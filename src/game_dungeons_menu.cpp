@@ -84,6 +84,11 @@ public:
   // The level construction
   //
   class Nodes *nodes {};
+
+  //
+  // First level
+  //
+  class DungeonNode *start_node {};
 };
 
 static game_dungeons_ctx *g_ctx;
@@ -354,6 +359,11 @@ static void game_dungeons_tick(Widp w)
         ctx->levels[ y ][ x ] = l;
         game_dungeons_update_buttons(ctx->w);
 
+        auto node = ctx->nodes->getn(x, y);
+        if (node->is_ascend_dungeon) {
+          game->level = l;
+        }
+
         ctx->generating = true;
         return;
       }
@@ -378,7 +388,7 @@ static uint8_t game_dungeons_go_back(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t game_dungeons_reroll(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_dungeons_random(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
@@ -386,8 +396,7 @@ static uint8_t game_dungeons_reroll(Widp w, int32_t x, int32_t y, uint32_t butto
   game->fini();
   g_opt_seed_name = "";
   game->init();
-
-  game_dungeons_init();
+  game->menu_dungeons_select();
 
   return true;
 }
@@ -396,7 +405,6 @@ static uint8_t game_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button
 {
   TRACE_NO_INDENT();
 
-#if 0
   game_dungeons_ctx *ctx;
   if (! w) {
     ctx = g_ctx;
@@ -404,13 +412,12 @@ static uint8_t game_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button
     ctx = (game_dungeons_ctx *) wid_get_void_context(w);
   }
 
-  game_dungeons_destroy(wid_get_top_parent(w));
-  game->fini();
-  g_opt_seed_name = "";
-  game->init();
-  game_dungeons_init();
+  if (! ctx->generated) {
+    return true;
+  }
 
-#endif
+  game_dungeons_destroy(wid_get_top_parent(w));
+  game->start();
 
   return true;
 }
@@ -444,7 +451,9 @@ static uint8_t game_dungeons_key_up(Widp w, const struct SDL_Keysym *key)
             auto c = wid_event_to_char(key);
             switch (c) {
               case 'c' : game_dungeons_choose_seed(nullptr, 0, 0, 0); return true;
-              case 'r' : game_dungeons_reroll(nullptr, 0, 0, 0); return true;
+              case 'r' : game_dungeons_random(nullptr, 0, 0, 0); return true;
+              case 'e' : game_dungeons_enter(nullptr, 0, 0, 0); return true;
+              case ' ' : game_dungeons_enter(nullptr, 0, 0, 0); return true;
               case 'b' :
               case 'q' :
               case SDLK_ESCAPE : game_dungeons_go_back(nullptr, 0, 0, 0); return true;
@@ -516,7 +525,7 @@ void game_grid_node_walk(class Nodes *nodes, int depth, int *furthest_depth, cla
   }
 }
 
-void game_dungeons_init(void)
+void Game::menu_dungeons_select(void)
 {
   TRACE_AND_INDENT();
 
@@ -524,7 +533,7 @@ void game_dungeons_init(void)
     DIE("No game struct");
   }
 
-  game->pre_init();
+  pre_init();
 
   //
   // Create a context to hold button info so we can update it when the focus changes
@@ -542,12 +551,11 @@ void game_dungeons_init(void)
   //
   // Find the entry node
   //
-  class DungeonNode *start_node {};
   for (auto y = 0; y < ctx->nodes->grid_height; y++) {
     for (auto x = 0; x < ctx->nodes->grid_width; x++) {
       auto node = ctx->nodes->getn(x, y);
       if (node->is_ascend_dungeon) {
-        start_node = node;
+        ctx->start_node = node;
       }
       node->dir_up             = false;
       node->dir_down           = false;
@@ -559,7 +567,7 @@ void game_dungeons_init(void)
     }
   }
 
-  if (! start_node) {
+  if (! ctx->start_node) {
     DIE("No start dungeon node");
   }
 
@@ -569,7 +577,7 @@ void game_dungeons_init(void)
   int                depth          = 0;
   int                furthest_depth = 0;
   class DungeonNode *furthest_node  = 0;
-  game_grid_node_walk(ctx->nodes, depth, &furthest_depth, &furthest_node, start_node);
+  game_grid_node_walk(ctx->nodes, depth, &furthest_depth, &furthest_node, ctx->start_node);
   if (! furthest_node) {
     DIE("No furthest dungeon node");
   }
@@ -614,7 +622,7 @@ void game_dungeons_init(void)
     point br = make_point(TERM_WIDTH - 1, 0);
 
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "Dungeon seed: " + game->seed_name);
+    wid_set_text(w, "Dungeon seed: " + seed_name);
     wid_set_shape_none(w);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
   }
@@ -663,7 +671,7 @@ void game_dungeons_init(void)
     point br = make_point(x_at + width, y_at + 2);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, game_dungeons_reroll);
+    wid_set_on_mouse_up(w, game_dungeons_random);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$R%%fg=" UI_TEXT_COLOR_STR "$andom level");
   }

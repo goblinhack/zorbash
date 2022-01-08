@@ -6,4 +6,4 @@
 
 #pragma once
 
-void game_dungeons_init(void);
+void game_menu_dungeons_init(void);

@@ -161,6 +161,8 @@ public:
   void init_level(point3d);
   void init_levels(void);
   void init(void);
+  void start(void);
+  void place_player(void);
   void pre_init(void);
   void set_seed(void);
   void load_config(void);
@@ -169,6 +171,7 @@ public:
   void load_snapshot(void);
   void load(void);
   void main_menu_select(void);
+  void menu_dungeons_select(void);
   void new_game(void);
   void quit_select(void);
   void robot_mode_tick();

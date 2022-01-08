@@ -37,61 +37,6 @@ void game_main_menu_hide(void)
   wid_hide(game_main_menu_window->wid_text_area->wid_text_area);
 }
 
-static uint8_t game_menu_quick_start(Widp w, int32_t x, int32_t y, uint32_t button)
-{
-  TRACE_AND_INDENT();
-  LOG("Main menu new game chosen");
-
-  game_main_menu_destroy();
-
-  wid_rightbar_fini();
-  wid_rightbar_init();
-
-  wid_topcon_fini();
-  wid_topcon_init();
-
-  wid_thing_info_fini();
-  wid_inventory_fini();
-
-  wid_skillbox_fini();
-  wid_skillbox_init();
-
-  game->init();
-
-  wid_actionbar_init();
-
-  wid_visible(wid_topcon_window);
-  TOPCON("Welcome to the lair of the dread monster, %%fg=red$Zorbash%%fg=reset$.");
-  TOPCON("Collect the %%fg=yellow$crystals%%fg=reset$ and defeat Zorbash to win.");
-
-  CON("%%fg=red$@@@@@@  @@@@@  @@@@@@  @@@@@@   @@@@@   @@@@  @@@ @@@%%fg=reset$");
-  CON("%%fg=red$@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@ @@@ @@@%%fg=reset$");
-  CON("%%fg=red$   @@! @@! @@@ @@! @@@ @@! @@@ @@! @@@ !@@    @@! @@@%%fg=reset$");
-  CON("%%fg=red$   @!  !@! @!@ !@! @!@ !@  @!@ !@! @!@ !@!    !@! @!@%%fg=reset$");
-  CON("%%fg=red$  @!   @!@ !@! @!@!@!  @!@@!@  @!@@!@! !!@!!  @!@!!@!%%fg=reset$");
-  CON("%%fg=red$ !!    !@! !!! !!@!!   !!!!!!! !!!!!!!  !!!!! !!!@!!!%%fg=reset$");
-  CON("%%fg=red$ !:    !!: !!! !!: !!  !!: !!! !!: !!!     !: !!: !!!%%fg=reset$");
-  CON("%%fg=red$:!     :!: !:! :!: !:! :!: !:! :!: !:!    !:! :!: !:!%%fg=reset$");
-  CON("%%fg=red$:::::: ::::::: ::  ::: ::::::: ::: ::: :::::: ::  :::%%fg=reset$");
-  CON("%%fg=red$::::::  :::::  ::  ::: ::::::  ::: ::: :::::: ::  :::%%fg=reset$");
-  CON("%%fg=red$::::::  :::::  ::  ::: ::::::  ::: : : :::::  ::  :::%%fg=reset$");
-  CON("%%fg=red$:  :    :       :  :    :  ::   :  : : :   :   :  : :%%fg=reset$");
-  CON("%%fg=red$.  .      .     .    .  :  :           .   .        :%%fg=reset$");
-  CON("%%fg=red$.         .                :     . :   .            :%%fg=reset$");
-  CON("%%fg=red$.  . .  : . :   .  : .  :  ::   :. : . ..  .   .  : :%%fg=reset$");
-  CON("%%fg=green$Version " MYVER "%%fg=reset$");
-  CON("Press %%fg=yellow$<tab>%%fg=reset$ to complete commands.");
-  CON("Press %%fg=yellow$?%%fg=reset$ to show command options.");
-  CON("You can also enter raw python code here.");
-
-  wid_botcon_fini();
-  wid_botcon_init();
-
-  wid_visible(wid_botcon_window);
-  BOTCON("Press 'h' for help.");
-  return false;
-}
-
 static uint8_t game_main_menu_load_game(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
@@ -107,14 +52,12 @@ static uint8_t game_main_menu_config(Widp w, int32_t x, int32_t y, uint32_t butt
   return false;
 }
 
-static uint8_t game_menu_slow_start(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_menu_new_game(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  // game_menu_quick_start(nullptr, 0, 0, 0);
   game_main_menu_hide();
   game_main_menu_destroy();
-  wid_visible(wid_topcon_window);
-  game_dungeons_init();
+  game->menu_dungeons_select();
   return false;
 }
 
@@ -168,8 +111,7 @@ static uint8_t game_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'n' : game_menu_slow_start(nullptr, 0, 0, 0); return true;
-              case 's' : game_menu_quick_start(nullptr, 0, 0, 0); return true;
+              case 'n' : game_menu_new_game(nullptr, 0, 0, 0); return true;
               case 'l' : game_main_menu_load_game(nullptr, 0, 0, 0); return true;
               case 'o' : game_main_menu_config(nullptr, 0, 0, 0); return true;
               case 'c' : game_main_menu_credits_game(nullptr, 0, 0, 0); return true;
@@ -414,24 +356,10 @@ void Game::main_menu_select(void)
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + 2);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, game_menu_slow_start);
+    wid_set_on_mouse_up(w, game_menu_new_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$N%%fg=reset$ew game%%fg=reset$");
   }
-#if 0
-  y_at += 3;
-  { TRACE_NO_INDENT();
-    auto p = game_main_menu_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Quick start");
-
-    point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, game_menu_quick_start);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Quick %%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$S%%fg=reset$tart");
-  }
-#endif
   y_at += 3;
   {
     TRACE_NO_INDENT();
@@ -517,5 +445,5 @@ void Game::main_menu_select(void)
 void Game::new_game(void)
 {
   TRACE_NO_INDENT();
-  game_menu_quick_start(nullptr, 0, 0, 0);
+  game->menu_dungeons_select();
 }

@@ -26,13 +26,13 @@ static void selected(Widp w, const std::wstring &text)
   wid_destroy(&wid_keyboard_choose_seed);
   g_opt_seed_name = wstring_to_string(text);
   game->save_config();
-  game_dungeons_init();
+  game->menu_dungeons_select();
 }
 
 static void cancelled(Widp w, const std::wstring &text)
 {
   wid_destroy(&wid_keyboard_choose_seed);
-  game_dungeons_init();
+  game->menu_dungeons_select();
 }
 
 void Game::choose_seed_select(void)
