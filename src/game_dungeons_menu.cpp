@@ -326,6 +326,29 @@ static void game_display_grid_bg(void)
   blit_flush();
 }
 
+static void game_dungeons_create_level_at(game_dungeons_ctx *ctx, int x, int y)
+{
+  auto node = ctx->nodes->getn(x, y);
+
+  auto level_at = game->current_level;
+  level_at.z += y;
+  level_at.x += x;
+  level_at.z *= 2;
+  level_at.z += 1;
+
+  game->init_level(level_at);
+  auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+  if (! l) {
+    return;
+  }
+
+  ctx->levels[ y ][ x ] = l;
+
+  if (node->is_ascend_dungeon) {
+    game->level = l;
+  }
+}
+
 static void game_dungeons_tick(Widp w)
 {
   TRACE_NO_INDENT();
@@ -349,19 +372,7 @@ static void game_dungeons_tick(Widp w)
             continue;
           }
 
-          auto level_at = game->current_level;
-          level_at.z += y;
-          level_at.x += x;
-          level_at.z *= 2;
-          level_at.z += 1;
-
-          game->init_level(level_at);
-          auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-          if (! l) {
-            return;
-          }
-
-          game->level     = l;
+          game_dungeons_create_level_at(ctx, x, y);
           ctx->generating = true;
           ctx->generated  = true;
           game_dungeons_enter(w, 0, 0, 0);
@@ -381,33 +392,10 @@ static void game_dungeons_tick(Widp w)
           continue;
         }
 
-        auto level_at = game->current_level;
-        level_at.z += y;
-        level_at.x += x;
-        level_at.z *= 2;
-        level_at.z += 1;
-
-        game->init_level(level_at);
-        auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-        if (! l) {
-          return;
-        }
-        ctx->levels[ y ][ x ] = l;
+        game_dungeons_create_level_at(ctx, x, y);
         game_dungeons_update_buttons(ctx->w);
 
-        auto node = ctx->nodes->getn(x, y);
-        if (node->is_ascend_dungeon) {
-          game->level = l;
-        }
-
         ctx->generating = true;
-
-        if (g_opt_quick_start) {
-          ctx->generated = true;
-          game_dungeons_enter(w, 0, 0, 0);
-          return;
-        }
-
         return;
       }
     }
@@ -874,11 +862,13 @@ void Game::menu_dungeons_select(void)
     }
   }
 
-  game_dungeons_update_buttons(window);
-  wid_set_do_not_lower(window, 1);
-  wid_update(window);
-  wid_raise(window);
-  wid_set_focus(window);
+  if (! g_opt_quick_start) {
+    game_dungeons_update_buttons(window);
+    wid_set_do_not_lower(window, 1);
+    wid_update(window);
+    wid_raise(window);
+    wid_set_focus(window);
+  }
 
   ctx->created = time_get_time_ms();
 }
