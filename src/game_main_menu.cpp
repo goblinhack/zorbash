@@ -114,7 +114,6 @@ static uint8_t game_menu_slow_start(Widp w, int32_t x, int32_t y, uint32_t butto
   game_main_menu_hide();
   game_main_menu_destroy();
   wid_visible(wid_topcon_window);
-  TOPCON("HELLO");
   game_levels_grid_init();
   return false;
 }
@@ -397,6 +396,7 @@ void Game::main_menu_select(void)
   wid_skillbox_fini();
   wid_thing_info_fini();
   wid_actionbar_fini();
+  wid_topcon_fini();
 
   game->wid_thing_info_destroy_immediate();
 
@@ -406,7 +406,7 @@ void Game::main_menu_select(void)
 
   game_main_menu_window = new WidPopup("Main menu", tl, br, nullptr, "nothing", false, false);
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     Widp w = game_main_menu_window->wid_popup_container;
     wid_set_on_key_up(w, game_main_menu_key_up);
     wid_set_on_key_down(w, game_main_menu_key_down);
@@ -415,7 +415,7 @@ void Game::main_menu_select(void)
 
   int y_at = 0;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "New Game");
 
@@ -428,7 +428,7 @@ void Game::main_menu_select(void)
   }
 #if 0
   y_at += 3;
-  { TRACE_AND_INDENT();
+  { TRACE_NO_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Quick start");
 
@@ -442,7 +442,7 @@ void Game::main_menu_select(void)
 #endif
   y_at += 3;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Choose seed");
 
@@ -455,7 +455,7 @@ void Game::main_menu_select(void)
   }
   y_at += 3;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Choose player name");
 
@@ -468,7 +468,7 @@ void Game::main_menu_select(void)
   }
   y_at += 3;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Load Game");
 
@@ -481,7 +481,7 @@ void Game::main_menu_select(void)
   }
   y_at += 3;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Options");
 
@@ -494,7 +494,7 @@ void Game::main_menu_select(void)
   }
   y_at += 3;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Credits");
 
@@ -507,7 +507,7 @@ void Game::main_menu_select(void)
   }
   y_at += 3;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Hiscores");
 
@@ -520,7 +520,7 @@ void Game::main_menu_select(void)
   }
   y_at += 3;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = game_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Quit Game");
 
@@ -537,6 +537,6 @@ void Game::main_menu_select(void)
 
 void Game::new_game(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game_menu_quick_start(nullptr, 0, 0, 0);
 }

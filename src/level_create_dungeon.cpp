@@ -16,7 +16,7 @@
 bool Level::create_dungeon(point3d at, int seed)
 {
   TRACE_AND_INDENT();
-  dbg("DGN: Create dungeon at (%d,%d,%d)", at.x, at.y, at.z);
+  dbg("DGN: Create dungeon");
 
   if (player) {
     TOPCON("A new dungeon level is coming into being...");
@@ -36,7 +36,7 @@ bool Level::create_dungeon(point3d at, int seed)
       continue;
     }
 
-    log("DGN: Create dungeon layout (%d,%d,%d) took %u ms", at.x, at.y, at.z, time_get_time_ms() - start);
+    log("DGN: Create dungeon layout took %u ms", time_get_time_ms() - start);
 
     //
     // Check we have a dungeon start
