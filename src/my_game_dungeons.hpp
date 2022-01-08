@@ -6,4 +6,4 @@
 
 #pragma once
 
-void game_levels_grid_init(void);
+void game_dungeons_init(void);

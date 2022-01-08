@@ -3,10 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "game_levels_grid.hpp"
 #include "my_array_bounds_check.hpp"
 #include "my_dungeon_grid.hpp"
 #include "my_game.hpp"
+#include "my_game_dungeons.hpp"
 #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_random.hpp"
@@ -88,7 +88,7 @@ void Game::init_levels(void)
 #if 0
   IF_DEBUG2
   {
-    game_levels_grid_init();
+    game_dungeons_init();
     return;
   }
 #endif

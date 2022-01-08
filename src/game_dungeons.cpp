@@ -5,11 +5,11 @@
 
 #include <SDL.h>
 
-#include "game_levels_grid.hpp"
 #include "my_array_bounds_check.hpp"
 #include "my_color.hpp"
 #include "my_dungeon_grid.hpp"
 #include "my_game.hpp"
+#include "my_game_dungeons.hpp"
 #include "my_gl.hpp"
 #include "my_globals_extra.hpp"
 #include "my_main.hpp"
@@ -21,10 +21,10 @@
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 
-class game_levels_grid_ctx
+class game_dungeons_ctx
 {
 public:
-  ~game_levels_grid_ctx()
+  ~game_dungeons_ctx()
   {
     TRACE_NO_INDENT();
     if (w) {
@@ -86,16 +86,17 @@ public:
   class Nodes *nodes {};
 };
 
-static game_levels_grid_ctx *g_ctx;
+static game_dungeons_ctx *g_ctx;
 
-static void game_levels_grid_destroy(Widp w);
-static void game_levels_grid_set_focus(game_levels_grid_ctx *ctx, int focusx, int focusy);
+static void game_dungeons_destroy(Widp w);
+static void game_dungeons_set_focus(game_dungeons_ctx *ctx, int focusx, int focusy);
 
 #define ROOM_WIDTH_CHARS  7
 #define ROOM_HEIGHT_CHARS 7
 
-static void game_levels_grid_update_button(game_levels_grid_ctx *ctx, Widp b, int x, int y)
+static void game_dungeons_update_button(game_dungeons_ctx *ctx, Widp b, int x, int y)
 {
+  TRACE_NO_INDENT();
   if (! b) {
     return;
   }
@@ -199,14 +200,14 @@ static void game_levels_grid_update_button(game_levels_grid_ctx *ctx, Widp b, in
   }
 }
 
-static void game_levels_grid_update_buttons(Widp w)
+static void game_dungeons_update_buttons(Widp w)
 {
   TRACE_NO_INDENT();
-  game_levels_grid_ctx *ctx;
+  game_dungeons_ctx *ctx;
   if (! w) {
     ctx = g_ctx;
   } else {
-    ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
+    ctx = (game_dungeons_ctx *) wid_get_void_context(w);
   }
 
   verify(MTYPE_WID, ctx);
@@ -221,45 +222,45 @@ static void game_levels_grid_update_buttons(Widp w)
       if (! b) {
         continue;
       }
-      game_levels_grid_update_button(ctx, b, x, y);
+      game_dungeons_update_button(ctx, b, x, y);
     }
   }
   wid_update(w);
 }
 
-static void game_levels_grid_event(Widp w, int focusx, int focusy) { TRACE_NO_INDENT(); }
+static void game_dungeons_event(Widp w, int focusx, int focusy) { TRACE_NO_INDENT(); }
 
-static uint8_t game_levels_grid_mouse_event(Widp w, int focusx, int focusy)
+static uint8_t game_dungeons_mouse_event(Widp w, int focusx, int focusy)
 {
   TRACE_NO_INDENT();
-  game_levels_grid_event(w, focusx, focusy);
+  game_dungeons_event(w, focusx, focusy);
 
   return true;
 }
 
-static uint8_t game_levels_grid_button_mouse_event(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_dungeons_button_mouse_event(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
   int focus  = wid_get_int_context(w);
   int focusx = (focus & 0xff);
   int focusy = (focus & 0xff00) >> 8;
 
-  return (game_levels_grid_mouse_event(w, focusx, focusy));
+  return (game_dungeons_mouse_event(w, focusx, focusy));
 }
 
-static void game_levels_grid_set_focus(game_levels_grid_ctx *ctx, int focusx, int focusy)
+static void game_dungeons_set_focus(game_dungeons_ctx *ctx, int focusx, int focusy)
 {
   TRACE_NO_INDENT();
   ctx->focusx = focusx;
   ctx->focusy = focusy;
 
-  game_levels_grid_update_buttons(ctx->w);
+  game_dungeons_update_buttons(ctx->w);
 }
 
-static void game_levels_grid_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void game_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  game_levels_grid_ctx *ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
+  game_dungeons_ctx *ctx = (game_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
   if (! relx && ! rely && ! wheelx && ! wheely) {
@@ -279,20 +280,20 @@ static void game_levels_grid_mouse_over(Widp w, int32_t relx, int32_t rely, int3
   int focusx = (focus & 0xff);
   int focusy = (focus & 0xff00) >> 8;
 
-  game_levels_grid_set_focus(ctx, focusx, focusy);
+  game_dungeons_set_focus(ctx, focusx, focusy);
 }
 
-static void game_levels_grid_destroy(Widp w)
+static void game_dungeons_destroy(Widp w)
 {
   TRACE_NO_INDENT();
-  game_levels_grid_ctx *ctx;
+  game_dungeons_ctx *ctx;
 
   if (! w) {
     ctx = g_ctx;
     verify(MTYPE_WID, ctx);
     g_ctx = nullptr;
   } else {
-    ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
+    ctx = (game_dungeons_ctx *) wid_get_void_context(w);
     verify(MTYPE_WID, ctx);
     wid_set_void_context(w, 0);
   }
@@ -308,7 +309,7 @@ static void game_levels_grid_destroy(Widp w)
 
 static void game_display_grid_bg(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -318,10 +319,10 @@ static void game_display_grid_bg(void)
   blit_flush();
 }
 
-static void game_levels_grid_tick(Widp w)
+static void game_dungeons_tick(Widp w)
 {
   TRACE_NO_INDENT();
-  game_levels_grid_ctx *ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
+  game_dungeons_ctx *ctx = (game_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
   game_display_grid_bg();
@@ -351,7 +352,7 @@ static void game_levels_grid_tick(Widp w)
           return;
         }
         ctx->levels[ y ][ x ] = l;
-        game_levels_grid_update_buttons(ctx->w);
+        game_dungeons_update_buttons(ctx->w);
 
         ctx->generating = true;
         return;
@@ -368,71 +369,62 @@ static void game_levels_grid_tick(Widp w)
   ctx->generated = true;
 }
 
-static uint8_t game_levels_grid_go_back(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_dungeons_go_back(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
-  game_levels_grid_destroy(wid_get_top_parent(w));
+  game_dungeons_destroy(wid_get_top_parent(w));
   game->fini();
   game->main_menu_select();
   return true;
 }
 
-static uint8_t game_levels_grid_reroll(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_dungeons_reroll(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
-  game_levels_grid_ctx *ctx;
-  if (! w) {
-    ctx = g_ctx;
-  } else {
-    ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
-  }
-
-  game_levels_grid_destroy(wid_get_top_parent(w));
+  game_dungeons_destroy(wid_get_top_parent(w));
   game->fini();
   g_opt_seed_name = "";
   game->init();
-  game_levels_grid_init();
 
-  ctx->generated  = false;
-  ctx->generating = false;
+  game_dungeons_init();
 
   return true;
 }
 
-static uint8_t game_levels_grid_enter(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
 #if 0
-  game_levels_grid_ctx *ctx;
+  game_dungeons_ctx *ctx;
   if (! w) {
     ctx = g_ctx;
   } else {
-    ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
+    ctx = (game_dungeons_ctx *) wid_get_void_context(w);
   }
 
-  game_levels_grid_destroy(wid_get_top_parent(w));
+  game_dungeons_destroy(wid_get_top_parent(w));
   game->fini();
   g_opt_seed_name = "";
   game->init();
-  game_levels_grid_init();
+  game_dungeons_init();
 
 #endif
 
   return true;
 }
 
-static uint8_t game_levels_grid_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_dungeons_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
-  game_levels_grid_destroy(wid_get_top_parent(w));
+  TRACE_NO_INDENT();
+  game_dungeons_destroy(wid_get_top_parent(w));
   game->fini();
   game->choose_seed_select();
   return false;
 }
 
-static uint8_t game_levels_grid_key_up(Widp w, const struct SDL_Keysym *key)
+static uint8_t game_dungeons_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
   if (sdl_shift_held) {
@@ -451,11 +443,11 @@ static uint8_t game_levels_grid_key_up(Widp w, const struct SDL_Keysym *key)
             TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'c' : game_levels_grid_choose_seed(nullptr, 0, 0, 0); return true;
-              case 'r' : game_levels_grid_reroll(nullptr, 0, 0, 0); return true;
+              case 'c' : game_dungeons_choose_seed(nullptr, 0, 0, 0); return true;
+              case 'r' : game_dungeons_reroll(nullptr, 0, 0, 0); return true;
               case 'b' :
               case 'q' :
-              case SDLK_ESCAPE : game_levels_grid_go_back(nullptr, 0, 0, 0); return true;
+              case SDLK_ESCAPE : game_dungeons_go_back(nullptr, 0, 0, 0); return true;
             }
           }
       }
@@ -464,7 +456,7 @@ static uint8_t game_levels_grid_key_up(Widp w, const struct SDL_Keysym *key)
   return false;
 }
 
-static uint8_t game_levels_grid_key_down(Widp w, const struct SDL_Keysym *key)
+static uint8_t game_dungeons_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
   if (sdl_shift_held) {
@@ -479,6 +471,7 @@ static uint8_t game_levels_grid_key_down(Widp w, const struct SDL_Keysym *key)
 void game_grid_node_walk(class Nodes *nodes, int depth, int *furthest_depth, class DungeonNode **furthest,
                          class DungeonNode *node)
 {
+  TRACE_NO_INDENT();
   if (node->is_walked) {
     return;
   }
@@ -523,7 +516,7 @@ void game_grid_node_walk(class Nodes *nodes, int depth, int *furthest_depth, cla
   }
 }
 
-void game_levels_grid_init(void)
+void game_dungeons_init(void)
 {
   TRACE_AND_INDENT();
 
@@ -536,13 +529,15 @@ void game_levels_grid_init(void)
   //
   // Create a context to hold button info so we can update it when the focus changes
   //
-  game_levels_grid_ctx *ctx = new game_levels_grid_ctx();
+  game_dungeons_ctx *ctx = new game_dungeons_ctx();
   newptr(MTYPE_WID, ctx, "wid level grid ctx");
   g_ctx = ctx;
 
-  ctx->nodes  = new Nodes(10, 10, false /* not a dungeon */);
-  ctx->focusx = -1;
-  ctx->focusy = -1;
+  ctx->nodes      = new Nodes(10, 10, false /* not a dungeon */);
+  ctx->focusx     = -1;
+  ctx->focusy     = -1;
+  ctx->generated  = false;
+  ctx->generating = false;
 
   //
   // Find the entry node
@@ -594,8 +589,8 @@ void game_levels_grid_init(void)
     wid_set_pos(window, tl, br);
     wid_set_shape_none(window);
     wid_set_void_context(window, ctx);
-    wid_set_on_key_up(window, game_levels_grid_key_up);
-    wid_set_on_key_down(window, game_levels_grid_key_down);
+    wid_set_on_key_up(window, game_dungeons_key_up);
+    wid_set_on_key_down(window, game_dungeons_key_down);
   }
 
   /*
@@ -639,7 +634,7 @@ void game_levels_grid_init(void)
     point br = make_point(x_at + width, y_at + 8);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, game_levels_grid_enter);
+    wid_set_on_mouse_up(w, game_dungeons_enter);
     wid_set_shape_none(w);
     ctx->wid_enter = w;
   }
@@ -654,7 +649,7 @@ void game_levels_grid_init(void)
     point br = make_point(x_at + width, y_at + 2);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, game_levels_grid_choose_seed);
+    wid_set_on_mouse_up(w, game_dungeons_choose_seed);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$hange seed");
   }
@@ -668,7 +663,7 @@ void game_levels_grid_init(void)
     point br = make_point(x_at + width, y_at + 2);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, game_levels_grid_reroll);
+    wid_set_on_mouse_up(w, game_dungeons_reroll);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$R%%fg=" UI_TEXT_COLOR_STR "$andom level");
   }
@@ -682,7 +677,7 @@ void game_levels_grid_init(void)
     point br = make_point(x_at + width, y_at + 2);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, game_levels_grid_go_back);
+    wid_set_on_mouse_up(w, game_dungeons_go_back);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$B%%fg=" UI_TEXT_COLOR_STR "$ack?");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
@@ -693,7 +688,7 @@ void game_levels_grid_init(void)
   {
     Widp button_container = wid_new_square_button(window, "wid level grid buttons");
     wid_set_shape_none(button_container);
-    wid_set_on_tick(button_container, game_levels_grid_tick);
+    wid_set_on_tick(button_container, game_dungeons_tick);
 
     point tl = make_point(0, 0);
     point br = make_point(0, 0);
@@ -742,14 +737,14 @@ void game_levels_grid_init(void)
         Widp b                 = wid_new_square_button(button_container, "wid level grid button");
         ctx->buttons[ y ][ x ] = b;
 
-        wid_set_on_mouse_over_begin(b, game_levels_grid_mouse_over);
-        wid_set_on_mouse_down(b, game_levels_grid_button_mouse_event);
+        wid_set_on_mouse_over_begin(b, game_dungeons_mouse_over);
+        wid_set_on_mouse_down(b, game_dungeons_button_mouse_event);
         wid_set_color(b, WID_COLOR_BG, WHITE);
         wid_set_void_context(b, ctx);
         int focus = (y << 8) | x;
         wid_set_int_context(b, focus);
 
-        game_levels_grid_update_button(ctx, b, x, y);
+        game_dungeons_update_button(ctx, b, x, y);
 
         int32_t tl_x;
         int32_t tl_y;
@@ -828,7 +823,7 @@ void game_levels_grid_init(void)
     }
   }
 
-  game_levels_grid_update_buttons(window);
+  game_dungeons_update_buttons(window);
   wid_set_do_not_lower(window, 1);
   wid_update(window);
   wid_raise(window);
