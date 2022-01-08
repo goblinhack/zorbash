@@ -44,6 +44,7 @@
 #define UI_SIDEBAR_RIGHT_WIDTH       16
 #define UI_TEXT_COLOR                GRAY // Default text color
 #define UI_TEXT_COLOR_STR            "gray"
+#define UI_TEXT_HIGHLIGHT_COLOR_STR  "white"
 #define UI_TILE_LARGE_HEIGHT         8
 #define UI_TILE_LARGE_WIDTH          8
 #define UI_TOPCON_HEIGHT             10 // Scrollbar limit

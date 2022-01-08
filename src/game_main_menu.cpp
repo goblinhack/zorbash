@@ -118,14 +118,6 @@ static uint8_t game_menu_slow_start(Widp w, int32_t x, int32_t y, uint32_t butto
   return false;
 }
 
-static uint8_t game_main_menu_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button)
-{
-  TRACE_AND_INDENT();
-  game->choose_seed_select();
-  game_main_menu_destroy();
-  return false;
-}
-
 static uint8_t game_main_menu_choose_player_name(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
@@ -400,7 +392,7 @@ void Game::main_menu_select(void)
 
   game->wid_thing_info_destroy_immediate();
 
-  point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 26);
+  point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 23);
   point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
   auto  width = br.x - tl.x - 2;
 
@@ -424,7 +416,7 @@ void Game::main_menu_select(void)
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, game_menu_slow_start);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=white$N%%fg=reset$ew game%%fg=reset$");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$N%%fg=reset$ew game%%fg=reset$");
   }
 #if 0
   y_at += 3;
@@ -437,22 +429,9 @@ void Game::main_menu_select(void)
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, game_menu_quick_start);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Quick %%fg=white$S%%fg=reset$tart");
+    wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Quick %%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$S%%fg=reset$tart");
   }
 #endif
-  y_at += 3;
-  {
-    TRACE_NO_INDENT();
-    auto p = game_main_menu_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Choose seed");
-
-    point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, game_main_menu_choose_seed);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose seed");
-  }
   y_at += 3;
   {
     TRACE_NO_INDENT();
@@ -477,7 +456,7 @@ void Game::main_menu_select(void)
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, game_main_menu_load_game);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=white$L%%fg=reset$oad game");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$L%%fg=" UI_TEXT_COLOR_STR "$oad game");
   }
   y_at += 3;
   {
@@ -490,7 +469,7 @@ void Game::main_menu_select(void)
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, game_main_menu_config);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=white$O%%fg=reset$ptions");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$O%%fg=" UI_TEXT_COLOR_STR "$ptions");
   }
   y_at += 3;
   {
@@ -503,7 +482,7 @@ void Game::main_menu_select(void)
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, game_main_menu_credits_game);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=white$C%%fg=reset$redits");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$redits");
   }
   y_at += 3;
   {
@@ -529,7 +508,7 @@ void Game::main_menu_select(void)
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, game_main_menu_quit_game);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=white$Q%%fg=reset$uit Game");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Q%%fg=" UI_TEXT_COLOR_STR "$uit Game");
   }
 
   wid_update(game_main_menu_window->wid_text_area->wid_text_area);
