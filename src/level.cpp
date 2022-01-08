@@ -12,8 +12,7 @@
 std::string Level::to_string(void)
 {
   TRACE_NO_INDENT();
-  int  level_no     = num();
-  auto level_no_str = std::to_string(level_no);
+  auto level_no_str = world_at.to_string();
 
   if (is_level_type_sewer) {
     return ("sewer " + level_no_str);

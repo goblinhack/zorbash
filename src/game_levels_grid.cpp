@@ -19,8 +19,6 @@
 #include "my_time.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
-#include "my_wid_botcon.hpp"
-#include "my_wid_topcon.hpp"
 
 class game_levels_grid_ctx
 {
@@ -40,6 +38,11 @@ public:
   Widp w {};
 
   //
+  // Enyer button
+  //
+  Widp wid_enter {};
+
+  //
   // Current button
   //
   Widp b {};
@@ -54,6 +57,12 @@ public:
   // When the level_grid was made.
   //
   uint32_t created;
+
+  //
+  // Set when making the dungeons
+  //
+  bool generating {};
+  bool generated {};
 
   //
   // Items in the level_grid
@@ -302,33 +311,43 @@ static void game_levels_grid_tick(Widp w)
   game_levels_grid_ctx *ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
-  for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
-    for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-      Widp b = ctx->buttons[ y ][ x ];
-      if (! b) {
-        continue;
-      }
+  wid_set_style(ctx->wid_enter, UI_WID_STYLE_GRAY);
 
-      if (ctx->levels[ y ][ x ]) {
-        continue;
-      }
+  if (! ctx->generated) {
+    for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
+      for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
+        Widp b = ctx->buttons[ y ][ x ];
+        if (! b) {
+          continue;
+        }
 
-      auto level_at = game->current_level;
-      level_at.z += y;
-      level_at.x += x;
-      level_at.z *= 2;
-      level_at.z += 1;
+        if (ctx->levels[ y ][ x ]) {
+          continue;
+        }
 
-      game->init_level(level_at);
-      auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-      if (! l) {
+        auto level_at = game->current_level;
+        level_at.z += y;
+        level_at.x += x;
+        level_at.z *= 2;
+        level_at.z += 1;
+
+        game->init_level(level_at);
+        auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+        if (! l) {
+          return;
+        }
+        ctx->levels[ y ][ x ] = l;
+        game_levels_grid_update_buttons(ctx->w);
+
+        ctx->generating = true;
         return;
       }
-      ctx->levels[ y ][ x ] = l;
-      game_levels_grid_update_buttons(ctx->w);
-      return;
     }
   }
+
+  wid_set_style(ctx->wid_enter, UI_WID_STYLE_OK);
+
+  ctx->generated = true;
 }
 
 static uint8_t game_levels_grid_go_back(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -337,20 +356,54 @@ static uint8_t game_levels_grid_go_back(Widp w, int32_t x, int32_t y, uint32_t b
   game_levels_grid_destroy(wid_get_top_parent(w));
   game->fini();
   game->main_menu_select();
-  wid_hide(wid_topcon_window);
-  wid_hide(wid_botcon_window);
   return true;
 }
 
-#if 0
 static uint8_t game_levels_grid_reroll(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
+
+  game_levels_grid_ctx *ctx;
+  if (! w) {
+    ctx = g_ctx;
+  } else {
+    ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
+  }
+
   game_levels_grid_destroy(wid_get_top_parent(w));
+  game->fini();
+  g_opt_seed_name = "";
+  game->init();
   game_levels_grid_init();
+
+  ctx->generated  = false;
+  ctx->generating = false;
+
   return true;
 }
+
+static uint8_t game_levels_grid_play(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_NO_INDENT();
+
+#if 0
+  game_levels_grid_ctx *ctx;
+  if (! w) {
+    ctx = g_ctx;
+  } else {
+    ctx = (game_levels_grid_ctx *) wid_get_void_context(w);
+  }
+
+  game_levels_grid_destroy(wid_get_top_parent(w));
+  game->fini();
+  g_opt_seed_name = "";
+  game->init();
+  game_levels_grid_init();
+
 #endif
+
+  return true;
+}
 
 static uint8_t game_levels_grid_key_up(Widp w, const struct SDL_Keysym *key)
 {
@@ -371,7 +424,9 @@ static uint8_t game_levels_grid_key_up(Widp w, const struct SDL_Keysym *key)
             TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
+              case 'r' : game_levels_grid_reroll(nullptr, 0, 0, 0); return true;
               case 'b' :
+              case 'q' :
               case SDLK_ESCAPE : game_levels_grid_go_back(nullptr, 0, 0, 0); return true;
             }
           }
@@ -444,17 +499,15 @@ void game_levels_grid_init(void)
 {
   TRACE_AND_INDENT();
 
-  wid_visible(wid_topcon_window);
-
   if (! game) {
     DIE("No game struct");
   }
 
   game->pre_init();
 
-  /*
-   * Create a context to hold button info so we can update it when the focus changes
-   */
+  //
+  // Create a context to hold button info so we can update it when the focus changes
+  //
   game_levels_grid_ctx *ctx = new game_levels_grid_ctx();
   newptr(MTYPE_WID, ctx, "wid level grid ctx");
   g_ctx = ctx;
@@ -511,7 +564,7 @@ void game_levels_grid_init(void)
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
 
     wid_set_pos(window, tl, br);
-    wid_set_style(window, UI_WID_STYLE_NORMAL);
+    wid_set_shape_none(window);
     wid_set_void_context(window, ctx);
     wid_set_on_key_up(window, game_levels_grid_key_up);
     wid_set_on_key_down(window, game_levels_grid_key_down);
@@ -528,32 +581,69 @@ void game_levels_grid_init(void)
 
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Aim: Collect all the crystals. Reach the final level. Confront Zorbash.");
-    wid_set_text(w, "WORK IN PROGRESS: CHECK BACK LATER IN JANUARY.");
     wid_set_shape_none(w);
     wid_set_color(w, WID_COLOR_TEXT_FG, YELLOW);
   }
-
   {
-    Widp w = wid_new_square_button(window, "wid level_grid seed");
+    Widp w = wid_new_square_button(window, "wid level_grid title");
 
-    point tl = make_point(TERM_WIDTH - 30, 3);
-    point br = make_point(TERM_WIDTH - 2, 5);
+    point tl = make_point(0, 0);
+    point br = make_point(TERM_WIDTH - 1, 0);
 
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "Seed: " + g_opt_seed_name);
-    wid_set_style(w, UI_WID_STYLE_DARK);
+    wid_set_text(w, "Dungeon seed: " + game->seed_name);
+    wid_set_shape_none(w);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
   }
+
+  point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 26);
+  point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
+  auto  width = br.x - tl.x - 2;
+  int   y_at = y_at = TERM_HEIGHT - 18;
+  int   x_at = x_at = TERM_WIDTH - width - 2;
 
   {
     TRACE_NO_INDENT();
     Widp w = wid_new_square_button(window, "wid level_grid reroll");
 
-    point tl = make_point(TERM_WIDTH - 30, TERM_HEIGHT - 4);
-    point br = make_point(TERM_WIDTH - 2, TERM_HEIGHT - 2);
+    point tl = make_point(x_at, y_at);
+    point br = make_point(x_at + width, y_at + 8);
 
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "Reroll with random seed?");
+    wid_set_on_mouse_up(w, game_levels_grid_play);
+    wid_set_style(w, UI_WID_STYLE_GRAY);
+    wid_set_text(w, "%%fg=white$E%%fg=reset$nter the Dungeon!");
     wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    ctx->wid_enter = w;
+  }
+
+  y_at += 10;
+  {
+    TRACE_NO_INDENT();
+    Widp w = wid_new_square_button(window, "wid level_grid reroll");
+
+    point tl = make_point(x_at, y_at);
+    point br = make_point(x_at + width, y_at + 2);
+
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, game_levels_grid_reroll);
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_text(w, "%%fg=white$R%%fg=reset$eroll?");
+    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+  }
+
+  y_at += 3;
+  {
+    TRACE_NO_INDENT();
+    Widp w = wid_new_square_button(window, "wid level_grid reroll");
+
+    point tl = make_point(x_at, y_at);
+    point br = make_point(x_at + width, y_at + 2);
+
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, game_levels_grid_go_back);
+    wid_set_text(w, "%%fg=white$B%%fg=reset$ack?");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
 
   /*
