@@ -6175,12 +6175,12 @@ def init_tiles1_monsts_and_items():
         "boss_icon.1",
         "boss_icon.2",
         "you_icon",
+        "",
         "key_icon",
         "dollar_icon",
         "save",
         "load",
         "bug",
-        "",
         #########################################################################
         "",
         "skill_devoted_thrust",
