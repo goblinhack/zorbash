@@ -2,7 +2,7 @@ import my
 import zorb_all
 
 
-def on_death_of_a_follower(me, x, y):
+def on_death_of_a_follower(me, leader, x, y):
     if not my.thing_is_dead_or_dying(me):
         my.thing_msg(me, "The zorblin eldster cries out in rage!")
 
