@@ -704,7 +704,7 @@ void Game::menu_dungeons_select(void)
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, game_dungeons_random);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$R%%fg=" UI_TEXT_COLOR_STR "$andom level");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$R%%fg=" UI_TEXT_COLOR_STR "$andom dungeon");
   }
 
   y_at += 3;

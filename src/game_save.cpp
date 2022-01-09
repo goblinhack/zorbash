@@ -893,6 +893,8 @@ void Game::save(int slot)
 
 void Game::save_snapshot(void)
 {
+  TOPCON("Autosaving...");
+
   TRACE_AND_INDENT();
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
