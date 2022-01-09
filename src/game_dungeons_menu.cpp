@@ -311,7 +311,11 @@ static void game_dungeons_destroy(Widp w)
   if (! ctx->w) {
     return;
   }
-  delete ctx;
+
+  if (ctx) {
+    delete ctx;
+    oldptr(MTYPE_WID, ctx);
+  }
 }
 
 static void game_display_grid_bg(void)

@@ -772,6 +772,11 @@ static void wid_topcon_wid_create(void)
   TRACE_AND_INDENT();
   int h = UI_TOPCON_VIS_HEIGHT;
 
+  if (wid_topcon_window) {
+    wid_topcon_fini();
+  }
+
+  TRACE_NO_INDENT();
   {
     point tl = make_point(0, 0);
     point br = make_point(UI_TOPCON_VIS_WIDTH - 1, h);
@@ -783,6 +788,7 @@ static void wid_topcon_wid_create(void)
     wid_set_on_key_down(wid_topcon_window, wid_topcon_input);
   }
 
+  TRACE_NO_INDENT();
   {
     point tl = make_point(0, 0);
     point br = make_point(UI_TOPCON_VIS_WIDTH - 1, h);
@@ -796,6 +802,7 @@ static void wid_topcon_wid_create(void)
     wid_set_color(wid_topcon_container, WID_COLOR_BG, c);
   }
 
+  TRACE_NO_INDENT();
   {
     int32_t row;
     int     row_bottom = h - 1;
@@ -808,6 +815,7 @@ static void wid_topcon_wid_create(void)
       point tl = make_point(0, row_bottom);
       point br = make_point(UI_TOPCON_WIDTH, row_bottom);
 
+      TRACE_NO_INDENT();
       child = wid_new_container(wid_topcon_container, "");
 
       wid_set_shape_none(child);
@@ -829,10 +837,9 @@ static void wid_topcon_wid_create(void)
     wid_raise(wid_topcon_input_line);
   }
 
+  TRACE_NO_INDENT();
   wid_topcon_vert_scroll = wid_new_vert_scroll_bar(wid_topcon_window, "", wid_topcon_container);
-
   wid_visible(wid_get_parent(wid_topcon_vert_scroll));
-
   wid_update(wid_topcon_window);
 }
 
