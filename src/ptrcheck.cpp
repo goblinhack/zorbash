@@ -305,79 +305,46 @@ static void hash_free(hash_t *hash_table, void *ptr)
   free(elem);
 }
 
-//
-// Check a pointer for validity.
-//
-static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char *func, const char *file, int line,
-                                         int dont_store)
+static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
 {
-  static const char *unknown_ptr_warning  = "** UNKNOWN POINTER ** ";
-  static const char *null_pointer_warning = "** NULL POINTER ** ";
-  int                ring_ptr_size;
-  Ptrcheck          *pc;
-  hash_elem_t       *e;
+  int       ring_ptr_size;
+  Ptrcheck *pc;
 
   //
-  // Check the robust handle is valid.
+  // Currently active pointer?
   //
-  e = hash_find(hash[ mtype ], (void *) ptr);
-  if (e) {
-    pc = e->pc;
+  auto elem = hash_find(hash[ mtype ], (void *) ptr);
+  if (elem) {
+    auto pc = elem->pc;
 
-    if (dont_store) {
-#ifdef ENABLE_DEBUG_PTRCHECK
-      std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u (do not store)\n", ptr,
-                                  pc->what, pc->size, file, func, line);
-#endif
-      return (pc);
+    auto a = pc->allocated_by;
+    if (a) {
+      fprintf(stderr, "PTRCHECK: Currently allocated at %p \"%s\" (%u bytes) at %s:%s line %u at %s\n", pc->ptr,
+              pc->what, pc->size, a->file, a->func, a->line, a->ts);
+
+      fprintf(stderr, "%s", a->bt->to_string().c_str());
     }
 
     //
-    // Add some free information that we know the pointer is safe at this
-    // point in time.
+    // Dump the pointer history.
     //
 #ifdef ENABLE_PTRCHECK_HISTORY
-    IF_DEBUG2
-    {
-      auto l = pc->last_seen[ pc->last_seen_at ];
-      if (! l) {
-        l = pc->last_seen[ pc->last_seen_at ] = new Ptrcheck_history();
-      }
-      l->file = file;
-      l->func = func;
-      l->line = line;
-      delete l->bt;
-
-      l->bt = new Backtrace();
-      l->bt->init();
-      timestamp(l->ts, sizeof(l->ts));
-
-      pc->last_seen_at++;
-      pc->last_seen_size++;
-
-      if (pc->last_seen_at >= ENABLE_PTRCHECK_HISTORY) {
-        pc->last_seen_at = 0;
+    int h = pc->last_seen_at;
+    for (auto j = 0; j < pc->last_seen_size; j++) {
+      if (--h < 0) {
+        h = ENABLE_PTRCHECK_HISTORY - 1;
       }
 
-      if (pc->last_seen_size >= ENABLE_PTRCHECK_HISTORY) {
-        pc->last_seen_size = ENABLE_PTRCHECK_HISTORY;
+      auto H = pc->last_seen[ h ];
+      if (H) {
+        fprintf(stderr, "PTRCHECK: Last seen at [%u] at %s:%s line %u at %s\n", j, H->file, H->func, H->line, H->ts);
+        if (H->bt) {
+          fprintf(stderr, "%s", H->bt->to_string().c_str());
+        }
       }
     }
 #endif
-#ifdef ENABLE_DEBUG_PTRCHECK
-    std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr, pc->what,
-                                pc->size, file, func, line, l->ts);
-#endif
-    return (pc);
-  } else if (! ptr) {
-    ERR("%s%p NULL pointer %s:%s line %u", null_pointer_warning, ptr, file, func, line);
-    return nullptr;
   }
-
-  //
-  // We may be about to crash. Complain!
-  //
-  ERR("%s%p %s:%s line %u", unknown_ptr_warning, ptr, file, func, line);
 
   //
   // Check the ring buffer to see if we've seen this pointer before.
@@ -471,6 +438,83 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
 }
 
 //
+// Check a pointer for validity.
+//
+static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char *func, const char *file, int line,
+                                         int dont_store)
+{
+  static const char *unknown_ptr_warning  = "** UNKNOWN POINTER ** ";
+  static const char *null_pointer_warning = "** NULL POINTER ** ";
+  Ptrcheck          *pc;
+  hash_elem_t       *e;
+
+  //
+  // Check the robust handle is valid.
+  //
+  e = hash_find(hash[ mtype ], (void *) ptr);
+  if (e) {
+    pc = e->pc;
+
+    if (dont_store) {
+#ifdef ENABLE_DEBUG_PTRCHECK
+      std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u (do not store)\n", ptr,
+                                  pc->what, pc->size, file, func, line);
+#endif
+      return (pc);
+    }
+
+    //
+    // Add some free information that we know the pointer is safe at this
+    // point in time.
+    //
+#ifdef ENABLE_PTRCHECK_HISTORY
+    IF_DEBUG2
+    {
+      auto l = pc->last_seen[ pc->last_seen_at ];
+      if (! l) {
+        l = pc->last_seen[ pc->last_seen_at ] = new Ptrcheck_history();
+      }
+      l->file = file;
+      l->func = func;
+      l->line = line;
+      delete l->bt;
+
+      l->bt = new Backtrace();
+      l->bt->init();
+      timestamp(l->ts, sizeof(l->ts));
+
+      pc->last_seen_at++;
+      pc->last_seen_size++;
+
+      if (pc->last_seen_at >= ENABLE_PTRCHECK_HISTORY) {
+        pc->last_seen_at = 0;
+      }
+
+      if (pc->last_seen_size >= ENABLE_PTRCHECK_HISTORY) {
+        pc->last_seen_size = ENABLE_PTRCHECK_HISTORY;
+      }
+    }
+#endif
+#ifdef ENABLE_DEBUG_PTRCHECK
+    std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr, pc->what,
+                                pc->size, file, func, line, l->ts);
+#endif
+    return (pc);
+  } else if (! ptr) {
+    ERR("%s%p NULL pointer %s:%s line %u", null_pointer_warning, ptr, file, func, line);
+    return nullptr;
+  }
+
+  //
+  // We may be about to crash. Complain!
+  //
+  ERR("%s%p %s:%s line %u", unknown_ptr_warning, ptr, file, func, line);
+
+  ptrcheck_describe_pointer(mtype, ptr);
+  exit(1);
+}
+
+//
 // Record this pointer.
 //
 void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, const char *func, const char *file,
@@ -514,6 +558,7 @@ void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, con
   //
   if (hash_find(hash[ mtype ], (void *) ptr)) {
     ERR("Pointer %p already exists and attempting to add again", ptr);
+    ptrcheck_describe_pointer(mtype, ptr);
     return ((void *) ptr);
   }
 
