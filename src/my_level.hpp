@@ -86,6 +86,12 @@ public:
   std::array< std::array< uint32_t, MAP_HEIGHT >, MAP_WIDTH > _is_map_changed {};
 
   //
+  // For level transitions
+  //
+  std::vector< point3d > prev_levels;
+  std::vector< point3d > next_levels;
+
+  //
   // When this Level was made. Used to restore timestamps relative to this.
   //
   ts_t ts_created {};

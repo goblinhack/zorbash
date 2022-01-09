@@ -482,6 +482,9 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   uint32_t csum_in = 0;
   in >> bits(csum_in);
 
+  in >> bits(my.t->prev_levels);
+  in >> bits(my.t->next_levels);
+
   in >> bits(l->ts_created);
   old_ts_created = l->ts_created;
   in >> bits(l->ts_saved);

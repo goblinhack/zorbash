@@ -443,6 +443,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   }
   out << bits(csum);
 
+  out << bits(my.t->prev_levels);
+  out << bits(my.t->next_levels);
+
   out << bits(my.t->ts_created);
   ts_t ts_saved = time_get_time_ms();
   out << bits(ts_saved);

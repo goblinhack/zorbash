@@ -19,6 +19,8 @@ public:
   // to adjoining depths. Depth increases as we get closer to the exit.
   //
   int depth {0};
+  int walk_depth {};
+
   //
   // pass 1 is the main dungeon
   // pass 2 are secret levels
