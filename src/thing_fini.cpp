@@ -53,6 +53,14 @@ void Thing::destroy(void)
   FOR_ALL_EQUIP(e) { unequip("unequip item as owner is destroyed", e, false); }
 
   //
+  // Remove buffs etc... in destroy as it can be intereting for the player to be
+  // able to see what they had when dead.
+  //
+  skill_remove_all();
+  buff_remove_all();
+  debuff_remove_all();
+
+  //
   // hooks remove must be after unequip
   //
   hooks_remove();
