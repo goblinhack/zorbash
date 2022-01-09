@@ -208,8 +208,7 @@ redo:
   }
 
   //
-  // Now place secret rooms and join them to the main
-  // depth via secret doors
+  // Now place secret rooms and join them to the main depth via secret doors
   //
   pass = 2;
   if (is_dungeon) {
