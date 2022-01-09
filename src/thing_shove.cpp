@@ -95,9 +95,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
 
   if (it->monst_size() - monst_size() > 1) {
     if (is_player()) {
-      TOPCON("%s is too large to be shoved!", it->text_The().c_str());
+      msg("%s is too large to be shoved!", it->text_The().c_str());
     } else if (it->is_player()) {
-      TOPCON("%s fails to shove you!", text_The().c_str());
+      msg("%s fails to shove you!", text_The().c_str());
     }
     return (THING_SHOVE_TRIED_AND_FAILED);
   }
@@ -105,9 +105,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   if (! it->is_brazier() && ! it->is_barrel()) {
     if (it->collision_check_only(shove_pos)) {
       if (is_player()) {
-        TOPCON("%s cannot be shoved!", it->text_The().c_str());
+        msg("%s cannot be shoved!", it->text_The().c_str());
       } else if (it->is_player()) {
-        TOPCON("%s fails to shove you!", text_The().c_str());
+        msg("%s fails to shove you!", text_The().c_str());
       }
       return (THING_SHOVE_TRIED_AND_FAILED);
     }
@@ -119,12 +119,12 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     if (! d20roll(get_stat_str(), it->get_stat_str())) {
       if (is_player()) {
         if (it->is_monst()) {
-          TOPCON("%s shoves you back!", it->text_The().c_str());
+          msg("%s shoves you back!", it->text_The().c_str());
         } else {
-          TOPCON("%s refuses to budge!", it->text_The().c_str());
+          msg("%s refuses to budge!", it->text_The().c_str());
         }
       } else if (it->is_player()) {
-        TOPCON("%s fails to shove you!", text_The().c_str());
+        msg("%s fails to shove you!", text_The().c_str());
       }
       return (THING_SHOVE_TRIED_AND_FAILED);
     }
@@ -148,47 +148,47 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     if (it->is_brazier()) {
       if (! it->is_dead) {
         if (is_player()) {
-          TOPCON("The brazier falls back on you!");
+          msg("The brazier falls back on you!");
         }
         it->move_to(curr_at);
       }
     } else if (it->is_barrel()) {
       if (is_player()) {
-        TOPCON("The barrel will not budge!");
+        msg("The barrel will not budge!");
       }
     } else {
       if (is_player()) {
-        TOPCON("%s cannot be shoved! Something blocks the way.", text_The().c_str());
+        msg("%s cannot be shoved! Something blocks the way.", text_The().c_str());
       }
     }
   } else {
     if (is_player()) {
       if (it->is_brazier()) {
         if (it->is_dead) {
-          TOPCON("You kick the brazier around. Why though?");
+          msg("You kick the brazier around. Why though?");
         } else {
-          TOPCON("You knock over %s!", it->text_the().c_str());
+          msg("You knock over %s!", it->text_the().c_str());
         }
       } else {
         if (it->is_dead) {
-          TOPCON("You kick %s!", it->text_the().c_str());
+          msg("You kick %s!", it->text_the().c_str());
         } else {
-          TOPCON("You shove %s!", it->text_the().c_str());
+          msg("You shove %s!", it->text_the().c_str());
         }
       }
     } else if (it->is_player()) {
       if (level->is_chasm(shove_pos)) {
-        TOPCON("%%fg=red$%s shoves you into the abyss!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the abyss!%%fg=reset$", text_The().c_str());
       } else if (level->is_lava(shove_pos)) {
-        TOPCON("%%fg=red$%s shoves you into the red death!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the red death!%%fg=reset$", text_The().c_str());
       } else if (level->is_water(shove_pos)) {
-        TOPCON("%%fg=red$%s shoves you into the depths!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the depths!%%fg=reset$", text_The().c_str());
       } else if (level->is_fire(shove_pos)) {
-        TOPCON("%%fg=red$%s shoves you into the flames!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the flames!%%fg=reset$", text_The().c_str());
       } else if (it->is_dead) {
-        TOPCON("%s kicks your corpse for fun!", text_The().c_str());
+        msg("%s kicks your corpse for fun!", text_The().c_str());
       } else {
-        TOPCON("%s shoves you!", text_The().c_str());
+        msg("%s shoves you!", text_The().c_str());
       }
     }
 
@@ -224,12 +224,12 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
       if (pcg_random_range(0, 100) < 5) {
         if (is_player()) {
           if (set_on_fire("set yourself on fire")) {
-            TOPCON("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
+            msg("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
           }
         }
       } else {
         if (is_player()) {
-          TOPCON("%%fg=orange$It burns as you shove it, but you avoid the flames.%%fg=reset$");
+          msg("%%fg=orange$It burns as you shove it, but you avoid the flames.%%fg=reset$");
         }
       }
     }

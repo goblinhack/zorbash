@@ -99,7 +99,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   if (is_able_to_tire()) {
     if (! get_stamina()) {
       if (is_player()) {
-        TOPCON("You are too tired to jump. You need to rest.");
+        msg("You are too tired to jump. You need to rest.");
       }
       dbg("Too tired to jump, stamina %d", get_stamina());
       return false;
@@ -116,7 +116,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     TRACE_NO_INDENT();
     dbg("No, oob");
     if (is_player()) {
-      TOPCON("You can't jump into the void.");
+      msg("You can't jump into the void.");
     }
     return false;
   }
@@ -129,7 +129,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     // Ok ot move
     //
     if (is_player()) {
-      TOPCON("You try to jump but are stuck fast.");
+      msg("You try to jump but are stuck fast.");
     }
     wobble(25);
     dbg("You try to jump but are stuck fast.");
@@ -156,7 +156,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
     if (! d20roll(get_stat_str(), it->get_stat_str())) {
       if (is_player()) {
-        TOPCON("You are held in place!");
+        msg("You are held in place!");
       }
       dbg("You are held in place");
       wobble(25);
@@ -178,7 +178,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         IF_DEBUG2 { log("No, is not lit or visited"); }
 
         if (is_player()) {
-          TOPCON("You can't jump into the unknown.");
+          msg("You can't jump into the unknown.");
         }
         dbg("You can't jump into the unknown.");
         return false;
@@ -221,7 +221,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     TRACE_AND_INDENT();
     dbg("No, jump failed, into obstacle");
     if (is_player()) {
-      TOPCON("You can't jump into solid objects.");
+      msg("You can't jump into solid objects.");
     }
     return false;
   }

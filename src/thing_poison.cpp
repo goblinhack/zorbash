@@ -39,7 +39,7 @@ void Thing::poison_tick(void)
     if (poison) {
       if (d20() < get_stat_con()) {
         if (is_player()) {
-          TOPCON("You take half damage fron poison due to your sturdy con.");
+          msg("You take half damage fron poison due to your sturdy con.");
         }
         poison /= 2;
         set_poisoned_amount(poison);

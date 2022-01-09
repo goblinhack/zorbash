@@ -22,7 +22,7 @@ void Thing::water_tick(void)
     auto owner = get_top_owner();
     if (owner) {
       if (owner->is_player()) {
-        TOPCON("%%fg=green$You quench the flames!%%fg=reset$");
+        msg("%%fg=green$You quench the flames!%%fg=reset$");
       }
     }
 

@@ -95,7 +95,7 @@ void Thing::fall(float fall_height, ts_t ms)
 
   if (is_on_fire()) {
     if (is_player()) {
-      TOPCON("%%fg=green$The fall puts out the flames!%%fg=reset$");
+      msg("%%fg=green$The fall puts out the flames!%%fg=reset$");
     }
     unset_on_fire();
   }
@@ -180,7 +180,7 @@ bool Thing::fall_to_next_level(void)
   auto next_level = get(game->world.levels, where_to.x, where_to.y, where_to.z);
   if (! next_level) {
     if (is_player()) {
-      TOPCON("The chasm is permanently blocked!");
+      msg("The chasm is permanently blocked!");
     }
     dbg("No, no next level");
     return false;
@@ -244,23 +244,23 @@ bool Thing::fall_to_next_level(void)
 
       if (is_player()) {
         game->level = next_level;
-        TOPCON("%%fg=red$You tumble into the void!%%fg=reset$");
+        msg("%%fg=red$You tumble into the void!%%fg=reset$");
       } else {
         if (get_distance_to_player() >= DMAP_IS_PASSABLE) {
           if (is_monst()) {
-            TOPCON("You hear the distant cry of some creature falling");
+            msg("You hear the distant cry of some creature falling");
           } else if (is_item()) {
-            TOPCON("You hear the distant crash of something falling");
+            msg("You hear the distant crash of something falling");
           } else {
-            TOPCON("You hear the distant sound of something falling");
+            msg("You hear the distant sound of something falling");
           }
         } else {
           if (is_monst()) {
-            TOPCON("%s tumbles into the void!", text_The().c_str());
+            msg("%s tumbles into the void!", text_The().c_str());
           } else if (is_item()) {
-            TOPCON("%s falls into the void!", text_The().c_str());
+            msg("%s falls into the void!", text_The().c_str());
           } else {
-            TOPCON("%s slips into the void!", text_The().c_str());
+            msg("%s slips into the void!", text_The().c_str());
           }
         }
       }
@@ -312,28 +312,28 @@ bool Thing::fall_to_next_level(void)
       auto new_pos = make_point(x, y);
       if (next_level->is_lava(new_pos)) {
         if (is_player()) {
-          TOPCON("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
+          msg("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
         }
         fall_damage *= 3;
       } else if (next_level->is_fire(new_pos)) {
         if (is_player()) {
-          TOPCON("%%fg=orange$You plunge into flames! Not a good move!%%fg=reset$");
+          msg("%%fg=orange$You plunge into flames! Not a good move!%%fg=reset$");
         }
         fall_damage *= 2;
       } else if (next_level->is_deep_water(new_pos)) {
         if (is_player()) {
-          TOPCON("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
+          msg("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
         }
         fall_damage /= 4;
       } else if (next_level->is_shallow_water(new_pos)) {
         if (is_player()) {
-          TOPCON("%%fg=yellow$The water lessens the fall!%%fg=reset$");
+          msg("%%fg=yellow$The water lessens the fall!%%fg=reset$");
         }
         fall_damage /= 2;
       }
 
       if (is_player()) {
-        TOPCON("%%fg=red$You take %u fall damage!%%fg=reset$", fall_damage);
+        msg("%%fg=red$You take %u fall damage!%%fg=reset$", fall_damage);
       }
 
       if (is_monst() || is_player()) {

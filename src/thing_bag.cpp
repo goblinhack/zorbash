@@ -334,7 +334,7 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
 {
   TRACE_NO_INDENT();
   if (item == this) {
-    TOPCON("Cannot place an item inside itself!");
+    msg("Cannot place an item inside itself!");
     return false;
   }
 
@@ -409,7 +409,7 @@ bool Thing::bag_can_place_anywhere(Thingp item, point &pos)
 {
   TRACE_NO_INDENT();
   if (item == this) {
-    TOPCON("Cannot place an item inside itself!");
+    msg("Cannot place an item inside itself!");
     return false;
   }
 

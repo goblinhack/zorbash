@@ -181,7 +181,7 @@ void Game::wid_skill_choose(void)
   // Once skills are maxxed out, that's it
   //
   if (player->get_itemsp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
-    TOPCON("%%fg=red$Your brain is full and cannot fit in any more skillsj%%fg=reset$");
+    player->msg("%%fg=red$Your brain is full and cannot fit in any more skillsj%%fg=reset$");
     change_state(Game::STATE_NORMAL);
     return;
   }
@@ -205,7 +205,7 @@ void Game::wid_skill_choose(void)
   }
 
   if (skills.empty()) {
-    TOPCON("%%fg=purple$You have learned all there is to learn.%%fg=reset$");
+    player->msg("%%fg=purple$You have learned all there is to learn.%%fg=reset$");
     change_state(Game::STATE_NORMAL);
     return;
   }

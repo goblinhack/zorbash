@@ -404,7 +404,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (real_hitter->is_able_to_tire()) {
     if (! real_hitter->get_stamina()) {
       if (real_hitter->is_player()) {
-        TOPCON("You are too tired to attack. You need to rest.");
+        msg("You are too tired to attack. You need to rest.");
         return false;
       }
     }
@@ -417,9 +417,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (environ_prefers_fire()) {
     if (hitter->is_fire() || real_hitter->is_fire()) {
       if (is_player()) {
-        TOPCON("You bask in the fire!");
+        msg("You bask in the fire!");
       } else if (real_hitter->is_player()) {
-        TOPCON("%s basks in the fire!", text_The().c_str());
+        msg("%s basks in the fire!", text_The().c_str());
       }
       return false;
     }
@@ -458,9 +458,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     if (environ_prefers_poison()) {
       if (hitter->is_poisonous_danger_level() || real_hitter->is_poisonous_danger_level()) {
         if (is_player()) {
-          TOPCON("You drink in the poison!");
+          msg("You drink in the poison!");
         } else if (real_hitter->is_player()) {
-          TOPCON("%s drinks in the poison!", text_The().c_str());
+          msg("%s drinks in the poison!", text_The().c_str());
         }
         health_boost(damage);
         return false;
@@ -480,9 +480,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     if (is_undead() || is_ethereal()) {
       if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
         if (is_player()) {
-          TOPCON("You are immune to the withering touch of %s!", text_the().c_str());
+          msg("You are immune to the withering touch of %s!", text_the().c_str());
         } else if (real_hitter->is_player()) {
-          TOPCON("%s shrugs off your withering touch!", text_The().c_str());
+          msg("%s shrugs off your withering touch!", text_The().c_str());
         }
         return false;
       }
@@ -491,9 +491,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         if (environ_prefers_necrosis()) {
           if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
             if (is_player()) {
-              TOPCON("You gain strength from the withering touch!");
+              msg("You gain strength from the withering touch!");
             } else if (real_hitter->is_player()) {
-              TOPCON("%s gains strength from your withering touch!", text_The().c_str());
+              msg("%s gains strength from your withering touch!", text_The().c_str());
             }
             incr_stat_str();
             return false;
@@ -517,9 +517,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           }
           decr_stat_str();
           if (is_player()) {
-            TOPCON("%%fg=limegreen$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
+            msg("%%fg=limegreen$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
-            TOPCON("%%fg=limegreen$Your rotting hand touches %s for 1 permanent strength damage!%%fg=reset$",
+            msg("%%fg=limegreen$Your rotting hand touches %s for 1 permanent strength damage!%%fg=reset$",
                    text_the().c_str());
           }
           return true;
@@ -528,9 +528,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         if (environ_prefers_necrosis()) {
           if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
             if (is_player()) {
-              TOPCON("You gain con from the withering touch!");
+              msg("You gain con from the withering touch!");
             } else if (real_hitter->is_player()) {
-              TOPCON("%s gains con from your withering touch!", text_The().c_str());
+              msg("%s gains con from your withering touch!", text_The().c_str());
             }
             incr_stat_con();
             return false;
@@ -554,9 +554,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           }
           decr_stat_con();
           if (is_player()) {
-            TOPCON("%%fg=limegreen$Your skin is rotting. You lose 1 permanent con!%%fg=reset$");
+            msg("%%fg=limegreen$Your skin is rotting. You lose 1 permanent con!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
-            TOPCON("%%fg=limegreen$Your rotting hand touches %s for 1 permanent con damage!%%fg=reset$",
+            msg("%%fg=limegreen$Your rotting hand touches %s for 1 permanent con damage!%%fg=reset$",
                    text_the().c_str());
           }
           return true;
@@ -630,20 +630,20 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       // You hit yourself
       //
       if (attack_poison) {
-        TOPCON("%%fg=yellow$Poison circulates through your veins for %d damage!%%fg=reset$", damage);
+        msg("%%fg=yellow$Poison circulates through your veins for %d damage!%%fg=reset$", damage);
       } else if (attack_necrosis) {
-        TOPCON("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
+        msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else if (crit) {
-        TOPCON("%%fg=red$You CRIT yourself for %d damage!%%fg=reset$", damage);
+        msg("%%fg=red$You CRIT yourself for %d damage!%%fg=reset$", damage);
       } else if (hitter->is_weapon()) {
-        TOPCON("%%fg=orange$You hit yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+        msg("%%fg=orange$You hit yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
       } else if (hitter->is_laser()) {
-        TOPCON("%%fg=orange$You zap yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+        msg("%%fg=orange$You zap yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
       } else if (hitter->is_item_magical()) {
-        TOPCON("%%fg=orange$You blast yourself for %d damage with %s!%%fg=reset$", damage,
+        msg("%%fg=orange$You blast yourself for %d damage with %s!%%fg=reset$", damage,
                hitter->text_the().c_str());
       } else {
-        TOPCON("%%fg=orange$You hurt yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+        msg("%%fg=orange$You hurt yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
       }
     } else {
       if (is_dead || is_dying) {
@@ -651,46 +651,46 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         // Fatal/final hit
         //
         if (attack_poison) {
-          TOPCON("%%fg=red$%s's fangs suck the last sustenance from you!%%fg=reset$",
+          msg("%%fg=red$%s's fangs suck the last sustenance from you!%%fg=reset$",
                  real_hitter->text_The().c_str());
         } else if (attack_necrosis) {
-          TOPCON("%%fg=red$%s's withering touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s's withering touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (hitter->is_weapon()) {
-          TOPCON("%%fg=red$%s cuts you down with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=red$%s cuts you down with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                  hitter->text_the(false).c_str());
         } else if (hitter->is_laser()) {
-          TOPCON("%%fg=red$%s zaps you apart with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=red$%s zaps you apart with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                  hitter->text_the().c_str());
         } else if (hitter->is_item_magical()) {
-          TOPCON("%%fg=red$%s blasts you into pieces with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=red$%s blasts you into pieces with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                  hitter->text_the().c_str());
         } else if (hitter->is_projectile() || hitter->is_laser()) {
-          TOPCON("%%fg=red$%s blasted you into bits with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=red$%s blasted you into bits with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                  hitter->text_the().c_str());
         } else if (attack_acid) {
-          TOPCON("%%fg=red$%s dissolves your body!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s dissolves your body!%%fg=reset$", real_hitter->text_The().c_str());
           msg("Sizzle!");
         } else if (attack_natural) {
-          TOPCON("%%fg=red$%s %s deep!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=red$%s %s deep!%%fg=reset$", real_hitter->text_The().c_str(),
                  pluralise(real_hitter->damage_natural_attack_type()).c_str());
           msg("Urk!");
         } else if (attack_energy) {
-          TOPCON("%%fg=red$%s blasts you apart!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s blasts you apart!%%fg=reset$", real_hitter->text_The().c_str());
           msg("Zap!");
         } else if (attack_lightning) {
-          TOPCON("%%fg=red$%s fries your body!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s fries your body!%%fg=reset$", real_hitter->text_The().c_str());
           msg("Brzzt!");
         } else if (attack_crush) {
-          TOPCON("%%fg=red$You are flattened by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=red$You are flattened by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("Splat!");
         } else if (attack_fire) {
-          TOPCON("%%fg=red$You are burnt to a crisp by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=red$You are burnt to a crisp by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("Sizzle!");
         } else if (attack_digest) {
-          TOPCON("%%fg=red$You are being eaten by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=red$You are being eaten by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("Slurp!");
         } else {
-          TOPCON("%%fg=red$%s %s you fatally!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=red$%s %s you fatally!%%fg=reset$", real_hitter->text_The().c_str(),
                  real_hitter->text_hits().c_str());
         }
       } else {
@@ -698,54 +698,54 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         // Hit when not dead yet...
         //
         if (attack_poison) {
-          TOPCON("%%fg=yellow$%s's fangs poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=yellow$%s's fangs poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                  damage);
         } else if (attack_necrosis) {
-          TOPCON("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (crit) {
-          TOPCON("%%fg=red$%s CRITS you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("%%fg=red$%s CRITS you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
         } else if (hitter->is_weapon()) {
-          TOPCON("%%fg=orange$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+          msg("%%fg=orange$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                  hitter->text_the(false).c_str());
         } else if (hitter->is_laser()) {
-          TOPCON("%%fg=orange$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+          msg("%%fg=orange$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                  hitter->text_the().c_str());
         } else if (hitter->is_item_magical()) {
-          TOPCON("%%fg=orange$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=orange$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                  damage, hitter->text_the().c_str());
         } else if (hitter->is_projectile() || hitter->is_laser()) {
-          TOPCON("%%fg=orange$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=orange$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
                  damage, hitter->text_the().c_str());
         } else if (attack_acid) {
-          TOPCON("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
           msg("Sizzle!");
         } else if (attack_natural) {
           if (! real_hitter->damage_natural_attack_type().empty()) {
-            TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+            msg("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                    pluralise(real_hitter->damage_natural_attack_type()).c_str(), damage);
             msg(capitalise(real_hitter->damage_natural_attack_type()));
           } else {
-            TOPCON("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+            msg("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
             msg("Chomp!");
           }
         } else if (attack_energy) {
-          TOPCON("%%fg=orange$%s blasts you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("%%fg=orange$%s blasts you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
           msg("Zap!");
         } else if (attack_lightning) {
-          TOPCON("%%fg=orange$%s electrocutes you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=orange$%s electrocutes you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                  damage);
           msg("Brzzt!");
         } else if (attack_crush) {
-          TOPCON("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("Ouch!");
         } else if (attack_fire) {
-          TOPCON("%%fg=orange$You are being burnt by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=orange$You are being burnt by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("!");
         } else if (attack_digest) {
-          TOPCON("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
           msg("Gulp!");
         } else {
-          TOPCON("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                  real_hitter->text_hits().c_str(), damage);
         }
       }
@@ -753,7 +753,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
     if (real_hitter->is_fire() || real_hitter->is_lava()) {
       if (set_on_fire("hit by fire")) {
-        TOPCON("%%fg=red$You are literally ON FIRE!%%fg=reset$");
+        msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");
       }
     }
 
@@ -770,67 +770,67 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       if (is_alive_monst() || is_mob_spawner()) {
         if (crit) {
-          TOPCON("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$", text_the().c_str(), damage);
+          msg("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$", text_the().c_str(), damage);
         } else {
           if (hitter && (hitter != real_hitter)) {
             if (attack_poison) {
-              TOPCON("You poison %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You poison %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             } else if (attack_necrosis) {
-              TOPCON("You rot %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You rot %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             } else if (hitter->is_weapon()) {
-              TOPCON("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             } else if (hitter->is_laser()) {
-              TOPCON("You zap %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You zap %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             } else if (hitter->is_item_magical()) {
-              TOPCON("You blast %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You blast %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             } else {
-              TOPCON("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
             }
           } else {
             if (attack_poison) {
-              TOPCON("You poison %s for %d damage.", text_the().c_str(), damage);
+              msg("You poison %s for %d damage.", text_the().c_str(), damage);
             } else if (attack_necrosis) {
-              TOPCON("You rot %s for %d damage.", text_the().c_str(), damage);
+              msg("You rot %s for %d damage.", text_the().c_str(), damage);
             } else if (hitter->is_weapon()) {
-              TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
+              msg("You hit %s for %d damage.", text_the().c_str(), damage);
             } else if (hitter->is_laser()) {
-              TOPCON("You zap %s for %d damage.", text_the().c_str(), damage);
+              msg("You zap %s for %d damage.", text_the().c_str(), damage);
             } else if (hitter->is_item_magical()) {
-              TOPCON("You blast %s for %d damage.", text_the().c_str(), damage);
+              msg("You blast %s for %d damage.", text_the().c_str(), damage);
             } else {
-              TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
+              msg("You hit %s for %d damage.", text_the().c_str(), damage);
             }
           }
         }
       } else if (is_item()) {
         if (hitter->is_weapon()) {
-          TOPCON("You hit %s.", text_the().c_str());
+          msg("You hit %s.", text_the().c_str());
         } else if (hitter->is_laser()) {
-          TOPCON("You zap %s.", text_the().c_str());
+          msg("You zap %s.", text_the().c_str());
         } else if (hitter->is_item_magical()) {
-          TOPCON("You blast %s.", text_the().c_str());
+          msg("You blast %s.", text_the().c_str());
         } else {
-          TOPCON("You hit %s.", text_the().c_str());
+          msg("You hit %s.", text_the().c_str());
         }
       } else if (is_rock() || is_wall_dungeon()) {
         if (hitter->is_weapon()) {
-          TOPCON("You hit %s, why though?", text_the().c_str());
+          msg("You hit %s, why though?", text_the().c_str());
         } else if (hitter->is_laser()) {
-          TOPCON("You zap %s, why though?", text_the().c_str());
+          msg("You zap %s, why though?", text_the().c_str());
         } else if (hitter->is_item_magical()) {
-          TOPCON("You blast %s, why though?", text_the().c_str());
+          msg("You blast %s, why though?", text_the().c_str());
         } else {
-          TOPCON("You hit %s, why though?", text_the().c_str());
+          msg("You hit %s, why though?", text_the().c_str());
         }
       } else {
         if (hitter->is_weapon()) {
-          TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
+          msg("You hit %s for %d damage.", text_the().c_str(), damage);
         } else if (hitter->is_laser()) {
-          TOPCON("You zap %s for %d damage.", text_the().c_str(), damage);
+          msg("You zap %s for %d damage.", text_the().c_str(), damage);
         } else if (hitter->is_item_magical()) {
-          TOPCON("You blast %s for %d damage.", text_the().c_str(), damage);
+          msg("You blast %s for %d damage.", text_the().c_str(), damage);
         } else {
-          TOPCON("You hit %s for %d damage.", text_the().c_str(), damage);
+          msg("You hit %s for %d damage.", text_the().c_str(), damage);
         }
       }
     } else {

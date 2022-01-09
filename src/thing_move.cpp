@@ -259,7 +259,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 
       if (! d20roll(get_stat_str(), it->get_stat_str())) {
         if (is_player()) {
-          TOPCON("You are held in place and cannot move!");
+          msg("You are held in place and cannot move!");
         }
         dbg("You are held in place");
         wobble(25);
@@ -280,10 +280,10 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       if (! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
         if (is_player()) {
           if (level->is_spiderweb(curr_at.x, curr_at.y)) {
-            TOPCON("You are trapped under a barrel!");
+            msg("You are trapped under a barrel!");
             game->tick_begin("trapped in a barrel");
           } else {
-            TOPCON("You cannot move!");
+            msg("You cannot move!");
             game->tick_begin("trapped in a barrel");
           }
           msg(string_sprintf("%%fg=red$!"));
@@ -310,10 +310,10 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     } else if (is_stuck()) {
       if (is_player()) {
         if (level->is_spiderweb(curr_at.x, curr_at.y)) {
-          TOPCON("You are trapped in a web!");
+          msg("You are trapped in a web!");
           game->tick_begin("trapped in a web");
         } else {
-          TOPCON("You cannot move!");
+          msg("You cannot move!");
           game->tick_begin("trapped in something sticky");
         }
         msg(string_sprintf("%%fg=red$!"));
@@ -386,9 +386,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         game->wid_collect_create(items);
 #endif
       }
-      TOPCON("You wait...");
+      msg("You wait...");
     } else {
-      TOPCON("You rest...");
+      msg("You rest...");
       rest();
     }
     return false;
@@ -530,7 +530,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         //
         if (is_player()) {
           std::string s = t->text_The() + " free attacks as you move";
-          TOPCON("%s.", s.c_str());
+          msg("%s.", s.c_str());
         }
       }
 

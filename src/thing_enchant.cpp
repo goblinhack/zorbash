@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_game.hpp"
 #include "my_level.hpp"
 #include "my_main.hpp"
 #include "my_monst.hpp"
@@ -48,8 +49,8 @@ void Thing::on_enchant(void)
 
 bool Thing::enchant_with_stone(Thingp what)
 {
-  if (is_player()) {
-    TOPCON("You enchant %s.", what->text_the().c_str());
+  if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
+    msg("You enchant %s.", what->text_the().c_str());
   }
 
   dbg("enchant %s", what->text_the().c_str());
@@ -81,8 +82,8 @@ bool Thing::enchant_with_stone(Thingp what)
 
 bool Thing::enchant_without_stone(Thingp what)
 {
-  if (is_player()) {
-    TOPCON("You enchant %s.", what->text_the().c_str());
+  if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
+    msg("You enchant %s.", what->text_the().c_str());
   }
 
   dbg("Enchant %s", what->text_the().c_str());

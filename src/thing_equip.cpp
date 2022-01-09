@@ -354,15 +354,15 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   }
 
   if (is_player()) {
-    if (! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
+    if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
       if (item->is_dead) {
-        TOPCON("%s is broken.", item->text_The().c_str());
+        msg("%s is broken.", item->text_The().c_str());
       } else if (item->is_ring()) {
-        TOPCON("You slip off the %s.", item->text_the().c_str());
+        msg("You slip off the %s.", item->text_the().c_str());
       } else if (item->is_weapon()) {
-        TOPCON("You unwield the %s.", item->text_the().c_str());
+        msg("You unwield the %s.", item->text_the().c_str());
       } else {
-        TOPCON("You take off on %s.", item->text_the().c_str());
+        msg("You take off on %s.", item->text_the().c_str());
       }
     }
   }
@@ -468,27 +468,27 @@ bool Thing::equip(Thingp item, int equip)
   }
 
   if (is_player()) {
-    if (! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
+    if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
       if (item->is_ring()) {
-        TOPCON("You slip on the %s.", item->text_the().c_str());
+        msg("You slip on the %s.", item->text_the().c_str());
       } else if (item->is_weapon()) {
-        TOPCON("You wield the %s.", item->text_the().c_str());
+        msg("You wield the %s.", item->text_the().c_str());
       } else {
-        TOPCON("You put on %s.", item->text_the().c_str());
+        msg("You put on %s.", item->text_the().c_str());
       }
     }
   } else if (is_monst() && ! is_offscreen) {
     if (level->player && (level->tick_created < game->tick_current)) {
       if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-        TOPCON("%s wields %s.", text_The().c_str(), item->text_the().c_str());
+        msg("%s wields %s.", text_The().c_str(), item->text_the().c_str());
       } else if (item->is_weapon()) {
-        TOPCON("You hear the whoosh of a weapon being wielded.");
+        msg("You hear the whoosh of a weapon being wielded.");
       } else if (item->is_ring()) {
-        TOPCON("You hear the powerful thrum of a magical ring being worn.");
+        msg("You hear the powerful thrum of a magical ring being worn.");
       } else if (item->is_wand()) {
-        TOPCON("You hear a strange magical swishing sound.");
+        msg("You hear a strange magical swishing sound.");
       } else if (item->is_item_magical()) {
-        TOPCON("You hear the distant sound of magic, whatever that is.");
+        msg("You hear the distant sound of magic, whatever that is.");
       }
     }
   }
@@ -566,7 +566,7 @@ bool Thing::equip_use(bool forced, int equip)
   if (is_able_to_tire()) {
     if (! get_stamina()) {
       if (is_player()) {
-        TOPCON("You are too tired to attack. You need to rest.");
+        msg("You are too tired to attack. You need to rest.");
       }
       return false;
     }
@@ -597,7 +597,7 @@ bool Thing::equip_use(bool forced, int equip)
       // We get here if trying to use a weapon but have none.
       //
       if (is_player()) {
-        TOPCON("You attack with bare fists!");
+        msg("You attack with bare fists!");
       }
 
       //

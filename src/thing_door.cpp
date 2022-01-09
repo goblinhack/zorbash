@@ -21,7 +21,7 @@ bool Thing::open_door(Thingp it)
   if (is_on_fire()) {
     if (! it->is_on_fire()) {
       if (is_player()) {
-        TOPCON("The door is ablaze!");
+        msg("The door is ablaze!");
       }
       it->set_on_fire("opened flaming door");
     }
@@ -50,7 +50,7 @@ bool Thing::open_door(Thingp it)
     it->level_push();
 
     if (is_player()) {
-      TOPCON("The door creaks open.");
+      msg("The door creaks open.");
     }
 
     it->on_open();
@@ -62,7 +62,7 @@ bool Thing::open_door(Thingp it)
   if (is_player()) {
     static uint32_t last_told_when;
     if (! last_told_when || (game->tick_current >= last_told_when + 10)) {
-      TOPCON("You need a key.");
+      msg("You need a key.");
     }
     last_told_when = game->tick_current;
   }
@@ -75,7 +75,7 @@ bool Thing::close_door(Thingp it)
   if (is_on_fire()) {
     if (! it->is_on_fire()) {
       if (is_player()) {
-        TOPCON("The door is ablaze!");
+        msg("The door is ablaze!");
       }
       it->set_on_fire("closed flaming door");
     }
@@ -102,7 +102,7 @@ bool Thing::close_door(Thingp it)
   it->level_push();
 
   if (is_player()) {
-    TOPCON("The door creaks open.");
+    msg("The door creaks open.");
   }
 
   update_light();

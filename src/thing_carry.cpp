@@ -202,8 +202,9 @@ bool Thing::carry(Thingp item, bool can_equip)
     set_where_i_failed_to_collect_last(item->curr_at);
 
     if (is_player()) {
-      if (! level->is_starting) {
-        TOPCON("%%fg=red$No space to carry %s.%%fg=reset$", item->text_the().c_str());
+      if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead &&
+          ! is_dying) {
+        msg("%%fg=red$No space to carry %s.%%fg=reset$", item->text_the().c_str());
       }
     }
     return false;
@@ -267,21 +268,21 @@ bool Thing::carry(Thingp item, bool can_equip)
     // Avoid dup message
     //
   } else {
-    if (! level->is_starting) {
+    if (game->tick_current > 1) {
       if (is_player()) {
-        TOPCON("You carry %s.", item->text_the().c_str());
+        msg("You carry %s.", item->text_the().c_str());
       } else if (is_monst() && ! is_offscreen) {
         if (level->player && (level->tick_created < game->tick_current)) {
           if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
             if (! already_carried) {
-              TOPCON("%s collects %s.", text_The().c_str(), item->text_the().c_str());
+              msg("%s collects %s.", text_The().c_str(), item->text_the().c_str());
             }
           } else if (item->is_weapon()) {
-            TOPCON("You hear the noise of a weapons being drawn.");
+            msg("You hear the noise of a weapons being drawn.");
           } else if (item->is_food()) {
-            TOPCON("You hear a strange slurping sound.");
+            msg("You hear a strange slurping sound.");
           } else if (item->is_item_magical()) {
-            TOPCON("You hear a greedy cackle.");
+            msg("You hear a greedy cackle.");
           }
         }
       }

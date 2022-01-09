@@ -293,7 +293,7 @@ bool Thing::use(Thingp what, int preferred_equip)
     }
     if (equip(what, preferred_equip)) {
       if (is_player()) {
-        TOPCON("You equip the %s.", what->text_the().c_str());
+        msg("You equip the %s.", what->text_the().c_str());
         game->tick_begin("player changed weapon");
       }
     }
@@ -423,7 +423,7 @@ bool Thing::use(Thingp what, int preferred_equip)
     dbg("Trying to drink: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
-      TOPCON("You quaff the %s.", what->text_the().c_str());
+      msg("You quaff the %s.", what->text_the().c_str());
     }
     used(what, this, true /* remove after use */);
     if (is_player()) {
@@ -433,7 +433,7 @@ bool Thing::use(Thingp what, int preferred_equip)
     dbg("Trying to wave: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
-      TOPCON("You wave the %s.", what->text_the().c_str());
+      msg("You wave the %s.", what->text_the().c_str());
     }
     used(what, this, false /* remove after use */);
     if (is_player()) {
@@ -464,7 +464,7 @@ bool Thing::use(Thingp what, int preferred_equip)
     dbg("Trying to use, last resort: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
-      TOPCON("I don't know how to use %s.", what->text_the().c_str());
+      msg("I don't know how to use %s.", what->text_the().c_str());
       game->tick_begin("player tried to use something they could not");
     }
   }

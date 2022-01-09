@@ -86,7 +86,7 @@ bool Thing::descend_sewer(void)
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {
     if (is_player()) {
-      TOPCON("The sewer is permanently blocked!");
+      msg("The sewer is permanently blocked!");
     }
     return false;
   }
@@ -96,7 +96,7 @@ bool Thing::descend_sewer(void)
 
   if (is_player()) {
     game->level = l;
-    TOPCON("You descend into the sewer. Why though?");
+    msg("You descend into the sewer. Why though?");
   }
 
   dbg("Move to next level sewer entrance");

@@ -46,7 +46,7 @@ void Thing::brazier_tick(void)
       if (try_to_shove(t, delta)) {
         if (! is_dead) {
           if (is_player()) {
-            TOPCON("You knock over the brazier!");
+            msg("You knock over the brazier!");
           }
         }
         return;
@@ -55,7 +55,7 @@ void Thing::brazier_tick(void)
 
     if (! is_dead) {
       if (pcg_random_range(0, 100) < 20) {
-        TOPCON("You stumble into the flames!");
+        msg("You stumble into the flames!");
         set_on_fire("stumbled into flames");
       }
     }

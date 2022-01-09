@@ -209,7 +209,7 @@ void con(const wchar_t *fmt)
   FLUSH_THE_CONSOLE();
 }
 
-static void topcon_(const char *fmt, va_list args)
+void topcon_(const char *fmt, va_list args)
 {
   char buf[ MAXLONGSTR ];
   char ts[ MAXLONGSTR / 2 ];
@@ -231,7 +231,7 @@ static void topcon_(const char *fmt, va_list args)
   FLUSH_THE_CONSOLE();
 }
 
-static void topcon_(const wchar_t *fmt, va_list args)
+void topcon_(const wchar_t *fmt, va_list args)
 {
   {
     char ts[ MAXLONGSTR ];

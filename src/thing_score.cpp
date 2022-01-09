@@ -29,7 +29,7 @@ void Thing::score_add(Thingp victim)
     auto score = get_danger_initial_level(victim);
     if (score > 0) {
       if (get_health() < get_health_initial() / 10) {
-        TOPCON("%%fg=red$Glory defeat x10 score!%%fg=reset$");
+        msg("%%fg=red$Glory defeat x10 score!%%fg=reset$");
         incr_score(score * 10);
       } else {
         incr_score(score);

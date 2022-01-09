@@ -87,7 +87,7 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
 
   if (! laser->is_laser()) {
     if (is_player()) {
-      TOPCON("I don't know how to zap %s.", laser->text_the().c_str());
+      msg("I don't know how to zap %s.", laser->text_the().c_str());
       game->tick_begin("player tried to use something they could not");
     }
     return nullptr;

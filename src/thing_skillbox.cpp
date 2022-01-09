@@ -60,7 +60,7 @@ bool Thing::skillbox_id_insert(Thingp what)
     item_slot                              = free_slot;
   } else {
     if (skillbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
-      TOPCON("No space to carry %s which is not carried.", what->text_the().c_str());
+      msg("No space to carry %s which is not carried.", what->text_the().c_str());
       return false;
     }
 
@@ -291,9 +291,9 @@ bool Level::skillbox_chosen(const uint32_t slot)
   IF_DEBUG2 { what->log("Chosen skillbox item"); }
 
   if (what->is_activated) {
-    TOPCON("You activate %s skill.", what->text_the().c_str());
+    player->msg("You activate %s skill.", what->text_the().c_str());
   } else {
-    TOPCON("You deactivate %s skill.", what->text_the().c_str());
+    player->msg("You deactivate %s skill.", what->text_the().c_str());
   }
 
   return true;

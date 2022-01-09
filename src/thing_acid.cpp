@@ -51,7 +51,7 @@ void Thing::acid_tick(void)
     FOR_ALL_THINGS_END()
   } else {
     if (is_player()) {
-      TOPCON("Your shoes are dissolving!");
+      msg("Your shoes are dissolving!");
     }
   }
 }

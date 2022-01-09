@@ -58,7 +58,7 @@ bool Thing::buffbox_id_insert(Thingp what)
     item_slot                            = free_slot;
   } else {
     if (buffbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
-      TOPCON("No space to carry %s which is not carried.", what->text_the().c_str());
+      msg("No space to carry %s which is not carried.", what->text_the().c_str());
       return false;
     }
 

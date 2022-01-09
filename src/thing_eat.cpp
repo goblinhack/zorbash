@@ -111,7 +111,7 @@ bool Thing::eat(Thingp victim)
   //
   if (is_player()) {
     auto boost = health_boost(victim->get_nutrition());
-    TOPCON("You munch %s for %d health.", victim->text_the().c_str(), boost);
+    msg("You munch %s for %d health.", victim->text_the().c_str(), boost);
     return true;
   }
 
@@ -163,7 +163,7 @@ bool Thing::consume(Thingp victim)
   //
   if (is_player()) {
     auto boost = health_boost(victim->get_nutrition());
-    TOPCON("You munch %s for %d health.", victim->text_the().c_str(), boost);
+    msg("You munch %s for %d health.", victim->text_the().c_str(), boost);
     return true;
   }
 
@@ -190,18 +190,18 @@ bool Thing::consume(Thingp victim)
           if (! victim->is_offscreen) {
             if (victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
-                TOPCON("%%fg=red$%s feasts on your corpse!%%fg=reset$", text_The().c_str());
+                msg("%%fg=red$%s feasts on your corpse!%%fg=reset$", text_The().c_str());
               } else {
-                TOPCON("%%fg=orange$%s is eating you!%%fg=reset$", text_The().c_str());
+                msg("%%fg=orange$%s is eating you!%%fg=reset$", text_The().c_str());
               }
             } else if (victim->is_monst() || victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
-                TOPCON("%s feasts on the corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                msg("%s feasts on the corpse of %s!", text_The().c_str(), victim->text_the().c_str());
               } else {
-                TOPCON("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
+                msg("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
               }
             } else {
-              TOPCON("%s consumes %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%s consumes %s.", text_The().c_str(), victim->text_the().c_str());
             }
           }
         }
