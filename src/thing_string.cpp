@@ -22,7 +22,7 @@ std::string Thing::to_string(void)
   if (unlikely(! level)) {
     return (string_sprintf("%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/off" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
@@ -31,7 +31,7 @@ std::string Thing::to_string(void)
     TRACE_NO_INDENT();
     return (string_sprintf("%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/off" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
@@ -42,7 +42,7 @@ std::string Thing::to_string(void)
       return (string_sprintf(
           "%" PRIX32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
           is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
-          is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+          is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
           is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
           is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
           is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
@@ -59,7 +59,7 @@ std::string Thing::to_string(void)
     return (string_sprintf(
         "%" PRIX32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d o:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
         is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
-        is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+        is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
         is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
         is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
         is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
@@ -69,7 +69,7 @@ std::string Thing::to_string(void)
   return (string_sprintf(
       "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z, tpp->name().c_str(),
       is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
-      is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+      is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
       is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
       is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
       is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
@@ -88,7 +88,7 @@ std::string Thing::to_short_string(void)
   if (unlikely(! level)) {
     return (string_sprintf("%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/off" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
@@ -97,7 +97,7 @@ std::string Thing::to_short_string(void)
     TRACE_NO_INDENT();
     return (string_sprintf("%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
                            is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/offscr" : "",
+                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/off" : "",
                            is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
                            is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
@@ -105,7 +105,7 @@ std::string Thing::to_short_string(void)
   return (string_sprintf(
       "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z, tpp->name().c_str(),
       is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
-      is_offscreen ? "/offscr" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+      is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
       is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
       is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
       is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
