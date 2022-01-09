@@ -33,7 +33,12 @@ Thingp World::thing_find(ThingId id)
 
 void World::alloc_thing_id(Thingp t)
 {
-  static uint32_t last_id = 0;
+  //
+  // Choose something high enough to start that will likely not be the same
+  // as plain old numbers used in the logs for things like damage; so this
+  // thing ID stands out.
+  //
+  static uint32_t last_id = 0x10000;
 
   for (;;) {
     last_id++;

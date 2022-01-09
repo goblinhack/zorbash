@@ -67,9 +67,13 @@ void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Th
     }
 
     if (it) {
+      log("AI: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
+          get_health(), get_health_max(), long_msg.c_str(), it->to_short_string().c_str());
       CON("Robot: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
           get_health(), get_health_max(), long_msg.c_str(), it->to_short_string().c_str());
     } else {
+      log("AI: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y, get_health(),
+          get_health_max(), long_msg.c_str());
       CON("Robot: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y, get_health(),
           get_health_max(), long_msg.c_str());
     }
@@ -1590,6 +1594,9 @@ bool Thing::ai_tick(bool recursing)
   // See if anything dangerous is close
   //
   auto threat = get_most_dangerous_visible_thing();
+  if (threat) {
+    AI_LOG("Threat", threat);
+  }
 
   //
   // A threat can be a few tiles away; but if one is standing literally
@@ -1725,7 +1732,11 @@ bool Thing::ai_tick(bool recursing)
           //
           // If not too close to the thread we can try and do something else like pick up a weapon.
           //
-          if (distance(curr_at, threat->curr_at) > 2) {
+          if (game->tick_current - get_tick_last_i_was_attacked() < 2) {
+            //
+            // Don't relax. You're being attacked.
+            //
+          } else if (distance(curr_at, threat->curr_at) > 2) {
             //
             // Look around for something nearby to do; like collect an item.
             //
@@ -2402,7 +2413,7 @@ void Thing::ai_change_state(int new_state, const std::string &why)
     return;
   }
 
-  dbg("AI change state");
+  dbg("AI change state: %s", why.c_str());
   TRACE_AND_INDENT();
 
   std::string to;
@@ -2573,7 +2584,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
   AI_LOG("Needs to avoid", it);
   TRACE_AND_INDENT();
 
-  auto d = get_distance_avoid();
+  auto d = get_distance_vision();
   if (! d) {
     d = 2;
   }

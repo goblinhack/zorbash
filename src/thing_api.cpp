@@ -6286,6 +6286,54 @@ uint32_t Thing::incr_tick_last_level_change(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_last_i_was_attacked
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_tick_last_i_was_attacked(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (get_infop()->tick_last_i_was_attacked);
+  } else {
+    return 0;
+  }
+}
+
+uint32_t Thing::set_tick_last_i_was_attacked(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->tick_last_i_was_attacked = v);
+}
+
+uint32_t Thing::decr_tick_last_i_was_attacked(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->tick_last_i_was_attacked -= v);
+}
+
+uint32_t Thing::incr_tick_last_i_was_attacked(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->tick_last_i_was_attacked += v);
+}
+
+uint32_t Thing::decr_tick_last_i_was_attacked(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->tick_last_i_was_attacked--);
+}
+
+uint32_t Thing::incr_tick_last_i_was_attacked(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->tick_last_i_was_attacked++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // where_i_dropped_an_item_last
 ////////////////////////////////////////////////////////////////////////////
 point Thing::get_where_i_dropped_an_item_last(void)
