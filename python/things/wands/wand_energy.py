@@ -12,7 +12,7 @@ def on_idle(me, x, y):
         my.thing_incr_charge_count(me, 1)
         owner = my.thing_get_top_owner_id(me)
         if my.thing_is_player(owner):
-            my.topcon(f"%%fg=gold$The {my.thing_get_name(me)} pulses.%%fg=reset$")
+            my.thing_msg(me, f"%%fg=gold$The {my.thing_get_name(me)} pulses.%%fg=reset$")
 
 
 def on_use(owner, item, target, x, y):
@@ -26,7 +26,7 @@ def on_use(owner, item, target, x, y):
 
 def on_final_use(owner, item, target, x, y):
     if my.thing_is_player(owner):
-        my.topcon("The wand fades away into nothingness.")
+        my.thing_msg(owner, "The wand fades away into nothingness.")
 
 
 def explode(me, x, y):
@@ -51,7 +51,7 @@ def on_fall(me, x, y):
 def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
     if my.thing_is_player(owner):
-        my.topcon("The wand glows.")
+        my.thing_msg(me, "The wand glows.")
     my.thing_incr_charge_count(me, 5)
 
 

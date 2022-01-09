@@ -6,13 +6,13 @@ mytp = None
 
 def on_owner_set(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.topcon("A green glow surrounds you.")
+        my.thing_msg(me, "A green glow surrounds you.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_unset(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.topcon("The green glow around you fades.")
+        my.thing_msg(me, "The green glow around you fades.")
 
 
 def on_owner_damage_melee(me, owner, hitter, x, y, damage):
@@ -86,9 +86,9 @@ def on_tick(owner, item, x, y):
     new_poison = int(poison / 2)
     if my.thing_is_player(owner):
         if new_poison == 0:
-            my.topcon("%%fg=green$The poison has little effect on you!%%fg=reset$")
+            my.thing_msg(owner, "%%fg=green$The poison has little effect on you!%%fg=reset$")
         else:
-            my.topcon("%%fg=green$The poison fades from your system!%%fg=reset$")
+            my.thing_msg(owner, "%%fg=green$The poison fades from your system!%%fg=reset$")
     my.thing_set_poisoned_amount(owner, new_poison)
     return True
 

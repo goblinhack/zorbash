@@ -4,7 +4,7 @@ import tp
 
 def on_death(me, x, y):
     my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
-    my.topcon("The bridge collapses!")
+    my.thing_msg(me, "The bridge collapses!")
 
     for bridge in my.level_flood_fill_get_all_things(me, x, y, "is_bridge"):
         if bridge != me:

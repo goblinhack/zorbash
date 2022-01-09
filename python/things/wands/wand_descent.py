@@ -10,7 +10,7 @@ def on_idle(me, x, y):
         my.thing_incr_charge_count(me, 1)
         owner = my.thing_get_top_owner_id(me)
         if my.thing_is_player(owner):
-            my.topcon(f"%%fg=blue$The {my.thing_get_name(me)} pulses.%%fg=reset$")
+            my.thing_msg(owner, f"%%fg=blue$The {my.thing_get_name(me)} pulses.%%fg=reset$")
 
 
 def explode(me, x, y):
@@ -22,7 +22,7 @@ def explode(me, x, y):
 
 def on_final_use(owner, item, target, x, y):
     if my.thing_is_player(owner):
-        my.topcon("The wand crumbles into dust.")
+        my.thing_msg(owner, "The wand crumbles into dust.")
 
 
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):

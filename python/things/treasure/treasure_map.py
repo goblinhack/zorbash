@@ -5,7 +5,7 @@ import tp
 def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
     if my.thing_is_player(owner):
-        my.topcon("The map glows. It seems full of knowledge.")
+        my.thing_msg(me, "The map glows. It seems full of knowledge.")
 
 
 def tp_init(name, text_name, short_text_name):

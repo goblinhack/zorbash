@@ -6,9 +6,6 @@ mytp = None
 
 def on_use(owner, skill, target, x, y):
     my.level_spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
-    # my.topcon("owner  {} {}".format(my.thing_get_name(owner), my.thing_get_health(owner)))
-    # my.topcon("skill  {} {}".format(my.thing_get_name(skill), my.thing_get_health(skill)))
-    # my.topcon("target {} {}".format(my.thing_get_name(target), my.thing_get_health(target)))
     bonus = int(my.thing_get_stamina(owner) / 2)
 
     enchant = my.thing_get_enchant(skill)
@@ -16,12 +13,12 @@ def on_use(owner, skill, target, x, y):
 
     if bonus > 1:
         if my.thing_is_player(owner):
-            my.topcon(f"%%fg=yellow$You strike with a mighty thrust of {bonus}.%%fg=reset$")
+            my.thing_msg(owner, f"%%fg=yellow$You strike with a mighty thrust of {bonus}.%%fg=reset$")
         my.thing_incr_current_damage(owner, bonus)
         my.thing_decr_stamina(owner, bonus)
     else:
         if my.thing_is_player(owner):
-            my.topcon("You run out of devotion.")
+            my.thing_msg(owner, "You run out of devotion.")
         my.thing_skill_deactivate(owner, skill)
 
 
