@@ -77,9 +77,11 @@ void Thing::killed(Thingp defeater, const char *reason)
   }
 
   //
-  // Unequip weapons
+  // Unequip weapons. Keep player items around for post mortem analysis.
   //
-  FOR_ALL_EQUIP(e) { unequip("owner is dead", e, false); }
+  if (! is_player()) {
+    FOR_ALL_EQUIP(e) { unequip("owner is dead", e, false); }
+  }
 
   //
   // If in a bag, get out of there!
@@ -137,10 +139,6 @@ void Thing::killed(Thingp defeater, const char *reason)
       drop_all();
       dbg("Dropped all items");
     }
-
-    skill_remove_all();
-    buff_remove_all();
-    debuff_remove_all();
   }
 
   if (! is_corpse_currently) {
@@ -305,8 +303,7 @@ void Thing::killed(Thingp defeater, const char *reason)
 
       if (game->config.hiscores.is_new_hiscore(this)) {
         if (game->robot_mode) {
-          msg("%%fg=yellow$New robo high score, %s place!%%fg=reset$",
-                        game->config.hiscores.place_str(this));
+          msg("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
         } else {
           msg("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
         }
