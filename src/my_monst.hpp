@@ -85,7 +85,7 @@ public:
 
   ThingId on_fire_id_anim {};
   ThingId owner_id {};         // Who carries this thing?
-  ThingId mob_spawner_id {};    // Who generated this thing?
+  ThingId mob_spawner_id {};   // Who generated this thing?
   ThingId leader_id {};        // Who is the current ally leader
   ThingId spawner_owner_id {}; // Who spawned this thing?
 
@@ -181,6 +181,10 @@ public:
   //
   uint32_t tick_last_escape {};
   uint32_t tick_last_level_change {};
+  //
+  // When we were last attacked
+  //
+  uint32_t tick_last_i_was_attacked {};
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

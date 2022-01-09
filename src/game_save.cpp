@@ -100,6 +100,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->tick_last_dropped);
   out << bits(my.t->tick_last_escape);
   out << bits(my.t->tick_last_level_change);
+  out << bits(my.t->tick_last_i_was_attacked);
   out << bits(my.t->tick_last_location_check);
   out << bits(my.t->tick_resurrect_when);
   out << bits(my.t->wobble);
