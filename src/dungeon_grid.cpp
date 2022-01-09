@@ -132,7 +132,7 @@ redo:
   while (depth < 10) {
     set_max_depth();
 
-    auto placed = snake_walk(depth, 3, pass);
+    auto placed = snake_walk(depth, 5, pass);
 
     if (debug_enabled) {
       LOG("Node-grid: Level depth %d placed %d nodes", depth, placed);
