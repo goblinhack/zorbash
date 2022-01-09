@@ -851,6 +851,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         if (it->get_immediate_owner_id().ok()) {
+          AI_LOG("", "Has an ownwer; ignore", it);
           continue;
         }
 
@@ -858,13 +859,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't attack your mob_spawner
         //
         if (it->is_mob_spawner() && (get_top_mob_spawner() == this)) {
-          continue;
-        }
-
-        //
-        // Don't attack your leader
-        //
-        if (get_leader() == this) {
+          AI_LOG("", "My mob spawner", it);
           continue;
         }
 
@@ -872,6 +867,16 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't attack your fellow minion
         //
         if (it->is_minion() && (it->get_top_mob_spawner() == get_top_mob_spawner())) {
+          AI_LOG("", "Fellow minion", it);
+          continue;
+        }
+
+        //
+        // Don't attack your leader
+        //
+        auto leader = get_leader();
+        if (leader == this) {
+          AI_LOG("", "Same leader", it);
           continue;
         }
 
@@ -879,8 +884,11 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't attack your fellow follower
         //
         if (it->is_able_to_follow()) {
-          if (it->get_leader() == get_leader()) {
-            continue;
+          if (leader) {
+            if (it->get_leader() == leader) {
+              AI_LOG("", "Fellow follower", it);
+              continue;
+            }
           }
         }
 
@@ -2239,6 +2247,7 @@ bool Thing::ai_tick(bool recursing)
         //
         AI_LOG("Nothing to do at all.");
         if (is_player()) {
+          TOPCON("Robot has ran out of things to do.");
           wid_actionbar_robot_mode_off();
         }
 
