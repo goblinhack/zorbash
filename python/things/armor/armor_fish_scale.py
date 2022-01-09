@@ -15,7 +15,7 @@ def on_unequip(owner, me, x, y):
 def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
     if my.thing_is_player(owner):
-        my.topcon("The scale armor glows.")
+        my.thing_msg(me, "The scale armor glows.")
     my.thing_incr_stat_def(me, 2)
 
 

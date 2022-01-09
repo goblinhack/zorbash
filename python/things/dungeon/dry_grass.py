@@ -5,7 +5,7 @@ import tp
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     my.level_spawn_at_thing(me, "small_fire")
     my.level_place_at(me, "dry_grass_dead", x, y)
-    my.topcon("The dry grass burns!")
+    my.thing_msg(me, "The dry grass burns!")
 
 
 def tp_init(name, tiles=[]):

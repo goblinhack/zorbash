@@ -8,11 +8,9 @@ def on_tick(owner, item, x, y):
     poison = my.thing_get_poisoned_amount(owner)
     if poison == 0:
         if my.thing_is_player(owner):
-            my.topcon("You are no longer poisoned.")
+            my.thing_msg(owner, "You are no longer poisoned.")
         my.thing_dead(item, "end of debuff")
         return True
-    # Too noisy
-    # my.topcon("%%fg=yellow$You are poisoned!%%fg=reset$")
     return True
 
 

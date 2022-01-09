@@ -4,7 +4,7 @@ import zorb_all
 
 def on_death_of_a_follower(me, leader, x, y):
     if not my.thing_is_dead_or_dying(leader):
-        my.topcon("The zorblin necromancer begins muttering some unknown words!")
+        my.thing_msg(me, "The zorblin necromancer begins muttering some unknown words!")
 
 
 def on_born(me, x, y):

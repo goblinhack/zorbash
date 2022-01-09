@@ -4,7 +4,7 @@ import tp
 
 def on_lifespan_tick(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.topcon("One of your torches fizzles out.")
+        my.thing_msg(me, "One of your torches fizzles out.")
 
 
 def tp_init(name, text_name, tiles=[]):

@@ -6,13 +6,13 @@ mytp = None
 
 def on_owner_set(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.topcon("You feel slippery as a banana.")
+        my.thing_msg(me, "You feel slippery as a banana.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_unset(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.topcon("You return to your normal level of stickiness.")
+        my.thing_msg(me, "You return to your normal level of stickiness.")
 
 
 def tp_init(name, text_name):
