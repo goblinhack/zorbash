@@ -25,7 +25,7 @@ bool Thing::throw_item_choose_target(Thingp what)
 
   if (! what->is_throwable()) {
     if (is_player()) {
-      TOPCON("I don't know how to throw %s.", what->text_the().c_str());
+      msg("I don't know how to throw %s.", what->text_the().c_str());
       game->tick_begin("player tried to throw something they could not");
     }
     return false;
@@ -61,13 +61,13 @@ void Thing::throw_at(Thingp what, Thingp target)
 
   if (DISTANCE(curr_at.x, curr_at.y, target->curr_at.x, target->curr_at.y) > get_distance_throw()) {
     if (is_player()) {
-      TOPCON("You cannot throw %s that far.", what->text_the().c_str());
+      msg("You cannot throw %s that far.", what->text_the().c_str());
     }
     return;
   }
 
   if (is_player()) {
-    TOPCON("You throw %s.", what->text_the().c_str());
+    msg("You throw %s.", what->text_the().c_str());
   }
 
   dbg("Thrown %s", what->to_short_string().c_str());

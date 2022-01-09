@@ -58,8 +58,16 @@ void Game::wid_thing_info_destroy_deferred(void)
 WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
 {
   TRACE_AND_INDENT();
-  auto player = game->level->player;
+
+  auto level = game->level;
+  if (! level) {
+    return nullptr;
+  }
+  auto player = level->player;
   if (! player) {
+    return nullptr;
+  }
+  if (! player->player_is_ready_for_messages()) {
     return nullptr;
   }
 
@@ -174,8 +182,16 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
 WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > &ts)
 {
   TRACE_AND_INDENT();
-  auto player = game->level->player;
+
+  auto level = game->level;
+  if (! level) {
+    return nullptr;
+  }
+  auto player = level->player;
   if (! player) {
+    return nullptr;
+  }
+  if (! player->player_is_ready_for_messages()) {
     return nullptr;
   }
 

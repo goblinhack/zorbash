@@ -79,7 +79,7 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
 
   if (! projectile->is_projectile()) {
     if (is_player()) {
-      TOPCON("I don't know how to fire %s.", projectile->text_the().c_str());
+      msg("I don't know how to fire %s.", projectile->text_the().c_str());
       game->tick_begin("player tried to use something they could not");
     }
     return nullptr;

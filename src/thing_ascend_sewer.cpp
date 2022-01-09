@@ -68,7 +68,7 @@ bool Thing::ascend_sewer(void)
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {
     if (is_player()) {
-      TOPCON("The entrance is permanently blocked!");
+      msg("The entrance is permanently blocked!");
     }
     return false;
   }
@@ -78,7 +78,7 @@ bool Thing::ascend_sewer(void)
 
   if (is_player()) {
     game->level = l;
-    TOPCON("You ascend out of the wriggling filthy sewer.");
+    msg("You ascend out of the wriggling filthy sewer.");
   }
 
   dbg("Move to previous level exit");

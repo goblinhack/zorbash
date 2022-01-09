@@ -66,9 +66,9 @@ void Thing::update_light_power_including_torch_effect(uint8_t &out_light_power)
   if (orig_light_power) {
     if (light_power != orig_light_power) {
       if (light_power <= 1) {
-        TOPCON("You are plunged into darkness.");
+        msg("You are plunged into darkness.");
       } else if (light_power < orig_light_power) {
-        TOPCON("It gets darker...");
+        msg("It gets darker...");
       }
 
       //

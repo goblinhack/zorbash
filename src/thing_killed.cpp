@@ -155,21 +155,21 @@ void Thing::killed(Thingp defeater, const char *reason)
         if (is_door()) {
           if (defeater && defeater->is_fire()) {
             if (distance < 5) {
-              TOPCON("The door burns through.");
+              msg("The door burns through.");
             } else if (distance < DMAP_IS_PASSABLE) {
-              TOPCON("The hear the crackling of burning wood.");
+              msg("The hear the crackling of burning wood.");
             } else {
-              TOPCON("You smell smoke in the air.");
+              msg("You smell smoke in the air.");
             }
           } else if (defeater && defeater->is_player()) {
-            TOPCON("The door crashes open.");
+            msg("The door crashes open.");
           } else {
             if (distance <= 1) {
-              TOPCON("You see the door crash open.");
+              msg("You see the door crash open.");
             } else if (distance < DMAP_IS_PASSABLE) {
-              TOPCON("The hear the noise of a door crashing open.");
+              msg("The hear the noise of a door crashing open.");
             } else {
-              TOPCON("The hear the distant noise of a door crashing open.");
+              msg("The hear the distant noise of a door crashing open.");
             }
           }
           p->update_light();
@@ -179,19 +179,19 @@ void Thing::killed(Thingp defeater, const char *reason)
           //
           if (defeater && defeater->is_fire()) {
             if (distance < 5) {
-              TOPCON("%s burns.", text_The().c_str());
+              msg("%s burns.", text_The().c_str());
             } else {
-              TOPCON("You smell smoke in the air.");
+              msg("You smell smoke in the air.");
             }
           } else if (defeater && defeater->is_player()) {
-            TOPCON("%s breaks open.", text_The().c_str());
+            msg("%s breaks open.", text_The().c_str());
           } else {
             if (distance <= 1) {
-              TOPCON("You see %s crash open.", text_the().c_str());
+              msg("You see %s crash open.", text_the().c_str());
             } else if (distance < DMAP_IS_PASSABLE) {
-              TOPCON("The hear the noise of a %s crashing open.", short_text_a_or_an().c_str());
+              msg("The hear the noise of a %s crashing open.", short_text_a_or_an().c_str());
             } else {
-              TOPCON("The hear the distant noise of %s crashing open.", short_text_a_or_an().c_str());
+              msg("The hear the distant noise of %s crashing open.", short_text_a_or_an().c_str());
             }
           }
         }
@@ -221,35 +221,35 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       if (game->robot_mode) {
         if (defeater && defeater->is_acid()) {
-          TOPCON("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
-          TOPCON("%%fg=red$RIP: Robot is burnt to death %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is burnt to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_water()) {
-          TOPCON("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_necrotic_danger_level()) {
-          TOPCON("%%fg=red$RIP: Robot is falls to pieces, %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is falls to pieces, %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_engulfer()) {
-          TOPCON("%%fg=red$RIP: Robot is consumed, %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is consumed, %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          TOPCON("%%fg=red$RIP: Robot is disassembled, %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is disassembled, %s.%%fg=reset$", reason);
         } else {
-          TOPCON("%%fg=red$RIP: Robot is deactivated, %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is deactivated, %s.%%fg=reset$", reason);
         }
       } else {
         if (defeater && defeater->is_acid()) {
-          TOPCON("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
-          TOPCON("%%fg=red$RIP: You are burnt to death %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: You are burnt to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_water()) {
-          TOPCON("%%fg=red$RIP: You are drowned %s.", reason);
+          msg("%%fg=red$RIP: You are drowned %s.", reason);
         } else if (defeater && defeater->is_necrotic_danger_level()) {
-          TOPCON("%%fg=red$RIP: You are rotted to death %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: You are rotted to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_engulfer()) {
-          TOPCON("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          TOPCON("%%fg=red$RIP: You are %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: You are %s.%%fg=reset$", reason);
         } else {
-          TOPCON("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
         }
       }
     }
@@ -305,9 +305,10 @@ void Thing::killed(Thingp defeater, const char *reason)
 
       if (game->config.hiscores.is_new_hiscore(this)) {
         if (game->robot_mode) {
-          TOPCON("%%fg=yellow$New robo high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
+          msg("%%fg=yellow$New robo high score, %s place!%%fg=reset$",
+                        game->config.hiscores.place_str(this));
         } else {
-          TOPCON("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
+          msg("%%fg=yellow$New high score, %s place!%%fg=reset$", game->config.hiscores.place_str(this));
         }
         game->config.hiscores.add_new_hiscore(this, title(), reason);
       }
@@ -320,32 +321,32 @@ void Thing::killed(Thingp defeater, const char *reason)
         if (defeater->is_player()) {
           if (is_monst()) {
             if (is_undead()) {
-              TOPCON("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else if (is_jelly()) {
-              TOPCON("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             } else {
-              TOPCON("%%fg=white$%s is dead, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+              msg("%%fg=white$%s is dead, %s.%%fg=reset$", The_no_dying.c_str(), reason);
             }
           } else if (on_death_is_open()) {
             //
             // Already logged
             //
           } else {
-            TOPCON("%s is destroyed, %s.", The_no_dying.c_str(), reason);
+            msg("%s is destroyed, %s.", The_no_dying.c_str(), reason);
           }
 
           defeater->score_add(this);
         } else if (is_monst() && (get_distance_to_player() >= DMAP_IS_PASSABLE)) {
           if (is_undead()) {
-            TOPCON("You hear the distant cry of the undead...");
+            msg("You hear the distant cry of the undead...");
           } else if (is_jelly()) {
-            TOPCON("You hear a distant splat...");
+            msg("You hear a distant splat...");
           } else if (is_humanoid()) {
-            TOPCON("You hear distant common language cursing...");
+            msg("You hear distant common language cursing...");
           } else if (is_meat()) {
-            TOPCON("You hear the distant crunching of bones...");
+            msg("You hear the distant crunching of bones...");
           } else {
-            TOPCON("You hear a distant shriek...");
+            msg("You hear a distant shriek...");
           }
         }
       }

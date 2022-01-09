@@ -40,7 +40,7 @@ void Thing::hunger_clock_tick(void)
     decr_health();
     if (get_health() == 1) {
       if (is_player()) {
-        TOPCON("You are starving!");
+        msg("You are starving!");
       }
       return;
     }

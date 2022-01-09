@@ -16,7 +16,7 @@ bool Thing::target_select(Thingp item)
   TRACE_NO_INDENT();
 
   if (game->state != Game::STATE_CHOOSING_TARGET) {
-    TOPCON("Choose a target to use %s at.", item->text_the().c_str());
+    msg("Choose a target to use %s at.", item->text_the().c_str());
   }
 
   game->change_state(Game::STATE_CHOOSING_TARGET);

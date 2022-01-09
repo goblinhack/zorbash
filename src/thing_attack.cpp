@@ -446,7 +446,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   if (is_able_to_tire()) {
     if (! get_stamina()) {
       if (is_player()) {
-        TOPCON("You are too tired to attack. You need to rest.");
+        msg("You are too tired to attack. You need to rest.");
       }
       return false;
     }
@@ -711,7 +711,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
   if (damage <= 0) {
     if (is_player() || (owner && owner->is_player())) {
-      TOPCON("You inflict no damage on %s.", victim->text_the().c_str());
+      msg("You inflict no damage on %s.", victim->text_the().c_str());
     }
     dbg("Attack failed, no damage");
     return false;
@@ -786,13 +786,13 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
       if (! hit) {
         if (is_player() || (owner && owner->is_player())) {
-          TOPCON("You miss %s.", victim->text_the().c_str());
+          msg("You miss %s.", victim->text_the().c_str());
           msg("!");
         } else if (victim->is_player()) {
           if (owner) {
-            TOPCON("%s misses with %s.", owner->text_the().c_str(), text_The().c_str());
+            msg("%s misses with %s.", owner->text_the().c_str(), text_The().c_str());
           } else {
-            TOPCON("%s misses.", text_The().c_str());
+            msg("%s misses.", text_The().c_str());
           }
         } else {
           dbg("The attack missed (att modifier %d, AC %d) on %s", stat_att, stat_def, victim->to_string().c_str());
@@ -814,7 +814,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         if (armor) {
           if (d10000() < armor->break_chance_d10000()) {
             if (is_player()) {
-              TOPCON("%s falls apart.", armor->text_The().c_str());
+              msg("%s falls apart.", armor->text_The().c_str());
             }
             armor->dead("broken");
           }
@@ -824,7 +824,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         if (shield) {
           if (d10000() < shield->break_chance_d10000()) {
             if (is_player()) {
-              TOPCON("%s falls apart.", shield->text_The().c_str());
+              msg("%s falls apart.", shield->text_The().c_str());
             }
             shield->dead("broken");
           }
@@ -834,7 +834,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         if (helmet) {
           if (d10000() < helmet->break_chance_d10000()) {
             if (is_player()) {
-              TOPCON("%s falls apart.", helmet->text_The().c_str());
+              msg("%s falls apart.", helmet->text_The().c_str());
             }
             helmet->dead("broken");
           }

@@ -58,15 +58,15 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 
       if (item->is_gold()) {
         if (value > 1) {
-          TOPCON("You collect %d gold coins.", value);
+          player->msg("You collect %d gold coins.", value);
         } else {
-          TOPCON("You collect a lone piece of gold.");
+          player->msg("You collect a lone piece of gold.");
         }
       } else {
         if (value > 1) {
-          TOPCON("%s magically converts into %d gold.", item->text_The().c_str(), value);
+          player->msg("%s magically converts into %d gold.", item->text_The().c_str(), value);
         } else {
-          TOPCON("%s magically converts into a measly one gold.", item->text_The().c_str());
+          player->msg("%s magically converts into a measly one gold.", item->text_The().c_str());
         }
       }
     }
@@ -92,7 +92,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
       return;
     }
 
-    TOPCON("You collect the key.");
+    msg("You collect the key.");
 
     auto p = (w->abs_tl + w->abs_br) / 2;
     p.x    = (int) (((float) game->config.game_pix_width / (float) TERM_WIDTH) * (float) p.x);
@@ -622,7 +622,7 @@ bool Level::inventory_chosen(const uint32_t slot)
   }
 
   if (slot >= itemsp->inventory_shortcuts.size()) {
-    TOPCON("Nothing at slot %d.", slot + 1);
+    player->msg("Nothing at slot %d.", slot + 1);
     inventory_dump();
     sound_play("bonk");
     return false;
@@ -633,7 +633,7 @@ bool Level::inventory_chosen(const uint32_t slot)
 
   auto oid = get(itemsp->inventory_shortcuts, slot);
   if (! oid) {
-    TOPCON("Nothing item at that slot %d.", slot + 1);
+    player->msg("Nothing item at that slot %d.", slot + 1);
     sound_play("bonk");
     return false;
   }
@@ -646,7 +646,7 @@ bool Level::inventory_chosen(const uint32_t slot)
 
     item = inventory_describe(slot);
     if (! item) {
-      TOPCON("No item found at slot %d.", slot + 1);
+      player->msg("No item found at slot %d.", slot + 1);
       inventory_dump();
       sound_play("bonk");
       return false;
@@ -654,7 +654,7 @@ bool Level::inventory_chosen(const uint32_t slot)
   } else {
     item = inventory_describe(game->inventory_highlight_slot);
     if (! item) {
-      TOPCON("No item found at highlight slot %d.", game->inventory_highlight_slot);
+      player->msg("No item found at highlight slot %d.", game->inventory_highlight_slot);
       inventory_dump();
       sound_play("bonk");
       return false;

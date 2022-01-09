@@ -36,7 +36,7 @@ void Thing::fire_tick(void)
       hit = (d100() < 90);
       if (! hit) {
         if (is_player()) {
-          TOPCON("%%fg=green$You feel a brief cool breeze and reprieve from the flames!%%fg=reset$");
+          msg("%%fg=green$You feel a brief cool breeze and reprieve from the flames!%%fg=reset$");
 
           //
           // Smoke ensures a reprieve.
@@ -92,11 +92,11 @@ void Thing::fire_tick(void)
       hit = (d100() < 20);
       if (hit) {
         if (is_player()) {
-          TOPCON("%%fg=red$The flames wrap around you!%%fg=reset$");
+          msg("%%fg=red$The flames wrap around you!%%fg=reset$");
         }
       } else {
         if (is_player()) {
-          TOPCON("%%fg=red$You dodge the flames.%%fg=reset$");
+          msg("%%fg=red$You dodge the flames.%%fg=reset$");
         }
       }
     } else {
@@ -121,7 +121,7 @@ void Thing::fire_tick(void)
 
     auto h = decr_health(damage);
     if (is_player()) {
-      TOPCON("%%fg=red$You take %u burn damage!%%fg=reset$", damage);
+      msg("%%fg=red$You take %u burn damage!%%fg=reset$", damage);
     }
 
     if (h <= 0) {
@@ -130,7 +130,7 @@ void Thing::fire_tick(void)
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
             if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-              TOPCON("%s is melted!", text_The().c_str());
+              msg("%s is melted!", text_The().c_str());
             }
           }
         }
@@ -140,9 +140,9 @@ void Thing::fire_tick(void)
           if (level->player && (level->tick_created < game->tick_current)) {
             if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
               if (is_monst()) {
-                TOPCON("%s burns to death!", text_The().c_str());
+                msg("%s burns to death!", text_The().c_str());
               } else {
-                TOPCON("%s burns!", text_The().c_str());
+                msg("%s burns!", text_The().c_str());
               }
             }
           }
@@ -154,7 +154,7 @@ void Thing::fire_tick(void)
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
             if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-              TOPCON("%s melts!", text_The().c_str());
+              msg("%s melts!", text_The().c_str());
             }
           }
         }
@@ -162,7 +162,7 @@ void Thing::fire_tick(void)
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
             if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-              TOPCON("%s burns!", text_The().c_str());
+              msg("%s burns!", text_The().c_str());
             }
           }
         }

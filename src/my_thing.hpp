@@ -428,6 +428,7 @@ public:
   bool particle_anim_exists(void);
   bool path_pop_next_move(void);
   bool place(const std::string &what, const point &p);
+  bool player_is_ready_for_messages(void);
   bool possible_to_attack_at(point at);
   bool possible_to_attack(const Thingp it);
   bool projectile_anim_exists(void);
@@ -1086,6 +1087,7 @@ public:
   int is_able_to_see_through_doors(void);
   int is_able_to_shove(void);
   int is_able_to_tire(void);
+  int is_able_to_use_amulet(void);
   int is_able_to_use_armor(void);
   int is_able_to_use_boots(void);
   int is_able_to_use_cloak(void);
@@ -1100,6 +1102,7 @@ public:
   int is_alive_monst(void);
   int is_alive_on_end_of_anim(void);
   int is_always_hit(void);
+  int is_amulet(void);
   int is_aquatic(void);
   int is_armor(void);
   int is_ascend_dungeon(void);
@@ -1231,6 +1234,7 @@ public:
   int is_loggable(void);
   int is_meat_eater(void);
   int is_meat(void);
+  int is_meltable(void);
   int is_metal(void);
   int is_minion(void);
   int is_mob_spawner(void);
@@ -1311,6 +1315,7 @@ public:
   int item_width(void);
   int light_power(void);
   int maybe_itemsp_value(const Thingp it);
+  int melting_chance_d1000(void);
   int minion_limit(void);
   int monst_size(void);
   int normal_placement_rules(void);
@@ -1412,7 +1417,6 @@ public:
   int unused_chance4_d1000(void);
   int unused_chance5_d1000(void);
   int unused_chance6_d1000(void);
-  int melting_chance_d1000(void);
   int unused_flag100(void);
   int unused_flag101(void);
   int unused_flag102(void);
@@ -1507,9 +1511,6 @@ public:
   int unused_flag183(void);
   int unused_flag184(void);
   int unused_flag185(void);
-  int is_meltable(void);
-  int is_amulet(void);
-  int is_able_to_use_amulet(void);
   int unused_flag18(void);
   int unused_flag19(void);
   int unused_flag1(void);
@@ -1983,6 +1984,7 @@ public:
   void stats_tick();
   void throw_at(Thingp w, Thingp target);
   void tick();
+  void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon_(const char *fmt, va_list args); // compile error without
   void treasure_map_check(void);
