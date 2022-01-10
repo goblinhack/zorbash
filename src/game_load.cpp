@@ -824,7 +824,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
 
   if (! g_opt_override_debug_level) {
     if (my.t.debug_mode) {
-      g_opt_debug3 = true;
+      g_opt_debug3 = false;
       g_opt_debug2 = true;
       g_opt_debug1 = true;
     }

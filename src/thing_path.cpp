@@ -78,7 +78,7 @@ bool Thing::path_pop_next_move(void)
       IF_DEBUG2
       {
         auto s = string_sprintf("Next position %d,%d is a hazard", (int) future_pos.x, (int) future_pos.y);
-        AI_LOG("", s);
+        AI_LOG(s);
       }
 
       TRACE_NO_INDENT();
@@ -94,7 +94,7 @@ bool Thing::path_pop_next_move(void)
           IF_DEBUG2
           {
             auto s = string_sprintf("Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
-            AI_LOG("", s);
+            AI_LOG(s);
           }
 
           auto jump_pos = aip->move_path[ 0 ];
@@ -147,7 +147,7 @@ bool Thing::path_pop_next_move(void)
               IF_DEBUG2
               {
                 auto s = string_sprintf("Jumped carefully; try entire path %d,%d", jump_pos.x, jump_pos.y);
-                AI_LOG("", s);
+                AI_LOG(s);
               }
               if (is_player()) {
                 game->tick_begin("Jumped carefully");
@@ -195,7 +195,7 @@ bool Thing::path_pop_next_move(void)
       //
       // Can the monst shove it into a something bad?
       //
-      AI_LOG("", "Something is in our way that can be shoved");
+      AI_LOG("Something is in our way that can be shoved");
       auto delta = future_pos - curr_at;
       FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y)
       {
@@ -213,7 +213,7 @@ bool Thing::path_pop_next_move(void)
               {
                 auto s = string_sprintf("Tried to shove monst into hazard at %s but failed",
                                         future_pos.to_string().c_str());
-                AI_LOG("", s);
+                AI_LOG(s);
               }
               if (is_player()) {
                 game->tick_begin("Tried to shove but failed");
@@ -226,7 +226,7 @@ bool Thing::path_pop_next_move(void)
               IF_DEBUG2
               {
                 auto s = string_sprintf("Shoved monst at %s", future_pos.to_string().c_str());
-                AI_LOG("", s);
+                AI_LOG(s);
               }
               if (is_player()) {
                 game->tick_begin("Tried to shove");
@@ -242,10 +242,10 @@ bool Thing::path_pop_next_move(void)
       IF_DEBUG2
       {
         auto s = string_sprintf("Try to attack monst at %s", future_pos.to_string().c_str());
-        AI_LOG("", s);
+        AI_LOG(s);
       }
 
-      AI_LOG("", "Move, no shove allowed, no attack allowed");
+      AI_LOG("Move, no shove allowed, no attack allowed");
       if (move_no_shove_no_attack(future_pos)) {
         return true;
       }
@@ -267,14 +267,14 @@ bool Thing::path_pop_next_move(void)
       IF_DEBUG2
       {
         auto s = string_sprintf("Cannot pass hazard at %s", future_pos.to_string().c_str());
-        AI_LOG("", s);
+        AI_LOG(s);
       }
 
       //
       // Could be a monster sitting in lava, attack it?
       //
       if (level->is_monst(future_pos)) {
-        AI_LOG("", "Hazard, but a monst is on it. Try to attack it.");
+        AI_LOG("Hazard, but a monst is on it. Try to attack it.");
         if (move_no_shove_attack_allowed(future_pos)) {
           return true;
         }
@@ -286,10 +286,10 @@ bool Thing::path_pop_next_move(void)
     {
       auto s =
           string_sprintf("Try to move (shoving not allowed, attack allowed) to %s", future_pos.to_string().c_str());
-      AI_LOG("", s);
+      AI_LOG(s);
     }
 
-    AI_LOG("", "Move, no shove allowed, attack allowed");
+    AI_LOG("Move, no shove allowed, attack allowed");
     if (move_no_shove_attack_allowed(future_pos)) {
       return true;
     }
@@ -304,10 +304,10 @@ bool Thing::path_pop_next_move(void)
     IF_DEBUG2
     {
       auto s = string_sprintf("Try to move (shoving and attacking allowed) to %s", future_pos.to_string().c_str());
-      AI_LOG("", s);
+      AI_LOG(s);
     }
 
-    AI_LOG("", "Move, shove allowed, attack allowed");
+    AI_LOG("Move, shove allowed, attack allowed");
     if (move(future_pos)) {
       return true;
     }
@@ -323,18 +323,18 @@ bool Thing::path_pop_next_move(void)
   }
 
   if (possible_to_attack_at(future_pos)) {
-    AI_LOG("", "Try to move and attack");
+    AI_LOG("Try to move and attack");
     if (move_no_shove_attack_allowed(future_pos)) {
       return true;
     }
   } else {
-    AI_LOG("", "Try to move, no shove, no attack");
+    AI_LOG("Try to move, no shove, no attack");
     if (move_no_shove_no_attack(future_pos)) {
       return true;
     }
 
     if (possible_to_attack_at(future_pos)) {
-      AI_LOG("", "Try to move, no shove, attack allowed");
+      AI_LOG("Try to move, no shove, attack allowed");
       if (move_no_shove_attack_allowed(future_pos)) {
         return true;
       }

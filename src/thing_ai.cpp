@@ -45,7 +45,7 @@
   IF_DEBUG                                                                                                           \
   {                                                                                                                  \
     auto s = string_sprintf("Add goal prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);                    \
-    AI_LOG("", s, it);                                                                                               \
+    AI_LOG(s, it);                                                                                                   \
   }                                                                                                                  \
   goals.insert(Goal(prio, score, p, msg, it));
 
@@ -53,47 +53,36 @@
   IF_DEBUG                                                                                                           \
   {                                                                                                                  \
     auto s = string_sprintf("Add goal (avoid) prio %d score %d @(%d,%d) %s", prio, score, p.x, p.y, msg);            \
-    AI_LOG("", s, it);                                                                                               \
+    AI_LOG(s, it);                                                                                                   \
   }                                                                                                                  \
   goals.insert(Goal(prio, score, p, msg, it, true /* avoid */));
 
-void Thing::ai_log(const std::string &short_msg, const std::string &long_msg, Thingp it)
+void Thing::ai_log(const std::string &msg, Thingp it)
 {
   TRACE_NO_INDENT();
 
   if (is_player()) {
-    if (! short_msg.empty()) {
-      BOTCON("Robot: %s", short_msg.c_str());
-    }
-
     if (it) {
       log("AI: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
-          get_health(), get_health_max(), long_msg.c_str(), it->to_short_string().c_str());
+          get_health(), get_health_max(), msg.c_str(), it->to_short_string().c_str());
       CON("Robot: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
-          get_health(), get_health_max(), long_msg.c_str(), it->to_short_string().c_str());
+          get_health(), get_health_max(), msg.c_str(), it->to_short_string().c_str());
     } else {
       log("AI: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y, get_health(),
-          get_health_max(), long_msg.c_str());
+          get_health_max(), msg.c_str());
       CON("Robot: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y, get_health(),
-          get_health_max(), long_msg.c_str());
+          get_health_max(), msg.c_str());
     }
   } else {
     if (it) {
-      log("AI: %s, %s", long_msg.c_str(), it->to_short_string().c_str());
+      log("AI: %s, %s", msg.c_str(), it->to_short_string().c_str());
     } else {
-      log("AI: %s", long_msg.c_str());
+      log("AI: %s", msg.c_str());
     }
   }
 }
 
-void Thing::ai_log(const std::string &short_msg, const std::string &long_msg)
-{
-  ai_log(short_msg, long_msg, nullptr);
-}
-
-void Thing::ai_log(const std::string &short_msg) { ai_log(short_msg, short_msg, nullptr); }
-
-void Thing::ai_log(const std::string &short_msg, Thingp it) { ai_log(short_msg, short_msg, it); }
+void Thing::ai_log(const std::string &msg) { ai_log(msg, nullptr); }
 
 //
 // Look at all the things that are currently visited (read that as light rays
@@ -109,7 +98,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   //
   std::string s = "Choose goal";
   IF_DEBUG { s = string_sprintf("Try to find goals, search-type %d", search_type); }
-  AI_LOG("", s);
+  AI_LOG(s);
   TRACE_AND_INDENT();
 
   //
@@ -141,16 +130,19 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   // No goals?
   //
   if (goalmaps.empty()) {
-    AI_LOG("", "No goals found");
+    AI_LOG("No goals found");
     return false;
   }
 
   for (auto &g : goalmaps) {
     IF_DEBUG2
     {
-      AI_LOG("", "Modify dmap for terrain");
+      AI_LOG("Pre modify dmap for terrain");
       dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
-      level->heatmap_print(point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+
+      if (search_type == SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED) {
+        level->heatmap_print(point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+      }
     }
 
     //
@@ -168,14 +160,14 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 
     IF_DEBUG2
     {
-      AI_LOG("", "Modified dmap for terrain");
+      AI_LOG("Modified dmap for terrain");
       dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
     }
 
     const Dmap saved_dmap = *g.dmap;
     for (const auto &goal : g.goals) {
       if (goal.avoid) {
-        AI_LOG("", "Processing avoid goal");
+        AI_LOG("Processing avoid goal");
         TRACE_AND_INDENT();
         std::multiset< Goal > avoid;
         if (ai_choose_avoid_goals(avoid, goal)) {
@@ -193,7 +185,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
               {
                 auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
                                         (int) goal.at.y, goal.msg.c_str());
-                AI_LOG("", s);
+                AI_LOG(s);
               }
               return true;
             }
@@ -215,7 +207,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
         {
           auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
                                   (int) goal.at.y, goal.msg.c_str());
-          AI_LOG("", s);
+          AI_LOG(s);
         }
         return true;
       }
@@ -232,7 +224,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
   {
     auto s = string_sprintf("Process goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x, (int) goal.at.y,
                             goal.msg.c_str());
-    AI_LOG("", s);
+    AI_LOG(s);
   }
   TRACE_AND_INDENT();
 
@@ -250,7 +242,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
   //
   uint8_t *c = getptr(dmap.val, goal.at.x, goal.at.y);
   if (*c == DMAP_MAX_LESS_PREFERRED_TERRAIN) {
-    AI_LOG("", "Goal is on bad terrain");
+    AI_LOG("Goal is on bad terrain");
     return false;
   }
 
@@ -303,14 +295,14 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
         // then this is sub ideal.
         //
         if (ai_obstacle_for_me(fallback.path[ fallback.path.size() - 1 ])) {
-          AI_LOG("", "Goal (and fallback) is astar unreachable");
+          AI_LOG("Goal (and fallback) is astar unreachable");
           return false;
         }
 
         IF_DEBUG
         {
           auto s = string_sprintf("Use fallback path as goal at %d,%d is unreachable", goal.at.x, goal.at.y);
-          AI_LOG("", s);
+          AI_LOG(s);
         }
         result = fallback;
       } else {
@@ -319,7 +311,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
         auto end   = point(maxx, maxy);
         astar_dump(&dmap, goal.at, start, end);
 #endif
-        AI_LOG("", "Goal is astar unreachable");
+        AI_LOG("Goal is astar unreachable");
         return false;
       }
     }
@@ -353,7 +345,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
         }
         return true;
       }
-      AI_LOG("", "Goal has no path");
+      AI_LOG("Goal has no path");
       return false;
     }
 
@@ -361,7 +353,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     for (auto p1 : new_move_path) {
       goal_path_str += " " + p1.to_string();
     }
-    AI_LOG("", goal_path_str);
+    AI_LOG(goal_path_str);
 
     if (is_player()) {
       level->cursor_path_create(new_move_path);
@@ -394,12 +386,10 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
       return true;
     }
 
-    if (is_player()) {
-      dbg("Robot: Failed to move to goal");
-    }
+    AI_LOG("Failed to move to goal");
   }
 
-  AI_LOG("", "Goal had no reachable paths");
+  AI_LOG("Goal had no reachable paths");
   return false;
 }
 
@@ -408,14 +398,15 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 //
 int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int search_type, bool check_for_interrupts)
 {
-  AI_LOG("", "Init dmap can see");
+  AI_LOG("Init dmap can see");
   TRACE_AND_INDENT();
 
   std::array< std::array< uint8_t, MAP_WIDTH >, MAP_HEIGHT > can_jump = {};
-  point                                                      start((int) curr_at.x, (int) curr_at.y);
-  auto                                                       dmap_can_see      = get_dmap_can_see();
-  bool                                                       jump_allowed      = false;
-  int                                                        something_changed = 0;
+
+  point start((int) curr_at.x, (int) curr_at.y);
+  auto  dmap_can_see      = get_dmap_can_see();
+  bool  jump_allowed      = false;
+  int   something_changed = 0;
 
   for (int y = miny; y <= maxy; y++) {
     for (int x = minx; x <= maxx; x++) {
@@ -661,14 +652,14 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                     set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
-                      dbg("Interrupted by thing worth collecting %s", it->to_short_string().c_str());
+                      AI_LOG("Interrupted by thing worth collecting", it);
                     }
                   }
                   if (is_dangerous(it)) {
                     set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
-                      dbg("Interrupted by dangerous thing %s", it->to_short_string().c_str());
+                      AI_LOG("Interrupted by dangerous thing", it);
                     }
                   }
 
@@ -676,7 +667,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
                     set(aip->interrupt_map.val, p.x, p.y, game->tick_current);
                     if (check_for_interrupts) {
                       something_changed++;
-                      dbg("Interrupted by edible collecting %s", it->to_short_string().c_str());
+                      AI_LOG("Interrupted by edible collecting", it);
                     }
                   }
                 }
@@ -811,7 +802,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 //
 void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy)
 {
-  AI_LOG("", "Choose can see goals");
+  AI_LOG("Choose can see goals");
   TRACE_AND_INDENT();
 
   auto dmap_can_see = get_dmap_can_see();
@@ -841,7 +832,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
-        AI_LOG("", "Can see cand", it);
+        AI_LOG("Can see cand", it);
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           continue;
         }
@@ -851,7 +842,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         if (it->get_immediate_owner_id().ok()) {
-          AI_LOG("", "Has an ownwer; ignore", it);
+          AI_LOG("Has an ownwer; ignore", it);
           continue;
         }
 
@@ -859,7 +850,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't attack your mob_spawner
         //
         if (it->is_mob_spawner() && (get_top_mob_spawner() == this)) {
-          AI_LOG("", "My mob spawner", it);
+          AI_LOG("My mob spawner", it);
           continue;
         }
 
@@ -867,7 +858,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't attack your fellow minion
         //
         if (it->is_minion() && (it->get_top_mob_spawner() == get_top_mob_spawner())) {
-          AI_LOG("", "Fellow minion", it);
+          AI_LOG("Fellow minion", it);
           continue;
         }
 
@@ -876,7 +867,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         auto leader = get_leader();
         if (leader == this) {
-          AI_LOG("", "Same leader", it);
+          AI_LOG("Same leader", it);
           continue;
         }
 
@@ -886,13 +877,13 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         if (it->is_able_to_follow()) {
           if (leader) {
             if (it->get_leader() == leader) {
-              AI_LOG("", "Fellow follower", it);
+              AI_LOG("Fellow follower", it);
               continue;
             }
           }
         }
 
-        AI_LOG("", "Can see", it);
+        AI_LOG("Can see", it);
 
         auto goal_penalty = get_goal_penalty(it);
 
@@ -1072,7 +1063,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 //
 void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type)
 {
-  AI_LOG("", "Choose search goals");
+  AI_LOG("Choose search goals");
   TRACE_AND_INDENT();
 
   point start((int) curr_at.x, (int) curr_at.y);
@@ -1358,7 +1349,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       IF_DEBUG
       {
         auto s = string_sprintf("Search cand is hated @(%d,%d)", p.x, p.y);
-        AI_LOG("", s);
+        AI_LOG(s);
       }
       continue;
     }
@@ -1434,7 +1425,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
 
 bool Thing::ai_choose_immediately_adjacent_goal(void)
 {
-  AI_LOG("", "Choose immediately adjacent goals");
+  AI_LOG("Choose immediately adjacent goals");
   TRACE_AND_INDENT();
 
   bool left;
@@ -1507,7 +1498,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
             attack         = true;
             attack_allowed = true;
 
-            AI_LOG("Trying to break out of a web", "Trying to break out of a web", it);
+            AI_LOG("Trying to break out of a web", it);
             if (is_player()) {
               player_tick(left, right, up, down, attack, wait, jump);
             } else {
@@ -1534,6 +1525,9 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   return false;
 }
 
+//
+// Return true on having done something
+//
 bool Thing::ai_tick(bool recursing)
 {
   dbg("AI tick");
@@ -1646,34 +1640,53 @@ bool Thing::ai_tick(bool recursing)
     }
   }
 
-  if (! recursing) {
-    for (int y = miny; y <= maxy; y++) {
-      for (int x = minx; x <= maxx; x++) {
-        if (aip->can_see_currently.can_see[ x ][ y ]) {
-          IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
-          set(aip->can_see_ever.can_see, x, y, true);
-        }
+  //
+  // Anything we can see currently, set into the "have ever seen" array
+  //
+  for (int y = miny; y <= maxy; y++) {
+    for (int x = minx; x <= maxx; x++) {
+      if (aip->can_see_currently.can_see[ x ][ y ]) {
+        IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
+        set(aip->can_see_ever.can_see, x, y, true);
       }
     }
-    //
-    // Check for interrupts
-    //
-    AI_LOG("", "Check for interruptions");
-    if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
-      AI_LOG("Something interrupted me");
-      if (is_player()) {
-        game->tick_begin("Robot move interrupted by something");
+  }
+
+  if (get_infop()->monst_state != MONST_STATE_IDLE) {
+    if (! recursing) {
+      //
+      // Check for serious interrupts
+      //
+      if (is_on_fire() && environ_avoids_fire()) {
+        AI_LOG("I am on fire!");
+        return ai_tick(true);
       }
 
-      ai_change_state(MONST_STATE_IDLE, "move interrupted by a change");
-      if (is_player()) {
-        game->request_remake_actionbar = true;
+      if (get_terrain_cost(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
+        AI_LOG("I am on some bad terrain!");
+        return ai_tick(true);
       }
 
       //
-      // Allow another go; this stops monster's moves stuttering
+      // Check for less interrupts; like a monster being seen
       //
-      return ai_tick(true);
+      AI_LOG("Check for interruptions");
+      if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
+        AI_LOG("Something interrupted me");
+        if (is_player()) {
+          game->tick_begin("Robot move interrupted by something");
+        }
+
+        ai_change_state(MONST_STATE_IDLE, "move interrupted by a change");
+        if (is_player()) {
+          game->request_remake_actionbar = true;
+        }
+
+        //
+        // Allow another go; this stops monster's moves stuttering
+        //
+        return ai_tick(true);
+      }
     }
   }
 
@@ -1721,6 +1734,37 @@ bool Thing::ai_tick(bool recursing)
   switch (get_infop()->monst_state) {
     case MONST_STATE_IDLE :
       {
+        //
+        // If on fire, try and put it out!
+        //
+        if (is_on_fire() && environ_avoids_fire()) {
+          AI_LOG("I am on fire!");
+          TRACE_AND_INDENT();
+          if (is_intelligent()) {
+            if (ai_on_fire()) {
+              return true;
+            }
+          }
+        }
+
+        //
+        // If somewhere bad, escape
+        //
+        if (get_terrain_cost(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
+          AI_LOG("on bad terrain, escape");
+          TRACE_AND_INDENT();
+          if (ai_escape()) {
+            return true;
+          }
+
+          aip->wander_dest = point(0, 0);
+          AI_LOG("cannot escape, try to wander");
+          TRACE_AND_INDENT();
+          if (ai_wander()) {
+            return true;
+          }
+        }
+
         if (threat) {
           if (is_dangerous(threat)) {
             AI_LOG("A dangerous threat is near", threat);
@@ -2247,18 +2291,11 @@ bool Thing::ai_tick(bool recursing)
         //
         AI_LOG("Nothing to do at all.");
         if (is_player()) {
-          TOPCON("Robot has ran out of things to do.");
+          msg("Robot has ran out of things to do.");
           wid_actionbar_robot_mode_off();
         }
 
-        if (is_player()) {
-          return ai_wander();
-        }
-
-        //
-        // Caller will try and wander
-        //
-        return false;
+        return ai_wander();
       }
       break;
 
@@ -2467,7 +2504,7 @@ void Thing::ai_change_state(int new_state, const std::string &why)
   IF_DEBUG
   {
     auto s = string_sprintf("State change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
-    AI_LOG("", s);
+    AI_LOG(s);
   }
 
   get_infop()->monst_state = new_state;
@@ -2499,70 +2536,11 @@ void Thing::ai_get_next_hop(void)
 {
   TRACE_NO_INDENT();
 
-  point start((int) curr_at.x, (int) curr_at.y);
-
-  if (! maybe_aip()) {
-    err("No monst aip");
-  }
-
-  //
-  // If on fire, try and put it out!
-  //
-  if (is_on_fire() && environ_avoids_fire()) {
-    dbg("AI: I am on fire!");
-    TRACE_AND_INDENT();
-
-    if (is_intelligent()) {
-      if (ai_on_fire()) {
-        return;
-      }
-    }
-  }
-
-  auto aip          = get_aip();
-  bool wander_tried = false;
-
-  //
-  // If somewhere bad, escape
-  //
-  if (get_terrain_cost(start) >= DMAP_LESS_PREFERRED_TERRAIN) {
-    dbg("AI: on bad terrain, escape");
-    TRACE_AND_INDENT();
-
-    if (ai_escape()) {
-      return;
-    }
-
-    aip->wander_dest = point(0, 0);
-
-    dbg("AI: cannot escape, try to wander");
-    TRACE_AND_INDENT();
-
-    if (ai_wander()) {
-      return;
-    }
-    wander_tried = true;
-  }
-
   //
   // Find the best goal to go to
   //
   if (ai_tick()) {
-    aip->wander_dest = point(0, 0);
     return;
-  }
-
-  //
-  // If we get here we found no goal. Try to wander.
-  //
-  if (! wander_tried) {
-    dbg("AI: found no goal, wander");
-    TRACE_AND_INDENT();
-
-    if (ai_wander()) {
-      return;
-    }
-    wander_tried = true;
   }
 
   //
@@ -2726,6 +2704,6 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
     }
   }
 
-  AI_LOG("", "Could not avoid", it);
+  AI_LOG("Could not avoid", it);
   return false;
 }

@@ -8,14 +8,17 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-point Thing::get_random_target(void)
+point Thing::get_random_target(int d)
 {
-  int16_t d     = (int) get_distance_vision();
-  auto    tries = 100;
-
-  if (is_player()) {
-    d = MAP_WIDTH / 2;
+  if (! d) {
+    if (is_player()) {
+      d = MAP_WIDTH / 2;
+    } else {
+      d = (int) get_distance_vision();
+    }
   }
+
+  auto tries = 100;
 
   //
   // Minions cannot wander too far

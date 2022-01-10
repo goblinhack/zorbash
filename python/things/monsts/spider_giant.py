@@ -57,7 +57,7 @@ def tp_init(name, text_name):
     mytp.set_distance_jump(2)
     mytp.set_distance_mob_spawner_max(5)
     mytp.set_distance_vision(5)
-    mytp.set_environ_avoids_fire(100)
+    mytp.set_environ_avoids_fire(10)
     mytp.set_environ_avoids_water(100)
     mytp.set_environ_prefers_spiderwebs(True)
     mytp.set_gfx_animated_can_hflip(True)

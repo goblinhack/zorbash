@@ -313,9 +313,6 @@ bool Thing::try_to_carry(Thingp item)
 
 std::list< Thingp > Thing::anything_to_carry_at(point at)
 {
-  dbg("Anything to carry?");
-  TRACE_AND_INDENT();
-
   std::vector< std::pair< Thingp, int > > items;
 
   //
@@ -332,7 +329,6 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
     }
 
     if (t->is_engulfer()) {
-      dbg("Nope, I'm being swallowed");
       goto end;
     }
   }

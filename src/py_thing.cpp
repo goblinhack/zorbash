@@ -859,7 +859,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
     } else {
       TOPCON("%s", msg);
     }
-    owner->msg(msg);
+    owner->msg("%s", msg);
   }
 
   Py_RETURN_NONE;

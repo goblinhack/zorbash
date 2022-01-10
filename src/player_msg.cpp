@@ -4,9 +4,11 @@
 //
 
 #include "my_game.hpp"
+#include "my_log.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include <stdarg.h>
 
 //
 // A message generated for the console. Check if we should print it.
@@ -14,7 +16,6 @@
 bool Thing::player_is_ready_for_messages(void)
 {
   verify(MTYPE_THING, this);
-  va_list args;
 
   if (! level) {
     return false;
@@ -32,7 +33,7 @@ bool Thing::player_is_ready_for_messages(void)
     return false;
   }
 
-  if (level->is_starting || ! level->is_being_destroyed) {
+  if (level->is_starting || level->is_being_destroyed) {
     return false;
   }
   return true;
@@ -51,6 +52,6 @@ void Thing::msg(const char *fmt, ...)
   }
 
   va_start(args, fmt);
-  topcon_(fmt, args);
+  ::topcon_(fmt, args);
   va_end(args);
 }

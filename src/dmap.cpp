@@ -92,9 +92,9 @@ void dmap_print(const Dmap *D, point at, point tl, point br)
 
   LOG("DMAP: tl %d,%d br %d %d at %d,%d", minx, miny, maxx, maxy, at.x, at.y);
 
-  for (y = miny; y < maxy; y++) {
+  for (y = miny; y <= maxy; y++) {
     std::string debug;
-    for (x = minx; x < maxx; x++) {
+    for (x = minx; x <= maxx; x++) {
       uint8_t e = get(D->val, x, y);
       if (point(x, y) == at) {
         debug += ("  @");

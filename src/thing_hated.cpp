@@ -33,11 +33,10 @@ bool Thing::is_hated_by_me(const point &p)
     if (level->is_chasm(p)) {
       return true;
     }
-  }
-
-  if (environ_avoids_fire()) {
-    int heat = level->heatmap(p);
-    if (heat > 0) { // avoid if hotter
+    if (level->is_fire(p)) {
+      return true;
+    }
+    if (level->is_lava(p)) {
       return true;
     }
   }
@@ -64,11 +63,10 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
     if (level->is_chasm(p)) {
       return true;
     }
-  }
-
-  if (environ_avoids_fire()) {
-    int heat = level->heatmap(p);
-    if (heat > 0) { // avoid if hotter
+    if (level->is_fire(p)) {
+      return true;
+    }
+    if (level->is_lava(p)) {
       return true;
     }
   }
@@ -155,27 +153,6 @@ bool Thing::is_hated_by_me(const Thingp itp)
     // But allow baby slimes to attack each other!
     //
     if (it->is_jelly_parent()) {
-      return true;
-    }
-  }
-
-  if (! is_on_fire()) {
-    if (me->environ_avoids_fire()) {
-      if (it->is_brazier()) {
-        return false;
-      }
-      if (it->is_fire()) {
-        return true;
-      }
-      if (it->is_lava()) {
-        return true;
-      }
-    }
-  }
-
-  if (environ_avoids_fire()) {
-    int heat = level->heatmap(itp->curr_at);
-    if (heat > 0) { // avoid if hotter
       return true;
     }
   }

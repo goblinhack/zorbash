@@ -1668,6 +1668,10 @@ void Level::place_spiderweb(Dungeonp d)
           return;
         }
 
+        if (! tp->normal_placement_rules()) {
+          continue;
+        }
+
         if (heatmap(x, y)) {
           continue;
         }
