@@ -32,26 +32,26 @@ bool Thing::is_disliked_by_me(const point &p)
   }
 
   if (! is_on_fire()) {
-    int heat = level->heatmap(p);
+    //
+    // Single fire looks like:
+    // .....
+    // .111.
+    // .151.
+    // .111.
+    // .....
+    //
+    int  heat        = level->heatmap(p);
+    auto avoid_level = environ_avoids_fire();
     if (damage_received_doubled_from_fire()) {
-      if (heat > 0) {
-        if (environ_avoids_fire()) {
-          return true;
-        }
+      avoid_level *= 2;
+    }
+    if (avoid_level >= 100) {
+      if (heat >= 1) {
+        return true;
       }
-    } else {
-      //
-      // Single fire looks like:
-      // .....
-      // .111.
-      // .151.
-      // .111.
-      // .....
-      //
+    } else if (avoid_level >= 10) {
       if (heat >= 5) {
-        if (environ_avoids_fire()) {
-          return true;
-        }
+        return true;
       }
     }
   }
@@ -80,24 +80,26 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
     }
   }
 
-  if (environ_avoids_fire()) {
-    int heat = level->heatmap(p);
-    if (damage_received_doubled_from_fire()) {
-      if (heat > 0) { // avoid if hotter
-        return true;
-      }
-    } else {
-      //
-      // Single fire looks like:
-      // .....
-      // .111.
-      // .151.
-      // .111.
-      // .....
-      //
-      if (heat >= 5) { // avoid if hotter
-        return true;
-      }
+  //
+  // Single fire looks like:
+  // .....
+  // .111.
+  // .151.
+  // .111.
+  // .....
+  //
+  int  heat        = level->heatmap(p);
+  auto avoid_level = environ_avoids_fire();
+  if (damage_received_doubled_from_fire()) {
+    avoid_level *= 2;
+  }
+  if (avoid_level >= 100) {
+    if (heat >= 1) {
+      return true;
+    }
+  } else if (avoid_level >= 10) {
+    if (heat >= 5) {
+      return true;
     }
   }
 
@@ -208,6 +210,29 @@ bool Thing::is_disliked_by_me(const Thingp itp)
         return true;
       }
       if (it->is_lava()) {
+        return true;
+      }
+    }
+
+    //
+    // Single fire looks like:
+    // .....
+    // .111.
+    // .151.
+    // .111.
+    // .....
+    //
+    int  heat        = level->heatmap(itp->curr_at);
+    auto avoid_level = environ_avoids_fire();
+    if (damage_received_doubled_from_fire()) {
+      avoid_level *= 2;
+    }
+    if (avoid_level >= 100) {
+      if (heat >= 1) {
+        return true;
+      }
+    } else if (avoid_level >= 10) {
+      if (heat >= 5) {
         return true;
       }
     }

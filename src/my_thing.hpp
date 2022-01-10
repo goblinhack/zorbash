@@ -1611,7 +1611,7 @@ public:
 
   point get_vision_source(void);
   point dir_to_direction();
-  point get_random_target(void);
+  point get_random_target(int dist = 0);
   point get_where_i_dropped_an_item_last(void);
   point get_lunge_to(void);
 
@@ -1778,10 +1778,8 @@ public:
   void ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy);
   void ai_choose_search_goals(std::multiset< Goal > &goals, int search_type);
   void ai_get_next_hop(void);
-  void ai_log(const std::string &short_msg);
-  void ai_log(const std::string &short_msg, const std::string &long_msg);
-  void ai_log(const std::string &short_msg, const std::string &long_msg, Thingp it);
-  void ai_log(const std::string &short_msg, Thingp it);
+  void ai_log(const std::string &msg);
+  void ai_log(const std::string &msg, Thingp it);
   void animate();
   void avoid_tick(void);
   void barrel_tick();

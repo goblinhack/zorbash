@@ -48,7 +48,7 @@ def tp_init(name, text_name):
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_distance_avoid(4)
     mytp.set_distance_vision(8)
-    mytp.set_environ_avoids_fire(100)
+    mytp.set_environ_avoids_fire(10)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")

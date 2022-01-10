@@ -46,7 +46,6 @@ def tp_init(name, text_name):
     mytp.set_distance_mob_spawner_max(6)
     mytp.set_distance_vision(7)
     mytp.set_environ_avoids_water(100)
-    mytp.set_environ_avoids_water(True)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")

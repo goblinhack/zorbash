@@ -19,6 +19,7 @@ def tp_init(name, tiles=[]):
     mytp.set_is_loggable(True)
     mytp.set_is_spiderweb(True)
     mytp.set_is_sticky(True)
+    mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thick and sticky spiderweb.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

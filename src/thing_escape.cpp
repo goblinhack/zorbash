@@ -82,7 +82,7 @@ bool Thing::ai_escape(void)
       //
       // Set this so next time we will choose another target
       //
-      get_aip()->wander_dest = point(-1, -1);
+      get_aip()->wander_dest = point(0, 0);
     }
   }
 

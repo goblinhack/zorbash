@@ -881,8 +881,8 @@ void Game::menu_dungeons_select(void)
   point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 26);
   point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
   auto  width = br.x - tl.x - 2;
-  int   y_at = y_at = TERM_HEIGHT - 23;
-  int   x_at = x_at = TERM_WIDTH - width - 2;
+  int   y_at  = TERM_HEIGHT - 23;
+  int   x_at  = TERM_WIDTH - width - 2;
 
   y_at += 3;
   {

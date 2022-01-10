@@ -39,7 +39,7 @@ public:
     return (out);
   }
 
-  std::string to_string(void) { return "(" + std::to_string(x) + "," + std::to_string(y) + ")"; }
+  std::string to_string(void) const { return "(" + std::to_string(x) + "," + std::to_string(y) + ")"; }
 
   void operator+=(my_apoint a)
   {

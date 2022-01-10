@@ -2,7 +2,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- - seed 1 robot and zoblin will not move                                                                                                      -->
 <!-- - the barrel health and safety alert seen twice on seed 1                                                                                    -->
-<!-- - the enchantstone explodes when close to lava???                                                                                            -->
 <!-- - if I click on a rock to attack then I should attack that rock?                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

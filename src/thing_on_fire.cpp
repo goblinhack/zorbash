@@ -113,6 +113,11 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
   point dmap_start = start;
   point dmap_end   = end;
 
+  if (level->is_oob(start) || level->is_oob(end)) {
+    err("Cannot create fire path, start %s, end %s", start.to_string().c_str(), end.to_string().c_str());
+    return false;
+  }
+
   int minx, miny, maxx, maxy;
   if (dmap_start.x < dmap_end.x) {
     minx = dmap_start.x;
@@ -237,15 +242,16 @@ bool Thing::ai_on_fire_choose_target(point &nh)
 
   auto attempts = 10;
   while (attempts--) {
-    auto  tries   = 1000;
+    auto  tries   = 10;
     auto  closest = std::numeric_limits< int >::max();
     point best;
     auto  got_one = false;
 
     while (tries--) {
-      auto target = get_random_target();
+      auto target = get_random_target(get_distance_vision());
       if (level->is_shallow_water(target)) {
         if (distance(start, target) < closest) {
+          dbg("Best (shallow water) at %d,%d", target.x, target.y);
           best    = target;
           got_one = true;
         }
@@ -257,8 +263,44 @@ bool Thing::ai_on_fire_choose_target(point &nh)
       if (ai_create_on_fire_path(nh, start, target)) {
         get_aip()->wander_dest = target;
         dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+        if (is_player()) {
+          msg("You are thinking of jumping into that cool water!");
+        }
         return true;
       }
+      closest = std::numeric_limits< int >::max();
+    }
+  }
+
+  attempts = 10;
+  while (attempts--) {
+    auto  tries   = 10;
+    auto  closest = std::numeric_limits< int >::max();
+    point best;
+    auto  got_one = false;
+
+    while (tries--) {
+      auto target = get_random_target(get_distance_vision());
+      if (level->is_chasm(target)) {
+        if (distance(start, target) < closest) {
+          dbg("Best (chasm) at %d,%d", target.x, target.y);
+          best    = target;
+          got_one = true;
+        }
+      }
+    }
+
+    if (got_one) {
+      target = best;
+      if (ai_create_on_fire_path(nh, start, target)) {
+        get_aip()->wander_dest = target;
+        dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+        if (is_player()) {
+          msg("You are thinking of jumping into a chasm!");
+        }
+        return true;
+      }
+      closest = std::numeric_limits< int >::max();
     }
   }
 
@@ -268,11 +310,12 @@ bool Thing::ai_on_fire_choose_target(point &nh)
 
 bool Thing::ai_on_fire(void)
 {
-  TRACE_NO_INDENT();
-  dbg("Ai on fire");
-  auto tries = 10;
-  while (tries--) {
+  dbg("AI: on fire, try to escape");
+  TRACE_AND_INDENT();
+
+  for (auto tries = 1; tries < 10; tries++) {
     point nh;
+    dbg("AI: on fire, try %d", tries);
     if (ai_on_fire_choose_target(nh)) {
       if (move_to_or_escape(nh)) {
         return true;

@@ -217,7 +217,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Choose a new wander location
   //
-  get_aip()->wander_dest = point(-1, -1);
+  get_aip()->wander_dest = point(0, 0);
 
   dest = get_random_target();
 
@@ -310,7 +310,7 @@ bool Thing::ai_wander(void)
       //
       // Set this so next time we will choose another dest
       //
-      get_aip()->wander_dest = point(-1, -1);
+      get_aip()->wander_dest = point(0, 0);
     }
   }
 
