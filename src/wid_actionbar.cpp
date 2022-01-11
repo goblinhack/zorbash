@@ -21,7 +21,17 @@
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
 
-static Widp wid_actionbar;
+static Widp      wid_actionbar;
+static WidPopup *wid_over_robot_mode;
+static WidPopup *wid_over_quit;
+static WidPopup *wid_over_keyboard;
+static WidPopup *wid_over_inventory;
+static WidPopup *wid_over_collect;
+static WidPopup *wid_over_save;
+static WidPopup *wid_over_zoom_in;
+static WidPopup *wid_over_zoom_out;
+static WidPopup *wid_over_wait;
+static WidPopup *wid_over_load;
 
 static ts_t wid_last_wait;
 static ts_t wid_last_wait_repeat;
@@ -38,6 +48,37 @@ void wid_actionbar_close_all_popups(void)
   wid_inventory_fini();
   game_quit_destroy();
   game_config_keyboard_destroy();
+
+  delete wid_over_robot_mode;
+  wid_over_robot_mode = nullptr;
+
+  delete wid_over_quit;
+  wid_over_quit = nullptr;
+
+  delete wid_over_keyboard;
+  wid_over_keyboard = nullptr;
+
+  delete wid_over_inventory;
+  wid_over_inventory = nullptr;
+
+  delete wid_over_collect;
+  wid_over_collect = nullptr;
+
+  delete wid_over_load;
+  wid_over_load = nullptr;
+
+  delete wid_over_save;
+  wid_over_save = nullptr;
+
+  delete wid_over_zoom_in;
+  wid_over_zoom_in = nullptr;
+
+  delete wid_over_zoom_out;
+  wid_over_zoom_out = nullptr;
+
+  delete wid_over_wait;
+  wid_over_wait = nullptr;
+
   game->change_state(Game::STATE_NORMAL);
 }
 
@@ -67,13 +108,40 @@ static uint8_t wid_actionbar_quit(Widp w, int32_t x, int32_t y, uint32_t button)
 static void wid_actionbar_quit_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to quit the dungeon.");
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 5;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_quit = new WidPopup("Quit", tl, br, nullptr, "", false, false);
+  wid_over_quit->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Quit game");
+  wid_over_quit->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_quit->log("Select this to abandon all hope.");
 }
 
 static void wid_actionbar_quit_over_e(Widp w)
 {
   TRACE_NO_INDENT();
-  BOTCON(" ");
+
+  delete wid_over_quit;
+  wid_over_quit = nullptr;
 }
 
 void wid_actionbar_robot_mode_toggle(void)
@@ -133,13 +201,50 @@ static uint8_t wid_actionbar_robot(Widp w, int32_t x, int32_t y, uint32_t button
 static void wid_actionbar_robot_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to explore the dungeon like a robot.");
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 20;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_robot_mode = new WidPopup("Robot", tl, br, nullptr, "", false, false);
+  wid_over_robot_mode->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Robot mode");
+  wid_over_robot_mode->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_robot_mode->log(
+      "Robot mode allows your player to explore the level automatically. Be warned, the robot will fight enemies, "
+      "equip weapons etc... all on its own.");
+  wid_over_robot_mode->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_robot_mode->log(
+      "It is also not that smart and hence NOT to be trusted with a precious "
+      "character you have built it.");
+  wid_over_robot_mode->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_robot_mode->log(
+      "Goblinhack cannot be held responsible for the death, dismemberment or otherwise damage caused to a player "
+      "character in robot mode.");
 }
 
 static void wid_actionbar_robot_over_e(Widp w)
 {
   TRACE_NO_INDENT();
-  BOTCON(" ");
+
+  delete wid_over_robot_mode;
+  wid_over_robot_mode = nullptr;
 }
 
 static void wid_actionbar_ai_tick(Widp w)
@@ -174,14 +279,9 @@ static uint8_t wid_actionbar_close(Widp w, int32_t x, int32_t y, uint32_t button
 static void wid_actionbar_close_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to close any popups.");
 }
 
-static void wid_actionbar_close_over_e(Widp w)
-{
-  TRACE_NO_INDENT();
-  BOTCON(" ");
-}
+static void wid_actionbar_close_over_e(Widp w) { TRACE_NO_INDENT(); }
 
 static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
 {
@@ -215,13 +315,43 @@ static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
 static void wid_actionbar_load_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to load a previously saved dungeon.");
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 10;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_load = new WidPopup("Load game", tl, br, nullptr, "", false, false);
+  wid_over_load->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Load game");
+  wid_over_load->log(UI_LOGGING_EMPTY_LINE);
+
+  wid_over_load->log("Select this to load a previous game.");
+  wid_over_load->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_load->log("NOTE: auto load will create snapshots you can load to recover.");
 }
 
 static void wid_actionbar_load_over_e(Widp w)
 {
   TRACE_NO_INDENT();
-  BOTCON(" ");
+
+  delete wid_over_load;
+  wid_over_load = nullptr;
 }
 
 static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -256,13 +386,43 @@ static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
 static void wid_actionbar_save_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to save the current dungeon.");
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 10;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_save = new WidPopup("Save game", tl, br, nullptr, "", false, false);
+  wid_over_save->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Save game");
+  wid_over_save->log(UI_LOGGING_EMPTY_LINE);
+
+  wid_over_save->log("Select this to save your current progress");
+  wid_over_save->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_save->log("NOTE: auto save will occasionally also perform saves for you.");
 }
 
 static void wid_actionbar_save_over_e(Widp w)
 {
   TRACE_NO_INDENT();
-  BOTCON(" ");
+
+  delete wid_over_save;
+  wid_over_save = nullptr;
 }
 
 static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -303,13 +463,43 @@ static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t bu
 static void wid_actionbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to see what you are carrying.");
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 10;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_inventory = new WidPopup("Inventory", tl, br, nullptr, "", false, false);
+  wid_over_inventory->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Inventory");
+  wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
+
+  wid_over_inventory->log("Select this to see your hard earned loot.");
+  wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_inventory->log("NOTE: that you are able to carry at most one extra bag, so use space wisely");
 }
 
 static void wid_actionbar_inventory_over_e(Widp w)
 {
   TRACE_NO_INDENT();
-  BOTCON(" ");
+
+  delete wid_over_inventory;
+  wid_over_inventory = nullptr;
 }
 
 static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -353,13 +543,42 @@ static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t butt
 static void wid_actionbar_collect_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to collect any loot you are over.");
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 10;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_collect = new WidPopup("Collect loot", tl, br, nullptr, "", false, false);
+  wid_over_collect->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Collect loot");
+  wid_over_collect->log(UI_LOGGING_EMPTY_LINE);
+
+  wid_over_collect->log("Select this to collect loot at your location.");
+  wid_over_collect->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_collect->log("NOTE: that you are able to carry at most one extra bag, so use space wisely");
 }
 
 static void wid_actionbar_collect_over_e(Widp w)
 {
   TRACE_NO_INDENT();
-  BOTCON(" ");
+  delete wid_over_collect;
+  wid_over_collect = nullptr;
 }
 
 static uint8_t wid_actionbar_wait(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -435,13 +654,43 @@ static uint8_t wid_actionbar_repeat_wait(Widp w, int32_t x, int32_t y, uint32_t 
 static void wid_actionbar_wait_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to happily pass the time of day.");
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 13;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_wait = new WidPopup("Wait/rest", tl, br, nullptr, "", false, false);
+  wid_over_wait->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Wait/rest");
+  wid_over_wait->log(UI_LOGGING_EMPTY_LINE);
+
+  wid_over_wait->log("Select this to pass one turn waiting.");
+  wid_over_wait->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_wait->log("Hold down to pass multiple turns.");
+  wid_over_wait->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_wait->log(
+      "Eventually your stamina and health will improve, but watch out for "
+      "wandering monsters.");
 }
 
 static void wid_actionbar_wait_over_e(Widp w)
 {
   TRACE_NO_INDENT();
-  BOTCON(" ");
+
+  delete wid_over_wait;
+  wid_over_wait = nullptr;
 }
 
 static uint8_t wid_actionbar_zoom_out(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -456,18 +705,6 @@ static uint8_t wid_actionbar_zoom_out(Widp w, int32_t x, int32_t y, uint32_t but
   wid_actionbar_close_all_popups();
   config_game_pix_zoom_out();
   return true;
-}
-
-static void wid_actionbar_zoom_out_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
-{
-  TRACE_NO_INDENT();
-  BOTCON("Select this to zoom out the map.");
-}
-
-static void wid_actionbar_zoom_out_over_e(Widp w)
-{
-  TRACE_NO_INDENT();
-  BOTCON(" ");
 }
 
 static uint8_t wid_actionbar_zoom_in(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -487,13 +724,73 @@ static uint8_t wid_actionbar_zoom_in(Widp w, int32_t x, int32_t y, uint32_t butt
 static void wid_actionbar_zoom_in_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to zoom in the map.");
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 6;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_zoom_in = new WidPopup("Zoom out", tl, br, nullptr, "", false, false);
+  wid_over_zoom_in->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Zoom out");
+  wid_over_zoom_in->log(UI_LOGGING_EMPTY_LINE);
+
+  wid_over_zoom_in->log("Select this to zoom out of the map.");
+}
+
+static void wid_actionbar_zoom_out_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_NO_INDENT();
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 6;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_zoom_out = new WidPopup("Zoom in", tl, br, nullptr, "", false, false);
+  wid_over_zoom_out->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Zoom in");
+  wid_over_zoom_out->log(UI_LOGGING_EMPTY_LINE);
+
+  wid_over_zoom_out->log("Select this to zoom into the map.");
 }
 
 static void wid_actionbar_zoom_in_over_e(Widp w)
 {
   TRACE_NO_INDENT();
-  BOTCON(" ");
+
+  delete wid_over_zoom_in;
+  wid_over_zoom_in = nullptr;
+}
+
+static void wid_actionbar_zoom_out_over_e(Widp w)
+{
+  TRACE_NO_INDENT();
+
+  delete wid_over_zoom_out;
+  wid_over_zoom_out = nullptr;
 }
 
 static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -520,13 +817,36 @@ static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t bu
 static void wid_actionbar_configure_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  BOTCON("Select this to change key settings.");
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 6;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_keyboard = new WidPopup("Keyboard", tl, br, nullptr, "", false, false);
+  wid_over_keyboard->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Configure keyboard");
+  wid_over_keyboard->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_keyboard->log("Select this to change the default key settings.");
 }
 
 static void wid_actionbar_configure_over_e(Widp w)
 {
   TRACE_NO_INDENT();
-  BOTCON(" ");
+
+  delete wid_over_keyboard;
+  wid_over_keyboard = nullptr;
 }
 
 void wid_actionbar_init(void)

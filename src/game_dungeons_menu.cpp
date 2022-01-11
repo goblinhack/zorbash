@@ -1082,6 +1082,172 @@ void Game::menu_dungeons_select(void)
     }
   }
 
+  {
+    int y = TERM_HEIGHT - 40;
+
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 4, tl.y);
+
+      wid_set_pos(b, tl, br);
+      wid_set_text(b, "Key:");
+    }
+
+    y += 2;
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 1, tl.y + 1);
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_bg_tilename(b, "dungeon_icon.1");
+
+      tl.x += 2;
+      br.x = TERM_WIDTH - 5;
+
+      b = wid_new_square_button(window, "wid key text");
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_text(b, "Easy");
+    }
+    y += 2;
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 1, tl.y + 1);
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_bg_tilename(b, "dungeon_icon.2");
+
+      tl.x += 2;
+      br.x = TERM_WIDTH - 5;
+
+      b = wid_new_square_button(window, "wid key text");
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_text(b, "...");
+    }
+    y += 2;
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 1, tl.y + 1);
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_bg_tilename(b, "dungeon_icon.3");
+
+      tl.x += 2;
+      br.x = TERM_WIDTH - 5;
+
+      b = wid_new_square_button(window, "wid key text");
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_text(b, "...");
+    }
+    y += 2;
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 1, tl.y + 1);
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_bg_tilename(b, "dungeon_icon.4");
+
+      tl.x += 2;
+      br.x = TERM_WIDTH - 5;
+
+      b = wid_new_square_button(window, "wid key text");
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_text(b, "...");
+    }
+    y += 2;
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 1, tl.y + 1);
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_bg_tilename(b, "dungeon_icon.5");
+
+      tl.x += 2;
+      br.x = TERM_WIDTH - 5;
+
+      b = wid_new_square_button(window, "wid key text");
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_text(b, "...");
+    }
+    y += 2;
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 1, tl.y + 1);
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_bg_tilename(b, "dungeon_icon.6");
+
+      tl.x += 2;
+      br.x = TERM_WIDTH - 5;
+
+      b = wid_new_square_button(window, "wid key text");
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_text(b, "...");
+    }
+    y += 2;
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 1, tl.y + 1);
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_bg_tilename(b, "dungeon_icon.7");
+
+      tl.x += 2;
+      br.x = TERM_WIDTH - 5;
+
+      b = wid_new_square_button(window, "wid key text");
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_text(b, "...");
+    }
+    y += 2;
+    {
+      Widp  b = wid_new_square_button(window, "wid key");
+      point tl(TERM_WIDTH - 12, y);
+      point br(tl.x + 1, tl.y + 1);
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_bg_tilename(b, "dungeon_icon.8");
+
+      tl.x += 2;
+      br.x = TERM_WIDTH - 5;
+
+      b = wid_new_square_button(window, "wid key text");
+
+      wid_set_pos(b, tl, br);
+      wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+      wid_set_text(b, "Hard");
+    }
+  }
+
   if (! g_opt_quick_start) {
     game_dungeons_update_buttons(window);
     wid_set_do_not_lower(window, 1);

@@ -140,5 +140,7 @@ PyObject *py_add_module(const char *mod)
 void py_fini(void)
 {
   TRACE_AND_INDENT();
-  Py_Finalize();
+  if (my_mod) {
+    Py_Finalize();
+  }
 }

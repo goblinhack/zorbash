@@ -127,6 +127,11 @@ PyObject *die_(PyObject *obj, PyObject *args, PyObject *keywds)
 void py_err(void)
 {
   TRACE_AND_INDENT();
+
+  if (! my_mod) {
+    return;
+  }
+
   PyObject *err = PyErr_Occurred();
   if (! err) {
     return;
@@ -187,8 +192,12 @@ void py_err(void)
 void py_trace(void)
 {
   TRACE_AND_INDENT();
-  PyThreadState *tstate = PyThreadState_GET();
 
+  if (! my_mod) {
+    return;
+  }
+
+  PyThreadState *tstate = PyThreadState_GET();
   if (tstate && tstate->frame) {
     PyFrameObject *frame = tstate->frame;
 

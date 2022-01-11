@@ -128,7 +128,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
   auto name = t->short_text_capitalise();
-  wid_popup_window->log("%%fg=white$" + name);
+  wid_popup_window->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$" + name);
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
   if (t->is_dead) {
@@ -207,7 +207,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
   for (auto t : ts) {
     auto name = t->short_text_capitalise();
-    snprintf(tmp, sizeof(tmp) - 2, "%%fg=white$%-28s%%fg=reset$", name.c_str());
+    snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s%%fg=reset$", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
       if (*c == ' ') {
         *c = '`';
