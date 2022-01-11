@@ -49,9 +49,7 @@ void Thing::on_enchant(void)
 
 bool Thing::enchant_with_stone(Thingp what)
 {
-  if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
-    msg("You enchant %s.", what->text_the().c_str());
-  }
+  msg("You enchant %s.", what->text_the().c_str());
 
   dbg("enchant %s", what->text_the().c_str());
   TRACE_AND_INDENT();
@@ -82,9 +80,7 @@ bool Thing::enchant_with_stone(Thingp what)
 
 bool Thing::enchant_without_stone(Thingp what)
 {
-  if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
-    msg("You enchant %s.", what->text_the().c_str());
-  }
+  msg("You enchant %s.", what->text_the().c_str());
 
   dbg("Enchant %s", what->text_the().c_str());
   TRACE_AND_INDENT();

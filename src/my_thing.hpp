@@ -429,6 +429,7 @@ public:
   bool path_pop_next_move(void);
   bool place(const std::string &what, const point &p);
   bool player_is_ready_for_messages(void);
+  bool player_is_ready_for_thing_info(void);
   bool possible_to_attack_at(point at);
   bool possible_to_attack(const Thingp it);
   bool projectile_anim_exists(void);
@@ -1904,7 +1905,7 @@ public:
   void move_set_dir_from_delta(point);
   void move_to_immediately(point to);
   void move_to(point to);
-  void msg(const std::string &);
+  void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void necrosis_tick(void);
   void new_aip(void);
   void new_infop(void);
@@ -1941,6 +1942,7 @@ public:
   void poisoned(void);
   void poison_tick(void);
   void polymorph(Tpp);
+  void popup(const std::string &);
   void reinit(void);
   void release_followers(void);
   void remove_all_references();
@@ -1988,7 +1990,6 @@ public:
   void stats_tick();
   void throw_at(Thingp w, Thingp target);
   void tick();
-  void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon_(const char *fmt, va_list args); // compile error without
   void treasure_map_check(void);

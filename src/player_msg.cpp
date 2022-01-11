@@ -39,6 +39,28 @@ bool Thing::player_is_ready_for_messages(void)
   return true;
 }
 
+bool Thing::player_is_ready_for_thing_info(void)
+{
+  verify(MTYPE_THING, this);
+
+  if (! level) {
+    return false;
+  }
+
+  if (! level->player) {
+    return false;
+  }
+
+  if (level->player->is_dead || level->player->is_dying) {
+    return false;
+  }
+
+  if (level->is_starting || level->is_being_destroyed) {
+    return false;
+  }
+  return true;
+}
+
 //
 // A message generated for the console. Check if we should print it.
 //

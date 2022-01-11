@@ -667,26 +667,26 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               hitter->text_the().c_str());
         } else if (attack_acid) {
           msg("%%fg=red$%s dissolves your body!%%fg=reset$", real_hitter->text_The().c_str());
-          msg("Sizzle!");
+          popup("Sizzle!");
         } else if (attack_natural) {
           msg("%%fg=red$%s %s deep!%%fg=reset$", real_hitter->text_The().c_str(),
               pluralise(real_hitter->damage_natural_attack_type()).c_str());
-          msg("Urk!");
+          popup("Urk!");
         } else if (attack_energy) {
           msg("%%fg=red$%s blasts you apart!%%fg=reset$", real_hitter->text_The().c_str());
-          msg("Zap!");
+          popup("Zap!");
         } else if (attack_lightning) {
           msg("%%fg=red$%s fries your body!%%fg=reset$", real_hitter->text_The().c_str());
-          msg("Brzzt!");
+          popup("Brzzt!");
         } else if (attack_crush) {
           msg("%%fg=red$You are flattened by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          msg("Splat!");
+          popup("Splat!");
         } else if (attack_fire) {
           msg("%%fg=red$You are burnt to a crisp by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          msg("Sizzle!");
+          popup("Sizzle!");
         } else if (attack_digest) {
           msg("%%fg=red$You are being eaten by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          msg("Slurp!");
+          popup("Slurp!");
         } else {
           msg("%%fg=red$%s %s you fatally!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str());
@@ -716,31 +716,31 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               hitter->text_the().c_str());
         } else if (attack_acid) {
           msg("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-          msg("Sizzle!");
+          popup("Sizzle!");
         } else if (attack_natural) {
           if (! real_hitter->damage_natural_attack_type().empty()) {
             msg("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
                 pluralise(real_hitter->damage_natural_attack_type()).c_str(), damage);
-            msg(capitalise(real_hitter->damage_natural_attack_type()));
+            popup(capitalise(real_hitter->damage_natural_attack_type()));
           } else {
             msg("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-            msg("Chomp!");
+            popup("Chomp!");
           }
         } else if (attack_energy) {
           msg("%%fg=orange$%s blasts you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-          msg("Zap!");
+          popup("Zap!");
         } else if (attack_lightning) {
           msg("%%fg=orange$%s electrocutes you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
-          msg("Brzzt!");
+          popup("Brzzt!");
         } else if (attack_crush) {
           msg("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          msg("Ouch!");
+          popup("Ouch!");
         } else if (attack_fire) {
           msg("%%fg=orange$You are being burnt by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          msg("!");
+          popup("!");
         } else if (attack_digest) {
           msg("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          msg("Gulp!");
+          popup("Gulp!");
         } else {
           msg("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str(), damage);
@@ -867,7 +867,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     // Player being hit
     //
-    msg(string_sprintf("%%fg=red$-%d", damage));
+    popup(string_sprintf("%%fg=red$-%d", damage));
   } else if (is_monst()) {
     //
     // ThingInfo being hit
@@ -876,7 +876,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // ThingInfo being hit by player
       //
-      msg(string_sprintf("%%fg=white$-%d", damage));
+      popup(string_sprintf("%%fg=white$-%d", damage));
     }
   }
 

@@ -58,7 +58,7 @@ void Thing::lava_tick(void)
   } else {
     if (is_player()) {
       msg("You stand on a sightly cooler rock in the lava!");
-      msg("Your feet are warm and toasty!");
+      popup("Hm, toasty!");
     }
   }
 

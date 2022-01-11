@@ -5,17 +5,15 @@
 <!-- - if I click on a rock to attack then I should attack that rock?                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
-<!-- Next todo                                                                                                                                    -->
-<!-- ------                                                                                                                                       -->
-<!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
-<!-- - level fall through to special level ?                                                                                                      -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - level pyramid                                                                                                                              -->
+<!-- - level pyramid                                                                                                                              (-->
+<!-- - level fall through to special level ?                                                                                                       -->
+<!-- - robot disclaimer                                                                                                                            --)>
+<!-- - crystal collection                                                                                                                         -->
+<!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
+<!-- - char selection                                                                                                                             -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
-<!-- - orb of zorb                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- UI                                                                                                                                           -->

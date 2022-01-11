@@ -286,7 +286,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
             msg("You cannot move!");
             game->tick_begin("trapped in a barrel");
           }
-          msg(string_sprintf("%%fg=red$!"));
+          popup(string_sprintf("%%fg=red$!"));
         }
         lunge(future_pos);
 
@@ -316,7 +316,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           msg("You cannot move!");
           game->tick_begin("trapped in something sticky");
         }
-        msg(string_sprintf("%%fg=red$!"));
+        popup(string_sprintf("%%fg=red$!"));
       }
       lunge(future_pos);
 
