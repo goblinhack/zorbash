@@ -1446,7 +1446,6 @@ void sdl_loop(void)
         sdl_screenshot_do();
       }
 
-      LOG("SDL DELAY");
       SDL_Delay(game->config.sdl_delay);
 
       //
