@@ -8,7 +8,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-void Thing::msg(std::string const &m)
+void Thing::popup(std::string const &m)
 {
   static point    last_at;
   float           dy;

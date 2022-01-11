@@ -38,8 +38,8 @@ bool Thing::steal_treasure_from(Thingp it)
   chosen->hide();
 
   if (it->is_player()) {
-    it->msg(string_sprintf("                        %%fg=white$Where's my money?!"));
-    msg("%%fg=orange$You feel less wealthy somehow...%%fg=reset$");
+    it->popup(string_sprintf("%%fg=white$Where's my money?!"));
+    it->msg("%%fg=orange$You feel less wealthy somehow...%%fg=reset$");
   }
   return true;
 }
@@ -73,8 +73,8 @@ bool Thing::steal_item_from(Thingp it)
   chosen->hide();
 
   if (it->is_player()) {
-    it->msg(string_sprintf("                        %%fg=white$Where's my stuff?!"));
-    msg("%%fg=orange$You feel lighter somehow...%%fg=reset$");
+    it->popup(string_sprintf("%%fg=white$Where's my stuff?!"));
+    it->msg("%%fg=orange$You feel lighter somehow...%%fg=reset$");
   }
 
   //

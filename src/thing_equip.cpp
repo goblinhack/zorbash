@@ -468,14 +468,12 @@ bool Thing::equip(Thingp item, int equip)
   }
 
   if (is_player()) {
-    if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
-      if (item->is_ring()) {
-        msg("You slip on the %s.", item->text_the().c_str());
-      } else if (item->is_weapon()) {
-        msg("You wield the %s.", item->text_the().c_str());
-      } else {
-        msg("You put on %s.", item->text_the().c_str());
-      }
+    if (item->is_ring()) {
+      msg("You slip on the %s.", item->text_the().c_str());
+    } else if (item->is_weapon()) {
+      msg("You wield the %s.", item->text_the().c_str());
+    } else {
+      msg("You put on %s.", item->text_the().c_str());
     }
   } else if (is_monst() && ! is_offscreen) {
     if (level->player && (level->tick_created < game->tick_current)) {

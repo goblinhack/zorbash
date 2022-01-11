@@ -787,13 +787,14 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       if (! hit) {
         if (is_player() || (owner && owner->is_player())) {
           msg("You miss %s.", victim->text_the().c_str());
-          msg("!");
+          popup("!");
         } else if (victim->is_player()) {
           if (owner) {
             msg("%s misses with %s.", owner->text_the().c_str(), text_The().c_str());
           } else {
             msg("%s misses.", text_The().c_str());
           }
+          popup("misses!");
         } else {
           dbg("The attack missed (att modifier %d, AC %d) on %s", stat_att, stat_def, victim->to_string().c_str());
         }
@@ -815,6 +816,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
           if (d10000() < armor->break_chance_d10000()) {
             if (is_player()) {
               msg("%s falls apart.", armor->text_The().c_str());
+              popup("!!!");
             }
             armor->dead("broken");
           }
@@ -825,6 +827,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
           if (d10000() < shield->break_chance_d10000()) {
             if (is_player()) {
               msg("%s falls apart.", shield->text_The().c_str());
+              popup("!!!");
             }
             shield->dead("broken");
           }
@@ -835,6 +838,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
           if (d10000() < helmet->break_chance_d10000()) {
             if (is_player()) {
               msg("%s falls apart.", helmet->text_The().c_str());
+              popup("!!!");
             }
             helmet->dead("broken");
           }

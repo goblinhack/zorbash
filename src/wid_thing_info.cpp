@@ -67,7 +67,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   if (! player) {
     return nullptr;
   }
-  if (! player->player_is_ready_for_messages()) {
+  if (! player->player_is_ready_for_thing_info()) {
     return nullptr;
   }
 
@@ -191,7 +191,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   if (! player) {
     return nullptr;
   }
-  if (! player->player_is_ready_for_messages()) {
+  if (! player->player_is_ready_for_thing_info()) {
     return nullptr;
   }
 

@@ -245,6 +245,7 @@ bool Thing::fall_to_next_level(void)
       if (is_player()) {
         game->level = next_level;
         msg("%%fg=red$You tumble into the void!%%fg=reset$");
+        popup("Aargh");
       } else {
         if (get_distance_to_player() >= DMAP_IS_PASSABLE) {
           if (is_monst()) {
@@ -257,6 +258,7 @@ bool Thing::fall_to_next_level(void)
         } else {
           if (is_monst()) {
             msg("%s tumbles into the void!", text_The().c_str());
+            popup("Aargh");
           } else if (is_item()) {
             msg("%s falls into the void!", text_The().c_str());
           } else {
