@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - seed 1 robot and zoblin will not move                                                                                                      -->
 <!-- - the barrel health and safety alert seen twice on seed 1                                                                                    -->
 <!-- - if I click on a rock to attack then I should attack that rock?                                                                             -->
 <!-- ------                                                                                                                                       -->
@@ -9,7 +8,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- - level pyramid                                                                                                                              (-->
 <!-- - level fall through to special level ?                                                                                                       -->
-<!-- - robot disclaimer                                                                                                                            --)>
 <!-- - crystal collection                                                                                                                         -->
 <!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- - char selection                                                                                                                             -->
