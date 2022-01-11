@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - the barrel health and safety alert seen twice on seed 1                                                                                    -->
 <!-- - if I click on a rock to attack then I should attack that rock?                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -38,7 +37,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- - random floor trap                                                                                                                          -->
 <!-- - moving blocks?                                                                                                                             -->
-<!-- - boulders blocking secret room?                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Sound                                                                                                                                        -->
