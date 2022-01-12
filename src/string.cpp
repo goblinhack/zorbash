@@ -1433,4 +1433,3 @@ std::string capitalise(std::string in)
 
   return out;
 }
-

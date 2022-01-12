@@ -48,27 +48,27 @@
 //
 
 #ifndef _MY_SLRE_HEADER_DEFINED
-#define	_MY_SLRE_HEADER_DEFINED
+#define _MY_SLRE_HEADER_DEFINED
 
 //
 // Compiled regular expression
 //
 struct slre {
-  unsigned char	code[256];
-  unsigned char	data[256];
-  int		code_size;
-  int		data_size;
-  int		num_caps;	// Number of bracket pairs	
-  int		anchored;	// Must match from string start	
-  const char	*err_str;	// Error string			
+  unsigned char code[ 256 ];
+  unsigned char data[ 256 ];
+  int           code_size;
+  int           data_size;
+  int           num_caps; // Number of bracket pairs
+  int           anchored; // Must match from string start
+  const char   *err_str;  // Error string
 };
 
 //
 // Captured substring
 //
 struct cap {
-  const char	*ptr;		// Pointer to the substring	
-  int		len;		// Substring length		
+  const char *ptr; // Pointer to the substring
+  int         len; // Substring length
 };
 
 //
@@ -87,8 +87,7 @@ int slre_compile(struct slre *, const char *re);
 // hold all captures. The caller function must make sure it is! So, the
 // array_size = number_of_round_bracket_pairs + 1
 //
-int slre_match(const struct slre *, const char *buf, int buf_len,
-  struct cap *captured_substrings);
+int slre_match(const struct slre *, const char *buf, int buf_len, struct cap *captured_substrings);
 
 void slre_test(void);
 #endif // SLRE_HEADER_DEFINED

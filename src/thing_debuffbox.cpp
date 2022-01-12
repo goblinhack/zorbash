@@ -66,7 +66,7 @@ bool Thing::debuffbox_id_insert(Thingp what)
   int item_slot = -1;
   if (free_slot != -1) {
     get_itemsp()->debuffbox_id[ free_slot ] = what->id;
-    item_slot                              = free_slot;
+    item_slot                               = free_slot;
   } else {
     if (debuffbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
       msg("No space to carry %s which is not carried.", what->text_the().c_str());

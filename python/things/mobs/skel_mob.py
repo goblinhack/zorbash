@@ -29,7 +29,6 @@ def tp_init(name, text_name):
     mytp.set_ai_shove_chance_d1000(200)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(5)
-    mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_damage_received_doubled_from_water(True)
     mytp.set_environ_avoids_water(100)
     mytp.set_gfx_animated(True)

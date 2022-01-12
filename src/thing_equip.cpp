@@ -548,7 +548,7 @@ void Thing::equip_remove_anim(int equip)
   set_equip_id(NoThingId.id, equip);
 }
 
-bool Thing::equip_use(bool forced, int equip)
+bool Thing::equip_use(bool forced, int equip, point *at)
 {
   dbg("Try to use equipped item");
   TRACE_AND_INDENT();
@@ -572,7 +572,7 @@ bool Thing::equip_use(bool forced, int equip)
 
   dbg("Find best attack target");
   TRACE_AND_INDENT();
-  bool attacked = target_attack_best(equip);
+  bool attacked = target_attack_best(equip, at);
   if (! attacked) {
     if (is_player() && forced) {
       //

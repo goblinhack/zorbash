@@ -250,8 +250,8 @@ int Thing::on_owner_damage_stat_con(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_stat_con call [%s] expected mod:function, got %d elems",
-      on_owner_damage_stat_con.c_str(), (int) on_owner_damage_stat_con.size());
+  ERR("Bad on_owner_damage_stat_con call [%s] expected mod:function, got %d elems", on_owner_damage_stat_con.c_str(),
+      (int) on_owner_damage_stat_con.size());
 
   return damage;
 }

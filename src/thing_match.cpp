@@ -1205,7 +1205,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag184() && (what == "unused_flag184")) {
     return true;
   }
-  if (unused_flag185() && (what == "unused_flag185")) {
+  if (is_able_to_move_diagonally() && (what == "is_able_to_move_diagonally")) {
     return true;
   }
   if (is_meltable() && (what == "is_meltable")) {
@@ -2487,8 +2487,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag184") {
     return &Thing::unused_flag184;
   }
-  if (what == "unused_flag185") {
-    return &Thing::unused_flag185;
+  if (what == "is_able_to_move_diagonally") {
+    return &Thing::is_able_to_move_diagonally;
   }
   if (what == "is_meltable") {
     return &Thing::is_meltable;

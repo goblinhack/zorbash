@@ -36,7 +36,8 @@ void Thing::fire_tick(void)
       hit = (d100() < 90);
       if (! hit) {
         if (is_player()) {
-          msg("%%fg=green$You feel a brief cool breeze and reprieve from the flames!%%fg=reset$");
+          msg("%%fg=green$You feel a brief cool breeze and reprieve from the "
+              "flames!%%fg=reset$");
 
           //
           // Smoke ensures a reprieve.

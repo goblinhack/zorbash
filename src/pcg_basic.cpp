@@ -28,73 +28,71 @@
  * your project.
  */
 
-#include "my_pcg_basic.hpp"
-#include "my_main.hpp"
-#include "my_sys.hpp"
 #include "my_game.hpp"
+#include "my_main.hpp"
+#include "my_pcg_basic.hpp"
+#include "my_sys.hpp"
 
 // state for global RNGs
 
 bool pcg_random_allowed = true;
 
-struct pcg_state_setseq_64 {    // Internals are *Private*.
-  uint64_t state;             // RNG state.  All values are possible.
-  uint64_t inc;               // Controls which RNG sequence (stream) is
-                // selected. Must *always* be odd.
+struct pcg_state_setseq_64 { // Internals are *Private*.
+  uint64_t state;            // RNG state.  All values are possible.
+  uint64_t inc;              // Controls which RNG sequence (stream) is
+                             // selected. Must *always* be odd.
 };
 typedef struct pcg_state_setseq_64 pcg32_random_t;
 
-#define PCG32_INITIALIZER   { 0x853c49e6748fea9bULL, 0xda3e39cb94b95bdbULL }
+#define PCG32_INITIALIZER                                                                                            \
+  {                                                                                                                  \
+    0x853c49e6748fea9bULL, 0xda3e39cb94b95bdbULL                                                                     \
+  }
 pcg32_random_t pcg32_global = PCG32_INITIALIZER;
 
-uint32_t pcg32_random_r(pcg32_random_t* rng)
+uint32_t pcg32_random_r(pcg32_random_t *rng)
 {
   if (game->robot_mode) {
-    if (!pcg_random_allowed) { TRACE_AND_INDENT();
+    if (! pcg_random_allowed) {
+      TRACE_AND_INDENT();
       DIE("Trying to use pcg randomness outside of game logic part");
     }
   }
 
-  uint64_t oldstate = rng->state;
-  rng->state = oldstate * 6364136223846793005ULL + rng->inc;
+  uint64_t oldstate   = rng->state;
+  rng->state          = oldstate * 6364136223846793005ULL + rng->inc;
   uint32_t xorshifted = ((oldstate >> 18u) ^ oldstate) >> 27u;
-  uint32_t rot = oldstate >> 59u;
-  uint32_t r =  (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
-  //LOG("RAND %u ", r);
-  //backtrace_dump();
+  uint32_t rot        = oldstate >> 59u;
+  uint32_t r          = (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
+  // LOG("RAND %u ", r);
+  // backtrace_dump();
   return r;
 }
 
-void pcg32_srandom_r(pcg32_random_t* rng, uint64_t initstate, uint64_t initseq)
+void pcg32_srandom_r(pcg32_random_t *rng, uint64_t initstate, uint64_t initseq)
 {
   rng->state = 0U;
-  rng->inc = (initseq << 1u) | 1u;
+  rng->inc   = (initseq << 1u) | 1u;
   pcg32_random_r(rng);
   rng->state += initstate;
   pcg32_random_r(rng);
 }
 
-void pcg32_srandom(uint64_t seed, uint64_t seq)
-{
-  pcg32_srandom_r(&pcg32_global, seed, seq);
-}
+void pcg32_srandom(uint64_t seed, uint64_t seq) { pcg32_srandom_r(&pcg32_global, seed, seq); }
 
 // pcg32_random()
 // pcg32_random_r(rng)
 //     Generate a uniformly distributed 32-bit random number
 
-uint32_t pcg32_random()
-{
-  return pcg32_random_r(&pcg32_global);
-}
+uint32_t pcg32_random() { return pcg32_random_r(&pcg32_global); }
 
 // pcg32_boundedrand(bound):
 // pcg32_boundedrand_r(rng, bound):
 //     Generate a uniformly distributed number, r, where 0 <= r < bound
 
-uint32_t pcg32_boundedrand_r(pcg32_random_t* rng, uint32_t bound)
+uint32_t pcg32_boundedrand_r(pcg32_random_t *rng, uint32_t bound)
 {
-  if (!bound) {
+  if (! bound) {
     return 0;
   }
 
@@ -121,7 +119,7 @@ uint32_t pcg32_boundedrand_r(pcg32_random_t* rng, uint32_t bound)
   // (i.e., 2147483649), which invalidates almost 50% of the range.  In
   // practice, bounds are typically small and only a tiny amount of the range
   // is eliminated.
-  for (;/*ever*/;) {
+  for (; /*ever*/;) {
     uint32_t r = pcg32_random_r(rng);
     if (r >= threshold) {
       return r % bound;
@@ -129,7 +127,4 @@ uint32_t pcg32_boundedrand_r(pcg32_random_t* rng, uint32_t bound)
   }
 }
 
-uint32_t pcg32_boundedrand(uint32_t bound)
-{
-  return pcg32_boundedrand_r(&pcg32_global, bound);
-}
+uint32_t pcg32_boundedrand(uint32_t bound) { return pcg32_boundedrand_r(&pcg32_global, bound); }

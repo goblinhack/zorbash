@@ -6,7 +6,7 @@
 
 #pragma once
 
-typedef void(*wid_keyboard_event_t)(Widp, const char *text);
+typedef void (*wid_keyboard_event_t)(Widp, const char *text);
 
 #define WID_KEYBOARD_ACROSS 12
 #define WID_KEYBOARD_DOWN   5
@@ -30,7 +30,7 @@ typedef struct {
   /*
    * Entered text.
    */
-  char text[MAXLONGSTR];
+  char text[ MAXLONGSTR ];
 
   /*
    * Item currently in focus
@@ -46,7 +46,7 @@ typedef struct {
   /*
    * Items in the keyboard
    */
-  Widp buttons[WID_KEYBOARD_DOWN][WID_KEYBOARD_ACROSS];
+  Widp buttons[ WID_KEYBOARD_DOWN ][ WID_KEYBOARD_ACROSS ];
 
   /*
    * What to call on events
@@ -61,9 +61,6 @@ typedef struct {
 
 } wid_keyboard_ctx;
 
-Widp wid_keyboard (const char *text,
-           const char *title,
-           wid_keyboard_event_t selected,
-           wid_keyboard_event_t cancelled);
+Widp wid_keyboard(const char *text, const char *title, wid_keyboard_event_t selected, wid_keyboard_event_t cancelled);
 
 extern int wid_keyboard_visible;

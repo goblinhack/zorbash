@@ -13,6 +13,7 @@
 #include "my_random.hpp"
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
+#include "my_template.hpp"
 #include "my_thing.hpp"
 #include "my_thing_ai.hpp"
 #include "my_thing_template.hpp"
@@ -61,24 +62,10 @@ void Thing::ai_log(const std::string &msg, Thingp it)
 {
   TRACE_NO_INDENT();
 
-  if (is_player()) {
-    if (it) {
-      log("AI: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
-          get_health(), get_health_max(), msg.c_str(), it->to_short_string().c_str());
-      CON("Robot: @(%s, %d,%d %d/%dh) %s, %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y,
-          get_health(), get_health_max(), msg.c_str(), it->to_short_string().c_str());
-    } else {
-      log("AI: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y, get_health(),
-          get_health_max(), msg.c_str());
-      CON("Robot: @(%s, %d,%d %d/%dh) %s", level->to_string().c_str(), (int) curr_at.x, (int) curr_at.y, get_health(),
-          get_health_max(), msg.c_str());
-    }
+  if (it) {
+    log("AI: %s, %s", msg.c_str(), it->to_short_string().c_str());
   } else {
-    if (it) {
-      log("AI: %s, %s", msg.c_str(), it->to_short_string().c_str());
-    } else {
-      log("AI: %s", msg.c_str());
-    }
+    log("AI: %s", msg.c_str());
   }
 }
 
@@ -105,6 +92,23 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   // Find all the possible goals. Higher scores, lower costs are preferred
   //
   auto dmap_can_see = get_dmap_can_see();
+
+  switch (search_type) {
+    case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
+    case SEARCH_TYPE_LOCAL_NO_JUMP :
+    case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : break;
+    case SEARCH_TYPE_GLOBAL_NO_JUMP :
+    case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
+    case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
+    case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
+      if (is_player()) {
+        minx = 0;
+        maxx = MAP_WIDTH - 1;
+        miny = 0;
+        maxy = MAP_HEIGHT - 1;
+      }
+      break;
+  }
 
   std::multiset< Goal > goals;
   std::list< GoalMap >  goalmaps;
@@ -137,11 +141,13 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   for (auto &g : goalmaps) {
     IF_DEBUG2
     {
-      AI_LOG("Pre modify dmap for terrain");
-      dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+      if (is_debug_type()) {
+        AI_LOG("Pre modify dmap for terrain");
+        dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
 
-      if (search_type == SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED) {
-        level->heatmap_print(point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+        if (search_type == SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED) {
+          level->heatmap_print(point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+        }
       }
     }
 
@@ -279,7 +285,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
 #endif
   point astar_start(start.x, start.y);
   auto  astar_end           = goal.at;
-  auto [ result, fallback ] = astar_solve(this, &goal, path_debug, astar_start, astar_end, &dmap);
+  auto [ result, fallback ] = astar_solve(&goal, path_debug, astar_start, astar_end, &dmap);
 
   //
   // Unreachable?
@@ -818,21 +824,36 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
     }
   }
 
+  if (is_debug_type()) {
+    log("Choose can see goals %d,%d to %d,%d", minx, miny, maxx, maxy);
+  }
+
   for (int y = miny; y <= maxy; y++) {
     for (int x = minx; x <= maxx; x++) {
       point p(x, y);
 
       if (! get(aip->can_see_currently.can_see, p.x, p.y)) {
+        //        if (is_debug_type()) {
+        //          log("%d %d can not see currently", p.x, p.y);
+        //        }
         continue;
       }
 
       if (get(dmap_can_see->val, x, y) == DMAP_IS_WALL) {
+        //        if (is_debug_type()) {
+        //          log("%d %d can not see due to dmap", p.x, p.y);
+        //        }
         continue;
       }
+
+      //      if (is_debug_type()) {
+      //        log("%d %d walk", p.x, p.y);
+      //      }
 
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
         AI_LOG("Can see cand", it);
+
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           continue;
         }
@@ -1326,7 +1347,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   //
   // Choose goals (higher scores, lower costs are preferred)
   //
-  for (auto p : can_reach_cands) {
+  for (auto i = 0; i < can_reach_cands.size(); i++) {
+    auto p = pcg_one_of(can_reach_cands);
+
     //
     // Avoid sewer descend/ascend loop
     //
@@ -1575,13 +1598,6 @@ bool Thing::ai_tick(bool recursing)
   int  maxx          = std::min(MAP_WIDTH - 1, (int) (vision_source.x + dx));
   int  miny          = std::max(0, (int) (vision_source.y - dy));
   int  maxy          = std::min(MAP_HEIGHT - 1, (int) (vision_source.y + dy));
-
-  if (is_player()) {
-    minx = 0;
-    maxx = MAP_WIDTH - 1;
-    miny = 0;
-    maxy = MAP_HEIGHT - 1;
-  }
 
   bool left         = false;
   bool right        = false;
@@ -2378,7 +2394,7 @@ bool Thing::ai_tick(bool recursing)
         // Then close it. This is really just visual feedback.
         //
         if (is_player()) {
-          ai_change_state(MONST_STATE_REPACK_INVENTORY, "close inventory");
+          ai_change_state(MONST_STATE_REPACK_INVENTORY, "repack inventory");
           game->tick_begin("Robot finished collecting");
         } else {
           ai_change_state(MONST_STATE_IDLE, "close inventory");
