@@ -1594,10 +1594,11 @@ bool Thing::ai_tick(bool recursing)
   const float dy = dx;
 
   auto vision_source = get_vision_source();
-  int  minx          = std::max(0, (int) (vision_source.x - dx));
-  int  maxx          = std::min(MAP_WIDTH - 1, (int) (vision_source.x + dx));
-  int  miny          = std::max(0, (int) (vision_source.y - dy));
-  int  maxy          = std::min(MAP_HEIGHT - 1, (int) (vision_source.y + dy));
+
+  int minx = std::max(0, (int) (vision_source.x - dx));
+  int maxx = std::min(MAP_WIDTH - 1, (int) (vision_source.x + dx));
+  int miny = std::max(0, (int) (vision_source.y - dy));
+  int maxy = std::min(MAP_HEIGHT - 1, (int) (vision_source.y + dy));
 
   bool left         = false;
   bool right        = false;
