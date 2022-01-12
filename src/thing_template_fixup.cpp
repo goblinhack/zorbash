@@ -28,6 +28,12 @@ void tp_fixup(void)
       tp->set_is_combustible(true);
     }
 
+    if (tp->is_wooden()) {
+      if (! tp->is_burnable()) {
+        DIE("Tp %s needs to be set as burnable if wooden", tp->name().c_str());
+      }
+    }
+
     if (tp->is_able_to_fire_at()) {
       if (! tp->distance_vision()) {
         DIE("Tp %s needs vision distance if it is able to fire at things", tp->name().c_str());

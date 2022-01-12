@@ -50,6 +50,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_gold_value_dice("500")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_bag_item(True)
+    mytp.set_is_burnable(True)
     mytp.set_is_collectable(True)
     mytp.set_is_combustible(True)
     mytp.set_is_crushable(True)
