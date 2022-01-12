@@ -176,8 +176,10 @@ void Game::place_player(void)
 
 void Game::start(void)
 {
-  LOG("Start the game!");
   TRACE_AND_INDENT();
+  LOG("Start the game!");
+
+  tick_begin_ms = time_get_time_ms();
 
   wid_rightbar_fini();
   wid_rightbar_init();

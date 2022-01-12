@@ -47,6 +47,15 @@ bool Thing::player_is_ready_for_thing_info(void)
     return false;
   }
 
+  //
+  // No popups before the first tick
+  //
+  if (game->tick_current == 1) {
+    if ((time_get_time_ms() - game->tick_begin_ms) < 100) {
+      return false;
+    }
+  }
+
   if (! level->player) {
     return false;
   }
