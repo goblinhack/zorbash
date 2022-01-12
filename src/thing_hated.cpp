@@ -33,11 +33,13 @@ bool Thing::is_hated_by_me(const point &p)
     if (level->is_chasm(p)) {
       return true;
     }
-    if (level->is_fire(p)) {
-      return true;
-    }
-    if (level->is_lava(p)) {
-      return true;
+    if (environ_avoids_fire()) {
+      if (level->is_fire(p)) {
+        return true;
+      }
+      if (level->is_lava(p)) {
+        return true;
+      }
     }
   }
 
@@ -63,11 +65,13 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
     if (level->is_chasm(p)) {
       return true;
     }
-    if (level->is_fire(p)) {
-      return true;
-    }
-    if (level->is_lava(p)) {
-      return true;
+    if (environ_avoids_fire()) {
+      if (level->is_fire(p)) {
+        return true;
+      }
+      if (level->is_lava(p)) {
+        return true;
+      }
     }
   }
 

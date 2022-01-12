@@ -196,7 +196,7 @@ void Level::cursor_path_draw_line(point start, point end)
   dbg3("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   dmap_process(&d, dmap_start, dmap_end);
-  // dmap_print(&d, start, dmap_start, dmap_end);
+  dmap_print(&d, start, dmap_start, dmap_end);
   auto p                 = dmap_solve_allow_diagonal(&d, start);
   game->cursor_move_path = p;
 

@@ -11,6 +11,9 @@
 
 void Thing::lunge(point to)
 {
+  log("Lunge to %d,%d", to.x, to.y);
+  TRACE_AND_INDENT();
+
   move_finish();
 
   auto t = set_ts_lunge_begin(time_get_time_ms_cached());

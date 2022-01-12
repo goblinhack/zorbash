@@ -33,9 +33,13 @@ bool Thing::target_select(Thingp item)
 // Find the best thing to attack. Look at our current direction and if nothing
 // in that path, look around for something else.
 //
-bool Thing::target_attack_best(int equip)
+bool Thing::target_attack_best(int equip, point *at)
 {
-  dbg("Target-attack-best: Try to attack with equpped item");
+  if (at) {
+    dbg("Target-attack-best: Try to attack with equpped item at %s", at->to_string().c_str());
+  } else {
+    dbg("Target-attack-best: Try to attack with equpped item");
+  }
   TRACE_AND_INDENT();
 
   int  dx, dy;
@@ -52,7 +56,7 @@ bool Thing::target_attack_best(int equip)
   bool target_overlaps = false;
   auto hit_at          = curr_at + point(dx, dy);
 
-  dbg("Target-attack-best: Attack at %d,%d delta %d,%d", hit_at.x, hit_at.y, dx, dy);
+  dbg("Target-attack-best: Attack delta %d,%d", dx, dy);
   TRACE_AND_INDENT();
 
   //
@@ -72,6 +76,17 @@ bool Thing::target_attack_best(int equip)
   // If stuck in a web we can only hit the web
   //
   if (level->is_spiderweb(curr_at)) {
+    std::vector< point > local_only = {point(0, 0)};
+
+    all_deltas = local_only;
+  }
+
+  //
+  // If we clicked on a target we must attack only there.
+  // If we pressed space then the target is where we are at, so look around
+  // for the best thing to hit.
+  //
+  if (at && (*at != curr_at)) {
     std::vector< point > local_only = {point(0, 0)};
 
     all_deltas = local_only;

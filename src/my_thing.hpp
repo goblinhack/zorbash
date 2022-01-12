@@ -374,7 +374,7 @@ public:
   bool enchant_with_stone(Thingp);
   bool equipped_anything(void);
   bool equip(Thingp w, int equip);
-  bool equip_use(bool forced, int equip);
+  bool equip_use(bool forced, int equip, point *at = nullptr);
   bool equip_use_may_attack(int equip);
   bool equip_use_must_attack(int equip);
   bool fall_to_next_level(void);
@@ -450,7 +450,7 @@ public:
   bool spawn_radius_range(Thingp parent, Thingp target, const std::string &what, uint32_t rad_min, uint32_t rad_max);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
-  bool target_attack_best(int equip);
+  bool target_attack_best(int equip, point *at = nullptr);
   bool target_select(Thingp item);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
@@ -1511,7 +1511,7 @@ public:
   int unused_flag182(void);
   int unused_flag183(void);
   int unused_flag184(void);
-  int unused_flag185(void);
+  int is_able_to_move_diagonally(void);
   int unused_flag18(void);
   int unused_flag19(void);
   int unused_flag1(void);
@@ -1824,10 +1824,10 @@ public:
   void dead_(const char *fmt, va_list args); // compile error without
   void dead(const std::string &);
   void dead_scheduled(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-  void dead_scheduled_(const char *fmt, va_list args); // compile error without
+  void dead_scheduled_(const char *fmt, va_list args);
   void dead_scheduled(const std::string &);
   void dead(Thingp defeater, const char *fmt, ...) __attribute__((format(printf, 3, 4)));
-  void dead_(Thingp defeater, const char *fmt, va_list args); // compile error without
+  void dead_(Thingp defeater, const char *fmt, va_list args);
   void dead(Thingp defeater, std::string &);
   void debuff_activate(Thingp what);
   void debuff_deactivate(Thingp what);
@@ -2017,6 +2017,8 @@ public:
   static std::function< int(Thingp) > matches_to_func(const std::string &what);
 
   std::list< Thingp > get_all_followers(void);
+
+  std::pair< Path, Path > astar_solve(const class Goal *goal, char path_debug, point s, point g, const Dmap *d);
 
   ThingInfop  get_or_alloc_infop(void);
   ThingItemsp get_or_alloc_itemsp(void);

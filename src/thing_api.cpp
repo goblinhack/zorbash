@@ -2502,10 +2502,10 @@ int Thing::unused_flag184(void)
   return (tp()->unused_flag184());
 }
 
-int Thing::unused_flag185(void)
+int Thing::is_able_to_move_diagonally(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag185());
+  return (tp()->is_able_to_move_diagonally());
 }
 
 int Thing::is_meltable(void)

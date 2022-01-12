@@ -51,4 +51,3 @@ bool Thing::buff_find_is_aquatic(void)
   }
   return false;
 }
-

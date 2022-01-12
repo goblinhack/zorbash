@@ -532,7 +532,7 @@ private:
   int _unused_flag182 {};
   int _unused_flag183 {};
   int _unused_flag184 {};
-  int _unused_flag185 {};
+  int _is_able_to_move_diagonally {};
   int _is_meltable {};
   int _is_amulet {};
   int _is_able_to_use_amulet {};
@@ -1394,7 +1394,7 @@ public:
   int unused_flag182(void) const { return _unused_flag182; }
   int unused_flag183(void) const { return _unused_flag183; }
   int unused_flag184(void) const { return _unused_flag184; }
-  int unused_flag185(void) const { return _unused_flag185; }
+  int is_able_to_move_diagonally(void) const { return _is_able_to_move_diagonally; }
   int is_meltable(void) const { return _is_meltable; }
   int is_amulet(void) const { return _is_amulet; }
   int is_able_to_use_amulet(void) const { return _is_able_to_use_amulet; }
@@ -2022,7 +2022,7 @@ public:
   void set_unused_flag182(int v) { _unused_flag182 = v; }
   void set_unused_flag183(int v) { _unused_flag183 = v; }
   void set_unused_flag184(int v) { _unused_flag184 = v; }
-  void set_unused_flag185(int v) { _unused_flag185 = v; }
+  void set_is_able_to_move_diagonally(int v) { _is_able_to_move_diagonally = v; }
   void set_is_meltable(int v) { _is_meltable = v; }
   void set_is_amulet(int v) { _is_amulet = v; }
   void set_is_able_to_use_amulet(int v) { _is_able_to_use_amulet = v; }

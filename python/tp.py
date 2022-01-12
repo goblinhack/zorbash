@@ -934,8 +934,8 @@ class Tp:
     def set_unused_flag184(self, value):
         my.tp_set_unused_flag184(self, value)
 
-    def set_unused_flag185(self, value):
-        my.tp_set_unused_flag185(self, value)
+    def set_is_able_to_move_diagonally(self, value):
+        my.tp_set_is_able_to_move_diagonally(self, value)
 
     def set_is_meltable(self, value):
         my.tp_set_is_meltable(self, value)

@@ -1,12 +1,12 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - if I click on a rock to attack then I should attack that rock?                                                                             -->
+<!-- - robot did not collect key and then died in fire                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - level pyramid                                                                                                                              (-->
-<!-- - level fall through to special level ?                                                                                                       -->
+<!-- - level pyramid                                                                                                                              -->
+<!-- - level fall through to special level ?                                                                                                      -->
 <!-- - crystal collection                                                                                                                         -->
 <!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- - char selection                                                                                                                             -->

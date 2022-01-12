@@ -224,8 +224,9 @@ public:
       auto  c       = open_nodes.begin();
       Node *current = c->second;
 
-      set(astar_debug, current->at.x, current->at.y, (char) ('?'));
-      if (current->at == goal) {
+      auto at = current->at;
+      set(astar_debug, at.x, at.y, (char) ('?'));
+      if (at == goal) {
         auto [ path, cost ] = create_path(dmap, current);
 
         if (cost < best.cost) {
@@ -282,12 +283,20 @@ public:
       // Also leads to zig zag paths over chasms that would need
       // optimized.
       //
-#if 0
-      eval_neighbor(me, current, point(-1, -1));
-      eval_neighbor(me, current, point(-1,  1));
-      eval_neighbor(me, current, point( 1, -1));
-      eval_neighbor(me, current, point( 1,  1));
-#endif
+      if (me->is_able_to_move_diagonally()) {
+        if ((get(dmap->val, at.x - 1, at.y) == DMAP_IS_WALL) || (get(dmap->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
+          eval_neighbor(me, current, point(-1, -1));
+        }
+        if ((get(dmap->val, at.x - 1, at.y) == DMAP_IS_WALL) || (get(dmap->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
+          eval_neighbor(me, current, point(-1, 1));
+        }
+        if ((get(dmap->val, at.x + 1, at.y) == DMAP_IS_WALL) || (get(dmap->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
+          eval_neighbor(me, current, point(1, -1));
+        }
+        if ((get(dmap->val, at.x + 1, at.y) == DMAP_IS_WALL) || (get(dmap->val, at.x, at.y + 1) == DMAP_IS_WALL)) {
+          eval_neighbor(me, current, point(1, 1));
+        }
+      }
     }
 
     cleanup();
@@ -333,9 +342,9 @@ void astar_dump(const Dmap *dmap, const point &at, const point &start, const poi
   }
 }
 
-std::pair< Path, Path > astar_solve(Thingp me, const Goal *goal, char path_debug, point s, point g, const Dmap *d)
+std::pair< Path, Path > Thing::astar_solve(const Goal *goal, char path_debug, point s, point g, const Dmap *d)
 {
   char tmp = path_debug;
   auto a   = Astar(s, g, d);
-  return (a.solve(me, goal, &tmp));
+  return (a.solve(this, goal, &tmp));
 }

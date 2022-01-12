@@ -249,13 +249,13 @@ void Charmap::init_charmaps(void)
   c          = &all_charmaps[ char_index ];
   c->c       = char_index;
 
-  char_index     = Charmap::MINION_MOB_EASY;
-  c              = &all_charmaps[ char_index ];
-  c->c           = char_index;
+  char_index             = Charmap::MINION_MOB_EASY;
+  c                      = &all_charmaps[ char_index ];
+  c->c                   = char_index;
   c->is_mob_spawner_easy = true;
 
-  char_index     = Charmap::MINION_MOB_HARD;
-  c              = &all_charmaps[ char_index ];
-  c->c           = char_index;
+  char_index             = Charmap::MINION_MOB_HARD;
+  c                      = &all_charmaps[ char_index ];
+  c->c                   = char_index;
   c->is_mob_spawner_easy = true;
 }

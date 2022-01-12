@@ -70,6 +70,7 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_follow(True)
     mytp.set_is_able_to_jump(True)
     mytp.set_is_able_to_learn_skills(True)
+    mytp.set_is_able_to_move_diagonally(True)
     mytp.set_is_able_to_open_doors(True)
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_able_to_shove(True)

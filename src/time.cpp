@@ -259,4 +259,3 @@ std::string &string_timestamp(void)
   last_timestamp = s;
   return last_timestamp;
 }
-

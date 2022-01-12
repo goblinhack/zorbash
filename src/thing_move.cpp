@@ -450,7 +450,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     dbg("Must attack");
     TRACE_AND_INDENT();
 
-    equip_use(must_attack, MONST_EQUIP_WEAPON);
+    equip_use(must_attack, MONST_EQUIP_WEAPON, &future_pos);
     return false;
   }
 
@@ -488,7 +488,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           game->tick_begin("player tried to attack");
         }
 
-        if (equip_use(must_attack, MONST_EQUIP_WEAPON)) {
+        if (equip_use(must_attack, MONST_EQUIP_WEAPON, &future_pos)) {
           clear_move_path("Attacked");
           return true;
         }

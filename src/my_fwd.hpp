@@ -35,7 +35,7 @@ using LevelStaticp = class LevelStatic *;
 using Levelp       = class Level *;
 using Lightp       = class Light *;
 using ThingInfop   = struct ThingInfo_ *;
-using ThingItemsp   = struct ThingItem_ *;
+using ThingItemsp  = struct ThingItem_ *;
 using ThingAip     = struct ThingAi_ *;
 
 using Roomp  = class Room *;

@@ -36,7 +36,7 @@ void Thing::get_light_power_including_torch_effect(uint8_t &out_light_power)
 {
   TRACE_NO_INDENT();
   int light_power = get_initial_light_power();
-  int torch_count    = get_torch_count();
+  int torch_count = get_torch_count();
 
   if (torch_count < 6) {
     light_power -= 7 - torch_count;

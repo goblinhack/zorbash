@@ -450,7 +450,7 @@ PyObject *thing_unused_flag181(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag182(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag183(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag184(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag185(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_move_diagonally(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_meltable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_amulet(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_amulet(PyObject *obj, PyObject *args, PyObject *keywds);

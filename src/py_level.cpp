@@ -62,12 +62,12 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         if (m.is_floor || m.is_bridge || m.is_corridor || m.is_secret_corridor || m.is_dirt) {
           floor_string += c;
         } else if (m.is_blood || m.is_deep_water || m.is_door || m.is_ascend_dungeon || m.is_descend_dungeon ||
-                   m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_spawner_easy || m.is_mob_spawner_hard ||
-                   m.is_gold || m.is_key || m.is_lava || m.is_monst_easy || m.is_monst_med || m.is_monst_hard ||
-                   m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a || m.is_treasure_class_b ||
-                   m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
-                   m.is_potion || m.is_wand || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel ||
-                   m.is_trap || m.is_shallow_water || m.is_deep_water || m.is_floor_deco) {
+                   m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_spawner_easy ||
+                   m.is_mob_spawner_hard || m.is_gold || m.is_key || m.is_lava || m.is_monst_easy || m.is_monst_med ||
+                   m.is_monst_hard || m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a ||
+                   m.is_treasure_class_b || m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b ||
+                   m.is_weapon_class_c || m.is_potion || m.is_wand || m.is_ring || m.is_secret_door || m.is_brazier ||
+                   m.is_barrel || m.is_trap || m.is_shallow_water || m.is_deep_water || m.is_floor_deco) {
           floor_string += Charmap::FLOOR;
         } else {
           floor_string += Charmap::SPACE;
@@ -739,7 +739,7 @@ LEVEL_BODY_GET_BOOL_AT(level_unused_flag181_at, unused_flag181)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag182_at, unused_flag182)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag183_at, unused_flag183)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag184_at, unused_flag184)
-LEVEL_BODY_GET_BOOL_AT(level_unused_flag185_at, unused_flag185)
+LEVEL_BODY_GET_BOOL_AT(level_is_able_to_move_diagonally_at, is_able_to_move_diagonally)
 LEVEL_BODY_GET_BOOL_AT(level_is_meltable_at, is_meltable)
 LEVEL_BODY_GET_BOOL_AT(level_is_amulet_at, is_amulet)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_use_amulet_at, is_able_to_use_amulet)

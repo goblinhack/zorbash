@@ -34,7 +34,6 @@ static int wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
 
 void wid_inventory_fini(void)
 {
-  TRACE_AND_INDENT();
   DBG("Close inventory");
   TRACE_AND_INDENT();
 
@@ -60,17 +59,17 @@ void wid_inventory_fini(void)
 
 bool wid_inventory_init(void)
 {
+  DBG3("Inventory: Init inventory");
   TRACE_AND_INDENT();
-  DBG("Init inventory");
-  TRACE_AND_INDENT();
+
   return wid_inventory_create(nullptr, nullptr);
 }
 
 uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
   DBG3("Inventory: open");
   TRACE_AND_INDENT();
+
   if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
@@ -84,16 +83,15 @@ uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t butt
 
 static uint8_t wid_right_bar_inventory_close(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
   DBG3("Inventory: close");
   TRACE_AND_INDENT();
+
   wid_inventory_fini();
   return true;
 }
 
 static void wid_inventory_mouse_over_tab_bag1(Widp w, int32_t x, int32_t y, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
   DBG3("Inventory: bag1");
   TRACE_AND_INDENT();
 
@@ -115,7 +113,6 @@ static void wid_inventory_mouse_over_tab_bag1(Widp w, int32_t x, int32_t y, int3
 
 static void wid_inventory_mouse_over_tab_bag2(Widp w, int32_t x, int32_t y, int32_t wheelx, int32_t wheely)
 {
-  TRACE_AND_INDENT();
   DBG3("Inventory: bag2");
   TRACE_AND_INDENT();
 
@@ -137,7 +134,9 @@ static void wid_inventory_mouse_over_tab_bag2(Widp w, int32_t x, int32_t y, int3
 
 static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
 {
+  DBG3("Inventory: key down");
   TRACE_AND_INDENT();
+
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -163,8 +162,7 @@ static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
-  DBG3("Item options use");
+  DBG3("Inventory: Item options use");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -201,8 +199,7 @@ static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint3
 
 static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
-  DBG3("Item options eat");
+  DBG3("Inventory: Item options eat");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -240,8 +237,7 @@ static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint3
 
 static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
-  DBG3("Item options throw");
+  DBG3("Inventory: Item options throw");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -278,8 +274,7 @@ static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uin
 
 static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  TRACE_AND_INDENT();
-  DBG3("Item options drop");
+  DBG3("Inventory: Item options drop");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -312,7 +307,9 @@ static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint
 
 static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
 {
+  DBG3("Inventory: Item options key up");
   TRACE_AND_INDENT();
+
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -528,6 +525,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
 
 void wid_inventory_over_requested(Thingp over)
 {
+  TRACE_NO_INDENT();
   if (over == wid_inventory_thing_over) {
     return;
   }
@@ -537,6 +535,7 @@ void wid_inventory_over_requested(Thingp over)
 
 void wid_inventory_select_requested(Thingp selected)
 {
+  TRACE_NO_INDENT();
   if (selected == wid_inventory_thing_selected) {
     return;
   }
@@ -546,6 +545,7 @@ void wid_inventory_select_requested(Thingp selected)
 
 bool wid_inventory_over(Thingp over)
 {
+  TRACE_NO_INDENT();
   if (over == wid_inventory_thing_over) {
     return true;
   }
@@ -554,6 +554,7 @@ bool wid_inventory_over(Thingp over)
 
 bool wid_inventory_select(Thingp selected)
 {
+  TRACE_NO_INDENT();
   if (selected == wid_inventory_thing_selected) {
     return true;
   }
@@ -562,6 +563,7 @@ bool wid_inventory_select(Thingp selected)
 
 static void wid_slot_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
+  TRACE_NO_INDENT();
   if (game->in_transit_item) {
     return;
   }
@@ -590,6 +592,7 @@ static void wid_slot_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, i
 
 static void wid_slot_item_mouse_over_end(Widp w)
 {
+  TRACE_NO_INDENT();
   if (game->in_transit_item) {
     return;
   }
@@ -600,9 +603,9 @@ static void wid_slot_item_mouse_over_end(Widp w)
 
 static uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
 {
+  DBG3("Inventory: Mouse down, item select");
   TRACE_AND_INDENT();
-  DBG3("Mouse down, item select");
-  TRACE_AND_INDENT();
+
   if (game->in_transit_item) {
     return false;
   }
@@ -624,6 +627,7 @@ static uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t but
 static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const char *wid_name,
                                     const char *tile_name)
 {
+  TRACE_NO_INDENT();
   auto w = wid_new_square_button(parent, wid_name);
   wid_set_pos(w, tl, br);
 
@@ -673,12 +677,12 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
 
 static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const char *wid_name)
 {
+  TRACE_NO_INDENT();
   wid_inventory_add_equip(parent, equip, tl, br, wid_name, wid_name);
 }
 
 bool wid_inventory_create(Thingp selected, Thingp over)
 {
-  TRACE_AND_INDENT();
   DBG("Create inventory");
   TRACE_AND_INDENT();
 

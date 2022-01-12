@@ -61,6 +61,7 @@ def tp_init(name, text_name):
     mytp.set_hunger_is_insatiable(True)
     mytp.set_is_able_to_change_levels(True)
     mytp.set_is_able_to_fall(True)
+    mytp.set_is_able_to_move_diagonally(True)
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_able_to_shove(True)
     mytp.set_is_attackable_by_monst(True)

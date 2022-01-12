@@ -495,10 +495,10 @@ static std::vector< point > dmap_solve_(const Dmap *D, const point start, const 
       }
 
       //
-      // Don't allow diagonal shortcuts if an obstacle would be
-      // crossed in an adjacent tile
+      // Don't allow diagonal shortcuts if an obstacle would be crossed in an adjacent tile
+      // Yes, this should be a not check to allow the player to move diagonally.
       //
-      if (allow_diagonals) {
+      if (! allow_diagonals) {
         if (d.x < 0) {
           if (d.y < 0) {
             if ((get(D->val, at.x - 1, at.y) == DMAP_IS_WALL) || (get(D->val, at.x, at.y - 1) == DMAP_IS_WALL)) {
