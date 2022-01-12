@@ -111,6 +111,8 @@ static uint8_t game_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
+              case SDLK_RETURN :
+              case ' ' :
               case 'n' : game_menu_new_game(nullptr, 0, 0, 0); return true;
               case 'l' : game_main_menu_load_game(nullptr, 0, 0, 0); return true;
               case 'o' : game_main_menu_config(nullptr, 0, 0, 0); return true;
