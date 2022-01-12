@@ -666,7 +666,9 @@ static uint8_t game_dungeons_key_up(Widp w, const struct SDL_Keysym *key)
               case 'c' : game_dungeons_choose_seed(nullptr, 0, 0, 0); return true;
               case 'r' : game_dungeons_random(nullptr, 0, 0, 0); return true;
               case 'e' : game_dungeons_enter(nullptr, 0, 0, 0); return true;
-              case ' ' : game_dungeons_enter(nullptr, 0, 0, 0); return true;
+              case SDLK_RETURN :
+              case ' ' :
+              case 'n' : game_dungeons_enter(nullptr, 0, 0, 0); return true;
               case 'b' :
               case 'q' :
               case SDLK_ESCAPE : game_dungeons_go_back(nullptr, 0, 0, 0); return true;
