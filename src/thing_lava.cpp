@@ -17,7 +17,11 @@ void Thing::lava_tick(void)
 {
   TRACE_NO_INDENT();
 
-  if (! environ_avoids_fire()) {
+  if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
+    //
+    // Keep going
+    //
+  } else if (! environ_avoids_fire()) {
     return;
   }
 
