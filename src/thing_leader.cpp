@@ -324,18 +324,8 @@ bool Thing::same_leader(Thingp it)
     return false;
   }
 
-  //
-  // Monster checks so things like lasers do not think they are part of a team
-  // with the firer the leader. If you remove this check lightning can still
-  // hit the firer.
-  //
-  if (! is_monst()) {
-    return false;
-  }
-
-  if (! it->is_monst()) {
-    return false;
-  }
+  auto my_owner  = get_top_owner();
+  auto its_owner = it->get_top_owner();
 
   if (! is_interesting()) {
     return false;
@@ -345,8 +335,31 @@ bool Thing::same_leader(Thingp it)
     return false;
   }
 
-  auto   my_owner  = get_top_owner();
-  auto   its_owner = it->get_top_owner();
+  //
+  // Monster checks so things like lasers do not think they are part of a team
+  // with the firer the leader. If you remove this check lightning can still
+  // hit the firer.
+  //
+  if (! is_monst()) {
+    if (my_owner && my_owner->is_monst()) {
+      //
+      // Allow this; a sword being swung by a team member
+      //
+    } else {
+      return false;
+    }
+  }
+
+  if (! it->is_monst()) {
+    if (its_owner && its_owner->is_monst()) {
+      //
+      // Allow this; a sword being swung by a team member
+      //
+    } else {
+      return false;
+    }
+  }
+
   Thingp me;
 
   if (my_owner) {
@@ -366,16 +379,12 @@ bool Thing::same_leader(Thingp it)
   Thingp my_leader  = me->get_leader();
   Thingp its_leader = it->get_leader();
 
-#if 0
-  me->con("me");
-  it->con("it");
   if (my_leader) {
-    my_leader->con("my leader");
+    log("my leader: %s", my_leader->to_short_string().c_str());
   }
   if (its_leader) {
-    its_leader->con("its leader");
+    log("its leader: %s", its_leader->to_short_string().c_str());
   }
-#endif
 
   if (my_leader && (my_leader == it)) {
     return true;
