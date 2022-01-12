@@ -131,6 +131,12 @@ int Thing::get_stat_def_total(void)
     dbg("AC: with (stuck count %d): %d", get_stuck_count(), stat);
   }
 
+  stat -= get_idle_count();
+  if (stat != prev) {
+    prev = stat;
+    dbg("AC: with (idle count %d): %d", get_stuck_count(), stat);
+  }
+
   //
   // Terrain penalties
   //

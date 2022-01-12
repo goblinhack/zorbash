@@ -61,29 +61,43 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
   *target_overlaps = false;
 
   for (auto &cand : thing_colls) {
+    auto t = cand.target;
+
     //
     // Don't be silly and hit yourself.
     //
-    if (cand.target == me) {
+    if (t == me) {
       continue;
     }
 
-    dbg("Candidate: %s", cand.target->to_string().c_str());
+    dbg("Collision-candidate: %s", t->to_string().c_str());
 
     //
     // Skip things that aren't really hitable.
     //
-    if (cand.target->tp()->gfx_equip_carry_anim()) {
+    if (t->tp()->gfx_equip_carry_anim()) {
       if (is_loggable()) {
-        dbg("Ignore %s skip, not hittable", cand.target->to_string().c_str());
+        dbg("Collision-candidate: Ignore %s skip, not hittable", t->to_string().c_str());
       }
       continue;
     }
 
     if (! cand.priority) {
       if (is_loggable()) {
-        dbg("Ignore %s low priority", cand.target->to_string().c_str());
+        dbg("Collision-candidate: Ignore %s low priority", t->to_string().c_str());
       }
+      continue;
+    }
+
+    if (t->is_dead || t->is_dying) {
+      if (! can_eat(t)) {
+        dbg2("Collision-candidate: %s no dead or dying", t->to_short_string().c_str());
+        continue;
+      }
+    }
+
+    if (same_mob(t) || same_leader(t)) {
+      dbg2("Collision-candidate: %s no same leader", t->to_short_string().c_str());
       continue;
     }
 
@@ -98,7 +112,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
       //
       best = &cand;
       if (is_loggable()) {
-        dbg("Add %s", cand.target->to_string().c_str());
+        dbg("Collision-candidate: Add %s", t->to_string().c_str());
       }
     } else if (cand.priority == best->priority) {
       //
@@ -113,12 +127,12 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
       if (dist_cand < dist_best) {
         best = &cand;
         if (is_loggable()) {
-          dbg("Add %s", cand.target->to_string().c_str());
+          dbg("Collision-candidate: Add %s", t->to_string().c_str());
         }
       }
     } else {
       if (is_loggable()) {
-        dbg("Ignore %s", cand.target->to_string().c_str());
+        dbg("Collision-candidate: Ignore %s", t->to_string().c_str());
       }
     }
   }
