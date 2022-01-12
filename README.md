@@ -10,6 +10,7 @@
 <!-- - crystal collection                                                                                                                         -->
 <!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- - char selection                                                                                                                             -->
+<!-- - num pad                                                                                                                                    -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
