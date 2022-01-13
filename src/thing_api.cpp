@@ -5976,13 +5976,13 @@ int Thing::get_light_power(void)
 
   uint8_t light_power = get_infop()->light_power;
 
-  if (! light_power) {
-    light_power = get_initial_light_power();
+  if (is_player()) {
+    light_power = 0;
   }
 
   get_light_power_including_torch_effect(light_power);
-
   get_infop()->light_power = light_power;
+
   return light_power;
 }
 
@@ -6001,10 +6001,12 @@ int Thing::update_light_power(void)
   }
 
   if (is_player()) {
-    update_light_power_including_torch_effect(light_power);
+    light_power = 0;
   }
 
+  update_light_power_including_torch_effect(light_power);
   get_infop()->light_power = light_power;
+
   return light_power;
 }
 

@@ -35,11 +35,24 @@ int Thing::get_torch_count(void)
 void Thing::get_light_power_including_torch_effect(uint8_t &out_light_power)
 {
   TRACE_NO_INDENT();
-  int light_power = get_initial_light_power();
-  int torch_count = get_torch_count();
 
-  if (torch_count < 6) {
-    light_power -= 7 - torch_count;
+  static Tpp torch;
+  if (! torch) {
+    torch = tp_find("torch");
+  }
+
+  int light_power = get_initial_light_power();
+
+  if (is_player()) {
+    light_power = 0;
+  }
+
+  int torch_count = get_torch_count();
+  light_power += torch->light_power() * torch_count;
+
+  auto max_distance = tp()->distance_vision();
+  if (light_power > max_distance) {
+    light_power = max_distance;
   }
 
   if (torch_count == 0) {

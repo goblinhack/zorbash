@@ -185,6 +185,8 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
         msg("%%fg=red$%s shoves you into the depths!%%fg=reset$", text_The().c_str());
       } else if (level->is_fire(shove_pos)) {
         msg("%%fg=red$%s shoves you into the flames!%%fg=reset$", text_The().c_str());
+      } else if (level->is_spiderweb(shove_pos)) {
+        msg("%%fg=red$%s shoves you into the sticky web!%%fg=reset$", text_The().c_str());
       } else if (it->is_dead) {
         msg("%s kicks your corpse for fun!", text_The().c_str());
       } else {

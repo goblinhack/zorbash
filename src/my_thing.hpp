@@ -1910,8 +1910,8 @@ public:
   void new_aip(void);
   void new_infop(void);
   void new_itemsp(void);
-  void new_light(point offset, int strength);
-  void new_light(point offset, int strength, color col, int fbo);
+  void new_light(point offset, int light_power);
+  void new_light(point offset, int light_power, float scale, color col, int fbo);
   void notify_followers_of_death_of_my_leader(void);
   void notify_of_death_of_my_leader(void);
   void on_born(void);
