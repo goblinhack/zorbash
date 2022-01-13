@@ -9,7 +9,7 @@ def on_lifespan_tick(owner, me, x, y):
 
 def tp_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
-    mytp.set_charge_count(4)
+    mytp.set_charge_count(10)
     mytp.set_collision_hit_priority(1)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)
@@ -32,9 +32,9 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_wooden(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_lifespan_dice("1d300+100")
+    mytp.set_lifespan_dice("1d3")
     mytp.set_light_color("orange")
-    mytp.set_light_power(2)
+    mytp.set_light_power(1)
     mytp.set_long_text_description("A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
     mytp.set_normal_placement_rules(True)
     mytp.set_on_lifespan_tick_do("me.on_lifespan_tick()")

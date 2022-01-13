@@ -104,19 +104,18 @@ void Light::draw_line(int16_t index, const point &p0, const point &p1)
   }
 }
 
-Lightp light_new(Thingp owner, point offset, int light_power, color col, int fbo)
+Lightp light_new(Thingp owner, point offset, int light_power, float scale, color col, int fbo)
 {
   TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
   l->offset           = offset;
-  l->light_power      = light_power;
   l->light_power_orig = light_power;
   l->owner            = owner;
   l->col              = col;
   l->fbo              = fbo;
 
-  l->update_light_scale(1.0);
+  l->update_light_scale(scale);
 
   // log("Created");
   return (l);
@@ -128,7 +127,6 @@ Lightp light_new(Thingp owner, point offset, int light_power)
   auto l = new Light(); // std::make_shared< class Light >();
 
   l->offset           = offset;
-  l->light_power      = light_power;
   l->light_power_orig = light_power;
   l->owner            = owner;
   l->ray_cast_only    = true;
@@ -143,16 +141,14 @@ Lightp light_new(Thingp owner, point offset, int light_power)
 void Light::update_light_scale(float scale)
 {
   TRACE_AND_INDENT();
-  light_power = (float) light_power_orig * TILE_WIDTH * scale;
+  light_scale      = scale;
+  light_power_curr = light_power_orig * light_scale * (float) TILE_WIDTH;
   update();
 }
 
 void Light::update(void)
 {
   TRACE_AND_INDENT();
-  if (! light_power) {
-    DIE("no light light_power set");
-  }
 
   level          = owner->level;
   max_light_rays = LIGHT_MAX_RAYS;
@@ -167,7 +163,7 @@ void Light::update(void)
   for (auto i = 0; i < max_light_rays; i++) {
     double cosr, sinr;
     sincos(dr * i, &sinr, &cosr);
-    draw_line(i, point(0, 0), point(light_power * cosr, light_power * sinr));
+    draw_line(i, point(0, 0), point(light_power_curr * cosr, light_power_curr * sinr));
   }
 }
 
@@ -256,7 +252,7 @@ bool Light::calculate(void)
   // Walk the light rays in a circle. Find the nearest walls and then let
   // the light leak a little.
   //
-  auto d = (light_power / TILE_WIDTH) + 1;
+  auto d = (light_power_curr / TILE_WIDTH) + 1;
   if (likely(((player->curr_at.x >= d) && (player->curr_at.x <= MAP_WIDTH - d) && (player->curr_at.y >= d) &&
               (player->curr_at.y <= MAP_HEIGHT - d)))) {
     //
@@ -274,7 +270,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > light_power)) {
+          if (unlikely(rp->distance > light_power_curr)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -340,7 +336,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > light_power)) {
+          if (unlikely(rp->distance > light_power_curr)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -395,7 +391,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > light_power)) {
+          if (unlikely(rp->distance > light_power_curr)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -461,7 +457,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > light_power)) {
+          if (unlikely(rp->distance > light_power_curr)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -721,7 +717,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           }
 
           auto  mid = (blit_br + blit_tl) / 2;
-          float s   = l->light_power;
+          float s   = l->light_power_curr;
           if (t->gfx_flickers()) {
             s -= (((float) non_pcg_random_range(0, 5)) / 10.0);
           }
@@ -793,7 +789,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
             }
           }
 
-          auto  s   = l->light_power + l->flicker;
+          auto  s   = l->light_power_curr + l->flicker;
           auto  mid = (blit_br + blit_tl) / 2;
           auto  tlx = mid.x - s;
           auto  tly = mid.y - s;

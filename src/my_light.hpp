@@ -36,8 +36,9 @@ public:
   point cached_light_pos;
   point cached_pixel_map_at;
 
-  int16_t light_power_orig {}; // Initial light_power
-  int16_t light_power {};      // Current torch light_power
+  float   light_scale {};      // Light_scale
+  int16_t light_power_curr {}; // Current torch light_power
+  int16_t light_power_orig {}; // Original torch light_power
 
   uint16_t flicker {};
   uint16_t max_light_rays {};
@@ -70,7 +71,7 @@ public:
   void update(void);
 };
 
-extern Lightp light_new(Thingp owner, point offset, int light_power, color col, int fbo);
+extern Lightp light_new(Thingp owner, point offset, int light_power, float light_scale, color col, int fbo);
 
 extern Lightp light_new(Thingp owner, point offset, int light_power);
 

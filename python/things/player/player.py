@@ -320,7 +320,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_is_red_blooded(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
-    mytp.set_light_power(8)
+    mytp.set_light_power(10)
     mytp.set_long_text_description("Our most noble adventurer of no particular race or gender or creed. Devoid of fear and stout of heart. Likes kittens.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_on_born_do("player.on_born()")

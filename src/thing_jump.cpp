@@ -178,9 +178,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         IF_DEBUG2 { log("No, is not lit or visited"); }
 
         if (is_player()) {
-          msg("You can't jump into the unknown.");
+          msg("You can't jump into the unlit regions.");
         }
-        dbg("You can't jump into the unknown.");
+        dbg("You can't jump into the unlit regions.");
         return false;
       }
     }
