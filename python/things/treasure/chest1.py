@@ -3,15 +3,15 @@ import tp
 
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    my.sound_play(f"door_hit{my.non_pcg_randint(1, 2)}")
+    my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, f"door_hit{my.non_pcg_randint(1, 2)}")
 
 
 def on_death(me, x, y):
-    my.sound_play("door_break")
+    my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "door_break")
 
 
 def on_open(me, x, y):
-    my.sound_play("door_open")
+    my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "door_open")
 
 
 def tp_init(name, text_name):

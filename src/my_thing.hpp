@@ -657,8 +657,6 @@ public:
   float get_distance_recruitment_max(point p);
   float get_distance_recruitment_max(void);
   float get_distance_throw(void);
-  float get_distance_to_player(void);
-  float get_distance_to_player_on_different_level(void);
   float get_distance_vision(void);
   float get_fadeup_fade(void);
   float get_fadeup_height(void);
@@ -764,6 +762,8 @@ public:
   int decr_keys(void);
   int decr_lifespan(int);
   int decr_lifespan(void);
+  int decr_prev_light_power(int);
+  int decr_prev_light_power(void);
   int decr_light_power(int);
   int decr_light_power(void);
   int decr_minion_count(int);
@@ -901,6 +901,8 @@ public:
   int get_danger_current_level(void);
   int get_danger_initial_level(Thingp);
   int get_danger_initial_level(void);
+  int get_distance_to_player_on_different_level(void);
+  int get_distance_to_player(void);
   int get_enchant_max(void);
   int get_enchantstone_count(void);
   int get_enchant(void);
@@ -929,6 +931,7 @@ public:
   int get_on_idle_tick_frequency(void);
   int get_owned_count(void);
   int get_poisoned_amount(void);
+  int get_prev_light_power(void);
   int get_resurrect(void);
   int get_score(void);
   int get_skillstone_count(void);
@@ -1019,6 +1022,8 @@ public:
   int incr_necrotized_amount(int);
   int incr_necrotized_amount(void);
   int incr_owned_count(int);
+  int incr_prev_light_power(int);
+  int incr_prev_light_power(void);
   int incr_owned_count(void);
   int incr_poisoned_amount(int);
   int incr_poisoned_amount(void);
@@ -1384,6 +1389,7 @@ public:
   int set_idle_count(int);
   int set_keys(int);
   int set_lifespan(int);
+  int set_prev_light_power(int);
   int set_light_power(int);
   int set_minion_count(int);
   int set_necrotized_amount(int);
@@ -1911,7 +1917,7 @@ public:
   void new_infop(void);
   void new_itemsp(void);
   void new_light(point offset, int light_power);
-  void new_light(point offset, int light_power, float scale, color col, int fbo);
+  void new_light(point offset, int light_power, int light_delta, color col, int fbo);
   void notify_followers_of_death_of_my_leader(void);
   void notify_of_death_of_my_leader(void);
   void on_born(void);
@@ -2031,6 +2037,12 @@ public:
   ThingInfop  get_infop(void);
   ThingItemsp get_itemsp(void);
   ThingAip    get_aip(void);
+
+  bool target_attack_best_attempt_1(Thingp item, point at, std::vector< point > &all_deltas);
+  bool target_attack_best_attempt_2(Thingp item, point at, std::vector< point > &all_deltas);
+  bool target_attack_best_attempt_3(Thingp item, point at, std::vector< point > &all_deltas);
+  bool target_attack_best_attempts(Thingp item, point at, std::vector< point > &all_deltas);
+  bool target_attack_best_attempts(Thingp item, point at);
 
 } Thing;
 

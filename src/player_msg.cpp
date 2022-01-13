@@ -82,6 +82,11 @@ void Thing::msg(const char *fmt, ...)
     return;
   }
 
+  int distance = get_distance_to_player();
+  if (distance >= DMAP_IS_PASSABLE) {
+    return;
+  }
+
   va_start(args, fmt);
   ::topcon_(fmt, args);
   va_end(args);

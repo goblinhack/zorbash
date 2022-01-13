@@ -14,7 +14,7 @@ def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_blast_max_radius(2)
     mytp.set_collision_check(True)
-    mytp.set_is_interesting(True)
+    mytp.set_is_tmp_thing(True)
     mytp.set_is_laser(True)
     mytp.set_is_loggable(True)
     mytp.set_is_no_tile(True)

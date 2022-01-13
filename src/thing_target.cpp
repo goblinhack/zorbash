@@ -33,65 +33,8 @@ bool Thing::target_select(Thingp item)
 // Find the best thing to attack. Look at our current direction and if nothing
 // in that path, look around for something else.
 //
-bool Thing::target_attack_best(int equip, point *at)
+bool Thing::target_attack_best_attempt_1(Thingp item, point at, std::vector< point > &all_deltas)
 {
-  if (at) {
-    dbg("Target-attack-best: Try to attack with equpped item at %s", at->to_string().c_str());
-  } else {
-    dbg("Target-attack-best: Try to attack with equpped item");
-  }
-  TRACE_AND_INDENT();
-
-  int  dx, dy;
-  auto item = get_equip(equip);
-  if (! item) {
-    auto d = dir_to_direction();
-    dx     = d.x;
-    dy     = d.y;
-  } else {
-    get_equip_use_offset(&dx, &dy, equip);
-  }
-
-  bool target_attacked = false;
-  bool target_overlaps = false;
-  auto hit_at          = curr_at + point(dx, dy);
-
-  dbg("Target-attack-best: Attack delta %d,%d", dx, dy);
-  TRACE_AND_INDENT();
-
-  //
-  // Lunge at the target
-  //
-  decr_stamina();
-
-  //
-  // Look in the chosen dir first for something to hit, then behind us.
-  //
-  std::vector< point > all_deltas = {
-      point(dx, dy), point(-dx, -dy), point(-1, -1), point(1, -1), point(-1, 1), point(1, 1),
-      point(0, -1),  point(-1, 0),    point(1, 0),   point(0, 1),  point(0, 0), // For spiderwebs
-  };
-
-  //
-  // If stuck in a web we can only hit the web
-  //
-  if (level->is_spiderweb(curr_at)) {
-    std::vector< point > local_only = {point(0, 0)};
-
-    all_deltas = local_only;
-  }
-
-  //
-  // If we clicked on a target we must attack only there.
-  // If we pressed space then the target is where we are at, so look around
-  // for the best thing to hit.
-  //
-  if (at && (*at != curr_at)) {
-    std::vector< point > local_only = {point(0, 0)};
-
-    all_deltas = local_only;
-  }
-
   bool   found_best {};
   point  best_hit_at;
   int    best_priority = -999;
@@ -99,12 +42,13 @@ bool Thing::target_attack_best(int equip, point *at)
 
   dbg2("Target-attack-best: Try to find something to attack, attempt 1");
   TRACE_AND_INDENT();
-  for (const auto &d : all_deltas) {
-    auto hit_at = curr_at + point(d.x, d.y);
 
+  for (const auto &d : all_deltas) {
     //
     // Find the alternative best thing to hit
     //
+    auto hit_at = at + d;
+
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
@@ -151,7 +95,7 @@ bool Thing::target_attack_best(int equip, point *at)
       if (prio > best_priority) {
         dbg2("Target-attack-best: %s is best prio %d", t->to_short_string().c_str(), prio);
         best_priority = prio;
-        best_hit_at   = hit_at;
+        best_hit_at   = at;
         best          = t;
         found_best    = true;
       }
@@ -160,11 +104,12 @@ bool Thing::target_attack_best(int equip, point *at)
   }
 
   if (found_best) {
-    target_attacked = false;
-    target_overlaps = false;
+    bool target_attacked = false;
+    bool target_overlaps = false;
 
     dbg2("Target-attack-best: Best target to hit is %s", best->to_string().c_str());
     TRACE_AND_INDENT();
+
     if (item) {
       if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
@@ -178,20 +123,25 @@ bool Thing::target_attack_best(int equip, point *at)
     }
   }
 
-  //
-  // Try again but include doors
-  //
-  found_best    = false;
-  best_priority = -999;
+  return false;
+}
+
+bool Thing::target_attack_best_attempt_2(Thingp item, point at, std::vector< point > &all_deltas)
+{
+  bool   found_best {};
+  point  best_hit_at;
+  int    best_priority = -999;
+  Thingp best          = nullptr;
 
   dbg2("Target-attack-best: Try to find something to attack, attempt 2");
   TRACE_AND_INDENT();
-  for (const auto &d : all_deltas) {
-    auto hit_at = curr_at + point(d.x, d.y);
 
+  for (const auto &d : all_deltas) {
     //
     // Find the alternative best thing to hit
     //
+    auto hit_at = at + d;
+
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
@@ -249,11 +199,12 @@ bool Thing::target_attack_best(int equip, point *at)
   }
 
   if (found_best) {
-    target_attacked = false;
-    target_overlaps = false;
+    bool target_attacked = false;
+    bool target_overlaps = false;
 
-    dbg2("Target-attack-best: Best target (2nd try) to hit is %s", best->to_string().c_str());
+    dbg2("Target-attack-best: Best target to hit is %s", best->to_string().c_str());
     TRACE_AND_INDENT();
+
     if (item) {
       if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
@@ -267,20 +218,25 @@ bool Thing::target_attack_best(int equip, point *at)
     }
   }
 
-  //
-  // Try again for anything we might want to hit.
-  //
-  found_best    = false;
-  best_priority = -999;
+  return false;
+}
+
+bool Thing::target_attack_best_attempt_3(Thingp item, point at, std::vector< point > &all_deltas)
+{
+  bool   found_best {};
+  point  best_hit_at;
+  int    best_priority = -999;
+  Thingp best          = nullptr;
 
   dbg2("Target-attack-best: Try to find something to attack, attempt 3");
   TRACE_AND_INDENT();
-  for (const auto &d : all_deltas) {
-    auto hit_at = curr_at + point(d.x, d.y);
 
+  for (const auto &d : all_deltas) {
     //
     // Find the alternative best thing to hit
     //
+    auto hit_at = at + d;
+
     FOR_ALL_COLLISION_THINGS(level, t, hit_at.x, hit_at.y)
     {
       int prio = t->collision_hit_priority();
@@ -329,11 +285,12 @@ bool Thing::target_attack_best(int equip, point *at)
   }
 
   if (found_best) {
-    target_attacked = false;
-    target_overlaps = false;
+    bool target_attacked = false;
+    bool target_overlaps = false;
 
-    dbg2("Target-attack-best: Best target (3rd try) to hit is %s", best->to_string().c_str());
+    dbg2("Target-attack-best: Best target to hit is %s", best->to_string().c_str());
     TRACE_AND_INDENT();
+
     if (item) {
       if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
         lunge(best_hit_at);
@@ -347,9 +304,96 @@ bool Thing::target_attack_best(int equip, point *at)
     }
   }
 
+  return false;
+}
+
+bool Thing::target_attack_best_attempts(Thingp item, point at, std::vector< point > &all_deltas)
+{
+  if (target_attack_best_attempt_1(item, curr_at, all_deltas)) {
+    return true;
+  }
+  if (target_attack_best_attempt_2(item, curr_at, all_deltas)) {
+    return true;
+  }
+  if (target_attack_best_attempt_3(item, curr_at, all_deltas)) {
+    return true;
+  }
+  return false;
+}
+
+bool Thing::target_attack_best_attempts(Thingp item, point at)
+{
+  std::vector< point > local_only = {point(0, 0)};
+  return target_attack_best_attempts(item, at, local_only);
+}
+
+bool Thing::target_attack_best(int equip, point *at)
+{
+  if (at) {
+    dbg("Target-attack-best: Try to attack with equpped item at %s", at->to_string().c_str());
+  } else {
+    dbg("Target-attack-best: Try to attack with equpped item");
+  }
+  TRACE_AND_INDENT();
+
+  int  dx, dy;
+  auto item = get_equip(equip);
+  if (! item) {
+    auto d = dir_to_direction();
+    dx     = d.x;
+    dy     = d.y;
+  } else {
+    get_equip_use_offset(&dx, &dy, equip);
+  }
+
+  bool target_attacked = false;
+  bool target_overlaps = false;
+
+  dbg("Target-attack-best: Attack delta %d,%d", dx, dy);
+  TRACE_AND_INDENT();
+
+  //
+  // Lunge at the target
+  //
+  decr_stamina();
+
+  //
+  // Look in the chosen dir first for something to hit, then behind us.
+  //
+  std::vector< point > all_deltas = {
+      point(dx, dy), point(-dx, -dy), point(-1, -1), point(1, -1), point(-1, 1), point(1, 1),
+      point(0, -1),  point(-1, 0),    point(1, 0),   point(0, 1),  point(0, 0), // For spiderwebs
+  };
+
+  //
+  // If stuck in a web we can only hit the web
+  //
+  if (level->is_spiderweb(curr_at)) {
+    std::vector< point > local_only = {point(0, 0)};
+
+    all_deltas = local_only;
+  }
+
+  //
+  // If we clicked on a target we must attack only there.
+  // If we pressed space then the target is where we are at, so look around
+  // for the best thing to hit.
+  //
+  if (at && (*at != curr_at)) {
+    auto                 delta      = *at - curr_at;
+    std::vector< point > local_only = {delta};
+
+    all_deltas = local_only;
+  }
+
+  if (target_attack_best_attempts(item, curr_at, all_deltas)) {
+    return true;
+  }
+
   //
   // Last resort where we just try and hit where we are pointing.
   //
+  auto hit_at = curr_at + point(dx, dy);
   if (item) {
     dbg("Target-attack-best: Have equip item %s", item->to_short_string().c_str());
     TRACE_AND_INDENT();

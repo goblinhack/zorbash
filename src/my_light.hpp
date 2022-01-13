@@ -21,7 +21,6 @@ typedef struct {
 
 class Light
 {
-private:
 public:
   Light(void);
   ~Light(void);
@@ -36,9 +35,11 @@ public:
   point cached_light_pos;
   point cached_pixel_map_at;
 
-  float   light_scale {};      // Light_scale
-  int16_t light_power_curr {}; // Current torch light_power
-  int16_t light_power_orig {}; // Original torch light_power
+  float light_scale {};      // Light_scale
+  int   light_power_curr {}; // Current torch light_power
+  int   light_power_orig {}; // Original torch light_power
+  int   light_power_actual {};
+  int   light_power_delta {};
 
   uint16_t flicker {};
   uint16_t max_light_rays {};
@@ -71,7 +72,7 @@ public:
   void update(void);
 };
 
-extern Lightp light_new(Thingp owner, point offset, int light_power, float light_scale, color col, int fbo);
+extern Lightp light_new(Thingp owner, point offset, int light_power, int light_power_delta, color col, int fbo);
 
 extern Lightp light_new(Thingp owner, point offset, int light_power);
 

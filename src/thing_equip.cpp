@@ -550,7 +550,11 @@ void Thing::equip_remove_anim(int equip)
 
 bool Thing::equip_use(bool forced, int equip, point *at)
 {
-  dbg("Try to use equipped item");
+  if (at) {
+    dbg("Try to use equipped item at %s", at->to_string().c_str());
+  } else {
+    dbg("Try to use equipped item");
+  }
   TRACE_AND_INDENT();
 
   if (get_equip_id_use_anim(equip).ok()) {

@@ -452,6 +452,9 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
         if (it->is_toughness_soft()) {
           dbg("Overlaps; barrel can splat soft monst");
           return false;
+        } else if (it->is_flying()) {
+          dbg("Overlaps; barrel can splat flying monst");
+          return false;
         } else if (it->is_ethereal()) {
           dbg("Overlaps; barrel can splat ethereal monst");
           return false;
@@ -545,6 +548,30 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
   }
 
+  if (it->is_flying()) {
+    if (things_overlap(me, future_pos, it)) {
+      //
+      // Stop ghosts massing together
+      //
+      if (is_flying()) {
+        dbg("Yes; Stop flying things from piling up");
+        return true;
+      }
+
+      //
+      // This also allows the player to attack a ghost over lava without falling
+      // into the lava
+      //
+      if (is_monst() || is_player()) {
+        dbg("Yes; Stop monst moving on flying things");
+        return true;
+      }
+
+      dbg("No; can pass through flying thing");
+      return false;
+    }
+  }
+
   if (it->is_descend_dungeon()) {
     if (things_overlap(me, future_pos, it)) {
       dbg("No; overlaps but can exit");
@@ -616,7 +643,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
   }
 
-  if (it->is_barrel() && ! is_ethereal()) {
+  if (it->is_barrel() && ! is_ethereal() && ! is_flying()) {
     //
     // As we want to be able to shove the barrel, we need to check for
     // collision. However if standing on the thing, allow movement away.
@@ -634,7 +661,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
   }
 
-  if (it->is_brazier() && ! is_ethereal()) {
+  if (it->is_brazier() && ! is_ethereal() && ! is_flying()) {
     //
     // As we want to be able to shove the brazier, we need to check for
     // collision. However if standing on the thing, allow movement away.

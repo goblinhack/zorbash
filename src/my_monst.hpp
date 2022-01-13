@@ -112,6 +112,7 @@ public:
   int keys                = {};
   int lifespan            = {}; // How many things this thing owns.
   int light_power         = {}; // Current strength, including torches
+  int prev_light_power    = {}; // Current strength, including torches
   int monst_state         = {};
   int necrosis            = {};
   int poison              = {};

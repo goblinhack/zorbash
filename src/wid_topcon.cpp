@@ -73,7 +73,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   }
 
   if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
+    if ((key->scancode == SDL_SCANCODE_KP_DIVIDE) || (key->scancode == (SDL_Scancode) game->config.key_console)) {
       return false;
     }
   }
@@ -87,13 +87,13 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return true;
   }
 
-  if (key->scancode == (SDL_Scancode) game->config.key_zoom_out) {
+  if ((key->scancode == SDL_SCANCODE_KP_MINUS) || (key->scancode == (SDL_Scancode) game->config.key_zoom_out)) {
     LOG("PLAYER: Zoom out.");
     config_game_pix_zoom_out();
     return true;
   }
 
-  if (key->scancode == (SDL_Scancode) game->config.key_zoom_in) {
+  if ((key->scancode == SDL_SCANCODE_KP_PLUS) || (key->scancode == (SDL_Scancode) game->config.key_zoom_in)) {
     LOG("PLAYER: Zoom in.");
     config_game_pix_zoom_in();
     return true;
@@ -107,10 +107,96 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   bool wait   = false;
   bool jump   = false;
 
+  if (key->scancode == SDL_SCANCODE_KP_1) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_left = true;
+    game->request_player_down = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_2) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_down = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_3) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_right = true;
+    game->request_player_down  = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_4) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_left = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_6) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_right = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_7) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_left = true;
+    game->request_player_up   = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_8) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_up = true;
+    return false; // To avoid click noise
+  }
+  if (key->scancode == SDL_SCANCODE_KP_9) {
+    // 7 8 9
+    // 4   6
+    // 1 2 3
+    if (! game->request_player_move) {
+      game->request_player_move = time_get_time_ms();
+    }
+    game->request_player_right = true;
+    game->request_player_up    = true;
+    return false; // To avoid click noise
+  }
+
   //
   // Allow diagonal movements by checking for multiple presses
   //
-  if (key->scancode == (SDL_Scancode) game->config.key_wait_or_collect) {
+  if ((key->scancode == SDL_SCANCODE_KP_PERIOD) ||
+      (key->scancode == (SDL_Scancode) game->config.key_wait_or_collect)) {
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
@@ -160,12 +246,20 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     game->request_player_down = true;
     return false; // To avoid click noise
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_attack) {
+
+  //
+  // attack
+  //
+  if ((key->scancode == SDL_SCANCODE_KP_ENTER) || (key->scancode == (SDL_Scancode) game->config.key_attack)) {
     attack = true;
     player_tick(left, right, up, down, attack, wait, jump);
     return false; // To avoid click noise
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_jump) {
+
+  //
+  // jump
+  //
+  if ((key->scancode == SDL_SCANCODE_KP_5) || (key->scancode == (SDL_Scancode) game->config.key_jump)) {
     jump = true;
     player_tick(left, right, up, down, attack, wait, jump);
     return false; // To avoid click noise
@@ -233,7 +327,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
   }
 
-  if (key->scancode == (SDL_Scancode) game->config.key_drop) {
+  if ((key->scancode == SDL_SCANCODE_KP_BACKSPACE) || (key->scancode == (SDL_Scancode) game->config.key_drop)) {
     LOG("PLAYER: Pressed drop key");
     TRACE_AND_INDENT();
 
@@ -384,7 +478,11 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       }
       return true;
     }
-    if (key->scancode == (SDL_Scancode) game->config.key_inventory) {
+
+    //
+    // Open inventory
+    //
+    if ((key->scancode == SDL_SCANCODE_KP_MULTIPLY) || (key->scancode == (SDL_Scancode) game->config.key_inventory)) {
       LOG("PLAYER: Pressed inventory key");
       wid_inventory_init();
       return true;

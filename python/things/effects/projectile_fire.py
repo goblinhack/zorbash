@@ -19,10 +19,10 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_damage_fire_chance_d1000(1000)
     mytp.set_damage_fire_dice("1d10")  # This is the damage when the monst fires
     mytp.set_is_fire(True)
-    mytp.set_is_interesting(True)
     mytp.set_is_loggable(True)
     mytp.set_is_no_tile(True)
     mytp.set_is_projectile(True)
+    mytp.set_is_tmp_thing(True)
     mytp.set_is_usable(True)
     mytp.set_on_born_do("me.on_born()")
     mytp.set_text_a_or_an("a")
