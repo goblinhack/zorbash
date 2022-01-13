@@ -149,7 +149,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       level_push();
       auto p = level->player;
       if (p) {
-        float distance = get_distance_to_player();
+        int distance = get_distance_to_player();
         if (is_door()) {
           if (defeater && defeater->is_fire()) {
             if (distance < 5) {

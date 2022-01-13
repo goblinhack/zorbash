@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - robot did not collect key and then died in fire                                                                                            -->
+<!-- laser attack broken                                                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
@@ -10,7 +10,6 @@
 <!-- - crystal collection                                                                                                                         -->
 <!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- - char selection                                                                                                                             -->
-<!-- - num pad                                                                                                                                    -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

@@ -29,6 +29,14 @@ void Thing::level_push(void)
     con("push at %d,%d", last_attached.x, last_attached.y);
   }
 #endif
+  //
+  // Don't have things like lasers or projectiles briefly setting fire on a tile
+  // as that will cause interactions. And they really are brief, not long lived
+  // like actual fire.
+  //
+  if (is_tmp_thing()) {
+    return;
+  }
 
   if (is_acid()) {
     i_set_is_acid = true;

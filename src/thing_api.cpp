@@ -5958,6 +5958,54 @@ int Thing::incr_lifespan(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// prev_light_power
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_prev_light_power(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (get_infop()->prev_light_power);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::set_prev_light_power(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->prev_light_power = v);
+}
+
+int Thing::decr_prev_light_power(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->prev_light_power -= v);
+}
+
+int Thing::incr_prev_light_power(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->prev_light_power += v);
+}
+
+int Thing::decr_prev_light_power(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->prev_light_power--);
+}
+
+int Thing::incr_prev_light_power(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->prev_light_power++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // light_power
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_initial_light_power(void)

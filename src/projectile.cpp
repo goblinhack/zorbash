@@ -19,9 +19,10 @@
 #include "my_tile.hpp"
 #include "my_vector_bounds_check.hpp"
 
-Projectile_::Projectile_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at,
-                         uint32_t ts_start, uint32_t ts_stop)
-    : id(thing_id), start(start), stop(stop), pixel_map_at(pixel_map_at), ts_start(ts_start), ts_stop(ts_stop)
+Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId target_id, point start, point stop,
+                         point pixel_map_at, uint32_t ts_start, uint32_t ts_stop, bool follow_moving_target)
+    : id(thing_id), target_id(target_id), start(start), stop(stop), pixel_map_at(pixel_map_at), ts_start(ts_start),
+      ts_stop(ts_stop), follow_moving_target(follow_moving_target)
 {
   TRACE_AND_INDENT();
   auto t = level->thing_find(id);
@@ -69,7 +70,8 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, point start, point stop
   }
 }
 
-void Level::new_projectile(ThingId id, point start, point stop, uint32_t dur)
+void Level::new_projectile(ThingId id, ThingId target_id, point start, point stop, uint32_t dur,
+                           bool follow_moving_target)
 {
   TRACE_AND_INDENT();
   if (id.ok()) {
@@ -84,7 +86,8 @@ void Level::new_projectile(ThingId id, point start, point stop, uint32_t dur)
   }
 
   uint32_t now = time_get_time_ms();
-  new_projectiles.push_back(Projectile(this, id, start, stop, pixel_map_at, now, now + dur));
+  new_projectiles.push_back(
+      Projectile(this, id, target_id, start, stop, pixel_map_at, now, now + dur, follow_moving_target));
 }
 
 void Level::display_projectiles(void)
@@ -135,6 +138,13 @@ void Level::display_projectiles(void)
         t->has_projectile = false;
       }
       return true;
+    }
+
+    if (p.follow_moving_target) {
+      auto t = thing_find(p.target_id);
+      if (t) {
+        p.stop = t->last_blit_at;
+      }
     }
 
     auto start = p.start - p.pixel_map_at;

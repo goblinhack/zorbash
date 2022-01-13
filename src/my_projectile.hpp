@@ -15,17 +15,19 @@
 typedef class Projectile_
 {
 public:
-  Projectile_(Levelp level, ThingId thing_id, point start, point stop, point pixel_map_at, uint32_t ts_start,
-              uint32_t ts_stop);
+  Projectile_(Levelp level, ThingId thing_id, ThingId target_id, point start, point stop, point pixel_map_at,
+              uint32_t ts_start, uint32_t ts_stop, bool follow_moving_target);
 
   Levelp  level {};
   ThingId id {};
+  ThingId target_id {};
   point   start;
   point   stop;
   point   pixel_map_at;
 
   uint32_t ts_start {};
   uint32_t ts_stop {};
+  bool     follow_moving_target {};
 
   //
   // Animation frames

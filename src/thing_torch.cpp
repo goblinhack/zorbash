@@ -71,16 +71,16 @@ void Thing::get_light_power_including_torch_effect(uint8_t &out_light_power)
 void Thing::update_light_power_including_torch_effect(uint8_t &out_light_power)
 {
   TRACE_NO_INDENT();
-  uint8_t orig_light_power = out_light_power;
   uint8_t light_power;
 
   get_light_power_including_torch_effect(light_power);
 
-  if (orig_light_power) {
-    if (light_power != orig_light_power) {
+  auto prev = get_prev_light_power();
+  if (prev) {
+    if (light_power != prev) {
       if (light_power <= 1) {
         msg("You are plunged into darkness.");
-      } else if (light_power < orig_light_power) {
+      } else if (light_power < prev) {
         msg("It gets darker...");
       }
 
@@ -92,5 +92,6 @@ void Thing::update_light_power_including_torch_effect(uint8_t &out_light_power)
     }
   }
 
+  set_prev_light_power(light_power);
   out_light_power = light_power;
 }

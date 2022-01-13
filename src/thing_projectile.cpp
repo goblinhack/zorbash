@@ -90,7 +90,7 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
     game->change_state(Game::STATE_NORMAL);
   }
 
-  level->new_projectile(projectile->id, start, end, 200);
+  level->new_projectile(projectile->id, target->id, start, end, 200, true /* follow the target */);
 
   on_use(projectile, target);
 
