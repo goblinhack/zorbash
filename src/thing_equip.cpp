@@ -551,7 +551,7 @@ void Thing::equip_remove_anim(int equip)
 bool Thing::equip_use(bool forced, int equip, point *at)
 {
   if (at) {
-    dbg("Try to use equipped item at %s", at->to_string().c_str());
+    dbg("Try to use equipped %s item at %s", equip_name(equip).c_str(), at->to_string().c_str());
   } else {
     dbg("Try to use equipped item");
   }
@@ -565,6 +565,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
     return false;
   }
 
+  TRACE_NO_INDENT();
   if (is_able_to_tire()) {
     if (! get_stamina()) {
       if (is_player()) {
@@ -587,9 +588,9 @@ bool Thing::equip_use(bool forced, int equip, point *at)
     }
   }
 
+  TRACE_NO_INDENT();
   std::string used_as;
-
-  auto item = get_equip(equip);
+  auto        item = get_equip(equip);
   if (! item) {
     dbg("No equipped item");
     TRACE_AND_INDENT();
@@ -607,46 +608,34 @@ bool Thing::equip_use(bool forced, int equip, point *at)
       //
       on_you_natural_attack();
     }
+
     used_as = gfx_anim_use();
-    if (used_as.empty()) {
-      die("Could not attack as you have no 'use' animation frame");
-      return false;
-    }
   } else {
     dbg("Equipped item: %s", item->to_short_string().c_str());
+    used_as = item->gfx_anim_use();
+  }
+
+  TRACE_NO_INDENT();
+  if (! used_as.empty()) {
+    dbg("Used as: %s", used_as.c_str());
     TRACE_AND_INDENT();
-
-    auto equip_tp = item->tp();
-
-    used_as = equip_tp->gfx_anim_use();
-    if (used_as.empty()) {
-      die("Could not use %s/%" PRIX32 " has no 'use' animation frame", item->to_short_string().c_str(), item->id.id);
-      return false;
-    }
 
     auto what = tp_find(used_as);
     if (! what) {
-      err("Could not find %s to equip", used_as.c_str());
+      err("Could not find use-anim %s", used_as.c_str());
       return false;
     }
+
+    auto use_anim = level->thing_new(used_as, this);
+    use_anim->set_owner(this);
+
+    set_equip_use_anim(use_anim, equip);
   }
-
-  //
-  // Save the thing id so the client wid can keep track of the weapon.
-  //
-  TRACE_NO_INDENT();
-  auto use_anim = level->thing_new(used_as, this);
-
-  //
-  // Attach to the parent thing.
-  //
-  use_anim->set_owner(this);
-
-  set_equip_use_anim(use_anim, equip);
 
   //
   // Hide the carry_anim while using.
   //
+  TRACE_NO_INDENT();
   auto c = get_equip_carry_anim(equip);
   if (c) {
     c->hide();

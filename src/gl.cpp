@@ -504,9 +504,34 @@ void blit_fbo_window_pix(int fbo)
   blit_flush();
 }
 
-void blit_fbo_bind(int fbo) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[ fbo ]); }
+static int fbo_locked = -1;
+void       blit_fbo_bind(int fbo)
+{
+  if (fbo_locked != -1) {
+    DIE("Attempt to bind to another FBO %d when locked", fbo);
+  }
+  glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[ fbo ]);
+}
 
-void blit_fbo_unbind(void) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0); }
+void blit_fbo_unbind(void)
+{
+  if (fbo_locked != -1) {
+    DIE("Attempt to unbind when locked");
+  }
+  glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
+}
+
+void blit_fbo_bind_locked(int fbo)
+{
+  fbo_locked = fbo;
+  glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[ fbo ]);
+}
+
+void blit_fbo_unbind_locked(void)
+{
+  fbo_locked = -1;
+  glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
+}
 
 //
 // x and y per element.

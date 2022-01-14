@@ -470,6 +470,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   bool attack_natural   = false;
   int  damage           = 0;
 
+  dbg("Set damage types");
+  TRACE_AND_INDENT();
+
   //
   // Chance of poison damage?
   //
@@ -480,6 +483,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         damage        = damage_poison;
         damage_set    = true;
         attack_poison = true;
+        dbg("Set poison damage %d", damage);
       }
     }
   }
@@ -488,11 +492,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future1_chance_d1000()) {
-      int attack_future1 = get_damage_future1();
-      if (attack_future1 > 0) {
-        damage         = attack_future1;
+      int damage_future1 = get_damage_future1();
+      if (damage_future1 > 0) {
+        damage         = damage_future1;
         damage_set     = true;
         attack_future1 = true;
+        dbg("Set future1 damage %d", damage);
       }
     }
   }
@@ -502,11 +507,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future2_chance_d1000()) {
-      int attack_future2 = get_damage_future2();
-      if (attack_future2 > 0) {
-        damage         = attack_future2;
+      int damage_future2 = get_damage_future2();
+      if (damage_future2 > 0) {
+        damage         = damage_future2;
         damage_set     = true;
         attack_future2 = true;
+        dbg("Set future2 damage %d", damage);
       }
     }
   }
@@ -516,11 +522,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future3_chance_d1000()) {
-      int attack_future3 = get_damage_future3();
-      if (attack_future3 > 0) {
-        damage         = attack_future3;
+      int damage_future3 = get_damage_future3();
+      if (damage_future3 > 0) {
+        damage         = damage_future3;
         damage_set     = true;
         attack_future3 = true;
+        dbg("Set future3 damage %d", damage);
       }
     }
   }
@@ -530,11 +537,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future4_chance_d1000()) {
-      int attack_future4 = get_damage_future4();
-      if (attack_future4 > 0) {
-        damage         = attack_future4;
+      int damage_future4 = get_damage_future4();
+      if (damage_future4 > 0) {
+        damage         = damage_future4;
         damage_set     = true;
         attack_future4 = true;
+        dbg("Set future4 damage %d", damage);
       }
     }
   }
@@ -544,11 +552,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_fire_chance_d1000()) {
-      int attack_fire = get_damage_fire();
-      if (attack_fire > 0) {
-        damage      = attack_fire;
+      int damage_fire = get_damage_fire();
+      if (damage_fire > 0) {
+        damage      = damage_fire;
         damage_set  = true;
         attack_fire = true;
+        dbg("Set fire damage %d", damage);
       }
     }
   }
@@ -558,11 +567,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_crush_chance_d1000()) {
-      int attack_crush = get_damage_crush();
-      if (attack_crush > 0) {
-        damage       = attack_crush;
+      int damage_crush = get_damage_crush();
+      if (damage_crush > 0) {
+        damage       = damage_crush;
         damage_set   = true;
         attack_crush = true;
+        dbg("Set crush damage %d", damage);
       }
     }
   }
@@ -572,11 +582,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_lightning_chance_d1000()) {
-      int attack_lightning = get_damage_lightning();
-      if (attack_lightning > 0) {
-        damage           = attack_lightning;
+      int damage_lightning = get_damage_lightning();
+      if (damage_lightning > 0) {
+        damage           = damage_lightning;
         damage_set       = true;
         attack_lightning = true;
+        dbg("Set lightning damage %d", damage);
       }
     }
   }
@@ -586,11 +597,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_energy_chance_d1000()) {
-      int attack_energy = get_damage_energy();
-      if (attack_energy > 0) {
-        damage        = attack_energy;
+      int damage_energy = get_damage_energy();
+      if (damage_energy > 0) {
+        damage        = damage_energy;
         damage_set    = true;
         attack_energy = true;
+        dbg("Set energy damage %d", damage);
       }
     }
   }
@@ -600,11 +612,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_acid_chance_d1000()) {
-      int attack_acid = get_damage_acid();
-      if (attack_acid > 0) {
-        damage      = attack_acid;
+      int damage_acid = get_damage_acid();
+      if (damage_acid > 0) {
+        damage      = damage_acid;
         damage_set  = true;
         attack_acid = true;
+        dbg("Set acid damage %d", damage);
       }
     }
   }
@@ -614,11 +627,12 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_digest_chance_d1000()) {
-      int attack_digest = get_damage_digest();
-      if (attack_digest > 0) {
-        damage        = attack_digest;
+      int damage_digest = get_damage_digest();
+      if (damage_digest > 0) {
+        damage        = damage_digest;
         damage_set    = true;
         attack_digest = true;
+        dbg("Set digest damage %d", damage);
       }
     }
   }
@@ -633,6 +647,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         damage          = damage_necrosis;
         damage_set      = true;
         attack_necrosis = true;
+        dbg("Set necro damage %d", damage);
       }
     }
   }
@@ -647,6 +662,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         damage         = damage_natural_attack + stat_att;
         damage_set     = true;
         attack_natural = true;
+        dbg("Set natural damage %d", damage);
       }
     }
   }
@@ -661,6 +677,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     if (d1000() < damage_melee_chance_d1000()) {
       damage = get_damage_melee() + stat_att;
       if (damage > 0) {
+        dbg("Set melee damage %d", damage);
         damage_set = true;
       }
     }
@@ -670,6 +687,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       if (d1000() < owner->damage_melee_chance_d1000()) {
         damage = get_damage_melee() + stat_att;
         if (damage > 0) {
+          dbg("Set melee damage %d", damage);
           damage_set = true;
         }
       }
@@ -851,6 +869,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
+  dbg("Do the hit");
+  TRACE_AND_INDENT();
   if (victim->is_hit(this, crit, attack_natural, attack_poison, attack_necrosis, attack_future1, attack_future2,
                      attack_future3, attack_future4, attack_fire, attack_crush, attack_lightning, attack_energy,
                      attack_acid, attack_digest, damage)) {

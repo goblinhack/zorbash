@@ -97,7 +97,7 @@ void Level::new_laser(ThingId id, ThingId target_id, point start, point stop, ui
 
 void Level::display_lasers(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 #if 0
   CON("-");
   for (auto p : all_lasers) {
@@ -127,6 +127,7 @@ void Level::display_lasers(void)
   blit_init();
   auto now = time_get_time_ms();
   auto e   = std::remove_if(all_lasers.begin(), all_lasers.end(), [ =, this ](Laser &p) {
+    TRACE_NO_INDENT();
     float timestep = p.ts_stop - p.ts_start;
     float dt       = ((float) (now - p.ts_start)) / timestep;
 
@@ -150,7 +151,7 @@ void Level::display_lasers(void)
     }
 
     if (p.follow_moving_target) {
-      auto t = thing_find(p.target_id);
+      auto t = thing_find_optional(p.target_id);
       if (t) {
         p.stop = t->last_blit_at;
       }
@@ -196,10 +197,13 @@ void Level::display_lasers(void)
 
       Tilep tile;
 
+      TRACE_NO_INDENT();
       if (animstep == 1) {
         tile = get(p.tiles, frame, 0);
-      } else if (animstep == steps) {
+      } else if ((animstep >= steps) || (animstep >= p.tiles.size())) {
         tile = get(p.tiles, frame, Laser::max_frames - 1);
+      } else if (animstep >= p.tiles.size()) {
+        tile = get(p.tiles, frame, (frame % (p.tiles.size() - 2)) + 1);
       } else {
         tile = get(p.tiles, frame, animstep);
       }

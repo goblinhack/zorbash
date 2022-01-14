@@ -30,6 +30,7 @@ void Thing::destroy(void)
 
   if (is_loggable()) {
     auto immediate_owner = get_immediate_owner();
+    dbg2("Destroy");
     if (immediate_owner) {
       auto top_owner = get_top_owner();
       if (top_owner) {

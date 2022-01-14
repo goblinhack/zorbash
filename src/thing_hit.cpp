@@ -748,12 +748,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     }
 
-    if (real_hitter->is_fire() || real_hitter->is_lava()) {
-      if (set_on_fire("hit by fire")) {
-        msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");
-      }
-    }
-
     //
     // Player being hit
     //
@@ -835,13 +829,18 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       // Something else hitting something else
       //
     }
+  }
 
-    //
-    // Monster or player hitting something
-    //
-    if (real_hitter->is_fire() || real_hitter->is_lava()) {
-      set_on_fire("hit by fire or lava");
-
+  /*
+   * Check for wand of fire projectiles (this is the non real hitter case)
+   */
+  if (attack_fire || hitter->is_fire() || hitter->is_lava() || real_hitter->is_fire() || real_hitter->is_lava()) {
+    if (set_on_fire("hit by fire")) {
+      if (is_player()) {
+        msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");
+      } else {
+        msg("%s is on fire!", text_The().c_str());
+      }
       if (is_monst() || (is_player() && game->robot_mode)) {
         ai_change_state(MONST_STATE_IDLE, "monst was set on fire");
       }

@@ -26,7 +26,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim)
       return false;
     }
 
-    log("Chosen target: %s", victim->to_short_string().c_str());
+    dbg("Chosen target: %s", victim->to_short_string().c_str());
     TRACE_AND_INDENT();
 
     used(item, victim, true);
@@ -65,15 +65,27 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
   auto end   = target->last_blit_at;
 
   if (! start.x && ! start.y) {
+    msg("Misfire!");
+    if (is_player()) {
+      game->tick_begin("failed to fire projectile");
+    }
     return nullptr;
   }
 
   if (! end.x && ! end.y) {
+    msg("Misfire!");
+    if (is_player()) {
+      game->tick_begin("failed to fire projectile");
+    }
     return nullptr;
   }
 
   auto projectile = level->thing_new(projectile_name, target->curr_at, this);
   if (! projectile) {
+    err("No projectile to fire");
+    if (is_player()) {
+      game->tick_begin("failed to fire projectile");
+    }
     return nullptr;
   }
 
@@ -81,7 +93,7 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
 
   if (! projectile->is_projectile()) {
     if (is_player()) {
-      msg("I don't know how to fire %s.", projectile->text_the().c_str());
+      msg("I don't know how to fire projectile %s.", projectile->text_the().c_str());
       game->tick_begin("player tried to use something they could not");
     }
     return nullptr;
@@ -104,19 +116,18 @@ Thingp Thing::projectile_fire_at(const std::string &laser_name, point at)
   Thingp best = nullptr;
   point  best_hit_at;
 
+  dbg("Projectile fire %s at %s", laser_name.c_str(), at.to_string().c_str());
+  TRACE_AND_INDENT();
+
   if (target_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
     return projectile_fire_at(laser_name, best);
   }
 
-  FOR_ALL_THINGS(level, t, at.x, at.y)
+  FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      continue;
+      return projectile_fire_at(laser_name, t);
     }
-    if (t->is_cursor()) {
-      continue;
-    }
-    return projectile_fire_at(laser_name, t);
   }
   FOR_ALL_THINGS_END()
 

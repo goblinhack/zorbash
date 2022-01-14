@@ -78,38 +78,47 @@ extern int sdl_key_repeat_count;
 extern ts_t sdl_last_time_for_key;
 
 extern SDL_Scancode sdl_grabbed_scancode;
-extern bool         g_grab_next_key;
+
+extern SDL_Window *window; // Our window handle
+
 typedef void (*on_sdl_key_grab_t)(SDL_Scancode);
-extern on_sdl_key_grab_t                      on_sdl_key_grab;
+extern on_sdl_key_grab_t on_sdl_key_grab;
+
 extern std::array< uint8_t, SDL_MAX_BUTTONS > sdl_joy_buttons;
 
-void                   sdl_fbo_load(int fbo, const std::vector< uint8_t > &pixels);
 std::vector< uint8_t > sdl_fbo_save(int fbo);
-uint8_t                config_errored(tokensp, void *context);
-uint8_t                config_fps_counter_set(tokensp, void *context);
-uint8_t                config_game_pix_zoom_set(tokensp, void *context);
-uint8_t                config_gfx_inverted_set(tokensp, void *context);
-uint8_t                config_gfx_lights_set(tokensp, void *context);
-uint8_t                config_gfx_minimap_set(tokensp, void *context);
-uint8_t                config_gfx_vsync_enable(tokensp, void *context);
-uint8_t                sdl_init(void);
-void                   config_game_pix_zoom_in(void);
-void                   config_game_pix_zoom_out(void);
-void                   config_game_pix_zoom_update(void);
-void                   config_gfx_inverted_toggle(void);
-void                   config_gfx_lights_toggle(void);
-void                   config_gfx_minimap_toggle(void);
-void                   config_gfx_vsync_update(void);
-void                   my_sdl_hide_keyboard(void);
-void                   sdl_config_update_all(void);
-void                   sdl_exit(void);
-void                   sdl_fini(void);
-void                   sdl_flush_display(void);
-void                   sdl_joy_rumble(float strength, ts_t ms);
-void                   sdl_loop(void);
-void                   sdl_screenshot_do(void);
-void                   sdl_screenshot(void);
-void                   sdl_show_keyboard(void);
-void                   sdl_fbo_dump(int fbo, const std::string &name);
+
+int sdl_filter_events(void *userdata, SDL_Event *event);
+int sdl_get_mouse(void);
+
+uint8_t config_errored(tokensp, void *context);
+uint8_t config_fps_counter_set(tokensp, void *context);
+uint8_t config_game_pix_zoom_set(tokensp, void *context);
+uint8_t config_gfx_inverted_set(tokensp, void *context);
+uint8_t config_gfx_lights_set(tokensp, void *context);
+uint8_t config_gfx_minimap_set(tokensp, void *context);
+uint8_t config_gfx_vsync_enable(tokensp, void *context);
+uint8_t sdl_init(void);
+
+void config_game_pix_zoom_in(void);
+void config_game_pix_zoom_out(void);
+void config_game_pix_zoom_update(void);
+void config_gfx_inverted_toggle(void);
+void config_gfx_lights_toggle(void);
+void config_gfx_minimap_toggle(void);
+void config_gfx_vsync_update(void);
+void sdl_config_update_all(void);
+void sdl_event(SDL_Event *event);
+void sdl_exit(void);
+void sdl_fbo_dump(int fbo, const std::string &name);
+void sdl_fbo_load(int fbo, const std::vector< uint8_t > &pixels);
+void sdl_fini(void);
+void sdl_flush_display(void);
+void sdl_joy_rumble(float strength, ts_t ms);
+void sdl_loop(void);
+void sdl_screenshot_do(void);
+void sdl_screenshot(void);
+void sdl_show_keyboard(void);
+void sdl_tick(void);
 
 #endif
