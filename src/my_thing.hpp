@@ -275,6 +275,8 @@ public:
   Thingp in_the_way(const point s, const point e, int x, int y);
   Thingp laser_fire_at(const std::string &item, Thingp target);
   Thingp projectile_fire_at(const std::string &item, Thingp target);
+  Thingp laser_fire_at(const std::string &item, point at);
+  Thingp projectile_fire_at(const std::string &item, point at);
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at_if_possible(const std::string &what);
 
@@ -429,6 +431,7 @@ public:
   bool path_pop_next_move(void);
   bool place(const std::string &what, const point &p);
   bool player_is_ready_for_messages(void);
+  bool player_is_ready_for_messages(std::string &why);
   bool player_is_ready_for_thing_info(void);
   bool possible_to_attack_at(point at);
   bool possible_to_attack(const Thingp it);
@@ -2038,11 +2041,14 @@ public:
   ThingItemsp get_itemsp(void);
   ThingAip    get_aip(void);
 
-  bool target_attack_best_attempt_1(Thingp item, point at, std::vector< point > &all_deltas);
-  bool target_attack_best_attempt_2(Thingp item, point at, std::vector< point > &all_deltas);
-  bool target_attack_best_attempt_3(Thingp item, point at, std::vector< point > &all_deltas);
-  bool target_attack_best_attempts(Thingp item, point at, std::vector< point > &all_deltas);
-  bool target_attack_best_attempts(Thingp item, point at);
+  bool target_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
+                                    std::vector< point > &all_deltas);
+  bool target_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
+                                    std::vector< point > &all_deltas);
+  bool target_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
+                                    std::vector< point > &all_deltas);
+  bool target_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at);
+  bool target_attack_found_best(Thingp item, Thingp best, point best_hit_at);
 
 } Thing;
 

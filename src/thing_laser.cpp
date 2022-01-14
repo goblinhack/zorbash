@@ -3,9 +3,11 @@
 // See the README.md file for license info.
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_main.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_tile.hpp"
@@ -108,4 +110,28 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
   on_use(laser, target);
 
   return laser;
+}
+
+Thingp Thing::laser_fire_at(const std::string &laser_name, point at)
+{
+  Thingp best = nullptr;
+  point  best_hit_at;
+
+  if (target_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
+    return laser_fire_at(laser_name, best);
+  }
+
+  FOR_ALL_COLLISION_THINGS(level, t, at.x, at.y)
+  {
+    if (t->is_the_grid) {
+      continue;
+    }
+    if (t->is_cursor()) {
+      continue;
+    }
+    return laser_fire_at(laser_name, t);
+  }
+  FOR_ALL_THINGS_END()
+
+  return nullptr;
 }
