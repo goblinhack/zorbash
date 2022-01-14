@@ -26,7 +26,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
       return false;
     }
 
-    log("Chosen target: %s", victim->to_short_string().c_str());
+    dbg("Chosen target: %s", victim->to_short_string().c_str());
     TRACE_AND_INDENT();
 
     used(item, victim, true);
@@ -45,7 +45,12 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
     return true;
   }
 
+  dbg("Need to select a target");
+  TRACE_AND_INDENT();
+
   if (! target_select(item)) {
+    dbg("Failed to select a target");
+    TRACE_AND_INDENT();
     return false;
   }
 
@@ -56,7 +61,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
 Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
 {
-  log("Laser fire %s at %s", laser_name.c_str(), target->to_short_string().c_str());
+  dbg("Laser fire %s at %s", laser_name.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (laser_name == "") {
@@ -72,16 +77,27 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
   auto end   = target->last_blit_at;
 
   if (! start.x && ! start.y) {
+    msg("Misfire!");
+    if (is_player()) {
+      game->tick_begin("failed to fire laser");
+    }
     return nullptr;
   }
 
   if (! end.x && ! end.y) {
+    msg("Misfire!");
+    if (is_player()) {
+      game->tick_begin("failed to fire laser");
+    }
     return nullptr;
   }
 
   auto laser = level->thing_new(laser_name, target->curr_at, this);
   if (! laser) {
-    log("No laser to fire");
+    err("No laser to fire");
+    if (is_player()) {
+      game->tick_begin("failed to fire laser");
+    }
     return nullptr;
   }
 
@@ -118,19 +134,18 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, point at)
   Thingp best = nullptr;
   point  best_hit_at;
 
+  dbg("Laser fire %s at %s", laser_name.c_str(), at.to_string().c_str());
+  TRACE_AND_INDENT();
+
   if (target_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
     return laser_fire_at(laser_name, best);
   }
 
-  FOR_ALL_THINGS(level, t, at.x, at.y)
+  FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      continue;
+      return laser_fire_at(laser_name, t);
     }
-    if (t->is_cursor()) {
-      continue;
-    }
-    return laser_fire_at(laser_name, t);
   }
   FOR_ALL_THINGS_END()
 

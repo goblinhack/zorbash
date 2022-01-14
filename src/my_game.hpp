@@ -270,6 +270,7 @@ public:
   //
   uint32_t robot_mode_requested {};
   uint32_t robot_mode_tick_requested {};
+  uint32_t start_requested {};
 
   //
   // Used for timesteps within a game tick for smooth thing movement

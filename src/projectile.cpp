@@ -92,7 +92,7 @@ void Level::new_projectile(ThingId id, ThingId target_id, point start, point sto
 
 void Level::display_projectiles(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 #if 0
   CON("-");
   for (auto p : all_projectiles) {
@@ -141,7 +141,7 @@ void Level::display_projectiles(void)
     }
 
     if (p.follow_moving_target) {
-      auto t = thing_find(p.target_id);
+      auto t = thing_find_optional(p.target_id);
       if (t) {
         p.stop = t->last_blit_at;
       }

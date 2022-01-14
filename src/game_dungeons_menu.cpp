@@ -630,7 +630,7 @@ static uint8_t game_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button
     DIE("No game");
   }
 
-  game->start();
+  game->start_requested = true;
 
   return true;
 }

@@ -6538,7 +6538,7 @@ void wid_display_all(void)
   gl_leave_2d_mode();
   gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
 
-  blit_fbo_bind(FBO_WID);
+  blit_fbo_bind_locked(FBO_WID);
   glClear(GL_COLOR_BUFFER_BIT);
   glcolor(WHITE);
 
@@ -6551,9 +6551,7 @@ void wid_display_all(void)
   wid_total_count = 0;
 
   for (auto iter = wid_top_level.begin(); iter != wid_top_level.end(); ++iter) {
-
     auto w = iter->second;
-
     if (wid_is_hidden(w)) {
       continue;
     }
@@ -6595,7 +6593,7 @@ printf("========================================= %d\n", wid_total_count);
 
   ascii_display();
 
-  blit_fbo_unbind();
+  blit_fbo_unbind_locked();
 
   //
   // Need this to reset wid_over after display

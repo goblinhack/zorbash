@@ -40,10 +40,10 @@ ts_t time_get_time_ms(void)
   return (time_now);
 #endif
 #ifdef NOT_NEEDED
-  extern uint8_t sdl_main_loop_running;
+  extern uint8_t g_main_loop_running;
   extern uint8_t sdl_init_video;
 
-  if (unlikely(! sdl_main_loop_running || ! sdl_init_video)) {
+  if (unlikely(! g_main_loop_running || ! sdl_init_video)) {
     struct timeval tv;
 
     gettimeofday(&tv, nullptr);

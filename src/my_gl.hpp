@@ -284,10 +284,12 @@ void blit_colored(int tex, float texMinX, float texMinY, float texMaxX, float te
                   GLushort right, GLushort bottom, color color_bl, color color_br, color color_tl, color color_tr);
 void blit_fbo(int fbo);
 void blit_fbo_bind(int fbo);
+void blit_fbo_bind_locked(int fbo);
 void blit_fbo_game_pix(int fbo);
 void blit_fbo_ui_pix(int fbo);
 void blit_fbo_window_pix(int fbo);
 void blit_fbo_unbind(void);
+void blit_fbo_unbind_locked(void);
 void blit_fini(void);
 void blit_flush(void);
 void blit_flush_colored_triangle_fan(float *begin, float *end);

@@ -15,6 +15,7 @@ extern char *GFX_PATH;
 extern char *TTF_PATH;
 extern char *WORLD_PATH;
 
+extern bool g_main_loop_running;
 extern bool g_die_occurred;             // Fatal error has occurred
 extern bool g_do_screenshot;            // Grab a screen shot next fram
 extern bool g_errored;                  // An error has occurred

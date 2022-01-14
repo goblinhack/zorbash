@@ -19,6 +19,7 @@ char *WORLD_PATH;
 FILE *g_log_stdout;
 FILE *g_log_stderr;
 
+bool g_main_loop_running;
 bool g_die_occurred;             // Fatal error has occurred
 bool g_do_screenshot;            // Grab a screen shot next fram
 bool g_errored;                  // An error has occurred

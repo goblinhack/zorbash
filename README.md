@@ -1,7 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- stats with penalties                                                                                                                         -->
-<!-- check can laser wall or floor?                                                                                                               -->
+<!-- You hit the spiderweb for 6 damage.                                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
