@@ -33,16 +33,16 @@ bool Thing::target_select(Thingp item)
 // Find the best thing to attack. Look at our current direction and if nothing
 // in that path, look around for something else.
 //
-bool Thing::target_attack_best_attempt_1(Thingp item, point at, std::vector< point > &all_deltas)
+bool Thing::target_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
+                                         std::vector< point > &all_deltas)
 {
-  bool   found_best {};
-  point  best_hit_at;
-  int    best_priority = -999;
-  Thingp best          = nullptr;
+  bool found_best {};
+  int  best_priority = -999;
 
   dbg2("Target-attack-best: Try to find something to attack, attempt 1");
   TRACE_AND_INDENT();
 
+  *best = nullptr;
   for (const auto &d : all_deltas) {
     //
     // Find the alternative best thing to hit
@@ -95,47 +95,27 @@ bool Thing::target_attack_best_attempt_1(Thingp item, point at, std::vector< poi
       if (prio > best_priority) {
         dbg2("Target-attack-best: %s is best prio %d", t->to_short_string().c_str(), prio);
         best_priority = prio;
-        best_hit_at   = at;
-        best          = t;
+        *best_hit_at  = at;
+        *best         = t;
         found_best    = true;
       }
     }
     FOR_ALL_THINGS_END();
   }
 
-  if (found_best) {
-    bool target_attacked = false;
-    bool target_overlaps = false;
-
-    dbg2("Target-attack-best: Best target to hit is %s", best->to_string().c_str());
-    TRACE_AND_INDENT();
-
-    if (item) {
-      if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
-        lunge(best_hit_at);
-        return true;
-      }
-    } else {
-      if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
-        lunge(best_hit_at);
-        return true;
-      }
-    }
-  }
-
-  return false;
+  return found_best;
 }
 
-bool Thing::target_attack_best_attempt_2(Thingp item, point at, std::vector< point > &all_deltas)
+bool Thing::target_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
+                                         std::vector< point > &all_deltas)
 {
-  bool   found_best {};
-  point  best_hit_at;
-  int    best_priority = -999;
-  Thingp best          = nullptr;
+  bool found_best {};
+  int  best_priority = -999;
 
   dbg2("Target-attack-best: Try to find something to attack, attempt 2");
   TRACE_AND_INDENT();
 
+  *best = nullptr;
   for (const auto &d : all_deltas) {
     //
     // Find the alternative best thing to hit
@@ -190,47 +170,27 @@ bool Thing::target_attack_best_attempt_2(Thingp item, point at, std::vector< poi
       if (prio > best_priority) {
         dbg2("Target-attack-best: %s is best prio %d", t->to_short_string().c_str(), prio);
         best_priority = prio;
-        best_hit_at   = hit_at;
-        best          = t;
+        *best_hit_at  = hit_at;
+        *best         = t;
         found_best    = true;
       }
     }
     FOR_ALL_THINGS_END();
   }
 
-  if (found_best) {
-    bool target_attacked = false;
-    bool target_overlaps = false;
-
-    dbg2("Target-attack-best: Best target to hit is %s", best->to_string().c_str());
-    TRACE_AND_INDENT();
-
-    if (item) {
-      if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
-        lunge(best_hit_at);
-        return true;
-      }
-    } else {
-      if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
-        lunge(best_hit_at);
-        return true;
-      }
-    }
-  }
-
-  return false;
+  return found_best;
 }
 
-bool Thing::target_attack_best_attempt_3(Thingp item, point at, std::vector< point > &all_deltas)
+bool Thing::target_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
+                                         std::vector< point > &all_deltas)
 {
-  bool   found_best {};
-  point  best_hit_at;
-  int    best_priority = -999;
-  Thingp best          = nullptr;
+  bool found_best {};
+  int  best_priority = -999;
 
   dbg2("Target-attack-best: Try to find something to attack, attempt 3");
   TRACE_AND_INDENT();
 
+  *best = nullptr;
   for (const auto &d : all_deltas) {
     //
     // Find the alternative best thing to hit
@@ -276,55 +236,56 @@ bool Thing::target_attack_best_attempt_3(Thingp item, point at, std::vector< poi
       if (prio > best_priority) {
         dbg2("Target-attack-best: %s is best prio %d", t->to_short_string().c_str(), prio);
         best_priority = prio;
-        best_hit_at   = hit_at;
-        best          = t;
+        *best_hit_at  = hit_at;
+        *best         = t;
         found_best    = true;
       }
     }
     FOR_ALL_THINGS_END();
   }
 
-  if (found_best) {
-    bool target_attacked = false;
-    bool target_overlaps = false;
+  return found_best;
+}
 
-    dbg2("Target-attack-best: Best target to hit is %s", best->to_string().c_str());
-    TRACE_AND_INDENT();
+bool Thing::target_attack_found_best(Thingp item, Thingp best, point best_hit_at)
+{
+  bool target_attacked = false;
+  bool target_overlaps = false;
 
-    if (item) {
-      if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
-        lunge(best_hit_at);
-        return true;
-      }
-    } else {
-      if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
-        lunge(best_hit_at);
-        return true;
-      }
+  dbg2("Target-attack-best: Best target to hit is %s", best->to_string().c_str());
+  TRACE_AND_INDENT();
+
+  if (item) {
+    if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+      lunge(best_hit_at);
+      return true;
+    }
+  } else {
+    if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+      lunge(best_hit_at);
+      return true;
     }
   }
-
-  return false;
+  return true;
 }
 
-bool Thing::target_attack_best_attempts(Thingp item, point at, std::vector< point > &all_deltas)
+bool Thing::target_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at)
 {
-  if (target_attack_best_attempt_1(item, curr_at, all_deltas)) {
-    return true;
-  }
-  if (target_attack_best_attempt_2(item, curr_at, all_deltas)) {
-    return true;
-  }
-  if (target_attack_best_attempt_3(item, curr_at, all_deltas)) {
-    return true;
-  }
-  return false;
-}
+  std::vector< point > all_deltas = {point(0, 0)};
 
-bool Thing::target_attack_best_attempts(Thingp item, point at)
-{
-  std::vector< point > local_only = {point(0, 0)};
-  return target_attack_best_attempts(item, at, local_only);
+  if (target_attack_best_attempt_1(item, curr_at, best, best_hit_at, all_deltas)) {
+    return true;
+  }
+
+  if (target_attack_best_attempt_2(item, curr_at, best, best_hit_at, all_deltas)) {
+    return true;
+  }
+
+  if (target_attack_best_attempt_3(item, curr_at, best, best_hit_at, all_deltas)) {
+    return true;
+  }
+
+  return false;
 }
 
 bool Thing::target_attack_best(int equip, point *at)
@@ -386,8 +347,19 @@ bool Thing::target_attack_best(int equip, point *at)
     all_deltas = local_only;
   }
 
-  if (target_attack_best_attempts(item, curr_at, all_deltas)) {
-    return true;
+  Thingp best = nullptr;
+  point  best_hit_at;
+
+  if (target_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    return target_attack_found_best(item, best, best_hit_at);
+  }
+
+  if (target_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    return target_attack_found_best(item, best, best_hit_at);
+  }
+
+  if (target_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    return target_attack_found_best(item, best, best_hit_at);
   }
 
   //

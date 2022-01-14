@@ -404,12 +404,11 @@ bool Thing::possible_to_attack_at(point at)
     dbg("Yes; %s", victim->to_string().c_str());
     ret = true;
   }
+  FOR_ALL_THINGS_END()
 
   if (! ret) {
     dbg("No");
   }
-
-  FOR_ALL_THINGS_END()
 
   return ret;
 }

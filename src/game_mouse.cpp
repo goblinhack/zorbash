@@ -68,9 +68,9 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
       // The laser name is provided by the likes of wand
       //
       if (! item->laser_name().empty()) {
-        player->laser_fire_at(item->laser_name(), level->cursor);
+        player->laser_fire_at(item->laser_name(), level->cursor->curr_at);
       } else if (! item->projectile_name().empty()) {
-        player->projectile_fire_at(item->projectile_name(), level->cursor);
+        player->projectile_fire_at(item->projectile_name(), level->cursor->curr_at);
       } else {
         TOPCON("Unknown beam weapon: %s.", item->text_the().c_str());
       }

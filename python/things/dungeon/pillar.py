@@ -12,6 +12,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_floor_deco(True)
     mytp.set_is_interesting(True)
     mytp.set_is_obs_wall_or_door(True)
+    mytp.set_is_always_hit(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("An aged and moss-covered stone pillar.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
