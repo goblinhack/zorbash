@@ -95,7 +95,7 @@ bool Thing::target_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
       if (prio > best_priority) {
         dbg2("Target-attack-best: %s is best prio %d", t->to_short_string().c_str(), prio);
         best_priority = prio;
-        *best_hit_at  = at;
+        *best_hit_at  = hit_at;
         *best         = t;
         found_best    = true;
       }
@@ -252,7 +252,8 @@ bool Thing::target_attack_found_best(Thingp item, Thingp best, point best_hit_at
   bool target_attacked = false;
   bool target_overlaps = false;
 
-  dbg2("Target-attack-best: Best target to hit is %s", best->to_string().c_str());
+  dbg2("Target-attack-best: Best target to hit is %s at %s", best->to_string().c_str(),
+       best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
 
   if (item) {
