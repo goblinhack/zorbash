@@ -108,7 +108,7 @@ Thingp Thing::projectile_fire_at(const std::string &laser_name, point at)
     return projectile_fire_at(laser_name, best);
   }
 
-  FOR_ALL_COLLISION_THINGS(level, t, at.x, at.y)
+  FOR_ALL_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
       continue;
@@ -120,5 +120,6 @@ Thingp Thing::projectile_fire_at(const std::string &laser_name, point at)
   }
   FOR_ALL_THINGS_END()
 
+  err("No target to fire at");
   return nullptr;
 }

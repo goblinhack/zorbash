@@ -56,7 +56,8 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
 Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
 {
-  TRACE_NO_INDENT();
+  log("Laser fire %s at %s", laser_name.c_str(), target->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   if (laser_name == "") {
     die("No laser name");
@@ -121,7 +122,7 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, point at)
     return laser_fire_at(laser_name, best);
   }
 
-  FOR_ALL_COLLISION_THINGS(level, t, at.x, at.y)
+  FOR_ALL_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
       continue;
@@ -133,5 +134,6 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, point at)
   }
   FOR_ALL_THINGS_END()
 
+  err("No target to fire at");
   return nullptr;
 }

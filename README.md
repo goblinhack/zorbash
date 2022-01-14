@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- laser attack broken                                                                                                                          -->
+<!-- stats with penalties                                                                                                                         -->
 <!-- check can laser wall or floor?                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
