@@ -535,6 +535,24 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->pixel_map_at);
   out << bits(my.t->seed);
   out << bits(my.t->world_at);
+  out << bits(my.t->difficulty_depth);
+  out << bits(my.t->d1000_chance_of_creating_monst_class_a);
+  out << bits(my.t->d1000_chance_of_creating_monst_class_b);
+  out << bits(my.t->d1000_chance_of_creating_monst_class_c);
+  out << bits(my.t->d1000_chance_of_creating_monst_class_d);
+  out << bits(my.t->d1000_chance_of_creating_monst_class_e);
+  out << bits(my.t->d1000_chance_of_creating_mob_spawner_class_a);
+  out << bits(my.t->d1000_chance_of_creating_mob_spawner_class_b);
+  out << bits(my.t->d1000_chance_of_creating_treasure_class_a);
+  out << bits(my.t->d1000_chance_of_creating_treasure_class_b);
+  out << bits(my.t->d1000_chance_of_creating_treasure_class_c);
+  out << bits(my.t->d1000_chance_of_creating_weapon_class_a);
+  out << bits(my.t->d1000_chance_of_creating_weapon_class_b);
+  out << bits(my.t->d1000_chance_of_creating_weapon_class_c);
+  out << bits(my.t->minx);
+  out << bits(my.t->miny);
+  out << bits(my.t->maxx);
+  out << bits(my.t->maxy);
 
 #ifdef ENABLE_DEBUG_THING_SER
   LOG("DGN: Check things");

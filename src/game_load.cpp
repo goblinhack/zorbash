@@ -578,6 +578,24 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->pixel_map_at);
   in >> bits(l->seed);
   in >> bits(l->world_at);
+  in >> bits(l->difficulty_depth);
+  in >> bits(l->d1000_chance_of_creating_monst_class_a);
+  in >> bits(l->d1000_chance_of_creating_monst_class_b);
+  in >> bits(l->d1000_chance_of_creating_monst_class_c);
+  in >> bits(l->d1000_chance_of_creating_monst_class_d);
+  in >> bits(l->d1000_chance_of_creating_monst_class_e);
+  in >> bits(l->d1000_chance_of_creating_mob_spawner_class_a);
+  in >> bits(l->d1000_chance_of_creating_mob_spawner_class_b);
+  in >> bits(l->d1000_chance_of_creating_treasure_class_a);
+  in >> bits(l->d1000_chance_of_creating_treasure_class_b);
+  in >> bits(l->d1000_chance_of_creating_treasure_class_c);
+  in >> bits(l->d1000_chance_of_creating_weapon_class_a);
+  in >> bits(l->d1000_chance_of_creating_weapon_class_b);
+  in >> bits(l->d1000_chance_of_creating_weapon_class_c);
+  in >> bits(l->minx);
+  in >> bits(l->miny);
+  in >> bits(l->maxx);
+  in >> bits(l->maxy);
 
   l->update_new_level();
   l->ts_redraw_bg      = 1; // Force redraw

@@ -428,7 +428,7 @@ PyObject *thing_unused_flag161(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag162(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag163(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag164(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag165(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_monst_class_e(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag166(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_mob_spawner_class_b(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_mob_spawner_class_a(PyObject *obj, PyObject *args, PyObject *keywds);

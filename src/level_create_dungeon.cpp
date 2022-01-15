@@ -830,44 +830,43 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
       }
 
       if (d->is_monst_class_a(x, y)) {
-        if (pcg_random_range(0, 100) < 50) {
+        if (d1000() < d1000_chance_of_creating_monst_class_a) {
           tp = tp_random_monst_class_a(p);
         }
       }
-
       if (d->is_monst_class_b(x, y)) {
-        if (pcg_random_range(0, 100) < 50) {
+        if (d1000() < d1000_chance_of_creating_monst_class_b) {
           tp = tp_random_monst_class_b(p);
         }
       }
-
       if (d->is_monst_class_c(x, y)) {
-        if (pcg_random_range(0, 100) < 50) {
+        if (d1000() < d1000_chance_of_creating_monst_class_c) {
           tp = tp_random_monst_class_c(p);
         }
       }
-
-#if 0
-      if (tp && tp->is_monst()) {
-        CON("TMP using debug monster");
-        tp = tp_find("cleaner");
-        if (!tp) {
-          DIE("can't find debug monster");
+      if (d->is_monst_class_d(x, y)) {
+        if (d1000() < d1000_chance_of_creating_monst_class_d) {
+          tp = tp_random_monst_class_d(p);
         }
       }
-#endif
+      if (d->is_monst_class_e(x, y)) {
+        if (d1000() < d1000_chance_of_creating_monst_class_e) {
+          tp = tp_random_monst_class_e(p);
+        }
+      }
+
       //
       // If a hard monst room then always give treasure
       //
-      auto r           = d->getr(x, y);
-      bool be_generous = false;
+      auto r                     = d->getr(x, y);
+      bool is_more_generous_room = false;
       if (r) {
-        if (r->is_hard_set) {
-          be_generous = r->is_hard;
+        if (r->is_more_generous_room_set) {
+          is_more_generous_room = r->is_more_generous_room;
         } else {
-          be_generous    = r->contains(MAP_DEPTH_OBJ, Charmap::MONST_CLASS_C, Charmap::MONST_CLASS_B, Charmap::DOOR);
-          r->is_hard_set = true;
-          r->is_hard     = be_generous;
+          is_more_generous_room        = r->contains(MAP_DEPTH_OBJ, Charmap::DOOR);
+          r->is_more_generous_room_set = true;
+          r->is_more_generous_room     = is_more_generous_room;
         }
       }
 
@@ -885,15 +884,14 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
           // Else choose a normal mob
           //
           if (d->is_mob_spawner_class_a(x, y)) {
-            if (be_generous) {
+            if (d1000() < d1000_chance_of_creating_mob_spawner_class_a) {
               tp = tp_random_mob_spawner_class_a(p);
-            } else {
-              if (pcg_random_range(0, 100) < 50) {
-                tp = tp_random_mob_spawner_class_a(p);
-              }
             }
-          } else if (d->is_mob_spawner_class_b(x, y)) {
-            tp = tp_random_mob_spawner_class_b(p);
+          }
+          if (d->is_mob_spawner_class_b(x, y)) {
+            if (d1000() < d1000_chance_of_creating_mob_spawner_class_b) {
+              tp = tp_random_mob_spawner_class_b(p);
+            }
           }
         }
       }
@@ -902,12 +900,56 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         tp = tp_random_barrel();
       }
 
-      if (d->is_treasure_type(x, y)) {
-        if (be_generous) {
-          tp = tp_random_treasure();
-        } else {
-          if (pcg_random_range(0, 100) < 50) {
-            tp = tp_random_treasure();
+      if (r && r->is_secret) {
+        //
+        // For secret rooms, be generous and place the good stuff first.
+        // We enchant this later after placing.
+        //
+        if (d->is_treasure_class_a(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_a * 3) {
+            tp = tp_random_treasure_class_a(p);
+          }
+        }
+        if (d->is_treasure_class_b(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_b * 3) {
+            tp = tp_random_treasure_class_b(p);
+          }
+        }
+        if (d->is_treasure_class_c(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_c * 3) {
+            tp = tp_random_treasure_class_c(p);
+          }
+        }
+      } else if (is_more_generous_room) {
+        if (d->is_treasure_class_a(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_a * 2) {
+            tp = tp_random_treasure_class_a(p);
+          }
+        }
+        if (d->is_treasure_class_b(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_b * 2) {
+            tp = tp_random_treasure_class_b(p);
+          }
+        }
+        if (d->is_treasure_class_c(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_c * 2) {
+            tp = tp_random_treasure_class_c(p);
+          }
+        }
+      } else {
+        if (d->is_treasure_class_a(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_a) {
+            tp = tp_random_treasure_class_a(p);
+          }
+        }
+        if (d->is_treasure_class_b(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_b) {
+            tp = tp_random_treasure_class_b(p);
+          }
+        }
+        if (d->is_treasure_class_c(x, y)) {
+          if (d1000() < d1000_chance_of_creating_treasure_class_c) {
+            tp = tp_random_treasure_class_c(p);
           }
         }
       }
@@ -917,73 +959,51 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         // For secret rooms, be generous and place the good stuff first.
         // We enchant this later after placing.
         //
-        if (d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y)) {
-          if (pcg_random_range(0, 100) < 80) {
-            tp = tp_random_item_class_c();
-          } else if (pcg_random_range(0, 100) < 80) {
-            tp = tp_random_item_class_b();
-          } else {
-            tp = tp_random_item_class_a();
+        if (d->is_weapon_class_a(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_a * 3) {
+            tp = tp_random_weapon_class_a(p);
+          }
+        }
+        if (d->is_weapon_class_b(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_b * 3) {
+            tp = tp_random_weapon_class_b(p);
+          }
+        }
+        if (d->is_weapon_class_c(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_c * 3) {
+            tp = tp_random_weapon_class_c(p);
+          }
+        }
+      } else if (is_more_generous_room) {
+        if (d->is_weapon_class_a(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_a * 2) {
+            tp = tp_random_weapon_class_a(p);
+          }
+        }
+        if (d->is_weapon_class_b(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_b * 2) {
+            tp = tp_random_weapon_class_b(p);
+          }
+        }
+        if (d->is_weapon_class_c(x, y)) {
+          if (d1000() < d1000_chance_of_creating_weapon_class_c * 2) {
+            tp = tp_random_weapon_class_c(p);
           }
         }
       } else {
-        if (d->is_treasure_class_a(x, y)) {
-          if (be_generous) {
-            tp = tp_random_item_class_a();
-          } else {
-            if (pcg_random_range(0, 100) < 50) {
-              tp = tp_random_item_class_a();
-            }
-          }
-        }
-
-        if (d->is_treasure_class_b(x, y)) {
-          if (be_generous) {
-            tp = tp_random_item_class_b();
-          } else {
-            if (pcg_random_range(0, 100) < 50) {
-              tp = tp_random_item_class_b();
-            }
-          }
-        }
-
-        if (d->is_treasure_class_c(x, y)) {
-          if (be_generous) {
-            tp = tp_random_item_class_c();
-          } else {
-            if (pcg_random_range(0, 100) < 50) {
-              tp = tp_random_item_class_c();
-            }
-          }
-        }
-
         if (d->is_weapon_class_a(x, y)) {
-          if (be_generous) {
-            tp = tp_random_weapon_class_a();
-          } else {
-            if (pcg_random_range(0, 100) < 50) {
-              tp = tp_random_weapon_class_a();
-            }
+          if (d1000() < d1000_chance_of_creating_weapon_class_a) {
+            tp = tp_random_weapon_class_a(p);
           }
         }
-
         if (d->is_weapon_class_b(x, y)) {
-          if (be_generous) {
-            tp = tp_random_weapon_class_b();
-          } else {
-            if (pcg_random_range(0, 100) < 50) {
-              tp = tp_random_weapon_class_b();
-            }
+          if (d1000() < d1000_chance_of_creating_weapon_class_b) {
+            tp = tp_random_weapon_class_b(p);
           }
         }
-
         if (d->is_weapon_class_c(x, y)) {
-          if (be_generous) {
-            tp = tp_random_weapon_class_c();
-          } else {
-            if (pcg_random_range(0, 100) < 50) {
-              tp = tp_random_weapon_class_c();
-            }
+          if (d1000() < d1000_chance_of_creating_weapon_class_c) {
+            tp = tp_random_weapon_class_c(p);
           }
         }
       }

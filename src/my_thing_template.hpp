@@ -510,7 +510,7 @@ private:
   int _unused_flag162 {};
   int _unused_flag163 {};
   int _unused_flag164 {};
-  int _unused_flag165 {};
+  int _is_monst_class_e {};
   int _unused_flag166 {};
   int _is_mob_spawner_class_b {};
   int _is_mob_spawner_class_a {};
@@ -1372,7 +1372,7 @@ public:
   int unused_flag162(void) const { return _unused_flag162; }
   int unused_flag163(void) const { return _unused_flag163; }
   int unused_flag164(void) const { return _unused_flag164; }
-  int unused_flag165(void) const { return _unused_flag165; }
+  int is_monst_class_e(void) const { return _is_monst_class_e; }
   int unused_flag166(void) const { return _unused_flag166; }
   int is_mob_spawner_class_b(void) const { return _is_mob_spawner_class_b; }
   int is_mob_spawner_class_a(void) const { return _is_mob_spawner_class_a; }
@@ -2000,7 +2000,7 @@ public:
   void set_unused_flag162(int v) { _unused_flag162 = v; }
   void set_unused_flag163(int v) { _unused_flag163 = v; }
   void set_unused_flag164(int v) { _unused_flag164 = v; }
-  void set_unused_flag165(int v) { _unused_flag165 = v; }
+  void set_is_monst_class_e(int v) { _is_monst_class_e = v; }
   void set_unused_flag166(int v) { _unused_flag166 = v; }
   void set_is_mob_spawner_class_b(int v) { _is_mob_spawner_class_b = v; }
   void set_is_mob_spawner_class_a(int v) { _is_mob_spawner_class_a = v; }
@@ -2186,6 +2186,14 @@ class Tp *tp_random_wand_class_c(void);
 class Tp *tp_random_ring_class_a(void);
 class Tp *tp_random_ring_class_b(void);
 class Tp *tp_random_ring_class_c(void);
+class Tp *tp_random_treasure_class_a(void);
+class Tp *tp_random_treasure_class_b(void);
+class Tp *tp_random_treasure_class_c(void);
+class Tp *tp_random_monst_class_a(void);
+class Tp *tp_random_monst_class_b(void);
+class Tp *tp_random_monst_class_c(void);
+class Tp *tp_random_monst_class_d(void);
+class Tp *tp_random_monst_class_e(void);
 
 const Tpidmap &tp_get_skills(void);
 

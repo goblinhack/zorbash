@@ -27,6 +27,11 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth)
   this->difficulty_depth = difficulty_depth;
   world_at               = at;
 
+  //
+  // Setup the various chances of things appearing.
+  //
+  set_chances_of_creating();
+
   IF_DEBUG2
   {
     log("-");

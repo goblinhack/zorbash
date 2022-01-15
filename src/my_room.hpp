@@ -42,8 +42,8 @@ public:
   bool has_door_left {false};
   bool has_door_right {false};
 
-  bool is_hard_set {};
-  bool is_hard {};
+  bool is_more_generous_room_set {};
+  bool is_more_generous_room {};
 
   //
   // All doors in this room. We will choose one for connectivity.
