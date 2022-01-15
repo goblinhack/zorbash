@@ -480,12 +480,12 @@ do
       set_unused_flag176 \
       set_unused_flag177 \
       set_unused_flag178 \
-      set_unused_flag179 \
-      set_unused_flag180 \
-      set_unused_flag181 \
-      set_unused_flag182 \
-      set_unused_flag183 \
-      set_unused_flag184 \
+      set_stat_def_penalty_when_stuck_max \
+      set_stat_def_penalty_when_idle_max \
+      set_stat_def_penalty_when_in_deep_water \
+      set_stat_def_penalty_when_in_shallow_water \
+      set_stat_def_penalty_when_stuck \
+      set_stat_def_penalty_when_idle \
       set_is_able_to_move_diagonally \
       set_is_meltable \
       set_is_amulet \

@@ -949,6 +949,7 @@ public:
   int get_stat_con(void);
   int get_stat_def_mod(void);
   int get_stat_def_total(void);
+  int get_stat_def_penalties_total(void);
   int get_stat_def(void);
   int get_stat_dex_mod(void);
   int get_stat_dex_total(void);
@@ -1513,13 +1514,13 @@ public:
   int unused_flag176(void);
   int unused_flag177(void);
   int unused_flag178(void);
-  int unused_flag179(void);
+  int stat_def_penalty_when_stuck_max(void);
   int unused_flag17(void);
-  int unused_flag180(void);
-  int unused_flag181(void);
-  int unused_flag182(void);
-  int unused_flag183(void);
-  int unused_flag184(void);
+  int stat_def_penalty_when_idle_max(void);
+  int stat_def_penalty_when_in_deep_water(void);
+  int stat_def_penalty_when_in_shallow_water(void);
+  int stat_def_penalty_when_stuck(void);
+  int stat_def_penalty_when_idle(void);
   int is_able_to_move_diagonally(void);
   int unused_flag18(void);
   int unused_flag19(void);
