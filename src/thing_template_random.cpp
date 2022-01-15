@@ -42,6 +42,11 @@ static Tpidmap tp_item_not_a_container_class_b;
 static Tpidmap tp_item_not_a_container_class_c;
 static Tpidmap tp_key;
 static Tpidmap tp_monst;
+static Tpidmap tp_monst_class_a;
+static Tpidmap tp_monst_class_b;
+static Tpidmap tp_monst_class_c;
+static Tpidmap tp_monst_class_d;
+static Tpidmap tp_monst_class_e;
 static Tpidmap tp_pink_splatter;
 static Tpidmap tp_potion;
 static Tpidmap tp_ring;
@@ -65,6 +70,9 @@ static Tpidmap tp_weapon;
 static Tpidmap tp_weapon_class_a;
 static Tpidmap tp_weapon_class_b;
 static Tpidmap tp_weapon_class_c;
+static Tpidmap tp_treasure_class_a;
+static Tpidmap tp_treasure_class_b;
+static Tpidmap tp_treasure_class_c;
 
 void tp_random_init(void)
 {
@@ -257,6 +265,16 @@ void tp_random_init(void)
       }
     }
 
+    if (tp->is_treasure_class_a()) {
+      tp_treasure_class_a.push_back(tp);
+    }
+    if (tp->is_treasure_class_b()) {
+      tp_treasure_class_b.push_back(tp);
+    }
+    if (tp->is_treasure_class_c()) {
+      tp_treasure_class_c.push_back(tp);
+    }
+
     if (tp->is_wand()) {
       if (tp->is_treasure_class_a()) {
         tp_wand_class_a.push_back(tp);
@@ -284,6 +302,21 @@ void tp_random_init(void)
     if (! tp->is_minion()) {
       if (tp->is_monst()) {
         tp_monst.push_back(tp);
+      }
+      if (tp->is_monst_class_a()) {
+        tp_monst_class_a.push_back(tp);
+      }
+      if (tp->is_monst_class_b()) {
+        tp_monst_class_b.push_back(tp);
+      }
+      if (tp->is_monst_class_c()) {
+        tp_monst_class_c.push_back(tp);
+      }
+      if (tp->is_monst_class_d()) {
+        tp_monst_class_d.push_back(tp);
+      }
+      if (tp->is_monst_class_e()) {
+        tp_monst_class_e.push_back(tp);
       }
     }
   }
@@ -344,96 +377,49 @@ Tpp tp_random_monst(void)
   return tp_get_with_rarity_filter(tp_monst);
 }
 
-Tpp Level::tp_random_monst(const point &p)
+Tpp tp_random_monst_class_a(void)
 {
   TRACE_NO_INDENT();
-  auto tries = 0U;
-  for (;;) {
-    if (tries++ > 10000) {
-      return nullptr;
-    }
-    auto tpp = ::tp_random_monst();
-    if (tpp->is_disliked_by_me(this, p)) {
-      continue;
-    }
-
-    return tpp;
+  if (unlikely(! tp_monst_class_a.size())) {
+    return tp_random_monst();
   }
+  return tp_get_with_rarity_filter(tp_monst_class_a);
 }
 
-Tpp Level::tp_random_monst_class_a(const point &p)
+Tpp tp_random_monst_class_b(void)
 {
   TRACE_NO_INDENT();
-
-  auto tries = 0U;
-  for (;;) {
-    if (tries++ > 10000) {
-      CON("Cannot place class A monst at %d,%d", p.x, p.y);
-      return tp_random_monst(p);
-    }
-
-    auto tpp = ::tp_random_monst();
-    if (tpp->is_disliked_by_me(this, p)) {
-      continue;
-    }
-
-    if (! tpp->is_monst_class_a()) {
-      continue;
-    }
-
-    dbg("DGN: Placed monster class A '%s'", tpp->short_text_capitalise().c_str());
-    return tpp;
+  if (unlikely(! tp_monst_class_b.size())) {
+    return tp_random_monst_class_a();
   }
+  return tp_get_with_rarity_filter(tp_monst_class_b);
 }
 
-Tpp Level::tp_random_monst_class_b(const point &p)
+Tpp tp_random_monst_class_c(void)
 {
   TRACE_NO_INDENT();
-
-  auto tries = 0U;
-  for (;;) {
-    if (tries++ > 10000) {
-      CON("Cannot place class B monst at %d,%d", p.x, p.y);
-      return tp_random_monst(p);
-    }
-
-    auto tpp = tp_random_monst(p);
-    if (tpp->is_disliked_by_me(this, p)) {
-      continue;
-    }
-
-    if (! tpp->is_monst_class_b()) {
-      continue;
-    }
-
-    dbg("DGN: Placed monster class B '%s'", tpp->short_text_capitalise().c_str());
-    return tpp;
+  if (unlikely(! tp_monst_class_c.size())) {
+    return tp_random_monst_class_b();
   }
+  return tp_get_with_rarity_filter(tp_monst_class_c);
 }
 
-Tpp Level::tp_random_monst_class_c(const point &p)
+Tpp tp_random_monst_class_d(void)
 {
   TRACE_NO_INDENT();
-
-  auto tries = 0U;
-  for (;;) {
-    if (tries++ > 10000) {
-      CON("Cannot place class C monst at %d,%d", p.x, p.y);
-      return tp_random_monst(p);
-    }
-
-    auto tpp = tp_random_monst(p);
-    if (tpp->is_disliked_by_me(this, p)) {
-      continue;
-    }
-
-    if (! tpp->is_monst_class_c()) {
-      continue;
-    }
-
-    dbg("DGN: Placed monster class C '%s'", tpp->short_text_capitalise().c_str());
-    return tpp;
+  if (unlikely(! tp_monst_class_d.size())) {
+    return tp_random_monst_class_c();
   }
+  return tp_get_with_rarity_filter(tp_monst_class_d);
+}
+
+Tpp tp_random_monst_class_e(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_monst_class_e.size())) {
+    return tp_random_monst_class_d();
+  }
+  return tp_get_with_rarity_filter(tp_monst_class_e);
 }
 
 Tpp tp_random_food(void)
@@ -480,8 +466,7 @@ Tpp tp_random_item_class_b(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_item_class_b.size())) {
-    ERR("No item_class_b found");
-    return nullptr;
+    return tp_random_item_class_a();
   }
   return tp_get_with_rarity_filter(tp_item_class_b);
 }
@@ -490,8 +475,7 @@ Tpp tp_random_item_class_c(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_item_class_c.size())) {
-    ERR("No item_class_c found");
-    return nullptr;
+    return tp_random_item_class_b();
   }
   return tp_get_with_rarity_filter(tp_item_class_c);
 }
@@ -510,8 +494,7 @@ Tpp tp_random_item_not_a_container_class_b(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_item_not_a_container_class_b.size())) {
-    ERR("No item_not_a_container_class_b found");
-    return nullptr;
+    return tp_random_item_not_a_container_class_a();
   }
   return tp_get_with_rarity_filter(tp_item_not_a_container_class_b);
 }
@@ -520,8 +503,7 @@ Tpp tp_random_item_not_a_container_class_c(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_item_not_a_container_class_c.size())) {
-    ERR("No item_not_a_container_class_c found");
-    return nullptr;
+    return tp_random_item_not_a_container_class_b();
   }
   return tp_get_with_rarity_filter(tp_item_not_a_container_class_c);
 }
@@ -551,6 +533,33 @@ Tpp tp_random_weapon_class_c(void)
     return tp_random_weapon_class_b();
   }
   return tp_get_with_rarity_filter(tp_weapon_class_c);
+}
+
+Tpp tp_random_treasure_class_a(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_treasure_class_a.size())) {
+    return tp_random_treasure();
+  }
+  return tp_get_with_rarity_filter(tp_treasure_class_a);
+}
+
+Tpp tp_random_treasure_class_b(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_treasure_class_b.size())) {
+    return tp_random_treasure_class_a();
+  }
+  return tp_get_with_rarity_filter(tp_treasure_class_b);
+}
+
+Tpp tp_random_treasure_class_c(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_treasure_class_c.size())) {
+    return tp_random_treasure_class_b();
+  }
+  return tp_get_with_rarity_filter(tp_treasure_class_c);
 }
 
 Tpp tp_random_wand_class_a(void)
@@ -850,34 +859,6 @@ Tpp tp_random_ethereal_mob(void)
 Tpp tp_random_mob_spawner_class_a(void) { return tp_random_mob(); }
 
 Tpp tp_random_mob_spawner_class_b(void) { return tp_random_mob(); }
-
-Tpp Level::tp_random_mob(const point &p)
-{
-  TRACE_NO_INDENT();
-  auto tries = 0U;
-  for (;;) {
-    if (tries++ > 10000) {
-      return nullptr;
-    }
-    auto tpp = ::tp_random_mob();
-    if (tpp->is_disliked_by_me(this, p)) {
-      continue;
-    }
-    return tpp;
-  }
-}
-
-Tpp Level::tp_random_mob_spawner_class_a(const point &p)
-{
-  TRACE_NO_INDENT();
-  return tp_random_mob(p);
-}
-
-Tpp Level::tp_random_mob_spawner_class_b(const point &p)
-{
-  TRACE_NO_INDENT();
-  return tp_random_mob(p);
-}
 
 Tpp tp_random_blood(void)
 {

@@ -466,7 +466,7 @@ do
       set_unused_flag162 \
       set_unused_flag163 \
       set_unused_flag164 \
-      set_unused_flag165 \
+      set_is_monst_class_e \
       set_unused_flag166 \
       set_is_mob_spawner_class_b \
       set_is_mob_spawner_class_a \

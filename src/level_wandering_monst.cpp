@@ -52,15 +52,21 @@ bool Level::create_wandering_monster(void)
 
     point p(x, y);
     tp = nullptr;
-    if (pcg_random_range(0, 100) < 50) {
+    if (d1000() < d1000_chance_of_creating_monst_class_a) {
       tp = tp_random_monst_class_a(p);
       TOPCON("You hear a distant squeak.");
-    } else if (pcg_random_range(0, 100) < 20) {
+    } else if (d1000() < d1000_chance_of_creating_monst_class_b) {
       tp = tp_random_monst_class_b(p);
-      TOPCON("You hear a distant growl.");
-    } else if (pcg_random_range(0, 100) < 10) {
+      TOPCON("You hear a distant groan.");
+    } else if (d1000() < d1000_chance_of_creating_monst_class_c) {
       tp = tp_random_monst_class_c(p);
+      TOPCON("You hear a distant growl.");
+    } else if (d1000() < d1000_chance_of_creating_monst_class_d) {
+      tp = tp_random_monst_class_d(p);
       TOPCON("You hear a distant roar.");
+    } else if (d1000() < d1000_chance_of_creating_monst_class_e) {
+      tp = tp_random_monst_class_e(p);
+      TOPCON("You hear a distant bellow.");
     }
 
     if (tp) {

@@ -220,6 +220,16 @@ void Charmap::init_charmaps(void)
   c->c                = char_index;
   c->is_monst_class_c = true;
 
+  char_index          = Charmap::MONST_CLASS_D;
+  c                   = &all_charmaps[ char_index ];
+  c->c                = char_index;
+  c->is_monst_class_d = true;
+
+  char_index          = Charmap::MONST_CLASS_E;
+  c                   = &all_charmaps[ char_index ];
+  c->c                = char_index;
+  c->is_monst_class_e = true;
+
   char_index = Charmap::FOOD;
   c          = &all_charmaps[ char_index ];
   c->c       = char_index;

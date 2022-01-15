@@ -45,7 +45,9 @@ public:
     MOB_SPAWNER_CLASS_B = 'G',
     MONST_CLASS_A       = 'm',
     MONST_CLASS_B       = 'M',
-    MONST_CLASS_C       = 'H',
+    MONST_CLASS_C       = 'h',
+    MONST_CLASS_D       = 'H',
+    MONST_CLASS_E       = 'N',
     NONE                = '\0',
     POTION              = '!',
     ROCK                = 'r',
@@ -94,6 +96,8 @@ public:
   bool is_monst_class_a {false};
   bool is_monst_class_b {false};
   bool is_monst_class_c {false};
+  bool is_monst_class_d {false};
+  bool is_monst_class_e {false};
   bool is_potion {false};
   bool is_wand {false};
   bool is_ring {false};

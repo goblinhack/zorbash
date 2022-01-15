@@ -36,7 +36,9 @@ import my
 # MOB_SPAWNER_CLASS_B           G  always generated
 # MONST_CLASS_A                 m
 # MONST_CLASS_B                 M
-# MONST_CLASS_C                 H
+# MONST_CLASS_C                 h
+# MONST_CLASS_D                 H
+# MONST_CLASS_E                 N
 # TREASURE_CLASS_A              $
 # TREASURE_CLASS_B              2
 # TREASURE_CLASS_C              3

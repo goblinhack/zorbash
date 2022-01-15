@@ -2382,10 +2382,10 @@ int Thing::unused_flag164(void)
   return (tp()->unused_flag164());
 }
 
-int Thing::unused_flag165(void)
+int Thing::is_monst_class_e(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag165());
+  return (tp()->is_monst_class_e());
 }
 
 int Thing::unused_flag166(void)

@@ -112,12 +112,29 @@ public:
   int difficulty_depth {};
 
   //
+  // Chances for various things to appear
+  //
+  int d1000_chance_of_creating_monst_class_a {};
+  int d1000_chance_of_creating_monst_class_b {};
+  int d1000_chance_of_creating_monst_class_c {};
+  int d1000_chance_of_creating_monst_class_d {};
+  int d1000_chance_of_creating_monst_class_e {};
+  int d1000_chance_of_creating_mob_spawner_class_a {};
+  int d1000_chance_of_creating_mob_spawner_class_b {};
+  int d1000_chance_of_creating_treasure_class_a {};
+  int d1000_chance_of_creating_treasure_class_b {};
+  int d1000_chance_of_creating_treasure_class_c {};
+  int d1000_chance_of_creating_weapon_class_a {};
+  int d1000_chance_of_creating_weapon_class_b {};
+  int d1000_chance_of_creating_weapon_class_c {};
+
+  //
   // Current on screen map limits in tile coords
   //
-  int minx;
-  int maxx;
-  int miny;
-  int maxy;
+  int minx {};
+  int maxx {};
+  int miny {};
+  int maxy {};
 
   bool cursor_found {};
   bool is_heatmap_valid {};
@@ -589,6 +606,14 @@ public:
   Tpp tp_random_monst_class_a(const point &p);
   Tpp tp_random_monst_class_c(const point &p);
   Tpp tp_random_monst_class_b(const point &p);
+  Tpp tp_random_monst_class_d(const point &p);
+  Tpp tp_random_monst_class_e(const point &p);
+  Tpp tp_random_treasure_class_a(const point &p);
+  Tpp tp_random_treasure_class_c(const point &p);
+  Tpp tp_random_treasure_class_b(const point &p);
+  Tpp tp_random_weapon_class_a(const point &p);
+  Tpp tp_random_weapon_class_c(const point &p);
+  Tpp tp_random_weapon_class_b(const point &p);
 
   bool buffbox_over(const uint32_t slot);
   bool can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag);
@@ -871,6 +896,7 @@ public:
   void scroll_map_to_player_immediately(void);
   void scroll_map_to_player(void);
   void scroll_map(void);
+  void set_chances_of_creating(void);
   void set_gfx_water(const int x, const int y);
   void set_is_able_to_stand_on(const int x, const int y);
   void set_is_acid(const int x, const int y);

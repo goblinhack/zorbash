@@ -1500,7 +1500,7 @@ public:
   int unused_flag162(void);
   int unused_flag163(void);
   int unused_flag164(void);
-  int unused_flag165(void);
+  int is_monst_class_e(void);
   int unused_flag166(void);
   int is_mob_spawner_class_b(void);
   int is_mob_spawner_class_a(void);
