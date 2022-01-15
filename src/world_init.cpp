@@ -24,7 +24,7 @@ void World::clear(void)
   }
 }
 
-Levelp World::new_level_at(point3d at, int seed)
+Levelp World::new_level_at(point3d at, uint32_t seed, int difficulty_depth)
 {
   TRACE_AND_INDENT();
   auto old_level = get(levels, at.x, at.y, at.z);
@@ -32,7 +32,7 @@ Levelp World::new_level_at(point3d at, int seed)
 
   auto new_level = new Level();
   set(levels, at.x, at.y, at.z, new_level);
-  new_level->create(at, seed);
+  new_level->create(at, seed, difficulty_depth);
 
   return new_level;
 }

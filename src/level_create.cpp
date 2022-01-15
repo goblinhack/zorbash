@@ -12,7 +12,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-void Level::create(point3d at, int seed)
+void Level::create(point3d at, uint32_t seed, int difficulty_depth)
 {
   TRACE_AND_INDENT();
   pcg_srand(game->seed + at.z);
@@ -23,8 +23,9 @@ void Level::create(point3d at, int seed)
   is_level_type_dungeon = false;
   is_level_type_sewer   = false;
 
-  this->seed = seed;
-  world_at   = at;
+  this->seed             = seed;
+  this->difficulty_depth = difficulty_depth;
+  world_at               = at;
 
   IF_DEBUG2
   {

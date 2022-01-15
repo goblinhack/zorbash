@@ -13,7 +13,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-bool Level::create_dungeon(point3d at, int seed)
+bool Level::create_dungeon(point3d at, uint32_t seed)
 {
   TRACE_AND_INDENT();
   dbg("DGN: Create dungeon");

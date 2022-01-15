@@ -107,6 +107,11 @@ public:
   point3d world_at;
 
   //
+  // Levels are group into difficulty levels
+  //
+  int difficulty_depth {};
+
+  //
   // Current on screen map limits in tile coords
   //
   int minx;
@@ -148,7 +153,7 @@ public:
   //
   // All randomness jumps off of this as the root
   //
-  int seed {};
+  uint32_t seed {};
 
 #define MAX_THING_GROUPS              3
 #define THING_GROUP_PRIO_HIGH         0
@@ -589,9 +594,9 @@ public:
   bool can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag);
   bool can_see_obstacle(int x, int y);
   bool can_see_unimpeded(int x0, int y0, int x1, int y1);
-  bool create_dungeon(point3d at, int seed);
+  bool create_dungeon(point3d at, uint32_t seed);
   bool create_sewer_pipes(point3d at);
-  bool create_sewer(point3d at, int seed);
+  bool create_sewer(point3d at, uint32_t seed);
   bool create_sewer_pools(void);
   bool create_wandering_monster(void);
   bool debuffbox_over(const uint32_t slot);
@@ -778,7 +783,7 @@ public:
   void create_dungeon_place_sewer_pipes(Dungeonp d);
   void create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries);
   void created(void);
-  void create(point3d at, int seed);
+  void create(point3d at, uint32_t seed, int difficulty_depth);
   void create_sewer_place_remaining_walls(const std::string &what);
   void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
   void cursor_check_if_scroll_needed(void);

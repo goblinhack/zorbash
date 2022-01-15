@@ -158,8 +158,7 @@ public:
   void help_select(void);
   void hiscore_select(void);
   void init_jump_paths(void);
-  void init_level(point3d);
-  void init_levels(void);
+  void init_level(point3d, int difficulty_depth = 0);
   void init(void);
   void start(void);
   void place_player(void);
@@ -246,7 +245,7 @@ public:
   bool things_are_moving {};
   // fpoint      mouse_over;        // Mouse cursor
   point       minimap_over;      // Which tile in the minimap
-  int         seed {};           // All randomness jumps off of this
+  uint32_t    seed {};           // All randomness jumps off of this
   std::string tick_requested {}; // Something has requested a game tick
   std::string seed_name {};      // Human readable version of the above
   point3d     current_level;     // Where we are in the world.

@@ -68,7 +68,7 @@ public:
   //
   std::vector< Roomp > all_placed_rooms;
 
-  Dungeon(int map_width, int map_height, int grid_width, int grid_height, int seed);
+  Dungeon(int map_width, int map_height, int grid_width, int grid_height, uint32_t seed);
   Dungeon(int level);
   ~Dungeon();
 

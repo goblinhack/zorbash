@@ -13,7 +13,7 @@
 #include "my_thing_ai.hpp"
 #include "my_thing_template.hpp"
 
-bool Level::create_sewer(point3d at, int seed)
+bool Level::create_sewer(point3d at, uint32_t seed)
 {
   TRACE_AND_INDENT();
   log("Create sewer at (%d,%d,%d)", at.x, at.y, at.z);
