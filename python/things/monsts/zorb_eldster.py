@@ -17,6 +17,7 @@ def tp_init(name, text_name):
     mytp.set_stat_str(8)
     mytp.set_health_initial_dice("2d5")
     mytp.set_is_able_to_use_weapons(True)
+    mytp.set_is_monst_class_b(True)
 
     delay = 300
     mytp.set_tile(tile=name + ".1", delay_ms=delay, frame=1)

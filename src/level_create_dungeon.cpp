@@ -829,21 +829,21 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         tp = tp_random_secret_door();
       }
 
-      if (d->is_monst_easy(x, y)) {
+      if (d->is_monst_class_a(x, y)) {
         if (pcg_random_range(0, 100) < 50) {
-          tp = tp_random_monst_easy(p);
+          tp = tp_random_monst_class_a(p);
         }
       }
 
-      if (d->is_monst_med(x, y)) {
+      if (d->is_monst_class_b(x, y)) {
         if (pcg_random_range(0, 100) < 50) {
-          tp = tp_random_monst_med(p);
+          tp = tp_random_monst_class_b(p);
         }
       }
 
-      if (d->is_monst_hard(x, y)) {
+      if (d->is_monst_class_c(x, y)) {
         if (pcg_random_range(0, 100) < 50) {
-          tp = tp_random_monst_hard(p);
+          tp = tp_random_monst_class_c(p);
         }
       }
 
@@ -865,13 +865,13 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         if (r->is_hard_set) {
           be_generous = r->is_hard;
         } else {
-          be_generous    = r->contains(MAP_DEPTH_OBJ, Charmap::MONST_HARD, Charmap::MONST_MED, Charmap::DOOR);
+          be_generous    = r->contains(MAP_DEPTH_OBJ, Charmap::MONST_CLASS_C, Charmap::MONST_CLASS_B, Charmap::DOOR);
           r->is_hard_set = true;
           r->is_hard     = be_generous;
         }
       }
 
-      if (d->is_mob_spawner_easy(x, y) || d->is_mob_spawner_hard(x, y)) {
+      if (d->is_mob_spawner_class_a(x, y) || d->is_mob_spawner_class_b(x, y)) {
         //
         // If surrounded by hazards then choose an ethereal mob
         //
@@ -884,16 +884,16 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
           //
           // Else choose a normal mob
           //
-          if (d->is_mob_spawner_easy(x, y)) {
+          if (d->is_mob_spawner_class_a(x, y)) {
             if (be_generous) {
-              tp = tp_random_mob_easy(p);
+              tp = tp_random_mob_spawner_class_a(p);
             } else {
               if (pcg_random_range(0, 100) < 50) {
-                tp = tp_random_mob_easy(p);
+                tp = tp_random_mob_spawner_class_a(p);
               }
             }
-          } else if (d->is_mob_spawner_hard(x, y)) {
-            tp = tp_random_mob_hard(p);
+          } else if (d->is_mob_spawner_class_b(x, y)) {
+            tp = tp_random_mob_spawner_class_b(p);
           }
         }
       }

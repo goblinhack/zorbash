@@ -22,6 +22,7 @@ def tp_init(name, text_name):
     mytp.set_text_hits("hits")
     mytp.set_gfx_anim_use("attack_punch")
     mytp.set_damage_natural_attack_type("punch")
+    mytp.set_is_monst_class_b(True)
     mytp.set_damage_natural_attack_dice("2d6+2")
     mytp.set_health_initial_dice("2d10+4")
     mytp.set_is_intelligent(True)

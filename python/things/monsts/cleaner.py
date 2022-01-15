@@ -58,6 +58,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_jelly_eater(True)
     mytp.set_is_loggable(True)
     mytp.set_is_meat_eater(True)
+    mytp.set_is_monst_class_b(True)
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_potion_eater(True)

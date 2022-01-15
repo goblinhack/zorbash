@@ -578,12 +578,12 @@ public:
   Thingp thing_new(const std::string &tp_name, const point at, Thingp owner = nullptr);
 
   Tpp tp_random_mob(const point &p);
-  Tpp tp_random_mob_easy(const point &p);
-  Tpp tp_random_mob_hard(const point &p);
+  Tpp tp_random_mob_spawner_class_a(const point &p);
+  Tpp tp_random_mob_spawner_class_b(const point &p);
   Tpp tp_random_monst(const point &p);
-  Tpp tp_random_monst_easy(const point &p);
-  Tpp tp_random_monst_hard(const point &p);
-  Tpp tp_random_monst_med(const point &p);
+  Tpp tp_random_monst_class_a(const point &p);
+  Tpp tp_random_monst_class_c(const point &p);
+  Tpp tp_random_monst_class_b(const point &p);
 
   bool buffbox_over(const uint32_t slot);
   bool can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag);
