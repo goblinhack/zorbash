@@ -468,12 +468,12 @@ do
       set_unused_flag164 \
       set_unused_flag165 \
       set_unused_flag166 \
-      set_unused_flag167 \
-      set_unused_flag168 \
-      set_unused_flag169 \
-      set_unused_flag170 \
-      set_unused_flag171 \
-      set_unused_flag172 \
+      set_is_mob_spawner_class_b \
+      set_is_mob_spawner_class_a \
+      set_is_monst_class_d \
+      set_is_monst_class_c \
+      set_is_monst_class_b \
+      set_is_monst_class_a \
       set_stat_att_penalty_when_in_deep_water \
       set_stat_att_penalty_when_in_shallow_water \
       set_stat_att_penalty_when_idle_max \

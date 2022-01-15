@@ -40,6 +40,7 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_ethereal_mob(True)
     mytp.set_is_loggable(True)
+    mytp.set_is_mob_spawner_class_a(True)
     mytp.set_is_mob_spawner(True)
     mytp.set_is_obs_destructable(True)
     mytp.set_is_shovable(True)

@@ -65,6 +65,7 @@ def tp_init(name, text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_meat_eater(True)
     mytp.set_is_meat(True)
+    mytp.set_is_monst_class_b(True)
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_red_blooded(True)

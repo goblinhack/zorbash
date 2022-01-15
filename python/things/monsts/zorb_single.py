@@ -5,6 +5,7 @@ def tp_init(name, text_name):
     mytp = zorb_all.tp_init(name, text_name)
     mytp.set_text_description("A very lesser and a bit insecure zorblin.")
     mytp.set_is_able_to_use_weapons(True)
+    mytp.set_is_monst_class_b(True)
     mytp.set_is_carrier_of_treasure_class_a(True)
     mytp.set_is_carrier_of_weapon_class_a(True)
 

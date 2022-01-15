@@ -32,17 +32,17 @@ import my
 # WALL                          x
 # WAND                          /
 
-# MINION_MOB_EASY               g  has a 50% chance of not heing generated
-# MINION_MOB_HARD               G  always generated
-# MONST_EASY                    m  has a 50% chance of not heing generated
-# MONST_MED                     M  has a 50% chance of not heing generated
-# MONST_HARD                    H  has a 50% chance of not heing generated
-# TREASURE_CLASS_A              $  has a 50% chance of not heing generated
-# TREASURE_CLASS_B              2  has a 50% chance of not heing generated
-# TREASURE_CLASS_C              3  has a 50% chance of not heing generated
-# WEAPON_CLASS_A                (  has a 50% chance of not heing generated
-# WEAPON_CLASS_B                )  has a 50% chance of not heing generated
-# WEAPON_CLASS_C                -  has a 50% chance of not heing generated
+# MOB_SPAWNER_CLASS_A           g
+# MOB_SPAWNER_CLASS_B           G  always generated
+# MONST_CLASS_A                 m
+# MONST_CLASS_B                 M
+# MONST_CLASS_C                 H
+# TREASURE_CLASS_A              $
+# TREASURE_CLASS_B              2
+# TREASURE_CLASS_C              3
+# WEAPON_CLASS_A                (
+# WEAPON_CLASS_B                )
+# WEAPON_CLASS_C                -
 
 # FOOD                          f  always generated
 # GOLD                          o  always generated

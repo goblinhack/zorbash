@@ -205,20 +205,20 @@ void Charmap::init_charmaps(void)
   c->c                 = char_index;
   c->is_weapon_class_c = true;
 
-  char_index       = Charmap::MONST_EASY;
-  c                = &all_charmaps[ char_index ];
-  c->c             = char_index;
-  c->is_monst_easy = true;
+  char_index          = Charmap::MONST_CLASS_A;
+  c                   = &all_charmaps[ char_index ];
+  c->c                = char_index;
+  c->is_monst_class_a = true;
 
-  char_index       = Charmap::MONST_MED;
-  c                = &all_charmaps[ char_index ];
-  c->c             = char_index;
-  c->is_monst_hard = true;
+  char_index          = Charmap::MONST_CLASS_B;
+  c                   = &all_charmaps[ char_index ];
+  c->c                = char_index;
+  c->is_monst_class_c = true;
 
-  char_index       = Charmap::MONST_HARD;
-  c                = &all_charmaps[ char_index ];
-  c->c             = char_index;
-  c->is_monst_hard = true;
+  char_index          = Charmap::MONST_CLASS_C;
+  c                   = &all_charmaps[ char_index ];
+  c->c                = char_index;
+  c->is_monst_class_c = true;
 
   char_index = Charmap::FOOD;
   c          = &all_charmaps[ char_index ];
@@ -249,13 +249,13 @@ void Charmap::init_charmaps(void)
   c          = &all_charmaps[ char_index ];
   c->c       = char_index;
 
-  char_index             = Charmap::MINION_MOB_EASY;
-  c                      = &all_charmaps[ char_index ];
-  c->c                   = char_index;
-  c->is_mob_spawner_easy = true;
+  char_index                = Charmap::MOB_SPAWNER_CLASS_A;
+  c                         = &all_charmaps[ char_index ];
+  c->c                      = char_index;
+  c->is_mob_spawner_class_a = true;
 
-  char_index             = Charmap::MINION_MOB_HARD;
-  c                      = &all_charmaps[ char_index ];
-  c->c                   = char_index;
-  c->is_mob_spawner_easy = true;
+  char_index                = Charmap::MOB_SPAWNER_CLASS_B;
+  c                         = &all_charmaps[ char_index ];
+  c->c                      = char_index;
+  c->is_mob_spawner_class_a = true;
 }

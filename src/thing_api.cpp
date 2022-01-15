@@ -2394,40 +2394,40 @@ int Thing::unused_flag166(void)
   return (tp()->unused_flag166());
 }
 
-int Thing::unused_flag167(void)
+int Thing::is_mob_spawner_class_b(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag167());
+  return (tp()->is_mob_spawner_class_b());
 }
 
-int Thing::unused_flag168(void)
+int Thing::is_mob_spawner_class_a(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag168());
+  return (tp()->is_mob_spawner_class_a());
 }
 
-int Thing::unused_flag169(void)
+int Thing::is_monst_class_d(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag169());
+  return (tp()->is_monst_class_d());
 }
 
-int Thing::unused_flag170(void)
+int Thing::is_monst_class_c(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag170());
+  return (tp()->is_monst_class_c());
 }
 
-int Thing::unused_flag171(void)
+int Thing::is_monst_class_b(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag171());
+  return (tp()->is_monst_class_b());
 }
 
-int Thing::unused_flag172(void)
+int Thing::is_monst_class_a(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag172());
+  return (tp()->is_monst_class_a());
 }
 
 int Thing::stat_att_penalty_when_in_deep_water(void)

@@ -76,6 +76,7 @@ def tp_init(name, text_name):
     mytp.set_is_green_blooded(True)
     mytp.set_is_hittable(True)
     mytp.set_is_loggable(True)
+    mytp.set_is_monst_class_b(True)
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_necrotic_danger_level(1)  # danger level

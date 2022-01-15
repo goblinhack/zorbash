@@ -512,13 +512,13 @@ private:
   int _unused_flag164 {};
   int _unused_flag165 {};
   int _unused_flag166 {};
-  int _unused_flag167 {};
-  int _unused_flag168 {};
-  int _unused_flag169 {};
+  int _is_mob_spawner_class_b {};
+  int _is_mob_spawner_class_a {};
+  int _is_monst_class_d {};
   int _unused_flag17 {};
-  int _unused_flag170 {};
-  int _unused_flag171 {};
-  int _unused_flag172 {};
+  int _is_monst_class_c {};
+  int _is_monst_class_b {};
+  int _is_monst_class_a {};
   int _stat_att_penalty_when_in_deep_water {};
   int _stat_att_penalty_when_in_shallow_water {};
   int _stat_att_penalty_when_idle_max {};
@@ -1374,13 +1374,13 @@ public:
   int unused_flag164(void) const { return _unused_flag164; }
   int unused_flag165(void) const { return _unused_flag165; }
   int unused_flag166(void) const { return _unused_flag166; }
-  int unused_flag167(void) const { return _unused_flag167; }
-  int unused_flag168(void) const { return _unused_flag168; }
-  int unused_flag169(void) const { return _unused_flag169; }
+  int is_mob_spawner_class_b(void) const { return _is_mob_spawner_class_b; }
+  int is_mob_spawner_class_a(void) const { return _is_mob_spawner_class_a; }
+  int is_monst_class_d(void) const { return _is_monst_class_d; }
   int unused_flag16(void) const { return _unused_flag16; }
-  int unused_flag170(void) const { return _unused_flag170; }
-  int unused_flag171(void) const { return _unused_flag171; }
-  int unused_flag172(void) const { return _unused_flag172; }
+  int is_monst_class_c(void) const { return _is_monst_class_c; }
+  int is_monst_class_b(void) const { return _is_monst_class_b; }
+  int is_monst_class_a(void) const { return _is_monst_class_a; }
   int stat_att_penalty_when_in_deep_water(void) const { return _stat_att_penalty_when_in_deep_water; }
   int stat_att_penalty_when_in_shallow_water(void) const { return _stat_att_penalty_when_in_shallow_water; }
   int stat_att_penalty_when_idle_max(void) const { return _stat_att_penalty_when_idle_max; }
@@ -2002,13 +2002,13 @@ public:
   void set_unused_flag164(int v) { _unused_flag164 = v; }
   void set_unused_flag165(int v) { _unused_flag165 = v; }
   void set_unused_flag166(int v) { _unused_flag166 = v; }
-  void set_unused_flag167(int v) { _unused_flag167 = v; }
-  void set_unused_flag168(int v) { _unused_flag168 = v; }
-  void set_unused_flag169(int v) { _unused_flag169 = v; }
+  void set_is_mob_spawner_class_b(int v) { _is_mob_spawner_class_b = v; }
+  void set_is_mob_spawner_class_a(int v) { _is_mob_spawner_class_a = v; }
+  void set_is_monst_class_d(int v) { _is_monst_class_d = v; }
   void set_unused_flag16(int v) { _unused_flag16 = v; }
-  void set_unused_flag170(int v) { _unused_flag170 = v; }
-  void set_unused_flag171(int v) { _unused_flag171 = v; }
-  void set_unused_flag172(int v) { _unused_flag172 = v; }
+  void set_is_monst_class_c(int v) { _is_monst_class_c = v; }
+  void set_is_monst_class_b(int v) { _is_monst_class_b = v; }
+  void set_is_monst_class_a(int v) { _is_monst_class_a = v; }
   void set_stat_att_penalty_when_in_deep_water(int v) { _stat_att_penalty_when_in_deep_water = v; }
   void set_stat_att_penalty_when_in_shallow_water(int v) { _stat_att_penalty_when_in_shallow_water = v; }
   void set_stat_att_penalty_when_idle_max(int v) { _stat_att_penalty_when_idle_max = v; }
@@ -2159,12 +2159,9 @@ class Tp *tp_random_item_not_a_container_class_a(void);
 class Tp *tp_random_item_not_a_container_class_b(void);
 class Tp *tp_random_item_not_a_container_class_c(void);
 class Tp *tp_random_key(void);
-class Tp *tp_random_mob_easy(void);
-class Tp *tp_random_mob_hard(void);
+class Tp *tp_random_mob_spawner_class_a(void);
+class Tp *tp_random_mob_spawner_class_b(void);
 class Tp *tp_random_mob(void);
-class Tp *tp_random_monst_easy(void);
-class Tp *tp_random_monst_hard(void);
-class Tp *tp_random_monst_med(void);
 class Tp *tp_random_monst(void);
 class Tp *tp_random_pink_splatter(void);
 class Tp *tp_random_potion(void);

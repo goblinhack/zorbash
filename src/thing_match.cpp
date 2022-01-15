@@ -1151,22 +1151,22 @@ bool Thing::matches(const std::string &what)
   if (unused_flag166() && (what == "unused_flag166")) {
     return true;
   }
-  if (unused_flag167() && (what == "unused_flag167")) {
+  if (is_mob_spawner_class_b() && (what == "is_mob_spawner_class_b")) {
     return true;
   }
-  if (unused_flag168() && (what == "unused_flag168")) {
+  if (is_mob_spawner_class_a() && (what == "is_mob_spawner_class_a")) {
     return true;
   }
-  if (unused_flag169() && (what == "unused_flag169")) {
+  if (is_monst_class_d() && (what == "is_monst_class_d")) {
     return true;
   }
-  if (unused_flag170() && (what == "unused_flag170")) {
+  if (is_monst_class_c() && (what == "is_monst_class_c")) {
     return true;
   }
-  if (unused_flag171() && (what == "unused_flag171")) {
+  if (is_monst_class_b() && (what == "is_monst_class_b")) {
     return true;
   }
-  if (unused_flag172() && (what == "unused_flag172")) {
+  if (is_monst_class_a() && (what == "is_monst_class_a")) {
     return true;
   }
   if (stat_att_penalty_when_in_deep_water() && (what == "stat_att_penalty_when_in_deep_water")) {
@@ -2433,23 +2433,23 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag166") {
     return &Thing::unused_flag166;
   }
-  if (what == "unused_flag167") {
-    return &Thing::unused_flag167;
+  if (what == "is_mob_spawner_class_b") {
+    return &Thing::is_mob_spawner_class_b;
   }
-  if (what == "unused_flag168") {
-    return &Thing::unused_flag168;
+  if (what == "is_mob_spawner_class_a") {
+    return &Thing::is_mob_spawner_class_a;
   }
-  if (what == "unused_flag169") {
-    return &Thing::unused_flag169;
+  if (what == "is_monst_class_d") {
+    return &Thing::is_monst_class_d;
   }
-  if (what == "unused_flag170") {
-    return &Thing::unused_flag170;
+  if (what == "is_monst_class_c") {
+    return &Thing::is_monst_class_c;
   }
-  if (what == "unused_flag171") {
-    return &Thing::unused_flag171;
+  if (what == "is_monst_class_b") {
+    return &Thing::is_monst_class_b;
   }
-  if (what == "unused_flag172") {
-    return &Thing::unused_flag172;
+  if (what == "is_monst_class_a") {
+    return &Thing::is_monst_class_a;
   }
   if (what == "stat_att_penalty_when_in_deep_water") {
     return &Thing::stat_att_penalty_when_in_deep_water;

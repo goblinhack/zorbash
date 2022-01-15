@@ -880,23 +880,23 @@ class Tp:
     def set_unused_flag166(self, value):
         my.tp_set_unused_flag166(self, value)
 
-    def set_unused_flag167(self, value):
-        my.tp_set_unused_flag167(self, value)
+    def set_is_mob_spawner_class_b(self, value):
+        my.tp_set_is_mob_spawner_class_b(self, value)
 
-    def set_unused_flag168(self, value):
-        my.tp_set_unused_flag168(self, value)
+    def set_is_mob_spawner_class_a(self, value):
+        my.tp_set_is_mob_spawner_class_a(self, value)
 
-    def set_unused_flag169(self, value):
-        my.tp_set_unused_flag169(self, value)
+    def set_is_monst_class_d(self, value):
+        my.tp_set_is_monst_class_d(self, value)
 
-    def set_unused_flag170(self, value):
-        my.tp_set_unused_flag170(self, value)
+    def set_is_monst_class_c(self, value):
+        my.tp_set_is_monst_class_c(self, value)
 
-    def set_unused_flag171(self, value):
-        my.tp_set_unused_flag171(self, value)
+    def set_is_monst_class_b(self, value):
+        my.tp_set_is_monst_class_b(self, value)
 
-    def set_unused_flag172(self, value):
-        my.tp_set_unused_flag172(self, value)
+    def set_is_monst_class_a(self, value):
+        my.tp_set_is_monst_class_a(self, value)
 
     def set_stat_att_penalty_when_in_deep_water(self, value):
         my.tp_set_stat_att_penalty_when_in_deep_water(self, value)

@@ -112,8 +112,8 @@ public:
   bool   is_floor_no_check(const int x, const int y);
   bool   is_food(const int x, const int y);
   bool   is_mob_spawner_any(const int x, const int y);
-  bool   is_mob_spawner_easy(const int x, const int y);
-  bool   is_mob_spawner_hard(const int x, const int y);
+  bool   is_mob_spawner_class_a(const int x, const int y);
+  bool   is_mob_spawner_class_b(const int x, const int y);
   bool   is_gold(const int x, const int y);
   bool   is_hazard(const int x, const int y);
   bool   is_treasure_class_a(const int x, const int y);
@@ -126,9 +126,9 @@ public:
   bool   is_lava(const int x, const int y);
   bool   is_lava_no_check(const int x, const int y);
   bool   is_monst_any(const int x, const int y);
-  bool   is_monst_easy(const int x, const int y);
-  bool   is_monst_med(const int x, const int y);
-  bool   is_monst_hard(const int x, const int y);
+  bool   is_monst_class_a(const int x, const int y);
+  bool   is_monst_class_b(const int x, const int y);
+  bool   is_monst_class_c(const int x, const int y);
   bool   is_potion(const int x, const int y);
   bool   is_wand(const int x, const int y);
   bool   is_ring(const int x, const int y);

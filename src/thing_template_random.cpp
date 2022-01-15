@@ -344,24 +344,6 @@ Tpp tp_random_monst(void)
   return tp_get_with_rarity_filter(tp_monst);
 }
 
-Tpp tp_random_monst_easy(void)
-{
-  TRACE_NO_INDENT();
-  return tp_random_monst();
-}
-
-Tpp tp_random_monst_med(void)
-{
-  TRACE_NO_INDENT();
-  return tp_random_monst();
-}
-
-Tpp tp_random_monst_hard(void)
-{
-  TRACE_NO_INDENT();
-  return tp_random_monst();
-}
-
 Tpp Level::tp_random_monst(const point &p)
 {
   TRACE_NO_INDENT();
@@ -379,160 +361,77 @@ Tpp Level::tp_random_monst(const point &p)
   }
 }
 
-Tpp Level::tp_random_monst_easy(const point &p)
+Tpp Level::tp_random_monst_class_a(const point &p)
 {
   TRACE_NO_INDENT();
-  Thingp current_player      = player;
-  int    player_danger_level = 0;
-
-  if (! current_player) {
-    //
-    // Try the current level
-    //
-    if (game->level) {
-      current_player = game->level->player;
-    }
-  }
-
-  if (current_player) {
-    player_danger_level = current_player->get_danger_initial_level();
-
-    //
-    // Increase the danger level of the parent as we go deeper
-    //
-    player_danger_level += num() * 10;
-  }
-
-  if (! player_danger_level) {
-    player_danger_level = 100;
-  }
 
   auto tries = 0U;
   for (;;) {
     if (tries++ > 10000) {
-      CON("Cannot place easy monst at %d,%d", p.x, p.y);
+      CON("Cannot place class A monst at %d,%d", p.x, p.y);
       return tp_random_monst(p);
     }
+
     auto tpp = ::tp_random_monst();
     if (tpp->is_disliked_by_me(this, p)) {
       continue;
     }
 
-    if (player_danger_level) {
-      if (tpp->get_danger_level() > player_danger_level) {
-        continue;
-      }
+    if (! tpp->is_monst_class_a()) {
+      continue;
     }
 
-    dbg("DGN: Placed easy monster '%s' difficulty %d (mine %d)", tpp->short_text_capitalise().c_str(),
-        tpp->get_danger_level(), player_danger_level);
+    dbg("DGN: Placed monster class A '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
 
-Tpp Level::tp_random_monst_med(const point &p)
+Tpp Level::tp_random_monst_class_b(const point &p)
 {
   TRACE_NO_INDENT();
-  Thingp current_player      = player;
-  int    player_danger_level = 0;
-
-  if (! current_player) {
-    //
-    // Try the current level
-    //
-    if (game->level) {
-      current_player = game->level->player;
-    }
-  }
-
-  if (current_player) {
-    player_danger_level = current_player->get_danger_initial_level();
-
-    //
-    // Increase the danger level of the parent as we go deeper
-    //
-    player_danger_level += num() * 10;
-  }
-
-  if (! player_danger_level) {
-    player_danger_level = 100;
-  }
 
   auto tries = 0U;
   for (;;) {
     if (tries++ > 10000) {
-      CON("Cannot place medium monst at %d,%d", p.x, p.y);
+      CON("Cannot place class B monst at %d,%d", p.x, p.y);
       return tp_random_monst(p);
     }
-    auto tpp = ::tp_random_monst();
+
+    auto tpp = tp_random_monst(p);
     if (tpp->is_disliked_by_me(this, p)) {
       continue;
     }
 
-    if (player_danger_level) {
-      if (tpp->get_danger_level() < (int) ((float) player_danger_level * 1.0)) {
-        continue;
-      }
-      if (tpp->get_danger_level() > (int) ((float) player_danger_level * 1.5)) {
-        continue;
-      }
+    if (! tpp->is_monst_class_b()) {
+      continue;
     }
 
-    dbg("DGN: Placed medium monster '%s' difficulty %d (mine %d)", tpp->short_text_capitalise().c_str(),
-        tpp->get_danger_level(), player_danger_level);
+    dbg("DGN: Placed monster class B '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
 
-Tpp Level::tp_random_monst_hard(const point &p)
+Tpp Level::tp_random_monst_class_c(const point &p)
 {
   TRACE_NO_INDENT();
-  Thingp current_player      = player;
-  int    player_danger_level = 0;
-  if (! current_player) {
-    //
-    // Try the current level
-    //
-    if (game->level) {
-      current_player = game->level->player;
-    }
-  }
-
-  if (current_player) {
-    player_danger_level = current_player->get_danger_initial_level();
-
-    //
-    // Increase the danger level of the parent as we go deeper
-    //
-    player_danger_level += num() * 10;
-  }
-
-  if (! player_danger_level) {
-    player_danger_level = 100;
-  }
 
   auto tries = 0U;
   for (;;) {
     if (tries++ > 10000) {
-      CON("Cannot place hard monst at %d,%d", p.x, p.y);
+      CON("Cannot place class C monst at %d,%d", p.x, p.y);
       return tp_random_monst(p);
     }
-    auto tpp = ::tp_random_monst();
+
+    auto tpp = tp_random_monst(p);
     if (tpp->is_disliked_by_me(this, p)) {
       continue;
     }
 
-    if (player_danger_level) {
-      if (tpp->get_danger_level() < (int) ((float) player_danger_level * 1.0)) {
-        continue;
-      }
-      if (tpp->get_danger_level() > (int) ((float) player_danger_level * 2.0)) {
-        continue;
-      }
+    if (! tpp->is_monst_class_c()) {
+      continue;
     }
 
-    dbg("DGN: Placed hard monster '%s' difficulty %d (mine %d)", tpp->short_text_capitalise().c_str(),
-        tpp->get_danger_level(), player_danger_level);
+    dbg("DGN: Placed monster class C '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -948,9 +847,9 @@ Tpp tp_random_ethereal_mob(void)
   return tp_get_with_rarity_filter(tp_ethereal_mob);
 }
 
-Tpp tp_random_mob_easy(void) { return tp_random_mob(); }
+Tpp tp_random_mob_spawner_class_a(void) { return tp_random_mob(); }
 
-Tpp tp_random_mob_hard(void) { return tp_random_mob(); }
+Tpp tp_random_mob_spawner_class_b(void) { return tp_random_mob(); }
 
 Tpp Level::tp_random_mob(const point &p)
 {
@@ -968,13 +867,13 @@ Tpp Level::tp_random_mob(const point &p)
   }
 }
 
-Tpp Level::tp_random_mob_easy(const point &p)
+Tpp Level::tp_random_mob_spawner_class_a(const point &p)
 {
   TRACE_NO_INDENT();
   return tp_random_mob(p);
 }
 
-Tpp Level::tp_random_mob_hard(const point &p)
+Tpp Level::tp_random_mob_spawner_class_b(const point &p)
 {
   TRACE_NO_INDENT();
   return tp_random_mob(p);
