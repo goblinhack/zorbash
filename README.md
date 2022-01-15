@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- stats with penalties                                                                                                                         -->
-<!-- You hit the spiderweb for 6 damage.                                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->

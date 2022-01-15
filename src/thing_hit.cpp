@@ -235,12 +235,15 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     damage = on_damage_melee(real_hitter, damage);
   }
 
+  std::string damage_type;
+
   if (attack_poison) {
     if (! damage) {
       real_hitter->log("No poison damage on %s", to_short_string().c_str());
       return false;
     } else {
       real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "poison ";
     }
   } else if (attack_future1) {
     if (! damage) {
@@ -248,6 +251,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "damage_future1 ";
     }
   } else if (attack_future2) {
     if (! damage) {
@@ -255,6 +259,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "damage_future2 ";
     }
   } else if (attack_future3) {
     if (! damage) {
@@ -262,6 +267,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "damage_future3 ";
     }
   } else if (attack_future4) {
     if (! damage) {
@@ -269,6 +275,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_future4 damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "damage_future4 ";
     }
   } else if (attack_fire) {
     if (! damage) {
@@ -276,6 +283,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_fire damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "fire ";
     }
   } else if (attack_crush) {
     if (! is_crushable()) {
@@ -288,6 +296,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_crush damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "crush ";
     }
   } else if (attack_lightning) {
     if (! damage) {
@@ -295,6 +304,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "lightning ";
     }
   } else if (attack_energy) {
     if (! damage) {
@@ -302,6 +312,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_energy damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "energy ";
     }
   } else if (attack_acid) {
     if (! damage) {
@@ -309,6 +320,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_acid damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "acid ";
     }
   } else if (attack_digest) {
     if (! damage) {
@@ -316,6 +328,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack damage_digest damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "digest ";
     }
   } else if (attack_necrosis) {
     if (! damage) {
@@ -323,6 +336,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "rotting ";
     }
   } else if (attack_natural) {
     if (! damage) {
@@ -330,6 +344,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str());
+      damage_type = "natural ";
     }
   } else {
     if (! damage) {
@@ -343,6 +358,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (real_hitter->is_fire() || real_hitter->is_lava()) {
     if (damage_received_doubled_from_fire()) {
       damage *= 2;
+      damage_type = "double " + damage_type;
       dbg("Double damage from fire");
     }
   }
@@ -350,6 +366,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (real_hitter->is_acid()) {
     if (damage_received_doubled_from_acid()) {
       damage *= 2;
+      damage_type = "double " + damage_type;
       dbg("Double damage from acid");
     }
   }
@@ -357,6 +374,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (real_hitter->is_poisonous_danger_level()) {
     if (damage_received_doubled_from_poison()) {
       damage *= 2;
+      damage_type = "double " + damage_type;
       dbg("Double damage from poison");
     }
   }
@@ -364,6 +382,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (real_hitter->is_necrotic_danger_level()) {
     if (damage_received_doubled_from_necrosis()) {
       damage *= 2;
+      damage_type = "double " + damage_type;
       dbg("Double damage from necrosis");
     }
   }
@@ -372,6 +391,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     if (real_hitter->is_shallow_water() || real_hitter->is_deep_water()) {
       if (damage_received_doubled_from_water()) {
         damage *= 2;
+        damage_type = "double " + damage_type;
         dbg("Double damage from water");
       }
     }
@@ -630,19 +650,24 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       // You hit yourself
       //
       if (attack_poison) {
-        msg("%%fg=yellow$Poison circulates through your veins for %d damage!%%fg=reset$", damage);
+        msg("%%fg=yellow$Poison circulates through your veins for %s%d damage!%%fg=reset$", damage_type.c_str(),
+            damage);
       } else if (attack_necrosis) {
         msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else if (crit) {
-        msg("%%fg=red$You CRIT yourself for %d damage!%%fg=reset$", damage);
+        msg("%%fg=red$You CRIT yourself for %s%d damage!%%fg=reset$", damage_type.c_str(), damage);
       } else if (hitter->is_weapon()) {
-        msg("%%fg=orange$You hit yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+        msg("%%fg=orange$You hit yourself for %s%d damage with %s!%%fg=reset$", damage_type.c_str(), damage,
+            hitter->text_the().c_str());
       } else if (hitter->is_laser()) {
-        msg("%%fg=orange$You zap yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+        msg("%%fg=orange$You zap yourself for %s%d damage with %s!%%fg=reset$", damage_type.c_str(), damage,
+            hitter->text_the().c_str());
       } else if (hitter->is_item_magical()) {
-        msg("%%fg=orange$You blast yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+        msg("%%fg=orange$You blast yourself for %s%d damage with %s!%%fg=reset$", damage_type.c_str(), damage,
+            hitter->text_the().c_str());
       } else {
-        msg("%%fg=orange$You hurt yourself for %d damage with %s!%%fg=reset$", damage, hitter->text_the().c_str());
+        msg("%%fg=orange$You hurt yourself for %s%d damage with %s!%%fg=reset$", damage_type.c_str(), damage,
+            hitter->text_the().c_str());
       }
     } else {
       if (is_dead || is_dying) {
@@ -696,41 +721,46 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         // Hit when not dead yet...
         //
         if (attack_poison) {
-          msg("%%fg=yellow$%s's fangs poisons you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
-              damage);
+          msg("%%fg=yellow$%s's fangs poisons you for %s%d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage_type.c_str(), damage);
         } else if (attack_necrosis) {
           msg("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (crit) {
-          msg("%%fg=red$%s CRITS you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("%%fg=red$%s CRITS you for %s%d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage_type.c_str(), damage);
         } else if (hitter->is_weapon()) {
-          msg("%%fg=orange$%s hits you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              hitter->text_the(false).c_str());
+          msg("%%fg=orange$%s hits you for %s%d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage_type.c_str(), damage, hitter->text_the(false).c_str());
         } else if (hitter->is_laser()) {
-          msg("%%fg=orange$%s zaps you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              hitter->text_the().c_str());
+          msg("%%fg=orange$%s zaps you for %s%d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage_type.c_str(), damage, hitter->text_the().c_str());
         } else if (hitter->is_item_magical()) {
-          msg("%%fg=orange$%s blasts you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              hitter->text_the().c_str());
+          msg("%%fg=orange$%s blasts you for %s%d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage_type.c_str(), damage, hitter->text_the().c_str());
         } else if (hitter->is_projectile() || hitter->is_laser()) {
-          msg("%%fg=orange$%s blasted you for %d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              hitter->text_the().c_str());
+          msg("%%fg=orange$%s blasted you for %s%d damage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage_type.c_str(), damage, hitter->text_the().c_str());
         } else if (attack_acid) {
-          msg("%%fg=orange$%s burns you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("%%fg=orange$%s burns you for %s%d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage_type.c_str(), damage);
           popup("Sizzle!");
         } else if (attack_natural) {
           if (! real_hitter->damage_natural_attack_type().empty()) {
-            msg("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
-                pluralise(real_hitter->damage_natural_attack_type()).c_str(), damage);
+            msg("%%fg=orange$%s %s you for %s%d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+                pluralise(real_hitter->damage_natural_attack_type()).c_str(), damage_type.c_str(), damage);
             popup(capitalise(real_hitter->damage_natural_attack_type()));
           } else {
-            msg("%%fg=orange$%s bites you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+            msg("%%fg=orange$%s bites you for %s%d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+                damage_type.c_str(), damage);
             popup("Chomp!");
           }
         } else if (attack_energy) {
-          msg("%%fg=orange$%s blasts you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("%%fg=orange$%s blasts you for %s%d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage_type.c_str(), damage);
           popup("Zap!");
         } else if (attack_lightning) {
-          msg("%%fg=orange$%s electrocutes you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(), damage);
+          msg("%%fg=orange$%s electrocutes you for %s%d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage_type.c_str(), damage);
           popup("Brzzt!");
         } else if (attack_crush) {
           msg("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
@@ -742,8 +772,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           msg("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
           popup("Gulp!");
         } else {
-          msg("%%fg=orange$%s %s you for %d damage!%%fg=reset$", real_hitter->text_The().c_str(),
-              real_hitter->text_hits().c_str(), damage);
+          msg("%%fg=orange$%s %s you for %s%d damage!%%fg=reset$", real_hitter->text_The().c_str(),
+              real_hitter->text_hits().c_str(), damage_type.c_str(), damage);
         }
       }
     }
@@ -761,35 +791,42 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       if (is_alive_monst() || is_mob_spawner()) {
         if (crit) {
-          msg("%%fg=red$You CRIT hit %s for %d damage!%%fg=reset$", text_the().c_str(), damage);
+          msg("%%fg=red$You CRIT hit %s for %s%d damage!%%fg=reset$", text_the().c_str(), damage_type.c_str(),
+              damage);
         } else {
           if (hitter && (hitter != real_hitter)) {
             if (attack_poison) {
-              msg("You poison %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You poison %s for %s%d damage with %s.", text_the().c_str(), damage_type.c_str(), damage,
+                  hitter->text_the().c_str());
             } else if (attack_necrosis) {
-              msg("You rot %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You rot %s for %s%d damage with %s.", text_the().c_str(), damage_type.c_str(), damage,
+                  hitter->text_the().c_str());
             } else if (hitter->is_weapon()) {
-              msg("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You hit %s for %s%d damage with %s.", text_the().c_str(), damage_type.c_str(), damage,
+                  hitter->text_the().c_str());
             } else if (hitter->is_laser()) {
-              msg("You zap %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You zap %s for %s%d damage with %s.", text_the().c_str(), damage_type.c_str(), damage,
+                  hitter->text_the().c_str());
             } else if (hitter->is_item_magical()) {
-              msg("You blast %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You blast %s for %s%d damage with %s.", text_the().c_str(), damage_type.c_str(), damage,
+                  hitter->text_the().c_str());
             } else {
-              msg("You hit %s for %d damage with %s.", text_the().c_str(), damage, hitter->text_the().c_str());
+              msg("You hit %s for %s%d damage with %s.", text_the().c_str(), damage_type.c_str(), damage,
+                  hitter->text_the().c_str());
             }
           } else {
             if (attack_poison) {
-              msg("You poison %s for %d damage.", text_the().c_str(), damage);
+              msg("You poison %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
             } else if (attack_necrosis) {
-              msg("You rot %s for %d damage.", text_the().c_str(), damage);
+              msg("You rot %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
             } else if (hitter->is_weapon()) {
-              msg("You hit %s for %d damage.", text_the().c_str(), damage);
+              msg("You hit %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
             } else if (hitter->is_laser()) {
-              msg("You zap %s for %d damage.", text_the().c_str(), damage);
+              msg("You zap %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
             } else if (hitter->is_item_magical()) {
-              msg("You blast %s for %d damage.", text_the().c_str(), damage);
+              msg("You blast %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
             } else {
-              msg("You hit %s for %d damage.", text_the().c_str(), damage);
+              msg("You hit %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
             }
           }
         }
@@ -815,13 +852,13 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         }
       } else {
         if (hitter->is_weapon()) {
-          msg("You hit %s for %d damage.", text_the().c_str(), damage);
+          msg("You hit %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
         } else if (hitter->is_laser()) {
-          msg("You zap %s for %d damage.", text_the().c_str(), damage);
+          msg("You zap %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
         } else if (hitter->is_item_magical()) {
-          msg("You blast %s for %d damage.", text_the().c_str(), damage);
+          msg("You blast %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
         } else {
-          msg("You hit %s for %d damage.", text_the().c_str(), damage);
+          msg("You hit %s for %s%d damage.", text_the().c_str(), damage_type.c_str(), damage);
         }
       }
     } else {
