@@ -122,19 +122,36 @@ int Thing::get_stat_def_total(void)
     }
   }
 
-  //
-  // Penalties
-  //
-  stat -= get_stuck_count();
-  if (stat != prev) {
-    prev = stat;
-    dbg("AC: with (stuck count %d): %d", get_stuck_count(), stat);
-  }
+  dbg("AC: final: %d", stat);
+  return stat;
+}
 
-  stat -= get_idle_count();
-  if (stat != prev) {
-    prev = stat;
-    dbg("AC: with (idle count %d): %d", get_stuck_count(), stat);
+int Thing::get_stat_def_penalties_total(void)
+{
+  TRACE_NO_INDENT();
+
+  int penalty = 0;
+  int prev    = 0;
+
+  //
+  // Positional penalties
+  //
+  if (stat_def_penalty_when_stuck()) {
+    int p = stat_def_penalty_when_stuck() + get_stuck_count();
+    p     = std::min(p, stat_def_penalty_when_stuck_max());
+    penalty += p;
+    if (penalty != prev) {
+      prev = penalty;
+      dbg("AC penalty: stuck %d", p);
+    }
+  } else if (stat_def_penalty_when_idle()) {
+    int p = stat_def_penalty_when_idle() + get_idle_count();
+    p     = std::min(p, stat_def_penalty_when_idle_max());
+    penalty += p;
+    if (penalty != prev) {
+      prev = penalty;
+      dbg("AC penalty: idle %d", p);
+    }
   }
 
   //
@@ -142,23 +159,31 @@ int Thing::get_stat_def_total(void)
   //
   if (! is_aquatic() && ! buff_find_is_aquatic()) {
     if (level->is_water(curr_at)) {
-      stat /= 2;
-      if (stat != prev) {
-        prev = stat;
-        dbg("AC: with (water penalty): %d", stat);
+      int p = stat_def_penalty_when_in_shallow_water();
+      if (p) {
+        penalty += p;
+        if (penalty != prev) {
+          prev = penalty;
+          dbg("AC penalty: with (in shallow water %d): %d", p, penalty);
+        }
       }
     }
     if (level->is_deep_water(curr_at)) {
-      stat /= 2;
-      if (stat != prev) {
-        prev = stat;
-        dbg("AC: with (deep water penalty): %d", stat);
+      int p = stat_def_penalty_when_in_deep_water();
+      if (p) {
+        penalty += p;
+        if (penalty != prev) {
+          prev = penalty;
+          dbg("AC penalty: with (in deep water %d): %d", p, penalty);
+        }
       }
     }
   }
 
-  dbg("AC: final: %d", stat);
-  return stat;
+  if (penalty) {
+    dbg("AC penalty: %d", penalty);
+  }
+  return penalty;
 }
 
 int Thing::get_stat_def(void)

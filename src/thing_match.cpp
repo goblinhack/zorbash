@@ -1187,22 +1187,22 @@ bool Thing::matches(const std::string &what)
   if (unused_flag178() && (what == "unused_flag178")) {
     return true;
   }
-  if (unused_flag179() && (what == "unused_flag179")) {
+  if (stat_def_penalty_when_stuck_max() && (what == "stat_def_penalty_when_stuck_max")) {
     return true;
   }
-  if (unused_flag180() && (what == "unused_flag180")) {
+  if (stat_def_penalty_when_idle_max() && (what == "stat_def_penalty_when_idle_max")) {
     return true;
   }
-  if (unused_flag181() && (what == "unused_flag181")) {
+  if (stat_def_penalty_when_in_deep_water() && (what == "stat_def_penalty_when_in_deep_water")) {
     return true;
   }
-  if (unused_flag182() && (what == "unused_flag182")) {
+  if (stat_def_penalty_when_in_shallow_water() && (what == "stat_def_penalty_when_in_shallow_water")) {
     return true;
   }
-  if (unused_flag183() && (what == "unused_flag183")) {
+  if (stat_def_penalty_when_stuck() && (what == "stat_def_penalty_when_stuck")) {
     return true;
   }
-  if (unused_flag184() && (what == "unused_flag184")) {
+  if (stat_def_penalty_when_idle() && (what == "stat_def_penalty_when_idle")) {
     return true;
   }
   if (is_able_to_move_diagonally() && (what == "is_able_to_move_diagonally")) {
@@ -2469,23 +2469,23 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag178") {
     return &Thing::unused_flag178;
   }
-  if (what == "unused_flag179") {
-    return &Thing::unused_flag179;
+  if (what == "stat_def_penalty_when_stuck_max") {
+    return &Thing::stat_def_penalty_when_stuck_max;
   }
-  if (what == "unused_flag180") {
-    return &Thing::unused_flag180;
+  if (what == "stat_def_penalty_when_idle_max") {
+    return &Thing::stat_def_penalty_when_idle_max;
   }
-  if (what == "unused_flag181") {
-    return &Thing::unused_flag181;
+  if (what == "stat_def_penalty_when_in_deep_water") {
+    return &Thing::stat_def_penalty_when_in_deep_water;
   }
-  if (what == "unused_flag182") {
-    return &Thing::unused_flag182;
+  if (what == "stat_def_penalty_when_in_shallow_water") {
+    return &Thing::stat_def_penalty_when_in_shallow_water;
   }
-  if (what == "unused_flag183") {
-    return &Thing::unused_flag183;
+  if (what == "stat_def_penalty_when_stuck") {
+    return &Thing::stat_def_penalty_when_stuck;
   }
-  if (what == "unused_flag184") {
-    return &Thing::unused_flag184;
+  if (what == "stat_def_penalty_when_idle") {
+    return &Thing::stat_def_penalty_when_idle;
   }
   if (what == "is_able_to_move_diagonally") {
     return &Thing::is_able_to_move_diagonally;

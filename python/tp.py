@@ -916,23 +916,23 @@ class Tp:
     def set_unused_flag178(self, value):
         my.tp_set_unused_flag178(self, value)
 
-    def set_unused_flag179(self, value):
-        my.tp_set_unused_flag179(self, value)
+    def set_stat_def_penalty_when_stuck_max(self, value):
+        my.tp_set_stat_def_penalty_when_stuck_max(self, value)
 
-    def set_unused_flag180(self, value):
-        my.tp_set_unused_flag180(self, value)
+    def set_stat_def_penalty_when_idle_max(self, value):
+        my.tp_set_stat_def_penalty_when_idle_max(self, value)
 
-    def set_unused_flag181(self, value):
-        my.tp_set_unused_flag181(self, value)
+    def set_stat_def_penalty_when_in_deep_water(self, value):
+        my.tp_set_stat_def_penalty_when_in_deep_water(self, value)
 
-    def set_unused_flag182(self, value):
-        my.tp_set_unused_flag182(self, value)
+    def set_stat_def_penalty_when_in_shallow_water(self, value):
+        my.tp_set_stat_def_penalty_when_in_shallow_water(self, value)
 
-    def set_unused_flag183(self, value):
-        my.tp_set_unused_flag183(self, value)
+    def set_stat_def_penalty_when_stuck(self, value):
+        my.tp_set_stat_def_penalty_when_stuck(self, value)
 
-    def set_unused_flag184(self, value):
-        my.tp_set_unused_flag184(self, value)
+    def set_stat_def_penalty_when_idle(self, value):
+        my.tp_set_stat_def_penalty_when_idle(self, value)
 
     def set_is_able_to_move_diagonally(self, value):
         my.tp_set_is_able_to_move_diagonally(self, value)
