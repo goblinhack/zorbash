@@ -1169,22 +1169,22 @@ bool Thing::matches(const std::string &what)
   if (unused_flag172() && (what == "unused_flag172")) {
     return true;
   }
-  if (unused_flag173() && (what == "unused_flag173")) {
+  if (stat_att_penalty_when_in_deep_water() && (what == "stat_att_penalty_when_in_deep_water")) {
     return true;
   }
-  if (unused_flag174() && (what == "unused_flag174")) {
+  if (stat_att_penalty_when_in_shallow_water() && (what == "stat_att_penalty_when_in_shallow_water")) {
     return true;
   }
-  if (unused_flag175() && (what == "unused_flag175")) {
+  if (stat_att_penalty_when_idle_max() && (what == "stat_att_penalty_when_idle_max")) {
     return true;
   }
-  if (unused_flag176() && (what == "unused_flag176")) {
+  if (stat_att_penalty_when_idle() && (what == "stat_att_penalty_when_idle")) {
     return true;
   }
-  if (unused_flag177() && (what == "unused_flag177")) {
+  if (stat_att_penalty_when_stuck() && (what == "stat_att_penalty_when_stuck")) {
     return true;
   }
-  if (unused_flag178() && (what == "unused_flag178")) {
+  if (stat_att_penalty_when_stuck_max() && (what == "stat_att_penalty_when_stuck_max")) {
     return true;
   }
   if (stat_def_penalty_when_stuck_max() && (what == "stat_def_penalty_when_stuck_max")) {
@@ -2451,23 +2451,23 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag172") {
     return &Thing::unused_flag172;
   }
-  if (what == "unused_flag173") {
-    return &Thing::unused_flag173;
+  if (what == "stat_att_penalty_when_in_deep_water") {
+    return &Thing::stat_att_penalty_when_in_deep_water;
   }
-  if (what == "unused_flag174") {
-    return &Thing::unused_flag174;
+  if (what == "stat_att_penalty_when_in_shallow_water") {
+    return &Thing::stat_att_penalty_when_in_shallow_water;
   }
-  if (what == "unused_flag175") {
-    return &Thing::unused_flag175;
+  if (what == "stat_att_penalty_when_idle_max") {
+    return &Thing::stat_att_penalty_when_idle_max;
   }
-  if (what == "unused_flag176") {
-    return &Thing::unused_flag176;
+  if (what == "stat_att_penalty_when_idle") {
+    return &Thing::stat_att_penalty_when_idle;
   }
-  if (what == "unused_flag177") {
-    return &Thing::unused_flag177;
+  if (what == "stat_att_penalty_when_stuck") {
+    return &Thing::stat_att_penalty_when_stuck;
   }
-  if (what == "unused_flag178") {
-    return &Thing::unused_flag178;
+  if (what == "stat_att_penalty_when_stuck_max") {
+    return &Thing::stat_att_penalty_when_stuck_max;
   }
   if (what == "stat_def_penalty_when_stuck_max") {
     return &Thing::stat_def_penalty_when_stuck_max;

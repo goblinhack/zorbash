@@ -2430,40 +2430,40 @@ int Thing::unused_flag172(void)
   return (tp()->unused_flag172());
 }
 
-int Thing::unused_flag173(void)
+int Thing::stat_att_penalty_when_in_deep_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag173());
+  return (tp()->stat_att_penalty_when_in_deep_water());
 }
 
-int Thing::unused_flag174(void)
+int Thing::stat_att_penalty_when_in_shallow_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag174());
+  return (tp()->stat_att_penalty_when_in_shallow_water());
 }
 
-int Thing::unused_flag175(void)
+int Thing::stat_att_penalty_when_idle_max(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag175());
+  return (tp()->stat_att_penalty_when_idle_max());
 }
 
-int Thing::unused_flag176(void)
+int Thing::stat_att_penalty_when_idle(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag176());
+  return (tp()->stat_att_penalty_when_idle());
 }
 
-int Thing::unused_flag177(void)
+int Thing::stat_att_penalty_when_stuck(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag177());
+  return (tp()->stat_att_penalty_when_stuck());
 }
 
-int Thing::unused_flag178(void)
+int Thing::stat_att_penalty_when_stuck_max(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag178());
+  return (tp()->stat_att_penalty_when_stuck_max());
 }
 
 int Thing::stat_def_penalty_when_stuck_max(void)
