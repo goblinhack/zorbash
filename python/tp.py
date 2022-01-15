@@ -871,8 +871,8 @@ class Tp:
     def set_unused_flag163(self, value):
         my.tp_set_unused_flag163(self, value)
 
-    def set_unused_flag164(self, value):
-        my.tp_set_unused_flag164(self, value)
+    def set_is_treasure(self, value):
+        my.tp_set_is_treasure(self, value)
 
     def set_is_monst_class_e(self, value):
         my.tp_set_is_monst_class_e(self, value)

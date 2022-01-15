@@ -20,8 +20,11 @@
 #include "my_time.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
+#include "my_wid_popup.hpp"
 
 static uint8_t game_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
+
+static WidPopup *wid_level_description;
 
 class game_dungeons_ctx
 {
@@ -31,6 +34,9 @@ public:
     TRACE_NO_INDENT();
     if (w) {
       wid_destroy(&w);
+
+      delete wid_level_description;
+      wid_level_description = nullptr;
     }
     delete nodes;
   }
@@ -305,11 +311,58 @@ static void game_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t
     return;
   }
 
-  int focus  = wid_get_int_context(w);
-  int focusx = (focus & 0xff);
-  int focusy = (focus & 0xff00) >> 8;
+  int focus = wid_get_int_context(w);
+  int x     = (focus & 0xff);
+  int y     = (focus & 0xff00) >> 8;
 
-  game_dungeons_set_focus(ctx, focusx, focusy);
+  game_dungeons_set_focus(ctx, x, y);
+
+  auto level_at = game_dungeons_grid_to_level_coord(x, y);
+  auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+  if (l) {
+    delete wid_level_description;
+    wid_level_description = nullptr;
+
+    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 52);
+    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 42);
+
+    char tmp[ MAXSHORTSTR ];
+    wid_level_description = new WidPopup("Level stats", tl, br, nullptr, "", false, false);
+    wid_level_description->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Level reconn");
+    wid_level_description->log(UI_LOGGING_EMPTY_LINE);
+
+    snprintf(tmp, sizeof(tmp) - 1, "Monst HP estimate %u", l->get_total_monst_hp_level());
+    wid_level_description->log(tmp, true);
+    wid_level_description->log(UI_LOGGING_EMPTY_LINE);
+
+    snprintf(tmp, sizeof(tmp) - 1, "Monst damage est. %u", l->get_total_monst_damage_level());
+    wid_level_description->log(tmp, true);
+    wid_level_description->log(UI_LOGGING_EMPTY_LINE);
+
+    snprintf(tmp, sizeof(tmp) - 1, "Loot value est.   %u", l->get_total_loot_level());
+    wid_level_description->log(tmp, true);
+    wid_level_description->log(UI_LOGGING_EMPTY_LINE);
+
+    snprintf(tmp, sizeof(tmp) - 1, "Food HP est.      %u", l->get_total_food_level());
+    wid_level_description->log(tmp, true);
+
+    auto        node = ctx->nodes->getn(x, y);
+    std::string bg_tilename;
+    switch (node->depth) {
+      case -1 : break;
+      case 1 : bg_tilename = "dungeon_icon.1"; break;
+      case 2 : bg_tilename = "dungeon_icon.2"; break;
+      case 3 : bg_tilename = "dungeon_icon.3"; break;
+      case 4 : bg_tilename = "dungeon_icon.4"; break;
+      case 5 : bg_tilename = "dungeon_icon.5"; break;
+      case 6 : bg_tilename = "dungeon_icon.6"; break;
+      case 7 : bg_tilename = "dungeon_icon.7"; break;
+      case 8 : bg_tilename = "dungeon_icon.8"; break;
+    }
+
+    wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY30);
+    wid_set_bg_tilename(wid_level_description->wid_popup_container, bg_tilename);
+  }
 }
 
 static void game_dungeons_destroy(Widp w)
@@ -472,6 +525,41 @@ static void game_dungeons_tick(Widp w)
   game_display_grid_bg();
   wid_set_style(ctx->wid_enter, UI_WID_STYLE_GRAY);
 
+  static int val;
+  static int delta = 1;
+  static int step  = 2;
+
+  val += delta * step;
+
+  if (val > 255) {
+    val   = 255;
+    delta = -1;
+  }
+
+  if (val < 200) {
+    val   = 200;
+    delta = 1;
+  }
+
+  {
+    for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
+      for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
+        Widp b = ctx->buttons[ y ][ x ];
+        if (! b) {
+          continue;
+        }
+
+        auto node = ctx->nodes->getn(x, y);
+        if (node->is_ascend_dungeon) {
+          color c = GREEN;
+          c.g     = val;
+          wid_set_color(b, WID_COLOR_BG, c);
+          wid_update(b);
+        }
+      }
+    }
+  }
+
   if (! ctx->generated) {
     //
     // For quick start we only create one level
@@ -574,14 +662,20 @@ static void game_dungeons_tick(Widp w)
     game_join_levels(ctx);
   }
 
-  //
-  // Tell the user the dungeons are ready!
-  //
-  auto b = ctx->wid_enter;
-  wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$E%%fg=" UI_TEXT_COLOR_STR "$nter the Dungeon");
-  wid_set_style(b, UI_WID_STYLE_OK);
-  wid_set_shape_square(b);
-  wid_update(b);
+  {
+    color c = GREEN;
+    c.g     = val;
+
+    //
+    // Tell the user the dungeons are ready!
+    //
+    auto b = ctx->wid_enter;
+    wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$E%%fg=" UI_TEXT_COLOR_STR "$nter the Dungeon");
+    wid_set_style(b, UI_WID_STYLE_OK);
+    wid_set_color(b, WID_COLOR_BG, c);
+    wid_set_shape_square(b);
+    wid_update(b);
+  }
 
   ctx->generated = true;
 }

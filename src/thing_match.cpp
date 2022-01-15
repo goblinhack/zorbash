@@ -1142,7 +1142,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag163() && (what == "unused_flag163")) {
     return true;
   }
-  if (unused_flag164() && (what == "unused_flag164")) {
+  if (is_treasure() && (what == "is_treasure")) {
     return true;
   }
   if (is_monst_class_e() && (what == "is_monst_class_e")) {
@@ -2424,8 +2424,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag163") {
     return &Thing::unused_flag163;
   }
-  if (what == "unused_flag164") {
-    return &Thing::unused_flag164;
+  if (what == "is_treasure") {
+    return &Thing::is_treasure;
   }
   if (what == "is_monst_class_e") {
     return &Thing::is_monst_class_e;

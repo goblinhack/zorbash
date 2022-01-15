@@ -16,6 +16,7 @@ def tp_init(name, text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_stone(True)
     mytp.set_is_treasure_class_c(True)
+    mytp.set_is_treasure(True)
     mytp.set_is_treasure_type(True)
     mytp.set_long_text_description("A glistening diamond. Like a spark of white fire in the darkness. Is there anything more precious. Probably. Grab it quick anyway.")
     mytp.set_normal_placement_rules(True)

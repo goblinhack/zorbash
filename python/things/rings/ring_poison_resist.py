@@ -32,6 +32,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_spawner(True)
     mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_treasure_class_c(True)
+    mytp.set_is_treasure(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
     mytp.set_is_very_combustible(True)

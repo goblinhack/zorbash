@@ -1325,7 +1325,7 @@ public:
   int item_slot_charge_count(const uint32_t slot);
   int item_width(void);
   int light_power(void);
-  int maybe_itemsp_value(const Thingp it);
+  int get_value(const Thingp it);
   int melting_chance_d1000(void);
   int minion_limit(void);
   int monst_size(void);
@@ -1499,7 +1499,7 @@ public:
   int unused_flag161(void);
   int unused_flag162(void);
   int unused_flag163(void);
-  int unused_flag164(void);
+  int is_treasure(void);
   int is_monst_class_e(void);
   int unused_flag166(void);
   int is_mob_spawner_class_b(void);

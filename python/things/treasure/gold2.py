@@ -19,6 +19,7 @@ def gold_init(name, text_name):
     mytp.set_is_metal(True)
     mytp.set_is_moveable(True)
     mytp.set_is_treasure_class_a(True)
+    mytp.set_is_treasure(True)
     mytp.set_is_treasure_type(True)
     mytp.set_light_color("yellow")
     mytp.set_light_power(1)

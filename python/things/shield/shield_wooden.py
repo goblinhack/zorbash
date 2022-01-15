@@ -33,6 +33,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_item(True)
     mytp.set_is_loggable(True)
     mytp.set_is_treasure_class_a(True)
+    mytp.set_is_treasure(True)
     mytp.set_is_treasure_type(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)

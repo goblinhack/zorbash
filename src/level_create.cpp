@@ -103,3 +103,72 @@ void Level::place_the_grid(void)
     }
   }
 }
+
+int Level::get_total_monst_hp_level(void)
+{
+  int hp = 0;
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  {
+    if (t->is_monst()) {
+      hp += t->get_health_initial();
+    }
+
+    if (t->is_mob_spawner()) {
+      hp += t->get_health_initial() * t->minion_limit();
+    }
+  }
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  return hp;
+}
+
+int Level::get_total_monst_damage_level(void)
+{
+  int damage = 0;
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  {
+    if (t->is_mob_spawner() || t->is_monst()) {
+      damage += t->get_damage_melee_dice().max_roll();
+      damage += t->get_damage_poison_dice().max_roll();
+      damage += t->get_damage_future1_dice().max_roll();
+      damage += t->get_damage_future2_dice().max_roll();
+      damage += t->get_damage_future3_dice().max_roll();
+      damage += t->get_damage_future4_dice().max_roll();
+      damage += t->get_damage_fire_dice().max_roll();
+      damage += t->get_damage_crush_dice().max_roll();
+      damage += t->get_damage_lightning_dice().max_roll();
+      damage += t->get_damage_energy_dice().max_roll();
+      damage += t->get_damage_acid_dice().max_roll();
+      damage += t->get_damage_digest_dice().max_roll();
+      damage += t->get_damage_digest_dice().max_roll();
+      damage += t->get_damage_natural_attack_dice().max_roll();
+    }
+  }
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  return damage;
+}
+
+int Level::get_total_loot_level(void)
+{
+  int value = 0;
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  {
+    if (t->is_treasure() || t->is_weapon() || t->is_wand()) {
+      value += t->get_gold_value();
+    }
+  }
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  return value;
+}
+
+int Level::get_total_food_level(void)
+{
+  int value = 0;
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  {
+    if (t->is_food()) {
+      value += t->get_nutrition();
+    }
+  }
+  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  return value;
+}
