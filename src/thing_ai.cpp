@@ -1931,8 +1931,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_weapon = nullptr;
             get_carried_weapon_highest_value(&best_weapon);
             if (best_weapon) {
-              auto curr_weapon_val = curr_weapon ? maybe_itemsp_value(curr_weapon) : 0;
-              auto best_weapon_val = maybe_itemsp_value(best_weapon);
+              auto curr_weapon_val = curr_weapon ? get_value(curr_weapon) : 0;
+              auto best_weapon_val = get_value(best_weapon);
 
               if (! curr_weapon) {
                 if (use(best_weapon, MONST_EQUIP_WEAPON)) {
@@ -1960,8 +1960,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_armor = nullptr;
             get_carried_armor_highest_value(&best_armor);
             if (best_armor) {
-              auto curr_armor_val = curr_armor ? maybe_itemsp_value(curr_armor) : 0;
-              auto best_armor_val = maybe_itemsp_value(best_armor);
+              auto curr_armor_val = curr_armor ? get_value(curr_armor) : 0;
+              auto best_armor_val = get_value(best_armor);
 
               if (! curr_armor) {
                 if (use(best_armor, MONST_EQUIP_ARMOR)) {
@@ -1989,8 +1989,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_helmet = nullptr;
             get_carried_helmet_highest_value(&best_helmet);
             if (best_helmet) {
-              auto curr_helmet_val = curr_helmet ? maybe_itemsp_value(curr_helmet) : 0;
-              auto best_helmet_val = maybe_itemsp_value(best_helmet);
+              auto curr_helmet_val = curr_helmet ? get_value(curr_helmet) : 0;
+              auto best_helmet_val = get_value(best_helmet);
 
               if (! curr_helmet) {
                 if (use(best_helmet, MONST_EQUIP_HELMET)) {
@@ -2018,8 +2018,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_amulet = nullptr;
             get_carried_amulet_highest_value(&best_amulet);
             if (best_amulet) {
-              auto curr_amulet_val = curr_amulet ? maybe_itemsp_value(curr_amulet) : 0;
-              auto best_amulet_val = maybe_itemsp_value(best_amulet);
+              auto curr_amulet_val = curr_amulet ? get_value(curr_amulet) : 0;
+              auto best_amulet_val = get_value(best_amulet);
 
               if (! curr_amulet) {
                 if (use(best_amulet, MONST_EQUIP_AMULET)) {
@@ -2047,8 +2047,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_boots = nullptr;
             get_carried_boots_highest_value(&best_boots);
             if (best_boots) {
-              auto curr_boots_val = curr_boots ? maybe_itemsp_value(curr_boots) : 0;
-              auto best_boots_val = maybe_itemsp_value(best_boots);
+              auto curr_boots_val = curr_boots ? get_value(curr_boots) : 0;
+              auto best_boots_val = get_value(best_boots);
 
               if (! curr_boots) {
                 if (use(best_boots, MONST_EQUIP_BOOTS)) {
@@ -2076,8 +2076,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_gauntlet = nullptr;
             get_carried_gauntlet_highest_value(&best_gauntlet);
             if (best_gauntlet) {
-              auto curr_gauntlet_val = curr_gauntlet ? maybe_itemsp_value(curr_gauntlet) : 0;
-              auto best_gauntlet_val = maybe_itemsp_value(best_gauntlet);
+              auto curr_gauntlet_val = curr_gauntlet ? get_value(curr_gauntlet) : 0;
+              auto best_gauntlet_val = get_value(best_gauntlet);
 
               if (! curr_gauntlet) {
                 if (use(best_gauntlet, MONST_EQUIP_GAUNTLET)) {
@@ -2105,8 +2105,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_shield = nullptr;
             get_carried_shield_highest_value(&best_shield);
             if (best_shield) {
-              auto curr_shield_val = curr_shield ? maybe_itemsp_value(curr_shield) : 0;
-              auto best_shield_val = maybe_itemsp_value(best_shield);
+              auto curr_shield_val = curr_shield ? get_value(curr_shield) : 0;
+              auto best_shield_val = get_value(best_shield);
 
               if (! curr_shield) {
                 if (use(best_shield, MONST_EQUIP_SHIELD)) {
@@ -2134,8 +2134,8 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_cloak = nullptr;
             get_carried_cloak_highest_value(&best_cloak);
             if (best_cloak) {
-              auto curr_cloak_val = curr_cloak ? maybe_itemsp_value(curr_cloak) : 0;
-              auto best_cloak_val = maybe_itemsp_value(best_cloak);
+              auto curr_cloak_val = curr_cloak ? get_value(curr_cloak) : 0;
+              auto best_cloak_val = get_value(best_cloak);
 
               if (! curr_cloak) {
                 if (use(best_cloak, MONST_EQUIP_CLOAK)) {
@@ -2167,9 +2167,9 @@ bool Thing::ai_tick(bool recursing)
             Thingp best_ring  = nullptr;
             get_carried_ring_highest_value(&best_ring);
             if (best_ring) {
-              auto curr_ring1_val = curr_ring1 ? maybe_itemsp_value(curr_ring1) : 0;
-              auto curr_ring2_val = curr_ring2 ? maybe_itemsp_value(curr_ring2) : 0;
-              auto best_ring_val  = maybe_itemsp_value(best_ring);
+              auto curr_ring1_val = curr_ring1 ? get_value(curr_ring1) : 0;
+              auto curr_ring2_val = curr_ring2 ? get_value(curr_ring2) : 0;
+              auto best_ring_val  = get_value(best_ring);
 
               if (! curr_ring1) {
                 if (use(best_ring, MONST_EQUIP_RING1)) {

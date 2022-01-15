@@ -114,7 +114,7 @@ int Thing::get_carried_armor_least_value(Thingp *out)
       continue;
     }
 
-    auto v = maybe_itemsp_value(t);
+    auto v = get_value(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -143,7 +143,7 @@ int Thing::get_carried_armor_highest_value(Thingp *out)
       continue;
     }
 
-    auto v = maybe_itemsp_value(t);
+    auto v = get_value(t);
     if (! *out) {
       *out          = t;
       highest_value = v;
@@ -181,7 +181,7 @@ int Thing::get_carried_armor_highest_value_for_target(Thingp *out, Thingp target
       }
     }
 
-    auto v = maybe_itemsp_value(t);
+    auto v = get_value(t);
     if (! *out) {
       *out          = t;
       highest_value = v;

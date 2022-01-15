@@ -365,7 +365,7 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       open(t);
 
       for (const auto t : t->get_item_vector()) {
-        items.push_back(std::make_pair(t, maybe_itemsp_value(t)));
+        items.push_back(std::make_pair(t, get_value(t)));
       }
     }
 
@@ -379,7 +379,7 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
     }
 
     dbg("Potential item to carry: %s", t->to_string().c_str());
-    items.push_back(std::make_pair(t, maybe_itemsp_value(t)));
+    items.push_back(std::make_pair(t, get_value(t)));
   }
   FOR_ALL_THINGS_END()
 

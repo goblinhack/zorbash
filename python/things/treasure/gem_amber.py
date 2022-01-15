@@ -16,6 +16,7 @@ def tp_init(name, text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_stone(True)
     mytp.set_is_treasure_class_b(True)
+    mytp.set_is_treasure(True)
     mytp.set_is_treasure_type(True)
     mytp.set_long_text_description("A rough hunk of amber. Quite how it got here and from what tree it fell, no one knows.")
     mytp.set_normal_placement_rules(True)

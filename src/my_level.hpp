@@ -649,6 +649,11 @@ public:
   bool skillbox_over(const uint32_t slot);
   bool tick(void);
 
+  int get_total_monst_hp_level(void);
+  int get_total_monst_damage_level(void);
+  int get_total_loot_level(void);
+  int get_total_food_level(void);
+
   float get_wobble(void) const;
   float update_wobble(void);
 

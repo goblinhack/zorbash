@@ -58,6 +58,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_target_auto_select(True)
     mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_treasure_class_b(True)
+    mytp.set_is_treasure(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
     mytp.set_is_very_combustible(True)

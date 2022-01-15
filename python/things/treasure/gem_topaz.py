@@ -16,6 +16,7 @@ def tp_init(name, text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_stone(True)
     mytp.set_is_treasure_class_b(True)
+    mytp.set_is_treasure(True)
     mytp.set_is_treasure_type(True)
     mytp.set_long_text_description("Topaz is prized for its ability to help you make friends. Just what you need. There are some entrails left on this piece. Just wipe them off.")
     mytp.set_normal_placement_rules(True)
