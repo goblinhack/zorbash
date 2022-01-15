@@ -474,12 +474,12 @@ do
       set_unused_flag170 \
       set_unused_flag171 \
       set_unused_flag172 \
-      set_unused_flag173 \
-      set_unused_flag174 \
-      set_unused_flag175 \
-      set_unused_flag176 \
-      set_unused_flag177 \
-      set_unused_flag178 \
+      set_stat_att_penalty_when_in_deep_water \
+      set_stat_att_penalty_when_in_shallow_water \
+      set_stat_att_penalty_when_idle_max \
+      set_stat_att_penalty_when_idle \
+      set_stat_att_penalty_when_stuck \
+      set_stat_att_penalty_when_stuck_max \
       set_stat_def_penalty_when_stuck_max \
       set_stat_def_penalty_when_idle_max \
       set_stat_def_penalty_when_in_deep_water \

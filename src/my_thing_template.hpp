@@ -519,12 +519,12 @@ private:
   int _unused_flag170 {};
   int _unused_flag171 {};
   int _unused_flag172 {};
-  int _unused_flag173 {};
-  int _unused_flag174 {};
-  int _unused_flag175 {};
-  int _unused_flag176 {};
-  int _unused_flag177 {};
-  int _unused_flag178 {};
+  int _stat_att_penalty_when_in_deep_water {};
+  int _stat_att_penalty_when_in_shallow_water {};
+  int _stat_att_penalty_when_idle_max {};
+  int _stat_att_penalty_when_idle {};
+  int _stat_att_penalty_when_stuck {};
+  int _stat_att_penalty_when_stuck_max {};
   int _stat_def_penalty_when_stuck_max {};
   int _unused_flag18 {};
   int _stat_def_penalty_when_idle_max {};
@@ -1381,12 +1381,12 @@ public:
   int unused_flag170(void) const { return _unused_flag170; }
   int unused_flag171(void) const { return _unused_flag171; }
   int unused_flag172(void) const { return _unused_flag172; }
-  int unused_flag173(void) const { return _unused_flag173; }
-  int unused_flag174(void) const { return _unused_flag174; }
-  int unused_flag175(void) const { return _unused_flag175; }
-  int unused_flag176(void) const { return _unused_flag176; }
-  int unused_flag177(void) const { return _unused_flag177; }
-  int unused_flag178(void) const { return _unused_flag178; }
+  int stat_att_penalty_when_in_deep_water(void) const { return _stat_att_penalty_when_in_deep_water; }
+  int stat_att_penalty_when_in_shallow_water(void) const { return _stat_att_penalty_when_in_shallow_water; }
+  int stat_att_penalty_when_idle_max(void) const { return _stat_att_penalty_when_idle_max; }
+  int stat_att_penalty_when_idle(void) const { return _stat_att_penalty_when_idle; }
+  int stat_att_penalty_when_stuck(void) const { return _stat_att_penalty_when_stuck; }
+  int stat_att_penalty_when_stuck_max(void) const { return _stat_att_penalty_when_stuck_max; }
   int stat_def_penalty_when_stuck_max(void) const { return _stat_def_penalty_when_stuck_max; }
   int unused_flag17(void) const { return _unused_flag17; }
   int stat_def_penalty_when_idle_max(void) const { return _stat_def_penalty_when_idle_max; }
@@ -2009,12 +2009,12 @@ public:
   void set_unused_flag170(int v) { _unused_flag170 = v; }
   void set_unused_flag171(int v) { _unused_flag171 = v; }
   void set_unused_flag172(int v) { _unused_flag172 = v; }
-  void set_unused_flag173(int v) { _unused_flag173 = v; }
-  void set_unused_flag174(int v) { _unused_flag174 = v; }
-  void set_unused_flag175(int v) { _unused_flag175 = v; }
-  void set_unused_flag176(int v) { _unused_flag176 = v; }
-  void set_unused_flag177(int v) { _unused_flag177 = v; }
-  void set_unused_flag178(int v) { _unused_flag178 = v; }
+  void set_stat_att_penalty_when_in_deep_water(int v) { _stat_att_penalty_when_in_deep_water = v; }
+  void set_stat_att_penalty_when_in_shallow_water(int v) { _stat_att_penalty_when_in_shallow_water = v; }
+  void set_stat_att_penalty_when_idle_max(int v) { _stat_att_penalty_when_idle_max = v; }
+  void set_stat_att_penalty_when_idle(int v) { _stat_att_penalty_when_idle = v; }
+  void set_stat_att_penalty_when_stuck(int v) { _stat_att_penalty_when_stuck = v; }
+  void set_stat_att_penalty_when_stuck_max(int v) { _stat_att_penalty_when_stuck_max = v; }
   void set_stat_def_penalty_when_stuck_max(int v) { _stat_def_penalty_when_stuck_max = v; }
   void set_unused_flag17(int v) { _unused_flag17 = v; }
   void set_stat_def_penalty_when_idle_max(int v) { _stat_def_penalty_when_idle_max = v; }

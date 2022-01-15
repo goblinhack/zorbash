@@ -102,13 +102,36 @@ int Thing::get_attack_modifier(const Thingp victim)
     }
   }
 
+  dbg("Att: final: %d", stat);
+  return stat;
+}
+
+int Thing::get_stat_att_penalties_total(void)
+{
+  TRACE_NO_INDENT();
+
+  int penalty = 0;
+  int prev    = 0;
+
   //
-  // Penalties
+  // Positional penalties
   //
-  stat -= get_stuck_count();
-  if (stat != prev) {
-    prev = stat;
-    dbg("Att with (stuck count %d): %d", get_stuck_count(), stat);
+  if (stat_att_penalty_when_stuck()) {
+    int p = stat_att_penalty_when_stuck() + get_stuck_count();
+    p     = std::min(p, stat_att_penalty_when_stuck_max());
+    penalty += p;
+    if (penalty != prev) {
+      prev = penalty;
+      dbg("Att penalty: stuck %d", p);
+    }
+  } else if (stat_att_penalty_when_idle()) {
+    int p = stat_att_penalty_when_idle() + get_idle_count();
+    p     = std::min(p, stat_att_penalty_when_idle_max());
+    penalty += p;
+    if (penalty != prev) {
+      prev = penalty;
+      dbg("Att penalty: idle %d", p);
+    }
   }
 
   //
@@ -116,21 +139,29 @@ int Thing::get_attack_modifier(const Thingp victim)
   //
   if (! is_aquatic() && ! buff_find_is_aquatic()) {
     if (level->is_water(curr_at)) {
-      stat /= 2;
-      if (stat != prev) {
-        prev = stat;
-        dbg("Att with (water penalty): %d", stat);
+      int p = stat_att_penalty_when_in_shallow_water();
+      if (p) {
+        penalty += p;
+        if (penalty != prev) {
+          prev = penalty;
+          dbg("Att penalty: with (in shallow water %d): %d", p, penalty);
+        }
       }
     }
     if (level->is_deep_water(curr_at)) {
-      stat /= 2;
-      if (stat != prev) {
-        prev = stat;
-        dbg("Att with (deep water penalty): %d", stat);
+      int p = stat_att_penalty_when_in_deep_water();
+      if (p) {
+        penalty += p;
+        if (penalty != prev) {
+          prev = penalty;
+          dbg("Att penalty: with (in deep water %d): %d", p, penalty);
+        }
       }
     }
   }
 
-  dbg("Att: final: %d", stat);
-  return stat;
+  if (penalty) {
+    dbg("Att penalty: %d", penalty);
+  }
+  return penalty;
 }
