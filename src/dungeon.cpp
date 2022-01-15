@@ -335,7 +335,7 @@ void Dungeon::debug(const std::string s)
 //
 // Make a dungeon from rooms
 //
-Dungeon::Dungeon(int map_width, int map_height, int grid_width, int grid_height, int seed)
+Dungeon::Dungeon(int map_width, int map_height, int grid_width, int grid_height, uint32_t seed)
     : map_width(map_width), map_height(map_height), grid_width(grid_width), grid_height(grid_height), seed(seed)
 {
   TRACE_AND_INDENT();
