@@ -14,11 +14,11 @@
 #include "my_dmap.hpp"
 #include "my_dungeon.hpp"
 #include "my_fwd.hpp"
+#include "my_game_defs.hpp"
 #include "my_laser.hpp"
 #include "my_particle.hpp"
 #include "my_point3d.hpp"
 #include "my_projectile.hpp"
-#include "my_thing_defs.hpp"
 #include "my_time.hpp"
 
 class Level
@@ -854,7 +854,8 @@ public:
   void display_map_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
   void display_map(void);
   void display_minimap(void);
-  void display_debugmap(void);
+  void display_debugmap(int x, int y);
+  void display_debugmap(int x, int y, int tlx, int tly, int brx, int bly);
   void display_projectiles(void);
   void display_target(void);
   void display(void);
@@ -1040,7 +1041,7 @@ public:
   void update_map_things_to_stand_on(void);
   void update_map(void);
   void update_minimap(bool showing_two_levels, bool show_faded);
-  void update_debugmap(void);
+  void update_debugmap(int x, int y);
   void update_new_level(void);
   void update_same_level_immediately(void);
   void update_same_level(void);

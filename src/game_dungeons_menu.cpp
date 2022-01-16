@@ -688,6 +688,47 @@ static void game_dungeons_post_display_tick(Widp w)
   game_dungeons_ctx *ctx = (game_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
+  for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
+    for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
+      Widp b = ctx->buttons[ y ][ x ];
+      if (! b) {
+        continue;
+      }
+
+      auto level_at = game_dungeons_grid_to_level_coord(x, y);
+      auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+      if (! l) {
+        continue;
+      }
+
+      int tlx, tly, brx, bry;
+      wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
+
+      l->debugmap_tl.x = tlx;
+      l->debugmap_tl.y = tly;
+      l->debugmap_br.x = brx;
+      l->debugmap_br.y = bry;
+
+      {
+        int tlx = l->debugmap_tl.x * game->config.ascii_gl_width;
+        int tly = l->debugmap_tl.y * game->config.ascii_gl_height;
+
+        l->debugmap_br.x++;
+        l->debugmap_br.y++;
+
+        int brx = l->debugmap_br.x * game->config.ascii_gl_width;
+        int bry = l->debugmap_br.y * game->config.ascii_gl_height;
+
+        glcolor(WHITE);
+        blit_fbo_bind_locked(FBO_WID);
+        glDisable(GL_TEXTURE_2D);
+        gl_blitsquare(tlx, tly, brx, bry);
+        glEnable(GL_TEXTURE_2D);
+        blit_fbo_unbind_locked();
+      }
+    }
+  }
+
   IF_DEBUG
   {
     for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
@@ -704,50 +745,68 @@ static void game_dungeons_post_display_tick(Widp w)
         }
 
         if (! l->debugmap_valid) {
-          l->update_debugmap();
+          l->update_debugmap(x, y);
         }
       }
     }
 
-    gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
+    //
+    // Too much noise
+    //
+    if (0) {
+      gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
+      for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
+        for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
+          Widp b = ctx->buttons[ y ][ x ];
+          if (! b) {
+            continue;
+          }
 
-    for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
-      for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-        Widp b = ctx->buttons[ y ][ x ];
-        if (! b) {
-          continue;
-        }
+          auto level_at = game_dungeons_grid_to_level_coord(x, y);
+          auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+          if (! l) {
+            continue;
+          }
 
-        auto level_at = game_dungeons_grid_to_level_coord(x, y);
-        auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-        if (! l) {
-          continue;
-        }
+          int tlx, tly, brx, bry;
+          wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
 
-        int tlx, tly, brx, bry;
-        wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
+          l->debugmap_tl.x = tlx;
+          l->debugmap_tl.y = tly;
+          l->debugmap_br.x = brx;
+          l->debugmap_br.y = bry;
 
-        l->debugmap_tl.x = tlx;
-        l->debugmap_tl.y = tly;
-        l->debugmap_br.x = brx;
-        l->debugmap_br.y = bry;
-
-        {
-          int tlx = l->debugmap_tl.x * game->config.ascii_gl_width;
-          int tly = l->debugmap_tl.y * game->config.ascii_gl_height;
-
-          l->debugmap_br.x++;
-          l->debugmap_br.y++;
-
-          int brx = l->debugmap_br.x * game->config.ascii_gl_width;
-          int bry = l->debugmap_br.y * game->config.ascii_gl_height;
+          l->debugmap_br.x -= 2;
+          l->debugmap_br.y -= 2;
 
           glcolor(WHITE);
           blit_fbo_bind_locked(FBO_WID);
-          l->display_debugmap();
-          glDisable(GL_TEXTURE_2D);
-          gl_blitsquare(tlx, tly, brx, bry);
-          glEnable(GL_TEXTURE_2D);
+          l->display_debugmap(x, y);
+          blit_fbo_unbind_locked();
+        }
+      }
+    }
+  }
+
+  IF_DEBUG
+  {
+    if ((ctx->focusx != -1) && (ctx->focusx != -1)) {
+      auto level_at = game_dungeons_grid_to_level_coord(ctx->focusx, ctx->focusy);
+      auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+
+      if (l) {
+        if (wid_level_description) {
+          int tlx, tly, brx, bry;
+          int sz = MAP_WIDTH * 3;
+          tlx    = game->config.ui_pix_width - sz;
+          tly    = 0;
+          brx    = game->config.ui_pix_width;
+          bry    = sz;
+
+          gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
+          glcolor(WHITE);
+          blit_fbo_bind_locked(FBO_WID);
+          l->display_debugmap(ctx->focusx, ctx->focusy, tlx, tly, brx, bry);
           blit_fbo_unbind_locked();
         }
       }

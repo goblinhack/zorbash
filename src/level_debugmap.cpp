@@ -10,13 +10,13 @@
 #include "my_thing.hpp"
 #include "my_tile.hpp"
 
-void Level::update_debugmap(void)
+void Level::update_debugmap(int x, int y)
 {
   TRACE_AND_INDENT();
 
-  gl_enter_2d_mode(MAP_WIDTH + 1, MAP_HEIGHT + 1);
+  gl_enter_2d_mode(MAP_WIDTH, MAP_HEIGHT);
 
-  blit_fbo_bind(FBO_DEBUGMAP);
+  blit_fbo_bind(FBO_DEBUGMAP + (y * DUNGEONS_GRID_CHUNK_WIDTH) + x);
   glBlendFunc(GL_ONE, GL_ZERO);
 
   glDisable(GL_TEXTURE_2D);
@@ -36,7 +36,11 @@ void Level::update_debugmap(void)
     for (auto x = 0; x < MAP_WIDTH; x++) {
       color c;
 
-      if (is_monst(x, y)) {
+      if (is_ascend_dungeon(x, y)) {
+        c = WHITE;
+      } else if (is_descend_dungeon(x, y)) {
+        c = WHITE;
+      } else if (is_monst(x, y)) {
         c = RED;
       } else if (is_mob_spawner(x, y)) {
         c = PINK;
@@ -47,15 +51,15 @@ void Level::update_debugmap(void)
       } else if (is_wall(x, y)) {
         c = GRAY80;
       } else if (is_rock(x, y)) {
-        c = GRAY70;
+        c = GRAY20;
       } else if (is_floor(x, y) || is_corridor(x, y)) {
         c = GRAY40;
       } else if (is_bridge(x, y)) {
         c = BROWN1;
       } else if (is_shallow_water(x, y)) {
-        c = LIGHTBLUE;
+        c = DARKBLUE;
       } else if (is_deep_water(x, y)) {
-        c = LIGHTBLUE;
+        c = DARKBLUE;
       } else if (is_dirt(x, y)) {
         c = GRAY20;
       } else if (is_enchantstone(x, y)) {
@@ -68,6 +72,22 @@ void Level::update_debugmap(void)
         c = GRAY50;
       } else {
         c = BLACK;
+      }
+
+      if (x < MAP_BORDER_ROCK) {
+        c = BROWN;
+      }
+
+      if (y < MAP_BORDER_ROCK) {
+        c = BROWN;
+      }
+
+      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        c = BROWN;
+      }
+
+      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        c = BROWN;
       }
 
       glcolor(c);

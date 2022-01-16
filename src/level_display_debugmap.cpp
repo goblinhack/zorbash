@@ -13,7 +13,7 @@
 #include "my_tile.hpp"
 #include "my_ui.hpp"
 
-void Level::display_debugmap(void)
+void Level::display_debugmap(int x, int y)
 {
   float tlx = debugmap_tl.x * game->config.ascii_gl_width;
   float tly = debugmap_tl.y * game->config.ascii_gl_height;
@@ -24,6 +24,17 @@ void Level::display_debugmap(void)
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   blit_init();
-  blit(fbo_tex_id[ FBO_DEBUGMAP ], 0.0, 1.0, 1.0, 0.0, tlx, bry, brx, tly);
+  int fbo = FBO_DEBUGMAP + (y * DUNGEONS_GRID_CHUNK_WIDTH) + x;
+  blit(fbo_tex_id[ fbo ], 0.0, 1.0, 1.0, 0.0, tlx, bry, brx, tly);
+  blit_flush();
+}
+
+void Level::display_debugmap(int x, int y, int tlx, int tly, int brx, int bry)
+{
+  glcolor(WHITE);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  blit_init();
+  int fbo = FBO_DEBUGMAP + (y * DUNGEONS_GRID_CHUNK_WIDTH) + x;
+  blit(fbo_tex_id[ fbo ], 0.0, 1.0, 1.0, 0.0, tlx, bry, brx, tly);
   blit_flush();
 }

@@ -11,8 +11,8 @@
 #include "my_depth.hpp"
 #include "my_dungeon_grid.hpp"
 #include "my_fwd.hpp"
+#include "my_game_defs.hpp"
 #include "my_point.hpp"
-#include "my_thing_defs.hpp"
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x)  STRINGIFY(x)

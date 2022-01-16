@@ -445,7 +445,6 @@ void fbo_get_size(int fbo, int &w, int &h)
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;
-    case FBO_DEBUGMAP :
     case FBO_MINIMAP :
       w = MAP_WIDTH;
       h = MAP_HEIGHT;
@@ -471,6 +470,11 @@ void fbo_get_size(int fbo, int &w, int &h)
       w = game->config.window_pix_width;
       h = game->config.window_pix_height;
       break;
+  }
+
+  if ((fbo >= FBO_DEBUGMAP) && (fbo < FBO_DEBUGMAP_END)) {
+    w = MAP_WIDTH;
+    h = MAP_HEIGHT;
   }
 }
 

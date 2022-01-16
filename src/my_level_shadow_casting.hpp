@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "my_thing_defs.hpp"
+#include "my_game_defs.hpp"
 
 typedef struct FovMap_ {
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > can_see {};

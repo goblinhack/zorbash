@@ -179,7 +179,7 @@ redo:
   }
 
   if (! is_dungeon) {
-    if (max_depth != 8) {
+    if (max_depth != DUNGEONS_MAX_DEPTH) {
       debug("redo, not enough depth challenges");
       goto redo;
     }
