@@ -13,9 +13,9 @@
 #include "my_charmap.hpp"
 #include "my_depth.hpp"
 #include "my_fwd.hpp"
+#include "my_game_defs.hpp"
 #include "my_main.hpp"
 #include "my_point.hpp"
-#include "my_thing_defs.hpp"
 
 typedef std::vector< Roomp > Rooms;
 

@@ -15,7 +15,10 @@
 void Level::create(point3d at, uint32_t seed, int difficulty_depth)
 {
   TRACE_AND_INDENT();
-  pcg_srand(game->seed + at.z);
+
+  uint32_t seedval = game->seed + (at.z * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH) +
+                     (at.y * DUNGEONS_GRID_CHUNK_HEIGHT) + at.x + difficulty_depth;
+  pcg_srand(seedval);
 
   is_starting = true;
   clear();
@@ -23,7 +26,7 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth)
   is_level_type_dungeon = false;
   is_level_type_sewer   = false;
 
-  this->seed             = seed;
+  this->seed             = seedval;
   this->difficulty_depth = difficulty_depth;
   world_at               = at;
 
@@ -35,7 +38,7 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth)
   IF_DEBUG2
   {
     log("-");
-    log("Creating, seed %u", seed);
+    log("Creating, seed %u", seedval);
     log("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
     log("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
   }

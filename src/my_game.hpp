@@ -8,8 +8,10 @@
 #define _MY_GAME_HPP_
 
 #include "my_hiscore.hpp"
+#include "my_thing_defs.hpp"
 #include "my_world.hpp"
 #include <list>
+#include <vector>
 
 class WidBag;
 class WidPopup;

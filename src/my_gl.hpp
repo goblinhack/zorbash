@@ -8,6 +8,8 @@
 #define _MY_GLAPI_HPP_
 #define GL_GLEXT_PROTOTYPES
 
+#include "my_game_defs.hpp"
+
 #include <array>
 
 /* Defined before OpenGL and GLUT includes to avoid deprecation messages */
@@ -257,7 +259,8 @@ extern PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 #define FBO_SCREEN_FADE_IN_AND_OUT  18
 #define FBO_SMALL_POINT_LIGHTS      19
 #define FBO_DEBUGMAP                20
-#define MAX_FBO                     21
+#define FBO_DEBUGMAP_END            (FBO_DEBUGMAP + (DUNGEONS_GRID_CHUNK_WIDTH * DUNGEONS_GRID_CHUNK_HEIGHT))
+#define MAX_FBO                     (FBO_DEBUGMAP_END + 1)
 
 extern uint32_t                      NUMBER_BYTES_PER_VERTICE_2D;
 extern GLfloat                      *bufp;
