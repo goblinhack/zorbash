@@ -256,7 +256,8 @@ extern PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 #define FBO_FINAL                   17
 #define FBO_SCREEN_FADE_IN_AND_OUT  18
 #define FBO_SMALL_POINT_LIGHTS      19
-#define MAX_FBO                     20
+#define FBO_DEBUGMAP                20
+#define MAX_FBO                     21
 
 extern uint32_t                      NUMBER_BYTES_PER_VERTICE_2D;
 extern GLfloat                      *bufp;

@@ -407,6 +407,8 @@ static void game_display_grid_bg(void)
 
 static void game_dungeons_create_level_at(game_dungeons_ctx *ctx, int x, int y)
 {
+  TRACE_NO_INDENT();
+
   auto node     = ctx->nodes->getn(x, y);
   auto level_at = game_dungeons_grid_to_level_coord(x, y);
 
@@ -678,6 +680,79 @@ static void game_dungeons_tick(Widp w)
   }
 
   ctx->generated = true;
+}
+
+static void game_dungeons_post_display_tick(Widp w)
+{
+  TRACE_NO_INDENT();
+  game_dungeons_ctx *ctx = (game_dungeons_ctx *) wid_get_void_context(w);
+  verify(MTYPE_WID, ctx);
+
+  IF_DEBUG
+  {
+    for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
+      for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
+        Widp b = ctx->buttons[ y ][ x ];
+        if (! b) {
+          continue;
+        }
+
+        auto level_at = game_dungeons_grid_to_level_coord(x, y);
+        auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+        if (! l) {
+          continue;
+        }
+
+        if (! l->debugmap_valid) {
+          l->update_debugmap();
+        }
+      }
+    }
+
+    gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
+
+    for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
+      for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
+        Widp b = ctx->buttons[ y ][ x ];
+        if (! b) {
+          continue;
+        }
+
+        auto level_at = game_dungeons_grid_to_level_coord(x, y);
+        auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+        if (! l) {
+          continue;
+        }
+
+        int tlx, tly, brx, bry;
+        wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
+
+        l->debugmap_tl.x = tlx;
+        l->debugmap_tl.y = tly;
+        l->debugmap_br.x = brx;
+        l->debugmap_br.y = bry;
+
+        {
+          int tlx = l->debugmap_tl.x * game->config.ascii_gl_width;
+          int tly = l->debugmap_tl.y * game->config.ascii_gl_height;
+
+          l->debugmap_br.x++;
+          l->debugmap_br.y++;
+
+          int brx = l->debugmap_br.x * game->config.ascii_gl_width;
+          int bry = l->debugmap_br.y * game->config.ascii_gl_height;
+
+          glcolor(WHITE);
+          blit_fbo_bind_locked(FBO_WID);
+          l->display_debugmap();
+          glDisable(GL_TEXTURE_2D);
+          gl_blitsquare(tlx, tly, brx, bry);
+          glEnable(GL_TEXTURE_2D);
+          blit_fbo_unbind_locked();
+        }
+      }
+    }
+  }
 }
 
 static uint8_t game_dungeons_go_back(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -1048,6 +1123,7 @@ void Game::menu_dungeons_select(void)
     Widp button_container = wid_new_square_button(window, "wid level grid buttons");
     wid_set_shape_none(button_container);
     wid_set_on_tick(button_container, game_dungeons_tick);
+    wid_set_on_tick_post_display(button_container, game_dungeons_post_display_tick);
 
     point tl = make_point(0, 0);
     point br = make_point(0, 0);

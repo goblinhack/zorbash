@@ -299,6 +299,9 @@ public:
   //
   point minimap_tl;
   point minimap_br;
+  point debugmap_tl;
+  point debugmap_br;
+  bool  debugmap_valid {};
 
   //
   // We regenerate this map every player move, and indicates the shortest
@@ -851,6 +854,7 @@ public:
   void display_map_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
   void display_map(void);
   void display_minimap(void);
+  void display_debugmap(void);
   void display_projectiles(void);
   void display_target(void);
   void display(void);
@@ -1036,6 +1040,7 @@ public:
   void update_map_things_to_stand_on(void);
   void update_map(void);
   void update_minimap(bool showing_two_levels, bool show_faded);
+  void update_debugmap(void);
   void update_new_level(void);
   void update_same_level_immediately(void);
   void update_same_level(void);

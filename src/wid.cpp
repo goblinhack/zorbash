@@ -62,9 +62,10 @@ static wid_key_map_int wid_top_level3;
 static wid_key_map_int wid_top_level4;
 
 //
-// For ticking things.
+// For tick things.
 //
-static wid_key_map_int wid_top_level5;
+static wid_key_map_int wid_tick_top_level;
+static wid_key_map_int wid_tick_post_display_top_level;
 
 //
 // Ignore events to avoid processing the same event twice if we
@@ -126,8 +127,10 @@ static void    wid_tree3_moving_wids_remove(Widp w);
 static void    wid_tree3_moving_wids_insert(Widp w);
 static void    wid_tree4_wids_being_destroyed_remove(Widp w);
 static void    wid_tree4_wids_being_destroyed_insert(Widp w);
-static void    wid_tree5_ticking_wids_remove(Widp w);
-static void    wid_tree5_ticking_wids_insert(Widp w);
+static void    wid_tree5_tick_wids_remove(Widp w);
+static void    wid_tree5_tick_wids_insert(Widp w);
+static void    wid_tree6_tick_post_display_wids_remove(Widp w);
+static void    wid_tree6_tick_post_display_wids_insert(Widp w);
 static void    wid_move_dequeue(Widp w);
 static void    wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scissors, int clip);
 
@@ -1791,7 +1794,19 @@ void wid_set_on_tick(Widp w, on_tick_t fn)
 
   w->on_tick = fn;
 
-  wid_tree5_ticking_wids_insert(w);
+  wid_tree5_tick_wids_insert(w);
+}
+
+void wid_set_on_tick_post_display(Widp w, on_tick_post_display_t fn)
+{
+  TRACE_AND_INDENT();
+  if (! fn) {
+    ERR("No tick_post_displayer function set");
+  }
+
+  w->on_tick_post_display = fn;
+
+  wid_tree6_tick_post_display_wids_insert(w);
 }
 
 //
@@ -1964,10 +1979,10 @@ static void wid_tree4_wids_being_destroyed_insert(Widp w)
   w->in_tree4_wids_being_destroyed = root;
 }
 
-static void wid_tree5_ticking_wids_insert(Widp w)
+static void wid_tree5_tick_wids_insert(Widp w)
 {
   TRACE_AND_INDENT();
-  if (w->in_tree5_ticking_wids) {
+  if (w->in_tree5_tick_wids) {
     return;
   }
 
@@ -1979,7 +1994,7 @@ static void wid_tree5_ticking_wids_insert(Widp w)
 
   wid_key_map_int *root;
 
-  root = &wid_top_level5;
+  root = &wid_tick_top_level;
 
   w->tree5_key = ++key;
   auto result  = root->insert(std::make_pair(w->tree5_key, w));
@@ -1987,7 +2002,33 @@ static void wid_tree5_ticking_wids_insert(Widp w)
     DIE("Wid insert name [%s] tree5 failed", wid_get_name(w).c_str());
   }
 
-  w->in_tree5_ticking_wids = root;
+  w->in_tree5_tick_wids = root;
+}
+
+static void wid_tree6_tick_post_display_wids_insert(Widp w)
+{
+  TRACE_AND_INDENT();
+  if (w->in_tree6_tick_wids_post_display) {
+    return;
+  }
+
+  if (wid_exiting) {
+    return;
+  }
+
+  static uint64_t key;
+
+  wid_key_map_int *root;
+
+  root = &wid_tick_post_display_top_level;
+
+  w->tree6_key = ++key;
+  auto result  = root->insert(std::make_pair(w->tree6_key, w));
+  if (result.second == false) {
+    DIE("Wid insert name [%s] tree6 failed", wid_get_name(w).c_str());
+  }
+
+  w->in_tree6_tick_wids_post_display = root;
 }
 
 static void wid_tree_remove(Widp w)
@@ -2093,10 +2134,10 @@ static void wid_tree4_wids_being_destroyed_remove(Widp w)
   w->in_tree4_wids_being_destroyed = nullptr;
 }
 
-static void wid_tree5_ticking_wids_remove(Widp w)
+static void wid_tree5_tick_wids_remove(Widp w)
 {
   TRACE_AND_INDENT();
-  auto root = w->in_tree5_ticking_wids;
+  auto root = w->in_tree5_tick_wids;
   if (! root) {
     return;
   }
@@ -2107,8 +2148,26 @@ static void wid_tree5_ticking_wids_remove(Widp w)
   }
   root->erase(w->tree5_key);
 
-  w->in_tree5_ticking_wids = nullptr;
-  w->on_tick               = 0;
+  w->in_tree5_tick_wids = nullptr;
+  w->on_tick            = 0;
+}
+
+static void wid_tree6_tick_post_display_wids_remove(Widp w)
+{
+  TRACE_AND_INDENT();
+  auto root = w->in_tree6_tick_wids_post_display;
+  if (! root) {
+    return;
+  }
+
+  auto result = root->find(w->tree6_key);
+  if (result == root->end()) {
+    DIE("Wid tree6 did not find wid");
+  }
+  root->erase(w->tree6_key);
+
+  w->in_tree6_tick_wids_post_display = nullptr;
+  w->on_tick_post_display            = 0;
 }
 
 //
@@ -2164,7 +2223,8 @@ static void wid_destroy_immediate_internal(Widp w)
   TRACE_AND_INDENT();
   wid_tree3_moving_wids_remove(w);
   wid_tree4_wids_being_destroyed_remove(w);
-  wid_tree5_ticking_wids_remove(w);
+  wid_tree5_tick_wids_remove(w);
+  wid_tree6_tick_post_display_wids_remove(w);
 
   if (w->on_destroy) {
     (w->on_destroy)(w);
@@ -2335,10 +2395,11 @@ static void wid_destroy_delay(Widp *wp, int32_t delay)
   }
 
   //
-  // Make sure it stops ticking right now as client pointers this widget
+  // Make sure it stops tick right now as client pointers this widget
   // might use in the ticker may no longer be valid.
   //
-  wid_tree5_ticking_wids_remove(w);
+  wid_tree5_tick_wids_remove(w);
+  wid_tree6_tick_post_display_wids_remove(w);
 }
 
 void wid_destroy(Widp *wp)
@@ -6373,13 +6434,13 @@ void wid_gc_all(void)
 //
 // Do stuff for all widgets.
 //
-void wid_tick_all(void)
+static void wid_tick_all(void)
 {
   TRACE_AND_INDENT();
   wid_time = time_get_time_ms_cached();
 
   std::list< Widp > work;
-  for (auto &iter : wid_top_level5) {
+  for (auto &iter : wid_tick_top_level) {
     auto w = iter.second;
     work.push_back(w);
   }
@@ -6475,6 +6536,26 @@ void wid_tick_all(void)
         game->level->cursor_path_clear();
       }
     }
+  }
+}
+
+static void wid_tick_all_post_display(void)
+{
+  TRACE_AND_INDENT();
+  wid_time = time_get_time_ms_cached();
+
+  std::list< Widp > work;
+  for (auto &iter : wid_tick_post_display_top_level) {
+    auto w = iter.second;
+    work.push_back(w);
+  }
+
+  for (auto &w : work) {
+    if (! w->on_tick_post_display) {
+      ERR("Wid on tick_post_displayer tree, but no callback set");
+    }
+
+    (w->on_tick_post_display)(w);
   }
 }
 
@@ -6594,6 +6675,8 @@ printf("========================================= %d\n", wid_total_count);
   ascii_display();
 
   blit_fbo_unbind_locked();
+
+  wid_tick_all_post_display();
 
   //
   // Need this to reset wid_over after display
