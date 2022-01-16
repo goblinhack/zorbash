@@ -89,6 +89,7 @@ typedef void (*on_mouse_focus_end_t)(Widp);
 typedef void (*on_mouse_over_begin_t)(Widp, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
 typedef void (*on_mouse_over_end_t)(Widp);
 typedef void (*on_tick_t)(Widp);
+typedef void (*on_tick_post_display_t)(Widp);
 uint32_t wid_get_cursor(Widp);
 uint32_t wid_get_gllist(Widp);
 uint32_t wid_get_mode_gllist(Widp);
@@ -218,6 +219,7 @@ void     wid_set_on_mouse_over_begin(Widp, on_mouse_over_begin_t fn);
 void     wid_set_on_mouse_over_end(Widp, on_mouse_over_end_t fn);
 void     wid_set_on_mouse_up(Widp, on_mouse_up_t fn);
 void     wid_set_on_tick(Widp, on_tick_t fn);
+void     wid_set_on_tick_post_display(Widp, on_tick_post_display_t fn);
 void     wid_set_pos(Widp, point tl, point br);
 void     wid_set_pos_pct(Widp, fpoint tl, fpoint br);
 void     wid_set_prev(Widp w, Widp);
@@ -239,7 +241,6 @@ void     wid_set_text_rhs(Widp, uint8_t val);
 void     wid_set_text_top(Widp, uint8_t val);
 void     wid_set_top(Widp, uint8_t val);
 void     wid_this_visible(Widp);
-void     wid_tick_all(void);
 void     wid_toggle_hidden(Widp);
 void     wid_unset_focus();
 void     wid_unset_focus_lock(void);
@@ -349,12 +350,14 @@ public:
   WidKeyType   tree3_key {};
   WidKeyType   tree4_key {};
   WidKeyType   tree5_key {};
+  WidKeyType   tree6_key {};
 
   wid_key_map_location *in_tree_root {};
   wid_key_map_int      *in_tree2_unsorted_root {};
   wid_key_map_int      *in_tree3_moving_wids {};
   wid_key_map_int      *in_tree4_wids_being_destroyed {};
-  wid_key_map_int      *in_tree5_ticking_wids {};
+  wid_key_map_int      *in_tree5_tick_wids {};
+  wid_key_map_int      *in_tree6_tick_wids_post_display {};
   wid_key_map_int      *in_tree_global_unsorted_root {};
 
   //
@@ -378,9 +381,10 @@ public:
   wid_key_map_int tree4_wids_being_destroyed {};
 
   //
-  // A tree for ticking things
+  // A tree for tick things
   //
-  wid_key_map_int tree5_ticking_wids {};
+  wid_key_map_int tree5_tick_wids {};
+  wid_key_map_int tree6_tick_post_displaying_wids {};
 
   //
   // Tiles widget
@@ -548,6 +552,7 @@ public:
   on_destroy_t           on_destroy {};
   on_destroy_begin_t     on_destroy_begin {};
   on_tick_t              on_tick {};
+  on_tick_post_display_t on_tick_post_display {};
 };
 
 uint8_t wid_is_moving(Widp w);
