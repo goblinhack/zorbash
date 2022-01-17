@@ -8,7 +8,7 @@ def on_death_of_a_follower(me, leader, x, y):
 
 
 def on_born(me, x, y):
-    my.thing_carry(me, "treasure_map")
+    my.thing_carry(me, "map_treasure")
     my.thing_carry(me, "gold6")
     my.thing_carry(me, "cutlass")
 

@@ -464,7 +464,7 @@ public:
   bool too_far_from_mob_spawner(point p);
   bool too_far_from_mob_spawner(point p, float delta);
   bool too_far_from_mob_spawner(void);
-  bool treasure_map_available(void);
+  bool map_treasure_available(void);
   bool try_harder_to_jump(void);
   bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
   bool try_to_carry(Thingp w);
@@ -838,8 +838,8 @@ public:
   int environ_prefers_spiderwebs(void);
   int environ_prefers_water(void);
   int get_attack_modifier(Thingp victim);
-  int get_beast_map_carried_count(void);
-  int get_beast_map_count(void);
+  int get_map_beast_carried_count(void);
+  int get_map_beast_count(void);
   int get_bounce_count(void);
   int get_carried_amulet_count(void);
   int get_carried_amulet_highest_value_for_target(Thingp *out, Thingp target);
@@ -969,8 +969,8 @@ public:
   int get_stuck_count(void);
   int get_submerged_offset(void);
   int get_torch_count(void);
-  int get_treasure_map_carried_count(void);
-  int get_treasure_map_count(void);
+  int get_map_treasure_carried_count(void);
+  int get_map_treasure_count(void);
   int gfx_an_animation_only(void);
   int gfx_animated_can_hflip(void);
   int gfx_animated_can_vflip(void);
@@ -1143,7 +1143,7 @@ public:
   int is_bag_item(void);
   int is_bag(void);
   int is_barrel(void);
-  int is_beast_map(void);
+  int is_map_beast(void);
   int is_bleeder(void);
   int is_blood_eater(void);
   int is_blood_splatter(void);
@@ -1302,7 +1302,7 @@ public:
   int is_treasure_class_b(void);
   int is_treasure_class_c(void);
   int is_treasure_eater(void);
-  int is_treasure_map(void);
+  int is_map_treasure(void);
   int is_treasure_type(void);
   int is_undead(void);
   int is_usable(void);
@@ -1795,7 +1795,7 @@ public:
   void animate();
   void avoid_tick(void);
   void barrel_tick();
-  void beast_map_check(void);
+  void map_beast_check(void);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
   void blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles);
@@ -1969,7 +1969,7 @@ public:
   void rotting(void);
   void score_add(Thingp victim);
   void secret_door_tick();
-  void set_beast_map_count(int);
+  void set_map_beast_count(int);
   void set_born(point3d);
   void set_bounce_count(int);
   void set_bounce_fade(float);
@@ -1991,7 +1991,7 @@ public:
   void set_score(int);
   void set_spawned_owner(Thingp spawner_owner);
   void set_submerged_offset(int);
-  void set_treasure_map_count(int);
+  void set_map_treasure_count(int);
   void set_wobble(float);
   void show_botcon_description(void);
   void skill_activate(Thingp what);
@@ -2003,7 +2003,7 @@ public:
   void tick();
   void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon_(const char *fmt, va_list args); // compile error without
-  void treasure_map_check(void);
+  void map_treasure_check(void);
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
   void unleash_spawners_things(void);

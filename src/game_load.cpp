@@ -178,8 +178,8 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->minion_count);
    in >> bits(my.t->owned_count);
    in >> bits(my.t->spawned_count);
-   in >> bits(my.t->treasure_map_count);
-   in >> bits(my.t->beast_map_count);
+   in >> bits(my.t->map_treasure_count);
+   in >> bits(my.t->map_beast_count);
   // clang-format on
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

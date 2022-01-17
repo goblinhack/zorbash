@@ -9,24 +9,24 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-int Thing::get_treasure_map_count(void)
+int Thing::get_map_treasure_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->treasure_map_count);
+    return (get_infop()->map_treasure_count);
   } else {
     return 0;
   }
 }
 
-void Thing::set_treasure_map_count(int v)
+void Thing::set_map_treasure_count(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  get_infop()->treasure_map_count = v;
+  get_infop()->map_treasure_count = v;
 }
 
-int Thing::get_treasure_map_carried_count(void)
+int Thing::get_map_treasure_carried_count(void)
 {
   TRACE_NO_INDENT();
 
@@ -36,28 +36,28 @@ int Thing::get_treasure_map_carried_count(void)
 
   int v = 0;
   for (const auto t : get_item_vector()) {
-    v += t->is_treasure_map() ? 1 : 0;
+    v += t->is_map_treasure() ? 1 : 0;
   }
   return v;
 }
 
-void Thing::treasure_map_check(void)
+void Thing::map_treasure_check(void)
 {
   TRACE_NO_INDENT();
 
   //
   // If carrying a treasure map we need to update the map_mini
   //
-  auto count = get_treasure_map_carried_count();
-  if (get_treasure_map_count() != count) {
+  auto count = get_map_treasure_carried_count();
+  if (get_map_treasure_count() != count) {
     if (is_player()) {
       level->map_mini_valid = false;
     }
   }
-  set_treasure_map_count(count);
+  set_map_treasure_count(count);
 }
 
-bool Thing::treasure_map_available(void)
+bool Thing::map_treasure_available(void)
 {
   TRACE_NO_INDENT();
 
@@ -69,7 +69,7 @@ bool Thing::treasure_map_available(void)
   // Check if we have a map and that it works for this level
   //
   for (const auto t : get_item_vector()) {
-    if (! t->is_treasure_map()) {
+    if (! t->is_map_treasure()) {
       continue;
     }
 

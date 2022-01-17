@@ -323,8 +323,8 @@ static void game_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t
     delete wid_level_description;
     wid_level_description = nullptr;
 
-    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 52);
-    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 42);
+    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 48);
+    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 38);
 
     char tmp[ MAXSHORTSTR ];
     wid_level_description = new WidPopup("Level stats", tl, br, nullptr, "", false, false);
@@ -1115,7 +1115,7 @@ void Game::menu_dungeons_select(void)
   point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 26);
   point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
   auto  width = br.x - tl.x - 2;
-  int   y_at  = TERM_HEIGHT - 23;
+  int   y_at  = TERM_HEIGHT - 21;
   int   x_at  = TERM_WIDTH - width - 2;
 
   y_at += 3;
@@ -1124,7 +1124,7 @@ void Game::menu_dungeons_select(void)
     Widp w = wid_new_square_button(window, "Enter");
 
     point tl = make_point(x_at, y_at);
-    point br = make_point(x_at + width, y_at + 8);
+    point br = make_point(x_at + width, y_at + 4);
 
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, game_dungeons_enter);
@@ -1132,7 +1132,7 @@ void Game::menu_dungeons_select(void)
     ctx->wid_enter = w;
   }
 
-  y_at += 10;
+  y_at += 5;
 
   {
     TRACE_NO_INDENT();
@@ -1318,7 +1318,7 @@ void Game::menu_dungeons_select(void)
   }
 
   {
-    int y = TERM_HEIGHT - 40;
+    int y = TERM_HEIGHT - 36;
 
     {
       Widp  b = wid_new_square_button(window, "wid key");
@@ -1329,7 +1329,7 @@ void Game::menu_dungeons_select(void)
       wid_set_text(b, "Key:");
     }
 
-    y += 2;
+    y += 1;
     {
       Widp  b = wid_new_square_button(window, "wid key");
       point tl(TERM_WIDTH - 12, y);

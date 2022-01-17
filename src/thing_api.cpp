@@ -2880,16 +2880,16 @@ int Thing::is_health_booster(void)
   return (tp()->is_health_booster());
 }
 
-int Thing::is_beast_map(void)
+int Thing::is_map_beast(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_beast_map());
+  return (tp()->is_map_beast());
 }
 
-int Thing::is_treasure_map(void)
+int Thing::is_map_treasure(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_treasure_map());
+  return (tp()->is_map_treasure());
 }
 
 int Thing::is_able_to_use_wands(void)

@@ -155,8 +155,8 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->minion_count);
   out << bits(my.t->owned_count);
   out << bits(my.t->spawned_count);
-  out << bits(my.t->treasure_map_count);
-  out << bits(my.t->beast_map_count);
+  out << bits(my.t->map_treasure_count);
+  out << bits(my.t->map_beast_count);
   // clang-format on
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

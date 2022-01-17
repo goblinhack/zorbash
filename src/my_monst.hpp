@@ -145,8 +145,8 @@ public:
   int8_t minion_count       = {}; // How many minions this mob_spawner has
   int8_t owned_count        = {}; // How many things own me
   int8_t spawned_count      = {}; // How many things this thing spawned.
-  int8_t treasure_map_count = {}; // How many treasure maps held. Really only care if > 0
-  int8_t beast_map_count    = {}; // How many beast maps held. Really only care if > 0
+  int8_t map_treasure_count = {}; // How many treasure maps held. Really only care if > 0
+  int8_t map_beast_count    = {}; // How many beast maps held. Really only care if > 0
 
   std::string msg;         // Text that floats on screen
   std::string dead_reason; // What defeated me
