@@ -4,6 +4,7 @@
 //
 
 #pragma once
+#include "my_depth.hpp"
 #include "my_fwd.hpp"
 #include "my_thing_defs.hpp"
 #include <memory> // do not remove

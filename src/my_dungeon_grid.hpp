@@ -20,6 +20,7 @@ public:
   //
   int depth {0};
   int walk_depth {};
+  int walk_order {};
 
   //
   // pass 1 is the main dungeon

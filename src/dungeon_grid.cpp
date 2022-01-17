@@ -734,8 +734,8 @@ void Nodes::init_nodes(void)
       auto n                = getn(x, y);
       n->depth              = 0;
       n->pass               = 0;
-      n->x                  = 0;
-      n->y                  = 0;
+      n->x                  = x;
+      n->y                  = y;
       n->is_key             = false;
       n->is_lock            = false;
       n->is_ascend_dungeon  = false;

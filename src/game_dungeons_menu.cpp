@@ -77,7 +77,8 @@ public:
   //
   bool generating {};
   bool generated {};
-  int  generating_depth {};
+  int  generating_level {};
+  int  max_generating_level {};
 
   //
   // Items in the level_grid
@@ -238,6 +239,10 @@ static void game_dungeons_update_button(game_dungeons_ctx *ctx, Widp b, int x, i
       wid_set_fg_tilename(b, fg_tilename);
     }
   }
+
+  char tmp[ MAXSHORTSTR ];
+  snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order);
+  wid_set_text(b, tmp);
 }
 
 static void game_dungeons_update_buttons(Widp w)
@@ -480,12 +485,12 @@ static void game_dungeons_create_level_at(game_dungeons_ctx *ctx, int x, int y)
   // Create a level of the given difficulty at a fixed location
   //
   game->init_level(level_at, node->depth, node->walk_depth);
-  CON("%d ", node->walk_depth);
   auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (! l) {
     return;
   }
 
+  CON("final node %p %d at %d,%d", node, node->walk_order, x, y);
   ctx->levels[ y ][ x ] = l;
 
   if (node->is_ascend_dungeon) {
@@ -646,7 +651,7 @@ static void game_dungeons_tick(Widp w)
 
           game_dungeons_create_level_at(ctx, x, y);
           ctx->generating       = true;
-          ctx->generating_depth = 0;
+          ctx->generating_level = 0;
           ctx->generated        = true;
           game_dungeons_enter(w, 0, 0, 0);
           return;
@@ -677,7 +682,7 @@ static void game_dungeons_tick(Widp w)
           continue;
         }
 
-        if (node->depth <= ctx->generating_depth) {
+        if (node->depth == ctx->generating_level) {
           game_dungeons_create_level_at(ctx, x, y);
           game_dungeons_update_buttons(ctx->w);
 
@@ -690,7 +695,7 @@ static void game_dungeons_tick(Widp w)
     //
     // We've ran out of levels at the current depth. Try the next depth.
     //
-    ctx->generating_depth++;
+    ctx->generating_level++;
 
     for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
       for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
@@ -711,7 +716,7 @@ static void game_dungeons_tick(Widp w)
           continue;
         }
 
-        if (node->depth <= ctx->generating_depth) {
+        if (node->depth == ctx->generating_level) {
           game_dungeons_create_level_at(ctx, x, y);
           game_dungeons_update_buttons(ctx->w);
 
@@ -997,7 +1002,7 @@ static uint8_t game_dungeons_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-void game_grid_node_walk(class Nodes *nodes, int depth_limit, int depth, int *furthest_depth,
+void game_grid_node_walk(class Nodes *nodes, int *walk_order, int depth_limit, int depth, int *furthest_depth,
                          class DungeonNode **furthest, class DungeonNode *node)
 {
   TRACE_NO_INDENT();
@@ -1014,8 +1019,14 @@ void game_grid_node_walk(class Nodes *nodes, int depth_limit, int depth, int *fu
     *furthest       = node;
   }
 
+  if (walk_order) {
+    (*walk_order)++;
+    node->walk_order = *walk_order;
+    CON("depth node %p %d at %d,%d", node, *walk_order, node->x, node->y);
+  }
+
   if (depth_limit > -1) {
-    if (depth > depth_limit) {
+    if (node->depth > depth_limit) {
       return;
     }
   }
@@ -1024,7 +1035,7 @@ void game_grid_node_walk(class Nodes *nodes, int depth_limit, int depth, int *fu
     auto next_node = nodes->getn(node->x, node->y + 1);
     if (next_node) {
       node->dir_down = true;
-      game_grid_node_walk(nodes, depth_limit, depth, furthest_depth, furthest, next_node);
+      game_grid_node_walk(nodes, walk_order, depth_limit, depth, furthest_depth, furthest, next_node);
     }
   }
 
@@ -1032,7 +1043,7 @@ void game_grid_node_walk(class Nodes *nodes, int depth_limit, int depth, int *fu
     auto next_node = nodes->getn(node->x - 1, node->y);
     if (next_node) {
       node->dir_left = true;
-      game_grid_node_walk(nodes, depth_limit, depth, furthest_depth, furthest, next_node);
+      game_grid_node_walk(nodes, walk_order, depth_limit, depth, furthest_depth, furthest, next_node);
     }
   }
 
@@ -1040,7 +1051,7 @@ void game_grid_node_walk(class Nodes *nodes, int depth_limit, int depth, int *fu
     auto next_node = nodes->getn(node->x, node->y - 1);
     if (next_node) {
       node->dir_up = true;
-      game_grid_node_walk(nodes, depth_limit, depth, furthest_depth, furthest, next_node);
+      game_grid_node_walk(nodes, walk_order, depth_limit, depth, furthest_depth, furthest, next_node);
     }
   }
 
@@ -1048,7 +1059,7 @@ void game_grid_node_walk(class Nodes *nodes, int depth_limit, int depth, int *fu
     auto next_node = nodes->getn(node->x + 1, node->y);
     if (next_node) {
       node->dir_right = true;
-      game_grid_node_walk(nodes, depth_limit, depth, furthest_depth, furthest, next_node);
+      game_grid_node_walk(nodes, walk_order, depth_limit, depth, furthest_depth, furthest, next_node);
     }
   }
 }
@@ -1075,7 +1086,7 @@ void Game::menu_dungeons_select(void)
   ctx->focusy           = -1;
   ctx->generated        = false;
   ctx->generating       = false;
-  ctx->generating_depth = 1;
+  ctx->generating_level = 0;
 
   //
   // Find the entry node
@@ -1109,7 +1120,7 @@ void Game::menu_dungeons_select(void)
   //
   // Walk, one depth level at a time
   //
-  for (int depth_limit = 0; depth_limit < DUNGEONS_GRID_CHUNK_WIDTH; depth_limit++) {
+  for (int depth_limit = 0; depth_limit <= DUNGEONS_MAX_DEPTH; depth_limit++) {
     for (auto y = 0; y < ctx->nodes->grid_height; y++) {
       for (auto x = 0; x < ctx->nodes->grid_width; x++) {
         auto node = ctx->nodes->getn(x, y);
@@ -1118,8 +1129,12 @@ void Game::menu_dungeons_select(void)
         }
       }
     }
-    int depth = 0;
-    game_grid_node_walk(ctx->nodes, depth_limit, depth, &furthest_depth, &furthest_node, ctx->start_node);
+    int depth      = 0;
+    int walk_order = 0;
+    game_grid_node_walk(ctx->nodes, &walk_order, depth_limit, depth, &furthest_depth, &furthest_node,
+                        ctx->start_node);
+    ctx->generating_level     = 0;
+    ctx->max_generating_level = walk_order;
   }
   if (! furthest_node) {
     DIE("No furthest dungeon node");
@@ -1137,7 +1152,7 @@ void Game::menu_dungeons_select(void)
     }
   }
   int depth = 0;
-  game_grid_node_walk(ctx->nodes, -1, depth, &furthest_depth, &furthest_node, ctx->start_node);
+  game_grid_node_walk(ctx->nodes, nullptr, -1, depth, &furthest_depth, &furthest_node, ctx->start_node);
 
   furthest_node->is_descend_dungeon = true;
 
