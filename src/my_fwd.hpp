@@ -38,12 +38,13 @@ using ThingInfop   = struct ThingInfo_ *;
 using ThingItemsp  = struct ThingItem_ *;
 using ThingAip     = struct ThingAi_ *;
 
-using Roomp  = class Room *;
-using Texp   = class Tex *;
-using Thingp = class Thing_ *;
-using Tilep  = class Tile *;
-using Tpp    = class Tp *;
-using Widp   = class Wid *;
-using Worldp = class World *;
+using Dungeonp = class Dungeon *;
+using Roomp    = class Room *;
+using Texp     = class Tex *;
+using Thingp   = class Thing_ *;
+using Tilep    = class Tile *;
+using Tpp      = class Tp *;
+using Widp     = class Wid *;
+using Worldp   = class World *;
 
 #endif

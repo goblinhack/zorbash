@@ -4,6 +4,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_depth.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_globals.hpp"
@@ -340,7 +341,7 @@ void Level::display_map(void)
   if (fade_out) {
     if ((time_get_time_ms_cached() < ts_fade_out_begin) ||
         (time_get_time_ms_cached() - ts_fade_out_begin > LEVEL_FADE_OUT_MS)) {
-      map_mini_valid     = false;
+      map_mini_valid    = false;
       ts_fade_out_begin = 0;
       fade_out_finished = true;
       if (player) {
@@ -352,7 +353,7 @@ void Level::display_map(void)
   if (fade_in) {
     if ((time_get_time_ms_cached() < ts_fade_in_begin) ||
         (time_get_time_ms_cached() - ts_fade_in_begin > LEVEL_FADE_IN_MS)) {
-      map_mini_valid    = false;
+      map_mini_valid   = false;
       ts_fade_in_begin = 0;
       if (player) {
         player->log("Fade in of level finished");
