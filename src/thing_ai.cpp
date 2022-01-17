@@ -385,8 +385,6 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     } else {
       aip->move_path = new_move_path;
 
-      move_set_dir_from_delta(goal.at - curr_at);
-
       if (jump_attack(goal.what)) {
         return true;
       }

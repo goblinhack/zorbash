@@ -16,6 +16,7 @@ def tp_init(name, text_name):
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_cold_dice("1")
     mytp.set_distance_vision(7)
+    mytp.set_is_debug_type(True)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")

@@ -13,6 +13,7 @@
 #include "my_thing_ai.hpp"
 #include "my_thing_id.hpp"
 #include "my_time.hpp"
+#include <array>
 #include <list>
 
 constexpr uint32_t THING_MAGIC_BEGIN = 11221122;

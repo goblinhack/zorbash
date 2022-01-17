@@ -11,7 +11,7 @@
 
 void Thing::lunge(point to)
 {
-  log("Lunge to %d,%d", to.x, to.y);
+  dbg("Lunge to %d,%d", to.x, to.y);
   TRACE_AND_INDENT();
 
   move_finish();
