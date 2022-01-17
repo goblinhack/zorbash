@@ -704,20 +704,20 @@ static void game_dungeons_post_display_tick(Widp w)
       int tlx, tly, brx, bry;
       wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
 
-      l->debugmap_tl.x = tlx;
-      l->debugmap_tl.y = tly;
-      l->debugmap_br.x = brx;
-      l->debugmap_br.y = bry;
+      l->map_debug_tl.x = tlx;
+      l->map_debug_tl.y = tly;
+      l->map_debug_br.x = brx;
+      l->map_debug_br.y = bry;
 
       {
-        int tlx = l->debugmap_tl.x * game->config.ascii_gl_width;
-        int tly = l->debugmap_tl.y * game->config.ascii_gl_height;
+        int tlx = l->map_debug_tl.x * game->config.ascii_gl_width;
+        int tly = l->map_debug_tl.y * game->config.ascii_gl_height;
 
-        l->debugmap_br.x++;
-        l->debugmap_br.y++;
+        l->map_debug_br.x++;
+        l->map_debug_br.y++;
 
-        int brx = l->debugmap_br.x * game->config.ascii_gl_width;
-        int bry = l->debugmap_br.y * game->config.ascii_gl_height;
+        int brx = l->map_debug_br.x * game->config.ascii_gl_width;
+        int bry = l->map_debug_br.y * game->config.ascii_gl_height;
 
         glcolor(WHITE);
         blit_fbo_bind_locked(FBO_WID);
@@ -744,8 +744,8 @@ static void game_dungeons_post_display_tick(Widp w)
           continue;
         }
 
-        if (! l->debugmap_valid) {
-          l->update_debugmap(x, y);
+        if (! l->map_debug_valid) {
+          l->update_map_debug(x, y);
         }
       }
     }
@@ -771,17 +771,17 @@ static void game_dungeons_post_display_tick(Widp w)
           int tlx, tly, brx, bry;
           wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
 
-          l->debugmap_tl.x = tlx;
-          l->debugmap_tl.y = tly;
-          l->debugmap_br.x = brx;
-          l->debugmap_br.y = bry;
+          l->map_debug_tl.x = tlx;
+          l->map_debug_tl.y = tly;
+          l->map_debug_br.x = brx;
+          l->map_debug_br.y = bry;
 
-          l->debugmap_br.x -= 2;
-          l->debugmap_br.y -= 2;
+          l->map_debug_br.x -= 2;
+          l->map_debug_br.y -= 2;
 
           glcolor(WHITE);
           blit_fbo_bind_locked(FBO_WID);
-          l->display_debugmap(x, y);
+          l->display_map_debug(x, y);
           blit_fbo_unbind_locked();
         }
       }
@@ -806,7 +806,7 @@ static void game_dungeons_post_display_tick(Widp w)
           gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
           glcolor(WHITE);
           blit_fbo_bind_locked(FBO_WID);
-          l->display_debugmap(ctx->focusx, ctx->focusy, tlx, tly, brx, bry);
+          l->display_map_debug(ctx->focusx, ctx->focusy, tlx, tly, brx, bry);
           blit_fbo_unbind_locked();
         }
       }

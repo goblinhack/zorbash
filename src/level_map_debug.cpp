@@ -10,13 +10,13 @@
 #include "my_thing.hpp"
 #include "my_tile.hpp"
 
-void Level::update_debugmap(int x, int y)
+void Level::update_map_debug(int x, int y)
 {
   TRACE_AND_INDENT();
 
   gl_enter_2d_mode(MAP_WIDTH, MAP_HEIGHT);
 
-  blit_fbo_bind(FBO_DEBUGMAP + (y * DUNGEONS_GRID_CHUNK_WIDTH) + x);
+  blit_fbo_bind(FBO_MAP_DEBUG + (y * DUNGEONS_GRID_CHUNK_WIDTH) + x);
   glBlendFunc(GL_ONE, GL_ZERO);
 
   glDisable(GL_TEXTURE_2D);
@@ -106,5 +106,5 @@ void Level::update_debugmap(int x, int y)
   blit_fbo_unbind();
   glEnable(GL_TEXTURE_2D);
 
-  debugmap_valid = true;
+  map_debug_valid = true;
 }

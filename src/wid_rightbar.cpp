@@ -23,7 +23,7 @@ static bool wid_rightbar_create(void);
 
 Widp wid_item_popup {};
 Widp wid_rightbar {};
-Widp wid_minimap {};
+Widp wid_map_mini {};
 
 void wid_rightbar_fini(void)
 {
@@ -791,8 +791,8 @@ static bool wid_rightbar_create(void)
   //
   y_at += 8;
   {
-    auto w      = wid_new_container(wid_rightbar, "minimap wid");
-    wid_minimap = w;
+    auto w      = wid_new_container(wid_rightbar, "map_mini wid");
+    wid_map_mini = w;
     point tl    = make_point(0, y_at);
     point br    = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + UI_SIDEBAR_RIGHT_WIDTH);
 
@@ -806,10 +806,10 @@ static bool wid_rightbar_create(void)
     int tlx, tly, brx, bry;
     wid_get_tl_x_tl_y_br_x_br_y(w, &tlx, &tly, &brx, &bry);
 
-    level->minimap_tl.x = tlx;
-    level->minimap_tl.y = tly;
-    level->minimap_br.x = brx;
-    level->minimap_br.y = bry;
+    level->map_mini_tl.x = tlx;
+    level->map_mini_tl.y = tly;
+    level->map_mini_br.x = brx;
+    level->map_mini_br.y = bry;
   }
 
   wid_update(wid_rightbar);

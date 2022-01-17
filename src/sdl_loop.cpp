@@ -261,7 +261,7 @@ void sdl_loop(void)
       // Draw the map
       //
       if (likely(game->level != nullptr)) {
-        game->level->display_minimap();
+        game->level->display_map_mini();
       }
 
       glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

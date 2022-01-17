@@ -569,7 +569,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->map_wanted_at);
   in >> bits(l->maxx);
   in >> bits(l->maxy);
-  in >> bits(l->minimap_valid);
+  in >> bits(l->map_mini_valid);
   in >> bits(l->minx);
   in >> bits(l->miny);
   in >> bits(l->monst_count);
@@ -783,7 +783,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.gfx_fullscreen);
   in >> bits(my.t.gfx_fullscreen_desktop);
   in >> bits(my.t.gfx_inverted);
-  in >> bits(my.t.gfx_minimap);
+  in >> bits(my.t.gfx_map_mini);
   in >> bits(my.t.gfx_show_hidden);
   in >> bits(my.t.gfx_vsync_enable);
   in >> bits(my.t.tile_height);
@@ -903,7 +903,7 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
 
   in >> bits(my.t.started);
   in >> bits(my.t.things_are_moving);
-  in >> bits(my.t.minimap_over);
+  in >> bits(my.t.map_mini_over);
   in >> bits(my.t.seed);
   in >> bits(my.t.seed_name);
   in >> bits(my.t.tick_requested);

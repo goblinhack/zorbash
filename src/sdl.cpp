@@ -1010,15 +1010,15 @@ uint8_t config_gfx_inverted_set(tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-void config_gfx_minimap_toggle(void)
+void config_gfx_map_mini_toggle(void)
 {
   TRACE_NO_INDENT();
 
-  if (! game->config.gfx_minimap) {
-    game->config.gfx_minimap = true;
+  if (! game->config.gfx_map_mini) {
+    game->config.gfx_map_mini = true;
     CON("GFX map enabled");
   } else {
-    game->config.gfx_minimap = false;
+    game->config.gfx_map_mini = false;
     CON("GFX map disabled");
   }
 }
@@ -1026,19 +1026,19 @@ void config_gfx_minimap_toggle(void)
 //
 // User has entered a command, run it
 //
-uint8_t config_gfx_minimap_set(tokens_t *tokens, void *context)
+uint8_t config_gfx_map_mini_set(tokens_t *tokens, void *context)
 {
   TRACE_NO_INDENT();
 
   char *s = tokens->args[ 3 ];
 
   if (! s || (*s == '\0')) {
-    game->config.gfx_minimap = true;
+    game->config.gfx_map_mini = true;
     CON("GFX map enabled (default)");
   } else {
     int val                  = strtol(s, 0, 10) ? 1 : 0;
-    game->config.gfx_minimap = val;
-    if (game->config.gfx_minimap) {
+    game->config.gfx_map_mini = val;
+    if (game->config.gfx_map_mini) {
       CON("GFX map enabled");
     } else {
       CON("GFX map disabled");

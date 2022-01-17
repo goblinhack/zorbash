@@ -43,7 +43,7 @@ void Config::reset(void)
   gfx_fullscreen_desktop = true;
   gfx_inverted           = false;
   gfx_lights             = true;
-  gfx_minimap            = true;
+  gfx_map_mini            = true;
   gfx_show_hidden        = false;
   gfx_vsync_enable       = true;
   gfx_vsync_locked       = false;

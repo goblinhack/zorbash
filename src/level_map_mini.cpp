@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_tile.hpp"
 
-void Level::update_minimap(bool showing_two_levels, bool show_faded)
+void Level::update_map_mini(bool showing_two_levels, bool show_faded)
 {
   TRACE_AND_INDENT();
   static int last_rendered;
@@ -30,7 +30,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
 
   gl_enter_2d_mode(MAP_WIDTH + 1, MAP_HEIGHT + 1);
 
-  blit_fbo_bind(FBO_MINIMAP);
+  blit_fbo_bind(FBO_MAP_MINI);
   glBlendFunc(GL_ONE, GL_ZERO);
 
   //
@@ -165,7 +165,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
         }
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
-          if ((game->minimap_over.x == x) && (game->minimap_over.y == y)) {
+          if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) {
             c = YELLOW;
           }
           if (! game->robot_mode) {
@@ -243,7 +243,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
         }
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
-          if ((game->minimap_over.x == x) && (game->minimap_over.y == y)) {
+          if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) {
             c = YELLOW;
           }
           if (! game->robot_mode) {
@@ -368,7 +368,7 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
 #endif
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
-          if ((game->minimap_over.x == x) && (game->minimap_over.y == y)) {
+          if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) {
             c = YELLOW;
           }
           if (! game->robot_mode) {
@@ -411,5 +411,5 @@ void Level::update_minimap(bool showing_two_levels, bool show_faded)
   blit_flush();
   blit_fbo_unbind();
   glEnable(GL_TEXTURE_2D);
-  minimap_valid = true;
+  map_mini_valid = true;
 }

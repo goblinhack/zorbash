@@ -52,7 +52,7 @@ public:
   int gfx_fullscreen_desktop = true;
   int gfx_inverted           = false;
   int gfx_lights             = true;
-  int gfx_minimap            = true;
+  int gfx_map_mini            = true;
   int gfx_show_hidden        = false;
   int gfx_vsync_enable       = true;
   int gfx_vsync_locked       = false;
@@ -246,7 +246,7 @@ public:
   bool started {}; // Game is afoot
   bool things_are_moving {};
   // fpoint      mouse_over;        // Mouse cursor
-  point       minimap_over;      // Which tile in the minimap
+  point       map_mini_over;      // Which tile in the map_mini
   uint32_t    seed {};           // All randomness jumps off of this
   std::string tick_requested {}; // Something has requested a game tick
   std::string seed_name {};      // Human readable version of the above
