@@ -719,10 +719,18 @@ static void game_dungeons_post_display_tick(Widp w)
         int brx = l->map_debug_br.x * game->config.ascii_gl_width;
         int bry = l->map_debug_br.y * game->config.ascii_gl_height;
 
+        brx--;
+        bry--;
+
         glcolor(WHITE);
         blit_fbo_bind_locked(FBO_WID);
         glDisable(GL_TEXTURE_2D);
+        //
+        // Avoids missing pixel at the corner
+        //
+        glLineWidth(2.0);
         gl_blitsquare(tlx, tly, brx, bry);
+        glLineWidth(1.0);
         glEnable(GL_TEXTURE_2D);
         blit_fbo_unbind_locked();
       }
