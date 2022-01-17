@@ -4,6 +4,7 @@
 //
 
 #include <SDL.h>
+#include <map>
 
 #include "my_array_bounds_check.hpp"
 #include "my_color.hpp"
@@ -17,6 +18,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
+#include "my_thing.hpp"
 #include "my_time.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
@@ -25,6 +27,7 @@
 static uint8_t game_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
 
 static WidPopup *wid_level_description;
+static WidPopup *wid_level_contents;
 
 class game_dungeons_ctx
 {
@@ -37,6 +40,8 @@ public:
 
       delete wid_level_description;
       wid_level_description = nullptr;
+      delete wid_level_contents;
+      wid_level_contents = nullptr;
     }
     delete nodes;
   }
@@ -362,6 +367,65 @@ static void game_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t
 
     wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY30);
     wid_set_bg_tilename(wid_level_description->wid_popup_container, bg_tilename);
+  }
+
+  IF_DEBUG
+  {
+    if (l) {
+      delete wid_level_contents;
+      wid_level_contents = nullptr;
+
+      std::map< ThingId, int > contents;
+      for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_WIDTH; y++) {
+          FOR_ALL_THINGS_THAT_INTERACT(l, t, x, y)
+          {
+            if (t->is_treasure() || t->is_monst() || t->is_mob_spawner()) {
+              contents[ t->id ]++;
+            }
+          }
+          FOR_ALL_THINGS_END();
+        }
+      }
+
+      point tl = make_point(0, TERM_HEIGHT - (contents.size() + 5));
+      point br = make_point(40, TERM_HEIGHT - 1);
+
+      wid_level_contents = new WidPopup("Level contents", tl, br, nullptr, "", true, false);
+      wid_level_contents->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Level contents");
+      wid_level_contents->log(UI_LOGGING_EMPTY_LINE);
+
+      char tmp[ MAXSHORTSTR ];
+      for (auto p : contents) {
+        auto t = l->thing_find(p.first);
+        if (t->is_monst()) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=red$%d %s", p.second, t->short_text_capitalise().c_str());
+        } else {
+          continue;
+        }
+        wid_level_contents->log(tmp, true);
+      }
+      for (auto p : contents) {
+        auto t = l->thing_find(p.first);
+        if (t->is_mob_spawner()) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=pink$%d %s", p.second, t->short_text_capitalise().c_str());
+        } else {
+          continue;
+        }
+        wid_level_contents->log(tmp, true);
+      }
+      for (auto p : contents) {
+        auto t = l->thing_find(p.first);
+        if (t->is_treasure()) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gold$%d %s", p.second, t->short_text_capitalise().c_str());
+        } else {
+          continue;
+        }
+        wid_level_contents->log(tmp, true);
+      }
+
+      wid_set_color(wid_level_contents->wid_popup_container, WID_COLOR_BG, GRAY30);
+    }
   }
 }
 
