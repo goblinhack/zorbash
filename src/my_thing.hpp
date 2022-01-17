@@ -674,8 +674,8 @@ public:
   float update_wobble(void);
 
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool natural_attack, bool poison, bool necrosis,
-                    bool damage_future1, bool damage_future2, bool damage_future3, bool damage_cold,
-                    bool damage_fire, bool damage_crush, bool damage_lightning, bool damage_energy, bool damage_acid,
+                    bool damage_future1, bool damage_future2, bool damage_future3, bool damage_cold, bool damage_fire,
+                    bool damage_crush, bool damage_lightning, bool damage_energy, bool damage_acid,
                     bool damage_digest, int dmg);
 
   int is_hit(Thingp hitter, bool crit, bool natural_attack, bool poison, bool necrosis, bool damage_future1,
@@ -1914,6 +1914,7 @@ public:
   void move_delta(point);
   void move_finish(void);
   void move_set_dir_from_delta(point);
+  void move_set_dir_from_target_or_delta(point delta);
   void move_to_immediately(point to);
   void move_to(point to);
   void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));

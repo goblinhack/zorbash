@@ -431,7 +431,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   auto y     = future_pos.y;
   auto delta = point(x, y) - curr_at;
 
-  move_set_dir_from_delta(delta);
+  move_set_dir_from_target_or_delta(delta);
 
   //
   // Bounce rings and weapons
@@ -542,14 +542,26 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   if (tp()->gfx_animated_can_hflip()) {
-    if (future_pos.x > curr_at.x) {
-      if (is_facing_left && ! get_ts_flip_start()) {
-        set_ts_flip_start(time_get_time_ms_cached());
-      }
-    } else if (future_pos.x < curr_at.x) {
-      if (! is_facing_left && ! get_ts_flip_start()) {
-        set_ts_flip_start(time_get_time_ms_cached());
-      }
+    switch (dir) {
+      case THING_DIR_NONE :
+      case THING_DIR_DOWN :
+      case THING_DIR_UP : break;
+
+      case THING_DIR_LEFT :
+      case THING_DIR_TL :
+      case THING_DIR_BL :
+        if (! is_facing_left && ! get_ts_flip_start()) {
+          set_ts_flip_start(time_get_time_ms_cached());
+        }
+        break;
+
+      case THING_DIR_RIGHT :
+      case THING_DIR_TR :
+      case THING_DIR_BR :
+        if (is_facing_left && ! get_ts_flip_start()) {
+          set_ts_flip_start(time_get_time_ms_cached());
+        }
+        break;
     }
   }
 
@@ -695,72 +707,12 @@ void Thing::update_pos(point to, bool immediately)
   move_carried_items();
 }
 
-void Thing::move_set_dir_from_delta(point delta)
-{
-  //
-  // If not moving and this is the first move then break out of the
-  // idle animation.
-  //
-  if (is_dir_none()) {
-    ts_next_frame = time_get_time_ms_cached();
-  }
-
-  con("TODO %s", delta.to_string().c_str());
-  if (delta.x < 0) {
-    if (delta.y > 0) {
-      dir_set_bl();
-    } else if (delta.y < 0) {
-      dir_set_tl();
-    } else {
-      dir_set_left();
-    }
-    has_ever_moved = true;
-    return;
-  }
-
-  if (delta.x > 0) {
-    if (delta.y > 0) {
-      dir_set_br();
-    } else if (delta.y < 0) {
-      dir_set_tr();
-    } else {
-      dir_set_right();
-    }
-    has_ever_moved = true;
-    return;
-  }
-
-  if (delta.y > 0) {
-    if (delta.x > 0) {
-      dir_set_br();
-    } else if (delta.x < 0) {
-      dir_set_bl();
-    } else {
-      dir_set_down();
-    }
-    has_ever_moved = true;
-    return;
-  }
-
-  if (delta.y < 0) {
-    if (delta.x > 0) {
-      dir_set_tr();
-    } else if (delta.x < 0) {
-      dir_set_tl();
-    } else {
-      dir_set_up();
-    }
-    has_ever_moved = true;
-    return;
-  }
-}
-
 void Thing::move_to(point to)
 {
   TRACE_NO_INDENT();
   move_finish();
   auto delta = to - curr_at;
-  move_set_dir_from_delta(delta);
+  move_set_dir_from_target_or_delta(delta);
 
   update_pos(to, false);
 }
@@ -769,7 +721,7 @@ void Thing::move_delta(point delta)
 {
   TRACE_NO_INDENT();
   move_finish();
-  move_set_dir_from_delta(delta);
+  move_set_dir_from_target_or_delta(delta);
 
   //
   // If the move finish ended up doing something like moving into
@@ -788,7 +740,7 @@ void Thing::move_to_immediately(point to)
   TRACE_NO_INDENT();
   move_finish();
   auto delta = to - curr_at;
-  move_set_dir_from_delta(delta);
+  move_set_dir_from_target_or_delta(delta);
 
   //
   // Don't check for descending here as that check will be set when falling

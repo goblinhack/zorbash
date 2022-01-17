@@ -740,7 +740,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     //
     if (get_equip(MONST_EQUIP_WEAPON)) {
       auto delta = victim->curr_at - curr_at;
-      move_set_dir_from_delta(delta);
+      move_set_dir_from_target_or_delta(delta);
       equip_use_may_attack(MONST_EQUIP_WEAPON);
       return true;
     }
@@ -751,7 +751,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob_spawner()) {
       if (get_equip(MONST_EQUIP_WEAPON)) {
         auto delta = victim->curr_at - curr_at;
-        move_set_dir_from_delta(delta);
+        move_set_dir_from_target_or_delta(delta);
         equip_use_may_attack(MONST_EQUIP_WEAPON);
         return true;
       }
