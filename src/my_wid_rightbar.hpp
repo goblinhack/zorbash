@@ -13,5 +13,5 @@ bool wid_rightbar_init(void);
 // Global widgets.
 //
 extern Widp wid_rightbar_window;
-extern Widp wid_minimap;
+extern Widp wid_map_mini;
 extern bool is_mouse_over_rightbar(void);

@@ -141,7 +141,7 @@ public:
   bool is_starting {}; // Loading level
   bool map_changed {}; // Something moved on the map
   bool map_follow_player {};
-  bool minimap_valid {};
+  bool map_mini_valid {};
   bool is_level_type_sewer {};
   bool is_level_type_dungeon {};
 
@@ -295,13 +295,13 @@ public:
   std::vector< Laser > new_lasers;
 
   //
-  // Where the minimap widget ois
+  // Where the map_mini widget ois
   //
-  point minimap_tl;
-  point minimap_br;
-  point debugmap_tl;
-  point debugmap_br;
-  bool  debugmap_valid {};
+  point map_mini_tl;
+  point map_mini_br;
+  point map_debug_tl;
+  point map_debug_br;
+  bool  map_debug_valid {};
 
   //
   // We regenerate this map every player move, and indicates the shortest
@@ -853,9 +853,9 @@ public:
   void display_map_fg_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
   void display_map_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
   void display_map(void);
-  void display_minimap(void);
-  void display_debugmap(int x, int y);
-  void display_debugmap(int x, int y, int tlx, int tly, int brx, int bly);
+  void display_map_mini(void);
+  void display_map_debug(int x, int y);
+  void display_map_debug(int x, int y, int tlx, int tly, int brx, int bly);
   void display_projectiles(void);
   void display_target(void);
   void display(void);
@@ -1040,8 +1040,8 @@ public:
   void update_heatmap(void);
   void update_map_things_to_stand_on(void);
   void update_map(void);
-  void update_minimap(bool showing_two_levels, bool show_faded);
-  void update_debugmap(int x, int y);
+  void update_map_mini(bool showing_two_levels, bool show_faded);
+  void update_map_debug(int x, int y);
   void update_new_level(void);
   void update_same_level_immediately(void);
   void update_same_level(void);

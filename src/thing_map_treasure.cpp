@@ -46,12 +46,12 @@ void Thing::treasure_map_check(void)
   TRACE_NO_INDENT();
 
   //
-  // If carrying a treasure map we need to update the minimap
+  // If carrying a treasure map we need to update the map_mini
   //
   auto count = get_treasure_map_carried_count();
   if (get_treasure_map_count() != count) {
     if (is_player()) {
-      level->minimap_valid = false;
+      level->map_mini_valid = false;
     }
   }
   set_treasure_map_count(count);

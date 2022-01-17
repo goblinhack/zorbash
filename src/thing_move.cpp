@@ -675,7 +675,7 @@ void Thing::update_pos(point to, bool immediately)
 
   if (is_player()) {
     if (((int) old_at.x != (int) new_at.x) || ((int) old_at.y != (int) new_at.y)) {
-      level->minimap_valid = false;
+      level->map_mini_valid = false;
     }
   }
 

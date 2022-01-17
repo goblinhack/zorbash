@@ -51,7 +51,7 @@ uint8_t wid_console_init(void)
 
   command_add(config_fps_counter_set, "set fps [01]", "enable frames per sec counter");
   command_add(config_gfx_inverted_set, "set gfx inverted [01]", "enable reverse colors");
-  command_add(config_gfx_minimap_set, "set gfx minimap [01]", "enable dungeon minimap");
+  command_add(config_gfx_map_mini_set, "set gfx map_mini [01]", "enable dungeon map_mini");
   command_add(config_game_pix_zoom_set, "set gfx zoom [0123456789]", "map zoom");
   if (! game->config.gfx_vsync_locked) {
     command_add(config_gfx_vsync_enable, "set vsync [01]", "enable vertical sync enable");

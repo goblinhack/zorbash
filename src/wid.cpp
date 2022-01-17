@@ -6527,12 +6527,12 @@ static void wid_tick_all(void)
   }
 
   //
-  // If not over the minimap, clear the cursor. This allows us to click on the map
+  // If not over the map_mini, clear the cursor. This allows us to click on the map
   // and have the player move to that location.
   //
   if (wid_over) {
     if (game->level) {
-      if (wid_over != wid_minimap) {
+      if (wid_over != wid_map_mini) {
         game->level->cursor_path_clear();
       }
     }
@@ -6946,11 +6946,11 @@ bool wid_some_recent_event_occurred(void)
   }
 
   //
-  // If over the minimap allows clicks to move us
+  // If over the map_mini allows clicks to move us
   //
   // Else, ignore clicks as they should go to a widget
   //
-  if (game->minimap_over == point(-1, -1)) {
+  if (game->map_mini_over == point(-1, -1)) {
     auto w = wid_find_under_mouse();
     if (w) {
       if (w->name != "wid topcon window") {

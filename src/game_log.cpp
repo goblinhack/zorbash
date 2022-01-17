@@ -89,7 +89,7 @@ void Config::dump(std::string pfx)
   LOG("%s gfx_fullscreen         %u", pfx.c_str(), gfx_fullscreen);
   LOG("%s gfx_fullscreen_desktop %u", pfx.c_str(), gfx_fullscreen_desktop);
   LOG("%s gfx_inverted           %u", pfx.c_str(), gfx_inverted);
-  LOG("%s gfx_minimap            %u", pfx.c_str(), gfx_minimap);
+  LOG("%s gfx_map_mini            %u", pfx.c_str(), gfx_map_mini);
   LOG("%s gfx_show_hidden        %u", pfx.c_str(), gfx_show_hidden);
   LOG("%s gfx_vsync_enable       %u", pfx.c_str(), gfx_vsync_enable);
   LOG("%s music_volume           %u", pfx.c_str(), music_volume);

@@ -402,7 +402,7 @@ void gl_init_fbo(void)
     fbo_get_size(i, tex_width, tex_height);
 
     //
-    // If no change in size (minimap, bg map) then do not reset the FBO
+    // If no change in size (map_mini, bg map) then do not reset the FBO
     //
     if (fbo_size[ i ] == isize(tex_width, tex_height)) {
       DBG2("GFX: skip init of FBO %d", i);
@@ -445,7 +445,7 @@ void fbo_get_size(int fbo, int &w, int &h)
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;
-    case FBO_MINIMAP :
+    case FBO_MAP_MINI :
       w = MAP_WIDTH;
       h = MAP_HEIGHT;
       break;
@@ -472,7 +472,7 @@ void fbo_get_size(int fbo, int &w, int &h)
       break;
   }
 
-  if ((fbo >= FBO_DEBUGMAP) && (fbo < FBO_DEBUGMAP_END)) {
+  if ((fbo >= FBO_MAP_DEBUG) && (fbo < FBO_MAP_DEBUG_END)) {
     w = MAP_WIDTH;
     h = MAP_HEIGHT;
   }

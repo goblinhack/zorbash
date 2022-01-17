@@ -526,7 +526,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->map_wanted_at);
   out << bits(my.t->maxx);
   out << bits(my.t->maxy);
-  out << bits(my.t->minimap_valid);
+  out << bits(my.t->map_mini_valid);
   out << bits(my.t->minx);
   out << bits(my.t->miny);
   out << bits(my.t->monst_count);
@@ -664,7 +664,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(my.t.gfx_fullscreen);
   out << bits(my.t.gfx_fullscreen_desktop);
   out << bits(my.t.gfx_inverted);
-  out << bits(my.t.gfx_minimap);
+  out << bits(my.t.gfx_map_mini);
   out << bits(my.t.gfx_show_hidden);
   out << bits(my.t.gfx_vsync_enable);
   out << bits(my.t.tile_height);
@@ -743,7 +743,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 
   out << bits(my.t.started);
   out << bits(my.t.things_are_moving);
-  out << bits(my.t.minimap_over);
+  out << bits(my.t.map_mini_over);
   out << bits(my.t.seed);
   out << bits(my.t.seed_name);
   out << bits(my.t.tick_requested);

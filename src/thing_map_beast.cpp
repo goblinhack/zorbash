@@ -46,12 +46,12 @@ void Thing::beast_map_check(void)
   TRACE_NO_INDENT();
 
   //
-  // If carrying a beast map we need to update the minimap
+  // If carrying a beast map we need to update the map_mini
   //
   auto count = get_beast_map_carried_count();
   if (get_beast_map_count() != count) {
     if (is_player()) {
-      level->minimap_valid = false;
+      level->map_mini_valid = false;
     }
   }
   set_beast_map_count(count);

@@ -256,7 +256,7 @@ void Level::cursor_path_draw(point start, point end)
   //
   // Let's see the path
   //
-  minimap_valid = false;
+  map_mini_valid = false;
 }
 
 void Level::cursor_path_draw(const std::vector< point > &move_path)
@@ -286,7 +286,7 @@ void Level::cursor_path_draw(const std::vector< point > &move_path)
   //
   // Let's see the path
   //
-  minimap_valid = false;
+  map_mini_valid = false;
 }
 
 //
@@ -307,7 +307,7 @@ void Level::cursor_path_draw(void)
   //
   // Let's see the path
   //
-  minimap_valid = false;
+  map_mini_valid = false;
 }
 
 //

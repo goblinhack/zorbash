@@ -90,7 +90,7 @@ void Config::dump(std::string pfx, std::ostream &out)
   out << pfx << "gfx_fullscreen         " << gfx_fullscreen << std::endl;
   out << pfx << "gfx_fullscreen_desktop " << gfx_fullscreen_desktop << std::endl;
   out << pfx << "gfx_inverted           " << gfx_inverted << std::endl;
-  out << pfx << "gfx_minimap            " << gfx_minimap << std::endl;
+  out << pfx << "gfx_map_mini            " << gfx_map_mini << std::endl;
   out << pfx << "gfx_show_hidden        " << gfx_show_hidden << std::endl;
   out << pfx << "gfx_vsync_enable       " << gfx_vsync_enable << std::endl;
   out << pfx << "music_volume           " << music_volume << std::endl;

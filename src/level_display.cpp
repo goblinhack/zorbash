@@ -52,17 +52,17 @@ void Level::display(void)
     //
     // If a sewer, then also show the level above as it helps navigation
     //
-    if (! minimap_valid) {
+    if (! map_mini_valid) {
       if (game->level->is_level_type_sewer) {
         bool showing_two_levels = true;
         auto dungeon_level      = world_at + point3d(0, 0, -1);
         auto dungeon            = get(game->world.levels, dungeon_level.x, dungeon_level.y, dungeon_level.z);
         if (dungeon) {
-          dungeon->update_minimap(showing_two_levels, true /* faded */);
+          dungeon->update_map_mini(showing_two_levels, true /* faded */);
         }
-        update_minimap(showing_two_levels, false /* faded */);
+        update_map_mini(showing_two_levels, false /* faded */);
       } else {
-        update_minimap(false /* showing_two_levels */, false /* faded */);
+        update_map_mini(false /* showing_two_levels */, false /* faded */);
       }
     }
 
@@ -340,7 +340,7 @@ void Level::display_map(void)
   if (fade_out) {
     if ((time_get_time_ms_cached() < ts_fade_out_begin) ||
         (time_get_time_ms_cached() - ts_fade_out_begin > LEVEL_FADE_OUT_MS)) {
-      minimap_valid     = false;
+      map_mini_valid     = false;
       ts_fade_out_begin = 0;
       fade_out_finished = true;
       if (player) {
@@ -352,7 +352,7 @@ void Level::display_map(void)
   if (fade_in) {
     if ((time_get_time_ms_cached() < ts_fade_in_begin) ||
         (time_get_time_ms_cached() - ts_fade_in_begin > LEVEL_FADE_IN_MS)) {
-      minimap_valid    = false;
+      map_mini_valid    = false;
       ts_fade_in_begin = 0;
       if (player) {
         player->log("Fade in of level finished");

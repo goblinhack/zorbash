@@ -33,11 +33,11 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
 
   dbg3("Cursor find on visible things");
   TRACE_AND_INDENT();
-  if ((game->minimap_over.x > 0) && (game->minimap_over.y > 0)) {
+  if ((game->map_mini_over.x > 0) && (game->map_mini_over.y > 0)) {
     //
     // Don't move onto lava unless double click
     //
-    auto to = game->minimap_over;
+    auto to = game->map_mini_over;
     if (! wid_mouse_two_clicks) {
       if (cursor) {
         TRACE_AND_INDENT();
