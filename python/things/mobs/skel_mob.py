@@ -3,6 +3,9 @@ import tp
 
 
 def on_idle_tick_frequency_dice(me, x, y):
+    #
+    # Make sure to only spawn minions so they have the is_minion flag set
+    #
     if my.pcg_randint(1, 100) < 10:
         if my.level_spawn_next_to(me, "skel_minion_fire"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")

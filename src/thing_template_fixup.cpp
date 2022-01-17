@@ -28,6 +28,12 @@ void tp_fixup(void)
       tp->set_is_combustible(true);
     }
 
+    if (tp->is_flying()) {
+      if (tp->is_shovable()) {
+        DIE("Tp %s a flying thing that can be shoved, are you sure?", tp->name().c_str());
+      }
+    }
+
     if (tp->is_wooden()) {
       if (! tp->is_burnable()) {
         DIE("Tp %s needs to be set as burnable if wooden", tp->name().c_str());
@@ -84,7 +90,7 @@ void tp_fixup(void)
     num_attack_types += tp->get_damage_future1() ? 1 : 0;
     num_attack_types += tp->get_damage_future2() ? 1 : 0;
     num_attack_types += tp->get_damage_future3() ? 1 : 0;
-    num_attack_types += tp->get_damage_future4() ? 1 : 0;
+    num_attack_types += tp->get_damage_cold() ? 1 : 0;
     num_attack_types += tp->get_damage_fire() ? 1 : 0;
     num_attack_types += tp->get_damage_crush() ? 1 : 0;
     num_attack_types += tp->get_damage_lightning() ? 1 : 0;
@@ -121,8 +127,8 @@ void tp_fixup(void)
       if (tp->get_damage_future3() > 0) {
         tp->set_damage_future3_chance_d1000(1000);
       }
-      if (tp->get_damage_future4() > 0) {
-        tp->set_damage_future4_chance_d1000(1000);
+      if (tp->get_damage_cold() > 0) {
+        tp->set_damage_cold_chance_d1000(1000);
       }
       if (tp->get_damage_lightning() > 0) {
         tp->set_damage_lightning_chance_d1000(1000);

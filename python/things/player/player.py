@@ -151,7 +151,7 @@ def on_death(me, x, y):
         "You tried. Well done. I really mean it. Maybe.",
         "You wave farewell to the monsters.",
         "You went to meet your maker. It was not impressed.",
-        "You went to the funky spirit in the sky.",
+        "You went to the spirit in the sky.",
         "You went to the restaurant at the end of the universe.",
     ]
     my.topcon(f"{random.choice(messages)}")
@@ -200,7 +200,7 @@ def on_damage_future3(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_future4(me, hitter, x, y, damage):
+def on_damage_cold(me, hitter, x, y, damage):
     return damage
 
 
@@ -257,7 +257,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_collateral_damage_pct(90)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(20)
-    mytp.set_damage_natural_attack_dice("1d6+1")
+    mytp.set_damage_natural_dice("1d6+1")
     mytp.set_damage_natural_attack_type("punch")
     mytp.set_distance_avoid(3)
     mytp.set_distance_jump(2)
@@ -332,7 +332,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_on_damage_future1_do("player.on_damage_future1()")
     mytp.set_on_damage_future2_do("player.on_damage_future2()")
     mytp.set_on_damage_future3_do("player.on_damage_future3()")
-    mytp.set_on_damage_future4_do("player.on_damage_future4()")
+    mytp.set_on_damage_cold_do("player.on_damage_cold()")
     mytp.set_on_damage_lightning_do("player.on_damage_lightning()")
     mytp.set_on_damage_melee_do("player.on_damage_melee()")
     mytp.set_on_damage_natural_attack_do("player.on_damage_natural_attack()")

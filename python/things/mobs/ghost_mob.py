@@ -3,6 +3,9 @@ import tp
 
 
 def on_idle_tick_frequency_dice(me, x, y):
+    #
+    # Make sure to only spawn minions so they have the is_minion flag set
+    #
     my.level_spawn_next_to(me, "ghost_minion")
 
 

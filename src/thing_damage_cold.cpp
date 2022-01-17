@@ -15,22 +15,22 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-const Dice &Thing::get_damage_future4_dice(void)
+const Dice &Thing::get_damage_cold_dice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->get_damage_future4_dice());
+  return (tp()->get_damage_cold_dice());
 }
 
-const std::string &Thing::get_damage_future4_dice_str(void)
+const std::string &Thing::get_damage_cold_dice_str(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->get_damage_future4_dice_str());
+  return (tp()->get_damage_cold_dice_str());
 }
 
-int Thing::get_damage_future4(void)
+int Thing::get_damage_cold(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->get_damage_future4_dice().roll();
+  auto roll = tp()->get_damage_cold_dice().roll();
 
   if (roll) {
     return roll + get_enchant();
@@ -38,27 +38,27 @@ int Thing::get_damage_future4(void)
   return roll;
 }
 
-int Thing::on_owner_damage_future4(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_cold(Thingp owner, Thingp hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_future4 null thing");
+    err("Cannot owner_damage_cold null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_future4 null thing");
+    err("Cannot owner_damage_cold null thing");
     return damage;
   }
 
-  auto on_owner_damage_future4 = on_owner_damage_future4_do();
-  if (std::empty(on_owner_damage_future4)) {
+  auto on_owner_damage_cold = on_owner_damage_cold_do();
+  if (std::empty(on_owner_damage_cold)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_future4, '.');
+  auto t = split_tokens(on_owner_damage_cold, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -78,27 +78,27 @@ int Thing::on_owner_damage_future4(Thingp owner, Thingp hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_future4 call [%s] expected mod:function, got %d elems", on_owner_damage_future4.c_str(),
-      (int) on_owner_damage_future4.size());
+  ERR("Bad on_owner_damage_cold call [%s] expected mod:function, got %d elems", on_owner_damage_cold.c_str(),
+      (int) on_owner_damage_cold.size());
 
   return damage;
 }
 
-int Thing::on_damage_future4(Thingp hitter, int damage)
+int Thing::on_damage_cold(Thingp hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot damage_future4 null thing");
+    err("Cannot damage_cold null thing");
     return damage;
   }
 
-  auto on_damage_future4 = on_damage_future4_do();
-  if (std::empty(on_damage_future4)) {
+  auto on_damage_cold = on_damage_cold_do();
+  if (std::empty(on_damage_cold)) {
     return damage;
   }
 
-  auto t = split_tokens(on_damage_future4, '.');
+  auto t = split_tokens(on_damage_cold, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -118,8 +118,8 @@ int Thing::on_damage_future4(Thingp hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_damage_future4 call [%s] expected mod:function, got %d elems", on_damage_future4.c_str(),
-      (int) on_damage_future4.size());
+  ERR("Bad on_damage_cold call [%s] expected mod:function, got %d elems", on_damage_cold.c_str(),
+      (int) on_damage_cold.size());
 
   return damage;
 }

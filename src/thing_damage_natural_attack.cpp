@@ -15,22 +15,22 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-const Dice &Thing::get_damage_natural_attack_dice(void)
+const Dice &Thing::get_damage_natural_dice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->get_damage_natural_attack_dice());
+  return (tp()->get_damage_natural_dice());
 }
 
-const std::string &Thing::get_damage_natural_attack_dice_str(void)
+const std::string &Thing::get_damage_natural_dice_str(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->get_damage_natural_attack_dice_str());
+  return (tp()->get_damage_natural_dice_str());
 }
 
 int Thing::get_damage_natural_attack(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->get_damage_natural_attack_dice().roll();
+  auto roll = tp()->get_damage_natural_dice().roll();
 
   if (roll) {
     return roll + get_enchant();

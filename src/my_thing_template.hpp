@@ -58,7 +58,7 @@ public:
 
 private:
   Dice _damage_acid_dice {};
-  Dice _damage_natural_attack_dice {};
+  Dice _damage_natural_dice {};
   Dice _damage_crush_dice {};
   Dice _damage_digest_dice {};
   Dice _damage_energy_dice {};
@@ -66,7 +66,7 @@ private:
   Dice _damage_future1_dice {};
   Dice _damage_future2_dice {};
   Dice _damage_future3_dice {};
-  Dice _damage_future4_dice {};
+  Dice _damage_cold_dice {};
   Dice _damage_lightning_dice {};
   Dice _damage_melee_dice {};
   Dice _damage_necrosis_dice {};
@@ -118,7 +118,7 @@ private:
   int _damage_future1_chance_d1000 {};
   int _damage_future2_chance_d1000 {};
   int _damage_future3_chance_d1000 {};
-  int _damage_future4_chance_d1000 {};
+  int _damage_cold_chance_d1000 {};
   int _damage_lightning_chance_d1000 {};
   int _damage_melee_chance_d1000 {};
   int _damage_natural_attack_chance_d1000 {};
@@ -636,10 +636,10 @@ private:
   std::string _damage_future1_dice_str;
   std::string _damage_future2_dice_str;
   std::string _damage_future3_dice_str;
-  std::string _damage_future4_dice_str;
+  std::string _damage_cold_dice_str;
   std::string _damage_lightning_dice_str;
   std::string _damage_melee_dice_str;
-  std::string _damage_natural_attack_dice_str;
+  std::string _damage_natural_dice_str;
   std::string _damage_natural_attack_type;
   std::string _damage_necrosis_dice_str;
   std::string _damage_poison_dice_str;
@@ -665,7 +665,7 @@ private:
   std::string _on_damage_future1_do;
   std::string _on_damage_future2_do;
   std::string _on_damage_future3_do;
-  std::string _on_damage_future4_do;
+  std::string _on_damage_cold_do;
   std::string _on_damage_lightning_do;
   std::string _on_damage_melee_do;
   std::string _on_damage_natural_attack_do;
@@ -693,7 +693,7 @@ private:
   std::string _on_owner_damage_future1_do;
   std::string _on_owner_damage_future2_do;
   std::string _on_owner_damage_future3_do;
-  std::string _on_owner_damage_future4_do;
+  std::string _on_owner_damage_cold_do;
   std::string _on_owner_damage_lightning_do;
   std::string _on_owner_damage_melee_do;
   std::string _on_owner_damage_natural_attack_do;
@@ -742,7 +742,7 @@ public:
   bool is_hated_by_me(class Level *, point p) const;
 
   const Dice &get_damage_acid_dice(void) const;
-  const Dice &get_damage_natural_attack_dice(void) const;
+  const Dice &get_damage_natural_dice(void) const;
   const Dice &get_damage_crush_dice(void) const;
   const Dice &get_damage_digest_dice(void) const;
   const Dice &get_damage_energy_dice(void) const;
@@ -750,7 +750,7 @@ public:
   const Dice &get_damage_future1_dice(void) const;
   const Dice &get_damage_future2_dice(void) const;
   const Dice &get_damage_future3_dice(void) const;
-  const Dice &get_damage_future4_dice(void) const;
+  const Dice &get_damage_cold_dice(void) const;
   const Dice &get_damage_lightning_dice(void) const;
   const Dice &get_damage_melee_dice(void) const;
   const Dice &get_damage_necrosis_dice(void) const;
@@ -773,7 +773,7 @@ public:
   const int get_damage_future1(void) const;
   const int get_damage_future2(void) const;
   const int get_damage_future3(void) const;
-  const int get_damage_future4(void) const;
+  const int get_damage_cold(void) const;
   const int get_damage_lightning(void) const;
   const int get_damage_melee(void) const;
   const int get_damage_necrosis(void) const;
@@ -817,7 +817,7 @@ public:
   const Tilemap *tp_x_tiles(void) const;
 
   void set_damage_acid_dice(const std::string &);
-  void set_damage_natural_attack_dice(const std::string &);
+  void set_damage_natural_dice(const std::string &);
   void set_damage_crush_dice(const std::string &);
   void set_damage_digest_dice(const std::string &);
   void set_damage_energy_dice(const std::string &);
@@ -825,7 +825,7 @@ public:
   void set_damage_future1_dice(const std::string &);
   void set_damage_future2_dice(const std::string &);
   void set_damage_future3_dice(const std::string &);
-  void set_damage_future4_dice(const std::string &);
+  void set_damage_cold_dice(const std::string &);
   void set_damage_lightning_dice(const std::string &);
   void set_damage_melee_dice(const std::string &);
   void set_damage_necrosis_dice(const std::string &);
@@ -842,7 +842,7 @@ public:
   std::string text_a_or_an(void) const;
 
   const std::string &get_damage_acid_dice_str(void) const;
-  const std::string &get_damage_natural_attack_dice_str(void) const;
+  const std::string &get_damage_natural_dice_str(void) const;
   const std::string &get_damage_crush_dice_str(void) const;
   const std::string &get_damage_digest_dice_str(void) const;
   const std::string &get_damage_energy_dice_str(void) const;
@@ -850,7 +850,7 @@ public:
   const std::string &get_damage_future1_dice_str(void) const;
   const std::string &get_damage_future2_dice_str(void) const;
   const std::string &get_damage_future3_dice_str(void) const;
-  const std::string &get_damage_future4_dice_str(void) const;
+  const std::string &get_damage_cold_dice_str(void) const;
   const std::string &get_damage_lightning_dice_str(void) const;
   const std::string &get_damage_melee_dice_str(void) const;
   const std::string &get_damage_necrosis_dice_str(void) const;
@@ -882,7 +882,7 @@ public:
   const std::string &on_damage_future1_do(void) const { return _on_damage_future1_do; }
   const std::string &on_damage_future2_do(void) const { return _on_damage_future2_do; }
   const std::string &on_damage_future3_do(void) const { return _on_damage_future3_do; }
-  const std::string &on_damage_future4_do(void) const { return _on_damage_future4_do; }
+  const std::string &on_damage_cold_do(void) const { return _on_damage_cold_do; }
   const std::string &on_damage_lightning_do(void) const { return _on_damage_lightning_do; }
   const std::string &on_damage_melee_do(void) const { return _on_damage_melee_do; }
   const std::string &on_damage_natural_attack_do(void) const { return _on_damage_natural_attack_do; }
@@ -909,7 +909,7 @@ public:
   const std::string &on_owner_damage_future1_do(void) const { return _on_owner_damage_future1_do; }
   const std::string &on_owner_damage_future2_do(void) const { return _on_owner_damage_future2_do; }
   const std::string &on_owner_damage_future3_do(void) const { return _on_owner_damage_future3_do; }
-  const std::string &on_owner_damage_future4_do(void) const { return _on_owner_damage_future4_do; }
+  const std::string &on_owner_damage_cold_do(void) const { return _on_owner_damage_cold_do; }
   const std::string &on_owner_damage_lightning_do(void) const { return _on_owner_damage_lightning_do; }
   const std::string &on_owner_damage_melee_do(void) const { return _on_owner_damage_melee_do; }
   const std::string &on_owner_damage_natural_attack_do(void) const { return _on_owner_damage_natural_attack_do; }
@@ -982,7 +982,7 @@ public:
   int damage_future1_chance_d1000(void) const { return _damage_future1_chance_d1000; }
   int damage_future2_chance_d1000(void) const { return _damage_future2_chance_d1000; }
   int damage_future3_chance_d1000(void) const { return _damage_future3_chance_d1000; }
-  int damage_future4_chance_d1000(void) const { return _damage_future4_chance_d1000; }
+  int damage_cold_chance_d1000(void) const { return _damage_cold_chance_d1000; }
   int damage_lightning_chance_d1000(void) const { return _damage_lightning_chance_d1000; }
   int damage_melee_chance_d1000(void) const { return _damage_melee_chance_d1000; }
   int damage_natural_attack_chance_d1000(void) const { return _damage_natural_attack_chance_d1000; }
@@ -1527,7 +1527,7 @@ public:
   void set_damage_future1_chance_d1000(int v) { _damage_future1_chance_d1000 = v; }
   void set_damage_future2_chance_d1000(int v) { _damage_future2_chance_d1000 = v; }
   void set_damage_future3_chance_d1000(int v) { _damage_future3_chance_d1000 = v; }
-  void set_damage_future4_chance_d1000(int v) { _damage_future4_chance_d1000 = v; }
+  void set_damage_cold_chance_d1000(int v) { _damage_cold_chance_d1000 = v; }
   void set_damage_lightning_chance_d1000(int v) { _damage_lightning_chance_d1000 = v; }
   void set_damage_melee_chance_d1000(int v) { _damage_melee_chance_d1000 = v; }
   void set_damage_natural_attack_chance_d1000(int v) { _damage_natural_attack_chance_d1000 = v; }
@@ -1834,7 +1834,7 @@ public:
   void set_on_damage_future1_do(const std::string &v) { _on_damage_future1_do = v; }
   void set_on_damage_future2_do(const std::string &v) { _on_damage_future2_do = v; }
   void set_on_damage_future3_do(const std::string &v) { _on_damage_future3_do = v; }
-  void set_on_damage_future4_do(const std::string &v) { _on_damage_future4_do = v; }
+  void set_on_damage_cold_do(const std::string &v) { _on_damage_cold_do = v; }
   void set_on_damage_lightning_do(const std::string &v) { _on_damage_lightning_do = v; }
   void set_on_damage_melee_do(const std::string &v) { _on_damage_melee_do = v; }
   void set_on_damage_natural_attack_do(const std::string &v) { _on_damage_natural_attack_do = v; }
@@ -1863,7 +1863,7 @@ public:
   void set_on_owner_damage_future1_do(const std::string &v) { _on_owner_damage_future1_do = v; }
   void set_on_owner_damage_future2_do(const std::string &v) { _on_owner_damage_future2_do = v; }
   void set_on_owner_damage_future3_do(const std::string &v) { _on_owner_damage_future3_do = v; }
-  void set_on_owner_damage_future4_do(const std::string &v) { _on_owner_damage_future4_do = v; }
+  void set_on_owner_damage_cold_do(const std::string &v) { _on_owner_damage_cold_do = v; }
   void set_on_owner_damage_lightning_do(const std::string &v) { _on_owner_damage_lightning_do = v; }
   void set_on_owner_damage_melee_do(const std::string &v) { _on_owner_damage_melee_do = v; }
   void set_on_owner_damage_natural_attack_do(const std::string &v) { _on_owner_damage_natural_attack_do = v; }

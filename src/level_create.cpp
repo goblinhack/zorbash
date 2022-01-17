@@ -12,12 +12,21 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-void Level::create(point3d at, uint32_t seed, int difficulty_depth)
+void Level::create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_depth)
 {
   TRACE_AND_INDENT();
 
-  uint32_t seedval = game->seed + (at.z * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH) +
-                     (at.y * DUNGEONS_GRID_CHUNK_HEIGHT) + at.x + difficulty_depth;
+  uint32_t seedval;
+
+  if (! dungeon_depth) {
+    seedval = game->seed + 1; // +1 is a temporary hack
+  } else {
+    seedval = (at.z * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH) + (at.y * DUNGEONS_GRID_CHUNK_HEIGHT) +
+              at.x + dungeon_depth;
+  }
+
+  game->seed = seedval;
+
   pcg_srand(seedval);
 
   is_starting = true;
@@ -28,6 +37,7 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth)
 
   this->seed             = seedval;
   this->difficulty_depth = difficulty_depth;
+  this->dungeon_depth    = dungeon_depth;
   world_at               = at;
 
   //
@@ -135,7 +145,7 @@ int Level::get_total_monst_damage_level(void)
       damage += t->get_damage_future1_dice().max_roll();
       damage += t->get_damage_future2_dice().max_roll();
       damage += t->get_damage_future3_dice().max_roll();
-      damage += t->get_damage_future4_dice().max_roll();
+      damage += t->get_damage_cold_dice().max_roll();
       damage += t->get_damage_fire_dice().max_roll();
       damage += t->get_damage_crush_dice().max_roll();
       damage += t->get_damage_lightning_dice().max_roll();
@@ -143,7 +153,7 @@ int Level::get_total_monst_damage_level(void)
       damage += t->get_damage_acid_dice().max_roll();
       damage += t->get_damage_digest_dice().max_roll();
       damage += t->get_damage_digest_dice().max_roll();
-      damage += t->get_damage_natural_attack_dice().max_roll();
+      damage += t->get_damage_natural_dice().max_roll();
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)

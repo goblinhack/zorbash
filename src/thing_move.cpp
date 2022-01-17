@@ -705,6 +705,7 @@ void Thing::move_set_dir_from_delta(point delta)
     ts_next_frame = time_get_time_ms_cached();
   }
 
+  con("TODO %s", delta.to_string().c_str());
   if (delta.x < 0) {
     if (delta.y > 0) {
       dir_set_bl();

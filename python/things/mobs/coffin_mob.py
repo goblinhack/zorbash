@@ -3,12 +3,11 @@ import tp
 
 
 def on_idle_tick_frequency_dice(me, x, y):
-    if my.pcg_randint(1, 100) < 10:
-        if my.level_spawn_next_to(me, "bat_greater"):
-            my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones1")
-    else:
-        if my.level_spawn_next_to(me, "bat_minion"):
-            my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones2")
+    #
+    # Make sure to only spawn minions so they have the is_minion flag set
+    #
+    if my.level_spawn_next_to(me, "bat_minion"):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones2")
 
 
 def on_death(me, x, y):

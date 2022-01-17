@@ -52,7 +52,7 @@ public:
   int gfx_fullscreen_desktop = true;
   int gfx_inverted           = false;
   int gfx_lights             = true;
-  int gfx_map_mini            = true;
+  int gfx_map_mini           = true;
   int gfx_show_hidden        = false;
   int gfx_vsync_enable       = true;
   int gfx_vsync_locked       = false;
@@ -160,7 +160,7 @@ public:
   void help_select(void);
   void hiscore_select(void);
   void init_jump_paths(void);
-  void init_level(point3d, int difficulty_depth = 0);
+  void init_level(point3d, int difficulty_depth = 0, int dungeon_depth = 0);
   void init(void);
   void start(void);
   void place_player(void);
@@ -202,7 +202,7 @@ public:
   void wid_thing_info_add_damage_future1(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_future2(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_future3(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_future4(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_cold(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_fire(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_crush(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t);
@@ -246,7 +246,7 @@ public:
   bool started {}; // Game is afoot
   bool things_are_moving {};
   // fpoint      mouse_over;        // Mouse cursor
-  point       map_mini_over;      // Which tile in the map_mini
+  point       map_mini_over;     // Which tile in the map_mini
   uint32_t    seed {};           // All randomness jumps off of this
   std::string tick_requested {}; // Something has requested a game tick
   std::string seed_name {};      // Human readable version of the above

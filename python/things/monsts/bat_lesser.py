@@ -36,7 +36,7 @@ def tp_init(name, text_name):
     mytp.set_attack_meat(True)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
-    mytp.set_damage_natural_attack_dice("1d4+2")
+    mytp.set_damage_natural_dice("1d4+2")
     mytp.set_damage_natural_attack_type("nibble")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_distance_avoid(3)
@@ -67,7 +67,6 @@ def tp_init(name, text_name):
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_red_blooded(True)
-    mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
     mytp.set_is_toughness_soft(True)
     mytp.set_long_text_description("A snarling mass of flying cuteness. They don't see so well, so best to keep far away.")
@@ -84,7 +83,7 @@ def tp_init(name, text_name):
     mytp.set_stat_dex(15)
     mytp.set_stat_str(2)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("An enormous bat.")
+    mytp.set_text_description("A little bat.")
     mytp.set_text_hits("claws")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
@@ -123,7 +122,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="bat_lesser", text_name="huge fluffy bat")
+    tp_init(name="bat_lesser", text_name="little fluffy bat")
 
 
 init()

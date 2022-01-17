@@ -24,7 +24,7 @@
 #include "my_wid_topcon.hpp"
 #include "my_world.hpp"
 
-void Game::init_level(point3d p, int difficulty_depth)
+void Game::init_level(point3d p, int difficulty_depth, int dungeon_depth)
 {
   DBG("Game init level %d,%d,%d", p.x, p.y, p.z);
   TRACE_AND_INDENT();
@@ -35,7 +35,7 @@ void Game::init_level(point3d p, int difficulty_depth)
   TRACE_AND_INDENT();
   if (! l) {
     DBG("Create new level at: %d,%d,%d", p.x, p.y, p.z);
-    world.new_level_at(p, level_seed, difficulty_depth);
+    world.new_level_at(p, level_seed, difficulty_depth, dungeon_depth);
     l = get(world.levels, p.x, p.y, p.z);
     if (! l) {
       ERR("No level created at: %d,%d,%d", game->current_level.x, game->current_level.y, game->current_level.z);

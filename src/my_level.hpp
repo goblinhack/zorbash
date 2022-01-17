@@ -110,6 +110,7 @@ public:
   // Levels are group into difficulty levels
   //
   int difficulty_depth {};
+  int dungeon_depth {};
 
   //
   // Chances for various things to appear
@@ -816,7 +817,7 @@ public:
   void create_dungeon_place_sewer_pipes(Dungeonp d);
   void create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries);
   void created(void);
-  void create(point3d at, uint32_t seed, int difficulty_depth);
+  void create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_depth);
   void create_sewer_place_remaining_walls(const std::string &what);
   void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
   void cursor_check_if_scroll_needed(void);
