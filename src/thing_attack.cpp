@@ -536,10 +536,10 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Chance of attack_future4 damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_future4_chance_d1000()) {
-      int damage_future4 = get_damage_future4();
-      if (damage_future4 > 0) {
-        damage         = damage_future4;
+    if (d1000() < damage_cold_chance_d1000()) {
+      int damage_cold = get_damage_cold();
+      if (damage_cold > 0) {
+        damage         = damage_cold;
         damage_set     = true;
         attack_future4 = true;
         dbg("Set future4 damage %d", damage);
@@ -1104,7 +1104,7 @@ int Thing::is_attacked_with_damage_future3(Thingp hitter, int damage)
                  attack_acid, attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_future4(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_cold(Thingp hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;

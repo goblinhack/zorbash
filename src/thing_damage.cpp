@@ -18,14 +18,14 @@
 int Thing::get_damage_max(void)
 {
   TRACE_NO_INDENT();
-  auto max_damage = get_damage_natural_attack_dice().max_roll();
+  auto max_damage = get_damage_natural_dice().max_roll();
   max_damage      = std::max(max_damage, get_damage_digest_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_melee_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_poison_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_future1_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_future2_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_future3_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_future4_dice().max_roll());
+  max_damage      = std::max(max_damage, get_damage_cold_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_fire_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_crush_dice().max_roll());
   max_damage      = std::max(max_damage, get_damage_lightning_dice().max_roll());
@@ -51,14 +51,14 @@ int Thing::get_damage_max(void)
 int Thing::get_damage_min(void)
 {
   TRACE_NO_INDENT();
-  auto min_damage = get_damage_natural_attack_dice().min_roll();
+  auto min_damage = get_damage_natural_dice().min_roll();
   min_damage      = std::min(min_damage, get_damage_digest_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_melee_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_poison_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_future1_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_future2_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_future3_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_future4_dice().min_roll());
+  min_damage      = std::min(min_damage, get_damage_cold_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_fire_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_crush_dice().min_roll());
   min_damage      = std::min(min_damage, get_damage_lightning_dice().min_roll());

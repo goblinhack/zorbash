@@ -268,7 +268,7 @@ int Thing::buff_on_damage_future3(Thingp hitter, int damage)
   return damage;
 }
 
-int Thing::buff_on_damage_future4(Thingp hitter, int damage)
+int Thing::buff_on_damage_cold(Thingp hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -280,7 +280,7 @@ int Thing::buff_on_damage_future4(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_future4(this, hitter, damage);
+      damage = t->on_owner_damage_cold(this, hitter, damage);
     }
   }
   return damage;

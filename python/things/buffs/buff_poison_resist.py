@@ -35,7 +35,7 @@ def on_owner_damage_future3(me, owner, hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_future4(me, owner, hitter, x, y, damage):
+def on_owner_damage_cold(me, owner, hitter, x, y, damage):
     return damage
 
 
@@ -108,7 +108,7 @@ def tp_init(name, text_name):
     mytp.set_on_owner_damage_future1_do("me.on_owner_damage_future1()")
     mytp.set_on_owner_damage_future2_do("me.on_owner_damage_future2()")
     mytp.set_on_owner_damage_future3_do("me.on_owner_damage_future3()")
-    mytp.set_on_owner_damage_future4_do("me.on_owner_damage_future4()")
+    mytp.set_on_owner_damage_cold_do("me.on_owner_damage_cold()")
     mytp.set_on_owner_damage_lightning_do("me.on_owner_damage_lightning()")
     mytp.set_on_owner_damage_melee_do("me.on_owner_damage_melee()")
     mytp.set_on_owner_damage_natural_attack_do("me.on_owner_damage_natural_attack()")

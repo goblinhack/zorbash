@@ -23,7 +23,7 @@ PyObject *level_damage_fire_chance_d1000_at(PyObject *obj, PyObject *args, PyObj
 PyObject *level_damage_future1_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_future2_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_future3_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_damage_future4_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_damage_cold_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_lightning_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_necrosis_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_poison_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);

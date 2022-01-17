@@ -45,7 +45,6 @@ def tp_init(name, text_name):
     mytp.set_is_openable(True)
     mytp.set_is_treasure_chest(True)
     mytp.set_is_treasure_class_a(True)
-    mytp.set_is_treasure(True)
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure(True)
     mytp.set_is_treasure_type(True)

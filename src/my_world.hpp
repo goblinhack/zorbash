@@ -31,20 +31,22 @@ public:
   //
   point3d at;
 
-  void                 clear(void);
-  void                 fini(void);
-  void                 dump(std::string prefix, std::ostream &out);
-  void                 dump(std::string prefix);
-  Levelp               new_level_at(point3d at, uint32_t seed, int difficulty_depth);
-  friend std::ostream &operator<<(std::ostream &out, Bits< const World & > const my);
-  friend std::istream &operator>>(std::istream &in, Bits< World & > my);
+  void clear(void);
+  void fini(void);
+  void dump(std::string prefix, std::ostream &out);
+  void dump(std::string prefix);
+  void alloc_thing_id(Thingp t);
+  void alloc_tmp_thing_id(Thingp t);
+  void realloc_thing_id(Thingp t);
+  void free_thing_id(Thingp t);
 
-  void   alloc_thing_id(Thingp t);
-  void   alloc_tmp_thing_id(Thingp t);
-  void   realloc_thing_id(Thingp t);
-  void   free_thing_id(Thingp t);
+  Levelp new_level_at(point3d at, uint32_t seed, int difficulty_depth, int dungeon_depth);
+
   Thingp thing_find_optional(ThingId id);
   Thingp thing_find(ThingId id);
+
+  friend std::ostream &operator<<(std::ostream &out, Bits< const World & > const my);
+  friend std::istream &operator>>(std::istream &in, Bits< World & > my);
 };
 
 #endif

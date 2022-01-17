@@ -485,14 +485,14 @@ public:
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
 
-  const Dice &get_damage_natural_attack_dice(void);
+  const Dice &get_damage_natural_dice(void);
   const Dice &get_damage_crush_dice(void);
   const Dice &get_damage_melee_dice(void);
   const Dice &get_damage_poison_dice(void);
   const Dice &get_damage_future1_dice(void);
   const Dice &get_damage_future2_dice(void);
   const Dice &get_damage_future3_dice(void);
-  const Dice &get_damage_future4_dice(void);
+  const Dice &get_damage_cold_dice(void);
   const Dice &get_damage_fire_dice(void);
   const Dice &get_damage_lightning_dice(void);
   const Dice &get_damage_energy_dice(void);
@@ -537,14 +537,14 @@ public:
   const fpoint &get_interpolated_at(void);
 
   const std::string  get_danger_level_str(Thingp); // Cannot return reference
-  const std::string &get_damage_natural_attack_dice_str(void);
+  const std::string &get_damage_natural_dice_str(void);
   const std::string &get_damage_crush_dice_str(void);
   const std::string &get_damage_melee_dice_str(void);
   const std::string &get_damage_poison_dice_str(void);
   const std::string &get_damage_future1_dice_str(void);
   const std::string &get_damage_future2_dice_str(void);
   const std::string &get_damage_future3_dice_str(void);
-  const std::string &get_damage_future4_dice_str(void);
+  const std::string &get_damage_cold_dice_str(void);
   const std::string &get_damage_fire_dice_str(void);
   const std::string &get_damage_lightning_dice_str(void);
   const std::string &get_damage_energy_dice_str(void);
@@ -579,7 +579,7 @@ public:
   const std::string &on_damage_future1_do(void);
   const std::string &on_damage_future2_do(void);
   const std::string &on_damage_future3_do(void);
-  const std::string &on_damage_future4_do(void);
+  const std::string &on_damage_cold_do(void);
   const std::string &on_damage_lightning_do(void);
   const std::string &on_damage_melee_do(void);
   const std::string &on_damage_necrosis_do(void);
@@ -608,7 +608,7 @@ public:
   const std::string &on_owner_damage_future1_do(void);
   const std::string &on_owner_damage_future2_do(void);
   const std::string &on_owner_damage_future3_do(void);
-  const std::string &on_owner_damage_future4_do(void);
+  const std::string &on_owner_damage_cold_do(void);
   const std::string &on_owner_damage_lightning_do(void);
   const std::string &on_owner_damage_melee_do(void);
   const std::string &on_owner_damage_necrosis_do(void);
@@ -674,12 +674,12 @@ public:
   float update_wobble(void);
 
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool natural_attack, bool poison, bool necrosis,
-                    bool damage_future1, bool damage_future2, bool damage_future3, bool damage_future4,
+                    bool damage_future1, bool damage_future2, bool damage_future3, bool damage_cold,
                     bool damage_fire, bool damage_crush, bool damage_lightning, bool damage_energy, bool damage_acid,
                     bool damage_digest, int dmg);
 
   int is_hit(Thingp hitter, bool crit, bool natural_attack, bool poison, bool necrosis, bool damage_future1,
-             bool damage_future2, bool damage_future3, bool damage_future4, bool damage_fire, bool damage_crush,
+             bool damage_future2, bool damage_future3, bool damage_cold, bool damage_fire, bool damage_crush,
              bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
 
   int aggression_level_pct(void);
@@ -709,7 +709,7 @@ public:
   int buff_on_damage_future1(Thingp hitter, int damage);
   int buff_on_damage_future2(Thingp hitter, int damage);
   int buff_on_damage_future3(Thingp hitter, int damage);
-  int buff_on_damage_future4(Thingp hitter, int damage);
+  int buff_on_damage_cold(Thingp hitter, int damage);
   int buff_on_damage_lightning(Thingp hitter, int damage);
   int buff_on_damage_melee(Thingp hitter, int damage);
   int buff_on_damage_natural_attack(Thingp hitter, int damage);
@@ -730,7 +730,7 @@ public:
   int damage_future1_chance_d1000(void);
   int damage_future2_chance_d1000(void);
   int damage_future3_chance_d1000(void);
-  int damage_future4_chance_d1000(void);
+  int damage_cold_chance_d1000(void);
   int damage_lightning_chance_d1000(void);
   int damage_melee_chance_d1000(void);
   int damage_natural_attack_chance_d1000(void);
@@ -892,7 +892,7 @@ public:
   int get_damage_future1(void);
   int get_damage_future2(void);
   int get_damage_future3(void);
-  int get_damage_future4(void);
+  int get_damage_cold(void);
   int get_damage_lightning(void);
   int get_damage_max(void);
   int get_damage_melee(void);
@@ -1128,7 +1128,7 @@ public:
   int is_attacked_with_damage_future1(Thingp hitter, int damage);
   int is_attacked_with_damage_future2(Thingp hitter, int damage);
   int is_attacked_with_damage_future3(Thingp hitter, int damage);
-  int is_attacked_with_damage_future4(Thingp hitter, int damage);
+  int is_attacked_with_damage_cold(Thingp hitter, int damage);
   int is_attacked_with_damage_lightning(Thingp hitter, int damage);
   int is_attacked_with_damage_melee(Thingp hitter, int damage);
   int is_attacked_with_damage_natural_attack(Thingp hitter, int damage);
@@ -1346,8 +1346,8 @@ public:
   int on_damage_future2(Thingp owner, Thingp hitter, int damage);
   int on_damage_future3(Thingp hitter, int damage);
   int on_damage_future3(Thingp owner, Thingp hitter, int damage);
-  int on_damage_future4(Thingp hitter, int damage);
-  int on_damage_future4(Thingp owner, Thingp hitter, int damage);
+  int on_damage_cold(Thingp hitter, int damage);
+  int on_damage_cold(Thingp owner, Thingp hitter, int damage);
   int on_damage_lightning(Thingp hitter, int damage);
   int on_damage_lightning(Thingp owner, Thingp hitter, int damage);
   int on_damage_melee(Thingp hitter, int damage);
@@ -1372,7 +1372,7 @@ public:
   int on_owner_damage_future1(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_future2(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_future3(Thingp owner, Thingp hitter, int damage);
-  int on_owner_damage_future4(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_cold(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_melee(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_natural_attack(Thingp owner, Thingp hitter, int damage);

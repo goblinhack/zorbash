@@ -92,13 +92,13 @@ void               Tp::set_damage_future3_dice(const std::string &v)
   _damage_future3_dice_str = v;
 }
 
-const Dice        &Tp::get_damage_future4_dice(void) const { return _damage_future4_dice; }
-const int          Tp::get_damage_future4(void) const { return _damage_future4_dice.roll(); }
-const std::string &Tp::get_damage_future4_dice_str(void) const { return _damage_future4_dice_str; }
-void               Tp::set_damage_future4_dice(const std::string &v)
+const Dice        &Tp::get_damage_cold_dice(void) const { return _damage_cold_dice; }
+const int          Tp::get_damage_cold(void) const { return _damage_cold_dice.roll(); }
+const std::string &Tp::get_damage_cold_dice_str(void) const { return _damage_cold_dice_str; }
+void               Tp::set_damage_cold_dice(const std::string &v)
 {
-  _damage_future4_dice     = v;
-  _damage_future4_dice_str = v;
+  _damage_cold_dice     = v;
+  _damage_cold_dice_str = v;
 }
 
 const Dice        &Tp::get_damage_fire_dice(void) const { return _damage_fire_dice; }
@@ -164,13 +164,13 @@ void               Tp::set_damage_necrosis_dice(const std::string &v)
   _damage_necrosis_dice_str = v;
 }
 
-const Dice        &Tp::get_damage_natural_attack_dice(void) const { return _damage_natural_attack_dice; }
-const int          Tp::get_damage_natural_attack(void) const { return _damage_natural_attack_dice.roll(); }
-const std::string &Tp::get_damage_natural_attack_dice_str(void) const { return _damage_natural_attack_dice_str; }
-void               Tp::set_damage_natural_attack_dice(const std::string &v)
+const Dice        &Tp::get_damage_natural_dice(void) const { return _damage_natural_dice; }
+const int          Tp::get_damage_natural_attack(void) const { return _damage_natural_dice.roll(); }
+const std::string &Tp::get_damage_natural_dice_str(void) const { return _damage_natural_dice_str; }
+void               Tp::set_damage_natural_dice(const std::string &v)
 {
-  _damage_natural_attack_dice     = v;
-  _damage_natural_attack_dice_str = v;
+  _damage_natural_dice     = v;
+  _damage_natural_dice_str = v;
 }
 
 const Dice        &Tp::get_health_initial_dice(void) const { return _health_initial_dice; }

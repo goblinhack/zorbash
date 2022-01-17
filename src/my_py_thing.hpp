@@ -28,7 +28,7 @@ PyObject *thing_damage_fire_chance_d1000(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_damage_future1_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_future2_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_future3_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_damage_future4_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_damage_cold_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_lightning_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_necrosis_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_poison_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -77,7 +77,7 @@ PyObject *thing_get_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_get_damage_future1(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_future2(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_future3(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_get_damage_future4(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_get_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_lightning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_melee(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_damage_natural_attack(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -48,7 +48,7 @@ def tp_init(name, text_name):
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_natural_attack_chance_d1000(900)
-    mytp.set_damage_natural_attack_dice("1d8+3")
+    mytp.set_damage_natural_dice("1d8+3")
     mytp.set_damage_natural_attack_type("gore")
     mytp.set_damage_poison_chance_d1000(100)
     mytp.set_damage_poison_dice("2d8+2")

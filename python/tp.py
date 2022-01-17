@@ -223,8 +223,8 @@ class Tp:
     def set_on_owner_damage_future3_do(self, value):
         my.tp_set_on_owner_damage_future3_do(self, value)
 
-    def set_on_owner_damage_future4_do(self, value):
-        my.tp_set_on_owner_damage_future4_do(self, value)
+    def set_on_owner_damage_cold_do(self, value):
+        my.tp_set_on_owner_damage_cold_do(self, value)
 
     def set_on_owner_damage_fire_do(self, value):
         my.tp_set_on_owner_damage_fire_do(self, value)
@@ -271,8 +271,8 @@ class Tp:
     def set_on_damage_future3_do(self, value):
         my.tp_set_on_damage_future3_do(self, value)
 
-    def set_on_damage_future4_do(self, value):
-        my.tp_set_on_damage_future4_do(self, value)
+    def set_on_damage_cold_do(self, value):
+        my.tp_set_on_damage_cold_do(self, value)
 
     def set_on_damage_fire_do(self, value):
         my.tp_set_on_damage_fire_do(self, value)
@@ -1492,8 +1492,8 @@ class Tp:
     def set_damage_future3_chance_d1000(self, value):
         my.tp_set_damage_future3_chance_d1000(self, value)
 
-    def set_damage_future4_chance_d1000(self, value):
-        my.tp_set_damage_future4_chance_d1000(self, value)
+    def set_damage_cold_chance_d1000(self, value):
+        my.tp_set_damage_cold_chance_d1000(self, value)
 
     def set_damage_fire_chance_d1000(self, value):
         my.tp_set_damage_fire_chance_d1000(self, value)
@@ -1867,8 +1867,8 @@ class Tp:
     def set_damage_future3_dice(self, value):
         my.tp_set_damage_future3_dice(self, value)
 
-    def set_damage_future4_dice(self, value):
-        my.tp_set_damage_future4_dice(self, value)
+    def set_damage_cold_dice(self, value):
+        my.tp_set_damage_cold_dice(self, value)
 
     def set_damage_fire_dice(self, value):
         my.tp_set_damage_fire_dice(self, value)
@@ -1891,8 +1891,8 @@ class Tp:
     def set_damage_necrosis_dice(self, value):
         my.tp_set_damage_necrosis_dice(self, value)
 
-    def set_damage_natural_attack_dice(self, value):
-        my.tp_set_damage_natural_attack_dice(self, value)
+    def set_damage_natural_dice(self, value):
+        my.tp_set_damage_natural_dice(self, value)
 
     def set_gold_value_dice(self, value):
         my.tp_set_gold_value_dice(self, value)
