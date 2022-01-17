@@ -1649,7 +1649,7 @@ bool Thing::ai_tick(bool recursing)
   //
   // If we have a treasure map then we know this level
   //
-  if (treasure_map_available()) {
+  if (map_treasure_available()) {
     for (int y = miny; y <= maxy; y++) {
       for (int x = minx; x <= maxx; x++) {
         set(aip->can_see_ever.can_see, x, y, true);

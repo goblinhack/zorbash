@@ -30,8 +30,8 @@ def init_solid():
 
 
 @timeme
-def init_treasure_map():
-    my.tex_load(file="data/gfx/treasure_map.tga", name="treasure_map")
+def init_map_treasure():
+    my.tex_load(file="data/gfx/map_treasure.tga", name="map_treasure")
 
 
 @timeme
@@ -6635,8 +6635,8 @@ def init_tiles1_monsts_and_items():
         "thunderstone",
         "enchantstone",
         "skillstone",
-        "treasure_map",
-        "beast_map",
+        "map_treasure",
+        "map_beast",
         "",
         "",
         "axe.1",
@@ -10846,7 +10846,7 @@ init_light()
 init_projectile_fire_tiles()
 init_projectile_web_tiles()
 init_solid()
-init_treasure_map()
+init_map_treasure()
 init_tiles1_floor()
 init_tiles1_monsts_and_items()
 init_tiles1_walls()

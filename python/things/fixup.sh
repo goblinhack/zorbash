@@ -140,7 +140,7 @@ do
       set_is_bag_item_container \
       set_is_bag_item_not_stackable \
       set_is_barrel \
-      set_is_beast_map \
+      set_is_map_beast \
       set_is_bleeder \
       set_is_blood \
       set_is_blood_eater \
@@ -288,7 +288,7 @@ do
       set_is_treasure_class_b \
       set_is_treasure_class_c \
       set_is_treasure_eater \
-      set_is_treasure_map \
+      set_is_map_treasure \
       set_is_treasure_type \
       set_is_undead \
       set_is_usable \

@@ -73,8 +73,8 @@ void Game::place_player(void)
         level->thing_new("fire", point(x - 1, y + 1));
         level->thing_new("food_frog", point(x, y + 1));
         // level->thing_new("thunderstone", point(x - 1, y - 1));
-        // level->thing_new("treasure_map", point(x - 1, y - 2));
-        // level->thing_new("beast_map", point(x + 1, y - 2));
+        // level->thing_new("map_treasure", point(x - 1, y - 2));
+        // level->thing_new("map_beast", point(x + 1, y - 2));
         // level->thing_new("fire", point(x + 2, y - 2));
         // level->thing_new("zorblin", point(x + 1, y));
         // level->thing_new("zorb_pack", point(x + 2, y));

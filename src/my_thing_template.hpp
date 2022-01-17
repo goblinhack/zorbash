@@ -231,7 +231,7 @@ private:
   int _is_bag_item_container {};
   int _is_bag_item_not_stackable {};
   int _is_barrel {};
-  int _is_beast_map {};
+  int _is_map_beast {};
   int _is_bleeder {};
   int _is_blood {};
   int _is_blood_eater {};
@@ -387,7 +387,7 @@ private:
   int _is_treasure_class_b {};
   int _is_treasure_class_c {};
   int _is_treasure_eater {};
-  int _is_treasure_map {};
+  int _is_map_treasure {};
   int _is_treasure_type {};
   int _is_undead {};
   int _is_usable {};
@@ -1101,7 +1101,7 @@ public:
   int is_bag_item(void) const { return _is_bag_item; }
   int is_bag(void) const { return _is_bag; }
   int is_barrel(void) const { return _is_barrel; }
-  int is_beast_map(void) const { return _is_beast_map; }
+  int is_map_beast(void) const { return _is_map_beast; }
   int is_bleeder(void) const { return _is_bleeder; }
   int is_blood_eater(void) const { return _is_blood_eater; }
   int is_blood_splatter(void) const { return _is_blood_splatter; }
@@ -1256,7 +1256,7 @@ public:
   int is_treasure_class_b(void) const { return _is_treasure_class_b; }
   int is_treasure_class_c(void) const { return _is_treasure_class_c; }
   int is_treasure_eater(void) const { return _is_treasure_eater; }
-  int is_treasure_map(void) const { return _is_treasure_map; }
+  int is_map_treasure(void) const { return _is_map_treasure; }
   int is_treasure_type(void) const { return _is_treasure_type; }
   int is_undead(void) const { return _is_undead; }
   int is_usable(void) const { return _is_usable; }
@@ -1644,7 +1644,7 @@ public:
   void set_is_bag_item(int v) { _is_bag_item = v; }
   void set_is_bag_item_not_stackable(int v) { _is_bag_item_not_stackable = v; }
   void set_is_barrel(int v) { _is_barrel = v; }
-  void set_is_beast_map(int v) { _is_beast_map = v; }
+  void set_is_map_beast(int v) { _is_map_beast = v; }
   void set_is_bleeder(int v) { _is_bleeder = v; }
   void set_is_blood_eater(int v) { _is_blood_eater = v; }
   void set_is_blood(int v) { _is_blood = v; }
@@ -1799,7 +1799,7 @@ public:
   void set_is_treasure_class_b(int v) { _is_treasure_class_b = v; }
   void set_is_treasure_class_c(int v) { _is_treasure_class_c = v; }
   void set_is_treasure_eater(int v) { _is_treasure_eater = v; }
-  void set_is_treasure_map(int v) { _is_treasure_map = v; }
+  void set_is_map_treasure(int v) { _is_map_treasure = v; }
   void set_is_treasure_type(int v) { _is_treasure_type = v; }
   void set_is_undead(int v) { _is_undead = v; }
   void set_is_usable(int v) { _is_usable = v; }

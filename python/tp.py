@@ -994,11 +994,11 @@ class Tp:
     def set_is_flying(self, value):
         my.tp_set_is_flying(self, value)
 
-    def set_is_beast_map(self, value):
-        my.tp_set_is_beast_map(self, value)
+    def set_is_map_beast(self, value):
+        my.tp_set_is_map_beast(self, value)
 
-    def set_is_treasure_map(self, value):
-        my.tp_set_is_treasure_map(self, value)
+    def set_is_map_treasure(self, value):
+        my.tp_set_is_map_treasure(self, value)
 
     def set_is_able_to_use_wands(self, value):
         my.tp_set_is_able_to_use_wands(self, value)

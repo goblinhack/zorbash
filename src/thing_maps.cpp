@@ -10,6 +10,6 @@
 void Thing::check_all_carried_maps(void)
 {
   TRACE_NO_INDENT();
-  treasure_map_check();
-  beast_map_check();
+  map_treasure_check();
+  map_beast_check();
 }

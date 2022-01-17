@@ -54,21 +54,21 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
   //
   // Check if carrying a treasure map
   //
-  bool has_treasure_map = false;
+  bool has_map_treasure = false;
   if (player) {
-    has_treasure_map = player->treasure_map_available();
+    has_map_treasure = player->map_treasure_available();
   }
 
-  bool has_beast_map = false;
-  if (player && (player->get_beast_map_count() > 0)) {
-    has_beast_map = true;
+  bool has_map_beast = false;
+  if (player && (player->get_map_beast_count() > 0)) {
+    has_map_beast = true;
   }
 
-  static Texp treasure_map;
-  static int  treasure_map_id;
-  if (! treasure_map) {
-    treasure_map    = tex_load("", "treasure_map", GL_LINEAR);
-    treasure_map_id = tex_get_gl_binding(treasure_map);
+  static Texp map_treasure;
+  static int  map_treasure_id;
+  if (! map_treasure) {
+    map_treasure    = tex_load("", "map_treasure", GL_LINEAR);
+    map_treasure_id = tex_get_gl_binding(map_treasure);
   }
 
   static Texp solid_tex;
@@ -78,10 +78,10 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
     solid_tex_id = tex_get_gl_binding(solid_tex);
   }
 
-  if (has_treasure_map) {
+  if (has_map_treasure) {
     glcolor(WHITE);
     glEnable(GL_TEXTURE_2D);
-    blit(treasure_map_id, 0, MAP_HEIGHT, MAP_WIDTH, 0);
+    blit(map_treasure_id, 0, MAP_HEIGHT, MAP_WIDTH, 0);
     blit_flush();
     glDisable(GL_TEXTURE_2D);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -202,7 +202,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         blit(solid_tex_id, tlx, tly, brx, bry);
       }
     }
-  } else if (has_treasure_map) {
+  } else if (has_map_treasure) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = BLACK;
@@ -214,7 +214,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           //
           // Have both? Overlay the monsters
           //
-          if (has_beast_map) {
+          if (has_map_beast) {
             c   = RED;
             c.a = 255;
           } else {
@@ -278,7 +278,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
 
         edge_of_sceen = false; // Not sure I like seeing this
 
-        if (is_monst(x, y) && has_beast_map) {
+        if (is_monst(x, y) && has_map_beast) {
           c   = RED;
           c.a = 255;
         } else if (! is_lit_ever(x, y)) {
