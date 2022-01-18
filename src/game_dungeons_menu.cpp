@@ -243,6 +243,8 @@ static void game_dungeons_update_button(game_dungeons_ctx *ctx, Widp b, int x, i
   char tmp[ MAXSHORTSTR ];
   snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order);
   wid_set_text(b, tmp);
+  wid_set_text_lhs(b, true);
+  wid_set_text_top(b, true);
 }
 
 static void game_dungeons_update_buttons(Widp w)
@@ -484,7 +486,7 @@ static void game_dungeons_create_level_at(game_dungeons_ctx *ctx, int x, int y)
   //
   // Create a level of the given difficulty at a fixed location
   //
-  game->init_level(level_at, node->depth, node->walk_depth);
+  game->init_level(level_at, node->depth, node->depth);
   auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (! l) {
     return;
@@ -570,12 +572,12 @@ static void game_join_levels(game_dungeons_ctx *ctx)
           DIE("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
         }
 
-        if (alt->walk_depth < node->walk_depth) {
+        if (alt->walk_order < node->walk_order) {
           //
           // Closer to the start
           //
           l->prev_levels.push_back(alt_at);
-        } else if (alt->walk_depth > node->walk_depth) {
+        } else if (alt->walk_order > node->walk_order) {
           //
           // Closer to the end
           //
@@ -789,10 +791,12 @@ static void game_dungeons_post_display_tick(Widp w)
         int brx = l->map_debug_br.x * game->config.ascii_gl_width;
         int bry = l->map_debug_br.y * game->config.ascii_gl_height;
 
-        brx--;
-        bry--;
+        tlx--;
+        tly--;
+        brx++;
+        bry++;
 
-        glcolor(WHITE);
+        glcolor(GRAY50);
         blit_fbo_bind_locked(FBO_WID);
         glDisable(GL_TEXTURE_2D);
         //
@@ -1002,65 +1006,150 @@ static uint8_t game_dungeons_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-void game_grid_node_walk(class Nodes *nodes, int *walk_order, int depth_limit, int depth, int *furthest_depth,
-                         class DungeonNode **furthest, class DungeonNode *node)
+void game_grid_node_walk(game_dungeons_ctx *ctx)
 {
   TRACE_NO_INDENT();
-  if (node->is_walked) {
-    return;
-  }
 
-  node->is_walked  = true;
-  node->walk_depth = depth;
+  static std::list< DungeonNode * > open;
+  auto                              curr_node  = ctx->start_node;
+  int                               walk_order = 0;
 
-  depth++;
-  if (depth > *furthest_depth) {
-    *furthest_depth = depth;
-    *furthest       = node;
-  }
-
-  if (walk_order) {
-    (*walk_order)++;
-    node->walk_order = *walk_order;
-    CON("depth node %p %d at %d,%d", node, *walk_order, node->x, node->y);
-  }
-
-  if (depth_limit > -1) {
-    if (node->depth > depth_limit) {
-      return;
+  for (auto y = 0; y < ctx->nodes->grid_height; y++) {
+    for (auto x = 0; x < ctx->nodes->grid_width; x++) {
+      auto node = ctx->nodes->getn(x, y);
+      if (! node) {
+        continue;
+      }
+      if (node->depth <= 0) {
+        continue;
+      }
+      if (node == curr_node) {
+        continue;
+      }
+      open.push_back(node);
     }
   }
 
-  if (node->has_door_down) {
-    auto next_node = nodes->getn(node->x, node->y + 1);
-    if (next_node) {
-      node->dir_down = true;
-      game_grid_node_walk(nodes, walk_order, depth_limit, depth, furthest_depth, furthest, next_node);
-    }
+  if (open.empty()) {
+    DIE("No node candidates to create dungeon grid");
   }
 
-  if (node->has_door_left) {
-    auto next_node = nodes->getn(node->x - 1, node->y);
-    if (next_node) {
-      node->dir_left = true;
-      game_grid_node_walk(nodes, walk_order, depth_limit, depth, furthest_depth, furthest, next_node);
-    }
-  }
+  for (;;) {
+    DungeonNode *best = nullptr;
+    CON("cands %d walk %d,%d depth %d walk %d", (int) open.size(), curr_node->x, curr_node->y, curr_node->depth,
+        walk_order);
 
-  if (node->has_door_up) {
-    auto next_node = nodes->getn(node->x, node->y - 1);
-    if (next_node) {
-      node->dir_up = true;
-      game_grid_node_walk(nodes, walk_order, depth_limit, depth, furthest_depth, furthest, next_node);
+    //
+    // First pass look for the closest node in the same depth
+    //
+    for (auto cand : open) {
+      CON("cand %d,%d depth %d ", cand->x, cand->y, cand->depth);
+      if (cand->depth == curr_node->depth) {
+        if (! best) {
+          best = cand;
+        } else if ((distance(point(curr_node->x, curr_node->y), point(cand->x, cand->y))) <
+                   (distance(point(curr_node->x, curr_node->y), point(best->x, best->y)))) {
+          best = cand;
+        }
+      }
     }
-  }
 
-  if (node->has_door_right) {
-    auto next_node = nodes->getn(node->x + 1, node->y);
-    if (next_node) {
-      node->dir_right = true;
-      game_grid_node_walk(nodes, walk_order, depth_limit, depth, furthest_depth, furthest, next_node);
+    //
+    // Second pass look for the closest node in the next depth
+    //
+    if (! best) {
+      for (auto cand : open) {
+        if (cand->depth == curr_node->depth + 1) {
+          if (! best) {
+            best = cand;
+          } else if ((distance(point(curr_node->x, curr_node->y), point(cand->x, cand->y))) <
+                     (distance(point(curr_node->x, curr_node->y), point(best->x, best->y)))) {
+            best = cand;
+          }
+        }
+      }
     }
+
+    curr_node->walk_order = ++walk_order;
+
+    //
+    // If no best then this is the furthest last node
+    //
+    if (! best) {
+      ctx->generating_level         = 0;
+      ctx->max_generating_level     = walk_order;
+      curr_node->is_descend_dungeon = true;
+      break;
+    }
+
+    if (best->x > curr_node->x) {
+      curr_node->dir_right = true;
+    }
+    if (best->x < curr_node->x) {
+      curr_node->dir_left = true;
+    }
+    if (best->y > curr_node->y) {
+      curr_node->dir_down = true;
+    }
+    if (best->y < curr_node->y) {
+      curr_node->dir_up = true;
+    }
+
+    std::vector< point > deltas = {
+        point(0, -1),
+        point(-1, 0),
+        point(1, 0),
+        point(0, 1),
+    };
+
+    auto x = curr_node->x;
+    auto y = curr_node->y;
+
+    for (auto delta : deltas) {
+      if (x + delta.x < 0) {
+        continue;
+      }
+      if (y + delta.y < 0) {
+        continue;
+      }
+      if (x + delta.x >= DUNGEONS_GRID_CHUNK_WIDTH) {
+        continue;
+      }
+      if (y + delta.y >= DUNGEONS_GRID_CHUNK_HEIGHT) {
+        continue;
+      }
+      auto alt = ctx->nodes->getn(x + delta.x, y + delta.y);
+      if (! alt) {
+        continue;
+      }
+      if (! alt->depth) {
+        continue;
+      }
+
+      if (alt->x > curr_node->x) {
+        if (! alt->dir_left) {
+          curr_node->dir_right = true;
+        }
+      }
+      if (alt->x < curr_node->x) {
+        if (! alt->dir_right) {
+          curr_node->dir_left = true;
+        }
+      }
+      if (alt->y > curr_node->y) {
+        if (! alt->dir_up) {
+          curr_node->dir_down = true;
+        }
+      }
+      if (alt->y < curr_node->y) {
+        if (! alt->dir_down) {
+          curr_node->dir_up = true;
+        }
+      }
+    }
+
+    open.remove(best);
+    curr_node = best;
   }
 }
 
@@ -1111,51 +1200,6 @@ void Game::menu_dungeons_select(void)
     DIE("No start dungeon node");
   }
 
-  //
-  // Assign directions that flow to the end node
-  //
-  int                furthest_depth = 0;
-  class DungeonNode *furthest_node  = 0;
-
-  //
-  // Walk, one depth level at a time
-  //
-  for (int depth_limit = 0; depth_limit <= DUNGEONS_MAX_DEPTH; depth_limit++) {
-    for (auto y = 0; y < ctx->nodes->grid_height; y++) {
-      for (auto x = 0; x < ctx->nodes->grid_width; x++) {
-        auto node = ctx->nodes->getn(x, y);
-        if (node) {
-          node->is_walked = false;
-        }
-      }
-    }
-    int depth      = 0;
-    int walk_order = 0;
-    game_grid_node_walk(ctx->nodes, &walk_order, depth_limit, depth, &furthest_depth, &furthest_node,
-                        ctx->start_node);
-    ctx->generating_level     = 0;
-    ctx->max_generating_level = walk_order;
-  }
-  if (! furthest_node) {
-    DIE("No furthest dungeon node");
-  }
-
-  //
-  // Walk, all nodes so that each node has a different depth, depth first essentially
-  //
-  for (auto y = 0; y < ctx->nodes->grid_height; y++) {
-    for (auto x = 0; x < ctx->nodes->grid_width; x++) {
-      auto node = ctx->nodes->getn(x, y);
-      if (node) {
-        node->is_walked = false;
-      }
-    }
-  }
-  int depth = 0;
-  game_grid_node_walk(ctx->nodes, nullptr, -1, depth, &furthest_depth, &furthest_node, ctx->start_node);
-
-  furthest_node->is_descend_dungeon = true;
-
   auto window = wid_new_square_window("wid level grid");
   ctx->w      = window;
   ctx->is_new = true;
@@ -1184,7 +1228,7 @@ void Game::menu_dungeons_select(void)
     point br = make_point(TERM_WIDTH - 1, 1);
 
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "Aim: Collect all the crystals. Reach the final level. Confront Zorbash.");
+    wid_set_text(w, "Collect all the crystals. Reach the final level. Confront Zorbash.");
     wid_set_shape_none(w);
     wid_set_color(w, WID_COLOR_TEXT_FG, YELLOW);
   }
@@ -1297,6 +1341,8 @@ void Game::menu_dungeons_select(void)
     int32_t pbr_x;
     int32_t pbr_y;
     wid_get_tl_x_tl_y_br_x_br_y(button_container, &ptl_x, &ptl_y, &pbr_x, &pbr_y);
+
+    game_grid_node_walk(ctx);
 
     /*
      * Create the buttons
