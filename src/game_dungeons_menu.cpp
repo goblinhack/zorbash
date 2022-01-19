@@ -486,7 +486,7 @@ static void game_dungeons_create_level_at(game_dungeons_ctx *ctx, int x, int y)
   //
   // Create a level of the given difficulty at a fixed location
   //
-  game->init_level(level_at, node->depth, node->depth);
+  game->init_level(level_at, node->depth, node->walk_order);
   auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (! l) {
     return;

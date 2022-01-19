@@ -25,7 +25,7 @@ std::string Level::to_string(void)
 uint32_t Level::num(void)
 {
   TRACE_NO_INDENT();
-  return (uint32_t) (world_at.z / 2) + 1;
+  return dungeon_depth;
 }
 
 uint8_t Level::is_acid(const point &p)
