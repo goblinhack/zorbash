@@ -204,6 +204,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Don't let minions wander too far from their mob_spawner.
   //
+  auto aip         = maybe_aip();
   auto mob_spawner = get_top_mob_spawner();
   if (mob_spawner) {
     if (get_distance_mob_spawner_max()) {
@@ -229,6 +230,13 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           //
           if (is_minion()) {
             lunge(future_pos);
+          }
+
+          //
+          // Choose a new target
+          //
+          if (aip) {
+            aip->wander_dest = point(0, 0);
           }
           return false;
         }
