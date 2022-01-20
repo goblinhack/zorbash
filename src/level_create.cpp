@@ -18,7 +18,7 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_
 
   uint32_t seedval;
 
-  if (! dungeon_depth) {
+  if (dungeon_depth <= 1) {
     seedval = game->seed + 1; // +1 is a temporary hack
   } else {
     seedval = (at.z * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH) + (at.y * DUNGEONS_GRID_CHUNK_HEIGHT) +

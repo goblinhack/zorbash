@@ -51,8 +51,11 @@ void Level::update_map_debug(int x, int y)
     for (auto x = 0; x < MAP_WIDTH; x++) {
       color c = BLACK;
 
-      if (is_monst(x, y) || is_spiderweb(x, y) || is_mob_spawner(x, y)) {
+      if (is_monst(x, y) || is_mob_spawner(x, y)) {
         c   = RED;
+        c.a = 255;
+      } else if (is_spiderweb(x, y)) {
+        c   = WHITE;
         c.a = 255;
       } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) ||
                  is_enchantstone(x, y)) {
