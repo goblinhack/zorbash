@@ -8,7 +8,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-bool Thing::place(const std::string &what, const point &p)
+bool Thing::place(const std::string &what, const point p)
 {
   dbg("place");
   TRACE_AND_INDENT();

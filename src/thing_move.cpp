@@ -779,7 +779,7 @@ void Thing::move_to_immediately(point to)
   }
 }
 
-bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
+bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
 {
   if (escaping) {
     dbg("Escape to attempt %d,%d", nh.x, nh.y);
@@ -831,28 +831,28 @@ bool Thing::move_to_try(const point &nh, const bool escaping, bool check_only)
   }
 }
 
-bool Thing::move_to_or_attack(const point &nh)
+bool Thing::move_to_or_attack(const point nh)
 {
   dbg("Move to or attack");
   TRACE_AND_INDENT();
   return move_to_try(nh, false, false);
 }
 
-bool Thing::move_to_or_escape(const point &nh)
+bool Thing::move_to_or_escape(const point nh)
 {
   dbg("Move to or escape");
   TRACE_AND_INDENT();
   return move_to_try(nh, true, false);
 }
 
-bool Thing::move_to_or_attack_check_only(const point &nh)
+bool Thing::move_to_or_attack_check_only(const point nh)
 {
   dbg("Move to or attack");
   TRACE_AND_INDENT();
   return move_to_try(nh, false, true);
 }
 
-bool Thing::move_to_or_escape_check_only(const point &nh)
+bool Thing::move_to_or_escape_check_only(const point nh)
 {
   dbg("Move to or escape");
   TRACE_AND_INDENT();

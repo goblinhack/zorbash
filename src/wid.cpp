@@ -3308,7 +3308,7 @@ Widp wid_find(const std::string &name)
   return nullptr;
 }
 
-static void wid_find_all_at(Widp w, std::list< Widp > &out, const point &p)
+static void wid_find_all_at(Widp w, std::list< Widp > &out, const point p)
 {
   TRACE_AND_INDENT();
 
@@ -3322,7 +3322,7 @@ static void wid_find_all_at(Widp w, std::list< Widp > &out, const point &p)
   }
 }
 
-std::list< Widp > wid_find_all_at(const point &p)
+std::list< Widp > wid_find_all_at(const point p)
 {
   std::list< Widp > out;
 

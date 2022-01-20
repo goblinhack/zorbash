@@ -90,7 +90,7 @@ void Thing::dead_scheduled(const char *fmt, ...)
   va_end(args);
 }
 
-bool Thing::if_matches_then_dead(const std::string &what, const point &p)
+bool Thing::if_matches_then_dead(const std::string &what, const point p)
 {
   TRACE_AND_INDENT();
   //

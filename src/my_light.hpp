@@ -57,8 +57,8 @@ public:
   void destroyed(void);
   void die(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void die_(const char *fmt, va_list args); // compile error without
-  void draw_line(const int16_t index, const point &p0, const point &p1);
-  void draw_pixel(const int16_t index, const point &p0, const point &p1);
+  void draw_line(const int16_t index, const point p0, const point p1);
+  void draw_pixel(const int16_t index, const point p0, const point p1);
   void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void err_(const char *fmt, va_list args); // compile error without
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));

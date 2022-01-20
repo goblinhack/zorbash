@@ -733,7 +733,7 @@ void gl_blitquad(GLushort left, GLushort top, GLushort right, GLushort bottom)
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitquad(const point &tl, const point &tr, const point &bl, const point &br)
+void gl_blitquad(const point tl, const point tr, const point bl, const point br)
 {
   GLushort  xy[ 4 * 2 ];
   GLushort *xyp = xy;

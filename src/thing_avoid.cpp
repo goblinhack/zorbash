@@ -91,7 +91,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   return false;
 }
 
-bool Thing::will_avoid_monst(const point &p)
+bool Thing::will_avoid_monst(const point p)
 {
   TRACE_NO_INDENT();
   auto me = tp();
