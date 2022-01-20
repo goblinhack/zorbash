@@ -78,7 +78,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="skel_mob", text_name="pile of bones")
+    tp_init(name="skel_mob", text_name="skeleton mobber")
 
 
 init()

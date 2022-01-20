@@ -756,7 +756,7 @@ void Nodes::init_nodes(void)
     }
   }
 
-  auto obstacles = pcg_random_range(1, ((grid_width * grid_height) / 6) * 8);
+  auto obstacles = ((grid_width * grid_height) / 6) * 4;
 
   if (! is_dungeon) {
     obstacles /= 10;
