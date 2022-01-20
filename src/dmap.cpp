@@ -381,7 +381,7 @@ void dmap_process(Dmap *D, point tl, point br)
       dmap_print(D);
     }
     if (after - before > 0) {
-      CON("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
+      LOG("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
     }
   }
 }

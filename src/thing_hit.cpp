@@ -692,26 +692,26 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               hitter->text_the().c_str());
         } else if (attack_acid) {
           msg("%%fg=red$%s dissolves your body!%%fg=reset$", real_hitter->text_The().c_str());
-          popup("Sizzle!");
+          popup("%%fg=red$Sizzle!");
         } else if (attack_natural) {
           msg("%%fg=red$%s %s deep!%%fg=reset$", real_hitter->text_The().c_str(),
               pluralise(real_hitter->damage_natural_attack_type()).c_str());
-          popup("Urk!");
+          popup("%%fg=red$Urk!");
         } else if (attack_energy) {
           msg("%%fg=red$%s blasts you apart!%%fg=reset$", real_hitter->text_The().c_str());
-          popup("Zap!");
+          popup("%%fg=red$Zap!");
         } else if (attack_lightning) {
           msg("%%fg=red$%s fries your body!%%fg=reset$", real_hitter->text_The().c_str());
-          popup("Brzzt!");
+          popup("%%fg=red$Brzzt!");
         } else if (attack_crush) {
           msg("%%fg=red$You are flattened by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          popup("Splat!");
+          popup("%%fg=red$Splat!");
         } else if (attack_fire) {
           msg("%%fg=red$You are burnt to a crisp by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          popup("Sizzle!");
+          popup("%%fg=red$Sizzle!");
         } else if (attack_digest) {
           msg("%%fg=red$You are being eaten by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          popup("Slurp!");
+          popup("%%fg=red$Slurp!");
         } else {
           msg("%%fg=red$%s %s you fatally!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str());
@@ -743,34 +743,34 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         } else if (attack_acid) {
           msg("%%fg=orange$%s burns you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str());
-          popup("Sizzle!");
+          popup("%%fg=red$Sizzle!");
         } else if (attack_natural) {
           if (! real_hitter->damage_natural_attack_type().empty()) {
             msg("%%fg=orange$%s attacks you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                 damage_type.c_str());
-            popup(capitalise(real_hitter->damage_natural_attack_type()));
+            popup("%%fg=red$" + capitalise(real_hitter->damage_natural_attack_type()));
           } else {
             msg("%%fg=orange$%s bites you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                 damage_type.c_str());
-            popup("Chomp!");
+            popup("%%fg=red$Chomp!");
           }
         } else if (attack_energy) {
           msg("%%fg=orange$%s blasts you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str());
-          popup("Zap!");
+          popup("%%fg=red$Zap!");
         } else if (attack_lightning) {
           msg("%%fg=orange$%s electrocutes you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str());
-          popup("Brzzt!");
+          popup("%%fg=red$Brzzt!");
         } else if (attack_crush) {
           msg("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          popup("Ouch!");
+          popup("%%fg=red$Ouch!");
         } else if (attack_fire) {
           msg("%%fg=orange$You are being burnt by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          popup("!");
+          popup("%%fg=red$!");
         } else if (attack_digest) {
           msg("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
-          popup("Gulp!");
+          popup("%%fg=red$Gulp!");
         } else {
           msg("%%fg=orange$%s %s you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str(), damage, damage_type.c_str());

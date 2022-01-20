@@ -40,7 +40,7 @@ def tp_init(name, text_name):
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_natural_attack_chance_d1000(950)
-    mytp.set_damage_natural_attack_type("touch")
+    mytp.set_damage_natural_attack_type("bite")
     mytp.set_damage_natural_dice("1d6+10")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_damage_received_doubled_from_water(True)
