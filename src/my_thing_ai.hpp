@@ -91,7 +91,7 @@ public:
   }
 };
 
-extern void astar_dump(const Dmap *dmap, const point &at, const point &start, const point &end);
+extern void astar_dump(const Dmap *dmap, const point at, const point start, const point end);
 
 class GoalMap
 {

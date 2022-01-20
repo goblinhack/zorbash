@@ -304,7 +304,7 @@ void blit_init(void);
 void fbo_get_size(int fbo, int &w, int &h);
 void gl_blitline(GLushort tlx, GLushort tly, GLushort brx, GLushort bry);
 void gl_blitquad(GLushort tlx, GLushort tly, GLushort brx, GLushort bry);
-void gl_blitquad(const point &tl, const point &tr, const point &bl, const point &br);
+void gl_blitquad(const point tl, const point tr, const point bl, const point br);
 void gl_blitsquare(GLushort tlx, GLushort tly, GLushort brx, GLushort bry);
 void gl_enter_2_5d_mode(void);
 void gl_enter_2d_mode(int, int);

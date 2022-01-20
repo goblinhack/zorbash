@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-bool Thing::is_disliked_by_me(const point &p)
+bool Thing::is_disliked_by_me(const point p)
 {
   TRACE_NO_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {

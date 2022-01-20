@@ -390,7 +390,7 @@ public:
   bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
   bool health_boost_would_occur(int v);
   bool idle_check(void);
-  bool if_matches_then_dead(const std::string &what, const point &p);
+  bool if_matches_then_dead(const std::string &what, const point p);
   bool inventory_shortcuts_insert(Thingp what);
   bool inventory_shortcuts_remove(Thingp what);
   bool inventory_shortcuts_remove(Thingp what, Thingp target);
@@ -398,11 +398,11 @@ public:
   bool is_bloodied(void);
   bool is_carrying_item(void);
   bool is_carrying_treasure(void);
-  bool is_disliked_by_me(const point &p);
+  bool is_disliked_by_me(const point p);
   bool is_disliked_by_me(const Thingp it);
   bool is_enemy(Thingp attacker);
   bool is_equipped(Thingp item);
-  bool is_hated_by_me(const point &p);
+  bool is_hated_by_me(const point p);
   bool is_hated_by_me(const Thingp it);
   bool is_on_fire(void);
   bool is_stuck(void);
@@ -417,11 +417,11 @@ public:
   bool move_no_shove_no_attack(point future_pos);
   bool move(point to);
   bool move(point to, uint8_t u, uint8_t d, uint8_t l, uint8_t r, uint8_t att, uint8_t idl, bool shoveok, bool attok);
-  bool move_to_or_attack_check_only(const point &nh);
-  bool move_to_or_attack(const point &);
-  bool move_to_or_escape_check_only(const point &nh);
-  bool move_to_or_escape(const point &);
-  bool move_to_try(const point &, const bool escaping, bool check_only);
+  bool move_to_or_attack_check_only(const point nh);
+  bool move_to_or_attack(const point );
+  bool move_to_or_escape_check_only(const point nh);
+  bool move_to_or_escape(const point );
+  bool move_to_try(const point , const bool escaping, bool check_only);
   bool natural_attack(Thingp victim);
   bool on_firing_at_something(Thingp hitter);
   bool on_tick(void);
@@ -429,7 +429,7 @@ public:
   bool open(Thingp it);
   bool particle_anim_exists(void);
   bool path_pop_next_move(void);
-  bool place(const std::string &what, const point &p);
+  bool place(const std::string &what, const point p);
   bool player_is_ready_for_messages(void);
   bool player_is_ready_for_messages(std::string &why);
   bool player_is_ready_for_thing_info(void);
@@ -480,7 +480,7 @@ public:
   bool unequip(const char *why, int equip, bool allowed_to_recarry);
   bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
   bool use(Thingp w, int equip = -1);
-  bool will_avoid_monst(const point &p);
+  bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);

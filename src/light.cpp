@@ -38,7 +38,7 @@ Light::~Light(void)
   oldptr(MTYPE_LIGHT, this);
 }
 
-void Light::draw_pixel(int16_t index, const point &p0, const point &p1)
+void Light::draw_pixel(int16_t index, const point p0, const point p1)
 {
   RayPoint r;
   r.p        = p1;
@@ -47,7 +47,7 @@ void Light::draw_pixel(int16_t index, const point &p0, const point &p1)
 }
 
 // http://www.edepot.com/linee.html
-void Light::draw_line(int16_t index, const point &p0, const point &p1)
+void Light::draw_line(int16_t index, const point p0, const point p1)
 {
   points[ index ].resize(0);
 

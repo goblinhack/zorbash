@@ -45,7 +45,7 @@ std::list< Widp > wid_find_all(Widp w, const std::string &name);
 std::list< Widp > wid_find_all_containing(Widp w, const std::string &name);
 std::list< Widp > wid_find_all_containing(const std::string &name);
 Widp              wid_find(const std::string &name);
-std::list< Widp > wid_find_all_at(const point &p);
+std::list< Widp > wid_find_all_at(const point p);
 Widp              wid_get_current_focus(void);
 Widp              wid_get_focus(Widp);
 Widp              wid_get_head(Widp);

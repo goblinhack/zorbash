@@ -115,14 +115,14 @@ static inline point make_point(const int x, const int y) { return point(x, y); }
 
 static inline point make_point(const fpoint &f) { return point(f.x, f.y); }
 
-static inline fpoint make_fpoint(const point &f) { return fpoint(f.x, f.y); }
+static inline fpoint make_fpoint(const point f) { return fpoint(f.x, f.y); }
 
 fpoint rotate_radians(float angle, const fpoint &p, const fpoint &origin);
 fpoint rotate_radians(const fpoint &p, float angle);
 fpoint normal(const fpoint &p);
 fpoint unit(const fpoint &p);
 float  distance(const fpoint &a, const fpoint &b);
-float  distance(const point &a, const point &b);
+float  distance(const point a, const point b);
 float  angle_radians(const fpoint &p);
 
 #endif // _MY_POINT_HPP_

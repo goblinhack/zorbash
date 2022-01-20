@@ -305,7 +305,7 @@ public:
   }
 };
 
-void astar_dump(const Dmap *dmap, const point &at, const point &start, const point &end)
+void astar_dump(const Dmap *dmap, const point at, const point start, const point end)
 {
   int x;
   int y;

@@ -14,7 +14,7 @@
 // One level above dislike!
 //
 
-bool Thing::is_hated_by_me(const point &p)
+bool Thing::is_hated_by_me(const point p)
 {
   TRACE_NO_INDENT();
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
