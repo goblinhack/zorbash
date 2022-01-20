@@ -151,6 +151,7 @@ void dmap_print(const Dmap *D)
 
 void dmap_process(Dmap *D, point tl, point br)
 {
+  auto                                                              before = SDL_GetTicks();
   uint8_t                                                           x;
   uint8_t                                                           y;
   uint8_t                                                           a;
@@ -369,29 +370,23 @@ void dmap_process(Dmap *D, point tl, point br)
       }
     }
   }
-}
 
-void dmap_process(Dmap *D)
-{
-#if 0
   //
   // Sanity check the dmap does not take too much time
   //
   if (unlikely(g_opt_debug1)) {
-    auto before = SDL_GetTicks();
-    dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
     auto after = SDL_GetTicks();
     if (after - before > 70) {
       ERR("DMAP is taking too long, %d ms", after - before);
       dmap_print(D);
     }
-  } else {
-    dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
+    if (after - before > 0) {
+      CON("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
+    }
   }
-#else
-  dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
-#endif
 }
+
+void dmap_process(Dmap *D) { dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT)); }
 
 static bool is_obs_wall_or_door_at(const Dmap *D, int x, int y)
 {

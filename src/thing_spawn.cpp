@@ -58,14 +58,23 @@ bool Thing::spawn_next_to(const std::string &what)
     // No spawning onto chasms for example
     //
     if (tpp->is_disliked_by_me(level, p)) {
+      if (level->is_chasm(x, y)) {
+        con("no chasm spawn %d", __LINE__);
+      }
       continue;
     }
 
     if (collision_obstacle(p)) {
+      if (level->is_chasm(x, y)) {
+        con("no chasm spawn %d", __LINE__);
+      }
       continue;
     }
 
-    if (ai_obstacle_for_me(p)) {
+    if (tpp->ai_obstacle_for_me(level, p)) {
+      if (level->is_chasm(x, y)) {
+        con("no chasm spawn %d", __LINE__);
+      }
       continue;
     }
 

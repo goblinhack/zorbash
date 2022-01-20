@@ -282,7 +282,7 @@ void Dungeon::make_dungeon(void)
                 1 /* generations */);
 
   DBG2("DGN: Generate wet grass");
-  wet_grass_gen(2000, // fill prob
+  wet_grass_gen(1000, // fill prob
                 10,   // R1
                 5,    // R2
                 1 /* generations */);
@@ -3880,6 +3880,8 @@ void Dungeon::add_remaining(void)
 
 void Dungeon::add_foilage_around_water(void)
 {
+  bool foilage_ok_next_to_walls = pcg_random_range(0, 100) > 50;
+
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
     for (auto x = 2; x < MAP_WIDTH - 2; x++) {
 
@@ -3889,7 +3891,7 @@ void Dungeon::add_foilage_around_water(void)
       }
 
       if (is_dirt(x, y)) {
-        if (pcg_random_range(0, 100) > 50) {
+        if (pcg_random_range(0, 100) > 80) {
           continue;
         }
       }
@@ -3912,6 +3914,12 @@ void Dungeon::add_foilage_around_water(void)
             goto next;
           }
 
+          if (! foilage_ok_next_to_walls) {
+            if (is_wall(x + dx, y + dy)) {
+              foilage_ok = -1;
+              goto next;
+            }
+          }
           if (is_shallow_water(x + dx, y + dy) || is_foilage(x + dx, y + dy) || is_deep_water(x + dx, y + dy)) {
             foilage_ok = 1;
           }

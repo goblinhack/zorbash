@@ -129,7 +129,13 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
       }
       if (t->is_cursor_can_hover_over_x2_click()) {
         player->log("Needs double click");
-        TOPCON("Double click to move.");
+        if (level->is_chasm(to)) {
+          TOPCON("Double click to jump into the abyss.");
+        } else if (level->is_lava(to)) {
+          TOPCON("Double click to jump into the lava.");
+        } else {
+          TOPCON("Double click to move to move onto that.");
+        }
         return true;
       }
     }
