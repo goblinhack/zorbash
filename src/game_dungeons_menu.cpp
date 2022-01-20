@@ -987,7 +987,10 @@ static uint8_t game_dungeons_key_down(Widp w, const struct SDL_Keysym *key)
     }
   }
 
-  return true;
+  //
+  // So screenshots can work
+  //
+  return false;
 }
 
 static bool are_nodes_directly_connected(DungeonNode *a, DungeonNode *b)

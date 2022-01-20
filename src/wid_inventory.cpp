@@ -157,7 +157,10 @@ static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
     }
   }
 
-  return true;
+  //
+  // So screenshots can work
+  //
+  return false;
 }
 
 static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint32_t button)
