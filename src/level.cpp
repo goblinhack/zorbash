@@ -28,7 +28,7 @@ uint32_t Level::num(void)
   return dungeon_depth;
 }
 
-uint8_t Level::is_acid(const point &p)
+uint8_t Level::is_acid(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -75,7 +75,7 @@ uint8_t Level::is_chasm(const int x, const int y)
   return (get(_is_chasm, x, y));
 }
 
-uint8_t Level::is_chasm(const point &p)
+uint8_t Level::is_chasm(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -104,7 +104,7 @@ void Level::unset_is_chasm(const int x, const int y)
   decr(_is_chasm, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_hazard(const point &p)
+uint8_t Level::is_hazard(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -142,7 +142,7 @@ void Level::unset_is_hazard(const int x, const int y)
   decr(_is_hazard, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_cursor_path_hazard_for_player(const point &p)
+uint8_t Level::is_cursor_path_hazard_for_player(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -180,7 +180,7 @@ void Level::unset_is_cursor_path_hazard_for_player(const int x, const int y)
   decr(_is_cursor_path_hazard_for_player, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_heavy(const point &p)
+uint8_t Level::is_heavy(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -218,7 +218,7 @@ void Level::unset_is_heavy(const int x, const int y)
   decr(_is_heavy, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_secret_door(const point &p)
+uint8_t Level::is_secret_door(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -256,7 +256,7 @@ void Level::unset_is_secret_door(const int x, const int y)
   decr(_is_secret_door, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_ripple(const point &p)
+uint8_t Level::is_ripple(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -294,7 +294,7 @@ void Level::unset_is_ripple(const int x, const int y)
   decr(_is_ripple, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_barrel(const point &p)
+uint8_t Level::is_barrel(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -332,7 +332,7 @@ void Level::unset_is_barrel(const int x, const int y)
   decr(_is_barrel, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_mob_spawner(const point &p)
+uint8_t Level::is_mob_spawner(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -370,7 +370,7 @@ void Level::unset_is_mob_spawner(const int x, const int y)
   decr(_is_mob_spawner, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_potion(const point &p)
+uint8_t Level::is_potion(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -408,7 +408,7 @@ void Level::unset_is_potion(const int x, const int y)
   decr(_is_potion, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_wand(const point &p)
+uint8_t Level::is_wand(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -446,7 +446,7 @@ void Level::unset_is_wand(const int x, const int y)
   decr(_is_wand, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_ring(const point &p)
+uint8_t Level::is_ring(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -484,7 +484,7 @@ void Level::unset_is_ring(const int x, const int y)
   decr(_is_ring, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_blood(const point &p)
+uint8_t Level::is_blood(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -520,7 +520,7 @@ void Level::unset_is_blood(const int x, const int y)
   decr(_is_blood, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::gfx_water(const point &p)
+uint8_t Level::gfx_water(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -558,7 +558,7 @@ void Level::unset_gfx_water(const int x, const int y)
   decr(_gfx_water, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_deep_water(const point &p)
+uint8_t Level::is_deep_water(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -596,7 +596,7 @@ void Level::unset_is_deep_water(const int x, const int y)
   decr(_is_deep_water, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_shallow_water(const point &p)
+uint8_t Level::is_shallow_water(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -634,7 +634,7 @@ void Level::unset_is_shallow_water(const int x, const int y)
   decr(_is_shallow_water, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_water(const point &p)
+uint8_t Level::is_water(const point p)
 {
   TRACE_NO_INDENT();
   return is_shallow_water(p) || is_deep_water(p);
@@ -646,7 +646,7 @@ uint8_t Level::is_water(const int x, const int y)
   return is_shallow_water(x, y) || is_deep_water(x, y);
 }
 
-uint8_t Level::is_wall(const point &p)
+uint8_t Level::is_wall(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -684,7 +684,7 @@ void Level::unset_is_wall(const int x, const int y)
   decr(_is_wall, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_corridor(const point &p)
+uint8_t Level::is_corridor(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -722,7 +722,7 @@ void Level::unset_is_corridor(const int x, const int y)
   decr(_is_corridor, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_bridge(const point &p)
+uint8_t Level::is_bridge(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -760,7 +760,7 @@ void Level::unset_is_bridge(const int x, const int y)
   decr(_is_bridge, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_dirt(const point &p)
+uint8_t Level::is_dirt(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -798,7 +798,7 @@ void Level::unset_is_dirt(const int x, const int y)
   decr(_is_dirt, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_dry_grass(const point &p)
+uint8_t Level::is_dry_grass(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -836,7 +836,7 @@ void Level::unset_is_dry_grass(const int x, const int y)
   decr(_is_dry_grass, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_wet_grass(const point &p)
+uint8_t Level::is_wet_grass(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -874,7 +874,7 @@ void Level::unset_is_wet_grass(const int x, const int y)
   decr(_is_wet_grass, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_enchantstone(const point &p)
+uint8_t Level::is_enchantstone(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -912,7 +912,7 @@ void Level::unset_is_enchantstone(const int x, const int y)
   decr(_is_enchantstone, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_skillstone(const point &p)
+uint8_t Level::is_skillstone(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -950,7 +950,7 @@ void Level::unset_is_skillstone(const int x, const int y)
   decr(_is_skillstone, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_foilage(const point &p)
+uint8_t Level::is_foilage(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -988,7 +988,7 @@ void Level::unset_is_foilage(const int x, const int y)
   decr(_is_foilage, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_spiderweb(const point &p)
+uint8_t Level::is_spiderweb(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1026,7 +1026,7 @@ void Level::unset_is_spiderweb(const int x, const int y)
   decr(_is_spiderweb, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_sticky(const point &p)
+uint8_t Level::is_sticky(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1064,7 +1064,7 @@ void Level::unset_is_sticky(const int x, const int y)
   decr(_is_sticky, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_shovable(const point &p)
+uint8_t Level::is_shovable(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1102,7 +1102,7 @@ void Level::unset_is_shovable(const int x, const int y)
   decr(_is_shovable, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_floor(const point &p)
+uint8_t Level::is_floor(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1140,7 +1140,7 @@ void Level::unset_is_floor(const int x, const int y)
   decr(_is_floor, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_rock(const point &p)
+uint8_t Level::is_rock(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1178,7 +1178,7 @@ void Level::unset_is_rock(const int x, const int y)
   decr(_is_rock, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_able_to_stand_on(const point &p)
+uint8_t Level::is_able_to_stand_on(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1216,7 +1216,7 @@ void Level::unset_is_able_to_stand_on(const int x, const int y)
   decr(_is_able_to_stand_on, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_corpse(const point &p)
+uint8_t Level::is_corpse(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1252,7 +1252,7 @@ void Level::unset_is_corpse(const int x, const int y)
   decr(_is_corpse, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_monst(const point &p)
+uint8_t Level::is_monst(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1261,7 +1261,7 @@ uint8_t Level::is_monst(const point &p)
   return (get(_is_monst, p.x, p.y));
 }
 
-uint8_t Level::is_monst_or_player(const point &p)
+uint8_t Level::is_monst_or_player(const point p)
 {
   if (is_monst(p)) {
     return true;
@@ -1299,7 +1299,7 @@ void Level::unset_is_monst(const int x, const int y)
   decr(_is_monst, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_door(const point &p)
+uint8_t Level::is_door(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1335,7 +1335,7 @@ void Level::unset_is_door(const int x, const int y)
   decr(_is_door, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_key(const point &p)
+uint8_t Level::is_key(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1371,7 +1371,7 @@ void Level::unset_is_key(const int x, const int y)
   decr(_is_key, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_food(const point &p)
+uint8_t Level::is_food(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1407,7 +1407,7 @@ void Level::unset_is_food(const int x, const int y)
   decr(_is_food, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_treasure_type(const point &p)
+uint8_t Level::is_treasure_type(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1443,7 +1443,7 @@ void Level::unset_is_treasure_type(const int x, const int y)
   decr(_is_treasure_type, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_gold(const point &p)
+uint8_t Level::is_gold(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1479,7 +1479,7 @@ void Level::unset_is_gold(const int x, const int y)
   decr(_is_gold, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_ascend_dungeon(const point &p)
+uint8_t Level::is_ascend_dungeon(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1515,7 +1515,7 @@ void Level::unset_is_ascend_dungeon(const int x, const int y)
   decr(_is_ascend_dungeon, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_descend_dungeon(const point &p)
+uint8_t Level::is_descend_dungeon(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1551,7 +1551,7 @@ void Level::unset_is_descend_dungeon(const int x, const int y)
   decr(_is_descend_dungeon, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_ascend_sewer(const point &p)
+uint8_t Level::is_ascend_sewer(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1587,7 +1587,7 @@ void Level::unset_is_ascend_sewer(const int x, const int y)
   decr(_is_ascend_sewer, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_descend_sewer(const point &p)
+uint8_t Level::is_descend_sewer(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1623,7 +1623,7 @@ void Level::unset_is_descend_sewer(const int x, const int y)
   decr(_is_descend_sewer, x, y, (uint8_t) 1);
 }
 
-uint8_t Level::is_smoke(const point &p)
+uint8_t Level::is_smoke(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -1682,7 +1682,7 @@ bool Level::is_oob(const point p) const
   return ((p.x < 0) || (p.x >= MAP_WIDTH) || (p.y < 0) || (p.y >= MAP_HEIGHT));
 }
 
-uint8_t Level::fade_in_map(const point &p)
+uint8_t Level::fade_in_map(const point p)
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
@@ -1690,7 +1690,7 @@ uint8_t Level::fade_in_map(const point &p)
   return (get(_fade_in_map, p.x, p.y));
 }
 
-uint8_t Level::fade_in_map_no_check(const point &p) { return (get_no_check(_fade_in_map, p.x, p.y)); }
+uint8_t Level::fade_in_map_no_check(const point p) { return (get_no_check(_fade_in_map, p.x, p.y)); }
 
 uint8_t Level::fade_in_map(const int x, const int y)
 {
@@ -1737,7 +1737,7 @@ void Level::unset_fade_in(const int x, const int y)
 
 void Level::unset_fade_in_no_check(const int x, const int y) { set_no_check(_fade_in_map, x, y, (uint8_t) 0); }
 
-uint8_t Level::is_lit_ever(const point &p)
+uint8_t Level::is_lit_ever(const point p)
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
@@ -1745,7 +1745,7 @@ uint8_t Level::is_lit_ever(const point &p)
   return (get(_is_lit_ever, p.x, p.y));
 }
 
-uint8_t Level::is_lit_ever_no_check(const point &p) { return (get_no_check(_is_lit_ever, p.x, p.y)); }
+uint8_t Level::is_lit_ever_no_check(const point p) { return (get_no_check(_is_lit_ever, p.x, p.y)); }
 
 uint8_t Level::is_lit_ever(const int x, const int y)
 {
@@ -1790,7 +1790,7 @@ void Level::unset_is_lit_ever_no_check(const int x, const int y) { set_no_check(
 //
 // Used in lighting, so inlined
 //
-bool Level::is_light_blocker(const point &p) const
+bool Level::is_light_blocker(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
@@ -1798,7 +1798,7 @@ bool Level::is_light_blocker(const point &p) const
   return (get(_is_light_blocker, p.x, p.y));
 }
 
-bool Level::is_light_blocker_no_check(const point &p) const { return (get_no_check(_is_light_blocker, p.x, p.y)); }
+bool Level::is_light_blocker_no_check(const point p) const { return (get_no_check(_is_light_blocker, p.x, p.y)); }
 
 bool Level::is_light_blocker(const int x, const int y) const
 {
@@ -1839,7 +1839,7 @@ void Level::unset_is_light_blocker_no_check(const int x, const int y)
 //
 // Used in lighting, so inlined
 //
-bool Level::is_obs_wall_or_door(const point &p) const
+bool Level::is_obs_wall_or_door(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
@@ -1847,7 +1847,7 @@ bool Level::is_obs_wall_or_door(const point &p) const
   return (get(_is_obs_wall_or_door, p.x, p.y));
 }
 
-bool Level::is_obs_wall_or_door_no_check(const point &p) const
+bool Level::is_obs_wall_or_door_no_check(const point p) const
 {
   return (get_no_check(_is_obs_wall_or_door, p.x, p.y));
 }
@@ -1894,7 +1894,7 @@ void Level::unset_is_obs_wall_or_door_no_check(const int x, const int y)
 //
 // Used in lighting, so inlined
 //
-bool Level::is_obs_destructable(const point &p) const
+bool Level::is_obs_destructable(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
@@ -1902,7 +1902,7 @@ bool Level::is_obs_destructable(const point &p) const
   return (get(_is_obs_destructable, p.x, p.y));
 }
 
-bool Level::is_obs_destructable_no_check(const point &p) const
+bool Level::is_obs_destructable_no_check(const point p) const
 {
   return (get_no_check(_is_obs_destructable, p.x, p.y));
 }
@@ -1946,7 +1946,7 @@ void Level::unset_is_obs_destructable_no_check(const int x, const int y)
   set_no_check(_is_obs_destructable, x, y, false);
 }
 
-uint8_t Level::is_lit_currently(const point &p)
+uint8_t Level::is_lit_currently(const point p)
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
@@ -1954,7 +1954,7 @@ uint8_t Level::is_lit_currently(const point &p)
   return (get(_is_lit_currently, p.x, p.y));
 }
 
-uint8_t Level::is_lit_currently_no_check(const point &p) { return (get_no_check(_is_lit_currently, p.x, p.y)); }
+uint8_t Level::is_lit_currently_no_check(const point p) { return (get_no_check(_is_lit_currently, p.x, p.y)); }
 
 //
 // Note light fades

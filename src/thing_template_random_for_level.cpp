@@ -12,7 +12,7 @@
 #include "my_tile.hpp"
 #include "my_vector_bounds_check.hpp"
 
-Tpp Level::tp_random_monst(const point &p)
+Tpp Level::tp_random_monst(const point p)
 {
   TRACE_NO_INDENT();
   auto tries = 0U;
@@ -29,7 +29,7 @@ Tpp Level::tp_random_monst(const point &p)
   }
 }
 
-Tpp Level::tp_random_monst_class_a(const point &p)
+Tpp Level::tp_random_monst_class_a(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -50,7 +50,7 @@ Tpp Level::tp_random_monst_class_a(const point &p)
   }
 }
 
-Tpp Level::tp_random_monst_class_b(const point &p)
+Tpp Level::tp_random_monst_class_b(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -71,7 +71,7 @@ Tpp Level::tp_random_monst_class_b(const point &p)
   }
 }
 
-Tpp Level::tp_random_monst_class_c(const point &p)
+Tpp Level::tp_random_monst_class_c(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -92,7 +92,7 @@ Tpp Level::tp_random_monst_class_c(const point &p)
   }
 }
 
-Tpp Level::tp_random_monst_class_d(const point &p)
+Tpp Level::tp_random_monst_class_d(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -113,7 +113,7 @@ Tpp Level::tp_random_monst_class_d(const point &p)
   }
 }
 
-Tpp Level::tp_random_monst_class_e(const point &p)
+Tpp Level::tp_random_monst_class_e(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -134,7 +134,7 @@ Tpp Level::tp_random_monst_class_e(const point &p)
   }
 }
 
-Tpp Level::tp_random_treasure_class_a(const point &p)
+Tpp Level::tp_random_treasure_class_a(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -155,7 +155,7 @@ Tpp Level::tp_random_treasure_class_a(const point &p)
   }
 }
 
-Tpp Level::tp_random_treasure_class_b(const point &p)
+Tpp Level::tp_random_treasure_class_b(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -176,7 +176,7 @@ Tpp Level::tp_random_treasure_class_b(const point &p)
   }
 }
 
-Tpp Level::tp_random_treasure_class_c(const point &p)
+Tpp Level::tp_random_treasure_class_c(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -197,7 +197,7 @@ Tpp Level::tp_random_treasure_class_c(const point &p)
   }
 }
 
-Tpp Level::tp_random_weapon_class_a(const point &p)
+Tpp Level::tp_random_weapon_class_a(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -218,7 +218,7 @@ Tpp Level::tp_random_weapon_class_a(const point &p)
   }
 }
 
-Tpp Level::tp_random_weapon_class_b(const point &p)
+Tpp Level::tp_random_weapon_class_b(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -239,7 +239,7 @@ Tpp Level::tp_random_weapon_class_b(const point &p)
   }
 }
 
-Tpp Level::tp_random_weapon_class_c(const point &p)
+Tpp Level::tp_random_weapon_class_c(const point p)
 {
   TRACE_NO_INDENT();
 
@@ -260,7 +260,7 @@ Tpp Level::tp_random_weapon_class_c(const point &p)
   }
 }
 
-Tpp Level::tp_random_mob(const point &p)
+Tpp Level::tp_random_mob(const point p)
 {
   TRACE_NO_INDENT();
   auto tries = 0U;
@@ -276,13 +276,13 @@ Tpp Level::tp_random_mob(const point &p)
   }
 }
 
-Tpp Level::tp_random_mob_spawner_class_a(const point &p)
+Tpp Level::tp_random_mob_spawner_class_a(const point p)
 {
   TRACE_NO_INDENT();
   return tp_random_mob(p);
 }
 
-Tpp Level::tp_random_mob_spawner_class_b(const point &p)
+Tpp Level::tp_random_mob_spawner_class_b(const point p)
 {
   TRACE_NO_INDENT();
   return tp_random_mob(p);

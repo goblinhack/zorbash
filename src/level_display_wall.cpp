@@ -10,7 +10,7 @@
 #include "my_tex.hpp"
 #include "my_thing.hpp"
 
-void Thing::blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles)
+void Thing::blit_wall_cladding(point tl, point br, const ThingTiles *tiles)
 {
   TRACE_AND_INDENT();
   float dw = game->config.one_pixel_width * 1;
@@ -116,7 +116,7 @@ void Thing::blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles)
   }
 }
 
-void Thing::blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles)
+void Thing::blit_wall_shadow(point tl, point br, const ThingTiles *tiles)
 {
   TRACE_AND_INDENT();
   float dw = game->config.one_pixel_width * 1;
