@@ -221,7 +221,7 @@ bool Level::tick(void)
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
-  static const int wait_count_max = 10; // THING_TICK_WAIT_TOO_LONG;
+  static const int wait_count_max = THING_TICK_WAIT_TOO_LONG;
   static int       wait_count;
   wait_count++;
 
