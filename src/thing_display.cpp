@@ -15,8 +15,7 @@
 #include "my_tile.hpp"
 #include "my_ui.hpp"
 
-void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point &blit_tl,
-                                         const point &blit_br)
+void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, const point blit_br)
 {
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
@@ -199,7 +198,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
   }
 }
 
-void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point &blit_tl, const point &blit_br)
+void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, const point blit_br)
 {
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
@@ -234,7 +233,7 @@ void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const po
   glcolor(WHITE);
 }
 
-void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point &blit_tl, const point &blit_br)
+void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, const point blit_br)
 {
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }

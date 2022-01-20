@@ -1798,16 +1798,16 @@ public:
   void map_beast_check(void);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
-  void blit_floor_chasm(point &tl, point &br, const ThingTiles *tiles);
+  void blit_floor_chasm(point tl, point br, const ThingTiles *tiles);
   void blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, const bool reflection);
   void blit(int fbo);
-  void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
-  void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
-  void blit_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
+  void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
+  void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
+  void blit_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_text(std::string const &, color c, point tl, point br);
   void blit_upside_down(int fbo);
-  void blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles);
-  void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
+  void blit_wall_cladding(point tl, point br, const ThingTiles *tiles);
+  void blit_wall_shadow(point tl, point br, const ThingTiles *tiles);
   void botcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void botcon_(const char *fmt, va_list args); // compile error without
   void bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count);

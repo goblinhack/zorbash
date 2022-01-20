@@ -8,7 +8,7 @@
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
 
-uint8_t Level::is_lava(const point &p)
+uint8_t Level::is_lava(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -47,7 +47,7 @@ void Level::unset_is_lava(const int x, const int y)
   map_changed = true;
   decr(_is_lava, x, y, (uint8_t) 1);
 }
-uint8_t Level::is_brazier(const point &p)
+uint8_t Level::is_brazier(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -85,7 +85,7 @@ void Level::unset_is_brazier(const int x, const int y)
   map_changed = true;
   decr(_is_brazier, x, y, (uint8_t) 1);
 }
-uint8_t Level::is_fire(const point &p)
+uint8_t Level::is_fire(const point p)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(p.x, p.y))) {
@@ -122,7 +122,7 @@ void Level::unset_is_fire(const int x, const int y)
   }
   decr(_is_fire, x, y, (uint8_t) 1);
 }
-uint8_t Level::heatmap(const point &p)
+uint8_t Level::heatmap(const point p)
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
@@ -130,7 +130,7 @@ uint8_t Level::heatmap(const point &p)
   return (get(_heatmap, p.x, p.y));
 }
 
-uint8_t Level::heatmap_no_check(const point &p) { return (get_no_check(_heatmap, p.x, p.y)); }
+uint8_t Level::heatmap_no_check(const point p) { return (get_no_check(_heatmap, p.x, p.y)); }
 
 uint8_t Level::heatmap(const int x, const int y)
 {
