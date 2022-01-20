@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - crash on sewers and entrance                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
@@ -202,6 +203,9 @@ Screenshots
 ![Alt text](pics/screenshot.13.png?raw=true "")
 ![Alt text](pics/screenshot.14.png?raw=true "")
 ![Alt text](pics/screenshot.15.png?raw=true "")
+![Alt text](pics/screenshot.16.png?raw=true "")
+![Alt text](pics/screenshot.17.png?raw=true "")
+![Alt text](pics/screenshot.18.png?raw=true "")
 
 How to build
 ------------
