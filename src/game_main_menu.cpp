@@ -135,7 +135,10 @@ static uint8_t game_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
     }
   }
 
-  return true;
+  //
+  // So screenshots can work
+  //
+  return false;
 }
 
 static void game_display_title_bg(void)
@@ -320,7 +323,7 @@ static void game_main_menu_tick(Widp w)
 void Game::main_menu_select(void)
 {
   TRACE_AND_INDENT();
-  CON("Main menu");
+  LOG("Main menu");
 
   music_play_intro();
 

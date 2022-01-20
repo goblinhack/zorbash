@@ -90,7 +90,7 @@ void Thing::init_lights(void)
     //
     // Helps when the light is really low. Gives some local intensity.
     //
-    new_light(point(0, 0), 1, 1, col, FBO_SMALL_POINT_LIGHTS);
+    new_light(point(0, 0), 2, 1, col, FBO_SMALL_POINT_LIGHTS);
 
     alpha_scale = 0.75;
     col.a       = (int) (255.0 * alpha_scale);
