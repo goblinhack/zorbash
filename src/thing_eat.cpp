@@ -90,6 +90,62 @@ bool Thing::can_eat(const Thingp itp)
   return false;
 }
 
+bool Tp::can_eat(const Thingp itp)
+{
+  dbg("Can eat? %s", itp->to_short_string().c_str());
+  TRACE_AND_INDENT();
+
+  if (is_meat_eater()) {
+    if (itp->is_meat()) {
+      dbg("Can eat meat: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (is_blood_eater()) {
+    if (itp->is_blood()) {
+      dbg("Can eat blood: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (is_food_eater()) {
+    if (itp->is_food()) {
+      dbg("Can eat food: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (is_treasure_eater()) {
+    if (itp->is_treasure_type()) {
+      dbg("Can eat treasure: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (is_potion_eater()) {
+    if (itp->is_potion()) {
+      dbg("Can eat potion: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (is_item_magical_eater()) {
+    if (itp->is_item_magical()) {
+      dbg("Can eat magical: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (is_jelly_baby_eater()) {
+    if (itp->is_jelly_baby()) {
+      dbg("Can eat jelly: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (is_player()) {
+    if (itp->is_food()) {
+      dbg("Can eat food: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  return false;
+}
+
 //
 // Try to eat
 //

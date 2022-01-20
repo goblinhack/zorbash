@@ -70,13 +70,6 @@ void sdl_loop(void)
   //
   SDL_PumpEvents();
 
-  //
-  // Reset the fade in due to the above
-  //
-  if (game->level) {
-    game->level->ts_fade_in_begin = time_get_time_ms_cached();
-  }
-
   for (; /*ever*/;) {
     // LOG("SDL tick");
 

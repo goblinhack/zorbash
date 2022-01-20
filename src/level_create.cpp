@@ -16,6 +16,10 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_
 {
   TRACE_AND_INDENT();
 
+  if (difficulty_depth > DUNGEONS_MAX_DEPTH) {
+    difficulty_depth = DUNGEONS_MAX_DEPTH;
+  }
+
   uint32_t seedval;
 
   if (dungeon_depth <= 1) {

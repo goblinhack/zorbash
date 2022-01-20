@@ -623,6 +623,11 @@ void Thing::jump_end(void)
   //
   collision_check_do();
 
+  //
+  // Need this so that if we land on a chasm we fall immediately
+  //
+  location_check_forced();
+
   get_infop()->last_failed_jump_at = point(-1, -1);
 }
 
@@ -657,7 +662,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
       TRACE_AND_INDENT();
 
       auto delta = maybe_victim->curr_at - curr_at;
-      auto dest  = maybe_victim->curr_at + delta;
+      auto dest  = curr_at + delta;
       return try_to_jump_carefully(dest);
     }
   }

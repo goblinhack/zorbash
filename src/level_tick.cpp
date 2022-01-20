@@ -81,14 +81,21 @@ void Level::handle_input_events(void)
     }
   }
 
+  auto   level  = game->level;
+  Thingp player = nullptr;
+  if (level) {
+    player = level->player;
+  }
+
   //
   // After a small delay handle the player move. This allows for diagonal moves to be handled without generating two
   // key presses.
   //
-  if (game->request_player_move && time_have_x_tenths_passed_since(1, game->request_player_move)) {
+  if (((player && player->get_aip()->move_path.size()) || game->request_player_move) &&
+      time_have_x_tenths_passed_since(1, game->request_player_move)) {
     //
-    // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete soonet
-    // and should result in the flag below being cleared.
+    // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete
+    // soonet and should result in the flag below being cleared.
     //
     static int time_boost = 0;
     if (game->things_are_moving) {
@@ -188,6 +195,7 @@ bool Level::tick(void)
                  THING_TICK_DURATION_TOO_LONG);
         }
       }
+      // t->con("PERF: Thing took %u ms", time_get_time_ms() - tick_begin_ms);
     }
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
   }
@@ -213,7 +221,7 @@ bool Level::tick(void)
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
-  static const int wait_count_max = THING_TICK_WAIT_TOO_LONG;
+  static const int wait_count_max = 10; // THING_TICK_WAIT_TOO_LONG;
   static int       wait_count;
   wait_count++;
 

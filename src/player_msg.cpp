@@ -58,7 +58,7 @@ bool Thing::player_is_ready_for_messages(std::string &why)
     return false;
   }
 
-  if (game->tick_current < 1) {
+  if (game->tick_current <= 1) {
     why = "first tick";
     return false;
   }

@@ -11,8 +11,45 @@
 #include "my_math.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
-bool Thing::ai_obstacle_for_me(const point &p)
+bool Thing::ai_obstacle_for_me(point p)
+{
+  TRACE_NO_INDENT();
+
+  //
+  // Avoid threats and treat them as obstacles
+  //
+  FOR_ALL_THING_GROUPS(group)
+  {
+    for (auto &t : get(level->all_things_ptr_at[ group ], p.x, p.y)) {
+      if (unlikely(! t)) {
+        continue;
+      }
+
+      if (t->is_the_grid) {
+        continue;
+      }
+      if (t->is_floor()) {
+        continue;
+      }
+      if (t->is_hidden) {
+        continue;
+      }
+
+      //
+      // "true" on collision
+      //
+      if (ai_obstacle(t)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+bool Tp::ai_obstacle_for_me(Levelp level, point p)
 {
   TRACE_NO_INDENT();
 
@@ -320,6 +357,119 @@ bool Thing::ai_obstacle(Thingp it)
     // if (will_avoid_threat(it)) {
     //     return true;
     // }
+  } else if (is_player()) {
+    if (it->is_alive_monst()) {
+      //
+      // Ignore is_ethereal to make it easier to attack ghosts
+      //
+      return true;
+    }
+  }
+
+  return false;
+}
+
+//
+// Return TRUE if this is something that should block AI
+//
+bool Tp::ai_obstacle(Thingp it)
+{
+  //
+  // Skip things we cannot collide with
+  //
+  if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
+    return false;
+  }
+
+  //
+  // Allow cleaners to engulf/swallow attack
+  //
+  if (is_engulfer() && can_eat(it)) {
+    return false;
+  }
+
+  //
+  // Lava, acid etc...
+  //
+  if (is_disliked_by_me(it->level, it->curr_at)) {
+    return true;
+  }
+
+  //
+  // Stop tentacleyes piling on top of each other
+  //
+  if (it->is_floating() || it->is_flying()) {
+    if (is_floating() || is_flying()) {
+      return true;
+    }
+  }
+
+  //
+  // Stop ghosts piling on top of each other
+  //
+  if (it->is_ethereal()) {
+    if (is_ethereal()) {
+      return true;
+    }
+  }
+
+  //
+  // Stop entities piling on top of each other
+  //
+  if (it->is_able_to_walk_through_walls()) {
+    if (is_able_to_walk_through_walls()) {
+      return true;
+    }
+  }
+
+  //
+  // Allow movement through open doors only
+  //
+  if (it->is_able_to_see_through_doors()) {
+    if (it->is_door()) {
+      return false;
+    }
+  }
+
+  if (it->is_brazier() || it->is_barrel() || it->is_obs_wall_or_door()) {
+    if (is_able_to_walk_through_walls()) {
+      return false;
+    }
+
+    if (! it->is_open) {
+      if (it->is_door()) {
+        if (is_able_to_open_doors()) {
+          return false;
+        }
+        if (is_able_to_break_down_doors()) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+
+  if (it->is_secret_door()) {
+    return false;
+  }
+
+  if (! is_ethereal()) {
+    //
+    // This lets you skip around mobs to avoid ghosts
+    //
+    if (is_minion()) {
+      if (it->is_mob_spawner()) {
+        return true;
+      }
+    }
+  }
+
+  if (is_monst() || (is_player() && game->robot_mode)) {
+    if (it->is_chasm()) {
+      if (! is_floating() && ! is_flying()) {
+        return true;
+      }
+    }
   } else if (is_player()) {
     if (it->is_alive_monst()) {
       //

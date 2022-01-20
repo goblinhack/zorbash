@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - fade in                                                                                                                                    -->
+<!-- - ghost mob next to pit did not generate ghosts                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
@@ -11,6 +11,7 @@
 <!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- - char selection                                                                                                                             -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
+<!-- - eat corpses, like a bat corpse?                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- UI                                                                                                                                           -->
@@ -178,7 +179,7 @@
 Zorbash
 -------
 
-Welcome to the lair of the dread tentacleye, Zorbash. Liberate the Orb of Zorb and defeat Zorbash to win.
+Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals and confront Zorbash to win.
 
 This is work in progress. My plan is to release a minimal viable game this year; 2022. Likely linux
 only with windows to follow later.  4 bosses plus final boss.

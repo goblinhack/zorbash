@@ -172,7 +172,7 @@ bool Thing::fall_to_next_level(void)
     where_to = level->world_at + point3d(0, 0, 1);
   }
 
-  game->init_level(where_to);
+  game->init_level(where_to, level->difficulty_depth + 1, level->dungeon_depth + 1);
   if (is_player()) {
     game->current_level = where_to;
   }

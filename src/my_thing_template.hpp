@@ -740,6 +740,21 @@ public:
 
   bool is_disliked_by_me(class Level *, point p) const;
   bool is_hated_by_me(class Level *, point p) const;
+  bool ai_obstacle(Thingp it);
+  bool ai_obstacle_for_me(class Level *, point);
+  bool can_eat(const Thingp itp);
+
+  void dbg_(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void err_(const char *fmt, va_list args); // compile error without
+  void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void log_(const char *fmt, va_list args); // compile error without
+  void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void topcon_(const char *fmt, va_list args); // compile error without
+  void die(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void die_(const char *fmt, va_list args); // compile error without
+  void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void con_(const char *fmt, va_list args); // compile error without
 
   const Dice &get_damage_acid_dice(void) const;
   const Dice &get_damage_natural_dice(void) const;
@@ -946,6 +961,9 @@ public:
   const std::string &text_unused2(void) const { return _text_unused2; }
   const std::string &text_unused3(void) const { return _text_unused3; }
   const std::string &text_unused(void) const { return _text_unused; }
+
+  std::string to_string(void);
+  std::string to_short_string(void);
 
   int aggression_level_pct(void) const { return _aggression_level_pct; }
   int ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }

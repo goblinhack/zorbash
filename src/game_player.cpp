@@ -87,8 +87,9 @@ void Game::place_player(void)
       //
       LOG("DGN: Scroll to player");
       level->scroll_map_to_player();
-
-      return;
     }
   }
+
+  level->ts_fade_in_begin = time_get_time_ms_cached();
+  level->ts_redraw_bg     = 1; // Force redraw
 }
