@@ -18,6 +18,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
+#include "my_template.hpp"
 #include "my_thing.hpp"
 #include "my_time.hpp"
 #include "my_ui.hpp"
@@ -275,26 +276,6 @@ static void game_dungeons_update_buttons(Widp w)
   wid_update(w);
 }
 
-static void game_dungeons_event(Widp w, int focusx, int focusy) { TRACE_NO_INDENT(); }
-
-static uint8_t game_dungeons_mouse_event(Widp w, int focusx, int focusy)
-{
-  TRACE_NO_INDENT();
-  game_dungeons_event(w, focusx, focusy);
-
-  return true;
-}
-
-static uint8_t game_dungeons_button_mouse_event(Widp w, int32_t x, int32_t y, uint32_t button)
-{
-  TRACE_NO_INDENT();
-  int focus  = wid_get_int_context(w);
-  int focusx = (focus & 0xff);
-  int focusy = (focus & 0xff00) >> 8;
-
-  return (game_dungeons_mouse_event(w, focusx, focusy));
-}
-
 static void game_dungeons_set_focus(game_dungeons_ctx *ctx, int focusx, int focusy)
 {
   TRACE_NO_INDENT();
@@ -382,53 +363,46 @@ static void game_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t
       delete wid_level_contents;
       wid_level_contents = nullptr;
 
-      std::map< ThingId, int > contents;
+      std::map< std::string, int > monst_contents;
+      std::map< std::string, int > treasure_contents;
+
       for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_WIDTH; y++) {
           FOR_ALL_THINGS_THAT_INTERACT(l, t, x, y)
           {
-            if (t->is_treasure() || t->is_monst() || t->is_mob_spawner()) {
-              contents[ t->id ]++;
+            if (t->is_monst() || t->is_mob_spawner()) {
+              monst_contents[ t->short_text_capitalise() ]++;
+            }
+            if (t->is_treasure()) {
+              treasure_contents[ t->short_text_capitalise() ]++;
             }
           }
           FOR_ALL_THINGS_END();
         }
       }
 
-      point tl = make_point(0, TERM_HEIGHT - (contents.size() + 5));
-      point br = make_point(40, TERM_HEIGHT - 1);
+      auto  total_size = monst_contents.size() + treasure_contents.size();
+      point tl         = make_point(0, 3);
+      point br         = make_point(40, total_size + 6);
 
-      wid_level_contents = new WidPopup("Level contents", tl, br, nullptr, "", true, false);
-      wid_level_contents->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Level contents");
+      wid_level_contents = new WidPopup("Contents", tl, br, nullptr, "", true, false);
+      wid_level_contents->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Contents");
       wid_level_contents->log(UI_LOGGING_EMPTY_LINE);
 
       char tmp[ MAXSHORTSTR ];
-      for (auto p : contents) {
-        auto t = l->thing_find(p.first);
-        if (t->is_monst()) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=red$%d %s", p.second, t->short_text_capitalise().c_str());
-        } else {
-          continue;
+      {
+        auto m = flip_map(monst_contents);
+        for (auto p = m.rbegin(); p != m.rend(); ++p) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=red$%d %s", p->first, p->second.c_str());
+          wid_level_contents->log(tmp, true);
         }
-        wid_level_contents->log(tmp, true);
       }
-      for (auto p : contents) {
-        auto t = l->thing_find(p.first);
-        if (t->is_mob_spawner()) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=pink$%d %s", p.second, t->short_text_capitalise().c_str());
-        } else {
-          continue;
+      {
+        auto m = flip_map(treasure_contents);
+        for (auto p = m.rbegin(); p != m.rend(); ++p) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gold$%d %s", p->first, p->second.c_str());
+          wid_level_contents->log(tmp, true);
         }
-        wid_level_contents->log(tmp, true);
-      }
-      for (auto p : contents) {
-        auto t = l->thing_find(p.first);
-        if (t->is_treasure()) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gold$%d %s", p.second, t->short_text_capitalise().c_str());
-        } else {
-          continue;
-        }
-        wid_level_contents->log(tmp, true);
       }
 
       wid_set_color(wid_level_contents->wid_popup_container, WID_COLOR_BG, GRAY30);
@@ -948,6 +922,48 @@ static uint8_t game_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
+static uint8_t game_dungeons_shortcut_enter(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_NO_INDENT();
+
+  game_dungeons_ctx *ctx;
+  if (! w) {
+    ctx = g_ctx;
+  } else {
+    ctx = (game_dungeons_ctx *) wid_get_void_context(wid_get_top_parent(w));
+  }
+  verify(MTYPE_WID, ctx);
+
+  if (! ctx) {
+    return true;
+  }
+
+  if (! ctx->generated) {
+    return true;
+  }
+
+  game_dungeons_destroy(wid_get_top_parent(w));
+
+  if (! game) {
+    DIE("No game");
+  }
+
+  int focus = wid_get_int_context(w);
+  int lx    = (focus & 0xff);
+  int ly    = (focus & 0xff00) >> 8;
+
+  auto level_at = game_dungeons_grid_to_level_coord(lx, ly);
+  auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+  if (! l) {
+    return true;
+  }
+
+  game->level           = l;
+  game->start_requested = true;
+
+  return true;
+}
+
 static uint8_t game_dungeons_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
@@ -1337,7 +1353,7 @@ void Game::menu_dungeons_select(void)
         ctx->buttons[ y ][ x ] = b;
 
         wid_set_on_mouse_over_begin(b, game_dungeons_mouse_over);
-        wid_set_on_mouse_down(b, game_dungeons_button_mouse_event);
+        IF_DEBUG { wid_set_on_mouse_down(b, game_dungeons_shortcut_enter); }
         wid_set_color(b, WID_COLOR_BG, WHITE);
         wid_set_void_context(b, ctx);
         int focus = (y << 8) | x;
