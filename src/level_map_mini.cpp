@@ -207,10 +207,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = BLACK;
 
-        if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) || is_enchantstone(x, y)) {
-          c   = GOLD2;
-          c.a = 255;
-        } else if (is_monst(x, y) || is_spiderweb(x, y) || is_mob_spawner(x, y)) {
+        if (is_monst(x, y) || is_spiderweb(x, y) || is_mob_spawner(x, y)) {
           //
           // Have both? Overlay the monsters
           //
@@ -220,6 +217,10 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           } else {
             continue;
           }
+        } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) ||
+                   is_enchantstone(x, y)) {
+          c   = GOLD2;
+          c.a = 255;
         } else if (is_wall(x, y) || is_rock(x, y)) {
           continue;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
