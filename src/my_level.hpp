@@ -26,10 +26,11 @@ public:
   //
   // These are caches for fast lookup in display code
   //
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH >    _is_light_blocker {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH >    _is_lit_ever {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH >    _is_obs_wall_or_door {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH >    _is_obs_destructable {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_lit_ever {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_destructable {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_wall_or_door {};
+
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _fade_in_map {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _gfx_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _heatmap {};
@@ -44,44 +45,42 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_chasm {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_corpse {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_corridor {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_hazard_for_player {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_deep_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_descend_dungeon {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_descend_sewer {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_dirt {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_door {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_dry_grass {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wet_grass {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_enchantstone {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_hazard_for_player {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_heavy {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_fire {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_foilage {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_food {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_gold {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_hazard {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_heavy {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_key {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lava {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lit_currently {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob_spawner {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_monst {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_potion {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ring {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ripple {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_rock {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_secret_door {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_shallow_water {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_shovable {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_skillstone {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_smoke {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_spiderweb {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_sticky {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_shovable {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_treasure_type {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wall {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wand {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ring {};
-  //
-  // Something moved
-  //
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wet_grass {};
+
   std::array< std::array< uint32_t, MAP_HEIGHT >, MAP_WIDTH > _is_map_changed {};
 
   //
@@ -106,10 +105,15 @@ public:
   point3d world_at;
 
   //
+  // Where in the 2d grid presented at game start, we are
+  //
+  point grid_at;
+
+  //
   // Levels are group into difficulty levels
   //
   int difficulty_depth {};
-  int dungeon_depth {};
+  int dungeon_walk_order_level_no {};
 
   //
   // Chances for various things to appear
@@ -136,14 +140,16 @@ public:
   int miny {};
   int maxy {};
 
-  bool cursor_found {};
+  bool is_cursor_found {};
+  bool is_final_level {};
+  bool is_first_level {};
   bool is_heatmap_valid {};
-  bool is_starting {}; // Loading level
-  bool map_changed {}; // Something moved on the map
-  bool map_follow_player {};
-  bool map_mini_valid {};
-  bool is_level_type_sewer {};
   bool is_level_type_dungeon {};
+  bool is_level_type_sewer {};
+  bool is_map_changed {}; // Something moved on the map
+  bool is_map_follow_player {};
+  bool is_map_mini_valid {};
+  bool is_starting {}; // Loading level
 
   point cursor_at;
   point cursor_old;
@@ -816,7 +822,7 @@ public:
   void create_dungeon_place_sewer_pipes(Dungeonp d);
   void create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries);
   void created(void);
-  void create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_depth);
+  void create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_walk_order_level_no);
   void create_sewer_place_remaining_walls(const std::string &what);
   void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
   void cursor_check_if_scroll_needed(void);
@@ -1049,10 +1055,10 @@ public:
   void update(void);
   void update_water_next_to_lava(void);
 
-  uint32_t is_map_changed(const int x, const int y);
-  uint32_t is_map_changed(const point p);
-  uint32_t is_map_changed_no_check(const int x, const int y);
-  uint32_t is_map_changed_no_check(const point p);
+  uint32_t get_is_map_changed(const int x, const int y);
+  uint32_t get_is_map_changed(const point p);
+  uint32_t get_is_map_changed_no_check(const int x, const int y);
+  uint32_t get_is_map_changed_no_check(const point p);
 
   std::deque< point >  flood_fill(point) const;
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);

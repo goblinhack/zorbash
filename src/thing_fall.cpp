@@ -164,26 +164,30 @@ bool Thing::fall_to_next_level(void)
   //
   // Fall from a dungeon to the next dungeon, 2 levels down
   //
-  auto where_to = level->world_at + point3d(0, 0, 2);
+  auto fall_to = level->world_at + point3d(0, 0, 2);
   if (level->is_level_type_sewer) {
     //
     // If in a sewer then we drop only one level to the next dungeon.
     //
-    where_to = level->world_at + point3d(0, 0, 1);
+    fall_to = level->world_at + point3d(0, 0, 1);
   }
 
-  game->init_level(where_to, level->difficulty_depth + 1, level->dungeon_depth + 1);
-  if (is_player()) {
-    game->current_level = where_to;
-  }
+  auto l = get(game->world.levels, fall_to.x, fall_to.y, fall_to.z);
+  if (! l) {
+    game->init_level(fall_to, level->grid_at + point(0, 1), level->difficulty_depth + 1,
+                     level->dungeon_walk_order_level_no + 1);
 
-  auto next_level = get(game->world.levels, where_to.x, where_to.y, where_to.z);
-  if (! next_level) {
-    if (is_player()) {
-      msg("The chasm is permanently blocked!");
+    l = get(game->world.levels, fall_to.x, fall_to.y, fall_to.z);
+    if (! l) {
+      if (is_player()) {
+        msg("The chasm is permanently blocked!");
+      }
+      return false;
     }
-    dbg("No, no next level");
-    return false;
+  }
+
+  if (is_player()) {
+    game->current_level = fall_to;
   }
 
   auto tries = 0;
@@ -215,35 +219,34 @@ bool Thing::fall_to_next_level(void)
     }
     tries++;
 
-    if (next_level->is_oob(x, y)) {
+    if (l->is_oob(x, y)) {
       dbg("No, %d,%d is out of dungeon", x, y);
       continue;
     }
 
     dbg("Try to fall to %d,%d", x, y);
-    if (! next_level->is_able_to_stand_on(x, y)) {
+    if (! l->is_able_to_stand_on(x, y)) {
       continue;
     }
 
-    if (next_level->is_ascend_dungeon(x, y) || next_level->is_monst(x, y) || next_level->is_rock(x, y) ||
-        next_level->is_door(x, y) || next_level->is_secret_door(x, y) || next_level->is_mob_spawner(x, y) ||
-        next_level->is_chasm(x, y) || next_level->is_wall(x, y) || next_level->is_ascend_sewer(x, y) ||
-        next_level->is_descend_sewer(x, y) || next_level->is_descend_dungeon(x, y)) {
+    if (l->is_ascend_dungeon(x, y) || l->is_monst(x, y) || l->is_rock(x, y) || l->is_door(x, y) ||
+        l->is_secret_door(x, y) || l->is_mob_spawner(x, y) || l->is_chasm(x, y) || l->is_wall(x, y) ||
+        l->is_ascend_sewer(x, y) || l->is_descend_sewer(x, y) || l->is_descend_dungeon(x, y)) {
       dbg("No, %d,%d is a special tile", x, y);
       continue;
     }
 
-    if (next_level->is_floor(x, y) || next_level->is_corridor(x, y) || next_level->is_bridge(x, y) ||
-        next_level->is_water(x, y) || next_level->is_fire(x, y) || next_level->is_lava(x, y)) {
+    if (l->is_floor(x, y) || l->is_corridor(x, y) || l->is_bridge(x, y) || l->is_water(x, y) || l->is_fire(x, y) ||
+        l->is_lava(x, y)) {
 
       IF_DEBUG1
       {
-        FOR_ALL_THINGS(next_level, t, x, y) { t->log("Landed under thing on new level"); }
+        FOR_ALL_THINGS(l, t, x, y) { t->log("Landed under thing on new level"); }
         FOR_ALL_THINGS_END()
       }
 
       if (is_player()) {
-        game->level = next_level;
+        game->level = l;
         msg("%%fg=red$You tumble into the void!%%fg=reset$");
         popup("Aargh");
       } else {
@@ -269,7 +272,7 @@ bool Thing::fall_to_next_level(void)
 
       dbg("Land on the next level, change level then move to %d,%d", x, y);
       TRACE_AND_INDENT();
-      level_change(next_level);
+      level_change(l);
 
       dbg("Land on the next level, move to %d,%d", x, y);
       TRACE_AND_INDENT();
@@ -280,13 +283,13 @@ bool Thing::fall_to_next_level(void)
       move_carried_items_immediately();
 
       if (is_player()) {
-        next_level->scroll_map_to_player();
-        next_level->update_new_level();
+        l->scroll_map_to_player();
+        l->update_new_level();
         //
         // Make sure all monsts on the new level are at the
         // same tick or they will get lots of free attacks
         //
-        next_level->update_all_ticks();
+        l->update_all_ticks();
       }
 
       set_fall_height(0);
@@ -312,22 +315,22 @@ bool Thing::fall_to_next_level(void)
       }
 
       auto new_pos = make_point(x, y);
-      if (next_level->is_lava(new_pos)) {
+      if (l->is_lava(new_pos)) {
         if (is_player()) {
           msg("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
         }
         fall_damage *= 3;
-      } else if (next_level->is_fire(new_pos)) {
+      } else if (l->is_fire(new_pos)) {
         if (is_player()) {
           msg("%%fg=orange$You plunge into flames! Not a good move!%%fg=reset$");
         }
         fall_damage *= 2;
-      } else if (next_level->is_deep_water(new_pos)) {
+      } else if (l->is_deep_water(new_pos)) {
         if (is_player()) {
           msg("%%fg=yellow$The deep water lessens the fall!%%fg=reset$");
         }
         fall_damage /= 4;
-      } else if (next_level->is_shallow_water(new_pos)) {
+      } else if (l->is_shallow_water(new_pos)) {
         if (is_player()) {
           msg("%%fg=yellow$The water lessens the fall!%%fg=reset$");
         }
@@ -340,10 +343,10 @@ bool Thing::fall_to_next_level(void)
 
       if (is_monst() || is_player()) {
         bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
-        next_level->thing_new(tp_random_blood_splatter()->name(), new_pos);
+        l->thing_new(tp_random_blood_splatter()->name(), new_pos);
       }
 
-      next_level->scroll_map_to_player();
+      l->scroll_map_to_player();
       update_light();
 
       //

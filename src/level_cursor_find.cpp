@@ -57,21 +57,21 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
     //
     // What tile are we over?
     //
-    auto old     = cursor_found;
-    cursor_found = false;
+    auto old        = is_cursor_found;
+    is_cursor_found = false;
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         FOR_ALL_GRID_THINGS(this, t, x, y)
         {
           t->cursor_hover_over_check();
-          if (cursor_found) {
+          if (is_cursor_found) {
             goto done;
           }
         }
         FOR_ALL_THINGS_END();
       }
     }
-    cursor_found = old;
+    is_cursor_found = old;
   }
 
 done:

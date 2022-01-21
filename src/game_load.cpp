@@ -484,9 +484,6 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   uint32_t csum_in = 0;
   in >> bits(csum_in);
 
-  in >> bits(my.t->prev_levels);
-  in >> bits(my.t->next_levels);
-
   in >> bits(l->ts_created);
   old_ts_created = l->ts_created;
   in >> bits(l->ts_saved);
@@ -499,8 +496,9 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   in >> bits(my.t->_is_light_blocker);
   in >> bits(my.t->_is_lit_ever);
-  in >> bits(my.t->_is_obs_wall_or_door);
   in >> bits(my.t->_is_obs_destructable);
+  in >> bits(my.t->_is_obs_wall_or_door);
+
   in >> bits(my.t->_fade_in_map);
   in >> bits(my.t->_gfx_water);
   in >> bits(my.t->_heatmap);
@@ -515,93 +513,110 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_chasm);
   in >> bits(my.t->_is_corpse);
   in >> bits(my.t->_is_corridor);
+  in >> bits(my.t->_is_cursor_path_hazard_for_player);
   in >> bits(my.t->_is_deep_water);
   in >> bits(my.t->_is_descend_dungeon);
   in >> bits(my.t->_is_descend_sewer);
   in >> bits(my.t->_is_dirt);
   in >> bits(my.t->_is_door);
   in >> bits(my.t->_is_dry_grass);
-  in >> bits(my.t->_is_wet_grass);
   in >> bits(my.t->_is_enchantstone);
-  in >> bits(my.t->_is_cursor_path_hazard_for_player);
-  in >> bits(my.t->_is_heavy);
   in >> bits(my.t->_is_fire);
   in >> bits(my.t->_is_floor);
   in >> bits(my.t->_is_foilage);
   in >> bits(my.t->_is_food);
   in >> bits(my.t->_is_gold);
   in >> bits(my.t->_is_hazard);
+  in >> bits(my.t->_is_heavy);
   in >> bits(my.t->_is_key);
   in >> bits(my.t->_is_lava);
   in >> bits(my.t->_is_lit_currently);
   in >> bits(my.t->_is_mob_spawner);
   in >> bits(my.t->_is_monst);
   in >> bits(my.t->_is_potion);
+  in >> bits(my.t->_is_ring);
   in >> bits(my.t->_is_ripple);
   in >> bits(my.t->_is_rock);
   in >> bits(my.t->_is_secret_door);
   in >> bits(my.t->_is_shallow_water);
+  in >> bits(my.t->_is_shovable);
   in >> bits(my.t->_is_skillstone);
   in >> bits(my.t->_is_smoke);
   in >> bits(my.t->_is_spiderweb);
   in >> bits(my.t->_is_sticky);
-  in >> bits(my.t->_is_shovable);
   in >> bits(my.t->_is_treasure_type);
   in >> bits(my.t->_is_wall);
   in >> bits(my.t->_is_wand);
-  in >> bits(my.t->_is_ring);
+  in >> bits(my.t->_is_wet_grass);
+
   in >> bits(my.t->_is_map_changed);
 
-  in >> bits(l->all_things_id_at);
-  in >> bits(l->cursor_at);
-  in >> bits(l->cursor_old);
-  in >> bits(l->cursor_found);
-  in >> bits(l->fbo_light);
-  in >> bits(l->is_level_type_dungeon);
-  in >> bits(l->is_heatmap_valid);
-  in >> bits(l->is_level_type_sewer);
-  in >> bits(l->is_starting);
-  in >> bits(l->map_at);
-  in >> bits(l->map_br);
-  in >> bits(l->map_changed);
-  in >> bits(l->map_follow_player);
-  in >> bits(l->map_tl);
-  in >> bits(l->map_wanted_at);
-  in >> bits(l->maxx);
-  in >> bits(l->maxy);
-  in >> bits(l->map_mini_valid);
-  in >> bits(l->minx);
-  in >> bits(l->miny);
-  in >> bits(l->monst_count);
-  in >> bits(l->mouse_at);
-  in >> bits(l->mouse_old);
-  in >> bits(l->pixel_map_at);
-  in >> bits(l->seed);
+  in >> bits(my.t->prev_levels);
+  in >> bits(my.t->next_levels);
+
   in >> bits(l->world_at);
+  in >> bits(l->grid_at);
+
   in >> bits(l->difficulty_depth);
+  in >> bits(l->dungeon_walk_order_level_no);
+
+  in >> bits(l->d1000_chance_of_creating_mob_spawner_class_a);
+  in >> bits(l->d1000_chance_of_creating_mob_spawner_class_b);
   in >> bits(l->d1000_chance_of_creating_monst_class_a);
   in >> bits(l->d1000_chance_of_creating_monst_class_b);
   in >> bits(l->d1000_chance_of_creating_monst_class_c);
   in >> bits(l->d1000_chance_of_creating_monst_class_d);
   in >> bits(l->d1000_chance_of_creating_monst_class_e);
-  in >> bits(l->d1000_chance_of_creating_mob_spawner_class_a);
-  in >> bits(l->d1000_chance_of_creating_mob_spawner_class_b);
   in >> bits(l->d1000_chance_of_creating_treasure_class_a);
   in >> bits(l->d1000_chance_of_creating_treasure_class_b);
   in >> bits(l->d1000_chance_of_creating_treasure_class_c);
   in >> bits(l->d1000_chance_of_creating_weapon_class_a);
   in >> bits(l->d1000_chance_of_creating_weapon_class_b);
   in >> bits(l->d1000_chance_of_creating_weapon_class_c);
-  in >> bits(l->minx);
-  in >> bits(l->miny);
+
   in >> bits(l->maxx);
   in >> bits(l->maxy);
+  in >> bits(l->minx);
+  in >> bits(l->miny);
+
+  in >> bits(l->is_cursor_found);
+  in >> bits(l->is_final_level);
+  in >> bits(l->is_first_level);
+  in >> bits(l->is_heatmap_valid);
+  in >> bits(l->is_level_type_dungeon);
+  in >> bits(l->is_level_type_sewer);
+  in >> bits(l->is_map_changed);
+  in >> bits(l->is_map_follow_player);
+  in >> bits(l->is_map_mini_valid);
+  in >> bits(l->is_starting);
+
+  in >> bits(l->cursor_at);
+  in >> bits(l->cursor_old);
+  in >> bits(l->map_br);
+  in >> bits(l->map_tl);
+  in >> bits(l->pixel_map_at);
+
+  in >> bits(l->map_at);
+  in >> bits(l->map_wanted_at);
+
+  in >> bits(l->mouse_at);
+  in >> bits(l->mouse_old);
+
+  in >> bits(l->wobble);
+
+  in >> bits(l->monst_count);
+
+  in >> bits(l->seed);
+
+  in >> bits(l->all_things_id_at);
+
+  in >> bits(l->fbo_light);
 
   l->update_new_level();
-  l->ts_redraw_bg      = 1; // Force redraw
-  l->ts_fade_in_begin  = time_get_time_ms_cached();
-  l->map_changed       = true;
-  l->map_follow_player = true;
+  l->ts_redraw_bg         = 1; // Force redraw
+  l->ts_fade_in_begin     = time_get_time_ms_cached();
+  l->is_map_changed       = true;
+  l->is_map_follow_player = true;
 
   auto p = l->world_at;
   LOG("DGN: Loading things for level %d,%d,%d", p.x, p.y, p.z);

@@ -71,18 +71,16 @@ bool Thing::ascend_dungeon(void)
 
   auto next_level = level->world_at + point3d(0, 0, -2);
 
-  game->init_level(next_level);
-
-  if (is_player()) {
-    game->current_level = next_level;
-  }
-
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {
     if (is_player()) {
       msg("The entrance is permanently blocked!");
     }
     return false;
+  }
+
+  if (is_player()) {
+    game->current_level = next_level;
   }
 
   for (auto x = 0; x < MAP_WIDTH; x++) {

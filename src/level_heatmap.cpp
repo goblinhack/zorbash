@@ -34,7 +34,7 @@ void Level::set_is_lava(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_lava, x, y, (uint8_t) 1);
 }
 
@@ -44,7 +44,7 @@ void Level::unset_is_lava(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_lava, x, y, (uint8_t) 1);
 }
 uint8_t Level::is_brazier(const point p)
@@ -72,7 +72,7 @@ void Level::set_is_brazier(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_brazier, x, y, (uint8_t) 1);
 }
 
@@ -82,7 +82,7 @@ void Level::unset_is_brazier(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_brazier, x, y, (uint8_t) 1);
 }
 uint8_t Level::is_fire(const point p)

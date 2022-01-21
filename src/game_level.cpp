@@ -24,23 +24,23 @@
 #include "my_wid_topcon.hpp"
 #include "my_world.hpp"
 
-void Game::init_level(point3d p, int difficulty_depth, int dungeon_depth)
+void Game::init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no)
 {
-  DBG("Game init level %d,%d,%d", p.x, p.y, p.z);
+  DBG("Game init level %d,%d,%d", world_at.x, world_at.y, world_at.z);
   TRACE_AND_INDENT();
 
-  auto level_seed = seed + p.x + p.y + p.z;
+  auto level_seed = seed + world_at.x + world_at.y + world_at.z;
   TRACE_AND_INDENT();
-  auto l = get(world.levels, p.x, p.y, p.z);
+  auto l = get(world.levels, world_at.x, world_at.y, world_at.z);
   TRACE_AND_INDENT();
   if (! l) {
-    DBG("Create new level at: %d,%d,%d", p.x, p.y, p.z);
-    world.new_level_at(p, level_seed, difficulty_depth, dungeon_depth);
-    l = get(world.levels, p.x, p.y, p.z);
+    DBG("Create new level at: %d,%d,%d", world_at.x, world_at.y, world_at.z);
+    world.new_level_at(world_at, grid_at, level_seed, difficulty_depth, dungeon_walk_order_level_no);
+    l = get(world.levels, world_at.x, world_at.y, world_at.z);
     if (! l) {
       ERR("No level created at: %d,%d,%d", game->current_level.x, game->current_level.y, game->current_level.z);
     }
   } else {
-    LOG("Level already exists: %d,%d,%d", p.x, p.y, p.z);
+    LOG("Level already exists: %d,%d,%d", world_at.x, world_at.y, world_at.z);
   }
 }

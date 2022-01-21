@@ -48,26 +48,26 @@ void Level::handle_input_events(void)
 
   if (state[ game->config.key_map_left ]) {
     map_wanted_at.x -= map_move_scroll_delta;
-    cursor_found      = false;
-    map_follow_player = false;
+    is_cursor_found      = false;
+    is_map_follow_player = false;
   }
 
   if (state[ game->config.key_map_right ]) {
     map_wanted_at.x += map_move_scroll_delta;
-    cursor_found      = false;
-    map_follow_player = false;
+    is_cursor_found      = false;
+    is_map_follow_player = false;
   }
 
   if (state[ game->config.key_map_up ]) {
     map_wanted_at.y -= map_move_scroll_delta;
-    cursor_found      = false;
-    map_follow_player = false;
+    is_cursor_found      = false;
+    is_map_follow_player = false;
   }
 
   if (state[ game->config.key_map_down ]) {
     map_wanted_at.y += map_move_scroll_delta;
-    cursor_found      = false;
-    map_follow_player = false;
+    is_cursor_found      = false;
+    is_map_follow_player = false;
   }
 
   bool up    = state[ game->config.key_move_up ];

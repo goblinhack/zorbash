@@ -56,7 +56,7 @@ if (player) {
   //
   // If following the player scroll in smaller chunks
   //
-  if (map_follow_player) {
+  if (is_map_follow_player) {
     if (fast) {
       map_at.x -= dx;
       map_at.y -= dy;
@@ -176,7 +176,7 @@ void Level::scroll_map_to_player(void)
   mouse_at          = -1;
   mouse_old         = -1;
   ts_redraw_bg      = time_get_time_ms_cached() + 500;
-  map_follow_player = true;
+  is_map_follow_player = true;
 
   map_wanted_at = make_fpoint(player->curr_at) - fpoint(TILES_ACROSS / 2, TILES_DOWN / 2);
 
@@ -229,7 +229,7 @@ void Level::scroll_map_set_target(void)
     return;
   }
 
-  if (player && map_follow_player) {
+  if (player && is_map_follow_player) {
     follow        = make_fpoint(player->curr_at);
     sensitivity   = 0.5;
     x_sensitivity = sensitivity * game->config.video_w_h_ratio;
@@ -261,7 +261,7 @@ void Level::scroll_map_set_target(void)
     if (dy < y1) {
       map_wanted_at.y--;
     }
-  } else if (cursor && ! map_follow_player) {
+  } else if (cursor && ! is_map_follow_player) {
     //
     // Allow the player to scroll around the scene of carnage
     // once dead

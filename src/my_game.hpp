@@ -160,7 +160,7 @@ public:
   void help_select(void);
   void hiscore_select(void);
   void init_jump_paths(void);
-  void init_level(point3d, int difficulty_depth = 0, int dungeon_depth = 0);
+  void init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no);
   void init(void);
   void start(void);
   void place_player(void);

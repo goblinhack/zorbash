@@ -37,7 +37,7 @@ void Thing::cursor_hover_over_check(void)
         level->cursor_at = curr_at;
         level->cursor_describe();
       }
-      level->cursor_found = true;
+      level->is_cursor_found = true;
     }
   }
 }
