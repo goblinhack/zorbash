@@ -16,7 +16,7 @@
 void Level::update_new_level(void)
 {
   TRACE_AND_INDENT();
-  map_mini_valid    = false;
+  is_map_mini_valid = false;
   is_heatmap_valid = false;
 
   scroll_map_to_player_immediately();
@@ -35,7 +35,7 @@ void Level::update_new_level(void)
 void Level::update_same_level(void)
 {
   TRACE_AND_INDENT();
-  map_mini_valid    = false;
+  is_map_mini_valid = false;
   is_heatmap_valid = false;
 
   lights_update_same_level();
@@ -48,7 +48,7 @@ void Level::update_same_level(void)
 void Level::update_same_level_immediately(void)
 {
   TRACE_AND_INDENT();
-  map_mini_valid    = false;
+  is_map_mini_valid = false;
   is_heatmap_valid = false;
 
   scroll_map_to_player_immediately();

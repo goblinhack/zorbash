@@ -445,9 +445,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   }
   out << bits(csum);
 
-  out << bits(my.t->prev_levels);
-  out << bits(my.t->next_levels);
-
   out << bits(my.t->ts_created);
   ts_t ts_saved = time_get_time_ms();
   out << bits(ts_saved);
@@ -456,8 +453,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   out << bits(my.t->_is_light_blocker);
   out << bits(my.t->_is_lit_ever);
-  out << bits(my.t->_is_obs_wall_or_door);
   out << bits(my.t->_is_obs_destructable);
+  out << bits(my.t->_is_obs_wall_or_door);
+
   out << bits(my.t->_fade_in_map);
   out << bits(my.t->_gfx_water);
   out << bits(my.t->_heatmap);
@@ -472,87 +470,104 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_chasm);
   out << bits(my.t->_is_corpse);
   out << bits(my.t->_is_corridor);
+  out << bits(my.t->_is_cursor_path_hazard_for_player);
   out << bits(my.t->_is_deep_water);
   out << bits(my.t->_is_descend_dungeon);
   out << bits(my.t->_is_descend_sewer);
   out << bits(my.t->_is_dirt);
   out << bits(my.t->_is_door);
   out << bits(my.t->_is_dry_grass);
-  out << bits(my.t->_is_wet_grass);
   out << bits(my.t->_is_enchantstone);
-  out << bits(my.t->_is_cursor_path_hazard_for_player);
-  out << bits(my.t->_is_heavy);
   out << bits(my.t->_is_fire);
   out << bits(my.t->_is_floor);
   out << bits(my.t->_is_foilage);
   out << bits(my.t->_is_food);
   out << bits(my.t->_is_gold);
   out << bits(my.t->_is_hazard);
+  out << bits(my.t->_is_heavy);
   out << bits(my.t->_is_key);
   out << bits(my.t->_is_lava);
   out << bits(my.t->_is_lit_currently);
   out << bits(my.t->_is_mob_spawner);
   out << bits(my.t->_is_monst);
   out << bits(my.t->_is_potion);
+  out << bits(my.t->_is_ring);
   out << bits(my.t->_is_ripple);
   out << bits(my.t->_is_rock);
   out << bits(my.t->_is_secret_door);
   out << bits(my.t->_is_shallow_water);
+  out << bits(my.t->_is_shovable);
   out << bits(my.t->_is_skillstone);
   out << bits(my.t->_is_smoke);
   out << bits(my.t->_is_spiderweb);
   out << bits(my.t->_is_sticky);
-  out << bits(my.t->_is_shovable);
   out << bits(my.t->_is_treasure_type);
   out << bits(my.t->_is_wall);
   out << bits(my.t->_is_wand);
-  out << bits(my.t->_is_ring);
+  out << bits(my.t->_is_wet_grass);
+
   out << bits(my.t->_is_map_changed);
 
-  out << bits(my.t->all_things_id_at);
-  out << bits(my.t->cursor_at);
-  out << bits(my.t->cursor_old);
-  out << bits(my.t->cursor_found);
-  out << bits(my.t->fbo_light);
-  out << bits(my.t->is_level_type_dungeon);
-  out << bits(my.t->is_heatmap_valid);
-  out << bits(my.t->is_level_type_sewer);
-  out << bits(my.t->is_starting);
-  out << bits(my.t->map_at);
-  out << bits(my.t->map_br);
-  out << bits(my.t->map_changed);
-  out << bits(my.t->map_follow_player);
-  out << bits(my.t->map_tl);
-  out << bits(my.t->map_wanted_at);
-  out << bits(my.t->maxx);
-  out << bits(my.t->maxy);
-  out << bits(my.t->map_mini_valid);
-  out << bits(my.t->minx);
-  out << bits(my.t->miny);
-  out << bits(my.t->monst_count);
-  out << bits(my.t->mouse_at);
-  out << bits(my.t->mouse_old);
-  out << bits(my.t->pixel_map_at);
-  out << bits(my.t->seed);
+  out << bits(my.t->prev_levels);
+  out << bits(my.t->next_levels);
+
   out << bits(my.t->world_at);
+  out << bits(my.t->grid_at);
+
   out << bits(my.t->difficulty_depth);
+  out << bits(my.t->dungeon_walk_order_level_no);
+
+  out << bits(my.t->d1000_chance_of_creating_mob_spawner_class_a);
+  out << bits(my.t->d1000_chance_of_creating_mob_spawner_class_b);
   out << bits(my.t->d1000_chance_of_creating_monst_class_a);
   out << bits(my.t->d1000_chance_of_creating_monst_class_b);
   out << bits(my.t->d1000_chance_of_creating_monst_class_c);
   out << bits(my.t->d1000_chance_of_creating_monst_class_d);
   out << bits(my.t->d1000_chance_of_creating_monst_class_e);
-  out << bits(my.t->d1000_chance_of_creating_mob_spawner_class_a);
-  out << bits(my.t->d1000_chance_of_creating_mob_spawner_class_b);
   out << bits(my.t->d1000_chance_of_creating_treasure_class_a);
   out << bits(my.t->d1000_chance_of_creating_treasure_class_b);
   out << bits(my.t->d1000_chance_of_creating_treasure_class_c);
   out << bits(my.t->d1000_chance_of_creating_weapon_class_a);
   out << bits(my.t->d1000_chance_of_creating_weapon_class_b);
   out << bits(my.t->d1000_chance_of_creating_weapon_class_c);
-  out << bits(my.t->minx);
-  out << bits(my.t->miny);
+
   out << bits(my.t->maxx);
   out << bits(my.t->maxy);
+  out << bits(my.t->minx);
+  out << bits(my.t->miny);
+
+  out << bits(my.t->is_cursor_found);
+  out << bits(my.t->is_final_level);
+  out << bits(my.t->is_first_level);
+  out << bits(my.t->is_heatmap_valid);
+  out << bits(my.t->is_level_type_dungeon);
+  out << bits(my.t->is_level_type_sewer);
+  out << bits(my.t->is_map_changed);
+  out << bits(my.t->is_map_follow_player);
+  out << bits(my.t->is_map_mini_valid);
+  out << bits(my.t->is_starting);
+
+  out << bits(my.t->cursor_at);
+  out << bits(my.t->cursor_old);
+  out << bits(my.t->map_br);
+  out << bits(my.t->map_tl);
+  out << bits(my.t->pixel_map_at);
+
+  out << bits(my.t->map_at);
+  out << bits(my.t->map_wanted_at);
+
+  out << bits(my.t->mouse_at);
+  out << bits(my.t->mouse_old);
+
+  out << bits(my.t->wobble);
+
+  out << bits(my.t->monst_count);
+
+  out << bits(my.t->seed);
+
+  out << bits(my.t->all_things_id_at);
+
+  out << bits(my.t->fbo_light);
 
 #ifdef ENABLE_DEBUG_THING_SER
   LOG("DGN: Check things");

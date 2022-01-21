@@ -25,7 +25,7 @@ std::string Level::to_string(void)
 uint32_t Level::num(void)
 {
   TRACE_NO_INDENT();
-  return dungeon_depth;
+  return dungeon_walk_order_level_no;
 }
 
 uint8_t Level::is_acid(const point p)
@@ -52,7 +52,7 @@ void Level::set_is_acid(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_acid, x, y, (uint8_t) 1);
 }
 
@@ -62,7 +62,7 @@ void Level::unset_is_acid(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_acid, x, y, (uint8_t) 1);
 }
 
@@ -90,7 +90,7 @@ void Level::set_is_chasm(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_chasm, x, y, (uint8_t) 1);
 }
 
@@ -100,7 +100,7 @@ void Level::unset_is_chasm(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_chasm, x, y, (uint8_t) 1);
 }
 
@@ -128,7 +128,7 @@ void Level::set_is_hazard(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_hazard, x, y, (uint8_t) 1);
 }
 
@@ -138,7 +138,7 @@ void Level::unset_is_hazard(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_hazard, x, y, (uint8_t) 1);
 }
 
@@ -166,7 +166,7 @@ void Level::set_is_cursor_path_hazard_for_player(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_cursor_path_hazard_for_player, x, y, (uint8_t) 1);
 }
 
@@ -176,7 +176,7 @@ void Level::unset_is_cursor_path_hazard_for_player(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_cursor_path_hazard_for_player, x, y, (uint8_t) 1);
 }
 
@@ -204,7 +204,7 @@ void Level::set_is_heavy(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_heavy, x, y, (uint8_t) 1);
 }
 
@@ -214,7 +214,7 @@ void Level::unset_is_heavy(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_heavy, x, y, (uint8_t) 1);
 }
 
@@ -242,7 +242,7 @@ void Level::set_is_secret_door(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_secret_door, x, y, (uint8_t) 1);
 }
 
@@ -252,7 +252,7 @@ void Level::unset_is_secret_door(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_secret_door, x, y, (uint8_t) 1);
 }
 
@@ -280,7 +280,7 @@ void Level::set_is_ripple(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_ripple, x, y, (uint8_t) 1);
 }
 
@@ -290,7 +290,7 @@ void Level::unset_is_ripple(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_ripple, x, y, (uint8_t) 1);
 }
 
@@ -318,7 +318,7 @@ void Level::set_is_barrel(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_barrel, x, y, (uint8_t) 1);
 }
 
@@ -328,7 +328,7 @@ void Level::unset_is_barrel(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_barrel, x, y, (uint8_t) 1);
 }
 
@@ -356,7 +356,7 @@ void Level::set_is_mob_spawner(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_mob_spawner, x, y, (uint8_t) 1);
 }
 
@@ -366,7 +366,7 @@ void Level::unset_is_mob_spawner(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_mob_spawner, x, y, (uint8_t) 1);
 }
 
@@ -394,7 +394,7 @@ void Level::set_is_potion(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_potion, x, y, (uint8_t) 1);
 }
 
@@ -404,7 +404,7 @@ void Level::unset_is_potion(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_potion, x, y, (uint8_t) 1);
 }
 
@@ -432,7 +432,7 @@ void Level::set_is_wand(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_wand, x, y, (uint8_t) 1);
 }
 
@@ -442,7 +442,7 @@ void Level::unset_is_wand(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_wand, x, y, (uint8_t) 1);
 }
 
@@ -470,7 +470,7 @@ void Level::set_is_ring(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_ring, x, y, (uint8_t) 1);
 }
 
@@ -480,7 +480,7 @@ void Level::unset_is_ring(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_ring, x, y, (uint8_t) 1);
 }
 
@@ -544,7 +544,7 @@ void Level::set_gfx_water(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_gfx_water, x, y, (uint8_t) 1);
 }
 
@@ -554,7 +554,7 @@ void Level::unset_gfx_water(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_gfx_water, x, y, (uint8_t) 1);
 }
 
@@ -582,7 +582,7 @@ void Level::set_is_deep_water(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_deep_water, x, y, (uint8_t) 1);
 }
 
@@ -592,7 +592,7 @@ void Level::unset_is_deep_water(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_deep_water, x, y, (uint8_t) 1);
 }
 
@@ -620,7 +620,7 @@ void Level::set_is_shallow_water(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_shallow_water, x, y, (uint8_t) 1);
 }
 
@@ -630,7 +630,7 @@ void Level::unset_is_shallow_water(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_shallow_water, x, y, (uint8_t) 1);
 }
 
@@ -670,7 +670,7 @@ void Level::set_is_wall(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_wall, x, y, (uint8_t) 1);
 }
 
@@ -680,7 +680,7 @@ void Level::unset_is_wall(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_wall, x, y, (uint8_t) 1);
 }
 
@@ -708,7 +708,7 @@ void Level::set_is_corridor(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_corridor, x, y, (uint8_t) 1);
 }
 
@@ -718,7 +718,7 @@ void Level::unset_is_corridor(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_corridor, x, y, (uint8_t) 1);
 }
 
@@ -746,7 +746,7 @@ void Level::set_is_bridge(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_bridge, x, y, (uint8_t) 1);
 }
 
@@ -756,7 +756,7 @@ void Level::unset_is_bridge(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_bridge, x, y, (uint8_t) 1);
 }
 
@@ -784,7 +784,7 @@ void Level::set_is_dirt(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_dirt, x, y, (uint8_t) 1);
 }
 
@@ -794,7 +794,7 @@ void Level::unset_is_dirt(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_dirt, x, y, (uint8_t) 1);
 }
 
@@ -822,7 +822,7 @@ void Level::set_is_dry_grass(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_dry_grass, x, y, (uint8_t) 1);
 }
 
@@ -832,7 +832,7 @@ void Level::unset_is_dry_grass(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_dry_grass, x, y, (uint8_t) 1);
 }
 
@@ -860,7 +860,7 @@ void Level::set_is_wet_grass(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_wet_grass, x, y, (uint8_t) 1);
 }
 
@@ -870,7 +870,7 @@ void Level::unset_is_wet_grass(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_wet_grass, x, y, (uint8_t) 1);
 }
 
@@ -898,7 +898,7 @@ void Level::set_is_enchantstone(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_enchantstone, x, y, (uint8_t) 1);
 }
 
@@ -908,7 +908,7 @@ void Level::unset_is_enchantstone(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_enchantstone, x, y, (uint8_t) 1);
 }
 
@@ -936,7 +936,7 @@ void Level::set_is_skillstone(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_skillstone, x, y, (uint8_t) 1);
 }
 
@@ -946,7 +946,7 @@ void Level::unset_is_skillstone(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_skillstone, x, y, (uint8_t) 1);
 }
 
@@ -974,7 +974,7 @@ void Level::set_is_foilage(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_foilage, x, y, (uint8_t) 1);
 }
 
@@ -984,7 +984,7 @@ void Level::unset_is_foilage(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_foilage, x, y, (uint8_t) 1);
 }
 
@@ -1012,7 +1012,7 @@ void Level::set_is_spiderweb(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_spiderweb, x, y, (uint8_t) 1);
 }
 
@@ -1022,7 +1022,7 @@ void Level::unset_is_spiderweb(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_spiderweb, x, y, (uint8_t) 1);
 }
 
@@ -1050,7 +1050,7 @@ void Level::set_is_sticky(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_sticky, x, y, (uint8_t) 1);
 }
 
@@ -1060,7 +1060,7 @@ void Level::unset_is_sticky(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_sticky, x, y, (uint8_t) 1);
 }
 
@@ -1088,7 +1088,7 @@ void Level::set_is_shovable(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_shovable, x, y, (uint8_t) 1);
 }
 
@@ -1098,7 +1098,7 @@ void Level::unset_is_shovable(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_shovable, x, y, (uint8_t) 1);
 }
 
@@ -1126,7 +1126,7 @@ void Level::set_is_floor(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_floor, x, y, (uint8_t) 1);
 }
 
@@ -1136,7 +1136,7 @@ void Level::unset_is_floor(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_floor, x, y, (uint8_t) 1);
 }
 
@@ -1164,7 +1164,7 @@ void Level::set_is_rock(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_rock, x, y, (uint8_t) 1);
 }
 
@@ -1174,7 +1174,7 @@ void Level::unset_is_rock(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_rock, x, y, (uint8_t) 1);
 }
 
@@ -1202,7 +1202,7 @@ void Level::set_is_able_to_stand_on(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   incr(_is_able_to_stand_on, x, y, (uint8_t) 1);
 }
 
@@ -1212,7 +1212,7 @@ void Level::unset_is_able_to_stand_on(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  map_changed = true;
+  is_map_changed = true;
   decr(_is_able_to_stand_on, x, y, (uint8_t) 1);
 }
 
@@ -2021,7 +2021,7 @@ void Level::unset_is_lit_currently_no_check(const int x, const int y)
   set_no_check(_is_lit_currently, x, y, (uint8_t) 0);
 }
 
-uint32_t Level::is_map_changed(const int x, const int y)
+uint32_t Level::get_is_map_changed(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return false;
@@ -2029,7 +2029,10 @@ uint32_t Level::is_map_changed(const int x, const int y)
   return (get(_is_map_changed, x, y));
 }
 
-uint32_t Level::is_map_changed_no_check(const int x, const int y) { return (get_no_check(_is_map_changed, x, y)); }
+uint32_t Level::get_is_map_changed_no_check(const int x, const int y)
+{
+  return (get_no_check(_is_map_changed, x, y));
+}
 
 void Level::set_is_map_changed_no_check(const int x, const int y) { set(_is_map_changed, x, y, game->tick_current); }
 

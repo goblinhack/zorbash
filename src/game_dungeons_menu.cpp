@@ -244,7 +244,7 @@ static void game_dungeons_update_button(game_dungeons_ctx *ctx, Widp b, int x, i
   }
 
   char tmp[ MAXSHORTSTR ];
-  snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order);
+  snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order_level_no);
   wid_set_text(b, tmp);
   wid_set_text_lhs(b, true);
   wid_set_text_top(b, true);
@@ -462,7 +462,7 @@ static void game_dungeons_create_level_at(game_dungeons_ctx *ctx, int x, int y)
   //
   // Create a level of the given difficulty at a fixed location
   //
-  game->init_level(level_at, node->depth, node->walk_order);
+  game->init_level(level_at, point(x, y), node->depth, node->walk_order_level_no);
   auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (! l) {
     return;
@@ -473,6 +473,11 @@ static void game_dungeons_create_level_at(game_dungeons_ctx *ctx, int x, int y)
   if (node->is_ascend_dungeon) {
     game->level         = l;
     game->current_level = level_at;
+    l->is_first_level   = true;
+  }
+
+  if (node->is_descend_dungeon) {
+    l->is_final_level = true;
   }
 }
 
@@ -547,12 +552,12 @@ static void game_join_levels(game_dungeons_ctx *ctx)
           DIE("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
         }
 
-        if (alt->walk_order < node->walk_order) {
+        if (alt->walk_order_level_no < node->walk_order_level_no) {
           //
           // Closer to the start
           //
           l->prev_levels.push_back(alt_at);
-        } else if (alt->walk_order > node->walk_order) {
+        } else if (alt->walk_order_level_no > node->walk_order_level_no) {
           //
           // Closer to the end
           //
@@ -659,7 +664,7 @@ static void game_dungeons_tick(Widp w)
           continue;
         }
 
-        if (node->walk_order == ctx->generating_level) {
+        if (node->walk_order_level_no == ctx->generating_level) {
           ctx->generating_level++;
           game_dungeons_create_level_at(ctx, x, y);
           game_dungeons_update_buttons(ctx->w);
@@ -1026,7 +1031,7 @@ void game_grid_node_walk(game_dungeons_ctx *ctx)
   std::list< DungeonNode * > open;
   std::list< DungeonNode * > same_depth_nodes;
   std::list< DungeonNode * > next_depth_nodes;
-  int                        walk_order = 0;
+  int                        walk_order_level_no = 0;
 
   for (auto y = 0; y < ctx->nodes->grid_height; y++) {
     for (auto x = 0; x < ctx->nodes->grid_width; x++) {
@@ -1100,8 +1105,8 @@ void game_grid_node_walk(game_dungeons_ctx *ctx)
       }
     }
 
-    if (! curr_node->walk_order) {
-      curr_node->walk_order = ++walk_order;
+    if (! curr_node->walk_order_level_no) {
+      curr_node->walk_order_level_no = ++walk_order_level_no;
     }
 
     //
@@ -1109,7 +1114,7 @@ void game_grid_node_walk(game_dungeons_ctx *ctx)
     //
     if (same_depth_nodes.empty() && next_depth_nodes.empty()) {
       ctx->generating_level         = 1;
-      ctx->max_generating_level     = walk_order;
+      ctx->max_generating_level     = walk_order_level_no;
       curr_node->is_descend_dungeon = true;
       break;
     }

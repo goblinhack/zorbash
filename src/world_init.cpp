@@ -24,15 +24,16 @@ void World::clear(void)
   }
 }
 
-Levelp World::new_level_at(point3d at, uint32_t seed, int difficulty_depth, int dungeon_depth)
+Levelp World::new_level_at(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth,
+                           int dungeon_walk_order_level_no)
 {
   TRACE_AND_INDENT();
-  auto old_level = get(levels, at.x, at.y, at.z);
+  auto old_level = get(levels, world_at.x, world_at.y, world_at.z);
   delete old_level;
 
   auto new_level = new Level();
-  set(levels, at.x, at.y, at.z, new_level);
-  new_level->create(at, seed, difficulty_depth, dungeon_depth);
+  set(levels, world_at.x, world_at.y, world_at.z, new_level);
+  new_level->create(world_at, seed, difficulty_depth, dungeon_walk_order_level_no);
 
   return new_level;
 }

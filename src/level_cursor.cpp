@@ -22,7 +22,7 @@ void Level::cursor_check_if_scroll_needed(void)
   //
   // Not sure why I have this and what it does :)
   //
-  if (map_follow_player) {
+  if (is_map_follow_player) {
     if (cursor) {
       if (player) {
         auto d = distance(player->curr_at, cursor->curr_at);
@@ -77,7 +77,7 @@ void Level::cursor_move(void)
     dy *= scale;
 
     map_wanted_at += fpoint(dx, dy);
-    map_follow_player = false;
+    is_map_follow_player = false;
     return;
   }
 
@@ -95,12 +95,12 @@ void Level::cursor_move(void)
     mouse_at = mouse_tick;
     if (mouse_at > mouse_old) {
       mouse_old    = mouse_at;
-      cursor_found = false;
+      is_cursor_found = false;
     }
   } else {
     mouse_at          = mouse_tick;
     mouse_old         = mouse_at;
-    map_follow_player = true;
+    is_map_follow_player = true;
   }
 
   if (cursor) {

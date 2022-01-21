@@ -310,7 +310,7 @@ void Thing::killed(Thingp defeater, const char *reason)
         game->config.hiscores.add_new_hiscore(this, title(), reason);
       }
 
-      level->map_follow_player = false;
+      level->is_map_follow_player = false;
       game->dead_select(reason);
     } else if (is_loggable()) {
       dbg("%s killed, %s", The_no_dying.c_str(), reason);

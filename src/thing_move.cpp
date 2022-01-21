@@ -516,8 +516,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   if (is_player()) {
     set_where_i_failed_to_collect_last(point(-1, -1));
 
-    if (! level->map_follow_player) {
-      level->map_follow_player = true;
+    if (! level->is_map_follow_player) {
+      level->is_map_follow_player = true;
     }
   }
 
@@ -696,7 +696,7 @@ void Thing::update_pos(point to, bool immediately)
 
   if (is_player()) {
     if (((int) old_at.x != (int) new_at.x) || ((int) old_at.y != (int) new_at.y)) {
-      level->map_mini_valid = false;
+      level->is_map_mini_valid = false;
     }
   }
 
@@ -771,8 +771,8 @@ void Thing::move_to_immediately(point to)
   }
 
   if (is_player()) {
-    if (! level->map_follow_player) {
-      level->map_follow_player = true;
+    if (! level->is_map_follow_player) {
+      level->is_map_follow_player = true;
     }
   }
 

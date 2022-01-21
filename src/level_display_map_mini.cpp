@@ -62,6 +62,6 @@ void Level::display_map_mini(void)
   }
 
   if (old_map_mini_over != game->map_mini_over) {
-    map_mini_valid = false;
+    is_map_mini_valid = false;
   }
 }

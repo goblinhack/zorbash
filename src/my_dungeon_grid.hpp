@@ -19,7 +19,11 @@ public:
   // to adjoining depths. Depth increases as we get closer to the exit.
   //
   int depth {0};
-  int walk_order {};
+
+  //
+  // Used only in the game start when creating a grid of levels
+  //
+  int walk_order_level_no {};
 
   //
   // pass 1 is the main dungeon

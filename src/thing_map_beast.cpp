@@ -51,7 +51,7 @@ void Thing::map_beast_check(void)
   auto count = get_map_beast_carried_count();
   if (get_map_beast_count() != count) {
     if (is_player()) {
-      level->map_mini_valid = false;
+      level->is_map_mini_valid = false;
     }
   }
   set_map_beast_count(count);

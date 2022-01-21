@@ -412,5 +412,5 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
   blit_flush();
   blit_fbo_unbind();
   glEnable(GL_TEXTURE_2D);
-  map_mini_valid = true;
+  is_map_mini_valid = true;
 }

@@ -59,11 +59,6 @@ bool Thing::ascend_sewer(void)
   TRACE_AND_INDENT();
 
   auto next_level = level->world_at + point3d(0, 0, -1);
-  game->init_level(next_level);
-
-  if (is_player()) {
-    game->current_level = next_level;
-  }
 
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {
@@ -71,6 +66,10 @@ bool Thing::ascend_sewer(void)
       msg("The entrance is permanently blocked!");
     }
     return false;
+  }
+
+  if (is_player()) {
+    game->current_level = next_level;
   }
 
   int x = curr_at.x;
