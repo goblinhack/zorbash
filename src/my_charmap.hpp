@@ -91,8 +91,8 @@ public:
   bool is_gold {false};
   bool is_key {false};
   bool is_lava {false};
-  bool is_mob_spawner_class_b {false};
-  bool is_mob_spawner_class_a {false};
+  bool is_mob_challenge_class_b {false};
+  bool is_mob_challenge_class_a {false};
   bool is_monst_class_a {false};
   bool is_monst_class_b {false};
   bool is_monst_class_c {false};

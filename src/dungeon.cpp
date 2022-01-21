@@ -860,7 +860,7 @@ bool Dungeon::is_monst_class_e(const int x, const int y)
   return false;
 }
 
-bool Dungeon::is_mob_spawner_any(const int x, const int y)
+bool Dungeon::is_mob_any(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -870,34 +870,17 @@ bool Dungeon::is_mob_spawner_any(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_spawner_class_a) {
+    if (v.is_mob_challenge_class_a) {
       return true;
     }
-    if (v.is_mob_spawner_class_b) {
-      return true;
-    }
-  }
-  return false;
-}
-
-bool Dungeon::is_mob_spawner_class_a(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
-  }
-
-  for (auto d = 0; d < map_depth; d++) {
-    auto c = getc(x, y, d);
-    auto v = get(Charmap::all_charmaps, c);
-
-    if (v.is_mob_spawner_class_a) {
+    if (v.is_mob_challenge_class_b) {
       return true;
     }
   }
   return false;
 }
 
-bool Dungeon::is_mob_spawner_class_b(const int x, const int y)
+bool Dungeon::is_mob_challenge_class_a(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -907,7 +890,24 @@ bool Dungeon::is_mob_spawner_class_b(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_mob_spawner_class_b) {
+    if (v.is_mob_challenge_class_a) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Dungeon::is_mob_challenge_class_b(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
+  }
+
+  for (auto d = 0; d < map_depth; d++) {
+    auto c = getc(x, y, d);
+    auto v = get(Charmap::all_charmaps, c);
+
+    if (v.is_mob_challenge_class_b) {
       return true;
     }
   }

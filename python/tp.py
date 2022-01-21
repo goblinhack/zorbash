@@ -880,11 +880,11 @@ class Tp:
     def set_unused_flag166(self, value):
         my.tp_set_unused_flag166(self, value)
 
-    def set_is_mob_spawner_class_b(self, value):
-        my.tp_set_is_mob_spawner_class_b(self, value)
+    def set_is_mob_challenge_class_b(self, value):
+        my.tp_set_is_mob_challenge_class_b(self, value)
 
-    def set_is_mob_spawner_class_a(self, value):
-        my.tp_set_is_mob_spawner_class_a(self, value)
+    def set_is_mob_challenge_class_a(self, value):
+        my.tp_set_is_mob_challenge_class_a(self, value)
 
     def set_is_monst_class_d(self, value):
         my.tp_set_is_monst_class_d(self, value)
@@ -1336,8 +1336,8 @@ class Tp:
     def set_charge_count(self, value):
         my.tp_set_charge_count(self, value)
 
-    def set_distance_mob_spawner_max(self, value):
-        my.tp_set_distance_mob_spawner_max(self, value)
+    def set_distance_mob_max(self, value):
+        my.tp_set_distance_mob_max(self, value)
 
     def set_is_skill(self, value):
         my.tp_set_is_skill(self, value)
@@ -1612,8 +1612,8 @@ class Tp:
     def set_damage_received_doubled_from_water(self, value):
         my.tp_set_damage_received_doubled_from_water(self, value)
 
-    def set_is_mob_spawner(self, value):
-        my.tp_set_is_mob_spawner(self, value)
+    def set_is_mob(self, value):
+        my.tp_set_is_mob(self, value)
 
     def set_is_treasure_eater(self, value):
         my.tp_set_is_treasure_eater(self, value)

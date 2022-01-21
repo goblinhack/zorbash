@@ -132,7 +132,7 @@ private:
   int _distance_avoid {};
   int _distance_jump {};
   int _distance_leader_max {};
-  int _distance_mob_spawner_max {};
+  int _distance_mob_max {};
   int _distance_minion_vision_shared {};
   int _distance_recruitment_max {};
   int _distance_throw {};
@@ -333,7 +333,7 @@ private:
   int _is_meat_eater {};
   int _is_metal {};
   int _is_minion {};
-  int _is_mob_spawner {};
+  int _is_mob {};
   int _is_monst {};
   int _is_moveable {};
   int _is_msg {};
@@ -512,8 +512,8 @@ private:
   int _is_treasure {};
   int _is_monst_class_e {};
   int _unused_flag166 {};
-  int _is_mob_spawner_class_b {};
-  int _is_mob_spawner_class_a {};
+  int _is_mob_challenge_class_b {};
+  int _is_mob_challenge_class_a {};
   int _is_monst_class_d {};
   int _unused_flag17 {};
   int _is_monst_class_c {};
@@ -1014,7 +1014,7 @@ public:
   int distance_avoid(void) const { return _distance_avoid; }
   int distance_jump(void) const { return _distance_jump; }
   int distance_leader_max(void) const { return _distance_leader_max; }
-  int distance_mob_spawner_max(void) const { return _distance_mob_spawner_max; }
+  int distance_mob_max(void) const { return _distance_mob_max; }
   int distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
   int distance_recruitment_max(void) const { return _distance_recruitment_max; }
   int distance_throw(void) const { return _distance_throw; }
@@ -1220,7 +1220,7 @@ public:
   int is_meat(void) const { return _is_meat; }
   int is_metal(void) const { return _is_metal; }
   int is_minion(void) const { return _is_minion; }
-  int is_mob_spawner(void) const { return _is_mob_spawner; }
+  int is_mob(void) const { return _is_mob; }
   int is_monst(void) const { return _is_monst; }
   int is_moveable(void) const { return _is_moveable; }
   int is_msg(void) const { return _is_msg; }
@@ -1392,8 +1392,8 @@ public:
   int is_treasure(void) const { return _is_treasure; }
   int is_monst_class_e(void) const { return _is_monst_class_e; }
   int unused_flag166(void) const { return _unused_flag166; }
-  int is_mob_spawner_class_b(void) const { return _is_mob_spawner_class_b; }
-  int is_mob_spawner_class_a(void) const { return _is_mob_spawner_class_a; }
+  int is_mob_challenge_class_b(void) const { return _is_mob_challenge_class_b; }
+  int is_mob_challenge_class_a(void) const { return _is_mob_challenge_class_a; }
   int is_monst_class_d(void) const { return _is_monst_class_d; }
   int unused_flag16(void) const { return _unused_flag16; }
   int is_monst_class_c(void) const { return _is_monst_class_c; }
@@ -1560,7 +1560,7 @@ public:
   void set_distance_avoid(int v) { _distance_avoid = v; }
   void set_distance_jump(int v) { _distance_jump = v; }
   void set_distance_leader_max(int v) { _distance_leader_max = v; }
-  void set_distance_mob_spawner_max(int v) { _distance_mob_spawner_max = v; }
+  void set_distance_mob_max(int v) { _distance_mob_max = v; }
   void set_distance_minion_vision_shared(int v) { _distance_minion_vision_shared = v; }
   void set_distance_recruitment_max(int v) { _distance_recruitment_max = v; }
   void set_distance_throw(int v) { _distance_throw = v; }
@@ -1763,7 +1763,7 @@ public:
   void set_is_meat(int v) { _is_meat = v; }
   void set_is_metal(int v) { _is_metal = v; }
   void set_is_minion(int v) { _is_minion = v; }
-  void set_is_mob_spawner(int v) { _is_mob_spawner = v; }
+  void set_is_mob(int v) { _is_mob = v; }
   void set_is_monst(int v) { _is_monst = v; }
   void set_is_moveable(int v) { _is_moveable = v; }
   void set_is_msg(int v) { _is_msg = v; }
@@ -2020,8 +2020,8 @@ public:
   void set_is_treasure(int v) { _is_treasure = v; }
   void set_is_monst_class_e(int v) { _is_monst_class_e = v; }
   void set_unused_flag166(int v) { _unused_flag166 = v; }
-  void set_is_mob_spawner_class_b(int v) { _is_mob_spawner_class_b = v; }
-  void set_is_mob_spawner_class_a(int v) { _is_mob_spawner_class_a = v; }
+  void set_is_mob_challenge_class_b(int v) { _is_mob_challenge_class_b = v; }
+  void set_is_mob_challenge_class_a(int v) { _is_mob_challenge_class_a = v; }
   void set_is_monst_class_d(int v) { _is_monst_class_d = v; }
   void set_unused_flag16(int v) { _unused_flag16 = v; }
   void set_is_monst_class_c(int v) { _is_monst_class_c = v; }
@@ -2177,8 +2177,8 @@ class Tp *tp_random_item_not_a_container_class_a(void);
 class Tp *tp_random_item_not_a_container_class_b(void);
 class Tp *tp_random_item_not_a_container_class_c(void);
 class Tp *tp_random_key(void);
-class Tp *tp_random_mob_spawner_class_a(void);
-class Tp *tp_random_mob_spawner_class_b(void);
+class Tp *tp_random_mob_challenge_class_a(void);
+class Tp *tp_random_mob_challenge_class_b(void);
 class Tp *tp_random_mob(void);
 class Tp *tp_random_monst(void);
 class Tp *tp_random_pink_splatter(void);

@@ -49,8 +49,8 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     //
     if ((top_owner != this) && (immediate_owner != this)) {
       if (immediate_owner) {
-        log("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
-        log("Top owner of %s is %s", what->to_short_string().c_str(), what->get_top_owner()->to_string().c_str());
+        dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
+        dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->get_top_owner()->to_string().c_str());
         err("Attempt to drop %s which is not carried and owned by %s", what->to_short_string().c_str(),
             immediate_owner->to_string().c_str());
       } else {
@@ -155,8 +155,8 @@ bool Thing::drop_into_ether(Thingp what)
   auto immediate_owner = what->get_immediate_owner();
   if ((top_owner != this) && (immediate_owner != this)) {
     if (immediate_owner) {
-      log("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
-      log("Top owner of %s is %s", what->to_short_string().c_str(), what->get_top_owner()->to_string().c_str());
+      dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
+      dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->get_top_owner()->to_string().c_str());
       err("Attempt to drop into ether %s which is not carried and owned by %s", what->to_short_string().c_str(),
           immediate_owner->to_string().c_str());
     } else {

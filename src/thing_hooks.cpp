@@ -137,8 +137,8 @@ void Thing::hooks_remove()
     }
   }
 
-  if (get_immediate_mob_spawner_id().ok()) {
-    remove_mob_spawner();
+  if (get_immediate_mob_id().ok()) {
+    remove_mob();
   }
 
   if (get_leader_id().ok()) {
@@ -216,9 +216,9 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
-        auto o = t->get_immediate_mob_spawner();
+        auto o = t->get_immediate_mob();
         if (o == this) {
-          t->remove_mob_spawner();
+          t->remove_mob();
         }
       }
     }
@@ -276,8 +276,8 @@ void Thing::remove_all_references()
           if (id == t->get_infop()->owner_id) {
             err("thing is still attached to (owner) %s", t->to_string().c_str());
           }
-          if (id == t->get_infop()->mob_spawner_id) {
-            err("thing is still attached to (mob_spawner) %s", t->to_string().c_str());
+          if (id == t->get_infop()->mob_id) {
+            err("thing is still attached to (mob) %s", t->to_string().c_str());
           }
           if (id == t->get_infop()->leader_id) {
             err("thing is still attached to (leader) %s", t->to_string().c_str());
@@ -316,8 +316,8 @@ void Thing::remove_all_references()
         if (id == t->get_infop()->owner_id) {
           err("interesting thing is still attached to (owner) %s", t->to_string().c_str());
         }
-        if (id == t->get_infop()->mob_spawner_id) {
-          err("interesting thing is still attached to (mob_spawner) %s", t->to_string().c_str());
+        if (id == t->get_infop()->mob_id) {
+          err("interesting thing is still attached to (mob) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->leader_id) {
           err("interesting thing is still attached to (leader) %s", t->to_string().c_str());
@@ -354,8 +354,8 @@ void Thing::remove_all_references()
         if (id == t->get_infop()->owner_id) {
           err("interesting thing is still attached to (owner) %s", t->to_string().c_str());
         }
-        if (id == t->get_infop()->mob_spawner_id) {
-          err("interesting thing is still attached to (mob_spawner) %s", t->to_string().c_str());
+        if (id == t->get_infop()->mob_id) {
+          err("interesting thing is still attached to (mob) %s", t->to_string().c_str());
         }
         if (id == t->get_infop()->leader_id) {
           err("interesting thing is still attached to (leader) %s", t->to_string().c_str());

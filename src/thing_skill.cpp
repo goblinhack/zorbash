@@ -195,7 +195,7 @@ int Thing::get_skillstone_count(void)
     if (! t->is_skillstone()) {
       continue;
     }
-    log("Found a skillstone: %s", t->to_string().c_str());
+    dbg("Found a skillstone: %s", t->to_string().c_str());
     v++;
   }
   return v;
@@ -263,6 +263,6 @@ bool Thing::learn_random_skill(void)
   }
 
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
-  log("Add this skill: %s", chosen->name().c_str());
+  dbg("Add this skill: %s", chosen->name().c_str());
   return skill_add(chosen);
 }

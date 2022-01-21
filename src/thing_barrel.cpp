@@ -36,7 +36,7 @@ void Thing::barrel_tick(void)
     FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
     {
       if (! t->is_barrel()) {
-        t->dbg_("Crushed by a barrel");
+        t->log("Crushed by a barrel");
         t->is_attacked_with_damage_crush(this, get_damage_crush());
       }
     }
@@ -48,7 +48,7 @@ void Thing::barrel_tick(void)
     FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
     {
       if (t->is_barrel()) {
-        log("Crushed by a barrel");
+        dbg("Crushed by a barrel");
         is_attacked_with_damage_crush(t, t->get_damage_crush());
       }
     }

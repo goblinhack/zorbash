@@ -169,7 +169,7 @@ public:
   uint64_t i_set_is_key                           : 1 {};
   uint64_t i_set_is_lava                          : 1 {};
   uint64_t i_set_is_light_blocker                 : 1 {};
-  uint64_t i_set_is_mob_spawner                   : 1 {};
+  uint64_t i_set_is_mob                   : 1 {};
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_necrotic_danger_level         : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
@@ -261,13 +261,13 @@ public:
   Thingp get_equip_carry_anim(int equip);
   Thingp get_equip(int equip);
   Thingp get_equip_use_anim(int equip);
-  Thingp get_immediate_mob_spawner();
+  Thingp get_immediate_mob();
   Thingp get_immediate_owner();
   Thingp get_immediate_spawned_owner();
   Thingp get_leader();
   Thingp get_most_dangerous_adjacent_thing(void);
   Thingp get_most_dangerous_visible_thing(void);
-  Thingp get_top_mob_spawner();
+  Thingp get_top_mob();
   Thingp get_top_owner();
   Thingp get_top_spawned_owner();
   Thingp in_the_way(const point s, const point e);
@@ -461,9 +461,9 @@ public:
   bool too_far_from_leader(point p);
   bool too_far_from_leader(point p, float delta);
   bool too_far_from_leader(void);
-  bool too_far_from_mob_spawner(point p);
-  bool too_far_from_mob_spawner(point p, float delta);
-  bool too_far_from_mob_spawner(void);
+  bool too_far_from_mob(point p);
+  bool too_far_from_mob(point p, float delta);
+  bool too_far_from_mob(void);
   bool map_treasure_available(void);
   bool try_harder_to_jump(void);
   bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
@@ -508,12 +508,12 @@ public:
   const Dice &get_spawn_group_size_dice(void);
   const Dice &get_resurrect_dice(void);
 
-  const ThingId &get_immediate_mob_spawner_id(void);
+  const ThingId &get_immediate_mob_id(void);
   const ThingId &get_leader_id(void);
   const ThingId &get_immediate_owner_id(void);
   const ThingId &get_immediate_spawned_owner_id(void);
   const ThingId &get_top_owner_id(void);
-  const ThingId &set_mob_spawner_id(const ThingId &v);
+  const ThingId &set_mob_id(const ThingId &v);
   const ThingId &set_leader_id(const ThingId &v);
   const ThingId &set_owner_id(const ThingId &v);
   const ThingId &set_spawned_owner_id(const ThingId &v);
@@ -651,12 +651,12 @@ public:
   float get_distance_avoid(void);
   float get_distance_from_leader(point p);
   float get_distance_from_leader(void);
-  float get_distance_from_mob_spawner(point p);
-  float get_distance_from_mob_spawner(void);
+  float get_distance_from_mob(point p);
+  float get_distance_from_mob(void);
   float get_distance_leader_max(point p);
   float get_distance_leader_max(void);
-  float get_distance_mob_spawner_max(point p);
-  float get_distance_mob_spawner_max(void);
+  float get_distance_mob_max(point p);
+  float get_distance_mob_max(void);
   float get_distance_recruitment_max(point p);
   float get_distance_recruitment_max(void);
   float get_distance_throw(void);
@@ -1248,7 +1248,7 @@ public:
   int is_meltable(void);
   int is_metal(void);
   int is_minion(void);
-  int is_mob_spawner(void);
+  int is_mob(void);
   int is_monst(void);
   int is_moveable(void);
   int is_msg(void);
@@ -1502,8 +1502,8 @@ public:
   int is_treasure(void);
   int is_monst_class_e(void);
   int unused_flag166(void);
-  int is_mob_spawner_class_b(void);
-  int is_mob_spawner_class_a(void);
+  int is_mob_challenge_class_b(void);
+  int is_mob_challenge_class_a(void);
   int is_monst_class_d(void);
   int unused_flag16(void);
   int is_monst_class_c(void);
@@ -1623,7 +1623,7 @@ public:
 
   point get_vision_source(void);
   point dir_to_direction();
-  point get_random_target(int dist = 0);
+  point get_target_random(int dist = 0);
   point get_where_i_dropped_an_item_last(void);
   point get_lunge_to(void);
 
@@ -1959,7 +1959,7 @@ public:
   void release_followers(void);
   void remove_all_references();
   void remove_leader(void);
-  void remove_mob_spawner(void);
+  void remove_mob(void);
   void remove_owner(void);
   void remove_spawner_owner(void);
   void reset_goal_penalty(Thingp attacker);
@@ -1986,7 +1986,7 @@ public:
   void set_interpolated_at(fpoint v);
   void set_leader(Thingp leader);
   void set_lunge_to(point);
-  void set_mob_spawner(Thingp mob_spawner);
+  void set_mob(Thingp mob);
   void set_msg(const std::string &);
   void set_owner(Thingp owner);
   void set_score(int);

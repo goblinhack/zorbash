@@ -276,13 +276,13 @@ Tpp Level::tp_random_mob(const point p)
   }
 }
 
-Tpp Level::tp_random_mob_spawner_class_a(const point p)
+Tpp Level::tp_random_mob_challenge_class_a(const point p)
 {
   TRACE_NO_INDENT();
   return tp_random_mob(p);
 }
 
-Tpp Level::tp_random_mob_spawner_class_b(const point p)
+Tpp Level::tp_random_mob_challenge_class_b(const point p)
 {
   TRACE_NO_INDENT();
   return tp_random_mob(p);

@@ -76,7 +76,7 @@ bool Thing::target_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
         continue;
       }
 
-      if (t->is_mob_spawner() || t->is_monst() || t->is_player()) {
+      if (t->is_mob() || t->is_monst() || t->is_player()) {
         prio += get_danger_current_level(t);
         dbg2("Target-attack-best: %s mob prio %d", t->to_short_string().c_str(), prio);
 

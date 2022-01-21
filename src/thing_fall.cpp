@@ -85,7 +85,7 @@ void Thing::fall(float fall_height, ts_t ms)
   //
   // If a mob falls, the connection to the minions is severed
   //
-  if (is_mob_spawner()) {
+  if (is_mob()) {
     destroy_minions(nullptr);
   }
 
@@ -174,14 +174,19 @@ bool Thing::fall_to_next_level(void)
 
   auto l = get(game->world.levels, fall_to.x, fall_to.y, fall_to.z);
   if (! l) {
-    game->init_level(fall_to, level->grid_at + point(0, 1), level->difficulty_depth + 1,
-                     level->dungeon_walk_order_level_no + 1);
+    if (! game->init_level(fall_to, level->grid_at + point(0, 1), level->difficulty_depth + 1,
+                           level->dungeon_walk_order_level_no + 1)) {
+      if (is_player()) {
+        msg("You fall into nothingness!");
+      }
+      dead("Nowhere to fall to");
+      return false;
+    }
 
     l = get(game->world.levels, fall_to.x, fall_to.y, fall_to.z);
     if (! l) {
-      if (is_player()) {
-        msg("The chasm is permanently blocked!");
-      }
+      err("No level");
+      dead("Nowhere to fall to");
       return false;
     }
   }
@@ -230,7 +235,7 @@ bool Thing::fall_to_next_level(void)
     }
 
     if (l->is_ascend_dungeon(x, y) || l->is_monst(x, y) || l->is_rock(x, y) || l->is_door(x, y) ||
-        l->is_secret_door(x, y) || l->is_mob_spawner(x, y) || l->is_chasm(x, y) || l->is_wall(x, y) ||
+        l->is_secret_door(x, y) || l->is_mob(x, y) || l->is_chasm(x, y) || l->is_wall(x, y) ||
         l->is_ascend_sewer(x, y) || l->is_descend_sewer(x, y) || l->is_descend_dungeon(x, y)) {
       dbg("No, %d,%d is a special tile", x, y);
       continue;
@@ -306,7 +311,7 @@ bool Thing::fall_to_next_level(void)
         fall_damage = pcg_random_range(20, 50);
       }
 
-      if (is_wand() || is_potion() || is_mob_spawner() || is_monst()) {
+      if (is_wand() || is_potion() || is_mob() || is_monst()) {
         fall_damage = get_health() / 2;
       }
 

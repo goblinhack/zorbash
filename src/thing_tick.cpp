@@ -181,7 +181,9 @@ void Thing::achieve_goals_in_life(void)
     return;
   }
 
-  if (! is_player()) {
+  if (is_player()) {
+    light_update_power();
+  } else {
     if (try_to_escape()) {
       dbg("Try to escape");
       return;
@@ -299,7 +301,7 @@ void Thing::tick(void)
 
   if (unlikely(is_dead)) {
     //
-    // Resurrect things unless that can do unless that has been disabled e.g. via minion mob_spawner death
+    // Resurrect things unless that can do unless that has been disabled e.g. via minion mob death
     //
     if (! is_resurrection_blocked && is_resurrectable()) {
       //
@@ -308,12 +310,12 @@ void Thing::tick(void)
       achieve_goals_in_death();
     }
 
-    IF_DEBUG3 { log("Tick; is dead"); }
+    IF_DEBUG3 { dbg("Tick; is dead"); }
     return;
   }
 
   if (unlikely(is_dead)) {
-    IF_DEBUG3 { log("Tick; died"); }
+    IF_DEBUG3 { dbg("Tick; died"); }
     return;
   }
 

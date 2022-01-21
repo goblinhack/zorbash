@@ -1200,10 +1200,10 @@ int Thing::is_meat(void)
   return (tp()->is_meat());
 }
 
-int Thing::is_mob_spawner(void)
+int Thing::is_mob(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_mob_spawner());
+  return (tp()->is_mob());
 }
 
 int Thing::is_minion(void)
@@ -2394,16 +2394,16 @@ int Thing::unused_flag166(void)
   return (tp()->unused_flag166());
 }
 
-int Thing::is_mob_spawner_class_b(void)
+int Thing::is_mob_challenge_class_b(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_mob_spawner_class_b());
+  return (tp()->is_mob_challenge_class_b());
 }
 
-int Thing::is_mob_spawner_class_a(void)
+int Thing::is_mob_challenge_class_a(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_mob_spawner_class_a());
+  return (tp()->is_mob_challenge_class_a());
 }
 
 int Thing::is_monst_class_d(void)
@@ -3258,10 +3258,10 @@ int Thing::environ_prefers_spiderwebs(void)
   return (tp()->environ_prefers_spiderwebs());
 }
 
-float Thing::get_distance_mob_spawner_max(void)
+float Thing::get_distance_mob_max(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->distance_mob_spawner_max());
+  return (tp()->distance_mob_max());
 }
 
 float Thing::get_distance_leader_max(void)
@@ -5286,10 +5286,10 @@ int Thing::get_stamina(void)
     v += owner->get_stamina();
   }
   if (is_minion()) {
-    auto mob_spawner = get_immediate_mob_spawner();
-    if (mob_spawner) {
-      auto mob_spawner = get_immediate_mob_spawner();
-      v += mob_spawner->get_stamina();
+    auto mob = get_immediate_mob();
+    if (mob) {
+      auto mob = get_immediate_mob();
+      v += mob->get_stamina();
     }
   }
   return v;
@@ -5356,10 +5356,10 @@ int Thing::get_enchant(void)
     v += owner->get_enchant();
   }
   if (is_minion()) {
-    auto mob_spawner = get_immediate_mob_spawner();
-    if (mob_spawner) {
-      auto mob_spawner = get_immediate_mob_spawner();
-      v += mob_spawner->get_enchant();
+    auto mob = get_immediate_mob();
+    if (mob) {
+      auto mob = get_immediate_mob();
+      v += mob->get_enchant();
     }
   }
   return v;
@@ -5426,10 +5426,10 @@ int Thing::get_poisoned_amount(void)
     v += owner->get_poisoned_amount();
   }
   if (is_minion()) {
-    auto mob_spawner = get_immediate_mob_spawner();
-    if (mob_spawner) {
-      auto mob_spawner = get_immediate_mob_spawner();
-      v += mob_spawner->get_poisoned_amount();
+    auto mob = get_immediate_mob();
+    if (mob) {
+      auto mob = get_immediate_mob();
+      v += mob->get_poisoned_amount();
     }
   }
   return v;
@@ -5502,10 +5502,10 @@ int Thing::get_necrotized_amount(void)
     v += owner->get_necrotized_amount();
   }
   if (is_minion()) {
-    auto mob_spawner = get_immediate_mob_spawner();
-    if (mob_spawner) {
-      auto mob_spawner = get_immediate_mob_spawner();
-      v += mob_spawner->get_necrotized_amount();
+    auto mob = get_immediate_mob();
+    if (mob) {
+      auto mob = get_immediate_mob();
+      v += mob->get_necrotized_amount();
     }
   }
   return v;
@@ -7571,7 +7571,7 @@ std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::get_b
     //
     // Watch out here as lasers can have owners and do not live in bags.
     //
-    log("No bag");
+    dbg("No bag");
     return nullptr;
   }
 }
@@ -7585,7 +7585,7 @@ const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing:
     //
     // Watch out here as lasers can have owners and do not live in bags.
     //
-    log("No bag");
+    dbg("No bag");
     return nullptr;
   }
 }

@@ -94,7 +94,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
 
         if (is_lit_recently(x, y) && is_monst(x, y)) {
           c = RED;
-        } else if (is_mob_spawner(x, y)) {
+        } else if (is_mob(x, y)) {
           c = PINK;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = PINK;
@@ -207,7 +207,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = BLACK;
 
-        if (is_monst(x, y) || is_spiderweb(x, y) || is_mob_spawner(x, y)) {
+        if (is_monst(x, y) || is_spiderweb(x, y) || is_mob(x, y)) {
           //
           // Have both? Overlay the monsters
           //
@@ -292,7 +292,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           }
         } else if (is_monst(x, y)) {
           c = RED;
-        } else if (is_mob_spawner(x, y)) {
+        } else if (is_mob(x, y)) {
           c = PINK;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = WHITE;

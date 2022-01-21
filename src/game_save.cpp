@@ -68,7 +68,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->light_power);
   out << bits(my.t->prev_light_power);
   out << bits(my.t->lunge_to);
-  out << bits(my.t->mob_spawner_id);
+  out << bits(my.t->mob_id);
   out << bits(my.t->monst_state);
   out << bits(my.t->msg);
   out << bits(my.t->necrosis);
@@ -361,7 +361,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_key ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_lava ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_light_blocker ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_mob_spawner ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_mob ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_monst ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_wall_or_door ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_destructable ? 1LLU : 0LLU) << shift; shift++;
@@ -488,7 +488,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_key);
   out << bits(my.t->_is_lava);
   out << bits(my.t->_is_lit_currently);
-  out << bits(my.t->_is_mob_spawner);
+  out << bits(my.t->_is_mob);
   out << bits(my.t->_is_monst);
   out << bits(my.t->_is_potion);
   out << bits(my.t->_is_ring);
@@ -517,8 +517,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->difficulty_depth);
   out << bits(my.t->dungeon_walk_order_level_no);
 
-  out << bits(my.t->d1000_chance_of_creating_mob_spawner_class_a);
-  out << bits(my.t->d1000_chance_of_creating_mob_spawner_class_b);
+  out << bits(my.t->d1000_chance_of_creating_mob_challenge_class_a);
+  out << bits(my.t->d1000_chance_of_creating_mob_challenge_class_b);
   out << bits(my.t->d1000_chance_of_creating_monst_class_a);
   out << bits(my.t->d1000_chance_of_creating_monst_class_b);
   out << bits(my.t->d1000_chance_of_creating_monst_class_c);
@@ -656,8 +656,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
 std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
 {
   TRACE_AND_INDENT();
-  uint32_t header_size = sizeof(Config);
-  out << bits(header_size);
+  uint32_t serialized_size = sizeof(Config);
+  out << bits(serialized_size);
 
   out << bits(my.t.game_pix_scale_height);
   out << bits(my.t.game_pix_scale_width);
@@ -745,9 +745,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
 std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 {
   TRACE_AND_INDENT();
-  uint32_t header_size = sizeof(Game);
+  uint32_t serialized_size = sizeof(Game);
   out << bits(my.t.version);
-  out << bits(header_size);
+  out << bits(serialized_size);
   out << bits(my.t.save_slot);
   out << bits(my.t.save_meta);
   out << bits(my.t.save_file);

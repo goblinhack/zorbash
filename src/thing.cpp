@@ -81,20 +81,20 @@ const ThingId &Thing::set_owner_id(const ThingId &v)
   return (get_infop()->owner_id = v);
 }
 
-const ThingId &Thing::get_immediate_mob_spawner_id(void)
+const ThingId &Thing::get_immediate_mob_id(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (get_infop()->mob_spawner_id);
+  return (get_infop()->mob_id);
 }
 
-const ThingId &Thing::set_mob_spawner_id(const ThingId &v)
+const ThingId &Thing::set_mob_id(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->mob_spawner_id = v);
+  return (get_infop()->mob_id = v);
 }
 
 const ThingId &Thing::get_leader_id(void)

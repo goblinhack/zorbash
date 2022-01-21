@@ -63,7 +63,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_key {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lava {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lit_currently {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob_spawner {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_monst {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_potion {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ring {};
@@ -123,8 +123,8 @@ public:
   int d1000_chance_of_creating_monst_class_c {};
   int d1000_chance_of_creating_monst_class_d {};
   int d1000_chance_of_creating_monst_class_e {};
-  int d1000_chance_of_creating_mob_spawner_class_a {};
-  int d1000_chance_of_creating_mob_spawner_class_b {};
+  int d1000_chance_of_creating_mob_challenge_class_a {};
+  int d1000_chance_of_creating_mob_challenge_class_b {};
   int d1000_chance_of_creating_treasure_class_a {};
   int d1000_chance_of_creating_treasure_class_b {};
   int d1000_chance_of_creating_treasure_class_c {};
@@ -609,8 +609,8 @@ public:
   Thingp thing_new(const std::string &tp_name, const point at, Thingp owner = nullptr);
 
   Tpp tp_random_mob(const point p);
-  Tpp tp_random_mob_spawner_class_a(const point p);
-  Tpp tp_random_mob_spawner_class_b(const point p);
+  Tpp tp_random_mob_challenge_class_a(const point p);
+  Tpp tp_random_mob_challenge_class_b(const point p);
   Tpp tp_random_monst(const point p);
   Tpp tp_random_monst_class_a(const point p);
   Tpp tp_random_monst_class_c(const point p);
@@ -751,8 +751,8 @@ public:
   uint8_t is_lit_ever_no_check(const int x, const int y);
   uint8_t is_lit_ever_no_check(const point p);
   uint8_t is_lit_recently(const int x, const int y);
-  uint8_t is_mob_spawner(const int x, const int y);
-  uint8_t is_mob_spawner(const point p);
+  uint8_t is_mob(const int x, const int y);
+  uint8_t is_mob(const point p);
   uint8_t is_monst(const int x, const int y);
   uint8_t is_monst_or_player(const point p);
   uint8_t is_monst(const point p);
@@ -952,7 +952,7 @@ public:
   void set_is_map_changed(const int x, const int y);
   void set_is_map_changed_no_check(const int x, const int y);
   void set_is_map_changed_no_check(const int x, const int y, uint32_t v);
-  void set_is_mob_spawner(const int x, const int y);
+  void set_is_mob(const int x, const int y);
   void set_is_monst(const int x, const int y);
   void set_is_obs_destructable(const int x, const int y);
   void set_is_obs_destructable_no_check(const int x, const int y);
@@ -1019,7 +1019,7 @@ public:
   void unset_is_lit_ever_no_check(const int x, const int y);
   void unset_is_map_changed(const int x, const int y);
   void unset_is_map_changed_no_check(const int x, const int y);
-  void unset_is_mob_spawner(const int x, const int y);
+  void unset_is_mob(const int x, const int y);
   void unset_is_monst(const int x, const int y);
   void unset_is_obs_destructable(const int x, const int y);
   void unset_is_obs_destructable_no_check(const int x, const int y);

@@ -130,9 +130,9 @@ void Thing::level_push(void)
     i_set_is_food = true;
     level->set_is_food(mx, my);
   }
-  if (is_mob_spawner()) {
-    i_set_is_mob_spawner = true;
-    level->set_is_mob_spawner(mx, my);
+  if (is_mob()) {
+    i_set_is_mob = true;
+    level->set_is_mob(mx, my);
   }
   if (is_gold()) {
     i_set_is_gold = true;

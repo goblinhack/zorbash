@@ -467,7 +467,7 @@ bool Thing::matches(const std::string &what)
   if (is_metal() && (what == "is_metal")) {
     return true;
   }
-  if (is_mob_spawner() && (what == "is_mob_spawner")) {
+  if (is_mob() && (what == "is_mob")) {
     return true;
   }
   if (is_minion() && (what == "is_minion")) {
@@ -1151,10 +1151,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag166() && (what == "unused_flag166")) {
     return true;
   }
-  if (is_mob_spawner_class_b() && (what == "is_mob_spawner_class_b")) {
+  if (is_mob_challenge_class_b() && (what == "is_mob_challenge_class_b")) {
     return true;
   }
-  if (is_mob_spawner_class_a() && (what == "is_mob_spawner_class_a")) {
+  if (is_mob_challenge_class_a() && (what == "is_mob_challenge_class_a")) {
     return true;
   }
   if (is_monst_class_d() && (what == "is_monst_class_d")) {
@@ -1749,8 +1749,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_metal") {
     return &Thing::is_metal;
   }
-  if (what == "is_mob_spawner") {
-    return &Thing::is_mob_spawner;
+  if (what == "is_mob") {
+    return &Thing::is_mob;
   }
   if (what == "is_minion") {
     return &Thing::is_minion;
@@ -2433,11 +2433,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag166") {
     return &Thing::unused_flag166;
   }
-  if (what == "is_mob_spawner_class_b") {
-    return &Thing::is_mob_spawner_class_b;
+  if (what == "is_mob_challenge_class_b") {
+    return &Thing::is_mob_challenge_class_b;
   }
-  if (what == "is_mob_spawner_class_a") {
-    return &Thing::is_mob_spawner_class_a;
+  if (what == "is_mob_challenge_class_a") {
+    return &Thing::is_mob_challenge_class_a;
   }
   if (what == "is_monst_class_d") {
     return &Thing::is_monst_class_d;

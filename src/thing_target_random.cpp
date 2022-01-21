@@ -8,7 +8,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-point Thing::get_random_target(int d)
+point Thing::get_target_random(int d)
 {
   if (! d) {
     if (is_player()) {
@@ -18,29 +18,35 @@ point Thing::get_random_target(int d)
     }
   }
 
-  auto tries = 100;
+  auto  tries         = 100;
+  point wander_source = curr_at;
 
   //
   // Minions cannot wander too far
   //
-  auto mob_spawner = get_top_mob_spawner();
-  if (mob_spawner) {
-    d = (int) get_distance_mob_spawner_max();
+  auto mob = get_top_mob();
+  if (mob) {
+    d             = (int) get_distance_mob_max();
+    wander_source = mob->curr_at;
+    dbg("Use mob %s as wander source: %s", mob->to_short_string().c_str(), wander_source.to_string().c_str());
   }
 
   auto leader = get_leader();
   if (leader) {
-    d = (int) get_distance_leader_max();
+    d             = (int) get_distance_leader_max();
+    wander_source = leader->curr_at;
+    dbg("Use leader %s as wander source: %s", leader->to_short_string().c_str(), wander_source.to_string().c_str());
   }
 
   while (tries--) {
-    point   start(curr_at.x, curr_at.y);
-    int16_t dx = pcg_random_range(-d, d);
-    int16_t dy = pcg_random_range(-d, d);
+    point   start = wander_source;
+    int16_t dx    = pcg_random_range(-d, d);
+    int16_t dy    = pcg_random_range(-d, d);
     if (! dx && ! dy) {
       continue;
     }
 
+    dbg("Try: %s", start.to_string().c_str());
     auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
@@ -72,12 +78,14 @@ point Thing::get_random_target(int d)
   tries = 100;
 
   while (tries--) {
-    point   start(curr_at.x, curr_at.y);
-    int16_t dx = pcg_random_range(-d, d);
-    int16_t dy = pcg_random_range(-d, d);
+    point   start = wander_source;
+    int16_t dx    = pcg_random_range(-d, d);
+    int16_t dy    = pcg_random_range(-d, d);
     if (! dx && ! dy) {
       continue;
     }
+
+    dbg("Try (2): %s", start.to_string().c_str());
     auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
@@ -97,12 +105,13 @@ point Thing::get_random_target(int d)
   //
   // Any point will do
   //
-  point   start(curr_at.x, curr_at.y);
-  int16_t dx = pcg_random_range(-d, d);
-  int16_t dy = pcg_random_range(-d, d);
+  point   start = wander_source;
+  int16_t dx    = pcg_random_range(-d, d);
+  int16_t dy    = pcg_random_range(-d, d);
   if (! dx && ! dy) {
     return start;
   }
+  dbg("Try (3): %s", start.to_string().c_str());
   auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
   auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 

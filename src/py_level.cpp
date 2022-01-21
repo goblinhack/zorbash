@@ -62,8 +62,8 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         if (m.is_floor || m.is_bridge || m.is_corridor || m.is_secret_corridor || m.is_dirt) {
           floor_string += c;
         } else if (m.is_blood || m.is_deep_water || m.is_door || m.is_ascend_dungeon || m.is_descend_dungeon ||
-                   m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_spawner_class_a ||
-                   m.is_mob_spawner_class_b || m.is_gold || m.is_key || m.is_lava || m.is_monst_class_a ||
+                   m.is_descend_sewer || m.is_floor_deco || m.is_food || m.is_mob_challenge_class_a ||
+                   m.is_mob_challenge_class_b || m.is_gold || m.is_key || m.is_lava || m.is_monst_class_a ||
                    m.is_monst_class_b || m.is_monst_class_c || m.is_enchantstone || m.is_skillstone ||
                    m.is_monst_class_d || m.is_monst_class_e || m.is_treasure_class_a || m.is_treasure_class_b ||
                    m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
@@ -107,7 +107,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
         }
 
         if (m.is_blood || m.is_ascend_dungeon || m.is_descend_dungeon || m.is_descend_sewer || m.is_floor_deco ||
-            m.is_food || m.is_mob_spawner_class_a || m.is_mob_spawner_class_b || m.is_gold || m.is_key ||
+            m.is_food || m.is_mob_challenge_class_a || m.is_mob_challenge_class_b || m.is_gold || m.is_key ||
             m.is_monst_class_a || m.is_monst_class_b || m.is_monst_class_c || m.is_enchantstone || m.is_skillstone ||
             m.is_monst_class_d || m.is_monst_class_e || m.is_treasure_class_a || m.is_treasure_class_b ||
             m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
@@ -584,7 +584,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_meat_at, is_meat)
 LEVEL_BODY_GET_BOOL_AT(level_is_meat_eater_at, is_meat_eater)
 LEVEL_BODY_GET_BOOL_AT(level_is_metal_at, is_metal)
 LEVEL_BODY_GET_BOOL_AT(level_is_minion_at, is_minion)
-LEVEL_BODY_GET_BOOL_AT(level_is_mob_spawner_at, is_mob_spawner)
+LEVEL_BODY_GET_BOOL_AT(level_is_mob_at, is_mob)
 LEVEL_BODY_GET_BOOL_AT(level_is_monst_at, is_monst)
 LEVEL_BODY_GET_BOOL_AT(level_is_moveable_at, is_moveable)
 LEVEL_BODY_GET_BOOL_AT(level_is_msg_at, is_msg)
@@ -720,8 +720,8 @@ LEVEL_BODY_GET_BOOL_AT(level_unused_flag163_at, unused_flag163)
 LEVEL_BODY_GET_BOOL_AT(level_is_treasure_at, is_treasure)
 LEVEL_BODY_GET_BOOL_AT(level_is_monst_class_e_at, is_monst_class_e)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag166_at, unused_flag166)
-LEVEL_BODY_GET_BOOL_AT(level_is_mob_spawner_class_b_at, is_mob_spawner_class_b)
-LEVEL_BODY_GET_BOOL_AT(level_is_mob_spawner_class_a_at, is_mob_spawner_class_a)
+LEVEL_BODY_GET_BOOL_AT(level_is_mob_challenge_class_b_at, is_mob_challenge_class_b)
+LEVEL_BODY_GET_BOOL_AT(level_is_mob_challenge_class_a_at, is_mob_challenge_class_a)
 LEVEL_BODY_GET_BOOL_AT(level_is_monst_class_d_at, is_monst_class_d)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag16_at, unused_flag16)
 LEVEL_BODY_GET_BOOL_AT(level_is_monst_class_c_at, is_monst_class_c)

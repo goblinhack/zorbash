@@ -91,7 +91,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->light_power);
    in >> bits(my.t->prev_light_power);
    in >> bits(my.t->lunge_to);
-   in >> bits(my.t->mob_spawner_id);
+   in >> bits(my.t->mob_id);
    in >> bits(my.t->monst_state);
    in >> bits(my.t->msg);
    in >> bits(my.t->necrosis);
@@ -416,7 +416,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->i_set_is_key = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_lava = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_light_blocker = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->i_set_is_mob_spawner = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->i_set_is_mob = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_monst = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_obs_wall_or_door = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_obs_destructable = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -531,7 +531,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_key);
   in >> bits(my.t->_is_lava);
   in >> bits(my.t->_is_lit_currently);
-  in >> bits(my.t->_is_mob_spawner);
+  in >> bits(my.t->_is_mob);
   in >> bits(my.t->_is_monst);
   in >> bits(my.t->_is_potion);
   in >> bits(my.t->_is_ring);
@@ -560,8 +560,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->difficulty_depth);
   in >> bits(l->dungeon_walk_order_level_no);
 
-  in >> bits(l->d1000_chance_of_creating_mob_spawner_class_a);
-  in >> bits(l->d1000_chance_of_creating_mob_spawner_class_b);
+  in >> bits(l->d1000_chance_of_creating_mob_challenge_class_a);
+  in >> bits(l->d1000_chance_of_creating_mob_challenge_class_b);
   in >> bits(l->d1000_chance_of_creating_monst_class_a);
   in >> bits(l->d1000_chance_of_creating_monst_class_b);
   in >> bits(l->d1000_chance_of_creating_monst_class_c);
@@ -772,8 +772,8 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
 std::istream &operator>>(std::istream &in, Bits< Config & > my)
 {
   TRACE_AND_INDENT();
-  /* uint32_t           header_size                  */ in >> bits(my.t.header_size);
-  if (my.t.header_size != sizeof(Config)) {
+  /* uint32_t           serialized_size                  */ in >> bits(my.t.serialized_size);
+  if (my.t.serialized_size != sizeof(Config)) {
     game_load_error = "bad save file header version";
     return in;
   }
@@ -894,8 +894,8 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
     game_load_error = "old version '" MYVER "' v '" + my.t.version + "'";
     return (in);
   }
-  in >> bits(my.t.header_size);
-  if (my.t.header_size != (uint32_t) sizeof(Game)) {
+  in >> bits(my.t.serialized_size);
+  if (my.t.serialized_size != (uint32_t) sizeof(Game)) {
     game_load_error = "old version '" MYVER "' v '" + my.t.version + "'";
     return (in);
   }

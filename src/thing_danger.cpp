@@ -280,7 +280,7 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
-  if (! it->is_mob_spawner() && ! it->is_monst() && ! it->is_player()) {
+  if (! it->is_mob() && ! it->is_monst() && ! it->is_player()) {
     return false;
   }
 
@@ -292,7 +292,7 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
-  if (it->is_minion() && (it->get_top_mob_spawner() == get_top_mob_spawner())) {
+  if (it->is_minion() && (it->get_top_mob() == get_top_mob())) {
     return false;
   }
 

@@ -49,9 +49,9 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
-  auto my_mob_spawner  = get_top_mob_spawner();
-  auto its_mob_spawner = victim->get_top_mob_spawner();
-  if (my_mob_spawner && (my_mob_spawner == its_mob_spawner)) {
+  auto my_mob  = get_top_mob();
+  auto its_mob = victim->get_top_mob();
+  if (my_mob && (my_mob == its_mob)) {
     return false;
   }
 
@@ -748,7 +748,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     //
     // Don't swing weapons at pools of blood.
     //
-    if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob_spawner()) {
+    if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob()) {
       if (get_equip(MONST_EQUIP_WEAPON)) {
         auto delta = victim->curr_at - curr_at;
         move_set_dir_from_target_or_delta(delta);

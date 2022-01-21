@@ -248,7 +248,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     auto  got_one = false;
 
     while (tries--) {
-      auto target = get_random_target(get_distance_vision());
+      auto target = get_target_random(get_distance_vision());
       if (level->is_shallow_water(target)) {
         if (distance(start, target) < closest) {
           dbg("Best (shallow water) at %d,%d", target.x, target.y);
@@ -281,7 +281,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     auto  got_one = false;
 
     while (tries--) {
-      auto target = get_random_target(get_distance_vision());
+      auto target = get_target_random(get_distance_vision());
       if (level->is_chasm(target)) {
         if (distance(start, target) < closest) {
           dbg("Best (chasm) at %d,%d", target.x, target.y);

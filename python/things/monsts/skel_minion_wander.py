@@ -42,7 +42,7 @@ def tp_init(name, text_name):
     mytp.set_damage_natural_attack_type("claw")
     mytp.set_damage_natural_dice("1d3")
     mytp.set_damage_received_doubled_from_water(True)
-    mytp.set_distance_mob_spawner_max(10)
+    mytp.set_distance_mob_max(10)
     mytp.set_distance_vision(11)
     mytp.set_environ_avoids_water(100)
     mytp.set_gfx_animated_can_hflip(True)

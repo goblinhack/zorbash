@@ -431,7 +431,7 @@ PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
-PyObject *thing_set_mob_spawner(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     me_id    = 0;
@@ -465,7 +465,7 @@ PyObject *thing_set_mob_spawner(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  me->set_mob_spawner(owner);
+  me->set_mob(owner);
   Py_RETURN_NONE;
 }
 
