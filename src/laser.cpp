@@ -202,7 +202,7 @@ void Level::display_lasers(void)
         tile = get(p.tiles, frame, 0);
       } else if ((animstep >= steps) || (animstep >= (int) p.tiles.size())) {
         tile = get(p.tiles, frame, Laser::max_frames - 1);
-      } else if (animstep >= p.tiles.size()) {
+      } else if (animstep >= (int) p.tiles.size()) {
         tile = get(p.tiles, frame, (frame % (p.tiles.size() - 2)) + 1);
       } else {
         tile = get(p.tiles, frame, animstep);

@@ -1347,7 +1347,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   //
   // Choose goals (higher scores, lower costs are preferred)
   //
-  for (auto i = 0; i < can_reach_cands.size(); i++) {
+  for (auto i = 0; i < (int) can_reach_cands.size(); i++) {
     auto p = pcg_one_of(can_reach_cands);
 
     //
