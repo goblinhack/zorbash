@@ -32,7 +32,7 @@ Thingp Thing::in_the_way(const point s, const point e, int x, int y)
     }
 
     if (t->is_attackable_by_player() || t->is_attackable_by_monst()) {
-      log("This is in the way: %s", t->to_short_string().c_str());
+      dbg("This is in the way: %s", t->to_short_string().c_str());
       return t;
     }
   }

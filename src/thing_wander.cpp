@@ -218,14 +218,14 @@ bool Thing::ai_choose_wander(point &nh)
   // Choose a new wander location
   //
   get_aip()->wander_dest = point(0, 0);
-
-  dest = get_random_target();
+  dest                   = get_target_random();
+  dbg("Try wander to %s", dest.to_string().c_str());
 
   //
   // Minions are constrained but we should stop the movement if it gets too far.
   // There may be nowhere else for it to try to move.
   //
-  if (too_far_from_mob_spawner(dest)) {
+  if (too_far_from_mob(dest)) {
     dbg("Too far off the leash but allow wander anyway to %d,%d", dest.x, dest.y);
   }
 

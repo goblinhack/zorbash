@@ -380,10 +380,10 @@ bool Thing::same_leader(Thingp it)
   Thingp its_leader = it->get_leader();
 
   if (my_leader) {
-    log("my leader: %s", my_leader->to_short_string().c_str());
+    dbg("my leader: %s", my_leader->to_short_string().c_str());
   }
   if (its_leader) {
-    log("its leader: %s", its_leader->to_short_string().c_str());
+    dbg("its leader: %s", its_leader->to_short_string().c_str());
   }
 
   if (my_leader && (my_leader == it)) {

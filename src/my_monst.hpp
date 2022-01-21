@@ -86,7 +86,7 @@ public:
 
   ThingId on_fire_id_anim {};
   ThingId owner_id {};         // Who carries this thing?
-  ThingId mob_spawner_id {};   // Who generated this thing?
+  ThingId mob_id {};   // Who generated this thing?
   ThingId leader_id {};        // Who is the current ally leader
   ThingId spawner_owner_id {}; // Who spawned this thing?
 
@@ -143,7 +143,7 @@ public:
   int8_t bounce_count       = {}; // Graphical bounce count
   int8_t charge_count       = {}; // Wand charges
   int8_t follower_count     = {}; // How many followers this leader has
-  int8_t minion_count       = {}; // How many minions this mob_spawner has
+  int8_t minion_count       = {}; // How many minions this mob has
   int8_t owned_count        = {}; // How many things own me
   int8_t spawned_count      = {}; // How many things this thing spawned.
   int8_t map_treasure_count = {}; // How many treasure maps held. Really only care if > 0

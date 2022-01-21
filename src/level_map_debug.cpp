@@ -51,7 +51,7 @@ void Level::update_map_debug(int x, int y)
     for (auto x = 0; x < MAP_WIDTH; x++) {
       color c = BLACK;
 
-      if (is_monst(x, y) || is_mob_spawner(x, y)) {
+      if (is_monst(x, y) || is_mob(x, y)) {
         c   = RED;
         c.a = 255;
       } else if (is_spiderweb(x, y)) {

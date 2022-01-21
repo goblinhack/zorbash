@@ -504,7 +504,7 @@ void Thing::dump_equip(void)
   {
     auto t = get_equip(e);
     if (t) {
-      log("Equipped: %s", t->to_string().c_str());
+      dbg("Equipped: %s", t->to_string().c_str());
     }
   }
 }

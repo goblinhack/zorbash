@@ -789,7 +789,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // Player hitting something else
       //
-      if (is_alive_monst() || is_mob_spawner()) {
+      if (is_alive_monst() || is_mob()) {
         if (crit) {
           msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
               damage_type.c_str());

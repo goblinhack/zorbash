@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_ascii.hpp"
 #include "my_font.hpp"
 #include "my_game.hpp"
@@ -12,7 +13,6 @@
 #include "my_sys.hpp"
 #include "my_thing_template.hpp"
 #include "my_ui.hpp"
-#include "my_vector_bounds_check.hpp"
 
 struct ascii_ ascii;
 
@@ -95,15 +95,9 @@ public:
   AsciiCell(void) {}
 };
 
-static std::vector< std::vector< AsciiCell > > cells;
+static std::array< std::array< AsciiCell, TERM_WIDTH_MAX >, TERM_HEIGHT_MAX > cells;
 
-void ascii_init(void)
-{
-  cells.resize(TERM_WIDTH_MAX);
-  for (auto x = 0; x < TERM_WIDTH_MAX; x++) {
-    cells[ x ].resize(TERM_HEIGHT_MAX);
-  }
-}
+void ascii_init(void) {}
 
 //
 // For drawing the mouse cursor.
@@ -1382,9 +1376,5 @@ void ascii_display(void)
 void ascii_clear_display(void)
 {
   TRACE_NO_INDENT();
-  for (auto y = 0; y < TERM_HEIGHT; y++) {
-    for (auto x = 0; x < TERM_WIDTH; x++) {
-      cells[ x ][ y ] = {};
-    }
-  }
+  cells = {};
 }

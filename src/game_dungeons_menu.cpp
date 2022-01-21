@@ -372,7 +372,7 @@ static void game_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t
         for (auto y = 0; y < MAP_WIDTH; y++) {
           FOR_ALL_THINGS_THAT_INTERACT(l, t, x, y)
           {
-            if (t->is_monst() || t->is_mob_spawner()) {
+            if (t->is_monst() || t->is_mob()) {
               monst_contents[ t->short_text_capitalise() ]++;
             }
             if (t->is_treasure()) {
@@ -462,7 +462,11 @@ static void game_dungeons_create_level_at(game_dungeons_ctx *ctx, int x, int y)
   //
   // Create a level of the given difficulty at a fixed location
   //
-  game->init_level(level_at, point(x, y), node->depth, node->walk_order_level_no);
+  if (! game->init_level(level_at, point(x, y), node->depth, node->walk_order_level_no)) {
+    ERR("Could not create level");
+    return;
+  }
+
   auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (! l) {
     return;

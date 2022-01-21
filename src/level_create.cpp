@@ -39,10 +39,10 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_
   is_level_type_dungeon = false;
   is_level_type_sewer   = false;
 
-  this->seed             = seedval;
-  this->difficulty_depth = difficulty_depth;
+  this->seed                        = seedval;
+  this->difficulty_depth            = difficulty_depth;
   this->dungeon_walk_order_level_no = dungeon_walk_order_level_no;
-  world_at               = at;
+  world_at                          = at;
 
   //
   // Setup the various chances of things appearing.
@@ -130,7 +130,7 @@ int Level::get_total_monst_hp_level(void)
       hp += t->get_health_initial();
     }
 
-    if (t->is_mob_spawner()) {
+    if (t->is_mob()) {
       hp += t->get_health_initial() * t->minion_limit();
     }
   }
@@ -143,7 +143,7 @@ int Level::get_total_monst_damage_level(void)
   int damage = 0;
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
-    if (t->is_mob_spawner() || t->is_monst()) {
+    if (t->is_mob() || t->is_monst()) {
       damage += t->get_damage_melee_dice().max_roll();
       damage += t->get_damage_poison_dice().max_roll();
       damage += t->get_damage_future1_dice().max_roll();

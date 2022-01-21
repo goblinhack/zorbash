@@ -34,9 +34,9 @@ void Thing::level_leave(void)
   // release_followers();
 
   {
-    auto it = get_immediate_mob_spawner();
+    auto it = get_immediate_mob();
     if (it) {
-      remove_mob_spawner();
+      remove_mob();
     }
   }
 

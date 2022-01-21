@@ -71,14 +71,17 @@ bool Thing::descend_dungeon(void)
   dbg("Is trying to descend");
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {
-    game->init_level(next_level, level->grid_at + point(0, 1), level->difficulty_depth + 1,
-                     level->dungeon_walk_order_level_no + 1);
-
-    l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
-    if (! l) {
+    if (! game->init_level(next_level, level->grid_at + point(0, 1), level->difficulty_depth + 1,
+                           level->dungeon_walk_order_level_no + 1)) {
       if (is_player()) {
         msg("The exit is permanently blocked!");
       }
+      return false;
+    }
+
+    l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
+    if (! l) {
+      err("No level");
       return false;
     }
   }

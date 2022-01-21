@@ -72,7 +72,7 @@ bool Thing::enchant_with_stone(Thingp what)
     //
     // Not really an error if the enchant is automatic
     //
-    log("no enchantstone found");
+    dbg("no enchantstone found");
   }
 
   return true;
@@ -117,7 +117,7 @@ int Thing::get_enchantstone_count(void)
     if (! t->is_enchantstone()) {
       continue;
     }
-    log("Found an enchantstone: %s", t->to_string().c_str());
+    dbg("Found an enchantstone: %s", t->to_string().c_str());
     v++;
   }
   return v;
@@ -128,7 +128,7 @@ bool Thing::can_enchant_something(void)
   TRACE_NO_INDENT();
   for (const auto t : get_item_vector()) {
     if (t->is_enchantable()) {
-      log("Found something we can enchant: %s", t->to_string().c_str());
+      dbg("Found something we can enchant: %s", t->to_string().c_str());
       return true;
     }
   }
@@ -151,6 +151,6 @@ bool Thing::enchant_random_item_with_stone(void)
   }
 
   auto chosen = cands[ pcg_random_range(0, cands.size()) ];
-  log("Enchant this randomly: %s", chosen->to_string().c_str());
+  dbg("Enchant this randomly: %s", chosen->to_string().c_str());
   return enchant_with_stone(chosen);
 }

@@ -29,11 +29,11 @@ std::string Thing::to_string(void)
 
   if (unlikely(! tpp)) {
     TRACE_NO_INDENT();
-    return (string_sprintf("%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
-                           is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/off" : "",
-                           is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
+    return (string_sprintf(
+        "%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
+        is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
+        is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+        is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 
   if (! g_loading) {
@@ -67,10 +67,10 @@ std::string Thing::to_string(void)
   }
 
   return (string_sprintf(
-      "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z, tpp->name().c_str(),
-      is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
-      is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
-      is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
+      "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
+      tpp->name().c_str(), is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
+      is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "",
+      is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
       is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
       is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
       is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y));
@@ -95,18 +95,18 @@ std::string Thing::to_short_string(void)
 
   if (unlikely(! tpp)) {
     TRACE_NO_INDENT();
-    return (string_sprintf("%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z,
-                           is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
-                           is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/off" : "",
-                           is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "",
-                           is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
+    return (string_sprintf(
+        "%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
+        is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
+        is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
+        is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "", curr_at.x, curr_at.y));
   }
 
   return (string_sprintf(
-      "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->world_at.z, tpp->name().c_str(),
-      is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",
-      is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
-      is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
+      "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
+      tpp->name().c_str(), is_dead ? "/dead" : "", is_scheduled_for_death ? "/dead-sched" : "",
+      is_resurrecting ? "/resurrecting" : "", is_offscreen ? "/off" : "", is_on_fire() ? "/onfire" : "",
+      is_hidden ? "/hid" : "", is_jumping ? "/jumping" : "", is_moving ? "/mv" : "", is_falling ? "/fall" : "",
       is_changing_level ? "/chg-level" : "", is_waiting_to_ascend_dungeon ? "/asc-dung" : "",
       is_waiting_to_descend_dungeon ? "/des-dung" : "", is_waiting_to_descend_sewer ? "/des-sewer" : "",
       is_waiting_to_ascend_sewer ? "/asc-sewer" : "", curr_at.x, curr_at.y));
@@ -124,7 +124,7 @@ std::string Thing::to_dbg_string(void)
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
-      level->world_at.z, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
+      level->dungeon_walk_order_level_no, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
       has_ever_moved ? ", has_ever_moved" : "", has_external_particle ? ", has_external_particle" : "",
       has_internal_particle ? ", has_internal_particle" : "", has_laser ? ", has_laser" : "",
       has_light ? ", has_light" : "", has_projectile ? ", has_projectile" : "", is_activated ? ", is_activated" : "",
@@ -158,7 +158,7 @@ std::string Thing::to_dbg_string(void)
       i_set_is_foilage ? ", i_set_is_foilage" : "", i_set_is_food ? ", i_set_is_food" : "",
       i_set_is_gold ? ", i_set_is_gold" : "", i_set_is_hazard ? ", i_set_is_hazard" : "",
       i_set_is_key ? ", i_set_is_key" : "", i_set_is_lava ? ", i_set_is_lava" : "",
-      i_set_is_light_blocker ? ", i_set_is_light_blocker" : "", i_set_is_mob_spawner ? ", i_set_is_mob_spawner" : "",
+      i_set_is_light_blocker ? ", i_set_is_light_blocker" : "", i_set_is_mob ? ", i_set_is_mob" : "",
       i_set_is_monst ? ", i_set_is_monst" : "", i_set_is_obs_wall_or_door ? ", i_set_is_obs_wall_or_door" : "",
       i_set_is_obs_destructable ? ", i_set_is_obs_destructable" : "",
       i_set_is_poisonous_danger_level ? ", i_set_is_poisonous_danger_level" : "",
@@ -186,7 +186,7 @@ std::string Thing::to_dbg_saved_string(void)
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
-      level->world_at.z, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
+      level->dungeon_walk_order_level_no, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
       has_ever_moved ? ", has_ever_moved" : "", has_laser ? ", has_laser" : "", has_light ? ", has_light" : "",
       has_projectile ? ", has_projectile" : "", is_activated ? ", is_activated" : "",
       is_attached ? ", is_attached" : "", is_being_destroyed ? ", is_being_destroyed" : "",
@@ -219,7 +219,7 @@ std::string Thing::to_dbg_saved_string(void)
       i_set_is_foilage ? ", i_set_is_foilage" : "", i_set_is_food ? ", i_set_is_food" : "",
       i_set_is_gold ? ", i_set_is_gold" : "", i_set_is_hazard ? ", i_set_is_hazard" : "",
       i_set_is_key ? ", i_set_is_key" : "", i_set_is_lava ? ", i_set_is_lava" : "",
-      i_set_is_light_blocker ? ", i_set_is_light_blocker" : "", i_set_is_mob_spawner ? ", i_set_is_mob_spawner" : "",
+      i_set_is_light_blocker ? ", i_set_is_light_blocker" : "", i_set_is_mob ? ", i_set_is_mob" : "",
       i_set_is_monst ? ", i_set_is_monst" : "", i_set_is_obs_wall_or_door ? ", i_set_is_obs_wall_or_door" : "",
       i_set_is_obs_destructable ? ", i_set_is_obs_destructable" : "",
       i_set_is_poisonous_danger_level ? ", i_set_is_poisonous_danger_level" : "",

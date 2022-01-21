@@ -94,7 +94,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   // If a minion mob dies, kill all minions
   //
-  if (defeater && is_mob_spawner()) {
+  if (defeater && is_mob()) {
     destroy_minions(defeater);
   }
 
@@ -109,7 +109,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   is_dead           = true;
 
   //
-  // Resurrect unless say this was a minion and its mob_spawner died
+  // Resurrect unless say this was a minion and its mob died
   //
   if (! is_resurrection_blocked) {
     if (is_resurrectable()) {

@@ -15,7 +15,7 @@ def tp_init(name, text_name):
     mytp.set_collision_hit_priority(10)
     mytp.set_damage_cold_dice("1")
     mytp.set_distance_minion_vision_shared(True)
-    mytp.set_distance_mob_spawner_max(6)
+    mytp.set_distance_mob_max(6)
     mytp.set_distance_vision(7)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)

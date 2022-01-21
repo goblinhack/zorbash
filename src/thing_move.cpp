@@ -101,9 +101,9 @@ void Thing::move_finish(void)
         s += " " + p1.to_string();
       }
       if (s.empty()) {
-        log("End of move");
+        dbg("End of move");
       } else {
-        log("End of move, moves left:%s", s.c_str());
+        dbg("End of move, moves left:%s", s.c_str());
       }
     }
 
@@ -202,19 +202,19 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   //
-  // Don't let minions wander too far from their mob_spawner.
+  // Don't let minions wander too far from their mob.
   //
   auto aip         = maybe_aip();
-  auto mob_spawner = get_top_mob_spawner();
-  if (mob_spawner) {
-    if (get_distance_mob_spawner_max()) {
-      auto new_distance  = distance(future_pos, mob_spawner->curr_at);
-      auto curr_distance = distance(curr_at, mob_spawner->curr_at);
+  auto mob = get_top_mob();
+  if (mob) {
+    if (get_distance_mob_max()) {
+      auto new_distance  = distance(future_pos, mob->curr_at);
+      auto curr_distance = distance(curr_at, mob->curr_at);
       if (new_distance <= curr_distance) {
         //
         // Always allow moves that end up closer to the base
         //
-      } else if (new_distance > get_distance_mob_spawner_max() + 1) {
+      } else if (new_distance > get_distance_mob_max() + 1) {
         //
         // Too far.
         //
@@ -224,7 +224,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           //
         } else {
           dbg("Minion cannot move to %d,%d (new-dist %f, curr-dist %f); it tugs at the leash at %d,%d", future_pos.x,
-              future_pos.y, new_distance, curr_distance, mob_spawner->curr_at.x, mob_spawner->curr_at.y);
+              future_pos.y, new_distance, curr_distance, mob->curr_at.x, mob->curr_at.y);
           //
           // Don't make spiders (minions to webs) lunge
           //

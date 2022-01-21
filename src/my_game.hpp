@@ -25,7 +25,7 @@ class WidPopup;
 typedef class Config_
 {
 public:
-  uint32_t header_size = {};
+  uint32_t serialized_size = {};
   //
   // Keep flags int size so the header size will change on a new flag.
   // It does not always for new bools.
@@ -139,16 +139,17 @@ public:
   WidPopup *wid_thing_info_create_popup(Thingp t, point tl, point be);
   WidPopup *wid_thing_info_create_popup_compact(const std::vector< Thingp > &);
 
+  bool init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no);
   bool load(std::string save_file, class Game &target);
   bool paused(void);
   bool save(std::string save_file);
-  bool wid_thing_info_push_popup(Thingp t);
   bool tick_end();
   bool wid_bag_move_item(Thingp t);
+  bool wid_thing_info_push_popup(Thingp t);
 
-  void config_gfx_select(void);
   void choose_player_name_select(void);
   void choose_seed_select(void);
+  void config_gfx_select(void);
   void config_keyboard_select(void);
   void config_other_select(void);
   void config_sound_select(void);
@@ -160,12 +161,7 @@ public:
   void help_select(void);
   void hiscore_select(void);
   void init_jump_paths(void);
-  void init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no);
   void init(void);
-  void start(void);
-  void place_player(void);
-  void pre_init(void);
-  void set_seed(void);
   void load_config(void);
   void load(int slot);
   void load_select(void);
@@ -174,6 +170,8 @@ public:
   void main_menu_select(void);
   void menu_dungeons_select(void);
   void new_game(void);
+  void place_player(void);
+  void pre_init(void);
   void quit_select(void);
   void robot_mode_tick();
   void save_config(void);
@@ -182,6 +180,8 @@ public:
   void save_snapshot_check();
   void save_snapshot(void);
   void save(void);
+  void set_seed(void);
+  void start(void);
   void tick_begin(const std::string &);
   void tick_begin_now(void);
   void tick_set_speed(void);
@@ -193,29 +193,29 @@ public:
   void wid_thing_info_add_attack(WidPopup *w, Thingp t);
   void wid_thing_info_add_carry_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
-  void wid_thing_info_add_stat_con(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_acid(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_cold(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_crush(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_digest(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_melee(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_poison(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_energy(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_fire(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_future1(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_future2(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_future3(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_cold(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_fire(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_crush(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_energy(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damage_acid(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_melee(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damage_poison(WidPopup *w, Thingp t);
   void wid_thing_info_add_danger_level(WidPopup *w, Thingp t);
-  void wid_thing_info_add_stat_def(WidPopup *w, Thingp t);
-  void wid_thing_info_add_stat_dex(WidPopup *w, Thingp t);
   void wid_thing_info_add_enchant(WidPopup *w, Thingp t);
   void wid_thing_info_add_gold_value(WidPopup *w, Thingp t);
   void wid_thing_info_add_health(WidPopup *w, Thingp t);
   void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
   void wid_thing_info_add_rarity(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_con(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_def(WidPopup *w, Thingp t);
+  void wid_thing_info_add_stat_dex(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_str(WidPopup *w, Thingp t);
   void wid_thing_info_clear_popup(void);
   void wid_thing_info_create_list(const std::vector< Thingp > &ts);
@@ -229,36 +229,46 @@ public:
   // Save file name, contains the date and other useful save slot info
   //
   std::string version = "" MYVER "";
-  uint32_t    header_size {};
-  int         save_slot {};
+
+  uint32_t serialized_size {};
+  int      save_slot {};
+
   std::string save_meta;
   std::string save_file;
   std::string appdata;
   std::string saved_dir;
-  Config      config;
-  World       world;
-  Levelp      level {}; // Current displayed level
-  Levelp      level_being_created {};
+
+  Config config;
+
+  World world;
+
+  Levelp level {}; // Current displayed level
+  Levelp level_being_created {};
 
   //
   // Keep all in order:
   //
   bool started {}; // Game is afoot
   bool things_are_moving {};
-  // fpoint      mouse_over;        // Mouse cursor
-  point       map_mini_over;     // Which tile in the map_mini
-  uint32_t    seed {};           // All randomness jumps off of this
+
+  point map_mini_over; // Which tile in the map_mini
+
+  uint32_t seed {}; // All randomness jumps off of this
+
   std::string tick_requested {}; // Something has requested a game tick
   std::string seed_name {};      // Human readable version of the above
-  point3d     current_level;     // Where we are in the world.
-  uint16_t    frame_count {0};   // Used to know if things have been displayed
-  uint32_t    fps_value = {};    // Current framerate
-  uint32_t    tick_completed {1};
-  uint32_t    tick_current {1};
-  uint8_t     inventory_highlight_slot {};
-  uint8_t     previous_slot {};
-  uint8_t     robot_mode {};
-  uint8_t     skillbox_highlight_slot {};
+
+  point3d current_level; // Where we are in the world.
+
+  uint16_t frame_count {0}; // Used to know if things have been displayed
+  uint32_t fps_value = {};  // Current framerate
+  uint32_t tick_completed {1};
+  uint32_t tick_current {1};
+
+  uint8_t inventory_highlight_slot {};
+  uint8_t previous_slot {};
+  uint8_t robot_mode {};
+  uint8_t skillbox_highlight_slot {};
 
   /////////////////////////////////////////////////////////////////////////
   // not worth saving

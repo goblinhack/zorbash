@@ -4,6 +4,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_light.hpp"
@@ -142,10 +143,20 @@ Lightp light_new(Thingp owner, point offset, int light_power)
 void Light::update_light_scale(float scale)
 {
   TRACE_AND_INDENT();
+
+  int old_light_power_curr   = light_power_orig * light_scale * (float) TILE_WIDTH;
+  int old_light_power_actual = light_power_curr + ((float) light_power_delta * (float) TILE_WIDTH);
+
   light_scale        = scale;
   light_power_curr   = light_power_orig * light_scale * (float) TILE_WIDTH;
   light_power_actual = light_power_curr + ((float) light_power_delta * (float) TILE_WIDTH);
-  update();
+
+  //
+  // Regenerate the light only if it changes
+  //
+  if ((light_power_curr != old_light_power_curr) || (light_power_actual != old_light_power_actual)) {
+    update();
+  }
 }
 
 void Light::update(void)
@@ -163,8 +174,8 @@ void Light::update(void)
   //
   float dr = RAD_360 / (float) max_light_rays;
   for (auto i = 0; i < max_light_rays; i++) {
-    double cosr, sinr;
-    sincos(dr * i, &sinr, &cosr);
+    float cosr, sinr;
+    sincosf(dr * i, &sinr, &cosr);
     draw_line(i, point(0, 0), point(light_power_actual * cosr, light_power_actual * sinr));
   }
 }
@@ -633,7 +644,6 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
   if (player) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
-    player->light_update_power();
     for (auto l : player->get_light()) {
       if (l->ray_cast_only) {
         l->render(true);

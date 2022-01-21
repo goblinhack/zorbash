@@ -153,7 +153,7 @@ void tp_random_init(void)
     if (tp->is_key()) {
       tp_key.push_back(tp);
     }
-    if (tp->is_mob_spawner()) {
+    if (tp->is_mob()) {
       tp_mob.push_back(tp);
     }
     if (tp->is_potion()) {
@@ -856,9 +856,9 @@ Tpp tp_random_ethereal_mob(void)
   return tp_get_with_rarity_filter(tp_ethereal_mob);
 }
 
-Tpp tp_random_mob_spawner_class_a(void) { return tp_random_mob(); }
+Tpp tp_random_mob_challenge_class_a(void) { return tp_random_mob(); }
 
-Tpp tp_random_mob_spawner_class_b(void) { return tp_random_mob(); }
+Tpp tp_random_mob_challenge_class_b(void) { return tp_random_mob(); }
 
 Tpp tp_random_blood(void)
 {

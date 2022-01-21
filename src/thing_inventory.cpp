@@ -35,7 +35,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     std::string name = "gold and keys";
     auto        w    = wid_find(name);
     if (unlikely(! w)) {
-      log("Could not find wid %s", name.c_str());
+      dbg("Could not find wid %s", name.c_str());
       return;
     }
 
@@ -88,7 +88,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     std::string name = "gold and keys";
     auto        w    = wid_find(name);
     if (unlikely(! w)) {
-      log("Could not find wid %s", name.c_str());
+      dbg("Could not find wid %s", name.c_str());
       return;
     }
 
@@ -112,7 +112,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     std::string name = "inventory slot" + std::to_string(slot);
     auto        w    = wid_find(name);
     if (unlikely(! w)) {
-      log("Could not find wid %s", name.c_str());
+      dbg("Could not find wid %s", name.c_str());
       return;
     }
 
@@ -177,7 +177,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
     std::string name = "inventory slot" + std::to_string(slot);
     auto        w    = wid_find(name);
     if (unlikely(! w)) {
-      log("Could not find wid %s", name.c_str());
+      dbg("Could not find wid %s", name.c_str());
       return;
     }
 

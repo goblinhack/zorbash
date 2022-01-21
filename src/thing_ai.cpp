@@ -445,7 +445,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
-      if (too_far_from_mob_spawner(p)) {
+      if (too_far_from_mob(p)) {
         continue;
       }
 
@@ -868,9 +868,9 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         //
-        // Don't attack your mob_spawner
+        // Don't attack your mob
         //
-        if (it->is_mob_spawner() && (get_top_mob_spawner() == this)) {
+        if (it->is_mob() && (get_top_mob() == this)) {
           AI_LOG("My mob spawner", it);
           continue;
         }
@@ -878,7 +878,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your fellow minion
         //
-        if (it->is_minion() && (it->get_top_mob_spawner() == get_top_mob_spawner())) {
+        if (it->is_minion() && (it->get_top_mob() == get_top_mob())) {
           AI_LOG("Fellow minion", it);
           continue;
         }
@@ -1020,7 +1020,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 int avoid_score = ((max_dist - dist) * health_diff);
                 GOAL_AVOID_ADD(GOAL_PRIO_VERY_HIGH, avoid_score, "avoid-monst", it);
               }
-            } else if (it->is_mob_spawner() && is_able_to_attack_mobs()) {
+            } else if (it->is_mob() && is_able_to_attack_mobs()) {
               //
               // Very close, high priority attack
               //
@@ -1123,7 +1123,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     //
     // Don't look too far beyond where we can go
     //
-    if (too_far_from_mob_spawner(p)) {
+    if (too_far_from_mob(p)) {
       continue;
     }
 
@@ -1357,7 +1357,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       continue;
     }
 
-    if (too_far_from_mob_spawner(p, 1)) {
+    if (too_far_from_mob(p, 1)) {
       continue;
     }
 
@@ -1430,9 +1430,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
 
     if (is_minion()) {
-      auto mob_spawner = get_top_mob_spawner();
-      if (mob_spawner) {
-        auto dist = distance(p, mob_spawner->curr_at);
+      auto mob = get_top_mob();
+      if (mob) {
+        auto dist = distance(p, mob->curr_at);
         auto msg  = string_sprintf("search cand @(%d,%d) dist-from-owner %f", p.x, p.y, dist);
         GOAL_ADD(GOAL_PRIO_VERY_LOW, total_score, msg.c_str(), nullptr);
       } else {
@@ -1633,7 +1633,7 @@ bool Thing::ai_tick(bool recursing)
   }
 
   //
-  // Update what we can see - which if a minion is from the perspective of the mob_spawner.
+  // Update what we can see - which if a minion is from the perspective of the mob.
   //
   auto vision_souce = get_vision_source();
 

@@ -262,10 +262,10 @@ void Charmap::init_charmaps(void)
   char_index                = Charmap::MOB_SPAWNER_CLASS_A;
   c                         = &all_charmaps[ char_index ];
   c->c                      = char_index;
-  c->is_mob_spawner_class_a = true;
+  c->is_mob_challenge_class_a = true;
 
   char_index                = Charmap::MOB_SPAWNER_CLASS_B;
   c                         = &all_charmaps[ char_index ];
   c->c                      = char_index;
-  c->is_mob_spawner_class_a = true;
+  c->is_mob_challenge_class_a = true;
 }

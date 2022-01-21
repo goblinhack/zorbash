@@ -351,7 +351,7 @@ void Level::heatmap_print(point at, point tl, point br)
         debug += (" m");
         continue;
       }
-      if (is_mob_spawner(x, y)) {
+      if (is_mob(x, y)) {
         debug += (" m");
         continue;
       }

@@ -62,16 +62,16 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Spider minions need to be leashed
   //
   bool jumping_home = false;
-  if (too_far_from_mob_spawner(to)) {
+  if (too_far_from_mob(to)) {
     dbg("No, minion is too far off the leash to jump");
     TRACE_AND_INDENT();
 
-    auto mob_spawner = get_top_mob_spawner();
-    if (mob_spawner) {
+    auto mob = get_top_mob();
+    if (mob) {
       dbg("Try jumping home");
       TRACE_AND_INDENT();
 
-      to           = mob_spawner->curr_at;
+      to           = mob->curr_at;
       jumping_home = true;
     } else {
       return false;
@@ -175,7 +175,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       //
     } else {
       if (! level->is_lit_ever(x, y)) {
-        IF_DEBUG2 { log("No, is not lit or visited"); }
+        IF_DEBUG2 { dbg("No, is not lit or visited"); }
 
         if (is_player()) {
           msg("You can't jump into the unlit regions.");

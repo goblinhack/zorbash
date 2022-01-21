@@ -43,7 +43,7 @@ def tp_init(name, text_name):
     mytp.set_damage_natural_dice("1d4")
     mytp.set_damage_received_doubled_from_water(True)
     mytp.set_distance_minion_vision_shared(True)
-    mytp.set_distance_mob_spawner_max(12)
+    mytp.set_distance_mob_max(12)
     mytp.set_distance_vision(13)
     mytp.set_environ_avoids_water(100)
     mytp.set_environ_prefers_fire(True)

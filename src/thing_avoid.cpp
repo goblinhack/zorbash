@@ -39,7 +39,7 @@ bool Thing::will_avoid_monst(const Thingp it)
     return false;
   }
 
-  if (it->is_minion() && (it->get_top_mob_spawner() == get_top_mob_spawner())) {
+  if (it->is_minion() && (it->get_top_mob() == get_top_mob())) {
     return false;
   }
 
@@ -120,7 +120,7 @@ bool Thing::will_avoid_monst(const point p)
       return false;
     }
 
-    if (it->is_minion() && (it->get_top_mob_spawner() == get_top_mob_spawner())) {
+    if (it->is_minion() && (it->get_top_mob() == get_top_mob())) {
       return false;
     }
 
