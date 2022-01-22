@@ -4,7 +4,7 @@
 //
 
 #include "my_game.hpp"
-#include "my_game_dungeons.hpp"
+#include "my_wid_choose_initial_dungeons.hpp"
 #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_sdl.hpp"

@@ -8,7 +8,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_file.hpp"
 #include "my_game.hpp"
-#include "my_game_error.hpp"
+#include "my_wid_error.hpp"
 #include "my_globals_extra.hpp"
 #include "my_monst.hpp"
 #include "my_sdl.hpp"
@@ -1025,7 +1025,7 @@ bool Game::load(std::string file_to_load, class Game &target)
   auto     vec = read_lzo_file(file_to_load, &uncompressed_len, &cs);
   if (vec.size() <= 0) {
     if (! game_load_headers_only) {
-      game_error("load error, empty file?");
+      wid_error("load error, empty file?");
     }
     return false;
   }
@@ -1075,7 +1075,7 @@ bool Game::load(std::string file_to_load, class Game &target)
   in >> bits(target);
   if (game_load_error != "") {
     if (! game_load_headers_only) {
-      game_error("load error, " + game_load_error);
+      wid_error("load error, " + game_load_error);
     }
     return false;
   }

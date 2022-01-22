@@ -100,7 +100,7 @@ static void game_display_credits_fg(void)
   blit_flush();
 }
 
-static void game_credits_tick(Widp w)
+static void wid_credits_tick(Widp w)
 {
   TRACE_AND_INDENT();
   game_display_credits_bg();
@@ -184,7 +184,7 @@ void Game::credits_select(void)
 
     wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
     wid_set_on_mouse_up(w, wid_credits_mouse_up);
-    wid_set_on_tick(w, game_credits_tick);
+    wid_set_on_tick(w, wid_credits_tick);
 
     wid_set_pos(w, tl, br);
     wid_set_text(w, "BACK");
