@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - crash on sewers and entrance                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
