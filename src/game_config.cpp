@@ -58,25 +58,18 @@ void Config::reset(void)
   ascii_gl_height        = {};
   ascii_gl_width         = {};
 
-  key_action0 = {SDL_SCANCODE_0};
-  key_action1 = {SDL_SCANCODE_1};
-  key_action2 = {SDL_SCANCODE_2};
-  key_action3 = {SDL_SCANCODE_3};
-  key_action4 = {SDL_SCANCODE_4};
-  key_action5 = {SDL_SCANCODE_5};
-  key_action6 = {SDL_SCANCODE_6};
-  key_action7 = {SDL_SCANCODE_7};
-  key_action8 = {SDL_SCANCODE_8};
-  key_action9 = {SDL_SCANCODE_9};
-  key_attack  = {SDL_SCANCODE_SPACE};
-#ifdef __APPLE__
-  //
-  // Delete on mac seems to map to backspace...
-  //
-  key_drop = {SDL_SCANCODE_BACKSPACE};
-#else
-  key_drop = {SDL_SCANCODE_DELETE};
-#endif
+  key_action0.sym         = SDLK_0;
+  key_action1.sym         = SDLK_1;
+  key_action2.sym         = SDLK_2;
+  key_action3.sym         = SDLK_3;
+  key_action4.sym         = SDLK_4;
+  key_action5.sym         = SDLK_5;
+  key_action6.sym         = SDLK_6;
+  key_action7.sym         = SDLK_7;
+  key_action8.sym         = SDLK_8;
+  key_action9.sym         = SDLK_9;
+  key_attack.sym          = SDLK_SPACE;
+  key_drop.sym            = SDLK_BACKSPACE;
   key_eat.sym             = SDLK_e;
   key_help.sym            = SDLK_h;
   key_jump.sym            = SDLK_j;
