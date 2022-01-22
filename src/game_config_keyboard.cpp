@@ -138,13 +138,13 @@ static void game_config_check_for_conflicts(SDL_Keysym code)
     TOPCON("%%fg=orange$Conflicting key, disabling key robot mode%%fg=reset$");
     game->config.key_robot_mode = {};
   }
-  if (sdlk_eq(game->config.key_unused4, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key unused4%%fg=reset$");
-    game->config.key_unused4 = {};
+  if (sdlk_eq(game->config.key_descend, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key descend%%fg=reset$");
+    game->config.key_descend = {};
   }
-  if (sdlk_eq(game->config.key_unused5, code)) {
-    TOPCON("%%fg=orange$Conflicting key, disabling key unused5%%fg=reset$");
-    game->config.key_unused5 = {};
+  if (sdlk_eq(game->config.key_ascend, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key ascend%%fg=reset$");
+    game->config.key_ascend = {};
   }
   if (sdlk_eq(game->config.key_eat, code)) {
     TOPCON("%%fg=orange$Conflicting key, disabling key eat%%fg=reset$");
@@ -365,6 +365,24 @@ static void game_config_key_use_set(SDL_Keysym code)
   game->config.key_use = {};
   game_config_check_for_conflicts(code);
   game->config.key_use = code;
+  game->config_keyboard_select();
+}
+
+static void game_config_key_ascend_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  game->config.key_ascend = {};
+  game_config_check_for_conflicts(code);
+  game->config.key_ascend = code;
+  game->config_keyboard_select();
+}
+
+static void game_config_key_descend_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  game->config.key_descend = {};
+  game_config_check_for_conflicts(code);
+  game->config.key_descend = code;
   game->config_keyboard_select();
 }
 
@@ -772,6 +790,22 @@ static uint8_t game_config_key_use(Widp w, int32_t x, int32_t y, uint32_t button
   TRACE_AND_INDENT();
   grab_key("item use");
   on_sdl_key_grab = game_config_key_use_set;
+  return true;
+}
+
+static uint8_t game_config_key_descend(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item descend");
+  on_sdl_key_grab = game_config_key_descend_set;
+  return true;
+}
+
+static uint8_t game_config_key_ascend(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item ascend");
+  on_sdl_key_grab = game_config_key_ascend_set;
   return true;
 }
 
@@ -1530,7 +1564,64 @@ void Game::config_keyboard_select(void)
     wid_set_on_mouse_up(w, game_config_key_eat);
   }
   ///////////////////////////////////////////////////////////////////////
-  // gfx_mode
+  // descend
+  ///////////////////////////////////////////////////////////////////////
+  y_at += 1;
+  {
+    TRACE_AND_INDENT();
+    auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "descend");
+
+    point tl = make_point(0, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Descend");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 8, y_at);
+    point br = make_point(width / 2 + 20, y_at);
+    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_descend));
+    wid_set_on_mouse_up(w, game_config_key_descend);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // ascend
+  ///////////////////////////////////////////////////////////////////////
+  y_at += 1;
+  {
+    TRACE_AND_INDENT();
+    auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "ascend");
+
+    point tl = make_point(0, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Ascend");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 8, y_at);
+    point br = make_point(width / 2 + 20, y_at);
+    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_ascend));
+    wid_set_on_mouse_up(w, game_config_key_ascend);
+  }
+  y_at++;
+  ///////////////////////////////////////////////////////////////////////
+  // Inventory
   ///////////////////////////////////////////////////////////////////////
   y_at += 1;
   {
@@ -1912,7 +2003,7 @@ void Game::config_keyboard_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "robot mode");
+    wid_set_text(w, "Robot mode");
   }
   {
     TRACE_AND_INDENT();

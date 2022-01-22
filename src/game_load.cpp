@@ -854,8 +854,8 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.key_save);
   in >> bits(my.t.key_screenshot);
   in >> bits(my.t.key_throw);
-  in >> bits(my.t.key_unused4);
-  in >> bits(my.t.key_unused5);
+  in >> bits(my.t.key_descend);
+  in >> bits(my.t.key_ascend);
   in >> bits(my.t.key_use);
   in >> bits(my.t.key_wait_or_collect);
   in >> bits(my.t.key_zoom_in);

@@ -105,8 +105,8 @@ public:
   SDL_Keysym key_save            = {};
   SDL_Keysym key_screenshot      = {};
   SDL_Keysym key_throw           = {};
-  SDL_Keysym key_unused4         = {};
-  SDL_Keysym key_unused5         = {};
+  SDL_Keysym key_descend         = {};
+  SDL_Keysym key_ascend         = {};
   SDL_Keysym key_use             = {};
   SDL_Keysym key_wait_or_collect = {};
   SDL_Keysym key_zoom_in         = {};
