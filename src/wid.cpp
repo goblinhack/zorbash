@@ -3881,7 +3881,7 @@ uint8_t wid_receive_input(Widp w, const SDL_Keysym *key)
   uint32_t     origlen;
   uint32_t     cnt;
 
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
 
@@ -4110,7 +4110,7 @@ static uint8_t wid_receive_unhandled_input(const SDL_Keysym *key)
 
   w = wid_get_top_parent(wid_console_input_line);
 
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     wid_toggle_hidden(wid_console_window);
     wid_raise(wid_console_window);
 
@@ -4127,7 +4127,7 @@ static uint8_t wid_receive_unhandled_input(const SDL_Keysym *key)
     return true;
   }
 
-  if (sdlk_eq(key, game->config.key_screenshot)) {
+  if (sdlk_eq(*key, game->config.key_screenshot)) {
     sdl_screenshot();
     TOPCON("Screenshot taken.");
     CON("PLAYER: Screenshot taken");

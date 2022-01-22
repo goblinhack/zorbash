@@ -7,6 +7,7 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_random.hpp"
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
@@ -107,31 +108,61 @@ void Thing::location_check_forced(void)
     return;
   }
 
-  if (! is_able_to_change_levels()) {
-    return;
+  if (is_able_to_change_levels()) {
+    auto descend_check = false;
+    auto ascend_check  = false;
+
+    //
+    // If we have a move path then we are perhaps trying to descend into the
+    // level below.
+    //
+    if (level->is_ascend_dungeon(curr_at.x, curr_at.y) || level->is_ascend_sewer(curr_at.x, curr_at.y)) {
+      if (is_player()) {
+        if (game->request_ascend || (curr_at == game->cursor_move_end)) {
+          ascend_check         = true;
+          game->request_ascend = false;
+        }
+      } else if (pcg_random_range(0, 100) < 10) {
+        ascend_check = true;
+      }
+    }
+
+    if (level->is_descend_dungeon(curr_at.x, curr_at.y) || level->is_descend_sewer(curr_at.x, curr_at.y)) {
+      if (is_player()) {
+        if (game->request_descend || (curr_at == game->cursor_move_end)) {
+          descend_check         = true;
+          game->request_descend = false;
+        }
+      } else if (pcg_random_range(0, 100) < 10) {
+        descend_check = true;
+      }
+    }
+
+    if (ascend_check) {
+      if (ascend_dungeon_tick()) {
+        dbg("Location check, ascending dungeon");
+        return;
+      }
+      if (ascend_sewer_tick()) {
+        dbg("Location check, ascending sewer");
+        return;
+      }
+    }
+    if (descend_check) {
+      if (descend_dungeon_tick()) {
+        dbg("Location check, descending dungeon");
+        return;
+      }
+      if (descend_sewer_tick()) {
+        dbg("Location check, descending sewer");
+        return;
+      }
+    }
   }
 
-  //
-  // If we have a move path then we are perhaps trying to do descend into the
-  // level below.
-  //
-  if (maybe_aip() && get_aip()->move_path.size() <= 1) {
-    if (descend_dungeon_tick()) {
-      dbg("Location check, descending dungeon");
-      return;
-    }
-    if (ascend_dungeon_tick()) {
-      dbg("Location check, ascending dungeon");
-      return;
-    }
-    if (descend_sewer_tick()) {
-      dbg("Location check, descending sewer");
-      return;
-    }
-    if (ascend_sewer_tick()) {
-      dbg("Location check, ascending sewer");
-      return;
-    }
+  if (is_player()) {
+    game->request_ascend  = false;
+    game->request_descend = false;
   }
 }
 

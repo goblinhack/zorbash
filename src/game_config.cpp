@@ -151,7 +151,7 @@ static uint8_t game_config_top_back(Widp w, int32_t x, int32_t y, uint32_t butto
 static uint8_t game_config_top_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
 
@@ -183,7 +183,7 @@ static uint8_t game_config_top_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
 

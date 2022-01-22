@@ -14,10 +14,6 @@
 
 bool Thing::descend_dungeon_tick(void)
 {
-  if (! is_able_to_change_levels()) {
-    return false;
-  }
-
   if (! level->is_descend_dungeon(curr_at.x, curr_at.y)) {
     return false;
   }

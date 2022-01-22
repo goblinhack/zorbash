@@ -7,6 +7,73 @@
 
 std::string to_string_ignoring_mods(const SDL_Keysym &k)
 {
+  if (k.sym == SDLK_AMPERSAND) {
+    return "&";
+  }
+
+  if (k.sym == SDLK_ASTERISK) {
+    return "*";
+  }
+
+  if (k.sym == SDLK_AT) {
+    return "@";
+  }
+
+  if (k.sym == SDLK_CARET) {
+    return "^";
+  }
+
+  if (k.sym == SDLK_COLON) {
+    return ":";
+  }
+
+  if (k.sym == SDLK_DOLLAR) {
+    return "$";
+  }
+
+  if (k.sym == SDLK_EXCLAIM) {
+    return "!";
+  }
+
+  if (k.sym == SDLK_GREATER) {
+    return ">";
+  }
+
+  if (k.sym == SDLK_HASH) {
+    return "#";
+  }
+
+  if (k.sym == SDLK_LEFTPAREN) {
+    return "(";
+  }
+
+  if (k.sym == SDLK_LESS) {
+    return "<";
+  }
+
+  if (k.sym == SDLK_PERCENT) {
+    return "%";
+  }
+
+  if (k.sym == SDLK_PLUS) {
+    return "+";
+  }
+
+  if (k.sym == SDLK_QUESTION) {
+    return "?";
+  }
+
+  if (k.sym == SDLK_QUOTEDBL) {
+    return "\"";
+  }
+
+  if (k.sym == SDLK_RIGHTPAREN) {
+    return ")";
+  }
+
+  if (k.sym == SDLK_UNDERSCORE) {
+    return "_";
+  }
   if ((k.scancode == SDL_SCANCODE_0) || (k.sym == SDLK_0)) {
     return "0";
   }
@@ -831,74 +898,6 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
     return "z";
   }
 
-  if (k.sym == SDLK_AMPERSAND) {
-    return "&";
-  }
-
-  if (k.sym == SDLK_ASTERISK) {
-    return "*";
-  }
-
-  if (k.sym == SDLK_AT) {
-    return "@";
-  }
-
-  if (k.sym == SDLK_CARET) {
-    return "^";
-  }
-
-  if (k.sym == SDLK_COLON) {
-    return ":";
-  }
-
-  if (k.sym == SDLK_DOLLAR) {
-    return "$";
-  }
-
-  if (k.sym == SDLK_EXCLAIM) {
-    return "!";
-  }
-
-  if (k.sym == SDLK_GREATER) {
-    return ">";
-  }
-
-  if (k.sym == SDLK_HASH) {
-    return "#";
-  }
-
-  if (k.sym == SDLK_LEFTPAREN) {
-    return "(";
-  }
-
-  if (k.sym == SDLK_LESS) {
-    return "<";
-  }
-
-  if (k.sym == SDLK_PERCENT) {
-    return "%";
-  }
-
-  if (k.sym == SDLK_PLUS) {
-    return "+";
-  }
-
-  if (k.sym == SDLK_QUESTION) {
-    return "?";
-  }
-
-  if (k.sym == SDLK_QUOTEDBL) {
-    return "\"";
-  }
-
-  if (k.sym == SDLK_RIGHTPAREN) {
-    return ")";
-  }
-
-  if (k.sym == SDLK_UNDERSCORE) {
-    return "_";
-  }
-
   return "";
 }
 
@@ -978,6 +977,106 @@ std::string to_string(const SDL_Keysym &k)
   }
 
   return out + to_string_ignoring_mods(k);
+}
+
+SDL_Keysym sdlk_normalize(SDL_Keysym k)
+{
+  if ((k.mod & KMOD_LSHIFT) || (k.mod & KMOD_RSHIFT)) {
+    k.mod &= ~KMOD_SHIFT;
+    switch (k.sym) {
+      case SDLK_COMMA :
+        // <
+        k.sym = SDLK_LESS;
+        break;
+      case SDLK_MINUS :
+        // _
+        k.sym = SDLK_MINUS;
+        break;
+      case SDLK_PERIOD :
+        // >
+        k.sym = SDLK_GREATER;
+        break;
+      case SDLK_SLASH :
+        // ?
+        k.sym = SDLK_QUESTION;
+        break;
+      case SDLK_EQUALS :
+        // +
+        k.sym = SDLK_PLUS;
+        break;
+      case SDLK_0 :
+        // )
+        k.sym = SDLK_RIGHTPAREN;
+        break;
+      case SDLK_1 :
+        // !
+        k.sym = SDLK_EXCLAIM;
+        break;
+      case SDLK_2 :
+        // @
+        k.sym = SDLK_AT;
+        break;
+      case SDLK_3 :
+        // #
+        k.sym = SDLK_HASH;
+        break;
+      case SDLK_4 :
+        // $
+        k.sym = SDLK_DOLLAR;
+        break;
+      case SDLK_5 :
+        // %
+        k.sym = SDLK_PERCENT;
+        break;
+      case SDLK_6 :
+        // ^
+        k.sym = SDLK_CARET;
+        break;
+      case SDLK_7 :
+        // &
+        k.sym = SDLK_AMPERSAND;
+        break;
+      case SDLK_8 :
+        // *
+        k.sym = SDLK_ASTERISK;
+        break;
+      case SDLK_9 :
+        // (
+        k.sym = SDLK_LEFTPAREN;
+        break;
+      case SDLK_SEMICOLON :
+        // :
+        k.sym = SDLK_COLON;
+        break;
+      case SDLK_LEFTBRACKET :
+        // {
+        k.sym = SDLK_LEFTBRACKET;
+        break;
+      case SDLK_BACKSLASH :
+        // |
+        k.sym = SDLK_KP_VERTICALBAR;
+        break;
+      case SDLK_RIGHTBRACKET :
+        // }
+        k.sym = SDLK_RIGHTBRACKET;
+        break;
+      case SDLK_HASH :
+        // ~
+        //
+        // Not sure about this one for tilde in US and UK keyboards
+        //
+        k.sym = SDLK_BACKQUOTE;
+        break;
+    }
+  }
+  return k;
+}
+
+bool sdlk_eq(const SDL_Keysym &a, const SDL_Keysym &b)
+{
+  auto k1 = sdlk_normalize(a);
+  auto k2 = sdlk_normalize(b);
+  return (k1.sym == k2.sym) && (k1.mod == k2.mod);
 }
 
 bool sdlk_eq(const SDL_Scancode s, const SDL_Keysym &k)

@@ -72,11 +72,11 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return false;
   }
 
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
 
-  if (sdlk_eq(key, game->config.key_robot_mode)) {
+  if (sdlk_eq(*key, game->config.key_robot_mode)) {
     LOG("PLAYER: Pressed robot mode key");
     TRACE_AND_INDENT();
     wid_actionbar_robot_mode_toggle();
@@ -85,16 +85,34 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return true;
   }
 
-  if (sdlk_eq(key, game->config.key_zoom_out)) {
+  if (sdlk_eq(*key, game->config.key_zoom_out)) {
     LOG("PLAYER: Zoom out.");
     config_game_pix_zoom_out();
     return true;
   }
 
-  if (sdlk_eq(key, game->config.key_zoom_in)) {
+  if (sdlk_eq(*key, game->config.key_zoom_in)) {
     LOG("PLAYER: Zoom in.");
     config_game_pix_zoom_in();
     return true;
+  }
+
+  if (sdlk_eq(*key, game->config.key_ascend)) {
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    game->request_ascend = true;
+    game->tick_begin("ascend");
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_descend)) {
+    //
+    // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
+    //
+    game->request_descend = true;
+    game->tick_begin("descend");
+    return false; // To avoid click noise
   }
 
   bool left   = false;
@@ -193,7 +211,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   //
   // Allow diagonal movements by checking for multiple presses
   //
-  if ((key->scancode == SDL_SCANCODE_KP_PERIOD) || (sdlk_eq(key, game->config.key_wait_or_collect))) {
+  if ((key->scancode == SDL_SCANCODE_KP_PERIOD) || (sdlk_eq(*key, game->config.key_wait_or_collect))) {
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
@@ -203,7 +221,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     game->request_player_wait_or_collect = true;
     return false; // To avoid click noise
   }
-  if (sdlk_eq(key, game->config.key_move_left)) {
+  if (sdlk_eq(*key, game->config.key_move_left)) {
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
@@ -213,7 +231,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     game->request_player_left = true;
     return false; // To avoid click noise
   }
-  if (sdlk_eq(key, game->config.key_move_right)) {
+  if (sdlk_eq(*key, game->config.key_move_right)) {
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
@@ -223,7 +241,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     game->request_player_right = true;
     return false; // To avoid click noise
   }
-  if (sdlk_eq(key, game->config.key_move_up)) {
+  if (sdlk_eq(*key, game->config.key_move_up)) {
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
@@ -233,7 +251,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     game->request_player_up = true;
     return false; // To avoid click noise
   }
-  if (sdlk_eq(key, game->config.key_move_down)) {
+  if (sdlk_eq(*key, game->config.key_move_down)) {
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
@@ -247,7 +265,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   //
   // attack
   //
-  if (sdlk_eq(key, game->config.key_attack)) {
+  if (sdlk_eq(*key, game->config.key_attack)) {
     attack = true;
     player_tick(left, right, up, down, attack, wait, jump);
     return false; // To avoid click noise
@@ -256,7 +274,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   //
   // jump
   //
-  if (sdlk_eq(key, game->config.key_jump)) {
+  if (sdlk_eq(*key, game->config.key_jump)) {
     jump = true;
     player_tick(left, right, up, down, attack, wait, jump);
     return false; // To avoid click noise
@@ -324,7 +342,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
   }
 
-  if (sdlk_eq(key, game->config.key_drop)) {
+  if (sdlk_eq(*key, game->config.key_drop)) {
     LOG("PLAYER: Pressed drop key");
     TRACE_AND_INDENT();
 
@@ -370,7 +388,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
   }
 
-  if (sdlk_eq(key, game->config.key_eat)) {
+  if (sdlk_eq(*key, game->config.key_eat)) {
     LOG("PLAYER: Pressed eat key");
     TRACE_AND_INDENT();
     if (game->state == Game::STATE_CHOOSING_TARGET) {
@@ -403,7 +421,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
   }
 
-  if (sdlk_eq(key, game->config.key_quit)) {
+  if (sdlk_eq(*key, game->config.key_quit)) {
     LOG("PLAYER: Pressed quit key");
     TRACE_AND_INDENT();
     wid_actionbar_robot_mode_off();
@@ -418,7 +436,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // Avoid random keypresses interrupting the robot
     //
   } else {
-    if (sdlk_eq(key, game->config.key_help)) {
+    if (sdlk_eq(*key, game->config.key_help)) {
       LOG("PLAYER: Pressed help key");
       TRACE_AND_INDENT();
       wid_actionbar_robot_mode_off();
@@ -427,7 +445,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->config_keyboard_select();
       return true;
     }
-    if (sdlk_eq(key, game->config.key_load)) {
+    if (sdlk_eq(*key, game->config.key_load)) {
       LOG("PLAYER: Pressed load key");
       TRACE_AND_INDENT();
       wid_actionbar_robot_mode_off();
@@ -437,7 +455,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->load_select();
       return true;
     }
-    if (sdlk_eq(key, game->config.key_save)) {
+    if (sdlk_eq(*key, game->config.key_save)) {
       LOG("PLAYER: Pressed save key");
       TRACE_AND_INDENT();
       wid_actionbar_robot_mode_off();
@@ -447,7 +465,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->save_select();
       return true;
     }
-    if (sdlk_eq(key, game->config.key_use)) {
+    if (sdlk_eq(*key, game->config.key_use)) {
       LOG("PLAYER: Pressed use key");
       TRACE_AND_INDENT();
       if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -463,7 +481,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       }
       return true;
     }
-    if (sdlk_eq(key, game->config.key_throw)) {
+    if (sdlk_eq(*key, game->config.key_throw)) {
       LOG("PLAYER: Pressed throw key");
       TRACE_AND_INDENT();
       if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) {
@@ -479,7 +497,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
     // Open inventory
     //
-    if (sdlk_eq(key, game->config.key_inventory)) {
+    if (sdlk_eq(*key, game->config.key_inventory)) {
       LOG("PLAYER: Pressed inventory key");
       wid_inventory_init();
       return true;
@@ -489,7 +507,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       //
       // If shift is held, select skills
       //
-      if (sdlk_eq(key, game->config.key_action0)) {
+      if (sdlk_eq(*key, game->config.key_action0)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -498,7 +516,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action1)) {
+      if (sdlk_eq(*key, game->config.key_action1)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -507,7 +525,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action2)) {
+      if (sdlk_eq(*key, game->config.key_action2)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -516,7 +534,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action3)) {
+      if (sdlk_eq(*key, game->config.key_action3)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -525,7 +543,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action4)) {
+      if (sdlk_eq(*key, game->config.key_action4)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -534,7 +552,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action5)) {
+      if (sdlk_eq(*key, game->config.key_action5)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -543,7 +561,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action6)) {
+      if (sdlk_eq(*key, game->config.key_action6)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -552,7 +570,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action7)) {
+      if (sdlk_eq(*key, game->config.key_action7)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -561,7 +579,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action8)) {
+      if (sdlk_eq(*key, game->config.key_action8)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -570,7 +588,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         wid_rightbar_init();
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action9)) {
+      if (sdlk_eq(*key, game->config.key_action9)) {
         LOG("PLAYER: Pressed skill action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -583,7 +601,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       //
       // If shift is not held, select inventory
       //
-      if (sdlk_eq(key, game->config.key_action0)) {
+      if (sdlk_eq(*key, game->config.key_action0)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -596,7 +614,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action1)) {
+      if (sdlk_eq(*key, game->config.key_action1)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -609,7 +627,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action2)) {
+      if (sdlk_eq(*key, game->config.key_action2)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -622,7 +640,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action3)) {
+      if (sdlk_eq(*key, game->config.key_action3)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -635,7 +653,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action4)) {
+      if (sdlk_eq(*key, game->config.key_action4)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -648,7 +666,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action5)) {
+      if (sdlk_eq(*key, game->config.key_action5)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -661,7 +679,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action6)) {
+      if (sdlk_eq(*key, game->config.key_action6)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -674,7 +692,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action7)) {
+      if (sdlk_eq(*key, game->config.key_action7)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -687,7 +705,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action8)) {
+      if (sdlk_eq(*key, game->config.key_action8)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);
@@ -700,7 +718,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         }
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action9)) {
+      if (sdlk_eq(*key, game->config.key_action9)) {
         LOG("PLAYER: Pressed action key");
         TRACE_AND_INDENT();
         game->change_state(Game::STATE_NORMAL);

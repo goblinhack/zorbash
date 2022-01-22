@@ -199,6 +199,7 @@ void Level::cursor_path_draw_line(point start, point end)
   // dmap_print(&d, start, dmap_start, dmap_end);
   auto p                 = dmap_solve_allow_diagonal(&d, start);
   game->cursor_move_path = p;
+  game->cursor_move_end  = end;
 
   for (auto &c : p) {
     if (cursor && cursor->is_visible()) {
@@ -215,6 +216,7 @@ void Level::cursor_path_draw_line(const std::vector< point > &move_path)
   TRACE_AND_INDENT();
 
   game->cursor_move_path = move_path;
+  game->cursor_move_end  = {};
 
   for (auto &c : move_path) {
     if (cursor && cursor->is_visible()) {
@@ -418,6 +420,7 @@ void Level::cursor_path_clear(void)
   }
 
   game->cursor_move_path.clear();
+  game->cursor_move_end = {};
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {

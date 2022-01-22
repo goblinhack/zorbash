@@ -63,11 +63,11 @@ static uint8_t wid_skills_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
 
-  if (sdlk_eq(key, game->config.key_drop)) {
+  if (sdlk_eq(*key, game->config.key_drop)) {
     auto what = game->level->inventory_get();
     if (what) {
       if (game->level->player->drop(what)) {
@@ -130,7 +130,7 @@ static uint8_t wid_skills_key_down(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
 

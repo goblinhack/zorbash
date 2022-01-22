@@ -106,7 +106,7 @@ public:
   SDL_Keysym key_screenshot      = {};
   SDL_Keysym key_throw           = {};
   SDL_Keysym key_descend         = {};
-  SDL_Keysym key_ascend         = {};
+  SDL_Keysym key_ascend          = {};
   SDL_Keysym key_use             = {};
   SDL_Keysym key_wait_or_collect = {};
   SDL_Keysym key_zoom_in         = {};
@@ -352,6 +352,8 @@ public:
   bool     request_player_left {};
   bool     request_player_right {};
   bool     request_player_wait_or_collect {};
+  bool     request_ascend {};
+  bool     request_descend {};
 
   Thingp request_inventory_thing_over {};
   Thingp request_inventory_thing_selected {};
@@ -370,6 +372,7 @@ public:
   // Temporary. Last cursor path shown.
   //
   std::vector< point > cursor_move_path;
+  point                cursor_move_end;
 
   //
   // Temporary for the status bar
