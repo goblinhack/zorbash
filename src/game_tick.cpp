@@ -156,6 +156,11 @@ bool Game::tick_end(void)
   //
   tick_set_speed();
 
+  //
+  // Recreate as we might need to show location specific icons, like aacend ot descend
+  //
+  wid_actionbar_init();
+
   return true;
 }
 

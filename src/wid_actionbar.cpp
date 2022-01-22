@@ -28,6 +28,8 @@ static WidPopup *wid_over_keyboard;
 static WidPopup *wid_over_inventory;
 static WidPopup *wid_over_collect;
 static WidPopup *wid_over_save;
+static WidPopup *wid_over_ascend;
+static WidPopup *wid_over_descend;
 static WidPopup *wid_over_zoom_in;
 static WidPopup *wid_over_zoom_out;
 static WidPopup *wid_over_wait;
@@ -69,6 +71,12 @@ void wid_actionbar_close_all_popups(void)
 
   delete wid_over_save;
   wid_over_save = nullptr;
+
+  delete wid_over_ascend;
+  wid_over_ascend = nullptr;
+
+  delete wid_over_descend;
+  wid_over_descend = nullptr;
 
   delete wid_over_zoom_in;
   wid_over_zoom_in = nullptr;
@@ -228,11 +236,11 @@ static void wid_actionbar_robot_over_b(Widp w, int32_t relx, int32_t rely, int32
   wid_over_robot_mode->log(UI_LOGGING_EMPTY_LINE);
   wid_over_robot_mode->log(
       "Robot mode allows your player to explore the level automatically. Be warned, the robot will fight enemies, "
-      "equip weapons etc... all on its own.");
+      "equip weapons etc... all on its own. Madness.");
   wid_over_robot_mode->log(UI_LOGGING_EMPTY_LINE);
   wid_over_robot_mode->log(
-      "It is also not that smart and hence NOT to be trusted with a precious "
-      "character you have built it.");
+      "It is also sub smart and hence NOT to be trusted with a precious "
+      "character you have built.");
   wid_over_robot_mode->log(UI_LOGGING_EMPTY_LINE);
   wid_over_robot_mode->log(
       "Goblinhack cannot be held responsible for the death, dismemberment or otherwise damage caused to a player "
@@ -423,6 +431,144 @@ static void wid_actionbar_save_over_e(Widp w)
 
   delete wid_over_save;
   wid_over_save = nullptr;
+}
+
+static uint8_t wid_actionbar_ascend(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  DBG3("Actionbar ascend");
+  TRACE_NO_INDENT();
+
+  if (! game->level) {
+    return true;
+  }
+
+  auto player = game->level->player;
+  if (! player) {
+    return true;
+  }
+
+  if (player->is_dead) {
+    return true;
+  }
+
+  wid_actionbar_close_all_popups();
+  game->request_ascend = true;
+  game->tick_begin("ascend");
+  wid_actionbar_init();
+  delete wid_over_ascend;
+  wid_over_ascend = nullptr;
+  return true;
+}
+
+static void wid_actionbar_ascend_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 9;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_ascend = new WidPopup("Ascend", tl, br, nullptr, "", false, false);
+  wid_over_ascend->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Ascend");
+  wid_over_ascend->log(UI_LOGGING_EMPTY_LINE);
+
+  wid_over_ascend->log(
+      "Select this to ascend cowardly to the previous level. I mean you might have a good reason, but let's both of "
+      "us face it; probably not...");
+}
+
+static void wid_actionbar_ascend_over_e(Widp w)
+{
+  TRACE_NO_INDENT();
+
+  delete wid_over_ascend;
+  wid_over_ascend = nullptr;
+}
+
+static uint8_t wid_actionbar_descend(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  DBG3("Actionbar descend");
+  TRACE_NO_INDENT();
+
+  if (! game->level) {
+    return true;
+  }
+
+  auto player = game->level->player;
+  if (! player) {
+    return true;
+  }
+
+  if (player->is_dead) {
+    return true;
+  }
+
+  wid_actionbar_close_all_popups();
+  game->request_descend = true;
+  game->tick_begin("descend");
+  wid_actionbar_init();
+  delete wid_over_descend;
+  wid_over_descend = nullptr;
+  return true;
+}
+
+static void wid_actionbar_descend_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 30;
+  int height = 8;
+
+  tlx -= width / 2;
+  brx += width / 2;
+  tly -= height;
+  bry -= 4;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_over_descend = new WidPopup("Descend", tl, br, nullptr, "", false, false);
+  wid_over_descend->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Descend");
+  wid_over_descend->log(UI_LOGGING_EMPTY_LINE);
+
+  wid_over_descend->log(
+      "Select this to descend to the next level. If you dare... I mean seriously, there could be trouble down "
+      "there.");
+}
+
+static void wid_actionbar_descend_over_e(Widp w)
+{
+  TRACE_NO_INDENT();
+
+  delete wid_over_descend;
+  wid_over_descend = nullptr;
 }
 
 static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -856,6 +1002,7 @@ void wid_actionbar_init(void)
   if (! game->level) {
     return;
   }
+  auto level = game->level;
 
   auto player = game->level->player;
   if (! player) {
@@ -896,6 +1043,23 @@ void wid_actionbar_init(void)
     options++;
     options++;
   }
+
+  bool add_descend {};
+  if (level->is_descend_dungeon(player->curr_at.x, player->curr_at.y) ||
+      level->is_descend_sewer(player->curr_at.x, player->curr_at.y)) {
+    options++;
+    add_descend = true;
+  }
+
+  bool add_ascend {};
+  if (level->dungeon_walk_order_level_no > 1) {
+    if (level->is_ascend_dungeon(player->curr_at.x, player->curr_at.y) ||
+        level->is_ascend_sewer(player->curr_at.x, player->curr_at.y)) {
+      options++;
+      add_ascend = true;
+    }
+  }
+
   int option_width = 4;
   int w            = options * option_width;
   int left_half    = w / 2;
@@ -964,6 +1128,30 @@ void wid_actionbar_init(void)
       wid_set_on_tick(w, wid_actionbar_ai_tick);
     }
     wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    x_at += option_width;
+  }
+
+  if (! game->request_ascend && add_ascend) {
+    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar ascend");
+    point tl = make_point(x_at, 0);
+    point br = make_point(x_at + option_width - 1, option_width - 1);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "ui_icon_ascend");
+    wid_set_on_mouse_up(w, wid_actionbar_ascend);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_e);
+    x_at += option_width;
+  }
+
+  if (! game->request_descend && add_descend) {
+    auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar descend");
+    point tl = make_point(x_at, 0);
+    point br = make_point(x_at + option_width - 1, option_width - 1);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "ui_icon_descend");
+    wid_set_on_mouse_up(w, wid_actionbar_descend);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_b);
+    wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_e);
     x_at += option_width;
   }
 
