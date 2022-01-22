@@ -30,7 +30,7 @@ static void wid_error_destroy(void)
   wid_botcon_fini();
   wid_botcon_init();
   game->fini();
-  game->main_menu_select();
+  game->wid_main_menu_select();
   TOPCON("The dungeon went dark briefly. What happened?");
 }
 

@@ -20,7 +20,7 @@ static void wid_credits_destroy(void)
   delete wid_credits_window;
   wid_credits_window = nullptr;
   game->fini();
-  game->main_menu_select();
+  game->wid_main_menu_select();
   wid_hide(wid_topcon_window);
   wid_hide(wid_botcon_window);
 }
@@ -108,7 +108,7 @@ static void wid_credits_tick(Widp w)
   game_display_credits_fg();
 }
 
-void Game::credits_select(void)
+void Game::wid_credits_select(void)
 {
   TRACE_AND_INDENT();
   CON("Credits");

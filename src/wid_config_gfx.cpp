@@ -27,7 +27,7 @@ static uint8_t wid_config_gfx_cancel(Widp w, int32_t x, int32_t y, uint32_t butt
   game->load_config();
   sdl_config_update_all();
   wid_config_gfx_destroy();
-  game->config_top_select();
+  game->wid_config_top_menu();
   return true;
 }
 
@@ -37,7 +37,7 @@ static uint8_t wid_config_gfx_save(Widp w, int32_t x, int32_t y, uint32_t button
   CON("PLAYER: Save config");
   game->save_config();
   wid_config_gfx_destroy();
-  game->config_top_select();
+  game->wid_config_top_menu();
   if (local_g_need_restart) {
     g_need_restart = true;
   }
@@ -48,7 +48,7 @@ static uint8_t wid_config_gfx_back(Widp w, int32_t x, int32_t y, uint32_t button
 {
   TRACE_AND_INDENT();
   wid_config_gfx_destroy();
-  game->config_top_select();
+  game->wid_config_top_menu();
   return true;
 }
 
@@ -58,7 +58,7 @@ static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int32_t x, int32_t y, 
   CON("PLAYER: Toggle vsync");
   game->config.gfx_vsync_enable = ! game->config.gfx_vsync_enable;
   config_gfx_vsync_update();
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   return true;
 }
 
@@ -70,7 +70,7 @@ static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int32_t x, int32_t y, ui
   if (game->config.gfx_fullscreen) {
     game->config.gfx_fullscreen_desktop = false;
   }
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   local_g_need_restart = true;
   return true;
 }
@@ -83,7 +83,7 @@ static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int32_t x, int32
   if (game->config.gfx_fullscreen_desktop) {
     game->config.gfx_fullscreen = false;
   }
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   local_g_need_restart = true;
   return true;
 }
@@ -93,7 +93,7 @@ static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int32_t x, int32_t y,
   TRACE_AND_INDENT();
   CON("PLAYER: Toggle gfx_allow_highdpi");
   game->config.gfx_allow_highdpi = ! game->config.gfx_allow_highdpi;
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   local_g_need_restart = true;
   return true;
 }
@@ -103,7 +103,7 @@ static uint8_t wid_config_gfx_borderless_toggle(Widp w, int32_t x, int32_t y, ui
   TRACE_AND_INDENT();
   CON("PLAYER: Toggle gfx_borderless");
   game->config.gfx_borderless = ! game->config.gfx_borderless;
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   local_g_need_restart = true;
   return true;
 }
@@ -113,7 +113,7 @@ static uint8_t wid_config_gfx_inverted_toggle(Widp w, int32_t x, int32_t y, uint
   TRACE_AND_INDENT();
   CON("PLAYER: Toggle inverted");
   game->config.gfx_inverted = ! game->config.gfx_inverted;
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   return true;
 }
 
@@ -122,7 +122,7 @@ static uint8_t wid_config_other_fps_counter_toggle(Widp w, int32_t x, int32_t y,
   TRACE_AND_INDENT();
   CON("PLAYER: Toggle fps_counter");
   game->config.fps_counter = ! game->config.fps_counter;
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   return true;
 }
 
@@ -155,7 +155,7 @@ static uint8_t wid_config_gfx_resolution_incr(Widp w, int32_t x, int32_t y, uint
   }
   wid_config_gfx_save(nullptr, 0, 0, 0);
   sdl_config_update_all();
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   return true;
 }
 
@@ -188,7 +188,7 @@ static uint8_t wid_config_gfx_resolution_decr(Widp w, int32_t x, int32_t y, uint
   }
   wid_config_gfx_save(nullptr, 0, 0, 0);
   sdl_config_update_all();
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   return true;
 }
 
@@ -233,7 +233,7 @@ static uint8_t wid_config_gfx_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-void Game::config_gfx_select(void)
+void Game::wid_config_gfx_select(void)
 {
   TRACE_AND_INDENT();
   if (wid_config_gfx_window) {

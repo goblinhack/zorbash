@@ -1278,7 +1278,7 @@ static uint8_t wid_load_saved_snapshot(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-void Game::load_select(void)
+void Game::wid_load_select(void)
 {
   TRACE_AND_INDENT();
   CON("PLAYER: Loading a saved game, destroy old");

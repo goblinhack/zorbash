@@ -442,7 +442,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       wid_actionbar_robot_mode_off();
       game->change_state(Game::STATE_NORMAL);
       wid_thing_info_fini(); // To remove bag or other info
-      game->config_keyboard_select();
+      game->wid_config_keyboard_select();
       return true;
     }
     if (sdlk_eq(*key, game->config.key_load)) {
@@ -452,7 +452,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->change_state(Game::STATE_NORMAL);
       wid_thing_info_fini(); // To remove bag or other info
       LOG("PLAYER: Loading game");
-      game->load_select();
+      game->wid_load_select();
       return true;
     }
     if (sdlk_eq(*key, game->config.key_save)) {
@@ -462,7 +462,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->change_state(Game::STATE_NORMAL);
       wid_thing_info_fini(); // To remove bag or other info
       LOG("PLAYER: Saving the game");
-      game->save_select();
+      game->wid_save_select();
       return true;
     }
     if (sdlk_eq(*key, game->config.key_use)) {

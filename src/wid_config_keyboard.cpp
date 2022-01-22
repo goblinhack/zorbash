@@ -197,7 +197,7 @@ static uint8_t wid_config_keyboard_cancel(Widp w, int32_t x, int32_t y, uint32_t
     // Back to the game
     //
   } else {
-    game->config_top_select();
+    game->wid_config_top_menu();
   }
   sdl_config_update_all();
   return true;
@@ -214,7 +214,7 @@ static uint8_t wid_config_keyboard_save(Widp w, int32_t x, int32_t y, uint32_t b
     // Back to the game
     //
   } else {
-    game->config_top_select();
+    game->wid_config_top_menu();
   }
   return true;
 }
@@ -228,7 +228,7 @@ static uint8_t wid_config_keyboard_back(Widp w, int32_t x, int32_t y, uint32_t b
     // Back to the game
     //
   } else {
-    game->config_top_select();
+    game->wid_config_top_menu();
   }
   return true;
 }
@@ -239,7 +239,7 @@ static void wid_config_key_move_left_set(SDL_Keysym code)
   game->config.key_move_left = {};
   wid_config_check_for_conflicts(code);
   game->config.key_move_left = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_move_right_set(SDL_Keysym code)
@@ -248,7 +248,7 @@ static void wid_config_key_move_right_set(SDL_Keysym code)
   game->config.key_move_right = {};
   wid_config_check_for_conflicts(code);
   game->config.key_move_right = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_move_up_set(SDL_Keysym code)
@@ -257,7 +257,7 @@ static void wid_config_key_move_up_set(SDL_Keysym code)
   game->config.key_move_up = {};
   wid_config_check_for_conflicts(code);
   game->config.key_move_up = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_move_down_set(SDL_Keysym code)
@@ -266,7 +266,7 @@ static void wid_config_key_move_down_set(SDL_Keysym code)
   game->config.key_move_down = {};
   wid_config_check_for_conflicts(code);
   game->config.key_move_down = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_map_left_set(SDL_Keysym code)
@@ -275,7 +275,7 @@ static void wid_config_key_map_left_set(SDL_Keysym code)
   game->config.key_map_left = {};
   wid_config_check_for_conflicts(code);
   game->config.key_map_left = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_map_right_set(SDL_Keysym code)
@@ -284,7 +284,7 @@ static void wid_config_key_map_right_set(SDL_Keysym code)
   game->config.key_map_right = {};
   wid_config_check_for_conflicts(code);
   game->config.key_map_right = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_map_up_set(SDL_Keysym code)
@@ -293,7 +293,7 @@ static void wid_config_key_map_up_set(SDL_Keysym code)
   game->config.key_map_up = {};
   wid_config_check_for_conflicts(code);
   game->config.key_map_up = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_map_down_set(SDL_Keysym code)
@@ -302,7 +302,7 @@ static void wid_config_key_map_down_set(SDL_Keysym code)
   game->config.key_map_down = {};
   wid_config_check_for_conflicts(code);
   game->config.key_map_down = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_attack_set(SDL_Keysym code)
@@ -311,7 +311,7 @@ static void wid_config_key_attack_set(SDL_Keysym code)
   game->config.key_attack = {};
   wid_config_check_for_conflicts(code);
   game->config.key_attack = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_wait_or_collect_set(SDL_Keysym code)
@@ -320,7 +320,7 @@ static void wid_config_key_wait_or_collect_set(SDL_Keysym code)
   game->config.key_wait_or_collect = {};
   wid_config_check_for_conflicts(code);
   game->config.key_wait_or_collect = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_jump_set(SDL_Keysym code)
@@ -329,7 +329,7 @@ static void wid_config_key_jump_set(SDL_Keysym code)
   game->config.key_jump = {};
   wid_config_check_for_conflicts(code);
   game->config.key_jump = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_throw_set(SDL_Keysym code)
@@ -338,7 +338,7 @@ static void wid_config_key_throw_set(SDL_Keysym code)
   game->config.key_throw = {};
   wid_config_check_for_conflicts(code);
   game->config.key_throw = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_inventory_set(SDL_Keysym code)
@@ -347,7 +347,7 @@ static void wid_config_key_inventory_set(SDL_Keysym code)
   game->config.key_inventory = {};
   wid_config_check_for_conflicts(code);
   game->config.key_inventory = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_drop_set(SDL_Keysym code)
@@ -356,7 +356,7 @@ static void wid_config_key_drop_set(SDL_Keysym code)
   game->config.key_drop = {};
   wid_config_check_for_conflicts(code);
   game->config.key_drop = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_use_set(SDL_Keysym code)
@@ -365,7 +365,7 @@ static void wid_config_key_use_set(SDL_Keysym code)
   game->config.key_use = {};
   wid_config_check_for_conflicts(code);
   game->config.key_use = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_ascend_set(SDL_Keysym code)
@@ -374,7 +374,7 @@ static void wid_config_key_ascend_set(SDL_Keysym code)
   game->config.key_ascend = {};
   wid_config_check_for_conflicts(code);
   game->config.key_ascend = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_descend_set(SDL_Keysym code)
@@ -383,7 +383,7 @@ static void wid_config_key_descend_set(SDL_Keysym code)
   game->config.key_descend = {};
   wid_config_check_for_conflicts(code);
   game->config.key_descend = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_eat_set(SDL_Keysym code)
@@ -392,7 +392,7 @@ static void wid_config_key_eat_set(SDL_Keysym code)
   game->config.key_eat = {};
   wid_config_check_for_conflicts(code);
   game->config.key_eat = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action0_set(SDL_Keysym code)
@@ -401,7 +401,7 @@ static void wid_config_key_action0_set(SDL_Keysym code)
   game->config.key_action0 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action0 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action1_set(SDL_Keysym code)
@@ -410,7 +410,7 @@ static void wid_config_key_action1_set(SDL_Keysym code)
   game->config.key_action1 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action1 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action2_set(SDL_Keysym code)
@@ -419,7 +419,7 @@ static void wid_config_key_action2_set(SDL_Keysym code)
   game->config.key_action2 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action2 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action3_set(SDL_Keysym code)
@@ -428,7 +428,7 @@ static void wid_config_key_action3_set(SDL_Keysym code)
   game->config.key_action3 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action3 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action4_set(SDL_Keysym code)
@@ -437,7 +437,7 @@ static void wid_config_key_action4_set(SDL_Keysym code)
   game->config.key_action4 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action4 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action5_set(SDL_Keysym code)
@@ -446,7 +446,7 @@ static void wid_config_key_action5_set(SDL_Keysym code)
   game->config.key_action5 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action5 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action6_set(SDL_Keysym code)
@@ -455,7 +455,7 @@ static void wid_config_key_action6_set(SDL_Keysym code)
   game->config.key_action6 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action6 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action7_set(SDL_Keysym code)
@@ -464,7 +464,7 @@ static void wid_config_key_action7_set(SDL_Keysym code)
   game->config.key_action7 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action7 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action8_set(SDL_Keysym code)
@@ -473,7 +473,7 @@ static void wid_config_key_action8_set(SDL_Keysym code)
   game->config.key_action8 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action8 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_action9_set(SDL_Keysym code)
@@ -482,7 +482,7 @@ static void wid_config_key_action9_set(SDL_Keysym code)
   game->config.key_action9 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action9 = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_save_set(SDL_Keysym code)
@@ -491,7 +491,7 @@ static void wid_config_key_save_set(SDL_Keysym code)
   game->config.key_save = {};
   wid_config_check_for_conflicts(code);
   game->config.key_save = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_load_set(SDL_Keysym code)
@@ -500,7 +500,7 @@ static void wid_config_key_load_set(SDL_Keysym code)
   game->config.key_load = {};
   wid_config_check_for_conflicts(code);
   game->config.key_load = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_robot_mode_set(SDL_Keysym code)
@@ -509,7 +509,7 @@ static void wid_config_key_robot_mode_set(SDL_Keysym code)
   game->config.key_robot_mode = {};
   wid_config_check_for_conflicts(code);
   game->config.key_robot_mode = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_zoom_in_set(SDL_Keysym code)
@@ -518,7 +518,7 @@ static void wid_config_key_zoom_in_set(SDL_Keysym code)
   game->config.key_zoom_in = {};
   wid_config_check_for_conflicts(code);
   game->config.key_zoom_in = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_zoom_out_set(SDL_Keysym code)
@@ -527,7 +527,7 @@ static void wid_config_key_zoom_out_set(SDL_Keysym code)
   game->config.key_zoom_out = {};
   wid_config_check_for_conflicts(code);
   game->config.key_zoom_out = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_help_set(SDL_Keysym code)
@@ -536,7 +536,7 @@ static void wid_config_key_help_set(SDL_Keysym code)
   game->config.key_help = {};
   wid_config_check_for_conflicts(code);
   game->config.key_help = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_console_set(SDL_Keysym code)
@@ -545,7 +545,7 @@ static void wid_config_key_console_set(SDL_Keysym code)
   game->config.key_console = {};
   wid_config_check_for_conflicts(code);
   game->config.key_console = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_quit_set(SDL_Keysym code)
@@ -554,7 +554,7 @@ static void wid_config_key_quit_set(SDL_Keysym code)
   game->config.key_quit = {};
   wid_config_check_for_conflicts(code);
   game->config.key_quit = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void wid_config_key_screenshot_set(SDL_Keysym code)
@@ -563,7 +563,7 @@ static void wid_config_key_screenshot_set(SDL_Keysym code)
   game->config.key_screenshot = {};
   wid_config_check_for_conflicts(code);
   game->config.key_screenshot = code;
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 }
 
 static void grab_key(const std::string which)
@@ -618,7 +618,7 @@ static uint8_t wid_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t
   wid_config_check_for_conflicts(k);
   game->config.key_map_right = k;
 
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 
   return true;
 }
@@ -668,7 +668,7 @@ static uint8_t wid_config_keyboard_profile_wasd(Widp w, int32_t x, int32_t y, ui
   wid_config_check_for_conflicts(k);
   game->config.key_map_right = k;
 
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
 
   return true;
 }
@@ -1008,7 +1008,7 @@ static uint8_t wid_config_keyboard_key_down(Widp w, const struct SDL_Keysym *key
   return true;
 }
 
-void Game::config_keyboard_select(void)
+void Game::wid_config_keyboard_select(void)
 {
   TRACE_AND_INDENT();
   wid_notice_destroy();

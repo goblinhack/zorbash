@@ -26,7 +26,7 @@ static uint8_t wid_config_sound_cancel(Widp w, int32_t x, int32_t y, uint32_t bu
   CON("PLAYER: Reload config");
   game->load_config();
   wid_config_sound_destroy();
-  game->config_top_select();
+  game->wid_config_top_menu();
   return true;
 }
 
@@ -36,7 +36,7 @@ static uint8_t wid_config_sound_save(Widp w, int32_t x, int32_t y, uint32_t butt
   CON("PLAYER: Save config");
   game->save_config();
   wid_config_sound_destroy();
-  game->config_top_select();
+  game->wid_config_top_menu();
   return true;
 }
 
@@ -44,7 +44,7 @@ static uint8_t wid_config_sound_back(Widp w, int32_t x, int32_t y, uint32_t butt
 {
   TRACE_AND_INDENT();
   wid_config_sound_destroy();
-  game->config_top_select();
+  game->wid_config_top_menu();
   return true;
 }
 
@@ -56,7 +56,7 @@ static uint8_t wid_config_sound_effects_volume_incr(Widp w, int32_t x, int32_t y
   if (game->config.sound_volume > MIX_MAX_VOLUME) {
     game->config.sound_volume = MIX_MAX_VOLUME;
   }
-  game->config_sound_select();
+  game->wid_config_sound_select();
   return true;
 }
 
@@ -69,7 +69,7 @@ static uint8_t wid_config_sound_effects_volume_decr(Widp w, int32_t x, int32_t y
   } else {
     game->config.sound_volume = 0;
   }
-  game->config_sound_select();
+  game->wid_config_sound_select();
   return true;
 }
 
@@ -81,7 +81,7 @@ static uint8_t wid_config_sound_music_volume_incr(Widp w, int32_t x, int32_t y, 
   if (game->config.music_volume > MIX_MAX_VOLUME) {
     game->config.music_volume = MIX_MAX_VOLUME;
   }
-  game->config_sound_select();
+  game->wid_config_sound_select();
   music_update_volume();
   return true;
 }
@@ -95,7 +95,7 @@ static uint8_t wid_config_sound_music_volume_decr(Widp w, int32_t x, int32_t y, 
   } else {
     game->config.music_volume = 0;
   }
-  game->config_sound_select();
+  game->wid_config_sound_select();
   music_update_volume();
   return true;
 }
@@ -141,7 +141,7 @@ static uint8_t wid_config_sound_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-void Game::config_sound_select(void)
+void Game::wid_config_sound_select(void)
 {
   TRACE_AND_INDENT();
   if (wid_config_sound_window) {

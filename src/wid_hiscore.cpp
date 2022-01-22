@@ -22,7 +22,7 @@ static void wid_hiscore_destroy(void)
   TRACE_AND_INDENT();
   delete wid_hiscore_window;
   wid_hiscore_window = nullptr;
-  game->main_menu_select();
+  game->wid_main_menu_select();
 }
 
 static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key)
@@ -75,7 +75,7 @@ static uint8_t wid_hiscore_mouse_up(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-void Game::hiscore_select(void)
+void Game::wid_hiscores_show(void)
 {
   TRACE_AND_INDENT();
   if (wid_hiscore_window) {

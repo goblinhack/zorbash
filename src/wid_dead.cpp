@@ -25,7 +25,7 @@ static void wid_dead_destroy(void)
   delete wid_dead_window;
   wid_dead_window = nullptr;
   game->fini();
-  game->main_menu_select();
+  game->wid_main_menu_select();
   wid_hide(wid_topcon_window);
   wid_hide(wid_botcon_window);
 }
@@ -81,7 +81,7 @@ static uint8_t wid_dead_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-void Game::dead_select(const char *reason)
+void Game::wid_dead_select(const char *reason)
 {
   TRACE_AND_INDENT();
   LOG("Open dead select: %s", reason);

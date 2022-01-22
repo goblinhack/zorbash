@@ -4,7 +4,6 @@
 //
 
 #include "my_game.hpp"
-#include "my_wid_choose_initial_dungeons.hpp"
 #include "my_gl.hpp"
 #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
@@ -40,14 +39,14 @@ void wid_main_menu_hide(void)
 static uint8_t wid_main_menu_load_game(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  game->load_select();
+  game->wid_load_select();
   return false;
 }
 
 static uint8_t wid_main_menu_config(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  game->config_top_select();
+  game->wid_config_top_menu();
   wid_main_menu_hide();
   return false;
 }
@@ -57,14 +56,14 @@ static uint8_t game_menu_new_game(Widp w, int32_t x, int32_t y, uint32_t button)
   TRACE_AND_INDENT();
   wid_main_menu_hide();
   wid_main_menu_destroy();
-  game->menu_dungeons_select();
+  game->wid_choose_initial_dungeons();
   return false;
 }
 
-static uint8_t wid_main_menu_choose_player_name(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_player_name(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  game->choose_player_name_select();
+  game->wid_choose_player_name_select();
   wid_main_menu_destroy();
   return false;
 }
@@ -72,7 +71,7 @@ static uint8_t wid_main_menu_choose_player_name(Widp w, int32_t x, int32_t y, ui
 static uint8_t wid_main_menu_credits_game(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  game->credits_select();
+  game->wid_credits_select();
   wid_main_menu_destroy();
   return false;
 }
@@ -88,7 +87,7 @@ static uint8_t wid_main_menu_quit_game(Widp w, int32_t x, int32_t y, uint32_t bu
 static uint8_t wid_main_menu_hiscores(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  game->hiscore_select();
+  game->wid_hiscores_show();
   return false;
 }
 
@@ -318,7 +317,7 @@ static void wid_main_menu_tick(Widp w)
   }
 }
 
-void Game::main_menu_select(void)
+void Game::wid_main_menu_select(void)
 {
   TRACE_AND_INDENT();
   LOG("Main menu");
@@ -372,7 +371,7 @@ void Game::main_menu_select(void)
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + 2);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, wid_main_menu_choose_player_name);
+    wid_set_on_mouse_up(w, wid_choose_player_name);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose player name");
   }
@@ -448,5 +447,5 @@ void Game::main_menu_select(void)
 void Game::new_game(void)
 {
   TRACE_NO_INDENT();
-  game->menu_dungeons_select();
+  game->wid_choose_initial_dungeons();
 }
