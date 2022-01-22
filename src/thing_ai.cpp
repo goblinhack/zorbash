@@ -1119,6 +1119,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     if (p.y < MAP_BORDER_ROCK) {
       continue;
     }
+    if (level->is_obs_wall_or_door(p.x, p.y)) {
+      continue;
+    }
 
     //
     // Don't look too far beyond where we can go
@@ -1133,7 +1136,47 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       }
     }
 
-    if (level->is_obs_wall_or_door(p.x, p.y)) {
+    bool skip_location = false;
+
+    //
+    // Don't try and walk through other minions
+    //
+    if (is_minion()) {
+      FOR_ALL_THINGS(level, it, p.x, p.y)
+      {
+        if (it == this) {
+          continue;
+        }
+        if (it->is_minion()) {
+          if (same_mob(it)) {
+            skip_location = true;
+            break;
+          }
+        }
+      }
+    }
+    FOR_ALL_THINGS_END();
+
+    //
+    // Don't try and walk through other followers
+    //
+    if (is_able_to_follow()) {
+      FOR_ALL_THINGS(level, it, p.x, p.y)
+      {
+        if (it == this) {
+          continue;
+        }
+        if (it->is_able_to_follow()) {
+          if (same_leader(it)) {
+            skip_location = true;
+            break;
+          }
+        }
+      }
+    }
+    FOR_ALL_THINGS_END();
+
+    if (skip_location) {
       continue;
     }
 
