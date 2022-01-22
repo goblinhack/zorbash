@@ -48,8 +48,8 @@ void wid_actionbar_close_all_popups(void)
   wid_load_destroy();
   wid_save_destroy();
   wid_inventory_fini();
-  game_quit_destroy();
-  game_config_keyboard_destroy();
+  wid_quit_destroy();
+  wid_config_keyboard_destroy();
 
   delete wid_over_robot_mode;
   wid_over_robot_mode = nullptr;
@@ -104,7 +104,7 @@ static uint8_t wid_actionbar_quit(Widp w, int32_t x, int32_t y, uint32_t button)
   TRACE_NO_INDENT();
 
   wid_actionbar_close_all_popups();
-  if (game_quit_window) {
+  if (wid_quit_window) {
     wid_actionbar_init();
     return true;
   }
@@ -949,7 +949,7 @@ static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t bu
   }
 
   wid_actionbar_close_all_popups();
-  if (game_config_keyboard_window) {
+  if (wid_config_keyboard_window) {
     wid_actionbar_init();
     return true;
   }

@@ -4,7 +4,7 @@
 //
 
 #include "my_game.hpp"
-#include "my_game_dungeons.hpp"
+#include "my_wid_choose_initial_dungeons.hpp"
 #include "my_gl.hpp"
 #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
@@ -22,77 +22,77 @@
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
 
-static WidPopup *game_main_menu_window;
+static WidPopup *wid_main_menu_window;
 
-void game_main_menu_destroy(void)
+void wid_main_menu_destroy(void)
 {
   TRACE_AND_INDENT();
-  delete game_main_menu_window;
-  game_main_menu_window = nullptr;
+  delete wid_main_menu_window;
+  wid_main_menu_window = nullptr;
 }
 
-void game_main_menu_hide(void)
+void wid_main_menu_hide(void)
 {
   TRACE_AND_INDENT();
-  wid_hide(game_main_menu_window->wid_text_area->wid_text_area);
+  wid_hide(wid_main_menu_window->wid_text_area->wid_text_area);
 }
 
-static uint8_t game_main_menu_load_game(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_load_game(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->load_select();
   return false;
 }
 
-static uint8_t game_main_menu_config(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_config(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->config_top_select();
-  game_main_menu_hide();
+  wid_main_menu_hide();
   return false;
 }
 
 static uint8_t game_menu_new_game(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  game_main_menu_hide();
-  game_main_menu_destroy();
+  wid_main_menu_hide();
+  wid_main_menu_destroy();
   game->menu_dungeons_select();
   return false;
 }
 
-static uint8_t game_main_menu_choose_player_name(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_choose_player_name(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->choose_player_name_select();
-  game_main_menu_destroy();
+  wid_main_menu_destroy();
   return false;
 }
 
-static uint8_t game_main_menu_credits_game(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_credits_game(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->credits_select();
-  game_main_menu_destroy();
+  wid_main_menu_destroy();
   return false;
 }
 
-static uint8_t game_main_menu_quit_game(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_quit_game(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->quit_select();
-  game_main_menu_destroy();
+  wid_main_menu_destroy();
   return false;
 }
 
-static uint8_t game_main_menu_hiscores(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_hiscores(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->hiscore_select();
   return false;
 }
 
-static uint8_t game_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
+static uint8_t wid_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
@@ -113,10 +113,10 @@ static uint8_t game_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
               case SDLK_RETURN :
               case ' ' :
               case 'n' : game_menu_new_game(nullptr, 0, 0, 0); return true;
-              case 'l' : game_main_menu_load_game(nullptr, 0, 0, 0); return true;
-              case 'o' : game_main_menu_config(nullptr, 0, 0, 0); return true;
-              case 'c' : game_main_menu_credits_game(nullptr, 0, 0, 0); return true;
-              case 'q' : game_main_menu_quit_game(nullptr, 0, 0, 0); return true;
+              case 'l' : wid_main_menu_load_game(nullptr, 0, 0, 0); return true;
+              case 'o' : wid_main_menu_config(nullptr, 0, 0, 0); return true;
+              case 'c' : wid_main_menu_credits_game(nullptr, 0, 0, 0); return true;
+              case 'q' : wid_main_menu_quit_game(nullptr, 0, 0, 0); return true;
             }
           }
       }
@@ -125,7 +125,7 @@ static uint8_t game_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
   return false;
 }
 
-static uint8_t game_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
+static uint8_t wid_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
@@ -291,7 +291,7 @@ static void game_display_title_fg4(void)
   blit_flush();
 }
 
-static void game_main_menu_tick(Widp w)
+static void wid_main_menu_tick(Widp w)
 {
   TRACE_AND_INDENT();
   game_display_title_bg();
@@ -304,7 +304,7 @@ static void game_main_menu_tick(Widp w)
   ascii_putf(1, TERM_HEIGHT - 2, GREEN, BLACK, L"Version " MYVER);
 
   if (game->started) {
-    game_main_menu_destroy();
+    wid_main_menu_destroy();
   }
 
   if (! g_opt_player_name.empty()) {
@@ -325,8 +325,8 @@ void Game::main_menu_select(void)
 
   music_play_intro();
 
-  if (game_main_menu_window) {
-    game_main_menu_destroy();
+  if (wid_main_menu_window) {
+    wid_main_menu_destroy();
   }
   wid_rightbar_fini();
   wid_inventory_fini();
@@ -341,19 +341,19 @@ void Game::main_menu_select(void)
   point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
   auto  width = br.x - tl.x - 2;
 
-  game_main_menu_window = new WidPopup("Main menu", tl, br, nullptr, "nothing", false, false);
+  wid_main_menu_window = new WidPopup("Main menu", tl, br, nullptr, "nothing", false, false);
   {
     TRACE_NO_INDENT();
-    Widp w = game_main_menu_window->wid_popup_container;
-    wid_set_on_key_up(w, game_main_menu_key_up);
-    wid_set_on_key_down(w, game_main_menu_key_down);
-    wid_set_on_tick(w, game_main_menu_tick);
+    Widp w = wid_main_menu_window->wid_popup_container;
+    wid_set_on_key_up(w, wid_main_menu_key_up);
+    wid_set_on_key_down(w, wid_main_menu_key_down);
+    wid_set_on_tick(w, wid_main_menu_tick);
   }
 
   int y_at = 0;
   {
     TRACE_NO_INDENT();
-    auto p = game_main_menu_window->wid_text_area->wid_text_area;
+    auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "New Game");
 
     point tl = make_point(0, y_at);
@@ -366,83 +366,83 @@ void Game::main_menu_select(void)
   y_at += 3;
   {
     TRACE_NO_INDENT();
-    auto p = game_main_menu_window->wid_text_area->wid_text_area;
+    auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Choose player name");
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + 2);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, game_main_menu_choose_player_name);
+    wid_set_on_mouse_up(w, wid_main_menu_choose_player_name);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose player name");
   }
   y_at += 3;
   {
     TRACE_NO_INDENT();
-    auto p = game_main_menu_window->wid_text_area->wid_text_area;
+    auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Load Game");
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + 2);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, game_main_menu_load_game);
+    wid_set_on_mouse_up(w, wid_main_menu_load_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$L%%fg=" UI_TEXT_COLOR_STR "$oad game");
   }
   y_at += 3;
   {
     TRACE_NO_INDENT();
-    auto p = game_main_menu_window->wid_text_area->wid_text_area;
+    auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Options");
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + 2);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, game_main_menu_config);
+    wid_set_on_mouse_up(w, wid_main_menu_config);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$O%%fg=" UI_TEXT_COLOR_STR "$ptions");
   }
   y_at += 3;
   {
     TRACE_NO_INDENT();
-    auto p = game_main_menu_window->wid_text_area->wid_text_area;
+    auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Credits");
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + 2);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, game_main_menu_credits_game);
+    wid_set_on_mouse_up(w, wid_main_menu_credits_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$redits");
   }
   y_at += 3;
   {
     TRACE_NO_INDENT();
-    auto p = game_main_menu_window->wid_text_area->wid_text_area;
+    auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Hiscores");
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + 2);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, game_main_menu_hiscores);
+    wid_set_on_mouse_up(w, wid_main_menu_hiscores);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Hiscores");
   }
   y_at += 3;
   {
     TRACE_NO_INDENT();
-    auto p = game_main_menu_window->wid_text_area->wid_text_area;
+    auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Quit Game");
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + 2);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_on_mouse_up(w, game_main_menu_quit_game);
+    wid_set_on_mouse_up(w, wid_main_menu_quit_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Q%%fg=" UI_TEXT_COLOR_STR "$uit Game");
   }
 
-  wid_update(game_main_menu_window->wid_text_area->wid_text_area);
+  wid_update(wid_main_menu_window->wid_text_area->wid_text_area);
 }
 
 void Game::new_game(void)

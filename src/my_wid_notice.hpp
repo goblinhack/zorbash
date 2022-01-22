@@ -4,5 +4,5 @@
 //
 
 #pragma once
-void game_notice(std::string notice);
-void game_notice_destroy(void);
+void wid_notice(std::string notice);
+void wid_notice_destroy(void);

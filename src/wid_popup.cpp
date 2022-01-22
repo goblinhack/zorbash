@@ -19,8 +19,8 @@
 
 bool wid_popup_exists(void)
 {
-  return (wid_collect || wid_skills || wid_enchant || wid_load || wid_save || game_config_keyboard_window ||
-          game_quit_window || wid_inventory_window);
+  return (wid_collect || wid_skills || wid_enchant || wid_load || wid_save || wid_config_keyboard_window ||
+          wid_quit_window || wid_inventory_window);
 }
 
 WidPopup::~WidPopup()

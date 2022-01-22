@@ -42,7 +42,7 @@ void Game::change_state(int new_state)
       wid_load_destroy();
       wid_save_destroy();
       wid_inventory_fini();
-      game_quit_destroy();
+      wid_quit_destroy();
       LOG("State changed to STATE_NORMAL");
       break;
     case STATE_OPTIONS_FOR_ITEM_MENU : LOG("State changed to STATE_OPTIONS_FOR_ITEM_MENU"); break;

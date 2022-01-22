@@ -263,6 +263,9 @@ void Level::describe(point p)
 
     wid_thing_info_fini();
 
+    //
+    // If nothing else and hovering over the player show that
+    //
     if (cursor && (cursor->curr_at == player->curr_at)) {
       push_back_if_unique(hover_over_things, player);
     }

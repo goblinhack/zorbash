@@ -44,8 +44,8 @@ extern void wid_enchant_destroy(void);
 extern void wid_skill_choose_destroy(void);
 extern void wid_load_destroy(void);
 extern void wid_save_destroy(void);
-extern void game_quit_destroy(void);
-extern void game_config_keyboard_destroy(void);
+extern void wid_quit_destroy(void);
+extern void wid_config_keyboard_destroy(void);
 extern bool wid_popup_exists(void);
 
 extern WidPopup *wid_collect;
@@ -53,7 +53,7 @@ extern WidPopup *wid_skills;
 extern WidPopup *wid_enchant;
 extern WidPopup *wid_load;
 extern WidPopup *wid_save;
-extern WidPopup *game_quit_window;
-extern WidPopup *game_config_keyboard_window;
+extern WidPopup *wid_quit_window;
+extern WidPopup *wid_config_keyboard_window;
 
 #endif

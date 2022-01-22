@@ -4,4 +4,4 @@
 //
 
 #pragma once
-extern void game_error(std::string error);
+extern void wid_error(std::string error);
