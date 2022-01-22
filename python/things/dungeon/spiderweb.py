@@ -20,6 +20,7 @@ def tp_init(name, tiles=[]):
     mytp.set_is_loggable(True)
     mytp.set_is_spiderweb(True)
     mytp.set_is_sticky(True)
+    mytp.set_long_text_description("Free real estate. All welcome, says a small sign next to this web.")
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("Thick and sticky spiderweb.")
