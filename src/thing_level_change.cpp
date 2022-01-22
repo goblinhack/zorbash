@@ -10,6 +10,7 @@
 #include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include "my_wid_actionbar.hpp"
 #include "my_world.hpp"
 
 //
@@ -124,6 +125,11 @@ void Thing::level_change(Levelp l)
   if (is_player()) {
     game->request_snapshot = true;
   }
+
+  //
+  // Recreate as we might need to show location specific icons, like aacend ot descend
+  //
+  wid_actionbar_init();
 }
 
 //

@@ -884,6 +884,15 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
+  if (is_on_fire()) {
+    if (is_player()) {
+      msg("%%fg=red$You burn whilst being attacked! So cruel!%%fg=reset$");
+    }
+    if (hitter->set_on_fire("hit by fire due to attacking")) {
+      msg("%s sets itself on fire!", hitter->text_The().c_str());
+    }
+  }
+
   //
   // Interrupt whatever the monster was doing.
   //
