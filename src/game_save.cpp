@@ -34,6 +34,16 @@ extern uint32_t csum(char *mem, uint32_t len);
     out << bits(magic);                                                                                              \
   }
 
+std::ostream &operator<<(std::ostream &out, Bits< const SDL_Keysym & > const my)
+{
+  TRACE_AND_INDENT();
+  out << bits(my.t.scancode);
+  out << bits(my.t.sym);
+  out << bits(my.t.mod);
+  out << bits(my.t.unused);
+  return (out);
+}
+
 std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
 {
   TRACE_AND_INDENT();
@@ -984,10 +994,9 @@ void wid_save_destroy(void)
 static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   switch (key->mod) {
@@ -1036,10 +1045,9 @@ static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)
 static uint8_t wid_save_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   return true;

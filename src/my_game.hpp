@@ -7,11 +7,13 @@
 #ifndef _MY_GAME_HPP_
 #define _MY_GAME_HPP_
 
-#include "my_hiscore.hpp"
-#include "my_thing_defs.hpp"
-#include "my_world.hpp"
 #include <list>
 #include <vector>
+
+#include "my_hiscore.hpp"
+#include "my_sdl.hpp"
+#include "my_thing_defs.hpp"
+#include "my_world.hpp"
 
 class WidBag;
 class WidPopup;
@@ -66,48 +68,49 @@ public:
   int32_t window_pix_height = {};
   int32_t window_pix_width  = {};
 
-  uint16_t ascii_gl_height     = {};
-  uint16_t ascii_gl_width      = {};
-  uint32_t key_action0         = {};
-  uint32_t key_action1         = {};
-  uint32_t key_action2         = {};
-  uint32_t key_action3         = {};
-  uint32_t key_action4         = {};
-  uint32_t key_action5         = {};
-  uint32_t key_action6         = {};
-  uint32_t key_action7         = {};
-  uint32_t key_action8         = {};
-  uint32_t key_action9         = {};
-  uint32_t key_attack          = {};
-  uint32_t key_console         = {};
-  uint32_t key_drop            = {};
-  uint32_t key_eat             = {};
-  uint32_t key_help            = {};
-  uint32_t key_inventory       = {};
-  uint32_t key_jump            = {};
-  uint32_t key_load            = {};
-  uint32_t key_map_down        = {};
-  uint32_t key_map_left        = {};
-  uint32_t key_map_right       = {};
-  uint32_t key_map_up          = {};
-  uint32_t key_move_down       = {};
-  uint32_t key_move_left       = {};
-  uint32_t key_move_right      = {};
-  uint32_t key_move_up         = {};
-  uint32_t key_quit            = {};
-  uint32_t key_robot_mode      = {};
-  uint32_t key_save            = {};
-  uint32_t key_screenshot      = {};
-  uint32_t key_throw           = {};
-  uint32_t key_unused4         = {};
-  uint32_t key_unused5         = {};
-  uint32_t key_use             = {};
-  uint32_t key_wait_or_collect = {};
-  uint32_t key_zoom_in         = {};
-  uint32_t key_zoom_out        = {};
-  uint32_t music_volume        = {};
-  uint32_t sdl_delay           = {};
-  uint32_t sound_volume        = {};
+  uint16_t ascii_gl_height = {};
+  uint16_t ascii_gl_width  = {};
+  uint32_t music_volume    = {};
+  uint32_t sdl_delay       = {};
+  uint32_t sound_volume    = {};
+
+  SDL_Keysym key_action0         = {};
+  SDL_Keysym key_action1         = {};
+  SDL_Keysym key_action2         = {};
+  SDL_Keysym key_action3         = {};
+  SDL_Keysym key_action4         = {};
+  SDL_Keysym key_action5         = {};
+  SDL_Keysym key_action6         = {};
+  SDL_Keysym key_action7         = {};
+  SDL_Keysym key_action8         = {};
+  SDL_Keysym key_action9         = {};
+  SDL_Keysym key_attack          = {};
+  SDL_Keysym key_console         = {};
+  SDL_Keysym key_drop            = {};
+  SDL_Keysym key_eat             = {};
+  SDL_Keysym key_help            = {};
+  SDL_Keysym key_inventory       = {};
+  SDL_Keysym key_jump            = {};
+  SDL_Keysym key_load            = {};
+  SDL_Keysym key_map_down        = {};
+  SDL_Keysym key_map_left        = {};
+  SDL_Keysym key_map_right       = {};
+  SDL_Keysym key_map_up          = {};
+  SDL_Keysym key_move_down       = {};
+  SDL_Keysym key_move_left       = {};
+  SDL_Keysym key_move_right      = {};
+  SDL_Keysym key_move_up         = {};
+  SDL_Keysym key_quit            = {};
+  SDL_Keysym key_robot_mode      = {};
+  SDL_Keysym key_save            = {};
+  SDL_Keysym key_screenshot      = {};
+  SDL_Keysym key_throw           = {};
+  SDL_Keysym key_unused4         = {};
+  SDL_Keysym key_unused5         = {};
+  SDL_Keysym key_use             = {};
+  SDL_Keysym key_wait_or_collect = {};
+  SDL_Keysym key_zoom_in         = {};
+  SDL_Keysym key_zoom_out        = {};
 
   uint8_t tile_height = {};
   uint8_t tile_width  = {};

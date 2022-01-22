@@ -75,7 +75,7 @@ void Thing::move_finish(void)
     dbg("Check if anything to carry");
     if (check_anything_to_carry(true)) {
       BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
-             SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
+             ::to_string(game->config.key_wait_or_collect).c_str());
       level->describe(curr_at);
       game->request_remake_actionbar = true;
     }
@@ -204,7 +204,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Don't let minions wander too far from their mob.
   //
-  auto aip         = maybe_aip();
+  auto aip = maybe_aip();
   auto mob = get_top_mob();
   if (mob) {
     if (get_distance_mob_max()) {

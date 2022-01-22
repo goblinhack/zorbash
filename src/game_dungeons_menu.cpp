@@ -954,10 +954,9 @@ static uint8_t game_dungeons_choose_seed(Widp w, int32_t x, int32_t y, uint32_t 
 static uint8_t game_dungeons_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   switch (key->mod) {
@@ -990,10 +989,9 @@ static uint8_t game_dungeons_key_up(Widp w, const struct SDL_Keysym *key)
 static uint8_t game_dungeons_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   //

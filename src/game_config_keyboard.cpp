@@ -14,235 +14,157 @@
 static int last_vert_scroll_offset = -1;
 WidPopup  *game_config_keyboard_window;
 
-//
-// Check for saving keys to config can fit
-//
-static_assert(sizeof(SDL_Scancode) <= sizeof(game->config.key_move_left));
-
-static void game_config_check_for_conflicts(SDL_Scancode code)
+static void game_config_check_for_conflicts(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  if (game->config.key_action0) {
-    if (game->config.key_action0 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action0%%fg=reset$");
-      game->config.key_action0 = 0;
-    }
+
+  if (sdlk_eq(game->config.key_action0, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action0%%fg=reset$");
+    game->config.key_action0 = {};
   }
-  if (game->config.key_action1) {
-    if (game->config.key_action1 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action1%%fg=reset$");
-      game->config.key_action1 = 0;
-    }
+  if (sdlk_eq(game->config.key_action1, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action1%%fg=reset$");
+    game->config.key_action1 = {};
   }
-  if (game->config.key_action2) {
-    if (game->config.key_action2 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action2%%fg=reset$");
-      game->config.key_action2 = 0;
-    }
+  if (sdlk_eq(game->config.key_action2, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action2%%fg=reset$");
+    game->config.key_action2 = {};
   }
-  if (game->config.key_action3) {
-    if (game->config.key_action3 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action3%%fg=reset$");
-      game->config.key_action3 = 0;
-    }
+  if (sdlk_eq(game->config.key_action3, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action3%%fg=reset$");
+    game->config.key_action3 = {};
   }
-  if (game->config.key_action4) {
-    if (game->config.key_action4 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action4%%fg=reset$");
-      game->config.key_action4 = 0;
-    }
+  if (sdlk_eq(game->config.key_action4, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action4%%fg=reset$");
+    game->config.key_action4 = {};
   }
-  if (game->config.key_action5) {
-    if (game->config.key_action5 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action5%%fg=reset$");
-      game->config.key_action5 = 0;
-    }
+  if (sdlk_eq(game->config.key_action5, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action5%%fg=reset$");
+    game->config.key_action5 = {};
   }
-  if (game->config.key_action6) {
-    if (game->config.key_action6 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action6%%fg=reset$");
-      game->config.key_action6 = 0;
-    }
+  if (sdlk_eq(game->config.key_action6, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action6%%fg=reset$");
+    game->config.key_action6 = {};
   }
-  if (game->config.key_action7) {
-    if (game->config.key_action7 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action7%%fg=reset$");
-      game->config.key_action7 = 0;
-    }
+  if (sdlk_eq(game->config.key_action7, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action7%%fg=reset$");
+    game->config.key_action7 = {};
   }
-  if (game->config.key_action8) {
-    if (game->config.key_action8 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action8%%fg=reset$");
-      game->config.key_action8 = 0;
-    }
+  if (sdlk_eq(game->config.key_action8, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action8%%fg=reset$");
+    game->config.key_action8 = {};
   }
-  if (game->config.key_action9) {
-    if (game->config.key_action9 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key action9%%fg=reset$");
-      game->config.key_action9 = 0;
-    }
+  if (sdlk_eq(game->config.key_action9, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key action9%%fg=reset$");
+    game->config.key_action9 = {};
   }
-  if (game->config.key_attack) {
-    if (game->config.key_attack == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key attack.%%fg=reset$");
-      game->config.key_attack = 0;
-    }
+  if (sdlk_eq(game->config.key_attack, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key attack.%%fg=reset$");
+    game->config.key_attack = {};
   }
-  if (game->config.key_drop) {
-    if (game->config.key_drop == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key drop.%%fg=reset$");
-      game->config.key_drop = 0;
-    }
+  if (sdlk_eq(game->config.key_drop, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key drop.%%fg=reset$");
+    game->config.key_drop = {};
   }
-  if (game->config.key_help) {
-    if (game->config.key_help == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key help.%%fg=reset$");
-      game->config.key_help = 0;
-    }
+  if (sdlk_eq(game->config.key_help, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key help.%%fg=reset$");
+    game->config.key_help = {};
   }
-  if (game->config.key_jump) {
-    if (game->config.key_jump == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key jump.%%fg=reset$");
-      game->config.key_jump = 0;
-    }
+  if (sdlk_eq(game->config.key_jump, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key jump.%%fg=reset$");
+    game->config.key_jump = {};
   }
-  if (game->config.key_load) {
-    if (game->config.key_load == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key load.%%fg=reset$");
-      game->config.key_load = 0;
-    }
+  if (sdlk_eq(game->config.key_load, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key load.%%fg=reset$");
+    game->config.key_load = {};
   }
-  if (game->config.key_map_down) {
-    if (game->config.key_map_down == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key map down.%%fg=reset$");
-      game->config.key_map_down = 0;
-    }
+  if (sdlk_eq(game->config.key_map_down, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key map down.%%fg=reset$");
+    game->config.key_map_down = {};
   }
-  if (game->config.key_map_left) {
-    if (game->config.key_map_left == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key map left.%%fg=reset$");
-      game->config.key_map_left = 0;
-    }
+  if (sdlk_eq(game->config.key_map_left, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key map left.%%fg=reset$");
+    game->config.key_map_left = {};
   }
-  if (game->config.key_map_right) {
-    if (game->config.key_map_right == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key map right.%%fg=reset$");
-      game->config.key_map_right = 0;
-    }
+  if (sdlk_eq(game->config.key_map_right, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key map right.%%fg=reset$");
+    game->config.key_map_right = {};
   }
-  if (game->config.key_map_up) {
-    if (game->config.key_map_up == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key map up.%%fg=reset$");
-      game->config.key_map_up = 0;
-    }
+  if (sdlk_eq(game->config.key_map_up, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key map up.%%fg=reset$");
+    game->config.key_map_up = {};
   }
-  if (game->config.key_move_down) {
-    if (game->config.key_move_down == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key move down.%%fg=reset$");
-      game->config.key_move_down = 0;
-    }
+  if (sdlk_eq(game->config.key_move_down, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key move down.%%fg=reset$");
+    game->config.key_move_down = {};
   }
-  if (game->config.key_move_left) {
-    if (game->config.key_move_left == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key move left.%%fg=reset$");
-      game->config.key_move_left = 0;
-    }
+  if (sdlk_eq(game->config.key_move_left, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key move left.%%fg=reset$");
+    game->config.key_move_left = {};
   }
-  if (game->config.key_move_right) {
-    if (game->config.key_move_right == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key move right.%%fg=reset$");
-      game->config.key_move_right = 0;
-    }
+  if (sdlk_eq(game->config.key_move_right, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key move right.%%fg=reset$");
+    game->config.key_move_right = {};
   }
-  if (game->config.key_move_up) {
-    if (game->config.key_move_up == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key move up.%%fg=reset$");
-      game->config.key_move_up = 0;
-    }
+  if (sdlk_eq(game->config.key_move_up, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key move up.%%fg=reset$");
+    game->config.key_move_up = {};
   }
-  if (game->config.key_quit) {
-    if (game->config.key_quit == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key quit.%%fg=reset$");
-      game->config.key_quit = 0;
-    }
+  if (sdlk_eq(game->config.key_quit, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key quit.%%fg=reset$");
+    game->config.key_quit = {};
   }
-  if (game->config.key_save) {
-    if (game->config.key_save == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key save.%%fg=reset$");
-      game->config.key_save = 0;
-    }
+  if (sdlk_eq(game->config.key_save, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key save.%%fg=reset$");
+    game->config.key_save = {};
   }
-  if (game->config.key_screenshot) {
-    if (game->config.key_screenshot == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key screenshot.%%fg=reset$");
-      game->config.key_screenshot = 0;
-    }
+  if (sdlk_eq(game->config.key_screenshot, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key screenshot.%%fg=reset$");
+    game->config.key_screenshot = {};
   }
-  if (game->config.key_throw) {
-    if (game->config.key_throw == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key throw.%%fg=reset$");
-      game->config.key_throw = 0;
-    }
+  if (sdlk_eq(game->config.key_throw, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key throw.%%fg=reset$");
+    game->config.key_throw = {};
   }
-  if (game->config.key_inventory) {
-    if (game->config.key_inventory == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key gfx mode.%%fg=reset$");
-      game->config.key_inventory = 0;
-    }
+  if (sdlk_eq(game->config.key_inventory, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key gfx mode.%%fg=reset$");
+    game->config.key_inventory = {};
   }
-  if (game->config.key_console) {
-    if (game->config.key_console == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key unused2%%fg=reset$");
-      game->config.key_console = 0;
-    }
+  if (sdlk_eq(game->config.key_console, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key console%%fg=reset$");
+    game->config.key_console = {};
   }
-  if (game->config.key_robot_mode) {
-    if (game->config.key_robot_mode == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key robot mode%%fg=reset$");
-      game->config.key_robot_mode = 0;
-    }
+  if (sdlk_eq(game->config.key_robot_mode, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key robot mode%%fg=reset$");
+    game->config.key_robot_mode = {};
   }
-  if (game->config.key_unused4) {
-    if (game->config.key_unused4 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key unused4%%fg=reset$");
-      game->config.key_unused4 = 0;
-    }
+  if (sdlk_eq(game->config.key_unused4, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key unused4%%fg=reset$");
+    game->config.key_unused4 = {};
   }
-  if (game->config.key_unused5) {
-    if (game->config.key_unused5 == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key unused5%%fg=reset$");
-      game->config.key_unused5 = 0;
-    }
+  if (sdlk_eq(game->config.key_unused5, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key unused5%%fg=reset$");
+    game->config.key_unused5 = {};
   }
-  if (game->config.key_eat) {
-    if (game->config.key_eat == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key unused6%%fg=reset$");
-      game->config.key_eat = 0;
-    }
+  if (sdlk_eq(game->config.key_eat, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key eat%%fg=reset$");
+    game->config.key_eat = {};
   }
-  if (game->config.key_use) {
-    if (game->config.key_use == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key use.%%fg=reset$");
-      game->config.key_use = 0;
-    }
+  if (sdlk_eq(game->config.key_use, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key use.%%fg=reset$");
+    game->config.key_use = {};
   }
-  if (game->config.key_wait_or_collect) {
-    if (game->config.key_wait_or_collect == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key wait.%%fg=reset$");
-      game->config.key_wait_or_collect = 0;
-    }
+  if (sdlk_eq(game->config.key_wait_or_collect, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key wait.%%fg=reset$");
+    game->config.key_wait_or_collect = {};
   }
-  if (game->config.key_zoom_in) {
-    if (game->config.key_zoom_in == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key zoom in.%%fg=reset$");
-      game->config.key_zoom_in = 0;
-    }
+  if (sdlk_eq(game->config.key_zoom_in, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key zoom in.%%fg=reset$");
+    game->config.key_zoom_in = {};
   }
-  if (game->config.key_zoom_out) {
-    if (game->config.key_zoom_out == code) {
-      TOPCON("%%fg=orange$Conflicting key, disabling key zoom out.%%fg=reset$");
-      game->config.key_zoom_out = 0;
-    }
+  if (sdlk_eq(game->config.key_zoom_out, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key zoom out.%%fg=reset$");
+    game->config.key_zoom_out = {};
   }
 }
 
@@ -311,316 +233,316 @@ static uint8_t game_config_keyboard_back(Widp w, int32_t x, int32_t y, uint32_t 
   return true;
 }
 
-static void game_config_key_move_left_set(SDL_Scancode code)
+static void game_config_key_move_left_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_move_left = 0;
+  game->config.key_move_left = {};
   game_config_check_for_conflicts(code);
   game->config.key_move_left = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_move_right_set(SDL_Scancode code)
+static void game_config_key_move_right_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_move_right = 0;
+  game->config.key_move_right = {};
   game_config_check_for_conflicts(code);
   game->config.key_move_right = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_move_up_set(SDL_Scancode code)
+static void game_config_key_move_up_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_move_up = 0;
+  game->config.key_move_up = {};
   game_config_check_for_conflicts(code);
   game->config.key_move_up = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_move_down_set(SDL_Scancode code)
+static void game_config_key_move_down_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_move_down = 0;
+  game->config.key_move_down = {};
   game_config_check_for_conflicts(code);
   game->config.key_move_down = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_map_left_set(SDL_Scancode code)
+static void game_config_key_map_left_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_map_left = 0;
+  game->config.key_map_left = {};
   game_config_check_for_conflicts(code);
   game->config.key_map_left = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_map_right_set(SDL_Scancode code)
+static void game_config_key_map_right_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_map_right = 0;
+  game->config.key_map_right = {};
   game_config_check_for_conflicts(code);
   game->config.key_map_right = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_map_up_set(SDL_Scancode code)
+static void game_config_key_map_up_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_map_up = 0;
+  game->config.key_map_up = {};
   game_config_check_for_conflicts(code);
   game->config.key_map_up = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_map_down_set(SDL_Scancode code)
+static void game_config_key_map_down_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_map_down = 0;
+  game->config.key_map_down = {};
   game_config_check_for_conflicts(code);
   game->config.key_map_down = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_attack_set(SDL_Scancode code)
+static void game_config_key_attack_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_attack = 0;
+  game->config.key_attack = {};
   game_config_check_for_conflicts(code);
   game->config.key_attack = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_wait_or_collect_set(SDL_Scancode code)
+static void game_config_key_wait_or_collect_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_wait_or_collect = 0;
+  game->config.key_wait_or_collect = {};
   game_config_check_for_conflicts(code);
   game->config.key_wait_or_collect = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_jump_set(SDL_Scancode code)
+static void game_config_key_jump_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_jump = 0;
+  game->config.key_jump = {};
   game_config_check_for_conflicts(code);
   game->config.key_jump = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_throw_set(SDL_Scancode code)
+static void game_config_key_throw_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_throw = 0;
+  game->config.key_throw = {};
   game_config_check_for_conflicts(code);
   game->config.key_throw = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_inventory_set(SDL_Scancode code)
+static void game_config_key_inventory_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_inventory = 0;
+  game->config.key_inventory = {};
   game_config_check_for_conflicts(code);
   game->config.key_inventory = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_drop_set(SDL_Scancode code)
+static void game_config_key_drop_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_drop = 0;
+  game->config.key_drop = {};
   game_config_check_for_conflicts(code);
   game->config.key_drop = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_use_set(SDL_Scancode code)
+static void game_config_key_use_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_use = 0;
+  game->config.key_use = {};
   game_config_check_for_conflicts(code);
   game->config.key_use = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_eat_set(SDL_Scancode code)
+static void game_config_key_eat_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_eat = 0;
+  game->config.key_eat = {};
   game_config_check_for_conflicts(code);
   game->config.key_eat = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action0_set(SDL_Scancode code)
+static void game_config_key_action0_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action0 = 0;
+  game->config.key_action0 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action0 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action1_set(SDL_Scancode code)
+static void game_config_key_action1_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action1 = 0;
+  game->config.key_action1 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action1 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action2_set(SDL_Scancode code)
+static void game_config_key_action2_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action2 = 0;
+  game->config.key_action2 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action2 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action3_set(SDL_Scancode code)
+static void game_config_key_action3_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action3 = 0;
+  game->config.key_action3 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action3 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action4_set(SDL_Scancode code)
+static void game_config_key_action4_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action4 = 0;
+  game->config.key_action4 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action4 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action5_set(SDL_Scancode code)
+static void game_config_key_action5_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action5 = 0;
+  game->config.key_action5 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action5 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action6_set(SDL_Scancode code)
+static void game_config_key_action6_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action6 = 0;
+  game->config.key_action6 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action6 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action7_set(SDL_Scancode code)
+static void game_config_key_action7_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action7 = 0;
+  game->config.key_action7 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action7 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action8_set(SDL_Scancode code)
+static void game_config_key_action8_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action8 = 0;
+  game->config.key_action8 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action8 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_action9_set(SDL_Scancode code)
+static void game_config_key_action9_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_action9 = 0;
+  game->config.key_action9 = {};
   game_config_check_for_conflicts(code);
   game->config.key_action9 = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_save_set(SDL_Scancode code)
+static void game_config_key_save_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_save = 0;
+  game->config.key_save = {};
   game_config_check_for_conflicts(code);
   game->config.key_save = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_load_set(SDL_Scancode code)
+static void game_config_key_load_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_load = 0;
+  game->config.key_load = {};
   game_config_check_for_conflicts(code);
   game->config.key_load = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_robot_mode_set(SDL_Scancode code)
+static void game_config_key_robot_mode_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_robot_mode = 0;
+  game->config.key_robot_mode = {};
   game_config_check_for_conflicts(code);
   game->config.key_robot_mode = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_zoom_in_set(SDL_Scancode code)
+static void game_config_key_zoom_in_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_zoom_in = 0;
+  game->config.key_zoom_in = {};
   game_config_check_for_conflicts(code);
   game->config.key_zoom_in = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_zoom_out_set(SDL_Scancode code)
+static void game_config_key_zoom_out_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_zoom_out = 0;
+  game->config.key_zoom_out = {};
   game_config_check_for_conflicts(code);
   game->config.key_zoom_out = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_help_set(SDL_Scancode code)
+static void game_config_key_help_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_help = 0;
+  game->config.key_help = {};
   game_config_check_for_conflicts(code);
   game->config.key_help = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_console_set(SDL_Scancode code)
+static void game_config_key_console_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_console = 0;
+  game->config.key_console = {};
   game_config_check_for_conflicts(code);
   game->config.key_console = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_quit_set(SDL_Scancode code)
+static void game_config_key_quit_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_quit = 0;
+  game->config.key_quit = {};
   game_config_check_for_conflicts(code);
   game->config.key_quit = code;
   game->config_keyboard_select();
 }
 
-static void game_config_key_screenshot_set(SDL_Scancode code)
+static void game_config_key_screenshot_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
-  game->config.key_screenshot = 0;
+  game->config.key_screenshot = {};
   game_config_check_for_conflicts(code);
   game->config.key_screenshot = code;
   game->config_keyboard_select();
@@ -636,37 +558,47 @@ static void grab_key(const std::string which)
 static uint8_t game_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  game->config.key_move_up = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_UP);
-  game->config.key_move_up = SDL_SCANCODE_UP;
+  SDL_Keysym k;
 
-  game->config.key_move_left = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_LEFT);
-  game->config.key_move_left = SDL_SCANCODE_LEFT;
+  game->config.key_move_up = {};
+  k.sym                    = SDLK_UP;
+  game_config_check_for_conflicts(k);
+  game->config.key_move_up = k;
 
-  game->config.key_move_down = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_DOWN);
-  game->config.key_move_down = SDL_SCANCODE_DOWN;
+  game->config.key_move_left = {};
+  k.sym                      = SDLK_LEFT;
+  game_config_check_for_conflicts(k);
+  game->config.key_move_left = k;
 
-  game->config.key_move_right = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_RIGHT);
-  game->config.key_move_right = SDL_SCANCODE_RIGHT;
+  game->config.key_move_down = {};
+  k.sym                      = SDLK_DOWN;
+  game_config_check_for_conflicts(k);
+  game->config.key_move_down = k;
 
-  game->config.key_map_up = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_W);
-  game->config.key_map_up = SDL_SCANCODE_W;
+  game->config.key_move_right = {};
+  k.sym                       = SDLK_RIGHT;
+  game_config_check_for_conflicts(k);
+  game->config.key_move_right = k;
 
-  game->config.key_map_left = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_A);
-  game->config.key_map_left = SDL_SCANCODE_A;
+  game->config.key_map_up = {};
+  k.sym                   = SDLK_w;
+  game_config_check_for_conflicts(k);
+  game->config.key_map_up = k;
 
-  game->config.key_map_down = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_S);
-  game->config.key_map_down = SDL_SCANCODE_S;
+  game->config.key_map_left = {};
+  k.sym                     = SDLK_a;
+  game_config_check_for_conflicts(k);
+  game->config.key_map_left = k;
 
-  game->config.key_map_right = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_D);
-  game->config.key_map_right = SDL_SCANCODE_D;
+  game->config.key_map_down = {};
+  k.sym                     = SDLK_s;
+  game_config_check_for_conflicts(k);
+  game->config.key_map_down = k;
+
+  game->config.key_map_right = {};
+  k.sym                      = SDLK_d;
+  game_config_check_for_conflicts(k);
+  game->config.key_map_right = k;
 
   game->config_keyboard_select();
 
@@ -676,37 +608,47 @@ static uint8_t game_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_
 static uint8_t game_config_keyboard_profile_wasd(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  game->config.key_move_up = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_W);
-  game->config.key_move_up = SDL_SCANCODE_W;
+  SDL_Keysym k;
 
-  game->config.key_move_left = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_A);
-  game->config.key_move_left = SDL_SCANCODE_A;
+  game->config.key_move_up = {};
+  k.sym                    = SDLK_w;
+  game_config_check_for_conflicts(k);
+  game->config.key_move_up = k;
 
-  game->config.key_move_down = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_S);
-  game->config.key_move_down = SDL_SCANCODE_S;
+  game->config.key_move_left = {};
+  k.sym                      = SDLK_a;
+  game_config_check_for_conflicts(k);
+  game->config.key_move_left = k;
 
-  game->config.key_move_right = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_D);
-  game->config.key_move_right = SDL_SCANCODE_D;
+  game->config.key_move_down = {};
+  k.sym                      = SDLK_s;
+  game_config_check_for_conflicts(k);
+  game->config.key_move_down = k;
 
-  game->config.key_map_up = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_UP);
-  game->config.key_map_up = SDL_SCANCODE_UP;
+  game->config.key_move_right = {};
+  k.sym                       = SDLK_d;
+  game_config_check_for_conflicts(k);
+  game->config.key_move_right = k;
 
-  game->config.key_map_left = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_LEFT);
-  game->config.key_map_left = SDL_SCANCODE_LEFT;
+  game->config.key_map_up = {};
+  k.sym                   = SDLK_UP;
+  game_config_check_for_conflicts(k);
+  game->config.key_map_up = k;
 
-  game->config.key_map_down = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_DOWN);
-  game->config.key_map_down = SDL_SCANCODE_DOWN;
+  game->config.key_map_left = {};
+  k.sym                     = SDLK_LEFT;
+  game_config_check_for_conflicts(k);
+  game->config.key_map_left = k;
 
-  game->config.key_map_right = 0;
-  game_config_check_for_conflicts(SDL_SCANCODE_RIGHT);
-  game->config.key_map_right = SDL_SCANCODE_RIGHT;
+  game->config.key_map_down = {};
+  k.sym                     = SDLK_DOWN;
+  game_config_check_for_conflicts(k);
+  game->config.key_map_down = k;
+
+  game->config.key_map_right = {};
+  k.sym                      = SDLK_RIGHT;
+  game_config_check_for_conflicts(k);
+  game->config.key_map_right = k;
 
   game->config_keyboard_select();
 
@@ -996,10 +938,9 @@ static uint8_t game_config_key_screenshot(Widp w, int32_t x, int32_t y, uint32_t
 static uint8_t game_config_keyboard_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   switch (key->mod) {
@@ -1025,10 +966,9 @@ static uint8_t game_config_keyboard_key_up(Widp w, const struct SDL_Keysym *key)
 static uint8_t game_config_keyboard_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   return true;
@@ -1184,7 +1124,7 @@ void Game::config_keyboard_select(void)
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_move_up));
+    wid_set_text(w, ::to_string(game->config.key_move_up));
     wid_set_on_mouse_up(w, game_config_key_move_up);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1212,7 +1152,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_move_left));
+    wid_set_text(w, ::to_string(game->config.key_move_left));
     wid_set_on_mouse_up(w, game_config_key_move_left);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1240,7 +1180,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_move_down));
+    wid_set_text(w, ::to_string(game->config.key_move_down));
     wid_set_on_mouse_up(w, game_config_key_move_down);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1268,7 +1208,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_move_right));
+    wid_set_text(w, ::to_string(game->config.key_move_right));
     wid_set_on_mouse_up(w, game_config_key_move_right);
   }
 
@@ -1301,7 +1241,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_map_up));
+    wid_set_text(w, ::to_string(game->config.key_map_up));
     wid_set_on_mouse_up(w, game_config_key_map_up);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1329,7 +1269,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_map_left));
+    wid_set_text(w, ::to_string(game->config.key_map_left));
     wid_set_on_mouse_up(w, game_config_key_map_left);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1357,7 +1297,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_map_down));
+    wid_set_text(w, ::to_string(game->config.key_map_down));
     wid_set_on_mouse_up(w, game_config_key_map_down);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1385,7 +1325,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_map_right));
+    wid_set_text(w, ::to_string(game->config.key_map_right));
     wid_set_on_mouse_up(w, game_config_key_map_right);
   }
 
@@ -1418,7 +1358,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_attack));
+    wid_set_text(w, ::to_string(game->config.key_attack));
     wid_set_on_mouse_up(w, game_config_key_attack);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1446,7 +1386,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
+    wid_set_text(w, ::to_string(game->config.key_wait_or_collect));
     wid_set_on_mouse_up(w, game_config_key_wait_or_collect);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1474,7 +1414,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_jump));
+    wid_set_text(w, ::to_string(game->config.key_jump));
     wid_set_on_mouse_up(w, game_config_key_jump);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1502,7 +1442,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_throw));
+    wid_set_text(w, ::to_string(game->config.key_throw));
     wid_set_on_mouse_up(w, game_config_key_throw);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1530,7 +1470,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_drop));
+    wid_set_text(w, ::to_string(game->config.key_drop));
     wid_set_on_mouse_up(w, game_config_key_drop);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1558,7 +1498,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_use));
+    wid_set_text(w, ::to_string(game->config.key_use));
     wid_set_on_mouse_up(w, game_config_key_use);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1586,7 +1526,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_eat));
+    wid_set_text(w, ::to_string(game->config.key_eat));
     wid_set_on_mouse_up(w, game_config_key_eat);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1614,7 +1554,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_inventory));
+    wid_set_text(w, ::to_string(game->config.key_inventory));
     wid_set_on_mouse_up(w, game_config_key_inventory);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1642,7 +1582,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action0));
+    wid_set_text(w, ::to_string(game->config.key_action0));
     wid_set_on_mouse_up(w, game_config_key_action0);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1670,7 +1610,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action1));
+    wid_set_text(w, ::to_string(game->config.key_action1));
     wid_set_on_mouse_up(w, game_config_key_action1);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1698,7 +1638,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action2));
+    wid_set_text(w, ::to_string(game->config.key_action2));
     wid_set_on_mouse_up(w, game_config_key_action2);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1726,7 +1666,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action3));
+    wid_set_text(w, ::to_string(game->config.key_action3));
     wid_set_on_mouse_up(w, game_config_key_action3);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1754,7 +1694,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action4));
+    wid_set_text(w, ::to_string(game->config.key_action4));
     wid_set_on_mouse_up(w, game_config_key_action4);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1782,7 +1722,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action5));
+    wid_set_text(w, ::to_string(game->config.key_action5));
     wid_set_on_mouse_up(w, game_config_key_action5);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1810,7 +1750,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action6));
+    wid_set_text(w, to_string(game->config.key_action6));
     wid_set_on_mouse_up(w, game_config_key_action6);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1838,7 +1778,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action7));
+    wid_set_text(w, ::to_string(game->config.key_action7));
     wid_set_on_mouse_up(w, game_config_key_action7);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1866,7 +1806,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action8));
+    wid_set_text(w, ::to_string(game->config.key_action8));
     wid_set_on_mouse_up(w, game_config_key_action8);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1894,7 +1834,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_action9));
+    wid_set_text(w, ::to_string(game->config.key_action9));
     wid_set_on_mouse_up(w, game_config_key_action9);
   }
 
@@ -1927,7 +1867,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_save));
+    wid_set_text(w, ::to_string(game->config.key_save));
     wid_set_on_mouse_up(w, game_config_key_save);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1955,7 +1895,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_load));
+    wid_set_text(w, ::to_string(game->config.key_load));
     wid_set_on_mouse_up(w, game_config_key_load);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -1983,7 +1923,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_robot_mode));
+    wid_set_text(w, ::to_string(game->config.key_robot_mode));
     wid_set_on_mouse_up(w, game_config_key_robot_mode);
   }
 
@@ -2016,7 +1956,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_zoom_in));
+    wid_set_text(w, ::to_string(game->config.key_zoom_in));
     wid_set_on_mouse_up(w, game_config_key_zoom_in);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -2044,7 +1984,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_zoom_out));
+    wid_set_text(w, ::to_string(game->config.key_zoom_out));
     wid_set_on_mouse_up(w, game_config_key_zoom_out);
   }
 
@@ -2077,7 +2017,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_screenshot));
+    wid_set_text(w, ::to_string(game->config.key_screenshot));
     wid_set_on_mouse_up(w, game_config_key_screenshot);
   }
 
@@ -2110,7 +2050,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_quit));
+    wid_set_text(w, ::to_string(game->config.key_quit));
     wid_set_on_mouse_up(w, game_config_key_quit);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -2138,7 +2078,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_console));
+    wid_set_text(w, ::to_string(game->config.key_console));
     wid_set_on_mouse_up(w, game_config_key_console);
   }
   ///////////////////////////////////////////////////////////////////////
@@ -2166,7 +2106,7 @@ void Game::config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, SDL_GetScancodeName((SDL_Scancode) game->config.key_help));
+    wid_set_text(w, ::to_string(game->config.key_help));
     wid_set_on_mouse_up(w, game_config_key_help);
   }
 

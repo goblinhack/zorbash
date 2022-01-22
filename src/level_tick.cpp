@@ -46,34 +46,34 @@ void Level::handle_input_events(void)
   const float    map_move_scroll_delta = 0.2;
   const uint8_t *state                 = SDL_GetKeyboardState(0);
 
-  if (state[ game->config.key_map_left ]) {
+  if (state[ sdlk_to_scancode(game->config.key_map_left) ]) {
     map_wanted_at.x -= map_move_scroll_delta;
     is_cursor_found      = false;
     is_map_follow_player = false;
   }
 
-  if (state[ game->config.key_map_right ]) {
+  if (state[ sdlk_to_scancode(game->config.key_map_right) ]) {
     map_wanted_at.x += map_move_scroll_delta;
     is_cursor_found      = false;
     is_map_follow_player = false;
   }
 
-  if (state[ game->config.key_map_up ]) {
+  if (state[ sdlk_to_scancode(game->config.key_map_up) ]) {
     map_wanted_at.y -= map_move_scroll_delta;
     is_cursor_found      = false;
     is_map_follow_player = false;
   }
 
-  if (state[ game->config.key_map_down ]) {
+  if (state[ sdlk_to_scancode(game->config.key_map_down) ]) {
     map_wanted_at.y += map_move_scroll_delta;
     is_cursor_found      = false;
     is_map_follow_player = false;
   }
 
-  bool up    = state[ game->config.key_move_up ];
-  bool down  = state[ game->config.key_move_down ];
-  bool left  = state[ game->config.key_move_left ];
-  bool right = state[ game->config.key_move_right ];
+  bool up    = state[ sdlk_to_scancode(game->config.key_move_up) ];
+  bool down  = state[ sdlk_to_scancode(game->config.key_move_down) ];
+  bool left  = state[ sdlk_to_scancode(game->config.key_move_left) ];
+  bool right = state[ sdlk_to_scancode(game->config.key_move_right) ];
 
   if (up || down || left || right) {
     if (! game->request_player_move) {

@@ -56,10 +56,9 @@ int  joy_naxes;
 int  joy_buttons;
 int  joy_balls;
 
-SDL_Window   *window;  // Our window handle
-SDL_GLContext context; // Our opengl context handle
-
-SDL_Scancode      sdl_grabbed_scancode;
+SDL_Window       *window;  // Our window handle
+SDL_GLContext     context; // Our opengl context handle
+SDL_Keysym        sdl_grabbed_key;
 on_sdl_key_grab_t on_sdl_key_grab;
 
 void sdl_fini(void)
@@ -438,18 +437,6 @@ void sdl_event(SDL_Event *event)
   switch (event->type) {
     case SDL_KEYDOWN :
       {
-        if (g_grab_next_key) {
-          DBG("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
-              SDL_GetKeyName(event->key.keysym.sym), SDL_GetScancodeName(event->key.keysym.scancode));
-
-          g_grab_next_key      = false;
-          sdl_grabbed_scancode = event->key.keysym.scancode;
-          if (on_sdl_key_grab) {
-            (*on_sdl_key_grab)(sdl_grabbed_scancode);
-          }
-          return;
-        }
-
         key = &event->key.keysym;
 
         DBG("SDL: Keyboard: Key pressed keycode 0x%08" PRIX32 " = %s %d", event->key.keysym.sym,
@@ -496,6 +483,18 @@ void sdl_event(SDL_Event *event)
       }
     case SDL_KEYUP :
       {
+        if (g_grab_next_key) {
+          DBG("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
+              SDL_GetKeyName(event->key.keysym.sym), SDL_GetScancodeName(event->key.keysym.scancode));
+
+          g_grab_next_key = false;
+          sdl_grabbed_key = event->key.keysym;
+          if (on_sdl_key_grab) {
+            (*on_sdl_key_grab)(sdl_grabbed_key);
+          }
+          return;
+        }
+
         sdl_key_repeat_count  = 0;
         sdl_last_time_for_key = 0;
         memset(&last_key_pressed, 0, sizeof(*key));
@@ -1036,7 +1035,7 @@ uint8_t config_gfx_map_mini_set(tokens_t *tokens, void *context)
     game->config.gfx_map_mini = true;
     CON("GFX map enabled (default)");
   } else {
-    int val                  = strtol(s, 0, 10) ? 1 : 0;
+    int val                   = strtol(s, 0, 10) ? 1 : 0;
     game->config.gfx_map_mini = val;
     if (game->config.gfx_map_mini) {
       CON("GFX map enabled");

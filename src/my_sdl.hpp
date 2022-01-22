@@ -9,6 +9,7 @@
 
 #include <SDL.h>
 
+#include "c_plus_plus_serializer.hpp"
 #include "my_command.hpp"
 #include "my_main.hpp"
 #include "my_time.hpp"
@@ -77,11 +78,11 @@ extern int sdl_key_repeat_count;
 
 extern ts_t sdl_last_time_for_key;
 
-extern SDL_Scancode sdl_grabbed_scancode;
+extern SDL_Keysym sdl_grabbed_key;
 
 extern SDL_Window *window; // Our window handle
 
-typedef void (*on_sdl_key_grab_t)(SDL_Scancode);
+typedef void (*on_sdl_key_grab_t)(SDL_Keysym);
 extern on_sdl_key_grab_t on_sdl_key_grab;
 
 extern std::array< uint8_t, SDL_MAX_BUTTONS > sdl_joy_buttons;
@@ -120,5 +121,26 @@ void sdl_screenshot_do(void);
 void sdl_screenshot(void);
 void sdl_show_keyboard(void);
 void sdl_tick(void);
+
+std::ostream &operator<<(std::ostream &out, Bits< const SDL_Keysym & > const my);
+std::istream &operator>>(std::istream &in, Bits< SDL_Keysym & > my);
+
+static inline bool sdlk_eq(const SDL_Keysym &a, const SDL_Keysym &b) { return (a.sym == b.sym) && (a.mod == b.mod); }
+
+static inline bool sdlk_eq(const SDL_Keysym *a, const SDL_Keysym &b)
+{
+  return (a->sym == b.sym) && (a->mod == b.mod);
+}
+static inline bool sdlk_eq(const SDL_Keysym *a, const SDL_Keysym *b)
+{
+  return (a->sym == b->sym) && (a->mod == b->mod);
+}
+
+bool sdlk_eq(const SDL_Scancode s, const SDL_Keysym &k);
+
+SDL_Scancode sdlk_to_scancode(const SDL_Keysym &k);
+
+std::string to_string(const SDL_Keysym &k);
+std::string to_string_ignoring_mods(const SDL_Keysym &k);
 
 #endif

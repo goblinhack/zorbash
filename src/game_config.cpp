@@ -43,7 +43,7 @@ void Config::reset(void)
   gfx_fullscreen_desktop = true;
   gfx_inverted           = false;
   gfx_lights             = true;
-  gfx_map_mini            = true;
+  gfx_map_mini           = true;
   gfx_show_hidden        = false;
   gfx_vsync_enable       = true;
   gfx_vsync_locked       = false;
@@ -77,34 +77,35 @@ void Config::reset(void)
 #else
   key_drop = {SDL_SCANCODE_DELETE};
 #endif
-  key_eat             = {SDL_SCANCODE_E};
-  key_help            = {SDL_SCANCODE_H};
-  key_jump            = {SDL_SCANCODE_J};
-  key_load            = {SDL_SCANCODE_F11};
-  key_map_down        = {SDL_SCANCODE_DOWN};
-  key_map_left        = {SDL_SCANCODE_LEFT};
-  key_map_right       = {SDL_SCANCODE_RIGHT};
-  key_map_up          = {SDL_SCANCODE_UP};
-  key_move_down       = {SDL_SCANCODE_S};
-  key_move_left       = {SDL_SCANCODE_A};
-  key_move_right      = {SDL_SCANCODE_D};
-  key_move_up         = {SDL_SCANCODE_W};
-  key_quit            = {SDL_SCANCODE_Q};
-  key_save            = {SDL_SCANCODE_F12};
-  key_screenshot      = {SDL_SCANCODE_F10};
-  key_throw           = {SDL_SCANCODE_T};
-  key_inventory       = {SDL_SCANCODE_I};
-  key_console         = {SDL_SCANCODE_TAB};
-  key_robot_mode      = {SDL_SCANCODE_R};
-  key_unused4         = 0;
-  key_unused5         = 0;
-  key_use             = {SDL_SCANCODE_U};
-  key_wait_or_collect = {SDL_SCANCODE_PERIOD};
-  key_zoom_in         = {SDL_SCANCODE_Z};
-  key_zoom_out        = {SDL_SCANCODE_X};
-  music_volume        = {MIX_MAX_VOLUME / 3};
-  sdl_delay           = 1;
-  sound_volume        = {MIX_MAX_VOLUME / 2};
+  key_eat.sym             = SDLK_e;
+  key_help.sym            = SDLK_h;
+  key_jump.sym            = SDLK_j;
+  key_load.sym            = SDLK_F11;
+  key_map_down.sym        = SDLK_DOWN;
+  key_map_left.sym        = SDLK_LEFT;
+  key_map_right.sym       = SDLK_RIGHT;
+  key_map_up.sym          = SDLK_UP;
+  key_move_down.sym       = SDLK_s;
+  key_move_left.sym       = SDLK_a;
+  key_move_right.sym      = SDLK_d;
+  key_move_up.sym         = SDLK_w;
+  key_quit.sym            = SDLK_q;
+  key_save.sym            = SDLK_F12;
+  key_screenshot.sym      = SDLK_F10;
+  key_throw.sym           = SDLK_t;
+  key_inventory.sym       = SDLK_i;
+  key_console.sym         = SDLK_TAB;
+  key_console.mod         = KMOD_LSHIFT;
+  key_robot_mode.sym      = SDLK_r;
+  key_unused4             = {};
+  key_unused5             = {};
+  key_use.sym             = SDLK_u;
+  key_wait_or_collect.sym = SDLK_PERIOD;
+  key_zoom_in.sym         = SDLK_z;
+  key_zoom_out.sym        = SDLK_x;
+  music_volume            = {MIX_MAX_VOLUME / 3};
+  sdl_delay               = 1;
+  sound_volume            = {MIX_MAX_VOLUME / 2};
 }
 
 static void game_config_top_destroy(void)
@@ -157,10 +158,8 @@ static uint8_t game_config_top_back(Widp w, int32_t x, int32_t y, uint32_t butto
 static uint8_t game_config_top_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   switch (key->mod) {
@@ -190,10 +189,9 @@ static uint8_t game_config_top_key_up(Widp w, const struct SDL_Keysym *key)
 static uint8_t game_config_top_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   return true;
