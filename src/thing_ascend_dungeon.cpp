@@ -36,7 +36,7 @@ bool Thing::ascend_dungeon_tick(void)
     return false;
   }
 
-  if (level->world_at.z > 1) {
+  if (level->dungeon_walk_order_level_no > 1) {
     if (is_player()) {
       level->ts_fade_out_begin     = time_get_time_ms_cached();
       level->fbo_light             = sdl_fbo_save(FBO_FULLMAP_LIGHT);

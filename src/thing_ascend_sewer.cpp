@@ -29,15 +29,13 @@ bool Thing::ascend_sewer_tick(void)
     return false;
   }
 
-  if (level->world_at.z > 1) {
-    if (is_player()) {
-      level->ts_fade_out_begin   = time_get_time_ms_cached();
-      level->fbo_light           = sdl_fbo_save(FBO_FULLMAP_LIGHT);
-      is_waiting_to_ascend_sewer = true;
-      return true;
-    } else {
-      return ascend_sewer();
-    }
+  if (is_player()) {
+    level->ts_fade_out_begin   = time_get_time_ms_cached();
+    level->fbo_light           = sdl_fbo_save(FBO_FULLMAP_LIGHT);
+    is_waiting_to_ascend_sewer = true;
+    return true;
+  } else {
+    return ascend_sewer();
   }
 
   return false;

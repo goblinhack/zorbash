@@ -23,6 +23,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_health_bar_shown(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_health_initial_dice("1")
+    mytp.set_is_green_blooded(True)  # not really
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_able_to_walk_through_walls(True)
     mytp.set_is_attackable_by_monst(True)
