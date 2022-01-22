@@ -488,7 +488,7 @@ void sdl_event(SDL_Event *event)
               SDL_GetKeyName(event->key.keysym.sym), SDL_GetScancodeName(event->key.keysym.scancode));
 
           g_grab_next_key = false;
-          sdl_grabbed_key = event->key.keysym;
+          sdl_grabbed_key = sdlk_normalize(event->key.keysym);
           if (on_sdl_key_grab) {
             (*on_sdl_key_grab)(sdl_grabbed_key);
           }

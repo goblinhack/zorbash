@@ -709,7 +709,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     }
   }
 
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
 
@@ -720,7 +720,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     return false;
   }
 
-  if (sdlk_eq(key, game->config.key_drop)) {
+  if (sdlk_eq(*key, game->config.key_drop)) {
     if (game->level->player->drop(what)) {
       game->tick_begin("drop");
     }
@@ -734,70 +734,70 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     case KMOD_LCTRL :
     case KMOD_RCTRL :
     default :
-      if (sdlk_eq(key, game->config.key_action0)) {
+      if (sdlk_eq(*key, game->config.key_action0)) {
         game->level->inventory_assign(9, what);
         wid_inventory_select(what);
         game->request_remake_rightbar = true;
         CON("PLAYER: Reassigned item to key.");
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action1)) {
+      if (sdlk_eq(*key, game->config.key_action1)) {
         game->level->inventory_assign(0, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
         CON("PLAYER: Reassigned item to key.");
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action2)) {
+      if (sdlk_eq(*key, game->config.key_action2)) {
         game->level->inventory_assign(1, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
         CON("PLAYER: Reassigned item to key.");
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action3)) {
+      if (sdlk_eq(*key, game->config.key_action3)) {
         game->level->inventory_assign(2, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
         CON("PLAYER: Reassigned item to key.");
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action4)) {
+      if (sdlk_eq(*key, game->config.key_action4)) {
         game->level->inventory_assign(3, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
         CON("PLAYER: Reassigned item to key.");
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action5)) {
+      if (sdlk_eq(*key, game->config.key_action5)) {
         game->level->inventory_assign(4, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
         CON("PLAYER: Reassigned item to key.");
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action6)) {
+      if (sdlk_eq(*key, game->config.key_action6)) {
         game->level->inventory_assign(5, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
         CON("PLAYER: Reassigned item to key.");
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action7)) {
+      if (sdlk_eq(*key, game->config.key_action7)) {
         game->level->inventory_assign(6, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
         CON("PLAYER: Reassigned item to key.");
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action8)) {
+      if (sdlk_eq(*key, game->config.key_action8)) {
         game->level->inventory_assign(7, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
         CON("PLAYER: Reassigned item to key.");
         return true;
       }
-      if (sdlk_eq(key, game->config.key_action9)) {
+      if (sdlk_eq(*key, game->config.key_action9)) {
         game->level->inventory_assign(8, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
@@ -807,7 +807,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       break;
   }
 
-  if (sdlk_eq(key, game->config.key_drop)) {
+  if (sdlk_eq(*key, game->config.key_drop)) {
     DBG3("Pressed drop key");
     TRACE_AND_INDENT();
     if (player->drop(what)) {
@@ -818,7 +818,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
-  if (sdlk_eq(key, game->config.key_eat)) {
+  if (sdlk_eq(*key, game->config.key_eat)) {
     DBG3("Pressed eat key");
     TRACE_AND_INDENT();
     player->use(what);
@@ -829,7 +829,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
-  if (sdlk_eq(key, game->config.key_use)) {
+  if (sdlk_eq(*key, game->config.key_use)) {
     DBG3("Pressed use key");
     player->use(what);
     if (game->state == Game::STATE_INVENTORY) {
@@ -839,7 +839,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
-  if (sdlk_eq(key, game->config.key_throw)) {
+  if (sdlk_eq(*key, game->config.key_throw)) {
     DBG3("Pressed throw key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);

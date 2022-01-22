@@ -96,7 +96,7 @@ static uint8_t game_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
 
@@ -129,7 +129,7 @@ static uint8_t game_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
 
-  if (sdlk_eq(key, game->config.key_console)) {
+  if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
 
