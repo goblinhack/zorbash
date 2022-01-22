@@ -2556,7 +2556,7 @@ void Thing::ai_change_state(int new_state, const std::string &why)
     case MONST_STATE_USING_SKILLSTONE :
       from = "USING-SKILLSTONE";
       if (is_player()) {
-        wid_skill_choose_destroy();
+        wid_choose_skill_destroy();
       }
       break;
   }
@@ -2586,7 +2586,7 @@ void Thing::ai_change_state(int new_state, const std::string &why)
       break;
     case MONST_STATE_USING_SKILLSTONE :
       if (is_player()) {
-        game->wid_skill_choose();
+        game->wid_choose_skill();
       }
       break;
   }

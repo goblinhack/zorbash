@@ -44,7 +44,7 @@ void wid_actionbar_close_all_popups(void)
   wid_thing_info_fini();
   wid_collect_destroy();
   wid_enchant_destroy();
-  wid_skill_choose_destroy();
+  wid_choose_skill_destroy();
   wid_load_destroy();
   wid_save_destroy();
   wid_inventory_fini();
@@ -315,7 +315,7 @@ static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
   }
 
-  game->load_select();
+  game->wid_load_select();
   wid_actionbar_init();
   return true;
 }
@@ -386,7 +386,7 @@ static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
   }
 
-  game->save_select();
+  game->wid_save_select();
   wid_actionbar_init();
   return true;
 }
@@ -956,7 +956,7 @@ static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t bu
 
   game->change_state(Game::STATE_NORMAL);
   wid_thing_info_fini(); // To remove bag or other info
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
   return true;
 }
 

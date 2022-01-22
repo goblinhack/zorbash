@@ -26,7 +26,7 @@ static uint8_t wid_config_other_cancel(Widp w, int32_t x, int32_t y, uint32_t bu
   CON("PLAYER: Reload config");
   game->load_config();
   wid_config_other_destroy();
-  game->config_top_select();
+  game->wid_config_top_menu();
   return true;
 }
 
@@ -36,7 +36,7 @@ static uint8_t wid_config_other_save(Widp w, int32_t x, int32_t y, uint32_t butt
   CON("PLAYER: Save config");
   game->save_config();
   wid_config_other_destroy();
-  game->config_top_select();
+  game->wid_config_top_menu();
   return true;
 }
 
@@ -44,7 +44,7 @@ static uint8_t wid_config_other_back(Widp w, int32_t x, int32_t y, uint32_t butt
 {
   TRACE_AND_INDENT();
   wid_config_other_destroy();
-  game->config_top_select();
+  game->wid_config_top_menu();
   return true;
 }
 
@@ -64,7 +64,7 @@ static uint8_t wid_config_other_sdl_delay_incr(Widp w, int32_t x, int32_t y, uin
   TRACE_AND_INDENT();
   CON("PLAYER: Increment sdl_delay");
   game->config.sdl_delay++;
-  game->config_other_select();
+  game->wid_config_other_select();
   return true;
 }
 
@@ -73,7 +73,7 @@ static uint8_t wid_config_other_sdl_delay_decr(Widp w, int32_t x, int32_t y, uin
   TRACE_AND_INDENT();
   CON("PLAYER: Decrement sdl_delay");
   game->config.sdl_delay--;
-  game->config_other_select();
+  game->wid_config_other_select();
   return true;
 }
 
@@ -118,7 +118,7 @@ static uint8_t wid_config_other_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-void Game::config_other_select(void)
+void Game::wid_config_other_select(void)
 {
   TRACE_AND_INDENT();
   if (wid_config_other_window) {

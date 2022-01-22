@@ -1062,7 +1062,7 @@ static uint8_t wid_save_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-void Game::save_select(void)
+void Game::wid_save_select(void)
 {
   TRACE_AND_INDENT();
   if (wid_save) {

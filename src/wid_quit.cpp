@@ -64,7 +64,7 @@ static uint8_t wid_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
     wid_botcon_fini();
     wid_botcon_init();
     game->fini();
-    game->main_menu_select();
+    game->wid_main_menu_select();
   } else {
     wid_quit_destroy();
     DIE_CLEAN("PLAYER: Quit");
@@ -77,7 +77,7 @@ static uint8_t wid_quit_no(Widp w, int32_t x, int32_t y, uint32_t button)
   TRACE_NO_INDENT();
   wid_quit_destroy();
   if (! game->level) {
-    game->main_menu_select();
+    game->wid_main_menu_select();
   } else {
     wid_actionbar_init();
   }

@@ -41,7 +41,7 @@ extern void wid_popup_test(void);
 
 extern void wid_collect_destroy(void);
 extern void wid_enchant_destroy(void);
-extern void wid_skill_choose_destroy(void);
+extern void wid_choose_skill_destroy(void);
 extern void wid_load_destroy(void);
 extern void wid_save_destroy(void);
 extern void wid_quit_destroy(void);

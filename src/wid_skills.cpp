@@ -20,7 +20,7 @@
 WidPopup                 *wid_skills;
 static std::vector< Tpp > skills;
 
-void wid_skill_choose_destroy(void)
+void wid_choose_skill_destroy(void)
 {
   TRACE_AND_INDENT();
   delete wid_skills;
@@ -32,7 +32,7 @@ static void wid_skills_slot(int slot)
 {
   TRACE_AND_INDENT();
   if (slot >= (int) skills.size()) {
-    wid_skill_choose_destroy();
+    wid_choose_skill_destroy();
     return;
   }
 
@@ -43,7 +43,7 @@ static void wid_skills_slot(int slot)
     game->tick_begin("learned a skill");
   }
 
-  wid_skill_choose_destroy();
+  wid_choose_skill_destroy();
 }
 
 static uint8_t wid_skills_key_up(Widp w, const struct SDL_Keysym *key)
@@ -76,7 +76,7 @@ static uint8_t wid_skills_key_up(Widp w, const struct SDL_Keysym *key)
     }
     CON("PLAYER: Skill choose cancelled");
     game->change_state(Game::STATE_NORMAL);
-    wid_skill_choose_destroy();
+    wid_choose_skill_destroy();
     return true;
   }
 
@@ -102,7 +102,7 @@ static uint8_t wid_skills_key_up(Widp w, const struct SDL_Keysym *key)
                 {
                   TRACE_AND_INDENT();
                   CON("PLAYER: Skill choose cancelled");
-                  wid_skill_choose_destroy();
+                  wid_choose_skill_destroy();
                   return true;
                 }
             }
@@ -158,7 +158,7 @@ static uint8_t wid_skills_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-void Game::wid_skill_choose(void)
+void Game::wid_choose_skill(void)
 {
   TRACE_AND_INDENT();
   BOTCON("You lucky thing. Time to learn some new skill.");

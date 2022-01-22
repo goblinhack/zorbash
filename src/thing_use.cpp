@@ -283,7 +283,7 @@ bool Thing::use(Thingp what, int preferred_equip)
     dbg("Trying to use skillstone: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
-      game->wid_skill_choose();
+      game->wid_choose_skill();
     }
   } else if (what->is_weapon()) {
     dbg("Trying to use weapon: %s", what->to_short_string().c_str());

@@ -38,7 +38,7 @@ void Game::change_state(int new_state)
       wid_thing_info_fini();
       wid_collect_destroy();
       wid_enchant_destroy();
-      wid_skill_choose_destroy();
+      wid_choose_skill_destroy();
       wid_load_destroy();
       wid_save_destroy();
       wid_inventory_fini();
@@ -62,7 +62,7 @@ void Game::change_state(int new_state)
       break;
     case STATE_CHOOSING_SKILLS :
       LOG("State changing to STATE_CHOOSING_SKILLS");
-      wid_skill_choose_destroy();
+      wid_choose_skill_destroy();
       LOG("State changed to STATE_CHOOSING_SKILLS");
       break;
     case STATE_CHOOSING_TARGET : // Looking to somewhere to throw at

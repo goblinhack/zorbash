@@ -24,16 +24,16 @@
 #include "my_wid.hpp"
 #include "my_wid_popup.hpp"
 
-static uint8_t wid_choose_initial_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
-static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int32_t y, uint32_t button);
+static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
+static uint8_t wid_choose_next_dungeons_shortcut_enter(Widp w, int32_t x, int32_t y, uint32_t button);
 
 static WidPopup *wid_level_description;
 static WidPopup *wid_level_contents;
 
-class wid_choose_initial_dungeons_ctx
+class wid_choose_next_dungeons_ctx
 {
 public:
-  ~wid_choose_initial_dungeons_ctx()
+  ~wid_choose_next_dungeons_ctx()
   {
     TRACE_NO_INDENT();
     if (w) {
@@ -107,15 +107,15 @@ public:
   class DungeonNode *start_node {};
 };
 
-static wid_choose_initial_dungeons_ctx *g_ctx;
+static wid_choose_next_dungeons_ctx *g_ctx;
 
-static void wid_choose_initial_dungeons_destroy(Widp w);
-static void wid_choose_initial_dungeons_set_focus(wid_choose_initial_dungeons_ctx *ctx, int focusx, int focusy);
+static void wid_choose_next_dungeons_destroy(Widp w);
+static void wid_choose_next_dungeons_set_focus(wid_choose_next_dungeons_ctx *ctx, int focusx, int focusy);
 
 #define ROOM_WIDTH_CHARS  7
 #define ROOM_HEIGHT_CHARS 7
 
-static point3d wid_choose_initial_dungeons_grid_to_level_coord(int x, int y)
+static point3d wid_choose_next_dungeons_grid_to_level_coord(int x, int y)
 {
   point3d level_at;
 
@@ -130,7 +130,7 @@ static point3d wid_choose_initial_dungeons_grid_to_level_coord(int x, int y)
   return level_at;
 }
 
-static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeons_ctx *ctx, Widp b, int x, int y)
+static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx *ctx, Widp b, int x, int y)
 {
   TRACE_NO_INDENT();
   if (! b) {
@@ -209,7 +209,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   if (node->is_ascend_dungeon) {
     fg_tilename = "you_icon";
-    wid_set_on_mouse_down(b, wid_choose_initial_dungeons_shortcut_enter);
+    wid_set_on_mouse_down(b, wid_choose_next_dungeons_shortcut_enter);
   }
 
   if (node->is_descend_dungeon) {
@@ -234,7 +234,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     wid_set_bg_tilename(b, bg_tilename);
   }
 
-  auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (l) {
     if (! fg_tilename.empty()) {
@@ -249,14 +249,14 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
   wid_set_text_top(b, true);
 }
 
-static void wid_choose_initial_dungeons_update_buttons(Widp w)
+static void wid_choose_next_dungeons_update_buttons(Widp w)
 {
   TRACE_NO_INDENT();
-  wid_choose_initial_dungeons_ctx *ctx;
+  wid_choose_next_dungeons_ctx *ctx;
   if (! w) {
     ctx = g_ctx;
   } else {
-    ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(w);
+    ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
   }
 
   verify(MTYPE_WID, ctx);
@@ -271,25 +271,25 @@ static void wid_choose_initial_dungeons_update_buttons(Widp w)
       if (! b) {
         continue;
       }
-      wid_choose_initial_dungeons_update_button(ctx, b, x, y);
+      wid_choose_next_dungeons_update_button(ctx, b, x, y);
     }
   }
   wid_update(w);
 }
 
-static void wid_choose_initial_dungeons_set_focus(wid_choose_initial_dungeons_ctx *ctx, int focusx, int focusy)
+static void wid_choose_next_dungeons_set_focus(wid_choose_next_dungeons_ctx *ctx, int focusx, int focusy)
 {
   TRACE_NO_INDENT();
   ctx->focusx = focusx;
   ctx->focusy = focusy;
 
-  wid_choose_initial_dungeons_update_buttons(ctx->w);
+  wid_choose_next_dungeons_update_buttons(ctx->w);
 }
 
-static void wid_choose_initial_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_choose_next_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
-  wid_choose_initial_dungeons_ctx *ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(w);
+  wid_choose_next_dungeons_ctx *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
   if (! relx && ! rely && ! wheelx && ! wheely) {
@@ -309,9 +309,9 @@ static void wid_choose_initial_dungeons_mouse_over(Widp w, int32_t relx, int32_t
   int x     = (focus & 0xff);
   int y     = (focus & 0xff00) >> 8;
 
-  wid_choose_initial_dungeons_set_focus(ctx, x, y);
+  wid_choose_next_dungeons_set_focus(ctx, x, y);
 
-  auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (l) {
     delete wid_level_description;
@@ -411,17 +411,17 @@ static void wid_choose_initial_dungeons_mouse_over(Widp w, int32_t relx, int32_t
   }
 }
 
-static void wid_choose_initial_dungeons_destroy(Widp w)
+static void wid_choose_next_dungeons_destroy(Widp w)
 {
   TRACE_NO_INDENT();
-  wid_choose_initial_dungeons_ctx *ctx;
+  wid_choose_next_dungeons_ctx *ctx;
 
   if (! w) {
     ctx = g_ctx;
     verify(MTYPE_WID, ctx);
     g_ctx = nullptr;
   } else {
-    ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(w);
+    ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
     verify(MTYPE_WID, ctx);
     wid_set_void_context(w, 0);
   }
@@ -451,12 +451,12 @@ static void game_display_grid_bg(void)
   blit_flush();
 }
 
-static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dungeons_ctx *ctx, int x, int y)
+static void wid_choose_next_dungeons_create_level_at(wid_choose_next_dungeons_ctx *ctx, int x, int y)
 {
   TRACE_NO_INDENT();
 
   auto node     = ctx->nodes->getn(x, y);
-  auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
 
   //
   // Create a level of the given difficulty at a fixed location
@@ -489,7 +489,7 @@ static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dunge
 // boss level and what is closer to the start. We use this when choosing the
 // next or previous level.
 //
-static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
+static void game_join_levels(wid_choose_next_dungeons_ctx *ctx)
 {
   TRACE_NO_INDENT();
 
@@ -505,7 +505,7 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
         continue;
       }
 
-      auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+      auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
       if (! l) {
         continue;
@@ -545,7 +545,7 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
         }
 
         auto alt_at = l->world_at;
-        auto offset = wid_choose_initial_dungeons_grid_to_level_coord(delta.x, delta.y);
+        auto offset = wid_choose_next_dungeons_grid_to_level_coord(delta.x, delta.y);
         alt_at.x += offset.x;
         alt_at.z += offset.y;
 
@@ -573,10 +573,10 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
   }
 }
 
-static void wid_choose_initial_dungeons_tick(Widp w)
+static void wid_choose_next_dungeons_tick(Widp w)
 {
   TRACE_NO_INDENT();
-  wid_choose_initial_dungeons_ctx *ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(w);
+  wid_choose_next_dungeons_ctx *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
   game_display_grid_bg();
@@ -634,11 +634,11 @@ static void wid_choose_initial_dungeons_tick(Widp w)
             continue;
           }
 
-          wid_choose_initial_dungeons_create_level_at(ctx, x, y);
+          wid_choose_next_dungeons_create_level_at(ctx, x, y);
           ctx->generating       = true;
           ctx->generating_level = 1;
           ctx->generated        = true;
-          wid_choose_initial_dungeons_enter(w, 0, 0, 0);
+          wid_choose_next_dungeons_enter(w, 0, 0, 0);
           return;
         }
       }
@@ -669,8 +669,8 @@ static void wid_choose_initial_dungeons_tick(Widp w)
 
         if (node->walk_order_level_no == ctx->generating_level) {
           ctx->generating_level++;
-          wid_choose_initial_dungeons_create_level_at(ctx, x, y);
-          wid_choose_initial_dungeons_update_buttons(ctx->w);
+          wid_choose_next_dungeons_create_level_at(ctx, x, y);
+          wid_choose_next_dungeons_update_buttons(ctx->w);
 
           ctx->generating = true;
           return;
@@ -704,10 +704,10 @@ static void wid_choose_initial_dungeons_tick(Widp w)
   ctx->generated = true;
 }
 
-static void wid_choose_initial_dungeons_post_display_tick(Widp w)
+static void wid_choose_next_dungeons_post_display_tick(Widp w)
 {
   TRACE_NO_INDENT();
-  wid_choose_initial_dungeons_ctx *ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(w);
+  wid_choose_next_dungeons_ctx *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
   for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
@@ -717,7 +717,7 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
         continue;
       }
 
-      auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+      auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
       if (! l) {
         continue;
@@ -770,7 +770,7 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
           continue;
         }
 
-        auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+        auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
         auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
         if (! l) {
           continue;
@@ -794,7 +794,7 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
             continue;
           }
 
-          auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+          auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
           auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
           if (! l) {
             continue;
@@ -823,7 +823,7 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
   IF_DEBUG
   {
     if ((ctx->focusx != -1) && (ctx->focusx != -1)) {
-      auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(ctx->focusx, ctx->focusy);
+      auto level_at = wid_choose_next_dungeons_grid_to_level_coord(ctx->focusx, ctx->focusy);
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
 
       if (l) {
@@ -846,37 +846,37 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
   }
 }
 
-static uint8_t wid_choose_initial_dungeons_go_back(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_next_dungeons_go_back(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
-  wid_choose_initial_dungeons_destroy(wid_get_top_parent(w));
+  wid_choose_next_dungeons_destroy(wid_get_top_parent(w));
   game->fini();
   game->wid_main_menu_select();
   return true;
 }
 
-static uint8_t wid_choose_initial_dungeons_random(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_next_dungeons_random(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
-  wid_choose_initial_dungeons_destroy(wid_get_top_parent(w));
+  wid_choose_next_dungeons_destroy(wid_get_top_parent(w));
   game->fini();
   g_opt_seed_name = "";
   game->init();
-  game->wid_choose_initial_dungeons();
+  game->wid_choose_next_dungeons();
 
   return true;
 }
 
-static uint8_t wid_choose_initial_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
-  wid_choose_initial_dungeons_ctx *ctx;
+  wid_choose_next_dungeons_ctx *ctx;
   if (! w) {
     ctx = g_ctx;
   } else {
-    ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(wid_get_top_parent(w));
+    ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(wid_get_top_parent(w));
   }
   verify(MTYPE_WID, ctx);
 
@@ -888,7 +888,7 @@ static uint8_t wid_choose_initial_dungeons_enter(Widp w, int32_t x, int32_t y, u
     return true;
   }
 
-  wid_choose_initial_dungeons_destroy(wid_get_top_parent(w));
+  wid_choose_next_dungeons_destroy(wid_get_top_parent(w));
 
   if (! game) {
     DIE("No game");
@@ -899,15 +899,15 @@ static uint8_t wid_choose_initial_dungeons_enter(Widp w, int32_t x, int32_t y, u
   return true;
 }
 
-static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_next_dungeons_shortcut_enter(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
-  wid_choose_initial_dungeons_ctx *ctx;
+  wid_choose_next_dungeons_ctx *ctx;
   if (! w) {
     ctx = g_ctx;
   } else {
-    ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(wid_get_top_parent(w));
+    ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(wid_get_top_parent(w));
   }
   verify(MTYPE_WID, ctx);
 
@@ -919,7 +919,7 @@ static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int
     return true;
   }
 
-  wid_choose_initial_dungeons_destroy(wid_get_top_parent(w));
+  wid_choose_next_dungeons_destroy(wid_get_top_parent(w));
 
   if (! game) {
     DIE("No game");
@@ -929,7 +929,7 @@ static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int
   int lx    = (focus & 0xff);
   int ly    = (focus & 0xff00) >> 8;
 
-  auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(lx, ly);
+  auto level_at = wid_choose_next_dungeons_grid_to_level_coord(lx, ly);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (! l) {
     return true;
@@ -941,16 +941,16 @@ static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int
   return true;
 }
 
-static uint8_t wid_choose_initial_dungeons_wid_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_next_dungeons_wid_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_NO_INDENT();
-  wid_choose_initial_dungeons_destroy(wid_get_top_parent(w));
+  wid_choose_next_dungeons_destroy(wid_get_top_parent(w));
   game->fini();
   game->wid_choose_seed_select();
   return false;
 }
 
-static uint8_t wid_choose_initial_dungeons_key_up(Widp w, const struct SDL_Keysym *key)
+static uint8_t wid_choose_next_dungeons_key_up(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
 
@@ -968,15 +968,15 @@ static uint8_t wid_choose_initial_dungeons_key_up(Widp w, const struct SDL_Keysy
             TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'c' : wid_choose_initial_dungeons_wid_choose_seed(nullptr, 0, 0, 0); return true;
-              case 'r' : wid_choose_initial_dungeons_random(nullptr, 0, 0, 0); return true;
-              case 'e' : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
+              case 'c' : wid_choose_next_dungeons_wid_choose_seed(nullptr, 0, 0, 0); return true;
+              case 'r' : wid_choose_next_dungeons_random(nullptr, 0, 0, 0); return true;
+              case 'e' : wid_choose_next_dungeons_enter(nullptr, 0, 0, 0); return true;
               case SDLK_RETURN :
               case ' ' :
-              case 'n' : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
+              case 'n' : wid_choose_next_dungeons_enter(nullptr, 0, 0, 0); return true;
               case 'b' :
               case 'q' :
-              case SDLK_ESCAPE : wid_choose_initial_dungeons_go_back(nullptr, 0, 0, 0); return true;
+              case SDLK_ESCAPE : wid_choose_next_dungeons_go_back(nullptr, 0, 0, 0); return true;
             }
           }
       }
@@ -985,7 +985,7 @@ static uint8_t wid_choose_initial_dungeons_key_up(Widp w, const struct SDL_Keysy
   return false;
 }
 
-static uint8_t wid_choose_initial_dungeons_key_down(Widp w, const struct SDL_Keysym *key)
+static uint8_t wid_choose_next_dungeons_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_NO_INDENT();
 
@@ -1025,7 +1025,7 @@ static bool are_nodes_directly_connected(DungeonNode *a, DungeonNode *b)
   return false;
 }
 
-void game_grid_node_walk(wid_choose_initial_dungeons_ctx *ctx)
+void game_grid_node_walk(wid_choose_next_dungeons_ctx *ctx)
 {
   TRACE_NO_INDENT();
 
@@ -1122,7 +1122,7 @@ void game_grid_node_walk(wid_choose_initial_dungeons_ctx *ctx)
   }
 }
 
-void Game::wid_choose_initial_dungeons(void)
+void Game::wid_choose_next_dungeons(void)
 {
   TRACE_AND_INDENT();
 
@@ -1135,7 +1135,7 @@ void Game::wid_choose_initial_dungeons(void)
   //
   // Create a context to hold button info so we can update it when the focus changes
   //
-  wid_choose_initial_dungeons_ctx *ctx = new wid_choose_initial_dungeons_ctx();
+  wid_choose_next_dungeons_ctx *ctx = new wid_choose_next_dungeons_ctx();
   newptr(MTYPE_WID, ctx, "wid level grid ctx");
   g_ctx = ctx;
 
@@ -1179,8 +1179,8 @@ void Game::wid_choose_initial_dungeons(void)
     wid_set_pos(window, tl, br);
     wid_set_shape_none(window);
     wid_set_void_context(window, ctx);
-    wid_set_on_key_up(window, wid_choose_initial_dungeons_key_up);
-    wid_set_on_key_down(window, wid_choose_initial_dungeons_key_down);
+    wid_set_on_key_up(window, wid_choose_next_dungeons_key_up);
+    wid_set_on_key_down(window, wid_choose_next_dungeons_key_down);
   }
 
   /*
@@ -1224,7 +1224,7 @@ void Game::wid_choose_initial_dungeons(void)
     point br = make_point(x_at + width, y_at + 4);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_choose_initial_dungeons_enter);
+    wid_set_on_mouse_up(w, wid_choose_next_dungeons_enter);
     wid_set_shape_none(w);
     ctx->wid_enter = w;
   }
@@ -1239,7 +1239,7 @@ void Game::wid_choose_initial_dungeons(void)
     point br = make_point(x_at + width, y_at + 2);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_choose_initial_dungeons_wid_choose_seed);
+    wid_set_on_mouse_up(w, wid_choose_next_dungeons_wid_choose_seed);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$hange seed");
   }
@@ -1253,7 +1253,7 @@ void Game::wid_choose_initial_dungeons(void)
     point br = make_point(x_at + width, y_at + 2);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_choose_initial_dungeons_random);
+    wid_set_on_mouse_up(w, wid_choose_next_dungeons_random);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$R%%fg=" UI_TEXT_COLOR_STR "$andom dungeon");
   }
@@ -1267,7 +1267,7 @@ void Game::wid_choose_initial_dungeons(void)
     point br = make_point(x_at + width, y_at + 2);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_choose_initial_dungeons_go_back);
+    wid_set_on_mouse_up(w, wid_choose_next_dungeons_go_back);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$B%%fg=" UI_TEXT_COLOR_STR "$ack?");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
@@ -1278,8 +1278,8 @@ void Game::wid_choose_initial_dungeons(void)
   {
     Widp button_container = wid_new_square_button(window, "wid level grid buttons");
     wid_set_shape_none(button_container);
-    wid_set_on_tick(button_container, wid_choose_initial_dungeons_tick);
-    wid_set_on_tick_post_display(button_container, wid_choose_initial_dungeons_post_display_tick);
+    wid_set_on_tick(button_container, wid_choose_next_dungeons_tick);
+    wid_set_on_tick_post_display(button_container, wid_choose_next_dungeons_post_display_tick);
 
     point tl = make_point(0, 0);
     point br = make_point(0, 0);
@@ -1330,14 +1330,14 @@ void Game::wid_choose_initial_dungeons(void)
         Widp b                 = wid_new_square_button(button_container, "wid level grid button");
         ctx->buttons[ y ][ x ] = b;
 
-        wid_set_on_mouse_over_begin(b, wid_choose_initial_dungeons_mouse_over);
-        IF_DEBUG { wid_set_on_mouse_down(b, wid_choose_initial_dungeons_shortcut_enter); }
+        wid_set_on_mouse_over_begin(b, wid_choose_next_dungeons_mouse_over);
+        IF_DEBUG { wid_set_on_mouse_down(b, wid_choose_next_dungeons_shortcut_enter); }
         wid_set_color(b, WID_COLOR_BG, WHITE);
         wid_set_void_context(b, ctx);
         int focus = (y << 8) | x;
         wid_set_int_context(b, focus);
 
-        wid_choose_initial_dungeons_update_button(ctx, b, x, y);
+        wid_choose_next_dungeons_update_button(ctx, b, x, y);
 
         int32_t tl_x;
         int32_t tl_y;
@@ -1583,7 +1583,7 @@ void Game::wid_choose_initial_dungeons(void)
   }
 
   if (! g_opt_quick_start) {
-    wid_choose_initial_dungeons_update_buttons(window);
+    wid_choose_next_dungeons_update_buttons(window);
     wid_set_do_not_lower(window, 1);
     wid_update(window);
     wid_raise(window);

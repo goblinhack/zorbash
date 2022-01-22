@@ -311,7 +311,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       }
 
       level->is_map_follow_player = false;
-      game->dead_select(reason);
+      game->wid_dead_select(reason);
     } else if (is_loggable()) {
       dbg("%s killed, %s", The_no_dying.c_str(), reason);
       if (defeater && (defeater != this)) {

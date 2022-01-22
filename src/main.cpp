@@ -884,7 +884,7 @@ int32_t main(int32_t argc, char *argv[])
     game->new_game();
   } else {
     CON("INI: Game menu");
-    game->main_menu_select();
+    game->wid_main_menu_select();
   }
 
   if (g_opt_resume) {

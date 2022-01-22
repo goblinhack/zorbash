@@ -112,7 +112,7 @@ static uint8_t wid_config_top_graphics(Widp w, int32_t x, int32_t y, uint32_t bu
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
-  game->config_gfx_select();
+  game->wid_config_gfx_select();
   return true;
 }
 
@@ -120,7 +120,7 @@ static uint8_t wid_config_top_keyboard(Widp w, int32_t x, int32_t y, uint32_t bu
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
-  game->config_keyboard_select();
+  game->wid_config_keyboard_select();
   return true;
 }
 
@@ -128,7 +128,7 @@ static uint8_t wid_config_top_sound(Widp w, int32_t x, int32_t y, uint32_t butto
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
-  game->config_sound_select();
+  game->wid_config_sound_select();
   return true;
 }
 
@@ -136,7 +136,7 @@ static uint8_t wid_config_top_other(Widp w, int32_t x, int32_t y, uint32_t butto
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
-  game->config_other_select();
+  game->wid_config_other_select();
   return true;
 }
 
@@ -144,7 +144,7 @@ static uint8_t wid_config_top_back(Widp w, int32_t x, int32_t y, uint32_t button
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
-  game->main_menu_select();
+  game->wid_main_menu_select();
   return true;
 }
 
@@ -190,7 +190,7 @@ static uint8_t wid_config_top_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-void Game::config_top_select(void)
+void Game::wid_config_top_menu(void)
 {
   TRACE_AND_INDENT();
   CON("Config menu");
