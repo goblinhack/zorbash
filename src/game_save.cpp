@@ -735,8 +735,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(my.t.key_save);
   out << bits(my.t.key_screenshot);
   out << bits(my.t.key_throw);
-  out << bits(my.t.key_unused4);
-  out << bits(my.t.key_unused5);
+  out << bits(my.t.key_descend);
+  out << bits(my.t.key_ascend);
   out << bits(my.t.key_use);
   out << bits(my.t.key_wait_or_collect);
   out << bits(my.t.key_zoom_in);

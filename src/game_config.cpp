@@ -97,8 +97,8 @@ void Config::reset(void)
   key_console.sym         = SDLK_TAB;
   key_console.mod         = KMOD_LSHIFT;
   key_robot_mode.sym      = SDLK_r;
-  key_unused4             = {};
-  key_unused5             = {};
+  key_descend.sym         = SDLK_GREATER;
+  key_ascend.sym          = SDLK_LESS;
   key_use.sym             = SDLK_u;
   key_wait_or_collect.sym = SDLK_PERIOD;
   key_zoom_in.sym         = SDLK_z;
