@@ -69,7 +69,7 @@ void Level::describe(point p)
       else { continue; }
     }
 
-    if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
+    if (t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
       IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }

@@ -111,7 +111,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="jelly_baby", text_name="baby jelly")
+    tp_init(name="jelly_baby", text_name="baby jelly jumper")
 
 
 init()

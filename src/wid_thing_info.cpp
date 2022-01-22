@@ -146,6 +146,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
 
   wid_thing_info_add_enchant(wid_popup_window, t);
   wid_thing_info_add_rarity(wid_popup_window, t);
+  wid_thing_info_add_general_info(wid_popup_window, t);
   //
   // Not sure if we will have shops
   //
@@ -171,6 +172,9 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_stat_str(wid_popup_window, t);
   wid_thing_info_add_stat_con(wid_popup_window, t);
   wid_thing_info_add_stat_dex(wid_popup_window, t);
+  if (t->is_alive_monst() || t->is_player()) {
+    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+  }
   wid_thing_info_add_charge_count(wid_popup_window, t);
   wid_thing_info_add_danger_level(wid_popup_window, t);
   wid_thing_info_add_carry_info(wid_popup_window, t);
@@ -551,6 +555,7 @@ void Game::wid_thing_info_add_rarity(WidPopup *w, Thingp t)
     snprintf(tmp2, sizeof(tmp2) - 1, "%s", text.c_str());
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rarity %17s````", tmp2);
     w->log(tmp);
+    w->log(UI_LOGGING_EMPTY_LINE);
   }
 }
 
@@ -1241,8 +1246,8 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
   }
 
   const std::string danger_level = player->get_danger_level_str(t);
-  w->log(UI_LOGGING_EMPTY_LINE);
   w->log(danger_level);
+  w->log(UI_LOGGING_EMPTY_LINE);
 
   auto monst_max_damage = t->get_damage_max();
   if (monst_max_damage != 0) {
@@ -1256,17 +1261,17 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     }
 
     if (monst_defeat_count == 1) {
-      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hit!");
+      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (monst_defeat_count <= 2) {
-      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
+      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (monst_defeat_count <= 10) {
-      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("%%fg=orange$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
-    } else {
       w->log(UI_LOGGING_EMPTY_LINE);
-      w->log("Could defeat you eventually...");
+    } else {
+      w->log("Could defeat you eventually.");
+      w->log(UI_LOGGING_EMPTY_LINE);
     }
   }
 
@@ -1282,20 +1287,20 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     }
 
     if (player_defeat_count == 1) {
-      w->log(UI_LOGGING_EMPTY_LINE);
-      w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hit.");
+      w->log("You could beat it in " + std::to_string(player_defeat_count) + " hit.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits");
+      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (player_defeat_count <= 2) {
-      w->log(UI_LOGGING_EMPTY_LINE);
-      w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hits.");
+      w->log("You could beat it in " + std::to_string(player_defeat_count) + " hits.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
+      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (player_defeat_count <= 10) {
-      w->log(UI_LOGGING_EMPTY_LINE);
-      w->log("You could defeat it in " + std::to_string(player_defeat_count) + " hits.");
+      w->log("You could beat it in " + std::to_string(player_defeat_count) + " hits.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
-    } else {
       w->log(UI_LOGGING_EMPTY_LINE);
+    } else {
       w->log("%%fg=red$It will take many hits to defeat...");
+      w->log(UI_LOGGING_EMPTY_LINE);
     }
   }
 }
@@ -1322,17 +1327,17 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     //
     if (t->is_bag_item_container()) {
       if (items > 3) {
-        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks to be full of presents.", true);
+        w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 1) {
-        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks like it contains a few things.", true);
+        w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 0) {
-        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks like it contains something.", true);
-      } else {
         w->log(UI_LOGGING_EMPTY_LINE);
+      } else {
         w->log("Is empty.", true);
+        w->log(UI_LOGGING_EMPTY_LINE);
       }
     }
   } else {
@@ -1340,23 +1345,67 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     // Cannot see inside a chest, so no log
     //
     if (t->is_treasure_chest()) {
-      w->log(UI_LOGGING_EMPTY_LINE);
       w->log("Looks to be locked.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (t->is_bag()) {
       if (items > 3) {
-        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks to be bulging with presents.", true);
+        w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 1) {
-        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks like it contains a few things.", true);
+        w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 0) {
-        w->log(UI_LOGGING_EMPTY_LINE);
         w->log("Looks like it contains something.", true);
-      } else {
         w->log(UI_LOGGING_EMPTY_LINE);
+      } else {
         w->log("Looks like it is empty.", true);
+        w->log(UI_LOGGING_EMPTY_LINE);
       }
     }
+  }
+}
+
+void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+
+  if (t->is_monst() && t->environ_avoids_water()) {
+    if (t->environ_avoids_water() > 10) {
+      w->log("Hates water.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
+    } else {
+      w->log("Avoids water.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
+    }
+  }
+
+  if (t->is_monst() && t->environ_avoids_acid()) {
+    if (t->environ_avoids_acid() > 10) {
+      w->log("Hates acid.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
+    } else {
+      w->log("Avoids acid.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
+    }
+  }
+
+  if (t->is_monst() && t->environ_avoids_fire()) {
+    if (t->environ_avoids_fire() > 10) {
+      w->log("Hates fire.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
+    } else {
+      w->log("Avoids fire.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
+    }
+  } else if (t->is_meltable()) {
+    w->log("Can melt.", true);
+    w->log(UI_LOGGING_EMPTY_LINE);
+  } else if (t->is_combustible()) {
+    w->log("Can burn.", true);
+    w->log(UI_LOGGING_EMPTY_LINE);
+  } else if (t->is_very_combustible()) {
+    w->log("Can explode!", true);
+    w->log(UI_LOGGING_EMPTY_LINE);
   }
 }
 
