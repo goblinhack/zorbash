@@ -91,6 +91,11 @@ void Thing::fire_tick(void)
       smoke->set_lifespan(pcg_random_range(1, 10));
 
       hit = (d100() < 20);
+
+      if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
+        hit = true;
+      }
+
       if (hit) {
         if (is_player()) {
           msg("%%fg=red$The flames wrap around you!%%fg=reset$");

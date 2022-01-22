@@ -20,7 +20,6 @@ def tp_init(name, text_name):
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")
-    mytp.set_is_green_blooded(True)  # not really
     mytp.set_gfx_glows(True)
     mytp.set_gfx_health_bar_shown(True)
     mytp.set_gfx_short_shadow_caster(True)
@@ -33,6 +32,7 @@ def tp_init(name, text_name):
     mytp.set_is_ethereal(True)
     mytp.set_is_fearless(True)
     mytp.set_is_floating(True)
+    mytp.set_is_green_blooded(True)  # not really
     mytp.set_is_hittable(True)
     mytp.set_is_loggable(True)
     mytp.set_is_minion(True)

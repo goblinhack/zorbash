@@ -77,6 +77,13 @@ bool Thing::possible_to_attack(const Thingp victim)
   dbg("Is it possible to attack %s?", victim->to_string().c_str());
   TRACE_AND_INDENT();
 
+  if (victim->is_on_fire()) {
+    if (environ_avoids_fire()) {
+      dbg("Cannot attack %s, it is on fire", victim->to_string().c_str());
+      return false;
+    }
+  }
+
   //
   // Fire attacks via tick so it can get you when you fall or jump into it.
   //
