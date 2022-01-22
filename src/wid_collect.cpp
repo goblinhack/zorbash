@@ -133,13 +133,11 @@ static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
-  if (key->scancode == (SDL_Scancode) game->config.key_drop) {
+  if (sdlk_eq(key, game->config.key_drop)) {
     auto what = game->level->inventory_get();
     if (what) {
       if (game->level->player->drop(what)) {
@@ -201,10 +199,9 @@ static uint8_t wid_collect_key_down(Widp w, const struct SDL_Keysym *key)
   if (player->is_dead) {
     return true;
   }
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   return true;

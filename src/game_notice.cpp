@@ -36,10 +36,9 @@ static uint8_t game_notice_key_up(Widp w, const struct SDL_Keysym *key)
 static uint8_t game_notice_key_down(Widp w, const struct SDL_Keysym *key)
 {
   TRACE_AND_INDENT();
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   return true;

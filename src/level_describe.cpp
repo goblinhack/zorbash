@@ -268,7 +268,7 @@ void Level::describe(point p)
     dbg3("Describe @%d,%d; found %d things", p.x, p.y, (int) hover_over_things.size());
     game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
     if (hover_over_things.size() > 1) {
-      auto        k = std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
+      auto        k = ::to_string(game->config.key_wait_or_collect);
       std::string text;
       if (k == ".") {
         text = "Multiple things here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
@@ -281,7 +281,7 @@ void Level::describe(point p)
     dbg3("Describe @%d,%d; found %d thing", p.x, p.y, (int) hover_over_things.size());
     game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
     if (hover_over_things.size() > 1) {
-      auto        k = std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
+      auto        k = ::to_string(game->config.key_wait_or_collect);
       std::string text;
       if (k == ".") {
         text = "Something is here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";

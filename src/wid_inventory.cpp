@@ -151,10 +151,8 @@ static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   //
@@ -327,16 +325,14 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
-  if (sdl_shift_held) {
-    if (key->scancode == (SDL_Scancode) game->config.key_console) {
-      return false;
-    }
+  if (sdlk_eq(key, game->config.key_console)) {
+    return false;
   }
 
   //
   // If shift is not held, select inventory
   //
-  if (key->scancode == (SDL_Scancode) game->config.key_action0) {
+  if (sdlk_eq(key, game->config.key_action0)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -349,7 +345,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_action1) {
+  if (sdlk_eq(key, game->config.key_action1)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -362,7 +358,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_action2) {
+  if (sdlk_eq(key, game->config.key_action2)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -375,7 +371,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_action3) {
+  if (sdlk_eq(key, game->config.key_action3)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -388,7 +384,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_action4) {
+  if (sdlk_eq(key, game->config.key_action4)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -401,7 +397,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_action5) {
+  if (sdlk_eq(key, game->config.key_action5)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -414,7 +410,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_action6) {
+  if (sdlk_eq(key, game->config.key_action6)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -427,7 +423,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_action7) {
+  if (sdlk_eq(key, game->config.key_action7)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -440,7 +436,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_action8) {
+  if (sdlk_eq(key, game->config.key_action8)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -453,7 +449,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     }
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_action9) {
+  if (sdlk_eq(key, game->config.key_action9)) {
     CON("PLAYER: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
@@ -467,19 +463,19 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
 
-  if (key->scancode == (SDL_Scancode) game->config.key_use) {
+  if (sdlk_eq(key, game->config.key_use)) {
     wid_inventory_item_option_use(nullptr, 0, 0, 0);
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_throw) {
+  if (sdlk_eq(key, game->config.key_throw)) {
     wid_inventory_item_option_throw(nullptr, 0, 0, 0);
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_eat) {
+  if (sdlk_eq(key, game->config.key_eat)) {
     wid_inventory_item_option_eat(nullptr, 0, 0, 0);
     return true;
   }
-  if (key->scancode == (SDL_Scancode) game->config.key_drop) {
+  if (sdlk_eq(key, game->config.key_drop)) {
     wid_inventory_item_option_drop(nullptr, 0, 0, 0);
     return true;
   }

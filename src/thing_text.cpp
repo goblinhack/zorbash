@@ -274,8 +274,7 @@ void Thing::show_botcon_description(void)
   //
   if (get_immediate_owner()) {
     if (is_droppable()) {
-      text += " %%fg=orange$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_drop)) +
-              "%%fg=reset$ to drop.";
+      text += " %%fg=orange$" + ::to_string(game->config.key_drop) + "%%fg=reset$ to drop.";
     }
   }
 
@@ -305,26 +304,20 @@ void Thing::show_botcon_description(void)
   if (get_immediate_owner()) {
     if (is_usable()) {
       if (is_food()) {
-        text += " %%fg=green$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_eat)) +
-                "%%fg=reset$ to eat.";
+        text += " %%fg=green$" + ::to_string(game->config.key_eat) + "%%fg=reset$ to eat.";
       } else if (is_potion()) {
-        text += " %%fg=green$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_use)) +
-                "%%fg=reset$ to drink.";
+        text += " %%fg=green$" + ::to_string(game->config.key_use) + "%%fg=reset$ to drink.";
       } else if (is_wand()) {
-        text += " %%fg=green$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_use)) +
-                "%%fg=reset$ to use.";
+        text += " %%fg=green$" + ::to_string(game->config.key_use) + "%%fg=reset$ to use.";
       } else if (is_ring()) {
-        text += " %%fg=green$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_use)) +
-                "%%fg=reset$ to wear.";
+        text += " %%fg=green$" + ::to_string(game->config.key_use) + "%%fg=reset$ to wear.";
       } else {
-        text += " %%fg=cyan$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_use)) +
-                "%%fg=reset$ to use.";
+        text += " %%fg=cyan$" + ::to_string(game->config.key_use) + "%%fg=reset$ to use.";
       }
     }
 
     if (is_throwable() && ! is_auto_throw()) {
-      text += " %%fg=purple$" + std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_throw)) +
-              "%%fg=reset$ to throw.";
+      text += " %%fg=purple$" + ::to_string(game->config.key_throw) + "%%fg=reset$ to throw.";
     }
 
     if (is_bag_item_container()) {
@@ -341,7 +334,7 @@ void Thing::show_botcon_description(void)
   if (! is_hidden) {
     if (is_collectable() && level->player) {
       if (curr_at == level->player->curr_at) {
-        auto k = std::string(SDL_GetScancodeName((SDL_Scancode) game->config.key_wait_or_collect));
+        auto k = ::to_string(game->config.key_wait_or_collect);
         if (k == ".") {
           text += " Press %%fg=yellow$" + k + "%%fg=reset$ or click to collect.";
         } else {
