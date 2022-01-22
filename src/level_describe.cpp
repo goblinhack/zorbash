@@ -69,7 +69,7 @@ void Level::describe(point p)
       else { continue; }
     }
 
-    if (t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
+    if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
       IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }
@@ -262,6 +262,10 @@ void Level::describe(point p)
     }
 
     wid_thing_info_fini();
+
+    if (cursor && (cursor->curr_at == player->curr_at)) {
+      push_back_if_unique(hover_over_things, player);
+    }
   }
 
   if (hover_over_things.size() > 1) {
