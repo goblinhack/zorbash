@@ -3,9 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_color.hpp"
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_globals.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
@@ -101,7 +102,28 @@ bool Thing::close_door(Thingp it)
   it->is_open = false;
   it->level_push();
 
+  //
+  // Slamming the door on a thing for crush damage
+  //
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, it->curr_at.x, it->curr_at.y)
+  {
+    if (t == this) {
+      continue;
+    }
+
+    if (t->is_monst() || t->is_player()) {
+      continue;
+    }
+
+    is_attacked_with_damage_crush(it, it->get_damage_crush());
+  }
+  FOR_ALL_THINGS_END()
+
+  //
+  // Give a key back
+  //
   incr_keys(1);
+
   if (is_player()) {
     msg("The door slams shut.");
   }

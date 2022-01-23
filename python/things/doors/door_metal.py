@@ -18,6 +18,8 @@ def tp_init(name):
     mytp = tp.Tp(name, "reinforced door")
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(9)
+    mytp.set_damage_crush_chance_d1000(1000)
+    mytp.set_damage_crush_dice("2d6")
     mytp.set_gfx_animated(True)
     mytp.set_gfx_health_bar_autohide(True)
     mytp.set_gfx_oversized_and_on_floor(True)
