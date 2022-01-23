@@ -7,6 +7,8 @@
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!-- - level pyramid                                                                                                                              -->
+<!-- - hub shop levels                                                                                                                            -->
+<!-- - different sound for bosses                                                                                                                 -->
 <!-- - level fall through to special level ?                                                                                                      -->
 <!-- - crystal collection                                                                                                                         -->
 <!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
