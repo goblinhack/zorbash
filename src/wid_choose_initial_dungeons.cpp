@@ -111,16 +111,6 @@ static void wid_choose_initial_dungeons_set_focus(wid_choose_initial_dungeons_ct
 #define WID_LEVEL_WIDTH_CHARS  7
 #define WID_LEVEL_HEIGHT_CHARS 7
 
-static point3d wid_choose_initial_dungeons_grid_to_level_coord(int x, int y)
-{
-  point3d level_at;
-
-  level_at.x = x;
-  level_at.z = (y * 2) + 1;
-
-  return level_at;
-}
-
 static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeons_ctx *ctx, Widp b, int x, int y)
 {
   TRACE_NO_INDENT();
@@ -225,7 +215,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     wid_set_bg_tilename(b, bg_tilename);
   }
 
-  auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (l) {
     if (! fg_tilename.empty()) {
@@ -314,7 +304,7 @@ static void wid_choose_initial_dungeons_mouse_over(Widp w, int32_t relx, int32_t
 
   wid_choose_initial_dungeons_set_focus(ctx, x, y);
 
-  auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
 
   IF_DEBUG
@@ -353,24 +343,12 @@ static void wid_choose_initial_dungeons_destroy(Widp w)
   }
 }
 
-static void game_display_grid_bg(void)
-{
-  TRACE_NO_INDENT();
-  glcolor(WHITE);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-  std::string t = "grid";
-  blit_init();
-  tile_blit(tile_find_mand(t.c_str()), point(0, 0), point(game->config.ui_pix_width, game->config.ui_pix_height));
-  blit_flush();
-}
-
 static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dungeons_ctx *ctx, int x, int y)
 {
   TRACE_NO_INDENT();
 
   auto node     = ctx->nodes->getn(x, y);
-  auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
 
   //
   // Create a level of the given difficulty at a fixed location
@@ -419,7 +397,7 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
         continue;
       }
 
-      auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+      auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
       if (! l) {
         continue;
@@ -490,7 +468,7 @@ static void wid_choose_initial_dungeons_tick(Widp w)
   wid_choose_initial_dungeons_ctx *ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
-  game_display_grid_bg();
+  wid_choose_dungeons_bg();
   wid_set_style(ctx->wid_enter, UI_WID_STYLE_GRAY);
 
   static int val;
@@ -628,47 +606,13 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
         continue;
       }
 
-      auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+      auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
       if (! l) {
         continue;
       }
 
-      int tlx, tly, brx, bry;
-      wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
-
-      l->map_debug_tl.x = tlx;
-      l->map_debug_tl.y = tly;
-      l->map_debug_br.x = brx;
-      l->map_debug_br.y = bry;
-
-      {
-        int tlx = l->map_debug_tl.x * game->config.ascii_gl_width;
-        int tly = l->map_debug_tl.y * game->config.ascii_gl_height;
-
-        l->map_debug_br.x++;
-        l->map_debug_br.y++;
-
-        int brx = l->map_debug_br.x * game->config.ascii_gl_width;
-        int bry = l->map_debug_br.y * game->config.ascii_gl_height;
-
-        tlx--;
-        tly--;
-        brx++;
-        bry++;
-
-        glcolor(GRAY50);
-        blit_fbo_bind_locked(FBO_WID);
-        glDisable(GL_TEXTURE_2D);
-        //
-        // Avoids missing pixel at the corner
-        //
-        glLineWidth(2.0);
-        gl_blitsquare(tlx, tly, brx, bry);
-        glLineWidth(1.0);
-        glEnable(GL_TEXTURE_2D);
-        blit_fbo_unbind_locked();
-      }
+      wid_choose_dungeon_border(b, l);
     }
   }
 
@@ -681,7 +625,7 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
           continue;
         }
 
-        auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
+        auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
         auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
         if (! l) {
           continue;
@@ -697,7 +641,7 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
   IF_DEBUG
   {
     if ((ctx->focusx != -1) && (ctx->focusx != -1)) {
-      auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(ctx->focusx, ctx->focusy);
+      auto level_at = wid_choose_dungeon_grid_to_level_coord(ctx->focusx, ctx->focusy);
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
 
       if (l) {
@@ -801,7 +745,7 @@ static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int
   int lx    = (focus & 0xff);
   int ly    = (focus & 0xff00) >> 8;
 
-  auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(lx, ly);
+  auto level_at = wid_choose_dungeon_grid_to_level_coord(lx, ly);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (! l) {
     return true;
