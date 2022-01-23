@@ -101,8 +101,9 @@ bool Thing::close_door(Thingp it)
   it->is_open = false;
   it->level_push();
 
+  incr_keys(1);
   if (is_player()) {
-    msg("The door creaks open.");
+    msg("The door slams shut.");
   }
 
   update_light();
