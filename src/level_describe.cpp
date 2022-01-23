@@ -7,6 +7,7 @@
 #include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_main.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
@@ -89,7 +90,6 @@ void Level::describe(point p)
 
     if (t->is_described_when_hovering_over()) {
       if (! t->text_description().empty() || ! t->long_text_description().empty()) {
-
         IF_DEBUG2 { t->log("Add to describe"); }
         got_one_with_long_text |= ! t->long_text_description().empty();
         push_back_if_unique(hover_over_things, t);
@@ -266,7 +266,8 @@ void Level::describe(point p)
     //
     // If nothing else and hovering over the player show that
     //
-    if (cursor && (cursor->curr_at == player->curr_at)) {
+    if (cursor && ! cursor->is_hidden && ! cursor->is_dead && (cursor->curr_at == player->curr_at) &&
+        player->get_aip()->move_path.empty()) {
       push_back_if_unique(hover_over_things, player);
     }
   }
