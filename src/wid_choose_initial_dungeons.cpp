@@ -22,13 +22,11 @@
 #include "my_time.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
+#include "my_wid_choose_dungeon.hpp"
 #include "my_wid_popup.hpp"
 
 static uint8_t wid_choose_initial_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
 static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int32_t y, uint32_t button);
-
-static WidPopup *wid_level_description;
-static WidPopup *wid_level_contents;
 
 class wid_choose_initial_dungeons_ctx
 {
@@ -39,8 +37,6 @@ public:
     if (w) {
       wid_destroy(&w);
 
-      delete wid_level_description;
-      wid_level_description = nullptr;
       delete wid_level_contents;
       wid_level_contents = nullptr;
     }
@@ -320,100 +316,11 @@ static void wid_choose_initial_dungeons_mouse_over(Widp w, int32_t relx, int32_t
 
   auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-  if (l) {
-    delete wid_level_description;
-    wid_level_description = nullptr;
-
-    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 48);
-    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 38);
-
-    char tmp[ MAXSHORTSTR ];
-    wid_level_description = new WidPopup("Level stats", tl, br, nullptr, "", false, false);
-    wid_level_description->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Level reconn");
-    wid_level_description->log(UI_LOGGING_EMPTY_LINE);
-
-    snprintf(tmp, sizeof(tmp) - 1, "Monst HP estimate %u", l->get_total_monst_hp_level());
-    wid_level_description->log(tmp, true);
-    wid_level_description->log(UI_LOGGING_EMPTY_LINE);
-
-    snprintf(tmp, sizeof(tmp) - 1, "Monst damage est. %u", l->get_total_monst_damage_level());
-    wid_level_description->log(tmp, true);
-    wid_level_description->log(UI_LOGGING_EMPTY_LINE);
-
-    snprintf(tmp, sizeof(tmp) - 1, "Loot value est.   %u", l->get_total_loot_level());
-    wid_level_description->log(tmp, true);
-    wid_level_description->log(UI_LOGGING_EMPTY_LINE);
-
-    snprintf(tmp, sizeof(tmp) - 1, "Food HP est.      %u", l->get_total_food_level());
-    wid_level_description->log(tmp, true);
-
-    auto        node = ctx->nodes->getn(x, y);
-    std::string bg_tilename;
-    switch (node->depth) {
-      case -1 : break;
-      case 1 : bg_tilename = "dungeon_icon.1"; break;
-      case 2 : bg_tilename = "dungeon_icon.2"; break;
-      case 3 : bg_tilename = "dungeon_icon.3"; break;
-      case 4 : bg_tilename = "dungeon_icon.4"; break;
-      case 5 : bg_tilename = "dungeon_icon.5"; break;
-      case 6 : bg_tilename = "dungeon_icon.6"; break;
-      case 7 : bg_tilename = "dungeon_icon.7"; break;
-      case 8 : bg_tilename = "dungeon_icon.8"; break;
-    }
-
-    wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY30);
-    wid_set_bg_tilename(wid_level_description->wid_popup_container, bg_tilename);
-  }
 
   IF_DEBUG
   {
     if (l) {
-      delete wid_level_contents;
-      wid_level_contents = nullptr;
-
-      std::map< std::string, int > monst_contents;
-      std::map< std::string, int > treasure_contents;
-
-      for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_WIDTH; y++) {
-          FOR_ALL_THINGS_THAT_INTERACT(l, t, x, y)
-          {
-            if (t->is_monst() || t->is_mob()) {
-              monst_contents[ t->short_text_capitalise() ]++;
-            }
-            if (t->is_treasure()) {
-              treasure_contents[ t->short_text_capitalise() ]++;
-            }
-          }
-          FOR_ALL_THINGS_END();
-        }
-      }
-
-      auto  total_size = monst_contents.size() + treasure_contents.size();
-      point tl         = make_point(0, 3);
-      point br         = make_point(40, total_size + 6);
-
-      wid_level_contents = new WidPopup("Contents", tl, br, nullptr, "", true, false);
-      wid_level_contents->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Contents");
-      wid_level_contents->log(UI_LOGGING_EMPTY_LINE);
-
-      char tmp[ MAXSHORTSTR ];
-      {
-        auto m = flip_map(monst_contents);
-        for (auto p = m.rbegin(); p != m.rend(); ++p) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=red$%d %s", p->first, p->second.c_str());
-          wid_level_contents->log(tmp, true);
-        }
-      }
-      {
-        auto m = flip_map(treasure_contents);
-        for (auto p = m.rbegin(); p != m.rend(); ++p) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gold$%d %s", p->first, p->second.c_str());
-          wid_level_contents->log(tmp, true);
-        }
-      }
-
-      wid_set_color(wid_level_contents->wid_popup_container, WID_COLOR_BG, GRAY30);
+      wid_show_dungeon_contents(l);
     }
   }
 }
@@ -553,9 +460,7 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
 
         auto alt_at  = l->world_at;
         auto alt_loc = l->world_at + point3d(delta.x, 0, delta.y * 2);
-        CON("at %s alt %s del %d,%d %d,%d,%d", l->world_at.to_string().c_str(), alt_at.to_string().c_str(), delta.x,
-            delta.y, alt_loc.x, alt_loc.y, alt_loc.z);
-        auto alt_l = get(game->world.levels, alt_loc.x, alt_loc.y, alt_loc.z);
+        auto alt_l   = get(game->world.levels, alt_loc.x, alt_loc.y, alt_loc.z);
         if (! alt_l) {
           l->err("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
           DIE("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
@@ -787,43 +692,6 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
         }
       }
     }
-
-    //
-    // Too much noise
-    //
-    if (0) {
-      gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
-      for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-          Widp b = ctx->buttons[ y ][ x ];
-          if (! b) {
-            continue;
-          }
-
-          auto level_at = wid_choose_initial_dungeons_grid_to_level_coord(x, y);
-          auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-          if (! l) {
-            continue;
-          }
-
-          int tlx, tly, brx, bry;
-          wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
-
-          l->map_debug_tl.x = tlx;
-          l->map_debug_tl.y = tly;
-          l->map_debug_br.x = brx;
-          l->map_debug_br.y = bry;
-
-          l->map_debug_br.x -= 2;
-          l->map_debug_br.y -= 2;
-
-          glcolor(WHITE);
-          blit_fbo_bind_locked(FBO_WID);
-          l->display_map_debug(x, y);
-          blit_fbo_unbind_locked();
-        }
-      }
-    }
   }
 
   IF_DEBUG
@@ -833,20 +701,18 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
 
       if (l) {
-        if (wid_level_description) {
-          int tlx, tly, brx, bry;
-          int sz = MAP_WIDTH * 3;
-          tlx    = game->config.ui_pix_width - sz;
-          tly    = 0;
-          brx    = game->config.ui_pix_width;
-          bry    = sz;
+        int tlx, tly, brx, bry;
+        int sz = MAP_WIDTH * 3;
+        tlx    = game->config.ui_pix_width - sz;
+        tly    = 0;
+        brx    = game->config.ui_pix_width;
+        bry    = sz;
 
-          gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
-          glcolor(WHITE);
-          blit_fbo_bind_locked(FBO_WID);
-          l->display_map_debug(ctx->focusx, ctx->focusy, tlx, tly, brx, bry);
-          blit_fbo_unbind_locked();
-        }
+        gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
+        glcolor(WHITE);
+        blit_fbo_bind_locked(FBO_WID);
+        l->display_map_debug(ctx->focusx, ctx->focusy, tlx, tly, brx, bry);
+        blit_fbo_unbind_locked();
       }
     }
   }
