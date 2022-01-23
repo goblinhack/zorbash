@@ -33,7 +33,7 @@ Levelp World::new_level_at(point3d world_at, point grid_at, uint32_t seed, int d
 
   auto new_level = new Level();
   set(levels, world_at.x, world_at.y, world_at.z, new_level);
-  new_level->create(world_at, seed, difficulty_depth, dungeon_walk_order_level_no);
+  new_level->create(world_at, grid_at, seed, difficulty_depth, dungeon_walk_order_level_no);
 
   return new_level;
 }

@@ -8,7 +8,6 @@
 #include "my_array_bounds_check.hpp"
 #include "my_file.hpp"
 #include "my_game.hpp"
-#include "my_wid_error.hpp"
 #include "my_globals_extra.hpp"
 #include "my_monst.hpp"
 #include "my_sdl.hpp"
@@ -20,6 +19,7 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
+#include "my_wid_error.hpp"
 #include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_topcon.hpp"
@@ -569,6 +569,9 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   in >> bits(l->difficulty_depth);
   in >> bits(l->dungeon_walk_order_level_no);
+  in >> bits(l->is_boss_level);
+  in >> bits(l->is_final_boss_level);
+  in >> bits(l->is_crystal_level);
 
   in >> bits(l->d1000_chance_of_creating_mob_challenge_class_a);
   in >> bits(l->d1000_chance_of_creating_mob_challenge_class_b);

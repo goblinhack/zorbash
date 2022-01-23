@@ -112,20 +112,15 @@ static wid_choose_initial_dungeons_ctx *g_ctx;
 static void wid_choose_initial_dungeons_destroy(Widp w);
 static void wid_choose_initial_dungeons_set_focus(wid_choose_initial_dungeons_ctx *ctx, int focusx, int focusy);
 
-#define ROOM_WIDTH_CHARS  7
-#define ROOM_HEIGHT_CHARS 7
+#define WID_LEVEL_WIDTH_CHARS  7
+#define WID_LEVEL_HEIGHT_CHARS 7
 
 static point3d wid_choose_initial_dungeons_grid_to_level_coord(int x, int y)
 {
   point3d level_at;
 
-  level_at.z += y;
-  level_at.x += x;
-  //
-  // Need to account for potential sewer levels
-  //
-  level_at.z *= 2;
-  level_at.z += 1;
+  level_at.x = x;
+  level_at.z = (y * 2) + 1;
 
   return level_at;
 }
@@ -137,8 +132,8 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     return;
   }
 
-  int width  = ROOM_WIDTH_CHARS - 1;
-  int height = ROOM_HEIGHT_CHARS - 1;
+  int width  = WID_LEVEL_WIDTH_CHARS - 1;
+  int height = WID_LEVEL_HEIGHT_CHARS - 1;
 
   point tl;
   point br;
@@ -239,6 +234,18 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
   if (l) {
     if (! fg_tilename.empty()) {
       wid_set_fg_tilename(b, fg_tilename);
+    }
+
+    if (node->is_lock) {
+      l->is_boss_level = true;
+    }
+
+    if (node->is_descend_dungeon) {
+      l->is_final_boss_level = true;
+    }
+
+    if (node->is_key) {
+      l->is_crystal_level = true;
     }
   }
 
@@ -544,12 +551,11 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
           continue;
         }
 
-        auto alt_at = l->world_at;
-        auto offset = wid_choose_initial_dungeons_grid_to_level_coord(delta.x, delta.y);
-        alt_at.x += offset.x;
-        alt_at.z += offset.y;
-
-        auto alt_l = get(game->world.levels, alt_at.x, alt_at.y, alt_at.z);
+        auto alt_at  = l->world_at;
+        auto alt_loc = l->world_at + point3d(delta.x, 0, delta.y * 2);
+        CON("at %s alt %s del %d,%d %d,%d,%d", l->world_at.to_string().c_str(), alt_at.to_string().c_str(), delta.x,
+            delta.y, alt_loc.x, alt_loc.y, alt_loc.z);
+        auto alt_l = get(game->world.levels, alt_loc.x, alt_loc.y, alt_loc.z);
         if (! alt_l) {
           l->err("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
           DIE("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
@@ -559,12 +565,12 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
           //
           // Closer to the start
           //
-          l->prev_levels.push_back(alt_at);
+          l->prev_levels.push_back(alt_l->world_at);
         } else if (alt->walk_order_level_no > node->walk_order_level_no) {
           //
           // Closer to the end
           //
-          l->next_levels.push_back(alt_at);
+          l->next_levels.push_back(alt_l->world_at);
         } else {
           DIE("Levels have the same walk depth");
         }
@@ -963,6 +969,7 @@ static uint8_t wid_choose_initial_dungeons_key_up(Widp w, const struct SDL_Keysy
     case KMOD_RCTRL :
     default :
       switch (key->sym) {
+        case SDLK_RETURN : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
         default :
           {
             TRACE_NO_INDENT();
@@ -971,7 +978,6 @@ static uint8_t wid_choose_initial_dungeons_key_up(Widp w, const struct SDL_Keysy
               case 'c' : wid_choose_initial_dungeons_wid_choose_seed(nullptr, 0, 0, 0); return true;
               case 'r' : wid_choose_initial_dungeons_random(nullptr, 0, 0, 0); return true;
               case 'e' : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
-              case SDLK_RETURN :
               case ' ' :
               case 'n' : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
               case 'b' :
@@ -1284,8 +1290,8 @@ void Game::wid_choose_initial_dungeons(void)
     point tl = make_point(0, 0);
     point br = make_point(0, 0);
 
-    br.x = (ROOM_WIDTH_CHARS + 1) * DUNGEONS_GRID_CHUNK_WIDTH;
-    br.y = (ROOM_HEIGHT_CHARS + 1) * DUNGEONS_GRID_CHUNK_HEIGHT;
+    br.x = (WID_LEVEL_WIDTH_CHARS + 1) * DUNGEONS_GRID_CHUNK_WIDTH;
+    br.y = (WID_LEVEL_HEIGHT_CHARS + 1) * DUNGEONS_GRID_CHUNK_HEIGHT;
 
     auto offx = (TERM_WIDTH - (br.x - tl.x)) / 2;
     auto offy = (TERM_HEIGHT - (br.y - tl.y)) / 2;
@@ -1359,9 +1365,9 @@ void Game::wid_choose_initial_dungeons(void)
           point tl(tl_x, tl_y);
           point br(br_x, br_y);
 
-          tl.x += (ROOM_WIDTH_CHARS / 2) - 1;
+          tl.x += (WID_LEVEL_WIDTH_CHARS / 2) - 1;
           br.x = tl.x;
-          tl.y += ROOM_HEIGHT_CHARS;
+          tl.y += WID_LEVEL_HEIGHT_CHARS;
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
@@ -1376,7 +1382,7 @@ void Game::wid_choose_initial_dungeons(void)
 
           tl.x--;
           br.x = tl.x;
-          tl.y += (ROOM_HEIGHT_CHARS / 2);
+          tl.y += (WID_LEVEL_HEIGHT_CHARS / 2);
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
@@ -1389,9 +1395,9 @@ void Game::wid_choose_initial_dungeons(void)
           point tl(tl_x, tl_y);
           point br(br_x, br_y);
 
-          tl.x += ROOM_WIDTH_CHARS - 1;
+          tl.x += WID_LEVEL_WIDTH_CHARS - 1;
           br.x = tl.x;
-          tl.y += (ROOM_HEIGHT_CHARS / 2);
+          tl.y += (WID_LEVEL_HEIGHT_CHARS / 2);
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
@@ -1404,7 +1410,7 @@ void Game::wid_choose_initial_dungeons(void)
           point tl(tl_x, tl_y);
           point br(br_x, br_y);
 
-          tl.x += (ROOM_WIDTH_CHARS / 2) - 1;
+          tl.x += (WID_LEVEL_WIDTH_CHARS / 2) - 1;
           br.x = tl.x;
           br.y = tl.y;
 

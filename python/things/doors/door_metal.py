@@ -22,7 +22,7 @@ def tp_init(name):
     mytp.set_gfx_health_bar_autohide(True)
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
-    mytp.set_health_initial_dice("10d20")
+    mytp.set_health_initial_dice("5d20")
     mytp.set_is_always_hit(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)

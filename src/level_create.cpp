@@ -12,10 +12,12 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-void Level::create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_walk_order_level_no)
+void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth,
+                   int dungeon_walk_order_level_no)
 {
   TRACE_AND_INDENT();
 
+  CON("XXX %p %s %s", this, world_at.to_string().c_str(), grid_at.to_string().c_str());
   if (difficulty_depth > DUNGEONS_MAX_DEPTH) {
     difficulty_depth = DUNGEONS_MAX_DEPTH;
   }
@@ -25,8 +27,8 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_
   if (dungeon_walk_order_level_no <= 1) {
     seedval = game->seed + 1; // +1 is a temporary hack
   } else {
-    seedval = (at.z * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH) + (at.y * DUNGEONS_GRID_CHUNK_HEIGHT) +
-              at.x + dungeon_walk_order_level_no;
+    seedval = (world_at.z * DUNGEONS_GRID_CHUNK_HEIGHT * DUNGEONS_GRID_CHUNK_WIDTH) +
+              (world_at.y * DUNGEONS_GRID_CHUNK_HEIGHT) + world_at.x + dungeon_walk_order_level_no;
   }
 
   game->seed = seedval;
@@ -42,7 +44,8 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_
   this->seed                        = seedval;
   this->difficulty_depth            = difficulty_depth;
   this->dungeon_walk_order_level_no = dungeon_walk_order_level_no;
-  world_at                          = at;
+  this->world_at                    = world_at;
+  this->grid_at                     = grid_at;
 
   //
   // Setup the various chances of things appearing.
@@ -63,10 +66,10 @@ void Level::create(point3d at, uint32_t seed, int difficulty_depth, int dungeon_
   game->level_being_created = this;
 
   bool ret;
-  if (at.z & 1) {
-    ret = create_dungeon(at, seed);
+  if (world_at.z & 1) {
+    ret = create_dungeon(world_at, seed);
   } else {
-    ret = create_sewer(at, seed);
+    ret = create_sewer(world_at, seed);
   }
 
   game->level_being_created = nullptr;
