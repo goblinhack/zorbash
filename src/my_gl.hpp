@@ -243,7 +243,7 @@ extern PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 #define FBO_MAP_HIDDEN              2
 #define FBO_WID                     3
 #define FBO_PLAYER_VISIBLE_LIGHTING 4
-#define FBO_MAP_MINI                 5
+#define FBO_MAP_MINI                5
 #define FBO_MASK1                   6
 #define FBO_MASK2                   7
 #define FBO_MASK3                   8
@@ -258,8 +258,8 @@ extern PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 #define FBO_FINAL                   17
 #define FBO_SCREEN_FADE_IN_AND_OUT  18
 #define FBO_SMALL_POINT_LIGHTS      19
-#define FBO_MAP_DEBUG                20
-#define FBO_MAP_DEBUG_END            (FBO_MAP_DEBUG + (DUNGEONS_GRID_CHUNK_WIDTH * DUNGEONS_GRID_CHUNK_HEIGHT))
+#define FBO_MAP_DEBUG               20
+#define FBO_MAP_DEBUG_END           (FBO_MAP_DEBUG + (DUNGEONS_GRID_CHUNK_WIDTH * DUNGEONS_GRID_CHUNK_HEIGHT))
 #define MAX_FBO                     (FBO_MAP_DEBUG_END + 1)
 
 extern uint32_t                      NUMBER_BYTES_PER_VERTICE_2D;

@@ -82,7 +82,7 @@ def tp_init(name, text_name):
     mytp.set_is_red_blooded(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)
-    mytp.set_long_text_description("An enormous halfling giant rat... Blood drips from its teeth. Will eat almost anything, especially you. Sometimes answers to the name of Mr Squeakles.")
+    mytp.set_long_text_description("An enormous giant dwarf rat... Blood drips from its teeth. Will eat almost anything, especially you. Sometimes answers to the name of Mr Squeakles.")
     mytp.set_monst_size(my.MONST_SIZE_LARGE)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d6")
@@ -97,7 +97,7 @@ def tp_init(name, text_name):
     mytp.set_stat_dex(10)
     mytp.set_stat_str(7)
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("A giant rat. Slightly cute. Likely rabid.")
+    mytp.set_text_description("A rat, no more, no less. Slightly cute. Likely rabid.")
     mytp.set_text_hits("gores")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)
     mytp.set_z_prio(my.MAP_PRIO_NORMAL)
@@ -111,7 +111,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="rat_giant", text_name="halfling giant rat")
+    tp_init(name="rat_giant", text_name="giant dwarf rat")
 
 
 init()

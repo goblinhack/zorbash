@@ -23,16 +23,17 @@
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_actionbar.hpp"
+#include "my_wid_choose_dungeon.hpp"
 #include "my_wid_popup.hpp"
 #include "my_wid_topcon.hpp"
 
 #define WID_LEVEL_WIDTH_CHARS  7
 #define WID_LEVEL_HEIGHT_CHARS 7
 
-// static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
+static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
+static void    wid_choose_next_dungeons_update_buttons(Widp w);
 
 static WidPopup *wid_level_description;
-static WidPopup *wid_level_contents;
 
 class wid_choose_next_dungeons_ctx
 {
@@ -57,11 +58,6 @@ public:
   // Parent widget
   //
   Widp w {};
-
-  //
-  // Enyer button
-  //
-  Widp wid_enter {};
 
   //
   // Current button
@@ -95,7 +91,6 @@ public:
 
 static wid_choose_next_dungeons_ctx *g_ctx;
 
-#if 0
 static void wid_choose_next_dungeons_destroy(Widp w);
 static void wid_choose_next_dungeons_set_focus(wid_choose_next_dungeons_ctx *ctx, int focusx, int focusy);
 
@@ -112,148 +107,6 @@ static point3d wid_choose_next_dungeons_grid_to_level_coord(int x, int y)
   level_at.z += 1;
 
   return level_at;
-}
-
-static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx *ctx, Widp b, int x, int y)
-{
-  TRACE_NO_INDENT();
-  if (! b) {
-    return;
-  }
-
-  int width  = WID_LEVEL_WIDTH_CHARS - 1;
-  int height = WID_LEVEL_HEIGHT_CHARS - 1;
-
-  point tl;
-  point br;
-  color c;
-
-  tl.x = x * (width + 1);
-  tl.y = y * (height + 1);
-
-  br.x = tl.x;
-  br.y = tl.y;
-  br.x += width - 1;
-  br.y += height - 1;
-
-  if ((x == ctx->focusx) && (y == ctx->focusy)) {
-    ctx->b = b;
-    wid_raise(b);
-  } else {
-    wid_lower(b);
-  }
-
-  if (ctx->is_new) {
-    wid_set_pos(b, tl, br);
-  }
-
-  auto node = ctx->nodes->getn(x, y);
-
-  std::string bg_tilename;
-
-  if (! node) {
-    return;
-  }
-
-  if (node->depth <= 0) {
-    return;
-  }
-
-  if (ctx->levels[ y ][ x ]) {
-    switch (node->depth) {
-      case -1 : break;
-      case 1 : bg_tilename = "dungeon_icon.1"; break;
-      case 2 : bg_tilename = "dungeon_icon.2"; break;
-      case 3 : bg_tilename = "dungeon_icon.3"; break;
-      case 4 : bg_tilename = "dungeon_icon.4"; break;
-      case 5 : bg_tilename = "dungeon_icon.5"; break;
-      case 6 : bg_tilename = "dungeon_icon.6"; break;
-      case 7 : bg_tilename = "dungeon_icon.7"; break;
-      case 8 : bg_tilename = "dungeon_icon.8"; break;
-    }
-  } else {
-    switch (node->depth) {
-      case -1 : break;
-      case 1 : bg_tilename = "dungeon_icon_loading.1"; break;
-      case 2 : bg_tilename = "dungeon_icon_loading.2"; break;
-      case 3 : bg_tilename = "dungeon_icon_loading.3"; break;
-      case 4 : bg_tilename = "dungeon_icon_loading.4"; break;
-      case 5 : bg_tilename = "dungeon_icon_loading.5"; break;
-      case 6 : bg_tilename = "dungeon_icon_loading.6"; break;
-      case 7 : bg_tilename = "dungeon_icon_loading.7"; break;
-      case 8 : bg_tilename = "dungeon_icon_loading.8"; break;
-    }
-  }
-
-  std::string fg_tilename;
-
-  if (node->is_lock) {
-    fg_tilename = "boss_icon.1";
-  }
-
-  if (node->is_descend_dungeon) {
-    fg_tilename = "boss_icon.2";
-  }
-
-  if (node->is_key) {
-    switch (node->depth) {
-      case -1 : break;
-      case 1 : fg_tilename = "crystal.1"; break;
-      case 2 : fg_tilename = "crystal.2"; break;
-      case 3 : fg_tilename = "crystal.3"; break;
-      case 4 : fg_tilename = "crystal.4"; break;
-      case 5 : fg_tilename = "crystal.5"; break;
-      case 6 : fg_tilename = "crystal.6"; break;
-      case 7 : fg_tilename = "crystal.7"; break;
-      case 8 : fg_tilename = "crystal.8"; break;
-    }
-  }
-
-  if (! bg_tilename.empty()) {
-    wid_set_bg_tilename(b, bg_tilename);
-  }
-
-  auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
-  auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-  if (l) {
-    if (! fg_tilename.empty()) {
-      wid_set_fg_tilename(b, fg_tilename);
-    }
-  }
-
-  char tmp[ MAXSHORTSTR ];
-  snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order_level_no);
-  wid_set_text(b, tmp);
-  wid_set_text_lhs(b, true);
-  wid_set_text_top(b, true);
-}
-
-static void wid_choose_next_dungeons_update_buttons(Widp w)
-{
-  TRACE_NO_INDENT();
-  wid_choose_next_dungeons_ctx *ctx;
-  if (! w) {
-    ctx = g_ctx;
-  } else {
-    ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
-  }
-
-  verify(MTYPE_WID, ctx);
-
-  int x, y;
-
-  ctx->b = 0;
-
-  for (x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
-    for (y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-      Widp b = ctx->buttons[ y ][ x ];
-      if (! b) {
-        continue;
-      }
-      wid_choose_next_dungeons_update_button(ctx, b, x, y);
-    }
-  }
-  wid_update(w);
 }
 
 static void wid_choose_next_dungeons_set_focus(wid_choose_next_dungeons_ctx *ctx, int focusx, int focusy)
@@ -275,15 +128,6 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int32_t relx, int32_t re
     return;
   }
 
-  /*
-   * If we recreate the level_grid with a fixed focus we will be told about
-   * a mouse over event immediately which may not be over the focus item
-   * and will cause us to move. Annoying.
-   */
-  if (time_get_time_ms() - ctx->created < 100) {
-    return;
-  }
-
   int focus = wid_get_int_context(w);
   int x     = (focus & 0xff);
   int y     = (focus & 0xff00) >> 8;
@@ -296,8 +140,8 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int32_t relx, int32_t re
     delete wid_level_description;
     wid_level_description = nullptr;
 
-    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 48);
-    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 38);
+    point tl = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 12);
+    point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
 
     char tmp[ MAXSHORTSTR ];
     wid_level_description = new WidPopup("Level stats", tl, br, nullptr, "", false, false);
@@ -319,9 +163,9 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int32_t relx, int32_t re
     snprintf(tmp, sizeof(tmp) - 1, "Food HP est.      %u", l->get_total_food_level());
     wid_level_description->log(tmp, true);
 
-    auto        node = ctx->nodes->getn(x, y);
+    auto        l = ctx->levels[ y ][ x ];
     std::string bg_tilename;
-    switch (node->depth) {
+    switch (l->difficulty_depth) {
       case -1 : break;
       case 1 : bg_tilename = "dungeon_icon.1"; break;
       case 2 : bg_tilename = "dungeon_icon.2"; break;
@@ -340,52 +184,7 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int32_t relx, int32_t re
   IF_DEBUG
   {
     if (l) {
-      delete wid_level_contents;
-      wid_level_contents = nullptr;
-
-      std::map< std::string, int > monst_contents;
-      std::map< std::string, int > treasure_contents;
-
-      for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_WIDTH; y++) {
-          FOR_ALL_THINGS_THAT_INTERACT(l, t, x, y)
-          {
-            if (t->is_monst() || t->is_mob()) {
-              monst_contents[ t->short_text_capitalise() ]++;
-            }
-            if (t->is_treasure()) {
-              treasure_contents[ t->short_text_capitalise() ]++;
-            }
-          }
-          FOR_ALL_THINGS_END();
-        }
-      }
-
-      auto  total_size = monst_contents.size() + treasure_contents.size();
-      point tl         = make_point(0, 3);
-      point br         = make_point(40, total_size + 6);
-
-      wid_level_contents = new WidPopup("Contents", tl, br, nullptr, "", true, false);
-      wid_level_contents->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Contents");
-      wid_level_contents->log(UI_LOGGING_EMPTY_LINE);
-
-      char tmp[ MAXSHORTSTR ];
-      {
-        auto m = flip_map(monst_contents);
-        for (auto p = m.rbegin(); p != m.rend(); ++p) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=red$%d %s", p->first, p->second.c_str());
-          wid_level_contents->log(tmp, true);
-        }
-      }
-      {
-        auto m = flip_map(treasure_contents);
-        for (auto p = m.rbegin(); p != m.rend(); ++p) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gold$%d %s", p->first, p->second.c_str());
-          wid_level_contents->log(tmp, true);
-        }
-      }
-
-      wid_set_color(wid_level_contents->wid_popup_container, WID_COLOR_BG, GRAY30);
+      wid_show_dungeon_contents(l);
     }
   }
 }
@@ -430,128 +229,6 @@ static void game_display_grid_bg(void)
   blit_flush();
 }
 
-static void wid_choose_next_dungeons_create_level_at(wid_choose_next_dungeons_ctx *ctx, int x, int y)
-{
-  TRACE_NO_INDENT();
-
-  auto node     = ctx->nodes->getn(x, y);
-  auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
-
-  //
-  // Create a level of the given difficulty at a fixed location
-  //
-  if (! game->init_level(level_at, point(x, y), node->depth, node->walk_order_level_no)) {
-    ERR("Could not create level");
-    return;
-  }
-
-  auto l = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-  if (! l) {
-    return;
-  }
-
-  ctx->levels[ y ][ x ] = l;
-
-  if (node->is_ascend_dungeon) {
-    game->level         = l;
-    game->current_level = level_at;
-    l->is_first_level   = true;
-  }
-
-  if (node->is_descend_dungeon) {
-    l->is_final_level = true;
-  }
-}
-
-//
-// Create the linkages between levels so we know what is closer to the big
-// boss level and what is closer to the start. We use this when choosing the
-// next or previous level.
-//
-static void game_join_levels(wid_choose_next_dungeons_ctx *ctx)
-{
-  TRACE_NO_INDENT();
-
-  for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
-    for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-      Widp b = ctx->buttons[ y ][ x ];
-      if (! b) {
-        continue;
-      }
-
-      auto node = ctx->nodes->getn(x, y);
-      if (! node) {
-        continue;
-      }
-
-      auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
-      auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-      if (! l) {
-        continue;
-      }
-
-      //
-      // All possible ways levels can connect
-      //
-      std::vector< point > deltas = {
-          point(0, -1),
-          point(-1, 0),
-          point(1, 0),
-          point(0, 1),
-      };
-
-      for (auto delta : deltas) {
-        if (x + delta.x < 0) {
-          continue;
-        }
-        if (y + delta.y < 0) {
-          continue;
-        }
-        if (x + delta.x >= DUNGEONS_GRID_CHUNK_WIDTH) {
-          continue;
-        }
-        if (y + delta.y >= DUNGEONS_GRID_CHUNK_HEIGHT) {
-          continue;
-        }
-        auto alt = ctx->nodes->getn(x + delta.x, y + delta.y);
-        if (! alt) {
-          continue;
-        }
-
-        Widp b = ctx->buttons[ y + delta.y ][ x + delta.x ];
-        if (! b) {
-          continue;
-        }
-
-        auto alt_at = l->world_at;
-        auto offset = wid_choose_next_dungeons_grid_to_level_coord(delta.x, delta.y);
-        alt_at.x += offset.x;
-        alt_at.z += offset.y;
-
-        auto alt_l = get(game->world.levels, alt_at.x, alt_at.y, alt_at.z);
-        if (! alt_l) {
-          l->err("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
-          DIE("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
-        }
-
-        if (alt->walk_order_level_no < node->walk_order_level_no) {
-          //
-          // Closer to the start
-          //
-          l->prev_levels.push_back(alt_at);
-        } else if (alt->walk_order_level_no > node->walk_order_level_no) {
-          //
-          // Closer to the end
-          //
-          l->next_levels.push_back(alt_at);
-        } else {
-          DIE("Levels have the same walk depth");
-        }
-      }
-    }
-  }
-}
-
 static void wid_choose_next_dungeons_tick(Widp w)
 {
   TRACE_NO_INDENT();
@@ -559,7 +236,6 @@ static void wid_choose_next_dungeons_tick(Widp w)
   verify(MTYPE_WID, ctx);
 
   game_display_grid_bg();
-  wid_set_style(ctx->wid_enter, UI_WID_STYLE_GRAY);
 
   static int val;
   static int delta = 1;
@@ -585,102 +261,37 @@ static void wid_choose_next_dungeons_tick(Widp w)
           continue;
         }
 
-        auto node = ctx->nodes->getn(x, y);
-        if (node->is_ascend_dungeon) {
-          color c = GREEN;
-          c.g     = val;
+        auto l = ctx->levels[ y ][ x ];
+        if (game->level == l) {
+          color c = WHITE;
           wid_set_color(b, WID_COLOR_BG, c);
           wid_update(b);
-        }
-      }
-    }
-  }
 
-  if (! ctx->generated) {
-    //
-    // For quick start we only create one level
-    //
-    if (g_opt_quick_start) {
-      for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-          Widp b = ctx->buttons[ y ][ x ];
-          if (! b) {
-            continue;
+          for (auto n : ctx->next_levels[ y ][ x ]) {
+            auto n_at = n->grid_at;
+            Widp b    = ctx->buttons[ n_at.y ][ n_at.x ];
+            if (b) {
+              color c = WHITE;
+              c.a     = val;
+              wid_set_color(b, WID_COLOR_BG, c);
+              wid_update(b);
+            }
           }
 
-          auto node = ctx->nodes->getn(x, y);
-          if (! node->is_ascend_dungeon) {
-            continue;
+          for (auto n : ctx->prev_levels[ y ][ x ]) {
+            auto n_at = n->grid_at;
+            Widp b    = ctx->buttons[ n_at.y ][ n_at.x ];
+            if (b) {
+              color c = WHITE;
+              c.a     = val;
+              wid_set_color(b, WID_COLOR_BG, c);
+              wid_update(b);
+            }
           }
-
-          wid_choose_next_dungeons_create_level_at(ctx, x, y);
-          ctx->generating       = true;
-          ctx->generating_level = 1;
-          ctx->generated        = true;
-          wid_choose_next_dungeons_enter(w, 0, 0, 0);
-          return;
         }
       }
     }
-
-    //
-    // For normal start, we make one level per tick so that we get to see
-    // some visual progress for the user.
-    //
-    for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
-      for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-        Widp b = ctx->buttons[ y ][ x ];
-        if (! b) {
-          continue;
-        }
-
-        //
-        // Skip made levels
-        //
-        if (ctx->levels[ y ][ x ]) {
-          continue;
-        }
-
-        auto node = ctx->nodes->getn(x, y);
-        if (! node) {
-          continue;
-        }
-
-        if (node->walk_order_level_no == ctx->generating_level) {
-          ctx->generating_level++;
-          wid_choose_next_dungeons_create_level_at(ctx, x, y);
-          wid_choose_next_dungeons_update_buttons(ctx->w);
-
-          ctx->generating = true;
-          return;
-        }
-      }
-    }
-
-    //
-    // Create the linkages between levels so we know what is closer to the big
-    // boss level and what is closer to the start. We use this when choosing the
-    // next or previous level.
-    //
-    game_join_levels(ctx);
   }
-
-  {
-    color c = GREEN;
-    c.g     = val;
-
-    //
-    // Tell the user the dungeons are ready!
-    //
-    auto b = ctx->wid_enter;
-    wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$E%%fg=" UI_TEXT_COLOR_STR "$nter the Dungeon");
-    wid_set_style(b, UI_WID_STYLE_OK);
-    wid_set_color(b, WID_COLOR_BG, c);
-    wid_set_shape_square(b);
-    wid_update(b);
-  }
-
-  ctx->generated = true;
 }
 
 static void wid_choose_next_dungeons_post_display_tick(Widp w)
@@ -725,7 +336,7 @@ static void wid_choose_next_dungeons_post_display_tick(Widp w)
         brx++;
         bry++;
 
-        glcolor(GRAY50);
+        glcolor(GRAY20);
         blit_fbo_bind_locked(FBO_WID);
         glDisable(GL_TEXTURE_2D);
         //
@@ -757,43 +368,6 @@ static void wid_choose_next_dungeons_post_display_tick(Widp w)
 
         if (! l->map_debug_valid) {
           l->update_map_debug(x, y);
-        }
-      }
-    }
-
-    //
-    // Too much noise
-    //
-    if (0) {
-      gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
-      for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
-          Widp b = ctx->buttons[ y ][ x ];
-          if (! b) {
-            continue;
-          }
-
-          auto level_at = wid_choose_next_dungeons_grid_to_level_coord(x, y);
-          auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-          if (! l) {
-            continue;
-          }
-
-          int tlx, tly, brx, bry;
-          wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
-
-          l->map_debug_tl.x = tlx;
-          l->map_debug_tl.y = tly;
-          l->map_debug_br.x = brx;
-          l->map_debug_br.y = bry;
-
-          l->map_debug_br.x -= 2;
-          l->map_debug_br.y -= 2;
-
-          glcolor(WHITE);
-          blit_fbo_bind_locked(FBO_WID);
-          l->display_map_debug(x, y);
-          blit_fbo_unbind_locked();
         }
       }
     }
@@ -841,21 +415,14 @@ static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint
     return true;
   }
 
-  if (! ctx->generated) {
-    return true;
-  }
-
   wid_choose_next_dungeons_destroy(wid_get_top_parent(w));
 
   if (! game) {
     DIE("No game");
   }
 
-  game->start_requested = true;
-
   return true;
 }
-#endif
 
 static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx *ctx, Widp b, int x, int y)
 {
@@ -961,6 +528,11 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   wid_set_text(b, tmp);
   wid_set_text_lhs(b, true);
   wid_set_text_top(b, true);
+  wid_set_color(b, WID_COLOR_BG, GRAY50);
+
+  if (game->level == l) {
+    wid_set_color(b, WID_COLOR_BG, WHITE);
+  }
 }
 
 static void wid_choose_next_dungeons_update_buttons(Widp w)
@@ -1010,6 +582,7 @@ void Game::wid_choose_next_dungeons(Levelp current)
   player->is_changing_level = true;
 
   wid_actionbar_close_all_popups();
+  wid_actionbar_fini();
   wid_hide(wid_topcon_window);
 
   //
@@ -1027,7 +600,6 @@ void Game::wid_choose_next_dungeons(Levelp current)
         auto gx                 = l->grid_at.x;
         auto gy                 = l->grid_at.y;
         ctx->levels[ gy ][ gx ] = l;
-        CON("found level at %d,%d,%d -> %d,%d", x, y, z, gx, gy);
       }
     }
   }
@@ -1082,8 +654,8 @@ void Game::wid_choose_next_dungeons(Levelp current)
   {
     Widp button_container = wid_new_square_button(window, "wid level grid buttons");
     wid_set_shape_none(button_container);
-    // wid_set_on_tick(button_container, wid_choose_next_dungeons_tick);
-    // wid_set_on_tick_post_display(button_container, wid_choose_next_dungeons_post_display_tick);
+    wid_set_on_tick(button_container, wid_choose_next_dungeons_tick);
+    wid_set_on_tick_post_display(button_container, wid_choose_next_dungeons_post_display_tick);
 
     point tl = make_point(0, 0);
     point br = make_point(0, 0);
@@ -1127,7 +699,7 @@ void Game::wid_choose_next_dungeons(Levelp current)
         Widp b                 = wid_new_square_button(button_container, "wid level grid button");
         ctx->buttons[ y ][ x ] = b;
 
-        // wid_set_on_mouse_over_begin(b, wid_choose_next_dungeons_mouse_over);
+        wid_set_on_mouse_over_begin(b, wid_choose_next_dungeons_mouse_over);
         wid_set_color(b, WID_COLOR_BG, WHITE);
         wid_set_void_context(b, ctx);
         int focus = (y << 8) | x;
@@ -1157,25 +729,20 @@ void Game::wid_choose_next_dungeons(Levelp current)
           if (! alt) {
             continue;
           }
-          alt->con("next level at %d,%d", alt->grid_at.x, alt->grid_at.y);
           if (l->grid_at == alt->grid_at + point(0, -1)) {
-            alt->con("down");
             has_door_down = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(0, 1)) {
-            alt->con("up");
             has_door_up = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(-1, 0)) {
-            alt->con("right");
             has_door_right = true;
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
           if (l->grid_at == alt->grid_at + point(1, 0)) {
             has_door_left = true;
-            alt->con("left");
             ctx->next_levels[ y ][ x ].push_back(alt);
           }
         }
@@ -1185,7 +752,6 @@ void Game::wid_choose_next_dungeons(Levelp current)
           if (! alt) {
             continue;
           }
-          alt->con("prev level at %d,%d", alt->grid_at.x, alt->grid_at.y);
           if (l->grid_at == alt->grid_at + point(0, -1)) {
             has_door_down = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
@@ -1217,7 +783,6 @@ void Game::wid_choose_next_dungeons(Levelp current)
           tl.y += WID_LEVEL_HEIGHT_CHARS;
           br.y = tl.y;
 
-          CON("%d,%d .. %d,%d", tl.x, tl.y, br.x, br.y);
           wid_set_pos(b, tl, br);
           wid_set_fg2_tilename(b, "ud_icon");
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
