@@ -45,6 +45,9 @@ public:
       wid_level_description = nullptr;
       delete wid_level_contents;
       wid_level_contents = nullptr;
+      if (game) {
+        game->paused = false;
+      }
     }
   }
 
@@ -990,9 +993,7 @@ void Game::wid_choose_next_dungeons(Levelp current)
 {
   TRACE_AND_INDENT();
 
-  if (! game) {
-    DIE("No game struct");
-  }
+  paused = true;
 
   //
   // Create a context to hold button info so we can update it when the focus changes

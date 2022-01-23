@@ -144,7 +144,6 @@ public:
 
   bool init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no);
   bool load(std::string save_file, class Game &target);
-  bool paused(void);
   bool save(std::string save_file);
   bool tick_end();
   bool wid_bag_move_item(Thingp t);
@@ -284,6 +283,8 @@ public:
   //
   // Temporary
   //
+  bool paused {}; // Game is paused choosing a level?
+
   uint32_t robot_mode_requested {};
   uint32_t robot_mode_tick_requested {};
   uint32_t start_requested {};

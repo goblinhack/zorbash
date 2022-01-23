@@ -565,15 +565,6 @@ void Light::render_triangle_fans(void)
     return;
   }
 
-  //
-  // Fade the lights
-  //
-  auto scale = ((float) owner->level->is_lit_currently_no_check(owner->curr_at.x, owner->curr_at.y)) / 255.0;
-  col.r      = ((float) col.r) * scale;
-  col.g      = ((float) col.g) * scale;
-  col.b      = ((float) col.b) * scale;
-  col.a      = ((float) col.a) * scale;
-
   glcolor(col);
   if (! cached_gl_cmds.size()) {
     blit_init();
