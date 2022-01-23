@@ -150,6 +150,10 @@ bool Level::tick(void)
     return false;
   }
 
+  if (game->paused) {
+    return false;
+  }
+
   if (ts_fade_in_begin) {
     return false;
   }

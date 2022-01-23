@@ -62,6 +62,11 @@ bool Thing::descend_dungeon(void)
     }
   }
 
+  if (is_player()) {
+    game->wid_choose_next_dungeons(level);
+    return true;
+  }
+
   auto next_level = level->world_at + point3d(0, 0, 2);
 
   dbg("Is trying to descend");
