@@ -9,6 +9,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_color.hpp"
 #include "my_game.hpp"
+#include "my_gl.hpp"
 #include "my_main.hpp"
 #include "my_math.hpp"
 #include "my_ptrcheck.hpp"
@@ -73,4 +74,65 @@ void wid_show_dungeon_contents(Levelp l)
   }
 
   wid_set_color(wid_level_contents->wid_popup_container, WID_COLOR_BG, GRAY30);
+}
+
+point3d wid_choose_dungeon_grid_to_level_coord(int x, int y)
+{
+  point3d level_at;
+
+  level_at.x = x;
+  level_at.z = (y * 2) + 1;
+
+  return level_at;
+}
+
+void wid_choose_dungeons_bg(void)
+{
+  TRACE_NO_INDENT();
+  glcolor(WHITE);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+  std::string t = "grid";
+  blit_init();
+  tile_blit(tile_find_mand(t.c_str()), point(0, 0), point(game->config.ui_pix_width, game->config.ui_pix_height));
+  blit_flush();
+}
+
+void wid_choose_dungeon_border(Widp b, Levelp l)
+{
+  int tlx, tly, brx, bry;
+  wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
+
+  l->map_debug_tl.x = tlx;
+  l->map_debug_tl.y = tly;
+  l->map_debug_br.x = brx;
+  l->map_debug_br.y = bry;
+
+  {
+    int tlx = l->map_debug_tl.x * game->config.ascii_gl_width;
+    int tly = l->map_debug_tl.y * game->config.ascii_gl_height;
+
+    l->map_debug_br.x++;
+    l->map_debug_br.y++;
+
+    int brx = l->map_debug_br.x * game->config.ascii_gl_width;
+    int bry = l->map_debug_br.y * game->config.ascii_gl_height;
+
+    tlx--;
+    tly--;
+    brx++;
+    bry++;
+
+    glcolor(GRAY20);
+    blit_fbo_bind_locked(FBO_WID);
+    glDisable(GL_TEXTURE_2D);
+    //
+    // Avoids missing pixel at the corner
+    //
+    glLineWidth(2.0);
+    gl_blitsquare(tlx, tly, brx, bry);
+    glLineWidth(1.0);
+    glEnable(GL_TEXTURE_2D);
+    blit_fbo_unbind_locked();
+  }
 }
