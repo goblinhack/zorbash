@@ -22,7 +22,9 @@
 #include "my_time.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
+#include "my_wid_actionbar.hpp"
 #include "my_wid_popup.hpp"
+#include "my_wid_topcon.hpp"
 
 #define WID_LEVEL_WIDTH_CHARS  7
 #define WID_LEVEL_HEIGHT_CHARS 7
@@ -993,7 +995,22 @@ void Game::wid_choose_next_dungeons(Levelp current)
 {
   TRACE_AND_INDENT();
 
-  paused = true;
+  auto level = game->level;
+  if (! level) {
+    ERR("No level");
+    return;
+  }
+  auto player = level->player;
+  if (! player) {
+    ERR("No player");
+    return;
+  }
+
+  paused                    = true;
+  player->is_changing_level = true;
+
+  wid_actionbar_close_all_popups();
+  wid_hide(wid_topcon_window);
 
   //
   // Create a context to hold button info so we can update it when the focus changes
