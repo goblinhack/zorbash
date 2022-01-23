@@ -565,6 +565,15 @@ void Light::render_triangle_fans(void)
     return;
   }
 
+  //
+  // Fade the lights
+  //
+  auto scale = ((float) owner->level->is_lit_currently_no_check(owner->curr_at.x, owner->curr_at.y)) / 255.0;
+  col.r      = ((float) col.r) * scale;
+  col.g      = ((float) col.g) * scale;
+  col.b      = ((float) col.b) * scale;
+  col.a      = ((float) col.a) * scale;
+
   glcolor(col);
   if (! cached_gl_cmds.size()) {
     blit_init();
@@ -734,11 +743,22 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
             s -= (((float) non_pcg_random_range(0, (int) s)) / 8.0);
           }
 
-          auto  tlx = mid.x - s;
-          auto  tly = mid.y - s;
-          auto  brx = mid.x + s;
-          auto  bry = mid.y + s;
-          color c   = l->col;
+          auto tlx = mid.x - s;
+          auto tly = mid.y - s;
+          auto brx = mid.x + s;
+          auto bry = mid.y + s;
+
+          color c = l->col;
+
+          //
+          // Fade the lights
+          //
+          auto scale = ((float) t->level->is_lit_currently_no_check(x, y)) / 255.0;
+          c.r        = ((float) c.r) * scale;
+          c.g        = ((float) c.g) * scale;
+          c.b        = ((float) c.b) * scale;
+          c.a        = ((float) c.a) * scale;
+
           glcolor(c);
           blit(g_light_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
         }
@@ -808,6 +828,16 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           auto  brx = mid.x + s;
           auto  bry = mid.y + s;
           color c   = l->col;
+
+          //
+          // Fade the lights
+          //
+          auto scale = ((float) t->level->is_lit_currently_no_check(x, y)) / 255.0;
+          c.r        = ((float) c.r) * scale;
+          c.g        = ((float) c.g) * scale;
+          c.b        = ((float) c.b) * scale;
+          c.a        = ((float) c.a) * scale;
+
           glcolor(c);
           blit(g_glow_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
         }
@@ -829,8 +859,10 @@ void Level::lights_fade(void)
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       auto v = is_lit_currently_no_check(x, y);
-      if (v) {
-        set_is_lit_currently_no_check(x, y, v - 1);
+      if (v > 10) {
+        set_is_lit_currently_no_check(x, y, v - 10);
+      } else {
+        set_is_lit_currently_no_check(x, y, 0);
       }
     }
   }
