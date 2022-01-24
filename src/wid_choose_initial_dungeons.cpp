@@ -1400,7 +1400,6 @@ void Game::wid_choose_initial_dungeons(void)
 
   if (! g_opt_quick_start) {
     wid_choose_initial_dungeons_update_buttons(window);
-    wid_set_do_not_lower(window, 1);
     wid_update(window);
     wid_raise(window);
     wid_set_focus(window);

@@ -175,7 +175,7 @@ public:
   void tick_set_speed(void);
   void tick_update(void);
   void wid_choose_initial_dungeons(void);
-  void wid_choose_next_dungeons(Levelp);
+  void wid_choose_next_dungeons(Levelp, bool is_ascending, bool is_descending);
   void wid_choose_player_name_select(void);
   void wid_choose_seed_select(void);
   void wid_choose_skill(void);

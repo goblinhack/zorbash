@@ -6,6 +6,7 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - save/load progress                                                                                                                         -->
 <!-- - level pyramid                                                                                                                              -->
 <!-- - hub shop levels                                                                                                                            -->
 <!-- - different sound for bosses                                                                                                                 -->

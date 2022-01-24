@@ -169,7 +169,7 @@ public:
   uint64_t i_set_is_key                           : 1 {};
   uint64_t i_set_is_lava                          : 1 {};
   uint64_t i_set_is_light_blocker                 : 1 {};
-  uint64_t i_set_is_mob                   : 1 {};
+  uint64_t i_set_is_mob                           : 1 {};
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_necrotic_danger_level         : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
@@ -300,7 +300,7 @@ public:
   bool any_adjacent_monst(void);
   bool any_unfriendly_monst_visible(void);
   bool ascend_dungeon_tick();
-  bool ascend_dungeon(void);
+  bool ascend_dungeon(bool force = false, point3d next_level = point3d(0, 0, 0));
   bool ascend(int z);
   bool ascend_sewer_tick();
   bool ascend_sewer(void);
@@ -360,7 +360,7 @@ public:
   bool debuff_remove(Tpp what);
   bool debuff_use(Thingp it);
   bool descend_dungeon_tick();
-  bool descend_dungeon(void);
+  bool descend_dungeon(bool force = false, point3d next_level = point3d(0, 0, 0));
   bool descend_sewer_tick();
   bool descend_sewer(void);
   bool describe_when_hovered_over_in_rightbar(void);
@@ -418,10 +418,10 @@ public:
   bool move(point to);
   bool move(point to, uint8_t u, uint8_t d, uint8_t l, uint8_t r, uint8_t att, uint8_t idl, bool shoveok, bool attok);
   bool move_to_or_attack_check_only(const point nh);
-  bool move_to_or_attack(const point );
+  bool move_to_or_attack(const point);
   bool move_to_or_escape_check_only(const point nh);
-  bool move_to_or_escape(const point );
-  bool move_to_try(const point , const bool escaping, bool check_only);
+  bool move_to_or_escape(const point);
+  bool move_to_try(const point, const bool escaping, bool check_only);
   bool natural_attack(Thingp victim);
   bool on_firing_at_something(Thingp hitter);
   bool on_tick(void);

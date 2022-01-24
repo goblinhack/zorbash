@@ -29,13 +29,6 @@ bool Thing::ascend_dungeon_tick(void)
     dbg("Location check, ascend");
   }
 
-  if (game->tick_current - get_tick_last_level_change() <= 1) {
-    if (is_player()) {
-      dbg("Location check, ascend, no too soon");
-    }
-    return false;
-  }
-
   if (level->dungeon_walk_order_level_no > 1) {
     if (is_player()) {
       level->ts_fade_out_begin     = time_get_time_ms_cached();
@@ -58,12 +51,14 @@ bool Thing::ascend_dungeon_tick(void)
   return false;
 }
 
-bool Thing::ascend_dungeon(void)
+bool Thing::ascend_dungeon(bool force, point3d next_level)
 {
-  if (is_changing_level || is_hidden || is_falling || is_waiting_to_descend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_leave_level_has_completed_fall || is_jumping) {
-    dbg("Ascend dungeon, no");
-    return false;
+  if (! force) {
+    if (is_changing_level || is_hidden || is_falling || is_waiting_to_descend_dungeon ||
+        is_waiting_to_descend_sewer || is_waiting_to_leave_level_has_completed_fall || is_jumping) {
+      dbg("Ascend dungeon, no");
+      return false;
+    }
   }
 
   if (! maybe_infop()) {
@@ -73,7 +68,16 @@ bool Thing::ascend_dungeon(void)
   dbg("Ascend dungeon");
   TRACE_AND_INDENT();
 
-  auto next_level = level->world_at + point3d(0, 0, -2);
+  if (! force) {
+    if (is_player()) {
+      game->wid_choose_next_dungeons(level, false, true);
+      return true;
+    }
+  }
+
+  if (next_level == point3d(0, 0, 0)) {
+    next_level = level->world_at + point3d(0, 0, -2);
+  }
 
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {
