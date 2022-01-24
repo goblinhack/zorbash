@@ -15,6 +15,7 @@
 #include "my_main.hpp"
 #include "my_math.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_python.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_template.hpp"
@@ -185,16 +186,16 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
   std::string fg_tilename;
 
   if (node->is_lock) {
-    fg_tilename = "boss_icon.1";
+    fg_tilename = "boss_icon";
   }
 
   if (node->is_ascend_dungeon) {
-    fg_tilename = "you_icon";
+    fg_tilename = "you_are_here_icon";
     wid_set_on_mouse_down(b, wid_choose_initial_dungeons_shortcut_enter);
   }
 
   if (node->is_descend_dungeon) {
-    fg_tilename = "boss_icon.2";
+    fg_tilename = "final_boss_icon";
   }
 
   if (node->is_key) {
@@ -942,9 +943,7 @@ void Game::wid_choose_initial_dungeons(void)
 {
   TRACE_AND_INDENT();
 
-  if (! game) {
-    DIE("No game struct");
-  }
+  py_call_void_fn("events", "on_initial_dungeon_menu_select", 0);
 
   pre_init();
 

@@ -18,6 +18,7 @@ PyObject *log_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *music_halt_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *non_pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds);

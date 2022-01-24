@@ -15,6 +15,7 @@
 #include "my_main.hpp"
 #include "my_math.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_python.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_template.hpp"
@@ -476,11 +477,11 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   std::string fg_tilename;
 
   if (l->is_boss_level) {
-    fg_tilename = "boss_icon.1";
+    fg_tilename = "boss_icon";
   }
 
   if (l->is_final_boss_level) {
-    fg_tilename = "boss_icon.2";
+    fg_tilename = "final_boss_icon";
   }
 
   if (l->is_crystal_level) {
@@ -498,7 +499,7 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   }
 
   if (game->level == l) {
-    fg_tilename = "you_icon";
+    fg_tilename = "you_are_here_icon";
   }
 
   if (! bg_tilename.empty()) {
@@ -563,6 +564,8 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
     ERR("No player");
     return;
   }
+
+  py_call_void_fn("events", "on_initial_dungeon_menu_select", 0);
 
   paused                    = true;
   player->is_changing_level = true;

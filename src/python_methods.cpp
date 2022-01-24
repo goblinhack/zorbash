@@ -1693,6 +1693,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_WRAPPED_PYTHON_FUNCTION(map_load_room),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(music_load),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(music_play),
+    MY_ADD_WRAPPED_PYTHON_FUNCTION(music_halt),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(pct_to_abs),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(puts),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(sound_load),

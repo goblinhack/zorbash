@@ -114,9 +114,11 @@ public:
   //
   int difficulty_depth {};
   int dungeon_walk_order_level_no {};
-  int is_boss_level {};
-  int is_final_boss_level {};
-  int is_crystal_level {};
+
+  bool is_shop_level {};
+  bool is_boss_level {};
+  bool is_final_boss_level {};
+  bool is_crystal_level {};
 
   //
   // Chances for various things to appear
