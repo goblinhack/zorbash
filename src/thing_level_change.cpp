@@ -7,6 +7,7 @@
 #include "my_gl.hpp"
 #include "my_light.hpp"
 #include "my_monst.hpp"
+#include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
@@ -124,6 +125,9 @@ void Thing::level_change(Levelp l)
 
   if (is_player()) {
     game->request_snapshot = true;
+
+    py_call_void_fn("events", "on_level_change", level->dungeon_walk_order_level_no, level->is_shop_level,
+                    level->is_crystal_level, level->is_boss_level, level->is_final_boss_level);
   }
 
   //

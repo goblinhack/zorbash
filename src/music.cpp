@@ -158,53 +158,11 @@ bool music_play(const std::string &name)
   return true;
 }
 
-#if 0
-void music_play_game (uint32_t level_no)
-{ TRACE_AND_INDENT();
-  static std::string music[] = {
-    "data/music/Faith.ogg",
-  };
-
-  /*
-   * So we get the same music for each player on the same level.
-   */
-  int r = level_no;
-  int x = r % ARRAY_SIZE(music);
-
-  music_play(music[x], music[x], 44100);
-}
-
-void music_play_death (void)
-{ TRACE_AND_INDENT();
-  music_play("data/music/Faith.ogg", "death", 44100 );
-}
-
-void music_play_demo (void)
-{ TRACE_AND_INDENT();
-  music_play("data/music/Faith.ogg", "battle", 44100 );
-}
-
-void music_play_dead (void)
-{ TRACE_AND_INDENT();
-  music_play("data/music/Faith.ogg", "dead", 44100 );
-}
-
-void music_play_game_over (void)
-{ TRACE_AND_INDENT();
-  music_play("data/music/Faith.ogg", "game over", 44100 );
-}
-#endif
-
-void music_play_intro(void)
-{
-  TRACE_AND_INDENT();
-  music_play("intro");
-}
-
-void music_halt(void)
+bool music_halt(void)
 {
   TRACE_AND_INDENT();
   music_current = "";
 
   Mix_FadeOutMusic(1500);
+  return true;
 }

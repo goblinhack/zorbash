@@ -8,6 +8,7 @@
 #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_music.hpp"
+#include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
@@ -322,7 +323,7 @@ void Game::wid_main_menu_select(void)
   TRACE_AND_INDENT();
   LOG("Main menu");
 
-  music_play_intro();
+  py_call_void_fn("events", "on_main_menu_select", 0);
 
   if (wid_main_menu_window) {
     wid_main_menu_destroy();

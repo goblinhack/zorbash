@@ -5,6 +5,7 @@
 
 #include "my_game.hpp"
 #include "my_main.hpp"
+#include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
@@ -85,6 +86,8 @@ void Game::wid_dead_select(const char *reason)
 {
   TRACE_AND_INDENT();
   LOG("Open dead select: %s", reason);
+
+  py_call_void_fn("events", "on_player_death", level->dungeon_walk_order_level_no);
 
   wid_actionbar_fini();
   wid_thing_info_fini();

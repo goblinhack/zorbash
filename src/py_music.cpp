@@ -72,3 +72,17 @@ PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   Py_RETURN_TRUE;
 }
+
+PyObject *music_halt_(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+
+  PY_DBG("music_halt()");
+
+  if (! music_halt()) {
+    ERR("music_halt: Failed");
+    Py_RETURN_FALSE;
+  }
+
+  Py_RETURN_TRUE;
+}
