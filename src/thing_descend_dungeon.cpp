@@ -38,12 +38,14 @@ bool Thing::descend_dungeon_tick(void)
   }
 }
 
-bool Thing::descend_dungeon(void)
+bool Thing::descend_dungeon(bool force, point3d next_level)
 {
-  if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_leave_level_has_completed_fall || is_jumping) {
-    dbg("Descend dungeon, no");
-    return false;
+  if (! force) {
+    if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+        is_waiting_to_leave_level_has_completed_fall || is_jumping) {
+      dbg("Descend dungeon, no");
+      return false;
+    }
   }
 
   if (! maybe_infop()) {
@@ -62,12 +64,16 @@ bool Thing::descend_dungeon(void)
     }
   }
 
-  if (is_player()) {
-    game->wid_choose_next_dungeons(level);
-    return true;
+  if (! force) {
+    if (is_player()) {
+      game->wid_choose_next_dungeons(level, false, true);
+      return true;
+    }
   }
 
-  auto next_level = level->world_at + point3d(0, 0, 2);
+  if (next_level == point3d(0, 0, 0)) {
+    next_level = level->world_at + point3d(0, 0, 2);
+  }
 
   dbg("Is trying to descend");
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);

@@ -17,7 +17,6 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
 {
   TRACE_AND_INDENT();
 
-  CON("XXX %p %s %s", this, world_at.to_string().c_str(), grid_at.to_string().c_str());
   if (difficulty_depth > DUNGEONS_MAX_DEPTH) {
     difficulty_depth = DUNGEONS_MAX_DEPTH;
   }

@@ -87,6 +87,12 @@ public:
   // First level
   //
   class DungeonNode *start_node {};
+
+  //
+  // Which direction are we moving in?
+  //
+  bool is_descending {};
+  bool is_ascending {};
 };
 
 static wid_choose_next_dungeons_ctx *g_ctx;
@@ -162,7 +168,7 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int32_t relx, int32_t re
       case 8 : bg_tilename = "dungeon_icon.8"; break;
     }
 
-    wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY30);
+    wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY10);
     wid_set_bg_tilename(wid_level_description->wid_popup_container, bg_tilename);
   }
 
@@ -240,25 +246,31 @@ static void wid_choose_next_dungeons_tick(Widp w)
           wid_set_color(b, WID_COLOR_BG, c);
           wid_update(b);
 
-          for (auto n : ctx->next_levels[ y ][ x ]) {
-            auto n_at = n->grid_at;
-            Widp b    = ctx->buttons[ n_at.y ][ n_at.x ];
-            if (b) {
-              color c = WHITE;
-              c.a     = val;
-              wid_set_color(b, WID_COLOR_BG, c);
-              wid_update(b);
+          if (ctx->is_descending) {
+            for (auto n : ctx->next_levels[ y ][ x ]) {
+              auto n_at = n->grid_at;
+              Widp b    = ctx->buttons[ n_at.y ][ n_at.x ];
+              if (b) {
+                color c = WHITE;
+                c.a     = val;
+                wid_set_color(b, WID_COLOR_BG, c);
+                wid_update(b);
+                wid_set_on_mouse_down(b, wid_choose_next_dungeons_enter);
+              }
             }
           }
 
-          for (auto n : ctx->prev_levels[ y ][ x ]) {
-            auto n_at = n->grid_at;
-            Widp b    = ctx->buttons[ n_at.y ][ n_at.x ];
-            if (b) {
-              color c = WHITE;
-              c.a     = val;
-              wid_set_color(b, WID_COLOR_BG, c);
-              wid_update(b);
+          if (ctx->is_ascending) {
+            for (auto n : ctx->prev_levels[ y ][ x ]) {
+              auto n_at = n->grid_at;
+              Widp b    = ctx->buttons[ n_at.y ][ n_at.x ];
+              if (b) {
+                color c = WHITE;
+                c.a     = val;
+                wid_set_color(b, WID_COLOR_BG, c);
+                wid_update(b);
+                wid_set_on_mouse_down(b, wid_choose_next_dungeons_enter);
+              }
             }
           }
         }
@@ -348,16 +360,51 @@ static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint
   } else {
     ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(wid_get_top_parent(w));
   }
-  verify(MTYPE_WID, ctx);
 
+  verify(MTYPE_WID, ctx);
   if (! ctx) {
+    ERR("No ctx");
     return true;
   }
 
-  wid_choose_next_dungeons_destroy(wid_get_top_parent(w));
+  auto level = game->level;
+  if (! level) {
+    ERR("No level");
+    return true;
+  }
+  auto player = level->player;
+  if (! player) {
+    ERR("No player");
+    return true;
+  }
 
-  if (! game) {
-    DIE("No game");
+  {
+    int focus = wid_get_int_context(w);
+    int x     = (focus & 0xff);
+    int y     = (focus & 0xff00) >> 8;
+
+    LOG("Chose level at %d,%d", x, y);
+
+    auto l = ctx->levels[ y ][ x ];
+    if (! l) {
+      LOG("No level at %d,%d", x, y);
+      return true;
+    }
+
+    if (ctx->is_ascending) {
+      LOG("Ascend to %s", l->world_at.to_string().c_str());
+      player->ascend_dungeon(true, l->world_at);
+    }
+
+    if (ctx->is_descending) {
+      LOG("Descend to %s", l->world_at.to_string().c_str());
+      player->descend_dungeon(true, l->world_at);
+    }
+
+    wid_choose_next_dungeons_destroy(wid_get_top_parent(w));
+
+    wid_actionbar_fini();
+    wid_hide(wid_topcon_window);
   }
 
   return true;
@@ -502,7 +549,7 @@ static void wid_choose_next_dungeons_update_buttons(Widp w)
   wid_update(w);
 }
 
-void Game::wid_choose_next_dungeons(Levelp current)
+void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_descending)
 {
   TRACE_AND_INDENT();
 
@@ -543,8 +590,10 @@ void Game::wid_choose_next_dungeons(Levelp current)
     }
   }
 
-  ctx->focusx = -1;
-  ctx->focusy = -1;
+  ctx->focusx        = -1;
+  ctx->focusy        = -1;
+  ctx->is_descending = is_descending;
+  ctx->is_ascending  = is_ascending;
 
   auto window = wid_new_square_window("wid level grid");
   ctx->w      = window;
@@ -775,7 +824,6 @@ void Game::wid_choose_next_dungeons(Levelp current)
   }
 
   wid_choose_next_dungeons_update_buttons(window);
-  wid_set_do_not_lower(window, 1);
   wid_update(window);
   wid_raise(window);
   wid_set_focus(window);

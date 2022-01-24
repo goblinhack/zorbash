@@ -51,7 +51,13 @@ void Level::update_map_debug(int x, int y)
     for (auto x = 0; x < MAP_WIDTH; x++) {
       color c = BLACK;
 
-      if (is_monst(x, y) || is_mob(x, y)) {
+      if (is_ascend_dungeon(x, y)) {
+        c   = GREEN;
+        c.a = 255;
+      } else if (is_descend_dungeon(x, y)) {
+        c   = PURPLE;
+        c.a = 255;
+      } else if (is_monst(x, y) || is_mob(x, y)) {
         c   = RED;
         c.a = 255;
       } else if (is_spiderweb(x, y)) {
@@ -60,12 +66,6 @@ void Level::update_map_debug(int x, int y)
       } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) ||
                  is_enchantstone(x, y)) {
         c   = GOLD2;
-        c.a = 255;
-      } else if (is_ascend_dungeon(x, y)) {
-        c   = GREEN;
-        c.a = 255;
-      } else if (is_descend_dungeon(x, y)) {
-        c   = PURPLE;
         c.a = 255;
       } else if (is_wall(x, y) || is_rock(x, y)) {
         continue;
