@@ -23,7 +23,7 @@ static void wid_config_other_destroy(void)
 static uint8_t wid_config_other_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Reload config");
+  CON("INF: Reload config");
   game->load_config();
   wid_config_other_destroy();
   game->wid_config_top_menu();
@@ -33,7 +33,7 @@ static uint8_t wid_config_other_cancel(Widp w, int32_t x, int32_t y, uint32_t bu
 static uint8_t wid_config_other_save(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Save config");
+  CON("INF: Save config");
   game->save_config();
   wid_config_other_destroy();
   game->wid_config_top_menu();
@@ -51,9 +51,9 @@ static uint8_t wid_config_other_back(Widp w, int32_t x, int32_t y, uint32_t butt
 static uint8_t wid_config_debug_mode_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Toggle debug_mode");
+  CON("INF: Toggle debug_mode");
   game->config.debug_mode = ! game->config.debug_mode;
-  CON("PLAYER: Save config");
+  CON("INF: Save config");
   game->save_config();
   g_need_restart = true;
   return true;
@@ -62,7 +62,7 @@ static uint8_t wid_config_debug_mode_toggle(Widp w, int32_t x, int32_t y, uint32
 static uint8_t wid_config_other_sdl_delay_incr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Increment sdl_delay");
+  CON("INF: Increment sdl_delay");
   game->config.sdl_delay++;
   game->wid_config_other_select();
   return true;
@@ -71,8 +71,26 @@ static uint8_t wid_config_other_sdl_delay_incr(Widp w, int32_t x, int32_t y, uin
 static uint8_t wid_config_other_sdl_delay_decr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Decrement sdl_delay");
+  CON("INF: Decrement sdl_delay");
   game->config.sdl_delay--;
+  game->wid_config_other_select();
+  return true;
+}
+
+static uint8_t wid_config_other_snapshot_freq_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  CON("INF: Increment snapshot_freq");
+  game->config.snapshot_freq++;
+  game->wid_config_other_select();
+  return true;
+}
+
+static uint8_t wid_config_other_snapshot_freq_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  CON("INF: Decrement snapshot_freq");
+  game->config.snapshot_freq--;
   game->wid_config_other_select();
   return true;
 }
@@ -224,6 +242,58 @@ void Game::wid_config_other_select(void)
   }
 
   //////////////////////////////////////////////////////////////////////
+  // snapshot_freq
+  //////////////////////////////////////////////////////////////////////
+  y_at += 3;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_other_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Snapshot save freq");
+
+    point tl = make_point(0, y_at);
+    point br = make_point(width / 2, y_at + 2);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Snapshot save freq");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_other_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Snapshot save freq value");
+
+    point tl = make_point(width / 2, y_at);
+    point br = make_point(width / 2 + 6, y_at + 2);
+    wid_set_style(w, UI_WID_STYLE_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, std::to_string(game->config.snapshot_freq));
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_other_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Snapshot save freq +");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 9, y_at + 2);
+    wid_set_style(w, UI_WID_STYLE_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_other_snapshot_freq_incr);
+    wid_set_text(w, "+");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_other_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Snapshot save freq -");
+
+    point tl = make_point(width / 2 + 10, y_at);
+    point br = make_point(width / 2 + 12, y_at + 2);
+    wid_set_style(w, UI_WID_STYLE_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_other_snapshot_freq_decr);
+    wid_set_text(w, "-");
+  }
+
+  //////////////////////////////////////////////////////////////////////
   // delay
   //////////////////////////////////////////////////////////////////////
   y_at += 3;
@@ -242,7 +312,7 @@ void Game::wid_config_other_select(void)
   {
     TRACE_AND_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "SDL delay value");
+    auto w = wid_new_square_button(p, "SDL: delay value");
 
     point tl = make_point(width / 2, y_at);
     point br = make_point(width / 2 + 6, y_at + 2);
@@ -253,7 +323,7 @@ void Game::wid_config_other_select(void)
   {
     TRACE_AND_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "SDL delay value +");
+    auto w = wid_new_square_button(p, "SDL: delay value +");
 
     point tl = make_point(width / 2 + 7, y_at);
     point br = make_point(width / 2 + 9, y_at + 2);
@@ -265,7 +335,7 @@ void Game::wid_config_other_select(void)
   {
     TRACE_AND_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "SDL delay value -");
+    auto w = wid_new_square_button(p, "SDL: delay value -");
 
     point tl = make_point(width / 2 + 10, y_at);
     point br = make_point(width / 2 + 12, y_at + 2);

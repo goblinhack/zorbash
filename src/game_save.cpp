@@ -432,12 +432,12 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
     /*
      * Faster
      */
-    LOG("DGN: Save level snapshot");
+    LOG("INF: Save level snapshot");
     game->level->fbo_light.clear();
   } else if (game->level == my.t) {
-    LOG("DGN: Save lightmap");
+    LOG("INF: Save lightmap");
     game->level->fbo_light = sdl_fbo_save(FBO_FULLMAP_LIGHT);
-    LOG("DGN: Saved lightmap");
+    LOG("INF: Saved lightmap");
   } else {
     /*
      * No light for non current levels
@@ -586,7 +586,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->fbo_light);
 
 #ifdef ENABLE_DEBUG_THING_SER
-  LOG("DGN: Check things");
+  LOG("INF: Check things");
   FOR_ALL_THING_GROUPS(group)
   {
     for (auto p : my.t->all_things[ group ]) {
@@ -597,7 +597,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 #endif
 
 #if 0
-  LOG("DGN: Saved slots");
+  LOG("INF: Saved slots");
   FOR_ALL_THING_GROUPS(group) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -612,7 +612,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   }
 #endif
 
-  LOG("DGN: Save things");
+  LOG("INF: Save things");
   FOR_ALL_THING_GROUPS(group)
   {
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -635,7 +635,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   }
 
   WRITE_MAGIC(THING_MAGIC_FINAL);
-  LOG("DGN: Saved things");
+  LOG("INF: Saved things");
 
   return (out);
 }
@@ -668,16 +668,18 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
         auto    l = get(my.t.levels, x, y, z);
         if (l) {
           step++;
-          wid_progress_bar((float) step / (float) count);
+          if (count > 1) {
+            wid_progress_bar("Saving...", (float) step / (float) count);
+          }
 
           exists = true;
-          CON("DGN: Save level %d,%d,%d", p.x, p.y, p.z);
+          LOG("INF: Save level %d,%d,%d", p.x, p.y, p.z);
           out << bits(p);
           out << bits(exists);
           out << bits(l);
           auto eol = GAME_SAVE_MARKER_EOL;
           out << bits(eol);
-          LOG("DGN: Saved level %d,%d,%d", p.x, p.y, p.z);
+          LOG("INF: Saved level %d,%d,%d", p.x, p.y, p.z);
         } else {
           exists = false;
           out << bits(p);
@@ -770,6 +772,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(my.t.key_zoom_out);
   out << bits(my.t.music_volume);
   out << bits(my.t.sdl_delay);
+  out << bits(my.t.snapshot_freq);
   out << bits(my.t.sound_volume);
   out << bits(g_opt_player_name);
   out << bits(g_opt_seed_name);
@@ -795,18 +798,20 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 
   out << bits(my.t.started);
   out << bits(my.t.things_are_moving);
+  out << bits(false); // robot_mode
+
   out << bits(my.t.map_mini_over);
   out << bits(my.t.seed);
   out << bits(my.t.seed_name);
   out << bits(my.t.tick_requested);
   out << bits(my.t.current_level);
+  out << bits(my.t.move_count);
   out << bits(my.t.frame_count);
   out << bits(my.t.fps_value);
   out << bits(my.t.tick_completed);
   out << bits(my.t.tick_current);
   out << bits(my.t.inventory_highlight_slot);
   out << bits(my.t.previous_slot);
-  out << bits(false);
   out << bits(my.t.skillbox_highlight_slot);
 
   out << bits(wid_topcon_serialize());
@@ -852,7 +857,7 @@ bool Game::save(std::string file_to_save)
   int      r =
       lzo1x_1_compress((lzo_bytep) uncompressed, uncompressed_len, (lzo_bytep) compressed, &compressed_len, wrkmem);
   if (r == LZO_E_OK) {
-    LOG("DGN: Saved as %s, compress %luMb -> %luMb", file_to_save.c_str(),
+    LOG("INF: Saved as %s, compress %luMb -> %luMb", file_to_save.c_str(),
         (unsigned long) uncompressed_len / (1024 * 1024), (unsigned long) compressed_len / (1024 * 1024));
   } else {
     ERR("LZO internal error - compression failed: %d", r);
@@ -914,7 +919,7 @@ void Game::save(void)
 {
   TRACE_AND_INDENT();
   LOG("-");
-  CON("DGN: Saving %s", save_file.c_str());
+  CON("INF: Saving %s", save_file.c_str());
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
@@ -922,7 +927,7 @@ void Game::save(void)
 
   LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
-  CON("DGN: Saved %s, seed %u", save_file.c_str(), seed);
+  CON("INF: Saved %s, seed %u", save_file.c_str(), seed);
   LOG("-");
 }
 
@@ -952,7 +957,7 @@ void Game::save(int slot)
   auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
   LOG("-");
-  CON("DGN: Saving %s", save_file.c_str());
+  CON("INF: Saving %s", save_file.c_str());
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
@@ -960,7 +965,7 @@ void Game::save(int slot)
 
   LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
-  CON("DGN: Saved %s, seed %u", save_file.c_str(), seed);
+  CON("INF: Saved %s, seed %u", save_file.c_str(), seed);
   LOG("-");
 
   TOPCON("Saved the game to %s.", save_file.c_str());
@@ -986,7 +991,7 @@ void Game::save_snapshot(void)
   auto save_file = saved_dir + "saved-snapshot";
 
   LOG("-");
-  CON("DGN: Saving %s", save_file.c_str());
+  CON("INF: Saving %s", save_file.c_str());
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
@@ -994,7 +999,7 @@ void Game::save_snapshot(void)
 
   LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
-  CON("DGN: Saved %s, seed %u", save_file.c_str(), seed);
+  CON("INF: Saved %s, seed %u", save_file.c_str(), seed);
   LOG("-");
 
   TOPCON("%%fg=green$Autosaved.%%fg=reset$");
@@ -1057,7 +1062,7 @@ static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)
               case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
-                  CON("PLAYER: Save game cancelled");
+                  CON("INF: Save game cancelled");
                   wid_save_destroy();
                   return true;
                 }
@@ -1089,6 +1094,13 @@ static uint8_t wid_save_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
+static uint8_t wid_save_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  wid_save_destroy();
+  return true;
+}
+
 void Game::wid_save_select(void)
 {
   TRACE_AND_INDENT();
@@ -1096,14 +1108,24 @@ void Game::wid_save_select(void)
     return;
   }
 
-  auto  m     = TERM_WIDTH / 2;
-  point tl    = make_point(m - 50, UI_TOPCON_VIS_HEIGHT + 2);
-  point br    = make_point(m + 50, tl.y + 52);
-  auto  width = br.x - tl.x;
+  int   popup_width = 100;
+  auto  m           = TERM_WIDTH / 2;
+  point tl          = make_point(m - popup_width / 2, UI_TOPCON_VIS_HEIGHT + 2);
+  point br          = make_point(m + popup_width / 2, tl.y + 52);
+  auto  width       = br.x - tl.x;
 
   wid_save = new WidPopup("Game save", tl, br, tile_find_mand("save"), "", false, false);
   wid_set_on_key_up(wid_save->wid_popup_container, wid_save_key_up);
   wid_set_on_key_down(wid_save->wid_popup_container, wid_save_key_down);
+
+  {
+    auto  w = wid_new_square_button(wid_save->wid_popup_container, "wid inventory window close");
+    point tl(width - 3, 0);
+    point br(width - 0, 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "ui_icon_close");
+    wid_set_on_mouse_up(w, wid_save_cancel);
+  }
 
   game_load_headers_only = true;
 

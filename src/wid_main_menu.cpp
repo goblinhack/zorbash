@@ -116,6 +116,7 @@ static uint8_t wid_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
               case 'l' : wid_main_menu_load_game(nullptr, 0, 0, 0); return true;
               case 'o' : wid_main_menu_config(nullptr, 0, 0, 0); return true;
               case 'c' : wid_main_menu_credits_game(nullptr, 0, 0, 0); return true;
+              case 'h' : wid_main_menu_hiscores(nullptr, 0, 0, 0); return true;
               case 'q' : wid_main_menu_quit_game(nullptr, 0, 0, 0); return true;
             }
           }
@@ -426,7 +427,7 @@ void Game::wid_main_menu_select(void)
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, wid_main_menu_hiscores);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Hiscores");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$H%%fg=" UI_TEXT_COLOR_STR "$iscores");
   }
   y_at += 3;
   {

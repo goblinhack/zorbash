@@ -144,7 +144,7 @@ static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key)
         game->tick_begin("drop");
       }
     }
-    CON("PLAYER: collect cancelled");
+    CON("INF: collect cancelled");
     game->change_state(Game::STATE_NORMAL);
     wid_collect_destroy();
     return true;
@@ -171,7 +171,7 @@ static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key)
               case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
-                  CON("PLAYER: collect cancelled");
+                  CON("INF: collect cancelled");
                   wid_collect_destroy();
                   return true;
                 }

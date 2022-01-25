@@ -74,7 +74,7 @@ static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
         game->tick_begin("drop");
       }
     }
-    CON("PLAYER: Enchant cancelled");
+    CON("INF: Enchant cancelled");
     game->change_state(Game::STATE_NORMAL);
     wid_enchant_destroy();
     return true;
@@ -101,7 +101,7 @@ static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
               case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
-                  CON("PLAYER: Enchant cancelled");
+                  CON("INF: Enchant cancelled");
                   wid_enchant_destroy();
                   return true;
                 }

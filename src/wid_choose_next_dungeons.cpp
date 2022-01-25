@@ -404,8 +404,8 @@ static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint
 
     wid_choose_next_dungeons_destroy(wid_get_top_parent(w));
 
-    wid_actionbar_fini();
-    wid_hide(wid_topcon_window);
+    wid_actionbar_init();
+    wid_visible(wid_topcon_window);
   }
 
   return true;

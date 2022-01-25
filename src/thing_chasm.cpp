@@ -22,5 +22,5 @@ void Thing::chasm_tick(void)
 
   dbg("Over a chasm");
   TRACE_AND_INDENT();
-  fall(1, 750);
+  fall(1, 1000);
 }

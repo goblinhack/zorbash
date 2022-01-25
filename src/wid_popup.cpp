@@ -71,8 +71,9 @@ WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile,
     auto w       = wid_new_square_button(wid_popup_container, "wid title " + name);
     wid_title    = w;
     auto title_x = (outer_w - tile_size) / 2;
-    wid_set_pos(w, point(title_x + 0, 1), point(title_x + tile_size, tile_size));
+    wid_set_pos(w, point(title_x + 0, 1), point(title_x + tile_size - 1, tile_size));
     wid_set_style(w, UI_WID_STYLE_DARK);
+    wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
     wid_set_fg_tile(w, title_tile);
   }
 

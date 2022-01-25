@@ -45,7 +45,7 @@ Tpp Level::tp_random_monst_class_a(const point p)
       continue;
     }
 
-    dbg("DGN: Placed monster class A '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed monster class A '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -66,7 +66,7 @@ Tpp Level::tp_random_monst_class_b(const point p)
       continue;
     }
 
-    dbg("DGN: Placed monster class B '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed monster class B '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -87,7 +87,7 @@ Tpp Level::tp_random_monst_class_c(const point p)
       continue;
     }
 
-    dbg("DGN: Placed monster class C '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed monster class C '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -108,7 +108,7 @@ Tpp Level::tp_random_monst_class_d(const point p)
       continue;
     }
 
-    dbg("DGN: Placed monster class D '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed monster class D '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -129,7 +129,7 @@ Tpp Level::tp_random_monst_class_e(const point p)
       continue;
     }
 
-    dbg("DGN: Placed monster class E '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed monster class E '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -150,7 +150,7 @@ Tpp Level::tp_random_treasure_class_a(const point p)
       continue;
     }
 
-    dbg("DGN: Placed treasure class A '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed treasure class A '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -171,7 +171,7 @@ Tpp Level::tp_random_treasure_class_b(const point p)
       continue;
     }
 
-    dbg("DGN: Placed treasure class B '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed treasure class B '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -192,7 +192,7 @@ Tpp Level::tp_random_treasure_class_c(const point p)
       continue;
     }
 
-    dbg("DGN: Placed treasure class C '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed treasure class C '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -213,7 +213,7 @@ Tpp Level::tp_random_weapon_class_a(const point p)
       continue;
     }
 
-    dbg("DGN: Placed weapon class A '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed weapon class A '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -234,7 +234,7 @@ Tpp Level::tp_random_weapon_class_b(const point p)
       continue;
     }
 
-    dbg("DGN: Placed weapon class B '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed weapon class B '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }
@@ -255,7 +255,7 @@ Tpp Level::tp_random_weapon_class_c(const point p)
       continue;
     }
 
-    dbg("DGN: Placed weapon class C '%s'", tpp->short_text_capitalise().c_str());
+    dbg("INF: Placed weapon class C '%s'", tpp->short_text_capitalise().c_str());
     return tpp;
   }
 }

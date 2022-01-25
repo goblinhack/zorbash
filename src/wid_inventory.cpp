@@ -333,7 +333,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   // If shift is not held, select inventory
   //
   if (sdlk_eq(*key, game->config.key_action0)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -346,7 +346,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action1)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -359,7 +359,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action2)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -372,7 +372,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action3)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -385,7 +385,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action4)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -398,7 +398,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action5)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -411,7 +411,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action6)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -424,7 +424,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action7)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -437,7 +437,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action8)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -450,7 +450,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return true;
   }
   if (sdlk_eq(*key, game->config.key_action9)) {
-    CON("PLAYER: Pressed action key");
+    CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
     wid_thing_info_fini(); // To remove bag or other info
@@ -495,7 +495,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
               case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
-                  DBG("PLAYER: inventory cancelled");
+                  DBG("INF: inventory cancelled");
 
                   if (game->in_transit_item) {
                     wid_in_transit_item_drop();

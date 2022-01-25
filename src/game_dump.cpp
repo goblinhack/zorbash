@@ -97,6 +97,7 @@ void Config::dump(std::string pfx, std::ostream &out)
   out << pfx << "one_pixel_height       " << one_pixel_height << std::endl;
   out << pfx << "one_pixel_width        " << one_pixel_width << std::endl;
   out << pfx << "sdl_delay              " << sdl_delay << std::endl;
+  out << pfx << "snapshot_freq          " << snapshot_freq << std::endl;
   out << pfx << "sound_volume           " << sound_volume << std::endl;
   out << pfx << "tile_height            " << tile_height << std::endl;
   out << pfx << "tile_pix_height        " << tile_pix_height << std::endl;

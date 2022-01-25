@@ -25,10 +25,6 @@ bool Thing::player_is_ready_for_messages(void)
     return false;
   }
 
-  if (level->player->is_dead || level->player->is_dying) {
-    return false;
-  }
-
   if (game->tick_current < 1) {
     return false;
   }
@@ -50,11 +46,6 @@ bool Thing::player_is_ready_for_messages(std::string &why)
 
   if (! level->player) {
     why = "no player";
-    return false;
-  }
-
-  if (level->player->is_dead || level->player->is_dying) {
-    why = "player is dead";
     return false;
   }
 

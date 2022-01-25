@@ -1,21 +1,18 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- blue floors                                                                                                                                  -->
-<!-- fallis too fast                                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - save/load progress                                                                                                                         -->
-<!-- - level pyramid                                                                                                                              -->
+<!-- - check level up                                                                                                                             -->
 <!-- - hub shop levels                                                                                                                            -->
+<!-- - basecamp level?                                                                                                                           -->
 <!-- - different sound for bosses                                                                                                                 -->
 <!-- - level fall through to special level ?                                                                                                      -->
 <!-- - crystal collection                                                                                                                         -->
 <!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
-<!-- - char selection                                                                                                                             -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
-<!-- - eat corpses, like a bat corpse?                                                                                                            -->
+<!-- - char selection                                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- UI                                                                                                                                           -->
@@ -87,6 +84,7 @@
 <!--                                                                                                                                              -->
 <!-- AI                                                                                                                                           -->
 <!-- ------                                                                                                                                       -->
+<!-- - eat corpses, like a bat corpse?                                                                                                            -->
 <!-- - add monst states, like wandering (not noticed your stealth), hunting, worshipping, sleeping                                                -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

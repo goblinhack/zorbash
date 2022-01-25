@@ -32,14 +32,14 @@ void gl_init_2d_mode(void)
   //
   // Enable Texture Worldping
   //
-  CON("GFX: enable textures");
+  CON("GFX: OpenGL enable textures");
   glEnable(GL_TEXTURE_2D);
   GL_ERROR_CHECK();
 
   //
   // Enable alpha blending for sprites
   //
-  CON("GFX: enable blending");
+  CON("GFX: OpenGL enable blending");
   glEnable(GL_BLEND);
   GL_ERROR_CHECK();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -48,24 +48,24 @@ void gl_init_2d_mode(void)
   //
   // Setup our viewport
   //
-  CON("GFX: enable viewport");
+  CON("GFX: OpenGL enable viewport");
   glViewport(0, 0, game->config.window_pix_width, game->config.window_pix_height);
   GL_ERROR_CHECK();
 
   //
   // Reset the view
   //
-  CON("GFX: identity");
   glLoadIdentity();
   GL_ERROR_CHECK();
 
   gl_init_fbo();
 
-  CON("GFX: misc");
   glLineWidth(1.0);
   GL_ERROR_CHECK();
   glEnable(GL_LINE_SMOOTH);
   GL_ERROR_CHECK();
+
+  CON("GFX: OpenGL initialized");
 }
 
 void gl_enter_2d_mode(void)
@@ -391,7 +391,7 @@ void gl_init_fbo(void)
 {
   int i;
 
-  CON("GFX: create FBOs");
+  CON("GFX: OpenGL creat FBOs");
   GL_ERROR_CHECK();
 
   for (i = 0; i < MAX_FBO; i++) {
@@ -419,7 +419,7 @@ void gl_init_fbo(void)
     blit_fbo_unbind();
   }
 
-  CON("GFX: created FBOs");
+  CON("GFX: OpenGL created FBOs");
   GL_ERROR_CHECK();
 }
 

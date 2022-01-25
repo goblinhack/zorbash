@@ -98,6 +98,7 @@ void Config::reset(void)
   key_zoom_out.sym        = SDLK_x;
   music_volume            = {MIX_MAX_VOLUME / 3};
   sdl_delay               = 1;
+  snapshot_freq           = ENABLE_SAVE_SNAPSHOT_FREQ;
   sound_volume            = {MIX_MAX_VOLUME / 2};
 }
 

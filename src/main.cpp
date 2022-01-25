@@ -46,10 +46,10 @@ static char **ARGV;
 void quit(void)
 {
   TRACE_AND_INDENT();
-  LOG("FINI: Quitting, start cleanup");
+  LOG("FIN: Quitting, start cleanup");
 
   if (g_quitting) {
-    LOG("FINI: Quitting, nested");
+    LOG("FIN: Quitting, nested");
     return;
   }
 
@@ -66,61 +66,61 @@ void quit(void)
     game->fini();
   }
 
-  LOG("FINI: room_fini");
+  LOG("FIN: room_fini");
   room_fini();
 
-  LOG("FINI: level_fini");
+  LOG("FIN: level_fini");
   level_fini();
 
-  LOG("FINI: sdl_exit");
+  LOG("FIN: sdl_exit");
   sdl_exit();
 
-  LOG("FINI: tp_fini");
+  LOG("FIN: tp_fini");
   tp_fini();
 
-  LOG("FINI: wid_console_fini");
+  LOG("FIN: wid_console_fini");
   wid_console_fini();
 
-  LOG("FINI: wid_topcon_fini");
+  LOG("FIN: wid_topcon_fini");
   wid_topcon_fini();
 
-  LOG("FINI: wid_botcon_fini");
+  LOG("FIN: wid_botcon_fini");
   wid_botcon_fini();
 
-  LOG("FINI: command_fini");
+  LOG("FIN: command_fini");
   command_fini();
 
-  LOG("FINI: wid_fini");
+  LOG("FIN: wid_fini");
   wid_fini();
 
-  LOG("FINI: font_fini");
+  LOG("FIN: font_fini");
   font_fini();
 
-  LOG("FINI: tex_fini");
+  LOG("FIN: tex_fini");
   tex_fini();
 
-  LOG("FINI: wid_tiles_fini");
+  LOG("FIN: wid_tiles_fini");
   wid_tiles_fini();
 
-  LOG("FINI: tile_fini");
+  LOG("FIN: tile_fini");
   tile_fini();
 
-  LOG("FINI: blit_fini");
+  LOG("FIN: blit_fini");
   blit_fini();
 
-  LOG("FINI: color_fini");
+  LOG("FIN: color_fini");
   color_fini();
 
-  LOG("FINI: audio_fini");
+  LOG("FIN: audio_fini");
   audio_fini();
 
-  LOG("FINI: music_fini");
+  LOG("FIN: music_fini");
   music_fini();
 
-  LOG("FINI: sound_fini");
+  LOG("FIN: sound_fini");
   sound_fini();
 
-  LOG("FINI: sdl_fini");
+  LOG("FIN: sdl_fini");
   sdl_fini();
 
   if (EXEC_FULL_PATH_AND_NAME) {
@@ -164,9 +164,9 @@ void quit(void)
   }
 #endif
 
-  LOG("FINI: Cleanup done");
+  LOG("FIN: Cleanup done");
 
-  LOG("FINI: py_fini");
+  LOG("FIN: py_fini");
   //
   // This might exit
   //
@@ -692,18 +692,16 @@ int32_t main(int32_t argc, char *argv[])
     }
   }
 
-  CON("INI: SDL create window");
   if (! sdl_init()) {
-    ERR("SDL init");
+    ERR("SDL: init");
   }
 
   if (g_need_restart) {
-    CON("FINI: Restart");
+    CON("FIN: Restart");
     g_need_restart = false;
     execv(argv[ 0 ], argv);
   }
 
-  CON("INI: OpenGL enter 2D mode");
   gl_init_2d_mode();
 
   //
@@ -715,9 +713,9 @@ int32_t main(int32_t argc, char *argv[])
   gfx_init();
 
   //
-  // Random number mobs
+  // Random number
   //
-  CON("INI: Create random number mobs");
+  CON("INI: Initialize random number generator");
   double                             mean = 1.0;
   double                             std  = 0.5;
   std::normal_distribution< double > distribution;
@@ -902,20 +900,20 @@ int32_t main(int32_t argc, char *argv[])
   g_opt_no_slow_log_flush = false;
   TRACE_NO_INDENT();
   sdl_loop();
-  LOG("FINI: SDL loop finished");
+  LOG("FIN: SDL loop finished");
 
-  CON("FINI: Leave 2D mode");
+  CON("FIN: Leave 2D mode");
   gl_leave_2d_mode();
 
-  CON("FINI: Quit");
+  CON("FIN: Quit");
   quit();
 
   if (g_need_restart) {
-    CON("FINI: Restart");
+    CON("FIN: Restart");
     g_need_restart = false;
     execv(argv[ 0 ], argv);
   }
 
-  CON("FINI: Goodbye and take care until next time!");
+  CON("FIN: Goodbye and take care until next time!");
   return 0;
 }

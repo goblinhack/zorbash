@@ -635,10 +635,10 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   l->is_map_follow_player = true;
 
   auto p = l->world_at;
-  LOG("DGN: Loading things for level %d,%d,%d", p.x, p.y, p.z);
+  LOG("INF: Loading things for level %d,%d,%d", p.x, p.y, p.z);
 
 #if 0
-  LOG("DGN: Loaded slots");
+  LOG("INF: Loaded slots");
   FOR_ALL_THING_GROUPS(group) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -736,10 +736,10 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   l->update_new_level();
 
   READ_MAGIC("level end", THING_MAGIC_FINAL);
-  LOG("DGN: Loaded things for level %d,%d,%d", p.x, p.y, p.z);
+  LOG("INF: Loaded things for level %d,%d,%d", p.x, p.y, p.z);
 
   my.t->update_map();
-  LOG("DGN: updated map for level %d,%d,%d", p.x, p.y, p.z);
+  LOG("INF: updated map for level %d,%d,%d", p.x, p.y, p.z);
   return (in);
 }
 
@@ -769,9 +769,11 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
 
         if (exists) {
           step++;
-          wid_progress_bar((float) step / (float) count);
+          if (count > 1) {
+            wid_progress_bar("Loading...", (float) step / (float) count);
+          }
 
-          CON("DGN: Loading level %d,%d,%d", p.x, p.y, p.z);
+          LOG("INF: Loading level %d,%d,%d", p.x, p.y, p.z);
           auto l = new Level();
           set(my.t.levels, x, y, z, l);
           in >> bits(l);
@@ -785,7 +787,7 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
             game_load_error = string_sprintf("end of level %d,%d,%d not found", x, y, z);
             return (in);
           }
-          CON("DGN: Loaded level %d,%d,%d", p.x, p.y, p.z);
+          LOG("INF: Loaded level %d,%d,%d", p.x, p.y, p.z);
         }
       }
     }
@@ -877,6 +879,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.key_zoom_out);
   in >> bits(my.t.music_volume);
   in >> bits(my.t.sdl_delay);
+  in >> bits(my.t.snapshot_freq);
   in >> bits(my.t.sound_volume);
   in >> bits(g_opt_player_name);
   // seed name handled below
@@ -915,13 +918,13 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
 {
   TRACE_AND_INDENT();
   in >> bits(my.t.version);
-  if (my.t.version != MYVER) {
-    game_load_error = "old version '" MYVER "' v '" + my.t.version + "'";
-    return (in);
-  }
   in >> bits(my.t.serialized_size);
   if (my.t.serialized_size != (uint32_t) sizeof(Game)) {
-    game_load_error = "old version '" MYVER "' v '" + my.t.version + "'";
+    game_load_error = "Will not load. Wrong version. Expected version " MYVER ", found version " + my.t.version;
+    return (in);
+  }
+  if (my.t.version != MYVER) {
+    game_load_error = "May not load. Wrong version. Expected version " MYVER ", found version " + my.t.version;
     return (in);
   }
   in >> bits(my.t.save_slot);
@@ -943,18 +946,20 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
 
   in >> bits(my.t.started);
   in >> bits(my.t.things_are_moving);
+  in >> bits(my.t.robot_mode);
+
   in >> bits(my.t.map_mini_over);
   in >> bits(my.t.seed);
   in >> bits(my.t.seed_name);
   in >> bits(my.t.tick_requested);
   in >> bits(my.t.current_level);
+  in >> bits(my.t.move_count);
   in >> bits(my.t.frame_count);
   in >> bits(my.t.fps_value);
   in >> bits(my.t.tick_completed);
   in >> bits(my.t.tick_current);
   in >> bits(my.t.inventory_highlight_slot);
   in >> bits(my.t.previous_slot);
-  in >> bits(my.t.robot_mode);
   in >> bits(my.t.skillbox_highlight_slot);
 
   std::vector< std::wstring > s;
@@ -1056,7 +1061,7 @@ bool Game::load(std::string file_to_load, class Game &target)
   int      r = lzo1x_decompress((lzo_bytep) compressed, compressed_len, (lzo_bytep) uncompressed, &new_len, nullptr);
   if (r == LZO_E_OK && new_len == uncompressed_len) {
     if (! game_load_headers_only) {
-      CON("DGN: Loading %s, decompress %luMb -> %luMb", file_to_load.c_str(),
+      CON("INF: Loading %s, decompress %luMb -> %luMb", file_to_load.c_str(),
           (unsigned long) compressed_len / (1024 * 1024), (unsigned long) uncompressed_len / (1024 * 1024));
     }
   } else {
@@ -1123,7 +1128,7 @@ void Game::load(void)
 {
   TRACE_AND_INDENT();
   LOG("-");
-  CON("DGN: Loading %s", save_file.c_str());
+  CON("INF: Loading %s", save_file.c_str());
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
@@ -1135,7 +1140,7 @@ void Game::load(void)
 
   LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
-  CON("DGN: Loaded %s, seed %u", save_file.c_str(), seed);
+  CON("INF: Loaded %s, seed %u", save_file.c_str(), seed);
   LOG("-");
 }
 
@@ -1160,7 +1165,7 @@ void Game::load(int slot)
   auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
   LOG("-");
-  CON("DGN: Loading %s", save_file.c_str());
+  CON("INF: Loading %s", save_file.c_str());
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
   LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -1172,7 +1177,7 @@ void Game::load(int slot)
 
   LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-  CON("DGN: Loaded %s, seed %d", save_file.c_str(), seed);
+  CON("INF: Loaded %s, seed %d", save_file.c_str(), seed);
   LOG("-");
 
   TOPCON("Loaded the game from %s.", save_file.c_str());
@@ -1186,7 +1191,7 @@ void Game::load_snapshot(void)
   auto save_file = saved_dir + "saved-snapshot";
 
   LOG("-");
-  CON("DGN: Loading %s", save_file.c_str());
+  CON("INF: Loading %s", save_file.c_str());
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
   LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v");
 
@@ -1198,7 +1203,7 @@ void Game::load_snapshot(void)
 
   LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^");
   LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | |");
-  CON("DGN: Loaded %s, seed %d", save_file.c_str(), seed);
+  CON("INF: Loaded %s, seed %d", save_file.c_str(), seed);
   LOG("-");
 
   TOPCON("Loaded the game from %s.", save_file.c_str());
@@ -1253,7 +1258,7 @@ static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key)
               case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
-                  CON("PLAYER: Load game cancelled");
+                  CON("INF: Load game cancelled");
                   wid_load_destroy();
                   return true;
                 }
@@ -1292,24 +1297,40 @@ static uint8_t wid_load_saved_snapshot(Widp w, int32_t x, int32_t y, uint32_t bu
   wid_load_destroy();
   return true;
 }
+static uint8_t wid_load_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  wid_load_destroy();
+  return true;
+}
 
 void Game::wid_load_select(void)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Loading a saved game, destroy old");
+  CON("INF: Loading a saved game, destroy old");
 
   if (wid_load) {
     return;
   }
 
-  auto  m     = TERM_WIDTH / 2;
-  point tl    = make_point(m - 50, UI_TOPCON_VIS_HEIGHT + 2);
-  point br    = make_point(m + 50, tl.y + 52);
-  auto  width = br.x - tl.x;
+  int   popup_width = 100;
+  auto  m           = TERM_WIDTH / 2;
+  point tl          = make_point(m - popup_width / 2, UI_TOPCON_VIS_HEIGHT + 2);
+  point br          = make_point(m + popup_width / 2, tl.y + 52);
+  auto  width       = br.x - tl.x;
 
   wid_load = new WidPopup("Game load", tl, br, tile_find_mand("load"), "", false, false);
   wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
   wid_set_on_key_down(wid_load->wid_popup_container, wid_load_key_down);
+
+  {
+    auto  w = wid_new_square_button(wid_load->wid_popup_container, "wid inventory window close");
+    point tl(width - 3, 0);
+    point br(width - 0, 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "ui_icon_close");
+    wid_set_on_mouse_up(w, wid_load_cancel);
+  }
 
   game_load_headers_only = true;
 
@@ -1321,7 +1342,7 @@ void Game::wid_load_select(void)
     Game tmp;
     auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
-    wid_progress_bar((float) slot / (float) UI_WID_SAVE_SLOTS);
+    wid_progress_bar("Scanning...", (float) slot / (float) UI_WID_SAVE_SLOTS);
 
     if (slot == UI_WID_SAVE_SLOTS - 1) {
       tmp_file = saved_dir + "saved-snapshot";
@@ -1368,6 +1389,7 @@ void Game::wid_load_select(void)
   game_load_headers_only = false;
   wid_update(wid_load->wid_text_area->wid_text_area);
 
+  wid_progress_bar_destroy();
   wid_actionbar_init();
   game->change_state(Game::STATE_LOAD_MENU);
 }

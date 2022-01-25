@@ -6,5 +6,5 @@
 
 #pragma once
 
-Widp wid_progress_bar(float pct);
+void wid_progress_bar(const std::string &title, float pct);
 void wid_progress_bar_destroy(void);

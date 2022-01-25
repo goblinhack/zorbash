@@ -7,6 +7,7 @@
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_popup.hpp"
+#include "my_wid_progress_bar.hpp"
 
 static int progress_steps = 32;
 
@@ -19,7 +20,7 @@ void wid_progress_bar_destroy(void)
   wid_progress_bar_window = nullptr;
 }
 
-void wid_progress_bar(float pct)
+void wid_progress_bar(const std::string &title, float pct)
 {
   TRACE_NO_INDENT();
   LOG("Progress bar");
@@ -50,13 +51,13 @@ void wid_progress_bar(float pct)
   {
     TRACE_NO_INDENT();
     auto p = wid_progress_bar_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Loading");
+    auto w = wid_new_square_button(p, "Title");
 
     point tl = make_point(0, y_at);
     point br = make_point(UI_WID_POPUP_WIDTH_WIDE, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "Loading...");
+    wid_set_text(w, title);
   }
 
   y_at = 2;

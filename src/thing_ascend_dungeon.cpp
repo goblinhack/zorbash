@@ -70,7 +70,7 @@ bool Thing::ascend_dungeon(bool force, point3d next_level)
 
   if (! force) {
     if (is_player()) {
-      game->wid_choose_next_dungeons(level, false, true);
+      game->wid_choose_next_dungeons(level, true, false);
       return true;
     }
   }
