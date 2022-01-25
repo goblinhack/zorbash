@@ -70,7 +70,7 @@ bool Level::create_wandering_monster(void)
     }
 
     if (tp) {
-      dbg("DGN: Creating %s", tp->name().c_str());
+      dbg("INF: Creating %s", tp->name().c_str());
       thing_new(tp->name(), point(x, y));
     }
   }

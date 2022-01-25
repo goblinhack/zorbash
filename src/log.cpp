@@ -330,7 +330,7 @@ static void dying_(const char *fmt, va_list args)
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
 
-  snprintf(buf + len, MAXLONGSTR - len, "DYING: ");
+  snprintf(buf + len, MAXLONGSTR - len, "DIE: ");
 
   len = (int) strlen(buf);
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);

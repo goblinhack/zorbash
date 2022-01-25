@@ -96,6 +96,7 @@ void Config::dump(std::string pfx)
   LOG("%s one_pixel_height       %f", pfx.c_str(), one_pixel_height);
   LOG("%s one_pixel_width        %f", pfx.c_str(), one_pixel_width);
   LOG("%s sdl_delay              %u", pfx.c_str(), sdl_delay);
+  LOG("%s snapshot_freq          %u", pfx.c_str(), snapshot_freq);
   LOG("%s sound_volume           %u", pfx.c_str(), sound_volume);
   LOG("%s tile_pix_height        %f", pfx.c_str(), tile_pix_height);
   LOG("%s tile_pix_width         %f", pfx.c_str(), tile_pix_width);

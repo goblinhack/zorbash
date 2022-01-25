@@ -33,7 +33,7 @@ void Game::place_player(void)
     return;
   }
 
-  LOG("DGN: Place player");
+  LOG("INF: Place player");
 
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -84,12 +84,12 @@ void Game::place_player(void)
         // level->thing_new("zorb_pack", point(x + 2, y));
       }
 
-      LOG("DGN: Placed player");
+      LOG("INF: Placed player");
 
       //
       // Zoom the map to the player
       //
-      LOG("DGN: Scroll to player");
+      LOG("INF: Scroll to player");
       level->scroll_map_to_player();
     }
   }

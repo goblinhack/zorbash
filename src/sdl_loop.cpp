@@ -22,7 +22,7 @@
 void sdl_loop(void)
 {
   TRACE_NO_INDENT();
-  LOG("SDL main loop");
+  LOG("SDL: main loop");
 
   SDL_Event events[ 10 ];
   int       found;
@@ -71,7 +71,7 @@ void sdl_loop(void)
   SDL_PumpEvents();
 
   for (; /*ever*/;) {
-    // LOG("SDL tick");
+    // LOG("SDL: tick");
 
     frames++;
     game->frame_count++;

@@ -35,7 +35,8 @@ static std::string get_env(const char *env)
 void py_init(char *argv[])
 {
   TRACE_AND_INDENT();
-  CON("INI: PYVER %s", PYVER);
+
+  CON("INI: Python version is %s", PYVER);
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 

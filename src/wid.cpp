@@ -4130,7 +4130,7 @@ static uint8_t wid_receive_unhandled_input(const SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_screenshot)) {
     sdl_screenshot();
     TOPCON("Screenshot taken.");
-    CON("PLAYER: Screenshot taken");
+    CON("INF: Screenshot taken");
     return true;
   }
 

@@ -738,70 +738,70 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
         game->level->inventory_assign(9, what);
         wid_inventory_select(what);
         game->request_remake_rightbar = true;
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action1)) {
         game->level->inventory_assign(0, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action2)) {
         game->level->inventory_assign(1, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action3)) {
         game->level->inventory_assign(2, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action4)) {
         game->level->inventory_assign(3, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action5)) {
         game->level->inventory_assign(4, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action6)) {
         game->level->inventory_assign(5, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action7)) {
         game->level->inventory_assign(6, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action8)) {
         game->level->inventory_assign(7, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action9)) {
         game->level->inventory_assign(8, what);
         game->request_remake_rightbar = true;
         wid_inventory_select(what);
-        CON("PLAYER: Reassigned item to key.");
+        CON("INF: Reassigned item to key.");
         return true;
       }
       break;

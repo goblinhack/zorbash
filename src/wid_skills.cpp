@@ -74,7 +74,7 @@ static uint8_t wid_skills_key_up(Widp w, const struct SDL_Keysym *key)
         game->tick_begin("drop");
       }
     }
-    CON("PLAYER: Skill choose cancelled");
+    CON("INF: Skill choose cancelled");
     game->change_state(Game::STATE_NORMAL);
     wid_choose_skill_destroy();
     return true;
@@ -101,7 +101,7 @@ static uint8_t wid_skills_key_up(Widp w, const struct SDL_Keysym *key)
               case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
-                  CON("PLAYER: Skill choose cancelled");
+                  CON("INF: Skill choose cancelled");
                   wid_choose_skill_destroy();
                   return true;
                 }

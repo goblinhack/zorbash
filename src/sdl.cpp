@@ -63,7 +63,7 @@ on_sdl_key_grab_t on_sdl_key_grab;
 
 void sdl_fini(void)
 {
-  LOG("SDL fini");
+  LOG("SDL: fini");
   TRACE_AND_INDENT();
 
 #ifdef ENABLE_UI_ASCII_MOUSE
@@ -72,21 +72,21 @@ void sdl_fini(void)
 #endif
 
   if (sdl_init_video) {
-    CON("SDL video quit");
+    CON("SDL: video quit");
     sdl_init_video = 0;
     SDL_VideoQuit();
   }
 
-  CON("SDL delete GL context");
+  CON("SDL: delete GL context");
   SDL_GL_DeleteContext(context);
 
-  CON("SDL destroy window");
+  CON("SDL: destroy window");
   SDL_DestroyWindow(window);
 
-  CON("SDL quit");
+  CON("SDL: quit");
   SDL_Quit();
 
-  CON("SDL fini done");
+  CON("SDL: fini done");
 }
 
 static inline void sdl_list_video_size(void)
@@ -113,7 +113,7 @@ void sdl_joy_rumble(float strength, ts_t ms)
 
 static void sdl_init_rumble(void)
 {
-  LOG("SDL: init rumble:");
+  LOG("SDL: Init rumble:");
   TRACE_AND_INDENT();
 
   if (! haptic) {
@@ -142,7 +142,7 @@ static void sdl_init_rumble(void)
 
 static void sdl_init_joystick(void)
 {
-  LOG("SDL: init input:");
+  LOG("SDL: Init input:");
   TRACE_NO_INDENT();
 
   SDL_GameController *controller = nullptr;
@@ -200,7 +200,7 @@ uint8_t sdl_init(void)
   int video_height;
   int value;
 
-  LOG("SDL: SDL init, version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
+  CON("SDL: Version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
   TRACE_AND_INDENT();
 
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
@@ -209,7 +209,7 @@ uint8_t sdl_init(void)
     return false;
   }
 
-  LOG("SDL: SDL_VideoInit");
+  CON("SDL: Init video");
   if (SDL_VideoInit(0) != 0) {
     SDL_MSG_BOX("SDL_VideoInit failed %s", SDL_GetError());
     DIE("SDL_VideoInit failed %s", SDL_GetError());
@@ -239,7 +239,7 @@ uint8_t sdl_init(void)
     SDL_DisplayMode mode;
     memset(&mode, 0, sizeof(mode));
 
-    LOG("SDL: SDL_GetCurrentDisplayMode");
+    CON("SDL: Init display");
     if (SDL_GetCurrentDisplayMode(0, &mode) < 0) {
       SDL_MSG_BOX("Couldn't set windowed display: %s", SDL_GetError());
       DIE("Couldn't set windowed display: %s", SDL_GetError());
@@ -268,21 +268,21 @@ uint8_t sdl_init(void)
 
   uint32_t video_unused_flags;
 
-  LOG("SDL: Set SDL_WINDOW_OPENGL");
+  CON("SDL: Set SDL_WINDOW_OPENGL");
   video_unused_flags = SDL_WINDOW_OPENGL;
 
   if (game->config.gfx_borderless) {
-    LOG("SDL: Set SDL_WINDOW_BORDERLESS");
+    CON("SDL: Set SDL_WINDOW_BORDERLESS");
     video_unused_flags |= SDL_WINDOW_BORDERLESS;
   }
 
   if (game->config.gfx_fullscreen) {
-    LOG("SDL: Set SDL_WINDOW_FULLSCREEN");
+    CON("SDL: Set SDL_WINDOW_FULLSCREEN");
     video_unused_flags |= SDL_WINDOW_FULLSCREEN;
   }
 
   if (game->config.gfx_fullscreen_desktop) {
-    LOG("SDL: Set SDL_WINDOW_FULLSCREEN_DESKTOP");
+    CON("SDL: Set SDL_WINDOW_FULLSCREEN_DESKTOP");
     video_unused_flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
   }
 
@@ -291,17 +291,17 @@ uint8_t sdl_init(void)
     // For a lo pixel game this makes no sense as the frame
     // buffers are really large and slows things down.
     //
-    LOG("SDL: Calling SDL_GetDisplayDPI");
+    CON("SDL: Calling SDL_GetDisplayDPI");
     float dpi;
     if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
       video_unused_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
-      LOG("SDL: SDL_WINDOW_ALLOW_HIGHDPI");
+      CON("SDL: SDL_WINDOW_ALLOW_HIGHDPI");
     } else {
       ERR("SDL: Cannot enable high DPI");
     }
   }
 
-  LOG("SDL: SDL_CreateWindow");
+  CON("SDL: Create window");
   window = SDL_CreateWindow("zorbash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, video_width, video_height,
                             video_unused_flags);
   if (! window) {
@@ -320,6 +320,7 @@ uint8_t sdl_init(void)
     SDL_GetWindowSize(window, &game->config.window_pix_width, &game->config.window_pix_height);
   }
 
+  CON("SDL: Create OpenGL context");
   LOG("SDL: Call SDL_GL_CreateContext(%dx%d)", game->config.window_pix_width, game->config.window_pix_height);
 
   context = SDL_GL_CreateContext(window);
@@ -362,10 +363,10 @@ uint8_t sdl_init(void)
   LOG("SDL: Call SDL_SetWindowTitle");
   SDL_SetWindowTitle(window, "zorbash");
 
-  LOG("SDL: GL Vendor   : %s", glGetString(GL_VENDOR));
-  LOG("SDL: GL Renderer : %s", glGetString(GL_RENDERER));
-  LOG("SDL: GL Version  : %s", glGetString(GL_VERSION));
-  LOG("SDL: GL Exts     : %s", glGetString(GL_EXTENSIONS));
+  CON("SDL: OpenGL Vendor   : %s", glGetString(GL_VENDOR));
+  CON("SDL: OpenGL Renderer : %s", glGetString(GL_RENDERER));
+  CON("SDL: OpenGL Version  : %s", glGetString(GL_VERSION));
+  LOG("SDL: OpenGL Exts     : %s", glGetString(GL_EXTENSIONS));
 
   SDL_GL_GetAttribute(SDL_GL_RED_SIZE, &value);
   LOG("SDL: Red size    : %d", value);
@@ -1116,10 +1117,10 @@ uint8_t config_gfx_vsync_enable(tokens_t *tokens, void *context)
   }
 
   if (game->config.gfx_vsync_enable) {
-    CON("PLAYER: Vsync enabled");
+    CON("INF: Vsync enabled");
     SDL_GL_SetSwapInterval(1);
   } else {
-    CON("PLAYER: Vsync disabled");
+    CON("INF: Vsync disabled");
     SDL_GL_SetSwapInterval(0);
   }
   GL_ERROR_CHECK();
@@ -1149,7 +1150,7 @@ uint8_t config_errored(tokens_t *tokens, void *context)
 {
   TRACE_NO_INDENT();
   g_errored = false;
-  CON("PLAYER: Errored mode cleared");
+  CON("INF: Errored mode cleared");
   wid_hide(wid_console_window);
   return true;
 }
@@ -1183,7 +1184,7 @@ void sdl_flush_display(bool force)
 {
   TRACE_NO_INDENT();
 
-  IF_DEBUG
+  IF_NODEBUG
   {
     if (! g_opt_quick_start) {
       force = true;

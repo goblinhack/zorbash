@@ -16,6 +16,7 @@ void Game::fini(void)
   things_are_moving = false;
   tick_completed    = 1;
   tick_current      = 1;
+  move_count        = 0;
   TRACE_NO_INDENT();
   config.fini();
   TRACE_NO_INDENT();

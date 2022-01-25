@@ -16,7 +16,7 @@
 bool Level::create_dungeon(point3d at, uint32_t seed)
 {
   TRACE_AND_INDENT();
-  dbg("DGN: Create dungeon");
+  dbg("INF: Create dungeon");
 
   if (player) {
     TOPCON("A new dungeon level is coming into being...");
@@ -30,18 +30,18 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     uint32_t start   = time_get_time_ms();
     auto     dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
     if (dungeon->failed) {
-      log("DGN: create dungeon, failed, retry");
+      log("INF: create dungeon, failed, retry");
       seed++;
       delete dungeon;
       continue;
     }
 
-    log("DGN: Create dungeon layout took %u ms", time_get_time_ms() - start);
+    log("INF: Create dungeon layout took %u ms", time_get_time_ms() - start);
 
     //
     // Check we have a dungeon start
     //
-    dbg2("DGN: Look for entrance");
+    dbg2("INF: Look for entrance");
     {
       for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -58,7 +58,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // The grid is the basis of all reality.
     //
-    dbg2("DGN: Place the grid");
+    dbg2("INF: Place the grid");
     place_the_grid();
     if (g_errored) {
       return false;
@@ -78,7 +78,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
       return false;
     }
 
-    dbg2("DGN: Place random walls");
+    dbg2("INF: Place random walls");
     create_dungeon_place_walls(dungeon, wall_type, 1, 6, 6, tries);
     if (g_errored) {
       return false;
@@ -132,7 +132,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
       return false;
     }
 
-    dbg2("DGN: Place random floors");
+    dbg2("INF: Place random floors");
     {
       auto floor_type = pcg_random_range_inclusive(1, 11);
 
@@ -265,19 +265,19 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
       }
     }
 
-    dbg2("DGN: Place corridors");
+    dbg2("INF: Place corridors");
     create_dungeon_place_corridor(dungeon, "corridor1", 0);
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place bridges");
+    dbg2("INF: Place bridges");
     create_dungeon_place_bridge(dungeon);
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place rocks");
+    dbg2("INF: Place rocks");
     create_dungeon_place_rocks(dungeon, 1, 6, 6, tries);
     if (g_errored) {
       return false;
@@ -327,43 +327,43 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
       return false;
     }
 
-    dbg2("DGN: Place remaining rocks");
+    dbg2("INF: Place remaining rocks");
     create_dungeon_place_remaining_rocks(dungeon, "rock1");
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place remaining walls");
+    dbg2("INF: Place remaining walls");
     create_dungeon_place_remaining_walls(dungeon, wall_type->name());
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place dirt");
+    dbg2("INF: Place dirt");
     place_dirt(dungeon);
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place chasms");
+    dbg2("INF: Place chasms");
     create_dungeon_place_chasm(dungeon, "chasm1");
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place deep water");
+    dbg2("INF: Place deep water");
     create_dungeon_place_deep_water(dungeon, "deep_water1");
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place shallow water");
+    dbg2("INF: Place shallow water");
     create_dungeon_place_place_shallow_water(dungeon, "water1");
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place lava");
+    dbg2("INF: Place lava");
     create_dungeon_place_lava(dungeon, "lava1");
     if (g_errored) {
       return false;
@@ -372,7 +372,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Place braziers first and then update the heatmap
     //
-    dbg2("DGN: Place braziers");
+    dbg2("INF: Place braziers");
     create_dungeon_place_braziers(dungeon, "brazier1");
     if (g_errored) {
       return false;
@@ -381,13 +381,13 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Update the heatmap to avoid placing monsts next to lava
     //
-    dbg2("DGN: Update heatmap");
+    dbg2("INF: Update heatmap");
     update_heatmap();
 
     //
     // Items that have no special placement rules
     //
-    dbg2("DGN: Place items");
+    dbg2("INF: Place items");
     create_dungeon_place_objects_with_normal_placement_rules(dungeon);
     if (g_errored) {
       return false;
@@ -396,7 +396,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Scary non essential stuff
     //
-    dbg2("DGN: Place blood");
+    dbg2("INF: Place blood");
     create_dungeon_place_random_blood(dungeon);
     if (g_errored) {
       return false;
@@ -405,13 +405,13 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Less important stuff
     //
-    dbg2("DGN: Place smoke");
+    dbg2("INF: Place smoke");
     create_dungeon_place_lava_smoke(dungeon);
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place floor deco");
+    dbg2("INF: Place floor deco");
     place_floor_deco(dungeon);
     if (g_errored) {
       return false;
@@ -420,7 +420,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Place some pools of blood
     //
-    dbg2("DGN: Place random floor deco");
+    dbg2("INF: Place random floor deco");
     create_dungeon_place_random_floor_deco(dungeon);
     if (g_errored) {
       return false;
@@ -429,7 +429,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Place some horrible sewers
     //
-    dbg2("DGN: Place sewer pipes");
+    dbg2("INF: Place sewer pipes");
     create_dungeon_place_sewer_pipes(dungeon);
     if (g_errored) {
       return false;
@@ -438,7 +438,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Be evil
     //
-    dbg2("DGN: Place spiderweb");
+    dbg2("INF: Place spiderweb");
     place_spiderweb(dungeon);
     if (g_errored) {
       return false;
@@ -447,7 +447,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Be nice
     //
-    dbg2("DGN: Place random treasure");
+    dbg2("INF: Place random treasure");
     place_random_treasure(dungeon);
     if (g_errored) {
       return false;
@@ -465,7 +465,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Final update of the heatmap to account placement of braziers
     //
-    dbg2("DGN: Final update heatmap");
+    dbg2("INF: Final update heatmap");
 
     //
     // Make sure and place dry grass after this
@@ -475,13 +475,13 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Place some greenery
     //
-    dbg2("DGN: Place dry grass");
+    dbg2("INF: Place dry grass");
     place_dry_grass(dungeon);
     if (g_errored) {
       return false;
     }
 
-    dbg2("DGN: Place wet grass");
+    dbg2("INF: Place wet grass");
     place_wet_grass(dungeon);
     if (g_errored) {
       return false;
@@ -490,7 +490,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Place some brownery
     //
-    dbg2("DGN: Place foilage");
+    dbg2("INF: Place foilage");
     place_foilage(dungeon);
     if (g_errored) {
       return false;
@@ -500,7 +500,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     break;
   }
 
-  log("DGN: Populated dungeon at (%d,%d,%d) took %u ms", at.x, at.y, at.z, time_get_time_ms() - start);
+  log("INF: Populated dungeon at (%d,%d,%d) took %u ms", at.x, at.y, at.z, time_get_time_ms() - start);
   return true;
 }
 
@@ -1035,26 +1035,26 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         }
       }
 
-      dbg("DGN: Creating %s", tp->name().c_str());
+      dbg("INF: Creating %s", tp->name().c_str());
       auto t = thing_new(tp->name(), point(x, y));
       if (t) {
         if (t->is_weapon()) {
           if (r && r->is_secret) {
             t->enchant_randomly();
           }
-          dbg("DGN: Placed weapon '%s'", t->short_text_capitalise().c_str());
+          dbg("INF: Placed weapon '%s'", t->short_text_capitalise().c_str());
         } else if (t->is_treasure_type()) {
           if (r && r->is_secret) {
             t->enchant_randomly();
           }
-          dbg("DGN: Placed treasure '%s'", t->short_text_capitalise().c_str());
+          dbg("INF: Placed treasure '%s'", t->short_text_capitalise().c_str());
         } else if (t->is_bag()) {
-          dbg("DGN: Placed '%s'", t->short_text_capitalise().c_str());
+          dbg("INF: Placed '%s'", t->short_text_capitalise().c_str());
         } else if (t->is_monst()) {
           //
           // Already logged
           //
-          // dbg("DGN: Placed random monster '%s'", t->short_text_capitalise().c_str());
+          // dbg("INF: Placed random monster '%s'", t->short_text_capitalise().c_str());
         } else {
           //
           // Doors etc... don't log, not as interesting
@@ -1578,7 +1578,7 @@ void Level::place_random_treasure(Dungeonp d)
         }
       }
 
-      dbg("DGN: Placed random item '%s'", t->short_text_capitalise().c_str());
+      dbg("INF: Placed random item '%s'", t->short_text_capitalise().c_str());
 
       if (treasure_max-- < 0) {
         return;
@@ -1610,7 +1610,7 @@ void Level::place_random_torches(Dungeonp d)
       //
       (void) thing_new("torch", point(x, y));
 
-      dbg("DGN: Placed random torch");
+      dbg("INF: Placed random torch");
       if (torch_max-- < 0) {
         return;
       }

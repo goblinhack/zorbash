@@ -72,6 +72,7 @@ public:
   uint16_t ascii_gl_width  = {};
   uint32_t music_volume    = {};
   uint32_t sdl_delay       = {};
+  uint32_t snapshot_freq   = {};
   uint32_t sound_volume    = {};
 
   SDL_Keysym key_action0         = {};
@@ -254,6 +255,7 @@ public:
   //
   bool started {}; // Game is afoot
   bool things_are_moving {};
+  bool robot_mode {};
 
   point map_mini_over; // Which tile in the map_mini
 
@@ -264,6 +266,7 @@ public:
 
   point3d current_level; // Where we are in the world.
 
+  uint32_t move_count {};   // How many moves the player has made
   uint16_t frame_count {0}; // Used to know if things have been displayed
   uint32_t fps_value = {};  // Current framerate
   uint32_t tick_completed {1};
@@ -271,7 +274,6 @@ public:
 
   uint8_t inventory_highlight_slot {};
   uint8_t previous_slot {};
-  uint8_t robot_mode {};
   uint8_t skillbox_highlight_slot {};
 
   /////////////////////////////////////////////////////////////////////////

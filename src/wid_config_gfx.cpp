@@ -23,7 +23,7 @@ static void wid_config_gfx_destroy(void)
 static uint8_t wid_config_gfx_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Reload config");
+  CON("INF: Reload config");
   game->load_config();
   sdl_config_update_all();
   wid_config_gfx_destroy();
@@ -34,7 +34,7 @@ static uint8_t wid_config_gfx_cancel(Widp w, int32_t x, int32_t y, uint32_t butt
 static uint8_t wid_config_gfx_save(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Save config");
+  CON("INF: Save config");
   game->save_config();
   wid_config_gfx_destroy();
   game->wid_config_top_menu();
@@ -55,7 +55,7 @@ static uint8_t wid_config_gfx_back(Widp w, int32_t x, int32_t y, uint32_t button
 static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Toggle vsync");
+  CON("INF: Toggle vsync");
   game->config.gfx_vsync_enable = ! game->config.gfx_vsync_enable;
   config_gfx_vsync_update();
   game->wid_config_gfx_select();
@@ -65,7 +65,7 @@ static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int32_t x, int32_t y, 
 static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Toggle gfx_fullscreen");
+  CON("INF: Toggle gfx fullscreen");
   game->config.gfx_fullscreen = ! game->config.gfx_fullscreen;
   if (game->config.gfx_fullscreen) {
     game->config.gfx_fullscreen_desktop = false;
@@ -78,7 +78,7 @@ static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int32_t x, int32_t y, ui
 static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Toggle gfx_fullscreen_desktop");
+  CON("INF: Toggle gfx fullscreen desktop");
   game->config.gfx_fullscreen_desktop = ! game->config.gfx_fullscreen_desktop;
   if (game->config.gfx_fullscreen_desktop) {
     game->config.gfx_fullscreen = false;
@@ -91,7 +91,7 @@ static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int32_t x, int32
 static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Toggle gfx_allow_highdpi");
+  CON("INF: Toggle gfx allow highdpi");
   game->config.gfx_allow_highdpi = ! game->config.gfx_allow_highdpi;
   game->wid_config_gfx_select();
   local_g_need_restart = true;
@@ -101,7 +101,7 @@ static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int32_t x, int32_t y,
 static uint8_t wid_config_gfx_borderless_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Toggle gfx_borderless");
+  CON("INF: Toggle gfx borderless");
   game->config.gfx_borderless = ! game->config.gfx_borderless;
   game->wid_config_gfx_select();
   local_g_need_restart = true;
@@ -111,7 +111,7 @@ static uint8_t wid_config_gfx_borderless_toggle(Widp w, int32_t x, int32_t y, ui
 static uint8_t wid_config_gfx_inverted_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Toggle inverted");
+  CON("INF: Toggle inverted");
   game->config.gfx_inverted = ! game->config.gfx_inverted;
   game->wid_config_gfx_select();
   return true;
@@ -120,7 +120,7 @@ static uint8_t wid_config_gfx_inverted_toggle(Widp w, int32_t x, int32_t y, uint
 static uint8_t wid_config_other_fps_counter_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Toggle fps_counter");
+  CON("INF: Toggle fps counter");
   game->config.fps_counter = ! game->config.fps_counter;
   game->wid_config_gfx_select();
   return true;
@@ -129,7 +129,7 @@ static uint8_t wid_config_other_fps_counter_toggle(Widp w, int32_t x, int32_t y,
 static uint8_t wid_config_gfx_resolution_incr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Increment resolution");
+  CON("INF: Increment resolution");
   auto res    = std::to_string(game->config.window_pix_width) + "x" + std::to_string(game->config.window_pix_height);
   auto n      = SDL_GetNumDisplayModes(0);
   int  chosen = 0;
@@ -162,7 +162,7 @@ static uint8_t wid_config_gfx_resolution_incr(Widp w, int32_t x, int32_t y, uint
 static uint8_t wid_config_gfx_resolution_decr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Decrement resolution");
+  CON("INF: Decrement resolution");
   auto res    = std::to_string(game->config.window_pix_width) + "x" + std::to_string(game->config.window_pix_height);
   auto n      = SDL_GetNumDisplayModes(0);
   int  chosen = 0;

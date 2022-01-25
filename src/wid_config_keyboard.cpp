@@ -189,7 +189,7 @@ void wid_config_keyboard_destroy(void)
 static uint8_t wid_config_keyboard_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Reload config");
+  CON("INF: Reload config");
   game->load_config();
   wid_config_keyboard_destroy();
   if (game->started) {
@@ -206,7 +206,7 @@ static uint8_t wid_config_keyboard_cancel(Widp w, int32_t x, int32_t y, uint32_t
 static uint8_t wid_config_keyboard_save(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  CON("PLAYER: Save config");
+  CON("INF: Save config");
   game->save_config();
   wid_config_keyboard_destroy();
   if (game->started) {

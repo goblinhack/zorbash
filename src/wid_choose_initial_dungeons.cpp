@@ -437,7 +437,6 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
           continue;
         }
 
-        auto alt_at  = l->world_at;
         auto alt_loc = l->world_at + point3d(delta.x, 0, delta.y * 2);
         auto alt_l   = get(game->world.levels, alt_loc.x, alt_loc.y, alt_loc.z);
         if (! alt_l) {
