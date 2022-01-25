@@ -10835,6 +10835,52 @@ def init_projectile_web_tiles():
     )
 
 
+@timeme
+def init_progress_bar():
+    tiles = [
+        "progress_bar.1",
+        "progress_bar.2",
+        "progress_bar.3",
+        "progress_bar.4",
+        "progress_bar.5",
+        "progress_bar.6",
+        "progress_bar.7",
+        "progress_bar.8",
+        "progress_bar.9",
+        "progress_bar.10",
+        "progress_bar.11",
+        "progress_bar.12",
+        "progress_bar.13",
+        "progress_bar.14",
+        "progress_bar.15",
+        "progress_bar.16",
+        "progress_bar.17",
+        "progress_bar.18",
+        "progress_bar.19",
+        "progress_bar.20",
+        "progress_bar.21",
+        "progress_bar.22",
+        "progress_bar.23",
+        "progress_bar.24",
+        "progress_bar.25",
+        "progress_bar.26",
+        "progress_bar.27",
+        "progress_bar.28",
+        "progress_bar.29",
+        "progress_bar.30",
+        "progress_bar.31",
+        "progress_bar.32",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/progress_bar.tga",
+        name="progress_bar",
+        width=256,
+        height=32,
+        arr=tiles,
+    )
+
+
 init_chasm()
 init_claws_tiles()
 init_explosions()
@@ -10874,3 +10920,4 @@ init_ui_rightbar()
 init_ui_tabs()
 init_ui_tile_bg()
 init_weapons_tiles()
+init_progress_bar()
