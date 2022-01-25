@@ -21,6 +21,7 @@
 #include "my_wid_console.hpp"
 #include "my_wid_error.hpp"
 #include "my_wid_popup.hpp"
+#include "my_wid_progress_bar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_topcon.hpp"
 
@@ -748,6 +749,11 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
   my.t.levels         = {};
   my.t.all_thing_ptrs = {};
 
+  int count {};
+  int step {};
+
+  in >> bits(count);
+
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
@@ -762,6 +768,9 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
         }
 
         if (exists) {
+          step++;
+          wid_progress_bar((float) step / (float) count);
+
           CON("DGN: Loading level %d,%d,%d", p.x, p.y, p.z);
           auto l = new Level();
           set(my.t.levels, x, y, z, l);
@@ -781,6 +790,7 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
       }
     }
   }
+  wid_progress_bar_destroy();
   return (in);
 }
 
@@ -1310,6 +1320,8 @@ void Game::wid_load_select(void)
   for (auto slot = 0; slot < UI_WID_SAVE_SLOTS; slot++) {
     Game tmp;
     auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
+
+    wid_progress_bar((float) slot / (float) UI_WID_SAVE_SLOTS);
 
     if (slot == UI_WID_SAVE_SLOTS - 1) {
       tmp_file = saved_dir + "saved-snapshot";

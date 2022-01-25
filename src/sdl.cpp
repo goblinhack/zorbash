@@ -1179,21 +1179,34 @@ uint8_t sdl_user_exit(tokens_t *tokens, void *context)
   return true;
 }
 
-void sdl_flush_display(void)
+void sdl_flush_display(bool force)
 {
   TRACE_NO_INDENT();
-  if (g_opt_no_slow_log_flush) {
-    return;
+
+  IF_DEBUG
+  {
+    if (! g_opt_quick_start) {
+      force = true;
+    }
+  }
+
+  if (! force) {
+    if (g_opt_no_slow_log_flush) {
+      return;
+    }
   }
 
   glEnable(GL_TEXTURE_2D);
   gl_enter_2d_mode();
   wid_display_all();
+  gl_leave_2d_mode();
+  gl_enter_2d_mode(game->config.window_pix_width, game->config.window_pix_height);
   if (game->config.gfx_inverted) {
     glLogicOp(GL_COPY_INVERTED);
     glEnable(GL_COLOR_LOGIC_OP);
   }
-  blit_fbo_ui_pix(FBO_WID);
+  blit_fbo_window_pix(FBO_WID);
+  blit_fbo_unbind();
   if (game->config.gfx_inverted) {
     glLogicOp(GL_COPY);
     glDisable(GL_COLOR_LOGIC_OP);

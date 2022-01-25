@@ -113,7 +113,7 @@ void sdl_exit(void);
 void sdl_fbo_dump(int fbo, const std::string &name);
 void sdl_fbo_load(int fbo, const std::vector< uint8_t > &pixels);
 void sdl_fini(void);
-void sdl_flush_display(void);
+void sdl_flush_display(bool force = false);
 void sdl_joy_rumble(float strength, ts_t ms);
 void sdl_loop(void);
 void sdl_mouse_center(void);

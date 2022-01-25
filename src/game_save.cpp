@@ -18,6 +18,7 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_popup.hpp"
+#include "my_wid_progress_bar.hpp"
 #include "my_wid_topcon.hpp"
 
 WidPopup *wid_save;
@@ -642,6 +643,23 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my)
 {
   TRACE_AND_INDENT();
+
+  int count {};
+  int step {};
+
+  for (auto x = 0; x < LEVELS_ACROSS; ++x) {
+    for (auto y = 0; y < LEVELS_DOWN; ++y) {
+      for (auto z = 0; z < LEVELS_DEEP; ++z) {
+        point3d p(x, y, z);
+        auto    l = get(my.t.levels, x, y, z);
+        if (l) {
+          count++;
+        }
+      }
+    }
+  }
+  out << bits(count);
+
   for (auto x = 0; x < LEVELS_ACROSS; ++x) {
     for (auto y = 0; y < LEVELS_DOWN; ++y) {
       for (auto z = 0; z < LEVELS_DEEP; ++z) {
@@ -649,6 +667,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
         bool    exists;
         auto    l = get(my.t.levels, x, y, z);
         if (l) {
+          step++;
+          wid_progress_bar((float) step / (float) count);
+
           exists = true;
           CON("DGN: Save level %d,%d,%d", p.x, p.y, p.z);
           out << bits(p);
@@ -665,6 +686,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
       }
     }
   }
+  wid_progress_bar_destroy();
   return (out);
 }
 
