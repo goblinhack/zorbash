@@ -5,7 +5,10 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - check level up                                                                                                                             -->
+<!-- - swamp gas                                                                                                                                  -->
+<!-- - swamp wort food                                                                                                                            -->
+<!-- - swamp belcher                                                                                                                                  -->
+<!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 jelly boss, spawns jellys, tries to jump splat the player                                                                           -->
 <!--          swamp wort, gas bloater and swamp tiles that allow 50% movement                                                                     -->
 <!--          boss will eat swamp wort to spawn                                                                                                   -->

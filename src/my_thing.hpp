@@ -1497,8 +1497,8 @@ public:
   int unused_flag15(void);
   int unused_flag160(void);
   int unused_flag161(void);
-  int unused_flag162(void);
-  int unused_flag163(void);
+  int is_biome_swamp(void);
+  int is_biome_dungeon(void);
   int is_treasure(void);
   int is_monst_class_e(void);
   int unused_flag166(void);

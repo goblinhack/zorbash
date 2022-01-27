@@ -61,6 +61,8 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_use_weapons(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
+    mytp.set_is_biome_dungeon(True)
+    mytp.set_is_biome_swamp(True)
     mytp.set_is_bony(True)
     mytp.set_is_carrier_of_treasure_class_a(True)
     mytp.set_is_corpse_on_death(True)

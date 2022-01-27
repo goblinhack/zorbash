@@ -463,8 +463,8 @@ do
       set_unused_flag159 \
       set_unused_flag160 \
       set_unused_flag161 \
-      set_unused_flag162 \
-      set_unused_flag163 \
+      set_is_biome_swamp \
+      set_is_biome_dungeon \
       set_is_treasure \
       set_is_monst_class_e \
       set_unused_flag166 \

@@ -328,8 +328,8 @@ PyObject *level_unused_flag159_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag15_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag160_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag161_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag162_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag163_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_biome_swamp_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_biome_dungeon_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_monst_class_e_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag166_at(PyObject *obj, PyObject *args, PyObject *keywds);

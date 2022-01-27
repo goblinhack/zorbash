@@ -26,6 +26,7 @@ def tp_init(name, text_name):
     mytp.set_is_bag_item_container(True)
     mytp.set_is_bag_item_not_stackable(True)
     mytp.set_is_bag_item(True)
+    mytp.set_is_biome_dungeon(True)
     mytp.set_is_burnable(True)
     mytp.set_is_carrier_of_treasure_class_a(True)
     mytp.set_is_carrier_of_treasure_class_b(True)

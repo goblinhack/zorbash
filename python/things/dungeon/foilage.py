@@ -13,6 +13,7 @@ def tp_init(name, tiles=[]):
     mytp.set_health_initial_dice("1d5")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_attackable_by_player(True)
+    mytp.set_is_biome_dungeon(True)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_foilage(True)

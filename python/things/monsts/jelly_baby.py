@@ -53,6 +53,8 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
+    mytp.set_is_biome_dungeon(True)
+    mytp.set_is_biome_swamp(True)
     mytp.set_is_blood_eater(True)
     mytp.set_is_burnable(True)
     mytp.set_is_crushable(True)

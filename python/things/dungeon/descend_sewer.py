@@ -12,6 +12,8 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_gfx_show_outlined(True)
+    mytp.set_is_biome_dungeon(True)
+    mytp.set_is_biome_swamp(True)
     mytp.set_is_descend_sewer(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_loggable(True)
