@@ -13,12 +13,18 @@
 std::string Level::to_string(void)
 {
   TRACE_NO_INDENT();
-  auto level_no_str = world_at.to_string();
+
+  std::string level_no_str;
+  if (dungeon_walk_order_level_no) {
+    level_no_str = std::to_string(dungeon_walk_order_level_no);
+  } else {
+    level_no_str = world_at.to_string();
+  }
 
   if (is_level_type_sewer) {
-    return ("sewer " + level_no_str);
+    return ("sewer L" + level_no_str);
   } else {
-    return ("level " + level_no_str);
+    return ("dungeon L" + level_no_str);
   }
 }
 

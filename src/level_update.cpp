@@ -17,7 +17,20 @@ void Level::update_new_level(void)
 {
   TRACE_AND_INDENT();
   is_map_mini_valid = false;
-  is_heatmap_valid = false;
+  is_heatmap_valid  = false;
+
+  if (game->level == this) {
+    log("Updating current level");
+  }
+
+  if (player) {
+    log("Update new level with player present");
+    if (game->level != this) {
+      log("Game level is not set yet.");
+    }
+  } else {
+    log("Update new level with no player present");
+  }
 
   scroll_map_to_player_immediately();
   lights_update_new_level();
@@ -36,7 +49,7 @@ void Level::update_same_level(void)
 {
   TRACE_AND_INDENT();
   is_map_mini_valid = false;
-  is_heatmap_valid = false;
+  is_heatmap_valid  = false;
 
   lights_update_same_level();
   dmap_to_player_update();
@@ -49,7 +62,7 @@ void Level::update_same_level_immediately(void)
 {
   TRACE_AND_INDENT();
   is_map_mini_valid = false;
-  is_heatmap_valid = false;
+  is_heatmap_valid  = false;
 
   scroll_map_to_player_immediately();
   lights_update_new_level();

@@ -292,8 +292,14 @@ void Thing::reinit(void)
       DIE("Player exists in multiple places on map, %d,%d and %d,%d", level->player->curr_at.x,
           level->player->curr_at.y, curr_at.x, curr_at.y);
       return;
+      game->level = level;
     }
     level->player = this;
+
+    //
+    // game->level is set in game_load via current_level
+    //
+    dbg("Player placed on new level");
   }
 
   point new_at((int) curr_at.x, (int) curr_at.y);
