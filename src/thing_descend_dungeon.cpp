@@ -75,6 +75,11 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
     next_level = level->world_at + point3d(0, 0, 2);
   }
 
+  if (next_level.z >= LEVELS_DEEP) {
+    fall_into_the_void();
+    return false;
+  }
+
   dbg("Is trying to descend");
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {

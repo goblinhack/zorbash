@@ -117,14 +117,16 @@ void Thing::msg(const char *fmt, ...)
     return;
   }
 
-  int distance = get_distance_to_player();
-  if (distance >= DMAP_IS_PASSABLE) {
-    log("Too far for player to see msg:");
-    TRACE_AND_INDENT();
-    va_start(args, fmt);
-    log_(fmt, args);
-    va_end(args);
-    return;
+  if (! is_player()) {
+    int distance = get_distance_to_player();
+    if (distance >= DMAP_IS_PASSABLE) {
+      log("Too far for player to see msg:");
+      TRACE_AND_INDENT();
+      va_start(args, fmt);
+      log_(fmt, args);
+      va_end(args);
+      return;
+    }
   }
 
   va_start(args, fmt);
