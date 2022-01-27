@@ -172,21 +172,23 @@ bool Thing::fall_to_next_level(void)
     fall_to = level->world_at + point3d(0, 0, 1);
   }
 
+  if (fall_to.z >= LEVELS_DEEP) {
+    fall_into_the_void();
+    return false;
+  }
+
   auto l = get(game->world.levels, fall_to.x, fall_to.y, fall_to.z);
   if (! l) {
     if (! game->init_level(fall_to, level->grid_at + point(0, 1), level->difficulty_depth + 1,
                            level->dungeon_walk_order_level_no + 1)) {
-      if (is_player()) {
-        msg("You fall into nothingness!");
-      }
-      dead("Nowhere to fall to");
+      fall_into_the_void();
       return false;
     }
 
     l = get(game->world.levels, fall_to.x, fall_to.y, fall_to.z);
     if (! l) {
       err("No level");
-      dead("Nowhere to fall to");
+      fall_into_the_void();
       return false;
     }
   }

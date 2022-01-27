@@ -1,18 +1,36 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- when putting on armor it only syncs after 1 move                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!-- - check level up                                                                                                                             -->
-<!-- - hub shop levels                                                                                                                            -->
-<!-- - basecamp level?                                                                                                                           -->
+<!-- - boss 1 jelly boss, spawns jellys, tries to jump splat the player                                                                           -->
+<!--          swamp wort, gas bloater and swamp tiles that allow 50% movement                                                                     -->
+<!--          boss will eat swamp wort to spawn                                                                                                   -->
+<!--          explode bog tiles to kill boss                                                                                                      -->
+<!-- - boss 2 rat king boss, sewer like level with rats coming out of the walls                                                                   -->
+<!-- - boss 3 goblin king boss, will be happy if the rat king crown is given                                                                      -->
+<!-- - boss 4 swamp blink toad, can teleport and launch a stream of goo                                                                           -->
+<!-- - boss 5 water level, kraken? can grab and throw the player                                                                                  -->
+<!-- - boss 6 undead mummy king, pyramid shaped level, ankh of life restor given                                                                  -->
+<!-- - boss 7 face a clone of yourself                                                                                                            -->
+<!-- - boss 8 Place crystals at the alter of Zorb. This opens a vault. Go inside and battle zorbash.                                              -->
+<!-- -        If you win, the gods turn on you and you get to replaced Zorbash.                                                                   -->
+<!-- -        You spare zorbash, he regenerates, you run out and destroy the alter and the demi gods, return to home.                             -->
+<!-- -        The curse was that the alter of Zorb would grant demi god status to any that sacrificed one that was dear to them.                  -->
+<!-- -        This curse must be renewed many times. Zorbash, -ash means servant of Zorb was such a team member who was sacrificed.               -->
+<!-- -        The only way to break the curse is to destroy the crystals. Zorbash will then be freed from servitude.                              -->
 <!-- - different sound for bosses                                                                                                                 -->
-<!-- - level fall through to special level ?                                                                                                      -->
 <!-- - crystal collection                                                                                                                         -->
-<!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
+<!-- ------                                                                                                                                       -->
+<!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- - char selection                                                                                                                             -->
+<!-- - level fall through to special level ?                                                                                                      -->
+<!-- - hub shop levels                                                                                                                            -->
+<!-- - basecamp level?                                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- UI                                                                                                                                           -->

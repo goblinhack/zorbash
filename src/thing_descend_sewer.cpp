@@ -76,6 +76,11 @@ bool Thing::descend_sewer(void)
 
   auto next_level = level->world_at + point3d(0, 0, 1);
 
+  if (next_level.z >= LEVELS_DEEP) {
+    fall_into_the_void();
+    return false;
+  }
+
   dbg("Is trying to descend to the sewer");
   auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
   if (! l) {

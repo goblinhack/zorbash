@@ -1795,7 +1795,6 @@ public:
   void animate();
   void avoid_tick(void);
   void barrel_tick();
-  void map_beast_check(void);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
   void blit_floor_chasm(point tl, point br, const ThingTiles *tiles);
@@ -1874,6 +1873,7 @@ public:
   void err_(const char *fmt, va_list args); // compile error without
   void fadeup(float fadeup_height, float fadeup_fade, ts_t ms);
   void fall(float fall_height, ts_t ms);
+  void fall_into_the_void(void);
   void fire_tick();
   void gc(void);
   void get_equip_use_offset(int *dx, int *dy, int equip);
@@ -1909,6 +1909,8 @@ public:
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void log_(const char *fmt, va_list args); // compile error without
   void lunge(point tt);
+  void map_beast_check(void);
+  void map_treasure_check(void);
   void move_carried_items_immediately(void);
   void move_carried_items(void);
   void move_delta(point);
@@ -1970,7 +1972,6 @@ public:
   void rotting(void);
   void score_add(Thingp victim);
   void secret_door_tick();
-  void set_map_beast_count(int);
   void set_born(point3d);
   void set_bounce_count(int);
   void set_bounce_fade(float);
@@ -1986,13 +1987,14 @@ public:
   void set_interpolated_at(fpoint v);
   void set_leader(Thingp leader);
   void set_lunge_to(point);
+  void set_map_beast_count(int);
+  void set_map_treasure_count(int);
   void set_mob(Thingp mob);
   void set_msg(const std::string &);
   void set_owner(Thingp owner);
   void set_score(int);
   void set_spawned_owner(Thingp spawner_owner);
   void set_submerged_offset(int);
-  void set_map_treasure_count(int);
   void set_wobble(float);
   void show_botcon_description(void);
   void skill_activate(Thingp what);
@@ -2004,7 +2006,6 @@ public:
   void tick();
   void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon_(const char *fmt, va_list args); // compile error without
-  void map_treasure_check(void);
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
   void unleash_spawners_things(void);
