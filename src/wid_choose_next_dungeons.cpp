@@ -386,20 +386,20 @@ static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint
 
     LOG("Chose level at %d,%d", x, y);
 
-    auto l = ctx->levels[ y ][ x ];
-    if (! l) {
+    auto next_level = ctx->levels[ y ][ x ];
+    if (! next_level) {
       LOG("No level at %d,%d", x, y);
       return true;
     }
 
     if (ctx->is_ascending) {
-      LOG("Ascend to %s", l->world_at.to_string().c_str());
-      player->ascend_dungeon(true, l->world_at);
+      LOG("Ascend to %s", next_level->world_at.to_string().c_str());
+      player->ascend_dungeon(true, next_level->world_at);
     }
 
     if (ctx->is_descending) {
-      LOG("Descend to %s", l->world_at.to_string().c_str());
-      player->descend_dungeon(true, l->world_at);
+      LOG("Descend to %s", next_level->world_at.to_string().c_str());
+      player->descend_dungeon(true, next_level->world_at);
     }
 
     wid_choose_next_dungeons_destroy(wid_get_top_parent(w));

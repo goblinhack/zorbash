@@ -745,13 +745,14 @@ static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int
   int lx    = (focus & 0xff);
   int ly    = (focus & 0xff00) >> 8;
 
-  auto level_at = wid_choose_dungeon_grid_to_level_coord(lx, ly);
-  auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
-  if (! l) {
+  auto level_at    = wid_choose_dungeon_grid_to_level_coord(lx, ly);
+  auto start_level = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+  if (! start_level) {
     return true;
   }
 
-  game->level           = l;
+  game->level           = start_level;
+  game->current_level   = level_at;
   game->start_requested = true;
 
   return true;

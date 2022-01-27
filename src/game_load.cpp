@@ -968,7 +968,10 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   in >> bits(s);
   wid_console_deserialize(s);
 
+  LOG("Current level set to %s", my.t.current_level.to_string().c_str());
   my.t.level = get(my.t.world.levels, my.t.current_level.x, my.t.current_level.y, my.t.current_level.z);
+  my.t.level->log("This is the current level");
+
   return (in);
 }
 
@@ -1101,6 +1104,12 @@ bool Game::load(std::string file_to_load, class Game &target)
   }
 
   if (! game_load_headers_only) {
+    if (! game->level) {
+      ERR("No level set as current");
+      return false;
+    }
+    game->level->log("This level is set as current");
+
     wid_visible(wid_topcon_window);
     wid_visible(wid_botcon_window);
     wid_rightbar_fini();
