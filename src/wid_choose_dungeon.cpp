@@ -74,6 +74,8 @@ void wid_show_dungeon_contents(Levelp l)
   }
 
   wid_set_color(wid_level_contents->wid_popup_container, WID_COLOR_BG, GRAY30);
+  wid_lower(wid_level_contents->wid_popup_container);
+  wid_set_do_not_raise(wid_level_contents->wid_popup_container, true);
 }
 
 point3d wid_choose_dungeon_grid_to_level_coord(int x, int y)

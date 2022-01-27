@@ -8,7 +8,7 @@
 
 void Thing::fall_into_the_void(void)
 {
-  if (is_dead()) {
+  if (is_dead) {
     return;
   }
 
