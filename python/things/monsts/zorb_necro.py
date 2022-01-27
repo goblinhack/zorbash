@@ -57,6 +57,7 @@ def tp_init(name, text_name):
     mytp.set_text_description("A master of the darkest arts.")
     mytp.set_is_carrier_of_treasure_class_b(True)
     mytp.set_is_monst_class_b(True)
+    mytp.set_is_biome_dungeon(True)
     mytp.set_stat_str(6)
     mytp.set_distance_avoid(5)
     mytp.set_health_initial_dice("2d3+4")

@@ -865,11 +865,11 @@ class Tp:
     def set_unused_flag161(self, value):
         my.tp_set_unused_flag161(self, value)
 
-    def set_unused_flag162(self, value):
-        my.tp_set_unused_flag162(self, value)
+    def set_is_biome_swamp(self, value):
+        my.tp_set_is_biome_swamp(self, value)
 
-    def set_unused_flag163(self, value):
-        my.tp_set_unused_flag163(self, value)
+    def set_is_biome_dungeon(self, value):
+        my.tp_set_is_biome_dungeon(self, value)
 
     def set_is_treasure(self, value):
         my.tp_set_is_treasure(self, value)

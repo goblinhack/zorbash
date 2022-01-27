@@ -16,6 +16,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     mytp = tp.Tp(name, "bridge")
     mytp.set_gfx_shown_in_bg(True)
     mytp.set_is_able_to_fall(True)
+    mytp.set_is_biome_dungeon(True)
     mytp.set_is_bridge(True)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)

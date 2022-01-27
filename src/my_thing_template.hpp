@@ -507,8 +507,8 @@ private:
   int _unused_flag16 {};
   int _unused_flag160 {};
   int _unused_flag161 {};
-  int _unused_flag162 {};
-  int _unused_flag163 {};
+  int _is_biome_swamp {};
+  int _is_biome_dungeon {};
   int _is_treasure {};
   int _is_monst_class_e {};
   int _unused_flag166 {};
@@ -1387,8 +1387,8 @@ public:
   int unused_flag15(void) const { return _unused_flag15; }
   int unused_flag160(void) const { return _unused_flag160; }
   int unused_flag161(void) const { return _unused_flag161; }
-  int unused_flag162(void) const { return _unused_flag162; }
-  int unused_flag163(void) const { return _unused_flag163; }
+  int is_biome_swamp(void) const { return _is_biome_swamp; }
+  int is_biome_dungeon(void) const { return _is_biome_dungeon; }
   int is_treasure(void) const { return _is_treasure; }
   int is_monst_class_e(void) const { return _is_monst_class_e; }
   int unused_flag166(void) const { return _unused_flag166; }
@@ -2015,8 +2015,8 @@ public:
   void set_unused_flag15(int v) { _unused_flag15 = v; }
   void set_unused_flag160(int v) { _unused_flag160 = v; }
   void set_unused_flag161(int v) { _unused_flag161 = v; }
-  void set_unused_flag162(int v) { _unused_flag162 = v; }
-  void set_unused_flag163(int v) { _unused_flag163 = v; }
+  void set_is_biome_swamp(int v) { _is_biome_swamp = v; }
+  void set_is_biome_dungeon(int v) { _is_biome_dungeon = v; }
   void set_is_treasure(int v) { _is_treasure = v; }
   void set_is_monst_class_e(int v) { _is_monst_class_e = v; }
   void set_unused_flag166(int v) { _unused_flag166 = v; }

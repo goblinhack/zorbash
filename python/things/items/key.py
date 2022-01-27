@@ -11,6 +11,7 @@ def key_init(name, text_name):
     mytp.set_gold_value_dice("10")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_auto_collect_item(True)
+    mytp.set_is_biome_dungeon(True)
     mytp.set_is_collectable(True)
     mytp.set_is_collect_as_keys(True)
     mytp.set_is_interesting(True)

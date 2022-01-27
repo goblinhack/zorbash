@@ -8,6 +8,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gold_value_dice("1d300+100")
     mytp.set_is_able_to_fall(True)
+    mytp.set_is_biome_dungeon(True)
     mytp.set_is_collectable(True)
     mytp.set_is_collected_as_gold(True)
     mytp.set_is_described_when_hovering_over(True)

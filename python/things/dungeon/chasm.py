@@ -9,6 +9,7 @@ import tp
 def chasm_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
     mytp.set_ai_obstacle(True)
+    mytp.set_is_biome_dungeon(True)
     mytp.set_is_chasm(True)
     mytp.set_is_cursor_can_hover_over_x2_click(True)
     mytp.set_is_cursor_path_hazard_for_player(True)

@@ -8,6 +8,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_shown_in_bg(True)
+    mytp.set_is_biome_dungeon(True)
+    mytp.set_is_biome_swamp(True)
     mytp.set_is_critical_to_level(True)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_descend_dungeon(True)

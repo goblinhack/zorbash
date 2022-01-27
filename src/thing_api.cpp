@@ -2364,16 +2364,16 @@ int Thing::unused_flag161(void)
   return (tp()->unused_flag161());
 }
 
-int Thing::unused_flag162(void)
+int Thing::is_biome_swamp(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag162());
+  return (tp()->is_biome_swamp());
 }
 
-int Thing::unused_flag163(void)
+int Thing::is_biome_dungeon(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag163());
+  return (tp()->is_biome_dungeon());
 }
 
 int Thing::is_treasure(void)

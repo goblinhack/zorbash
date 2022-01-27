@@ -1020,6 +1020,12 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         continue;
       }
 
+      if (! tp->is_biome_dungeon()) {
+        // fix when swamp added
+        err("INF: Dropping %s for dungeon biome", tp->name().c_str());
+        continue;
+      }
+
       //
       // Don't place items where they would catch fire immediately.
       //

@@ -28,6 +28,8 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_walk_through_walls(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
+    mytp.set_is_biome_dungeon(True)
+    mytp.set_is_biome_swamp(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_ethereal(True)
     mytp.set_is_fearless(True)

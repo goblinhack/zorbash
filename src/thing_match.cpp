@@ -1136,10 +1136,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag161() && (what == "unused_flag161")) {
     return true;
   }
-  if (unused_flag162() && (what == "unused_flag162")) {
+  if (is_biome_swamp() && (what == "is_biome_swamp")) {
     return true;
   }
-  if (unused_flag163() && (what == "unused_flag163")) {
+  if (is_biome_dungeon() && (what == "is_biome_dungeon")) {
     return true;
   }
   if (is_treasure() && (what == "is_treasure")) {
@@ -2418,11 +2418,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag161") {
     return &Thing::unused_flag161;
   }
-  if (what == "unused_flag162") {
-    return &Thing::unused_flag162;
+  if (what == "is_biome_swamp") {
+    return &Thing::is_biome_swamp;
   }
-  if (what == "unused_flag163") {
-    return &Thing::unused_flag163;
+  if (what == "is_biome_dungeon") {
+    return &Thing::is_biome_dungeon;
   }
   if (what == "is_treasure") {
     return &Thing::is_treasure;
