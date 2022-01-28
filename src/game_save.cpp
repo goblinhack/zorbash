@@ -465,6 +465,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->ts_fade_out_begin);
   out << bits(my.t->ts_fade_in_begin);
 
+  out << bits(my.t->gas_swamp);
+
   out << bits(my.t->_is_light_blocker);
   out << bits(my.t->_is_light_blocker_for_monst);
   out << bits(my.t->_is_lit_ever);

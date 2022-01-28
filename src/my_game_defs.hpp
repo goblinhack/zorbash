@@ -18,6 +18,11 @@
 #define MAX_GRID_CHUNK_HEIGHT      DUNGEONS_GRID_CHUNK_HEIGHT
 #define MAX_GRID_CHUNK_WIDTH       DUNGEONS_GRID_CHUNK_WIDTH
 
+//
+// How granular gas is. This divides up a single tile.
+//
+#define DUNGEON_GAS_RESOLUTION 4
+
 #define LEVEL_FADE_IN_MS   500 // Level start fade animation time
 #define LEVEL_FADE_OUT_MS  500 // Level end fade animation time
 #define LEVELS_MONST_COUNT 100 // Monsters max per level. Want more? You're mad...

@@ -508,6 +508,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->ts_fade_out_begin);
   in >> bits(l->ts_fade_in_begin);
 
+  in >> bits(my.t->gas_swamp);
+
   in >> bits(my.t->_is_light_blocker);
   in >> bits(my.t->_is_light_blocker_for_monst);
   in >> bits(my.t->_is_lit_ever);
