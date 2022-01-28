@@ -8,8 +8,8 @@ def tp_init(name, text_name):
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_is_able_to_fall(True)
-    mytp.set_is_blood_splatter(True)
     mytp.set_is_loggable(True)
+    mytp.set_is_red_splatter(True)
     mytp.set_is_removeable_if_out_of_slots(True)
     mytp.set_is_tmp_thing(True)
     mytp.set_text_a_or_an("a")
@@ -42,7 +42,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="blood_splatter", text_name="blood splatter")
+    tp_init(name="red_splatter", text_name="blood splatter")
 
 
 init()

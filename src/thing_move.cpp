@@ -288,7 +288,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       //
       if (! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
         if (is_player()) {
-          if (level->is_spiderweb(curr_at.x, curr_at.y)) {
+          if (level->is_barrel(curr_at.x, curr_at.y)) {
             msg("You are trapped under a barrel!");
             game->tick_begin("trapped in a barrel");
           } else {
@@ -468,6 +468,11 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   if (curr_at != future_pos) {
+    //
+    // Trail of blood?
+    //
+    place_blood();
+
     if (up) {
       dbg("Try to move up; collision check");
     } else if (down) {

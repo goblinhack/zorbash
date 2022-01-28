@@ -45,9 +45,15 @@ bool Thing::can_eat(const Thingp itp)
       return true;
     }
   }
-  if (me->is_blood_eater()) {
-    if (itp->is_blood()) {
-      dbg("Can eat blood: %s", itp->to_short_string().c_str());
+  if (me->is_red_blood_eater()) {
+    if (itp->is_red_blood()) {
+      dbg("Can eat red blood: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (me->is_green_blood_eater()) {
+    if (itp->is_green_blood()) {
+      dbg("Can eat green blood: %s", itp->to_short_string().c_str());
       return true;
     }
   }
@@ -101,8 +107,14 @@ bool Tp::can_eat(const Thingp itp)
       return true;
     }
   }
-  if (is_blood_eater()) {
-    if (itp->is_blood()) {
+  if (is_red_blood_eater()) {
+    if (itp->is_red_blood()) {
+      dbg("Can eat blood: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (is_green_blood_eater()) {
+    if (itp->is_green_blood()) {
       dbg("Can eat blood: %s", itp->to_short_string().c_str());
       return true;
     }
@@ -173,8 +185,8 @@ bool Thing::eat(Thingp victim)
 
   if (attack_eater()) {
     if ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
-        (is_blood_eater() && victim->is_blood()) || (is_food_eater() && victim->is_food()) ||
-        (is_treasure_eater() && victim->is_treasure_type()) ||
+        (is_red_blood_eater() && victim->is_red_blood()) || (is_green_blood_eater() && victim->is_green_blood()) ||
+        (is_food_eater() && victim->is_food()) || (is_treasure_eater() && victim->is_treasure_type()) ||
         (is_item_magical_eater() && victim->is_item_magical()) || (is_potion_eater() && victim->is_potion())) {
 
       //
@@ -225,8 +237,8 @@ bool Thing::consume(Thingp victim)
 
   if (attack_eater()) {
     if ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
-        (is_blood_eater() && victim->is_blood()) || (is_food_eater() && victim->is_food()) ||
-        (is_treasure_eater() && victim->is_treasure_type()) ||
+        (is_red_blood_eater() && victim->is_red_blood()) || (is_green_blood_eater() && victim->is_green_blood()) ||
+        (is_food_eater() && victim->is_food()) || (is_treasure_eater() && victim->is_treasure_type()) ||
         (is_item_magical_eater() && victim->is_item_magical()) || (is_potion_eater() && victim->is_potion())) {
 
       dbg("Consumes %s", victim->text_the().c_str());
@@ -234,7 +246,7 @@ bool Thing::consume(Thingp victim)
       if (! is_player()) {
         if (get_distance_to_player() < DMAP_IS_PASSABLE) {
           if (victim->is_meat()) {
-            level->thing_new(tp_random_blood_splatter()->name(), curr_at);
+            level->thing_new(tp_random_red_splatter()->name(), curr_at);
           } else if (victim->is_pink_blooded()) {
             level->thing_new(tp_random_pink_splatter()->name(), curr_at);
           } else if (victim->is_red_blooded()) {

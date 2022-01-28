@@ -198,17 +198,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   }
 
   if (! level->is_being_destroyed) {
-    if (is_bleeder()) {
-      int splatters = pcg_random_range(2, 10);
-      for (int splatter = 0; splatter < splatters; splatter++) {
-        auto tpp = tp_random_blood();
-        (void) level->thing_new(tpp, curr_at);
-        if (unlikely(! tpp)) {
-          err("Could not place blood");
-          break;
-        }
-      }
-    }
+    place_blood(true);
 
     //
     // Add to the hiscore table?

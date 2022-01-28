@@ -238,7 +238,7 @@ void Charmap::init_charmaps(void)
   char_index  = Charmap::BLOOD;
   c           = &all_charmaps[ char_index ];
   c->c        = char_index;
-  c->is_blood = true;
+  c->is_red_blood = true;
 
   char_index    = Charmap::BRAZIER;
   c             = &all_charmaps[ char_index ];

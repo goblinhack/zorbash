@@ -42,9 +42,13 @@ void Thing::level_push(void)
     i_set_is_acid = true;
     level->set_is_acid(mx, my);
   }
-  if (is_blood()) {
-    i_set_is_blood = true;
-    level->set_is_blood(mx, my);
+  if (is_red_blood()) {
+    i_set_is_red_blood = true;
+    level->set_is_red_blood(mx, my);
+  }
+  if (is_green_blood()) {
+    i_set_is_green_blood = true;
+    level->set_is_green_blood(mx, my);
   }
   if (is_chasm()) {
     i_set_is_chasm = true;

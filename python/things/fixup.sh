@@ -142,9 +142,9 @@ do
       set_is_barrel \
       set_is_map_beast \
       set_is_bleeder \
-      set_is_blood \
-      set_is_blood_eater \
-      set_is_blood_splatter \
+      set_is_red_blood \
+      set_is_red_blood_eater \
+      set_is_red_splatter \
       set_is_bones \
       set_is_bony \
       set_is_brazier \
@@ -462,12 +462,12 @@ do
       set_unused_flag158 \
       set_unused_flag159 \
       set_unused_flag160 \
-      set_unused_flag161 \
+      set_is_green_blood \
       set_is_biome_swamp \
       set_is_biome_dungeon \
       set_is_treasure \
       set_is_monst_class_e \
-      set_unused_flag166 \
+      set_is_green_blood_eater \
       set_is_mob_challenge_class_b \
       set_is_mob_challenge_class_a \
       set_is_monst_class_d \

@@ -221,13 +221,22 @@ bool Thing::matches(const std::string &what)
   if (is_bleeder() && (what == "is_bleeder")) {
     return true;
   }
-  if (is_blood_eater() && (what == "is_blood_eater")) {
+  if (is_red_blood_eater() && (what == "is_red_blood_eater")) {
     return true;
   }
-  if (is_blood_splatter() && (what == "is_blood_splatter")) {
+  if (is_red_splatter() && (what == "is_red_splatter")) {
     return true;
   }
-  if (is_blood() && (what == "is_blood")) {
+  if (is_red_blood() && (what == "is_red_blood")) {
+    return true;
+  }
+  if (is_green_blood_eater() && (what == "is_green_blood_eater")) {
+    return true;
+  }
+  if (is_green_splatter() && (what == "is_green_splatter")) {
+    return true;
+  }
+  if (is_green_blood() && (what == "is_green_blood")) {
     return true;
   }
   if (is_bones() && (what == "is_bones")) {
@@ -1133,7 +1142,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag160() && (what == "unused_flag160")) {
     return true;
   }
-  if (unused_flag161() && (what == "unused_flag161")) {
+  if (is_green_blood() && (what == "is_green_blood")) {
     return true;
   }
   if (is_biome_swamp() && (what == "is_biome_swamp")) {
@@ -1148,7 +1157,7 @@ bool Thing::matches(const std::string &what)
   if (is_monst_class_e() && (what == "is_monst_class_e")) {
     return true;
   }
-  if (unused_flag166() && (what == "unused_flag166")) {
+  if (is_green_blood_eater() && (what == "is_green_blood_eater")) {
     return true;
   }
   if (is_mob_challenge_class_b() && (what == "is_mob_challenge_class_b")) {
@@ -1509,14 +1518,23 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_bleeder") {
     return &Thing::is_bleeder;
   }
-  if (what == "is_blood_eater") {
-    return &Thing::is_blood_eater;
+  if (what == "is_red_blood_eater") {
+    return &Thing::is_red_blood_eater;
   }
-  if (what == "is_blood") {
-    return &Thing::is_blood;
+  if (what == "is_red_blood") {
+    return &Thing::is_red_blood;
   }
-  if (what == "is_blood_splatter") {
-    return &Thing::is_blood_splatter;
+  if (what == "is_red_splatter") {
+    return &Thing::is_red_splatter;
+  }
+  if (what == "is_green_blood_eater") {
+    return &Thing::is_green_blood_eater;
+  }
+  if (what == "is_green_blood") {
+    return &Thing::is_green_blood;
+  }
+  if (what == "is_green_splatter") {
+    return &Thing::is_green_splatter;
   }
   if (what == "is_bones") {
     return &Thing::is_bones;
@@ -2415,8 +2433,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag160") {
     return &Thing::unused_flag160;
   }
-  if (what == "unused_flag161") {
-    return &Thing::unused_flag161;
+  if (what == "is_green_blood") {
+    return &Thing::is_green_blood;
   }
   if (what == "is_biome_swamp") {
     return &Thing::is_biome_swamp;
@@ -2430,8 +2448,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_monst_class_e") {
     return &Thing::is_monst_class_e;
   }
-  if (what == "unused_flag166") {
-    return &Thing::unused_flag166;
+  if (what == "is_green_blood_eater") {
+    return &Thing::is_green_blood_eater;
   }
   if (what == "is_mob_challenge_class_b") {
     return &Thing::is_mob_challenge_class_b;

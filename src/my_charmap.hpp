@@ -69,7 +69,8 @@ public:
   };
 
   char c;
-  bool is_blood {false};
+  bool is_red_blood {false};
+  bool is_green_blood {false};
   bool is_chasm {false};
   bool is_corridor {false};
   bool is_bridge {false};

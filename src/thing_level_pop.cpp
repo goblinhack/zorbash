@@ -25,9 +25,13 @@ void Thing::level_pop(void)
     i_set_is_acid = false;
     level->unset_is_acid(mx, my);
   }
-  if (i_set_is_blood) {
-    i_set_is_blood = false;
-    level->unset_is_blood(mx, my);
+  if (i_set_is_red_blood) {
+    i_set_is_red_blood = false;
+    level->unset_is_red_blood(mx, my);
+  }
+  if (i_set_is_green_blood) {
+    i_set_is_green_blood = false;
+    level->unset_is_green_blood(mx, my);
   }
   if (i_set_is_chasm) {
     i_set_is_chasm = false;

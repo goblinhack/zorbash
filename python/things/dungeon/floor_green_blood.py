@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
+    mytp.set_collision_hit_priority(2)
     mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated_can_vflip(True)
     mytp.set_gfx_animated(True)
@@ -11,13 +12,13 @@ def tp_init(name, text_name):
     mytp.set_health_initial_dice("1d4")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_attackable_by_monst(True)
-    mytp.set_is_blood(True)
     mytp.set_is_interesting(True)
+    mytp.set_is_red_blood(True)
     mytp.set_is_removeable_if_out_of_slots(True)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d4")
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("An artwork comprised mainly of blood.")
+    mytp.set_text_description("An artwork comprised mainly of green blood.")
     mytp.set_z_depth(my.MAP_DEPTH_FLOOR2)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
@@ -30,14 +31,14 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="floor_blood1", text_name="pool of blood")
-    tp_init(name="floor_blood2", text_name="pool of blood")
-    tp_init(name="floor_blood3", text_name="pool of blood")
-    tp_init(name="floor_blood4", text_name="pool of blood")
-    tp_init(name="floor_blood5", text_name="pool of blood")
-    tp_init(name="floor_blood6", text_name="pool of blood")
-    tp_init(name="floor_blood7", text_name="pool of blood")
-    tp_init(name="floor_blood8", text_name="pool of blood")
+    tp_init(name="floor_green_blood1", text_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood2", text_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood3", text_name="pool of fluorescent blood with bits in it")
+    tp_init(name="floor_green_blood4", text_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood5", text_name="pool of yucky fluorescent blood")
+    tp_init(name="floor_green_blood6", text_name="pool of icky fluorescent blood")
+    tp_init(name="floor_green_blood7", text_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood8", text_name="pool of fluorescent blood")
 
 
 init()

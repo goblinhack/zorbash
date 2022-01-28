@@ -397,7 +397,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     // Scary non essential stuff
     //
     dbg2("INF: Place blood");
-    create_dungeon_place_random_blood(dungeon);
+    create_dungeon_place_random_red_blood(dungeon);
     if (g_errored) {
       return false;
     }
@@ -795,8 +795,8 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
 
       point p(x, y);
 
-      if (d->is_blood(x, y)) {
-        tp = tp_random_blood();
+      if (d->is_red_blood(x, y)) {
+        tp = tp_random_red_blood();
       }
       if (d->is_door(x, y)) {
         tp = tp_random_door();
@@ -1157,12 +1157,12 @@ void Level::create_dungeon_place_braziers(Dungeonp d, const std::string &what)
   }
 }
 
-void Level::create_dungeon_place_random_blood(Dungeonp d)
+void Level::create_dungeon_place_random_red_blood(Dungeonp d)
 {
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (is_blood(x, y)) {
+      if (is_red_blood(x, y)) {
         continue;
       }
 
@@ -1178,11 +1178,11 @@ void Level::create_dungeon_place_random_blood(Dungeonp d)
         continue;
       }
 
-      if (pcg_random_range(0, 1000) > 20) {
+      if (pcg_random_range(0, 1000) > 50) {
         continue;
       }
 
-      auto tp = tp_random_blood();
+      auto tp = tp_random_red_blood();
       (void) thing_new(tp->name(), point(x, y));
     }
   }
@@ -1245,7 +1245,7 @@ void Level::place_floor_deco(Dungeonp d)
         continue;
       }
 
-      if (d->is_food(x, y) || d->is_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
+      if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_wand(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
           d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||
@@ -1288,7 +1288,7 @@ void Level::create_dungeon_place_random_floor_deco(Dungeonp d)
         continue;
       }
 
-      if (d->is_food(x, y) || d->is_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
+      if (d->is_food(x, y) || d->is_red_blood(x, y) || d->is_door(x, y) || d->is_ascend_dungeon(x, y) ||
           d->is_descend_dungeon(x, y) || d->is_mob_any(x, y) || d->is_key(x, y) || d->is_potion(x, y) ||
           d->is_barrel(x, y) || d->is_wand(x, y) || d->is_ring(x, y) || d->is_secret_door(x, y) ||
           d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_treasure_type(x, y) ||

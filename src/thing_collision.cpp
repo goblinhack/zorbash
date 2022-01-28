@@ -84,7 +84,7 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
 
     if (! cand.priority) {
       if (is_loggable()) {
-        dbg("Collision-candidate: Ignore %s low priority", t->to_string().c_str());
+        dbg("Collision-candidate: Ignore %s no priority", t->to_string().c_str());
       }
       continue;
     }
@@ -241,8 +241,8 @@ bool Thing::collision_find_best_target(bool *target_attacked, bool *target_overl
 
           if (is_monst() &&
               ((is_food_eater() && victim->is_food()) || (is_jelly_eater() && victim->is_jelly()) ||
-               (is_meat_eater() && victim->is_meat()) || (is_blood_eater() && victim->is_blood()) ||
-               (is_food_eater() && victim->is_food())) &&
+               (is_meat_eater() && victim->is_meat()) || (is_red_blood_eater() && victim->is_red_blood()) ||
+               (is_green_blood_eater() && victim->is_green_blood()) || (is_food_eater() && victim->is_food())) &&
               eat(victim)) {
             *target_attacked = true;
             ret              = true;
