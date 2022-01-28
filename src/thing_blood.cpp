@@ -35,4 +35,11 @@ void Thing::place_blood(bool force)
       (void) level->thing_new(tp->name(), curr_at);
     }
   }
+
+  if (is_pink_blooded()) {
+    if (level->is_pink_blood(curr_at.x, curr_at.y)) {
+      auto tp = tp_random_pink_blood();
+      (void) level->thing_new(tp->name(), curr_at);
+    }
+  }
 }

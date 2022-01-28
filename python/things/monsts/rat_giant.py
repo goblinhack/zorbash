@@ -29,7 +29,6 @@ def tp_init(name, text_name):
     mytp.set_aggression_level_pct(20)
     mytp.set_ai_resent_count(10)
     mytp.set_ai_wanderer(True)
-    mytp.set_attack_blood(True)
     mytp.set_attack_eater(True)
     mytp.set_attack_lunge(True)
     mytp.set_collision_check(True)

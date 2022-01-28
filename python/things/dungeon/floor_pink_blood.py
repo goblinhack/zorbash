@@ -18,7 +18,7 @@ def tp_init(name, text_name):
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d4")
     mytp.set_text_a_or_an("a")
-    mytp.set_text_description("An artwork comprised mainly of green blood.")
+    mytp.set_text_description("An artwork comprised mainly of pink gooey blood.")
     mytp.set_z_depth(my.MAP_DEPTH_FLOOR2)
     mytp.set_z_prio(my.MAP_PRIO_BEHIND)
 
@@ -31,14 +31,14 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="floor_green_blood1", text_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood2", text_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood3", text_name="pool of fluorescent blood with bits in it")
-    tp_init(name="floor_green_blood4", text_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood5", text_name="pool of yucky fluorescent blood")
-    tp_init(name="floor_green_blood6", text_name="pool of icky fluorescent blood")
-    tp_init(name="floor_green_blood7", text_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood8", text_name="pool of fluorescent blood")
+    tp_init(name="floor_pink_blood1", text_name="pool of fluorescent gooey blood")
+    tp_init(name="floor_pink_blood2", text_name="pool of fluorescent gooey blood")
+    tp_init(name="floor_pink_blood3", text_name="pool of fluorescent gooey blood with bits in it")
+    tp_init(name="floor_pink_blood4", text_name="pool of fluorescent gooey blood")
+    tp_init(name="floor_pink_blood5", text_name="pool of yucky fluorescent gooey blood")
+    tp_init(name="floor_pink_blood6", text_name="pool of icky fluorescent gooey blood")
+    tp_init(name="floor_pink_blood7", text_name="pool of fluorescent gooey blood")
+    tp_init(name="floor_pink_blood8", text_name="pool of fluorescent gooey blood")
 
 
 init()

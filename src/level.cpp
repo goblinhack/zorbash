@@ -562,6 +562,42 @@ void Level::unset_is_green_blood(const int x, const int y)
   decr(_is_green_blood, x, y, (uint8_t) 1);
 }
 
+uint8_t Level::is_pink_blood(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_pink_blood, p.x, p.y));
+}
+
+uint8_t Level::is_pink_blood(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_pink_blood, x, y));
+}
+
+void Level::set_is_pink_blood(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  incr(_is_pink_blood, x, y, (uint8_t) 1);
+}
+
+void Level::unset_is_pink_blood(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  decr(_is_pink_blood, x, y, (uint8_t) 1);
+}
+
 uint8_t Level::gfx_water(const point p)
 {
   TRACE_NO_INDENT();

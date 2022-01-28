@@ -83,7 +83,6 @@ public:
   bool   is_anything_at_no_check(const int x, const int y);
   bool   is_anything_at_no_check(const int x, const int y, const int z);
   bool   is_red_blood(const int x, const int y);
-  bool   is_green_blood(const int x, const int y);
   bool   is_chasm(const int x, const int y);
   bool   is_chasm_no_check(const int x, const int y);
   bool   is_corridor(const int x, const int y);

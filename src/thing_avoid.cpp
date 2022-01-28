@@ -56,7 +56,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   }
 
   if (me->is_red_blood()) {
-    if (it->is_red_blood_eater() || it->attack_blood()) {
+    if (it->is_red_blood_eater()) {
       if (is_dangerous(it)) {
         return true;
       }
@@ -64,7 +64,15 @@ bool Thing::will_avoid_monst(const Thingp it)
   }
 
   if (me->is_green_blood()) {
-    if (it->is_green_blood_eater() || it->attack_blood()) {
+    if (it->is_green_blood_eater()) {
+      if (is_dangerous(it)) {
+        return true;
+      }
+    }
+  }
+
+  if (me->is_pink_blood()) {
+    if (it->is_pink_blood_eater()) {
       if (is_dangerous(it)) {
         return true;
       }

@@ -31,7 +31,6 @@ def tp_init(name, text_name):
     mytp.set_ai_resent_count(100)
     mytp.set_ai_shove_chance_d1000(200)
     mytp.set_ai_wanderer(True)
-    mytp.set_attack_blood(True)
     mytp.set_attack_eater(True)
     mytp.set_attack_humanoid(True)
     mytp.set_attack_living(True)
