@@ -43,6 +43,7 @@ void Thing::animate(void)
         auto ntile = tile_get_frame(tmap, tile->frame);
         if (ntile) {
           tile_curr = ntile->global_index;
+          dir       = owner->dir;
           return;
         }
       }
