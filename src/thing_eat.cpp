@@ -57,6 +57,12 @@ bool Thing::can_eat(const Thingp itp)
       return true;
     }
   }
+  if (me->is_pink_blood_eater()) {
+    if (itp->is_pink_blood()) {
+      dbg("Can eat pink blood: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
   if (me->is_food_eater()) {
     if (itp->is_food()) {
       dbg("Can eat food: %s", itp->to_short_string().c_str());
@@ -115,6 +121,12 @@ bool Tp::can_eat(const Thingp itp)
   }
   if (is_green_blood_eater()) {
     if (itp->is_green_blood()) {
+      dbg("Can eat blood: %s", itp->to_short_string().c_str());
+      return true;
+    }
+  }
+  if (is_pink_blood_eater()) {
+    if (itp->is_pink_blood()) {
       dbg("Can eat blood: %s", itp->to_short_string().c_str());
       return true;
     }
@@ -186,7 +198,8 @@ bool Thing::eat(Thingp victim)
   if (attack_eater()) {
     if ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
         (is_red_blood_eater() && victim->is_red_blood()) || (is_green_blood_eater() && victim->is_green_blood()) ||
-        (is_food_eater() && victim->is_food()) || (is_treasure_eater() && victim->is_treasure_type()) ||
+        (is_pink_blood_eater() && victim->is_pink_blood()) || (is_food_eater() && victim->is_food()) ||
+        (is_treasure_eater() && victim->is_treasure_type()) ||
         (is_item_magical_eater() && victim->is_item_magical()) || (is_potion_eater() && victim->is_potion())) {
 
       //
@@ -238,7 +251,8 @@ bool Thing::consume(Thingp victim)
   if (attack_eater()) {
     if ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
         (is_red_blood_eater() && victim->is_red_blood()) || (is_green_blood_eater() && victim->is_green_blood()) ||
-        (is_food_eater() && victim->is_food()) || (is_treasure_eater() && victim->is_treasure_type()) ||
+        (is_pink_blood_eater() && victim->is_pink_blood()) || (is_food_eater() && victim->is_food()) ||
+        (is_treasure_eater() && victim->is_treasure_type()) ||
         (is_item_magical_eater() && victim->is_item_magical()) || (is_potion_eater() && victim->is_potion())) {
 
       dbg("Consumes %s", victim->text_the().c_str());

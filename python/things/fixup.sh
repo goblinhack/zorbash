@@ -43,7 +43,6 @@ do
       set_ai_obstacle \
       set_ai_resent_count \
       set_ai_wanderer \
-      set_attack_blood \
       set_attack_eater \
       set_attack_humanoid \
       set_attack_living \
@@ -461,7 +460,7 @@ do
       set_unused_flag157 \
       set_unused_flag158 \
       set_unused_flag159 \
-      set_unused_flag160 \
+      set_is_pink_blood_eater \
       set_is_green_blood \
       set_is_biome_swamp \
       set_is_biome_dungeon \

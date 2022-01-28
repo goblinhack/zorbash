@@ -2352,16 +2352,22 @@ int Thing::unused_flag159(void)
   return (tp()->unused_flag159());
 }
 
-int Thing::unused_flag160(void)
+int Thing::is_pink_blood_eater(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag160());
+  return (tp()->is_pink_blood_eater());
 }
 
 int Thing::is_green_blood(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_green_blood());
+}
+
+int Thing::is_pink_blood(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_pink_blood());
 }
 
 int Thing::is_biome_swamp(void)
@@ -2740,12 +2746,6 @@ int Thing::is_red_blood_eater(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_red_blood_eater());
-}
-
-int Thing::attack_blood(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->attack_blood());
 }
 
 int Thing::is_slippery(void)

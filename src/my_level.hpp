@@ -65,6 +65,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lit_currently {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_monst {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_pink_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_potion {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_red_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ring {};
@@ -741,6 +742,8 @@ public:
   uint8_t is_gold(const point p);
   uint8_t is_green_blood(const int x, const int y);
   uint8_t is_green_blood(const point p);
+  uint8_t is_pink_blood(const int x, const int y);
+  uint8_t is_pink_blood(const point p);
   uint8_t is_hazard(const int x, const int y);
   uint8_t is_hazard(const point p);
   uint8_t is_heavy(const int x, const int y);
@@ -946,6 +949,7 @@ public:
   void set_is_food(const int x, const int y);
   void set_is_gold(const int x, const int y);
   void set_is_green_blood(const int x, const int y);
+  void set_is_pink_blood(const int x, const int y);
   void set_is_hazard(const int x, const int y);
   void set_is_heavy(const int x, const int y);
   void set_is_key(const int x, const int y);
@@ -1016,6 +1020,7 @@ public:
   void unset_is_food(const int x, const int y);
   void unset_is_gold(const int x, const int y);
   void unset_is_green_blood(const int x, const int y);
+  void unset_is_pink_blood(const int x, const int y);
   void unset_is_hazard(const int x, const int y);
   void unset_is_heavy(const int x, const int y);
   void unset_is_key(const int x, const int y);

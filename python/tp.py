@@ -859,8 +859,8 @@ class Tp:
     def set_unused_flag159(self, value):
         my.tp_set_unused_flag159(self, value)
 
-    def set_unused_flag160(self, value):
-        my.tp_set_unused_flag160(self, value)
+    def set_is_pink_blood_eater(self, value):
+        my.tp_set_is_pink_blood_eater(self, value)
 
     def set_is_green_blood(self, value):
         my.tp_set_is_green_blood(self, value)

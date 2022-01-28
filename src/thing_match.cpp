@@ -74,9 +74,6 @@ bool Thing::matches(const std::string &what)
   if (ai_wanderer() && (what == "ai_wanderer")) {
     return true;
   }
-  if (attack_blood() && (what == "attack_blood")) {
-    return true;
-  }
   if (attack_eater() && (what == "attack_eater")) {
     return true;
   }
@@ -1139,7 +1136,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag159() && (what == "unused_flag159")) {
     return true;
   }
-  if (unused_flag160() && (what == "unused_flag160")) {
+  if (is_pink_blood_eater() && (what == "is_pink_blood_eater")) {
     return true;
   }
   if (is_green_blood() && (what == "is_green_blood")) {
@@ -1370,9 +1367,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "ai_wanderer") {
     return &Thing::ai_wanderer;
-  }
-  if (what == "attack_blood") {
-    return &Thing::attack_blood;
   }
   if (what == "attack_eater") {
     return &Thing::attack_eater;
@@ -2430,8 +2424,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag159") {
     return &Thing::unused_flag159;
   }
-  if (what == "unused_flag160") {
-    return &Thing::unused_flag160;
+  if (what == "is_pink_blood_eater") {
+    return &Thing::is_pink_blood_eater;
   }
   if (what == "is_green_blood") {
     return &Thing::is_green_blood;

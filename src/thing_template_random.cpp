@@ -17,6 +17,7 @@ static Tpidmap tp_ascend_sewer;
 static Tpidmap tp_barrel;
 static Tpidmap tp_red_blood;
 static Tpidmap tp_green_blood;
+static Tpidmap tp_pink_blood;
 static Tpidmap tp_red_splatter;
 static Tpidmap tp_bones;
 static Tpidmap tp_brazier;
@@ -93,6 +94,9 @@ void tp_random_init(void)
     }
     if (tp->is_green_blood()) {
       tp_green_blood.push_back(tp);
+    }
+    if (tp->is_pink_blood()) {
+      tp_pink_blood.push_back(tp);
     }
     if (tp->is_red_splatter()) {
       tp_red_splatter.push_back(tp);
@@ -868,7 +872,7 @@ Tpp tp_random_red_blood(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_red_blood.size())) {
-    ERR("No bloods found");
+    ERR("No red blood found");
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_red_blood);
@@ -878,10 +882,20 @@ Tpp tp_random_green_blood(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_green_blood.size())) {
-    ERR("No bloods found");
+    ERR("No green blood found");
     return nullptr;
   }
   return tp_get_with_no_rarity_filter(tp_green_blood);
+}
+
+Tpp tp_random_pink_blood(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_pink_blood.size())) {
+    ERR("No pink blood found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_pink_blood);
 }
 
 Tpp tp_random_bones(void)

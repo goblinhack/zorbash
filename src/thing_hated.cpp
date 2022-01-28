@@ -105,7 +105,7 @@ bool Thing::is_hated_by_me(const Thingp itp)
   }
 
   if (me->is_red_blood()) {
-    if (it->is_red_blood_eater() || it->attack_blood()) {
+    if (it->is_red_blood_eater()) {
       if (is_dangerous(itp)) {
         return true;
       }
@@ -113,7 +113,15 @@ bool Thing::is_hated_by_me(const Thingp itp)
   }
 
   if (me->is_green_blood()) {
-    if (it->is_green_blood_eater() || it->attack_blood()) {
+    if (it->is_green_blood_eater()) {
+      if (is_dangerous(itp)) {
+        return true;
+      }
+    }
+  }
+
+  if (me->is_pink_blood()) {
+    if (it->is_pink_blood_eater()) {
       if (is_dangerous(itp)) {
         return true;
       }
