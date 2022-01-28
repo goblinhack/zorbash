@@ -1684,9 +1684,9 @@ bool Thing::ai_tick(bool recursing)
   // We need to grow the light a bit for level explorers
   //
   if (is_explorer()) {
-    level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision() + 1);
+    level->fov_calculete(this, &aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision() + 1);
   } else {
-    level->fov_calculete(&aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision());
+    level->fov_calculete(this, &aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision());
   }
 
   //
@@ -1706,7 +1706,7 @@ bool Thing::ai_tick(bool recursing)
   for (int y = miny; y <= maxy; y++) {
     for (int x = minx; x <= maxx; x++) {
       if (aip->can_see_currently.can_see[ x ][ y ]) {
-        IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
+        IF_DEBUG2 { (void) level->thing_new("ai_path2", point(x, y)); }
         set(aip->can_see_ever.can_see, x, y, true);
       }
     }

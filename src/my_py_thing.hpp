@@ -462,7 +462,7 @@ PyObject *thing_unused_flag155(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag156(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag157(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag158(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag159(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_light_blocker_for_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pink_blood_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);

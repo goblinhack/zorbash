@@ -329,6 +329,7 @@ private:
   int _is_laser {};
   int _is_lava {};
   int _is_light_blocker {};
+  int _is_light_blocker_for_monst {};
   int _is_living {};
   int _is_loggable {};
   int _is_map_beast {};
@@ -532,7 +533,6 @@ private:
   int _unused_flag156 {};
   int _unused_flag157 {};
   int _unused_flag158 {};
-  int _unused_flag159 {};
   int _unused_flag16 {};
   int _unused_flag17 {};
   int _unused_flag18 {};
@@ -1215,6 +1215,7 @@ public:
   int is_key(void) const { return _is_key; }
   int is_laser(void) const { return _is_laser; }
   int is_lava(void) const { return _is_lava; }
+  int is_light_blocker_for_monst(void) const { return _is_light_blocker_for_monst; }
   int is_light_blocker(void) const { return _is_light_blocker; }
   int is_living(void) const { return _is_living; }
   int is_loggable(void) const { return _is_loggable; }
@@ -1412,7 +1413,6 @@ public:
   int unused_flag156(void) const { return _unused_flag156; }
   int unused_flag157(void) const { return _unused_flag157; }
   int unused_flag158(void) const { return _unused_flag158; }
-  int unused_flag159(void) const { return _unused_flag159; }
   int unused_flag15(void) const { return _unused_flag15; }
   int unused_flag16(void) const { return _unused_flag16; }
   int unused_flag17(void) const { return _unused_flag17; }
@@ -1758,6 +1758,7 @@ public:
   void set_is_key(int v) { _is_key = v; }
   void set_is_laser(int v) { _is_laser = v; }
   void set_is_lava(int v) { _is_lava = v; }
+  void set_is_light_blocker_for_monst(int v) { _is_light_blocker_for_monst = v; }
   void set_is_light_blocker(int v) { _is_light_blocker = v; }
   void set_is_living(int v) { _is_living = v; }
   void set_is_loggable(int v) { _is_loggable = v; }
@@ -2040,7 +2041,6 @@ public:
   void set_unused_flag156(int v) { _unused_flag156 = v; }
   void set_unused_flag157(int v) { _unused_flag157 = v; }
   void set_unused_flag158(int v) { _unused_flag158 = v; }
-  void set_unused_flag159(int v) { _unused_flag159 = v; }
   void set_unused_flag15(int v) { _unused_flag15 = v; }
   void set_unused_flag16(int v) { _unused_flag16 = v; }
   void set_unused_flag17(int v) { _unused_flag17 = v; }

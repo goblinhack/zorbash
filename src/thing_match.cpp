@@ -458,6 +458,9 @@ bool Thing::matches(const std::string &what)
   if (is_light_blocker() && (what == "is_light_blocker")) {
     return true;
   }
+  if (is_light_blocker_for_monst() && (what == "is_light_blocker_for_monst")) {
+    return true;
+  }
   if (is_living() && (what == "is_living")) {
     return true;
   }
@@ -1133,7 +1136,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag158() && (what == "unused_flag158")) {
     return true;
   }
-  if (unused_flag159() && (what == "unused_flag159")) {
+  if (is_light_blocker_for_monst() && (what == "is_light_blocker_for_monst")) {
     return true;
   }
   if (is_pink_blood_eater() && (what == "is_pink_blood_eater")) {
@@ -2421,8 +2424,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag158") {
     return &Thing::unused_flag158;
   }
-  if (what == "unused_flag159") {
-    return &Thing::unused_flag159;
+  if (what == "is_light_blocker_for_monst") {
+    return &Thing::is_light_blocker_for_monst;
   }
   if (what == "is_pink_blood_eater") {
     return &Thing::is_pink_blood_eater;

@@ -169,6 +169,7 @@ public:
   uint64_t i_set_is_key                           : 1 {};
   uint64_t i_set_is_lava                          : 1 {};
   uint64_t i_set_is_light_blocker                 : 1 {};
+  uint64_t i_set_is_light_blocker_for_monst       : 1 {};
   uint64_t i_set_is_mob                           : 1 {};
   uint64_t i_set_is_monst                         : 1 {};
   uint64_t i_set_is_necrotic_danger_level         : 1 {};
@@ -1243,6 +1244,7 @@ public:
   int is_key(void);
   int is_laser(void);
   int is_lava(void);
+  int is_light_blocker_for_monst(void);
   int is_light_blocker(void);
   int is_living(void);
   int is_loggable(void);
@@ -1521,7 +1523,6 @@ public:
   int unused_flag156(void);
   int unused_flag157(void);
   int unused_flag158(void);
-  int unused_flag159(void);
   int unused_flag15(void);
   int unused_flag16(void);
   int unused_flag17(void);

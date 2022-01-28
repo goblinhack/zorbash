@@ -1917,6 +1917,61 @@ void Level::unset_is_light_blocker_no_check(const int x, const int y)
 //
 // Used in lighting, so inlined
 //
+bool Level::is_light_blocker_for_monst(const point p) const
+{
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_light_blocker_for_monst, p.x, p.y));
+}
+
+bool Level::is_light_blocker_for_monst_no_check(const point p) const
+{
+  return (get_no_check(_is_light_blocker_for_monst, p.x, p.y));
+}
+
+bool Level::is_light_blocker_for_monst(const int x, const int y) const
+{
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_light_blocker_for_monst, x, y));
+}
+
+bool Level::is_light_blocker_for_monst_no_check(const int x, const int y) const
+{
+  return (get_no_check(_is_light_blocker_for_monst, x, y));
+}
+
+void Level::set_is_light_blocker_for_monst(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_light_blocker_for_monst, x, y, true);
+}
+
+void Level::set_is_light_blocker_for_monst_no_check(const int x, const int y)
+{
+  set_no_check(_is_light_blocker_for_monst, x, y, true);
+}
+
+void Level::unset_is_light_blocker_for_monst(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_light_blocker_for_monst, x, y, false);
+}
+
+void Level::unset_is_light_blocker_for_monst_no_check(const int x, const int y)
+{
+  set_no_check(_is_light_blocker_for_monst, x, y, false);
+}
+
+//
+// Used in lighting, so inlined
+//
 bool Level::is_obs_wall_or_door(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {

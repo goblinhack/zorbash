@@ -1176,6 +1176,12 @@ int Thing::is_light_blocker(void)
   return (tp()->is_light_blocker());
 }
 
+int Thing::is_light_blocker_for_monst(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_light_blocker_for_monst());
+}
+
 int Thing::is_living(void)
 {
   TRACE_NO_INDENT();
@@ -2344,12 +2350,6 @@ int Thing::unused_flag158(void)
 {
   TRACE_NO_INDENT();
   return (tp()->unused_flag158());
-}
-
-int Thing::unused_flag159(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag159());
 }
 
 int Thing::is_pink_blood_eater(void)
