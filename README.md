@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- test green and add pink blood                                                                                                                -->
-<!-- should be able to hide behind bushes                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->

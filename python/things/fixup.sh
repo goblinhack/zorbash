@@ -459,7 +459,7 @@ do
       set_unused_flag156 \
       set_unused_flag157 \
       set_unused_flag158 \
-      set_unused_flag159 \
+      set_is_light_blocker_for_monst \
       set_is_pink_blood_eater \
       set_is_green_blood \
       set_is_biome_swamp \

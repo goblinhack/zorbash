@@ -45,7 +45,9 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
-#include "my_level_shadow_casting.hpp"
+#include "my_level_fov.hpp"
+#include "my_thing.hpp"
+#include "my_wid_topcon.hpp"
 
 // Octant transformation matrixes.
 // {xx, xy, yx, yy}
@@ -55,7 +57,7 @@ static const int matrix_table[ 8 ][ 4 ] = {
 };
 
 // Cast visiblity using shadowcasting.
-void Level::scan(FovMap *fov, int pov_x, int pov_y,
+void Level::scan(Thingp me, FovMap *fov, int pov_x, int pov_y,
                  int   distance, // Polar distance from POV.
                  float view_slope_high, float view_slope_low, int max_radius, int octant, bool light_walls)
 {
@@ -98,29 +100,39 @@ void Level::scan(FovMap *fov, int pov_x, int pov_y,
       continue; // Angle is out-of-bounds.
     }
 
-    if (angle * angle + distance * distance <= radius_squared && (light_walls || ! is_light_blocker(map_x, map_y))) {
+    auto light_blocker = is_light_blocker(map_x, map_y);
+    if (me->is_monst()) {
+      if (! light_blocker) {
+        light_blocker = is_light_blocker_for_monst(map_x, map_y);
+        if (light_blocker) {
+          me->topcon("%d,%d", map_x, map_y);
+        }
+      }
+    }
+
+    if (angle * angle + distance * distance <= radius_squared && (light_walls || ! light_blocker)) {
       set(fov->can_see, map_x, map_y, true);
     }
 
-    if (prev_tile_blocked && ! is_light_blocker(map_x, map_y)) { // Wall -> floor.
-      view_slope_high = prev_tile_slope_low;                     // Reduce the view size.
+    if (prev_tile_blocked && ! light_blocker) { // Wall -> floor.
+      view_slope_high = prev_tile_slope_low;    // Reduce the view size.
     }
 
-    if (! prev_tile_blocked && is_light_blocker(map_x, map_y)) { // Floor -> wall.
+    if (! prev_tile_blocked && light_blocker) { // Floor -> wall.
       // Get the last sequence of floors as a view and recurse into them.
-      scan(fov, pov_x, pov_y, distance + 1, view_slope_high, tile_slope_high, max_radius, octant, light_walls);
+      scan(me, fov, pov_x, pov_y, distance + 1, view_slope_high, tile_slope_high, max_radius, octant, light_walls);
     }
 
-    prev_tile_blocked = is_light_blocker(map_x, map_y);
+    prev_tile_blocked = light_blocker;
   }
 
   if (! prev_tile_blocked) {
     // Tail-recurse into the current view.
-    scan(fov, pov_x, pov_y, distance + 1, view_slope_high, view_slope_low, max_radius, octant, light_walls);
+    scan(me, fov, pov_x, pov_y, distance + 1, view_slope_high, view_slope_low, max_radius, octant, light_walls);
   }
 }
 
-bool Level::fov_calculete(FovMap *fov, int pov_x, int pov_y, int max_radius, bool light_walls)
+bool Level::fov_calculete(Thingp me, FovMap *fov, int pov_x, int pov_y, int max_radius, bool light_walls)
 {
   if (is_oob(pov_x, pov_y)) {
     err("Point of view {%i, %i} is out of bounds.", pov_x, pov_y);
@@ -137,7 +149,7 @@ bool Level::fov_calculete(FovMap *fov, int pov_x, int pov_y, int max_radius, boo
 
   /* recursive shadow casting */
   for (int octant = 0; octant < 8; ++octant) {
-    scan(fov, pov_x, pov_y, 1, 1.0, 0.0, max_radius, octant, light_walls);
+    scan(me, fov, pov_x, pov_y, 1, 1.0, 0.0, max_radius, octant, light_walls);
   }
 
   set(fov->can_see, pov_x, pov_y, true);

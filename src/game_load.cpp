@@ -429,6 +429,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->i_set_is_key = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_lava = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_light_blocker = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->i_set_is_light_blocker_for_monst = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_mob = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_monst = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_obs_wall_or_door = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -508,6 +509,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->ts_fade_in_begin);
 
   in >> bits(my.t->_is_light_blocker);
+  in >> bits(my.t->_is_light_blocker_for_monst);
   in >> bits(my.t->_is_lit_ever);
   in >> bits(my.t->_is_obs_destructable);
   in >> bits(my.t->_is_obs_wall_or_door);

@@ -3891,13 +3891,13 @@ void Dungeon::add_foilage_around_water(void)
       }
 
       if (is_dirt(x, y)) {
-        if (pcg_random_range(0, 100) > 80) {
+        if (pcg_random_range(0, 100) > 95) {
           continue;
         }
       }
 
       if (is_floor(x, y)) {
-        if (pcg_random_range(0, 100) > 5) {
+        if (pcg_random_range(0, 100) > 50) {
           continue;
         }
       }

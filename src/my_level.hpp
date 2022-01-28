@@ -27,6 +27,7 @@ public:
   // These are caches for fast lookup in display code
   //
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker_for_monst {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_lit_ever {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_destructable {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_wall_or_door {};
@@ -648,6 +649,10 @@ public:
   bool is_light_blocker(const point p) const;
   bool is_light_blocker_no_check(const int x, const int y) const;
   bool is_light_blocker_no_check(const point p) const;
+  bool is_light_blocker_for_monst(const int x, const int y) const;
+  bool is_light_blocker_for_monst(const point p) const;
+  bool is_light_blocker_for_monst_no_check(const int x, const int y) const;
+  bool is_light_blocker_for_monst_no_check(const point p) const;
   bool is_obs_destructable(const int x, const int y) const;
   bool is_obs_destructable(const point p) const;
   bool is_obs_destructable_no_check(const int x, const int y) const;
@@ -956,6 +961,8 @@ public:
   void set_is_lava(const int x, const int y);
   void set_is_light_blocker(const int x, const int y);
   void set_is_light_blocker_no_check(const int x, const int y);
+  void set_is_light_blocker_for_monst(const int x, const int y);
+  void set_is_light_blocker_for_monst_no_check(const int x, const int y);
   void set_is_lit_currently(const int x, const int y);
   void set_is_lit_currently_no_check(const int x, const int y);
   void set_is_lit_currently_no_check(const int x, const int y, uint8_t v);
@@ -1027,6 +1034,8 @@ public:
   void unset_is_lava(const int x, const int y);
   void unset_is_light_blocker(const int x, const int y);
   void unset_is_light_blocker_no_check(const int x, const int y);
+  void unset_is_light_blocker_for_monst(const int x, const int y);
+  void unset_is_light_blocker_for_monst_no_check(const int x, const int y);
   void unset_is_lit_currently(const int x, const int y);
   void unset_is_lit_currently_no_check(const int x, const int y);
   void unset_is_lit_ever(const int x, const int y);
@@ -1079,11 +1088,11 @@ public:
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);
   std::deque< Thingp > flood_fill_things(point, std::function< int(Thingp) > filter);
 
-  void scan(struct FovMap_ *fov, int pov_x, int pov_y,
+  void scan(Thingp me, struct FovMap_ *fov, int pov_x, int pov_y,
             int   distance, // Polar distance from POV.
             float view_slope_high, float view_slope_low, int max_radius, int octant, bool light_walls);
 
-  bool fov_calculete(struct FovMap_ *fov, int pov_x, int pov_y, int max_radius, bool light_walls = true);
+  bool fov_calculete(Thingp me, struct FovMap_ *fov, int pov_x, int pov_y, int max_radius, bool light_walls = true);
 };
 
 #endif

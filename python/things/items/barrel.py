@@ -45,6 +45,7 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_heavy(True)
     mytp.set_is_hittable(True)
+    mytp.set_is_light_blocker_for_monst(True)  # to give cover to the player
     mytp.set_is_loggable(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)  # So it can interact with fire
