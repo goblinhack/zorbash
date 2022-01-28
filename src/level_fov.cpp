@@ -100,13 +100,13 @@ void Level::scan(Thingp me, FovMap *fov, int pov_x, int pov_y,
       continue; // Angle is out-of-bounds.
     }
 
+    //
+    // Treat player and monster blocking differently so the player can use cover
+    //
     auto light_blocker = is_light_blocker(map_x, map_y);
     if (me->is_monst()) {
       if (! light_blocker) {
         light_blocker = is_light_blocker_for_monst(map_x, map_y);
-        if (light_blocker) {
-          me->topcon("%d,%d", map_x, map_y);
-        }
       }
     }
 

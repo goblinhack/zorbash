@@ -23,6 +23,9 @@
 class Level
 {
 public:
+  std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
+      gas_swamp {};
+
   //
   // These are caches for fast lookup in display code
   //
