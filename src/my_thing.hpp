@@ -144,7 +144,6 @@ public:
   uint64_t i_set_is_ascend_dungeon                : 1 {};
   uint64_t i_set_is_ascend_sewer                  : 1 {};
   uint64_t i_set_is_barrel                        : 1 {};
-  uint64_t i_set_is_blood                         : 1 {};
   uint64_t i_set_is_brazier                       : 1 {};
   uint64_t i_set_is_bridge                        : 1 {};
   uint64_t i_set_is_chasm                         : 1 {};
@@ -157,13 +156,13 @@ public:
   uint64_t i_set_is_dirt                          : 1 {};
   uint64_t i_set_is_door                          : 1 {};
   uint64_t i_set_is_dry_grass                     : 1 {};
-  uint64_t i_set_is_wet_grass                     : 1 {};
   uint64_t i_set_is_enchantstone                  : 1 {};
   uint64_t i_set_is_fire                          : 1 {};
   uint64_t i_set_is_floor                         : 1 {};
   uint64_t i_set_is_foilage                       : 1 {};
   uint64_t i_set_is_food                          : 1 {};
   uint64_t i_set_is_gold                          : 1 {};
+  uint64_t i_set_is_green_blood                   : 1 {};
   uint64_t i_set_is_hazard                        : 1 {};
   uint64_t i_set_is_heavy                         : 1 {};
   uint64_t i_set_is_key                           : 1 {};
@@ -176,6 +175,7 @@ public:
   uint64_t i_set_is_obs_wall_or_door              : 1 {};
   uint64_t i_set_is_poisonous_danger_level        : 1 {};
   uint64_t i_set_is_potion                        : 1 {};
+  uint64_t i_set_is_red_blood                     : 1 {};
   uint64_t i_set_is_ring                          : 1 {};
   uint64_t i_set_is_ripple                        : 1 {};
   uint64_t i_set_is_rock                          : 1 {};
@@ -189,6 +189,7 @@ public:
   uint64_t i_set_is_treasure_type                 : 1 {};
   uint64_t i_set_is_wall                          : 1 {};
   uint64_t i_set_is_wand                          : 1 {};
+  uint64_t i_set_is_wet_grass                     : 1 {};
   uint64_t i_set_water                            : 1 {};
 
   /////////////////////////////////////////////////////////////////////////
@@ -1145,9 +1146,9 @@ public:
   int is_barrel(void);
   int is_map_beast(void);
   int is_bleeder(void);
-  int is_blood_eater(void);
-  int is_blood_splatter(void);
-  int is_blood(void);
+  int is_red_blood_eater(void);
+  int is_red_splatter(void);
+  int is_red_blood(void);
   int is_bones(void);
   int is_bony(void);
   int is_boots(void);
@@ -1496,12 +1497,12 @@ public:
   int unused_flag159(void);
   int unused_flag15(void);
   int unused_flag160(void);
-  int unused_flag161(void);
+  int is_green_blood(void);
   int is_biome_swamp(void);
   int is_biome_dungeon(void);
   int is_treasure(void);
   int is_monst_class_e(void);
-  int unused_flag166(void);
+  int is_green_blood_eater(void);
   int is_mob_challenge_class_b(void);
   int is_mob_challenge_class_a(void);
   int is_monst_class_d(void);
@@ -1953,6 +1954,7 @@ public:
   void on_you_miss_do(Thingp hitter);
   void on_you_natural_attack(void);
   void path_shorten(std::vector< point > &path);
+  void place_blood(bool force = false);
   void poisoned(void);
   void poison_tick(void);
   void polymorph(Tpp);

@@ -965,7 +965,7 @@ bool Dungeon::is_barrel(const int x, const int y)
   return false;
 }
 
-bool Dungeon::is_blood(const int x, const int y)
+bool Dungeon::is_red_blood(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -975,7 +975,7 @@ bool Dungeon::is_blood(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_blood) {
+    if (v.is_red_blood) {
       return true;
     }
   }

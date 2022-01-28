@@ -15,8 +15,9 @@
 static Tpidmap tp_ascend_dungeon;
 static Tpidmap tp_ascend_sewer;
 static Tpidmap tp_barrel;
-static Tpidmap tp_blood;
-static Tpidmap tp_blood_splatter;
+static Tpidmap tp_red_blood;
+static Tpidmap tp_green_blood;
+static Tpidmap tp_red_splatter;
 static Tpidmap tp_bones;
 static Tpidmap tp_brazier;
 static Tpidmap tp_deco;
@@ -87,11 +88,14 @@ void tp_random_init(void)
     if (tp->is_barrel()) {
       tp_barrel.push_back(tp);
     }
-    if (tp->is_blood()) {
-      tp_blood.push_back(tp);
+    if (tp->is_red_blood()) {
+      tp_red_blood.push_back(tp);
     }
-    if (tp->is_blood_splatter()) {
-      tp_blood_splatter.push_back(tp);
+    if (tp->is_green_blood()) {
+      tp_green_blood.push_back(tp);
+    }
+    if (tp->is_red_splatter()) {
+      tp_red_splatter.push_back(tp);
     }
     if (tp->is_green_splatter()) {
       tp_green_splatter.push_back(tp);
@@ -696,14 +700,14 @@ Tpp tp_random_ripple(void)
   return tp_get_with_no_rarity_filter(tp_ripples);
 }
 
-Tpp tp_random_blood_splatter(void)
+Tpp tp_random_red_splatter(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_blood_splatter.size())) {
-    ERR("No blood_splatter found");
+  if (unlikely(! tp_red_splatter.size())) {
+    ERR("No red_splatter found");
     return nullptr;
   }
-  return tp_get_with_no_rarity_filter(tp_blood_splatter);
+  return tp_get_with_no_rarity_filter(tp_red_splatter);
 }
 
 Tpp tp_random_green_splatter(void)
@@ -860,14 +864,24 @@ Tpp tp_random_mob_challenge_class_a(void) { return tp_random_mob(); }
 
 Tpp tp_random_mob_challenge_class_b(void) { return tp_random_mob(); }
 
-Tpp tp_random_blood(void)
+Tpp tp_random_red_blood(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_blood.size())) {
+  if (unlikely(! tp_red_blood.size())) {
     ERR("No bloods found");
     return nullptr;
   }
-  return tp_get_with_no_rarity_filter(tp_blood);
+  return tp_get_with_no_rarity_filter(tp_red_blood);
+}
+
+Tpp tp_random_green_blood(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_green_blood.size())) {
+    ERR("No bloods found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_green_blood);
 }
 
 Tpp tp_random_bones(void)

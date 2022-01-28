@@ -68,7 +68,6 @@ def tp_init(name, text_name):
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_biome_dungeon(True)
-    mytp.set_is_blood_eater(True)
     mytp.set_is_burnable(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_crushable(True)
@@ -81,6 +80,7 @@ def tp_init(name, text_name):
     mytp.set_is_monst(True)
     mytp.set_is_moveable(True)
     mytp.set_is_necrotic_danger_level(1)  # danger level
+    mytp.set_is_red_blood_eater(True)
     mytp.set_is_resurrectable(True)
     mytp.set_is_shovable(True)
     mytp.set_is_tickable(True)

@@ -347,7 +347,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_ascend_dungeon ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_sewer ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_barrel ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_blood ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_red_blood ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_green_blood ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_chasm ? 1LLU : 0LLU) << shift; shift++;
@@ -475,7 +476,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_ascend_dungeon);
   out << bits(my.t->_is_ascend_sewer);
   out << bits(my.t->_is_barrel);
-  out << bits(my.t->_is_blood);
+  out << bits(my.t->_is_red_blood);
+  out << bits(my.t->_is_green_blood);
   out << bits(my.t->_is_brazier);
   out << bits(my.t->_is_bridge);
   out << bits(my.t->_is_chasm);

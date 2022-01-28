@@ -402,7 +402,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->i_set_is_ascend_dungeon = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_ascend_sewer = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_barrel = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->i_set_is_blood = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->i_set_is_red_blood = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->i_set_is_green_blood = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_brazier = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_bridge = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_chasm = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -518,7 +519,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_ascend_dungeon);
   in >> bits(my.t->_is_ascend_sewer);
   in >> bits(my.t->_is_barrel);
-  in >> bits(my.t->_is_blood);
+  in >> bits(my.t->_is_red_blood);
+  in >> bits(my.t->_is_green_blood);
   in >> bits(my.t->_is_brazier);
   in >> bits(my.t->_is_bridge);
   in >> bits(my.t->_is_chasm);

@@ -350,7 +350,7 @@ bool Thing::fall_to_next_level(void)
 
       if (is_monst() || is_player()) {
         bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
-        l->thing_new(tp_random_blood_splatter()->name(), new_pos);
+        l->thing_new(tp_random_red_splatter()->name(), new_pos);
       }
 
       l->scroll_map_to_player();

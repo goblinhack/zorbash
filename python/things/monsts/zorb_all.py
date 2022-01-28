@@ -78,6 +78,7 @@ def tp_init(name, text_name):
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)
     mytp.set_is_biome_dungeon(True)
+    mytp.set_is_bleeder(True)
     mytp.set_is_bony(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_crushable(True)

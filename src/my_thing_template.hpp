@@ -233,9 +233,9 @@ private:
   int _is_barrel {};
   int _is_map_beast {};
   int _is_bleeder {};
-  int _is_blood {};
-  int _is_blood_eater {};
-  int _is_blood_splatter {};
+  int _is_red_blood {};
+  int _is_red_blood_eater {};
+  int _is_red_splatter {};
   int _is_bones {};
   int _is_bony {};
   int _is_boots {};
@@ -506,12 +506,12 @@ private:
   int _unused_flag159 {};
   int _unused_flag16 {};
   int _unused_flag160 {};
-  int _unused_flag161 {};
+  int _is_green_blood {};
   int _is_biome_swamp {};
   int _is_biome_dungeon {};
   int _is_treasure {};
   int _is_monst_class_e {};
-  int _unused_flag166 {};
+  int _is_green_blood_eater {};
   int _is_mob_challenge_class_b {};
   int _is_mob_challenge_class_a {};
   int _is_monst_class_d {};
@@ -1121,9 +1121,9 @@ public:
   int is_barrel(void) const { return _is_barrel; }
   int is_map_beast(void) const { return _is_map_beast; }
   int is_bleeder(void) const { return _is_bleeder; }
-  int is_blood_eater(void) const { return _is_blood_eater; }
-  int is_blood_splatter(void) const { return _is_blood_splatter; }
-  int is_blood(void) const { return _is_blood; }
+  int is_red_blood_eater(void) const { return _is_red_blood_eater; }
+  int is_red_splatter(void) const { return _is_red_splatter; }
+  int is_red_blood(void) const { return _is_red_blood; }
   int is_bones(void) const { return _is_bones; }
   int is_bony(void) const { return _is_bony; }
   int is_boots(void) const { return _is_boots; }
@@ -1386,12 +1386,12 @@ public:
   int unused_flag159(void) const { return _unused_flag159; }
   int unused_flag15(void) const { return _unused_flag15; }
   int unused_flag160(void) const { return _unused_flag160; }
-  int unused_flag161(void) const { return _unused_flag161; }
+  int is_green_blood(void) const { return _is_green_blood; }
   int is_biome_swamp(void) const { return _is_biome_swamp; }
   int is_biome_dungeon(void) const { return _is_biome_dungeon; }
   int is_treasure(void) const { return _is_treasure; }
   int is_monst_class_e(void) const { return _is_monst_class_e; }
-  int unused_flag166(void) const { return _unused_flag166; }
+  int is_green_blood_eater(void) const { return _is_green_blood_eater; }
   int is_mob_challenge_class_b(void) const { return _is_mob_challenge_class_b; }
   int is_mob_challenge_class_a(void) const { return _is_mob_challenge_class_a; }
   int is_monst_class_d(void) const { return _is_monst_class_d; }
@@ -1664,9 +1664,9 @@ public:
   void set_is_barrel(int v) { _is_barrel = v; }
   void set_is_map_beast(int v) { _is_map_beast = v; }
   void set_is_bleeder(int v) { _is_bleeder = v; }
-  void set_is_blood_eater(int v) { _is_blood_eater = v; }
-  void set_is_blood(int v) { _is_blood = v; }
-  void set_is_blood_splatter(int v) { _is_blood_splatter = v; }
+  void set_is_red_blood_eater(int v) { _is_red_blood_eater = v; }
+  void set_is_red_blood(int v) { _is_red_blood = v; }
+  void set_is_red_splatter(int v) { _is_red_splatter = v; }
   void set_is_bones(int v) { _is_bones = v; }
   void set_is_bony(int v) { _is_bony = v; }
   void set_is_boots(int v) { _is_boots = v; }
@@ -2014,12 +2014,12 @@ public:
   void set_unused_flag159(int v) { _unused_flag159 = v; }
   void set_unused_flag15(int v) { _unused_flag15 = v; }
   void set_unused_flag160(int v) { _unused_flag160 = v; }
-  void set_unused_flag161(int v) { _unused_flag161 = v; }
+  void set_is_green_blood(int v) { _is_green_blood = v; }
   void set_is_biome_swamp(int v) { _is_biome_swamp = v; }
   void set_is_biome_dungeon(int v) { _is_biome_dungeon = v; }
   void set_is_treasure(int v) { _is_treasure = v; }
   void set_is_monst_class_e(int v) { _is_monst_class_e = v; }
-  void set_unused_flag166(int v) { _unused_flag166 = v; }
+  void set_is_green_blood_eater(int v) { _is_green_blood_eater = v; }
   void set_is_mob_challenge_class_b(int v) { _is_mob_challenge_class_b = v; }
   void set_is_mob_challenge_class_a(int v) { _is_mob_challenge_class_a = v; }
   void set_is_monst_class_d(int v) { _is_monst_class_d = v; }
@@ -2152,8 +2152,6 @@ class Tp *tp_load(int id, const std::string &file, const std::string &text_name,
 class Tp *tp_random_ascend_dungeon(void);
 class Tp *tp_random_ascend_sewer(void);
 class Tp *tp_random_barrel(void);
-class Tp *tp_random_blood_splatter(void);
-class Tp *tp_random_blood(void);
 class Tp *tp_random_bones(void);
 class Tp *tp_random_brazier(void);
 class Tp *tp_random_deco(void);
@@ -2162,13 +2160,13 @@ class Tp *tp_random_descend_sewer(void);
 class Tp *tp_random_dirt(void);
 class Tp *tp_random_door(void);
 class Tp *tp_random_dry_grass(void);
-class Tp *tp_random_wet_grass(void);
 class Tp *tp_random_enchantstone(void);
 class Tp *tp_random_ethereal_mob(void);
 class Tp *tp_random_floor(void);
 class Tp *tp_random_foilage(void);
 class Tp *tp_random_food(void);
 class Tp *tp_random_gold(void);
+class Tp *tp_random_green_blood(void);
 class Tp *tp_random_green_splatter(void);
 class Tp *tp_random_item_class_a(void);
 class Tp *tp_random_item_class_b(void);
@@ -2180,38 +2178,40 @@ class Tp *tp_random_key(void);
 class Tp *tp_random_mob_challenge_class_a(void);
 class Tp *tp_random_mob_challenge_class_b(void);
 class Tp *tp_random_mob(void);
+class Tp *tp_random_monst_class_a(void);
+class Tp *tp_random_monst_class_b(void);
+class Tp *tp_random_monst_class_c(void);
+class Tp *tp_random_monst_class_d(void);
+class Tp *tp_random_monst_class_e(void);
 class Tp *tp_random_monst(void);
 class Tp *tp_random_pink_splatter(void);
 class Tp *tp_random_potion(void);
+class Tp *tp_random_red_blood(void);
+class Tp *tp_random_red_splatter(void);
+class Tp *tp_random_ring_class_a(void);
+class Tp *tp_random_ring_class_b(void);
+class Tp *tp_random_ring_class_c(void);
 class Tp *tp_random_ring(void);
-class Tp *tp_random_wand(void);
-class Tp *tp_random_weapon(void);
 class Tp *tp_random_ripple(void);
 class Tp *tp_random_rock(void);
 class Tp *tp_random_secret_door(void);
 class Tp *tp_random_sewer_wall(void);
 class Tp *tp_random_skillstone(void);
 class Tp *tp_random_spiderweb(void);
+class Tp *tp_random_treasure_class_a(void);
+class Tp *tp_random_treasure_class_b(void);
+class Tp *tp_random_treasure_class_c(void);
 class Tp *tp_random_treasure(void);
 class Tp *tp_random_wall_dungeon(void);
+class Tp *tp_random_wand_class_a(void);
+class Tp *tp_random_wand_class_b(void);
+class Tp *tp_random_wand_class_c(void);
 class Tp *tp_random_wand(void);
 class Tp *tp_random_weapon_class_a(void);
 class Tp *tp_random_weapon_class_b(void);
 class Tp *tp_random_weapon_class_c(void);
-class Tp *tp_random_wand_class_a(void);
-class Tp *tp_random_wand_class_b(void);
-class Tp *tp_random_wand_class_c(void);
-class Tp *tp_random_ring_class_a(void);
-class Tp *tp_random_ring_class_b(void);
-class Tp *tp_random_ring_class_c(void);
-class Tp *tp_random_treasure_class_a(void);
-class Tp *tp_random_treasure_class_b(void);
-class Tp *tp_random_treasure_class_c(void);
-class Tp *tp_random_monst_class_a(void);
-class Tp *tp_random_monst_class_b(void);
-class Tp *tp_random_monst_class_c(void);
-class Tp *tp_random_monst_class_d(void);
-class Tp *tp_random_monst_class_e(void);
+class Tp *tp_random_weapon(void);
+class Tp *tp_random_wet_grass(void);
 
 const Tpidmap &tp_get_skills(void);
 

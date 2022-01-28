@@ -862,8 +862,8 @@ class Tp:
     def set_unused_flag160(self, value):
         my.tp_set_unused_flag160(self, value)
 
-    def set_unused_flag161(self, value):
-        my.tp_set_unused_flag161(self, value)
+    def set_is_green_blood(self, value):
+        my.tp_set_is_green_blood(self, value)
 
     def set_is_biome_swamp(self, value):
         my.tp_set_is_biome_swamp(self, value)
@@ -877,8 +877,8 @@ class Tp:
     def set_is_monst_class_e(self, value):
         my.tp_set_is_monst_class_e(self, value)
 
-    def set_unused_flag166(self, value):
-        my.tp_set_unused_flag166(self, value)
+    def set_is_green_blood_eater(self, value):
+        my.tp_set_is_green_blood_eater(self, value)
 
     def set_is_mob_challenge_class_b(self, value):
         my.tp_set_is_mob_challenge_class_b(self, value)
@@ -1099,8 +1099,8 @@ class Tp:
     def set_attack_undead(self, value):
         my.tp_set_attack_undead(self, value)
 
-    def set_is_blood_eater(self, value):
-        my.tp_set_is_blood_eater(self, value)
+    def set_is_red_blood_eater(self, value):
+        my.tp_set_is_red_blood_eater(self, value)
 
     def set_attack_blood(self, value):
         my.tp_set_attack_blood(self, value)
@@ -1768,8 +1768,8 @@ class Tp:
     def set_is_cursor_path(self, value):
         my.tp_set_is_cursor_path(self, value)
 
-    def set_is_blood_splatter(self, value):
-        my.tp_set_is_blood_splatter(self, value)
+    def set_is_red_splatter(self, value):
+        my.tp_set_is_red_splatter(self, value)
 
     def set_is_no_tile(self, value):
         my.tp_set_is_no_tile(self, value)
@@ -1951,8 +1951,8 @@ class Tp:
     def set_light_power(self, value):
         my.tp_set_light_power(self, value)
 
-    def set_is_blood(self, value):
-        my.tp_set_is_blood(self, value)
+    def set_is_red_blood(self, value):
+        my.tp_set_is_red_blood(self, value)
 
     def set_gfx_animated_can_vflip(self, value):
         my.tp_set_gfx_animated_can_vflip(self, value)

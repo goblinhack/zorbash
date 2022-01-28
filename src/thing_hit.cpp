@@ -868,9 +868,14 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  /*
-   * Check for wand of fire projectiles (this is the non real hitter case)
-   */
+  //
+  // Trail of blood?
+  //
+  place_blood();
+
+  //
+  // Check for wand of fire projectiles (this is the non real hitter case)
+  //
   if (attack_fire || hitter->is_fire() || hitter->is_lava() || real_hitter->is_fire() || real_hitter->is_lava()) {
     if (set_on_fire("hit by fire")) {
       if (is_player()) {
@@ -936,12 +941,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     } else if (is_green_blooded()) {
       level->thing_new(tp_random_green_splatter()->name(), curr_at);
     } else if (is_red_blooded()) {
-      level->thing_new(tp_random_blood_splatter()->name(), curr_at);
+      level->thing_new(tp_random_red_splatter()->name(), curr_at);
     } else {
       //
       // Need something else for the undead?
       //
-      level->thing_new(tp_random_blood_splatter()->name(), curr_at);
+      level->thing_new(tp_random_red_splatter()->name(), curr_at);
     }
   }
 

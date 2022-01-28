@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- when putting on armor it only syncs after 1 move                                                                                             -->
+<!-- test green and add pink blood                                                                                                                -->
 <!-- should be able to hide behind bushes                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -8,7 +8,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- - swamp gas                                                                                                                                  -->
 <!-- - swamp wort food                                                                                                                            -->
-<!-- - swamp belcher                                                                                                                                  -->
+<!-- - swamp belcher                                                                                                                              -->
 <!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 jelly boss, spawns jellys, tries to jump splat the player                                                                           -->
 <!--          swamp wort, gas bloater and swamp tiles that allow 50% movement                                                                     -->

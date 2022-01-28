@@ -678,16 +678,16 @@ int Thing::is_bleeder(void)
   return (tp()->is_bleeder());
 }
 
-int Thing::is_blood_splatter(void)
+int Thing::is_red_splatter(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_blood_splatter());
+  return (tp()->is_red_splatter());
 }
 
-int Thing::is_blood(void)
+int Thing::is_red_blood(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_blood());
+  return (tp()->is_red_blood());
 }
 
 int Thing::is_bones(void)
@@ -2358,10 +2358,10 @@ int Thing::unused_flag160(void)
   return (tp()->unused_flag160());
 }
 
-int Thing::unused_flag161(void)
+int Thing::is_green_blood(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag161());
+  return (tp()->is_green_blood());
 }
 
 int Thing::is_biome_swamp(void)
@@ -2388,10 +2388,10 @@ int Thing::is_monst_class_e(void)
   return (tp()->is_monst_class_e());
 }
 
-int Thing::unused_flag166(void)
+int Thing::is_green_blood_eater(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag166());
+  return (tp()->is_green_blood_eater());
 }
 
 int Thing::is_mob_challenge_class_b(void)
@@ -2736,10 +2736,10 @@ int Thing::attack_undead(void)
   return (tp()->attack_undead());
 }
 
-int Thing::is_blood_eater(void)
+int Thing::is_red_blood_eater(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_blood_eater());
+  return (tp()->is_red_blood_eater());
 }
 
 int Thing::attack_blood(void)
