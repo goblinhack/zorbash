@@ -342,59 +342,60 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
 
   bits64 = 0;
   shift  = 0;
-  bits64 |= (my.t->i_set_water ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_acid ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_dungeon ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_sewer ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_barrel ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_red_blood ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_green_blood ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_pink_blood ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_chasm ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_corpse ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_corridor ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_cursor_path_hazard_for_player ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_deep_water ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_descend_dungeon ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_descend_sewer ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_dirt ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_door ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_dry_grass ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_wet_grass ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_enchantstone ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_cursor_path_hazard_for_player ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_heavy ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_fire ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_floor ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_foilage ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_food ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_gas_blocker ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gold ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_green_blood ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_hazard ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_heavy ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_key ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_lava ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_light_blocker ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_light_blocker_for_monst ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_mob ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_monst ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_obs_wall_or_door ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_obs_destructable ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_poisonous_danger_level ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_necrotic_danger_level ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_obs_destructable ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_obs_wall_or_door ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_pink_blood ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_poisonous_danger_level ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_potion ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_red_blood ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_ring ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ripple ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_rock ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_secret_door ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_shallow_water ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_shovable ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_skillstone ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_smoke ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_spiderweb ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_sticky ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_shovable ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_treasure_type ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_wall ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_wand ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_ring ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_wet_grass ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_water ? 1LLU : 0LLU) << shift; shift++;
   // clang-format on
 
   if (shift >= (int) (sizeof(bits64) * 8)) {
@@ -467,6 +468,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   out << bits(my.t->gas_swamp);
 
+  out << bits(my.t->_is_gas_blocker);
   out << bits(my.t->_is_light_blocker);
   out << bits(my.t->_is_light_blocker_for_monst);
   out << bits(my.t->_is_lit_ever);

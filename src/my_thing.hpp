@@ -161,9 +161,9 @@ public:
   uint64_t i_set_is_floor                         : 1 {};
   uint64_t i_set_is_foilage                       : 1 {};
   uint64_t i_set_is_food                          : 1 {};
+  uint64_t i_set_is_gas_blocker                   : 1 {};
   uint64_t i_set_is_gold                          : 1 {};
   uint64_t i_set_is_green_blood                   : 1 {};
-  uint64_t i_set_is_pink_blood                    : 1 {};
   uint64_t i_set_is_hazard                        : 1 {};
   uint64_t i_set_is_heavy                         : 1 {};
   uint64_t i_set_is_key                           : 1 {};
@@ -175,6 +175,7 @@ public:
   uint64_t i_set_is_necrotic_danger_level         : 1 {};
   uint64_t i_set_is_obs_destructable              : 1 {};
   uint64_t i_set_is_obs_wall_or_door              : 1 {};
+  uint64_t i_set_is_pink_blood                    : 1 {};
   uint64_t i_set_is_poisonous_danger_level        : 1 {};
   uint64_t i_set_is_potion                        : 1 {};
   uint64_t i_set_is_red_blood                     : 1 {};
@@ -704,6 +705,7 @@ public:
   int blast_min_radius(void);
   int break_chance_d10000(void);
   int buff_on_damage_acid(Thingp hitter, int damage);
+  int buff_on_damage_cold(Thingp hitter, int damage);
   int buff_on_damage_crush(Thingp hitter, int damage);
   int buff_on_damage_digest(Thingp hitter, int damage);
   int buff_on_damage_energy(Thingp hitter, int damage);
@@ -711,7 +713,6 @@ public:
   int buff_on_damage_future1(Thingp hitter, int damage);
   int buff_on_damage_future2(Thingp hitter, int damage);
   int buff_on_damage_future3(Thingp hitter, int damage);
-  int buff_on_damage_cold(Thingp hitter, int damage);
   int buff_on_damage_lightning(Thingp hitter, int damage);
   int buff_on_damage_melee(Thingp hitter, int damage);
   int buff_on_damage_natural_attack(Thingp hitter, int damage);
@@ -725,6 +726,7 @@ public:
   int collision_check(void);
   int collision_hit_priority(void);
   int damage_acid_chance_d1000(void);
+  int damage_cold_chance_d1000(void);
   int damage_crush_chance_d1000(void);
   int damage_digest_chance_d1000(void);
   int damage_energy_chance_d1000(void);
@@ -732,7 +734,6 @@ public:
   int damage_future1_chance_d1000(void);
   int damage_future2_chance_d1000(void);
   int damage_future3_chance_d1000(void);
-  int damage_cold_chance_d1000(void);
   int damage_lightning_chance_d1000(void);
   int damage_melee_chance_d1000(void);
   int damage_natural_attack_chance_d1000(void);
@@ -767,8 +768,6 @@ public:
   int decr_keys(void);
   int decr_lifespan(int);
   int decr_lifespan(void);
-  int decr_prev_light_power(int);
-  int decr_prev_light_power(void);
   int decr_light_power(int);
   int decr_light_power(void);
   int decr_minion_count(int);
@@ -779,6 +778,8 @@ public:
   int decr_owned_count(void);
   int decr_poisoned_amount(int);
   int decr_poisoned_amount(void);
+  int decr_prev_light_power(int);
+  int decr_prev_light_power(void);
   int decr_spawned_count(int);
   int decr_spawned_count(void);
   int decr_stamina(int);
@@ -840,8 +841,6 @@ public:
   int environ_prefers_spiderwebs(void);
   int environ_prefers_water(void);
   int get_attack_modifier(Thingp victim);
-  int get_map_beast_carried_count(void);
-  int get_map_beast_count(void);
   int get_bounce_count(void);
   int get_carried_amulet_count(void);
   int get_carried_amulet_highest_value_for_target(Thingp *out, Thingp target);
@@ -887,6 +886,7 @@ public:
   int get_charge_count(void);
   int get_current_damage(void);
   int get_damage_acid(void);
+  int get_damage_cold(void);
   int get_damage_crush(void);
   int get_damage_digest(void);
   int get_damage_energy(void);
@@ -894,7 +894,6 @@ public:
   int get_damage_future1(void);
   int get_damage_future2(void);
   int get_damage_future3(void);
-  int get_damage_cold(void);
   int get_damage_lightning(void);
   int get_damage_max(void);
   int get_damage_melee(void);
@@ -930,6 +929,10 @@ public:
   int get_lifespan(void);
   int get_light_power_initial(void);
   int get_light_power(void);
+  int get_map_beast_carried_count(void);
+  int get_map_beast_count(void);
+  int get_map_treasure_carried_count(void);
+  int get_map_treasure_count(void);
   int get_minion_count(void);
   int get_necrotized_amount(void);
   int get_nutrition(void);
@@ -946,13 +949,13 @@ public:
   int get_stamina_max(void);
   int get_stamina(void);
   int get_stat_att_mod(void);
+  int get_stat_att_penalties_total(void);
   int get_stat_con_mod(void);
   int get_stat_con_total(void);
   int get_stat_con(void);
   int get_stat_def_mod(void);
-  int get_stat_def_total(void);
   int get_stat_def_penalties_total(void);
-  int get_stat_att_penalties_total(void);
+  int get_stat_def_total(void);
   int get_stat_def(void);
   int get_stat_dex_mod(void);
   int get_stat_dex_total(void);
@@ -971,8 +974,7 @@ public:
   int get_stuck_count(void);
   int get_submerged_offset(void);
   int get_torch_count(void);
-  int get_map_treasure_carried_count(void);
-  int get_map_treasure_count(void);
+  int get_value(const Thingp it);
   int gfx_an_animation_only(void);
   int gfx_animated_can_hflip(void);
   int gfx_animated_can_vflip(void);
@@ -1029,11 +1031,11 @@ public:
   int incr_necrotized_amount(int);
   int incr_necrotized_amount(void);
   int incr_owned_count(int);
-  int incr_prev_light_power(int);
-  int incr_prev_light_power(void);
   int incr_owned_count(void);
   int incr_poisoned_amount(int);
   int incr_poisoned_amount(void);
+  int incr_prev_light_power(int);
+  int incr_prev_light_power(void);
   int incr_spawned_count(int);
   int incr_spawned_count(void);
   int incr_stamina(int);
@@ -1064,7 +1066,6 @@ public:
   int incr_stats05(void);
   int incr_stats06(int);
   int incr_stats06(void);
-  int get_value(const Thingp it);
   int incr_stats07(int);
   int incr_stats07(void);
   int incr_stats09(int);
@@ -1213,6 +1214,7 @@ public:
   int is_foilage(void);
   int is_food_eater(void);
   int is_food(void);
+  int is_gas_blocker(void);
   int is_gauntlet(void);
   int is_gfx_anim_synced_with_owner(void);
   int is_glass(void);
@@ -1522,7 +1524,6 @@ public:
   int unused_flag155(void);
   int unused_flag156(void);
   int unused_flag157(void);
-  int unused_flag158(void);
   int unused_flag15(void);
   int unused_flag16(void);
   int unused_flag17(void);

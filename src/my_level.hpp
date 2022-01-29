@@ -29,6 +29,7 @@ public:
   //
   // These are caches for fast lookup in display code
   //
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_gas_blocker {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker_for_monst {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_lit_ever {};
@@ -656,6 +657,10 @@ public:
   bool is_light_blocker_for_monst(const point p) const;
   bool is_light_blocker_for_monst_no_check(const int x, const int y) const;
   bool is_light_blocker_for_monst_no_check(const point p) const;
+  bool is_gas_blocker(const int x, const int y) const;
+  bool is_gas_blocker(const point p) const;
+  bool is_gas_blocker_no_check(const int x, const int y) const;
+  bool is_gas_blocker_no_check(const point p) const;
   bool is_obs_destructable(const int x, const int y) const;
   bool is_obs_destructable(const point p) const;
   bool is_obs_destructable_no_check(const int x, const int y) const;
@@ -955,17 +960,18 @@ public:
   void set_is_floor(const int x, const int y);
   void set_is_foilage(const int x, const int y);
   void set_is_food(const int x, const int y);
+  void set_is_gas_blocker(const int x, const int y);
+  void set_is_gas_blocker_no_check(const int x, const int y);
   void set_is_gold(const int x, const int y);
   void set_is_green_blood(const int x, const int y);
-  void set_is_pink_blood(const int x, const int y);
   void set_is_hazard(const int x, const int y);
   void set_is_heavy(const int x, const int y);
   void set_is_key(const int x, const int y);
   void set_is_lava(const int x, const int y);
   void set_is_light_blocker(const int x, const int y);
-  void set_is_light_blocker_no_check(const int x, const int y);
   void set_is_light_blocker_for_monst(const int x, const int y);
   void set_is_light_blocker_for_monst_no_check(const int x, const int y);
+  void set_is_light_blocker_no_check(const int x, const int y);
   void set_is_lit_currently(const int x, const int y);
   void set_is_lit_currently_no_check(const int x, const int y);
   void set_is_lit_currently_no_check(const int x, const int y, uint8_t v);
@@ -980,6 +986,7 @@ public:
   void set_is_obs_destructable_no_check(const int x, const int y);
   void set_is_obs_wall_or_door(const int x, const int y);
   void set_is_obs_wall_or_door_no_check(const int x, const int y);
+  void set_is_pink_blood(const int x, const int y);
   void set_is_potion(const int x, const int y);
   void set_is_red_blood(const int x, const int y);
   void set_is_ring(const int x, const int y);
@@ -1001,6 +1008,7 @@ public:
   void things_gc_force(void);
   void things_gc_if_possible(void);
   void things_tick(void);
+  void tick_gas(void);
   void unset_fade_in(const int x, const int y);
   void unset_fade_in_no_check(const int x, const int y);
   void unset_gfx_water(const int x, const int y);
@@ -1028,17 +1036,18 @@ public:
   void unset_is_floor(const int x, const int y);
   void unset_is_foilage(const int x, const int y);
   void unset_is_food(const int x, const int y);
+  void unset_is_gas_blocker(const int x, const int y);
+  void unset_is_gas_blocker_no_check(const int x, const int y);
   void unset_is_gold(const int x, const int y);
   void unset_is_green_blood(const int x, const int y);
-  void unset_is_pink_blood(const int x, const int y);
   void unset_is_hazard(const int x, const int y);
   void unset_is_heavy(const int x, const int y);
   void unset_is_key(const int x, const int y);
   void unset_is_lava(const int x, const int y);
   void unset_is_light_blocker(const int x, const int y);
-  void unset_is_light_blocker_no_check(const int x, const int y);
   void unset_is_light_blocker_for_monst(const int x, const int y);
   void unset_is_light_blocker_for_monst_no_check(const int x, const int y);
+  void unset_is_light_blocker_no_check(const int x, const int y);
   void unset_is_lit_currently(const int x, const int y);
   void unset_is_lit_currently_no_check(const int x, const int y);
   void unset_is_lit_ever(const int x, const int y);
@@ -1051,6 +1060,7 @@ public:
   void unset_is_obs_destructable_no_check(const int x, const int y);
   void unset_is_obs_wall_or_door(const int x, const int y);
   void unset_is_obs_wall_or_door_no_check(const int x, const int y);
+  void unset_is_pink_blood(const int x, const int y);
   void unset_is_potion(const int x, const int y);
   void unset_is_red_blood(const int x, const int y);
   void unset_is_ring(const int x, const int y);

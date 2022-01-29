@@ -8,6 +8,7 @@ def tp_init(name, text_name):
     mytp.set_is_biome_dungeon(True)
     mytp.set_is_cursor_can_hover_over(True)
     mytp.set_is_described_when_hovering_over(True)
+    mytp.set_is_gas_blocker(True)
     mytp.set_is_interesting(True)
     mytp.set_is_light_blocker(True)
     mytp.set_is_secret_door(True)

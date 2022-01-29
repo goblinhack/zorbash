@@ -1969,6 +1969,46 @@ void Level::unset_is_light_blocker_for_monst_no_check(const int x, const int y)
   set_no_check(_is_light_blocker_for_monst, x, y, false);
 }
 
+bool Level::is_gas_blocker(const point p) const
+{
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_gas_blocker, p.x, p.y));
+}
+
+bool Level::is_gas_blocker_no_check(const point p) const { return (get_no_check(_is_gas_blocker, p.x, p.y)); }
+
+bool Level::is_gas_blocker(const int x, const int y) const
+{
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_gas_blocker, x, y));
+}
+
+bool Level::is_gas_blocker_no_check(const int x, const int y) const { return (get_no_check(_is_gas_blocker, x, y)); }
+
+void Level::set_is_gas_blocker(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_gas_blocker, x, y, true);
+}
+
+void Level::set_is_gas_blocker_no_check(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, true); }
+
+void Level::unset_is_gas_blocker(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_gas_blocker, x, y, false);
+}
+
+void Level::unset_is_gas_blocker_no_check(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, false); }
+
 //
 // Used in lighting, so inlined
 //

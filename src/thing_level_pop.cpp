@@ -165,6 +165,10 @@ void Thing::level_pop(void)
     i_set_is_light_blocker_for_monst = false;
     level->unset_is_light_blocker_for_monst(mx, my);
   }
+  if (i_set_is_gas_blocker) {
+    i_set_is_gas_blocker = false;
+    level->unset_is_gas_blocker(mx, my);
+  }
   if (i_set_is_monst) {
     i_set_is_monst = false;
     level->unset_is_monst(mx, my);
