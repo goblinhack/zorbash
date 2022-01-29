@@ -206,6 +206,8 @@ PyObject *level_is_lava_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_light_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_light_blocker_for_monst_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_light_blocker_for_monst_for_monst_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_gas_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_gas_blocker_for_monst_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_living_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_loggable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_meat_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -364,7 +366,7 @@ PyObject *level_unused_flag154_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag155_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag156_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag157_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag158_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_gas_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag15_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag16_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag17_at(PyObject *obj, PyObject *args, PyObject *keywds);

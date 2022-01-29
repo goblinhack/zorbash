@@ -853,8 +853,8 @@ class Tp:
     def set_unused_flag157(self, value):
         my.tp_set_unused_flag157(self, value)
 
-    def set_unused_flag158(self, value):
-        my.tp_set_unused_flag158(self, value)
+    def set_is_gas_blocker(self, value):
+        my.tp_set_is_gas_blocker(self, value)
 
     def set_is_light_blocker_for_monst(self, value):
         my.tp_set_is_light_blocker_for_monst(self, value)

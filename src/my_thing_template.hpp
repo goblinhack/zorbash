@@ -532,7 +532,7 @@ private:
   int _unused_flag155 {};
   int _unused_flag156 {};
   int _unused_flag157 {};
-  int _unused_flag158 {};
+  int _is_gas_blocker {};
   int _unused_flag16 {};
   int _unused_flag17 {};
   int _unused_flag18 {};
@@ -1412,7 +1412,7 @@ public:
   int unused_flag155(void) const { return _unused_flag155; }
   int unused_flag156(void) const { return _unused_flag156; }
   int unused_flag157(void) const { return _unused_flag157; }
-  int unused_flag158(void) const { return _unused_flag158; }
+  int is_gas_blocker(void) const { return _is_gas_blocker; }
   int unused_flag15(void) const { return _unused_flag15; }
   int unused_flag16(void) const { return _unused_flag16; }
   int unused_flag17(void) const { return _unused_flag17; }
@@ -2040,7 +2040,7 @@ public:
   void set_unused_flag155(int v) { _unused_flag155 = v; }
   void set_unused_flag156(int v) { _unused_flag156 = v; }
   void set_unused_flag157(int v) { _unused_flag157 = v; }
-  void set_unused_flag158(int v) { _unused_flag158 = v; }
+  void set_is_gas_blocker(int v) { _is_gas_blocker = v; }
   void set_unused_flag15(int v) { _unused_flag15 = v; }
   void set_unused_flag16(int v) { _unused_flag16 = v; }
   void set_unused_flag17(int v) { _unused_flag17 = v; }

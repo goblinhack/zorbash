@@ -48,6 +48,7 @@ void Level::clear(void)
   _is_lava                    = {};
   _is_light_blocker           = {};
   _is_light_blocker_for_monst = {};
+  _is_gas_blocker             = {};
   _is_lit_currently           = {};
   _is_lit_ever                = {};
   _is_monst                   = {};
