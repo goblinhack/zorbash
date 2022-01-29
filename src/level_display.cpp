@@ -354,7 +354,7 @@ void Level::display_map(void)
     if ((time_get_time_ms_cached() < ts_fade_in_begin) ||
         (time_get_time_ms_cached() - ts_fade_in_begin > LEVEL_FADE_IN_MS)) {
       is_map_mini_valid = false;
-      ts_fade_in_begin = 0;
+      ts_fade_in_begin  = 0;
       if (player) {
         player->log("Fade in of level finished");
       }
@@ -466,6 +466,8 @@ void Level::display_map(void)
     // So we can see monsts jump over walls
     //
     display_internal_particles();
+
+    display_gas(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
 
     IF_NODEBUG2
     {

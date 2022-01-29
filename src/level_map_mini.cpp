@@ -285,13 +285,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
 
         edge_of_sceen = false; // Not sure I like seeing this
 
-        if (is_ascend_dungeon(x, y)) {
-          c   = GREEN;
-          c.a = 255;
-        } else if (is_descend_dungeon(x, y)) {
-          c   = PURPLE;
-          c.a = 255;
-        } else if (is_monst(x, y) && has_map_beast) {
+        if (is_monst(x, y) && has_map_beast) {
           c   = RED;
           c.a = 255;
         } else if (! is_lit_ever(x, y)) {
@@ -302,6 +296,12 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
             c   = BLACK;
             c.a = 100;
           }
+        } else if (is_ascend_dungeon(x, y)) {
+          c   = GREEN;
+          c.a = 255;
+        } else if (is_descend_dungeon(x, y)) {
+          c   = PURPLE;
+          c.a = 255;
         } else if (is_monst(x, y)) {
           c = RED;
         } else if (is_mob(x, y)) {

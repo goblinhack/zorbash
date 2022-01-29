@@ -8973,6 +8973,22 @@ def init_tiles3_surface_effects():
         "lava1.14",
         "lava1.15",
         "lava1.16",
+        "gas1.1",
+        "gas1.2",
+        "gas1.3",
+        "gas1.4",
+        "gas1.5",
+        "gas1.6",
+        "gas1.7",
+        "gas1.8",
+        "gas1.9",
+        "gas1.10",
+        "gas1.11",
+        "gas1.12",
+        "gas1.13",
+        "gas1.14",
+        "gas1.15",
+        "gas1.16",
     ]
 
     my.tile_load_arr_sprites(

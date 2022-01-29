@@ -10,6 +10,7 @@
 #include <strings.h> // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
+color LIGHTGREEN;
 #if 0
 color HOTPINK1;
 color HOTPINK2;
@@ -52,7 +53,6 @@ color LIGHTCYAN3;
 color LIGHTCYAN4;
 color LIGHTCYAN;
 color LIGHTGRAY;
-color LIGHTGREEN;
 color LIGHTPINK1;
 color LIGHTPINK2;
 color LIGHTPINK3;
@@ -71,6 +71,7 @@ color LIGHTSLATEGRAY;
 void color_init3(void)
 {
   TRACE_AND_INDENT();
+  color_set("lightgreen", &LIGHTGREEN, 144, 238, 144, 255);
 #if 0
   color_set("hotpink1", &HOTPINK1, 255, 110, 180, 255);
   color_set("hotpink2", &HOTPINK2, 238, 106, 167, 255);
@@ -111,7 +112,6 @@ void color_init3(void)
   color_set("lightcyan4", &LIGHTCYAN4, 122, 139, 139, 255);
   color_set("lightcyan", &LIGHTCYAN, 224, 255, 255, 255);
   color_set("lightgray", &LIGHTGRAY, 211, 211, 211, 255);
-  color_set("lightgreen", &LIGHTGREEN, 144, 238, 144, 255);
   color_set("lightpink1", &LIGHTPINK1, 255, 174, 185, 255);
   color_set("lightpink2", &LIGHTPINK2, 238, 162, 173, 255);
   color_set("lightpink3", &LIGHTPINK3, 205, 140, 149, 255);

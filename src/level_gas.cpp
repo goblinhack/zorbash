@@ -146,7 +146,7 @@ void Level::tick_gas(void)
 
   old_gas = gas_swamp;
 
-  uint8_t step = pcg_random_range(0, 10) + 1;
+  uint8_t step = pcg_random_range(0, 7) + 1;
   for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; y++) {
     uint16_t x = DUNGEON_GAS_RESOLUTION;
 
