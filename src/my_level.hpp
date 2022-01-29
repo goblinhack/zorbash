@@ -878,6 +878,7 @@ public:
   void display_internal_particles(void);
   void display_lasers(void);
   void display_lava(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
+  void display_gas(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
   void display_map_bg_things(void);
   void display_map_debug(int x, int y);
   void display_map_debug(int x, int y, int tlx, int tly, int brx, int bly);

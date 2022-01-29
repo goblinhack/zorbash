@@ -10,7 +10,6 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_damage_fire_chance_d1000(1000)
     mytp.set_damage_fire_dice("1d12+6")
     mytp.set_damage_natural_attack_type("burn")
-    mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)
     mytp.set_gfx_glows(True)
     mytp.set_is_able_to_fall(True)

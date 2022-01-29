@@ -21,7 +21,7 @@
 //
 // How granular gas is. This divides up a single tile.
 //
-#define DUNGEON_GAS_RESOLUTION 2
+#define DUNGEON_GAS_RESOLUTION 8
 
 #define LEVEL_FADE_IN_MS   500 // Level start fade animation time
 #define LEVEL_FADE_OUT_MS  500 // Level end fade animation time
