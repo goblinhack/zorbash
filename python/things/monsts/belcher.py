@@ -64,6 +64,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_stat_def(0)
     mytp.set_stat_dex(0)
     mytp.set_stat_str(10)
+    mytp.set_is_shovable(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_obstacle_when_dead(True)
     mytp.set_text_a_or_an("a")

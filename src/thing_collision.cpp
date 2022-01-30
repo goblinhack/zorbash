@@ -482,8 +482,10 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       }
 
       if (it->is_dead) {
-        dbg("No; ignore corpse");
-        return false;
+        if (! it->is_obstacle_when_dead()) {
+          dbg("No; ignore corpse");
+          return false;
+        }
       }
     }
   }

@@ -268,7 +268,11 @@ bool Thing::fall_to_next_level(void)
         } else {
           if (is_monst()) {
             msg("%s tumbles into the void!", text_The().c_str());
-            popup("Aargh");
+            if (is_humanoid()) {
+              if (! is_dead) {
+                popup("Curses!");
+              }
+            }
           } else if (is_item()) {
             msg("%s falls into the void!", text_The().c_str());
           } else {

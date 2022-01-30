@@ -130,7 +130,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     }
 
     if (it->is_monst()) {
-      it->popup(string_sprintf("%%fg=orange$!"));
+      if (! it->is_dead) {
+        it->popup(string_sprintf("%%fg=orange$!"));
+      }
     }
   }
 

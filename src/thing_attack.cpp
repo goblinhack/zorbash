@@ -851,7 +851,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       if (! hit) {
         if (is_player() || (owner && owner->is_player())) {
           msg("You miss %s.", victim->text_the().c_str());
-          popup("!");
+          popup("missed!");
         } else if (victim->is_player()) {
           if (owner) {
             msg("%s misses with %s.", owner->text_the().c_str(), text_the().c_str());
