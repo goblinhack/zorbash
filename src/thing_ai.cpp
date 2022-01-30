@@ -1545,7 +1545,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
             AI_LOG("Trying to break down a door", it);
             if (is_player()) {
               player_tick(left, right, up, down, attack, wait, jump);
-            } else {
+            } else if (is_moveable()) {
               move(curr_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
             }
             return true;
@@ -1567,7 +1567,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
             AI_LOG("Trying to break out of a web", it);
             if (is_player()) {
               player_tick(left, right, up, down, attack, wait, jump);
-            } else {
+            } else if (is_moveable()) {
               move(curr_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
             }
             return true;
@@ -2503,7 +2503,7 @@ bool Thing::ai_tick(bool recursing)
   if (do_something) {
     if (is_player()) {
       player_tick(left, right, up, down, attack, wait, jump);
-    } else {
+    } else if (is_moveable()) {
       move(curr_at, up, down, left, right, attack, wait, false, false);
     }
   }

@@ -5,7 +5,7 @@
 #include "my_level.hpp"
 #include "my_random.hpp"
 
-void Level::tick_gas(void)
+void Level::tick_gas_swamp(void)
 {
   static std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
       old_gas {};
