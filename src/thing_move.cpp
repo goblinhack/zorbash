@@ -180,10 +180,14 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   TRACE_NO_INDENT();
   dbg("Move");
 
-  if (is_dead) {
+  if (! is_moveable()) {
+    dbg("Cannot move");
     return false;
   }
-
+  if (is_dead) {
+    dbg("Cannot move; dead");
+    return false;
+  }
   if (is_hidden) {
     dbg("Move; no, is hidden");
     return false;

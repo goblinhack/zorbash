@@ -45,6 +45,11 @@ bool Thing::ai_escape(void)
   dbg("AI escape");
   TRACE_AND_INDENT();
 
+  if (! is_moveable()) {
+    dbg("No cannot move");
+    return false;
+  }
+
   //
   // Need to clear any existing path, so we don't come back to that later and jump around the screen
   //

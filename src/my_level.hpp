@@ -1009,7 +1009,7 @@ public:
   void things_gc_force(void);
   void things_gc_if_possible(void);
   void things_tick(void);
-  void tick_gas(void);
+  void tick_gas_swamp(void);
   void unset_fade_in(const int x, const int y);
   void unset_fade_in_no_check(const int x, const int y);
   void unset_gfx_water(const int x, const int y);
