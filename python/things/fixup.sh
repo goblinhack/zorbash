@@ -457,7 +457,7 @@ do
       set_unused_flag154 \
       set_unused_flag155 \
       set_unused_flag156 \
-      set_unused_flag157 \
+      set_is_obstacle_when_dead \
       set_is_gas_blocker \
       set_is_light_blocker_for_monst \
       set_is_pink_blood_eater \

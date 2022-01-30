@@ -64,6 +64,8 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_stat_def(0)
     mytp.set_stat_dex(0)
     mytp.set_stat_str(10)
+    mytp.set_is_corpse_on_death(True)
+    mytp.set_is_obstacle_when_dead(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A gaseous belcher. But don't call it that to its face.")
     mytp.set_text_hits("burns")
@@ -75,6 +77,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_tile(tile=name + "_awake.2", delay_ms=delay)
     mytp.set_tile(tile=name + "_awake.3", delay_ms=delay)
     mytp.set_tile(tile=name + "_awake.4", delay_ms=delay)
+    mytp.set_tile(tile=name + "_dead.1", delay_ms=delay, is_dead=True)
 
     mytp.update()
 

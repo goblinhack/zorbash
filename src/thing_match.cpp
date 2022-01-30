@@ -1133,7 +1133,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag156() && (what == "unused_flag156")) {
     return true;
   }
-  if (unused_flag157() && (what == "unused_flag157")) {
+  if (is_obstacle_when_dead() && (what == "is_obstacle_when_dead")) {
     return true;
   }
   if (is_gas_blocker() && (what == "is_gas_blocker")) {
@@ -2424,8 +2424,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag156") {
     return &Thing::unused_flag156;
   }
-  if (what == "unused_flag157") {
-    return &Thing::unused_flag157;
+  if (what == "is_obstacle_when_dead") {
+    return &Thing::is_obstacle_when_dead;
   }
   if (what == "is_gas_blocker") {
     return &Thing::is_gas_blocker;

@@ -2346,10 +2346,10 @@ int Thing::unused_flag156(void)
   return (tp()->unused_flag156());
 }
 
-int Thing::unused_flag157(void)
+int Thing::is_obstacle_when_dead(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag157());
+  return (tp()->is_obstacle_when_dead());
 }
 
 int Thing::is_pink_blood_eater(void)

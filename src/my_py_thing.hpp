@@ -460,7 +460,7 @@ PyObject *thing_unused_flag153(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag154(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag155(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag156(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag157(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_obstacle_when_dead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gas_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_light_blocker_for_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gas_blocker(PyObject *obj, PyObject *args, PyObject *keywds);

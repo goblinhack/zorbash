@@ -1523,7 +1523,7 @@ public:
   int unused_flag154(void);
   int unused_flag155(void);
   int unused_flag156(void);
-  int unused_flag157(void);
+  int is_obstacle_when_dead(void);
   int unused_flag15(void);
   int unused_flag16(void);
   int unused_flag17(void);

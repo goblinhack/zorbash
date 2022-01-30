@@ -204,7 +204,7 @@ bool Thing::collision_obstacle(Thingp it)
       return true;
     }
 
-    if (it->is_player()) {
+    if (it->is_monst() || it->is_player()) {
       //
       // Allow cleaners to engulf/swallow attack
       //
@@ -213,6 +213,17 @@ bool Thing::collision_obstacle(Thingp it)
       }
 
       return true;
+    }
+  }
+
+  if (it->is_monst()) {
+    if (it->is_dead) {
+      //
+      // Allow passing over corpses
+      //
+      if (it->is_obstacle_when_dead()) {
+        return true;
+      }
     }
   }
 
@@ -366,6 +377,17 @@ bool Thing::ai_obstacle(Thingp it)
     }
   }
 
+  if (it->is_monst()) {
+    if (it->is_dead) {
+      //
+      // Allow passing over corpses
+      //
+      if (it->is_obstacle_when_dead()) {
+        return true;
+      }
+    }
+  }
+
   return false;
 }
 
@@ -476,6 +498,17 @@ bool Tp::ai_obstacle(Thingp it)
       // Ignore is_ethereal to make it easier to attack ghosts
       //
       return true;
+    }
+  }
+
+  if (it->is_monst()) {
+    if (it->is_dead) {
+      //
+      // Allow passing over corpses
+      //
+      if (it->is_obstacle_when_dead()) {
+        return true;
+      }
     }
   }
 

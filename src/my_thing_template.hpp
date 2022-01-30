@@ -531,7 +531,7 @@ private:
   int _unused_flag154 {};
   int _unused_flag155 {};
   int _unused_flag156 {};
-  int _unused_flag157 {};
+  int _is_obstacle_when_dead {};
   int _is_gas_blocker {};
   int _unused_flag16 {};
   int _unused_flag17 {};
@@ -1411,7 +1411,7 @@ public:
   int unused_flag154(void) const { return _unused_flag154; }
   int unused_flag155(void) const { return _unused_flag155; }
   int unused_flag156(void) const { return _unused_flag156; }
-  int unused_flag157(void) const { return _unused_flag157; }
+  int is_obstacle_when_dead(void) const { return _is_obstacle_when_dead; }
   int is_gas_blocker(void) const { return _is_gas_blocker; }
   int unused_flag15(void) const { return _unused_flag15; }
   int unused_flag16(void) const { return _unused_flag16; }
@@ -2039,7 +2039,7 @@ public:
   void set_unused_flag154(int v) { _unused_flag154 = v; }
   void set_unused_flag155(int v) { _unused_flag155 = v; }
   void set_unused_flag156(int v) { _unused_flag156 = v; }
-  void set_unused_flag157(int v) { _unused_flag157 = v; }
+  void set_is_obstacle_when_dead(int v) { _is_obstacle_when_dead = v; }
   void set_is_gas_blocker(int v) { _is_gas_blocker = v; }
   void set_unused_flag15(int v) { _unused_flag15 = v; }
   void set_unused_flag16(int v) { _unused_flag16 = v; }
