@@ -850,8 +850,8 @@ class Tp:
     def set_unused_flag156(self, value):
         my.tp_set_unused_flag156(self, value)
 
-    def set_unused_flag157(self, value):
-        my.tp_set_unused_flag157(self, value)
+    def set_is_obstacle_when_dead(self, value):
+        my.tp_set_is_obstacle_when_dead(self, value)
 
     def set_is_gas_blocker(self, value):
         my.tp_set_is_gas_blocker(self, value)

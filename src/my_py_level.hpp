@@ -365,7 +365,7 @@ PyObject *level_unused_flag153_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag154_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag155_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag156_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag157_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_obstacle_when_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_gas_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag15_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag16_at(PyObject *obj, PyObject *args, PyObject *keywds);
