@@ -279,6 +279,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(level_spawn_at_thing),
     MY_ADD_PYTHON_FUNCTION(level_spawn_at_thing_if_possible),
     MY_ADD_PYTHON_FUNCTION(level_spawn_fire_around_thing),
+    MY_ADD_PYTHON_FUNCTION(level_spawn_gas_swamp_around_thing),
     MY_ADD_PYTHON_FUNCTION(level_unused_flag100_at),
     MY_ADD_PYTHON_FUNCTION(level_unused_flag101_at),
     MY_ADD_PYTHON_FUNCTION(level_unused_flag102_at),

@@ -14,6 +14,7 @@ PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_spawn_gas_swamp_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds);
