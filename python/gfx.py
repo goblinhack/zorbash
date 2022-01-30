@@ -8636,6 +8636,23 @@ def init_tiles2():
         "foilage.31",
         "foilage.32",
         #########################################################################
+        #########################################################################
+        "belcher_asleep.1",
+        "belcher_asleep.2",
+        "belcher_asleep.3",
+        "belcher_asleep.4",
+        "belcher_awake.1",
+        "belcher_awake.2",
+        "belcher_awake.3",
+        "belcher_awake.4",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
     ]
 
     my.tile_load_arr_sprites(
