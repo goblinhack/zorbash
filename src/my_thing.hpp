@@ -451,6 +451,7 @@ public:
   bool skill_remove(Thingp it);
   bool skill_use(Thingp it);
   bool spawn_fire(const std::string &what);
+  bool spawn_gas_swamp(int radius);
   bool spawn_next_to(const std::string &what);
   bool spawn_next_to_or_on_monst(const std::string &what);
   bool spawn_radius_range(const std::string &what, uint32_t rad_min, uint32_t rad_max);

@@ -462,6 +462,76 @@ bool Thing::spawn_fire(const std::string &what)
   return true;
 }
 
+bool Thing::spawn_gas_swamp(int radius)
+{
+  TRACE_NO_INDENT();
+  dbg("Spawn gas swamp");
+
+  std::vector< point > possible;
+
+  for (int dx = -radius; dx <= radius; dx++) {
+    for (int dy = -radius; dy <= radius; dy++) {
+
+      auto x = curr_at.x + dx;
+      auto y = curr_at.y + dy;
+
+      if (x < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        continue;
+      }
+
+      float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
+
+      //
+      // Radius needs to be the same as the check in get_carried_wand_highest_value_for_target
+      //
+      if (dist > radius) {
+        continue;
+      }
+
+      if (level->is_rock(x, y) || level->is_wall(x, y)) {
+        continue;
+      }
+
+      auto p = point(x, y);
+
+      if (collision_obstacle(p)) {
+        continue;
+      }
+
+      if (ai_obstacle_for_me(p)) {
+        continue;
+      }
+
+      possible.push_back(p);
+    }
+  }
+
+  auto cands = possible.size();
+  if (! cands) {
+    return false;
+  }
+
+  auto chosen = possible[ pcg_random_range(0, cands) ];
+
+  uint16_t gx =
+      (chosen.x * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
+  uint16_t gy =
+      (chosen.y * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
+
+  level->gas_swamp[ gy ][ gx ] = 254;
+
+  return true;
+}
+
 Thingp Thing::spawn_at_if_possible(const std::string &what)
 {
   TRACE_NO_INDENT();

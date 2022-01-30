@@ -2,6 +2,10 @@ import my
 import tp
 
 
+def on_idle(me, x, y):
+    my.level_spawn_gas_swamp_around_thing(me, 2)
+
+
 def on_death(me, x, y):
     my.level_spawn_at_thing(me, "green_splatter")
 
@@ -32,6 +36,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_health_initial_dice("1d10+10")
     mytp.set_hunger_clock_tick_frequency(50)
     mytp.set_hunger_health_pct(95)
+    mytp.set_on_idle_tick_frequency_dice("1d5:me.on_idle()")
     mytp.set_hunger_is_insatiable(True)
     mytp.set_is_able_to_fall(True)
     mytp.set_is_able_to_see_in_the_dark(True)
