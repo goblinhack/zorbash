@@ -162,6 +162,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   // clang-format off
   out << bits(my.t->bounce_count);
   out << bits(my.t->charge_count);
+  out << bits(my.t->sleep_count);
   out << bits(my.t->follower_count);
   out << bits(my.t->minion_count);
   out << bits(my.t->owned_count);

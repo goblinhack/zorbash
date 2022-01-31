@@ -528,9 +528,9 @@ private:
   int _unused_flag151 {};
   int _unused_flag152 {};
   int _unused_flag153 {};
-  int _unused_flag154 {};
-  int _unused_flag155 {};
-  int _unused_flag156 {};
+  int _noise_level {};
+  int _is_asleep_initially {};
+  int _is_able_to_sleep {};
   int _is_obstacle_when_dead {};
   int _is_gas_blocker {};
   int _unused_flag16 {};
@@ -1408,9 +1408,9 @@ public:
   int unused_flag151(void) const { return _unused_flag151; }
   int unused_flag152(void) const { return _unused_flag152; }
   int unused_flag153(void) const { return _unused_flag153; }
-  int unused_flag154(void) const { return _unused_flag154; }
-  int unused_flag155(void) const { return _unused_flag155; }
-  int unused_flag156(void) const { return _unused_flag156; }
+  int noise_level(void) const { return _noise_level; }
+  int is_asleep_initially(void) const { return _is_asleep_initially; }
+  int is_able_to_sleep(void) const { return _is_able_to_sleep; }
   int is_obstacle_when_dead(void) const { return _is_obstacle_when_dead; }
   int is_gas_blocker(void) const { return _is_gas_blocker; }
   int unused_flag15(void) const { return _unused_flag15; }
@@ -2036,9 +2036,9 @@ public:
   void set_unused_flag151(int v) { _unused_flag151 = v; }
   void set_unused_flag152(int v) { _unused_flag152 = v; }
   void set_unused_flag153(int v) { _unused_flag153 = v; }
-  void set_unused_flag154(int v) { _unused_flag154 = v; }
-  void set_unused_flag155(int v) { _unused_flag155 = v; }
-  void set_unused_flag156(int v) { _unused_flag156 = v; }
+  void set_noise_level(int v) { _noise_level = v; }
+  void set_is_asleep_initially(int v) { _is_asleep_initially = v; }
+  void set_is_able_to_sleep(int v) { _is_able_to_sleep = v; }
   void set_is_obstacle_when_dead(int v) { _is_obstacle_when_dead = v; }
   void set_is_gas_blocker(int v) { _is_gas_blocker = v; }
   void set_unused_flag15(int v) { _unused_flag15 = v; }

@@ -7,6 +7,7 @@
 #include "my_font.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
+#include "my_monst.hpp"
 #include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_tex.hpp"
@@ -807,11 +808,24 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     auto y     = blit_br.y - ((1.0 - tile->py1 /* pct */) * tile->pix_height);
     auto x     = (blit_tl.x + blit_br.x) / 2;
 
+    //
+    // Add health bar
+    //
     {
       auto tile = get(game->tile_cache_health, h_step);
       if (unlikely(! tile)) {
+        //
+        // Sleeping?
+        //
+        bool sleeping = false;
+        if (maybe_infop()->monst_state) {
+          sleeping = (get_infop()->monst_state == MONST_STATE_SLEEPING);
+        }
         std::string s = "health" + std::to_string(h_step);
-        tile          = tile_find_mand(s);
+        if (sleeping) {
+          s = "health_sleeping" + std::to_string(h_step);
+        }
+        tile = tile_find_mand(s);
         set(game->tile_cache_health, h_step, tile);
       }
 

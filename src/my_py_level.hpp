@@ -362,9 +362,9 @@ PyObject *level_unused_flag150_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag151_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag152_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag153_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag154_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag155_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag156_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_noise_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_asleep_initially_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_sleep_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_obstacle_when_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_gas_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag15_at(PyObject *obj, PyObject *args, PyObject *keywds);

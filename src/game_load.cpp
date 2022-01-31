@@ -185,6 +185,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
   // clang-format off
    in >> bits(my.t->bounce_count);
    in >> bits(my.t->charge_count);
+   in >> bits(my.t->sleep_count);
    in >> bits(my.t->follower_count);
    in >> bits(my.t->minion_count);
    in >> bits(my.t->owned_count);

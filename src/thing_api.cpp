@@ -2328,22 +2328,22 @@ int Thing::unused_flag153(void)
   return (tp()->unused_flag153());
 }
 
-int Thing::unused_flag154(void)
+int Thing::noise_level(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag154());
+  return (tp()->noise_level());
 }
 
-int Thing::unused_flag155(void)
+int Thing::is_asleep_initially(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag155());
+  return (tp()->is_asleep_initially());
 }
 
-int Thing::unused_flag156(void)
+int Thing::is_able_to_sleep(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag156());
+  return (tp()->is_able_to_sleep());
 }
 
 int Thing::is_obstacle_when_dead(void)
@@ -5801,6 +5801,54 @@ int Thing::incr_charge_count(void)
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->charge_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// sleep_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_sleep_count(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (get_infop()->sleep_count);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::set_sleep_count(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->sleep_count = v);
+}
+
+int Thing::decr_sleep_count(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->sleep_count -= v);
+}
+
+int Thing::incr_sleep_count(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->sleep_count += v);
+}
+
+int Thing::decr_sleep_count(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->sleep_count--);
+}
+
+int Thing::incr_sleep_count(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (get_infop()->sleep_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

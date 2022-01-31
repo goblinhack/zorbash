@@ -750,6 +750,8 @@ public:
   int decr_current_damage(int);
   int decr_current_damage(void);
   int decr_distance_throw(int);
+  int decr_sleep_count(int);
+  int decr_sleep_count(void);
   int decr_distance_throw(void);
   int decr_enchant(int);
   int decr_enchant_max(int);
@@ -885,6 +887,7 @@ public:
   int get_carried_weapon_highest_value(Thingp *out);
   int get_carried_weapon_least_value(Thingp *out);
   int get_charge_count(void);
+  int get_sleep_count(void);
   int get_current_damage(void);
   int get_damage_acid(void);
   int get_damage_cold(void);
@@ -1003,6 +1006,8 @@ public:
   int hunger_is_insatiable(void);
   int incr_charge_count(int);
   int incr_charge_count(void);
+  int incr_sleep_count(int);
+  int incr_sleep_count(void);
   int incr_current_damage(int);
   int incr_current_damage(void);
   int incr_distance_throw(int);
@@ -1404,6 +1409,7 @@ public:
   int range_max(void);
   int rarity(void);
   int set_charge_count(int);
+  int set_sleep_count(int);
   int set_current_damage(int);
   int set_distance_throw(int);
   int set_enchant(int);
@@ -1521,9 +1527,9 @@ public:
   int unused_flag151(void);
   int unused_flag152(void);
   int unused_flag153(void);
-  int unused_flag154(void);
-  int unused_flag155(void);
-  int unused_flag156(void);
+  int noise_level(void);
+  int is_asleep_initially(void);
+  int is_able_to_sleep(void);
   int is_obstacle_when_dead(void);
   int unused_flag15(void);
   int unused_flag16(void);

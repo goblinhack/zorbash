@@ -22,6 +22,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("Custard pie. At least it might be custard. Whatever it is it oozes a bit and is yellow.")
+    mytp.set_noise_level(1)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("10+1d20")
     mytp.set_rarity(my.RARITY_COMMON)

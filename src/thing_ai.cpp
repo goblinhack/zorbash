@@ -2387,6 +2387,7 @@ bool Thing::ai_tick(bool recursing)
         return true;
       }
       break;
+    case MONST_STATE_SLEEPING :
     case MONST_STATE_RESTING :
       {
         //
@@ -2417,6 +2418,14 @@ bool Thing::ai_tick(bool recursing)
         }
 
         AI_LOG("Wait and rest.");
+
+        if (is_able_to_sleep()) {
+          incr_sleep_count();
+          if (get_sleep_count() > 5) {
+            ai_change_state(MONST_STATE_SLEEPING, "time to sleep");
+          }
+        }
+
         do_something = true;
         wait         = true;
         break;
@@ -2525,13 +2534,38 @@ void Thing::ai_change_state(int new_state, const std::string &why)
   std::string to;
   std::string from;
   switch (new_state) {
-    case MONST_STATE_IDLE : to = "IDLE"; break;
-    case MONST_STATE_MOVING : to = "MOVING"; break;
-    case MONST_STATE_RESTING : to = "RESTING"; break;
-    case MONST_STATE_OPEN_INVENTORY : to = "OPEN-INVENTORY"; break;
-    case MONST_STATE_USING_ENCHANTSTONE : to = "USING-ENCHANTSTONE"; break;
-    case MONST_STATE_USING_SKILLSTONE : to = "USING-SKILLSTONE"; break;
-    case MONST_STATE_REPACK_INVENTORY : to = "REPACK"; break;
+    case MONST_STATE_IDLE :
+      set_sleep_count(0);
+      to = "IDLE";
+      break;
+    case MONST_STATE_MOVING :
+      set_sleep_count(0);
+      to = "MOVING";
+      break;
+    case MONST_STATE_RESTING :
+      // allow sleep count to increment
+      to = "RESTING";
+      break;
+    case MONST_STATE_OPEN_INVENTORY :
+      set_sleep_count(0);
+      to = "OPEN-INVENTORY";
+      break;
+    case MONST_STATE_USING_ENCHANTSTONE :
+      set_sleep_count(0);
+      to = "USING-ENCHANTSTONE";
+      break;
+    case MONST_STATE_USING_SKILLSTONE :
+      set_sleep_count(0);
+      to = "USING-SKILLSTONE";
+      break;
+    case MONST_STATE_REPACK_INVENTORY :
+      set_sleep_count(0);
+      to = "REPACK";
+      break;
+    case MONST_STATE_SLEEPING :
+      // allow sleep count to increment
+      to = "SLEEPING";
+      break;
   }
 
   if (is_player()) {
@@ -2559,6 +2593,7 @@ void Thing::ai_change_state(int new_state, const std::string &why)
         wid_choose_skill_destroy();
       }
       break;
+    case MONST_STATE_SLEEPING : from = "SLEEPING"; break;
   }
 
   IF_DEBUG

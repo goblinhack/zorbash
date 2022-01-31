@@ -48,6 +48,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(5)
     mytp.set_long_text_description("A gleaming cutlass. Ideal for the entry level pirate.")
     mytp.set_melting_chance_d1000(10)
+    mytp.set_noise_level(10)
     mytp.set_on_use_do("me.on_use()")
     mytp.set_rarity(my.RARITY_RARE)
     mytp.set_text_a_or_an("a")
