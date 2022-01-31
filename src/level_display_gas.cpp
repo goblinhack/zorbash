@@ -102,7 +102,7 @@ void Level::display_gas(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16
             int gbrx = gtlx + (TILE_WIDTH / DUNGEON_GAS_RESOLUTION);
             int gbry = gtly + (TILE_HEIGHT / DUNGEON_GAS_RESOLUTION);
 
-            int d = (TILE_HEIGHT / DUNGEON_GAS_RESOLUTION) * 4;
+            int d = (TILE_HEIGHT / DUNGEON_GAS_RESOLUTION) * 2;
             gtlx -= d;
             gtly -= d;
             gbrx += d;
