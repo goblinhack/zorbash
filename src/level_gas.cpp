@@ -165,4 +165,31 @@ void Level::tick_gas_swamp(void)
       }
     }
   }
+
+  for (auto x = 0; x < MAP_WIDTH; x++) {
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+      if (is_gas_blocker(x, y)) {
+        for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
+          for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
+            uint16_t gx           = x * DUNGEON_GAS_RESOLUTION + dx;
+            uint16_t gy           = y * DUNGEON_GAS_RESOLUTION + dy;
+            gas_swamp[ gy ][ gx ] = 255;
+          }
+        }
+      } else {
+        //
+        // Cater for doors opening
+        //
+        for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
+          for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
+            uint16_t gx = x * DUNGEON_GAS_RESOLUTION + dx;
+            uint16_t gy = y * DUNGEON_GAS_RESOLUTION + dy;
+            if (gas_swamp[ gy ][ gx ] == 255) {
+              gas_swamp[ gy ][ gx ] = 0;
+            }
+          }
+        }
+      }
+    }
+  }
 }

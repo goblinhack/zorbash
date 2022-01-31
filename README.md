@@ -1,12 +1,16 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- hide top console on error                                                                                                                    -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - swamp gas                                                                                                                                  -->
-<!-- - swamp wort food                                                                                                                            -->
 <!-- - swamp belcher                                                                                                                              -->
+<!-- - swamp gas                                                                                                                                  -->
+<!-- - noise alert for sleeping monst                                                                                                             -->
+<!-- - noise alert for broken door                                                                                                                -->
+<!-- - axe hits all around                                                                                                                        -->
+<!-- - swamp wort food                                                                                                                            -->
 <!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 jelly boss, spawns jellys, tries to jump splat the player                                                                           -->
 <!--          swamp wort, gas bloater and swamp tiles that allow 50% movement                                                                     -->

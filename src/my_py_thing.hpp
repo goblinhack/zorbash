@@ -462,8 +462,10 @@ PyObject *thing_is_asleep_initially(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_able_to_sleep(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obstacle_when_dead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gas_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_gas_intensity(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_light_blocker_for_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gas_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_gas_intensity(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pink_blood_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag16(PyObject *obj, PyObject *args, PyObject *keywds);
