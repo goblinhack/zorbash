@@ -106,6 +106,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
+    mytp.set_noise_level(10)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_enchant_do("me.on_enchant()")
     mytp.set_on_fall_do("me.on_fall()")

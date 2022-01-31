@@ -1124,13 +1124,13 @@ bool Thing::matches(const std::string &what)
   if (unused_flag153() && (what == "unused_flag153")) {
     return true;
   }
-  if (unused_flag154() && (what == "unused_flag154")) {
+  if (noise_level() && (what == "noise_level")) {
     return true;
   }
-  if (unused_flag155() && (what == "unused_flag155")) {
+  if (is_asleep_initially() && (what == "is_asleep_initially")) {
     return true;
   }
-  if (unused_flag156() && (what == "unused_flag156")) {
+  if (is_able_to_sleep() && (what == "is_able_to_sleep")) {
     return true;
   }
   if (is_obstacle_when_dead() && (what == "is_obstacle_when_dead")) {
@@ -2415,14 +2415,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag153") {
     return &Thing::unused_flag153;
   }
-  if (what == "unused_flag154") {
-    return &Thing::unused_flag154;
+  if (what == "noise_level") {
+    return &Thing::noise_level;
   }
-  if (what == "unused_flag155") {
-    return &Thing::unused_flag155;
+  if (what == "is_asleep_initially") {
+    return &Thing::is_asleep_initially;
   }
-  if (what == "unused_flag156") {
-    return &Thing::unused_flag156;
+  if (what == "is_able_to_sleep") {
+    return &Thing::is_able_to_sleep;
   }
   if (what == "is_obstacle_when_dead") {
     return &Thing::is_obstacle_when_dead;

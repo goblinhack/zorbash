@@ -14,6 +14,7 @@
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_rightbar.hpp"
+#include "my_wid_topcon.hpp"
 #include "stb_image_write.hpp"
 
 //
@@ -92,6 +93,7 @@ void sdl_loop(void)
         if (wid_console_window && ! (wid_console_window->visible)) {
           wid_visible(wid_console_window);
           wid_raise(wid_console_window);
+          wid_lower(wid_topcon_window);
         }
       }
     }

@@ -454,9 +454,9 @@ do
       set_unused_flag151 \
       set_unused_flag152 \
       set_unused_flag153 \
-      set_unused_flag154 \
-      set_unused_flag155 \
-      set_unused_flag156 \
+      set_noise_level \
+      set_is_asleep_initially \
+      set_is_able_to_sleep \
       set_is_obstacle_when_dead \
       set_is_gas_blocker \
       set_is_light_blocker_for_monst \

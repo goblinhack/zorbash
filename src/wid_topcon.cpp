@@ -946,8 +946,6 @@ static void wid_topcon_wid_create(void)
       wid_set_color(child, WID_COLOR_BG, COLOR_NONE);
       wid_set_name(child, "topcon output");
     }
-
-    wid_raise(wid_topcon_input_line);
   }
 
   TRACE_NO_INDENT();

@@ -841,14 +841,14 @@ class Tp:
     def set_unused_flag153(self, value):
         my.tp_set_unused_flag153(self, value)
 
-    def set_unused_flag154(self, value):
-        my.tp_set_unused_flag154(self, value)
+    def set_noise_level(self, value):
+        my.tp_set_noise_level(self, value)
 
-    def set_unused_flag155(self, value):
-        my.tp_set_unused_flag155(self, value)
+    def set_is_asleep_initially(self, value):
+        my.tp_set_is_asleep_initially(self, value)
 
-    def set_unused_flag156(self, value):
-        my.tp_set_unused_flag156(self, value)
+    def set_is_able_to_sleep(self, value):
+        my.tp_set_is_able_to_sleep(self, value)
 
     def set_is_obstacle_when_dead(self, value):
         my.tp_set_is_obstacle_when_dead(self, value)

@@ -32,6 +32,7 @@ enum {
 enum {
   MONST_STATE_IDLE,
   MONST_STATE_MOVING,
+  MONST_STATE_SLEEPING,
   MONST_STATE_RESTING,
   MONST_STATE_OPEN_INVENTORY,
   MONST_STATE_USING_ENCHANTSTONE,
@@ -86,7 +87,7 @@ public:
 
   ThingId on_fire_id_anim {};
   ThingId owner_id {};         // Who carries this thing?
-  ThingId mob_id {};   // Who generated this thing?
+  ThingId mob_id {};           // Who generated this thing?
   ThingId leader_id {};        // Who is the current ally leader
   ThingId spawner_owner_id {}; // Who spawned this thing?
 
@@ -142,6 +143,7 @@ public:
 
   int8_t bounce_count       = {}; // Graphical bounce count
   int8_t charge_count       = {}; // Wand charges
+  int8_t sleep_count        = {}; // How long asleep
   int8_t follower_count     = {}; // How many followers this leader has
   int8_t minion_count       = {}; // How many minions this mob has
   int8_t owned_count        = {}; // How many things own me
