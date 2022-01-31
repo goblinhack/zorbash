@@ -61,6 +61,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_foilage {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_food {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_gas_intensity {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_gold {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_green_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_hazard {};
@@ -751,12 +752,14 @@ public:
   uint8_t is_foilage(const point p);
   uint8_t is_food(const int x, const int y);
   uint8_t is_food(const point p);
+  uint8_t is_gas_intensity(const int x, const int y) const;
+  uint8_t is_gas_intensity(const point p) const;
+  uint8_t is_gas_intensity_no_check(const int x, const int y) const;
+  uint8_t is_gas_intensity_no_check(const point p) const;
   uint8_t is_gold(const int x, const int y);
   uint8_t is_gold(const point p);
   uint8_t is_green_blood(const int x, const int y);
   uint8_t is_green_blood(const point p);
-  uint8_t is_pink_blood(const int x, const int y);
-  uint8_t is_pink_blood(const point p);
   uint8_t is_hazard(const int x, const int y);
   uint8_t is_hazard(const point p);
   uint8_t is_heavy(const int x, const int y);
@@ -780,6 +783,8 @@ public:
   uint8_t is_monst(const int x, const int y);
   uint8_t is_monst(const point p);
   uint8_t is_monst_or_player(const point p);
+  uint8_t is_pink_blood(const int x, const int y);
+  uint8_t is_pink_blood(const point p);
   uint8_t is_potion(const int x, const int y);
   uint8_t is_potion(const point p);
   uint8_t is_red_blood(const int x, const int y);
@@ -875,10 +880,10 @@ public:
   void display_external_particles(void);
   void display_fade_in(void);
   void display_fade_out(void);
+  void display_gas(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
   void display_internal_particles(void);
   void display_lasers(void);
   void display_lava(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
-  void display_gas(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
   void display_map_bg_things(void);
   void display_map_debug(int x, int y);
   void display_map_debug(int x, int y, int tlx, int tly, int brx, int bly);
@@ -963,6 +968,8 @@ public:
   void set_is_food(const int x, const int y);
   void set_is_gas_blocker(const int x, const int y);
   void set_is_gas_blocker_no_check(const int x, const int y);
+  void set_is_gas_intensity(const int x, const int y, uint8_t val);
+  void set_is_gas_intensity_no_check(const int x, const int y, uint8_t val);
   void set_is_gold(const int x, const int y);
   void set_is_green_blood(const int x, const int y);
   void set_is_hazard(const int x, const int y);
@@ -1039,6 +1046,8 @@ public:
   void unset_is_food(const int x, const int y);
   void unset_is_gas_blocker(const int x, const int y);
   void unset_is_gas_blocker_no_check(const int x, const int y);
+  void unset_is_gas_intensity(const int x, const int y);
+  void unset_is_gas_intensity_no_check(const int x, const int y);
   void unset_is_gold(const int x, const int y);
   void unset_is_green_blood(const int x, const int y);
   void unset_is_hazard(const int x, const int y);

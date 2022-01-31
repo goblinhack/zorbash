@@ -527,9 +527,6 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_ascend_dungeon);
   in >> bits(my.t->_is_ascend_sewer);
   in >> bits(my.t->_is_barrel);
-  in >> bits(my.t->_is_red_blood);
-  in >> bits(my.t->_is_green_blood);
-  in >> bits(my.t->_is_pink_blood);
   in >> bits(my.t->_is_brazier);
   in >> bits(my.t->_is_bridge);
   in >> bits(my.t->_is_chasm);
@@ -547,7 +544,9 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_floor);
   in >> bits(my.t->_is_foilage);
   in >> bits(my.t->_is_food);
+  in >> bits(my.t->_is_gas_intensity);
   in >> bits(my.t->_is_gold);
+  in >> bits(my.t->_is_green_blood);
   in >> bits(my.t->_is_hazard);
   in >> bits(my.t->_is_heavy);
   in >> bits(my.t->_is_key);
@@ -555,7 +554,9 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_lit_currently);
   in >> bits(my.t->_is_mob);
   in >> bits(my.t->_is_monst);
+  in >> bits(my.t->_is_pink_blood);
   in >> bits(my.t->_is_potion);
+  in >> bits(my.t->_is_red_blood);
   in >> bits(my.t->_is_ring);
   in >> bits(my.t->_is_ripple);
   in >> bits(my.t->_is_rock);

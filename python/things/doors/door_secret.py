@@ -12,6 +12,7 @@ def tp_init(name, text_name):
     mytp.set_is_interesting(True)
     mytp.set_is_light_blocker(True)
     mytp.set_is_secret_door(True)
+    mytp.set_noise_level(20)
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A strange looking wall.")

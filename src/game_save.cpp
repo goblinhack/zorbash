@@ -484,9 +484,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_ascend_dungeon);
   out << bits(my.t->_is_ascend_sewer);
   out << bits(my.t->_is_barrel);
-  out << bits(my.t->_is_red_blood);
-  out << bits(my.t->_is_green_blood);
-  out << bits(my.t->_is_pink_blood);
   out << bits(my.t->_is_brazier);
   out << bits(my.t->_is_bridge);
   out << bits(my.t->_is_chasm);
@@ -504,7 +501,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_floor);
   out << bits(my.t->_is_foilage);
   out << bits(my.t->_is_food);
+  out << bits(my.t->_is_gas_intensity);
   out << bits(my.t->_is_gold);
+  out << bits(my.t->_is_green_blood);
   out << bits(my.t->_is_hazard);
   out << bits(my.t->_is_heavy);
   out << bits(my.t->_is_key);
@@ -512,7 +511,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_lit_currently);
   out << bits(my.t->_is_mob);
   out << bits(my.t->_is_monst);
+  out << bits(my.t->_is_pink_blood);
   out << bits(my.t->_is_potion);
+  out << bits(my.t->_is_red_blood);
   out << bits(my.t->_is_ring);
   out << bits(my.t->_is_ripple);
   out << bits(my.t->_is_rock);
