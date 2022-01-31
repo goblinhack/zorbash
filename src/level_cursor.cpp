@@ -94,12 +94,12 @@ void Level::cursor_move(void)
   if (ts_created && time_have_x_tenths_passed_since(2, ts_created)) {
     mouse_at = mouse_tick;
     if (mouse_at > mouse_old) {
-      mouse_old    = mouse_at;
+      mouse_old       = mouse_at;
       is_cursor_found = false;
     }
   } else {
-    mouse_at          = mouse_tick;
-    mouse_old         = mouse_at;
+    mouse_at             = mouse_tick;
+    mouse_old            = mouse_at;
     is_map_follow_player = true;
   }
 
