@@ -652,8 +652,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       // You hit yourself
       //
       if (attack_poison) {
-        msg("%%fg=yellow$Poison circulates through your veins for %s%d damage!%%fg=reset$", damage_type.c_str(),
-            damage);
+        if (level->is_gas_poison(curr_at.x, curr_at.y)) {
+          msg("%%fg=yellow$Poison burns your lungs for %s%d damage!%%fg=reset$", damage_type.c_str(), damage);
+        } else {
+          msg("%%fg=yellow$Poison circulates through your veins for %s%d damage!%%fg=reset$", damage_type.c_str(),
+              damage);
+        }
       } else if (attack_necrosis) {
         msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else if (crit) {
@@ -1004,7 +1008,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
     if (real_hitter == this) {
       if (attack_poison) {
-        reason = "by poisoning";
+        if (level->is_gas_poison(curr_at.x, curr_at.y)) {
+          reason = "by poison gas";
+        } else {
+          reason = "by poisoning";
+        }
       } else if (attack_future1) {
         reason = "by future1";
       } else if (attack_future2) {
