@@ -462,7 +462,7 @@ bool Thing::spawn_fire(const std::string &what)
   return true;
 }
 
-bool Thing::spawn_gas_swamp(int radius)
+bool Thing::spawn_gas_poison(int radius)
 {
   TRACE_NO_INDENT();
   dbg("Spawn gas swamp");
@@ -527,7 +527,7 @@ bool Thing::spawn_gas_swamp(int radius)
   uint16_t gy =
       (chosen.y * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
 
-  level->gas_swamp[ gy ][ gx ] = 254;
+  level->gas_poison[ gy ][ gx ] = 254;
 
   return true;
 }

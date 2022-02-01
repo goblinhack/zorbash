@@ -24,7 +24,7 @@ class Level
 {
 public:
   std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
-      gas_swamp {};
+      gas_poison {};
 
   //
   // These are caches for fast lookup in display code
@@ -61,7 +61,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_floor {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_foilage {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_food {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_gas_intensity {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_gas_poison {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_gold {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_green_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_hazard {};
@@ -752,10 +752,10 @@ public:
   uint8_t is_foilage(const point p);
   uint8_t is_food(const int x, const int y);
   uint8_t is_food(const point p);
-  uint8_t is_gas_intensity(const int x, const int y) const;
-  uint8_t is_gas_intensity(const point p) const;
-  uint8_t is_gas_intensity_no_check(const int x, const int y) const;
-  uint8_t is_gas_intensity_no_check(const point p) const;
+  uint8_t is_gas_poison(const int x, const int y) const;
+  uint8_t is_gas_poison(const point p) const;
+  uint8_t is_gas_poison_no_check(const int x, const int y) const;
+  uint8_t is_gas_poison_no_check(const point p) const;
   uint8_t is_gold(const int x, const int y);
   uint8_t is_gold(const point p);
   uint8_t is_green_blood(const int x, const int y);
@@ -968,8 +968,8 @@ public:
   void set_is_food(const int x, const int y);
   void set_is_gas_blocker(const int x, const int y);
   void set_is_gas_blocker_no_check(const int x, const int y);
-  void set_is_gas_intensity(const int x, const int y, uint8_t val);
-  void set_is_gas_intensity_no_check(const int x, const int y, uint8_t val);
+  void set_is_gas_poison(const int x, const int y, uint8_t val);
+  void set_is_gas_poison_no_check(const int x, const int y, uint8_t val);
   void set_is_gold(const int x, const int y);
   void set_is_green_blood(const int x, const int y);
   void set_is_hazard(const int x, const int y);
@@ -1016,7 +1016,7 @@ public:
   void things_gc_force(void);
   void things_gc_if_possible(void);
   void things_tick(void);
-  void tick_gas_swamp(void);
+  void tick_gas_poison(void);
   void unset_fade_in(const int x, const int y);
   void unset_fade_in_no_check(const int x, const int y);
   void unset_gfx_water(const int x, const int y);
@@ -1046,8 +1046,8 @@ public:
   void unset_is_food(const int x, const int y);
   void unset_is_gas_blocker(const int x, const int y);
   void unset_is_gas_blocker_no_check(const int x, const int y);
-  void unset_is_gas_intensity(const int x, const int y);
-  void unset_is_gas_intensity_no_check(const int x, const int y);
+  void unset_is_gas_poison(const int x, const int y);
+  void unset_is_gas_poison_no_check(const int x, const int y);
   void unset_is_gold(const int x, const int y);
   void unset_is_green_blood(const int x, const int y);
   void unset_is_hazard(const int x, const int y);

@@ -2322,10 +2322,10 @@ int Thing::unused_flag152(void)
   return (tp()->unused_flag152());
 }
 
-int Thing::unused_flag153(void)
+int Thing::is_breather(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag153());
+  return (tp()->is_breather());
 }
 
 int Thing::noise_level(void)

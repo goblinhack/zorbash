@@ -451,7 +451,7 @@ public:
   bool skill_remove(Thingp it);
   bool skill_use(Thingp it);
   bool spawn_fire(const std::string &what);
-  bool spawn_gas_swamp(int radius);
+  bool spawn_gas_poison(int radius);
   bool spawn_next_to(const std::string &what);
   bool spawn_next_to_or_on_monst(const std::string &what);
   bool spawn_radius_range(const std::string &what, uint32_t rad_min, uint32_t rad_max);
@@ -1526,7 +1526,7 @@ public:
   int unused_flag150(void);
   int unused_flag151(void);
   int unused_flag152(void);
-  int unused_flag153(void);
+  int is_breather(void);
   int noise_level(void);
   int is_asleep_initially(void);
   int is_able_to_sleep(void);
@@ -1886,6 +1886,7 @@ public:
   void fall(float fall_height, ts_t ms);
   void fall_into_the_void(void);
   void fire_tick();
+  void gas_poison_tick(void);
   void gc(void);
   void get_equip_use_offset(int *dx, int *dy, int equip);
   void get_light_power_including_torch_effect(uint8_t &light_power);

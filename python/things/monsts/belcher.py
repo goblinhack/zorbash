@@ -3,7 +3,7 @@ import tp
 
 
 def on_idle(me, x, y):
-    my.level_spawn_gas_swamp_around_thing(me, 2)
+    my.level_spawn_gas_poison_around_thing(me, 2)
 
 
 def on_death(me, x, y):

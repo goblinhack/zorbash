@@ -838,8 +838,8 @@ class Tp:
     def set_unused_flag152(self, value):
         my.tp_set_unused_flag152(self, value)
 
-    def set_unused_flag153(self, value):
-        my.tp_set_unused_flag153(self, value)
+    def set_is_breather(self, value):
+        my.tp_set_is_breather(self, value)
 
     def set_noise_level(self, value):
         my.tp_set_noise_level(self, value)

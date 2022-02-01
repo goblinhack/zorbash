@@ -68,6 +68,7 @@ def tp_init(name, text_name):
     mytp.set_is_biome_swamp(True)
     mytp.set_is_bleeder(True)
     mytp.set_is_bony(True)
+    mytp.set_is_breather(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_crushable(True)
     mytp.set_is_described_when_hovering_over(True)

@@ -821,7 +821,7 @@ PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject 
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_gas_swamp_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t id     = 0;
@@ -852,7 +852,7 @@ PyObject *level_spawn_gas_swamp_around_thing(PyObject *obj, PyObject *args, PyOb
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_gas_swamp(radius)) {
+  if (t->spawn_gas_poison(radius)) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;

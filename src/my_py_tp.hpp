@@ -14,7 +14,7 @@ PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_spawn_gas_swamp_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -613,7 +613,7 @@ TP_SET_PROTO(unused_flag15)
 TP_SET_PROTO(unused_flag150)
 TP_SET_PROTO(unused_flag151)
 TP_SET_PROTO(unused_flag152)
-TP_SET_PROTO(unused_flag153)
+TP_SET_PROTO(is_breather)
 TP_SET_PROTO(noise_level)
 TP_SET_PROTO(is_asleep_initially)
 TP_SET_PROTO(is_able_to_sleep)
