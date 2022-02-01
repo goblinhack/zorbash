@@ -108,7 +108,7 @@ void Thing::move_finish(void)
     }
 
     if (! get_aip()->move_path.size() && (get_infop()->monst_state == MONST_STATE_MOVING)) {
-      ai_change_state(MONST_STATE_IDLE, "move finished");
+      change_state(MONST_STATE_IDLE, "move finished");
     }
   }
 
@@ -900,6 +900,6 @@ void Thing::clear_move_path(const std::string &why)
     }
   }
 
-  ai_change_state(MONST_STATE_IDLE, why);
+  change_state(MONST_STATE_IDLE, why);
   get_aip()->move_path.clear();
 }

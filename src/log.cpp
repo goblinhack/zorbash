@@ -483,6 +483,7 @@ void myerr(const char *fmt, ...)
   wid_unset_focus();
   wid_unset_focus_lock();
 
+  wid_hide(wid_topcon_window);
   nested_error = false;
 
   if (g_quitting) {

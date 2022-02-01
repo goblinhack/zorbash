@@ -88,7 +88,7 @@ void Config::reset(void)
   key_throw.sym           = SDLK_t;
   key_inventory.sym       = SDLK_i;
   key_console.sym         = SDLK_TAB;
-  key_console.mod         = KMOD_LSHIFT;
+  key_console.mod         = KMOD_SHIFT;
   key_robot_mode.sym      = SDLK_r;
   key_descend.sym         = SDLK_GREATER;
   key_ascend.sym          = SDLK_LESS;

@@ -1797,7 +1797,7 @@ public:
   void add_avoid(Thingp attacker);
   void add_enemy(Thingp attacker);
   void add_goal_penalty(Thingp attacker);
-  void ai_change_state(int new_state, const std::string &why);
+  void change_state(int new_state, const std::string &why);
   void ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy);
   void ai_choose_search_goals(std::multiset< Goal > &goals, int search_type);
   void ai_get_next_hop(void);
