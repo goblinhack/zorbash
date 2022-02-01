@@ -19,7 +19,7 @@ void Level::tick_gas_poison(void)
            y++) {
         for (uint16_t x = DUNGEON_GAS_RESOLUTION; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION;
              x++) {
-          if (rand() % 100 < 10) {
+          if (pcg_random_range(0, 100) < 10) {
             gas_poison[ x ][ y ] = 9;
           }
         }
@@ -149,28 +149,6 @@ void Level::tick_gas_poison(void)
 
   old_gas = gas_poison;
 
-#if 0
-  uint8_t step = pcg_random_range(0, 7) + 1;
-  for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; y++) {
-    uint16_t x = DUNGEON_GAS_RESOLUTION;
-
-    uint8_t *n = &gas_poison[ y ][ x ];
-
-    for (; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; x += step, n += step) {
-      uint8_t gn = *n;
-      if (gn == 255) {
-        continue;
-      }
-
-      if (*n) {
-        if (*n < 9) {
-          *n = *n + 1;
-        }
-      }
-    }
-  }
-#endif
-
   //
   // Update the level gas intensity per tile
   //
@@ -194,4 +172,26 @@ void Level::tick_gas_poison(void)
       set_is_gas_poison_no_check(x, y, g);
     }
   }
+}
+
+void Level::poison_gas_explosion(point at)
+{
+  if (is_gas_poison_no_check(at.x, at.y) < 5) {
+    return;
+  }
+
+  for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
+    for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
+      uint16_t gx            = at.x * DUNGEON_GAS_RESOLUTION + dx;
+      uint16_t gy            = at.y * DUNGEON_GAS_RESOLUTION + dy;
+      gas_poison[ gy ][ gx ] = 0;
+    }
+  }
+  set_is_gas_poison_no_check(at.x, at.y, 0);
+  thing_new("explosion_major", at);
+
+  poison_gas_explosion(at + point(1, 0));
+  poison_gas_explosion(at + point(-1, 0));
+  poison_gas_explosion(at + point(1, -1));
+  poison_gas_explosion(at + point(-1, 1));
 }

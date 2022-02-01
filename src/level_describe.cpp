@@ -41,6 +41,8 @@ void Level::describe(point p)
   }
 
   dbg3("Describe @%d,%d", p.x, p.y);
+  // XXX
+  // TOPCON("G%u", is_gas_poison_no_check(p.x, p.y));
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_ENCHANTING_ITEMS) ||

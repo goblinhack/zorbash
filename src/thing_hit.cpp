@@ -171,7 +171,7 @@ void Thing::on_you_natural_attack(void)
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
                          bool crit, bool attack_natural, bool attack_poison, bool attack_necrosis,
-                         bool attack_future1, bool attack_future2, bool attack_future3, bool attack_future4,
+                         bool attack_future1, bool attack_future2, bool attack_future3, bool attack_cold,
                          bool attack_fire, bool attack_crush, bool attack_lightning, bool attack_energy,
                          bool attack_acid, bool attack_digest, int damage)
 {
@@ -203,9 +203,22 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   } else if (attack_future3) {
     damage = buff_on_damage_future3(real_hitter, damage);
     damage = on_damage_future3(real_hitter, damage);
-  } else if (attack_future4) {
+  } else if (attack_cold) {
     damage = buff_on_damage_cold(real_hitter, damage);
     damage = on_damage_cold(real_hitter, damage);
+    if (is_on_fire()) {
+      unset_on_fire();
+
+      auto owner = get_top_owner();
+      if (owner) {
+        if (owner->is_player()) {
+          msg("%%fg=green$The cold attack puts out the flames!%%fg=reset$");
+        }
+      }
+
+      auto smoke = level->thing_new("smoke", curr_at);
+      smoke->set_lifespan(pcg_random_range(1, 10));
+    }
   } else if (attack_fire) {
     damage = buff_on_damage_fire(real_hitter, damage);
     damage = on_damage_fire(real_hitter, damage);
@@ -269,7 +282,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_short_string().c_str());
       damage_type = "damage_future3 ";
     }
-  } else if (attack_future4) {
+  } else if (attack_cold) {
     if (! damage) {
       real_hitter->log("No damage_cold damage on %s", to_short_string().c_str());
       return false;
@@ -769,13 +782,20 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               damage_type.c_str());
           popup("%%fg=red$Brzzt!");
         } else if (attack_crush) {
-          msg("%%fg=orange$You are being crushed by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=orange$You are being crushed by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
+              damage);
           popup("%%fg=red$Ouch!");
         } else if (attack_fire) {
-          msg("%%fg=orange$You are being burnt by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          if (real_hitter->is_explosion()) {
+            msg("%%fg=orange$You are blasted by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
+                damage);
+          } else {
+            msg("%%fg=orange$You are burnt by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(), damage);
+          }
           popup("%%fg=red$!");
         } else if (attack_digest) {
-          msg("%%fg=red$You are being consumed by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=red$You are being consumed by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
+              damage);
           popup("%%fg=red$Gulp!");
         } else {
           msg("%%fg=orange$%s %s you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
@@ -897,7 +917,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (is_on_fire()) {
     if (is_player()) {
-      msg("%%fg=red$You burn whilst being attacked! So cruel!%%fg=reset$");
+      if (real_hitter->is_monst()) {
+        msg("%%fg=red$You burn whilst being attacked! So cruel!%%fg=reset$");
+      }
     }
     if (hitter->set_on_fire("hit by fire due to attacking")) {
       msg("%s sets itself on fire!", hitter->text_The().c_str());
@@ -1019,8 +1041,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         reason = "by future2";
       } else if (attack_future3) {
         reason = "by future3";
-      } else if (attack_future4) {
-        reason = "by future4";
+      } else if (attack_cold) {
+        reason = "by cold";
       } else if (attack_fire) {
         reason = "by fire";
       } else if (attack_crush) {
@@ -1095,9 +1117,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 // Returns true on the target being dead.
 //
 int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poison, bool attack_necrosis,
-                  bool attack_future1, bool attack_future2, bool attack_future3, bool attack_future4,
-                  bool attack_fire, bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid,
-                  bool attack_digest, int damage)
+                  bool attack_future1, bool attack_future2, bool attack_future3, bool attack_cold, bool attack_fire,
+                  bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid, bool attack_digest,
+                  int damage)
 {
   TRACE_NO_INDENT();
   if (attack_natural || attack_digest) {
@@ -1190,10 +1212,12 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
     //
     // This case is hit if a ghost runs into a player. The ghost takes
     // damage. We don't want the player to keep absorbing hits when
-    // already dead though.
+    // the ghost is dead though.
     //
-    IF_DEBUG2 { hitter->log("No, hitter %s is already dead", to_short_string().c_str()); }
-    return false;
+    if (hitter->is_monst()) {
+      IF_DEBUG2 { hitter->log("No, hitter %s is already dead", to_short_string().c_str()); }
+      return false;
+    }
   }
 
   //
@@ -1239,7 +1263,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
 
   hit_and_destroyed =
       ai_hit_actual(hitter, real_hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_future1,
-                    attack_future2, attack_future3, attack_future4, attack_fire, attack_crush, attack_lightning,
+                    attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
                     attack_energy, attack_acid, attack_digest, damage);
 
   return (hit_and_destroyed);

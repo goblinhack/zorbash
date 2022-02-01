@@ -140,14 +140,6 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
-  // Apply gas damage
-  //
-  gas_poison_tick();
-  if (is_dead) {
-    return;
-  }
-
-  //
   // Apply poison damage
   //
   poison_tick();
