@@ -59,52 +59,46 @@ void Thing::location_check_forced(void)
   //
   chasm_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
     return;
   }
   corrode_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
     return;
   }
   barrel_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
     return;
   }
   secret_door_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
     return;
   }
   brazier_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
     return;
   }
   water_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
     return;
   }
   lava_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
     return;
   }
   acid_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
     return;
   }
   fire_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
     return;
   }
   grass_tick();
   if (is_dead) {
-    dbg("Location check, skip, dead");
+    return;
+  }
+  gas_poison_tick();
+  if (is_dead) {
     return;
   }
 

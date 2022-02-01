@@ -11,6 +11,10 @@ def tp_init(name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
+    mytp.set_damage_fire_chance_d1000(1000)
+    mytp.set_damage_fire_dice("1d6")  # This is the damage when the monst fires
+    mytp.set_is_fire(True)
+    mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_floating(True)
     mytp.set_is_loggable(True)
     mytp.set_is_tickable(True)

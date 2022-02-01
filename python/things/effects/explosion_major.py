@@ -26,6 +26,8 @@ def tp_init(name):
     mytp.set_gfx_animated(True)
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
+    mytp.set_is_fire(True)
+    mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_is_explosion(True)
     mytp.set_is_floating(True)
     mytp.set_is_loggable(True)
