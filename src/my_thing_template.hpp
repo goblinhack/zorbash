@@ -527,7 +527,7 @@ private:
   int _unused_flag150 {};
   int _unused_flag151 {};
   int _unused_flag152 {};
-  int _unused_flag153 {};
+  int _is_breather {};
   int _noise_level {};
   int _is_asleep_initially {};
   int _is_able_to_sleep {};
@@ -1407,7 +1407,7 @@ public:
   int unused_flag150(void) const { return _unused_flag150; }
   int unused_flag151(void) const { return _unused_flag151; }
   int unused_flag152(void) const { return _unused_flag152; }
-  int unused_flag153(void) const { return _unused_flag153; }
+  int is_breather(void) const { return _is_breather; }
   int noise_level(void) const { return _noise_level; }
   int is_asleep_initially(void) const { return _is_asleep_initially; }
   int is_able_to_sleep(void) const { return _is_able_to_sleep; }
@@ -2035,7 +2035,7 @@ public:
   void set_unused_flag150(int v) { _unused_flag150 = v; }
   void set_unused_flag151(int v) { _unused_flag151 = v; }
   void set_unused_flag152(int v) { _unused_flag152 = v; }
-  void set_unused_flag153(int v) { _unused_flag153 = v; }
+  void set_is_breather(int v) { _is_breather = v; }
   void set_noise_level(int v) { _noise_level = v; }
   void set_is_asleep_initially(int v) { _is_asleep_initially = v; }
   void set_is_able_to_sleep(int v) { _is_able_to_sleep = v; }

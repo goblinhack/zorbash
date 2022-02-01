@@ -2009,53 +2009,53 @@ void Level::unset_is_gas_blocker(const int x, const int y)
 
 void Level::unset_is_gas_blocker_no_check(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, false); }
 
-uint8_t Level::is_gas_intensity(const point p) const
+uint8_t Level::is_gas_poison(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return 0;
   }
-  return (get(_is_gas_intensity, p.x, p.y));
+  return (get(_is_gas_poison, p.x, p.y));
 }
 
-uint8_t Level::is_gas_intensity_no_check(const point p) const { return (get_no_check(_is_gas_intensity, p.x, p.y)); }
+uint8_t Level::is_gas_poison_no_check(const point p) const { return (get_no_check(_is_gas_poison, p.x, p.y)); }
 
-uint8_t Level::is_gas_intensity(const int x, const int y) const
+uint8_t Level::is_gas_poison(const int x, const int y) const
 {
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_gas_intensity, x, y));
+  return (get(_is_gas_poison, x, y));
 }
 
-uint8_t Level::is_gas_intensity_no_check(const int x, const int y) const
+uint8_t Level::is_gas_poison_no_check(const int x, const int y) const
 {
-  return (get_no_check(_is_gas_intensity, x, y));
+  return (get_no_check(_is_gas_poison, x, y));
 }
 
-void Level::set_is_gas_intensity(const int x, const int y, uint8_t val)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  set(_is_gas_intensity, x, y, val);
-}
-
-void Level::set_is_gas_intensity_no_check(const int x, const int y, uint8_t val)
-{
-  set_no_check(_is_gas_intensity, x, y, val);
-}
-
-void Level::unset_is_gas_intensity(const int x, const int y)
+void Level::set_is_gas_poison(const int x, const int y, uint8_t val)
 {
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  set(_is_gas_intensity, x, y, (uint8_t) 0);
+  set(_is_gas_poison, x, y, val);
 }
 
-void Level::unset_is_gas_intensity_no_check(const int x, const int y)
+void Level::set_is_gas_poison_no_check(const int x, const int y, uint8_t val)
 {
-  set_no_check(_is_gas_intensity, x, y, (uint8_t) 0);
+  set_no_check(_is_gas_poison, x, y, val);
+}
+
+void Level::unset_is_gas_poison(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_gas_poison, x, y, (uint8_t) 0);
+}
+
+void Level::unset_is_gas_poison_no_check(const int x, const int y)
+{
+  set_no_check(_is_gas_poison, x, y, (uint8_t) 0);
 }
 
 //

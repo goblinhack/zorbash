@@ -510,7 +510,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->ts_fade_out_begin);
   in >> bits(l->ts_fade_in_begin);
 
-  in >> bits(my.t->gas_swamp);
+  in >> bits(my.t->gas_poison);
 
   in >> bits(my.t->_is_gas_blocker);
   in >> bits(my.t->_is_light_blocker);
@@ -544,7 +544,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_floor);
   in >> bits(my.t->_is_foilage);
   in >> bits(my.t->_is_food);
-  in >> bits(my.t->_is_gas_intensity);
+  in >> bits(my.t->_is_gas_poison);
   in >> bits(my.t->_is_gold);
   in >> bits(my.t->_is_green_blood);
   in >> bits(my.t->_is_hazard);

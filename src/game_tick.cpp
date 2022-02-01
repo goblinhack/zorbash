@@ -75,7 +75,7 @@ void Game::tick_begin_now(void)
 
   if (level) {
     level->lights_fade();
-    level->tick_gas_swamp();
+    level->tick_gas_poison();
 
     auto player = level->player;
     if (player && ! robot_mode) {

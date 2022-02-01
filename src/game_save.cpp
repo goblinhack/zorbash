@@ -467,7 +467,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->ts_fade_out_begin);
   out << bits(my.t->ts_fade_in_begin);
 
-  out << bits(my.t->gas_swamp);
+  out << bits(my.t->gas_poison);
 
   out << bits(my.t->_is_gas_blocker);
   out << bits(my.t->_is_light_blocker);
@@ -501,7 +501,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_floor);
   out << bits(my.t->_is_foilage);
   out << bits(my.t->_is_food);
-  out << bits(my.t->_is_gas_intensity);
+  out << bits(my.t->_is_gas_poison);
   out << bits(my.t->_is_gold);
   out << bits(my.t->_is_green_blood);
   out << bits(my.t->_is_hazard);

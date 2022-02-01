@@ -5,7 +5,7 @@
 #include "my_level.hpp"
 #include "my_random.hpp"
 
-void Level::tick_gas_swamp(void)
+void Level::tick_gas_poison(void)
 {
   static std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
       old_gas {};
@@ -18,13 +18,13 @@ void Level::tick_gas_swamp(void)
       for (uint16_t x = DUNGEON_GAS_RESOLUTION; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION;
            x++) {
         if (rand() % 100 < 10) {
-          gas_swamp[ x ][ y ] = 9;
+          gas_poison[ x ][ y ] = 9;
         }
       }
     }
   }
 
-  old_gas = gas_swamp;
+  old_gas = gas_poison;
 
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -33,7 +33,7 @@ void Level::tick_gas_swamp(void)
           for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
             uint16_t gx           = x * DUNGEON_GAS_RESOLUTION + dx;
             uint16_t gy           = y * DUNGEON_GAS_RESOLUTION + dy;
-            gas_swamp[ gy ][ gx ] = 255;
+            gas_poison[ gy ][ gx ] = 255;
           }
         }
       } else {
@@ -44,8 +44,8 @@ void Level::tick_gas_swamp(void)
           for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
             uint16_t gx = x * DUNGEON_GAS_RESOLUTION + dx;
             uint16_t gy = y * DUNGEON_GAS_RESOLUTION + dy;
-            if (gas_swamp[ gy ][ gx ] == 255) {
-              gas_swamp[ gy ][ gx ] = 0;
+            if (gas_poison[ gy ][ gx ] == 255) {
+              gas_poison[ gy ][ gx ] = 0;
             }
           }
         }
@@ -58,7 +58,7 @@ void Level::tick_gas_swamp(void)
   for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; y++) {
     uint16_t x = DUNGEON_GAS_RESOLUTION;
     for (; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; x++) {
-      uint8_t n = gas_swamp[ y ][ x ];
+      uint8_t n = gas_poison[ y ][ x ];
       if (n == 255) {
         printf("X");
       } else if (n) {
@@ -87,7 +87,7 @@ void Level::tick_gas_swamp(void)
     uint8_t *h = g + 1;
     uint8_t *i = h + 1;
 
-    uint8_t *n = &gas_swamp[ y ][ x ];
+    uint8_t *n = &gas_poison[ y ][ x ];
 
     for (; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; x++) {
       uint8_t ga = *a++;
@@ -144,13 +144,13 @@ void Level::tick_gas_swamp(void)
     }
   }
 
-  old_gas = gas_swamp;
+  old_gas = gas_poison;
 
   uint8_t step = pcg_random_range(0, 7) + 1;
   for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; y++) {
     uint16_t x = DUNGEON_GAS_RESOLUTION;
 
-    uint8_t *n = &gas_swamp[ y ][ x ];
+    uint8_t *n = &gas_poison[ y ][ x ];
 
     for (; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; x += step, n += step) {
       uint8_t gn = *n;
@@ -173,7 +173,7 @@ void Level::tick_gas_swamp(void)
         for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
           uint16_t gx = x * DUNGEON_GAS_RESOLUTION + dx;
           uint16_t gy = y * DUNGEON_GAS_RESOLUTION + dy;
-          int      i  = gas_swamp[ gy ][ gx ];
+          int      i  = gas_poison[ gy ][ gx ];
           if (i == 255) {
             continue;
           }
@@ -183,7 +183,7 @@ void Level::tick_gas_swamp(void)
       if (g > 254) {
         g = 254;
       }
-      set_is_gas_intensity_no_check(x, y, g);
+      set_is_gas_poison_no_check(x, y, g);
     }
   }
 }

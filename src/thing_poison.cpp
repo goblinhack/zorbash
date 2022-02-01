@@ -3,12 +3,11 @@
 // See the README.md file for license info.
 //
 
+#include "my_level.hpp"
 #include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-#include "my_tile.hpp"
-#include "my_ui.hpp"
 #include "my_wid_topcon.hpp"
 
 void Thing::poison_tick(void)
@@ -33,18 +32,31 @@ void Thing::poison_tick(void)
   int    poison = old_poison;
 
   if (poison) {
-    poison /= 2;
-    set_poisoned_amount(poison);
+    auto new_poison = poison / 2;
 
     if (poison) {
       if (d20() < get_stat_con()) {
         if (is_player()) {
-          msg("You take half damage fron poison due to your sturdy con.");
+          msg("You take half damage fron poison due to your sturdy constitution.");
         }
-        poison /= 2;
-        set_poisoned_amount(poison);
+        new_poison = poison / 2;
       }
     }
+
+    //
+    // Do not let poison go to zero if still in the gas. This stops messages that
+    // look like you have recovered.
+    //
+    if (is_breather()) {
+      auto intensity = level->is_gas_poison(curr_at.x, curr_at.y) / 10;
+      if (intensity) {
+        if (! new_poison) {
+          new_poison = 1;
+        }
+      }
+    }
+
+    set_poisoned_amount(new_poison);
 
     if (poison) {
       is_attacked_with_damage_poison(hitter, poison);

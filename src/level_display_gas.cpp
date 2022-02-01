@@ -70,7 +70,7 @@ void Level::display_gas(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16
           for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
             uint16_t gx        = x * DUNGEON_GAS_RESOLUTION + dx;
             uint16_t gy        = y * DUNGEON_GAS_RESOLUTION + dy;
-            uint8_t  intensity = gas_swamp[ gy ][ gx ];
+            uint8_t  intensity = gas_poison[ gy ][ gx ];
 
             if (! intensity) {
               continue;

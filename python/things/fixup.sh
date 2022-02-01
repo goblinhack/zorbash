@@ -453,7 +453,7 @@ do
       set_unused_flag150 \
       set_unused_flag151 \
       set_unused_flag152 \
-      set_unused_flag153 \
+      set_is_breather \
       set_noise_level \
       set_is_asleep_initially \
       set_is_able_to_sleep \
