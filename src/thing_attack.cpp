@@ -492,7 +492,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   if (is_able_to_tire()) {
     if (! get_stamina()) {
       if (is_player()) {
-        msg("You are too tired to attack. You need to rest.");
+        msg("You are too tired to attack.");
       }
       return false;
     }
@@ -863,8 +863,10 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
           dbg("The attack missed (att modifier %d, AC %d) on %s", stat_att, stat_def, victim->to_string().c_str());
         }
 
-        if (attack_lunge()) {
-          lunge(victim->curr_at);
+        if (victim != this) {
+          if (attack_lunge()) {
+            lunge(victim->curr_at);
+          }
         }
 
         //
@@ -923,8 +925,10 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
                      attack_acid, attack_digest, damage)) {
     dbg("The attack succeeded");
 
-    if (attack_lunge()) {
-      lunge(victim->curr_at);
+    if (victim != this) {
+      if (attack_lunge()) {
+        lunge(victim->curr_at);
+      }
     }
     if (attack_eater()) {
       health_boost(victim->get_nutrition());
@@ -986,8 +990,10 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     if (is_loggable()) {
       dbg("Attack missed %s", victim->to_string().c_str());
     }
-    if (attack_lunge()) {
-      lunge(victim->curr_at);
+    if (victim != this) {
+      if (attack_lunge()) {
+        lunge(victim->curr_at);
+      }
     }
     dead("by foolishness");
     return true;

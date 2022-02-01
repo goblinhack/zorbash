@@ -99,7 +99,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   if (is_able_to_tire()) {
     if (! get_stamina()) {
       if (is_player()) {
-        msg("You are too tired to jump. You need to rest.");
+        msg("You are too tired to jump.");
       }
       dbg("Too tired to jump, stamina %d", get_stamina());
       return false;

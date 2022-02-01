@@ -569,7 +569,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
   if (is_able_to_tire()) {
     if (! get_stamina()) {
       if (is_player()) {
-        msg("You are too tired to attack. You need to rest.");
+        msg("You are too tired to attack.");
       }
       return false;
     }

@@ -205,11 +205,13 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     return false;
   }
 
-  if (get_stamina() < 5) {
-    if (is_player()) {
-      msg("You cannot move, you are so tired! Nap time...");
-      game->tick_begin("too tired to move");
-      return false;
+  if (is_able_to_tire()) {
+    if (get_stamina() < 5) {
+      if (is_player()) {
+        msg("You cannot move, you are so tired! Nap time...");
+        game->tick_begin("too tired to move");
+        return false;
+      }
     }
   }
 
@@ -371,7 +373,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         if (up || down || left || right) {
           if (d20() > get_stat_con()) {
             if (pcg_random_range(0, 100) < 10) {
-              decr_stamina();
+              if (is_able_to_tire()) {
+                decr_stamina();
+              }
             }
           }
         } else {

@@ -10,15 +10,18 @@ void Level::tick_gas_poison(void)
   static std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
       old_gas {};
 
-  static int first = 1;
-  if (first) {
-    first = 0;
-    for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION;
-         y++) {
-      for (uint16_t x = DUNGEON_GAS_RESOLUTION; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION;
-           x++) {
-        if (rand() % 100 < 10) {
-          gas_poison[ x ][ y ] = 9;
+  IF_DEBUG2
+  {
+    static int first = 1;
+    if (first) {
+      first = 0;
+      for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION;
+           y++) {
+        for (uint16_t x = DUNGEON_GAS_RESOLUTION; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION;
+             x++) {
+          if (rand() % 100 < 10) {
+            gas_poison[ x ][ y ] = 9;
+          }
         }
       }
     }
@@ -31,8 +34,8 @@ void Level::tick_gas_poison(void)
       if (is_gas_blocker(x, y)) {
         for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
           for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
-            uint16_t gx           = x * DUNGEON_GAS_RESOLUTION + dx;
-            uint16_t gy           = y * DUNGEON_GAS_RESOLUTION + dy;
+            uint16_t gx            = x * DUNGEON_GAS_RESOLUTION + dx;
+            uint16_t gy            = y * DUNGEON_GAS_RESOLUTION + dy;
             gas_poison[ gy ][ gx ] = 255;
           }
         }
@@ -146,6 +149,7 @@ void Level::tick_gas_poison(void)
 
   old_gas = gas_poison;
 
+#if 0
   uint8_t step = pcg_random_range(0, 7) + 1;
   for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; y++) {
     uint16_t x = DUNGEON_GAS_RESOLUTION;
@@ -165,7 +169,11 @@ void Level::tick_gas_poison(void)
       }
     }
   }
+#endif
 
+  //
+  // Update the level gas intensity per tile
+  //
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       int g = 0;
