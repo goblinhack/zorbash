@@ -81,6 +81,10 @@ void py_init(char *argv[])
 
   CON("INI: Calling Py_Initialize");
   Py_Initialize();
+  if (g_errored) {
+    return;
+  }
+
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 

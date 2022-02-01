@@ -979,103 +979,118 @@ std::string to_string(const SDL_Keysym &k)
   return out + to_string_ignoring_mods(k);
 }
 
-SDL_Keysym sdlk_normalize(SDL_Keysym k)
+SDL_Keysym sdlk_normalize(SDL_Keysym k_in)
 {
+  SDL_Keysym k = k_in;
+
   if ((k.mod & KMOD_LSHIFT) || (k.mod & KMOD_RSHIFT)) {
     k.mod &= ~KMOD_SHIFT;
     switch (k.sym) {
       case SDLK_COMMA :
         // <
         k.sym = SDLK_LESS;
-        break;
+        return k;
       case SDLK_MINUS :
         // _
         k.sym = SDLK_MINUS;
-        break;
+        return k;
       case SDLK_PERIOD :
         // >
         k.sym = SDLK_GREATER;
-        break;
+        return k;
       case SDLK_SLASH :
         // ?
         k.sym = SDLK_QUESTION;
-        break;
+        return k;
       case SDLK_EQUALS :
         // +
         k.sym = SDLK_PLUS;
-        break;
+        return k;
       case SDLK_0 :
         // )
         k.sym = SDLK_RIGHTPAREN;
-        break;
+        return k;
       case SDLK_1 :
         // !
         k.sym = SDLK_EXCLAIM;
-        break;
+        return k;
       case SDLK_2 :
         // @
         k.sym = SDLK_AT;
-        break;
+        return k;
       case SDLK_3 :
         // #
         k.sym = SDLK_HASH;
-        break;
+        return k;
       case SDLK_4 :
         // $
         k.sym = SDLK_DOLLAR;
-        break;
+        return k;
       case SDLK_5 :
         // %
         k.sym = SDLK_PERCENT;
-        break;
+        return k;
       case SDLK_6 :
         // ^
         k.sym = SDLK_CARET;
-        break;
+        return k;
       case SDLK_7 :
         // &
         k.sym = SDLK_AMPERSAND;
-        break;
+        return k;
       case SDLK_8 :
         // *
         k.sym = SDLK_ASTERISK;
-        break;
+        return k;
       case SDLK_9 :
         // (
         k.sym = SDLK_LEFTPAREN;
-        break;
+        return k;
       case SDLK_SEMICOLON :
         // :
         k.sym = SDLK_COLON;
-        break;
+        return k;
       case SDLK_LEFTBRACKET :
         // {
         k.sym = SDLK_LEFTBRACKET;
-        break;
+        return k;
       case SDLK_BACKSLASH :
         // |
         k.sym = SDLK_KP_VERTICALBAR;
-        break;
+        return k;
       case SDLK_RIGHTBRACKET :
         // }
         k.sym = SDLK_RIGHTBRACKET;
-        break;
+        return k;
       case SDLK_HASH :
         // ~
         //
         // Not sure about this one for tilde in US and UK keyboards
         //
         k.sym = SDLK_BACKQUOTE;
-        break;
+        return k;
     }
   }
-  return k;
+  return k_in;
 }
 
 bool sdlk_eq(const SDL_Keysym &a, const SDL_Keysym &b)
 {
   auto k1 = sdlk_normalize(a);
   auto k2 = sdlk_normalize(b);
+
+  //
+  // So either shift key works
+  if (k1.mod & KMOD_SHIFT)
+    k1.mod |= KMOD_SHIFT;
+  if (k2.mod & KMOD_SHIFT)
+    k2.mod |= KMOD_SHIFT;
+
+  if (k1.mod & KMOD_CTRL)
+    k1.mod |= KMOD_CTRL;
+  if (k2.mod & KMOD_CTRL)
+    k2.mod |= KMOD_CTRL;
+
   return (k1.sym == k2.sym) && (k1.mod == k2.mod);
 }
 

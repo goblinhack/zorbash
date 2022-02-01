@@ -162,15 +162,15 @@ bool Thing::path_pop_next_move(void)
 
           if (too_far) {
             if (any_unfriendly_monst_visible()) {
-              ai_change_state(MONST_STATE_IDLE, "too far, need to rest but threat nearby, failed to jump");
+              change_state(MONST_STATE_IDLE, "too far, need to rest but threat nearby, failed to jump");
             } else {
-              ai_change_state(MONST_STATE_RESTING, "too far, need to rest, failed to jump");
+              change_state(MONST_STATE_RESTING, "too far, need to rest, failed to jump");
             }
           } else {
             if (any_unfriendly_monst_visible()) {
-              ai_change_state(MONST_STATE_IDLE, "need to rest but threat nearby, failed to jump");
+              change_state(MONST_STATE_IDLE, "need to rest but threat nearby, failed to jump");
             } else {
-              ai_change_state(MONST_STATE_RESTING, "need to rest, failed to jump");
+              change_state(MONST_STATE_RESTING, "need to rest, failed to jump");
             }
           }
 

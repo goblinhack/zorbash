@@ -614,7 +614,7 @@ bool Level::tick(void)
         //
         if (game->state != Game::STATE_NORMAL) {
           LOG("Robot: reset to normal state");
-          player->ai_change_state(MONST_STATE_IDLE, "reset to normal state");
+          player->change_state(MONST_STATE_IDLE, "reset to normal state");
         }
 
         LOG("Robot: no new tick was requested, so tick anyway");

@@ -844,12 +844,19 @@ int32_t main(int32_t argc, char *argv[])
 
   CON("INI: Python init");
   py_init(argv);
+  if (g_errored) {
+    goto loop;
+  }
+
   py_call_void("init2");
   CON("INI: Python inited");
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   CON("INI: Load dungeon thing templates");
   tp_init();
+  if (g_errored) {
+    goto loop;
+  }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //
@@ -857,6 +864,9 @@ int32_t main(int32_t argc, char *argv[])
   //
   CON("INI: Load dungeon rooms");
   room_init();
+  if (g_errored) {
+    goto loop;
+  }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if 0
@@ -890,6 +900,7 @@ int32_t main(int32_t argc, char *argv[])
     game->load_snapshot();
   }
 
+loop:
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 

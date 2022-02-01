@@ -1737,7 +1737,7 @@ bool Thing::ai_tick(bool recursing)
           game->tick_begin("Robot move interrupted by something");
         }
 
-        ai_change_state(MONST_STATE_IDLE, "move interrupted by a change");
+        change_state(MONST_STATE_IDLE, "move interrupted by a change");
         if (is_player()) {
           game->request_remake_actionbar = true;
         }
@@ -1868,7 +1868,7 @@ bool Thing::ai_tick(bool recursing)
             if (is_player()) {
               game->tick_begin("Robot is forced to rest, very low on stamina");
             }
-            ai_change_state(MONST_STATE_RESTING, "need to rest, very low on stamina");
+            change_state(MONST_STATE_RESTING, "need to rest, very low on stamina");
             return true;
           }
 
@@ -1882,7 +1882,7 @@ bool Thing::ai_tick(bool recursing)
               if (is_player()) {
                 game->tick_begin("Robot needs to rest, very low on health");
               }
-              ai_change_state(MONST_STATE_RESTING, "need to rest, very low on health");
+              change_state(MONST_STATE_RESTING, "need to rest, very low on health");
               return true;
             }
           }
@@ -1901,7 +1901,7 @@ bool Thing::ai_tick(bool recursing)
             if (is_player()) {
               game->tick_begin("Robot is low on stamina");
             }
-            ai_change_state(MONST_STATE_RESTING, "need to rest, low on stamina");
+            change_state(MONST_STATE_RESTING, "need to rest, low on stamina");
             return true;
           }
 
@@ -1917,7 +1917,7 @@ bool Thing::ai_tick(bool recursing)
               if (is_player()) {
                 game->tick_begin("Robot is low on health");
               }
-              ai_change_state(MONST_STATE_RESTING, "need to rest, low on health");
+              change_state(MONST_STATE_RESTING, "need to rest, low on health");
               return true;
             }
           }
@@ -1940,7 +1940,7 @@ bool Thing::ai_tick(bool recursing)
                   if (is_player()) {
                     game->tick_begin("Robot can enchant something");
                   }
-                  ai_change_state(MONST_STATE_USING_ENCHANTSTONE, "can enchant something");
+                  change_state(MONST_STATE_USING_ENCHANTSTONE, "can enchant something");
                   return true;
                 }
               }
@@ -1955,7 +1955,7 @@ bool Thing::ai_tick(bool recursing)
                   if (is_player()) {
                     game->tick_begin("Robot can learn something");
                   }
-                  ai_change_state(MONST_STATE_USING_SKILLSTONE, "can learn something");
+                  change_state(MONST_STATE_USING_SKILLSTONE, "can learn something");
                   return true;
                 }
               }
@@ -2290,7 +2290,7 @@ bool Thing::ai_tick(bool recursing)
         for (int search_type = 0; search_type < search_type_max; search_type++) {
           if (ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
             if (aip->move_path.size()) {
-              ai_change_state(MONST_STATE_MOVING, "found a new goal");
+              change_state(MONST_STATE_MOVING, "found a new goal");
             }
             return true;
           }
@@ -2327,7 +2327,7 @@ bool Thing::ai_tick(bool recursing)
           if (is_player()) {
             game->tick_begin("nothing to do, rest");
           }
-          ai_change_state(MONST_STATE_RESTING, "nothing to do, rest");
+          change_state(MONST_STATE_RESTING, "nothing to do, rest");
           return true;
         }
 
@@ -2369,7 +2369,7 @@ bool Thing::ai_tick(bool recursing)
           if (is_player()) {
             game->tick_begin("Robot move finished");
           }
-          ai_change_state(MONST_STATE_IDLE, "move finished");
+          change_state(MONST_STATE_IDLE, "move finished");
           if (is_player()) {
             game->request_remake_actionbar = true;
           }
@@ -2400,7 +2400,7 @@ bool Thing::ai_tick(bool recursing)
           if (is_player()) {
             game->tick_begin("Robot has rested enough");
           }
-          ai_change_state(MONST_STATE_IDLE, "rested enough");
+          change_state(MONST_STATE_IDLE, "rested enough");
           get_infop()->last_failed_jump_at = point(0, 0);
           return true;
         }
@@ -2413,7 +2413,7 @@ bool Thing::ai_tick(bool recursing)
           if (is_player()) {
             game->tick_begin("Robot ate an item");
           }
-          ai_change_state(MONST_STATE_OPEN_INVENTORY, "eat something");
+          change_state(MONST_STATE_OPEN_INVENTORY, "eat something");
           return true;
         }
 
@@ -2422,7 +2422,7 @@ bool Thing::ai_tick(bool recursing)
         if (is_able_to_sleep()) {
           incr_sleep_count();
           if (get_sleep_count() > 5) {
-            ai_change_state(MONST_STATE_SLEEPING, "time to sleep");
+            change_state(MONST_STATE_SLEEPING, "time to sleep");
           }
         }
 
@@ -2447,10 +2447,10 @@ bool Thing::ai_tick(bool recursing)
         // Then close it. This is really just visual feedback.
         //
         if (is_player()) {
-          ai_change_state(MONST_STATE_REPACK_INVENTORY, "repack inventory");
+          change_state(MONST_STATE_REPACK_INVENTORY, "repack inventory");
           game->tick_begin("Robot finished collecting");
         } else {
-          ai_change_state(MONST_STATE_IDLE, "close inventory");
+          change_state(MONST_STATE_IDLE, "close inventory");
         }
       }
       break;
@@ -2462,10 +2462,10 @@ bool Thing::ai_tick(bool recursing)
         //
         enchant_random_item_with_stone();
         if (is_player()) {
-          ai_change_state(MONST_STATE_REPACK_INVENTORY, "enchanted");
+          change_state(MONST_STATE_REPACK_INVENTORY, "enchanted");
           game->tick_begin("Robot finished enchanting");
         } else {
-          ai_change_state(MONST_STATE_IDLE, "enchanted");
+          change_state(MONST_STATE_IDLE, "enchanted");
         }
       }
       break;
@@ -2477,10 +2477,10 @@ bool Thing::ai_tick(bool recursing)
         //
         learn_random_skill();
         if (is_player()) {
-          ai_change_state(MONST_STATE_REPACK_INVENTORY, "added skill");
+          change_state(MONST_STATE_REPACK_INVENTORY, "added skill");
           game->tick_begin("Robot finished adding skills");
         } else {
-          ai_change_state(MONST_STATE_IDLE, "added skill");
+          change_state(MONST_STATE_IDLE, "added skill");
         }
       }
       break;
@@ -2503,7 +2503,7 @@ bool Thing::ai_tick(bool recursing)
         // Need to go back to reseting, as this resets failed jumps once fully rested
         // and we may have came here due to eating food when resting.
         //
-        ai_change_state(MONST_STATE_RESTING, "finished repacking");
+        change_state(MONST_STATE_RESTING, "finished repacking");
         return true;
       }
       break;
@@ -2518,113 +2518,6 @@ bool Thing::ai_tick(bool recursing)
   }
 
   return true;
-}
-
-void Thing::ai_change_state(int new_state, const std::string &why)
-{
-  TRACE_NO_INDENT();
-
-  if (get_infop()->monst_state == new_state) {
-    return;
-  }
-
-  dbg("AI change state: %s", why.c_str());
-  TRACE_AND_INDENT();
-
-  std::string to;
-  std::string from;
-  switch (new_state) {
-    case MONST_STATE_IDLE :
-      set_sleep_count(0);
-      to = "IDLE";
-      break;
-    case MONST_STATE_MOVING :
-      set_sleep_count(0);
-      to = "MOVING";
-      break;
-    case MONST_STATE_RESTING :
-      // allow sleep count to increment
-      to = "RESTING";
-      break;
-    case MONST_STATE_OPEN_INVENTORY :
-      set_sleep_count(0);
-      to = "OPEN-INVENTORY";
-      break;
-    case MONST_STATE_USING_ENCHANTSTONE :
-      set_sleep_count(0);
-      to = "USING-ENCHANTSTONE";
-      break;
-    case MONST_STATE_USING_SKILLSTONE :
-      set_sleep_count(0);
-      to = "USING-SKILLSTONE";
-      break;
-    case MONST_STATE_REPACK_INVENTORY :
-      set_sleep_count(0);
-      to = "REPACK";
-      break;
-    case MONST_STATE_SLEEPING :
-      // allow sleep count to increment
-      to = "SLEEPING";
-      break;
-  }
-
-  if (is_player()) {
-    wid_inventory_fini();
-  }
-
-  //
-  // Current state
-  //
-  switch (get_infop()->monst_state) {
-    case MONST_STATE_IDLE : from = "IDLE"; break;
-    case MONST_STATE_MOVING : from = "MOVING"; break;
-    case MONST_STATE_RESTING : from = "RESTING"; break;
-    case MONST_STATE_REPACK_INVENTORY : from = "REPACK"; break;
-    case MONST_STATE_OPEN_INVENTORY : from = "OPEN-INVENTORY"; break;
-    case MONST_STATE_USING_ENCHANTSTONE :
-      from = "USING-ENCHANTSTONE";
-      if (is_player()) {
-        wid_enchant_destroy();
-      }
-      break;
-    case MONST_STATE_USING_SKILLSTONE :
-      from = "USING-SKILLSTONE";
-      if (is_player()) {
-        wid_choose_skill_destroy();
-      }
-      break;
-    case MONST_STATE_SLEEPING : from = "SLEEPING"; break;
-  }
-
-  IF_DEBUG
-  {
-    auto s = string_sprintf("State change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
-    AI_LOG(s);
-  }
-
-  get_infop()->monst_state = new_state;
-  switch (new_state) {
-    case MONST_STATE_IDLE : clear_move_path("State is now idle"); break;
-    case MONST_STATE_MOVING : break;
-    case MONST_STATE_RESTING : break;
-    case MONST_STATE_REPACK_INVENTORY : break;
-    case MONST_STATE_OPEN_INVENTORY :
-      if (is_player()) {
-        wid_inventory_init();
-        game->request_remake_rightbar = true;
-      }
-      break;
-    case MONST_STATE_USING_ENCHANTSTONE :
-      if (is_player()) {
-        game->wid_enchant_an_item();
-      }
-      break;
-    case MONST_STATE_USING_SKILLSTONE :
-      if (is_player()) {
-        game->wid_choose_skill();
-      }
-      break;
-  }
 }
 
 void Thing::ai_get_next_hop(void)
