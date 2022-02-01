@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- thing state                                                                                                                                  -->
+<!-- swinging when in gas                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
@@ -12,15 +12,16 @@
 <!-- - axe hits all around                                                                                                                        -->
 <!-- - swamp wort food                                                                                                                            -->
 <!-- - swamp level                                                                                                                                -->
-<!-- - boss 1 jelly boss, spawns jellys, tries to jump splat the player                                                                           -->
+<!-- - monst swamp blink toad, can teleport and launch a stream of goo                                                                           -->
+<!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
+<!-- - boss 2 jelly boss, spawns jellys, tries to jump splat the player                                                                           -->
 <!--          swamp wort, gas bloater and swamp tiles that allow 50% movement                                                                     -->
 <!--          boss will eat swamp wort to spawn                                                                                                   -->
 <!--          explode bog tiles to kill boss                                                                                                      -->
-<!-- - boss 2 rat king boss, sewer like level with rats coming out of the walls                                                                   -->
-<!-- - boss 3 goblin king boss, will be happy if the rat king crown is given                                                                      -->
-<!-- - boss 4 swamp blink toad, can teleport and launch a stream of goo                                                                           -->
+<!-- - boss 3 rat king boss, sewer like level with rats coming out of the walls                                                                   -->
+<!-- - boss 4 goblin king boss, will be happy if the rat king crown is given                                                                      -->
 <!-- - boss 5 water level, kraken? can grab and throw the player                                                                                  -->
-<!-- - boss 6 undead mummy king, pyramid shaped level, ankh of life restor given                                                                  -->
+<!-- - boss 6 ...                                                                                                                                 -->
 <!-- - boss 7 face a clone of yourself                                                                                                            -->
 <!-- - boss 8 Place crystals at the alter of Zorb. This opens a vault. Go inside and battle zorbash.                                              -->
 <!-- -        If you win, the gods turn on you and you get to replaced Zorbash.                                                                   -->

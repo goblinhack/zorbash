@@ -416,15 +416,17 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   auto delta = curr_at - hitter->curr_at;
 
-  if (real_hitter->tp()->gfx_bounce_on_move()) {
-    real_hitter->bounce(0.5, 0.1, 100, 3);
-    real_hitter->move_set_dir_from_delta(delta);
+  if (real_hitter != this) {
+    if (real_hitter->tp()->gfx_bounce_on_move()) {
+      real_hitter->bounce(0.5, 0.1, 100, 3);
+      real_hitter->move_set_dir_from_delta(delta);
+    }
   }
 
   if (real_hitter->is_able_to_tire()) {
     if (! real_hitter->get_stamina()) {
       if (real_hitter->is_player()) {
-        msg("You are too tired to attack. You need to rest.");
+        msg("You are too tired to attack.");
         return false;
       }
     }
@@ -950,26 +952,30 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  if (real_hitter->is_player() || real_hitter->is_monst()) {
-    wobble(90);
-    bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
+  if (real_hitter != this) {
+    if (real_hitter->is_player() || real_hitter->is_monst()) {
+      wobble(90);
+      bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
+    }
   }
 
   //
-  // Are we carrying a weapon? If not, see if we can do a claw attack
+  // Python callback. Poison looks like an attack on self, so avoid.
   //
-  if (attack_natural || attack_poison || attack_digest ||
-      ! real_hitter->get_equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
-    auto claws = real_hitter->tp()->gfx_anim_use();
-    if (claws != "") {
-      auto natural_attack_effect = level->thing_new(claws, curr_at);
-      natural_attack_effect->bounce(0.1, 0.1, 100, 3);
-      natural_attack_effect->move_set_dir_from_delta(delta);
+  if (real_hitter != this) {
+    //
+    // Are we carrying a weapon? If not, see if we can do a claw attack
+    //
+    if (attack_natural || attack_poison || attack_digest ||
+        ! real_hitter->get_equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
+      auto claws = real_hitter->tp()->gfx_anim_use();
+      if (claws != "") {
+        auto natural_attack_effect = level->thing_new(claws, curr_at);
+        natural_attack_effect->bounce(0.1, 0.1, 100, 3);
+        natural_attack_effect->move_set_dir_from_delta(delta);
 
-      //
-      // Python callback
-      //
-      real_hitter->on_you_natural_attack();
+        real_hitter->on_you_natural_attack();
+      }
     }
   }
 
