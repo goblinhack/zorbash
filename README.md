@@ -1,12 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- need non fire effect for wand of descent                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - swamp belcher                                                                                                                              -->
-<!-- - swamp gas                                                                                                                                  -->
 <!-- - noise alert for sleeping monst                                                                                                             -->
 <!-- - noise alert for broken door                                                                                                                -->
 <!-- - axe hits all around                                                                                                                        -->
