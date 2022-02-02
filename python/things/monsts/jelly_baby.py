@@ -60,6 +60,8 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_fearless(500)
     mytp.set_is_hittable(True)
+    mytp.set_is_immune_to_acid(True)
+    mytp.set_is_immune_to_necrosis(True)
     mytp.set_is_jelly_baby_eater(True)
     mytp.set_is_jelly_baby(True)
     mytp.set_is_jelly_eater(True)

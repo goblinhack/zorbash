@@ -206,15 +206,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   } else if (attack_cold) {
     damage = buff_on_damage_cold(real_hitter, damage);
     damage = on_damage_cold(real_hitter, damage);
-    if (is_on_fire()) {
-      unset_on_fire();
 
-      auto owner = get_top_owner();
-      if (owner) {
-        if (owner->is_player()) {
-          msg("%%fg=green$The cold attack puts out the flames!%%fg=reset$");
-        }
+    if (is_on_fire()) {
+      if (is_player()) {
+        msg("%%fg=green$The cold attack puts out the flames!%%fg=reset$");
       }
+      unset_on_fire();
 
       auto smoke = level->thing_new("smoke", curr_at);
       smoke->set_lifespan(pcg_random_range(1, 10));
@@ -449,7 +446,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Check for immunity
   //
-  if (environ_prefers_fire()) {
+  if (is_immune_to_fire()) {
     if (hitter->is_fire() || real_hitter->is_fire()) {
       if (is_player()) {
         msg("You bask in the fire!");
@@ -490,7 +487,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   // Poison attack
   //
   if (attack_poison) {
-    if (environ_prefers_poison()) {
+    if (is_immune_to_poison()) {
       if (hitter->is_poisonous_danger_level() || real_hitter->is_poisonous_danger_level()) {
         if (is_player()) {
           msg("You drink in the poison!");
@@ -523,7 +520,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     } else {
       if (pcg_random_range(0, 100) < 50) {
-        if (environ_prefers_necrosis()) {
+        if (is_immune_to_necrosis()) {
           if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
             if (is_player()) {
               msg("You gain strength from the withering touch!");
@@ -560,7 +557,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           return true;
         }
       } else {
-        if (environ_prefers_necrosis()) {
+        if (is_immune_to_necrosis()) {
           if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
             if (is_player()) {
               msg("You gain con from the withering touch!");

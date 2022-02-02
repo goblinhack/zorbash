@@ -35,6 +35,12 @@ def tp_init(name, text_name):
     mytp.set_is_floating(True)
     mytp.set_is_green_blooded(True)  # not really
     mytp.set_is_hittable(True)
+    mytp.set_is_immune_to_acid(True)
+    mytp.set_is_immune_to_cold(True)
+    mytp.set_is_immune_to_fire(True)
+    mytp.set_is_immune_to_necrosis(True)
+    mytp.set_is_immune_to_poison(True)
+    mytp.set_is_immune_to_water(True)
     mytp.set_is_loggable(True)
     mytp.set_is_monst_class_a(True)
     mytp.set_is_monst(True)

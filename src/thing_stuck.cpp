@@ -27,7 +27,7 @@ bool Thing::is_stuck(void)
     return false;
   }
 
-  if (environ_prefers_spiderwebs() && level->is_spiderweb(curr_at.x, curr_at.y)) {
+  if (is_immune_to_spiderwebs() && level->is_spiderweb(curr_at.x, curr_at.y)) {
     return false;
   }
 

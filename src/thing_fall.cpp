@@ -276,7 +276,7 @@ bool Thing::fall_to_next_level(void)
           } else if (is_item()) {
             msg("%s falls into the void!", text_The().c_str());
           } else {
-            msg("%s slips into the void!", text_The().c_str());
+            msg("%s fades into the void!", text_The().c_str());
           }
         }
       }

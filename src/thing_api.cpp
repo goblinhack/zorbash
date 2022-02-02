@@ -582,10 +582,10 @@ int Thing::is_able_to_walk_through_walls(void)
   return (tp()->is_able_to_walk_through_walls());
 }
 
-int Thing::environ_prefers_acid(void)
+int Thing::is_immune_to_acid(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_prefers_acid());
+  return (tp()->is_immune_to_acid());
 }
 
 int Thing::is_acid(void)
@@ -2316,10 +2316,10 @@ int Thing::unused_flag151(void)
   return (tp()->unused_flag151());
 }
 
-int Thing::unused_flag152(void)
+int Thing::is_immune_to_cold(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag152());
+  return (tp()->is_immune_to_cold());
 }
 
 int Thing::is_breather(void)
@@ -3216,10 +3216,10 @@ int Thing::is_wand(void)
   return (tp()->is_wand());
 }
 
-int Thing::environ_prefers_water(void)
+int Thing::is_immune_to_water(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_prefers_water());
+  return (tp()->is_immune_to_water());
 }
 
 int Thing::is_weapon(void)
@@ -3234,28 +3234,28 @@ int Thing::is_able_to_use_rings(void)
   return (tp()->is_able_to_use_rings());
 }
 
-int Thing::environ_prefers_fire(void)
+int Thing::is_immune_to_fire(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_prefers_fire());
+  return (tp()->is_immune_to_fire());
 }
 
-int Thing::environ_prefers_poison(void)
+int Thing::is_immune_to_poison(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_prefers_poison());
+  return (tp()->is_immune_to_poison());
 }
 
-int Thing::environ_prefers_necrosis(void)
+int Thing::is_immune_to_necrosis(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_prefers_necrosis());
+  return (tp()->is_immune_to_necrosis());
 }
 
-int Thing::environ_prefers_spiderwebs(void)
+int Thing::is_immune_to_spiderwebs(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->environ_prefers_spiderwebs());
+  return (tp()->is_immune_to_spiderwebs());
 }
 
 float Thing::get_distance_mob_max(void)
