@@ -143,12 +143,12 @@ private:
   int _environ_avoids_necrosis {};
   int _environ_avoids_poison {};
   int _environ_avoids_water {};
-  int _environ_prefers_acid {};
-  int _environ_prefers_fire {};
-  int _environ_prefers_necrosis {};
-  int _environ_prefers_poison {};
-  int _environ_prefers_spiderwebs {};
-  int _environ_prefers_water {};
+  int _is_immune_to_acid {};
+  int _is_immune_to_fire {};
+  int _is_immune_to_necrosis {};
+  int _is_immune_to_poison {};
+  int _is_immune_to_spiderwebs {};
+  int _is_immune_to_water {};
   int _gfx_an_animation_only {};
   int _gfx_animated {};
   int _gfx_animated_can_hflip {};
@@ -526,7 +526,7 @@ private:
   int _unused_flag15 {};
   int _unused_flag150 {};
   int _unused_flag151 {};
-  int _unused_flag152 {};
+  int _is_immune_to_cold {};
   int _is_breather {};
   int _noise_level {};
   int _is_asleep_initially {};
@@ -1025,12 +1025,12 @@ public:
   int environ_avoids_necrosis(void) const { return _environ_avoids_necrosis; }
   int environ_avoids_poison(void) const { return _environ_avoids_poison; }
   int environ_avoids_water(void) const { return _environ_avoids_water; }
-  int environ_prefers_acid(void) const { return _environ_prefers_acid; }
-  int environ_prefers_fire(void) const { return _environ_prefers_fire; }
-  int environ_prefers_necrosis(void) const { return _environ_prefers_necrosis; }
-  int environ_prefers_poison(void) const { return _environ_prefers_poison; }
-  int environ_prefers_spiderwebs(void) const { return _environ_prefers_spiderwebs; }
-  int environ_prefers_water(void) const { return _environ_prefers_water; }
+  int is_immune_to_acid(void) const { return _is_immune_to_acid; }
+  int is_immune_to_fire(void) const { return _is_immune_to_fire; }
+  int is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
+  int is_immune_to_poison(void) const { return _is_immune_to_poison; }
+  int is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
+  int is_immune_to_water(void) const { return _is_immune_to_water; }
   int get_danger_level(void);
   int get_spawn_group_radius(void) const { return _spawn_group_radius; }
   int get_stat_con(void) const { return _stat_con; }
@@ -1406,7 +1406,7 @@ public:
   int unused_flag14(void) const { return _unused_flag14; }
   int unused_flag150(void) const { return _unused_flag150; }
   int unused_flag151(void) const { return _unused_flag151; }
-  int unused_flag152(void) const { return _unused_flag152; }
+  int is_immune_to_cold(void) const { return _is_immune_to_cold; }
   int is_breather(void) const { return _is_breather; }
   int noise_level(void) const { return _noise_level; }
   int is_asleep_initially(void) const { return _is_asleep_initially; }
@@ -1571,12 +1571,12 @@ public:
   void set_environ_avoids_necrosis(int v) { _environ_avoids_necrosis = v; }
   void set_environ_avoids_poison(int v) { _environ_avoids_poison = v; }
   void set_environ_avoids_water(int v) { _environ_avoids_water = v; }
-  void set_environ_prefers_acid(int v) { _environ_prefers_acid = v; }
-  void set_environ_prefers_fire(int v) { _environ_prefers_fire = v; }
-  void set_environ_prefers_necrosis(int v) { _environ_prefers_necrosis = v; }
-  void set_environ_prefers_poison(int v) { _environ_prefers_poison = v; }
-  void set_environ_prefers_spiderwebs(int v) { _environ_prefers_spiderwebs = v; }
-  void set_environ_prefers_water(int v) { _environ_prefers_water = v; }
+  void set_is_immune_to_acid(int v) { _is_immune_to_acid = v; }
+  void set_is_immune_to_fire(int v) { _is_immune_to_fire = v; }
+  void set_is_immune_to_necrosis(int v) { _is_immune_to_necrosis = v; }
+  void set_is_immune_to_poison(int v) { _is_immune_to_poison = v; }
+  void set_is_immune_to_spiderwebs(int v) { _is_immune_to_spiderwebs = v; }
+  void set_is_immune_to_water(int v) { _is_immune_to_water = v; }
   void set_equip_carry_anim(const std::string &v) { _equip_carry_anim = v; }
   void set_gfx_an_animation_only(int v) { _gfx_an_animation_only = v; }
   void set_gfx_animated_can_hflip(int v) { _gfx_animated_can_hflip = v; }
@@ -2034,7 +2034,7 @@ public:
   void set_unused_flag14(int v) { _unused_flag14 = v; }
   void set_unused_flag150(int v) { _unused_flag150 = v; }
   void set_unused_flag151(int v) { _unused_flag151 = v; }
-  void set_unused_flag152(int v) { _unused_flag152 = v; }
+  void set_is_immune_to_cold(int v) { _is_immune_to_cold = v; }
   void set_is_breather(int v) { _is_breather = v; }
   void set_noise_level(int v) { _noise_level = v; }
   void set_is_asleep_initially(int v) { _is_asleep_initially = v; }

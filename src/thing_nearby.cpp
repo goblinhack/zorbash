@@ -49,7 +49,7 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
       //
       // Treat as a threat so they attack
       //
-      if (! environ_prefers_spiderwebs()) {
+      if (! is_immune_to_spiderwebs()) {
         if (it->is_spiderweb()) {
           if (it->curr_at == curr_at) {
             possible.push_back(std::make_pair(it, 666));

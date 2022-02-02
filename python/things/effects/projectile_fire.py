@@ -22,7 +22,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_loggable(True)
     mytp.set_is_no_tile(True)
     mytp.set_is_projectile(True)
-    mytp.set_is_tickable(True)  # So it can interact with fire
+    mytp.set_is_tmp_thing(True)
     mytp.set_is_usable(True)
     mytp.set_on_born_do("me.on_born()")
     mytp.set_text_a_or_an("a")

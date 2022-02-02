@@ -835,8 +835,8 @@ class Tp:
     def set_unused_flag151(self, value):
         my.tp_set_unused_flag151(self, value)
 
-    def set_unused_flag152(self, value):
-        my.tp_set_unused_flag152(self, value)
+    def set_is_immune_to_cold(self, value):
+        my.tp_set_is_immune_to_cold(self, value)
 
     def set_is_breather(self, value):
         my.tp_set_is_breather(self, value)
@@ -1273,8 +1273,8 @@ class Tp:
     def set_is_item_magical_eater(self, value):
         my.tp_set_is_item_magical_eater(self, value)
 
-    def set_environ_prefers_fire(self, value):
-        my.tp_set_environ_prefers_fire(self, value)
+    def set_is_immune_to_fire(self, value):
+        my.tp_set_is_immune_to_fire(self, value)
 
     def set_is_projectile(self, value):
         my.tp_set_is_projectile(self, value)
@@ -1351,8 +1351,8 @@ class Tp:
     def set_is_descend_sewer(self, value):
         my.tp_set_is_descend_sewer(self, value)
 
-    def set_environ_prefers_spiderwebs(self, value):
-        my.tp_set_environ_prefers_spiderwebs(self, value)
+    def set_is_immune_to_spiderwebs(self, value):
+        my.tp_set_is_immune_to_spiderwebs(self, value)
 
     def set_is_shallow_water(self, value):
         my.tp_set_is_shallow_water(self, value)
@@ -1387,8 +1387,8 @@ class Tp:
     def set_is_humanoid(self, value):
         my.tp_set_is_humanoid(self, value)
 
-    def set_environ_prefers_poison(self, value):
-        my.tp_set_environ_prefers_poison(self, value)
+    def set_is_immune_to_poison(self, value):
+        my.tp_set_is_immune_to_poison(self, value)
 
     def set_damage_received_doubled_from_poison(self, value):
         my.tp_set_damage_received_doubled_from_poison(self, value)
@@ -1396,8 +1396,8 @@ class Tp:
     def set_environ_avoids_poison(self, value):
         my.tp_set_environ_avoids_poison(self, value)
 
-    def set_environ_prefers_necrosis(self, value):
-        my.tp_set_environ_prefers_necrosis(self, value)
+    def set_is_immune_to_necrosis(self, value):
+        my.tp_set_is_immune_to_necrosis(self, value)
 
     def set_damage_received_doubled_from_necrosis(self, value):
         my.tp_set_damage_received_doubled_from_necrosis(self, value)
@@ -1621,8 +1621,8 @@ class Tp:
     def set_damage_received_doubled_from_acid(self, value):
         my.tp_set_damage_received_doubled_from_acid(self, value)
 
-    def set_environ_prefers_acid(self, value):
-        my.tp_set_environ_prefers_acid(self, value)
+    def set_is_immune_to_acid(self, value):
+        my.tp_set_is_immune_to_acid(self, value)
 
     def set_is_jelly_parent(self, value):
         my.tp_set_is_jelly_parent(self, value)
@@ -1906,8 +1906,8 @@ class Tp:
     def set_collision_attack(self, value):
         my.tp_set_collision_attack(self, value)
 
-    def set_environ_prefers_water(self, value):
-        my.tp_set_environ_prefers_water(self, value)
+    def set_is_immune_to_water(self, value):
+        my.tp_set_is_immune_to_water(self, value)
 
     def set_collision_hit_priority(self, value):
         my.tp_set_collision_hit_priority(self, value)

@@ -837,12 +837,12 @@ public:
   int environ_avoids_necrosis(void);
   int environ_avoids_poison(void);
   int environ_avoids_water(void);
-  int environ_prefers_acid(void);
-  int environ_prefers_fire(void);
-  int environ_prefers_necrosis(void);
-  int environ_prefers_poison(void);
-  int environ_prefers_spiderwebs(void);
-  int environ_prefers_water(void);
+  int is_immune_to_acid(void);
+  int is_immune_to_fire(void);
+  int is_immune_to_necrosis(void);
+  int is_immune_to_poison(void);
+  int is_immune_to_spiderwebs(void);
+  int is_immune_to_water(void);
   int get_attack_modifier(Thingp victim);
   int get_bounce_count(void);
   int get_carried_amulet_count(void);
@@ -1525,7 +1525,7 @@ public:
   int unused_flag14(void);
   int unused_flag150(void);
   int unused_flag151(void);
-  int unused_flag152(void);
+  int is_immune_to_cold(void);
   int is_breather(void);
   int noise_level(void);
   int is_asleep_initially(void);

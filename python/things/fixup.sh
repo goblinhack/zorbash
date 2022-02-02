@@ -66,12 +66,12 @@ do
       set_environ_avoids_necrosis \
       set_environ_avoids_poison \
       set_environ_avoids_water \
-      set_environ_prefers_acid \
-      set_environ_prefers_fire \
-      set_environ_prefers_necrosis \
-      set_environ_prefers_poison \
-      set_environ_prefers_spiderwebs \
-      set_environ_prefers_water \
+      set_is_immune_to_acid \
+      set_is_immune_to_fire \
+      set_is_immune_to_necrosis \
+      set_is_immune_to_poison \
+      set_is_immune_to_spiderwebs \
+      set_is_immune_to_water \
       set_gfx_an_animation_only \
       set_gfx_animated \
       set_gfx_animated_can_hflip \
@@ -452,7 +452,7 @@ do
       set_unused_flag149 \
       set_unused_flag150 \
       set_unused_flag151 \
-      set_unused_flag152 \
+      set_is_immune_to_cold \
       set_is_breather \
       set_noise_level \
       set_is_asleep_initially \

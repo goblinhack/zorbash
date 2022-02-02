@@ -47,7 +47,8 @@ void Game::place_player(void)
         t->enchant_without_stone(W);
       }
       {
-        auto W = level->thing_new("wand_fire", point(x, y));
+        auto W = level->thing_new("wand_energy", point(x, y));
+        // auto W = level->thing_new("wand_fire", point(x, y));
         t->carry(W);
         t->enchant_without_stone(W);
       }

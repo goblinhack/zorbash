@@ -119,22 +119,22 @@ bool Thing::matches(const std::string &what)
   if (environ_avoids_water() && (what == "environ_avoids_water")) {
     return true;
   }
-  if (environ_prefers_acid() && (what == "environ_prefers_acid")) {
+  if (is_immune_to_acid() && (what == "is_immune_to_acid")) {
     return true;
   }
-  if (environ_prefers_fire() && (what == "environ_prefers_fire")) {
+  if (is_immune_to_fire() && (what == "is_immune_to_fire")) {
     return true;
   }
-  if (environ_prefers_necrosis() && (what == "environ_prefers_necrosis")) {
+  if (is_immune_to_necrosis() && (what == "is_immune_to_necrosis")) {
     return true;
   }
-  if (environ_prefers_poison() && (what == "environ_prefers_poison")) {
+  if (is_immune_to_poison() && (what == "is_immune_to_poison")) {
     return true;
   }
-  if (environ_prefers_spiderwebs() && (what == "environ_prefers_spiderwebs")) {
+  if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) {
     return true;
   }
-  if (environ_prefers_water() && (what == "environ_prefers_water")) {
+  if (is_immune_to_water() && (what == "is_immune_to_water")) {
     return true;
   }
   if (gfx_flickers() && (what == "gfx_flickers")) {
@@ -1118,7 +1118,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag151() && (what == "unused_flag151")) {
     return true;
   }
-  if (unused_flag152() && (what == "unused_flag152")) {
+  if (is_immune_to_cold() && (what == "is_immune_to_cold")) {
     return true;
   }
   if (is_breather() && (what == "is_breather")) {
@@ -1422,23 +1422,23 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "environ_avoids_water") {
     return &Thing::environ_avoids_water;
   }
-  if (what == "environ_prefers_acid") {
-    return &Thing::environ_prefers_acid;
+  if (what == "is_immune_to_acid") {
+    return &Thing::is_immune_to_acid;
   }
-  if (what == "environ_prefers_fire") {
-    return &Thing::environ_prefers_fire;
+  if (what == "is_immune_to_fire") {
+    return &Thing::is_immune_to_fire;
   }
-  if (what == "environ_prefers_necrosis") {
-    return &Thing::environ_prefers_necrosis;
+  if (what == "is_immune_to_necrosis") {
+    return &Thing::is_immune_to_necrosis;
   }
-  if (what == "environ_prefers_poison") {
-    return &Thing::environ_prefers_poison;
+  if (what == "is_immune_to_poison") {
+    return &Thing::is_immune_to_poison;
   }
-  if (what == "environ_prefers_spiderwebs") {
-    return &Thing::environ_prefers_spiderwebs;
+  if (what == "is_immune_to_spiderwebs") {
+    return &Thing::is_immune_to_spiderwebs;
   }
-  if (what == "environ_prefers_water") {
-    return &Thing::environ_prefers_water;
+  if (what == "is_immune_to_water") {
+    return &Thing::is_immune_to_water;
   }
   if (what == "gfx_flickers") {
     return &Thing::gfx_flickers;
@@ -2409,8 +2409,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag151") {
     return &Thing::unused_flag151;
   }
-  if (what == "unused_flag152") {
-    return &Thing::unused_flag152;
+  if (what == "is_immune_to_cold") {
+    return &Thing::is_immune_to_cold;
   }
   if (what == "is_breather") {
     return &Thing::is_breather;

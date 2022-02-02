@@ -1052,7 +1052,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             }
           }
 
-          if (! environ_prefers_spiderwebs()) {
+          if (! is_immune_to_spiderwebs()) {
             if (it->is_spiderweb() && ! dist) {
               //
               // Very close, high priority attack

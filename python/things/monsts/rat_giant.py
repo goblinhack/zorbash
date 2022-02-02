@@ -74,6 +74,7 @@ def tp_init(name, text_name):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_food_eater(True)
     mytp.set_is_hittable(True)
+    mytp.set_is_immune_to_water(True)
     mytp.set_is_living(True)
     mytp.set_is_loggable(True)
     mytp.set_is_meat_eater(True)

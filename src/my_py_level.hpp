@@ -33,12 +33,12 @@ PyObject *level_environ_avoids_fire_at(PyObject *obj, PyObject *args, PyObject *
 PyObject *level_environ_avoids_necrosis_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_environ_prefers_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_environ_prefers_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_environ_prefers_necrosis_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_environ_prefers_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_environ_prefers_spiderwebs_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_environ_prefers_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_immune_to_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_immune_to_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_immune_to_necrosis_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_immune_to_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_immune_to_spiderwebs_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_immune_to_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_flickers_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -363,7 +363,7 @@ PyObject *level_unused_flag149_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag14_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag150_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag151_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag152_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_immune_to_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_breather_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag15_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag16_at(PyObject *obj, PyObject *args, PyObject *keywds);
