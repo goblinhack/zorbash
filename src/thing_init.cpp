@@ -6,6 +6,7 @@
 #include "my_backtrace.hpp"
 #include "my_color.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
@@ -245,6 +246,10 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
 
   if (is_tmp_thing()) {
     pcg_random_allowed = true;
+  }
+
+  if (is_asleep_initially()) {
+    change_state(MONST_STATE_SLEEPING, "asleep initially");
   }
 
   on_born();

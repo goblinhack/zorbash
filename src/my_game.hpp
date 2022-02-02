@@ -382,7 +382,7 @@ public:
   //
   // Temporary for the status bar
   //
-  std::array< Tilep, GAME_MONST_HEALTH_BAR_STEPS + 1 > tile_cache_health;
+  std::array< std::array< Tilep, GAME_MONST_HEALTH_BAR_STEPS + 1 >, 2 > tile_cache_health;
 
   //
   // Temporary. Dampens mouse clicks

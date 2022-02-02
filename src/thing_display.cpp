@@ -812,21 +812,24 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     // Add health bar
     //
     {
-      auto tile = get(game->tile_cache_health, h_step);
+      auto index = 0;
+      if (maybe_infop()->monst_state) {
+        if (get_infop()->monst_state == MONST_STATE_SLEEPING) {
+          index = 1;
+        }
+      }
+
+      auto tile = get(game->tile_cache_health, h_step, index);
       if (unlikely(! tile)) {
         //
         // Sleeping?
         //
-        bool sleeping = false;
-        if (maybe_infop()->monst_state) {
-          sleeping = (get_infop()->monst_state == MONST_STATE_SLEEPING);
-        }
         std::string s = "health" + std::to_string(h_step);
-        if (sleeping) {
+        if (index) {
           s = "health_sleeping" + std::to_string(h_step);
         }
         tile = tile_find_mand(s);
-        set(game->tile_cache_health, h_step, tile);
+        set(game->tile_cache_health, h_step, index, tile);
       }
 
       tile_blit(tile, point(x - TILE_WIDTH / 2, y - TILE_HEIGHT), point(x + TILE_WIDTH / 2, y));
