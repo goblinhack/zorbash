@@ -32,9 +32,6 @@ void Thing::change_state(int new_state, const std::string &why)
     return;
   }
 
-  dbg("AI change state: %s", why.c_str());
-  TRACE_AND_INDENT();
-
   std::string to;
   std::string from;
   switch (new_state) {
@@ -100,11 +97,8 @@ void Thing::change_state(int new_state, const std::string &why)
     case MONST_STATE_SLEEPING : from = "SLEEPING"; break;
   }
 
-  IF_DEBUG
-  {
-    auto s = string_sprintf("State change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
-    AI_LOG(s);
-  }
+  dbg("State change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
+  TRACE_AND_INDENT();
 
   get_infop()->monst_state = new_state;
   switch (new_state) {
