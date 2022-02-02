@@ -48,7 +48,7 @@ def on_death(me, x, y):
         "I have never killed a man, but I have read many obituaries with great pleasure - Clarence Darrow.",
         "I intend to live forever or die trying - Groucho Marx.",
         "I like sleeping; it's like death without the commitment - Unknown.",
-        "I’m always relieved when someone is delivering a eulogy and I realize that I’m listening to it - George Carlin.",
+        "I'm always relieved when someone is delivering a eulogy and I realize that I'm listening to it - George Carlin.",
         "Immortality... a fate worse than death - Edgar A Shoaff.",
         "I'm not afraid to die, I just don't want to be there when it happens - Woody Allen.",
         "I'm very pleased to be here. At my age I'm very pleased to be anywhere - George Burns.",
