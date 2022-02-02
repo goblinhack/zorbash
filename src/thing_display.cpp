@@ -819,7 +819,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
         }
       }
 
-      auto tile = get(game->tile_cache_health, h_step, index);
+      auto tile = get(game->tile_cache_health, index, h_step);
       if (unlikely(! tile)) {
         //
         // Sleeping?
@@ -829,7 +829,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           s = "health_sleeping" + std::to_string(h_step);
         }
         tile = tile_find_mand(s);
-        set(game->tile_cache_health, h_step, index, tile);
+        set(game->tile_cache_health, index, h_step, tile);
       }
 
       tile_blit(tile, point(x - TILE_WIDTH / 2, y - TILE_HEIGHT), point(x + TILE_WIDTH / 2, y));
