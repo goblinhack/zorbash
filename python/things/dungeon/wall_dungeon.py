@@ -37,6 +37,7 @@ def tp_init(
     mytp.set_is_gas_blocker(True)
     mytp.set_is_hittable(True)
     mytp.set_is_light_blocker(True)
+    mytp.set_is_noise_blocker(True)
     mytp.set_is_obs_wall_or_door(True)
     mytp.set_is_wall_dungeon(True)
     mytp.set_is_wall(True)

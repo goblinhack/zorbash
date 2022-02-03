@@ -525,10 +525,10 @@ private:
   int _unused_flag149 {};
   int _unused_flag15 {};
   int _unused_flag150 {};
-  int _unused_flag151 {};
+  int _is_noise_blocker {};
   int _is_immune_to_cold {};
   int _is_breather {};
-  int _noise_level {};
+  int _noise_decibels {};
   int _is_asleep_initially {};
   int _is_able_to_sleep {};
   int _is_obstacle_when_dead {};
@@ -1405,10 +1405,10 @@ public:
   int unused_flag149(void) const { return _unused_flag149; }
   int unused_flag14(void) const { return _unused_flag14; }
   int unused_flag150(void) const { return _unused_flag150; }
-  int unused_flag151(void) const { return _unused_flag151; }
+  int is_noise_blocker(void) const { return _is_noise_blocker; }
   int is_immune_to_cold(void) const { return _is_immune_to_cold; }
   int is_breather(void) const { return _is_breather; }
-  int noise_level(void) const { return _noise_level; }
+  int noise_decibels(void) const { return _noise_decibels; }
   int is_asleep_initially(void) const { return _is_asleep_initially; }
   int is_able_to_sleep(void) const { return _is_able_to_sleep; }
   int is_obstacle_when_dead(void) const { return _is_obstacle_when_dead; }
@@ -2033,10 +2033,10 @@ public:
   void set_unused_flag149(int v) { _unused_flag149 = v; }
   void set_unused_flag14(int v) { _unused_flag14 = v; }
   void set_unused_flag150(int v) { _unused_flag150 = v; }
-  void set_unused_flag151(int v) { _unused_flag151 = v; }
+  void set_is_noise_blocker(int v) { _is_noise_blocker = v; }
   void set_is_immune_to_cold(int v) { _is_immune_to_cold = v; }
   void set_is_breather(int v) { _is_breather = v; }
-  void set_noise_level(int v) { _noise_level = v; }
+  void set_noise_decibels(int v) { _noise_decibels = v; }
   void set_is_asleep_initially(int v) { _is_asleep_initially = v; }
   void set_is_able_to_sleep(int v) { _is_able_to_sleep = v; }
   void set_is_obstacle_when_dead(int v) { _is_obstacle_when_dead = v; }

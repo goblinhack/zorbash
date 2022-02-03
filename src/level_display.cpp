@@ -66,10 +66,6 @@ void Level::display(void)
         update_map_mini(false /* showing_two_levels */, false /* faded */);
       }
     }
-
-    if (! is_heatmap_valid) {
-      update_heatmap();
-    }
   }
 }
 

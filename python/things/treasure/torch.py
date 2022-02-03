@@ -38,7 +38,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_light_color("orange")
     mytp.set_light_power(1)
     mytp.set_long_text_description("A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
-    mytp.set_noise_level(1)
+    mytp.set_noise_decibels(1)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_lifespan_tick_do("me.on_lifespan_tick()")
     mytp.set_text_a_or_an("a")

@@ -96,7 +96,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(4)
     mytp.set_laser_name("laser_energy")
     mytp.set_long_text_description("Discharges a powerful beam of energy upon an unwitting recipient...")
-    mytp.set_noise_level(5)
+    mytp.set_noise_decibels(5)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_enchant_do("me.on_enchant()")
     mytp.set_on_fall_do("me.on_fall()")

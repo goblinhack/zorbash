@@ -451,10 +451,10 @@ do
       set_unused_flag148 \
       set_unused_flag149 \
       set_unused_flag150 \
-      set_unused_flag151 \
+      set_is_noise_blocker \
       set_is_immune_to_cold \
       set_is_breather \
-      set_noise_level \
+      set_noise_decibels \
       set_is_asleep_initially \
       set_is_able_to_sleep \
       set_is_obstacle_when_dead \

@@ -82,6 +82,18 @@ void Game::tick_begin_now(void)
       player->level->fov_calculete(player, &player->get_aip()->can_see_currently, player->curr_at.x,
                                    player->curr_at.y, player->get_distance_vision());
     }
+
+    //
+    // Update the heatmap before the next tick
+    //
+    if (! level->is_heatmap_valid) {
+      level->update_heatmap();
+    }
+
+    //
+    // Update the noisemap before the next tick
+    //
+    level->update_noisemap();
   }
 }
 

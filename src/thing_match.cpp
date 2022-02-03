@@ -464,6 +464,9 @@ bool Thing::matches(const std::string &what)
   if (is_gas_blocker() && (what == "is_gas_blocker")) {
     return true;
   }
+  if (is_noise_blocker() && (what == "is_noise_blocker")) {
+    return true;
+  }
   if (is_living() && (what == "is_living")) {
     return true;
   }
@@ -1115,7 +1118,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag150() && (what == "unused_flag150")) {
     return true;
   }
-  if (unused_flag151() && (what == "unused_flag151")) {
+  if (is_noise_blocker() && (what == "is_noise_blocker")) {
     return true;
   }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) {
@@ -1124,7 +1127,7 @@ bool Thing::matches(const std::string &what)
   if (is_breather() && (what == "is_breather")) {
     return true;
   }
-  if (noise_level() && (what == "noise_level")) {
+  if (noise_decibels() && (what == "noise_decibels")) {
     return true;
   }
   if (is_asleep_initially() && (what == "is_asleep_initially")) {
@@ -1142,7 +1145,7 @@ bool Thing::matches(const std::string &what)
   if (is_light_blocker_for_monst() && (what == "is_light_blocker_for_monst")) {
     return true;
   }
-  if (is_gas_blocker() && (what == "is_gas_blocker")) {
+  if (is_noise_blocker() && (what == "is_noise_blocker")) {
     return true;
   }
   if (is_pink_blood_eater() && (what == "is_pink_blood_eater")) {
@@ -2406,8 +2409,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag150") {
     return &Thing::unused_flag150;
   }
-  if (what == "unused_flag151") {
-    return &Thing::unused_flag151;
+  if (what == "is_noise_blocker") {
+    return &Thing::is_noise_blocker;
   }
   if (what == "is_immune_to_cold") {
     return &Thing::is_immune_to_cold;
@@ -2415,8 +2418,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_breather") {
     return &Thing::is_breather;
   }
-  if (what == "noise_level") {
-    return &Thing::noise_level;
+  if (what == "noise_decibels") {
+    return &Thing::noise_decibels;
   }
   if (what == "is_asleep_initially") {
     return &Thing::is_asleep_initially;
@@ -2430,11 +2433,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_gas_blocker") {
     return &Thing::is_gas_blocker;
   }
+  if (what == "is_noise_blocker") {
+    return &Thing::is_noise_blocker;
+  }
   if (what == "is_light_blocker_for_monst") {
     return &Thing::is_light_blocker_for_monst;
-  }
-  if (what == "is_gas_blocker") {
-    return &Thing::is_gas_blocker;
   }
   if (what == "is_pink_blood_eater") {
     return &Thing::is_pink_blood_eater;

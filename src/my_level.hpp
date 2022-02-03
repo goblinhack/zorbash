@@ -30,6 +30,7 @@ public:
   // These are caches for fast lookup in display code
   //
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_gas_blocker {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_noise_blocker {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker_for_monst {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_lit_ever {};
@@ -664,6 +665,10 @@ public:
   bool is_gas_blocker(const point p) const;
   bool is_gas_blocker_no_check(const int x, const int y) const;
   bool is_gas_blocker_no_check(const point p) const;
+  bool is_noise_blocker(const int x, const int y) const;
+  bool is_noise_blocker(const point p) const;
+  bool is_noise_blocker_no_check(const int x, const int y) const;
+  bool is_noise_blocker_no_check(const point p) const;
   bool is_obs_destructable(const int x, const int y) const;
   bool is_obs_destructable(const point p) const;
   bool is_obs_destructable_no_check(const int x, const int y) const;
@@ -929,6 +934,8 @@ public:
   void incr_noisemap_in(const int x, const int y);
   void incr_noisemap_in_no_check(const int x, const int y);
   void incr_noisemap_in_no_check(const int x, const int y, int dv);
+  void set_noisemap(const int x, const int y, uint8_t v);
+  void set_noisemap_no_check(const int x, const int y, uint8_t v);
   void inventory_dump(void);
   void lights_fade(void);
   void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
@@ -985,6 +992,8 @@ public:
   void set_is_food(const int x, const int y);
   void set_is_gas_blocker(const int x, const int y);
   void set_is_gas_blocker_no_check(const int x, const int y);
+  void set_is_noise_blocker(const int x, const int y);
+  void set_is_noise_blocker_no_check(const int x, const int y);
   void set_is_gas_poison(const int x, const int y, uint8_t val);
   void set_is_gas_poison_no_check(const int x, const int y, uint8_t val);
   void set_is_gold(const int x, const int y);
@@ -1068,6 +1077,8 @@ public:
   void unset_is_food(const int x, const int y);
   void unset_is_gas_blocker(const int x, const int y);
   void unset_is_gas_blocker_no_check(const int x, const int y);
+  void unset_is_noise_blocker(const int x, const int y);
+  void unset_is_noise_blocker_no_check(const int x, const int y);
   void unset_is_gas_poison(const int x, const int y);
   void unset_is_gas_poison_no_check(const int x, const int y);
   void unset_is_gold(const int x, const int y);

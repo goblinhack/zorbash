@@ -62,8 +62,8 @@ enum {
 #define FOR_ALL_DEBUFFS(_id_)          for (auto _id_ : get_itemsp()->debuffs)
 #define FOR_ALL_DEBUFFS_FOR(_t_, _id_) for (auto _id_ : (_t_)->get_itemsp()->debuffs)
 
-#define FOR_ALL_SKILLS(_id_)                 for (auto _id_ : get_itemsp()->skills)
-#define FOR_ALL_SKILLS_LEARNED_BY(_t_, _id_) for (auto _id_ : (_t_)->get_itemsp()->skills)
+#define FOR_ALL_SKILLS(_id_)          for (auto _id_ : get_itemsp()->skills)
+#define FOR_ALL_SKILLS_FOR(_t_, _id_) for (auto _id_ : (_t_)->get_itemsp()->skills)
 
 #define FOR_ALL_CARRYING(_id_)        for (auto _id_ : get_itemsp()->carrying)
 #define FOR_ALL_CARRIED_BY(_t_, _id_) for (auto _id_ : (_t_)->get_itemsp()->carrying)
