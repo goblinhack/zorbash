@@ -21,6 +21,8 @@ void Level::clear(void)
   _fade_in_map                = {};
   _gfx_water                  = {};
   _heatmap                    = {};
+  _noisemap                   = {};
+  _noisemap_in                = {};
   _is_able_to_stand_on        = {};
   _is_acid                    = {};
   _is_ascend_dungeon          = {};
@@ -49,7 +51,7 @@ void Level::clear(void)
   _is_light_blocker           = {};
   _is_light_blocker_for_monst = {};
   _is_gas_blocker             = {};
-  _is_gas_poison           = {};
+  _is_gas_poison              = {};
   _is_lit_currently           = {};
   _is_lit_ever                = {};
   _is_monst                   = {};

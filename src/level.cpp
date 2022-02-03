@@ -2027,10 +2027,7 @@ uint8_t Level::is_gas_poison(const int x, const int y) const
   return (get(_is_gas_poison, x, y));
 }
 
-uint8_t Level::is_gas_poison_no_check(const int x, const int y) const
-{
-  return (get_no_check(_is_gas_poison, x, y));
-}
+uint8_t Level::is_gas_poison_no_check(const int x, const int y) const { return (get_no_check(_is_gas_poison, x, y)); }
 
 void Level::set_is_gas_poison(const int x, const int y, uint8_t val)
 {
@@ -2276,4 +2273,119 @@ void Level::unset_is_map_changed(const int x, const int y)
 void Level::unset_is_map_changed_no_check(const int x, const int y)
 {
   set_no_check(_is_map_changed, x, y, (uint32_t) 0);
+}
+
+uint8_t Level::is_lava(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_lava, p.x, p.y));
+}
+
+uint8_t Level::is_lava(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_lava, x, y));
+}
+
+uint8_t Level::is_lava_no_check(const int x, const int y) { return (get(_is_lava, x, y)); }
+
+void Level::set_is_lava(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_lava, x, y, (uint8_t) 1);
+}
+
+void Level::unset_is_lava(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_lava, x, y, (uint8_t) 1);
+}
+uint8_t Level::is_brazier(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_brazier, p.x, p.y));
+}
+
+uint8_t Level::is_brazier(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_brazier, x, y));
+}
+uint8_t Level::is_brazier_no_check(const int x, const int y) { return (get(_is_brazier, x, y)); }
+
+void Level::set_is_brazier(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_brazier, x, y, (uint8_t) 1);
+}
+
+void Level::unset_is_brazier(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_brazier, x, y, (uint8_t) 1);
+}
+uint8_t Level::is_fire(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_fire, p.x, p.y));
+}
+
+uint8_t Level::is_fire(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_fire, x, y));
+}
+
+uint8_t Level::is_fire_no_check(const int x, const int y) { return (get(_is_fire, x, y)); }
+
+void Level::set_is_fire(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  incr(_is_fire, x, y, (uint8_t) 1);
+}
+
+void Level::unset_is_fire(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  decr(_is_fire, x, y, (uint8_t) 1);
 }

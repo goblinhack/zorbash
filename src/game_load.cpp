@@ -522,6 +522,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_fade_in_map);
   in >> bits(my.t->_gfx_water);
   in >> bits(my.t->_heatmap);
+  in >> bits(my.t->_noisemap);
+  in >> bits(my.t->_noisemap_in);
   in >> bits(my.t->_is_able_to_stand_on);
   in >> bits(my.t->_is_acid);
   in >> bits(my.t->_is_ascend_dungeon);

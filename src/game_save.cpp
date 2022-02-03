@@ -479,6 +479,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_fade_in_map);
   out << bits(my.t->_gfx_water);
   out << bits(my.t->_heatmap);
+  out << bits(my.t->_noisemap);
+  out << bits(my.t->_noisemap_in);
   out << bits(my.t->_is_able_to_stand_on);
   out << bits(my.t->_is_acid);
   out << bits(my.t->_is_ascend_dungeon);
