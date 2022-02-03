@@ -73,7 +73,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(4)
     mytp.set_laser_name("laser_descent")
     mytp.set_long_text_description("This most dangerous wand can transport its target to the next level by the most efficacious means possible...")
-    mytp.set_noise_level(5)
+    mytp.set_noise_decibels(5)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_fall_do("me.on_fall()")
     mytp.set_on_final_use_do("me.on_final_use()")

@@ -193,7 +193,7 @@ void Game::wid_enchant_an_item(void)
     enchant_items.push_back(t);
   }
 
-  FOR_ALL_SKILLS_LEARNED_BY(player, id)
+  FOR_ALL_SKILLS_FOR(player, id)
   {
     auto t = thing_find(id);
     if (t) {

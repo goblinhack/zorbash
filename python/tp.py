@@ -832,8 +832,8 @@ class Tp:
     def set_unused_flag150(self, value):
         my.tp_set_unused_flag150(self, value)
 
-    def set_unused_flag151(self, value):
-        my.tp_set_unused_flag151(self, value)
+    def set_is_noise_blocker(self, value):
+        my.tp_set_is_noise_blocker(self, value)
 
     def set_is_immune_to_cold(self, value):
         my.tp_set_is_immune_to_cold(self, value)
@@ -841,8 +841,8 @@ class Tp:
     def set_is_breather(self, value):
         my.tp_set_is_breather(self, value)
 
-    def set_noise_level(self, value):
-        my.tp_set_noise_level(self, value)
+    def set_noise_decibels(self, value):
+        my.tp_set_noise_decibels(self, value)
 
     def set_is_asleep_initially(self, value):
         my.tp_set_is_asleep_initially(self, value)

@@ -5,6 +5,8 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
+#include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
 
@@ -27,6 +29,16 @@ uint8_t Level::noisemap(const int x, const int y)
 }
 
 uint8_t Level::noisemap_no_check(const int x, const int y) { return (get_no_check(_noisemap, x, y)); }
+
+void Level::set_noisemap(const int x, const int y, uint8_t v)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_noisemap, x, y, v);
+}
+
+void Level::set_noisemap_no_check(const int x, const int y, uint8_t v) { set_no_check(_noisemap, x, y, v); }
 
 void Level::incr_noisemap(const int x, const int y)
 {
@@ -128,8 +140,56 @@ void Level::update_noisemap(void)
 
   for (auto y = MAP_BORDER_ROOM; y < MAP_HEIGHT - MAP_BORDER_ROOM; y++) {
     for (auto x = MAP_BORDER_ROOM; x < MAP_WIDTH - MAP_BORDER_ROOM; x++) {
+      set_noisemap_no_check(x, y, noisemap_in_no_check(x, y));
+
+      if (is_noise_blocker(x, y)) {
+        set_noisemap_no_check(x, y, DMAP_IS_WALL);
+      }
+
+      FOR_ALL_THINGS_THAT_INTERACT(this, t, x, y)
+      {
+        if (t->is_noise_blocker()) {
+          continue;
+        }
+
+        if (t->is_open || t->is_dead) {
+          continue;
+        }
+
+        FOR_ALL_EQUIP(e)
+        {
+          auto equip = t->get_equip(e);
+          if (equip) {
+          }
+        }
+
+        if (t->maybe_itemsp()) {
+          FOR_ALL_BUFFS_FOR(t, id)
+          {
+            auto buff = thing_find(id);
+            if (buff) {
+            }
+          }
+
+          FOR_ALL_DEBUFFS_FOR(t, id)
+          {
+            auto buff = thing_find(id);
+            if (buff) {
+            }
+          }
+
+          FOR_ALL_SKILLS_FOR(t, id)
+          {
+            auto buff = thing_find(id);
+            if (buff) {
+            }
+          }
+        }
+      }
+      FOR_ALL_THINGS_END()
     }
   }
+  _noisemap_in = {};
 }
 
 void Level::noisemap_print(point at, point tl, point br)

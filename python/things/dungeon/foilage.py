@@ -18,6 +18,7 @@ def tp_init(name, tiles=[]):
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_foilage(True)
     mytp.set_is_light_blocker_for_monst(True)  # to give cover to the player
+    mytp.set_is_noise_blocker(True)
     mytp.set_text_a_or_an("the")
     mytp.set_text_description("Thick and sicky looking foilage and roots.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

@@ -162,6 +162,7 @@ public:
   uint64_t i_set_is_foilage                       : 1 {};
   uint64_t i_set_is_food                          : 1 {};
   uint64_t i_set_is_gas_blocker                   : 1 {};
+  uint64_t i_set_is_noise_blocker                 : 1 {};
   uint64_t i_set_is_gold                          : 1 {};
   uint64_t i_set_is_green_blood                   : 1 {};
   uint64_t i_set_is_hazard                        : 1 {};
@@ -1524,10 +1525,10 @@ public:
   int unused_flag149(void);
   int unused_flag14(void);
   int unused_flag150(void);
-  int unused_flag151(void);
+  int is_noise_blocker(void);
   int is_immune_to_cold(void);
   int is_breather(void);
-  int noise_level(void);
+  int noise_decibels(void);
   int is_asleep_initially(void);
   int is_able_to_sleep(void);
   int is_obstacle_when_dead(void);

@@ -51,7 +51,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(5)
     mytp.set_long_text_description("A rusting short sword. Ideal for absolutely no one.")
     mytp.set_melting_chance_d1000(5)
-    mytp.set_noise_level(10)
+    mytp.set_noise_decibels(10)
     mytp.set_on_use_do("me.on_use()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_text_a_or_an("a")

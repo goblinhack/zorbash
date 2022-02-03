@@ -33,7 +33,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("When carrying this magical map you are able to see all the treasure, food and keys on the current level.")
-    mytp.set_noise_level(15)
+    mytp.set_noise_decibels(15)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_enchant_do("me.on_enchant()")
     mytp.set_text_a_or_an("a")
