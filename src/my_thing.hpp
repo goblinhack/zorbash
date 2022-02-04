@@ -1524,7 +1524,7 @@ public:
   int unused_flag148(void);
   int unused_flag149(void);
   int unused_flag14(void);
-  int unused_flag150(void);
+  int is_noise_level_able_to_hear(void);
   int is_noise_blocker(void);
   int is_immune_to_cold(void);
   int is_breather(void);

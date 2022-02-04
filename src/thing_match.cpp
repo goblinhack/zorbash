@@ -1115,7 +1115,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag149() && (what == "unused_flag149")) {
     return true;
   }
-  if (unused_flag150() && (what == "unused_flag150")) {
+  if (is_noise_level_able_to_hear() && (what == "is_noise_level_able_to_hear")) {
     return true;
   }
   if (is_noise_blocker() && (what == "is_noise_blocker")) {
@@ -2406,8 +2406,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag149") {
     return &Thing::unused_flag149;
   }
-  if (what == "unused_flag150") {
-    return &Thing::unused_flag150;
+  if (what == "is_noise_level_able_to_hear") {
+    return &Thing::is_noise_level_able_to_hear;
   }
   if (what == "is_noise_blocker") {
     return &Thing::is_noise_blocker;

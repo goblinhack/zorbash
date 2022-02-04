@@ -51,6 +51,7 @@ def tp_init(name, text_name):
     mytp.set_light_power(1)
     mytp.set_long_text_description("A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
+    mytp.set_noise_level_hearing(0)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("me.on_death()")
     mytp.set_rarity(my.RARITY_COMMON)

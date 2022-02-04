@@ -829,8 +829,8 @@ class Tp:
     def set_unused_flag149(self, value):
         my.tp_set_unused_flag149(self, value)
 
-    def set_unused_flag150(self, value):
-        my.tp_set_unused_flag150(self, value)
+    def set_is_noise_level_able_to_hear(self, value):
+        my.tp_set_is_noise_level_able_to_hear(self, value)
 
     def set_is_noise_blocker(self, value):
         my.tp_set_is_noise_blocker(self, value)

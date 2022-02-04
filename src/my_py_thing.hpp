@@ -453,7 +453,7 @@ PyObject *thing_unused_flag147(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag148(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag149(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag150(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_noise_level_able_to_hear(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_noise_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_cold(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_breather(PyObject *obj, PyObject *args, PyObject *keywds);
