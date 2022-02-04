@@ -165,7 +165,7 @@ void Level::update_noisemap(void)
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      if (is_noise_blocker(x, y)) {
+      if (noise_blocker(x, y)) {
         set_noisemap_no_check(x, y, DMAP_IS_WALL);
         continue;
       }
@@ -174,7 +174,7 @@ void Level::update_noisemap(void)
 
       FOR_ALL_THINGS_THAT_INTERACT(this, t, x, y)
       {
-        if (t->is_noise_blocker()) {
+        if (t->noise_blocker()) {
           continue;
         }
 

@@ -464,7 +464,7 @@ bool Thing::matches(const std::string &what)
   if (is_gas_blocker() && (what == "is_gas_blocker")) {
     return true;
   }
-  if (is_noise_blocker() && (what == "is_noise_blocker")) {
+  if (noise_blocker() && (what == "noise_blocker")) {
     return true;
   }
   if (is_living() && (what == "is_living")) {
@@ -1115,10 +1115,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag149() && (what == "unused_flag149")) {
     return true;
   }
-  if (is_noise_level_able_to_hear() && (what == "is_noise_level_able_to_hear")) {
+  if (noise_level_hearing() && (what == "noise_level_hearing")) {
     return true;
   }
-  if (is_noise_blocker() && (what == "is_noise_blocker")) {
+  if (noise_blocker() && (what == "noise_blocker")) {
     return true;
   }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) {
@@ -1145,7 +1145,7 @@ bool Thing::matches(const std::string &what)
   if (is_light_blocker_for_monst() && (what == "is_light_blocker_for_monst")) {
     return true;
   }
-  if (is_noise_blocker() && (what == "is_noise_blocker")) {
+  if (noise_blocker() && (what == "noise_blocker")) {
     return true;
   }
   if (is_pink_blood_eater() && (what == "is_pink_blood_eater")) {
@@ -2406,11 +2406,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag149") {
     return &Thing::unused_flag149;
   }
-  if (what == "is_noise_level_able_to_hear") {
-    return &Thing::is_noise_level_able_to_hear;
+  if (what == "noise_level_hearing") {
+    return &Thing::noise_level_hearing;
   }
-  if (what == "is_noise_blocker") {
-    return &Thing::is_noise_blocker;
+  if (what == "noise_blocker") {
+    return &Thing::noise_blocker;
   }
   if (what == "is_immune_to_cold") {
     return &Thing::is_immune_to_cold;
@@ -2433,8 +2433,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_gas_blocker") {
     return &Thing::is_gas_blocker;
   }
-  if (what == "is_noise_blocker") {
-    return &Thing::is_noise_blocker;
+  if (what == "noise_blocker") {
+    return &Thing::noise_blocker;
   }
   if (what == "is_light_blocker_for_monst") {
     return &Thing::is_light_blocker_for_monst;
