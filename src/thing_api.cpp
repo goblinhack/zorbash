@@ -2310,10 +2310,10 @@ int Thing::unused_flag149(void)
   return (tp()->unused_flag149());
 }
 
-int Thing::unused_flag150(void)
+int Thing::is_noise_level_able_to_hear(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag150());
+  return (tp()->is_noise_level_able_to_hear());
 }
 
 int Thing::is_immune_to_cold(void)

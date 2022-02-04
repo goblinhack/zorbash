@@ -62,6 +62,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_light_power(2)
     mytp.set_long_text_description("Dungeon belchers are carnivorous plants that have evolved creative means of catching their prey. Beware their stench...")
     mytp.set_monst_size(my.MONST_SIZE_LARGE)
+    mytp.set_noise_level_hearing(50)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d4")
     mytp.set_on_death_do("me.on_death()")

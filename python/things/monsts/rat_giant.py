@@ -88,6 +88,7 @@ def tp_init(name, text_name):
     mytp.set_is_tickable(True)
     mytp.set_long_text_description("An enormous giant dwarf rat... Blood drips from its teeth. Will eat almost anything, especially you. Sometimes answers to the name of Mr Squeakles.")
     mytp.set_monst_size(my.MONST_SIZE_LARGE)
+    mytp.set_noise_level_hearing(10)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("1d6")
     mytp.set_on_death_do("me.on_death()")

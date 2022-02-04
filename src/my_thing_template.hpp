@@ -524,7 +524,7 @@ private:
   int _unused_flag148 {};
   int _unused_flag149 {};
   int _unused_flag15 {};
-  int _unused_flag150 {};
+  int _is_noise_level_able_to_hear {};
   int _is_noise_blocker {};
   int _is_immune_to_cold {};
   int _is_breather {};
@@ -1404,7 +1404,7 @@ public:
   int unused_flag148(void) const { return _unused_flag148; }
   int unused_flag149(void) const { return _unused_flag149; }
   int unused_flag14(void) const { return _unused_flag14; }
-  int unused_flag150(void) const { return _unused_flag150; }
+  int is_noise_level_able_to_hear(void) const { return _is_noise_level_able_to_hear; }
   int is_noise_blocker(void) const { return _is_noise_blocker; }
   int is_immune_to_cold(void) const { return _is_immune_to_cold; }
   int is_breather(void) const { return _is_breather; }
@@ -2032,7 +2032,7 @@ public:
   void set_unused_flag148(int v) { _unused_flag148 = v; }
   void set_unused_flag149(int v) { _unused_flag149 = v; }
   void set_unused_flag14(int v) { _unused_flag14 = v; }
-  void set_unused_flag150(int v) { _unused_flag150 = v; }
+  void set_is_noise_level_able_to_hear(int v) { _is_noise_level_able_to_hear = v; }
   void set_is_noise_blocker(int v) { _is_noise_blocker = v; }
   void set_is_immune_to_cold(int v) { _is_immune_to_cold = v; }
   void set_is_breather(int v) { _is_breather = v; }

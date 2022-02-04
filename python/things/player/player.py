@@ -325,6 +325,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_long_text_description("Our most noble adventurer of no particular race or gender or creed. Devoid of fear and stout of heart. Likes kittens.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_noise_decibels(20)
+    mytp.set_noise_level_hearing(30)
     mytp.set_on_born_do("player.on_born()")
     mytp.set_on_damage_acid_do("player.on_damage_acid()")
     mytp.set_on_damage_cold_do("player.on_damage_cold()")

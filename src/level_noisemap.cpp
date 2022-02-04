@@ -12,6 +12,26 @@
 
 static int loudest_sound = 100;
 
+//
+// Some examples of sound levels. We max out at 100 to allow for the dmap resolution.
+// Entries are placed into the dmap at 100 - decibels level. To find out the sound at
+// your location, just to 100 - dmap-value. So 90 at your location would be 10 decibels.
+//
+// 10 	A pin dropping
+// 20 	Rustling leaves
+// 30 	Whisper
+// 40 	A babbling brook
+// 50 	Light traffic, Refrigerator
+// 60 	Conversational speech
+// 70 	Shower, Dishwasher
+// 75 	Toilet flushing
+// 80 	Alarm clock,
+// 85 	Passing diesel truck,
+// 90 	Squeeze toy, Lawnmower, Arc welder.
+// 95 	Food processor, Belt sander
+// 100  Motorcycle (riding),
+//
+
 uint8_t Level::noisemap(const point p)
 {
   if (unlikely(is_oob(p.x, p.y))) {
