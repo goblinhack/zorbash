@@ -28,7 +28,7 @@ def tp_init(name, text_name):
     mytp.set_damage_natural_dice("1d5")
     mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_distance_avoid(3)
-    mytp.set_distance_jump(5)
+    mytp.set_distance_jump(2)
     mytp.set_distance_vision(7)
     mytp.set_environ_avoids_fire(100)
     mytp.set_gfx_animated_can_hflip(True)

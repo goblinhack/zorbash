@@ -567,11 +567,16 @@ bool Thing::equip_use(bool forced, int equip, point *at)
 
   TRACE_NO_INDENT();
   if (is_able_to_tire()) {
-    if (! get_stamina()) {
+    if (get_stamina() < 5) {
       if (is_player()) {
-        msg("You are too tired to attack.");
+        if (d20roll_under(get_stat_con())) {
+          msg("You are so tired but dig deep and attack!");
+        } else {
+          msg("You are too tired to attack.");
+          game->tick_begin("too tired to attack");
+          return false;
+        }
       }
-      return false;
     }
   }
 
