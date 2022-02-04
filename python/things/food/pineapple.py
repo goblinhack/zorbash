@@ -21,7 +21,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_usable(True)
     mytp.set_item_height(4)
     mytp.set_item_width(4)
-    mytp.set_long_text_description("A pineapple. How it got here... I mean I just can't explain this one. Just eat it and enjoy the weird drems tonight.")
+    mytp.set_long_text_description("A pineapple. How it got here... I mean I just can't explain this one. Just eat it and enjoy the weird dreams tonight.")
     mytp.set_noise_decibels(1)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("10+1d20")

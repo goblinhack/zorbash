@@ -12,6 +12,7 @@ def tp_init(name, text_name):
     mytp.set_health_initial_dice("1d4")
     mytp.set_is_able_to_fall(True)
     mytp.set_is_attackable_by_monst(True)
+    mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_green_blood(True)
     mytp.set_is_interesting(True)
     mytp.set_is_removeable_if_out_of_slots(True)

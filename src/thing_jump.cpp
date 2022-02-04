@@ -33,7 +33,7 @@ float Thing::how_far_i_can_jump(void)
 float Thing::how_far_i_can_jump_max(void)
 {
   TRACE_NO_INDENT();
-  auto d = (float) distance_jump() + 1;
+  auto d = (float) distance_jump();
   return d;
 }
 
