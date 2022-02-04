@@ -40,8 +40,6 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _fade_in_map {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _gfx_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _heatmap {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _noisemap {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _noisemap_in {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_able_to_stand_on {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_acid {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ascend_dungeon {};
@@ -93,6 +91,12 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wet_grass {};
 
   std::array< std::array< uint32_t, MAP_HEIGHT >, MAP_WIDTH > _is_map_changed {};
+
+  //
+  // Holds noise as it fades around the level
+  //
+  Dmap _noisemap {};
+  Dmap _noisemap_in {};
 
   //
   // For level transitions
@@ -922,7 +926,7 @@ public:
   void handle_all_pending_things(void);
   void handle_input_events(void);
   void heatmap_print(point at, point tl, point br);
-  void noisemap_print(point at, point tl, point br);
+  void noisemap_print(void);
   void incr_fade_in(const int x, const int y);
   void incr_fade_in_no_check(const int x, const int y);
   void incr_heatmap(const int x, const int y);
