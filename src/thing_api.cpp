@@ -1188,10 +1188,10 @@ int Thing::is_gas_blocker(void)
   return (tp()->is_gas_blocker());
 }
 
-int Thing::is_noise_blocker(void)
+int Thing::noise_blocker(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_noise_blocker());
+  return (tp()->noise_blocker());
 }
 
 int Thing::is_living(void)
@@ -2310,10 +2310,10 @@ int Thing::unused_flag149(void)
   return (tp()->unused_flag149());
 }
 
-int Thing::is_noise_level_able_to_hear(void)
+int Thing::noise_level_hearing(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_noise_level_able_to_hear());
+  return (tp()->noise_level_hearing());
 }
 
 int Thing::is_immune_to_cold(void)

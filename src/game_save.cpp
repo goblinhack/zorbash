@@ -365,7 +365,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_foilage ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_food ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gas_blocker ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_noise_blocker ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_noise_blocker ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gold ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_green_blood ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_hazard ? 1LLU : 0LLU) << shift; shift++;
@@ -471,7 +471,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->gas_poison);
 
   out << bits(my.t->_is_gas_blocker);
-  out << bits(my.t->_is_noise_blocker);
+  out << bits(my.t->_noise_blocker);
   out << bits(my.t->_is_light_blocker);
   out << bits(my.t->_is_light_blocker_for_monst);
   out << bits(my.t->_is_lit_ever);

@@ -2009,50 +2009,50 @@ void Level::unset_is_gas_blocker(const int x, const int y)
 
 void Level::unset_is_gas_blocker_no_check(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, false); }
 
-bool Level::is_noise_blocker(const point p) const
+bool Level::noise_blocker(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
   }
-  return (get(_is_noise_blocker, p.x, p.y));
+  return (get(_noise_blocker, p.x, p.y));
 }
 
-bool Level::is_noise_blocker_no_check(const point p) const { return (get_no_check(_is_noise_blocker, p.x, p.y)); }
+bool Level::noise_blocker_no_check(const point p) const { return (get_no_check(_noise_blocker, p.x, p.y)); }
 
-bool Level::is_noise_blocker(const int x, const int y) const
+bool Level::noise_blocker(const int x, const int y) const
 {
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_noise_blocker, x, y));
+  return (get(_noise_blocker, x, y));
 }
 
-bool Level::is_noise_blocker_no_check(const int x, const int y) const
+bool Level::noise_blocker_no_check(const int x, const int y) const
 {
-  return (get_no_check(_is_noise_blocker, x, y));
+  return (get_no_check(_noise_blocker, x, y));
 }
 
-void Level::set_is_noise_blocker(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  set(_is_noise_blocker, x, y, true);
-}
-
-void Level::set_is_noise_blocker_no_check(const int x, const int y) { set_no_check(_is_noise_blocker, x, y, true); }
-
-void Level::unset_is_noise_blocker(const int x, const int y)
+void Level::set_noise_blocker(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  set(_is_noise_blocker, x, y, false);
+  set(_noise_blocker, x, y, true);
 }
 
-void Level::unset_is_noise_blocker_no_check(const int x, const int y)
+void Level::set_noise_blocker_no_check(const int x, const int y) { set_no_check(_noise_blocker, x, y, true); }
+
+void Level::unset_noise_blocker(const int x, const int y)
 {
-  set_no_check(_is_noise_blocker, x, y, false);
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_noise_blocker, x, y, false);
+}
+
+void Level::unset_noise_blocker_no_check(const int x, const int y)
+{
+  set_no_check(_noise_blocker, x, y, false);
 }
 
 uint8_t Level::is_gas_poison(const point p) const

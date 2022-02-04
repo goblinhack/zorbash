@@ -450,8 +450,8 @@ do
       set_unused_flag147 \
       set_unused_flag148 \
       set_unused_flag149 \
-      set_is_noise_level_able_to_hear \
-      set_is_noise_blocker \
+      set_noise_level_hearing \
+      set_noise_blocker \
       set_is_immune_to_cold \
       set_is_breather \
       set_noise_decibels \
