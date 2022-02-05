@@ -519,7 +519,7 @@ private:
   int _unused_flag143 {};
   int _unused_flag144 {};
   int _unused_flag145 {};
-  int _unused_flag146 {};
+  int _noise_decibels_on_born {};
   int _noise_decibels_on_open {};
   int _noise_decibels_on_you_are_hit_and_now_dead {};
   int _noise_decibels_on_you_are_hit_but_still_alive {};
@@ -1399,7 +1399,7 @@ public:
   int unused_flag143(void) const { return _unused_flag143; }
   int unused_flag144(void) const { return _unused_flag144; }
   int unused_flag145(void) const { return _unused_flag145; }
-  int unused_flag146(void) const { return _unused_flag146; }
+  int noise_decibels_on_born(void) const { return _noise_decibels_on_born; }
   int noise_decibels_on_open(void) const { return _noise_decibels_on_open; }
   int noise_decibels_on_you_are_hit_and_now_dead(void) const { return _noise_decibels_on_you_are_hit_and_now_dead; }
   int noise_decibels_on_you_are_hit_but_still_alive(void) const { return _noise_decibels_on_you_are_hit_but_still_alive; }
@@ -2027,7 +2027,7 @@ public:
   void set_unused_flag143(int v) { _unused_flag143 = v; }
   void set_unused_flag144(int v) { _unused_flag144 = v; }
   void set_unused_flag145(int v) { _unused_flag145 = v; }
-  void set_unused_flag146(int v) { _unused_flag146 = v; }
+  void set_noise_decibels_on_born(int v) { _noise_decibels_on_born = v; }
   void set_noise_decibels_on_open(int v) { _noise_decibels_on_open = v; }
   void set_noise_decibels_on_you_are_hit_and_now_dead(int v) { _noise_decibels_on_you_are_hit_and_now_dead = v; }
   void set_noise_decibels_on_you_are_hit_but_still_alive(int v) { _noise_decibels_on_you_are_hit_but_still_alive = v; }

@@ -255,6 +255,11 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   on_born();
 
   //
+  // Mainly for explosions
+  //
+  level->incr_noisemap_in(curr_at.x, curr_at.y, noise_decibels_on_born());
+
+  //
   // Spawn zorblin packs
   //
   static bool spawning_group;

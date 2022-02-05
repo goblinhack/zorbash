@@ -2286,10 +2286,10 @@ int Thing::unused_flag145(void)
   return (tp()->unused_flag145());
 }
 
-int Thing::unused_flag146(void)
+int Thing::noise_decibels_on_born(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag146());
+  return (tp()->noise_decibels_on_born());
 }
 
 int Thing::noise_decibels_on_open(void)

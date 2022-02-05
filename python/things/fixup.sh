@@ -446,7 +446,7 @@ do
       set_unused_flag143 \
       set_unused_flag144 \
       set_unused_flag145 \
-      set_unused_flag146 \
+      set_noise_decibels_on_born \
       set_noise_decibels_on_open \
       set_noise_decibels_on_you_are_hit_and_now_dead \
       set_noise_decibels_on_you_are_hit_but_still_alive \
