@@ -54,6 +54,18 @@ enum {
   MONST_EQUIP_MAX,
 };
 
+//
+// Search priorities in order
+//
+#define MONST_SEARCH_TYPE_MAX                       7
+#define MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED      0
+#define MONST_SEARCH_TYPE_LOCAL_NO_JUMP             1
+#define MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED        2
+#define MONST_SEARCH_TYPE_GLOBAL_NO_JUMP            3
+#define MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       4
+#define MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP      5
+#define MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 6
+
 #define FOR_ALL_EQUIP(_equip_) for (auto _equip_ = 0; _equip_ < MONST_EQUIP_MAX; _equip_++)
 
 #define FOR_ALL_BUFFS(_id_)          for (auto _id_ : get_itemsp()->buffs)
