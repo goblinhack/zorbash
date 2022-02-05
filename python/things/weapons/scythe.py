@@ -17,6 +17,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_break_chance_d10000(5)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
+    mytp.set_collision_hit_priority(6)
     mytp.set_damage_melee_chance_d1000(1000)
     mytp.set_damage_melee_dice("3d6+1")
     mytp.set_equip_carry_anim("scythe_carry")

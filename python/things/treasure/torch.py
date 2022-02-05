@@ -11,6 +11,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp = tp.Tp(name, text_name)
     mytp.set_charge_count(10)
     mytp.set_collision_hit_priority(1)
+    mytp.set_collision_hit_priority(6)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_flickers(True)
     mytp.set_gfx_glows(True)

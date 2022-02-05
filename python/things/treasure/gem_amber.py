@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
+    mytp.set_collision_hit_priority(6)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gold_value_dice("1d30")
