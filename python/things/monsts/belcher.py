@@ -3,7 +3,8 @@ import tp
 
 
 def on_idle(me, x, y):
-    my.level_spawn_gas_poison_around_thing(me, 2)
+    if not my.thing_is_sleeping(me):
+        my.level_spawn_gas_poison_around_thing(me, 2)
 
 
 def on_death(me, x, y):
@@ -84,6 +85,11 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_tile(tile=name + "_awake.3", delay_ms=delay)
     mytp.set_tile(tile=name + "_awake.4", delay_ms=delay)
     mytp.set_tile(tile=name + "_dead.1", delay_ms=delay, is_dead=True)
+    delay = 500
+    mytp.set_tile(tile=name + "_asleep.1", is_sleeping=True, delay_ms=delay)
+    mytp.set_tile(tile=name + "_asleep.2", is_sleeping=True, delay_ms=delay)
+    mytp.set_tile(tile=name + "_asleep.3", is_sleeping=True, delay_ms=delay)
+    mytp.set_tile(tile=name + "_asleep.2", is_sleeping=True, delay_ms=delay)
 
     mytp.update()
 

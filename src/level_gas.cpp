@@ -10,6 +10,7 @@ void Level::tick_gas_poison(void)
   static std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
       old_gas {};
 
+#if 0
   IF_DEBUG2
   {
     static int first = 1;
@@ -26,6 +27,7 @@ void Level::tick_gas_poison(void)
       }
     }
   }
+#endif
 
   old_gas = gas_poison;
 

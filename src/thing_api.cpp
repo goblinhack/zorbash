@@ -7660,3 +7660,5 @@ int Thing::get_group(void)
   }
   return THING_GROUP_PRIO_NORMAL;
 }
+
+bool Thing::is_state_sleeping(void) { return is_sleeping; }

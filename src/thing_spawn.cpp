@@ -34,7 +34,7 @@ bool Thing::spawn_next_to(const std::string &what)
   // Don't spawn too many monsts
   //
   if (tpp->is_monst()) {
-    if (level->monst_count >= LEVELS_MONST_COUNT) {
+    if (level->monst_count >= LEVEL_MONST_COUNT_MAX) {
       dbg("Too many minions");
       return false;
     }
@@ -118,7 +118,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   // Don't spawn too many monsts
   //
   if (tpp->is_monst()) {
-    if (level->monst_count >= LEVELS_MONST_COUNT) {
+    if (level->monst_count >= LEVEL_MONST_COUNT_MAX) {
       return false;
     }
   }
@@ -204,7 +204,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
   // Don't spawn too many monsts
   //
   if (tpp->is_monst()) {
-    if (level->monst_count >= LEVELS_MONST_COUNT) {
+    if (level->monst_count >= LEVEL_MONST_COUNT_MAX) {
       return false;
     }
   }
@@ -265,7 +265,7 @@ bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uin
   // Don't spawn too many monsts
   //
   if (tpp->is_monst()) {
-    if (level->monst_count >= LEVELS_MONST_COUNT) {
+    if (level->monst_count >= LEVEL_MONST_COUNT_MAX) {
       return false;
     }
   }
@@ -325,7 +325,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
   // Don't spawn too many monsts
   //
   if (tpp->is_monst()) {
-    if (level->monst_count >= LEVELS_MONST_COUNT) {
+    if (level->monst_count >= LEVEL_MONST_COUNT_MAX) {
       dbg("Too many monsters");
       return false;
     }

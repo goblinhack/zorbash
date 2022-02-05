@@ -312,6 +312,7 @@ PyObject *thing_is_organic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pink_blooded(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pink_splatter(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_player(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_sleeping(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_poisonous_danger_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_potion_eater(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_potion(PyObject *obj, PyObject *args, PyObject *keywds);

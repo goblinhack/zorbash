@@ -774,6 +774,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_pink_blooded),
     MY_ADD_PYTHON_FUNCTION(thing_is_pink_splatter),
     MY_ADD_PYTHON_FUNCTION(thing_is_player),
+    MY_ADD_PYTHON_FUNCTION(thing_is_sleeping),
     MY_ADD_PYTHON_FUNCTION(thing_is_poisonous_danger_level),
     MY_ADD_PYTHON_FUNCTION(thing_is_potion),
     MY_ADD_PYTHON_FUNCTION(thing_is_potion_eater),

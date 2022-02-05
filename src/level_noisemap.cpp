@@ -10,8 +10,6 @@
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
 
-static int loudest_sound = 100;
-
 //
 // Some examples of sound levels. We max out at 100 to allow for the dmap resolution.
 // Entries are placed into the dmap at 100 - decibels level. To find out the sound at
@@ -226,8 +224,8 @@ void Level::update_noisemap(void)
 
       decibels += noisemap_in_no_check(x, y);
 
-      if (decibels > loudest_sound) {
-        decibels = loudest_sound;
+      if (decibels > LEVEL_LOUDEST_SOUND) {
+        decibels = LEVEL_LOUDEST_SOUND;
       }
       if (decibels < 0) {
         decibels = 0;
@@ -240,9 +238,9 @@ void Level::update_noisemap(void)
     }
   }
 
-  // noisemap_print();
+  noisemap_print();
   dmap_process(&_noisemap);
-  // noisemap_print();
+  noisemap_print();
 
   _noisemap_in.val = {};
 }

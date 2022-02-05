@@ -37,35 +37,41 @@ void Thing::change_state(int new_state, const std::string &why)
   switch (new_state) {
     case MONST_STATE_IDLE :
       set_sleep_count(0);
-      to = "IDLE";
+      is_sleeping = false;
+      to          = "IDLE";
       break;
     case MONST_STATE_MOVING :
       set_sleep_count(0);
-      to = "MOVING";
+      is_sleeping = false;
+      to          = "MOVING";
       break;
     case MONST_STATE_RESTING :
-      // allow sleep count to increment
-      to = "RESTING";
+      is_sleeping = false;
+      to          = "RESTING";
       break;
     case MONST_STATE_OPEN_INVENTORY :
       set_sleep_count(0);
-      to = "OPEN-INVENTORY";
+      is_sleeping = false;
+      to          = "OPEN-INVENTORY";
       break;
     case MONST_STATE_USING_ENCHANTSTONE :
       set_sleep_count(0);
-      to = "USING-ENCHANTSTONE";
+      is_sleeping = false;
+      to          = "USING-ENCHANTSTONE";
       break;
     case MONST_STATE_USING_SKILLSTONE :
       set_sleep_count(0);
-      to = "USING-SKILLSTONE";
+      is_sleeping = false;
+      to          = "USING-SKILLSTONE";
       break;
     case MONST_STATE_REPACK_INVENTORY :
       set_sleep_count(0);
-      to = "REPACK";
+      is_sleeping = false;
+      to          = "REPACK";
       break;
     case MONST_STATE_SLEEPING :
-      // allow sleep count to increment
-      to = "SLEEPING";
+      is_sleeping = true;
+      to          = "SLEEPING";
       break;
   }
 

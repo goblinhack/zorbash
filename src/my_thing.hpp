@@ -508,6 +508,7 @@ public:
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
+  bool is_state_sleeping(void);
 
   const Dice &get_damage_natural_dice(void);
   const Dice &get_damage_crush_dice(void);
