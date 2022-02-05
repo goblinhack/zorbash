@@ -22,5 +22,14 @@ bool Thing::state_sleeping(bool &do_something, bool &wait)
 {
   TRACE_NO_INDENT();
 
-  return state_resting(do_something, wait);
+  AI_LOG("Continue sleeping.");
+
+  if (is_able_to_sleep()) {
+    incr_sleep_count();
+  }
+
+  do_something = true;
+  wait         = true;
+
+  return false;
 }
