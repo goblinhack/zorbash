@@ -449,7 +449,7 @@ PyObject *thing_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag143(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag144(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag145(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag146(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_noise_decibels_on_born(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_decibels_on_open(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_decibels_on_you_are_hit_and_now_dead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_decibels_on_you_are_hit_but_still_alive(PyObject *obj, PyObject *args, PyObject *keywds);

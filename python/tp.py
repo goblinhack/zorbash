@@ -817,8 +817,8 @@ class Tp:
     def set_unused_flag145(self, value):
         my.tp_set_unused_flag145(self, value)
 
-    def set_unused_flag146(self, value):
-        my.tp_set_unused_flag146(self, value)
+    def set_noise_decibels_on_born(self, value):
+        my.tp_set_noise_decibels_on_born(self, value)
 
     def set_noise_decibels_on_open(self, value):
         my.tp_set_noise_decibels_on_open(self, value)

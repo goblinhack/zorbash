@@ -1103,7 +1103,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag145() && (what == "unused_flag145")) {
     return true;
   }
-  if (unused_flag146() && (what == "unused_flag146")) {
+  if (noise_decibels_on_born() && (what == "noise_decibels_on_born")) {
     return true;
   }
   if (noise_decibels_on_open() && (what == "noise_decibels_on_open")) {
@@ -2394,8 +2394,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag145") {
     return &Thing::unused_flag145;
   }
-  if (what == "unused_flag146") {
-    return &Thing::unused_flag146;
+  if (what == "noise_decibels_on_born") {
+    return &Thing::noise_decibels_on_born;
   }
   if (what == "noise_decibels_on_open") {
     return &Thing::noise_decibels_on_open;
