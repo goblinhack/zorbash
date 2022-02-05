@@ -448,7 +448,7 @@ PyObject *thing_unused_flag141(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag142(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag143(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag144(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag145(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_noise_decibels_on_jumping(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_decibels_on_born(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_decibels_on_open(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_decibels_on_you_are_hit_and_now_dead(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -458,7 +458,7 @@ PyObject *thing_noise_decibels_hearing(PyObject *obj, PyObject *args, PyObject *
 PyObject *thing_noise_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_cold(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_breather(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_noise_decibels(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_noise_decibels_on_moving_or_being_carried(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_asleep_initially(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_sleep(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obstacle_when_dead(PyObject *obj, PyObject *args, PyObject *keywds);

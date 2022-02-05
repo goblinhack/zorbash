@@ -445,7 +445,7 @@ do
       set_unused_flag142 \
       set_unused_flag143 \
       set_unused_flag144 \
-      set_unused_flag145 \
+      set_noise_decibels_on_jumping \
       set_noise_decibels_on_born \
       set_noise_decibels_on_open \
       set_noise_decibels_on_you_are_hit_and_now_dead \
@@ -454,7 +454,7 @@ do
       set_noise_blocker \
       set_is_immune_to_cold \
       set_is_breather \
-      set_noise_decibels \
+      set_noise_decibels_on_moving_or_being_carried \
       set_is_asleep_initially \
       set_is_able_to_sleep \
       set_is_obstacle_when_dead \

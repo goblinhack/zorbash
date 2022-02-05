@@ -23,7 +23,7 @@ def key_init(name, text_name):
     mytp.set_is_moveable(True)
     mytp.set_light_color("yellow")
     mytp.set_light_power(2)
-    mytp.set_noise_decibels(5)
+    mytp.set_noise_decibels_on_moving_or_being_carried(5)
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("an")
     mytp.set_text_description("A key that leadeth places undreamt, or next door.")

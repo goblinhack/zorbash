@@ -23,7 +23,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("Fresh slice of melon. I mean it does have some things on it, but they'll dust off. Think of it as extra protein.")
-    mytp.set_noise_decibels(1)
+    mytp.set_noise_decibels_on_moving_or_being_carried(1)
     mytp.set_normal_placement_rules(True)
     mytp.set_nutrition_dice("10+1d10")
     mytp.set_rarity(my.RARITY_COMMON)

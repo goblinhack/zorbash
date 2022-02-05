@@ -41,7 +41,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(4)
     mytp.set_long_text_description("Lime scale armor. Very tough while it lasts. Which is not long...")
     mytp.set_melting_chance_d1000(10)
-    mytp.set_noise_decibels(20)
+    mytp.set_noise_decibels_on_moving_or_being_carried(20)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_enchant_do("me.on_enchant()")
     mytp.set_rarity(my.RARITY_COMMON)

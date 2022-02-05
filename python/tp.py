@@ -814,8 +814,8 @@ class Tp:
     def set_unused_flag144(self, value):
         my.tp_set_unused_flag144(self, value)
 
-    def set_unused_flag145(self, value):
-        my.tp_set_unused_flag145(self, value)
+    def set_noise_decibels_on_jumping(self, value):
+        my.tp_set_noise_decibels_on_jumping(self, value)
 
     def set_noise_decibels_on_born(self, value):
         my.tp_set_noise_decibels_on_born(self, value)
@@ -841,8 +841,8 @@ class Tp:
     def set_is_breather(self, value):
         my.tp_set_is_breather(self, value)
 
-    def set_noise_decibels(self, value):
-        my.tp_set_noise_decibels(self, value)
+    def set_noise_decibels_on_moving_or_being_carried(self, value):
+        my.tp_set_noise_decibels_on_moving_or_being_carried(self, value)
 
     def set_is_asleep_initially(self, value):
         my.tp_set_is_asleep_initially(self, value)

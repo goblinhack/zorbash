@@ -2280,10 +2280,10 @@ int Thing::unused_flag144(void)
   return (tp()->unused_flag144());
 }
 
-int Thing::unused_flag145(void)
+int Thing::noise_decibels_on_jumping(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag145());
+  return (tp()->noise_decibels_on_jumping());
 }
 
 int Thing::noise_decibels_on_born(void)
@@ -2328,10 +2328,10 @@ int Thing::is_breather(void)
   return (tp()->is_breather());
 }
 
-int Thing::noise_decibels(void)
+int Thing::noise_decibels_on_moving_or_being_carried(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_decibels());
+  return (tp()->noise_decibels_on_moving_or_being_carried());
 }
 
 int Thing::is_asleep_initially(void)

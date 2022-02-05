@@ -1100,7 +1100,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag144() && (what == "unused_flag144")) {
     return true;
   }
-  if (unused_flag145() && (what == "unused_flag145")) {
+  if (noise_decibels_on_jumping() && (what == "noise_decibels_on_jumping")) {
     return true;
   }
   if (noise_decibels_on_born() && (what == "noise_decibels_on_born")) {
@@ -1127,7 +1127,7 @@ bool Thing::matches(const std::string &what)
   if (is_breather() && (what == "is_breather")) {
     return true;
   }
-  if (noise_decibels() && (what == "noise_decibels")) {
+  if (noise_decibels_on_moving_or_being_carried() && (what == "noise_decibels_on_moving_or_being_carried")) {
     return true;
   }
   if (is_asleep_initially() && (what == "is_asleep_initially")) {
@@ -2391,8 +2391,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag144") {
     return &Thing::unused_flag144;
   }
-  if (what == "unused_flag145") {
-    return &Thing::unused_flag145;
+  if (what == "noise_decibels_on_jumping") {
+    return &Thing::noise_decibels_on_jumping;
   }
   if (what == "noise_decibels_on_born") {
     return &Thing::noise_decibels_on_born;
@@ -2418,8 +2418,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_breather") {
     return &Thing::is_breather;
   }
-  if (what == "noise_decibels") {
-    return &Thing::noise_decibels;
+  if (what == "noise_decibels_on_moving_or_being_carried") {
+    return &Thing::noise_decibels_on_moving_or_being_carried;
   }
   if (what == "is_asleep_initially") {
     return &Thing::is_asleep_initially;

@@ -26,7 +26,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("This magical map can show you the position of all monsters on the level as they move around.")
-    mytp.set_noise_decibels(15)
+    mytp.set_noise_decibels_on_moving_or_being_carried(15)
     mytp.set_normal_placement_rules(True)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("An aged beast map.")
