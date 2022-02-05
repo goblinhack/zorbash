@@ -820,14 +820,14 @@ class Tp:
     def set_unused_flag146(self, value):
         my.tp_set_unused_flag146(self, value)
 
-    def set_unused_flag147(self, value):
-        my.tp_set_unused_flag147(self, value)
+    def set_noise_decibels_on_open(self, value):
+        my.tp_set_noise_decibels_on_open(self, value)
 
-    def set_unused_flag148(self, value):
-        my.tp_set_unused_flag148(self, value)
+    def set_noise_decibels_on_you_are_hit_and_now_dead(self, value):
+        my.tp_set_noise_decibels_on_you_are_hit_and_now_dead(self, value)
 
-    def set_noise_decibels_on_i_am_hit(self, value):
-        my.tp_set_noise_decibels_on_i_am_hit(self, value)
+    def set_noise_decibels_on_you_are_hit_but_still_alive(self, value):
+        my.tp_set_noise_decibels_on_you_are_hit_but_still_alive(self, value)
 
     def set_noise_decibels_hearing(self, value):
         my.tp_set_noise_decibels_hearing(self, value)

@@ -1088,17 +1088,22 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   wake();
 
   //
-  // Set up noise, for example a door being hit
-  //
-  level->incr_noisemap_in(curr_at.x, curr_at.y, noise_decibels_on_i_am_hit());
-
-  //
   // Python callback
   //
   if (is_dead || is_dying) {
     on_you_are_hit_and_now_dead(hitter, real_hitter, crit, damage);
+
+    //
+    // Set up noise, for example a door being hit
+    //
+    level->incr_noisemap_in(curr_at.x, curr_at.y, noise_decibels_on_you_are_hit_but_still_alive());
   } else {
     on_you_are_hit_but_still_alive(hitter, real_hitter, crit, damage);
+
+    //
+    // Set up noise, for example a door being broken
+    //
+    level->incr_noisemap_in(curr_at.x, curr_at.y, noise_decibels_on_you_are_hit_and_now_dead());
   }
 
   //

@@ -2292,22 +2292,22 @@ int Thing::unused_flag146(void)
   return (tp()->unused_flag146());
 }
 
-int Thing::unused_flag147(void)
+int Thing::noise_decibels_on_open(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag147());
+  return (tp()->noise_decibels_on_open());
 }
 
-int Thing::unused_flag148(void)
+int Thing::noise_decibels_on_you_are_hit_and_now_dead(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag148());
+  return (tp()->noise_decibels_on_you_are_hit_and_now_dead());
 }
 
-int Thing::noise_decibels_on_i_am_hit(void)
+int Thing::noise_decibels_on_you_are_hit_but_still_alive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_decibels_on_i_am_hit());
+  return (tp()->noise_decibels_on_you_are_hit_but_still_alive());
 }
 
 int Thing::noise_decibels_hearing(void)

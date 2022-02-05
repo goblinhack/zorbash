@@ -1106,13 +1106,13 @@ bool Thing::matches(const std::string &what)
   if (unused_flag146() && (what == "unused_flag146")) {
     return true;
   }
-  if (unused_flag147() && (what == "unused_flag147")) {
+  if (noise_decibels_on_open() && (what == "noise_decibels_on_open")) {
     return true;
   }
-  if (unused_flag148() && (what == "unused_flag148")) {
+  if (noise_decibels_on_you_are_hit_and_now_dead() && (what == "noise_decibels_on_you_are_hit_and_now_dead")) {
     return true;
   }
-  if (noise_decibels_on_i_am_hit() && (what == "noise_decibels_on_i_am_hit")) {
+  if (noise_decibels_on_you_are_hit_but_still_alive() && (what == "noise_decibels_on_you_are_hit_but_still_alive")) {
     return true;
   }
   if (noise_decibels_hearing() && (what == "noise_decibels_hearing")) {
@@ -2397,14 +2397,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag146") {
     return &Thing::unused_flag146;
   }
-  if (what == "unused_flag147") {
-    return &Thing::unused_flag147;
+  if (what == "noise_decibels_on_open") {
+    return &Thing::noise_decibels_on_open;
   }
-  if (what == "unused_flag148") {
-    return &Thing::unused_flag148;
+  if (what == "noise_decibels_on_you_are_hit_and_now_dead") {
+    return &Thing::noise_decibels_on_you_are_hit_and_now_dead;
   }
-  if (what == "noise_decibels_on_i_am_hit") {
-    return &Thing::noise_decibels_on_i_am_hit;
+  if (what == "noise_decibels_on_you_are_hit_but_still_alive") {
+    return &Thing::noise_decibels_on_you_are_hit_but_still_alive;
   }
   if (what == "noise_decibels_hearing") {
     return &Thing::noise_decibels_hearing;

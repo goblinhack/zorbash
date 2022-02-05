@@ -1539,9 +1539,9 @@ public:
   int unused_flag144(void);
   int unused_flag145(void);
   int unused_flag146(void);
-  int unused_flag147(void);
-  int unused_flag148(void);
-  int noise_decibels_on_i_am_hit(void);
+  int noise_decibels_on_open(void);
+  int noise_decibels_on_you_are_hit_and_now_dead(void);
+  int noise_decibels_on_you_are_hit_but_still_alive(void);
   int unused_flag14(void);
   int noise_decibels_hearing(void);
   int noise_blocker(void);

@@ -358,9 +358,9 @@ PyObject *level_unused_flag143_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag144_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag145_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag146_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag147_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag148_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_noise_decibels_on_i_am_hit_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_noise_decibels_on_open_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_noise_decibels_on_you_are_hit_and_now_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_noise_decibels_on_you_are_hit_but_still_alive_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag14_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_decibels_hearing_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
