@@ -48,7 +48,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("A wooden short sword. Ideal for play fighting and not much else.")
-    mytp.set_noise_decibels(5)
+    mytp.set_noise_decibels_on_moving_or_being_carried(5)
     mytp.set_on_use_do("me.on_use()")
     mytp.set_rarity(my.RARITY_COMMON)
     mytp.set_text_a_or_an("a")

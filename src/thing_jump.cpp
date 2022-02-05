@@ -624,6 +624,11 @@ void Thing::jump_end(void)
   collision_check_do();
 
   //
+  // Mainly for explosions
+  //
+  level->incr_noisemap_in(curr_at.x, curr_at.y, noise_decibels_on_jumping());
+
+  //
   // Need this so that if we land on a chasm we fall immediately
   //
   location_check_forced();

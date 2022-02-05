@@ -49,7 +49,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(8)
     mytp.set_long_text_description("A huge gleaming scythe. Ideal for gardening and other uses.")
     mytp.set_melting_chance_d1000(2)
-    mytp.set_noise_decibels(20)
+    mytp.set_noise_decibels_on_moving_or_being_carried(20)
     mytp.set_on_use_do("me.on_use()")
     mytp.set_rarity(my.RARITY_UNCOMMON)
     mytp.set_text_a_or_an("a")

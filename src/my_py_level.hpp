@@ -294,7 +294,7 @@ PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wet_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wooden_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_noise_decibels_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_noise_decibels_on_moving_or_being_carried_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_att_penalty_when_idle_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_att_penalty_when_idle_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_att_penalty_when_in_deep_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -356,7 +356,7 @@ PyObject *level_unused_flag141_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag142_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag143_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag144_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag145_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_noise_decibels_on_jumping_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_decibels_on_born_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_decibels_on_open_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_decibels_on_you_are_hit_and_now_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);

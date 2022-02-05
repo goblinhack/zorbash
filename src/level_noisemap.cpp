@@ -233,13 +233,17 @@ void Level::update_noisemap(void)
           continue;
         }
 
-        decibels += t->noise_decibels();
+        if (t->get_idle_count() || t->get_stuck_count()) {
+          continue;
+        }
+
+        decibels += t->noise_decibels_on_moving_or_being_carried();
 
         FOR_ALL_EQUIP(e)
         {
           auto it = t->get_equip(e);
           if (it) {
-            decibels += it->noise_decibels();
+            decibels += it->noise_decibels_on_moving_or_being_carried();
           }
         }
 
@@ -248,7 +252,7 @@ void Level::update_noisemap(void)
           {
             auto it = thing_find(id);
             if (it) {
-              decibels += it->noise_decibels();
+              decibels += it->noise_decibels_on_moving_or_being_carried();
             }
           }
 
@@ -256,7 +260,7 @@ void Level::update_noisemap(void)
           {
             auto it = thing_find(id);
             if (it) {
-              decibels += it->noise_decibels();
+              decibels += it->noise_decibels_on_moving_or_being_carried();
             }
           }
 
@@ -264,7 +268,7 @@ void Level::update_noisemap(void)
           {
             auto it = thing_find(id);
             if (it) {
-              decibels += it->noise_decibels();
+              decibels += it->noise_decibels_on_moving_or_being_carried();
             }
           }
         }

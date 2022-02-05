@@ -31,7 +31,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_enchantable(True)
     mytp.set_is_wooden(True)
     mytp.set_is_interesting(True)
-    mytp.set_noise_decibels(25)
+    mytp.set_noise_decibels_on_moving_or_being_carried(25)
     mytp.set_is_item(True)
     mytp.set_collision_hit_priority(6)
     mytp.set_is_biome_dungeon(True)

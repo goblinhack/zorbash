@@ -1537,7 +1537,7 @@ public:
   int unused_flag142(void);
   int unused_flag143(void);
   int unused_flag144(void);
-  int unused_flag145(void);
+  int noise_decibels_on_jumping(void);
   int noise_decibels_on_born(void);
   int noise_decibels_on_open(void);
   int noise_decibels_on_you_are_hit_and_now_dead(void);
@@ -1547,7 +1547,7 @@ public:
   int noise_blocker(void);
   int is_immune_to_cold(void);
   int is_breather(void);
-  int noise_decibels(void);
+  int noise_decibels_on_moving_or_being_carried(void);
   int is_asleep_initially(void);
   int is_able_to_sleep(void);
   int is_obstacle_when_dead(void);
