@@ -162,7 +162,7 @@ public:
   uint64_t i_set_is_foilage                       : 1 {};
   uint64_t i_set_is_food                          : 1 {};
   uint64_t i_set_is_gas_blocker                   : 1 {};
-  uint64_t i_set_noise_blocker                 : 1 {};
+  uint64_t i_set_noise_blocker                    : 1 {};
   uint64_t i_set_is_gold                          : 1 {};
   uint64_t i_set_is_green_blood                   : 1 {};
   uint64_t i_set_is_hazard                        : 1 {};
@@ -304,8 +304,8 @@ public:
   bool ai_wander(void);
   bool any_adjacent_monst(void);
   bool any_unfriendly_monst_visible(void);
-  bool ascend_dungeon_tick();
   bool ascend_dungeon(bool force = false, point3d next_level = point3d(0, 0, 0));
+  bool ascend_dungeon_tick();
   bool ascend(int z);
   bool ascend_sewer_tick();
   bool ascend_sewer(void);
@@ -364,8 +364,8 @@ public:
   bool debuff_remove(Thingp it);
   bool debuff_remove(Tpp what);
   bool debuff_use(Thingp it);
-  bool descend_dungeon_tick();
   bool descend_dungeon(bool force = false, point3d next_level = point3d(0, 0, 0));
+  bool descend_dungeon_tick();
   bool descend_sewer_tick();
   bool descend_sewer(void);
   bool describe_when_hovered_over_in_rightbar(void);
@@ -416,6 +416,7 @@ public:
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item, Thingp victim = nullptr);
   bool learn_random_skill(void);
+  bool map_treasure_available(void);
   bool matches(const std::string &what);
   bool move_away_from_entrance(void);
   bool move_no_shove_attack_allowed(point future_pos);
@@ -435,8 +436,8 @@ public:
   bool particle_anim_exists(void);
   bool path_pop_next_move(void);
   bool place(const std::string &what, const point p);
-  bool player_is_ready_for_messages(void);
   bool player_is_ready_for_messages(std::string &why);
+  bool player_is_ready_for_messages(void);
   bool player_is_ready_for_thing_info(void);
   bool possible_to_attack_at(point at);
   bool possible_to_attack(const Thingp it);
@@ -457,6 +458,14 @@ public:
   bool spawn_next_to_or_on_monst(const std::string &what);
   bool spawn_radius_range(const std::string &what, uint32_t rad_min, uint32_t rad_max);
   bool spawn_radius_range(Thingp parent, Thingp target, const std::string &what, uint32_t rad_min, uint32_t rad_max);
+  bool state_idle(Thingp threat, int minx, int miny, int maxx, int maxy);
+  bool state_moving(void);
+  bool state_open_inventory(void);
+  bool state_repack_inventory(void);
+  bool state_resting(bool &do_something, bool &wait);
+  bool state_sleeping(bool &do_something, bool &wait);
+  bool state_using_enchantstone(void);
+  bool state_using_skillstone(void);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
   bool target_attack_best(int equip, point *at = nullptr);
@@ -470,9 +479,9 @@ public:
   bool too_far_from_mob(point p);
   bool too_far_from_mob(point p, float delta);
   bool too_far_from_mob(void);
-  bool map_treasure_available(void);
   bool try_harder_to_jump(void);
   bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
+  bool try_to_enchant_items(void);
   bool try_to_carry(Thingp w);
   bool try_to_escape(void);
   bool try_to_jump_away_from_player(void);
@@ -483,6 +492,15 @@ public:
   bool try_to_jump(point to, bool carefully, bool *too_far);
   bool try_to_jump_towards_player(void);
   bool try_to_jump(void);
+  bool try_to_use_amulet(void);
+  bool try_to_use_armor(void);
+  bool try_to_use_boots(void);
+  bool try_to_use_cloak(void);
+  bool try_to_use_gauntlet(void);
+  bool try_to_use_helmet(void);
+  bool try_to_use_rings(void);
+  bool try_to_use_shield(void);
+  bool try_to_use_weapon(void);
   bool unequip(const char *why, int equip, bool allowed_to_recarry);
   bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
   bool use(Thingp w, int equip = -1);

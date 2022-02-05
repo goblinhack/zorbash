@@ -24,18 +24,6 @@
 #include <algorithm>
 #include <set>
 
-//
-// Search priorities in order
-//
-#define SEARCH_TYPE_MAX                       7
-#define SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED      0
-#define SEARCH_TYPE_LOCAL_NO_JUMP             1
-#define SEARCH_TYPE_LOCAL_JUMP_ALLOWED        2
-#define SEARCH_TYPE_GLOBAL_NO_JUMP            3
-#define SEARCH_TYPE_GLOBAL_JUMP_ALLOWED       4
-#define SEARCH_TYPE_LAST_RESORTS_NO_JUMP      5
-#define SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED 6
-
 #define GOAL_PRIO_VERY_HIGH 0
 #define GOAL_PRIO_HIGH      1
 #define GOAL_PRIO_MED       2
@@ -94,13 +82,13 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   auto dmap_can_see = get_dmap_can_see();
 
   switch (search_type) {
-    case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
-    case SEARCH_TYPE_LOCAL_NO_JUMP :
-    case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : break;
-    case SEARCH_TYPE_GLOBAL_NO_JUMP :
-    case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
-    case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
-    case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
+    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP :
+    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED : break;
+    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP :
+    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
       if (is_player()) {
         minx = 0;
         maxx = MAP_WIDTH - 1;
@@ -115,16 +103,16 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   ai_dmap_can_see_init(minx, miny, maxx, maxy, search_type, false);
 
   switch (search_type) {
-    case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
       ai_choose_can_see_goals(goals, minx, miny, maxx, maxy);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
-    case SEARCH_TYPE_LOCAL_NO_JUMP :
-    case SEARCH_TYPE_LOCAL_JUMP_ALLOWED :
-    case SEARCH_TYPE_GLOBAL_NO_JUMP :
-    case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
-    case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
-    case SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
+    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP :
+    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP :
+    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
       ai_choose_search_goals(goals, search_type);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
@@ -145,7 +133,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
         AI_LOG("Pre modify dmap for terrain");
         dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
 
-        if (search_type == SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED) {
+        if (search_type == MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED) {
           level->heatmap_print(point(start.x, start.y), point(minx, miny), point(maxx, maxy));
         }
       }
@@ -421,13 +409,13 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   }
 
   switch (search_type) {
-    case SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED : jump_allowed = true; break;
-    case SEARCH_TYPE_LOCAL_NO_JUMP : jump_allowed = false; break;
-    case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
-    case SEARCH_TYPE_GLOBAL_NO_JUMP : jump_allowed = false; break;
-    case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_allowed = true; break;
-    case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_allowed = true; break;
-    case SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_allowed = false; break;
+    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED : jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP : jump_allowed = false; break;
+    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP : jump_allowed = false; break;
+    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_allowed = false; break;
   }
 
   if (! is_able_to_jump()) {
@@ -1213,12 +1201,12 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     int jump_distance;
 
     switch (search_type) {
-      case SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
-      case SEARCH_TYPE_LOCAL_NO_JUMP : jump_distance = 0; break;
-      case SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
-      case SEARCH_TYPE_GLOBAL_NO_JUMP : jump_distance = 0; break;
-      case SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
-      case SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_distance = 0; break;
+      case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
+      case MONST_SEARCH_TYPE_LOCAL_NO_JUMP : jump_distance = 0; break;
+      case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
+      case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP : jump_distance = 0; break;
+      case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
+      case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_distance = 0; break;
       default : DIE("unexpected search-type case"); break;
     }
 
@@ -1267,7 +1255,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
-          if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
+          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
             continue;
           }
         } else if (level->is_ascend_sewer(o)) {
@@ -1283,7 +1271,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
-          if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
+          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
             continue;
           }
         } else if (level->is_descend_dungeon(o)) {
@@ -1296,7 +1284,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
-          if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
+          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
             continue;
           }
         } else if (level->is_ascend_dungeon(o)) {
@@ -1309,7 +1297,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
-          if (search_type < SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
+          if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
             continue;
           }
         } else {
@@ -1591,935 +1579,6 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   return false;
 }
 
-//
-// Return true on having done something
-//
-bool Thing::ai_tick(bool recursing)
-{
-  dbg("AI tick");
-  TRACE_AND_INDENT();
-
-  auto aip = get_aip();
-
-  if (is_player()) {
-    if (game->things_are_moving) {
-      return false;
-    }
-
-    if (game->tick_completed != game->tick_current) {
-      return false;
-    }
-  }
-
-  if (is_dead) {
-    return false;
-  }
-
-  if (is_changing_level || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
-      is_jumping) {
-    return false;
-  }
-
-  if (level->ts_fade_in_begin) {
-    return false;
-  }
-
-  if (level->cursor) {
-    level->cursor->hide();
-  }
-
-  //
-  // Set up the extent of the AI, choosing smaller areas for monsters for
-  // speed.
-  //
-  const float dx = get_distance_vision();
-  const float dy = dx;
-
-  auto vision_source = get_vision_source();
-
-  int minx = std::max(0, (int) (vision_source.x - dx));
-  int maxx = std::min(MAP_WIDTH - 1, (int) (vision_source.x + dx));
-  int miny = std::max(0, (int) (vision_source.y - dy));
-  int maxy = std::min(MAP_HEIGHT - 1, (int) (vision_source.y + dy));
-
-  bool left         = false;
-  bool right        = false;
-  bool up           = false;
-  bool down         = false;
-  bool attack       = false;
-  bool wait         = false;
-  bool jump         = false;
-  bool do_something = false;
-
-  //
-  // See if anything dangerous is close
-  //
-  auto threat = get_most_dangerous_visible_thing();
-  if (threat) {
-    AI_LOG("Threat", threat);
-  }
-
-  //
-  // A threat can be a few tiles away; but if one is standing literally
-  // next to us! then it takes priority.
-  //
-  auto adjacent_threat = get_most_dangerous_adjacent_thing();
-  if (adjacent_threat) {
-    AI_LOG("Adjacent threat", adjacent_threat);
-    if (is_dangerous(adjacent_threat)) {
-      threat = adjacent_threat;
-    } else {
-      AI_LOG("Adjacent threat (not dangerous)", adjacent_threat);
-      threat = nullptr;
-    }
-  }
-
-  //
-  // Update what we can see - which if a minion is from the perspective of the mob.
-  //
-  auto vision_souce = get_vision_source();
-
-  //
-  // We need to grow the light a bit for level explorers
-  //
-  if (is_explorer()) {
-    level->fov_calculete(this, &aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision() + 1);
-  } else {
-    level->fov_calculete(this, &aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision());
-  }
-
-  //
-  // If we have a treasure map then we know this level
-  //
-  if (map_treasure_available()) {
-    for (int y = miny; y <= maxy; y++) {
-      for (int x = minx; x <= maxx; x++) {
-        set(aip->can_see_ever.can_see, x, y, true);
-      }
-    }
-  }
-
-  //
-  // Anything we can see currently, set into the "have ever seen" array
-  //
-  for (int y = miny; y <= maxy; y++) {
-    for (int x = minx; x <= maxx; x++) {
-      if (aip->can_see_currently.can_see[ x ][ y ]) {
-        IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
-        set(aip->can_see_ever.can_see, x, y, true);
-      }
-    }
-  }
-
-  if (get_infop()->monst_state != MONST_STATE_IDLE) {
-    if (! recursing) {
-      //
-      // Check for serious interrupts
-      //
-      if (is_on_fire() && environ_avoids_fire()) {
-        AI_LOG("I am on fire!");
-        return ai_tick(true);
-      }
-
-      if (get_terrain_cost(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
-        AI_LOG("I am on some bad terrain!");
-        return ai_tick(true);
-      }
-
-      //
-      // Check for less interrupts; like a monster being seen
-      //
-      AI_LOG("Check for interruptions");
-      if (ai_dmap_can_see_init(minx, miny, maxx, maxy, SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
-        AI_LOG("Something interrupted me");
-        if (is_player()) {
-          game->tick_begin("Robot move interrupted by something");
-        }
-
-        change_state(MONST_STATE_IDLE, "move interrupted by a change");
-        if (is_player()) {
-          game->request_remake_actionbar = true;
-        }
-
-        //
-        // Allow another go; this stops monster's moves stuttering
-        //
-        return ai_tick(true);
-      }
-    }
-  }
-
-#if 0
-  if (is_debug_type()) {
-    con("This is my field of view:");
-    con("  .  - can see currently");
-    con("  ,  - have seen ever");
-    for (int y = 0; y < MAP_HEIGHT; y++) {
-      for (int x = 0; x < MAP_WIDTH; x++) {
-        if ((x == (int) curr_at.x) && (y == (int) curr_at.y)) {
-          printf("*");
-        } else {
-          if (get(aip->can_see_currently.can_see, x, y)) {
-            if (level->is_door(x, y)) {
-              printf("D");
-            } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("X");
-            } else {
-              printf(".");
-            }
-          } else if (get(aip->can_see_ever.can_see, x, y)) {
-            if (level->is_door(x, y)) {
-              printf("D");
-            } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("X");
-            } else {
-              printf(",");
-            }
-          } else {
-            if (level->is_door(x, y)) {
-              printf("d");
-            } else if (level->is_obs_wall_or_door(x, y)) {
-              printf("x");
-            } else {
-              printf(" ");
-            }
-          }
-        }
-      }
-      printf("\n");
-    }
-  }
-#endif
-  switch (get_infop()->monst_state) {
-    case MONST_STATE_IDLE :
-      {
-        //
-        // If on fire, try and put it out!
-        //
-        if (is_on_fire() && environ_avoids_fire()) {
-          AI_LOG("I am on fire!");
-          TRACE_AND_INDENT();
-          if (is_intelligent()) {
-            if (ai_on_fire()) {
-              return true;
-            }
-          }
-        }
-
-        //
-        // If somewhere bad, escape
-        //
-        if (get_terrain_cost(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
-          AI_LOG("on bad terrain, escape");
-          TRACE_AND_INDENT();
-          if (ai_escape()) {
-            return true;
-          }
-
-          aip->wander_dest = point(0, 0);
-          AI_LOG("cannot escape, try to wander");
-          TRACE_AND_INDENT();
-          if (ai_wander()) {
-            return true;
-          }
-        }
-
-        if (threat) {
-          if (is_dangerous(threat)) {
-            AI_LOG("A dangerous threat is near", threat);
-          } else if (is_enemy(threat)) {
-            AI_LOG("An enemy threat is near", threat);
-          } else if (is_to_be_avoided(threat)) {
-            AI_LOG("An avoid threat is near", threat);
-          } else {
-            AI_LOG("A threat is near", threat);
-          }
-        }
-
-        //
-        // Look for doors or things to collect, if not being attacked.
-        //
-        if (threat && (is_dangerous(threat) || is_enemy(threat) || is_to_be_avoided(threat))) {
-          //
-          // If not too close to the thread we can try and do something else like pick up a weapon.
-          //
-          if (game->tick_current - get_tick_last_i_was_attacked() < 2) {
-            //
-            // Don't relax. You're being attacked.
-            //
-          } else if (distance(curr_at, threat->curr_at) > 2) {
-            //
-            // Look around for something nearby to do; like collect an item.
-            //
-            AI_LOG("Look around for some immediately adjacent goal as threat is not too close");
-            if (ai_choose_immediately_adjacent_goal()) {
-              return true;
-            }
-          }
-
-          //
-          // No resting when in danger unless in dire straits
-          //
-          // If we're absolutely exhausted, we must rest, threat or no threat
-          //
-          if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 10)) {
-            AI_LOG("Very low on stamina, forced to rest");
-            if (is_player()) {
-              game->tick_begin("Robot is forced to rest, very low on stamina");
-            }
-            change_state(MONST_STATE_RESTING, "need to rest, very low on stamina");
-            return true;
-          }
-
-          //
-          // If really low on health and we have something we can eat, try
-          // that.
-          //
-          if (get_health() < get_health_max() / 10) {
-            if (can_eat_something()) {
-              AI_LOG("Very low on health, forced to rest");
-              if (is_player()) {
-                game->tick_begin("Robot needs to rest, very low on health");
-              }
-              change_state(MONST_STATE_RESTING, "need to rest, very low on health");
-              return true;
-            }
-          }
-        } else {
-          //
-          // Not under threat, so we can think about doing some other house cleaning tasks.
-          //
-          AI_LOG("Idle, look for something to do");
-
-          //
-          // If we're absolutely exhausted, we must rest, threat or no threat
-          //
-          AI_LOG("Idle, rest check");
-          if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 3)) {
-            AI_LOG("Low on stamina, rest");
-            if (is_player()) {
-              game->tick_begin("Robot is low on stamina");
-            }
-            change_state(MONST_STATE_RESTING, "need to rest, low on stamina");
-            return true;
-          }
-
-          //
-          // If really low on health and we have something we can eat, try
-          // that.
-          //
-          AI_LOG("Idle, health check");
-          if (get_health() < get_health_max() / 3) {
-            AI_LOG("Idle, eat check as a bit hungry");
-            if (can_eat_something()) {
-              AI_LOG("Low on health, rest");
-              if (is_player()) {
-                game->tick_begin("Robot is low on health");
-              }
-              change_state(MONST_STATE_RESTING, "need to rest, low on health");
-              return true;
-            }
-          }
-
-          //
-          // Be a bit more careful if there is somethjing that might want to
-          // attack us, even if it is not a threat. i.e. a harmless goblin
-          // could push us off of a cliff while we're doing other stuff.
-          //
-          if (is_able_to_enchant_items() || is_able_to_learn_skills()) {
-            AI_LOG("Idle, unfriendly monst check");
-            if (! any_unfriendly_monst_visible()) {
-              //
-              // Can we enchant something?
-              //
-              AI_LOG("Idle, enchant check");
-              if (is_able_to_enchant_items()) {
-                if (get_enchantstone_count() && can_enchant_something()) {
-                  AI_LOG("Try to enchant something");
-                  if (is_player()) {
-                    game->tick_begin("Robot can enchant something");
-                  }
-                  change_state(MONST_STATE_USING_ENCHANTSTONE, "can enchant something");
-                  return true;
-                }
-              }
-
-              //
-              // Can we learn some skills?
-              //
-              AI_LOG("Idle, enchant check");
-              if (is_able_to_learn_skills()) {
-                if (get_skillstone_count() && can_learn_something()) {
-                  AI_LOG("Try to use a skillstone");
-                  if (is_player()) {
-                    game->tick_begin("Robot can learn something");
-                  }
-                  change_state(MONST_STATE_USING_SKILLSTONE, "can learn something");
-                  return true;
-                }
-              }
-            } else {
-              AI_LOG("Idle, unfriendlies are near");
-            }
-          }
-
-          //
-          // Can we switch to a better weapon? Only if we can use weapons. We don't
-          // wand jellys wandering around with swords!
-          //
-          if (is_able_to_use_weapons()) {
-            AI_LOG("Idle, weapon check");
-            Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
-            Thingp best_weapon = nullptr;
-            get_carried_weapon_highest_value(&best_weapon);
-            if (best_weapon) {
-              auto curr_weapon_val = curr_weapon ? get_value(curr_weapon) : 0;
-              auto best_weapon_val = get_value(best_weapon);
-
-              if (! curr_weapon) {
-                if (use(best_weapon, MONST_EQUIP_WEAPON)) {
-                  AI_LOG("Change weapon", best_weapon);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped weapon");
-                  }
-                  return true;
-                }
-              } else if (best_weapon_val > curr_weapon_val) {
-                if (use(best_weapon, MONST_EQUIP_WEAPON)) {
-                  AI_LOG("Change weapon", best_weapon);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed weapon");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          if (is_able_to_use_armor()) {
-            AI_LOG("Idle, armor check");
-            Thingp curr_armor = get_equip(MONST_EQUIP_ARMOR);
-            Thingp best_armor = nullptr;
-            get_carried_armor_highest_value(&best_armor);
-            if (best_armor) {
-              auto curr_armor_val = curr_armor ? get_value(curr_armor) : 0;
-              auto best_armor_val = get_value(best_armor);
-
-              if (! curr_armor) {
-                if (use(best_armor, MONST_EQUIP_ARMOR)) {
-                  AI_LOG("Change armor", best_armor);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped armor");
-                  }
-                  return true;
-                }
-              } else if (best_armor_val > curr_armor_val) {
-                if (use(best_armor, MONST_EQUIP_ARMOR)) {
-                  AI_LOG("Change armor", best_armor);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed armor");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          if (is_able_to_use_helmet()) {
-            AI_LOG("Idle, helmet check");
-            Thingp curr_helmet = get_equip(MONST_EQUIP_HELMET);
-            Thingp best_helmet = nullptr;
-            get_carried_helmet_highest_value(&best_helmet);
-            if (best_helmet) {
-              auto curr_helmet_val = curr_helmet ? get_value(curr_helmet) : 0;
-              auto best_helmet_val = get_value(best_helmet);
-
-              if (! curr_helmet) {
-                if (use(best_helmet, MONST_EQUIP_HELMET)) {
-                  AI_LOG("Change helmet", best_helmet);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped helmet");
-                  }
-                  return true;
-                }
-              } else if (best_helmet_val > curr_helmet_val) {
-                if (use(best_helmet, MONST_EQUIP_HELMET)) {
-                  AI_LOG("Change helmet", best_helmet);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed helmet");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          if (is_able_to_use_amulet()) {
-            AI_LOG("Idle, amulet check");
-            Thingp curr_amulet = get_equip(MONST_EQUIP_AMULET);
-            Thingp best_amulet = nullptr;
-            get_carried_amulet_highest_value(&best_amulet);
-            if (best_amulet) {
-              auto curr_amulet_val = curr_amulet ? get_value(curr_amulet) : 0;
-              auto best_amulet_val = get_value(best_amulet);
-
-              if (! curr_amulet) {
-                if (use(best_amulet, MONST_EQUIP_AMULET)) {
-                  AI_LOG("Change amulet", best_amulet);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped amulet");
-                  }
-                  return true;
-                }
-              } else if (best_amulet_val > curr_amulet_val) {
-                if (use(best_amulet, MONST_EQUIP_AMULET)) {
-                  AI_LOG("Change amulet", best_amulet);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed amulet");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          if (is_able_to_use_boots()) {
-            AI_LOG("Idle, boots check");
-            Thingp curr_boots = get_equip(MONST_EQUIP_BOOTS);
-            Thingp best_boots = nullptr;
-            get_carried_boots_highest_value(&best_boots);
-            if (best_boots) {
-              auto curr_boots_val = curr_boots ? get_value(curr_boots) : 0;
-              auto best_boots_val = get_value(best_boots);
-
-              if (! curr_boots) {
-                if (use(best_boots, MONST_EQUIP_BOOTS)) {
-                  AI_LOG("Change boots", best_boots);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped boots");
-                  }
-                  return true;
-                }
-              } else if (best_boots_val > curr_boots_val) {
-                if (use(best_boots, MONST_EQUIP_BOOTS)) {
-                  AI_LOG("Change boots", best_boots);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed boots");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          if (is_able_to_use_gauntlet()) {
-            AI_LOG("Idle, gauntlet check");
-            Thingp curr_gauntlet = get_equip(MONST_EQUIP_GAUNTLET);
-            Thingp best_gauntlet = nullptr;
-            get_carried_gauntlet_highest_value(&best_gauntlet);
-            if (best_gauntlet) {
-              auto curr_gauntlet_val = curr_gauntlet ? get_value(curr_gauntlet) : 0;
-              auto best_gauntlet_val = get_value(best_gauntlet);
-
-              if (! curr_gauntlet) {
-                if (use(best_gauntlet, MONST_EQUIP_GAUNTLET)) {
-                  AI_LOG("Change gauntlet", best_gauntlet);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped gauntlet");
-                  }
-                  return true;
-                }
-              } else if (best_gauntlet_val > curr_gauntlet_val) {
-                if (use(best_gauntlet, MONST_EQUIP_GAUNTLET)) {
-                  AI_LOG("Change gauntlet", best_gauntlet);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed gauntlet");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          if (is_able_to_use_shield()) {
-            AI_LOG("Idle, shield check");
-            Thingp curr_shield = get_equip(MONST_EQUIP_SHIELD);
-            Thingp best_shield = nullptr;
-            get_carried_shield_highest_value(&best_shield);
-            if (best_shield) {
-              auto curr_shield_val = curr_shield ? get_value(curr_shield) : 0;
-              auto best_shield_val = get_value(best_shield);
-
-              if (! curr_shield) {
-                if (use(best_shield, MONST_EQUIP_SHIELD)) {
-                  AI_LOG("Change shield", best_shield);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped shield");
-                  }
-                  return true;
-                }
-              } else if (best_shield_val > curr_shield_val) {
-                if (use(best_shield, MONST_EQUIP_SHIELD)) {
-                  AI_LOG("Change shield", best_shield);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed shield");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          if (is_able_to_use_cloak()) {
-            AI_LOG("Idle, cloak check");
-            Thingp curr_cloak = get_equip(MONST_EQUIP_CLOAK);
-            Thingp best_cloak = nullptr;
-            get_carried_cloak_highest_value(&best_cloak);
-            if (best_cloak) {
-              auto curr_cloak_val = curr_cloak ? get_value(curr_cloak) : 0;
-              auto best_cloak_val = get_value(best_cloak);
-
-              if (! curr_cloak) {
-                if (use(best_cloak, MONST_EQUIP_CLOAK)) {
-                  AI_LOG("Change cloak", best_cloak);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped cloak");
-                  }
-                  return true;
-                }
-              } else if (best_cloak_val > curr_cloak_val) {
-                if (use(best_cloak, MONST_EQUIP_CLOAK)) {
-                  AI_LOG("Change cloak", best_cloak);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed cloak");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          if (is_able_to_use_rings()) {
-            AI_LOG("Idle, ring check");
-            //
-            // Can we switch to a better ring?
-            //
-            Thingp curr_ring1 = get_equip(MONST_EQUIP_RING1);
-            Thingp curr_ring2 = get_equip(MONST_EQUIP_RING2);
-            Thingp best_ring  = nullptr;
-            get_carried_ring_highest_value(&best_ring);
-            if (best_ring) {
-              auto curr_ring1_val = curr_ring1 ? get_value(curr_ring1) : 0;
-              auto curr_ring2_val = curr_ring2 ? get_value(curr_ring2) : 0;
-              auto best_ring_val  = get_value(best_ring);
-
-              if (! curr_ring1) {
-                if (use(best_ring, MONST_EQUIP_RING1)) {
-                  AI_LOG("Change ring", best_ring);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped ring1");
-                  }
-                  return true;
-                }
-              } else if (! curr_ring2) {
-                if (use(best_ring, MONST_EQUIP_RING2)) {
-                  AI_LOG("Change ring", best_ring);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has equipped ring2");
-                  }
-                  return true;
-                }
-              } else if (best_ring_val > curr_ring1_val) {
-                if (use(best_ring, MONST_EQUIP_RING1)) {
-                  AI_LOG("Change ring", best_ring);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed ring1");
-                  }
-                  return true;
-                }
-              } else if (best_ring_val > curr_ring2_val) {
-                if (use(best_ring, MONST_EQUIP_RING2)) {
-                  AI_LOG("Change ring", best_ring);
-                  if (is_player()) {
-                    game->tick_begin("Robot, has changed ring2");
-                  }
-                  return true;
-                }
-              }
-            }
-          }
-
-          //
-          // Look around for something nearby to do; like collect an item.
-          //
-          AI_LOG("Look around for some immediately adjacent goal");
-          if (ai_choose_immediately_adjacent_goal()) {
-            return true;
-          }
-        }
-
-        //
-        // Look for goals. Each search type expands the scope of what we look at
-        // until at the end, we end up looking for the exit.
-        //
-        AI_LOG("Idle, look for goals");
-        int search_type_max;
-        if (is_able_to_jump()) {
-          if (is_explorer()) {
-            if (is_exit_finder()) {
-              search_type_max = SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED + 1;
-            } else {
-              search_type_max = SEARCH_TYPE_GLOBAL_JUMP_ALLOWED + 1;
-            }
-          } else {
-            search_type_max = SEARCH_TYPE_LOCAL_JUMP_ALLOWED + 1;
-          }
-        } else {
-          if (is_explorer()) {
-            if (is_exit_finder()) {
-              search_type_max = SEARCH_TYPE_LAST_RESORTS_NO_JUMP + 1;
-            } else {
-              search_type_max = SEARCH_TYPE_GLOBAL_NO_JUMP + 1;
-            }
-          } else {
-            search_type_max = SEARCH_TYPE_LOCAL_NO_JUMP + 1;
-          }
-        }
-
-        for (int search_type = 0; search_type < search_type_max; search_type++) {
-          if (ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
-            if (aip->move_path.size()) {
-              change_state(MONST_STATE_MOVING, "found a new goal");
-            }
-            return true;
-          }
-        }
-
-        //
-        // If going somewhere, continue
-        //
-        if (aip->wander_dest != point(0, 0)) {
-          if (pcg_random_range(0, 100) < 50) {
-            dbg("Try to continue wander");
-            if (ai_wander()) {
-              return true;
-            }
-          }
-        }
-
-        //
-        // If nothing to do, might as well rest. If there is a point.
-        //
-        auto rest = true;
-        if ((get_health() >= (get_health_max() / 4) * 3)) {
-          if (is_able_to_tire()) {
-            if (get_stamina() >= (get_stamina_max() / 4) * 3) {
-              rest = false;
-            }
-          } else {
-            rest = false;
-          }
-        }
-
-        if (rest) {
-          AI_LOG("Nothing to do. Rest.");
-          if (is_player()) {
-            game->tick_begin("nothing to do, rest");
-          }
-          change_state(MONST_STATE_RESTING, "nothing to do, rest");
-          return true;
-        }
-
-        //
-        // Compress the bag?
-        //
-        if (is_player()) {
-          if (bag_compress()) {
-            while (bag_compress()) {
-            }
-            AI_LOG("Repack inventory.");
-            if (is_player()) {
-              game->tick_begin("repacked bag");
-              return true;
-            }
-          }
-        }
-
-        //
-        // What is the point of it all?
-        //
-        AI_LOG("Nothing to do at all.");
-        if (is_player()) {
-          msg("Robot has ran out of things to do.");
-          wid_actionbar_robot_mode_off();
-        }
-
-        return ai_wander();
-      }
-      break;
-
-    case MONST_STATE_MOVING :
-      {
-        //
-        // Finished the move?
-        //
-        if (aip->move_path.empty()) {
-          AI_LOG("Move finished.");
-          if (is_player()) {
-            game->tick_begin("Robot move finished");
-          }
-          change_state(MONST_STATE_IDLE, "move finished");
-          if (is_player()) {
-            game->request_remake_actionbar = true;
-          }
-          return true;
-        }
-
-        //
-        // Keep on moving.
-        //
-        AI_LOG("Keep on moving");
-        if (is_player()) {
-          game->tick_begin("Robot move");
-        }
-        path_pop_next_move();
-        return true;
-      }
-      break;
-    case MONST_STATE_SLEEPING :
-    case MONST_STATE_RESTING :
-      {
-        //
-        // If attacked, we should be kicked out of resting
-        //
-        // If resting, check if we are rested enough.
-        //
-        if ((get_health() >= (get_health_max() / 4) * 3) && (get_stamina() >= (get_stamina_max() / 4) * 3)) {
-          AI_LOG("Rested enough. Back to work.");
-          if (is_player()) {
-            game->tick_begin("Robot has rested enough");
-          }
-          change_state(MONST_STATE_IDLE, "rested enough");
-          get_infop()->last_failed_jump_at = point(0, 0);
-          return true;
-        }
-
-        //
-        // Check for food first, before abandoning resting
-        //
-        if (eat_something()) {
-          AI_LOG("Ate an item.");
-          if (is_player()) {
-            game->tick_begin("Robot ate an item");
-          }
-          change_state(MONST_STATE_OPEN_INVENTORY, "eat something");
-          return true;
-        }
-
-        AI_LOG("Wait and rest.");
-
-        if (is_able_to_sleep()) {
-          incr_sleep_count();
-          if (get_sleep_count() > 5) {
-            change_state(MONST_STATE_SLEEPING, "time to sleep");
-          }
-        }
-
-        do_something = true;
-        wait         = true;
-        break;
-      }
-      break;
-
-    case MONST_STATE_OPEN_INVENTORY :
-      {
-        //
-        // Wait for the inventory to be remade
-        //
-        if (is_player()) {
-          if (game->request_remake_rightbar) {
-            return true;
-          }
-        }
-
-        //
-        // Then close it. This is really just visual feedback.
-        //
-        if (is_player()) {
-          change_state(MONST_STATE_REPACK_INVENTORY, "repack inventory");
-          game->tick_begin("Robot finished collecting");
-        } else {
-          change_state(MONST_STATE_IDLE, "close inventory");
-        }
-      }
-      break;
-
-    case MONST_STATE_USING_ENCHANTSTONE :
-      {
-        //
-        // Enchant a random item.
-        //
-        enchant_random_item_with_stone();
-        if (is_player()) {
-          change_state(MONST_STATE_REPACK_INVENTORY, "enchanted");
-          game->tick_begin("Robot finished enchanting");
-        } else {
-          change_state(MONST_STATE_IDLE, "enchanted");
-        }
-      }
-      break;
-
-    case MONST_STATE_USING_SKILLSTONE :
-      {
-        //
-        // Choose a skill
-        //
-        learn_random_skill();
-        if (is_player()) {
-          change_state(MONST_STATE_REPACK_INVENTORY, "added skill");
-          game->tick_begin("Robot finished adding skills");
-        } else {
-          change_state(MONST_STATE_IDLE, "added skill");
-        }
-      }
-      break;
-
-    case MONST_STATE_REPACK_INVENTORY :
-      {
-        //
-        // Compress the bag?
-        //
-        if (bag_compress()) {
-          while (bag_compress()) {
-          }
-          AI_LOG("Repacked inventory.");
-        }
-        if (is_player()) {
-          game->tick_begin("repacked bag");
-        }
-
-        //
-        // Need to go back to reseting, as this resets failed jumps once fully rested
-        // and we may have came here due to eating food when resting.
-        //
-        change_state(MONST_STATE_RESTING, "finished repacking");
-        return true;
-      }
-      break;
-  }
-
-  if (do_something) {
-    if (is_player()) {
-      player_tick(left, right, up, down, attack, wait, jump);
-    } else if (is_moveable()) {
-      move(curr_at, up, down, left, right, attack, wait, false, false);
-    }
-  }
-
-  return true;
-}
-
 void Thing::ai_get_next_hop(void)
 {
   TRACE_NO_INDENT();
@@ -2694,4 +1753,274 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
 
   AI_LOG("Could not avoid", it);
   return false;
+}
+
+//
+// Return true on having done something
+//
+bool Thing::ai_tick(bool recursing)
+{
+  dbg("AI tick");
+  TRACE_AND_INDENT();
+
+  auto aip = get_aip();
+
+  if (is_player()) {
+    if (game->things_are_moving) {
+      return false;
+    }
+
+    if (game->tick_completed != game->tick_current) {
+      return false;
+    }
+  }
+
+  if (is_dead) {
+    return false;
+  }
+
+  if (is_changing_level || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
+      is_jumping) {
+    return false;
+  }
+
+  if (level->ts_fade_in_begin) {
+    return false;
+  }
+
+  if (level->cursor) {
+    level->cursor->hide();
+  }
+
+  //
+  // Set up the extent of the AI, choosing smaller areas for monsters for
+  // speed.
+  //
+  const float dx = get_distance_vision();
+  const float dy = dx;
+
+  auto vision_source = get_vision_source();
+
+  int minx = std::max(0, (int) (vision_source.x - dx));
+  int maxx = std::min(MAP_WIDTH - 1, (int) (vision_source.x + dx));
+  int miny = std::max(0, (int) (vision_source.y - dy));
+  int maxy = std::min(MAP_HEIGHT - 1, (int) (vision_source.y + dy));
+
+  bool   left         = false;
+  bool   right        = false;
+  bool   up           = false;
+  bool   down         = false;
+  bool   attack       = false;
+  bool   wait         = false;
+  bool   jump         = false;
+  bool   do_something = false;
+  Thingp threat       = nullptr;
+
+  bool sleeping = get_infop()->monst_state == MONST_STATE_SLEEPING;
+  if (sleeping) {
+    if (level->noisemap(curr_at) > noise_level_hearing()) {
+      msg("%s awakes!", text_The().c_str());
+      change_state(MONST_STATE_IDLE, "move interrupted by a change");
+      sleeping = false;
+    }
+  }
+
+  if (! sleeping) {
+    //
+    // See if anything dangerous is close
+    //
+    threat = get_most_dangerous_visible_thing();
+    if (threat) {
+      AI_LOG("Threat", threat);
+    }
+
+    //
+    // A threat can be a few tiles away; but if one is standing literally
+    // next to us! then it takes priority.
+    //
+    auto adjacent_threat = get_most_dangerous_adjacent_thing();
+    if (adjacent_threat) {
+      AI_LOG("Adjacent threat", adjacent_threat);
+      if (is_dangerous(adjacent_threat)) {
+        threat = adjacent_threat;
+      } else {
+        AI_LOG("Adjacent threat (not dangerous)", adjacent_threat);
+        threat = nullptr;
+      }
+    }
+
+    //
+    // Update what we can see - which if a minion is from the perspective of the mob.
+    //
+    auto vision_souce = get_vision_source();
+
+    //
+    // We need to grow the light a bit for level explorers
+    //
+    if (is_explorer()) {
+      level->fov_calculete(this, &aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision() + 1);
+    } else {
+      level->fov_calculete(this, &aip->can_see_currently, vision_souce.x, vision_souce.y, get_distance_vision());
+    }
+
+    //
+    // If we have a treasure map then we know this level
+    //
+    if (map_treasure_available()) {
+      for (int y = miny; y <= maxy; y++) {
+        for (int x = minx; x <= maxx; x++) {
+          set(aip->can_see_ever.can_see, x, y, true);
+        }
+      }
+    }
+
+    //
+    // Anything we can see currently, set into the "have ever seen" array
+    //
+    for (int y = miny; y <= maxy; y++) {
+      for (int x = minx; x <= maxx; x++) {
+        if (aip->can_see_currently.can_see[ x ][ y ]) {
+          IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
+          set(aip->can_see_ever.can_see, x, y, true);
+        }
+      }
+    }
+
+    if (get_infop()->monst_state != MONST_STATE_IDLE) {
+      if (! recursing) {
+        //
+        // Check for serious interrupts
+        //
+        if (is_on_fire() && environ_avoids_fire()) {
+          AI_LOG("I am on fire!");
+          return ai_tick(true);
+        }
+
+        if (get_terrain_cost(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
+          AI_LOG("I am on some bad terrain!");
+          return ai_tick(true);
+        }
+
+        //
+        // Check for less interrupts; like a monster being seen
+        //
+        AI_LOG("Check for interruptions");
+        if (ai_dmap_can_see_init(minx, miny, maxx, maxy, MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED, true)) {
+          AI_LOG("Something interrupted me");
+          if (is_player()) {
+            game->tick_begin("Robot move interrupted by something");
+          }
+
+          change_state(MONST_STATE_IDLE, "move interrupted by a change");
+          if (is_player()) {
+            game->request_remake_actionbar = true;
+          }
+
+          //
+          // Allow another go; this stops monster's moves stuttering
+          //
+          return ai_tick(true);
+        }
+      }
+    }
+  }
+
+#if 0
+  if (is_debug_type()) {
+    con("This is my field of view:");
+    con("  .  - can see currently");
+    con("  ,  - have seen ever");
+    for (int y = 0; y < MAP_HEIGHT; y++) {
+      for (int x = 0; x < MAP_WIDTH; x++) {
+        if ((x == (int) curr_at.x) && (y == (int) curr_at.y)) {
+          printf("*");
+        } else {
+          if (get(aip->can_see_currently.can_see, x, y)) {
+            if (level->is_door(x, y)) {
+              printf("D");
+            } else if (level->is_obs_wall_or_door(x, y)) {
+              printf("X");
+            } else {
+              printf(".");
+            }
+          } else if (get(aip->can_see_ever.can_see, x, y)) {
+            if (level->is_door(x, y)) {
+              printf("D");
+            } else if (level->is_obs_wall_or_door(x, y)) {
+              printf("X");
+            } else {
+              printf(",");
+            }
+          } else {
+            if (level->is_door(x, y)) {
+              printf("d");
+            } else if (level->is_obs_wall_or_door(x, y)) {
+              printf("x");
+            } else {
+              printf(" ");
+            }
+          }
+        }
+      }
+      printf("\n");
+    }
+  }
+#endif
+  switch (get_infop()->monst_state) {
+    case MONST_STATE_IDLE :
+      if (state_idle(threat, minx, miny, maxx, maxy)) {
+        return true;
+      }
+      break;
+    case MONST_STATE_MOVING :
+      if (state_moving()) {
+        return true;
+      }
+      break;
+    case MONST_STATE_SLEEPING :
+      if (state_sleeping(do_something, wait)) {
+        return true;
+      }
+      break;
+    case MONST_STATE_RESTING :
+      if (state_resting(do_something, wait)) {
+        return true;
+      }
+      break;
+
+    case MONST_STATE_OPEN_INVENTORY :
+      if (state_open_inventory()) {
+        return true;
+      }
+      break;
+
+    case MONST_STATE_USING_ENCHANTSTONE :
+      if (state_using_enchantstone()) {
+        return true;
+      }
+      break;
+
+    case MONST_STATE_USING_SKILLSTONE :
+      if (state_using_skillstone()) {
+        return true;
+      }
+      break;
+
+    case MONST_STATE_REPACK_INVENTORY :
+      if (state_open_inventory()) {
+        return true;
+      }
+      break;
+  }
+
+  if (do_something) {
+    if (is_player()) {
+      player_tick(left, right, up, down, attack, wait, jump);
+    } else if (is_moveable()) {
+      move(curr_at, up, down, left, right, attack, wait, false, false);
+    }
+  }
+
+  return true;
 }
