@@ -4,12 +4,12 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - noise alert for broken door                                                                                                                -->
-<!-- - noise alert for explosion                                                                                                                  -->
-<!-- - axe hits all around                                                                                                                        -->
+<!-- - swamp                                                                                                                                      -->
 <!-- - swamp wort food                                                                                                                            -->
-<!-- - swamp level                                                                                                                                -->
 <!-- - monst swamp blink toad, can teleport and launch a stream of goo                                                                           -->
+<!-- - ogre and totems?                                                                                                                          -->
+<!-- - axe hits all around                                                                                                                        -->
+<!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
 <!-- - boss 2 jelly boss, spawns jellys, tries to jump splat the player                                                                           -->
 <!--          swamp wort, gas bloater and swamp tiles that allow 50% movement                                                                     -->
