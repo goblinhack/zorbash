@@ -520,9 +520,9 @@ private:
   int _unused_flag144 {};
   int _unused_flag145 {};
   int _unused_flag146 {};
-  int _unused_flag147 {};
-  int _unused_flag148 {};
-  int _noise_decibels_on_i_am_hit {};
+  int _noise_decibels_on_open {};
+  int _noise_decibels_on_you_are_hit_and_now_dead {};
+  int _noise_decibels_on_you_are_hit_but_still_alive {};
   int _unused_flag15 {};
   int _noise_decibels_hearing {};
   int _noise_blocker {};
@@ -1400,9 +1400,9 @@ public:
   int unused_flag144(void) const { return _unused_flag144; }
   int unused_flag145(void) const { return _unused_flag145; }
   int unused_flag146(void) const { return _unused_flag146; }
-  int unused_flag147(void) const { return _unused_flag147; }
-  int unused_flag148(void) const { return _unused_flag148; }
-  int noise_decibels_on_i_am_hit(void) const { return _noise_decibels_on_i_am_hit; }
+  int noise_decibels_on_open(void) const { return _noise_decibels_on_open; }
+  int noise_decibels_on_you_are_hit_and_now_dead(void) const { return _noise_decibels_on_you_are_hit_and_now_dead; }
+  int noise_decibels_on_you_are_hit_but_still_alive(void) const { return _noise_decibels_on_you_are_hit_but_still_alive; }
   int unused_flag14(void) const { return _unused_flag14; }
   int noise_decibels_hearing(void) const { return _noise_decibels_hearing; }
   int noise_blocker(void) const { return _noise_blocker; }
@@ -2028,9 +2028,9 @@ public:
   void set_unused_flag144(int v) { _unused_flag144 = v; }
   void set_unused_flag145(int v) { _unused_flag145 = v; }
   void set_unused_flag146(int v) { _unused_flag146 = v; }
-  void set_unused_flag147(int v) { _unused_flag147 = v; }
-  void set_unused_flag148(int v) { _unused_flag148 = v; }
-  void set_noise_decibels_on_i_am_hit(int v) { _noise_decibels_on_i_am_hit = v; }
+  void set_noise_decibels_on_open(int v) { _noise_decibels_on_open = v; }
+  void set_noise_decibels_on_you_are_hit_and_now_dead(int v) { _noise_decibels_on_you_are_hit_and_now_dead = v; }
+  void set_noise_decibels_on_you_are_hit_but_still_alive(int v) { _noise_decibels_on_you_are_hit_but_still_alive = v; }
   void set_unused_flag14(int v) { _unused_flag14 = v; }
   void set_noise_decibels_hearing(int v) { _noise_decibels_hearing = v; }
   void set_noise_blocker(int v) { _noise_blocker = v; }
