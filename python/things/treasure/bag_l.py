@@ -6,6 +6,7 @@ def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
     mytp.set_capacity_height(12)
     mytp.set_capacity_width(12)
+    mytp.set_collision_hit_priority(6)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_is_able_to_fall(True)

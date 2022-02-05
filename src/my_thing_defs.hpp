@@ -23,7 +23,7 @@
 #define THING_HEALTH_BLOODIED_PCT2        15   // More...
 #define THING_HEALTH_BLOODIED_PCT3        15   // More...
 #define THING_HEALTH_BLOODIED_PCT4        5    // Lots of blood on screen
-#define THING_JUMP_HEIGHT                 40   // Height in pixels
+#define THING_JUMP_HEIGHT                 20   // Height in pixels
 #define THING_JUMP_SPEED_MS               450  // Jump animation speed
 #define THING_MOVE_SPEED_FAST_MS          50   // When in robot mode, move things faster
 #define THING_MOVE_SPEED_SLOW_MS          125  // Normal movement speed

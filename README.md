@@ -5,8 +5,8 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - noise alert for sleeping monst                                                                                                             -->
 <!-- - noise alert for broken door                                                                                                                -->
+<!-- - noise alert for explosion                                                                                                                  -->
 <!-- - axe hits all around                                                                                                                        -->
 <!-- - swamp wort food                                                                                                                            -->
 <!-- - swamp level                                                                                                                                -->

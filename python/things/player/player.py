@@ -257,6 +257,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_collateral_damage_pct(90)
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(20)
+    mytp.set_collision_hit_priority(6)
     mytp.set_damage_natural_attack_type("punch")
     mytp.set_damage_natural_dice("1d6+1")
     mytp.set_distance_avoid(3)

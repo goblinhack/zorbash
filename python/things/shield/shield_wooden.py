@@ -33,6 +33,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_interesting(True)
     mytp.set_noise_decibels(25)
     mytp.set_is_item(True)
+    mytp.set_collision_hit_priority(6)
     mytp.set_is_biome_dungeon(True)
     mytp.set_is_loggable(True)
     mytp.set_is_treasure_class_a(True)

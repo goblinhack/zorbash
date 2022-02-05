@@ -11,6 +11,7 @@ def on_enchant(me, x, y):
 def tp_init(name, text_name, short_text_name):
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_collision_hit_priority(0)
+    mytp.set_collision_hit_priority(6)
     mytp.set_enchant_max(1)
     mytp.set_environ_avoids_fire(100)
     mytp.set_gold_value_dice("300")
