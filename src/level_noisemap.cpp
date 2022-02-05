@@ -291,9 +291,13 @@ void Level::update_noisemap(void)
     }
   }
 
-  noisemap_print();
+  if (0) {
+    noisemap_print();
+  }
   dmap_process(&_noisemap);
-  noisemap_print();
+  if (0) {
+    noisemap_print();
+  }
 
   _noisemap_in.val = {};
 }
