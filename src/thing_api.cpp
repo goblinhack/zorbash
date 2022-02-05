@@ -2304,16 +2304,16 @@ int Thing::unused_flag148(void)
   return (tp()->unused_flag148());
 }
 
-int Thing::unused_flag149(void)
+int Thing::noise_decibels_on_i_am_hit(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag149());
+  return (tp()->noise_decibels_on_i_am_hit());
 }
 
-int Thing::noise_level_hearing(void)
+int Thing::noise_decibels_hearing(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_level_hearing());
+  return (tp()->noise_decibels_hearing());
 }
 
 int Thing::is_immune_to_cold(void)

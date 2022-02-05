@@ -89,7 +89,7 @@ def tp_init(name, text_name):
     mytp.set_long_text_description("Possibly the corpse of one who ventured into this dungeon before. All life is gone now, and what remains is a corpse wrapped in rags. Death is no release for this poor creature. Watch out for its necrotic touch!")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_noise_decibels(5)
-    mytp.set_noise_level_hearing(50)
+    mytp.set_noise_decibels_hearing(50)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("me.on_death()")
     mytp.set_on_you_are_hit_but_still_alive_do("me.on_you_are_hit_but_still_alive()")

@@ -32,6 +32,8 @@ void Thing::change_state(int new_state, const std::string &why)
     return;
   }
 
+  auto was_sleeping = is_sleeping;
+
   std::string to;
   std::string from;
   switch (new_state) {
@@ -128,5 +130,9 @@ void Thing::change_state(int new_state, const std::string &why)
         game->wid_choose_skill();
       }
       break;
+  }
+
+  if (is_sleeping != was_sleeping) {
+    awake();
   }
 }

@@ -1817,10 +1817,13 @@ bool Thing::ai_tick(bool recursing)
   bool   do_something = false;
   Thingp threat       = nullptr;
 
+  //
+  // Wake on noise?
+  //
   is_sleeping = get_infop()->monst_state == MONST_STATE_SLEEPING;
   if (is_sleeping) {
-    if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_level_hearing()) {
-      change_state(MONST_STATE_IDLE, "move interrupted by a change");
+    if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_decibels_hearing()) {
+      wake();
     }
   }
 

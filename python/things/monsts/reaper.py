@@ -52,7 +52,7 @@ def tp_init(name, text_name):
     mytp.set_is_undead(True)
     mytp.set_long_text_description("A lesser reaper. You cannot defeat what does not live!")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
-    mytp.set_noise_level_hearing(0)
+    mytp.set_noise_decibels_hearing(0)
     mytp.set_normal_placement_rules(True)
     mytp.set_rarity(my.RARITY_VERY_RARE)
     mytp.set_resurrect_dice("1d10+30")

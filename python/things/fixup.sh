@@ -449,8 +449,8 @@ do
       set_unused_flag146 \
       set_unused_flag147 \
       set_unused_flag148 \
-      set_unused_flag149 \
-      set_noise_level_hearing \
+      set_noise_decibels_on_i_am_hit \
+      set_noise_decibels_hearing \
       set_noise_blocker \
       set_is_immune_to_cold \
       set_is_breather \

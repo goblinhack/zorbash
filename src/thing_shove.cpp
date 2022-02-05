@@ -93,6 +93,11 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   point shove_delta = delta;
   point shove_pos   = it->curr_at + shove_delta;
 
+  //
+  // Wake on shove
+  //
+  it->wake();
+
   if (it->monst_size() - monst_size() > 1) {
     if (is_player()) {
       msg("%s is too large to be shoved!", it->text_The().c_str());
