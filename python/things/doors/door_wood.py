@@ -43,7 +43,7 @@ def tp_init(name):
     mytp.set_is_obs_wall_or_door(True)
     mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_noise_blocker(True)
-    mytp.set_noise_decibels(50)
+    mytp.set_noise_decibels_on_i_am_hit(50)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("me.on_death()")
     mytp.set_on_death_is_open(True)

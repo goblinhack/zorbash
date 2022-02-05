@@ -489,6 +489,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     return false;
   }
 
+  //
+  // Too tired to attack
+  //
   if (is_able_to_tire()) {
     if (get_stamina() < 5) {
       if (is_player()) {
@@ -1006,6 +1009,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
   return false;
 }
+
 bool Thing::natural_attack(Thingp victim) { return attack(victim, true); }
 
 int Thing::is_attacked_with_damage_melee(Thingp hitter, int damage)

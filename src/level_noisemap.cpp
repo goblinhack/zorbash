@@ -65,26 +65,38 @@ void Level::incr_noisemap(const int x, const int y)
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  uint8_t v = get(_noisemap.val, x, y);
-  if (v < 255) {
-    set(_noisemap.val, x, y, (uint8_t) (v + 1));
+  int v = get_no_check(_noisemap.val, x, y) + 1;
+  if (v > LEVEL_LOUDEST_SOUND) {
+    v = LEVEL_LOUDEST_SOUND;
   }
+  if (v < 0) {
+    v = 0;
+  }
+  set_no_check(_noisemap.val, x, y, (uint8_t) v);
 }
 
 void Level::incr_noisemap_no_check(const int x, const int y, int dv)
 {
-  uint8_t v = get_no_check(_noisemap.val, x, y);
-  if (v < 255) {
-    set_no_check(_noisemap.val, x, y, (uint8_t) (v + dv));
+  int v = get_no_check(_noisemap.val, x, y) + 1;
+  if (v > LEVEL_LOUDEST_SOUND) {
+    v = LEVEL_LOUDEST_SOUND;
   }
+  if (v < 0) {
+    v = 0;
+  }
+  set_no_check(_noisemap.val, x, y, (uint8_t) v);
 }
 
 void Level::incr_noisemap_no_check(const int x, const int y)
 {
-  uint8_t v = get_no_check(_noisemap.val, x, y);
-  if (v < 255) {
-    set_no_check(_noisemap.val, x, y, (uint8_t) (v + 1));
+  int v = get_no_check(_noisemap.val, x, y) + 1;
+  if (v > LEVEL_LOUDEST_SOUND) {
+    v = LEVEL_LOUDEST_SOUND;
   }
+  if (v < 0) {
+    v = 0;
+  }
+  set_no_check(_noisemap.val, x, y, (uint8_t) v);
 }
 
 void Level::unset_noisemap(const int x, const int y)
@@ -117,31 +129,68 @@ uint8_t Level::noisemap_in(const int x, const int y)
 
 uint8_t Level::noisemap_in_no_check(const int x, const int y) { return (get_no_check(_noisemap_in.val, x, y)); }
 
+void Level::set_noisemap_in(const int x, const int y, uint8_t v)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_noisemap_in.val, x, y, v);
+}
+
+void Level::set_noisemap_in_no_check(const int x, const int y, uint8_t v) { set_no_check(_noisemap_in.val, x, y, v); }
+
+void Level::incr_noisemap_in(const int x, const int y, int dv)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  int v = get_no_check(_noisemap_in.val, x, y) + dv;
+  if (v > LEVEL_LOUDEST_SOUND) {
+    v = LEVEL_LOUDEST_SOUND;
+  }
+  if (v < 0) {
+    v = 0;
+  }
+  set_no_check(_noisemap_in.val, x, y, (uint8_t) v);
+}
+
 void Level::incr_noisemap_in(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
   }
-  uint8_t v = get(_noisemap_in.val, x, y);
-  if (v < 255) {
-    set(_noisemap_in.val, x, y, (uint8_t) (v + 1));
+  int v = get_no_check(_noisemap_in.val, x, y) + 1;
+  if (v > LEVEL_LOUDEST_SOUND) {
+    v = LEVEL_LOUDEST_SOUND;
   }
+  if (v < 0) {
+    v = 0;
+  }
+  set_no_check(_noisemap_in.val, x, y, (uint8_t) v);
 }
 
 void Level::incr_noisemap_in_no_check(const int x, const int y, int dv)
 {
-  uint8_t v = get_no_check(_noisemap_in.val, x, y);
-  if (v < 255) {
-    set_no_check(_noisemap_in.val, x, y, (uint8_t) (v + dv));
+  int v = get_no_check(_noisemap_in.val, x, y) + dv;
+  if (v > LEVEL_LOUDEST_SOUND) {
+    v = LEVEL_LOUDEST_SOUND;
   }
+  if (v < 0) {
+    v = 0;
+  }
+  set_no_check(_noisemap_in.val, x, y, (uint8_t) v);
 }
 
 void Level::incr_noisemap_in_no_check(const int x, const int y)
 {
-  uint8_t v = get_no_check(_noisemap_in.val, x, y);
-  if (v < 255) {
-    set_no_check(_noisemap_in.val, x, y, (uint8_t) (v + 1));
+  int v = get_no_check(_noisemap_in.val, x, y) + 1;
+  if (v > LEVEL_LOUDEST_SOUND) {
+    v = LEVEL_LOUDEST_SOUND;
   }
+  if (v < 0) {
+    v = 0;
+  }
+  set_no_check(_noisemap_in.val, x, y, (uint8_t) v);
 }
 
 void Level::unset_noisemap_in(const int x, const int y)

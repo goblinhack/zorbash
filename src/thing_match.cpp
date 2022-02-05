@@ -1112,10 +1112,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag148() && (what == "unused_flag148")) {
     return true;
   }
-  if (unused_flag149() && (what == "unused_flag149")) {
+  if (noise_decibels_on_i_am_hit() && (what == "noise_decibels_on_i_am_hit")) {
     return true;
   }
-  if (noise_level_hearing() && (what == "noise_level_hearing")) {
+  if (noise_decibels_hearing() && (what == "noise_decibels_hearing")) {
     return true;
   }
   if (noise_blocker() && (what == "noise_blocker")) {
@@ -2403,11 +2403,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag148") {
     return &Thing::unused_flag148;
   }
-  if (what == "unused_flag149") {
-    return &Thing::unused_flag149;
+  if (what == "noise_decibels_on_i_am_hit") {
+    return &Thing::noise_decibels_on_i_am_hit;
   }
-  if (what == "noise_level_hearing") {
-    return &Thing::noise_level_hearing;
+  if (what == "noise_decibels_hearing") {
+    return &Thing::noise_decibels_hearing;
   }
   if (what == "noise_blocker") {
     return &Thing::noise_blocker;

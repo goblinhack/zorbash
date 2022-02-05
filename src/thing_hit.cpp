@@ -1083,6 +1083,16 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   set_tick_last_i_was_attacked(game->tick_current);
 
   //
+  // Wake on attack
+  //
+  wake();
+
+  //
+  // Set up noise, for example a door being hit
+  //
+  level->incr_noisemap_in(curr_at.x, curr_at.y, noise_decibels_on_i_am_hit());
+
+  //
   // Python callback
   //
   if (is_dead || is_dying) {

@@ -360,9 +360,9 @@ PyObject *level_unused_flag145_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag146_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag147_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag148_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag149_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_noise_decibels_on_i_am_hit_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag14_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_noise_level_hearing_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_noise_decibels_hearing_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_breather_at(PyObject *obj, PyObject *args, PyObject *keywds);
