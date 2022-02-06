@@ -42,6 +42,8 @@ def init():
             "spiderweb.2",
             "spiderweb.3",
             "spiderweb.4",
+            "spiderweb.5",
+            "spiderweb.6",
         ],
     )
 
