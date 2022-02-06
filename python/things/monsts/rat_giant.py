@@ -110,6 +110,10 @@ def tp_init(name, text_name):
     delay = 150
     mytp.set_tile("rat_giant.1", delay_ms=delay)
     mytp.set_tile("rat_giant.2", delay_ms=delay)
+    mytp.set_tile("rat_giant.3", delay_ms=delay)
+    mytp.set_tile("rat_giant.4", delay_ms=delay)
+    mytp.set_tile("rat_giant.sleeping.1", is_sleeping=True, delay_ms=delay)
+    mytp.set_tile("rat_giant.sleeping.2", is_sleeping=True, delay_ms=delay)
     mytp.set_tile("rat_giant.dead", is_dead=True, delay_ms=delay)
 
     mytp.update()

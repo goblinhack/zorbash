@@ -72,7 +72,7 @@ void Game::place_player(void)
       IF_DEBUG2
       {
         // level->thing_new("belcher", point(x + 3, y));
-        level->thing_new("rat_giant", point(x + 3, y - 2));
+        level->thing_new("spider_giant", point(x + 3, y - 2));
         level->thing_new("food_frog", point(x + 3, y - 1));
         // level->thing_new("spiderweb", point(x + 3, y));
         // level->thing_new("armor_lather", point(x, y - 2));
@@ -85,7 +85,8 @@ void Game::place_player(void)
         //  level->thing_new("map_beast", point(x + 1, y - 2));
         //  level->thing_new("fire", point(x + 2, y - 2));
         //  level->thing_new("zorblin", point(x + 1, y));
-        //  level->thing_new("zorb_pack", point(x + 2, y));
+        // level->thing_new("zorb_pack", point(x + 2, y));
+        // level->assign_leaders_and_followers();
       }
 
       LOG("INF: Placed player");

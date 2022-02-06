@@ -27,6 +27,8 @@ def tp_init(name, text_name):
     mytp.set_tile(tile=name + ".4", delay_ms=delay, frame=4)
     mytp.set_tile(tile=name + ".5", delay_ms=delay, frame=5)
     mytp.set_tile(tile=name + ".6", delay_ms=delay, frame=6)
+    mytp.set_tile(tile=name + ".1", is_sleeping=True, delay_ms=delay, frame=1)
+    mytp.set_tile(tile=name + ".2", is_sleeping=True, delay_ms=delay, frame=2)
 
     mytp.set_tile(tile=name + ".1.dead", is_dead=True, delay_ms=delay)
     mytp.set_tile(tile=name + ".2.dead", is_dead=True, delay_ms=delay)
