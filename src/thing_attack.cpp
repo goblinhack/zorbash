@@ -818,6 +818,11 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   bool crit = false;
 
   //
+  // Wake on attack
+  //
+  victim->wake();
+
+  //
   // See if we can bypass its defences
   //
   if (is_player() || is_alive_monst() || (owner && (owner->is_player() || owner->is_alive_monst()))) {

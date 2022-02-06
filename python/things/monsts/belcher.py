@@ -34,6 +34,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_health_initial_dice("1d10+10")
+    mytp.set_is_heavy(True)
     mytp.set_hunger_clock_tick_frequency(50)
     mytp.set_hunger_health_pct(95)
     mytp.set_hunger_is_insatiable(True)

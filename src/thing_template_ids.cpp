@@ -188,6 +188,8 @@ std::initializer_list< std::string > tps = {
     "food_turnip",
     "food_watermelon",
     "food_wine",
+    "gargoyle_moving",
+    "gargoyle_static",
     "gem_amber",
     "gem_amethyst",
     "gem_aventurine",

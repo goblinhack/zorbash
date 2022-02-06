@@ -443,8 +443,8 @@ do
       set_unused_flag140 \
       set_unused_flag141 \
       set_unused_flag142 \
-      set_unused_flag143 \
-      set_unused_flag144 \
+      set_gfx_health_bar_shown_when_awake_only \
+      set_gfx_show_asleep \
       set_noise_decibels_on_jumping \
       set_noise_decibels_on_born \
       set_noise_decibels_on_open \

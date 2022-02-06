@@ -701,6 +701,44 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
+PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     owner_id = 0;
+  char        *msg      = nullptr;
+  static char *kwlist[] = {(char *) "owner", (char *) "msg", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! msg) {
+    ERR("%s: No popup msg thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  //
+  // If not reachable, suppress the popup
+  //
+  if (owner->get_distance_to_player() < DMAP_IS_PASSABLE) {
+    owner->popup(msg);
+  }
+
+  Py_RETURN_NONE;
+}
+
 PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();

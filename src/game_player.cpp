@@ -72,7 +72,7 @@ void Game::place_player(void)
       IF_DEBUG2
       {
         // level->thing_new("belcher", point(x + 3, y));
-        level->thing_new("spider_giant", point(x + 3, y - 2));
+        level->thing_new("gargoyle_static", point(x + 3, y - 2));
         level->thing_new("food_frog", point(x + 3, y - 1));
         // level->thing_new("spiderweb", point(x + 3, y));
         // level->thing_new("armor_lather", point(x, y - 2));

@@ -611,6 +611,7 @@ public:
   const std::string &on_damage_poison_do(void);
   const std::string &on_damage_stat_str_do(void);
   const std::string &on_death_do(void);
+  const std::string &on_awake_do(void);
   const std::string &on_enchant_do(void);
   const std::string &on_equip_do(void);
   const std::string &on_fall_do(void);
@@ -1535,8 +1536,8 @@ public:
   int unused_flag140(void);
   int unused_flag141(void);
   int unused_flag142(void);
-  int unused_flag143(void);
-  int unused_flag144(void);
+  int gfx_health_bar_shown_when_awake_only(void);
+  int gfx_show_asleep(void);
   int noise_decibels_on_jumping(void);
   int noise_decibels_on_born(void);
   int noise_decibels_on_open(void);
