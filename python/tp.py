@@ -340,6 +340,9 @@ class Tp:
     def set_on_death_do(self, value):
         my.tp_set_on_death_do(self, value)
 
+    def set_on_awake_do(self, value):
+        my.tp_set_on_awake_do(self, value)
+
     def set_on_born_do(self, value):
         my.tp_set_on_born_do(self, value)
 
@@ -808,11 +811,11 @@ class Tp:
     def set_unused_flag142(self, value):
         my.tp_set_unused_flag142(self, value)
 
-    def set_unused_flag143(self, value):
-        my.tp_set_unused_flag143(self, value)
+    def set_gfx_health_bar_shown_when_awake_only(self, value):
+        my.tp_set_gfx_health_bar_shown_when_awake_only(self, value)
 
-    def set_unused_flag144(self, value):
-        my.tp_set_unused_flag144(self, value)
+    def set_gfx_show_asleep(self, value):
+        my.tp_set_gfx_show_asleep(self, value)
 
     def set_noise_decibels_on_jumping(self, value):
         my.tp_set_noise_decibels_on_jumping(self, value)

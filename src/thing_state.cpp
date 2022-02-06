@@ -32,7 +32,7 @@ void Thing::change_state(int new_state, const std::string &why)
     return;
   }
 
-  auto was_sleeping = is_sleeping;
+  bool was_sleeping = is_sleeping;
 
   std::string to;
   std::string from;
@@ -133,6 +133,8 @@ void Thing::change_state(int new_state, const std::string &why)
   }
 
   if (is_sleeping != was_sleeping) {
-    awake();
+    if (! is_sleeping) {
+      awake();
+    }
   }
 }

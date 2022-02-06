@@ -1083,11 +1083,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   set_tick_last_i_was_attacked(game->tick_current);
 
   //
-  // Wake on attack
-  //
-  wake();
-
-  //
   // Python callback
   //
   if (is_dead || is_dying) {

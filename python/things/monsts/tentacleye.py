@@ -63,6 +63,7 @@ def tp_init(name, text_name):
     mytp.set_is_able_to_fire_at(True)
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_able_to_sleep(True)
+    mytp.set_gfx_show_asleep(True)
     mytp.set_is_able_to_tire(True)
     mytp.set_is_attackable_by_monst(True)
     mytp.set_is_attackable_by_player(True)

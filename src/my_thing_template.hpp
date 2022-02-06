@@ -516,8 +516,8 @@ private:
   int _unused_flag140 {};
   int _unused_flag141 {};
   int _unused_flag142 {};
-  int _unused_flag143 {};
-  int _unused_flag144 {};
+  int _gfx_health_bar_shown_when_awake_only {};
+  int _gfx_show_asleep {};
   int _noise_decibels_on_jumping {};
   int _noise_decibels_on_born {};
   int _noise_decibels_on_open {};
@@ -673,6 +673,7 @@ private:
   std::string _on_damage_stat_con_do;
   std::string _on_damage_stat_str_do;
   std::string _on_death_do;
+  std::string _on_awake_do;
   std::string _on_death_of_a_follower_do;
   std::string _on_death_of_my_leader_do;
   std::string _on_enchant_do;
@@ -905,6 +906,7 @@ public:
   const std::string &on_damage_poison_do(void) const { return _on_damage_poison_do; }
   const std::string &on_damage_stat_str_do(void) const { return _on_damage_stat_str_do; }
   const std::string &on_death_do(void) const { return _on_death_do; }
+  const std::string &on_awake_do(void) const { return _on_awake_do; }
   const std::string &on_death_of_a_follower_do(void) const { return _on_death_of_a_follower_do; }
   const std::string &on_death_of_my_leader_do(void) const { return _on_death_of_my_leader_do; }
   const std::string &on_enchant_do(void) const { return _on_enchant_do; }
@@ -1396,13 +1398,16 @@ public:
   int unused_flag140(void) const { return _unused_flag140; }
   int unused_flag141(void) const { return _unused_flag141; }
   int unused_flag142(void) const { return _unused_flag142; }
-  int unused_flag143(void) const { return _unused_flag143; }
-  int unused_flag144(void) const { return _unused_flag144; }
+  int gfx_health_bar_shown_when_awake_only(void) const { return _gfx_health_bar_shown_when_awake_only; }
+  int gfx_show_asleep(void) const { return _gfx_show_asleep; }
   int noise_decibels_on_jumping(void) const { return _noise_decibels_on_jumping; }
   int noise_decibels_on_born(void) const { return _noise_decibels_on_born; }
   int noise_decibels_on_open(void) const { return _noise_decibels_on_open; }
   int noise_decibels_on_you_are_hit_and_now_dead(void) const { return _noise_decibels_on_you_are_hit_and_now_dead; }
-  int noise_decibels_on_you_are_hit_but_still_alive(void) const { return _noise_decibels_on_you_are_hit_but_still_alive; }
+  int noise_decibels_on_you_are_hit_but_still_alive(void) const
+  {
+    return _noise_decibels_on_you_are_hit_but_still_alive;
+  }
   int unused_flag14(void) const { return _unused_flag14; }
   int noise_decibels_hearing(void) const { return _noise_decibels_hearing; }
   int noise_blocker(void) const { return _noise_blocker; }
@@ -1880,6 +1885,7 @@ public:
   void set_on_damage_stat_con_do(const std::string &v) { _on_damage_stat_con_do = v; }
   void set_on_damage_stat_str_do(const std::string &v) { _on_damage_stat_str_do = v; }
   void set_on_death_do(const std::string &v) { _on_death_do = v; }
+  void set_on_awake_do(const std::string &v) { _on_awake_do = v; }
   void set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
   void set_on_death_is_open(int v) { _on_death_is_open = v; }
   void set_on_death_of_a_follower_do(const std::string &v) { _on_death_of_a_follower_do = v; }
@@ -2024,13 +2030,16 @@ public:
   void set_unused_flag140(int v) { _unused_flag140 = v; }
   void set_unused_flag141(int v) { _unused_flag141 = v; }
   void set_unused_flag142(int v) { _unused_flag142 = v; }
-  void set_unused_flag143(int v) { _unused_flag143 = v; }
-  void set_unused_flag144(int v) { _unused_flag144 = v; }
+  void set_gfx_health_bar_shown_when_awake_only(int v) { _gfx_health_bar_shown_when_awake_only = v; }
+  void set_gfx_show_asleep(int v) { _gfx_show_asleep = v; }
   void set_noise_decibels_on_jumping(int v) { _noise_decibels_on_jumping = v; }
   void set_noise_decibels_on_born(int v) { _noise_decibels_on_born = v; }
   void set_noise_decibels_on_open(int v) { _noise_decibels_on_open = v; }
   void set_noise_decibels_on_you_are_hit_and_now_dead(int v) { _noise_decibels_on_you_are_hit_and_now_dead = v; }
-  void set_noise_decibels_on_you_are_hit_but_still_alive(int v) { _noise_decibels_on_you_are_hit_but_still_alive = v; }
+  void set_noise_decibels_on_you_are_hit_but_still_alive(int v)
+  {
+    _noise_decibels_on_you_are_hit_but_still_alive = v;
+  }
   void set_unused_flag14(int v) { _unused_flag14 = v; }
   void set_noise_decibels_hearing(int v) { _noise_decibels_hearing = v; }
   void set_noise_blocker(int v) { _noise_blocker = v; }

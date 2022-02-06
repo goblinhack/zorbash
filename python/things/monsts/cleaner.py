@@ -21,6 +21,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_collision_check(True)
     mytp.set_collision_hit_priority(10)
     mytp.set_collision_hit_priority(6)
+    mytp.set_is_heavy(True)
     mytp.set_damage_digest_dice("1d40")
     mytp.set_damage_natural_attack_type("burn")
     mytp.set_damage_natural_dice("1d20")

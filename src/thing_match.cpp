@@ -1094,10 +1094,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag142() && (what == "unused_flag142")) {
     return true;
   }
-  if (unused_flag143() && (what == "unused_flag143")) {
+  if (gfx_health_bar_shown_when_awake_only() && (what == "gfx_health_bar_shown_when_awake_only")) {
     return true;
   }
-  if (unused_flag144() && (what == "unused_flag144")) {
+  if (gfx_show_asleep() && (what == "gfx_show_asleep")) {
     return true;
   }
   if (noise_decibels_on_jumping() && (what == "noise_decibels_on_jumping")) {
@@ -2385,11 +2385,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag142") {
     return &Thing::unused_flag142;
   }
-  if (what == "unused_flag143") {
-    return &Thing::unused_flag143;
+  if (what == "gfx_health_bar_shown_when_awake_only") {
+    return &Thing::gfx_health_bar_shown_when_awake_only;
   }
-  if (what == "unused_flag144") {
-    return &Thing::unused_flag144;
+  if (what == "gfx_show_asleep") {
+    return &Thing::gfx_show_asleep;
   }
   if (what == "noise_decibels_on_jumping") {
     return &Thing::noise_decibels_on_jumping;

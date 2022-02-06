@@ -354,8 +354,8 @@ PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag140_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag141_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag142_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag143_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag144_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_gfx_health_bar_shown_when_awake_only_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_gfx_show_asleep_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_decibels_on_jumping_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_decibels_on_born_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_decibels_on_open_at(PyObject *obj, PyObject *args, PyObject *keywds);

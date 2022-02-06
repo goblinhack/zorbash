@@ -26,6 +26,11 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
+  //
+  // Wake on shove
+  //
+  it->wake();
+
   if (! it->is_shovable()) {
     dbg("Not able to shove %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
@@ -93,11 +98,6 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   point shove_delta = delta;
   point shove_pos   = it->curr_at + shove_delta;
 
-  //
-  // Wake on shove
-  //
-  it->wake();
-
   if (it->monst_size() - monst_size() > 1) {
     if (is_player()) {
       msg("%s is too large to be shoved!", it->text_The().c_str());
@@ -121,10 +121,19 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   if (! it->is_dead) {
     dbg("Shove: It strength %d vs me %d", it->get_stat_str(), get_stat_str());
 
-    if (! d20roll(get_stat_str(), it->get_stat_str())) {
+    int its_strength = it->get_stat_str();
+    if (it->is_heavy()) {
+      its_strength += 4;
+    }
+
+    if (! d20roll(get_stat_str(), its_strength)) {
       if (is_player()) {
         if (it->is_monst()) {
-          msg("%s shoves you back!", it->text_The().c_str());
+          if (it->is_able_to_shove()) {
+            msg("%s shoves you back!", it->text_The().c_str());
+          } else {
+            msg("%s is resolute!", it->text_The().c_str());
+          }
         } else {
           msg("%s refuses to budge!", it->text_The().c_str());
         }

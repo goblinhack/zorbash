@@ -802,37 +802,48 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   if (tile && ! tile->is_invisible && ! is_dead && ! reflection && lit &&
       (gfx_health_bar_shown() || (gfx_health_bar_autohide() && (h < m)))) {
 
-    int h_step = (1.0 - ((float) h / (float) m)) * GAME_MONST_HEALTH_BAR_STEPS;
-    h_step     = std::min(h_step, GAME_MONST_HEALTH_BAR_STEPS);
-    h_step     = std::max(h_step, 1);
-    auto y     = blit_br.y - ((1.0 - tile->py1 /* pct */) * tile->pix_height);
-    auto x     = (blit_tl.x + blit_br.x) / 2;
+    if (is_sleeping && gfx_health_bar_shown_when_awake_only()) {
+      //
+      // Only show health when awake
+      //
+    } else {
+      int h_step = (1.0 - ((float) h / (float) m)) * GAME_MONST_HEALTH_BAR_STEPS;
+      h_step     = std::min(h_step, GAME_MONST_HEALTH_BAR_STEPS);
+      h_step     = std::max(h_step, 1);
+      auto y     = blit_br.y - ((1.0 - tile->py1 /* pct */) * tile->pix_height);
+      auto x     = (blit_tl.x + blit_br.x) / 2;
 
-    //
-    // Add health bar
-    //
-    {
-      auto index = 0;
-      if (maybe_infop()->monst_state) {
-        if (get_infop()->monst_state == MONST_STATE_SLEEPING) {
-          index = 1;
+      //
+      // Add health bar
+      //
+      {
+        auto index = 0;
+        if (maybe_infop()->monst_state) {
+          if (get_infop()->monst_state == MONST_STATE_SLEEPING) {
+            //
+            // Don't show gargoyles when snoozing for example
+            //
+            if (gfx_show_asleep()) {
+              index = 1;
+            }
+          }
         }
-      }
 
-      auto tile = get(game->tile_cache_health, index, h_step);
-      if (unlikely(! tile)) {
-        //
-        // Sleeping?
-        //
-        std::string s = "health" + std::to_string(h_step);
-        if (index) {
-          s = "health_sleeping" + std::to_string(h_step);
+        auto tile = get(game->tile_cache_health, index, h_step);
+        if (unlikely(! tile)) {
+          //
+          // Sleeping?
+          //
+          std::string s = "health" + std::to_string(h_step);
+          if (index) {
+            s = "health_sleeping" + std::to_string(h_step);
+          }
+          tile = tile_find_mand(s);
+          set(game->tile_cache_health, index, h_step, tile);
         }
-        tile = tile_find_mand(s);
-        set(game->tile_cache_health, index, h_step, tile);
-      }
 
-      tile_blit(tile, point(x - TILE_WIDTH / 2, y - TILE_HEIGHT), point(x + TILE_WIDTH / 2, y));
+        tile_blit(tile, point(x - TILE_WIDTH / 2, y - TILE_HEIGHT), point(x + TILE_WIDTH / 2, y));
+      }
     }
   }
 

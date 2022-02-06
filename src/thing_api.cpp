@@ -2268,16 +2268,16 @@ int Thing::unused_flag142(void)
   return (tp()->unused_flag142());
 }
 
-int Thing::unused_flag143(void)
+int Thing::gfx_health_bar_shown_when_awake_only(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag143());
+  return (tp()->gfx_health_bar_shown_when_awake_only());
 }
 
-int Thing::unused_flag144(void)
+int Thing::gfx_show_asleep(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag144());
+  return (tp()->gfx_show_asleep());
 }
 
 int Thing::noise_decibels_on_jumping(void)
@@ -7182,6 +7182,12 @@ const std::string &Thing::on_death_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_death_do());
+}
+
+const std::string &Thing::on_awake_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_awake_do());
 }
 
 const std::string &Thing::on_enchant_do(void)
