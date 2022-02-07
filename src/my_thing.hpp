@@ -1344,7 +1344,7 @@ public:
   int is_torch(void);
   int is_toughness_hard(void);
   int is_toughness_soft(void);
-  int is_toughness_very_tough(void);
+  int is_toughness_very_hard(void);
   int is_treasure_chest(void);
   int is_treasure_class_a(void);
   int is_treasure_class_b(void);
@@ -1535,7 +1535,7 @@ public:
   int unused_flag13(void);
   int unused_flag140(void);
   int unused_flag141(void);
-  int unused_flag142(void);
+  int is_very_heavy(void);
   int gfx_health_bar_shown_when_awake_only(void);
   int gfx_show_asleep(void);
   int noise_decibels_on_jumping(void);

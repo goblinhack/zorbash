@@ -122,9 +122,16 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     dbg("Shove: It strength %d vs me %d", it->get_stat_str(), get_stat_str());
 
     int its_strength = it->get_stat_str();
+
     if (it->is_heavy()) {
-      its_strength += 4;
+      its_strength += 10;
     }
+
+    if (it->is_very_heavy()) {
+      its_strength += 10;
+    }
+
+    log("Shove: It strength %d vs me %d", its_strength, get_stat_str());
 
     if (! d20roll(get_stat_str(), its_strength)) {
       if (is_player()) {

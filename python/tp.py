@@ -808,8 +808,8 @@ class Tp:
     def set_unused_flag141(self, value):
         my.tp_set_unused_flag141(self, value)
 
-    def set_unused_flag142(self, value):
-        my.tp_set_unused_flag142(self, value)
+    def set_is_very_heavy(self, value):
+        my.tp_set_is_very_heavy(self, value)
 
     def set_gfx_health_bar_shown_when_awake_only(self, value):
         my.tp_set_gfx_health_bar_shown_when_awake_only(self, value)
@@ -1237,8 +1237,8 @@ class Tp:
     def set_is_enchantable(self, value):
         my.tp_set_is_enchantable(self, value)
 
-    def set_is_toughness_very_tough(self, value):
-        my.tp_set_is_toughness_very_tough(self, value)
+    def set_is_toughness_very_hard(self, value):
+        my.tp_set_is_toughness_very_hard(self, value)
 
     def set_is_bones(self, value):
         my.tp_set_is_bones(self, value)

@@ -964,7 +964,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         if (victim->is_toughness_hard()) {
           break_chance *= 2;
         }
-        if (victim->is_toughness_very_tough()) {
+        if (victim->is_toughness_very_hard()) {
           break_chance *= 2;
         }
         if (d10000() < break_chance) {
@@ -981,7 +981,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         if (victim->is_toughness_hard()) {
           break_chance *= 2;
         }
-        if (victim->is_toughness_very_tough()) {
+        if (victim->is_toughness_very_hard()) {
           break_chance *= 2;
         }
         if (d10000() < break_chance) {

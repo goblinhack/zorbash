@@ -277,7 +277,7 @@ PyObject *level_is_tmp_thing_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_is_torch_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_toughness_hard_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_toughness_soft_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_toughness_very_tough_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_toughness_very_hard_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_chest_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -353,7 +353,7 @@ PyObject *level_unused_flag139_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag140_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag141_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag142_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_very_heavy_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_health_bar_shown_when_awake_only_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_show_asleep_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_decibels_on_jumping_at(PyObject *obj, PyObject *args, PyObject *keywds);

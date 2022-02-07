@@ -1202,10 +1202,10 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
   //
   // Allow rocks on the main level to be destoryed; but not in the border
   //
-  if (is_toughness_very_tough()) {
+  if (is_toughness_very_hard()) {
     if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) ||
         (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
-      IF_DEBUG2 { hitter->log("Cannot hit: %s is very_tough", to_short_string().c_str()); }
+      IF_DEBUG2 { hitter->log("Cannot hit: %s is very_hard", to_short_string().c_str()); }
       return false;
     }
   }
