@@ -399,7 +399,7 @@ private:
   int _is_torch {};
   int _is_toughness_hard {};
   int _is_toughness_soft {};
-  int _is_toughness_very_tough {};
+  int _is_toughness_very_hard {};
   int _is_treasure {};
   int _is_treasure_chest {};
   int _is_treasure_class_a {};
@@ -515,7 +515,7 @@ private:
   int _unused_flag14 {};
   int _unused_flag140 {};
   int _unused_flag141 {};
-  int _unused_flag142 {};
+  int _is_very_heavy {};
   int _gfx_health_bar_shown_when_awake_only {};
   int _gfx_show_asleep {};
   int _noise_decibels_on_jumping {};
@@ -1288,7 +1288,7 @@ public:
   int is_torch(void) const { return _is_torch; }
   int is_toughness_hard(void) const { return _is_toughness_hard; }
   int is_toughness_soft(void) const { return _is_toughness_soft; }
-  int is_toughness_very_tough(void) const { return _is_toughness_very_tough; }
+  int is_toughness_very_hard(void) const { return _is_toughness_very_hard; }
   int is_treasure_chest(void) const { return _is_treasure_chest; }
   int is_treasure_class_a(void) const { return _is_treasure_class_a; }
   int is_treasure_class_b(void) const { return _is_treasure_class_b; }
@@ -1397,7 +1397,7 @@ public:
   int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag140(void) const { return _unused_flag140; }
   int unused_flag141(void) const { return _unused_flag141; }
-  int unused_flag142(void) const { return _unused_flag142; }
+  int is_very_heavy(void) const { return _is_very_heavy; }
   int gfx_health_bar_shown_when_awake_only(void) const { return _gfx_health_bar_shown_when_awake_only; }
   int gfx_show_asleep(void) const { return _gfx_show_asleep; }
   int noise_decibels_on_jumping(void) const { return _noise_decibels_on_jumping; }
@@ -1834,7 +1834,7 @@ public:
   void set_is_torch(int v) { _is_torch = v; }
   void set_is_toughness_hard(int v) { _is_toughness_hard = v; }
   void set_is_toughness_soft(int v) { _is_toughness_soft = v; }
-  void set_is_toughness_very_tough(int v) { _is_toughness_very_tough = v; }
+  void set_is_toughness_very_hard(int v) { _is_toughness_very_hard = v; }
   void set_is_treasure_chest(int v) { _is_treasure_chest = v; }
   void set_is_treasure_class_a(int v) { _is_treasure_class_a = v; }
   void set_is_treasure_class_b(int v) { _is_treasure_class_b = v; }
@@ -2029,7 +2029,7 @@ public:
   void set_unused_flag13(int v) { _unused_flag13 = v; }
   void set_unused_flag140(int v) { _unused_flag140 = v; }
   void set_unused_flag141(int v) { _unused_flag141 = v; }
-  void set_unused_flag142(int v) { _unused_flag142 = v; }
+  void set_is_very_heavy(int v) { _is_very_heavy = v; }
   void set_gfx_health_bar_shown_when_awake_only(int v) { _gfx_health_bar_shown_when_awake_only = v; }
   void set_gfx_show_asleep(int v) { _gfx_show_asleep = v; }
   void set_noise_decibels_on_jumping(int v) { _noise_decibels_on_jumping = v; }

@@ -28,6 +28,10 @@ void tp_fixup(void)
       tp->set_is_combustible(true);
     }
 
+    if (tp->is_very_heavy()) {
+      tp->set_is_heavy(true);
+    }
+
     if (tp->is_flying()) {
       if (tp->is_shovable()) {
         DIE("Tp %s a flying thing that can be shoved, are you sure?", tp->name().c_str());

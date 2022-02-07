@@ -1032,10 +1032,10 @@ int Thing::hunger_is_insatiable(void)
   return (tp()->hunger_is_insatiable());
 }
 
-int Thing::is_toughness_very_tough(void)
+int Thing::is_toughness_very_hard(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_toughness_very_tough());
+  return (tp()->is_toughness_very_hard());
 }
 
 int Thing::is_intelligent(void)
@@ -2262,10 +2262,10 @@ int Thing::unused_flag141(void)
   return (tp()->unused_flag141());
 }
 
-int Thing::unused_flag142(void)
+int Thing::is_very_heavy(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag142());
+  return (tp()->is_very_heavy());
 }
 
 int Thing::gfx_health_bar_shown_when_awake_only(void)

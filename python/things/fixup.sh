@@ -212,7 +212,7 @@ do
       set_is_heavy \
       set_is_hittable \
       set_is_humanoid \
-      set_is_toughness_very_tough \
+      set_is_toughness_very_hard \
       set_is_intelligent \
       set_is_interesting \
       set_is_item \
@@ -442,7 +442,7 @@ do
       set_unused_flag139 \
       set_unused_flag140 \
       set_unused_flag141 \
-      set_unused_flag142 \
+      set_is_very_heavy \
       set_gfx_health_bar_shown_when_awake_only \
       set_gfx_show_asleep \
       set_noise_decibels_on_jumping \
