@@ -8903,6 +8903,7 @@ def init_tiles3():
         "gargoyle.moving.4",
         "gargoyle.moving.5",
         "gargoyle.moving.6",
+        "gargoyle.moving.7",
         "gargoyle.dead",
     ]
 

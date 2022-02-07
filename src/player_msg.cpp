@@ -25,8 +25,10 @@ bool Thing::player_is_ready_for_messages(void)
     return false;
   }
 
-  if (game->tick_current < 1) {
-    return false;
+  if (game->tick_current <= 1) {
+    if (game->tick_requested.empty()) {
+      return false;
+    }
   }
 
   if (level->is_starting || level->is_being_destroyed) {
@@ -50,8 +52,10 @@ bool Thing::player_is_ready_for_messages(std::string &why)
   }
 
   if (game->tick_current <= 1) {
-    why = "first tick";
-    return false;
+    if (game->tick_requested.empty()) {
+      why = "first tick";
+      return false;
+    }
   }
 
   if (level->is_starting) {
@@ -78,8 +82,10 @@ bool Thing::player_is_ready_for_thing_info(void)
   // No popups before the first tick
   //
   if (game->tick_current <= 1) {
-    if ((time_get_time_ms() - game->tick_begin_ms) < 100) {
-      return false;
+    if (game->tick_requested.empty()) {
+      if ((time_get_time_ms() - game->tick_begin_ms) < 100) {
+        return false;
+      }
     }
   }
 

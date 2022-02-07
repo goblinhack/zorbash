@@ -92,6 +92,15 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
     return nullptr;
   }
 
+  //
+  // The attack is immediate when we create the laser blast at the target.
+  // Sp, we need to bump the game tick at this point.
+  //
+  if (is_player()) {
+    game->tick_begin("player zapped a laser");
+    game->change_state(Game::STATE_NORMAL);
+  }
+
   auto laser = level->thing_new(laser_name, target->curr_at, this);
   if (! laser) {
     err("No laser to fire");
@@ -103,19 +112,6 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
 
   dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(), target->to_string().c_str(),
       distance(curr_at, target->curr_at));
-
-  if (! laser->is_laser()) {
-    if (is_player()) {
-      msg("I don't know how to zap %s.", laser->text_the().c_str());
-      game->tick_begin("player tried to use something they could not");
-    }
-    return nullptr;
-  }
-
-  if (is_player()) {
-    game->tick_begin("player zapped " + laser->text_the());
-    game->change_state(Game::STATE_NORMAL);
-  }
 
   level->new_laser(laser->id, target->id, start, end, game->current_move_speed, true /* follow */);
 

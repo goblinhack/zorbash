@@ -13,6 +13,14 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
+    health = my.thing_get_health(me)
+    low_health = int((my.thing_get_health_max(me) / 100.0) * 90)
+    my.topcon("{} {}".format(health, low_health))
+    if health < low_health:
+        my.thing_msg(me, "Roar! The gargoyle is unleashed!")
+        my.thing_popup(me, "Free!")
+        my.thing_polymorph(me, "gargoyle_moving")
+
 
 def on_you_miss_do(me, hitter, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
@@ -23,7 +31,6 @@ def on_you_miss_do(me, hitter, x, y):
 def on_death(me, x, y):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monst_death1"):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
-    my.thing_polymorph(me, "gargoyle_moving")
 
 
 def on_awake(me, x, y):
@@ -56,14 +63,16 @@ def tp_init(name, text_name):
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_damage_natural_attack_type("claws")
     mytp.set_damage_natural_dice("2d6")
+    mytp.set_gfx_health_bar_shown(True)
     mytp.set_gfx_health_bar_shown_when_awake_only(True)
     mytp.set_distance_vision(10)
     mytp.set_gfx_animated(True)
+    mytp.set_is_able_to_fall(True)
     mytp.set_is_heavy(True)
     mytp.set_gfx_anim_use("attack_claws")
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
-    mytp.set_health_initial_dice("19d10+76")
+    mytp.set_health_initial_dice("7d8+20")
     mytp.set_is_able_to_fire_at(True)
     mytp.set_is_able_to_see_in_the_dark(True)
     mytp.set_is_able_to_sleep(True)
