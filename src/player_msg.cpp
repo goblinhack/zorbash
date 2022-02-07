@@ -125,6 +125,7 @@ void Thing::msg(const char *fmt, ...)
 
   if (! is_player()) {
     int distance = get_distance_to_player();
+    TOPCON("DIST %d", distance);
     if (distance >= DMAP_IS_PASSABLE) {
       log("Too far for player to see msg:");
       TRACE_AND_INDENT();
