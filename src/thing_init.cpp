@@ -215,6 +215,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     } else {
       tile_curr = 0;
     }
+
+    animate();
   } else {
     auto tile = tile_random(tiles);
     if (tile) {

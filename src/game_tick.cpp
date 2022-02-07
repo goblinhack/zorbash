@@ -61,11 +61,11 @@ void Game::tick_begin_now(void)
     TRACE_AND_INDENT();
     auto player = level->player;
     if (player) {
-      TOPCON("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
-             player->to_string().c_str());
+      CON("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+          player->to_string().c_str());
     } else {
-      TOPCON("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
-             level->to_string().c_str());
+      CON("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+          level->to_string().c_str());
     }
   } else {
     CON("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
