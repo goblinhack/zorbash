@@ -451,7 +451,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       if (is_player()) {
         msg("You bask in the fire!");
       } else if (real_hitter->is_player()) {
-        msg("%s basks in the fire!", text_The().c_str());
+        msg("%s basks in the fire! You do no damage!", text_The().c_str());
       }
       return false;
     }
@@ -492,7 +492,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         if (is_player()) {
           msg("You drink in the poison!");
         } else if (real_hitter->is_player()) {
-          msg("%s drinks in the poison!", text_The().c_str());
+          msg("%s drinks in the poison! You do no damage!", text_The().c_str());
         }
         health_boost(damage);
         return false;
@@ -560,9 +560,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         if (is_immune_to_necrosis()) {
           if (hitter->is_necrotic_danger_level() || real_hitter->is_necrotic_danger_level()) {
             if (is_player()) {
-              msg("You gain con from the withering touch!");
+              msg("You gain constitution from the withering touch!");
             } else if (real_hitter->is_player()) {
-              msg("%s gains con from your withering touch!", text_The().c_str());
+              msg("%s gains constitution from your withering touch!", text_The().c_str());
             }
             incr_stat_con();
             return false;
@@ -915,7 +915,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (is_on_fire()) {
     if (is_player()) {
       if (real_hitter->is_monst()) {
-        msg("%%fg=red$You burn whilst being attacked! So cruel!%%fg=reset$");
+        msg("%%fg=red$You burn whilst being attacked!%%fg=reset$");
       }
     }
     if (hitter->set_on_fire("hit by fire due to attacking")) {

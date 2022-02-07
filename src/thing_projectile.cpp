@@ -80,6 +80,15 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
     return nullptr;
   }
 
+  //
+  // The attack is immediate when we create the projectile blast at the target.
+  // Sp, we need to bump the game tick at this point.
+  //
+  if (is_player()) {
+    game->tick_begin("player fired a projectile");
+    game->change_state(Game::STATE_NORMAL);
+  }
+
   auto projectile = level->thing_new(projectile_name, target->curr_at, this);
   if (! projectile) {
     err("No projectile to fire");
@@ -97,11 +106,6 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
       game->tick_begin("player tried to use something they could not");
     }
     return nullptr;
-  }
-
-  if (is_player()) {
-    game->tick_begin("player fired " + projectile->text_the());
-    game->change_state(Game::STATE_NORMAL);
   }
 
   level->new_projectile(projectile->id, target->id, start, end, 200, true /* follow the target */);

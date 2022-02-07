@@ -1299,7 +1299,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
       w->log(UI_LOGGING_EMPTY_LINE);
     } else {
-      w->log("%%fg=red$It will take many hits to defeat...");
+      w->log("%%fg=red$Will take many hits to defeat...");
       w->log(UI_LOGGING_EMPTY_LINE);
     }
   }
