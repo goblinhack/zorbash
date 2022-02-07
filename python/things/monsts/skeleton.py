@@ -64,7 +64,6 @@ def tp_init(name, text_name):
     mytp.set_is_bony(True)
     mytp.set_is_corpse_on_death(True)
     mytp.set_is_crushable(True)
-    mytp.set_is_debug_type(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_fearless(True)
     mytp.set_is_hittable(True)
