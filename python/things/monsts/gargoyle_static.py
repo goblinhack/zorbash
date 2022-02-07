@@ -15,7 +15,6 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
 
     health = my.thing_get_health(me)
     low_health = int((my.thing_get_health_max(me) / 100.0) * 90)
-    my.topcon("{} {}".format(health, low_health))
     if health < low_health:
         my.thing_msg(me, "Roar! The gargoyle is unleashed!")
         my.thing_popup(me, "Free!")
