@@ -351,6 +351,18 @@ bool Thing::target_attack_best(int equip, point *at)
   Thingp best = nullptr;
   point  best_hit_at;
 
+  //
+  // Look in the chosen dir first
+  //
+  if (dx || dy) {
+    std::vector< point > all_deltas = {
+        point(dx, dy),
+    };
+    if (target_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+      return target_attack_found_best(item, best, best_hit_at);
+    }
+  }
+
   if (target_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
     return target_attack_found_best(item, best, best_hit_at);
   }
