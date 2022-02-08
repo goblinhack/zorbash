@@ -910,9 +910,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         change_state(MONST_STATE_IDLE, "monst was set on fire");
       }
     }
-  }
-
-  if (is_on_fire()) {
+  } else if (is_on_fire()) {
     if (is_player()) {
       if (real_hitter->is_monst()) {
         msg("%%fg=red$You burn whilst being attacked!%%fg=reset$");
