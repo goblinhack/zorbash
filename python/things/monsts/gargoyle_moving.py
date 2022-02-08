@@ -99,7 +99,7 @@ def tp_init(name, text_name):
     mytp.set_tile("gargoyle.moving.5", delay_ms=delay)
     mytp.set_tile("gargoyle.moving.6", delay_ms=delay)
     mytp.set_tile("gargoyle.moving.7", delay_ms=delay)
-    mytp.set_tile("gargoyle.dead", is_dead=True, delay_ms=delay)
+    mytp.set_tile("gargoyle.moving.dead", is_dead=True, delay_ms=delay)
 
     mytp.update()
 

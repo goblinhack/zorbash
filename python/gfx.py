@@ -8897,6 +8897,8 @@ def init_tiles3():
         "gargoyle.1",
         "gargoyle.2",
         "gargoyle.3",
+        "gargoyle.dead",
+        "gargoyle.podium",
         "gargoyle.moving.1",
         "gargoyle.moving.2",
         "gargoyle.moving.3",
@@ -8904,7 +8906,7 @@ def init_tiles3():
         "gargoyle.moving.5",
         "gargoyle.moving.6",
         "gargoyle.moving.7",
-        "gargoyle.dead",
+        "gargoyle.moving.dead",
     ]
 
     my.tile_load_arr_sprites(
