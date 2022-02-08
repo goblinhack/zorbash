@@ -19,6 +19,7 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
         my.thing_msg(me, "Roar! The gargoyle is unleashed!")
         my.thing_popup(me, "Free!")
         my.thing_polymorph(me, "gargoyle_moving")
+        my.level_spawn_at_thing(me, "gargoyle_podium")
 
 
 def on_you_miss_do(me, hitter, x, y):
