@@ -39,7 +39,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_collision_hit_priority(6)
     mytp.set_damage_fire_chance_d1000(1000)
     mytp.set_damage_fire_dice("1d8+6")
-    mytp.set_damage_received_doubled_from_fire(True)
+    mytp.set_damage_received_doubled_from_cold(True)
     mytp.set_environ_avoids_water(100)
     mytp.set_equip_carry_anim("wand_fire_carry")
     mytp.set_gfx_animated(True)

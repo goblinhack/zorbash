@@ -6782,6 +6782,26 @@ def init_tiles1_monsts_and_items():
         "",
         "",
         #########################################################################
+        "wand_cold.1",
+        "wand_cold.2",
+        "wand_cold.3",
+        "wand_cold.4",
+        "wand_cold.5",
+        "wand_cold.6",
+        "wand_cold_carry.1",
+        "wand_cold_carry.2",
+        "wand_cold_carry.3",
+        "wand_cold_carry.4",
+        "wand_cold_carry.5",
+        "wand_cold_carry.6",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        #########################################################################
         "",
         "",
         "",
@@ -6856,26 +6876,6 @@ def init_tiles1_monsts_and_items():
         "shield_woodon_carry.4",
         "shield_woodon_carry.5",
         "shield_woodon_carry.6",
-        "",
-        "",
-        "",
-        "",
-        "",
-        #########################################################################
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
         "",
         "",
         "",
@@ -10846,6 +10846,36 @@ def init_projectile_fire_tiles():
 
 
 @timeme
+def init_projectile_cold_tiles():
+    tiles = [
+        "projectile_cold.1",
+        "projectile_cold.2",
+        "projectile_cold.3",
+        "projectile_cold.4",
+        "projectile_cold.5",
+        "projectile_cold.6",
+        "projectile_cold.7",
+        "projectile_cold.8",
+        "projectile_cold.9",
+        "projectile_cold.10",
+        "projectile_cold.11",
+        "projectile_cold.12",
+        "projectile_cold.13",
+        "projectile_cold.14",
+        "projectile_cold.15",
+        "projectile_cold.16",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/projectile_cold.tga",
+        name="projectile_cold",
+        width=32,
+        height=32,
+        arr=tiles,
+    )
+
+
+@timeme
 def init_projectile_web_tiles():
     tiles = [
         "projectile_web.1",
@@ -10930,6 +10960,7 @@ init_laser_light_fork_tiles()
 init_laser_light_tiles()
 init_light()
 init_projectile_fire_tiles()
+init_projectile_cold_tiles()
 init_projectile_web_tiles()
 init_solid()
 init_map_treasure()

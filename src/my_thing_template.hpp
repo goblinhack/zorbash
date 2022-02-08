@@ -510,11 +510,11 @@ private:
   int _unused_flag135 {};
   int _unused_flag136 {};
   int _unused_flag137 {};
-  int _unused_flag138 {};
-  int _unused_flag139 {};
+  int _damage_received_doubled_from_cold {};
+  int _is_cold {};
   int _unused_flag14 {};
-  int _unused_flag140 {};
-  int _unused_flag141 {};
+  int _is_temperature_change_sensitive {};
+  int _is_temperature {};
   int _is_very_heavy {};
   int _gfx_health_bar_shown_when_awake_only {};
   int _gfx_show_asleep {};
@@ -1392,11 +1392,11 @@ public:
   int unused_flag135(void) const { return _unused_flag135; }
   int unused_flag136(void) const { return _unused_flag136; }
   int unused_flag137(void) const { return _unused_flag137; }
-  int unused_flag138(void) const { return _unused_flag138; }
-  int unused_flag139(void) const { return _unused_flag139; }
+  int damage_received_doubled_from_cold(void) const { return _damage_received_doubled_from_cold; }
+  int is_cold(void) const { return _is_cold; }
   int unused_flag13(void) const { return _unused_flag13; }
-  int unused_flag140(void) const { return _unused_flag140; }
-  int unused_flag141(void) const { return _unused_flag141; }
+  int is_temperature_change_sensitive(void) const { return _is_temperature_change_sensitive; }
+  int is_temperature(void) const { return _is_temperature; }
   int is_very_heavy(void) const { return _is_very_heavy; }
   int gfx_health_bar_shown_when_awake_only(void) const { return _gfx_health_bar_shown_when_awake_only; }
   int gfx_show_asleep(void) const { return _gfx_show_asleep; }
@@ -2024,11 +2024,11 @@ public:
   void set_unused_flag135(int v) { _unused_flag135 = v; }
   void set_unused_flag136(int v) { _unused_flag136 = v; }
   void set_unused_flag137(int v) { _unused_flag137 = v; }
-  void set_unused_flag138(int v) { _unused_flag138 = v; }
-  void set_unused_flag139(int v) { _unused_flag139 = v; }
+  void set_damage_received_doubled_from_cold(int v) { _damage_received_doubled_from_cold = v; }
+  void set_is_cold(int v) { _is_cold = v; }
   void set_unused_flag13(int v) { _unused_flag13 = v; }
-  void set_unused_flag140(int v) { _unused_flag140 = v; }
-  void set_unused_flag141(int v) { _unused_flag141 = v; }
+  void set_is_temperature_change_sensitive(int v) { _is_temperature_change_sensitive = v; }
+  void set_is_temperature(int v) { _is_temperature = v; }
   void set_is_very_heavy(int v) { _is_very_heavy = v; }
   void set_gfx_health_bar_shown_when_awake_only(int v) { _gfx_health_bar_shown_when_awake_only = v; }
   void set_gfx_show_asleep(int v) { _gfx_show_asleep = v; }

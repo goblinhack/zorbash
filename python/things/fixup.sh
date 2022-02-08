@@ -438,10 +438,10 @@ do
       set_unused_flag135 \
       set_unused_flag136 \
       set_unused_flag137 \
-      set_unused_flag138 \
-      set_unused_flag139 \
-      set_unused_flag140 \
-      set_unused_flag141 \
+      set_damage_received_doubled_from_cold \
+      set_is_cold \
+      set_is_temperature_change_sensitive \
+      set_is_temperature \
       set_is_very_heavy \
       set_gfx_health_bar_shown_when_awake_only \
       set_gfx_show_asleep \

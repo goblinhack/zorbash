@@ -17,6 +17,7 @@ def tp_init(name):
     mytp.set_is_fire(True)
     mytp.set_is_floating(True)
     mytp.set_is_loggable(True)
+    mytp.set_is_temperature(100)
     mytp.set_is_tickable(True)
     mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_noise_decibels_on_born(70)

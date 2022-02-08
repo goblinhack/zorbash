@@ -22,6 +22,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_laser(True)
     mytp.set_is_loggable(True)
     mytp.set_is_no_tile(True)
+    mytp.set_is_temperature(100)
     mytp.set_is_tmp_thing(True)
     mytp.set_is_usable(True)
     mytp.set_on_born_do("me.on_born()")

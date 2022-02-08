@@ -1530,11 +1530,11 @@ public:
   int unused_flag135(void);
   int unused_flag136(void);
   int unused_flag137(void);
-  int unused_flag138(void);
-  int unused_flag139(void);
+  int damage_received_doubled_from_cold(void);
+  int is_cold(void);
   int unused_flag13(void);
-  int unused_flag140(void);
-  int unused_flag141(void);
+  int is_temperature_change_sensitive(void);
+  int is_temperature(void);
   int is_very_heavy(void);
   int gfx_health_bar_shown_when_awake_only(void);
   int gfx_show_asleep(void);

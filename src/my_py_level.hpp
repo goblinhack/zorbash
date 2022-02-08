@@ -348,11 +348,11 @@ PyObject *level_unused_flag134_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag135_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag136_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag137_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag138_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag139_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_damage_received_doubled_from_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag140_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag141_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_temperature_change_sensitive_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_temperature_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_very_heavy_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_health_bar_shown_when_awake_only_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_show_asleep_at(PyObject *obj, PyObject *args, PyObject *keywds);

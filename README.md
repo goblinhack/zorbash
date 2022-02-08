@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- fire then cold for cracking damage on gargoyle                                                                                               -->
+<!-- quiet slippers                                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
