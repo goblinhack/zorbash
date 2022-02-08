@@ -1,8 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- wand of cold                                                                                                                                 -->
 <!-- fire then cold for cracking damage on gargoyle                                                                                               -->
 <!-- quiet slippers                                                                                                                               -->
+<!-- haste                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

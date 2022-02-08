@@ -14,10 +14,8 @@ def on_idle(me, x, y):
 
 
 def explode(me, x, y):
-    my.thing_msg(me, "The wand of cold explodes, predictably in a coldball.")
+    my.thing_msg(me, "The wand of cold explodes, oddly in a fireball.")
     my.level_spawn_at_thing(me, "explosion_major")
-    my.level_spawn_cold_around_thing(me, "cold")
-    my.level_spawn_at_thing(me, "cold")
     my.thing_dead(me, "exploded")
 
 
@@ -58,12 +56,12 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_item(True)
     mytp.set_is_loggable(True)
     mytp.set_is_target_auto_select(True)
+    mytp.set_is_temperature(-10)
     mytp.set_is_tickable(True)  # So it can interact with cold
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure(True)
     mytp.set_is_treasure_type(True)
     mytp.set_is_usable(True)
-    mytp.set_is_very_combustible(True)
     mytp.set_is_wand(True)
     mytp.set_is_wooden(True)
     mytp.set_item_height(4)

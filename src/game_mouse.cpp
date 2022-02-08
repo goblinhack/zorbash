@@ -161,6 +161,8 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
             return true;
           }
         }
+      } else if (items.size()) {
+        game->wid_collect_create(items);
       }
     }
   }

@@ -39,6 +39,7 @@ def tp_init(
     mytp.set_is_light_blocker(True)
     mytp.set_is_obs_wall_or_door(True)
     mytp.set_is_rock(True)
+    mytp.set_is_stone(True)
     mytp.set_is_toughness_very_hard(True)
     mytp.set_is_wall(True)
     mytp.set_noise_blocker(True)
