@@ -77,7 +77,10 @@ void Thing::move_finish(void)
       BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
              ::to_string(game->config.key_wait_or_collect).c_str());
       level->describe(curr_at);
-      game->request_remake_actionbar = true;
+      //// game->request_remake_actionbar = true;
+
+      auto items = anything_to_carry();
+      game->wid_collect_create(items);
     }
   }
 

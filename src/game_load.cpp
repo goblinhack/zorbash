@@ -339,6 +339,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->ts_next_frame = load(T);
   in >> bits(my.t->tile_curr);
   in >> bits(my.t->alpha);
+  in >> bits(my.t->temperature);
   in >> bits(my.t->z_depth);
   uint8_t dir;
   in >> dir;

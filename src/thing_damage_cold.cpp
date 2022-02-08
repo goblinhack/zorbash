@@ -21,9 +21,14 @@ const Dice &Thing::get_damage_cold_dice(void)
   return (tp()->get_damage_cold_dice());
 }
 
-const std::string &Thing::get_damage_cold_dice_str(void)
+const std::string Thing::get_damage_cold_dice_str(void)
 {
   TRACE_NO_INDENT();
+
+  if (get_enchant()) {
+    return tp()->get_damage_cold_dice_str() + modifier_to_string(get_enchant());
+  }
+
   return (tp()->get_damage_cold_dice_str());
 }
 

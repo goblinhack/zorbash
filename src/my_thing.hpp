@@ -85,6 +85,11 @@ public:
   uint16_t frame_count {};
   int16_t  tp_id {-1}; // Common settings
 
+  //
+  // Used for things that are sensitive to temperature change, like stone.
+  //
+  int16_t temperature {0};
+
   uint8_t alpha {255}; // For fading
   uint8_t z_depth {};
 
@@ -561,22 +566,23 @@ public:
 
   const fpoint &get_interpolated_at(void);
 
-  const std::string  get_danger_level_str(Thingp); // Cannot return reference
-  const std::string &get_damage_natural_dice_str(void);
-  const std::string &get_damage_crush_dice_str(void);
-  const std::string &get_damage_melee_dice_str(void);
-  const std::string &get_damage_poison_dice_str(void);
-  const std::string &get_damage_future1_dice_str(void);
-  const std::string &get_damage_future2_dice_str(void);
-  const std::string &get_damage_future3_dice_str(void);
-  const std::string &get_damage_cold_dice_str(void);
-  const std::string &get_damage_fire_dice_str(void);
-  const std::string &get_damage_lightning_dice_str(void);
-  const std::string &get_damage_energy_dice_str(void);
-  const std::string &get_damage_acid_dice_str(void);
+  const std::string get_damage_acid_dice_str(void);
+  const std::string get_damage_cold_dice_str(void);
+  const std::string get_damage_crush_dice_str(void);
+  const std::string get_damage_digest_dice_str(void);
+  const std::string get_damage_energy_dice_str(void);
+  const std::string get_damage_fire_dice_str(void);
+  const std::string get_damage_future1_dice_str(void);
+  const std::string get_damage_future2_dice_str(void);
+  const std::string get_damage_future3_dice_str(void);
+  const std::string get_damage_lightning_dice_str(void);
+  const std::string get_damage_melee_dice_str(void);
+  const std::string get_damage_natural_dice_str(void);
+  const std::string get_damage_necrosis_dice_str(void);
+  const std::string get_damage_poison_dice_str(void);
+
   const std::string &equip_carry_anim(void);
-  const std::string &get_damage_digest_dice_str(void);
-  const std::string &get_damage_necrosis_dice_str(void);
+  const std::string  get_danger_level_str(Thingp); // Cannot return reference
   const std::string &get_dead_reason(void);
   const std::string &get_gold_value_dice_str(void);
   const std::string &get_health_initial_dice_str(void);

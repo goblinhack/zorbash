@@ -301,6 +301,12 @@ static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint
     wid_inventory_fini();
     player->drop(what);
     wid_inventory_init();
+
+    if (what->is_bag_item_container()) {
+      wid_inventory_fini();
+      wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
+      wid_inventory_init();
+    }
   }
 
   return true;
@@ -536,6 +542,24 @@ void wid_inventory_select_requested(Thingp selected)
   }
   game->request_inventory_thing_selected    = selected;
   game->request_inventory_thing_selected_do = true;
+
+  if (selected) {
+    auto owner = selected->get_immediate_owner();
+
+    if (selected->is_bag_item_container()) {
+      wid_inventory_fini();
+      wid_inventory_tab = WID_INVENTORY_TAB_BAG2;
+      wid_inventory_init();
+    } else if (owner && owner->is_bag_item_container()) {
+      //
+      // Stay in bag
+      //
+    } else if (wid_inventory_tab == WID_INVENTORY_TAB_BAG2) {
+      wid_inventory_fini();
+      wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
+      wid_inventory_init();
+    }
+  }
 }
 
 bool wid_inventory_over(Thingp over)

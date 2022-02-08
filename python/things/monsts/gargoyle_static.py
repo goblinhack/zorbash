@@ -89,7 +89,6 @@ def tp_init(name, text_name):
     mytp.set_is_monst(True)
     mytp.set_is_shovable(True)
     mytp.set_is_stone(True)
-    mytp.set_is_temperature_change_sensitive(True)
     mytp.set_is_tickable(True)
     mytp.set_is_toughness_very_hard(True)
     mytp.set_is_undead(True)
