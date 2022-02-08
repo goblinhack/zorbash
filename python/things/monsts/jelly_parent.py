@@ -27,6 +27,7 @@ def tp_init(name, text_name):
     mytp.set_damage_natural_attack_type("bite")
     mytp.set_damage_natural_dice("1d5")
     mytp.set_damage_received_doubled_from_fire(True)
+    mytp.set_damage_received_doubled_from_cold(True)
     mytp.set_distance_avoid(3)
     mytp.set_distance_jump(2)
     mytp.set_distance_vision(7)

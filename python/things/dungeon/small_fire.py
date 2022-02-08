@@ -24,6 +24,7 @@ def tp_init(name, text_name):
     mytp.set_is_fire(True)
     mytp.set_is_loggable(True)
     mytp.set_is_moveable(True)
+    mytp.set_is_temperature(100)
     mytp.set_is_tickable(True)
     mytp.set_lifespan_dice("1d10+10")
     mytp.set_light_color("yellow")

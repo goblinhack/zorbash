@@ -15,7 +15,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_blast_max_radius(2)
     mytp.set_collision_hit_priority(5)
     mytp.set_collision_hit_priority(6)
-    mytp.set_damage_received_doubled_from_fire(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)

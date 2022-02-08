@@ -1079,16 +1079,16 @@ bool Thing::matches(const std::string &what)
   if (unused_flag137() && (what == "unused_flag137")) {
     return true;
   }
-  if (unused_flag138() && (what == "unused_flag138")) {
+  if (damage_received_doubled_from_cold() && (what == "damage_received_doubled_from_cold")) {
     return true;
   }
-  if (unused_flag139() && (what == "unused_flag139")) {
+  if (is_cold() && (what == "is_cold")) {
     return true;
   }
-  if (unused_flag140() && (what == "unused_flag140")) {
+  if (is_temperature_change_sensitive() && (what == "is_temperature_change_sensitive")) {
     return true;
   }
-  if (unused_flag141() && (what == "unused_flag141")) {
+  if (is_temperature() && (what == "is_temperature")) {
     return true;
   }
   if (is_very_heavy() && (what == "is_very_heavy")) {
@@ -2370,17 +2370,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag137") {
     return &Thing::unused_flag137;
   }
-  if (what == "unused_flag138") {
-    return &Thing::unused_flag138;
+  if (what == "damage_received_doubled_from_cold") {
+    return &Thing::damage_received_doubled_from_cold;
   }
-  if (what == "unused_flag139") {
-    return &Thing::unused_flag139;
+  if (what == "is_cold") {
+    return &Thing::is_cold;
   }
-  if (what == "unused_flag140") {
-    return &Thing::unused_flag140;
+  if (what == "is_temperature_change_sensitive") {
+    return &Thing::is_temperature_change_sensitive;
   }
-  if (what == "unused_flag141") {
-    return &Thing::unused_flag141;
+  if (what == "is_temperature") {
+    return &Thing::is_temperature;
   }
   if (what == "is_very_heavy") {
     return &Thing::is_very_heavy;

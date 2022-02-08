@@ -22,6 +22,7 @@ def tp_init(name, text_name, tiles=[]):
     mytp.set_is_dead_on_shove(True)
     mytp.set_is_described_when_hovering_over(True)
     mytp.set_is_fire(True)
+    mytp.set_is_temperature(100)
     mytp.set_is_floor_deco(True)
     mytp.set_is_heavy(True)
     mytp.set_is_shovable(True)

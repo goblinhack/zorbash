@@ -796,17 +796,17 @@ class Tp:
     def set_unused_flag137(self, value):
         my.tp_set_unused_flag137(self, value)
 
-    def set_unused_flag138(self, value):
-        my.tp_set_unused_flag138(self, value)
+    def set_damage_received_doubled_from_cold(self, value):
+        my.tp_set_damage_received_doubled_from_cold(self, value)
 
-    def set_unused_flag139(self, value):
-        my.tp_set_unused_flag139(self, value)
+    def set_is_cold(self, value):
+        my.tp_set_is_cold(self, value)
 
-    def set_unused_flag140(self, value):
-        my.tp_set_unused_flag140(self, value)
+    def set_is_temperature_change_sensitive(self, value):
+        my.tp_set_is_temperature_change_sensitive(self, value)
 
-    def set_unused_flag141(self, value):
-        my.tp_set_unused_flag141(self, value)
+    def set_is_temperature(self, value):
+        my.tp_set_is_temperature(self, value)
 
     def set_is_very_heavy(self, value):
         my.tp_set_is_very_heavy(self, value)

@@ -20,6 +20,7 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_is_hazard(True)
     mytp.set_is_lava(True)
     mytp.set_is_loggable(True)
+    mytp.set_is_temperature(1000)
     mytp.set_light_color("red")
     mytp.set_light_power(2)
     mytp.set_text_a_or_an("")

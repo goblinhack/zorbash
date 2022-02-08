@@ -2238,28 +2238,28 @@ int Thing::unused_flag137(void)
   return (tp()->unused_flag137());
 }
 
-int Thing::unused_flag138(void)
+int Thing::damage_received_doubled_from_cold(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag138());
+  return (tp()->damage_received_doubled_from_cold());
 }
 
-int Thing::unused_flag139(void)
+int Thing::is_cold(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag139());
+  return (tp()->is_cold());
 }
 
-int Thing::unused_flag140(void)
+int Thing::is_temperature_change_sensitive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag140());
+  return (tp()->is_temperature_change_sensitive());
 }
 
-int Thing::unused_flag141(void)
+int Thing::is_temperature(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag141());
+  return (tp()->is_temperature());
 }
 
 int Thing::is_very_heavy(void)
