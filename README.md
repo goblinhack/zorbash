@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- spawn pedestal                                                                                                                               -->
-<!-- rat wakes msg                                                                                                                                -->
 <!-- fire then cold for cracking damage on gargoyle                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->

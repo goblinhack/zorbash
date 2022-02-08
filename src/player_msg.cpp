@@ -110,9 +110,19 @@ void Thing::msg(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
-  va_list args;
 
   std::string why;
+  va_list     args;
+
+  auto player = level->player;
+  if (! player) {
+    log("No player for msg: %s", why.c_str());
+    TRACE_AND_INDENT();
+    va_start(args, fmt);
+    log_(fmt, args);
+    va_end(args);
+    return;
+  }
 
   if (! player_is_ready_for_messages(why)) {
     log("Player not ready for msg: %s", why.c_str());
@@ -125,9 +135,17 @@ void Thing::msg(const char *fmt, ...)
 
   if (! is_player()) {
     int distance = get_distance_to_player();
-    TOPCON("DIST %d", distance);
     if (distance >= DMAP_IS_PASSABLE) {
-      log("Too far for player to see msg:");
+      log("Too far too see msg: %s", why.c_str());
+      TRACE_AND_INDENT();
+      va_start(args, fmt);
+      log_(fmt, args);
+      va_end(args);
+      return;
+    }
+
+    if (! level->can_see_unimpeded(player->curr_at.x, player->curr_at.y, curr_at.x, curr_at.y)) {
+      log("Cannot directly see for msg: %s", why.c_str());
       TRACE_AND_INDENT();
       va_start(args, fmt);
       log_(fmt, args);
