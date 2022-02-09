@@ -1075,7 +1075,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     incr_score(damage);
   }
 
-  hitter->topcon("T%d", hitter->get_temperature());
   incr_temperature(hitter->get_temperature());
 
   //
