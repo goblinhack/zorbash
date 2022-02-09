@@ -56,7 +56,6 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_item(True)
     mytp.set_is_loggable(True)
     mytp.set_is_target_auto_select(True)
-    mytp.set_is_temperature(-10)
     mytp.set_is_tickable(True)  # So it can interact with cold
     mytp.set_is_treasure_class_b(True)
     mytp.set_is_treasure(True)
@@ -75,6 +74,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_on_you_are_on_fire_do("me.on_fire()")
     mytp.set_projectile_name("projectile_cold")
     mytp.set_range_max(7)
+    mytp.set_temperature(-10)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A wand of cold.")
     mytp.set_z_depth(my.MAP_DEPTH_OBJ)

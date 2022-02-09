@@ -2250,16 +2250,16 @@ int Thing::is_cold(void)
   return (tp()->is_cold());
 }
 
-int Thing::is_temperature_change_sensitive(void)
+int Thing::temperature_change_sensitive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_temperature_change_sensitive());
+  return (tp()->temperature_change_sensitive());
 }
 
-int Thing::is_temperature(void)
+int Thing::temperature(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_temperature());
+  return (tp()->temperature());
 }
 
 int Thing::is_very_heavy(void)

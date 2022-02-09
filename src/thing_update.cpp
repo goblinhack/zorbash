@@ -217,6 +217,14 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
+    auto v = tpp->temperature();
+    if (unlikely(v)) {
+      set_temperature(v);
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
     auto v = tpp->distance_throw();
     if (unlikely(v)) {
       set_distance_throw(v);

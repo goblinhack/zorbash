@@ -513,8 +513,8 @@ private:
   int _damage_received_doubled_from_cold {};
   int _is_cold {};
   int _unused_flag14 {};
-  int _is_temperature_change_sensitive {};
-  int _is_temperature {};
+  int _temperature_change_sensitive {};
+  int _temperature {};
   int _is_very_heavy {};
   int _gfx_health_bar_shown_when_awake_only {};
   int _gfx_show_asleep {};
@@ -1395,8 +1395,8 @@ public:
   int damage_received_doubled_from_cold(void) const { return _damage_received_doubled_from_cold; }
   int is_cold(void) const { return _is_cold; }
   int unused_flag13(void) const { return _unused_flag13; }
-  int is_temperature_change_sensitive(void) const { return _is_temperature_change_sensitive; }
-  int is_temperature(void) const { return _is_temperature; }
+  int temperature_change_sensitive(void) const { return _temperature_change_sensitive; }
+  int temperature(void) const { return _temperature; }
   int is_very_heavy(void) const { return _is_very_heavy; }
   int gfx_health_bar_shown_when_awake_only(void) const { return _gfx_health_bar_shown_when_awake_only; }
   int gfx_show_asleep(void) const { return _gfx_show_asleep; }
@@ -2027,8 +2027,8 @@ public:
   void set_damage_received_doubled_from_cold(int v) { _damage_received_doubled_from_cold = v; }
   void set_is_cold(int v) { _is_cold = v; }
   void set_unused_flag13(int v) { _unused_flag13 = v; }
-  void set_is_temperature_change_sensitive(int v) { _is_temperature_change_sensitive = v; }
-  void set_is_temperature(int v) { _is_temperature = v; }
+  void set_temperature_change_sensitive(int v) { _temperature_change_sensitive = v; }
+  void set_temperature(int v) { _temperature = v; }
   void set_is_very_heavy(int v) { _is_very_heavy = v; }
   void set_gfx_health_bar_shown_when_awake_only(int v) { _gfx_health_bar_shown_when_awake_only = v; }
   void set_gfx_show_asleep(int v) { _gfx_show_asleep = v; }

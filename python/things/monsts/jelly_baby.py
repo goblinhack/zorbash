@@ -78,7 +78,7 @@ def tp_init(name, text_name):
     mytp.set_is_red_blood_eater(True)
     mytp.set_is_tickable(True)
     mytp.set_is_toughness_soft(True)
-    mytp.set_long_text_description("Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when threatened. This one is a baby jelly. It tends to avoid adults of its kind. So should you.")
+    mytp.set_long_text_description("Jelly jumpers are numerous, bouncy and lots of fun! They will eat almost anything, including their own. They have the annoying habit of jumping when threatened. This one is a baby jelly. It tends to avoid adults of its kind. So should you.")
     mytp.set_monst_size(my.MONST_SIZE_TINY)
     mytp.set_noise_decibels_hearing(50)
     mytp.set_normal_placement_rules(True)
