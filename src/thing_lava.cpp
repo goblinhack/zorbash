@@ -32,7 +32,7 @@ void Thing::lava_tick(void)
   }
 
   dbg("Lava tick");
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
 
   bool hit = false;
 

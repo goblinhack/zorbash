@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- smoke and gargoyle                                                                                                                           -->
 <!-- quiet slippers                                                                                                                               -->
 <!-- haste                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
