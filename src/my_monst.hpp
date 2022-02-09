@@ -147,7 +147,7 @@ public:
   int stats06             = {};
   int stats07             = {};
   int stats09             = {};
-  int stats19             = {};
+  int temperature             = {};
   int stat_str            = {};
   int stat_str_mod        = {};
   int submerged_offset    = {}; // Pixels

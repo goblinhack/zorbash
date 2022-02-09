@@ -1075,6 +1075,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     incr_score(damage);
   }
 
+  incr_temperature(hitter->get_temperature());
+
   //
   // Used by AI to know if we can relax
   //

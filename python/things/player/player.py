@@ -327,6 +327,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_noise_decibels_hearing(30)
     mytp.set_noise_decibels_on_jumping(20)
+    mytp.set_is_temperature_change_sensitive(True)
     mytp.set_noise_decibels_on_moving_or_being_carried(20)
     mytp.set_on_born_do("player.on_born()")
     mytp.set_on_damage_acid_do("player.on_damage_acid()")

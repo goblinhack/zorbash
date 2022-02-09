@@ -104,7 +104,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->stats06);
   out << bits(my.t->stats07);
   out << bits(my.t->stats09);
-  out << bits(my.t->stats19);
+  out << bits(my.t->temperature);
   out << bits(my.t->stat_str);
   out << bits(my.t->stat_str_mod);
   out << bits(my.t->submerged_offset);
@@ -282,7 +282,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   out << bits(my.t->ts_next_frame);
   out << bits(my.t->tile_curr);
   out << bits(my.t->alpha);
-  out << bits(my.t->temperature);
   out << bits(my.t->z_depth);
   uint8_t dir = my.t->dir;
   out << bits(dir);
