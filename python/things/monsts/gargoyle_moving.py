@@ -38,6 +38,7 @@ def tp_init(name, text_name):
     mytp.set_damage_natural_dice("1d6+2")
     mytp.set_distance_jump(2)
     mytp.set_distance_vision(10)
+    mytp.set_is_corpse_on_death(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_anim_use("attack_claws")
     mytp.set_gfx_health_bar_shown(True)

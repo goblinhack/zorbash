@@ -217,7 +217,7 @@ std::initializer_list< std::string > tps = {
     "laser_energy",
     "laser_light",
     "laser_light_fork",
-    "lava1",
+    "lava",
     "map_beast",
     "map_treasure",
     "mob_explosion",
