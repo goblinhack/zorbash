@@ -3897,7 +3897,7 @@ void Dungeon::add_foilage_around_water(void)
       }
 
       if (is_floor(x, y)) {
-        if (pcg_random_range(0, 100) > 50) {
+        if (pcg_random_range(0, 100) > 10) {
           continue;
         }
       }
@@ -3927,7 +3927,11 @@ void Dungeon::add_foilage_around_water(void)
       }
     next:
       if (foilage_ok == 1) {
-        putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+        if (pcg_random_range(0, 100) > 80) {
+          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::WET_GRASS);
+        } else {
+          putc(x, y, MAP_DEPTH_FLOOR2, Charmap::FOILAGE);
+        }
       }
     }
   }

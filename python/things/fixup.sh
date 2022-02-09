@@ -440,8 +440,8 @@ do
       set_unused_flag137 \
       set_damage_received_doubled_from_cold \
       set_is_cold \
-      set_is_temperature_change_sensitive \
-      set_is_temperature \
+      set_temperature_change_sensitive \
+      set_temperature \
       set_is_very_heavy \
       set_gfx_health_bar_shown_when_awake_only \
       set_gfx_show_asleep \

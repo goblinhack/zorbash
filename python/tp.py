@@ -802,11 +802,11 @@ class Tp:
     def set_is_cold(self, value):
         my.tp_set_is_cold(self, value)
 
-    def set_is_temperature_change_sensitive(self, value):
-        my.tp_set_is_temperature_change_sensitive(self, value)
+    def set_temperature_change_sensitive(self, value):
+        my.tp_set_temperature_change_sensitive(self, value)
 
-    def set_is_temperature(self, value):
-        my.tp_set_is_temperature(self, value)
+    def set_temperature(self, value):
+        my.tp_set_temperature(self, value)
 
     def set_is_very_heavy(self, value):
         my.tp_set_is_very_heavy(self, value)

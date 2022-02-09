@@ -1448,10 +1448,10 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
   }
 
   if (t->is_item()) {
-    if (t->is_temperature() < 0) {
+    if (t->temperature() < 0) {
       w->log("Is cold to the touch.", true);
       w->log(UI_LOGGING_EMPTY_LINE);
-    } else if (t->is_temperature() > 0) {
+    } else if (t->temperature() > 0) {
       w->log("Is warm to the touch.", true);
       w->log(UI_LOGGING_EMPTY_LINE);
     }

@@ -77,7 +77,7 @@ int Thing::incr_temperature(int v)
   if (v > 0) {
     if (T < 0) {
       if (is_alive_monst()) {
-        if (is_temperature_change_sensitive()) {
+        if (temperature_change_sensitive()) {
           if (is_stone()) {
             msg("%s cracks from the change in temperature.", text_The().c_str());
           } else {
@@ -90,7 +90,7 @@ int Thing::incr_temperature(int v)
   } else if (v < 0) {
     if (T > 0) {
       if (is_alive_monst()) {
-        if (is_temperature_change_sensitive()) {
+        if (temperature_change_sensitive()) {
           if (is_stone()) {
             msg("%s cracks from the change in temperature.", text_The().c_str());
           } else {
@@ -102,7 +102,7 @@ int Thing::incr_temperature(int v)
     }
   } else if (v < -100) {
     if (is_alive_monst()) {
-      if (is_temperature_change_sensitive()) {
+      if (temperature_change_sensitive()) {
         if (is_stone()) {
           msg("%s fractures from the extreme cold.", text_The().c_str());
         } else {
@@ -113,7 +113,7 @@ int Thing::incr_temperature(int v)
     }
   } else if (v > 100) {
     if (is_alive_monst()) {
-      if (is_temperature_change_sensitive()) {
+      if (temperature_change_sensitive()) {
         if (is_stone()) {
           msg("%s fractures from the extreme heat.", text_The().c_str());
         } else {

@@ -1085,10 +1085,10 @@ bool Thing::matches(const std::string &what)
   if (is_cold() && (what == "is_cold")) {
     return true;
   }
-  if (is_temperature_change_sensitive() && (what == "is_temperature_change_sensitive")) {
+  if (temperature_change_sensitive() && (what == "temperature_change_sensitive")) {
     return true;
   }
-  if (is_temperature() && (what == "is_temperature")) {
+  if (temperature() && (what == "temperature")) {
     return true;
   }
   if (is_very_heavy() && (what == "is_very_heavy")) {
@@ -2376,11 +2376,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_cold") {
     return &Thing::is_cold;
   }
-  if (what == "is_temperature_change_sensitive") {
-    return &Thing::is_temperature_change_sensitive;
+  if (what == "temperature_change_sensitive") {
+    return &Thing::temperature_change_sensitive;
   }
-  if (what == "is_temperature") {
-    return &Thing::is_temperature;
+  if (what == "temperature") {
+    return &Thing::temperature;
   }
   if (what == "is_very_heavy") {
     return &Thing::is_very_heavy;
