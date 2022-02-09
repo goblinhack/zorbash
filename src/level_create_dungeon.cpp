@@ -364,7 +364,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     }
 
     dbg2("INF: Place lava");
-    create_dungeon_place_lava(dungeon, "lava1");
+    create_dungeon_place_lava(dungeon, "lava");
     if (g_errored) {
       return false;
     }

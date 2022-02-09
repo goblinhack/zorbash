@@ -68,6 +68,7 @@ def tp_init(name, text_name):
     mytp.set_gfx_health_bar_shown_when_awake_only(True)
     mytp.set_gfx_oversized_and_on_floor(True)
     mytp.set_gfx_short_shadow_caster(True)
+    mytp.set_is_corpse_on_death(True)
     mytp.set_gfx_show_outlined(True)
     mytp.set_health_initial_dice("7d8+20")
     mytp.set_is_able_to_fall(True)

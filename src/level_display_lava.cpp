@@ -38,7 +38,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
 #define LAVA_DOWN   8
   static std::array< std::array< Tilep, LAVA_DOWN >, LAVA_ACROSS > lava;
   if (! lava[ 0 ][ 0 ]) {
-    set(lava, 0, 0, tile_find("lava1a"));
+    set(lava, 0, 0, tile_find("lavaa"));
     set(lava, 1, 0, tile_find("lava2a"));
     set(lava, 2, 0, tile_find("lava3a"));
     set(lava, 3, 0, tile_find("lava4a"));
@@ -46,7 +46,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
     set(lava, 5, 0, tile_find("lava6a"));
     set(lava, 6, 0, tile_find("lava7a"));
     set(lava, 7, 0, tile_find("lava8a"));
-    set(lava, 0, 1, tile_find("lava1b"));
+    set(lava, 0, 1, tile_find("lavab"));
     set(lava, 1, 1, tile_find("lava2b"));
     set(lava, 2, 1, tile_find("lava3b"));
     set(lava, 3, 1, tile_find("lava4b"));
@@ -54,7 +54,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
     set(lava, 5, 1, tile_find("lava6b"));
     set(lava, 6, 1, tile_find("lava7b"));
     set(lava, 7, 1, tile_find("lava8b"));
-    set(lava, 0, 2, tile_find("lava1c"));
+    set(lava, 0, 2, tile_find("lavac"));
     set(lava, 1, 2, tile_find("lava2c"));
     set(lava, 2, 2, tile_find("lava3c"));
     set(lava, 3, 2, tile_find("lava4c"));
@@ -62,7 +62,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
     set(lava, 5, 2, tile_find("lava6c"));
     set(lava, 6, 2, tile_find("lava7c"));
     set(lava, 7, 2, tile_find("lava8c"));
-    set(lava, 0, 3, tile_find("lava1d"));
+    set(lava, 0, 3, tile_find("lavad"));
     set(lava, 1, 3, tile_find("lava2d"));
     set(lava, 2, 3, tile_find("lava3d"));
     set(lava, 3, 3, tile_find("lava4d"));
@@ -70,7 +70,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
     set(lava, 5, 3, tile_find("lava6d"));
     set(lava, 6, 3, tile_find("lava7d"));
     set(lava, 7, 3, tile_find("lava8d"));
-    set(lava, 0, 4, tile_find("lava1e"));
+    set(lava, 0, 4, tile_find("lavae"));
     set(lava, 1, 4, tile_find("lava2e"));
     set(lava, 2, 4, tile_find("lava3e"));
     set(lava, 3, 4, tile_find("lava4e"));
@@ -78,7 +78,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
     set(lava, 5, 4, tile_find("lava6e"));
     set(lava, 6, 4, tile_find("lava7e"));
     set(lava, 7, 4, tile_find("lava8e"));
-    set(lava, 0, 5, tile_find("lava1f"));
+    set(lava, 0, 5, tile_find("lavaf"));
     set(lava, 1, 5, tile_find("lava2f"));
     set(lava, 2, 5, tile_find("lava3f"));
     set(lava, 3, 5, tile_find("lava4f"));
@@ -86,7 +86,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
     set(lava, 5, 5, tile_find("lava6f"));
     set(lava, 6, 5, tile_find("lava7f"));
     set(lava, 7, 5, tile_find("lava8f"));
-    set(lava, 0, 6, tile_find("lava1g"));
+    set(lava, 0, 6, tile_find("lavag"));
     set(lava, 1, 6, tile_find("lava2g"));
     set(lava, 2, 6, tile_find("lava3g"));
     set(lava, 3, 6, tile_find("lava4g"));
@@ -94,7 +94,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
     set(lava, 5, 6, tile_find("lava6g"));
     set(lava, 6, 6, tile_find("lava7g"));
     set(lava, 7, 6, tile_find("lava8g"));
-    set(lava, 0, 7, tile_find("lava1h"));
+    set(lava, 0, 7, tile_find("lavah"));
     set(lava, 1, 7, tile_find("lava2h"));
     set(lava, 2, 7, tile_find("lava3h"));
     set(lava, 3, 7, tile_find("lava4h"));
