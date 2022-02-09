@@ -85,11 +85,6 @@ public:
   uint16_t frame_count {};
   int16_t  tp_id {-1}; // Common settings
 
-  //
-  // Used for things that are sensitive to temperature change, like stone.
-  //
-  int16_t temperature {0};
-
   uint8_t alpha {255}; // For fading
   uint8_t z_depth {};
 
@@ -844,8 +839,8 @@ public:
   int decr_stats07(void);
   int decr_stats09(int);
   int decr_stats09(void);
-  int decr_stats19(int);
-  int decr_stats19(void);
+  int decr_temperature(int);
+  int decr_temperature(void);
   int decr_stat_str(int);
   int decr_stat_str_mod(int);
   int decr_stat_str_mod(void);
@@ -998,7 +993,7 @@ public:
   int get_stats06(void);
   int get_stats07(void);
   int get_stats09(void);
-  int get_stats19(void);
+  int get_temperature(void);
   int get_stat_str_mod(void);
   int get_stat_str_total(void);
   int get_stat_str(void);
@@ -1103,8 +1098,8 @@ public:
   int incr_stats07(void);
   int incr_stats09(int);
   int incr_stats09(void);
-  int incr_stats19(int);
-  int incr_stats19(void);
+  int incr_temperature(int);
+  int incr_temperature(void);
   int incr_stat_str(int);
   int incr_stat_str_mod(int);
   int incr_stat_str_mod(void);
@@ -1471,7 +1466,7 @@ public:
   int set_stats06(int);
   int set_stats07(int);
   int set_stats09(int);
-  int set_stats19(int);
+  int set_temperature(int);
   int set_stat_str(int);
   int set_stat_str_mod(int);
   int set_stuck_count(int);
@@ -1960,6 +1955,7 @@ public:
   void move_to(point to);
   void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void necrosis_tick(void);
+  void temperature_tick(void);
   void new_aip(void);
   void new_infop(void);
   void new_itemsp(void);

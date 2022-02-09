@@ -156,6 +156,14 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
+  // Cool down / heat up
+  //
+  temperature_tick();
+  if (is_dead) {
+    return;
+  }
+
+  //
   // Check for impacts
   //
   if (collision_check_do()) {
