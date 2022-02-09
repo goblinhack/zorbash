@@ -44,7 +44,10 @@ void Thing::update(void)
   auto tpp     = tp();
   int  carried = 0;
 
-  {
+  //
+  // If polymorphed, retain the same health
+  //
+  if (! get_health()) {
     TRACE_NO_INDENT();
     auto v = tpp->get_health_initial();
     if (unlikely(v)) {
@@ -53,7 +56,10 @@ void Thing::update(void)
     }
   }
 
-  {
+  //
+  // If polymorphed, retain the same health
+  //
+  if (! get_stamina()) {
     TRACE_NO_INDENT();
     auto v = tpp->stamina();
     if (unlikely(v)) {
@@ -215,7 +221,7 @@ void Thing::update(void)
     }
   }
 
-  {
+  if (! get_temperature()) {
     TRACE_NO_INDENT();
     auto v = tpp->temperature();
     if (unlikely(v)) {

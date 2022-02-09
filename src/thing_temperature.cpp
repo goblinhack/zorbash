@@ -78,12 +78,14 @@ int Thing::incr_temperature(int v)
     if (T < 0) {
       if (is_alive_monst()) {
         if (temperature_change_sensitive()) {
+          auto damage = (v - T) / 10;
+          is_attacked_with_damage_fire(this, damage);
           if (is_stone()) {
-            msg("%s cracks from the change in temperature.", text_The().c_str());
+            popup("Crack!");
+            msg("%s cracks from the change in temperature for %d damage.", text_The().c_str(), damage);
           } else {
-            msg("%s suffers from the change in temperature.", text_The().c_str());
+            msg("%s suffers from the change in temperature for %d damage.", text_The().c_str(), damage);
           }
-          is_attacked_with_damage_fire(this, (v - T) / 10);
         }
       }
     }
@@ -91,35 +93,41 @@ int Thing::incr_temperature(int v)
     if (T > 0) {
       if (is_alive_monst()) {
         if (temperature_change_sensitive()) {
+          auto damage = (T - v) / 10;
+          is_attacked_with_damage_cold(this, damage);
           if (is_stone()) {
-            msg("%s cracks from the change in temperature.", text_The().c_str());
+            popup("Crack!");
+            msg("%s cracks from the change in temperature for %d damage.", text_The().c_str(), damage);
           } else {
-            msg("%s suffers from the change in temperature.", text_The().c_str());
+            msg("%s suffers from the change in temperature for %d damage.", text_The().c_str(), damage);
           }
-          is_attacked_with_damage_cold(this, (T - v) / 10);
         }
       }
     }
   } else if (v < -100) {
     if (is_alive_monst()) {
       if (temperature_change_sensitive()) {
+        auto damage = abs(v) / 10;
+        is_attacked_with_damage_fire(this, damage);
         if (is_stone()) {
-          msg("%s fractures from the extreme cold.", text_The().c_str());
+          popup("Crack!");
+          msg("%s fractures from the extreme cold for %d damage.", text_The().c_str(), damage);
         } else {
-          msg("%s suffers from the extreme cold.", text_The().c_str());
+          msg("%s suffers from the extreme cold for %d damage.", text_The().c_str(), damage);
         }
-        is_attacked_with_damage_fire(this, abs(v) / 10);
       }
     }
   } else if (v > 100) {
     if (is_alive_monst()) {
       if (temperature_change_sensitive()) {
+        auto damage = abs(v) / 10;
+        is_attacked_with_damage_cold(this, damage);
         if (is_stone()) {
-          msg("%s fractures from the extreme heat.", text_The().c_str());
+          popup("Crack!");
+          msg("%s fractures from the extreme heat for %d damage.", text_The().c_str(), damage);
         } else {
-          msg("%s suffers from the extreme heat.", text_The().c_str());
+          msg("%s suffers from the extreme heat for %d damage.", text_The().c_str(), damage);
         }
-        is_attacked_with_damage_cold(this, abs(v) / 10);
       }
     }
   }
