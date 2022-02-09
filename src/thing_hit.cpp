@@ -668,10 +668,6 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           msg("%%fg=yellow$Poison circulates through your veins for %s%d damage!%%fg=reset$", damage_type.c_str(),
               damage);
         }
-      } else if (attack_necrosis) {
-        msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
-      } else if (crit) {
-        msg("%%fg=red$You CRIT yourself for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
       } else if (hitter->is_weapon()) {
         msg("%%fg=orange$You hit yourself for %d %sdamage with %s!%%fg=reset$", damage, damage_type.c_str(),
             hitter->text_the().c_str());
@@ -681,6 +677,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       } else if (hitter->is_item_magical()) {
         msg("%%fg=orange$You blast yourself for %d %sdamage with %s!%%fg=reset$", damage, damage_type.c_str(),
             hitter->text_the().c_str());
+      } else if (attack_fire) {
+        msg("%%fg=orange$You burn for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
+      } else if (attack_cold) {
+        msg("%%fg=orange$You blister for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
+      } else if (attack_necrosis) {
+        msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else {
         msg("%%fg=orange$You hurt yourself for %d %sdamage with %s!%%fg=reset$", damage, damage_type.c_str(),
             hitter->text_the().c_str());
@@ -1071,16 +1073,19 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     dbg("Is hit by (%s) %u damage, health now %d", real_hitter->to_short_string().c_str(), damage, h);
   }
 
-  if (is_player()) {
-    incr_score(damage);
-  }
-
-  incr_temperature(hitter->get_temperature());
-
   //
   // Used by AI to know if we can relax
   //
   set_tick_last_i_was_attacked(game->tick_current);
+
+  if (is_player()) {
+    incr_score(damage);
+  }
+
+  //
+  // This might trigger more damage
+  //
+  incr_temperature(hitter->get_temperature());
 
   //
   // Python callback

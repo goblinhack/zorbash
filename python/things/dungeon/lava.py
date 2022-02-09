@@ -22,7 +22,7 @@ def lava_init(name, text_name, tiles=[]):
     mytp.set_is_loggable(True)
     mytp.set_light_color("red")
     mytp.set_light_power(2)
-    mytp.set_temperature(1000)
+    mytp.set_temperature(800)
     mytp.set_text_a_or_an("")
     mytp.set_text_description("%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto).")
     mytp.set_text_hits("tickles")
