@@ -77,7 +77,6 @@ void Thing::move_finish(void)
       BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",
              ::to_string(game->config.key_wait_or_collect).c_str());
       level->describe(curr_at);
-      //// game->request_remake_actionbar = true;
 
       auto items = anything_to_carry();
       game->wid_collect_create(items);
@@ -119,6 +118,7 @@ void Thing::move_finish(void)
   // Something moved
   //
   if (curr_at != last_at) {
+    level->incr_noisemap_in(curr_at.x, curr_at.y, get_noise_total());
     level->set_is_map_changed(curr_at.x, curr_at.y);
   }
 }

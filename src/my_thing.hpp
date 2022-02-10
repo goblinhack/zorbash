@@ -799,6 +799,7 @@ public:
   int decr_necrotized_amount(int);
   int decr_necrotized_amount(void);
   int decr_noise(int);
+  int get_noise_total(void);
   int decr_noise(void);
   int decr_owned_count(int);
   int decr_owned_count(void);

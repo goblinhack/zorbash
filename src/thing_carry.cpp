@@ -270,7 +270,13 @@ bool Thing::carry(Thingp item, bool can_equip)
   } else {
     if (game->tick_current > 1) {
       if (is_player()) {
-        msg("You carry %s.", item->text_the().c_str());
+        if (equipped) {
+          //
+          // We've already said you put on the boots
+          //
+        } else {
+          msg("You carry %s.", item->text_the().c_str());
+        }
       } else if (is_monst() && ! is_offscreen) {
         if (level->player && (level->tick_created < game->tick_current)) {
           if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {

@@ -196,6 +196,7 @@ public:
   void wid_save_select(void);
   void wid_thing_info_add_attack(WidPopup *w, Thingp t);
   void wid_thing_info_add_carry_info(WidPopup *w, Thingp t);
+  void wid_thing_info_add_noise(WidPopup *w, Thingp t);
   void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_acid(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_cold(WidPopup *w, Thingp t);

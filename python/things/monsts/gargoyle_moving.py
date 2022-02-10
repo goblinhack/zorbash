@@ -72,7 +72,7 @@ def tp_init(name, text_name):
     mytp.set_is_very_heavy(True)
     mytp.set_long_text_description("These monstrous creatures guard the dungeon from the likes of you. This particular gargoyle has been unleashed, to roam the dungeon with impunitiy.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
-    mytp.set_noise_decibels_hearing(50)
+    mytp.set_noise_decibels_hearing(60)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("me.on_death()")
     mytp.set_on_firing_at_something_do("me.on_firing_at_something()")
