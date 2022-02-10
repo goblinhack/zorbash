@@ -445,16 +445,16 @@ do
       set_is_very_heavy \
       set_gfx_health_bar_shown_when_awake_only \
       set_gfx_show_asleep \
-      set_noise_decibels_on_jumping \
-      set_noise_decibels_on_born \
-      set_noise_decibels_on_open \
-      set_noise_decibels_on_you_are_hit_and_now_dead \
-      set_noise_decibels_on_you_are_hit_but_still_alive \
+      set_noise_on_jumping \
+      set_noise_on_born \
+      set_noise_on_open \
+      set_noise_on_you_are_hit_and_now_dead \
+      set_noise_on_you_are_hit_but_still_alive \
       set_noise_decibels_hearing \
       set_noise_blocker \
       set_is_immune_to_cold \
       set_is_breather \
-      set_noise_decibels_on_moving_or_being_carried \
+      set_noise_on_moving_or_being_carried \
       set_is_asleep_initially \
       set_is_able_to_sleep \
       set_is_obstacle_when_dead \

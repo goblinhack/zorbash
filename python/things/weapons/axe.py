@@ -48,7 +48,7 @@ def init_weapon(name, text_name, short_text_name):
     mytp.set_item_height(6)
     mytp.set_item_width(6)
     mytp.set_long_text_description("A gleaming wooden handled axe. It's edge is hungry.")
-    mytp.set_noise_decibels_on_moving_or_being_carried(15)
+    mytp.set_noise_on_moving_or_being_carried(15)
     mytp.set_on_use_do("me.on_use()")
     mytp.set_rarity(my.RARITY_UNCOMMON)
     mytp.set_stat_att_mod(1)  # means +1 per enchant

@@ -626,7 +626,7 @@ void Thing::jump_end(void)
   //
   // Mainly for explosions
   //
-  level->incr_noisemap_in(curr_at.x, curr_at.y, noise_decibels_on_jumping());
+  level->incr_noisemap_in(curr_at.x, curr_at.y, noise_on_jumping());
 
   //
   // Need this so that if we land on a chasm we fall immediately

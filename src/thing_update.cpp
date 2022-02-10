@@ -229,6 +229,17 @@ void Thing::update(void)
     }
   }
 
+  //
+  // Allow polymorph to change noise
+  //
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->noise_on_moving_or_being_carried();
+    if (unlikely(v)) {
+      set_noise(v);
+    }
+  }
+
   {
     TRACE_NO_INDENT();
     auto v = tpp->distance_throw();
@@ -462,7 +473,7 @@ void Thing::update(void)
   // Initial equip of helmet
   //
   if (is_able_to_use_helmet()) {
-    dbg("Armor equip");
+    dbg("Helmet equip");
     TRACE_AND_INDENT();
 
     Thingp best_helmet = nullptr;
@@ -476,7 +487,7 @@ void Thing::update(void)
   // Initial equip of amulet
   //
   if (is_able_to_use_amulet()) {
-    dbg("Armor equip");
+    dbg("Amulet equip");
     TRACE_AND_INDENT();
 
     Thingp best_amulet = nullptr;
@@ -490,7 +501,7 @@ void Thing::update(void)
   // Initial equip of boots
   //
   if (is_able_to_use_boots()) {
-    dbg("Armor equip");
+    dbg("Boos equip");
     TRACE_AND_INDENT();
 
     Thingp best_boots = nullptr;
@@ -504,7 +515,7 @@ void Thing::update(void)
   // Initial equip of gauntlet
   //
   if (is_able_to_use_gauntlet()) {
-    dbg("Armor equip");
+    dbg("Gauntlet equip");
     TRACE_AND_INDENT();
 
     Thingp best_gauntlet = nullptr;
@@ -518,7 +529,7 @@ void Thing::update(void)
   // Initial equip of cloak
   //
   if (is_able_to_use_cloak()) {
-    dbg("Armor equip");
+    dbg("Cloak equip");
     TRACE_AND_INDENT();
 
     Thingp best_cloak = nullptr;
@@ -532,7 +543,7 @@ void Thing::update(void)
   // Initial equip of shield
   //
   if (is_able_to_use_shield()) {
-    dbg("Armor equip");
+    dbg("Shield equip");
     TRACE_AND_INDENT();
 
     Thingp best_shield = nullptr;

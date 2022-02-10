@@ -68,7 +68,7 @@ bool Thing::open(Thingp it)
   update_light();
   level->request_dmap_to_player_update = true;
 
-  level->incr_noisemap_in(it->curr_at.x, it->curr_at.y, it->noise_decibels_on_open());
+  level->incr_noisemap_in(it->curr_at.x, it->curr_at.y, it->noise_on_open());
 
   return true;
 }
