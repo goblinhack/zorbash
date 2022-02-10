@@ -304,7 +304,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_activated ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_attached ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_being_destroyed ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_scheduled_for_gc ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_bouncing ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_changing_level ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_dead ? 1LLU : 0LLU) << shift; shift++;
@@ -312,7 +311,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_facing_left ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_fadeup ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_falling ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_ring2 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hidden ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hungry ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_in_lava ? 1LLU : 0LLU) << shift; shift++;
@@ -324,7 +322,9 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_resurrected ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrecting ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrection_blocked ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_ring2 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_death ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_scheduled_for_gc ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_jump_end ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_sleeping ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_starving ? 1LLU : 0LLU) << shift; shift++;

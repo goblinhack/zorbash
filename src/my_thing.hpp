@@ -103,7 +103,6 @@ public:
   uint64_t has_projectile                               : 1 {}; // current projectile being fired
   uint64_t is_activated                                 : 1 {}; // this skill is activated
   uint64_t is_attached                                  : 1 {}; // is attached to the level
-  uint64_t is_scheduled_for_gc                          : 1 {};
   uint64_t is_being_destroyed                           : 1 {};
   uint64_t is_bouncing                                  : 1 {};
   uint64_t is_changing_level                            : 1 {}; // is in the process of changing level
@@ -112,7 +111,6 @@ public:
   uint64_t is_facing_left                               : 1 {};
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
-  uint64_t is_ring2                                     : 1 {}; // for 2nd rings
   uint64_t is_hidden                                    : 1 {};
   uint64_t is_hungry                                    : 1 {};
   uint64_t is_in_lava                                   : 1 {};
@@ -124,7 +122,9 @@ public:
   uint64_t is_resurrected                               : 1 {}; // has finished resurrecting
   uint64_t is_resurrecting                              : 1 {}; // is currently resurrecing
   uint64_t is_resurrection_blocked                      : 1 {}; // blocked from resurrection
+  uint64_t is_ring2                                     : 1 {}; // for 2nd rings
   uint64_t is_scheduled_for_death                       : 1 {}; // will die in next game loop
+  uint64_t is_scheduled_for_gc                          : 1 {};
   uint64_t is_scheduled_for_jump_end                    : 1 {};
   uint64_t is_sleeping                                  : 1 {};
   uint64_t is_starving                                  : 1 {};
