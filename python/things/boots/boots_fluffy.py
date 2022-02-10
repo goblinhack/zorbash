@@ -11,7 +11,7 @@ def on_equip(owner, me, x, y):
 
 def on_unequip(owner, me, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "Your feet are cold againk!")
+        my.thing_msg(me, "Your feet are cold again!")
 
 
 def on_enchant(me, x, y):

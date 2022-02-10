@@ -26,6 +26,64 @@ int Thing::noise(void)
   }
 }
 
+int Thing::get_noise_total(void)
+{
+  TRACE_NO_INDENT();
+  if (! maybe_infop()) {
+    return 0;
+  }
+
+  auto decibels = noise();
+  // con("NOISE %d", decibels);
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto it = get_equip(e);
+    if (it) {
+      decibels += it->noise();
+      // it->con("NOISE %d", decibels);
+    }
+  }
+
+  if (maybe_itemsp()) {
+    FOR_ALL_CARRYING(id)
+    {
+      auto it = level->thing_find(id);
+      if (it) {
+        decibels += it->noise();
+        // it->con("NOISE %d", decibels);
+      }
+    }
+
+    FOR_ALL_BUFFS_FOR(this, id)
+    {
+      auto it = level->thing_find(id);
+      if (it) {
+        decibels += it->noise();
+        // it->con("NOISE %d", decibels);
+      }
+    }
+
+    FOR_ALL_DEBUFFS_FOR(this, id)
+    {
+      auto it = level->thing_find(id);
+      if (it) {
+        decibels += it->noise();
+        // it->con("NOISE %d", decibels);
+      }
+    }
+
+    FOR_ALL_SKILLS_FOR(this, id)
+    {
+      auto it = level->thing_find(id);
+      if (it) {
+        decibels += it->noise();
+      }
+    }
+  }
+  return decibels;
+}
+
 int Thing::set_noise(int v)
 {
   TRACE_NO_INDENT();

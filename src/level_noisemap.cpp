@@ -219,64 +219,6 @@ void Level::update_noisemap(void)
 
       int decibels = noisemap_in_no_check(x, y);
 
-      FOR_ALL_THINGS_THAT_INTERACT(this, t, x, y)
-      {
-        if (t->noise_blocker()) {
-          continue;
-        }
-
-        if (t->is_open || t->is_dead) {
-          continue;
-        }
-
-        if (t->is_item()) {
-          continue;
-        }
-
-        if (t->get_idle_count() || t->get_stuck_count()) {
-          continue;
-        }
-
-        decibels += t->noise();
-
-        FOR_ALL_EQUIP(e)
-        {
-          auto it = t->get_equip(e);
-          if (it) {
-            decibels += it->noise();
-          }
-        }
-
-        if (t->maybe_itemsp()) {
-          FOR_ALL_BUFFS_FOR(t, id)
-          {
-            auto it = thing_find(id);
-            if (it) {
-              decibels += it->noise();
-            }
-          }
-
-          FOR_ALL_DEBUFFS_FOR(t, id)
-          {
-            auto it = thing_find(id);
-            if (it) {
-              decibels += it->noise();
-            }
-          }
-
-          FOR_ALL_SKILLS_FOR(t, id)
-          {
-            auto it = thing_find(id);
-            if (it) {
-              decibels += it->noise();
-            }
-          }
-        }
-      }
-      FOR_ALL_THINGS_END()
-
-      decibels += noisemap_in_no_check(x, y);
-
       if (decibels > LEVEL_LOUDEST_SOUND) {
         decibels = LEVEL_LOUDEST_SOUND;
       }

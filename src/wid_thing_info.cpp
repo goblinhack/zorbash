@@ -153,6 +153,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_gold_value(wid_popup_window, t);
   wid_thing_info_add_nutrition(wid_popup_window, t);
   wid_thing_info_add_health(wid_popup_window, t);
+  wid_thing_info_add_noise(wid_popup_window, t);
   wid_thing_info_add_damage_natural_attack(wid_popup_window, t);
   wid_thing_info_add_damage_melee(wid_popup_window, t);
   wid_thing_info_add_damage_poison(wid_popup_window, t);
@@ -1227,6 +1228,30 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
   } else if (t->get_stat_str_mod()) {
     auto stat = t->get_stat_str_mod();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength modifier        %3s", modifier_to_string(stat).c_str());
+    w->log(tmp);
+  }
+}
+
+void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  auto n = t->get_noise_total();
+  if (n) {
+    if (t->is_item()) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise when carried       %3d", n);
+      w->log(tmp);
+    } else {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level base         %3d", t->noise());
+      w->log(tmp);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level with items   %3d", n);
+      w->log(tmp);
+    }
+  }
+
+  if (t->is_monst()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level hearing      %3d", t->noise_decibels_hearing());
     w->log(tmp);
   }
 }

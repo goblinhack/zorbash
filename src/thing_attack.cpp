@@ -781,6 +781,20 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
+  //
+  // An attack counts as making noise.
+  //
+  if (owner) {
+    level->incr_noisemap_in(curr_at.x, curr_at.y, owner->get_noise_total());
+  } else {
+    level->incr_noisemap_in(curr_at.x, curr_at.y, get_noise_total());
+  }
+
+  //
+  // Wake on attack
+  //
+  victim->wake();
+
   if (damage <= 0) {
     if (is_player() || (owner && owner->is_player())) {
       msg("You inflict no damage on %s.", victim->text_the().c_str());
@@ -816,11 +830,6 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   }
 
   bool crit = false;
-
-  //
-  // Wake on attack
-  //
-  victim->wake();
 
   //
   // See if we can bypass its defences

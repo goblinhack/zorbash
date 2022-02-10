@@ -54,6 +54,7 @@ std::initializer_list< std::string > tps = {
     "bones.5",
     "bones.6",
     "boots_fluffy",
+    "boots_fluffy_carry",
     "brazier1",
     "bridge_lr",
     "bridge_ud",
