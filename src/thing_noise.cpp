@@ -50,6 +50,12 @@ int Thing::get_noise_total(void)
     {
       auto it = level->thing_find(id);
       if (it) {
+        //
+        // Don't count boots for example twice
+        //
+        if (is_equipped(it)) {
+          continue;
+        }
         decibels += it->noise();
         // it->con("NOISE %d", decibels);
       }
@@ -78,6 +84,7 @@ int Thing::get_noise_total(void)
       auto it = level->thing_find(id);
       if (it) {
         decibels += it->noise();
+        // it->con("NOISE %d", decibels);
       }
     }
   }

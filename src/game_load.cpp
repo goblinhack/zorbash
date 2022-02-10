@@ -363,7 +363,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->is_activated = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_attached = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_being_destroyed = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->is_scheduled_for_gc = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_bouncing = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_changing_level = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_dead = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -371,7 +370,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->is_facing_left = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_fadeup = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_falling = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->is_ring2 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_hidden = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_hungry = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_in_lava = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -383,7 +381,9 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->is_resurrected = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_resurrecting = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_resurrection_blocked = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->is_ring2 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_scheduled_for_death = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->is_scheduled_for_gc = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_scheduled_for_jump_end = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_sleeping = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_starving = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
