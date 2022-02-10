@@ -2280,34 +2280,34 @@ int Thing::gfx_show_asleep(void)
   return (tp()->gfx_show_asleep());
 }
 
-int Thing::noise_decibels_on_jumping(void)
+int Thing::noise_on_jumping(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_decibels_on_jumping());
+  return (tp()->noise_on_jumping());
 }
 
-int Thing::noise_decibels_on_born(void)
+int Thing::noise_on_born(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_decibels_on_born());
+  return (tp()->noise_on_born());
 }
 
-int Thing::noise_decibels_on_open(void)
+int Thing::noise_on_open(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_decibels_on_open());
+  return (tp()->noise_on_open());
 }
 
-int Thing::noise_decibels_on_you_are_hit_and_now_dead(void)
+int Thing::noise_on_you_are_hit_and_now_dead(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_decibels_on_you_are_hit_and_now_dead());
+  return (tp()->noise_on_you_are_hit_and_now_dead());
 }
 
-int Thing::noise_decibels_on_you_are_hit_but_still_alive(void)
+int Thing::noise_on_you_are_hit_but_still_alive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_decibels_on_you_are_hit_but_still_alive());
+  return (tp()->noise_on_you_are_hit_but_still_alive());
 }
 
 int Thing::noise_decibels_hearing(void)
@@ -2328,10 +2328,10 @@ int Thing::is_breather(void)
   return (tp()->is_breather());
 }
 
-int Thing::noise_decibels_on_moving_or_being_carried(void)
+int Thing::noise_on_moving_or_being_carried(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_decibels_on_moving_or_being_carried());
+  return (tp()->noise_on_moving_or_being_carried());
 }
 
 int Thing::is_asleep_initially(void)

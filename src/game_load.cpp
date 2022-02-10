@@ -128,6 +128,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stats07);
    in >> bits(my.t->stats09);
    in >> bits(my.t->temperature);
+   in >> bits(my.t->noise);
    in >> bits(my.t->stat_str);
    in >> bits(my.t->stat_str_mod);
    in >> bits(my.t->submerged_offset);

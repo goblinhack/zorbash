@@ -105,6 +105,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->stats07);
   out << bits(my.t->stats09);
   out << bits(my.t->temperature);
+  out << bits(my.t->noise);
   out << bits(my.t->stat_str);
   out << bits(my.t->stat_str_mod);
   out << bits(my.t->submerged_offset);

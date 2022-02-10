@@ -34,7 +34,7 @@ def tp_init(name):
     mytp.set_is_tickable(True)  # So it can interact with fire
     mytp.set_light_color("yellow")
     mytp.set_light_power(4)
-    mytp.set_noise_decibels_on_born(100)
+    mytp.set_noise_on_born(100)
     mytp.set_on_death_do("me.on_death()")
     mytp.set_temperature(100)
     mytp.set_text_hits("blasts")

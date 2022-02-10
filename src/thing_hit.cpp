@@ -680,7 +680,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       } else if (attack_fire) {
         msg("%%fg=orange$You burn for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
       } else if (attack_cold) {
-        msg("%%fg=orange$You blister for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
+        msg("%%fg=cyan$You blister for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
       } else if (attack_necrosis) {
         msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else {
@@ -1096,14 +1096,14 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     // Set up noise, for example a door being hit
     //
-    level->incr_noisemap_in(curr_at.x, curr_at.y, noise_decibels_on_you_are_hit_but_still_alive());
+    level->incr_noisemap_in(curr_at.x, curr_at.y, noise_on_you_are_hit_but_still_alive());
   } else {
     on_you_are_hit_but_still_alive(hitter, real_hitter, crit, damage);
 
     //
     // Set up noise, for example a door being broken
     //
-    level->incr_noisemap_in(curr_at.x, curr_at.y, noise_decibels_on_you_are_hit_and_now_dead());
+    level->incr_noisemap_in(curr_at.x, curr_at.y, noise_on_you_are_hit_and_now_dead());
   }
 
   //

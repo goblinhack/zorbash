@@ -124,6 +124,7 @@ private:
   int _damage_necrosis_chance_d1000 {};
   int _damage_poison_chance_d1000 {};
   int _damage_received_doubled_from_acid {};
+  int _damage_received_doubled_from_cold {};
   int _damage_received_doubled_from_fire {};
   int _damage_received_doubled_from_necrosis {};
   int _damage_received_doubled_from_poison {};
@@ -143,12 +144,6 @@ private:
   int _environ_avoids_necrosis {};
   int _environ_avoids_poison {};
   int _environ_avoids_water {};
-  int _is_immune_to_acid {};
-  int _is_immune_to_fire {};
-  int _is_immune_to_necrosis {};
-  int _is_immune_to_poison {};
-  int _is_immune_to_spiderwebs {};
-  int _is_immune_to_water {};
   int _gfx_an_animation_only {};
   int _gfx_animated {};
   int _gfx_animated_can_hflip {};
@@ -163,10 +158,12 @@ private:
   int _gfx_glows {};
   int _gfx_health_bar_autohide {};
   int _gfx_health_bar_shown {};
+  int _gfx_health_bar_shown_when_awake_only {};
   int _gfx_long_shadow_caster {};
   int _gfx_on_fire_anim {};
   int _gfx_oversized_and_on_floor {};
   int _gfx_short_shadow_caster {};
+  int _gfx_show_asleep {};
   int _gfx_shown_in_bg {};
   int _gfx_show_outlined {};
   int _gfx_solid_shadow {};
@@ -202,6 +199,7 @@ private:
   int _is_able_to_see_in_the_dark {};
   int _is_able_to_see_through_doors {};
   int _is_able_to_shove {};
+  int _is_able_to_sleep {};
   int _is_able_to_tire {};
   int _is_able_to_use_amulet {};
   int _is_able_to_use_armor {};
@@ -222,6 +220,7 @@ private:
   int _is_armor {};
   int _is_ascend_dungeon {};
   int _is_ascend_sewer {};
+  int _is_asleep_initially {};
   int _is_attackable_by_monst {};
   int _is_attackable_by_player {};
   int _is_auto_collect_item {};
@@ -240,6 +239,7 @@ private:
   int _is_bony {};
   int _is_boots {};
   int _is_brazier {};
+  int _is_breather {};
   int _is_bridge {};
   int _is_buff {};
   int _is_burnable {};
@@ -251,6 +251,7 @@ private:
   int _is_carrier_of_weapon_class_c {};
   int _is_chasm {};
   int _is_cloak {};
+  int _is_cold {};
   int _is_collectable {};
   int _is_collect_as_keys {};
   int _is_collected_as_gold {};
@@ -296,6 +297,7 @@ private:
   int _is_foilage {};
   int _is_food {};
   int _is_food_eater {};
+  int _is_gas_blocker {};
   int _is_gauntlet {};
   int _is_gfx_anim_synced_with_owner {};
   int _is_glass {};
@@ -310,6 +312,13 @@ private:
   int _is_helmet {};
   int _is_hittable {};
   int _is_humanoid {};
+  int _is_immune_to_acid {};
+  int _is_immune_to_cold {};
+  int _is_immune_to_fire {};
+  int _is_immune_to_necrosis {};
+  int _is_immune_to_poison {};
+  int _is_immune_to_spiderwebs {};
+  int _is_immune_to_water {};
   int _is_intelligent {};
   int _is_interesting {}; // e.g. something edible or a monst or lava
   int _is_item {};
@@ -353,6 +362,7 @@ private:
   int _is_necrotic_danger_level {};
   int _is_no_tile {};
   int _is_obs_destructable {};
+  int _is_obstacle_when_dead {};
   int _is_obs_wall_or_door {};
   int _is_openable {};
   int _is_organic {};
@@ -411,6 +421,7 @@ private:
   int _is_usable {};
   int _is_used_when_thrown {};
   int _is_very_combustible {};
+  int _is_very_heavy {};
   int _is_wall {};
   int _is_wall_dungeon {};
   int _is_wand {};
@@ -426,6 +437,14 @@ private:
   int _melting_chance_d1000 {};
   int _minion_limit {};
   int _monst_size {};
+  int _noise_blocker {};
+  int _noise_decibels_hearing {};
+  int _noise_on_born {};
+  int _noise_on_jumping {};
+  int _noise_on_moving_or_being_carried {};
+  int _noise_on_open {};
+  int _noise_on_you_are_hit_and_now_dead {};
+  int _noise_on_you_are_hit_but_still_alive {};
   int _normal_placement_rules {};
   int _on_death_drop_all_items {};
   int _on_death_is_open {};
@@ -461,6 +480,8 @@ private:
   int _stats09 {};
   int _stat_str {};
   int _stat_str_mod {};
+  int _temperature {};
+  int _temperature_change_sensitive {};
   int _unused_chance1_d1000 {};
   int _unused_chance2_d1000 {};
   int _unused_chance3_d1000 {};
@@ -510,29 +531,8 @@ private:
   int _unused_flag135 {};
   int _unused_flag136 {};
   int _unused_flag137 {};
-  int _damage_received_doubled_from_cold {};
-  int _is_cold {};
   int _unused_flag14 {};
-  int _temperature_change_sensitive {};
-  int _temperature {};
-  int _is_very_heavy {};
-  int _gfx_health_bar_shown_when_awake_only {};
-  int _gfx_show_asleep {};
-  int _noise_decibels_on_jumping {};
-  int _noise_decibels_on_born {};
-  int _noise_decibels_on_open {};
-  int _noise_decibels_on_you_are_hit_and_now_dead {};
-  int _noise_decibels_on_you_are_hit_but_still_alive {};
   int _unused_flag15 {};
-  int _noise_decibels_hearing {};
-  int _noise_blocker {};
-  int _is_immune_to_cold {};
-  int _is_breather {};
-  int _noise_decibels_on_moving_or_being_carried {};
-  int _is_asleep_initially {};
-  int _is_able_to_sleep {};
-  int _is_obstacle_when_dead {};
-  int _is_gas_blocker {};
   int _unused_flag16 {};
   int _unused_flag17 {};
   int _unused_flag18 {};
@@ -1008,6 +1008,7 @@ public:
   int damage_necrosis_chance_d1000(void) const { return _damage_necrosis_chance_d1000; }
   int damage_poison_chance_d1000(void) const { return _damage_poison_chance_d1000; }
   int damage_received_doubled_from_acid(void) const { return _damage_received_doubled_from_acid; }
+  int damage_received_doubled_from_cold(void) const { return _damage_received_doubled_from_cold; }
   int damage_received_doubled_from_fire(void) const { return _damage_received_doubled_from_fire; }
   int damage_received_doubled_from_necrosis(void) const { return _damage_received_doubled_from_necrosis; }
   int damage_received_doubled_from_poison(void) const { return _damage_received_doubled_from_poison; }
@@ -1027,12 +1028,6 @@ public:
   int environ_avoids_necrosis(void) const { return _environ_avoids_necrosis; }
   int environ_avoids_poison(void) const { return _environ_avoids_poison; }
   int environ_avoids_water(void) const { return _environ_avoids_water; }
-  int is_immune_to_acid(void) const { return _is_immune_to_acid; }
-  int is_immune_to_fire(void) const { return _is_immune_to_fire; }
-  int is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
-  int is_immune_to_poison(void) const { return _is_immune_to_poison; }
-  int is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
-  int is_immune_to_water(void) const { return _is_immune_to_water; }
   int get_danger_level(void);
   int get_spawn_group_radius(void) const { return _spawn_group_radius; }
   int get_stat_con(void) const { return _stat_con; }
@@ -1053,10 +1048,12 @@ public:
   int gfx_glows(void) const { return _gfx_glows; }
   int gfx_health_bar_autohide(void) const { return _gfx_health_bar_autohide; }
   int gfx_health_bar_shown(void) const { return _gfx_health_bar_shown; }
+  int gfx_health_bar_shown_when_awake_only(void) const { return _gfx_health_bar_shown_when_awake_only; }
   int gfx_long_shadow_caster(void) const { return _gfx_long_shadow_caster; }
   int gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
   int gfx_oversized_and_on_floor(void) const { return _gfx_oversized_and_on_floor; }
   int gfx_short_shadow_caster(void) const { return _gfx_short_shadow_caster; }
+  int gfx_show_asleep(void) const { return _gfx_show_asleep; }
   int gfx_shown_in_bg(void) const { return _gfx_shown_in_bg; }
   int gfx_show_outlined(void) const { return _gfx_show_outlined; }
   int gfx_solid_shadow(void) const { return _gfx_solid_shadow; }
@@ -1092,6 +1089,7 @@ public:
   int is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
   int is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
   int is_able_to_shove(void) const { return _is_able_to_shove; }
+  int is_able_to_sleep(void) const { return _is_able_to_sleep; }
   int is_able_to_tire(void) const { return _is_able_to_tire; }
   int is_able_to_use_amulet(void) const { return _is_able_to_use_amulet; }
   int is_able_to_use_armor(void) const { return _is_able_to_use_armor; }
@@ -1112,6 +1110,7 @@ public:
   int is_armor(void) const { return _is_armor; }
   int is_ascend_dungeon(void) const { return _is_ascend_dungeon; }
   int is_ascend_sewer(void) const { return _is_ascend_sewer; }
+  int is_asleep_initially(void) const { return _is_asleep_initially; }
   int is_attackable_by_monst(void) const { return _is_attackable_by_monst; }
   int is_attackable_by_player(void) const { return _is_attackable_by_player; }
   int is_auto_collect_item(void) const { return _is_auto_collect_item; }
@@ -1130,6 +1129,7 @@ public:
   int is_bony(void) const { return _is_bony; }
   int is_boots(void) const { return _is_boots; }
   int is_brazier(void) const { return _is_brazier; }
+  int is_breather(void) const { return _is_breather; }
   int is_bridge(void) const { return _is_bridge; }
   int is_buff(void) const { return _is_buff; }
   int is_burnable(void) const { return _is_burnable; }
@@ -1141,6 +1141,7 @@ public:
   int is_carrier_of_weapon_class_c(void) const { return _is_carrier_of_weapon_class_c; }
   int is_chasm(void) const { return _is_chasm; }
   int is_cloak(void) const { return _is_cloak; }
+  int is_cold(void) const { return _is_cold; }
   int is_collectable(void) const { return _is_collectable; }
   int is_collect_as_keys(void) const { return _is_collect_as_keys; }
   int is_collected_as_gold(void) const { return _is_collected_as_gold; }
@@ -1186,6 +1187,7 @@ public:
   int is_foilage(void) const { return _is_foilage; }
   int is_food_eater(void) const { return _is_food_eater; }
   int is_food(void) const { return _is_food; }
+  int is_gas_blocker(void) const { return _is_gas_blocker; }
   int is_gauntlet(void) const { return _is_gauntlet; }
   int is_gfx_anim_synced_with_owner(void) const { return _is_gfx_anim_synced_with_owner; }
   int is_glass(void) const { return _is_glass; }
@@ -1200,6 +1202,13 @@ public:
   int is_helmet(void) const { return _is_helmet; }
   int is_hittable(void) const { return _is_hittable; }
   int is_humanoid(void) const { return _is_humanoid; }
+  int is_immune_to_acid(void) const { return _is_immune_to_acid; }
+  int is_immune_to_cold(void) const { return _is_immune_to_cold; }
+  int is_immune_to_fire(void) const { return _is_immune_to_fire; }
+  int is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
+  int is_immune_to_poison(void) const { return _is_immune_to_poison; }
+  int is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
+  int is_immune_to_water(void) const { return _is_immune_to_water; }
   int is_intelligent(void) const { return _is_intelligent; }
   int is_interesting(void) const { return _is_interesting; }
   int is_item_carrier(void) const { return _is_item_carrier; }
@@ -1242,6 +1251,7 @@ public:
   int is_necrotic_danger_level(void) const { return _is_necrotic_danger_level; }
   int is_no_tile(void) const { return _is_no_tile; }
   int is_obs_destructable(void) const { return _is_obs_destructable; }
+  int is_obstacle_when_dead(void) const { return _is_obstacle_when_dead; }
   int is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
   int is_openable(void) const { return _is_openable; }
   int is_organic(void) const { return _is_organic; }
@@ -1300,6 +1310,7 @@ public:
   int is_usable(void) const { return _is_usable; }
   int is_used_when_thrown(void) const { return _is_used_when_thrown; }
   int is_very_combustible(void) const { return _is_very_combustible; }
+  int is_very_heavy(void) const { return _is_very_heavy; }
   int is_wall_dungeon(void) const { return _is_wall_dungeon; }
   int is_wall(void) const { return _is_wall; }
   int is_wand(void) const { return _is_wand; }
@@ -1315,6 +1326,14 @@ public:
   int melting_chance_d1000(void) const { return _melting_chance_d1000; }
   int minion_limit(void) const { return _minion_limit; }
   int monst_size(void) const { return _monst_size; }
+  int noise_blocker(void) const { return _noise_blocker; }
+  int noise_decibels_hearing(void) const { return _noise_decibels_hearing; }
+  int noise_on_born(void) const { return _noise_on_born; }
+  int noise_on_jumping(void) const { return _noise_on_jumping; }
+  int noise_on_moving_or_being_carried(void) const { return _noise_on_moving_or_being_carried; }
+  int noise_on_open(void) const { return _noise_on_open; }
+  int noise_on_you_are_hit_and_now_dead(void) const { return _noise_on_you_are_hit_and_now_dead; }
+  int noise_on_you_are_hit_but_still_alive(void) const { return _noise_on_you_are_hit_but_still_alive; }
   int normal_placement_rules(void) const { return _normal_placement_rules; }
   int on_death_drop_all_items(void) const { return _on_death_drop_all_items; }
   int on_death_is_open(void) const { return _on_death_is_open; }
@@ -1345,6 +1364,8 @@ public:
   int stats07(void) const { return _stats07; }
   int stats09(void) const { return _stats09; }
   int stat_str_mod(void) const { return _stat_str_mod; }
+  int temperature_change_sensitive(void) const { return _temperature_change_sensitive; }
+  int temperature(void) const { return _temperature; }
   int unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
   int unused_chance2_d1000(void) const { return _unused_chance2_d1000; }
   int unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
@@ -1392,32 +1413,8 @@ public:
   int unused_flag135(void) const { return _unused_flag135; }
   int unused_flag136(void) const { return _unused_flag136; }
   int unused_flag137(void) const { return _unused_flag137; }
-  int damage_received_doubled_from_cold(void) const { return _damage_received_doubled_from_cold; }
-  int is_cold(void) const { return _is_cold; }
   int unused_flag13(void) const { return _unused_flag13; }
-  int temperature_change_sensitive(void) const { return _temperature_change_sensitive; }
-  int temperature(void) const { return _temperature; }
-  int is_very_heavy(void) const { return _is_very_heavy; }
-  int gfx_health_bar_shown_when_awake_only(void) const { return _gfx_health_bar_shown_when_awake_only; }
-  int gfx_show_asleep(void) const { return _gfx_show_asleep; }
-  int noise_decibels_on_jumping(void) const { return _noise_decibels_on_jumping; }
-  int noise_decibels_on_born(void) const { return _noise_decibels_on_born; }
-  int noise_decibels_on_open(void) const { return _noise_decibels_on_open; }
-  int noise_decibels_on_you_are_hit_and_now_dead(void) const { return _noise_decibels_on_you_are_hit_and_now_dead; }
-  int noise_decibels_on_you_are_hit_but_still_alive(void) const
-  {
-    return _noise_decibels_on_you_are_hit_but_still_alive;
-  }
   int unused_flag14(void) const { return _unused_flag14; }
-  int noise_decibels_hearing(void) const { return _noise_decibels_hearing; }
-  int noise_blocker(void) const { return _noise_blocker; }
-  int is_immune_to_cold(void) const { return _is_immune_to_cold; }
-  int is_breather(void) const { return _is_breather; }
-  int noise_decibels_on_moving_or_being_carried(void) const { return _noise_decibels_on_moving_or_being_carried; }
-  int is_asleep_initially(void) const { return _is_asleep_initially; }
-  int is_able_to_sleep(void) const { return _is_able_to_sleep; }
-  int is_obstacle_when_dead(void) const { return _is_obstacle_when_dead; }
-  int is_gas_blocker(void) const { return _is_gas_blocker; }
   int unused_flag15(void) const { return _unused_flag15; }
   int unused_flag16(void) const { return _unused_flag16; }
   int unused_flag17(void) const { return _unused_flag17; }
@@ -1557,6 +1554,7 @@ public:
   void set_damage_necrosis_chance_d1000(int v) { _damage_necrosis_chance_d1000 = v; }
   void set_damage_poison_chance_d1000(int v) { _damage_poison_chance_d1000 = v; }
   void set_damage_received_doubled_from_acid(int v) { _damage_received_doubled_from_acid = v; }
+  void set_damage_received_doubled_from_cold(int v) { _damage_received_doubled_from_cold = v; }
   void set_damage_received_doubled_from_fire(int v) { _damage_received_doubled_from_fire = v; }
   void set_damage_received_doubled_from_necrosis(int v) { _damage_received_doubled_from_necrosis = v; }
   void set_damage_received_doubled_from_poison(int v) { _damage_received_doubled_from_poison = v; }
@@ -1576,12 +1574,6 @@ public:
   void set_environ_avoids_necrosis(int v) { _environ_avoids_necrosis = v; }
   void set_environ_avoids_poison(int v) { _environ_avoids_poison = v; }
   void set_environ_avoids_water(int v) { _environ_avoids_water = v; }
-  void set_is_immune_to_acid(int v) { _is_immune_to_acid = v; }
-  void set_is_immune_to_fire(int v) { _is_immune_to_fire = v; }
-  void set_is_immune_to_necrosis(int v) { _is_immune_to_necrosis = v; }
-  void set_is_immune_to_poison(int v) { _is_immune_to_poison = v; }
-  void set_is_immune_to_spiderwebs(int v) { _is_immune_to_spiderwebs = v; }
-  void set_is_immune_to_water(int v) { _is_immune_to_water = v; }
   void set_equip_carry_anim(const std::string &v) { _equip_carry_anim = v; }
   void set_gfx_an_animation_only(int v) { _gfx_an_animation_only = v; }
   void set_gfx_animated_can_hflip(int v) { _gfx_animated_can_hflip = v; }
@@ -1598,10 +1590,12 @@ public:
   void set_gfx_glows(int v) { _gfx_glows = v; }
   void set_gfx_health_bar_autohide(int v) { _gfx_health_bar_autohide = v; }
   void set_gfx_health_bar_shown(int v) { _gfx_health_bar_shown = v; }
+  void set_gfx_health_bar_shown_when_awake_only(int v) { _gfx_health_bar_shown_when_awake_only = v; }
   void set_gfx_long_shadow_caster(int v) { _gfx_long_shadow_caster = v; }
   void set_gfx_on_fire_anim(int v) { _gfx_on_fire_anim = v; }
   void set_gfx_oversized_and_on_floor(int v) { _gfx_oversized_and_on_floor = v; }
   void set_gfx_short_shadow_caster(int v) { _gfx_short_shadow_caster = v; }
+  void set_gfx_show_asleep(int v) { _gfx_show_asleep = v; }
   void set_gfx_shown_in_bg(int v) { _gfx_shown_in_bg = v; }
   void set_gfx_show_outlined(int v) { _gfx_show_outlined = v; }
   void set_gfx_solid_shadow(int v) { _gfx_solid_shadow = v; }
@@ -1637,6 +1631,7 @@ public:
   void set_is_able_to_see_in_the_dark(int v) { _is_able_to_see_in_the_dark = v; }
   void set_is_able_to_see_through_doors(int v) { _is_able_to_see_through_doors = v; }
   void set_is_able_to_shove(int v) { _is_able_to_shove = v; }
+  void set_is_able_to_sleep(int v) { _is_able_to_sleep = v; }
   void set_is_able_to_tire(int v) { _is_able_to_tire = v; }
   void set_is_able_to_use_amulet(int v) { _is_able_to_use_amulet = v; }
   void set_is_able_to_use_armor(int v) { _is_able_to_use_armor = v; }
@@ -1658,6 +1653,7 @@ public:
   void set_is_armor(int v) { _is_armor = v; }
   void set_is_ascend_dungeon(int v) { _is_ascend_dungeon = v; }
   void set_is_ascend_sewer(int v) { _is_ascend_sewer = v; }
+  void set_is_asleep_initially(int v) { _is_asleep_initially = v; }
   void set_is_attackable_by_monst(int v) { _is_attackable_by_monst = v; }
   void set_is_attackable_by_player(int v) { _is_attackable_by_player = v; }
   void set_is_auto_collect_item(int v) { _is_auto_collect_item = v; }
@@ -1676,6 +1672,7 @@ public:
   void set_is_bony(int v) { _is_bony = v; }
   void set_is_boots(int v) { _is_boots = v; }
   void set_is_brazier(int v) { _is_brazier = v; }
+  void set_is_breather(int v) { _is_breather = v; }
   void set_is_bridge(int v) { _is_bridge = v; }
   void set_is_buff(int v) { _is_buff = v; }
   void set_is_burnable(int v) { _is_burnable = v; }
@@ -1687,6 +1684,7 @@ public:
   void set_is_carrier_of_weapon_class_c(int v) { _is_carrier_of_weapon_class_c = v; }
   void set_is_chasm(int v) { _is_chasm = v; }
   void set_is_cloak(int v) { _is_cloak = v; }
+  void set_is_cold(int v) { _is_cold = v; }
   void set_is_collectable(int v) { _is_collectable = v; }
   void set_is_collect_as_keys(int v) { _is_collect_as_keys = v; }
   void set_is_collected_as_gold(int v) { _is_collected_as_gold = v; }
@@ -1732,6 +1730,7 @@ public:
   void set_is_foilage(int v) { _is_foilage = v; }
   void set_is_food_eater(int v) { _is_food_eater = v; }
   void set_is_food(int v) { _is_food = v; }
+  void set_is_gas_blocker(int v) { _is_gas_blocker = v; }
   void set_is_gauntlet(int v) { _is_gauntlet = v; }
   void set_is_gfx_anim_synced_with_owner(int v) { _is_gfx_anim_synced_with_owner = v; }
   void set_is_glass(int v) { _is_glass = v; }
@@ -1746,6 +1745,13 @@ public:
   void set_is_helmet(int v) { _is_helmet = v; }
   void set_is_hittable(int v) { _is_hittable = v; }
   void set_is_humanoid(int v) { _is_humanoid = v; }
+  void set_is_immune_to_acid(int v) { _is_immune_to_acid = v; }
+  void set_is_immune_to_cold(int v) { _is_immune_to_cold = v; }
+  void set_is_immune_to_fire(int v) { _is_immune_to_fire = v; }
+  void set_is_immune_to_necrosis(int v) { _is_immune_to_necrosis = v; }
+  void set_is_immune_to_poison(int v) { _is_immune_to_poison = v; }
+  void set_is_immune_to_spiderwebs(int v) { _is_immune_to_spiderwebs = v; }
+  void set_is_immune_to_water(int v) { _is_immune_to_water = v; }
   void set_is_intelligent(int v) { _is_intelligent = v; }
   void set_is_interesting(int v) { _is_interesting = v; }
   void set_is_item_carrier(int v) { _is_item_carrier = v; }
@@ -1788,6 +1794,7 @@ public:
   void set_is_necrotic_danger_level(int v) { _is_necrotic_danger_level = v; }
   void set_is_no_tile(int v) { _is_no_tile = v; }
   void set_is_obs_destructable(int v) { _is_obs_destructable = v; }
+  void set_is_obstacle_when_dead(int v) { _is_obstacle_when_dead = v; }
   void set_is_obs_wall_or_door(int v) { _is_obs_wall_or_door = v; }
   void set_is_openable(int v) { _is_openable = v; }
   void set_is_organic(int v) { _is_organic = v; }
@@ -1846,6 +1853,7 @@ public:
   void set_is_usable(int v) { _is_usable = v; }
   void set_is_used_when_thrown(int v) { _is_used_when_thrown = v; }
   void set_is_very_combustible(int v) { _is_very_combustible = v; }
+  void set_is_very_heavy(int v) { _is_very_heavy = v; }
   void set_is_wall_dungeon(int v) { _is_wall_dungeon = v; }
   void set_is_wall(int v) { _is_wall = v; }
   void set_is_wand(int v) { _is_wand = v; }
@@ -1866,7 +1874,16 @@ public:
   void set_minion_limit(int v) { _minion_limit = v; }
   void set_monst_size(int v) { _monst_size = v; }
   void set_name(const std::string &v) { _name = v; }
+  void set_noise_blocker(int v) { _noise_blocker = v; }
+  void set_noise_decibels_hearing(int v) { _noise_decibels_hearing = v; }
+  void set_noise_on_born(int v) { _noise_on_born = v; }
+  void set_noise_on_jumping(int v) { _noise_on_jumping = v; }
+  void set_noise_on_moving_or_being_carried(int v) { _noise_on_moving_or_being_carried = v; }
+  void set_noise_on_open(int v) { _noise_on_open = v; }
+  void set_noise_on_you_are_hit_and_now_dead(int v) { _noise_on_you_are_hit_and_now_dead = v; }
+  void set_noise_on_you_are_hit_but_still_alive(int v) { _noise_on_you_are_hit_but_still_alive = v; }
   void set_normal_placement_rules(int v) { _normal_placement_rules = v; }
+  void set_on_awake_do(const std::string &v) { _on_awake_do = v; }
   void set_on_born_do(const std::string &v) { _on_born_do = v; }
   void set_on_damage_acid_do(const std::string &v) { _on_damage_acid_do = v; }
   void set_on_damage_cold_do(const std::string &v) { _on_damage_cold_do = v; }
@@ -1885,7 +1902,6 @@ public:
   void set_on_damage_stat_con_do(const std::string &v) { _on_damage_stat_con_do = v; }
   void set_on_damage_stat_str_do(const std::string &v) { _on_damage_stat_str_do = v; }
   void set_on_death_do(const std::string &v) { _on_death_do = v; }
-  void set_on_awake_do(const std::string &v) { _on_awake_do = v; }
   void set_on_death_drop_all_items(int v) { _on_death_drop_all_items = v; }
   void set_on_death_is_open(int v) { _on_death_is_open = v; }
   void set_on_death_of_a_follower_do(const std::string &v) { _on_death_of_a_follower_do = v; }
@@ -1965,6 +1981,8 @@ public:
   void set_str1(const std::string &v) { _str1 = v; }
   void set_str2(const std::string &v) { _str2 = v; }
   void set_str4(const std::string &v) { _str4 = v; }
+  void set_temperature_change_sensitive(int v) { _temperature_change_sensitive = v; }
+  void set_temperature(int v) { _temperature = v; }
   void set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
   void set_text_debuff(const std::string &v) { _text_debuff = v; }
   void set_text_description(const std::string &v) { _text_description = v; }
@@ -2024,32 +2042,8 @@ public:
   void set_unused_flag135(int v) { _unused_flag135 = v; }
   void set_unused_flag136(int v) { _unused_flag136 = v; }
   void set_unused_flag137(int v) { _unused_flag137 = v; }
-  void set_damage_received_doubled_from_cold(int v) { _damage_received_doubled_from_cold = v; }
-  void set_is_cold(int v) { _is_cold = v; }
   void set_unused_flag13(int v) { _unused_flag13 = v; }
-  void set_temperature_change_sensitive(int v) { _temperature_change_sensitive = v; }
-  void set_temperature(int v) { _temperature = v; }
-  void set_is_very_heavy(int v) { _is_very_heavy = v; }
-  void set_gfx_health_bar_shown_when_awake_only(int v) { _gfx_health_bar_shown_when_awake_only = v; }
-  void set_gfx_show_asleep(int v) { _gfx_show_asleep = v; }
-  void set_noise_decibels_on_jumping(int v) { _noise_decibels_on_jumping = v; }
-  void set_noise_decibels_on_born(int v) { _noise_decibels_on_born = v; }
-  void set_noise_decibels_on_open(int v) { _noise_decibels_on_open = v; }
-  void set_noise_decibels_on_you_are_hit_and_now_dead(int v) { _noise_decibels_on_you_are_hit_and_now_dead = v; }
-  void set_noise_decibels_on_you_are_hit_but_still_alive(int v)
-  {
-    _noise_decibels_on_you_are_hit_but_still_alive = v;
-  }
   void set_unused_flag14(int v) { _unused_flag14 = v; }
-  void set_noise_decibels_hearing(int v) { _noise_decibels_hearing = v; }
-  void set_noise_blocker(int v) { _noise_blocker = v; }
-  void set_is_immune_to_cold(int v) { _is_immune_to_cold = v; }
-  void set_is_breather(int v) { _is_breather = v; }
-  void set_noise_decibels_on_moving_or_being_carried(int v) { _noise_decibels_on_moving_or_being_carried = v; }
-  void set_is_asleep_initially(int v) { _is_asleep_initially = v; }
-  void set_is_able_to_sleep(int v) { _is_able_to_sleep = v; }
-  void set_is_obstacle_when_dead(int v) { _is_obstacle_when_dead = v; }
-  void set_is_gas_blocker(int v) { _is_gas_blocker = v; }
   void set_unused_flag15(int v) { _unused_flag15 = v; }
   void set_unused_flag16(int v) { _unused_flag16 = v; }
   void set_unused_flag17(int v) { _unused_flag17 = v; }

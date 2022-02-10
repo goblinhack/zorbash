@@ -55,7 +55,7 @@ bool Thing::open_door(Thingp it)
     }
 
     it->on_open();
-    level->incr_noisemap_in(it->curr_at.x, it->curr_at.y, it->noise_decibels_on_open());
+    level->incr_noisemap_in(it->curr_at.x, it->curr_at.y, it->noise_on_open());
 
     update_light();
     level->request_dmap_to_player_update = true;
@@ -130,7 +130,7 @@ bool Thing::close_door(Thingp it)
     msg("The door slams shut.");
   }
 
-  level->incr_noisemap_in(it->curr_at.x, it->curr_at.y, it->noise_decibels_on_open());
+  level->incr_noisemap_in(it->curr_at.x, it->curr_at.y, it->noise_on_open());
 
   update_light();
   level->request_dmap_to_player_update = true;

@@ -116,9 +116,17 @@ int Thing::incr_temperature(int v)
           hit         = true;
           if (is_stone()) {
             popup("Crack!");
-            msg("%s cracks from the change in temperature for %d damage.", text_The().c_str(), damage);
+            if (is_player()) {
+              msg("%%fg=orange$%s cracks from the change in temperature for %d damage.%%fg=reset$",
+                  text_The().c_str(), damage);
+            } else {
+            }
           } else {
-            msg("%s suffers from the change in temperature for %d damage.", text_The().c_str(), damage);
+            if (is_player()) {
+              msg("%%fg=orange$%s suffers from the change in temperature for %d damage.%%fg=reset$",
+                  text_The().c_str(), damage);
+            } else {
+            }
           }
           is_attacked_with_damage_fire(this, damage);
         }
@@ -130,9 +138,19 @@ int Thing::incr_temperature(int v)
           hit         = true;
           if (is_stone()) {
             popup("Crack!");
-            msg("%s cracks from the change in temperature for %d damage.", text_The().c_str(), damage);
+            if (is_player()) {
+              msg("%%fg=cyan$%s cracks from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(),
+                  damage);
+            } else {
+              msg("%s cracks from the change in temperature for %d damage.", text_The().c_str(), damage);
+            }
           } else {
-            msg("%s suffers from the change in temperature for %d damage.", text_The().c_str(), damage);
+            if (is_player()) {
+              msg("%%fg=cyan$%s suffers from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(),
+                  damage);
+            } else {
+              msg("%s suffers from the change in temperature for %d damage.", text_The().c_str(), damage);
+            }
           }
           is_attacked_with_damage_cold(this, damage);
         }
@@ -148,9 +166,19 @@ int Thing::incr_temperature(int v)
             auto damage = abs(v) / 20;
             if (is_stone()) {
               popup("Crack!");
-              msg("%s fractures from the extreme cold for %d damage.", text_The().c_str(), damage);
+              if (is_player()) {
+                msg("%%fg=cyan$%s fractures from the extreme cold for %d damage.%%fg=reset$", text_The().c_str(),
+                    damage);
+              } else {
+                msg("%s fractures from the extreme cold for %d damage.", text_The().c_str(), damage);
+              }
             } else {
-              msg("%s suffers from the extreme cold for %d damage.", text_The().c_str(), damage);
+              if (is_player()) {
+                msg("%%fg=cyan$%s suffers from the extreme cold for %d damage.%%fg=reset$", text_The().c_str(),
+                    damage);
+              } else {
+                msg("%s suffers from the extreme cold for %d damage.", text_The().c_str(), damage);
+              }
             }
             is_attacked_with_damage_cold(this, damage);
           }
@@ -161,9 +189,19 @@ int Thing::incr_temperature(int v)
             auto damage = abs(v) / 20;
             if (is_stone()) {
               popup("Crack!");
-              msg("%s fractures from the extreme heat for %d damage.", text_The().c_str(), damage);
+              if (is_player()) {
+                msg("%%fg=orange$%s fractures from the extreme heat for %d damage.%%fg=reset$", text_The().c_str(),
+                    damage);
+              } else {
+                msg("%s fractures from the extreme heat for %d damage.", text_The().c_str(), damage);
+              }
             } else {
-              msg("%s suffers from the extreme heat for %d damage.", text_The().c_str(), damage);
+              if (is_player()) {
+                msg("%%fg=orange$%s suffers from the extreme heat for %d damage.%%fg=reset$", text_The().c_str(),
+                    damage);
+              } else {
+                msg("%s suffers from the extreme heat for %d damage.", text_The().c_str(), damage);
+              }
             }
             is_attacked_with_damage_fire(this, damage);
           }

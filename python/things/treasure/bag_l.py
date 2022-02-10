@@ -34,7 +34,7 @@ def tp_init(name, text_name):
     mytp.set_item_height(8)
     mytp.set_item_width(8)
     mytp.set_long_text_description("A large leathery brown bag.")
-    mytp.set_noise_decibels_on_moving_or_being_carried(1)
+    mytp.set_noise_on_moving_or_being_carried(1)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_drop_all_items(True)
     mytp.set_text_a_or_an("a")

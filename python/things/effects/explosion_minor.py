@@ -19,7 +19,7 @@ def tp_init(name):
     mytp.set_is_loggable(True)
     mytp.set_is_tickable(True)
     mytp.set_is_tickable(True)  # So it can interact with fire
-    mytp.set_noise_decibels_on_born(70)
+    mytp.set_noise_on_born(70)
     mytp.set_on_death_do("me.on_death()")
     mytp.set_temperature(100)
     mytp.set_z_depth(my.MAP_DEPTH_EXPLOSION_MINOR)

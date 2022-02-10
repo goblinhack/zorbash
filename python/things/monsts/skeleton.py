@@ -84,7 +84,7 @@ def tp_init(name, text_name):
     mytp.set_long_text_description("A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     mytp.set_monst_size(my.MONST_SIZE_NORMAL)
     mytp.set_noise_decibels_hearing(50)
-    mytp.set_noise_decibels_on_moving_or_being_carried(25)
+    mytp.set_noise_on_moving_or_being_carried(25)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_death_do("me.on_death()")
     mytp.set_on_you_are_hit_but_still_alive_do("me.on_you_are_hit_but_still_alive()")

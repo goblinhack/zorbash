@@ -15,7 +15,7 @@ def tp_init(name, text_name, short_text_name):
     global mytp
     mytp = tp.Tp(name, text_name, short_text_name)
     mytp.set_break_chance_d10000(20)
-    mytp.set_enchant_max(5)
+    mytp.set_enchant_max(10)
     mytp.set_equip_carry_anim("shield_wooden_carry")
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gold_value_dice("10")
@@ -31,7 +31,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_is_enchantable(True)
     mytp.set_is_wooden(True)
     mytp.set_is_interesting(True)
-    mytp.set_noise_decibels_on_moving_or_being_carried(25)
+    mytp.set_noise_on_moving_or_being_carried(25)
     mytp.set_is_item(True)
     mytp.set_collision_hit_priority(6)
     mytp.set_is_biome_dungeon(True)

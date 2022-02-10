@@ -1100,19 +1100,19 @@ bool Thing::matches(const std::string &what)
   if (gfx_show_asleep() && (what == "gfx_show_asleep")) {
     return true;
   }
-  if (noise_decibels_on_jumping() && (what == "noise_decibels_on_jumping")) {
+  if (noise_on_jumping() && (what == "noise_on_jumping")) {
     return true;
   }
-  if (noise_decibels_on_born() && (what == "noise_decibels_on_born")) {
+  if (noise_on_born() && (what == "noise_on_born")) {
     return true;
   }
-  if (noise_decibels_on_open() && (what == "noise_decibels_on_open")) {
+  if (noise_on_open() && (what == "noise_on_open")) {
     return true;
   }
-  if (noise_decibels_on_you_are_hit_and_now_dead() && (what == "noise_decibels_on_you_are_hit_and_now_dead")) {
+  if (noise_on_you_are_hit_and_now_dead() && (what == "noise_on_you_are_hit_and_now_dead")) {
     return true;
   }
-  if (noise_decibels_on_you_are_hit_but_still_alive() && (what == "noise_decibels_on_you_are_hit_but_still_alive")) {
+  if (noise_on_you_are_hit_but_still_alive() && (what == "noise_on_you_are_hit_but_still_alive")) {
     return true;
   }
   if (noise_decibels_hearing() && (what == "noise_decibels_hearing")) {
@@ -1127,7 +1127,7 @@ bool Thing::matches(const std::string &what)
   if (is_breather() && (what == "is_breather")) {
     return true;
   }
-  if (noise_decibels_on_moving_or_being_carried() && (what == "noise_decibels_on_moving_or_being_carried")) {
+  if (noise_on_moving_or_being_carried() && (what == "noise_on_moving_or_being_carried")) {
     return true;
   }
   if (is_asleep_initially() && (what == "is_asleep_initially")) {
@@ -2391,20 +2391,20 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "gfx_show_asleep") {
     return &Thing::gfx_show_asleep;
   }
-  if (what == "noise_decibels_on_jumping") {
-    return &Thing::noise_decibels_on_jumping;
+  if (what == "noise_on_jumping") {
+    return &Thing::noise_on_jumping;
   }
-  if (what == "noise_decibels_on_born") {
-    return &Thing::noise_decibels_on_born;
+  if (what == "noise_on_born") {
+    return &Thing::noise_on_born;
   }
-  if (what == "noise_decibels_on_open") {
-    return &Thing::noise_decibels_on_open;
+  if (what == "noise_on_open") {
+    return &Thing::noise_on_open;
   }
-  if (what == "noise_decibels_on_you_are_hit_and_now_dead") {
-    return &Thing::noise_decibels_on_you_are_hit_and_now_dead;
+  if (what == "noise_on_you_are_hit_and_now_dead") {
+    return &Thing::noise_on_you_are_hit_and_now_dead;
   }
-  if (what == "noise_decibels_on_you_are_hit_but_still_alive") {
-    return &Thing::noise_decibels_on_you_are_hit_but_still_alive;
+  if (what == "noise_on_you_are_hit_but_still_alive") {
+    return &Thing::noise_on_you_are_hit_but_still_alive;
   }
   if (what == "noise_decibels_hearing") {
     return &Thing::noise_decibels_hearing;
@@ -2418,8 +2418,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_breather") {
     return &Thing::is_breather;
   }
-  if (what == "noise_decibels_on_moving_or_being_carried") {
-    return &Thing::noise_decibels_on_moving_or_being_carried;
+  if (what == "noise_on_moving_or_being_carried") {
+    return &Thing::noise_on_moving_or_being_carried;
   }
   if (what == "is_asleep_initially") {
     return &Thing::is_asleep_initially;

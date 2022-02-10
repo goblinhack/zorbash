@@ -46,7 +46,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_height(4)
     mytp.set_item_width(4)
     mytp.set_long_text_description("Lathered armor. Not to be confused with leather armor, this armor is leathery with a fine soapy film to help you wriggle out of sticky situations. Apart from that it is mostly useless.")
-    mytp.set_noise_decibels_on_moving_or_being_carried(5)
+    mytp.set_noise_on_moving_or_being_carried(5)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_enchant_do("me.on_enchant()")
     mytp.set_on_equip_do("me.on_equip()")

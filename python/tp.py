@@ -817,20 +817,20 @@ class Tp:
     def set_gfx_show_asleep(self, value):
         my.tp_set_gfx_show_asleep(self, value)
 
-    def set_noise_decibels_on_jumping(self, value):
-        my.tp_set_noise_decibels_on_jumping(self, value)
+    def set_noise_on_jumping(self, value):
+        my.tp_set_noise_on_jumping(self, value)
 
-    def set_noise_decibels_on_born(self, value):
-        my.tp_set_noise_decibels_on_born(self, value)
+    def set_noise_on_born(self, value):
+        my.tp_set_noise_on_born(self, value)
 
-    def set_noise_decibels_on_open(self, value):
-        my.tp_set_noise_decibels_on_open(self, value)
+    def set_noise_on_open(self, value):
+        my.tp_set_noise_on_open(self, value)
 
-    def set_noise_decibels_on_you_are_hit_and_now_dead(self, value):
-        my.tp_set_noise_decibels_on_you_are_hit_and_now_dead(self, value)
+    def set_noise_on_you_are_hit_and_now_dead(self, value):
+        my.tp_set_noise_on_you_are_hit_and_now_dead(self, value)
 
-    def set_noise_decibels_on_you_are_hit_but_still_alive(self, value):
-        my.tp_set_noise_decibels_on_you_are_hit_but_still_alive(self, value)
+    def set_noise_on_you_are_hit_but_still_alive(self, value):
+        my.tp_set_noise_on_you_are_hit_but_still_alive(self, value)
 
     def set_noise_decibels_hearing(self, value):
         my.tp_set_noise_decibels_hearing(self, value)
@@ -844,8 +844,8 @@ class Tp:
     def set_is_breather(self, value):
         my.tp_set_is_breather(self, value)
 
-    def set_noise_decibels_on_moving_or_being_carried(self, value):
-        my.tp_set_noise_decibels_on_moving_or_being_carried(self, value)
+    def set_noise_on_moving_or_being_carried(self, value):
+        my.tp_set_noise_on_moving_or_being_carried(self, value)
 
     def set_is_asleep_initially(self, value):
         my.tp_set_is_asleep_initially(self, value)

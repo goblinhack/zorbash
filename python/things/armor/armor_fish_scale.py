@@ -49,7 +49,7 @@ def tp_init(name, text_name, short_text_name):
     mytp.set_item_width(4)
     mytp.set_long_text_description("Scale mail armor composed of lots of little fish shaped scales. Smells a bit fishy too. You might actually be wearing a fish.")
     mytp.set_melting_chance_d1000(2)
-    mytp.set_noise_decibels_on_moving_or_being_carried(25)
+    mytp.set_noise_on_moving_or_being_carried(25)
     mytp.set_normal_placement_rules(True)
     mytp.set_on_enchant_do("me.on_enchant()")
     mytp.set_on_equip_do("me.on_equip()")
