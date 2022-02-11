@@ -1,6 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- luck                                                                                                                                         -->
+<!-- luck description                                                                                                                             -->
+<!-- luck bridge / lava / falling                                                                                                                 -->
 <!-- weight                                                                                                                                       -->
 <!-- haste                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->

@@ -31,7 +31,7 @@ def tp_init(name, text_name):
     my.tp_set_tile(self, tile=name + ".11", delay_ms=delay)
     my.tp_set_tile(self, tile=name + ".12", delay_ms=delay)
     my.tp_set_tile(self, tile=name + ".13", delay_ms=delay)
-    self.set_tile(
+    my.tp_set_tile(self,
         tile=name + ".14",
         delay_ms=delay,
         is_end_of_anim=True,

@@ -22,7 +22,7 @@ def tp_init(name):
     my.tp_set_tile(self, tile=name + ".5", delay_ms=delay)
     my.tp_set_tile(self, tile=name + ".6", delay_ms=delay)
     my.tp_set_tile(self, tile=name + ".7", delay_ms=delay)
-    self.set_tile(
+    my.tp_set_tile(self,
         tile=name + ".8",
         delay_ms=delay,
         is_end_of_anim=True,

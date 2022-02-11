@@ -29,7 +29,7 @@ def tp_init(name):
     my.tp_set_tile(self, "explosion_minor.1", delay_ms=delay)
     my.tp_set_tile(self, "explosion_minor.2", delay_ms=delay)
     my.tp_set_tile(self, "explosion_minor.3", delay_ms=delay)
-    self.set_tile(
+    my.tp_set_tile(self,
         "explosion_minor.4",
         delay_ms=delay,
         is_end_of_anim=True,

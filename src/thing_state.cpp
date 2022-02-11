@@ -28,10 +28,6 @@ void Thing::change_state(int new_state, const std::string &why)
 {
   TRACE_NO_INDENT();
 
-  if (get_infop()->monst_state == new_state) {
-    return;
-  }
-
   bool was_sleeping = is_sleeping;
 
   std::string to;
@@ -75,6 +71,12 @@ void Thing::change_state(int new_state, const std::string &why)
       is_sleeping = true;
       to          = "SLEEPING";
       break;
+  }
+
+  if (get_infop()->monst_state == new_state) {
+    dbg("Same state %s, reason: %s", to.c_str(), why.c_str());
+    TRACE_AND_INDENT();
+    return;
   }
 
   if (is_player()) {

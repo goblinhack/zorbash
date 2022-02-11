@@ -32,7 +32,7 @@ def tp_init(name, text_name):
     my.tp_set_tile(self, "green_splatter.11", delay_ms=delay)
     my.tp_set_tile(self, "green_splatter.12", delay_ms=delay)
     my.tp_set_tile(self, "green_splatter.13", delay_ms=delay)
-    self.set_tile(
+    my.tp_set_tile(self,
         "green_splatter.14",
         delay_ms=delay,
         is_end_of_anim=True,
