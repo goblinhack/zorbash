@@ -44,7 +44,7 @@ def tp_init(name, text_name):
     my.tp_set_hunger_health_pct(self, 95)
     my.tp_set_hunger_is_insatiable(self, True)
     my.tp_set_is_able_to_fall(self, True)
-    my.tp_set_is_able_to_jump_attack_chance_d1000(self, 20)
+    my.tp_set_is_able_to_jump_attack_chance_d1000(self, 100)
     my.tp_set_is_able_to_jump_attack(self, True)
     my.tp_set_is_able_to_jump_escape(self, True)
     my.tp_set_is_able_to_jump_on_low_hp_chance_d1000(self, 500)

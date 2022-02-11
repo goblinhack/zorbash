@@ -14,7 +14,7 @@ def on_born(me, x, y):
 
 
 def tp_init(name, text_name):
-    self = zorb_all.tp_init( name, text_name)
+    self = zorb_all.tp_init(name, text_name)
     my.tp_set_long_text_description_extra(self, "This particular zorblin was once a ruthless adventurer who plundered the seas in their mighty pirate ship, but due to a series of unfortunate and inexplicable events has now found themselves wandering the halls of this dungeon looking for the odd piece of eight.")
     my.tp_set_on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.tp_set_on_born_do(self, "me.on_born()")

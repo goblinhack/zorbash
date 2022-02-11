@@ -8,7 +8,7 @@ def on_death_of_a_follower(me, leader, x, y):
 
 
 def tp_init(name, text_name):
-    self = zorb_all.tp_init( name, text_name)
+    self = zorb_all.tp_init(name, text_name)
     my.tp_set_long_text_description_extra(self, "This particular zorblin is world weary and longing for an early retirement. Can you help?.")
     my.tp_set_on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.tp_set_text_description(self, "A very war-weary goblin.")

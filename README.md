@@ -3,6 +3,8 @@
 <!-- luck                                                                                                                                         -->
 <!-- luck description                                                                                                                             -->
 <!-- luck bridge / lava / falling                                                                                                                 -->
+<!-- luck trap                                                                                                                                    -->
+<!-- luck and enchanted stuff                                                                                                                     -->
 <!-- weight                                                                                                                                       -->
 <!-- haste                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->

@@ -12,7 +12,7 @@ def on_born(me, x, y):
 
 
 def tp_init(name, text_name):
-    self = zorb_all.tp_init( name, text_name)
+    self = zorb_all.tp_init(name, text_name)
     my.tp_set_long_text_description_extra(self, "This particular zorblin is well trained in the martial arts and prefers to fight bare fisted.")
     my.tp_set_on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.tp_set_on_born_do(self, "me.on_born()")

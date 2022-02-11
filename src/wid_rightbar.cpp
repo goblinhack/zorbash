@@ -16,6 +16,7 @@
 #include "my_wid_buffbox.hpp"
 #include "my_wid_debuffbox.hpp"
 #include "my_wid_inventory.hpp"
+#include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 
@@ -25,17 +26,375 @@ Widp wid_item_popup {};
 Widp wid_rightbar {};
 Widp wid_map_mini {};
 
+static WidPopup *wid_rightbar_popup;
+
 void wid_rightbar_fini(void)
 {
   TRACE_AND_INDENT();
   wid_destroy(&wid_item_popup);
   wid_destroy(&wid_rightbar);
+
+  delete wid_rightbar_popup;
+  wid_rightbar_popup = nullptr;
 }
 
 bool wid_rightbar_init(void)
 {
   TRACE_AND_INDENT();
   return wid_rightbar_create();
+}
+
+static void wid_rightbar_stats_over_ac_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 40;
+  int height = 20;
+
+  tlx -= width + 4;
+  brx = tlx + width;
+  bry += height;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
+  wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Armor class");
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log(
+      "Your armor factor is your main defense against melee attacks. An attacker must roll more than your AC to hit "
+      "you, so a higher AC is better.",
+      true);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  {
+    auto val = player->get_stat_def();
+    char tmp[ MAXSHORTSTR ];
+    snprintf(tmp, sizeof(tmp) - 1, "Your base armor class is %d.", val);
+    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  }
+
+  {
+    auto tot = player->get_stat_def_total();
+    auto val = player->get_stat_def();
+    if (val != tot) {
+      char tmp[ MAXSHORTSTR ];
+      snprintf(tmp, sizeof(tmp) - 1, "Your total armor class including all items and modifiers is %d.", tot);
+      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    } else {
+      wid_rightbar_popup->log("You currently have no armor bonuses", true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    }
+  }
+
+  game->wid_thing_info_create(level->player);
+}
+
+static void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 40;
+  int height = 20;
+
+  tlx -= width + 4;
+  brx = tlx + width;
+  bry += height;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
+  wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Strength");
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log("Your strength. 10 is for a normal puny human and gives no bonus.", true);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log("Strength gives you bonuses to hitting, jumping and shoving monsters.", true);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  {
+    auto val = player->get_stat_str();
+    char tmp[ MAXSHORTSTR ];
+    snprintf(tmp, sizeof(tmp) - 1, "Your strength is %d.", val);
+    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  }
+
+  {
+    auto val = player->get_stat_str();
+    auto tot = player->get_stat_str_total();
+    if (val != tot) {
+      char tmp[ MAXSHORTSTR ];
+      snprintf(tmp, sizeof(tmp) - 1, "Your total strength including all items and modifiers is %d.", val);
+      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    } else {
+      wid_rightbar_popup->log("You currently have no strength bonuses", true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    }
+  }
+
+  game->wid_thing_info_create(level->player);
+}
+
+static void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 40;
+  int height = 20;
+
+  tlx -= width + 4;
+  brx = tlx + width;
+  bry += height;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
+  wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Constitution");
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log("Your constitution. 10 is for a normal sickly human and gives no bonus.", true);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log(
+      "Constitution gives you bonuses for hunger, poison resistance and pushing that "
+      "bit harder to attack when utterly exhausted.",
+      true);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  {
+    auto val = player->get_stat_con();
+    char tmp[ MAXSHORTSTR ];
+    snprintf(tmp, sizeof(tmp) - 1, "Your constitution is %d.", val);
+    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  }
+
+  {
+    auto val = player->get_stat_con();
+    auto tot = player->get_stat_con_total();
+    if (val != tot) {
+      char tmp[ MAXSHORTSTR ];
+      snprintf(tmp, sizeof(tmp) - 1, "Your total constitution including all items and modifiers is %d.", val);
+      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    } else {
+      wid_rightbar_popup->log("You currently have no constitution bonuses", true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    }
+  }
+
+  game->wid_thing_info_create(level->player);
+}
+
+static void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 40;
+  int height = 20;
+
+  tlx -= width + 4;
+  brx = tlx + width;
+  bry += height;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
+  wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Dexterity");
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log("Your dexterity. 10 is for a normal human, whatever that is and gives no bonus.", true);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log(
+      "Dexterity gives you bonuses for defense, noise dampening and helps you find your "
+      "way across tricky bridges.",
+      true);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  {
+    auto val = player->get_stat_dex();
+    char tmp[ MAXSHORTSTR ];
+    snprintf(tmp, sizeof(tmp) - 1, "Your dexterity is %d.", val);
+    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  }
+
+  {
+    auto val = player->get_stat_dex();
+    auto tot = player->get_stat_dex_total();
+    if (val != tot) {
+      char tmp[ MAXSHORTSTR ];
+      snprintf(tmp, sizeof(tmp) - 1, "Your total dexterity including all items and modifiers is %d.", val);
+      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    } else {
+      wid_rightbar_popup->log("You currently have no dexterity bonuses", true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    }
+  }
+
+  game->wid_thing_info_create(level->player);
+}
+
+static void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_NO_INDENT();
+
+  if (wid_popup_exists()) {
+    return;
+  }
+
+  int32_t tlx;
+  int32_t tly;
+  int32_t brx;
+  int32_t bry;
+  wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
+
+  int width  = 40;
+  int height = 20;
+
+  tlx -= width + 4;
+  brx = tlx + width;
+  bry += height;
+
+  point tl(tlx, tly);
+  point br(brx, bry);
+
+  wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
+  wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Luck");
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log("Your luck factor. 10 is for a normal unlucky human and gives no bonus.", true);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  wid_rightbar_popup->log(
+      "Luck gives you bonuses for finding surprise enchanted items and making bridges "
+      "less likely to collapse, and avoiding setting off traps.",
+      true);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  {
+    auto val = player->get_stat_luck();
+    char tmp[ MAXSHORTSTR ];
+    snprintf(tmp, sizeof(tmp) - 1, "Your luck is %d.", val);
+    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+  }
+
+  {
+    auto val = player->get_stat_luck();
+    auto tot = player->get_stat_luck_total();
+    if (val != tot) {
+      char tmp[ MAXSHORTSTR ];
+      snprintf(tmp, sizeof(tmp) - 1, "Your total luck including all items and modifiers is %d.", val);
+      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    } else {
+      wid_rightbar_popup->log("You currently have no luck bonuses", true);
+      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
+    }
+  }
+
+  game->wid_thing_info_create(level->player);
+}
+
+static void wid_rightbar_stats_over_popup_e(Widp w)
+{
+  TRACE_NO_INDENT();
+
+  delete wid_rightbar_popup;
+  wid_rightbar_popup = nullptr;
 }
 
 static void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
@@ -375,37 +734,87 @@ static bool wid_rightbar_create(void)
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_ac_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_def_total(), player->get_stat_str_total(),
-             player->get_stat_con_total());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_def_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+  }
+
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(5, y_at + 1);
+    point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_str_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+  }
+
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(10, y_at + 1);
+    point br = make_point(10 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_con_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
   y_at += 1;
 
   ///////////////////////////////////////////////////////////////////////////
-  // DEX
+  // DEX LUK
   ///////////////////////////////////////////////////////////////////////////
   {
     TRACE_AND_INDENT();
-    auto w = wid_new_plain(wid_rightbar, "stats2-value");
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at + 1);
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_dex_total(), player->get_stat_luck_total(),
-             0);
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_dex_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
+
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(5, y_at + 1);
+    point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_luck_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+  }
+
   y_at += 3;
 
   auto itemsp = player->maybe_itemsp();

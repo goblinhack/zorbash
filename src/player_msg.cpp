@@ -83,7 +83,7 @@ bool Thing::player_is_ready_for_thing_info(void)
   //
   if (game->tick_current <= 1) {
     if (game->tick_requested.empty()) {
-      if ((time_get_time_ms() - game->tick_begin_ms) < 100) {
+      if ((time_get_time_ms() - game->tick_begin_ms) < 50) {
         return false;
       }
     }
