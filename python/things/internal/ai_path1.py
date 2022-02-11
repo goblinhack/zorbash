@@ -4,19 +4,19 @@ import tp
 
 def tp_init(name):
     mytp = tp.Tp(name, name)
-    mytp.set_gfx_animated(True)
-    mytp.set_is_debug_path(True)
-    mytp.set_is_moveable(True)
-    mytp.set_is_removeable_if_out_of_slots(True)
-    mytp.set_is_tmp_thing(True)
-    mytp.set_text_description("AI path.")
-    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
+    my.tp_set_gfx_animated(mytp, True)
+    my.tp_set_is_debug_path(mytp, True)
+    my.tp_set_is_moveable(mytp, True)
+    my.tp_set_is_removeable_if_out_of_slots(mytp, True)
+    my.tp_set_is_tmp_thing(mytp, True)
+    my.tp_set_text_description(mytp, "AI path.")
+    my.tp_set_z_depth(mytp, my.MAP_DEPTH_OBJ)
+    my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL)
 
     delay = 50
-    mytp.set_tile(tile=name + ".1", delay_ms=delay)
+    my.tp_set_tile(mytp, tile=name + ".1", delay_ms=delay)
 
-    mytp.update()
+    my.tp_update(mytp, )
 
 
 def init():

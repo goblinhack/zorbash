@@ -506,7 +506,7 @@ do
         grep -q $arg $PAYLOAD
         # Too much noise
         #if [ $? -ne 0 ]; then
-        #  echo "    mytp.$arg(False)" >> $PAYLOAD
+        #  echo "    my.tp_$arg(mytp, False)" >> $PAYLOAD
         #fi
     done
 

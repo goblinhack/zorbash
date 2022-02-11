@@ -4,26 +4,26 @@ import tp
 
 def tp_init(name, text_name):
     mytp = tp.Tp(name, text_name)
-    mytp.set_gfx_animated_can_hflip(True)
-    mytp.set_gfx_animated_can_vflip(True)
-    mytp.set_gfx_animated(True)
-    mytp.set_gfx_attack_anim(True)
-    mytp.set_gfx_show_outlined(True)
-    mytp.set_is_loggable(True)
-    mytp.set_is_moveable(True)
-    mytp.set_is_removeable_if_out_of_slots(True)
-    mytp.set_is_tmp_thing(True)
-    mytp.set_text_a_or_an("a")
-    mytp.set_text_description("Claw attack.")
-    mytp.set_z_depth(my.MAP_DEPTH_EQUIP)
-    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
+    my.tp_set_gfx_animated_can_hflip(mytp, True)
+    my.tp_set_gfx_animated_can_vflip(mytp, True)
+    my.tp_set_gfx_animated(mytp, True)
+    my.tp_set_gfx_attack_anim(mytp, True)
+    my.tp_set_gfx_show_outlined(mytp, True)
+    my.tp_set_is_loggable(mytp, True)
+    my.tp_set_is_moveable(mytp, True)
+    my.tp_set_is_removeable_if_out_of_slots(mytp, True)
+    my.tp_set_is_tmp_thing(mytp, True)
+    my.tp_set_text_a_or_an(mytp, "a")
+    my.tp_set_text_description(mytp, "Claw attack.")
+    my.tp_set_z_depth(mytp, my.MAP_DEPTH_EQUIP)
+    my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL)
 
     delay = 5
-    mytp.set_tile(tile=name + ".1", delay_ms=delay, is_dir_left=True)
-    mytp.set_tile(tile=name + ".2", delay_ms=delay, is_dir_left=True)
-    mytp.set_tile(tile=name + ".3", delay_ms=delay, is_dir_left=True)
-    mytp.set_tile(tile=name + ".4", delay_ms=delay, is_dir_left=True)
-    mytp.set_tile(tile=name + ".5", delay_ms=delay, is_dir_left=True)
+    my.tp_set_tile(mytp, tile=name + ".1", delay_ms=delay, is_dir_left=True)
+    my.tp_set_tile(mytp, tile=name + ".2", delay_ms=delay, is_dir_left=True)
+    my.tp_set_tile(mytp, tile=name + ".3", delay_ms=delay, is_dir_left=True)
+    my.tp_set_tile(mytp, tile=name + ".4", delay_ms=delay, is_dir_left=True)
+    my.tp_set_tile(mytp, tile=name + ".5", delay_ms=delay, is_dir_left=True)
     mytp.set_tile(
         tile=name + ".6",
         delay_ms=delay,
@@ -32,11 +32,11 @@ def tp_init(name, text_name):
         is_dead_on_end_of_anim=True,
     )
 
-    mytp.set_tile(tile=name + ".1", delay_ms=delay, is_dir_right=True)
-    mytp.set_tile(tile=name + ".2", delay_ms=delay, is_dir_right=True)
-    mytp.set_tile(tile=name + ".3", delay_ms=delay, is_dir_right=True)
-    mytp.set_tile(tile=name + ".4", delay_ms=delay, is_dir_right=True)
-    mytp.set_tile(tile=name + ".5", delay_ms=delay, is_dir_right=True)
+    my.tp_set_tile(mytp, tile=name + ".1", delay_ms=delay, is_dir_right=True)
+    my.tp_set_tile(mytp, tile=name + ".2", delay_ms=delay, is_dir_right=True)
+    my.tp_set_tile(mytp, tile=name + ".3", delay_ms=delay, is_dir_right=True)
+    my.tp_set_tile(mytp, tile=name + ".4", delay_ms=delay, is_dir_right=True)
+    my.tp_set_tile(mytp, tile=name + ".5", delay_ms=delay, is_dir_right=True)
     mytp.set_tile(
         tile=name + ".6",
         delay_ms=delay,
@@ -45,11 +45,11 @@ def tp_init(name, text_name):
         is_dead_on_end_of_anim=True,
     )
 
-    mytp.set_tile(tile=name + ".1", delay_ms=delay, is_dir_up=True)
-    mytp.set_tile(tile=name + ".2", delay_ms=delay, is_dir_up=True)
-    mytp.set_tile(tile=name + ".3", delay_ms=delay, is_dir_up=True)
-    mytp.set_tile(tile=name + ".4", delay_ms=delay, is_dir_up=True)
-    mytp.set_tile(tile=name + ".5", delay_ms=delay, is_dir_up=True)
+    my.tp_set_tile(mytp, tile=name + ".1", delay_ms=delay, is_dir_up=True)
+    my.tp_set_tile(mytp, tile=name + ".2", delay_ms=delay, is_dir_up=True)
+    my.tp_set_tile(mytp, tile=name + ".3", delay_ms=delay, is_dir_up=True)
+    my.tp_set_tile(mytp, tile=name + ".4", delay_ms=delay, is_dir_up=True)
+    my.tp_set_tile(mytp, tile=name + ".5", delay_ms=delay, is_dir_up=True)
     mytp.set_tile(
         tile=name + ".6",
         delay_ms=delay,
@@ -58,11 +58,11 @@ def tp_init(name, text_name):
         is_dead_on_end_of_anim=True,
     )
 
-    mytp.set_tile(tile=name + ".1", delay_ms=delay, is_dir_down=True)
-    mytp.set_tile(tile=name + ".2", delay_ms=delay, is_dir_down=True)
-    mytp.set_tile(tile=name + ".3", delay_ms=delay, is_dir_down=True)
-    mytp.set_tile(tile=name + ".4", delay_ms=delay, is_dir_down=True)
-    mytp.set_tile(tile=name + ".5", delay_ms=delay, is_dir_down=True)
+    my.tp_set_tile(mytp, tile=name + ".1", delay_ms=delay, is_dir_down=True)
+    my.tp_set_tile(mytp, tile=name + ".2", delay_ms=delay, is_dir_down=True)
+    my.tp_set_tile(mytp, tile=name + ".3", delay_ms=delay, is_dir_down=True)
+    my.tp_set_tile(mytp, tile=name + ".4", delay_ms=delay, is_dir_down=True)
+    my.tp_set_tile(mytp, tile=name + ".5", delay_ms=delay, is_dir_down=True)
     mytp.set_tile(
         tile=name + ".6",
         delay_ms=delay,
@@ -71,7 +71,7 @@ def tp_init(name, text_name):
         is_dead_on_end_of_anim=True,
     )
 
-    mytp.update()
+    my.tp_update(mytp, )
 
 
 def init():

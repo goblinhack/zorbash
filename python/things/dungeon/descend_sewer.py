@@ -7,32 +7,32 @@ def spawn(me, x, y):
 
 
 def tp_init(name, tiles=[], left1_tiles=[]):
-    # mytp.set_is_mob(True) # don't set to avoid auto place
+    # my.tp_set_is_mob(mytp, True) # don't set to avoid auto place
     mytp = tp.Tp(name)
-    mytp.set_gfx_animated(True)
-    mytp.set_gfx_shown_in_bg(True)
-    mytp.set_gfx_show_outlined(True)
-    mytp.set_is_biome_dungeon(True)
-    mytp.set_is_biome_swamp(True)
-    mytp.set_is_descend_sewer(True)
-    mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_loggable(True)
-    mytp.set_is_tickable(True)
-    mytp.set_light_color("lime")
-    mytp.set_light_power(1)
-    mytp.set_long_text_description("A filthy sewer pipe. Watch out, they can spawn surprises. Don't fall in!")
-    mytp.set_minion_limit(5)
-    mytp.set_on_idle_tick_frequency_dice("1d50+50:descend_sewer.spawn()")
-    mytp.set_text_a_or_an("a")
-    mytp.set_text_description("A slime coated sewer pipe.")
-    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(my.MAP_PRIO_ALWAYS_BEHIND)
+    my.tp_set_gfx_animated(mytp, True)
+    my.tp_set_gfx_shown_in_bg(mytp, True)
+    my.tp_set_gfx_show_outlined(mytp, True)
+    my.tp_set_is_biome_dungeon(mytp, True)
+    my.tp_set_is_biome_swamp(mytp, True)
+    my.tp_set_is_descend_sewer(mytp, True)
+    my.tp_set_is_described_when_hovering_over(mytp, True)
+    my.tp_set_is_loggable(mytp, True)
+    my.tp_set_is_tickable(mytp, True)
+    my.tp_set_light_color(mytp, "lime")
+    my.tp_set_light_power(mytp, 1)
+    my.tp_set_long_text_description(mytp, "A filthy sewer pipe. Watch out, they can spawn surprises. Don't fall in!")
+    my.tp_set_minion_limit(mytp, 5)
+    my.tp_set_on_idle_tick_frequency_dice(mytp, "1d50+50:descend_sewer.spawn()")
+    my.tp_set_text_a_or_an(mytp, "a")
+    my.tp_set_text_description(mytp, "A slime coated sewer pipe.")
+    my.tp_set_z_depth(mytp, my.MAP_DEPTH_OBJ)
+    my.tp_set_z_prio(mytp, my.MAP_PRIO_ALWAYS_BEHIND)
 
     delay = 2500
     for t in tiles:
-        mytp.set_tile(tile=t, delay_ms=delay)
+        my.tp_set_tile(mytp, tile=t, delay_ms=delay)
 
-    mytp.update()
+    my.tp_update(mytp, )
 
 
 def init():

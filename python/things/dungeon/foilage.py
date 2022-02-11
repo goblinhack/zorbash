@@ -4,30 +4,30 @@ import tp
 
 def tp_init(name, tiles=[]):
     mytp = tp.Tp(name, "foilage")
-    mytp.set_collision_check(True)
-    mytp.set_collision_hit_priority(3)
-    mytp.set_gfx_long_shadow_caster(True)
-    mytp.set_gfx_oversized_and_on_floor(True)
-    mytp.set_gfx_shown_in_bg(True)
-    mytp.set_gfx_solid_shadow(True)
-    mytp.set_health_initial_dice("1d5")
-    mytp.set_is_able_to_fall(True)
-    mytp.set_is_attackable_by_player(True)
-    mytp.set_is_biome_dungeon(True)
-    mytp.set_is_cursor_can_hover_over(True)
-    mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_foilage(True)
-    mytp.set_is_light_blocker_for_monst(True)  # to give cover to the player
-    mytp.set_noise_blocker(True)
-    mytp.set_text_a_or_an("the")
-    mytp.set_text_description("Thick and sicky looking foilage and roots.")
-    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(my.MAP_PRIO_IN_FRONT)
+    my.tp_set_collision_check(mytp, True)
+    my.tp_set_collision_hit_priority(mytp, 3)
+    my.tp_set_gfx_long_shadow_caster(mytp, True)
+    my.tp_set_gfx_oversized_and_on_floor(mytp, True)
+    my.tp_set_gfx_shown_in_bg(mytp, True)
+    my.tp_set_gfx_solid_shadow(mytp, True)
+    my.tp_set_health_initial_dice(mytp, "1d5")
+    my.tp_set_is_able_to_fall(mytp, True)
+    my.tp_set_is_attackable_by_player(mytp, True)
+    my.tp_set_is_biome_dungeon(mytp, True)
+    my.tp_set_is_cursor_can_hover_over(mytp, True)
+    my.tp_set_is_described_when_hovering_over(mytp, True)
+    my.tp_set_is_foilage(mytp, True)
+    my.tp_set_is_light_blocker_for_monst(mytp, True)  # to give cover to the player
+    my.tp_set_noise_blocker(mytp, True)
+    my.tp_set_text_a_or_an(mytp, "the")
+    my.tp_set_text_description(mytp, "Thick and sicky looking foilage and roots.")
+    my.tp_set_z_depth(mytp, my.MAP_DEPTH_OBJ)
+    my.tp_set_z_prio(mytp, my.MAP_PRIO_IN_FRONT)
 
     for t in tiles:
-        mytp.set_tile(t)
+        my.tp_set_tile(mytp, t)
 
-    mytp.update()
+    my.tp_update(mytp, )
 
 
 def init():
