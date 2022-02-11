@@ -33,9 +33,9 @@ for IN in \
 do
     echo $IN
 
-    sed '1,/mytp = tp.Tp(/!d' $IN > $PRE
-    sed '/mytp = tp.Tp(/,/mytp.set_z_prio(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
-    sed '/mytp.set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
+    sed '1,/self = tp.Tp(/!d' $IN > $PRE
+    sed '/self = tp.Tp(/,/self.set_z_prio(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
+    sed '/self.set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \
       set_aggression_level_pct \
@@ -506,7 +506,7 @@ do
         grep -q $arg $PAYLOAD
         # Too much noise
         #if [ $? -ne 0 ]; then
-        #  echo "    my.tp_$arg(mytp, False)" >> $PAYLOAD
+        #  echo "    my.tp_$arg(self, False)" >> $PAYLOAD
         #fi
     done
 

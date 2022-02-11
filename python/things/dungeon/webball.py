@@ -3,34 +3,34 @@ import tp
 
 
 def tp_init(name, tiles=[]):
-    mytp = tp.Tp(name, "webball")
-    my.tp_set_collision_check(mytp, True)
-    my.tp_set_collision_hit_priority(mytp, 3)
-    my.tp_set_gfx_show_outlined(mytp, True)
-    my.tp_set_health_initial_dice(mytp, "1d40")
-    my.tp_set_is_able_to_fall(mytp, True)
-    my.tp_set_is_attackable_by_monst(mytp, True)
-    my.tp_set_is_attackable_by_player(mytp, True)
-    my.tp_set_is_biome_dungeon(mytp, True)
-    my.tp_set_is_burnable(mytp, True)
-    my.tp_set_is_combustible(mytp, True)
-    my.tp_set_is_cursor_can_hover_over(mytp, True)
-    my.tp_set_is_described_when_hovering_over(mytp, True)
-    my.tp_set_is_hittable(mytp, True)
-    my.tp_set_is_interesting(mytp, True)  # So robot can see and break out
-    my.tp_set_is_loggable(mytp, True)
-    my.tp_set_is_spiderweb(mytp, True)
-    my.tp_set_is_sticky(mytp, True)
-    my.tp_set_normal_placement_rules(mytp, False)
-    my.tp_set_text_a_or_an(mytp, "a")
-    my.tp_set_text_description(mytp, "Thick and sticky webball.")
-    my.tp_set_z_depth(mytp, my.MAP_DEPTH_OBJ)
-    my.tp_set_z_prio(mytp, my.MAP_PRIO_IN_FRONT)  # so appears behind spider
+    self = tp.Tp(name, "webball")
+    my.tp_set_collision_check(self, True)
+    my.tp_set_collision_hit_priority(self, 3)
+    my.tp_set_gfx_show_outlined(self, True)
+    my.tp_set_health_initial_dice(self, "1d40")
+    my.tp_set_is_able_to_fall(self, True)
+    my.tp_set_is_attackable_by_monst(self, True)
+    my.tp_set_is_attackable_by_player(self, True)
+    my.tp_set_is_biome_dungeon(self, True)
+    my.tp_set_is_burnable(self, True)
+    my.tp_set_is_combustible(self, True)
+    my.tp_set_is_cursor_can_hover_over(self, True)
+    my.tp_set_is_described_when_hovering_over(self, True)
+    my.tp_set_is_hittable(self, True)
+    my.tp_set_is_interesting(self, True)  # So robot can see and break out
+    my.tp_set_is_loggable(self, True)
+    my.tp_set_is_spiderweb(self, True)
+    my.tp_set_is_sticky(self, True)
+    my.tp_set_normal_placement_rules(self, False)
+    my.tp_set_text_a_or_an(self, "a")
+    my.tp_set_text_description(self, "Thick and sticky webball.")
+    my.tp_set_z_depth(self, my.MAP_DEPTH_OBJ)
+    my.tp_set_z_prio(self, my.MAP_PRIO_IN_FRONT)  # so appears behind spider
 
     for t in tiles:
-        my.tp_set_tile(mytp, t)
+        my.tp_set_tile(self, t)
 
-    my.tp_update(mytp, )
+    my.tp_update(self)
 
 
 def init():

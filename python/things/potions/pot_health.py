@@ -1,7 +1,7 @@
 import my
 import tp
 
-mytp = None
+self = None
 
 
 def on_use(owner, item, target, x, y):
@@ -61,72 +61,72 @@ def on_enchant(me, x, y):
     if my.thing_is_player(owner):
         my.thing_msg(me, "The potion bubbles.")
     enchant = my.thing_get_enchant(me)
-    global mytp
+    global self
     if enchant == 0:
-        my.tp_set_long_text_description(mytp, "Restores you to 80 percent health")
+        my.tp_set_long_text_description(self, "Restores you to 80 percent health")
     elif enchant == 0:
-        my.tp_set_long_text_description(mytp, "Restores you to 90 percent health")
+        my.tp_set_long_text_description(self, "Restores you to 90 percent health")
     else:
-        my.tp_set_long_text_description(mytp, "Restores you to full health")
+        my.tp_set_long_text_description(self, "Restores you to full health")
 
 
 def tp_init(name, text_name, short_text_name):
-    global mytp
-    mytp = tp.Tp(name, text_name, short_text_name)
-    my.tp_set_collision_hit_priority(mytp, 5)
-    my.tp_set_collision_hit_priority(mytp, 6)
-    my.tp_set_enchant_max(mytp, 2)
-    my.tp_set_environ_avoids_fire(mytp, 20)
-    my.tp_set_gfx_animated(mytp, True)
-    my.tp_set_gfx_short_shadow_caster(mytp, True)
-    my.tp_set_gfx_show_outlined(mytp, True)
-    my.tp_set_gold_value_dice(mytp, "50")
-    my.tp_set_is_able_to_fall(mytp, True)
-    my.tp_set_is_bag_item(mytp, True)
-    my.tp_set_is_biome_dungeon(mytp, True)
-    my.tp_set_is_collectable(mytp, True)
-    my.tp_set_is_combustible(mytp, True)
-    my.tp_set_is_crushable(mytp, True)
-    my.tp_set_is_described_when_hovering_over(mytp, True)
-    my.tp_set_is_droppable(mytp, True)
-    my.tp_set_is_enchantable(mytp, True)
-    my.tp_set_is_glass(mytp, True)
-    my.tp_set_is_health_booster(mytp, True)
-    my.tp_set_is_hittable(mytp, True)
-    my.tp_set_is_item(mytp, True)
-    my.tp_set_is_loggable(mytp, True)
-    my.tp_set_is_moveable(mytp, True)
-    my.tp_set_is_potion(mytp, True)
-    my.tp_set_is_throwable(mytp, True)
-    my.tp_set_is_tickable(mytp, True)  # So it can interact with fire
-    my.tp_set_is_treasure_class_b(mytp, True)
-    my.tp_set_is_treasure(mytp, True)
-    my.tp_set_is_treasure_type(mytp, True)
-    my.tp_set_is_usable(mytp, True)
-    my.tp_set_item_height(mytp, 4)
-    my.tp_set_item_width(mytp, 4)
-    my.tp_set_long_text_description(mytp, "Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
-    my.tp_set_noise_on_moving_or_being_carried(mytp, 10)
-    my.tp_set_normal_placement_rules(mytp, True)
-    my.tp_set_on_enchant_do(mytp, "me.on_enchant()")
-    my.tp_set_on_fall_do(mytp, "me.on_fall()")
-    my.tp_set_on_use_do(mytp, "me.on_use()")
-    my.tp_set_on_you_are_hit_but_still_alive_do(mytp, "me.on_you_are_hit_but_still_alive()")
-    my.tp_set_on_you_are_on_fire_do(mytp, "me.on_fire()")
-    my.tp_set_text_a_or_an(mytp, "a")
-    my.tp_set_text_description(mytp, "A potion of health restoration.")
-    my.tp_set_text_enchant(mytp, "+10 percent health and stamina")
-    my.tp_set_z_depth(mytp, my.MAP_DEPTH_OBJ)
-    my.tp_set_z_prio(mytp, my.MAP_PRIO_BEHIND)
+    global self
+    self = tp.Tp(name, text_name, short_text_name)
+    my.tp_set_collision_hit_priority(self, 5)
+    my.tp_set_collision_hit_priority(self, 6)
+    my.tp_set_enchant_max(self, 2)
+    my.tp_set_environ_avoids_fire(self, 20)
+    my.tp_set_gfx_animated(self, True)
+    my.tp_set_gfx_short_shadow_caster(self, True)
+    my.tp_set_gfx_show_outlined(self, True)
+    my.tp_set_gold_value_dice(self, "50")
+    my.tp_set_is_able_to_fall(self, True)
+    my.tp_set_is_bag_item(self, True)
+    my.tp_set_is_biome_dungeon(self, True)
+    my.tp_set_is_collectable(self, True)
+    my.tp_set_is_combustible(self, True)
+    my.tp_set_is_crushable(self, True)
+    my.tp_set_is_described_when_hovering_over(self, True)
+    my.tp_set_is_droppable(self, True)
+    my.tp_set_is_enchantable(self, True)
+    my.tp_set_is_glass(self, True)
+    my.tp_set_is_health_booster(self, True)
+    my.tp_set_is_hittable(self, True)
+    my.tp_set_is_item(self, True)
+    my.tp_set_is_loggable(self, True)
+    my.tp_set_is_moveable(self, True)
+    my.tp_set_is_potion(self, True)
+    my.tp_set_is_throwable(self, True)
+    my.tp_set_is_tickable(self, True)  # So it can interact with fire
+    my.tp_set_is_treasure_class_b(self, True)
+    my.tp_set_is_treasure(self, True)
+    my.tp_set_is_treasure_type(self, True)
+    my.tp_set_is_usable(self, True)
+    my.tp_set_item_height(self, 4)
+    my.tp_set_item_width(self, 4)
+    my.tp_set_long_text_description(self, "Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
+    my.tp_set_noise_on_moving_or_being_carried(self, 10)
+    my.tp_set_normal_placement_rules(self, True)
+    my.tp_set_on_enchant_do(self, "me.on_enchant()")
+    my.tp_set_on_fall_do(self, "me.on_fall()")
+    my.tp_set_on_use_do(self, "me.on_use()")
+    my.tp_set_on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
+    my.tp_set_on_you_are_on_fire_do(self, "me.on_fire()")
+    my.tp_set_text_a_or_an(self, "a")
+    my.tp_set_text_description(self, "A potion of health restoration.")
+    my.tp_set_text_enchant(self, "+10 percent health and stamina")
+    my.tp_set_z_depth(self, my.MAP_DEPTH_OBJ)
+    my.tp_set_z_prio(self, my.MAP_PRIO_BEHIND)
 
-    my.tp_set_tile(mytp, tile=name + ".1", delay_ms=500)
-    my.tp_set_tile(mytp, tile=name + ".2", delay_ms=500)
-    my.tp_set_tile(mytp, tile=name + ".3", delay_ms=500)
-    my.tp_set_tile(mytp, tile=name + ".4", delay_ms=500)
-    my.tp_set_tile(mytp, tile=name + ".5", delay_ms=500)
-    my.tp_set_tile(mytp, tile=name + ".6", delay_ms=500)
+    my.tp_set_tile(self, tile=name + ".1", delay_ms=500)
+    my.tp_set_tile(self, tile=name + ".2", delay_ms=500)
+    my.tp_set_tile(self, tile=name + ".3", delay_ms=500)
+    my.tp_set_tile(self, tile=name + ".4", delay_ms=500)
+    my.tp_set_tile(self, tile=name + ".5", delay_ms=500)
+    my.tp_set_tile(self, tile=name + ".6", delay_ms=500)
 
-    my.tp_update(mytp, )
+    my.tp_update(self)
 
 
 def init():

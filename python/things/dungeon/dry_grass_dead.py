@@ -3,25 +3,25 @@ import tp
 
 
 def tp_init(name, tiles=[]):
-    mytp = tp.Tp(name, "dry trampled grass")
-    my.tp_set_gfx_short_shadow_caster(mytp, True)
-    my.tp_set_gfx_shown_in_bg(mytp, True)
-    my.tp_set_gfx_very_short_shadow_caster(mytp, True)
-    my.tp_set_is_able_to_fall(mytp, True)
-    my.tp_set_is_biome_dungeon(mytp, True)
-    my.tp_set_is_cursor_can_hover_over(mytp, True)
-    my.tp_set_is_described_when_hovering_over(mytp, True)
-    my.tp_set_is_dry_grass(mytp, True)
-    my.tp_set_is_interesting(mytp, True)
-    my.tp_set_text_a_or_an(mytp, "the")
-    my.tp_set_text_description(mytp, "Burnt not so funky grass.")
-    my.tp_set_z_depth(mytp, my.MAP_DEPTH_FLOOR2)
-    my.tp_set_z_prio(mytp, my.MAP_PRIO_BEHIND)
+    self = tp.Tp(name, "dry trampled grass")
+    my.tp_set_gfx_short_shadow_caster(self, True)
+    my.tp_set_gfx_shown_in_bg(self, True)
+    my.tp_set_gfx_very_short_shadow_caster(self, True)
+    my.tp_set_is_able_to_fall(self, True)
+    my.tp_set_is_biome_dungeon(self, True)
+    my.tp_set_is_cursor_can_hover_over(self, True)
+    my.tp_set_is_described_when_hovering_over(self, True)
+    my.tp_set_is_dry_grass(self, True)
+    my.tp_set_is_interesting(self, True)
+    my.tp_set_text_a_or_an(self, "the")
+    my.tp_set_text_description(self, "Burnt not so funky grass.")
+    my.tp_set_z_depth(self, my.MAP_DEPTH_FLOOR2)
+    my.tp_set_z_prio(self, my.MAP_PRIO_BEHIND)
 
     for t in tiles:
-        my.tp_set_tile(mytp, t)
+        my.tp_set_tile(self, t)
 
-    my.tp_update(mytp, )
+    my.tp_update(self)
 
 
 def init():
