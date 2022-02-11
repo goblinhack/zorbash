@@ -25,12 +25,14 @@
 bool Thing::state_open_inventory(void)
 {
   TRACE_NO_INDENT();
+  AI_LOG("Open inventory.");
 
   //
   // Wait for the inventory to be remade
   //
   if (is_player()) {
     if (game->request_remake_rightbar) {
+      AI_LOG("Wait on inventory.");
       return true;
     }
   }

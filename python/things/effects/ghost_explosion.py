@@ -21,7 +21,7 @@ def tp_init(name):
     delay = 100  # too fast and you don't see it
     my.tp_set_tile(self, tile=name + ".2", delay_ms=delay)
     my.tp_set_tile(self, tile=name + ".3", delay_ms=delay)
-    self.set_tile(
+    my.tp_set_tile(self,
         tile=name + ".4",
         delay_ms=delay,
         is_end_of_anim=True,

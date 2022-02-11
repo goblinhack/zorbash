@@ -27,7 +27,7 @@ def tp_init(name):
     my.tp_set_tile(self, tile=name + "_left.3", delay_ms=delay, is_dir_left=True)
     my.tp_set_tile(self, tile=name + "_left.4", delay_ms=delay, is_dir_left=True)
     my.tp_set_tile(self, tile=name + "_left.5", delay_ms=delay, is_dir_left=True)
-    self.set_tile(
+    my.tp_set_tile(self,
         tile=name + "_left.6",
         delay_ms=delay,
         is_dir_left=True,
@@ -39,7 +39,7 @@ def tp_init(name):
     my.tp_set_tile(self, tile=name + "_left.3", delay_ms=delay, is_dir_right=True)
     my.tp_set_tile(self, tile=name + "_left.4", delay_ms=delay, is_dir_right=True)
     my.tp_set_tile(self, tile=name + "_left.5", delay_ms=delay, is_dir_right=True)
-    self.set_tile(
+    my.tp_set_tile(self,
         tile=name + "_left.6",
         delay_ms=delay,
         is_dir_right=True,
@@ -51,7 +51,7 @@ def tp_init(name):
     my.tp_set_tile(self, tile=name + "_up.3", delay_ms=delay, is_dir_up=True)
     my.tp_set_tile(self, tile=name + "_up.4", delay_ms=delay, is_dir_up=True)
     my.tp_set_tile(self, tile=name + "_up.5", delay_ms=delay, is_dir_up=True)
-    self.set_tile(
+    my.tp_set_tile(self,
         tile=name + "_up.6",
         delay_ms=delay,
         is_dir_up=True,
@@ -63,7 +63,7 @@ def tp_init(name):
     my.tp_set_tile(self, tile=name + "_up.3", delay_ms=delay, is_dir_down=True)
     my.tp_set_tile(self, tile=name + "_up.4", delay_ms=delay, is_dir_down=True)
     my.tp_set_tile(self, tile=name + "_up.5", delay_ms=delay, is_dir_down=True)
-    self.set_tile(
+    my.tp_set_tile(self,
         tile=name + "_up.6",
         delay_ms=delay,
         is_dir_down=True,

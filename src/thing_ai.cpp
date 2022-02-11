@@ -2009,7 +2009,7 @@ bool Thing::ai_tick(bool recursing)
       break;
 
     case MONST_STATE_REPACK_INVENTORY :
-      if (state_open_inventory()) {
+      if (state_repack_inventory()) {
         return true;
       }
       break;

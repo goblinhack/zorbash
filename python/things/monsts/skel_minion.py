@@ -159,7 +159,7 @@ def tp_init(name, text_name):
     my.tp_set_tile(self, "skeleton.4.dead", is_resurrecting=True, delay_ms=delay)
     my.tp_set_tile(self, "skeleton.3.dead", is_resurrecting=True, delay_ms=delay)
     my.tp_set_tile(self, "skeleton.2.dead", is_resurrecting=True, delay_ms=delay)
-    self.set_tile(
+    my.tp_set_tile(self,
         "skeleton.1.dead",
         is_resurrecting=True,
         is_end_of_anim=True,
