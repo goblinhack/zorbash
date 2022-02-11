@@ -829,6 +829,10 @@ public:
   int decr_stat_dex_mod(int);
   int decr_stat_dex_mod(void);
   int decr_stat_dex(void);
+  int decr_stat_luck(int);
+  int decr_stat_luck_mod(int);
+  int decr_stat_luck_mod(void);
+  int decr_stat_luck(void);
   int decr_stats02(int);
   int decr_stats02(void);
   int decr_stats03(int);
@@ -984,6 +988,9 @@ public:
   int get_stat_dex_mod(void);
   int get_stat_dex_total(void);
   int get_stat_dex(void);
+  int get_stat_luck_mod(void);
+  int get_stat_luck_total(void);
+  int get_stat_luck(void);
   int get_stats02(void);
   int get_stats03(void);
   int get_stats04(void);
@@ -1086,6 +1093,10 @@ public:
   int incr_stat_dex_mod(int);
   int incr_stat_dex_mod(void);
   int incr_stat_dex(void);
+  int incr_stat_luck(int);
+  int incr_stat_luck_mod(int);
+  int incr_stat_luck_mod(void);
+  int incr_stat_luck(void);
   int incr_stats02(int);
   int incr_stats02(void);
   int incr_stats03(int);
@@ -1484,6 +1495,8 @@ public:
   int set_stat_def_mod(int);
   int set_stat_dex(int);
   int set_stat_dex_mod(int);
+  int set_stat_luck(int);
+  int set_stat_luck_mod(int);
   int set_stats02(int);
   int set_stats03(int);
   int set_stats04(int);

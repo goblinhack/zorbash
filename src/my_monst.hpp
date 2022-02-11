@@ -140,6 +140,8 @@ public:
   int stat_def_mod        = {};
   int stat_dex            = {};
   int stat_dex_mod        = {};
+  int stat_luck           = {};
+  int stat_luck_mod       = {};
   int stats02             = {};
   int stats03             = {};
   int stats04             = {};

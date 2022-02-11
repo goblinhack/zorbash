@@ -949,9 +949,6 @@ class Tp:
     def set_is_able_to_use_amulet(self, value):
         my.tp_set_is_able_to_use_amulet(self, value)
 
-    def set_is_able_to_use_helmet(self, value):
-        my.tp_set_is_able_to_use_helmet(self, value)
-
     def set_is_able_to_use_boots(self, value):
         my.tp_set_is_able_to_use_boots(self, value)
 
@@ -1792,6 +1789,9 @@ class Tp:
     def set_stat_dex(self, value):
         my.tp_set_stat_dex(self, value)
 
+    def set_stat_luck(self, value):
+        my.tp_set_stat_luck(self, value)
+
     def set_stat_def(self, value):
         my.tp_set_stat_def(self, value)
 
@@ -1806,6 +1806,9 @@ class Tp:
 
     def set_stat_dex_mod(self, value):
         my.tp_set_stat_dex_mod(self, value)
+
+    def set_stat_luck_mod(self, value):
+        my.tp_set_stat_luck_mod(self, value)
 
     def set_stat_def_mod(self, value):
         my.tp_set_stat_def_mod(self, value)

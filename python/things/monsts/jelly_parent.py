@@ -91,6 +91,7 @@ def tp_init(name, text_name):
     mytp.set_stat_con(14)
     mytp.set_stat_def(8)
     mytp.set_stat_dex(10)
+    mytp.set_stat_luck(10)
     mytp.set_stat_str(15)
     mytp.set_text_a_or_an("a")
     mytp.set_text_description("A gargantuan pile of sentient jelly.")

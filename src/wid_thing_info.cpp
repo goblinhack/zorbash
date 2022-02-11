@@ -173,6 +173,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_stat_str(wid_popup_window, t);
   wid_thing_info_add_stat_con(wid_popup_window, t);
   wid_thing_info_add_stat_dex(wid_popup_window, t);
+  wid_thing_info_add_stat_luck(wid_popup_window, t);
   if (t->is_alive_monst() || t->is_player()) {
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -248,6 +249,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_stat_str(wid_popup_window, t);
     wid_thing_info_add_stat_con(wid_popup_window, t);
     wid_thing_info_add_stat_dex(wid_popup_window, t);
+    wid_thing_info_add_stat_luck(wid_popup_window, t);
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
   }
@@ -1269,6 +1271,23 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
   } else if (t->get_stat_dex_mod()) {
     auto stat = t->get_stat_dex_mod();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity mod            %3s", modifier_to_string(stat).c_str());
+    w->log(tmp);
+  }
+}
+
+void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  if (t->is_alive_monst() || t->is_player()) {
+    auto stat = t->get_stat_luck_total();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck                   %2d%3s", stat,
+             stat_to_bonus_slash_str(stat).c_str());
+    w->log(tmp);
+  } else if (t->get_stat_luck_mod()) {
+    auto stat = t->get_stat_luck_mod();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck mod                 %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
 }

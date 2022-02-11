@@ -1500,6 +1500,8 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(stat_def_penalty_when_stuck_max),
     MY_ADD_PYTHON_TP_FUNCTION(stat_dex),
     MY_ADD_PYTHON_TP_FUNCTION(stat_dex_mod),
+    MY_ADD_PYTHON_TP_FUNCTION(stat_luck),
+    MY_ADD_PYTHON_TP_FUNCTION(stat_luck_mod),
     MY_ADD_PYTHON_TP_FUNCTION(stats02),
     MY_ADD_PYTHON_TP_FUNCTION(stats03),
     MY_ADD_PYTHON_TP_FUNCTION(stats04),

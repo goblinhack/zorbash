@@ -401,7 +401,8 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_dex_total(), 0, 0);
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d   %2d   %2d", player->get_stat_dex_total(), player->get_stat_luck_total(),
+             0);
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -791,10 +792,10 @@ static bool wid_rightbar_create(void)
   //
   y_at += 8;
   {
-    auto w      = wid_new_container(wid_rightbar, "map_mini wid");
+    auto w       = wid_new_container(wid_rightbar, "map_mini wid");
     wid_map_mini = w;
-    point tl    = make_point(0, y_at);
-    point br    = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + UI_SIDEBAR_RIGHT_WIDTH);
+    point tl     = make_point(0, y_at);
+    point br     = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + UI_SIDEBAR_RIGHT_WIDTH);
 
     wid_set_pos(w, tl, br);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);

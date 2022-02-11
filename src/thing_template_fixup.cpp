@@ -85,6 +85,9 @@ void tp_fixup(void)
       if (! tp->get_stat_dex()) {
         tp->set_stat_dex(10);
       }
+      if (! tp->get_stat_luck()) {
+        tp->set_stat_luck(10);
+      }
     }
 
     //

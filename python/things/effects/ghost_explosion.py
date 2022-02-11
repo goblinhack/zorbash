@@ -4,10 +4,10 @@ import tp
 
 def tp_init(name):
     mytp = tp.Tp(name)
+    mytp.set_gfx_animated_can_hflip(True)
     mytp.set_gfx_animated(True)
     mytp.set_gfx_short_shadow_caster(True)
     mytp.set_gfx_show_outlined(True)
-    mytp.set_gfx_animated_can_hflip(True)
     mytp.set_is_explosion(True)
     mytp.set_is_floating(True)
     mytp.set_is_loggable(True)

@@ -111,6 +111,14 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
+    auto v = tpp->get_stat_luck();
+    if (unlikely(v)) {
+      set_stat_luck(v);
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
     auto v = tpp->stats02();
     if (unlikely(v)) {
       set_stats02(v);
@@ -194,6 +202,14 @@ void Thing::update(void)
     auto v = tpp->stat_dex_mod();
     if (unlikely(v)) {
       set_stat_dex_mod(v);
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_luck_mod();
+    if (unlikely(v)) {
+      set_stat_luck_mod(v);
     }
   }
 
