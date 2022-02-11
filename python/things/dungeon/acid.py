@@ -3,32 +3,32 @@ import tp
 
 
 def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
-    mytp = tp.Tp(name, text_name, short_text_name)
-    my.tp_set_ai_obstacle(mytp, True)
-    my.tp_set_damage_acid_chance_d1000(mytp, 1000)
-    my.tp_set_damage_acid_dice(mytp, "1d3+1")
-    my.tp_set_damage_natural_attack_type(mytp, "burn")
-    my.tp_set_gfx_show_outlined(mytp, True)
-    my.tp_set_is_able_to_fall(mytp, True)
-    my.tp_set_is_acid(mytp, True)
-    my.tp_set_is_hazard(mytp, True)
-    my.tp_set_is_loggable(mytp, True)
-    my.tp_set_is_meat_eater(mytp, True)
-    my.tp_set_is_removeable_if_out_of_slots(mytp, True)
-    my.tp_set_is_tickable(mytp, True)  # for lifespan tick
-    my.tp_set_lifespan_dice(mytp, "1d20+20")
-    my.tp_set_light_color(mytp, "green")
-    my.tp_set_light_power(mytp, 2)
-    my.tp_set_text_a_or_an(mytp, "")
-    my.tp_set_text_description(mytp, "A pool of hissing acid.")
-    my.tp_set_text_hits(mytp, "burns")
-    my.tp_set_z_depth(mytp, my.MAP_DEPTH_FLOOR2)
-    my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL)
+    self = tp.Tp(name, text_name, short_text_name)
+    my.tp_set_ai_obstacle(self, True)
+    my.tp_set_damage_acid_chance_d1000(self, 1000)
+    my.tp_set_damage_acid_dice(self, "1d3+1")
+    my.tp_set_damage_natural_attack_type(self, "burn")
+    my.tp_set_gfx_show_outlined(self, True)
+    my.tp_set_is_able_to_fall(self, True)
+    my.tp_set_is_acid(self, True)
+    my.tp_set_is_hazard(self, True)
+    my.tp_set_is_loggable(self, True)
+    my.tp_set_is_meat_eater(self, True)
+    my.tp_set_is_removeable_if_out_of_slots(self, True)
+    my.tp_set_is_tickable(self, True)  # for lifespan tick
+    my.tp_set_lifespan_dice(self, "1d20+20")
+    my.tp_set_light_color(self, "green")
+    my.tp_set_light_power(self, 2)
+    my.tp_set_text_a_or_an(self, "")
+    my.tp_set_text_description(self, "A pool of hissing acid.")
+    my.tp_set_text_hits(self, "burns")
+    my.tp_set_z_depth(self, my.MAP_DEPTH_FLOOR2)
+    my.tp_set_z_prio(self, my.MAP_PRIO_NORMAL)
 
     for t in tiles:
-        my.tp_set_tile(mytp, tile=t)
+        my.tp_set_tile(self, tile=t)
 
-    my.tp_update(mytp, )
+    my.tp_update(self)
 
 
 def init():

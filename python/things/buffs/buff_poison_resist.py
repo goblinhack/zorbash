@@ -1,7 +1,7 @@
 import my
 import tp
 
-mytp = None
+self = None
 
 
 def on_owner_set(me, owner, x, y):
@@ -94,35 +94,35 @@ def on_tick(owner, item, x, y):
 
 
 def tp_init(name, text_name):
-    global mytp
-    mytp = tp.Tp(name, text_name)
+    global self
+    self = tp.Tp(name, text_name)
 
-    my.tp_set_is_buff(mytp, True)
-    my.tp_set_is_loggable(mytp, True)
-    my.tp_set_long_text_description(mytp, "Poison causes you 50 percent less damage.")
-    my.tp_set_on_owner_damage_acid_do(mytp, "me.on_owner_damage_acid()")
-    my.tp_set_on_owner_damage_cold_do(mytp, "me.on_owner_damage_cold()")
-    my.tp_set_on_owner_damage_crush_do(mytp, "me.on_owner_damage_crush()")
-    my.tp_set_on_owner_damage_digest_do(mytp, "me.on_owner_damage_digest()")
-    my.tp_set_on_owner_damage_energy_do(mytp, "me.on_owner_damage_energy()")
-    my.tp_set_on_owner_damage_fire_do(mytp, "me.on_owner_damage_fire()")
-    my.tp_set_on_owner_damage_future1_do(mytp, "me.on_owner_damage_future1()")
-    my.tp_set_on_owner_damage_future2_do(mytp, "me.on_owner_damage_future2()")
-    my.tp_set_on_owner_damage_future3_do(mytp, "me.on_owner_damage_future3()")
-    my.tp_set_on_owner_damage_lightning_do(mytp, "me.on_owner_damage_lightning()")
-    my.tp_set_on_owner_damage_melee_do(mytp, "me.on_owner_damage_melee()")
-    my.tp_set_on_owner_damage_natural_attack_do(mytp, "me.on_owner_damage_natural_attack()")
-    my.tp_set_on_owner_damage_necrosis_do(mytp, "me.on_owner_damage_necrosis()")
-    my.tp_set_on_owner_damage_poison_do(mytp, "me.on_owner_damage_poison()")
-    my.tp_set_on_owner_damage_stat_con_do(mytp, "me.on_owner_damage_stat_con()")
-    my.tp_set_on_owner_damage_stat_str_do(mytp, "me.on_owner_damage_stat_str()")
-    my.tp_set_on_owner_set_do(mytp, "me.on_owner_set()")
-    my.tp_set_on_owner_unset_do(mytp, "me.on_owner_unset()")
-    my.tp_set_on_tick_do(mytp, "me.on_tick()")
-    my.tp_set_text_description(mytp, "Poison resistant buff.")
-    my.tp_set_tile(mytp, tile="buff_poison_resist")
-    # my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
-    my.tp_update(mytp, )
+    my.tp_set_is_buff(self, True)
+    my.tp_set_is_loggable(self, True)
+    my.tp_set_long_text_description(self, "Poison causes you 50 percent less damage.")
+    my.tp_set_on_owner_damage_acid_do(self, "me.on_owner_damage_acid()")
+    my.tp_set_on_owner_damage_cold_do(self, "me.on_owner_damage_cold()")
+    my.tp_set_on_owner_damage_crush_do(self, "me.on_owner_damage_crush()")
+    my.tp_set_on_owner_damage_digest_do(self, "me.on_owner_damage_digest()")
+    my.tp_set_on_owner_damage_energy_do(self, "me.on_owner_damage_energy()")
+    my.tp_set_on_owner_damage_fire_do(self, "me.on_owner_damage_fire()")
+    my.tp_set_on_owner_damage_future1_do(self, "me.on_owner_damage_future1()")
+    my.tp_set_on_owner_damage_future2_do(self, "me.on_owner_damage_future2()")
+    my.tp_set_on_owner_damage_future3_do(self, "me.on_owner_damage_future3()")
+    my.tp_set_on_owner_damage_lightning_do(self, "me.on_owner_damage_lightning()")
+    my.tp_set_on_owner_damage_melee_do(self, "me.on_owner_damage_melee()")
+    my.tp_set_on_owner_damage_natural_attack_do(self, "me.on_owner_damage_natural_attack()")
+    my.tp_set_on_owner_damage_necrosis_do(self, "me.on_owner_damage_necrosis()")
+    my.tp_set_on_owner_damage_poison_do(self, "me.on_owner_damage_poison()")
+    my.tp_set_on_owner_damage_stat_con_do(self, "me.on_owner_damage_stat_con()")
+    my.tp_set_on_owner_damage_stat_str_do(self, "me.on_owner_damage_stat_str()")
+    my.tp_set_on_owner_set_do(self, "me.on_owner_set()")
+    my.tp_set_on_owner_unset_do(self, "me.on_owner_unset()")
+    my.tp_set_on_tick_do(self, "me.on_tick()")
+    my.tp_set_text_description(self, "Poison resistant buff.")
+    my.tp_set_tile(self, tile="buff_poison_resist")
+    # my.tp_set_z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
+    my.tp_update(self)
 
 
 def init():
