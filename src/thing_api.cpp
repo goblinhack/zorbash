@@ -5015,6 +5015,74 @@ int Thing::incr_stat_dex_mod(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// stat_luck_mod
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_stat_luck_mod(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (get_infop()->stat_luck_mod);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::set_stat_luck_mod(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (get_infop()->stat_luck_mod = v);
+  return (n);
+}
+
+int Thing::decr_stat_luck_mod(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (get_infop()->stat_luck_mod -= v);
+  return (n);
+}
+
+int Thing::incr_stat_luck_mod(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (get_infop()->stat_luck_mod += v);
+  return (n);
+}
+
+int Thing::decr_stat_luck_mod(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (get_infop()->stat_luck_mod--);
+  return (n);
+}
+
+int Thing::incr_stat_luck_mod(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (get_infop()->stat_luck_mod++);
+  return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // stat_att_mod
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stat_att_mod(void)

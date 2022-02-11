@@ -471,6 +471,8 @@ private:
   int _stat_def_penalty_when_stuck_max {};
   int _stat_dex {};
   int _stat_dex_mod {};
+  int _stat_luck {};
+  int _stat_luck_mod {};
   int _stats02 {};
   int _stats03 {};
   int _stats04 {};
@@ -1033,6 +1035,7 @@ public:
   int get_stat_con(void) const { return _stat_con; }
   int get_stat_def(void) const { return _stat_def; }
   int get_stat_dex(void) const { return _stat_dex; }
+  int get_stat_luck(void) const { return _stat_luck; }
   int get_stat_str(void) const { return _stat_str; }
   int gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
   int gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
@@ -1356,6 +1359,7 @@ public:
   int stat_def_penalty_when_stuck_max(void) const { return _stat_def_penalty_when_stuck_max; }
   int stat_def_penalty_when_stuck(void) const { return _stat_def_penalty_when_stuck; }
   int stat_dex_mod(void) const { return _stat_dex_mod; }
+  int stat_luck_mod(void) const { return _stat_luck_mod; }
   int stats02(void) const { return _stats02; }
   int stats03(void) const { return _stats03; }
   int stats04(void) const { return _stats04; }
@@ -1969,6 +1973,8 @@ public:
   void set_stat_def_penalty_when_stuck_max(int v) { _stat_def_penalty_when_stuck_max = v; }
   void set_stat_dex(int v) { _stat_dex = v; }
   void set_stat_dex_mod(int v) { _stat_dex_mod = v; }
+  void set_stat_luck(int v) { _stat_luck = v; }
+  void set_stat_luck_mod(int v) { _stat_luck_mod = v; }
   void set_stats02(int v) { _stats02 = v; }
   void set_stats03(int v) { _stats03 = v; }
   void set_stats04(int v) { _stats04 = v; }

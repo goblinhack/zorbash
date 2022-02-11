@@ -120,6 +120,8 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stat_def_mod);
    in >> bits(my.t->stat_dex);
    in >> bits(my.t->stat_dex_mod);
+   in >> bits(my.t->stat_luck);
+   in >> bits(my.t->stat_luck_mod);
    in >> bits(my.t->stats02);
    in >> bits(my.t->stats03);
    in >> bits(my.t->stats04);

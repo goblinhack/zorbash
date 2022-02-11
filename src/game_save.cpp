@@ -97,6 +97,8 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->stat_def_mod);
   out << bits(my.t->stat_dex);
   out << bits(my.t->stat_dex_mod);
+  out << bits(my.t->stat_luck);
+  out << bits(my.t->stat_luck_mod);
   out << bits(my.t->stats02);
   out << bits(my.t->stats03);
   out << bits(my.t->stats04);

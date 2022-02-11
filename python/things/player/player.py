@@ -365,6 +365,7 @@ def tp_init(name, text_name, short_text_name, title):
     mytp.set_stat_def_penalty_when_stuck(10)
     mytp.set_stat_def_penalty_when_stuck_max(15)
     mytp.set_stat_dex(10)
+    mytp.set_stat_luck(10)
     mytp.set_stat_str(10)
     mytp.set_temperature_change_sensitive(True)
     mytp.set_text_a_or_an("the")
