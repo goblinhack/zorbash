@@ -8,7 +8,7 @@ def on_death_of_a_follower(me, leader, x, y):
 
 
 def tp_init(name, text_name):
-    self = zorb_all.tp_init( name, text_name)
+    self = zorb_all.tp_init(name, text_name)
     my.tp_set_long_text_description_extra(self, "This particular zorblin has risen through the ranks. As tough as stone nails in a stone coffin, this zorblin is not prepared to take any of your cheek.")
     my.tp_set_health_initial_dice(self, "2d10")
     my.tp_set_health_initial_dice(self, "2d10+4")

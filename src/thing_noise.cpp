@@ -88,6 +88,9 @@ int Thing::get_noise_total(void)
       }
     }
   }
+
+  decibels -= get_stat_dex_mod() * 10;
+
   return decibels;
 }
 

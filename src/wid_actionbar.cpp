@@ -244,7 +244,7 @@ static void wid_actionbar_robot_over_b(Widp w, int32_t relx, int32_t rely, int32
   wid_over_robot_mode->log(UI_LOGGING_EMPTY_LINE);
   wid_over_robot_mode->log(
       "Goblinhack cannot be held responsible for the death, dismemberment or otherwise damage caused to a player "
-      "character in robot mode.");
+      "character while in robot mode.");
 }
 
 static void wid_actionbar_robot_over_e(Widp w)

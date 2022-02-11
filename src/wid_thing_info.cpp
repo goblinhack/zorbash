@@ -1035,14 +1035,14 @@ void Game::wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t)
       } else {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->get_damage_natural_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Att:%-9s%15s",
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Atk:%-9s%15s",
                    capitalise(t->damage_natural_attack_type()).c_str(), tmp2);
         } else {
           min_value += t->get_enchant();
           max_value += t->get_enchant();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
                    t->get_damage_natural_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Att:%-9s%15s",
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Atk:%-9s%15s",
                    capitalise(t->damage_natural_attack_type()).c_str(), tmp2);
         }
         w->log(tmp);
@@ -1375,7 +1375,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
       w->log(UI_LOGGING_EMPTY_LINE);
     } else {
-      w->log("%%fg=red$Will take many hits to defeat...");
+      w->log("%%fg=red$Takes many hits to defeat...");
       w->log(UI_LOGGING_EMPTY_LINE);
     }
   }
@@ -1478,11 +1478,14 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     w->log(UI_LOGGING_EMPTY_LINE);
   } else if (t->is_burnable()) {
     if (t->is_monst() || t->is_player()) {
-      w->log("Can catch fire.", true);
+      //
+      // Too obvious
+      // w->log("Can catch fire.", true);
+      //
     } else {
       w->log("Item can burn.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
     }
-    w->log(UI_LOGGING_EMPTY_LINE);
   } else if (t->is_combustible()) {
     w->log("Is combustible.", true);
     w->log(UI_LOGGING_EMPTY_LINE);

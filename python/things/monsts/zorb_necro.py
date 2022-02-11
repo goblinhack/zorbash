@@ -49,7 +49,7 @@ def on_death(me, x, y):
 
 
 def tp_init(name, text_name):
-    self = zorb_all.tp_init( name, text_name)
+    self = zorb_all.tp_init(name, text_name)
     my.tp_set_long_text_description_extra(self, "This particular zorblin is learned in the dark arts. Withered of body, but sharp of mind, beware the abilities of this zorblin.")
     my.tp_set_on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.tp_set_on_death_do(self, "me.on_death()")
@@ -59,6 +59,8 @@ def tp_init(name, text_name):
     my.tp_set_is_monst_class_b(self, True)
     my.tp_set_is_biome_dungeon(self, True)
     my.tp_set_stat_str(self, 6)
+    my.tp_set_stat_dex(self, 6)
+    my.tp_set_stat_luck(self, 6)
     my.tp_set_distance_avoid(self, 5)
     my.tp_set_health_initial_dice(self, "2d3+4")
     my.tp_set_is_able_to_use_wands(self, True)
