@@ -19,16 +19,16 @@ def tp_init(name, text_name):
     global mytp
     mytp = tp.Tp(name, text_name)
 
-    mytp.set_is_aquatic(True)
-    mytp.set_is_buff(True)
-    mytp.set_is_loggable(True)
-    mytp.set_long_text_description("You feel at home in the water and will suffer no more water penalties for either attack or defence when in shallow or deep water. Always beware of puddles though.")
-    mytp.set_on_owner_set_do("me.on_owner_set()")
-    mytp.set_on_owner_unset_do("me.on_owner_unset()")
-    mytp.set_text_description("You are as at home in the water as on the land. If you ever were.")
-    mytp.set_tile(tile="buff_aquatic")
-    # mytp.set_z_prio(my.MAP_PRIO_NORMAL) # End marker for fixup.sh
-    mytp.update()
+    my.tp_set_is_aquatic(mytp, True)
+    my.tp_set_is_buff(mytp, True)
+    my.tp_set_is_loggable(mytp, True)
+    my.tp_set_long_text_description(mytp, "You feel at home in the water and will suffer no more water penalties for either attack or defence when in shallow or deep water. Always beware of puddles though.")
+    my.tp_set_on_owner_set_do(mytp, "me.on_owner_set()")
+    my.tp_set_on_owner_unset_do(mytp, "me.on_owner_unset()")
+    my.tp_set_text_description(mytp, "You are as at home in the water as on the land. If you ever were.")
+    my.tp_set_tile(mytp, tile="buff_aquatic")
+    # my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
+    my.tp_update(mytp, )
 
 
 def init():

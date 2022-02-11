@@ -24,132 +24,132 @@ def tp_init(
 ):
 
     mytp = tp.Tp(name)
-    mytp.set_ai_obstacle(True)
-    mytp.set_collision_hit_priority(2)
-    mytp.set_gfx_shown_in_bg(True)
-    mytp.set_health_initial_dice("20d10")
-    mytp.set_is_always_hit(True)
-    mytp.set_is_attackable_by_monst(True)
-    mytp.set_is_attackable_by_player(True)
-    mytp.set_is_biome_dungeon(True)
-    mytp.set_is_cursor_can_hover_over(True)
-    mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_gas_blocker(True)
-    mytp.set_is_hittable(True)
-    mytp.set_is_light_blocker(True)
-    mytp.set_is_obs_wall_or_door(True)
-    mytp.set_is_sewer_wall(True)
-    mytp.set_is_stone(True)
-    mytp.set_is_wall(True)
-    mytp.set_noise_blocker(True)
-    mytp.set_text_a_or_an("a")
-    mytp.set_text_description("A slime covered wall.")
-    mytp.set_z_depth(my.MAP_DEPTH_OBJ)
-    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
+    my.tp_set_ai_obstacle(mytp, True)
+    my.tp_set_collision_hit_priority(mytp, 2)
+    my.tp_set_gfx_shown_in_bg(mytp, True)
+    my.tp_set_health_initial_dice(mytp, "20d10")
+    my.tp_set_is_always_hit(mytp, True)
+    my.tp_set_is_attackable_by_monst(mytp, True)
+    my.tp_set_is_attackable_by_player(mytp, True)
+    my.tp_set_is_biome_dungeon(mytp, True)
+    my.tp_set_is_cursor_can_hover_over(mytp, True)
+    my.tp_set_is_described_when_hovering_over(mytp, True)
+    my.tp_set_is_gas_blocker(mytp, True)
+    my.tp_set_is_hittable(mytp, True)
+    my.tp_set_is_light_blocker(mytp, True)
+    my.tp_set_is_obs_wall_or_door(mytp, True)
+    my.tp_set_is_sewer_wall(mytp, True)
+    my.tp_set_is_stone(mytp, True)
+    my.tp_set_is_wall(mytp, True)
+    my.tp_set_noise_blocker(mytp, True)
+    my.tp_set_text_a_or_an(mytp, "a")
+    my.tp_set_text_description(mytp, "A slime covered wall.")
+    my.tp_set_z_depth(mytp, my.MAP_DEPTH_OBJ)
+    my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL)
 
     if tiles is not None:
         for t in tiles:
-            mytp.set_tile(t)
+            my.tp_set_tile(mytp, t)
     else:
-        mytp.set_tile(tile=name)
+        my.tp_set_tile(mytp, tile=name)
 
     if left1_tiles is not None:
         for t in left1_tiles:
-            mytp.set_left1_tile(t)
+            my.tp_set_left1_tile(mytp, t)
     else:
-        mytp.set_left1_tile(left1_tile=name)
+        my.tp_set_left1_tile(mytp, left1_tile=name)
 
     if right1_tiles is not None:
         for t in right1_tiles:
-            mytp.set_right1_tile(t)
+            my.tp_set_right1_tile(mytp, t)
     else:
-        mytp.set_right1_tile(right1_tile=name)
+        my.tp_set_right1_tile(mytp, right1_tile=name)
 
     if top1_tiles is not None:
         for t in top1_tiles:
-            mytp.set_top1_tile(t)
+            my.tp_set_top1_tile(mytp, t)
     else:
-        mytp.set_top1_tile(top1_tile=name)
+        my.tp_set_top1_tile(mytp, top1_tile=name)
 
     if bot1_tiles is not None:
         for t in bot1_tiles:
-            mytp.set_bot1_tile(t)
+            my.tp_set_bot1_tile(mytp, t)
     else:
-        mytp.set_bot1_tile(bot1_tile=name)
+        my.tp_set_bot1_tile(mytp, bot1_tile=name)
 
     if tl1_tiles is not None:
         for t in tl1_tiles:
-            mytp.set_tl1_tile(t)
+            my.tp_set_tl1_tile(mytp, t)
     else:
-        mytp.set_tl1_tile(tl1_tile=name)
+        my.tp_set_tl1_tile(mytp, tl1_tile=name)
 
     if tr1_tiles is not None:
         for t in tr1_tiles:
-            mytp.set_tr1_tile(t)
+            my.tp_set_tr1_tile(mytp, t)
     else:
-        mytp.set_tr1_tile(tr1_tile=name)
+        my.tp_set_tr1_tile(mytp, tr1_tile=name)
 
     if bl1_tiles is not None:
         for t in bl1_tiles:
-            mytp.set_bl1_tile(t)
+            my.tp_set_bl1_tile(mytp, t)
     else:
-        mytp.set_bl1_tile(bl1_tile=name)
+        my.tp_set_bl1_tile(mytp, bl1_tile=name)
 
     if br1_tiles is not None:
         for t in br1_tiles:
-            mytp.set_br1_tile(t)
+            my.tp_set_br1_tile(mytp, t)
     else:
-        mytp.set_br1_tile(br1_tile=name)
+        my.tp_set_br1_tile(mytp, br1_tile=name)
 
     if left2_tiles is not None:
         for t in left2_tiles:
-            mytp.set_left2_tile(t)
+            my.tp_set_left2_tile(mytp, t)
     else:
-        mytp.set_left2_tile(left2_tile=name)
+        my.tp_set_left2_tile(mytp, left2_tile=name)
 
     if right2_tiles is not None:
         for t in right2_tiles:
-            mytp.set_right2_tile(t)
+            my.tp_set_right2_tile(mytp, t)
     else:
-        mytp.set_right2_tile(right2_tile=name)
+        my.tp_set_right2_tile(mytp, right2_tile=name)
 
     if top2_tiles is not None:
         for t in top2_tiles:
-            mytp.set_top2_tile(t)
+            my.tp_set_top2_tile(mytp, t)
     else:
-        mytp.set_top2_tile(top2_tile=name)
+        my.tp_set_top2_tile(mytp, top2_tile=name)
 
     if bot2_tiles is not None:
         for t in bot2_tiles:
-            mytp.set_bot2_tile(t)
+            my.tp_set_bot2_tile(mytp, t)
     else:
-        mytp.set_bot2_tile(bot2_tile=name)
+        my.tp_set_bot2_tile(mytp, bot2_tile=name)
 
     if tl2_tiles is not None:
         for t in tl2_tiles:
-            mytp.set_tl2_tile(t)
+            my.tp_set_tl2_tile(mytp, t)
     else:
-        mytp.set_tl2_tile(tl2_tile=name)
+        my.tp_set_tl2_tile(mytp, tl2_tile=name)
 
     if tr2_tiles is not None:
         for t in tr2_tiles:
-            mytp.set_tr2_tile(t)
+            my.tp_set_tr2_tile(mytp, t)
     else:
-        mytp.set_tr2_tile(tr2_tile=name)
+        my.tp_set_tr2_tile(mytp, tr2_tile=name)
 
     if bl2_tiles is not None:
         for t in bl2_tiles:
-            mytp.set_bl2_tile(t)
+            my.tp_set_bl2_tile(mytp, t)
     else:
-        mytp.set_bl2_tile(bl2_tile=name)
+        my.tp_set_bl2_tile(mytp, bl2_tile=name)
 
     if br2_tiles is not None:
         for t in br2_tiles:
-            mytp.set_br2_tile(t)
+            my.tp_set_br2_tile(mytp, t)
     else:
-        mytp.set_br2_tile(br2_tile=name)
+        my.tp_set_br2_tile(mytp, br2_tile=name)
 
-    mytp.update()
+    my.tp_update(mytp, )
 
 
 def init():

@@ -14,30 +14,30 @@ def on_death(me, x, y):
 
 def tp_init(name, tiles=[], bot3_tiles=[]):
     mytp = tp.Tp(name, "bridge")
-    mytp.set_gfx_shown_in_bg(True)
-    mytp.set_is_able_to_fall(True)
-    mytp.set_is_biome_dungeon(True)
-    mytp.set_is_bridge(True)
-    mytp.set_is_cursor_can_hover_over(True)
-    mytp.set_is_described_when_hovering_over(True)
-    mytp.set_is_interesting(True)
-    mytp.set_is_tickable(True)
-    mytp.set_on_death_do("bridge.on_death()")
-    mytp.set_text_a_or_an("the")
-    mytp.set_text_description("Shaky bridge.")
-    mytp.set_z_depth(my.MAP_DEPTH_FLOOR)
-    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
+    my.tp_set_gfx_shown_in_bg(mytp, True)
+    my.tp_set_is_able_to_fall(mytp, True)
+    my.tp_set_is_biome_dungeon(mytp, True)
+    my.tp_set_is_bridge(mytp, True)
+    my.tp_set_is_cursor_can_hover_over(mytp, True)
+    my.tp_set_is_described_when_hovering_over(mytp, True)
+    my.tp_set_is_interesting(mytp, True)
+    my.tp_set_is_tickable(mytp, True)
+    my.tp_set_on_death_do(mytp, "bridge.on_death()")
+    my.tp_set_text_a_or_an(mytp, "the")
+    my.tp_set_text_description(mytp, "Shaky bridge.")
+    my.tp_set_z_depth(mytp, my.MAP_DEPTH_FLOOR)
+    my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL)
 
     for t in tiles:
-        mytp.set_tile(t)
+        my.tp_set_tile(mytp, t)
 
     if bot3_tiles is not None:
         for t in bot3_tiles:
-            mytp.set_bot3_tile(t)
+            my.tp_set_bot3_tile(mytp, t)
     else:
-        mytp.set_bot3_tile(bot3_tile=name)
+        my.tp_set_bot3_tile(mytp, bot3_tile=name)
 
-    mytp.update()
+    my.tp_update(mytp, )
 
 
 def init():

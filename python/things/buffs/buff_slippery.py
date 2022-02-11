@@ -19,16 +19,16 @@ def tp_init(name, text_name):
     global mytp
     mytp = tp.Tp(name, text_name)
 
-    mytp.set_is_buff(True)
-    mytp.set_is_loggable(True)
-    mytp.set_is_slippery(True)
-    mytp.set_long_text_description("No more trapped in webs for you! With this buff you can glide with ease through the cobwebs.")
-    mytp.set_on_owner_set_do("me.on_owner_set()")
-    mytp.set_on_owner_unset_do("me.on_owner_unset()")
-    mytp.set_text_description("You are as slippery as a banana buff.")
-    mytp.set_tile(tile="buff_slippery")
-    # mytp.set_z_prio(my.MAP_PRIO_NORMAL) # End marker for fixup.sh
-    mytp.update()
+    my.tp_set_is_buff(mytp, True)
+    my.tp_set_is_loggable(mytp, True)
+    my.tp_set_is_slippery(mytp, True)
+    my.tp_set_long_text_description(mytp, "No more trapped in webs for you! With this buff you can glide with ease through the cobwebs.")
+    my.tp_set_on_owner_set_do(mytp, "me.on_owner_set()")
+    my.tp_set_on_owner_unset_do(mytp, "me.on_owner_unset()")
+    my.tp_set_text_description(mytp, "You are as slippery as a banana buff.")
+    my.tp_set_tile(mytp, tile="buff_slippery")
+    # my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
+    my.tp_update(mytp, )
 
 
 def init():

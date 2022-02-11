@@ -5,14 +5,14 @@ import tp
 def tp_init(name):
     text_name = "the grid"
     mytp = tp.Tp(name, text_name)
-    mytp.set_is_the_grid(True)
-    mytp.set_text_a_or_an("the")
-    mytp.set_text_description("The grid.")
-    mytp.set_z_depth(my.MAP_DEPTH_THE_GRID)
-    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
+    my.tp_set_is_the_grid(mytp, True)
+    my.tp_set_text_a_or_an(mytp, "the")
+    my.tp_set_text_description(mytp, "The grid.")
+    my.tp_set_z_depth(mytp, my.MAP_DEPTH_THE_GRID)
+    my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL)
 
-    mytp.set_tile(tile=name)
-    mytp.update()
+    my.tp_set_tile(mytp, tile=name)
+    my.tp_update(mytp, )
 
 
 def init():

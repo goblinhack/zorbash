@@ -4,31 +4,31 @@ import tp
 
 def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     mytp = tp.Tp(name, text_name, short_text_name)
-    mytp.set_ai_obstacle(True)
-    mytp.set_damage_acid_chance_d1000(1000)
-    mytp.set_damage_acid_dice("1d3+1")
-    mytp.set_damage_natural_attack_type("burn")
-    mytp.set_gfx_show_outlined(True)
-    mytp.set_is_able_to_fall(True)
-    mytp.set_is_acid(True)
-    mytp.set_is_hazard(True)
-    mytp.set_is_loggable(True)
-    mytp.set_is_meat_eater(True)
-    mytp.set_is_removeable_if_out_of_slots(True)
-    mytp.set_is_tickable(True)  # for lifespan tick
-    mytp.set_lifespan_dice("1d20+20")
-    mytp.set_light_color("green")
-    mytp.set_light_power(2)
-    mytp.set_text_a_or_an("")
-    mytp.set_text_description("A pool of hissing acid.")
-    mytp.set_text_hits("burns")
-    mytp.set_z_depth(my.MAP_DEPTH_FLOOR2)
-    mytp.set_z_prio(my.MAP_PRIO_NORMAL)
+    my.tp_set_ai_obstacle(mytp, True)
+    my.tp_set_damage_acid_chance_d1000(mytp, 1000)
+    my.tp_set_damage_acid_dice(mytp, "1d3+1")
+    my.tp_set_damage_natural_attack_type(mytp, "burn")
+    my.tp_set_gfx_show_outlined(mytp, True)
+    my.tp_set_is_able_to_fall(mytp, True)
+    my.tp_set_is_acid(mytp, True)
+    my.tp_set_is_hazard(mytp, True)
+    my.tp_set_is_loggable(mytp, True)
+    my.tp_set_is_meat_eater(mytp, True)
+    my.tp_set_is_removeable_if_out_of_slots(mytp, True)
+    my.tp_set_is_tickable(mytp, True)  # for lifespan tick
+    my.tp_set_lifespan_dice(mytp, "1d20+20")
+    my.tp_set_light_color(mytp, "green")
+    my.tp_set_light_power(mytp, 2)
+    my.tp_set_text_a_or_an(mytp, "")
+    my.tp_set_text_description(mytp, "A pool of hissing acid.")
+    my.tp_set_text_hits(mytp, "burns")
+    my.tp_set_z_depth(mytp, my.MAP_DEPTH_FLOOR2)
+    my.tp_set_z_prio(mytp, my.MAP_PRIO_NORMAL)
 
     for t in tiles:
-        mytp.set_tile(tile=t)
+        my.tp_set_tile(mytp, tile=t)
 
-    mytp.update()
+    my.tp_update(mytp, )
 
 
 def init():
