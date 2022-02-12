@@ -183,6 +183,27 @@ bool Level::tick(void)
 
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
     {
+      //
+      // Give things a bit of time to move
+      //
+      t->incr_movement_left(t->get_move_speed());
+    }
+    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
+
+    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+    {
+      int movement_left = t->get_movement_left();
+      if (movement_left <= 0) {
+        continue;
+      }
+
+      if (player) {
+        movement_left -= player->get_move_speed();
+      } else {
+        movement_left -= 100;
+      }
+      t->set_movement_left(movement_left);
+
       uint32_t tick_begin_ms = time_get_time_ms();
       t->tick();
       IF_DEBUG2

@@ -46,7 +46,7 @@ def tp_init(name, text_name):
     my.tp_set_is_minion(self, True)
     my.tp_set_is_monst_class_a(self, True)
     my.tp_set_is_monst(self, True)
-    my.tp_set_move_speed(self, 25)
+    my.tp_set_move_speed(self, 400)
     my.tp_set_is_moveable(self, True)
     my.tp_set_is_tickable(self, True)
     my.tp_set_is_undead(self, True)

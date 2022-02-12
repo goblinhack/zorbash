@@ -1775,8 +1775,6 @@ public:
   ts_t set_ts_lunge_begin(ts_t);
   ts_t set_ts_lunge_end(ts_t);
 
-  uint32_t decr_tick_last_did_something(uint32_t);
-  uint32_t decr_tick_last_did_something(void);
   uint32_t decr_tick_last_dropped(uint32_t);
   uint32_t decr_tick_last_dropped(void);
   uint32_t decr_tick_last_escape(uint32_t);
@@ -1787,17 +1785,11 @@ public:
   uint32_t decr_tick_last_i_was_attacked(void);
   uint32_t decr_tick_last_location_check(uint32_t);
   uint32_t decr_tick_last_location_check(void);
-  uint32_t decr_tick_resurrect_when(int);
-  uint32_t decr_tick_resurrect_when(void);
-  uint32_t get_tick_last_did_something(void);
   uint32_t get_tick_last_dropped(void);
   uint32_t get_tick_last_escape(void);
   uint32_t get_tick_last_level_change(void);
   uint32_t get_tick_last_i_was_attacked(void);
   uint32_t get_tick_last_location_check(void);
-  uint32_t get_tick_resurrect_when(void);
-  uint32_t incr_tick_last_did_something(uint32_t);
-  uint32_t incr_tick_last_did_something(void);
   uint32_t incr_tick_last_dropped(uint32_t);
   uint32_t incr_tick_last_dropped(void);
   uint32_t incr_tick_last_escape(uint32_t);
@@ -1808,15 +1800,31 @@ public:
   uint32_t incr_tick_last_i_was_attacked(void);
   uint32_t incr_tick_last_location_check(uint32_t);
   uint32_t incr_tick_last_location_check(void);
-  uint32_t incr_tick_resurrect_when(int);
-  uint32_t incr_tick_resurrect_when(void);
+  uint32_t decr_tick_last_did_something(uint32_t);
+  uint32_t decr_tick_last_did_something(void);
+  uint32_t get_tick_last_did_something(void);
+  uint32_t incr_tick_last_did_something(uint32_t);
+  uint32_t incr_tick_last_did_something(void);
   uint32_t set_tick_last_did_something(uint32_t);
   uint32_t set_tick_last_dropped(uint32_t);
   uint32_t set_tick_last_escape(uint32_t);
   uint32_t set_tick_last_level_change(uint32_t);
   uint32_t set_tick_last_i_was_attacked(uint32_t);
   uint32_t set_tick_last_location_check(uint32_t);
+
+  uint32_t decr_tick_resurrect_when(int);
+  uint32_t decr_tick_resurrect_when(void);
+  uint32_t get_tick_resurrect_when(void);
+  uint32_t incr_tick_resurrect_when(int);
+  uint32_t incr_tick_resurrect_when(void);
   uint32_t set_tick_resurrect_when(int);
+
+  uint32_t decr_movement_left(int);
+  uint32_t decr_movement_left(void);
+  uint32_t get_movement_left(void);
+  uint32_t incr_movement_left(int);
+  uint32_t incr_movement_left(void);
+  uint32_t set_movement_left(int);
 
   uint8_t blit_begin_reflection_submerged(void);
   uint8_t blit_begin_submerged(void);

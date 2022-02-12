@@ -4282,7 +4282,7 @@ int Thing::incr_enchant_max(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// attack_resurrect_when
+// tick_resurrect_when
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_tick_resurrect_when(void)
 {
@@ -4331,6 +4331,59 @@ uint32_t Thing::incr_tick_resurrect_when(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (get_infop()->tick_resurrect_when++);
+  return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// movement_left
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_movement_left(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (get_infop()->movement_left);
+  } else {
+    return 0;
+  }
+}
+
+uint32_t Thing::set_movement_left(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (get_infop()->movement_left = v);
+  return (n);
+}
+
+uint32_t Thing::decr_movement_left(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (get_infop()->movement_left -= v);
+  return (n);
+}
+
+uint32_t Thing::incr_movement_left(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (get_infop()->movement_left += v);
+  return (n);
+}
+
+uint32_t Thing::decr_movement_left(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (get_infop()->movement_left--);
+  return (n);
+}
+
+uint32_t Thing::incr_movement_left(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (get_infop()->movement_left++);
   return (n);
 }
 

@@ -126,10 +126,12 @@ public:
   int keys                = {};
   int lifespan            = {}; // How many things this thing owns.
   int light_power         = {}; // Current strength, including torches
-  int prev_light_power    = {}; // Current strength, including torches
   int monst_state         = {};
+  int movement_left       = {};
   int necrosis            = {};
+  int noise               = {};
   int poison              = {};
+  int prev_light_power    = {}; // Current strength, including torches
   int score               = {};
   int stamina             = {};
   int stamina_max         = {};
@@ -149,11 +151,10 @@ public:
   int stats06             = {};
   int stats07             = {};
   int stats09             = {};
-  int temperature         = {};
-  int noise               = {};
   int stat_str            = {};
   int stat_str_mod        = {};
   int submerged_offset    = {}; // Pixels
+  int temperature         = {};
   int tick_resurrect_when = {};
 
   int8_t bounce_count       = {}; // Graphical bounce count
