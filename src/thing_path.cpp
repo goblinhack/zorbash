@@ -19,12 +19,12 @@ bool Thing::path_pop_next_move(void)
 {
   bool too_far = false;
 
-  auto aip = maybe_aip();
-  if (! aip) {
+  auto ai = maybe_aip();
+  if (! ai) {
     return false;
   }
 
-  if (! aip->move_path.size()) {
+  if (! ai->move_path.size()) {
     return false;
   }
 
@@ -32,12 +32,12 @@ bool Thing::path_pop_next_move(void)
   std::string s = "";
   IF_DEBUG2
   {
-    for (auto p : aip->move_path) {
+    for (auto p : ai->move_path) {
       s += " " + p.to_string();
       (void) level->thing_new("ai_path1", point(p.x, p.y));
     }
   }
-  auto to         = aip->move_path[ 0 ];
+  auto to         = ai->move_path[ 0 ];
   auto future_pos = point(to.x, to.y);
 
   if (s.empty()) {
@@ -67,7 +67,7 @@ bool Thing::path_pop_next_move(void)
   //
   // Remove the first element
   //
-  aip->move_path.erase(aip->move_path.begin());
+  ai->move_path.erase(ai->move_path.begin());
 
   //
   // Jump over obstacles if they appear in the path
@@ -82,23 +82,23 @@ bool Thing::path_pop_next_move(void)
       }
 
       TRACE_NO_INDENT();
-      if (aip->move_path.size()) {
-        auto jump_pos = aip->move_path[ 0 ];
-        aip->move_path.erase(aip->move_path.begin());
+      if (ai->move_path.size()) {
+        auto jump_pos = ai->move_path[ 0 ];
+        ai->move_path.erase(ai->move_path.begin());
 
         //
         // If the thing we are going to land on is also a hazard, can we jump further?
         //
         TRACE_NO_INDENT();
-        if (is_disliked_by_me(jump_pos) && aip->move_path.size()) {
+        if (is_disliked_by_me(jump_pos) && ai->move_path.size()) {
           IF_DEBUG2
           {
             auto s = string_sprintf("Next-next position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
             AI_LOG(s);
           }
 
-          auto jump_pos = aip->move_path[ 0 ];
-          aip->move_path.erase(aip->move_path.begin());
+          auto jump_pos = ai->move_path[ 0 ];
+          ai->move_path.erase(ai->move_path.begin());
 
           if (is_disliked_by_me(jump_pos)) {
             //
@@ -138,7 +138,7 @@ bool Thing::path_pop_next_move(void)
           // Try the entire path. This allows us to jump next to a thing that
           // might have moved into our move path (and where we were trying to land.)
           //
-          for (auto pit = aip->move_path.rbegin(); pit != aip->move_path.rend(); pit++) {
+          for (auto pit = ai->move_path.rbegin(); pit != ai->move_path.rend(); pit++) {
             jump_pos = *pit;
             if (distance(curr_at, jump_pos) < 2) {
               break;
@@ -367,7 +367,7 @@ bool Thing::cursor_path_pop_first_move(void)
     // A path to the target exists.
     //
     new_aip();
-    aip_get()->move_path = game->cursor_move_path;
+    aip()->move_path = game->cursor_move_path;
     game->cursor_move_path.clear();
 
     if (path_pop_next_move()) {

@@ -36,7 +36,7 @@ void Thing::level_change(Levelp l)
   level_enter();
 
   if (maybe_aip()) {
-    aip_get()->move_path = {};
+    aip()->move_path = {};
     clear_age_map();
     clear_seen_map();
     clear_interrupt_map();

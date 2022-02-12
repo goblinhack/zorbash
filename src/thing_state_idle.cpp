@@ -26,7 +26,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
 {
   TRACE_NO_INDENT();
 
-  auto aip = aip_get();
+  auto ai = aip();
 
   //
   // If on fire, try and put it out!
@@ -51,7 +51,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
       return true;
     }
 
-    aip->wander_dest = point(0, 0);
+    ai->wander_dest = point(0, 0);
     AI_LOG("cannot escape, try to wander");
     TRACE_AND_INDENT();
     if (ai_wander()) {
@@ -226,7 +226,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
 
   for (int search_type = 0; search_type < search_type_max; search_type++) {
     if (ai_create_path_to_goal(minx, miny, maxx, maxy, search_type)) {
-      if (aip->move_path.size()) {
+      if (ai->move_path.size()) {
         change_state(MONST_STATE_MOVING, "found a new goal");
       }
       return true;
@@ -236,7 +236,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   // If going somewhere, continue
   //
-  if (aip->wander_dest != point(0, 0)) {
+  if (ai->wander_dest != point(0, 0)) {
     if (pcg_random_range(0, 100) < 50) {
       dbg("Try to continue wander");
       if (ai_wander()) {

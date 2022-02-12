@@ -269,7 +269,7 @@ void Level::describe(point p)
     // If nothing else and hovering over the player show that
     //
     if (cursor && ! cursor->is_hidden && ! cursor->is_dead && (cursor->curr_at == player->curr_at) &&
-        player->aip_get()->move_path.empty()) {
+        player->aip()->move_path.empty()) {
       push_back_if_unique(hover_over_things, player);
     }
   }

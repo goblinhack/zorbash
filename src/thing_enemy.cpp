@@ -20,7 +20,7 @@ bool Thing::is_enemy(Thingp attacker)
     return false;
   }
 
-  if (aip_get()->enemies.find(attacker->id) != aip_get()->enemies.end()) {
+  if (aip()->enemies.find(attacker->id) != aip()->enemies.end()) {
     return true;
   }
   return false;
@@ -36,10 +36,10 @@ void Thing::enemies_tick(void)
     return;
   }
 
-  for (auto &p : aip_get()->enemies) {
+  for (auto &p : aip()->enemies) {
     auto attacker = level->thing_find_optional(p.first);
     if (! attacker) {
-      aip_get()->enemies.erase(p.first);
+      aip()->enemies.erase(p.first);
       return;
     }
 
@@ -54,7 +54,7 @@ void Thing::enemies_tick(void)
       if (is_player() && game->robot_mode) {
         CON("Robot: enemy remove as is dead: %s", attacker->to_string().c_str());
       }
-      aip_get()->enemies.erase(p.first);
+      aip()->enemies.erase(p.first);
       return;
     }
 
@@ -65,7 +65,7 @@ void Thing::enemies_tick(void)
       if (is_player() && game->robot_mode) {
         CON("Robot: enemy remove as is far away: %s", attacker->to_string().c_str());
       }
-      aip_get()->enemies.erase(p.first);
+      aip()->enemies.erase(p.first);
       return;
     }
 
@@ -99,19 +99,19 @@ void Thing::add_enemy(Thingp attacker)
     return;
   }
 
-  if (! aip_get()->enemies[ attacker->id ]) {
+  if (! aip()->enemies[ attacker->id ]) {
     if (is_player() && game->robot_mode) {
       CON("Robot: enemy add %s", attacker->to_string().c_str());
     } else {
       dbg("Add new enemy %s", attacker->to_string().c_str());
     }
-    aip_get()->enemies[ attacker->id ] = ai_resent_count();
+    aip()->enemies[ attacker->id ] = ai_resent_count();
   } else {
     dbg("Increment old enemy %s", attacker->to_string().c_str());
-    aip_get()->enemies[ attacker->id ] *= 2;
+    aip()->enemies[ attacker->id ] *= 2;
 
-    if (aip_get()->enemies[ attacker->id ] > THING_AI_MAX_RESENT_COUNT) {
-      aip_get()->enemies[ attacker->id ] = THING_AI_MAX_RESENT_COUNT;
+    if (aip()->enemies[ attacker->id ] > THING_AI_MAX_RESENT_COUNT) {
+      aip()->enemies[ attacker->id ] = THING_AI_MAX_RESENT_COUNT;
     }
   }
 }

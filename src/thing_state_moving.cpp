@@ -22,12 +22,12 @@ bool Thing::state_moving(void)
 {
   TRACE_NO_INDENT();
 
-  auto aip = aip_get();
+  auto ai = aip();
 
   //
   // Finished the move?
   //
-  if (aip->move_path.empty()) {
+  if (ai->move_path.empty()) {
     AI_LOG("Move finished.");
     if (is_player()) {
       game->tick_begin("Robot move finished");

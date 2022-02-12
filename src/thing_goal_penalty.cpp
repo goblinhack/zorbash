@@ -18,13 +18,13 @@
 int Thing::goal_penalty_get(Thingp attacker)
 {
   TRACE_NO_INDENT();
-  auto aip = maybe_aip();
-  if (! aip) {
+  auto ai = maybe_aip();
+  if (! ai) {
     return 0;
   }
 
-  auto f = aip->goal_penalty.find(attacker->id);
-  if (f == aip->goal_penalty.end()) {
+  auto f = ai->goal_penalty.find(attacker->id);
+  if (f == ai->goal_penalty.end()) {
     return 0;
   }
 
@@ -34,13 +34,13 @@ int Thing::goal_penalty_get(Thingp attacker)
 void Thing::reset_goal_penalty(Thingp attacker)
 {
   TRACE_NO_INDENT();
-  auto aip = maybe_aip();
-  if (! aip) {
+  auto ai = maybe_aip();
+  if (! ai) {
     return;
   }
 
-  auto f = aip->goal_penalty.find(attacker->id);
-  if (f == aip->goal_penalty.end()) {
+  auto f = ai->goal_penalty.find(attacker->id);
+  if (f == ai->goal_penalty.end()) {
     return;
   }
 
@@ -53,15 +53,15 @@ void Thing::reset_goal_penalty(Thingp attacker)
 void Thing::goal_penalty_tick(void)
 {
   TRACE_NO_INDENT();
-  auto aip = maybe_aip();
-  if (! aip) {
+  auto ai = maybe_aip();
+  if (! ai) {
     return;
   }
 
-  for (auto &p : aip->goal_penalty) {
+  for (auto &p : ai->goal_penalty) {
     auto attacker = level->thing_find_optional(p.first);
     if (! attacker) {
-      aip->goal_penalty.erase(p.first);
+      ai->goal_penalty.erase(p.first);
       return;
     }
 
@@ -69,7 +69,7 @@ void Thing::goal_penalty_tick(void)
       if (is_player() && game->robot_mode) {
         CON("Robot: Remove goal penalty, is dead: %s", attacker->to_string().c_str());
       }
-      aip->goal_penalty.erase(p.first);
+      ai->goal_penalty.erase(p.first);
       return;
     }
 
@@ -84,7 +84,7 @@ void Thing::goal_penalty_tick(void)
       CON("Robot: Remove goal penalty: %s (%d timeout)", attacker->to_string().c_str(), p.second);
     }
 
-    aip->goal_penalty.erase(p.first);
+    ai->goal_penalty.erase(p.first);
     return;
   }
 }
@@ -92,12 +92,12 @@ void Thing::goal_penalty_tick(void)
 void Thing::add_goal_penalty(Thingp attacker)
 {
   TRACE_NO_INDENT();
-  auto aip = maybe_aip();
-  if (! aip) {
+  auto ai = maybe_aip();
+  if (! ai) {
     return;
   }
 
-  auto penalty = aip->goal_penalty[ attacker->id ];
+  auto penalty = ai->goal_penalty[ attacker->id ];
 
   if (! penalty) {
     penalty = 20;
@@ -118,5 +118,5 @@ void Thing::add_goal_penalty(Thingp attacker)
       penalty = THING_AI_MAX_GOAL_PENALTY;
     }
   }
-  aip->goal_penalty[ attacker->id ] = penalty;
+  ai->goal_penalty[ attacker->id ] = penalty;
 }

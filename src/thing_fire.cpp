@@ -135,7 +135,7 @@ void Thing::fire_tick(void)
       if (is_meltable()) {
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
               msg("%s is melted!", text_The().c_str());
             }
           }
@@ -144,7 +144,7 @@ void Thing::fire_tick(void)
       } else {
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
               if (is_monst()) {
                 msg("%s burns to death!", text_The().c_str());
               } else {
@@ -159,7 +159,7 @@ void Thing::fire_tick(void)
       if (is_meltable()) {
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
               msg("%s melts!", text_The().c_str());
             }
           }
@@ -167,7 +167,7 @@ void Thing::fire_tick(void)
       } else {
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
               msg("%s burns!", text_The().c_str());
             }
           }

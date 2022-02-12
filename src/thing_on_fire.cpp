@@ -218,14 +218,14 @@ bool Thing::ai_on_fire_choose_target(point &nh)
   //
   // Reached the target? Choose a new one.
   //
-  auto target = aip_get()->wander_dest;
+  auto target = aip()->wander_dest;
 
   if (target != point(0, 0)) {
     if (! level->is_shallow_water(target.x, target.y)) {
       //
       // Choose a new wander location
       //
-      aip_get()->wander_dest = point(0, 0);
+      aip()->wander_dest = point(0, 0);
     }
   }
 
@@ -238,7 +238,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
   //
   // Choose a new wander location
   //
-  aip_get()->wander_dest = point(0, 0);
+  aip()->wander_dest = point(0, 0);
 
   auto attempts = 10;
   while (attempts--) {
@@ -261,7 +261,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     if (got_one) {
       target = best;
       if (ai_create_on_fire_path(nh, start, target)) {
-        aip_get()->wander_dest = target;
+        aip()->wander_dest = target;
         dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
         if (is_player()) {
           msg("You are thinking of jumping into that cool water!");
@@ -294,7 +294,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     if (got_one) {
       target = best;
       if (ai_create_on_fire_path(nh, start, target)) {
-        aip_get()->wander_dest = target;
+        aip()->wander_dest = target;
         dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
         if (is_player()) {
           msg("You are thinking of jumping into a chasm!");
@@ -326,7 +326,7 @@ bool Thing::ai_on_fire(void)
       //
       // Set this so next time we will choose another target
       //
-      aip_get()->wander_dest = point(0, 0);
+      aip()->wander_dest = point(0, 0);
     }
   }
 

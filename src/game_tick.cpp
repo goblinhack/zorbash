@@ -79,7 +79,7 @@ void Game::tick_begin_now(void)
 
     auto player = level->player;
     if (player && ! robot_mode) {
-      player->level->fov_calculete(player, &player->aip_get()->can_see_currently, player->curr_at.x,
+      player->level->fov_calculete(player, &player->aip()->can_see_currently, player->curr_at.x,
                                    player->curr_at.y, player->distance_vision_get());
     }
 

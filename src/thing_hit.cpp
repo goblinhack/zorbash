@@ -1118,7 +1118,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // If alive, one hit per tick
       //
-      aip_get()->recently_hit_by[ real_hitter->id ] = true;
+      aip()->recently_hit_by[ real_hitter->id ] = true;
     }
   }
 
@@ -1185,7 +1185,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
   // Avoid the lava hitting twice.
   //
   if (maybe_aip()) {
-    if (aip_get()->recently_hit_by.find(real_hitter->id) != aip_get()->recently_hit_by.end()) {
+    if (aip()->recently_hit_by.find(real_hitter->id) != aip()->recently_hit_by.end()) {
       IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
       return false;
     }

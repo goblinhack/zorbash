@@ -279,7 +279,7 @@ bool Thing::carry(Thingp item, bool can_equip)
         }
       } else if (is_monst() && ! is_offscreen) {
         if (level->player && (level->tick_created < game->tick_current)) {
-          if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+          if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
             if (! already_carried) {
               msg("%s collects %s.", text_The().c_str(), item->text_the().c_str());
             }

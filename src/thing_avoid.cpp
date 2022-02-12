@@ -197,7 +197,7 @@ bool Thing::is_to_be_avoided(Thingp attacker)
     return false;
   }
 
-  if (aip_get()->avoid.find(attacker->id) != aip_get()->avoid.end()) {
+  if (aip()->avoid.find(attacker->id) != aip()->avoid.end()) {
     return true;
   }
   return false;
@@ -210,8 +210,8 @@ bool Thing::cannot_avoid(Thingp attacker)
     return false;
   }
 
-  auto f = aip_get()->avoid.find(attacker->id);
-  if (f == aip_get()->avoid.end()) {
+  auto f = aip()->avoid.find(attacker->id);
+  if (f == aip()->avoid.end()) {
     return false;
   }
 
@@ -235,10 +235,10 @@ void Thing::avoid_tick(void)
     return;
   }
 
-  for (auto &p : aip_get()->avoid) {
+  for (auto &p : aip()->avoid) {
     auto attacker = level->thing_find_optional(p.first);
     if (! attacker) {
-      aip_get()->avoid.erase(p.first);
+      aip()->avoid.erase(p.first);
       return;
     }
 
@@ -246,7 +246,7 @@ void Thing::avoid_tick(void)
       if (is_player() && game->robot_mode) {
         CON("Robot: Remove avoid, is dead: %s", attacker->to_string().c_str());
       }
-      aip_get()->avoid.erase(p.first);
+      aip()->avoid.erase(p.first);
       return;
     }
 
@@ -264,11 +264,11 @@ void Thing::avoid_tick(void)
       if (is_player() && game->robot_mode) {
         CON("Robot: Remove avoid: %s", attacker->to_string().c_str());
       }
-      aip_get()->avoid.erase(p.first);
+      aip()->avoid.erase(p.first);
       return;
     }
 
-    aip_get()->avoid.erase(p.first);
+    aip()->avoid.erase(p.first);
     return;
   }
 }
@@ -290,19 +290,19 @@ void Thing::add_avoid(Thingp attacker)
     return;
   }
 
-  if (! aip_get()->avoid[ attacker->id ]) {
+  if (! aip()->avoid[ attacker->id ]) {
     if (is_player() && game->robot_mode) {
       CON("Robot: Add new avoid %s", attacker->to_string().c_str());
     } else {
       dbg("Add new avoid %s", attacker->to_string().c_str());
     }
-    aip_get()->avoid[ attacker->id ] += 2;
+    aip()->avoid[ attacker->id ] += 2;
   } else {
     dbg("Increment old avoid %s", attacker->to_string().c_str());
-    aip_get()->avoid[ attacker->id ] += 2;
+    aip()->avoid[ attacker->id ] += 2;
 
-    if (aip_get()->avoid[ attacker->id ] > THING_AI_MAX_AVOID_COUNT) {
-      aip_get()->avoid[ attacker->id ] = THING_AI_MAX_AVOID_COUNT;
+    if (aip()->avoid[ attacker->id ] > THING_AI_MAX_AVOID_COUNT) {
+      aip()->avoid[ attacker->id ] = THING_AI_MAX_AVOID_COUNT;
     }
   }
 }

@@ -3413,7 +3413,7 @@ ThingItemsp Thing::itemsp_get(void)
   return _itemsp;
 }
 
-ThingAip Thing::aip_get(void)
+ThingAip Thing::aip(void)
 {
   TRACE_NO_INDENT();
   if (! _aip) {
@@ -3430,14 +3430,14 @@ AgeMap *Thing::age_map_get(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (&aip_get()->age_map);
+  return (&aip()->age_map);
 }
 
 void Thing::clear_age_map(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  aip_get()->age_map.val = {};
+  aip()->age_map.val = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3447,14 +3447,14 @@ AgeMap *Thing::seen_map_get(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (&aip_get()->seen_map);
+  return (&aip()->seen_map);
 }
 
 void Thing::clear_seen_map(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  aip_get()->seen_map.val = {};
+  aip()->seen_map.val = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3464,14 +3464,14 @@ AgeMap *Thing::interrupt_map_get(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (&aip_get()->interrupt_map);
+  return (&aip()->interrupt_map);
 }
 
 void Thing::clear_interrupt_map(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  aip_get()->interrupt_map.val = {};
+  aip()->interrupt_map.val = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3481,7 +3481,7 @@ Dmap *Thing::dmap_can_see_get(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (&aip_get()->dmap_can_see);
+  return (&aip()->dmap_can_see);
 }
 
 void Thing::clear_dmap_can_see(void)
@@ -3491,7 +3491,7 @@ void Thing::clear_dmap_can_see(void)
 
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      set(aip_get()->dmap_can_see.val, x, y, DMAP_IS_WALL);
+      set(aip()->dmap_can_see.val, x, y, DMAP_IS_WALL);
     }
   }
 }
@@ -3503,14 +3503,14 @@ FovMap *Thing::can_see_currently_get(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (&aip_get()->can_see_currently);
+  return (&aip()->can_see_currently);
 }
 
 void Thing::clear_can_see_currently(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  aip_get()->can_see_currently.can_see = {};
+  aip()->can_see_currently.can_see = {};
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3520,14 +3520,14 @@ FovMap *Thing::can_see_ever_get(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (&aip_get()->can_see_ever);
+  return (&aip()->can_see_ever);
 }
 
 void Thing::clear_can_see_ever(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  aip_get()->can_see_ever.can_see = {};
+  aip()->can_see_ever.can_see = {};
 }
 
 int Thing::item_height(void)
@@ -5916,7 +5916,7 @@ int Thing::idle_count_get(void)
   }
 
   if (maybe_aip()) {
-    return (aip_get()->idle_count);
+    return (aip()->idle_count);
   } else {
     return 0;
   }
@@ -5926,35 +5926,35 @@ int Thing::idle_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->idle_count = v);
+  return (aip()->idle_count = v);
 }
 
 int Thing::idle_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->idle_count -= v);
+  return (aip()->idle_count -= v);
 }
 
 int Thing::idle_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->idle_count += v);
+  return (aip()->idle_count += v);
 }
 
 int Thing::idle_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->idle_count--);
+  return (aip()->idle_count--);
 }
 
 int Thing::idle_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->idle_count++);
+  return (aip()->idle_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5969,7 +5969,7 @@ int Thing::stuck_count_get(void)
   }
 
   if (maybe_aip()) {
-    return (aip_get()->stuck_count);
+    return (aip()->stuck_count);
   } else {
     return 0;
   }
@@ -5979,35 +5979,35 @@ int Thing::stuck_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->stuck_count = v);
+  return (aip()->stuck_count = v);
 }
 
 int Thing::stuck_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->stuck_count -= v);
+  return (aip()->stuck_count -= v);
 }
 
 int Thing::stuck_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->stuck_count += v);
+  return (aip()->stuck_count += v);
 }
 
 int Thing::stuck_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->stuck_count--);
+  return (aip()->stuck_count--);
 }
 
 int Thing::stuck_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_aip();
-  return (aip_get()->stuck_count++);
+  return (aip()->stuck_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
