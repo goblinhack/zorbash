@@ -363,11 +363,11 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       if (! level->is_being_destroyed) {
         dbg("Defeated, leaves corpse");
-        level->set_is_corpse(curr_at.x, curr_at.y);
+        level->is_corpse_set(curr_at.x, curr_at.y);
 
         if (i_set_is_monst) {
           i_set_is_monst = false;
-          level->unset_is_monst(curr_at.x, curr_at.y);
+          level->is_monst_unset(curr_at.x, curr_at.y);
         }
         return;
       }

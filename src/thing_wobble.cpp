@@ -11,7 +11,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-void Thing::wobble(float wobble) { set_wobble(wobble); }
+void Thing::wobble(float wobble) { wobble_set(wobble); }
 
 float Thing::update_wobble(void)
 {
@@ -27,7 +27,7 @@ float Thing::update_wobble(void)
   auto new_w = w;
   new_w *= 0.75;
   new_w = -new_w;
-  set_wobble(new_w);
+  wobble_set(new_w);
 
   return (w);
 }

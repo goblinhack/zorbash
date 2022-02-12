@@ -171,7 +171,7 @@ void Level::tick_gas_poison(void)
       if (g > 254) {
         g = 254;
       }
-      set_is_gas_poison_no_check(x, y, g);
+      is_gas_poison_no_check_set(x, y, g);
     }
   }
 }
@@ -189,7 +189,7 @@ void Level::poison_gas_explosion(point at)
       gas_poison[ gy ][ gx ] = 0;
     }
   }
-  set_is_gas_poison_no_check(at.x, at.y, 0);
+  is_gas_poison_no_check_set(at.x, at.y, 0);
   thing_new("explosion_major", at);
 
   poison_gas_explosion(at + point(1, 0));

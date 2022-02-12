@@ -3748,7 +3748,7 @@ float Thing::get_wobble(void)
   }
 }
 
-void Thing::set_wobble(float v)
+void Thing::wobble_set(float v)
 {
   TRACE_NO_INDENT();
   new_infop();

@@ -2059,7 +2059,7 @@ public:
   void set_score(int);
   void set_spawned_owner(Thingp spawner_owner);
   void set_submerged_offset(int);
-  void set_wobble(float);
+  void wobble_set(float);
   void show_botcon_description(void);
   void skill_activate(Thingp what);
   void skill_deactivate(Thingp what);

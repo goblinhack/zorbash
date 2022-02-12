@@ -60,7 +60,7 @@ void Thing::level_push(void)
   }
   if (is_corpse()) {
     i_set_is_corpse = true;
-    level->set_is_corpse(mx, my);
+    level->is_corpse_set(mx, my);
   }
   if (is_corridor()) {
     i_set_is_corridor = true;

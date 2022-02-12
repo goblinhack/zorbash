@@ -208,7 +208,7 @@ void Level::update_map_things_to_stand_on(void)
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       if (is_floor(x, y) || is_corridor(x, y) || is_dirt(x, y) || is_bridge(x, y)) {
-        set_is_able_to_stand_on(x, y);
+        is_able_to_stand_on_set(x, y);
       }
     }
   }

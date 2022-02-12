@@ -12,7 +12,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-void Level::set_chances_of_creating(void)
+void Level::chances_of_creating_set(void)
 {
   TRACE_AND_INDENT();
 
