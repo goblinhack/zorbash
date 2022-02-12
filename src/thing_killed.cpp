@@ -292,7 +292,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       // Poor player
       //
       if (! get_score()) {
-        incr_score(1);
+        score_incr(1);
       }
 
       if (game->config.hiscores.is_new_hiscore(this)) {

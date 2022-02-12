@@ -38,7 +38,7 @@ static uint8_t wid_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
         // Poor player
         //
         if (! player->get_score()) {
-          player->incr_score(1);
+          player->score_incr(1);
         }
 
         if (game->config.hiscores.is_new_hiscore(player)) {

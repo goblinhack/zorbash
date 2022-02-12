@@ -128,11 +128,11 @@ void Thing::set_mob(Thingp mob)
 
   if (mob) {
     set_mob_id(mob->id);
-    mob->incr_minion_count();
+    mob->minion_count_incr();
   } else {
     set_mob_id(NoThingId);
     if (old_mob) {
-      old_mob->decr_minion_count();
+      old_mob->minion_count_decr();
     }
   }
 }
@@ -149,7 +149,7 @@ void Thing::remove_mob(void)
   dbg("Remove mob %s", old_mob->to_string().c_str());
 
   set_mob_id(NoThingId);
-  old_mob->decr_minion_count();
+  old_mob->minion_count_decr();
 }
 
 //

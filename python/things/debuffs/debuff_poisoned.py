@@ -18,14 +18,14 @@ def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
 
-    my.tp_set_is_debuff(self, True)
-    my.tp_set_is_loggable(self, True)
-    my.tp_set_long_text_description(self, "Poison courses through your unlucky veins.")
-    my.tp_set_on_tick_do(self, "me.on_tick()")
-    my.tp_set_text_debuff(self, "You are poisoned")
-    my.tp_set_text_description(self, "Poisoned debuff.")
-    my.tp_set_tile(self, tile="debuff_poisoned")
-    # my.tp_set_z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
+    my.is_debuff(self, True)
+    my.is_loggable(self, True)
+    my.long_text_description(self, "Poison courses through your unlucky veins.")
+    my.on_tick_do(self, "me.on_tick()")
+    my.text_debuff(self, "You are poisoned")
+    my.text_description(self, "Poisoned debuff.")
+    my.tile(self, tile="debuff_poisoned")
+    # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tp_update(self)
 
 

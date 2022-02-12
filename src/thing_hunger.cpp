@@ -37,7 +37,7 @@ void Thing::hunger_clock_tick(void)
   TRACE_AND_INDENT();
 
   if (get_health() > 1) {
-    decr_health();
+    health_decr();
     if (get_health() == 1) {
       if (is_player()) {
         msg("You are starving!");

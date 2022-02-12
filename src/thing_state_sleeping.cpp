@@ -25,7 +25,7 @@ bool Thing::state_sleeping(bool &do_something, bool &wait)
   AI_LOG("Continue sleeping.");
 
   if (is_able_to_sleep()) {
-    incr_sleep_count();
+    sleep_count_incr();
   }
 
   do_something = true;

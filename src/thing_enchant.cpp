@@ -55,7 +55,7 @@ bool Thing::enchant_with_stone(Thingp what)
   TRACE_AND_INDENT();
 
   what->on_enchant();
-  what->incr_enchant(1);
+  what->enchant_incr(1);
 
   //
   // Drop an enchantstone
@@ -86,7 +86,7 @@ bool Thing::enchant_without_stone(Thingp what)
   TRACE_AND_INDENT();
 
   what->on_enchant();
-  what->incr_enchant(1);
+  what->enchant_incr(1);
 
   return true;
 }
@@ -99,12 +99,12 @@ void Thing::enchant_randomly(void)
     return;
   }
 
-  incr_enchant(1);
+  enchant_incr(1);
   while (pcg_random_range(0, 100) < 20 + level->num() * 2) {
     if (get_enchant() >= get_enchant_max()) {
       break;
     }
-    incr_enchant(1);
+    enchant_incr(1);
   }
 }
 

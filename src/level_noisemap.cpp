@@ -60,7 +60,7 @@ void Level::set_noisemap(const int x, const int y, uint8_t v)
 
 void Level::set_noisemap_no_check(const int x, const int y, uint8_t v) { set_no_check(_noisemap.val, x, y, v); }
 
-void Level::incr_noisemap(const int x, const int y)
+void Level::noisemap_incr(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -75,7 +75,7 @@ void Level::incr_noisemap(const int x, const int y)
   set_no_check(_noisemap.val, x, y, (uint8_t) v);
 }
 
-void Level::incr_noisemap_no_check(const int x, const int y, int dv)
+void Level::noisemap_no_check_incr(const int x, const int y, int dv)
 {
   int v = get_no_check(_noisemap.val, x, y) + 1;
   if (v > LEVEL_LOUDEST_SOUND) {
@@ -87,7 +87,7 @@ void Level::incr_noisemap_no_check(const int x, const int y, int dv)
   set_no_check(_noisemap.val, x, y, (uint8_t) v);
 }
 
-void Level::incr_noisemap_no_check(const int x, const int y)
+void Level::noisemap_no_check_incr(const int x, const int y)
 {
   int v = get_no_check(_noisemap.val, x, y) + 1;
   if (v > LEVEL_LOUDEST_SOUND) {
@@ -139,7 +139,7 @@ void Level::set_noisemap_in(const int x, const int y, uint8_t v)
 
 void Level::set_noisemap_in_no_check(const int x, const int y, uint8_t v) { set_no_check(_noisemap_in.val, x, y, v); }
 
-void Level::incr_noisemap_in(const int x, const int y, int dv)
+void Level::noisemap_in_incr(const int x, const int y, int dv)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -154,7 +154,7 @@ void Level::incr_noisemap_in(const int x, const int y, int dv)
   set_no_check(_noisemap_in.val, x, y, (uint8_t) v);
 }
 
-void Level::incr_noisemap_in(const int x, const int y)
+void Level::noisemap_in_incr(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -169,7 +169,7 @@ void Level::incr_noisemap_in(const int x, const int y)
   set_no_check(_noisemap_in.val, x, y, (uint8_t) v);
 }
 
-void Level::incr_noisemap_in_no_check(const int x, const int y, int dv)
+void Level::noisemap_in_no_check_incr(const int x, const int y, int dv)
 {
   int v = get_no_check(_noisemap_in.val, x, y) + dv;
   if (v > LEVEL_LOUDEST_SOUND) {
@@ -181,7 +181,7 @@ void Level::incr_noisemap_in_no_check(const int x, const int y, int dv)
   set_no_check(_noisemap_in.val, x, y, (uint8_t) v);
 }
 
-void Level::incr_noisemap_in_no_check(const int x, const int y)
+void Level::noisemap_in_no_check_incr(const int x, const int y)
 {
   int v = get_no_check(_noisemap_in.val, x, y) + 1;
   if (v > LEVEL_LOUDEST_SOUND) {

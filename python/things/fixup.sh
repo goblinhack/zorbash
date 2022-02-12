@@ -34,8 +34,8 @@ do
     echo $IN
 
     sed '1,/self = tp.Tp(/!d' $IN > $PRE
-    sed '/self = tp.Tp(/,/set_z_prio(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
-    sed '/set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
+    sed '/self = tp.Tp(/,/z_prio(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
+    sed '/z_prio(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \
       set_aggression_level_pct \

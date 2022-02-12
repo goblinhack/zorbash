@@ -1780,7 +1780,7 @@ uint8_t Level::fade_in_map(const int x, const int y)
 
 uint8_t Level::fade_in_map_no_check(const int x, const int y) { return (get_no_check(_fade_in_map, x, y)); }
 
-void Level::incr_fade_in(const int x, const int y)
+void Level::fade_in_incr(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -1794,7 +1794,7 @@ void Level::incr_fade_in(const int x, const int y)
   }
 }
 
-void Level::incr_fade_in_no_check(const int x, const int y)
+void Level::fade_in_no_check_incr(const int x, const int y)
 {
   auto v = get_no_check(_fade_in_map, x, y);
   if (v < 255) {

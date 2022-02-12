@@ -116,7 +116,7 @@ int Thing::set_stat_luck(int v)
   return (n);
 }
 
-int Thing::decr_stat_luck(int v)
+int Thing::stat_luck_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -127,7 +127,7 @@ int Thing::decr_stat_luck(int v)
   return (n);
 }
 
-int Thing::incr_stat_luck(int v)
+int Thing::stat_luck_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -138,7 +138,7 @@ int Thing::incr_stat_luck(int v)
   return (n);
 }
 
-int Thing::decr_stat_luck(void)
+int Thing::stat_luck_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -149,7 +149,7 @@ int Thing::decr_stat_luck(void)
   return (n);
 }
 
-int Thing::incr_stat_luck(void)
+int Thing::stat_luck_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

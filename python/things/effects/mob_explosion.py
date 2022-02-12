@@ -4,22 +4,22 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name)
-    my.tp_set_gfx_animated(self, True)
-    my.tp_set_gfx_short_shadow_caster(self, True)
-    my.tp_set_gfx_show_outlined(self, True)
-    my.tp_set_is_explosion(self, True)
-    my.tp_set_is_floating(self, True)
-    my.tp_set_is_loggable(self, True)
-    my.tp_set_is_tickable(self, True)
-    my.tp_set_noise_on_born(self, 50)
-    my.tp_set_z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
-    my.tp_set_z_prio(self, my.MAP_PRIO_IN_FRONT)
+    my.gfx_animated(self, True)
+    my.gfx_short_shadow_caster(self, True)
+    my.gfx_show_outlined(self, True)
+    my.is_explosion(self, True)
+    my.is_floating(self, True)
+    my.is_loggable(self, True)
+    my.is_tickable(self, True)
+    my.noise_on_born(self, 50)
+    my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
+    my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
     delay = 100
-    my.tp_set_tile(self, tile=name + ".1", delay_ms=delay)
-    my.tp_set_tile(self, tile=name + ".2", delay_ms=delay)
-    my.tp_set_tile(self, tile=name + ".3", delay_ms=delay)
-    my.tp_set_tile(self,
+    my.tile(self, tile=name + ".1", delay_ms=delay)
+    my.tile(self, tile=name + ".2", delay_ms=delay)
+    my.tile(self, tile=name + ".3", delay_ms=delay)
+    my.tile(self,
         tile=name + ".4",
         delay_ms=delay,
         is_end_of_anim=True,

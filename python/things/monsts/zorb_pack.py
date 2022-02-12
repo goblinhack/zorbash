@@ -26,13 +26,13 @@ def on_you_are_declared_a_follower(me, leader, x, y):
 
 def tp_init(name, text_name):
     self = zorb_all.tp_init(name, text_name)
-    my.tp_set_spawn_group_radius(self, 4)
-    my.tp_set_spawn_group_size_dice(self, "1d8")
-    my.tp_set_is_allied_with(self, "zorb_pack")
-    my.tp_set_on_you_are_declared_a_follower_do(self, "me.on_you_are_declared_a_follower()")
-    my.tp_set_is_monst_class_b(self, True)
-    my.tp_set_is_biome_dungeon(self, True)
-    my.tp_set_on_you_are_declared_leader_do(self, "me.on_you_are_declared_leader()")
+    my.spawn_group_radius(self, 4)
+    my.spawn_group_size_dice(self, "1d8")
+    my.is_allied_with(self, "zorb_pack")
+    my.on_you_are_declared_a_follower_do(self, "me.on_you_are_declared_a_follower()")
+    my.is_monst_class_b(self, True)
+    my.is_biome_dungeon(self, True)
+    my.on_you_are_declared_leader_do(self, "me.on_you_are_declared_leader()")
     my.tp_update(self)
 
 

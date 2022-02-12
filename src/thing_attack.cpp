@@ -785,9 +785,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // An attack counts as making noise.
   //
   if (owner) {
-    level->incr_noisemap_in(curr_at.x, curr_at.y, owner->get_noise_total());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, owner->get_noise_total());
   } else {
-    level->incr_noisemap_in(curr_at.x, curr_at.y, get_noise_total());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, get_noise_total());
   }
 
   //
@@ -999,7 +999,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       }
     }
 
-    decr_stamina();
+    stamina_decr();
     return true;
   }
 

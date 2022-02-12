@@ -118,7 +118,7 @@ void Thing::move_finish(void)
   // Something moved
   //
   if (curr_at != last_at) {
-    level->incr_noisemap_in(curr_at.x, curr_at.y, get_noise_total());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, get_noise_total());
     level->set_is_map_changed(curr_at.x, curr_at.y);
   }
 }
@@ -334,7 +334,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         }
         FOR_ALL_THINGS_END()
 
-        incr_stuck_count();
+        stuck_count_incr();
         return false;
       }
     } else if (is_stuck()) {
@@ -364,7 +364,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       }
       FOR_ALL_THINGS_END()
 
-      incr_stuck_count();
+      stuck_count_incr();
       return false;
     }
   }
@@ -381,7 +381,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           if (d20() > get_stat_con()) {
             if (pcg_random_range(0, 100) < 10) {
               if (is_able_to_tire()) {
-                decr_stamina();
+                stamina_decr();
               }
             }
           }

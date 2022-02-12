@@ -440,7 +440,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         return false;
       }
     }
-    real_hitter->decr_stamina(1);
+    real_hitter->stamina_decr(1);
   }
 
   //
@@ -499,7 +499,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     } else {
       if (real_hitter->is_poisonous_danger_level()) {
-        incr_poisoned_amount(damage / 2);
+        poisoned_amount_incr(damage / 2);
       }
       poisoned();
     }
@@ -527,7 +527,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             } else if (real_hitter->is_player()) {
               msg("%s gains strength from your withering touch!", text_The().c_str());
             }
-            incr_stat_str();
+            stat_str_incr();
             return false;
           }
         } else {
@@ -544,10 +544,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           if (real_hitter->is_necrotic_danger_level()) {
             if (damage > 1) {
               rotting();
-              incr_necrotized_amount(damage - 1);
+              necrotized_amount_incr(damage - 1);
             }
           }
-          decr_stat_str();
+          stat_str_decr();
           if (is_player()) {
             msg("%%fg=limegreen$Your skin is rotting. You lose 1 permanent strength!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
@@ -564,7 +564,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             } else if (real_hitter->is_player()) {
               msg("%s gains constitution from your withering touch!", text_The().c_str());
             }
-            incr_stat_con();
+            stat_con_incr();
             return false;
           }
         } else {
@@ -581,10 +581,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           if (real_hitter->is_necrotic_danger_level()) {
             if (damage > 1) {
               rotting();
-              incr_necrotized_amount(damage - 1);
+              necrotized_amount_incr(damage - 1);
             }
           }
-          decr_stat_con();
+          stat_con_decr();
           if (is_player()) {
             msg("%%fg=limegreen$Your skin is rotting. You lose 1 permanent con!%%fg=reset$");
           } else if (is_alive_monst() && real_hitter->is_player()) {
@@ -1002,7 +1002,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  auto h = decr_health(damage);
+  auto h = health_decr(damage);
   if (h <= 0) {
     h = set_health(0);
 
@@ -1079,13 +1079,13 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   set_tick_last_i_was_attacked(game->tick_current);
 
   if (is_player()) {
-    incr_score(damage);
+    score_incr(damage);
   }
 
   //
   // This might trigger more damage
   //
-  incr_temperature(hitter->get_temperature());
+  temperature_incr(hitter->get_temperature());
 
   //
   // Python callback
@@ -1096,14 +1096,14 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     // Set up noise, for example a door being hit
     //
-    level->incr_noisemap_in(curr_at.x, curr_at.y, noise_on_you_are_hit_but_still_alive());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_you_are_hit_but_still_alive());
   } else {
     on_you_are_hit_but_still_alive(hitter, real_hitter, crit, damage);
 
     //
     // Set up noise, for example a door being broken
     //
-    level->incr_noisemap_in(curr_at.x, curr_at.y, noise_on_you_are_hit_and_now_dead());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_you_are_hit_and_now_dead());
   }
 
   //

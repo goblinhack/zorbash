@@ -125,7 +125,7 @@ void Thing::fire_tick(void)
       damage *= 2;
     }
 
-    auto h = decr_health(damage);
+    auto h = health_decr(damage);
     if (is_player()) {
       msg("%%fg=red$You take %u burn damage!%%fg=reset$", damage);
     }

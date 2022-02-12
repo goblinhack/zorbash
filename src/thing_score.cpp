@@ -32,15 +32,15 @@ void Thing::score_add(Thingp victim)
         if (is_player()) {
           popup("%%fg=red$Glory defeat x10 score!%%fg=reset$");
         }
-        incr_score(score * 10);
+        score_incr(score * 10);
       } else {
-        incr_score(score);
+        score_incr(score);
       }
     } else {
       //
       // Give something, but not a lot as it was not a challenge
       //
-      incr_score(victim->get_health_initial());
+      score_incr(victim->get_health_initial());
     }
   }
 }

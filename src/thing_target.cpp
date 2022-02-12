@@ -317,7 +317,7 @@ bool Thing::victim_attack_best(int equip, point *at)
   //
   // Lunge at the target
   //
-  decr_stamina();
+  stamina_decr();
 
   //
   // Look in the chosen dir first for something to hit, then behind us.

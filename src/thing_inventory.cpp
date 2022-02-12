@@ -53,8 +53,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 
     auto player = level->player;
     if (player) {
-      player->incr_score(value * 10);
-      player->incr_gold(value);
+      player->score_incr(value * 10);
+      player->gold_incr(value);
 
       if (item->is_gold()) {
         if (value > 1) {
@@ -238,7 +238,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
 
   if (item->is_collect_as_keys()) {
     wid_thing_info_fini();
-    incr_keys(1);
+    keys_incr(1);
     inventory_particle(item, itemsp->inventory_shortcuts.size() - 1);
     item->dead("by being collected");
 
