@@ -186,7 +186,7 @@ bool Level::tick(void)
       //
       // Give things a bit of time to move
       //
-      t->incr_movement_left(t->get_move_speed());
+      t->incr_movement_left(t->move_speed());
     }
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
@@ -198,7 +198,7 @@ bool Level::tick(void)
       }
 
       if (player) {
-        movement_left -= player->get_move_speed();
+        movement_left -= player->move_speed();
       } else {
         movement_left -= 100;
       }
