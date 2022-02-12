@@ -91,7 +91,7 @@ void Level::handle_input_events(void)
   // After a small delay handle the player move. This allows for diagonal moves to be handled without generating two
   // key presses.
   //
-  if (((player && player->aip_get()->move_path.size()) || game->request_player_move) &&
+  if (((player && player->aip()->move_path.size()) || game->request_player_move) &&
       time_have_x_tenths_passed_since(1, game->request_player_move)) {
     //
     // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete
@@ -479,7 +479,7 @@ bool Level::tick(void)
 
   if (game->things_are_moving) {
     if (ts_created && time_have_x_tenths_passed_since(10, ts_created)) {
-      if (game->request_player_move || (player && player->aip_get()->move_path.size())) {
+      if (game->request_player_move || (player && player->aip()->move_path.size())) {
         if ((time_get_time_ms() - game->tick_begin_ms) > 100) {
           game->tick_current_is_too_slow = true;
           time_delta += 20;
@@ -621,7 +621,7 @@ bool Level::tick(void)
         game->robot_mode_tick_requested = false;
         if (game->robot_mode) {
           player->ai_tick();
-        } else if (player->aip_get()->move_path.size()) {
+        } else if (player->aip()->move_path.size()) {
           player->path_pop_next_move();
         }
       }
@@ -646,7 +646,7 @@ bool Level::tick(void)
     } else if (player) {
       if (game->robot_mode) {
         player->ai_tick();
-      } else if (player->aip_get()->move_path.size()) {
+      } else if (player->aip()->move_path.size()) {
         player->path_pop_next_move();
       }
     }

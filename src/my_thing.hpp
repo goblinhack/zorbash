@@ -2110,7 +2110,7 @@ public:
 
   ThingInfop  infop_get(void);
   ThingItemsp itemsp_get(void);
-  ThingAip    aip_get(void);
+  ThingAip    aip(void);
 
   bool victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
                                     std::vector< point > &all_deltas);

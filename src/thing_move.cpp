@@ -99,7 +99,7 @@ void Thing::move_finish(void)
     IF_DEBUG1
     {
       std::string s = "";
-      for (auto p1 : aip_get()->move_path) {
+      for (auto p1 : aip()->move_path) {
         s += " " + p1.to_string();
       }
       if (s.empty()) {
@@ -109,7 +109,7 @@ void Thing::move_finish(void)
       }
     }
 
-    if (! aip_get()->move_path.size() && (infop_get()->monst_state == MONST_STATE_MOVING)) {
+    if (! aip()->move_path.size() && (infop_get()->monst_state == MONST_STATE_MOVING)) {
       change_state(MONST_STATE_IDLE, "move finished");
     }
   }
@@ -225,7 +225,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Don't let minions wander too far from their mob.
   //
-  auto aip = maybe_aip();
+  auto ai = maybe_aip();
   auto mob = top_mob_get();
   if (mob) {
     if (distance_mob_max_get()) {
@@ -256,8 +256,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           //
           // Choose a new target
           //
-          if (aip) {
-            aip->wander_dest = point(0, 0);
+          if (ai) {
+            ai->wander_dest = point(0, 0);
           }
           return false;
         }
@@ -811,7 +811,7 @@ void Thing::move_to_immediately(point to)
   // so we don't try to continua an AI move
   //
   if (maybe_aip()) {
-    aip_get()->move_path.clear();
+    aip()->move_path.clear();
   }
 }
 
@@ -912,5 +912,5 @@ void Thing::clear_move_path(const std::string &why)
   }
 
   change_state(MONST_STATE_IDLE, why);
-  aip_get()->move_path.clear();
+  aip()->move_path.clear();
 }

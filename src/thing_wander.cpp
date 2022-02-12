@@ -201,7 +201,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Reached the dest? Choose a new one.
   //
-  auto dest = aip_get()->wander_dest;
+  auto dest = aip()->wander_dest;
   if ((curr_at.x == dest.x) && (curr_at.y == dest.y)) {
     dbg("Reached dest");
     dest = point(-1, -1);
@@ -217,7 +217,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Choose a new wander location
   //
-  aip_get()->wander_dest = point(0, 0);
+  aip()->wander_dest = point(0, 0);
   dest                   = dest_random_get();
   dbg("Try wander to %s", dest.to_string().c_str());
 
@@ -247,7 +247,7 @@ bool Thing::ai_choose_wander(point &nh)
     return false;
   }
 
-  aip_get()->wander_dest = dest;
+  aip()->wander_dest = dest;
 #ifdef ENABLE_DEBUG_AI_WANDER
   thing_new("ai_path2", fpoint(dest.x, dest.y));
 #endif
@@ -315,7 +315,7 @@ bool Thing::ai_wander(void)
       //
       // Set this so next time we will choose another dest
       //
-      aip_get()->wander_dest = point(0, 0);
+      aip()->wander_dest = point(0, 0);
     }
   }
 

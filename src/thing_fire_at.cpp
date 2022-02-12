@@ -107,7 +107,7 @@ Thingp Thing::best_fire_at_target_get(void)
  */
 static void thing_possible_hit_add(Thingp me, Thingp target)
 {
-  if (! get(me->aip_get()->can_see_currently.can_see, (int) target->curr_at.x, (int) target->curr_at.y)) {
+  if (! get(me->aip()->can_see_currently.can_see, (int) target->curr_at.x, (int) target->curr_at.y)) {
     return;
   }
 

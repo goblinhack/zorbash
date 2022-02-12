@@ -240,7 +240,7 @@ void Thing::achieve_goals_in_life(void)
     //
     // Pop the next player move at the end of the game tick
     //
-    if (maybe_aip() && aip_get()->move_path.empty()) {
+    if (maybe_aip() && aip()->move_path.empty()) {
       //
       // If resting, keep resting
       //
@@ -304,7 +304,7 @@ void Thing::tick(void)
   // Allow the same thing to hit us again
   //
   if (maybe_aip()) {
-    aip_get()->recently_hit_by.clear();
+    aip()->recently_hit_by.clear();
   }
 
   if (unlikely(is_dead)) {

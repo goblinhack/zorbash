@@ -676,7 +676,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
     dbg("Try to jump attack");
     TRACE_AND_INDENT();
 
-    auto p         = aip_get()->move_path;
+    auto p         = aip()->move_path;
     auto jump_dist = pcg_random_range(0, p.size());
     return try_to_jump_carefully(get(p, jump_dist));
   }
