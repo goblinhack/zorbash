@@ -4,24 +4,24 @@ import tp
 
 def tp_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
-    my.tp_set_ai_obstacle(self, True)
-    my.tp_set_environ_avoids_fire(self, 1)
-    my.tp_set_gfx_animated(self, True)
-    my.tp_set_gfx_shown_in_bg(self, True)
-    my.tp_set_gfx_water(self, True)
-    my.tp_set_is_able_to_fall(self, True)
-    my.tp_set_is_biome_dungeon(self, True)
-    my.tp_set_is_deep_water(self, True)
-    my.tp_set_is_described_when_hovering_over(self, True)
-    my.tp_set_is_hazard(self, True)
-    my.tp_set_text_a_or_an(self, "the")
-    my.tp_set_text_description(self, "A pool of deep dank water, with things in it.")
-    my.tp_set_z_depth(self, my.MAP_DEPTH_WATER)
-    my.tp_set_z_prio(self, my.MAP_PRIO_NORMAL)
+    my.ai_obstacle(self, True)
+    my.environ_avoids_fire(self, 1)
+    my.gfx_animated(self, True)
+    my.gfx_shown_in_bg(self, True)
+    my.gfx_water(self, True)
+    my.is_able_to_fall(self, True)
+    my.is_biome_dungeon(self, True)
+    my.is_deep_water(self, True)
+    my.is_described_when_hovering_over(self, True)
+    my.is_hazard(self, True)
+    my.text_a_or_an(self, "the")
+    my.text_description(self, "A pool of deep dank water, with things in it.")
+    my.z_depth(self, my.MAP_DEPTH_WATER)
+    my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 1250
     for t in tiles:
-        my.tp_set_tile(self, tile=t, delay_ms=delay)
+        my.tile(self, tile=t, delay_ms=delay)
 
     my.tp_update(self)
 

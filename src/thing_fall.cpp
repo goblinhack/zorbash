@@ -379,7 +379,7 @@ bool Thing::fall_to_next_level(void)
       }
 
       if (tp()->get_health_initial_dice_str() != "") {
-        auto h = decr_health(fall_damage);
+        auto h = health_decr(fall_damage);
         if (h <= 0) {
           h = set_health(0);
           dead("by flying without wings");

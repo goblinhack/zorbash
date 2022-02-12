@@ -11,17 +11,17 @@ def on_born(me, x, y):
 #
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.tp_set_blast_max_radius(self, 2)
-    my.tp_set_collision_check(self, True)
-    my.tp_set_is_laser(self, True)
-    my.tp_set_is_loggable(self, True)
-    my.tp_set_is_no_tile(self, True)
-    my.tp_set_is_tmp_thing(self, True)
-    my.tp_set_is_usable(self, True)
-    my.tp_set_on_born_do(self, "me.on_born()")
-    my.tp_set_text_a_or_an(self, "a")
-    my.tp_set_z_depth(self, my.MAP_DEPTH_OBJ)
-    my.tp_set_z_prio(self, my.MAP_PRIO_BEHIND)
+    my.blast_max_radius(self, 2)
+    my.collision_check(self, True)
+    my.is_laser(self, True)
+    my.is_loggable(self, True)
+    my.is_no_tile(self, True)
+    my.is_tmp_thing(self, True)
+    my.is_usable(self, True)
+    my.on_born_do(self, "me.on_born()")
+    my.text_a_or_an(self, "a")
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
+    my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tp_update(self)
 

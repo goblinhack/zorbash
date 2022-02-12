@@ -187,11 +187,11 @@ void Thing::set_owner(Thingp owner)
 
   if (owner) {
     set_owner_id(owner->id);
-    owner->incr_owned_count();
+    owner->owned_count_incr();
   } else {
     set_owner_id(NoThingId);
     if (old_owner) {
-      old_owner->decr_owned_count();
+      old_owner->owned_count_decr();
     }
   }
 
@@ -212,7 +212,7 @@ void Thing::remove_owner(void)
   on_owner_remove(old_owner);
 
   set_owner_id(NoThingId);
-  old_owner->decr_owned_count();
+  old_owner->owned_count_decr();
 
   //
   // If this was fire and it had an owner (the thing it set on fire)

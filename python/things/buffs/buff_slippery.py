@@ -19,15 +19,15 @@ def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
 
-    my.tp_set_is_buff(self, True)
-    my.tp_set_is_loggable(self, True)
-    my.tp_set_is_slippery(self, True)
-    my.tp_set_long_text_description(self, "No more trapped in webs for you! With this buff you can glide with ease through the cobwebs.")
-    my.tp_set_on_owner_add_do(self, "me.on_owner_add()")
-    my.tp_set_on_owner_remove_do(self, "me.on_owner_remove()")
-    my.tp_set_text_description(self, "You are as slippery as a banana buff.")
-    my.tp_set_tile(self, tile="buff_slippery")
-    # my.tp_set_z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
+    my.is_buff(self, True)
+    my.is_loggable(self, True)
+    my.is_slippery(self, True)
+    my.long_text_description(self, "No more trapped in webs for you! With this buff you can glide with ease through the cobwebs.")
+    my.on_owner_add_do(self, "me.on_owner_add()")
+    my.on_owner_remove_do(self, "me.on_owner_remove()")
+    my.text_description(self, "You are as slippery as a banana buff.")
+    my.tile(self, tile="buff_slippery")
+    # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tp_update(self)
 
 

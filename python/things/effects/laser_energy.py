@@ -15,20 +15,20 @@ def on_born(me, x, y):
 #
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.tp_set_collision_check(self, True)
-    my.tp_set_damage_energy_chance_d1000(self, 1000)
-    my.tp_set_damage_energy_dice(self, "1d6")  # This is the damage when the monst fires
-    my.tp_set_is_fire(self, True)
-    my.tp_set_is_laser(self, True)
-    my.tp_set_is_loggable(self, True)
-    my.tp_set_is_no_tile(self, True)
-    my.tp_set_is_tmp_thing(self, True)
-    my.tp_set_is_usable(self, True)
-    my.tp_set_on_born_do(self, "me.on_born()")
-    my.tp_set_temperature(self, 100)
-    my.tp_set_text_a_or_an(self, "a")
-    my.tp_set_z_depth(self, my.MAP_DEPTH_OBJ)
-    my.tp_set_z_prio(self, my.MAP_PRIO_BEHIND)
+    my.collision_check(self, True)
+    my.damage_energy_chance_d1000(self, 1000)
+    my.damage_energy_dice(self, "1d6")  # This is the damage when the monst fires
+    my.is_fire(self, True)
+    my.is_laser(self, True)
+    my.is_loggable(self, True)
+    my.is_no_tile(self, True)
+    my.is_tmp_thing(self, True)
+    my.is_usable(self, True)
+    my.on_born_do(self, "me.on_born()")
+    my.temperature(self, 100)
+    my.text_a_or_an(self, "a")
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
+    my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tp_update(self)
 

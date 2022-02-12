@@ -28,7 +28,7 @@ uint8_t Level::heatmap(const int x, const int y)
 
 uint8_t Level::heatmap_no_check(const int x, const int y) { return (get_no_check(_heatmap, x, y)); }
 
-void Level::incr_heatmap(const int x, const int y)
+void Level::heatmap_incr(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -39,7 +39,7 @@ void Level::incr_heatmap(const int x, const int y)
   }
 }
 
-void Level::incr_heatmap_no_check(const int x, const int y, int dv)
+void Level::heatmap_no_check_incr(const int x, const int y, int dv)
 {
   uint8_t v = get_no_check(_heatmap, x, y);
   if (v < 255) {
@@ -47,7 +47,7 @@ void Level::incr_heatmap_no_check(const int x, const int y, int dv)
   }
 }
 
-void Level::incr_heatmap_no_check(const int x, const int y)
+void Level::heatmap_no_check_incr(const int x, const int y)
 {
   uint8_t v = get_no_check(_heatmap, x, y);
   if (v < 255) {
@@ -73,32 +73,32 @@ void Level::update_heatmap(void)
     for (auto x = MAP_BORDER_ROOM; x < MAP_WIDTH - MAP_BORDER_ROOM; x++) {
 
       if (is_lava_no_check(x, y)) {
-        incr_heatmap_no_check(x + 1, y + 1);
-        incr_heatmap_no_check(x, y + 1);
-        incr_heatmap_no_check(x - 1, y + 1);
-        incr_heatmap_no_check(x + 1, y);
-        incr_heatmap_no_check(x, y, 10);
-        incr_heatmap_no_check(x - 1, y);
-        incr_heatmap_no_check(x + 1, y - 1);
-        incr_heatmap_no_check(x, y - 1);
-        incr_heatmap_no_check(x - 1, y - 1);
+        heatmap_no_check_incr(x + 1, y + 1);
+        heatmap_no_check_incr(x, y + 1);
+        heatmap_no_check_incr(x - 1, y + 1);
+        heatmap_no_check_incr(x + 1, y);
+        heatmap_no_check_incr(x, y, 10);
+        heatmap_no_check_incr(x - 1, y);
+        heatmap_no_check_incr(x + 1, y - 1);
+        heatmap_no_check_incr(x, y - 1);
+        heatmap_no_check_incr(x - 1, y - 1);
       }
 
       if (is_brazier_no_check(x, y)) {
-        incr_heatmap_no_check(x, y, 5);
+        heatmap_no_check_incr(x, y, 5);
         continue;
       }
 
       if (is_fire_no_check(x, y)) {
-        incr_heatmap_no_check(x + 1, y + 1);
-        incr_heatmap_no_check(x, y + 1);
-        incr_heatmap_no_check(x - 1, y + 1);
-        incr_heatmap_no_check(x + 1, y);
-        incr_heatmap_no_check(x, y, 5);
-        incr_heatmap_no_check(x - 1, y);
-        incr_heatmap_no_check(x + 1, y - 1);
-        incr_heatmap_no_check(x, y - 1);
-        incr_heatmap_no_check(x - 1, y - 1);
+        heatmap_no_check_incr(x + 1, y + 1);
+        heatmap_no_check_incr(x, y + 1);
+        heatmap_no_check_incr(x - 1, y + 1);
+        heatmap_no_check_incr(x + 1, y);
+        heatmap_no_check_incr(x, y, 5);
+        heatmap_no_check_incr(x - 1, y);
+        heatmap_no_check_incr(x + 1, y - 1);
+        heatmap_no_check_incr(x, y - 1);
+        heatmap_no_check_incr(x - 1, y - 1);
       }
     }
   }

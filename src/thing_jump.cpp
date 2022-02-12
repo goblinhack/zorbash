@@ -393,7 +393,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 
   if (! is_able_to_jump_without_tiring()) {
     if (d20() > get_stat_str()) {
-      decr_stamina(10);
+      stamina_decr(10);
     }
   }
 
@@ -626,7 +626,7 @@ void Thing::jump_end(void)
   //
   // Mainly for explosions
   //
-  level->incr_noisemap_in(curr_at.x, curr_at.y, noise_on_jumping());
+  level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_jumping());
 
   //
   // Need this so that if we land on a chasm we fall immediately

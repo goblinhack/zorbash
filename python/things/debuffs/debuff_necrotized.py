@@ -18,14 +18,14 @@ def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
 
-    my.tp_set_is_debuff(self, True)
-    my.tp_set_is_loggable(self, True)
-    my.tp_set_long_text_description(self, "Your skin is peeling off!")
-    my.tp_set_on_tick_do(self, "me.on_tick()")
-    my.tp_set_text_debuff(self, "You are rotting!")
-    my.tp_set_text_description(self, "Rotting debuff.")
-    my.tp_set_tile(self, tile="debuff_necrotized")
-    # my.tp_set_z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
+    my.is_debuff(self, True)
+    my.is_loggable(self, True)
+    my.long_text_description(self, "Your skin is peeling off!")
+    my.on_tick_do(self, "me.on_tick()")
+    my.text_debuff(self, "You are rotting!")
+    my.text_description(self, "Rotting debuff.")
+    my.tile(self, tile="debuff_necrotized")
+    # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tp_update(self)
 
 

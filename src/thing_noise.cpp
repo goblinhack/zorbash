@@ -105,7 +105,7 @@ int Thing::set_noise(int v)
   return (n);
 }
 
-int Thing::decr_noise(int v)
+int Thing::noise_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -116,7 +116,7 @@ int Thing::decr_noise(int v)
   return (n);
 }
 
-int Thing::incr_noise(int v)
+int Thing::noise_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -127,7 +127,7 @@ int Thing::incr_noise(int v)
   return (n);
 }
 
-int Thing::decr_noise(void)
+int Thing::noise_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -138,7 +138,7 @@ int Thing::decr_noise(void)
   return (n);
 }
 
-int Thing::incr_noise(void)
+int Thing::noise_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

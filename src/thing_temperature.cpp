@@ -51,7 +51,7 @@ void Thing::temperature_tick(void)
   dbg("Temperature tick");
   TRACE_AND_INDENT();
 
-  incr_temperature(location_t);
+  temperature_incr(location_t);
 
   t = get_temperature();
   if (! t) {
@@ -83,7 +83,7 @@ int Thing::set_temperature(int v)
   return (n);
 }
 
-int Thing::decr_temperature(int v)
+int Thing::temperature_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -94,7 +94,7 @@ int Thing::decr_temperature(int v)
   return (n);
 }
 
-int Thing::incr_temperature(int v)
+int Thing::temperature_incr(int v)
 {
   TRACE_NO_INDENT();
 
@@ -228,7 +228,7 @@ int Thing::incr_temperature(int v)
   return (n);
 }
 
-int Thing::decr_temperature(void)
+int Thing::temperature_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -239,7 +239,7 @@ int Thing::decr_temperature(void)
   return (n);
 }
 
-int Thing::incr_temperature(void)
+int Thing::temperature_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

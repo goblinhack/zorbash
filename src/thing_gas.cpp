@@ -40,13 +40,13 @@ void Thing::gas_poison_tick(void)
     return;
   }
 
-  incr_poisoned_amount(pcg_random_range(1, intensity));
+  poisoned_amount_incr(pcg_random_range(1, intensity));
 
   if (get_stamina()) {
     if (is_player()) {
       msg("You choke in the gas.");
     }
-    decr_stamina(d20());
+    stamina_decr(d20());
   } else {
     if (is_player()) {
       msg("You are trapped in the gas! You feel like a very long nap.");

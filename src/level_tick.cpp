@@ -186,7 +186,7 @@ bool Level::tick(void)
       //
       // Give things a bit of time to move
       //
-      t->incr_movement_left(t->move_speed());
+      t->movement_left_incr(t->move_speed());
     }
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 

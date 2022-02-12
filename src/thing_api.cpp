@@ -3848,7 +3848,7 @@ int Thing::set_gold(int v)
   return (n);
 }
 
-int Thing::decr_gold(int v)
+int Thing::gold_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -3862,7 +3862,7 @@ int Thing::decr_gold(int v)
   return (n);
 }
 
-int Thing::incr_gold(int v)
+int Thing::gold_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -3873,7 +3873,7 @@ int Thing::incr_gold(int v)
   return (n);
 }
 
-int Thing::decr_gold(void)
+int Thing::gold_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -3887,7 +3887,7 @@ int Thing::decr_gold(void)
   return (n);
 }
 
-int Thing::incr_gold(void)
+int Thing::gold_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -3921,7 +3921,7 @@ void Thing::set_score(int v)
   get_infop()->score = v;
 }
 
-void Thing::incr_score(int v)
+void Thing::score_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -3955,7 +3955,7 @@ int Thing::set_keys(int v)
   return (n);
 }
 
-int Thing::decr_keys(int v)
+int Thing::keys_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -3969,7 +3969,7 @@ int Thing::decr_keys(int v)
   return (n);
 }
 
-int Thing::incr_keys(int v)
+int Thing::keys_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -3980,7 +3980,7 @@ int Thing::incr_keys(int v)
   return (n);
 }
 
-int Thing::decr_keys(void)
+int Thing::keys_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -3994,7 +3994,7 @@ int Thing::decr_keys(void)
   return (n);
 }
 
-int Thing::incr_keys(void)
+int Thing::keys_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4033,7 +4033,7 @@ int Thing::set_health(int v)
   return (n);
 }
 
-int Thing::decr_health(int v)
+int Thing::health_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4044,7 +4044,7 @@ int Thing::decr_health(int v)
   return (n);
 }
 
-int Thing::incr_health(int v)
+int Thing::health_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4055,7 +4055,7 @@ int Thing::incr_health(int v)
   return (n);
 }
 
-int Thing::decr_health(void)
+int Thing::health_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4066,7 +4066,7 @@ int Thing::decr_health(void)
   return (n);
 }
 
-int Thing::incr_health(void)
+int Thing::health_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4101,7 +4101,7 @@ int Thing::set_health_max(int v)
   return (n);
 }
 
-int Thing::decr_health_max(int v)
+int Thing::health_max_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4112,7 +4112,7 @@ int Thing::decr_health_max(int v)
   return (n);
 }
 
-int Thing::incr_health_max(int v)
+int Thing::health_max_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4123,7 +4123,7 @@ int Thing::incr_health_max(int v)
   return (n);
 }
 
-int Thing::decr_health_max(void)
+int Thing::health_max_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4134,7 +4134,7 @@ int Thing::decr_health_max(void)
   return (n);
 }
 
-int Thing::incr_health_max(void)
+int Thing::health_max_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4169,7 +4169,7 @@ int Thing::set_stamina_max(int v)
   return (n);
 }
 
-int Thing::decr_stamina_max(int v)
+int Thing::stamina_max_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4180,7 +4180,7 @@ int Thing::decr_stamina_max(int v)
   return (n);
 }
 
-int Thing::incr_stamina_max(int v)
+int Thing::stamina_max_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4191,7 +4191,7 @@ int Thing::incr_stamina_max(int v)
   return (n);
 }
 
-int Thing::decr_stamina_max(void)
+int Thing::stamina_max_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4202,7 +4202,7 @@ int Thing::decr_stamina_max(void)
   return (n);
 }
 
-int Thing::incr_stamina_max(void)
+int Thing::stamina_max_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4237,7 +4237,7 @@ int Thing::set_enchant_max(int v)
   return (n);
 }
 
-int Thing::decr_enchant_max(int v)
+int Thing::enchant_max_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4248,7 +4248,7 @@ int Thing::decr_enchant_max(int v)
   return (n);
 }
 
-int Thing::incr_enchant_max(int v)
+int Thing::enchant_max_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4259,7 +4259,7 @@ int Thing::incr_enchant_max(int v)
   return (n);
 }
 
-int Thing::decr_enchant_max(void)
+int Thing::enchant_max_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4270,7 +4270,7 @@ int Thing::decr_enchant_max(void)
   return (n);
 }
 
-int Thing::incr_enchant_max(void)
+int Thing::enchant_max_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4302,7 +4302,7 @@ uint32_t Thing::set_tick_resurrect_when(int v)
   return (n);
 }
 
-uint32_t Thing::decr_tick_resurrect_when(int v)
+uint32_t Thing::tick_resurrect_when_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4310,7 +4310,7 @@ uint32_t Thing::decr_tick_resurrect_when(int v)
   return (n);
 }
 
-uint32_t Thing::incr_tick_resurrect_when(int v)
+uint32_t Thing::tick_resurrect_when_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4318,7 +4318,7 @@ uint32_t Thing::incr_tick_resurrect_when(int v)
   return (n);
 }
 
-uint32_t Thing::decr_tick_resurrect_when(void)
+uint32_t Thing::tick_resurrect_when_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4326,7 +4326,7 @@ uint32_t Thing::decr_tick_resurrect_when(void)
   return (n);
 }
 
-uint32_t Thing::incr_tick_resurrect_when(void)
+uint32_t Thing::tick_resurrect_when_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4355,7 +4355,7 @@ uint32_t Thing::set_movement_left(int v)
   return (n);
 }
 
-uint32_t Thing::decr_movement_left(int v)
+uint32_t Thing::movement_left_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4363,7 +4363,7 @@ uint32_t Thing::decr_movement_left(int v)
   return (n);
 }
 
-uint32_t Thing::incr_movement_left(int v)
+uint32_t Thing::movement_left_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4371,7 +4371,7 @@ uint32_t Thing::incr_movement_left(int v)
   return (n);
 }
 
-uint32_t Thing::decr_movement_left(void)
+uint32_t Thing::movement_left_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4379,7 +4379,7 @@ uint32_t Thing::decr_movement_left(void)
   return (n);
 }
 
-uint32_t Thing::incr_movement_left(void)
+uint32_t Thing::movement_left_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4411,7 +4411,7 @@ int Thing::set_stats02(int v)
   return (n);
 }
 
-int Thing::decr_stats02(int v)
+int Thing::stats02_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4422,7 +4422,7 @@ int Thing::decr_stats02(int v)
   return (n);
 }
 
-int Thing::incr_stats02(int v)
+int Thing::stats02_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4433,7 +4433,7 @@ int Thing::incr_stats02(int v)
   return (n);
 }
 
-int Thing::decr_stats02(void)
+int Thing::stats02_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4444,7 +4444,7 @@ int Thing::decr_stats02(void)
   return (n);
 }
 
-int Thing::incr_stats02(void)
+int Thing::stats02_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4479,7 +4479,7 @@ int Thing::set_stats03(int v)
   return (n);
 }
 
-int Thing::decr_stats03(int v)
+int Thing::stats03_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4490,7 +4490,7 @@ int Thing::decr_stats03(int v)
   return (n);
 }
 
-int Thing::incr_stats03(int v)
+int Thing::stats03_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4501,7 +4501,7 @@ int Thing::incr_stats03(int v)
   return (n);
 }
 
-int Thing::decr_stats03(void)
+int Thing::stats03_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4512,7 +4512,7 @@ int Thing::decr_stats03(void)
   return (n);
 }
 
-int Thing::incr_stats03(void)
+int Thing::stats03_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4547,7 +4547,7 @@ int Thing::set_stats04(int v)
   return (n);
 }
 
-int Thing::decr_stats04(int v)
+int Thing::stats04_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4558,7 +4558,7 @@ int Thing::decr_stats04(int v)
   return (n);
 }
 
-int Thing::incr_stats04(int v)
+int Thing::stats04_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4569,7 +4569,7 @@ int Thing::incr_stats04(int v)
   return (n);
 }
 
-int Thing::decr_stats04(void)
+int Thing::stats04_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4580,7 +4580,7 @@ int Thing::decr_stats04(void)
   return (n);
 }
 
-int Thing::incr_stats04(void)
+int Thing::stats04_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4615,7 +4615,7 @@ int Thing::set_stats05(int v)
   return (n);
 }
 
-int Thing::decr_stats05(int v)
+int Thing::stats05_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4626,7 +4626,7 @@ int Thing::decr_stats05(int v)
   return (n);
 }
 
-int Thing::incr_stats05(int v)
+int Thing::stats05_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4637,7 +4637,7 @@ int Thing::incr_stats05(int v)
   return (n);
 }
 
-int Thing::decr_stats05(void)
+int Thing::stats05_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4648,7 +4648,7 @@ int Thing::decr_stats05(void)
   return (n);
 }
 
-int Thing::incr_stats05(void)
+int Thing::stats05_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4683,7 +4683,7 @@ int Thing::set_stats06(int v)
   return (n);
 }
 
-int Thing::decr_stats06(int v)
+int Thing::stats06_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4694,7 +4694,7 @@ int Thing::decr_stats06(int v)
   return (n);
 }
 
-int Thing::incr_stats06(int v)
+int Thing::stats06_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4705,7 +4705,7 @@ int Thing::incr_stats06(int v)
   return (n);
 }
 
-int Thing::decr_stats06(void)
+int Thing::stats06_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4716,7 +4716,7 @@ int Thing::decr_stats06(void)
   return (n);
 }
 
-int Thing::incr_stats06(void)
+int Thing::stats06_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4751,7 +4751,7 @@ int Thing::set_stats07(int v)
   return (n);
 }
 
-int Thing::decr_stats07(int v)
+int Thing::stats07_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4762,7 +4762,7 @@ int Thing::decr_stats07(int v)
   return (n);
 }
 
-int Thing::incr_stats07(int v)
+int Thing::stats07_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4773,7 +4773,7 @@ int Thing::incr_stats07(int v)
   return (n);
 }
 
-int Thing::decr_stats07(void)
+int Thing::stats07_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4784,7 +4784,7 @@ int Thing::decr_stats07(void)
   return (n);
 }
 
-int Thing::incr_stats07(void)
+int Thing::stats07_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4819,7 +4819,7 @@ int Thing::set_stats09(int v)
   return (n);
 }
 
-int Thing::decr_stats09(int v)
+int Thing::stats09_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4830,7 +4830,7 @@ int Thing::decr_stats09(int v)
   return (n);
 }
 
-int Thing::incr_stats09(int v)
+int Thing::stats09_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4841,7 +4841,7 @@ int Thing::incr_stats09(int v)
   return (n);
 }
 
-int Thing::decr_stats09(void)
+int Thing::stats09_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4852,7 +4852,7 @@ int Thing::decr_stats09(void)
   return (n);
 }
 
-int Thing::incr_stats09(void)
+int Thing::stats09_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4887,7 +4887,7 @@ int Thing::set_stat_def_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_def_mod(int v)
+int Thing::stat_def_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4898,7 +4898,7 @@ int Thing::decr_stat_def_mod(int v)
   return (n);
 }
 
-int Thing::incr_stat_def_mod(int v)
+int Thing::stat_def_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4909,7 +4909,7 @@ int Thing::incr_stat_def_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_def_mod(void)
+int Thing::stat_def_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4920,7 +4920,7 @@ int Thing::decr_stat_def_mod(void)
   return (n);
 }
 
-int Thing::incr_stat_def_mod(void)
+int Thing::stat_def_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4955,7 +4955,7 @@ int Thing::set_stat_con_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_con_mod(int v)
+int Thing::stat_con_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4966,7 +4966,7 @@ int Thing::decr_stat_con_mod(int v)
   return (n);
 }
 
-int Thing::incr_stat_con_mod(int v)
+int Thing::stat_con_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4977,7 +4977,7 @@ int Thing::incr_stat_con_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_con_mod(void)
+int Thing::stat_con_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4988,7 +4988,7 @@ int Thing::decr_stat_con_mod(void)
   return (n);
 }
 
-int Thing::incr_stat_con_mod(void)
+int Thing::stat_con_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5023,7 +5023,7 @@ int Thing::set_stat_dex_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_dex_mod(int v)
+int Thing::stat_dex_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5034,7 +5034,7 @@ int Thing::decr_stat_dex_mod(int v)
   return (n);
 }
 
-int Thing::incr_stat_dex_mod(int v)
+int Thing::stat_dex_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5045,7 +5045,7 @@ int Thing::incr_stat_dex_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_dex_mod(void)
+int Thing::stat_dex_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5056,7 +5056,7 @@ int Thing::decr_stat_dex_mod(void)
   return (n);
 }
 
-int Thing::incr_stat_dex_mod(void)
+int Thing::stat_dex_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5091,7 +5091,7 @@ int Thing::set_stat_luck_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_luck_mod(int v)
+int Thing::stat_luck_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5102,7 +5102,7 @@ int Thing::decr_stat_luck_mod(int v)
   return (n);
 }
 
-int Thing::incr_stat_luck_mod(int v)
+int Thing::stat_luck_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5113,7 +5113,7 @@ int Thing::incr_stat_luck_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_luck_mod(void)
+int Thing::stat_luck_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5124,7 +5124,7 @@ int Thing::decr_stat_luck_mod(void)
   return (n);
 }
 
-int Thing::incr_stat_luck_mod(void)
+int Thing::stat_luck_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5159,7 +5159,7 @@ int Thing::set_stat_att_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_att_mod(int v)
+int Thing::stat_att_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5170,7 +5170,7 @@ int Thing::decr_stat_att_mod(int v)
   return (n);
 }
 
-int Thing::incr_stat_att_mod(int v)
+int Thing::stat_att_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5181,7 +5181,7 @@ int Thing::incr_stat_att_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_att_mod(void)
+int Thing::stat_att_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5192,7 +5192,7 @@ int Thing::decr_stat_att_mod(void)
   return (n);
 }
 
-int Thing::incr_stat_att_mod(void)
+int Thing::stat_att_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5227,7 +5227,7 @@ int Thing::set_stat_str_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_str_mod(int v)
+int Thing::stat_str_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5238,7 +5238,7 @@ int Thing::decr_stat_str_mod(int v)
   return (n);
 }
 
-int Thing::incr_stat_str_mod(int v)
+int Thing::stat_str_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5249,7 +5249,7 @@ int Thing::incr_stat_str_mod(int v)
   return (n);
 }
 
-int Thing::decr_stat_str_mod(void)
+int Thing::stat_str_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5260,7 +5260,7 @@ int Thing::decr_stat_str_mod(void)
   return (n);
 }
 
-int Thing::incr_stat_str_mod(void)
+int Thing::stat_str_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5292,7 +5292,7 @@ int Thing::set_distance_throw(int v)
   return (n);
 }
 
-int Thing::decr_distance_throw(int v)
+int Thing::distance_throw_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5300,7 +5300,7 @@ int Thing::decr_distance_throw(int v)
   return (n);
 }
 
-int Thing::incr_distance_throw(int v)
+int Thing::distance_throw_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5308,7 +5308,7 @@ int Thing::incr_distance_throw(int v)
   return (n);
 }
 
-int Thing::decr_distance_throw(void)
+int Thing::distance_throw_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5316,7 +5316,7 @@ int Thing::decr_distance_throw(void)
   return (n);
 }
 
-int Thing::incr_distance_throw(void)
+int Thing::distance_throw_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5356,7 +5356,7 @@ int Thing::set_stamina(int v)
   return (n);
 }
 
-int Thing::decr_stamina(int v)
+int Thing::stamina_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5367,7 +5367,7 @@ int Thing::decr_stamina(int v)
   return (n);
 }
 
-int Thing::incr_stamina(int v)
+int Thing::stamina_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5375,7 +5375,7 @@ int Thing::incr_stamina(int v)
   return (n);
 }
 
-int Thing::decr_stamina(void)
+int Thing::stamina_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5386,7 +5386,7 @@ int Thing::decr_stamina(void)
   return (n);
 }
 
-int Thing::incr_stamina(void)
+int Thing::stamina_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5426,7 +5426,7 @@ int Thing::set_enchant(int v)
   return (n);
 }
 
-int Thing::decr_enchant(int v)
+int Thing::enchant_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5437,7 +5437,7 @@ int Thing::decr_enchant(int v)
   return (n);
 }
 
-int Thing::incr_enchant(int v)
+int Thing::enchant_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5445,7 +5445,7 @@ int Thing::incr_enchant(int v)
   return (n);
 }
 
-int Thing::decr_enchant(void)
+int Thing::enchant_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5456,7 +5456,7 @@ int Thing::decr_enchant(void)
   return (n);
 }
 
-int Thing::incr_enchant(void)
+int Thing::enchant_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5499,7 +5499,7 @@ int Thing::set_poisoned_amount(int v)
   return (n);
 }
 
-int Thing::decr_poisoned_amount(int v)
+int Thing::poisoned_amount_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5510,7 +5510,7 @@ int Thing::decr_poisoned_amount(int v)
   return (n);
 }
 
-int Thing::incr_poisoned_amount(int v)
+int Thing::poisoned_amount_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5521,7 +5521,7 @@ int Thing::incr_poisoned_amount(int v)
   return (n);
 }
 
-int Thing::decr_poisoned_amount(void)
+int Thing::poisoned_amount_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5532,7 +5532,7 @@ int Thing::decr_poisoned_amount(void)
   return (n);
 }
 
-int Thing::incr_poisoned_amount(void)
+int Thing::poisoned_amount_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5575,7 +5575,7 @@ int Thing::set_necrotized_amount(int v)
   return (n);
 }
 
-int Thing::decr_necrotized_amount(int v)
+int Thing::necrotized_amount_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5586,7 +5586,7 @@ int Thing::decr_necrotized_amount(int v)
   return (n);
 }
 
-int Thing::incr_necrotized_amount(int v)
+int Thing::necrotized_amount_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5597,7 +5597,7 @@ int Thing::incr_necrotized_amount(int v)
   return (n);
 }
 
-int Thing::decr_necrotized_amount(void)
+int Thing::necrotized_amount_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5608,7 +5608,7 @@ int Thing::decr_necrotized_amount(void)
   return (n);
 }
 
-int Thing::incr_necrotized_amount(void)
+int Thing::necrotized_amount_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5636,28 +5636,28 @@ int Thing::set_owned_count(int v)
   return (get_infop()->owned_count = v);
 }
 
-int Thing::decr_owned_count(int v)
+int Thing::owned_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->owned_count -= v);
 }
 
-int Thing::incr_owned_count(int v)
+int Thing::owned_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->owned_count += v);
 }
 
-int Thing::decr_owned_count(void)
+int Thing::owned_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->owned_count--);
 }
 
-int Thing::incr_owned_count(void)
+int Thing::owned_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5684,28 +5684,28 @@ int Thing::set_minion_count(int v)
   return (get_infop()->minion_count = v);
 }
 
-int Thing::decr_minion_count(int v)
+int Thing::minion_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->minion_count -= v);
 }
 
-int Thing::incr_minion_count(int v)
+int Thing::minion_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->minion_count += v);
 }
 
-int Thing::decr_minion_count(void)
+int Thing::minion_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->minion_count--);
 }
 
-int Thing::incr_minion_count(void)
+int Thing::minion_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5732,28 +5732,28 @@ int Thing::set_follower_count(int v)
   return (get_infop()->follower_count = v);
 }
 
-int Thing::decr_follower_count(int v)
+int Thing::follower_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->follower_count -= v);
 }
 
-int Thing::incr_follower_count(int v)
+int Thing::follower_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->follower_count += v);
 }
 
-int Thing::decr_follower_count(void)
+int Thing::follower_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->follower_count--);
 }
 
-int Thing::incr_follower_count(void)
+int Thing::follower_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5780,28 +5780,28 @@ int Thing::set_spawned_count(int v)
   return (get_infop()->spawned_count = v);
 }
 
-int Thing::decr_spawned_count(int v)
+int Thing::spawned_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->spawned_count -= v);
 }
 
-int Thing::incr_spawned_count(int v)
+int Thing::spawned_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->spawned_count += v);
 }
 
-int Thing::decr_spawned_count(void)
+int Thing::spawned_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->spawned_count--);
 }
 
-int Thing::incr_spawned_count(void)
+int Thing::spawned_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5828,28 +5828,28 @@ int Thing::set_charge_count(int v)
   return (get_infop()->charge_count = v);
 }
 
-int Thing::decr_charge_count(int v)
+int Thing::charge_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->charge_count -= v);
 }
 
-int Thing::incr_charge_count(int v)
+int Thing::charge_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->charge_count += v);
 }
 
-int Thing::decr_charge_count(void)
+int Thing::charge_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->charge_count--);
 }
 
-int Thing::incr_charge_count(void)
+int Thing::charge_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5876,28 +5876,28 @@ int Thing::set_sleep_count(int v)
   return (get_infop()->sleep_count = v);
 }
 
-int Thing::decr_sleep_count(int v)
+int Thing::sleep_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->sleep_count -= v);
 }
 
-int Thing::incr_sleep_count(int v)
+int Thing::sleep_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->sleep_count += v);
 }
 
-int Thing::decr_sleep_count(void)
+int Thing::sleep_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->sleep_count--);
 }
 
-int Thing::incr_sleep_count(void)
+int Thing::sleep_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5929,28 +5929,28 @@ int Thing::set_idle_count(int v)
   return (get_aip()->idle_count = v);
 }
 
-int Thing::decr_idle_count(int v)
+int Thing::idle_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
   return (get_aip()->idle_count -= v);
 }
 
-int Thing::incr_idle_count(int v)
+int Thing::idle_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
   return (get_aip()->idle_count += v);
 }
 
-int Thing::decr_idle_count(void)
+int Thing::idle_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_aip();
   return (get_aip()->idle_count--);
 }
 
-int Thing::incr_idle_count(void)
+int Thing::idle_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_aip();
@@ -5982,28 +5982,28 @@ int Thing::set_stuck_count(int v)
   return (get_aip()->stuck_count = v);
 }
 
-int Thing::decr_stuck_count(int v)
+int Thing::stuck_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
   return (get_aip()->stuck_count -= v);
 }
 
-int Thing::incr_stuck_count(int v)
+int Thing::stuck_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
   return (get_aip()->stuck_count += v);
 }
 
-int Thing::decr_stuck_count(void)
+int Thing::stuck_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_aip();
   return (get_aip()->stuck_count--);
 }
 
-int Thing::incr_stuck_count(void)
+int Thing::stuck_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_aip();
@@ -6030,28 +6030,28 @@ int Thing::set_lifespan(int v)
   return (get_infop()->lifespan = v);
 }
 
-int Thing::decr_lifespan(int v)
+int Thing::lifespan_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->lifespan -= v);
 }
 
-int Thing::incr_lifespan(int v)
+int Thing::lifespan_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->lifespan += v);
 }
 
-int Thing::decr_lifespan(void)
+int Thing::lifespan_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->lifespan--);
 }
 
-int Thing::incr_lifespan(void)
+int Thing::lifespan_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6078,28 +6078,28 @@ int Thing::set_prev_light_power(int v)
   return (get_infop()->prev_light_power = v);
 }
 
-int Thing::decr_prev_light_power(int v)
+int Thing::prev_light_power_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->prev_light_power -= v);
 }
 
-int Thing::incr_prev_light_power(int v)
+int Thing::prev_light_power_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->prev_light_power += v);
 }
 
-int Thing::decr_prev_light_power(void)
+int Thing::prev_light_power_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->prev_light_power--);
 }
 
-int Thing::incr_prev_light_power(void)
+int Thing::prev_light_power_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6166,28 +6166,28 @@ int Thing::set_light_power(int v)
   return (get_infop()->light_power = v);
 }
 
-int Thing::decr_light_power(int v)
+int Thing::light_power_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->light_power -= v);
 }
 
-int Thing::incr_light_power(int v)
+int Thing::light_power_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->light_power += v);
 }
 
-int Thing::decr_light_power(void)
+int Thing::light_power_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->light_power--);
 }
 
-int Thing::incr_light_power(void)
+int Thing::light_power_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6215,28 +6215,28 @@ uint32_t Thing::set_tick_last_did_something(uint32_t v)
   return (get_infop()->tick_last_did_something = v);
 }
 
-uint32_t Thing::decr_tick_last_did_something(uint32_t v)
+uint32_t Thing::tick_last_did_something_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_did_something -= v);
 }
 
-uint32_t Thing::incr_tick_last_did_something(uint32_t v)
+uint32_t Thing::tick_last_did_something_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_did_something += v);
 }
 
-uint32_t Thing::decr_tick_last_did_something(void)
+uint32_t Thing::tick_last_did_something_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_did_something--);
 }
 
-uint32_t Thing::incr_tick_last_did_something(void)
+uint32_t Thing::tick_last_did_something_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6264,28 +6264,28 @@ uint32_t Thing::set_tick_last_dropped(uint32_t v)
   return (get_infop()->tick_last_dropped = v);
 }
 
-uint32_t Thing::decr_tick_last_dropped(uint32_t v)
+uint32_t Thing::tick_last_dropped_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_dropped -= v);
 }
 
-uint32_t Thing::incr_tick_last_dropped(uint32_t v)
+uint32_t Thing::tick_last_dropped_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_dropped += v);
 }
 
-uint32_t Thing::decr_tick_last_dropped(void)
+uint32_t Thing::tick_last_dropped_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_dropped--);
 }
 
-uint32_t Thing::incr_tick_last_dropped(void)
+uint32_t Thing::tick_last_dropped_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6312,28 +6312,28 @@ uint32_t Thing::set_tick_last_location_check(uint32_t v)
   return (get_infop()->tick_last_location_check = v);
 }
 
-uint32_t Thing::decr_tick_last_location_check(uint32_t v)
+uint32_t Thing::tick_last_location_check_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_location_check -= v);
 }
 
-uint32_t Thing::incr_tick_last_location_check(uint32_t v)
+uint32_t Thing::tick_last_location_check_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_location_check += v);
 }
 
-uint32_t Thing::decr_tick_last_location_check(void)
+uint32_t Thing::tick_last_location_check_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_location_check--);
 }
 
-uint32_t Thing::incr_tick_last_location_check(void)
+uint32_t Thing::tick_last_location_check_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6360,28 +6360,28 @@ uint32_t Thing::set_tick_last_escape(uint32_t v)
   return (get_infop()->tick_last_escape = v);
 }
 
-uint32_t Thing::decr_tick_last_escape(uint32_t v)
+uint32_t Thing::tick_last_escape_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_escape -= v);
 }
 
-uint32_t Thing::incr_tick_last_escape(uint32_t v)
+uint32_t Thing::tick_last_escape_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_escape += v);
 }
 
-uint32_t Thing::decr_tick_last_escape(void)
+uint32_t Thing::tick_last_escape_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_escape--);
 }
 
-uint32_t Thing::incr_tick_last_escape(void)
+uint32_t Thing::tick_last_escape_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6408,28 +6408,28 @@ uint32_t Thing::set_tick_last_level_change(uint32_t v)
   return (get_infop()->tick_last_level_change = v);
 }
 
-uint32_t Thing::decr_tick_last_level_change(uint32_t v)
+uint32_t Thing::tick_last_level_change_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_level_change -= v);
 }
 
-uint32_t Thing::incr_tick_last_level_change(uint32_t v)
+uint32_t Thing::tick_last_level_change_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_level_change += v);
 }
 
-uint32_t Thing::decr_tick_last_level_change(void)
+uint32_t Thing::tick_last_level_change_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_level_change--);
 }
 
-uint32_t Thing::incr_tick_last_level_change(void)
+uint32_t Thing::tick_last_level_change_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6456,28 +6456,28 @@ uint32_t Thing::set_tick_last_i_was_attacked(uint32_t v)
   return (get_infop()->tick_last_i_was_attacked = v);
 }
 
-uint32_t Thing::decr_tick_last_i_was_attacked(uint32_t v)
+uint32_t Thing::tick_last_i_was_attacked_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_i_was_attacked -= v);
 }
 
-uint32_t Thing::incr_tick_last_i_was_attacked(uint32_t v)
+uint32_t Thing::tick_last_i_was_attacked_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_i_was_attacked += v);
 }
 
-uint32_t Thing::decr_tick_last_i_was_attacked(void)
+uint32_t Thing::tick_last_i_was_attacked_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->tick_last_i_was_attacked--);
 }
 
-uint32_t Thing::incr_tick_last_i_was_attacked(void)
+uint32_t Thing::tick_last_i_was_attacked_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6544,28 +6544,28 @@ ts_t Thing::set_ts_lunge_begin(ts_t v)
   return (get_infop()->ts_lunge_begin = v);
 }
 
-ts_t Thing::decr_ts_lunge_begin(ts_t v)
+ts_t Thing::ts_lunge_begin_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_lunge_begin -= v);
 }
 
-ts_t Thing::incr_ts_lunge_begin(ts_t v)
+ts_t Thing::ts_lunge_begin_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_lunge_begin += v);
 }
 
-ts_t Thing::decr_ts_lunge_begin(void)
+ts_t Thing::ts_lunge_begin_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_lunge_begin--);
 }
 
-ts_t Thing::incr_ts_lunge_begin(void)
+ts_t Thing::ts_lunge_begin_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6592,28 +6592,28 @@ ts_t Thing::set_ts_lunge_end(ts_t v)
   return (get_infop()->ts_lunge_end = v);
 }
 
-ts_t Thing::decr_ts_lunge_end(ts_t v)
+ts_t Thing::ts_lunge_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_lunge_end -= v);
 }
 
-ts_t Thing::incr_ts_lunge_end(ts_t v)
+ts_t Thing::ts_lunge_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_lunge_end += v);
 }
 
-ts_t Thing::decr_ts_lunge_end(void)
+ts_t Thing::ts_lunge_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_lunge_end--);
 }
 
-ts_t Thing::incr_ts_lunge_end(void)
+ts_t Thing::ts_lunge_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6640,28 +6640,28 @@ ts_t Thing::set_ts_bounce_begin(ts_t v)
   return (get_infop()->ts_bounce_begin = v);
 }
 
-ts_t Thing::decr_ts_bounce_begin(ts_t v)
+ts_t Thing::ts_bounce_begin_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_bounce_begin -= v);
 }
 
-ts_t Thing::incr_ts_bounce_begin(ts_t v)
+ts_t Thing::ts_bounce_begin_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_bounce_begin += v);
 }
 
-ts_t Thing::decr_ts_bounce_begin(void)
+ts_t Thing::ts_bounce_begin_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_bounce_begin--);
 }
 
-ts_t Thing::incr_ts_bounce_begin(void)
+ts_t Thing::ts_bounce_begin_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6688,28 +6688,28 @@ ts_t Thing::set_ts_bounce_end(ts_t v)
   return (get_infop()->ts_bounce_end = v);
 }
 
-ts_t Thing::decr_ts_bounce_end(ts_t v)
+ts_t Thing::ts_bounce_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_bounce_end -= v);
 }
 
-ts_t Thing::incr_ts_bounce_end(ts_t v)
+ts_t Thing::ts_bounce_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_bounce_end += v);
 }
 
-ts_t Thing::decr_ts_bounce_end(void)
+ts_t Thing::ts_bounce_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_bounce_end--);
 }
 
-ts_t Thing::incr_ts_bounce_end(void)
+ts_t Thing::ts_bounce_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6736,28 +6736,28 @@ ts_t Thing::set_ts_fadeup_begin(ts_t v)
   return (get_infop()->ts_fadeup_begin = v);
 }
 
-ts_t Thing::decr_ts_fadeup_begin(ts_t v)
+ts_t Thing::ts_fadeup_begin_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fadeup_begin -= v);
 }
 
-ts_t Thing::incr_ts_fadeup_begin(ts_t v)
+ts_t Thing::ts_fadeup_begin_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fadeup_begin += v);
 }
 
-ts_t Thing::decr_ts_fadeup_begin(void)
+ts_t Thing::ts_fadeup_begin_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fadeup_begin--);
 }
 
-ts_t Thing::incr_ts_fadeup_begin(void)
+ts_t Thing::ts_fadeup_begin_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6784,28 +6784,28 @@ ts_t Thing::set_ts_fadeup_end(ts_t v)
   return (get_infop()->ts_fadeup_end = v);
 }
 
-ts_t Thing::decr_ts_fadeup_end(ts_t v)
+ts_t Thing::ts_fadeup_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fadeup_end -= v);
 }
 
-ts_t Thing::incr_ts_fadeup_end(ts_t v)
+ts_t Thing::ts_fadeup_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fadeup_end += v);
 }
 
-ts_t Thing::decr_ts_fadeup_end(void)
+ts_t Thing::ts_fadeup_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fadeup_end--);
 }
 
-ts_t Thing::incr_ts_fadeup_end(void)
+ts_t Thing::ts_fadeup_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6832,28 +6832,28 @@ ts_t Thing::set_ts_flip_start(ts_t v)
   return (get_infop()->ts_flip_start = v);
 }
 
-ts_t Thing::decr_ts_flip_start(ts_t v)
+ts_t Thing::ts_flip_start_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_flip_start -= v);
 }
 
-ts_t Thing::incr_ts_flip_start(ts_t v)
+ts_t Thing::ts_flip_start_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_flip_start += v);
 }
 
-ts_t Thing::decr_ts_flip_start(void)
+ts_t Thing::ts_flip_start_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_flip_start--);
 }
 
-ts_t Thing::incr_ts_flip_start(void)
+ts_t Thing::ts_flip_start_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6880,28 +6880,28 @@ ts_t Thing::set_ts_anim_delay_end(ts_t v)
   return (get_infop()->ts_anim_delay_end = v);
 }
 
-ts_t Thing::decr_ts_anim_delay_end(ts_t v)
+ts_t Thing::ts_anim_delay_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_anim_delay_end -= v);
 }
 
-ts_t Thing::incr_ts_anim_delay_end(ts_t v)
+ts_t Thing::ts_anim_delay_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_anim_delay_end += v);
 }
 
-ts_t Thing::decr_ts_anim_delay_end(void)
+ts_t Thing::ts_anim_delay_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_anim_delay_end--);
 }
 
-ts_t Thing::incr_ts_anim_delay_end(void)
+ts_t Thing::ts_anim_delay_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6928,28 +6928,28 @@ ts_t Thing::set_ts_fall_begin(ts_t v)
   return (get_infop()->ts_fall_begin = v);
 }
 
-ts_t Thing::decr_ts_fall_begin(ts_t v)
+ts_t Thing::ts_fall_begin_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fall_begin -= v);
 }
 
-ts_t Thing::incr_ts_fall_begin(ts_t v)
+ts_t Thing::ts_fall_begin_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fall_begin += v);
 }
 
-ts_t Thing::decr_ts_fall_begin(void)
+ts_t Thing::ts_fall_begin_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fall_begin--);
 }
 
-ts_t Thing::incr_ts_fall_begin(void)
+ts_t Thing::ts_fall_begin_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6976,28 +6976,28 @@ ts_t Thing::set_ts_fall_end(ts_t v)
   return (get_infop()->ts_fall_end = v);
 }
 
-ts_t Thing::decr_ts_fall_end(ts_t v)
+ts_t Thing::ts_fall_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fall_end -= v);
 }
 
-ts_t Thing::incr_ts_fall_end(ts_t v)
+ts_t Thing::ts_fall_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fall_end += v);
 }
 
-ts_t Thing::decr_ts_fall_end(void)
+ts_t Thing::ts_fall_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
   return (get_infop()->ts_fall_end--);
 }
 
-ts_t Thing::incr_ts_fall_end(void)
+ts_t Thing::ts_fall_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -7121,7 +7121,7 @@ int Thing::set_current_damage(int v)
   return (n);
 }
 
-int Thing::decr_current_damage(int v)
+int Thing::current_damage_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -7132,7 +7132,7 @@ int Thing::decr_current_damage(int v)
   return (n);
 }
 
-int Thing::incr_current_damage(int v)
+int Thing::current_damage_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -7143,7 +7143,7 @@ int Thing::incr_current_damage(int v)
   return (n);
 }
 
-int Thing::decr_current_damage(void)
+int Thing::current_damage_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -7154,7 +7154,7 @@ int Thing::decr_current_damage(void)
   return (n);
 }
 
-int Thing::incr_current_damage(void)
+int Thing::current_damage_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

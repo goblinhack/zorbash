@@ -207,7 +207,7 @@ int Thing::set_stat_def(int v)
   return (n);
 }
 
-int Thing::decr_stat_def(int v)
+int Thing::stat_def_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -221,7 +221,7 @@ int Thing::decr_stat_def(int v)
   return (n);
 }
 
-int Thing::incr_stat_def(int v)
+int Thing::stat_def_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -232,7 +232,7 @@ int Thing::incr_stat_def(int v)
   return (n);
 }
 
-int Thing::decr_stat_def(void)
+int Thing::stat_def_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -246,7 +246,7 @@ int Thing::decr_stat_def(void)
   return (n);
 }
 
-int Thing::incr_stat_def(void)
+int Thing::stat_def_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

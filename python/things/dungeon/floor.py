@@ -8,22 +8,22 @@ import tp
 #
 def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name)
-    my.tp_set_gfx_shown_in_bg(self, True)
-    my.tp_set_is_cursor_can_hover_over(self, True)
-    my.tp_set_is_floor(self, True)
-    my.tp_set_text_a_or_an(self, "the")
-    my.tp_set_text_description(self, "The unwashed dungeon floor.")
-    my.tp_set_z_depth(self, my.MAP_DEPTH_FLOOR)
-    my.tp_set_z_prio(self, my.MAP_PRIO_BEHIND)
+    my.gfx_shown_in_bg(self, True)
+    my.is_cursor_can_hover_over(self, True)
+    my.is_floor(self, True)
+    my.text_a_or_an(self, "the")
+    my.text_description(self, "The unwashed dungeon floor.")
+    my.z_depth(self, my.MAP_DEPTH_FLOOR)
+    my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     for t in tiles:
-        my.tp_set_tile(self, t)
+        my.tile(self, t)
 
     if bot3_tiles is not None:
         for t in bot3_tiles:
-            my.tp_set_bot3_tile(self, t)
+            my.bot3_tile(self, t)
     else:
-        my.tp_set_bot3_tile(self, bot3_tile=name)
+        my.bot3_tile(self, bot3_tile=name)
 
     my.tp_update(self)
 

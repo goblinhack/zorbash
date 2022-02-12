@@ -184,7 +184,7 @@ void Thing::set_leader(Thingp leader)
   }
 
   if (old_leader) {
-    old_leader->decr_follower_count();
+    old_leader->follower_count_decr();
   }
 
   if (leader) {
@@ -199,7 +199,7 @@ void Thing::set_leader(Thingp leader)
       // You are being led
       //
       set_leader_id(leader->id);
-      leader->incr_follower_count();
+      leader->follower_count_incr();
       dbg("Leader set");
       on_you_are_declared_a_follower(leader);
     }
@@ -221,7 +221,7 @@ void Thing::remove_leader(void)
   dbg("Remove leader %s", old_leader->to_string().c_str());
 
   set_leader_id(NoThingId);
-  old_leader->decr_follower_count();
+  old_leader->follower_count_decr();
 }
 
 //

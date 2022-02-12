@@ -58,7 +58,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 #define TP_BODY_SET_STRING(__field__)                                                                                \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                               \
   {                                                                                                                  \
     PyObject *py_class = 0;                                                                                          \
     char     *tp_name  = 0;                                                                                          \
@@ -108,7 +108,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
 #define TP_BODY_SET_STRING_FN(__field__, __fn__)                                                                     \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                               \
   {                                                                                                                  \
     PyObject *py_class = 0;                                                                                          \
     char     *tp_name  = 0;                                                                                          \
@@ -146,7 +146,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
-    tp->set_##__field__(std::string(value ? value : ""));                                                            \
+    tp->__field__(std::string(value ? value : ""));                                                                  \
     value = 0;                                                                                                       \
     (__fn__)(tp);                                                                                                    \
                                                                                                                      \
@@ -159,7 +159,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
 #define TP_BODY_SET_ENUM(__field__, __str2val__)                                                                     \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                               \
   {                                                                                                                  \
     PyObject *py_class = 0;                                                                                          \
     char     *tp_name  = 0;                                                                                          \
@@ -195,7 +195,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
-    tp->set_##__field__((__str2val__) (value));                                                                      \
+    tp->__field__((__str2val__) (value));                                                                            \
     if (tp->__field__() == (int) (tp->__field__()) - 1) {                                                            \
       ERR("%s: Cannot find enum %s", __FUNCTION__, value);                                                           \
       goto done;                                                                                                     \
@@ -214,7 +214,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
 #define TP_BODY_SET_INT(__field__)                                                                                   \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                               \
   {                                                                                                                  \
     PyObject *py_class = 0;                                                                                          \
     char     *tp_name  = 0;                                                                                          \
@@ -258,7 +258,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
 #define TP_BODY_SET_DOUBLE(__field__)                                                                                \
-  PyObject *tp_set_##__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                      \
+  PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                               \
   {                                                                                                                  \
     PyObject *py_class = 0;                                                                                          \
     char     *tp_name  = 0;                                                                                          \
@@ -301,7 +301,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_TRUE;                                                                                                  \
   }
 
-static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int dir, int level)
+static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int dir, int level)
 {
   PyObject *py_class = 0;
   char     *tp_name  = 0;
@@ -594,95 +594,95 @@ static PyObject *tp_set_tile_dir(PyObject *obj, PyObject *args, PyObject *keywds
   Py_RETURN_TRUE;
 }
 
-PyObject *tp_set_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE, 1));
+  return (tile_dir(obj, args, keywds, THING_DIR_NONE, 1));
 }
-PyObject *tp_set_top1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *top1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP, 1));
+  return (tile_dir(obj, args, keywds, THING_DIR_UP, 1));
 }
-PyObject *tp_set_bot1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *bot1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 1));
+  return (tile_dir(obj, args, keywds, THING_DIR_DOWN, 1));
 }
-PyObject *tp_set_left1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *left1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT, 1));
+  return (tile_dir(obj, args, keywds, THING_DIR_LEFT, 1));
 }
-PyObject *tp_set_right1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *right1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT, 1));
+  return (tile_dir(obj, args, keywds, THING_DIR_RIGHT, 1));
 }
-PyObject *tp_set_tl1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tl1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL, 1));
+  return (tile_dir(obj, args, keywds, THING_DIR_TL, 1));
 }
-PyObject *tp_set_tr1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tr1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR, 1));
+  return (tile_dir(obj, args, keywds, THING_DIR_TR, 1));
 }
-PyObject *tp_set_bl1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *bl1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL, 1));
+  return (tile_dir(obj, args, keywds, THING_DIR_BL, 1));
 }
-PyObject *tp_set_br1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *br1_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR, 1));
+  return (tile_dir(obj, args, keywds, THING_DIR_BR, 1));
 }
-PyObject *tp_set_top2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *top2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP, 2));
+  return (tile_dir(obj, args, keywds, THING_DIR_UP, 2));
 }
-PyObject *tp_set_bot2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *bot2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 2));
+  return (tile_dir(obj, args, keywds, THING_DIR_DOWN, 2));
 }
-PyObject *tp_set_bot3_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *bot3_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 3));
+  return (tile_dir(obj, args, keywds, THING_DIR_DOWN, 3));
 }
-PyObject *tp_set_left2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *left2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT, 2));
+  return (tile_dir(obj, args, keywds, THING_DIR_LEFT, 2));
 }
-PyObject *tp_set_right2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *right2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT, 2));
+  return (tile_dir(obj, args, keywds, THING_DIR_RIGHT, 2));
 }
-PyObject *tp_set_tl2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tl2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL, 2));
+  return (tile_dir(obj, args, keywds, THING_DIR_TL, 2));
 }
-PyObject *tp_set_tr2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tr2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR, 2));
+  return (tile_dir(obj, args, keywds, THING_DIR_TR, 2));
 }
-PyObject *tp_set_bl2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *bl2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL, 2));
+  return (tile_dir(obj, args, keywds, THING_DIR_BL, 2));
 }
-PyObject *tp_set_br2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *br2_tile(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR, 2));
+  return (tile_dir(obj, args, keywds, THING_DIR_BR, 2));
 }
 
 PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds)

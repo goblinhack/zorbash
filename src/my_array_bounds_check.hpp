@@ -365,25 +365,25 @@ static inline void set_no_check(std::array< TYPE, XDIM > &container, std::size_t
 }
 
 template < class TYPE, std::size_t XDIM >
-static inline void incr_no_check(std::array< TYPE, XDIM > &container, std::size_t X, TYPE v)
+static inline void no_check_incr(std::array< TYPE, XDIM > &container, std::size_t X, TYPE v)
 {
   container[ X ] += v;
 }
 
 template < class TYPE, std::size_t XDIM >
-static inline void decr_no_check(std::array< TYPE, XDIM > &container, std::size_t X, TYPE v)
+static inline void no_check_decr(std::array< TYPE, XDIM > &container, std::size_t X, TYPE v)
 {
   container[ X ] -= v;
 }
 
 template < class TYPE, std::size_t XDIM >
-static inline void incr_no_check(std::array< TYPE, XDIM > &container, std::size_t X)
+static inline void no_check_incr(std::array< TYPE, XDIM > &container, std::size_t X)
 {
   container[ X ]++;
 }
 
 template < class TYPE, std::size_t XDIM >
-static inline void decr_no_check(std::array< TYPE, XDIM > &container, std::size_t X)
+static inline void no_check_decr(std::array< TYPE, XDIM > &container, std::size_t X)
 {
   container[ X ]--;
 }
@@ -417,14 +417,14 @@ static inline void set_no_check(std::array< std::array< TYPE, YDIM >, XDIM > &co
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
-static inline void incr_no_check(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X,
+static inline void no_check_incr(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X,
                                  std::size_t Y, TYPE v)
 {
   container[ X ][ Y ] += v;
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
-static inline void decr_no_check(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X,
+static inline void no_check_decr(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X,
                                  std::size_t Y, TYPE v)
 {
   container[ X ][ Y ] -= v;
@@ -512,8 +512,8 @@ static inline TYPE &
 #define set_no_check set
 #undef get_no_check
 #define get_no_check get
-#undef incr_no_check
-#define incr_no_check incr
-#undef decr_no_check
-#define decr_no_check decr
+#undef no_check_incr
+#define no_check_incr incr
+#undef no_check_decr
+#define no_check_decr decr
 #endif

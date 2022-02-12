@@ -337,7 +337,7 @@ void Thing::tick(void)
 
   if (is_monst() || is_player()) {
     if (curr_at == last_at) {
-      incr_idle_count();
+      idle_count_incr();
     } else {
       set_idle_count(0);
     }

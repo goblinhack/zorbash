@@ -125,7 +125,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
 
     if (is_player()) {
       sound_play("drop");
-      level->incr_noisemap_in(curr_at.x, curr_at.y, what->noise_on_moving_or_being_carried());
+      level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_moving_or_being_carried());
     }
   }
   what->is_being_dropped = false;
