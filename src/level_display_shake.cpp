@@ -24,7 +24,7 @@ float Level::update_wobble(void)
   auto new_w = w;
   new_w *= 0.75;
   new_w = -new_w;
-  set_wobble(new_w);
+  wobble_set(new_w);
 
   return (w);
 }
@@ -35,7 +35,7 @@ float Level::get_wobble(void) const
   return (wobble);
 }
 
-void Level::set_wobble(float v)
+void Level::wobble_set(float v)
 {
   TRACE_AND_INDENT();
   wobble = v;

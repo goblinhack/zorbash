@@ -49,7 +49,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   //
   // Setup the various chances of things appearing.
   //
-  set_chances_of_creating();
+  chances_of_creating_set();
 
   IF_DEBUG2
   {

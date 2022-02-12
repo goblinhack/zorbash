@@ -807,7 +807,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     // Player being hit
     //
     if (is_bloodied() || (damage > THING_DAMAGE_SHAKE_ABOVE)) {
-      level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
+      level->wobble_set(damage / THING_DAMAGE_SHAKE_SCALE);
     }
   } else {
     if (real_hitter->is_player()) {

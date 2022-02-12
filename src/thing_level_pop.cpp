@@ -23,215 +23,215 @@ void Thing::level_pop(void)
 
   if (i_set_is_acid) {
     i_set_is_acid = false;
-    level->unset_is_acid(mx, my);
+    level->is_acid_unset(mx, my);
   }
   if (i_set_is_red_blood) {
     i_set_is_red_blood = false;
-    level->unset_is_red_blood(mx, my);
+    level->is_red_blood_unset(mx, my);
   }
   if (i_set_is_green_blood) {
     i_set_is_green_blood = false;
-    level->unset_is_green_blood(mx, my);
+    level->is_green_blood_unset(mx, my);
   }
   if (i_set_is_pink_blood) {
     i_set_is_pink_blood = false;
-    level->unset_is_pink_blood(mx, my);
+    level->is_pink_blood_unset(mx, my);
   }
   if (i_set_is_chasm) {
     i_set_is_chasm = false;
-    level->unset_is_chasm(mx, my);
+    level->is_chasm_unset(mx, my);
   }
   if (i_set_is_corpse) {
     i_set_is_corpse = false;
-    level->unset_is_corpse(mx, my);
+    level->is_corpse_unset(mx, my);
   }
   if (i_set_is_corridor) {
     i_set_is_corridor = false;
-    level->unset_is_corridor(mx, my);
+    level->is_corridor_unset(mx, my);
   }
   if (i_set_is_bridge) {
     i_set_is_bridge = false;
-    level->unset_is_bridge(mx, my);
+    level->is_bridge_unset(mx, my);
   }
   if (i_set_is_shallow_water) {
     i_set_is_shallow_water = false;
-    level->unset_is_shallow_water(mx, my);
+    level->is_shallow_water_unset(mx, my);
   }
   if (i_set_is_deep_water) {
     i_set_is_deep_water = false;
-    level->unset_is_deep_water(mx, my);
+    level->is_deep_water_unset(mx, my);
   }
   if (i_set_is_dirt) {
     i_set_is_dirt = false;
-    level->unset_is_dirt(mx, my);
+    level->is_dirt_unset(mx, my);
   }
   if (i_set_is_dry_grass) {
     i_set_is_dry_grass = false;
-    level->unset_is_dry_grass(mx, my);
+    level->is_dry_grass_unset(mx, my);
   }
   if (i_set_is_wet_grass) {
     i_set_is_wet_grass = false;
-    level->unset_is_wet_grass(mx, my);
+    level->is_wet_grass_unset(mx, my);
   }
   if (i_set_is_enchantstone) {
     i_set_is_enchantstone = false;
-    level->unset_is_enchantstone(mx, my);
+    level->is_enchantstone_unset(mx, my);
   }
   if (i_set_is_skillstone) {
     i_set_is_skillstone = false;
-    level->unset_is_skillstone(mx, my);
+    level->is_skillstone_unset(mx, my);
   }
   if (i_set_is_foilage) {
     i_set_is_foilage = false;
-    level->unset_is_foilage(mx, my);
+    level->is_foilage_unset(mx, my);
   }
   if (i_set_is_spiderweb) {
     i_set_is_spiderweb = false;
-    level->unset_is_spiderweb(mx, my);
+    level->is_spiderweb_unset(mx, my);
   }
   if (i_set_is_sticky) {
     i_set_is_sticky = false;
-    level->unset_is_sticky(mx, my);
+    level->is_sticky_unset(mx, my);
   }
   if (i_set_is_shovable) {
     i_set_is_shovable = false;
-    level->unset_is_shovable(mx, my);
+    level->is_shovable_unset(mx, my);
   }
   if (i_set_is_door) {
     i_set_is_door = false;
-    level->unset_is_door(mx, my);
+    level->is_door_unset(mx, my);
   }
   if (i_set_is_ascend_dungeon) {
     i_set_is_ascend_dungeon = false;
-    level->unset_is_ascend_dungeon(mx, my);
+    level->is_ascend_dungeon_unset(mx, my);
   }
   if (i_set_is_descend_dungeon) {
     i_set_is_descend_dungeon = false;
-    level->unset_is_descend_dungeon(mx, my);
+    level->is_descend_dungeon_unset(mx, my);
   }
   if (i_set_is_ascend_sewer) {
     i_set_is_ascend_sewer = false;
-    level->unset_is_ascend_sewer(mx, my);
+    level->is_ascend_sewer_unset(mx, my);
   }
   if (i_set_is_descend_sewer) {
     i_set_is_descend_sewer = false;
-    level->unset_is_descend_sewer(mx, my);
+    level->is_descend_sewer_unset(mx, my);
   }
   if (i_set_is_fire) {
     i_set_is_fire = false;
-    level->unset_is_fire(mx, my);
+    level->is_fire_unset(mx, my);
   }
   if (i_set_is_floor) {
     i_set_is_floor = false;
-    level->unset_is_floor(mx, my);
+    level->is_floor_unset(mx, my);
   }
   if (i_set_is_food) {
     i_set_is_food = false;
-    level->unset_is_food(mx, my);
+    level->is_food_unset(mx, my);
   }
   if (i_set_is_mob) {
     i_set_is_mob = false;
-    level->unset_is_mob(mx, my);
+    level->is_mob_unset(mx, my);
   }
   if (i_set_is_gold) {
     i_set_is_gold = false;
-    level->unset_is_gold(mx, my);
+    level->is_gold_unset(mx, my);
   }
   if (i_set_is_hazard) {
     i_set_is_hazard = false;
-    level->unset_is_hazard(mx, my);
+    level->is_hazard_unset(mx, my);
   }
   if (i_set_is_cursor_path_hazard_for_player) {
     i_set_is_cursor_path_hazard_for_player = false;
-    level->unset_is_cursor_path_hazard_for_player(mx, my);
+    level->is_cursor_path_hazard_for_player_unset(mx, my);
   }
   if (i_set_is_heavy) {
     i_set_is_heavy = false;
-    level->unset_is_heavy(mx, my);
+    level->is_heavy_unset(mx, my);
   }
   if (i_set_is_key) {
     i_set_is_key = false;
-    level->unset_is_key(mx, my);
+    level->is_key_unset(mx, my);
   }
   if (i_set_is_lava) {
     i_set_is_lava = false;
-    level->unset_is_lava(mx, my);
+    level->is_lava_unset(mx, my);
   }
   if (i_set_is_light_blocker) {
     i_set_is_light_blocker = false;
-    level->unset_is_light_blocker(mx, my);
+    level->is_light_blocker_unset(mx, my);
   }
   if (i_set_is_light_blocker_for_monst) {
     i_set_is_light_blocker_for_monst = false;
-    level->unset_is_light_blocker_for_monst(mx, my);
+    level->is_light_blocker_for_monst_unset(mx, my);
   }
   if (i_set_is_gas_blocker) {
     i_set_is_gas_blocker = false;
-    level->unset_is_gas_blocker(mx, my);
+    level->is_gas_blocker_unset(mx, my);
   }
   if (i_set_noise_blocker) {
     i_set_noise_blocker = false;
-    level->unset_noise_blocker(mx, my);
+    level->noise_blocker_unset(mx, my);
   }
   if (i_set_is_monst) {
     i_set_is_monst = false;
-    level->unset_is_monst(mx, my);
+    level->is_monst_unset(mx, my);
   }
   if (i_set_is_obs_wall_or_door) {
     i_set_is_obs_wall_or_door = false;
-    level->unset_is_obs_wall_or_door(mx, my);
+    level->is_obs_wall_or_door_unset(mx, my);
   }
   if (i_set_is_obs_destructable) {
     i_set_is_obs_destructable = false;
-    level->unset_is_obs_destructable(mx, my);
+    level->is_obs_destructable_unset(mx, my);
   }
   if (i_set_is_potion) {
     i_set_is_potion = false;
-    level->unset_is_potion(mx, my);
+    level->is_potion_unset(mx, my);
   }
   if (i_set_is_wand) {
     i_set_is_wand = false;
-    level->unset_is_wand(mx, my);
+    level->is_wand_unset(mx, my);
   }
   if (i_set_is_ring) {
     i_set_is_ring = false;
-    level->unset_is_ring(mx, my);
+    level->is_ring_unset(mx, my);
   }
   if (i_set_is_ripple) {
     i_set_is_ripple = false;
-    level->unset_is_ripple(mx, my);
+    level->is_ripple_unset(mx, my);
   }
   if (i_set_is_rock) {
     i_set_is_rock = false;
-    level->unset_is_rock(mx, my);
+    level->is_rock_unset(mx, my);
   }
   if (i_set_is_secret_door) {
     i_set_is_secret_door = false;
-    level->unset_is_secret_door(mx, my);
+    level->is_secret_door_unset(mx, my);
   }
   if (i_set_is_smoke) {
     i_set_is_smoke = false;
-    level->unset_is_smoke(mx, my);
+    level->is_smoke_unset(mx, my);
   }
   if (i_set_is_brazier) {
     i_set_is_brazier = false;
-    level->unset_is_brazier(mx, my);
+    level->is_brazier_unset(mx, my);
   }
   if (i_set_is_barrel) {
     i_set_is_barrel = false;
-    level->unset_is_barrel(mx, my);
+    level->is_barrel_unset(mx, my);
   }
   if (i_set_is_treasure_type) {
     i_set_is_treasure_type = false;
-    level->unset_is_treasure_type(mx, my);
+    level->is_treasure_type_unset(mx, my);
   }
   if (i_set_is_wall) {
     i_set_is_wall = false;
-    level->unset_is_wall(mx, my);
+    level->is_wall_unset(mx, my);
   }
   if (i_set_water) {
     i_set_water = false;
-    level->unset_gfx_water(mx, my);
+    level->gfx_water_unset(mx, my);
   }
   int group = get_group();
   level->remove_thing(last_attached.x, last_attached.y, id, group);

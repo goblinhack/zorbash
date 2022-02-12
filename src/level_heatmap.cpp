@@ -55,7 +55,7 @@ void Level::heatmap_no_check_incr(const int x, const int y)
   }
 }
 
-void Level::unset_heatmap(const int x, const int y)
+void Level::heatmap_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -63,7 +63,7 @@ void Level::unset_heatmap(const int x, const int y)
   set(_heatmap, x, y, (uint8_t) 0);
 }
 
-void Level::unset_heatmap_no_check(const int x, const int y) { set_no_check(_heatmap, x, y, (uint8_t) 0); }
+void Level::heatmap_no_check_unset(const int x, const int y) { set_no_check(_heatmap, x, y, (uint8_t) 0); }
 
 void Level::update_heatmap(void)
 {

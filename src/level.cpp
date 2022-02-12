@@ -62,7 +62,7 @@ void Level::is_acid_set(const int x, const int y)
   incr(_is_acid, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_acid(const int x, const int y)
+void Level::is_acid_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -100,7 +100,7 @@ void Level::is_chasm_set(const int x, const int y)
   incr(_is_chasm, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_chasm(const int x, const int y)
+void Level::is_chasm_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -138,7 +138,7 @@ void Level::is_hazard_set(const int x, const int y)
   incr(_is_hazard, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_hazard(const int x, const int y)
+void Level::is_hazard_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -176,7 +176,7 @@ void Level::is_cursor_path_hazard_for_player_set(const int x, const int y)
   incr(_is_cursor_path_hazard_for_player, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_cursor_path_hazard_for_player(const int x, const int y)
+void Level::is_cursor_path_hazard_for_player_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -214,7 +214,7 @@ void Level::is_heavy_set(const int x, const int y)
   incr(_is_heavy, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_heavy(const int x, const int y)
+void Level::is_heavy_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -252,7 +252,7 @@ void Level::is_secret_door_set(const int x, const int y)
   incr(_is_secret_door, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_secret_door(const int x, const int y)
+void Level::is_secret_door_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -290,7 +290,7 @@ void Level::is_ripple_set(const int x, const int y)
   incr(_is_ripple, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_ripple(const int x, const int y)
+void Level::is_ripple_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -328,7 +328,7 @@ void Level::is_barrel_set(const int x, const int y)
   incr(_is_barrel, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_barrel(const int x, const int y)
+void Level::is_barrel_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -366,7 +366,7 @@ void Level::is_mob_set(const int x, const int y)
   incr(_is_mob, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_mob(const int x, const int y)
+void Level::is_mob_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -404,7 +404,7 @@ void Level::is_potion_set(const int x, const int y)
   incr(_is_potion, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_potion(const int x, const int y)
+void Level::is_potion_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -442,7 +442,7 @@ void Level::is_wand_set(const int x, const int y)
   incr(_is_wand, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_wand(const int x, const int y)
+void Level::is_wand_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -480,7 +480,7 @@ void Level::is_ring_set(const int x, const int y)
   incr(_is_ring, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_ring(const int x, const int y)
+void Level::is_ring_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -517,7 +517,7 @@ void Level::is_red_blood_set(const int x, const int y)
   incr(_is_red_blood, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_red_blood(const int x, const int y)
+void Level::is_red_blood_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -553,7 +553,7 @@ void Level::is_green_blood_set(const int x, const int y)
   incr(_is_green_blood, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_green_blood(const int x, const int y)
+void Level::is_green_blood_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -589,7 +589,7 @@ void Level::is_pink_blood_set(const int x, const int y)
   incr(_is_pink_blood, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_pink_blood(const int x, const int y)
+void Level::is_pink_blood_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -626,7 +626,7 @@ void Level::gfx_water_set(const int x, const int y)
   incr(_gfx_water, x, y, (uint8_t) 1);
 }
 
-void Level::unset_gfx_water(const int x, const int y)
+void Level::gfx_water_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -664,7 +664,7 @@ void Level::is_deep_water_set(const int x, const int y)
   incr(_is_deep_water, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_deep_water(const int x, const int y)
+void Level::is_deep_water_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -702,7 +702,7 @@ void Level::is_shallow_water_set(const int x, const int y)
   incr(_is_shallow_water, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_shallow_water(const int x, const int y)
+void Level::is_shallow_water_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -752,7 +752,7 @@ void Level::is_wall_set(const int x, const int y)
   incr(_is_wall, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_wall(const int x, const int y)
+void Level::is_wall_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -790,7 +790,7 @@ void Level::is_corridor_set(const int x, const int y)
   incr(_is_corridor, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_corridor(const int x, const int y)
+void Level::is_corridor_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -828,7 +828,7 @@ void Level::is_bridge_set(const int x, const int y)
   incr(_is_bridge, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_bridge(const int x, const int y)
+void Level::is_bridge_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -866,7 +866,7 @@ void Level::is_dirt_set(const int x, const int y)
   incr(_is_dirt, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_dirt(const int x, const int y)
+void Level::is_dirt_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -904,7 +904,7 @@ void Level::is_dry_grass_set(const int x, const int y)
   incr(_is_dry_grass, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_dry_grass(const int x, const int y)
+void Level::is_dry_grass_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -942,7 +942,7 @@ void Level::is_wet_grass_set(const int x, const int y)
   incr(_is_wet_grass, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_wet_grass(const int x, const int y)
+void Level::is_wet_grass_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -980,7 +980,7 @@ void Level::is_enchantstone_set(const int x, const int y)
   incr(_is_enchantstone, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_enchantstone(const int x, const int y)
+void Level::is_enchantstone_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1018,7 +1018,7 @@ void Level::is_skillstone_set(const int x, const int y)
   incr(_is_skillstone, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_skillstone(const int x, const int y)
+void Level::is_skillstone_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1056,7 +1056,7 @@ void Level::is_foilage_set(const int x, const int y)
   incr(_is_foilage, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_foilage(const int x, const int y)
+void Level::is_foilage_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1094,7 +1094,7 @@ void Level::is_spiderweb_set(const int x, const int y)
   incr(_is_spiderweb, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_spiderweb(const int x, const int y)
+void Level::is_spiderweb_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1132,7 +1132,7 @@ void Level::is_sticky_set(const int x, const int y)
   incr(_is_sticky, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_sticky(const int x, const int y)
+void Level::is_sticky_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1170,7 +1170,7 @@ void Level::is_shovable_set(const int x, const int y)
   incr(_is_shovable, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_shovable(const int x, const int y)
+void Level::is_shovable_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1208,7 +1208,7 @@ void Level::is_floor_set(const int x, const int y)
   incr(_is_floor, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_floor(const int x, const int y)
+void Level::is_floor_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1246,7 +1246,7 @@ void Level::is_rock_set(const int x, const int y)
   incr(_is_rock, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_rock(const int x, const int y)
+void Level::is_rock_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1274,7 +1274,7 @@ uint8_t Level::is_able_to_stand_on(const int x, const int y)
   return (get(_is_able_to_stand_on, x, y));
 }
 
-void Level::set_is_able_to_stand_on(const int x, const int y)
+void Level::is_able_to_stand_on_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1284,7 +1284,7 @@ void Level::set_is_able_to_stand_on(const int x, const int y)
   incr(_is_able_to_stand_on, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_able_to_stand_on(const int x, const int y)
+void Level::is_able_to_stand_on_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1312,7 +1312,7 @@ uint8_t Level::is_corpse(const int x, const int y)
   return (get(_is_corpse, x, y));
 }
 
-void Level::set_is_corpse(const int x, const int y)
+void Level::is_corpse_set(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1321,7 +1321,7 @@ void Level::set_is_corpse(const int x, const int y)
   incr(_is_corpse, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_corpse(const int x, const int y)
+void Level::is_corpse_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1368,7 +1368,7 @@ void Level::is_monst_set(const int x, const int y)
   incr(_is_monst, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_monst(const int x, const int y)
+void Level::is_monst_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1404,7 +1404,7 @@ void Level::is_door_set(const int x, const int y)
   incr(_is_door, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_door(const int x, const int y)
+void Level::is_door_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1440,7 +1440,7 @@ void Level::is_key_set(const int x, const int y)
   incr(_is_key, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_key(const int x, const int y)
+void Level::is_key_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1476,7 +1476,7 @@ void Level::is_food_set(const int x, const int y)
   incr(_is_food, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_food(const int x, const int y)
+void Level::is_food_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1512,7 +1512,7 @@ void Level::is_treasure_type_set(const int x, const int y)
   incr(_is_treasure_type, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_treasure_type(const int x, const int y)
+void Level::is_treasure_type_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1548,7 +1548,7 @@ void Level::is_gold_set(const int x, const int y)
   incr(_is_gold, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_gold(const int x, const int y)
+void Level::is_gold_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1584,7 +1584,7 @@ void Level::is_ascend_dungeon_set(const int x, const int y)
   incr(_is_ascend_dungeon, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_ascend_dungeon(const int x, const int y)
+void Level::is_ascend_dungeon_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1620,7 +1620,7 @@ void Level::is_descend_dungeon_set(const int x, const int y)
   incr(_is_descend_dungeon, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_descend_dungeon(const int x, const int y)
+void Level::is_descend_dungeon_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1656,7 +1656,7 @@ void Level::is_ascend_sewer_set(const int x, const int y)
   incr(_is_ascend_sewer, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_ascend_sewer(const int x, const int y)
+void Level::is_ascend_sewer_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1692,7 +1692,7 @@ void Level::is_descend_sewer_set(const int x, const int y)
   incr(_is_descend_sewer, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_descend_sewer(const int x, const int y)
+void Level::is_descend_sewer_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1728,7 +1728,7 @@ void Level::is_smoke_set(const int x, const int y)
   incr(_is_smoke, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_smoke(const int x, const int y)
+void Level::is_smoke_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -1805,7 +1805,7 @@ void Level::fade_in_no_check_incr(const int x, const int y)
   }
 }
 
-void Level::unset_fade_in(const int x, const int y)
+void Level::fade_in_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -1813,7 +1813,7 @@ void Level::unset_fade_in(const int x, const int y)
   set(_fade_in_map, x, y, (uint8_t) 0);
 }
 
-void Level::unset_fade_in_no_check(const int x, const int y) { set_no_check(_fade_in_map, x, y, (uint8_t) 0); }
+void Level::fade_in_no_check_unset(const int x, const int y) { set_no_check(_fade_in_map, x, y, (uint8_t) 0); }
 
 uint8_t Level::is_lit_ever(const point p)
 {
@@ -1835,7 +1835,7 @@ uint8_t Level::is_lit_ever(const int x, const int y)
 
 uint8_t Level::is_lit_ever_no_check(const int x, const int y) { return (get_no_check(_is_lit_ever, x, y)); }
 
-void Level::set_is_lit_ever(const int x, const int y)
+void Level::is_lit_ever_set(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -1847,7 +1847,7 @@ void Level::set_is_lit_ever(const int x, const int y)
   set(_is_lit_ever, x, y, true);
 }
 
-void Level::set_is_lit_ever_no_check(const int x, const int y)
+void Level::is_lit_ever_no_check_set(const int x, const int y)
 {
   if (! get_no_check(_is_lit_ever, x, y)) {
     set_no_check(_fade_in_map, x, y, (uint8_t) 1);
@@ -1855,7 +1855,7 @@ void Level::set_is_lit_ever_no_check(const int x, const int y)
   set_no_check(_is_lit_ever, x, y, true);
 }
 
-void Level::unset_is_lit_ever(const int x, const int y)
+void Level::is_lit_ever_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -1863,7 +1863,7 @@ void Level::unset_is_lit_ever(const int x, const int y)
   set(_is_lit_ever, x, y, false);
 }
 
-void Level::unset_is_lit_ever_no_check(const int x, const int y) { set_no_check(_is_lit_ever, x, y, false); }
+void Level::is_lit_ever_no_check_unset(const int x, const int y) { set_no_check(_is_lit_ever, x, y, false); }
 
 //
 // Used in lighting, so inlined
@@ -1899,9 +1899,9 @@ void Level::is_light_blocker_set(const int x, const int y)
   set(_is_light_blocker, x, y, true);
 }
 
-void Level::set_is_light_blocker_no_check(const int x, const int y) { set_no_check(_is_light_blocker, x, y, true); }
+void Level::is_light_blocker_no_check_set(const int x, const int y) { set_no_check(_is_light_blocker, x, y, true); }
 
-void Level::unset_is_light_blocker(const int x, const int y)
+void Level::is_light_blocker_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -1909,7 +1909,7 @@ void Level::unset_is_light_blocker(const int x, const int y)
   set(_is_light_blocker, x, y, false);
 }
 
-void Level::unset_is_light_blocker_no_check(const int x, const int y)
+void Level::is_light_blocker_no_check_unset(const int x, const int y)
 {
   set_no_check(_is_light_blocker, x, y, false);
 }
@@ -1951,12 +1951,12 @@ void Level::is_light_blocker_for_monst_set(const int x, const int y)
   set(_is_light_blocker_for_monst, x, y, true);
 }
 
-void Level::set_is_light_blocker_for_monst_no_check(const int x, const int y)
+void Level::is_light_blocker_for_monst_no_check_set(const int x, const int y)
 {
   set_no_check(_is_light_blocker_for_monst, x, y, true);
 }
 
-void Level::unset_is_light_blocker_for_monst(const int x, const int y)
+void Level::is_light_blocker_for_monst_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -1964,7 +1964,7 @@ void Level::unset_is_light_blocker_for_monst(const int x, const int y)
   set(_is_light_blocker_for_monst, x, y, false);
 }
 
-void Level::unset_is_light_blocker_for_monst_no_check(const int x, const int y)
+void Level::is_light_blocker_for_monst_no_check_unset(const int x, const int y)
 {
   set_no_check(_is_light_blocker_for_monst, x, y, false);
 }
@@ -1997,9 +1997,9 @@ void Level::is_gas_blocker_set(const int x, const int y)
   set(_is_gas_blocker, x, y, true);
 }
 
-void Level::set_is_gas_blocker_no_check(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, true); }
+void Level::is_gas_blocker_no_check_set(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, true); }
 
-void Level::unset_is_gas_blocker(const int x, const int y)
+void Level::is_gas_blocker_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -2007,7 +2007,7 @@ void Level::unset_is_gas_blocker(const int x, const int y)
   set(_is_gas_blocker, x, y, false);
 }
 
-void Level::unset_is_gas_blocker_no_check(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, false); }
+void Level::is_gas_blocker_no_check_unset(const int x, const int y) { set_no_check(_is_gas_blocker, x, y, false); }
 
 bool Level::noise_blocker(const point p) const
 {
@@ -2040,9 +2040,9 @@ void Level::noise_blocker_set(const int x, const int y)
   set(_noise_blocker, x, y, true);
 }
 
-void Level::set_noise_blocker_no_check(const int x, const int y) { set_no_check(_noise_blocker, x, y, true); }
+void Level::noise_blocker_no_check_set(const int x, const int y) { set_no_check(_noise_blocker, x, y, true); }
 
-void Level::unset_noise_blocker(const int x, const int y)
+void Level::noise_blocker_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -2050,7 +2050,7 @@ void Level::unset_noise_blocker(const int x, const int y)
   set(_noise_blocker, x, y, false);
 }
 
-void Level::unset_noise_blocker_no_check(const int x, const int y)
+void Level::noise_blocker_no_check_unset(const int x, const int y)
 {
   set_no_check(_noise_blocker, x, y, false);
 }
@@ -2075,7 +2075,7 @@ uint8_t Level::is_gas_poison(const int x, const int y) const
 
 uint8_t Level::is_gas_poison_no_check(const int x, const int y) const { return (get_no_check(_is_gas_poison, x, y)); }
 
-void Level::set_is_gas_poison(const int x, const int y, uint8_t val)
+void Level::is_gas_poison_set(const int x, const int y, uint8_t val)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -2083,12 +2083,12 @@ void Level::set_is_gas_poison(const int x, const int y, uint8_t val)
   set(_is_gas_poison, x, y, val);
 }
 
-void Level::set_is_gas_poison_no_check(const int x, const int y, uint8_t val)
+void Level::is_gas_poison_no_check_set(const int x, const int y, uint8_t val)
 {
   set_no_check(_is_gas_poison, x, y, val);
 }
 
-void Level::unset_is_gas_poison(const int x, const int y)
+void Level::is_gas_poison_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -2096,7 +2096,7 @@ void Level::unset_is_gas_poison(const int x, const int y)
   set(_is_gas_poison, x, y, (uint8_t) 0);
 }
 
-void Level::unset_is_gas_poison_no_check(const int x, const int y)
+void Level::is_gas_poison_no_check_unset(const int x, const int y)
 {
   set_no_check(_is_gas_poison, x, y, (uint8_t) 0);
 }
@@ -2138,12 +2138,12 @@ void Level::is_obs_wall_or_door_set(const int x, const int y)
   set(_is_obs_wall_or_door, x, y, true);
 }
 
-void Level::set_is_obs_wall_or_door_no_check(const int x, const int y)
+void Level::is_obs_wall_or_door_no_check_set(const int x, const int y)
 {
   set_no_check(_is_obs_wall_or_door, x, y, true);
 }
 
-void Level::unset_is_obs_wall_or_door(const int x, const int y)
+void Level::is_obs_wall_or_door_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -2151,7 +2151,7 @@ void Level::unset_is_obs_wall_or_door(const int x, const int y)
   set(_is_obs_wall_or_door, x, y, false);
 }
 
-void Level::unset_is_obs_wall_or_door_no_check(const int x, const int y)
+void Level::is_obs_wall_or_door_no_check_unset(const int x, const int y)
 {
   set_no_check(_is_obs_wall_or_door, x, y, false);
 }
@@ -2193,12 +2193,12 @@ void Level::is_obs_destructable_set(const int x, const int y)
   set(_is_obs_destructable, x, y, true);
 }
 
-void Level::set_is_obs_destructable_no_check(const int x, const int y)
+void Level::is_obs_destructable_no_check_set(const int x, const int y)
 {
   set_no_check(_is_obs_destructable, x, y, true);
 }
 
-void Level::unset_is_obs_destructable(const int x, const int y)
+void Level::is_obs_destructable_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -2206,7 +2206,7 @@ void Level::unset_is_obs_destructable(const int x, const int y)
   set(_is_obs_destructable, x, y, false);
 }
 
-void Level::unset_is_obs_destructable_no_check(const int x, const int y)
+void Level::is_obs_destructable_no_check_unset(const int x, const int y)
 {
   set_no_check(_is_obs_destructable, x, y, false);
 }
@@ -2248,7 +2248,7 @@ uint8_t Level::is_lit_currently(const int x, const int y)
 
 uint8_t Level::is_lit_currently_no_check(const int x, const int y) { return (get_no_check(_is_lit_currently, x, y)); }
 
-void Level::set_is_lit_currently_no_check(const int x, const int y)
+void Level::is_lit_currently_no_check_set(const int x, const int y)
 {
   auto l = getptr_no_check(_is_lit_currently, x, y);
   if (*l == 0) {
@@ -2258,7 +2258,7 @@ void Level::set_is_lit_currently_no_check(const int x, const int y)
   }
 }
 
-void Level::set_is_lit_currently(const int x, const int y)
+void Level::is_lit_currently_set(const int x, const int y)
 {
   auto l = getptr(_is_lit_currently, x, y);
   if (*l == 0) {
@@ -2268,12 +2268,12 @@ void Level::set_is_lit_currently(const int x, const int y)
   }
 }
 
-void Level::set_is_lit_currently_no_check(const int x, const int y, uint8_t v)
+void Level::is_lit_currently_no_check_set(const int x, const int y, uint8_t v)
 {
   set_no_check(_is_lit_currently, x, y, v);
 }
 
-void Level::unset_is_lit_currently(const int x, const int y)
+void Level::is_lit_currently_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -2281,7 +2281,7 @@ void Level::unset_is_lit_currently(const int x, const int y)
   set(_is_lit_currently, x, y, (uint8_t) 0);
 }
 
-void Level::unset_is_lit_currently_no_check(const int x, const int y)
+void Level::is_lit_currently_no_check_unset(const int x, const int y)
 {
   set_no_check(_is_lit_currently, x, y, (uint8_t) 0);
 }
@@ -2299,16 +2299,16 @@ uint32_t Level::get_is_map_changed_no_check(const int x, const int y)
   return (get_no_check(_is_map_changed, x, y));
 }
 
-void Level::set_is_map_changed_no_check(const int x, const int y) { set(_is_map_changed, x, y, game->tick_current); }
+void Level::is_map_changed_no_check_set(const int x, const int y) { set(_is_map_changed, x, y, game->tick_current); }
 
-void Level::set_is_map_changed(const int x, const int y) { set(_is_map_changed, x, y, game->tick_current); }
+void Level::is_map_changed_set(const int x, const int y) { set(_is_map_changed, x, y, game->tick_current); }
 
-void Level::set_is_map_changed_no_check(const int x, const int y, uint32_t v)
+void Level::is_map_changed_no_check_set(const int x, const int y, uint32_t v)
 {
   set_no_check(_is_map_changed, x, y, v);
 }
 
-void Level::unset_is_map_changed(const int x, const int y)
+void Level::is_map_changed_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
@@ -2316,7 +2316,7 @@ void Level::unset_is_map_changed(const int x, const int y)
   set(_is_map_changed, x, y, (uint32_t) 0);
 }
 
-void Level::unset_is_map_changed_no_check(const int x, const int y)
+void Level::is_map_changed_no_check_unset(const int x, const int y)
 {
   set_no_check(_is_map_changed, x, y, (uint32_t) 0);
 }
@@ -2351,7 +2351,7 @@ void Level::is_lava_set(const int x, const int y)
   incr(_is_lava, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_lava(const int x, const int y)
+void Level::is_lava_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -2389,7 +2389,7 @@ void Level::is_brazier_set(const int x, const int y)
   incr(_is_brazier, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_brazier(const int x, const int y)
+void Level::is_brazier_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {
@@ -2427,7 +2427,7 @@ void Level::is_fire_set(const int x, const int y)
   incr(_is_fire, x, y, (uint8_t) 1);
 }
 
-void Level::unset_is_fire(const int x, const int y)
+void Level::is_fire_unset(const int x, const int y)
 {
   TRACE_NO_INDENT();
   if (unlikely(is_oob(x, y))) {

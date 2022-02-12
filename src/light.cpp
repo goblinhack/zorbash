@@ -255,7 +255,7 @@ bool Light::calculate(void)
   //
   // Make sure the current tile is always marked visited.
   //
-  level->set_is_lit_ever((int) player->curr_at.x, (int) player->curr_at.y);
+  level->is_lit_ever_set((int) player->curr_at.x, (int) player->curr_at.y);
 
 #if 0
   set(walked, player->curr_at.x, player->curr_at.y, true);
@@ -295,8 +295,8 @@ bool Light::calculate(void)
 #if 0
           set(walked, x, y, true);
 #endif
-          level->set_is_lit_ever_no_check(x, y);      // for AI and jumping
-          level->set_is_lit_currently_no_check(x, y); // allows lights to fade
+          level->is_lit_ever_no_check_set(x, y);      // for AI and jumping
+          level->is_lit_currently_no_check_set(x, y); // allows lights to fade
           rp++;
 
           //
@@ -416,8 +416,8 @@ bool Light::calculate(void)
 #if 0
           set(walked, x, y, true);
 #endif
-          level->set_is_lit_ever(x, y);      // for AI and jumping
-          level->set_is_lit_currently(x, y); // allows lights to fade
+          level->is_lit_ever_set(x, y);      // for AI and jumping
+          level->is_lit_currently_set(x, y); // allows lights to fade
           rp++;
 
           //
@@ -851,9 +851,9 @@ void Level::lights_fade(void)
     for (auto x = 0; x < MAP_WIDTH; x++) {
       auto v = is_lit_currently_no_check(x, y);
       if (v > 10) {
-        set_is_lit_currently_no_check(x, y, v - 10);
+        is_lit_currently_no_check_set(x, y, v - 10);
       } else {
-        set_is_lit_currently_no_check(x, y, 0);
+        is_lit_currently_no_check_set(x, y, 0);
       }
     }
   }

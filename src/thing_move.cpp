@@ -119,7 +119,7 @@ void Thing::move_finish(void)
   //
   if (curr_at != last_at) {
     level->noisemap_in_incr(curr_at.x, curr_at.y, get_noise_total());
-    level->set_is_map_changed(curr_at.x, curr_at.y);
+    level->is_map_changed_set(curr_at.x, curr_at.y);
   }
 }
 
