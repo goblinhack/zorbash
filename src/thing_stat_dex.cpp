@@ -105,7 +105,7 @@ int Thing::get_stat_dex(void)
   }
 }
 
-int Thing::set_stat_dex(int v)
+int Thing::stat_dex_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

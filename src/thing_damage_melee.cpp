@@ -21,15 +21,15 @@ const Dice &Thing::get_damage_melee_dice(void)
   return (tp()->get_damage_melee_dice());
 }
 
-const std::string Thing::get_damage_melee_dice_str(void)
+const std::string Thing::damage_melee_dice_str_get(void)
 {
   TRACE_NO_INDENT();
 
   if (get_enchant()) {
-    return tp()->get_damage_melee_dice_str() + modifier_to_string(get_enchant());
+    return tp()->damage_melee_dice_str_get() + modifier_to_string(get_enchant());
   }
 
-  return (tp()->get_damage_melee_dice_str());
+  return (tp()->damage_melee_dice_str_get());
 }
 
 int Thing::get_damage_melee(void)

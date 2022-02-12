@@ -109,7 +109,7 @@ void Thing::set_equip_carry_anim_id(ThingId equip_carry_anim_id, int equip)
   Thingp equip_carry_anim;
 
   if (! equip_carry_anim_id) {
-    set_equip_carry_anim(nullptr, equip);
+    equip_carry_anim_set(nullptr, equip);
     return;
   }
 
@@ -118,10 +118,10 @@ void Thing::set_equip_carry_anim_id(ThingId equip_carry_anim_id, int equip)
     return;
   }
 
-  set_equip_carry_anim(equip_carry_anim, equip);
+  equip_carry_anim_set(equip_carry_anim, equip);
 }
 
-void Thing::set_equip_carry_anim(Thingp new_equip_carry_anim, int equip)
+void Thing::equip_carry_anim_set(Thingp new_equip_carry_anim, int equip)
 {
   TRACE_NO_INDENT();
   if (new_equip_carry_anim) {
@@ -446,7 +446,7 @@ bool Thing::equip(Thingp item, int equip)
   //
   // Save the thing id so the client wid can keep track of the thing.
   //
-  set_equip_carry_anim(carry_anim, equip);
+  equip_carry_anim_set(carry_anim, equip);
 
   //
   // Attach to the thing.
@@ -527,7 +527,7 @@ void Thing::equip_remove_anim(int equip)
   if (equip_carry_anim) {
     dbg("Remove carry-anim");
     equip_carry_anim->dead("by owner sheathed weapon, remove carry-anim");
-    set_equip_carry_anim(nullptr, equip);
+    equip_carry_anim_set(nullptr, equip);
   } else {
     dbg("Weapon had no carry-anim");
   }

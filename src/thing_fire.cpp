@@ -44,7 +44,7 @@ void Thing::fire_tick(void)
           //
           if (! level->is_smoke(at.x, at.y)) {
             auto smoke = level->thing_new("smoke", at);
-            smoke->set_lifespan(pcg_random_range(1, 10));
+            smoke->lifespan_set(pcg_random_range(1, 10));
           }
         }
       }
@@ -88,7 +88,7 @@ void Thing::fire_tick(void)
     //
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
-      smoke->set_lifespan(pcg_random_range(1, 10));
+      smoke->lifespan_set(pcg_random_range(1, 10));
 
       hit = (d100() < 20);
 
@@ -131,7 +131,7 @@ void Thing::fire_tick(void)
     }
 
     if (h <= 0) {
-      h = set_health(0);
+      h = health_set(0);
       if (is_meltable()) {
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
@@ -177,7 +177,7 @@ void Thing::fire_tick(void)
 
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
-      smoke->set_lifespan(pcg_random_range(1, 10));
+      smoke->lifespan_set(pcg_random_range(1, 10));
     }
   }
 }

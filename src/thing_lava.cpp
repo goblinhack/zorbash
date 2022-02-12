@@ -69,6 +69,6 @@ void Thing::lava_tick(void)
 
   if (! level->is_smoke(at.x, at.y)) {
     auto smoke = level->thing_new("smoke", at);
-    smoke->set_lifespan(pcg_random_range(1, 10));
+    smoke->lifespan_set(pcg_random_range(1, 10));
   }
 }

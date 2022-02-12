@@ -51,8 +51,8 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->get_health_initial();
     if (unlikely(v)) {
-      set_health(v);
-      set_health_max(v);
+      health_set(v);
+      health_max_set(v);
     }
   }
 
@@ -63,8 +63,8 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stamina();
     if (unlikely(v)) {
-      set_stamina(v);
-      set_stamina_max(v);
+      stamina_set(v);
+      stamina_max_set(v);
     }
   }
 
@@ -72,8 +72,8 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->enchant_level();
     if (unlikely(v)) {
-      set_enchant(v);
-      set_enchant_max(v);
+      enchant_set(v);
+      enchant_max_set(v);
     }
   }
 
@@ -81,7 +81,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->enchant_max();
     if (unlikely(v)) {
-      set_enchant_max(v);
+      enchant_max_set(v);
     }
   }
 
@@ -89,7 +89,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->get_stat_def();
     if (unlikely(v)) {
-      set_stat_def(v);
+      stat_def_set(v);
     }
   }
 
@@ -97,7 +97,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->lifespan();
     if (unlikely(v)) {
-      set_lifespan(v);
+      lifespan_set(v);
     }
   }
 
@@ -105,7 +105,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->get_stat_dex();
     if (unlikely(v)) {
-      set_stat_dex(v);
+      stat_dex_set(v);
     }
   }
 
@@ -113,7 +113,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->get_stat_luck();
     if (unlikely(v)) {
-      set_stat_luck(v);
+      stat_luck_set(v);
     }
   }
 
@@ -121,7 +121,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stats02();
     if (unlikely(v)) {
-      set_stats02(v);
+      stats02_set(v);
     }
   }
 
@@ -129,7 +129,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stats03();
     if (unlikely(v)) {
-      set_stats03(v);
+      stats03_set(v);
     }
   }
 
@@ -137,7 +137,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stats04();
     if (unlikely(v)) {
-      set_stats04(v);
+      stats04_set(v);
     }
   }
 
@@ -145,7 +145,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stats05();
     if (unlikely(v)) {
-      set_stats05(v);
+      stats05_set(v);
     }
   }
 
@@ -153,7 +153,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stats06();
     if (unlikely(v)) {
-      set_stats06(v);
+      stats06_set(v);
     }
   }
 
@@ -161,7 +161,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stats07();
     if (unlikely(v)) {
-      set_stats07(v);
+      stats07_set(v);
     }
   }
 
@@ -169,7 +169,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stat_att_mod();
     if (unlikely(v)) {
-      set_stat_att_mod(v);
+      stat_att_mod_set(v);
     }
   }
 
@@ -177,7 +177,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stats09();
     if (unlikely(v)) {
-      set_stats09(v);
+      stats09_set(v);
     }
   }
 
@@ -185,7 +185,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stat_def_mod();
     if (unlikely(v)) {
-      set_stat_def_mod(v);
+      stat_def_mod_set(v);
     }
   }
 
@@ -193,7 +193,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stat_con_mod();
     if (unlikely(v)) {
-      set_stat_con_mod(v);
+      stat_con_mod_set(v);
     }
   }
 
@@ -201,7 +201,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stat_dex_mod();
     if (unlikely(v)) {
-      set_stat_dex_mod(v);
+      stat_dex_mod_set(v);
     }
   }
 
@@ -209,7 +209,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stat_luck_mod();
     if (unlikely(v)) {
-      set_stat_luck_mod(v);
+      stat_luck_mod_set(v);
     }
   }
 
@@ -217,7 +217,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stat_att_mod();
     if (unlikely(v)) {
-      set_stat_att_mod(v);
+      stat_att_mod_set(v);
     }
   }
 
@@ -225,7 +225,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->get_stat_con();
     if (unlikely(v)) {
-      set_stat_con(v);
+      stat_con_set(v);
     }
   }
 
@@ -233,7 +233,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->stat_str_mod();
     if (unlikely(v)) {
-      set_stat_str_mod(v);
+      stat_str_mod_set(v);
     }
   }
 
@@ -241,7 +241,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->temperature();
     if (unlikely(v)) {
-      set_temperature(v);
+      temperature_set(v);
     }
   }
 
@@ -252,7 +252,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->noise_on_moving_or_being_carried();
     if (unlikely(v)) {
-      set_noise(v);
+      noise_set(v);
     }
   }
 
@@ -260,7 +260,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->distance_throw();
     if (unlikely(v)) {
-      set_distance_throw(v);
+      distance_throw_set(v);
     }
   }
 
@@ -268,12 +268,12 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->get_stat_str();
     if (unlikely(v)) {
-      set_stat_str(v);
+      stat_str_set(v);
     }
   }
 
   if (unlikely(tpp->charge_count())) {
-    set_charge_count(tpp->charge_count());
+    charge_count_set(tpp->charge_count());
   }
 
   auto tiles = &tpp->tiles;

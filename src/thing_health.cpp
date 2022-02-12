@@ -26,7 +26,7 @@ int Thing::health_boost(int v)
   }
 
   new_health = std::min(new_health, max_health);
-  set_health(new_health);
+  health_set(new_health);
 
   if (new_health >= max_health) {
     dbg("Health boost not possible, maxxed at %d", new_health);

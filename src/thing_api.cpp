@@ -77,10 +77,10 @@ const Dice &Thing::get_health_initial_dice(void)
   return (tp()->get_health_initial_dice());
 }
 
-const std::string &Thing::get_health_initial_dice_str(void)
+const std::string &Thing::health_initial_dice_str_get(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->get_health_initial_dice_str());
+  return (tp()->health_initial_dice_str_get());
 }
 
 int Thing::get_health_initial(void)
@@ -3837,7 +3837,7 @@ int Thing::get_gold(void)
   }
 }
 
-int Thing::set_gold(int v)
+int Thing::gold_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -3944,7 +3944,7 @@ int Thing::get_keys(void)
   }
 }
 
-int Thing::set_keys(int v)
+int Thing::keys_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4022,7 +4022,7 @@ int Thing::get_health(void)
   return v;
 }
 
-int Thing::set_health(int v)
+int Thing::health_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4090,7 +4090,7 @@ int Thing::get_health_max(void)
   }
 }
 
-int Thing::set_health_max(int v)
+int Thing::health_max_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4158,7 +4158,7 @@ int Thing::get_stamina_max(void)
   }
 }
 
-int Thing::set_stamina_max(int v)
+int Thing::stamina_max_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4226,7 +4226,7 @@ int Thing::get_enchant_max(void)
   }
 }
 
-int Thing::set_enchant_max(int v)
+int Thing::enchant_max_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4400,7 +4400,7 @@ int Thing::get_stats02(void)
   }
 }
 
-int Thing::set_stats02(int v)
+int Thing::stats02_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4468,7 +4468,7 @@ int Thing::get_stats03(void)
   }
 }
 
-int Thing::set_stats03(int v)
+int Thing::stats03_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4536,7 +4536,7 @@ int Thing::get_stats04(void)
   }
 }
 
-int Thing::set_stats04(int v)
+int Thing::stats04_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4604,7 +4604,7 @@ int Thing::get_stats05(void)
   }
 }
 
-int Thing::set_stats05(int v)
+int Thing::stats05_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4672,7 +4672,7 @@ int Thing::get_stats06(void)
   }
 }
 
-int Thing::set_stats06(int v)
+int Thing::stats06_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4740,7 +4740,7 @@ int Thing::get_stats07(void)
   }
 }
 
-int Thing::set_stats07(int v)
+int Thing::stats07_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4808,7 +4808,7 @@ int Thing::get_stats09(void)
   }
 }
 
-int Thing::set_stats09(int v)
+int Thing::stats09_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4876,7 +4876,7 @@ int Thing::get_stat_def_mod(void)
   }
 }
 
-int Thing::set_stat_def_mod(int v)
+int Thing::stat_def_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4944,7 +4944,7 @@ int Thing::get_stat_con_mod(void)
   }
 }
 
-int Thing::set_stat_con_mod(int v)
+int Thing::stat_con_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5012,7 +5012,7 @@ int Thing::get_stat_dex_mod(void)
   }
 }
 
-int Thing::set_stat_dex_mod(int v)
+int Thing::stat_dex_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5080,7 +5080,7 @@ int Thing::get_stat_luck_mod(void)
   }
 }
 
-int Thing::set_stat_luck_mod(int v)
+int Thing::stat_luck_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5148,7 +5148,7 @@ int Thing::get_stat_att_mod(void)
   }
 }
 
-int Thing::set_stat_att_mod(int v)
+int Thing::stat_att_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5216,7 +5216,7 @@ int Thing::get_stat_str_mod(void)
   }
 }
 
-int Thing::set_stat_str_mod(int v)
+int Thing::stat_str_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -5284,7 +5284,7 @@ float Thing::get_distance_throw(void)
   }
 }
 
-int Thing::set_distance_throw(int v)
+int Thing::distance_throw_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5348,7 +5348,7 @@ int Thing::get_stamina(void)
   return v;
 }
 
-int Thing::set_stamina(int v)
+int Thing::stamina_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5418,7 +5418,7 @@ int Thing::get_enchant(void)
   return v;
 }
 
-int Thing::set_enchant(int v)
+int Thing::enchant_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5488,7 +5488,7 @@ int Thing::get_poisoned_amount(void)
   return v;
 }
 
-int Thing::set_poisoned_amount(int v)
+int Thing::poisoned_amount_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5564,7 +5564,7 @@ int Thing::get_necrotized_amount(void)
   return v;
 }
 
-int Thing::set_necrotized_amount(int v)
+int Thing::necrotized_amount_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5629,7 +5629,7 @@ int Thing::get_owned_count(void)
   }
 }
 
-int Thing::set_owned_count(int v)
+int Thing::owned_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5677,7 +5677,7 @@ int Thing::get_minion_count(void)
   }
 }
 
-int Thing::set_minion_count(int v)
+int Thing::minion_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5725,7 +5725,7 @@ int Thing::get_follower_count(void)
   }
 }
 
-int Thing::set_follower_count(int v)
+int Thing::follower_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5773,7 +5773,7 @@ int Thing::get_spawned_count(void)
   }
 }
 
-int Thing::set_spawned_count(int v)
+int Thing::spawned_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5821,7 +5821,7 @@ int Thing::get_charge_count(void)
   }
 }
 
-int Thing::set_charge_count(int v)
+int Thing::charge_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5869,7 +5869,7 @@ int Thing::get_sleep_count(void)
   }
 }
 
-int Thing::set_sleep_count(int v)
+int Thing::sleep_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -5922,7 +5922,7 @@ int Thing::get_idle_count(void)
   }
 }
 
-int Thing::set_idle_count(int v)
+int Thing::idle_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
@@ -5975,7 +5975,7 @@ int Thing::get_stuck_count(void)
   }
 }
 
-int Thing::set_stuck_count(int v)
+int Thing::stuck_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_aip();
@@ -6023,7 +6023,7 @@ int Thing::get_lifespan(void)
   }
 }
 
-int Thing::set_lifespan(int v)
+int Thing::lifespan_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6071,7 +6071,7 @@ int Thing::get_prev_light_power(void)
   }
 }
 
-int Thing::set_prev_light_power(int v)
+int Thing::prev_light_power_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -6159,7 +6159,7 @@ int Thing::update_light_power(void)
   return light_power;
 }
 
-int Thing::set_light_power(int v)
+int Thing::light_power_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -7110,7 +7110,7 @@ int Thing::get_current_damage(void)
   return v;
 }
 
-int Thing::set_current_damage(int v)
+int Thing::current_damage_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

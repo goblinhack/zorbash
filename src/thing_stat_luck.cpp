@@ -105,7 +105,7 @@ int Thing::get_stat_luck(void)
   }
 }
 
-int Thing::set_stat_luck(int v)
+int Thing::stat_luck_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

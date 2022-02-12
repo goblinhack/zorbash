@@ -160,7 +160,7 @@ void Thing::hooks_remove()
       if (is_loggable()) {
         dbg("Hooks remove carry-anim");
       }
-      set_equip_carry_anim(nullptr, e);
+      equip_carry_anim_set(nullptr, e);
       item->remove_owner();
       item->dead("weapon carry-anim owner defeated ");
     }

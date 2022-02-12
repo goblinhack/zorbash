@@ -68,7 +68,7 @@ void Level::update_water_next_to_lava(void)
                   if (! is_starting) {
                     if (! is_smoke(x, y)) {
                       auto smoke = thing_new("smoke", point(x, y));
-                      smoke->set_lifespan(pcg_random_range(1, 10));
+                      smoke->lifespan_set(pcg_random_range(1, 10));
                     }
                   }
                 }

@@ -59,7 +59,7 @@ void Thing::temperature_tick(void)
   }
 
   t = (int) ((float) t * 0.95);
-  set_temperature(t);
+  temperature_set(t);
 }
 
 int Thing::get_temperature(void)
@@ -72,7 +72,7 @@ int Thing::get_temperature(void)
   }
 }
 
-int Thing::set_temperature(int v)
+int Thing::temperature_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

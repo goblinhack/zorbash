@@ -105,7 +105,7 @@ int Thing::get_stat_str(void)
   }
 }
 
-int Thing::set_stat_str(int v)
+int Thing::stat_str_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

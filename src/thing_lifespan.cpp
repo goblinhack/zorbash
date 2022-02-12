@@ -77,7 +77,7 @@ void Thing::lifespan_tick(void)
     if (get_charge_count()) {
       dbg("Lifespan expired (but has %d charges left)", get_charge_count());
       game->request_remake_rightbar = true;
-      set_lifespan(tp()->lifespan());
+      lifespan_set(tp()->lifespan());
       return;
     }
   }

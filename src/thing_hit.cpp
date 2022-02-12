@@ -214,7 +214,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       unset_on_fire();
 
       auto smoke = level->thing_new("smoke", curr_at);
-      smoke->set_lifespan(pcg_random_range(1, 10));
+      smoke->lifespan_set(pcg_random_range(1, 10));
     }
   } else if (attack_fire) {
     damage = buff_on_damage_fire(real_hitter, damage);
@@ -606,7 +606,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     if (owner) {
       if (owner->get_current_damage()) {
         damage = owner->get_current_damage();
-        owner->set_current_damage(0);
+        owner->current_damage_set(0);
       }
     }
   }
@@ -619,7 +619,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         //
         // Allow the damage to be modified
         //
-        real_hitter->set_current_damage(damage);
+        real_hitter->current_damage_set(damage);
         real_hitter->use(skill);
         damage = real_hitter->get_current_damage();
       }
@@ -1004,7 +1004,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   auto h = health_decr(damage);
   if (h <= 0) {
-    h = set_health(0);
+    h = health_set(0);
 
     //
     // Record who dun it.

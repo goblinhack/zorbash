@@ -94,7 +94,7 @@ int Thing::get_noise_total(void)
   return decibels;
 }
 
-int Thing::set_noise(int v)
+int Thing::noise_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {

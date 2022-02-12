@@ -369,7 +369,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
-  set_stuck_count(0);
+  stuck_count_set(0);
 
   //
   // No rest for the undead.
