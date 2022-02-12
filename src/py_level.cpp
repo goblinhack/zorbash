@@ -651,7 +651,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_steal_item_chance_d1000_at, is_steal_item_chance
 LEVEL_BODY_GET_BOOL_AT(level_is_sticky_at, is_sticky)
 LEVEL_BODY_GET_BOOL_AT(level_is_stone_at, is_stone)
 LEVEL_BODY_GET_BOOL_AT(level_is_sword_at, is_sword)
-LEVEL_BODY_GET_BOOL_AT(level_is_target_auto_select_at, is_target_auto_select)
+LEVEL_BODY_GET_BOOL_AT(level_is_victim_select_at, is_victim_select)
 LEVEL_BODY_GET_BOOL_AT(level_is_throwable_at, is_throwable)
 LEVEL_BODY_GET_BOOL_AT(level_is_tickable_at, is_tickable)
 LEVEL_BODY_GET_BOOL_AT(level_is_tmp_thing_at, is_tmp_thing)

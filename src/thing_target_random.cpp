@@ -8,7 +8,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-point Thing::get_target_random(int d)
+point Thing::get_dest_random(int d)
 {
   if (! d) {
     if (is_player()) {

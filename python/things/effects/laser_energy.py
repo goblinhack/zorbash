@@ -3,8 +3,8 @@ import tp
 
 
 def on_born(me, x, y):
-    target_x, target_y = my.thing_get_coords(me)
-    for thing in my.level_get_all(me, target_x, target_y):
+    selection_x, selection_y = my.thing_get_coords(me)
+    for thing in my.level_get_all(me, selection_x, selection_y):
         if my.thing_possible_to_attack(me, thing):
             my.thing_hit(me, thing)
     my.level_spawn_at_thing(me, "explosion_minor")

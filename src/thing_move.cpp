@@ -463,7 +463,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   auto y     = future_pos.y;
   auto delta = point(x, y) - curr_at;
 
-  move_set_dir_from_target_or_delta(delta);
+  move_set_dir_from_dest_or_delta(delta);
 
   //
   // Bounce rings and weapons
@@ -749,7 +749,7 @@ void Thing::move_to(point to)
   TRACE_NO_INDENT();
   move_finish();
   auto delta = to - curr_at;
-  move_set_dir_from_target_or_delta(delta);
+  move_set_dir_from_dest_or_delta(delta);
 
   update_pos(to, false);
 }
@@ -758,7 +758,7 @@ void Thing::move_delta(point delta)
 {
   TRACE_NO_INDENT();
   move_finish();
-  move_set_dir_from_target_or_delta(delta);
+  move_set_dir_from_dest_or_delta(delta);
 
   //
   // If the move finish ended up doing something like moving into
@@ -777,7 +777,7 @@ void Thing::move_to_immediately(point to)
   TRACE_NO_INDENT();
   move_finish();
   auto delta = to - curr_at;
-  move_set_dir_from_target_or_delta(delta);
+  move_set_dir_from_dest_or_delta(delta);
 
   //
   // Don't check for descending here as that check will be set when falling
@@ -839,10 +839,10 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     dbg("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
     TRACE_AND_INDENT();
 
-    bool target_attacked = false;
-    bool target_overlaps = false;
-    collision_check_and_handle_nearby(nh, &target_attacked, &target_overlaps);
-    if (target_attacked) {
+    bool victim_attacked = false;
+    bool victim_overlaps = false;
+    collision_check_and_handle_nearby(nh, &victim_attacked, &victim_overlaps);
+    if (victim_attacked) {
       dbg("Cannot move to %d,%d, must attack", nh.x, nh.y);
       return true;
     } else {

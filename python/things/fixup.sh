@@ -276,7 +276,7 @@ do
       set_is_sticky \
       set_is_stone \
       set_is_sword \
-      set_is_target_auto_select \
+      set_is_victim_select \
       set_is_the_grid \
       set_is_throwable \
       set_is_tickable \

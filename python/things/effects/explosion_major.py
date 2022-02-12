@@ -11,10 +11,10 @@ def attack(me, thing):
 def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_d")
 
-    target_x, target_y = my.thing_get_coords(me)
+    selection_x, selection_y = my.thing_get_coords(me)
     for dx in range(-1, 2):
         for dy in range(-1, 2):
-            for thing in my.level_get_all(me, target_x + dx, target_y + dy):
+            for thing in my.level_get_all(me, selection_x + dx, selection_y + dy):
                 attack(me, thing)
 
 

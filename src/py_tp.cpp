@@ -817,14 +817,14 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
   char    *what       = nullptr;
   uint32_t id         = 0;
   uint32_t parent_id  = 0;
-  uint32_t target_id  = 0;
+  uint32_t victim_id  = 0;
   uint32_t radius_min = 0;
   uint32_t radius_max = 0;
 
   static char *kwlist[] = {
-      (char *) "id", (char *) "parent_id", (char *) "target_id", (char *) "what", (char *) "min", (char *) "max", 0};
+      (char *) "id", (char *) "parent_id", (char *) "victim_id", (char *) "what", (char *) "min", (char *) "max", 0};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, &parent_id, &target_id, &what, &radius_min,
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, &parent_id, &victim_id, &what, &radius_min,
                                     &radius_max)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -840,8 +840,8 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
     Py_RETURN_FALSE;
   }
 
-  if (! target_id) {
-    ERR("%s: Missing 'target_id'", __FUNCTION__);
+  if (! victim_id) {
+    ERR("%s: Missing 'victim_id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -869,7 +869,7 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
     Py_RETURN_FALSE;
   }
 
-  auto target = level->thing_find(ThingId(target_id));
+  auto target = level->thing_find(ThingId(victim_id));
   if (! target) {
     ERR("%s: Cannot find target thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
@@ -1349,7 +1349,7 @@ TP_BODY_SET_INT(is_steal_item_chance_d1000)
 TP_BODY_SET_INT(is_sticky)
 TP_BODY_SET_INT(is_stone)
 TP_BODY_SET_INT(is_sword)
-TP_BODY_SET_INT(is_target_auto_select)
+TP_BODY_SET_INT(is_victim_select)
 TP_BODY_SET_INT(is_the_grid)
 TP_BODY_SET_INT(is_throwable)
 TP_BODY_SET_INT(is_tickable)
@@ -1651,8 +1651,8 @@ TP_BODY_SET_STRING(on_owner_damage_necrosis_do)
 TP_BODY_SET_STRING(on_owner_damage_poison_do)
 TP_BODY_SET_STRING(on_owner_damage_stat_con_do)
 TP_BODY_SET_STRING(on_owner_damage_stat_str_do)
-TP_BODY_SET_STRING(on_owner_set_do)
-TP_BODY_SET_STRING(on_owner_unset_do)
+TP_BODY_SET_STRING(on_owner_add_do)
+TP_BODY_SET_STRING(on_owner_remove_do)
 TP_BODY_SET_STRING(on_polymorphed_do)
 TP_BODY_SET_STRING(on_tick_do)
 TP_BODY_SET_STRING(on_unequip_do)

@@ -31,13 +31,13 @@ bool Thing::throw_item_choose_target(Thingp what)
     return false;
   }
 
-  if (! target_select(what)) {
+  if (! victim_select(what)) {
     return false;
   }
 
   game->request_to_throw_item = what;
 
-  return target_select(what);
+  return victim_select(what);
 }
 
 void Thing::throw_at(Thingp what, Thingp target)

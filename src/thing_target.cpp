@@ -11,7 +11,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-bool Thing::target_select(Thingp item)
+bool Thing::victim_select(Thingp item)
 {
   TRACE_NO_INDENT();
 
@@ -33,7 +33,7 @@ bool Thing::target_select(Thingp item)
 // Find the best thing to attack. Look at our current direction and if nothing
 // in that path, look around for something else.
 //
-bool Thing::target_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
+bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
                                          std::vector< point > &all_deltas)
 {
   bool found_best {};
@@ -106,7 +106,7 @@ bool Thing::target_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
-bool Thing::target_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
+bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
                                          std::vector< point > &all_deltas)
 {
   bool found_best {};
@@ -181,7 +181,7 @@ bool Thing::target_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
-bool Thing::target_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
+bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
                                          std::vector< point > &all_deltas)
 {
   bool found_best {};
@@ -247,22 +247,22 @@ bool Thing::target_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
-bool Thing::target_attack_found_best(Thingp item, Thingp best, point best_hit_at)
+bool Thing::victim_attack_found_best(Thingp item, Thingp best, point best_hit_at)
 {
-  bool target_attacked = false;
-  bool target_overlaps = false;
+  bool victim_attacked = false;
+  bool victim_overlaps = false;
 
   dbg2("Target-attack-best: Best target to hit is %s at %s", best->to_string().c_str(),
        best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
 
   if (item) {
-    if (item->collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+    if (item->collision_check_and_handle_at(best_hit_at, &victim_attacked, &victim_overlaps)) {
       lunge(best_hit_at);
       return true;
     }
   } else {
-    if (collision_check_and_handle_at(best_hit_at, &target_attacked, &target_overlaps)) {
+    if (collision_check_and_handle_at(best_hit_at, &victim_attacked, &victim_overlaps)) {
       lunge(best_hit_at);
       return true;
     }
@@ -270,26 +270,26 @@ bool Thing::target_attack_found_best(Thingp item, Thingp best, point best_hit_at
   return true;
 }
 
-bool Thing::target_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at)
+bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at)
 {
   std::vector< point > all_deltas = {point(0, 0)};
 
-  if (target_attack_best_attempt_1(item, curr_at, best, best_hit_at, all_deltas)) {
+  if (victim_attack_best_attempt_1(item, curr_at, best, best_hit_at, all_deltas)) {
     return true;
   }
 
-  if (target_attack_best_attempt_2(item, curr_at, best, best_hit_at, all_deltas)) {
+  if (victim_attack_best_attempt_2(item, curr_at, best, best_hit_at, all_deltas)) {
     return true;
   }
 
-  if (target_attack_best_attempt_3(item, curr_at, best, best_hit_at, all_deltas)) {
+  if (victim_attack_best_attempt_3(item, curr_at, best, best_hit_at, all_deltas)) {
     return true;
   }
 
   return false;
 }
 
-bool Thing::target_attack_best(int equip, point *at)
+bool Thing::victim_attack_best(int equip, point *at)
 {
   if (at) {
     dbg("Target-attack-best: Try to attack with equpped item at %s", at->to_string().c_str());
@@ -308,8 +308,8 @@ bool Thing::target_attack_best(int equip, point *at)
     get_equip_use_offset(&dx, &dy, equip);
   }
 
-  bool target_attacked = false;
-  bool target_overlaps = false;
+  bool victim_attacked = false;
+  bool victim_overlaps = false;
 
   dbg("Target-attack-best: Attack delta %d,%d", dx, dy);
   TRACE_AND_INDENT();
@@ -358,21 +358,21 @@ bool Thing::target_attack_best(int equip, point *at)
     std::vector< point > all_deltas = {
         point(dx, dy),
     };
-    if (target_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
-      return target_attack_found_best(item, best, best_hit_at);
+    if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+      return victim_attack_found_best(item, best, best_hit_at);
     }
   }
 
-  if (target_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
-    return target_attack_found_best(item, best, best_hit_at);
+  if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    return victim_attack_found_best(item, best, best_hit_at);
   }
 
-  if (target_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
-    return target_attack_found_best(item, best, best_hit_at);
+  if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    return victim_attack_found_best(item, best, best_hit_at);
   }
 
-  if (target_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
-    return target_attack_found_best(item, best, best_hit_at);
+  if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    return victim_attack_found_best(item, best, best_hit_at);
   }
 
   //
@@ -384,9 +384,9 @@ bool Thing::target_attack_best(int equip, point *at)
     TRACE_AND_INDENT();
 
     on_use(item);
-    if (item->collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
+    if (item->collision_check_and_handle_at(hit_at, &victim_attacked, &victim_overlaps)) {
       lunge(hit_at);
-      if (target_attacked) {
+      if (victim_attacked) {
         dbg("Target-attack-best: Attacked with equip item");
         return true;
       }
@@ -396,9 +396,9 @@ bool Thing::target_attack_best(int equip, point *at)
     dbg("Target-attack-best: No equip item");
     TRACE_AND_INDENT();
 
-    if (collision_check_and_handle_at(hit_at, &target_attacked, &target_overlaps)) {
+    if (collision_check_and_handle_at(hit_at, &victim_attacked, &victim_overlaps)) {
       lunge(hit_at);
-      if (target_attacked) {
+      if (victim_attacked) {
         dbg("Target-attack-best: No equip item but attacked");
         return true;
       }

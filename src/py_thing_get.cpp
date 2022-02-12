@@ -388,7 +388,7 @@ THING_BODY_GET_BOOL(thing_is_steal_item_chance_d1000, is_steal_item_chance_d1000
 THING_BODY_GET_BOOL(thing_is_sticky, is_sticky)
 THING_BODY_GET_BOOL(thing_is_stone, is_stone)
 THING_BODY_GET_BOOL(thing_is_sword, is_sword)
-THING_BODY_GET_BOOL(thing_is_target_auto_select, is_target_auto_select)
+THING_BODY_GET_BOOL(thing_is_victim_select, is_victim_select)
 THING_BODY_GET_BOOL(thing_is_throwable, is_throwable)
 THING_BODY_GET_BOOL(thing_is_tickable, is_tickable)
 THING_BODY_GET_BOOL(thing_is_tmp_thing, is_tmp_thing)

@@ -275,7 +275,7 @@ PyObject *level_is_steal_item_chance_d1000_at(PyObject *obj, PyObject *args, PyO
 PyObject *level_is_sticky_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_stone_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_sword_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_target_auto_select_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_victim_select_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_throwable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tickable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tmp_thing_at(PyObject *obj, PyObject *args, PyObject *keywds);

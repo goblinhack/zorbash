@@ -582,7 +582,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
 
   dbg("Find best attack target");
   TRACE_AND_INDENT();
-  bool attacked = target_attack_best(equip, at);
+  bool attacked = victim_attack_best(equip, at);
   if (! attacked) {
     if (is_player() && forced) {
       //

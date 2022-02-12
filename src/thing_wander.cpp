@@ -218,7 +218,7 @@ bool Thing::ai_choose_wander(point &nh)
   // Choose a new wander location
   //
   get_aip()->wander_dest = point(0, 0);
-  dest                   = get_target_random();
+  dest                   = get_dest_random();
   dbg("Try wander to %s", dest.to_string().c_str());
 
   //

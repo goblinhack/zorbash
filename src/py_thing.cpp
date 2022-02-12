@@ -60,10 +60,10 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     hitter_id = 0;
-  uint32_t     target_id = 0;
+  uint32_t     victim_id = 0;
   static char *kwlist[]  = {(char *) "hitter", (char *) "target", 0};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &target_id)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &victim_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
@@ -79,14 +79,14 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  if (! target_id) {
+  if (! victim_id) {
     ERR("%s: No target thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
-  Thingp target = game->thing_find(target_id);
+  Thingp target = game->thing_find(victim_id);
   if (! target) {
-    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, target_id);
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
     Py_RETURN_NONE;
   }
 
@@ -101,10 +101,10 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
 {
   TRACE_AND_INDENT();
   uint32_t     hitter_id = 0;
-  uint32_t     target_id = 0;
+  uint32_t     victim_id = 0;
   static char *kwlist[]  = {(char *) "hitter", (char *) "target", 0};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &target_id)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &victim_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
@@ -120,14 +120,14 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
     Py_RETURN_NONE;
   }
 
-  if (! target_id) {
+  if (! victim_id) {
     ERR("%s: No target thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
-  Thingp target = game->thing_find(target_id);
+  Thingp target = game->thing_find(victim_id);
   if (! target) {
-    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, target_id);
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
     Py_RETURN_NONE;
   }
 
@@ -147,10 +147,10 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_AND_INDENT();
   uint32_t     owner_id  = 0;
   char        *item      = nullptr;
-  uint32_t     target_id = 0;
+  uint32_t     victim_id = 0;
   static char *kwlist[]  = {(char *) "owner", (char *) "item", (char *) "target", 0};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &target_id)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &victim_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
@@ -171,14 +171,14 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  if (! target_id) {
+  if (! victim_id) {
     ERR("%s: No target thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
-  Thingp target = game->thing_find(target_id);
+  Thingp target = game->thing_find(victim_id);
   if (! target) {
-    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, target_id);
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
     Py_RETURN_NONE;
   }
 
