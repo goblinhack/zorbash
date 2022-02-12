@@ -48,7 +48,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   dbg("Need to select a target");
   TRACE_AND_INDENT();
 
-  if (! target_select(item)) {
+  if (! victim_select(item)) {
     dbg("Failed to select a target");
     TRACE_AND_INDENT();
     return false;
@@ -56,7 +56,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
   game->request_to_fire_item = item;
 
-  return target_select(item);
+  return victim_select(item);
 }
 
 Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
@@ -133,7 +133,7 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, point at)
   dbg("Laser fire %s at %s", laser_name.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
-  if (target_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
+  if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
     return laser_fire_at(laser_name, best);
   }
 

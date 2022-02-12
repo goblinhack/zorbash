@@ -951,8 +951,8 @@ public:
   void new_external_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep, bool hflip, bool vis);
   void new_internal_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool, bool vis);
   void new_internal_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep, bool hflip, bool vis);
-  void new_laser(ThingId id, ThingId target_id, point start, point stop, uint32_t dur, bool follow);
-  void new_projectile(ThingId id, ThingId target_id, point start, point stop, uint32_t dur, bool follow);
+  void new_laser(ThingId id, ThingId victim_id, point start, point stop, uint32_t dur, bool follow);
+  void new_projectile(ThingId id, ThingId victim_id, point start, point stop, uint32_t dur, bool follow);
   void noisemap_print(void);
   void place_dirt(Dungeonp d);
   void place_dry_grass(Dungeonp d);

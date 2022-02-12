@@ -401,7 +401,7 @@ private:
   int _is_sticky {};
   int _is_stone {};
   int _is_sword {};
-  int _is_target_auto_select {};
+  int _is_victim_select {};
   int _is_the_grid {};
   int _is_throwable {};
   int _is_tickable {}; // e.g. a monst or player or something moveable
@@ -703,8 +703,8 @@ private:
   std::string _on_owner_damage_poison_do;
   std::string _on_owner_damage_stat_con_do;
   std::string _on_owner_damage_stat_str_do;
-  std::string _on_owner_set_do;
-  std::string _on_owner_unset_do;
+  std::string _on_owner_add_do;
+  std::string _on_owner_remove_do;
   std::string _on_polymorphed_do;
   std::string _on_tick_do;
   std::string _on_unequip_do;
@@ -935,8 +935,8 @@ public:
   const std::string &on_owner_damage_necrosis_do(void) const { return _on_owner_damage_necrosis_do; }
   const std::string &on_owner_damage_poison_do(void) const { return _on_owner_damage_poison_do; }
   const std::string &on_owner_damage_stat_str_do(void) const { return _on_owner_damage_stat_str_do; }
-  const std::string &on_owner_set_do(void) const { return _on_owner_set_do; }
-  const std::string &on_owner_unset_do(void) const { return _on_owner_unset_do; }
+  const std::string &on_owner_add_do(void) const { return _on_owner_add_do; }
+  const std::string &on_owner_remove_do(void) const { return _on_owner_remove_do; }
   const std::string &on_polymorphed_do(void) const { return _on_polymorphed_do; }
   const std::string &on_tick_do(void) const { return _on_tick_do; }
   const std::string &on_unequip_do(void) const { return _on_unequip_do; }
@@ -1293,7 +1293,7 @@ public:
   int is_sticky(void) const { return _is_sticky; }
   int is_stone(void) const { return _is_stone; }
   int is_sword(void) const { return _is_sword; }
-  int is_target_auto_select(void) const { return _is_target_auto_select; }
+  int is_victim_select(void) const { return _is_victim_select; }
   int is_the_grid(void) const { return _is_the_grid; }
   int is_throwable(void) const { return _is_throwable; }
   int is_tickable(void) const { return _is_tickable; }
@@ -1837,7 +1837,7 @@ public:
   void set_is_sticky(int v) { _is_sticky = v; }
   void set_is_stone(int v) { _is_stone = v; }
   void set_is_sword(int v) { _is_sword = v; }
-  void set_is_target_auto_select(int v) { _is_target_auto_select = v; }
+  void set_is_victim_select(int v) { _is_victim_select = v; }
   void set_is_the_grid(int v) { _is_the_grid = v; }
   void set_is_throwable(int v) { _is_throwable = v; }
   void set_is_tickable(int v) { _is_tickable = v; }
@@ -1934,8 +1934,8 @@ public:
   void set_on_owner_damage_poison_do(const std::string &v) { _on_owner_damage_poison_do = v; }
   void set_on_owner_damage_stat_con_do(const std::string &v) { _on_owner_damage_stat_con_do = v; }
   void set_on_owner_damage_stat_str_do(const std::string &v) { _on_owner_damage_stat_str_do = v; }
-  void set_on_owner_set_do(const std::string &v) { _on_owner_set_do = v; }
-  void set_on_owner_unset_do(const std::string &v) { _on_owner_unset_do = v; }
+  void set_on_owner_add_do(const std::string &v) { _on_owner_add_do = v; }
+  void set_on_owner_remove_do(const std::string &v) { _on_owner_remove_do = v; }
   void set_on_polymorphed_do(const std::string &v) { _on_polymorphed_do = v; }
   void set_on_tick_do(const std::string &v) { _on_tick_do = v; }
   void set_on_unequip_do(const std::string &v) { _on_unequip_do = v; }

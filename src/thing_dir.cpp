@@ -44,7 +44,7 @@ point Thing::dir_to_direction(void)
   return point(0, 0);
 }
 
-void Thing::move_set_dir_from_target_or_delta(point delta)
+void Thing::move_set_dir_from_dest_or_delta(point delta)
 {
   auto aip = maybe_aip();
   if (aip && aip->move_path.size() > 1) {

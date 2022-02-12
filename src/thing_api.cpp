@@ -3066,10 +3066,10 @@ int Thing::is_sword(void)
   return (tp()->is_sword());
 }
 
-int Thing::is_target_auto_select(void)
+int Thing::is_victim_select(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_target_auto_select());
+  return (tp()->is_victim_select());
 }
 
 int Thing::is_throwable(void)
@@ -7333,16 +7333,16 @@ const std::string &Thing::on_unequip_do(void)
   return (tp()->on_unequip_do());
 }
 
-const std::string &Thing::on_owner_set_do(void)
+const std::string &Thing::on_owner_add_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_set_do());
+  return (tp()->on_owner_add_do());
 }
 
-const std::string &Thing::on_owner_unset_do(void)
+const std::string &Thing::on_owner_remove_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_unset_do());
+  return (tp()->on_owner_remove_do());
 }
 
 const std::string &Thing::on_you_are_declared_a_follower_do(void)

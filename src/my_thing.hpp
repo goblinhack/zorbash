@@ -468,8 +468,8 @@ public:
   bool state_using_skillstone(void);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
-  bool target_attack_best(int equip, point *at = nullptr);
-  bool target_select(Thingp item);
+  bool victim_attack_best(int equip, point *at = nullptr);
+  bool victim_select(Thingp item);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
   bool throw_item_choose_target(Thingp item);
@@ -641,8 +641,8 @@ public:
   const std::string &on_owner_damage_necrosis_do(void);
   const std::string &on_owner_damage_poison_do(void);
   const std::string &on_owner_damage_stat_str_do(void);
-  const std::string &on_owner_set_do(void);
-  const std::string &on_owner_unset_do(void);
+  const std::string &on_owner_add_do(void);
+  const std::string &on_owner_remove_do(void);
   const std::string &on_polymorphed_do(void);
   const std::string &on_tick_do(void);
   const std::string &on_unequip_do(void);
@@ -1363,7 +1363,7 @@ public:
   int is_sticky(void);
   int is_stone(void);
   int is_sword(void);
-  int is_target_auto_select(void);
+  int is_victim_select(void);
   int is_throwable(void);
   int is_tickable(void);
   int is_tmp_thing(void);
@@ -1676,7 +1676,7 @@ public:
 
   point get_vision_source(void);
   point dir_to_direction(void);
-  point get_target_random(int dist = 0);
+  point get_dest_random(int dist = 0);
   point get_where_i_dropped_an_item_last(void);
   point get_lunge_to(void);
 
@@ -1978,7 +1978,7 @@ public:
   void move_delta(point);
   void move_finish(void);
   void move_set_dir_from_delta(point);
-  void move_set_dir_from_target_or_delta(point delta);
+  void move_set_dir_from_dest_or_delta(point delta);
   void move_to_immediately(point to);
   void move_to(point to);
   void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
@@ -2003,8 +2003,8 @@ public:
   void on_lifespan_tick(Thingp hitter);
   void on_move(void);
   void on_open(void);
-  void on_owner_set(Thingp owner);
-  void on_owner_unset(Thingp owner);
+  void on_owner_add(Thingp owner);
+  void on_owner_remove(Thingp owner);
   void on_polymorphed(void);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
@@ -2111,14 +2111,14 @@ public:
   ThingItemsp get_itemsp(void);
   ThingAip    get_aip(void);
 
-  bool target_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
+  bool victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
                                     std::vector< point > &all_deltas);
-  bool target_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
+  bool victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
                                     std::vector< point > &all_deltas);
-  bool target_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
+  bool victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
                                     std::vector< point > &all_deltas);
-  bool target_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at);
-  bool target_attack_found_best(Thingp item, Thingp best, point best_hit_at);
+  bool victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at);
+  bool victim_attack_found_best(Thingp item, Thingp best, point best_hit_at);
 
 } Thing;
 

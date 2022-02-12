@@ -45,13 +45,13 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim)
     return true;
   }
 
-  if (! target_select(item)) {
+  if (! victim_select(item)) {
     return false;
   }
 
   game->request_to_fire_item = item;
 
-  return target_select(item);
+  return victim_select(item);
 }
 
 Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp target)
@@ -123,7 +123,7 @@ Thingp Thing::projectile_fire_at(const std::string &laser_name, point at)
   dbg("Projectile fire %s at %s", laser_name.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
-  if (target_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
+  if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
     return projectile_fire_at(laser_name, best);
   }
 

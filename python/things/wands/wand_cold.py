@@ -55,7 +55,7 @@ def tp_init(name, text_name, short_text_name):
     my.tp_set_is_item_magical(self, True)
     my.tp_set_is_item(self, True)
     my.tp_set_is_loggable(self, True)
-    my.tp_set_is_target_auto_select(self, True)
+    my.tp_set_is_victim_select(self, True)
     my.tp_set_is_tickable(self, True)  # So it can interact with cold
     my.tp_set_is_treasure_class_b(self, True)
     my.tp_set_is_treasure(self, True)

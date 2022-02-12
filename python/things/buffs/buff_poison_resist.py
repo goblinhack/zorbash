@@ -4,13 +4,13 @@ import tp
 self = None
 
 
-def on_owner_set(me, owner, x, y):
+def on_owner_add(me, owner, x, y):
     if my.thing_is_player(owner):
         my.thing_msg(me, "A green glow surrounds you.")
 
 
 # Called on removing a ring. Not called on death of the owner.
-def on_owner_unset(me, owner, x, y):
+def on_owner_remove(me, owner, x, y):
     if my.thing_is_player(owner):
         my.thing_msg(me, "The green glow around you fades.")
 
@@ -116,8 +116,8 @@ def tp_init(name, text_name):
     my.tp_set_on_owner_damage_poison_do(self, "me.on_owner_damage_poison()")
     my.tp_set_on_owner_damage_stat_con_do(self, "me.on_owner_damage_stat_con()")
     my.tp_set_on_owner_damage_stat_str_do(self, "me.on_owner_damage_stat_str()")
-    my.tp_set_on_owner_set_do(self, "me.on_owner_set()")
-    my.tp_set_on_owner_unset_do(self, "me.on_owner_unset()")
+    my.tp_set_on_owner_add_do(self, "me.on_owner_add()")
+    my.tp_set_on_owner_remove_do(self, "me.on_owner_remove()")
     my.tp_set_on_tick_do(self, "me.on_tick()")
     my.tp_set_text_description(self, "Poison resistant buff.")
     my.tp_set_tile(self, tile="buff_poison_resist")

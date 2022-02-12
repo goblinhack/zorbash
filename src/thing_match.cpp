@@ -587,7 +587,7 @@ bool Thing::matches(const std::string &what)
   if (is_sword() && (what == "is_sword")) {
     return true;
   }
-  if (is_target_auto_select() && (what == "is_target_auto_select")) {
+  if (is_victim_select() && (what == "is_victim_select")) {
     return true;
   }
   if (is_throwable() && (what == "is_throwable")) {
@@ -1878,8 +1878,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_sword") {
     return &Thing::is_sword;
   }
-  if (what == "is_target_auto_select") {
-    return &Thing::is_target_auto_select;
+  if (what == "is_victim_select") {
+    return &Thing::is_victim_select;
   }
   if (what == "is_throwable") {
     return &Thing::is_throwable;

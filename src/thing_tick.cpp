@@ -280,17 +280,17 @@ bool Thing::collision_check_do(void)
     return false;
   }
 
-  bool target_attacked = false;
-  bool target_overlaps = false;
-  if (collision_check_and_handle_at(&target_attacked, &target_overlaps)) {
-    return target_attacked;
+  bool victim_attacked = false;
+  bool victim_overlaps = false;
+  if (collision_check_and_handle_at(&victim_attacked, &victim_overlaps)) {
+    return victim_attacked;
   }
 
-  if (target_attacked || target_overlaps) {
+  if (victim_attacked || victim_overlaps) {
     move_finish();
     clear_move_path("Collision");
   }
-  return target_attacked;
+  return victim_attacked;
 }
 
 void Thing::tick(void)

@@ -348,7 +348,7 @@ PyObject *thing_is_steal_item_chance_d1000(PyObject *obj, PyObject *args, PyObje
 PyObject *thing_is_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_stone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sword(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_target_auto_select(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_victim_select(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_throwable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tickable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tmp_thing(PyObject *obj, PyObject *args, PyObject *keywds);
