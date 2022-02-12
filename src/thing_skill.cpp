@@ -25,7 +25,7 @@ bool Thing::skill_add(Thingp what)
     return false;
   }
 
-  auto existing_owner = what->get_immediate_owner();
+  auto existing_owner = what->immediate_owner_get();
   if (existing_owner) {
     if (existing_owner == this) {
       dbg("No; same owner");
@@ -49,8 +49,8 @@ bool Thing::skill_add(Thingp what)
     }
   }
 
-  get_itemsp()->skills.push_front(what->id);
-  what->set_owner(this);
+  itemsp_get()->skills.push_front(what->id);
+  what->owner_set(this);
   what->hide();
 
   dbg("Add skill %s", what->to_short_string().c_str());
@@ -69,13 +69,13 @@ bool Thing::skill_remove(Thingp what)
   dbg("Removing skill %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  auto existing_owner = what->get_immediate_owner();
+  auto existing_owner = what->immediate_owner_get();
   if (existing_owner != this) {
     err("Attempt to remove skill %s which is not owned", what->to_short_string().c_str());
     return false;
   }
 
-  Thingp top_owner = get_top_owner();
+  Thingp top_owner = top_owner_get();
   if (top_owner) {
     if (top_owner->is_player()) {
       top_owner->skillbox_id_remove(what);
@@ -83,7 +83,7 @@ bool Thing::skill_remove(Thingp what)
   }
 
   what->remove_owner();
-  get_itemsp()->skills.remove(what->id);
+  itemsp_get()->skills.remove(what->id);
   game->request_remake_skillbox = true;
 
   dbg("Removed %s", what->to_short_string().c_str());
@@ -97,8 +97,8 @@ void Thing::skill_remove_all(void)
     return;
   }
 
-  while (! get_itemsp()->skills.empty()) {
-    auto id = *get_itemsp()->skills.begin();
+  while (! itemsp_get()->skills.empty()) {
+    auto id = *itemsp_get()->skills.begin();
     auto t  = level->thing_find(id);
     if (unlikely(! t)) {
       return;
@@ -136,7 +136,7 @@ int Thing::skill_enchant_count(const uint32_t slot)
     return 0;
   }
 
-  auto thing_id = get(get_itemsp()->skillbox_id, slot);
+  auto thing_id = get(itemsp_get()->skillbox_id, slot);
   if (! thing_id) {
     return 0;
   }
@@ -146,7 +146,7 @@ int Thing::skill_enchant_count(const uint32_t slot)
     auto o = game->level->thing_find(oid);
     if (o) {
       if (o->id == thing_id) {
-        return o->get_enchant();
+        return o->enchant_get();
       }
     }
   }
@@ -173,7 +173,7 @@ bool Thing::skill_add(Tpp what)
   // Drop a skillstone
   //
   auto found = false;
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     if (t->is_skillstone()) {
       t->dead("used");
       found = true;
@@ -187,11 +187,11 @@ bool Thing::skill_add(Tpp what)
   return true;
 }
 
-int Thing::get_skillstone_count(void)
+int Thing::skillstone_count_get(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     if (! t->is_skillstone()) {
       continue;
     }
@@ -208,7 +208,7 @@ bool Thing::can_learn_something(void)
   //
   // Once skills are maxxed out, that's it
   //
-  if (get_itemsp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
+  if (itemsp_get()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
     return false;
   }
 

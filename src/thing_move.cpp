@@ -69,7 +69,7 @@ void Thing::move_finish(void)
   //
   // Set this so that we can pick up items again at the last location.
   //
-  set_where_i_dropped_an_item_last(point(-1, -1));
+  where_i_dropped_an_item_last_set(point(-1, -1));
 
   if (is_player()) {
     dbg("Check if anything to carry");
@@ -99,7 +99,7 @@ void Thing::move_finish(void)
     IF_DEBUG1
     {
       std::string s = "";
-      for (auto p1 : get_aip()->move_path) {
+      for (auto p1 : aip_get()->move_path) {
         s += " " + p1.to_string();
       }
       if (s.empty()) {
@@ -109,7 +109,7 @@ void Thing::move_finish(void)
       }
     }
 
-    if (! get_aip()->move_path.size() && (get_infop()->monst_state == MONST_STATE_MOVING)) {
+    if (! aip_get()->move_path.size() && (infop_get()->monst_state == MONST_STATE_MOVING)) {
       change_state(MONST_STATE_IDLE, "move finished");
     }
   }
@@ -118,7 +118,7 @@ void Thing::move_finish(void)
   // Something moved
   //
   if (curr_at != last_at) {
-    level->noisemap_in_incr(curr_at.x, curr_at.y, get_noise_total());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total_get());
     level->is_map_changed_set(curr_at.x, curr_at.y);
   }
 }
@@ -209,9 +209,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   if (is_able_to_tire()) {
-    if (get_stamina() < 5) {
+    if (stamina_get() < 5) {
       if (is_player()) {
-        if (d20roll_under(get_stat_con())) {
+        if (d20roll_under(stat_con_get())) {
           msg("You are so tired but dig deep into your reserves to move!");
         } else {
           msg("You cannot move, you are so tired!");
@@ -226,16 +226,16 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   // Don't let minions wander too far from their mob.
   //
   auto aip = maybe_aip();
-  auto mob = get_top_mob();
+  auto mob = top_mob_get();
   if (mob) {
-    if (get_distance_mob_max()) {
+    if (distance_mob_max_get()) {
       auto new_distance  = distance(future_pos, mob->curr_at);
       auto curr_distance = distance(curr_at, mob->curr_at);
       if (new_distance <= curr_distance) {
         //
         // Always allow moves that end up closer to the base
         //
-      } else if (new_distance > get_distance_mob_max() + 1) {
+      } else if (new_distance > distance_mob_max_get() + 1) {
         //
         // Too far.
         //
@@ -287,7 +287,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         continue;
       }
 
-      if (! d20roll(get_stat_str(), it->get_stat_str())) {
+      if (! d20roll(stat_str_get(), it->stat_str_get())) {
         if (is_player()) {
           msg("You are held in place and cannot move!");
         }
@@ -378,7 +378,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     if (! must_attack) {
       if (! is_undead() && ! is_ethereal()) {
         if (up || down || left || right) {
-          if (d20() > get_stat_con()) {
+          if (d20() > stat_con_get()) {
             if (pcg_random_range(0, 100) < 10) {
               if (is_able_to_tire()) {
                 stamina_decr();
@@ -395,7 +395,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Set this so that we can pick up items again at the last location.
   //
-  set_where_i_dropped_an_item_last(point(-1, -1));
+  where_i_dropped_an_item_last_set(point(-1, -1));
 
   if (is_player() && wait_or_collect) {
     game->tick_begin("player idled");
@@ -469,7 +469,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   // Bounce rings and weapons
   //
   if (gfx_bounce_on_move()) {
-    if (get_bounce() == 0) {
+    if (bounce_get() == 0) {
       bounce(0.2 /* height */, 0.1 /* fade */, 200, 3);
     }
   }
@@ -542,7 +542,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   if (is_player()) {
-    set_where_i_failed_to_collect_last(point(-1, -1));
+    where_i_failed_to_collect_last_set(point(-1, -1));
 
     if (! level->is_map_follow_player) {
       level->is_map_follow_player = true;
@@ -553,7 +553,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   // If we allow the player here to get a free attack, then it looks nuts
   // as we end up attacking without actually attacking
   //
-  auto t = get_most_dangerous_adjacent_thing();
+  auto t = most_dangerous_adjacent_thing_get();
   if (is_monst() && t && ! t->is_player()) {
     auto free_attack = (((t->curr_at.x >= curr_at.x) && left) || ((t->curr_at.x <= curr_at.x) && right) ||
                         ((t->curr_at.y >= curr_at.y) && up) || ((t->curr_at.y <= curr_at.y) && down));
@@ -587,16 +587,16 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       case THING_DIR_LEFT :
       case THING_DIR_TL :
       case THING_DIR_BL :
-        if (! is_facing_left && ! get_ts_flip_start()) {
-          set_ts_flip_start(time_get_time_ms_cached());
+        if (! is_facing_left && ! ts_flip_start_get()) {
+          ts_flip_start_set(time_get_time_ms_cached());
         }
         break;
 
       case THING_DIR_RIGHT :
       case THING_DIR_TR :
       case THING_DIR_BR :
-        if (is_facing_left && ! get_ts_flip_start()) {
-          set_ts_flip_start(time_get_time_ms_cached());
+        if (is_facing_left && ! ts_flip_start_get()) {
+          ts_flip_start_set(time_get_time_ms_cached());
         }
         break;
     }
@@ -616,7 +616,7 @@ void Thing::update_interpolated_position(void)
   auto   tpp     = tp();
   float  step    = game->tick_dt;
 
-  auto p = get_top_owner();
+  auto p = top_owner_get();
   if ((p && p->is_falling) || is_falling) {
     if (z_depth == MAP_DEPTH_LAVA) {
       //
@@ -675,10 +675,10 @@ void Thing::update_interpolated_position(void)
   //
   if (curr_at != make_point(new_pos)) {
     level_pop();
-    set_interpolated_at(new_pos);
+    interpolated_at_set(new_pos);
     level_push();
   } else {
-    set_interpolated_at(new_pos);
+    interpolated_at_set(new_pos);
   }
 
   //
@@ -811,7 +811,7 @@ void Thing::move_to_immediately(point to)
   // so we don't try to continua an AI move
   //
   if (maybe_aip()) {
-    get_aip()->move_path.clear();
+    aip_get()->move_path.clear();
   }
 }
 
@@ -853,7 +853,7 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     dbg("Move to %d,%d is ok", nh.x, nh.y);
 
     if (! escaping) {
-      if (get_terrain_cost(nh) >= DMAP_LESS_PREFERRED_TERRAIN) {
+      if (terrain_cost_get(nh) >= DMAP_LESS_PREFERRED_TERRAIN) {
         TRACE_NO_INDENT();
         dbg("But %d,%d is less preferred terrain, avoid", nh.x, nh.y);
         return false;
@@ -912,5 +912,5 @@ void Thing::clear_move_path(const std::string &why)
   }
 
   change_state(MONST_STATE_IDLE, why);
-  get_aip()->move_path.clear();
+  aip_get()->move_path.clear();
 }

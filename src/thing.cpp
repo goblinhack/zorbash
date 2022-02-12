@@ -47,95 +47,95 @@ const Tpp Thing::tp_slow(void)
 
 uint8_t Thing::z_prio(void) { return (tp()->z_prio); }
 
-std::size_t Thing::get_light_count(void)
+std::size_t Thing::light_count_get(void)
 {
   if (! maybe_infop()) {
     return 0;
   }
-  return (get_infop()->light.size());
+  return (infop_get()->light.size());
 }
 
-const ThingId &Thing::get_immediate_owner_id(void)
+const ThingId &Thing::immediate_owner_id_get(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (get_infop()->owner_id);
+  return (infop_get()->owner_id);
 }
 
-const ThingId &Thing::get_top_owner_id(void)
+const ThingId &Thing::top_owner_id_get(void)
 {
   TRACE_NO_INDENT();
-  auto t = get_top_owner();
+  auto t = top_owner_get();
   if (t) {
     return t->id;
   }
   return (NoThingId);
 }
 
-const ThingId &Thing::set_owner_id(const ThingId &v)
+const ThingId &Thing::owner_id_set(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->owner_id = v);
+  return (infop_get()->owner_id = v);
 }
 
-const ThingId &Thing::get_immediate_mob_id(void)
+const ThingId &Thing::immediate_mob_id_get(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (get_infop()->mob_id);
+  return (infop_get()->mob_id);
 }
 
-const ThingId &Thing::set_mob_id(const ThingId &v)
+const ThingId &Thing::mob_id_set(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->mob_id = v);
+  return (infop_get()->mob_id = v);
 }
 
-const ThingId &Thing::get_leader_id(void)
+const ThingId &Thing::leader_id_get(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (get_infop()->leader_id);
+  return (infop_get()->leader_id);
 }
 
-const ThingId &Thing::set_leader_id(const ThingId &v)
+const ThingId &Thing::leader_id_set(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->leader_id = v);
+  return (infop_get()->leader_id = v);
 }
 
-const ThingId &Thing::get_immediate_spawned_owner_id(void)
+const ThingId &Thing::immediate_spawned_owner_id_get(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (get_infop()->spawner_owner_id);
+  return (infop_get()->spawner_owner_id);
 }
 
-const ThingId &Thing::set_spawned_owner_id(const ThingId &v)
+const ThingId &Thing::spawned_owner_id_set(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (get_infop()->spawner_owner_id = v);
+  return (infop_get()->spawner_owner_id = v);
 }
 
-const fpoint &Thing::get_interpolated_at(void)
+const fpoint &Thing::interpolated_at_get(void)
 {
   TRACE_NO_INDENT();
   return (interpolated_at);
 }
 
-void Thing::set_interpolated_at(fpoint v)
+void Thing::interpolated_at_set(fpoint v)
 {
   TRACE_NO_INDENT();
   interpolated_at = v;

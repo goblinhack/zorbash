@@ -61,7 +61,7 @@ bool Thing::enchant_with_stone(Thingp what)
   // Drop an enchantstone
   //
   auto found = false;
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     if (t->is_enchantstone()) {
       t->dead("used");
       found = true;
@@ -101,19 +101,19 @@ void Thing::enchant_randomly(void)
 
   enchant_incr(1);
   while (pcg_random_range(0, 100) < 20 + level->num() * 2) {
-    if (get_enchant() >= get_enchant_max()) {
+    if (enchant_get() >= enchant_max_get()) {
       break;
     }
     enchant_incr(1);
   }
 }
 
-int Thing::get_enchantstone_count(void)
+int Thing::enchantstone_count_get(void)
 {
   TRACE_NO_INDENT();
 
   int v = 0;
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     if (! t->is_enchantstone()) {
       continue;
     }
@@ -126,7 +126,7 @@ int Thing::get_enchantstone_count(void)
 bool Thing::can_enchant_something(void)
 {
   TRACE_NO_INDENT();
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     if (t->is_enchantable()) {
       dbg("Found something we can enchant: %s", t->to_string().c_str());
       return true;
@@ -139,7 +139,7 @@ bool Thing::enchant_random_item_with_stone(void)
 {
   TRACE_NO_INDENT();
   std::vector< Thingp > cands;
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     if (! t->is_enchantable()) {
       continue;
     }

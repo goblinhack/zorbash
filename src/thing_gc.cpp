@@ -20,7 +20,7 @@ void Thing::gc(void)
 
   TRACE_NO_INDENT();
 
-  int  group  = get_group();
+  int  group  = group_get();
   auto result = level->all_things_to_be_destroyed[ group ].insert(std::pair(id, this));
   if (result.second == false) {
     //

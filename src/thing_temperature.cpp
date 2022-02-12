@@ -39,11 +39,11 @@ void Thing::temperature_tick(void)
       continue;
     }
 
-    location_t += t->get_temperature();
+    location_t += t->temperature_get();
   }
   FOR_ALL_THINGS_END()
 
-  auto t = get_temperature();
+  auto t = temperature_get();
   if (! location_t && ! t) {
     return;
   }
@@ -53,7 +53,7 @@ void Thing::temperature_tick(void)
 
   temperature_incr(location_t);
 
-  t = get_temperature();
+  t = temperature_get();
   if (! t) {
     return;
   }
@@ -62,11 +62,11 @@ void Thing::temperature_tick(void)
   temperature_set(t);
 }
 
-int Thing::get_temperature(void)
+int Thing::temperature_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->temperature);
+    return (infop_get()->temperature);
   } else {
     return 0;
   }
@@ -79,7 +79,7 @@ int Thing::temperature_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->temperature = v);
+  auto n = (infop_get()->temperature = v);
   return (n);
 }
 
@@ -90,7 +90,7 @@ int Thing::temperature_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->temperature -= v);
+  auto n = (infop_get()->temperature -= v);
   return (n);
 }
 
@@ -105,7 +105,7 @@ int Thing::temperature_incr(int v)
   log("Increment temp %d", v);
   TRACE_AND_INDENT();
 
-  auto T   = get_temperature();
+  auto T   = temperature_get();
   bool hit = false;
 
   if (temperature_change_sensitive()) {
@@ -158,7 +158,7 @@ int Thing::temperature_incr(int v)
     }
   }
 
-  if (game->tick_current != get_tick_last_i_was_attacked()) {
+  if (game->tick_current != tick_last_i_was_attacked_get()) {
     if (! hit) {
       if (v < -100) {
         if (is_alive_monst()) {
@@ -215,14 +215,14 @@ int Thing::temperature_incr(int v)
   }
 
   new_infop();
-  auto n = (get_infop()->temperature += v);
+  auto n = (infop_get()->temperature += v);
 
   if (n > 1000) {
     n                        = 1000;
-    get_infop()->temperature = v;
+    infop_get()->temperature = v;
   } else if (n < -1000) {
     n                        = -1000;
-    get_infop()->temperature = v;
+    infop_get()->temperature = v;
   }
 
   return (n);
@@ -235,7 +235,7 @@ int Thing::temperature_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->temperature--);
+  auto n = (infop_get()->temperature--);
   return (n);
 }
 
@@ -246,6 +246,6 @@ int Thing::temperature_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->temperature++);
+  auto n = (infop_get()->temperature++);
   return (n);
 }

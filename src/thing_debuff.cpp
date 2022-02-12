@@ -22,7 +22,7 @@ bool Thing::debuff_add(Thingp what)
     return false;
   }
 
-  auto existing_owner = what->get_immediate_owner();
+  auto existing_owner = what->immediate_owner_get();
   if (existing_owner) {
     if (existing_owner == this) {
       dbg("No; same owner");
@@ -46,8 +46,8 @@ bool Thing::debuff_add(Thingp what)
     }
   }
 
-  get_itemsp()->debuffs.push_front(what->id);
-  what->set_owner(this);
+  itemsp_get()->debuffs.push_front(what->id);
+  what->owner_set(this);
   what->hide();
 
   dbg("Add debuff %s", what->to_short_string().c_str());
@@ -64,7 +64,7 @@ bool Thing::debuff_remove(Thingp what)
   dbg("Removing debuff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  auto existing_owner = what->get_immediate_owner();
+  auto existing_owner = what->immediate_owner_get();
   if (existing_owner != this) {
     err("Attempt to remove debuff %s which is not owned", what->to_short_string().c_str());
     return false;
@@ -75,7 +75,7 @@ bool Thing::debuff_remove(Thingp what)
   }
 
   what->remove_owner();
-  get_itemsp()->debuffs.remove(what->id);
+  itemsp_get()->debuffs.remove(what->id);
   game->request_remake_debuffbox = true;
 
   dbg("Removed %s", what->to_short_string().c_str());
@@ -89,8 +89,8 @@ void Thing::debuff_remove_all(void)
     return;
   }
 
-  while (! get_itemsp()->debuffs.empty()) {
-    auto id = *get_itemsp()->debuffs.begin();
+  while (! itemsp_get()->debuffs.empty()) {
+    auto id = *itemsp_get()->debuffs.begin();
     auto t  = level->thing_find(id);
     if (unlikely(! t)) {
       return;
@@ -136,8 +136,8 @@ bool Thing::debuff_add_if_not_found(Tpp what)
     return false;
   }
 
-  while (! get_itemsp()->debuffs.empty()) {
-    auto id = *get_itemsp()->debuffs.begin();
+  while (! itemsp_get()->debuffs.empty()) {
+    auto id = *itemsp_get()->debuffs.begin();
     auto t  = level->thing_find(id);
     if (t) {
       if (t->tp() == what) {
@@ -183,7 +183,7 @@ void Thing::debuff_tick(void)
   if (! maybe_itemsp()) {
     return;
   }
-  if (get_itemsp()->debuffs.empty()) {
+  if (itemsp_get()->debuffs.empty()) {
     return;
   }
 

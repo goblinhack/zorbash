@@ -544,7 +544,7 @@ void wid_inventory_select_requested(Thingp selected)
   game->request_inventory_thing_selected_do = true;
 
   if (selected) {
-    auto owner = selected->get_immediate_owner();
+    auto owner = selected->immediate_owner_get();
 
     if (selected->is_bag_item_container()) {
       wid_inventory_fini();
@@ -660,7 +660,7 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
     return;
   }
 
-  auto t = player->get_equip(equip);
+  auto t = player->equip_get(equip);
   if (t) {
     t->log("Set as equip");
     wid_set_thing_id_context(w, t->id);
@@ -779,7 +779,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   //
   Thingp bag = nullptr;
   {
-    for (const auto t : player->get_item_vector()) {
+    for (const auto t : player->item_vector_get()) {
       if (t->is_bag()) {
         bag = t;
         break;
@@ -819,8 +819,8 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     for (auto slot = 0; slot < (int) UI_INVENTORY_QUICK_ITEMS_MAX; slot++) {
       Thingp t = nullptr;
 
-      if (slot < (int) player->get_itemsp()->inventory_shortcuts.size()) {
-        auto thing_id = get(player->get_itemsp()->inventory_shortcuts, slot);
+      if (slot < (int) player->itemsp_get()->inventory_shortcuts.size()) {
+        auto thing_id = get(player->itemsp_get()->inventory_shortcuts, slot);
         if (thing_id.ok()) {
           t = level->thing_find(thing_id);
         }

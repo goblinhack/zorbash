@@ -233,7 +233,7 @@ void Thing::level_pop(void)
     i_set_water = false;
     level->gfx_water_unset(mx, my);
   }
-  int group = get_group();
+  int group = group_get();
   level->remove_thing(last_attached.x, last_attached.y, id, group);
 
   if (is_lava() || is_fire()) {

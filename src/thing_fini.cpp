@@ -29,10 +29,10 @@ void Thing::destroy(void)
   verify(MTYPE_THING, this);
 
   if (is_loggable()) {
-    auto immediate_owner = get_immediate_owner();
+    auto immediate_owner = immediate_owner_get();
     dbg2("Destroy");
     if (immediate_owner) {
-      auto top_owner = get_top_owner();
+      auto top_owner = top_owner_get();
       if (top_owner) {
         dbg2("Is being destroyed, has top owner: %s", top_owner->to_string().c_str());
       }

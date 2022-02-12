@@ -10,17 +10,17 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-Thingp Thing::get_top_spawned_owner(void)
+Thingp Thing::top_spawned_owner_get(void)
 {
   TRACE_NO_INDENT();
-  auto id = get_immediate_spawned_owner_id();
+  auto id = immediate_spawned_owner_id_get();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
       return nullptr;
     }
-    if (unlikely(i->get_immediate_spawned_owner_id().ok())) {
-      return i->get_immediate_spawned_owner();
+    if (unlikely(i->immediate_spawned_owner_id_get().ok())) {
+      return i->immediate_spawned_owner_get();
     }
     return i;
   } else {
@@ -28,10 +28,10 @@ Thingp Thing::get_top_spawned_owner(void)
   }
 }
 
-Thingp Thing::get_immediate_spawned_owner(void)
+Thingp Thing::immediate_spawned_owner_get(void)
 {
   TRACE_NO_INDENT();
-  auto id = get_immediate_spawned_owner_id();
+  auto id = immediate_spawned_owner_id_get();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
@@ -43,14 +43,14 @@ Thingp Thing::get_immediate_spawned_owner(void)
   }
 }
 
-void Thing::set_spawned_owner(Thingp spawner_owner)
+void Thing::spawned_owner_set(Thingp spawner_owner)
 {
   TRACE_NO_INDENT();
   if (spawner_owner) {
     verify(MTYPE_THING, spawner_owner);
   }
 
-  auto old_spawner_owner = get_immediate_spawned_owner();
+  auto old_spawner_owner = immediate_spawned_owner_get();
   if (old_spawner_owner) {
     if (old_spawner_owner == spawner_owner) {
       return;
@@ -69,10 +69,10 @@ void Thing::set_spawned_owner(Thingp spawner_owner)
   }
 
   if (spawner_owner) {
-    set_spawned_owner_id(spawner_owner->id);
+    spawned_owner_id_set(spawner_owner->id);
     spawner_owner->spawned_count_incr();
   } else {
-    set_spawned_owner_id(NoThingId);
+    spawned_owner_id_set(NoThingId);
     if (old_spawner_owner) {
       old_spawner_owner->spawned_count_decr();
     }
@@ -82,7 +82,7 @@ void Thing::set_spawned_owner(Thingp spawner_owner)
 void Thing::remove_spawner_owner(void)
 {
   TRACE_NO_INDENT();
-  auto old_spawner_owner = get_immediate_spawned_owner();
+  auto old_spawner_owner = immediate_spawned_owner_get();
   if (! old_spawner_owner) {
     err("No spawner owner");
     return;
@@ -90,7 +90,7 @@ void Thing::remove_spawner_owner(void)
 
   dbg("Remove spawner owner %s", old_spawner_owner->to_string().c_str());
 
-  set_spawned_owner_id(NoThingId);
+  spawned_owner_id_set(NoThingId);
   old_spawner_owner->spawned_count_decr();
 }
 
@@ -109,7 +109,7 @@ void Thing::destroy_spawned(Thingp defeater)
     return;
   }
 
-  if (! get_spawned_count()) {
+  if (! spawned_count_get()) {
     return;
   }
 
@@ -120,7 +120,7 @@ void Thing::destroy_spawned(Thingp defeater)
   {
     for (auto p : level->all_things[ group ]) {
       auto spawner = p.second;
-      auto o       = spawner->get_immediate_spawned_owner();
+      auto o       = spawner->immediate_spawned_owner_get();
       if (o && (o == this)) {
         spawner->remove_spawner_owner();
         spawner->dead(defeater, "its spawner died");
@@ -136,7 +136,7 @@ void Thing::unleash_spawners_things(void)
     return;
   }
 
-  if (! get_spawned_count()) {
+  if (! spawned_count_get()) {
     return;
   }
 
@@ -147,7 +147,7 @@ void Thing::unleash_spawners_things(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto spawner = p.second;
-      auto o       = spawner->get_immediate_spawned_owner();
+      auto o       = spawner->immediate_spawned_owner_get();
       if (o && (o == this)) {
         spawner->remove_spawner_owner();
       }

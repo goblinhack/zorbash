@@ -129,11 +129,11 @@ int Level::get_total_monst_hp_level(void)
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
     if (t->is_monst()) {
-      hp += t->get_health_initial();
+      hp += t->health_initial_get();
     }
 
     if (t->is_mob()) {
-      hp += t->get_health_initial() * t->minion_limit();
+      hp += t->health_initial_get() * t->minion_limit();
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
@@ -146,20 +146,20 @@ int Level::get_total_monst_damage_level(void)
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
     if (t->is_mob() || t->is_monst()) {
-      damage += t->get_damage_melee_dice().max_roll();
-      damage += t->get_damage_poison_dice().max_roll();
-      damage += t->get_damage_future1_dice().max_roll();
-      damage += t->get_damage_future2_dice().max_roll();
-      damage += t->get_damage_future3_dice().max_roll();
-      damage += t->get_damage_cold_dice().max_roll();
-      damage += t->get_damage_fire_dice().max_roll();
-      damage += t->get_damage_crush_dice().max_roll();
-      damage += t->get_damage_lightning_dice().max_roll();
-      damage += t->get_damage_energy_dice().max_roll();
-      damage += t->get_damage_acid_dice().max_roll();
-      damage += t->get_damage_digest_dice().max_roll();
-      damage += t->get_damage_digest_dice().max_roll();
-      damage += t->get_damage_natural_dice().max_roll();
+      damage += t->damage_melee_dice_get().max_roll();
+      damage += t->damage_poison_dice_get().max_roll();
+      damage += t->damage_future1_dice_get().max_roll();
+      damage += t->damage_future2_dice_get().max_roll();
+      damage += t->damage_future3_dice_get().max_roll();
+      damage += t->damage_cold_dice_get().max_roll();
+      damage += t->damage_fire_dice_get().max_roll();
+      damage += t->damage_crush_dice_get().max_roll();
+      damage += t->damage_lightning_dice_get().max_roll();
+      damage += t->damage_energy_dice_get().max_roll();
+      damage += t->damage_acid_dice_get().max_roll();
+      damage += t->damage_digest_dice_get().max_roll();
+      damage += t->damage_digest_dice_get().max_roll();
+      damage += t->damage_natural_dice_get().max_roll();
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
@@ -172,7 +172,7 @@ int Level::get_total_loot_level(void)
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
     if (t->is_treasure() || t->is_weapon() || t->is_wand()) {
-      value += t->get_gold_value();
+      value += t->gold_value_get();
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
@@ -185,7 +185,7 @@ int Level::get_total_food_level(void)
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
     if (t->is_food()) {
-      value += t->get_nutrition();
+      value += t->nutrition_get();
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)

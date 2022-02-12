@@ -16,13 +16,13 @@ int Thing::item_count_including_charges(Tpp tp)
 {
   TRACE_NO_INDENT();
   auto count = 0;
-  for (const auto o : get_item_vector()) {
+  for (const auto o : item_vector_get()) {
     if (o->tp() == tp) {
       if (o->is_bag_item_not_stackable()) {
         count = 1;
       } else {
-        if (o->get_charge_count()) {
-          count += o->get_charge_count();
+        if (o->charge_count_get()) {
+          count += o->charge_count_get();
         } else {
           count++;
         }
@@ -37,7 +37,7 @@ int Thing::item_count_excluding_charges(Tpp tp)
 {
   TRACE_NO_INDENT();
   auto count = 0;
-  for (const auto o : get_item_vector()) {
+  for (const auto o : item_vector_get()) {
     if (o->tp() == tp) {
       if (o->is_bag_item_not_stackable()) {
         count = 1;
@@ -63,16 +63,16 @@ void Thing::move_carried_items(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (get_equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_carry_anim(e));
+    if (equip_id_carry_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim_get(e));
       if (w) {
         w->move_to(curr_at);
         w->dir = dir;
       }
     }
 
-    if (get_equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_use_anim(e));
+    if (equip_id_use_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim_get(e));
       if (w) {
         w->move_to(curr_at);
         w->dir = dir;
@@ -85,7 +85,7 @@ void Thing::move_carried_items(void)
   // carried sword and so it had better be in the same location.
   //
   if (maybe_itemsp()) {
-    for (const auto o : get_item_vector()) {
+    for (const auto o : item_vector_get()) {
       o->move_to(curr_at);
       o->dir = dir;
     }
@@ -121,7 +121,7 @@ void Thing::move_carried_items(void)
     }
   }
 
-  auto on_fire_anim_id = get_on_fire_anim_id();
+  auto on_fire_anim_id = on_fire_anim_id_get();
   if (on_fire_anim_id.ok()) {
     TRACE_NO_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
@@ -145,16 +145,16 @@ void Thing::move_carried_items_immediately(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (get_equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_carry_anim(e));
+    if (equip_id_carry_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim_get(e));
       if (w) {
         w->move_to_immediately(curr_at);
         w->dir = dir;
       }
     }
 
-    if (get_equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_use_anim(e));
+    if (equip_id_use_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim_get(e));
       if (w) {
         w->move_to_immediately(curr_at);
         w->dir = dir;
@@ -167,13 +167,13 @@ void Thing::move_carried_items_immediately(void)
   // carried sword and so it had better be in the same location.
   //
   if (maybe_itemsp()) {
-    for (const auto o : get_item_vector()) {
+    for (const auto o : item_vector_get()) {
       o->move_to_immediately(curr_at);
       o->dir = dir;
     }
   }
 
-  auto on_fire_anim_id = get_on_fire_anim_id();
+  auto on_fire_anim_id = on_fire_anim_id_get();
   if (on_fire_anim_id.ok()) {
     TRACE_NO_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
@@ -191,11 +191,11 @@ bool Thing::is_carrying_item(void)
     return false;
   }
 
-  if (get_itemsp()->carrying.size()) {
+  if (itemsp_get()->carrying.size()) {
     return true;
   }
 
-  auto owner = get_top_owner();
+  auto owner = top_owner_get();
   if (owner) {
     return owner->is_carrying_item();
   }

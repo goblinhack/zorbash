@@ -15,30 +15,30 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-const Dice &Thing::get_damage_digest_dice(void)
+const Dice &Thing::damage_digest_dice_get(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->get_damage_digest_dice());
+  return (tp()->damage_digest_dice_get());
 }
 
 const std::string Thing::damage_digest_dice_str_get(void)
 {
   TRACE_NO_INDENT();
 
-  if (get_enchant()) {
-    return tp()->damage_digest_dice_str_get() + modifier_to_string(get_enchant());
+  if (enchant_get()) {
+    return tp()->damage_digest_dice_str_get() + modifier_to_string(enchant_get());
   }
 
   return (tp()->damage_digest_dice_str_get());
 }
 
-int Thing::get_damage_digest(void)
+int Thing::damage_digest_get(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->get_damage_digest_dice().roll();
+  auto roll = tp()->damage_digest_dice_get().roll();
 
   if (roll) {
-    return roll + get_enchant();
+    return roll + enchant_get();
   }
   return roll;
 }

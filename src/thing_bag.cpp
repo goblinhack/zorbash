@@ -20,7 +20,7 @@ static bool                  log_quiet;
 
 bool Thing::bag_contains(Thingp item)
 {
-  auto bag = get_bag();
+  auto bag = bag_get();
   auto bw  = capacity_width();
   auto bh  = capacity_height();
   auto w   = item->item_width();
@@ -50,7 +50,7 @@ bool Thing::bag_add(Thingp item)
   //
   // Only players can compress bag contents. Monst just carry everything
   //
-  auto top_owner = get_top_owner();
+  auto top_owner = top_owner_get();
   if (top_owner && ! top_owner->is_player()) {
     return false;
   }
@@ -73,11 +73,11 @@ bool Thing::bag_add(Thingp item)
   //
   item->new_itemsp();
 
-  if (item->get_itemsp()->preferred_bag_position != point(-1, -1)) {
+  if (item->itemsp_get()->preferred_bag_position != point(-1, -1)) {
     if (! log_quiet) {
       dbg3("Bag: Add %s at preferred position", item->to_short_string().c_str());
     }
-    auto at = item->get_itemsp()->preferred_bag_position;
+    auto at = item->itemsp_get()->preferred_bag_position;
     if (bag_can_place_at(item, at)) {
       if (bag_place_at(item, at)) {
         while (bag_compress()) {
@@ -167,11 +167,11 @@ bool Thing::bag_add_test(Thingp item)
   //
   item->new_itemsp();
 
-  if (item->get_itemsp()->preferred_bag_position != point(-1, -1)) {
+  if (item->itemsp_get()->preferred_bag_position != point(-1, -1)) {
     if (! log_quiet) {
       dbg3("Bag: Add test %s at preferred position", item->to_short_string().c_str());
     }
-    auto at = item->get_itemsp()->preferred_bag_position;
+    auto at = item->itemsp_get()->preferred_bag_position;
     if (bag_can_place_at(item, at)) {
       return true;
     }
@@ -224,7 +224,7 @@ bool Thing::bag_add_test(Thingp item)
 bool Thing::bag_compress(void)
 {
   TRACE_NO_INDENT();
-  auto bag           = get_bag();
+  auto bag           = bag_get();
   auto bw            = capacity_width();
   auto bh            = capacity_height();
   auto did_something = false;
@@ -232,7 +232,7 @@ bool Thing::bag_compress(void)
   //
   // Only players can compress bag contents. Monst just carry everything
   //
-  auto top_owner = get_top_owner();
+  auto top_owner = top_owner_get();
   if (top_owner && ! top_owner->is_player()) {
     return false;
   } else if (! is_player()) {
@@ -254,15 +254,15 @@ bool Thing::bag_compress(void)
         continue;
       }
 
-      if (bag_remove_at(t, t->get_itemsp()->bag_position)) {
-        if (bag_can_place_at(t, t->get_itemsp()->bag_position + point(0, 1))) {
-          if (bag_place_at(t, t->get_itemsp()->bag_position + point(0, 1))) {
+      if (bag_remove_at(t, t->itemsp_get()->bag_position)) {
+        if (bag_can_place_at(t, t->itemsp_get()->bag_position + point(0, 1))) {
+          if (bag_place_at(t, t->itemsp_get()->bag_position + point(0, 1))) {
             did_something = true;
           } else {
-            bag_place_at(t, t->get_itemsp()->bag_position);
+            bag_place_at(t, t->itemsp_get()->bag_position);
           }
         } else {
-          bag_place_at(t, t->get_itemsp()->bag_position);
+          bag_place_at(t, t->itemsp_get()->bag_position);
         }
       }
     }
@@ -292,7 +292,7 @@ bool Thing::bag_remove_at(Thingp item, point pos)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, item);
 
-  auto bag    = get_bag();
+  auto bag    = bag_get();
   auto w      = item->item_width();
   auto h      = item->item_height();
   bool logged = false;
@@ -340,7 +340,7 @@ bool Thing::bag_can_place_at(Thingp item, point pos)
 
   verify(MTYPE_THING, item);
 
-  auto bag = get_stat_const_bag();
+  auto bag = stat_const_bag_get();
   auto bw  = capacity_width();
   auto bh  = capacity_height();
   auto w   = item->item_width();
@@ -457,7 +457,7 @@ bool Thing::bag_can_place_anywhere(Thingp item, point &pos)
 bool Thing::bag_place_at(Thingp item, point pos)
 {
   TRACE_NO_INDENT();
-  auto bag = get_bag();
+  auto bag = bag_get();
   auto bw  = capacity_width();
   auto bh  = capacity_height();
   auto w   = item->item_width();
@@ -481,8 +481,8 @@ bool Thing::bag_place_at(Thingp item, point pos)
       set(bag, x, y, item->id);
     }
   }
-  item->get_itemsp()->bag_position      = pos;
-  item->get_itemsp()->last_bag_position = pos;
+  item->itemsp_get()->bag_position      = pos;
+  item->itemsp_get()->last_bag_position = pos;
 
   if (0) {
     LOG("Bag contents after add:");
@@ -519,7 +519,7 @@ bool Thing::bag_remove(Thingp item)
   }
 
   bool found = false;
-  auto bag   = get_bag();
+  auto bag   = bag_get();
 
   //
   // Watch out here as lasers can have owners and do not live in bags.
@@ -591,7 +591,7 @@ bool Thing::bag_remove(Thingp item)
   }
 
   if (found) {
-    item->get_itemsp()->bag_position = point(-1, -1);
+    item->itemsp_get()->bag_position = point(-1, -1);
   }
 
   return found;

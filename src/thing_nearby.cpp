@@ -14,7 +14,7 @@
 #include <algorithm>
 #include <set>
 
-Thingp Thing::get_most_dangerous_adjacent_thing(void)
+Thingp Thing::most_dangerous_adjacent_thing_get(void)
 {
   std::vector< std::pair< Thingp, int > > possible;
 
@@ -32,7 +32,7 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
       continue;
     }
 
-    if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
+    if (! get(aip_get()->can_see_currently.can_see, o.x, o.y)) {
       continue;
     }
 
@@ -62,12 +62,12 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
         continue;
       }
 
-      auto score = it->get_health();
+      auto score = it->health_get();
       if (! will_avoid_monst(point(x, y))) {
         continue;
       }
 
-      score += it->get_health_max();
+      score += it->health_max_get();
       possible.push_back(std::make_pair(it, score));
     }
     FOR_ALL_THINGS_END()
@@ -85,11 +85,11 @@ Thingp Thing::get_most_dangerous_adjacent_thing(void)
   return possible[ 0 ].first;
 }
 
-Thingp Thing::get_most_dangerous_visible_thing(void)
+Thingp Thing::most_dangerous_visible_thing_get(void)
 {
   std::vector< std::pair< Thingp, int > > possible;
 
-  float d = get_distance_vision();
+  float d = distance_vision_get();
 
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
@@ -98,7 +98,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
         continue;
       }
 
-      if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
+      if (! get(aip_get()->can_see_currently.can_see, o.x, o.y)) {
         continue;
       }
 
@@ -116,7 +116,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
           continue;
         }
 
-        auto score = t->get_health();
+        auto score = t->health_get();
 
         //
         // If we're being engulfed, this is a serious threat!
@@ -129,7 +129,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
           continue;
         }
 
-        score += t->get_health_max();
+        score += t->health_max_get();
         possible.push_back(std::make_pair(t, score));
         dbg("Potential danger: %s", t->to_string().c_str());
       }
@@ -151,7 +151,7 @@ Thingp Thing::get_most_dangerous_visible_thing(void)
 
 bool Thing::any_unfriendly_monst_visible(void)
 {
-  float d = get_distance_vision();
+  float d = distance_vision_get();
 
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
@@ -164,7 +164,7 @@ bool Thing::any_unfriendly_monst_visible(void)
         continue;
       }
 
-      if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
+      if (! get(aip_get()->can_see_currently.can_see, o.x, o.y)) {
         continue;
       }
 
@@ -208,7 +208,7 @@ bool Thing::any_adjacent_monst(void)
       continue;
     }
 
-    if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
+    if (! get(aip_get()->can_see_currently.can_see, o.x, o.y)) {
       continue;
     }
 
@@ -232,11 +232,11 @@ bool Thing::any_adjacent_monst(void)
   return false;
 }
 
-Thingp Thing::get_best_visible_target(void)
+Thingp Thing::best_visible_target_get(void)
 {
   std::vector< std::pair< Thingp, int > > possible;
 
-  float d = get_distance_vision();
+  float d = distance_vision_get();
 
   for (auto dx = -d; dx <= d; dx++) {
     for (auto dy = -d; dy <= d; dy++) {
@@ -245,7 +245,7 @@ Thingp Thing::get_best_visible_target(void)
         continue;
       }
 
-      if (! get(get_aip()->can_see_currently.can_see, o.x, o.y)) {
+      if (! get(aip_get()->can_see_currently.can_see, o.x, o.y)) {
         continue;
       }
 
@@ -274,9 +274,9 @@ Thingp Thing::get_best_visible_target(void)
           continue;
         }
 
-        auto score = t->get_health();
+        auto score = t->health_get();
 
-        if (distance(t->curr_at, curr_at) < get_distance_avoid()) {
+        if (distance(t->curr_at, curr_at) < distance_avoid_get()) {
           score += 100;
         }
 
@@ -291,7 +291,7 @@ Thingp Thing::get_best_visible_target(void)
           score += 100;
         }
 
-        score += t->get_health_max();
+        score += t->health_max_get();
         possible.push_back(std::make_pair(t, score));
         dbg("Potential target: %s", t->to_string().c_str());
       }

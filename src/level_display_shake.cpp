@@ -12,7 +12,7 @@
 
 float Level::update_wobble(void)
 {
-  auto w = get_wobble();
+  auto w = wobble_get();
   if (w == 0.0) {
     return 0.0;
   }
@@ -29,7 +29,7 @@ float Level::update_wobble(void)
   return (w);
 }
 
-float Level::get_wobble(void) const
+float Level::wobble_get(void) const
 {
   TRACE_AND_INDENT();
   return (wobble);

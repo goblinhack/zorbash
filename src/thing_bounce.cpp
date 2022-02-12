@@ -13,16 +13,16 @@
 
 void Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count)
 {
-  auto t = set_ts_bounce_begin(time_get_time_ms_cached());
-  set_ts_bounce_end(t + ms);
+  auto t = ts_bounce_begin_set(time_get_time_ms_cached());
+  ts_bounce_end_set(t + ms);
 
-  set_bounce_height(bounce_height);
-  set_bounce_fade(bounce_fade);
-  set_bounce_count(bounce_count);
+  bounce_height_set(bounce_height);
+  bounce_fade_set(bounce_fade);
+  bounce_count_set(bounce_count);
   is_bouncing = true;
 }
 
-float Thing::get_bounce(void)
+float Thing::bounce_get(void)
 {
   if (! is_bouncing) {
     return (0.0);
@@ -30,29 +30,29 @@ float Thing::get_bounce(void)
 
   auto t = time_get_time_ms_cached();
 
-  if (t >= get_ts_bounce_end()) {
+  if (t >= ts_bounce_end_get()) {
     is_bouncing = false;
 
-    if (get_bounce_count() == 255) {
+    if (bounce_count_get() == 255) {
       //
       // Bounce forever
       //
-      bounce(get_bounce_height() * get_bounce_fade(), get_bounce_fade(),
-             (float) (get_ts_bounce_end() - get_ts_bounce_begin()) * get_bounce_fade(), get_bounce_count());
-    } else if (get_bounce_count()) {
-      bounce(get_bounce_height() * get_bounce_fade(), get_bounce_fade(),
-             (float) (get_ts_bounce_end() - get_ts_bounce_begin()) * get_bounce_fade(), get_bounce_count() - 1);
+      bounce(bounce_height_get() * bounce_fade_get(), bounce_fade_get(),
+             (float) (ts_bounce_end_get() - ts_bounce_begin_get()) * bounce_fade_get(), bounce_count_get());
+    } else if (bounce_count_get()) {
+      bounce(bounce_height_get() * bounce_fade_get(), bounce_fade_get(),
+             (float) (ts_bounce_end_get() - ts_bounce_begin_get()) * bounce_fade_get(), bounce_count_get() - 1);
     }
 
     return 0;
   }
 
-  float time_step = (float) (t - get_ts_bounce_begin()) / (float) (get_ts_bounce_end() - get_ts_bounce_begin());
+  float time_step = (float) (t - ts_bounce_begin_get()) / (float) (ts_bounce_end_get() - ts_bounce_begin_get());
 
   float height = 1.0;
 
   height *= sin(time_step * RAD_180);
-  height *= get_bounce_height();
+  height *= bounce_height_get();
 
   return (height);
 }

@@ -16,26 +16,26 @@ void Thing::lunge(point to)
 
   move_finish();
 
-  auto t = set_ts_lunge_begin(time_get_time_ms_cached());
+  auto t = ts_lunge_begin_set(time_get_time_ms_cached());
   auto p = to - curr_at;
-  set_ts_lunge_end(t + 200);
-  set_lunge_to(to);
+  ts_lunge_end_set(t + 200);
+  lunge_to_set(to);
   move_set_dir_from_delta(p);
 }
 
-float Thing::get_lunge(void)
+float Thing::lunge_get(void)
 {
-  if (! get_ts_lunge_begin()) {
+  if (! ts_lunge_begin_get()) {
     return 0;
   }
 
   auto t = time_get_time_ms_cached();
 
-  if (t >= get_ts_lunge_end()) {
+  if (t >= ts_lunge_end_get()) {
     return 0;
   }
 
-  float time_step = (float) (t - get_ts_lunge_begin()) / (float) (get_ts_lunge_end() - get_ts_lunge_begin());
+  float time_step = (float) (t - ts_lunge_begin_get()) / (float) (ts_lunge_end_get() - ts_lunge_begin_get());
 
   if (time_step > 0.5) {
     return (1.0 - time_step);

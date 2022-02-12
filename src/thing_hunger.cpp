@@ -15,30 +15,30 @@ void Thing::hunger_clock_tick(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_dead || ! get_hunger_clock_tick_frequency()) {
+  if (is_dead || ! hunger_clock_tick_frequency_get()) {
     return;
   }
 
   //
   // Hunger clock fires rarely
   //
-  if (game->tick_current % get_hunger_clock_tick_frequency()) {
+  if (game->tick_current % hunger_clock_tick_frequency_get()) {
     return;
   }
 
   //
   // Hunger only ticks on con fail
   //
-  if (d20roll_under(get_stat_con())) {
+  if (d20roll_under(stat_con_get())) {
     return;
   }
 
   dbg("Hunger tick");
   TRACE_AND_INDENT();
 
-  if (get_health() > 1) {
+  if (health_get() > 1) {
     health_decr();
-    if (get_health() == 1) {
+    if (health_get() == 1) {
       if (is_player()) {
         msg("You are starving!");
       }
@@ -56,7 +56,7 @@ void Thing::hunger_update(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_dead || ! get_hunger_clock_tick_frequency()) {
+  if (is_dead || ! hunger_clock_tick_frequency_get()) {
     return;
   }
 
@@ -65,15 +65,15 @@ void Thing::hunger_update(void)
 
   auto tpp = tp();
 
-  int hungry_at = (int) ((double) get_health_max() * ((double) tpp->hunger_health_pct() / 100.0));
+  int hungry_at = (int) ((double) health_max_get() * ((double) tpp->hunger_health_pct() / 100.0));
 
   auto old_is_hungry = is_hungry;
-  is_hungry          = get_health() <= hungry_at;
+  is_hungry          = health_get() <= hungry_at;
 
-  int starving_at = (int) ((double) get_health_max() * ((double) tpp->health_starving_pct() / 100.0));
+  int starving_at = (int) ((double) health_max_get() * ((double) tpp->health_starving_pct() / 100.0));
 
   auto old_is_starving = is_starving;
-  is_starving          = get_health() <= starving_at;
+  is_starving          = health_get() <= starving_at;
 
   if (old_is_starving != is_starving) {
     if (is_starving) {

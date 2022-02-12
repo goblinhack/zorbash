@@ -12,18 +12,18 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-int Thing::get_torch_count(void)
+int Thing::torch_count_get(void)
 {
   TRACE_NO_INDENT();
   int torch_count = 0;
 
-  for (const auto o : get_item_vector()) {
+  for (const auto o : item_vector_get()) {
     if (! o->is_torch()) {
       continue;
     }
 
-    if (o->get_charge_count()) {
-      torch_count += o->get_charge_count();
+    if (o->charge_count_get()) {
+      torch_count += o->charge_count_get();
     } else {
       torch_count++;
     }
@@ -32,7 +32,7 @@ int Thing::get_torch_count(void)
   return torch_count;
 }
 
-void Thing::get_light_power_including_torch_effect(uint8_t &out_light_power)
+void Thing::light_power_including_torch_effect_get(uint8_t &out_light_power)
 {
   TRACE_NO_INDENT();
 
@@ -41,13 +41,13 @@ void Thing::get_light_power_including_torch_effect(uint8_t &out_light_power)
     torch = tp_find("torch");
   }
 
-  int light_power = get_initial_light_power();
+  int light_power = initial_light_power_get();
 
   if (is_player()) {
     light_power = 0;
   }
 
-  int torch_count = get_torch_count();
+  int torch_count = torch_count_get();
   light_power += torch->light_power() * torch_count;
 
   auto max_distance = tp()->distance_vision();
@@ -73,9 +73,9 @@ void Thing::update_light_power_including_torch_effect(uint8_t &out_light_power)
   TRACE_NO_INDENT();
   uint8_t light_power;
 
-  get_light_power_including_torch_effect(light_power);
+  light_power_including_torch_effect_get(light_power);
 
-  auto prev = get_prev_light_power();
+  auto prev = prev_light_power_get();
   if (prev) {
     if (light_power != prev) {
       if (light_power <= 1) {

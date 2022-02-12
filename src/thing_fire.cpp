@@ -115,11 +115,11 @@ void Thing::fire_tick(void)
     TRACE_AND_INDENT();
 
     if (! is_on_fire()) {
-      set_on_fire("caught fire");
+      on_fire_set("caught fire");
     }
 
     auto fire   = tp_find("fire");
-    auto damage = fire->get_damage_fire();
+    auto damage = fire->damage_fire_get();
 
     if (environ_avoids_fire()) {
       damage *= 2;
@@ -135,7 +135,7 @@ void Thing::fire_tick(void)
       if (is_meltable()) {
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+            if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
               msg("%s is melted!", text_The().c_str());
             }
           }
@@ -144,7 +144,7 @@ void Thing::fire_tick(void)
       } else {
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+            if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
               if (is_monst()) {
                 msg("%s burns to death!", text_The().c_str());
               } else {
@@ -159,7 +159,7 @@ void Thing::fire_tick(void)
       if (is_meltable()) {
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+            if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
               msg("%s melts!", text_The().c_str());
             }
           }
@@ -167,7 +167,7 @@ void Thing::fire_tick(void)
       } else {
         if (! is_offscreen) {
           if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+            if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
               msg("%s burns!", text_The().c_str());
             }
           }

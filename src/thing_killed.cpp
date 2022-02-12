@@ -90,7 +90,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   // If in a bag, get out of there!
   //
-  auto immediate_owner = get_immediate_owner();
+  auto immediate_owner = immediate_owner_get();
   if (immediate_owner) {
     immediate_owner->bag_remove(this);
   }
@@ -117,7 +117,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   if (! is_resurrection_blocked) {
     if (is_resurrectable()) {
-      set_tick_resurrect_when(game->tick_current + get_resurrect());
+      tick_resurrect_when_set(game->tick_current + resurrect_get());
     }
   }
 
@@ -153,7 +153,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       level_push();
       auto p = level->player;
       if (p) {
-        int distance = get_distance_to_player();
+        int distance = distance_to_player_get();
         if (is_door()) {
           if (defeater && defeater->is_fire()) {
             if (distance < 5) {
@@ -279,7 +279,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     //
     // Tell the leader I am dead
     //
-    auto leader = get_leader();
+    auto leader = leader_get();
     if (leader) {
       on_death_of_a_follower(leader);
     }
@@ -291,7 +291,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       // Poor player
       //
-      if (! get_score()) {
+      if (! score_get()) {
         score_incr(1);
       }
 
@@ -327,7 +327,7 @@ void Thing::killed(Thingp defeater, const char *reason)
           }
 
           defeater->score_add(this);
-        } else if (is_monst() && (get_distance_to_player() >= DMAP_IS_PASSABLE)) {
+        } else if (is_monst() && (distance_to_player_get() >= DMAP_IS_PASSABLE)) {
           if (is_undead()) {
             msg("You hear the distant cry of the undead...");
           } else if (is_jelly()) {
@@ -348,7 +348,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       // Already a corpse
       //
       dbg("Already a corpse, clean it up");
-      if (! get_tick_resurrect_when()) {
+      if (! tick_resurrect_when_get()) {
         if (is_bony()) {
           dbg("Can place final bones");
           auto tpp = tp_random_bones();

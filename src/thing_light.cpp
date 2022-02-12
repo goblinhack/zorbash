@@ -14,7 +14,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-std::vector< Lightp > &Thing::get_light(void)
+std::vector< Lightp > &Thing::light_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -33,9 +33,9 @@ void Thing::new_light(point offset, int light_power, int delta, color col, int f
   TRACE_NO_INDENT();
   new_infop();
   auto l = light_new(this, offset, light_power, delta, col, fbo);
-  get_infop()->light.push_back(l);
-  get_infop()->light_power = light_power;
-  get_infop()->light_col   = col;
+  infop_get()->light.push_back(l);
+  infop_get()->light_power = light_power;
+  infop_get()->light_col   = col;
 }
 
 void Thing::new_light(point offset, int light_power)
@@ -43,8 +43,8 @@ void Thing::new_light(point offset, int light_power)
   TRACE_NO_INDENT();
   new_infop();
   auto l = light_new(this, offset, light_power);
-  get_infop()->light.push_back(l);
-  get_infop()->light_power = light_power;
+  infop_get()->light.push_back(l);
+  infop_get()->light_power = light_power;
 }
 
 void Thing::delete_lights(void)
@@ -52,10 +52,10 @@ void Thing::delete_lights(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     verify(MTYPE_INFOP, maybe_infop());
-    for (auto &l : get_infop()->light) {
+    for (auto &l : infop_get()->light) {
       delete l;
     }
-    get_infop()->light.resize(0);
+    infop_get()->light.resize(0);
   }
 }
 
@@ -76,7 +76,7 @@ void Thing::init_lights(void)
     //
     color col = WHITE;
 
-    int light_power = get_initial_light_power();
+    int light_power = initial_light_power_get();
 
     //
     // This is a raycast only light to mark things as visible
@@ -115,13 +115,13 @@ void Thing::init_lights(void)
     has_light = true;
     dbg("Player created");
   } else {
-    if (unlikely(get_light_power())) {
+    if (unlikely(light_power_get())) {
       std::string l = light_color();
       if (l.empty()) {
         l = "white";
       }
       color c = string2color(l);
-      new_light(point(0, 0), get_light_power(), 0, c, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(0, 0), light_power_get(), 0, c, FBO_PLAYER_VISIBLE_LIGHTING);
       has_light = true;
     }
   }
@@ -130,12 +130,12 @@ void Thing::init_lights(void)
 void Thing::light_update_power(void)
 {
   TRACE_NO_INDENT();
-  float light_power_new = get_light_power();
+  float light_power_new = light_power_get();
   if (! light_power_new) {
     light_power_new = 1;
   }
 
-  for (auto l : get_light()) {
+  for (auto l : light_get()) {
     if (l->ray_cast_only) {
       continue;
     }

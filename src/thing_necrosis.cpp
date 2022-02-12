@@ -16,7 +16,7 @@ void Thing::necrosis_tick(void)
   TRACE_NO_INDENT();
 
   if ((is_alive_monst() || is_player()) && ! is_ethereal() && ! is_undead()) {
-    auto old_necrosis = get_necrotized_amount();
+    auto old_necrosis = necrotized_amount_get();
     if (! old_necrosis) {
       return;
     }

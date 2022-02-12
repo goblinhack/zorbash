@@ -30,8 +30,8 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
   }
 
   if (is_foilage()) {
-    fpoint p  = level->player->get_interpolated_at();
-    fpoint o  = get_interpolated_at();
+    fpoint p  = level->player->interpolated_at_get();
+    fpoint o  = interpolated_at_get();
     fpoint d  = o - p;
     float  dx = d.x;
     float  dy = d.y;
@@ -106,11 +106,11 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
     float dx = 1.0;
     float dy = 1.0;
     if (level->player) {
-      if (get_immediate_owner_id() == level->player->id) {
+      if (immediate_owner_id_get() == level->player->id) {
         // use default shadow for carried items
       } else if (this != level->player) {
-        fpoint      p = level->player->get_interpolated_at();
-        fpoint      o = get_interpolated_at();
+        fpoint      p = level->player->interpolated_at_get();
+        fpoint      o = interpolated_at_get();
         fpoint      d = o - p;
         const float D = 16.0;
         dx            = d.x / D;
@@ -167,11 +167,11 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
       std::swap(shadow_tl, shadow_tr);
     }
 
-    float bounce = get_bounce();
+    float bounce = bounce_get();
     float tileh  = game->config.tile_pix_height;
     float bh     = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
 
-    float fadeup = get_fadeup();
+    float fadeup = fadeup_get();
     if (fadeup < 0) {
       return;
     }
@@ -248,7 +248,7 @@ void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, 
     return;
   }
 
-  if (is_player() || (get_immediate_owner_id() == level->player->id)) {
+  if (is_player() || (immediate_owner_id_get() == level->player->id)) {
     blit_player_owned_shadow(tpp, tile, blit_tl, blit_br);
   } else {
     blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);
@@ -388,11 +388,11 @@ void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point o
   glcolor(WHITE);
 }
 
-bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br,
+bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br,
                        Tilep &tile, bool reflection)
 {
   TRACE_NO_INDENT();
-  fpoint at = get_interpolated_at();
+  fpoint at = interpolated_at_get();
 
   //
   // We render these offset form their owner, so if dead, then it is
@@ -475,22 +475,22 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Flipping
   //
-  auto top_owner = get_top_owner();
-  auto owner     = get_immediate_owner();
+  auto top_owner = top_owner_get();
+  auto owner     = immediate_owner_get();
   auto falling   = is_falling || (owner && owner->is_falling);
 
   if (likely(! falling)) {
     if (unlikely(tpp->gfx_animated_can_hflip())) {
-      if (get_ts_flip_start()) {
+      if (ts_flip_start_get()) {
         //
         // Slow flip
         //
-        auto diff       = time_get_time_ms_cached() - get_ts_flip_start();
+        auto diff       = time_get_time_ms_cached() - ts_flip_start_get();
         ts_t flip_time  = game->current_move_speed;
         ts_t flip_steps = flip_time;
 
         if (diff > flip_time) {
-          set_ts_flip_start(0);
+          ts_flip_start_set(0);
           is_facing_left = ! is_facing_left;
           if (is_dir_left() || is_dir_tl() || is_dir_bl()) {
             std::swap(blit_tl.x, blit_br.x);
@@ -541,9 +541,9 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   if (unlikely(is_bouncing || (top_owner && top_owner->is_bouncing))) {
     float bounce;
     if (top_owner) {
-      bounce = owner->get_bounce();
+      bounce = owner->bounce_get();
     } else {
-      bounce = get_bounce();
+      bounce = bounce_get();
     }
 
     float bh = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
@@ -562,10 +562,10 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   if (falling) {
     float fall = 0;
 
-    fall = get_fall();
+    fall = fall_get();
     update_interpolated_position();
     if (owner) {
-      fall = owner->get_fall();
+      fall = owner->fall_get();
     }
 
     auto s = ((blit_br.y - blit_tl.y - 1) / 2) * fall;
@@ -590,16 +590,16 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   float lunge;
   if (owner) {
-    lunge = owner->get_lunge();
+    lunge = owner->lunge_get();
   } else {
-    lunge = get_lunge();
+    lunge = lunge_get();
   }
   if (unlikely(lunge > 0.0)) {
     point delta;
     if (owner) {
-      delta = owner->get_lunge_to() - owner->curr_at;
+      delta = owner->lunge_to_get() - owner->curr_at;
     } else {
-      delta = get_lunge_to() - curr_at;
+      delta = lunge_to_get() - curr_at;
     }
     float dx = -delta.x * lunge;
     float dy = -delta.y * lunge;
@@ -614,7 +614,7 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Fading.
   //
-  float fadeup = get_fadeup();
+  float fadeup = fadeup_get();
   if (likely(fadeup == 0)) {
   } else if (fadeup < 0) {
     blit = false;
@@ -647,16 +647,16 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
       map_loc = owner->curr_at;
     }
 
-    set_submerged_offset(0);
+    submerged_offset_set(0);
 
     if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
       is_in_water = true;
-      set_submerged_offset(8);
+      submerged_offset_set(8);
     } else if (level->is_lava((int) map_loc.x, (int) map_loc.y)) {
       is_in_lava = true;
-      set_submerged_offset(TILE_HEIGHT / 2);
+      submerged_offset_set(TILE_HEIGHT / 2);
     } else if (level->is_shallow_water((int) map_loc.x, (int) map_loc.y)) {
-      set_submerged_offset(4);
+      submerged_offset_set(4);
       is_in_water = true;
     }
 
@@ -664,20 +664,20 @@ bool Thing::get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
       //
       // Ghosts do not sink into lava
       //
-      set_submerged_offset(0);
+      submerged_offset_set(0);
     }
   }
 
   return (blit);
 }
 
-bool Thing::get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection)
+bool Thing::map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, bool reflection)
 {
   TRACE_NO_INDENT();
   point pre_effect_blit_tl;
   point pre_effect_blit_br;
 
-  auto blit = get_coords(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, reflection);
+  auto blit = coords_get(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, reflection);
 
   float dx = level->pixel_map_at.x;
   float dy = level->pixel_map_at.y;
@@ -701,11 +701,11 @@ bool Thing::get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, b
 uint8_t Thing::blit_begin_submerged(void)
 {
   TRACE_NO_INDENT();
-  auto submerged = get_submerged_offset();
+  auto submerged = submerged_offset_get();
   if (submerged) {
     blit_flush();
     auto waterline = last_blit_br.y;
-    auto owner     = get_immediate_owner();
+    auto owner     = immediate_owner_get();
     if (owner) {
       waterline = owner->last_blit_br.y;
     }
@@ -734,11 +734,11 @@ void Thing::blit_end_submerged(uint8_t submerged)
 uint8_t Thing::blit_begin_reflection_submerged(void)
 {
   TRACE_NO_INDENT();
-  auto submerged = get_submerged_offset();
+  auto submerged = submerged_offset_get();
   if (submerged) {
     blit_flush();
     auto waterline = last_blit_br.y;
-    auto owner     = get_immediate_owner();
+    auto owner     = immediate_owner_get();
     if (owner) {
       waterline = owner->last_blit_br.y;
     }
@@ -788,14 +788,14 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   }
 
   if (unlikely(is_msg())) {
-    blit_text(get_msg(), WHITE, blit_tl, blit_br);
+    blit_text(msg_get(), WHITE, blit_tl, blit_br);
   }
 
   //
   // Show a health bar over the thing?
   //
-  auto h = get_health();
-  auto m = get_health_max();
+  auto h = health_get();
+  auto m = health_max_get();
 
   auto lit = (fbo == FBO_FULLMAP) || level->is_lit_currently_no_check(curr_at.x, curr_at.y);
 
@@ -819,7 +819,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       {
         auto index = 0;
         if (maybe_infop()->monst_state) {
-          if (get_infop()->monst_state == MONST_STATE_SLEEPING) {
+          if (infop_get()->monst_state == MONST_STATE_SLEEPING) {
             //
             // Don't show gargoyles when snoozing for example
             //
@@ -871,7 +871,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   uint8_t fade = level->is_lit_currently(curr_at.x, curr_at.y);
   if (fbo == FBO_FULLMAP) {
     c.a = 255;
-  } else if (get_light_power()) {
+  } else if (light_power_get()) {
     c.a = fade;
   }
 
@@ -903,7 +903,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
             //
             // Seems to be ok
             //
-          } else if (get_immediate_owner()) {
+          } else if (immediate_owner_get()) {
             //
             // Seems to be ok
             //
@@ -932,7 +932,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     tile_blit(tile, blit_tl, blit_br);
   }
 
-  get_tiles();
+  tiles_get();
   if (is_wall()) {
     if (! reflection) {
       blit_wall_shadow(blit_tl, blit_br, &tiles);
@@ -973,11 +973,11 @@ void Thing::blit(int fbo)
     point pre_effect_blit_tl;
     point pre_effect_blit_br;
 
-    if (! get_coords(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, false)) {
+    if (! coords_get(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, false)) {
       return;
     }
   } else {
-    if (! get_map_offset_coords(blit_tl, blit_br, tile, false)) {
+    if (! map_offset_coords_get(blit_tl, blit_br, tile, false)) {
       return;
     }
   }
@@ -996,11 +996,11 @@ void Thing::blit_upside_down(int fbo)
     point pre_effect_blit_tl;
     point pre_effect_blit_br;
 
-    if (! get_coords(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, false)) {
+    if (! coords_get(blit_tl, blit_br, pre_effect_blit_tl, pre_effect_blit_br, tile, false)) {
       return;
     }
   } else {
-    if (! get_map_offset_coords(blit_tl, blit_br, tile, true)) {
+    if (! map_offset_coords_get(blit_tl, blit_br, tile, true)) {
       return;
     }
   }

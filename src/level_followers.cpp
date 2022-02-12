@@ -52,7 +52,7 @@ void Level::assign_leaders_and_followers(void)
         //
         // That are close enough
         //
-        if (distance(t->curr_at, m->curr_at) <= m->get_distance_recruitment_max()) {
+        if (distance(t->curr_at, m->curr_at) <= m->distance_recruitment_max_get()) {
           group_cand = g.first;
         }
       }
@@ -87,7 +87,7 @@ void Level::assign_leaders_and_followers(void)
       if (! leader) {
         leader = m;
       } else {
-        if (m->get_danger_current_level() > leader->get_danger_current_level()) {
+        if (m->danger_current_level_get() > leader->danger_current_level_get()) {
           leader = m;
         }
       }
@@ -105,7 +105,7 @@ void Level::assign_leaders_and_followers(void)
     }
 
     for (const auto &m : g.second) {
-      m->set_leader(leader);
+      m->leader_set(leader);
     }
   }
 }

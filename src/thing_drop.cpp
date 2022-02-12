@@ -36,8 +36,8 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   }
   TRACE_AND_INDENT();
 
-  auto top_owner       = what->get_top_owner();
-  auto immediate_owner = what->get_immediate_owner();
+  auto top_owner       = what->top_owner_get();
+  auto immediate_owner = what->immediate_owner_get();
 
   if (game->in_transit_item) {
     //
@@ -50,7 +50,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     if ((top_owner != this) && (immediate_owner != this)) {
       if (immediate_owner) {
         dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
-        dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->get_top_owner()->to_string().c_str());
+        dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->top_owner_get()->to_string().c_str());
         err("Attempt to drop %s which is not carried and owned by %s", what->to_short_string().c_str(),
             immediate_owner->to_string().c_str());
       } else {
@@ -98,14 +98,14 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   }
 
   if (immediate_owner) {
-    immediate_owner->get_itemsp()->carrying.remove(what->id);
+    immediate_owner->itemsp_get()->carrying.remove(what->id);
   }
 
   if (! stolen) {
     //
     // Prevent too soon re-carry
     //
-    set_where_i_dropped_an_item_last(curr_at);
+    where_i_dropped_an_item_last_set(curr_at);
   }
 
   if (is_bag_item_container() || is_player()) {
@@ -129,7 +129,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     }
   }
   what->is_being_dropped = false;
-  what->set_tick_last_dropped(game->tick_current);
+  what->tick_last_dropped_set(game->tick_current);
   check_all_carried_items_are_owned();
   check_all_carried_maps();
 
@@ -152,12 +152,12 @@ bool Thing::drop_into_ether(Thingp what)
   dbg("Dropping %s into the ether", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  auto top_owner       = what->get_top_owner();
-  auto immediate_owner = what->get_immediate_owner();
+  auto top_owner       = what->top_owner_get();
+  auto immediate_owner = what->immediate_owner_get();
   if ((top_owner != this) && (immediate_owner != this)) {
     if (immediate_owner) {
       dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
-      dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->get_top_owner()->to_string().c_str());
+      dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->top_owner_get()->to_string().c_str());
       err("Attempt to drop into ether %s which is not carried and owned by %s", what->to_short_string().c_str(),
           immediate_owner->to_string().c_str());
     } else {
@@ -169,7 +169,7 @@ bool Thing::drop_into_ether(Thingp what)
   if (top_owner) {
     FOR_ALL_EQUIP(e)
     {
-      if (what == top_owner->get_equip(e)) {
+      if (what == top_owner->equip_get(e)) {
         top_owner->unequip("moved into ether", e, true);
       }
     }
@@ -190,7 +190,7 @@ bool Thing::drop_into_ether(Thingp what)
 
   what->remove_owner();
   if (immediate_owner) {
-    immediate_owner->get_itemsp()->carrying.remove(what->id);
+    immediate_owner->itemsp_get()->carrying.remove(what->id);
   }
   game->request_remake_rightbar = true;
 
@@ -228,7 +228,7 @@ bool Thing::drop_from_ether(Thingp what)
   //
   // Prevent too soon re-carry
   //
-  set_where_i_dropped_an_item_last(player->curr_at);
+  where_i_dropped_an_item_last_set(player->curr_at);
 
   //
   // Remove from the inventory
@@ -259,7 +259,7 @@ bool Thing::drop_from_ether(Thingp what)
   if (is_player()) {
     sound_play("drop");
   }
-  what->set_tick_last_dropped(game->tick_current);
+  what->tick_last_dropped_set(game->tick_current);
   check_all_carried_items_are_owned();
   check_all_carried_maps();
 
@@ -275,8 +275,8 @@ void Thing::drop_all(void)
     return;
   }
 
-  while (! get_itemsp()->carrying.empty()) {
-    auto id = *get_itemsp()->carrying.begin();
+  while (! itemsp_get()->carrying.empty()) {
+    auto id = *itemsp_get()->carrying.begin();
     auto t  = level->thing_find(id);
     if (unlikely(! t)) {
       return;

@@ -20,13 +20,13 @@ int Thing::noise(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->noise);
+    return (infop_get()->noise);
   } else {
     return 0;
   }
 }
 
-int Thing::get_noise_total(void)
+int Thing::noise_total_get(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
@@ -38,7 +38,7 @@ int Thing::get_noise_total(void)
 
   FOR_ALL_EQUIP(e)
   {
-    auto it = get_equip(e);
+    auto it = equip_get(e);
     if (it) {
       decibels += it->noise();
       // it->con("NOISE %d", decibels);
@@ -89,7 +89,7 @@ int Thing::get_noise_total(void)
     }
   }
 
-  decibels -= get_stat_dex_mod() * 10;
+  decibels -= stat_dex_mod_get() * 10;
 
   return decibels;
 }
@@ -101,7 +101,7 @@ int Thing::noise_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->noise = v);
+  auto n = (infop_get()->noise = v);
   return (n);
 }
 
@@ -112,7 +112,7 @@ int Thing::noise_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->noise -= v);
+  auto n = (infop_get()->noise -= v);
   return (n);
 }
 
@@ -123,7 +123,7 @@ int Thing::noise_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->noise += v);
+  auto n = (infop_get()->noise += v);
   return (n);
 }
 
@@ -134,7 +134,7 @@ int Thing::noise_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->noise--);
+  auto n = (infop_get()->noise--);
   return (n);
 }
 
@@ -145,6 +145,6 @@ int Thing::noise_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->noise++);
+  auto n = (infop_get()->noise++);
   return (n);
 }

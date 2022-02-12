@@ -26,7 +26,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
 {
   TRACE_NO_INDENT();
 
-  auto aip = get_aip();
+  auto aip = aip_get();
 
   //
   // If on fire, try and put it out!
@@ -44,7 +44,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   // If somewhere bad, escape
   //
-  if (get_terrain_cost(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
+  if (terrain_cost_get(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
     AI_LOG("on bad terrain, escape");
     TRACE_AND_INDENT();
     if (ai_escape()) {
@@ -78,7 +78,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     //
     // If not too close to the thread we can try and do something else like pick up a weapon.
     //
-    if (game->tick_current - get_tick_last_i_was_attacked() < 2) {
+    if (game->tick_current - tick_last_i_was_attacked_get() < 2) {
       //
       // Don't relax. You're being attacked.
       //
@@ -97,7 +97,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     //
     // If we're absolutely exhausted, we must rest, threat or no threat
     //
-    if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 10)) {
+    if (is_able_to_tire() && (stamina_get() < stamina_max_get() / 10)) {
       AI_LOG("Very low on stamina, forced to rest");
       if (is_player()) {
         game->tick_begin("Robot is forced to rest, very low on stamina");
@@ -110,7 +110,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     // If really low on health and we have something we can eat, try
     // that.
     //
-    if (get_health() < get_health_max() / 10) {
+    if (health_get() < health_max_get() / 10) {
       if (can_eat_something()) {
         AI_LOG("Very low on health, forced to rest");
         if (is_player()) {
@@ -130,7 +130,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     // If we're absolutely exhausted, we must rest, threat or no threat
     //
     AI_LOG("Idle, rest check");
-    if (is_able_to_tire() && (get_stamina() < get_stamina_max() / 3)) {
+    if (is_able_to_tire() && (stamina_get() < stamina_max_get() / 3)) {
       AI_LOG("Low on stamina, rest");
       if (is_player()) {
         game->tick_begin("Robot is low on stamina");
@@ -144,7 +144,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     // that.
     //
     AI_LOG("Idle, health check");
-    if (get_health() < get_health_max() / 3) {
+    if (health_get() < health_max_get() / 3) {
       AI_LOG("Idle, eat check as a bit hungry");
       if (can_eat_something()) {
         AI_LOG("Low on health, rest");
@@ -249,9 +249,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   // If nothing to do, might as well rest. If there is a point.
   //
   auto rest = true;
-  if ((get_health() >= (get_health_max() / 4) * 3)) {
+  if ((health_get() >= (health_max_get() / 4) * 3)) {
     if (is_able_to_tire()) {
-      if (get_stamina() >= (get_stamina_max() / 4) * 3) {
+      if (stamina_get() >= (stamina_max_get() / 4) * 3) {
         rest = false;
       }
     } else {

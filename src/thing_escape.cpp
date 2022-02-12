@@ -15,8 +15,8 @@
 bool Thing::try_to_escape(void)
 {
   if (is_able_to_jump()) {
-    auto health_max = get_health_max();
-    auto health     = get_health();
+    auto health_max = health_max_get();
+    auto health     = health_get();
 
     if (health > health_max / 2) {
       return false;
@@ -25,13 +25,13 @@ bool Thing::try_to_escape(void)
     //
     // Don't try and escape too often else the player can never kill the monst!
     //
-    if (game->tick_current - get_tick_last_escape() < 20) {
+    if (game->tick_current - tick_last_escape_get() < 20) {
       return false;
     }
 
     if (d1000() < tp()->is_able_to_jump_on_low_hp_chance_d1000()) {
       if (try_to_jump_away_from_player()) {
-        set_tick_last_escape(game->tick_current);
+        tick_last_escape_set(game->tick_current);
         return true;
       }
     }
@@ -87,7 +87,7 @@ bool Thing::ai_escape(void)
       //
       // Set this so next time we will choose another target
       //
-      get_aip()->wander_dest = point(0, 0);
+      aip_get()->wander_dest = point(0, 0);
     }
   }
 

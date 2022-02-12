@@ -49,7 +49,7 @@ void Thing::on_fire(void)
 bool Thing::is_on_fire(void)
 {
   TRACE_NO_INDENT();
-  auto id = get_on_fire_anim_id();
+  auto id = on_fire_anim_id_get();
   if (! id) {
     return false;
   }
@@ -60,7 +60,7 @@ bool Thing::is_on_fire(void)
 void Thing::unset_on_fire(void)
 {
   TRACE_NO_INDENT();
-  auto id = get_on_fire_anim_id();
+  auto id = on_fire_anim_id_get();
   if (! id) {
     return;
   }
@@ -69,25 +69,25 @@ void Thing::unset_on_fire(void)
   if (fire_anim) {
     dbg("Unset on fire");
     fire_anim->dead("by removing fire");
-    set_on_fire_anim_id(NoThingId);
+    on_fire_anim_id_set(NoThingId);
   }
 }
 
-bool Thing::set_on_fire(const std::string &why)
+bool Thing::on_fire_set(const std::string &why)
 {
   TRACE_NO_INDENT();
   if (! is_burnable() && ! is_combustible()) {
     return false;
   }
 
-  if (get_on_fire_anim_id().ok()) {
+  if (on_fire_anim_id_get().ok()) {
     return false;
   }
 
   dbg("Set on fire, %s", why.c_str());
   auto on_fire_anim = level->thing_new("fire", this);
-  set_on_fire_anim_id(on_fire_anim->id);
-  on_fire_anim->set_owner(this);
+  on_fire_anim_id_set(on_fire_anim->id);
+  on_fire_anim->owner_set(this);
   move_carried_items();
 
   if (! is_dead) {
@@ -218,14 +218,14 @@ bool Thing::ai_on_fire_choose_target(point &nh)
   //
   // Reached the target? Choose a new one.
   //
-  auto target = get_aip()->wander_dest;
+  auto target = aip_get()->wander_dest;
 
   if (target != point(0, 0)) {
     if (! level->is_shallow_water(target.x, target.y)) {
       //
       // Choose a new wander location
       //
-      get_aip()->wander_dest = point(0, 0);
+      aip_get()->wander_dest = point(0, 0);
     }
   }
 
@@ -238,7 +238,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
   //
   // Choose a new wander location
   //
-  get_aip()->wander_dest = point(0, 0);
+  aip_get()->wander_dest = point(0, 0);
 
   auto attempts = 10;
   while (attempts--) {
@@ -248,7 +248,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     auto  got_one = false;
 
     while (tries--) {
-      auto target = get_dest_random(get_distance_vision());
+      auto target = dest_random_get(distance_vision_get());
       if (level->is_shallow_water(target)) {
         if (distance(start, target) < closest) {
           dbg("Best (shallow water) at %d,%d", target.x, target.y);
@@ -261,7 +261,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     if (got_one) {
       target = best;
       if (ai_create_on_fire_path(nh, start, target)) {
-        get_aip()->wander_dest = target;
+        aip_get()->wander_dest = target;
         dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
         if (is_player()) {
           msg("You are thinking of jumping into that cool water!");
@@ -281,7 +281,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     auto  got_one = false;
 
     while (tries--) {
-      auto target = get_dest_random(get_distance_vision());
+      auto target = dest_random_get(distance_vision_get());
       if (level->is_chasm(target)) {
         if (distance(start, target) < closest) {
           dbg("Best (chasm) at %d,%d", target.x, target.y);
@@ -294,7 +294,7 @@ bool Thing::ai_on_fire_choose_target(point &nh)
     if (got_one) {
       target = best;
       if (ai_create_on_fire_path(nh, start, target)) {
-        get_aip()->wander_dest = target;
+        aip_get()->wander_dest = target;
         dbg("On-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
         if (is_player()) {
           msg("You are thinking of jumping into a chasm!");
@@ -326,7 +326,7 @@ bool Thing::ai_on_fire(void)
       //
       // Set this so next time we will choose another target
       //
-      get_aip()->wander_dest = point(0, 0);
+      aip_get()->wander_dest = point(0, 0);
     }
   }
 

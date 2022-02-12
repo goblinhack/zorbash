@@ -85,17 +85,17 @@ bool Thing::is_equipped(Thingp item)
 {
   FOR_ALL_EQUIP(e)
   {
-    if (item == get_equip(e)) {
+    if (item == equip_get(e)) {
       return true;
     }
   }
   return false;
 }
 
-Thingp Thing::get_equip(int equip)
+Thingp Thing::equip_get(int equip)
 {
   TRACE_NO_INDENT();
-  auto id = get_equip_id(equip);
+  auto id = equip_id_get(equip);
   if (id.ok()) {
     return (level->thing_find(id));
   }
@@ -103,7 +103,7 @@ Thingp Thing::get_equip(int equip)
   return nullptr;
 }
 
-void Thing::set_equip_carry_anim_id(ThingId equip_carry_anim_id, int equip)
+void Thing::equip_carry_anim_id_set(ThingId equip_carry_anim_id, int equip)
 {
   TRACE_NO_INDENT();
   Thingp equip_carry_anim;
@@ -128,7 +128,7 @@ void Thing::equip_carry_anim_set(Thingp new_equip_carry_anim, int equip)
     verify(MTYPE_THING, new_equip_carry_anim);
   }
 
-  auto old_equip_carry_anim = get_equip_carry_anim(equip);
+  auto old_equip_carry_anim = equip_carry_anim_get(equip);
   if (old_equip_carry_anim) {
     if (old_equip_carry_anim == new_equip_carry_anim) {
       return;
@@ -137,7 +137,7 @@ void Thing::equip_carry_anim_set(Thingp new_equip_carry_anim, int equip)
     if (new_equip_carry_anim) {
       dbg("Change equip carry-anim, %s->%s", old_equip_carry_anim->to_string().c_str(),
           new_equip_carry_anim->to_string().c_str());
-      new_equip_carry_anim->set_owner(this);
+      new_equip_carry_anim->owner_set(this);
     } else {
       dbg("Remove equip carry-anim, %s", old_equip_carry_anim->to_string().c_str());
     }
@@ -145,29 +145,29 @@ void Thing::equip_carry_anim_set(Thingp new_equip_carry_anim, int equip)
   } else {
     if (new_equip_carry_anim) {
       dbg("Set equip carry-anim, %s", new_equip_carry_anim->to_string().c_str());
-      new_equip_carry_anim->set_owner(this);
+      new_equip_carry_anim->owner_set(this);
     }
   }
 
   if (new_equip_carry_anim) {
-    set_equip_id_carry_anim(new_equip_carry_anim->id, equip);
+    equip_id_carry_anim_set(new_equip_carry_anim->id, equip);
 
     new_equip_carry_anim->is_ring2 = false;
     if (equip == MONST_EQUIP_RING2) {
       new_equip_carry_anim->is_ring2 = true;
     }
   } else {
-    set_equip_id_carry_anim(NoThingId.id, equip);
+    equip_id_carry_anim_set(NoThingId.id, equip);
   }
 }
 
-void Thing::set_equip_use_anim_id(ThingId gfx_anim_use_id, int equip)
+void Thing::equip_use_anim_id_set(ThingId gfx_anim_use_id, int equip)
 {
   TRACE_NO_INDENT();
   Thingp gfx_anim_use;
 
   if (! gfx_anim_use_id) {
-    set_equip_use_anim(nullptr, equip);
+    equip_use_anim_set(nullptr, equip);
     return;
   }
 
@@ -176,17 +176,17 @@ void Thing::set_equip_use_anim_id(ThingId gfx_anim_use_id, int equip)
     return;
   }
 
-  set_equip_use_anim(gfx_anim_use, equip);
+  equip_use_anim_set(gfx_anim_use, equip);
 }
 
-void Thing::set_equip_use_anim(Thingp new_gfx_anim_use, int equip)
+void Thing::equip_use_anim_set(Thingp new_gfx_anim_use, int equip)
 {
   TRACE_NO_INDENT();
   if (new_gfx_anim_use) {
     verify(MTYPE_THING, new_gfx_anim_use);
   }
 
-  auto old_gfx_anim_use = get_equip_use_anim(equip);
+  auto old_gfx_anim_use = equip_use_anim_get(equip);
 
   if (old_gfx_anim_use) {
     if (old_gfx_anim_use == new_gfx_anim_use) {
@@ -196,7 +196,7 @@ void Thing::set_equip_use_anim(Thingp new_gfx_anim_use, int equip)
     if (new_gfx_anim_use) {
       dbg("Change equip use-anim %s->%s", old_gfx_anim_use->to_string().c_str(),
           new_gfx_anim_use->to_string().c_str());
-      new_gfx_anim_use->set_owner(this);
+      new_gfx_anim_use->owner_set(this);
     } else {
       dbg("Remove equip use-anim %s", old_gfx_anim_use->to_string().c_str());
     }
@@ -204,24 +204,24 @@ void Thing::set_equip_use_anim(Thingp new_gfx_anim_use, int equip)
   } else {
     if (new_gfx_anim_use) {
       dbg("Set equip use-anim %s", new_gfx_anim_use->to_string().c_str());
-      new_gfx_anim_use->set_owner(this);
+      new_gfx_anim_use->owner_set(this);
     }
   }
 
   if (new_gfx_anim_use) {
-    set_equip_id_use_anim(new_gfx_anim_use->id, equip);
+    equip_id_use_anim_set(new_gfx_anim_use->id, equip);
   } else {
-    set_equip_id_use_anim(NoThingId.id, equip);
+    equip_id_use_anim_set(NoThingId.id, equip);
   }
 }
 
-void Thing::get_equip_use_offset(int *dx, int *dy, int equip)
+void Thing::equip_use_offset_get(int *dx, int *dy, int equip)
 {
   TRACE_NO_INDENT();
   *dx = 0;
   *dy = 0;
 
-  auto item = get_equip(equip);
+  auto item = equip_get(equip);
   if (! item) {
     return;
   }
@@ -280,12 +280,12 @@ void Thing::get_equip_use_offset(int *dx, int *dy, int equip)
   }
 }
 
-Thingp Thing::get_equip_carry_anim(int equip)
+Thingp Thing::equip_carry_anim_get(int equip)
 {
   TRACE_NO_INDENT();
   Thingp equip_carry_anim = 0;
 
-  auto id = get_equip_id_carry_anim(equip);
+  auto id = equip_id_carry_anim_get(equip);
   if (id.ok()) {
     equip_carry_anim = level->thing_find(id);
   }
@@ -293,7 +293,7 @@ Thingp Thing::get_equip_carry_anim(int equip)
   return (equip_carry_anim);
 }
 
-Thingp Thing::get_equip_use_anim(int equip)
+Thingp Thing::equip_use_anim_get(int equip)
 {
   TRACE_NO_INDENT();
 
@@ -303,7 +303,7 @@ Thingp Thing::get_equip_use_anim(int equip)
   //
   Thingp gfx_anim_use = 0;
 
-  auto id = get_equip_id_use_anim(equip);
+  auto id = equip_id_use_anim_get(equip);
   if (id.ok()) {
     gfx_anim_use = level->thing_find(id);
   }
@@ -315,13 +315,13 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 {
   TRACE_NO_INDENT();
 
-  if (! get_equip_id(equip)) {
+  if (! equip_id_get(equip)) {
     return false;
   }
 
-  auto item = get_equip(equip);
+  auto item = equip_get(equip);
   if (! item) {
-    dbg("Could not unequip %" PRIX32 ", no equip thing: %s", get_equip_id(equip).id, why);
+    dbg("Could not unequip %" PRIX32 ", no equip thing: %s", equip_id_get(equip).id, why);
     return false;
   }
 
@@ -346,7 +346,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
     }
   }
 
-  auto top_owner = item->get_top_owner();
+  auto top_owner = item->top_owner_get();
   if (top_owner) {
     dbg("Has unequipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
   } else {
@@ -374,7 +374,7 @@ bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
 {
   TRACE_NO_INDENT();
 
-  auto top_owner = get_top_owner();
+  auto top_owner = top_owner_get();
   if (! top_owner) {
     err("Could not unequp; no owner");
     return false;
@@ -382,7 +382,7 @@ bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
 
   FOR_ALL_EQUIP(e)
   {
-    if (this == top_owner->get_equip(e)) {
+    if (this == top_owner->equip_get(e)) {
       return top_owner->unequip(why, e, allowed_to_recarry);
     }
   }
@@ -398,16 +398,16 @@ bool Thing::equip(Thingp item, int equip)
   TRACE_NO_INDENT();
   auto equip_tp = item->tp();
 
-  if (get_equip(equip) == item) {
+  if (equip_get(equip) == item) {
     dbg("Re-equipping: %s", item->to_short_string().c_str());
     return false;
   }
 
-  if ((equip == MONST_EQUIP_RING2) && (get_equip(MONST_EQUIP_RING1) == item)) {
+  if ((equip == MONST_EQUIP_RING2) && (equip_get(MONST_EQUIP_RING1) == item)) {
     unequip("equip swap", MONST_EQUIP_RING1, true);
   }
 
-  if ((equip == MONST_EQUIP_RING1) && (get_equip(MONST_EQUIP_RING2) == item)) {
+  if ((equip == MONST_EQUIP_RING1) && (equip_get(MONST_EQUIP_RING2) == item)) {
     unequip("equip swap", MONST_EQUIP_RING2, true);
   }
 
@@ -422,9 +422,9 @@ bool Thing::equip(Thingp item, int equip)
   //
   // Remove from the container of carrier
   //
-  auto immediate_owner = item->get_immediate_owner();
+  auto immediate_owner = item->immediate_owner_get();
   if (immediate_owner) {
-    immediate_owner->get_itemsp()->carrying.remove(item->id);
+    immediate_owner->itemsp_get()->carrying.remove(item->id);
   }
 
   unequip("equip new", equip, true);
@@ -441,7 +441,7 @@ bool Thing::equip(Thingp item, int equip)
   //
   // Set the id so we can use it later
   //
-  set_equip_id(item->id, equip);
+  equip_id_set(item->id, equip);
 
   //
   // Save the thing id so the client wid can keep track of the thing.
@@ -451,9 +451,9 @@ bool Thing::equip(Thingp item, int equip)
   //
   // Attach to the thing.
   //
-  carry_anim->set_owner(this);
+  carry_anim->owner_set(this);
 
-  auto top_owner = item->get_top_owner();
+  auto top_owner = item->top_owner_get();
   if (top_owner) {
     if (top_owner != this) {
       dbg("Has equipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
@@ -477,7 +477,7 @@ bool Thing::equip(Thingp item, int equip)
     }
   } else if (is_monst() && ! is_offscreen) {
     if (level->player && (level->tick_created < game->tick_current)) {
-      if (get(level->player->get_aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+      if (get(level->player->aip_get()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
         msg("%s wields %s.", text_The().c_str(), item->text_the().c_str());
       } else if (item->is_weapon()) {
         msg("You hear the whoosh of a weapon being wielded.");
@@ -502,7 +502,7 @@ void Thing::dump_equip(void)
 
   FOR_ALL_EQUIP(e)
   {
-    auto t = get_equip(e);
+    auto t = equip_get(e);
     if (t) {
       dbg("Equipped: %s", t->to_string().c_str());
     }
@@ -512,7 +512,7 @@ void Thing::dump_equip(void)
 void Thing::equip_remove_anim(int equip)
 {
   TRACE_NO_INDENT();
-  auto item = get_equip(equip);
+  auto item = equip_get(equip);
   if (! item) {
     return;
   }
@@ -523,7 +523,7 @@ void Thing::equip_remove_anim(int equip)
   //
   // If this thing has its own thing id for animations then destroy that.
   //
-  auto equip_carry_anim = get_equip_carry_anim(equip);
+  auto equip_carry_anim = equip_carry_anim_get(equip);
   if (equip_carry_anim) {
     dbg("Remove carry-anim");
     equip_carry_anim->dead("by owner sheathed weapon, remove carry-anim");
@@ -532,11 +532,11 @@ void Thing::equip_remove_anim(int equip)
     dbg("Weapon had no carry-anim");
   }
 
-  auto gfx_anim_use = get_equip_use_anim(equip);
+  auto gfx_anim_use = equip_use_anim_get(equip);
   if (gfx_anim_use) {
     dbg("Remove use-anim");
     gfx_anim_use->dead("by owner sheathed weapon, remove use-anim");
-    set_equip_use_anim(nullptr, equip);
+    equip_use_anim_set(nullptr, equip);
   } else {
     dbg("Weapon had no use/attack anim");
   }
@@ -545,7 +545,7 @@ void Thing::equip_remove_anim(int equip)
   // No do not clear this. We need to keep the weapon around so we can swing
   // it
   //
-  set_equip_id(NoThingId.id, equip);
+  equip_id_set(NoThingId.id, equip);
 }
 
 bool Thing::equip_use(bool forced, int equip, point *at)
@@ -557,7 +557,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
   }
   TRACE_AND_INDENT();
 
-  if (get_equip_id_use_anim(equip).ok()) {
+  if (equip_id_use_anim_get(equip).ok()) {
     //
     // Still using.
     //
@@ -567,9 +567,9 @@ bool Thing::equip_use(bool forced, int equip, point *at)
 
   TRACE_NO_INDENT();
   if (is_able_to_tire()) {
-    if (get_stamina() < 5) {
+    if (stamina_get() < 5) {
       if (is_player()) {
-        if (d20roll_under(get_stat_con())) {
+        if (d20roll_under(stat_con_get())) {
           msg("You are so tired but dig deep and attack!");
         } else {
           msg("You are too tired to attack.");
@@ -595,7 +595,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
 
   TRACE_NO_INDENT();
   std::string used_as;
-  auto        item = get_equip(equip);
+  auto        item = equip_get(equip);
   if (! item) {
     dbg("No equipped item");
     TRACE_AND_INDENT();
@@ -632,16 +632,16 @@ bool Thing::equip_use(bool forced, int equip, point *at)
     }
 
     auto use_anim = level->thing_new(used_as, this);
-    use_anim->set_owner(this);
+    use_anim->owner_set(this);
 
-    set_equip_use_anim(use_anim, equip);
+    equip_use_anim_set(use_anim, equip);
   }
 
   //
   // Hide the carry_anim while using.
   //
   TRACE_NO_INDENT();
-  auto c = get_equip_carry_anim(equip);
+  auto c = equip_carry_anim_get(equip);
   if (c) {
     c->hide();
   }
@@ -692,7 +692,7 @@ bool Thing::equipped_anything(void)
 
   FOR_ALL_EQUIP(e)
   {
-    auto what = get_equip(e);
+    auto what = equip_get(e);
     if (what) {
       return true;
     }

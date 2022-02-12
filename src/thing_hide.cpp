@@ -26,22 +26,22 @@ void Thing::hide(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (get_equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_carry_anim(e));
+    if (equip_id_carry_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim_get(e));
       if (w) {
         w->hide();
       }
     }
 
-    if (get_equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_use_anim(e));
+    if (equip_id_use_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim_get(e));
       if (w) {
         w->hide();
       }
     }
   }
 
-  auto on_fire_anim_id = get_on_fire_anim_id();
+  auto on_fire_anim_id = on_fire_anim_id_get();
   if (on_fire_anim_id.ok()) {
     TRACE_NO_INDENT();
     auto w = level->thing_find(on_fire_anim_id);

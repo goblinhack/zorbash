@@ -88,7 +88,7 @@ static void wid_rightbar_stats_over_ac_b(Widp w, int32_t relx, int32_t rely, int
   }
 
   {
-    auto val = player->get_stat_def();
+    auto val = player->stat_def_get();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your base armor class is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -96,8 +96,8 @@ static void wid_rightbar_stats_over_ac_b(Widp w, int32_t relx, int32_t rely, int
   }
 
   {
-    auto tot = player->get_stat_def_total();
-    auto val = player->get_stat_def();
+    auto tot = player->stat_def_total_get();
+    auto val = player->stat_def_get();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total armor class including all items and modifiers is %d.", tot);
@@ -155,7 +155,7 @@ static void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->get_stat_str();
+    auto val = player->stat_str_get();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your strength is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -163,8 +163,8 @@ static void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->get_stat_str();
-    auto tot = player->get_stat_str_total();
+    auto val = player->stat_str_get();
+    auto tot = player->stat_str_total_get();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total strength including all items and modifiers is %d.", val);
@@ -225,7 +225,7 @@ static void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->get_stat_con();
+    auto val = player->stat_con_get();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your constitution is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -233,8 +233,8 @@ static void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->get_stat_con();
-    auto tot = player->get_stat_con_total();
+    auto val = player->stat_con_get();
+    auto tot = player->stat_con_total_get();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total constitution including all items and modifiers is %d.", val);
@@ -295,7 +295,7 @@ static void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->get_stat_dex();
+    auto val = player->stat_dex_get();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your dexterity is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -303,8 +303,8 @@ static void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->get_stat_dex();
-    auto tot = player->get_stat_dex_total();
+    auto val = player->stat_dex_get();
+    auto tot = player->stat_dex_total_get();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total dexterity including all items and modifiers is %d.", val);
@@ -365,7 +365,7 @@ static void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t re
   }
 
   {
-    auto val = player->get_stat_luck();
+    auto val = player->stat_luck_get();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your luck is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -373,8 +373,8 @@ static void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t re
   }
 
   {
-    auto val = player->get_stat_luck();
-    auto tot = player->get_stat_luck_total();
+    auto val = player->stat_luck_get();
+    auto tot = player->stat_luck_total_get();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total luck including all items and modifiers is %d.", val);
@@ -642,7 +642,7 @@ static bool wid_rightbar_create(void)
     wid_set_pos(w, tl, br);
     auto g = dynprintf(
         "%%fg=gray$%06d %%fg=white$%%tile=dollar_icon$%%fg=gray$%03d %%fg=yellow$%%tile=key_icon$%%fg=gray$%d",
-        player->get_score(), player->get_gold(), player->get_keys());
+        player->score_get(), player->gold_get(), player->keys_get());
     wid_set_text(w, g);
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);
@@ -662,7 +662,7 @@ static bool wid_rightbar_create(void)
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
 
-    int i     = ((float) player->get_health() / (float) player->get_health_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
+    int i     = ((float) player->health_get() / (float) player->health_max_get()) * (float) UI_HEALTH_BAR_STEPS - 1;
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_" + std::to_string(i);
@@ -679,7 +679,7 @@ static bool wid_rightbar_create(void)
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
-    std::string s = std::to_string(player->get_health()) + "/" + std::to_string(player->get_health_max());
+    std::string s = std::to_string(player->health_get()) + "/" + std::to_string(player->health_max_get());
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
@@ -700,7 +700,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
-    int i     = ((float) player->get_stamina() / (float) player->get_stamina_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
+    int i     = ((float) player->stamina_get() / (float) player->stamina_max_get()) * (float) UI_HEALTH_BAR_STEPS - 1;
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_" + std::to_string(i);
@@ -717,7 +717,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
-    std::string s = std::to_string(player->get_stamina()) + "/" + std::to_string(player->get_stamina_max());
+    std::string s = std::to_string(player->stamina_get()) + "/" + std::to_string(player->stamina_max_get());
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
   }
@@ -738,7 +738,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_def_total());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_def_total_get());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -755,7 +755,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_str_total());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_str_total_get());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -772,7 +772,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_con_total());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_con_total_get());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -793,7 +793,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_dex_total());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_dex_total_get());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -810,7 +810,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->get_stat_luck_total());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_luck_total_get());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -902,7 +902,7 @@ static bool wid_rightbar_create(void)
         //
         // Print highlighted weapon
         //
-        auto weapon = player->get_equip(MONST_EQUIP_WEAPON);
+        auto weapon = player->equip_get(MONST_EQUIP_WEAPON);
         if (weapon) {
           auto equip_id = weapon->id;
           auto thing_id = get(itemsp->inventory_shortcuts, i);

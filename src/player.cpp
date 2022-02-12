@@ -150,7 +150,7 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     // If swinging, don't leave the weapon behind
     //
     // Not sure about this one
-    // if (player->get_equip_id_use_anim().ok()) {
+    // if (player->equip_id_use_anim_get().ok()) {
     //     player->topcon("Don't move while swinging weapon");
     //     return;
     // }

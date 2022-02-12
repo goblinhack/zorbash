@@ -644,7 +644,7 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
   if (player) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
-    for (auto l : player->get_light()) {
+    for (auto l : player->light_get()) {
       if (l->ray_cast_only) {
         l->render(true);
         continue;
@@ -695,7 +695,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
     for (auto x = minx; x < maxx; x++) {
       FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
       {
-        for (auto &l : t->get_light()) {
+        for (auto &l : t->light_get()) {
 
           if (player && (l->owner == player)) {
             if (! include_player_lights) {
@@ -724,7 +724,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           point blit_tl, blit_br;
           Tilep tile = {};
 
-          if (! t->get_map_offset_coords(blit_tl, blit_br, tile, false)) {
+          if (! t->map_offset_coords_get(blit_tl, blit_br, tile, false)) {
             continue;
           }
 
@@ -769,7 +769,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
     for (auto x = minx; x < maxx; x++) {
       FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
       {
-        for (auto &l : t->get_light()) {
+        for (auto &l : t->light_get()) {
 
           if (player && (l->owner == player)) {
             if (! include_player_lights) {
@@ -802,7 +802,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           point blit_tl, blit_br;
           Tilep tile = {};
 
-          if (! t->get_map_offset_coords(blit_tl, blit_br, tile, false)) {
+          if (! t->map_offset_coords_get(blit_tl, blit_br, tile, false)) {
             continue;
           }
 
@@ -873,7 +873,7 @@ void Level::lights_update_new_level(void)
         // Need to do this as light position depends on blitting
         //
         t->is_blitted = false;
-        for (auto &l : t->get_light()) {
+        for (auto &l : t->light_get()) {
           l->update();
           l->reset();
         }
@@ -893,7 +893,7 @@ void Level::lights_update_same_level(void)
     for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
       {
-        for (auto &l : t->get_light()) {
+        for (auto &l : t->light_get()) {
           l->update();
           l->reset();
         }

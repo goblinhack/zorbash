@@ -27,13 +27,13 @@ bool Thing::state_resting(bool &do_something, bool &wait)
   //
   // If resting, check if we are rested enough.
   //
-  if ((get_health() >= (get_health_max() / 4) * 3) && (get_stamina() >= (get_stamina_max() / 4) * 3)) {
+  if ((health_get() >= (health_max_get() / 4) * 3) && (stamina_get() >= (stamina_max_get() / 4) * 3)) {
     AI_LOG("Rested enough. Back to work.");
     if (is_player()) {
       game->tick_begin("Robot has rested enough");
     }
     change_state(MONST_STATE_IDLE, "rested enough");
-    get_infop()->last_failed_jump_at = point(0, 0);
+    infop_get()->last_failed_jump_at = point(0, 0);
     return true;
   }
 
@@ -53,7 +53,7 @@ bool Thing::state_resting(bool &do_something, bool &wait)
 
   if (is_able_to_sleep()) {
     sleep_count_incr();
-    if (get_sleep_count() > 5) {
+    if (sleep_count_get() > 5) {
       change_state(MONST_STATE_SLEEPING, "time to sleep");
     }
   }

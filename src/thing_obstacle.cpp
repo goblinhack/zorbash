@@ -308,7 +308,7 @@ bool Thing::ai_obstacle(Thingp it)
     if (! it->is_open) {
       if (it->is_door()) {
         if (is_able_to_open_doors()) {
-          if (get_keys()) {
+          if (keys_get()) {
             return false;
           }
         }
@@ -334,7 +334,7 @@ bool Thing::ai_obstacle(Thingp it)
     //
     if (is_minion()) {
       if (it->is_mob()) {
-        if (it == get_top_mob()) {
+        if (it == top_mob_get()) {
           return true;
         }
       }

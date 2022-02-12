@@ -16,12 +16,12 @@ void Thing::stamina_boost(int v)
     return;
   }
 
-  auto max_stamina = get_stamina_max();
+  auto max_stamina = stamina_max_get();
   if (! max_stamina) {
     return;
   }
 
-  auto old_stamina = get_stamina();
+  auto old_stamina = stamina_get();
   auto new_stamina = old_stamina + v;
   new_stamina      = std::min(new_stamina, max_stamina);
   stamina_set(new_stamina);

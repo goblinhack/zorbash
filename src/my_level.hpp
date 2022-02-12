@@ -414,7 +414,7 @@ public:
       /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
       i++;                                                                                                           \
       if (t->is_hidden) {                                                                                            \
-        t->set_tick_last_did_something(game->tick_current);                                                          \
+        t->tick_last_did_something_set(game->tick_current);                                                          \
         continue;                                                                                                    \
       }                                                                                                              \
                                                                                                                      \
@@ -695,7 +695,7 @@ public:
   int get_total_loot_level(void);
   int get_total_food_level(void);
 
-  float get_wobble(void) const;
+  float wobble_get(void) const;
   float update_wobble(void);
 
   friend std::istream &operator>>(std::istream &in, Bits< Levelp & > my);
@@ -926,7 +926,7 @@ public:
   void fade_in_no_check_unset(const int x, const int y);
   void fade_in_unset(const int x, const int y);
   void fini(void);
-  void get_tiles(void);
+  void tiles_get(void);
   void gfx_water_set(const int x, const int y);
   void gfx_water_unset(const int x, const int y);
   void handle_all_pending_things(int group);

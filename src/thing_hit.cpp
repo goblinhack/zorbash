@@ -434,7 +434,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (real_hitter->is_able_to_tire()) {
-    if (! real_hitter->get_stamina()) {
+    if (! real_hitter->stamina_get()) {
       if (real_hitter->is_player()) {
         msg("You are too tired to attack.");
         return false;
@@ -602,10 +602,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   // wand so we can add in enchants.
   //
   if (hitter->is_laser()) {
-    auto owner = hitter->get_immediate_owner();
+    auto owner = hitter->immediate_owner_get();
     if (owner) {
-      if (owner->get_current_damage()) {
-        damage = owner->get_current_damage();
+      if (owner->current_damage_get()) {
+        damage = owner->current_damage_get();
         owner->current_damage_set(0);
       }
     }
@@ -621,16 +621,16 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         //
         real_hitter->current_damage_set(damage);
         real_hitter->use(skill);
-        damage = real_hitter->get_current_damage();
+        damage = real_hitter->current_damage_get();
       }
     }
   }
 
   if (crit) {
     damage *= 2;
-    IF_DEBUG2 { hitter->log("Hit %s (health %d) for CRIT damage %d", text_the().c_str(), get_health(), damage); }
+    IF_DEBUG2 { hitter->log("Hit %s (health %d) for CRIT damage %d", text_the().c_str(), health_get(), damage); }
   } else {
-    IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), get_health(), damage); }
+    IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), health_get(), damage); }
   }
 
   //
@@ -638,7 +638,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   if (is_player()) {
     if (game->robot_mode) {
-      if (get_infop()->monst_state == MONST_STATE_MOVING) {
+      if (infop_get()->monst_state == MONST_STATE_MOVING) {
         clear_move_path("robot was hit while moving");
       } else {
         //
@@ -902,7 +902,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   // Check for wand of fire projectiles (this is the non real hitter case)
   //
   if (attack_fire || hitter->is_fire() || hitter->is_lava() || real_hitter->is_fire() || real_hitter->is_lava()) {
-    if (set_on_fire("hit by fire")) {
+    if (on_fire_set("hit by fire")) {
       if (is_player()) {
         msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");
       } else {
@@ -918,7 +918,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         msg("%%fg=red$You burn whilst being attacked!%%fg=reset$");
       }
     }
-    if (hitter->set_on_fire("hit by fire due to attacking")) {
+    if (hitter->on_fire_set("hit by fire due to attacking")) {
       msg("%s sets itself on fire!", hitter->text_The().c_str());
     }
   }
@@ -955,7 +955,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  real_hitter->set_tick_last_did_something(game->tick_current);
+  real_hitter->tick_last_did_something_set(game->tick_current);
 
   //
   // Splat graphics
@@ -990,7 +990,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     // Are we carrying a weapon? If not, see if we can do a claw attack
     //
     if (attack_natural || attack_poison || attack_digest ||
-        ! real_hitter->get_equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
+        ! real_hitter->equip_id_carry_anim_get(MONST_EQUIP_WEAPON).ok()) {
       auto claws = real_hitter->tp()->gfx_anim_use();
       if (claws != "") {
         auto natural_attack_effect = level->thing_new(claws, curr_at);
@@ -1076,7 +1076,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // Used by AI to know if we can relax
   //
-  set_tick_last_i_was_attacked(game->tick_current);
+  tick_last_i_was_attacked_set(game->tick_current);
 
   if (is_player()) {
     score_incr(damage);
@@ -1085,7 +1085,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // This might trigger more damage
   //
-  temperature_incr(hitter->get_temperature());
+  temperature_incr(hitter->temperature_get());
 
   //
   // Python callback
@@ -1118,7 +1118,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // If alive, one hit per tick
       //
-      get_aip()->recently_hit_by[ real_hitter->id ] = true;
+      aip_get()->recently_hit_by[ real_hitter->id ] = true;
     }
   }
 
@@ -1162,7 +1162,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
   Thingp real_hitter = nullptr;
 
   if (hitter) {
-    real_hitter = hitter->get_top_owner();
+    real_hitter = hitter->top_owner_get();
 
     //
     // If on fire, the fire is owned by the player. So don't make the player the real hitter.
@@ -1185,7 +1185,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
   // Avoid the lava hitting twice.
   //
   if (maybe_aip()) {
-    if (get_aip()->recently_hit_by.find(real_hitter->id) != get_aip()->recently_hit_by.end()) {
+    if (aip_get()->recently_hit_by.find(real_hitter->id) != aip_get()->recently_hit_by.end()) {
       IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
       return false;
     }

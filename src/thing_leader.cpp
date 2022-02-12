@@ -84,9 +84,9 @@ void Thing::on_death_of_my_leader(void)
   }
 }
 
-float Thing::get_distance_from_leader(void)
+float Thing::distance_from_leader_get(void)
 {
-  auto leader = get_leader();
+  auto leader = leader_get();
   if (! leader) {
     return -1;
   }
@@ -94,9 +94,9 @@ float Thing::get_distance_from_leader(void)
   return distance(curr_at, leader->curr_at);
 }
 
-float Thing::get_distance_from_leader(point p)
+float Thing::distance_from_leader_get(point p)
 {
-  auto leader = get_leader();
+  auto leader = leader_get();
   if (! leader) {
     return -1;
   }
@@ -106,12 +106,12 @@ float Thing::get_distance_from_leader(point p)
 
 bool Thing::too_far_from_leader(void)
 {
-  auto leader = get_leader();
+  auto leader = leader_get();
   if (! leader) {
     return false;
   }
 
-  if (distance(curr_at, leader->curr_at) > get_distance_leader_max()) {
+  if (distance(curr_at, leader->curr_at) > distance_leader_max_get()) {
     return true;
   }
   return false;
@@ -119,12 +119,12 @@ bool Thing::too_far_from_leader(void)
 
 bool Thing::too_far_from_leader(point p)
 {
-  auto leader = get_leader();
+  auto leader = leader_get();
   if (! leader) {
     return false;
   }
 
-  if (distance(p, leader->curr_at) > get_distance_leader_max()) {
+  if (distance(p, leader->curr_at) > distance_leader_max_get()) {
     return true;
   }
   return false;
@@ -132,21 +132,21 @@ bool Thing::too_far_from_leader(point p)
 
 bool Thing::too_far_from_leader(point p, float delta)
 {
-  auto leader = get_leader();
+  auto leader = leader_get();
   if (! leader) {
     return false;
   }
 
-  if (distance(p, leader->curr_at) > get_distance_leader_max() + delta) {
+  if (distance(p, leader->curr_at) > distance_leader_max_get() + delta) {
     return true;
   }
   return false;
 }
 
-Thingp Thing::get_leader(void)
+Thingp Thing::leader_get(void)
 {
   TRACE_NO_INDENT();
-  auto id = get_leader_id();
+  auto id = leader_id_get();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
@@ -158,7 +158,7 @@ Thingp Thing::get_leader(void)
   }
 }
 
-void Thing::set_leader(Thingp leader)
+void Thing::leader_set(Thingp leader)
 {
   TRACE_NO_INDENT();
 
@@ -166,7 +166,7 @@ void Thing::set_leader(Thingp leader)
     verify(MTYPE_THING, leader);
   }
 
-  auto old_leader = get_leader();
+  auto old_leader = leader_get();
   if (old_leader) {
     if (old_leader == leader) {
       return;
@@ -198,13 +198,13 @@ void Thing::set_leader(Thingp leader)
       //
       // You are being led
       //
-      set_leader_id(leader->id);
+      leader_id_set(leader->id);
       leader->follower_count_incr();
       dbg("Leader set");
       on_you_are_declared_a_follower(leader);
     }
   } else {
-    set_leader_id(NoThingId);
+    leader_id_set(NoThingId);
     dbg("Leader unset");
   }
 }
@@ -213,14 +213,14 @@ void Thing::remove_leader(void)
 {
   TRACE_NO_INDENT();
 
-  auto old_leader = get_leader();
+  auto old_leader = leader_get();
   if (! old_leader) {
     return;
   }
 
   dbg("Remove leader %s", old_leader->to_string().c_str());
 
-  set_leader_id(NoThingId);
+  leader_id_set(NoThingId);
   old_leader->follower_count_decr();
 }
 
@@ -231,7 +231,7 @@ void Thing::release_followers(void)
 {
   TRACE_NO_INDENT();
 
-  if (! get_follower_count()) {
+  if (! follower_count_get()) {
     return;
   }
 
@@ -242,7 +242,7 @@ void Thing::release_followers(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto follower = p.second;
-      auto o        = follower->get_leader();
+      auto o        = follower->leader_get();
       if (o && (o == this)) {
         follower->remove_leader();
       }
@@ -254,7 +254,7 @@ void Thing::notify_of_death_of_my_leader(void)
 {
   TRACE_NO_INDENT();
 
-  auto leader = get_leader();
+  auto leader = leader_get();
   if (! leader) {
     return;
   }
@@ -270,7 +270,7 @@ void Thing::notify_followers_of_death_of_my_leader(void)
 {
   TRACE_NO_INDENT();
 
-  if (! get_follower_count()) {
+  if (! follower_count_get()) {
     return;
   }
 
@@ -281,7 +281,7 @@ void Thing::notify_followers_of_death_of_my_leader(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto follower = p.second;
-      auto o        = follower->get_leader();
+      auto o        = follower->leader_get();
       if (o && (o == this)) {
         follower->notify_of_death_of_my_leader();
       }
@@ -292,12 +292,12 @@ void Thing::notify_followers_of_death_of_my_leader(void)
 //
 // Get all things following you
 //
-std::list< Thingp > Thing::get_all_followers(void)
+std::list< Thingp > Thing::all_followers_get(void)
 {
   TRACE_NO_INDENT();
 
   std::list< Thingp > out;
-  if (! get_follower_count()) {
+  if (! follower_count_get()) {
     return out;
   }
 
@@ -308,7 +308,7 @@ std::list< Thingp > Thing::get_all_followers(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto follower = p.second;
-      auto leader   = follower->get_leader();
+      auto leader   = follower->leader_get();
       if (leader && (leader == this)) {
         out.push_back(follower);
       }
@@ -324,8 +324,8 @@ bool Thing::same_leader(Thingp it)
     return false;
   }
 
-  auto my_owner  = get_top_owner();
-  auto its_owner = it->get_top_owner();
+  auto my_owner  = top_owner_get();
+  auto its_owner = it->top_owner_get();
 
   if (! is_interesting()) {
     return false;
@@ -376,8 +376,8 @@ bool Thing::same_leader(Thingp it)
     return true;
   }
 
-  Thingp my_leader  = me->get_leader();
-  Thingp its_leader = it->get_leader();
+  Thingp my_leader  = me->leader_get();
+  Thingp its_leader = it->leader_get();
 
   if (my_leader) {
     dbg("my leader: %s", my_leader->to_short_string().c_str());

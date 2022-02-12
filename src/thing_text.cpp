@@ -61,7 +61,7 @@ std::string Thing::text_the(bool include_owner)
   //
   // "the goblin's short sword" for example
   //
-  auto top_owner = get_top_owner();
+  auto top_owner = top_owner_get();
   if (include_owner) {
     if (top_owner && ! top_owner->is_player()) {
       out += top_owner->text_name();
@@ -101,7 +101,7 @@ std::string Thing::text_the_no_dying(bool include_owner)
   //
   // "the goblin's short sword" for example
   //
-  auto top_owner = get_top_owner();
+  auto top_owner = top_owner_get();
   if (include_owner) {
     if (top_owner && ! top_owner->is_player()) {
       out += top_owner->text_name();
@@ -238,8 +238,8 @@ std::string Thing::short_text_capitalise(void)
     c++;
   }
 
-  if (get_enchant()) {
-    out += " +" + std::to_string(get_enchant());
+  if (enchant_get()) {
+    out += " +" + std::to_string(enchant_get());
   }
 
   return out;
@@ -272,7 +272,7 @@ void Thing::show_botcon_description(void)
   //
   // Want to show that you can drop a bag if you select it.
   //
-  if (get_immediate_owner()) {
+  if (immediate_owner_get()) {
     if (is_droppable()) {
       text += " %%fg=orange$" + ::to_string(game->config.key_drop) + "%%fg=reset$ to drop.";
     }
@@ -301,7 +301,7 @@ void Thing::show_botcon_description(void)
     text += " Necrotic. ";
   }
 
-  if (get_immediate_owner()) {
+  if (immediate_owner_get()) {
     if (is_usable()) {
       if (is_food()) {
         text += " %%fg=green$" + ::to_string(game->config.key_eat) + "%%fg=reset$ to eat.";

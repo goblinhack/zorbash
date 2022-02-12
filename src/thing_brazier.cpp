@@ -57,7 +57,7 @@ void Thing::brazier_tick(void)
     if (! is_dead) {
       if (pcg_random_range(0, 100) < 20) {
         msg("You stumble into the flames!");
-        set_on_fire("stumbled into flames");
+        on_fire_set("stumbled into flames");
       }
     }
   }

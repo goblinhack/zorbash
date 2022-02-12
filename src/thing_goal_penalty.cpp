@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <set>
 
-int Thing::get_goal_penalty(Thingp attacker)
+int Thing::goal_penalty_get(Thingp attacker)
 {
   TRACE_NO_INDENT();
   auto aip = maybe_aip();

@@ -41,6 +41,6 @@ void Thing::popup(std::string const &m)
   last_at.y = curr_at.y - dy;
 
   auto msg = level->thing_new("msg", curr_at - point(dx, dy));
-  msg->set_msg(m);
+  msg->msg_set(m);
   msg->fadeup(6.0, 0.05, 3000);
 }

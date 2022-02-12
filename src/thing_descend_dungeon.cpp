@@ -21,7 +21,7 @@ bool Thing::descend_dungeon_tick(void)
   TRACE_AND_INDENT();
   dbg("Descend tick");
 
-  if (game->tick_current - get_tick_last_level_change() <= 1) {
+  if (game->tick_current - tick_last_level_change_get() <= 1) {
     if (is_player()) {
       dbg("Location check, descend, no too soon");
     }
@@ -115,7 +115,7 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
 
         dbg("Level change");
         level_change(l);
-        set_tick_last_level_change(game->tick_current);
+        tick_last_level_change_set(game->tick_current);
 
         dbg("Level change move to destination");
         move_to_immediately(point(x, y));
@@ -139,7 +139,7 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
         move_finish();
 
         dbg("Level change update interpolated position");
-        set_interpolated_at(make_fpoint(curr_at));
+        interpolated_at_set(make_fpoint(curr_at));
         update_interpolated_position();
 
         dbg("Level change location check");

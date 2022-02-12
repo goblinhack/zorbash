@@ -13,15 +13,15 @@
 
 void Thing::fadeup(float fadeup_height, float fadeup_fade, ts_t ms)
 {
-  auto t = set_ts_fadeup_begin(time_get_time_ms_cached());
-  set_ts_fadeup_end(t + ms);
+  auto t = ts_fadeup_begin_set(time_get_time_ms_cached());
+  ts_fadeup_end_set(t + ms);
 
-  set_fadeup_height(fadeup_height);
-  set_fadeup_fade(fadeup_fade);
+  fadeup_height_set(fadeup_height);
+  fadeup_fade_set(fadeup_fade);
   is_fadeup = true;
 }
 
-float Thing::get_fadeup(void)
+float Thing::fadeup_get(void)
 {
   if (! is_fadeup) {
     alpha = 255;
@@ -30,20 +30,20 @@ float Thing::get_fadeup(void)
 
   auto t = time_get_time_ms_cached();
 
-  if (t >= get_ts_fadeup_end()) {
+  if (t >= ts_fadeup_end_get()) {
     dead("by fadeup finished");
     alpha = 0;
     return (-1);
   }
 
-  float time_step = (float) (t - get_ts_fadeup_begin()) / (float) (get_ts_fadeup_end() - get_ts_fadeup_begin());
+  float time_step = (float) (t - ts_fadeup_begin_get()) / (float) (ts_fadeup_end_get() - ts_fadeup_begin_get());
 
   float height = last_blit_br.y - last_blit_tl.y;
 
   alpha = (uint8_t) (255.0 - (250.0 * time_step));
 
   height *= sin(time_step * RAD_90);
-  height *= get_fadeup_height();
+  height *= fadeup_height_get();
 
   return (height);
 }

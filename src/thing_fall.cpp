@@ -67,10 +67,10 @@ void Thing::fall(float fall_height, ts_t ms)
     return;
   }
 
-  auto t = set_ts_fall_begin(time_get_time_ms_cached());
-  set_ts_fall_end(t + ms);
+  auto t = ts_fall_begin_set(time_get_time_ms_cached());
+  ts_fall_end_set(t + ms);
 
-  set_fall_height(fall_height);
+  fall_height_set(fall_height);
 
   dbg("Begin falling");
   TRACE_AND_INDENT();
@@ -105,7 +105,7 @@ void Thing::fall(float fall_height, ts_t ms)
   }
 }
 
-float Thing::get_fall(void)
+float Thing::fall_get(void)
 {
   if (! is_falling) {
     return 0;
@@ -113,7 +113,7 @@ float Thing::get_fall(void)
 
   auto ts = time_get_time_ms_cached();
 
-  if (ts >= get_ts_fall_end()) {
+  if (ts >= ts_fall_end_get()) {
     is_falling = false;
     dbg("End of falling timestamp");
     TRACE_AND_INDENT();
@@ -125,12 +125,12 @@ float Thing::get_fall(void)
     // Things that do not tick, like bones, need to fall on the end of the tick
     //
     if (! is_tickable()) {
-      level->all_things_pending_fall[ get_group() ].insert(std::pair(id, this));
+      level->all_things_pending_fall[ group_get() ].insert(std::pair(id, this));
     }
     return 0;
   }
 
-  float time_step = (float) (ts - get_ts_fall_begin()) / (float) (get_ts_fall_end() - get_ts_fall_begin());
+  float time_step = (float) (ts - ts_fall_begin_get()) / (float) (ts_fall_end_get() - ts_fall_begin_get());
   dbg("Is currently falling, dt %f", time_step);
 
   //
@@ -147,7 +147,7 @@ float Thing::get_fall(void)
     is_waiting_to_leave_level_has_completed_fall = true;
   }
 
-  float height = get_fall_height() * time_step;
+  float height = fall_height_get() * time_step;
 
   return (height);
 }
@@ -257,7 +257,7 @@ bool Thing::fall_to_next_level(void)
         msg("%%fg=red$You tumble into the void!%%fg=reset$");
         popup("Aargh");
       } else {
-        if (get_distance_to_player() >= DMAP_IS_PASSABLE) {
+        if (distance_to_player_get() >= DMAP_IS_PASSABLE) {
           if (is_monst()) {
             msg("You hear the distant cry of some creature falling");
           } else if (is_item()) {
@@ -303,7 +303,7 @@ bool Thing::fall_to_next_level(void)
         l->update_all_ticks();
       }
 
-      set_fall_height(0);
+      fall_height_set(0);
       if (is_player() || is_monst() || is_item()) {
         wobble(90);
       }
@@ -318,7 +318,7 @@ bool Thing::fall_to_next_level(void)
       }
 
       if (is_wand() || is_potion() || is_mob() || is_monst()) {
-        fall_damage = get_health() / 2;
+        fall_damage = health_get() / 2;
       }
 
       if (is_ring()) {

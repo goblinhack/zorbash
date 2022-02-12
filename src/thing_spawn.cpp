@@ -44,7 +44,7 @@ bool Thing::spawn_next_to(const std::string &what)
   // Don't spawn too many minions
   //
   if (is_mob()) {
-    if (get_minion_count() >= minion_limit()) {
+    if (minion_count_get() >= minion_limit()) {
       return false;
     }
   }
@@ -82,11 +82,11 @@ bool Thing::spawn_next_to(const std::string &what)
   c->inherit_from(this);
 
   if (c->is_minion()) {
-    c->set_mob(this);
+    c->mob_set(this);
   }
 
   if (is_spawner()) {
-    c->set_spawned_owner(this);
+    c->spawned_owner_set(this);
   }
 
   //
@@ -161,7 +161,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   auto c = level->thing_new(what, chosen);
   c->inherit_from(this);
   if (is_spawner()) {
-    c->set_spawned_owner(this);
+    c->spawned_owner_set(this);
   }
 
   //
@@ -216,7 +216,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
-      // Radius needs to be the same as the check in get_carried_wand_highest_value_for_target
+      // Radius needs to be the same as the check in carried_wand_highest_value_for_target_get
       //
       if (dist >= radius_max) {
         continue;
@@ -232,10 +232,10 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
 
       auto c = level->thing_new(what, point(x, y));
       c->inherit_from(this);
-      c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
+      c->ts_anim_delay_end_set(time_get_time_ms_cached() + dist * 100);
 
       if (is_spawner()) {
-        c->set_spawned_owner(this);
+        c->spawned_owner_set(this);
       }
 
       //
@@ -275,7 +275,7 @@ bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uin
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
-      // Radius needs to be the same as the check in get_carried_wand_highest_value_for_target
+      // Radius needs to be the same as the check in carried_wand_highest_value_for_target_get
       //
       if (dist >= radius_max) {
         continue;
@@ -291,10 +291,10 @@ bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uin
 
       auto c = level->thing_new(what, point(x, y));
       c->inherit_from(this);
-      c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
+      c->ts_anim_delay_end_set(time_get_time_ms_cached() + dist * 100);
 
       if (is_spawner()) {
-        c->set_spawned_owner(this);
+        c->spawned_owner_set(this);
       }
 
       //
@@ -350,7 +350,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
       point spawn_at = curr_at + point(x, y);
 
       //
-      // Radius needs to be the same as the check in get_carried_wand_highest_value_for_target
+      // Radius needs to be the same as the check in carried_wand_highest_value_for_target_get
       //
       float dist = distance(spawn_at, curr_at);
       if (dist >= radius_max) {
@@ -389,10 +389,10 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
       auto c = level->thing_new(what, spawn_at);
 
       c->inherit_from(this);
-      c->set_ts_anim_delay_end(time_get_time_ms_cached() + dist * 100);
+      c->ts_anim_delay_end_set(time_get_time_ms_cached() + dist * 100);
 
       if (is_spawner()) {
-        c->set_spawned_owner(this);
+        c->spawned_owner_set(this);
       }
 
       //
@@ -450,7 +450,7 @@ bool Thing::spawn_fire(const std::string &what)
   c->inherit_from(this);
 
   if (is_spawner()) {
-    c->set_spawned_owner(this);
+    c->spawned_owner_set(this);
   }
 
   //
@@ -491,7 +491,7 @@ bool Thing::spawn_gas_poison(int radius)
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
-      // Radius needs to be the same as the check in get_carried_wand_highest_value_for_target
+      // Radius needs to be the same as the check in carried_wand_highest_value_for_target_get
       //
       if (dist > radius) {
         continue;
@@ -558,7 +558,7 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
   auto c = level->thing_new(what, chosen);
   c->inherit_from(this);
   if (is_spawner()) {
-    c->set_spawned_owner(this);
+    c->spawned_owner_set(this);
   }
 
   //
@@ -592,7 +592,7 @@ Thingp Thing::spawn_at(const std::string &what)
   auto c = level->thing_new(what, chosen);
   c->inherit_from(this);
   if (is_spawner()) {
-    c->set_spawned_owner(this);
+    c->spawned_owner_set(this);
   }
 
   //

@@ -17,7 +17,7 @@ void Thing::level_push(void)
   TRACE_NO_INDENT();
   level_pop();
 
-  int group = get_group();
+  int group = group_get();
   level->put_thing((int) curr_at.x, (int) curr_at.y, id, group);
   auto mx       = (int16_t) (int) curr_at.x;
   auto my       = (int16_t) (int) curr_at.y;

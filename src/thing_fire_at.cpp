@@ -63,7 +63,7 @@ bool Thing::on_firing_at_something(Thingp target)
 /*
  * Find the thing with the highest priority to hit.
  */
-Thingp Thing::get_best_fire_at_target(void)
+Thingp Thing::best_fire_at_target_get(void)
 {
   ThingPossibleHit *best = nullptr;
   int               i;
@@ -79,7 +79,7 @@ Thingp Thing::get_best_fire_at_target(void)
     //
     // More dangerous things (to me) are preferred
     //
-    cand->priority += get_danger_current_level(cand->target);
+    cand->priority += danger_current_level_get(cand->target);
 
     //
     // Closer things are preferred
@@ -107,7 +107,7 @@ Thingp Thing::get_best_fire_at_target(void)
  */
 static void thing_possible_hit_add(Thingp me, Thingp target)
 {
-  if (! get(me->get_aip()->can_see_currently.can_see, (int) target->curr_at.x, (int) target->curr_at.y)) {
+  if (! get(me->aip_get()->can_see_currently.can_see, (int) target->curr_at.x, (int) target->curr_at.y)) {
     return;
   }
 
@@ -131,7 +131,7 @@ bool Thing::fire_at_target(void)
   }
 
   int   dx, dy;
-  float distance = get_distance_vision();
+  float distance = distance_vision_get();
 
   for (dx = -distance; dx <= distance; dx++)
     for (dy = -distance; dy <= distance; dy++) {
@@ -179,7 +179,7 @@ bool Thing::fire_at_target(void)
       FOR_ALL_THINGS_END();
     }
 
-  auto target = get_best_fire_at_target();
+  auto target = best_fire_at_target_get();
   if (! target) {
     return false;
   }
@@ -214,7 +214,7 @@ bool Thing::fire_at(Thingp target)
     return false;
   }
 
-  Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
+  Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
   if (! curr_weapon) {
     return false;
   }
@@ -225,7 +225,7 @@ bool Thing::fire_at(Thingp target)
   if (! curr_weapon->is_wand()) {
     if (is_able_to_use_wands()) {
       Thingp best_wand = nullptr;
-      get_carried_wand_highest_value_for_target(&best_wand, target);
+      carried_wand_highest_value_for_target_get(&best_wand, target);
       if (best_wand) {
         curr_weapon = best_wand;
       } else {

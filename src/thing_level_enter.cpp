@@ -22,7 +22,7 @@ void Thing::level_enter(void)
   }
   TRACE_AND_INDENT();
 
-  int  group  = get_group();
+  int  group  = group_get();
   auto result = level->all_things[ group ].insert(std::pair(id, this));
   if (result.second == false) {
     err("Failed to insert into thing map");
@@ -78,8 +78,8 @@ void Thing::level_enter(void)
   level_push();
 
   if (is_player() || is_monst()) {
-    set_where_i_dropped_an_item_last(point(-1, -1));
-    set_where_i_failed_to_collect_last(point(-1, -1));
+    where_i_dropped_an_item_last_set(point(-1, -1));
+    where_i_failed_to_collect_last_set(point(-1, -1));
   }
 
   //

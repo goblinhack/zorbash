@@ -759,21 +759,21 @@ public:
   void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void con_(const char *fmt, va_list args); // compile error without
 
-  const Dice &get_damage_acid_dice(void) const;
-  const Dice &get_damage_natural_dice(void) const;
-  const Dice &get_damage_crush_dice(void) const;
-  const Dice &get_damage_digest_dice(void) const;
-  const Dice &get_damage_energy_dice(void) const;
-  const Dice &get_damage_fire_dice(void) const;
-  const Dice &get_damage_future1_dice(void) const;
-  const Dice &get_damage_future2_dice(void) const;
-  const Dice &get_damage_future3_dice(void) const;
-  const Dice &get_damage_cold_dice(void) const;
-  const Dice &get_damage_lightning_dice(void) const;
-  const Dice &get_damage_melee_dice(void) const;
-  const Dice &get_damage_necrosis_dice(void) const;
-  const Dice &get_damage_poison_dice(void) const;
-  const Dice &get_health_initial_dice(void) const;
+  const Dice &damage_acid_dice_get(void) const;
+  const Dice &damage_natural_dice_get(void) const;
+  const Dice &damage_crush_dice_get(void) const;
+  const Dice &damage_digest_dice_get(void) const;
+  const Dice &damage_energy_dice_get(void) const;
+  const Dice &damage_fire_dice_get(void) const;
+  const Dice &damage_future1_dice_get(void) const;
+  const Dice &damage_future2_dice_get(void) const;
+  const Dice &damage_future3_dice_get(void) const;
+  const Dice &damage_cold_dice_get(void) const;
+  const Dice &damage_lightning_dice_get(void) const;
+  const Dice &damage_melee_dice_get(void) const;
+  const Dice &damage_necrosis_dice_get(void) const;
+  const Dice &damage_poison_dice_get(void) const;
+  const Dice &health_initial_dice_get(void) const;
   const Dice &gold_value_dice(void) const;
   const Dice &lifespan_dice(void) const;
   const Dice &nutrition_dice(void) const;
@@ -782,23 +782,23 @@ public:
   const Dice &spawn_group_size_dice(void) const;
 
   const int cash(void) const;
-  const int get_damage_acid(void) const;
-  const int get_damage_natural_attack(void) const;
-  const int get_damage_crush(void) const;
-  const int get_damage_digest(void) const;
-  const int get_damage_energy(void) const;
-  const int get_damage_fire(void) const;
-  const int get_damage_future1(void) const;
-  const int get_damage_future2(void) const;
-  const int get_damage_future3(void) const;
-  const int get_damage_cold(void) const;
-  const int get_damage_lightning(void) const;
-  const int get_damage_melee(void) const;
-  const int get_damage_necrosis(void) const;
-  const int get_damage_poison(void) const;
-  const int get_health_initial(void) const;
-  const int get_on_idle_tick_frequency(void) const;
-  const int get_spawn_group_size(void) const;
+  const int damage_acid_get(void) const;
+  const int damage_natural_attack_get(void) const;
+  const int damage_crush_get(void) const;
+  const int damage_digest_get(void) const;
+  const int damage_energy_get(void) const;
+  const int damage_fire_get(void) const;
+  const int damage_future1_get(void) const;
+  const int damage_future2_get(void) const;
+  const int damage_future3_get(void) const;
+  const int damage_cold_get(void) const;
+  const int damage_lightning_get(void) const;
+  const int damage_melee_get(void) const;
+  const int damage_necrosis_get(void) const;
+  const int damage_poison_get(void) const;
+  const int health_initial_get(void) const;
+  const int on_idle_tick_frequency_get(void) const;
+  const int spawn_group_size_get(void) const;
   const int lifespan(void) const;
   const int nutrition(void) const;
   const int resurrect(void) const;
@@ -1031,12 +1031,12 @@ public:
   int environ_avoids_poison(void) const { return _environ_avoids_poison; }
   int environ_avoids_water(void) const { return _environ_avoids_water; }
   int get_danger_level(void);
-  int get_spawn_group_radius(void) const { return _spawn_group_radius; }
-  int get_stat_con(void) const { return _stat_con; }
-  int get_stat_def(void) const { return _stat_def; }
-  int get_stat_dex(void) const { return _stat_dex; }
-  int get_stat_luck(void) const { return _stat_luck; }
-  int get_stat_str(void) const { return _stat_str; }
+  int spawn_group_radius_get(void) const { return _spawn_group_radius; }
+  int stat_con_get(void) const { return _stat_con; }
+  int stat_def_get(void) const { return _stat_def; }
+  int stat_dex_get(void) const { return _stat_dex; }
+  int stat_luck_get(void) const { return _stat_luck; }
+  int stat_str_get(void) const { return _stat_str; }
   int gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
   int gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
   int gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }

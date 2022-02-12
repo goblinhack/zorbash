@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 
-std::list< Thingp > Thing::get_food_list(void)
+std::list< Thingp > Thing::food_list_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -46,7 +46,7 @@ std::list< Thingp > Thing::get_food_list(void)
   return out;
 }
 
-std::vector< Thingp > Thing::get_food_vector(void)
+std::vector< Thingp > Thing::food_vector_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -82,7 +82,7 @@ std::vector< Thingp > Thing::get_food_vector(void)
   return out;
 }
 
-int Thing::get_carried_food_count(void)
+int Thing::carried_food_count_get(void)
 {
   TRACE_NO_INDENT();
   int count = 0;
@@ -91,7 +91,7 @@ int Thing::get_carried_food_count(void)
     return count;
   }
 
-  for (const auto t : get_food_list()) {
+  for (const auto t : food_list_get()) {
     if (t->is_food()) {
       count++;
     }
@@ -99,7 +99,7 @@ int Thing::get_carried_food_count(void)
   return count;
 }
 
-int Thing::get_carried_food_least_value(Thingp *out)
+int Thing::carried_food_least_value_get(Thingp *out)
 {
   TRACE_NO_INDENT();
   int least_value = -1;
@@ -109,12 +109,12 @@ int Thing::get_carried_food_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto t : get_food_list()) {
+  for (const auto t : food_list_get()) {
     if (! t->is_food()) {
       continue;
     }
 
-    auto v = get_value(t);
+    auto v = value_get(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -128,7 +128,7 @@ int Thing::get_carried_food_least_value(Thingp *out)
   return least_value;
 }
 
-int Thing::get_carried_food_highest_value(Thingp *out)
+int Thing::carried_food_highest_value_get(Thingp *out)
 {
   TRACE_NO_INDENT();
   int highest_value = -1;
@@ -138,12 +138,12 @@ int Thing::get_carried_food_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto t : get_food_list()) {
+  for (const auto t : food_list_get()) {
     if (! t->is_food()) {
       continue;
     }
 
-    auto v = get_value(t);
+    auto v = value_get(t);
     if (! *out) {
       *out          = t;
       highest_value = v;

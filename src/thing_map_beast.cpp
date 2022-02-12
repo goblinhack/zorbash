@@ -9,24 +9,24 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-int Thing::get_map_beast_count(void)
+int Thing::map_beast_count_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->map_beast_count);
+    return (infop_get()->map_beast_count);
   } else {
     return 0;
   }
 }
 
-void Thing::set_map_beast_count(int v)
+void Thing::map_beast_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  get_infop()->map_beast_count = v;
+  infop_get()->map_beast_count = v;
 }
 
-int Thing::get_map_beast_carried_count(void)
+int Thing::map_beast_carried_count_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -35,7 +35,7 @@ int Thing::get_map_beast_carried_count(void)
   }
 
   int v = 0;
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     v += t->is_map_beast() ? 1 : 0;
   }
   return v;
@@ -48,11 +48,11 @@ void Thing::map_beast_check(void)
   //
   // If carrying a beast map we need to update the map_mini
   //
-  auto count = get_map_beast_carried_count();
-  if (get_map_beast_count() != count) {
+  auto count = map_beast_carried_count_get();
+  if (map_beast_count_get() != count) {
     if (is_player()) {
       level->is_map_mini_valid = false;
     }
   }
-  set_map_beast_count(count);
+  map_beast_count_set(count);
 }

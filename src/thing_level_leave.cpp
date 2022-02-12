@@ -34,21 +34,21 @@ void Thing::level_leave(void)
   // release_followers();
 
   {
-    auto it = get_immediate_mob();
+    auto it = immediate_mob_get();
     if (it) {
       remove_mob();
     }
   }
 
   {
-    auto it = get_leader();
+    auto it = leader_get();
     if (it) {
       remove_leader();
     }
   }
 
   {
-    auto it = get_immediate_spawned_owner();
+    auto it = immediate_spawned_owner_get();
     if (it) {
       remove_spawner_owner();
     }
@@ -66,7 +66,7 @@ void Thing::level_leave(void)
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
-    int group = get_group();
+    int group = group_get();
     if (level->all_things_of_interest_walk_in_progress) {
       level->all_things_of_interest_pending_add[ group ].erase(id);
       level->all_things_of_interest_pending_remove[ group ].insert(std::pair(id, this));
@@ -82,7 +82,7 @@ void Thing::level_leave(void)
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
-    int group = get_group();
+    int group = group_get();
     if (level->all_animated_things_walk_in_progress) {
       level->all_animated_things_pending_add[ group ].erase(id);
       level->all_animated_things_pending_remove[ group ].insert(std::pair(id, this));

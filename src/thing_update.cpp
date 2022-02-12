@@ -27,7 +27,7 @@ void Thing::update_light(void)
   }
 
   size_t c = 0;
-  for (auto l : get_light()) {
+  for (auto l : light_get()) {
     l->cached_light_pos = point(-1, -1);
     c++;
   }
@@ -47,9 +47,9 @@ void Thing::update(void)
   //
   // If polymorphed, retain the same health
   //
-  if (! get_health()) {
+  if (! health_get()) {
     TRACE_NO_INDENT();
-    auto v = tpp->get_health_initial();
+    auto v = tpp->health_initial_get();
     if (unlikely(v)) {
       health_set(v);
       health_max_set(v);
@@ -59,7 +59,7 @@ void Thing::update(void)
   //
   // If polymorphed, retain the same health
   //
-  if (! get_stamina()) {
+  if (! stamina_get()) {
     TRACE_NO_INDENT();
     auto v = tpp->stamina();
     if (unlikely(v)) {
@@ -87,7 +87,7 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->get_stat_def();
+    auto v = tpp->stat_def_get();
     if (unlikely(v)) {
       stat_def_set(v);
     }
@@ -103,7 +103,7 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->get_stat_dex();
+    auto v = tpp->stat_dex_get();
     if (unlikely(v)) {
       stat_dex_set(v);
     }
@@ -111,7 +111,7 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->get_stat_luck();
+    auto v = tpp->stat_luck_get();
     if (unlikely(v)) {
       stat_luck_set(v);
     }
@@ -223,7 +223,7 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->get_stat_con();
+    auto v = tpp->stat_con_get();
     if (unlikely(v)) {
       stat_con_set(v);
     }
@@ -237,7 +237,7 @@ void Thing::update(void)
     }
   }
 
-  if (! get_temperature()) {
+  if (! temperature_get()) {
     TRACE_NO_INDENT();
     auto v = tpp->temperature();
     if (unlikely(v)) {
@@ -266,7 +266,7 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->get_stat_str();
+    auto v = tpp->stat_str_get();
     if (unlikely(v)) {
       stat_str_set(v);
     }
@@ -422,7 +422,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_weapon = nullptr;
-    get_carried_weapon_highest_value(&best_weapon);
+    carried_weapon_highest_value_get(&best_weapon);
     if (best_weapon) {
       equip(best_weapon, MONST_EQUIP_WEAPON);
     }
@@ -436,7 +436,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_armor = nullptr;
-    get_carried_armor_highest_value(&best_armor);
+    carried_armor_highest_value_get(&best_armor);
     if (best_armor) {
       equip(best_armor, MONST_EQUIP_ARMOR);
     }
@@ -450,7 +450,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_wand = nullptr;
-    get_carried_wand_highest_value(&best_wand);
+    carried_wand_highest_value_get(&best_wand);
     if (best_wand) {
       equip(best_wand, MONST_EQUIP_WEAPON);
     }
@@ -468,7 +468,7 @@ void Thing::update(void)
     //
     {
       Thingp best_ring = nullptr;
-      get_carried_ring_highest_value(&best_ring);
+      carried_ring_highest_value_get(&best_ring);
       if (best_ring) {
         equip(best_ring, MONST_EQUIP_RING1);
       }
@@ -478,7 +478,7 @@ void Thing::update(void)
     //
     {
       Thingp best_ring = nullptr;
-      get_carried_ring_highest_value(&best_ring);
+      carried_ring_highest_value_get(&best_ring);
       if (best_ring) {
         equip(best_ring, MONST_EQUIP_RING2);
       }
@@ -493,7 +493,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_helmet = nullptr;
-    get_carried_helmet_highest_value(&best_helmet);
+    carried_helmet_highest_value_get(&best_helmet);
     if (best_helmet) {
       equip(best_helmet, MONST_EQUIP_HELMET);
     }
@@ -507,7 +507,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_amulet = nullptr;
-    get_carried_amulet_highest_value(&best_amulet);
+    carried_amulet_highest_value_get(&best_amulet);
     if (best_amulet) {
       equip(best_amulet, MONST_EQUIP_AMULET);
     }
@@ -521,7 +521,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_boots = nullptr;
-    get_carried_boots_highest_value(&best_boots);
+    carried_boots_highest_value_get(&best_boots);
     if (best_boots) {
       equip(best_boots, MONST_EQUIP_BOOTS);
     }
@@ -535,7 +535,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_gauntlet = nullptr;
-    get_carried_gauntlet_highest_value(&best_gauntlet);
+    carried_gauntlet_highest_value_get(&best_gauntlet);
     if (best_gauntlet) {
       equip(best_gauntlet, MONST_EQUIP_GAUNTLET);
     }
@@ -549,7 +549,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_cloak = nullptr;
-    get_carried_cloak_highest_value(&best_cloak);
+    carried_cloak_highest_value_get(&best_cloak);
     if (best_cloak) {
       equip(best_cloak, MONST_EQUIP_CLOAK);
     }
@@ -563,7 +563,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_shield = nullptr;
-    get_carried_shield_highest_value(&best_shield);
+    carried_shield_highest_value_get(&best_shield);
     if (best_shield) {
       equip(best_shield, MONST_EQUIP_SHIELD);
     }
