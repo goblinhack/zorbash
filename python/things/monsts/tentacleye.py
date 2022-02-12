@@ -81,6 +81,7 @@ def tp_init(name, text_name):
     my.tp_set_is_meat(self, True)
     my.tp_set_is_monst_class_c(self, True)
     my.tp_set_is_monst(self, True)
+    my.tp_set_move_speed(self, 100)
     my.tp_set_is_moveable(self, True)
     my.tp_set_is_shovable(self, True)
     my.tp_set_is_tickable(self, True)

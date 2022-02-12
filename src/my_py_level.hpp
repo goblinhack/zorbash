@@ -362,7 +362,7 @@ PyObject *level_unused_flag133_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag134_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag135_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag136_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag137_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_move_speed_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag14_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag15_at(PyObject *obj, PyObject *args, PyObject *keywds);

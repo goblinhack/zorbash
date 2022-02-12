@@ -34,8 +34,8 @@ do
     echo $IN
 
     sed '1,/self = tp.Tp(/!d' $IN > $PRE
-    sed '/self = tp.Tp(/,/self.set_z_prio(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
-    sed '/self.set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
+    sed '/self = tp.Tp(/,/set_z_prio(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
+    sed '/set_z_prio(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \
       set_aggression_level_pct \
@@ -437,7 +437,7 @@ do
       set_unused_flag134 \
       set_unused_flag135 \
       set_unused_flag136 \
-      set_unused_flag137 \
+      set_move_speed \
       set_damage_received_doubled_from_cold \
       set_is_cold \
       set_temperature_change_sensitive \
