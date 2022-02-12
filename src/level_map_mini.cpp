@@ -60,7 +60,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
   }
 
   bool has_map_beast = false;
-  if (player && (player->get_map_beast_count() > 0)) {
+  if (player && (player->map_beast_count_get() > 0)) {
     has_map_beast = true;
   }
 

@@ -85,7 +85,7 @@ void Level::describe(point p)
       continue;
     }
 
-    if (t->get_immediate_owner()) {
+    if (t->immediate_owner_get()) {
       IF_DEBUG2 { t->log("Ignore for describe, has owner"); }
       continue;
     }
@@ -138,7 +138,7 @@ void Level::describe(point p)
       continue;
     }
 
-    if (t->get_immediate_owner()) {
+    if (t->immediate_owner_get()) {
       IF_DEBUG2 { t->log("Ignore for describe, has owner"); }
       continue;
     }
@@ -178,7 +178,7 @@ void Level::describe(point p)
       else { continue; }
     }
 
-    if (t->get_immediate_owner() || t->is_player() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
+    if (t->immediate_owner_get() || t->is_player() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
       IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }
@@ -269,7 +269,7 @@ void Level::describe(point p)
     // If nothing else and hovering over the player show that
     //
     if (cursor && ! cursor->is_hidden && ! cursor->is_dead && (cursor->curr_at == player->curr_at) &&
-        player->get_aip()->move_path.empty()) {
+        player->aip_get()->move_path.empty()) {
       push_back_if_unique(hover_over_things, player);
     }
   }

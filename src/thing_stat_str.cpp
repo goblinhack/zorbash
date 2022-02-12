@@ -15,34 +15,34 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-int Thing::get_stat_str_total(void)
+int Thing::stat_str_total_get(void)
 {
   TRACE_NO_INDENT();
 
-  auto owner = get_top_owner();
+  auto owner = top_owner_get();
   if (owner) {
-    return owner->get_stat_str();
+    return owner->stat_str_get();
   }
 
   int stat = 0;
   int prev = 0;
 
-  stat = get_stat_str();
+  stat = stat_str_get();
   prev = stat;
-  dbg("Str: (%d/%d): %d", get_stat_str(), stat_to_bonus(get_stat_str()), stat);
+  dbg("Str: (%d/%d): %d", stat_str_get(), stat_to_bonus(stat_str_get()), stat);
 
   FOR_ALL_EQUIP(e)
   {
-    auto iter = get_equip(e);
+    auto iter = equip_get(e);
     if (iter) {
-      stat += iter->get_stat_str_mod();
+      stat += iter->stat_str_mod_get();
       if (stat != prev) {
         prev = stat;
         dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-            modifier_to_string(iter->get_stat_str_mod()).c_str(), stat);
+            modifier_to_string(iter->stat_str_mod_get()).c_str(), stat);
       }
 
-      auto enchant = iter->get_enchant();
+      auto enchant = iter->enchant_get();
       stat += enchant;
       if (stat != prev) {
         prev = stat;
@@ -56,11 +56,11 @@ int Thing::get_stat_str_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->get_stat_str_mod();
+        stat += iter->stat_str_mod_get();
         if (stat != prev) {
           prev = stat;
           dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->get_stat_str_mod()).c_str(), stat);
+              modifier_to_string(iter->stat_str_mod_get()).c_str(), stat);
         }
       }
     }
@@ -69,11 +69,11 @@ int Thing::get_stat_str_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->get_stat_str_mod();
+        stat += iter->stat_str_mod_get();
         if (stat != prev) {
           prev = stat;
           dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->get_stat_str_mod()).c_str(), stat);
+              modifier_to_string(iter->stat_str_mod_get()).c_str(), stat);
         }
       }
     }
@@ -82,11 +82,11 @@ int Thing::get_stat_str_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->get_stat_str_mod();
+        stat += iter->stat_str_mod_get();
         if (stat != prev) {
           prev = stat;
           dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->get_stat_str_mod()).c_str(), stat);
+              modifier_to_string(iter->stat_str_mod_get()).c_str(), stat);
         }
       }
     }
@@ -95,11 +95,11 @@ int Thing::get_stat_str_total(void)
   return stat;
 }
 
-int Thing::get_stat_str(void)
+int Thing::stat_str_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (get_infop()->stat_str);
+    return (infop_get()->stat_str);
   } else {
     return 0;
   }
@@ -112,7 +112,7 @@ int Thing::stat_str_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_str = v);
+  auto n = (infop_get()->stat_str = v);
   return (n);
 }
 
@@ -123,7 +123,7 @@ int Thing::stat_str_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_str -= v);
+  auto n = (infop_get()->stat_str -= v);
   return (n);
 }
 
@@ -134,7 +134,7 @@ int Thing::stat_str_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_str += v);
+  auto n = (infop_get()->stat_str += v);
   return (n);
 }
 
@@ -145,7 +145,7 @@ int Thing::stat_str_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_str--);
+  auto n = (infop_get()->stat_str--);
   return (n);
 }
 
@@ -156,6 +156,6 @@ int Thing::stat_str_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_str++);
+  auto n = (infop_get()->stat_str++);
   return (n);
 }

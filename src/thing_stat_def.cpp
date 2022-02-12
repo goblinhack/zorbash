@@ -15,35 +15,35 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-int Thing::get_stat_def_total(void)
+int Thing::stat_def_total_get(void)
 {
   TRACE_NO_INDENT();
 
-  auto owner = get_top_owner();
+  auto owner = top_owner_get();
   if (owner) {
-    return owner->get_stat_def_total();
+    return owner->stat_def_total_get();
   }
 
   int stat = 0;
   int prev = 0;
 
-  stat = get_stat_def();
+  stat = stat_def_get();
   prev = stat;
   dbg("AC: %d", stat);
 
   //
   // Add def bonus
   //
-  stat += get_stat_def_mod();
+  stat += stat_def_mod_get();
   if (stat != prev) {
     prev = stat;
-    dbg("AC: with: (mod %d): %d", get_stat_def_mod(), stat);
+    dbg("AC: with: (mod %d): %d", stat_def_mod_get(), stat);
   }
 
   //
   // Add dex bonus to def
   //
-  int dex_total = get_stat_dex_total();
+  int dex_total = stat_dex_total_get();
   stat += stat_to_bonus(dex_total);
   if (stat != prev) {
     prev = stat;
@@ -55,13 +55,13 @@ int Thing::get_stat_def_total(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    auto iter = get_equip(e);
+    auto iter = equip_get(e);
     if (iter) {
-      stat = std::max(stat, iter->get_stat_def() + iter->get_stat_def_mod() + iter->get_enchant());
+      stat = std::max(stat, iter->stat_def_get() + iter->stat_def_mod_get() + iter->enchant_get());
       if (stat != prev) {
         prev = stat;
-        dbg("AC: with (%s def %d/%d): %d", iter->to_short_string().c_str(), iter->get_stat_def(),
-            stat_to_bonus(iter->get_stat_def()), stat);
+        dbg("AC: with (%s def %d/%d): %d", iter->to_short_string().c_str(), iter->stat_def_get(),
+            stat_to_bonus(iter->stat_def_get()), stat);
       }
     }
   }
@@ -71,12 +71,12 @@ int Thing::get_stat_def_total(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    auto iter = get_equip(e);
+    auto iter = equip_get(e);
     if (iter) {
-      stat += iter->get_stat_def_mod();
+      stat += iter->stat_def_mod_get();
       if (stat != prev) {
         prev = stat;
-        dbg("AC: with: (%s mod %d): %d", iter->to_short_string().c_str(), get_stat_def_mod(), stat);
+        dbg("AC: with: (%s mod %d): %d", iter->to_short_string().c_str(), stat_def_mod_get(), stat);
       }
     }
   }
@@ -86,11 +86,11 @@ int Thing::get_stat_def_total(void)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->get_stat_def_mod();
+        stat += buff->stat_def_mod_get();
         if (stat != prev) {
           prev = stat;
-          dbg("AC: with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_def(),
-              stat_to_bonus(buff->get_stat_def()), stat);
+          dbg("AC: with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def_get(),
+              stat_to_bonus(buff->stat_def_get()), stat);
         }
       }
     }
@@ -99,11 +99,11 @@ int Thing::get_stat_def_total(void)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->get_stat_def_mod();
+        stat += buff->stat_def_mod_get();
         if (stat != prev) {
           prev = stat;
-          dbg("AC: with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_def(),
-              stat_to_bonus(buff->get_stat_def()), stat);
+          dbg("AC: with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def_get(),
+              stat_to_bonus(buff->stat_def_get()), stat);
         }
       }
     }
@@ -112,11 +112,11 @@ int Thing::get_stat_def_total(void)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->get_stat_def_mod();
+        stat += buff->stat_def_mod_get();
         if (stat != prev) {
           prev = stat;
-          dbg("AC: with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->get_stat_def(),
-              stat_to_bonus(buff->get_stat_def()), stat);
+          dbg("AC: with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def_get(),
+              stat_to_bonus(buff->stat_def_get()), stat);
         }
       }
     }
@@ -126,7 +126,7 @@ int Thing::get_stat_def_total(void)
   return stat;
 }
 
-int Thing::get_stat_def_penalties_total(void)
+int Thing::stat_def_penalties_total_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -137,7 +137,7 @@ int Thing::get_stat_def_penalties_total(void)
   // Positional penalties
   //
   if (stat_def_penalty_when_stuck()) {
-    int p = stat_def_penalty_when_stuck() + get_stuck_count();
+    int p = stat_def_penalty_when_stuck() + stuck_count_get();
     p     = std::min(p, stat_def_penalty_when_stuck_max());
     penalty += p;
     if (penalty != prev) {
@@ -145,7 +145,7 @@ int Thing::get_stat_def_penalties_total(void)
       dbg("AC penalty: stuck %d", p);
     }
   } else if (stat_def_penalty_when_idle()) {
-    int p = stat_def_penalty_when_idle() + get_idle_count();
+    int p = stat_def_penalty_when_idle() + idle_count_get();
     p     = std::min(p, stat_def_penalty_when_idle_max());
     penalty += p;
     if (penalty != prev) {
@@ -186,12 +186,12 @@ int Thing::get_stat_def_penalties_total(void)
   return penalty;
 }
 
-int Thing::get_stat_def(void)
+int Thing::stat_def_get(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
-    v = get_infop()->stat_def;
+    v = infop_get()->stat_def;
   }
   return v;
 }
@@ -203,7 +203,7 @@ int Thing::stat_def_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_def = v);
+  auto n = (infop_get()->stat_def = v);
   return (n);
 }
 
@@ -214,9 +214,9 @@ int Thing::stat_def_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_def -= v);
-  if (get_infop()->stat_def < 0) {
-    get_infop()->stat_def = 0;
+  auto n = (infop_get()->stat_def -= v);
+  if (infop_get()->stat_def < 0) {
+    infop_get()->stat_def = 0;
   }
   return (n);
 }
@@ -228,7 +228,7 @@ int Thing::stat_def_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_def += v);
+  auto n = (infop_get()->stat_def += v);
   return (n);
 }
 
@@ -239,9 +239,9 @@ int Thing::stat_def_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_def--);
-  if (get_infop()->stat_def < 0) {
-    get_infop()->stat_def = 0;
+  auto n = (infop_get()->stat_def--);
+  if (infop_get()->stat_def < 0) {
+    infop_get()->stat_def = 0;
   }
   return (n);
 }
@@ -253,6 +253,6 @@ int Thing::stat_def_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (get_infop()->stat_def++);
+  auto n = (infop_get()->stat_def++);
   return (n);
 }

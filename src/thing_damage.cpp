@@ -15,68 +15,68 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-int Thing::get_damage_max(void)
+int Thing::damage_max_get(void)
 {
   TRACE_NO_INDENT();
-  auto max_damage = get_damage_natural_dice().max_roll();
-  max_damage      = std::max(max_damage, get_damage_digest_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_melee_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_poison_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_future1_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_future2_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_future3_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_cold_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_fire_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_crush_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_lightning_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_energy_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_acid_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_digest_dice().max_roll());
-  max_damage      = std::max(max_damage, get_damage_necrosis_dice().max_roll());
+  auto max_damage = damage_natural_dice_get().max_roll();
+  max_damage      = std::max(max_damage, damage_digest_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_melee_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_poison_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_future1_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_future2_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_future3_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_cold_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_fire_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_crush_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_lightning_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_energy_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_acid_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_digest_dice_get().max_roll());
+  max_damage      = std::max(max_damage, damage_necrosis_dice_get().max_roll());
 
   //
   // Add in weapons
   //
-  Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
+  Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
   if (curr_weapon) {
-    max_damage = std::max(max_damage, curr_weapon->get_damage_max());
+    max_damage = std::max(max_damage, curr_weapon->damage_max_get());
   }
 
   //
   // Don't include crush damage as it is non typical
   //
-  return max_damage + get_enchant();
+  return max_damage + enchant_get();
 }
 
-int Thing::get_damage_min(void)
+int Thing::damage_min_get(void)
 {
   TRACE_NO_INDENT();
-  auto min_damage = get_damage_natural_dice().min_roll();
-  min_damage      = std::min(min_damage, get_damage_digest_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_melee_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_poison_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_future1_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_future2_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_future3_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_cold_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_fire_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_crush_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_lightning_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_energy_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_acid_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_digest_dice().min_roll());
-  min_damage      = std::min(min_damage, get_damage_necrosis_dice().min_roll());
+  auto min_damage = damage_natural_dice_get().min_roll();
+  min_damage      = std::min(min_damage, damage_digest_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_melee_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_poison_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_future1_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_future2_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_future3_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_cold_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_fire_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_crush_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_lightning_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_energy_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_acid_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_digest_dice_get().min_roll());
+  min_damage      = std::min(min_damage, damage_necrosis_dice_get().min_roll());
 
   //
   // Add in weapons
   //
-  Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
+  Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
   if (curr_weapon) {
-    min_damage = std::min(min_damage, curr_weapon->get_damage_min());
+    min_damage = std::min(min_damage, curr_weapon->damage_min_get());
   }
 
   //
   // Don't include crush damage as it is non typical
   //
-  return min_damage + get_enchant();
+  return min_damage + enchant_get();
 }

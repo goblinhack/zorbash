@@ -106,7 +106,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     //
     // This is useful for treasure maps to tell if they work on this level
     //
-    set_born(point3d(born.x, born.y, level->world_at.z));
+    born_set(point3d(born.x, born.y, level->world_at.z));
   }
 
   if (is_player() || is_monst() || is_item()) {
@@ -130,8 +130,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     // Newly spawned things, don't make them do something immediately
     // This can lead to recursion
     //
-    set_tick_last_location_check(game->tick_current);
-    set_tick_last_did_something(game->tick_current);
+    tick_last_location_check_set(game->tick_current);
+    tick_last_did_something_set(game->tick_current);
   }
 
   //
@@ -167,7 +167,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   // Important to set the owner before the on_born call as we use that for lasers.
   //
   if (owner) {
-    set_owner(owner);
+    owner_set(owner);
   }
 
   //
@@ -230,7 +230,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   // Set position prior to attach
   //
   if (curr_at != point(-1, -1)) {
-    set_interpolated_at(make_fpoint(curr_at));
+    interpolated_at_set(make_fpoint(curr_at));
     update_interpolated_position();
   }
 
@@ -267,8 +267,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   static bool spawning_group;
   if (! spawning_group) {
     spawning_group = true;
-    if (get_spawn_group_size()) {
-      spawn_randomly_in_radius_range(name, get_spawn_group_size(), 1, get_spawn_group_radius());
+    if (spawn_group_size_get()) {
+      spawn_randomly_in_radius_range(name, spawn_group_size_get(), 1, spawn_group_radius_get());
     }
     spawning_group = false;
   }

@@ -103,7 +103,7 @@ bool Thing::ascend_dungeon(bool force, point3d next_level)
         is_changing_level = true;
 
         level_change(l);
-        set_tick_last_level_change(game->tick_current);
+        tick_last_level_change_set(game->tick_current);
         move_to_immediately(point(x, y));
         move_carried_items_immediately();
         if (is_player()) {
@@ -118,7 +118,7 @@ bool Thing::ascend_dungeon(bool force, point3d next_level)
         }
 
         move_finish();
-        set_interpolated_at(make_fpoint(curr_at));
+        interpolated_at_set(make_fpoint(curr_at));
         update_interpolated_position();
         location_check();
         update_light();

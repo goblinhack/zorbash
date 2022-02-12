@@ -37,8 +37,8 @@ bool Thing::possible_to_attack(const Thingp victim)
   //   return false;
   // }
 
-  auto my_owner  = get_top_owner();
-  auto its_owner = victim->get_top_owner();
+  auto my_owner  = top_owner_get();
+  auto its_owner = victim->top_owner_get();
   if (my_owner && ((my_owner == its_owner) || (my_owner == victim))) {
     if (is_laser()) {
       //
@@ -49,14 +49,14 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
-  auto my_mob  = get_top_mob();
-  auto its_mob = victim->get_top_mob();
+  auto my_mob  = top_mob_get();
+  auto its_mob = victim->top_mob_get();
   if (my_mob && (my_mob == its_mob)) {
     return false;
   }
 
-  auto my_spawned_owner  = get_top_spawned_owner();
-  auto its_spawned_owner = victim->get_top_spawned_owner();
+  auto my_spawned_owner  = top_spawned_owner_get();
+  auto its_spawned_owner = victim->top_spawned_owner_get();
   if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
     return false;
   }
@@ -339,7 +339,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   if (is_weapon()) {
-    auto o = get_immediate_owner();
+    auto o = immediate_owner_get();
     if (o) {
       if (o->is_monst()) {
         if (! victim->is_attackable_by_monst()) {
@@ -482,7 +482,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
   idle_count_set(0);
 
-  auto owner = get_top_owner();
+  auto owner = top_owner_get();
 
   if (! possible_to_attack(victim)) {
     dbg("Attack failed, not possible to attack %s", victim->to_string().c_str());
@@ -493,9 +493,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // Too tired to attack
   //
   if (is_able_to_tire()) {
-    if (get_stamina() < 5) {
+    if (stamina_get() < 5) {
       if (is_player()) {
-        if (d20roll_under(get_stat_con())) {
+        if (d20roll_under(stat_con_get())) {
           msg("You are so tired but dig deep and attack!");
         } else {
           msg("You are too tired to attack.");
@@ -506,8 +506,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
-  auto stat_att = get_attack_modifier(victim) - get_stat_att_penalties_total();
-  auto stat_def = victim->get_stat_def_total() - victim->get_stat_def_penalties_total();
+  auto stat_att = attack_modifier_get(victim) - stat_att_penalties_total_get();
+  auto stat_def = victim->stat_def_total_get() - victim->stat_def_penalties_total_get();
 
   bool damage_set       = false;
   bool attack_poison    = false;
@@ -533,7 +533,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set || prefer_natural_attack) {
     if (d1000() < damage_poison_chance_d1000()) {
-      int damage_poison = get_damage_poison();
+      int damage_poison = damage_poison_get();
       if (damage_poison > 0) {
         damage        = damage_poison;
         damage_set    = true;
@@ -547,7 +547,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future1_chance_d1000()) {
-      int damage_future1 = get_damage_future1();
+      int damage_future1 = damage_future1_get();
       if (damage_future1 > 0) {
         damage         = damage_future1;
         damage_set     = true;
@@ -562,7 +562,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future2_chance_d1000()) {
-      int damage_future2 = get_damage_future2();
+      int damage_future2 = damage_future2_get();
       if (damage_future2 > 0) {
         damage         = damage_future2;
         damage_set     = true;
@@ -577,7 +577,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future3_chance_d1000()) {
-      int damage_future3 = get_damage_future3();
+      int damage_future3 = damage_future3_get();
       if (damage_future3 > 0) {
         damage         = damage_future3;
         damage_set     = true;
@@ -592,7 +592,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_cold_chance_d1000()) {
-      int damage_cold = get_damage_cold();
+      int damage_cold = damage_cold_get();
       if (damage_cold > 0) {
         damage      = damage_cold;
         damage_set  = true;
@@ -607,7 +607,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_fire_chance_d1000()) {
-      int damage_fire = get_damage_fire();
+      int damage_fire = damage_fire_get();
       if (damage_fire > 0) {
         damage      = damage_fire;
         damage_set  = true;
@@ -622,7 +622,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_crush_chance_d1000()) {
-      int damage_crush = get_damage_crush();
+      int damage_crush = damage_crush_get();
       if (damage_crush > 0) {
         damage       = damage_crush;
         damage_set   = true;
@@ -637,7 +637,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_lightning_chance_d1000()) {
-      int damage_lightning = get_damage_lightning();
+      int damage_lightning = damage_lightning_get();
       if (damage_lightning > 0) {
         damage           = damage_lightning;
         damage_set       = true;
@@ -652,7 +652,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_energy_chance_d1000()) {
-      int damage_energy = get_damage_energy();
+      int damage_energy = damage_energy_get();
       if (damage_energy > 0) {
         damage        = damage_energy;
         damage_set    = true;
@@ -667,7 +667,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_acid_chance_d1000()) {
-      int damage_acid = get_damage_acid();
+      int damage_acid = damage_acid_get();
       if (damage_acid > 0) {
         damage      = damage_acid;
         damage_set  = true;
@@ -682,7 +682,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_digest_chance_d1000()) {
-      int damage_digest = get_damage_digest();
+      int damage_digest = damage_digest_get();
       if (damage_digest > 0) {
         damage        = damage_digest;
         damage_set    = true;
@@ -697,7 +697,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set || prefer_natural_attack) {
     if (d1000() < damage_necrosis_chance_d1000()) {
-      int damage_necrosis = get_damage_necrosis();
+      int damage_necrosis = damage_necrosis_get();
       if (damage_necrosis > 0) {
         damage          = damage_necrosis;
         damage_set      = true;
@@ -712,7 +712,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set || prefer_natural_attack) {
     if (d1000() < damage_natural_attack_chance_d1000()) {
-      int damage_natural_attack = get_damage_natural_attack();
+      int damage_natural_attack = damage_natural_attack_get();
       if (damage_natural_attack > 0) {
         damage         = damage_natural_attack + stat_att;
         damage_set     = true;
@@ -730,7 +730,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_melee_chance_d1000()) {
-      damage = get_damage_melee() + stat_att;
+      damage = damage_melee_get() + stat_att;
       if (damage > 0) {
         dbg("Set melee damage %d", damage);
         damage_set = true;
@@ -740,7 +740,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   if (! damage_set) {
     if (owner) {
       if (d1000() < owner->damage_melee_chance_d1000()) {
-        damage = get_damage_melee() + stat_att;
+        damage = damage_melee_get() + stat_att;
         if (damage > 0) {
           dbg("Set melee damage %d", damage);
           damage_set = true;
@@ -754,7 +754,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (is_engulfer()) {
     if (victim->curr_at == curr_at) {
-      damage           = get_damage_digest();
+      damage           = damage_digest_get();
       attack_poison    = false;
       attack_future1   = false;
       attack_future2   = false;
@@ -785,9 +785,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   // An attack counts as making noise.
   //
   if (owner) {
-    level->noisemap_in_incr(curr_at.x, curr_at.y, owner->get_noise_total());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, owner->noise_total_get());
   } else {
-    level->noisemap_in_incr(curr_at.x, curr_at.y, get_noise_total());
+    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total_get());
   }
 
   //
@@ -807,7 +807,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     //
     // Player always uses their weapon
     //
-    if (get_equip(MONST_EQUIP_WEAPON)) {
+    if (equip_get(MONST_EQUIP_WEAPON)) {
       auto delta = victim->curr_at - curr_at;
       move_set_dir_from_dest_or_delta(delta);
       equip_use_may_attack(MONST_EQUIP_WEAPON);
@@ -818,7 +818,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     // Don't swing weapons at pools of blood.
     //
     if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob()) {
-      if (get_equip(MONST_EQUIP_WEAPON)) {
+      if (equip_get(MONST_EQUIP_WEAPON)) {
         auto delta = victim->curr_at - curr_at;
         move_set_dir_from_dest_or_delta(delta);
         equip_use_may_attack(MONST_EQUIP_WEAPON);
@@ -899,7 +899,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         //
         // See if armor crumbles
         //
-        auto armor = victim->get_equip(MONST_EQUIP_ARMOR);
+        auto armor = victim->equip_get(MONST_EQUIP_ARMOR);
         if (armor) {
           if (d10000() < armor->break_chance_d10000()) {
             if (is_player()) {
@@ -910,7 +910,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
           }
         }
 
-        auto shield = victim->get_equip(MONST_EQUIP_SHIELD);
+        auto shield = victim->equip_get(MONST_EQUIP_SHIELD);
         if (shield) {
           if (d10000() < shield->break_chance_d10000()) {
             if (is_player()) {
@@ -921,7 +921,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
           }
         }
 
-        auto helmet = victim->get_equip(MONST_EQUIP_HELMET);
+        auto helmet = victim->equip_get(MONST_EQUIP_HELMET);
         if (helmet) {
           if (d10000() < helmet->break_chance_d10000()) {
             if (is_player()) {
@@ -953,7 +953,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       }
     }
     if (attack_eater()) {
-      health_boost(victim->get_nutrition());
+      health_boost(victim->nutrition_get());
     }
     if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
       dead("by foolishness");
@@ -962,9 +962,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     //
     // See if the weapon crumbles
     //
-    auto my_owner = get_top_owner();
+    auto my_owner = top_owner_get();
     if (my_owner) {
-      auto weapon = my_owner->get_equip(MONST_EQUIP_WEAPON);
+      auto weapon = my_owner->equip_get(MONST_EQUIP_WEAPON);
       if (weapon) {
         auto break_chance = weapon->break_chance_d10000();
         if (victim->is_toughness_soft()) {
@@ -981,7 +981,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         }
       }
 
-      auto gauntlet = my_owner->get_equip(MONST_EQUIP_GAUNTLET);
+      auto gauntlet = my_owner->equip_get(MONST_EQUIP_GAUNTLET);
       if (gauntlet) {
         auto break_chance = gauntlet->break_chance_d10000();
         if (victim->is_toughness_soft()) {

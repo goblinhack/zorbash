@@ -150,7 +150,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
     // However, try to open the door if you have a key.
     //
     if (victim->is_door() && ! victim->is_open) {
-      auto owner = get_immediate_owner();
+      auto owner = immediate_owner_get();
       if (owner) {
         if (owner->open_door(victim)) {
           *victim_attacked = false;
@@ -162,7 +162,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
       }
     }
 
-    auto owner = get_top_owner();
+    auto owner = top_owner_get();
     if (! *victim_attacked) {
       //
       // Carry to eat later. Things attack their food.
@@ -296,8 +296,8 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
 
   auto me = this;
 
-  Thingp owner_it = it->get_immediate_owner();
-  Thingp owner_me = me->get_immediate_owner();
+  Thingp owner_it = it->immediate_owner_get();
+  Thingp owner_me = me->immediate_owner_get();
 
   if ((owner_it == me) || (owner_me == it)) {
     //
@@ -330,7 +330,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
       dbg("No; cannot attack %s, no overlap", it->to_short_string().c_str());
     }
   } else if (can_eat(it)) {
-    if (game->tick_current < it->get_tick_last_dropped() + 1) {
+    if (game->tick_current < it->tick_last_dropped_get() + 1) {
       dbg("No; can eat but was seen previously");
       //
       // Continue the walk
@@ -490,8 +490,8 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
   }
 
-  Thingp owner_it = it->get_immediate_owner();
-  Thingp owner_me = me->get_immediate_owner();
+  Thingp owner_it = it->immediate_owner_get();
+  Thingp owner_me = me->immediate_owner_get();
 
   //
   // Need this or shields attack the player.
@@ -628,13 +628,13 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   }
 
   if (can_eat(it)) {
-    if (get_where_i_failed_to_collect_last() == it->curr_at) {
+    if (where_i_failed_to_collect_last_get() == it->curr_at) {
       dbg("No; tried to collect previously");
-      set_where_i_failed_to_collect_last(point(-1, -1));
+      where_i_failed_to_collect_last_set(point(-1, -1));
       return false;
     }
 
-    if (game->tick_current < it->get_tick_last_dropped() + 1) {
+    if (game->tick_current < it->tick_last_dropped_get() + 1) {
       dbg("No; can eat but was seen previously");
       return false;
     }
@@ -696,7 +696,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
 
     if (it->is_mob()) {
-      if (it == get_top_mob()) {
+      if (it == top_mob_get()) {
         if (things_overlap(me, future_pos, it)) {
           dbg("Yes; cannot pass through my mob spawner");
           return true;
@@ -773,7 +773,7 @@ bool Thing::collision_check_and_handle(point future_pos, bool *victim_attacked, 
           continue;
         }
 
-        if (it->get_top_owner()) {
+        if (it->top_owner_get()) {
           continue;
         }
 

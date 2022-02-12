@@ -33,7 +33,7 @@ void Thing::gas_poison_tick(void)
   dbg("Poison gas tick");
   TRACE_AND_INDENT();
 
-  if (d20() < get_stat_con()) {
+  if (d20() < stat_con_get()) {
     if (is_player()) {
       msg("You hold your breath in the gas.");
     }
@@ -42,7 +42,7 @@ void Thing::gas_poison_tick(void)
 
   poisoned_amount_incr(pcg_random_range(1, intensity));
 
-  if (get_stamina()) {
+  if (stamina_get()) {
     if (is_player()) {
       msg("You choke in the gas.");
     }

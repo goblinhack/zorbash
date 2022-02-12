@@ -37,7 +37,7 @@ bool Thing::on_tick(void)
       mod = name();
     }
 
-    auto owner = get_top_owner();
+    auto owner = top_owner_get();
     if (owner) {
       dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(), owner->to_string().c_str(),
           to_string().c_str(), (unsigned int) curr_at.x, (unsigned int) curr_at.y);
@@ -56,8 +56,8 @@ bool Thing::on_tick(void)
 
 void Thing::update_tick(void)
 {
-  set_tick_last_did_something(game->tick_current);
-  set_tick_last_location_check(game->tick_current);
+  tick_last_did_something_set(game->tick_current);
+  tick_last_location_check_set(game->tick_current);
 }
 
 void Thing::achieve_goals_in_life(void)
@@ -240,11 +240,11 @@ void Thing::achieve_goals_in_life(void)
     //
     // Pop the next player move at the end of the game tick
     //
-    if (maybe_aip() && get_aip()->move_path.empty()) {
+    if (maybe_aip() && aip_get()->move_path.empty()) {
       //
       // If resting, keep resting
       //
-      if (get_infop()->monst_state == MONST_STATE_MOVING) {
+      if (infop_get()->monst_state == MONST_STATE_MOVING) {
         change_state(MONST_STATE_IDLE, "move path is empty");
       }
     }
@@ -304,7 +304,7 @@ void Thing::tick(void)
   // Allow the same thing to hit us again
   //
   if (maybe_aip()) {
-    get_aip()->recently_hit_by.clear();
+    aip_get()->recently_hit_by.clear();
   }
 
   if (unlikely(is_dead)) {

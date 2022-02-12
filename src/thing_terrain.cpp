@@ -51,7 +51,7 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
   *d = (uint8_t) pref;
 }
 
-uint8_t Thing::get_terrain_cost(point p)
+uint8_t Thing::terrain_cost_get(point p)
 {
   uint8_t pref = 0;
   dmap_modify_terrain_cost(p, &pref);

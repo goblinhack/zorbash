@@ -36,7 +36,7 @@ void Thing::animate(void)
   // If this thing has an owner, sync the anim tiles so the weapon moves as the player does.
   //
   if (is_gfx_anim_synced_with_owner()) {
-    auto owner = get_top_owner();
+    auto owner = top_owner_get();
     if (owner) {
       tile = tile_index_to_tile(owner->tile_curr);
       if (tile) {
@@ -50,7 +50,7 @@ void Thing::animate(void)
     }
   }
 
-  if (time_get_time_ms_cached() <= get_ts_anim_delay_end()) {
+  if (time_get_time_ms_cached() <= ts_anim_delay_end_get()) {
 #ifdef DEBUG_ANIM
     if (is_debug_type()) {
       con("Waiting on anim frame");
@@ -197,7 +197,7 @@ void Thing::animate(void)
         "is_resurrecting %d "
         "is_sleeping %d "
         "is_starving %d ",
-        get_health(), is_attached, is_being_destroyed, is_blitted, is_bouncing, is_dead, is_facing_left, is_fadeup,
+        health_get(), is_attached, is_being_destroyed, is_blitted, is_bouncing, is_dead, is_facing_left, is_fadeup,
         is_falling, is_hidden, is_hungry, is_in_lava, is_in_water, is_jumping, is_moving, is_open, is_resurrected,
         is_resurrecting, is_sleeping, is_starving);
   }
@@ -235,8 +235,8 @@ void Thing::animate(void)
           continue;
         }
 
-        auto health_max = get_health_max();
-        auto health     = get_health();
+        auto health_max = health_max_get();
+        auto health     = health_get();
 
         if (tpp->internal_has_hp_anim()) {
           if (health < health_max / 4) {
@@ -452,7 +452,7 @@ void Thing::animate(void)
           "is_resurrecting %d "
           "is_sleeping %d "
           "is_starving %d ",
-          tries, size, tile_name(tile).c_str(), get_health(), (bool) is_attached, (bool) is_being_destroyed,
+          tries, size, tile_name(tile).c_str(), health_get(), (bool) is_attached, (bool) is_being_destroyed,
           (bool) is_blitted, (bool) is_bouncing, (bool) is_dead, (bool) is_facing_left, (bool) is_fadeup,
           (bool) is_falling, (bool) is_hidden, (bool) is_hungry, (bool) is_in_lava, (bool) is_in_water,
           (bool) is_jumping, (bool) is_moving, (bool) is_open, (bool) is_resurrected, (bool) is_resurrecting,

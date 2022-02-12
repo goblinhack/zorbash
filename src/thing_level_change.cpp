@@ -36,7 +36,7 @@ void Thing::level_change(Levelp l)
   level_enter();
 
   if (maybe_aip()) {
-    get_aip()->move_path = {};
+    aip_get()->move_path = {};
     clear_age_map();
     clear_seen_map();
     clear_interrupt_map();
@@ -61,7 +61,7 @@ void Thing::level_change(Levelp l)
   }
 
   {
-    auto it = get_immediate_owner();
+    auto it = immediate_owner_get();
     if (it) {
       it->level_change(l);
     }
@@ -69,24 +69,24 @@ void Thing::level_change(Levelp l)
 
   FOR_ALL_EQUIP(e)
   {
-    auto it = get_equip(e);
+    auto it = equip_get(e);
     if (it) {
       it->level_change(l);
     }
 
-    it = get_equip_carry_anim(e);
+    it = equip_carry_anim_get(e);
     if (it) {
       it->level_change(l);
     }
 
-    it = get_equip_use_anim(e);
+    it = equip_use_anim_get(e);
     if (it) {
       it->level_change(l);
     }
   }
 
   {
-    auto id = get_on_fire_anim_id();
+    auto id = on_fire_anim_id_get();
     if (id.ok()) {
       auto it = level->thing_find(id);
       if (it) {
@@ -96,12 +96,12 @@ void Thing::level_change(Levelp l)
   }
 
   if (maybe_itemsp()) {
-    for (const auto it : get_item_vector()) {
+    for (const auto it : item_vector_get()) {
       it->level_change(l);
     }
   }
 
-  for (auto l : get_light()) {
+  for (auto l : light_get()) {
     l->level = level;
     l->reset();
   }
@@ -151,7 +151,7 @@ bool Thing::move_away_from_entrance(void)
   dbg("Try to move away from entrance");
   TRACE_AND_INDENT();
 
-  auto d = get_distance_to_player_on_different_level();
+  auto d = distance_to_player_on_different_level_get();
   d *= 2;
   if (d < 2) {
     d = 2;

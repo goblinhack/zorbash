@@ -45,7 +45,7 @@ void Level::cursor_path_draw_circle(void)
   auto dist    = distance(player->curr_at, curr_at);
 
   if (game->request_to_throw_item) {
-    if (dist > player->get_distance_throw()) {
+    if (dist > player->distance_throw_get()) {
       too_far = true;
     }
   } else if (game->request_to_fire_item) {

@@ -20,12 +20,12 @@ void Thing::stats_tick(void)
   // Can this thing die if it's constiturion is too low?
   //
   if ((is_alive_monst() || is_player()) && ! is_ethereal() && ! is_undead()) {
-    if (! get_stat_str()) {
+    if (! stat_str_get()) {
       dead("by becoming too weak to breath");
       return;
     }
 
-    if (! get_stat_con()) {
+    if (! stat_con_get()) {
       dead("by becoming too sickly to live");
       return;
     }

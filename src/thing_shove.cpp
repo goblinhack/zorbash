@@ -36,29 +36,29 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_owner  = get_top_owner();
-  auto its_owner = it->get_top_owner();
+  auto my_owner  = top_owner_get();
+  auto its_owner = it->top_owner_get();
   if (my_owner && (my_owner == its_owner)) {
     dbg("Not able to shove (same owner) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_mob  = get_top_mob();
-  auto its_mob = it->get_top_mob();
+  auto my_mob  = top_mob_get();
+  auto its_mob = it->top_mob_get();
   if (my_mob && (my_mob == its_mob)) {
     dbg("Not able to shove (same master) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_leader  = get_leader();
-  auto its_leader = it->get_leader();
+  auto my_leader  = leader_get();
+  auto its_leader = it->leader_get();
   if (my_leader && (my_leader == its_leader)) {
     dbg("Not able to shove (same leader) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_spawned_owner  = get_top_spawned_owner();
-  auto its_spawned_owner = it->get_top_spawned_owner();
+  auto my_spawned_owner  = top_spawned_owner_get();
+  auto its_spawned_owner = it->top_spawned_owner_get();
   if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
     dbg("Not able to shove (same spawner) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
@@ -84,8 +84,8 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   //
   // If I'm on fire. set it on fire too!
   //
-  if (get_on_fire_anim_id().ok()) {
-    it->set_on_fire("I am on fire, set it on fire too");
+  if (on_fire_anim_id_get().ok()) {
+    it->on_fire_set("I am on fire, set it on fire too");
   }
 
   //
@@ -119,9 +119,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   }
 
   if (! it->is_dead) {
-    dbg("Shove: It strength %d vs me %d", it->get_stat_str(), get_stat_str());
+    dbg("Shove: It strength %d vs me %d", it->stat_str_get(), stat_str_get());
 
-    int its_strength = it->get_stat_str();
+    int its_strength = it->stat_str_get();
 
     if (it->is_heavy()) {
       its_strength += 10;
@@ -131,9 +131,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
       its_strength += 10;
     }
 
-    log("Shove: It strength %d vs me %d", its_strength, get_stat_str());
+    log("Shove: It strength %d vs me %d", its_strength, stat_str_get());
 
-    if (! d20roll(get_stat_str(), its_strength)) {
+    if (! d20roll(stat_str_get(), its_strength)) {
       if (is_player()) {
         if (it->is_monst()) {
           if (it->is_able_to_shove()) {
@@ -248,7 +248,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     if (it->is_fire()) {
       if (pcg_random_range(0, 100) < 5) {
         if (is_player()) {
-          if (set_on_fire("set yourself on fire")) {
+          if (on_fire_set("set yourself on fire")) {
             msg("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");
           }
         }

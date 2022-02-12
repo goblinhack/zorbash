@@ -77,7 +77,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
       }
 
       if (t->is_mob() || t->is_monst() || t->is_player()) {
-        prio += get_danger_current_level(t);
+        prio += danger_current_level_get(t);
         dbg2("Target-attack-best: %s mob prio %d", t->to_short_string().c_str(), prio);
 
         //
@@ -225,7 +225,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
       }
 
       if (t->is_hittable()) {
-        prio += get_danger_current_level(t);
+        prio += danger_current_level_get(t);
         dbg2("Target-attack-best: %s monst prio %d", t->to_short_string().c_str(), prio);
       } else {
         dbg2("Target-attack-best: %s ignore3 %d", t->to_short_string().c_str(), prio);
@@ -299,13 +299,13 @@ bool Thing::victim_attack_best(int equip, point *at)
   TRACE_AND_INDENT();
 
   int  dx, dy;
-  auto item = get_equip(equip);
+  auto item = equip_get(equip);
   if (! item) {
     auto d = dir_to_direction();
     dx     = d.x;
     dy     = d.y;
   } else {
-    get_equip_use_offset(&dx, &dy, equip);
+    equip_use_offset_get(&dx, &dy, equip);
   }
 
   bool victim_attacked = false;

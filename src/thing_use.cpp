@@ -183,24 +183,24 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
     on_use(what);
   }
 
-  auto existing_owner = what->get_top_owner();
+  auto existing_owner = what->top_owner_get();
   if (existing_owner != this) {
     err("Attempt to use %s which is not carried", what->to_short_string().c_str());
     return;
   }
 
   if (is_monst()) {
-    dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->get_charge_count());
+    dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->charge_count_get());
     return;
   }
 
   //
   // Decrement the charge count and do not remove, if it has charges
   //
-  if (what->get_charge_count()) {
+  if (what->charge_count_get()) {
     what->charge_count_decr();
-    if (what->get_charge_count()) {
-      dbg("Used %s (has %d charges left)", what->to_short_string().c_str(), what->get_charge_count());
+    if (what->charge_count_get()) {
+      dbg("Used %s (has %d charges left)", what->to_short_string().c_str(), what->charge_count_get());
       game->request_remake_rightbar = true;
       return;
     }
@@ -222,7 +222,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
     //
     // Last charge used up.
     //
-    if (what->get_initial_charge_count()) {
+    if (what->initial_charge_count_get()) {
       inventory_shortcuts_remove(what);
     } else {
       if (target) {
@@ -234,14 +234,14 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
   }
 
   if (remove_after_use) {
-    auto immediate_owner = what->get_immediate_owner();
+    auto immediate_owner = what->immediate_owner_get();
     if (immediate_owner) {
       immediate_owner->bag_remove(what);
     }
 
     what->hooks_remove();
     what->remove_owner();
-    get_itemsp()->carrying.remove(what->id);
+    itemsp_get()->carrying.remove(what->id);
 
     what->dead("by being used");
   }
@@ -264,9 +264,9 @@ bool Thing::use(Thingp what, int preferred_equip)
   //
   // If dropping an in transit item into an eqiup slot, then the owner is not set
   //
-  if (what->get_top_owner() == nullptr) {
+  if (what->top_owner_get() == nullptr) {
     dbg("Need to set owner for: %s", what->to_short_string().c_str());
-    what->set_owner(this);
+    what->owner_set(this);
   }
 
   if (what->is_skill()) {
@@ -446,9 +446,9 @@ bool Thing::use(Thingp what, int preferred_equip)
     // Choose a free slot if not specified
     //
     if (preferred_equip == -1) {
-      if (! get_equip(MONST_EQUIP_RING1)) {
+      if (! equip_get(MONST_EQUIP_RING1)) {
         preferred_equip = MONST_EQUIP_RING1;
-      } else if (! get_equip(MONST_EQUIP_RING2)) {
+      } else if (! equip_get(MONST_EQUIP_RING2)) {
         preferred_equip = MONST_EQUIP_RING2;
       } else {
         preferred_equip = MONST_EQUIP_RING1;

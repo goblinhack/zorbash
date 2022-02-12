@@ -15,7 +15,7 @@ void Thing::wobble(float wobble) { wobble_set(wobble); }
 
 float Thing::update_wobble(void)
 {
-  auto w = get_wobble();
+  auto w = wobble_get();
   if (w == 0.0) {
     return 0.0;
   }

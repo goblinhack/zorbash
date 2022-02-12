@@ -19,11 +19,11 @@ bool Thing::is_carrying_treasure(void)
     return false;
   }
 
-  if (! get_item_vector().empty()) {
+  if (! item_vector_get().empty()) {
     return true;
   }
 
-  auto owner = get_top_owner();
+  auto owner = top_owner_get();
   if (owner) {
     return owner->is_carrying_treasure();
   }
@@ -31,7 +31,7 @@ bool Thing::is_carrying_treasure(void)
   return false;
 }
 
-std::list< Thingp > Thing::get_treasure_list(void)
+std::list< Thingp > Thing::treasure_list_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -67,7 +67,7 @@ std::list< Thingp > Thing::get_treasure_list(void)
   return out;
 }
 
-std::vector< Thingp > Thing::get_treasure_vector(void)
+std::vector< Thingp > Thing::treasure_vector_get(void)
 {
   TRACE_NO_INDENT();
 

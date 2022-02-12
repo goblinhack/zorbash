@@ -43,7 +43,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     p.x    = (int) (((float) game->config.game_pix_width / (float) TERM_WIDTH) * (float) p.x);
     p.y    = (int) (((float) game->config.game_pix_height / (float) TERM_HEIGHT) * (float) p.y);
 
-    int value = item->get_gold_value();
+    int value = item->gold_value_get();
     int particle_count;
     if (item->is_gold()) {
       particle_count = value;
@@ -346,7 +346,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
     return false;
   }
 
-  auto immediate_owner = item->get_immediate_owner();
+  auto immediate_owner = item->immediate_owner_get();
   if (immediate_owner) {
     immediate_owner->bag_remove(item);
   }
@@ -413,7 +413,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
     return false;
   }
 
-  auto immediate_owner = item->get_immediate_owner();
+  auto immediate_owner = item->immediate_owner_get();
   if (immediate_owner) {
     immediate_owner->bag_remove(item);
   }
@@ -498,10 +498,10 @@ int Thing::item_enchant_count(const uint32_t slot)
     return 0;
   }
 
-  for (const auto o : get_item_vector()) {
+  for (const auto o : item_vector_get()) {
     if (o->id == thing_id) {
-      if (o->get_enchant()) {
-        return o->get_enchant();
+      if (o->enchant_get()) {
+        return o->enchant_get();
       }
     }
   }

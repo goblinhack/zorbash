@@ -96,7 +96,7 @@ void Thing::on_owner_remove(Thingp owner)
   }
 }
 
-Thingp Thing::get_top_owner(void)
+Thingp Thing::top_owner_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -111,14 +111,14 @@ Thingp Thing::get_top_owner(void)
     return nullptr;
   }
 
-  auto id = get_immediate_owner_id();
+  auto id = immediate_owner_id_get();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
       return nullptr;
     }
-    if (unlikely(i->get_immediate_owner_id().ok())) {
-      return i->get_immediate_owner();
+    if (unlikely(i->immediate_owner_id_get().ok())) {
+      return i->immediate_owner_get();
     }
     return i;
   } else {
@@ -126,7 +126,7 @@ Thingp Thing::get_top_owner(void)
   }
 }
 
-Thingp Thing::get_immediate_owner(void)
+Thingp Thing::immediate_owner_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -141,7 +141,7 @@ Thingp Thing::get_immediate_owner(void)
     return nullptr;
   }
 
-  auto id = get_immediate_owner_id();
+  auto id = immediate_owner_id_get();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
@@ -153,7 +153,7 @@ Thingp Thing::get_immediate_owner(void)
   }
 }
 
-void Thing::set_owner(Thingp owner)
+void Thing::owner_set(Thingp owner)
 {
   TRACE_NO_INDENT();
   if (owner) {
@@ -168,7 +168,7 @@ void Thing::set_owner(Thingp owner)
     return;
   }
 
-  auto old_owner = get_immediate_owner();
+  auto old_owner = immediate_owner_get();
   if (old_owner) {
     if (old_owner == owner) {
       return;
@@ -186,10 +186,10 @@ void Thing::set_owner(Thingp owner)
   }
 
   if (owner) {
-    set_owner_id(owner->id);
+    owner_id_set(owner->id);
     owner->owned_count_incr();
   } else {
-    set_owner_id(NoThingId);
+    owner_id_set(NoThingId);
     if (old_owner) {
       old_owner->owned_count_decr();
     }
@@ -203,7 +203,7 @@ void Thing::set_owner(Thingp owner)
 void Thing::remove_owner(void)
 {
   TRACE_NO_INDENT();
-  auto old_owner = get_immediate_owner();
+  auto old_owner = immediate_owner_get();
   if (! old_owner) {
     return;
   }
@@ -211,7 +211,7 @@ void Thing::remove_owner(void)
   dbg("Remove owner %s", old_owner->to_string().c_str());
   on_owner_remove(old_owner);
 
-  set_owner_id(NoThingId);
+  owner_id_set(NoThingId);
   old_owner->owned_count_decr();
 
   //
@@ -231,7 +231,7 @@ bool Thing::change_owner(Thingp new_owner)
     return true;
   }
 
-  auto old_owner = get_immediate_owner();
+  auto old_owner = immediate_owner_get();
   if (! old_owner) {
     return true;
   }
@@ -251,7 +251,7 @@ bool Thing::change_owner(Thingp new_owner)
 
   on_owner_remove(old_owner);
 
-  old_owner->get_itemsp()->carrying.remove(id);
+  old_owner->itemsp_get()->carrying.remove(id);
 
   hooks_remove();
 
@@ -263,7 +263,7 @@ bool Thing::change_owner(Thingp new_owner)
   //
   // Sanity check
   //
-  auto changed_owner = get_immediate_owner();
+  auto changed_owner = immediate_owner_get();
   if (! changed_owner) {
     err("Owner change failed");
     return false;

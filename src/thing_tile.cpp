@@ -8,7 +8,7 @@
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"
 
-void Thing::get_tiles()
+void Thing::tiles_get()
 {
   TRACE_AND_INDENT();
   auto n   = (uint32_t) id.id;

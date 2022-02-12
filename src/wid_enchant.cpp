@@ -176,7 +176,7 @@ void Game::wid_enchant_an_item(void)
 
   enchant_items.clear();
   std::map< Tpp, bool > found;
-  for (const auto t : player->get_item_vector()) {
+  for (const auto t : player->item_vector_get()) {
     auto tp = t->tp();
     if (found.find(tp) != found.end()) {
       continue;
@@ -184,8 +184,8 @@ void Game::wid_enchant_an_item(void)
     if (! t->is_enchantable()) {
       continue;
     }
-    if (t->get_enchant_max()) {
-      if (t->get_enchant() >= t->get_enchant_max()) {
+    if (t->enchant_max_get()) {
+      if (t->enchant_get() >= t->enchant_max_get()) {
         continue;
       }
     }
@@ -204,8 +204,8 @@ void Game::wid_enchant_an_item(void)
       if (! t->is_enchantable()) {
         continue;
       }
-      if (t->get_enchant_max()) {
-        if (t->get_enchant() >= t->get_enchant_max()) {
+      if (t->enchant_max_get()) {
+        if (t->enchant_get() >= t->enchant_max_get()) {
           continue;
         }
       }

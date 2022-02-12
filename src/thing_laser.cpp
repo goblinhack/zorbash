@@ -19,7 +19,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
   if (is_monst() || (game->robot_mode && is_player())) {
     if (! victim) {
-      victim = get_best_visible_target();
+      victim = best_visible_target_get();
     }
     if (! victim) {
       dbg("No victim found");
@@ -41,7 +41,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
     //
     // Get the damage from the enchanted wand, so the blast inflicts that damage.
     //
-    current_damage_set(item->get_current_damage());
+    current_damage_set(item->current_damage_get());
     return true;
   }
 

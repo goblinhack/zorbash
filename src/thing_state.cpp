@@ -73,7 +73,7 @@ void Thing::change_state(int new_state, const std::string &why)
       break;
   }
 
-  if (get_infop()->monst_state == new_state) {
+  if (infop_get()->monst_state == new_state) {
     dbg("Same state %s, reason: %s", to.c_str(), why.c_str());
     TRACE_AND_INDENT();
     return;
@@ -86,7 +86,7 @@ void Thing::change_state(int new_state, const std::string &why)
   //
   // Current state
   //
-  switch (get_infop()->monst_state) {
+  switch (infop_get()->monst_state) {
     case MONST_STATE_IDLE : from = "IDLE"; break;
     case MONST_STATE_MOVING : from = "MOVING"; break;
     case MONST_STATE_RESTING : from = "RESTING"; break;
@@ -110,7 +110,7 @@ void Thing::change_state(int new_state, const std::string &why)
   dbg("State change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
   TRACE_AND_INDENT();
 
-  get_infop()->monst_state = new_state;
+  infop_get()->monst_state = new_state;
   switch (new_state) {
     case MONST_STATE_IDLE : clear_move_path("State is now idle"); break;
     case MONST_STATE_MOVING : break;

@@ -22,10 +22,10 @@ void Thing::visible(void)
   //
   // If this thing has an owner, should the thing stay hidden?
   //
-  auto owner = get_top_owner();
+  auto owner = top_owner_get();
   if (owner) {
-    if (this == owner->get_equip_carry_anim(MONST_EQUIP_WEAPON)) {
-      if (owner->get_equip_use_anim(MONST_EQUIP_WEAPON)) {
+    if (this == owner->equip_carry_anim_get(MONST_EQUIP_WEAPON)) {
+      if (owner->equip_use_anim_get(MONST_EQUIP_WEAPON)) {
         //
         // Stay hidden until the weapon use is done.
         //
@@ -42,22 +42,22 @@ void Thing::visible(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (get_equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_carry_anim(e));
+    if (equip_id_carry_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim_get(e));
       if (w) {
         w->visible();
       }
     }
 
-    if (get_equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_use_anim(e));
+    if (equip_id_use_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim_get(e));
       if (w) {
         w->visible();
       }
     }
   }
 
-  auto on_fire_anim_id = get_on_fire_anim_id();
+  auto on_fire_anim_id = on_fire_anim_id_get();
   if (on_fire_anim_id.ok()) {
     TRACE_NO_INDENT();
     auto w = level->thing_find(on_fire_anim_id);

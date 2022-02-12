@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 
-std::list< Thingp > Thing::get_amulet_list(void)
+std::list< Thingp > Thing::amulet_list_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -46,7 +46,7 @@ std::list< Thingp > Thing::get_amulet_list(void)
   return out;
 }
 
-std::vector< Thingp > Thing::get_amulet_vector(void)
+std::vector< Thingp > Thing::amulet_vector_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -82,7 +82,7 @@ std::vector< Thingp > Thing::get_amulet_vector(void)
   return out;
 }
 
-int Thing::get_carried_amulet_count(void)
+int Thing::carried_amulet_count_get(void)
 {
   TRACE_NO_INDENT();
   int count = 0;
@@ -91,7 +91,7 @@ int Thing::get_carried_amulet_count(void)
     return count;
   }
 
-  for (const auto t : get_amulet_list()) {
+  for (const auto t : amulet_list_get()) {
     if (t->is_amulet()) {
       count++;
     }
@@ -99,7 +99,7 @@ int Thing::get_carried_amulet_count(void)
   return count;
 }
 
-int Thing::get_carried_amulet_least_value(Thingp *out)
+int Thing::carried_amulet_least_value_get(Thingp *out)
 {
   TRACE_NO_INDENT();
   int least_value = -1;
@@ -109,12 +109,12 @@ int Thing::get_carried_amulet_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto t : get_amulet_list()) {
+  for (const auto t : amulet_list_get()) {
     if (! t->is_amulet()) {
       continue;
     }
 
-    auto v = get_value(t);
+    auto v = value_get(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -128,7 +128,7 @@ int Thing::get_carried_amulet_least_value(Thingp *out)
   return least_value;
 }
 
-int Thing::get_carried_amulet_highest_value(Thingp *out)
+int Thing::carried_amulet_highest_value_get(Thingp *out)
 {
   TRACE_NO_INDENT();
   int highest_value = -1;
@@ -138,12 +138,12 @@ int Thing::get_carried_amulet_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto t : get_amulet_list()) {
+  for (const auto t : amulet_list_get()) {
     if (! t->is_amulet()) {
       continue;
     }
 
-    auto v = get_value(t);
+    auto v = value_get(t);
     if (! *out) {
       *out          = t;
       highest_value = v;
@@ -157,7 +157,7 @@ int Thing::get_carried_amulet_highest_value(Thingp *out)
   return highest_value;
 }
 
-int Thing::get_carried_amulet_highest_value_for_target(Thingp *out, Thingp target)
+int Thing::carried_amulet_highest_value_for_target_get(Thingp *out, Thingp target)
 {
   TRACE_NO_INDENT();
   int highest_value = -1;
@@ -167,7 +167,7 @@ int Thing::get_carried_amulet_highest_value_for_target(Thingp *out, Thingp targe
     return highest_value;
   }
 
-  for (const auto t : get_amulet_list()) {
+  for (const auto t : amulet_list_get()) {
     if (! t->is_amulet()) {
       continue;
     }
@@ -181,7 +181,7 @@ int Thing::get_carried_amulet_highest_value_for_target(Thingp *out, Thingp targe
       }
     }
 
-    auto v = get_value(t);
+    auto v = value_get(t);
     if (! *out) {
       *out          = t;
       highest_value = v;

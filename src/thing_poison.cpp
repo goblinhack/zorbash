@@ -18,7 +18,7 @@ void Thing::poison_tick(void)
     return;
   }
 
-  auto old_poison = get_poisoned_amount();
+  auto old_poison = poisoned_amount_get();
   if (! old_poison) {
     return;
   }
@@ -35,7 +35,7 @@ void Thing::poison_tick(void)
     auto new_poison = poison / 2;
 
     if (poison) {
-      if (d20() < get_stat_con()) {
+      if (d20() < stat_con_get()) {
         if (is_player()) {
           msg("You take half damage fron poison due to your sturdy constitution.");
         }

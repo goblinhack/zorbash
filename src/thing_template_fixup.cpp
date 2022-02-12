@@ -73,19 +73,19 @@ void tp_fixup(void)
     }
 
     if (tp->is_buff() || tp->is_debuff() || tp->is_skill() || tp->is_monst() || tp->is_item() || tp->is_player()) {
-      if (! tp->get_stat_str()) {
+      if (! tp->stat_str_get()) {
         tp->stat_str_set(10);
       }
-      if (! tp->get_stat_def()) {
+      if (! tp->stat_def_get()) {
         tp->stat_def_set(10);
       }
-      if (! tp->get_stat_con()) {
+      if (! tp->stat_con_get()) {
         tp->stat_con_set(10);
       }
-      if (! tp->get_stat_dex()) {
+      if (! tp->stat_dex_get()) {
         tp->stat_dex_set(10);
       }
-      if (! tp->get_stat_luck()) {
+      if (! tp->stat_luck_get()) {
         tp->stat_luck_set(10);
       }
     }
@@ -95,62 +95,62 @@ void tp_fixup(void)
     //
     int num_attack_types = 0;
 
-    num_attack_types += tp->get_damage_melee() ? 1 : 0;
-    num_attack_types += tp->get_damage_natural_attack() ? 1 : 0;
-    num_attack_types += tp->get_damage_poison() ? 1 : 0;
-    num_attack_types += tp->get_damage_future1() ? 1 : 0;
-    num_attack_types += tp->get_damage_future2() ? 1 : 0;
-    num_attack_types += tp->get_damage_future3() ? 1 : 0;
-    num_attack_types += tp->get_damage_cold() ? 1 : 0;
-    num_attack_types += tp->get_damage_fire() ? 1 : 0;
-    num_attack_types += tp->get_damage_crush() ? 1 : 0;
-    num_attack_types += tp->get_damage_lightning() ? 1 : 0;
-    num_attack_types += tp->get_damage_energy() ? 1 : 0;
-    num_attack_types += tp->get_damage_acid() ? 1 : 0;
-    num_attack_types += tp->get_damage_digest() ? 1 : 0;
-    num_attack_types += tp->get_damage_necrosis() ? 1 : 0;
+    num_attack_types += tp->damage_melee_get() ? 1 : 0;
+    num_attack_types += tp->damage_natural_attack_get() ? 1 : 0;
+    num_attack_types += tp->damage_poison_get() ? 1 : 0;
+    num_attack_types += tp->damage_future1_get() ? 1 : 0;
+    num_attack_types += tp->damage_future2_get() ? 1 : 0;
+    num_attack_types += tp->damage_future3_get() ? 1 : 0;
+    num_attack_types += tp->damage_cold_get() ? 1 : 0;
+    num_attack_types += tp->damage_fire_get() ? 1 : 0;
+    num_attack_types += tp->damage_crush_get() ? 1 : 0;
+    num_attack_types += tp->damage_lightning_get() ? 1 : 0;
+    num_attack_types += tp->damage_energy_get() ? 1 : 0;
+    num_attack_types += tp->damage_acid_get() ? 1 : 0;
+    num_attack_types += tp->damage_digest_get() ? 1 : 0;
+    num_attack_types += tp->damage_necrosis_get() ? 1 : 0;
 
     if (num_attack_types == 1) {
-      if (tp->get_damage_acid() > 0) {
+      if (tp->damage_acid_get() > 0) {
         tp->damage_acid_chance_d1000_set(1000);
       }
-      if (tp->get_damage_natural_attack() > 0) {
+      if (tp->damage_natural_attack_get() > 0) {
         tp->damage_natural_attack_chance_d1000_set(1000);
       }
-      if (tp->get_damage_crush() > 0) {
+      if (tp->damage_crush_get() > 0) {
         tp->damage_crush_chance_d1000_set(1000);
       }
-      if (tp->get_damage_digest() > 0) {
+      if (tp->damage_digest_get() > 0) {
         tp->damage_digest_chance_d1000_set(1000);
       }
-      if (tp->get_damage_energy() > 0) {
+      if (tp->damage_energy_get() > 0) {
         tp->damage_energy_chance_d1000_set(1000);
       }
-      if (tp->get_damage_fire() > 0) {
+      if (tp->damage_fire_get() > 0) {
         tp->damage_fire_chance_d1000_set(1000);
       }
-      if (tp->get_damage_future1() > 0) {
+      if (tp->damage_future1_get() > 0) {
         tp->damage_future1_chance_d1000_set(1000);
       }
-      if (tp->get_damage_future2() > 0) {
+      if (tp->damage_future2_get() > 0) {
         tp->damage_future2_chance_d1000_set(1000);
       }
-      if (tp->get_damage_future3() > 0) {
+      if (tp->damage_future3_get() > 0) {
         tp->damage_future3_chance_d1000_set(1000);
       }
-      if (tp->get_damage_cold() > 0) {
+      if (tp->damage_cold_get() > 0) {
         tp->damage_cold_chance_d1000_set(1000);
       }
-      if (tp->get_damage_lightning() > 0) {
+      if (tp->damage_lightning_get() > 0) {
         tp->damage_lightning_chance_d1000_set(1000);
       }
-      if (tp->get_damage_melee() > 0) {
+      if (tp->damage_melee_get() > 0) {
         tp->damage_melee_chance_d1000_set(1000);
       }
-      if (tp->get_damage_necrosis() > 0) {
+      if (tp->damage_necrosis_get() > 0) {
         tp->damage_necrosis_chance_d1000_set(1000);
       }
-      if (tp->get_damage_poison() > 0) {
+      if (tp->damage_poison_get() > 0) {
         tp->damage_poison_chance_d1000_set(1000);
       }
     }

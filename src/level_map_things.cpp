@@ -183,7 +183,7 @@ void Level::remove_thing(int x, int y, ThingId id, int group)
 void Level::check_thing(Thingp t)
 {
   TRACE_AND_INDENT();
-  int group = t->get_group();
+  int group = t->group_get();
   int x     = t->curr_at.x;
   int y     = t->curr_at.y;
 

@@ -41,7 +41,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   // Look in the bag.
   //
   if (item->is_bag()) {
-    for (const auto bag_item : item->get_item_vector()) {
+    for (const auto bag_item : item->item_vector_get()) {
       auto value = worth_collecting(bag_item, would_need_to_drop);
       if (value > 0) {
         dbg("Worth collecting bag item %s, yes (the contents)", bag_item->to_short_string().c_str());
@@ -61,7 +61,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   //
   // Don't pick up things we dropped
   //
-  if (game->tick_current < item->get_tick_last_dropped() + 1) {
+  if (game->tick_current < item->tick_last_dropped_get() + 1) {
     dbg("Worth collecting %s? no, was recently dropped", item->to_short_string().c_str());
     return -1;
   }
@@ -72,7 +72,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   // This can be nutrition or gold value etc... just something that is worth
   // something to us
   //
-  int value_to_me = get_value(item);
+  int value_to_me = value_get(item);
   if (value_to_me < 0) {
     dbg("Worth collecting %s? no, worthless", item->to_short_string().c_str());
     return -1;
@@ -85,7 +85,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   //
   if (item->is_weapon()) {
     Thingp worst_weapon       = nullptr;
-    auto   worst_weapon_value = get_carried_weapon_least_value(&worst_weapon);
+    auto   worst_weapon_value = carried_weapon_least_value_get(&worst_weapon);
     //
     // If we have an existing weapon, we can be smarter on checks and decided if
     // we perhaps want to swap the worst weapon for this one.
@@ -128,7 +128,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
           // Here we're adding a weapon that is better than the worst.
           // Check if we have too many, to drop the new worst weapon.
           //
-          if (get_carried_weapon_count() > 1) {
+          if (carried_weapon_count_get() > 1) {
             *would_need_to_drop = worst_weapon;
             dbg("Collect %s? yes, but no space, need to drop %s", item->to_short_string().c_str(),
                 worst_weapon->to_short_string().c_str());
@@ -148,7 +148,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
         // Here we're adding a weapon that is worse than the worst.
         // Only carry if we are low on weapons.
         //
-        if (get_carried_weapon_count() > 1) {
+        if (carried_weapon_count_get() > 1) {
           dbg("Collect %s? no, worse than the worst weapon %s", item->to_short_string().c_str(),
               worst_weapon->to_short_string().c_str());
           dbg("  (but we already have enough weapons)");
@@ -174,7 +174,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
 
   if (item->is_wand()) {
     Thingp worst_wand       = nullptr;
-    auto   worst_wand_value = get_carried_wand_least_value(&worst_wand);
+    auto   worst_wand_value = carried_wand_least_value_get(&worst_wand);
     //
     // If we have an existing wand, we can be smarter on checks and decided if
     // we perhaps want to swap the worst wand for this one.
@@ -217,7 +217,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
           // Here we're adding a wand that is better than the worst.
           // Check if we have too many, to drop the new worst wand.
           //
-          if (get_carried_wand_count() > 5) {
+          if (carried_wand_count_get() > 5) {
             *would_need_to_drop = worst_wand;
             dbg("Worth collecting %s? yes, but no space and too many wands, would need to drop %s",
                 item->to_short_string().c_str(), worst_wand->to_short_string().c_str());
@@ -237,7 +237,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
         // Here we're adding a wand that is worse than the worst.
         // Only carry if we are low on wands.
         //
-        if (get_carried_wand_count() > 5) {
+        if (carried_wand_count_get() > 5) {
           dbg("Worth collecting %s? no, it is worse than the worst wand %s, "
               "and we already have enough wands",
               item->to_short_string().c_str(), worst_wand->to_short_string().c_str());
@@ -263,7 +263,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
 
   if (item->is_ring()) {
     Thingp worst_ring       = nullptr;
-    auto   worst_ring_value = get_carried_ring_least_value(&worst_ring);
+    auto   worst_ring_value = carried_ring_least_value_get(&worst_ring);
     //
     // If we have an existing ring, we can be smarter on checks and decided if
     // we perhaps want to swap the worst ring for this one.
@@ -306,7 +306,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
           // Here we're adding a ring that is better than the worst.
           // Check if we have too many, to drop the new worst ring.
           //
-          if (get_carried_ring_count() > 2) {
+          if (carried_ring_count_get() > 2) {
             *would_need_to_drop = worst_ring;
             dbg("Worth collecting %s? yes, but no space and too many rings, would need to drop %s",
                 item->to_short_string().c_str(), worst_ring->to_short_string().c_str());
@@ -326,7 +326,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
         // Here we're adding a ring that is worse than the worst.
         // Only carry if we are low on rings.
         //
-        if (get_carried_ring_count() > 2) {
+        if (carried_ring_count_get() > 2) {
           dbg("Worth collecting %s? no, it is worse than the worst ring %s, "
               "and we already have enough rings",
               item->to_short_string().c_str(), worst_ring->to_short_string().c_str());
@@ -352,7 +352,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
 
   if (item->is_food() || item->is_health_booster()) {
     Thingp worst_food       = nullptr;
-    auto   worst_food_value = get_carried_food_least_value(&worst_food);
+    auto   worst_food_value = carried_food_least_value_get(&worst_food);
     //
     // If we have an existing food, we can be smarter on checks and decided if
     // we perhaps want to swap the worst food for this one.
@@ -395,7 +395,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
           // Here we're adding a food that is better than the worst.
           // Check if we have too many, to drop the new worst food.
           //
-          if (get_carried_food_count() > 5) {
+          if (carried_food_count_get() > 5) {
             *would_need_to_drop = worst_food;
             dbg("Worth collecting %s? yes, but no space and too many foods, would need to drop %s",
                 item->to_short_string().c_str(), worst_food->to_short_string().c_str());
@@ -415,7 +415,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
         // Here we're adding a food that is worse than the worst.
         // Only carry if we are low on foods.
         //
-        if (get_carried_food_count() > 5) {
+        if (carried_food_count_get() > 5) {
           dbg("Worth collecting %s? no, it is worse than the worst food %s, "
               "and we already have enough foods",
               item->to_short_string().c_str(), worst_food->to_short_string().c_str());

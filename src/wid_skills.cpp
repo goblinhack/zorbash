@@ -177,7 +177,7 @@ void Game::wid_choose_skill(void)
   //
   // Once skills are maxxed out, that's it
   //
-  if (player->get_itemsp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
+  if (player->itemsp_get()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
     player->msg("%%fg=red$Your brain is full and cannot fit in any more skillsj%%fg=reset$");
     change_state(Game::STATE_NORMAL);
     return;
@@ -187,7 +187,7 @@ void Game::wid_choose_skill(void)
   for (auto tpp : tp_get_skills()) {
 
     bool add = true;
-    for (auto oid : player->get_itemsp()->skills) {
+    for (auto oid : player->itemsp_get()->skills) {
       auto o = game->level->thing_find(oid);
       if (o) {
         if (o->tp() == tpp) {

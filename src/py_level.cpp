@@ -237,7 +237,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
     //
     // Don't include carried things else lasers will destroy all items carried!
     //
-    if (t->get_immediate_owner()) {
+    if (t->immediate_owner_get()) {
       continue;
     }
     items++;
@@ -251,7 +251,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
     //
     // Don't include carried things else lasers will destroy all items carried!
     //
-    if (t->get_immediate_owner()) {
+    if (t->immediate_owner_get()) {
       continue;
     }
     PyList_SetItem(lst, item, Py_BuildValue("I", t->id));
@@ -331,7 +331,7 @@ PyObject *thing_get_all_followers(PyObject *obj, PyObject *args, PyObject *keywd
     Py_RETURN_NONE;
   }
 
-  auto followers = t->get_all_followers();
+  auto followers = t->all_followers_get();
 
   if (followers.empty()) {
     Py_RETURN_NONE;
@@ -420,7 +420,7 @@ LEVEL_BODY_GET_BOOL_AT(level_gfx_show_asleep_at, gfx_show_asleep)
 LEVEL_BODY_GET_BOOL_AT(level_gfx_solid_shadow_at, gfx_solid_shadow)
 LEVEL_BODY_GET_BOOL_AT(level_gfx_very_short_shadow_caster_at, gfx_very_short_shadow_caster)
 LEVEL_BODY_GET_BOOL_AT(level_gfx_water_at, gfx_water)
-LEVEL_BODY_GET_BOOL_AT(level_hunger_clock_tick_frequency_at, get_hunger_clock_tick_frequency)
+LEVEL_BODY_GET_BOOL_AT(level_hunger_clock_tick_frequency_at, hunger_clock_tick_frequency_get)
 LEVEL_BODY_GET_BOOL_AT(level_hunger_is_insatiable_at, hunger_is_insatiable)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_attack_mobs_at, is_able_to_attack_mobs)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_break_down_doors_at, is_able_to_break_down_doors)

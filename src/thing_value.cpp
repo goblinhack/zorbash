@@ -15,7 +15,7 @@
 //
 // Return a score, higher is better for perceived value to you
 //
-int Thing::get_value(Thingp it)
+int Thing::value_get(Thingp it)
 {
   TRACE_NO_INDENT();
   int value = 0;
@@ -51,17 +51,17 @@ int Thing::get_value(Thingp it)
   //
   // Things are more "valuable" if we need them now for a health boost
   //
-  value += it->get_nutrition();
-  value += health_boost_would_occur(it->get_nutrition());
-  value += it->get_damage_max();
-  value += it->get_gold_value();
+  value += it->nutrition_get();
+  value += health_boost_would_occur(it->nutrition_get());
+  value += it->damage_max_get();
+  value += it->gold_value_get();
   //
   // Enchant is included in damage, but enchanting also has other benefits like
   // less corrosive. So give a boost in relation to the enchangt level.
   //
-  value += it->get_enchant();
+  value += it->enchant_get();
 
-  value *= 1 + it->get_charge_count();
+  value *= 1 + it->charge_count_get();
 
   dbg3("Item value for %s is %d", it->to_short_string().c_str(), value);
 

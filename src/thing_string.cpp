@@ -37,7 +37,7 @@ std::string Thing::to_string(void)
   }
 
   if (! g_loading) {
-    auto l = get_leader();
+    auto l = leader_get();
     if (l && (l != this)) {
       return (string_sprintf(
           "%" PRIX32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
@@ -54,8 +54,8 @@ std::string Thing::to_string(void)
    * Makes debugs too long
    */
 
-  if (! g_loading && get_immediate_owner()) {
-    auto o = get_immediate_owner();
+  if (! g_loading && immediate_owner_get()) {
+    auto o = immediate_owner_get();
     return (string_sprintf(
         "%" PRIX32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d o:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
         is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",

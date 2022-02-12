@@ -42,8 +42,8 @@ void HiScores::add_new_hiscore(Thingp player, const std::string &name, const std
   }
 
   while (h != hiscores.end()) {
-    if (player->get_score() > h->score) {
-      hiscores.insert(h, HiScore(hiscore_name, current_date(), player->get_score(),
+    if (player->score_get() > h->score) {
+      hiscores.insert(h, HiScore(hiscore_name, current_date(), player->score_get(),
                                  (player->level->world_at.z + 1) / 2, defeated_by));
 
       hiscores.resize(HiScore::max);
@@ -61,7 +61,7 @@ bool HiScores::is_new_hiscore(Thingp player)
   TRACE_AND_INDENT();
   std::vector< HiScore >::iterator h = hiscores.begin();
 
-  if (! player->get_score()) {
+  if (! player->score_get()) {
     //
     // Poor player.
     //
@@ -69,7 +69,7 @@ bool HiScores::is_new_hiscore(Thingp player)
   }
 
   while (h != hiscores.end()) {
-    if (player->get_score() > h->score) {
+    if (player->score_get() > h->score) {
       return true;
     }
     h++;
@@ -82,7 +82,7 @@ bool HiScores::is_new_highest_hiscore(Thingp player)
 {
   std::vector< HiScore >::iterator h = hiscores.begin();
 
-  if (! player->get_score()) {
+  if (! player->score_get()) {
     //
     // Poor player.
     //
@@ -90,7 +90,7 @@ bool HiScores::is_new_highest_hiscore(Thingp player)
   }
 
   while (h != hiscores.end()) {
-    if (player->get_score() > h->score) {
+    if (player->score_get() > h->score) {
       return true;
     }
     return false;
@@ -105,7 +105,7 @@ const char *HiScores::place_str(Thingp player)
       "11th",  "12th",   "13th",  "14th",   "15th",  "16th",  "17th",    "18th",   "19th",   "20th",
   };
 
-  if (! player->get_score()) {
+  if (! player->score_get()) {
     //
     // Poor player.
     //
@@ -115,7 +115,7 @@ const char *HiScores::place_str(Thingp player)
   std::vector< HiScore >::iterator h = hiscores.begin();
 
   while (h != hiscores.end()) {
-    if (player->get_score() > h->score) {
+    if (player->score_get() > h->score) {
       return (which[ h - hiscores.begin() ]);
     }
     h++;

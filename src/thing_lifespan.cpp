@@ -49,22 +49,22 @@ void Thing::lifespan_tick(void)
   //
   // Torches only tick when carried
   //
-  auto owner = get_immediate_owner();
+  auto owner = immediate_owner_get();
   if (is_torch() && ! owner) {
     return;
   }
 
-  if (! get_lifespan()) {
+  if (! lifespan_get()) {
     return;
   }
 
   lifespan_decr();
 
-  if (get_lifespan()) {
+  if (lifespan_get()) {
     return;
   }
 
-  auto top_owner = get_top_owner();
+  auto top_owner = top_owner_get();
   if (top_owner) {
     top_owner->on_lifespan_tick(this);
   }
@@ -72,10 +72,10 @@ void Thing::lifespan_tick(void)
   //
   // This is for torches
   //
-  if (get_charge_count()) {
+  if (charge_count_get()) {
     charge_count_decr();
-    if (get_charge_count()) {
-      dbg("Lifespan expired (but has %d charges left)", get_charge_count());
+    if (charge_count_get()) {
+      dbg("Lifespan expired (but has %d charges left)", charge_count_get());
       game->request_remake_rightbar = true;
       lifespan_set(tp()->lifespan());
       return;

@@ -8,13 +8,13 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-point Thing::get_dest_random(int d)
+point Thing::dest_random_get(int d)
 {
   if (! d) {
     if (is_player()) {
       d = MAP_WIDTH / 2;
     } else {
-      d = (int) get_distance_vision();
+      d = (int) distance_vision_get();
     }
   }
 
@@ -24,16 +24,16 @@ point Thing::get_dest_random(int d)
   //
   // Minions cannot wander too far
   //
-  auto mob = get_top_mob();
+  auto mob = top_mob_get();
   if (mob) {
-    d             = (int) get_distance_mob_max();
+    d             = (int) distance_mob_max_get();
     wander_source = mob->curr_at;
     dbg("Use mob %s as wander source: %s", mob->to_short_string().c_str(), wander_source.to_string().c_str());
   }
 
-  auto leader = get_leader();
+  auto leader = leader_get();
   if (leader) {
-    d             = (int) get_distance_leader_max();
+    d             = (int) distance_leader_max_get();
     wander_source = leader->curr_at;
     dbg("Use leader %s as wander source: %s", leader->to_short_string().c_str(), wander_source.to_string().c_str());
   }
@@ -57,7 +57,7 @@ point Thing::get_dest_random(int d)
     if (collision_obstacle(point(x, y))) {
       continue;
     } else {
-      auto c = get_terrain_cost(point(x, y));
+      auto c = terrain_cost_get(point(x, y));
       if (c >= DMAP_LESS_PREFERRED_TERRAIN) {
         continue;
       } else {

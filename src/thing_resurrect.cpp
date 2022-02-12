@@ -19,7 +19,7 @@ void Thing::resurrect(void)
   //
   // Resurrect, but weaker
   //
-  auto v = get_health_max() / 2;
+  auto v = health_max_get() / 2;
   if (v > 0) {
     is_resurrecting = true;
     tile_curr       = 0;
@@ -32,8 +32,8 @@ void Thing::resurrect(void)
     //
     // Catch up on ticks
     //
-    set_tick_last_did_something(game->tick_current);
-    set_tick_resurrect_when(0);
+    tick_last_did_something_set(game->tick_current);
+    tick_resurrect_when_set(0);
     is_dead  = false;
     is_dying = false;
 
@@ -65,8 +65,8 @@ void Thing::resurrect_tick(void)
   //
   // Rise at the apointed time
   //
-  if (game->tick_current < get_tick_resurrect_when()) {
-    dbg("Too soon to rise from the grave, at %d wait for %d", game->tick_current, get_tick_resurrect_when());
+  if (game->tick_current < tick_resurrect_when_get()) {
+    dbg("Too soon to rise from the grave, at %d wait for %d", game->tick_current, tick_resurrect_when_get());
     return;
   }
 
@@ -79,7 +79,7 @@ void Thing::resurrect_tick(void)
   // No respawn onto lava or things like that if we don't like that.
   // Or no respawn if something we don't like is standing on us!
   //
-  if (get_terrain_cost(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
+  if (terrain_cost_get(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
     dbg("Do not resurrect, on bad terrain");
     return;
   }

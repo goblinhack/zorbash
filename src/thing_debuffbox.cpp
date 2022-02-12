@@ -32,9 +32,9 @@ bool Thing::debuffbox_id_insert(Thingp what)
   }
 
   int  free_slot       = -1;
-  auto debuffbox_items = player->get_itemsp()->debuffbox_id.size();
+  auto debuffbox_items = player->itemsp_get()->debuffbox_id.size();
   for (auto i = 0U; i < debuffbox_items; i++) {
-    auto thing_id = get_itemsp()->debuffbox_id[ i ];
+    auto thing_id = itemsp_get()->debuffbox_id[ i ];
     if (! thing_id) {
       if (free_slot == -1) {
         free_slot = i;
@@ -65,7 +65,7 @@ bool Thing::debuffbox_id_insert(Thingp what)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    get_itemsp()->debuffbox_id[ free_slot ] = what->id;
+    itemsp_get()->debuffbox_id[ free_slot ] = what->id;
     item_slot                               = free_slot;
   } else {
     if (debuffbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
@@ -73,8 +73,8 @@ bool Thing::debuffbox_id_insert(Thingp what)
       return false;
     }
 
-    get_itemsp()->debuffbox_id.push_back(what->id);
-    item_slot = get_itemsp()->debuffbox_id.size() - 1;
+    itemsp_get()->debuffbox_id.push_back(what->id);
+    item_slot = itemsp_get()->debuffbox_id.size() - 1;
   }
 
   game->previous_slot = item_slot;
@@ -106,14 +106,14 @@ bool Thing::debuffbox_id_remove(Thingp what)
     return false;
   }
 
-  auto immediate_owner = what->get_immediate_owner();
+  auto immediate_owner = what->immediate_owner_get();
   if (immediate_owner) {
     immediate_owner->bag_remove(what);
   }
 
-  auto debuffbox_items = player->get_itemsp()->debuffbox_id.size();
+  auto debuffbox_items = player->itemsp_get()->debuffbox_id.size();
   for (auto i = 0U; i < debuffbox_items; i++) {
-    auto thing_id = get_itemsp()->debuffbox_id[ i ];
+    auto thing_id = itemsp_get()->debuffbox_id[ i ];
     if (! thing_id) {
       continue;
     }
@@ -126,7 +126,7 @@ bool Thing::debuffbox_id_remove(Thingp what)
       game->request_remake_debuffbox = true;
 
       dbg("Remove slot");
-      get_itemsp()->debuffbox_id[ i ] = NoThingId;
+      itemsp_get()->debuffbox_id[ i ] = NoThingId;
 
       wid_debuffbox_init();
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&

@@ -91,7 +91,7 @@ void Level::handle_input_events(void)
   // After a small delay handle the player move. This allows for diagonal moves to be handled without generating two
   // key presses.
   //
-  if (((player && player->get_aip()->move_path.size()) || game->request_player_move) &&
+  if (((player && player->aip_get()->move_path.size()) || game->request_player_move) &&
       time_have_x_tenths_passed_since(1, game->request_player_move)) {
     //
     // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete
@@ -192,7 +192,7 @@ bool Level::tick(void)
 
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
     {
-      int movement_left = t->get_movement_left();
+      int movement_left = t->movement_left_get();
       if (movement_left <= 0) {
         continue;
       }
@@ -202,7 +202,7 @@ bool Level::tick(void)
       } else {
         movement_left -= 100;
       }
-      t->set_movement_left(movement_left);
+      t->movement_left_set(movement_left);
 
       uint32_t tick_begin_ms = time_get_time_ms();
       t->tick();
@@ -241,7 +241,7 @@ bool Level::tick(void)
     }
     if (t->is_scheduled_for_death) {
       t->is_scheduled_for_death = false;
-      t->dead(t->get_dead_reason());
+      t->dead(t->dead_reason_get());
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
@@ -260,7 +260,7 @@ bool Level::tick(void)
     {
       t->animate();
       t->update_interpolated_position();
-      t->get_fall();
+      t->fall_get();
 
       //
       // We need to check all animated things are finished moving as they
@@ -281,7 +281,7 @@ bool Level::tick(void)
     {
       if (t->is_scheduled_for_death) {
         t->is_scheduled_for_death = false;
-        t->dead(t->get_dead_reason());
+        t->dead(t->dead_reason_get());
       }
     }
     FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
@@ -311,7 +311,7 @@ bool Level::tick(void)
     }
 
     t->update_interpolated_position();
-    t->get_fall();
+    t->fall_get();
 
     //
     // Check if we finished moving above. If not, keep waiting.
@@ -370,7 +370,7 @@ bool Level::tick(void)
 
     FOR_ALL_EQUIP(e)
     {
-      auto equip_id = t->get_equip_id_use_anim(e);
+      auto equip_id = t->equip_id_use_anim_get(e);
       if (equip_id.ok()) {
         auto w = thing_find(equip_id);
         if (w && ! (w->is_dead || w->is_scheduled_for_death)) {
@@ -385,7 +385,7 @@ bool Level::tick(void)
       }
     }
 
-    if (t->get_ts_flip_start() && ! (t->is_dead || t->is_scheduled_for_death)) {
+    if (t->ts_flip_start_get() && ! (t->is_dead || t->is_scheduled_for_death)) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
         t->con("Waiting on flipping thing longer than expected: %s", t->to_dbg_string().c_str());
       }
@@ -397,7 +397,7 @@ bool Level::tick(void)
       // Make sure offscreen animation occurs.
       //
       if (t->is_offscreen) {
-        t->set_ts_flip_start(0);
+        t->ts_flip_start_set(0);
       }
     }
 
@@ -423,10 +423,10 @@ bool Level::tick(void)
     //
     FOR_ALL_EQUIP(e)
     {
-      auto o = t->get_equip_carry_anim(e);
+      auto o = t->equip_carry_anim_get(e);
       if (o) {
         o->update_interpolated_position();
-        o->get_fall();
+        o->fall_get();
       }
     }
   }
@@ -479,7 +479,7 @@ bool Level::tick(void)
 
   if (game->things_are_moving) {
     if (ts_created && time_have_x_tenths_passed_since(10, ts_created)) {
-      if (game->request_player_move || (player && player->get_aip()->move_path.size())) {
+      if (game->request_player_move || (player && player->aip_get()->move_path.size())) {
         if ((time_get_time_ms() - game->tick_begin_ms) > 100) {
           game->tick_current_is_too_slow = true;
           time_delta += 20;
@@ -621,7 +621,7 @@ bool Level::tick(void)
         game->robot_mode_tick_requested = false;
         if (game->robot_mode) {
           player->ai_tick();
-        } else if (player->get_aip()->move_path.size()) {
+        } else if (player->aip_get()->move_path.size()) {
           player->path_pop_next_move();
         }
       }
@@ -646,7 +646,7 @@ bool Level::tick(void)
     } else if (player) {
       if (game->robot_mode) {
         player->ai_tick();
-      } else if (player->get_aip()->move_path.size()) {
+      } else if (player->aip_get()->move_path.size()) {
         player->path_pop_next_move();
       }
     }

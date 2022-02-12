@@ -48,7 +48,7 @@ bool Thing::try_to_enchant_items(void)
   //
   AI_LOG("Enchant check");
   if (is_able_to_enchant_items()) {
-    if (get_enchantstone_count() && can_enchant_something()) {
+    if (enchantstone_count_get() && can_enchant_something()) {
       AI_LOG("Try to enchant something");
       if (is_player()) {
         game->tick_begin("Robot can enchant something");
@@ -63,7 +63,7 @@ bool Thing::try_to_enchant_items(void)
   //
   AI_LOG("Enchant check");
   if (is_able_to_learn_skills()) {
-    if (get_skillstone_count() && can_learn_something()) {
+    if (skillstone_count_get() && can_learn_something()) {
       AI_LOG("Try to use a skillstone");
       if (is_player()) {
         game->tick_begin("Robot can learn something");
@@ -89,12 +89,12 @@ bool Thing::try_to_use_weapon(void)
   AI_LOG("Weapon check");
   TRACE_NO_INDENT();
 
-  Thingp curr_weapon = get_equip(MONST_EQUIP_WEAPON);
+  Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
   Thingp best_weapon = nullptr;
-  get_carried_weapon_highest_value(&best_weapon);
+  carried_weapon_highest_value_get(&best_weapon);
   if (best_weapon) {
-    auto curr_weapon_val = curr_weapon ? get_value(curr_weapon) : 0;
-    auto best_weapon_val = get_value(best_weapon);
+    auto curr_weapon_val = curr_weapon ? value_get(curr_weapon) : 0;
+    auto best_weapon_val = value_get(best_weapon);
 
     if (! curr_weapon) {
       if (use(best_weapon, MONST_EQUIP_WEAPON)) {
@@ -126,12 +126,12 @@ bool Thing::try_to_use_armor(void)
   AI_LOG("Armor check");
   TRACE_NO_INDENT();
 
-  Thingp curr_armor = get_equip(MONST_EQUIP_ARMOR);
+  Thingp curr_armor = equip_get(MONST_EQUIP_ARMOR);
   Thingp best_armor = nullptr;
-  get_carried_armor_highest_value(&best_armor);
+  carried_armor_highest_value_get(&best_armor);
   if (best_armor) {
-    auto curr_armor_val = curr_armor ? get_value(curr_armor) : 0;
-    auto best_armor_val = get_value(best_armor);
+    auto curr_armor_val = curr_armor ? value_get(curr_armor) : 0;
+    auto best_armor_val = value_get(best_armor);
 
     if (! curr_armor) {
       if (use(best_armor, MONST_EQUIP_ARMOR)) {
@@ -163,12 +163,12 @@ bool Thing::try_to_use_helmet(void)
   AI_LOG("Helmet check");
   TRACE_NO_INDENT();
 
-  Thingp curr_helmet = get_equip(MONST_EQUIP_HELMET);
+  Thingp curr_helmet = equip_get(MONST_EQUIP_HELMET);
   Thingp best_helmet = nullptr;
-  get_carried_helmet_highest_value(&best_helmet);
+  carried_helmet_highest_value_get(&best_helmet);
   if (best_helmet) {
-    auto curr_helmet_val = curr_helmet ? get_value(curr_helmet) : 0;
-    auto best_helmet_val = get_value(best_helmet);
+    auto curr_helmet_val = curr_helmet ? value_get(curr_helmet) : 0;
+    auto best_helmet_val = value_get(best_helmet);
 
     if (! curr_helmet) {
       if (use(best_helmet, MONST_EQUIP_HELMET)) {
@@ -200,12 +200,12 @@ bool Thing::try_to_use_amulet(void)
   AI_LOG("Amulet check");
   TRACE_NO_INDENT();
 
-  Thingp curr_amulet = get_equip(MONST_EQUIP_AMULET);
+  Thingp curr_amulet = equip_get(MONST_EQUIP_AMULET);
   Thingp best_amulet = nullptr;
-  get_carried_amulet_highest_value(&best_amulet);
+  carried_amulet_highest_value_get(&best_amulet);
   if (best_amulet) {
-    auto curr_amulet_val = curr_amulet ? get_value(curr_amulet) : 0;
-    auto best_amulet_val = get_value(best_amulet);
+    auto curr_amulet_val = curr_amulet ? value_get(curr_amulet) : 0;
+    auto best_amulet_val = value_get(best_amulet);
 
     if (! curr_amulet) {
       if (use(best_amulet, MONST_EQUIP_AMULET)) {
@@ -237,12 +237,12 @@ bool Thing::try_to_use_boots(void)
   AI_LOG("Boots check");
   TRACE_NO_INDENT();
 
-  Thingp curr_boots = get_equip(MONST_EQUIP_BOOTS);
+  Thingp curr_boots = equip_get(MONST_EQUIP_BOOTS);
   Thingp best_boots = nullptr;
-  get_carried_boots_highest_value(&best_boots);
+  carried_boots_highest_value_get(&best_boots);
   if (best_boots) {
-    auto curr_boots_val = curr_boots ? get_value(curr_boots) : 0;
-    auto best_boots_val = get_value(best_boots);
+    auto curr_boots_val = curr_boots ? value_get(curr_boots) : 0;
+    auto best_boots_val = value_get(best_boots);
 
     if (! curr_boots) {
       if (use(best_boots, MONST_EQUIP_BOOTS)) {
@@ -274,12 +274,12 @@ bool Thing::try_to_use_gauntlet(void)
   AI_LOG("Gauntlet check");
   TRACE_NO_INDENT();
 
-  Thingp curr_gauntlet = get_equip(MONST_EQUIP_GAUNTLET);
+  Thingp curr_gauntlet = equip_get(MONST_EQUIP_GAUNTLET);
   Thingp best_gauntlet = nullptr;
-  get_carried_gauntlet_highest_value(&best_gauntlet);
+  carried_gauntlet_highest_value_get(&best_gauntlet);
   if (best_gauntlet) {
-    auto curr_gauntlet_val = curr_gauntlet ? get_value(curr_gauntlet) : 0;
-    auto best_gauntlet_val = get_value(best_gauntlet);
+    auto curr_gauntlet_val = curr_gauntlet ? value_get(curr_gauntlet) : 0;
+    auto best_gauntlet_val = value_get(best_gauntlet);
 
     if (! curr_gauntlet) {
       if (use(best_gauntlet, MONST_EQUIP_GAUNTLET)) {
@@ -312,12 +312,12 @@ bool Thing::try_to_use_shield(void)
   AI_LOG("Shield check");
   TRACE_NO_INDENT();
 
-  Thingp curr_shield = get_equip(MONST_EQUIP_SHIELD);
+  Thingp curr_shield = equip_get(MONST_EQUIP_SHIELD);
   Thingp best_shield = nullptr;
-  get_carried_shield_highest_value(&best_shield);
+  carried_shield_highest_value_get(&best_shield);
   if (best_shield) {
-    auto curr_shield_val = curr_shield ? get_value(curr_shield) : 0;
-    auto best_shield_val = get_value(best_shield);
+    auto curr_shield_val = curr_shield ? value_get(curr_shield) : 0;
+    auto best_shield_val = value_get(best_shield);
 
     if (! curr_shield) {
       if (use(best_shield, MONST_EQUIP_SHIELD)) {
@@ -349,12 +349,12 @@ bool Thing::try_to_use_cloak(void)
   AI_LOG("Cloak check");
   TRACE_NO_INDENT();
 
-  Thingp curr_cloak = get_equip(MONST_EQUIP_CLOAK);
+  Thingp curr_cloak = equip_get(MONST_EQUIP_CLOAK);
   Thingp best_cloak = nullptr;
-  get_carried_cloak_highest_value(&best_cloak);
+  carried_cloak_highest_value_get(&best_cloak);
   if (best_cloak) {
-    auto curr_cloak_val = curr_cloak ? get_value(curr_cloak) : 0;
-    auto best_cloak_val = get_value(best_cloak);
+    auto curr_cloak_val = curr_cloak ? value_get(curr_cloak) : 0;
+    auto best_cloak_val = value_get(best_cloak);
 
     if (! curr_cloak) {
       if (use(best_cloak, MONST_EQUIP_CLOAK)) {
@@ -389,15 +389,15 @@ bool Thing::try_to_use_rings(void)
   //
   // Can we switch to a better ring?
   //
-  Thingp curr_ring1 = get_equip(MONST_EQUIP_RING1);
-  Thingp curr_ring2 = get_equip(MONST_EQUIP_RING2);
+  Thingp curr_ring1 = equip_get(MONST_EQUIP_RING1);
+  Thingp curr_ring2 = equip_get(MONST_EQUIP_RING2);
   Thingp best_ring  = nullptr;
 
-  get_carried_ring_highest_value(&best_ring);
+  carried_ring_highest_value_get(&best_ring);
   if (best_ring) {
-    auto curr_ring1_val = curr_ring1 ? get_value(curr_ring1) : 0;
-    auto curr_ring2_val = curr_ring2 ? get_value(curr_ring2) : 0;
-    auto best_ring_val  = get_value(best_ring);
+    auto curr_ring1_val = curr_ring1 ? value_get(curr_ring1) : 0;
+    auto curr_ring2_val = curr_ring2 ? value_get(curr_ring2) : 0;
+    auto best_ring_val  = value_get(best_ring);
 
     if (! curr_ring1) {
       if (use(best_ring, MONST_EQUIP_RING1)) {

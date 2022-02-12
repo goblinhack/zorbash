@@ -19,12 +19,12 @@ bool Thing::idle_check(void)
 {
   TRACE_NO_INDENT();
 
-  if (! std::empty(get_on_idle_tick_frequency_dice_str())) {
-    auto roll = get_on_idle_tick_frequency();
-    // con("%d %d roll %d", game->tick_current, get_tick_last_did_something(), roll);
-    if (game->tick_current - get_tick_last_did_something() >= (unsigned int) roll) {
-      // con("%d %d roll %d tick", game->tick_current, get_tick_last_did_something(), roll);
-      auto d   = get_on_idle_tick_frequency_dice();
+  if (! std::empty(on_idle_tick_frequency_dice_str_get())) {
+    auto roll = on_idle_tick_frequency_get();
+    // con("%d %d roll %d", game->tick_current, tick_last_did_something_get(), roll);
+    if (game->tick_current - tick_last_did_something_get() >= (unsigned int) roll) {
+      // con("%d %d roll %d tick", game->tick_current, tick_last_did_something_get(), roll);
+      auto d   = on_idle_tick_frequency_dice_get();
       auto mod = d.python_mod;
 
       if (mod == "me") {
@@ -32,7 +32,7 @@ bool Thing::idle_check(void)
       }
 
       py_call_void_fn(mod.c_str(), d.python_func.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
-      set_tick_last_did_something(game->tick_current);
+      tick_last_did_something_set(game->tick_current);
       return true;
     }
   }

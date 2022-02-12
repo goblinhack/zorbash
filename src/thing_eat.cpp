@@ -29,7 +29,7 @@ bool Thing::worth_eating(Thingp victim)
     return false;
   }
 
-  return health_boost_would_occur(victim->get_nutrition());
+  return health_boost_would_occur(victim->nutrition_get());
 }
 
 bool Thing::can_eat(const Thingp itp)
@@ -190,7 +190,7 @@ bool Thing::eat(Thingp victim)
   // Does the attacker feast on success?
   //
   if (is_player()) {
-    auto boost = health_boost(victim->get_nutrition());
+    auto boost = health_boost(victim->nutrition_get());
     msg("You munch %s for %d health.", victim->text_the().c_str(), boost);
     return true;
   }
@@ -209,7 +209,7 @@ bool Thing::eat(Thingp victim)
         //
         // Munch munch. Always try to eat.
         //
-      } else if (! health_boost(victim->get_nutrition())) {
+      } else if (! health_boost(victim->nutrition_get())) {
         dbg("No health boost from eating %s", victim->text_the().c_str());
         return false;
       }
@@ -243,7 +243,7 @@ bool Thing::consume(Thingp victim)
   // Does the attacker feast on success?
   //
   if (is_player()) {
-    auto boost = health_boost(victim->get_nutrition());
+    auto boost = health_boost(victim->nutrition_get());
     msg("You munch %s for %d health.", victim->text_the().c_str(), boost);
     return true;
   }
@@ -258,7 +258,7 @@ bool Thing::consume(Thingp victim)
       dbg("Consumes %s", victim->text_the().c_str());
 
       if (! is_player()) {
-        if (get_distance_to_player() < DMAP_IS_PASSABLE) {
+        if (distance_to_player_get() < DMAP_IS_PASSABLE) {
           if (victim->is_meat()) {
             level->thing_new(tp_random_red_splatter()->name(), curr_at);
           } else if (victim->is_pink_blooded()) {
@@ -305,7 +305,7 @@ bool Thing::eat_something(void)
   //
   // Try for food first, ignoring potions
   //
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     if (! can_eat(t)) {
       continue;
     }
@@ -315,7 +315,7 @@ bool Thing::eat_something(void)
 
     if (! best) {
       best = t;
-    } else if (t->get_nutrition() > best->get_nutrition()) {
+    } else if (t->nutrition_get() > best->nutrition_get()) {
       best = t;
     }
   }
@@ -351,7 +351,7 @@ bool Thing::can_eat_something(void)
   //
   // Try for food first, ignoring potions
   //
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     if (! can_eat(t)) {
       continue;
     }
@@ -364,7 +364,7 @@ bool Thing::can_eat_something(void)
   //
   // Try again but include potions
   //
-  for (const auto t : get_item_vector()) {
+  for (const auto t : item_vector_get()) {
     if (t->is_health_booster()) {
       return true;
     }

@@ -24,7 +24,7 @@ bool Thing::open_door(Thingp it)
       if (is_player()) {
         msg("The door is ablaze!");
       }
-      it->set_on_fire("opened flaming door");
+      it->on_fire_set("opened flaming door");
     }
   }
 
@@ -43,7 +43,7 @@ bool Thing::open_door(Thingp it)
   dbg("Open door");
   TRACE_AND_INDENT();
 
-  if (get_keys()) {
+  if (keys_get()) {
     keys_decr();
     IF_DEBUG1 { it->log("Open"); }
     it->level_pop();
@@ -80,7 +80,7 @@ bool Thing::close_door(Thingp it)
       if (is_player()) {
         msg("The door is ablaze!");
       }
-      it->set_on_fire("closed flaming door");
+      it->on_fire_set("closed flaming door");
     }
   }
 
@@ -117,7 +117,7 @@ bool Thing::close_door(Thingp it)
       continue;
     }
 
-    is_attacked_with_damage_crush(it, it->get_damage_crush());
+    is_attacked_with_damage_crush(it, it->damage_crush_get());
   }
   FOR_ALL_THINGS_END()
 

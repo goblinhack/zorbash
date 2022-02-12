@@ -24,7 +24,7 @@ void Thing::corrode_tick(void)
   //
   // Need to check if being consumed by a cleaner, hence owner check
   //
-  auto owner = get_top_owner();
+  auto owner = top_owner_get();
   if (level->is_acid(curr_at.x, curr_at.y) || (owner && owner->is_acid())) {
     int chance = 0;
 
@@ -47,8 +47,8 @@ void Thing::corrode_tick(void)
       chance = 1;
     }
 
-    if (get_enchant()) {
-      chance /= get_enchant() + 1;
+    if (enchant_get()) {
+      chance /= enchant_get() + 1;
     }
 
     if (chance) {

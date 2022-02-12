@@ -115,7 +115,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   //
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      auto c = get_terrain_cost(point(x, y));
+      auto c = terrain_cost_get(point(x, y));
       if (collision_obstacle(point(x, y))) {
         set(dmap.val, x, y, DMAP_IS_WALL);
         continue;
@@ -201,7 +201,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Reached the dest? Choose a new one.
   //
-  auto dest = get_aip()->wander_dest;
+  auto dest = aip_get()->wander_dest;
   if ((curr_at.x == dest.x) && (curr_at.y == dest.y)) {
     dbg("Reached dest");
     dest = point(-1, -1);
@@ -217,8 +217,8 @@ bool Thing::ai_choose_wander(point &nh)
   //
   // Choose a new wander location
   //
-  get_aip()->wander_dest = point(0, 0);
-  dest                   = get_dest_random();
+  aip_get()->wander_dest = point(0, 0);
+  dest                   = dest_random_get();
   dbg("Try wander to %s", dest.to_string().c_str());
 
   //
@@ -230,7 +230,7 @@ bool Thing::ai_choose_wander(point &nh)
   }
 
   if (too_far_from_leader(dest)) {
-    if (get_distance_from_leader() > too_far_from_leader(dest)) {
+    if (distance_from_leader_get() > too_far_from_leader(dest)) {
       dbg("Wander closer to leader via %d,%d", dest.x, dest.y);
     } else {
       dbg("Too far from leader; but allow wander anyway to %d,%d", dest.x, dest.y);
@@ -247,7 +247,7 @@ bool Thing::ai_choose_wander(point &nh)
     return false;
   }
 
-  get_aip()->wander_dest = dest;
+  aip_get()->wander_dest = dest;
 #ifdef ENABLE_DEBUG_AI_WANDER
   thing_new("ai_path2", fpoint(dest.x, dest.y));
 #endif
@@ -306,7 +306,7 @@ bool Thing::ai_wander(void)
   while (tries-- > 0) {
     point nh;
     if (ai_choose_wander(nh)) {
-      if (get_terrain_cost(nh) < DMAP_LESS_PREFERRED_TERRAIN) {
+      if (terrain_cost_get(nh) < DMAP_LESS_PREFERRED_TERRAIN) {
         if (move_to_or_attack(nh)) {
           return true;
         }
@@ -315,7 +315,7 @@ bool Thing::ai_wander(void)
       //
       // Set this so next time we will choose another dest
       //
-      get_aip()->wander_dest = point(0, 0);
+      aip_get()->wander_dest = point(0, 0);
     }
   }
 

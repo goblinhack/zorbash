@@ -129,10 +129,10 @@ bool Level::can_see_unimpeded(int x0, int y0, int x1, int y1)
   return (! r);
 }
 
-point Thing::get_vision_source(void)
+point Thing::vision_source_get(void)
 {
   if (is_minion() && distance_minion_vision_shared()) {
-    auto mob = get_top_mob();
+    auto mob = top_mob_get();
     if (mob) {
       return mob->curr_at;
     }

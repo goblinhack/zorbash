@@ -32,9 +32,9 @@ bool Thing::buffbox_id_insert(Thingp what)
   }
 
   int  free_slot     = -1;
-  auto buffbox_items = player->get_itemsp()->buffbox_id.size();
+  auto buffbox_items = player->itemsp_get()->buffbox_id.size();
   for (auto i = 0U; i < buffbox_items; i++) {
-    auto thing_id = get_itemsp()->buffbox_id[ i ];
+    auto thing_id = itemsp_get()->buffbox_id[ i ];
     if (! thing_id) {
       if (free_slot == -1) {
         free_slot = i;
@@ -54,7 +54,7 @@ bool Thing::buffbox_id_insert(Thingp what)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    get_itemsp()->buffbox_id[ free_slot ] = what->id;
+    itemsp_get()->buffbox_id[ free_slot ] = what->id;
     item_slot                             = free_slot;
   } else {
     if (buffbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
@@ -62,8 +62,8 @@ bool Thing::buffbox_id_insert(Thingp what)
       return false;
     }
 
-    get_itemsp()->buffbox_id.push_back(what->id);
-    item_slot = get_itemsp()->buffbox_id.size() - 1;
+    itemsp_get()->buffbox_id.push_back(what->id);
+    item_slot = itemsp_get()->buffbox_id.size() - 1;
   }
 
   game->previous_slot = item_slot;
@@ -95,14 +95,14 @@ bool Thing::buffbox_id_remove(Thingp what)
     return false;
   }
 
-  auto immediate_owner = what->get_immediate_owner();
+  auto immediate_owner = what->immediate_owner_get();
   if (immediate_owner) {
     immediate_owner->bag_remove(what);
   }
 
-  auto buffbox_items = player->get_itemsp()->buffbox_id.size();
+  auto buffbox_items = player->itemsp_get()->buffbox_id.size();
   for (auto i = 0U; i < buffbox_items; i++) {
-    auto thing_id = get_itemsp()->buffbox_id[ i ];
+    auto thing_id = itemsp_get()->buffbox_id[ i ];
     if (! thing_id) {
       continue;
     }
@@ -115,7 +115,7 @@ bool Thing::buffbox_id_remove(Thingp what)
       game->request_remake_buffbox = true;
 
       dbg("Remove slot");
-      get_itemsp()->buffbox_id[ i ] = NoThingId;
+      itemsp_get()->buffbox_id[ i ] = NoThingId;
 
       wid_buffbox_init();
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
@@ -187,12 +187,12 @@ bool Level::buffbox_over(const uint32_t slot)
     return false;
   }
 
-  if (slot >= player->get_itemsp()->buffbox_id.size()) {
+  if (slot >= player->itemsp_get()->buffbox_id.size()) {
     DBG("buffbox: Ignore; slot out of range");
     return false;
   }
 
-  auto oid = get(player->get_itemsp()->buffbox_id, slot);
+  auto oid = get(player->itemsp_get()->buffbox_id, slot);
   if (! oid) {
     DBG("buffbox: Ignore; nothing at that slot");
     return false;

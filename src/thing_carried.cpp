@@ -13,7 +13,7 @@
 //
 // Including items in bags
 //
-std::list< Thingp > Thing::get_item_list(void)
+std::list< Thingp > Thing::item_list_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -45,7 +45,7 @@ std::list< Thingp > Thing::get_item_list(void)
   return out;
 }
 
-std::vector< Thingp > Thing::get_item_vector(void)
+std::vector< Thingp > Thing::item_vector_get(void)
 {
   TRACE_NO_INDENT();
 

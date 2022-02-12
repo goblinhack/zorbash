@@ -465,7 +465,7 @@ PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  me->set_mob(owner);
+  me->mob_set(owner);
   Py_RETURN_NONE;
 }
 
@@ -503,7 +503,7 @@ PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  me->set_leader(owner);
+  me->leader_set(owner);
   Py_RETURN_NONE;
 }
 
@@ -690,7 +690,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
   //
   // If not reachable, suppress the msg
   //
-  if (owner->get_distance_to_player() < DMAP_IS_PASSABLE) {
+  if (owner->distance_to_player_get() < DMAP_IS_PASSABLE) {
     if (owner->is_monst()) {
       owner->msg("%s says '%s'", owner->text_The().c_str(), msg);
     } else {
@@ -732,7 +732,7 @@ PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
   //
   // If not reachable, suppress the popup
   //
-  if (owner->get_distance_to_player() < DMAP_IS_PASSABLE) {
+  if (owner->distance_to_player_get() < DMAP_IS_PASSABLE) {
     owner->popup(msg);
   }
 

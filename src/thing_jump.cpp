@@ -19,11 +19,11 @@ float Thing::how_far_i_can_jump(void)
   TRACE_NO_INDENT();
   auto d = (float) distance_jump() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
-  if (get_stamina() < get_stamina_max() / 2) {
+  if (stamina_get() < stamina_max_get() / 2) {
     d /= 2;
   }
 
-  if (get_stamina() < get_stamina_max() / 4) {
+  if (stamina_get() < stamina_max_get() / 4) {
     d /= 2;
   }
 
@@ -66,7 +66,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     dbg("No, minion is too far off the leash to jump");
     TRACE_AND_INDENT();
 
-    auto mob = get_top_mob();
+    auto mob = top_mob_get();
     if (mob) {
       dbg("Try jumping home");
       TRACE_AND_INDENT();
@@ -79,13 +79,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   if (too_far_from_leader(to)) {
-    if (get_distance_from_leader() > too_far_from_leader(to)) {
+    if (distance_from_leader_get() > too_far_from_leader(to)) {
       dbg("Jumping closer to the leader");
     } else {
       dbg("No, follower is too far from the leader to jump");
       TRACE_AND_INDENT();
 
-      auto leader = get_leader();
+      auto leader = leader_get();
       if (leader) {
         dbg("Try jumping closer to the leader");
         to           = leader->curr_at;
@@ -97,11 +97,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   if (is_able_to_tire()) {
-    if (! get_stamina()) {
+    if (! stamina_get()) {
       if (is_player()) {
         msg("You are too tired to jump.");
       }
-      dbg("Too tired to jump, stamina %d", get_stamina());
+      dbg("Too tired to jump, stamina %d", stamina_get());
       return false;
     }
   }
@@ -154,7 +154,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       continue;
     }
 
-    if (! d20roll(get_stat_str(), it->get_stat_str())) {
+    if (! d20roll(stat_str_get(), it->stat_str_get())) {
       if (is_player()) {
         msg("You are held in place!");
       }
@@ -169,7 +169,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Block jumping over doors
   //
   if (is_player()) {
-    if (get_map_treasure_count()) {
+    if (map_treasure_count_get()) {
       //
       // If we have a treasure map, allow wandering
       //
@@ -295,8 +295,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (get_equip_id_carry_anim(e).ok()) {
-      auto id = get_equip_id_carry_anim(e);
+    if (equip_id_carry_anim_get(e).ok()) {
+      auto id = equip_id_carry_anim_get(e);
       auto w  = level->thing_find(id);
       if (w) {
         w->move_to_immediately(curr_at);
@@ -313,9 +313,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       }
     }
 
-    if (get_equip_id_use_anim(e).ok()) {
-      auto id = get_equip_id_use_anim(e);
-      auto w  = level->thing_find(get_equip_id_use_anim(e));
+    if (equip_id_use_anim_get(e).ok()) {
+      auto id = equip_id_use_anim_get(e);
+      auto w  = level->thing_find(equip_id_use_anim_get(e));
       if (w) {
         w->move_to_immediately(curr_at);
         w->is_jumping = true;
@@ -339,12 +339,12 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  for (const auto w : get_item_vector()) {
+  for (const auto w : item_vector_get()) {
     w->move_to_immediately(curr_at);
     w->is_jumping = true;
   }
 
-  auto on_fire_anim_id = get_on_fire_anim_id();
+  auto on_fire_anim_id = on_fire_anim_id_get();
   if (on_fire_anim_id.ok()) {
     TRACE_NO_INDENT();
     auto id = on_fire_anim_id;
@@ -392,7 +392,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   wobble(25);
 
   if (! is_able_to_jump_without_tiring()) {
-    if (d20() > get_stat_str()) {
+    if (d20() > stat_str_get()) {
       stamina_decr(10);
     }
   }
@@ -565,15 +565,15 @@ void Thing::jump_end(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (get_equip_id_carry_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_carry_anim(e));
+    if (equip_id_carry_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim_get(e));
       if (w) {
         w->is_jumping = false;
       }
     }
 
-    if (get_equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(get_equip_id_use_anim(e));
+    if (equip_id_use_anim_get(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim_get(e));
       if (w) {
         w->is_jumping = false;
       }
@@ -584,11 +584,11 @@ void Thing::jump_end(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  for (const auto o : get_item_vector()) {
+  for (const auto o : item_vector_get()) {
     o->is_jumping = false;
   }
 
-  auto on_fire_anim_id = get_on_fire_anim_id();
+  auto on_fire_anim_id = on_fire_anim_id_get();
   if (on_fire_anim_id.ok()) {
     TRACE_NO_INDENT();
     auto w = level->thing_find(on_fire_anim_id);
@@ -601,7 +601,7 @@ void Thing::jump_end(void)
   // Attack of opportunity
   //
   if (is_player()) {
-    auto t = get_most_dangerous_adjacent_thing();
+    auto t = most_dangerous_adjacent_thing_get();
     if (t) {
       std::string s = t->text_The() + " attacks as you land";
       game->tick_begin("monst attacked as player landed");
@@ -633,7 +633,7 @@ void Thing::jump_end(void)
   //
   location_check_forced();
 
-  get_infop()->last_failed_jump_at = point(-1, -1);
+  infop_get()->last_failed_jump_at = point(-1, -1);
 }
 
 bool Thing::jump_attack(Thingp maybe_victim)
@@ -676,7 +676,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
     dbg("Try to jump attack");
     TRACE_AND_INDENT();
 
-    auto p         = get_aip()->move_path;
+    auto p         = aip_get()->move_path;
     auto jump_dist = pcg_random_range(0, p.size());
     return try_to_jump_carefully(get(p, jump_dist));
   }
@@ -688,7 +688,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
     //
     // If the things is near death, pounce
     //
-    if (maybe_victim->get_health() < maybe_victim->get_health_initial() / 10) {
+    if (maybe_victim->health_get() < maybe_victim->health_initial_get() / 10) {
       {
         dbg("Try to jump onto weakly %s", maybe_victim->to_string().c_str());
         TRACE_AND_INDENT();

@@ -15,13 +15,13 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-int Thing::get_attack_modifier(const Thingp victim)
+int Thing::attack_modifier_get(const Thingp victim)
 {
   TRACE_NO_INDENT();
 
-  auto owner = get_top_owner();
+  auto owner = top_owner_get();
   if (owner) {
-    return owner->get_attack_modifier(victim);
+    return owner->attack_modifier_get(victim);
   }
 
   int stat = 0;
@@ -30,32 +30,32 @@ int Thing::get_attack_modifier(const Thingp victim)
   //
   // Add att bonus
   //
-  stat += get_stat_att_mod();
+  stat += stat_att_mod_get();
   if (stat != prev) {
     prev = stat;
-    dbg("Att: with: (mod %d): %d", get_stat_att_mod(), stat);
+    dbg("Att: with: (mod %d): %d", stat_att_mod_get(), stat);
   }
 
   //
   // Add str bonus to att
   //
-  int str_total = get_stat_str_total();
+  int str_total = stat_str_total_get();
   stat          = stat_to_bonus(str_total);
-  stat += get_stat_att_mod();
+  stat += stat_att_mod_get();
   prev = stat;
   dbg("Att: (str %d): %d", str_total, stat);
 
   FOR_ALL_EQUIP(e)
   {
-    auto equip = get_equip(e);
+    auto equip = equip_get(e);
     if (equip) {
-      stat += equip->get_stat_att_mod();
+      stat += equip->stat_att_mod_get();
       if (stat != prev) {
         prev = stat;
         dbg("Att with (%s): %d", equip->to_short_string().c_str(), stat);
       }
 
-      auto enchant = equip->get_enchant();
+      auto enchant = equip->enchant_get();
       stat += enchant;
       if (stat != prev) {
         prev = stat;
@@ -69,7 +69,7 @@ int Thing::get_attack_modifier(const Thingp victim)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->get_stat_att_mod();
+        stat += buff->stat_att_mod_get();
         if (stat != prev) {
           prev = stat;
           dbg("Att with buff (%s): %d", buff->to_short_string().c_str(), stat);
@@ -81,7 +81,7 @@ int Thing::get_attack_modifier(const Thingp victim)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->get_stat_att_mod();
+        stat += buff->stat_att_mod_get();
         if (stat != prev) {
           prev = stat;
           dbg("Att with debuff (%s): %d", buff->to_short_string().c_str(), stat);
@@ -93,7 +93,7 @@ int Thing::get_attack_modifier(const Thingp victim)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->get_stat_att_mod();
+        stat += buff->stat_att_mod_get();
         if (stat != prev) {
           prev = stat;
           dbg("Att with skill (%s): %d", buff->to_short_string().c_str(), stat);
@@ -106,7 +106,7 @@ int Thing::get_attack_modifier(const Thingp victim)
   return stat;
 }
 
-int Thing::get_stat_att_penalties_total(void)
+int Thing::stat_att_penalties_total_get(void)
 {
   TRACE_NO_INDENT();
 
@@ -117,7 +117,7 @@ int Thing::get_stat_att_penalties_total(void)
   // Positional penalties
   //
   if (stat_att_penalty_when_stuck()) {
-    int p = stat_att_penalty_when_stuck() + get_stuck_count();
+    int p = stat_att_penalty_when_stuck() + stuck_count_get();
     p     = std::min(p, stat_att_penalty_when_stuck_max());
     penalty += p;
     if (penalty != prev) {
@@ -125,7 +125,7 @@ int Thing::get_stat_att_penalties_total(void)
       dbg("Att penalty: stuck %d", p);
     }
   } else if (stat_att_penalty_when_idle()) {
-    int p = stat_att_penalty_when_idle() + get_idle_count();
+    int p = stat_att_penalty_when_idle() + idle_count_get();
     p     = std::min(p, stat_att_penalty_when_idle_max());
     penalty += p;
     if (penalty != prev) {

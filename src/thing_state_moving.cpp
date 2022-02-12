@@ -22,7 +22,7 @@ bool Thing::state_moving(void)
 {
   TRACE_NO_INDENT();
 
-  auto aip = get_aip();
+  auto aip = aip_get();
 
   //
   // Finished the move?

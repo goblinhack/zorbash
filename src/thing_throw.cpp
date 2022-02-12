@@ -59,7 +59,7 @@ void Thing::throw_at(Thingp what, Thingp target)
     return;
   }
 
-  if (DISTANCE(curr_at.x, curr_at.y, target->curr_at.x, target->curr_at.y) > get_distance_throw()) {
+  if (DISTANCE(curr_at.x, curr_at.y, target->curr_at.x, target->curr_at.y) > distance_throw_get()) {
     if (is_player()) {
       msg("You cannot throw %s that far.", what->text_the().c_str());
     }

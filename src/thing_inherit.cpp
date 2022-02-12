@@ -12,6 +12,6 @@
 void Thing::inherit_from(Thingp it)
 {
   if (it->is_on_fire()) {
-    set_on_fire("owner is on fire");
+    on_fire_set("owner is on fire");
   }
 }
