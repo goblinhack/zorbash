@@ -1,8 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- luck                                                                                                                                         -->
-<!-- luck description                                                                                                                             -->
 <!-- luck bridge / lava / falling                                                                                                                 -->
+<!-- cursed weapon with bad luck / horseshoe / witches hat?                                                                                       -->
 <!-- luck trap                                                                                                                                    -->
 <!-- luck and enchanted stuff                                                                                                                     -->
 <!-- weight                                                                                                                                       -->

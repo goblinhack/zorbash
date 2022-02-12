@@ -532,7 +532,7 @@ private:
   int _unused_flag134 {};
   int _unused_flag135 {};
   int _unused_flag136 {};
-  int _unused_flag137 {};
+  int _move_speed {};
   int _unused_flag14 {};
   int _unused_flag15 {};
   int _unused_flag16 {};
@@ -1416,7 +1416,7 @@ public:
   int unused_flag134(void) const { return _unused_flag134; }
   int unused_flag135(void) const { return _unused_flag135; }
   int unused_flag136(void) const { return _unused_flag136; }
-  int unused_flag137(void) const { return _unused_flag137; }
+  int move_speed(void) const { return _move_speed; }
   int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag14(void) const { return _unused_flag14; }
   int unused_flag15(void) const { return _unused_flag15; }
@@ -2047,7 +2047,7 @@ public:
   void set_unused_flag134(int v) { _unused_flag134 = v; }
   void set_unused_flag135(int v) { _unused_flag135 = v; }
   void set_unused_flag136(int v) { _unused_flag136 = v; }
-  void set_unused_flag137(int v) { _unused_flag137 = v; }
+  void set_move_speed(int v) { _move_speed = v; }
   void set_unused_flag13(int v) { _unused_flag13 = v; }
   void set_unused_flag14(int v) { _unused_flag14 = v; }
   void set_unused_flag15(int v) { _unused_flag15 = v; }

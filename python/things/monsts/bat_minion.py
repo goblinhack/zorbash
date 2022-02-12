@@ -70,6 +70,7 @@ def tp_init(name, text_name):
     my.tp_set_is_minion(self, True)
     my.tp_set_is_monst_class_a(self, True)
     my.tp_set_is_monst(self, True)
+    my.tp_set_move_speed(self, 100)
     my.tp_set_is_moveable(self, True)
     my.tp_set_is_red_blooded(self, True)
     my.tp_set_is_tickable(self, True)

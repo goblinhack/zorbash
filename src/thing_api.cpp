@@ -2232,10 +2232,10 @@ int Thing::unused_flag136(void)
   return (tp()->unused_flag136());
 }
 
-int Thing::unused_flag137(void)
+int Thing::move_speed(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag137());
+  return (tp()->move_speed());
 }
 
 int Thing::damage_received_doubled_from_cold(void)

@@ -470,7 +470,7 @@ PyObject *thing_unused_flag133(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag134(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag135(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag136(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag137(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_move_speed(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);

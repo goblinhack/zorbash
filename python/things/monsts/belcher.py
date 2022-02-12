@@ -56,6 +56,7 @@ def tp_init(name, text_name, short_text_name):
     my.tp_set_is_meat_eater(self, True)
     my.tp_set_is_monst_class_b(self, True)
     my.tp_set_is_monst(self, True)
+    my.tp_set_move_speed(self, 100)
     my.tp_set_is_obstacle_when_dead(self, True)
     my.tp_set_is_shovable(self, True)
     my.tp_set_is_sticky(self, True)

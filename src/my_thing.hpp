@@ -1570,7 +1570,7 @@ public:
   int unused_flag134(void);
   int unused_flag135(void);
   int unused_flag136(void);
-  int unused_flag137(void);
+  int move_speed(void);
   int unused_flag13(void);
   int unused_flag14(void);
   int unused_flag15(void);
