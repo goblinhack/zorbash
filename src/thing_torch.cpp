@@ -92,6 +92,6 @@ void Thing::update_light_power_including_torch_effect(uint8_t &out_light_power)
     }
   }
 
-  set_prev_light_power(light_power);
+  prev_light_power_set(light_power);
   out_light_power = light_power;
 }

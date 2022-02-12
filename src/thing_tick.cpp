@@ -339,7 +339,7 @@ void Thing::tick(void)
     if (curr_at == last_at) {
       idle_count_incr();
     } else {
-      set_idle_count(0);
+      idle_count_set(0);
     }
   }
 }

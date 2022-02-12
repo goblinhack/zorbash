@@ -41,7 +41,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
     //
     // Get the damage from the enchanted wand, so the blast inflicts that damage.
     //
-    set_current_damage(item->get_current_damage());
+    current_damage_set(item->get_current_damage());
     return true;
   }
 

@@ -96,7 +96,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
-    tp->set_##__field__(std::string(value ? value : ""));                                                            \
+    tp->__field__##_set(std::string(value ? value : ""));                                                            \
     value = 0;                                                                                                       \
                                                                                                                      \
   done:                                                                                                              \
@@ -247,7 +247,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
-    tp->set_##__field__(value);                                                                                      \
+    tp->__field__##_set(value);                                                                                      \
                                                                                                                      \
   done:                                                                                                              \
     if (tp_name) {                                                                                                   \
@@ -291,8 +291,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
-    tp->set_##__field__(value);                                                                                      \
-                                                                                                                     \
+    tp->__field__##_set(value);                                                                                      \
   done:                                                                                                              \
     if (tp_name) {                                                                                                   \
       myfree(tp_name);                                                                                               \
@@ -535,16 +534,16 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
       tile->is_end_of_anim         = is_end_of_anim;
       tile->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
       if (is_dead_on_end_of_anim) {
-        tp->set_is_dead_on_end_of_anim(true);
+        tp->is_dead_on_end_of_anim_set(true);
       }
       tile->is_alive_on_end_of_anim = is_alive_on_end_of_anim;
       if (is_alive_on_end_of_anim) {
-        tp->set_is_alive_on_end_of_anim(true);
+        tp->is_alive_on_end_of_anim_set(true);
       }
       tile->is_resurrecting = is_resurrecting;
 
       if (tile->is_hp_25_percent || tile->is_hp_50_percent || tile->is_hp_75_percent || tile->is_hp_100_percent) {
-        tp->set_internal_has_hp_anim(true);
+        tp->internal_has_hp_anim_set(true);
       }
 
       if (up) {
@@ -580,7 +579,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
       }
 
       if (tile->internal_has_dir_anim) {
-        tp->set_internal_has_dir_anim(true);
+        tp->internal_has_dir_anim_set(true);
       }
     } else {
       (*tiles).push_back(nullptr);
@@ -1349,7 +1348,6 @@ TP_BODY_SET_INT(is_steal_item_chance_d1000)
 TP_BODY_SET_INT(is_sticky)
 TP_BODY_SET_INT(is_stone)
 TP_BODY_SET_INT(is_sword)
-TP_BODY_SET_INT(is_victim_select)
 TP_BODY_SET_INT(is_the_grid)
 TP_BODY_SET_INT(is_throwable)
 TP_BODY_SET_INT(is_tickable)
@@ -1370,6 +1368,7 @@ TP_BODY_SET_INT(is_usable)
 TP_BODY_SET_INT(is_used_when_thrown)
 TP_BODY_SET_INT(is_very_combustible)
 TP_BODY_SET_INT(is_very_heavy)
+TP_BODY_SET_INT(is_victim_select)
 TP_BODY_SET_INT(is_wall)
 TP_BODY_SET_INT(is_wall_dungeon)
 TP_BODY_SET_INT(is_wand)
@@ -1385,6 +1384,7 @@ TP_BODY_SET_INT(light_power)
 TP_BODY_SET_INT(melting_chance_d1000)
 TP_BODY_SET_INT(minion_limit)
 TP_BODY_SET_INT(monst_size)
+TP_BODY_SET_INT(move_speed)
 TP_BODY_SET_INT(noise_blocker)
 TP_BODY_SET_INT(noise_decibels_hearing)
 TP_BODY_SET_INT(noise_on_born)
@@ -1480,7 +1480,6 @@ TP_BODY_SET_INT(unused_flag133)
 TP_BODY_SET_INT(unused_flag134)
 TP_BODY_SET_INT(unused_flag135)
 TP_BODY_SET_INT(unused_flag136)
-TP_BODY_SET_INT(move_speed)
 TP_BODY_SET_INT(unused_flag14)
 TP_BODY_SET_INT(unused_flag15)
 TP_BODY_SET_INT(unused_flag16)
@@ -1635,6 +1634,7 @@ TP_BODY_SET_STRING(on_idle_tick_frequency_dice)
 TP_BODY_SET_STRING(on_lifespan_tick_do)
 TP_BODY_SET_STRING(on_move_do)
 TP_BODY_SET_STRING(on_open_do)
+TP_BODY_SET_STRING(on_owner_add_do)
 TP_BODY_SET_STRING(on_owner_damage_acid_do)
 TP_BODY_SET_STRING(on_owner_damage_cold_do)
 TP_BODY_SET_STRING(on_owner_damage_crush_do)
@@ -1651,7 +1651,6 @@ TP_BODY_SET_STRING(on_owner_damage_necrosis_do)
 TP_BODY_SET_STRING(on_owner_damage_poison_do)
 TP_BODY_SET_STRING(on_owner_damage_stat_con_do)
 TP_BODY_SET_STRING(on_owner_damage_stat_str_do)
-TP_BODY_SET_STRING(on_owner_add_do)
 TP_BODY_SET_STRING(on_owner_remove_do)
 TP_BODY_SET_STRING(on_polymorphed_do)
 TP_BODY_SET_STRING(on_tick_do)

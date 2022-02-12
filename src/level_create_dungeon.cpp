@@ -552,7 +552,7 @@ void Level::create_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int bloc
       auto Y = y + dy;
       for (auto dx = 0; dx < block_width; dx++) {
         auto X = x + dx;
-        set_is_wall(X, Y);
+        is_wall_set(X, Y);
 
         auto tilename = what + ".";
         tilename += std::to_string(variant);
@@ -637,7 +637,7 @@ void Level::create_dungeon_place_rocks(Dungeonp d, int variant, int block_width,
       auto Y = y + dy;
       for (auto dx = 0; dx < block_width; dx++) {
         auto X = x + dx;
-        set_is_rock(X, Y);
+        is_rock_set(X, Y);
 
         auto tilename = what + ".";
         tilename += std::to_string(variant);
@@ -751,7 +751,7 @@ void Level::create_dungeon_place_floors(Dungeonp d, std::string what, int floor_
       auto Y = y + dy;
       for (auto dx = 0; dx < block_width; dx++) {
         auto X = x + dx;
-        set_is_floor(X, Y);
+        is_floor_set(X, Y);
 
         auto new_thing = what + std::to_string(floor_type);
         auto tilename  = new_thing + ".";

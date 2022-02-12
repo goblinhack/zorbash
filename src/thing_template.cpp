@@ -75,9 +75,9 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_name, const
   }
 
   auto tp = new Tp();
-  tp->set_name(name);
-  tp->set_text_name(text_name);
-  tp->set_short_text_name(short_text_name);
+  tp->name_set(name);
+  tp->text_name_set(text_name);
+  tp->short_text_name_set(short_text_name);
 
   auto result = tp_name_map.insert(std::make_pair(name, tp));
   if (result.second == false) {

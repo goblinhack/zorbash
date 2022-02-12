@@ -377,7 +377,7 @@ void Level::create_sewer_place_walls(int variant, int block_width, int block_hei
       auto Y = y + dy;
       for (auto dx = 0; dx < block_width; dx++) {
         auto X = x + dx;
-        set_is_wall(X, Y);
+        is_wall_set(X, Y);
 
         auto tilename = what + ".";
         tilename += std::to_string(variant);

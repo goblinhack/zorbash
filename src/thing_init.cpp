@@ -204,7 +204,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   }
 
   if (unlikely(tpp->charge_count())) {
-    set_charge_count(tpp->charge_count());
+    charge_count_set(tpp->charge_count());
   }
 
   auto tiles = &tpp->tiles;

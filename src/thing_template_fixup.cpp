@@ -17,23 +17,23 @@ void tp_fixup(void)
   TRACE_AND_INDENT();
   for (auto &tp : tp_id_map) {
     if (tp->stamina()) {
-      tp->set_is_able_to_tire(true);
+      tp->is_able_to_tire_set(true);
     }
 
     if (tp->is_tickable()) {
-      tp->set_is_interesting(true);
+      tp->is_interesting_set(true);
     }
 
     if (tp->is_very_combustible()) {
-      tp->set_is_combustible(true);
+      tp->is_combustible_set(true);
     }
 
     if (tp->is_very_heavy()) {
-      tp->set_is_heavy(true);
+      tp->is_heavy_set(true);
     }
 
     if (tp->is_stone()) {
-      tp->set_temperature_change_sensitive(true);
+      tp->temperature_change_sensitive_set(true);
     }
 
     if (tp->is_flying()) {
@@ -74,19 +74,19 @@ void tp_fixup(void)
 
     if (tp->is_buff() || tp->is_debuff() || tp->is_skill() || tp->is_monst() || tp->is_item() || tp->is_player()) {
       if (! tp->get_stat_str()) {
-        tp->set_stat_str(10);
+        tp->stat_str_set(10);
       }
       if (! tp->get_stat_def()) {
-        tp->set_stat_def(10);
+        tp->stat_def_set(10);
       }
       if (! tp->get_stat_con()) {
-        tp->set_stat_con(10);
+        tp->stat_con_set(10);
       }
       if (! tp->get_stat_dex()) {
-        tp->set_stat_dex(10);
+        tp->stat_dex_set(10);
       }
       if (! tp->get_stat_luck()) {
-        tp->set_stat_luck(10);
+        tp->stat_luck_set(10);
       }
     }
 
@@ -112,46 +112,46 @@ void tp_fixup(void)
 
     if (num_attack_types == 1) {
       if (tp->get_damage_acid() > 0) {
-        tp->set_damage_acid_chance_d1000(1000);
+        tp->damage_acid_chance_d1000_set(1000);
       }
       if (tp->get_damage_natural_attack() > 0) {
-        tp->set_damage_natural_attack_chance_d1000(1000);
+        tp->damage_natural_attack_chance_d1000_set(1000);
       }
       if (tp->get_damage_crush() > 0) {
-        tp->set_damage_crush_chance_d1000(1000);
+        tp->damage_crush_chance_d1000_set(1000);
       }
       if (tp->get_damage_digest() > 0) {
-        tp->set_damage_digest_chance_d1000(1000);
+        tp->damage_digest_chance_d1000_set(1000);
       }
       if (tp->get_damage_energy() > 0) {
-        tp->set_damage_energy_chance_d1000(1000);
+        tp->damage_energy_chance_d1000_set(1000);
       }
       if (tp->get_damage_fire() > 0) {
-        tp->set_damage_fire_chance_d1000(1000);
+        tp->damage_fire_chance_d1000_set(1000);
       }
       if (tp->get_damage_future1() > 0) {
-        tp->set_damage_future1_chance_d1000(1000);
+        tp->damage_future1_chance_d1000_set(1000);
       }
       if (tp->get_damage_future2() > 0) {
-        tp->set_damage_future2_chance_d1000(1000);
+        tp->damage_future2_chance_d1000_set(1000);
       }
       if (tp->get_damage_future3() > 0) {
-        tp->set_damage_future3_chance_d1000(1000);
+        tp->damage_future3_chance_d1000_set(1000);
       }
       if (tp->get_damage_cold() > 0) {
-        tp->set_damage_cold_chance_d1000(1000);
+        tp->damage_cold_chance_d1000_set(1000);
       }
       if (tp->get_damage_lightning() > 0) {
-        tp->set_damage_lightning_chance_d1000(1000);
+        tp->damage_lightning_chance_d1000_set(1000);
       }
       if (tp->get_damage_melee() > 0) {
-        tp->set_damage_melee_chance_d1000(1000);
+        tp->damage_melee_chance_d1000_set(1000);
       }
       if (tp->get_damage_necrosis() > 0) {
-        tp->set_damage_necrosis_chance_d1000(1000);
+        tp->damage_necrosis_chance_d1000_set(1000);
       }
       if (tp->get_damage_poison() > 0) {
-        tp->set_damage_poison_chance_d1000(1000);
+        tp->damage_poison_chance_d1000_set(1000);
       }
     }
   }

@@ -26,8 +26,8 @@ void Thing::resurrect(void)
     animate();
 
     dbg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
-    set_health(v);
-    set_health_max(v);
+    health_set(v);
+    health_max_set(v);
 
     //
     // Catch up on ticks
@@ -39,7 +39,7 @@ void Thing::resurrect(void)
 
     if (! i_set_is_monst) {
       i_set_is_monst = true;
-      level->set_is_monst(curr_at.x, curr_at.y);
+      level->is_monst_set(curr_at.x, curr_at.y);
     }
   } else {
     dbg("Too weak to rise from the grave");
