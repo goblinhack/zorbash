@@ -1366,7 +1366,7 @@ public:
   int stats06(void) const { return _stats06; }
   int stats07(void) const { return _stats07; }
   int stats09(void) const { return _stats09; }
-  int stat_str_get(void) const { return _stat_str; }
+  int stat_str(void) const { return _stat_str; }
   int stat_str_mod(void) const { return _stat_str_mod; }
   int temperature_change_sensitive(void) const { return _temperature_change_sensitive; }
   int temperature(void) const { return _temperature; }

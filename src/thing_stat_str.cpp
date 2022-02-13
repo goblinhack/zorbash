@@ -21,25 +21,25 @@ int Thing::stat_str_total(void)
 
   auto owner = top_owner();
   if (owner) {
-    return owner->stat_str_get();
+    return owner->stat_str();
   }
 
   int stat = 0;
   int prev = 0;
 
-  stat = stat_str_get();
+  stat = stat_str();
   prev = stat;
-  dbg("Str: (%d/%d): %d", stat_str_get(), stat_to_bonus(stat_str_get()), stat);
+  dbg("Str: (%d/%d): %d", stat_str(), stat_to_bonus(stat_str()), stat);
 
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += iter->stat_str_mod_get();
+      stat += iter->stat_str_mod();
       if (stat != prev) {
         prev = stat;
         dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-            modifier_to_string(iter->stat_str_mod_get()).c_str(), stat);
+            modifier_to_string(iter->stat_str_mod()).c_str(), stat);
       }
 
       auto enchant = iter->enchant_get();
@@ -56,11 +56,11 @@ int Thing::stat_str_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_str_mod_get();
+        stat += iter->stat_str_mod();
         if (stat != prev) {
           prev = stat;
           dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_str_mod_get()).c_str(), stat);
+              modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
     }
@@ -69,11 +69,11 @@ int Thing::stat_str_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_str_mod_get();
+        stat += iter->stat_str_mod();
         if (stat != prev) {
           prev = stat;
           dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_str_mod_get()).c_str(), stat);
+              modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
     }
@@ -82,11 +82,11 @@ int Thing::stat_str_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_str_mod_get();
+        stat += iter->stat_str_mod();
         if (stat != prev) {
           prev = stat;
           dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_str_mod_get()).c_str(), stat);
+              modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
     }
@@ -95,7 +95,7 @@ int Thing::stat_str_total(void)
   return stat;
 }
 
-int Thing::stat_str_get(void)
+int Thing::stat_str(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {

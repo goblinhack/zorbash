@@ -327,7 +327,7 @@ int Thing::is_dangerous(Thingp it)
   return b > a;
 }
 
-const std::string Thing::danger_level_str_get(Thingp it)
+const std::string Thing::danger_level_str(Thingp it)
 {
   auto a     = danger_current_level();
   auto b     = it->danger_current_level();

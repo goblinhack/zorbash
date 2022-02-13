@@ -101,7 +101,6 @@ def tp_init(name, text_name):
     my.is_meat_eater(self, True)
     my.is_monst_class_b(self, True)
     my.is_monst(self, True)
-    my.move_speed(self, 100)
     my.is_moveable(self, True)
     my.is_poisonous_danger_level(self, 2)  # danger level
     my.is_shovable(self, True)
@@ -109,6 +108,7 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.long_text_description(self, "An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")
     my.monst_size(self, my.MONST_SIZE_GIANT)
+    my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d6")

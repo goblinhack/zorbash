@@ -577,7 +577,7 @@ public:
   const std::string  damage_natural_dice_str(void);
   const std::string  damage_necrosis_dice_str(void);
   const std::string  damage_poison_dice_str(void);
-  const std::string  danger_level_str_get(Thingp); // Cannot return reference
+  const std::string  danger_level_str(Thingp); // Cannot return reference
   const std::string &dead_reason_get(void);
   const std::string &equip_carry_anim(void);
   const std::string &gfx_anim_use(void);
@@ -1491,18 +1491,18 @@ public:
   int stats07(void);
   int stats09_decr(int);
   int stats09_decr(void);
-  int stats09_get(void);
+  int stats09(void);
   int stats09_incr(int);
   int stats09_incr(void);
   int stats09_set(int);
   int stat_str_decr(int);
   int stat_str_decr(void);
-  int stat_str_get(void);
+  int stat_str(void);
   int stat_str_incr(int);
   int stat_str_incr(void);
   int stat_str_mod_decr(int);
   int stat_str_mod_decr(void);
-  int stat_str_mod_get(void);
+  int stat_str_mod(void);
   int stat_str_mod_incr(int);
   int stat_str_mod_incr(void);
   int stat_str_mod_set(int);

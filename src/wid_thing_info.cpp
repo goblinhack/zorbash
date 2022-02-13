@@ -1227,8 +1227,8 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
-  } else if (t->stat_str_mod_get()) {
-    auto stat = t->stat_str_mod_get();
+  } else if (t->stat_str_mod()) {
+    auto stat = t->stat_str_mod();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength modifier        %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
@@ -1321,7 +1321,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     return;
   }
 
-  const std::string danger_level = player->danger_level_str_get(t);
+  const std::string danger_level = player->danger_level_str(t);
   w->log(danger_level);
   w->log(UI_LOGGING_EMPTY_LINE);
 

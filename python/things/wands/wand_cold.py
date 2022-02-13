@@ -55,12 +55,12 @@ def tp_init(name, text_name, short_text_name):
     my.is_item_magical(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
-    my.is_victim_select(self, True)
     my.is_tickable(self, True)  # So it can interact with cold
     my.is_treasure_class_b(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
+    my.is_victim_select(self, True)
     my.is_wand(self, True)
     my.is_wooden(self, True)
     my.item_height(self, 4)
