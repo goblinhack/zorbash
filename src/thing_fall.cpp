@@ -105,7 +105,7 @@ void Thing::fall(float fall_height, ts_t ms)
   }
 }
 
-float Thing::fall_get(void)
+float Thing::fall_curr(void)
 {
   if (! is_falling) {
     return 0;

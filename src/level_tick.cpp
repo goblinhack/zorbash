@@ -260,7 +260,7 @@ bool Level::tick(void)
     {
       t->animate();
       t->update_interpolated_position();
-      t->fall_get();
+      t->fall_curr();
 
       //
       // We need to check all animated things are finished moving as they
@@ -311,7 +311,7 @@ bool Level::tick(void)
     }
 
     t->update_interpolated_position();
-    t->fall_get();
+    t->fall_curr();
 
     //
     // Check if we finished moving above. If not, keep waiting.
@@ -426,7 +426,7 @@ bool Level::tick(void)
       auto o = t->equip_carry_anim(e);
       if (o) {
         o->update_interpolated_position();
-        o->fall_get();
+        o->fall_curr();
       }
     }
   }

@@ -674,7 +674,7 @@ public:
 
   float bounce_fade_curr(void);
   float bounce_height_curr(void);
-  float bounce_get(void);
+  float bounce_curr(void);
   float distance_avoid_get(void);
   float distance_from_leader(point p);
   float distance_from_leader(void);
@@ -690,12 +690,12 @@ public:
   float distance_vision_get(void);
   float fadeup_fade_curr(void);
   float fadeup_height_curr(void);
-  float fadeup_get(void);
+  float fadeup_curr(void);
   float fall_height_curr(void);
-  float fall_get(void);
+  float fall_curr(void);
   float health_pct(void);
-  float lunge_get(void);
-  float wobble_get(void);
+  float lunge_curr(void);
+  float wobble_curr(void);
   float how_far_i_can_jump_max(void);
   float how_far_i_can_jump(void);
   float update_wobble(void);

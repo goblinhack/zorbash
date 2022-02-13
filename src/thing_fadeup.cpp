@@ -21,7 +21,7 @@ void Thing::fadeup(float fadeup_height, float fadeup_fade, ts_t ms)
   is_fadeup = true;
 }
 
-float Thing::fadeup_get(void)
+float Thing::fadeup_curr(void)
 {
   if (! is_fadeup) {
     alpha = 255;

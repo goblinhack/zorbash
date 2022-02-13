@@ -167,11 +167,11 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
       std::swap(shadow_tl, shadow_tr);
     }
 
-    float bounce = bounce_get();
+    float bounce = bounce_curr();
     float tileh  = game->config.tile_pix_height;
     float bh     = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
 
-    float fadeup = fadeup_get();
+    float fadeup = fadeup_curr();
     if (fadeup < 0) {
       return;
     }
@@ -541,9 +541,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   if (unlikely(is_bouncing || (o && o->is_bouncing))) {
     float bounce;
     if (o) {
-      bounce = owner->bounce_get();
+      bounce = owner->bounce_curr();
     } else {
-      bounce = bounce_get();
+      bounce = bounce_curr();
     }
 
     float bh = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
@@ -562,10 +562,10 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   if (falling) {
     float fall = 0;
 
-    fall = fall_get();
+    fall = fall_curr();
     update_interpolated_position();
     if (owner) {
-      fall = owner->fall_get();
+      fall = owner->fall_curr();
     }
 
     auto s = ((blit_br.y - blit_tl.y - 1) / 2) * fall;
@@ -590,9 +590,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   float lunge;
   if (owner) {
-    lunge = owner->lunge_get();
+    lunge = owner->lunge_curr();
   } else {
-    lunge = lunge_get();
+    lunge = lunge_curr();
   }
   if (unlikely(lunge > 0.0)) {
     point delta;
@@ -614,7 +614,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Fading.
   //
-  float fadeup = fadeup_get();
+  float fadeup = fadeup_curr();
   if (likely(fadeup == 0)) {
   } else if (fadeup < 0) {
     blit = false;
