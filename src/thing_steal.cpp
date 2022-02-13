@@ -20,7 +20,7 @@ bool Thing::steal_treasure_from(Thingp it)
 
   dbg("Steal treasure from %s", it->to_short_string().c_str());
   TRACE_NO_INDENT();
-  auto cands = treasure_vector_get();
+  auto cands = treasure_vector();
   if (! cands.size()) {
     dbg("No, nothing to steal");
     return false;
@@ -56,7 +56,7 @@ bool Thing::steal_item_from(Thingp it)
   }
   TRACE_NO_INDENT();
   dbg("Yes, steal out of this list:");
-  auto cands = it->item_vector_get();
+  auto cands = it->item_vector();
   if (! cands.size()) {
     dbg("No, nothing to steal");
     return false;

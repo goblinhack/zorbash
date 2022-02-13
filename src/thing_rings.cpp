@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 
-std::list< Thingp > Thing::ring_list_get(void)
+std::list< Thingp > Thing::ring_list(void)
 {
   TRACE_NO_INDENT();
 
@@ -51,7 +51,7 @@ std::list< Thingp > Thing::ring_list_get(void)
   return out;
 }
 
-std::vector< Thingp > Thing::ring_vector_get(void)
+std::vector< Thingp > Thing::ring_vector(void)
 {
   std::vector< Thingp > out;
 
@@ -95,7 +95,7 @@ int Thing::carried_ring_count(void)
     return count;
   }
 
-  for (const auto t : ring_list_get()) {
+  for (const auto t : ring_list()) {
     if (t->is_ring()) {
       count++;
     }
@@ -113,7 +113,7 @@ int Thing::carried_ring_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto t : ring_list_get()) {
+  for (const auto t : ring_list()) {
     if (! t->is_ring()) {
       continue;
     }
@@ -142,7 +142,7 @@ int Thing::carried_ring_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto t : ring_list_get()) {
+  for (const auto t : ring_list()) {
     if (! t->is_ring()) {
       continue;
     }

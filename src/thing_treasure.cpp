@@ -19,7 +19,7 @@ bool Thing::is_carrying_treasure(void)
     return false;
   }
 
-  if (! item_vector_get().empty()) {
+  if (! item_vector().empty()) {
     return true;
   }
 
@@ -31,7 +31,7 @@ bool Thing::is_carrying_treasure(void)
   return false;
 }
 
-std::list< Thingp > Thing::treasure_list_get(void)
+std::list< Thingp > Thing::treasure_list(void)
 {
   TRACE_NO_INDENT();
 
@@ -67,7 +67,7 @@ std::list< Thingp > Thing::treasure_list_get(void)
   return out;
 }
 
-std::vector< Thingp > Thing::treasure_vector_get(void)
+std::vector< Thingp > Thing::treasure_vector(void)
 {
   TRACE_NO_INDENT();
 

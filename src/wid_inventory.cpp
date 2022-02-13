@@ -779,7 +779,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   //
   Thingp bag = nullptr;
   {
-    for (const auto t : player->item_vector_get()) {
+    for (const auto t : player->item_vector()) {
       if (t->is_bag()) {
         bag = t;
         break;

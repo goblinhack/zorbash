@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 
-std::list< Thingp > Thing::boots_list_get(void)
+std::list< Thingp > Thing::boots_list(void)
 {
   TRACE_NO_INDENT();
 
@@ -46,7 +46,7 @@ std::list< Thingp > Thing::boots_list_get(void)
   return out;
 }
 
-std::vector< Thingp > Thing::boots_vector_get(void)
+std::vector< Thingp > Thing::boots_vector(void)
 {
   TRACE_NO_INDENT();
 
@@ -91,7 +91,7 @@ int Thing::carried_boots_count(void)
     return count;
   }
 
-  for (const auto t : boots_list_get()) {
+  for (const auto t : boots_list()) {
     if (t->is_boots()) {
       count++;
     }
@@ -109,7 +109,7 @@ int Thing::carried_boots_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto t : boots_list_get()) {
+  for (const auto t : boots_list()) {
     if (! t->is_boots()) {
       continue;
     }
@@ -138,7 +138,7 @@ int Thing::carried_boots_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto t : boots_list_get()) {
+  for (const auto t : boots_list()) {
     if (! t->is_boots()) {
       continue;
     }
@@ -167,7 +167,7 @@ int Thing::carried_boots_highest_value_for_target(Thingp *out, Thingp target)
     return highest_value;
   }
 
-  for (const auto t : boots_list_get()) {
+  for (const auto t : boots_list()) {
     if (! t->is_boots()) {
       continue;
     }

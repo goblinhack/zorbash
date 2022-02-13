@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 
-std::list< Thingp > Thing::food_list_get(void)
+std::list< Thingp > Thing::food_list(void)
 {
   TRACE_NO_INDENT();
 
@@ -46,7 +46,7 @@ std::list< Thingp > Thing::food_list_get(void)
   return out;
 }
 
-std::vector< Thingp > Thing::food_vector_get(void)
+std::vector< Thingp > Thing::food_vector(void)
 {
   TRACE_NO_INDENT();
 
@@ -91,7 +91,7 @@ int Thing::carried_food_count(void)
     return count;
   }
 
-  for (const auto t : food_list_get()) {
+  for (const auto t : food_list()) {
     if (t->is_food()) {
       count++;
     }
@@ -109,7 +109,7 @@ int Thing::carried_food_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto t : food_list_get()) {
+  for (const auto t : food_list()) {
     if (! t->is_food()) {
       continue;
     }
@@ -138,7 +138,7 @@ int Thing::carried_food_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto t : food_list_get()) {
+  for (const auto t : food_list()) {
     if (! t->is_food()) {
       continue;
     }

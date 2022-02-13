@@ -48,7 +48,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // Limit is 1 bag per the inventory UI
   //
   if (item->is_bag()) {
-    for (const auto t : item->item_vector_get()) {
+    for (const auto t : item->item_vector()) {
       if (t->is_bag()) {
         dbg("Cannot carry; only one bag can be carried");
         return false;
@@ -89,7 +89,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   //
   bool equipped = false;
   if (can_equip && is_able_to_use_weapons() && item->is_auto_equipped() && item->is_weapon() &&
-      ! equip_id_get(MONST_EQUIP_WEAPON)) {
+      ! equip_id(MONST_EQUIP_WEAPON)) {
     if (equip(item, MONST_EQUIP_WEAPON)) {
       equipped = true;
     }
@@ -99,7 +99,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no armor yet, equip it
   //
   if (can_equip && is_able_to_use_armor() && item->is_auto_equipped() && item->is_armor() &&
-      ! equip_id_get(MONST_EQUIP_ARMOR)) {
+      ! equip_id(MONST_EQUIP_ARMOR)) {
     if (equip(item, MONST_EQUIP_ARMOR)) {
       equipped = true;
     }
@@ -109,7 +109,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no helmet yet, equip it
   //
   if (can_equip && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet() &&
-      ! equip_id_get(MONST_EQUIP_HELMET)) {
+      ! equip_id(MONST_EQUIP_HELMET)) {
     if (equip(item, MONST_EQUIP_HELMET)) {
       equipped = true;
     }
@@ -119,7 +119,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no helmet yet, equip it
   //
   if (can_equip && is_able_to_use_helmet() && item->is_auto_equipped() && item->is_helmet() &&
-      ! equip_id_get(MONST_EQUIP_HELMET)) {
+      ! equip_id(MONST_EQUIP_HELMET)) {
     if (equip(item, MONST_EQUIP_HELMET)) {
       equipped = true;
     }
@@ -129,7 +129,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no amulet yet, equip it
   //
   if (can_equip && is_able_to_use_amulet() && item->is_auto_equipped() && item->is_amulet() &&
-      ! equip_id_get(MONST_EQUIP_AMULET)) {
+      ! equip_id(MONST_EQUIP_AMULET)) {
     if (equip(item, MONST_EQUIP_AMULET)) {
       equipped = true;
     }
@@ -139,7 +139,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no boots yet, equip it
   //
   if (can_equip && is_able_to_use_boots() && item->is_auto_equipped() && item->is_boots() &&
-      ! equip_id_get(MONST_EQUIP_BOOTS)) {
+      ! equip_id(MONST_EQUIP_BOOTS)) {
     if (equip(item, MONST_EQUIP_BOOTS)) {
       equipped = true;
     }
@@ -149,7 +149,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no gauntlet yet, equip it
   //
   if (can_equip && is_able_to_use_gauntlet() && item->is_auto_equipped() && item->is_gauntlet() &&
-      ! equip_id_get(MONST_EQUIP_GAUNTLET)) {
+      ! equip_id(MONST_EQUIP_GAUNTLET)) {
     if (equip(item, MONST_EQUIP_GAUNTLET)) {
       equipped = true;
     }
@@ -159,7 +159,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no cloak yet, equip it
   //
   if (can_equip && is_able_to_use_cloak() && item->is_auto_equipped() && item->is_cloak() &&
-      ! equip_id_get(MONST_EQUIP_CLOAK)) {
+      ! equip_id(MONST_EQUIP_CLOAK)) {
     if (equip(item, MONST_EQUIP_CLOAK)) {
       equipped = true;
     }
@@ -169,7 +169,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // If we have no shield yet, equip it
   //
   if (can_equip && is_able_to_use_shield() && item->is_auto_equipped() && item->is_shield() &&
-      ! equip_id_get(MONST_EQUIP_SHIELD)) {
+      ! equip_id(MONST_EQUIP_SHIELD)) {
     if (equip(item, MONST_EQUIP_SHIELD)) {
       equipped = true;
     }
@@ -224,7 +224,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   }
 
   bool already_carried = false;
-  for (const auto t : item_vector_get()) {
+  for (const auto t : item_vector()) {
     if (t == item) {
       already_carried = true;
     }
@@ -299,7 +299,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   // Auto carry items in the bag? like keys?
   //
   if (item->is_bag_item_container()) {
-    for (const auto t : item->item_vector_get()) {
+    for (const auto t : item->item_vector()) {
       if (! t->is_bag_item()) {
         if (! carry(t)) {
           err("Could not auto carry %s's non item: %s", item->to_short_string().c_str(), t->to_string().c_str());
@@ -370,7 +370,7 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       //
       open(t);
 
-      for (const auto t : t->item_vector_get()) {
+      for (const auto t : t->item_vector()) {
         items.push_back(std::make_pair(t, value(t)));
       }
     }
@@ -486,7 +486,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
     dbg("Try to carry contents of: %s", item->to_short_string().c_str());
     TRACE_AND_INDENT();
 
-    for (const auto t : item->item_vector_get()) {
+    for (const auto t : item->item_vector()) {
       if (! try_to_carry_if_worthwhile_dropping_items_if_needed(t)) {
         return false;
       }
@@ -574,7 +574,7 @@ void Thing::check_all_carried_items_are_owned(void)
   if (carrying_anything()) {
     dbg("Carried items:");
     TRACE_AND_INDENT();
-    for (const auto &what : item_list_get()) {
+    for (const auto &what : item_list()) {
       auto top_owner       = what->top_owner();
       auto immediate_owner = what->immediate_owner();
       if ((top_owner != this) && (immediate_owner != this)) {

@@ -95,7 +95,7 @@ bool Thing::is_equipped(Thingp item)
 Thingp Thing::equip_get(int equip)
 {
   TRACE_NO_INDENT();
-  auto id = equip_id_get(equip);
+  auto id = equip_id(equip);
   if (id.ok()) {
     return (level->thing_find(id));
   }
@@ -315,13 +315,13 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 {
   TRACE_NO_INDENT();
 
-  if (! equip_id_get(equip)) {
+  if (! equip_id(equip)) {
     return false;
   }
 
   auto item = equip_get(equip);
   if (! item) {
-    dbg("Could not unequip %" PRIX32 ", no equip thing: %s", equip_id_get(equip).id, why);
+    dbg("Could not unequip %" PRIX32 ", no equip thing: %s", equip_id(equip).id, why);
     return false;
   }
 

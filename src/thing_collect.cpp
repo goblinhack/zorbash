@@ -41,7 +41,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   // Look in the bag.
   //
   if (item->is_bag()) {
-    for (const auto bag_item : item->item_vector_get()) {
+    for (const auto bag_item : item->item_vector()) {
       auto value = worth_collecting(bag_item, would_need_to_drop);
       if (value > 0) {
         dbg("Worth collecting bag item %s, yes (the contents)", bag_item->to_short_string().c_str());
