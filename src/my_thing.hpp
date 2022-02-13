@@ -921,7 +921,7 @@ public:
   int health(void);
   int health_incr(int);
   int health_incr(void);
-  int health_initial_get(void);
+  int health_initial(void);
   int health_max_decr(int);
   int health_max_decr(void);
   int health_max(void);
@@ -1232,14 +1232,14 @@ public:
   int lifespan_get(void);
   int lifespan_incr(int);
   int lifespan_incr(void);
-  int lifespan_initial_get(void);
+  int lifespan_initial(void);
   int lifespan_set(int);
   int light_power_decr(int);
   int light_power_decr(void);
   int light_power_get(void);
   int light_power_incr(int);
   int light_power_incr(void);
-  int light_power_initial_get(void);
+  int light_power_initial(void);
   int light_power_set(int);
   int light_power(void);
   int map_beast_carried_count(void);

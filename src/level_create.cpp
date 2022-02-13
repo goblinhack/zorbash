@@ -129,11 +129,11 @@ int Level::get_total_monst_hp_level(void)
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
     if (t->is_monst()) {
-      hp += t->health_initial_get();
+      hp += t->health_initial();
     }
 
     if (t->is_mob()) {
-      hp += t->health_initial_get() * t->minion_limit();
+      hp += t->health_initial() * t->minion_limit();
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
