@@ -728,7 +728,7 @@ public:
   int attack(void);
   int blast_max_radius(void);
   int blast_min_radius(void);
-  int bounce_count_get(void);
+  int bounce_count(void);
   int break_chance_d10000(void);
   int buff_on_damage_acid(Thingp hitter, int damage);
   int buff_on_damage_cold(Thingp hitter, int damage);
@@ -870,7 +870,7 @@ public:
   int enchant_max_set(int);
   int enchant_max(void);
   int enchant_set(int);
-  int enchantstone_count_get(void);
+  int enchantstone_count(void);
   int environ_avoids_acid(void);
   int environ_avoids_fire(void);
   int environ_avoids_necrosis(void);
@@ -878,7 +878,7 @@ public:
   int environ_avoids_water(void);
   int follower_count_decr(int);
   int follower_count_decr(void);
-  int follower_count_get(void);
+  int follower_count(void);
   int follower_count_incr(int);
   int follower_count_incr(void);
   int follower_count_set(int);
@@ -936,11 +936,11 @@ public:
   int hunger_is_insatiable(void);
   int idle_count_decr(int);
   int idle_count_decr(void);
-  int idle_count_get(void);
+  int idle_count(void);
   int idle_count_incr(int);
   int idle_count_incr(void);
   int idle_count_set(int);
-  int initial_charge_count_get(void);
+  int initial_charge_count(void);
   int initial_light_power_get(void);
   int is_able_to_attack_mobs(void);
   int is_able_to_break_down_doors(void);
@@ -1243,14 +1243,14 @@ public:
   int light_power_initial_get(void);
   int light_power_set(int);
   int light_power(void);
-  int map_beast_carried_count_get(void);
-  int map_beast_count_get(void);
-  int map_treasure_carried_count_get(void);
-  int map_treasure_count_get(void);
+  int map_beast_carried_count(void);
+  int map_beast_count(void);
+  int map_treasure_carried_count(void);
+  int map_treasure_count(void);
   int melting_chance_d1000(void);
   int minion_count_decr(int);
   int minion_count_decr(void);
-  int minion_count_get(void);
+  int minion_count(void);
   int minion_count_incr(int);
   int minion_count_incr(void);
   int minion_count_set(int);
@@ -1333,7 +1333,7 @@ public:
   int on_owner_damage_stat_str(Thingp owner, Thingp hitter, int damage);
   int owned_count_decr(int);
   int owned_count_decr(void);
-  int owned_count_get(void);
+  int owned_count(void);
   int owned_count_incr(int);
   int owned_count_incr(void);
   int owned_count_set(int);
@@ -1354,16 +1354,16 @@ public:
   int resurrect_get(void);
   int score_get(void);
   int skill_enchant_count(const uint32_t slot);
-  int skillstone_count_get(void);
+  int skillstone_count(void);
   int sleep_count_decr(int);
   int sleep_count_decr(void);
-  int sleep_count_get(void);
+  int sleep_count(void);
   int sleep_count_incr(int);
   int sleep_count_incr(void);
   int sleep_count_set(int);
   int spawned_count_decr(int);
   int spawned_count_decr(void);
-  int spawned_count_get(void);
+  int spawned_count(void);
   int spawned_count_incr(int);
   int spawned_count_incr(void);
   int spawned_count_set(int);
@@ -1511,7 +1511,7 @@ public:
   int stat_str_total_get(void);
   int stuck_count_decr(int);
   int stuck_count_decr(void);
-  int stuck_count_get(void);
+  int stuck_count(void);
   int stuck_count_incr(int);
   int stuck_count_incr(void);
   int stuck_count_set(int);
@@ -1524,7 +1524,7 @@ public:
   int temperature_incr(void);
   int temperature_set(int);
   int temperature(void);
-  int torch_count_get(void);
+  int torch_count(void);
   int unused_chance1_d1000(void);
   int unused_chance2_d1000(void);
   int unused_chance3_d1000(void);
@@ -1688,7 +1688,7 @@ public:
   std::list< Thingp > anything_to_carry(void);
   std::list< Thingp > anything_to_carry_at(point);
 
-  std::size_t light_count_get(void);
+  std::size_t light_count(void);
 
   std::string short_text_The(void);
   std::string short_text_a_or_an(void);

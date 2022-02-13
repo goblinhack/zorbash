@@ -12,7 +12,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-int Thing::torch_count_get(void)
+int Thing::torch_count(void)
 {
   TRACE_NO_INDENT();
   int torch_count = 0;
@@ -47,15 +47,15 @@ void Thing::light_power_including_torch_effect_get(uint8_t &out_light_power)
     light_power = 0;
   }
 
-  int torch_count = torch_count_get();
-  light_power += torch->light_power() * torch_count;
+  int count = torch_count();
+  light_power += torch->light_power() * count;
 
   auto max_distance = tp()->distance_vision();
   if (light_power > max_distance) {
     light_power = max_distance;
   }
 
-  if (torch_count == 0) {
+  if (count == 0) {
     if (is_player()) {
       light_power = 1;
     }

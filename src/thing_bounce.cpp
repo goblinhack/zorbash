@@ -33,15 +33,15 @@ float Thing::bounce_get(void)
   if (t >= ts_bounce_end_get()) {
     is_bouncing = false;
 
-    if (bounce_count_get() == 255) {
+    if (bounce_count() == 255) {
       //
       // Bounce forever
       //
       bounce(bounce_height_get() * bounce_fade_get(), bounce_fade_get(),
-             (float) (ts_bounce_end_get() - ts_bounce_begin_get()) * bounce_fade_get(), bounce_count_get());
-    } else if (bounce_count_get()) {
+             (float) (ts_bounce_end_get() - ts_bounce_begin_get()) * bounce_fade_get(), bounce_count());
+    } else if (bounce_count()) {
       bounce(bounce_height_get() * bounce_fade_get(), bounce_fade_get(),
-             (float) (ts_bounce_end_get() - ts_bounce_begin_get()) * bounce_fade_get(), bounce_count_get() - 1);
+             (float) (ts_bounce_end_get() - ts_bounce_begin_get()) * bounce_fade_get(), bounce_count() - 1);
     }
 
     return 0;

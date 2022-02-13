@@ -117,7 +117,7 @@ int Thing::stat_att_penalties_total(void)
   // Positional penalties
   //
   if (stat_att_penalty_when_stuck()) {
-    int p = stat_att_penalty_when_stuck() + stuck_count_get();
+    int p = stat_att_penalty_when_stuck() + stuck_count();
     p     = std::min(p, stat_att_penalty_when_stuck_max());
     penalty += p;
     if (penalty != prev) {
@@ -125,7 +125,7 @@ int Thing::stat_att_penalties_total(void)
       dbg("Att penalty: stuck %d", p);
     }
   } else if (stat_att_penalty_when_idle()) {
-    int p = stat_att_penalty_when_idle() + idle_count_get();
+    int p = stat_att_penalty_when_idle() + idle_count();
     p     = std::min(p, stat_att_penalty_when_idle_max());
     penalty += p;
     if (penalty != prev) {

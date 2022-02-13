@@ -108,7 +108,7 @@ void Thing::enchant_randomly(void)
   }
 }
 
-int Thing::enchantstone_count_get(void)
+int Thing::enchantstone_count(void)
 {
   TRACE_NO_INDENT();
 

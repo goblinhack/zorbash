@@ -9,7 +9,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-int Thing::map_treasure_count_get(void)
+int Thing::map_treasure_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -26,7 +26,7 @@ void Thing::map_treasure_count_set(int v)
   infop_get()->map_treasure_count = v;
 }
 
-int Thing::map_treasure_carried_count_get(void)
+int Thing::map_treasure_carried_count(void)
 {
   TRACE_NO_INDENT();
 
@@ -48,8 +48,8 @@ void Thing::map_treasure_check(void)
   //
   // If carrying a treasure map we need to update the map_mini
   //
-  auto count = map_treasure_carried_count_get();
-  if (map_treasure_count_get() != count) {
+  auto count = map_treasure_carried_count();
+  if (map_treasure_count() != count) {
     if (is_player()) {
       level->is_map_mini_valid = false;
     }

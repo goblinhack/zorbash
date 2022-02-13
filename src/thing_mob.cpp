@@ -167,7 +167,7 @@ void Thing::destroy_minions(Thingp defeater)
     return;
   }
 
-  if (! minion_count_get()) {
+  if (! minion_count()) {
     return;
   }
 
@@ -198,7 +198,7 @@ void Thing::unleash_minions(void)
     return;
   }
 
-  if (! minion_count_get()) {
+  if (! minion_count()) {
     return;
   }
 

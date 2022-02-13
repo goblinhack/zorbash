@@ -48,7 +48,7 @@ bool Thing::try_to_enchant_items(void)
   //
   AI_LOG("Enchant check");
   if (is_able_to_enchant_items()) {
-    if (enchantstone_count_get() && can_enchant_something()) {
+    if (enchantstone_count() && can_enchant_something()) {
       AI_LOG("Try to enchant something");
       if (is_player()) {
         game->tick_begin("Robot can enchant something");
@@ -63,7 +63,7 @@ bool Thing::try_to_enchant_items(void)
   //
   AI_LOG("Enchant check");
   if (is_able_to_learn_skills()) {
-    if (skillstone_count_get() && can_learn_something()) {
+    if (skillstone_count() && can_learn_something()) {
       AI_LOG("Try to use a skillstone");
       if (is_player()) {
         game->tick_begin("Robot can learn something");

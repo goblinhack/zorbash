@@ -44,7 +44,7 @@ bool Thing::spawn_next_to(const std::string &what)
   // Don't spawn too many minions
   //
   if (is_mob()) {
-    if (minion_count_get() >= minion_limit()) {
+    if (minion_count() >= minion_limit()) {
       return false;
     }
   }
