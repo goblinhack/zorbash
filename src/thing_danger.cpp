@@ -90,7 +90,7 @@ int Tp::get_danger_level(void)
   return danger_level;
 }
 
-int Thing::danger_initial_level_get(void)
+int Thing::danger_initial_level(void)
 {
   TRACE_NO_INDENT();
   int danger_level = 0;
@@ -177,7 +177,7 @@ int Thing::danger_initial_level_get(void)
   return danger_level;
 }
 
-int Thing::danger_current_level_get(void)
+int Thing::danger_current_level(void)
 {
   TRACE_NO_INDENT();
 
@@ -296,8 +296,8 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
-  int a = danger_current_level_get();
-  int b = it->danger_current_level_get();
+  int a = danger_current_level();
+  int b = it->danger_current_level();
 
   //
   // If it's really close, then it's more dangerous
@@ -329,8 +329,8 @@ int Thing::is_dangerous(Thingp it)
 
 const std::string Thing::danger_level_str_get(Thingp it)
 {
-  auto a     = danger_current_level_get();
-  auto b     = it->danger_current_level_get();
+  auto a     = danger_current_level();
+  auto b     = it->danger_current_level();
   auto delta = b - a;
 
   if (delta > 20) {
@@ -350,17 +350,17 @@ const std::string Thing::danger_level_str_get(Thingp it)
   }
 }
 
-int Thing::danger_current_level_get(Thingp it)
+int Thing::danger_current_level(Thingp it)
 {
-  int a = danger_current_level_get();
-  int b = it->danger_current_level_get();
+  int a = danger_current_level();
+  int b = it->danger_current_level();
   return b - a;
 }
 
-int Thing::danger_initial_level_get(Thingp it)
+int Thing::danger_initial_level(Thingp it)
 {
-  int a = danger_initial_level_get();
-  int b = it->danger_initial_level_get();
+  int a = danger_initial_level();
+  int b = it->danger_initial_level();
   // con("danger level %d vs %s %d", a, it->to_short_string().c_str(), b);
   return b - a;
 }

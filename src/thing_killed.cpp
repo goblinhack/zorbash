@@ -153,7 +153,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       level_push();
       auto p = level->player;
       if (p) {
-        int distance = distance_to_player_get();
+        int distance = distance_to_player();
         if (is_door()) {
           if (defeater && defeater->is_fire()) {
             if (distance < 5) {
@@ -327,7 +327,7 @@ void Thing::killed(Thingp defeater, const char *reason)
           }
 
           defeater->score_add(this);
-        } else if (is_monst() && (distance_to_player_get() >= DMAP_IS_PASSABLE)) {
+        } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
           if (is_undead()) {
             msg("You hear the distant cry of the undead...");
           } else if (is_jelly()) {

@@ -690,7 +690,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
   //
   // If not reachable, suppress the msg
   //
-  if (owner->distance_to_player_get() < DMAP_IS_PASSABLE) {
+  if (owner->distance_to_player() < DMAP_IS_PASSABLE) {
     if (owner->is_monst()) {
       owner->msg("%s says '%s'", owner->text_The().c_str(), msg);
     } else {
@@ -732,7 +732,7 @@ PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
   //
   // If not reachable, suppress the popup
   //
-  if (owner->distance_to_player_get() < DMAP_IS_PASSABLE) {
+  if (owner->distance_to_player() < DMAP_IS_PASSABLE) {
     owner->popup(msg);
   }
 

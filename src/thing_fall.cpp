@@ -257,7 +257,7 @@ bool Thing::fall_to_next_level(void)
         msg("%%fg=red$You tumble into the void!%%fg=reset$");
         popup("Aargh");
       } else {
-        if (distance_to_player_get() >= DMAP_IS_PASSABLE) {
+        if (distance_to_player() >= DMAP_IS_PASSABLE) {
           if (is_monst()) {
             msg("You hear the distant cry of some creature falling");
           } else if (is_item()) {

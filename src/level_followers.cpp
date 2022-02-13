@@ -87,7 +87,7 @@ void Level::assign_leaders_and_followers(void)
       if (! leader) {
         leader = m;
       } else {
-        if (m->danger_current_level_get() > leader->danger_current_level_get()) {
+        if (m->danger_current_level() > leader->danger_current_level()) {
           leader = m;
         }
       }
