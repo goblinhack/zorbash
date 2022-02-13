@@ -296,7 +296,7 @@ public:
   //
   // Not worth saving as is cleared each tick
   //
-  std::map< ThingId, bool > recently_hit_by {};
+  std::map< ThingId, int > recently_hit_by {};
 } ThingAi;
 std::ostream &operator<<(std::ostream &out, Bits< const ThingAip & > const my);
 std::istream &operator>>(std::istream &in, Bits< ThingAip & > my);

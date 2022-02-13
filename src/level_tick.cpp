@@ -92,10 +92,10 @@ void Level::handle_input_events(void)
   // key presses.
   //
   if (((player && player->aip()->move_path.size()) || game->request_player_move) &&
-      time_have_x_tenths_passed_since(1, game->request_player_move)) {
+      time_have_x_tenths_passed_since(2, game->request_player_move)) {
     //
     // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete
-    // soonet and should result in the flag below being cleared.
+    // sooner and should result in the flag below being cleared.
     //
     static int time_boost = 0;
     if (game->things_are_moving) {
@@ -186,44 +186,66 @@ bool Level::tick(void)
       //
       // Give things a bit of time to move
       //
-      t->movement_left_incr(t->move_speed());
-    }
-    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
-
-    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
-    {
-      int movement_left = t->movement_left();
-      if (movement_left <= 0) {
-        continue;
-      }
-
-      if (player) {
-        movement_left -= player->move_speed();
+      if (t->move_speed()) {
+        t->movement_left_incr(t->move_speed());
       } else {
-        movement_left -= 100;
+        //
+        // Things that do not move need to tick too.
+        //
+        t->movement_left_incr(1);
       }
-      t->movement_left_set(movement_left);
 
-      uint32_t tick_begin_ms = time_get_time_ms();
-      t->tick();
-      IF_DEBUG2
-      {
-        if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG * 3) {
-          t->log("PERF: Thing took too long, tick duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
-                 THING_TICK_DURATION_TOO_LONG);
-        }
+      //
+      // Allow the same thing to hit us again
+      //
+      if (t->maybe_aip()) {
+        t->aip()->recently_hit_by.clear();
       }
-      IF_NODEBUG2
-      {
-        if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
-          t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
-                 THING_TICK_DURATION_TOO_LONG);
-        }
-      }
-      // t->con("PERF: Thing took %u ms", time_get_time_ms() - tick_begin_ms);
     }
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
   }
+
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+  {
+    int remaining = t->movement_left();
+    if (remaining <= 0) {
+      continue;
+    }
+
+    if (t->is_waiting) {
+      continue;
+    }
+
+    if (t->move_speed()) {
+      if (player) {
+        remaining -= player->move_speed();
+      } else {
+        remaining -= 100;
+      }
+      t->movement_left_set(remaining);
+    } else {
+      t->movement_left_set(0);
+    }
+
+    uint32_t tick_begin_ms = time_get_time_ms();
+    t->tick();
+    IF_DEBUG2
+    {
+      if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG * 3) {
+        t->log("PERF: Thing took too long, tick duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
+               THING_TICK_DURATION_TOO_LONG);
+      }
+    }
+    IF_NODEBUG2
+    {
+      if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
+        t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
+               THING_TICK_DURATION_TOO_LONG);
+      }
+    }
+    // t->con("PERF: Thing took %u ms", time_get_time_ms() - tick_begin_ms);
+  }
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
   //
   // For all things that move, like monsters, or those that do not, like
@@ -272,6 +294,7 @@ bool Level::tick(void)
           t->con("Waiting on animated moving thing longer than expected: %s", t->to_dbg_string().c_str());
         }
         game->things_are_moving = true;
+        t->is_waiting           = true;
         // t->con("WAIT %d", __LINE__);
       }
     }
@@ -321,6 +344,7 @@ bool Level::tick(void)
         t->con("Waiting on moving thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
+      t->is_waiting           = true;
       // t->con("WAIT %d", __LINE__);
     }
 
@@ -332,6 +356,7 @@ bool Level::tick(void)
         t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
+      t->is_waiting           = true;
       // t->con("WAIT %d", __LINE__);
     }
 
@@ -343,6 +368,7 @@ bool Level::tick(void)
         t->con("Waiting on falling thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
+      t->is_waiting           = true;
       // t->con("WAIT %d", __LINE__);
     }
 
@@ -354,6 +380,7 @@ bool Level::tick(void)
         t->con("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
+      t->is_waiting           = true;
       // t->con("WAIT %d", __LINE__);
     }
 
@@ -365,6 +392,7 @@ bool Level::tick(void)
         t->con("Waiting on resurrecting thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
+      t->is_waiting           = true;
       // t->con("WAIT %d", __LINE__);
     }
 
@@ -379,6 +407,7 @@ bool Level::tick(void)
             t->con("This is the owner");
           }
           game->things_are_moving = true;
+          t->is_waiting           = true;
           // w->con("WAIT EQUIP %d", __LINE__);
           // t->con("WAIT %d", __LINE__);
         }
@@ -391,6 +420,7 @@ bool Level::tick(void)
       }
 
       game->things_are_moving = true;
+      t->is_waiting           = true;
       // t->con("WAIT %d", __LINE__);
 
       //
@@ -407,6 +437,7 @@ bool Level::tick(void)
         t->con("Waiting on waiting to fall thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
+      t->is_waiting           = true;
       // t->con("WAIT %d", __LINE__);
     }
 
@@ -415,6 +446,7 @@ bool Level::tick(void)
         t->con("Waiting on scheduled for death thing longer than expected: %s", t->to_dbg_string().c_str());
       }
       game->things_are_moving = true;
+      t->is_waiting           = true;
       // t->log("WAIT %d", __LINE__);
     }
 
@@ -564,6 +596,22 @@ bool Level::tick(void)
     t->location_check();
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+
+  //
+  // Fast moving things may still have stuff to do
+  //
+  bool work_to_do = false;
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+  {
+    if (t->movement_left() > 0) {
+      work_to_do = true;
+    }
+    t->is_waiting = false;
+  }
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
+  if (work_to_do) {
+    return true;
+  }
 
   //
   // We've finished waiting on all things, bump the game tick.

@@ -631,9 +631,15 @@ bool Thing::equip_use(bool forced, int equip, point *at)
       return false;
     }
 
-    auto use_anim = level->thing_new(used_as, this);
+    Thingp use_anim;
+    if (at) {
+      use_anim                 = level->thing_new(used_as, *at);
+      use_anim->dir            = dir;
+      use_anim->is_facing_left = is_facing_left;
+    } else {
+      use_anim = level->thing_new(used_as, this);
+    }
     use_anim->owner_set(this);
-
     equip_use_anim_set(use_anim, equip);
   }
 
@@ -646,7 +652,12 @@ bool Thing::equip_use(bool forced, int equip, point *at)
     c->hide();
   }
 
-  move_carried_items();
+  //
+  // Only move items if not, for example, claw attack
+  //
+  if (! at) {
+    move_carried_items();
+  }
 
   return true;
 }

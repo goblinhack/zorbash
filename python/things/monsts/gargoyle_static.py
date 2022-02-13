@@ -79,7 +79,6 @@ def tp_init(name, text_name):
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
     my.is_corpse_on_death(self, True)
-    my.is_debug_type(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_necrosis(self, True)

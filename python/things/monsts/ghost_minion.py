@@ -53,7 +53,7 @@ def tp_init(name, text_name):
     my.light_power(self, 1)
     my.long_text_description(self, "A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
-    my.move_speed(self, 400)
+    my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")

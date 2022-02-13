@@ -300,13 +300,6 @@ void Thing::tick(void)
 
   update_interpolated_position();
 
-  //
-  // Allow the same thing to hit us again
-  //
-  if (maybe_aip()) {
-    aip()->recently_hit_by.clear();
-  }
-
   if (unlikely(is_dead)) {
     //
     // Resurrect things unless that can do unless that has been disabled e.g. via minion mob death
