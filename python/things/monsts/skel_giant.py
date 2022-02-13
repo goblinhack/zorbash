@@ -83,7 +83,7 @@ def tp_init(name, text_name):
     my.is_undead(self, True)
     my.long_text_description(self, "A monstrous skeleton. It towers above you. It seems unhappy. Quite what body this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this. Watch, these can rise again!")
     my.monst_size(self, my.MONST_SIZE_GIANT)
-    my.move_speed(self, 100)
+    my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 50)
     my.noise_on_moving_or_being_carried(self, 25)
     my.normal_placement_rules(self, True)
@@ -160,11 +160,10 @@ def tp_init(name, text_name):
     my.tile(self, tile=name + ".3.dead", is_resurrecting=True, delay_ms=delay)
     my.tile(self, tile=name + ".2.dead", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-        tile=name + ".1.dead",
-        is_resurrecting=True,
-        is_end_of_anim=True,
-        is_alive_on_end_of_anim=True,
-    )
+            tile=name + ".1.dead",
+            is_resurrecting=True,
+            is_end_of_anim=True,
+            is_alive_on_end_of_anim=True)
 
     my.tp_update(self)
 

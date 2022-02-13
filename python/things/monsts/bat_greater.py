@@ -74,7 +74,7 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.long_text_description(self, "A snarling mass of flying death. These creatures of the night tend to hang around the graves of the newly undead.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
-    my.move_speed(self, 100)
+    my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")

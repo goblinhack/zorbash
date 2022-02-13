@@ -1,5 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- haste                                                                                                                                        -->
+<!-- animate grass                                                                                                                                -->
+<!-- slime noise on attack                                                                                                                          -->
 <!-- have items that show thigns like +1 defense, -1 strength, +2 dex etc...                                                                      -->
 <!-- luck                                                                                                                                         -->
 <!-- luck bridge / lava / falling                                                                                                                 -->
@@ -7,9 +10,6 @@
 <!-- luck trap                                                                                                                                    -->
 <!-- luck and enchanted stuff                                                                                                                     -->
 <!-- weight                                                                                                                                       -->
-<!-- animate grass                                                                                                                                -->
-<!-- slime noise on jump                                                                                                                          -->
-<!-- haste                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

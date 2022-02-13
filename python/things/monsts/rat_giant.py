@@ -89,7 +89,7 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.long_text_description(self, "An enormous giant dwarf rat... Blood drips from its teeth. Will eat almost anything, especially you. Sometimes answers to the name of Mr Squeakles.")
     my.monst_size(self, my.MONST_SIZE_LARGE)
-    my.move_speed(self, 100)
+    my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 10)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d6")
