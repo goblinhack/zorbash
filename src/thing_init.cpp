@@ -267,8 +267,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   static bool spawning_group;
   if (! spawning_group) {
     spawning_group = true;
-    if (spawn_group_size_get()) {
-      spawn_randomly_in_radius_range(name, spawn_group_size_get(), 1, spawn_group_radius_get());
+    if (spawn_group_size()) {
+      spawn_randomly_in_radius_range(name, spawn_group_size(), 1, spawn_group_radius());
     }
     spawning_group = false;
   }

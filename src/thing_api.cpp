@@ -47,7 +47,7 @@ const std::string &Thing::spawn_group_size_dice_str(void)
   return (tp()->spawn_group_size_dice_str());
 }
 
-int Thing::spawn_group_size_get(void)
+int Thing::spawn_group_size(void)
 {
   TRACE_NO_INDENT();
   return (tp()->spawn_group_size_dice().roll());
@@ -1374,10 +1374,10 @@ float Thing::distance_recruitment_max_float(void)
   return (tp()->distance_recruitment_max());
 }
 
-int Thing::spawn_group_radius_get(void)
+int Thing::spawn_group_radius(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->spawn_group_radius_get());
+  return (tp()->spawn_group_radius());
 }
 
 int Thing::distance_minion_vision_shared(void)

@@ -798,7 +798,7 @@ public:
   const int damage_poison(void) const;
   const int health_initial(void) const;
   const int on_idle_tick_frequency_get(void) const;
-  const int spawn_group_size_get(void) const;
+  const int spawn_group_size(void) const;
   const int lifespan(void) const;
   const int nutrition(void) const;
   const int resurrect(void) const;
@@ -1336,7 +1336,7 @@ public:
   int on_death_is_open(void) const { return _on_death_is_open; }
   int range_max(void) const { return _range_max; }
   int rarity(void) const { return _rarity; }
-  int spawn_group_radius_get(void) const { return _spawn_group_radius; }
+  int spawn_group_radius(void) const { return _spawn_group_radius; }
   int stamina(void) const { return _stamina; }
   int stat_att_mod(void) const { return _stat_att_mod; }
   int stat_att_penalty_when_idle_max(void) const { return _stat_att_penalty_when_idle_max; }
