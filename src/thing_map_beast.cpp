@@ -13,7 +13,7 @@ int Thing::map_beast_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->map_beast_count);
+    return (infop()->map_beast_count);
   } else {
     return 0;
   }
@@ -23,7 +23,7 @@ void Thing::map_beast_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->map_beast_count = v;
+  infop()->map_beast_count = v;
 }
 
 int Thing::map_beast_carried_count(void)

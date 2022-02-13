@@ -66,7 +66,7 @@ int Thing::temperature_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->temperature);
+    return (infop()->temperature);
   } else {
     return 0;
   }
@@ -79,7 +79,7 @@ int Thing::temperature_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->temperature = v);
+  auto n = (infop()->temperature = v);
   return (n);
 }
 
@@ -90,7 +90,7 @@ int Thing::temperature_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->temperature -= v);
+  auto n = (infop()->temperature -= v);
   return (n);
 }
 
@@ -215,14 +215,14 @@ int Thing::temperature_incr(int v)
   }
 
   new_infop();
-  auto n = (infop_get()->temperature += v);
+  auto n = (infop()->temperature += v);
 
   if (n > 1000) {
     n                        = 1000;
-    infop_get()->temperature = v;
+    infop()->temperature = v;
   } else if (n < -1000) {
     n                        = -1000;
-    infop_get()->temperature = v;
+    infop()->temperature = v;
   }
 
   return (n);
@@ -235,7 +235,7 @@ int Thing::temperature_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->temperature--);
+  auto n = (infop()->temperature--);
   return (n);
 }
 
@@ -246,6 +246,6 @@ int Thing::temperature_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->temperature++);
+  auto n = (infop()->temperature++);
   return (n);
 }

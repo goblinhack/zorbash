@@ -52,7 +52,7 @@ std::size_t Thing::light_count(void)
   if (! maybe_infop()) {
     return 0;
   }
-  return (infop_get()->light.size());
+  return (infop()->light.size());
 }
 
 const ThingId &Thing::immediate_owner_id_get(void)
@@ -61,7 +61,7 @@ const ThingId &Thing::immediate_owner_id_get(void)
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (infop_get()->owner_id);
+  return (infop()->owner_id);
 }
 
 const ThingId &Thing::top_owner_id_get(void)
@@ -78,7 +78,7 @@ const ThingId &Thing::owner_id_set(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->owner_id = v);
+  return (infop()->owner_id = v);
 }
 
 const ThingId &Thing::immediate_mob_id_get(void)
@@ -87,14 +87,14 @@ const ThingId &Thing::immediate_mob_id_get(void)
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (infop_get()->mob_id);
+  return (infop()->mob_id);
 }
 
 const ThingId &Thing::mob_id_set(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->mob_id = v);
+  return (infop()->mob_id = v);
 }
 
 const ThingId &Thing::leader_id_get(void)
@@ -103,14 +103,14 @@ const ThingId &Thing::leader_id_get(void)
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (infop_get()->leader_id);
+  return (infop()->leader_id);
 }
 
 const ThingId &Thing::leader_id_set(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->leader_id = v);
+  return (infop()->leader_id = v);
 }
 
 const ThingId &Thing::immediate_spawned_owner_id_get(void)
@@ -119,14 +119,14 @@ const ThingId &Thing::immediate_spawned_owner_id_get(void)
   if (! maybe_infop()) {
     return (NoThingId);
   }
-  return (infop_get()->spawner_owner_id);
+  return (infop()->spawner_owner_id);
 }
 
 const ThingId &Thing::spawned_owner_id_set(const ThingId &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->spawner_owner_id = v);
+  return (infop()->spawner_owner_id = v);
 }
 
 const fpoint &Thing::interpolated_at_get(void)

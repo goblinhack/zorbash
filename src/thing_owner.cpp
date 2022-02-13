@@ -251,7 +251,7 @@ bool Thing::change_owner(Thingp new_owner)
 
   on_owner_remove(old_owner);
 
-  old_owner->itemsp_get()->carrying.remove(id);
+  old_owner->itemsp()->carrying.remove(id);
 
   hooks_remove();
 

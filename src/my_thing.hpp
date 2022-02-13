@@ -2099,16 +2099,16 @@ public:
 
   std::pair< Path, Path > astar_solve(const class Goal *goal, char path_debug, point s, point g, const Dmap *d);
 
-  ThingInfop  or_alloc_infop_get(void);
-  ThingItemsp or_alloc_itemsp_get(void);
-  ThingAip    or_alloc_aip_get(void);
+  ThingInfop  get_or_alloc_infop(void);
+  ThingItemsp get_or_alloc_itemsp(void);
+  ThingAip    get_or_alloc_aip(void);
 
   ThingInfop  maybe_infop(void) { return _infop; }
   ThingItemsp maybe_itemsp(void) { return _itemsp; }
   ThingAip    maybe_aip(void) { return _aip; }
 
-  ThingInfop  infop_get(void);
-  ThingItemsp itemsp_get(void);
+  ThingInfop  infop(void);
+  ThingItemsp itemsp(void);
   ThingAip    aip(void);
 
   bool victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,

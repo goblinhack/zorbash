@@ -1819,7 +1819,7 @@ bool Thing::ai_tick(bool recursing)
   //
   // Wake on noise?
   //
-  is_sleeping = infop_get()->monst_state == MONST_STATE_SLEEPING;
+  is_sleeping = infop()->monst_state == MONST_STATE_SLEEPING;
   if (is_sleeping) {
     if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_decibels_hearing()) {
       wake();
@@ -1887,7 +1887,7 @@ bool Thing::ai_tick(bool recursing)
       }
     }
 
-    if (infop_get()->monst_state != MONST_STATE_IDLE) {
+    if (infop()->monst_state != MONST_STATE_IDLE) {
       if (! recursing) {
         //
         // Check for serious interrupts
@@ -1967,7 +1967,7 @@ bool Thing::ai_tick(bool recursing)
     }
   }
 #endif
-  switch (infop_get()->monst_state) {
+  switch (infop()->monst_state) {
     case MONST_STATE_IDLE :
       if (state_idle(threat, minx, miny, maxx, maxy)) {
         return true;

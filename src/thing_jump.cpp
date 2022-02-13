@@ -633,7 +633,7 @@ void Thing::jump_end(void)
   //
   location_check_forced();
 
-  infop_get()->last_failed_jump_at = point(-1, -1);
+  infop()->last_failed_jump_at = point(-1, -1);
 }
 
 bool Thing::jump_attack(Thingp maybe_victim)

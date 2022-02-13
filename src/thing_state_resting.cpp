@@ -33,7 +33,7 @@ bool Thing::state_resting(bool &do_something, bool &wait)
       game->tick_begin("Robot has rested enough");
     }
     change_state(MONST_STATE_IDLE, "rested enough");
-    infop_get()->last_failed_jump_at = point(0, 0);
+    infop()->last_failed_jump_at = point(0, 0);
     return true;
   }
 

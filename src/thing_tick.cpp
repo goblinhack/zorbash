@@ -244,7 +244,7 @@ void Thing::achieve_goals_in_life(void)
       //
       // If resting, keep resting
       //
-      if (infop_get()->monst_state == MONST_STATE_MOVING) {
+      if (infop()->monst_state == MONST_STATE_MOVING) {
         change_state(MONST_STATE_IDLE, "move path is empty");
       }
     }

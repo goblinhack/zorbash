@@ -34,9 +34,9 @@ bool Thing::skillbox_id_insert(Thingp what)
   }
 
   int  free_slot      = -1;
-  auto skillbox_items = player->itemsp_get()->skillbox_id.size();
+  auto skillbox_items = player->itemsp()->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
-    auto thing_id = itemsp_get()->skillbox_id[ i ];
+    auto thing_id = itemsp()->skillbox_id[ i ];
     if (! thing_id) {
       if (free_slot == -1) {
         free_slot = i;
@@ -56,7 +56,7 @@ bool Thing::skillbox_id_insert(Thingp what)
 
   int item_slot = -1;
   if (free_slot != -1) {
-    itemsp_get()->skillbox_id[ free_slot ] = what->id;
+    itemsp()->skillbox_id[ free_slot ] = what->id;
     item_slot                              = free_slot;
   } else {
     if (skillbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
@@ -64,8 +64,8 @@ bool Thing::skillbox_id_insert(Thingp what)
       return false;
     }
 
-    itemsp_get()->skillbox_id.push_back(what->id);
-    item_slot = itemsp_get()->skillbox_id.size() - 1;
+    itemsp()->skillbox_id.push_back(what->id);
+    item_slot = itemsp()->skillbox_id.size() - 1;
   }
 
   game->previous_slot = item_slot;
@@ -104,9 +104,9 @@ bool Thing::skillbox_id_remove(Thingp what)
     immediate_owner->bag_remove(what);
   }
 
-  auto skillbox_items = player->itemsp_get()->skillbox_id.size();
+  auto skillbox_items = player->itemsp()->skillbox_id.size();
   for (auto i = 0U; i < skillbox_items; i++) {
-    auto thing_id = itemsp_get()->skillbox_id[ i ];
+    auto thing_id = itemsp()->skillbox_id[ i ];
     if (! thing_id) {
       continue;
     }
@@ -119,12 +119,12 @@ bool Thing::skillbox_id_remove(Thingp what)
       game->request_remake_skillbox = true;
 
       dbg("Remove slot");
-      itemsp_get()->skillbox_id[ i ] = NoThingId;
+      itemsp()->skillbox_id[ i ] = NoThingId;
 
-      if (! itemsp_get()->skillbox_id.size()) {
+      if (! itemsp()->skillbox_id.size()) {
         game->skillbox_highlight_slot = {};
       } else {
-        while (game->skillbox_highlight_slot >= itemsp_get()->skillbox_id.size()) {
+        while (game->skillbox_highlight_slot >= itemsp()->skillbox_id.size()) {
           game->skillbox_highlight_slot--;
         }
       }

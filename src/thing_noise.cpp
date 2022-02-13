@@ -20,7 +20,7 @@ int Thing::noise(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->noise);
+    return (infop()->noise);
   } else {
     return 0;
   }
@@ -101,7 +101,7 @@ int Thing::noise_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->noise = v);
+  auto n = (infop()->noise = v);
   return (n);
 }
 
@@ -112,7 +112,7 @@ int Thing::noise_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->noise -= v);
+  auto n = (infop()->noise -= v);
   return (n);
 }
 
@@ -123,7 +123,7 @@ int Thing::noise_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->noise += v);
+  auto n = (infop()->noise += v);
   return (n);
 }
 
@@ -134,7 +134,7 @@ int Thing::noise_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->noise--);
+  auto n = (infop()->noise--);
   return (n);
 }
 
@@ -145,6 +145,6 @@ int Thing::noise_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->noise++);
+  auto n = (infop()->noise++);
   return (n);
 }

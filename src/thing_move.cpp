@@ -109,7 +109,7 @@ void Thing::move_finish(void)
       }
     }
 
-    if (! aip()->move_path.size() && (infop_get()->monst_state == MONST_STATE_MOVING)) {
+    if (! aip()->move_path.size() && (infop()->monst_state == MONST_STATE_MOVING)) {
       change_state(MONST_STATE_IDLE, "move finished");
     }
   }

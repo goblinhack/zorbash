@@ -99,7 +99,7 @@ int Thing::stat_luck(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stat_luck);
+    return (infop()->stat_luck);
   } else {
     return 0;
   }
@@ -112,7 +112,7 @@ int Thing::stat_luck_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck = v);
+  auto n = (infop()->stat_luck = v);
   return (n);
 }
 
@@ -123,7 +123,7 @@ int Thing::stat_luck_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck -= v);
+  auto n = (infop()->stat_luck -= v);
   return (n);
 }
 
@@ -134,7 +134,7 @@ int Thing::stat_luck_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck += v);
+  auto n = (infop()->stat_luck += v);
   return (n);
 }
 
@@ -145,7 +145,7 @@ int Thing::stat_luck_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck--);
+  auto n = (infop()->stat_luck--);
   return (n);
 }
 
@@ -156,6 +156,6 @@ int Thing::stat_luck_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck++);
+  auto n = (infop()->stat_luck++);
   return (n);
 }

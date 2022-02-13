@@ -191,7 +191,7 @@ int Thing::stat_def(void)
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
-    v = infop_get()->stat_def;
+    v = infop()->stat_def;
   }
   return v;
 }
@@ -203,7 +203,7 @@ int Thing::stat_def_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def = v);
+  auto n = (infop()->stat_def = v);
   return (n);
 }
 
@@ -214,9 +214,9 @@ int Thing::stat_def_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def -= v);
-  if (infop_get()->stat_def < 0) {
-    infop_get()->stat_def = 0;
+  auto n = (infop()->stat_def -= v);
+  if (infop()->stat_def < 0) {
+    infop()->stat_def = 0;
   }
   return (n);
 }
@@ -228,7 +228,7 @@ int Thing::stat_def_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def += v);
+  auto n = (infop()->stat_def += v);
   return (n);
 }
 
@@ -239,9 +239,9 @@ int Thing::stat_def_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def--);
-  if (infop_get()->stat_def < 0) {
-    infop_get()->stat_def = 0;
+  auto n = (infop()->stat_def--);
+  if (infop()->stat_def < 0) {
+    infop()->stat_def = 0;
   }
   return (n);
 }
@@ -253,6 +253,6 @@ int Thing::stat_def_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def++);
+  auto n = (infop()->stat_def++);
   return (n);
 }

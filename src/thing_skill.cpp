@@ -49,7 +49,7 @@ bool Thing::skill_add(Thingp what)
     }
   }
 
-  itemsp_get()->skills.push_front(what->id);
+  itemsp()->skills.push_front(what->id);
   what->owner_set(this);
   what->hide();
 
@@ -83,7 +83,7 @@ bool Thing::skill_remove(Thingp what)
   }
 
   what->remove_owner();
-  itemsp_get()->skills.remove(what->id);
+  itemsp()->skills.remove(what->id);
   game->request_remake_skillbox = true;
 
   dbg("Removed %s", what->to_short_string().c_str());
@@ -97,8 +97,8 @@ void Thing::skill_remove_all(void)
     return;
   }
 
-  while (! itemsp_get()->skills.empty()) {
-    auto id = *itemsp_get()->skills.begin();
+  while (! itemsp()->skills.empty()) {
+    auto id = *itemsp()->skills.begin();
     auto t  = level->thing_find(id);
     if (unlikely(! t)) {
       return;
@@ -136,7 +136,7 @@ int Thing::skill_enchant_count(const uint32_t slot)
     return 0;
   }
 
-  auto thing_id = get(itemsp_get()->skillbox_id, slot);
+  auto thing_id = get(itemsp()->skillbox_id, slot);
   if (! thing_id) {
     return 0;
   }
@@ -208,7 +208,7 @@ bool Thing::can_learn_something(void)
   //
   // Once skills are maxxed out, that's it
   //
-  if (itemsp_get()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
+  if (itemsp()->skills.size() >= UI_INVENTORY_QUICK_ITEMS_MAX) {
     return false;
   }
 

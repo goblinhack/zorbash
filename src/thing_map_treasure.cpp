@@ -13,7 +13,7 @@ int Thing::map_treasure_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->map_treasure_count);
+    return (infop()->map_treasure_count);
   } else {
     return 0;
   }
@@ -23,7 +23,7 @@ void Thing::map_treasure_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->map_treasure_count = v;
+  infop()->map_treasure_count = v;
 }
 
 int Thing::map_treasure_carried_count(void)

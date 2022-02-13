@@ -73,11 +73,11 @@ bool Thing::bag_add(Thingp item)
   //
   item->new_itemsp();
 
-  if (item->itemsp_get()->preferred_bag_position != point(-1, -1)) {
+  if (item->itemsp()->preferred_bag_position != point(-1, -1)) {
     if (! log_quiet) {
       dbg3("Bag: Add %s at preferred position", item->to_short_string().c_str());
     }
-    auto at = item->itemsp_get()->preferred_bag_position;
+    auto at = item->itemsp()->preferred_bag_position;
     if (bag_can_place_at(item, at)) {
       if (bag_place_at(item, at)) {
         while (bag_compress()) {
@@ -167,11 +167,11 @@ bool Thing::bag_add_test(Thingp item)
   //
   item->new_itemsp();
 
-  if (item->itemsp_get()->preferred_bag_position != point(-1, -1)) {
+  if (item->itemsp()->preferred_bag_position != point(-1, -1)) {
     if (! log_quiet) {
       dbg3("Bag: Add test %s at preferred position", item->to_short_string().c_str());
     }
-    auto at = item->itemsp_get()->preferred_bag_position;
+    auto at = item->itemsp()->preferred_bag_position;
     if (bag_can_place_at(item, at)) {
       return true;
     }
@@ -254,15 +254,15 @@ bool Thing::bag_compress(void)
         continue;
       }
 
-      if (bag_remove_at(t, t->itemsp_get()->bag_position)) {
-        if (bag_can_place_at(t, t->itemsp_get()->bag_position + point(0, 1))) {
-          if (bag_place_at(t, t->itemsp_get()->bag_position + point(0, 1))) {
+      if (bag_remove_at(t, t->itemsp()->bag_position)) {
+        if (bag_can_place_at(t, t->itemsp()->bag_position + point(0, 1))) {
+          if (bag_place_at(t, t->itemsp()->bag_position + point(0, 1))) {
             did_something = true;
           } else {
-            bag_place_at(t, t->itemsp_get()->bag_position);
+            bag_place_at(t, t->itemsp()->bag_position);
           }
         } else {
-          bag_place_at(t, t->itemsp_get()->bag_position);
+          bag_place_at(t, t->itemsp()->bag_position);
         }
       }
     }
@@ -481,8 +481,8 @@ bool Thing::bag_place_at(Thingp item, point pos)
       set(bag, x, y, item->id);
     }
   }
-  item->itemsp_get()->bag_position      = pos;
-  item->itemsp_get()->last_bag_position = pos;
+  item->itemsp()->bag_position      = pos;
+  item->itemsp()->last_bag_position = pos;
 
   if (0) {
     LOG("Bag contents after add:");
@@ -591,7 +591,7 @@ bool Thing::bag_remove(Thingp item)
   }
 
   if (found) {
-    item->itemsp_get()->bag_position = point(-1, -1);
+    item->itemsp()->bag_position = point(-1, -1);
   }
 
   return found;
