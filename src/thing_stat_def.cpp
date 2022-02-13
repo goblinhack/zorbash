@@ -15,35 +15,35 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-int Thing::stat_def_total_get(void)
+int Thing::stat_def_total(void)
 {
   TRACE_NO_INDENT();
 
   auto owner = top_owner_get();
   if (owner) {
-    return owner->stat_def_total_get();
+    return owner->stat_def_total();
   }
 
   int stat = 0;
   int prev = 0;
 
-  stat = stat_def_get();
+  stat = stat_def();
   prev = stat;
   dbg("AC: %d", stat);
 
   //
   // Add def bonus
   //
-  stat += stat_def_mod_get();
+  stat += stat_def_mod();
   if (stat != prev) {
     prev = stat;
-    dbg("AC: with: (mod %d): %d", stat_def_mod_get(), stat);
+    dbg("AC: with: (mod %d): %d", stat_def_mod(), stat);
   }
 
   //
   // Add dex bonus to def
   //
-  int dex_total = stat_dex_total_get();
+  int dex_total = stat_dex_total();
   stat += stat_to_bonus(dex_total);
   if (stat != prev) {
     prev = stat;
@@ -57,11 +57,11 @@ int Thing::stat_def_total_get(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat = std::max(stat, iter->stat_def_get() + iter->stat_def_mod_get() + iter->enchant_get());
+      stat = std::max(stat, iter->stat_def() + iter->stat_def_mod() + iter->enchant_get());
       if (stat != prev) {
         prev = stat;
-        dbg("AC: with (%s def %d/%d): %d", iter->to_short_string().c_str(), iter->stat_def_get(),
-            stat_to_bonus(iter->stat_def_get()), stat);
+        dbg("AC: with (%s def %d/%d): %d", iter->to_short_string().c_str(), iter->stat_def(),
+            stat_to_bonus(iter->stat_def()), stat);
       }
     }
   }
@@ -73,10 +73,10 @@ int Thing::stat_def_total_get(void)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += iter->stat_def_mod_get();
+      stat += iter->stat_def_mod();
       if (stat != prev) {
         prev = stat;
-        dbg("AC: with: (%s mod %d): %d", iter->to_short_string().c_str(), stat_def_mod_get(), stat);
+        dbg("AC: with: (%s mod %d): %d", iter->to_short_string().c_str(), stat_def_mod(), stat);
       }
     }
   }
@@ -86,11 +86,11 @@ int Thing::stat_def_total_get(void)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->stat_def_mod_get();
+        stat += buff->stat_def_mod();
         if (stat != prev) {
           prev = stat;
-          dbg("AC: with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def_get(),
-              stat_to_bonus(buff->stat_def_get()), stat);
+          dbg("AC: with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
+              stat_to_bonus(buff->stat_def()), stat);
         }
       }
     }
@@ -99,11 +99,11 @@ int Thing::stat_def_total_get(void)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->stat_def_mod_get();
+        stat += buff->stat_def_mod();
         if (stat != prev) {
           prev = stat;
-          dbg("AC: with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def_get(),
-              stat_to_bonus(buff->stat_def_get()), stat);
+          dbg("AC: with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
+              stat_to_bonus(buff->stat_def()), stat);
         }
       }
     }
@@ -112,11 +112,11 @@ int Thing::stat_def_total_get(void)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->stat_def_mod_get();
+        stat += buff->stat_def_mod();
         if (stat != prev) {
           prev = stat;
-          dbg("AC: with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def_get(),
-              stat_to_bonus(buff->stat_def_get()), stat);
+          dbg("AC: with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
+              stat_to_bonus(buff->stat_def()), stat);
         }
       }
     }
@@ -126,7 +126,7 @@ int Thing::stat_def_total_get(void)
   return stat;
 }
 
-int Thing::stat_def_penalties_total_get(void)
+int Thing::stat_def_penalties_total(void)
 {
   TRACE_NO_INDENT();
 
@@ -186,7 +186,7 @@ int Thing::stat_def_penalties_total_get(void)
   return penalty;
 }
 
-int Thing::stat_def_get(void)
+int Thing::stat_def(void)
 {
   TRACE_NO_INDENT();
   int v = 0;

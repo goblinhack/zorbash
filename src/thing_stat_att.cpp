@@ -30,10 +30,10 @@ int Thing::attack_modifier_get(const Thingp victim)
   //
   // Add att bonus
   //
-  stat += stat_att_mod_get();
+  stat += stat_att_mod();
   if (stat != prev) {
     prev = stat;
-    dbg("Att: with: (mod %d): %d", stat_att_mod_get(), stat);
+    dbg("Att: with: (mod %d): %d", stat_att_mod(), stat);
   }
 
   //
@@ -41,7 +41,7 @@ int Thing::attack_modifier_get(const Thingp victim)
   //
   int str_total = stat_str_total_get();
   stat          = stat_to_bonus(str_total);
-  stat += stat_att_mod_get();
+  stat += stat_att_mod();
   prev = stat;
   dbg("Att: (str %d): %d", str_total, stat);
 
@@ -49,7 +49,7 @@ int Thing::attack_modifier_get(const Thingp victim)
   {
     auto equip = equip_get(e);
     if (equip) {
-      stat += equip->stat_att_mod_get();
+      stat += equip->stat_att_mod();
       if (stat != prev) {
         prev = stat;
         dbg("Att with (%s): %d", equip->to_short_string().c_str(), stat);
@@ -69,7 +69,7 @@ int Thing::attack_modifier_get(const Thingp victim)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->stat_att_mod_get();
+        stat += buff->stat_att_mod();
         if (stat != prev) {
           prev = stat;
           dbg("Att with buff (%s): %d", buff->to_short_string().c_str(), stat);
@@ -81,7 +81,7 @@ int Thing::attack_modifier_get(const Thingp victim)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->stat_att_mod_get();
+        stat += buff->stat_att_mod();
         if (stat != prev) {
           prev = stat;
           dbg("Att with debuff (%s): %d", buff->to_short_string().c_str(), stat);
@@ -93,7 +93,7 @@ int Thing::attack_modifier_get(const Thingp victim)
     {
       auto buff = level->thing_find(id);
       if (buff) {
-        stat += buff->stat_att_mod_get();
+        stat += buff->stat_att_mod();
         if (stat != prev) {
           prev = stat;
           dbg("Att with skill (%s): %d", buff->to_short_string().c_str(), stat);
@@ -106,7 +106,7 @@ int Thing::attack_modifier_get(const Thingp victim)
   return stat;
 }
 
-int Thing::stat_att_penalties_total_get(void)
+int Thing::stat_att_penalties_total(void)
 {
   TRACE_NO_INDENT();
 

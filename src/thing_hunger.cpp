@@ -29,7 +29,7 @@ void Thing::hunger_clock_tick(void)
   //
   // Hunger only ticks on con fail
   //
-  if (d20roll_under(stat_con_get())) {
+  if (d20roll_under(stat_con())) {
     return;
   }
 

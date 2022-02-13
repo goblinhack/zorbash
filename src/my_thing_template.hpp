@@ -1032,10 +1032,10 @@ public:
   int environ_avoids_water(void) const { return _environ_avoids_water; }
   int get_danger_level(void);
   int spawn_group_radius_get(void) const { return _spawn_group_radius; }
-  int stat_con_get(void) const { return _stat_con; }
-  int stat_def_get(void) const { return _stat_def; }
-  int stat_dex_get(void) const { return _stat_dex; }
-  int stat_luck_get(void) const { return _stat_luck; }
+  int stat_con(void) const { return _stat_con; }
+  int stat_def(void) const { return _stat_def; }
+  int stat_dex(void) const { return _stat_dex; }
+  int stat_luck(void) const { return _stat_luck; }
   int stat_str_get(void) const { return _stat_str; }
   int gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
   int gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }

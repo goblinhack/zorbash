@@ -77,7 +77,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     // Need this check to ensure cleaners can always collect items
     //
     if (is_player()) {
-      if (game->tick_current < item->tick_last_dropped_get() + 1) {
+      if (game->tick_current < item->tick_last_dropped() + 1) {
         dbg("Cannot carry; was dropped here recently");
         return false;
       }

@@ -330,7 +330,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
       dbg("No; cannot attack %s, no overlap", it->to_short_string().c_str());
     }
   } else if (can_eat(it)) {
-    if (game->tick_current < it->tick_last_dropped_get() + 1) {
+    if (game->tick_current < it->tick_last_dropped() + 1) {
       dbg("No; can eat but was seen previously");
       //
       // Continue the walk
@@ -634,7 +634,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       return false;
     }
 
-    if (game->tick_current < it->tick_last_dropped_get() + 1) {
+    if (game->tick_current < it->tick_last_dropped() + 1) {
       dbg("No; can eat but was seen previously");
       return false;
     }

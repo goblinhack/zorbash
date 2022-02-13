@@ -211,7 +211,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   if (is_able_to_tire()) {
     if (stamina_get() < 5) {
       if (is_player()) {
-        if (d20roll_under(stat_con_get())) {
+        if (d20roll_under(stat_con())) {
           msg("You are so tired but dig deep into your reserves to move!");
         } else {
           msg("You cannot move, you are so tired!");
@@ -378,7 +378,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     if (! must_attack) {
       if (! is_undead() && ! is_ethereal()) {
         if (up || down || left || right) {
-          if (d20() > stat_con_get()) {
+          if (d20() > stat_con()) {
             if (pcg_random_range(0, 100) < 10) {
               if (is_able_to_tire()) {
                 stamina_decr();

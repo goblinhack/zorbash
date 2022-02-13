@@ -25,7 +25,7 @@ void Thing::stats_tick(void)
       return;
     }
 
-    if (! stat_con_get()) {
+    if (! stat_con()) {
       dead("by becoming too sickly to live");
       return;
     }

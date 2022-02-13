@@ -1130,7 +1130,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->stat_att_mod_get();
+    auto stat = t->stat_att_mod();
     if (! stat) {
       return;
     }
@@ -1146,20 +1146,20 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_armor() || t->is_alive_monst() || t->is_player()) {
-    auto ac       = t->stat_def_get();
-    auto ac_total = t->stat_def_total_get();
+    auto ac       = t->stat_def();
+    auto ac_total = t->stat_def_total();
     if (ac_total != ac) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class natural       %2d", ac);
       w->log(tmp);
 
       Thingp curr_armor = t->equip_get(MONST_EQUIP_ARMOR);
       if (curr_armor) {
-        auto ac = curr_armor->stat_def_get();
+        auto ac = curr_armor->stat_def();
         if (ac != 10) {
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn          %2d", ac);
           w->log(tmp);
         }
-        auto mod = curr_armor->stat_def_mod_get();
+        auto mod = curr_armor->stat_def_mod();
         if (mod) {
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn mod      %2d", mod);
           w->log(tmp);
@@ -1168,12 +1168,12 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
 
       Thingp curr_shield = t->equip_get(MONST_EQUIP_SHIELD);
       if (curr_shield) {
-        auto ac = curr_shield->stat_def_get();
+        auto ac = curr_shield->stat_def();
         if (ac != 10) {
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class shield        %2d", ac);
           w->log(tmp);
         }
-        auto mod = curr_shield->stat_def_mod_get();
+        auto mod = curr_shield->stat_def_mod();
         if (mod) {
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class shield mod    %2d", mod);
           w->log(tmp);
@@ -1182,13 +1182,13 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
 
       Thingp curr_helmet = t->equip_get(MONST_EQUIP_HELMET);
       if (curr_helmet) {
-        auto ac = curr_helmet->stat_def_get();
+        auto ac = curr_helmet->stat_def();
         if (ac != 10) {
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod    %2d", ac);
           w->log(tmp);
         }
 
-        auto mod = curr_helmet->stat_def_mod_get();
+        auto mod = curr_helmet->stat_def_mod();
         if (mod) {
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod    %2d", mod);
           w->log(tmp);
@@ -1197,13 +1197,13 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
 
       Thingp curr_amulet = t->equip_get(MONST_EQUIP_AMULET);
       if (curr_amulet) {
-        auto ac = curr_amulet->stat_def_get();
+        auto ac = curr_amulet->stat_def();
         if (ac != 10) {
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class from amulet   %2d", ac);
           w->log(tmp);
         }
 
-        auto mod = curr_amulet->stat_def_get();
+        auto mod = curr_amulet->stat_def();
         if (mod) {
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class amulet mod    %2d", mod);
           w->log(tmp);
@@ -1264,12 +1264,12 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->stat_dex_total_get();
+    auto stat = t->stat_dex_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity              %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
-  } else if (t->stat_dex_mod_get()) {
-    auto stat = t->stat_dex_mod_get();
+  } else if (t->stat_dex_mod()) {
+    auto stat = t->stat_dex_mod();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity mod            %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
@@ -1281,12 +1281,12 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->stat_luck_total_get();
+    auto stat = t->stat_luck_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck                   %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
-  } else if (t->stat_luck_mod_get()) {
-    auto stat = t->stat_luck_mod_get();
+  } else if (t->stat_luck_mod()) {
+    auto stat = t->stat_luck_mod();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck mod                 %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
@@ -1298,12 +1298,12 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->stat_con_total_get();
+    auto stat = t->stat_con_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
-  } else if (t->stat_con_mod_get()) {
-    auto stat = t->stat_con_mod_get();
+  } else if (t->stat_con_mod()) {
+    auto stat = t->stat_con_mod();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution mod         %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }

@@ -88,7 +88,7 @@ static void wid_rightbar_stats_over_ac_b(Widp w, int32_t relx, int32_t rely, int
   }
 
   {
-    auto val = player->stat_def_get();
+    auto val = player->stat_def();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your base armor class is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -96,8 +96,8 @@ static void wid_rightbar_stats_over_ac_b(Widp w, int32_t relx, int32_t rely, int
   }
 
   {
-    auto tot = player->stat_def_total_get();
-    auto val = player->stat_def_get();
+    auto tot = player->stat_def_total();
+    auto val = player->stat_def();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total armor class including all items and modifiers is %d.", tot);
@@ -225,7 +225,7 @@ static void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->stat_con_get();
+    auto val = player->stat_con();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your constitution is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -233,8 +233,8 @@ static void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->stat_con_get();
-    auto tot = player->stat_con_total_get();
+    auto val = player->stat_con();
+    auto tot = player->stat_con_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total constitution including all items and modifiers is %d.", val);
@@ -295,7 +295,7 @@ static void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->stat_dex_get();
+    auto val = player->stat_dex();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your dexterity is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -303,8 +303,8 @@ static void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->stat_dex_get();
-    auto tot = player->stat_dex_total_get();
+    auto val = player->stat_dex();
+    auto tot = player->stat_dex_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total dexterity including all items and modifiers is %d.", val);
@@ -365,7 +365,7 @@ static void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t re
   }
 
   {
-    auto val = player->stat_luck_get();
+    auto val = player->stat_luck();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your luck is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -373,8 +373,8 @@ static void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t re
   }
 
   {
-    auto val = player->stat_luck_get();
-    auto tot = player->stat_luck_total_get();
+    auto val = player->stat_luck();
+    auto tot = player->stat_luck_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total luck including all items and modifiers is %d.", val);
@@ -738,7 +738,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_def_total_get());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_def_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -772,7 +772,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_con_total_get());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_con_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -793,7 +793,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_dex_total_get());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_dex_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -810,7 +810,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_luck_total_get());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_luck_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }

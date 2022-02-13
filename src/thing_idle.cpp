@@ -21,9 +21,9 @@ bool Thing::idle_check(void)
 
   if (! std::empty(on_idle_tick_frequency_dice_str_get())) {
     auto roll = on_idle_tick_frequency_get();
-    // con("%d %d roll %d", game->tick_current, tick_last_did_something_get(), roll);
-    if (game->tick_current - tick_last_did_something_get() >= (unsigned int) roll) {
-      // con("%d %d roll %d tick", game->tick_current, tick_last_did_something_get(), roll);
+    // con("%d %d roll %d", game->tick_current, tick_last_did_something(), roll);
+    if (game->tick_current - tick_last_did_something() >= (unsigned int) roll) {
+      // con("%d %d roll %d tick", game->tick_current, tick_last_did_something(), roll);
       auto d   = on_idle_tick_frequency_dice_get();
       auto mod = d.python_mod;
 

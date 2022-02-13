@@ -15,31 +15,31 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-int Thing::stat_dex_total_get(void)
+int Thing::stat_dex_total(void)
 {
   TRACE_NO_INDENT();
 
   auto owner = top_owner_get();
   if (owner) {
-    return owner->stat_dex_get();
+    return owner->stat_dex();
   }
 
   int stat = 0;
   int prev = 0;
 
-  stat = stat_dex_get();
+  stat = stat_dex();
   prev = stat;
-  dbg("Dex: (%d/%d): %d", stat_dex_get(), stat_to_bonus(stat_dex_get()), stat);
+  dbg("Dex: (%d/%d): %d", stat_dex(), stat_to_bonus(stat_dex()), stat);
 
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += iter->stat_dex_mod_get();
+      stat += iter->stat_dex_mod();
       if (stat != prev) {
         prev = stat;
         dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
-            modifier_to_string(iter->stat_dex_mod_get()).c_str(), stat);
+            modifier_to_string(iter->stat_dex_mod()).c_str(), stat);
       }
 
       auto enchant = iter->enchant_get();
@@ -56,11 +56,11 @@ int Thing::stat_dex_total_get(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_dex_mod_get();
+        stat += iter->stat_dex_mod();
         if (stat != prev) {
           prev = stat;
           dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_dex_mod_get()).c_str(), stat);
+              modifier_to_string(iter->stat_dex_mod()).c_str(), stat);
         }
       }
     }
@@ -69,11 +69,11 @@ int Thing::stat_dex_total_get(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_dex_mod_get();
+        stat += iter->stat_dex_mod();
         if (stat != prev) {
           prev = stat;
           dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_dex_mod_get()).c_str(), stat);
+              modifier_to_string(iter->stat_dex_mod()).c_str(), stat);
         }
       }
     }
@@ -82,11 +82,11 @@ int Thing::stat_dex_total_get(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_dex_mod_get();
+        stat += iter->stat_dex_mod();
         if (stat != prev) {
           prev = stat;
           dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_dex_mod_get()).c_str(), stat);
+              modifier_to_string(iter->stat_dex_mod()).c_str(), stat);
         }
       }
     }
@@ -95,7 +95,7 @@ int Thing::stat_dex_total_get(void)
   return stat;
 }
 
-int Thing::stat_dex_get(void)
+int Thing::stat_dex(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
