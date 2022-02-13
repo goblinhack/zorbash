@@ -155,7 +155,7 @@ int Thing::danger_initial_level_get(void)
     danger_level /= 2;
   }
 
-  danger_level += damage_max_get();
+  danger_level += damage_max();
 
   danger_level += aggression_level_pct();
 
@@ -247,7 +247,7 @@ int Thing::danger_current_level_get(void)
     danger_level /= 2;
   }
 
-  danger_level += damage_max_get();
+  danger_level += damage_max();
 
   danger_level += aggression_level_pct();
 

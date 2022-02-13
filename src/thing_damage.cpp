@@ -15,7 +15,7 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-int Thing::damage_max_get(void)
+int Thing::damage_max(void)
 {
   TRACE_NO_INDENT();
   auto max_damage = damage_natural_dice().max_roll();
@@ -39,7 +39,7 @@ int Thing::damage_max_get(void)
   //
   Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
   if (curr_weapon) {
-    max_damage = std::max(max_damage, curr_weapon->damage_max_get());
+    max_damage = std::max(max_damage, curr_weapon->damage_max());
   }
 
   //
@@ -48,7 +48,7 @@ int Thing::damage_max_get(void)
   return max_damage + enchant_get();
 }
 
-int Thing::damage_min_get(void)
+int Thing::damage_min(void)
 {
   TRACE_NO_INDENT();
   auto min_damage = damage_natural_dice().min_roll();
@@ -72,7 +72,7 @@ int Thing::damage_min_get(void)
   //
   Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
   if (curr_weapon) {
-    min_damage = std::min(min_damage, curr_weapon->damage_min_get());
+    min_damage = std::min(min_damage, curr_weapon->damage_min());
   }
 
   //

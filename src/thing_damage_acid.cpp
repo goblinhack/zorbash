@@ -32,7 +32,7 @@ const std::string Thing::damage_acid_dice_str(void)
   return (tp()->damage_acid_dice_str());
 }
 
-int Thing::damage_acid_get(void)
+int Thing::damage_acid(void)
 {
   TRACE_NO_INDENT();
   auto roll = tp()->damage_acid_dice().roll();
