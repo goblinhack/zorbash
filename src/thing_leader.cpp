@@ -111,7 +111,7 @@ bool Thing::too_far_from_leader(void)
     return false;
   }
 
-  if (distance(curr_at, leader->curr_at) > distance_leader_max_get()) {
+  if (distance(curr_at, leader->curr_at) > distance_leader_max_float()) {
     return true;
   }
   return false;
@@ -124,7 +124,7 @@ bool Thing::too_far_from_leader(point p)
     return false;
   }
 
-  if (distance(p, leader->curr_at) > distance_leader_max_get()) {
+  if (distance(p, leader->curr_at) > distance_leader_max_float()) {
     return true;
   }
   return false;
@@ -137,7 +137,7 @@ bool Thing::too_far_from_leader(point p, float delta)
     return false;
   }
 
-  if (distance(p, leader->curr_at) > distance_leader_max_get() + delta) {
+  if (distance(p, leader->curr_at) > distance_leader_max_float() + delta) {
     return true;
   }
   return false;

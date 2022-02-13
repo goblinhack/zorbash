@@ -428,8 +428,8 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
         }
 
         text += t->text_description();
-        if (! t->gold_value_dice_str_get().empty()) {
-          text += " Value " + t->gold_value_dice_str_get() + " gold";
+        if (! t->gold_value_dice_str().empty()) {
+          text += " Value " + t->gold_value_dice_str() + " gold";
         }
         wid_set_text(wid_item, text);
       }

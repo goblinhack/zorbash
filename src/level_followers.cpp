@@ -52,7 +52,7 @@ void Level::assign_leaders_and_followers(void)
         //
         // That are close enough
         //
-        if (distance(t->curr_at, m->curr_at) <= m->distance_recruitment_max_get()) {
+        if (distance(t->curr_at, m->curr_at) <= m->distance_recruitment_max_float()) {
           group_cand = g.first;
         }
       }

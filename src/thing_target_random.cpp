@@ -26,14 +26,14 @@ point Thing::dest_random_get(int d)
   //
   auto mob = top_mob_get();
   if (mob) {
-    d             = (int) distance_mob_max_get();
+    d             = (int) distance_mob_max_float();
     wander_source = mob->curr_at;
     dbg("Use mob %s as wander source: %s", mob->to_short_string().c_str(), wander_source.to_string().c_str());
   }
 
   auto leader = leader_get();
   if (leader) {
-    d             = (int) distance_leader_max_get();
+    d             = (int) distance_leader_max_float();
     wander_source = leader->curr_at;
     dbg("Use leader %s as wander source: %s", leader->to_short_string().c_str(), wander_source.to_string().c_str());
   }

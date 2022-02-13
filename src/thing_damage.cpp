@@ -18,21 +18,21 @@
 int Thing::damage_max_get(void)
 {
   TRACE_NO_INDENT();
-  auto max_damage = damage_natural_dice_get().max_roll();
-  max_damage      = std::max(max_damage, damage_digest_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_melee_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_poison_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_future1_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_future2_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_future3_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_cold_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_fire_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_crush_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_lightning_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_energy_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_acid_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_digest_dice_get().max_roll());
-  max_damage      = std::max(max_damage, damage_necrosis_dice_get().max_roll());
+  auto max_damage = damage_natural_dice().max_roll();
+  max_damage      = std::max(max_damage, damage_digest_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_melee_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_poison_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_future1_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_future2_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_future3_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_cold_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_fire_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_crush_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_lightning_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_energy_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_acid_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_digest_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_necrosis_dice().max_roll());
 
   //
   // Add in weapons
@@ -51,21 +51,21 @@ int Thing::damage_max_get(void)
 int Thing::damage_min_get(void)
 {
   TRACE_NO_INDENT();
-  auto min_damage = damage_natural_dice_get().min_roll();
-  min_damage      = std::min(min_damage, damage_digest_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_melee_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_poison_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_future1_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_future2_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_future3_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_cold_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_fire_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_crush_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_lightning_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_energy_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_acid_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_digest_dice_get().min_roll());
-  min_damage      = std::min(min_damage, damage_necrosis_dice_get().min_roll());
+  auto min_damage = damage_natural_dice().min_roll();
+  min_damage      = std::min(min_damage, damage_digest_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_melee_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_poison_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_future1_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_future2_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_future3_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_cold_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_fire_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_crush_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_lightning_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_energy_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_acid_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_digest_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_necrosis_dice().min_roll());
 
   //
   // Add in weapons

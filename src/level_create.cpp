@@ -146,20 +146,20 @@ int Level::get_total_monst_damage_level(void)
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
     if (t->is_mob() || t->is_monst()) {
-      damage += t->damage_melee_dice_get().max_roll();
-      damage += t->damage_poison_dice_get().max_roll();
-      damage += t->damage_future1_dice_get().max_roll();
-      damage += t->damage_future2_dice_get().max_roll();
-      damage += t->damage_future3_dice_get().max_roll();
-      damage += t->damage_cold_dice_get().max_roll();
-      damage += t->damage_fire_dice_get().max_roll();
-      damage += t->damage_crush_dice_get().max_roll();
-      damage += t->damage_lightning_dice_get().max_roll();
-      damage += t->damage_energy_dice_get().max_roll();
-      damage += t->damage_acid_dice_get().max_roll();
-      damage += t->damage_digest_dice_get().max_roll();
-      damage += t->damage_digest_dice_get().max_roll();
-      damage += t->damage_natural_dice_get().max_roll();
+      damage += t->damage_melee_dice().max_roll();
+      damage += t->damage_poison_dice().max_roll();
+      damage += t->damage_future1_dice().max_roll();
+      damage += t->damage_future2_dice().max_roll();
+      damage += t->damage_future3_dice().max_roll();
+      damage += t->damage_cold_dice().max_roll();
+      damage += t->damage_fire_dice().max_roll();
+      damage += t->damage_crush_dice().max_roll();
+      damage += t->damage_lightning_dice().max_roll();
+      damage += t->damage_energy_dice().max_roll();
+      damage += t->damage_acid_dice().max_roll();
+      damage += t->damage_digest_dice().max_roll();
+      damage += t->damage_digest_dice().max_roll();
+      damage += t->damage_natural_dice().max_roll();
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)

@@ -17,13 +17,13 @@
 //
 // Dice
 //
-const Dice &Thing::on_idle_tick_frequency_dice_get(void)
+const Dice &Thing::on_idle_tick_frequency_dice(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_idle_tick_frequency_dice());
 }
 
-const std::string &Thing::on_idle_tick_frequency_dice_str_get(void)
+const std::string &Thing::on_idle_tick_frequency_dice_str(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_idle_tick_frequency_dice_str());
@@ -35,13 +35,13 @@ int Thing::on_idle_tick_frequency_get(void)
   return (tp()->on_idle_tick_frequency_dice().roll());
 }
 
-const Dice &Thing::spawn_group_size_dice_get(void)
+const Dice &Thing::spawn_group_size_dice(void)
 {
   TRACE_NO_INDENT();
   return (tp()->spawn_group_size_dice());
 }
 
-const std::string &Thing::spawn_group_size_dice_str_get(void)
+const std::string &Thing::spawn_group_size_dice_str(void)
 {
   TRACE_NO_INDENT();
   return (tp()->spawn_group_size_dice_str());
@@ -53,13 +53,13 @@ int Thing::spawn_group_size_get(void)
   return (tp()->spawn_group_size_dice().roll());
 }
 
-const Dice &Thing::nutrition_dice_get(void)
+const Dice &Thing::nutrition_dice(void)
 {
   TRACE_NO_INDENT();
   return (tp()->nutrition_dice());
 }
 
-const std::string &Thing::nutrition_dice_str_get(void)
+const std::string &Thing::nutrition_dice_str(void)
 {
   TRACE_NO_INDENT();
   return (tp()->nutrition_dice_str());
@@ -71,31 +71,31 @@ int Thing::nutrition_get(void)
   return (tp()->nutrition_dice().roll());
 }
 
-const Dice &Thing::health_initial_dice_get(void)
+const Dice &Thing::health_initial_dice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->health_initial_dice_get());
+  return (tp()->health_initial_dice());
 }
 
-const std::string &Thing::health_initial_dice_str_get(void)
+const std::string &Thing::health_initial_dice_str(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->health_initial_dice_str_get());
+  return (tp()->health_initial_dice_str());
 }
 
 int Thing::health_initial_get(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->health_initial_dice_get().roll());
+  return (tp()->health_initial_dice().roll());
 }
 
-const Dice &Thing::gold_value_dice_get(void)
+const Dice &Thing::gold_value_dice(void)
 {
   TRACE_NO_INDENT();
   return (tp()->gold_value_dice());
 }
 
-const std::string &Thing::gold_value_dice_str_get(void)
+const std::string &Thing::gold_value_dice_str(void)
 {
   TRACE_NO_INDENT();
   return (tp()->gold_value_dice_str());
@@ -107,13 +107,13 @@ int Thing::gold_value_get(void)
   return (tp()->gold_value_dice().roll());
 }
 
-const Dice &Thing::lifespan_dice_get(void)
+const Dice &Thing::lifespan_dice(void)
 {
   TRACE_NO_INDENT();
   return (tp()->lifespan_dice());
 }
 
-const std::string &Thing::lifespan_dice_str_get(void)
+const std::string &Thing::lifespan_dice_str(void)
 {
   TRACE_NO_INDENT();
   return (tp()->lifespan_dice_str());
@@ -125,13 +125,13 @@ int Thing::lifespan_initial_get(void)
   return (tp()->lifespan_dice().roll());
 }
 
-const Dice &Thing::resurrect_dice_get(void)
+const Dice &Thing::resurrect_dice(void)
 {
   TRACE_NO_INDENT();
   return (tp()->resurrect_dice());
 }
 
-const std::string &Thing::resurrect_dice_str_get(void)
+const std::string &Thing::resurrect_dice_str(void)
 {
   TRACE_NO_INDENT();
   return (tp()->resurrect_dice_str());
@@ -1368,7 +1368,7 @@ int Thing::distance_recruitment_max(void)
   return (tp()->distance_recruitment_max());
 }
 
-float Thing::distance_recruitment_max_get(void)
+float Thing::distance_recruitment_max_float(void)
 {
   TRACE_NO_INDENT();
   return (tp()->distance_recruitment_max());
@@ -3258,13 +3258,13 @@ int Thing::is_immune_to_spiderwebs(void)
   return (tp()->is_immune_to_spiderwebs());
 }
 
-float Thing::distance_mob_max_get(void)
+float Thing::distance_mob_max_float(void)
 {
   TRACE_NO_INDENT();
   return (tp()->distance_mob_max());
 }
 
-float Thing::distance_leader_max_get(void)
+float Thing::distance_leader_max_float(void)
 {
   TRACE_NO_INDENT();
   return (tp()->distance_leader_max());
