@@ -1258,7 +1258,7 @@ public:
   int move_speed(void);
   int necrotized_amount_decr(int);
   int necrotized_amount_decr(void);
-  int necrotized_amount_get(void);
+  int necrotized_amount(void);
   int necrotized_amount_incr(int);
   int necrotized_amount_incr(void);
   int necrotized_amount_set(int);
@@ -1338,7 +1338,7 @@ public:
   int owned_count_set(int);
   int poisoned_amount_decr(int);
   int poisoned_amount_decr(void);
-  int poisoned_amount_get(void);
+  int poisoned_amount(void);
   int poisoned_amount_incr(int);
   int poisoned_amount_incr(void);
   int poisoned_amount_set(int);

@@ -5467,7 +5467,7 @@ int Thing::enchant_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // poison
 ////////////////////////////////////////////////////////////////////////////
-int Thing::poisoned_amount_get(void)
+int Thing::poisoned_amount(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
@@ -5476,13 +5476,13 @@ int Thing::poisoned_amount_get(void)
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
-    v += owner->poisoned_amount_get();
+    v += owner->poisoned_amount();
   }
   if (is_minion()) {
     auto mob = immediate_mob();
     if (mob) {
       auto mob = immediate_mob();
-      v += mob->poisoned_amount_get();
+      v += mob->poisoned_amount();
     }
   }
   return v;
@@ -5543,7 +5543,7 @@ int Thing::poisoned_amount_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // necrosis
 ////////////////////////////////////////////////////////////////////////////
-int Thing::necrotized_amount_get(void)
+int Thing::necrotized_amount(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
@@ -5552,13 +5552,13 @@ int Thing::necrotized_amount_get(void)
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
-    v += owner->necrotized_amount_get();
+    v += owner->necrotized_amount();
   }
   if (is_minion()) {
     auto mob = immediate_mob();
     if (mob) {
       auto mob = immediate_mob();
-      v += mob->necrotized_amount_get();
+      v += mob->necrotized_amount();
     }
   }
   return v;
