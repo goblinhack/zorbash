@@ -447,7 +447,7 @@ bool Level::tick(void)
       }
       game->things_are_moving = true;
       t->is_waiting           = true;
-      // t->log("WAIT %d", __LINE__);
+      // t->con("WAIT %d", __LINE__);
     }
 
     //

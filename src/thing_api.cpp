@@ -4337,7 +4337,7 @@ uint32_t Thing::tick_resurrect_when_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // movement_left
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::movement_left(void)
+int Thing::movement_left(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -4347,7 +4347,7 @@ uint32_t Thing::movement_left(void)
   }
 }
 
-uint32_t Thing::movement_left_set(int v)
+int Thing::movement_left_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4355,7 +4355,7 @@ uint32_t Thing::movement_left_set(int v)
   return (n);
 }
 
-uint32_t Thing::movement_left_decr(int v)
+int Thing::movement_left_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4363,7 +4363,7 @@ uint32_t Thing::movement_left_decr(int v)
   return (n);
 }
 
-uint32_t Thing::movement_left_incr(int v)
+int Thing::movement_left_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4371,7 +4371,7 @@ uint32_t Thing::movement_left_incr(int v)
   return (n);
 }
 
-uint32_t Thing::movement_left_decr(void)
+int Thing::movement_left_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
@@ -4379,7 +4379,7 @@ uint32_t Thing::movement_left_decr(void)
   return (n);
 }
 
-uint32_t Thing::movement_left_incr(void)
+int Thing::movement_left_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
