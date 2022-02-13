@@ -4,8 +4,7 @@ import tp
 
 def on_you_natural_attack(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
@@ -179,11 +178,10 @@ def tp_init(name, text_name):
     my.tile(self, "skel_fire.3.dead", is_resurrecting=True, delay_ms=delay)
     my.tile(self, "skel_fire.2.dead", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-        "skel_fire.1.dead",
-        is_resurrecting=True,
-        is_end_of_anim=True,
-        is_alive_on_end_of_anim=True,
-    )
+            "skel_fire.1.dead",
+            is_resurrecting=True,
+            is_end_of_anim=True,
+            is_alive_on_end_of_anim=True)
 
     my.tp_update(self)
 

@@ -2,6 +2,10 @@ import my
 import tp
 
 
+def on_you_natural_attack(me, x, y):
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch")
+
+
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch"):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
@@ -93,6 +97,7 @@ def tp_init(name, text_name):
     my.on_death_do(self, "me.on_death()")
     my.on_jump_do(self, "me.on_jump()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
+    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_con(self, 14)
     my.stat_def(self, 8)

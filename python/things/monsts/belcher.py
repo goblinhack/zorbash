@@ -2,6 +2,10 @@ import my
 import tp
 
 
+def on_you_natural_attack(me, x, y):
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch")
+
+
 def on_idle(me, x, y):
     if not my.thing_is_sleeping(me):
         my.level_spawn_gas_poison_around_thing(me, 2)
@@ -71,6 +75,7 @@ def tp_init(name, text_name, short_text_name):
     my.nutrition_dice(self, "1d4")
     my.on_death_do(self, "me.on_death()")
     my.on_idle_tick_freq_dice(self, "1d5:me.on_idle()")
+    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_con(self, 20)
     my.stat_def(self, 0)
