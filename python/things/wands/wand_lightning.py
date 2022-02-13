@@ -75,7 +75,7 @@ def tp_init(name, text_name, short_text_name):
     my.noise_on_moving_or_being_carried(self, 5)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
-    my.on_idle_tick_frequency_dice(self, "1d200+200:me.on_idle()")
+    my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)

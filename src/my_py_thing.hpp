@@ -110,7 +110,7 @@ PyObject *thing_gfx_solid_shadow(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_gfx_very_short_shadow_caster(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_hunger_clock_tick_frequency(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_hunger_clock_tick_freq(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hunger_is_insatiable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_charge_count_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_current_incr(PyObject *obj, PyObject *args, PyObject *keywds);

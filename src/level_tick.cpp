@@ -192,7 +192,7 @@ bool Level::tick(void)
 
     FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
     {
-      int movement_left = t->movement_left_get();
+      int movement_left = t->movement_left();
       if (movement_left <= 0) {
         continue;
       }

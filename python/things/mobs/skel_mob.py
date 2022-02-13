@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_idle_tick_frequency_dice(me, x, y):
+def on_idle_tick_freq_dice(me, x, y):
     #
     # Make sure to only spawn minions so they have the is_minion flag set
     #
@@ -60,7 +60,7 @@ def tp_init(name, text_name):
     my.minion_limit(self, 4)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
-    my.on_idle_tick_frequency_dice(self, "1d10+10:me.on_idle_tick_frequency_dice()")
+    my.on_idle_tick_freq_dice(self, "1d10+10:me.on_idle_tick_freq_dice()")
     my.text_a_or_an(self, "a")
     my.text_description(self, "The dead rise again here.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)

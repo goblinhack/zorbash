@@ -30,7 +30,7 @@ def tp_init(name, text_name):
     my.lifespan_dice(self, "1d20+20")
     my.light_color(self, "yellow")
     my.light_power(self, 3)
-    my.on_idle_tick_frequency_dice(self, "1d5+5:me.spawn()")
+    my.on_idle_tick_freq_dice(self, "1d5+5:me.spawn()")
     my.temperature(self, 100)
     my.text_a_or_an(self, "")
     my.text_description(self, "Fire.")

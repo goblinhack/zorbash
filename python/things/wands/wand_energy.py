@@ -101,7 +101,7 @@ def tp_init(name, text_name, short_text_name):
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_fall_do(self, "me.on_fall()")
     my.on_final_use_do(self, "me.on_final_use()")
-    my.on_idle_tick_frequency_dice(self, "1d200+200:me.on_idle()")
+    my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")

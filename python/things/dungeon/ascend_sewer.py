@@ -22,7 +22,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.light_power(self, 1)
     my.long_text_description(self, "A way out of these stinking sewers!")
     my.minion_limit(self, 5)
-    my.on_idle_tick_frequency_dice(self, "1d50+50:ascend_sewer.spawn()")
+    my.on_idle_tick_freq_dice(self, "1d50+50:ascend_sewer.spawn()")
     my.text_a_or_an(self, "a")
     my.text_description(self, "A slime coated sewer pipe.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
