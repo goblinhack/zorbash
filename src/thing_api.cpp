@@ -137,7 +137,7 @@ const std::string &Thing::resurrect_dice_str(void)
   return (tp()->resurrect_dice_str());
 }
 
-int Thing::resurrect_get(void)
+int Thing::resurrect_when(void)
 {
   TRACE_NO_INDENT();
   return (tp()->resurrect_dice().roll());
@@ -3827,7 +3827,7 @@ void Thing::submerged_offset_set(int v)
 ////////////////////////////////////////////////////////////////////////////
 // gold
 ////////////////////////////////////////////////////////////////////////////
-int Thing::gold_get(void)
+int Thing::gold(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -3901,7 +3901,7 @@ int Thing::gold_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // score
 ////////////////////////////////////////////////////////////////////////////
-int Thing::score_get(void)
+int Thing::score(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -3934,7 +3934,7 @@ void Thing::score_incr(int v)
 ////////////////////////////////////////////////////////////////////////////
 // keys
 ////////////////////////////////////////////////////////////////////////////
-int Thing::keys_get(void)
+int Thing::keys(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {

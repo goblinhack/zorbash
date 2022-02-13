@@ -37,7 +37,7 @@ static uint8_t wid_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
         //
         // Poor player
         //
-        if (! player->score_get()) {
+        if (! player->score()) {
           player->score_incr(1);
         }
 

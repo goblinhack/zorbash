@@ -117,7 +117,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   if (! is_resurrection_blocked) {
     if (is_resurrectable()) {
-      tick_resurrect_when_set(game->tick_current + resurrect_get());
+      tick_resurrect_when_set(game->tick_current + resurrect_when());
     }
   }
 
@@ -291,7 +291,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       // Poor player
       //
-      if (! score_get()) {
+      if (! score()) {
         score_incr(1);
       }
 
