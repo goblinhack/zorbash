@@ -14,7 +14,7 @@
 #include <algorithm>
 #include <set>
 
-Thingp Thing::most_dangerous_adjacent_thing_get(void)
+Thingp Thing::most_dangerous_adjacent_thing(void)
 {
   std::vector< std::pair< Thingp, int > > possible;
 
@@ -85,7 +85,7 @@ Thingp Thing::most_dangerous_adjacent_thing_get(void)
   return possible[ 0 ].first;
 }
 
-Thingp Thing::most_dangerous_visible_thing_get(void)
+Thingp Thing::most_dangerous_visible_thing(void)
 {
   std::vector< std::pair< Thingp, int > > possible;
 

@@ -24,8 +24,8 @@ void Thing::visible(void)
   //
   auto owner = top_owner();
   if (owner) {
-    if (this == owner->equip_carry_anim_get(MONST_EQUIP_WEAPON)) {
-      if (owner->equip_use_anim_get(MONST_EQUIP_WEAPON)) {
+    if (this == owner->equip_carry_anim(MONST_EQUIP_WEAPON)) {
+      if (owner->equip_use_anim(MONST_EQUIP_WEAPON)) {
         //
         // Stay hidden until the weapon use is done.
         //
@@ -42,15 +42,15 @@ void Thing::visible(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (equip_id_carry_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim_get(e));
+    if (equip_id_carry_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim(e));
       if (w) {
         w->visible();
       }
     }
 
-    if (equip_id_use_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim_get(e));
+    if (equip_id_use_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim(e));
       if (w) {
         w->visible();
       }

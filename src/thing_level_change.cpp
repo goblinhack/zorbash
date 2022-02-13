@@ -74,12 +74,12 @@ void Thing::level_change(Levelp l)
       it->level_change(l);
     }
 
-    it = equip_carry_anim_get(e);
+    it = equip_carry_anim(e);
     if (it) {
       it->level_change(l);
     }
 
-    it = equip_use_anim_get(e);
+    it = equip_use_anim(e);
     if (it) {
       it->level_change(l);
     }

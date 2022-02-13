@@ -990,7 +990,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     // Are we carrying a weapon? If not, see if we can do a claw attack
     //
     if (attack_natural || attack_poison || attack_digest ||
-        ! real_hitter->equip_id_carry_anim_get(MONST_EQUIP_WEAPON).ok()) {
+        ! real_hitter->equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
       auto claws = real_hitter->tp()->gfx_anim_use();
       if (claws != "") {
         auto natural_attack_effect = level->thing_new(claws, curr_at);

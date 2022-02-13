@@ -295,8 +295,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (equip_id_carry_anim_get(e).ok()) {
-      auto id = equip_id_carry_anim_get(e);
+    if (equip_id_carry_anim(e).ok()) {
+      auto id = equip_id_carry_anim(e);
       auto w  = level->thing_find(id);
       if (w) {
         w->move_to_immediately(curr_at);
@@ -313,9 +313,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       }
     }
 
-    if (equip_id_use_anim_get(e).ok()) {
-      auto id = equip_id_use_anim_get(e);
-      auto w  = level->thing_find(equip_id_use_anim_get(e));
+    if (equip_id_use_anim(e).ok()) {
+      auto id = equip_id_use_anim(e);
+      auto w  = level->thing_find(equip_id_use_anim(e));
       if (w) {
         w->move_to_immediately(curr_at);
         w->is_jumping = true;
@@ -565,15 +565,15 @@ void Thing::jump_end(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (equip_id_carry_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim_get(e));
+    if (equip_id_carry_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim(e));
       if (w) {
         w->is_jumping = false;
       }
     }
 
-    if (equip_id_use_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim_get(e));
+    if (equip_id_use_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim(e));
       if (w) {
         w->is_jumping = false;
       }
@@ -601,7 +601,7 @@ void Thing::jump_end(void)
   // Attack of opportunity
   //
   if (is_player()) {
-    auto t = most_dangerous_adjacent_thing_get();
+    auto t = most_dangerous_adjacent_thing();
     if (t) {
       std::string s = t->text_The() + " attacks as you land";
       game->tick_begin("monst attacked as player landed");

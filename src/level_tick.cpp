@@ -370,7 +370,7 @@ bool Level::tick(void)
 
     FOR_ALL_EQUIP(e)
     {
-      auto equip_id = t->equip_id_use_anim_get(e);
+      auto equip_id = t->equip_id_use_anim(e);
       if (equip_id.ok()) {
         auto w = thing_find(equip_id);
         if (w && ! (w->is_dead || w->is_scheduled_for_death)) {
@@ -423,7 +423,7 @@ bool Level::tick(void)
     //
     FOR_ALL_EQUIP(e)
     {
-      auto o = t->equip_carry_anim_get(e);
+      auto o = t->equip_carry_anim(e);
       if (o) {
         o->update_interpolated_position();
         o->fall_get();

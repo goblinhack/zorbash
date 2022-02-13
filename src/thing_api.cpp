@@ -7007,7 +7007,7 @@ ts_t Thing::ts_fall_end_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // equip_id_carry_anim
 ////////////////////////////////////////////////////////////////////////////
-ThingId Thing::equip_id_carry_anim_get(int equip)
+ThingId Thing::equip_id_carry_anim(int equip)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
@@ -7030,7 +7030,7 @@ ThingId Thing::equip_id_carry_anim_set(ThingId v, int equip)
 ////////////////////////////////////////////////////////////////////////////
 // equip_id_use_anim
 ////////////////////////////////////////////////////////////////////////////
-ThingId Thing::equip_id_use_anim_get(int equip)
+ThingId Thing::equip_id_use_anim(int equip)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {

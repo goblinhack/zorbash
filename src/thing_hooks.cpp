@@ -67,7 +67,7 @@ void Thing::hooks_remove()
         o->equip_id_set(NoThingId.id, e);
       }
 
-      if (id == o->equip_id_carry_anim_get(e)) {
+      if (id == o->equip_id_carry_anim(e)) {
         o->unequip("remove hooks for carry-anim", e, false);
 
         if (is_loggable()) {
@@ -76,7 +76,7 @@ void Thing::hooks_remove()
         o->equip_carry_anim_id_set(NoThingId.id, e);
       }
 
-      if (id == o->equip_id_use_anim_get(e)) {
+      if (id == o->equip_id_use_anim(e)) {
         if (is_loggable()) {
           dbg("Detach use_anim from owner %s", o->to_string().c_str());
         }
@@ -85,7 +85,7 @@ void Thing::hooks_remove()
         //
         // End of the use-animation, make the sword visible again.
         //
-        auto carry_anim = o->equip_carry_anim_get(e);
+        auto carry_anim = o->equip_carry_anim(e);
         if (carry_anim) {
           dbg("Make carry weapon visible %s", o->to_string().c_str());
           TRACE_AND_INDENT();
@@ -114,11 +114,11 @@ void Thing::hooks_remove()
         }
       }
 
-      if (id == o->equip_id_use_anim_get(e)) {
+      if (id == o->equip_id_use_anim(e)) {
         err("Weapon use anim is still attached");
       }
 
-      if (id == o->equip_id_carry_anim_get(e)) {
+      if (id == o->equip_id_carry_anim(e)) {
         err("Weapon carry anim is still attached");
       }
     }
@@ -154,7 +154,7 @@ void Thing::hooks_remove()
   //
   FOR_ALL_EQUIP(e)
   {
-    Thingp item = equip_carry_anim_get(e);
+    Thingp item = equip_carry_anim(e);
     if (item) {
       verify(MTYPE_THING, item);
       if (is_loggable()) {
@@ -168,7 +168,7 @@ void Thing::hooks_remove()
 
   FOR_ALL_EQUIP(e)
   {
-    Thingp item = equip_use_anim_get(e);
+    Thingp item = equip_use_anim(e);
     if (item) {
       verify(MTYPE_THING, item);
       if (is_loggable()) {
