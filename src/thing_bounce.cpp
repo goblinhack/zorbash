@@ -30,29 +30,29 @@ float Thing::bounce_get(void)
 
   auto t = time_get_time_ms_cached();
 
-  if (t >= ts_bounce_end_get()) {
+  if (t >= ts_bounce_end()) {
     is_bouncing = false;
 
     if (bounce_count() == 255) {
       //
       // Bounce forever
       //
-      bounce(bounce_height_get() * bounce_fade_get(), bounce_fade_get(),
-             (float) (ts_bounce_end_get() - ts_bounce_begin_get()) * bounce_fade_get(), bounce_count());
+      bounce(bounce_height_curr() * bounce_fade_curr(), bounce_fade_curr(),
+             (float) (ts_bounce_end() - ts_bounce_begin()) * bounce_fade_curr(), bounce_count());
     } else if (bounce_count()) {
-      bounce(bounce_height_get() * bounce_fade_get(), bounce_fade_get(),
-             (float) (ts_bounce_end_get() - ts_bounce_begin_get()) * bounce_fade_get(), bounce_count() - 1);
+      bounce(bounce_height_curr() * bounce_fade_curr(), bounce_fade_curr(),
+             (float) (ts_bounce_end() - ts_bounce_begin()) * bounce_fade_curr(), bounce_count() - 1);
     }
 
     return 0;
   }
 
-  float time_step = (float) (t - ts_bounce_begin_get()) / (float) (ts_bounce_end_get() - ts_bounce_begin_get());
+  float time_step = (float) (t - ts_bounce_begin()) / (float) (ts_bounce_end() - ts_bounce_begin());
 
   float height = 1.0;
 
   height *= sin(time_step * RAD_180);
-  height *= bounce_height_get();
+  height *= bounce_height_curr();
 
   return (height);
 }

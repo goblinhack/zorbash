@@ -113,7 +113,7 @@ float Thing::fall_get(void)
 
   auto ts = time_get_time_ms_cached();
 
-  if (ts >= ts_fall_end_get()) {
+  if (ts >= ts_fall_end()) {
     is_falling = false;
     dbg("End of falling timestamp");
     TRACE_AND_INDENT();
@@ -130,7 +130,7 @@ float Thing::fall_get(void)
     return 0;
   }
 
-  float time_step = (float) (ts - ts_fall_begin_get()) / (float) (ts_fall_end_get() - ts_fall_begin_get());
+  float time_step = (float) (ts - ts_fall_begin()) / (float) (ts_fall_end() - ts_fall_begin());
   dbg("Is currently falling, dt %f", time_step);
 
   //
@@ -147,7 +147,7 @@ float Thing::fall_get(void)
     is_waiting_to_leave_level_has_completed_fall = true;
   }
 
-  float height = fall_height_get() * time_step;
+  float height = fall_height_curr() * time_step;
 
   return (height);
 }
