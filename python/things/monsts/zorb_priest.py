@@ -15,6 +15,7 @@ def tp_init(name, text_name):
     self = zorb_all.tp_init(name, text_name)
     my.long_text_description_extra(self, "This particular zorblin is well trained in the martial arts and prefers to fight bare fisted.")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
+    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
     my.on_born_do(self, "me.on_born()")
     my.text_description(self, "A master in physical punishment.")
     my.stat_str(self, 12)

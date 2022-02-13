@@ -2,6 +2,11 @@ import my
 import tp
 
 
+def on_you_natural_attack(me, x, y):
+    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
+
+
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
     my.aggression_level_pct(self, 100)
@@ -56,6 +61,7 @@ def tp_init(name, text_name):
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
+    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
     my.rarity(self, my.RARITY_VERY_RARE)
     my.resurrect_dice(self, "1d10+30")
     my.stat_con(self, 25)
@@ -91,11 +97,10 @@ def tp_init(name, text_name):
     my.tile(self, tile=name + ".3.dead", is_resurrecting=True, delay_ms=delay)
     my.tile(self, tile=name + ".2.dead", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-        tile=name + ".1.dead",
-        is_resurrecting=True,
-        is_end_of_anim=True,
-        is_alive_on_end_of_anim=True,
-    )
+            tile=name + ".1.dead",
+            is_resurrecting=True,
+            is_end_of_anim=True,
+            is_alive_on_end_of_anim=True)
 
     my.tp_update(self)
 

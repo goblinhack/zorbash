@@ -11,6 +11,7 @@ def tp_init(name, text_name):
     self = zorb_all.tp_init(name, text_name)
     my.long_text_description_extra(self, "This particular zorblin is world weary and longing for an early retirement. Can you help?.")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
+    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
     my.text_description(self, "A very war-weary goblin.")
     my.is_carrier_of_treasure_class_b(self, True)
     my.is_carrier_of_weapon_class_a(self, True)

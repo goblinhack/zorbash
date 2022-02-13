@@ -3,9 +3,8 @@ import tp
 
 
 def on_you_natural_attack(me, x, y):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
@@ -119,6 +118,7 @@ def tp_init(name, text_name):
     my.on_death_drop_all_items(self, True)
     my.on_you_are_hit_but_still_alive_do(self, "zorb_all.on_you_are_hit_but_still_alive()")
     my.on_you_miss_do(self, "zorb_all.on_you_miss_do()")
+    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
     my.on_you_natural_attack_do(self, "zorb_all.on_you_natural_attack()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina(self, 100)
