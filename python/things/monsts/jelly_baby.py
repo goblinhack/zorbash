@@ -15,6 +15,10 @@ def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.non_pcg_randint(1, 9)}")
 
 
+def on_jump(me, x, y):
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
+
+
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
     my.aggression_level_pct(self, 100)
@@ -85,6 +89,7 @@ def tp_init(name, text_name):
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
     my.on_death_do(self, "me.on_death()")
+    my.on_jump_do(self, "me.on_jump()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_con(self, 10)

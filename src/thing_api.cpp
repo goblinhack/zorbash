@@ -7255,6 +7255,12 @@ const std::string &Thing::on_fall_do(void)
   return (tp()->on_fall_do());
 }
 
+const std::string &Thing::on_jump_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_jump_do());
+}
+
 const std::string &Thing::on_you_are_on_fire_do(void)
 {
   TRACE_NO_INDENT();

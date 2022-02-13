@@ -617,6 +617,7 @@ public:
   const std::string &on_enchant_do(void);
   const std::string &on_equip_do(void);
   const std::string &on_fall_do(void);
+  const std::string &on_jump_do(void);
   const std::string &on_final_use_do(void);
   const std::string &on_firing_at_something_do(void);
   const std::string &on_idle_tick_freq_dice_str(void);
@@ -2015,6 +2016,7 @@ public:
   void on_enchant(void);
   void on_equip(Thingp what);
   void on_fall(void);
+  void on_jump(void);
   void on_final_use(Thingp what);
   void on_final_use(Thingp what, Thingp target);
   void on_fire(void);

@@ -7,6 +7,8 @@
 <!-- luck trap                                                                                                                                    -->
 <!-- luck and enchanted stuff                                                                                                                     -->
 <!-- weight                                                                                                                                       -->
+<!-- animate grass                                                                                                                                -->
+<!-- slime noise on jump                                                                                                                          -->
 <!-- haste                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
