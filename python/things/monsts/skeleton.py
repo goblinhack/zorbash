@@ -160,11 +160,10 @@ def tp_init(name, text_name):
     my.tile(self, "skeleton.3.dead", is_resurrecting=True, delay_ms=delay)
     my.tile(self, "skeleton.2.dead", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-        "skeleton.1.dead",
-        is_resurrecting=True,
-        is_end_of_anim=True,
-        is_alive_on_end_of_anim=True,
-    )
+            "skeleton.1.dead",
+            is_resurrecting=True,
+            is_end_of_anim=True,
+            is_alive_on_end_of_anim=True)
 
     my.tp_update(self)
 

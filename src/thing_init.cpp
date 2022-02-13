@@ -195,6 +195,11 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     is_facing_left = false;
   }
 
+  if (owner) {
+    dir            = owner->dir;
+    is_facing_left = owner->is_facing_left;
+  }
+
   update();
 
   if (unlikely(tpp->is_ascend_dungeon())) {

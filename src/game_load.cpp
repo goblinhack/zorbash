@@ -379,6 +379,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->is_in_water = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_jumping = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_moving = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->is_waiting = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_offscreen = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_open = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_resurrected = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

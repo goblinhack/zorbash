@@ -117,6 +117,7 @@ public:
   uint64_t is_in_water                                  : 1 {};
   uint64_t is_jumping                                   : 1 {};
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
+  uint64_t is_waiting                                   : 1 {}; // is waiting on this tick
   uint64_t is_offscreen                                 : 1 {};
   uint64_t is_open                                      : 1 {};
   uint64_t is_resurrected                               : 1 {}; // has finished resurrecting

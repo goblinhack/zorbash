@@ -225,7 +225,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Don't let minions wander too far from their mob.
   //
-  auto ai = maybe_aip();
+  auto ai  = maybe_aip();
   auto mob = top_mob();
   if (mob) {
     if (distance_mob_max_float()) {
@@ -615,6 +615,18 @@ void Thing::update_interpolated_position(void)
   fpoint new_pos = make_fpoint(curr_at);
   auto   tpp     = tp();
   float  step    = game->tick_dt;
+
+  //
+  // Handle fast moving things
+  //
+  if (level->player) {
+    if (move_speed()) {
+      step *= ((float) move_speed()) / level->player->move_speed();
+      if (step > 1) {
+        step = 1;
+      }
+    }
+  }
 
   auto p = top_owner();
   if ((p && p->is_falling) || is_falling) {

@@ -1118,7 +1118,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // If alive, one hit per tick
       //
-      aip()->recently_hit_by[ real_hitter->id ] = true;
+      aip()->recently_hit_by[ real_hitter->id ]++;
     }
   }
 
@@ -1186,8 +1186,24 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
   //
   if (maybe_aip()) {
     if (aip()->recently_hit_by.find(real_hitter->id) != aip()->recently_hit_by.end()) {
-      IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
-      return false;
+      //
+      // Faster things get more moves and hits
+      //
+      if (move_speed() && real_hitter->move_speed()) {
+        auto hit_count     = aip()->recently_hit_by[ real_hitter->id ];
+        auto max_hit_count = real_hitter->move_speed() / move_speed();
+
+        if (hit_count >= max_hit_count) {
+          IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
+          return false;
+        }
+      } else {
+        //
+        // Static things hit one time
+        //
+        IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
+        return false;
+      }
     }
   }
 

@@ -271,6 +271,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.gfx_animated(self, True)
     my.gfx_anim_use(self, "attack_punch")
     my.gfx_bounce_on_move(self, True)
+    my.move_speed(self, 100)
     my.gfx_flickers(self, True)
     my.gfx_short_shadow_caster(self, True)
     my.gfx_show_outlined(self, True)
