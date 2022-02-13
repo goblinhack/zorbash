@@ -18,7 +18,7 @@ void Thing::poison_tick(void)
     return;
   }
 
-  auto old_poison = poisoned_amount_get();
+  auto old_poison = poisoned_amount();
   if (! old_poison) {
     return;
   }
