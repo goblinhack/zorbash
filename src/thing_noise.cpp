@@ -26,7 +26,7 @@ int Thing::noise(void)
   }
 }
 
-int Thing::noise_total_get(void)
+int Thing::noise_total(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {

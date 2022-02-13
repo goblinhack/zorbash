@@ -15,7 +15,7 @@
 //
 // Return a score, higher is better for perceived value to you
 //
-int Thing::value_get(Thingp it)
+int Thing::value(Thingp it)
 {
   TRACE_NO_INDENT();
   int value = 0;
@@ -54,7 +54,7 @@ int Thing::value_get(Thingp it)
   value += it->nutrition_get();
   value += health_boost_would_occur(it->nutrition_get());
   value += it->damage_max();
-  value += it->gold_value_get();
+  value += it->gold_value();
   //
   // Enchant is included in damage, but enchanting also has other benefits like
   // less corrosive. So give a boost in relation to the enchangt level.

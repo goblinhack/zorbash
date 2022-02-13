@@ -39,7 +39,7 @@ int Thing::attack_modifier_get(const Thingp victim)
   //
   // Add str bonus to att
   //
-  int str_total = stat_str_total_get();
+  int str_total = stat_str_total();
   stat          = stat_to_bonus(str_total);
   stat += stat_att_mod();
   prev = stat;

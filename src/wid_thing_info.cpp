@@ -1223,7 +1223,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->stat_str_total_get();
+    auto stat = t->stat_str_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %2d%3s", stat,
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
@@ -1239,7 +1239,7 @@ void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  auto n = t->noise_total_get();
+  auto n = t->noise_total();
   if (n) {
     if (t->is_item()) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise when carried       %3d", n);

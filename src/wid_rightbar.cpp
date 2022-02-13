@@ -164,7 +164,7 @@ static void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rel
 
   {
     auto val = player->stat_str_get();
-    auto tot = player->stat_str_total_get();
+    auto tot = player->stat_str_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total strength including all items and modifiers is %d.", val);
@@ -755,7 +755,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_str_total_get());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_str_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }

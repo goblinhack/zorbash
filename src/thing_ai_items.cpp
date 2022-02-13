@@ -93,8 +93,8 @@ bool Thing::try_to_use_weapon(void)
   Thingp best_weapon = nullptr;
   carried_weapon_highest_value(&best_weapon);
   if (best_weapon) {
-    auto curr_weapon_val = curr_weapon ? value_get(curr_weapon) : 0;
-    auto best_weapon_val = value_get(best_weapon);
+    auto curr_weapon_val = curr_weapon ? value(curr_weapon) : 0;
+    auto best_weapon_val = value(best_weapon);
 
     if (! curr_weapon) {
       if (use(best_weapon, MONST_EQUIP_WEAPON)) {
@@ -130,8 +130,8 @@ bool Thing::try_to_use_armor(void)
   Thingp best_armor = nullptr;
   carried_armor_highest_value(&best_armor);
   if (best_armor) {
-    auto curr_armor_val = curr_armor ? value_get(curr_armor) : 0;
-    auto best_armor_val = value_get(best_armor);
+    auto curr_armor_val = curr_armor ? value(curr_armor) : 0;
+    auto best_armor_val = value(best_armor);
 
     if (! curr_armor) {
       if (use(best_armor, MONST_EQUIP_ARMOR)) {
@@ -167,8 +167,8 @@ bool Thing::try_to_use_helmet(void)
   Thingp best_helmet = nullptr;
   carried_helmet_highest_value(&best_helmet);
   if (best_helmet) {
-    auto curr_helmet_val = curr_helmet ? value_get(curr_helmet) : 0;
-    auto best_helmet_val = value_get(best_helmet);
+    auto curr_helmet_val = curr_helmet ? value(curr_helmet) : 0;
+    auto best_helmet_val = value(best_helmet);
 
     if (! curr_helmet) {
       if (use(best_helmet, MONST_EQUIP_HELMET)) {
@@ -204,8 +204,8 @@ bool Thing::try_to_use_amulet(void)
   Thingp best_amulet = nullptr;
   carried_amulet_highest_value(&best_amulet);
   if (best_amulet) {
-    auto curr_amulet_val = curr_amulet ? value_get(curr_amulet) : 0;
-    auto best_amulet_val = value_get(best_amulet);
+    auto curr_amulet_val = curr_amulet ? value(curr_amulet) : 0;
+    auto best_amulet_val = value(best_amulet);
 
     if (! curr_amulet) {
       if (use(best_amulet, MONST_EQUIP_AMULET)) {
@@ -241,8 +241,8 @@ bool Thing::try_to_use_boots(void)
   Thingp best_boots = nullptr;
   carried_boots_highest_value(&best_boots);
   if (best_boots) {
-    auto curr_boots_val = curr_boots ? value_get(curr_boots) : 0;
-    auto best_boots_val = value_get(best_boots);
+    auto curr_boots_val = curr_boots ? value(curr_boots) : 0;
+    auto best_boots_val = value(best_boots);
 
     if (! curr_boots) {
       if (use(best_boots, MONST_EQUIP_BOOTS)) {
@@ -278,8 +278,8 @@ bool Thing::try_to_use_gauntlet(void)
   Thingp best_gauntlet = nullptr;
   carried_gauntlet_highest_value(&best_gauntlet);
   if (best_gauntlet) {
-    auto curr_gauntlet_val = curr_gauntlet ? value_get(curr_gauntlet) : 0;
-    auto best_gauntlet_val = value_get(best_gauntlet);
+    auto curr_gauntlet_val = curr_gauntlet ? value(curr_gauntlet) : 0;
+    auto best_gauntlet_val = value(best_gauntlet);
 
     if (! curr_gauntlet) {
       if (use(best_gauntlet, MONST_EQUIP_GAUNTLET)) {
@@ -316,8 +316,8 @@ bool Thing::try_to_use_shield(void)
   Thingp best_shield = nullptr;
   carried_shield_highest_value(&best_shield);
   if (best_shield) {
-    auto curr_shield_val = curr_shield ? value_get(curr_shield) : 0;
-    auto best_shield_val = value_get(best_shield);
+    auto curr_shield_val = curr_shield ? value(curr_shield) : 0;
+    auto best_shield_val = value(best_shield);
 
     if (! curr_shield) {
       if (use(best_shield, MONST_EQUIP_SHIELD)) {
@@ -353,8 +353,8 @@ bool Thing::try_to_use_cloak(void)
   Thingp best_cloak = nullptr;
   carried_cloak_highest_value(&best_cloak);
   if (best_cloak) {
-    auto curr_cloak_val = curr_cloak ? value_get(curr_cloak) : 0;
-    auto best_cloak_val = value_get(best_cloak);
+    auto curr_cloak_val = curr_cloak ? value(curr_cloak) : 0;
+    auto best_cloak_val = value(best_cloak);
 
     if (! curr_cloak) {
       if (use(best_cloak, MONST_EQUIP_CLOAK)) {
@@ -395,9 +395,9 @@ bool Thing::try_to_use_rings(void)
 
   carried_ring_highest_value(&best_ring);
   if (best_ring) {
-    auto curr_ring1_val = curr_ring1 ? value_get(curr_ring1) : 0;
-    auto curr_ring2_val = curr_ring2 ? value_get(curr_ring2) : 0;
-    auto best_ring_val  = value_get(best_ring);
+    auto curr_ring1_val = curr_ring1 ? value(curr_ring1) : 0;
+    auto curr_ring2_val = curr_ring2 ? value(curr_ring2) : 0;
+    auto best_ring_val  = value(best_ring);
 
     if (! curr_ring1) {
       if (use(best_ring, MONST_EQUIP_RING1)) {

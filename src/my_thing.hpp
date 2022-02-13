@@ -913,7 +913,7 @@ public:
   int gold_incr(int);
   int gold_incr(void);
   int gold_set(int);
-  int gold_value_get(void);
+  int gold_value(void);
   int group_get(void);
   int health_boost(int v);
   int health_decr(int);
@@ -1275,7 +1275,7 @@ public:
   int noise_on_you_are_hit_and_now_dead(void);
   int noise_on_you_are_hit_but_still_alive(void);
   int noise_set(int);
-  int noise_total_get(void);
+  int noise_total(void);
   int noise(void);
   int normal_placement_rules(void);
   int nutrition_get(void);
@@ -1507,7 +1507,7 @@ public:
   int stat_str_mod_incr(void);
   int stat_str_mod_set(int);
   int stat_str_set(int);
-  int stat_str_total_get(void);
+  int stat_str_total(void);
   int stuck_count_decr(int);
   int stuck_count_decr(void);
   int stuck_count(void);
@@ -1667,7 +1667,7 @@ public:
   int unused_flag99(void);
   int unused_flag9(void);
   int update_light_power(void);
-  int value_get(const Thingp it);
+  int value(const Thingp it);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);

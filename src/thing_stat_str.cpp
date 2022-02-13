@@ -15,7 +15,7 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-int Thing::stat_str_total_get(void)
+int Thing::stat_str_total(void)
 {
   TRACE_NO_INDENT();
 
