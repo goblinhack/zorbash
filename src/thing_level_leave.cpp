@@ -34,14 +34,14 @@ void Thing::level_leave(void)
   // release_followers();
 
   {
-    auto it = immediate_mob_get();
+    auto it = immediate_mob();
     if (it) {
       remove_mob();
     }
   }
 
   {
-    auto it = leader_get();
+    auto it = leader();
     if (it) {
       remove_leader();
     }

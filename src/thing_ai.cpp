@@ -438,7 +438,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
 
       if (too_far_from_leader(p)) {
-        if (distance_from_leader_get() < too_far_from_leader(p)) {
+        if (distance_from_leader() < too_far_from_leader(p)) {
           continue;
         }
       }
@@ -804,11 +804,11 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
   auto ai = aip();
 
-  auto leader = leader_get();
-  if (leader) {
+  auto l = leader();
+  if (l) {
     if (too_far_from_leader()) {
-      point p = leader->curr_at;
-      GOAL_ADD(GOAL_PRIO_HIGH, 100, "follow-leader", leader);
+      point p = l->curr_at;
+      GOAL_ADD(GOAL_PRIO_HIGH, 100, "follow-leader", l);
     }
   }
 
@@ -858,7 +858,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your mob
         //
-        if (it->is_mob() && (top_mob_get() == this)) {
+        if (it->is_mob() && (top_mob() == this)) {
           AI_LOG("My mob spawner", it);
           continue;
         }
@@ -866,7 +866,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your fellow minion
         //
-        if (it->is_minion() && (it->top_mob_get() == top_mob_get())) {
+        if (it->is_minion() && (it->top_mob() == top_mob())) {
           AI_LOG("Fellow minion", it);
           continue;
         }
@@ -874,8 +874,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your leader
         //
-        auto leader = leader_get();
-        if (leader == this) {
+        auto l = leader();
+        if (l == this) {
           AI_LOG("Same leader", it);
           continue;
         }
@@ -884,8 +884,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't attack your fellow follower
         //
         if (it->is_able_to_follow()) {
-          if (leader) {
-            if (it->leader_get() == leader) {
+          if (l) {
+            if (it->leader() == l) {
               AI_LOG("Fellow follower", it);
               continue;
             }
@@ -974,8 +974,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
 
             if (is_enemy(it) && (dist <= max_dist)) {
-              if (! is_fearless() && (is_to_be_avoided(it) || is_dangerous(it)) &&
-                  (health() < health_max() / 2)) {
+              if (! is_fearless() && (is_to_be_avoided(it) || is_dangerous(it)) && (health() < health_max() / 2)) {
                 //
                 // Low on health. Best to avoid this enemy.
                 //
@@ -1119,7 +1118,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
 
     if (too_far_from_leader(p)) {
-      if (distance_from_leader_get() < too_far_from_leader(p)) {
+      if (distance_from_leader() < too_far_from_leader(p)) {
         continue;
       }
     }
@@ -1461,7 +1460,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
 
     if (is_minion()) {
-      auto mob = top_mob_get();
+      auto mob = top_mob();
       if (mob) {
         auto dist = distance(p, mob->curr_at);
         auto msg  = string_sprintf("search cand @(%d,%d) dist-from-owner %f", p.x, p.y, dist);

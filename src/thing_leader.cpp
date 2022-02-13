@@ -84,34 +84,34 @@ void Thing::on_death_of_my_leader(void)
   }
 }
 
-float Thing::distance_from_leader_get(void)
+float Thing::distance_from_leader(void)
 {
-  auto leader = leader_get();
-  if (! leader) {
+  auto l = leader();
+  if (! l) {
     return -1;
   }
 
-  return distance(curr_at, leader->curr_at);
+  return distance(curr_at, l->curr_at);
 }
 
-float Thing::distance_from_leader_get(point p)
+float Thing::distance_from_leader(point p)
 {
-  auto leader = leader_get();
-  if (! leader) {
+  auto l = leader();
+  if (! l) {
     return -1;
   }
 
-  return distance(p, leader->curr_at);
+  return distance(p, l->curr_at);
 }
 
 bool Thing::too_far_from_leader(void)
 {
-  auto leader = leader_get();
-  if (! leader) {
+  auto l = leader();
+  if (! l) {
     return false;
   }
 
-  if (distance(curr_at, leader->curr_at) > distance_leader_max_float()) {
+  if (distance(curr_at, l->curr_at) > distance_leader_max_float()) {
     return true;
   }
   return false;
@@ -119,12 +119,12 @@ bool Thing::too_far_from_leader(void)
 
 bool Thing::too_far_from_leader(point p)
 {
-  auto leader = leader_get();
-  if (! leader) {
+  auto l = leader();
+  if (! l) {
     return false;
   }
 
-  if (distance(p, leader->curr_at) > distance_leader_max_float()) {
+  if (distance(p, l->curr_at) > distance_leader_max_float()) {
     return true;
   }
   return false;
@@ -132,18 +132,18 @@ bool Thing::too_far_from_leader(point p)
 
 bool Thing::too_far_from_leader(point p, float delta)
 {
-  auto leader = leader_get();
-  if (! leader) {
+  auto l = leader();
+  if (! l) {
     return false;
   }
 
-  if (distance(p, leader->curr_at) > distance_leader_max_float() + delta) {
+  if (distance(p, l->curr_at) > distance_leader_max_float() + delta) {
     return true;
   }
   return false;
 }
 
-Thingp Thing::leader_get(void)
+Thingp Thing::leader(void)
 {
   TRACE_NO_INDENT();
   auto id = leader_id_get();
@@ -158,28 +158,28 @@ Thingp Thing::leader_get(void)
   }
 }
 
-void Thing::leader_set(Thingp leader)
+void Thing::leader_set(Thingp l)
 {
   TRACE_NO_INDENT();
 
-  if (leader) {
-    verify(MTYPE_THING, leader);
+  if (l) {
+    verify(MTYPE_THING, l);
   }
 
-  auto old_leader = leader_get();
+  auto old_leader = leader();
   if (old_leader) {
-    if (old_leader == leader) {
+    if (old_leader == l) {
       return;
     }
 
-    if (leader) {
-      dbg("Will change leader %s->%s", old_leader->to_string().c_str(), leader->to_string().c_str());
+    if (l) {
+      dbg("Will change leader %s->%s", old_leader->to_string().c_str(), l->to_string().c_str());
     } else {
       dbg("Will remove leader %s", old_leader->to_string().c_str());
     }
   } else {
-    if (leader) {
-      dbg("Will set leader to %s", leader->to_string().c_str());
+    if (l) {
+      dbg("Will set leader to %s", l->to_string().c_str());
     }
   }
 
@@ -187,21 +187,21 @@ void Thing::leader_set(Thingp leader)
     old_leader->follower_count_decr();
   }
 
-  if (leader) {
-    if (leader == this) {
+  if (l) {
+    if (l == this) {
       //
       // I am the leader
       //
       dbg("I am the leader");
-      leader->on_you_are_declared_leader();
+      l->on_you_are_declared_leader();
     } else {
       //
       // You are being led
       //
-      leader_id_set(leader->id);
-      leader->follower_count_incr();
+      leader_id_set(l->id);
+      l->follower_count_incr();
       dbg("Leader set");
-      on_you_are_declared_a_follower(leader);
+      on_you_are_declared_a_follower(l);
     }
   } else {
     leader_id_set(NoThingId);
@@ -213,7 +213,7 @@ void Thing::remove_leader(void)
 {
   TRACE_NO_INDENT();
 
-  auto old_leader = leader_get();
+  auto old_leader = leader();
   if (! old_leader) {
     return;
   }
@@ -242,7 +242,7 @@ void Thing::release_followers(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto follower = p.second;
-      auto o        = follower->leader_get();
+      auto o        = follower->leader();
       if (o && (o == this)) {
         follower->remove_leader();
       }
@@ -254,12 +254,12 @@ void Thing::notify_of_death_of_my_leader(void)
 {
   TRACE_NO_INDENT();
 
-  auto leader = leader_get();
-  if (! leader) {
+  auto l = leader();
+  if (! l) {
     return;
   }
 
-  dbg("Leader dead: %s", leader->to_string().c_str());
+  dbg("Leader dead: %s", l->to_string().c_str());
   on_death_of_my_leader();
 }
 
@@ -281,7 +281,7 @@ void Thing::notify_followers_of_death_of_my_leader(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto follower = p.second;
-      auto o        = follower->leader_get();
+      auto o        = follower->leader();
       if (o && (o == this)) {
         follower->notify_of_death_of_my_leader();
       }
@@ -308,7 +308,7 @@ std::list< Thingp > Thing::all_followers_get(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto follower = p.second;
-      auto leader   = follower->leader_get();
+      auto leader   = follower->leader();
       if (leader && (leader == this)) {
         out.push_back(follower);
       }
@@ -376,8 +376,8 @@ bool Thing::same_leader(Thingp it)
     return true;
   }
 
-  Thingp my_leader  = me->leader_get();
-  Thingp its_leader = it->leader_get();
+  Thingp my_leader  = me->leader();
+  Thingp its_leader = it->leader();
 
   if (my_leader) {
     dbg("my leader: %s", my_leader->to_short_string().c_str());

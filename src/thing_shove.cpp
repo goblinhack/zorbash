@@ -43,15 +43,15 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_mob  = top_mob_get();
-  auto its_mob = it->top_mob_get();
+  auto my_mob  = top_mob();
+  auto its_mob = it->top_mob();
   if (my_mob && (my_mob == its_mob)) {
     dbg("Not able to shove (same master) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_leader  = leader_get();
-  auto its_leader = it->leader_get();
+  auto my_leader  = leader();
+  auto its_leader = it->leader();
   if (my_leader && (my_leader == its_leader)) {
     dbg("Not able to shove (same leader) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);

@@ -49,8 +49,8 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
-  auto my_mob  = top_mob_get();
-  auto its_mob = victim->top_mob_get();
+  auto my_mob  = top_mob();
+  auto its_mob = victim->top_mob();
   if (my_mob && (my_mob == its_mob)) {
     return false;
   }

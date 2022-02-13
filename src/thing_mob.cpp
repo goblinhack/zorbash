@@ -10,9 +10,9 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 
-float Thing::distance_from_mob_get(void)
+float Thing::distance_from_mob(void)
 {
-  auto mob = top_mob_get();
+  auto mob = top_mob();
   if (! mob) {
     return -1;
   }
@@ -20,9 +20,9 @@ float Thing::distance_from_mob_get(void)
   return distance(curr_at, mob->curr_at);
 }
 
-float Thing::distance_from_mob_get(point p)
+float Thing::distance_from_mob(point p)
 {
-  auto mob = top_mob_get();
+  auto mob = top_mob();
   if (! mob) {
     return -1;
   }
@@ -32,7 +32,7 @@ float Thing::distance_from_mob_get(point p)
 
 bool Thing::too_far_from_mob(void)
 {
-  auto mob = top_mob_get();
+  auto mob = top_mob();
   if (! mob) {
     return false;
   }
@@ -45,7 +45,7 @@ bool Thing::too_far_from_mob(void)
 
 bool Thing::too_far_from_mob(point p)
 {
-  auto mob = top_mob_get();
+  auto mob = top_mob();
   if (! mob) {
     return false;
   }
@@ -58,7 +58,7 @@ bool Thing::too_far_from_mob(point p)
 
 bool Thing::too_far_from_mob(point p, float delta)
 {
-  auto mob = top_mob_get();
+  auto mob = top_mob();
   if (! mob) {
     return false;
   }
@@ -69,7 +69,7 @@ bool Thing::too_far_from_mob(point p, float delta)
   return false;
 }
 
-Thingp Thing::top_mob_get(void)
+Thingp Thing::top_mob(void)
 {
   TRACE_NO_INDENT();
   auto id = immediate_mob_id_get();
@@ -79,7 +79,7 @@ Thingp Thing::top_mob_get(void)
       return nullptr;
     }
     if (unlikely(i->immediate_mob_id_get().ok())) {
-      return i->immediate_mob_get();
+      return i->immediate_mob();
     }
     return i;
   } else {
@@ -87,7 +87,7 @@ Thingp Thing::top_mob_get(void)
   }
 }
 
-Thingp Thing::immediate_mob_get(void)
+Thingp Thing::immediate_mob(void)
 {
   TRACE_NO_INDENT();
   auto id = immediate_mob_id_get();
@@ -109,7 +109,7 @@ void Thing::mob_set(Thingp mob)
     verify(MTYPE_THING, mob);
   }
 
-  auto old_mob = immediate_mob_get();
+  auto old_mob = immediate_mob();
   if (old_mob) {
     if (old_mob == mob) {
       return;
@@ -140,7 +140,7 @@ void Thing::mob_set(Thingp mob)
 void Thing::remove_mob(void)
 {
   TRACE_NO_INDENT();
-  auto old_mob = immediate_mob_get();
+  auto old_mob = immediate_mob();
   if (! old_mob) {
     err("No mob");
     return;
@@ -178,7 +178,7 @@ void Thing::destroy_minions(Thingp defeater)
   {
     for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
-      auto o      = minion->immediate_mob_get();
+      auto o      = minion->immediate_mob();
       if (o && (o == this)) {
         minion->remove_mob();
         minion->is_resurrection_blocked = true;
@@ -209,7 +209,7 @@ void Thing::unleash_minions(void)
   {
     for (auto p : level->all_things[ group ]) {
       auto minion = p.second;
-      auto o      = minion->immediate_mob_get();
+      auto o      = minion->immediate_mob();
       if (o && (o == this)) {
         minion->remove_mob();
       }
@@ -239,12 +239,12 @@ bool Thing::same_mob(Thingp it)
     return false;
   }
 
-  auto mob = top_mob_get();
+  auto mob = top_mob();
   if (! mob) {
     return false;
   }
 
-  auto its_mob = it->top_mob_get();
+  auto its_mob = it->top_mob();
   if (! its_mob) {
     return false;
   }
