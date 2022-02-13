@@ -32,7 +32,7 @@ const std::string Thing::damage_crush_dice_str(void)
   return (tp()->damage_crush_dice_str());
 }
 
-int Thing::damage_crush_get(void)
+int Thing::damage_crush(void)
 {
   TRACE_NO_INDENT();
   auto roll = tp()->damage_crush_dice().roll();

@@ -1325,7 +1325,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
   w->log(danger_level);
   w->log(UI_LOGGING_EMPTY_LINE);
 
-  auto monst_max_damage = t->damage_max_get();
+  auto monst_max_damage = t->damage_max();
   if (monst_max_damage != 0) {
     auto monst_defeat_count = player->health_get() / monst_max_damage;
 
@@ -1351,9 +1351,9 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     }
   }
 
-  auto player_max_damage = t->damage_max_get();
+  auto player_max_damage = t->damage_max();
   if (player_max_damage != 0) {
-    auto player_defeat_count = t->health_get() / player->damage_max_get();
+    auto player_defeat_count = t->health_get() / player->damage_max();
 
     //
     // Oh dear. The monst is toast.

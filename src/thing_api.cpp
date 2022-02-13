@@ -7096,7 +7096,7 @@ ThingId Thing::on_fire_anim_id_set(ThingId v)
 ////////////////////////////////////////////////////////////////////////////
 // current_damage
 ////////////////////////////////////////////////////////////////////////////
-int Thing::current_damage_get(void)
+int Thing::current_damage(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
@@ -7105,7 +7105,7 @@ int Thing::current_damage_get(void)
   }
   auto owner = immediate_owner_get();
   if (owner && (owner != this)) {
-    v += owner->current_damage_get();
+    v += owner->current_damage();
   }
   return v;
 }

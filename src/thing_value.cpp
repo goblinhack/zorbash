@@ -53,7 +53,7 @@ int Thing::value_get(Thingp it)
   //
   value += it->nutrition_get();
   value += health_boost_would_occur(it->nutrition_get());
-  value += it->damage_max_get();
+  value += it->damage_max();
   value += it->gold_value_get();
   //
   // Enchant is included in damage, but enchanting also has other benefits like

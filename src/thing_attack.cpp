@@ -533,9 +533,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set || prefer_natural_attack) {
     if (d1000() < damage_poison_chance_d1000()) {
-      int damage_poison = damage_poison_get();
-      if (damage_poison > 0) {
-        damage        = damage_poison;
+      int damage_poison_val = damage_poison();
+      if (damage_poison_val > 0) {
+        damage        = damage_poison_val;
         damage_set    = true;
         attack_poison = true;
         dbg("Set poison damage %d", damage);
@@ -547,9 +547,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future1_chance_d1000()) {
-      int damage_future1 = damage_future1_get();
-      if (damage_future1 > 0) {
-        damage         = damage_future1;
+      int damage_future1_val = damage_future1();
+      if (damage_future1_val > 0) {
+        damage         = damage_future1_val;
         damage_set     = true;
         attack_future1 = true;
         dbg("Set future1 damage %d", damage);
@@ -562,9 +562,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future2_chance_d1000()) {
-      int damage_future2 = damage_future2_get();
-      if (damage_future2 > 0) {
-        damage         = damage_future2;
+      int damage_future2_val = damage_future2();
+      if (damage_future2_val > 0) {
+        damage         = damage_future2_val;
         damage_set     = true;
         attack_future2 = true;
         dbg("Set future2 damage %d", damage);
@@ -577,9 +577,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_future3_chance_d1000()) {
-      int damage_future3 = damage_future3_get();
-      if (damage_future3 > 0) {
-        damage         = damage_future3;
+      int damage_future3_val = damage_future3();
+      if (damage_future3_val > 0) {
+        damage         = damage_future3_val;
         damage_set     = true;
         attack_future3 = true;
         dbg("Set future3 damage %d", damage);
@@ -592,9 +592,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_cold_chance_d1000()) {
-      int damage_cold = damage_cold_get();
-      if (damage_cold > 0) {
-        damage      = damage_cold;
+      int damage_cold_val = damage_cold();
+      if (damage_cold_val > 0) {
+        damage      = damage_cold_val;
         damage_set  = true;
         attack_cold = true;
         dbg("Set cold damage %d", damage);
@@ -607,9 +607,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_fire_chance_d1000()) {
-      int damage_fire = damage_fire_get();
-      if (damage_fire > 0) {
-        damage      = damage_fire;
+      int damage_fire_val = damage_fire();
+      if (damage_fire_val > 0) {
+        damage      = damage_fire_val;
         damage_set  = true;
         attack_fire = true;
         dbg("Set fire damage %d", damage);
@@ -622,9 +622,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_crush_chance_d1000()) {
-      int damage_crush = damage_crush_get();
-      if (damage_crush > 0) {
-        damage       = damage_crush;
+      int damage_crush_val = damage_crush();
+      if (damage_crush_val > 0) {
+        damage       = damage_crush_val;
         damage_set   = true;
         attack_crush = true;
         dbg("Set crush damage %d", damage);
@@ -637,9 +637,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_lightning_chance_d1000()) {
-      int damage_lightning = damage_lightning_get();
-      if (damage_lightning > 0) {
-        damage           = damage_lightning;
+      int damage_lightning_val = damage_lightning();
+      if (damage_lightning_val > 0) {
+        damage           = damage_lightning_val;
         damage_set       = true;
         attack_lightning = true;
         dbg("Set lightning damage %d", damage);
@@ -652,9 +652,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_energy_chance_d1000()) {
-      int damage_energy = damage_energy_get();
-      if (damage_energy > 0) {
-        damage        = damage_energy;
+      int damage_energy_val = damage_energy();
+      if (damage_energy_val > 0) {
+        damage        = damage_energy_val;
         damage_set    = true;
         attack_energy = true;
         dbg("Set energy damage %d", damage);
@@ -667,9 +667,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_acid_chance_d1000()) {
-      int damage_acid = damage_acid_get();
-      if (damage_acid > 0) {
-        damage      = damage_acid;
+      int damage_acid_val = damage_acid();
+      if (damage_acid_val > 0) {
+        damage      = damage_acid_val;
         damage_set  = true;
         attack_acid = true;
         dbg("Set acid damage %d", damage);
@@ -682,9 +682,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_digest_chance_d1000()) {
-      int damage_digest = damage_digest_get();
-      if (damage_digest > 0) {
-        damage        = damage_digest;
+      int damage_digest_val = damage_digest();
+      if (damage_digest_val > 0) {
+        damage        = damage_digest_val;
         damage_set    = true;
         attack_digest = true;
         dbg("Set digest damage %d", damage);
@@ -697,9 +697,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set || prefer_natural_attack) {
     if (d1000() < damage_necrosis_chance_d1000()) {
-      int damage_necrosis = damage_necrosis_get();
-      if (damage_necrosis > 0) {
-        damage          = damage_necrosis;
+      int damage_necrosis_val = damage_necrosis();
+      if (damage_necrosis_val > 0) {
+        damage          = damage_necrosis_val;
         damage_set      = true;
         attack_necrosis = true;
         dbg("Set necro damage %d", damage);
@@ -712,9 +712,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set || prefer_natural_attack) {
     if (d1000() < damage_natural_attack_chance_d1000()) {
-      int damage_natural_attack = damage_natural_attack_get();
-      if (damage_natural_attack > 0) {
-        damage         = damage_natural_attack + stat_att;
+      int damage_natural_attack_val = damage_natural_attack();
+      if (damage_natural_attack_val > 0) {
+        damage         = damage_natural_attack_val + stat_att;
         damage_set     = true;
         attack_natural = true;
         dbg("Set natural damage %d", damage);
@@ -730,7 +730,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_melee_chance_d1000()) {
-      damage = damage_melee_get() + stat_att;
+      damage = damage_melee() + stat_att;
       if (damage > 0) {
         dbg("Set melee damage %d", damage);
         damage_set = true;
@@ -740,7 +740,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   if (! damage_set) {
     if (owner) {
       if (d1000() < owner->damage_melee_chance_d1000()) {
-        damage = damage_melee_get() + stat_att;
+        damage = damage_melee() + stat_att;
         if (damage > 0) {
           dbg("Set melee damage %d", damage);
           damage_set = true;
@@ -754,7 +754,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   //
   if (is_engulfer()) {
     if (victim->curr_at == curr_at) {
-      damage           = damage_digest_get();
+      damage           = damage_digest();
       attack_poison    = false;
       attack_future1   = false;
       attack_future2   = false;

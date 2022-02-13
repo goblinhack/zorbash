@@ -32,7 +32,7 @@ const std::string Thing::damage_energy_dice_str(void)
   return (tp()->damage_energy_dice_str());
 }
 
-int Thing::damage_energy_get(void)
+int Thing::damage_energy(void)
 {
   TRACE_NO_INDENT();
   auto roll = tp()->damage_energy_dice().roll();
