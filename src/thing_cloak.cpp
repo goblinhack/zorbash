@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 
-std::list< Thingp > Thing::cloak_list_get(void)
+std::list< Thingp > Thing::cloak_list(void)
 {
   TRACE_NO_INDENT();
 
@@ -91,7 +91,7 @@ int Thing::carried_cloak_count(void)
     return count;
   }
 
-  for (const auto t : cloak_list_get()) {
+  for (const auto t : cloak_list()) {
     if (t->is_cloak()) {
       count++;
     }
@@ -109,7 +109,7 @@ int Thing::carried_cloak_least_value(Thingp *out)
     return least_value;
   }
 
-  for (const auto t : cloak_list_get()) {
+  for (const auto t : cloak_list()) {
     if (! t->is_cloak()) {
       continue;
     }
@@ -138,7 +138,7 @@ int Thing::carried_cloak_highest_value(Thingp *out)
     return highest_value;
   }
 
-  for (const auto t : cloak_list_get()) {
+  for (const auto t : cloak_list()) {
     if (! t->is_cloak()) {
       continue;
     }
@@ -167,7 +167,7 @@ int Thing::carried_cloak_highest_value_for_target(Thingp *out, Thingp target)
     return highest_value;
   }
 
-  for (const auto t : cloak_list_get()) {
+  for (const auto t : cloak_list()) {
     if (! t->is_cloak()) {
       continue;
     }

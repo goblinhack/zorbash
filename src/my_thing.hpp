@@ -222,7 +222,7 @@ public:
   std::list< Thingp > amulet_list_get(void);
   std::list< Thingp > armor_list_get(void);
   std::list< Thingp > boots_list_get(void);
-  std::list< Thingp > cloak_list_get(void);
+  std::list< Thingp > cloak_list(void);
   std::list< Thingp > food_list_get(void);
   std::list< Thingp > gauntlet_list_get(void);
   std::list< Thingp > helmet_list_get(void);
