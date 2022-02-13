@@ -28,7 +28,7 @@ PyObject *level_damage_necrosis_chance_d1000_at(PyObject *obj, PyObject *args, P
 PyObject *level_damage_poison_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_received_doubled_from_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_enchant_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_enchant_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_enchant_max_current_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_necrosis_at(PyObject *obj, PyObject *args, PyObject *keywds);

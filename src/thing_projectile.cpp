@@ -41,7 +41,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim)
     //
     // Get the damage from the enchanted wand, so the blast inflicts that damage.
     //
-    current_damage_set(item->current_damage());
+    damage_current_set(item->damage_current());
     return true;
   }
 

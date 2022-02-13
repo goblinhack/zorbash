@@ -101,7 +101,7 @@ void Thing::enchant_randomly(void)
 
   enchant_incr(1);
   while (pcg_random_range(0, 100) < 20 + level->num() * 2) {
-    if (enchant_get() >= enchant_max_get()) {
+    if (enchant_get() >= enchant_max_current_get()) {
       break;
     }
     enchant_incr(1);

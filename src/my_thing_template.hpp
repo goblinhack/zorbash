@@ -401,7 +401,6 @@ private:
   int _is_sticky {};
   int _is_stone {};
   int _is_sword {};
-  int _is_victim_select {};
   int _is_the_grid {};
   int _is_throwable {};
   int _is_tickable {}; // e.g. a monst or player or something moveable
@@ -422,6 +421,7 @@ private:
   int _is_used_when_thrown {};
   int _is_very_combustible {};
   int _is_very_heavy {};
+  int _is_victim_select {};
   int _is_wall {};
   int _is_wall_dungeon {};
   int _is_wand {};
@@ -437,6 +437,7 @@ private:
   int _melting_chance_d1000 {};
   int _minion_limit {};
   int _monst_size {};
+  int _move_speed {};
   int _noise_blocker {};
   int _noise_decibels_hearing {};
   int _noise_on_born {};
@@ -532,7 +533,6 @@ private:
   int _unused_flag134 {};
   int _unused_flag135 {};
   int _unused_flag136 {};
-  int _move_speed {};
   int _unused_flag14 {};
   int _unused_flag15 {};
   int _unused_flag16 {};
@@ -657,6 +657,7 @@ private:
   std::string _long_text_description_extra;
   std::string _name;
   std::string _nutrition_dice_str;
+  std::string _on_awake_do;
   std::string _on_born_do;
   std::string _on_damage_acid_do;
   std::string _on_damage_cold_do;
@@ -675,7 +676,6 @@ private:
   std::string _on_damage_stat_con_do;
   std::string _on_damage_stat_str_do;
   std::string _on_death_do;
-  std::string _on_awake_do;
   std::string _on_death_of_a_follower_do;
   std::string _on_death_of_my_leader_do;
   std::string _on_enchant_do;
@@ -687,6 +687,7 @@ private:
   std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
+  std::string _on_owner_add_do;
   std::string _on_owner_damage_acid_do;
   std::string _on_owner_damage_cold_do;
   std::string _on_owner_damage_crush_do;
@@ -703,7 +704,6 @@ private:
   std::string _on_owner_damage_poison_do;
   std::string _on_owner_damage_stat_con_do;
   std::string _on_owner_damage_stat_str_do;
-  std::string _on_owner_add_do;
   std::string _on_owner_remove_do;
   std::string _on_polymorphed_do;
   std::string _on_tick_do;
@@ -860,7 +860,7 @@ public:
   std::string text_a_or_an(void) const;
 
   const std::string &damage_acid_dice_str(void) const;
-  const std::string &damage_natural_dice_str(void) const;
+  const std::string &damage_cold_dice_str(void) const;
   const std::string &damage_crush_dice_str(void) const;
   const std::string &damage_digest_dice_str(void) const;
   const std::string &damage_energy_dice_str(void) const;
@@ -868,31 +868,28 @@ public:
   const std::string &damage_future1_dice_str(void) const;
   const std::string &damage_future2_dice_str(void) const;
   const std::string &damage_future3_dice_str(void) const;
-  const std::string &damage_cold_dice_str(void) const;
   const std::string &damage_lightning_dice_str(void) const;
   const std::string &damage_melee_dice_str(void) const;
+  const std::string &damage_natural_attack_type(void) const { return _damage_natural_attack_type; }
+  const std::string &damage_natural_dice_str(void) const;
   const std::string &damage_necrosis_dice_str(void) const;
   const std::string &damage_poison_dice_str(void) const;
-  const std::string &health_initial_dice_str(void) const;
-  const std::string &gold_value_dice_str(void) const;
-  const std::string &lifespan_dice_str(void) const;
-  const std::string &nutrition_dice_str(void) const;
-  const std::string &on_idle_tick_frequency_dice_str(void) const;
-  const std::string &resurrect_dice_str(void) const;
-  const std::string &spawn_group_size_dice_str(void) const;
-
-  const std::string &damage_natural_attack_type(void) const { return _damage_natural_attack_type; }
   const std::string &equip_carry_anim(void) const { return _equip_carry_anim; }
   const std::string &gfx_anim_use(void) const { return _gfx_anim_use; }
+  const std::string &gold_value_dice_str(void) const;
+  const std::string &health_initial_dice_str(void) const;
   const std::string &is_allied_with(void) const { return _is_allied_with; }
   const std::string &laser_name(void) const { return _laser_name; }
+  const std::string &lifespan_dice_str(void) const;
   const std::string &light_color(void) const { return _light_color; }
   const std::string &long_text_description_extra(void) const { return _long_text_description_extra; }
   const std::string &long_text_description(void) const { return _long_text_description; }
   const std::string &name(void) const { return _name; }
+  const std::string &nutrition_dice_str(void) const;
+  const std::string &on_awake_do(void) const { return _on_awake_do; }
   const std::string &on_born_do(void) const { return _on_born_do; }
   const std::string &on_damage_acid_do(void) const { return _on_damage_acid_do; }
-  const std::string &on_damage_stat_con_do(void) const { return _on_damage_stat_con_do; }
+  const std::string &on_damage_cold_do(void) const { return _on_damage_cold_do; }
   const std::string &on_damage_crush_do(void) const { return _on_damage_crush_do; }
   const std::string &on_damage_digest_do(void) const { return _on_damage_digest_do; }
   const std::string &on_damage_energy_do(void) const { return _on_damage_energy_do; }
@@ -900,15 +897,14 @@ public:
   const std::string &on_damage_future1_do(void) const { return _on_damage_future1_do; }
   const std::string &on_damage_future2_do(void) const { return _on_damage_future2_do; }
   const std::string &on_damage_future3_do(void) const { return _on_damage_future3_do; }
-  const std::string &on_damage_cold_do(void) const { return _on_damage_cold_do; }
   const std::string &on_damage_lightning_do(void) const { return _on_damage_lightning_do; }
   const std::string &on_damage_melee_do(void) const { return _on_damage_melee_do; }
   const std::string &on_damage_natural_attack_do(void) const { return _on_damage_natural_attack_do; }
   const std::string &on_damage_necrosis_do(void) const { return _on_damage_necrosis_do; }
   const std::string &on_damage_poison_do(void) const { return _on_damage_poison_do; }
+  const std::string &on_damage_stat_con_do(void) const { return _on_damage_stat_con_do; }
   const std::string &on_damage_stat_str_do(void) const { return _on_damage_stat_str_do; }
   const std::string &on_death_do(void) const { return _on_death_do; }
-  const std::string &on_awake_do(void) const { return _on_awake_do; }
   const std::string &on_death_of_a_follower_do(void) const { return _on_death_of_a_follower_do; }
   const std::string &on_death_of_my_leader_do(void) const { return _on_death_of_my_leader_do; }
   const std::string &on_enchant_do(void) const { return _on_enchant_do; }
@@ -916,11 +912,13 @@ public:
   const std::string &on_fall_do(void) const { return _on_fall_do; }
   const std::string &on_final_use_do(void) const { return _on_final_use_do; }
   const std::string &on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
+  const std::string &on_idle_tick_frequency_dice_str(void) const;
   const std::string &on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
+  const std::string &on_owner_add_do(void) const { return _on_owner_add_do; }
   const std::string &on_owner_damage_acid_do(void) const { return _on_owner_damage_acid_do; }
-  const std::string &on_owner_damage_stat_con_do(void) const { return _on_owner_damage_stat_con_do; }
+  const std::string &on_owner_damage_cold_do(void) const { return _on_owner_damage_cold_do; }
   const std::string &on_owner_damage_crush_do(void) const { return _on_owner_damage_crush_do; }
   const std::string &on_owner_damage_digest_do(void) const { return _on_owner_damage_digest_do; }
   const std::string &on_owner_damage_energy_do(void) const { return _on_owner_damage_energy_do; }
@@ -928,14 +926,13 @@ public:
   const std::string &on_owner_damage_future1_do(void) const { return _on_owner_damage_future1_do; }
   const std::string &on_owner_damage_future2_do(void) const { return _on_owner_damage_future2_do; }
   const std::string &on_owner_damage_future3_do(void) const { return _on_owner_damage_future3_do; }
-  const std::string &on_owner_damage_cold_do(void) const { return _on_owner_damage_cold_do; }
   const std::string &on_owner_damage_lightning_do(void) const { return _on_owner_damage_lightning_do; }
   const std::string &on_owner_damage_melee_do(void) const { return _on_owner_damage_melee_do; }
   const std::string &on_owner_damage_natural_attack_do(void) const { return _on_owner_damage_natural_attack_do; }
   const std::string &on_owner_damage_necrosis_do(void) const { return _on_owner_damage_necrosis_do; }
   const std::string &on_owner_damage_poison_do(void) const { return _on_owner_damage_poison_do; }
+  const std::string &on_owner_damage_stat_con_do(void) const { return _on_owner_damage_stat_con_do; }
   const std::string &on_owner_damage_stat_str_do(void) const { return _on_owner_damage_stat_str_do; }
-  const std::string &on_owner_add_do(void) const { return _on_owner_add_do; }
   const std::string &on_owner_remove_do(void) const { return _on_owner_remove_do; }
   const std::string &on_polymorphed_do(void) const { return _on_polymorphed_do; }
   const std::string &on_tick_do(void) const { return _on_tick_do; }
@@ -949,7 +946,9 @@ public:
   const std::string &on_you_miss_do(void) const { return _on_you_miss_do; }
   const std::string &on_you_natural_attack_do(void) const { return _on_you_natural_attack_do; }
   const std::string &projectile_name(void) const { return _projectile_name; }
+  const std::string &resurrect_dice_str(void) const;
   const std::string &short_text_name(void) const { return _short_text_name; }
+  const std::string &spawn_group_size_dice_str(void) const;
   const std::string &spawn_on_shoved(void) const { return _spawn_on_shoved; }
   const std::string &str1(void) const { return _str1; }
   const std::string &str2(void) const { return _str2; }
@@ -1031,12 +1030,6 @@ public:
   int environ_avoids_poison(void) const { return _environ_avoids_poison; }
   int environ_avoids_water(void) const { return _environ_avoids_water; }
   int get_danger_level(void);
-  int spawn_group_radius_get(void) const { return _spawn_group_radius; }
-  int stat_con(void) const { return _stat_con; }
-  int stat_def(void) const { return _stat_def; }
-  int stat_dex(void) const { return _stat_dex; }
-  int stat_luck(void) const { return _stat_luck; }
-  int stat_str_get(void) const { return _stat_str; }
   int gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
   int gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
   int gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
@@ -1343,6 +1336,7 @@ public:
   int on_death_is_open(void) const { return _on_death_is_open; }
   int range_max(void) const { return _range_max; }
   int rarity(void) const { return _rarity; }
+  int spawn_group_radius_get(void) const { return _spawn_group_radius; }
   int stamina(void) const { return _stamina; }
   int stat_att_mod(void) const { return _stat_att_mod; }
   int stat_att_penalty_when_idle_max(void) const { return _stat_att_penalty_when_idle_max; }
@@ -1352,6 +1346,7 @@ public:
   int stat_att_penalty_when_stuck_max(void) const { return _stat_att_penalty_when_stuck_max; }
   int stat_att_penalty_when_stuck(void) const { return _stat_att_penalty_when_stuck; }
   int stat_con_mod(void) const { return _stat_con_mod; }
+  int stat_con(void) const { return _stat_con; }
   int stat_def_mod(void) const { return _stat_def_mod; }
   int stat_def_penalty_when_idle_max(void) const { return _stat_def_penalty_when_idle_max; }
   int stat_def_penalty_when_idle(void) const { return _stat_def_penalty_when_idle; }
@@ -1359,8 +1354,11 @@ public:
   int stat_def_penalty_when_in_shallow_water(void) const { return _stat_def_penalty_when_in_shallow_water; }
   int stat_def_penalty_when_stuck_max(void) const { return _stat_def_penalty_when_stuck_max; }
   int stat_def_penalty_when_stuck(void) const { return _stat_def_penalty_when_stuck; }
+  int stat_def(void) const { return _stat_def; }
   int stat_dex_mod(void) const { return _stat_dex_mod; }
+  int stat_dex(void) const { return _stat_dex; }
   int stat_luck_mod(void) const { return _stat_luck_mod; }
+  int stat_luck(void) const { return _stat_luck; }
   int stats02(void) const { return _stats02; }
   int stats03(void) const { return _stats03; }
   int stats04(void) const { return _stats04; }
@@ -1368,6 +1366,7 @@ public:
   int stats06(void) const { return _stats06; }
   int stats07(void) const { return _stats07; }
   int stats09(void) const { return _stats09; }
+  int stat_str_get(void) const { return _stat_str; }
   int stat_str_mod(void) const { return _stat_str_mod; }
   int temperature_change_sensitive(void) const { return _temperature_change_sensitive; }
   int temperature(void) const { return _temperature; }

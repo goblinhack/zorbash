@@ -73,7 +73,7 @@ void Thing::update(void)
     auto v = tpp->enchant_level();
     if (unlikely(v)) {
       enchant_set(v);
-      enchant_max_set(v);
+      enchant_max_current_set(v);
     }
   }
 
@@ -81,7 +81,7 @@ void Thing::update(void)
     TRACE_NO_INDENT();
     auto v = tpp->enchant_max();
     if (unlikely(v)) {
-      enchant_max_set(v);
+      enchant_max_current_set(v);
     }
   }
 

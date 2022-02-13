@@ -184,8 +184,8 @@ void Game::wid_enchant_an_item(void)
     if (! t->is_enchantable()) {
       continue;
     }
-    if (t->enchant_max_get()) {
-      if (t->enchant_get() >= t->enchant_max_get()) {
+    if (t->enchant_max_current_get()) {
+      if (t->enchant_get() >= t->enchant_max_current_get()) {
         continue;
       }
     }
@@ -204,8 +204,8 @@ void Game::wid_enchant_an_item(void)
       if (! t->is_enchantable()) {
         continue;
       }
-      if (t->enchant_max_get()) {
-        if (t->enchant_get() >= t->enchant_max_get()) {
+      if (t->enchant_max_current_get()) {
+        if (t->enchant_get() >= t->enchant_max_current_get()) {
           continue;
         }
       }
