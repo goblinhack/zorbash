@@ -695,7 +695,7 @@ public:
   int get_total_loot_level(void);
   int get_total_food_level(void);
 
-  float wobble_get(void) const;
+  float wobble_curr(void) const;
   float update_wobble(void);
 
   friend std::istream &operator>>(std::istream &in, Bits< Levelp & > my);

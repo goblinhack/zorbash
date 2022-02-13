@@ -22,7 +22,7 @@ void Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_c
   is_bouncing = true;
 }
 
-float Thing::bounce_get(void)
+float Thing::bounce_curr(void)
 {
   if (! is_bouncing) {
     return (0.0);

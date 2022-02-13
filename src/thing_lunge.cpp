@@ -23,7 +23,7 @@ void Thing::lunge(point to)
   move_set_dir_from_delta(p);
 }
 
-float Thing::lunge_get(void)
+float Thing::lunge_curr(void)
 {
   if (! ts_lunge_begin()) {
     return 0;
