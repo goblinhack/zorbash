@@ -346,7 +346,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
     }
   }
 
-  auto top_owner = item->top_owner_get();
+  auto top_owner = item->top_owner();
   if (top_owner) {
     dbg("Has unequipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
   } else {
@@ -374,16 +374,16 @@ bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
 {
   TRACE_NO_INDENT();
 
-  auto top_owner = top_owner_get();
-  if (! top_owner) {
+  auto o = top_owner();
+  if (! o) {
     err("Could not unequp; no owner");
     return false;
   }
 
   FOR_ALL_EQUIP(e)
   {
-    if (this == top_owner->equip_get(e)) {
-      return top_owner->unequip(why, e, allowed_to_recarry);
+    if (this == o->equip_get(e)) {
+      return o->unequip(why, e, allowed_to_recarry);
     }
   }
   err("Could not unequp; item not found in equipment");
@@ -422,7 +422,7 @@ bool Thing::equip(Thingp item, int equip)
   //
   // Remove from the container of carrier
   //
-  auto immediate_owner = item->immediate_owner_get();
+  auto immediate_owner = item->immediate_owner();
   if (immediate_owner) {
     immediate_owner->itemsp_get()->carrying.remove(item->id);
   }
@@ -453,7 +453,7 @@ bool Thing::equip(Thingp item, int equip)
   //
   carry_anim->owner_set(this);
 
-  auto top_owner = item->top_owner_get();
+  auto top_owner = item->top_owner();
   if (top_owner) {
     if (top_owner != this) {
       dbg("Has equipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());

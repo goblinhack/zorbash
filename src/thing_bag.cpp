@@ -50,8 +50,8 @@ bool Thing::bag_add(Thingp item)
   //
   // Only players can compress bag contents. Monst just carry everything
   //
-  auto top_owner = top_owner_get();
-  if (top_owner && ! top_owner->is_player()) {
+  auto o = top_owner();
+  if (o && ! o->is_player()) {
     return false;
   }
 
@@ -232,8 +232,8 @@ bool Thing::bag_compress(void)
   //
   // Only players can compress bag contents. Monst just carry everything
   //
-  auto top_owner = top_owner_get();
-  if (top_owner && ! top_owner->is_player()) {
+  auto o = top_owner();
+  if (o && ! o->is_player()) {
     return false;
   } else if (! is_player()) {
     return false;

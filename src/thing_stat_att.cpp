@@ -19,7 +19,7 @@ int Thing::attack_modifier_get(const Thingp victim)
 {
   TRACE_NO_INDENT();
 
-  auto owner = top_owner_get();
+  auto owner = top_owner();
   if (owner) {
     return owner->attack_modifier_get(victim);
   }

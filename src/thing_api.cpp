@@ -4015,7 +4015,7 @@ int Thing::health(void)
   if (maybe_infop()) {
     v = infop_get()->health;
   }
-  auto owner = immediate_owner_get();
+  auto owner = immediate_owner();
   if (owner && (owner != this)) {
     v += owner->health();
   }
@@ -5334,7 +5334,7 @@ int Thing::stamina_get(void)
   if (maybe_infop()) {
     v = infop_get()->stamina;
   }
-  auto owner = immediate_owner_get();
+  auto owner = immediate_owner();
   if (owner && (owner != this)) {
     v += owner->stamina_get();
   }
@@ -5404,7 +5404,7 @@ int Thing::enchant_get(void)
   if (maybe_infop()) {
     v = infop_get()->enchant;
   }
-  auto owner = immediate_owner_get();
+  auto owner = immediate_owner();
   if (owner && (owner != this)) {
     v += owner->enchant_get();
   }
@@ -5474,7 +5474,7 @@ int Thing::poisoned_amount_get(void)
   if (maybe_infop()) {
     v = infop_get()->poison;
   }
-  auto owner = immediate_owner_get();
+  auto owner = immediate_owner();
   if (owner && (owner != this)) {
     v += owner->poisoned_amount_get();
   }
@@ -5550,7 +5550,7 @@ int Thing::necrotized_amount_get(void)
   if (maybe_infop()) {
     v = infop_get()->necrosis;
   }
-  auto owner = immediate_owner_get();
+  auto owner = immediate_owner();
   if (owner && (owner != this)) {
     v += owner->necrotized_amount_get();
   }
@@ -7103,7 +7103,7 @@ int Thing::damage_current(void)
   if (maybe_infop()) {
     v = infop_get()->damage_current;
   }
-  auto owner = immediate_owner_get();
+  auto owner = immediate_owner();
   if (owner && (owner != this)) {
     v += owner->damage_current();
   }

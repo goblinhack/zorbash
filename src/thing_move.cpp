@@ -616,7 +616,7 @@ void Thing::update_interpolated_position(void)
   auto   tpp     = tp();
   float  step    = game->tick_dt;
 
-  auto p = top_owner_get();
+  auto p = top_owner();
   if ((p && p->is_falling) || is_falling) {
     if (z_depth == MAP_DEPTH_LAVA) {
       //

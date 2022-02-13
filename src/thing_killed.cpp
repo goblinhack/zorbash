@@ -90,9 +90,9 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   // If in a bag, get out of there!
   //
-  auto immediate_owner = immediate_owner_get();
-  if (immediate_owner) {
-    immediate_owner->bag_remove(this);
+  auto i_o = immediate_owner();
+  if (i_o) {
+    i_o->bag_remove(this);
   }
 
   //

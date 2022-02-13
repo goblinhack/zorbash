@@ -31,7 +31,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   dbg("Try to carry %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  auto top_owner = item->top_owner_get();
+  auto top_owner = item->top_owner();
   if (top_owner) {
     dbg("Item %s has owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
   }
@@ -210,7 +210,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     return false;
   }
 
-  auto existing_owner = item->immediate_owner_get();
+  auto existing_owner = item->immediate_owner();
   if (existing_owner) {
     if (existing_owner == this) {
       //
@@ -359,7 +359,7 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
       continue;
     }
 
-    if (t->immediate_owner_get()) {
+    if (t->immediate_owner()) {
       dbg("Potential item to carry, no, has owner: %s", t->to_string().c_str());
       continue;
     }
@@ -439,7 +439,7 @@ bool Thing::check_anything_to_carry(bool auto_collect_allowed)
       continue;
     }
 
-    if (t->immediate_owner_get()) {
+    if (t->immediate_owner()) {
       continue;
     }
 
@@ -575,12 +575,12 @@ void Thing::check_all_carried_items_are_owned(void)
     dbg("Carried items:");
     TRACE_AND_INDENT();
     for (const auto &what : item_list_get()) {
-      auto top_owner       = what->top_owner_get();
-      auto immediate_owner = what->immediate_owner_get();
+      auto top_owner       = what->top_owner();
+      auto immediate_owner = what->immediate_owner();
       if ((top_owner != this) && (immediate_owner != this)) {
         if (immediate_owner) {
           dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
-          dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->top_owner_get()->to_string().c_str());
+          dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->top_owner()->to_string().c_str());
           err("Item check failed for %s which is not carried and owned by %s", what->to_short_string().c_str(),
               immediate_owner->to_string().c_str());
         } else {

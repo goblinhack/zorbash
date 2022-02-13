@@ -346,7 +346,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
     return false;
   }
 
-  auto immediate_owner = item->immediate_owner_get();
+  auto immediate_owner = item->immediate_owner();
   if (immediate_owner) {
     immediate_owner->bag_remove(item);
   }
@@ -413,7 +413,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
     return false;
   }
 
-  auto immediate_owner = item->immediate_owner_get();
+  auto immediate_owner = item->immediate_owner();
   if (immediate_owner) {
     immediate_owner->bag_remove(item);
   }

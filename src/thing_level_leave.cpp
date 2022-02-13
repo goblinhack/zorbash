@@ -48,7 +48,7 @@ void Thing::level_leave(void)
   }
 
   {
-    auto it = immediate_spawned_owner_get();
+    auto it = immediate_spawned_owner();
     if (it) {
       remove_spawner_owner();
     }

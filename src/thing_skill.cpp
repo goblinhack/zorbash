@@ -25,7 +25,7 @@ bool Thing::skill_add(Thingp what)
     return false;
   }
 
-  auto existing_owner = what->immediate_owner_get();
+  auto existing_owner = what->immediate_owner();
   if (existing_owner) {
     if (existing_owner == this) {
       dbg("No; same owner");
@@ -69,16 +69,16 @@ bool Thing::skill_remove(Thingp what)
   dbg("Removing skill %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  auto existing_owner = what->immediate_owner_get();
+  auto existing_owner = what->immediate_owner();
   if (existing_owner != this) {
     err("Attempt to remove skill %s which is not owned", what->to_short_string().c_str());
     return false;
   }
 
-  Thingp top_owner = top_owner_get();
-  if (top_owner) {
-    if (top_owner->is_player()) {
-      top_owner->skillbox_id_remove(what);
+  Thingp o = top_owner();
+  if (o) {
+    if (o->is_player()) {
+      o->skillbox_id_remove(what);
     }
   }
 

@@ -85,7 +85,7 @@ void Level::describe(point p)
       continue;
     }
 
-    if (t->immediate_owner_get()) {
+    if (t->immediate_owner()) {
       IF_DEBUG2 { t->log("Ignore for describe, has owner"); }
       continue;
     }
@@ -138,7 +138,7 @@ void Level::describe(point p)
       continue;
     }
 
-    if (t->immediate_owner_get()) {
+    if (t->immediate_owner()) {
       IF_DEBUG2 { t->log("Ignore for describe, has owner"); }
       continue;
     }
@@ -178,7 +178,7 @@ void Level::describe(point p)
       else { continue; }
     }
 
-    if (t->immediate_owner_get() || t->is_player() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
+    if (t->immediate_owner() || t->is_player() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
       IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }

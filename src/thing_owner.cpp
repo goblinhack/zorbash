@@ -96,7 +96,7 @@ void Thing::on_owner_remove(Thingp owner)
   }
 }
 
-Thingp Thing::top_owner_get(void)
+Thingp Thing::top_owner(void)
 {
   TRACE_NO_INDENT();
 
@@ -118,7 +118,7 @@ Thingp Thing::top_owner_get(void)
       return nullptr;
     }
     if (unlikely(i->immediate_owner_id_get().ok())) {
-      return i->immediate_owner_get();
+      return i->immediate_owner();
     }
     return i;
   } else {
@@ -126,7 +126,7 @@ Thingp Thing::top_owner_get(void)
   }
 }
 
-Thingp Thing::immediate_owner_get(void)
+Thingp Thing::immediate_owner(void)
 {
   TRACE_NO_INDENT();
 
@@ -168,7 +168,7 @@ void Thing::owner_set(Thingp owner)
     return;
   }
 
-  auto old_owner = immediate_owner_get();
+  auto old_owner = immediate_owner();
   if (old_owner) {
     if (old_owner == owner) {
       return;
@@ -203,7 +203,7 @@ void Thing::owner_set(Thingp owner)
 void Thing::remove_owner(void)
 {
   TRACE_NO_INDENT();
-  auto old_owner = immediate_owner_get();
+  auto old_owner = immediate_owner();
   if (! old_owner) {
     return;
   }
@@ -231,7 +231,7 @@ bool Thing::change_owner(Thingp new_owner)
     return true;
   }
 
-  auto old_owner = immediate_owner_get();
+  auto old_owner = immediate_owner();
   if (! old_owner) {
     return true;
   }
@@ -263,7 +263,7 @@ bool Thing::change_owner(Thingp new_owner)
   //
   // Sanity check
   //
-  auto changed_owner = immediate_owner_get();
+  auto changed_owner = immediate_owner();
   if (! changed_owner) {
     err("Owner change failed");
     return false;

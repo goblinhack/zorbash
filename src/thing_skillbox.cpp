@@ -99,7 +99,7 @@ bool Thing::skillbox_id_remove(Thingp what)
     return false;
   }
 
-  auto immediate_owner = what->immediate_owner_get();
+  auto immediate_owner = what->immediate_owner();
   if (immediate_owner) {
     immediate_owner->bag_remove(what);
   }

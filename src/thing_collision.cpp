@@ -150,7 +150,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
     // However, try to open the door if you have a key.
     //
     if (victim->is_door() && ! victim->is_open) {
-      auto owner = immediate_owner_get();
+      auto owner = immediate_owner();
       if (owner) {
         if (owner->open_door(victim)) {
           *victim_attacked = false;
@@ -162,7 +162,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
       }
     }
 
-    auto owner = top_owner_get();
+    auto owner = top_owner();
     if (! *victim_attacked) {
       //
       // Carry to eat later. Things attack their food.
@@ -296,8 +296,8 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
 
   auto me = this;
 
-  Thingp owner_it = it->immediate_owner_get();
-  Thingp owner_me = me->immediate_owner_get();
+  Thingp owner_it = it->immediate_owner();
+  Thingp owner_me = me->immediate_owner();
 
   if ((owner_it == me) || (owner_me == it)) {
     //
@@ -490,8 +490,8 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
   }
 
-  Thingp owner_it = it->immediate_owner_get();
-  Thingp owner_me = me->immediate_owner_get();
+  Thingp owner_it = it->immediate_owner();
+  Thingp owner_me = me->immediate_owner();
 
   //
   // Need this or shields attack the player.
@@ -773,7 +773,7 @@ bool Thing::collision_check_and_handle(point future_pos, bool *victim_attacked, 
           continue;
         }
 
-        if (it->top_owner_get()) {
+        if (it->top_owner()) {
           continue;
         }
 

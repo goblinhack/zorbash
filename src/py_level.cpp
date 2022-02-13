@@ -237,7 +237,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
     //
     // Don't include carried things else lasers will destroy all items carried!
     //
-    if (t->immediate_owner_get()) {
+    if (t->immediate_owner()) {
       continue;
     }
     items++;
@@ -251,7 +251,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
     //
     // Don't include carried things else lasers will destroy all items carried!
     //
-    if (t->immediate_owner_get()) {
+    if (t->immediate_owner()) {
       continue;
     }
     PyList_SetItem(lst, item, Py_BuildValue("I", t->id));

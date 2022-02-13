@@ -23,102 +23,102 @@ void Thing::hooks_remove()
   //
   // We are owned by something. i.e. we are a sword.
   //
-  auto top_owner = top_owner_get();
+  auto o = top_owner();
 
   release_followers();
 
   remove_leader();
 
-  if (top_owner) {
-    dbg("Detach %" PRIX32 " from top owner %s", id.id, top_owner->to_string().c_str());
+  if (o) {
+    dbg("Detach %" PRIX32 " from top owner %s", id.id, o->to_string().c_str());
     TRACE_AND_INDENT();
 
-    if (top_owner->is_player()) {
-      top_owner->inventory_shortcuts_remove(this);
+    if (o->is_player()) {
+      o->inventory_shortcuts_remove(this);
     }
 
     if (is_skill()) {
-      top_owner->skill_remove(this);
+      o->skill_remove(this);
     }
 
     if (is_buff()) {
-      top_owner->buff_remove(this);
+      o->buff_remove(this);
     }
 
     if (is_debuff()) {
-      top_owner->debuff_remove(this);
+      o->debuff_remove(this);
     }
 
-    if (id == top_owner->on_fire_anim_id_get()) {
+    if (id == o->on_fire_anim_id_get()) {
       if (is_loggable()) {
-        dbg("Detach on_fire_anim_id from top_owner %s", top_owner->to_string().c_str());
+        dbg("Detach on_fire_anim_id from o %s", o->to_string().c_str());
       }
-      top_owner->on_fire_anim_id_set(NoThingId.id);
+      o->on_fire_anim_id_set(NoThingId.id);
     }
 
     FOR_ALL_EQUIP(e)
     {
-      if (id == top_owner->equip_id_get(e)) {
-        top_owner->unequip("remove hooks for equip id", e, false);
+      if (id == o->equip_id_get(e)) {
+        o->unequip("remove hooks for equip id", e, false);
 
         if (is_loggable()) {
-          dbg("Detach equip_id from top_owner %s", top_owner->to_string().c_str());
+          dbg("Detach equip_id from o %s", o->to_string().c_str());
         }
-        top_owner->equip_id_set(NoThingId.id, e);
+        o->equip_id_set(NoThingId.id, e);
       }
 
-      if (id == top_owner->equip_id_carry_anim_get(e)) {
-        top_owner->unequip("remove hooks for carry-anim", e, false);
+      if (id == o->equip_id_carry_anim_get(e)) {
+        o->unequip("remove hooks for carry-anim", e, false);
 
         if (is_loggable()) {
-          dbg("Detach carry-anim from top_owner %s", top_owner->to_string().c_str());
+          dbg("Detach carry-anim from o %s", o->to_string().c_str());
         }
-        top_owner->equip_carry_anim_id_set(NoThingId.id, e);
+        o->equip_carry_anim_id_set(NoThingId.id, e);
       }
 
-      if (id == top_owner->equip_id_use_anim_get(e)) {
+      if (id == o->equip_id_use_anim_get(e)) {
         if (is_loggable()) {
-          dbg("Detach use_anim from owner %s", top_owner->to_string().c_str());
+          dbg("Detach use_anim from owner %s", o->to_string().c_str());
         }
-        top_owner->equip_use_anim_id_set(NoThingId.id, e);
+        o->equip_use_anim_id_set(NoThingId.id, e);
 
         //
         // End of the use-animation, make the sword visible again.
         //
-        auto carry_anim = top_owner->equip_carry_anim_get(e);
+        auto carry_anim = o->equip_carry_anim_get(e);
         if (carry_anim) {
-          dbg("Make carry weapon visible %s", top_owner->to_string().c_str());
+          dbg("Make carry weapon visible %s", o->to_string().c_str());
           TRACE_AND_INDENT();
 
           //
           // But only if the owner is visible.
           //
-          if (top_owner->is_visible()) {
+          if (o->is_visible()) {
             if (is_loggable()) {
-              dbg("Reapply carry-anim for owner %s", top_owner->to_string().c_str());
+              dbg("Reapply carry-anim for owner %s", o->to_string().c_str());
             }
             carry_anim->visible();
           } else {
             if (is_loggable()) {
-              dbg("Do not reapply carry-anim for invisible owner %s", top_owner->to_string().c_str());
+              dbg("Do not reapply carry-anim for invisible owner %s", o->to_string().c_str());
             }
           }
         } else {
           if (is_loggable()) {
-            dbg("No carry-anim for owner %s", top_owner->to_string().c_str());
+            dbg("No carry-anim for owner %s", o->to_string().c_str());
           }
-          auto id = top_owner->equip_id_get(e);
+          auto id = o->equip_id_get(e);
           if (id.ok()) {
-            top_owner->equip(top_owner->equip_get(e), e);
+            o->equip(o->equip_get(e), e);
           }
         }
       }
 
-      if (id == top_owner->equip_id_use_anim_get(e)) {
+      if (id == o->equip_id_use_anim_get(e)) {
         err("Weapon use anim is still attached");
       }
 
-      if (id == top_owner->equip_id_carry_anim_get(e)) {
+      if (id == o->equip_id_carry_anim_get(e)) {
         err("Weapon carry anim is still attached");
       }
     }
@@ -127,13 +127,13 @@ void Thing::hooks_remove()
   //
   // Remove from inventory and remove from ownership
   //
-  top_owner = top_owner_get(); // Intentional to update this
-  if (top_owner) {
+  o = top_owner(); // Intentional to update this
+  if (o) {
     //
     // Don't try to drop lasers; as they are also owned.
     //
     if (is_item()) {
-      top_owner->drop_into_ether(this);
+      o->drop_into_ether(this);
     }
   }
 
@@ -198,7 +198,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
-        auto o = t->immediate_owner_get();
+        auto o = t->immediate_owner();
         if (o == this) {
           t->remove_owner();
         }
@@ -252,7 +252,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
-        auto o = t->immediate_spawned_owner_get();
+        auto o = t->immediate_spawned_owner();
         if (o == this) {
           t->remove_spawner_owner();
         }

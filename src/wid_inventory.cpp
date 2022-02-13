@@ -544,7 +544,7 @@ void wid_inventory_select_requested(Thingp selected)
   game->request_inventory_thing_selected_do = true;
 
   if (selected) {
-    auto owner = selected->immediate_owner_get();
+    auto owner = selected->immediate_owner();
 
     if (selected->is_bag_item_container()) {
       wid_inventory_fini();

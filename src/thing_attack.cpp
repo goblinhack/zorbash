@@ -37,8 +37,8 @@ bool Thing::possible_to_attack(const Thingp victim)
   //   return false;
   // }
 
-  auto my_owner  = top_owner_get();
-  auto its_owner = victim->top_owner_get();
+  auto my_owner  = top_owner();
+  auto its_owner = victim->top_owner();
   if (my_owner && ((my_owner == its_owner) || (my_owner == victim))) {
     if (is_laser()) {
       //
@@ -55,8 +55,8 @@ bool Thing::possible_to_attack(const Thingp victim)
     return false;
   }
 
-  auto my_spawned_owner  = top_spawned_owner_get();
-  auto its_spawned_owner = victim->top_spawned_owner_get();
+  auto my_spawned_owner  = top_spawned_owner();
+  auto its_spawned_owner = victim->top_spawned_owner();
   if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
     return false;
   }
@@ -339,7 +339,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   if (is_weapon()) {
-    auto o = immediate_owner_get();
+    auto o = immediate_owner();
     if (o) {
       if (o->is_monst()) {
         if (! victim->is_attackable_by_monst()) {
@@ -482,7 +482,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
   idle_count_set(0);
 
-  auto owner = top_owner_get();
+  auto owner = top_owner();
 
   if (! possible_to_attack(victim)) {
     dbg("Attack failed, not possible to attack %s", victim->to_string().c_str());
@@ -962,7 +962,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     //
     // See if the weapon crumbles
     //
-    auto my_owner = top_owner_get();
+    auto my_owner = top_owner();
     if (my_owner) {
       auto weapon = my_owner->equip_get(MONST_EQUIP_WEAPON);
       if (weapon) {

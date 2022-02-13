@@ -324,8 +324,8 @@ bool Thing::same_leader(Thingp it)
     return false;
   }
 
-  auto my_owner  = top_owner_get();
-  auto its_owner = it->top_owner_get();
+  auto my_owner  = top_owner();
+  auto its_owner = it->top_owner();
 
   if (! is_interesting()) {
     return false;

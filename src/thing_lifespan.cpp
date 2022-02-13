@@ -49,7 +49,7 @@ void Thing::lifespan_tick(void)
   //
   // Torches only tick when carried
   //
-  auto owner = immediate_owner_get();
+  auto owner = immediate_owner();
   if (is_torch() && ! owner) {
     return;
   }
@@ -64,9 +64,9 @@ void Thing::lifespan_tick(void)
     return;
   }
 
-  auto top_owner = top_owner_get();
-  if (top_owner) {
-    top_owner->on_lifespan_tick(this);
+  auto o = top_owner();
+  if (o) {
+    o->on_lifespan_tick(this);
   }
 
   //

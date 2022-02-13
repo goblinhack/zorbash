@@ -19,7 +19,7 @@ void Thing::water_tick(void)
   if (is_on_fire()) {
     unset_on_fire();
 
-    auto owner = top_owner_get();
+    auto owner = top_owner();
     if (owner) {
       if (owner->is_player()) {
         msg("%%fg=green$You quench the flames!%%fg=reset$");
