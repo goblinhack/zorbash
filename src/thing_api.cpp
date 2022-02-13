@@ -530,13 +530,13 @@ int Thing::environ_avoids_water(void)
   return (tp()->environ_avoids_water());
 }
 
-int Thing::hunger_health_pct_get(void)
+int Thing::hunger_health_pct(void)
 {
   TRACE_NO_INDENT();
   return (tp()->hunger_health_pct());
 }
 
-int Thing::health_starving_pct_get(void)
+int Thing::health_starving_pct(void)
 {
   TRACE_NO_INDENT();
   return (tp()->health_starving_pct());
@@ -2668,7 +2668,7 @@ int Thing::aggression_level_pct(void)
       //
       // If the leader is weak, be timid
       //
-      if (leader->health_get() < leader->health_initial_get() / 3) {
+      if (leader->health() < leader->health_initial_get() / 3) {
         return (aggression / 2);
       }
 
@@ -4008,7 +4008,7 @@ int Thing::keys_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // health
 ////////////////////////////////////////////////////////////////////////////
-int Thing::health_get(void)
+int Thing::health(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
@@ -4017,7 +4017,7 @@ int Thing::health_get(void)
   }
   auto owner = immediate_owner_get();
   if (owner && (owner != this)) {
-    v += owner->health_get();
+    v += owner->health();
   }
   return v;
 }

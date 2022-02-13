@@ -16,7 +16,7 @@ int Thing::health_boost(int v)
     return false;
   }
 
-  auto old_health = health_get();
+  auto old_health = health();
   auto new_health = old_health + v;
   auto max_health = health_max();
 
@@ -43,7 +43,7 @@ bool Thing::health_boost_would_occur(int v)
     return false;
   }
 
-  auto old_health = health_get();
+  auto old_health = health();
   auto max_health = health_max();
 
   if (old_health >= max_health) {
@@ -56,12 +56,12 @@ bool Thing::health_boost_would_occur(int v)
 bool Thing::is_bloodied(void)
 {
   TRACE_NO_INDENT();
-  return health_pct_get() <= THING_HEALTH_BLOODIED_PCT1;
+  return health_pct() <= THING_HEALTH_BLOODIED_PCT1;
 }
 
-float Thing::health_pct_get(void)
+float Thing::health_pct(void)
 {
   TRACE_NO_INDENT();
-  float pct = ((float) health_get() / (float) health_max()) * 100;
+  float pct = ((float) health() / (float) health_max()) * 100;
   return pct;
 }

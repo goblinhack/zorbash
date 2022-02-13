@@ -694,7 +694,7 @@ public:
   float fadeup_get(void);
   float fall_height_get(void);
   float fall_get(void);
-  float health_pct_get(void);
+  float health_pct(void);
   float lunge_get(void);
   float wobble_get(void);
   float how_far_i_can_jump_max(void);
@@ -919,7 +919,7 @@ public:
   int health_boost(int v);
   int health_decr(int);
   int health_decr(void);
-  int health_get(void);
+  int health(void);
   int health_incr(int);
   int health_incr(void);
   int health_initial_get(void);
@@ -930,9 +930,9 @@ public:
   int health_max_incr(void);
   int health_max_set(int);
   int health_set(int);
-  int health_starving_pct_get(void);
+  int health_starving_pct(void);
   int hunger_clock_tick_frequency_get(void);
-  int hunger_health_pct_get(void);
+  int hunger_health_pct(void);
   int hunger_is_insatiable(void);
   int idle_count_decr(int);
   int idle_count_decr(void);

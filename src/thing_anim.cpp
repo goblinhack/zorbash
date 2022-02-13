@@ -197,7 +197,7 @@ void Thing::animate(void)
         "is_resurrecting %d "
         "is_sleeping %d "
         "is_starving %d ",
-        health_get(), is_attached, is_being_destroyed, is_blitted, is_bouncing, is_dead, is_facing_left, is_fadeup,
+        health(), is_attached, is_being_destroyed, is_blitted, is_bouncing, is_dead, is_facing_left, is_fadeup,
         is_falling, is_hidden, is_hungry, is_in_lava, is_in_water, is_jumping, is_moving, is_open, is_resurrected,
         is_resurrecting, is_sleeping, is_starving);
   }
@@ -236,10 +236,10 @@ void Thing::animate(void)
         }
 
         auto health_max_val = health_max();
-        auto health         = health_get();
+        auto health_val     = health();
 
         if (tpp->internal_has_hp_anim()) {
-          if (health < health_max_val / 4) {
+          if (health_val < health_max_val / 4) {
             if (! tile_is_hp_25_percent(tile)) {
               tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
@@ -249,7 +249,7 @@ void Thing::animate(void)
 #endif
               continue;
             }
-          } else if (health < health_max_val / 2) {
+          } else if (health_val < health_max_val / 2) {
             if (! tile_is_hp_50_percent(tile)) {
               tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
@@ -259,7 +259,7 @@ void Thing::animate(void)
 #endif
               continue;
             }
-          } else if (health < (health_max_val / 4) * 3) {
+          } else if (health_val < (health_max_val / 4) * 3) {
             if (! tile_is_hp_75_percent(tile)) {
               tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
@@ -452,7 +452,7 @@ void Thing::animate(void)
           "is_resurrecting %d "
           "is_sleeping %d "
           "is_starving %d ",
-          tries, size, tile_name(tile).c_str(), health_get(), (bool) is_attached, (bool) is_being_destroyed,
+          tries, size, tile_name(tile).c_str(), health(), (bool) is_attached, (bool) is_being_destroyed,
           (bool) is_blitted, (bool) is_bouncing, (bool) is_dead, (bool) is_facing_left, (bool) is_fadeup,
           (bool) is_falling, (bool) is_hidden, (bool) is_hungry, (bool) is_in_lava, (bool) is_in_water,
           (bool) is_jumping, (bool) is_moving, (bool) is_open, (bool) is_resurrected, (bool) is_resurrecting,

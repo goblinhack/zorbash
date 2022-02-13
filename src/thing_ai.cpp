@@ -899,8 +899,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Worse terrain, less preferred. Higher score, morepreferred.
         //
-        auto my_health   = health_get();
-        auto it_health   = it->health_get();
+        auto my_health   = health();
+        auto it_health   = it->health();
         auto health_diff = my_health - it_health;
 
         //
@@ -975,7 +975,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
             if (is_enemy(it) && (dist <= max_dist)) {
               if (! is_fearless() && (is_to_be_avoided(it) || is_dangerous(it)) &&
-                  (health_get() < health_max() / 2)) {
+                  (health() < health_max() / 2)) {
                 //
                 // Low on health. Best to avoid this enemy.
                 //

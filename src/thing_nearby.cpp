@@ -62,7 +62,7 @@ Thingp Thing::most_dangerous_adjacent_thing_get(void)
         continue;
       }
 
-      auto score = it->health_get();
+      auto score = it->health();
       if (! will_avoid_monst(point(x, y))) {
         continue;
       }
@@ -116,7 +116,7 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
           continue;
         }
 
-        auto score = t->health_get();
+        auto score = t->health();
 
         //
         // If we're being engulfed, this is a serious threat!
@@ -274,7 +274,7 @@ Thingp Thing::best_visible_target_get(void)
           continue;
         }
 
-        auto score = t->health_get();
+        auto score = t->health();
 
         if (distance(t->curr_at, curr_at) < distance_avoid_get()) {
           score += 100;

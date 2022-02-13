@@ -628,9 +628,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (crit) {
     damage *= 2;
-    IF_DEBUG2 { hitter->log("Hit %s (health %d) for CRIT damage %d", text_the().c_str(), health_get(), damage); }
+    IF_DEBUG2 { hitter->log("Hit %s (health %d) for CRIT damage %d", text_the().c_str(), health(), damage); }
   } else {
-    IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), health_get(), damage); }
+    IF_DEBUG2 { hitter->log("Hit %s (health %d) for damage %d", text_the().c_str(), health(), damage); }
   }
 
   //

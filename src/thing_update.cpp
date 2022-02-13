@@ -47,7 +47,7 @@ void Thing::update(void)
   //
   // If polymorphed, retain the same health
   //
-  if (! health_get()) {
+  if (! health()) {
     TRACE_NO_INDENT();
     auto v = tpp->health_initial_get();
     if (unlikely(v)) {
