@@ -4216,7 +4216,7 @@ int Thing::stamina_max_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // enchant_max
 ////////////////////////////////////////////////////////////////////////////
-int Thing::enchant_max_get(void)
+int Thing::enchant_max_current_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -4226,7 +4226,7 @@ int Thing::enchant_max_get(void)
   }
 }
 
-int Thing::enchant_max_set(int v)
+int Thing::enchant_max_current_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4237,7 +4237,7 @@ int Thing::enchant_max_set(int v)
   return (n);
 }
 
-int Thing::enchant_max_decr(int v)
+int Thing::enchant_max_current_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4248,7 +4248,7 @@ int Thing::enchant_max_decr(int v)
   return (n);
 }
 
-int Thing::enchant_max_incr(int v)
+int Thing::enchant_max_current_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4259,7 +4259,7 @@ int Thing::enchant_max_incr(int v)
   return (n);
 }
 
-int Thing::enchant_max_decr(void)
+int Thing::enchant_max_current_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -4270,7 +4270,7 @@ int Thing::enchant_max_decr(void)
   return (n);
 }
 
-int Thing::enchant_max_incr(void)
+int Thing::enchant_max_current_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
@@ -7094,74 +7094,74 @@ ThingId Thing::on_fire_anim_id_set(ThingId v)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// current_damage
+// damage_current
 ////////////////////////////////////////////////////////////////////////////
-int Thing::current_damage(void)
+int Thing::damage_current(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
-    v = infop_get()->current_damage;
+    v = infop_get()->damage_current;
   }
   auto owner = immediate_owner_get();
   if (owner && (owner != this)) {
-    v += owner->current_damage();
+    v += owner->damage_current();
   }
   return v;
 }
 
-int Thing::current_damage_set(int v)
+int Thing::damage_current_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->current_damage = v);
+  auto n = (infop_get()->damage_current = v);
   return (n);
 }
 
-int Thing::current_damage_decr(int v)
+int Thing::damage_current_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->current_damage -= v);
+  auto n = (infop_get()->damage_current -= v);
   return (n);
 }
 
-int Thing::current_damage_incr(int v)
+int Thing::damage_current_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->current_damage += v);
+  auto n = (infop_get()->damage_current += v);
   return (n);
 }
 
-int Thing::current_damage_decr(void)
+int Thing::damage_current_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->current_damage--);
+  auto n = (infop_get()->damage_current--);
   return (n);
 }
 
-int Thing::current_damage_incr(void)
+int Thing::damage_current_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->current_damage++);
+  auto n = (infop_get()->damage_current++);
   return (n);
 }
 

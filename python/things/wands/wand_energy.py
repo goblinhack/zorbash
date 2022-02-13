@@ -21,7 +21,7 @@ def on_use(owner, item, target, x, y):
     # my.topcon("target {} {}".format(my.thing_get_name(target), my.thing_get_health(target)))
     damage = my.thing_get_damage_energy(item)
     enchant = my.thing_get_enchant(item)
-    my.thing_set_current_damage(owner, damage + enchant)
+    my.thing_set_damage_current(owner, damage + enchant)
 
 
 def on_final_use(owner, item, target, x, y):

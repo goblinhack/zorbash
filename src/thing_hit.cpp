@@ -604,9 +604,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   if (hitter->is_laser()) {
     auto owner = hitter->immediate_owner_get();
     if (owner) {
-      if (owner->current_damage()) {
-        damage = owner->current_damage();
-        owner->current_damage_set(0);
+      if (owner->damage_current()) {
+        damage = owner->damage_current();
+        owner->damage_current_set(0);
       }
     }
   }
@@ -619,9 +619,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         //
         // Allow the damage to be modified
         //
-        real_hitter->current_damage_set(damage);
+        real_hitter->damage_current_set(damage);
         real_hitter->use(skill);
-        damage = real_hitter->current_damage();
+        damage = real_hitter->damage_current();
       }
     }
   }

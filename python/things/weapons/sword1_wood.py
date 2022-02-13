@@ -9,7 +9,7 @@ def on_use(owner, item, target, x, y):
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
     damage = my.thing_get_damage_melee(item)
     enchant = my.thing_get_enchant(item) * 2
-    my.thing_set_current_damage(owner, damage + enchant)
+    my.thing_set_damage_current(owner, damage + enchant)
 
 
 def tp_init(name, text_name, short_text_name):

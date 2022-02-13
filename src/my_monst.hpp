@@ -216,7 +216,7 @@ public:
   //
   // Things not worth saving
   //
-  int current_damage {}; // Current damage; so it can be modified by python
+  int damage_current {}; // Current damage; so it can be modified by python
 } ThingInfo;
 std::ostream &operator<<(std::ostream &out, Bits< const ThingInfop & > const my);
 std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my);
