@@ -37,7 +37,7 @@ std::string Thing::to_string(void)
   }
 
   if (! g_loading) {
-    auto l = leader_get();
+    auto l = leader();
     if (l && (l != this)) {
       return (string_sprintf(
           "%" PRIX32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d l:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",

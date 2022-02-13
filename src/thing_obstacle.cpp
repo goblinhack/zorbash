@@ -334,7 +334,7 @@ bool Thing::ai_obstacle(Thingp it)
     //
     if (is_minion()) {
       if (it->is_mob()) {
-        if (it == top_mob_get()) {
+        if (it == top_mob()) {
           return true;
         }
       }

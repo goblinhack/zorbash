@@ -279,9 +279,9 @@ void Thing::killed(Thingp defeater, const char *reason)
     //
     // Tell the leader I am dead
     //
-    auto leader = leader_get();
-    if (leader) {
-      on_death_of_a_follower(leader);
+    auto l = leader();
+    if (l) {
+      on_death_of_a_follower(l);
     }
 
     //

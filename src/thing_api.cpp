@@ -2656,19 +2656,19 @@ int Thing::aggression_level_pct(void)
     //
     // Followers are more cockey if they have a leader
     //
-    auto leader = leader_get();
-    if (leader) {
+    auto l = leader();
+    if (l) {
       //
       // If the leader is dead, be timid
       //
-      if (leader->is_dead) {
+      if (l->is_dead) {
         return (aggression / 4);
       }
 
       //
       // If the leader is weak, be timid
       //
-      if (leader->health() < leader->health_initial_get() / 3) {
+      if (l->health() < l->health_initial_get() / 3) {
         return (aggression / 2);
       }
 
@@ -5339,9 +5339,9 @@ int Thing::stamina_get(void)
     v += owner->stamina_get();
   }
   if (is_minion()) {
-    auto mob = immediate_mob_get();
+    auto mob = immediate_mob();
     if (mob) {
-      auto mob = immediate_mob_get();
+      auto mob = immediate_mob();
       v += mob->stamina_get();
     }
   }
@@ -5409,9 +5409,9 @@ int Thing::enchant_get(void)
     v += owner->enchant_get();
   }
   if (is_minion()) {
-    auto mob = immediate_mob_get();
+    auto mob = immediate_mob();
     if (mob) {
-      auto mob = immediate_mob_get();
+      auto mob = immediate_mob();
       v += mob->enchant_get();
     }
   }
@@ -5479,9 +5479,9 @@ int Thing::poisoned_amount_get(void)
     v += owner->poisoned_amount_get();
   }
   if (is_minion()) {
-    auto mob = immediate_mob_get();
+    auto mob = immediate_mob();
     if (mob) {
-      auto mob = immediate_mob_get();
+      auto mob = immediate_mob();
       v += mob->poisoned_amount_get();
     }
   }
@@ -5555,9 +5555,9 @@ int Thing::necrotized_amount_get(void)
     v += owner->necrotized_amount_get();
   }
   if (is_minion()) {
-    auto mob = immediate_mob_get();
+    auto mob = immediate_mob();
     if (mob) {
-      auto mob = immediate_mob_get();
+      auto mob = immediate_mob();
       v += mob->necrotized_amount_get();
     }
   }

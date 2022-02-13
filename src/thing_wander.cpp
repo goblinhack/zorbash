@@ -230,7 +230,7 @@ bool Thing::ai_choose_wander(point &nh)
   }
 
   if (too_far_from_leader(dest)) {
-    if (distance_from_leader_get() > too_far_from_leader(dest)) {
+    if (distance_from_leader() > too_far_from_leader(dest)) {
       dbg("Wander closer to leader via %d,%d", dest.x, dest.y);
     } else {
       dbg("Too far from leader; but allow wander anyway to %d,%d", dest.x, dest.y);

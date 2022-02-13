@@ -216,7 +216,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
-        auto o = t->immediate_mob_get();
+        auto o = t->immediate_mob();
         if (o == this) {
           t->remove_mob();
         }
@@ -234,7 +234,7 @@ void Thing::remove_all_references()
     {
       for (auto p : level->all_things[ group ]) {
         auto t = p.second;
-        auto o = t->leader_get();
+        auto o = t->leader();
         if (o == this) {
           t->remove_leader();
         }

@@ -132,7 +132,7 @@ bool Level::can_see_unimpeded(int x0, int y0, int x1, int y1)
 point Thing::vision_source_get(void)
 {
   if (is_minion() && distance_minion_vision_shared()) {
-    auto mob = top_mob_get();
+    auto mob = top_mob();
     if (mob) {
       return mob->curr_at;
     }

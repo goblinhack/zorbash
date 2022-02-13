@@ -696,7 +696,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
 
     if (it->is_mob()) {
-      if (it == top_mob_get()) {
+      if (it == top_mob()) {
         if (things_overlap(me, future_pos, it)) {
           dbg("Yes; cannot pass through my mob spawner");
           return true;

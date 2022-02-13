@@ -66,7 +66,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     dbg("No, minion is too far off the leash to jump");
     TRACE_AND_INDENT();
 
-    auto mob = top_mob_get();
+    auto mob = top_mob();
     if (mob) {
       dbg("Try jumping home");
       TRACE_AND_INDENT();
@@ -79,16 +79,16 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   if (too_far_from_leader(to)) {
-    if (distance_from_leader_get() > too_far_from_leader(to)) {
+    if (distance_from_leader() > too_far_from_leader(to)) {
       dbg("Jumping closer to the leader");
     } else {
       dbg("No, follower is too far from the leader to jump");
       TRACE_AND_INDENT();
 
-      auto leader = leader_get();
-      if (leader) {
+      auto l = leader();
+      if (l) {
         dbg("Try jumping closer to the leader");
-        to           = leader->curr_at;
+        to           = l->curr_at;
         jumping_home = true;
       } else {
         return false;

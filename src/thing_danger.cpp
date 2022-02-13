@@ -292,7 +292,7 @@ int Thing::is_dangerous(Thingp it)
     return false;
   }
 
-  if (it->is_minion() && (it->top_mob_get() == top_mob_get())) {
+  if (it->is_minion() && (it->top_mob() == top_mob())) {
     return false;
   }
 
