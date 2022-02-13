@@ -318,7 +318,7 @@ bool Thing::fall_to_next_level(void)
       }
 
       if (is_wand() || is_potion() || is_mob() || is_monst()) {
-        fall_damage = health_get() / 2;
+        fall_damage = health() / 2;
       }
 
       if (is_ring()) {

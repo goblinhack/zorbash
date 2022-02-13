@@ -615,10 +615,10 @@ void Game::wid_thing_info_add_health(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    if (t->health_get() == t->health_max()) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %21d", t->health_get());
+    if (t->health() == t->health_max()) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %21d", t->health());
     } else {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d/%d", t->health_get(), t->health_max());
+      snprintf(tmp2, sizeof(tmp2) - 1, "%d/%d", t->health(), t->health_max());
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %21s", tmp2);
     }
     w->log(tmp);
@@ -1327,7 +1327,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
   auto monst_max_damage = t->damage_max();
   if (monst_max_damage != 0) {
-    auto monst_defeat_count = player->health_get() / monst_max_damage;
+    auto monst_defeat_count = player->health() / monst_max_damage;
 
     //
     // Oh dear. You my friend are toast.
@@ -1353,7 +1353,7 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
   auto player_max_damage = t->damage_max();
   if (player_max_damage != 0) {
-    auto player_defeat_count = t->health_get() / player->damage_max();
+    auto player_defeat_count = t->health() / player->damage_max();
 
     //
     // Oh dear. The monst is toast.

@@ -110,7 +110,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     // If really low on health and we have something we can eat, try
     // that.
     //
-    if (health_get() < health_max() / 10) {
+    if (health() < health_max() / 10) {
       if (can_eat_something()) {
         AI_LOG("Very low on health, forced to rest");
         if (is_player()) {
@@ -144,7 +144,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     // that.
     //
     AI_LOG("Idle, health check");
-    if (health_get() < health_max() / 3) {
+    if (health() < health_max() / 3) {
       AI_LOG("Idle, eat check as a bit hungry");
       if (can_eat_something()) {
         AI_LOG("Low on health, rest");
@@ -249,7 +249,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   // If nothing to do, might as well rest. If there is a point.
   //
   auto rest = true;
-  if ((health_get() >= (health_max() / 4) * 3)) {
+  if ((health() >= (health_max() / 4) * 3)) {
     if (is_able_to_tire()) {
       if (stamina_get() >= (stamina_max() / 4) * 3) {
         rest = false;

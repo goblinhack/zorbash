@@ -36,9 +36,9 @@ void Thing::hunger_clock_tick(void)
   dbg("Hunger tick");
   TRACE_AND_INDENT();
 
-  if (health_get() > 1) {
+  if (health() > 1) {
     health_decr();
-    if (health_get() == 1) {
+    if (health() == 1) {
       if (is_player()) {
         msg("You are starving!");
       }
@@ -68,12 +68,12 @@ void Thing::hunger_update(void)
   int hungry_at = (int) ((double) health_max() * ((double) tpp->hunger_health_pct() / 100.0));
 
   auto old_is_hungry = is_hungry;
-  is_hungry          = health_get() <= hungry_at;
+  is_hungry          = health() <= hungry_at;
 
   int starving_at = (int) ((double) health_max() * ((double) tpp->health_starving_pct() / 100.0));
 
   auto old_is_starving = is_starving;
-  is_starving          = health_get() <= starving_at;
+  is_starving          = health() <= starving_at;
 
   if (old_is_starving != is_starving) {
     if (is_starving) {
