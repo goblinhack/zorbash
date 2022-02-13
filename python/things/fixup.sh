@@ -94,7 +94,7 @@ do
       gfx_solid_shadow_set \
       gfx_very_short_shadow_caster_set \
       gfx_water_set \
-      hunger_clock_tick_frequency_set \
+      hunger_clock_tick_freq_set \
       hunger_is_insatiable_set \
       is_able_to_attack_mobs_set \
       is_able_to_break_down_doors_set \

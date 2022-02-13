@@ -43,7 +43,7 @@ PyObject *level_gfx_show_asleep_at(PyObject *obj, PyObject *args, PyObject *keyw
 PyObject *level_gfx_solid_shadow_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_very_short_shadow_caster_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_hunger_clock_tick_frequency_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_hunger_clock_tick_freq_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_hunger_is_insatiable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_attack_mobs_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_break_down_doors_at(PyObject *obj, PyObject *args, PyObject *keywds);

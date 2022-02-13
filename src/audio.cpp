@@ -23,7 +23,7 @@ bool audio_init(void)
 {
   TRACE_AND_INDENT();
   //
-  // Output sampling frequency in samples per second (Hz).
+  // Output sampling freq in samples per second (Hz).
   // you might use MIX_DEFAULT_FREQUENCY(22050) since that is a good value
   // for most games.
   //

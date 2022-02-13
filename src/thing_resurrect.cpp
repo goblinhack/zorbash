@@ -65,8 +65,8 @@ void Thing::resurrect_tick(void)
   //
   // Rise at the apointed time
   //
-  if (game->tick_current < tick_resurrect_when_get()) {
-    dbg("Too soon to rise from the grave, at %d wait for %d", game->tick_current, tick_resurrect_when_get());
+  if (game->tick_current < tick_resurrect_when()) {
+    dbg("Too soon to rise from the grave, at %d wait for %d", game->tick_current, tick_resurrect_when());
     return;
   }
 

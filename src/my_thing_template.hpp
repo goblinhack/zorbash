@@ -75,7 +75,7 @@ private:
   Dice _health_initial_dice {};
   Dice _lifespan_dice {};
   Dice _nutrition_dice {};
-  Dice _on_idle_tick_frequency_dice {};
+  Dice _on_idle_tick_freq_dice {};
   Dice _resurrect_dice {};
   Dice _spawn_group_size_dice {};
 
@@ -170,7 +170,7 @@ private:
   int _gfx_very_short_shadow_caster {};
   int _gfx_water {};
   int _health_starving_pct {};
-  int _hunger_clock_tick_frequency {};
+  int _hunger_clock_tick_freq {};
   int _hunger_health_pct {};
   int _hunger_is_insatiable {};
   int _internal_has_dir_anim {};
@@ -683,7 +683,7 @@ private:
   std::string _on_fall_do;
   std::string _on_final_use_do;
   std::string _on_firing_at_something_do;
-  std::string _on_idle_tick_frequency_dice_str;
+  std::string _on_idle_tick_freq_dice_str;
   std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
@@ -777,7 +777,7 @@ public:
   const Dice &gold_value_dice(void) const;
   const Dice &lifespan_dice(void) const;
   const Dice &nutrition_dice(void) const;
-  const Dice &on_idle_tick_frequency_dice(void) const;
+  const Dice &on_idle_tick_freq_dice(void) const;
   const Dice &resurrect_dice(void) const;
   const Dice &spawn_group_size_dice(void) const;
 
@@ -797,7 +797,7 @@ public:
   const int damage_necrosis(void) const;
   const int damage_poison(void) const;
   const int health_initial(void) const;
-  const int on_idle_tick_frequency_get(void) const;
+  const int on_idle_tick_freq(void) const;
   const int spawn_group_size(void) const;
   const int lifespan(void) const;
   const int nutrition(void) const;
@@ -852,7 +852,7 @@ public:
   void health_initial_dice_set(const std::string &);
   void lifespan_dice_set(const std::string &);
   void nutrition_dice_set(const std::string &);
-  void on_idle_tick_frequency_dice_set(const std::string &);
+  void on_idle_tick_freq_dice_set(const std::string &);
   void resurrect_dice_set(const std::string &);
   void spawn_group_size_dice_set(const std::string &);
 
@@ -912,7 +912,7 @@ public:
   const std::string &on_fall_do(void) const { return _on_fall_do; }
   const std::string &on_final_use_do(void) const { return _on_final_use_do; }
   const std::string &on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
-  const std::string &on_idle_tick_frequency_dice_str(void) const;
+  const std::string &on_idle_tick_freq_dice_str(void) const;
   const std::string &on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
@@ -1056,7 +1056,7 @@ public:
   int gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
   int gfx_water(void) const { return _gfx_water; }
   int health_starving_pct(void) const { return _health_starving_pct; }
-  int hunger_clock_tick_frequency(void) const { return _hunger_clock_tick_frequency; }
+  int hunger_clock_tick_freq(void) const { return _hunger_clock_tick_freq; }
   int hunger_health_pct(void) const { return _hunger_health_pct; }
   int hunger_is_insatiable(void) const { return _hunger_is_insatiable; }
   int internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
@@ -1605,7 +1605,7 @@ public:
   void gfx_very_short_shadow_caster_set(int v) { _gfx_very_short_shadow_caster = v; }
   void gfx_water_set(int v) { _gfx_water = v; }
   void health_starving_pct_set(int v) { _health_starving_pct = v; }
-  void hunger_clock_tick_frequency_set(int v) { _hunger_clock_tick_frequency = v; }
+  void hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
   void hunger_health_pct_set(int v) { _hunger_health_pct = v; }
   void hunger_is_insatiable_set(int v) { _hunger_is_insatiable = v; }
   void internal_has_dir_anim_set(int v) { _internal_has_dir_anim = v; }

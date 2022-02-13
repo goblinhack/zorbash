@@ -11,13 +11,13 @@
 //
 // Dice
 //
-const Dice        &Tp::on_idle_tick_frequency_dice(void) const { return _on_idle_tick_frequency_dice; }
-const int          Tp::on_idle_tick_frequency_get(void) const { return _on_idle_tick_frequency_dice.roll(); }
-const std::string &Tp::on_idle_tick_frequency_dice_str(void) const { return _on_idle_tick_frequency_dice_str; }
-void               Tp::on_idle_tick_frequency_dice_set(const std::string &v)
+const Dice        &Tp::on_idle_tick_freq_dice(void) const { return _on_idle_tick_freq_dice; }
+const int          Tp::on_idle_tick_freq(void) const { return _on_idle_tick_freq_dice.roll(); }
+const std::string &Tp::on_idle_tick_freq_dice_str(void) const { return _on_idle_tick_freq_dice_str; }
+void               Tp::on_idle_tick_freq_dice_set(const std::string &v)
 {
-  _on_idle_tick_frequency_dice     = v;
-  _on_idle_tick_frequency_dice_str = v;
+  _on_idle_tick_freq_dice     = v;
+  _on_idle_tick_freq_dice_str = v;
 }
 
 const Dice        &Tp::spawn_group_size_dice(void) const { return _spawn_group_size_dice; }

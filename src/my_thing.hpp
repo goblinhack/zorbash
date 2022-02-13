@@ -530,7 +530,7 @@ public:
   const Dice &health_initial_dice(void);
   const Dice &lifespan_dice(void);
   const Dice &nutrition_dice(void);
-  const Dice &on_idle_tick_frequency_dice(void);
+  const Dice &on_idle_tick_freq_dice(void);
   const Dice &spawn_group_size_dice(void);
   const Dice &resurrect_dice(void);
 
@@ -618,7 +618,7 @@ public:
   const std::string &on_fall_do(void);
   const std::string &on_final_use_do(void);
   const std::string &on_firing_at_something_do(void);
-  const std::string &on_idle_tick_frequency_dice_str(void);
+  const std::string &on_idle_tick_freq_dice_str(void);
   const std::string &on_lifespan_tick_do(void);
   const std::string &on_move_do(void);
   const std::string &on_open_do(void);
@@ -930,7 +930,7 @@ public:
   int health_max_set(int);
   int health_set(int);
   int health_starving_pct(void);
-  int hunger_clock_tick_frequency_get(void);
+  int hunger_clock_tick_freq(void);
   int hunger_health_pct(void);
   int hunger_is_insatiable(void);
   int idle_count_decr(int);
@@ -1313,7 +1313,7 @@ public:
   int on_damage_stat_str(Thingp owner, Thingp hitter, int damage);
   int on_death_drop_all_items(void);
   int on_death_is_open(void);
-  int on_idle_tick_frequency_get(void);
+  int on_idle_tick_freq(void);
   int on_owner_damage_acid(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_cold(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_crush(Thingp owner, Thingp hitter, int damage);
@@ -1814,14 +1814,14 @@ public:
 
   uint32_t tick_resurrect_when_decr(int);
   uint32_t tick_resurrect_when_decr(void);
-  uint32_t tick_resurrect_when_get(void);
+  uint32_t tick_resurrect_when(void);
   uint32_t tick_resurrect_when_incr(int);
   uint32_t tick_resurrect_when_incr(void);
   uint32_t tick_resurrect_when_set(int);
 
   uint32_t movement_left_decr(int);
   uint32_t movement_left_decr(void);
-  uint32_t movement_left_get(void);
+  uint32_t movement_left(void);
   uint32_t movement_left_incr(int);
   uint32_t movement_left_incr(void);
   uint32_t movement_left_set(int);
@@ -1854,6 +1854,7 @@ public:
   void ai_log(const std::string &msg, Thingp it);
   void animate(void);
   void avoid_tick(void);
+  void awake(void);
   void barrel_tick(void);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
@@ -1867,9 +1868,13 @@ public:
   void blit_upside_down(int fbo);
   void blit_wall_cladding(point tl, point br, const ThingTiles *tiles);
   void blit_wall_shadow(point tl, point br, const ThingTiles *tiles);
+  void born_set(point3d);
   void botcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void botcon_(const char *fmt, va_list args); // compile error without
+  void bounce_count_set(int);
+  void bounce_fade_set(float);
   void bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count);
+  void bounce_height_set(float);
   void brazier_tick(void);
   void buff_activate(Thingp what);
   void buff_deactivate(Thingp what);
@@ -1894,6 +1899,7 @@ public:
   void dead(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void dead_(const char *fmt, va_list args); // compile error without
   void dead(const std::string &);
+  void dead_reason_set(const std::string &);
   void dead_scheduled(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void dead_scheduled_(const char *fmt, va_list args);
   void dead_scheduled(const std::string &);
@@ -1929,40 +1935,47 @@ public:
   void dump(std::string prefix, std::ostream &out);
   void enchant_randomly(void);
   void enemies_tick(void);
+  void equip_carry_anim_id_set(ThingId equip_carry_anim_id, int equip);
+  void equip_carry_anim_set(Thingp equip_carry_anim, int equip);
   void equip_remove_anim(int equip);
+  void equip_use_anim_id_set(ThingId gfx_anim_use_id, int equip);
+  void equip_use_anim_set(Thingp gfx_anim_use, int equip);
+  void equip_use_offset_get(int *dx, int *dy, int equip);
   void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void err_(const char *fmt, va_list args); // compile error without
+  void fadeup_fade_set(float);
   void fadeup(float fadeup_height, float fadeup_fade, ts_t ms);
+  void fadeup_height_set(float);
   void fall(float fall_height, ts_t ms);
+  void fall_height_set(float);
   void fall_into_the_void(void);
   void fire_tick(void);
   void gas_poison_tick(void);
   void gc(void);
-  void equip_use_offset_get(int *dx, int *dy, int equip);
-  void light_power_including_torch_effect_get(uint8_t &light_power);
-  void tiles_get(void);
   void goal_penalty_tick(void);
   void grass_tick(void);
   void hide(void);
   void hooks_remove(void);
   void hunger_clock_tick(void);
   void hunger_update(void);
-  void score_incr(int);
   void inherit_from(Thingp it);
   void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);
   void init_lights(void);
+  void interpolated_at_set(fpoint v);
   void inventory_particle(Thingp what, uint32_t slot);
   void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);
   void jump_end(void);
   void killed(Thingp defeater, const char *reason);
   void killed(Thingp defeater, const std::string &reason);
   void lava_tick(void);
+  void leader_set(Thingp leader);
   void level_change(Levelp);
   void level_enter(void);
   void level_leave(void);
   void level_pop(void);
   void level_push(void);
   void lifespan_tick(void);
+  void light_power_including_torch_effect_get(uint8_t &light_power);
   void light_update_power(void);
   void location_check_all_things_at(void);
   void location_check_forced_all_things_at(void);
@@ -1971,8 +1984,12 @@ public:
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void log_(const char *fmt, va_list args); // compile error without
   void lunge(point tt);
+  void lunge_to_set(point);
   void map_beast_check(void);
+  void map_beast_count_set(int);
   void map_treasure_check(void);
+  void map_treasure_count_set(int);
+  void mob_set(Thingp mob);
   void move_carried_items_immediately(void);
   void move_carried_items(void);
   void move_delta(point);
@@ -1982,8 +1999,8 @@ public:
   void move_to_immediately(point to);
   void move_to(point to);
   void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void msg_set(const std::string &);
   void necrosis_tick(void);
-  void temperature_tick(void);
   void new_aip(void);
   void new_infop(void);
   void new_itemsp(void);
@@ -2015,6 +2032,7 @@ public:
   void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_miss_do(Thingp hitter);
   void on_you_natural_attack(void);
+  void owner_set(Thingp owner);
   void path_shorten(std::vector< point > &path);
   void place_blood(bool force = false);
   void poisoned(void);
@@ -2035,39 +2053,21 @@ public:
   void resurrect(void);
   void rotting(void);
   void score_add(Thingp victim);
-  void secret_door_tick(void);
-  void born_set(point3d);
-  void bounce_count_set(int);
-  void bounce_fade_set(float);
-  void bounce_height_set(float);
-  void dead_reason_set(const std::string &);
-  void equip_carry_anim_id_set(ThingId equip_carry_anim_id, int equip);
-  void equip_carry_anim_set(Thingp equip_carry_anim, int equip);
-  void equip_use_anim_id_set(ThingId gfx_anim_use_id, int equip);
-  void equip_use_anim_set(Thingp gfx_anim_use, int equip);
-  void fadeup_fade_set(float);
-  void fadeup_height_set(float);
-  void fall_height_set(float);
-  void interpolated_at_set(fpoint v);
-  void leader_set(Thingp leader);
-  void lunge_to_set(point);
-  void map_beast_count_set(int);
-  void map_treasure_count_set(int);
-  void mob_set(Thingp mob);
-  void msg_set(const std::string &);
-  void owner_set(Thingp owner);
+  void score_incr(int);
   void score_set(int);
-  void spawned_owner_set(Thingp spawner_owner);
-  void submerged_offset_set(int);
-  void wobble_set(float);
+  void secret_door_tick(void);
   void show_botcon_description(void);
   void skill_activate(Thingp what);
   void skill_deactivate(Thingp what);
   void skill_remove_all(void);
+  void spawned_owner_set(Thingp spawner_owner);
   void stamina_boost(int v);
   void stats_tick(void);
+  void submerged_offset_set(int);
+  void temperature_tick(void);
   void throw_at(Thingp w, Thingp target);
   void tick(void);
+  void tiles_get(void);
   void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon_(const char *fmt, va_list args); // compile error without
   void try_to_carry(const std::list< Thingp > &items);
@@ -2084,10 +2084,10 @@ public:
   void used(Thingp w, Thingp target, bool remove_after_use);
   void visible(void);
   void wake(void);
-  void awake(void);
   void water_tick(void);
   void weapon_sheath(void);
   void wobble(float wobble);
+  void wobble_set(float);
 
   const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *stat_const_bag(void);
 

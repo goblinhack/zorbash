@@ -17,22 +17,22 @@
 //
 // Dice
 //
-const Dice &Thing::on_idle_tick_frequency_dice(void)
+const Dice &Thing::on_idle_tick_freq_dice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_idle_tick_frequency_dice());
+  return (tp()->on_idle_tick_freq_dice());
 }
 
-const std::string &Thing::on_idle_tick_frequency_dice_str(void)
+const std::string &Thing::on_idle_tick_freq_dice_str(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_idle_tick_frequency_dice_str());
+  return (tp()->on_idle_tick_freq_dice_str());
 }
 
-int Thing::on_idle_tick_frequency_get(void)
+int Thing::on_idle_tick_freq(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_idle_tick_frequency_dice().roll());
+  return (tp()->on_idle_tick_freq_dice().roll());
 }
 
 const Dice &Thing::spawn_group_size_dice(void)
@@ -1344,10 +1344,10 @@ int Thing::is_able_to_jump_escape(void)
   return (tp()->is_able_to_jump_escape());
 }
 
-int Thing::hunger_clock_tick_frequency_get(void)
+int Thing::hunger_clock_tick_freq(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->hunger_clock_tick_frequency());
+  return (tp()->hunger_clock_tick_freq());
 }
 
 int Thing::is_able_to_follow(void)
@@ -4284,7 +4284,7 @@ int Thing::enchant_max_current_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // tick_resurrect_when
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_resurrect_when_get(void)
+uint32_t Thing::tick_resurrect_when(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -4337,7 +4337,7 @@ uint32_t Thing::tick_resurrect_when_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // movement_left
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::movement_left_get(void)
+uint32_t Thing::movement_left(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {

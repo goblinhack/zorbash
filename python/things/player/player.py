@@ -276,7 +276,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.gfx_show_outlined(self, True)
     my.health_initial_dice(self, "100")
     my.health_starving_pct(self, 5)
-    my.hunger_clock_tick_frequency(self, 50)
+    my.hunger_clock_tick_freq(self, 50)
     my.hunger_health_pct(self, 5)
     my.is_able_to_attack_mobs(self, True)
     my.is_able_to_break_down_doors(self, True)

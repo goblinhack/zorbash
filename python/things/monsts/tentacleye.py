@@ -57,7 +57,7 @@ def tp_init(name, text_name):
     my.gfx_show_asleep(self, True)
     my.gfx_show_outlined(self, True)
     my.health_initial_dice(self, "19d10+76")
-    my.hunger_clock_tick_frequency(self, 50)
+    my.hunger_clock_tick_freq(self, 50)
     my.hunger_health_pct(self, 95)
     my.hunger_is_insatiable(self, True)
     my.is_able_to_change_levels(self, True)

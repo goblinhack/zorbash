@@ -15,14 +15,14 @@ void Thing::hunger_clock_tick(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_dead || ! hunger_clock_tick_frequency_get()) {
+  if (is_dead || ! hunger_clock_tick_freq()) {
     return;
   }
 
   //
   // Hunger clock fires rarely
   //
-  if (game->tick_current % hunger_clock_tick_frequency_get()) {
+  if (game->tick_current % hunger_clock_tick_freq()) {
     return;
   }
 
@@ -56,7 +56,7 @@ void Thing::hunger_update(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_dead || ! hunger_clock_tick_frequency_get()) {
+  if (is_dead || ! hunger_clock_tick_freq()) {
     return;
   }
 
