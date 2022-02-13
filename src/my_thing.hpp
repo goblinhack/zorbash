@@ -1366,8 +1366,8 @@ public:
   int spawned_count_incr(int);
   int spawned_count_incr(void);
   int spawned_count_set(int);
-  int spawn_group_radius_get(void);
-  int spawn_group_size_get(void);
+  int spawn_group_radius(void);
+  int spawn_group_size(void);
   int spawn_randomly_in_radius_range(const std::string &what, int amount, uint32_t radius_min, uint32_t radius_max);
   int stamina_decr(int);
   int stamina_decr(void);

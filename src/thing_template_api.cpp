@@ -21,7 +21,7 @@ void               Tp::on_idle_tick_frequency_dice_set(const std::string &v)
 }
 
 const Dice        &Tp::spawn_group_size_dice(void) const { return _spawn_group_size_dice; }
-const int          Tp::spawn_group_size_get(void) const { return _spawn_group_size_dice.roll(); }
+const int          Tp::spawn_group_size(void) const { return _spawn_group_size_dice.roll(); }
 const std::string &Tp::spawn_group_size_dice_str(void) const { return _spawn_group_size_dice_str; }
 void               Tp::spawn_group_size_dice_set(const std::string &v)
 {
