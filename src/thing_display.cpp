@@ -106,7 +106,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
     float dx = 1.0;
     float dy = 1.0;
     if (level->player) {
-      if (immediate_owner_id_get() == level->player->id) {
+      if (immediate_owner_id() == level->player->id) {
         // use default shadow for carried items
       } else if (this != level->player) {
         fpoint      p = level->player->interpolated_at_get();
@@ -248,7 +248,7 @@ void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, 
     return;
   }
 
-  if (is_player() || (immediate_owner_id_get() == level->player->id)) {
+  if (is_player() || (immediate_owner_id() == level->player->id)) {
     blit_player_owned_shadow(tpp, tile, blit_tl, blit_br);
   } else {
     blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);

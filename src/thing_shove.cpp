@@ -84,7 +84,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   //
   // If I'm on fire. set it on fire too!
   //
-  if (on_fire_anim_id_get().ok()) {
+  if (on_fire_anim_id().ok()) {
     it->on_fire_set("I am on fire, set it on fire too");
   }
 

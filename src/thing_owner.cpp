@@ -111,13 +111,13 @@ Thingp Thing::top_owner(void)
     return nullptr;
   }
 
-  auto id = immediate_owner_id_get();
+  auto id = immediate_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
       return nullptr;
     }
-    if (unlikely(i->immediate_owner_id_get().ok())) {
+    if (unlikely(i->immediate_owner_id().ok())) {
       return i->immediate_owner();
     }
     return i;
@@ -141,7 +141,7 @@ Thingp Thing::immediate_owner(void)
     return nullptr;
   }
 
-  auto id = immediate_owner_id_get();
+  auto id = immediate_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {

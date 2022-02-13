@@ -49,7 +49,7 @@ void Thing::on_fire(void)
 bool Thing::is_on_fire(void)
 {
   TRACE_NO_INDENT();
-  auto id = on_fire_anim_id_get();
+  auto id = on_fire_anim_id();
   if (! id) {
     return false;
   }
@@ -60,7 +60,7 @@ bool Thing::is_on_fire(void)
 void Thing::unset_on_fire(void)
 {
   TRACE_NO_INDENT();
-  auto id = on_fire_anim_id_get();
+  auto id = on_fire_anim_id();
   if (! id) {
     return;
   }
@@ -80,7 +80,7 @@ bool Thing::on_fire_set(const std::string &why)
     return false;
   }
 
-  if (on_fire_anim_id_get().ok()) {
+  if (on_fire_anim_id().ok()) {
     return false;
   }
 

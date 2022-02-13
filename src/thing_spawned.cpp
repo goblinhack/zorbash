@@ -13,13 +13,13 @@
 Thingp Thing::top_spawned_owner(void)
 {
   TRACE_NO_INDENT();
-  auto id = immediate_spawned_owner_id_get();
+  auto id = immediate_spawned_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
       return nullptr;
     }
-    if (unlikely(i->immediate_spawned_owner_id_get().ok())) {
+    if (unlikely(i->immediate_spawned_owner_id().ok())) {
       return i->immediate_spawned_owner();
     }
     return i;
@@ -31,7 +31,7 @@ Thingp Thing::top_spawned_owner(void)
 Thingp Thing::immediate_spawned_owner(void)
 {
   TRACE_NO_INDENT();
-  auto id = immediate_spawned_owner_id_get();
+  auto id = immediate_spawned_owner_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {

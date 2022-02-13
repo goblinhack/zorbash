@@ -344,10 +344,10 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     w->is_jumping = true;
   }
 
-  auto on_fire_anim_id = on_fire_anim_id_get();
-  if (on_fire_anim_id.ok()) {
+  auto on_fire_id = on_fire_anim_id();
+  if (on_fire_id.ok()) {
     TRACE_NO_INDENT();
-    auto id = on_fire_anim_id;
+    auto id = on_fire_id;
     auto w  = level->thing_find(id);
     if (w) {
       w->move_to_immediately(curr_at);
@@ -588,10 +588,10 @@ void Thing::jump_end(void)
     o->is_jumping = false;
   }
 
-  auto on_fire_anim_id = on_fire_anim_id_get();
-  if (on_fire_anim_id.ok()) {
+  auto on_fire_id = on_fire_anim_id();
+  if (on_fire_id.ok()) {
     TRACE_NO_INDENT();
-    auto w = level->thing_find(on_fire_anim_id);
+    auto w = level->thing_find(on_fire_id);
     if (w) {
       w->is_jumping = false;
     }

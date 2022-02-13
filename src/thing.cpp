@@ -55,7 +55,7 @@ std::size_t Thing::light_count(void)
   return (infop()->light.size());
 }
 
-const ThingId &Thing::immediate_owner_id_get(void)
+const ThingId &Thing::immediate_owner_id(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
@@ -64,7 +64,7 @@ const ThingId &Thing::immediate_owner_id_get(void)
   return (infop()->owner_id);
 }
 
-const ThingId &Thing::top_owner_id_get(void)
+const ThingId &Thing::top_owner_id(void)
 {
   TRACE_NO_INDENT();
   auto t = top_owner();
@@ -81,7 +81,7 @@ const ThingId &Thing::owner_id_set(const ThingId &v)
   return (infop()->owner_id = v);
 }
 
-const ThingId &Thing::immediate_mob_id_get(void)
+const ThingId &Thing::immediate_mob_id(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
@@ -97,7 +97,7 @@ const ThingId &Thing::mob_id_set(const ThingId &v)
   return (infop()->mob_id = v);
 }
 
-const ThingId &Thing::leader_id_get(void)
+const ThingId &Thing::leader_id(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
@@ -113,7 +113,7 @@ const ThingId &Thing::leader_id_set(const ThingId &v)
   return (infop()->leader_id = v);
 }
 
-const ThingId &Thing::immediate_spawned_owner_id_get(void)
+const ThingId &Thing::immediate_spawned_owner_id(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
