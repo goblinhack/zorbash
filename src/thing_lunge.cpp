@@ -25,17 +25,17 @@ void Thing::lunge(point to)
 
 float Thing::lunge_get(void)
 {
-  if (! ts_lunge_begin_get()) {
+  if (! ts_lunge_begin()) {
     return 0;
   }
 
   auto t = time_get_time_ms_cached();
 
-  if (t >= ts_lunge_end_get()) {
+  if (t >= ts_lunge_end()) {
     return 0;
   }
 
-  float time_step = (float) (t - ts_lunge_begin_get()) / (float) (ts_lunge_end_get() - ts_lunge_begin_get());
+  float time_step = (float) (t - ts_lunge_begin()) / (float) (ts_lunge_end() - ts_lunge_begin());
 
   if (time_step > 0.5) {
     return (1.0 - time_step);

@@ -50,7 +50,7 @@ void Thing::animate(void)
     }
   }
 
-  if (time_get_time_ms_cached() <= ts_anim_delay_end_get()) {
+  if (time_get_time_ms_cached() <= ts_anim_delay_end()) {
 #ifdef DEBUG_ANIM
     if (is_debug_type()) {
       con("Waiting on anim frame");
