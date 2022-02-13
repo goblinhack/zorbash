@@ -65,12 +65,12 @@ void Thing::hunger_update(void)
 
   auto tpp = tp();
 
-  int hungry_at = (int) ((double) health_max_get() * ((double) tpp->hunger_health_pct() / 100.0));
+  int hungry_at = (int) ((double) health_max() * ((double) tpp->hunger_health_pct() / 100.0));
 
   auto old_is_hungry = is_hungry;
   is_hungry          = health_get() <= hungry_at;
 
-  int starving_at = (int) ((double) health_max_get() * ((double) tpp->health_starving_pct() / 100.0));
+  int starving_at = (int) ((double) health_max() * ((double) tpp->health_starving_pct() / 100.0));
 
   auto old_is_starving = is_starving;
   is_starving          = health_get() <= starving_at;

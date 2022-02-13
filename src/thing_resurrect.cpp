@@ -19,7 +19,7 @@ void Thing::resurrect(void)
   //
   // Resurrect, but weaker
   //
-  auto v = health_max_get() / 2;
+  auto v = health_max() / 2;
   if (v > 0) {
     is_resurrecting = true;
     tile_curr       = 0;

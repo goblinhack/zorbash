@@ -479,7 +479,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       //
       // Can jump but only if not tired.
       //
-      if (stamina_get() > stamina_max_get() / 2) {
+      if (stamina_get() > stamina_max() / 2) {
         //
         // Trace all possible jump paths to see if we can jump over
         //
@@ -975,7 +975,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
             if (is_enemy(it) && (dist <= max_dist)) {
               if (! is_fearless() && (is_to_be_avoided(it) || is_dangerous(it)) &&
-                  (health_get() < health_max_get() / 2)) {
+                  (health_get() < health_max() / 2)) {
                 //
                 // Low on health. Best to avoid this enemy.
                 //

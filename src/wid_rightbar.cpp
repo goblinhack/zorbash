@@ -662,7 +662,7 @@ static bool wid_rightbar_create(void)
     point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
 
-    int i     = ((float) player->health_get() / (float) player->health_max_get()) * (float) UI_HEALTH_BAR_STEPS - 1;
+    int i     = ((float) player->health_get() / (float) player->health_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_" + std::to_string(i);
@@ -679,7 +679,7 @@ static bool wid_rightbar_create(void)
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
-    std::string s = std::to_string(player->health_get()) + "/" + std::to_string(player->health_max_get());
+    std::string s = std::to_string(player->health_get()) + "/" + std::to_string(player->health_max());
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
@@ -700,7 +700,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
-    int i     = ((float) player->stamina_get() / (float) player->stamina_max_get()) * (float) UI_HEALTH_BAR_STEPS - 1;
+    int i     = ((float) player->stamina_get() / (float) player->stamina_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_" + std::to_string(i);
@@ -717,7 +717,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
-    std::string s = std::to_string(player->stamina_get()) + "/" + std::to_string(player->stamina_max_get());
+    std::string s = std::to_string(player->stamina_get()) + "/" + std::to_string(player->stamina_max());
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
   }

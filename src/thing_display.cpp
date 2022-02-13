@@ -795,7 +795,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   // Show a health bar over the thing?
   //
   auto h = health_get();
-  auto m = health_max_get();
+  auto m = health_max();
 
   auto lit = (fbo == FBO_FULLMAP) || level->is_lit_currently_no_check(curr_at.x, curr_at.y);
 

@@ -19,11 +19,11 @@ float Thing::how_far_i_can_jump(void)
   TRACE_NO_INDENT();
   auto d = (float) distance_jump() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
-  if (stamina_get() < stamina_max_get() / 2) {
+  if (stamina_get() < stamina_max() / 2) {
     d /= 2;
   }
 
-  if (stamina_get() < stamina_max_get() / 4) {
+  if (stamina_get() < stamina_max() / 4) {
     d /= 2;
   }
 

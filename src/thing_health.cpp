@@ -18,7 +18,7 @@ int Thing::health_boost(int v)
 
   auto old_health = health_get();
   auto new_health = old_health + v;
-  auto max_health = health_max_get();
+  auto max_health = health_max();
 
   if (old_health >= max_health) {
     dbg("Health boost not possible, maxxed out already");
@@ -44,7 +44,7 @@ bool Thing::health_boost_would_occur(int v)
   }
 
   auto old_health = health_get();
-  auto max_health = health_max_get();
+  auto max_health = health_max();
 
   if (old_health >= max_health) {
     return false;
@@ -62,6 +62,6 @@ bool Thing::is_bloodied(void)
 float Thing::health_pct_get(void)
 {
   TRACE_NO_INDENT();
-  float pct = ((float) health_get() / (float) health_max_get()) * 100;
+  float pct = ((float) health_get() / (float) health_max()) * 100;
   return pct;
 }
