@@ -378,7 +378,7 @@ bool Thing::fall_to_next_level(void)
         level->update_new_level();
       }
 
-      if (tp()->health_initial_dice_str_get() != "") {
+      if (tp()->health_initial_dice_str() != "") {
         auto h = health_decr(fall_damage);
         if (h <= 0) {
           h = health_set(0);

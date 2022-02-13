@@ -19,12 +19,12 @@ bool Thing::idle_check(void)
 {
   TRACE_NO_INDENT();
 
-  if (! std::empty(on_idle_tick_frequency_dice_str_get())) {
+  if (! std::empty(on_idle_tick_frequency_dice_str())) {
     auto roll = on_idle_tick_frequency_get();
     // con("%d %d roll %d", game->tick_current, tick_last_did_something(), roll);
     if (game->tick_current - tick_last_did_something() >= (unsigned int) roll) {
       // con("%d %d roll %d tick", game->tick_current, tick_last_did_something(), roll);
-      auto d   = on_idle_tick_frequency_dice_get();
+      auto d   = on_idle_tick_frequency_dice();
       auto mod = d.python_mod;
 
       if (mod == "me") {

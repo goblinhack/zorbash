@@ -37,7 +37,7 @@ bool Thing::too_far_from_mob(void)
     return false;
   }
 
-  if (distance(curr_at, mob->curr_at) > distance_mob_max_get()) {
+  if (distance(curr_at, mob->curr_at) > distance_mob_max_float()) {
     return true;
   }
   return false;
@@ -50,7 +50,7 @@ bool Thing::too_far_from_mob(point p)
     return false;
   }
 
-  if (distance(p, mob->curr_at) > distance_mob_max_get()) {
+  if (distance(p, mob->curr_at) > distance_mob_max_float()) {
     return true;
   }
   return false;
@@ -63,7 +63,7 @@ bool Thing::too_far_from_mob(point p, float delta)
     return false;
   }
 
-  if (distance(p, mob->curr_at) > distance_mob_max_get() + delta) {
+  if (distance(p, mob->curr_at) > distance_mob_max_float() + delta) {
     return true;
   }
   return false;

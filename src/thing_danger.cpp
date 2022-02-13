@@ -67,20 +67,20 @@ int Tp::get_danger_level(void)
 
   danger_level += aggression_level_pct();
 
-  danger_level += damage_melee_dice_get().max_roll();
-  danger_level += damage_poison_dice_get().max_roll();
-  danger_level += damage_future1_dice_get().max_roll();
-  danger_level += damage_future2_dice_get().max_roll();
-  danger_level += damage_future3_dice_get().max_roll();
-  danger_level += damage_cold_dice_get().max_roll();
-  danger_level += damage_fire_dice_get().max_roll();
-  danger_level += damage_crush_dice_get().max_roll();
-  danger_level += damage_lightning_dice_get().max_roll();
-  danger_level += damage_energy_dice_get().max_roll();
-  danger_level += damage_acid_dice_get().max_roll();
-  danger_level += damage_digest_dice_get().max_roll();
-  danger_level += damage_digest_dice_get().max_roll();
-  danger_level += damage_natural_dice_get().max_roll();
+  danger_level += damage_melee_dice().max_roll();
+  danger_level += damage_poison_dice().max_roll();
+  danger_level += damage_future1_dice().max_roll();
+  danger_level += damage_future2_dice().max_roll();
+  danger_level += damage_future3_dice().max_roll();
+  danger_level += damage_cold_dice().max_roll();
+  danger_level += damage_fire_dice().max_roll();
+  danger_level += damage_crush_dice().max_roll();
+  danger_level += damage_lightning_dice().max_roll();
+  danger_level += damage_energy_dice().max_roll();
+  danger_level += damage_acid_dice().max_roll();
+  danger_level += damage_digest_dice().max_roll();
+  danger_level += damage_digest_dice().max_roll();
+  danger_level += damage_natural_dice().max_roll();
 
   //
   // Don't include crush damage as it is non typical

@@ -15,27 +15,27 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-const Dice &Thing::damage_necrosis_dice_get(void)
+const Dice &Thing::damage_necrosis_dice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_necrosis_dice_get());
+  return (tp()->damage_necrosis_dice());
 }
 
-const std::string Thing::damage_necrosis_dice_str_get(void)
+const std::string Thing::damage_necrosis_dice_str(void)
 {
   TRACE_NO_INDENT();
 
   if (enchant_get()) {
-    return tp()->damage_necrosis_dice_str_get() + modifier_to_string(enchant_get());
+    return tp()->damage_necrosis_dice_str() + modifier_to_string(enchant_get());
   }
 
-  return (tp()->damage_necrosis_dice_str_get());
+  return (tp()->damage_necrosis_dice_str());
 }
 
 int Thing::damage_necrosis_get(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->damage_necrosis_dice_get().roll();
+  auto roll = tp()->damage_necrosis_dice().roll();
 
   if (roll) {
     return roll + enchant_get();
