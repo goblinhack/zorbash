@@ -73,7 +73,7 @@ def tp_init(name, text_name):
     my.is_toughness_soft(self, True)
     my.long_text_description(self, "A snarling mass of flying cuteness. They don't see so well, so best to keep far away.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
-    my.move_speed(self, 100)
+    my.move_speed(self, 300)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")

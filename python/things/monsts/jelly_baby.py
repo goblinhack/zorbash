@@ -84,7 +84,7 @@ def tp_init(name, text_name):
     my.is_toughness_soft(self, True)
     my.long_text_description(self, "Jelly jumpers are numerous, bouncy and lots of fun! They will eat almost anything, including their own. They have the annoying habit of jumping when threatened. This one is a baby jelly. It tends to avoid adults of its kind. So should you.")
     my.monst_size(self, my.MONST_SIZE_TINY)
-    my.move_speed(self, 100)
+    my.move_speed(self, 150)
     my.noise_decibels_hearing(self, 50)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
