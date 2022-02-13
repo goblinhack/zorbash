@@ -158,7 +158,7 @@ int Thing::temperature_incr(int v)
     }
   }
 
-  if (game->tick_current != tick_last_i_was_attacked_get()) {
+  if (game->tick_current != tick_last_i_was_attacked()) {
     if (! hit) {
       if (v < -100) {
         if (is_alive_monst()) {

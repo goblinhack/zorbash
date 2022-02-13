@@ -76,16 +76,16 @@ void tp_fixup(void)
       if (! tp->stat_str_get()) {
         tp->stat_str_set(10);
       }
-      if (! tp->stat_def_get()) {
+      if (! tp->stat_def()) {
         tp->stat_def_set(10);
       }
-      if (! tp->stat_con_get()) {
+      if (! tp->stat_con()) {
         tp->stat_con_set(10);
       }
-      if (! tp->stat_dex_get()) {
+      if (! tp->stat_dex()) {
         tp->stat_dex_set(10);
       }
-      if (! tp->stat_luck_get()) {
+      if (! tp->stat_luck()) {
         tp->stat_luck_set(10);
       }
     }

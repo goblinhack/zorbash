@@ -61,7 +61,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   //
   // Don't pick up things we dropped
   //
-  if (game->tick_current < item->tick_last_dropped_get() + 1) {
+  if (game->tick_current < item->tick_last_dropped() + 1) {
     dbg("Worth collecting %s? no, was recently dropped", item->to_short_string().c_str());
     return -1;
   }

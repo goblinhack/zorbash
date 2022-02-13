@@ -569,7 +569,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
   if (is_able_to_tire()) {
     if (stamina_get() < 5) {
       if (is_player()) {
-        if (d20roll_under(stat_con_get())) {
+        if (d20roll_under(stat_con())) {
           msg("You are so tired but dig deep and attack!");
         } else {
           msg("You are too tired to attack.");

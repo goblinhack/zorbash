@@ -18,7 +18,7 @@ void Thing::rest(void)
     health_boost(1);
   }
 
-  if (d20() < stat_con_get()) {
+  if (d20() < stat_con()) {
     stamina_boost(1);
   }
 }

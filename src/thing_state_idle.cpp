@@ -78,7 +78,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     //
     // If not too close to the thread we can try and do something else like pick up a weapon.
     //
-    if (game->tick_current - tick_last_i_was_attacked_get() < 2) {
+    if (game->tick_current - tick_last_i_was_attacked() < 2) {
       //
       // Don't relax. You're being attacked.
       //

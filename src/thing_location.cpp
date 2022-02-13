@@ -165,11 +165,11 @@ void Thing::location_check(void)
   TRACE_NO_INDENT();
 
   if (maybe_infop()) {
-    if (tick_last_location_check_get() == game->tick_current) {
+    if (tick_last_location_check() == game->tick_current) {
       return;
     }
 
-    dbg("Do location check. Last %d, game tick %d", tick_last_location_check_get(), game->tick_current);
+    dbg("Do location check. Last %d, game tick %d", tick_last_location_check(), game->tick_current);
     tick_last_location_check_set(game->tick_current);
   }
 

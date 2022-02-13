@@ -33,7 +33,7 @@ void Thing::gas_poison_tick(void)
   dbg("Poison gas tick");
   TRACE_AND_INDENT();
 
-  if (d20() < stat_con_get()) {
+  if (d20() < stat_con()) {
     if (is_player()) {
       msg("You hold your breath in the gas.");
     }
