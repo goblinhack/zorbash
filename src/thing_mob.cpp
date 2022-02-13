@@ -72,13 +72,13 @@ bool Thing::too_far_from_mob(point p, float delta)
 Thingp Thing::top_mob(void)
 {
   TRACE_NO_INDENT();
-  auto id = immediate_mob_id_get();
+  auto id = immediate_mob_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {
       return nullptr;
     }
-    if (unlikely(i->immediate_mob_id_get().ok())) {
+    if (unlikely(i->immediate_mob_id().ok())) {
       return i->immediate_mob();
     }
     return i;
@@ -90,7 +90,7 @@ Thingp Thing::top_mob(void)
 Thingp Thing::immediate_mob(void)
 {
   TRACE_NO_INDENT();
-  auto id = immediate_mob_id_get();
+  auto id = immediate_mob_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {

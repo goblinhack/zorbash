@@ -146,7 +146,7 @@ bool Thing::too_far_from_leader(point p, float delta)
 Thingp Thing::leader(void)
 {
   TRACE_NO_INDENT();
-  auto id = leader_id_get();
+  auto id = leader_id();
   if (likely(id.ok())) {
     auto i = level->thing_find(id);
     if (unlikely(! i)) {

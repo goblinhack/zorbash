@@ -86,7 +86,7 @@ void Thing::level_change(Levelp l)
   }
 
   {
-    auto id = on_fire_anim_id_get();
+    auto id = on_fire_anim_id();
     if (id.ok()) {
       auto it = level->thing_find(id);
       if (it) {

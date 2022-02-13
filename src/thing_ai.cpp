@@ -850,7 +850,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
-        if (it->immediate_owner_id_get().ok()) {
+        if (it->immediate_owner_id().ok()) {
           AI_LOG("Has an ownwer; ignore", it);
           continue;
         }

@@ -49,7 +49,7 @@ void Thing::hooks_remove()
       o->debuff_remove(this);
     }
 
-    if (id == o->on_fire_anim_id_get()) {
+    if (id == o->on_fire_anim_id()) {
       if (is_loggable()) {
         dbg("Detach on_fire_anim_id from o %s", o->to_string().c_str());
       }
@@ -137,15 +137,15 @@ void Thing::hooks_remove()
     }
   }
 
-  if (immediate_mob_id_get().ok()) {
+  if (immediate_mob_id().ok()) {
     remove_mob();
   }
 
-  if (leader_id_get().ok()) {
+  if (leader_id().ok()) {
     remove_leader();
   }
 
-  if (immediate_spawned_owner_id_get().ok()) {
+  if (immediate_spawned_owner_id().ok()) {
     remove_spawner_owner();
   }
 

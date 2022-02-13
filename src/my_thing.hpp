@@ -251,7 +251,7 @@ public:
   ThingShoved try_to_shove(point future_pos);
   ThingShoved try_to_shove_into_hazard(Thingp it, point delta);
 
-  ThingId on_fire_anim_id_get(void);
+  ThingId on_fire_anim_id(void);
   ThingId on_fire_anim_id_set(ThingId);
 
   ThingId equip_id(int equip);
@@ -534,11 +534,11 @@ public:
   const Dice &spawn_group_size_dice(void);
   const Dice &resurrect_dice(void);
 
-  const ThingId &immediate_mob_id_get(void);
-  const ThingId &leader_id_get(void);
-  const ThingId &immediate_owner_id_get(void);
-  const ThingId &immediate_spawned_owner_id_get(void);
-  const ThingId &top_owner_id_get(void);
+  const ThingId &immediate_mob_id(void);
+  const ThingId &leader_id(void);
+  const ThingId &immediate_owner_id(void);
+  const ThingId &immediate_spawned_owner_id(void);
+  const ThingId &top_owner_id(void);
   const ThingId &mob_id_set(const ThingId &v);
   const ThingId &leader_id_set(const ThingId &v);
   const ThingId &owner_id_set(const ThingId &v);
