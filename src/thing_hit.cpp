@@ -602,7 +602,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   // wand so we can add in enchants.
   //
   if (hitter->is_laser()) {
-    auto owner = hitter->immediate_owner_get();
+    auto owner = hitter->immediate_owner();
     if (owner) {
       if (owner->damage_current()) {
         damage = owner->damage_current();
@@ -1162,7 +1162,7 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
   Thingp real_hitter = nullptr;
 
   if (hitter) {
-    real_hitter = hitter->top_owner_get();
+    real_hitter = hitter->top_owner();
 
     //
     // If on fire, the fire is owned by the player. So don't make the player the real hitter.

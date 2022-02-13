@@ -36,8 +36,8 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_owner  = top_owner_get();
-  auto its_owner = it->top_owner_get();
+  auto my_owner  = top_owner();
+  auto its_owner = it->top_owner();
   if (my_owner && (my_owner == its_owner)) {
     dbg("Not able to shove (same owner) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
@@ -57,8 +57,8 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  auto my_spawned_owner  = top_spawned_owner_get();
-  auto its_spawned_owner = it->top_spawned_owner_get();
+  auto my_spawned_owner  = top_spawned_owner();
+  auto its_spawned_owner = it->top_spawned_owner();
   if (my_spawned_owner && (my_spawned_owner == its_spawned_owner)) {
     dbg("Not able to shove (same spawner) %s", it->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);

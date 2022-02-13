@@ -37,7 +37,7 @@ bool Thing::on_tick(void)
       mod = name();
     }
 
-    auto owner = top_owner_get();
+    auto owner = top_owner();
     if (owner) {
       dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(), owner->to_string().c_str(),
           to_string().c_str(), (unsigned int) curr_at.x, (unsigned int) curr_at.y);

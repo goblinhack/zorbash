@@ -195,7 +195,7 @@ bool Thing::is_carrying_item(void)
     return true;
   }
 
-  auto owner = top_owner_get();
+  auto owner = top_owner();
   if (owner) {
     return owner->is_carrying_item();
   }

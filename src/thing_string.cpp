@@ -54,8 +54,8 @@ std::string Thing::to_string(void)
    * Makes debugs too long
    */
 
-  if (! g_loading && immediate_owner_get()) {
-    auto o = immediate_owner_get();
+  if (! g_loading && immediate_owner()) {
+    auto o = immediate_owner();
     return (string_sprintf(
         "%" PRIX32 " %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d o:%s", id.id, tpp->name().c_str(), is_dead ? "/dead" : "",
         is_scheduled_for_death ? "/dead-sched" : "", is_resurrecting ? "/resurrecting" : "",

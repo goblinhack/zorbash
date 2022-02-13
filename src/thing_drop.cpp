@@ -36,8 +36,8 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   }
   TRACE_AND_INDENT();
 
-  auto top_owner       = what->top_owner_get();
-  auto immediate_owner = what->immediate_owner_get();
+  auto top_owner       = what->top_owner();
+  auto immediate_owner = what->immediate_owner();
 
   if (game->in_transit_item) {
     //
@@ -50,7 +50,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     if ((top_owner != this) && (immediate_owner != this)) {
       if (immediate_owner) {
         dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
-        dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->top_owner_get()->to_string().c_str());
+        dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->top_owner()->to_string().c_str());
         err("Attempt to drop %s which is not carried and owned by %s", what->to_short_string().c_str(),
             immediate_owner->to_string().c_str());
       } else {
@@ -152,12 +152,12 @@ bool Thing::drop_into_ether(Thingp what)
   dbg("Dropping %s into the ether", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  auto top_owner       = what->top_owner_get();
-  auto immediate_owner = what->immediate_owner_get();
+  auto top_owner       = what->top_owner();
+  auto immediate_owner = what->immediate_owner();
   if ((top_owner != this) && (immediate_owner != this)) {
     if (immediate_owner) {
       dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
-      dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->top_owner_get()->to_string().c_str());
+      dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->top_owner()->to_string().c_str());
       err("Attempt to drop into ether %s which is not carried and owned by %s", what->to_short_string().c_str(),
           immediate_owner->to_string().c_str());
     } else {

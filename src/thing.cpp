@@ -67,7 +67,7 @@ const ThingId &Thing::immediate_owner_id_get(void)
 const ThingId &Thing::top_owner_id_get(void)
 {
   TRACE_NO_INDENT();
-  auto t = top_owner_get();
+  auto t = top_owner();
   if (t) {
     return t->id;
   }

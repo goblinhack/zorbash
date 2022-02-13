@@ -268,14 +268,14 @@ public:
   Thingp equip_get(int equip);
   Thingp equip_use_anim_get(int equip);
   Thingp immediate_mob(void);
-  Thingp immediate_owner_get(void);
-  Thingp immediate_spawned_owner_get(void);
+  Thingp immediate_owner(void);
+  Thingp immediate_spawned_owner(void);
   Thingp leader(void);
   Thingp most_dangerous_adjacent_thing_get(void);
   Thingp most_dangerous_visible_thing_get(void);
   Thingp top_mob(void);
-  Thingp top_owner_get(void);
-  Thingp top_spawned_owner_get(void);
+  Thingp top_owner(void);
+  Thingp top_spawned_owner(void);
   Thingp in_the_way(const point s, const point e);
   Thingp in_the_way_(const point s, const point e, int x0_in, int y0_in, int x1_in, int y1_in, int flag);
   Thingp in_the_way(const point s, const point e, int x, int y);

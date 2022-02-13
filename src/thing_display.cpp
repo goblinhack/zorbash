@@ -475,9 +475,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Flipping
   //
-  auto top_owner = top_owner_get();
-  auto owner     = immediate_owner_get();
-  auto falling   = is_falling || (owner && owner->is_falling);
+  auto o       = top_owner();
+  auto owner   = immediate_owner();
+  auto falling = is_falling || (owner && owner->is_falling);
 
   if (likely(! falling)) {
     if (unlikely(tpp->gfx_animated_can_hflip())) {
@@ -538,9 +538,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Boing.
   //
-  if (unlikely(is_bouncing || (top_owner && top_owner->is_bouncing))) {
+  if (unlikely(is_bouncing || (o && o->is_bouncing))) {
     float bounce;
-    if (top_owner) {
+    if (o) {
       bounce = owner->bounce_get();
     } else {
       bounce = bounce_get();
@@ -705,7 +705,7 @@ uint8_t Thing::blit_begin_submerged(void)
   if (submerged) {
     blit_flush();
     auto waterline = last_blit_br.y;
-    auto owner     = immediate_owner_get();
+    auto owner     = immediate_owner();
     if (owner) {
       waterline = owner->last_blit_br.y;
     }
@@ -738,7 +738,7 @@ uint8_t Thing::blit_begin_reflection_submerged(void)
   if (submerged) {
     blit_flush();
     auto waterline = last_blit_br.y;
-    auto owner     = immediate_owner_get();
+    auto owner     = immediate_owner();
     if (owner) {
       waterline = owner->last_blit_br.y;
     }
@@ -903,7 +903,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
             //
             // Seems to be ok
             //
-          } else if (immediate_owner_get()) {
+          } else if (immediate_owner()) {
             //
             // Seems to be ok
             //

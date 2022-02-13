@@ -19,7 +19,7 @@ int Thing::stat_dex_total(void)
 {
   TRACE_NO_INDENT();
 
-  auto owner = top_owner_get();
+  auto owner = top_owner();
   if (owner) {
     return owner->stat_dex();
   }

@@ -589,7 +589,7 @@ bool Game::wid_bag_move_item(Thingp t)
   // No owner can happen if we could not move the item as we had no space
   // to carry. Just remove the transit itme.
   //
-  auto old_owner = t->immediate_owner_get();
+  auto old_owner = t->immediate_owner();
 
   if (bag) {
     bag->bag_remove(t);

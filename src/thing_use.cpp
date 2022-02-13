@@ -183,7 +183,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
     on_use(what);
   }
 
-  auto existing_owner = what->top_owner_get();
+  auto existing_owner = what->top_owner();
   if (existing_owner != this) {
     err("Attempt to use %s which is not carried", what->to_short_string().c_str());
     return;
@@ -234,7 +234,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
   }
 
   if (remove_after_use) {
-    auto immediate_owner = what->immediate_owner_get();
+    auto immediate_owner = what->immediate_owner();
     if (immediate_owner) {
       immediate_owner->bag_remove(what);
     }
@@ -264,7 +264,7 @@ bool Thing::use(Thingp what, int preferred_equip)
   //
   // If dropping an in transit item into an eqiup slot, then the owner is not set
   //
-  if (what->top_owner_get() == nullptr) {
+  if (what->top_owner() == nullptr) {
     dbg("Need to set owner for: %s", what->to_short_string().c_str());
     what->owner_set(this);
   }

@@ -61,7 +61,7 @@ void Thing::level_change(Levelp l)
   }
 
   {
-    auto it = immediate_owner_get();
+    auto it = immediate_owner();
     if (it) {
       it->level_change(l);
     }
