@@ -266,7 +266,7 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
-    auto v = tpp->stat_str_get();
+    auto v = tpp->stat_str();
     if (unlikely(v)) {
       stat_str_set(v);
     }

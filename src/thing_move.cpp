@@ -287,7 +287,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         continue;
       }
 
-      if (! d20roll(stat_str_get(), it->stat_str_get())) {
+      if (! d20roll(stat_str(), it->stat_str())) {
         if (is_player()) {
           msg("You are held in place and cannot move!");
         }

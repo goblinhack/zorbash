@@ -119,9 +119,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   }
 
   if (! it->is_dead) {
-    dbg("Shove: It strength %d vs me %d", it->stat_str_get(), stat_str_get());
+    dbg("Shove: It strength %d vs me %d", it->stat_str(), stat_str());
 
-    int its_strength = it->stat_str_get();
+    int its_strength = it->stat_str();
 
     if (it->is_heavy()) {
       its_strength += 10;
@@ -131,9 +131,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
       its_strength += 10;
     }
 
-    log("Shove: It strength %d vs me %d", its_strength, stat_str_get());
+    log("Shove: It strength %d vs me %d", its_strength, stat_str());
 
-    if (! d20roll(stat_str_get(), its_strength)) {
+    if (! d20roll(stat_str(), its_strength)) {
       if (is_player()) {
         if (it->is_monst()) {
           if (it->is_able_to_shove()) {

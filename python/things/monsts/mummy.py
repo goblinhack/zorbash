@@ -79,7 +79,6 @@ def tp_init(name, text_name):
     my.is_loggable(self, True)
     my.is_monst_class_b(self, True)
     my.is_monst(self, True)
-    my.move_speed(self, 100)
     my.is_moveable(self, True)
     my.is_necrotic_danger_level(self, 1)  # danger level
     my.is_red_blood_eater(self, True)
@@ -89,6 +88,7 @@ def tp_init(name, text_name):
     my.is_undead(self, True)
     my.long_text_description(self, "Possibly the corpse of one who ventured into this dungeon before. All life is gone now, and what remains is a corpse wrapped in rags. Death is no release for this poor creature. Watch out for its necrotic touch!")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
+    my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 50)
     my.noise_on_moving_or_being_carried(self, 5)
     my.normal_placement_rules(self, True)

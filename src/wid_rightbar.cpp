@@ -155,7 +155,7 @@ static void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->stat_str_get();
+    auto val = player->stat_str();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your strength is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -163,7 +163,7 @@ static void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->stat_str_get();
+    auto val = player->stat_str();
     auto tot = player->stat_str_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
