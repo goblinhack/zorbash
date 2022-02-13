@@ -840,10 +840,10 @@ public:
   int damage_received_doubled_from_necrosis(void);
   int damage_received_doubled_from_poison(void);
   int damage_received_doubled_from_water(void);
-  int danger_current_level_get(Thingp);
-  int danger_current_level_get(void);
-  int danger_initial_level_get(Thingp);
-  int danger_initial_level_get(void);
+  int danger_current_level(Thingp);
+  int danger_current_level(void);
+  int danger_initial_level(Thingp);
+  int danger_initial_level(void);
   int defence(void);
   int distance_jump(void);
   int distance_leader_max(void);
@@ -854,8 +854,8 @@ public:
   int distance_throw_incr(int);
   int distance_throw_incr(void);
   int distance_throw_set(int);
-  int distance_to_player_get(void);
-  int distance_to_player_on_different_level_get(void);
+  int distance_to_player(void);
+  int distance_to_player_on_different_level(void);
   int enchant_decr(int);
   int enchant_decr(void);
   int enchant_get(void);

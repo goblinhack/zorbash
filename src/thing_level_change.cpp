@@ -151,7 +151,7 @@ bool Thing::move_away_from_entrance(void)
   dbg("Try to move away from entrance");
   TRACE_AND_INDENT();
 
-  auto d = distance_to_player_on_different_level_get();
+  auto d = distance_to_player_on_different_level();
   d *= 2;
   if (d < 2) {
     d = 2;

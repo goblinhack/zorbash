@@ -77,7 +77,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
       }
 
       if (t->is_mob() || t->is_monst() || t->is_player()) {
-        prio += danger_current_level_get(t);
+        prio += danger_current_level(t);
         dbg2("Target-attack-best: %s mob prio %d", t->to_short_string().c_str(), prio);
 
         //
@@ -225,7 +225,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
       }
 
       if (t->is_hittable()) {
-        prio += danger_current_level_get(t);
+        prio += danger_current_level(t);
         dbg2("Target-attack-best: %s monst prio %d", t->to_short_string().c_str(), prio);
       } else {
         dbg2("Target-attack-best: %s ignore3 %d", t->to_short_string().c_str(), prio);
