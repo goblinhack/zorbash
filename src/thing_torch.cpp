@@ -22,8 +22,8 @@ int Thing::torch_count_get(void)
       continue;
     }
 
-    if (o->charge_count_get()) {
-      torch_count += o->charge_count_get();
+    if (o->charge_count()) {
+      torch_count += o->charge_count();
     } else {
       torch_count++;
     }

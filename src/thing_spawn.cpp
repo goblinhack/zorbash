@@ -216,7 +216,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
-      // Radius needs to be the same as the check in carried_wand_highest_value_for_target_get
+      // Radius needs to be the same as the check in carried_wand_highest_value_for_target
       //
       if (dist >= radius_max) {
         continue;
@@ -275,7 +275,7 @@ bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uin
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
-      // Radius needs to be the same as the check in carried_wand_highest_value_for_target_get
+      // Radius needs to be the same as the check in carried_wand_highest_value_for_target
       //
       if (dist >= radius_max) {
         continue;
@@ -350,7 +350,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
       point spawn_at = curr_at + point(x, y);
 
       //
-      // Radius needs to be the same as the check in carried_wand_highest_value_for_target_get
+      // Radius needs to be the same as the check in carried_wand_highest_value_for_target
       //
       float dist = distance(spawn_at, curr_at);
       if (dist >= radius_max) {
@@ -491,7 +491,7 @@ bool Thing::spawn_gas_poison(int radius)
       float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
 
       //
-      // Radius needs to be the same as the check in carried_wand_highest_value_for_target_get
+      // Radius needs to be the same as the check in carried_wand_highest_value_for_target
       //
       if (dist > radius) {
         continue;

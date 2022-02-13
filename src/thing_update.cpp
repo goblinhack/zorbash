@@ -422,7 +422,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_weapon = nullptr;
-    carried_weapon_highest_value_get(&best_weapon);
+    carried_weapon_highest_value(&best_weapon);
     if (best_weapon) {
       equip(best_weapon, MONST_EQUIP_WEAPON);
     }
@@ -436,7 +436,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_armor = nullptr;
-    carried_armor_highest_value_get(&best_armor);
+    carried_armor_highest_value(&best_armor);
     if (best_armor) {
       equip(best_armor, MONST_EQUIP_ARMOR);
     }
@@ -450,7 +450,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_wand = nullptr;
-    carried_wand_highest_value_get(&best_wand);
+    carried_wand_highest_value(&best_wand);
     if (best_wand) {
       equip(best_wand, MONST_EQUIP_WEAPON);
     }
@@ -468,7 +468,7 @@ void Thing::update(void)
     //
     {
       Thingp best_ring = nullptr;
-      carried_ring_highest_value_get(&best_ring);
+      carried_ring_highest_value(&best_ring);
       if (best_ring) {
         equip(best_ring, MONST_EQUIP_RING1);
       }
@@ -478,7 +478,7 @@ void Thing::update(void)
     //
     {
       Thingp best_ring = nullptr;
-      carried_ring_highest_value_get(&best_ring);
+      carried_ring_highest_value(&best_ring);
       if (best_ring) {
         equip(best_ring, MONST_EQUIP_RING2);
       }
@@ -493,7 +493,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_helmet = nullptr;
-    carried_helmet_highest_value_get(&best_helmet);
+    carried_helmet_highest_value(&best_helmet);
     if (best_helmet) {
       equip(best_helmet, MONST_EQUIP_HELMET);
     }
@@ -507,7 +507,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_amulet = nullptr;
-    carried_amulet_highest_value_get(&best_amulet);
+    carried_amulet_highest_value(&best_amulet);
     if (best_amulet) {
       equip(best_amulet, MONST_EQUIP_AMULET);
     }
@@ -521,7 +521,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_boots = nullptr;
-    carried_boots_highest_value_get(&best_boots);
+    carried_boots_highest_value(&best_boots);
     if (best_boots) {
       equip(best_boots, MONST_EQUIP_BOOTS);
     }
@@ -535,7 +535,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_gauntlet = nullptr;
-    carried_gauntlet_highest_value_get(&best_gauntlet);
+    carried_gauntlet_highest_value(&best_gauntlet);
     if (best_gauntlet) {
       equip(best_gauntlet, MONST_EQUIP_GAUNTLET);
     }
@@ -549,7 +549,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_cloak = nullptr;
-    carried_cloak_highest_value_get(&best_cloak);
+    carried_cloak_highest_value(&best_cloak);
     if (best_cloak) {
       equip(best_cloak, MONST_EQUIP_CLOAK);
     }
@@ -563,7 +563,7 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     Thingp best_shield = nullptr;
-    carried_shield_highest_value_get(&best_shield);
+    carried_shield_highest_value(&best_shield);
     if (best_shield) {
       equip(best_shield, MONST_EQUIP_SHIELD);
     }

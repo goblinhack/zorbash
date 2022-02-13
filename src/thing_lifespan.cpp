@@ -72,10 +72,10 @@ void Thing::lifespan_tick(void)
   //
   // This is for torches
   //
-  if (charge_count_get()) {
+  if (charge_count()) {
     charge_count_decr();
-    if (charge_count_get()) {
-      dbg("Lifespan expired (but has %d charges left)", charge_count_get());
+    if (charge_count()) {
+      dbg("Lifespan expired (but has %d charges left)", charge_count());
       game->request_remake_rightbar = true;
       lifespan_set(tp()->lifespan());
       return;

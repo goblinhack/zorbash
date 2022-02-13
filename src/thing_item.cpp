@@ -21,8 +21,8 @@ int Thing::item_count_including_charges(Tpp tp)
       if (o->is_bag_item_not_stackable()) {
         count = 1;
       } else {
-        if (o->charge_count_get()) {
-          count += o->charge_count_get();
+        if (o->charge_count()) {
+          count += o->charge_count();
         } else {
           count++;
         }
