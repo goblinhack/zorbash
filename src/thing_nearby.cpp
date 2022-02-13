@@ -67,7 +67,7 @@ Thingp Thing::most_dangerous_adjacent_thing_get(void)
         continue;
       }
 
-      score += it->health_max_get();
+      score += it->health_max();
       possible.push_back(std::make_pair(it, score));
     }
     FOR_ALL_THINGS_END()
@@ -129,7 +129,7 @@ Thingp Thing::most_dangerous_visible_thing_get(void)
           continue;
         }
 
-        score += t->health_max_get();
+        score += t->health_max();
         possible.push_back(std::make_pair(t, score));
         dbg("Potential danger: %s", t->to_string().c_str());
       }
@@ -291,7 +291,7 @@ Thingp Thing::best_visible_target_get(void)
           score += 100;
         }
 
-        score += t->health_max_get();
+        score += t->health_max();
         possible.push_back(std::make_pair(t, score));
         dbg("Potential target: %s", t->to_string().c_str());
       }

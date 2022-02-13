@@ -925,7 +925,7 @@ public:
   int health_initial_get(void);
   int health_max_decr(int);
   int health_max_decr(void);
-  int health_max_get(void);
+  int health_max(void);
   int health_max_incr(int);
   int health_max_incr(void);
   int health_max_set(int);
@@ -1377,7 +1377,7 @@ public:
   int stamina_incr(void);
   int stamina_max_decr(int);
   int stamina_max_decr(void);
-  int stamina_max_get(void);
+  int stamina_max(void);
   int stamina_max_incr(int);
   int stamina_max_incr(void);
   int stamina_max_set(int);

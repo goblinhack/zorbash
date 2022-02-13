@@ -16,7 +16,7 @@ void Thing::stamina_boost(int v)
     return;
   }
 
-  auto max_stamina = stamina_max_get();
+  auto max_stamina = stamina_max();
   if (! max_stamina) {
     return;
   }

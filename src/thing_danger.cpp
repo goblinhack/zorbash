@@ -162,11 +162,11 @@ int Thing::danger_initial_level(void)
   //
   // Low on health, reduce the level
   //
-  if (health_get() < health_max_get() / 5) {
+  if (health_get() < health_max() / 5) {
     danger_level /= 5;
   }
 
-  if (health_get() < health_max_get() / 10) {
+  if (health_get() < health_max() / 10) {
     danger_level /= 10;
   }
 
@@ -263,11 +263,11 @@ int Thing::danger_current_level(void)
   //
   // Low on health, reduce the level
   //
-  if (health_get() < health_max_get() / 5) {
+  if (health_get() < health_max() / 5) {
     danger_level /= 2;
   }
 
-  if (health_get() < health_max_get() / 10) {
+  if (health_get() < health_max() / 10) {
     danger_level /= 10;
   }
 
@@ -313,9 +313,9 @@ int Thing::is_dangerous(Thingp it)
   //
   // If I'm low on health then consider it more dangereous
   //
-  if (health_get() < health_max_get() / 5) {
+  if (health_get() < health_max() / 5) {
     b++;
-  } else if (health_get() < health_max_get() / 10) {
+  } else if (health_get() < health_max() / 10) {
     b += 2;
   }
 

@@ -235,11 +235,11 @@ void Thing::animate(void)
           continue;
         }
 
-        auto health_max = health_max_get();
-        auto health     = health_get();
+        auto health_max_val = health_max();
+        auto health         = health_get();
 
         if (tpp->internal_has_hp_anim()) {
-          if (health < health_max / 4) {
+          if (health < health_max_val / 4) {
             if (! tile_is_hp_25_percent(tile)) {
               tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
@@ -249,7 +249,7 @@ void Thing::animate(void)
 #endif
               continue;
             }
-          } else if (health < health_max / 2) {
+          } else if (health < health_max_val / 2) {
             if (! tile_is_hp_50_percent(tile)) {
               tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM
@@ -259,7 +259,7 @@ void Thing::animate(void)
 #endif
               continue;
             }
-          } else if (health < (health_max / 4) * 3) {
+          } else if (health < (health_max_val / 4) * 3) {
             if (! tile_is_hp_75_percent(tile)) {
               tile = tile_next(tmap, tile);
 #ifdef DEBUG_ANIM

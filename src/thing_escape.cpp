@@ -15,10 +15,10 @@
 bool Thing::try_to_escape(void)
 {
   if (is_able_to_jump()) {
-    auto health_max = health_max_get();
-    auto health     = health_get();
+    auto health_max_val = health_max();
+    auto health         = health_get();
 
-    if (health > health_max / 2) {
+    if (health > health_max_val / 2) {
       return false;
     }
 
