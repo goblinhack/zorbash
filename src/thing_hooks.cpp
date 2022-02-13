@@ -58,7 +58,7 @@ void Thing::hooks_remove()
 
     FOR_ALL_EQUIP(e)
     {
-      if (id == o->equip_id_get(e)) {
+      if (id == o->equip_id(e)) {
         o->unequip("remove hooks for equip id", e, false);
 
         if (is_loggable()) {
@@ -107,7 +107,7 @@ void Thing::hooks_remove()
           if (is_loggable()) {
             dbg("No carry-anim for owner %s", o->to_string().c_str());
           }
-          auto id = o->equip_id_get(e);
+          auto id = o->equip_id(e);
           if (id.ok()) {
             o->equip(o->equip_get(e), e);
           }

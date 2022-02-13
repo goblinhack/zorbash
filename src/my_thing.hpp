@@ -219,33 +219,33 @@ public:
   // Walk all items and bags to get the items
   //
 
-  std::list< Thingp > amulet_list_get(void);
-  std::list< Thingp > armor_list_get(void);
-  std::list< Thingp > boots_list_get(void);
+  std::list< Thingp > amulet_list(void);
+  std::list< Thingp > armor_list(void);
+  std::list< Thingp > boots_list(void);
   std::list< Thingp > cloak_list(void);
-  std::list< Thingp > food_list_get(void);
-  std::list< Thingp > gauntlet_list_get(void);
-  std::list< Thingp > helmet_list_get(void);
-  std::list< Thingp > item_list_get(void);
-  std::list< Thingp > ring_list_get(void);
-  std::list< Thingp > shield_list_get(void);
-  std::list< Thingp > treasure_list_get(void);
-  std::list< Thingp > wand_list_get(void);
-  std::list< Thingp > weapon_list_get(void);
+  std::list< Thingp > food_list(void);
+  std::list< Thingp > gauntlet_list(void);
+  std::list< Thingp > helmet_list(void);
+  std::list< Thingp > item_list(void);
+  std::list< Thingp > ring_list(void);
+  std::list< Thingp > shield_list(void);
+  std::list< Thingp > treasure_list(void);
+  std::list< Thingp > wand_list(void);
+  std::list< Thingp > weapon_list(void);
 
-  std::vector< Thingp > amulet_vector_get(void);
-  std::vector< Thingp > armor_vector_get(void);
-  std::vector< Thingp > boots_vector_get(void);
-  std::vector< Thingp > cloak_vector_get(void);
-  std::vector< Thingp > food_vector_get(void);
-  std::vector< Thingp > gauntlet_vector_get(void);
-  std::vector< Thingp > helmet_vector_get(void);
-  std::vector< Thingp > item_vector_get(void);
-  std::vector< Thingp > ring_vector_get(void);
-  std::vector< Thingp > shield_vector_get(void);
-  std::vector< Thingp > treasure_vector_get(void);
-  std::vector< Thingp > wand_vector_get(void);
-  std::vector< Thingp > weapon_vector_get(void);
+  std::vector< Thingp > amulet_vector(void);
+  std::vector< Thingp > armor_vector(void);
+  std::vector< Thingp > boots_vector(void);
+  std::vector< Thingp > cloak_vector(void);
+  std::vector< Thingp > food_vector(void);
+  std::vector< Thingp > gauntlet_vector(void);
+  std::vector< Thingp > helmet_vector(void);
+  std::vector< Thingp > item_vector(void);
+  std::vector< Thingp > ring_vector(void);
+  std::vector< Thingp > shield_vector(void);
+  std::vector< Thingp > treasure_vector(void);
+  std::vector< Thingp > wand_vector(void);
+  std::vector< Thingp > weapon_vector(void);
 
   ThingShoved try_to_shove(Thingp it, point delta);
   ThingShoved try_to_shove(point future_pos);
@@ -254,7 +254,7 @@ public:
   ThingId on_fire_anim_id_get(void);
   ThingId on_fire_anim_id_set(ThingId);
 
-  ThingId equip_id_get(int equip);
+  ThingId equip_id(int equip);
   ThingId equip_id_carry_anim(int equip);
   ThingId equip_id_use_anim(int equip);
 

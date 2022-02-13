@@ -35,7 +35,7 @@ int Thing::map_treasure_carried_count(void)
   }
 
   int v = 0;
-  for (const auto t : item_vector_get()) {
+  for (const auto t : item_vector()) {
     v += t->is_map_treasure() ? 1 : 0;
   }
   return v;
@@ -68,7 +68,7 @@ bool Thing::map_treasure_available(void)
   //
   // Check if we have a map and that it works for this level
   //
-  for (const auto t : item_vector_get()) {
+  for (const auto t : item_vector()) {
     if (! t->is_map_treasure()) {
       continue;
     }

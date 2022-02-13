@@ -176,7 +176,7 @@ void Game::wid_enchant_an_item(void)
 
   enchant_items.clear();
   std::map< Tpp, bool > found;
-  for (const auto t : player->item_vector_get()) {
+  for (const auto t : player->item_vector()) {
     auto tp = t->tp();
     if (found.find(tp) != found.end()) {
       continue;

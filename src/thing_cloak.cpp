@@ -46,7 +46,7 @@ std::list< Thingp > Thing::cloak_list(void)
   return out;
 }
 
-std::vector< Thingp > Thing::cloak_vector_get(void)
+std::vector< Thingp > Thing::cloak_vector(void)
 {
   TRACE_NO_INDENT();
 

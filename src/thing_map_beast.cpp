@@ -35,7 +35,7 @@ int Thing::map_beast_carried_count(void)
   }
 
   int v = 0;
-  for (const auto t : item_vector_get()) {
+  for (const auto t : item_vector()) {
     v += t->is_map_beast() ? 1 : 0;
   }
   return v;
