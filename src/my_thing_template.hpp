@@ -796,7 +796,7 @@ public:
   const int damage_melee(void) const;
   const int damage_necrosis(void) const;
   const int damage_poison(void) const;
-  const int health_initial_get(void) const;
+  const int health_initial(void) const;
   const int on_idle_tick_frequency_get(void) const;
   const int spawn_group_size_get(void) const;
   const int lifespan(void) const;

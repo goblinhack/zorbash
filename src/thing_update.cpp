@@ -49,7 +49,7 @@ void Thing::update(void)
   //
   if (! health()) {
     TRACE_NO_INDENT();
-    auto v = tpp->health_initial_get();
+    auto v = tpp->health_initial();
     if (unlikely(v)) {
       health_set(v);
       health_max_set(v);

@@ -83,7 +83,7 @@ const std::string &Thing::health_initial_dice_str(void)
   return (tp()->health_initial_dice_str());
 }
 
-int Thing::health_initial_get(void)
+int Thing::health_initial(void)
 {
   TRACE_NO_INDENT();
   return (tp()->health_initial_dice().roll());
@@ -119,7 +119,7 @@ const std::string &Thing::lifespan_dice_str(void)
   return (tp()->lifespan_dice_str());
 }
 
-int Thing::lifespan_initial_get(void)
+int Thing::lifespan_initial(void)
 {
   TRACE_NO_INDENT();
   return (tp()->lifespan_dice().roll());
@@ -2668,7 +2668,7 @@ int Thing::aggression_level_pct(void)
       //
       // If the leader is weak, be timid
       //
-      if (l->health() < l->health_initial_get() / 3) {
+      if (l->health() < l->health_initial() / 3) {
         return (aggression / 2);
       }
 

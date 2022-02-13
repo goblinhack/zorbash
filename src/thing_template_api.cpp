@@ -174,7 +174,7 @@ void               Tp::damage_natural_dice_set(const std::string &v)
 }
 
 const Dice        &Tp::health_initial_dice(void) const { return _health_initial_dice; }
-const int          Tp::health_initial_get(void) const { return _health_initial_dice.roll(); }
+const int          Tp::health_initial(void) const { return _health_initial_dice.roll(); }
 const std::string &Tp::health_initial_dice_str(void) const { return _health_initial_dice_str; }
 void               Tp::health_initial_dice_set(const std::string &v)
 {

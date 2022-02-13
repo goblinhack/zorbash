@@ -28,7 +28,7 @@ void Thing::score_add(Thingp victim)
   if (victim->is_monst()) {
     auto score = danger_initial_level(victim);
     if (score > 0) {
-      if (health() < health_initial_get() / 10) {
+      if (health() < health_initial() / 10) {
         if (is_player()) {
           popup("%%fg=red$Glory defeat x10 score!%%fg=reset$");
         }
@@ -40,7 +40,7 @@ void Thing::score_add(Thingp victim)
       //
       // Give something, but not a lot as it was not a challenge
       //
-      score_incr(victim->health_initial_get());
+      score_incr(victim->health_initial());
     }
   }
 }
