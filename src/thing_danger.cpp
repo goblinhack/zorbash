@@ -148,10 +148,10 @@ int Thing::danger_initial_level(void)
   if (is_able_to_fire_at()) {
     danger_level += 20;
   }
-  if (idle_count_get() > 5) {
+  if (idle_count() > 5) {
     danger_level /= 2;
   }
-  if (stuck_count_get() > 5) {
+  if (stuck_count() > 5) {
     danger_level /= 2;
   }
 
@@ -240,10 +240,10 @@ int Thing::danger_current_level(void)
   if (is_able_to_fire_at()) {
     danger_level += 20;
   }
-  if (idle_count_get() > 5) {
+  if (idle_count() > 5) {
     danger_level /= 2;
   }
-  if (stuck_count_get() > 5) {
+  if (stuck_count() > 5) {
     danger_level /= 2;
   }
 
@@ -255,8 +255,8 @@ int Thing::danger_current_level(void)
   // Leaders are stronger with more followers
   //
   if (is_able_to_follow()) {
-    if (follower_count_get()) {
-      danger_level *= follower_count_get();
+    if (follower_count()) {
+      danger_level *= follower_count();
     }
   }
 

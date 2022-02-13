@@ -187,7 +187,7 @@ bool Thing::skill_add(Tpp what)
   return true;
 }
 
-int Thing::skillstone_count_get(void)
+int Thing::skillstone_count(void)
 {
   TRACE_NO_INDENT();
   int v = 0;

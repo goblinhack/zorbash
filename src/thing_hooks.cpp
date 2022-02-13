@@ -188,8 +188,8 @@ void Thing::remove_all_references()
   //
   // Some things have lots of things they own
   //
-  if (owned_count_get()) {
-    dbg("Remove all owner references, total %d", owned_count_get());
+  if (owned_count()) {
+    dbg("Remove all owner references, total %d", owned_count());
 
     //
     // Slow, but not used too often
@@ -206,8 +206,8 @@ void Thing::remove_all_references()
     }
   }
 
-  if (minion_count_get()) {
-    dbg("Remove all minion references, total %d", minion_count_get());
+  if (minion_count()) {
+    dbg("Remove all minion references, total %d", minion_count());
 
     //
     // Slow, but not used too often
@@ -224,8 +224,8 @@ void Thing::remove_all_references()
     }
   }
 
-  if (follower_count_get()) {
-    dbg("Remove all follower references, total %d", follower_count_get());
+  if (follower_count()) {
+    dbg("Remove all follower references, total %d", follower_count());
 
     //
     // Slow, but not used too often
@@ -242,8 +242,8 @@ void Thing::remove_all_references()
     }
   }
 
-  if (spawned_count_get()) {
-    dbg("Remove all spawner references, total %d", spawned_count_get());
+  if (spawned_count()) {
+    dbg("Remove all spawner references, total %d", spawned_count());
 
     //
     // Slow, but not used too often

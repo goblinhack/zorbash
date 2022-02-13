@@ -231,7 +231,7 @@ void Thing::release_followers(void)
 {
   TRACE_NO_INDENT();
 
-  if (! follower_count_get()) {
+  if (! follower_count()) {
     return;
   }
 
@@ -270,7 +270,7 @@ void Thing::notify_followers_of_death_of_my_leader(void)
 {
   TRACE_NO_INDENT();
 
-  if (! follower_count_get()) {
+  if (! follower_count()) {
     return;
   }
 
@@ -297,7 +297,7 @@ std::list< Thingp > Thing::all_followers_get(void)
   TRACE_NO_INDENT();
 
   std::list< Thingp > out;
-  if (! follower_count_get()) {
+  if (! follower_count()) {
     return out;
   }
 

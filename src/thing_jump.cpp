@@ -169,7 +169,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Block jumping over doors
   //
   if (is_player()) {
-    if (map_treasure_count_get()) {
+    if (map_treasure_count()) {
       //
       // If we have a treasure map, allow wandering
       //

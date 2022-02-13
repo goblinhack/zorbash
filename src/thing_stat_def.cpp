@@ -137,7 +137,7 @@ int Thing::stat_def_penalties_total(void)
   // Positional penalties
   //
   if (stat_def_penalty_when_stuck()) {
-    int p = stat_def_penalty_when_stuck() + stuck_count_get();
+    int p = stat_def_penalty_when_stuck() + stuck_count();
     p     = std::min(p, stat_def_penalty_when_stuck_max());
     penalty += p;
     if (penalty != prev) {
@@ -145,7 +145,7 @@ int Thing::stat_def_penalties_total(void)
       dbg("AC penalty: stuck %d", p);
     }
   } else if (stat_def_penalty_when_idle()) {
-    int p = stat_def_penalty_when_idle() + idle_count_get();
+    int p = stat_def_penalty_when_idle() + idle_count();
     p     = std::min(p, stat_def_penalty_when_idle_max());
     penalty += p;
     if (penalty != prev) {

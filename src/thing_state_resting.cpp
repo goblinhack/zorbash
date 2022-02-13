@@ -53,7 +53,7 @@ bool Thing::state_resting(bool &do_something, bool &wait)
 
   if (is_able_to_sleep()) {
     sleep_count_incr();
-    if (sleep_count_get() > 5) {
+    if (sleep_count() > 5) {
       change_state(MONST_STATE_SLEEPING, "time to sleep");
     }
   }

@@ -47,7 +47,7 @@ const Tpp Thing::tp_slow(void)
 
 uint8_t Thing::z_prio(void) { return (tp()->z_prio); }
 
-std::size_t Thing::light_count_get(void)
+std::size_t Thing::light_count(void)
 {
   if (! maybe_infop()) {
     return 0;

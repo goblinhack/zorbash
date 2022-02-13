@@ -109,7 +109,7 @@ void Thing::destroy_spawned(Thingp defeater)
     return;
   }
 
-  if (! spawned_count_get()) {
+  if (! spawned_count()) {
     return;
   }
 
@@ -136,7 +136,7 @@ void Thing::unleash_spawners_things(void)
     return;
   }
 
-  if (! spawned_count_get()) {
+  if (! spawned_count()) {
     return;
   }
 

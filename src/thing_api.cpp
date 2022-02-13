@@ -356,7 +356,7 @@ int Thing::enchant_max(void)
   return (tp()->enchant_max());
 }
 
-int Thing::initial_charge_count_get(void)
+int Thing::initial_charge_count(void)
 {
   TRACE_NO_INDENT();
   return (tp()->charge_count());
@@ -2677,7 +2677,7 @@ int Thing::aggression_level_pct(void)
       //
       aggression += 20;
     } else {
-      aggression += 10 * follower_count_get();
+      aggression += 10 * follower_count();
     }
   }
 
@@ -3678,7 +3678,7 @@ void Thing::born_set(point3d v)
 ////////////////////////////////////////////////////////////////////////////
 // bounce_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::bounce_count_get(void)
+int Thing::bounce_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -5619,7 +5619,7 @@ int Thing::necrotized_amount_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // owned_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::owned_count_get(void)
+int Thing::owned_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -5667,7 +5667,7 @@ int Thing::owned_count_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // minion_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::minion_count_get(void)
+int Thing::minion_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -5715,7 +5715,7 @@ int Thing::minion_count_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // follower_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::follower_count_get(void)
+int Thing::follower_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -5763,7 +5763,7 @@ int Thing::follower_count_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // spawned_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::spawned_count_get(void)
+int Thing::spawned_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -5859,7 +5859,7 @@ int Thing::charge_count_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // sleep_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::sleep_count_get(void)
+int Thing::sleep_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
@@ -5907,7 +5907,7 @@ int Thing::sleep_count_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // idle_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::idle_count_get(void)
+int Thing::idle_count(void)
 {
   TRACE_NO_INDENT();
 
@@ -5960,7 +5960,7 @@ int Thing::idle_count_incr(void)
 ////////////////////////////////////////////////////////////////////////////
 // stuck_count
 ////////////////////////////////////////////////////////////////////////////
-int Thing::stuck_count_get(void)
+int Thing::stuck_count(void)
 {
   TRACE_NO_INDENT();
 
