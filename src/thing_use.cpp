@@ -190,17 +190,17 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
   }
 
   if (is_monst()) {
-    dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->charge_count_get());
+    dbg("Used %s (do not deplete %d charges)", what->to_short_string().c_str(), what->charge_count());
     return;
   }
 
   //
   // Decrement the charge count and do not remove, if it has charges
   //
-  if (what->charge_count_get()) {
+  if (what->charge_count()) {
     what->charge_count_decr();
-    if (what->charge_count_get()) {
-      dbg("Used %s (has %d charges left)", what->to_short_string().c_str(), what->charge_count_get());
+    if (what->charge_count()) {
+      dbg("Used %s (has %d charges left)", what->to_short_string().c_str(), what->charge_count());
       game->request_remake_rightbar = true;
       return;
     }

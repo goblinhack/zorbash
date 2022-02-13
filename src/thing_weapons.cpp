@@ -86,7 +86,7 @@ std::vector< Thingp > Thing::weapon_vector_get(void)
   return out;
 }
 
-int Thing::carried_weapon_count_get(void)
+int Thing::carried_weapon_count(void)
 {
   TRACE_NO_INDENT();
   int count = 0;
@@ -103,7 +103,7 @@ int Thing::carried_weapon_count_get(void)
   return count;
 }
 
-int Thing::carried_weapon_least_value_get(Thingp *out)
+int Thing::carried_weapon_least_value(Thingp *out)
 {
   TRACE_NO_INDENT();
   int least_value = -1;
@@ -132,7 +132,7 @@ int Thing::carried_weapon_least_value_get(Thingp *out)
   return least_value;
 }
 
-int Thing::carried_weapon_highest_value_get(Thingp *out)
+int Thing::carried_weapon_highest_value(Thingp *out)
 {
   TRACE_NO_INDENT();
   int highest_value = -1;

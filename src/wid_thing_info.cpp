@@ -1519,12 +1519,12 @@ void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)
   auto tp = t->tp();
   if (tp->charge_count()) {
     auto c = player->item_count_including_charges(t->tp());
-    if (c > t->charge_count_get()) {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d(%d tot)", t->charge_count_get(), c);
+    if (c > t->charge_count()) {
+      snprintf(tmp2, sizeof(tmp2) - 1, "%d(%d tot)", t->charge_count(), c);
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%21s", tmp2);
       w->log(tmp);
     } else {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d", t->charge_count_get());
+      snprintf(tmp2, sizeof(tmp2) - 1, "%d", t->charge_count());
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Charges%21s", tmp2);
       w->log(tmp);
     }

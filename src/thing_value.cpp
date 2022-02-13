@@ -61,7 +61,7 @@ int Thing::value_get(Thingp it)
   //
   value += it->enchant_get();
 
-  value *= 1 + it->charge_count_get();
+  value *= 1 + it->charge_count();
 
   dbg3("Item value for %s is %d", it->to_short_string().c_str(), value);
 

@@ -225,7 +225,7 @@ bool Thing::fire_at(Thingp target)
   if (! curr_weapon->is_wand()) {
     if (is_able_to_use_wands()) {
       Thingp best_wand = nullptr;
-      carried_wand_highest_value_for_target_get(&best_wand, target);
+      carried_wand_highest_value_for_target(&best_wand, target);
       if (best_wand) {
         curr_weapon = best_wand;
       } else {
