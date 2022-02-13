@@ -681,6 +681,7 @@ private:
   std::string _on_enchant_do;
   std::string _on_equip_do;
   std::string _on_fall_do;
+  std::string _on_jump_do;
   std::string _on_final_use_do;
   std::string _on_firing_at_something_do;
   std::string _on_idle_tick_freq_dice_str;
@@ -910,6 +911,7 @@ public:
   const std::string &on_enchant_do(void) const { return _on_enchant_do; }
   const std::string &on_equip_do(void) const { return _on_equip_do; }
   const std::string &on_fall_do(void) const { return _on_fall_do; }
+  const std::string &on_jump_do(void) const { return _on_jump_do; }
   const std::string &on_final_use_do(void) const { return _on_final_use_do; }
   const std::string &on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
   const std::string &on_idle_tick_freq_dice_str(void) const;
@@ -1913,6 +1915,7 @@ public:
   void on_enchant_do_set(const std::string &v) { _on_enchant_do = v; }
   void on_equip_do_set(const std::string &v) { _on_equip_do = v; }
   void on_fall_do_set(const std::string &v) { _on_fall_do = v; }
+  void on_jump_do_set(const std::string &v) { _on_jump_do = v; }
   void on_final_use_do_set(const std::string &v) { _on_final_use_do = v; }
   void on_firing_at_something_do_set(const std::string &v) { _on_firing_at_something_do = v; }
   void on_lifespan_tick_do_set(const std::string &v) { _on_lifespan_tick_do = v; }

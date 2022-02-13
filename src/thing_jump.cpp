@@ -7,12 +7,45 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_sprintf.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 #include <math.h>
+
+//
+// Python callback upon being jump
+//
+void Thing::on_jump(void)
+{
+  TRACE_NO_INDENT();
+  auto on_jump = tp()->on_jump_do();
+  if (std::empty(on_jump)) {
+    return;
+  }
+
+  auto t = split_tokens(on_jump, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
+    dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_jump call [%s] expected mod:function, got %d elems", on_jump.c_str(), (int) on_jump.size());
+  }
+}
 
 float Thing::how_far_i_can_jump(void)
 {
@@ -396,6 +429,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       stamina_decr(10);
     }
   }
+
+  on_jump();
 
   dbg("Jump success.");
   return true;
