@@ -1830,7 +1830,7 @@ bool Thing::ai_tick(bool recursing)
     //
     // See if anything dangerous is close
     //
-    threat = most_dangerous_visible_thing_get();
+    threat = most_dangerous_visible_thing();
     if (threat) {
       AI_LOG("Threat", threat);
     }
@@ -1839,7 +1839,7 @@ bool Thing::ai_tick(bool recursing)
     // A threat can be a few tiles away; but if one is standing literally
     // next to us! then it takes priority.
     //
-    auto adjacent_threat = most_dangerous_adjacent_thing_get();
+    auto adjacent_threat = most_dangerous_adjacent_thing();
     if (adjacent_threat) {
       AI_LOG("Adjacent threat", adjacent_threat);
       if (is_dangerous(adjacent_threat)) {

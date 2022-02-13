@@ -26,15 +26,15 @@ void Thing::hide(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (equip_id_carry_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim_get(e));
+    if (equip_id_carry_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim(e));
       if (w) {
         w->hide();
       }
     }
 
-    if (equip_id_use_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim_get(e));
+    if (equip_id_use_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim(e));
       if (w) {
         w->hide();
       }

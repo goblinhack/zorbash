@@ -63,16 +63,16 @@ void Thing::move_carried_items(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (equip_id_carry_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim_get(e));
+    if (equip_id_carry_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim(e));
       if (w) {
         w->move_to(curr_at);
         w->dir = dir;
       }
     }
 
-    if (equip_id_use_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim_get(e));
+    if (equip_id_use_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim(e));
       if (w) {
         w->move_to(curr_at);
         w->dir = dir;
@@ -145,16 +145,16 @@ void Thing::move_carried_items_immediately(void)
   //
   FOR_ALL_EQUIP(e)
   {
-    if (equip_id_carry_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_carry_anim_get(e));
+    if (equip_id_carry_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_carry_anim(e));
       if (w) {
         w->move_to_immediately(curr_at);
         w->dir = dir;
       }
     }
 
-    if (equip_id_use_anim_get(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim_get(e));
+    if (equip_id_use_anim(e).ok()) {
+      auto w = level->thing_find(equip_id_use_anim(e));
       if (w) {
         w->move_to_immediately(curr_at);
         w->dir = dir;

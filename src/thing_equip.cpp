@@ -106,19 +106,19 @@ Thingp Thing::equip_get(int equip)
 void Thing::equip_carry_anim_id_set(ThingId equip_carry_anim_id, int equip)
 {
   TRACE_NO_INDENT();
-  Thingp equip_carry_anim;
+  Thingp anim;
 
   if (! equip_carry_anim_id) {
     equip_carry_anim_set(nullptr, equip);
     return;
   }
 
-  equip_carry_anim = level->thing_find(equip_carry_anim_id);
-  if (! equip_carry_anim) {
+  anim = level->thing_find(equip_carry_anim_id);
+  if (! anim) {
     return;
   }
 
-  equip_carry_anim_set(equip_carry_anim, equip);
+  equip_carry_anim_set(anim, equip);
 }
 
 void Thing::equip_carry_anim_set(Thingp new_equip_carry_anim, int equip)
@@ -128,7 +128,7 @@ void Thing::equip_carry_anim_set(Thingp new_equip_carry_anim, int equip)
     verify(MTYPE_THING, new_equip_carry_anim);
   }
 
-  auto old_equip_carry_anim = equip_carry_anim_get(equip);
+  auto old_equip_carry_anim = equip_carry_anim(equip);
   if (old_equip_carry_anim) {
     if (old_equip_carry_anim == new_equip_carry_anim) {
       return;
@@ -186,7 +186,7 @@ void Thing::equip_use_anim_set(Thingp new_gfx_anim_use, int equip)
     verify(MTYPE_THING, new_gfx_anim_use);
   }
 
-  auto old_gfx_anim_use = equip_use_anim_get(equip);
+  auto old_gfx_anim_use = equip_use_anim(equip);
 
   if (old_gfx_anim_use) {
     if (old_gfx_anim_use == new_gfx_anim_use) {
@@ -280,20 +280,20 @@ void Thing::equip_use_offset_get(int *dx, int *dy, int equip)
   }
 }
 
-Thingp Thing::equip_carry_anim_get(int equip)
+Thingp Thing::equip_carry_anim(int equip)
 {
   TRACE_NO_INDENT();
-  Thingp equip_carry_anim = 0;
+  Thingp anim = 0;
 
-  auto id = equip_id_carry_anim_get(equip);
+  auto id = equip_id_carry_anim(equip);
   if (id.ok()) {
-    equip_carry_anim = level->thing_find(id);
+    anim = level->thing_find(id);
   }
 
-  return (equip_carry_anim);
+  return (anim);
 }
 
-Thingp Thing::equip_use_anim_get(int equip)
+Thingp Thing::equip_use_anim(int equip)
 {
   TRACE_NO_INDENT();
 
@@ -303,7 +303,7 @@ Thingp Thing::equip_use_anim_get(int equip)
   //
   Thingp gfx_anim_use = 0;
 
-  auto id = equip_id_use_anim_get(equip);
+  auto id = equip_id_use_anim(equip);
   if (id.ok()) {
     gfx_anim_use = level->thing_find(id);
   }
@@ -523,16 +523,16 @@ void Thing::equip_remove_anim(int equip)
   //
   // If this thing has its own thing id for animations then destroy that.
   //
-  auto equip_carry_anim = equip_carry_anim_get(equip);
-  if (equip_carry_anim) {
+  auto anim = equip_carry_anim(equip);
+  if (anim) {
     dbg("Remove carry-anim");
-    equip_carry_anim->dead("by owner sheathed weapon, remove carry-anim");
+    anim->dead("by owner sheathed weapon, remove carry-anim");
     equip_carry_anim_set(nullptr, equip);
   } else {
     dbg("Weapon had no carry-anim");
   }
 
-  auto gfx_anim_use = equip_use_anim_get(equip);
+  auto gfx_anim_use = equip_use_anim(equip);
   if (gfx_anim_use) {
     dbg("Remove use-anim");
     gfx_anim_use->dead("by owner sheathed weapon, remove use-anim");
@@ -557,7 +557,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
   }
   TRACE_AND_INDENT();
 
-  if (equip_id_use_anim_get(equip).ok()) {
+  if (equip_id_use_anim(equip).ok()) {
     //
     // Still using.
     //
@@ -641,7 +641,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
   // Hide the carry_anim while using.
   //
   TRACE_NO_INDENT();
-  auto c = equip_carry_anim_get(equip);
+  auto c = equip_carry_anim(equip);
   if (c) {
     c->hide();
   }
