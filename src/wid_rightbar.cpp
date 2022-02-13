@@ -642,7 +642,7 @@ static bool wid_rightbar_create(void)
     wid_set_pos(w, tl, br);
     auto g = dynprintf(
         "%%fg=gray$%06d %%fg=white$%%tile=dollar_icon$%%fg=gray$%03d %%fg=yellow$%%tile=key_icon$%%fg=gray$%d",
-        player->score_get(), player->gold_get(), player->keys_get());
+        player->score(), player->gold(), player->keys());
     wid_set_text(w, g);
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);

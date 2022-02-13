@@ -910,7 +910,7 @@ public:
   int goal_penalty_get(Thingp attacker);
   int gold_decr(int);
   int gold_decr(void);
-  int gold_get(void);
+  int gold(void);
   int gold_incr(int);
   int gold_incr(void);
   int gold_set(int);
@@ -1224,7 +1224,7 @@ public:
   int item_width(void);
   int keys_decr(int);
   int keys_decr(void);
-  int keys_get(void);
+  int keys(void);
   int keys_incr(int);
   int keys_incr(void);
   int keys_set(int);
@@ -1351,8 +1351,8 @@ public:
   int prev_light_power_set(int);
   int range_max(void);
   int rarity(void);
-  int resurrect_get(void);
-  int score_get(void);
+  int resurrect_when(void);
+  int score(void);
   int skill_enchant_count(const uint32_t slot);
   int skillstone_count(void);
   int sleep_count_decr(int);

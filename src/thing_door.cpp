@@ -43,7 +43,7 @@ bool Thing::open_door(Thingp it)
   dbg("Open door");
   TRACE_AND_INDENT();
 
-  if (keys_get()) {
+  if (keys()) {
     keys_decr();
     IF_DEBUG1 { it->log("Open"); }
     it->level_pop();

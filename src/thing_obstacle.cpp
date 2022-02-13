@@ -308,7 +308,7 @@ bool Thing::ai_obstacle(Thingp it)
     if (! it->is_open) {
       if (it->is_door()) {
         if (is_able_to_open_doors()) {
-          if (keys_get()) {
+          if (keys()) {
             return false;
           }
         }
