@@ -1821,12 +1821,12 @@ public:
   uint32_t tick_resurrect_when_incr(void);
   uint32_t tick_resurrect_when_set(int);
 
-  uint32_t movement_left_decr(int);
-  uint32_t movement_left_decr(void);
-  uint32_t movement_left(void);
-  uint32_t movement_left_incr(int);
-  uint32_t movement_left_incr(void);
-  uint32_t movement_left_set(int);
+  int movement_left_decr(int);
+  int movement_left_decr(void);
+  int movement_left(void);
+  int movement_left_incr(int);
+  int movement_left_incr(void);
+  int movement_left_set(int);
 
   uint8_t blit_begin_reflection_submerged(void);
   uint8_t blit_begin_submerged(void);
