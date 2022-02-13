@@ -3363,7 +3363,7 @@ void Thing::new_aip(void)
   }
 }
 
-ThingInfop Thing::or_alloc_infop_get(void)
+ThingInfop Thing::get_or_alloc_infop(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! _infop)) {
@@ -3373,7 +3373,7 @@ ThingInfop Thing::or_alloc_infop_get(void)
   return _infop;
 }
 
-ThingItemsp Thing::or_alloc_itemsp_get(void)
+ThingItemsp Thing::get_or_alloc_itemsp(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! _itemsp)) {
@@ -3383,7 +3383,7 @@ ThingItemsp Thing::or_alloc_itemsp_get(void)
   return _itemsp;
 }
 
-ThingAip Thing::or_alloc_aip_get(void)
+ThingAip Thing::get_or_alloc_aip(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! _aip)) {
@@ -3393,7 +3393,7 @@ ThingAip Thing::or_alloc_aip_get(void)
   return _aip;
 }
 
-ThingInfop Thing::infop_get(void)
+ThingInfop Thing::infop(void)
 {
   TRACE_NO_INDENT();
   if (! _infop) {
@@ -3403,7 +3403,7 @@ ThingInfop Thing::infop_get(void)
   return _infop;
 }
 
-ThingItemsp Thing::itemsp_get(void)
+ThingItemsp Thing::itemsp(void)
 {
   TRACE_NO_INDENT();
   if (! _itemsp) {
@@ -3546,8 +3546,8 @@ int Thing::capacity_height(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  if (infop_get()->capacity_height) {
-    return infop_get()->capacity_height;
+  if (infop()->capacity_height) {
+    return infop()->capacity_height;
   }
   return (tp()->capacity_height());
 }
@@ -3556,8 +3556,8 @@ int Thing::capacity_width(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  if (infop_get()->capacity_width) {
-    return infop_get()->capacity_width;
+  if (infop()->capacity_width) {
+    return infop()->capacity_width;
   }
   return (tp()->capacity_width());
 }
@@ -3581,7 +3581,7 @@ point Thing::lunge_to_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->lunge_to);
+    return (infop()->lunge_to);
   } else {
     return (point(0, 0));
   }
@@ -3591,7 +3591,7 @@ void Thing::lunge_to_set(point v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->lunge_to = v;
+  infop()->lunge_to = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3601,7 +3601,7 @@ float Thing::bounce_height_curr(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->bounce_height);
+    return (infop()->bounce_height);
   } else {
     return 0;
   }
@@ -3611,7 +3611,7 @@ void Thing::bounce_height_set(float v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->bounce_height = v;
+  infop()->bounce_height = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3621,7 +3621,7 @@ float Thing::fall_height_curr(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->fall_height);
+    return (infop()->fall_height);
   } else {
     return 0;
   }
@@ -3631,7 +3631,7 @@ void Thing::fall_height_set(float v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->fall_height = v;
+  infop()->fall_height = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3641,7 +3641,7 @@ float Thing::bounce_fade_curr(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->bounce_fade);
+    return (infop()->bounce_fade);
   } else {
     return 0;
   }
@@ -3651,7 +3651,7 @@ void Thing::bounce_fade_set(float v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->bounce_fade = v;
+  infop()->bounce_fade = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3661,7 +3661,7 @@ point3d Thing::born_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->born);
+    return (infop()->born);
   } else {
     die("No born location");
     return (point3d(-1, -1, -1));
@@ -3672,7 +3672,7 @@ void Thing::born_set(point3d v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->born = v;
+  infop()->born = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3682,7 +3682,7 @@ int Thing::bounce_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->bounce_count);
+    return (infop()->bounce_count);
   } else {
     return 0;
   }
@@ -3692,7 +3692,7 @@ void Thing::bounce_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->bounce_count = v;
+  infop()->bounce_count = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3702,7 +3702,7 @@ float Thing::fadeup_height_curr(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->fadeup_height);
+    return (infop()->fadeup_height);
   } else {
     return 0;
   }
@@ -3712,7 +3712,7 @@ void Thing::fadeup_height_set(float v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->fadeup_height = v;
+  infop()->fadeup_height = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3722,7 +3722,7 @@ float Thing::fadeup_fade_curr(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->fadeup_fade);
+    return (infop()->fadeup_fade);
   } else {
     return 0;
   }
@@ -3732,7 +3732,7 @@ void Thing::fadeup_fade_set(float v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->fadeup_fade = v;
+  infop()->fadeup_fade = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3742,7 +3742,7 @@ float Thing::wobble_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->wobble);
+    return (infop()->wobble);
   } else {
     return 0;
   }
@@ -3752,7 +3752,7 @@ void Thing::wobble_set(float v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->wobble = v;
+  infop()->wobble = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3762,7 +3762,7 @@ const std::string &Thing::msg_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->msg);
+    return (infop()->msg);
   } else {
     static std::string empty;
     return (empty);
@@ -3773,7 +3773,7 @@ void Thing::msg_set(const std::string &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->msg = v;
+  infop()->msg = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3783,7 +3783,7 @@ const std::string &Thing::dead_reason_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->dead_reason);
+    return (infop()->dead_reason);
   } else {
     static std::string empty;
     return (empty);
@@ -3794,7 +3794,7 @@ void Thing::dead_reason_set(const std::string &v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->dead_reason = v;
+  infop()->dead_reason = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3808,10 +3808,10 @@ int Thing::submerged_offset_get(void)
     // Floating when dead?
     //
     if (is_dead) {
-      return (infop_get()->submerged_offset / 2);
+      return (infop()->submerged_offset / 2);
     }
 
-    return (infop_get()->submerged_offset);
+    return (infop()->submerged_offset);
   } else {
     return 0;
   }
@@ -3821,7 +3821,7 @@ void Thing::submerged_offset_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  infop_get()->submerged_offset = v;
+  infop()->submerged_offset = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3831,7 +3831,7 @@ int Thing::gold(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->gold);
+    return (infop()->gold);
   } else {
     return 0;
   }
@@ -3844,7 +3844,7 @@ int Thing::gold_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->gold = v);
+  auto n = (infop()->gold = v);
   return (n);
 }
 
@@ -3855,9 +3855,9 @@ int Thing::gold_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->gold -= v);
-  if (infop_get()->gold < 0) {
-    infop_get()->gold = 0;
+  auto n = (infop()->gold -= v);
+  if (infop()->gold < 0) {
+    infop()->gold = 0;
   }
   return (n);
 }
@@ -3869,7 +3869,7 @@ int Thing::gold_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->gold += v);
+  auto n = (infop()->gold += v);
   return (n);
 }
 
@@ -3880,9 +3880,9 @@ int Thing::gold_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->gold--);
-  if (infop_get()->gold < 0) {
-    infop_get()->gold = 0;
+  auto n = (infop()->gold--);
+  if (infop()->gold < 0) {
+    infop()->gold = 0;
   }
   return (n);
 }
@@ -3894,7 +3894,7 @@ int Thing::gold_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->gold++);
+  auto n = (infop()->gold++);
   return (n);
 }
 
@@ -3905,7 +3905,7 @@ int Thing::score(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->score);
+    return (infop()->score);
   } else {
     return 0;
   }
@@ -3918,7 +3918,7 @@ void Thing::score_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  infop_get()->score = v;
+  infop()->score = v;
 }
 
 void Thing::score_incr(int v)
@@ -3928,7 +3928,7 @@ void Thing::score_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  infop_get()->score += v;
+  infop()->score += v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3938,7 +3938,7 @@ int Thing::keys(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->keys);
+    return (infop()->keys);
   } else {
     return 0;
   }
@@ -3951,7 +3951,7 @@ int Thing::keys_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->keys = v);
+  auto n = (infop()->keys = v);
   return (n);
 }
 
@@ -3962,9 +3962,9 @@ int Thing::keys_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->keys -= v);
-  if (infop_get()->keys < 0) {
-    infop_get()->keys = 0;
+  auto n = (infop()->keys -= v);
+  if (infop()->keys < 0) {
+    infop()->keys = 0;
   }
   return (n);
 }
@@ -3976,7 +3976,7 @@ int Thing::keys_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->keys += v);
+  auto n = (infop()->keys += v);
   return (n);
 }
 
@@ -3987,9 +3987,9 @@ int Thing::keys_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->keys--);
-  if (infop_get()->keys < 0) {
-    infop_get()->keys = 0;
+  auto n = (infop()->keys--);
+  if (infop()->keys < 0) {
+    infop()->keys = 0;
   }
   return (n);
 }
@@ -4001,7 +4001,7 @@ int Thing::keys_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->keys++);
+  auto n = (infop()->keys++);
   return (n);
 }
 
@@ -4013,7 +4013,7 @@ int Thing::health(void)
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
-    v = infop_get()->health;
+    v = infop()->health;
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
@@ -4029,7 +4029,7 @@ int Thing::health_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health = v);
+  auto n = (infop()->health = v);
   return (n);
 }
 
@@ -4040,7 +4040,7 @@ int Thing::health_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health -= v);
+  auto n = (infop()->health -= v);
   return (n);
 }
 
@@ -4051,7 +4051,7 @@ int Thing::health_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health += v);
+  auto n = (infop()->health += v);
   return (n);
 }
 
@@ -4062,7 +4062,7 @@ int Thing::health_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health--);
+  auto n = (infop()->health--);
   return (n);
 }
 
@@ -4073,7 +4073,7 @@ int Thing::health_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health++);
+  auto n = (infop()->health++);
   return (n);
 }
 
@@ -4084,7 +4084,7 @@ int Thing::health_max(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->health_max);
+    return (infop()->health_max);
   } else {
     return 0;
   }
@@ -4097,7 +4097,7 @@ int Thing::health_max_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health_max = v);
+  auto n = (infop()->health_max = v);
   return (n);
 }
 
@@ -4108,7 +4108,7 @@ int Thing::health_max_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health_max -= v);
+  auto n = (infop()->health_max -= v);
   return (n);
 }
 
@@ -4119,7 +4119,7 @@ int Thing::health_max_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health_max += v);
+  auto n = (infop()->health_max += v);
   return (n);
 }
 
@@ -4130,7 +4130,7 @@ int Thing::health_max_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health_max--);
+  auto n = (infop()->health_max--);
   return (n);
 }
 
@@ -4141,7 +4141,7 @@ int Thing::health_max_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->health_max++);
+  auto n = (infop()->health_max++);
   return (n);
 }
 
@@ -4152,7 +4152,7 @@ int Thing::stamina_max(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stamina_max);
+    return (infop()->stamina_max);
   } else {
     return 0;
   }
@@ -4165,7 +4165,7 @@ int Thing::stamina_max_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stamina_max = v);
+  auto n = (infop()->stamina_max = v);
   return (n);
 }
 
@@ -4176,7 +4176,7 @@ int Thing::stamina_max_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stamina_max -= v);
+  auto n = (infop()->stamina_max -= v);
   return (n);
 }
 
@@ -4187,7 +4187,7 @@ int Thing::stamina_max_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stamina_max += v);
+  auto n = (infop()->stamina_max += v);
   return (n);
 }
 
@@ -4198,7 +4198,7 @@ int Thing::stamina_max_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stamina_max--);
+  auto n = (infop()->stamina_max--);
   return (n);
 }
 
@@ -4209,7 +4209,7 @@ int Thing::stamina_max_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stamina_max++);
+  auto n = (infop()->stamina_max++);
   return (n);
 }
 
@@ -4220,7 +4220,7 @@ int Thing::enchant_max_current_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->enchant_max);
+    return (infop()->enchant_max);
   } else {
     return 0;
   }
@@ -4233,7 +4233,7 @@ int Thing::enchant_max_current_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->enchant_max = v);
+  auto n = (infop()->enchant_max = v);
   return (n);
 }
 
@@ -4244,7 +4244,7 @@ int Thing::enchant_max_current_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->enchant_max -= v);
+  auto n = (infop()->enchant_max -= v);
   return (n);
 }
 
@@ -4255,7 +4255,7 @@ int Thing::enchant_max_current_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->enchant_max += v);
+  auto n = (infop()->enchant_max += v);
   return (n);
 }
 
@@ -4266,7 +4266,7 @@ int Thing::enchant_max_current_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->enchant_max--);
+  auto n = (infop()->enchant_max--);
   return (n);
 }
 
@@ -4277,7 +4277,7 @@ int Thing::enchant_max_current_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->enchant_max++);
+  auto n = (infop()->enchant_max++);
   return (n);
 }
 
@@ -4288,7 +4288,7 @@ uint32_t Thing::tick_resurrect_when(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->tick_resurrect_when);
+    return (infop()->tick_resurrect_when);
   } else {
     return 0;
   }
@@ -4298,7 +4298,7 @@ uint32_t Thing::tick_resurrect_when_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->tick_resurrect_when = v);
+  auto n = (infop()->tick_resurrect_when = v);
   return (n);
 }
 
@@ -4306,7 +4306,7 @@ uint32_t Thing::tick_resurrect_when_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->tick_resurrect_when -= v);
+  auto n = (infop()->tick_resurrect_when -= v);
   return (n);
 }
 
@@ -4314,7 +4314,7 @@ uint32_t Thing::tick_resurrect_when_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->tick_resurrect_when += v);
+  auto n = (infop()->tick_resurrect_when += v);
   return (n);
 }
 
@@ -4322,7 +4322,7 @@ uint32_t Thing::tick_resurrect_when_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->tick_resurrect_when--);
+  auto n = (infop()->tick_resurrect_when--);
   return (n);
 }
 
@@ -4330,7 +4330,7 @@ uint32_t Thing::tick_resurrect_when_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->tick_resurrect_when++);
+  auto n = (infop()->tick_resurrect_when++);
   return (n);
 }
 
@@ -4341,7 +4341,7 @@ uint32_t Thing::movement_left(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->movement_left);
+    return (infop()->movement_left);
   } else {
     return 0;
   }
@@ -4351,7 +4351,7 @@ uint32_t Thing::movement_left_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->movement_left = v);
+  auto n = (infop()->movement_left = v);
   return (n);
 }
 
@@ -4359,7 +4359,7 @@ uint32_t Thing::movement_left_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->movement_left -= v);
+  auto n = (infop()->movement_left -= v);
   return (n);
 }
 
@@ -4367,7 +4367,7 @@ uint32_t Thing::movement_left_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->movement_left += v);
+  auto n = (infop()->movement_left += v);
   return (n);
 }
 
@@ -4375,7 +4375,7 @@ uint32_t Thing::movement_left_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->movement_left--);
+  auto n = (infop()->movement_left--);
   return (n);
 }
 
@@ -4383,7 +4383,7 @@ uint32_t Thing::movement_left_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->movement_left++);
+  auto n = (infop()->movement_left++);
   return (n);
 }
 
@@ -4394,7 +4394,7 @@ int Thing::stats02(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stats02);
+    return (infop()->stats02);
   } else {
     return 0;
   }
@@ -4407,7 +4407,7 @@ int Thing::stats02_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats02 = v);
+  auto n = (infop()->stats02 = v);
   return (n);
 }
 
@@ -4418,7 +4418,7 @@ int Thing::stats02_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats02 -= v);
+  auto n = (infop()->stats02 -= v);
   return (n);
 }
 
@@ -4429,7 +4429,7 @@ int Thing::stats02_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats02 += v);
+  auto n = (infop()->stats02 += v);
   return (n);
 }
 
@@ -4440,7 +4440,7 @@ int Thing::stats02_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats02--);
+  auto n = (infop()->stats02--);
   return (n);
 }
 
@@ -4451,7 +4451,7 @@ int Thing::stats02_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats02++);
+  auto n = (infop()->stats02++);
   return (n);
 }
 
@@ -4462,7 +4462,7 @@ int Thing::stats03(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stats03);
+    return (infop()->stats03);
   } else {
     return 0;
   }
@@ -4475,7 +4475,7 @@ int Thing::stats03_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats03 = v);
+  auto n = (infop()->stats03 = v);
   return (n);
 }
 
@@ -4486,7 +4486,7 @@ int Thing::stats03_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats03 -= v);
+  auto n = (infop()->stats03 -= v);
   return (n);
 }
 
@@ -4497,7 +4497,7 @@ int Thing::stats03_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats03 += v);
+  auto n = (infop()->stats03 += v);
   return (n);
 }
 
@@ -4508,7 +4508,7 @@ int Thing::stats03_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats03--);
+  auto n = (infop()->stats03--);
   return (n);
 }
 
@@ -4519,7 +4519,7 @@ int Thing::stats03_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats03++);
+  auto n = (infop()->stats03++);
   return (n);
 }
 
@@ -4530,7 +4530,7 @@ int Thing::stats04(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stats04);
+    return (infop()->stats04);
   } else {
     return 0;
   }
@@ -4543,7 +4543,7 @@ int Thing::stats04_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats04 = v);
+  auto n = (infop()->stats04 = v);
   return (n);
 }
 
@@ -4554,7 +4554,7 @@ int Thing::stats04_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats04 -= v);
+  auto n = (infop()->stats04 -= v);
   return (n);
 }
 
@@ -4565,7 +4565,7 @@ int Thing::stats04_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats04 += v);
+  auto n = (infop()->stats04 += v);
   return (n);
 }
 
@@ -4576,7 +4576,7 @@ int Thing::stats04_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats04--);
+  auto n = (infop()->stats04--);
   return (n);
 }
 
@@ -4587,7 +4587,7 @@ int Thing::stats04_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats04++);
+  auto n = (infop()->stats04++);
   return (n);
 }
 
@@ -4598,7 +4598,7 @@ int Thing::stats05(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stats05);
+    return (infop()->stats05);
   } else {
     return 0;
   }
@@ -4611,7 +4611,7 @@ int Thing::stats05_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats05 = v);
+  auto n = (infop()->stats05 = v);
   return (n);
 }
 
@@ -4622,7 +4622,7 @@ int Thing::stats05_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats05 -= v);
+  auto n = (infop()->stats05 -= v);
   return (n);
 }
 
@@ -4633,7 +4633,7 @@ int Thing::stats05_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats05 += v);
+  auto n = (infop()->stats05 += v);
   return (n);
 }
 
@@ -4644,7 +4644,7 @@ int Thing::stats05_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats05--);
+  auto n = (infop()->stats05--);
   return (n);
 }
 
@@ -4655,7 +4655,7 @@ int Thing::stats05_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats05++);
+  auto n = (infop()->stats05++);
   return (n);
 }
 
@@ -4666,7 +4666,7 @@ int Thing::stats06(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stats06);
+    return (infop()->stats06);
   } else {
     return 0;
   }
@@ -4679,7 +4679,7 @@ int Thing::stats06_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats06 = v);
+  auto n = (infop()->stats06 = v);
   return (n);
 }
 
@@ -4690,7 +4690,7 @@ int Thing::stats06_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats06 -= v);
+  auto n = (infop()->stats06 -= v);
   return (n);
 }
 
@@ -4701,7 +4701,7 @@ int Thing::stats06_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats06 += v);
+  auto n = (infop()->stats06 += v);
   return (n);
 }
 
@@ -4712,7 +4712,7 @@ int Thing::stats06_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats06--);
+  auto n = (infop()->stats06--);
   return (n);
 }
 
@@ -4723,7 +4723,7 @@ int Thing::stats06_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats06++);
+  auto n = (infop()->stats06++);
   return (n);
 }
 
@@ -4734,7 +4734,7 @@ int Thing::stats07(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stats07);
+    return (infop()->stats07);
   } else {
     return 0;
   }
@@ -4747,7 +4747,7 @@ int Thing::stats07_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats07 = v);
+  auto n = (infop()->stats07 = v);
   return (n);
 }
 
@@ -4758,7 +4758,7 @@ int Thing::stats07_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats07 -= v);
+  auto n = (infop()->stats07 -= v);
   return (n);
 }
 
@@ -4769,7 +4769,7 @@ int Thing::stats07_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats07 += v);
+  auto n = (infop()->stats07 += v);
   return (n);
 }
 
@@ -4780,7 +4780,7 @@ int Thing::stats07_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats07--);
+  auto n = (infop()->stats07--);
   return (n);
 }
 
@@ -4791,7 +4791,7 @@ int Thing::stats07_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats07++);
+  auto n = (infop()->stats07++);
   return (n);
 }
 
@@ -4802,7 +4802,7 @@ int Thing::stats09(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stats09);
+    return (infop()->stats09);
   } else {
     return 0;
   }
@@ -4815,7 +4815,7 @@ int Thing::stats09_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats09 = v);
+  auto n = (infop()->stats09 = v);
   return (n);
 }
 
@@ -4826,7 +4826,7 @@ int Thing::stats09_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats09 -= v);
+  auto n = (infop()->stats09 -= v);
   return (n);
 }
 
@@ -4837,7 +4837,7 @@ int Thing::stats09_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats09 += v);
+  auto n = (infop()->stats09 += v);
   return (n);
 }
 
@@ -4848,7 +4848,7 @@ int Thing::stats09_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats09--);
+  auto n = (infop()->stats09--);
   return (n);
 }
 
@@ -4859,7 +4859,7 @@ int Thing::stats09_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stats09++);
+  auto n = (infop()->stats09++);
   return (n);
 }
 
@@ -4870,7 +4870,7 @@ int Thing::stat_def_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stat_def_mod);
+    return (infop()->stat_def_mod);
   } else {
     return 0;
   }
@@ -4883,7 +4883,7 @@ int Thing::stat_def_mod_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def_mod = v);
+  auto n = (infop()->stat_def_mod = v);
   return (n);
 }
 
@@ -4894,7 +4894,7 @@ int Thing::stat_def_mod_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def_mod -= v);
+  auto n = (infop()->stat_def_mod -= v);
   return (n);
 }
 
@@ -4905,7 +4905,7 @@ int Thing::stat_def_mod_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def_mod += v);
+  auto n = (infop()->stat_def_mod += v);
   return (n);
 }
 
@@ -4916,7 +4916,7 @@ int Thing::stat_def_mod_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def_mod--);
+  auto n = (infop()->stat_def_mod--);
   return (n);
 }
 
@@ -4927,7 +4927,7 @@ int Thing::stat_def_mod_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_def_mod++);
+  auto n = (infop()->stat_def_mod++);
   return (n);
 }
 
@@ -4938,7 +4938,7 @@ int Thing::stat_con_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stat_con_mod);
+    return (infop()->stat_con_mod);
   } else {
     return 0;
   }
@@ -4951,7 +4951,7 @@ int Thing::stat_con_mod_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_con_mod = v);
+  auto n = (infop()->stat_con_mod = v);
   return (n);
 }
 
@@ -4962,7 +4962,7 @@ int Thing::stat_con_mod_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_con_mod -= v);
+  auto n = (infop()->stat_con_mod -= v);
   return (n);
 }
 
@@ -4973,7 +4973,7 @@ int Thing::stat_con_mod_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_con_mod += v);
+  auto n = (infop()->stat_con_mod += v);
   return (n);
 }
 
@@ -4984,7 +4984,7 @@ int Thing::stat_con_mod_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_con_mod--);
+  auto n = (infop()->stat_con_mod--);
   return (n);
 }
 
@@ -4995,7 +4995,7 @@ int Thing::stat_con_mod_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_con_mod++);
+  auto n = (infop()->stat_con_mod++);
   return (n);
 }
 
@@ -5006,7 +5006,7 @@ int Thing::stat_dex_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stat_dex_mod);
+    return (infop()->stat_dex_mod);
   } else {
     return 0;
   }
@@ -5019,7 +5019,7 @@ int Thing::stat_dex_mod_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_dex_mod = v);
+  auto n = (infop()->stat_dex_mod = v);
   return (n);
 }
 
@@ -5030,7 +5030,7 @@ int Thing::stat_dex_mod_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_dex_mod -= v);
+  auto n = (infop()->stat_dex_mod -= v);
   return (n);
 }
 
@@ -5041,7 +5041,7 @@ int Thing::stat_dex_mod_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_dex_mod += v);
+  auto n = (infop()->stat_dex_mod += v);
   return (n);
 }
 
@@ -5052,7 +5052,7 @@ int Thing::stat_dex_mod_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_dex_mod--);
+  auto n = (infop()->stat_dex_mod--);
   return (n);
 }
 
@@ -5063,7 +5063,7 @@ int Thing::stat_dex_mod_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_dex_mod++);
+  auto n = (infop()->stat_dex_mod++);
   return (n);
 }
 
@@ -5074,7 +5074,7 @@ int Thing::stat_luck_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stat_luck_mod);
+    return (infop()->stat_luck_mod);
   } else {
     return 0;
   }
@@ -5087,7 +5087,7 @@ int Thing::stat_luck_mod_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck_mod = v);
+  auto n = (infop()->stat_luck_mod = v);
   return (n);
 }
 
@@ -5098,7 +5098,7 @@ int Thing::stat_luck_mod_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck_mod -= v);
+  auto n = (infop()->stat_luck_mod -= v);
   return (n);
 }
 
@@ -5109,7 +5109,7 @@ int Thing::stat_luck_mod_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck_mod += v);
+  auto n = (infop()->stat_luck_mod += v);
   return (n);
 }
 
@@ -5120,7 +5120,7 @@ int Thing::stat_luck_mod_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck_mod--);
+  auto n = (infop()->stat_luck_mod--);
   return (n);
 }
 
@@ -5131,7 +5131,7 @@ int Thing::stat_luck_mod_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_luck_mod++);
+  auto n = (infop()->stat_luck_mod++);
   return (n);
 }
 
@@ -5142,7 +5142,7 @@ int Thing::stat_att_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stat_att_mod);
+    return (infop()->stat_att_mod);
   } else {
     return 0;
   }
@@ -5155,7 +5155,7 @@ int Thing::stat_att_mod_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_att_mod = v);
+  auto n = (infop()->stat_att_mod = v);
   return (n);
 }
 
@@ -5166,7 +5166,7 @@ int Thing::stat_att_mod_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_att_mod -= v);
+  auto n = (infop()->stat_att_mod -= v);
   return (n);
 }
 
@@ -5177,7 +5177,7 @@ int Thing::stat_att_mod_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_att_mod += v);
+  auto n = (infop()->stat_att_mod += v);
   return (n);
 }
 
@@ -5188,7 +5188,7 @@ int Thing::stat_att_mod_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_att_mod--);
+  auto n = (infop()->stat_att_mod--);
   return (n);
 }
 
@@ -5199,7 +5199,7 @@ int Thing::stat_att_mod_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_att_mod++);
+  auto n = (infop()->stat_att_mod++);
   return (n);
 }
 
@@ -5210,7 +5210,7 @@ int Thing::stat_str_mod(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->stat_str_mod);
+    return (infop()->stat_str_mod);
   } else {
     return 0;
   }
@@ -5223,7 +5223,7 @@ int Thing::stat_str_mod_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_str_mod = v);
+  auto n = (infop()->stat_str_mod = v);
   return (n);
 }
 
@@ -5234,7 +5234,7 @@ int Thing::stat_str_mod_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_str_mod -= v);
+  auto n = (infop()->stat_str_mod -= v);
   return (n);
 }
 
@@ -5245,7 +5245,7 @@ int Thing::stat_str_mod_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_str_mod += v);
+  auto n = (infop()->stat_str_mod += v);
   return (n);
 }
 
@@ -5256,7 +5256,7 @@ int Thing::stat_str_mod_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_str_mod--);
+  auto n = (infop()->stat_str_mod--);
   return (n);
 }
 
@@ -5267,7 +5267,7 @@ int Thing::stat_str_mod_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->stat_str_mod++);
+  auto n = (infop()->stat_str_mod++);
   return (n);
 }
 
@@ -5278,7 +5278,7 @@ float Thing::distance_throw_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->distance_throw);
+    return (infop()->distance_throw);
   } else {
     return 0;
   }
@@ -5288,7 +5288,7 @@ int Thing::distance_throw_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->distance_throw = v);
+  auto n = (infop()->distance_throw = v);
   return (n);
 }
 
@@ -5296,7 +5296,7 @@ int Thing::distance_throw_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->distance_throw -= v);
+  auto n = (infop()->distance_throw -= v);
   return (n);
 }
 
@@ -5304,7 +5304,7 @@ int Thing::distance_throw_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->distance_throw += v);
+  auto n = (infop()->distance_throw += v);
   return (n);
 }
 
@@ -5312,7 +5312,7 @@ int Thing::distance_throw_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->distance_throw--);
+  auto n = (infop()->distance_throw--);
   return (n);
 }
 
@@ -5320,7 +5320,7 @@ int Thing::distance_throw_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->distance_throw++);
+  auto n = (infop()->distance_throw++);
   return (n);
 }
 
@@ -5332,7 +5332,7 @@ int Thing::stamina_get(void)
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
-    v = infop_get()->stamina;
+    v = infop()->stamina;
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
@@ -5352,7 +5352,7 @@ int Thing::stamina_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->stamina = v);
+  auto n = (infop()->stamina = v);
   return (n);
 }
 
@@ -5360,9 +5360,9 @@ int Thing::stamina_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->stamina -= v);
-  if (infop_get()->stamina < 0) {
-    infop_get()->stamina = 0;
+  auto n = (infop()->stamina -= v);
+  if (infop()->stamina < 0) {
+    infop()->stamina = 0;
   }
   return (n);
 }
@@ -5371,7 +5371,7 @@ int Thing::stamina_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->stamina += v);
+  auto n = (infop()->stamina += v);
   return (n);
 }
 
@@ -5379,9 +5379,9 @@ int Thing::stamina_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->stamina--);
-  if (infop_get()->stamina < 0) {
-    infop_get()->stamina = 0;
+  auto n = (infop()->stamina--);
+  if (infop()->stamina < 0) {
+    infop()->stamina = 0;
   }
   return (n);
 }
@@ -5390,7 +5390,7 @@ int Thing::stamina_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->stamina++);
+  auto n = (infop()->stamina++);
   return (n);
 }
 
@@ -5402,7 +5402,7 @@ int Thing::enchant_get(void)
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
-    v = infop_get()->enchant;
+    v = infop()->enchant;
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
@@ -5422,7 +5422,7 @@ int Thing::enchant_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->enchant = v);
+  auto n = (infop()->enchant = v);
   return (n);
 }
 
@@ -5430,9 +5430,9 @@ int Thing::enchant_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->enchant -= v);
-  if (infop_get()->enchant < 0) {
-    infop_get()->enchant = 0;
+  auto n = (infop()->enchant -= v);
+  if (infop()->enchant < 0) {
+    infop()->enchant = 0;
   }
   return (n);
 }
@@ -5441,7 +5441,7 @@ int Thing::enchant_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->enchant += v);
+  auto n = (infop()->enchant += v);
   return (n);
 }
 
@@ -5449,9 +5449,9 @@ int Thing::enchant_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->enchant--);
-  if (infop_get()->enchant < 0) {
-    infop_get()->enchant = 0;
+  auto n = (infop()->enchant--);
+  if (infop()->enchant < 0) {
+    infop()->enchant = 0;
   }
   return (n);
 }
@@ -5460,7 +5460,7 @@ int Thing::enchant_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->enchant++);
+  auto n = (infop()->enchant++);
   return (n);
 }
 
@@ -5472,7 +5472,7 @@ int Thing::poisoned_amount(void)
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
-    v = infop_get()->poison;
+    v = infop()->poison;
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
@@ -5492,9 +5492,9 @@ int Thing::poisoned_amount_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->poison = v);
-  if (infop_get()->poison < 0) {
-    infop_get()->poison = 0;
+  auto n = (infop()->poison = v);
+  if (infop()->poison < 0) {
+    infop()->poison = 0;
   }
   return (n);
 }
@@ -5503,9 +5503,9 @@ int Thing::poisoned_amount_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->poison -= v);
-  if (infop_get()->poison < 0) {
-    infop_get()->poison = 0;
+  auto n = (infop()->poison -= v);
+  if (infop()->poison < 0) {
+    infop()->poison = 0;
   }
   return (n);
 }
@@ -5514,9 +5514,9 @@ int Thing::poisoned_amount_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->poison += v);
-  if (infop_get()->poison < 0) {
-    infop_get()->poison = 0;
+  auto n = (infop()->poison += v);
+  if (infop()->poison < 0) {
+    infop()->poison = 0;
   }
   return (n);
 }
@@ -5525,9 +5525,9 @@ int Thing::poisoned_amount_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->poison--);
-  if (infop_get()->poison < 0) {
-    infop_get()->poison = 0;
+  auto n = (infop()->poison--);
+  if (infop()->poison < 0) {
+    infop()->poison = 0;
   }
   return (n);
 }
@@ -5536,7 +5536,7 @@ int Thing::poisoned_amount_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->poison++);
+  auto n = (infop()->poison++);
   return (n);
 }
 
@@ -5548,7 +5548,7 @@ int Thing::necrotized_amount(void)
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
-    v = infop_get()->necrosis;
+    v = infop()->necrosis;
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
@@ -5568,9 +5568,9 @@ int Thing::necrotized_amount_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->necrosis = v);
-  if (infop_get()->necrosis < 0) {
-    infop_get()->necrosis = 0;
+  auto n = (infop()->necrosis = v);
+  if (infop()->necrosis < 0) {
+    infop()->necrosis = 0;
   }
   return (n);
 }
@@ -5579,9 +5579,9 @@ int Thing::necrotized_amount_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->necrosis -= v);
-  if (infop_get()->necrosis < 0) {
-    infop_get()->necrosis = 0;
+  auto n = (infop()->necrosis -= v);
+  if (infop()->necrosis < 0) {
+    infop()->necrosis = 0;
   }
   return (n);
 }
@@ -5590,9 +5590,9 @@ int Thing::necrotized_amount_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->necrosis += v);
-  if (infop_get()->necrosis < 0) {
-    infop_get()->necrosis = 0;
+  auto n = (infop()->necrosis += v);
+  if (infop()->necrosis < 0) {
+    infop()->necrosis = 0;
   }
   return (n);
 }
@@ -5601,9 +5601,9 @@ int Thing::necrotized_amount_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->necrosis--);
-  if (infop_get()->necrosis < 0) {
-    infop_get()->necrosis = 0;
+  auto n = (infop()->necrosis--);
+  if (infop()->necrosis < 0) {
+    infop()->necrosis = 0;
   }
   return (n);
 }
@@ -5612,7 +5612,7 @@ int Thing::necrotized_amount_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop_get()->necrosis++);
+  auto n = (infop()->necrosis++);
   return (n);
 }
 
@@ -5623,7 +5623,7 @@ int Thing::owned_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->owned_count);
+    return (infop()->owned_count);
   } else {
     return 0;
   }
@@ -5633,35 +5633,35 @@ int Thing::owned_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->owned_count = v);
+  return (infop()->owned_count = v);
 }
 
 int Thing::owned_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->owned_count -= v);
+  return (infop()->owned_count -= v);
 }
 
 int Thing::owned_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->owned_count += v);
+  return (infop()->owned_count += v);
 }
 
 int Thing::owned_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->owned_count--);
+  return (infop()->owned_count--);
 }
 
 int Thing::owned_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->owned_count++);
+  return (infop()->owned_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5671,7 +5671,7 @@ int Thing::minion_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->minion_count);
+    return (infop()->minion_count);
   } else {
     return 0;
   }
@@ -5681,35 +5681,35 @@ int Thing::minion_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->minion_count = v);
+  return (infop()->minion_count = v);
 }
 
 int Thing::minion_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->minion_count -= v);
+  return (infop()->minion_count -= v);
 }
 
 int Thing::minion_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->minion_count += v);
+  return (infop()->minion_count += v);
 }
 
 int Thing::minion_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->minion_count--);
+  return (infop()->minion_count--);
 }
 
 int Thing::minion_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->minion_count++);
+  return (infop()->minion_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5719,7 +5719,7 @@ int Thing::follower_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->follower_count);
+    return (infop()->follower_count);
   } else {
     return 0;
   }
@@ -5729,35 +5729,35 @@ int Thing::follower_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->follower_count = v);
+  return (infop()->follower_count = v);
 }
 
 int Thing::follower_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->follower_count -= v);
+  return (infop()->follower_count -= v);
 }
 
 int Thing::follower_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->follower_count += v);
+  return (infop()->follower_count += v);
 }
 
 int Thing::follower_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->follower_count--);
+  return (infop()->follower_count--);
 }
 
 int Thing::follower_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->follower_count++);
+  return (infop()->follower_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5767,7 +5767,7 @@ int Thing::spawned_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->spawned_count);
+    return (infop()->spawned_count);
   } else {
     return 0;
   }
@@ -5777,35 +5777,35 @@ int Thing::spawned_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->spawned_count = v);
+  return (infop()->spawned_count = v);
 }
 
 int Thing::spawned_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->spawned_count -= v);
+  return (infop()->spawned_count -= v);
 }
 
 int Thing::spawned_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->spawned_count += v);
+  return (infop()->spawned_count += v);
 }
 
 int Thing::spawned_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->spawned_count--);
+  return (infop()->spawned_count--);
 }
 
 int Thing::spawned_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->spawned_count++);
+  return (infop()->spawned_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5815,7 +5815,7 @@ int Thing::charge_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->charge_count);
+    return (infop()->charge_count);
   } else {
     return 0;
   }
@@ -5825,35 +5825,35 @@ int Thing::charge_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->charge_count = v);
+  return (infop()->charge_count = v);
 }
 
 int Thing::charge_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->charge_count -= v);
+  return (infop()->charge_count -= v);
 }
 
 int Thing::charge_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->charge_count += v);
+  return (infop()->charge_count += v);
 }
 
 int Thing::charge_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->charge_count--);
+  return (infop()->charge_count--);
 }
 
 int Thing::charge_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->charge_count++);
+  return (infop()->charge_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5863,7 +5863,7 @@ int Thing::sleep_count(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->sleep_count);
+    return (infop()->sleep_count);
   } else {
     return 0;
   }
@@ -5873,35 +5873,35 @@ int Thing::sleep_count_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->sleep_count = v);
+  return (infop()->sleep_count = v);
 }
 
 int Thing::sleep_count_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->sleep_count -= v);
+  return (infop()->sleep_count -= v);
 }
 
 int Thing::sleep_count_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->sleep_count += v);
+  return (infop()->sleep_count += v);
 }
 
 int Thing::sleep_count_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->sleep_count--);
+  return (infop()->sleep_count--);
 }
 
 int Thing::sleep_count_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->sleep_count++);
+  return (infop()->sleep_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6017,7 +6017,7 @@ int Thing::lifespan_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->lifespan);
+    return (infop()->lifespan);
   } else {
     return 0;
   }
@@ -6027,35 +6027,35 @@ int Thing::lifespan_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->lifespan = v);
+  return (infop()->lifespan = v);
 }
 
 int Thing::lifespan_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->lifespan -= v);
+  return (infop()->lifespan -= v);
 }
 
 int Thing::lifespan_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->lifespan += v);
+  return (infop()->lifespan += v);
 }
 
 int Thing::lifespan_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->lifespan--);
+  return (infop()->lifespan--);
 }
 
 int Thing::lifespan_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->lifespan++);
+  return (infop()->lifespan++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6065,7 +6065,7 @@ int Thing::prev_light_power_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->prev_light_power);
+    return (infop()->prev_light_power);
   } else {
     return 0;
   }
@@ -6075,35 +6075,35 @@ int Thing::prev_light_power_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->prev_light_power = v);
+  return (infop()->prev_light_power = v);
 }
 
 int Thing::prev_light_power_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->prev_light_power -= v);
+  return (infop()->prev_light_power -= v);
 }
 
 int Thing::prev_light_power_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->prev_light_power += v);
+  return (infop()->prev_light_power += v);
 }
 
 int Thing::prev_light_power_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->prev_light_power--);
+  return (infop()->prev_light_power--);
 }
 
 int Thing::prev_light_power_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->prev_light_power++);
+  return (infop()->prev_light_power++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6123,14 +6123,14 @@ int Thing::light_power_get(void)
     return initial_light_power_get();
   }
 
-  uint8_t light_power = infop_get()->light_power;
+  uint8_t light_power = infop()->light_power;
 
   if (is_player()) {
     light_power = 0;
   }
 
   light_power_including_torch_effect_get(light_power);
-  infop_get()->light_power = light_power;
+  infop()->light_power = light_power;
 
   return light_power;
 }
@@ -6143,7 +6143,7 @@ int Thing::update_light_power(void)
     return initial_light_power_get();
   }
 
-  uint8_t light_power = infop_get()->light_power;
+  uint8_t light_power = infop()->light_power;
 
   if (! light_power) {
     light_power = initial_light_power_get();
@@ -6154,7 +6154,7 @@ int Thing::update_light_power(void)
   }
 
   update_light_power_including_torch_effect(light_power);
-  infop_get()->light_power = light_power;
+  infop()->light_power = light_power;
 
   return light_power;
 }
@@ -6163,35 +6163,35 @@ int Thing::light_power_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->light_power = v);
+  return (infop()->light_power = v);
 }
 
 int Thing::light_power_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->light_power -= v);
+  return (infop()->light_power -= v);
 }
 
 int Thing::light_power_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->light_power += v);
+  return (infop()->light_power += v);
 }
 
 int Thing::light_power_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->light_power--);
+  return (infop()->light_power--);
 }
 
 int Thing::light_power_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->light_power++);
+  return (infop()->light_power++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6202,7 +6202,7 @@ uint32_t Thing::tick_last_did_something(void)
   TRACE_NO_INDENT();
 
   if (maybe_infop()) {
-    return (infop_get()->tick_last_did_something);
+    return (infop()->tick_last_did_something);
   } else {
     return 0;
   }
@@ -6212,35 +6212,35 @@ uint32_t Thing::tick_last_did_something_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_did_something = v);
+  return (infop()->tick_last_did_something = v);
 }
 
 uint32_t Thing::tick_last_did_something_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_did_something -= v);
+  return (infop()->tick_last_did_something -= v);
 }
 
 uint32_t Thing::tick_last_did_something_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_did_something += v);
+  return (infop()->tick_last_did_something += v);
 }
 
 uint32_t Thing::tick_last_did_something_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_did_something--);
+  return (infop()->tick_last_did_something--);
 }
 
 uint32_t Thing::tick_last_did_something_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_did_something++);
+  return (infop()->tick_last_did_something++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6251,7 +6251,7 @@ uint32_t Thing::tick_last_dropped(void)
   TRACE_NO_INDENT();
 
   if (maybe_infop()) {
-    return (infop_get()->tick_last_dropped);
+    return (infop()->tick_last_dropped);
   } else {
     return 0;
   }
@@ -6261,35 +6261,35 @@ uint32_t Thing::tick_last_dropped_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_dropped = v);
+  return (infop()->tick_last_dropped = v);
 }
 
 uint32_t Thing::tick_last_dropped_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_dropped -= v);
+  return (infop()->tick_last_dropped -= v);
 }
 
 uint32_t Thing::tick_last_dropped_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_dropped += v);
+  return (infop()->tick_last_dropped += v);
 }
 
 uint32_t Thing::tick_last_dropped_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_dropped--);
+  return (infop()->tick_last_dropped--);
 }
 
 uint32_t Thing::tick_last_dropped_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_dropped++);
+  return (infop()->tick_last_dropped++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6299,7 +6299,7 @@ uint32_t Thing::tick_last_location_check(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->tick_last_location_check);
+    return (infop()->tick_last_location_check);
   } else {
     return 0;
   }
@@ -6309,35 +6309,35 @@ uint32_t Thing::tick_last_location_check_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_location_check = v);
+  return (infop()->tick_last_location_check = v);
 }
 
 uint32_t Thing::tick_last_location_check_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_location_check -= v);
+  return (infop()->tick_last_location_check -= v);
 }
 
 uint32_t Thing::tick_last_location_check_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_location_check += v);
+  return (infop()->tick_last_location_check += v);
 }
 
 uint32_t Thing::tick_last_location_check_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_location_check--);
+  return (infop()->tick_last_location_check--);
 }
 
 uint32_t Thing::tick_last_location_check_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_location_check++);
+  return (infop()->tick_last_location_check++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6347,7 +6347,7 @@ uint32_t Thing::tick_last_escape(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->tick_last_escape);
+    return (infop()->tick_last_escape);
   } else {
     return 0;
   }
@@ -6357,35 +6357,35 @@ uint32_t Thing::tick_last_escape_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_escape = v);
+  return (infop()->tick_last_escape = v);
 }
 
 uint32_t Thing::tick_last_escape_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_escape -= v);
+  return (infop()->tick_last_escape -= v);
 }
 
 uint32_t Thing::tick_last_escape_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_escape += v);
+  return (infop()->tick_last_escape += v);
 }
 
 uint32_t Thing::tick_last_escape_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_escape--);
+  return (infop()->tick_last_escape--);
 }
 
 uint32_t Thing::tick_last_escape_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_escape++);
+  return (infop()->tick_last_escape++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6395,7 +6395,7 @@ uint32_t Thing::tick_last_level_change(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->tick_last_level_change);
+    return (infop()->tick_last_level_change);
   } else {
     return 0;
   }
@@ -6405,35 +6405,35 @@ uint32_t Thing::tick_last_level_change_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_level_change = v);
+  return (infop()->tick_last_level_change = v);
 }
 
 uint32_t Thing::tick_last_level_change_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_level_change -= v);
+  return (infop()->tick_last_level_change -= v);
 }
 
 uint32_t Thing::tick_last_level_change_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_level_change += v);
+  return (infop()->tick_last_level_change += v);
 }
 
 uint32_t Thing::tick_last_level_change_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_level_change--);
+  return (infop()->tick_last_level_change--);
 }
 
 uint32_t Thing::tick_last_level_change_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_level_change++);
+  return (infop()->tick_last_level_change++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6443,7 +6443,7 @@ uint32_t Thing::tick_last_i_was_attacked(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->tick_last_i_was_attacked);
+    return (infop()->tick_last_i_was_attacked);
   } else {
     return 0;
   }
@@ -6453,35 +6453,35 @@ uint32_t Thing::tick_last_i_was_attacked_set(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_i_was_attacked = v);
+  return (infop()->tick_last_i_was_attacked = v);
 }
 
 uint32_t Thing::tick_last_i_was_attacked_decr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_i_was_attacked -= v);
+  return (infop()->tick_last_i_was_attacked -= v);
 }
 
 uint32_t Thing::tick_last_i_was_attacked_incr(uint32_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_i_was_attacked += v);
+  return (infop()->tick_last_i_was_attacked += v);
 }
 
 uint32_t Thing::tick_last_i_was_attacked_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_i_was_attacked--);
+  return (infop()->tick_last_i_was_attacked--);
 }
 
 uint32_t Thing::tick_last_i_was_attacked_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->tick_last_i_was_attacked++);
+  return (infop()->tick_last_i_was_attacked++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6491,7 +6491,7 @@ point Thing::where_i_dropped_an_item_last_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
-    return (itemsp_get()->where_i_dropped_an_item_last);
+    return (itemsp()->where_i_dropped_an_item_last);
   } else {
     return (point(-1, -1));
   }
@@ -6501,7 +6501,7 @@ point Thing::where_i_dropped_an_item_last_set(point v)
 {
   TRACE_NO_INDENT();
   new_itemsp();
-  return (itemsp_get()->where_i_dropped_an_item_last = v);
+  return (itemsp()->where_i_dropped_an_item_last = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6511,7 +6511,7 @@ point Thing::where_i_failed_to_collect_last_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
-    return (itemsp_get()->where_i_failed_to_collect_last);
+    return (itemsp()->where_i_failed_to_collect_last);
   } else {
     return (point(-1, -1));
   }
@@ -6521,7 +6521,7 @@ point Thing::where_i_failed_to_collect_last_set(point v)
 {
   TRACE_NO_INDENT();
   new_itemsp();
-  return (itemsp_get()->where_i_failed_to_collect_last = v);
+  return (itemsp()->where_i_failed_to_collect_last = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6531,7 +6531,7 @@ ts_t Thing::ts_lunge_begin(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_lunge_begin);
+    return (infop()->ts_lunge_begin);
   } else {
     return 0;
   }
@@ -6541,35 +6541,35 @@ ts_t Thing::ts_lunge_begin_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_begin = v);
+  return (infop()->ts_lunge_begin = v);
 }
 
 ts_t Thing::ts_lunge_begin_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_begin -= v);
+  return (infop()->ts_lunge_begin -= v);
 }
 
 ts_t Thing::ts_lunge_begin_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_begin += v);
+  return (infop()->ts_lunge_begin += v);
 }
 
 ts_t Thing::ts_lunge_begin_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_begin--);
+  return (infop()->ts_lunge_begin--);
 }
 
 ts_t Thing::ts_lunge_begin_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_begin++);
+  return (infop()->ts_lunge_begin++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6579,7 +6579,7 @@ ts_t Thing::ts_lunge_end(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_lunge_end);
+    return (infop()->ts_lunge_end);
   } else {
     return 0;
   }
@@ -6589,35 +6589,35 @@ ts_t Thing::ts_lunge_end_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_end = v);
+  return (infop()->ts_lunge_end = v);
 }
 
 ts_t Thing::ts_lunge_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_end -= v);
+  return (infop()->ts_lunge_end -= v);
 }
 
 ts_t Thing::ts_lunge_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_end += v);
+  return (infop()->ts_lunge_end += v);
 }
 
 ts_t Thing::ts_lunge_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_end--);
+  return (infop()->ts_lunge_end--);
 }
 
 ts_t Thing::ts_lunge_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_lunge_end++);
+  return (infop()->ts_lunge_end++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6627,7 +6627,7 @@ ts_t Thing::ts_bounce_begin(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_bounce_begin);
+    return (infop()->ts_bounce_begin);
   } else {
     return 0;
   }
@@ -6637,35 +6637,35 @@ ts_t Thing::ts_bounce_begin_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_begin = v);
+  return (infop()->ts_bounce_begin = v);
 }
 
 ts_t Thing::ts_bounce_begin_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_begin -= v);
+  return (infop()->ts_bounce_begin -= v);
 }
 
 ts_t Thing::ts_bounce_begin_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_begin += v);
+  return (infop()->ts_bounce_begin += v);
 }
 
 ts_t Thing::ts_bounce_begin_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_begin--);
+  return (infop()->ts_bounce_begin--);
 }
 
 ts_t Thing::ts_bounce_begin_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_begin++);
+  return (infop()->ts_bounce_begin++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6675,7 +6675,7 @@ ts_t Thing::ts_bounce_end(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_bounce_end);
+    return (infop()->ts_bounce_end);
   } else {
     return 0;
   }
@@ -6685,35 +6685,35 @@ ts_t Thing::ts_bounce_end_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_end = v);
+  return (infop()->ts_bounce_end = v);
 }
 
 ts_t Thing::ts_bounce_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_end -= v);
+  return (infop()->ts_bounce_end -= v);
 }
 
 ts_t Thing::ts_bounce_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_end += v);
+  return (infop()->ts_bounce_end += v);
 }
 
 ts_t Thing::ts_bounce_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_end--);
+  return (infop()->ts_bounce_end--);
 }
 
 ts_t Thing::ts_bounce_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_bounce_end++);
+  return (infop()->ts_bounce_end++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6723,7 +6723,7 @@ ts_t Thing::ts_fadeup_begin(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_fadeup_begin);
+    return (infop()->ts_fadeup_begin);
   } else {
     return 0;
   }
@@ -6733,35 +6733,35 @@ ts_t Thing::ts_fadeup_begin_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_begin = v);
+  return (infop()->ts_fadeup_begin = v);
 }
 
 ts_t Thing::ts_fadeup_begin_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_begin -= v);
+  return (infop()->ts_fadeup_begin -= v);
 }
 
 ts_t Thing::ts_fadeup_begin_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_begin += v);
+  return (infop()->ts_fadeup_begin += v);
 }
 
 ts_t Thing::ts_fadeup_begin_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_begin--);
+  return (infop()->ts_fadeup_begin--);
 }
 
 ts_t Thing::ts_fadeup_begin_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_begin++);
+  return (infop()->ts_fadeup_begin++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6771,7 +6771,7 @@ ts_t Thing::ts_fadeup_end(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_fadeup_end);
+    return (infop()->ts_fadeup_end);
   } else {
     return 0;
   }
@@ -6781,35 +6781,35 @@ ts_t Thing::ts_fadeup_end_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_end = v);
+  return (infop()->ts_fadeup_end = v);
 }
 
 ts_t Thing::ts_fadeup_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_end -= v);
+  return (infop()->ts_fadeup_end -= v);
 }
 
 ts_t Thing::ts_fadeup_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_end += v);
+  return (infop()->ts_fadeup_end += v);
 }
 
 ts_t Thing::ts_fadeup_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_end--);
+  return (infop()->ts_fadeup_end--);
 }
 
 ts_t Thing::ts_fadeup_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fadeup_end++);
+  return (infop()->ts_fadeup_end++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6819,7 +6819,7 @@ ts_t Thing::ts_flip_start_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_flip_start);
+    return (infop()->ts_flip_start);
   } else {
     return 0;
   }
@@ -6829,35 +6829,35 @@ ts_t Thing::ts_flip_start_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_flip_start = v);
+  return (infop()->ts_flip_start = v);
 }
 
 ts_t Thing::ts_flip_start_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_flip_start -= v);
+  return (infop()->ts_flip_start -= v);
 }
 
 ts_t Thing::ts_flip_start_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_flip_start += v);
+  return (infop()->ts_flip_start += v);
 }
 
 ts_t Thing::ts_flip_start_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_flip_start--);
+  return (infop()->ts_flip_start--);
 }
 
 ts_t Thing::ts_flip_start_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_flip_start++);
+  return (infop()->ts_flip_start++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6867,7 +6867,7 @@ ts_t Thing::ts_anim_delay_end(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_anim_delay_end);
+    return (infop()->ts_anim_delay_end);
   } else {
     return 0;
   }
@@ -6877,35 +6877,35 @@ ts_t Thing::ts_anim_delay_end_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_anim_delay_end = v);
+  return (infop()->ts_anim_delay_end = v);
 }
 
 ts_t Thing::ts_anim_delay_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_anim_delay_end -= v);
+  return (infop()->ts_anim_delay_end -= v);
 }
 
 ts_t Thing::ts_anim_delay_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_anim_delay_end += v);
+  return (infop()->ts_anim_delay_end += v);
 }
 
 ts_t Thing::ts_anim_delay_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_anim_delay_end--);
+  return (infop()->ts_anim_delay_end--);
 }
 
 ts_t Thing::ts_anim_delay_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_anim_delay_end++);
+  return (infop()->ts_anim_delay_end++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6915,7 +6915,7 @@ ts_t Thing::ts_fall_begin(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_fall_begin);
+    return (infop()->ts_fall_begin);
   } else {
     return 0;
   }
@@ -6925,35 +6925,35 @@ ts_t Thing::ts_fall_begin_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_begin = v);
+  return (infop()->ts_fall_begin = v);
 }
 
 ts_t Thing::ts_fall_begin_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_begin -= v);
+  return (infop()->ts_fall_begin -= v);
 }
 
 ts_t Thing::ts_fall_begin_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_begin += v);
+  return (infop()->ts_fall_begin += v);
 }
 
 ts_t Thing::ts_fall_begin_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_begin--);
+  return (infop()->ts_fall_begin--);
 }
 
 ts_t Thing::ts_fall_begin_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_begin++);
+  return (infop()->ts_fall_begin++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -6963,7 +6963,7 @@ ts_t Thing::ts_fall_end(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->ts_fall_end);
+    return (infop()->ts_fall_end);
   } else {
     return 0;
   }
@@ -6973,35 +6973,35 @@ ts_t Thing::ts_fall_end_set(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_end = v);
+  return (infop()->ts_fall_end = v);
 }
 
 ts_t Thing::ts_fall_end_decr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_end -= v);
+  return (infop()->ts_fall_end -= v);
 }
 
 ts_t Thing::ts_fall_end_incr(ts_t v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_end += v);
+  return (infop()->ts_fall_end += v);
 }
 
 ts_t Thing::ts_fall_end_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_end--);
+  return (infop()->ts_fall_end--);
 }
 
 ts_t Thing::ts_fall_end_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->ts_fall_end++);
+  return (infop()->ts_fall_end++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -7011,7 +7011,7 @@ ThingId Thing::equip_id_carry_anim(int equip)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
-    auto id = get(itemsp_get()->equip_id_carry_anim, equip);
+    auto id = get(itemsp()->equip_id_carry_anim, equip);
     if (id != NoThingId) {
       verify(MTYPE_THING, level->thing_find(id));
     }
@@ -7024,7 +7024,7 @@ ThingId Thing::equip_id_carry_anim_set(ThingId v, int equip)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (itemsp_get()->equip_id_carry_anim[ equip ] = v);
+  return (itemsp()->equip_id_carry_anim[ equip ] = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -7034,7 +7034,7 @@ ThingId Thing::equip_id_use_anim(int equip)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
-    auto id = get(itemsp_get()->equip_id_use_anim, equip);
+    auto id = get(itemsp()->equip_id_use_anim, equip);
     if (id != NoThingId) {
       verify(MTYPE_THING, level->thing_find(id));
     }
@@ -7047,7 +7047,7 @@ ThingId Thing::equip_id_use_anim_set(ThingId v, int equip)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (itemsp_get()->equip_id_use_anim[ equip ] = v);
+  return (itemsp()->equip_id_use_anim[ equip ] = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -7057,8 +7057,8 @@ ThingId Thing::equip_id_get(int equip)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
-    // con("get weapon %" PRIX32 "",  itemsp_get()->equip_id);
-    return (itemsp_get()->equip_id[ equip ]);
+    // con("get weapon %" PRIX32 "",  itemsp()->equip_id);
+    return (itemsp()->equip_id[ equip ]);
   } else {
     // con("get equip id => none");
     return NoThingId;
@@ -7070,7 +7070,7 @@ ThingId Thing::equip_id_set(ThingId v, int equip)
   TRACE_NO_INDENT();
   new_infop();
   // con("set weapon %" PRIX32 "", v);
-  return (itemsp_get()->equip_id[ equip ] = v);
+  return (itemsp()->equip_id[ equip ] = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -7080,7 +7080,7 @@ ThingId Thing::on_fire_anim_id_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop_get()->on_fire_id_anim);
+    return (infop()->on_fire_id_anim);
   } else {
     return NoThingId;
   }
@@ -7090,7 +7090,7 @@ ThingId Thing::on_fire_anim_id_set(ThingId v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop_get()->on_fire_id_anim = v);
+  return (infop()->on_fire_id_anim = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -7101,7 +7101,7 @@ int Thing::damage_current(void)
   TRACE_NO_INDENT();
   int v = 0;
   if (maybe_infop()) {
-    v = infop_get()->damage_current;
+    v = infop()->damage_current;
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
@@ -7117,7 +7117,7 @@ int Thing::damage_current_set(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->damage_current = v);
+  auto n = (infop()->damage_current = v);
   return (n);
 }
 
@@ -7128,7 +7128,7 @@ int Thing::damage_current_decr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->damage_current -= v);
+  auto n = (infop()->damage_current -= v);
   return (n);
 }
 
@@ -7139,7 +7139,7 @@ int Thing::damage_current_incr(int v)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->damage_current += v);
+  auto n = (infop()->damage_current += v);
   return (n);
 }
 
@@ -7150,7 +7150,7 @@ int Thing::damage_current_decr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->damage_current--);
+  auto n = (infop()->damage_current--);
   return (n);
 }
 
@@ -7161,7 +7161,7 @@ int Thing::damage_current_incr(void)
     game->request_update_rightbar = true;
   }
   new_infop();
-  auto n = (infop_get()->damage_current++);
+  auto n = (infop()->damage_current++);
   return (n);
 }
 
@@ -7673,7 +7673,7 @@ std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::bag_g
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
-    return (&itemsp_get()->bag);
+    return (&itemsp()->bag);
   } else {
     //
     // Watch out here as lasers can have owners and do not live in bags.
@@ -7687,7 +7687,7 @@ const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing:
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
-    return (&itemsp_get()->bag);
+    return (&itemsp()->bag);
   } else {
     //
     // Watch out here as lasers can have owners and do not live in bags.

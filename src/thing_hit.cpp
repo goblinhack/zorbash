@@ -638,7 +638,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   if (is_player()) {
     if (game->robot_mode) {
-      if (infop_get()->monst_state == MONST_STATE_MOVING) {
+      if (infop()->monst_state == MONST_STATE_MOVING) {
         clear_move_path("robot was hit while moving");
       } else {
         //

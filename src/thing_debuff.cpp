@@ -46,7 +46,7 @@ bool Thing::debuff_add(Thingp what)
     }
   }
 
-  itemsp_get()->debuffs.push_front(what->id);
+  itemsp()->debuffs.push_front(what->id);
   what->owner_set(this);
   what->hide();
 
@@ -75,7 +75,7 @@ bool Thing::debuff_remove(Thingp what)
   }
 
   what->remove_owner();
-  itemsp_get()->debuffs.remove(what->id);
+  itemsp()->debuffs.remove(what->id);
   game->request_remake_debuffbox = true;
 
   dbg("Removed %s", what->to_short_string().c_str());
@@ -89,8 +89,8 @@ void Thing::debuff_remove_all(void)
     return;
   }
 
-  while (! itemsp_get()->debuffs.empty()) {
-    auto id = *itemsp_get()->debuffs.begin();
+  while (! itemsp()->debuffs.empty()) {
+    auto id = *itemsp()->debuffs.begin();
     auto t  = level->thing_find(id);
     if (unlikely(! t)) {
       return;
@@ -136,8 +136,8 @@ bool Thing::debuff_add_if_not_found(Tpp what)
     return false;
   }
 
-  while (! itemsp_get()->debuffs.empty()) {
-    auto id = *itemsp_get()->debuffs.begin();
+  while (! itemsp()->debuffs.empty()) {
+    auto id = *itemsp()->debuffs.begin();
     auto t  = level->thing_find(id);
     if (t) {
       if (t->tp() == what) {
@@ -183,7 +183,7 @@ void Thing::debuff_tick(void)
   if (! maybe_itemsp()) {
     return;
   }
-  if (itemsp_get()->debuffs.empty()) {
+  if (itemsp()->debuffs.empty()) {
     return;
   }
 

@@ -188,15 +188,15 @@ bool Thing::carry(Thingp item, bool can_equip)
     //
     // Bag being carried
     //
-    dbg("Added bag to bag at %d,%d", item->itemsp_get()->bag_position.x, item->itemsp_get()->bag_position.y);
+    dbg("Added bag to bag at %d,%d", item->itemsp()->bag_position.x, item->itemsp()->bag_position.y);
   } else if (! item->is_bag_item()) {
     //
     // A key for example, does not go in a bag
     //
     dbg("Non item not added to bag");
   } else if (bag_add(item)) {
-    dbg("Added %s to bag at %d,%d", item->to_short_string().c_str(), item->itemsp_get()->bag_position.x,
-        item->itemsp_get()->bag_position.y);
+    dbg("Added %s to bag at %d,%d", item->to_short_string().c_str(), item->itemsp()->bag_position.x,
+        item->itemsp()->bag_position.y);
   } else {
     dbg("Cannot carry; cannot store in a bag");
     where_i_failed_to_collect_last_set(item->curr_at);
@@ -258,7 +258,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   TRACE_AND_INDENT();
 
   if (! already_carried) {
-    itemsp_get()->carrying.push_front(item->id);
+    itemsp()->carrying.push_front(item->id);
   }
   item->owner_set(this);
   item->hide();
@@ -558,7 +558,7 @@ bool Thing::carrying_anything(void)
     return false;
   }
 
-  if (itemsp_get()->carrying.empty()) {
+  if (itemsp()->carrying.empty()) {
     return false;
   }
 

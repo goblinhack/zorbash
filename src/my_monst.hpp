@@ -68,17 +68,17 @@ enum {
 
 #define FOR_ALL_EQUIP(_equip_) for (auto _equip_ = 0; _equip_ < MONST_EQUIP_MAX; _equip_++)
 
-#define FOR_ALL_BUFFS(_id_)          for (auto _id_ : itemsp_get()->buffs)
-#define FOR_ALL_BUFFS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp_get()->buffs)
+#define FOR_ALL_BUFFS(_id_)          for (auto _id_ : itemsp()->buffs)
+#define FOR_ALL_BUFFS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->buffs)
 
-#define FOR_ALL_DEBUFFS(_id_)          for (auto _id_ : itemsp_get()->debuffs)
-#define FOR_ALL_DEBUFFS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp_get()->debuffs)
+#define FOR_ALL_DEBUFFS(_id_)          for (auto _id_ : itemsp()->debuffs)
+#define FOR_ALL_DEBUFFS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->debuffs)
 
-#define FOR_ALL_SKILLS(_id_)          for (auto _id_ : itemsp_get()->skills)
-#define FOR_ALL_SKILLS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp_get()->skills)
+#define FOR_ALL_SKILLS(_id_)          for (auto _id_ : itemsp()->skills)
+#define FOR_ALL_SKILLS_FOR(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->skills)
 
-#define FOR_ALL_CARRYING(_id_)        for (auto _id_ : itemsp_get()->carrying)
-#define FOR_ALL_CARRIED_BY(_t_, _id_) for (auto _id_ : (_t_)->itemsp_get()->carrying)
+#define FOR_ALL_CARRYING(_id_)        for (auto _id_ : itemsp()->carrying)
+#define FOR_ALL_CARRIED_BY(_t_, _id_) for (auto _id_ : (_t_)->itemsp()->carrying)
 
 //
 // Extra thing info. Needed for monsts and items.

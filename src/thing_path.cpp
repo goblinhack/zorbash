@@ -72,7 +72,7 @@ bool Thing::path_pop_next_move(void)
   //
   // Jump over obstacles if they appear in the path
   //
-  if ((curr_at != infop_get()->last_failed_jump_at) && is_able_to_jump() &&
+  if ((curr_at != infop()->last_failed_jump_at) && is_able_to_jump() &&
       (is_monst() || (is_player() && game->robot_mode))) {
     if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
       IF_DEBUG2
@@ -106,7 +106,7 @@ bool Thing::path_pop_next_move(void)
             //
             AI_LOG("Failed to jump cannot jump over hazards");
             clear_move_path("Failed to jump cannot jump over all hazards");
-            infop_get()->last_failed_jump_at = curr_at;
+            infop()->last_failed_jump_at = curr_at;
             return false;
           } else if (try_to_jump_carefully(jump_pos)) {
             AI_LOG("Long jump");
@@ -121,7 +121,7 @@ bool Thing::path_pop_next_move(void)
             //
             AI_LOG("Failed to try a long jump");
             clear_move_path("Failed to try a long jump");
-            infop_get()->last_failed_jump_at = curr_at;
+            infop()->last_failed_jump_at = curr_at;
             return false;
           }
         } else if (try_to_jump_carefully(jump_pos, &too_far)) {
@@ -158,7 +158,7 @@ bool Thing::path_pop_next_move(void)
           }
 
           clear_move_path("Failed to jump carefully");
-          infop_get()->last_failed_jump_at = curr_at;
+          infop()->last_failed_jump_at = curr_at;
 
           if (too_far) {
             if (any_unfriendly_monst_visible()) {

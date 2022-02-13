@@ -191,7 +191,7 @@ bool Thing::is_carrying_item(void)
     return false;
   }
 
-  if (itemsp_get()->carrying.size()) {
+  if (itemsp()->carrying.size()) {
     return true;
   }
 

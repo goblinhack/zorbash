@@ -46,7 +46,7 @@ bool Thing::buff_add(Thingp what)
     }
   }
 
-  itemsp_get()->buffs.push_front(what->id);
+  itemsp()->buffs.push_front(what->id);
   what->owner_set(this);
   what->hide();
 
@@ -75,7 +75,7 @@ bool Thing::buff_remove(Thingp what)
   }
 
   what->remove_owner();
-  itemsp_get()->buffs.remove(what->id);
+  itemsp()->buffs.remove(what->id);
   game->request_remake_buffbox = true;
 
   dbg("Removed %s", what->to_short_string().c_str());
@@ -110,8 +110,8 @@ void Thing::buff_remove_all(void)
     return;
   }
 
-  while (! itemsp_get()->buffs.empty()) {
-    auto id = *itemsp_get()->buffs.begin();
+  while (! itemsp()->buffs.empty()) {
+    auto id = *itemsp()->buffs.begin();
     auto t  = level->thing_find(id);
     if (unlikely(! t)) {
       return;
@@ -174,7 +174,7 @@ void Thing::buff_tick(void)
     return;
   }
 
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return;
   }
 
@@ -201,7 +201,7 @@ int Thing::buff_on_damage_poison(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -219,7 +219,7 @@ int Thing::buff_on_damage_future1(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -237,7 +237,7 @@ int Thing::buff_on_damage_future2(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -255,7 +255,7 @@ int Thing::buff_on_damage_future3(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -273,7 +273,7 @@ int Thing::buff_on_damage_cold(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -291,7 +291,7 @@ int Thing::buff_on_damage_fire(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -309,7 +309,7 @@ int Thing::buff_on_damage_crush(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -327,7 +327,7 @@ int Thing::buff_on_damage_lightning(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -345,7 +345,7 @@ int Thing::buff_on_damage_energy(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -363,7 +363,7 @@ int Thing::buff_on_damage_acid(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -381,7 +381,7 @@ int Thing::buff_on_damage_digest(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -399,7 +399,7 @@ int Thing::buff_on_damage_stat_con(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -417,7 +417,7 @@ int Thing::buff_on_damage_stat_str(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -435,7 +435,7 @@ int Thing::buff_on_damage_melee(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -453,7 +453,7 @@ int Thing::buff_on_damage_necrosis(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)
@@ -471,7 +471,7 @@ int Thing::buff_on_damage_natural_attack(Thingp hitter, int damage)
   if (! maybe_itemsp()) {
     return damage;
   }
-  if (itemsp_get()->buffs.empty()) {
+  if (itemsp()->buffs.empty()) {
     return damage;
   }
   FOR_ALL_BUFFS(item)

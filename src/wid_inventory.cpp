@@ -819,8 +819,8 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     for (auto slot = 0; slot < (int) UI_INVENTORY_QUICK_ITEMS_MAX; slot++) {
       Thingp t = nullptr;
 
-      if (slot < (int) player->itemsp_get()->inventory_shortcuts.size()) {
-        auto thing_id = get(player->itemsp_get()->inventory_shortcuts, slot);
+      if (slot < (int) player->itemsp()->inventory_shortcuts.size()) {
+        auto thing_id = get(player->itemsp()->inventory_shortcuts, slot);
         if (thing_id.ok()) {
           t = level->thing_find(thing_id);
         }

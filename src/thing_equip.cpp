@@ -424,7 +424,7 @@ bool Thing::equip(Thingp item, int equip)
   //
   auto immediate_owner = item->immediate_owner();
   if (immediate_owner) {
-    immediate_owner->itemsp_get()->carrying.remove(item->id);
+    immediate_owner->itemsp()->carrying.remove(item->id);
   }
 
   unequip("equip new", equip, true);

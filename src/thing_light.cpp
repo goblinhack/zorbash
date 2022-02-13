@@ -33,9 +33,9 @@ void Thing::new_light(point offset, int light_power, int delta, color col, int f
   TRACE_NO_INDENT();
   new_infop();
   auto l = light_new(this, offset, light_power, delta, col, fbo);
-  infop_get()->light.push_back(l);
-  infop_get()->light_power = light_power;
-  infop_get()->light_col   = col;
+  infop()->light.push_back(l);
+  infop()->light_power = light_power;
+  infop()->light_col   = col;
 }
 
 void Thing::new_light(point offset, int light_power)
@@ -43,8 +43,8 @@ void Thing::new_light(point offset, int light_power)
   TRACE_NO_INDENT();
   new_infop();
   auto l = light_new(this, offset, light_power);
-  infop_get()->light.push_back(l);
-  infop_get()->light_power = light_power;
+  infop()->light.push_back(l);
+  infop()->light_power = light_power;
 }
 
 void Thing::delete_lights(void)
@@ -52,10 +52,10 @@ void Thing::delete_lights(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     verify(MTYPE_INFOP, maybe_infop());
-    for (auto &l : infop_get()->light) {
+    for (auto &l : infop()->light) {
       delete l;
     }
-    infop_get()->light.resize(0);
+    infop()->light.resize(0);
   }
 }
 
