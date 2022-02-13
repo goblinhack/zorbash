@@ -43,7 +43,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     p.x    = (int) (((float) game->config.game_pix_width / (float) TERM_WIDTH) * (float) p.x);
     p.y    = (int) (((float) game->config.game_pix_height / (float) TERM_HEIGHT) * (float) p.y);
 
-    int value = item->gold_value_get();
+    int value = item->gold_value();
     int particle_count;
     if (item->is_gold()) {
       particle_count = value;

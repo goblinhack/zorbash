@@ -72,7 +72,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   // This can be nutrition or gold value etc... just something that is worth
   // something to us
   //
-  int value_to_me = value_get(item);
+  int value_to_me = value(item);
   if (value_to_me < 0) {
     dbg("Worth collecting %s? no, worthless", item->to_short_string().c_str());
     return -1;

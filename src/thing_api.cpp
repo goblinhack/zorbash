@@ -101,7 +101,7 @@ const std::string &Thing::gold_value_dice_str(void)
   return (tp()->gold_value_dice_str());
 }
 
-int Thing::gold_value_get(void)
+int Thing::gold_value(void)
 {
   TRACE_NO_INDENT();
   return (tp()->gold_value_dice().roll());
