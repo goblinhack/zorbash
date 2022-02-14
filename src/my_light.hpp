@@ -35,13 +35,18 @@ public:
   point cached_light_pos;
   point cached_pixel_map_at;
 
+  //
+  // How often lights flicker.
+  //
+  float flicker {};
+  int   flicker_count {};
+
   float light_scale {};      // Light_scale
   int   light_power_curr {}; // Current torch light_power
   int   light_power_orig {}; // Original torch light_power
   int   light_power_actual {};
   int   light_power_delta {};
 
-  uint16_t flicker {};
   uint16_t max_light_rays {};
 
   uint8_t is_being_destroyed : 1 {};

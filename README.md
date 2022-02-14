@@ -1,8 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- haste                                                                                                                                        -->
 <!-- animate grass                                                                                                                                -->
-<!-- slime noise on attack                                                                                                                          -->
+<!-- slime noise on attack                                                                                                                        -->
 <!-- have items that show thigns like +1 defense, -1 strength, +2 dex etc...                                                                      -->
 <!-- luck                                                                                                                                         -->
 <!-- luck bridge / lava / falling                                                                                                                 -->
@@ -17,8 +16,8 @@
 <!-- ------                                                                                                                                       -->
 <!-- - swamp                                                                                                                                      -->
 <!-- - swamp wort food                                                                                                                            -->
-<!-- - monst swamp blink toad, can teleport and launch a stream of goo                                                                           -->
-<!-- - ogre and totems?                                                                                                                          -->
+<!-- - monst swamp blink toad, can teleport and launch a stream of goo                                                                            -->
+<!-- - ogre and totems?                                                                                                                           -->
 <!-- - axe hits all around                                                                                                                        -->
 <!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
