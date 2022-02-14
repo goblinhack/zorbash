@@ -135,6 +135,7 @@ public:
   int score               = {};
   int stamina             = {};
   int stamina_max         = {};
+  int stat_att            = {};
   int stat_att_mod        = {};
   int stat_con            = {};
   int stat_con_mod        = {};

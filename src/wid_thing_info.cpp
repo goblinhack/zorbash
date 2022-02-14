@@ -1134,6 +1134,10 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
 
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus           %2d```", stat);
     w->log(tmp);
+  } else if (t->stat_att_mod()) {
+    auto stat = t->stat_att_total();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack modifier          %3s", modifier_to_string(stat).c_str());
+    w->log(tmp);
   }
 }
 
@@ -1211,6 +1215,10 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class               %2d", ac);
       w->log(tmp);
     }
+  } else if (t->stat_def_mod()) {
+    auto stat = t->stat_def_total();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor modifier           %3s", modifier_to_string(stat).c_str());
+    w->log(tmp);
   }
 }
 
@@ -1225,7 +1233,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
   } else if (t->stat_str_mod()) {
-    auto stat = t->stat_str_mod();
+    auto stat = t->stat_str_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength modifier        %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
@@ -1266,7 +1274,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
   } else if (t->stat_dex_mod()) {
-    auto stat = t->stat_dex_mod();
+    auto stat = t->stat_dex_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity modifier       %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
@@ -1283,7 +1291,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
   } else if (t->stat_luck_mod()) {
-    auto stat = t->stat_luck_mod();
+    auto stat = t->stat_luck_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck modifier            %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
@@ -1300,7 +1308,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
              stat_to_bonus_slash_str(stat).c_str());
     w->log(tmp);
   } else if (t->stat_con_mod()) {
-    auto stat = t->stat_con_mod();
+    auto stat = t->stat_con_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution modifier    %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }

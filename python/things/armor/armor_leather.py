@@ -8,7 +8,7 @@ def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
     if my.thing_is_player(owner):
         my.thing_msg(me, "The armor glows.")
-    my.thing_stat_def_incr(me, 1)
+    my.thing_stat_def_mod_incr(me, 1)
 
 
 def tp_init(name, text_name, short_text_name):
@@ -42,7 +42,7 @@ def tp_init(name, text_name, short_text_name):
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_COMMON)
-    my.stat_def(self, 11)
+    my.stat_def_mod(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Leather armor.")
     my.text_enchant(self, "+1 AC")

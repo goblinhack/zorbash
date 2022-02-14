@@ -17,36 +17,30 @@
 
 int Thing::stat_dex_total(void)
 {
-  TRACE_NO_INDENT();
-
-  auto owner = top_owner();
-  if (owner) {
-    return owner->stat_dex();
-  }
+  TRACE_AND_INDENT();
 
   int stat = 0;
   int prev = 0;
 
   stat = stat_dex();
   prev = stat;
-  dbg("Dex: (%d/%d): %d", stat_dex(), stat_to_bonus(stat_dex()), stat);
+  dbg("Dex: %d: %d", stat_dex(), stat);
+
+  stat += stat_dex_mod();
+  if (stat != prev) {
+    prev = stat;
+    dbg("Dex: with mod (%s): %d", modifier_to_string(stat_dex_mod()).c_str(), stat);
+  }
 
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += iter->stat_dex_mod();
+      stat += iter->stat_dex_total();
       if (stat != prev) {
         prev = stat;
         dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
             modifier_to_string(iter->stat_dex_mod()).c_str(), stat);
-      }
-
-      auto enchant = iter->enchant_get();
-      stat += enchant;
-      if (stat != prev) {
-        prev = stat;
-        dbg("Dex: with (%s enchant %d): %d", iter->to_short_string().c_str(), enchant, stat);
       }
     }
   }
@@ -69,7 +63,7 @@ int Thing::stat_dex_total(void)
         if (iter->is_auto_equipped()) {
           continue;
         }
-        stat += iter->stat_dex_mod();
+        stat += iter->stat_dex_total();
         if (stat != prev) {
           prev = stat;
           dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -82,7 +76,7 @@ int Thing::stat_dex_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_dex_mod();
+        stat += iter->stat_dex_total();
         if (stat != prev) {
           prev = stat;
           dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -95,7 +89,7 @@ int Thing::stat_dex_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_dex_mod();
+        stat += iter->stat_dex_total();
         if (stat != prev) {
           prev = stat;
           dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -108,13 +102,22 @@ int Thing::stat_dex_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_dex_mod();
+        stat += iter->stat_dex_total();
         if (stat != prev) {
           prev = stat;
           dbg("Dex: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_dex_mod()).c_str(), stat);
         }
       }
+    }
+  }
+
+  if (stat) {
+    auto enchant = enchant_get();
+    stat += enchant;
+    if (stat != prev) {
+      prev = stat;
+      dbg("Dex: with enchant %d: %d", enchant, stat);
     }
   }
 

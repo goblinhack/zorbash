@@ -72,7 +72,7 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->is_buff() || tp->is_debuff() || tp->is_skill() || tp->is_monst() || tp->is_item() || tp->is_player()) {
+    if (tp->is_monst() || tp->is_player()) {
       if (! tp->stat_str()) {
         tp->stat_str_set(10);
       }

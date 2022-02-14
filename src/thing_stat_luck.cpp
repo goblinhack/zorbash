@@ -17,36 +17,30 @@
 
 int Thing::stat_luck_total(void)
 {
-  TRACE_NO_INDENT();
-
-  auto owner = top_owner();
-  if (owner) {
-    return owner->stat_luck();
-  }
+  TRACE_AND_INDENT();
 
   int stat = 0;
   int prev = 0;
 
   stat = stat_luck();
   prev = stat;
-  dbg("Luck: (%d/%d): %d", stat_luck(), stat_to_bonus(stat_luck()), stat);
+  dbg("Luck: %d: %d", stat_luck(), stat);
+
+  stat += stat_luck_mod();
+  if (stat != prev) {
+    prev = stat;
+    dbg("Luck: with mod (%s): %d", modifier_to_string(stat_luck_mod()).c_str(), stat);
+  }
 
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat += iter->stat_luck_mod();
+      stat += iter->stat_luck_total();
       if (stat != prev) {
         prev = stat;
         dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
             modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
-      }
-
-      auto enchant = iter->enchant_get();
-      stat += enchant;
-      if (stat != prev) {
-        prev = stat;
-        dbg("Luck: with (%s enchant %d): %d", iter->to_short_string().c_str(), enchant, stat);
       }
     }
   }
@@ -69,7 +63,7 @@ int Thing::stat_luck_total(void)
         if (iter->is_auto_equipped()) {
           continue;
         }
-        stat += iter->stat_luck_mod();
+        stat += iter->stat_luck_total();
         if (stat != prev) {
           prev = stat;
           dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -82,7 +76,7 @@ int Thing::stat_luck_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_luck_mod();
+        stat += iter->stat_luck_total();
         if (stat != prev) {
           prev = stat;
           dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -95,7 +89,7 @@ int Thing::stat_luck_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_luck_mod();
+        stat += iter->stat_luck_total();
         if (stat != prev) {
           prev = stat;
           dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -108,13 +102,22 @@ int Thing::stat_luck_total(void)
     {
       auto iter = level->thing_find(id);
       if (iter) {
-        stat += iter->stat_luck_mod();
+        stat += iter->stat_luck_total();
         if (stat != prev) {
           prev = stat;
           dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
         }
       }
+    }
+  }
+
+  if (stat) {
+    auto enchant = enchant_get();
+    stat += enchant;
+    if (stat != prev) {
+      prev = stat;
+      dbg("Luck: with enchant %d: %d", enchant, stat);
     }
   }
 

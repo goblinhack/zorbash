@@ -8,7 +8,7 @@ def on_enchant(me, x, y):
     owner = my.thing_get_top_owner_id(me)
     if my.thing_is_player(owner):
         my.thing_msg(me, "The shield shines a woody wood color.")
-    my.thing_stat_def_incr(me, 1)
+    my.thing_stat_def_mod_incr(me, 1)
 
 
 def tp_init(name, text_name, short_text_name):

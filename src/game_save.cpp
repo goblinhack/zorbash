@@ -92,6 +92,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->spawner_owner_id);
   out << bits(my.t->stamina);
   out << bits(my.t->stamina_max);
+  out << bits(my.t->stat_att);
   out << bits(my.t->stat_att_mod);
   out << bits(my.t->stat_con);
   out << bits(my.t->stat_con_mod);

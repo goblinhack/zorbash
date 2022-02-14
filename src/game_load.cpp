@@ -115,6 +115,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->spawner_owner_id);
    in >> bits(my.t->stamina);
    in >> bits(my.t->stamina_max);
+   in >> bits(my.t->stat_att);
    in >> bits(my.t->stat_att_mod);
    in >> bits(my.t->stat_con);
    in >> bits(my.t->stat_con_mod);

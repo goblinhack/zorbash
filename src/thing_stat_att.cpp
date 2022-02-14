@@ -15,25 +15,21 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-int Thing::attack_modifier_get(const Thingp victim)
+int Thing::stat_att_total()
 {
-  TRACE_NO_INDENT();
-
-  auto owner = top_owner();
-  if (owner) {
-    return owner->attack_modifier_get(victim);
-  }
+  TRACE_AND_INDENT();
 
   int stat = 0;
   int prev = 0;
 
-  //
-  // Add att bonus
-  //
+  stat = stat_att();
+  prev = stat;
+  dbg("Att: %d: %d", stat_att(), stat);
+
   stat += stat_att_mod();
   if (stat != prev) {
     prev = stat;
-    dbg("Att: with: (mod %d): %d", stat_att_mod(), stat);
+    dbg("Att: with mod (%s): %d", modifier_to_string(stat_att_mod()).c_str(), stat);
   }
 
   //
@@ -47,19 +43,13 @@ int Thing::attack_modifier_get(const Thingp victim)
 
   FOR_ALL_EQUIP(e)
   {
-    auto equip = equip_get(e);
-    if (equip) {
-      stat += equip->stat_att_mod();
+    auto iter = equip_get(e);
+    if (iter) {
+      stat += iter->stat_att_total();
       if (stat != prev) {
         prev = stat;
-        dbg("Att with (%s): %d", equip->to_short_string().c_str(), stat);
-      }
-
-      auto enchant = equip->enchant_get();
-      stat += enchant;
-      if (stat != prev) {
-        prev = stat;
-        dbg("Att with (%s enchant %d): %d", equip->to_short_string().c_str(), enchant, stat);
+        dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
+            modifier_to_string(iter->stat_att_mod()).c_str(), stat);
       }
     }
   }
@@ -82,7 +72,7 @@ int Thing::attack_modifier_get(const Thingp victim)
         if (iter->is_auto_equipped()) {
           continue;
         }
-        stat += iter->stat_att_mod();
+        stat += iter->stat_att_total();
         if (stat != prev) {
           prev = stat;
           dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -93,43 +83,64 @@ int Thing::attack_modifier_get(const Thingp victim)
 
     FOR_ALL_BUFFS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat += buff->stat_att_mod();
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->stat_att_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Att with buff (%s): %d", buff->to_short_string().c_str(), stat);
+          dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->stat_att_mod()).c_str(), stat);
         }
       }
     }
 
     FOR_ALL_DEBUFFS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat += buff->stat_att_mod();
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->stat_att_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Att with debuff (%s): %d", buff->to_short_string().c_str(), stat);
+          dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->stat_att_mod()).c_str(), stat);
         }
       }
     }
 
     FOR_ALL_SKILLS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat += buff->stat_att_mod();
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->stat_att_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Att with skill (%s): %d", buff->to_short_string().c_str(), stat);
+          dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->stat_att_mod()).c_str(), stat);
         }
       }
     }
   }
 
-  dbg("Att: final: %d", stat);
+  if (stat) {
+    auto enchant = enchant_get();
+    stat += enchant;
+    if (stat != prev) {
+      prev = stat;
+      dbg("Att: with enchant %d: %d", enchant, stat);
+    }
+  }
+
   return stat;
+}
+
+int Thing::stat_att(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->stat_att);
+  } else {
+    return 0;
+  }
 }
 
 int Thing::stat_att_penalties_total(void)
