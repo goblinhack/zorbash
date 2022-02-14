@@ -6653,7 +6653,7 @@ def init_tiles1_monsts_and_items():
         "skillstone",
         "map_treasure",
         "map_beast",
-        "",
+        "horseshoe",
         "",
         "axe.1",
         "scythe.1",
