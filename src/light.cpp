@@ -728,16 +728,22 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
             continue;
           }
 
-          auto  mid = (blit_br + blit_tl) / 2;
-          float s   = l->light_power_actual;
+          auto mid = (blit_br + blit_tl) / 2;
+
+          float light_scale = l->light_power_actual;
+
           if (t->gfx_flickers()) {
-            s -= (((float) non_pcg_random_range(0, (int) s)) / 8.0);
+            if (l->flicker_count++ > LIGHT_FLICKER_SPEED) {
+              l->flicker       = (((float) non_pcg_random_range(0, (int) light_scale)) / 8.0);
+              l->flicker_count = 0;
+            }
+            light_scale -= l->flicker;
           }
 
-          auto tlx = mid.x - s;
-          auto tly = mid.y - s;
-          auto brx = mid.x + s;
-          auto bry = mid.y + s;
+          auto tlx = mid.x - light_scale;
+          auto tly = mid.y - light_scale;
+          auto brx = mid.x + light_scale;
+          auto bry = mid.y + light_scale;
 
           color c = l->col;
 
