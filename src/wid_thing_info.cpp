@@ -926,8 +926,7 @@ void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t)
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
-                 t->damage_lightning_dice_str().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_lightning_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Blast dmg%19s", tmp2);
       }
       w->log(tmp);
@@ -1027,8 +1026,7 @@ void Game::wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t)
         } else {
           min_value += t->enchant_get();
           max_value += t->enchant_get();
-          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
-                   t->damage_natural_dice_str().c_str());
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_natural_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg%20s", tmp2);
         }
         w->log(tmp);
@@ -1040,8 +1038,7 @@ void Game::wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t)
         } else {
           min_value += t->enchant_get();
           max_value += t->enchant_get();
-          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
-                   t->damage_natural_dice_str().c_str());
+          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_natural_dice_str().c_str());
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Atk:%-9s%15s",
                    capitalise(t->damage_natural_attack_type()).c_str(), tmp2);
         }
@@ -1161,7 +1158,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         }
         auto mod = curr_armor->stat_def_mod();
         if (mod) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn mod      %2d", mod);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn modifier %2d", mod);
           w->log(tmp);
         }
       }
@@ -1175,7 +1172,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
         }
         auto mod = curr_shield->stat_def_mod();
         if (mod) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class shield mod    %2d", mod);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class shield mod.   %2d", mod);
           w->log(tmp);
         }
       }
@@ -1184,13 +1181,13 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
       if (curr_helmet) {
         auto ac = curr_helmet->stat_def();
         if (ac != 10) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod    %2d", ac);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod.   %2d", ac);
           w->log(tmp);
         }
 
         auto mod = curr_helmet->stat_def_mod();
         if (mod) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod    %2d", mod);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod.   %2d", mod);
           w->log(tmp);
         }
       }
@@ -1205,7 +1202,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
 
         auto mod = curr_amulet->stat_def();
         if (mod) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class amulet mod    %2d", mod);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class amulet mod.   %2d", mod);
           w->log(tmp);
         }
       }
@@ -1270,7 +1267,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
     w->log(tmp);
   } else if (t->stat_dex_mod()) {
     auto stat = t->stat_dex_mod();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity mod            %3s", modifier_to_string(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity modifier       %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
 }
@@ -1287,7 +1284,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
     w->log(tmp);
   } else if (t->stat_luck_mod()) {
     auto stat = t->stat_luck_mod();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck mod                 %3s", modifier_to_string(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck modifier            %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
 }
@@ -1304,7 +1301,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
     w->log(tmp);
   } else if (t->stat_con_mod()) {
     auto stat = t->stat_con_mod();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution mod         %3s", modifier_to_string(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution modifier    %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
 }
