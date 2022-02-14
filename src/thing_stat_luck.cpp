@@ -52,6 +52,32 @@ int Thing::stat_luck_total(void)
   }
 
   if (maybe_itemsp()) {
+    FOR_ALL_CARRYING(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        //
+        // Don't count boots for example twice
+        //
+        if (is_equipped(iter)) {
+          continue;
+        }
+        //
+        // Things that are equipped must be equipped to get the benefit.
+        // Other items give the benefit by just being carried.
+        //
+        if (iter->is_auto_equipped()) {
+          continue;
+        }
+        stat += iter->stat_luck_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
+        }
+      }
+    }
+
     FOR_ALL_BUFFS(id)
     {
       auto iter = level->thing_find(id);

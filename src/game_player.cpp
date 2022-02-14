@@ -80,6 +80,7 @@ void Game::place_player(void)
         level->thing_new("gargoyle_static", point(x + 2, y - 2));
         // level->thing_new("lava", point(x, y));
         level->thing_new("food_frog", point(x + 3, y - 1));
+        level->thing_new("enchantstone", point(x + 1, y - 1));
         level->thing_new("horseshoe", point(x + 2, y - 1));
         // level->thing_new("spiderweb", point(x + 3, y));
         // level->thing_new("armor_lather", point(x, y - 2));
