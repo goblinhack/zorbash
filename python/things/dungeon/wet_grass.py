@@ -7,6 +7,7 @@ def tp_init(name, tiles=[]):
     my.gfx_short_shadow_caster(self, True)
     my.gfx_shown_in_bg(self, True)
     my.gfx_very_short_shadow_caster(self, True)
+    my.gfx_animated(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
     my.is_cursor_can_hover_over(self, True)
@@ -18,33 +19,88 @@ def tp_init(name, tiles=[]):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     for t in tiles:
-        my.tile(self, t)
+        my.tile(self, t, delay_ms=200)
 
     my.tp_update(self)
 
 
 def init():
     tp_init(
-        name="wet_grass",
+        name="wet_grass1",
         tiles=[
-            "wet_grass.1",
-            "wet_grass.2",
-            "wet_grass.3",
-            "wet_grass.4",
-            "wet_grass.5",
-            "wet_grass.6",
-            "wet_grass.7",
-            "wet_grass.8",
-            "wet_grass.9",
-            "wet_grass.10",
-            "wet_grass.11",
-            "wet_grass.12",
-            "wet_grass.13",
-            "wet_grass.14",
-            "wet_grass.15",
-            "wet_grass.16",
-            "wet_grass.17",
-            "wet_grass.18",
+            "wet_grass1.1",
+            "wet_grass1.2",
+            "wet_grass1.3",
+            "wet_grass1.4",
+            "wet_grass1.5",
+            "wet_grass1.4",
+            "wet_grass1.3",
+            "wet_grass1.2",
+        ],
+    )
+    tp_init(
+        name="wet_grass2",
+        tiles=[
+            "wet_grass2.1",
+            "wet_grass2.2",
+            "wet_grass2.3",
+            "wet_grass2.4",
+            "wet_grass2.5",
+            "wet_grass2.4",
+            "wet_grass2.3",
+            "wet_grass2.2",
+        ],
+    )
+    tp_init(
+        name="wet_grass3",
+        tiles=[
+            "wet_grass3.1",
+            "wet_grass3.2",
+            "wet_grass3.3",
+            "wet_grass3.4",
+            "wet_grass3.5",
+            "wet_grass3.4",
+            "wet_grass3.3",
+            "wet_grass3.2",
+        ],
+    )
+    tp_init(
+        name="wet_grass4",
+        tiles=[
+            "wet_grass4.1",
+            "wet_grass4.2",
+            "wet_grass4.3",
+            "wet_grass4.4",
+            "wet_grass4.5",
+            "wet_grass4.4",
+            "wet_grass4.3",
+            "wet_grass4.2",
+        ],
+    )
+    tp_init(
+        name="wet_grass5",
+        tiles=[
+            "wet_grass5.1",
+            "wet_grass5.2",
+            "wet_grass5.3",
+            "wet_grass5.4",
+            "wet_grass5.5",
+            "wet_grass5.4",
+            "wet_grass5.3",
+            "wet_grass5.2",
+        ],
+    )
+    tp_init(
+        name="wet_grass6",
+        tiles=[
+            "wet_grass6.1",
+            "wet_grass6.2",
+            "wet_grass6.3",
+            "wet_grass6.4",
+            "wet_grass6.5",
+            "wet_grass6.4",
+            "wet_grass6.3",
+            "wet_grass6.2",
         ],
     )
 
