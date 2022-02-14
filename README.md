@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- slime noise on attack                                                                                                                        -->
 <!-- have items that show thigns like +1 defense, -1 strength, +2 dex etc...                                                                      -->
 <!-- luck                                                                                                                                         -->
 <!-- luck bridge / lava / falling                                                                                                                 -->

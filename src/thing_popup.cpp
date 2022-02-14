@@ -20,7 +20,7 @@ void Thing::popup(std::string const &m)
     // Stop msgs piling up in the same tick
     //
     if (last_at.y == curr_at.y) {
-      dy = 1.0;
+      dy = 10.0;
     } else {
       dy = 0.0;
     }
