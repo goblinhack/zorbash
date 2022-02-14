@@ -506,7 +506,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
-  auto stat_att = attack_modifier_get(victim) - stat_att_penalties_total();
+  auto stat_att = stat_att_total() - stat_att_penalties_total();
   auto stat_def = victim->stat_def_total() - victim->stat_def_penalties_total();
 
   bool damage_set       = false;

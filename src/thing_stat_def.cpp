@@ -17,27 +17,19 @@
 
 int Thing::stat_def_total(void)
 {
-  TRACE_NO_INDENT();
-
-  auto owner = top_owner();
-  if (owner) {
-    return owner->stat_def_total();
-  }
+  TRACE_AND_INDENT();
 
   int stat = 0;
   int prev = 0;
 
   stat = stat_def();
   prev = stat;
-  dbg("Def: %d", stat);
+  dbg("Def: %d: %d", stat_def(), stat);
 
-  //
-  // Add def bonus
-  //
   stat += stat_def_mod();
   if (stat != prev) {
     prev = stat;
-    dbg("Def: with: (mod %d): %d", stat_def_mod(), stat);
+    dbg("Def: with mod (%s): %d", modifier_to_string(stat_def_mod()).c_str(), stat);
   }
 
   //
@@ -50,33 +42,15 @@ int Thing::stat_def_total(void)
     dbg("Def: with: (dex %d): %d", dex_total, stat);
   }
 
-  //
-  // Choose the highest armor
-  //
   FOR_ALL_EQUIP(e)
   {
     auto iter = equip_get(e);
     if (iter) {
-      stat = std::max(stat, iter->stat_def() + iter->stat_def_mod() + iter->enchant_get());
+      stat += iter->stat_def_total();
       if (stat != prev) {
         prev = stat;
-        dbg("Def: with (%s def %d/%d): %d", iter->to_short_string().c_str(), iter->stat_def(),
-            stat_to_bonus(iter->stat_def()), stat);
-      }
-    }
-  }
-
-  //
-  // Now add modifiers
-  //
-  FOR_ALL_EQUIP(e)
-  {
-    auto iter = equip_get(e);
-    if (iter) {
-      stat += iter->stat_def_mod();
-      if (stat != prev) {
-        prev = stat;
-        dbg("Def: with: (%s mod %d): %d", iter->to_short_string().c_str(), stat_def_mod(), stat);
+        dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+            modifier_to_string(iter->stat_def_mod()).c_str(), stat);
       }
     }
   }
@@ -99,7 +73,7 @@ int Thing::stat_def_total(void)
         if (iter->is_auto_equipped()) {
           continue;
         }
-        stat += iter->stat_def_mod();
+        stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
           dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
@@ -110,45 +84,53 @@ int Thing::stat_def_total(void)
 
     FOR_ALL_BUFFS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat += buff->stat_def_mod();
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Def: with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
-              stat_to_bonus(buff->stat_def()), stat);
+          dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
     }
 
     FOR_ALL_DEBUFFS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat += buff->stat_def_mod();
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Def: with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
-              stat_to_bonus(buff->stat_def()), stat);
+          dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
     }
 
     FOR_ALL_SKILLS(id)
     {
-      auto buff = level->thing_find(id);
-      if (buff) {
-        stat += buff->stat_def_mod();
+      auto iter = level->thing_find(id);
+      if (iter) {
+        stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Def: with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
-              stat_to_bonus(buff->stat_def()), stat);
+          dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
     }
   }
 
-  dbg("Def: final: %d", stat);
+  if (stat) {
+    auto enchant = enchant_get();
+    stat += enchant;
+    if (stat != prev) {
+      prev = stat;
+      dbg("Def: with enchant %d: %d", enchant, stat);
+    }
+  }
+
   return stat;
 }
 
