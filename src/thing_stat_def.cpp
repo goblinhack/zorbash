@@ -29,7 +29,7 @@ int Thing::stat_def_total(void)
 
   stat = stat_def();
   prev = stat;
-  dbg("AC: %d", stat);
+  dbg("Def: %d", stat);
 
   //
   // Add def bonus
@@ -37,7 +37,7 @@ int Thing::stat_def_total(void)
   stat += stat_def_mod();
   if (stat != prev) {
     prev = stat;
-    dbg("AC: with: (mod %d): %d", stat_def_mod(), stat);
+    dbg("Def: with: (mod %d): %d", stat_def_mod(), stat);
   }
 
   //
@@ -47,7 +47,7 @@ int Thing::stat_def_total(void)
   stat += stat_to_bonus(dex_total);
   if (stat != prev) {
     prev = stat;
-    dbg("AC: with: (dex %d): %d", dex_total, stat);
+    dbg("Def: with: (dex %d): %d", dex_total, stat);
   }
 
   //
@@ -60,7 +60,7 @@ int Thing::stat_def_total(void)
       stat = std::max(stat, iter->stat_def() + iter->stat_def_mod() + iter->enchant_get());
       if (stat != prev) {
         prev = stat;
-        dbg("AC: with (%s def %d/%d): %d", iter->to_short_string().c_str(), iter->stat_def(),
+        dbg("Def: with (%s def %d/%d): %d", iter->to_short_string().c_str(), iter->stat_def(),
             stat_to_bonus(iter->stat_def()), stat);
       }
     }
@@ -76,12 +76,38 @@ int Thing::stat_def_total(void)
       stat += iter->stat_def_mod();
       if (stat != prev) {
         prev = stat;
-        dbg("AC: with: (%s mod %d): %d", iter->to_short_string().c_str(), stat_def_mod(), stat);
+        dbg("Def: with: (%s mod %d): %d", iter->to_short_string().c_str(), stat_def_mod(), stat);
       }
     }
   }
 
   if (maybe_itemsp()) {
+    FOR_ALL_CARRYING(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        //
+        // Don't count boots for example twice
+        //
+        if (is_equipped(iter)) {
+          continue;
+        }
+        //
+        // Things that are equipped must be equipped to get the benefit.
+        // Other items give the benefit by just being carried.
+        //
+        if (iter->is_auto_equipped()) {
+          continue;
+        }
+        stat += iter->stat_def_mod();
+        if (stat != prev) {
+          prev = stat;
+          dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+              modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+        }
+      }
+    }
+
     FOR_ALL_BUFFS(id)
     {
       auto buff = level->thing_find(id);
@@ -89,7 +115,7 @@ int Thing::stat_def_total(void)
         stat += buff->stat_def_mod();
         if (stat != prev) {
           prev = stat;
-          dbg("AC: with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
+          dbg("Def: with buff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
               stat_to_bonus(buff->stat_def()), stat);
         }
       }
@@ -102,7 +128,7 @@ int Thing::stat_def_total(void)
         stat += buff->stat_def_mod();
         if (stat != prev) {
           prev = stat;
-          dbg("AC: with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
+          dbg("Def: with debuff (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
               stat_to_bonus(buff->stat_def()), stat);
         }
       }
@@ -115,14 +141,14 @@ int Thing::stat_def_total(void)
         stat += buff->stat_def_mod();
         if (stat != prev) {
           prev = stat;
-          dbg("AC: with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
+          dbg("Def: with skill (%s dex %d/%d): %d", buff->to_short_string().c_str(), buff->stat_def(),
               stat_to_bonus(buff->stat_def()), stat);
         }
       }
     }
   }
 
-  dbg("AC: final: %d", stat);
+  dbg("Def: final: %d", stat);
   return stat;
 }
 
