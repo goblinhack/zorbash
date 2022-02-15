@@ -35,11 +35,13 @@ int Thing::stat_def_total(void)
   //
   // Add dex bonus to def
   //
-  int dex_total = stat_dex_total();
-  stat += stat_to_bonus(dex_total);
-  if (stat != prev) {
-    prev = stat;
-    dbg("Def: with: (dex %d): %d", dex_total, stat);
+  if (is_monst() || is_player()) {
+    int dex_total = stat_dex_total();
+    stat += stat_to_bonus(dex_total);
+    if (stat != prev) {
+      prev = stat;
+      dbg("Def: with: (dex %d): %d", dex_total, stat);
+    }
   }
 
   FOR_ALL_EQUIP(e)

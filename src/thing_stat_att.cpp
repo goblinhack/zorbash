@@ -35,11 +35,13 @@ int Thing::stat_att_total()
   //
   // Add str bonus to att
   //
-  int str_total = stat_str_total();
-  stat          = stat_to_bonus(str_total);
-  stat += stat_att_mod();
-  prev = stat;
-  dbg("Att: (str %d): %d", str_total, stat);
+  if (is_monst() || is_player()) {
+    int str_total = stat_str_total();
+    stat          = stat_to_bonus(str_total);
+    stat += stat_att_mod();
+    prev = stat;
+    dbg("Att: (str %d): %d", str_total, stat);
+  }
 
   FOR_ALL_EQUIP(e)
   {
