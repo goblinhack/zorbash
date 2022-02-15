@@ -237,6 +237,14 @@ void Thing::update(void)
     }
   }
 
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_att_mod();
+    if (unlikely(v)) {
+      stat_att_mod_set(v);
+    }
+  }
+
   if (! temperature_get()) {
     TRACE_NO_INDENT();
     auto v = tpp->temperature();
@@ -269,6 +277,14 @@ void Thing::update(void)
     auto v = tpp->stat_str();
     if (unlikely(v)) {
       stat_str_set(v);
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
+    auto v = tpp->stat_att();
+    if (unlikely(v)) {
+      stat_att_set(v);
     }
   }
 

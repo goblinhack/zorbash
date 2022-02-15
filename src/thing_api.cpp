@@ -7453,6 +7453,12 @@ const std::string &Thing::on_owner_damage_stat_str_do(void)
   return (tp()->on_owner_damage_stat_str_do());
 }
 
+const std::string &Thing::on_owner_damage_stat_att_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_owner_damage_stat_att_do());
+}
+
 const std::string &Thing::on_owner_damage_melee_do(void)
 {
   TRACE_NO_INDENT();
@@ -7547,6 +7553,12 @@ const std::string &Thing::on_damage_stat_str_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_damage_stat_str_do());
+}
+
+const std::string &Thing::on_damage_stat_att_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_damage_stat_att_do());
 }
 
 const std::string &Thing::on_damage_melee_do(void)

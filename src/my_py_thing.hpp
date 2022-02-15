@@ -128,6 +128,7 @@ PyObject *thing_stamina_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stat_con_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stat_def_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stat_str_incr(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_stat_att_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stuck_count_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_attack_mobs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_down_doors(PyObject *obj, PyObject *args, PyObject *keywds);

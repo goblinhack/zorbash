@@ -611,6 +611,7 @@ public:
   const std::string &on_damage_poison_do(void);
   const std::string &on_damage_stat_con_do(void);
   const std::string &on_damage_stat_str_do(void);
+  const std::string &on_damage_stat_att_do(void);
   const std::string &on_death_do(void);
   const std::string &on_death_of_a_follower_do(void);
   const std::string &on_death_of_my_leader_do(void);
@@ -641,6 +642,7 @@ public:
   const std::string &on_owner_damage_poison_do(void);
   const std::string &on_owner_damage_stat_con_do(void);
   const std::string &on_owner_damage_stat_str_do(void);
+  const std::string &on_owner_damage_stat_att_do(void);
   const std::string &on_owner_remove_do(void);
   const std::string &on_polymorphed_do(void);
   const std::string &on_tick_do(void);
@@ -744,6 +746,7 @@ public:
   int buff_on_damage_natural_attack(Thingp hitter, int damage);
   int buff_on_damage_necrosis(Thingp hitter, int damage);
   int buff_on_damage_poison(Thingp hitter, int damage);
+  int buff_on_damage_stat_att(Thingp hitter, int damage);
   int buff_on_damage_stat_con(Thingp hitter, int damage);
   int buff_on_damage_stat_str(Thingp hitter, int damage);
   int capacity_height(void);
@@ -1308,6 +1311,8 @@ public:
   int on_damage_necrosis(Thingp owner, Thingp hitter, int damage);
   int on_damage_poison(Thingp hitter, int damage);
   int on_damage_poison(Thingp owner, Thingp hitter, int damage);
+  int on_damage_stat_att(Thingp hitter, int damage);
+  int on_damage_stat_att(Thingp owner, Thingp hitter, int damage);
   int on_damage_stat_con(Thingp hitter, int damage);
   int on_damage_stat_con(Thingp owner, Thingp hitter, int damage);
   int on_damage_stat_str(Thingp hitter, int damage);
@@ -1329,6 +1334,7 @@ public:
   int on_owner_damage_natural_attack(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_necrosis(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_poison(Thingp owner, Thingp hitter, int damage);
+  int on_owner_damage_stat_att(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_stat_con(Thingp owner, Thingp hitter, int damage);
   int on_owner_damage_stat_str(Thingp owner, Thingp hitter, int damage);
   int owned_count_decr(int);
@@ -1382,6 +1388,10 @@ public:
   int stamina_max_set(int);
   int stamina_max(void);
   int stamina_set(int);
+  int stat_att_decr(int);
+  int stat_att_decr(void);
+  int stat_att_incr(int);
+  int stat_att_incr(void);
   int stat_att_mod_decr(int);
   int stat_att_mod_decr(void);
   int stat_att_mod_incr(int);
@@ -1395,6 +1405,7 @@ public:
   int stat_att_penalty_when_in_shallow_water(void);
   int stat_att_penalty_when_stuck_max(void);
   int stat_att_penalty_when_stuck(void);
+  int stat_att_set(int);
   int stat_att_total(void);
   int stat_att(void);
   int stat_con_decr(int);

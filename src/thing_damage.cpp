@@ -3,17 +3,21 @@
 // See the README.md file for license info.
 //
 
+#include <algorithm>
+
 #include "my_array_bounds_check.hpp"
+#include "my_globals.hpp"
+#include "my_main.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_sprintf.hpp"
+#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-#include <algorithm>
 
 int Thing::damage_max(void)
 {
@@ -79,4 +83,130 @@ int Thing::damage_min(void)
   // Don't include crush damage as it is non typical
   //
   return min_damage + enchant_get();
+}
+
+int Thing::on_damage_stat_str(Thingp hitter, int damage)
+{
+  TRACE_NO_INDENT();
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_stat_str null thing");
+    return damage;
+  }
+
+  auto on_damage_stat_str = on_damage_stat_str_do();
+  if (std::empty(on_damage_stat_str)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_stat_str, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+        hitter->to_short_string().c_str(), damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
+                          (unsigned int) curr_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_stat_str call [%s] expected mod:function, got %d elems", on_damage_stat_str.c_str(),
+      (int) on_damage_stat_str.size());
+
+  return damage;
+}
+
+int Thing::on_damage_stat_att(Thingp hitter, int damage)
+{
+  TRACE_NO_INDENT();
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot damage_stat_att null thing");
+    return damage;
+  }
+
+  auto on_damage_stat_att = on_damage_stat_att_do();
+  if (std::empty(on_damage_stat_att)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_damage_stat_att, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
+    dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
+        hitter->to_short_string().c_str(), damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
+                          (unsigned int) curr_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_damage_stat_att call [%s] expected mod:function, got %d elems", on_damage_stat_att.c_str(),
+      (int) on_damage_stat_att.size());
+
+  return damage;
+}
+
+int Thing::on_owner_damage_stat_con(Thingp owner, Thingp hitter, int damage)
+{
+  TRACE_NO_INDENT();
+  verify(MTYPE_THING, owner);
+  if (! owner) {
+    err("Cannot owner_damage_stat_con null thing");
+    return damage;
+  }
+
+  verify(MTYPE_THING, hitter);
+  if (! hitter) {
+    err("Cannot owner_damage_stat_con null thing");
+    return damage;
+  }
+
+  auto on_owner_damage_stat_con = on_owner_damage_stat_con_do();
+  if (std::empty(on_owner_damage_stat_con)) {
+    return damage;
+  }
+
+  auto t = split_tokens(on_owner_damage_stat_con, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
+    dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_string().c_str(),
+        hitter->to_short_string().c_str(), damage);
+
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, (unsigned int) curr_at.x,
+                          (unsigned int) curr_at.y, (unsigned int) damage);
+  }
+
+  ERR("Bad on_owner_damage_stat_con call [%s] expected mod:function, got %d elems", on_owner_damage_stat_con.c_str(),
+      (int) on_owner_damage_stat_con.size());
+
+  return damage;
 }

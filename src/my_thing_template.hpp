@@ -453,6 +453,7 @@ private:
   int _rarity {};
   int _spawn_group_radius {};
   int _stamina {};
+  int _stat_att {};
   int _stat_att_mod {};
   int _stat_att_penalty_when_idle {};
   int _stat_att_penalty_when_idle_max {};
@@ -675,6 +676,7 @@ private:
   std::string _on_damage_poison_do;
   std::string _on_damage_stat_con_do;
   std::string _on_damage_stat_str_do;
+  std::string _on_damage_stat_att_do;
   std::string _on_death_do;
   std::string _on_death_of_a_follower_do;
   std::string _on_death_of_my_leader_do;
@@ -705,6 +707,7 @@ private:
   std::string _on_owner_damage_poison_do;
   std::string _on_owner_damage_stat_con_do;
   std::string _on_owner_damage_stat_str_do;
+  std::string _on_owner_damage_stat_att_do;
   std::string _on_owner_remove_do;
   std::string _on_polymorphed_do;
   std::string _on_tick_do;
@@ -905,6 +908,7 @@ public:
   const std::string &on_damage_poison_do(void) const { return _on_damage_poison_do; }
   const std::string &on_damage_stat_con_do(void) const { return _on_damage_stat_con_do; }
   const std::string &on_damage_stat_str_do(void) const { return _on_damage_stat_str_do; }
+  const std::string &on_damage_stat_att_do(void) const { return _on_damage_stat_att_do; }
   const std::string &on_death_do(void) const { return _on_death_do; }
   const std::string &on_death_of_a_follower_do(void) const { return _on_death_of_a_follower_do; }
   const std::string &on_death_of_my_leader_do(void) const { return _on_death_of_my_leader_do; }
@@ -935,6 +939,7 @@ public:
   const std::string &on_owner_damage_poison_do(void) const { return _on_owner_damage_poison_do; }
   const std::string &on_owner_damage_stat_con_do(void) const { return _on_owner_damage_stat_con_do; }
   const std::string &on_owner_damage_stat_str_do(void) const { return _on_owner_damage_stat_str_do; }
+  const std::string &on_owner_damage_stat_att_do(void) const { return _on_owner_damage_stat_att_do; }
   const std::string &on_owner_remove_do(void) const { return _on_owner_remove_do; }
   const std::string &on_polymorphed_do(void) const { return _on_polymorphed_do; }
   const std::string &on_tick_do(void) const { return _on_tick_do; }
@@ -1340,7 +1345,6 @@ public:
   int rarity(void) const { return _rarity; }
   int spawn_group_radius(void) const { return _spawn_group_radius; }
   int stamina(void) const { return _stamina; }
-  int stat_att_mod(void) const { return _stat_att_mod; }
   int stat_att_penalty_when_idle_max(void) const { return _stat_att_penalty_when_idle_max; }
   int stat_att_penalty_when_idle(void) const { return _stat_att_penalty_when_idle; }
   int stat_att_penalty_when_in_deep_water(void) const { return _stat_att_penalty_when_in_deep_water; }
@@ -1368,8 +1372,10 @@ public:
   int stats06(void) const { return _stats06; }
   int stats07(void) const { return _stats07; }
   int stats09(void) const { return _stats09; }
-  int stat_str(void) const { return _stat_str; }
   int stat_str_mod(void) const { return _stat_str_mod; }
+  int stat_att_mod(void) const { return _stat_att_mod; }
+  int stat_str(void) const { return _stat_str; }
+  int stat_att(void) const { return _stat_att; }
   int temperature_change_sensitive(void) const { return _temperature_change_sensitive; }
   int temperature(void) const { return _temperature; }
   int unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
@@ -1907,6 +1913,7 @@ public:
   void on_damage_poison_do_set(const std::string &v) { _on_damage_poison_do = v; }
   void on_damage_stat_con_do_set(const std::string &v) { _on_damage_stat_con_do = v; }
   void on_damage_stat_str_do_set(const std::string &v) { _on_damage_stat_str_do = v; }
+  void on_damage_stat_att_do_set(const std::string &v) { _on_damage_stat_att_do = v; }
   void on_death_do_set(const std::string &v) { _on_death_do = v; }
   void on_death_drop_all_items_set(int v) { _on_death_drop_all_items = v; }
   void on_death_is_open_set(int v) { _on_death_is_open = v; }
@@ -1915,9 +1922,9 @@ public:
   void on_enchant_do_set(const std::string &v) { _on_enchant_do = v; }
   void on_equip_do_set(const std::string &v) { _on_equip_do = v; }
   void on_fall_do_set(const std::string &v) { _on_fall_do = v; }
-  void on_jump_do_set(const std::string &v) { _on_jump_do = v; }
   void on_final_use_do_set(const std::string &v) { _on_final_use_do = v; }
   void on_firing_at_something_do_set(const std::string &v) { _on_firing_at_something_do = v; }
+  void on_jump_do_set(const std::string &v) { _on_jump_do = v; }
   void on_lifespan_tick_do_set(const std::string &v) { _on_lifespan_tick_do = v; }
   void on_move_do_set(const std::string &v) { _on_move_do = v; }
   void on_open_do_set(const std::string &v) { _on_open_do = v; }
@@ -1938,6 +1945,7 @@ public:
   void on_owner_damage_poison_do_set(const std::string &v) { _on_owner_damage_poison_do = v; }
   void on_owner_damage_stat_con_do_set(const std::string &v) { _on_owner_damage_stat_con_do = v; }
   void on_owner_damage_stat_str_do_set(const std::string &v) { _on_owner_damage_stat_str_do = v; }
+  void on_owner_damage_stat_att_do_set(const std::string &v) { _on_owner_damage_stat_att_do = v; }
   void on_owner_remove_do_set(const std::string &v) { _on_owner_remove_do = v; }
   void on_polymorphed_do_set(const std::string &v) { _on_polymorphed_do = v; }
   void on_tick_do_set(const std::string &v) { _on_tick_do = v; }
@@ -1964,6 +1972,7 @@ public:
   void stat_att_penalty_when_in_shallow_water_set(int v) { _stat_att_penalty_when_in_shallow_water = v; }
   void stat_att_penalty_when_stuck_max_set(int v) { _stat_att_penalty_when_stuck_max = v; }
   void stat_att_penalty_when_stuck_set(int v) { _stat_att_penalty_when_stuck = v; }
+  void stat_att_set(int v) { _stat_att = v; }
   void stat_con_mod_set(int v) { _stat_con_mod = v; }
   void stat_con_set(int v) { _stat_con = v; }
   void stat_def_mod_set(int v) { _stat_def_mod = v; }
