@@ -44,7 +44,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_biome_dungeon(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "An actual very rare wooden shield. I know, I can hardly believe it myself. Gives a staggering +2 to armor class.")
+    my.long_text_description(self, "An actual very rare wooden shield. I know, I can hardly believe it myself. Gives a staggering +2 to defense.")
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_COMMON)

@@ -83,7 +83,7 @@ void Game::place_player(void)
         level->thing_new("enchantstone", point(x + 1, y - 1));
         level->thing_new("horseshoe", point(x + 2, y - 1));
         // level->thing_new("spiderweb", point(x + 3, y));
-        // level->thing_new("armor_lather", point(x, y - 2));
+        level->thing_new("armor_lather", point(x, y - 2));
         level->thing_new("boots_fluffy", point(x, y - 2));
         // level->thing_new("shield_woodon", point(x + 1, y - 3));
         // level->thing_new("shield_wooden", point(x, y - 3));

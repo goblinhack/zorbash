@@ -351,6 +351,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.on_you_are_hit_but_still_alive_do(self, "player.on_you_are_hit_but_still_alive()")
     my.on_you_natural_attack_do(self, "player.on_you_natural_attack()")
     my.stamina(self, 100)
+    my.stat_att(self, 10)
     my.stat_att_penalty_when_idle_max(self, 0)
     my.stat_att_penalty_when_idle(self, 0)
     my.stat_att_penalty_when_in_deep_water(self, 5)

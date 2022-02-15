@@ -430,6 +430,24 @@ int Thing::buff_on_damage_stat_str(Thingp hitter, int damage)
   return damage;
 }
 
+int Thing::buff_on_damage_stat_att(Thingp hitter, int damage)
+{
+  if (! maybe_itemsp()) {
+    return damage;
+  }
+  if (itemsp()->buffs.empty()) {
+    return damage;
+  }
+  FOR_ALL_BUFFS(item)
+  {
+    auto t = level->thing_find(item.id);
+    if (t) {
+      damage = t->on_owner_damage_stat_att(this, hitter, damage);
+    }
+  }
+  return damage;
+}
+
 int Thing::buff_on_damage_melee(Thingp hitter, int damage)
 {
   if (! maybe_itemsp()) {

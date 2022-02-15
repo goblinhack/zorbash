@@ -37,10 +37,11 @@ int Thing::stat_att_total()
   //
   if (is_monst() || is_player()) {
     int str_total = stat_str_total();
-    stat          = stat_to_bonus(str_total);
-    stat += stat_att_mod();
-    prev = stat;
-    dbg("Att: (str %d): %d", str_total, stat);
+    stat += stat_to_bonus(str_total);
+    if (stat != prev) {
+      prev = stat;
+      dbg("Att: (str %d): %d", str_total, stat);
+    }
   }
 
   FOR_ALL_EQUIP(e)
@@ -135,16 +136,6 @@ int Thing::stat_att_total()
   return stat;
 }
 
-int Thing::stat_att(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->stat_att);
-  } else {
-    return 0;
-  }
-}
-
 int Thing::stat_att_penalties_total(void)
 {
   TRACE_NO_INDENT();
@@ -203,4 +194,69 @@ int Thing::stat_att_penalties_total(void)
     dbg("Att penalty: %d", penalty);
   }
   return penalty;
+}
+
+int Thing::stat_att(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->stat_att);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::stat_att_set(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->stat_att = v);
+  return (n);
+}
+
+int Thing::stat_att_decr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->stat_att -= v);
+  return (n);
+}
+
+int Thing::stat_att_incr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->stat_att += v);
+  return (n);
+}
+
+int Thing::stat_att_decr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->stat_att--);
+  return (n);
+}
+
+int Thing::stat_att_incr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->stat_att++);
+  return (n);
 }

@@ -1126,14 +1126,74 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player()) {
-    auto stat = t->stat_att_mod();
-    if (! stat) {
-      return;
-    }
+  if (t->is_armor() || t->is_alive_monst() || t->is_player()) {
+    auto ac       = t->stat_att();
+    auto ac_total = t->stat_att_total();
+    if (ac_total != ac) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %2d", ac);
+      w->log(tmp);
 
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus           %2d```", stat);
-    w->log(tmp);
+      Thingp curr_armor = t->equip_get(MONST_EQUIP_ARMOR);
+      if (curr_armor) {
+        auto ac = curr_armor->stat_att();
+        if (ac) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from armor         %2d", ac);
+          w->log(tmp);
+        }
+        auto mod = curr_armor->stat_att_mod();
+        if (mod) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack mod from armor    %3s", modifier_to_string(mod).c_str());
+          w->log(tmp);
+        }
+      }
+
+      Thingp curr_shield = t->equip_get(MONST_EQUIP_SHIELD);
+      if (curr_shield) {
+        auto ac = curr_shield->stat_att();
+        if (ac) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from shield        %2d", ac);
+          w->log(tmp);
+        }
+        auto mod = curr_shield->stat_att_mod();
+        if (mod) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack mod from shield   %3s", modifier_to_string(mod).c_str());
+          w->log(tmp);
+        }
+      }
+
+      Thingp curr_helmet = t->equip_get(MONST_EQUIP_HELMET);
+      if (curr_helmet) {
+        auto ac = curr_helmet->stat_att();
+        if (ac) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from helmet       %2d", ac);
+          w->log(tmp);
+        }
+
+        auto mod = curr_helmet->stat_att_mod();
+        if (mod) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack mod from helmet   %3s", modifier_to_string(mod).c_str());
+          w->log(tmp);
+        }
+      }
+
+      Thingp curr_amulet = t->equip_get(MONST_EQUIP_AMULET);
+      if (curr_amulet) {
+        auto ac = curr_amulet->stat_att();
+        if (ac) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from amulet        %2d", ac);
+          w->log(tmp);
+        }
+
+        auto mod = curr_amulet->stat_att();
+        if (mod) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack mod from amulet   %3s", modifier_to_string(mod).c_str());
+          w->log(tmp);
+        }
+      }
+    } else {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %2d", ac);
+      w->log(tmp);
+    }
   } else if (t->stat_att_mod()) {
     auto stat = t->stat_att_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack modifier          %3s", modifier_to_string(stat).c_str());
@@ -1150,19 +1210,19 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
     auto ac       = t->stat_def();
     auto ac_total = t->stat_def_total();
     if (ac_total != ac) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class natural       %2d", ac);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                   %2d", ac);
       w->log(tmp);
 
       Thingp curr_armor = t->equip_get(MONST_EQUIP_ARMOR);
       if (curr_armor) {
         auto ac = curr_armor->stat_def();
-        if (ac != 10) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn          %2d", ac);
+        if (ac) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense from armor        %2d", ac);
           w->log(tmp);
         }
         auto mod = curr_armor->stat_def_mod();
         if (mod) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class worn modifier %2d", mod);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense mod from armor   %3s", modifier_to_string(mod).c_str());
           w->log(tmp);
         }
       }
@@ -1170,13 +1230,13 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
       Thingp curr_shield = t->equip_get(MONST_EQUIP_SHIELD);
       if (curr_shield) {
         auto ac = curr_shield->stat_def();
-        if (ac != 10) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class shield        %2d", ac);
+        if (ac) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense from shield       %2d", ac);
           w->log(tmp);
         }
         auto mod = curr_shield->stat_def_mod();
         if (mod) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class shield mod.   %2d", mod);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense mod from shield  %3s", modifier_to_string(mod).c_str());
           w->log(tmp);
         }
       }
@@ -1184,14 +1244,14 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
       Thingp curr_helmet = t->equip_get(MONST_EQUIP_HELMET);
       if (curr_helmet) {
         auto ac = curr_helmet->stat_def();
-        if (ac != 10) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod.   %2d", ac);
+        if (ac) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense from helmet      %2d", ac);
           w->log(tmp);
         }
 
         auto mod = curr_helmet->stat_def_mod();
         if (mod) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class helmet mod.   %2d", mod);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense mod from helmet  %3s", modifier_to_string(mod).c_str());
           w->log(tmp);
         }
       }
@@ -1199,25 +1259,24 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
       Thingp curr_amulet = t->equip_get(MONST_EQUIP_AMULET);
       if (curr_amulet) {
         auto ac = curr_amulet->stat_def();
-        if (ac != 10) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class from amulet   %2d", ac);
+        if (ac) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense from amulet       %2d", ac);
           w->log(tmp);
         }
 
         auto mod = curr_amulet->stat_def();
         if (mod) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class amulet mod.   %2d", mod);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense mod from amulet  %3s", modifier_to_string(mod).c_str());
           w->log(tmp);
         }
       }
-
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor class               %2d", ac);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                   %2d", ac);
       w->log(tmp);
     }
   } else if (t->stat_def_mod()) {
     auto stat = t->stat_def_total();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Armor modifier           %3s", modifier_to_string(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense modifier         %3s", modifier_to_string(stat).c_str());
     w->log(tmp);
   }
 }

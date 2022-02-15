@@ -73,6 +73,9 @@ void tp_fixup(void)
     }
 
     if (tp->is_monst() || tp->is_player()) {
+      if (! tp->stat_att()) {
+        tp->stat_att_set(10);
+      }
       if (! tp->stat_str()) {
         tp->stat_str_set(10);
       }
