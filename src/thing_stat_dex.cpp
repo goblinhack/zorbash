@@ -17,7 +17,7 @@ int Thing::stat_dex_total(void)
 
   stat = stat_dex();
   prev = stat;
-  dbg("Dex: %d: %d", stat_dex(), stat);
+  dbg("Dex: %d", stat);
 
   stat += stat_dex_mod();
   if (stat != prev) {

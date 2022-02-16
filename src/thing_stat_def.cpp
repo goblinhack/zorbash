@@ -17,7 +17,7 @@ int Thing::stat_def_total(void)
 
   stat = stat_def();
   prev = stat;
-  dbg("Def: %d: %d", stat_def(), stat);
+  dbg("Def: %d", stat);
 
   stat += stat_def_mod();
   if (stat != prev) {

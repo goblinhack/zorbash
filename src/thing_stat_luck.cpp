@@ -17,7 +17,7 @@ int Thing::stat_luck_total(void)
 
   stat = stat_luck();
   prev = stat;
-  dbg("Luck: %d: %d", stat_luck(), stat);
+  dbg("Luck: %d", stat);
 
   stat += stat_luck_mod();
   if (stat != prev) {
