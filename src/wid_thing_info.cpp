@@ -1126,7 +1126,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_armor() || t->is_alive_monst() || t->is_player()) {
+  if (t->is_alive_monst() || t->is_player()) {
     auto ac       = t->stat_att();
     auto ac_total = t->stat_att_total();
     if (ac_total != ac) {
@@ -1206,7 +1206,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_armor() || t->is_alive_monst() || t->is_player()) {
+  if (t->is_alive_monst() || t->is_player()) {
     auto ac       = t->stat_def();
     auto ac_total = t->stat_def_total();
     if (ac_total != ac) {
