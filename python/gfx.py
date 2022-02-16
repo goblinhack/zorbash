@@ -46,7 +46,7 @@ def init_ui_circle():
         "ui_circle",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_circle.tga",
+        file="data/gfx/ui/ui_circle.tga",
         name="ui_circle",
         width=256,
         height=256,
@@ -65,7 +65,7 @@ def init_ui_tabs():
         "ui_tab_slots_dark",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_tabs.tga", name="ui_tabs", width=24, height=8, arr=tiles
+        file="data/gfx/ui/ui_tabs.tga", name="ui_tabs", width=24, height=8, arr=tiles
     )
 
 
@@ -75,7 +75,7 @@ def init_ui_tile_bg():
         "ui_tile_bg",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_tile_bg.tga",
+        file="data/gfx/ui/ui_tile_bg.tga",
         name="ui_tile_bg",
         width=128,
         height=128,
@@ -106,7 +106,7 @@ def init_ui_health_bar():
         "health_bar_0",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_health_bar.tga",
+        file="data/gfx/ui/ui_health_bar.tga",
         name="ui_health_bar",
         width=128,
         height=8,
@@ -120,7 +120,7 @@ def init_ui_rightbar():
         "ui_rightbar",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_rightbar.tga",
+        file="data/gfx/ui/ui_rightbar.tga",
         name="ui_rightbar",
         width=128,
         height=416,
@@ -134,7 +134,7 @@ def init_ui_inventory():
         "ui_inventory",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_inventory.tga",
+        file="data/gfx/ui/ui_inventory.tga",
         name="ui_inventory",
         width=864,
         height=320,
@@ -161,7 +161,7 @@ def init_ui_credits_bg():
         "ui_credits_bg",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_credits_bg.tga",
+        file="data/gfx/ui/ui_credits_bg.tga",
         name="ui_credits_bg",
         width=200,
         height=86,
@@ -175,7 +175,7 @@ def init_ui_credits_fg():
         "ui_credits_fg",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_credits_fg.tga",
+        file="data/gfx/ui/ui_credits_fg.tga",
         name="ui_credits_fg",
         width=200,
         height=86,
@@ -189,7 +189,7 @@ def init_title_fg1():
         "title_fg1_1",
     ]
     my.tile_load_arr(
-        file="data/gfx/title_fg1.tga", name="title_fg1", width=200, height=86, arr=tiles
+        file="data/gfx/ui/title_fg1.tga", name="title_fg1", width=200, height=86, arr=tiles
     )
 
 
@@ -199,7 +199,7 @@ def init_title_fg2():
         "title_fg2_1",
     ]
     my.tile_load_arr(
-        file="data/gfx/title_fg2.tga", name="title_fg2", width=200, height=86, arr=tiles
+        file="data/gfx/ui/title_fg2.tga", name="title_fg2", width=200, height=86, arr=tiles
     )
 
 
@@ -209,7 +209,7 @@ def init_title_fg3():
         "title_fg3_1",
     ]
     my.tile_load_arr(
-        file="data/gfx/title_fg3.tga", name="title_fg3", width=200, height=86, arr=tiles
+        file="data/gfx/ui/title_fg3.tga", name="title_fg3", width=200, height=86, arr=tiles
     )
 
 
@@ -282,7 +282,7 @@ def init_title_fg4():
         "title_fg4_64",
     ]
     my.tile_load_arr(
-        file="data/gfx/title_fg4.tga", name="title_fg4", width=200, height=86, arr=tiles
+        file="data/gfx/ui/title_fg4.tga", name="title_fg4", width=200, height=86, arr=tiles
     )
 
 
@@ -292,7 +292,7 @@ def init_title_bg():
         "title_bg",
     ]
     my.tile_load_arr(
-        file="data/gfx/title_bg.tga", name="title_bg", width=200, height=86, arr=tiles
+        file="data/gfx/ui/title_bg.tga", name="title_bg", width=200, height=86, arr=tiles
     )
 
 
@@ -312,7 +312,7 @@ def init_ui_dead():
         "ui_dead",
     ]
     my.tile_load_arr(
-        file="data/gfx/ui_dead.tga", name="ui_dead", width=304, height=248, arr=tiles
+        file="data/gfx/ui/ui_dead.tga", name="ui_dead", width=304, height=248, arr=tiles
     )
 
 

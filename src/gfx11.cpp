@@ -43,5 +43,5 @@ void gfx_init11(void)
       "ui11,8,15", "ui11,9,15", "ui11,10,15", "ui11,11,15", "ui11,12,15", "ui11,13,15", "ui11,14,15", "ui11,15,15",
   };
   const std::vector< std::string > arr(tiles);
-  tile_load_arr("data/gfx/ui_horiz2.tga", "ui_box11", 8, 8, arr);
+  tile_load_arr("data/gfx/ui/ui_horiz2.tga", "ui_box11", 8, 8, arr);
 }
