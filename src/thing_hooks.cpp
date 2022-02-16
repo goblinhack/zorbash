@@ -3,12 +3,9 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_color.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sprintf.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
 

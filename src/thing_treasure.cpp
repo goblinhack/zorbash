@@ -4,12 +4,7 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_sprintf.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 bool Thing::is_carrying_treasure(void)

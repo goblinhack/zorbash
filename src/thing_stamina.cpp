@@ -3,11 +3,7 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_tile.hpp"
 
 void Thing::stamina_boost(int v)
 {

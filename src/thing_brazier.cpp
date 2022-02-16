@@ -8,9 +8,7 @@
 #include "my_level.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 #include "my_vector_bounds_check.hpp"
 
 void Thing::brazier_tick(void)

@@ -4,11 +4,7 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_hiscore.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_py_thing.hpp"
 #include "my_python.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 

@@ -4,13 +4,7 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_sdl.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_wid.hpp"
-// REMOVED #include "my_wid_bag.hpp"
-// REMOVED #include "my_wid_console.hpp"
-// REMOVED #include "my_wid_inventory.hpp"
 #include "my_wid_rightbar.hpp"
 
 void Thing::cursor_hover_over_check(void)

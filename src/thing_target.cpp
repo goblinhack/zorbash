@@ -6,10 +6,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_python.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 bool Thing::victim_select(Thingp item)
 {

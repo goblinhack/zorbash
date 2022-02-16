@@ -6,7 +6,6 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_sound.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"

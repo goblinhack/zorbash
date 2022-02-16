@@ -4,15 +4,11 @@
 //
 
 #include "my_array_bounds_check.hpp"
-// REMOVED #include "my_color.hpp"
 #include "my_game.hpp"
 #include "my_globals_extra.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_wid_rightbar.hpp"
 
 //
 // Dice

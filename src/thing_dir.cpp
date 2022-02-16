@@ -4,7 +4,6 @@
 //
 
 #include "my_monst.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 point Thing::dir_to_direction(void)

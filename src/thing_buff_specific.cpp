@@ -5,12 +5,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_ui.hpp"
-// REMOVED #include "my_wid_buffbox.hpp"
 
 bool Thing::buff_find_is_slippery(void)
 {

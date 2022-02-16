@@ -14,6 +14,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_food(self, True)
+    my.gfx_bounce_always(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)

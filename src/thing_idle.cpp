@@ -4,13 +4,8 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_python.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_wid_console.hpp"
 
 //
 // Roll the dice and see if we do anything

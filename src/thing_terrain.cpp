@@ -6,10 +6,6 @@
 #include <algorithm>
 #include <set>
 
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_math.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 

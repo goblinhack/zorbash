@@ -9,11 +9,7 @@
 #include "my_gl.hpp"
 #include "my_monst.hpp"
 #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_tex.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 #include "my_ui.hpp"
 
 void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, const point blit_br)

@@ -8,12 +8,7 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_ttf.hpp"
-// REMOVED #include "my_wid.hpp"
-// REMOVED #include "my_wid_bag.hpp"
-// REMOVED #include "my_wid_popup.hpp"
 
 static std::list< WidBag * > bags;
 static bool                  log_quiet;

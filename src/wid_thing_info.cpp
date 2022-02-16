@@ -3,22 +3,13 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_backtrace.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_tile.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_wid_bag.hpp"
-// REMOVED #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_popup.hpp"
-// REMOVED #include "my_wid_thing_info.hpp"
-// REMOVED #include "my_wid_topcon.hpp"
 
 std::list< WidPopup * > wid_thing_info_window;
 

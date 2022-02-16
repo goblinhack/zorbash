@@ -3,14 +3,8 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_dice.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
-// REMOVED #include "my_vector_bounds_check.hpp"
 
 Tpp Level::tp_random_monst(const point p)
 {

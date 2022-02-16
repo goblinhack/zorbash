@@ -4,9 +4,7 @@
 //
 
 #include "my_level.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 int Thing::map_treasure_count(void)
