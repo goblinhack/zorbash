@@ -4,14 +4,14 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_color.hpp"
+// REMOVED #include "my_color.hpp"
 #include "my_game.hpp"
-#include "my_log.hpp"
+// REMOVED #include "my_log.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_python.hpp"
-#include "my_sprintf.hpp"
-#include "my_string.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_python.hpp"
+// REMOVED #include "my_sprintf.hpp"
+// REMOVED #include "my_string.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 void Thing::dead_(Thingp defeater, const char *fmt, va_list args)

@@ -3,10 +3,10 @@
 // See the README.md file for license info.
 //
 
-#include "my_dice.hpp"
+// REMOVED #include "my_dice.hpp"
 #include "my_sys.hpp"
 #include "my_thing_template.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_tile.hpp"
 
 //
 // Dice

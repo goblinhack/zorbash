@@ -5,10 +5,10 @@
 
 #include <math.h>
 
-#include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_sprintf.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_game.hpp"
+// REMOVED #include "my_gl.hpp"
+// REMOVED #include "my_sprintf.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 void Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count)

@@ -4,13 +4,13 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_color.hpp"
+// REMOVED #include "my_color.hpp"
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_sprintf.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sprintf.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
+// REMOVED #include "my_thing_template.hpp"
 
 void Thing::barrel_tick(void)
 {

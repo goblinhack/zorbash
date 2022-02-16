@@ -8,12 +8,12 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-#include "my_sdl.hpp"
+// REMOVED #include "my_sdl.hpp"
 #include "my_sprintf.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_wid.hpp"
-#include "my_wid_console.hpp"
+// REMOVED #include "my_wid.hpp"
+// REMOVED #include "my_wid_console.hpp"
 
 bool Thing::path_pop_next_move(void)
 {

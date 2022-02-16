@@ -3,13 +3,13 @@
 // See the README.md file for license info.
 //
 
-#include "my_dice.hpp"
+// REMOVED #include "my_dice.hpp"
 #include "my_level.hpp"
-#include "my_ptrcheck.hpp"
-#include "my_random.hpp"
-#include "my_sys.hpp"
-#include "my_thing_template.hpp"
-#include "my_tile.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
+// REMOVED #include "my_random.hpp"
+// REMOVED #include "my_sys.hpp"
+// REMOVED #include "my_thing_template.hpp"
+// REMOVED #include "my_tile.hpp"
 
 //
 // Templates can be assigned dynamic IDs - however the levels are more reproducable it

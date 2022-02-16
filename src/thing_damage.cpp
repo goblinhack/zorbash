@@ -5,19 +5,19 @@
 
 #include <algorithm>
 
-#include "my_array_bounds_check.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_array_bounds_check.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_main.hpp"
-#include "my_math.hpp"
+// REMOVED #include "my_math.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
-#include "my_random.hpp"
-#include "my_sprintf.hpp"
+// REMOVED #include "my_random.hpp"
+// REMOVED #include "my_sprintf.hpp"
 #include "my_string.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
+// REMOVED #include "my_thing_template.hpp"
 
 int Thing::damage_max(void)
 {

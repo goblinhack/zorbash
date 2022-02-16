@@ -7,7 +7,7 @@
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 Thingp Thing::in_the_way(const point s, const point e, int x, int y)

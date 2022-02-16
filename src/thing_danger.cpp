@@ -3,9 +3,9 @@
 // See the README.md file for license info.
 //
 
-#include "my_globals.hpp"
-#include "my_main.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_globals.hpp"
+// REMOVED #include "my_main.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
