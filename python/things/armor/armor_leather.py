@@ -45,7 +45,7 @@ def tp_init(name, text_name, short_text_name):
     my.stat_def_mod(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Leather armor.")
-    my.text_enchant(self, "+1 AC")
+    my.text_enchant(self, "+1 DEF")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
