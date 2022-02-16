@@ -7,6 +7,7 @@
 <!-- luck trap                                                                                                                                    -->
 <!-- luck and enchanted stuff                                                                                                                     -->
 <!-- weight                                                                                                                                       -->
+<!-- runics on weapons, like vampirism, force, quietus, lightning                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

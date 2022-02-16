@@ -26,18 +26,18 @@ def timeme(py_function):
 
 @timeme
 def init_solid():
-    my.tex_load(file="data/gfx/solid.tga", name="solid")
+    my.tex_load(file="data/gfx/ui/solid.tga", name="solid")
 
 
 @timeme
 def init_map_treasure():
-    my.tex_load(file="data/gfx/map_treasure.tga", name="map_treasure")
+    my.tex_load(file="data/gfx/ui/map_treasure.tga", name="map_treasure")
 
 
 @timeme
 def init_light():
-    my.tex_load(file="data/gfx/light.tga", name="light")
-    my.tex_load(file="data/gfx/glow.tga", name="glow")
+    my.tex_load(file="data/gfx/light/light.tga", name="light")
+    my.tex_load(file="data/gfx/light/glow.tga", name="glow")
 
 
 @timeme
@@ -151,7 +151,7 @@ def init_ui_blood():
         "blood_3",
     ]
     my.tile_load_arr(
-        file="data/gfx/blood.tga", name="blood", width=360, height=225, arr=tiles
+        file="data/gfx/ui/blood.tga", name="blood", width=360, height=225, arr=tiles
     )
 
 
@@ -302,7 +302,7 @@ def init_grid_bg():
         "grid",
     ]
     my.tile_load_arr(
-        file="data/gfx/grid.tga", name="grid", width=200, height=86, arr=tiles
+        file="data/gfx/ui/grid.tga", name="grid", width=200, height=86, arr=tiles
     )
 
 
@@ -317,7 +317,7 @@ def init_ui_dead():
 
 
 @timeme
-def init_tiles1_walls():
+def init_tiles_16x16():
     tiles = [
         "nothing",
         "crystal.1",
@@ -10531,7 +10531,7 @@ def init_tiles1_walls():
 
 
 @timeme
-def init_tiles2():
+def init_tiles_24x24():
     tiles = [
         "jelly_parent.1.100",
         "jelly_parent.2.100",
@@ -10752,12 +10752,12 @@ def init_tiles2():
     ]
 
     my.tile_load_arr_sprites(
-        file="data/gfx/tiles2.tga", name="tiles2", width=24, height=24, arr=tiles
+        file="data/gfx/tiles_24x24.tga", name="tiles_24x24", width=24, height=24, arr=tiles
     )
 
 
 @timeme
-def init_tiles3():
+def init_tiles_32x32():
     tiles = [
         "exit1.1",
         "exit1.2",
@@ -11001,12 +11001,12 @@ def init_tiles3():
     ]
 
     my.tile_load_arr_sprites(
-        file="data/gfx/tiles3.tga", name="tiles3", width=32, height=32, arr=tiles
+        file="data/gfx/tiles_32x32.tga", name="tiles_32x32", width=32, height=32, arr=tiles
     )
 
 
 @timeme
-def init_tiles3_surface_effects():
+def init_tiles_32x32_surface_effects():
     tiles = [
         "water1.1",
         "water1.2",
@@ -11107,8 +11107,8 @@ def init_tiles3_surface_effects():
     ]
 
     my.tile_load_arr_sprites(
-        file="data/gfx/tiles3_surface_effects.tga",
-        name="tiles3_surface_effects",
+        file="data/gfx/tiles_32x32_surface_effects.tga",
+        name="tiles_32x32_surface_effects",
         width=32,
         height=32,
         arr=tiles,
@@ -11116,7 +11116,7 @@ def init_tiles3_surface_effects():
 
 
 @timeme
-def init_tiles3_water():
+def init_tiles_32x32_water():
     tiles = [
         "water1a",
         "water2a",
@@ -11185,8 +11185,8 @@ def init_tiles3_water():
     ]
 
     my.tile_load_arr_sprites(
-        file="data/gfx/tiles3_water.tga",
-        name="tiles3_water",
+        file="data/gfx/tiles_32x32_water.tga",
+        name="tiles_32x32_water",
         width=32,
         height=32,
         arr=tiles,
@@ -11194,7 +11194,7 @@ def init_tiles3_water():
 
 
 @timeme
-def init_tiles3_sewer_water():
+def init_tiles_32x32_sewer_water():
     tiles = [
         "sewer_water1a",
         "sewer_water2a",
@@ -11263,8 +11263,8 @@ def init_tiles3_sewer_water():
     ]
 
     my.tile_load_arr_sprites(
-        file="data/gfx/tiles3_sewer_water.tga",
-        name="tiles3_sewer_water",
+        file="data/gfx/tiles_32x32_sewer_water.tga",
+        name="tiles_32x32_sewer_water",
         width=32,
         height=32,
         arr=tiles,
@@ -11272,7 +11272,7 @@ def init_tiles3_sewer_water():
 
 
 @timeme
-def init_tiles3_deep_water():
+def init_tiles_32x32_deep_water():
     tiles = [
         "deep_water1a",
         "deep_water2a",
@@ -11341,8 +11341,8 @@ def init_tiles3_deep_water():
     ]
 
     my.tile_load_arr_sprites(
-        file="data/gfx/tiles3_deep_water.tga",
-        name="tiles3_deep_water",
+        file="data/gfx/tiles_32x32_deep_water.tga",
+        name="tiles_32x32_deep_water",
         width=32,
         height=32,
         arr=tiles,
@@ -11350,7 +11350,7 @@ def init_tiles3_deep_water():
 
 
 @timeme
-def init_tiles3_lava():
+def init_tiles_32x32_lava():
     tiles = [
         "lavaa",
         "lava2a",
@@ -11419,8 +11419,8 @@ def init_tiles3_lava():
     ]
 
     my.tile_load_arr_sprites(
-        file="data/gfx/tiles3_lava.tga",
-        name="tiles3_lava",
+        file="data/gfx/tiles_32x32_lava.tga",
+        name="tiles_32x32_lava",
         width=32,
         height=32,
         arr=tiles,
@@ -12977,14 +12977,14 @@ init_projectile_cold_tiles()
 init_projectile_web_tiles()
 init_solid()
 init_map_treasure()
-init_tiles1_walls()
-init_tiles2()
-init_tiles3()
-init_tiles3_deep_water()
-init_tiles3_lava()
-init_tiles3_sewer_water()
-init_tiles3_surface_effects()
-init_tiles3_water()
+init_tiles_16x16()
+init_tiles_24x24()
+init_tiles_32x32()
+init_tiles_32x32_deep_water()
+init_tiles_32x32_lava()
+init_tiles_32x32_sewer_water()
+init_tiles_32x32_surface_effects()
+init_tiles_32x32_water()
 init_grid_bg()
 init_title_bg()
 init_title_fg1()
