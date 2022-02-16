@@ -5,11 +5,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_ui.hpp"
 #include "my_wid_debuffbox.hpp"
 
 bool Thing::debuff_add(Thingp what)

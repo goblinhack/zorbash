@@ -4,8 +4,6 @@
 //
 
 #include "my_level.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 bool Thing::place(const std::string &what, const point p)

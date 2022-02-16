@@ -3,13 +3,9 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_dice.hpp"
 #include "my_game.hpp"
 #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 #include "my_vector_bounds_check.hpp"
 
 static Tpidmap tp_ascend_dungeon;

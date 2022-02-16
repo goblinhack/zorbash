@@ -5,16 +5,10 @@
 
 #include "my_backtrace.hpp"
 #include "my_console.hpp"
-// REMOVED #include "my_game.hpp"
 #include "my_globals_extra.hpp"
 #include "my_log.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
-// REMOVED #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-// REMOVED #include "my_time.hpp"
-// REMOVED #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
 

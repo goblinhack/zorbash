@@ -4,7 +4,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 bool Level::can_see_obstacle(int x, int y)

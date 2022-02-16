@@ -4,15 +4,10 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 void Thing::on_use(Thingp what)
 {

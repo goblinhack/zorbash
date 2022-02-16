@@ -5,10 +5,8 @@
 
 #include "my_level.hpp"
 #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-// REMOVED #include "my_wid_topcon.hpp"
 
 void Thing::poison_tick(void)
 {

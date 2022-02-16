@@ -5,12 +5,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_tile.hpp"
 
 bool Thing::projectile_choose_target(Thingp item, Thingp victim)
 {

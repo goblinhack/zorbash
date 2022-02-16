@@ -3,13 +3,10 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_dice.hpp"
 #include "my_level.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing_template.hpp"
-// REMOVED #include "my_tile.hpp"
 #include "my_vector_bounds_check.hpp"
 
 Tpnamemap tp_name_map;

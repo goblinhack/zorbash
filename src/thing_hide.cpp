@@ -3,13 +3,8 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_color.hpp"
-// REMOVED #include "my_globals.hpp"
 #include "my_level.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_sprintf.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 void Thing::hide(void)

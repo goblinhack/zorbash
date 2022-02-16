@@ -4,10 +4,7 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_world.hpp"
 
 //
 // push/pop are for things moving on the same level

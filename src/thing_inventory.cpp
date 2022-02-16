@@ -7,11 +7,9 @@
 #include "my_monst.hpp"
 #include "my_random.hpp"
 #include "my_sound.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
-// REMOVED #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
 
 void Thing::inventory_particle(Thingp item, uint32_t slot)

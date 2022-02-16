@@ -5,7 +5,6 @@
 //
 #include "my_level.hpp"
 #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 point Thing::dest_random_get(int d)

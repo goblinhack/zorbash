@@ -7,9 +7,7 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_random.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 void Thing::fire_tick(void)
 {

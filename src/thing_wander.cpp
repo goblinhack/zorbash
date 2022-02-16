@@ -5,13 +5,8 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_globals.hpp"
-// REMOVED #include "my_main.hpp"
-// REMOVED #include "my_math.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_ai.hpp"
 #include "my_vector_bounds_check.hpp"
 #include <algorithm>
 

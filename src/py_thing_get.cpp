@@ -4,13 +4,8 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_hiscore.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_py_thing.hpp"
-// REMOVED #include "my_python.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 #define THING_BODY_GET_INT(__func__, __api__)                                                                        \
   PyObject *__func__(PyObject * obj, PyObject * args, PyObject * keywds)                                             \

@@ -3,8 +3,6 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_math.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include <algorithm>
 #include <set>

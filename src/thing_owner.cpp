@@ -3,14 +3,11 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_color.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
-// REMOVED #include "my_sprintf.hpp"
 #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 void Thing::on_owner_add(Thingp owner)

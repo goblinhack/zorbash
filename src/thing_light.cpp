@@ -3,16 +3,11 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_color.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
-// REMOVED #include "my_random.hpp"
-// REMOVED #include "my_sprintf.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 std::vector< Lightp > &Thing::light_get(void)
 {

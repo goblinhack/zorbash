@@ -9,8 +9,6 @@
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
-// REMOVED #include "my_sprintf.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 #include <math.h>

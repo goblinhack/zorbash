@@ -6,20 +6,12 @@
 #include "my_array_bounds_check.hpp"
 #include "my_depth.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_gl.hpp"
-// REMOVED #include "my_main.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_player.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_sprintf.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
-// REMOVED #include "my_wid_actionbar.hpp"
-// REMOVED #include "my_wid_console.hpp"
 
 void Thing::on_move(void)
 {

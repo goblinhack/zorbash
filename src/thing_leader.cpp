@@ -3,15 +3,10 @@
 // See the README.md file for license info.
 //
 
-// REMOVED #include "my_color.hpp"
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
-// REMOVED #include "my_sprintf.hpp"
-// REMOVED #include "my_string.hpp"
-// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-// REMOVED #include "my_thing_template.hpp"
 
 void Thing::on_you_are_declared_leader(void)
 {
