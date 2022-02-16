@@ -12956,7 +12956,7 @@ def init_progress_bar():
     ]
 
     my.tile_load_arr_sprites(
-        file="data/gfx/progress_bar.tga",
+        file="data/gfx/ui/progress_bar.tga",
         name="progress_bar",
         width=256,
         height=32,
