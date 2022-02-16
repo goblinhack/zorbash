@@ -6,10 +6,10 @@
 #include <math.h>
 
 #include "my_game.hpp"
-#include "my_globals.hpp"
-#include "my_main.hpp"
+// REMOVED #include "my_globals.hpp"
+// REMOVED #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 bool Thing::throw_item_choose_target(Thingp what)

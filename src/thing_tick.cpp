@@ -4,15 +4,15 @@
 //
 
 #include "my_game.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
-#include "my_string.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_string.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
-#include "my_wid_console.hpp"
+// REMOVED #include "my_thing_template.hpp"
+// REMOVED #include "my_wid_console.hpp"
 
 //
 // Python callback upon being tick

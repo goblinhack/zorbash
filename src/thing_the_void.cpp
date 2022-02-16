@@ -3,7 +3,7 @@
 // See the README.md file for license info.
 //
 
-#include "my_game.hpp"
+// REMOVED #include "my_game.hpp"
 #include "my_thing.hpp"
 
 void Thing::fall_into_the_void(void)

@@ -4,12 +4,12 @@
 //
 
 #include "my_game.hpp"
-#include "my_globals.hpp"
-#include "my_main.hpp"
+// REMOVED #include "my_globals.hpp"
+// REMOVED #include "my_main.hpp"
 #include "my_monst.hpp"
 #include "my_random.hpp"
-#include "my_sprintf.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sprintf.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 int Thing::item_count_including_charges(Tpp tp)

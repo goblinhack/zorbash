@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_color.hpp"
+// REMOVED #include "my_color.hpp"
 #include "my_game.hpp"
-#include "my_globals.hpp"
+// REMOVED #include "my_globals.hpp"
 #include "my_random.hpp"
-#include "my_sprintf.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sprintf.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 
 void Thing::corrode_tick(void)

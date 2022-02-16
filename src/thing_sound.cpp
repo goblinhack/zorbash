@@ -3,12 +3,12 @@
 // See the README.md file for license info.
 //
 
-#include "my_file.hpp"
+// REMOVED #include "my_file.hpp"
 #include "my_game.hpp"
-#include "my_main.hpp"
-#include "my_ptrcheck.hpp"
+// REMOVED #include "my_main.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
 #include "my_sound.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include <SDL_mixer.h>
 

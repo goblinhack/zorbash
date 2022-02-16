@@ -7,9 +7,9 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_wid_inventory.hpp"
+// REMOVED #include "my_wid_inventory.hpp"
 
 bool Thing::carry(Thingp item, bool can_equip)
 {

@@ -4,10 +4,10 @@
 //
 
 #include "my_game.hpp"
-#include "my_sdl.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sdl.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
+// REMOVED #include "my_thing_template.hpp"
 
 bool Thing::describe_when_hovered_over_in_rightbar(void)
 {

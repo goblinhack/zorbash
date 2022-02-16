@@ -4,15 +4,15 @@
 //
 
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_light.hpp"
+// REMOVED #include "my_gl.hpp"
+// REMOVED #include "my_light.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
-#include "my_sys.hpp"
+// REMOVED #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
-#include "my_world.hpp"
+// REMOVED #include "my_world.hpp"
 
 //
 // Get rid of all the hooks to other things that this thing has. e.g. the
