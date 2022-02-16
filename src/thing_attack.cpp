@@ -501,7 +501,11 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
-  auto stat_att       = stat_att_total() - stat_att_penalties_total();
+  auto stat_att = stat_att_total() - stat_att_penalties_total();
+  if (owner) {
+    stat_att = owner->stat_att_total() - owner->stat_att_penalties_total();
+  }
+
   auto stat_att_bonus = stat_to_bonus(stat_att);
   auto stat_def       = victim->stat_def_total() - victim->stat_def_penalties_total();
 

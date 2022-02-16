@@ -235,7 +235,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   }
 
   if (gfx_bounce_always()) {
-    bounce(0.2, 1.0, 500 + pcg_random_range(0, 50), 255);
+    bounce(0.3, 1.0, 400 + pcg_random_range(0, 100), 255);
   }
 
   init_lights();
