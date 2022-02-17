@@ -92,7 +92,7 @@ void Level::handle_input_events(void)
   // key presses.
   //
   if (((player && player->aip()->move_path.size()) || game->request_player_move) &&
-      time_have_x_tenths_passed_since(2, game->request_player_move)) {
+      time_have_x_hundredths_passed_since(15, game->request_player_move)) {
     //
     // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete
     // sooner and should result in the flag below being cleared.
@@ -100,9 +100,9 @@ void Level::handle_input_events(void)
     static int time_boost = 0;
     if (game->things_are_moving) {
       if (! time_boost) {
-        time_boost = 20;
+        time_boost = 10;
       } else {
-        time_boost += 20;
+        time_boost += 10;
       }
       if (time_boost > 50) {
         time_boost = 50;
@@ -396,38 +396,40 @@ bool Level::tick(void)
       // t->con("WAIT %d", __LINE__);
     }
 
-    FOR_ALL_EQUIP(e)
-    {
-      auto equip_id = t->equip_id_use_anim(e);
-      if (equip_id.ok()) {
-        auto w = thing_find(equip_id);
-        if (w && ! (w->is_dead || w->is_scheduled_for_death)) {
-          if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-            w->con("Waiting on this");
-            t->con("This is the owner");
+    if (game->robot_mode) {
+      FOR_ALL_EQUIP(e)
+      {
+        auto equip_id = t->equip_id_use_anim(e);
+        if (equip_id.ok()) {
+          auto w = thing_find(equip_id);
+          if (w && ! (w->is_dead || w->is_scheduled_for_death)) {
+            if ((wait_count > wait_count_max) && ! game->things_are_moving) {
+              w->con("Waiting on this");
+              t->con("This is the owner");
+            }
+            game->things_are_moving = true;
+            t->is_waiting           = true;
+            // w->con("WAIT EQUIP %d", __LINE__);
+            // t->con("WAIT %d", __LINE__);
           }
-          game->things_are_moving = true;
-          t->is_waiting           = true;
-          // w->con("WAIT EQUIP %d", __LINE__);
-          // t->con("WAIT %d", __LINE__);
         }
       }
-    }
 
-    if (t->ts_flip_start_get() && ! (t->is_dead || t->is_scheduled_for_death)) {
-      if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on flipping thing longer than expected: %s", t->to_dbg_string().c_str());
-      }
+      if (t->ts_flip_start_get() && ! (t->is_dead || t->is_scheduled_for_death)) {
+        if ((wait_count > wait_count_max) && ! game->things_are_moving) {
+          t->con("Waiting on flipping thing longer than expected: %s", t->to_dbg_string().c_str());
+        }
 
-      game->things_are_moving = true;
-      t->is_waiting           = true;
-      // t->con("WAIT %d", __LINE__);
+        game->things_are_moving = true;
+        t->is_waiting           = true;
+        // t->con("WAIT %d", __LINE__);
 
-      //
-      // Make sure offscreen animation occurs.
-      //
-      if (t->is_offscreen) {
-        t->ts_flip_start_set(0);
+        //
+        // Make sure offscreen animation occurs.
+        //
+        if (t->is_offscreen) {
+          t->ts_flip_start_set(0);
+        }
       }
     }
 

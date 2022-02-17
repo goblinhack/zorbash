@@ -186,7 +186,7 @@ void Thing::achieve_goals_in_life(void)
 
   if (is_player()) {
     light_update_power();
-  } else {
+  } else if (! is_sleeping) {
     if (try_to_escape()) {
       dbg("Try to escape");
       return;
@@ -208,8 +208,10 @@ void Thing::achieve_goals_in_life(void)
     }
   }
 
-  if (fire_at_target()) {
-    return;
+  if (! is_sleeping) {
+    if (fire_at_target()) {
+      return;
+    }
   }
 
   if (on_tick()) {
