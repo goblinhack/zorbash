@@ -15,7 +15,7 @@ def on_unequip(owner, me, x, y):
 
 
 def on_enchant(me, x, y):
-    owner = my.thing_get_top_owner_id(me)
+    owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
         my.thing_msg(me, "The boots become yet more fluffy and quiet.")
     my.thing_noise_incr(me, -10)

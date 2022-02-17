@@ -309,7 +309,7 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
   return (lst);
 }
 
-PyObject *thing_get_all_followers(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     id       = 0;

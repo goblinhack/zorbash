@@ -5,28 +5,28 @@ self = None
 
 
 def on_use(owner, item, target, x, y):
-    # my.con("owner   {} {:X}".format(my.thing_get_name(owner), owner))
-    # my.con("item    {} {:X}".format(my.thing_get_name(item), item))
-    # my.con("target  {} {:X}".format(my.thing_get_name(target), target))
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
+    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     did_something = False
 
-    enchant = my.thing_get_enchant(item)
+    enchant = my.thing_enchant_get(item)
 
-    health = my.thing_get_health(owner)
-    new_health = int((my.thing_get_health_max(owner) / 100.0) * 80 + enchant * 10)
+    health = my.thing_health_get(owner)
+    new_health = int((my.thing_health_max(owner) / 100.0) * 80 + enchant * 10)
     if new_health > health:
         did_something = True
-        my.thing_set_health(owner, new_health)
+        my.thing_health_set(owner, new_health)
 
-    stamina = my.thing_get_stamina(owner)
-    new_stamina = int((my.thing_get_stamina_max(owner) / 100.0) * 80 + enchant * 10)
+    stamina = my.thing_stamina_get(owner)
+    new_stamina = int((my.thing_stamina_max(owner) / 100.0) * 80 + enchant * 10)
     if new_stamina > stamina:
         did_something = True
-        my.thing_set_stamina(owner, new_stamina)
+        my.thing_stamina_set(owner, new_stamina)
 
-    if my.thing_get_poisoned_amount(owner) != 0:
+    if my.thing_poisoned_amount_get(owner) != 0:
         did_something = True
-        my.thing_set_poisoned_amount(owner, 0)
+        my.thing_poisoned_amount_set(owner, 0)
 
     if did_something:
         my.level_spawn_using_items_radius_range(owner, item, target, "pot_health_effect")
@@ -57,10 +57,10 @@ def on_fall(me, x, y):
 
 
 def on_enchant(me, x, y):
-    owner = my.thing_get_top_owner_id(me)
+    owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
         my.thing_msg(me, "The potion bubbles.")
-    enchant = my.thing_get_enchant(me)
+    enchant = my.thing_enchant_get(me)
     global self
     if enchant == 0:
         my.long_text_description(self, "Restores you to 80 percent health")

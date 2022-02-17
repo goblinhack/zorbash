@@ -8,20 +8,20 @@ def on_idle(me, x, y):
     #
     # Random recharge
     #
-    if my.thing_get_charge_count(me) < my.thing_get_initial_charge_count(me):
+    if my.thing_charge_count_get(me) < my.thing_initial_charge_count_get(me):
         my.thing_charge_count_incr(me, 1)
-        owner = my.thing_get_top_owner_id(me)
+        owner = my.thing_top_owner_id_get(me)
         if my.thing_is_player(owner):
-            my.thing_msg(me, f"%%fg=gold$The {my.thing_get_name(me)} pulses.%%fg=reset$")
+            my.thing_msg(me, f"%%fg=gold$The {my.thing_name_get(me)} pulses.%%fg=reset$")
 
 
 def on_use(owner, item, target, x, y):
-    # my.topcon("owner  {} {}".format(my.thing_get_name(owner), my.thing_get_health(owner)))
-    # my.topcon("item   {} {}".format(my.thing_get_name(item), my.thing_get_health(item)))
-    # my.topcon("target {} {}".format(my.thing_get_name(target), my.thing_get_health(target)))
-    damage = my.thing_get_damage_energy(item)
-    enchant = my.thing_get_enchant(item)
-    my.thing_set_damage_current(owner, damage + enchant)
+    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health_get(owner)))
+    # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health_get(item)))
+    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health_get(target)))
+    damage = my.thing_damage_energy_get(item)
+    enchant = my.thing_enchant_get(item)
+    my.thing_damage_current_set(owner, damage + enchant)
 
 
 def on_final_use(owner, item, target, x, y):
@@ -49,7 +49,7 @@ def on_fall(me, x, y):
 
 
 def on_enchant(me, x, y):
-    owner = my.thing_get_top_owner_id(me)
+    owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
         my.thing_msg(me, "The wand glows.")
     my.thing_charge_count_incr(me, 5)

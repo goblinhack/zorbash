@@ -5,7 +5,7 @@ self = None
 
 
 def on_tick(owner, item, x, y):
-    necrosis = my.thing_get_necrotized_amount(owner)
+    necrosis = my.thing_necrotized_amount_get(owner)
     if necrosis == 0:
         if my.thing_is_player(owner):
             my.thing_msg(owner, "You are no longer rotting any more than usual..")

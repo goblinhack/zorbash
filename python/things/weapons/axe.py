@@ -3,13 +3,13 @@ import tp
 
 
 def on_use(owner, item, target, x, y):
-    # my.con("owner   {} {:X}".format(my.thing_get_name(owner), owner))
-    # my.con("item    {} {:X}".format(my.thing_get_name(item), item))
-    # my.con("target  {} {:X}".format(my.thing_get_name(target), target))
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
+    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
-    damage = my.thing_get_damage_melee(item)
-    enchant = my.thing_get_enchant(item)
-    my.thing_set_damage_current(owner, damage + enchant)
+    damage = my.thing_damage_melee_get(item)
+    enchant = my.thing_enchant_get(item)
+    my.thing_damage_current_set(owner, damage + enchant)
 
 
 def init_weapon(name, text_name, short_text_name):

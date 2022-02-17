@@ -166,8 +166,8 @@ void Thing::level_pop(void)
     i_set_is_gas_blocker = false;
     level->is_gas_blocker_unset(mx, my);
   }
-  if (i_set_noise_blocker) {
-    i_set_noise_blocker = false;
+  if (i_noise_set_blocker) {
+    i_noise_set_blocker = false;
     level->noise_blocker_unset(mx, my);
   }
   if (i_set_is_monst) {

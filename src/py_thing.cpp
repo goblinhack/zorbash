@@ -8,7 +8,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-PyObject *thing_get_coords(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     id       = 0;

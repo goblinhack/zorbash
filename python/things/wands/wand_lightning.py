@@ -6,11 +6,11 @@ def on_idle(me, x, y):
     #
     # Random recharge
     #
-    if my.thing_get_charge_count(me) < my.thing_get_initial_charge_count(me):
+    if my.thing_charge_count_get(me) < my.thing_initial_charge_count_get(me):
         my.thing_charge_count_incr(me, 1)
-        owner = my.thing_get_top_owner_id(me)
+        owner = my.thing_top_owner_id_get(me)
         if my.thing_is_player(owner):
-            my.thing_msg(me, f"%%fg=cyan$The {my.thing_get_name(me)} pulses.%%fg=reset$")
+            my.thing_msg(me, f"%%fg=cyan$The {my.thing_name_get(me)} pulses.%%fg=reset$")
 
 
 def explode(me, x, y):
