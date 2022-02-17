@@ -208,7 +208,7 @@ void sdl_loop(void)
         auto mouse_down = sdl_get_mouse();
         if (mouse_down) {
           if (last_mouse_held_down) {
-            if (time_have_x_hundredths_passed_since(5, last_mouse_held_down)) {
+            if (time_have_x_hundredths_passed_since(10, last_mouse_held_down)) {
               LOG("SDL: Mouse DOWN held: Button %d", mouse_down);
               wid_mouse_held(mouse_down, mouse_x, mouse_y);
             }
