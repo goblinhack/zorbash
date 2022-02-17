@@ -13,6 +13,8 @@ void Thing::popup(std::string const &m)
   float           dx;
   static uint32_t last_tick;
 
+  dbg("Popup: %s", m.c_str());
+
   if (game->tick_current == last_tick) {
     //
     // Stop msgs piling up in the same tick

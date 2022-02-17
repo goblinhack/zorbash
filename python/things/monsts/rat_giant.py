@@ -114,6 +114,7 @@ def tp_init(name, text_name):
     my.tile(self, "rat_giant.2", delay_ms=delay)
     my.tile(self, "rat_giant.3", delay_ms=delay)
     my.tile(self, "rat_giant.4", delay_ms=delay)
+    delay = 1500
     my.tile(self, "rat_giant.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self, "rat_giant.sleeping.2", is_sleeping=True, delay_ms=delay)
     my.tile(self, "rat_giant.dead", is_dead=True, delay_ms=delay)

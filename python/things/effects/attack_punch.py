@@ -12,7 +12,6 @@ def init1(name, text_name):
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.is_removeable_if_out_of_slots(self, True)
-    my.is_tmp_thing(self, True)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Punch out.")
     my.z_depth(self, my.MAP_DEPTH_EQUIP)
@@ -23,56 +22,51 @@ def init1(name, text_name):
     my.tile(self, tile=name + ".2", delay_ms=delay, is_dir_down=True)
     my.tile(self, tile=name + ".3", delay_ms=delay, is_dir_down=True)
     my.tile(self,
-        tile=name + ".4",
-        delay_ms=delay,
-        is_dir_down=True,
-        is_end_of_anim=True,
-        is_dead_on_end_of_anim=True,
-    )
+            tile=name + ".4",
+            delay_ms=delay,
+            is_dir_down=True,
+            is_end_of_anim=True,
+            is_dead_on_end_of_anim=True)
 
     my.tile(self, tile=name + ".1", delay_ms=delay, is_dir_up=True)
     my.tile(self, tile=name + ".2", delay_ms=delay, is_dir_up=True)
     my.tile(self, tile=name + ".3", delay_ms=delay, is_dir_up=True)
     my.tile(self,
-        tile=name + ".4",
-        delay_ms=delay,
-        is_dir_up=True,
-        is_end_of_anim=True,
-        is_dead_on_end_of_anim=True,
-    )
+            tile=name + ".4",
+            delay_ms=delay,
+            is_dir_up=True,
+            is_end_of_anim=True,
+            is_dead_on_end_of_anim=True)
 
     my.tile(self, tile=name + ".1", delay_ms=delay, is_dir_left=True)
     my.tile(self, tile=name + ".2", delay_ms=delay, is_dir_left=True)
     my.tile(self, tile=name + ".3", delay_ms=delay, is_dir_left=True)
     my.tile(self,
-        tile=name + ".4",
-        delay_ms=delay,
-        is_dir_left=True,
-        is_end_of_anim=True,
-        is_dead_on_end_of_anim=True,
-    )
+            tile=name + ".4",
+            delay_ms=delay,
+            is_dir_left=True,
+            is_end_of_anim=True,
+            is_dead_on_end_of_anim=True)
 
     my.tile(self, tile=name + ".1", delay_ms=delay, is_dir_right=True)
     my.tile(self, tile=name + ".2", delay_ms=delay, is_dir_right=True)
     my.tile(self, tile=name + ".3", delay_ms=delay, is_dir_right=True)
     my.tile(self,
-        tile=name + ".4",
-        delay_ms=delay,
-        is_dir_right=True,
-        is_end_of_anim=True,
-        is_dead_on_end_of_anim=True,
-    )
+            tile=name + ".4",
+            delay_ms=delay,
+            is_dir_right=True,
+            is_end_of_anim=True,
+            is_dead_on_end_of_anim=True)
 
     my.tile(self, tile=name + ".1", delay_ms=delay, is_dir_none=True)
     my.tile(self, tile=name + ".2", delay_ms=delay, is_dir_none=True)
     my.tile(self, tile=name + ".3", delay_ms=delay, is_dir_none=True)
     my.tile(self,
-        tile=name + ".4",
-        delay_ms=delay,
-        is_dir_none=True,
-        is_end_of_anim=True,
-        is_dead_on_end_of_anim=True,
-    )
+            tile=name + ".4",
+            delay_ms=delay,
+            is_dir_none=True,
+            is_end_of_anim=True,
+            is_dead_on_end_of_anim=True)
 
     my.tp_update(self)
 

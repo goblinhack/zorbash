@@ -873,14 +873,14 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
       if (! hit) {
         if (is_player() || (owner && owner->is_player())) {
           msg("You miss %s.", victim->text_the().c_str());
-          popup("missed!");
+          popup("You miss!");
         } else if (victim->is_player()) {
           if (owner) {
             msg("%s misses with %s.", owner->text_the().c_str(), text_the().c_str());
           } else {
             msg("%s misses.", text_The().c_str());
           }
-          popup("misses!");
+          popup("It misses!");
         } else {
           dbg("The attack missed (att modifier %d, AC %d) on %s", stat_att, stat_def, victim->to_string().c_str());
         }

@@ -17,7 +17,9 @@ int Thing::stat_str_total(void)
 
   stat = stat_str();
   prev = stat;
-  dbg("Str: %d", stat);
+  if (stat) {
+    dbg("Str: %d", stat);
+  }
 
   stat += stat_str_mod();
   if (stat != prev) {
