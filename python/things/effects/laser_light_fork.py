@@ -21,7 +21,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_laser(self, True)
     my.is_loggable(self, True)
     my.is_no_tile(self, True)
-    my.is_tmp_thing(self, True)
     my.is_usable(self, True)
     my.on_born_do(self, "me.on_born()")
     my.text_a_or_an(self, "a")
