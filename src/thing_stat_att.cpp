@@ -17,7 +17,9 @@ int Thing::stat_att_total()
 
   stat = stat_att();
   prev = stat;
-  dbg("Att: %d", stat);
+  if (stat) {
+    dbg("Att: %d", stat);
+  }
 
   stat += stat_att_mod();
   if (stat != prev) {

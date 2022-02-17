@@ -938,16 +938,24 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     // Player being hit
     //
-    popup(string_sprintf("%%fg=red$-%d", damage));
+    if (crit) {
+      popup(string_sprintf("%%fg=red$It CRITS -%d", damage));
+    } else {
+      popup(string_sprintf("%%fg=orange$It hits -%d", damage));
+    }
   } else if (is_monst()) {
     //
-    // ThingInfo being hit
+    // Thing being hit
     //
     if (hitter->is_player() || real_hitter->is_player()) {
       //
-      // ThingInfo being hit by player
+      // Thing being hit by player
       //
-      popup(string_sprintf("%%fg=white$-%d", damage));
+      if (crit) {
+        popup(string_sprintf("%%fg=red$You CRIT -%d", damage));
+      } else {
+        popup(string_sprintf("%%fg=orange$You hit -%d", damage));
+      }
     }
   }
 

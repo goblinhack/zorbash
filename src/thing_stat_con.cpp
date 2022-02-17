@@ -17,7 +17,9 @@ int Thing::stat_con_total(void)
 
   stat = stat_con();
   prev = stat;
-  dbg("Con: %d", stat);
+  if (stat) {
+    dbg("Con: %d", stat);
+  }
 
   stat += stat_con_mod();
   if (stat != prev) {

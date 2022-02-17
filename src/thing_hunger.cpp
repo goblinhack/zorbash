@@ -56,6 +56,11 @@ void Thing::hunger_update(void)
     return;
   }
 
+  if (hunger_is_insatiable()) {
+    is_starving = true;
+    return;
+  }
+
   dbg("Hunger update");
   TRACE_AND_INDENT();
 
@@ -83,9 +88,5 @@ void Thing::hunger_update(void)
     } else {
       dbg("Is no longer hungry");
     }
-  }
-
-  if (hunger_is_insatiable()) {
-    is_starving = true;
   }
 }
