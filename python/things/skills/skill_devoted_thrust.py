@@ -6,9 +6,9 @@ self = None
 
 def on_use(owner, skill, target, x, y):
     my.level_spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
-    bonus = int(my.thing_get_stamina(owner) / 2)
+    bonus = int(my.thing_stamina_get(owner) / 2)
 
-    enchant = my.thing_get_enchant(skill)
+    enchant = my.thing_enchant_get(skill)
     bonus += int((bonus / 10) * enchant)
 
     if bonus > 1:

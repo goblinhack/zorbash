@@ -5,7 +5,7 @@ self = None
 
 
 def on_tick(owner, item, x, y):
-    poison = my.thing_get_poisoned_amount(owner)
+    poison = my.thing_poisoned_amount_get(owner)
     if poison == 0:
         if my.thing_is_player(owner):
             my.thing_msg(owner, "You are no longer poisoned.")

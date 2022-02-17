@@ -163,7 +163,7 @@ public:
   uint64_t i_set_is_foilage                       : 1 {};
   uint64_t i_set_is_food                          : 1 {};
   uint64_t i_set_is_gas_blocker                   : 1 {};
-  uint64_t i_set_noise_blocker                    : 1 {};
+  uint64_t i_noise_set_blocker                    : 1 {};
   uint64_t i_set_is_gold                          : 1 {};
   uint64_t i_set_is_green_blood                   : 1 {};
   uint64_t i_set_is_hazard                        : 1 {};

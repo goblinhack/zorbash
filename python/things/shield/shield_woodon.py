@@ -5,7 +5,7 @@ self = None
 
 
 def on_enchant(me, x, y):
-    owner = my.thing_get_top_owner_id(me)
+    owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
         my.thing_msg(me, "The shield looks a bit more wooden.")
     my.thing_stat_def_incr(me, 1)

@@ -3,7 +3,7 @@ import tp
 
 
 def explode(me, x, y):
-    my.con("explode {} {:X}".format(my.thing_get_name(me), me))
+    my.con("explode {} {:X}".format(my.thing_name_get(me), me))
     my.thing_msg(me, "The thunderstone explodes into fragments.")
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")
@@ -25,9 +25,9 @@ def on_fall(me, x, y):
 
 
 def on_use(owner, me, target, x, y):
-    # my.con("owner   {} {:X}".format(my.thing_get_name(owner), owner))
-    # my.con("me    {} {:X}".format(my.thing_get_name(me), me))
-    # my.con("target  {} {:X}".format(my.thing_get_name(target), target))
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("me    {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     my.level_spawn_at_thing(target, "explosion_major")
     my.level_spawn_using_items_radius_range(owner, me, target, "explosion_destroy_floor")
 

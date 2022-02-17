@@ -80,7 +80,7 @@ def on_owner_damage_stat_con(me, owner, hitter, x, y, damage):
 
 
 def on_tick(owner, item, x, y):
-    poison = my.thing_get_poisoned_amount(item)
+    poison = my.thing_poisoned_amount_get(item)
     if poison == 0:
         return True
     new_poison = int(poison / 2)
@@ -89,7 +89,7 @@ def on_tick(owner, item, x, y):
             my.thing_msg(owner, "%%fg=green$The poison has little effect on you!%%fg=reset$")
         else:
             my.thing_msg(owner, "%%fg=green$The poison fades from your system!%%fg=reset$")
-    my.thing_set_poisoned_amount(owner, new_poison)
+    my.thing_poisoned_amount_set(owner, new_poison)
     return True
 
 

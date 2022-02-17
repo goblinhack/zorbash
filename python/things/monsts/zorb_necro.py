@@ -16,8 +16,8 @@ def on_tick(me, x, y):
         return False
 
     risen = 0
-    if my.thing_get_stat_con(me) > 1:
-        followers = my.thing_get_all_followers(me)
+    if my.thing_stat_con(me) > 1:
+        followers = my.thing_all_followers_get(me)
         if followers is None:
             return False
 
@@ -28,7 +28,7 @@ def on_tick(me, x, y):
                 my.thing_stat_con_decr(me, 1)
                 my.thing_msg(me, "Arise my minion!")
                 my.thing_msg(follower, "Groan!")
-                if my.thing_get_stat_con(me) <= 1:
+                if my.thing_stat_con(me) <= 1:
                     return True
                 risen += 1
 
@@ -38,7 +38,7 @@ def on_tick(me, x, y):
 
 
 def on_death(me, x, y):
-    followers = my.thing_get_all_followers(me)
+    followers = my.thing_all_followers_get(me)
     if followers is None:
         return False
 

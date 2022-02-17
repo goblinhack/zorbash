@@ -459,5 +459,5 @@ PyObject *level_unused_flag97_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag98_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag99_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag9_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_get_all_followers(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

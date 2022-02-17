@@ -3,7 +3,7 @@ import tp
 
 
 def on_born(me, x, y):
-    selection_x, selection_y = my.thing_get_coords(me)
+    selection_x, selection_y = my.thing_coords_get(me)
     for thing in my.level_get_all(me, selection_x, selection_y):
         if my.thing_possible_to_attack(me, thing):
             my.thing_hit(me, thing)
@@ -12,14 +12,14 @@ def on_born(me, x, y):
 
 
 def on_use(owner, me, target, x, y):
-    # my.con("owner   {} {:X}".format(my.thing_get_name(owner), owner))
-    # my.con("me      {} {:X}".format(my.thing_get_name(me), me))
-    # my.con("target  {} {:X}".format(my.thing_get_name(target), target))
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     #
     # Lightning can impact all things in the same pool
     #
     for water in my.level_flood_fill_get_all_things(me, x, y, "is_water"):
-        water_x, water_y = my.thing_get_coords(water)
+        water_x, water_y = my.thing_coords_get(water)
         for thing in my.level_get_all(water, water_x, water_y):
             if thing != me:
                 if my.thing_possible_to_attack(me, thing):
