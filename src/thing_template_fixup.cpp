@@ -27,7 +27,7 @@ void tp_fixup(void)
     }
 
     if (tp->is_stone()) {
-      tp->temperature_change_sensitive_set(true);
+      tp->is_temperature_change_sensitive_set(true);
     }
 
     if (tp->is_flying()) {

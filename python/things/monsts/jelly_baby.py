@@ -84,6 +84,7 @@ def tp_init(name, text_name):
     my.is_pink_blood_eater(self, True)
     my.is_pink_blooded(self, True)
     my.is_red_blood_eater(self, True)
+    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.is_toughness_soft(self, True)
     my.long_text_description(self, "Jelly jumpers are numerous, bouncy and lots of fun! They will eat almost anything, including their own. They have the annoying habit of jumping when threatened. This one is a baby jelly. It tends to avoid adults of its kind. So should you.")

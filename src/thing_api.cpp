@@ -2222,10 +2222,10 @@ int Thing::unused_flag135(void)
   return (tp()->unused_flag135());
 }
 
-int Thing::unused_flag136(void)
+int Thing::is_temperature_sensitive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag136());
+  return (tp()->is_temperature_sensitive());
 }
 
 int Thing::move_speed(void)
@@ -2246,10 +2246,10 @@ int Thing::is_cold(void)
   return (tp()->is_cold());
 }
 
-int Thing::temperature_change_sensitive(void)
+int Thing::is_temperature_change_sensitive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->temperature_change_sensitive());
+  return (tp()->is_temperature_change_sensitive());
 }
 
 int Thing::temperature(void)

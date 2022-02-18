@@ -70,6 +70,7 @@ def tp_init(name, text_name):
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_red_blooded(self, True)
+    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.long_text_description(self, "A snarling mass of flying death. These creatures of the night tend to hang around the graves of the newly undead.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)

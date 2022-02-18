@@ -321,7 +321,7 @@ PyObject *level_stat_def_penalty_when_in_shallow_water_at(PyObject *obj, PyObjec
 PyObject *level_stat_def_penalty_when_stuck_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_def_penalty_when_stuck_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_temperature_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_temperature_change_sensitive_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_temperature_change_sensitive_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag100_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag101_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag102_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -361,7 +361,7 @@ PyObject *level_unused_flag132_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag133_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag134_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag135_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag136_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_temperature_sensitive_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_move_speed_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag14_at(PyObject *obj, PyObject *args, PyObject *keywds);

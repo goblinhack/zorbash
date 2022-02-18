@@ -485,7 +485,7 @@ private:
   int _stat_str {};
   int _stat_str_mod {};
   int _temperature {};
-  int _temperature_change_sensitive {};
+  int _is_temperature_change_sensitive {};
   int _unused_chance1_d1000 {};
   int _unused_chance2_d1000 {};
   int _unused_chance3_d1000 {};
@@ -533,7 +533,7 @@ private:
   int _unused_flag133 {};
   int _unused_flag134 {};
   int _unused_flag135 {};
-  int _unused_flag136 {};
+  int _is_temperature_sensitive {};
   int _unused_flag14 {};
   int _unused_flag15 {};
   int _unused_flag16 {};
@@ -1376,7 +1376,7 @@ public:
   int stat_att_mod(void) const { return _stat_att_mod; }
   int stat_str(void) const { return _stat_str; }
   int stat_att(void) const { return _stat_att; }
-  int temperature_change_sensitive(void) const { return _temperature_change_sensitive; }
+  int is_temperature_change_sensitive(void) const { return _is_temperature_change_sensitive; }
   int temperature(void) const { return _temperature; }
   int unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
   int unused_chance2_d1000(void) const { return _unused_chance2_d1000; }
@@ -1423,7 +1423,7 @@ public:
   int unused_flag133(void) const { return _unused_flag133; }
   int unused_flag134(void) const { return _unused_flag134; }
   int unused_flag135(void) const { return _unused_flag135; }
-  int unused_flag136(void) const { return _unused_flag136; }
+  int is_temperature_sensitive(void) const { return _is_temperature_sensitive; }
   int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag14(void) const { return _unused_flag14; }
   int unused_flag15(void) const { return _unused_flag15; }
@@ -1999,7 +1999,7 @@ public:
   void str1_set(const std::string &v) { _str1 = v; }
   void str2_set(const std::string &v) { _str2 = v; }
   void str4_set(const std::string &v) { _str4 = v; }
-  void temperature_change_sensitive_set(int v) { _temperature_change_sensitive = v; }
+  void is_temperature_change_sensitive_set(int v) { _is_temperature_change_sensitive = v; }
   void temperature_set(int v) { _temperature = v; }
   void text_a_or_an_set(const std::string &v) { _text_a_or_an = v; }
   void text_debuff_set(const std::string &v) { _text_debuff = v; }
@@ -2058,7 +2058,7 @@ public:
   void unused_flag133_set(int v) { _unused_flag133 = v; }
   void unused_flag134_set(int v) { _unused_flag134 = v; }
   void unused_flag135_set(int v) { _unused_flag135 = v; }
-  void unused_flag136_set(int v) { _unused_flag136 = v; }
+  void is_temperature_sensitive_set(int v) { _is_temperature_sensitive = v; }
   void unused_flag13_set(int v) { _unused_flag13 = v; }
   void unused_flag14_set(int v) { _unused_flag14 = v; }
   void unused_flag15_set(int v) { _unused_flag15 = v; }

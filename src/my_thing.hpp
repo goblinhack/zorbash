@@ -1529,7 +1529,7 @@ public:
   int stuck_count_set(int);
   int stuck_count(void);
   int submerged_offset_get(void);
-  int temperature_change_sensitive(void);
+  int is_temperature_change_sensitive(void);
   int temperature_decr(int);
   int temperature_decr(void);
   int temperature_get(void);
@@ -1583,7 +1583,7 @@ public:
   int unused_flag133(void);
   int unused_flag134(void);
   int unused_flag135(void);
-  int unused_flag136(void);
+  int is_temperature_sensitive(void);
   int unused_flag13(void);
   int unused_flag14(void);
   int unused_flag15(void);

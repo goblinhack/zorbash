@@ -68,6 +68,7 @@ def tp_init(name, text_name):
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_red_blooded(self, True)
+    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.is_toughness_soft(self, True)
     my.long_text_description(self, "A snarling mass of flying cuteness. They don't see so well, so best to keep far away.")

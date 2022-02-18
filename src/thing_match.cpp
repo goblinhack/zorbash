@@ -1071,7 +1071,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag135() && (what == "unused_flag135")) {
     return true;
   }
-  if (unused_flag136() && (what == "unused_flag136")) {
+  if (is_temperature_sensitive() && (what == "is_temperature_sensitive")) {
     return true;
   }
   if (move_speed() && (what == "move_speed")) {
@@ -1083,7 +1083,7 @@ bool Thing::matches(const std::string &what)
   if (is_cold() && (what == "is_cold")) {
     return true;
   }
-  if (temperature_change_sensitive() && (what == "temperature_change_sensitive")) {
+  if (is_temperature_change_sensitive() && (what == "is_temperature_change_sensitive")) {
     return true;
   }
   if (temperature() && (what == "temperature")) {
@@ -2362,8 +2362,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag135") {
     return &Thing::unused_flag135;
   }
-  if (what == "unused_flag136") {
-    return &Thing::unused_flag136;
+  if (what == "is_temperature_sensitive") {
+    return &Thing::is_temperature_sensitive;
   }
   if (what == "move_speed") {
     return &Thing::move_speed;
@@ -2374,8 +2374,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_cold") {
     return &Thing::is_cold;
   }
-  if (what == "temperature_change_sensitive") {
-    return &Thing::temperature_change_sensitive;
+  if (what == "is_temperature_change_sensitive") {
+    return &Thing::is_temperature_change_sensitive;
   }
   if (what == "temperature") {
     return &Thing::temperature;

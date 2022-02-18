@@ -76,16 +76,7 @@ int Thing::temperature_set(int v)
   return (n);
 }
 
-int Thing::temperature_decr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->temperature -= v);
-  return (n);
-}
+int Thing::temperature_decr(int v) { return temperature_incr(-v); }
 
 int Thing::temperature_incr(int v)
 {
@@ -95,66 +86,77 @@ int Thing::temperature_incr(int v)
     return v;
   }
 
+  if (is_flying()) {
+    return v;
+  }
+  if (is_floating()) {
+    return v;
+  }
+  if (is_dead) {
+    return v;
+  }
+  if (is_undead()) {
+    return v;
+  }
+
   log("Increment temp %d", v);
   TRACE_AND_INDENT();
 
   auto T   = temperature_get();
   bool hit = false;
 
-  if (temperature_change_sensitive()) {
+  if (is_temperature_change_sensitive()) {
     if (v > 0) {
       if (T < 0) {
-        if (is_alive_monst() || is_player()) {
-          auto damage = (v - T) / 10;
-          hit         = true;
-          if (is_stone()) {
-            popup("Crack!");
-            if (is_player()) {
-              msg("%%fg=orange$%s cracks from the change in temperature for %d damage.%%fg=reset$",
-                  text_The().c_str(), damage);
-            } else {
-            }
+        auto damage = (v - T) / 10;
+        hit         = true;
+        if (is_stone()) {
+          popup("Crack!");
+          if (is_player()) {
+            msg("%%fg=orange$%s cracks from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(),
+                damage);
           } else {
-            if (is_player()) {
-              msg("%%fg=orange$%s suffers from the change in temperature for %d damage.%%fg=reset$",
-                  text_The().c_str(), damage);
-            } else {
-            }
+            msg("%s cracks from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(), damage);
           }
-          is_attacked_with_damage_fire(this, damage);
+        } else {
+          if (is_player()) {
+            msg("%%fg=orange$%s suffers from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(),
+                damage);
+          } else {
+            msg("%s suffers from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(), damage);
+          }
         }
+        is_attacked_with_damage_fire(this, damage);
       }
     } else if (v < 0) {
       if (T > 0) {
-        if (is_alive_monst() || is_player()) {
-          auto damage = (T - v) / 10;
-          hit         = true;
-          if (is_stone()) {
-            popup("Crack!");
-            if (is_player()) {
-              msg("%%fg=cyan$%s cracks from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(),
-                  damage);
-            } else {
-              msg("%s cracks from the change in temperature for %d damage.", text_The().c_str(), damage);
-            }
+        auto damage = (T - v) / 10;
+        hit         = true;
+        if (is_stone()) {
+          popup("Crack!");
+          if (is_player()) {
+            msg("%%fg=cyan$%s cracks from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(),
+                damage);
           } else {
-            if (is_player()) {
-              msg("%%fg=cyan$%s suffers from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(),
-                  damage);
-            } else {
-              msg("%s suffers from the change in temperature for %d damage.", text_The().c_str(), damage);
-            }
+            msg("%s cracks from the change in temperature for %d damage.", text_The().c_str(), damage);
           }
-          is_attacked_with_damage_cold(this, damage);
+        } else {
+          if (is_player()) {
+            msg("%%fg=cyan$%s suffers from the change in temperature for %d damage.%%fg=reset$", text_The().c_str(),
+                damage);
+          } else {
+            msg("%s suffers from the change in temperature for %d damage.", text_The().c_str(), damage);
+          }
         }
+        is_attacked_with_damage_cold(this, damage);
       }
     }
   }
 
-  if (game->tick_current != tick_last_i_was_attacked()) {
-    if (! hit) {
-      if (v < -100) {
-        if (is_alive_monst()) {
+  if (is_temperature_sensitive()) {
+    if (game->tick_current != tick_last_i_was_attacked()) {
+      if (! hit) {
+        if (v < -100) {
           if (! is_immune_to_cold() || is_player()) {
             auto damage = abs(v) / 20;
             if (is_stone()) {
@@ -175,9 +177,7 @@ int Thing::temperature_incr(int v)
             }
             is_attacked_with_damage_cold(this, damage);
           }
-        }
-      } else if (v > 100) {
-        if (is_alive_monst() || is_player()) {
+        } else if (v > 100) {
           if (! is_immune_to_fire()) {
             auto damage = abs(v) / 20;
             if (is_stone()) {
@@ -211,34 +211,16 @@ int Thing::temperature_incr(int v)
   auto n = (infop()->temperature += v);
 
   if (n > 1000) {
-    n                        = 1000;
+    n                    = 1000;
     infop()->temperature = v;
   } else if (n < -1000) {
-    n                        = -1000;
+    n                    = -1000;
     infop()->temperature = v;
   }
 
   return (n);
 }
 
-int Thing::temperature_decr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->temperature--);
-  return (n);
-}
+int Thing::temperature_decr(void) { return temperature_incr(-1); }
 
-int Thing::temperature_incr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->temperature++);
-  return (n);
-}
+int Thing::temperature_incr(void) { return temperature_incr(1); }

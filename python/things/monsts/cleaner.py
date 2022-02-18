@@ -75,6 +75,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_red_blood_eater(self, True)
     my.is_steal_item_chance_d1000(self, 200)
     my.is_sticky(self, True)
+    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.is_toughness_soft(self, True)
     my.is_treasure_eater(self, True)
