@@ -138,9 +138,12 @@ Thingp Thing::immediate_owner(void)
     return nullptr;
   }
 
-  auto id = immediate_owner_id();
-  if (likely(id.ok())) {
-    auto i = level->thing_find(id);
+  auto o = immediate_owner_id();
+  if (o == id) {
+    die("Self owned");
+  }
+  if (likely(o.ok())) {
+    auto i = level->thing_find(o);
     if (unlikely(! i)) {
       return nullptr;
     }
