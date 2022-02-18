@@ -260,7 +260,6 @@ static void wid_collect_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int
 void Game::wid_collect_create(const std::list< Thingp > items /* intentional copy */)
 {
   TRACE_AND_INDENT();
-  BOTCON("You lucky thing. Choose an item to collect.");
   DBG2("Thing collect create");
   TRACE_AND_INDENT();
 
@@ -271,6 +270,14 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   if (! player) {
     change_state(Game::STATE_NORMAL);
     ERR("No player");
+    return;
+  }
+
+  //
+  // If moving over a tile with stuff on it, do not pause to collect
+  //
+  if (! player->aip()->move_path.empty()) {
+    change_state(Game::STATE_NORMAL);
     return;
   }
 
@@ -355,6 +362,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     TOPCON("Nothing to carry here.");
     return;
   }
+  BOTCON("You lucky thing. Choose an item to collect.");
 
   auto  m     = TERM_WIDTH / 2;
   point tl    = make_point(m - 35, UI_TOPCON_VIS_HEIGHT + 10);
