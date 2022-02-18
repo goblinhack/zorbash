@@ -17,7 +17,7 @@
 
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 #define __IPHONEOS__
-#include "SDL_opengles.hpp"
+#include "SDL_opengles.h"
 
 #define CreateVertexBuffers(nobuf, bufptr) glGenBuffers(nobuf, bufptr)
 #define DeleteVertexBuffers(nobuf, bufptr) glDeleteBuffers(nobuf, bufptr)
@@ -31,11 +31,11 @@
 #endif
 
 #ifdef _WIN32
-//    #include "GL/glew.hpp"
+//    #include "GL/glew.h"
 #elif __APPLE__
 #include "OpenGL/gl.h"
 #include "OpenGL/glext.h"
-#include "TargetConditionals.hpp"
+#include "TargetConditionals.h"
 
 #if TARGET_IPHONE_SIMULATOR
 // iOS Simulator

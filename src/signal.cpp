@@ -65,6 +65,7 @@ void callstack_dump(void)
 #define PATH_MAX 512
 #endif
 
+#if defined __linux__
 //
 // Should work on linux only.
 //
@@ -123,6 +124,7 @@ static void debug_crash_handler(int sig)
     waitpid(child, nullptr, 0);
   }
 }
+#endif
 
 void segv_handler(int sig)
 {
