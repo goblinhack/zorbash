@@ -65,6 +65,7 @@ def tp_init(name, text_name):
     my.is_moveable(self, True)
     my.is_shovable(self, True)
     my.is_stone(self, True)
+    my.is_temperature_change_sensitive(self, True)
     my.is_tickable(self, True)
     my.is_toughness_very_hard(self, True)
     my.is_undead(self, True)

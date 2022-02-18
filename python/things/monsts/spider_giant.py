@@ -104,6 +104,7 @@ def tp_init(name, text_name):
     my.is_poisonous_danger_level(self, 2)  # danger level
     my.is_shovable(self, True)
     my.is_spider(self, True)
+    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.long_text_description(self, "An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")
     my.monst_size(self, my.MONST_SIZE_GIANT)

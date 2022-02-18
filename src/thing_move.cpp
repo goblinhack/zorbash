@@ -200,20 +200,6 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     return false;
   }
 
-  if (is_able_to_tire()) {
-    if (stamina_get() < 5) {
-      if (is_player()) {
-        if (d20roll_under(stat_con())) {
-          msg("You are so tired but dig deep into your reserves to move!");
-        } else {
-          msg("You cannot move, you are so tired!");
-          game->tick_begin("too tired to move");
-          return false;
-        }
-      }
-    }
-  }
-
   //
   // Don't let minions wander too far from their mob.
   //
@@ -261,6 +247,23 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   // Check for being stuck in webs or something else sticky
   //
   if (up || down || left || right) {
+    //
+    // Too tired to move?
+    //
+    if (is_able_to_tire()) {
+      if (stamina_get() < 5) {
+        if (is_player()) {
+          if (d20roll_under(stat_con())) {
+            msg("You are so tired but dig deep into your reserves to move!");
+          } else {
+            msg("You cannot move, you are so tired!");
+            game->tick_begin("too tired to move");
+            return false;
+          }
+        }
+      }
+    }
+
     //
     // Blocked from moving by something stronger?
     //

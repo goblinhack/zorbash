@@ -63,6 +63,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_obstacle_when_dead(self, True)
     my.is_shovable(self, True)
     my.is_sticky(self, True)
+    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.is_toughness_soft(self, True)
     my.light_color(self, "green")

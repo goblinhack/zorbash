@@ -85,6 +85,7 @@ def tp_init(name, text_name):
     my.is_red_blood_eater(self, True)
     my.is_red_blooded(self, True)
     my.is_shovable(self, True)
+    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.long_text_description(self, "An enormous giant dwarf rat... Blood drips from its teeth. Will eat almost anything, especially you. Sometimes answers to the name of Mr Squeakles.")
     my.monst_size(self, my.MONST_SIZE_LARGE)

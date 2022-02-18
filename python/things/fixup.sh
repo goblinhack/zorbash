@@ -436,11 +436,11 @@ do
       unused_flag133_set \
       unused_flag134_set \
       unused_flag135_set \
-      unused_flag136_set \
+      is_temperature_sensitive_set \
       move_speed_set \
       damage_received_doubled_from_cold_set \
       is_cold_set \
-      temperature_change_sensitive_set \
+      is_temperature_change_sensitive_set \
       temperature_set \
       is_very_heavy_set \
       gfx_health_bar_shown_when_awake_only_set \
