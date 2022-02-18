@@ -49,9 +49,9 @@ public:
   int debug_mode             = false;
   int fps_counter            = false;
   int gfx_allow_highdpi      = false;
-  int gfx_borderless         = true;
+  int gfx_borderless         = false;
   int gfx_fullscreen         = false;
-  int gfx_fullscreen_desktop = true;
+  int gfx_fullscreen_desktop = false;
   int gfx_inverted           = false;
   int gfx_lights             = true;
   int gfx_map_mini           = true;

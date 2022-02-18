@@ -38,9 +38,9 @@ void Config::reset(void)
   debug_mode             = false;
   fps_counter            = false;
   gfx_allow_highdpi      = false;
-  gfx_borderless         = true;
+  gfx_borderless         = false;
   gfx_fullscreen         = false;
-  gfx_fullscreen_desktop = true;
+  gfx_fullscreen_desktop = false;
   gfx_inverted           = false;
   gfx_lights             = true;
   gfx_map_mini           = true;

@@ -517,7 +517,7 @@ void sdl_event(SDL_Event *event)
       }
     case SDL_MOUSEWHEEL :
       {
-        DBG("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
+        CON("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
             event->wheel.windowID);
 
         sdl_get_mouse();
@@ -571,7 +571,7 @@ void sdl_event(SDL_Event *event)
       {
         mouse_down = sdl_get_mouse();
 
-        DBG("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x,
+        CON("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x,
             event->button.y, mouse_down);
 
         auto now             = time_get_time_ms_cached();
@@ -586,7 +586,7 @@ void sdl_event(SDL_Event *event)
       {
         mouse_down = sdl_get_mouse();
 
-        DBG("SDL: Mouse UP: button %d released at %d,%d state %d", event->button.button, event->button.x,
+        CON("SDL: Mouse UP: button %d released at %d,%d state %d", event->button.button, event->button.x,
             event->button.y, mouse_down);
 
         wid_mouse_up(event->button.button, mouse_x, mouse_y);
