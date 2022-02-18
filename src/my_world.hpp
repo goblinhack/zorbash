@@ -7,6 +7,8 @@
 #ifndef _MY_WORLD_HPP_
 #define _MY_WORLD_HPP_
 
+#include <unordered_map>
+
 #include "my_game_defs.hpp"
 #include "my_level.hpp"
 #include "my_point.hpp"

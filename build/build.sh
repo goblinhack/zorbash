@@ -184,7 +184,7 @@ then
     exit 1
 fi
 
-C_FLAGS=`$SDL2_CONFIG --cflags | sed -s 's/ \-D_REENTRANT//g'`
+C_FLAGS=`$SDL2_CONFIG --cflags | sed 's/ \-D_REENTRANT//g'`
 if [ $? -ne 0 ]
 then
     log_err "Please install SDL2."
@@ -681,7 +681,7 @@ CORES=""
 
 case `uname` in
     *Darwin*)
-        CORES=`/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g' | '{print $1}'`
+        CORES=`/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g' | awk '{print $1}'`
     ;;
     *inux*)
         CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
