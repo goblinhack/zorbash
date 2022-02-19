@@ -34,7 +34,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "When carrying this magical map you are able to see all the treasure, food and keys on the current level.")
-    my.noise_on_moving_or_being_carried(self, 15)
+    my.noise_on_moving_or_being_carried(self, 1)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.text_a_or_an(self, "a")

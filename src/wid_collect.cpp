@@ -151,24 +151,24 @@ static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             auto c = wid_event_to_char(key);
             switch (c) {
-              case '1' :
-              case '2' :
-              case '3' :
-              case '4' :
-              case '5' :
-              case '6' :
-              case '7' :
-              case '8' :
-              case '9' : wid_collect_slot(c - '1'); return true;
-              case SDLK_ESCAPE :
+              case '1':
+              case '2':
+              case '3':
+              case '4':
+              case '5':
+              case '6':
+              case '7':
+              case '8':
+              case '9': wid_collect_slot(c - '1'); return true;
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   CON("INF: collect cancelled");
@@ -380,8 +380,13 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   point      tl         = make_point(m - left_half, UI_TOPCON_VIS_HEIGHT + 10);
   point      br         = make_point(m + right_half, tl.y + 25);
   auto       width      = br.x - tl.x;
+  auto       height     = br.y - tl.y;
 
-  wid_collect = new WidPopup("collect", tl, br, nullptr, "", false, true, collect_items.size() * 3);
+  if (items.size() > (height / 3) - 2) {
+    wid_collect = new WidPopup("collect", tl, br, nullptr, "", false, true, collect_items.size() * 3);
+  } else {
+    wid_collect = new WidPopup("collect", tl, br, nullptr, "", false, false, collect_items.size() * 3);
+  }
 
   wid_set_on_key_up(wid_collect->wid_popup_container, wid_collect_key_up);
   wid_set_on_key_down(wid_collect->wid_popup_container, wid_collect_key_down);

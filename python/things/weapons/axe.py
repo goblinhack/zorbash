@@ -7,9 +7,17 @@ def on_use(owner, item, target, x, y):
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
     # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
-    damage = my.thing_damage_melee_get(item)
     enchant = my.thing_enchant_get(item)
+
+    damage = my.thing_damage_melee_get(item)
     my.thing_damage_current_set(owner, damage + enchant)
+
+
+def on_enchant(me, x, y):
+    owner = my.thing_top_owner_id_get(me)
+    if my.thing_is_player(owner):
+        my.thing_msg(me, "The axe glows.")
+    my.thing_stat_att_mod_incr(me, 1)
 
 
 def init_weapon(name, text_name, short_text_name):
@@ -36,6 +44,7 @@ def init_weapon(name, text_name, short_text_name):
     my.is_droppable(self, True)
     my.is_enchantable(self, True)
     my.is_interesting(self, True)
+    my.on_enchant_do(self, "me.on_enchant()")
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_metal(self, True)
@@ -47,15 +56,14 @@ def init_weapon(name, text_name, short_text_name):
     my.is_wooden(self, True)
     my.item_height(self, 6)
     my.item_width(self, 6)
-    my.long_text_description(self, "A gleaming wooden handled axe. It's edge is hungry.")
+    my.long_text_description(self, "A gleaming wooden handled axe. It's a bit short and extra hungry for vengeance. Against what, who can say.")
     my.noise_on_moving_or_being_carried(self, 15)
     my.on_use_do(self, "me.on_use()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy choppy means of justice.")
-    my.text_enchant(self, "+1 damage")
-    my.text_enchant(self, "increase damage by 1")
+    my.text_enchant(self, "+1 DMG, +1 ATT")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
@@ -65,7 +73,7 @@ def init_weapon(name, text_name, short_text_name):
 
 
 def init():
-    init_weapon(name="axe", text_name="single headed axe", short_text_name="short axe")
+    init_weapon(name="axe", text_name="short axe", short_text_name="short axe")
 
 
 init()

@@ -108,7 +108,7 @@ def tp_init(name, text_name, short_text_name):
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
     my.text_description(self, "A wand of energy.")
-    my.text_enchant(self, "+5 charges, +1 damage")
+    my.text_enchant(self, "+5 CHARGE, +1 DMG")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 

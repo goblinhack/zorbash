@@ -52,7 +52,7 @@ def tp_init(name, text_name, short_text_name):
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy pointy means of justice.")
-    my.text_enchant(self, "+1 damage")
+    my.text_enchant(self, "+1 DMG")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
