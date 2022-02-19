@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- evil check for cross                                                                                                                         -->
 <!-- potion of paralysis should paralyse attackers too, so it is useful / vampire?                                                                -->
 <!-- have items that show thigns like +1 defense, -1 strength, +2 dex etc...                                                                      -->
 <!-- luck                                                                                                                                         -->

@@ -90,7 +90,6 @@ void Game::place_player(void)
         level->thing_new("armor_lather", point(x, y - 2));
         level->thing_new("boots_fluffy", point(x, y - 2));
         level->thing_new("shield_woodon", point(x, y - 2));
-        level->thing_new("shield_wooden", point(x, y - 2));
         // level->thing_new("fire", point(x, y - 2));
         level->thing_new("food_frog", point(x, y - 2));
         level->thing_new("thunderstone", point(x, y - 2));
@@ -100,6 +99,9 @@ void Game::place_player(void)
         // level->thing_new("zorb_pack", point(x + 2, y));
         // level->assign_leaders_and_followers();
       }
+      // level->thing_new("key_pair", point(x - 1, y - 2));
+      level->thing_new("key_golden", point(x - 1, y + 2));
+      // level->thing_new("key_penta", point(x, y + 2));
 
       LOG("INF: Placed player");
 
