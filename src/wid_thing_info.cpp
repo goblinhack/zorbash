@@ -214,7 +214,6 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
     IF_DEBUG2 { t->topcon("compact over"); }
 
-    wid_thing_info_add_rarity(wid_popup_window, t);
     //
     // Not sure if we will have shops
     //
@@ -529,27 +528,21 @@ void Game::wid_thing_info_add_rarity(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
 
-  auto        tp = t->tp();
-  std::string text;
+  auto tp = t->tp();
   if (t->is_collectable() || t->is_monst()) {
     if (tp->rarity() == THING_RARITY_UNCOMMON) {
-      text = "Uncommon";
+      w->log("This item is uncommon", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (tp->rarity() == THING_RARITY_RARE) {
-      text = "Rare";
+      w->log("This item is rare.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-      text = "Very rare";
+      w->log("This item is very rare.", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-      text = "Unique";
+      w->log("This item is unique!", true);
+      w->log(UI_LOGGING_EMPTY_LINE);
     }
-  }
-
-  if (! text.empty()) {
-    char tmp[ MAXSHORTSTR ];
-    char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%s", text.c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rarity %17s````", tmp2);
-    w->log(tmp);
-    w->log(UI_LOGGING_EMPTY_LINE);
   }
 }
 
@@ -568,7 +561,7 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->gold_value_dice_str().c_str());
     }
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value in gold%15s", tmp2);
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value        %15s", tmp2);
     w->log(tmp);
   }
 }
@@ -593,7 +586,7 @@ void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t)
       } else {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->nutrition_dice_str().c_str());
       }
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %21s", tmp2);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Nutrition %18s", tmp2);
       w->log(tmp);
     }
   }
