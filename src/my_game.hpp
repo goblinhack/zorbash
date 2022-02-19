@@ -53,10 +53,8 @@ public:
   int gfx_fullscreen         = false;
   int gfx_fullscreen_desktop = false;
   int gfx_inverted           = false;
-  int gfx_lights             = true;
-  int gfx_map_mini           = true;
   int gfx_show_hidden        = false;
-  int gfx_vsync_enable       = true;
+  int gfx_vsync_enable       = false;
   int gfx_vsync_locked       = false;
 
   int32_t config_pix_height = {};

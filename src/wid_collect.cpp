@@ -257,6 +257,15 @@ static void wid_collect_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int
   }
 }
 
+static uint8_t wid_collect_close(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  DBG3("Inventory: close");
+  TRACE_AND_INDENT();
+
+  wid_collect_destroy();
+  return true;
+}
+
 void Game::wid_collect_create(const std::list< Thingp > items /* intentional copy */)
 {
   TRACE_AND_INDENT();
@@ -364,10 +373,13 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   }
   BOTCON("You lucky thing. Choose an item to collect.");
 
-  auto  m     = TERM_WIDTH / 2;
-  point tl    = make_point(m - 35, UI_TOPCON_VIS_HEIGHT + 10);
-  point br    = make_point(m + 35, tl.y + 25);
-  auto  width = br.x - tl.x;
+  auto       m          = TERM_WIDTH / 2;
+  static int wid_width  = 70;
+  int        left_half  = wid_width / 2;
+  int        right_half = wid_width - left_half;
+  point      tl         = make_point(m - left_half, UI_TOPCON_VIS_HEIGHT + 10);
+  point      br         = make_point(m + right_half, tl.y + 25);
+  auto       width      = br.x - tl.x;
 
   wid_collect = new WidPopup("collect", tl, br, nullptr, "", false, true, collect_items.size() * 3);
 
@@ -380,7 +392,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     wid_collect->log("Choose something to collect");
   }
 
-  int y_at = 3;
+  int y_at = 4;
   for (auto slot = 0; slot < (int) collect_items.size(); slot++) {
     auto  p  = wid_collect->wid_text_area->wid_text_area;
     auto  w  = wid_new_container(p, "item slot");
@@ -448,6 +460,24 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     wid_update(w);
 
     y_at += 3;
+  }
+
+  {
+    auto  w = wid_new_square_button(wid_collect->wid_popup_container, "wid collect window close");
+    point tl(0, 0);
+    point br(3, 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "ui_icon_close");
+    wid_set_on_mouse_up(w, wid_collect_close);
+  }
+
+  {
+    auto  w = wid_new_square_button(wid_collect->wid_popup_container, "wid collect window close");
+    point tl(wid_width - 3, 0);
+    point br(wid_width - 0, 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "ui_icon_close");
+    wid_set_on_mouse_up(w, wid_collect_close);
   }
 
   wid_update(wid_collect->wid_text_area->wid_text_area);

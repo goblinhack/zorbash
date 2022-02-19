@@ -740,7 +740,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(my.t.gfx_fullscreen);
   out << bits(my.t.gfx_fullscreen_desktop);
   out << bits(my.t.gfx_inverted);
-  out << bits(my.t.gfx_map_mini);
   out << bits(my.t.gfx_show_hidden);
   out << bits(my.t.gfx_vsync_enable);
   out << bits(my.t.tile_height);
@@ -1054,25 +1053,25 @@ static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case '0' :
-              case '1' :
-              case '2' :
-              case '3' :
-              case '4' :
-              case '5' :
-              case '6' :
-              case '7' :
-              case '8' :
-              case '9' :
+              case '0':
+              case '1':
+              case '2':
+              case '3':
+              case '4':
+              case '5':
+              case '6':
+              case '7':
+              case '8':
+              case '9':
                 {
                   TRACE_AND_INDENT();
                   int slot = c - '0';
@@ -1080,8 +1079,8 @@ static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)
                   wid_save_destroy();
                   return true;
                 }
-              case 'b' :
-              case SDLK_ESCAPE :
+              case 'b':
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   CON("INF: Save game cancelled");

@@ -15,10 +15,6 @@
 
 void Level::display_map_mini(void)
 {
-  if (unlikely(! game->config.gfx_map_mini)) {
-    return;
-  }
-
   float tlx = map_mini_tl.x * game->config.ascii_gl_width;
   float tly = map_mini_tl.y * game->config.ascii_gl_height;
 
@@ -44,7 +40,7 @@ void Level::display_map_mini(void)
   auto old_map_mini_over = game->map_mini_over;
   if ((mouse_x >= tlx) && (mouse_x <= brx) && (mouse_y >= tly) && (mouse_y <= bry)) {
     game->map_mini_over = make_point(((float) (mouse_x - tlx) / (brx - tlx)) * MAP_WIDTH,
-                                    ((float) (mouse_y - tly) / (bry - tly)) * MAP_HEIGHT);
+                                     ((float) (mouse_y - tly) / (bry - tly)) * MAP_HEIGHT);
 
     point to(game->map_mini_over.x, game->map_mini_over.y);
     if (cursor) {

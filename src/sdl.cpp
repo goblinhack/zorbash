@@ -401,28 +401,28 @@ int sdl_filter_events(void *userdata, SDL_Event *event)
 
   switch (event->type) {
     // This is important!  Queue it if we want to quit. */
-    case SDL_QUIT : return 1;
+    case SDL_QUIT: return 1;
 
     // Mouse and keyboard events go to threads */
-    case SDL_MOUSEMOTION :
-    case SDL_MOUSEBUTTONDOWN :
-    case SDL_MOUSEBUTTONUP :
-    case SDL_MOUSEWHEEL :
-    case SDL_KEYDOWN :
-    case SDL_KEYUP :
-    case SDL_CONTROLLERDEVICEADDED :
-    case SDL_CONTROLLERBUTTONDOWN :
-    case SDL_CONTROLLERBUTTONUP :
-    case SDL_CONTROLLERAXISMOTION :
-    case SDL_JOYAXISMOTION : // Joystick axis motion
-    case SDL_JOYBALLMOTION : // Joystick trackball motion
-    case SDL_JOYHATMOTION :  // Joystick hat position change
-    case SDL_JOYBUTTONDOWN : // Joystick button pressed
-    case SDL_JOYBUTTONUP :   // Joystick button released
+    case SDL_MOUSEMOTION:
+    case SDL_MOUSEBUTTONDOWN:
+    case SDL_MOUSEBUTTONUP:
+    case SDL_MOUSEWHEEL:
+    case SDL_KEYDOWN:
+    case SDL_KEYUP:
+    case SDL_CONTROLLERDEVICEADDED:
+    case SDL_CONTROLLERBUTTONDOWN:
+    case SDL_CONTROLLERBUTTONUP:
+    case SDL_CONTROLLERAXISMOTION:
+    case SDL_JOYAXISMOTION: // Joystick axis motion
+    case SDL_JOYBALLMOTION: // Joystick trackball motion
+    case SDL_JOYHATMOTION:  // Joystick hat position change
+    case SDL_JOYBUTTONDOWN: // Joystick button pressed
+    case SDL_JOYBUTTONUP:   // Joystick button released
       return 1;
 
     // Drop all other events
-    default : return 0;
+    default: return 0;
   }
 }
 
@@ -436,7 +436,7 @@ void sdl_event(SDL_Event *event)
   static struct SDL_Keysym last_key_pressed;
 
   switch (event->type) {
-    case SDL_KEYDOWN :
+    case SDL_KEYDOWN:
       {
         key = &event->key.keysym;
 
@@ -482,7 +482,7 @@ void sdl_event(SDL_Event *event)
         sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
         break;
       }
-    case SDL_KEYUP :
+    case SDL_KEYUP:
       {
         if (g_grab_next_key) {
           DBG("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
@@ -510,12 +510,12 @@ void sdl_event(SDL_Event *event)
         sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
         break;
       }
-    case SDL_TEXTINPUT :
+    case SDL_TEXTINPUT:
       {
         DBG("SDL: Keyboard: Text input \"%s\" in window %d", event->text.text, event->text.windowID);
         break;
       }
-    case SDL_MOUSEWHEEL :
+    case SDL_MOUSEWHEEL:
       {
         CON("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
             event->wheel.windowID);
@@ -555,7 +555,7 @@ void sdl_event(SDL_Event *event)
         wid_mouse_motion(mouse_x, mouse_y, 0, 0, -wheel_x, wheel_y);
         break;
       }
-    case SDL_MOUSEMOTION :
+    case SDL_MOUSEMOTION:
       {
         mouse_down = sdl_get_mouse();
 
@@ -567,7 +567,7 @@ void sdl_event(SDL_Event *event)
         wid_mouse_motion(mouse_x, mouse_y, event->motion.xrel, event->motion.yrel, 0, 0);
         break;
       }
-    case SDL_MOUSEBUTTONDOWN :
+    case SDL_MOUSEBUTTONDOWN:
       {
         mouse_down = sdl_get_mouse();
 
@@ -582,7 +582,7 @@ void sdl_event(SDL_Event *event)
         mouse_down_when = now;
         break;
       }
-    case SDL_MOUSEBUTTONUP :
+    case SDL_MOUSEBUTTONUP:
       {
         mouse_down = sdl_get_mouse();
 
@@ -592,7 +592,7 @@ void sdl_event(SDL_Event *event)
         wid_mouse_up(event->button.button, mouse_x, mouse_y);
         break;
       }
-    case SDL_JOYAXISMOTION :
+    case SDL_JOYAXISMOTION:
       {
         DBG("SDL: Joystick %d: Axis %d moved by %d", event->jaxis.which, event->jaxis.axis, event->jaxis.value);
 
@@ -631,75 +631,75 @@ void sdl_event(SDL_Event *event)
 
         break;
       }
-    case SDL_JOYBALLMOTION :
+    case SDL_JOYBALLMOTION:
       {
         DBG("SDL: Joystick %d: Ball %d moved by %d,%d", event->jball.which, event->jball.ball, event->jball.xrel,
             event->jball.yrel);
         break;
       }
-    case SDL_JOYHATMOTION :
+    case SDL_JOYHATMOTION:
       {
         DBG("SDL: Joystick %d: Hat %d moved to ", event->jhat.which, event->jhat.hat);
 
         switch (event->jhat.value) {
-          case SDL_HAT_CENTERED : break;
-          case SDL_HAT_UP :
+          case SDL_HAT_CENTERED: break;
+          case SDL_HAT_UP:
             {
               DBG("SDL: UP");
               sdl_joy2_up = true;
               break;
             }
-          case SDL_HAT_RIGHTUP :
+          case SDL_HAT_RIGHTUP:
             {
               DBG("SDL: RIGHTUP");
               sdl_joy2_right = true;
               sdl_joy2_up    = true;
               break;
             }
-          case SDL_HAT_RIGHT :
+          case SDL_HAT_RIGHT:
             {
               DBG("SDL: RIGHT");
               sdl_joy2_right = true;
               break;
             }
-          case SDL_HAT_RIGHTDOWN :
+          case SDL_HAT_RIGHTDOWN:
             {
               DBG("SDL: RIGHTDOWN");
               sdl_joy2_right = true;
               sdl_joy2_down  = true;
               break;
             }
-          case SDL_HAT_DOWN :
+          case SDL_HAT_DOWN:
             {
               DBG("SDL: DOWN");
               sdl_joy2_down = true;
               break;
             }
-          case SDL_HAT_LEFTDOWN :
+          case SDL_HAT_LEFTDOWN:
             {
               DBG("SDL: LEFTDOWN");
               sdl_joy2_left = true;
               sdl_joy2_down = true;
               break;
             }
-          case SDL_HAT_LEFT :
+          case SDL_HAT_LEFT:
             {
               DBG("SDL: LEFT");
               sdl_joy2_left = true;
               break;
             }
-          case SDL_HAT_LEFTUP :
+          case SDL_HAT_LEFTUP:
             {
               sdl_joy2_left = true;
               sdl_joy2_up   = true;
               DBG("SDL: LEFTUP");
               break;
             }
-          default : DBG("SDL: UNKNOWN"); break;
+          default: DBG("SDL: UNKNOWN"); break;
         }
         break;
       }
-    case SDL_JOYBUTTONDOWN :
+    case SDL_JOYBUTTONDOWN:
       {
         DBG("SDL: Joystick %d: Button %d pressed", event->jbutton.which, event->jbutton.button);
         set(sdl_joy_buttons, event->jbutton.button, (uint8_t) 1);
@@ -707,18 +707,18 @@ void sdl_event(SDL_Event *event)
         wid_joy_button(mouse_x, mouse_y);
         break;
       }
-    case SDL_JOYBUTTONUP :
+    case SDL_JOYBUTTONUP:
       {
         DBG("SDL: Joystick %d: Button %d released", event->jbutton.which, event->jbutton.button);
         set(sdl_joy_buttons, event->jbutton.button, (uint8_t) 0);
         break;
       }
-    case SDL_CLIPBOARDUPDATE :
+    case SDL_CLIPBOARDUPDATE:
       {
         DBG("SDL: Clipboard updated");
         break;
       }
-    case SDL_QUIT :
+    case SDL_QUIT:
       {
 #ifdef ENABLE_UI_ASCII_MOUSE
         SDL_ShowCursor(1);
@@ -726,12 +726,12 @@ void sdl_event(SDL_Event *event)
         DIE("Quit requested");
         break;
       }
-    case SDL_USEREVENT :
+    case SDL_USEREVENT:
       {
         DBG("SDL: User event %d", event->user.code);
         break;
       }
-    default :
+    default:
       {
         DBG("SDL: Unknown event %d", event->type);
         break;
@@ -1001,47 +1001,6 @@ uint8_t config_gfx_inverted_set(tokens_t *tokens, void *context)
       CON("GFX inverted enabled");
     } else {
       CON("GFX inverted disabled");
-    }
-  }
-
-  return true;
-}
-
-//
-// User has entered a command, run it
-//
-void config_gfx_map_mini_toggle(void)
-{
-  TRACE_NO_INDENT();
-
-  if (! game->config.gfx_map_mini) {
-    game->config.gfx_map_mini = true;
-    CON("GFX map enabled");
-  } else {
-    game->config.gfx_map_mini = false;
-    CON("GFX map disabled");
-  }
-}
-
-//
-// User has entered a command, run it
-//
-uint8_t config_gfx_map_mini_set(tokens_t *tokens, void *context)
-{
-  TRACE_NO_INDENT();
-
-  char *s = tokens->args[ 3 ];
-
-  if (! s || (*s == '\0')) {
-    game->config.gfx_map_mini = true;
-    CON("GFX map enabled (default)");
-  } else {
-    int val                   = strtol(s, 0, 10) ? 1 : 0;
-    game->config.gfx_map_mini = val;
-    if (game->config.gfx_map_mini) {
-      CON("GFX map enabled");
-    } else {
-      CON("GFX map disabled");
     }
   }
 

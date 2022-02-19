@@ -101,15 +101,23 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
           continue;
         }
 
-        if (t->is_door() && t->is_open) {
-          t->close_door(t);
-          return true;
-        }
+        if (! t->is_dead) {
+          //
+          // If the door is not broken, we can close it
+          //
+          if (t->is_door() && t->is_open) {
+            t->close_door(t);
+            return true;
+          }
 
-        if (t->is_door() || t->is_alive_monst() || t->is_mob()) {
-          player->log("Close enough to attack");
-          player->attack(level->cursor->curr_at);
-          return true;
+          //
+          // Attack
+          //
+          if (t->is_door() || t->is_monst() || t->is_mob()) {
+            player->log("Close enough to attack");
+            player->attack(level->cursor->curr_at);
+            return true;
+          }
         }
       }
       FOR_ALL_THINGS_END()
@@ -124,6 +132,7 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
     auto to = level->cursor->curr_at;
     FOR_ALL_THINGS(level, t, to.x, to.y)
     {
+      t->topcon("mouse");
       if (t->is_hidden) {
         continue;
       }
@@ -147,21 +156,9 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
   // click check so we do not try to collect things in lava.
   //
   if (level->cursor) {
-    if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&
-        (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
-      //
-      // If more than one item, best to let the player move their and
-      // open the collect popup.
-      //
+    if (player->curr_at == level->cursor->curr_at) {
       auto items = player->anything_to_carry_at(player->curr_at);
-      if (items.size() == 1) {
-        for (auto item : items) {
-          player->log("Close enough to collect");
-          if (player->try_to_carry(item)) {
-            return true;
-          }
-        }
-      } else if (items.size()) {
+      if (items.size()) {
         game->wid_collect_create(items);
       }
     }

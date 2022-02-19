@@ -95,7 +95,6 @@ uint8_t config_fps_counter_set(tokensp, void *context);
 uint8_t config_game_pix_zoom_set(tokensp, void *context);
 uint8_t config_gfx_inverted_set(tokensp, void *context);
 uint8_t config_gfx_lights_set(tokensp, void *context);
-uint8_t config_gfx_map_mini_set(tokensp, void *context);
 uint8_t config_gfx_vsync_enable(tokensp, void *context);
 uint8_t sdl_init(void);
 uint8_t sdl_user_exit(struct tokens_t_ *tokens, void *context);
