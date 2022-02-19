@@ -693,7 +693,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
   blit_init();
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
+      FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
         for (auto &l : t->light_get()) {
 
@@ -773,7 +773,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
 
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
-      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
+      FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
         for (auto &l : t->light_get()) {
 
@@ -873,7 +873,7 @@ void Level::lights_update_new_level(void)
   TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
+      FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
         //
         // Need to do this as light position depends on blitting
@@ -897,7 +897,7 @@ void Level::lights_update_same_level(void)
   TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y)
+      FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
         for (auto &l : t->light_get()) {
           l->update();

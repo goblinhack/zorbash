@@ -110,13 +110,13 @@ void Thing::init_lights(void)
     has_light = true;
     dbg("Player created");
   } else {
-    if (unlikely(light_power_get())) {
+    if (unlikely(initial_light_power_get())) {
       std::string l = light_color();
       if (l.empty()) {
         l = "white";
       }
       color c = string2color(l);
-      new_light(point(0, 0), light_power_get(), 0, c, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(0, 0), initial_light_power_get(), 1, c, FBO_PLAYER_VISIBLE_LIGHTING);
       has_light = true;
     }
   }

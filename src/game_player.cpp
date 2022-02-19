@@ -100,8 +100,8 @@ void Game::place_player(void)
         // level->assign_leaders_and_followers();
       }
       // level->thing_new("key_pair", point(x - 1, y - 2));
-      level->thing_new("key_golden", point(x - 1, y + 2));
-      // level->thing_new("key_penta", point(x, y + 2));
+      // level->thing_new("key_golden", point(x - 1, y + 2));
+      level->thing_new("key_penta", point(x, y + 12));
 
       LOG("INF: Placed player");
 

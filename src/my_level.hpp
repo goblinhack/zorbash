@@ -511,7 +511,7 @@ public:
     continue;                                                                                                        \
   }
 
-#define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                                                                      \
+#define FOR_ALL_LIGHTS_AT(level, t, x, y)                                                                      \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
   if (likely(! t->has_light)) {                                                                                      \
     continue;                                                                                                        \
