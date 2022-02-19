@@ -1706,7 +1706,7 @@ def init_tiles_16x16():
         "",
         "",
         "",
-        "",
+        "medal",
         "bag_s",
         "bag_l",
         "thunderstone",
