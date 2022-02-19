@@ -236,7 +236,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
 
   if (item->is_collect_as_keys()) {
     wid_thing_info_fini();
-    keys_incr(1);
+    keys_incr(item->is_key());
     inventory_particle(item, itemsp->inventory_shortcuts.size() - 1);
     item->dead("by being collected");
 
