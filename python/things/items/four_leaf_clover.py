@@ -17,7 +17,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
-    my.is_treasure_class_a(self, True)
+    my.is_treasure_class_b(self, True)
     my.is_food(self, True)
     my.is_crushable(self, True)
     my.is_treasure(self, True)
