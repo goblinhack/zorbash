@@ -22,7 +22,7 @@ def key_init(name, text_name):
     my.is_metal(self, True)
     my.is_moveable(self, True)
     my.light_color(self, "yellow")
-    my.light_power(self, 5)
+    my.light_power(self, 2)
     my.rarity(self, my.RARITY_RARE)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
