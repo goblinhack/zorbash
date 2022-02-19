@@ -259,7 +259,7 @@ static void wid_collect_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int
 
 static uint8_t wid_collect_close(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  DBG3("Inventory: close");
+  DBG3("Thing collect: close");
   TRACE_AND_INDENT();
 
   wid_collect_destroy();
@@ -269,9 +269,10 @@ static uint8_t wid_collect_close(Widp w, int32_t x, int32_t y, uint32_t button)
 void Game::wid_collect_create(const std::list< Thingp > items /* intentional copy */)
 {
   TRACE_AND_INDENT();
-  DBG2("Thing collect create");
+  DBG("Thing collect create");
   TRACE_AND_INDENT();
 
+  wid_collect_destroy();
   wid_thing_info_fini();
   change_state(Game::STATE_COLLECTING_ITEMS);
 

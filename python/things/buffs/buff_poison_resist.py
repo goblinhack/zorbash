@@ -126,7 +126,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="buff_poison_resist", text_name="poison lover")
+    tp_init(name="buff_poison_resist", text_name="poison resist")
 
 
 init()

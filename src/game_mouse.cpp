@@ -52,7 +52,9 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
     return false;
   }
 
+  player->log("Mouse down");
   wid_thing_info_fini();
+
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     player->log("Chosen target");
     if (game->request_to_throw_item) {
@@ -84,92 +86,92 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
     return true;
   }
 
-  player->log("Mouse down");
+  if (game->state == Game::STATE_NORMAL) {
+    //
+    // Have we moved close enough to attack? Do this prior to checking for
+    // double click so we can attack monsts sitting in lava
+    //
+    if (level->cursor) {
+      if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&
+          (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
+        int x = level->cursor->curr_at.x;
+        int y = level->cursor->curr_at.y;
+        FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
+        {
+          if (t == level->player) {
+            continue;
+          }
 
-  //
-  // Have we moved close enough to attack? Do this prior to checking for
-  // double click so we can attack monsts sitting in lava
-  //
-  if (level->cursor) {
-    if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&
-        (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
-      int x = level->cursor->curr_at.x;
-      int y = level->cursor->curr_at.y;
-      FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
+          if (! t->is_dead) {
+            //
+            // If the door is not broken, we can close it
+            //
+            if (t->is_door() && t->is_open) {
+              t->close_door(t);
+              return true;
+            }
+
+            //
+            // Attack
+            //
+            if (t->is_door() || t->is_monst() || t->is_mob()) {
+              player->log("Close enough to attack");
+              player->attack(level->cursor->curr_at);
+              return true;
+            }
+          }
+        }
+        FOR_ALL_THINGS_END()
+      }
+    }
+
+    //
+    // If hovering over a double click thing then don't jump in unless
+    // the user really means it.
+    //
+    if (! wid_mouse_two_clicks) {
+      auto to = level->cursor->curr_at;
+      FOR_ALL_THINGS(level, t, to.x, to.y)
       {
-        if (t == level->player) {
+        t->topcon("mouse");
+        if (t->is_hidden) {
           continue;
         }
-
-        if (! t->is_dead) {
-          //
-          // If the door is not broken, we can close it
-          //
-          if (t->is_door() && t->is_open) {
-            t->close_door(t);
-            return true;
+        if (t->is_cursor_can_hover_over_x2_click()) {
+          player->log("Needs double click");
+          if (level->is_chasm(to)) {
+            TOPCON("Double click to jump into the abyss.");
+          } else if (level->is_lava(to)) {
+            TOPCON("Double click to jump into the lava.");
+          } else {
+            TOPCON("Double click to move to move onto that.");
           }
-
-          //
-          // Attack
-          //
-          if (t->is_door() || t->is_monst() || t->is_mob()) {
-            player->log("Close enough to attack");
-            player->attack(level->cursor->curr_at);
-            return true;
-          }
+          return true;
         }
       }
       FOR_ALL_THINGS_END()
     }
-  }
 
-  //
-  // If hovering over a double click thing then don't jump in unless
-  // the user really means it.
-  //
-  if (! wid_mouse_two_clicks) {
-    auto to = level->cursor->curr_at;
-    FOR_ALL_THINGS(level, t, to.x, to.y)
-    {
-      t->topcon("mouse");
-      if (t->is_hidden) {
-        continue;
-      }
-      if (t->is_cursor_can_hover_over_x2_click()) {
-        player->log("Needs double click");
-        if (level->is_chasm(to)) {
-          TOPCON("Double click to jump into the abyss.");
-        } else if (level->is_lava(to)) {
-          TOPCON("Double click to jump into the lava.");
-        } else {
-          TOPCON("Double click to move to move onto that.");
+    //
+    // Have we moved close enough to collect? Do this after the double
+    // click check so we do not try to collect things in lava.
+    //
+    if (level->cursor) {
+      if (player->curr_at == level->cursor->curr_at) {
+        auto items = player->anything_to_carry_at(player->curr_at);
+        if (items.size()) {
+          game->wid_collect_create(items);
         }
-        return true;
       }
     }
-    FOR_ALL_THINGS_END()
-  }
 
-  //
-  // Have we moved close enough to collect? Do this after the double
-  // click check so we do not try to collect things in lava.
-  //
-  if (level->cursor) {
-    if (player->curr_at == level->cursor->curr_at) {
-      auto items = player->anything_to_carry_at(player->curr_at);
-      if (items.size()) {
-        game->wid_collect_create(items);
-      }
+    //
+    // Grab the current move path and start walking toward it. This will
+    // consume one move by the player.
+    //
+    if (player->cursor_path_pop_first_move()) {
+      return true;
     }
-  }
-
-  //
-  // Grab the current move path and start walking toward it. This will
-  // consume one move by the player.
-  //
-  if (player->cursor_path_pop_first_move()) {
-    return true;
   }
 
   return false;

@@ -47,7 +47,7 @@ def tp_init(name, text_name):
     my.attack_meat(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
-    my.damage_natural_attack_type(self, "claw")
+    my.damage_natural_attack_type(self, "gore")
     my.damage_natural_dice(self, "1d3")
     my.damage_received_doubled_from_water(self, True)
     my.distance_avoid(self, 4)
