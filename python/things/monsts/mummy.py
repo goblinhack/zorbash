@@ -38,7 +38,7 @@ def tp_init(name, text_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.damage_natural_attack_chance_d1000(self, 950)
-    my.damage_natural_attack_type(self, "claw")
+    my.damage_natural_attack_type(self, "gore")
     my.damage_natural_dice(self, "1d6+10")
     my.damage_necrosis_chance_d1000(self, 50)
     my.damage_necrosis_dice(self, "1")

@@ -41,7 +41,7 @@ def tp_init(name, text_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
-    my.damage_natural_attack_type(self, "claw")
+    my.damage_natural_attack_type(self, "gore")
     my.damage_natural_dice(self, "1d4+2")
     my.distance_avoid(self, 5)
     my.distance_jump(self, 3)

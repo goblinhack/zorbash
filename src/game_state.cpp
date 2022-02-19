@@ -32,7 +32,7 @@ void Game::change_state(int new_state)
   state = new_state;
 
   switch (new_state) {
-    case STATE_NORMAL :
+    case STATE_NORMAL:
       // backtrace_dump();
       LOG("State changing to STATE_NORMAL");
       wid_thing_info_fini();
@@ -45,34 +45,34 @@ void Game::change_state(int new_state)
       wid_quit_destroy();
       LOG("State changed to STATE_NORMAL");
       break;
-    case STATE_OPTIONS_FOR_ITEM_MENU : LOG("State changed to STATE_OPTIONS_FOR_ITEM_MENU"); break;
-    case STATE_INVENTORY : // Currently managing inventory
+    case STATE_OPTIONS_FOR_ITEM_MENU: LOG("State changed to STATE_OPTIONS_FOR_ITEM_MENU"); break;
+    case STATE_INVENTORY: // Currently managing inventory
       LOG("State changed to STATE_INVENTORY");
       break;
-    case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
+    case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
       LOG("State changing to STATE_COLLECTING_ITEMS");
       wid_thing_info_fini();
       wid_collect_destroy();
       LOG("State changed to STATE_COLLECTING_ITEMS");
       break;
-    case STATE_ENCHANTING_ITEMS :
+    case STATE_ENCHANTING_ITEMS:
       LOG("State changing to STATE_ENCHANTING_ITEMS");
       wid_enchant_destroy();
       LOG("State changed to STATE_ENCHANTING_ITEMS");
       break;
-    case STATE_CHOOSING_SKILLS :
+    case STATE_CHOOSING_SKILLS:
       LOG("State changing to STATE_CHOOSING_SKILLS");
       wid_choose_skill_destroy();
       LOG("State changed to STATE_CHOOSING_SKILLS");
       break;
-    case STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
+    case STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
       LOG("State changing to STATE_CHOOSING_TARGET");
       wid_thing_info_fini();
       LOG("State changed to STATE_CHOOSING_TARGET");
       break;
-    case STATE_LOAD_MENU :
-    case STATE_SAVE_MENU :
-    case STATE_QUIT_MENU : wid_thing_info_fini(); break;
+    case STATE_LOAD_MENU:
+    case STATE_SAVE_MENU:
+    case STATE_QUIT_MENU: wid_thing_info_fini(); break;
   }
 
   //
@@ -85,11 +85,11 @@ void Game::change_state(int new_state)
   request_to_fire_item  = nullptr;
 
   switch (old_state) {
-    case STATE_NORMAL :
-    case STATE_INVENTORY :        // Currently managing inventory
-    case STATE_COLLECTING_ITEMS : // Collecting en masse from the level
-    case STATE_ENCHANTING_ITEMS :
-    case STATE_CHOOSING_SKILLS :
+    case STATE_NORMAL:
+    case STATE_INVENTORY:        // Currently managing inventory
+    case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+    case STATE_ENCHANTING_ITEMS:
+    case STATE_CHOOSING_SKILLS:
       if (level) {
         level->cursor_recreate();
         if (level->cursor) {
@@ -97,7 +97,7 @@ void Game::change_state(int new_state)
         }
       }
       break;
-    case STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
+    case STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
       //
       // Don't create the cursor right after selecting. Wait until
       // we move again.

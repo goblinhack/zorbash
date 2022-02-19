@@ -245,7 +245,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (attack_poison) {
     if (! damage) {
-      real_hitter->log("No poison damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no poison damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no poison damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str());
@@ -253,7 +257,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_future1) {
     if (! damage) {
-      real_hitter->log("No damage_future1 damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no future1 damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no future1 damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_short_string().c_str());
@@ -261,7 +269,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_future2) {
     if (! damage) {
-      real_hitter->log("No damage_future2 damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no future2 damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no future2 damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_short_string().c_str());
@@ -269,7 +281,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_future3) {
     if (! damage) {
-      real_hitter->log("No damage_future3 damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no future3 damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no future3 damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_short_string().c_str());
@@ -277,7 +293,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_cold) {
     if (! damage) {
-      real_hitter->log("No damage_cold damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no cold damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no cold damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_cold damage %d on %s", damage, to_short_string().c_str());
@@ -285,7 +305,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_fire) {
     if (! damage) {
-      real_hitter->log("No damage_fire damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no fire damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no fire damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_fire damage %d on %s", damage, to_short_string().c_str());
@@ -298,7 +322,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
 
     if (! damage) {
-      real_hitter->log("No damage_crush damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no crush damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no crush damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_crush damage %d on %s", damage, to_short_string().c_str());
@@ -306,7 +334,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_lightning) {
     if (! damage) {
-      real_hitter->log("No damage_lightning damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no lightning damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no lightning damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_short_string().c_str());
@@ -314,7 +346,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_energy) {
     if (! damage) {
-      real_hitter->log("No damage_energy damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no energy damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no energy damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_energy damage %d on %s", damage, to_short_string().c_str());
@@ -322,7 +358,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_acid) {
     if (! damage) {
-      real_hitter->log("No damage_acid damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no acid damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no acid damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_acid damage %d on %s", damage, to_short_string().c_str());
@@ -330,7 +370,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_digest) {
     if (! damage) {
-      real_hitter->log("No damage_digest damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no digest damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no digest damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack damage_digest damage %d on %s", damage, to_short_string().c_str());
@@ -338,7 +382,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_necrosis) {
     if (! damage) {
-      real_hitter->log("No necrosis damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no necrosis damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no necrosis damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str());
@@ -346,7 +394,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_natural) {
     if (! damage) {
-      real_hitter->log("No natural attack damage on %s", to_short_string().c_str());
+      damage_type = real_hitter->damage_natural_attack_type();
+      if (is_player()) {
+        msg("You take no %s damage!", damage_type.c_str());
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no %s damage!", text_The().c_str(), damage_type.c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str());
@@ -354,7 +407,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else {
     if (! damage) {
-      real_hitter->log("No melee damage on %s", to_short_string().c_str());
+      if (is_player()) {
+        msg("You take no attack damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no attack damage!", text_The().c_str());
+      }
       return false;
     } else {
       real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str());
@@ -462,9 +519,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
   } else if (hitter->is_monst()) {
     switch (hitter->try_to_shove_into_hazard(this, delta)) {
-      case THING_SHOVE_TRIED_AND_FAILED : return true;
-      case THING_SHOVE_TRIED_AND_PASSED : return true;
-      case THING_SHOVE_NEVER_TRIED : break;
+      case THING_SHOVE_TRIED_AND_FAILED: return true;
+      case THING_SHOVE_TRIED_AND_PASSED: return true;
+      case THING_SHOVE_NEVER_TRIED: break;
     }
   }
 

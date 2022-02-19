@@ -58,7 +58,7 @@ def tp_init(name, text_name):
     my.attack_meat(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
-    my.damage_natural_attack_type(self, "claws")
+    my.damage_natural_attack_type(self, "gore")
     my.damage_natural_dice(self, "2d6")
     my.distance_vision(self, 10)
     my.gfx_animated(self, True)
