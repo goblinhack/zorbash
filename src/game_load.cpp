@@ -847,7 +847,6 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.gfx_fullscreen);
   in >> bits(my.t.gfx_fullscreen_desktop);
   in >> bits(my.t.gfx_inverted);
-  in >> bits(my.t.gfx_map_mini);
   in >> bits(my.t.gfx_show_hidden);
   in >> bits(my.t.gfx_vsync_enable);
   in >> bits(my.t.tile_height);
@@ -1257,24 +1256,24 @@ static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             auto c = wid_event_to_char(key);
             switch (c) {
-              case '0' :
-              case '1' :
-              case '2' :
-              case '3' :
-              case '4' :
-              case '5' :
-              case '6' :
-              case '7' :
-              case '8' :
-              case '9' :
+              case '0':
+              case '1':
+              case '2':
+              case '3':
+              case '4':
+              case '5':
+              case '6':
+              case '7':
+              case '8':
+              case '9':
                 {
                   int slot = c - '0';
                   if (! get(slot_valid, slot)) {
@@ -1285,8 +1284,8 @@ static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key)
                   }
                   return true;
                 }
-              case 'b' :
-              case SDLK_ESCAPE :
+              case 'b':
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   CON("INF: Load game cancelled");

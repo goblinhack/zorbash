@@ -1,7 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- click on dead door cannot move                                                                                                               -->
-<!-- click next to player and it auto collects                                                                                                    -->
+<!-- close icon in wid collect                                                                                                                    -->
+<!-- potion of paralysis should paralyse attackers too, so it is useful                                                                           -->
+<!-- potion of healing also ?                                                                                                                     -->
 <!-- have items that show thigns like +1 defense, -1 strength, +2 dex etc...                                                                      -->
 <!-- luck                                                                                                                                         -->
 <!-- luck bridge / lava / falling                                                                                                                 -->

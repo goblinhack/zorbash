@@ -81,7 +81,7 @@ uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_right_bar_inventory_close(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_inventory_close(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   DBG3("Inventory: close");
   TRACE_AND_INDENT();
@@ -749,7 +749,16 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     point br(inventory_width - 1, 3);
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_close");
-    wid_set_on_mouse_up(w, wid_right_bar_inventory_close);
+    wid_set_on_mouse_up(w, wid_inventory_close);
+  }
+
+  {
+    auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
+    point tl(0, 0);
+    point br(3, 3);
+    wid_set_pos(w, tl, br);
+    wid_set_bg_tilename(w, "ui_icon_close");
+    wid_set_on_mouse_up(w, wid_inventory_close);
   }
 
   {
