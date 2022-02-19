@@ -81,24 +81,24 @@ static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             auto c = wid_event_to_char(key);
             switch (c) {
-              case '1' :
-              case '2' :
-              case '3' :
-              case '4' :
-              case '5' :
-              case '6' :
-              case '7' :
-              case '8' :
-              case '9' : wid_enchant_slot(c - '1'); return true;
-              case SDLK_ESCAPE :
+              case '1':
+              case '2':
+              case '3':
+              case '4':
+              case '5':
+              case '6':
+              case '7':
+              case '8':
+              case '9': wid_enchant_slot(c - '1'); return true;
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   CON("INF: Enchant cancelled");
@@ -175,30 +175,13 @@ void Game::wid_enchant_an_item(void)
   }
 
   enchant_items.clear();
-  std::map< Tpp, bool > found;
-  for (const auto t : player->item_vector()) {
-    auto tp = t->tp();
-    if (found.find(tp) != found.end()) {
-      continue;
-    }
-    if (! t->is_enchantable()) {
-      continue;
-    }
-    if (t->enchant_max_current_get()) {
-      if (t->enchant_get() >= t->enchant_max_current_get()) {
-        continue;
-      }
-    }
-    found[ tp ] = true;
-    enchant_items.push_back(t);
-  }
+  std::map< Thingp, bool > found;
 
-  FOR_ALL_SKILLS_FOR(player, id)
+  FOR_ALL_EQUIP(e)
   {
-    auto t = thing_find(id);
+    auto t = player->equip_get(e);
     if (t) {
-      auto tp = t->tp();
-      if (found.find(tp) != found.end()) {
+      if (found.find(t) != found.end()) {
         continue;
       }
       if (! t->is_enchantable()) {
@@ -209,8 +192,93 @@ void Game::wid_enchant_an_item(void)
           continue;
         }
       }
-      found[ tp ] = true;
+      found[ t ] = true;
       enchant_items.push_back(t);
+    }
+  }
+
+  if (player->maybe_itemsp()) {
+    FOR_ALL_CARRIED_BY(player, id)
+    {
+      auto t = level->thing_find(id);
+      if (t) {
+        if (found.find(t) != found.end()) {
+          continue;
+        }
+        if (player->is_equipped(t)) {
+          continue;
+        }
+        if (! t->is_enchantable()) {
+          continue;
+        }
+        if (t->enchant_max_current_get()) {
+          if (t->enchant_get() >= t->enchant_max_current_get()) {
+            continue;
+          }
+        }
+        found[ t ] = true;
+        enchant_items.push_back(t);
+      }
+    }
+
+    FOR_ALL_DEBUFFS_FOR(player, id)
+    {
+      auto t = level->thing_find(id);
+      if (t) {
+        if (found.find(t) != found.end()) {
+          continue;
+        }
+        if (! t->is_enchantable()) {
+          continue;
+        }
+        if (t->enchant_max_current_get()) {
+          if (t->enchant_get() >= t->enchant_max_current_get()) {
+            continue;
+          }
+        }
+        found[ t ] = true;
+        enchant_items.push_back(t);
+      }
+    }
+
+    FOR_ALL_BUFFS_FOR(player, id)
+    {
+      auto t = level->thing_find(id);
+      if (t) {
+        if (found.find(t) != found.end()) {
+          continue;
+        }
+        if (! t->is_enchantable()) {
+          continue;
+        }
+        if (t->enchant_max_current_get()) {
+          if (t->enchant_get() >= t->enchant_max_current_get()) {
+            continue;
+          }
+        }
+        found[ t ] = true;
+        enchant_items.push_back(t);
+      }
+    }
+
+    FOR_ALL_SKILLS_FOR(player, id)
+    {
+      auto t = level->thing_find(id);
+      if (t) {
+        if (found.find(t) != found.end()) {
+          continue;
+        }
+        if (! t->is_enchantable()) {
+          continue;
+        }
+        if (t->enchant_max_current_get()) {
+          if (t->enchant_get() >= t->enchant_max_current_get()) {
+            continue;
+          }
+        }
+        found[ t ] = true;
+        enchant_items.push_back(t);
+      }
     }
   }
 

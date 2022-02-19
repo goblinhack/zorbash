@@ -28,8 +28,7 @@ def tp_init(name, text_name, short_text_name):
     my.stat_luck_mod(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description(self, "A lucky horseshoe.")
-    my.text_enchant(self, "+1 luck")
-    my.text_enchant(self, "increase luck by 1")
+    my.text_enchant(self, "+1 LUCK")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 

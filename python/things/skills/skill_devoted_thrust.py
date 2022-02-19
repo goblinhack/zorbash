@@ -34,7 +34,7 @@ def tp_inti(name, text_name):
     my.on_use_do(self, "me.on_use()")
     my.stat_str_mod(self, 1)
     my.text_description(self, "Devoted thrust skill.")
-    my.text_enchant(self, "+10 percent damage")
+    my.text_enchant(self, "+10 percent DMG")
     my.text_skill(self, "Redirect health to damage, costing stamina")
     my.tile(self, tile=name)
     my.tile(self, tile=name + "_activated")
