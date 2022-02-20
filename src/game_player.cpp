@@ -51,7 +51,7 @@ void Game::place_player(void)
         t->carry(w3);
       }
       {
-        auto w3 = level->thing_new("axe", point(x, y));
+        auto w3 = level->thing_new("shovel", point(x, y));
         t->carry(w3);
       }
       {
