@@ -14,7 +14,10 @@ def on_idle(me, x, y):
 
 
 def explode(me, x, y):
-    my.thing_msg(me, "The wand of descent explodes. The earth tremors.")
+    if my.thing_is_dead_or_dying(me):
+        return
+
+    my.thing_msg(me, "The wand of descent explodes. The earth shakes.")
     my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
     my.thing_dead(me, "exploded")
 

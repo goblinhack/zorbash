@@ -484,6 +484,11 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     return false;
   }
 
+  if (victim->is_falling) {
+    dbg("Attack failed, victim is falling %s", victim->to_string().c_str());
+    return false;
+  }
+
   //
   // Too tired to attack
   //
