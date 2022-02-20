@@ -435,7 +435,7 @@ do
       unused_flag132_set \
       unused_flag133_set \
       unused_flag134_set \
-      unused_flag135_set \
+      is_dead_on_falling_set \
       is_temperature_sensitive_set \
       move_speed_set \
       damage_received_doubled_from_cold_set \

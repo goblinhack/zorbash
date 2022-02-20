@@ -1068,7 +1068,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag134() && (what == "unused_flag134")) {
     return true;
   }
-  if (unused_flag135() && (what == "unused_flag135")) {
+  if (is_dead_on_falling() && (what == "is_dead_on_falling")) {
     return true;
   }
   if (is_temperature_sensitive() && (what == "is_temperature_sensitive")) {
@@ -2359,8 +2359,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag134") {
     return &Thing::unused_flag134;
   }
-  if (what == "unused_flag135") {
-    return &Thing::unused_flag135;
+  if (what == "is_dead_on_falling") {
+    return &Thing::is_dead_on_falling;
   }
   if (what == "is_temperature_sensitive") {
     return &Thing::is_temperature_sensitive;

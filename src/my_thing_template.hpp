@@ -532,7 +532,7 @@ private:
   int _unused_flag132 {};
   int _unused_flag133 {};
   int _unused_flag134 {};
-  int _unused_flag135 {};
+  int _is_dead_on_falling {};
   int _is_temperature_sensitive {};
   int _unused_flag14 {};
   int _unused_flag15 {};
@@ -1422,7 +1422,7 @@ public:
   int unused_flag132(void) const { return _unused_flag132; }
   int unused_flag133(void) const { return _unused_flag133; }
   int unused_flag134(void) const { return _unused_flag134; }
-  int unused_flag135(void) const { return _unused_flag135; }
+  int is_dead_on_falling(void) const { return _is_dead_on_falling; }
   int is_temperature_sensitive(void) const { return _is_temperature_sensitive; }
   int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag14(void) const { return _unused_flag14; }
@@ -2057,7 +2057,7 @@ public:
   void unused_flag132_set(int v) { _unused_flag132 = v; }
   void unused_flag133_set(int v) { _unused_flag133 = v; }
   void unused_flag134_set(int v) { _unused_flag134 = v; }
-  void unused_flag135_set(int v) { _unused_flag135 = v; }
+  void is_dead_on_falling_set(int v) { _is_dead_on_falling = v; }
   void is_temperature_sensitive_set(int v) { _is_temperature_sensitive = v; }
   void unused_flag13_set(int v) { _unused_flag13 = v; }
   void unused_flag14_set(int v) { _unused_flag14 = v; }

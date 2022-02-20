@@ -1582,7 +1582,7 @@ public:
   int unused_flag132(void);
   int unused_flag133(void);
   int unused_flag134(void);
-  int unused_flag135(void);
+  int is_dead_on_falling(void);
   int is_temperature_sensitive(void);
   int unused_flag13(void);
   int unused_flag14(void);

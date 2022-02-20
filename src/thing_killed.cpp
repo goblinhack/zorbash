@@ -37,6 +37,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     }
   }
   TRACE_AND_INDENT();
+  auto player = level->player;
 
   ///////////////////////////////////////////////////////////////
   // WARNING: defeater can be nullptr
@@ -142,8 +143,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       level_pop();
       is_open = true;
       level_push();
-      auto p = level->player;
-      if (p) {
+      if (player) {
         int distance = distance_to_player();
         if (is_door()) {
           if (defeater && defeater->is_fire()) {
@@ -165,7 +165,7 @@ void Thing::killed(Thingp defeater, const char *reason)
               msg("The hear the distant noise of a door crashing open.");
             }
           }
-          p->update_light();
+          player->update_light();
         } else {
           //
           // e.g. treasure chest
@@ -313,8 +313,8 @@ void Thing::killed(Thingp defeater, const char *reason)
             //
             // Already logged
             //
-          } else if (top_owner() == this) {
-            msg("Your %s is destroyed, %s.", short_text_name().c_str(), reason);
+          } else if (top_owner() == player) {
+            msg("Your %s is destroyed.", short_text_name().c_str());
           } else {
             msg("%s is destroyed, %s.", The_no_dying.c_str(), reason);
           }

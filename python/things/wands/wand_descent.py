@@ -31,10 +31,6 @@ def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
 
 
-def on_fire(me, x, y):
-    explode(me, x, y)
-
-
 def on_fall(me, x, y):
     explode(me, x, y)
 
@@ -69,6 +65,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_usable(self, True)
     my.is_victim_select(self, True)
     my.is_wand(self, True)
+    my.health_initial_dice(self, "1d10+6")
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
@@ -80,7 +77,6 @@ def tp_init(name, text_name, short_text_name):
     my.on_final_use_do(self, "me.on_final_use()")
     my.on_idle_tick_freq_dice(self, "1d1000+200:me.on_idle()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
-    my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
     my.text_description(self, "A wand of descent.")
