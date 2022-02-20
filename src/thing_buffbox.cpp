@@ -143,23 +143,23 @@ Thingp Level::buffbox_get(const uint32_t slot)
   }
 
   if (slot >= itemsp->buffbox_id.size()) {
-    DBG("Slot %d out of range, max %d", slot, (int) itemsp->buffbox_id.size());
+    DBG2("Slot %d out of range, max %d", slot, (int) itemsp->buffbox_id.size());
     return nullptr;
   }
 
   auto thing_id = get(itemsp->buffbox_id, slot);
   if (! thing_id) {
-    DBG("Slot %d has no tp", slot);
+    DBG2("Slot %d has no tp", slot);
     return nullptr;
   }
 
   auto t = thing_find(thing_id);
   if (unlikely(! t)) {
-    DBG("Slot %d has no valid tp", slot);
+    DBG2("Slot %d has no valid tp", slot);
     return nullptr;
   }
 
-  DBG("Slot %d has %s", slot, t->name().c_str());
+  DBG2("Slot %d has %s", slot, t->name().c_str());
 
   for (auto oid : itemsp->buffs) {
     auto o = thing_find(oid);
@@ -171,28 +171,28 @@ Thingp Level::buffbox_get(const uint32_t slot)
     }
   }
 
-  DBG("Slot %d has buff tp %s that is not carried", slot, t->name().c_str());
+  DBG2("Slot %d has buff tp %s that is not carried", slot, t->name().c_str());
   return nullptr;
 }
 
 bool Level::buffbox_over(const uint32_t slot)
 {
-  DBG("buffbox: Over buffbox slot %d", slot);
+  DBG2("buffbox: Over buffbox slot %d", slot);
   TRACE_AND_INDENT();
 
   if (! player) {
-    DBG("buffbox: Ignore; no player");
+    DBG2("buffbox: Ignore; no player");
     return false;
   }
 
   if (slot >= player->itemsp()->buffbox_id.size()) {
-    DBG("buffbox: Ignore; slot out of range");
+    DBG2("buffbox: Ignore; slot out of range");
     return false;
   }
 
   auto oid = get(player->itemsp()->buffbox_id, slot);
   if (! oid) {
-    DBG("buffbox: Ignore; nothing at that slot");
+    DBG2("buffbox: Ignore; nothing at that slot");
     return false;
   }
 
@@ -209,7 +209,7 @@ bool Level::buffbox_over(const uint32_t slot)
 
 Thingp Level::buffbox_describe(const uint32_t slot)
 {
-  DBG("buffbox: Describe slot %d", slot);
+  DBG2("buffbox: Describe slot %d", slot);
   TRACE_AND_INDENT();
 
   auto what = buffbox_get(slot);
@@ -217,7 +217,7 @@ Thingp Level::buffbox_describe(const uint32_t slot)
     IF_DEBUG2 { what->log("buffbox: Describe slot %d", slot); }
     what->describe_when_hovered_over_in_rightbar();
   } else {
-    DBG("buffbox: Describe slot %d => nothing there", slot);
+    DBG2("buffbox: Describe slot %d => nothing there", slot);
   }
   return what;
 }

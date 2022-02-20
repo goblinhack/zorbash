@@ -411,8 +411,8 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
 
   Tilemap *tiles = nullptr;
   switch (dir) {
-    case THING_DIR_NONE : tiles = &tp->tiles; break;
-    case THING_DIR_DOWN :
+    case THING_DIR_NONE: tiles = &tp->tiles; break;
+    case THING_DIR_DOWN:
       if (level == 1) {
         tiles = &tp->bot1_tiles;
       } else if (level == 2) {
@@ -423,7 +423,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_UP :
+    case THING_DIR_UP:
       if (level == 1) {
         tiles = &tp->top1_tiles;
       } else if (level == 2) {
@@ -432,7 +432,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_LEFT :
+    case THING_DIR_LEFT:
       if (level == 1) {
         tiles = &tp->left1_tiles;
       } else if (level == 2) {
@@ -441,7 +441,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_RIGHT :
+    case THING_DIR_RIGHT:
       if (level == 1) {
         tiles = &tp->right1_tiles;
       } else if (level == 2) {
@@ -450,7 +450,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_TL :
+    case THING_DIR_TL:
       if (level == 1) {
         tiles = &tp->tl1_tiles;
       } else if (level == 2) {
@@ -459,7 +459,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_BL :
+    case THING_DIR_BL:
       if (level == 1) {
         tiles = &tp->bl1_tiles;
       } else if (level == 2) {
@@ -468,7 +468,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_TR :
+    case THING_DIR_TR:
       if (level == 1) {
         tiles = &tp->tr1_tiles;
       } else if (level == 2) {
@@ -477,7 +477,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         DIE("Bug");
       }
       break;
-    case THING_DIR_BR :
+    case THING_DIR_BR:
       if (level == 1) {
         tiles = &tp->br1_tiles;
       } else if (level == 2) {
@@ -1053,6 +1053,7 @@ TP_BODY_SET_INT(blit_left_off)
 TP_BODY_SET_INT(blit_right_off)
 TP_BODY_SET_INT(blit_top_off)
 TP_BODY_SET_INT(break_chance_d10000)
+TP_BODY_SET_INT(crit_chance_d10000)
 TP_BODY_SET_INT(capacity_height)
 TP_BODY_SET_INT(capacity_width)
 TP_BODY_SET_INT(charge_count)

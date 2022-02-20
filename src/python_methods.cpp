@@ -1090,6 +1090,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(br1_tile),
     MY_ADD_PYTHON_TP_FUNCTION(br2_tile),
     MY_ADD_PYTHON_TP_FUNCTION(break_chance_d10000),
+    MY_ADD_PYTHON_TP_FUNCTION(crit_chance_d10000),
     MY_ADD_PYTHON_TP_FUNCTION(capacity_height),
     MY_ADD_PYTHON_TP_FUNCTION(capacity_width),
     MY_ADD_PYTHON_TP_FUNCTION(charge_count),

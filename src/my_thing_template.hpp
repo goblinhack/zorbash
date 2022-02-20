@@ -102,6 +102,7 @@ private:
   int _blit_right_off {};
   int _blit_top_off {};
   int _break_chance_d10000 {};
+  int _crit_chance_d10000 {};
   int _capacity_height {};
   int _capacity_width {};
   int _charge_count {};
@@ -995,6 +996,7 @@ public:
   int blit_right_off(void) const { return _blit_right_off; }
   int blit_top_off(void) const { return _blit_top_off; }
   int break_chance_d10000(void) const { return _break_chance_d10000; }
+  int crit_chance_d10000(void) const { return _crit_chance_d10000; }
   int capacity_height(void) const { return _capacity_height; }
   int capacity_width(void) const { return _capacity_width; }
   int charge_count(void) const { return _charge_count; }
@@ -1542,6 +1544,7 @@ public:
   void blit_right_off_set(int v) { _blit_right_off = v; }
   void blit_top_off_set(int v) { _blit_top_off = v; }
   void break_chance_d10000_set(int v) { _break_chance_d10000 = v; }
+  void crit_chance_d10000_set(int v) { _crit_chance_d10000 = v; }
   void capacity_height_set(int v) { _capacity_height = v; }
   void capacity_width_set(int v) { _capacity_width = v; }
   void charge_count_set(int v) { _charge_count = v; }

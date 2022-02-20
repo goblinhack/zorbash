@@ -158,23 +158,23 @@ Thingp Level::skillbox_get(const uint32_t slot)
   }
 
   if (slot >= itemsp->skillbox_id.size()) {
-    DBG("Slot %d out of range, max %d", slot, (int) itemsp->skillbox_id.size());
+    DBG2("Slot %d out of range, max %d", slot, (int) itemsp->skillbox_id.size());
     return nullptr;
   }
 
   auto thing_id = get(itemsp->skillbox_id, slot);
   if (! thing_id) {
-    DBG("Slot %d has no tp", slot);
+    DBG2("Slot %d has no tp", slot);
     return nullptr;
   }
 
   auto t = thing_find(thing_id);
   if (unlikely(! t)) {
-    DBG("Slot %d has no valid tp", slot);
+    DBG2("Slot %d has no valid tp", slot);
     return nullptr;
   }
 
-  DBG("Slot %d has %s", slot, t->name().c_str());
+  DBG2("Slot %d has %s", slot, t->name().c_str());
 
   for (auto oid : itemsp->skills) {
     auto o = thing_find(oid);
@@ -186,7 +186,7 @@ Thingp Level::skillbox_get(const uint32_t slot)
     }
   }
 
-  DBG("Slot %d has skill tp %s that is not carried", slot, t->name().c_str());
+  DBG2("Slot %d has skill tp %s that is not carried", slot, t->name().c_str());
   return nullptr;
 }
 
@@ -196,11 +196,11 @@ bool Level::skillbox_over(const uint32_t slot)
 {
   TRACE_NO_INDENT();
 
-  DBG("Skillbox: Over skillbox slot %d", slot);
+  DBG2("Skillbox: Over skillbox slot %d", slot);
   TRACE_AND_INDENT();
 
   if (! player) {
-    DBG("Skillbox: Ignore; no player");
+    DBG2("Skillbox: Ignore; no player");
     return false;
   }
 
@@ -211,20 +211,20 @@ bool Level::skillbox_over(const uint32_t slot)
   }
 
   if (slot >= itemsp->skillbox_id.size()) {
-    DBG("Skillbox: Ignore; slot out of range");
+    DBG2("Skillbox: Ignore; slot out of range");
     return false;
   }
 
   auto oid = get(itemsp->skillbox_id, slot);
   if (! oid) {
-    DBG("Skillbox: Ignore; nothing at that slot");
+    DBG2("Skillbox: Ignore; nothing at that slot");
     return false;
   }
 
   Thingp what;
 
   if (slot != game->skillbox_highlight_slot) {
-    DBG("Skillbox: Request to remake skillbox due to highlight");
+    DBG2("Skillbox: Request to remake skillbox due to highlight");
     game->request_remake_skillbox = true;
     game->skillbox_highlight_slot = slot;
     what                          = skillbox_describe(slot);
@@ -233,7 +233,7 @@ bool Level::skillbox_over(const uint32_t slot)
   }
 
   if (! what) {
-    DBG("Skillbox: No skill chosen");
+    DBG2("Skillbox: No skill chosen");
     return false;
   }
 
@@ -245,7 +245,7 @@ bool Level::skillbox_chosen(const uint32_t slot)
 {
   TRACE_NO_INDENT();
 
-  DBG("Skillbox: Chosen skillbox slot %d", slot);
+  DBG2("Skillbox: Chosen skillbox slot %d", slot);
   TRACE_AND_INDENT();
 
   if (! player) {
@@ -259,16 +259,16 @@ bool Level::skillbox_chosen(const uint32_t slot)
   }
 
   if (slot >= itemsp->skillbox_id.size()) {
-    DBG("Skillbox: Nothing in slot %d", slot);
+    DBG2("Skillbox: Nothing in slot %d", slot);
     return false;
   }
 
-  DBG("Skillbox: Request to remake skillbox");
+  DBG2("Skillbox: Request to remake skillbox");
   game->request_remake_skillbox = true;
 
   auto oid = get(itemsp->skillbox_id, slot);
   if (! oid) {
-    DBG("Skillbox: No skill at slot %d", slot);
+    DBG2("Skillbox: No skill at slot %d", slot);
     return false;
   }
 
@@ -281,7 +281,7 @@ bool Level::skillbox_chosen(const uint32_t slot)
   }
 
   if (! what) {
-    DBG("Skillbox: No thing at slot %d", slot);
+    DBG2("Skillbox: No thing at slot %d", slot);
     return false;
   }
 
@@ -301,7 +301,7 @@ Thingp Level::skillbox_describe(const uint32_t slot)
 {
   TRACE_NO_INDENT();
 
-  DBG("Skillbox: Describe slot %d", slot);
+  DBG2("Skillbox: Describe slot %d", slot);
   TRACE_AND_INDENT();
 
   auto what = skillbox_get(slot);
@@ -309,7 +309,7 @@ Thingp Level::skillbox_describe(const uint32_t slot)
     IF_DEBUG2 { what->log("Skillbox: Describe slot %d", slot); }
     what->describe_when_hovered_over_in_rightbar();
   } else {
-    DBG("Skillbox: Describe slot %d => nothing there", slot);
+    DBG2("Skillbox: Describe slot %d => nothing there", slot);
   }
   return what;
 }

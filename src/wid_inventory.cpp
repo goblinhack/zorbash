@@ -34,7 +34,7 @@ static int wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
 
 void wid_inventory_fini(void)
 {
-  DBG("Close inventory");
+  DBG2("Close inventory");
   TRACE_AND_INDENT();
 
   if (wid_inventory_thing_info) {
@@ -501,7 +501,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
               case SDLK_ESCAPE :
                 {
                   TRACE_AND_INDENT();
-                  DBG("INF: inventory cancelled");
+                  DBG2("INF: inventory cancelled");
 
                   if (game->in_transit_item) {
                     wid_in_transit_item_drop();
@@ -702,7 +702,7 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
 
 bool wid_inventory_create(Thingp selected, Thingp over)
 {
-  DBG("Create inventory");
+  DBG2("Create inventory");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -1003,10 +1003,10 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   }
 
   TRACE_AND_INDENT();
-  DBG("Add equip");
+  DBG2("Add equip");
 
   TRACE_AND_INDENT();
-  DBG("Current equip:");
+  DBG2("Current equip:");
   player->dump_equip();
 
   int y_at = 8;

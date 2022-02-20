@@ -312,11 +312,6 @@ bool Thing::victim_attack_best_at(int equip, point *at)
   TRACE_AND_INDENT();
 
   //
-  // Lunge at the target
-  //
-  stamina_decr();
-
-  //
   // Look in the chosen dir first for something to hit, then behind us.
   //
   std::vector< point > all_deltas = {
@@ -442,10 +437,19 @@ bool Thing::victim_attack_best(int equip, point *at)
       TRACE_AND_INDENT();
       if (victim_attack_best_at(equip, &at)) {
         ret = true;
+        //
+        // Make sure each hit uses stamina
+        //
+        stamina_decr();
       }
     }
     return ret;
   }
 
-  return victim_attack_best_at(equip, at);
+  if (victim_attack_best_at(equip, at)) {
+    stamina_decr();
+    return true;
+  }
+
+  return false;
 }

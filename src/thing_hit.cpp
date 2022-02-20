@@ -252,7 +252,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "poison ";
     }
   } else if (attack_future1) {
@@ -264,7 +264,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "damage_future1 ";
     }
   } else if (attack_future2) {
@@ -276,7 +276,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "damage_future2 ";
     }
   } else if (attack_future3) {
@@ -288,7 +288,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "damage_future3 ";
     }
   } else if (attack_cold) {
@@ -300,7 +300,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_cold damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_cold damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "cold ";
     }
   } else if (attack_fire) {
@@ -312,12 +312,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_fire damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_fire damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "fire ";
     }
   } else if (attack_crush) {
     if (! is_crushable()) {
-      real_hitter->log("Cannot crush %s", to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Cannot crush %s", to_short_string().c_str()); }
       return false;
     }
 
@@ -329,7 +329,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_crush damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_crush damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "crush ";
     }
   } else if (attack_lightning) {
@@ -341,7 +341,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "lightning ";
     }
   } else if (attack_energy) {
@@ -353,7 +353,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_energy damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_energy damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "energy ";
     }
   } else if (attack_acid) {
@@ -365,7 +365,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_acid damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_acid damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "acid ";
     }
   } else if (attack_digest) {
@@ -377,7 +377,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack damage_digest damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack damage_digest damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "digest ";
     }
   } else if (attack_necrosis) {
@@ -389,7 +389,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "rotting ";
     }
   } else if (attack_natural) {
@@ -402,7 +402,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = real_hitter->damage_natural_attack_type() + " ";
     }
   } else {
@@ -414,7 +414,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
       return false;
     } else {
-      real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str());
+      IF_DEBUG2 { real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str()); }
     }
   }
 
@@ -591,7 +591,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           }
           damage = buff_on_damage_stat_str(real_hitter, damage);
           if (! damage) {
-            real_hitter->log("No strength damage");
+            IF_DEBUG2 { real_hitter->log("No strength damage"); }
             return false;
           }
           if (real_hitter->is_necrotic_danger_level()) {
@@ -628,7 +628,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           }
           damage = buff_on_damage_stat_con(real_hitter, damage);
           if (! damage) {
-            real_hitter->log("No con damage");
+            IF_DEBUG2 { real_hitter->log("No con damage"); }
             return false;
           }
           if (real_hitter->is_necrotic_danger_level()) {
@@ -1239,20 +1239,20 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
     //
     // Allow attacks when dead
     //
-    hitter->log("Possible attack on %s", to_short_string().c_str());
+    IF_DEBUG2 { hitter->log("Possible attack on %s", to_short_string().c_str()); }
   } else if (damage) {
     //
     // Filter attacks when dead
     //
     if (is_dead || is_dying) {
-      hitter->log("Already dead, no more melee hits %s", to_short_string().c_str());
+      IF_DEBUG2 { hitter->log("Already dead, no more melee hits %s", to_short_string().c_str()); }
       return false;
     }
-    hitter->log("Possible attack on %s", to_short_string().c_str());
+    IF_DEBUG2 { hitter->log("Possible attack on %s", to_short_string().c_str()); }
   } else {
     //
     // Failed attack
-    hitter->log("No damage");
+    IF_DEBUG2 { hitter->log("No damage"); }
     return false;
   }
   TRACE_NO_INDENT();

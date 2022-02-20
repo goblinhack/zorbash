@@ -733,6 +733,7 @@ public:
   int blast_min_radius(void);
   int bounce_count(void);
   int break_chance_d10000(void);
+  int crit_chance_d10000(void);
   int buff_on_damage_acid(Thingp hitter, int damage);
   int buff_on_damage_cold(Thingp hitter, int damage);
   int buff_on_damage_crush(Thingp hitter, int damage);

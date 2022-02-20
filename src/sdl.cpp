@@ -440,8 +440,8 @@ void sdl_event(SDL_Event *event)
       {
         key = &event->key.keysym;
 
-        DBG("SDL: Keyboard: Key pressed keycode 0x%08" PRIX32 " = %s %d", event->key.keysym.sym,
-            SDL_GetKeyName(event->key.keysym.sym), key->mod);
+        DBG2("SDL: Keyboard: Key pressed keycode 0x%08" PRIX32 " = %s %d", event->key.keysym.sym,
+             SDL_GetKeyName(event->key.keysym.sym), key->mod);
 
         {
           //
@@ -485,8 +485,8 @@ void sdl_event(SDL_Event *event)
     case SDL_KEYUP:
       {
         if (g_grab_next_key) {
-          DBG("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
-              SDL_GetKeyName(event->key.keysym.sym), SDL_GetScancodeName(event->key.keysym.scancode));
+          DBG2("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
+               SDL_GetKeyName(event->key.keysym.sym), SDL_GetScancodeName(event->key.keysym.scancode));
 
           g_grab_next_key = false;
           sdl_grabbed_key = sdlk_normalize(event->key.keysym);
@@ -500,8 +500,8 @@ void sdl_event(SDL_Event *event)
         sdl_last_time_for_key = 0;
         memset(&last_key_pressed, 0, sizeof(*key));
 
-        DBG("SDL: Keyboard: Key released keycode 0x%08" PRIX32 " = %s", event->key.keysym.sym,
-            SDL_GetKeyName(event->key.keysym.sym));
+        DBG2("SDL: Keyboard: Key released keycode 0x%08" PRIX32 " = %s", event->key.keysym.sym,
+             SDL_GetKeyName(event->key.keysym.sym));
 
         key = &event->key.keysym;
 
@@ -512,13 +512,13 @@ void sdl_event(SDL_Event *event)
       }
     case SDL_TEXTINPUT:
       {
-        DBG("SDL: Keyboard: Text input \"%s\" in window %d", event->text.text, event->text.windowID);
+        DBG2("SDL: Keyboard: Text input \"%s\" in window %d", event->text.text, event->text.windowID);
         break;
       }
     case SDL_MOUSEWHEEL:
       {
-        DBG("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
-            event->wheel.windowID);
+        DBG2("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
+             event->wheel.windowID);
 
         sdl_get_mouse();
 
@@ -571,8 +571,8 @@ void sdl_event(SDL_Event *event)
       {
         mouse_down = sdl_get_mouse();
 
-        DBG("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x,
-            event->button.y, mouse_down);
+        DBG2("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x,
+             event->button.y, mouse_down);
 
         auto now             = time_get_time_ms_cached();
         wid_mouse_visible    = 1;
@@ -586,15 +586,15 @@ void sdl_event(SDL_Event *event)
       {
         mouse_down = sdl_get_mouse();
 
-        DBG("SDL: Mouse UP: button %d released at %d,%d state %d", event->button.button, event->button.x,
-            event->button.y, mouse_down);
+        DBG2("SDL: Mouse UP: button %d released at %d,%d state %d", event->button.button, event->button.x,
+             event->button.y, mouse_down);
 
         wid_mouse_up(event->button.button, mouse_x, mouse_y);
         break;
       }
     case SDL_JOYAXISMOTION:
       {
-        DBG("SDL: Joystick %d: Axis %d moved by %d", event->jaxis.which, event->jaxis.axis, event->jaxis.value);
+        DBG2("SDL: Joystick %d: Axis %d moved by %d", event->jaxis.which, event->jaxis.axis, event->jaxis.value);
 
         int axis  = event->jaxis.axis;
         int value = event->jaxis.value;
@@ -609,7 +609,7 @@ void sdl_event(SDL_Event *event)
         sdl_right_fire = false;
 
         if (sdl_joy_axes[ 2 ] > sdl_joy_deadzone) {
-          DBG("SDL: left fire");
+          DBG2("SDL: left fire");
           sdl_left_fire = true;
           set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t) 1);
         } else {
@@ -617,7 +617,7 @@ void sdl_event(SDL_Event *event)
         }
 
         if (sdl_joy_axes[ 5 ] > sdl_joy_deadzone) {
-          DBG("SDL: right fire");
+          DBG2("SDL: right fire");
           sdl_right_fire = true;
           set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t) 1);
         } else {
@@ -633,58 +633,58 @@ void sdl_event(SDL_Event *event)
       }
     case SDL_JOYBALLMOTION:
       {
-        DBG("SDL: Joystick %d: Ball %d moved by %d,%d", event->jball.which, event->jball.ball, event->jball.xrel,
-            event->jball.yrel);
+        DBG2("SDL: Joystick %d: Ball %d moved by %d,%d", event->jball.which, event->jball.ball, event->jball.xrel,
+             event->jball.yrel);
         break;
       }
     case SDL_JOYHATMOTION:
       {
-        DBG("SDL: Joystick %d: Hat %d moved to ", event->jhat.which, event->jhat.hat);
+        DBG2("SDL: Joystick %d: Hat %d moved to ", event->jhat.which, event->jhat.hat);
 
         switch (event->jhat.value) {
           case SDL_HAT_CENTERED: break;
           case SDL_HAT_UP:
             {
-              DBG("SDL: UP");
+              DBG2("SDL: UP");
               sdl_joy2_up = true;
               break;
             }
           case SDL_HAT_RIGHTUP:
             {
-              DBG("SDL: RIGHTUP");
+              DBG2("SDL: RIGHTUP");
               sdl_joy2_right = true;
               sdl_joy2_up    = true;
               break;
             }
           case SDL_HAT_RIGHT:
             {
-              DBG("SDL: RIGHT");
+              DBG2("SDL: RIGHT");
               sdl_joy2_right = true;
               break;
             }
           case SDL_HAT_RIGHTDOWN:
             {
-              DBG("SDL: RIGHTDOWN");
+              DBG2("SDL: RIGHTDOWN");
               sdl_joy2_right = true;
               sdl_joy2_down  = true;
               break;
             }
           case SDL_HAT_DOWN:
             {
-              DBG("SDL: DOWN");
+              DBG2("SDL: DOWN");
               sdl_joy2_down = true;
               break;
             }
           case SDL_HAT_LEFTDOWN:
             {
-              DBG("SDL: LEFTDOWN");
+              DBG2("SDL: LEFTDOWN");
               sdl_joy2_left = true;
               sdl_joy2_down = true;
               break;
             }
           case SDL_HAT_LEFT:
             {
-              DBG("SDL: LEFT");
+              DBG2("SDL: LEFT");
               sdl_joy2_left = true;
               break;
             }
@@ -692,16 +692,16 @@ void sdl_event(SDL_Event *event)
             {
               sdl_joy2_left = true;
               sdl_joy2_up   = true;
-              DBG("SDL: LEFTUP");
+              DBG2("SDL: LEFTUP");
               break;
             }
-          default: DBG("SDL: UNKNOWN"); break;
+          default: DBG2("SDL: UNKNOWN"); break;
         }
         break;
       }
     case SDL_JOYBUTTONDOWN:
       {
-        DBG("SDL: Joystick %d: Button %d pressed", event->jbutton.which, event->jbutton.button);
+        DBG2("SDL: Joystick %d: Button %d pressed", event->jbutton.which, event->jbutton.button);
         set(sdl_joy_buttons, event->jbutton.button, (uint8_t) 1);
         sdl_get_mouse();
         wid_joy_button(mouse_x, mouse_y);
@@ -709,13 +709,13 @@ void sdl_event(SDL_Event *event)
       }
     case SDL_JOYBUTTONUP:
       {
-        DBG("SDL: Joystick %d: Button %d released", event->jbutton.which, event->jbutton.button);
+        DBG2("SDL: Joystick %d: Button %d released", event->jbutton.which, event->jbutton.button);
         set(sdl_joy_buttons, event->jbutton.button, (uint8_t) 0);
         break;
       }
     case SDL_CLIPBOARDUPDATE:
       {
-        DBG("SDL: Clipboard updated");
+        DBG2("SDL: Clipboard updated");
         break;
       }
     case SDL_QUIT:
@@ -728,12 +728,12 @@ void sdl_event(SDL_Event *event)
       }
     case SDL_USEREVENT:
       {
-        DBG("SDL: User event %d", event->user.code);
+        DBG2("SDL: User event %d", event->user.code);
         break;
       }
     default:
       {
-        DBG("SDL: Unknown event %d", event->type);
+        DBG2("SDL: Unknown event %d", event->type);
         break;
       }
   }
@@ -820,7 +820,7 @@ void sdl_tick(void)
   // Right stick
   //
   if (sdl_joy_axes[ 3 ] > sdl_joy_deadzone) {
-    DBG("SDL: right stick, right");
+    DBG2("SDL: right stick, right");
     sdl_joy1_right = true;
 
     incr(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT);
@@ -829,7 +829,7 @@ void sdl_tick(void)
   }
 
   if (sdl_joy_axes[ 3 ] < -sdl_joy_deadzone) {
-    DBG("SDL: right stick, left");
+    DBG2("SDL: right stick, left");
     sdl_joy1_left = true;
 
     incr(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT);
@@ -838,7 +838,7 @@ void sdl_tick(void)
   }
 
   if (sdl_joy_axes[ 4 ] > sdl_joy_deadzone) {
-    DBG("SDL: right stick, down");
+    DBG2("SDL: right stick, down");
     sdl_joy1_down = true;
 
     incr(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN);
@@ -847,7 +847,7 @@ void sdl_tick(void)
   }
 
   if (sdl_joy_axes[ 4 ] < -sdl_joy_deadzone) {
-    DBG("SDL: right stick, up");
+    DBG2("SDL: right stick, up");
     sdl_joy1_up = true;
 
     incr(sdl_joy_buttons, SDL_JOY_BUTTON_UP);
@@ -862,25 +862,25 @@ void sdl_tick(void)
   int my = 0;
 
   if (sdl_joy_axes[ 0 ] > sdl_joy_deadzone) {
-    DBG("SDL: left stick, right");
+    DBG2("SDL: left stick, right");
     sdl_joy2_right = true;
     mx             = 1;
   }
 
   if (sdl_joy_axes[ 0 ] < -sdl_joy_deadzone) {
-    DBG("SDL: left stick, left");
+    DBG2("SDL: left stick, left");
     sdl_joy2_left = true;
     mx            = -1;
   }
 
   if (sdl_joy_axes[ 1 ] > sdl_joy_deadzone) {
-    DBG("SDL: left stick, down");
+    DBG2("SDL: left stick, down");
     sdl_joy2_down = true;
     my            = 1;
   }
 
   if (sdl_joy_axes[ 1 ] < -sdl_joy_deadzone) {
-    DBG("SDL: left stick, up");
+    DBG2("SDL: left stick, up");
     sdl_joy2_up = true;
     my          = -1;
   }

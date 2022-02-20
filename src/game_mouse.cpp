@@ -52,11 +52,11 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
     return false;
   }
 
-  player->log("Mouse down");
+  IF_DEBUG2 { player->log("Mouse down"); }
   wid_thing_info_fini();
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
-    player->log("Chosen target");
+    IF_DEBUG2 { player->log("Chosen target"); }
     if (game->request_to_throw_item) {
       auto item = game->request_to_throw_item;
       player->throw_at(item, level->cursor);
@@ -115,7 +115,7 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
             // Attack
             //
             if (t->is_door() || t->is_monst() || t->is_mob()) {
-              player->log("Close enough to attack");
+              IF_DEBUG2 { player->log("Close enough to attack"); }
               player->attack(level->cursor->curr_at);
               return true;
             }
@@ -137,7 +137,7 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
           continue;
         }
         if (t->is_cursor_can_hover_over_x2_click()) {
-          player->log("Needs double click");
+          IF_DEBUG2 { player->log("Needs double click"); }
           if (level->is_chasm(to)) {
             TOPCON("Double click to jump into the abyss.");
           } else if (level->is_lava(to)) {

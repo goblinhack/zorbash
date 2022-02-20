@@ -18,6 +18,7 @@ def tp_init(name, text_name, short_text_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
+    my.crit_chance_d10000(self, 0)
     my.damage_melee_chance_d1000(self, 1000)
     my.damage_melee_dice(self, "1d6+1")
     my.damage_poison_chance_d1000(self, 100)
