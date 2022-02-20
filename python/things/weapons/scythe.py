@@ -54,6 +54,8 @@ def tp_init(name, text_name, short_text_name):
     my.noise_on_moving_or_being_carried(self, 20)
     my.on_use_do(self, "me.on_use()")
     my.rarity(self, my.RARITY_UNCOMMON)
+    my.stamina_on_use(self, 0)
+    my.stamina_on_use(self, 3)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy swingy means of justice.")
     my.text_enchant(self, "+1 DMG")

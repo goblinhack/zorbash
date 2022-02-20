@@ -493,7 +493,32 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         return false;
       }
     }
-    real_hitter->stamina_decr(1);
+
+    //
+    // Different weapons have different drain on stamina.
+    //
+    if (d20roll_under(stat_con_total())) {
+      //
+      // Only half stamina damage if you pass con roll
+      //
+      if (hitter != real_hitter) {
+        auto s = hitter->stamina_on_use();
+        if (s) {
+          s /= 2;
+          if (! s) {
+            s = 1;
+          }
+        }
+        real_hitter->stamina_decr(s);
+      }
+    } else {
+      if (hitter != real_hitter) {
+        auto s = hitter->stamina_on_use();
+        real_hitter->stamina_decr(s);
+      } else {
+        real_hitter->stamina_decr(1);
+      }
+    }
   }
 
   //

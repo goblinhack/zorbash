@@ -433,7 +433,7 @@ do
       unused_flag130_set \
       unused_flag131_set \
       unused_flag132_set \
-      unused_flag133_set \
+      stamina_on_use_set \
       collision_hit_all_adjacent_set \
       is_dead_on_falling_set \
       is_temperature_sensitive_set \

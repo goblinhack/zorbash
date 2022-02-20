@@ -531,7 +531,7 @@ private:
   int _unused_flag130 {};
   int _unused_flag131 {};
   int _unused_flag132 {};
-  int _unused_flag133 {};
+  int _stamina_on_use {};
   int _collision_hit_all_adjacent {};
   int _is_dead_on_falling {};
   int _is_temperature_sensitive {};
@@ -1422,7 +1422,7 @@ public:
   int unused_flag130(void) const { return _unused_flag130; }
   int unused_flag131(void) const { return _unused_flag131; }
   int unused_flag132(void) const { return _unused_flag132; }
-  int unused_flag133(void) const { return _unused_flag133; }
+  int stamina_on_use(void) const { return _stamina_on_use; }
   int collision_hit_all_adjacent(void) const { return _collision_hit_all_adjacent; }
   int is_dead_on_falling(void) const { return _is_dead_on_falling; }
   int is_temperature_sensitive(void) const { return _is_temperature_sensitive; }
@@ -2058,7 +2058,7 @@ public:
   void unused_flag130_set(int v) { _unused_flag130 = v; }
   void unused_flag131_set(int v) { _unused_flag131 = v; }
   void unused_flag132_set(int v) { _unused_flag132 = v; }
-  void unused_flag133_set(int v) { _unused_flag133 = v; }
+  void stamina_on_use_set(int v) { _stamina_on_use = v; }
   void collision_hit_all_adjacent_set(int v) { _collision_hit_all_adjacent = v; }
   void is_dead_on_falling_set(int v) { _is_dead_on_falling = v; }
   void is_temperature_sensitive_set(int v) { _is_temperature_sensitive = v; }
