@@ -46,17 +46,18 @@ void Thing::temperature_tick(void)
 
   temperature_incr(location_t);
 
-  t = temperature_get();
+  t = temperature_get() + location_t;
   if (! t) {
     return;
   }
 
-  t = (int) ((float) t * 0.95);
+  t = (int) ((float) t * 0.5);
+  topcon("T%d", t);
   temperature_set(t);
 
   if (is_temperature_sensitive()) {
     if (game->tick_current != tick_last_i_was_attacked()) {
-      if (t < -100) {
+      if (t <= -100) {
         if (! is_immune_to_cold() || is_player()) {
           auto damage = abs(t) / 20;
           if (is_stone()) {
@@ -75,7 +76,7 @@ void Thing::temperature_tick(void)
           }
           is_attacked_with_damage_cold(this, damage);
         }
-      } else if (t > 100) {
+      } else if (t >= 100) {
         if (! is_immune_to_fire()) {
           auto damage = abs(t) / 20;
           if (is_stone()) {
@@ -92,7 +93,9 @@ void Thing::temperature_tick(void)
               msg("%s suffers from the extreme heat.", text_The().c_str());
             }
           }
-          is_attacked_with_damage_fire(this, damage);
+          if (fire_tick()) {
+            is_attacked_with_damage_fire(this, damage);
+          }
         }
       }
     }

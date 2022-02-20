@@ -495,7 +495,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   if (is_able_to_tire()) {
     if (stamina_get() < 5) {
       if (is_player()) {
-        if (d20roll_under(stat_con())) {
+        if (d20roll_under(stat_con_total())) {
           msg("You are so tired but dig deep and attack!");
         } else {
           msg("You are too tired to attack.");

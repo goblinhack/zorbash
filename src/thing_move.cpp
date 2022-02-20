@@ -253,7 +253,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     if (is_able_to_tire()) {
       if (stamina_get() < 5) {
         if (is_player()) {
-          if (d20roll_under(stat_con())) {
+          if (d20roll_under(stat_con_total())) {
             msg("You are so tired but dig deep into your reserves to move!");
           } else {
             msg("You cannot move, you are so tired!");
@@ -282,7 +282,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         continue;
       }
 
-      if (! d20roll(stat_str(), it->stat_str())) {
+      if (! d20roll(stat_str(), it->stat_str_total())) {
         if (is_player()) {
           msg("You are held in place and cannot move!");
         }
@@ -575,21 +575,21 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 
   if (tp()->gfx_animated_can_hflip()) {
     switch (dir) {
-      case THING_DIR_NONE :
-      case THING_DIR_DOWN :
-      case THING_DIR_UP : break;
+      case THING_DIR_NONE:
+      case THING_DIR_DOWN:
+      case THING_DIR_UP: break;
 
-      case THING_DIR_LEFT :
-      case THING_DIR_TL :
-      case THING_DIR_BL :
+      case THING_DIR_LEFT:
+      case THING_DIR_TL:
+      case THING_DIR_BL:
         if (! is_facing_left && ! ts_flip_start_get()) {
           ts_flip_start_set(time_get_time_ms_cached());
         }
         break;
 
-      case THING_DIR_RIGHT :
-      case THING_DIR_TR :
-      case THING_DIR_BR :
+      case THING_DIR_RIGHT:
+      case THING_DIR_TR:
+      case THING_DIR_BR:
         if (is_facing_left && ! ts_flip_start_get()) {
           ts_flip_start_set(time_get_time_ms_cached());
         }

@@ -133,7 +133,6 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
       auto to = level->cursor->curr_at;
       FOR_ALL_THINGS(level, t, to.x, to.y)
       {
-        t->topcon("mouse");
         if (t->is_hidden) {
           continue;
         }

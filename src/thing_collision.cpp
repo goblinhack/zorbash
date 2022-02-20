@@ -109,9 +109,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
       // If this target is higher prio, prefer it.
       //
       best = &cand;
-      if (is_loggable()) {
-        dbg("Collision-candidate: Add %s", t->to_string().c_str());
-      }
+      dbg("Collision-candidate: Add %s", t->to_string().c_str());
     } else if (cand.priority == best->priority) {
       //
       // If this target is closer, prefer it.
@@ -124,9 +122,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
 
       if (dist_cand < dist_best) {
         best = &cand;
-        if (is_loggable()) {
-          dbg("Collision-candidate: Add %s", t->to_string().c_str());
-        }
+        dbg("Collision-candidate: Add %s", t->to_string().c_str());
       }
     } else {
       if (is_loggable()) {
@@ -160,7 +156,10 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
       }
     }
 
-    auto owner = top_owner();
+    //
+    // If an item is being attacked by fire, do we attack the item or the owner?
+    //
+    auto owner = immediate_owner();
     if (! *victim_attacked) {
       //
       // Carry to eat later. Things attack their food.
@@ -178,7 +177,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
           //
           // This is an odd one.
           //
-          err("Trying to attack self");
+          err("Trying to attack self: %s", victim->to_string().c_str());
         } else if (owner->can_eat(victim)) {
           //
           // Eat corpse?
@@ -265,7 +264,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
     if (is_wand() || is_laser() || is_weapon() || is_monst() || (is_player() && game->robot_mode)) {
       dbg("Collision: weapon check for %s", victim->to_string().c_str());
       if (! *victim_attacked) {
-        dbg("Collision: weapon try to attac for %s", victim->to_string().c_str());
+        dbg("Collision: weapon try to attack for %s", victim->to_string().c_str());
         if (attack(victim)) {
           *victim_attacked = true;
           ret              = true;

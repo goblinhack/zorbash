@@ -871,6 +871,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         //
         // This can be the player is on fire and that causes carried items to burn
         //
+        if (d20roll_under(real_hitter->stat_luck_total())) {
+          dbg("Avoids damage by luck");
+          return false;
+        }
+
         if (attack_poison) {
           msg("Your %s is being poisoned.", short_text_name().c_str());
         } else if (attack_future1) {
