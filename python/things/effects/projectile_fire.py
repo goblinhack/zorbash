@@ -18,6 +18,7 @@ def tp_init(name, text_name, short_text_name):
     my.collision_check(self, True)
     my.damage_fire_chance_d1000(self, 1000)
     my.damage_fire_dice(self, "1d10")  # This is the damage when the monst fires
+    my.is_dead_on_falling(self, True)
     my.is_fire(self, True)
     my.is_loggable(self, True)
     my.is_no_tile(self, True)

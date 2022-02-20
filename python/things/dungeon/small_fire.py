@@ -21,6 +21,7 @@ def tp_init(name, text_name):
     my.gfx_show_outlined(self, True)
     my.health_initial_dice(self, "5")
     my.is_able_to_fall(self, True)
+    my.is_dead_on_falling(self, True)
     my.is_fire(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)

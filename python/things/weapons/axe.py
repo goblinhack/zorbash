@@ -44,7 +44,6 @@ def init_weapon(name, text_name, short_text_name):
     my.is_droppable(self, True)
     my.is_enchantable(self, True)
     my.is_interesting(self, True)
-    my.on_enchant_do(self, "me.on_enchant()")
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_metal(self, True)
@@ -58,6 +57,7 @@ def init_weapon(name, text_name, short_text_name):
     my.item_width(self, 6)
     my.long_text_description(self, "A gleaming wooden handled axe. It's a bit short and extra hungry for vengeance. Against what, who can say.")
     my.noise_on_moving_or_being_carried(self, 15)
+    my.on_enchant_do(self, "me.on_enchant()")
     my.on_use_do(self, "me.on_use()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stat_att_mod(self, 1)  # means +1 per enchant

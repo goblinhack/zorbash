@@ -30,6 +30,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_ring(self, True)
+    my.health_initial_dice(self, "1d20")
     my.is_spawner(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_treasure_class_c(self, True)

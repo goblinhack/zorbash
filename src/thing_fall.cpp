@@ -64,6 +64,14 @@ void Thing::fall(float fall_height, ts_t ms)
     return;
   }
 
+  //
+  // Some things like fire die when falling
+  //
+  if (is_dead_on_falling()) {
+    dead("No, dead on falling");
+    return;
+  }
+
   auto t = ts_fall_begin_set(time_get_time_ms_cached());
   ts_fall_end_set(t + ms);
 

@@ -2216,10 +2216,10 @@ int Thing::unused_flag134(void)
   return (tp()->unused_flag134());
 }
 
-int Thing::unused_flag135(void)
+int Thing::is_dead_on_falling(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag135());
+  return (tp()->is_dead_on_falling());
 }
 
 int Thing::is_temperature_sensitive(void)
