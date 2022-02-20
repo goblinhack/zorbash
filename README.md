@@ -1,9 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- pike                                                                                                                                        -->
-<!-- broadsword                                                                                                                                        -->
-<!-- hit 180                                                                                                                                      -->
-<!-- hit adj                                                                                                                                      -->
+<!-- pike                                                                                                                                         -->
+<!-- broadsword                                                                                                                                   -->
+<!-- single shovel                                                                                                                                -->
+<!-- cloak of jelly                                                                                                                               -->
 <!-- evil check for cross                                                                                                                         -->
 <!-- boots of shoving                                                                                                                             -->
 <!-- cloak of fire protection                                                                                                                     -->
