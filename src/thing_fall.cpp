@@ -248,6 +248,13 @@ bool Thing::fall_to_next_level(void)
       continue;
     }
 
+    if (d20roll_under(stat_luck_total())) {
+      if (l->is_lava(x, y) || l->is_fire(x, y)) {
+        dbg("No, %d,%d is an unlucky tile", x, y);
+        continue;
+      }
+    }
+
     if (l->is_floor(x, y) || l->is_corridor(x, y) || l->is_bridge(x, y) || l->is_water(x, y) || l->is_fire(x, y) ||
         l->is_lava(x, y)) {
 
