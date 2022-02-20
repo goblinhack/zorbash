@@ -119,7 +119,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   if (! it->is_dead) {
     dbg("Shove: It strength %d vs me %d", it->stat_str(), stat_str());
 
-    int its_strength = it->stat_str();
+    int its_strength = it->stat_str_total();
 
     if (it->is_heavy()) {
       its_strength += 10;
@@ -198,18 +198,60 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
         }
       }
     } else if (it->is_player()) {
+
       if (level->is_chasm(shove_pos)) {
+        if (d20roll_under(stat_luck_total())) {
+          if (is_player()) {
+            msg("%%fg=red$%s tries to shove you into the abyss, but luckily you avoid it!%%fg=reset$",
+                text_The().c_str());
+          }
+          return (THING_SHOVE_TRIED_AND_FAILED);
+        }
         msg("%%fg=red$%s shoves you into the abyss!%%fg=reset$", text_The().c_str());
       } else if (level->is_lava(shove_pos)) {
+        if (d20roll_under(stat_luck_total())) {
+          if (is_player()) {
+            msg("%%fg=red$%s tries to shove you into the lava, but luckily you avoid it!%%fg=reset$",
+                text_The().c_str());
+          }
+          return (THING_SHOVE_TRIED_AND_FAILED);
+        }
         msg("%%fg=red$%s shoves you into the red death!%%fg=reset$", text_The().c_str());
       } else if (level->is_water(shove_pos)) {
+        if (d20roll_under(stat_luck_total())) {
+          if (is_player()) {
+            msg("%%fg=red$%s tries to shove you into the depths, but luckily you avoid it!%%fg=reset$",
+                text_The().c_str());
+          }
+          return (THING_SHOVE_TRIED_AND_FAILED);
+        }
         msg("%%fg=red$%s shoves you into the depths!%%fg=reset$", text_The().c_str());
       } else if (level->is_fire(shove_pos)) {
+        if (d20roll_under(stat_luck_total())) {
+          if (is_player()) {
+            msg("%%fg=red$%s tries to shove you into the flames, but luckily you avoid it!%%fg=reset$",
+                text_The().c_str());
+          }
+          return (THING_SHOVE_TRIED_AND_FAILED);
+        }
         msg("%%fg=red$%s shoves you into the flames!%%fg=reset$", text_The().c_str());
       } else if (level->is_spiderweb(shove_pos)) {
+        if (d20roll_under(stat_luck_total())) {
+          if (is_player()) {
+            msg("%%fg=red$%s tries to shove you into the web, but luckily you avoid it!%%fg=reset$",
+                text_The().c_str());
+          }
+          return (THING_SHOVE_TRIED_AND_FAILED);
+        }
         msg("%%fg=red$%s shoves you into the sticky web!%%fg=reset$", text_The().c_str());
       } else if (it->is_dead) {
-        msg("%s kicks your corpse for fun!", text_The().c_str());
+        if (d20roll_under(stat_luck_total())) {
+          if (is_player()) {
+            msg("%s kicks your corpse for fun, but hurts itself!", text_The().c_str());
+          }
+        } else {
+          msg("%s kicks your corpse for fun!", text_The().c_str());
+        }
       } else {
         msg("%s shoves you!", text_The().c_str());
       }
@@ -244,7 +286,11 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   //
   if (! was_dead) {
     if (it->is_fire()) {
-      if (pcg_random_range(0, 100) < 5) {
+      if (d20roll_under(stat_luck_total())) {
+        if (is_player()) {
+          msg("%%fg=orange$It burns as you shove it, but you luckily avoid the flames.%%fg=reset$");
+        }
+      } else if (pcg_random_range(0, 100) < 5) {
         if (is_player()) {
           if (on_fire_set("set yourself on fire")) {
             msg("%%fg=red$Clumsy! You set yourself on fire!%%fg=reset$");

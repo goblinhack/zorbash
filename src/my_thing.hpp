@@ -1963,7 +1963,7 @@ public:
   void fall(float fall_height, ts_t ms);
   void fall_height_set(float);
   void fall_into_the_void(void);
-  void fire_tick(void);
+  bool fire_tick(void);
   void gas_poison_tick(void);
   void gc(void);
   void goal_penalty_tick(void);

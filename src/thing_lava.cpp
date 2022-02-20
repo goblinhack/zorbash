@@ -36,7 +36,11 @@ void Thing::lava_tick(void)
   // Give the player a chance
   //
   if (! level->is_smoke(at.x, at.y)) {
-    hit = (d100() < 80);
+    if (d20roll_under(stat_luck_total())) {
+      hit = false;
+    } else {
+      hit = (d100() < 80);
+    }
   } else {
     hit = true;
   }
@@ -58,7 +62,7 @@ void Thing::lava_tick(void)
     FOR_ALL_THINGS_END()
   } else {
     if (is_player()) {
-      msg("You stand on a sightly cooler rock in the lava!");
+      msg("You luckily stand on a sightly cooler rock in the lava!");
       popup("Hm, toasty!");
     }
   }

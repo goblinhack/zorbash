@@ -9,7 +9,7 @@
 #include "my_random.hpp"
 #include "my_thing.hpp"
 
-void Thing::fire_tick(void)
+bool Thing::fire_tick(void)
 {
   if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
     //
@@ -17,7 +17,7 @@ void Thing::fire_tick(void)
     //
   } else if (! environ_avoids_fire()) {
     IF_DEBUG3 { dbg("No, is not fire avoider"); }
-    return;
+    return false;
   }
 
   bool  hit = false;
@@ -95,15 +95,26 @@ void Thing::fire_tick(void)
       }
 
       if (hit) {
-        if (is_player()) {
-          msg("%%fg=red$The flames wrap around you!%%fg=reset$");
+        if (d20roll_under(stat_luck_total())) {
+          if (is_player()) {
+            msg("%%fg=red$The flames wrap around you but you luckily avoid them!%%fg=reset$");
+          }
+          hit = false;
+        } else {
+          if (is_player()) {
+            msg("%%fg=red$The flames wrap around you!%%fg=reset$");
+          }
         }
       } else {
         if (is_player()) {
           msg("%%fg=red$You dodge the flames.%%fg=reset$");
         }
+        hit = false;
       }
     } else {
+      if (is_player()) {
+        msg("%%fg=red$You sweat near the flames.%%fg=reset$");
+      }
       hit = false;
     }
   }
@@ -121,4 +132,6 @@ void Thing::fire_tick(void)
       smoke->lifespan_set(pcg_random_range(1, 10));
     }
   }
+
+  return hit;
 }

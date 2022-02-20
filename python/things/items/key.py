@@ -8,6 +8,7 @@ def key_init(name, text_name):
     my.gfx_animated(self, True)
     my.gfx_bounce_always(self, True)
     my.gfx_short_shadow_caster(self, True)
+    my.gfx_show_outlined(self, True)
     my.gold_value_dice(self, "10")
     my.is_able_to_fall(self, True)
     my.is_auto_collect_item(self, True)

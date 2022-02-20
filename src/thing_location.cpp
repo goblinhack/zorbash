@@ -86,15 +86,18 @@ void Thing::location_check_forced(void)
   if (is_dead) {
     return;
   }
-  fire_tick();
-  if (is_dead) {
-    return;
-  }
   grass_tick();
   if (is_dead) {
     return;
   }
   gas_poison_tick();
+  if (is_dead) {
+    return;
+  }
+  //
+  // Cool down / heat up
+  //
+  temperature_tick();
   if (is_dead) {
     return;
   }

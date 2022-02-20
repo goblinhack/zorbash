@@ -566,7 +566,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
   if (is_able_to_tire()) {
     if (stamina_get() < 5) {
       if (is_player()) {
-        if (d20roll_under(stat_con())) {
+        if (d20roll_under(stat_con_total())) {
           msg("You are so tired but dig deep and attack!");
         } else {
           msg("You are too tired to attack.");
@@ -676,16 +676,16 @@ bool Thing::equip_use_must_attack(int equip)
 std::string equip_name(int equip)
 {
   switch (equip) {
-    case MONST_EQUIP_HELMET : return "helmet";
-    case MONST_EQUIP_AMULET : return "amulet";
-    case MONST_EQUIP_GAUNTLET : return "gauntlet";
-    case MONST_EQUIP_CLOAK : return "cloak";
-    case MONST_EQUIP_SHIELD : return "shield";
-    case MONST_EQUIP_ARMOR : return "armor";
-    case MONST_EQUIP_WEAPON : return "weapon";
-    case MONST_EQUIP_RING1 : return "ring1";
-    case MONST_EQUIP_BOOTS : return "boots";
-    case MONST_EQUIP_RING2 : return "ring2";
+    case MONST_EQUIP_HELMET: return "helmet";
+    case MONST_EQUIP_AMULET: return "amulet";
+    case MONST_EQUIP_GAUNTLET: return "gauntlet";
+    case MONST_EQUIP_CLOAK: return "cloak";
+    case MONST_EQUIP_SHIELD: return "shield";
+    case MONST_EQUIP_ARMOR: return "armor";
+    case MONST_EQUIP_WEAPON: return "weapon";
+    case MONST_EQUIP_RING1: return "ring1";
+    case MONST_EQUIP_BOOTS: return "boots";
+    case MONST_EQUIP_RING2: return "ring2";
   }
   DIE("unknown equip enum");
 }
