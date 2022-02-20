@@ -2205,16 +2205,16 @@ int Thing::unused_flag130(void)
   return (tp()->unused_flag130());
 }
 
-int Thing::unused_flag131(void)
+int Thing::collision_hit_adj(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag131());
+  return (tp()->collision_hit_adj());
 }
 
-int Thing::unused_flag132(void)
+int Thing::collision_hit_180(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag132());
+  return (tp()->collision_hit_180());
 }
 
 int Thing::stamina_on_use(void)
@@ -2223,10 +2223,10 @@ int Thing::stamina_on_use(void)
   return (tp()->stamina_on_use());
 }
 
-int Thing::collision_hit_all_adjacent(void)
+int Thing::collision_hit_360(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->collision_hit_all_adjacent());
+  return (tp()->collision_hit_360());
 }
 
 int Thing::is_dead_on_falling(void)

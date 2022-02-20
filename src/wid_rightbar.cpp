@@ -276,7 +276,7 @@ static void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rel
   wid_rightbar_popup->log("Your constitution. 10 is for a normal sickly human and gives no bonus.", true);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   wid_rightbar_popup->log(
-      "Constitution gives you bonuses for hunger, poison resistance and pushing that "
+      "Constitution gives you bonuses for hunger, weapon stamina, poison resistance and pushing that "
       "bit harder to attack when utterly exhausted.",
       true);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);

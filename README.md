@@ -1,5 +1,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- pike                                                                                                                                        -->
+<!-- broadsword                                                                                                                                        -->
+<!-- hit 180                                                                                                                                      -->
+<!-- hit adj                                                                                                                                      -->
 <!-- evil check for cross                                                                                                                         -->
 <!-- boots of shoving                                                                                                                             -->
 <!-- cloak of fire protection                                                                                                                     -->

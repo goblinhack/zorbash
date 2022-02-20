@@ -529,10 +529,10 @@ private:
   int _unused_flag129 {};
   int _unused_flag13 {};
   int _unused_flag130 {};
-  int _unused_flag131 {};
-  int _unused_flag132 {};
+  int _collision_hit_adj {};
+  int _collision_hit_180 {};
   int _stamina_on_use {};
-  int _collision_hit_all_adjacent {};
+  int _collision_hit_360 {};
   int _is_dead_on_falling {};
   int _is_temperature_sensitive {};
   int _unused_flag14 {};
@@ -1420,10 +1420,10 @@ public:
   int unused_flag129(void) const { return _unused_flag129; }
   int unused_flag12(void) const { return _unused_flag12; }
   int unused_flag130(void) const { return _unused_flag130; }
-  int unused_flag131(void) const { return _unused_flag131; }
-  int unused_flag132(void) const { return _unused_flag132; }
+  int collision_hit_adj(void) const { return _collision_hit_adj; }
+  int collision_hit_180(void) const { return _collision_hit_180; }
   int stamina_on_use(void) const { return _stamina_on_use; }
-  int collision_hit_all_adjacent(void) const { return _collision_hit_all_adjacent; }
+  int collision_hit_360(void) const { return _collision_hit_360; }
   int is_dead_on_falling(void) const { return _is_dead_on_falling; }
   int is_temperature_sensitive(void) const { return _is_temperature_sensitive; }
   int unused_flag13(void) const { return _unused_flag13; }
@@ -2056,10 +2056,10 @@ public:
   void unused_flag129_set(int v) { _unused_flag129 = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }
   void unused_flag130_set(int v) { _unused_flag130 = v; }
-  void unused_flag131_set(int v) { _unused_flag131 = v; }
-  void unused_flag132_set(int v) { _unused_flag132 = v; }
+  void collision_hit_adj_set(int v) { _collision_hit_adj = v; }
+  void collision_hit_180_set(int v) { _collision_hit_180 = v; }
   void stamina_on_use_set(int v) { _stamina_on_use = v; }
-  void collision_hit_all_adjacent_set(int v) { _collision_hit_all_adjacent = v; }
+  void collision_hit_360_set(int v) { _collision_hit_360 = v; }
   void is_dead_on_falling_set(int v) { _is_dead_on_falling = v; }
   void is_temperature_sensitive_set(int v) { _is_temperature_sensitive = v; }
   void unused_flag13_set(int v) { _unused_flag13 = v; }

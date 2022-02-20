@@ -431,10 +431,10 @@ do
       unused_flag128_set \
       unused_flag129_set \
       unused_flag130_set \
-      unused_flag131_set \
-      unused_flag132_set \
+      collision_hit_adj_set \
+      collision_hit_180_set \
       stamina_on_use_set \
-      collision_hit_all_adjacent_set \
+      collision_hit_360_set \
       is_dead_on_falling_set \
       is_temperature_sensitive_set \
       move_speed_set \

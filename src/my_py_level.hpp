@@ -356,10 +356,10 @@ PyObject *level_unused_flag128_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag129_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag12_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag130_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag131_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag132_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_collision_hit_adj_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_collision_hit_180_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stamina_on_use_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_collision_hit_all_adjacent_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_collision_hit_360_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_falling_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_temperature_sensitive_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_move_speed_at(PyObject *obj, PyObject *args, PyObject *keywds);

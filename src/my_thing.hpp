@@ -1580,10 +1580,10 @@ public:
   int unused_flag129(void);
   int unused_flag12(void);
   int unused_flag130(void);
-  int unused_flag131(void);
-  int unused_flag132(void);
+  int collision_hit_adj(void);
+  int collision_hit_180(void);
   int stamina_on_use(void);
-  int collision_hit_all_adjacent(void);
+  int collision_hit_360(void);
   int is_dead_on_falling(void);
   int is_temperature_sensitive(void);
   int unused_flag13(void);

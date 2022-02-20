@@ -453,7 +453,7 @@ bool Thing::victim_attack_best(int equip, point *at)
   bool victim_attacked = false;
   bool victim_overlaps = false;
 
-  if (item && item->collision_hit_all_adjacent()) {
+  if (item && item->collision_hit_360()) {
     std::vector< point > all_deltas = {
         point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
         point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // For spiderwebs
@@ -463,7 +463,106 @@ bool Thing::victim_attack_best(int equip, point *at)
     for (int attempt = 1; attempt <= 3; attempt++) {
       for (const auto &d : all_deltas) {
         point at = curr_at + d;
-        dbg("Target-attack-best: Try to attack all adj with equipped item at %s", at.to_string().c_str());
+        dbg("Target-attack-best: Try to attack 360 with equipped item at %s", at.to_string().c_str());
+        TRACE_AND_INDENT();
+        if (victim_attack_best_at(equip, &at, attempt, victim_attacked, victim_overlaps)) {
+          ret = true;
+        }
+        if (victim_attacked) {
+          ret = true;
+        }
+      }
+      if (ret) {
+        break;
+      }
+    }
+    return ret;
+  }
+
+  if (item && item->collision_hit_180()) {
+    std::vector< point > all_deltas = {
+        point(dx, dy),
+        point(-dx, -dy),
+    };
+
+    bool ret = false;
+    for (int attempt = 1; attempt <= 3; attempt++) {
+      for (const auto &d : all_deltas) {
+        point at = curr_at + d;
+        dbg("Target-attack-best: Try to attack 180 adj with equipped item at %s", at.to_string().c_str());
+        TRACE_AND_INDENT();
+        if (victim_attack_best_at(equip, &at, attempt, victim_attacked, victim_overlaps)) {
+          ret = true;
+        }
+        if (victim_attacked) {
+          ret = true;
+        }
+      }
+      if (ret) {
+        break;
+      }
+    }
+    return ret;
+  }
+
+  if (item && item->collision_hit_adj()) {
+    std::vector< point > all_deltas;
+
+    if ((dx == -1) && (dy == -1)) {
+      all_deltas = {
+          point(-1, -1),
+          point(-1, 0),
+          point(0, -1),
+      };
+    } else if ((dx == 1) && (dy == 1)) {
+      all_deltas = {
+          point(1, 1),
+          point(1, 0),
+          point(0, 1),
+      };
+    } else if ((dx == 1) && (dy == -1)) {
+      all_deltas = {
+          point(1, -1),
+          point(1, 0),
+          point(0, -1),
+      };
+    } else if ((dx == -1) && (dy == 1)) {
+      all_deltas = {
+          point(-1, 1),
+          point(-1, 0),
+          point(0, 1),
+      };
+    } else if ((dx == -1) && (dy == 0)) {
+      all_deltas = {
+          point(-1, 0),
+          point(-1, -1),
+          point(-1, 1),
+      };
+    } else if ((dx == 1) && (dy == 0)) {
+      all_deltas = {
+          point(1, 0),
+          point(1, -1),
+          point(1, 1),
+      };
+    } else if ((dx == 0) && (dy == -1)) {
+      all_deltas = {
+          point(0, -1),
+          point(-1, -1),
+          point(1, -1),
+      };
+    } else if ((dx == 0) && (dy == 1)) {
+      all_deltas = {
+          point(0, 1),
+          point(-1, 1),
+          point(1, 1),
+      };
+    }
+
+    bool ret = false;
+    for (int attempt = 1; attempt <= 3; attempt++) {
+      for (const auto &d : all_deltas) {
+        point at = curr_at + d;
+        dbg("Target-attack-best: Try to attack 180 adj with equipped item at %s", at.to_string().c_str());
         TRACE_AND_INDENT();
         if (victim_attack_best_at(equip, &at, attempt, victim_attacked, victim_overlaps)) {
           ret = true;
