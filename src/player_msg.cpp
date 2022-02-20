@@ -116,7 +116,7 @@ void Thing::msg(const char *fmt, ...)
 
   auto player = level->player;
   if (! player) {
-    log("No player for msg: %s", why.c_str());
+    dbg("No player for msg: %s", why.c_str());
     TRACE_AND_INDENT();
     va_start(args, fmt);
     log_(fmt, args);
@@ -125,7 +125,7 @@ void Thing::msg(const char *fmt, ...)
   }
 
   if (! player_is_ready_for_messages(why)) {
-    log("Player not ready for msg: %s", why.c_str());
+    dbg("Player not ready for msg: %s", why.c_str());
     TRACE_AND_INDENT();
     va_start(args, fmt);
     log_(fmt, args);
@@ -136,7 +136,7 @@ void Thing::msg(const char *fmt, ...)
   if (! is_player()) {
     int distance = distance_to_player();
     if (distance >= DMAP_IS_PASSABLE) {
-      log("Too far too see msg: %s", why.c_str());
+      dbg("Too far too see msg: %s", why.c_str());
       TRACE_AND_INDENT();
       va_start(args, fmt);
       log_(fmt, args);
@@ -145,7 +145,7 @@ void Thing::msg(const char *fmt, ...)
     }
 
     if (! level->can_see_unimpeded(player->curr_at.x, player->curr_at.y, curr_at.x, curr_at.y)) {
-      log("Cannot directly see for msg: %s", why.c_str());
+      dbg("Cannot directly see for msg: %s", why.c_str());
       TRACE_AND_INDENT();
       va_start(args, fmt);
       log_(fmt, args);

@@ -207,6 +207,8 @@ public:
   void wid_thing_info_add_damage_future3(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_melee(WidPopup *w, Thingp t);
+  void wid_thing_info_add_break_chance(WidPopup *w, Thingp t);
+  void wid_thing_info_add_crit_chance(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_natural_attack(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_poison(WidPopup *w, Thingp t);

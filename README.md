@@ -21,7 +21,6 @@
 <!-- - swamp wort food                                                                                                                            -->
 <!-- - monst swamp blink toad, can teleport and launch a stream of goo                                                                            -->
 <!-- - ogre and totems?                                                                                                                           -->
-<!-- - axe hits all around                                                                                                                        -->
 <!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
 <!-- - boss 2 jelly boss, spawns jellys, tries to jump splat the player                                                                           -->
@@ -154,7 +153,6 @@
 <!-- - plutonium sword, no wall damage                                                                                                            -->
 <!-- - strength penalties                                                                                                                         -->
 <!-- - gauntlet of lion armour (Henry II)                                                                                                         -->
-<!-- - axe hits all monsts around you ?                                                                                                           -->
 <!-- - blessed items resist explosion                                                                                                             -->
 <!-- - warhammer should kill parent jelly in one go                                                                                               -->
 <!-- - warhammer smash skeletton                                                                                                                  -->

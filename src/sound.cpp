@@ -117,7 +117,7 @@ bool sound_find(const std::string &alias)
 bool sound_play(const std::string &alias)
 {
   TRACE_AND_INDENT();
-  LOG("Play sound %s", alias.c_str());
+  DBG2("Play sound %s", alias.c_str());
 
   auto sound = all_sound.find(alias);
   if (sound == all_sound.end()) {
@@ -142,8 +142,7 @@ bool sound_play(const std::string &alias)
   Mix_VolumeChunk(sound->second->chunk, volume);
 
   if (Mix_PlayChannel(-1 /* first free channel */, sound->second->chunk, 0 /* loops */) == -1) {
-
-    LOG("Cannot play sound %s on any channel", alias.c_str());
+    DBG2("Cannot play sound %s on any channel", alias.c_str());
     Mix_HaltChannel(0);
     SDL_ClearError();
 
@@ -159,7 +158,7 @@ bool sound_play(const std::string &alias)
 bool sound_play_channel(int channel, const std::string &alias)
 {
   TRACE_AND_INDENT();
-  LOG("Play sound %s on channel %d", alias.c_str(), channel);
+  DBG2("Play sound %s on channel %d", alias.c_str(), channel);
 
   auto sound = all_sound.find(alias);
   if (sound == all_sound.end()) {
@@ -180,7 +179,7 @@ bool sound_play_channel(int channel, const std::string &alias)
 
   if (Mix_Playing(channel)) {
     if (Mix_PlayChannel(-1, sound->second->chunk, 0 /* loops */) == -1) {
-      LOG("Cannot play sound %s on channel %d", alias.c_str(), channel);
+      DBG2("Cannot play sound %s on channel %d", alias.c_str(), channel);
       return false;
     }
     return true;
@@ -193,7 +192,7 @@ bool sound_play_channel(int channel, const std::string &alias)
 
   if (Mix_PlayChannel(channel, sound->second->chunk, 0 /* loops */) == -1) {
     if (Mix_PlayChannel(-1, sound->second->chunk, 0 /* loops */) == -1) {
-      LOG("Cannot play sound %s on channel %d", alias.c_str(), channel);
+      DBG2("Cannot play sound %s on channel %d", alias.c_str(), channel);
       return false;
     }
   }

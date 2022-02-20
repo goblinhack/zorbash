@@ -159,6 +159,8 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_damage_acid(wid_popup_window, t);
   wid_thing_info_add_damage_digest(wid_popup_window, t);
   wid_thing_info_add_damage_necrosis(wid_popup_window, t);
+  wid_thing_info_add_break_chance(wid_popup_window, t);
+  wid_thing_info_add_crit_chance(wid_popup_window, t);
   wid_thing_info_add_attack(wid_popup_window, t);
   wid_thing_info_add_stat_def(wid_popup_window, t);
   wid_thing_info_add_stat_str(wid_popup_window, t);
@@ -234,6 +236,8 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_damage_acid(wid_popup_window, t);
     wid_thing_info_add_damage_digest(wid_popup_window, t);
     wid_thing_info_add_damage_necrosis(wid_popup_window, t);
+    wid_thing_info_add_break_chance(wid_popup_window, t);
+    wid_thing_info_add_crit_chance(wid_popup_window, t);
     wid_thing_info_add_attack(wid_popup_window, t);
     wid_thing_info_add_stat_def(wid_popup_window, t);
     wid_thing_info_add_stat_str(wid_popup_window, t);
@@ -516,11 +520,10 @@ void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   if (t->enchant_get()) {
     if (t->is_skill()) {
-      w->log("%%fg=yellow$This skill is enchanted!");
+      w->log("This skill is enchanted.", true);
     } else {
-      w->log("%%fg=yellow$This item is enchanted!");
+      w->log("Item is enchanted.", true);
     }
-    w->log(UI_LOGGING_EMPTY_LINE);
   }
 }
 
@@ -531,17 +534,13 @@ void Game::wid_thing_info_add_rarity(WidPopup *w, Thingp t)
   auto tp = t->tp();
   if (t->is_collectable() || t->is_monst()) {
     if (tp->rarity() == THING_RARITY_UNCOMMON) {
-      w->log("This item is uncommon", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      w->log("Item is uncommon", true);
     } else if (tp->rarity() == THING_RARITY_RARE) {
-      w->log("This item is rare.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      w->log("Item is rare.", true);
     } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-      w->log("This item is very rare.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      w->log("Item is very rare.", true);
     } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-      w->log("This item is unique!", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      w->log("Item is unique!", true);
     }
   }
 }
@@ -606,6 +605,50 @@ void Game::wid_thing_info_add_health(WidPopup *w, Thingp t)
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health %21s", tmp2);
     }
     w->log(tmp);
+  }
+}
+
+void Game::wid_thing_info_add_break_chance(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
+
+  auto chance = t->break_chance_d10000();
+  if (chance) {
+    int chance = (int) ((((float) t->break_chance_d10000()) / 10000.0) * 100.0);
+    if (chance < 5) {
+      float chance = ((((float) t->break_chance_d10000()) / 10000.0) * 100.0);
+      snprintf(tmp2, sizeof(tmp2) - 1, "%3.2f pct", chance);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Breaking chance %10s", tmp2);
+      w->log(tmp);
+    } else {
+      snprintf(tmp2, sizeof(tmp2) - 1, "%d pct", chance);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Breaking chance %10s", tmp2);
+      w->log(tmp);
+    }
+  }
+}
+
+void Game::wid_thing_info_add_crit_chance(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
+
+  auto chance = t->crit_chance_d10000();
+  if (chance) {
+    int chance = (int) ((((float) t->crit_chance_d10000()) / 10000.0) * 100.0);
+    if (chance < 5) {
+      float chance = ((((float) t->crit_chance_d10000()) / 10000.0) * 100.0);
+      snprintf(tmp2, sizeof(tmp2) - 1, "%3.2f pct", chance);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Crit hit chance %10s", tmp2);
+      w->log(tmp);
+    } else {
+      snprintf(tmp2, sizeof(tmp2) - 1, "%d pct", chance);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Crit hit chance %10s", tmp2);
+      w->log(tmp);
+    }
   }
 }
 

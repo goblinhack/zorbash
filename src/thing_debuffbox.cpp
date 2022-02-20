@@ -64,7 +64,7 @@ bool Thing::debuffbox_id_insert(Thingp what)
   int item_slot = -1;
   if (free_slot != -1) {
     itemsp()->debuffbox_id[ free_slot ] = what->id;
-    item_slot                               = free_slot;
+    item_slot                           = free_slot;
   } else {
     if (debuffbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
       msg("No space to carry %s which is not carried.", what->text_the().c_str());
@@ -154,23 +154,23 @@ Thingp Level::debuffbox_get(const uint32_t slot)
   }
 
   if (slot >= itemsp->debuffbox_id.size()) {
-    DBG("Slot %d out of range, max %d", slot, (int) itemsp->debuffbox_id.size());
+    DBG2("Slot %d out of range, max %d", slot, (int) itemsp->debuffbox_id.size());
     return nullptr;
   }
 
   auto thing_id = get(itemsp->debuffbox_id, slot);
   if (! thing_id) {
-    DBG("Slot %d has no tp", slot);
+    DBG2("Slot %d has no tp", slot);
     return nullptr;
   }
 
   auto t = thing_find(thing_id);
   if (unlikely(! t)) {
-    DBG("Slot %d has no valid tp", slot);
+    DBG2("Slot %d has no valid tp", slot);
     return nullptr;
   }
 
-  DBG("Slot %d has %s", slot, t->name().c_str());
+  DBG2("Slot %d has %s", slot, t->name().c_str());
 
   for (auto oid : itemsp->debuffs) {
     auto o = thing_find(oid);
@@ -182,17 +182,17 @@ Thingp Level::debuffbox_get(const uint32_t slot)
     }
   }
 
-  DBG("Slot %d has debuff tp %s that is not carried", slot, t->name().c_str());
+  DBG2("Slot %d has debuff tp %s that is not carried", slot, t->name().c_str());
   return nullptr;
 }
 
 bool Level::debuffbox_over(const uint32_t slot)
 {
-  DBG("debuffbox: Over debuffbox slot %d", slot);
+  DBG2("debuffbox: Over debuffbox slot %d", slot);
   TRACE_AND_INDENT();
 
   if (! player) {
-    DBG("debuffbox: Ignore; no player");
+    DBG2("debuffbox: Ignore; no player");
     return false;
   }
 
@@ -203,13 +203,13 @@ bool Level::debuffbox_over(const uint32_t slot)
   }
 
   if (slot >= itemsp->debuffbox_id.size()) {
-    DBG("debuffbox: Ignore; slot out of range");
+    DBG2("debuffbox: Ignore; slot out of range");
     return false;
   }
 
   auto oid = get(itemsp->debuffbox_id, slot);
   if (! oid) {
-    DBG("debuffbox: Ignore; nothing at that slot");
+    DBG2("debuffbox: Ignore; nothing at that slot");
     return false;
   }
 
@@ -226,7 +226,7 @@ bool Level::debuffbox_over(const uint32_t slot)
 
 Thingp Level::debuffbox_describe(const uint32_t slot)
 {
-  DBG("debuffbox: Describe slot %d", slot);
+  DBG2("debuffbox: Describe slot %d", slot);
   TRACE_AND_INDENT();
 
   auto what = debuffbox_get(slot);
@@ -234,7 +234,7 @@ Thingp Level::debuffbox_describe(const uint32_t slot)
     IF_DEBUG2 { what->log("debuffbox: Describe slot %d", slot); }
     what->describe_when_hovered_over_in_rightbar();
   } else {
-    DBG("debuffbox: Describe slot %d => nothing there", slot);
+    DBG2("debuffbox: Describe slot %d => nothing there", slot);
   }
   return what;
 }

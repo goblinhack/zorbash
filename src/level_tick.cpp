@@ -621,7 +621,7 @@ bool Level::tick(void)
   bool tick_done = game->tick_end();
 
   if (tick_done) {
-    LOG("Level tick done");
+    DBG("Level tick done");
     TRACE_AND_INDENT();
 
     handle_all_pending_things();

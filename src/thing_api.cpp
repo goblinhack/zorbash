@@ -268,6 +268,19 @@ int Thing::break_chance_d10000(void)
   return chance;
 }
 
+int Thing::crit_chance_d10000(void)
+{
+  TRACE_NO_INDENT();
+
+  int chance = tp()->crit_chance_d10000();
+  int e      = enchant_level();
+  while (e-- > 0) {
+    chance *= 2;
+  }
+
+  return chance;
+}
+
 int Thing::damage_melee_chance_d1000(void)
 {
   TRACE_NO_INDENT();
@@ -7728,7 +7741,7 @@ int Thing::group_get(void)
   if (is_projectile()) {
     return THING_GROUP_PRIO_HIGH;
   }
-  if (is_player()) {
+  if (is_player() || is_critical_to_level()) {
     return THING_GROUP_PRIO_MED;
   }
   if (is_tmp_thing()) {

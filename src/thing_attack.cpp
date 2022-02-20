@@ -836,6 +836,10 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
   bool crit = false;
 
+  if (d10000() < crit_chance_d10000()) {
+    crit = true;
+  }
+
   //
   // See if we can bypass its defences
   //
