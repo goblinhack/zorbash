@@ -14,6 +14,9 @@ def on_idle(me, x, y):
 
 
 def explode(me, x, y):
+    if my.thing_is_dead_or_dying(me):
+        return
+
     my.thing_msg(me, "The wand of lightning explodes in a flash.")
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")
