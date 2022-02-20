@@ -255,7 +255,7 @@ std::vector< std::wstring > wid_botcon_serialize(void)
     tmp = wid_get_next(tmp);
   }
   std::reverse(r.begin(), r.end());
-  return (r);
+  return r;
 }
 
 void wid_botcon_deserialize(std::vector< std::wstring > r)

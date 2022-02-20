@@ -13,7 +13,7 @@ template < class T > std::vector< T > make_range(const size_t how_many)
 {
   std::vector< T > v(how_many);
   std::generate(v.begin(), v.end(), [ n = 0 ]() mutable { return n++; });
-  return (v);
+  return v;
 }
 
 template < class T > std::vector< T > make_range(T start, T stop)
@@ -21,7 +21,7 @@ template < class T > std::vector< T > make_range(T start, T stop)
   size_t           how_many = stop - start;
   std::vector< T > v(how_many);
   std::generate(v.begin(), v.end(), [ n = start ]() mutable { return n++; });
-  return (v);
+  return v;
 }
 
 //
@@ -35,7 +35,7 @@ template < class T > std::vector< T > make_shuffled_range(const size_t how_many)
   std::vector< T > v(how_many);
   std::generate(v.begin(), v.end(), [ n = 0 ]() mutable { return n++; });
   std::shuffle(v.begin(), v.end(), rng);
-  return (v);
+  return v;
 }
 
 //

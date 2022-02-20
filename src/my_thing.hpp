@@ -471,7 +471,7 @@ public:
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
   bool victim_attack_best(int equip, point *at = nullptr);
-  bool victim_attack_best_at(int equip, point *at = nullptr);
+  bool victim_attack_best_at(int equip, point *at, int attempt, bool &victim_attacked, bool &victim_overlaps);
   bool victim_select(Thingp item);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
@@ -2135,7 +2135,8 @@ public:
   bool victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
                                     std::vector< point > &all_deltas);
   bool victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at);
-  bool victim_attack_found_best(Thingp item, Thingp best, point best_hit_at);
+  bool victim_attack_found_best(Thingp item, Thingp best, point best_hit_at, bool &victim_attacked,
+                                bool &victim_overlaps);
 
 } Thing;
 

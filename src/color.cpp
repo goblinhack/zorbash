@@ -328,5 +328,5 @@ color color_to_mono(color a)
   a.g = avg;
   a.b = avg;
 
-  return (a);
+  return a;
 }

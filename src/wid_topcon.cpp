@@ -967,7 +967,7 @@ std::vector< std::wstring > wid_topcon_serialize(void)
     tmp = wid_get_next(tmp);
   }
   std::reverse(r.begin(), r.end());
-  return (r);
+  return r;
 }
 
 void wid_topcon_deserialize(std::vector< std::wstring > r)

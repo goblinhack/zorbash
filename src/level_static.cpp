@@ -32,7 +32,7 @@ LevelStaticp LevelStatic::level_new(void)
   TRACE_AND_INDENT();
   auto r = new LevelStatic();
   LevelStatic::all_static_levels.push_back(r);
-  return (r);
+  return r;
 }
 
 void LevelStatic::finalize(void)

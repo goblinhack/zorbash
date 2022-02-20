@@ -29,7 +29,7 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
 {
   auto t = new class Thing_();
   t->init(this, name, at, owner);
-  return (t);
+  return t;
 }
 
 Thing::Thing_(void) { newptr(MTYPE_THING, this, "thing"); }

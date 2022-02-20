@@ -23,7 +23,7 @@ static Fontp font_load(std::string name, std::string file, int size, int style)
   auto f = font_find(name);
 
   if (f) {
-    return (f);
+    return f;
   }
 
   if (name == "") {
@@ -37,14 +37,14 @@ static Fontp font_load(std::string name, std::string file, int size, int style)
 
   if (result.second == false) {
     ERR("Font insert name [%s] failed", name.c_str());
-    return (f);
+    return f;
   }
 
 #ifdef ENABLE_GENERATE_TTF
   ttf_read_tga(f, file.c_str(), size);
 #endif
 
-  return (f);
+  return f;
 }
 
 Fontp font_find(std::string file)

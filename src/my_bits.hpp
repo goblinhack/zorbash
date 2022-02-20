@@ -80,6 +80,6 @@ static inline int32_t bitcount(int32_t w)
   w = (0x00ff00ffLU & w) + (0x00ff00ffLU & (w >> 8));
   w = (0x0000ffffLU & w) + (0x0000ffffLU & (w >> 16));
 
-  return (w);
+  return w;
 }
 #endif

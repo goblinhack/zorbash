@@ -137,7 +137,7 @@ int Thing::stat_str_set(int v)
   }
   new_infop();
   auto n = (infop()->stat_str = v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_str_decr(int v)
@@ -148,7 +148,7 @@ int Thing::stat_str_decr(int v)
   }
   new_infop();
   auto n = (infop()->stat_str -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_str_incr(int v)
@@ -159,7 +159,7 @@ int Thing::stat_str_incr(int v)
   }
   new_infop();
   auto n = (infop()->stat_str += v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_str_decr(void)
@@ -170,7 +170,7 @@ int Thing::stat_str_decr(void)
   }
   new_infop();
   auto n = (infop()->stat_str--);
-  return (n);
+  return n;
 }
 
 int Thing::stat_str_incr(void)
@@ -181,5 +181,5 @@ int Thing::stat_str_incr(void)
   }
   new_infop();
   auto n = (infop()->stat_str++);
-  return (n);
+  return n;
 }

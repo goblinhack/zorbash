@@ -35,7 +35,7 @@ Roomp Room::room_new(void)
   TRACE_AND_INDENT();
   auto r = new Room();
   Room::all_rooms.push_back(r);
-  return (r);
+  return r;
 }
 
 Roomp Room::create_w_flip(void)
@@ -92,7 +92,7 @@ Roomp Room::create_w_flip(void)
 
   r->finalize();
 
-  return (r);
+  return r;
 }
 
 Roomp Room::rotate_clockwise(void)
@@ -150,7 +150,7 @@ Roomp Room::rotate_clockwise(void)
 
   r->finalize();
 
-  return (r);
+  return r;
 }
 
 //

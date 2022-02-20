@@ -1700,9 +1700,9 @@ def init_tiles_16x16():
         "wall_dungeon.4.1.2x2.4",
         ############################################################
         "key_golden",
-        "key_pair",
         "key_penta",
-        "",
+        "key_pair",
+        "key_single",
         "",
         "",
         "",

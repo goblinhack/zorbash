@@ -93,7 +93,7 @@ int Thing::noise_set(int v)
   }
   new_infop();
   auto n = (infop()->noise = v);
-  return (n);
+  return n;
 }
 
 int Thing::noise_decr(int v)
@@ -104,7 +104,7 @@ int Thing::noise_decr(int v)
   }
   new_infop();
   auto n = (infop()->noise -= v);
-  return (n);
+  return n;
 }
 
 int Thing::noise_incr(int v)
@@ -115,7 +115,7 @@ int Thing::noise_incr(int v)
   }
   new_infop();
   auto n = (infop()->noise += v);
-  return (n);
+  return n;
 }
 
 int Thing::noise_decr(void)
@@ -126,7 +126,7 @@ int Thing::noise_decr(void)
   }
   new_infop();
   auto n = (infop()->noise--);
-  return (n);
+  return n;
 }
 
 int Thing::noise_incr(void)
@@ -137,5 +137,5 @@ int Thing::noise_incr(void)
   }
   new_infop();
   auto n = (infop()->noise++);
-  return (n);
+  return n;
 }

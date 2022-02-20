@@ -77,7 +77,7 @@ Fontp ttf_new(std::string name, int pointSize, int style)
     TTF_CloseFont(ttf);
   }
 
-  return (f);
+  return f;
 }
 
 //
@@ -209,7 +209,7 @@ Fontp ttf_read_tga(Fontp f, const char *name, int pointsize)
     getref(f->tex, c).image = tex_get_surface(tex);
   }
 
-  return (f);
+  return f;
 }
 
 Fontp ttf_write_tga(std::string name, int pointsize, int style)
@@ -422,5 +422,5 @@ Fontp ttf_write_tga(std::string name, int pointsize, int style)
     getref(f->tex, c).tex   = tex_get_gl_binding(tex);
   }
 
-  return (f);
+  return f;
 }

@@ -51,18 +51,6 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
       int prio = t->collision_hit_priority();
       dbg2("Target-attack-best: %s prio %d", t->to_short_string().c_str(), prio);
 
-      //
-      // Get the most important thing to hit.
-      //
-      if (item && item->possible_to_attack(t)) {
-        //
-        // Sword can attack
-        //
-      } else if (! possible_to_attack(t)) {
-        dbg2("Target-attack-best: %s no cannot attack", t->to_short_string().c_str());
-        continue;
-      }
-
       if (t->is_dead || t->is_dying) {
         dbg2("Target-attack-best: %s no dead or dying", t->to_short_string().c_str());
         continue;
@@ -85,6 +73,18 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
         dbg2("Target-attack-best: %s monst prio %d", t->to_short_string().c_str(), prio);
       } else {
         dbg2("Target-attack-best: %s ignore1 %d", t->to_short_string().c_str(), prio);
+        continue;
+      }
+
+      //
+      // Get the most important thing to hit.
+      //
+      if (item && item->possible_to_attack(t)) {
+        //
+        // Sword can attack
+        //
+      } else if (! possible_to_attack(t)) {
+        dbg2("Target-attack-best: %s no cannot attack", t->to_short_string().c_str());
         continue;
       }
 
@@ -244,10 +244,11 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
-bool Thing::victim_attack_found_best(Thingp item, Thingp best, point best_hit_at)
+bool Thing::victim_attack_found_best(Thingp item, Thingp best, point best_hit_at, bool &victim_attacked,
+                                     bool &victim_overlaps)
 {
-  bool victim_attacked = false;
-  bool victim_overlaps = false;
+  victim_attacked = false;
+  victim_overlaps = false;
 
   dbg2("Target-attack-best: Best target to hit is %s at %s", best->to_string().c_str(),
        best_hit_at.to_string().c_str());
@@ -286,7 +287,7 @@ bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point
   return false;
 }
 
-bool Thing::victim_attack_best_at(int equip, point *at)
+bool Thing::victim_attack_best_at(int equip, point *at, int attempt, bool &victim_attacked, bool &victim_overlaps)
 {
   if (at) {
     dbg("Target-attack-best-at: Try to attack with equipped item at %s", at->to_string().c_str());
@@ -305,8 +306,8 @@ bool Thing::victim_attack_best_at(int equip, point *at)
     equip_use_offset_get(&dx, &dy, equip);
   }
 
-  bool victim_attacked = false;
-  bool victim_overlaps = false;
+  victim_attacked = false;
+  victim_overlaps = false;
 
   dbg("Target-attack-best: Attack delta %d,%d", dx, dy);
   TRACE_AND_INDENT();
@@ -351,21 +352,46 @@ bool Thing::victim_attack_best_at(int equip, point *at)
         point(dx, dy),
     };
     if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
-      return victim_attack_found_best(item, best, best_hit_at);
+      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
     }
   }
 
-  if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
-    return victim_attack_found_best(item, best, best_hit_at);
+  if (attempt) {
+    if (attempt == 1) {
+      if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+        return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+      }
+    }
+    if (attempt == 2) {
+      if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
+        return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+      }
+    }
+    if (attempt == 3) {
+      if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
+        return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+      }
+    }
+  } else {
+    if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+    }
+
+    if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
+      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+    }
+
+    if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
+      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+    }
   }
 
-  if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
-    return victim_attack_found_best(item, best, best_hit_at);
+  if (attempt) {
+    return false;
   }
 
-  if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
-    return victim_attack_found_best(item, best, best_hit_at);
-  }
+  dbg("Target-attack-best: Last resorts");
+  TRACE_AND_INDENT();
 
   //
   // Last resort where we just try and hit where we are pointing.
@@ -424,6 +450,9 @@ bool Thing::victim_attack_best(int equip, point *at)
   //
   // Axe hits all around
   //
+  bool victim_attacked = false;
+  bool victim_overlaps = false;
+
   if (item && item->collision_hit_all_adjacent()) {
     std::vector< point > all_deltas = {
         point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
@@ -431,23 +460,26 @@ bool Thing::victim_attack_best(int equip, point *at)
     };
 
     bool ret = false;
-    for (const auto &d : all_deltas) {
-      point at = curr_at + d;
-      dbg("Target-attack-best: Try to attack all adj with equipped item at %s", at.to_string().c_str());
-      TRACE_AND_INDENT();
-      if (victim_attack_best_at(equip, &at)) {
-        ret = true;
-        //
-        // Make sure each hit uses stamina
-        //
-        stamina_decr();
+    for (int attempt = 1; attempt <= 3; attempt++) {
+      for (const auto &d : all_deltas) {
+        point at = curr_at + d;
+        dbg("Target-attack-best: Try to attack all adj with equipped item at %s", at.to_string().c_str());
+        TRACE_AND_INDENT();
+        if (victim_attack_best_at(equip, &at, attempt, victim_attacked, victim_overlaps)) {
+          ret = true;
+        }
+        if (victim_attacked) {
+          ret = true;
+        }
+      }
+      if (ret) {
+        break;
       }
     }
     return ret;
   }
 
-  if (victim_attack_best_at(equip, at)) {
-    stamina_decr();
+  if (victim_attack_best_at(equip, at, 0 /* All attempts */, victim_attacked, victim_overlaps)) {
     return true;
   }
 

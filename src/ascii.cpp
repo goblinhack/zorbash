@@ -793,7 +793,7 @@ int ascii_strlen(std::wstring const &text)
     x++;
   }
 
-  return (x);
+  return x;
 }
 
 int ascii_strlen(std::wstring const &text, std::wstring *col)
@@ -859,7 +859,7 @@ int ascii_strlen(std::wstring const &text, std::wstring *col)
     x++;
   }
 
-  return (x);
+  return x;
 }
 
 std::string ascii_strip(std::string const &text)

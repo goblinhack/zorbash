@@ -1781,5 +1781,5 @@ PyMODINIT_FUNC py_my_module_create(void)
     return 0;
   }
 
-  return (m);
+  return m;
 }
