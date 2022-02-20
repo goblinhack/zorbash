@@ -209,7 +209,7 @@ int Thing::stat_def_set(int v)
   }
   new_infop();
   auto n = (infop()->stat_def = v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_def_decr(int v)
@@ -223,7 +223,7 @@ int Thing::stat_def_decr(int v)
   if (infop()->stat_def < 0) {
     infop()->stat_def = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::stat_def_incr(int v)
@@ -234,7 +234,7 @@ int Thing::stat_def_incr(int v)
   }
   new_infop();
   auto n = (infop()->stat_def += v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_def_decr(void)
@@ -248,7 +248,7 @@ int Thing::stat_def_decr(void)
   if (infop()->stat_def < 0) {
     infop()->stat_def = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::stat_def_incr(void)
@@ -259,5 +259,5 @@ int Thing::stat_def_incr(void)
   }
   new_infop();
   auto n = (infop()->stat_def++);
-  return (n);
+  return n;
 }

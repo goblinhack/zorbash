@@ -4458,6 +4458,6 @@ Dungeonp dungeon_test(void)
   pcg_srand(x);
   auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, x);
 
-  return (d);
+  return d;
 #endif
 }

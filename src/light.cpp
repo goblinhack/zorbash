@@ -120,7 +120,7 @@ Lightp light_new(Thingp owner, point offset, int light_power, int delta, color c
   l->update_light_scale(1.0);
 
   // log("Created");
-  return (l);
+  return l;
 }
 
 Lightp light_new(Thingp owner, point offset, int light_power)
@@ -137,7 +137,7 @@ Lightp light_new(Thingp owner, point offset, int light_power)
   l->update_light_scale(1.0);
 
   // log("Created");
-  return (l);
+  return l;
 }
 
 void Light::update_light_scale(float scale)

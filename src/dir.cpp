@@ -67,7 +67,7 @@ char *dir_dotdot(char *s)
 
   size = (uint32_t) strlen(s);
   if (size <= 1) {
-    return (s);
+    return s;
   }
 
   /*

@@ -77,9 +77,9 @@ void Game::place_player(void)
         }
         // level->thing_new("belcher", point(x + 3, y));
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
-        level->thing_new("rat_giant", point(x + 1, y - 1));
-        level->thing_new("rat_giant", point(x + 1, y + 1));
-        level->thing_new("rat_giant", point(x - 1, y + 1));
+        // level->thing_new("rat_giant", point(x + 1, y - 1));
+        // level->thing_new("rat_giant", point(x + 1, y + 1));
+        // level->thing_new("rat_giant", point(x - 1, y + 1));
         // level->thing_new("gargoyle_static", point(x + 2, y - 2));
         // level->thing_new("lava", point(x, y));
         level->thing_new("food_frog", point(x + 3, y - 1));
@@ -89,22 +89,22 @@ void Game::place_player(void)
         // level->thing_new("four_leaf_clover", point(x + 2, y - 1));
         // level->thing_new("medal_of_valor", point(x + 2, y - 1));
         // level->thing_new("wooden_cross", point(x + 2, y - 1));
-        //  level->thing_new("spiderweb", point(x + 3, y));
+        // level->thing_new("spiderweb", point(x + 3, y));
         // level->thing_new("armor_lather", point(x, y - 2));
         // level->thing_new("boots_fluffy", point(x, y - 2));
         // level->thing_new("shield_woodon", point(x, y - 2));
-        //  level->thing_new("fire", point(x, y - 2));
+        // level->thing_new("fire", point(x, y - 2));
         // level->thing_new("food_frog", point(x, y - 2));
         // level->thing_new("thunderstone", point(x, y - 2));
         // level->thing_new("map_treasure", point(x, y - 2));
         // level->thing_new("map_beast", point(x, y - 2));
-        //   level->thing_new("zorblin", point(x + 1, y));
-        //  level->thing_new("zorb_pack", point(x + 2, y));
-        //  level->assign_leaders_and_followers();
+        // level->thing_new("zorblin", point(x + 1, y));
+        // level->thing_new("zorb_pack", point(x + 2, y));
+        // level->assign_leaders_and_followers();
+        // level->thing_new("key_pair", point(x - 1, y - 2));
+        // level->thing_new("key_golden", point(x - 1, y + 2));
+        // level->thing_new("key_penta", point(x, y + 12));
       }
-      // level->thing_new("key_pair", point(x - 1, y - 2));
-      // level->thing_new("key_golden", point(x - 1, y + 2));
-      level->thing_new("key_penta", point(x, y + 12));
 
       LOG("INF: Placed player");
 

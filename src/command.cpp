@@ -404,7 +404,7 @@ uint8_t command_handle(std::string input, std::string *expanded_text, uint8_t sh
     *expanded_text = std::string(buf);
   }
 
-  return (r);
+  return r;
 }
 
 uint8_t command_handle(std::wstring input, std::wstring *expanded_text, uint8_t show_ambiguous, uint8_t show_complete,
@@ -421,5 +421,5 @@ uint8_t command_handle(std::wstring input, std::wstring *expanded_text, uint8_t 
     *expanded_text = string_to_wstring(std::string(buf));
   }
 
-  return (r);
+  return r;
 }

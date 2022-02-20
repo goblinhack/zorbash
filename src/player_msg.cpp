@@ -136,7 +136,7 @@ void Thing::msg(const char *fmt, ...)
   if (! is_player()) {
     int distance = distance_to_player();
     if (distance >= DMAP_IS_PASSABLE) {
-      dbg("Too far too see msg: %s", why.c_str());
+      dbg("Too far to see msg: %s", why.c_str());
       TRACE_AND_INDENT();
       va_start(args, fmt);
       log_(fmt, args);

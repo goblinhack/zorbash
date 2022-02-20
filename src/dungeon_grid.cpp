@@ -670,7 +670,7 @@ void Nodes::putn(const int x, const int y, const DungeonNode n)
 DungeonNode *Nodes::getn(const int x, const int y)
 {
   auto p = node_addr(x, y);
-  return (p);
+  return p;
 }
 
 point Nodes::random_dir(void)
@@ -2181,7 +2181,7 @@ class Nodes *grid_test(void)
     /* auto d = */ new Nodes(MAX_GRID_CHUNK_WIDTH, MAX_GRID_CHUNK_HEIGHT, true);
 
     continue;
-    //        return (d);
+    //        return d;
   }
   return nullptr;
 }

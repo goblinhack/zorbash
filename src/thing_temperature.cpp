@@ -119,7 +119,7 @@ int Thing::temperature_set(int v)
   }
   new_infop();
   auto n = (infop()->temperature = v);
-  return (n);
+  return n;
 }
 
 int Thing::temperature_decr(int v) { return temperature_incr(-v); }
@@ -207,7 +207,7 @@ int Thing::temperature_incr(int v)
     infop()->temperature = v;
   }
 
-  return (n);
+  return n;
 }
 
 int Thing::temperature_decr(void) { return temperature_incr(-1); }

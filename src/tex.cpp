@@ -260,7 +260,7 @@ Texp tex_load(std::string file, std::string name, int mode)
   Texp t = tex_find(name);
 
   if (t) {
-    return (t);
+    return t;
   }
 
   DBG2("Loading texture '%s', '%s'", file.c_str(), name.c_str());
@@ -285,7 +285,7 @@ Texp tex_load(std::string file, std::string name, int mode)
 
   DBG2("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
 
-  return (t);
+  return t;
 }
 
 //
@@ -528,7 +528,7 @@ Texp tex_from_surface(SDL_Surface *surface, std::string file, std::string name, 
   t->gl_surface_binding = gl_surface_binding;
   t->surface            = surface;
 
-  return (t);
+  return t;
 }
 
 int32_t tex_get_gl_binding(Texp tex)

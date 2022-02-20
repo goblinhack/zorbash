@@ -197,5 +197,5 @@ tokens_t *tokens_tostring(const char *input, tokens_t *tokens)
   t = tokens_parse(input, tokens);
   tokens_compile(tokens);
 
-  return (t);
+  return t;
 }

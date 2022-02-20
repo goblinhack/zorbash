@@ -46,7 +46,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
   auto t = wid_tiles_find(name);
 
   if (t) {
-    return (t);
+    return t;
   }
 
   if (name == "") {
@@ -191,7 +191,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
 
   set(t->tile, i, j, tile);
 
-  return (t);
+  return t;
 }
 
 wid_tilesp wid_tiles_find(std::string file)

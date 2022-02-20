@@ -311,7 +311,7 @@ static int blit_msg_strlen(std::string const &text)
     x++;
   }
 
-  return (x);
+  return x;
 }
 
 void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point oblit_br)

@@ -26,7 +26,7 @@ float Level::update_wobble(void)
   new_w = -new_w;
   wobble_set(new_w);
 
-  return (w);
+  return w;
 }
 
 float Level::wobble_curr(void) const

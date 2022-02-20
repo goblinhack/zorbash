@@ -3854,7 +3854,7 @@ int Thing::gold_set(int v)
   }
   new_infop();
   auto n = (infop()->gold = v);
-  return (n);
+  return n;
 }
 
 int Thing::gold_decr(int v)
@@ -3868,7 +3868,7 @@ int Thing::gold_decr(int v)
   if (infop()->gold < 0) {
     infop()->gold = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::gold_incr(int v)
@@ -3879,7 +3879,7 @@ int Thing::gold_incr(int v)
   }
   new_infop();
   auto n = (infop()->gold += v);
-  return (n);
+  return n;
 }
 
 int Thing::gold_decr(void)
@@ -3893,7 +3893,7 @@ int Thing::gold_decr(void)
   if (infop()->gold < 0) {
     infop()->gold = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::gold_incr(void)
@@ -3904,7 +3904,7 @@ int Thing::gold_incr(void)
   }
   new_infop();
   auto n = (infop()->gold++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3961,7 +3961,7 @@ int Thing::keys_set(int v)
   }
   new_infop();
   auto n = (infop()->keys = v);
-  return (n);
+  return n;
 }
 
 int Thing::keys_decr(int v)
@@ -3975,7 +3975,7 @@ int Thing::keys_decr(int v)
   if (infop()->keys < 0) {
     infop()->keys = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::keys_incr(int v)
@@ -3986,7 +3986,7 @@ int Thing::keys_incr(int v)
   }
   new_infop();
   auto n = (infop()->keys += v);
-  return (n);
+  return n;
 }
 
 int Thing::keys_decr(void)
@@ -4000,7 +4000,7 @@ int Thing::keys_decr(void)
   if (infop()->keys < 0) {
     infop()->keys = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::keys_incr(void)
@@ -4011,215 +4011,7 @@ int Thing::keys_incr(void)
   }
   new_infop();
   auto n = (infop()->keys++);
-  return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// health
-////////////////////////////////////////////////////////////////////////////
-int Thing::health(void)
-{
-  TRACE_NO_INDENT();
-  int v = 0;
-  if (maybe_infop()) {
-    v = infop()->health;
-  }
-  auto owner = immediate_owner();
-  if (owner && (owner != this)) {
-    v += owner->health();
-  }
-  return v;
-}
-
-int Thing::health_set(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health = v);
-  return (n);
-}
-
-int Thing::health_decr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health -= v);
-  return (n);
-}
-
-int Thing::health_incr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health += v);
-  return (n);
-}
-
-int Thing::health_decr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health--);
-  return (n);
-}
-
-int Thing::health_incr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health++);
-  return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// health_max
-////////////////////////////////////////////////////////////////////////////
-int Thing::health_max(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->health_max);
-  } else {
-    return 0;
-  }
-}
-
-int Thing::health_max_set(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health_max = v);
-  return (n);
-}
-
-int Thing::health_max_decr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health_max -= v);
-  return (n);
-}
-
-int Thing::health_max_incr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health_max += v);
-  return (n);
-}
-
-int Thing::health_max_decr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health_max--);
-  return (n);
-}
-
-int Thing::health_max_incr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->health_max++);
-  return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// stamina_max
-////////////////////////////////////////////////////////////////////////////
-int Thing::stamina_max(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->stamina_max);
-  } else {
-    return 0;
-  }
-}
-
-int Thing::stamina_max_set(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->stamina_max = v);
-  return (n);
-}
-
-int Thing::stamina_max_decr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->stamina_max -= v);
-  return (n);
-}
-
-int Thing::stamina_max_incr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->stamina_max += v);
-  return (n);
-}
-
-int Thing::stamina_max_decr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->stamina_max--);
-  return (n);
-}
-
-int Thing::stamina_max_incr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->stamina_max++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4243,7 +4035,7 @@ int Thing::enchant_max_current_set(int v)
   }
   new_infop();
   auto n = (infop()->enchant_max = v);
-  return (n);
+  return n;
 }
 
 int Thing::enchant_max_current_decr(int v)
@@ -4254,7 +4046,7 @@ int Thing::enchant_max_current_decr(int v)
   }
   new_infop();
   auto n = (infop()->enchant_max -= v);
-  return (n);
+  return n;
 }
 
 int Thing::enchant_max_current_incr(int v)
@@ -4265,7 +4057,7 @@ int Thing::enchant_max_current_incr(int v)
   }
   new_infop();
   auto n = (infop()->enchant_max += v);
-  return (n);
+  return n;
 }
 
 int Thing::enchant_max_current_decr(void)
@@ -4276,7 +4068,7 @@ int Thing::enchant_max_current_decr(void)
   }
   new_infop();
   auto n = (infop()->enchant_max--);
-  return (n);
+  return n;
 }
 
 int Thing::enchant_max_current_incr(void)
@@ -4287,7 +4079,7 @@ int Thing::enchant_max_current_incr(void)
   }
   new_infop();
   auto n = (infop()->enchant_max++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4308,7 +4100,7 @@ uint32_t Thing::tick_resurrect_when_set(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->tick_resurrect_when = v);
-  return (n);
+  return n;
 }
 
 uint32_t Thing::tick_resurrect_when_decr(int v)
@@ -4316,7 +4108,7 @@ uint32_t Thing::tick_resurrect_when_decr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->tick_resurrect_when -= v);
-  return (n);
+  return n;
 }
 
 uint32_t Thing::tick_resurrect_when_incr(int v)
@@ -4324,7 +4116,7 @@ uint32_t Thing::tick_resurrect_when_incr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->tick_resurrect_when += v);
-  return (n);
+  return n;
 }
 
 uint32_t Thing::tick_resurrect_when_decr(void)
@@ -4332,7 +4124,7 @@ uint32_t Thing::tick_resurrect_when_decr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->tick_resurrect_when--);
-  return (n);
+  return n;
 }
 
 uint32_t Thing::tick_resurrect_when_incr(void)
@@ -4340,7 +4132,7 @@ uint32_t Thing::tick_resurrect_when_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->tick_resurrect_when++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4361,7 +4153,7 @@ int Thing::movement_left_set(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->movement_left = v);
-  return (n);
+  return n;
 }
 
 int Thing::movement_left_decr(int v)
@@ -4369,7 +4161,7 @@ int Thing::movement_left_decr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->movement_left -= v);
-  return (n);
+  return n;
 }
 
 int Thing::movement_left_incr(int v)
@@ -4377,7 +4169,7 @@ int Thing::movement_left_incr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->movement_left += v);
-  return (n);
+  return n;
 }
 
 int Thing::movement_left_decr(void)
@@ -4385,7 +4177,7 @@ int Thing::movement_left_decr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->movement_left--);
-  return (n);
+  return n;
 }
 
 int Thing::movement_left_incr(void)
@@ -4393,7 +4185,7 @@ int Thing::movement_left_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->movement_left++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4417,7 +4209,7 @@ int Thing::stats02_set(int v)
   }
   new_infop();
   auto n = (infop()->stats02 = v);
-  return (n);
+  return n;
 }
 
 int Thing::stats02_decr(int v)
@@ -4428,7 +4220,7 @@ int Thing::stats02_decr(int v)
   }
   new_infop();
   auto n = (infop()->stats02 -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stats02_incr(int v)
@@ -4439,7 +4231,7 @@ int Thing::stats02_incr(int v)
   }
   new_infop();
   auto n = (infop()->stats02 += v);
-  return (n);
+  return n;
 }
 
 int Thing::stats02_decr(void)
@@ -4450,7 +4242,7 @@ int Thing::stats02_decr(void)
   }
   new_infop();
   auto n = (infop()->stats02--);
-  return (n);
+  return n;
 }
 
 int Thing::stats02_incr(void)
@@ -4461,7 +4253,7 @@ int Thing::stats02_incr(void)
   }
   new_infop();
   auto n = (infop()->stats02++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4485,7 +4277,7 @@ int Thing::stats03_set(int v)
   }
   new_infop();
   auto n = (infop()->stats03 = v);
-  return (n);
+  return n;
 }
 
 int Thing::stats03_decr(int v)
@@ -4496,7 +4288,7 @@ int Thing::stats03_decr(int v)
   }
   new_infop();
   auto n = (infop()->stats03 -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stats03_incr(int v)
@@ -4507,7 +4299,7 @@ int Thing::stats03_incr(int v)
   }
   new_infop();
   auto n = (infop()->stats03 += v);
-  return (n);
+  return n;
 }
 
 int Thing::stats03_decr(void)
@@ -4518,7 +4310,7 @@ int Thing::stats03_decr(void)
   }
   new_infop();
   auto n = (infop()->stats03--);
-  return (n);
+  return n;
 }
 
 int Thing::stats03_incr(void)
@@ -4529,7 +4321,7 @@ int Thing::stats03_incr(void)
   }
   new_infop();
   auto n = (infop()->stats03++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4553,7 +4345,7 @@ int Thing::stats04_set(int v)
   }
   new_infop();
   auto n = (infop()->stats04 = v);
-  return (n);
+  return n;
 }
 
 int Thing::stats04_decr(int v)
@@ -4564,7 +4356,7 @@ int Thing::stats04_decr(int v)
   }
   new_infop();
   auto n = (infop()->stats04 -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stats04_incr(int v)
@@ -4575,7 +4367,7 @@ int Thing::stats04_incr(int v)
   }
   new_infop();
   auto n = (infop()->stats04 += v);
-  return (n);
+  return n;
 }
 
 int Thing::stats04_decr(void)
@@ -4586,7 +4378,7 @@ int Thing::stats04_decr(void)
   }
   new_infop();
   auto n = (infop()->stats04--);
-  return (n);
+  return n;
 }
 
 int Thing::stats04_incr(void)
@@ -4597,7 +4389,7 @@ int Thing::stats04_incr(void)
   }
   new_infop();
   auto n = (infop()->stats04++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4621,7 +4413,7 @@ int Thing::stats05_set(int v)
   }
   new_infop();
   auto n = (infop()->stats05 = v);
-  return (n);
+  return n;
 }
 
 int Thing::stats05_decr(int v)
@@ -4632,7 +4424,7 @@ int Thing::stats05_decr(int v)
   }
   new_infop();
   auto n = (infop()->stats05 -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stats05_incr(int v)
@@ -4643,7 +4435,7 @@ int Thing::stats05_incr(int v)
   }
   new_infop();
   auto n = (infop()->stats05 += v);
-  return (n);
+  return n;
 }
 
 int Thing::stats05_decr(void)
@@ -4654,7 +4446,7 @@ int Thing::stats05_decr(void)
   }
   new_infop();
   auto n = (infop()->stats05--);
-  return (n);
+  return n;
 }
 
 int Thing::stats05_incr(void)
@@ -4665,7 +4457,7 @@ int Thing::stats05_incr(void)
   }
   new_infop();
   auto n = (infop()->stats05++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4689,7 +4481,7 @@ int Thing::stats06_set(int v)
   }
   new_infop();
   auto n = (infop()->stats06 = v);
-  return (n);
+  return n;
 }
 
 int Thing::stats06_decr(int v)
@@ -4700,7 +4492,7 @@ int Thing::stats06_decr(int v)
   }
   new_infop();
   auto n = (infop()->stats06 -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stats06_incr(int v)
@@ -4711,7 +4503,7 @@ int Thing::stats06_incr(int v)
   }
   new_infop();
   auto n = (infop()->stats06 += v);
-  return (n);
+  return n;
 }
 
 int Thing::stats06_decr(void)
@@ -4722,7 +4514,7 @@ int Thing::stats06_decr(void)
   }
   new_infop();
   auto n = (infop()->stats06--);
-  return (n);
+  return n;
 }
 
 int Thing::stats06_incr(void)
@@ -4733,7 +4525,7 @@ int Thing::stats06_incr(void)
   }
   new_infop();
   auto n = (infop()->stats06++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4757,7 +4549,7 @@ int Thing::stats07_set(int v)
   }
   new_infop();
   auto n = (infop()->stats07 = v);
-  return (n);
+  return n;
 }
 
 int Thing::stats07_decr(int v)
@@ -4768,7 +4560,7 @@ int Thing::stats07_decr(int v)
   }
   new_infop();
   auto n = (infop()->stats07 -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stats07_incr(int v)
@@ -4779,7 +4571,7 @@ int Thing::stats07_incr(int v)
   }
   new_infop();
   auto n = (infop()->stats07 += v);
-  return (n);
+  return n;
 }
 
 int Thing::stats07_decr(void)
@@ -4790,7 +4582,7 @@ int Thing::stats07_decr(void)
   }
   new_infop();
   auto n = (infop()->stats07--);
-  return (n);
+  return n;
 }
 
 int Thing::stats07_incr(void)
@@ -4801,7 +4593,7 @@ int Thing::stats07_incr(void)
   }
   new_infop();
   auto n = (infop()->stats07++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4825,7 +4617,7 @@ int Thing::stats09_set(int v)
   }
   new_infop();
   auto n = (infop()->stats09 = v);
-  return (n);
+  return n;
 }
 
 int Thing::stats09_decr(int v)
@@ -4836,7 +4628,7 @@ int Thing::stats09_decr(int v)
   }
   new_infop();
   auto n = (infop()->stats09 -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stats09_incr(int v)
@@ -4847,7 +4639,7 @@ int Thing::stats09_incr(int v)
   }
   new_infop();
   auto n = (infop()->stats09 += v);
-  return (n);
+  return n;
 }
 
 int Thing::stats09_decr(void)
@@ -4858,7 +4650,7 @@ int Thing::stats09_decr(void)
   }
   new_infop();
   auto n = (infop()->stats09--);
-  return (n);
+  return n;
 }
 
 int Thing::stats09_incr(void)
@@ -4869,7 +4661,7 @@ int Thing::stats09_incr(void)
   }
   new_infop();
   auto n = (infop()->stats09++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4893,7 +4685,7 @@ int Thing::stat_def_mod_set(int v)
   }
   new_infop();
   auto n = (infop()->stat_def_mod = v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_def_mod_decr(int v)
@@ -4904,7 +4696,7 @@ int Thing::stat_def_mod_decr(int v)
   }
   new_infop();
   auto n = (infop()->stat_def_mod -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_def_mod_incr(int v)
@@ -4915,7 +4707,7 @@ int Thing::stat_def_mod_incr(int v)
   }
   new_infop();
   auto n = (infop()->stat_def_mod += v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_def_mod_decr(void)
@@ -4926,7 +4718,7 @@ int Thing::stat_def_mod_decr(void)
   }
   new_infop();
   auto n = (infop()->stat_def_mod--);
-  return (n);
+  return n;
 }
 
 int Thing::stat_def_mod_incr(void)
@@ -4937,7 +4729,7 @@ int Thing::stat_def_mod_incr(void)
   }
   new_infop();
   auto n = (infop()->stat_def_mod++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4961,7 +4753,7 @@ int Thing::stat_con_mod_set(int v)
   }
   new_infop();
   auto n = (infop()->stat_con_mod = v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_con_mod_decr(int v)
@@ -4972,7 +4764,7 @@ int Thing::stat_con_mod_decr(int v)
   }
   new_infop();
   auto n = (infop()->stat_con_mod -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_con_mod_incr(int v)
@@ -4983,7 +4775,7 @@ int Thing::stat_con_mod_incr(int v)
   }
   new_infop();
   auto n = (infop()->stat_con_mod += v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_con_mod_decr(void)
@@ -4994,7 +4786,7 @@ int Thing::stat_con_mod_decr(void)
   }
   new_infop();
   auto n = (infop()->stat_con_mod--);
-  return (n);
+  return n;
 }
 
 int Thing::stat_con_mod_incr(void)
@@ -5005,7 +4797,7 @@ int Thing::stat_con_mod_incr(void)
   }
   new_infop();
   auto n = (infop()->stat_con_mod++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5029,7 +4821,7 @@ int Thing::stat_dex_mod_set(int v)
   }
   new_infop();
   auto n = (infop()->stat_dex_mod = v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_dex_mod_decr(int v)
@@ -5040,7 +4832,7 @@ int Thing::stat_dex_mod_decr(int v)
   }
   new_infop();
   auto n = (infop()->stat_dex_mod -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_dex_mod_incr(int v)
@@ -5051,7 +4843,7 @@ int Thing::stat_dex_mod_incr(int v)
   }
   new_infop();
   auto n = (infop()->stat_dex_mod += v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_dex_mod_decr(void)
@@ -5062,7 +4854,7 @@ int Thing::stat_dex_mod_decr(void)
   }
   new_infop();
   auto n = (infop()->stat_dex_mod--);
-  return (n);
+  return n;
 }
 
 int Thing::stat_dex_mod_incr(void)
@@ -5073,7 +4865,7 @@ int Thing::stat_dex_mod_incr(void)
   }
   new_infop();
   auto n = (infop()->stat_dex_mod++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5097,7 +4889,7 @@ int Thing::stat_luck_mod_set(int v)
   }
   new_infop();
   auto n = (infop()->stat_luck_mod = v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_luck_mod_decr(int v)
@@ -5108,7 +4900,7 @@ int Thing::stat_luck_mod_decr(int v)
   }
   new_infop();
   auto n = (infop()->stat_luck_mod -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_luck_mod_incr(int v)
@@ -5119,7 +4911,7 @@ int Thing::stat_luck_mod_incr(int v)
   }
   new_infop();
   auto n = (infop()->stat_luck_mod += v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_luck_mod_decr(void)
@@ -5130,7 +4922,7 @@ int Thing::stat_luck_mod_decr(void)
   }
   new_infop();
   auto n = (infop()->stat_luck_mod--);
-  return (n);
+  return n;
 }
 
 int Thing::stat_luck_mod_incr(void)
@@ -5141,7 +4933,7 @@ int Thing::stat_luck_mod_incr(void)
   }
   new_infop();
   auto n = (infop()->stat_luck_mod++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5165,7 +4957,7 @@ int Thing::stat_att_mod_set(int v)
   }
   new_infop();
   auto n = (infop()->stat_att_mod = v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_att_mod_decr(int v)
@@ -5176,7 +4968,7 @@ int Thing::stat_att_mod_decr(int v)
   }
   new_infop();
   auto n = (infop()->stat_att_mod -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_att_mod_incr(int v)
@@ -5187,7 +4979,7 @@ int Thing::stat_att_mod_incr(int v)
   }
   new_infop();
   auto n = (infop()->stat_att_mod += v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_att_mod_decr(void)
@@ -5198,7 +4990,7 @@ int Thing::stat_att_mod_decr(void)
   }
   new_infop();
   auto n = (infop()->stat_att_mod--);
-  return (n);
+  return n;
 }
 
 int Thing::stat_att_mod_incr(void)
@@ -5209,7 +5001,7 @@ int Thing::stat_att_mod_incr(void)
   }
   new_infop();
   auto n = (infop()->stat_att_mod++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5233,7 +5025,7 @@ int Thing::stat_str_mod_set(int v)
   }
   new_infop();
   auto n = (infop()->stat_str_mod = v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_str_mod_decr(int v)
@@ -5244,7 +5036,7 @@ int Thing::stat_str_mod_decr(int v)
   }
   new_infop();
   auto n = (infop()->stat_str_mod -= v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_str_mod_incr(int v)
@@ -5255,7 +5047,7 @@ int Thing::stat_str_mod_incr(int v)
   }
   new_infop();
   auto n = (infop()->stat_str_mod += v);
-  return (n);
+  return n;
 }
 
 int Thing::stat_str_mod_decr(void)
@@ -5266,7 +5058,7 @@ int Thing::stat_str_mod_decr(void)
   }
   new_infop();
   auto n = (infop()->stat_str_mod--);
-  return (n);
+  return n;
 }
 
 int Thing::stat_str_mod_incr(void)
@@ -5277,7 +5069,7 @@ int Thing::stat_str_mod_incr(void)
   }
   new_infop();
   auto n = (infop()->stat_str_mod++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5298,7 +5090,7 @@ int Thing::distance_throw_set(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->distance_throw = v);
-  return (n);
+  return n;
 }
 
 int Thing::distance_throw_decr(int v)
@@ -5306,7 +5098,7 @@ int Thing::distance_throw_decr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->distance_throw -= v);
-  return (n);
+  return n;
 }
 
 int Thing::distance_throw_incr(int v)
@@ -5314,7 +5106,7 @@ int Thing::distance_throw_incr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->distance_throw += v);
-  return (n);
+  return n;
 }
 
 int Thing::distance_throw_decr(void)
@@ -5322,7 +5114,7 @@ int Thing::distance_throw_decr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->distance_throw--);
-  return (n);
+  return n;
 }
 
 int Thing::distance_throw_incr(void)
@@ -5330,77 +5122,7 @@ int Thing::distance_throw_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->distance_throw++);
-  return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// stamina
-////////////////////////////////////////////////////////////////////////////
-int Thing::stamina_get(void)
-{
-  TRACE_NO_INDENT();
-  int v = 0;
-  if (maybe_infop()) {
-    v = infop()->stamina;
-  }
-  auto owner = immediate_owner();
-  if (owner && (owner != this)) {
-    v += owner->stamina_get();
-  }
-  if (is_minion()) {
-    auto mob = immediate_mob();
-    if (mob) {
-      auto mob = immediate_mob();
-      v += mob->stamina_get();
-    }
-  }
-  return v;
-}
-
-int Thing::stamina_set(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->stamina = v);
-  return (n);
-}
-
-int Thing::stamina_decr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->stamina -= v);
-  if (infop()->stamina < 0) {
-    infop()->stamina = 0;
-  }
-  return (n);
-}
-
-int Thing::stamina_incr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->stamina += v);
-  return (n);
-}
-
-int Thing::stamina_decr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->stamina--);
-  if (infop()->stamina < 0) {
-    infop()->stamina = 0;
-  }
-  return (n);
-}
-
-int Thing::stamina_incr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->stamina++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5432,7 +5154,7 @@ int Thing::enchant_set(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->enchant = v);
-  return (n);
+  return n;
 }
 
 int Thing::enchant_decr(int v)
@@ -5443,7 +5165,7 @@ int Thing::enchant_decr(int v)
   if (infop()->enchant < 0) {
     infop()->enchant = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::enchant_incr(int v)
@@ -5451,7 +5173,7 @@ int Thing::enchant_incr(int v)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->enchant += v);
-  return (n);
+  return n;
 }
 
 int Thing::enchant_decr(void)
@@ -5462,7 +5184,7 @@ int Thing::enchant_decr(void)
   if (infop()->enchant < 0) {
     infop()->enchant = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::enchant_incr(void)
@@ -5470,7 +5192,7 @@ int Thing::enchant_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->enchant++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5505,7 +5227,7 @@ int Thing::poisoned_amount_set(int v)
   if (infop()->poison < 0) {
     infop()->poison = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::poisoned_amount_decr(int v)
@@ -5516,7 +5238,7 @@ int Thing::poisoned_amount_decr(int v)
   if (infop()->poison < 0) {
     infop()->poison = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::poisoned_amount_incr(int v)
@@ -5527,7 +5249,7 @@ int Thing::poisoned_amount_incr(int v)
   if (infop()->poison < 0) {
     infop()->poison = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::poisoned_amount_decr(void)
@@ -5538,7 +5260,7 @@ int Thing::poisoned_amount_decr(void)
   if (infop()->poison < 0) {
     infop()->poison = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::poisoned_amount_incr(void)
@@ -5546,7 +5268,7 @@ int Thing::poisoned_amount_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->poison++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5581,7 +5303,7 @@ int Thing::necrotized_amount_set(int v)
   if (infop()->necrosis < 0) {
     infop()->necrosis = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::necrotized_amount_decr(int v)
@@ -5592,7 +5314,7 @@ int Thing::necrotized_amount_decr(int v)
   if (infop()->necrosis < 0) {
     infop()->necrosis = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::necrotized_amount_incr(int v)
@@ -5603,7 +5325,7 @@ int Thing::necrotized_amount_incr(int v)
   if (infop()->necrosis < 0) {
     infop()->necrosis = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::necrotized_amount_decr(void)
@@ -5614,7 +5336,7 @@ int Thing::necrotized_amount_decr(void)
   if (infop()->necrosis < 0) {
     infop()->necrosis = 0;
   }
-  return (n);
+  return n;
 }
 
 int Thing::necrotized_amount_incr(void)
@@ -5622,7 +5344,7 @@ int Thing::necrotized_amount_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->necrosis++);
-  return (n);
+  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -7127,7 +6849,7 @@ int Thing::damage_current_set(int v)
   }
   new_infop();
   auto n = (infop()->damage_current = v);
-  return (n);
+  return n;
 }
 
 int Thing::damage_current_decr(int v)
@@ -7138,7 +6860,7 @@ int Thing::damage_current_decr(int v)
   }
   new_infop();
   auto n = (infop()->damage_current -= v);
-  return (n);
+  return n;
 }
 
 int Thing::damage_current_incr(int v)
@@ -7149,7 +6871,7 @@ int Thing::damage_current_incr(int v)
   }
   new_infop();
   auto n = (infop()->damage_current += v);
-  return (n);
+  return n;
 }
 
 int Thing::damage_current_decr(void)
@@ -7160,7 +6882,7 @@ int Thing::damage_current_decr(void)
   }
   new_infop();
   auto n = (infop()->damage_current--);
-  return (n);
+  return n;
 }
 
 int Thing::damage_current_incr(void)
@@ -7171,7 +6893,7 @@ int Thing::damage_current_incr(void)
   }
   new_infop();
   auto n = (infop()->damage_current++);
-  return (n);
+  return n;
 }
 
 const std::string &Thing::gfx_anim_use(void)

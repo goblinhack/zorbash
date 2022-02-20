@@ -279,7 +279,7 @@ std::vector< std::wstring > wid_console_serialize(void)
     tmp = wid_get_next(tmp);
   }
   std::reverse(r.begin(), r.end());
-  return (r);
+  return r;
 }
 
 void wid_console_deserialize(std::vector< std::wstring > r)

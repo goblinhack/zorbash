@@ -985,7 +985,11 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         if (victim->is_toughness_very_hard()) {
           break_chance *= 2;
         }
-        if (d10000() < break_chance) {
+        if (d20roll_under(stat_luck_total())) {
+          break_chance = 0;
+        }
+        auto roll = d10000();
+        if (roll < break_chance) {
           weapon->dead("broken");
         }
       }
@@ -1002,13 +1006,14 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         if (victim->is_toughness_very_hard()) {
           break_chance *= 2;
         }
+        if (d20roll_under(stat_luck_total())) {
+          break_chance = 0;
+        }
         if (d10000() < break_chance) {
           gauntlet->dead("broken");
         }
       }
     }
-
-    stamina_decr();
     return true;
   }
 

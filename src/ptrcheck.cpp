@@ -176,7 +176,7 @@ static void *local_zalloc(int size)
 {
   void *p;
   p = calloc(1, size);
-  return (p);
+  return p;
 }
 
 //

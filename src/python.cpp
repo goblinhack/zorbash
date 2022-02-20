@@ -1648,7 +1648,7 @@ err_out:
     ERR("Int conversion failed");
   }
 
-  return (i);
+  return i;
 }
 
 uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr)
@@ -1680,7 +1680,7 @@ err_out:
     ERR("Int conversion failed");
   }
 
-  return (i);
+  return i;
 }
 
 double py_obj_attr_double(const PyObject *py_obj, const char *attr)
@@ -1712,7 +1712,7 @@ err_out:
     ERR("Int conversion failed");
   }
 
-  return (i);
+  return i;
 }
 
 char *py_obj_attr_str(const PyObject *py_obj, const char *attr)

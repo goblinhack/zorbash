@@ -3,6 +3,8 @@
 // See the README.md file for license info.
 //
 
+#include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_thing.hpp"
 
 int Thing::health_boost(int v)
@@ -60,4 +62,144 @@ float Thing::health_pct(void)
   TRACE_NO_INDENT();
   float pct = ((float) health() / (float) health_max()) * 100;
   return pct;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// health
+////////////////////////////////////////////////////////////////////////////
+int Thing::health(void)
+{
+  TRACE_NO_INDENT();
+  int v = 0;
+  if (maybe_infop()) {
+    v = infop()->health;
+  }
+  auto owner = immediate_owner();
+  if (owner && (owner != this)) {
+    v += owner->health();
+  }
+  return v;
+}
+
+int Thing::health_set(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health = v);
+  return n;
+}
+
+int Thing::health_decr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health -= v);
+  return n;
+}
+
+int Thing::health_incr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health += v);
+  return n;
+}
+
+int Thing::health_decr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health--);
+  return n;
+}
+
+int Thing::health_incr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health++);
+  return n;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// health_max
+////////////////////////////////////////////////////////////////////////////
+int Thing::health_max(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->health_max);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::health_max_set(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health_max = v);
+  return n;
+}
+
+int Thing::health_max_decr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health_max -= v);
+  return n;
+}
+
+int Thing::health_max_incr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health_max += v);
+  return n;
+}
+
+int Thing::health_max_decr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health_max--);
+  return n;
+}
+
+int Thing::health_max_incr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->health_max++);
+  return n;
 }
