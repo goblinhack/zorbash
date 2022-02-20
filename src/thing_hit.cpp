@@ -867,7 +867,38 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       // Player hitting something else
       //
-      if (is_alive_monst() || is_mob()) {
+      if (top_owner() == real_hitter) {
+        //
+        // This can be the player is on fire and that causes carried items to burn
+        //
+        if (attack_poison) {
+          msg("Your %s is being poisoned.", short_text_name().c_str());
+        } else if (attack_future1) {
+          msg("Your %s is being future1.", short_text_name().c_str());
+        } else if (attack_future2) {
+          msg("Your %s is being future2.", short_text_name().c_str());
+        } else if (attack_future3) {
+          msg("Your %s is being future3.", short_text_name().c_str());
+        } else if (attack_cold) {
+          msg("Your %s is freezing.", short_text_name().c_str());
+        } else if (attack_fire) {
+          msg("Your %s is burning.", short_text_name().c_str());
+        } else if (attack_crush) {
+          msg("Your %s is being crushed.", short_text_name().c_str());
+        } else if (attack_lightning) {
+          msg("Your %s is being zapped.", short_text_name().c_str());
+        } else if (attack_energy) {
+          msg("Your %s is being blasted.", short_text_name().c_str());
+        } else if (attack_acid) {
+          msg("Your %s is disintegrating.", short_text_name().c_str());
+        } else if (attack_digest) {
+          msg("Your %s is dissolving.", short_text_name().c_str());
+        } else if (attack_necrosis) {
+          msg("Your %s is rotting.", short_text_name().c_str());
+        } else {
+          msg("Your %s is being damaged.", short_text_name().c_str());
+        }
+      } else if (is_alive_monst() || is_mob()) {
         if (crit) {
           msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
               damage_type.c_str());
@@ -958,7 +989,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     if (on_fire_set("hit by fire")) {
       if (is_player()) {
         msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");
-      } else {
+      } else if (is_monst()) {
         msg("%s is on fire!", text_The().c_str());
       }
       if (is_monst() || (is_player() && game->robot_mode)) {
@@ -1102,7 +1133,11 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       } else if (attack_cold) {
         reason = "by cold";
       } else if (attack_fire) {
-        reason = "by fire";
+        if (is_meltable()) {
+          reason = "by melting";
+        } else {
+          reason = "by fire";
+        }
       } else if (attack_crush) {
         reason = "by crushing";
       } else if (attack_fire) {

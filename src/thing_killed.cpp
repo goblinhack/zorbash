@@ -313,6 +313,8 @@ void Thing::killed(Thingp defeater, const char *reason)
             //
             // Already logged
             //
+          } else if (top_owner() == this) {
+            msg("Your %s is destroyed, %s.", short_text_name().c_str(), reason);
           } else {
             msg("%s is destroyed, %s.", The_no_dying.c_str(), reason);
           }

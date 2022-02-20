@@ -116,63 +116,6 @@ void Thing::fire_tick(void)
       on_fire_set("caught fire");
     }
 
-    auto fire   = tp_find("fire");
-    auto damage = fire->damage_fire();
-
-    if (environ_avoids_fire()) {
-      damage *= 2;
-    }
-
-    auto h = health_decr(damage);
-    if (is_player()) {
-      msg("%%fg=red$You take %u burn damage!%%fg=reset$", damage);
-    }
-
-    if (h <= 0) {
-      h = health_set(0);
-      if (is_meltable()) {
-        if (! is_offscreen) {
-          if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-              msg("%s is melted!", text_The().c_str());
-            }
-          }
-        }
-        dead("by melting");
-      } else {
-        if (! is_offscreen) {
-          if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-              if (is_monst()) {
-                msg("%s burns to death!", text_The().c_str());
-              } else {
-                msg("%s burns!", text_The().c_str());
-              }
-            }
-          }
-        }
-        dead("by burning");
-      }
-    } else {
-      if (is_meltable()) {
-        if (! is_offscreen) {
-          if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-              msg("%s melts!", text_The().c_str());
-            }
-          }
-        }
-      } else {
-        if (! is_offscreen) {
-          if (level->player && (level->tick_created < game->tick_current)) {
-            if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-              msg("%s burns!", text_The().c_str());
-            }
-          }
-        }
-      }
-    }
-
     if (! level->is_smoke(at.x, at.y)) {
       auto smoke = level->thing_new("smoke", at);
       smoke->lifespan_set(pcg_random_range(1, 10));

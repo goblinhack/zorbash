@@ -26,6 +26,10 @@ void tp_fixup(void)
       tp->is_heavy_set(true);
     }
 
+    if (tp->is_meltable() || tp->is_burnable() || tp->is_combustible() || tp->is_very_combustible()) {
+      tp->is_temperature_sensitive_set(true);
+    }
+
     if (tp->is_stone()) {
       tp->is_temperature_change_sensitive_set(true);
     }
