@@ -3,6 +3,9 @@ import tp
 
 
 def explode(me, x, y):
+    if my.thing_is_dead_or_dying(me):
+        return
+
     my.thing_dead(me, "exploded")
     my.thing_msg(me, "The oil filled barrel explodes. Health and safety have been alerted.")
     my.level_spawn_at_thing(me, "explosion_major")

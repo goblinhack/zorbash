@@ -3,7 +3,9 @@ import tp
 
 
 def explode(me, x, y):
-    my.con("explode {} {:X}".format(my.thing_name_get(me), me))
+    if my.thing_is_dead_or_dying(me):
+        return
+
     my.thing_msg(me, "The thunderstone explodes into fragments.")
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")

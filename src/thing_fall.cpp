@@ -322,8 +322,10 @@ bool Thing::fall_to_next_level(void)
         fall_damage = 0;
       }
 
+      dbg("Level change where you landed");
       auto new_pos = make_point(x, y);
       if (l->is_lava(new_pos)) {
+        topcon("LAVA");
         if (is_player()) {
           msg("%%fg=orange$You plunge into lava! This must be the end for you!%%fg=reset$");
         }

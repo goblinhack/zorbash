@@ -14,6 +14,9 @@ def on_idle(me, x, y):
 
 
 def explode(me, x, y):
+    if my.thing_is_dead_or_dying(me):
+        return
+
     my.thing_msg(me, "The wand of cold explodes, oddly in a fireball.")
     my.level_spawn_at_thing(me, "explosion_major")
     my.thing_dead(me, "exploded")
