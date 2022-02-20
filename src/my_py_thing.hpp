@@ -495,7 +495,7 @@ PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag130(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag131(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag132(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag133(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_stamina_on_use(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_collision_hit_all_adjacent(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_on_falling(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);

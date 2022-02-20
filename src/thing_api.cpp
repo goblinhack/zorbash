@@ -2217,10 +2217,10 @@ int Thing::unused_flag132(void)
   return (tp()->unused_flag132());
 }
 
-int Thing::unused_flag133(void)
+int Thing::stamina_on_use(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag133());
+  return (tp()->stamina_on_use());
 }
 
 int Thing::collision_hit_all_adjacent(void)
