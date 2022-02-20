@@ -33,8 +33,11 @@ def tp_init(name, text_name, short_text_name):
     my.is_ring(self, True)
     my.is_spawner(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
+    my.is_enchantable(self, True)
+    my.text_enchant(self, "+1 CON")
     my.is_treasure_class_c(self, True)
     my.is_treasure(self, True)
+    my.stat_con_mod(self, 3)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
     my.is_very_combustible(self, True)
