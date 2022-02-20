@@ -24,7 +24,7 @@ def init_weapon(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
     my.break_chance_d10000(self, 10)
     my.collision_check(self, True)
-    my.collision_hit_all_adjacent(self, True)
+    my.collision_hit_360(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
     my.crit_chance_d10000(self, 500)

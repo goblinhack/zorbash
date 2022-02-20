@@ -1056,16 +1056,16 @@ bool Thing::matches(const std::string &what)
   if (unused_flag130() && (what == "unused_flag130")) {
     return true;
   }
-  if (unused_flag131() && (what == "unused_flag131")) {
+  if (collision_hit_adj() && (what == "collision_hit_adj")) {
     return true;
   }
-  if (unused_flag132() && (what == "unused_flag132")) {
+  if (collision_hit_180() && (what == "collision_hit_180")) {
     return true;
   }
   if (stamina_on_use() && (what == "stamina_on_use")) {
     return true;
   }
-  if (collision_hit_all_adjacent() && (what == "collision_hit_all_adjacent")) {
+  if (collision_hit_360() && (what == "collision_hit_360")) {
     return true;
   }
   if (is_dead_on_falling() && (what == "is_dead_on_falling")) {
@@ -2347,17 +2347,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag130") {
     return &Thing::unused_flag130;
   }
-  if (what == "unused_flag131") {
-    return &Thing::unused_flag131;
+  if (what == "collision_hit_adj") {
+    return &Thing::collision_hit_adj;
   }
-  if (what == "unused_flag132") {
-    return &Thing::unused_flag132;
+  if (what == "collision_hit_180") {
+    return &Thing::collision_hit_180;
   }
   if (what == "stamina_on_use") {
     return &Thing::stamina_on_use;
   }
-  if (what == "collision_hit_all_adjacent") {
-    return &Thing::collision_hit_all_adjacent;
+  if (what == "collision_hit_360") {
+    return &Thing::collision_hit_360;
   }
   if (what == "is_dead_on_falling") {
     return &Thing::is_dead_on_falling;
