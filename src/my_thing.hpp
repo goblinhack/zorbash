@@ -471,6 +471,7 @@ public:
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
   bool victim_attack_best(int equip, point *at = nullptr);
+  bool victim_attack_best_at(int equip, point *at = nullptr);
   bool victim_select(Thingp item);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
@@ -1581,7 +1582,7 @@ public:
   int unused_flag131(void);
   int unused_flag132(void);
   int unused_flag133(void);
-  int unused_flag134(void);
+  int collision_hit_all_adjacent(void);
   int is_dead_on_falling(void);
   int is_temperature_sensitive(void);
   int unused_flag13(void);

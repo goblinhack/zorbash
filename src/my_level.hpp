@@ -198,10 +198,11 @@ public:
   //
   uint32_t seed {};
 
-#define MAX_THING_GROUPS              3
+#define MAX_THING_GROUPS              4
 #define THING_GROUP_PRIO_HIGH         0
-#define THING_GROUP_PRIO_NORMAL       1
-#define THING_GROUP_TMP               2
+#define THING_GROUP_PRIO_MED          1
+#define THING_GROUP_PRIO_NORMAL       2
+#define THING_GROUP_TMP               3
 #define FOR_ALL_THING_GROUPS(_group_) for (auto _group_ = 0; _group_ < MAX_THING_GROUPS; _group_++)
 
 #define FOR_ALL_THING_PRIO_GROUPS                                                                                    \
@@ -511,7 +512,7 @@ public:
     continue;                                                                                                        \
   }
 
-#define FOR_ALL_LIGHTS_AT(level, t, x, y)                                                                      \
+#define FOR_ALL_LIGHTS_AT(level, t, x, y)                                                                            \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
   if (likely(! t->has_light)) {                                                                                      \
     continue;                                                                                                        \

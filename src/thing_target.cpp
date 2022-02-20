@@ -286,12 +286,12 @@ bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point
   return false;
 }
 
-bool Thing::victim_attack_best(int equip, point *at)
+bool Thing::victim_attack_best_at(int equip, point *at)
 {
   if (at) {
-    dbg("Target-attack-best: Try to attack with equpped item at %s", at->to_string().c_str());
+    dbg("Target-attack-best-at: Try to attack with equipped item at %s", at->to_string().c_str());
   } else {
-    dbg("Target-attack-best: Try to attack with equpped item");
+    dbg("Target-attack-best-at: Try to attack with equipped item");
   }
   TRACE_AND_INDENT();
 
@@ -405,4 +405,47 @@ bool Thing::victim_attack_best(int equip, point *at)
 
   dbg("Target-attack-best: No target found");
   return false;
+}
+
+bool Thing::victim_attack_best(int equip, point *at)
+{
+  if (at) {
+    dbg("Target-attack-best: Try to attack with equipped item at %s", at->to_string().c_str());
+  } else {
+    dbg("Target-attack-best: Try to attack with equipped item");
+  }
+  TRACE_AND_INDENT();
+
+  int  dx, dy;
+  auto item = equip_get(equip);
+  if (! item) {
+    auto d = dir_to_direction();
+    dx     = d.x;
+    dy     = d.y;
+  } else {
+    equip_use_offset_get(&dx, &dy, equip);
+  }
+
+  //
+  // Axe hits all around
+  //
+  if (item && item->collision_hit_all_adjacent()) {
+    std::vector< point > all_deltas = {
+        point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
+        point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // For spiderwebs
+    };
+
+    bool ret = false;
+    for (const auto &d : all_deltas) {
+      point at = curr_at + d;
+      dbg("Target-attack-best: Try to attack all adj with equipped item at %s", at.to_string().c_str());
+      TRACE_AND_INDENT();
+      if (victim_attack_best_at(equip, &at)) {
+        ret = true;
+      }
+    }
+    return ret;
+  }
+
+  return victim_attack_best_at(equip, at);
 }
