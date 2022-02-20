@@ -18,13 +18,13 @@ def tp_init(name, text_name, short_text_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
-    my.crit_chance_d10000(self, 0)
     my.crit_chance_d10000(self, 1000)
     my.damage_melee_chance_d1000(self, 1000)
     my.damage_melee_dice(self, "3d6+1")
     my.equip_carry_anim(self, "scythe_carry")
     my.gfx_animated_can_hflip(self, True)
     my.gfx_animated(self, True)
+    my.collision_hit_adj(self, True)
     my.gfx_anim_use(self, "scythe_swing")
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)
@@ -68,7 +68,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="scythe", text_name="single headed scythe", short_text_name="short scythe")
+    tp_init(name="scythe", text_name="scythe", short_text_name="scythe")
 
 
 init()

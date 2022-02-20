@@ -20,7 +20,7 @@ def tp_init(name):
     my.z_depth(self, my.MAP_DEPTH_EQUIP)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
-    delay = 20
+    delay = 50
     my.tile(self, tile=name + "_left.1", delay_ms=delay, is_dir_left=True)
     my.tile(self, tile=name + "_left.2", delay_ms=delay, is_dir_left=True)
     my.tile(self, tile=name + "_left.3", delay_ms=delay, is_dir_left=True)

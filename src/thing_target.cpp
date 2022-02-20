@@ -485,6 +485,7 @@ bool Thing::victim_attack_best(int equip, point *at)
         point(-dx, -dy),
     };
 
+    topcon("%d %d", dx, dy);
     bool ret = false;
     for (int attempt = 1; attempt <= 3; attempt++) {
       for (const auto &d : all_deltas) {
