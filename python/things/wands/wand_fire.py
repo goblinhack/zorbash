@@ -65,7 +65,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
-    my.is_very_combustible(self, True)
     my.is_victim_select(self, True)
     my.is_wand(self, True)
     my.is_wooden(self, True)
