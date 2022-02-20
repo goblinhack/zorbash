@@ -2210,10 +2210,10 @@ int Thing::unused_flag133(void)
   return (tp()->unused_flag133());
 }
 
-int Thing::unused_flag134(void)
+int Thing::collision_hit_all_adjacent(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag134());
+  return (tp()->collision_hit_all_adjacent());
 }
 
 int Thing::is_dead_on_falling(void)
@@ -7727,6 +7727,9 @@ int Thing::group_get(void)
   }
   if (is_projectile()) {
     return THING_GROUP_PRIO_HIGH;
+  }
+  if (is_player()) {
+    return THING_GROUP_PRIO_MED;
   }
   if (is_tmp_thing()) {
     return THING_GROUP_TMP;

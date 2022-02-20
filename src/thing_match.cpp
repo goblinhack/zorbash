@@ -1065,7 +1065,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag133() && (what == "unused_flag133")) {
     return true;
   }
-  if (unused_flag134() && (what == "unused_flag134")) {
+  if (collision_hit_all_adjacent() && (what == "collision_hit_all_adjacent")) {
     return true;
   }
   if (is_dead_on_falling() && (what == "is_dead_on_falling")) {
@@ -2356,8 +2356,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag133") {
     return &Thing::unused_flag133;
   }
-  if (what == "unused_flag134") {
-    return &Thing::unused_flag134;
+  if (what == "collision_hit_all_adjacent") {
+    return &Thing::collision_hit_all_adjacent;
   }
   if (what == "is_dead_on_falling") {
     return &Thing::is_dead_on_falling;
