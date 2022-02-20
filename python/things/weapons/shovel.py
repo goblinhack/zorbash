@@ -68,7 +68,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="shovel", text_name="double bladed shovel", short_text_name="double bladed shovel")
+    tp_init(name="shovel", text_name="double shovel", short_text_name="double shovel")
 
 
 init()
