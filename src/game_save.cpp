@@ -288,6 +288,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   out << bits(my.t->tile_curr);
   out << bits(my.t->alpha);
   out << bits(my.t->z_depth);
+  out << bits(my.t->laser_count);
   uint8_t dir = my.t->dir;
   out << bits(dir);
 
@@ -302,7 +303,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   int      shift  = 0;
   // clang-format off
   bits64 |= (my.t->has_ever_moved ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->has_laser ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_light ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_projectile ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_activated ? 1LLU : 0LLU) << shift; shift++;

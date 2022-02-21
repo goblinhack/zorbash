@@ -17,7 +17,7 @@ def explode(me, x, y):
     if my.thing_is_dead_or_dying(me):
         return
 
-    my.thing_msg(me, "The wand of fire explodes, predictably in a fireball.")
+    my.thing_msg(me, "The wand of fireballs explodes, predictably in a fireball.")
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")
     my.level_spawn_at_thing(me, "fire")
@@ -67,7 +67,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Discharges a powerful blast of fire upon an unwitting recipient...")
+    my.long_text_description(self, "Discharges a single fireball at an ungrateful recipient...")
     my.noise_on_moving_or_being_carried(self, 5)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
@@ -77,7 +77,7 @@ def tp_init(name, text_name, short_text_name):
     my.range_max(self, 7)
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A wand of fire.")
+    my.text_description(self, "A wand of fireballs.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
@@ -92,7 +92,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="wand_fire", text_name="wand of fire", short_text_name="wand of fire")
+    tp_init(name="wand_fire", text_name="wand of fireballs", short_text_name="wand of fireballs")
 
 
 init()

@@ -56,6 +56,11 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
     die("No projectile name");
   }
 
+  auto collatoral_damage = in_the_way(curr_at, target->curr_at, 1);
+  if (collatoral_damage.size()) {
+    target = collatoral_damage[ 0 ];
+  }
+
   auto start = last_blit_at;
   auto end   = target->last_blit_at;
 

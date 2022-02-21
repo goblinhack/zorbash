@@ -49,7 +49,7 @@ void Level::things_gc(bool force)
           continue;
         }
 
-        if (t->has_laser) {
+        if (t->laser_count) {
           IF_DEBUG2 { t->log("Thing garbage collect delayed due to laser"); }
           continue;
         }

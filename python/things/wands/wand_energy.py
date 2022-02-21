@@ -93,7 +93,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.laser_name(self, "laser_energy")
-    my.long_text_description(self, "Discharges a powerful beam of energy upon an unwitting recipient...")
+    my.long_text_description(self, "Discharges a powerful ray of energy upon an unwitting recipient... Or recipients if you aim just right.")
     my.noise_on_moving_or_being_carried(self, 5)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
