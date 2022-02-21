@@ -2,7 +2,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- pike                                                                                                                                         -->
 <!-- broadsword                                                                                                                                   -->
-<!-- single shovel                                                                                                                                -->
 <!-- cloak of jelly                                                                                                                               -->
 <!-- evil check for cross                                                                                                                         -->
 <!-- boots of shoving                                                                                                                             -->
