@@ -255,6 +255,7 @@ bool Thing::victim_attack_found_best(Thingp item, Thingp best, point best_hit_at
   TRACE_AND_INDENT();
 
   if (item) {
+    on_use(item, best);
     if (item->collision_check_and_handle_at(best_hit_at, &victim_attacked, &victim_overlaps)) {
       lunge(best_hit_at);
       return true;
@@ -445,6 +446,13 @@ bool Thing::victim_attack_best(int equip, point *at)
     dy     = d.y;
   } else {
     equip_use_offset_get(&dx, &dy, equip);
+  }
+
+  //
+  // Always make the sword swishy noise.
+  //
+  if (item) {
+    on_swing(item);
   }
 
   //

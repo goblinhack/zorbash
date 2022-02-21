@@ -46,7 +46,7 @@ void Game::place_player(void)
         t->carry(W);
         t->enchant_without_stone(W);
       }
-      if (0) {
+      if (1) {
         auto w3 = level->thing_new("double_shovel", point(x, y));
         t->carry(w3);
       }

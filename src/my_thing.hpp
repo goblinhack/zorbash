@@ -649,6 +649,7 @@ public:
   const std::string &on_tick_do(void);
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
+  const std::string &on_swing_do(void);
   const std::string &on_you_are_declared_a_follower_do(void);
   const std::string &on_you_are_declared_leader_do(void);
   const std::string &on_you_are_hit_and_now_dead_do(void);
@@ -733,7 +734,6 @@ public:
   int blast_min_radius(void);
   int bounce_count(void);
   int break_chance_d10000(void);
-  int crit_chance_d10000(void);
   int buff_on_damage_acid(Thingp hitter, int damage);
   int buff_on_damage_cold(Thingp hitter, int damage);
   int buff_on_damage_crush(Thingp hitter, int damage);
@@ -802,7 +802,11 @@ public:
   int charge_count(void);
   int collateral_damage_pct(void);
   int collision_check(void);
+  int collision_hit_180(void);
+  int collision_hit_360(void);
+  int collision_hit_adj(void);
   int collision_hit_priority(void);
+  int crit_chance_d10000(void);
   int damage_acid_chance_d1000(void);
   int damage_acid(void);
   int damage_cold_chance_d1000(void);
@@ -1055,6 +1059,7 @@ public:
   int is_cursor(void);
   int is_dangerous(Thingp);
   int is_dead_on_end_of_anim(void);
+  int is_dead_on_falling(void);
   int is_dead_on_shove(void);
   int is_dead_or_dying(void);
   int is_debuff(void);
@@ -1191,6 +1196,8 @@ public:
   int is_sticky(void);
   int is_stone(void);
   int is_sword(void);
+  int is_temperature_change_sensitive(void);
+  int is_temperature_sensitive(void);
   int is_throwable(void);
   int is_tickable(void);
   int is_tmp_thing(void);
@@ -1389,6 +1396,7 @@ public:
   int stamina_max_incr(void);
   int stamina_max_set(int);
   int stamina_max(void);
+  int stamina_on_use(void);
   int stamina_set(int);
   int stat_att_decr(int);
   int stat_att_decr(void);
@@ -1531,7 +1539,6 @@ public:
   int stuck_count_set(int);
   int stuck_count(void);
   int submerged_offset_get(void);
-  int is_temperature_change_sensitive(void);
   int temperature_decr(int);
   int temperature_decr(void);
   int temperature_get(void);
@@ -1580,12 +1587,6 @@ public:
   int unused_flag129(void);
   int unused_flag12(void);
   int unused_flag130(void);
-  int collision_hit_adj(void);
-  int collision_hit_180(void);
-  int stamina_on_use(void);
-  int collision_hit_360(void);
-  int is_dead_on_falling(void);
-  int is_temperature_sensitive(void);
   int unused_flag13(void);
   int unused_flag14(void);
   int unused_flag15(void);
@@ -1857,6 +1858,7 @@ public:
   uint8_t is_visible(void);
   uint8_t z_prio(void);
 
+  bool fire_tick(void);
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
@@ -1965,7 +1967,6 @@ public:
   void fall(float fall_height, ts_t ms);
   void fall_height_set(float);
   void fall_into_the_void(void);
-  bool fire_tick(void);
   void gas_poison_tick(void);
   void gc(void);
   void goal_penalty_tick(void);
@@ -2030,16 +2031,17 @@ public:
   void on_enchant(void);
   void on_equip(Thingp what);
   void on_fall(void);
-  void on_jump(void);
   void on_final_use(Thingp what);
   void on_final_use(Thingp what, Thingp target);
   void on_fire(void);
+  void on_jump(void);
   void on_lifespan_tick(Thingp hitter);
   void on_move(void);
   void on_open(void);
   void on_owner_add(Thingp owner);
   void on_owner_remove(Thingp owner);
   void on_polymorphed(void);
+  void on_swing(Thingp what);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);

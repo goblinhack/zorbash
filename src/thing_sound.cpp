@@ -114,7 +114,6 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
 
   if (Mix_Playing(channel)) {
     if (Mix_PlayChannel(-1, sound->second->chunk, 0 /* loops */) == -1) {
-
       dbg2("Cannot play sound %s on channel %d, something else playing", alias.c_str(), channel);
       return false;
     }

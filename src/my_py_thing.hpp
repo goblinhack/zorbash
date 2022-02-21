@@ -22,6 +22,9 @@ PyObject *thing_charge_count_decr(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_charge_count_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_charge_count_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_collateral_damage_pct(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_collision_hit_180(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_collision_hit_360(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_collision_hit_adj(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_acid_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -190,6 +193,7 @@ PyObject *thing_is_cursor_path_hazard_for_player(PyObject *obj, PyObject *args, 
 PyObject *thing_is_cursor_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_dead_on_falling(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_or_dying_on_shove(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_or_dying(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_debuff(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -402,6 +406,7 @@ PyObject *thing_stamina_max_decr(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_stamina_max_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_max_set(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_stamina_on_use(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_set(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stat_att_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stat_att_incr(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -493,11 +498,6 @@ PyObject *thing_unused_flag128(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag129(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag130(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_collision_hit_adj(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_collision_hit_180(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_stamina_on_use(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_collision_hit_360(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_dead_on_falling(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag14(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag15(PyObject *obj, PyObject *args, PyObject *keywds);

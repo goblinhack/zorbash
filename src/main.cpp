@@ -203,12 +203,12 @@ void die(void)
 static void find_executable(void)
 {
   TRACE_AND_INDENT();
-  char *      parent_dir         = 0;
-  char *      curr_dir           = 0;
+  char       *parent_dir         = 0;
+  char       *curr_dir           = 0;
   std::string exec_name          = "";
-  char *      exec_expanded_name = 0;
-  char *      path               = 0;
-  char *      tmp;
+  char       *exec_expanded_name = 0;
+  char       *path               = 0;
+  char       *tmp;
 
   exec_name = mybasename(ARGV[ 0 ], __FUNCTION__);
   CON("INI: Will use EXEC_NAME as '%s'", exec_name.c_str());

@@ -7052,6 +7052,12 @@ const std::string &Thing::on_use_do(void)
   return (tp()->on_use_do());
 }
 
+const std::string &Thing::on_swing_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_swing_do());
+}
+
 const std::string &Thing::on_final_use_do(void)
 {
   TRACE_NO_INDENT();

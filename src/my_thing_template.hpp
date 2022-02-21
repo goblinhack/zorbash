@@ -714,6 +714,7 @@ private:
   std::string _on_tick_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
+  std::string _on_swing_do;
   std::string _on_you_are_declared_a_follower_do;
   std::string _on_you_are_declared_leader_do;
   std::string _on_you_are_hit_and_now_dead_do;
@@ -946,6 +947,7 @@ public:
   const std::string &on_tick_do(void) const { return _on_tick_do; }
   const std::string &on_unequip_do(void) const { return _on_unequip_do; }
   const std::string &on_use_do(void) const { return _on_use_do; }
+  const std::string &on_swing_do(void) const { return _on_swing_do; }
   const std::string &on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
   const std::string &on_you_are_declared_leader_do(void) const { return _on_you_are_declared_leader_do; }
   const std::string &on_you_are_hit_and_now_dead_do(void) const { return _on_you_are_hit_and_now_dead_do; }
@@ -1954,6 +1956,7 @@ public:
   void on_tick_do_set(const std::string &v) { _on_tick_do = v; }
   void on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }
   void on_use_do_set(const std::string &v) { _on_use_do = v; }
+  void on_swing_do_set(const std::string &v) { _on_swing_do = v; }
   void on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
   void on_you_are_declared_leader_do_set(const std::string &v) { _on_you_are_declared_leader_do = v; }
   void on_you_are_hit_and_now_dead_do_set(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }

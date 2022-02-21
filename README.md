@@ -4,7 +4,9 @@
 <!-- broadsword                                                                                                                                   -->
 <!-- cloak of jelly                                                                                                                               -->
 <!-- evil check for cross                                                                                                                         -->
-<!-- boots of shoving                                                                                                                             -->
+<!-- boots of shoving / steadfastness                                                                                                             -->
+<!-- boots of jumping                                                                                                                             -->
+<!-- boots of hiking / const                                                                                                                      -->
 <!-- cloak of fire protection                                                                                                                     -->
 <!-- potion of paralysis should paralyse attackers too, so it is useful / vampire?                                                                -->
 <!-- have items that show thigns like +1 defense, -1 strength, +2 dex etc...                                                                      -->
