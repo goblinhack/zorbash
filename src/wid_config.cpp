@@ -22,39 +22,49 @@ void Config::fini(void) { TRACE_AND_INDENT(); }
 void Config::reset(void)
 {
   TRACE_AND_INDENT();
-  game_pix_scale_height  = {};
-  game_pix_scale_width   = {};
-  game_pix_zoom          = GAME_DEFAULT_PIX_ZOOM;
-  one_pixel_height       = {};
-  one_pixel_width        = {};
-  tile_pix_height        = {};
-  tile_pix_width         = {};
-  tile_pixel_height      = {};
-  tile_pixel_width       = {};
-  ui_pix_scale_height    = {};
-  ui_pix_scale_width     = {};
-  ui_pix_zoom            = GAME_DEFAULT_UI_ZOOM;
-  video_w_h_ratio        = {};
-  debug_mode             = false;
-  fps_counter            = false;
-  gfx_allow_highdpi      = false;
-  gfx_borderless         = true;
-  gfx_fullscreen         = false;
+  game_pix_scale_height = {};
+  game_pix_scale_width  = {};
+  game_pix_zoom         = GAME_DEFAULT_PIX_ZOOM;
+  one_pixel_height      = {};
+  one_pixel_width       = {};
+  tile_pix_height       = {};
+  tile_pix_width        = {};
+  tile_pixel_height     = {};
+  tile_pixel_width      = {};
+  ui_pix_scale_height   = {};
+  ui_pix_scale_width    = {};
+  ui_pix_zoom           = GAME_DEFAULT_UI_ZOOM;
+  video_w_h_ratio       = {};
+  debug_mode            = false;
+  fps_counter           = false;
+  gfx_allow_highdpi     = false;
+  gfx_borderless        = true;
+  gfx_fullscreen        = false;
+#ifdef __linux__
+  //
+  // Avoids the top 10 pixels being stolen by gnome menu bar
+  //
+  gfx_fullscreen_desktop = true;
+#else
+  //
+  // Seems to work better on mac
+  //
   gfx_fullscreen_desktop = false;
-  gfx_inverted           = false;
-  gfx_show_hidden        = false;
-  gfx_vsync_enable       = true;
-  gfx_vsync_locked       = false;
-  config_pix_height      = {};
-  config_pix_width       = {};
-  game_pix_height        = {};
-  game_pix_width         = {};
-  ui_pix_height          = {};
-  ui_pix_width           = {};
-  window_pix_height      = {};
-  window_pix_width       = {};
-  ascii_gl_height        = {};
-  ascii_gl_width         = {};
+#endif
+  gfx_inverted      = false;
+  gfx_show_hidden   = false;
+  gfx_vsync_enable  = true;
+  gfx_vsync_locked  = false;
+  config_pix_height = {};
+  config_pix_width  = {};
+  game_pix_height   = {};
+  game_pix_width    = {};
+  ui_pix_height     = {};
+  ui_pix_width      = {};
+  window_pix_height = {};
+  window_pix_width  = {};
+  ascii_gl_height   = {};
+  ascii_gl_width    = {};
 
   key_action0.sym         = SDLK_0;
   key_action1.sym         = SDLK_1;

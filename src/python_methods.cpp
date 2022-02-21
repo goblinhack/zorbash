@@ -1520,6 +1520,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_tick_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_unequip_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_use_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_swing_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_declared_a_follower_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_declared_leader_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_you_are_hit_and_now_dead_do),

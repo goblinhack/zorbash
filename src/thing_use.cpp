@@ -19,6 +19,7 @@ void Thing::on_use(Thingp what)
 
   auto on_use = what->tp()->on_use_do();
   if (std::empty(on_use)) {
+    dbg("Has no on use");
     return;
   }
 
@@ -41,6 +42,41 @@ void Thing::on_use(Thingp what)
                     (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_use call [%s] expected mod:function, got %d elems", on_use.c_str(), (int) on_use.size());
+  }
+}
+
+void Thing::on_swing(Thingp what)
+{
+  verify(MTYPE_THING, what);
+  if (! what) {
+    err("Cannot swing null thing");
+    return;
+  }
+
+  auto on_swing = what->tp()->on_swing_do();
+  if (std::empty(on_swing)) {
+    dbg("Has no on swing");
+    return;
+  }
+
+  auto t = split_tokens(on_swing, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = what->name();
+    }
+
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_swing call [%s] expected mod:function, got %d elems", on_swing.c_str(), (int) on_swing.size());
   }
 }
 

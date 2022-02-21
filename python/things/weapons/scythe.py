@@ -2,10 +2,9 @@ import my
 import tp
 
 
-def on_use(owner, item, target, x, y):
+def on_swing(owner, item, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
-    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
     damage = my.thing_damage_melee(item)
     enchant = my.thing_enchant_get(item)
@@ -16,6 +15,7 @@ def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
     my.break_chance_d10000(self, 5)
     my.collision_check(self, True)
+    my.collision_hit_adj(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
     my.crit_chance_d10000(self, 1000)
@@ -24,7 +24,6 @@ def tp_init(name, text_name, short_text_name):
     my.equip_carry_anim(self, "scythe_carry")
     my.gfx_animated_can_hflip(self, True)
     my.gfx_animated(self, True)
-    my.collision_hit_adj(self, True)
     my.gfx_anim_use(self, "scythe_swing")
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)
@@ -52,7 +51,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_width(self, 8)
     my.long_text_description(self, "A huge gleaming scythe. Ideal for gardening and other uses.")
     my.noise_on_moving_or_being_carried(self, 20)
-    my.on_use_do(self, "me.on_use()")
+    my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_on_use(self, 3)
     my.text_a_or_an(self, "a")

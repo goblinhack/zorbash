@@ -2,10 +2,9 @@ import my
 import tp
 
 
-def on_use(owner, item, target, x, y):
+def on_swing(owner, item, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
-    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
     damage = my.thing_damage_melee(item)
     enchant = my.thing_enchant_get(item)
@@ -16,6 +15,7 @@ def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
     my.break_chance_d10000(self, 10)
     my.collision_check(self, True)
+    my.collision_hit_180(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
     my.crit_chance_d10000(self, 500)
@@ -27,7 +27,6 @@ def tp_init(name, text_name, short_text_name):
     my.gfx_anim_use(self, "double_shovel_swing")
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)
-    my.collision_hit_180(self, True)
     my.gold_value_dice(self, "50")
     my.is_able_to_fall(self, True)
     my.is_auto_equipped(self, True)
@@ -52,7 +51,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_width(self, 9)
     my.long_text_description(self, "A truly dreadful weapon of last resort. The masterwork double bladed shovel. Ideal for allotment use and hitting enemies both in front and behind in the same swing.")
     my.noise_on_moving_or_being_carried(self, 40)
-    my.on_use_do(self, "me.on_use()")
+    my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_RARE)
     my.stamina_on_use(self, 3)
     my.text_a_or_an(self, "a")

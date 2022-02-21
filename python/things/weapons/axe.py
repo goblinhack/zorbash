@@ -2,10 +2,9 @@ import my
 import tp
 
 
-def on_use(owner, item, target, x, y):
+def on_swing(owner, item, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
-    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
     enchant = my.thing_enchant_get(item)
 
@@ -60,7 +59,7 @@ def init_weapon(name, text_name, short_text_name):
     my.long_text_description(self, "A gleaming wooden handled axe. It's a bit short and extra hungry for vengeance. Against what, who can say. Take care, as your mighty swing can hit all monsters adjacent to you.")
     my.noise_on_moving_or_being_carried(self, 15)
     my.on_enchant_do(self, "me.on_enchant()")
-    my.on_use_do(self, "me.on_use()")
+    my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_on_use(self, 2)
     my.stat_att_mod(self, 1)  # means +1 per enchant
