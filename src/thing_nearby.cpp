@@ -267,7 +267,7 @@ Thingp Thing::best_visible_target_get(void)
         //
         // If no clear shot, then ignore
         //
-        if (in_the_way(curr_at, t->curr_at)) {
+        if (in_the_way(curr_at, t->curr_at, 1).size()) {
           continue;
         }
 

@@ -117,14 +117,14 @@ std::string Thing::to_dbg_string(void)
   return (string_sprintf(
       "L%d %" PRIX32
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
       level->dungeon_walk_order_level_no, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
       has_ever_moved ? ", has_ever_moved" : "", has_external_particle ? ", has_external_particle" : "",
-      has_internal_particle ? ", has_internal_particle" : "", has_laser ? ", has_laser" : "",
-      has_light ? ", has_light" : "", has_projectile ? ", has_projectile" : "", is_activated ? ", is_activated" : "",
+      has_internal_particle ? ", has_internal_particle" : "", has_light ? ", has_light" : "",
+      has_projectile ? ", has_projectile" : "", is_activated ? ", is_activated" : "",
       is_attached ? ", is_attached" : "", is_being_destroyed ? ", is_being_destroyed" : "",
       is_bouncing ? ", is_bouncing" : "", is_changing_level ? ", is_changing_level" : "", is_dead ? ", is_dead" : "",
       is_scheduled_for_death ? ", is_scheduled_for_death" : "", is_dying ? ", is_dying" : "",
@@ -181,10 +181,10 @@ std::string Thing::to_dbg_saved_string(void)
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
       level->dungeon_walk_order_level_no, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
-      has_ever_moved ? ", has_ever_moved" : "", has_laser ? ", has_laser" : "", has_light ? ", has_light" : "",
+      has_ever_moved ? ", has_ever_moved" : "", has_light ? ", has_light" : "",
       has_projectile ? ", has_projectile" : "", is_activated ? ", is_activated" : "",
       is_attached ? ", is_attached" : "", is_being_destroyed ? ", is_being_destroyed" : "",
       is_bouncing ? ", is_bouncing" : "", is_changing_level ? ", is_changing_level" : "", is_dead ? ", is_dead" : "",

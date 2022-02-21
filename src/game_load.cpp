@@ -345,6 +345,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   in >> bits(my.t->tile_curr);
   in >> bits(my.t->alpha);
   in >> bits(my.t->z_depth);
+  in >> bits(my.t->laser_count);
   uint8_t dir;
   in >> dir;
   my.t->dir = dir;
@@ -361,7 +362,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // CON("LOAD %016LX ",bits64);
   // clang-format off
   my.t->has_ever_moved = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->has_laser = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->has_light = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->has_projectile = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_activated = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

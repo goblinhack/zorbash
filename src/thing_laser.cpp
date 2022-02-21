@@ -54,18 +54,13 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   return victim_select(item);
 }
 
-Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
+bool Thing::laser_fire_at(const std::string &laser_name, Thingp target)
 {
   dbg("Laser fire %s at %s", laser_name.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (laser_name == "") {
     die("No laser name");
-  }
-
-  auto collatoral_damage = in_the_way(curr_at, target->curr_at);
-  if (collatoral_damage) {
-    target = collatoral_damage;
   }
 
   auto start = last_blit_at;
@@ -76,7 +71,7 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
     if (is_player()) {
       game->tick_begin("failed to fire laser");
     }
-    return nullptr;
+    return false;
   }
 
   if (! end.x && ! end.y) {
@@ -84,7 +79,7 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
     if (is_player()) {
       game->tick_begin("failed to fire laser");
     }
-    return nullptr;
+    return false;
   }
 
   //
@@ -96,31 +91,37 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, Thingp target)
     game->change_state(Game::STATE_NORMAL);
   }
 
-  auto laser = level->thing_new(laser_name, target->curr_at, this);
-  if (! laser) {
-    err("No laser to fire");
-    if (is_player()) {
-      game->tick_begin("failed to fire laser");
+  //
+  // Hit all things in the line of sight of the laser
+  //
+  auto collatoral_damage = in_the_way(curr_at, target->curr_at);
+  for (auto target : collatoral_damage) {
+    auto laser = level->thing_new(laser_name, target->curr_at, this);
+    if (! laser) {
+      err("No laser to fire");
+      if (is_player()) {
+        game->tick_begin("failed to fire laser");
+      }
+      return false;
     }
-    return nullptr;
+
+    dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(), target->to_string().c_str(),
+        distance(curr_at, target->curr_at));
+
+    level->new_laser(laser->id, target->id, start, end, game->current_move_speed, true /* follow */);
+
+    //
+    // This is needed for secondary lasers
+    //
+    laser->last_blit_at = end;
+
+    on_use(laser, target);
   }
 
-  dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(), target->to_string().c_str(),
-      distance(curr_at, target->curr_at));
-
-  level->new_laser(laser->id, target->id, start, end, game->current_move_speed, true /* follow */);
-
-  //
-  // This is needed for secondary lasers
-  //
-  laser->last_blit_at = end;
-
-  on_use(laser, target);
-
-  return laser;
+  return true;
 }
 
-Thingp Thing::laser_fire_at(const std::string &laser_name, point at)
+bool Thing::laser_fire_at(const std::string &laser_name, point at)
 {
   Thingp best = nullptr;
   point  best_hit_at;
@@ -141,5 +142,5 @@ Thingp Thing::laser_fire_at(const std::string &laser_name, point at)
   FOR_ALL_THINGS_END()
 
   err("No target to fire at");
-  return nullptr;
+  return false;
 }

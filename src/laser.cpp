@@ -83,10 +83,7 @@ void Level::new_laser(ThingId id, ThingId victim_id, point start, point stop, ui
   if (id.ok()) {
     auto t = thing_find(id);
     if (t) {
-      if (t->has_laser) {
-        return;
-      }
-      t->has_laser = true;
+      t->laser_count++;
       t->log("New internal laser");
     }
   }
@@ -145,7 +142,7 @@ void Level::display_lasers(void)
         // that will break repeatable randomness.
         //
         t->dead_scheduled("End of laser");
-        t->has_laser = false;
+        t->laser_count--;
       }
       return true;
     }
@@ -225,7 +222,7 @@ void Level::display_lasers(void)
 bool Thing::laser_anim_exists(void)
 {
   TRACE_AND_INDENT();
-  return has_laser;
+  return laser_count > 0;
 }
 
 void Thing::delete_laser(void)
@@ -241,5 +238,5 @@ void Thing::delete_laser(void)
   });
 
   level->all_lasers.erase(e, level->all_lasers.end());
-  has_laser = false;
+  laser_count--;
 }

@@ -40,17 +40,19 @@ Thingp Thing::in_the_way(const point s, const point e, int x, int y)
   return nullptr;
 }
 
-Thingp Thing::in_the_way_(const point s, const point e, int x0_in, int y0_in, int x1_in, int y1_in, int flag)
+std::vector< Thingp > Thing::in_the_way_(const point s, const point e, int x0_in, int y0_in, int x1_in, int y1_in,
+                                         int flag, size_t max_elems)
 {
-  float temp;
-  float dx;
-  float dy;
-  float tdy;
-  float dydx;
-  float p;
-  float x;
-  float y;
-  float i;
+  std::vector< Thingp > out;
+  float                 temp;
+  float                 dx;
+  float                 dy;
+  float                 tdy;
+  float                 dydx;
+  float                 p;
+  float                 x;
+  float                 y;
+  float                 i;
 
   float x0 = x0_in;
   float y0 = y0_in;
@@ -90,7 +92,12 @@ Thingp Thing::in_the_way_(const point s, const point e, int x0_in, int y0_in, in
   }
 
   if (it) {
-    return it;
+    out.push_back(it);
+    if (max_elems) {
+      if (out.size() >= max_elems) {
+        return out;
+      }
+    }
   }
 
   for (i = 1; i <= dx; i++) {
@@ -114,17 +121,22 @@ Thingp Thing::in_the_way_(const point s, const point e, int x0_in, int y0_in, in
     }
 
     if (it) {
-      return it;
+      out.push_back(it);
+      if (max_elems) {
+        if (out.size() >= max_elems) {
+          return out;
+        }
+      }
     }
   }
 
-  return nullptr;
+  return out;
 }
 
 /*
  * We're trying to hit a target, but something might be in the way.
  */
-Thingp Thing::in_the_way(const point s, const point e)
+std::vector< Thingp > Thing::in_the_way(const point s, const point e, size_t max_elems)
 {
   float slope = 100.0;
 
@@ -137,17 +149,13 @@ Thingp Thing::in_the_way(const point s, const point e)
     slope = (y1 - y0) * (1.0 / (x1 - x0));
   }
 
-  Thingp it;
-
   if ((0 <= slope) && (slope <= 1)) {
-    it = in_the_way_(s, e, x0, y0, x1, y1, 0);
+    return in_the_way_(s, e, x0, y0, x1, y1, 0, max_elems);
   } else if ((-1 <= slope) && (slope <= 0)) {
-    it = in_the_way_(s, e, x0, -y0, x1, -y1, 3);
+    return in_the_way_(s, e, x0, -y0, x1, -y1, 3, max_elems);
   } else if (slope > 1) {
-    it = in_the_way_(s, e, y0, x0, y1, x1, 1);
+    return in_the_way_(s, e, y0, x0, y1, x1, 1, max_elems);
   } else {
-    it = in_the_way_(s, e, -y0, x0, -y1, x1, 2);
+    return in_the_way_(s, e, -y0, x0, -y1, x1, 2, max_elems);
   }
-
-  return it;
 }

@@ -87,6 +87,7 @@ public:
 
   uint8_t alpha {255}; // For fading
   uint8_t z_depth {};
+  uint8_t laser_count {};
 
   uint64_t dir : 4 {}; // Direction
 
@@ -98,7 +99,6 @@ public:
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   uint64_t has_ever_moved                               : 1 {};
-  uint64_t has_laser                                    : 1 {}; // current laser being fired
   uint64_t has_light                                    : 1 {};
   uint64_t has_projectile                               : 1 {}; // current projectile being fired
   uint64_t is_activated                                 : 1 {}; // this skill is activated
@@ -277,15 +277,15 @@ public:
   Thingp top_mob(void);
   Thingp top_owner(void);
   Thingp top_spawned_owner(void);
-  Thingp in_the_way(const point s, const point e);
-  Thingp in_the_way_(const point s, const point e, int x0_in, int y0_in, int x1_in, int y1_in, int flag);
   Thingp in_the_way(const point s, const point e, int x, int y);
-  Thingp laser_fire_at(const std::string &item, Thingp target);
   Thingp projectile_fire_at(const std::string &item, Thingp target);
-  Thingp laser_fire_at(const std::string &item, point at);
   Thingp projectile_fire_at(const std::string &item, point at);
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at_if_possible(const std::string &what);
+
+  std::vector< Thingp > in_the_way(const point s, const point e, size_t max_elems = 0);
+  std::vector< Thingp > in_the_way_(const point s, const point e, int x0_in, int y0_in, int x1_in, int y1_in,
+                                    int flag, size_t max_elems);
 
   bool ai_blocked_completely(void);
   bool ai_blocked(void);
@@ -357,6 +357,7 @@ public:
   bool collision_obstacle(point);
   bool collision_obstacle(Thingp);
   bool consume(Thingp it);
+  bool coords_get(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
   bool cursor_path_pop_first_move(void);
   bool debuff_add_if_not_found(Tpp what);
   bool debuff_add(Thingp it);
@@ -393,8 +394,6 @@ public:
   bool fire_at(Thingp item, Thingp target);
   bool fire_at(Thingp target);
   bool fire_choose_target(Thingp item);
-  bool coords_get(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
-  bool map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
   bool health_boost_would_occur(int v);
   bool idle_check(void);
   bool if_matches_then_dead(const std::string &what, const point p);
@@ -412,12 +411,16 @@ public:
   bool is_hated_by_me(const point p);
   bool is_hated_by_me(const Thingp it);
   bool is_on_fire(void);
+  bool is_state_sleeping(void);
   bool is_stuck(void);
   bool is_to_be_avoided(Thingp attacker);
   bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item, Thingp victim = nullptr);
+  bool laser_fire_at(const std::string &item, point at);
+  bool laser_fire_at(const std::string &item, Thingp target);
   bool learn_random_skill(void);
+  bool map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
   bool map_treasure_available(void);
   bool matches(const std::string &what);
   bool move_away_from_entrance(void);
@@ -431,6 +434,7 @@ public:
   bool move_to_or_escape(const point);
   bool move_to_try(const point, const bool escaping, bool check_only);
   bool natural_attack(Thingp victim);
+  bool on_fire_set(const std::string &why);
   bool on_firing_at_something(Thingp hitter);
   bool on_tick(void);
   bool open_door(Thingp door);
@@ -447,7 +451,6 @@ public:
   bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
   bool same_leader(Thingp it);
   bool same_mob(Thingp it);
-  bool on_fire_set(const std::string &why);
   bool skill_add(Thingp it);
   bool skill_add(Tpp what);
   bool skillbox_id_insert(Thingp what);
@@ -470,9 +473,6 @@ public:
   bool state_using_skillstone(void);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
-  bool victim_attack_best(int equip, point *at = nullptr);
-  bool victim_attack_best_at(int equip, point *at, int attempt, bool &victim_attacked, bool &victim_overlaps);
-  bool victim_select(Thingp item);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
   bool throw_item_choose_target(Thingp item);
@@ -484,8 +484,8 @@ public:
   bool too_far_from_mob(void);
   bool try_harder_to_jump(void);
   bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
-  bool try_to_enchant_items(void);
   bool try_to_carry(Thingp w);
+  bool try_to_enchant_items(void);
   bool try_to_escape(void);
   bool try_to_jump_away_from_player(void);
   bool try_to_jump_carefree(point to);
@@ -507,11 +507,13 @@ public:
   bool unequip(const char *why, int equip, bool allowed_to_recarry);
   bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
   bool use(Thingp w, int equip = -1);
+  bool victim_attack_best_at(int equip, point *at, int attempt, bool &victim_attacked, bool &victim_overlaps);
+  bool victim_attack_best(int equip, point *at = nullptr);
+  bool victim_select(Thingp item);
   bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
-  bool is_state_sleeping(void);
 
   const Dice &damage_natural_dice(void);
   const Dice &damage_crush_dice(void);
