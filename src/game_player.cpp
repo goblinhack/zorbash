@@ -41,20 +41,24 @@ void Game::place_player(void)
         continue;
       }
       auto t = level->thing_new("player2", point(x, y));
-      {
+      if (0) {
         auto W = level->thing_new("wand_descent", point(x, y));
         t->carry(W);
         t->enchant_without_stone(W);
       }
       if (0) {
+        auto w3 = level->thing_new("double_shovel", point(x, y));
+        t->carry(w3);
+      }
+      if (1) {
         auto w3 = level->thing_new("sword1_wood", point(x, y));
         t->carry(w3);
       }
-      {
-        auto w3 = level->thing_new("shovel", point(x, y));
+      if (0) {
+        auto w3 = level->thing_new("axe", point(x, y));
         t->carry(w3);
       }
-      {
+      if (0) {
         auto W = level->thing_new("torch", point(x, y));
         t->carry(W);
       }

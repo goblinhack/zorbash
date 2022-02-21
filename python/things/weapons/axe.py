@@ -29,7 +29,7 @@ def init_weapon(name, text_name, short_text_name):
     my.collision_hit_priority(self, 6)
     my.crit_chance_d10000(self, 500)
     my.damage_melee_chance_d1000(self, 1000)
-    my.damage_melee_dice(self, "1d10+1")
+    my.damage_melee_dice(self, "1d12")
     my.equip_carry_anim(self, "axe_carry")
     my.gfx_animated_can_hflip(self, True)
     my.gfx_animated(self, True)
@@ -62,7 +62,6 @@ def init_weapon(name, text_name, short_text_name):
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_use_do(self, "me.on_use()")
     my.rarity(self, my.RARITY_UNCOMMON)
-    my.stamina_on_use(self, 0)
     my.stamina_on_use(self, 2)
     my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")

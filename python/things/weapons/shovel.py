@@ -14,21 +14,20 @@ def on_use(owner, item, target, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.break_chance_d10000(self, 10)
+    my.break_chance_d10000(self, 5)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
-    my.crit_chance_d10000(self, 500)
+    my.crit_chance_d10000(self, 200)
     my.damage_melee_chance_d1000(self, 1000)
-    my.damage_melee_dice(self, "2d12+1")
+    my.damage_melee_dice(self, "1d12")
     my.equip_carry_anim(self, "shovel_carry")
     my.gfx_animated_can_hflip(self, True)
     my.gfx_animated(self, True)
     my.gfx_anim_use(self, "shovel_swing")
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)
-    my.collision_hit_180(self, True)
-    my.gold_value_dice(self, "50")
+    my.gold_value_dice(self, "5")
     my.is_able_to_fall(self, True)
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
@@ -50,11 +49,10 @@ def tp_init(name, text_name, short_text_name):
     my.is_wooden(self, True)
     my.item_height(self, 8)
     my.item_width(self, 8)
-    my.long_text_description(self, "A truly dreadful weapon of last resort. The double bladed shovel. Ideal for allotment use and hitting enemies both in front and behind.")
-    my.noise_on_moving_or_being_carried(self, 40)
+    my.long_text_description(self, "A truly inspiring weapon of dread. The shovel. Ideal for light gardening and decapitation.")
+    my.noise_on_moving_or_being_carried(self, 20)
     my.on_use_do(self, "me.on_use()")
-    my.rarity(self, my.RARITY_UNCOMMON)
-    my.stamina_on_use(self, 0)
+    my.rarity(self, my.RARITY_COMMON)
     my.stamina_on_use(self, 3)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy diggy means of justice.")
@@ -68,7 +66,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="shovel", text_name="double shovel", short_text_name="double shovel")
+    tp_init(name="shovel", text_name="shovel", short_text_name="shovel")
 
 
 init()
