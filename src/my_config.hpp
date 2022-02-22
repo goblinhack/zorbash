@@ -16,7 +16,7 @@
 #undef ENABLE_DEBUG_AI_ASTAR                 // Astar AI path costs
 
 #undef ENABLE_DEBUG_AI           // Monster AI decisions
-#undef ENABLE_DEBUG_AI_WANDER    // AI wander path selection
+#undef ENABLE_DEBUG_AI_WAND_OR_STAFFER    // AI wander path selection
 #undef ENABLE_DEBUG_GFX_GL_BLEND // Use to debug specific blends
 #undef ENABLE_DEBUG_MEM_LEAKS    // Check for leaks at exit
 #undef ENABLE_DEBUG_PTRCHECK     // (VERY SLOW) Debug ptrcheck itself

@@ -138,6 +138,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_enchant(wid_popup_window, t);
   wid_thing_info_add_rarity(wid_popup_window, t);
   wid_thing_info_add_general_info(wid_popup_window, t);
+  wid_thing_info_add_carry_info(wid_popup_window, t);
   //
   // Not sure if we will have shops
   //
@@ -172,7 +173,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   }
   wid_thing_info_add_charge_count(wid_popup_window, t);
   wid_thing_info_add_danger_level(wid_popup_window, t);
-  wid_thing_info_add_carry_info(wid_popup_window, t);
   t->show_botcon_description();
 
   return wid_popup_window;
@@ -982,12 +982,12 @@ void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_energy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%18s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_energy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%19s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%18s", tmp2);
       }
       w->log(tmp);
 
@@ -1536,37 +1536,39 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
 
+  bool printed = false;
+
   if (t->is_monst() && t->environ_avoids_water()) {
     if (t->environ_avoids_water() > 10) {
       w->log("Hates water.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      printed = true;
     } else {
       w->log("Avoids water.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      printed = true;
     }
   }
 
   if (t->is_monst() && t->environ_avoids_acid()) {
     if (t->environ_avoids_acid() > 10) {
       w->log("Hates acid.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      printed = true;
     } else {
       w->log("Avoids acid.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      printed = true;
     }
   }
 
   if (t->is_monst() && t->environ_avoids_fire()) {
     if (t->environ_avoids_fire() > 10) {
       w->log("Hates fire.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      printed = true;
     } else {
       w->log("Avoids fire.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      printed = true;
     }
   } else if (t->is_meltable()) {
     w->log("Can melt.", true);
-    w->log(UI_LOGGING_EMPTY_LINE);
+    printed = true;
   } else if (t->is_burnable()) {
     if (t->is_monst() || t->is_player()) {
       //
@@ -1575,24 +1577,53 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
       //
     } else {
       w->log("Item can burn.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      printed = true;
     }
   } else if (t->is_combustible()) {
     w->log("Is combustible.", true);
-    w->log(UI_LOGGING_EMPTY_LINE);
+    printed = true;
   } else if (t->is_very_combustible()) {
     w->log("Can explode!", true);
-    w->log(UI_LOGGING_EMPTY_LINE);
+    printed = true;
   }
 
   if (t->is_item()) {
     if (t->temperature() < 0) {
       w->log("Is cold to the touch.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      printed = true;
     } else if (t->temperature() > 0) {
       w->log("Is warm to the touch.", true);
-      w->log(UI_LOGGING_EMPTY_LINE);
+      printed = true;
     }
+  }
+
+  if (t->is_staff()) {
+    w->log("Item hits all in path.", true);
+    printed = true;
+  }
+
+  if (t->is_wand()) {
+    w->log("Item hits first in path.", true);
+    printed = true;
+  }
+
+  if (t->collision_hit_360()) {
+    w->log("Item hits surrounding tiles.", true);
+    printed = true;
+  }
+
+  if (t->collision_hit_180()) {
+    w->log("Item hits front and behind.", true);
+    printed = true;
+  }
+
+  if (t->collision_hit_adj()) {
+    w->log("Item hits adjacent tiles.", true);
+    printed = true;
+  }
+
+  if (printed) {
+    w->log(UI_LOGGING_EMPTY_LINE);
   }
 }
 

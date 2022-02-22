@@ -72,13 +72,13 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   auto dmap_can_see = dmap_can_see_get();
 
   switch (search_type) {
-    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
-    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP :
-    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED : break;
-    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP :
-    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
-    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
-    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
+    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED:
+    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP:
+    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED: break;
+    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP:
+    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED:
+    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED:
+    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP:
       if (is_player()) {
         minx = 0;
         maxx = MAP_WIDTH - 1;
@@ -93,16 +93,16 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   ai_dmap_can_see_init(minx, miny, maxx, maxy, search_type, false);
 
   switch (search_type) {
-    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED :
+    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED:
       ai_choose_can_see_goals(goals, minx, miny, maxx, maxy);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
-    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP :
-    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED :
-    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP :
-    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED :
-    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED :
-    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP :
+    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP:
+    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED:
+    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP:
+    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED:
+    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED:
+    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP:
       ai_choose_search_goals(goals, search_type);
       goalmaps.push_back(GoalMap {goals, dmap_can_see});
       break;
@@ -399,13 +399,13 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   }
 
   switch (search_type) {
-    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED : jump_allowed = true; break;
-    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP : jump_allowed = false; break;
-    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_allowed = true; break;
-    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP : jump_allowed = false; break;
-    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_allowed = true; break;
-    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_allowed = true; break;
-    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_allowed = false; break;
+    case MONST_SEARCH_TYPE_CAN_SEE_JUMP_ALLOWED: jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_LOCAL_NO_JUMP: jump_allowed = false; break;
+    case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED: jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP: jump_allowed = false; break;
+    case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED: jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED: jump_allowed = true; break;
+    case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP: jump_allowed = false; break;
   }
 
   if (! is_able_to_jump()) {
@@ -1190,13 +1190,13 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     int jump_distance;
 
     switch (search_type) {
-      case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
-      case MONST_SEARCH_TYPE_LOCAL_NO_JUMP : jump_distance = 0; break;
-      case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
-      case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP : jump_distance = 0; break;
-      case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED : jump_distance = how_far_i_can_jump_max(); break;
-      case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP : jump_distance = 0; break;
-      default : DIE("unexpected search-type case"); break;
+      case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED: jump_distance = how_far_i_can_jump_max(); break;
+      case MONST_SEARCH_TYPE_LOCAL_NO_JUMP: jump_distance = 0; break;
+      case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED: jump_distance = how_far_i_can_jump_max(); break;
+      case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP: jump_distance = 0; break;
+      case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED: jump_distance = how_far_i_can_jump_max(); break;
+      case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP: jump_distance = 0; break;
+      default: DIE("unexpected search-type case"); break;
     }
 
     auto dist = distance(p, curr_at);
@@ -1958,46 +1958,46 @@ bool Thing::ai_tick(bool recursing)
   }
 #endif
   switch (infop()->monst_state) {
-    case MONST_STATE_IDLE :
+    case MONST_STATE_IDLE:
       if (state_idle(threat, minx, miny, maxx, maxy)) {
         return true;
       }
       break;
-    case MONST_STATE_MOVING :
+    case MONST_STATE_MOVING:
       if (state_moving()) {
         return true;
       }
       break;
-    case MONST_STATE_SLEEPING :
+    case MONST_STATE_SLEEPING:
       if (state_sleeping(do_something, wait)) {
         return true;
       }
       break;
-    case MONST_STATE_RESTING :
+    case MONST_STATE_RESTING:
       if (state_resting(do_something, wait)) {
         return true;
       }
       break;
 
-    case MONST_STATE_OPEN_INVENTORY :
+    case MONST_STATE_OPEN_INVENTORY:
       if (state_open_inventory()) {
         return true;
       }
       break;
 
-    case MONST_STATE_USING_ENCHANTSTONE :
+    case MONST_STATE_USING_ENCHANTSTONE:
       if (state_using_enchantstone()) {
         return true;
       }
       break;
 
-    case MONST_STATE_USING_SKILLSTONE :
+    case MONST_STATE_USING_SKILLSTONE:
       if (state_using_skillstone()) {
         return true;
       }
       break;
 
-    case MONST_STATE_REPACK_INVENTORY :
+    case MONST_STATE_REPACK_INVENTORY:
       if (state_repack_inventory()) {
         return true;
       }

@@ -30,7 +30,7 @@ import my
 # SHALLOW_WATER                 w
 # TRAP                          t
 # WALL                          x
-# WAND                          /
+# WAND_OR_STAFF                          /
 
 # MOB_SPAWNER_CLASS_A           g
 # MOB_SPAWNER_CLASS_B           G  always generated

@@ -301,7 +301,7 @@ PyObject *level_is_victim_select_at(PyObject *obj, PyObject *args, PyObject *key
 PyObject *level_is_visible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wall_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wall_dungeon_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_wand_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_wand_or_staff_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_weapon_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wet_grass_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -362,7 +362,7 @@ PyObject *level_unused_flag127_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag128_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag129_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag12_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag130_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_staff_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag14_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag15_at(PyObject *obj, PyObject *args, PyObject *keywds);

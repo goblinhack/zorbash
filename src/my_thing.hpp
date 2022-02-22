@@ -194,6 +194,7 @@ public:
   uint64_t i_set_is_treasure_type                 : 1 {};
   uint64_t i_set_is_wall                          : 1 {};
   uint64_t i_set_is_wand                          : 1 {};
+  uint64_t i_set_is_staff                         : 1 {};
   uint64_t i_set_is_wet_grass                     : 1 {};
   uint64_t i_set_water                            : 1 {};
 
@@ -1223,6 +1224,7 @@ public:
   int is_wall_dungeon(void);
   int is_wall(void);
   int is_wand(void);
+  int is_wand_or_staff(void);
   int is_water(void);
   int is_weapon_class_a(void);
   int is_weapon_class_b(void);
@@ -1588,7 +1590,7 @@ public:
   int unused_flag128(void);
   int unused_flag129(void);
   int unused_flag12(void);
-  int unused_flag130(void);
+  int is_staff(void);
   int unused_flag13(void);
   int unused_flag14(void);
   int unused_flag15(void);

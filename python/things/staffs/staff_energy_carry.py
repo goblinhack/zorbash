@@ -31,7 +31,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="wand_energy_carry")
+    tp_init(name="staff_energy_carry")
 
 
 init()

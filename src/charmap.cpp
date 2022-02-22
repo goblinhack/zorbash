@@ -140,10 +140,10 @@ void Charmap::init_charmaps(void)
   c->c         = char_index;
   c->is_potion = true;
 
-  char_index = Charmap::WAND;
-  c          = &all_charmaps[ char_index ];
-  c->c       = char_index;
-  c->is_wand = true;
+  char_index          = Charmap::WAND_OR_STAFF;
+  c                   = &all_charmaps[ char_index ];
+  c->c                = char_index;
+  c->is_wand_or_staff = true;
 
   char_index = Charmap::RING;
   c          = &all_charmaps[ char_index ];
@@ -235,9 +235,9 @@ void Charmap::init_charmaps(void)
   c->c       = char_index;
   c->is_food = true;
 
-  char_index  = Charmap::BLOOD;
-  c           = &all_charmaps[ char_index ];
-  c->c        = char_index;
+  char_index      = Charmap::BLOOD;
+  c               = &all_charmaps[ char_index ];
+  c->c            = char_index;
   c->is_red_blood = true;
 
   char_index    = Charmap::BRAZIER;
@@ -259,13 +259,13 @@ void Charmap::init_charmaps(void)
   c          = &all_charmaps[ char_index ];
   c->c       = char_index;
 
-  char_index                = Charmap::MOB_SPAWNER_CLASS_A;
-  c                         = &all_charmaps[ char_index ];
-  c->c                      = char_index;
+  char_index                  = Charmap::MOB_SPAWNER_CLASS_A;
+  c                           = &all_charmaps[ char_index ];
+  c->c                        = char_index;
   c->is_mob_challenge_class_a = true;
 
-  char_index                = Charmap::MOB_SPAWNER_CLASS_B;
-  c                         = &all_charmaps[ char_index ];
-  c->c                      = char_index;
+  char_index                  = Charmap::MOB_SPAWNER_CLASS_B;
+  c                           = &all_charmaps[ char_index ];
+  c->c                        = char_index;
   c->is_mob_challenge_class_a = true;
 }

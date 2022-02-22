@@ -157,7 +157,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   }
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
-#ifdef ENABLE_DEBUG_AI_WANDER
+#ifdef ENABLE_DEBUG_AI_WAND_OR_STAFFER
   for (auto i : result.path) {
     thing_new("ai_path1", fpoint(i.x, i.y));
   }
@@ -243,7 +243,7 @@ bool Thing::ai_choose_wander(point &nh)
   }
 
   aip()->wander_dest = dest;
-#ifdef ENABLE_DEBUG_AI_WANDER
+#ifdef ENABLE_DEBUG_AI_WAND_OR_STAFFER
   thing_new("ai_path2", fpoint(dest.x, dest.y));
 #endif
   dbg("Wander to %d,%d nh %d,%d", dest.x, dest.y, nh.x, nh.y);
@@ -294,7 +294,7 @@ bool Thing::ai_wander(void)
   }
 
   dbg("AI wander");
-  auto tries = THING_AI_WANDER_TRIES;
+  auto tries = THING_AI_WAND_OR_STAFFER_TRIES;
   if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
     tries = 1;
   }

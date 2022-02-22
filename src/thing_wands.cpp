@@ -31,12 +31,12 @@ std::list< Thingp > Thing::wand_list(void)
         if (unlikely(! t)) {
           continue;
         }
-        if (t->is_wand()) {
+        if (t->is_wand_or_staff()) {
           out.push_back(t);
         }
       }
     }
-    if (t->is_wand()) {
+    if (t->is_wand_or_staff()) {
       out.push_back(t);
     }
   }
@@ -67,12 +67,12 @@ std::vector< Thingp > Thing::wand_vector(void)
         if (unlikely(! t)) {
           continue;
         }
-        if (t->is_wand()) {
+        if (t->is_wand_or_staff()) {
           out.push_back(t);
         }
       }
     }
-    if (t->is_wand()) {
+    if (t->is_wand_or_staff()) {
       out.push_back(t);
     }
   }
@@ -89,7 +89,7 @@ int Thing::carried_wand_count(void)
   }
 
   for (const auto t : wand_list()) {
-    if (t->is_wand()) {
+    if (t->is_wand_or_staff()) {
       count++;
     }
   }
@@ -107,7 +107,7 @@ int Thing::carried_wand_least_value(Thingp *out)
   }
 
   for (const auto t : wand_list()) {
-    if (! t->is_wand()) {
+    if (! t->is_wand_or_staff()) {
       continue;
     }
 
@@ -136,7 +136,7 @@ int Thing::carried_wand_highest_value(Thingp *out)
   }
 
   for (const auto t : wand_list()) {
-    if (! t->is_wand()) {
+    if (! t->is_wand_or_staff()) {
       continue;
     }
 
@@ -165,7 +165,7 @@ int Thing::carried_wand_highest_value_for_target(Thingp *out, Thingp target)
   }
 
   for (const auto t : wand_list()) {
-    if (! t->is_wand()) {
+    if (! t->is_wand_or_staff()) {
       continue;
     }
 

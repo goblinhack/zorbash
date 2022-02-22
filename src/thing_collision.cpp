@@ -261,7 +261,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
     // Cannot do this for players or we end up attacking when waiting whilst
     // being consumed by a cleaner
     //
-    if (is_wand() || is_laser() || is_weapon() || is_monst() || (is_player() && game->robot_mode)) {
+    if (is_wand_or_staff() || is_laser() || is_weapon() || is_monst() || (is_player() && game->robot_mode)) {
       dbg("Collision: weapon check for %s", victim->to_string().c_str());
       if (! *victim_attacked) {
         dbg("Collision: weapon try to attack for %s", victim->to_string().c_str());

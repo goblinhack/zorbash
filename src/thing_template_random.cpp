@@ -247,7 +247,7 @@ void tp_random_init(void)
     if (tp->is_wall_dungeon()) {
       tp_wall_dungeon.push_back(tp);
     }
-    if (tp->is_wand()) {
+    if (tp->is_wand_or_staff()) {
       tp_wand.push_back(tp);
     }
     if (tp->is_ring()) {
@@ -279,7 +279,7 @@ void tp_random_init(void)
       tp_treasure_class_c.push_back(tp);
     }
 
-    if (tp->is_wand()) {
+    if (tp->is_wand_or_staff()) {
       if (tp->is_treasure_class_a()) {
         tp_wand_class_a.push_back(tp);
       }
@@ -566,29 +566,29 @@ Tpp tp_random_treasure_class_c(void)
   return tp_get_with_rarity_filter(tp_treasure_class_c);
 }
 
-Tpp tp_random_wand_class_a(void)
+Tpp tp_random_wand_or_staff_class_a(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_wand_class_a.size())) {
-    return tp_random_wand();
+    return tp_random_wand_or_staff();
   }
   return tp_get_with_rarity_filter(tp_wand_class_a);
 }
 
-Tpp tp_random_wand_class_b(void)
+Tpp tp_random_wand_or_staff_class_b(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_wand_class_b.size())) {
-    return tp_random_wand_class_a();
+    return tp_random_wand_or_staff_class_a();
   }
   return tp_get_with_rarity_filter(tp_wand_class_b);
 }
 
-Tpp tp_random_wand_class_c(void)
+Tpp tp_random_wand_or_staff_class_c(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_wand_class_c.size())) {
-    return tp_random_wand_class_b();
+    return tp_random_wand_or_staff_class_b();
   }
   return tp_get_with_rarity_filter(tp_wand_class_c);
 }
@@ -750,7 +750,7 @@ Tpp tp_random_potion(void)
   return tp_get_with_rarity_filter(tp_potion);
 }
 
-Tpp tp_random_wand(void)
+Tpp tp_random_wand_or_staff(void)
 {
   TRACE_NO_INDENT();
   if (unlikely(! tp_wand.size())) {

@@ -8,7 +8,7 @@ def on_death_of_a_follower(me, leader, x, y):
 
 
 def on_born(me, x, y):
-    my.thing_carry(me, "wand_energy")
+    my.thing_carry(me, "staff_energy")
 
 
 def on_tick(me, x, y):

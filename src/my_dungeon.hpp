@@ -132,7 +132,7 @@ public:
   bool   is_monst_class_d(const int x, const int y);
   bool   is_monst_class_e(const int x, const int y);
   bool   is_potion(const int x, const int y);
-  bool   is_wand(const int x, const int y);
+  bool   is_wand_or_staff(const int x, const int y);
   bool   is_ring(const int x, const int y);
   bool   is_rock(const int x, const int y);
   bool   is_secret_corridor_at(const int x, const int y);

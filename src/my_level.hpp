@@ -87,7 +87,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_sticky {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_treasure_type {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wall {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wand {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wand_or_staff {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wet_grass {};
 
   std::array< std::array< uint32_t, MAP_HEIGHT >, MAP_WIDTH > _is_map_changed {};
@@ -833,8 +833,8 @@ public:
   uint8_t is_treasure_type(const point p);
   uint8_t is_wall(const int x, const int y);
   uint8_t is_wall(const point p);
-  uint8_t is_wand(const int x, const int y);
-  uint8_t is_wand(const point p);
+  uint8_t is_wand_or_staff(const int x, const int y);
+  uint8_t is_wand_or_staff(const point p);
   uint8_t is_water(const int x, const int y);
   uint8_t is_water(const point p);
   uint8_t is_weapon_class_a(const int x, const int y);
@@ -1068,8 +1068,8 @@ public:
   void is_treasure_type_unset(const int x, const int y);
   void is_wall_set(const int x, const int y);
   void is_wall_unset(const int x, const int y);
-  void is_wand_set(const int x, const int y);
-  void is_wand_unset(const int x, const int y);
+  void is_wand_or_staff_set(const int x, const int y);
+  void is_wand_or_staff_unset(const int x, const int y);
   void is_wet_grass_set(const int x, const int y);
   void is_wet_grass_unset(const int x, const int y);
   void lights_fade(void);

@@ -15,7 +15,7 @@ def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
     my.break_chance_d10000(self, 100)
-    my.enchant_max(self, 5)
+    my.enchant_max(self, 2)
     my.equip_carry_anim(self, "shield_woodon_carry")
     my.gfx_short_shadow_caster(self, True)
     my.gold_value_dice(self, "5")

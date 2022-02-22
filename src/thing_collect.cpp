@@ -166,7 +166,7 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
     }
   }
 
-  if (item->is_wand()) {
+  if (item->is_wand_or_staff()) {
     Thingp worst_wand       = nullptr;
     auto   worst_wand_value = carried_wand_least_value(&worst_wand);
     //
