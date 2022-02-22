@@ -1382,7 +1382,7 @@ bool Dungeon::is_potion(const int x, const int y)
   return false;
 }
 
-bool Dungeon::is_wand(const int x, const int y)
+bool Dungeon::is_wand_or_staff(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     ERR("Oob %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -1392,7 +1392,7 @@ bool Dungeon::is_wand(const int x, const int y)
     auto c = getc(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
-    if (v.is_wand) {
+    if (v.is_wand_or_staff) {
       return true;
     }
   }
@@ -2968,7 +2968,7 @@ bool Dungeon::rooms_move_closer_together(void)
 
           auto moved_one = false;
           switch (pcg_random_range(0, 4)) {
-            case 0 :
+            case 0:
               if (can_place_room(r, r->at.x - delta, r->at.y)) {
                 r->at.x -= delta;
                 place_room(r, r->at.x, r->at.y);
@@ -2995,7 +2995,7 @@ bool Dungeon::rooms_move_closer_together(void)
               }
               break;
 
-            case 1 :
+            case 1:
               if (can_place_room(r, r->at.x + delta, r->at.y)) {
                 r->at.x += delta;
                 place_room(r, r->at.x, r->at.y);
@@ -3022,7 +3022,7 @@ bool Dungeon::rooms_move_closer_together(void)
               }
               break;
 
-            case 2 :
+            case 2:
               if (can_place_room(r, r->at.x, r->at.y - delta)) {
                 r->at.y -= delta;
                 place_room(r, r->at.x, r->at.y);
@@ -3049,7 +3049,7 @@ bool Dungeon::rooms_move_closer_together(void)
               }
               break;
 
-            case 3 :
+            case 3:
               if (can_place_room(r, r->at.x, r->at.y + delta)) {
                 r->at.y += delta;
                 place_room(r, r->at.x, r->at.y);
@@ -3075,7 +3075,7 @@ bool Dungeon::rooms_move_closer_together(void)
                 break;
               }
               break;
-            case 4 : ERR("Wtf");
+            case 4: ERR("Wtf");
           }
 
           if (moved_one) {

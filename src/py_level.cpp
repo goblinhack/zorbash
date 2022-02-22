@@ -67,7 +67,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
                    m.is_monst_class_b || m.is_monst_class_c || m.is_enchantstone || m.is_skillstone ||
                    m.is_monst_class_d || m.is_monst_class_e || m.is_treasure_class_a || m.is_treasure_class_b ||
                    m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
-                   m.is_potion || m.is_wand || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel ||
+                   m.is_potion || m.is_wand_or_staff || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel ||
                    m.is_trap || m.is_shallow_water || m.is_deep_water || m.is_floor_deco) {
           floor_string += Charmap::FLOOR;
         } else {
@@ -111,7 +111,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
             m.is_monst_class_a || m.is_monst_class_b || m.is_monst_class_c || m.is_enchantstone || m.is_skillstone ||
             m.is_monst_class_d || m.is_monst_class_e || m.is_treasure_class_a || m.is_treasure_class_b ||
             m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
-            m.is_potion || m.is_wand || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap || m.is_descend_sewer) {
+            m.is_potion || m.is_wand_or_staff || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap || m.is_descend_sewer) {
           obj_strings += c;
         } else {
           obj_strings += Charmap::SPACE;
@@ -671,7 +671,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_victim_select_at, is_victim_select)
 LEVEL_BODY_GET_BOOL_AT(level_is_visible_at, is_visible)
 LEVEL_BODY_GET_BOOL_AT(level_is_wall_at, is_wall)
 LEVEL_BODY_GET_BOOL_AT(level_is_wall_dungeon_at, is_wall_dungeon)
-LEVEL_BODY_GET_BOOL_AT(level_is_wand_at, is_wand)
+LEVEL_BODY_GET_BOOL_AT(level_is_wand_or_staff_at, is_wand_or_staff)
 LEVEL_BODY_GET_BOOL_AT(level_is_water_at, is_water)
 LEVEL_BODY_GET_BOOL_AT(level_is_weapon_at, is_weapon)
 LEVEL_BODY_GET_BOOL_AT(level_is_wet_grass_at, is_wet_grass)
@@ -732,7 +732,7 @@ LEVEL_BODY_GET_BOOL_AT(level_unused_flag127_at, unused_flag127)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag128_at, unused_flag128)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag129_at, unused_flag129)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag12_at, unused_flag12)
-LEVEL_BODY_GET_BOOL_AT(level_unused_flag130_at, unused_flag130)
+LEVEL_BODY_GET_BOOL_AT(level_is_staff_at, is_staff)
 LEVEL_BODY_GET_BOOL_AT(level_collision_hit_adj_at, collision_hit_adj)
 LEVEL_BODY_GET_BOOL_AT(level_collision_hit_180_at, collision_hit_180)
 LEVEL_BODY_GET_BOOL_AT(level_stamina_on_use_at, stamina_on_use)

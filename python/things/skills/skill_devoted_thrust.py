@@ -26,7 +26,6 @@ def tp_inti(name, text_name):
     global self
     self = tp.Tp(name, text_name)
 
-    my.enchant_max(self, 2)
     my.is_enchantable(self, True)
     my.is_loggable(self, True)
     my.is_skill(self, True)

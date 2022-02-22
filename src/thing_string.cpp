@@ -118,7 +118,7 @@ std::string Thing::to_dbg_string(void)
       "L%d %" PRIX32
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
       level->dungeon_walk_order_level_no, id.id, tp() ? tp()->name().c_str() : "notp", curr_at.x, curr_at.y,
@@ -165,7 +165,7 @@ std::string Thing::to_dbg_string(void)
       i_set_is_smoke ? ", i_set_is_smoke" : "", i_set_is_spiderweb ? ", i_set_is_spiderweb" : "",
       i_set_is_sticky ? ", i_set_is_sticky" : "", i_set_is_shovable ? ", i_set_is_shovable" : "",
       i_set_is_treasure_type ? ", i_set_is_treasure_type" : "", i_set_is_wall ? ", i_set_is_wall" : "",
-      i_set_is_wand ? ", i_set_is_wand" : "", i_set_is_ring ? ", i_set_is_ring" : ""));
+      i_set_is_ring ? ", i_set_is_ring" : ""));
 }
 
 //
@@ -179,7 +179,7 @@ std::string Thing::to_dbg_saved_string(void)
   return (string_sprintf(
       "L%d %" PRIX32
       " %s (%d,%d)%s%s%s%s%s%s%s%s%s%s%s%s%s"
-      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
+      "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s"
       "%s%s%s%s%s%s%s%s%s%s%s%s%s%s)",
@@ -226,5 +226,5 @@ std::string Thing::to_dbg_saved_string(void)
       i_set_is_smoke ? ", i_set_is_smoke" : "", i_set_is_spiderweb ? ", i_set_is_spiderweb" : "",
       i_set_is_sticky ? ", i_set_is_sticky" : "", i_set_is_shovable ? ", i_set_is_shovable" : "",
       i_set_is_treasure_type ? ", i_set_is_treasure_type" : "", i_set_is_wall ? ", i_set_is_wall" : "",
-      i_set_is_wand ? ", i_set_is_wand" : "", i_set_is_ring ? ", i_set_is_ring" : ""));
+      i_set_is_ring ? ", i_set_is_ring" : ""));
 }

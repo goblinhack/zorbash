@@ -63,7 +63,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   //
   // Weapons can't attack all by themselves. That would be nuts.
   //
-  if (is_weapon() || is_wand() || is_ring()) {
+  if (is_weapon() || is_wand_or_staff() || is_ring()) {
     if (! my_owner) {
       return false;
     }
@@ -410,7 +410,7 @@ bool Thing::possible_to_attack(const Thingp victim)
       return true;
     }
 
-    if (is_wand()) {
+    if (is_wand_or_staff()) {
       dbg("Can attack as wand %s", victim->to_string().c_str());
       return true;
     }

@@ -430,7 +430,7 @@ do
       unused_flag127_set \
       unused_flag128_set \
       unused_flag129_set \
-      unused_flag130_set \
+      is_staff_set \
       collision_hit_adj_set \
       collision_hit_180_set \
       stamina_on_use_set \

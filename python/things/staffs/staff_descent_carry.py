@@ -31,7 +31,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="wand_lightning_carry")
+    tp_init(name="staff_descent_carry")
 
 
 init()

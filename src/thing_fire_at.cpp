@@ -217,7 +217,7 @@ bool Thing::fire_at(Thingp target)
   //
   // If using a sword, allow the monst to use a wand without equipping
   //
-  if (! curr_weapon->is_wand()) {
+  if (! curr_weapon->is_wand_or_staff()) {
     if (is_able_to_use_wands()) {
       Thingp best_wand = nullptr;
       carried_wand_highest_value_for_target(&best_wand, target);

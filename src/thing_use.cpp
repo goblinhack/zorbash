@@ -460,7 +460,7 @@ bool Thing::use(Thingp what, int preferred_equip)
     if (is_player()) {
       game->tick_begin("player drunk an item");
     }
-  } else if (what->is_wand()) {
+  } else if (what->is_wand_or_staff()) {
     dbg("Trying to wave: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {

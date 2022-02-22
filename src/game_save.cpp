@@ -401,7 +401,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_sticky ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_treasure_type ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_wall ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_wand ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_wand? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_staff? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_wet_grass ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_water ? 1LLU : 0LLU) << shift; shift++;
   // clang-format on
@@ -536,7 +537,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_sticky);
   out << bits(my.t->_is_treasure_type);
   out << bits(my.t->_is_wall);
-  out << bits(my.t->_is_wand);
+  out << bits(my.t->_is_wand_or_staff);
   out << bits(my.t->_is_wet_grass);
 
   out << bits(my.t->_is_map_changed);

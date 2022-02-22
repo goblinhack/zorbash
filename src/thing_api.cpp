@@ -2199,10 +2199,10 @@ int Thing::unused_flag129(void)
   return (tp()->unused_flag129());
 }
 
-int Thing::unused_flag130(void)
+int Thing::is_staff(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag130());
+  return (tp()->is_staff());
 }
 
 int Thing::collision_hit_adj(void)
@@ -3223,6 +3223,12 @@ int Thing::is_wand(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_wand());
+}
+
+int Thing::is_wand_or_staff(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_wand_or_staff());
 }
 
 int Thing::is_immune_to_water(void)

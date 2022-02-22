@@ -337,19 +337,19 @@ void Thing::update(void)
     TRACE_AND_INDENT();
 
     if (is_carrier_of_treasure_class_a()) {
-      auto W = level->thing_new(tp_random_wand_class_a(), curr_at, this);
+      auto W = level->thing_new(tp_random_wand_or_staff_class_a(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
     if (is_carrier_of_treasure_class_b()) {
-      auto W = level->thing_new(tp_random_wand_class_b(), curr_at, this);
+      auto W = level->thing_new(tp_random_wand_or_staff_class_b(), curr_at, this);
       if (W) {
         carried += carry(W);
       }
     }
     if (is_carrier_of_treasure_class_c()) {
-      auto W = level->thing_new(tp_random_wand_class_c(), curr_at, this);
+      auto W = level->thing_new(tp_random_wand_or_staff_class_c(), curr_at, this);
       if (W) {
         carried += carry(W);
       }

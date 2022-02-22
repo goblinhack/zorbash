@@ -17,7 +17,7 @@ def explode(me, x, y):
     if my.thing_is_dead_or_dying(me):
         return
 
-    my.thing_msg(me, "The wand of lightning explodes in a flash.")
+    my.thing_msg(me, "The staff of lightning explodes in a flash.")
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")
     my.level_spawn_fire_around_thing(me, "fire")
@@ -39,8 +39,8 @@ def tp_init(name, text_name, short_text_name):
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
     my.damage_lightning_chance_d1000(self, 1000)
-    my.damage_lightning_dice(self, "20+1d10")
-    my.equip_carry_anim(self, "wand_lightning_carry")
+    my.damage_energy_dice(self, "1d20+8")
+    my.equip_carry_anim(self, "staff_lightning_carry")
     my.gfx_animated(self, True)
     my.gfx_short_shadow_caster(self, True)
     my.gfx_show_outlined(self, True)
@@ -64,12 +64,12 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
     my.is_victim_select(self, True)
-    my.is_wand(self, True)
+    my.is_staff(self, True)
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.laser_name(self, "laser_light")
-    my.long_text_description(self, "This wand blasts a charge of lightning at its unwitting target. Be careful when standing in the same pool as your target... Also do not use in the bath. If aimed carefully can attack multiple recipients.")
+    my.long_text_description(self, "This wand blasts a charge of lightning at its unwitting target. Be careful when standing in the same pool as your target... Also do not use in the bath.")
     my.noise_on_moving_or_being_carried(self, 5)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
@@ -77,7 +77,7 @@ def tp_init(name, text_name, short_text_name):
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A wand of lightning.")
+    my.text_description(self, "A staff of lightning.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
@@ -93,9 +93,9 @@ def tp_init(name, text_name, short_text_name):
 
 def init():
     tp_init(
-        name="wand_lightning",
-        text_name="wand of lightning",
-        short_text_name="wand of lightning",
+        name="staff_lightning",
+        text_name="staff of lightning",
+        short_text_name="staff of lightning",
     )
 
 

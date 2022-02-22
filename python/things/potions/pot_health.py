@@ -78,7 +78,7 @@ def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
-    my.enchant_max(self, 2)
+    my.enchant_max(self, 5)
     my.environ_avoids_fire(self, 20)
     my.gfx_animated(self, True)
     my.gfx_short_shadow_caster(self, True)

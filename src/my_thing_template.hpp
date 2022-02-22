@@ -528,7 +528,7 @@ private:
   int _unused_flag128 {};
   int _unused_flag129 {};
   int _unused_flag13 {};
-  int _unused_flag130 {};
+  int _is_staff {};
   int _collision_hit_adj {};
   int _collision_hit_180 {};
   int _stamina_on_use {};
@@ -1320,6 +1320,7 @@ public:
   int is_victim_select(void) const { return _is_victim_select; }
   int is_wall_dungeon(void) const { return _is_wall_dungeon; }
   int is_wall(void) const { return _is_wall; }
+  int is_wand_or_staff(void) const { return _is_wand || _is_staff; }
   int is_wand(void) const { return _is_wand; }
   int is_weapon_class_a(void) const { return _is_weapon_class_a; }
   int is_weapon_class_b(void) const { return _is_weapon_class_b; }
@@ -1421,7 +1422,7 @@ public:
   int unused_flag128(void) const { return _unused_flag128; }
   int unused_flag129(void) const { return _unused_flag129; }
   int unused_flag12(void) const { return _unused_flag12; }
-  int unused_flag130(void) const { return _unused_flag130; }
+  int is_staff(void) const { return _is_staff; }
   int collision_hit_adj(void) const { return _collision_hit_adj; }
   int collision_hit_180(void) const { return _collision_hit_180; }
   int stamina_on_use(void) const { return _stamina_on_use; }
@@ -2058,7 +2059,7 @@ public:
   void unused_flag128_set(int v) { _unused_flag128 = v; }
   void unused_flag129_set(int v) { _unused_flag129 = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }
-  void unused_flag130_set(int v) { _unused_flag130 = v; }
+  void is_staff_set(int v) { _is_staff = v; }
   void collision_hit_adj_set(int v) { _collision_hit_adj = v; }
   void collision_hit_180_set(int v) { _collision_hit_180 = v; }
   void stamina_on_use_set(int v) { _stamina_on_use = v; }
@@ -2230,10 +2231,10 @@ class Tp *tp_random_treasure_class_b(void);
 class Tp *tp_random_treasure_class_c(void);
 class Tp *tp_random_treasure(void);
 class Tp *tp_random_wall_dungeon(void);
-class Tp *tp_random_wand_class_a(void);
-class Tp *tp_random_wand_class_b(void);
-class Tp *tp_random_wand_class_c(void);
-class Tp *tp_random_wand(void);
+class Tp *tp_random_wand_or_staff_class_a(void);
+class Tp *tp_random_wand_or_staff_class_b(void);
+class Tp *tp_random_wand_or_staff_class_c(void);
+class Tp *tp_random_wand_or_staff(void);
 class Tp *tp_random_weapon_class_a(void);
 class Tp *tp_random_weapon_class_b(void);
 class Tp *tp_random_weapon_class_c(void);

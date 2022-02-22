@@ -627,7 +627,7 @@ bool Thing::matches(const std::string &what)
   if (is_wall() && (what == "is_wall")) {
     return true;
   }
-  if (is_wand() && (what == "is_wand")) {
+  if (is_wand_or_staff() && (what == "is_wand_or_staff")) {
     return true;
   }
   if (is_able_to_use_rings() && (what == "is_able_to_use_rings")) {
@@ -1053,7 +1053,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag129() && (what == "unused_flag129")) {
     return true;
   }
-  if (unused_flag130() && (what == "unused_flag130")) {
+  if (is_staff() && (what == "is_staff")) {
     return true;
   }
   if (collision_hit_adj() && (what == "collision_hit_adj")) {
@@ -1918,8 +1918,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_wall") {
     return &Thing::is_wall;
   }
-  if (what == "is_wand") {
-    return &Thing::is_wand;
+  if (what == "is_wand_or_staff") {
+    return &Thing::is_wand_or_staff;
   }
   if (what == "is_water") {
     return &Thing::is_water;
@@ -2344,8 +2344,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag129") {
     return &Thing::unused_flag129;
   }
-  if (what == "unused_flag130") {
-    return &Thing::unused_flag130;
+  if (what == "is_staff") {
+    return &Thing::is_staff;
   }
   if (what == "collision_hit_adj") {
     return &Thing::collision_hit_adj;

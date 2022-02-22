@@ -480,7 +480,7 @@ bool Thing::equip(Thingp item, int equip)
         msg("You hear the whoosh of a weapon being wielded.");
       } else if (item->is_ring()) {
         msg("You hear the powerful thrum of a magical ring being worn.");
-      } else if (item->is_wand()) {
+      } else if (item->is_wand_or_staff()) {
         msg("You hear a strange magical swishing sound.");
       } else if (item->is_item_magical()) {
         msg("You hear the distant sound of magic, whatever that is.");

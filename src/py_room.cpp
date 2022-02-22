@@ -81,7 +81,7 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
                    m.is_monst_class_b || m.is_monst_class_c || m.is_potion || m.is_secret_door ||
                    m.is_shallow_water || m.is_trap || m.is_monst_class_d || m.is_monst_class_e || m.is_enchantstone ||
                    m.is_skillstone || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
-                   m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c || m.is_wand ||
+                   m.is_treasure_class_a || m.is_treasure_class_b || m.is_treasure_class_c || m.is_wand_or_staff ||
                    m.is_ring || m.is_deep_water) {
           floor_string += Charmap::FLOOR;
         } else {
@@ -125,7 +125,7 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
             m.is_monst_class_b || m.is_monst_class_c || m.is_monst_class_d || m.is_monst_class_e ||
             m.is_enchantstone || m.is_skillstone || m.is_treasure_class_a || m.is_treasure_class_b ||
             m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
-            m.is_potion || m.is_wand || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap || m.is_descend_sewer) {
+            m.is_potion || m.is_wand_or_staff || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap || m.is_descend_sewer) {
           obj_strings += c;
         } else {
           obj_strings += Charmap::SPACE;
