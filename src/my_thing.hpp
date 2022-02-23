@@ -590,6 +590,7 @@ public:
   const std::string &health_initial_dice_str(void);
   const std::string &is_allied_with(void);
   const std::string &target_name_laser(void);
+  const std::string &target_name_radial(void);
   const std::string &lifespan_dice_str(void);
   const std::string &light_color(void);
   const std::string &long_text_description_extra(void);

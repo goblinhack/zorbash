@@ -6914,6 +6914,12 @@ const std::string &Thing::target_name_laser(void)
   return (tp()->target_name_laser());
 }
 
+const std::string &Thing::target_name_radial(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->target_name_radial());
+}
+
 const std::string &Thing::light_color(void)
 {
   TRACE_NO_INDENT();
