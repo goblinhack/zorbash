@@ -2111,7 +2111,7 @@ public:
   void update_pos(point, bool immediately);
   void update_tick(void);
   void update(void);
-  void used(Thingp w, Thingp target, bool remove_after_use);
+  void used(Thingp w, Thingp target, bool remove_after_use, UseOptions *options = nullptr);
   void visible(void);
   void wake(void);
   void water_tick(void);

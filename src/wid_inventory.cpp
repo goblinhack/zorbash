@@ -198,6 +198,45 @@ static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint3
   return true;
 }
 
+static uint8_t wid_inventory_item_option_use_radial(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  DBG3("Inventory: Item options use");
+  TRACE_AND_INDENT();
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return true;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return true;
+  }
+
+  if (player->is_dead) {
+    return true;
+  }
+
+  auto what = wid_inventory_thing_selected;
+  if (! what) {
+    what = wid_inventory_thing_over;
+  }
+
+  if (what) {
+    UseOptions use_options {};
+    use_options.radial_effect = true;
+    wid_inventory_fini();
+    player->log("Use (radial) %s", what->to_short_string().c_str());
+    player->use(what, &use_options);
+    //
+    // Don't do this. It closes up popups for skills
+    //
+    // wid_inventory_init();
+  }
+
+  return true;
+}
+
 static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   DBG3("Inventory: Item options eat");
@@ -999,7 +1038,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       point tl = make_point(x_off, y_at);
       point br = make_point(x_off + width, y_at + 2);
       wid_set_style(w, UI_WID_STYLE_NORMAL);
-      wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+      wid_set_on_mouse_up(w, wid_inventory_item_option_use_radial);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Use radially");
       y_at += 3;

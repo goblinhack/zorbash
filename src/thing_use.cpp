@@ -197,7 +197,7 @@ void Thing::on_final_use(Thingp what, Thingp target)
   }
 }
 
-void Thing::used(Thingp what, Thingp target, bool remove_after_use)
+void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *use_options)
 {
   verify(MTYPE_THING, what);
   if (! what) {
@@ -278,7 +278,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
   }
 }
 
-bool Thing::use(Thingp what, UseOptions *options)
+bool Thing::use(Thingp what, UseOptions *use_options)
 {
   verify(MTYPE_THING, what);
   if (! what) {
@@ -287,8 +287,8 @@ bool Thing::use(Thingp what, UseOptions *options)
   }
 
   int preferred_equip = -1;
-  if (options && options->preferred_equip_set) {
-    preferred_equip = options->preferred_equip;
+  if (use_options && use_options->preferred_equip_set) {
+    preferred_equip = use_options->preferred_equip;
   }
 
   TRACE_NO_INDENT();
@@ -471,7 +471,7 @@ bool Thing::use(Thingp what, UseOptions *options)
     if (is_player()) {
       msg("You wave the %s.", what->text_the().c_str());
     }
-    used(what, this, false /* remove after use */);
+    used(what, this, false /* remove after use */, use_options);
     if (is_player()) {
       game->tick_begin("player waved an item");
     }
