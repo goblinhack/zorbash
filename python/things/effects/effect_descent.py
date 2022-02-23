@@ -3,7 +3,7 @@ import tp
 
 
 def on_born(me, x, y):
-    my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+    my.level_spawn_using_items_radius_range(id=me, parent_id=me, victim_id=me, what="explosion_destroy_floor")
 
 
 #
