@@ -71,7 +71,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.target_name_laser(self, "effect_descent")
-    # my.target_name_radial(self, "effect_descent_radial")
+    my.target_name_radial(self, "effect_descent_radial")
     my.long_text_description(self, "This most dangerous wand can transport its target to the next level by the most efficacious means possible...")
     my.noise_on_moving_or_being_carried(self, 5)
     my.normal_placement_rules(self, True)

@@ -653,6 +653,7 @@ private:
   std::string _health_initial_dice_str;
   std::string _is_allied_with;
   std::string _target_name_laser;
+  std::string _target_name_radial;
   std::string _lifespan_dice_str;
   std::string _light_color;
   std::string _long_text_description;
@@ -886,6 +887,7 @@ public:
   const std::string &health_initial_dice_str(void) const;
   const std::string &is_allied_with(void) const { return _is_allied_with; }
   const std::string &target_name_laser(void) const { return _target_name_laser; }
+  const std::string &target_name_radial(void) const { return _target_name_radial; }
   const std::string &lifespan_dice_str(void) const;
   const std::string &light_color(void) const { return _light_color; }
   const std::string &long_text_description_extra(void) const { return _long_text_description_extra; }
@@ -1883,6 +1885,7 @@ public:
   void item_height_set(int v) { _item_height = v; }
   void item_width_set(int v) { _item_width = v; }
   void target_name_laser_set(const std::string &v) { _target_name_laser = v; }
+  void target_name_radial_set(const std::string &v) { _target_name_radial = v; }
   void light_color_set(const std::string &v) { _light_color = v; }
   void light_power_set(int v) { _light_power = v; }
   void long_text_description_extra_set(const std::string &v) { _long_text_description_extra = v; }

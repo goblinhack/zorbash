@@ -1431,6 +1431,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(item_height),
     MY_ADD_PYTHON_TP_FUNCTION(item_width),
     MY_ADD_PYTHON_TP_FUNCTION(target_name_laser),
+    MY_ADD_PYTHON_TP_FUNCTION(target_name_radial),
     MY_ADD_PYTHON_TP_FUNCTION(left1_tile),
     MY_ADD_PYTHON_TP_FUNCTION(left2_tile),
     MY_ADD_PYTHON_TP_FUNCTION(lifespan_dice),

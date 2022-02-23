@@ -115,22 +115,22 @@ Thingp Thing::projectile_fire_at(const std::string &target_name_projectile, Thin
   return projectile;
 }
 
-Thingp Thing::projectile_fire_at(const std::string &target_name_laser, point at)
+Thingp Thing::projectile_fire_at(const std::string &target_name_projectile, point at)
 {
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Projectile fire %s at %s", target_name_laser.c_str(), at.to_string().c_str());
+  dbg("Projectile fire %s at %s", target_name_projectile.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
-    return projectile_fire_at(target_name_laser, best);
+    return projectile_fire_at(target_name_projectile, best);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return projectile_fire_at(target_name_laser, t);
+      return projectile_fire_at(target_name_projectile, t);
     }
   }
   FOR_ALL_THINGS_END()
