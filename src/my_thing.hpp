@@ -48,6 +48,12 @@ typedef struct {
   uint16_t tr2_tile;
 } ThingTiles;
 
+typedef struct {
+  int  preferred_equip;
+  bool preferred_equip_set;
+  bool radial_effect;
+} UseOptions;
+
 typedef class Thing_
 {
 private:
@@ -507,7 +513,7 @@ public:
   bool try_to_use_weapon(void);
   bool unequip(const char *why, int equip, bool allowed_to_recarry);
   bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
-  bool use(Thingp w, int equip = -1);
+  bool use(Thingp w, UseOptions *options = nullptr);
   bool victim_attack_best_at(int equip, point *at, int attempt, bool &victim_attacked, bool &victim_overlaps);
   bool victim_attack_best(int equip, point *at = nullptr);
   bool is_target_select(Thingp item);

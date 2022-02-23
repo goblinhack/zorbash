@@ -360,7 +360,10 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       // Wear the ring
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what, MONST_EQUIP_RING1);
+      UseOptions use_options          = {};
+      use_options.preferred_equip     = MONST_EQUIP_RING1;
+      use_options.preferred_equip_set = true;
+      player->use(what, &use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -380,7 +383,10 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
       // Wear the ring
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what, MONST_EQUIP_RING2);
+      UseOptions use_options          = {};
+      use_options.preferred_equip     = MONST_EQUIP_RING1;
+      use_options.preferred_equip_set = true;
+      player->use(what, &use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -730,9 +736,9 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       if (sdlk_eq(*key, game->config.key_action0)) {
         game->level->inventory_assign(9, what);
         wid_inventory_select(what);
