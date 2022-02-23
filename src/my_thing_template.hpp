@@ -422,7 +422,7 @@ private:
   int _is_used_when_thrown {};
   int _is_very_combustible {};
   int _is_very_heavy {};
-  int _is_victim_select {};
+  int _is_target_select {};
   int _is_wall {};
   int _is_wall_dungeon {};
   int _is_wand {};
@@ -526,7 +526,7 @@ private:
   int _unused_flag126 {};
   int _unused_flag127 {};
   int _unused_flag128 {};
-  int _unused_flag129 {};
+  int _is_target_radial {};
   int _unused_flag13 {};
   int _is_staff {};
   int _collision_hit_adj {};
@@ -652,7 +652,7 @@ private:
   std::string _gold_value_dice_str;
   std::string _health_initial_dice_str;
   std::string _is_allied_with;
-  std::string _laser_name;
+  std::string _target_name_laser;
   std::string _lifespan_dice_str;
   std::string _light_color;
   std::string _long_text_description;
@@ -722,7 +722,7 @@ private:
   std::string _on_you_are_on_fire_do;
   std::string _on_you_miss_do;
   std::string _on_you_natural_attack_do;
-  std::string _projectile_name;
+  std::string _target_name_projectile;
   std::string _resurrect_dice_str;
   std::string _short_text_name;
   std::string _spawn_group_size_dice_str;
@@ -885,7 +885,7 @@ public:
   const std::string &gold_value_dice_str(void) const;
   const std::string &health_initial_dice_str(void) const;
   const std::string &is_allied_with(void) const { return _is_allied_with; }
-  const std::string &laser_name(void) const { return _laser_name; }
+  const std::string &target_name_laser(void) const { return _target_name_laser; }
   const std::string &lifespan_dice_str(void) const;
   const std::string &light_color(void) const { return _light_color; }
   const std::string &long_text_description_extra(void) const { return _long_text_description_extra; }
@@ -955,7 +955,7 @@ public:
   const std::string &on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
   const std::string &on_you_miss_do(void) const { return _on_you_miss_do; }
   const std::string &on_you_natural_attack_do(void) const { return _on_you_natural_attack_do; }
-  const std::string &projectile_name(void) const { return _projectile_name; }
+  const std::string &target_name_projectile(void) const { return _target_name_projectile; }
   const std::string &resurrect_dice_str(void) const;
   const std::string &short_text_name(void) const { return _short_text_name; }
   const std::string &spawn_group_size_dice_str(void) const;
@@ -1317,7 +1317,7 @@ public:
   int is_used_when_thrown(void) const { return _is_used_when_thrown; }
   int is_very_combustible(void) const { return _is_very_combustible; }
   int is_very_heavy(void) const { return _is_very_heavy; }
-  int is_victim_select(void) const { return _is_victim_select; }
+  int is_target_select(void) const { return _is_target_select; }
   int is_wall_dungeon(void) const { return _is_wall_dungeon; }
   int is_wall(void) const { return _is_wall; }
   int is_wand_or_staff(void) const { return _is_wand || _is_staff; }
@@ -1420,7 +1420,7 @@ public:
   int unused_flag126(void) const { return _unused_flag126; }
   int unused_flag127(void) const { return _unused_flag127; }
   int unused_flag128(void) const { return _unused_flag128; }
-  int unused_flag129(void) const { return _unused_flag129; }
+  int is_target_radial(void) const { return _is_target_radial; }
   int unused_flag12(void) const { return _unused_flag12; }
   int is_staff(void) const { return _is_staff; }
   int collision_hit_adj(void) const { return _collision_hit_adj; }
@@ -1870,7 +1870,7 @@ public:
   void is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
   void is_very_combustible_set(int v) { _is_very_combustible = v; }
   void is_very_heavy_set(int v) { _is_very_heavy = v; }
-  void is_victim_select_set(int v) { _is_victim_select = v; }
+  void is_target_select_set(int v) { _is_target_select = v; }
   void is_wall_dungeon_set(int v) { _is_wall_dungeon = v; }
   void is_wall_set(int v) { _is_wall = v; }
   void is_wand_set(int v) { _is_wand = v; }
@@ -1882,7 +1882,7 @@ public:
   void is_wooden_set(int v) { _is_wooden = v; }
   void item_height_set(int v) { _item_height = v; }
   void item_width_set(int v) { _item_width = v; }
-  void laser_name_set(const std::string &v) { _laser_name = v; }
+  void target_name_laser_set(const std::string &v) { _target_name_laser = v; }
   void light_color_set(const std::string &v) { _light_color = v; }
   void light_power_set(int v) { _light_power = v; }
   void long_text_description_extra_set(const std::string &v) { _long_text_description_extra = v; }
@@ -1965,7 +1965,7 @@ public:
   void on_you_are_on_fire_do_set(const std::string &v) { _on_you_are_on_fire_do = v; }
   void on_you_miss_do_set(const std::string &v) { _on_you_miss_do = v; }
   void on_you_natural_attack_do_set(const std::string &v) { _on_you_natural_attack_do = v; }
-  void projectile_name_set(const std::string &v) { _projectile_name = v; }
+  void target_name_projectile_set(const std::string &v) { _target_name_projectile = v; }
   void range_max_set(int v) { _range_max = v; }
   void rarity_set(int v) { _rarity = v; }
   void short_text_name_set(const std::string &v) { _short_text_name = v; }
@@ -2057,7 +2057,7 @@ public:
   void unused_flag126_set(int v) { _unused_flag126 = v; }
   void unused_flag127_set(int v) { _unused_flag127 = v; }
   void unused_flag128_set(int v) { _unused_flag128 = v; }
-  void unused_flag129_set(int v) { _unused_flag129 = v; }
+  void is_target_radial_set(int v) { _is_target_radial = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }
   void is_staff_set(int v) { _is_staff = v; }
   void collision_hit_adj_set(int v) { _collision_hit_adj = v; }

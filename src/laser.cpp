@@ -38,7 +38,7 @@ Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, point start, p
   if (t->is_laser()) {
     name = t->tp()->name();
   } else {
-    name = t->laser_name();
+    name = t->target_name_laser();
     if (name.empty()) {
       t->err("no laser name");
       return;

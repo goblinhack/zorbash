@@ -276,7 +276,7 @@ do
       is_sticky_set \
       is_stone_set \
       is_sword_set \
-      is_victim_select_set \
+      is_target_select_set \
       is_the_grid_set \
       is_throwable_set \
       is_tickable_set \
@@ -429,7 +429,7 @@ do
       unused_flag126_set \
       unused_flag127_set \
       unused_flag128_set \
-      unused_flag129_set \
+      is_target_radial_set \
       is_staff_set \
       collision_hit_adj_set \
       collision_hit_180_set \

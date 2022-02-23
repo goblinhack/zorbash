@@ -510,7 +510,7 @@ public:
   bool use(Thingp w, int equip = -1);
   bool victim_attack_best_at(int equip, point *at, int attempt, bool &victim_attacked, bool &victim_overlaps);
   bool victim_attack_best(int equip, point *at = nullptr);
-  bool victim_select(Thingp item);
+  bool is_target_select(Thingp item);
   bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
@@ -589,7 +589,7 @@ public:
   const std::string &gold_value_dice_str(void);
   const std::string &health_initial_dice_str(void);
   const std::string &is_allied_with(void);
-  const std::string &laser_name(void);
+  const std::string &target_name_laser(void);
   const std::string &lifespan_dice_str(void);
   const std::string &light_color(void);
   const std::string &long_text_description_extra(void);
@@ -660,7 +660,7 @@ public:
   const std::string &on_you_are_on_fire_do(void);
   const std::string &on_you_miss_do(void);
   const std::string &on_you_natural_attack_do(void);
-  const std::string &projectile_name(void);
+  const std::string &target_name_projectile(void);
   const std::string &resurrect_dice_str(void);
   const std::string &short_text_name(void);
   const std::string &spawn_group_size_dice_str(void);
@@ -1220,7 +1220,7 @@ public:
   int is_used_when_thrown(void);
   int is_very_combustible(void);
   int is_very_heavy(void);
-  int is_victim_select(void);
+  int is_target_select(void);
   int is_wall_dungeon(void);
   int is_wall(void);
   int is_wand(void);
@@ -1588,7 +1588,7 @@ public:
   int unused_flag126(void);
   int unused_flag127(void);
   int unused_flag128(void);
-  int unused_flag129(void);
+  int is_target_radial(void);
   int unused_flag12(void);
   int is_staff(void);
   int unused_flag13(void);

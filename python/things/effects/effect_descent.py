@@ -27,7 +27,7 @@ def tp_init(name, text_name, short_text_name):
 
 def init():
     tp_init(
-        name="laser_descent",
+        name="effect_descent",
         text_name="beam of destruction",
         short_text_name="beam of descent",
     )

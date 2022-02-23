@@ -297,7 +297,7 @@ PyObject *level_is_usable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_used_when_thrown_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_very_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_very_heavy_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_victim_select_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_target_select_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_visible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wall_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_wall_dungeon_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -360,7 +360,7 @@ PyObject *level_unused_flag125_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag126_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag127_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag128_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag129_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_target_radial_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag12_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_staff_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag13_at(PyObject *obj, PyObject *args, PyObject *keywds);

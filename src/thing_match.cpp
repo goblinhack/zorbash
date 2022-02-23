@@ -585,7 +585,7 @@ bool Thing::matches(const std::string &what)
   if (is_sword() && (what == "is_sword")) {
     return true;
   }
-  if (is_victim_select() && (what == "is_victim_select")) {
+  if (is_target_select() && (what == "is_target_select")) {
     return true;
   }
   if (is_throwable() && (what == "is_throwable")) {
@@ -1050,7 +1050,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag128() && (what == "unused_flag128")) {
     return true;
   }
-  if (unused_flag129() && (what == "unused_flag129")) {
+  if (is_target_radial() && (what == "is_target_radial")) {
     return true;
   }
   if (is_staff() && (what == "is_staff")) {
@@ -1876,9 +1876,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_sword") {
     return &Thing::is_sword;
   }
-  if (what == "is_victim_select") {
-    return &Thing::is_victim_select;
-  }
   if (what == "is_throwable") {
     return &Thing::is_throwable;
   }
@@ -2341,8 +2338,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag128") {
     return &Thing::unused_flag128;
   }
-  if (what == "unused_flag129") {
-    return &Thing::unused_flag129;
+  if (what == "is_target_radial") {
+    return &Thing::is_target_radial;
   }
   if (what == "is_staff") {
     return &Thing::is_staff;

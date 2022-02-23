@@ -38,7 +38,7 @@ Projectile_::Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, poin
   if (t->is_projectile()) {
     name = t->tp()->name();
   } else {
-    name = t->projectile_name();
+    name = t->target_name_projectile();
     if (name.empty()) {
       t->err("no projectile name");
       return;

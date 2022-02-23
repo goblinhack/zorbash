@@ -185,7 +185,7 @@ bool Thing::fire_at_target(void)
 bool Thing::fire_at_and_choose_target(Thingp item)
 {
   TRACE_NO_INDENT();
-  if (item->laser_name().empty()) {
+  if (item->target_name_laser().empty()) {
     return projectile_choose_target(item);
   } else {
     return laser_choose_target(item);
@@ -195,7 +195,7 @@ bool Thing::fire_at_and_choose_target(Thingp item)
 bool Thing::fire_at(Thingp item, Thingp target)
 {
   TRACE_NO_INDENT();
-  if (item->laser_name().empty()) {
+  if (item->target_name_laser().empty()) {
     return projectile_choose_target(item, target);
   } else {
     return laser_choose_target(item, target);
