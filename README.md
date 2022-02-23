@@ -3,7 +3,7 @@
 <!-- pike                                                                                                                                         -->
 <!-- broadsword                                                                                                                                   -->
 <!-- radial effect option for wand of descent                                                                                                     -->
-<!-- stone cloak, once per level turn to stone? / pass through stone                                                                               -->
+<!-- stone cloak, once per level turn to stone? / pass through stone / uses health and degrades                                                    -->
 <!-- cloak of jelly                                                                                                                               -->
 <!-- evil check for cross                                                                                                                         -->
 <!-- boots of shoving / steadfastness                                                                                                             -->
