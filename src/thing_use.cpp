@@ -278,12 +278,17 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use)
   }
 }
 
-bool Thing::use(Thingp what, int preferred_equip)
+bool Thing::use(Thingp what, UseOptions *options)
 {
   verify(MTYPE_THING, what);
   if (! what) {
     err("Cannot use null thing");
     return false;
+  }
+
+  int preferred_equip = -1;
+  if (options && options->preferred_equip_set) {
+    preferred_equip = options->preferred_equip;
   }
 
   TRACE_NO_INDENT();
@@ -468,7 +473,7 @@ bool Thing::use(Thingp what, int preferred_equip)
     }
     used(what, this, false /* remove after use */);
     if (is_player()) {
-      game->tick_begin("player drunk an item");
+      game->tick_begin("player waved an item");
     }
   } else if (what->is_ring()) {
     dbg("Trying to put on: %s", what->to_short_string().c_str());
