@@ -26,8 +26,8 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
     used(item, victim, true);
 
-    if (! item->laser_name().empty()) {
-      laser_fire_at(item->laser_name(), victim);
+    if (! item->target_name_laser().empty()) {
+      laser_fire_at(item->target_name_laser(), victim);
     } else {
       err("Unknown beam weapon: %s.", item->text_the().c_str());
       return false;
@@ -43,7 +43,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   dbg("Need to select a target");
   TRACE_AND_INDENT();
 
-  if (! victim_select(item)) {
+  if (! is_target_select(item)) {
     dbg("Failed to select a target");
     TRACE_AND_INDENT();
     return false;
@@ -51,15 +51,15 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
   game->request_to_fire_item = item;
 
-  return victim_select(item);
+  return is_target_select(item);
 }
 
-bool Thing::laser_fire_at(const std::string &laser_name, Thingp target)
+bool Thing::laser_fire_at(const std::string &target_name_laser, Thingp target)
 {
-  dbg("Laser fire %s at %s", laser_name.c_str(), target->to_short_string().c_str());
+  dbg("Laser fire %s at %s", target_name_laser.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (laser_name == "") {
+  if (target_name_laser == "") {
     die("No laser name");
   }
 
@@ -96,7 +96,7 @@ bool Thing::laser_fire_at(const std::string &laser_name, Thingp target)
   //
   auto collatoral_damage = in_the_way(curr_at, target->curr_at);
   for (auto target : collatoral_damage) {
-    auto laser = level->thing_new(laser_name, target->curr_at, this);
+    auto laser = level->thing_new(target_name_laser, target->curr_at, this);
     if (! laser) {
       err("No laser to fire");
       if (is_player()) {
@@ -121,22 +121,22 @@ bool Thing::laser_fire_at(const std::string &laser_name, Thingp target)
   return true;
 }
 
-bool Thing::laser_fire_at(const std::string &laser_name, point at)
+bool Thing::laser_fire_at(const std::string &target_name_laser, point at)
 {
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Laser fire %s at %s", laser_name.c_str(), at.to_string().c_str());
+  dbg("Laser fire %s at %s", target_name_laser.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
-    return laser_fire_at(laser_name, best);
+    return laser_fire_at(target_name_laser, best);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return laser_fire_at(laser_name, t);
+      return laser_fire_at(target_name_laser, t);
     }
   }
   FOR_ALL_THINGS_END()

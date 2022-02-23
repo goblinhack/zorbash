@@ -26,8 +26,8 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim)
 
     used(item, victim, true);
 
-    if (! item->projectile_name().empty()) {
-      projectile_fire_at(item->projectile_name(), victim);
+    if (! item->target_name_projectile().empty()) {
+      projectile_fire_at(item->target_name_projectile(), victim);
     } else {
       err("Unknown projectile: %s.", item->text_the().c_str());
       return false;
@@ -40,19 +40,19 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim)
     return true;
   }
 
-  if (! victim_select(item)) {
+  if (! is_target_select(item)) {
     return false;
   }
 
   game->request_to_fire_item = item;
 
-  return victim_select(item);
+  return is_target_select(item);
 }
 
-Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp target)
+Thingp Thing::projectile_fire_at(const std::string &target_name_projectile, Thingp target)
 {
   TRACE_AND_INDENT();
-  if (projectile_name == "") {
+  if (target_name_projectile == "") {
     die("No projectile name");
   }
 
@@ -89,7 +89,7 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
     game->change_state(Game::STATE_NORMAL);
   }
 
-  auto projectile = level->thing_new(projectile_name, target->curr_at, this);
+  auto projectile = level->thing_new(target_name_projectile, target->curr_at, this);
   if (! projectile) {
     err("No projectile to fire");
     if (is_player()) {
@@ -115,22 +115,22 @@ Thingp Thing::projectile_fire_at(const std::string &projectile_name, Thingp targ
   return projectile;
 }
 
-Thingp Thing::projectile_fire_at(const std::string &laser_name, point at)
+Thingp Thing::projectile_fire_at(const std::string &target_name_laser, point at)
 {
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Projectile fire %s at %s", laser_name.c_str(), at.to_string().c_str());
+  dbg("Projectile fire %s at %s", target_name_laser.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
-    return projectile_fire_at(laser_name, best);
+    return projectile_fire_at(target_name_laser, best);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return projectile_fire_at(laser_name, t);
+      return projectile_fire_at(target_name_laser, t);
     }
   }
   FOR_ALL_THINGS_END()

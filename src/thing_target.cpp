@@ -8,7 +8,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
-bool Thing::victim_select(Thingp item)
+bool Thing::is_target_select(Thingp item)
 {
   TRACE_NO_INDENT();
 

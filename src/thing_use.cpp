@@ -423,7 +423,7 @@ bool Thing::use(Thingp what, int preferred_equip)
     if (is_player()) {
       level->describe(what);
     }
-  } else if (what->is_victim_select()) {
+  } else if (what->is_target_select()) {
     dbg("Trying to fire: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_monst()) {

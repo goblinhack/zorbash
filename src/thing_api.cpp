@@ -2193,10 +2193,10 @@ int Thing::unused_flag128(void)
   return (tp()->unused_flag128());
 }
 
-int Thing::unused_flag129(void)
+int Thing::is_target_radial(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag129());
+  return (tp()->is_target_radial());
 }
 
 int Thing::is_staff(void)
@@ -3075,10 +3075,10 @@ int Thing::is_sword(void)
   return (tp()->is_sword());
 }
 
-int Thing::is_victim_select(void)
+int Thing::is_target_select(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_victim_select());
+  return (tp()->is_target_select());
 }
 
 int Thing::is_throwable(void)
@@ -6908,10 +6908,10 @@ const std::string &Thing::gfx_anim_use(void)
   return (tp()->gfx_anim_use());
 }
 
-const std::string &Thing::laser_name(void)
+const std::string &Thing::target_name_laser(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->laser_name());
+  return (tp()->target_name_laser());
 }
 
 const std::string &Thing::light_color(void)
@@ -7322,10 +7322,10 @@ const std::string &Thing::on_damage_natural_attack_do(void)
   return (tp()->on_damage_natural_attack_do());
 }
 
-const std::string &Thing::projectile_name(void)
+const std::string &Thing::target_name_projectile(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->projectile_name());
+  return (tp()->target_name_projectile());
 }
 
 const std::string &Thing::short_text_name(void)
