@@ -487,18 +487,18 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case SDLK_DELETE : wid_inventory_item_option_drop(nullptr, 0, 0, 0); return true;
-              case 'b' :
-              case SDLK_ESCAPE :
+              case SDLK_DELETE: wid_inventory_item_option_drop(nullptr, 0, 0, 0); return true;
+              case 'b':
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   DBG2("INF: inventory cancelled");
@@ -952,6 +952,18 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_pos(w, tl, br);
       wid_set_text(w, "%%fg=white$E%%fg=reset$at");
       y_at += 3;
+    } else if (! item_option->target_name_laser().empty()) {
+      TRACE_AND_INDENT();
+      auto p = wid_inventory_window;
+      auto w = wid_new_square_button(p, "use");
+
+      point tl = make_point(x_off, y_at);
+      point br = make_point(x_off + width, y_at + 2);
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "%%fg=white$U%%fg=reset$se (choose target)");
+      y_at += 3;
     } else if (item_option->is_usable() && ! player->is_equipped(item_option)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
@@ -975,6 +987,24 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       }
       y_at += 3;
     }
+
+    //
+    // "You shall not pass" mode
+    //
+    if (! item_option->target_name_radial().empty()) {
+      TRACE_AND_INDENT();
+      auto p = wid_inventory_window;
+      auto w = wid_new_square_button(p, "use");
+
+      point tl = make_point(x_off, y_at);
+      point br = make_point(x_off + width, y_at + 2);
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "Use radially");
+      y_at += 3;
+    }
+
     if (item_option->is_throwable()) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
@@ -988,6 +1018,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
       wid_set_text(w, "%%fg=white$T%%fg=reset$hrow");
       y_at += 3;
     }
+
     {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;

@@ -3,8 +3,9 @@ import tp
 
 
 def on_born(me, x, y):
-    my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+    my.level_spawn_using_items_radius_range(id=me, parent_id=me, victim_id=me, what="explosion_destroy_floor", min=1)
     my.thing_popup(me, "You shall not pass!")
+    my.thing_dead(me, "used")
 
 
 #
@@ -14,7 +15,6 @@ def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
     my.blast_max_radius(self, 2)
     my.collision_check(self, True)
-    my.is_laser(self, True)
     my.is_loggable(self, True)
     my.is_no_tile(self, True)
     my.is_usable(self, True)
