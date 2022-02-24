@@ -17,6 +17,46 @@
 extern uint8_t sdl_init_video;
 extern uint8_t sdl_exiting;
 
+extern int sdl_joy_naxes;
+extern int sdl_joy_balls;
+extern int sdl_joy_nbuttons;
+extern int sdl_joy_index;
+extern int sdl_mouse_tick;
+extern int sdl_mouse_x;
+extern int sdl_mouse_y;
+extern int sdl_held_mouse_x;
+extern int sdl_held_mouse_y;
+extern int sdl_joy1_down;
+extern int sdl_joy1_left;
+extern int sdl_joy1_right;
+extern int sdl_joy1_up;
+extern int sdl_joy2_down;
+extern int sdl_joy2_left;
+extern int sdl_joy2_right;
+extern int sdl_joy2_up;
+extern int sdl_joy_deadzone;
+extern int sdl_key_repeat_count;
+extern int sdl_left_fire;
+extern int sdl_right_fire;
+extern int sdl_wheel_x;
+extern int sdl_wheel_y;
+extern int sdl_shift_held;
+
+extern int *sdl_joy_axes;
+
+extern SDL_Keysym sdl_grabbed_key;
+
+extern SDL_Window *sdl_window; // Our window handle
+
+extern ts_t sdl_last_time_for_key;
+
+extern uint32_t sdl_mouse_down_ts;
+extern uint32_t sdl_last_mouse_held_down_when;
+
+struct tokens_t_;
+typedef void (*on_sdl_key_grab_t)(SDL_Keysym);
+extern on_sdl_key_grab_t on_sdl_key_grab;
+
 enum {
   SDL_JOY_BUTTON_A,                // 0
   SDL_JOY_BUTTON_B,                // 1
@@ -40,35 +80,7 @@ enum {
   SDL_JOY_BUTTON_RIGHT_FIRE = 31,
 #define SDL_MAX_BUTTONS 32
 };
-
-extern int                                    joy_axes;
-extern int                                    joy_balls;
-extern int                                    joy_buttons;
-extern int                                    joy_index;
-extern int                                    mouse_tick;
-extern int                                    mouse_x;
-extern int                                    mouse_y;
-extern int                                    sdl_joy1_down;
-extern int                                    sdl_joy1_left;
-extern int                                    sdl_joy1_right;
-extern int                                    sdl_joy1_up;
-extern int                                    sdl_joy2_down;
-extern int                                    sdl_joy2_left;
-extern int                                    sdl_joy2_right;
-extern int                                    sdl_joy2_up;
-extern int                                   *sdl_joy_axes;
-extern int                                    sdl_joy_deadzone;
-extern int                                    sdl_key_repeat_count;
-extern int                                    sdl_left_fire;
-extern int                                    sdl_right_fire;
-extern int                                    wheel_x;
-extern int                                    wheel_y;
-extern SDL_Keysym                             sdl_grabbed_key;
-extern SDL_Window                            *window; // Our window handle
 extern std::array< uint8_t, SDL_MAX_BUTTONS > sdl_joy_buttons;
-extern ts_t                                   sdl_last_time_for_key;
-extern uint32_t                               mouse_down;
-extern uint8_t                                sdl_shift_held;
 
 bool sdlk_eq(const SDL_Keysym &a, const SDL_Keysym &b);
 
@@ -85,10 +97,6 @@ std::string to_string(const SDL_Keysym &k);
 std::string to_string_ignoring_mods(const SDL_Keysym &k);
 
 std::vector< uint8_t > sdl_fbo_save(int fbo);
-
-struct tokens_t_;
-typedef void (*on_sdl_key_grab_t)(SDL_Keysym);
-extern on_sdl_key_grab_t on_sdl_key_grab;
 
 uint8_t config_errored(tokensp, void *context);
 uint8_t config_fps_counter_set(tokensp, void *context);

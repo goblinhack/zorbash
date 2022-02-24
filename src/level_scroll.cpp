@@ -271,16 +271,16 @@ void Level::scroll_map_set_target(void)
     }
 
     auto d = 0.3;
-    if (mouse_x >= game->config.window_pix_width - 1) {
+    if (sdl_mouse_x >= game->config.window_pix_width - 1) {
       map_wanted_at.x += d;
     }
-    if (mouse_x <= 1) {
+    if (sdl_mouse_x <= 1) {
       map_wanted_at.x -= d;
     }
-    if (mouse_y >= game->config.window_pix_height - 1) {
+    if (sdl_mouse_y >= game->config.window_pix_height - 1) {
       map_wanted_at.y += d;
     }
-    if (mouse_y <= 1) {
+    if (sdl_mouse_y <= 1) {
       map_wanted_at.y -= d;
     }
   }

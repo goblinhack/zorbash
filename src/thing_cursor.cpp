@@ -16,8 +16,8 @@ void Thing::cursor_hover_over_check(void)
   point tblit_tl = last_blit_tl;
   point tblit_br = last_blit_br;
 
-  auto mx = mouse_x;
-  auto my = mouse_y;
+  auto mx = sdl_mouse_x;
+  auto my = sdl_mouse_y;
   mx /= game->config.game_pix_scale_width;
   my /= game->config.game_pix_scale_height;
 

@@ -450,7 +450,9 @@ uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
   //
   // Moving things around your bag has a cost...
   //
-  game->tick_begin("moved an in transit item");
+  // This seems too harsh.
+  //
+  // game->tick_begin("moved an in transit item");
 
   return true;
 }
@@ -483,7 +485,7 @@ uint8_t wid_in_transit_item_drop(void)
   //
   // Moving things around your bag has a cost...
   //
-  game->tick_begin("dropped an in transit item");
+  // game->tick_begin("dropped an in transit item");
 
   return true;
 }
@@ -916,8 +918,8 @@ Widp is_mouse_over_any_bag(void)
     // If we are in the portion of the lower screen above the itembar
     // then do not scroll
     //
-    int x = mouse_x;
-    int y = mouse_y;
+    int x = sdl_mouse_x;
+    int y = sdl_mouse_y;
     pixel_to_ascii(&x, &y);
 
     static int tlx, tly, brx, bry, cached;
