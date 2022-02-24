@@ -59,7 +59,7 @@ void wid_inventory_fini(void)
 
 bool wid_inventory_init(void)
 {
-  DBG3("Inventory: Init inventory");
+  DBG2("Inventory: Init inventory");
   TRACE_AND_INDENT();
 
   return wid_inventory_create(nullptr, nullptr);
@@ -67,7 +67,7 @@ bool wid_inventory_init(void)
 
 uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  DBG3("Inventory: open");
+  DBG2("Inventory: open");
   TRACE_AND_INDENT();
 
   if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
@@ -83,7 +83,7 @@ uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t butt
 
 static uint8_t wid_inventory_close(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  DBG3("Inventory: close");
+  DBG2("Inventory: close");
   TRACE_AND_INDENT();
 
   wid_inventory_fini();
@@ -92,7 +92,7 @@ static uint8_t wid_inventory_close(Widp w, int32_t x, int32_t y, uint32_t button
 
 static void wid_inventory_mouse_over_tab_bag1(Widp w, int32_t x, int32_t y, int32_t wheelx, int32_t wheely)
 {
-  DBG3("Inventory: bag1");
+  DBG2("Inventory: bag1");
   TRACE_AND_INDENT();
 
   //
@@ -113,7 +113,7 @@ static void wid_inventory_mouse_over_tab_bag1(Widp w, int32_t x, int32_t y, int3
 
 static void wid_inventory_mouse_over_tab_bag2(Widp w, int32_t x, int32_t y, int32_t wheelx, int32_t wheely)
 {
-  DBG3("Inventory: bag2");
+  DBG2("Inventory: bag2");
   TRACE_AND_INDENT();
 
   //
@@ -134,7 +134,7 @@ static void wid_inventory_mouse_over_tab_bag2(Widp w, int32_t x, int32_t y, int3
 
 static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  DBG3("Inventory: key down");
+  DBG2("Inventory: key down");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -163,7 +163,7 @@ static uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  DBG3("Inventory: Item options use");
+  DBG2("Inventory: Item options use");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -200,7 +200,7 @@ static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint3
 
 static uint8_t wid_inventory_item_option_use_radial(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  DBG3("Inventory: Item options use");
+  DBG2("Inventory: Item options use radial");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -239,7 +239,7 @@ static uint8_t wid_inventory_item_option_use_radial(Widp w, int32_t x, int32_t y
 
 static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  DBG3("Inventory: Item options eat");
+  DBG2("Inventory: Item options eat");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -277,7 +277,7 @@ static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint3
 
 static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  DBG3("Inventory: Item options throw");
+  DBG2("Inventory: Item options throw");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -314,7 +314,7 @@ static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uin
 
 static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  DBG3("Inventory: Item options drop");
+  DBG2("Inventory: Item options drop");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -353,7 +353,7 @@ static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint
 
 static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  DBG3("Inventory: Item options key up");
+  DBG2("Inventory: Item options key up");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -661,7 +661,7 @@ static void wid_slot_item_mouse_over_end(Widp w)
 
 static uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
 {
-  DBG3("Inventory: Mouse down, item select");
+  DBG2("Inventory: Mouse down, item select");
   TRACE_AND_INDENT();
 
   if (game->in_transit_item) {

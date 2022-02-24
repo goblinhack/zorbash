@@ -195,6 +195,13 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
     radius_max = item->tp()->blast_max_radius();
   }
 
+  //
+  // For radial effects
+  //
+  if (radius_min && ! radius_max) {
+    radius_max = item->tp()->blast_max_radius();
+  }
+
   dbg("Spawn %s in radius range %u to %u", what.c_str(), radius_min, radius_max);
 
   //
