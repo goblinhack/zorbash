@@ -1,14 +1,17 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- pike                                                                                                                                         -->
-<!-- broadsword                                                                                                                                   -->
 <!-- radial effect option for wand of descent                                                                                                     -->
+<!-- radial effect for AI too                                                                                                                     -->
+<!-- shovel cannot hit web                                                                                                                        -->
 <!-- stone cloak, once per level turn to stone? / pass through stone / uses health and degrades                                                    -->
+<!-- very broadsword                                                                                                                                   -->
+<!-- pike                                                                                                                                         -->
 <!-- cloak of jelly                                                                                                                               -->
 <!-- evil check for cross                                                                                                                         -->
 <!-- boots of shoving / steadfastness                                                                                                             -->
 <!-- boots of jumping                                                                                                                             -->
 <!-- boots of hiking / const                                                                                                                      -->
+<!-- cloak of protection                                                                                                                          -->
 <!-- cloak of fire protection                                                                                                                     -->
 <!-- potion of paralysis should paralyse attackers too, so it is useful / vampire?                                                                -->
 <!-- have items that show thigns like +1 defense, -1 strength, +2 dex etc...                                                                      -->

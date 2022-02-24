@@ -429,14 +429,14 @@ bool Thing::use(Thingp what, UseOptions *use_options)
       level->describe(what);
     }
   } else if (what->is_target_select()) {
-    dbg("Trying to fire: %s", what->to_short_string().c_str());
+    dbg("Trying to target something: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_monst()) {
       if (! what->equip_carry_anim().empty()) {
         equip(what, preferred_equip);
       }
     }
-    ret = fire_at_and_choose_target(what);
+    ret = fire_at_and_choose_target(what, use_options);
     if (is_player()) {
       level->describe(what);
     }

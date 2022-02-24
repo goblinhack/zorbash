@@ -396,7 +396,7 @@ public:
   bool equip_use_must_attack(int equip);
   bool fall_to_next_level(void);
   bool fall(void);
-  bool fire_at_and_choose_target(Thingp);
+  bool fire_at_and_choose_target(Thingp, UseOptions *options = nullptr);
   bool fire_at_target(void);
   bool fire_at(Thingp item, Thingp target);
   bool fire_at(Thingp target);
@@ -424,8 +424,8 @@ public:
   bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item, Thingp victim = nullptr);
-  bool laser_fire_at(const std::string &item, point at);
-  bool laser_fire_at(const std::string &item, Thingp target);
+  bool laser_fire_at(const std::string &item, point at, UseOptions *use_options = nullptr);
+  bool laser_fire_at(const std::string &item, Thingp target, UseOptions *use_options = nullptr);
   bool learn_random_skill(void);
   bool map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
   bool map_treasure_available(void);
