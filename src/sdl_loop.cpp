@@ -191,8 +191,8 @@ void sdl_loop(void)
       //
       SDL_PumpEvents();
 
-      wheel_x = 0;
-      wheel_y = 0;
+      sdl_wheel_x = 0;
+      sdl_wheel_y = 0;
 
       found = SDL_PeepEvents(events, ARRAY_SIZE(events), SDL_GETEVENT, SDL_QUIT, SDL_LASTEVENT);
 
@@ -203,23 +203,24 @@ void sdl_loop(void)
       //
       // Mouse held?
       //
-      static uint32_t last_mouse_held_down = time_get_time_ms_cached();
       if (unlikely(! found)) {
         auto mouse_down = sdl_get_mouse();
         if (mouse_down) {
-          if (last_mouse_held_down) {
-            if (time_have_x_hundredths_passed_since(5, last_mouse_held_down)) {
-              DBG2("SDL: Mouse DOWN held: Button %d", mouse_down);
-              wid_mouse_held(mouse_down, mouse_x, mouse_y);
+          if (sdl_last_mouse_held_down_when) {
+            if (time_have_x_hundredths_passed_since(10, sdl_last_mouse_held_down_when)) {
+              if (sdl_held_mouse_x && sdl_held_mouse_y) {
+                DBG2("SDL: Mouse DOWN: held: Button %d now at %d,%d initially at %d,%d", mouse_down, sdl_mouse_x,
+                     sdl_mouse_y, sdl_held_mouse_x, sdl_held_mouse_y);
+                wid_mouse_held(mouse_down, sdl_held_mouse_x, sdl_held_mouse_y);
+                sdl_held_mouse_x = 0;
+                sdl_held_mouse_y = 0;
+              } else {
+                DBG2("SDL: Mouse DOWN: held: Button %d now at %d,%d", mouse_down, sdl_mouse_x, sdl_mouse_y);
+                wid_mouse_held(mouse_down, sdl_mouse_x, sdl_mouse_y);
+              }
             }
-          } else {
-            last_mouse_held_down = time_get_time_ms_cached();
           }
-        } else {
-          last_mouse_held_down = 0;
         }
-      } else {
-        last_mouse_held_down = 0;
       }
 
       //
@@ -288,7 +289,7 @@ void sdl_loop(void)
       // Flip
       //
       if (likely(game->config.gfx_vsync_locked)) {
-        SDL_GL_SwapWindow(window);
+        SDL_GL_SwapWindow(sdl_window);
       } else {
         glFlush();
       }

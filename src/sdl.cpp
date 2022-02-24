@@ -16,18 +16,21 @@
 #include "my_wid_rightbar.hpp"
 #include "stb_image_write.hpp"
 
-uint8_t  sdl_shift_held;
+int      sdl_shift_held;
 uint8_t  sdl_init_video;
 uint32_t mouse_down;
 uint32_t mouse_down_when;
+uint32_t sdl_last_mouse_held_down_when;
 
 ts_t sdl_last_time_for_key;
 
-int mouse_x;
-int mouse_y;
-int wheel_x;
-int wheel_y;
-int mouse_tick;
+int sdl_mouse_x;
+int sdl_mouse_y;
+int sdl_held_mouse_x;
+int sdl_held_mouse_y;
+int sdl_wheel_x;
+int sdl_wheel_y;
+int sdl_mouse_tick;
 
 int sdl_key_repeat_count;
 
@@ -51,15 +54,15 @@ static SDL_Haptic   *haptic;
 
 int *sdl_joy_axes;
 int  sdl_joy_deadzone = 8000;
-int  joy_index;
-int  joy_naxes;
-int  joy_buttons;
-int  joy_balls;
+int  sdl_joy_index;
+int  sdl_joy_naxes;
+int  sdl_joy_nbuttons;
+int  sdl_joy_balls;
 
-SDL_Window       *window;  // Our window handle
-SDL_GLContext     context; // Our opengl context handle
-SDL_Keysym        sdl_grabbed_key;
-on_sdl_key_grab_t on_sdl_key_grab;
+SDL_Window          *sdl_window;  // Our window handle
+static SDL_GLContext sdl_context; // Our opengl context handle
+SDL_Keysym           sdl_grabbed_key;
+on_sdl_key_grab_t    on_sdl_key_grab;
 
 void sdl_fini(void)
 {
@@ -78,10 +81,10 @@ void sdl_fini(void)
   }
 
   CON("SDL: delete GL context");
-  SDL_GL_DeleteContext(context);
+  SDL_GL_DeleteContext(sdl_context);
 
   CON("SDL: destroy window");
-  SDL_DestroyWindow(window);
+  SDL_DestroyWindow(sdl_window);
 
   CON("SDL: quit");
   SDL_Quit();
@@ -137,7 +140,7 @@ static void sdl_init_rumble(void)
     return;
   }
 
-  LOG("- Opened Haptic for joy index %d", joy_index);
+  LOG("- Opened Haptic for joy index %d", sdl_joy_index);
 }
 
 static void sdl_init_joystick(void)
@@ -156,16 +159,16 @@ static void sdl_init_joystick(void)
   LOG("- Init joystick");
   SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 
-  joy_index = 0;
-  for (joy_index = 0; joy_index < SDL_NumJoysticks(); ++joy_index) {
+  sdl_joy_index = 0;
+  for (sdl_joy_index = 0; sdl_joy_index < SDL_NumJoysticks(); ++sdl_joy_index) {
 
-    if (SDL_IsGameController(joy_index)) {
-      controller = SDL_GameControllerOpen(joy_index);
+    if (SDL_IsGameController(sdl_joy_index)) {
+      controller = SDL_GameControllerOpen(sdl_joy_index);
       if (controller) {
         LOG("- Found gamecontroller");
         break;
       } else {
-        WARN("Could not open gamecontroller %i: %s", joy_index, SDL_GetError());
+        WARN("Could not open gamecontroller %i: %s", sdl_joy_index, SDL_GetError());
         SDL_ClearError();
       }
     }
@@ -176,17 +179,17 @@ static void sdl_init_joystick(void)
     return;
   }
 
-  joy = SDL_JoystickOpen(joy_index);
+  joy = SDL_JoystickOpen(sdl_joy_index);
   if (joy) {
-    LOG("- Opened Joystick  : %d", joy_index);
+    LOG("- Opened Joystick  : %d", sdl_joy_index);
     LOG("- Name             : %s", SDL_JoystickNameForIndex(0));
     LOG("- Number of Axes   : %d", SDL_JoystickNumAxes(joy));
     LOG("- Number of Buttons: %d", SDL_JoystickNumButtons(joy));
     LOG("- Number of Balls  : %d", SDL_JoystickNumBalls(joy));
 
-    joy_naxes   = SDL_JoystickNumAxes(joy);
-    joy_buttons = SDL_JoystickNumButtons(joy);
-    joy_balls   = SDL_JoystickNumBalls(joy);
+    sdl_joy_naxes    = SDL_JoystickNumAxes(joy);
+    sdl_joy_nbuttons = SDL_JoystickNumButtons(joy);
+    sdl_joy_balls    = SDL_JoystickNumBalls(joy);
   } else {
     WARN("Couldn't open Joystick 0");
   }
@@ -302,9 +305,9 @@ uint8_t sdl_init(void)
   }
 
   CON("SDL: Create window");
-  window = SDL_CreateWindow("zorbash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, video_width, video_height,
-                            video_unused_flags);
-  if (! window) {
+  sdl_window = SDL_CreateWindow("zorbash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, video_width, video_height,
+                                video_unused_flags);
+  if (! sdl_window) {
     ERR("Couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
 
     SDL_MSG_BOX("Couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
@@ -315,16 +318,16 @@ uint8_t sdl_init(void)
   }
 
   if (video_unused_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
-    SDL_GL_GetDrawableSize(window, &game->config.window_pix_width, &game->config.window_pix_height);
+    SDL_GL_GetDrawableSize(sdl_window, &game->config.window_pix_width, &game->config.window_pix_height);
   } else {
-    SDL_GetWindowSize(window, &game->config.window_pix_width, &game->config.window_pix_height);
+    SDL_GetWindowSize(sdl_window, &game->config.window_pix_width, &game->config.window_pix_height);
   }
 
   CON("SDL: Create OpenGL context");
   LOG("SDL: Call SDL_GL_CreateContext(%dx%d)", game->config.window_pix_width, game->config.window_pix_height);
 
-  context = SDL_GL_CreateContext(window);
-  if (! context) {
+  sdl_context = SDL_GL_CreateContext(sdl_window);
+  if (! sdl_context) {
     SDL_ClearError();
     ERR("SDL_GL_CreateContext failed %s", SDL_GetError());
     SDL_MSG_BOX("SDL_GL_CreateContext failed %s", SDL_GetError());
@@ -333,7 +336,7 @@ uint8_t sdl_init(void)
 
   LOG("SDL: Call SDL_GL_CreateContext(%dx%d) done", game->config.window_pix_width, game->config.window_pix_height);
 
-  if (SDL_GL_MakeCurrent(window, context) < 0) {
+  if (SDL_GL_MakeCurrent(sdl_window, sdl_context) < 0) {
     SDL_ClearError();
     ERR("SDL_GL_MakeCurrent failed %s", SDL_GetError());
     SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
@@ -354,14 +357,14 @@ uint8_t sdl_init(void)
     glClearColor(0, 0, 0, 0);
   }
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_ACCUM_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-  SDL_GL_SwapWindow(window);
+  SDL_GL_SwapWindow(sdl_window);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_ACCUM_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-  SDL_GL_SwapWindow(window);
+  SDL_GL_SwapWindow(sdl_window);
 
   config_game_pix_zoom_update();
 
   LOG("SDL: Call SDL_SetWindowTitle");
-  SDL_SetWindowTitle(window, "zorbash");
+  SDL_SetWindowTitle(sdl_window, "zorbash");
 
   CON("SDL: OpenGL Vendor   : %s", glGetString(GL_VENDOR));
   CON("SDL: OpenGL Renderer : %s", glGetString(GL_RENDERER));
@@ -477,7 +480,7 @@ void sdl_event(SDL_Event *event)
           last_key_pressed = *key;
         }
 
-        wid_key_down(key, mouse_x, mouse_y);
+        wid_key_down(key, sdl_mouse_x, sdl_mouse_y);
 
         sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
         break;
@@ -505,7 +508,7 @@ void sdl_event(SDL_Event *event)
 
         key = &event->key.keysym;
 
-        wid_key_up(key, mouse_x, mouse_y);
+        wid_key_up(key, sdl_mouse_x, sdl_mouse_y);
 
         sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
         break;
@@ -540,19 +543,19 @@ void sdl_event(SDL_Event *event)
           ts = time_get_time_ms_cached();
         }
 
-        wheel_x = event->wheel.x;
-        wheel_y = event->wheel.y;
+        sdl_wheel_x = event->wheel.x;
+        sdl_wheel_y = event->wheel.y;
 
-        wheel_x *= accel;
-        wheel_y *= accel;
+        sdl_wheel_x *= accel;
+        sdl_wheel_y *= accel;
 
         //
         // Negative wheel x so side scrolls seem natural. Could just be
         // a dumb macos thing to ifdef?
         //
         wid_mouse_visible = 1;
-        mouse_tick++;
-        wid_mouse_motion(mouse_x, mouse_y, 0, 0, -wheel_x, wheel_y);
+        sdl_mouse_tick++;
+        wid_mouse_motion(sdl_mouse_x, sdl_mouse_y, 0, 0, -sdl_wheel_x, sdl_wheel_y);
         break;
       }
     case SDL_MOUSEMOTION:
@@ -563,13 +566,16 @@ void sdl_event(SDL_Event *event)
              event->motion.yrel, mouse_down);
 
         wid_mouse_visible = 1;
-        mouse_tick++;
-        wid_mouse_motion(mouse_x, mouse_y, event->motion.xrel, event->motion.yrel, 0, 0);
+        sdl_mouse_tick++;
+        wid_mouse_motion(sdl_mouse_x, sdl_mouse_y, event->motion.xrel, event->motion.yrel, 0, 0);
         break;
       }
     case SDL_MOUSEBUTTONDOWN:
       {
-        mouse_down = sdl_get_mouse();
+        mouse_down                    = sdl_get_mouse();
+        sdl_last_mouse_held_down_when = time_get_time_ms_cached();
+        sdl_held_mouse_x              = sdl_mouse_x;
+        sdl_held_mouse_y              = sdl_mouse_y;
 
         DBG2("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x,
              event->button.y, mouse_down);
@@ -578,18 +584,21 @@ void sdl_event(SDL_Event *event)
         wid_mouse_visible    = 1;
         wid_mouse_two_clicks = (now - mouse_down_when < UI_MOUSE_DOUBLE_CLICK);
 
-        wid_mouse_down(event->button.button, mouse_x, mouse_y);
+        wid_mouse_down(event->button.button, sdl_mouse_x, sdl_mouse_y);
         mouse_down_when = now;
         break;
       }
     case SDL_MOUSEBUTTONUP:
       {
-        mouse_down = sdl_get_mouse();
+        mouse_down                    = sdl_get_mouse();
+        sdl_last_mouse_held_down_when = 0;
+        sdl_held_mouse_x              = 0;
+        sdl_held_mouse_y              = 0;
 
         DBG2("SDL: Mouse UP: button %d released at %d,%d state %d", event->button.button, event->button.x,
              event->button.y, mouse_down);
 
-        wid_mouse_up(event->button.button, mouse_x, mouse_y);
+        wid_mouse_up(event->button.button, sdl_mouse_x, sdl_mouse_y);
         break;
       }
     case SDL_JOYAXISMOTION:
@@ -600,7 +609,7 @@ void sdl_event(SDL_Event *event)
         int value = event->jaxis.value;
 
         if (! sdl_joy_axes) {
-          sdl_joy_axes = (int *) myzalloc(sizeof(int) * joy_naxes, "joy axes");
+          sdl_joy_axes = (int *) myzalloc(sizeof(int) * sdl_joy_naxes, "joy axes");
         }
 
         sdl_joy_axes[ axis ] = value;
@@ -626,7 +635,7 @@ void sdl_event(SDL_Event *event)
 
         if (sdl_right_fire || sdl_left_fire) {
           sdl_get_mouse();
-          wid_joy_button(mouse_x, mouse_y);
+          wid_joy_button(sdl_mouse_x, sdl_mouse_y);
         }
 
         break;
@@ -704,7 +713,7 @@ void sdl_event(SDL_Event *event)
         DBG2("SDL: Joystick %d: Button %d pressed", event->jbutton.which, event->jbutton.button);
         set(sdl_joy_buttons, event->jbutton.button, (uint8_t) 1);
         sdl_get_mouse();
-        wid_joy_button(mouse_x, mouse_y);
+        wid_joy_button(sdl_mouse_x, sdl_mouse_y);
         break;
       }
     case SDL_JOYBUTTONUP:
@@ -757,8 +766,8 @@ int sdl_get_mouse(void)
   x *= game->config.window_pix_width / game->config.config_pix_width;
   y *= game->config.window_pix_height / game->config.config_pix_height;
 
-  mouse_x = x;
-  mouse_y = y;
+  sdl_mouse_x = x;
+  sdl_mouse_y = y;
 
   return (button);
 }
@@ -792,10 +801,10 @@ void sdl_mouse_warp(int x, int y)
     y = game->config.window_pix_height - border;
   }
 
-  SDL_WarpMouseInWindow(window, x, y);
+  SDL_WarpMouseInWindow(sdl_window, x, y);
 
-  mouse_x = x;
-  mouse_y = y;
+  sdl_mouse_x = x;
+  sdl_mouse_y = y;
 }
 
 void sdl_tick(void)
@@ -824,7 +833,7 @@ void sdl_tick(void)
     sdl_joy1_right = true;
 
     incr(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT);
-    wid_joy_button(mouse_x, mouse_y);
+    wid_joy_button(sdl_mouse_x, sdl_mouse_y);
     decr(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT);
   }
 
@@ -833,7 +842,7 @@ void sdl_tick(void)
     sdl_joy1_left = true;
 
     incr(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT);
-    wid_joy_button(mouse_x, mouse_y);
+    wid_joy_button(sdl_mouse_x, sdl_mouse_y);
     decr(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT);
   }
 
@@ -842,7 +851,7 @@ void sdl_tick(void)
     sdl_joy1_down = true;
 
     incr(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN);
-    wid_joy_button(mouse_x, mouse_y);
+    wid_joy_button(sdl_mouse_x, sdl_mouse_y);
     decr(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN);
   }
 
@@ -851,7 +860,7 @@ void sdl_tick(void)
     sdl_joy1_up = true;
 
     incr(sdl_joy_buttons, SDL_JOY_BUTTON_UP);
-    wid_joy_button(mouse_x, mouse_y);
+    wid_joy_button(sdl_mouse_x, sdl_mouse_y);
     decr(sdl_joy_buttons, SDL_JOY_BUTTON_UP);
   }
 
@@ -901,8 +910,8 @@ void sdl_tick(void)
       accel = UI_SCROLL_JOY_SCALE_MAX;
     }
 
-    double x = mouse_x + ((double) mx * accel);
-    double y = mouse_y + ((double) my * accel);
+    double x = sdl_mouse_x + ((double) mx * accel);
+    double y = sdl_mouse_y + ((double) my * accel);
 
     if (x < 0) {
       x = 0;
@@ -1171,7 +1180,7 @@ void sdl_flush_display(bool force)
     glLogicOp(GL_COPY);
     glDisable(GL_COLOR_LOGIC_OP);
   }
-  SDL_GL_SwapWindow(window);
+  SDL_GL_SwapWindow(sdl_window);
   GL_ERROR_CHECK();
 }
 

@@ -1,5 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- descent +1 is too weak                                                                                                                       -->
+<!-- still mouse issue on inventory                                                                                                               -->
 <!-- radial effect option for wand of descent                                                                                                     -->
 <!-- radial effect for AI too                                                                                                                     -->
 <!-- shovel cannot hit web                                                                                                                        -->

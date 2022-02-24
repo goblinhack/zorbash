@@ -1191,8 +1191,8 @@ static void ascii_blit(void)
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  float      mx = mouse_x;
-  float      my = mouse_y;
+  float      mx = sdl_mouse_x;
+  float      my = sdl_mouse_y;
   const auto dw = game->config.ascii_gl_width;
   const auto dh = game->config.ascii_gl_height;
 

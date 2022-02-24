@@ -877,7 +877,10 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
   //
   // This is intentionally 0,0 to use the items range unless overridden
   //
-  if (t->spawn_radius_range(parent, target, std::string(what), radius_min, radius_max)) {
+  t->con("it");
+  parent->con("parent");
+  target->con("target");
+  if (t->spawn_radius_range(parent, target, std::string(what), radius_min, radius_max + parent->enchant_get())) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;

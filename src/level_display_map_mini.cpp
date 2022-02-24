@@ -38,9 +38,9 @@ void Level::display_map_mini(void)
   // Over map_mini?
   //
   auto old_map_mini_over = game->map_mini_over;
-  if ((mouse_x >= tlx) && (mouse_x <= brx) && (mouse_y >= tly) && (mouse_y <= bry)) {
-    game->map_mini_over = make_point(((float) (mouse_x - tlx) / (brx - tlx)) * MAP_WIDTH,
-                                     ((float) (mouse_y - tly) / (bry - tly)) * MAP_HEIGHT);
+  if ((sdl_mouse_x >= tlx) && (sdl_mouse_x <= brx) && (sdl_mouse_y >= tly) && (sdl_mouse_y <= bry)) {
+    game->map_mini_over = make_point(((float) (sdl_mouse_x - tlx) / (brx - tlx)) * MAP_WIDTH,
+                                     ((float) (sdl_mouse_y - tly) / (bry - tly)) * MAP_HEIGHT);
 
     point to(game->map_mini_over.x, game->map_mini_over.y);
     if (cursor) {
