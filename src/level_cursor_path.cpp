@@ -363,8 +363,25 @@ void Level::cursor_path_create(void)
   //
   IF_NODEBUG
   {
-    if (! is_lit_ever(cursor_at.x, cursor_at.y)) {
-      return;
+    bool ok = false;
+
+    //
+    // But allow us to walk into the shadows as the light has a bit of blurring.
+    //
+    auto shadow_distance = 3;
+    for (int dx = -shadow_distance; dx <= shadow_distance; dx++) {
+      for (int dy = -shadow_distance; dy <= shadow_distance; dy++) {
+        if (! is_lit_ever(cursor_at.x + dx, cursor_at.y + dy)) {
+          ok = true;
+          break;
+        }
+      }
+      if (ok) {
+        break;
+      }
+    }
+    if (! ok) {
+      TOPCON("You can't see that far.");
     }
   }
 
