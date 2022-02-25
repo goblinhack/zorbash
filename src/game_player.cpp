@@ -75,16 +75,27 @@ void Game::place_player(void)
           t->enchant_without_stone(W);
         }
         {
+          auto W = level->thing_new("wand_fire", point(x, y));
+          t->carry(W);
+          t->enchant_without_stone(W);
+        }
+        {
+          auto W = level->thing_new("wand_cold", point(x, y));
+          t->carry(W);
+          t->enchant_without_stone(W);
+        }
+        {
           auto W = level->thing_new("staff_descent", point(x, y));
           t->carry(W);
           t->enchant_without_stone(W);
         }
         // level->thing_new("belcher", point(x + 3, y));
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
-        level->thing_new("rat_giant", point(x + 1, y));
-        level->thing_new("rat_giant", point(x + 2, y));
-        level->thing_new("rat_giant", point(x + 3, y));
-        // level->thing_new("gargoyle_static", point(x + 2, y - 2));
+        // level->thing_new("rat_giant", point(x + 1, y));
+        // level->thing_new("rat_giant", point(x + 2, y));
+        // level->thing_new("rat_giant", point(x + 3, y));
+        level->thing_new("zorb_necro", point(x + 2, y));
+        level->thing_new("gargoyle_static", point(x + 2, y - 2));
         // level->thing_new("lava", point(x, y));
         level->thing_new("food_frog", point(x + 3, y - 1));
         level->thing_new("fire", point(x + 3, y - 1));

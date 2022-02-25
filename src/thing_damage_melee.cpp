@@ -31,12 +31,10 @@ const std::string Thing::damage_melee_dice_str(void)
 int Thing::damage_melee(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->damage_melee_dice().roll();
-
-  if (roll) {
-    return roll + enchant_get();
-  }
-  return roll;
+  auto roll    = tp()->damage_melee_dice().roll();
+  auto enchant = enchant_get();
+  dbg("Damage melee roll %d + enchant %d", roll, enchant);
+  return roll + enchant;
 }
 
 int Thing::on_owner_damage_melee(Thingp owner, Thingp hitter, int damage)

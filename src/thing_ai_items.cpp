@@ -24,7 +24,7 @@ bool Thing::try_to_enchant_items(void)
   TRACE_NO_INDENT();
 
   if (any_unfriendly_monst_visible()) {
-    AI_LOG("Unfriendlies are near");
+    AI_LOG("Unfriendlies are near, skip enchanting items");
     return false;
   }
 

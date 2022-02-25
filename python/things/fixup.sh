@@ -118,7 +118,7 @@ do
       is_able_to_tire_set \
       is_able_to_use_armor_set \
       is_able_to_use_rings_set \
-      is_able_to_use_wands_set \
+      is_able_to_use_wands_or_staffs_set \
       is_able_to_use_weapons_set \
       is_able_to_walk_through_walls_set \
       is_acid_set \
@@ -428,7 +428,7 @@ do
       unused_flag125_set \
       unused_flag126_set \
       unused_flag127_set \
-      unused_flag128_set \
+      is_flat_set \
       is_target_radial_set \
       is_staff_set \
       collision_hit_adj_set \

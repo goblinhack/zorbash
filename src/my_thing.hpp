@@ -285,8 +285,8 @@ public:
   Thingp top_owner(void);
   Thingp top_spawned_owner(void);
   Thingp in_the_way(const point s, const point e, int x, int y);
-  Thingp projectile_fire_at(const std::string &item, Thingp target);
-  Thingp projectile_fire_at(const std::string &item, point at);
+  Thingp projectile_fire_at(Thingp wand, const std::string &item, Thingp target);
+  Thingp projectile_fire_at(Thingp wand, const std::string &item, point at);
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at_if_possible(const std::string &what);
 
@@ -424,8 +424,8 @@ public:
   bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item, Thingp victim = nullptr);
-  bool laser_fire_at(const std::string &item, point at, UseOptions *use_options = nullptr);
-  bool laser_fire_at(const std::string &item, Thingp target, UseOptions *use_options = nullptr);
+  bool laser_fire_at(Thingp staff, const std::string &item, point at, UseOptions *use_options = nullptr);
+  bool laser_fire_at(Thingp staff, const std::string &item, Thingp target, UseOptions *use_options = nullptr);
   bool learn_random_skill(void);
   bool map_offset_coords_get(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
   bool map_treasure_available(void);
@@ -995,7 +995,7 @@ public:
   int is_able_to_use_helmet(void);
   int is_able_to_use_rings(void);
   int is_able_to_use_shield(void);
-  int is_able_to_use_wands(void);
+  int is_able_to_use_wands_or_staffs(void);
   int is_able_to_use_weapons(void);
   int is_able_to_walk_through_walls(void);
   int is_acid(void);
@@ -1594,7 +1594,7 @@ public:
   int unused_flag125(void);
   int unused_flag126(void);
   int unused_flag127(void);
-  int unused_flag128(void);
+  int is_flat(void);
   int is_target_radial(void);
   int unused_flag12(void);
   int is_staff(void);

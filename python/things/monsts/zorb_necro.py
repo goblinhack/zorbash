@@ -8,6 +8,8 @@ def on_death_of_a_follower(me, leader, x, y):
 
 
 def on_born(me, x, y):
+    my.thing_msg(me, "Hello mortal!")
+    my.thing_carry(me, "staff_descent")
     my.thing_carry(me, "staff_energy")
 
 
@@ -57,7 +59,7 @@ def tp_init(name, text_name):
     my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
     my.on_born_do(self, "me.on_born()")
     my.text_description(self, "A master of the darkest arts.")
-    my.is_carrier_of_treasure_class_b(self, True)
+    # my.is_carrier_of_treasure_class_b(self, True)
     my.is_monst_class_b(self, True)
     my.is_biome_dungeon(self, True)
     my.stat_str(self, 6)
@@ -65,7 +67,7 @@ def tp_init(name, text_name):
     my.stat_luck(self, 6)
     my.distance_avoid(self, 5)
     my.health_initial_dice(self, "2d3+4")
-    my.is_able_to_use_wands(self, True)
+    my.is_able_to_use_wands_or_staffs(self, True)
     my.on_tick_do(self, "me.on_tick()")
     my.is_intelligent(self, True)
     my.is_able_to_use_rings(self, True)

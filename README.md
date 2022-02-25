@@ -1,12 +1,10 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- descent +1 is too weak                                                                                                                       -->
-<!-- still mouse issue on inventory                                                                                                               -->
-<!-- radial effect option for wand of descent                                                                                                     -->
+<!-- you shall not pass for monst                                                                                                                 -->
 <!-- radial effect for AI too                                                                                                                     -->
 <!-- shovel cannot hit web                                                                                                                        -->
-<!-- stone cloak, once per level turn to stone? / pass through stone / uses health and degrades                                                    -->
-<!-- very broadsword                                                                                                                                   -->
+<!-- stone cloak, once per level turn to stone? / pass through stone / uses health and degrades                                                   -->
+<!-- very broadsword                                                                                                                              -->
 <!-- pike                                                                                                                                         -->
 <!-- cloak of jelly                                                                                                                               -->
 <!-- evil check for cross                                                                                                                         -->

@@ -210,7 +210,7 @@ private:
   int _is_able_to_use_helmet {};
   int _is_able_to_use_rings {};
   int _is_able_to_use_shield {};
-  int _is_able_to_use_wands {};
+  int _is_able_to_use_wands_or_staffs {};
   int _is_able_to_use_weapons {};
   int _is_able_to_walk_through_walls {};
   int _is_acid {};
@@ -525,7 +525,7 @@ private:
   int _unused_flag125 {};
   int _unused_flag126 {};
   int _unused_flag127 {};
-  int _unused_flag128 {};
+  int _is_flat {};
   int _is_target_radial {};
   int _unused_flag13 {};
   int _is_staff {};
@@ -1108,7 +1108,7 @@ public:
   int is_able_to_use_helmet(void) const { return _is_able_to_use_helmet; }
   int is_able_to_use_rings(void) const { return _is_able_to_use_rings; }
   int is_able_to_use_shield(void) const { return _is_able_to_use_shield; }
-  int is_able_to_use_wands(void) const { return _is_able_to_use_wands; }
+  int is_able_to_use_wands_or_staffs(void) const { return _is_able_to_use_wands_or_staffs; }
   int is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
   int is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
   int is_acid(void) const { return _is_acid; }
@@ -1421,7 +1421,7 @@ public:
   int unused_flag125(void) const { return _unused_flag125; }
   int unused_flag126(void) const { return _unused_flag126; }
   int unused_flag127(void) const { return _unused_flag127; }
-  int unused_flag128(void) const { return _unused_flag128; }
+  int is_flat(void) const { return _is_flat; }
   int is_target_radial(void) const { return _is_target_radial; }
   int unused_flag12(void) const { return _unused_flag12; }
   int is_staff(void) const { return _is_staff; }
@@ -1660,7 +1660,7 @@ public:
   void is_able_to_use_helmet_set(int v) { _is_able_to_use_helmet = v; }
   void is_able_to_use_rings_set(int v) { _is_able_to_use_rings = v; }
   void is_able_to_use_shield_set(int v) { _is_able_to_use_shield = v; }
-  void is_able_to_use_wands_set(int v) { _is_able_to_use_wands = v; }
+  void is_able_to_use_wands_or_staffs_set(int v) { _is_able_to_use_wands_or_staffs = v; }
   void is_able_to_use_weapons_set(int v) { _is_able_to_use_weapons = v; }
   void is_able_to_walk_through_walls_set(int v) { _is_able_to_walk_through_walls = v; }
   void is_acid_set(int v) { _is_acid = v; }
@@ -2059,7 +2059,7 @@ public:
   void unused_flag125_set(int v) { _unused_flag125 = v; }
   void unused_flag126_set(int v) { _unused_flag126 = v; }
   void unused_flag127_set(int v) { _unused_flag127 = v; }
-  void unused_flag128_set(int v) { _unused_flag128 = v; }
+  void is_flat_set(int v) { _is_flat = v; }
   void is_target_radial_set(int v) { _is_target_radial = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }
   void is_staff_set(int v) { _is_staff = v; }

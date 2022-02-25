@@ -31,12 +31,10 @@ const std::string Thing::damage_acid_dice_str(void)
 int Thing::damage_acid(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->damage_acid_dice().roll();
-
-  if (roll) {
-    return roll + enchant_get();
-  }
-  return roll;
+  auto roll    = tp()->damage_acid_dice().roll();
+  auto enchant = enchant_get();
+  dbg("Damage acid roll %d + enchant %d", roll, enchant);
+  return roll + enchant;
 }
 
 int Thing::on_owner_damage_acid(Thingp owner, Thingp hitter, int damage)

@@ -186,7 +186,7 @@ bool Thing::fire_at_and_choose_target(Thingp item, UseOptions *use_options)
 {
   TRACE_NO_INDENT();
   if (use_options && use_options->radial_effect && ! item->target_name_radial().empty()) {
-    return laser_fire_at(item->target_name_radial(), this, use_options);
+    return laser_fire_at(item, item->target_name_radial(), this, use_options);
   } else if (! item->target_name_laser().empty()) {
     return laser_choose_target(item);
   } else {
@@ -213,14 +213,24 @@ bool Thing::fire_at(Thingp target)
 
   Thingp curr_weapon = equip_get(MONST_EQUIP_WEAPON);
   if (! curr_weapon) {
-    return false;
+    if (is_able_to_use_wands_or_staffs()) {
+      Thingp best_wand = nullptr;
+      carried_wand_highest_value_for_target(&best_wand, target);
+      if (best_wand) {
+        curr_weapon = best_wand;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 
   //
   // If using a sword, allow the monst to use a wand without equipping
   //
   if (! curr_weapon->is_wand_or_staff()) {
-    if (is_able_to_use_wands()) {
+    if (is_able_to_use_wands_or_staffs()) {
       Thingp best_wand = nullptr;
       carried_wand_highest_value_for_target(&best_wand, target);
       if (best_wand) {

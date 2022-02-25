@@ -30,6 +30,17 @@ Thingp Thing::in_the_way(const point s, const point e, int x, int y)
       continue;
     }
 
+    //
+    // So missiles do not hit blood or maps
+    //
+    if (t->is_flat()) {
+      continue;
+    }
+
+    if (t->is_dead) {
+      continue;
+    }
+
     if (t->is_attackable_by_player() || t->is_attackable_by_monst()) {
       dbg("This is in the way: %s", t->to_short_string().c_str());
       return t;

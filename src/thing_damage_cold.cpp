@@ -31,12 +31,10 @@ const std::string Thing::damage_cold_dice_str(void)
 int Thing::damage_cold(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->damage_cold_dice().roll();
-
-  if (roll) {
-    return roll + enchant_get();
-  }
-  return roll;
+  auto roll    = tp()->damage_cold_dice().roll();
+  auto enchant = enchant_get();
+  dbg("Damage cold roll %d + enchant %d", roll, enchant);
+  return roll + enchant;
 }
 
 int Thing::on_owner_damage_cold(Thingp owner, Thingp hitter, int damage)

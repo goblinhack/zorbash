@@ -27,7 +27,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim)
     used(item, victim, true);
 
     if (! item->target_name_projectile().empty()) {
-      projectile_fire_at(item->target_name_projectile(), victim);
+      projectile_fire_at(item, item->target_name_projectile(), victim);
     } else {
       err("Unknown projectile: %s.", item->text_the().c_str());
       return false;
@@ -49,8 +49,13 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim)
   return is_target_select(item);
 }
 
-Thingp Thing::projectile_fire_at(const std::string &target_name_projectile, Thingp target)
+Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_projectile, Thingp target)
 {
+  //
+  // NOTE: the item can be null here if this is monster firing with its
+  // intrinsic ability. Or it might be non null if say a wand.
+  //
+
   TRACE_AND_INDENT();
   if (target_name_projectile == "") {
     die("No projectile name");
@@ -89,7 +94,7 @@ Thingp Thing::projectile_fire_at(const std::string &target_name_projectile, Thin
     game->change_state(Game::STATE_NORMAL);
   }
 
-  auto projectile = level->thing_new(target_name_projectile, target->curr_at, this);
+  auto projectile = level->thing_new(target_name_projectile, target->curr_at, item ? item : this);
   if (! projectile) {
     err("No projectile to fire");
     if (is_player()) {
@@ -115,8 +120,13 @@ Thingp Thing::projectile_fire_at(const std::string &target_name_projectile, Thin
   return projectile;
 }
 
-Thingp Thing::projectile_fire_at(const std::string &target_name_projectile, point at)
+Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_projectile, point at)
 {
+  //
+  // NOTE: the item can be null here if this is monster firing with its
+  // intrinsic ability. Or it might be non null if say a wand.
+  //
+
   Thingp best = nullptr;
   point  best_hit_at;
 
@@ -124,13 +134,13 @@ Thingp Thing::projectile_fire_at(const std::string &target_name_projectile, poin
   TRACE_AND_INDENT();
 
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
-    return projectile_fire_at(target_name_projectile, best);
+    return projectile_fire_at(item, target_name_projectile, best);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return projectile_fire_at(target_name_projectile, t);
+      return projectile_fire_at(item, target_name_projectile, t);
     }
   }
   FOR_ALL_THINGS_END()
