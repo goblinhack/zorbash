@@ -120,6 +120,7 @@ void Game::place_player(void)
         // level->thing_new("key_golden", point(x - 1, y + 2));
         // level->thing_new("key_penta", point(x, y + 12));
       }
+      level->thing_new("fire", point(x + 3, y));
 
       LOG("INF: Placed player");
 
