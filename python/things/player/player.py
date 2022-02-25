@@ -324,7 +324,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.is_temperature_change_sensitive(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
-    my.light_power(self, 10)
+    my.light_power(self, 1)
     my.long_text_description(self, "You. A most noble adventurer of no particular race, gender or creed. Devoid of fear and stout of heart. Likes kittens.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
