@@ -9,7 +9,6 @@ def on_death_of_a_follower(me, leader, x, y):
 
 def on_born(me, x, y):
     my.thing_msg(me, "Hello mortal!")
-    my.thing_carry(me, "staff_descent")
     my.thing_carry(me, "staff_energy")
 
 

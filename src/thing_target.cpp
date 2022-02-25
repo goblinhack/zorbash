@@ -489,8 +489,7 @@ bool Thing::victim_attack_best(int equip, point *at)
 
   if (item && item->collision_hit_180()) {
     std::vector< point > all_deltas = {
-        point(dx, dy),
-        point(-dx, -dy),
+        point(dx, dy), point(-dx, -dy), point(0, 0), // For spiderwebs
     };
 
     bool ret = false;
@@ -518,51 +517,35 @@ bool Thing::victim_attack_best(int equip, point *at)
 
     if ((dx == -1) && (dy == -1)) {
       all_deltas = {
-          point(-1, -1),
-          point(-1, 0),
-          point(0, -1),
+          point(-1, -1), point(-1, 0), point(0, -1), point(0, 0), // For spiderwebs
       };
     } else if ((dx == 1) && (dy == 1)) {
       all_deltas = {
-          point(1, 1),
-          point(1, 0),
-          point(0, 1),
+          point(1, 1), point(1, 0), point(0, 1), point(0, 0), // For spiderwebs
       };
     } else if ((dx == 1) && (dy == -1)) {
       all_deltas = {
-          point(1, -1),
-          point(1, 0),
-          point(0, -1),
+          point(1, -1), point(1, 0), point(0, -1), point(0, 0), // For spiderwebs
       };
     } else if ((dx == -1) && (dy == 1)) {
       all_deltas = {
-          point(-1, 1),
-          point(-1, 0),
-          point(0, 1),
+          point(-1, 1), point(-1, 0), point(0, 1), point(0, 0), // For spiderwebs
       };
     } else if ((dx == -1) && (dy == 0)) {
       all_deltas = {
-          point(-1, 0),
-          point(-1, -1),
-          point(-1, 1),
+          point(-1, 0), point(-1, -1), point(-1, 1), point(0, 0), // For spiderwebs
       };
     } else if ((dx == 1) && (dy == 0)) {
       all_deltas = {
-          point(1, 0),
-          point(1, -1),
-          point(1, 1),
+          point(1, 0), point(1, -1), point(1, 1), point(0, 0), // For spiderwebs
       };
     } else if ((dx == 0) && (dy == -1)) {
       all_deltas = {
-          point(0, -1),
-          point(-1, -1),
-          point(1, -1),
+          point(0, -1), point(-1, -1), point(1, -1), point(0, 0), // For spiderwebs
       };
     } else if ((dx == 0) && (dy == 1)) {
       all_deltas = {
-          point(0, 1),
-          point(-1, 1),
-          point(1, 1),
+          point(0, 1), point(-1, 1), point(1, 1), point(0, 0), // For spiderwebs
       };
     }
 

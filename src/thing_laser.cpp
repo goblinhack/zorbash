@@ -5,6 +5,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_random.hpp"
 #include "my_thing.hpp"
 
 bool Thing::laser_choose_target(Thingp item, Thingp victim)
@@ -28,10 +29,20 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
 
     if (! item->target_name_laser().empty()) {
       UseOptions use_options = {};
-      if (item->target_name_radial().empty()) {
-        use_options.radial_effect = true;
+      if (non_pcg_random_range(0, 100) < 10) {
+        if (! item->target_name_radial().empty()) {
+          //
+          // You shall not pass!
+          //
+          use_options.radial_effect = true;
+          victim                    = this;
+          laser_fire_at(item, item->target_name_radial(), victim, &use_options);
+        } else {
+          laser_fire_at(item, item->target_name_laser(), victim, &use_options);
+        }
+      } else {
+        laser_fire_at(item, item->target_name_laser(), victim, &use_options);
       }
-      laser_fire_at(item, item->target_name_laser(), victim, &use_options);
     } else {
       err("Unknown beam weapon: %s.", item->text_the().c_str());
       return false;

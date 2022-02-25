@@ -1,32 +1,25 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- you shall not pass for monst                                                                                                                 -->
-<!-- radial effect for AI too                                                                                                                     -->
-<!-- shovel cannot hit web                                                                                                                        -->
-<!-- stone cloak, once per level turn to stone? / pass through stone / uses health and degrades                                                   -->
-<!-- very broadsword                                                                                                                              -->
-<!-- pike                                                                                                                                         -->
-<!-- cloak of jelly                                                                                                                               -->
-<!-- evil check for cross                                                                                                                         -->
-<!-- boots of shoving / steadfastness                                                                                                             -->
-<!-- boots of jumping                                                                                                                             -->
-<!-- boots of hiking / const                                                                                                                      -->
-<!-- cloak of protection                                                                                                                          -->
-<!-- cloak of fire protection                                                                                                                     -->
-<!-- potion of paralysis should paralyse attackers too, so it is useful / vampire?                                                                -->
-<!-- have items that show thigns like +1 defense, -1 strength, +2 dex etc...                                                                      -->
-<!-- luck                                                                                                                                         -->
-<!-- luck bridge / lava / falling                                                                                                                 -->
-<!-- cursed weapon with bad luck / horseshoe / witches hat?                                                                                       -->
-<!-- luck trap                                                                                                                                    -->
-<!-- luck and enchanted stuff                                                                                                                     -->
-<!-- weight                                                                                                                                       -->
-<!-- runics on weapons, like vampirism, force, quietus, lightning                                                                                 -->
-<!-- ------                                                                                                                                       -->
+<!-- bridges have walls under them!                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - very broadsword                                                                                                                            -->
+<!-- - pike                                                                                                                                       -->
+<!-- - stone cloak, once per level turn to stone? / pass through stone / uses health and degrades                                                 -->
+<!-- - cloak of protection                                                                                                                        -->
+<!-- - cloak of fire protection                                                                                                                   -->
+<!-- - cloak of jelly                                                                                                                             -->
+<!-- - boots of shoving / steadfastness                                                                                                           -->
+<!-- - boots of jumping                                                                                                                           -->
+<!-- - boots of hiking / const                                                                                                                    -->
+<!-- - potion of paralysis should paralyse attackers too, so it is useful / vampire?                                                              -->
+<!-- - cursed weapon with bad luck / horseshoe / witches hat?                                                                                     -->
+<!-- - luck trap                                                                                                                                  -->
+<!-- - luck and enchanted stuff                                                                                                                   -->
+<!-- - weight                                                                                                                                     -->
+<!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
 <!-- - swamp                                                                                                                                      -->
 <!-- - swamp wort food                                                                                                                            -->
 <!-- - monst swamp blink toad, can teleport and launch a stream of goo                                                                            -->
@@ -77,7 +70,6 @@
 <!-- - moving floor                                                                                                                               -->
 <!-- - shove chocolate frog statue, get frog?                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
 <!--                                                                                                                                              -->
 <!-- Traps                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
@@ -227,7 +219,7 @@ Zorbash
 Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals and confront Zorbash to win.
 
 This is work in progress. My plan is to release a minimal viable game this year; 2022. Likely linux
-only with windows to follow later.  4 bosses plus final boss.
+only with windows to follow later.
 
 Comments and suggestions welcome.
 
