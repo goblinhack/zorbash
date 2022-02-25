@@ -11481,6 +11481,32 @@ def init_chasm():
         file="data/gfx/chasm2.tga", name="chasm2", width=16, height=512, arr=tiles
     )
 
+    tiles = [
+        "chasm_under_bridge.1",
+        "chasm_under_bridge.2",
+        "chasm_under_bridge.3",
+        "chasm_under_bridge.4",
+        "chasm_under_bridge.5",
+        "chasm_under_bridge.6",
+        "chasm_under_bridge.7",
+        "chasm_under_bridge.8",
+        "chasm_under_bridge.9",
+        "chasm_under_bridge.10",
+        "chasm_under_bridge.11",
+        "chasm_under_bridge.12",
+        "chasm_under_bridge.13",
+        "chasm_under_bridge.14",
+        "chasm_under_bridge.15",
+        "chasm_under_bridge.16",
+        "chasm_under_bridge.17",
+        "chasm_under_bridge.18",
+        "chasm_under_bridge.19",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/chasm_under_bridge.tga", name="chasm_under_bridge", width=16, height=512, arr=tiles
+    )
+
 
 @timeme
 def init_weapons_tiles():

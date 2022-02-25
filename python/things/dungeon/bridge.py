@@ -18,6 +18,8 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
     my.is_bridge(self, True)
+    my.health_initial_dice(self, "20+1d10")
+    my.is_burnable(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
@@ -47,7 +49,7 @@ def init():
             "bridge_x",
         ],
         bot3_tiles=[
-            "chasm1.1",
+            "chasm_under_bridge.1",
         ],
     )
     tp_init(
@@ -73,25 +75,25 @@ def init():
             "bridge_lr.18",
         ],
         bot3_tiles=[
-            "chasm1.1",
-            "chasm1.2",
-            "chasm1.3",
-            "chasm1.4",
-            "chasm1.5",
-            "chasm1.6",
-            "chasm1.7",
-            "chasm1.8",
-            "chasm1.9",
-            "chasm1.10",
-            "chasm1.11",
-            "chasm1.12",
-            "chasm1.13",
-            "chasm1.14",
-            "chasm1.15",
-            "chasm1.16",
-            "chasm1.17",
-            "chasm1.18",
-            "chasm1.19",
+            "chasm_under_bridge.1",
+            "chasm_under_bridge.2",
+            "chasm_under_bridge.3",
+            "chasm_under_bridge.4",
+            "chasm_under_bridge.5",
+            "chasm_under_bridge.6",
+            "chasm_under_bridge.7",
+            "chasm_under_bridge.8",
+            "chasm_under_bridge.9",
+            "chasm_under_bridge.10",
+            "chasm_under_bridge.11",
+            "chasm_under_bridge.12",
+            "chasm_under_bridge.13",
+            "chasm_under_bridge.14",
+            "chasm_under_bridge.15",
+            "chasm_under_bridge.16",
+            "chasm_under_bridge.17",
+            "chasm_under_bridge.18",
+            "chasm_under_bridge.19",
         ],
     )
     tp_init(
@@ -118,25 +120,25 @@ def init():
             "bridge_ud.19",
         ],
         bot3_tiles=[
-            "chasm1.1",
-            "chasm1.2",
-            "chasm1.3",
-            "chasm1.4",
-            "chasm1.5",
-            "chasm1.6",
-            "chasm1.7",
-            "chasm1.8",
-            "chasm1.9",
-            "chasm1.10",
-            "chasm1.11",
-            "chasm1.12",
-            "chasm1.13",
-            "chasm1.14",
-            "chasm1.15",
-            "chasm1.16",
-            "chasm1.17",
-            "chasm1.18",
-            "chasm1.19",
+            "chasm_under_bridge.1",
+            "chasm_under_bridge.2",
+            "chasm_under_bridge.3",
+            "chasm_under_bridge.4",
+            "chasm_under_bridge.5",
+            "chasm_under_bridge.6",
+            "chasm_under_bridge.7",
+            "chasm_under_bridge.8",
+            "chasm_under_bridge.9",
+            "chasm_under_bridge.10",
+            "chasm_under_bridge.11",
+            "chasm_under_bridge.12",
+            "chasm_under_bridge.13",
+            "chasm_under_bridge.14",
+            "chasm_under_bridge.15",
+            "chasm_under_bridge.16",
+            "chasm_under_bridge.17",
+            "chasm_under_bridge.18",
+            "chasm_under_bridge.19",
         ],
     )
 
