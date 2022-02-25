@@ -222,7 +222,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
       //
       // Radius needs to be the same as the check in carried_wand_highest_value_for_target
       //
-      if (dist >= radius_max) {
+      if (dist > radius_max) {
         continue;
       }
 

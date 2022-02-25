@@ -257,6 +257,11 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   on_born();
 
   //
+  // In case we carry something here, check for equipping
+  //
+  update();
+
+  //
   // Mainly for explosions
   //
   level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_born());

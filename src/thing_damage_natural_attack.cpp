@@ -31,12 +31,10 @@ const std::string Thing::damage_natural_dice_str(void)
 int Thing::damage_natural_attack(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->damage_natural_dice().roll();
-
-  if (roll) {
-    return roll + enchant_get();
-  }
-  return roll;
+  auto roll    = tp()->damage_natural_dice().roll();
+  auto enchant = enchant_get();
+  dbg("Damage natural roll %d + enchant %d", roll, enchant);
+  return roll + enchant;
 }
 
 int Thing::on_owner_damage_natural_attack(Thingp owner, Thingp hitter, int damage)

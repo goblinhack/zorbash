@@ -31,12 +31,10 @@ const std::string Thing::damage_crush_dice_str(void)
 int Thing::damage_crush(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->damage_crush_dice().roll();
-
-  if (roll) {
-    return roll + enchant_get();
-  }
-  return roll;
+  auto roll    = tp()->damage_crush_dice().roll();
+  auto enchant = enchant_get();
+  dbg("Damage crush roll %d + enchant %d", roll, enchant);
+  return roll + enchant;
 }
 
 int Thing::on_owner_damage_crush(Thingp owner, Thingp hitter, int damage)

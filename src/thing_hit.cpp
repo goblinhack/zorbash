@@ -1058,8 +1058,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     if (crit) {
       popup(string_sprintf("%%fg=red$It CRITS -%d", damage));
-    } else {
+    } else if (hitter->is_fire() || real_hitter->is_fire()) {
+      popup(string_sprintf("%%fg=orange$Burning -%d", damage));
+    } else if (hitter->is_monst() || real_hitter->is_monst()) {
       popup(string_sprintf("%%fg=orange$It hits -%d", damage));
+    } else {
+      popup(string_sprintf("%%fg=orange$-%d", damage));
     }
   } else if (is_monst()) {
     //

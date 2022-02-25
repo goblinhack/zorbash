@@ -1047,7 +1047,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag127() && (what == "unused_flag127")) {
     return true;
   }
-  if (unused_flag128() && (what == "unused_flag128")) {
+  if (is_flat() && (what == "is_flat")) {
     return true;
   }
   if (is_target_radial() && (what == "is_target_radial")) {
@@ -1308,7 +1308,7 @@ bool Thing::matches(const std::string &what)
   if (is_map_beast() && (what == "is_map_beast")) {
     return true;
   }
-  if (is_able_to_use_wands() && (what == "is_able_to_use_wands")) {
+  if (is_able_to_use_wands_or_staffs() && (what == "is_able_to_use_wands_or_staffs")) {
     return true;
   }
   if (is_aquatic() && (what == "is_aquatic")) {
@@ -2335,8 +2335,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag127") {
     return &Thing::unused_flag127;
   }
-  if (what == "unused_flag128") {
-    return &Thing::unused_flag128;
+  if (what == "is_flat") {
+    return &Thing::is_flat;
   }
   if (what == "is_target_radial") {
     return &Thing::is_target_radial;
@@ -2596,8 +2596,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_map_beast") {
     return &Thing::is_map_beast;
   }
-  if (what == "is_able_to_use_wands") {
-    return &Thing::is_able_to_use_wands;
+  if (what == "is_able_to_use_wands_or_staffs") {
+    return &Thing::is_able_to_use_wands_or_staffs;
   }
   if (what == "is_aquatic") {
     return &Thing::is_aquatic;

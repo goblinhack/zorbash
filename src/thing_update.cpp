@@ -332,7 +332,7 @@ void Thing::update(void)
     }
   }
 
-  if (is_able_to_use_wands()) {
+  if (is_able_to_use_wands_or_staffs()) {
     dbg("Is wand equipper");
     TRACE_AND_INDENT();
 
@@ -457,7 +457,7 @@ void Thing::update(void)
   //
   // Initial equp of wand
   //
-  if (is_able_to_use_wands()) {
+  if (is_able_to_use_wands_or_staffs()) {
     dbg("Wand equip");
     TRACE_AND_INDENT();
 

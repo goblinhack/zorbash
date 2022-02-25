@@ -81,7 +81,7 @@ PyObject *level_is_able_to_use_gauntlet_at(PyObject *obj, PyObject *args, PyObje
 PyObject *level_is_able_to_use_helmet_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_rings_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_shield_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_able_to_use_wands_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_use_wands_or_staffs_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_use_weapons_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_walk_through_walls_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -359,7 +359,7 @@ PyObject *level_unused_flag124_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag125_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag126_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag127_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag128_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_flat_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_target_radial_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag12_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_staff_at(PyObject *obj, PyObject *args, PyObject *keywds);

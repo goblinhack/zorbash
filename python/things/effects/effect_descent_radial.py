@@ -3,7 +3,8 @@ import tp
 
 
 def on_born(me, x, y):
-    my.level_spawn_using_items_radius_range(id=me, parent_id=me, victim_id=me, what="explosion_destroy_floor", min=1)
+    item = my.thing_immediate_owner_id_get(me)
+    my.level_spawn_using_items_radius_range(id=me, parent_id=item, victim_id=me, what="explosion_destroy_floor", min=1)
     my.thing_popup(me, "You shall not pass!")
     my.thing_dead(me, "used")
 

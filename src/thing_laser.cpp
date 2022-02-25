@@ -27,7 +27,11 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
     used(item, victim, true);
 
     if (! item->target_name_laser().empty()) {
-      laser_fire_at(item->target_name_laser(), victim);
+      UseOptions use_options = {};
+      if (item->target_name_radial().empty()) {
+        use_options.radial_effect = true;
+      }
+      laser_fire_at(item, item->target_name_laser(), victim, &use_options);
     } else {
       err("Unknown beam weapon: %s.", item->text_the().c_str());
       return false;
@@ -54,8 +58,13 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   return is_target_select(item);
 }
 
-bool Thing::laser_fire_at(const std::string &target_name_laser, Thingp target, UseOptions *use_options)
+bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thingp target, UseOptions *use_options)
 {
+  //
+  // NOTE: the item can be null here if this is monster firing with its
+  // intrinsic ability. Or it might be non null if say a staff.
+  //
+
   dbg("Laser fire %s at %s", target_name_laser.c_str(), target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -97,7 +106,7 @@ bool Thing::laser_fire_at(const std::string &target_name_laser, Thingp target, U
   if (use_options && use_options->radial_effect) {
     dbg("Firing radial effect");
 
-    auto laser = level->thing_new(target_name_laser, target->curr_at, this);
+    auto laser = level->thing_new(target_name_laser, target->curr_at, item ? item : this);
     if (! laser) {
       err("No laser to fire");
       if (is_player()) {
@@ -115,7 +124,7 @@ bool Thing::laser_fire_at(const std::string &target_name_laser, Thingp target, U
     auto collatoral_damage = in_the_way(curr_at, target->curr_at);
     if (collatoral_damage.size()) {
       for (auto target : collatoral_damage) {
-        auto laser = level->thing_new(target_name_laser, target->curr_at, this);
+        auto laser = level->thing_new(target_name_laser, target->curr_at, item ? item : this);
         if (! laser) {
           err("No laser to fire");
           if (is_player()) {
@@ -137,7 +146,7 @@ bool Thing::laser_fire_at(const std::string &target_name_laser, Thingp target, U
         on_use(laser, target);
       }
     } else {
-      auto laser = level->thing_new(target_name_laser, target->curr_at, this);
+      auto laser = level->thing_new(target_name_laser, target->curr_at, item ? item : this);
       if (! laser) {
         err("No laser to fire");
         if (is_player()) {
@@ -163,8 +172,13 @@ bool Thing::laser_fire_at(const std::string &target_name_laser, Thingp target, U
   return true;
 }
 
-bool Thing::laser_fire_at(const std::string &target_name_laser, point at, UseOptions *use_options)
+bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, point at, UseOptions *use_options)
 {
+  //
+  // NOTE: the item can be null here if this is monster firing with its
+  // intrinsic ability. Or it might be non null if say a staff.
+  //
+
   Thingp best = nullptr;
   point  best_hit_at;
 
@@ -172,13 +186,13 @@ bool Thing::laser_fire_at(const std::string &target_name_laser, point at, UseOpt
   TRACE_AND_INDENT();
 
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
-    return laser_fire_at(target_name_laser, best, use_options);
+    return laser_fire_at(item, target_name_laser, best, use_options);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return laser_fire_at(target_name_laser, t, use_options);
+      return laser_fire_at(item, target_name_laser, t, use_options);
     }
   }
   FOR_ALL_THINGS_END()

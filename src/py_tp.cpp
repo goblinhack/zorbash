@@ -877,10 +877,14 @@ PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, P
   //
   // This is intentionally 0,0 to use the items range unless overridden
   //
-  t->con("it");
-  parent->con("parent");
-  target->con("target");
-  if (t->spawn_radius_range(parent, target, std::string(what), radius_min, radius_max + parent->enchant_get())) {
+  if (! radius_max) {
+    if (t->blast_max_radius()) {
+      radius_max = t->blast_max_radius();
+    }
+  }
+
+  if (t->spawn_radius_range(parent, target, std::string(what), radius_min,
+                            radius_max)) { // + parent->enchant_get())) {
     Py_RETURN_TRUE;
   }
   Py_RETURN_FALSE;
@@ -1164,7 +1168,7 @@ TP_BODY_SET_INT(is_able_to_use_gauntlet)
 TP_BODY_SET_INT(is_able_to_use_helmet)
 TP_BODY_SET_INT(is_able_to_use_rings)
 TP_BODY_SET_INT(is_able_to_use_shield)
-TP_BODY_SET_INT(is_able_to_use_wands)
+TP_BODY_SET_INT(is_able_to_use_wands_or_staffs)
 TP_BODY_SET_INT(is_able_to_use_weapons)
 TP_BODY_SET_INT(is_able_to_walk_through_walls)
 TP_BODY_SET_INT(is_acid)
@@ -1482,7 +1486,7 @@ TP_BODY_SET_INT(unused_flag124)
 TP_BODY_SET_INT(unused_flag125)
 TP_BODY_SET_INT(unused_flag126)
 TP_BODY_SET_INT(unused_flag127)
-TP_BODY_SET_INT(unused_flag128)
+TP_BODY_SET_INT(is_flat)
 TP_BODY_SET_INT(is_target_radial)
 TP_BODY_SET_INT(unused_flag13)
 TP_BODY_SET_INT(unused_flag14)

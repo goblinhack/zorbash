@@ -2187,10 +2187,10 @@ int Thing::unused_flag127(void)
   return (tp()->unused_flag127());
 }
 
-int Thing::unused_flag128(void)
+int Thing::is_flat(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag128());
+  return (tp()->is_flat());
 }
 
 int Thing::is_target_radial(void)
@@ -2901,10 +2901,10 @@ int Thing::is_map_treasure(void)
   return (tp()->is_map_treasure());
 }
 
-int Thing::is_able_to_use_wands(void)
+int Thing::is_able_to_use_wands_or_staffs(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_use_wands());
+  return (tp()->is_able_to_use_wands_or_staffs());
 }
 
 int Thing::is_aquatic(void)
@@ -5128,76 +5128,6 @@ int Thing::distance_throw_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   auto n = (infop()->distance_throw++);
-  return n;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// enchant
-////////////////////////////////////////////////////////////////////////////
-int Thing::enchant_get(void)
-{
-  TRACE_NO_INDENT();
-  int v = 0;
-  if (maybe_infop()) {
-    v = infop()->enchant;
-  }
-  auto owner = immediate_owner();
-  if (owner && (owner != this)) {
-    v += owner->enchant_get();
-  }
-  if (is_minion()) {
-    auto mob = immediate_mob();
-    if (mob) {
-      auto mob = immediate_mob();
-      v += mob->enchant_get();
-    }
-  }
-  return v;
-}
-
-int Thing::enchant_set(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->enchant = v);
-  return n;
-}
-
-int Thing::enchant_decr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->enchant -= v);
-  if (infop()->enchant < 0) {
-    infop()->enchant = 0;
-  }
-  return n;
-}
-
-int Thing::enchant_incr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->enchant += v);
-  return n;
-}
-
-int Thing::enchant_decr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->enchant--);
-  if (infop()->enchant < 0) {
-    infop()->enchant = 0;
-  }
-  return n;
-}
-
-int Thing::enchant_incr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->enchant++);
   return n;
 }
 
@@ -7481,7 +7411,7 @@ int Thing::group_get(void)
   if (is_projectile()) {
     return THING_GROUP_PRIO_HIGH;
   }
-  if (is_player() || is_critical_to_level()) {
+  if (is_critical_to_level()) {
     return THING_GROUP_PRIO_MED;
   }
   if (is_tmp_thing()) {

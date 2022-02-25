@@ -139,7 +139,7 @@ PyObject *thing_is_able_to_use_gauntlet(PyObject *obj, PyObject *args, PyObject 
 PyObject *thing_is_able_to_use_helmet(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_rings(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_shield(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_use_wands(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_use_wands_or_staffs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_walk_through_walls(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_acid(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -494,7 +494,7 @@ PyObject *thing_unused_flag124(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag125(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag126(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag127(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag128(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_flat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_target_radial(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag13(PyObject *obj, PyObject *args, PyObject *keywds);

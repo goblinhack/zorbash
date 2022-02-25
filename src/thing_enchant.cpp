@@ -149,3 +149,70 @@ bool Thing::enchant_random_item_with_stone(void)
   dbg("Enchant this randomly: %s", chosen->to_string().c_str());
   return enchant_with_stone(chosen);
 }
+
+int Thing::enchant_get(void)
+{
+  TRACE_NO_INDENT();
+  int v = 0;
+  if (maybe_infop()) {
+    v = infop()->enchant;
+  }
+  auto owner = immediate_owner();
+  if (owner && (owner != this)) {
+    v += owner->enchant_get();
+  }
+  if (is_minion()) {
+    auto mob = immediate_mob();
+    if (mob) {
+      auto mob = immediate_mob();
+      v += mob->enchant_get();
+    }
+  }
+  return v;
+}
+
+int Thing::enchant_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->enchant = v);
+  return n;
+}
+
+int Thing::enchant_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->enchant -= v);
+  if (infop()->enchant < 0) {
+    infop()->enchant = 0;
+  }
+  return n;
+}
+
+int Thing::enchant_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->enchant += v);
+  return n;
+}
+
+int Thing::enchant_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->enchant--);
+  if (infop()->enchant < 0) {
+    infop()->enchant = 0;
+  }
+  return n;
+}
+
+int Thing::enchant_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->enchant++);
+  return n;
+}

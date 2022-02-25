@@ -24,7 +24,7 @@ def tp_init(name, text_name):
     my.is_biome_dungeon(self, True)
     my.distance_avoid(self, 5)
     my.health_initial_dice(self, "2d4+4")
-    my.is_able_to_use_wands(self, True)
+    my.is_able_to_use_wands_or_staffs(self, True)
     my.is_intelligent(self, True)
     my.is_able_to_use_rings(self, True)
 

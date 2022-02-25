@@ -31,12 +31,10 @@ const std::string Thing::damage_lightning_dice_str(void)
 int Thing::damage_lightning(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->damage_lightning_dice().roll();
-
-  if (roll) {
-    return roll + enchant_get();
-  }
-  return roll;
+  auto roll    = tp()->damage_lightning_dice().roll();
+  auto enchant = enchant_get();
+  dbg("Damage lightning roll %d + enchant %d", roll, enchant);
+  return roll + enchant;
 }
 
 int Thing::on_owner_damage_lightning(Thingp owner, Thingp hitter, int damage)

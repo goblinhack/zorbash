@@ -13,6 +13,7 @@ def tp_init(name, text_name):
     my.is_able_to_fall(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_flat(self, True)
     my.is_interesting(self, True)
     my.is_red_blood(self, True)
     my.is_removeable_if_out_of_slots(self, True)

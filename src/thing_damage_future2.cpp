@@ -31,12 +31,10 @@ const std::string Thing::damage_future2_dice_str(void)
 int Thing::damage_future2(void)
 {
   TRACE_NO_INDENT();
-  auto roll = tp()->damage_future2_dice().roll();
-
-  if (roll) {
-    return roll + enchant_get();
-  }
-  return roll;
+  auto roll    = tp()->damage_future2_dice().roll();
+  auto enchant = enchant_get();
+  dbg("Damage future2 roll %d + enchant %d", roll, enchant);
+  return roll + enchant;
 }
 
 int Thing::on_owner_damage_future2(Thingp owner, Thingp hitter, int damage)
