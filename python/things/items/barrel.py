@@ -3,7 +3,7 @@ import tp
 
 
 def explode(me, x, y):
-    if my.thing_is_dead_or_dying(me):
+    if my.thing_is_dead(me):
         return
 
     my.thing_dead(me, "exploded")

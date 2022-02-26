@@ -353,18 +353,6 @@ int Thing::damage_received_doubled_from_water(void)
   return (tp()->damage_received_doubled_from_water());
 }
 
-int Thing::enchant_level(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->enchant_level());
-}
-
-int Thing::enchant_max(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->enchant_max());
-}
-
 int Thing::initial_charge_count(void)
 {
   TRACE_NO_INDENT();
@@ -853,6 +841,12 @@ int Thing::is_dead_or_dying(void)
 {
   TRACE_NO_INDENT();
   return is_dead || is_dying;
+}
+
+int Thing::is_dead_check(void)
+{
+  TRACE_NO_INDENT();
+  return is_dead;
 }
 
 int Thing::is_debug_path(void)
@@ -4021,176 +4015,55 @@ int Thing::keys_incr(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// enchant_max
+// movement_remaining
 ////////////////////////////////////////////////////////////////////////////
-int Thing::enchant_max_current_get(void)
+int Thing::movement_remaining(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->enchant_max);
+    return (infop()->movement_remaining);
   } else {
     return 0;
   }
 }
 
-int Thing::enchant_max_current_set(int v)
+int Thing::movement_remaining_set(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
   new_infop();
-  auto n = (infop()->enchant_max = v);
+  auto n = (infop()->movement_remaining = v);
   return n;
 }
 
-int Thing::enchant_max_current_decr(int v)
+int Thing::movement_remaining_decr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
   new_infop();
-  auto n = (infop()->enchant_max -= v);
+  auto n = (infop()->movement_remaining -= v);
   return n;
 }
 
-int Thing::enchant_max_current_incr(int v)
+int Thing::movement_remaining_incr(int v)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
   new_infop();
-  auto n = (infop()->enchant_max += v);
+  auto n = (infop()->movement_remaining += v);
   return n;
 }
 
-int Thing::enchant_max_current_decr(void)
+int Thing::movement_remaining_decr(void)
 {
   TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
   new_infop();
-  auto n = (infop()->enchant_max--);
+  auto n = (infop()->movement_remaining--);
   return n;
 }
 
-int Thing::enchant_max_current_incr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->enchant_max++);
-  return n;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// tick_resurrect_when
-////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::tick_resurrect_when(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->tick_resurrect_when);
-  } else {
-    return 0;
-  }
-}
-
-uint32_t Thing::tick_resurrect_when_set(int v)
+int Thing::movement_remaining_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto n = (infop()->tick_resurrect_when = v);
-  return n;
-}
-
-uint32_t Thing::tick_resurrect_when_decr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->tick_resurrect_when -= v);
-  return n;
-}
-
-uint32_t Thing::tick_resurrect_when_incr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->tick_resurrect_when += v);
-  return n;
-}
-
-uint32_t Thing::tick_resurrect_when_decr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->tick_resurrect_when--);
-  return n;
-}
-
-uint32_t Thing::tick_resurrect_when_incr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->tick_resurrect_when++);
-  return n;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// movement_left
-////////////////////////////////////////////////////////////////////////////
-int Thing::movement_left(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->movement_left);
-  } else {
-    return 0;
-  }
-}
-
-int Thing::movement_left_set(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->movement_left = v);
-  return n;
-}
-
-int Thing::movement_left_decr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->movement_left -= v);
-  return n;
-}
-
-int Thing::movement_left_incr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->movement_left += v);
-  return n;
-}
-
-int Thing::movement_left_decr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->movement_left--);
-  return n;
-}
-
-int Thing::movement_left_incr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  auto n = (infop()->movement_left++);
+  auto n = (infop()->movement_remaining++);
   return n;
 }
 

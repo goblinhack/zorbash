@@ -656,6 +656,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_on_end_of_anim),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_on_falling),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying),
+    MY_ADD_PYTHON_FUNCTION(thing_is_dead),
     MY_ADD_PYTHON_FUNCTION(thing_is_dead_or_dying_on_shove),
     MY_ADD_PYTHON_FUNCTION(thing_is_debuff),
     MY_ADD_PYTHON_FUNCTION(thing_is_debug_path),

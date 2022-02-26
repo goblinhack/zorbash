@@ -38,7 +38,7 @@ def on_use(owner, item, target, x, y):
 
 
 def explode(me, x, y):
-    if my.thing_is_dead_or_dying(me):
+    if my.thing_is_dead(me):
         return
 
     my.thing_msg(me, "The potion of health explodes.")

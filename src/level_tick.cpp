@@ -187,12 +187,12 @@ bool Level::tick(void)
       // Give things a bit of time to move
       //
       if (t->move_speed()) {
-        t->movement_left_incr(t->move_speed());
+        t->movement_remaining_incr(t->move_speed());
       } else {
         //
         // Things that do not move need to tick too.
         //
-        t->movement_left_incr(1);
+        t->movement_remaining_incr(1);
       }
 
       //
@@ -207,7 +207,7 @@ bool Level::tick(void)
 
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
   {
-    int remaining = t->movement_left();
+    int remaining = t->movement_remaining();
     if (remaining <= 0) {
       continue;
     }
@@ -222,9 +222,9 @@ bool Level::tick(void)
       } else {
         remaining -= 100;
       }
-      t->movement_left_set(remaining);
+      t->movement_remaining_set(remaining);
     } else {
-      t->movement_left_set(0);
+      t->movement_remaining_set(0);
     }
 
     uint32_t tick_begin_ms = time_get_time_ms();
@@ -605,7 +605,7 @@ bool Level::tick(void)
   bool work_to_do = false;
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
   {
-    if (t->movement_left() > 0) {
+    if (t->movement_remaining() > 0) {
       work_to_do = true;
     }
     t->is_waiting = false;

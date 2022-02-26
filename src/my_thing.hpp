@@ -1072,6 +1072,7 @@ public:
   int is_dead_on_falling(void);
   int is_dead_on_shove(void);
   int is_dead_or_dying(void);
+  int is_dead_check(void);
   int is_debuff(void);
   int is_debug_path(void);
   int is_debug_type(void);
@@ -1847,12 +1848,12 @@ public:
   uint32_t tick_resurrect_when_incr(void);
   uint32_t tick_resurrect_when_set(int);
 
-  int movement_left_decr(int);
-  int movement_left_decr(void);
-  int movement_left(void);
-  int movement_left_incr(int);
-  int movement_left_incr(void);
-  int movement_left_set(int);
+  int movement_remaining_decr(int);
+  int movement_remaining_decr(void);
+  int movement_remaining(void);
+  int movement_remaining_incr(int);
+  int movement_remaining_incr(void);
+  int movement_remaining_set(int);
 
   uint8_t blit_begin_reflection_submerged(void);
   uint8_t blit_begin_submerged(void);

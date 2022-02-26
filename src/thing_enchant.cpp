@@ -216,3 +216,83 @@ int Thing::enchant_incr(void)
   auto n = (infop()->enchant++);
   return n;
 }
+
+////////////////////////////////////////////////////////////////////////////
+// enchant_max
+////////////////////////////////////////////////////////////////////////////
+int Thing::enchant_max_current_get(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->enchant_max);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::enchant_max_current_set(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->enchant_max = v);
+  return n;
+}
+
+int Thing::enchant_max_current_decr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->enchant_max -= v);
+  return n;
+}
+
+int Thing::enchant_max_current_incr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->enchant_max += v);
+  return n;
+}
+
+int Thing::enchant_max_current_decr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->enchant_max--);
+  return n;
+}
+
+int Thing::enchant_max_current_incr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->request_update_rightbar = true;
+  }
+  new_infop();
+  auto n = (infop()->enchant_max++);
+  return n;
+}
+
+int Thing::enchant_level(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->enchant_level());
+}
+
+int Thing::enchant_max(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->enchant_max());
+}

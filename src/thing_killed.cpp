@@ -98,11 +98,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     destroy_spawned(defeater);
   }
 
-  //
-  // Set is_dead after the log message or we print it as dead
-  //
   auto The_no_dying = text_The_no_dying();
-  is_dead           = true;
 
   //
   // Resurrect unless say this was a minion and its mob died
@@ -374,6 +370,11 @@ void Thing::killed(Thingp defeater, const char *reason)
     }
   }
 
+  //
+  // Set is_dead after the log message or we print it as dead.
+  // Also make sure to set this after the on_death callback.
+  //
+  is_dead  = true;
   is_dying = false;
 
   level_pop();

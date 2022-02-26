@@ -30,7 +30,7 @@ def on_final_use(owner, item, target, x, y):
 
 
 def explode(me, x, y):
-    if my.thing_is_dead_or_dying(me):
+    if my.thing_is_dead(me):
         return
 
     my.thing_msg(me, "The staff of energy explodes in a blaze of power.")
