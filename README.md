@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - very broadsword                                                                                                                            -->
 <!-- - pike                                                                                                                                       -->
 <!-- - stone cloak, once per level turn to stone? / pass through stone / uses health and degrades                                                 -->
 <!-- - cloak of protection                                                                                                                        -->
