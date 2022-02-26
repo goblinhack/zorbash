@@ -1617,6 +1617,11 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     printed = true;
   }
 
+  if (t->collision_hit_two_tiles_ahead()) {
+    w->log("Item hits the two tiles ahead.", true);
+    printed = true;
+  }
+
   if (t->collision_hit_adj()) {
     w->log("Item hits adjacent tiles.", true);
     printed = true;

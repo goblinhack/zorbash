@@ -1044,7 +1044,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag126() && (what == "unused_flag126")) {
     return true;
   }
-  if (collision_hit_two_ahead() && (what == "collision_hit_two_ahead")) {
+  if (collision_hit_two_tiles_ahead() && (what == "collision_hit_two_tiles_ahead")) {
     return true;
   }
   if (is_flat() && (what == "is_flat")) {
@@ -2332,8 +2332,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag126") {
     return &Thing::unused_flag126;
   }
-  if (what == "collision_hit_two_ahead") {
-    return &Thing::collision_hit_two_ahead;
+  if (what == "collision_hit_two_tiles_ahead") {
+    return &Thing::collision_hit_two_tiles_ahead;
   }
   if (what == "is_flat") {
     return &Thing::is_flat;

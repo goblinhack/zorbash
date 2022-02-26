@@ -2181,10 +2181,10 @@ int Thing::unused_flag126(void)
   return (tp()->unused_flag126());
 }
 
-int Thing::collision_hit_two_ahead(void)
+int Thing::collision_hit_two_tiles_ahead(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->collision_hit_two_ahead());
+  return (tp()->collision_hit_two_tiles_ahead());
 }
 
 int Thing::is_flat(void)
