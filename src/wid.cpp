@@ -9,6 +9,7 @@
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_math.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_sdl.hpp"
@@ -416,14 +417,15 @@ void *wid_get_void_context(Widp w)
   return (w->void_context);
 }
 
-void wid_set_thing_id_context(Widp w, ThingId thing_id_context)
+void wid_set_thing_id_context(Widp w, Thingp t)
 {
   TRACE_AND_INDENT();
   if (! w) {
     ERR("NULL pointer");
     return;
   }
-  w->thing_id_context = thing_id_context;
+  w->thing_id_context = t->id;
+  t->itemsp()->wid    = w;
 }
 
 ThingId wid_get_thing_id_context(Widp w)
@@ -436,14 +438,15 @@ ThingId wid_get_thing_id_context(Widp w)
   return (w->thing_id_context);
 }
 
-void wid_set_thing_id2_context(Widp w, ThingId thing_id_context)
+void wid_set_thing_id2_context(Widp w, Thingp t)
 {
   TRACE_AND_INDENT();
   if (! w) {
     ERR("NULL pointer");
     return;
   }
-  w->thing_id2_context = thing_id_context;
+  w->thing_id2_context = t->id;
+  t->itemsp()->wid     = w;
 }
 
 ThingId wid_get_thing_id2_context(Widp w)

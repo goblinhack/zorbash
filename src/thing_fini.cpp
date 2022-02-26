@@ -143,13 +143,27 @@ void Thing::destroy(void)
 
   game->world.free_thing_id(this);
 
-  if (maybe_infop()) {
-    oldptr(MTYPE_INFOP, maybe_infop());
+  auto infop = maybe_infop();
+  if (infop) {
+    oldptr(MTYPE_INFOP, infop);
     delete _infop;
   }
 
-  if (maybe_itemsp()) {
-    oldptr(MTYPE_ITEMP, maybe_itemsp());
+  //
+  // Remove any thing references in widgets; due to say being in transit.
+  //
+  auto items = maybe_itemsp();
+  if (items) {
+    if (items->wid) {
+      if (items->wid->thing_id_context == id) {
+        items->wid->thing_id_context = NoThingId;
+      }
+      if (items->wid->thing_id2_context == id) {
+        items->wid->thing_id2_context = NoThingId;
+      }
+    }
+
+    oldptr(MTYPE_ITEMP, items);
     delete _itemsp;
   }
 
