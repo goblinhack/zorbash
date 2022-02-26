@@ -633,6 +633,14 @@ bool Thing::equip_use(bool forced, int equip, point *at)
       use_anim                 = level->thing_new(used_as, *at);
       use_anim->dir            = dir;
       use_anim->is_facing_left = is_facing_left;
+
+      //
+      // Slight offset for weapon swing
+      //
+      fpoint offset = make_fpoint(dir_to_direction());
+      offset /= 2;
+      fpoint i = use_anim->interpolated_at_get();
+      use_anim->interpolated_at_set(i + offset);
     } else {
       use_anim = level->thing_new(used_as, this);
     }

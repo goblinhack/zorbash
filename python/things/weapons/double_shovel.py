@@ -54,10 +54,10 @@ def tp_init(name, text_name, short_text_name):
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_RARE)
     my.stamina_on_use(self, 3)
+    my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy diggy means of justice.")
     my.text_enchant(self, "+1 DMG, +1 ATT")
-    my.stat_att_mod(self, 1)  # means +1 per enchant
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 

@@ -17,8 +17,8 @@ def tp_init(name, text_name, short_text_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
-    my.crit_chance_d10000(self, 1000)
     my.collision_hit_two_tiles_ahead(self, True)
+    my.crit_chance_d10000(self, 1000)
     my.damage_melee_chance_d1000(self, 1000)
     my.damage_melee_dice(self, "1d10")
     my.equip_carry_anim(self, "pike_carry")
@@ -53,8 +53,8 @@ def tp_init(name, text_name, short_text_name):
     my.noise_on_moving_or_being_carried(self, 40)
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)
-    my.stat_att_mod(self, 1)  # means +1 per enchant
     my.stamina_on_use(self, 3)
+    my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy skewering means of justice.")
     my.text_enchant(self, "+1 DMG, +1 ATT")
