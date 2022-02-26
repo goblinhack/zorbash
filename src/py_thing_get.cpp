@@ -239,6 +239,7 @@ THING_BODY_GET_BOOL(thing_is_cursor_path_hazard_for_player, is_cursor_path_hazar
 THING_BODY_GET_BOOL(thing_is_cursor_path, is_cursor_path)
 THING_BODY_GET_BOOL(thing_is_dead_on_end_of_anim, is_dead_on_end_of_anim)
 THING_BODY_GET_BOOL(thing_is_dead_or_dying, is_dead_or_dying)
+THING_BODY_GET_BOOL(thing_is_dead, is_dead_check)
 THING_BODY_GET_BOOL(thing_is_dead_or_dying_on_shove, is_dead_on_shove)
 THING_BODY_GET_BOOL(thing_is_debuff, is_debuff)
 THING_BODY_GET_BOOL(thing_is_debug_path, is_debug_path)

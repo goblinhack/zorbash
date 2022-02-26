@@ -14,7 +14,7 @@ def on_idle(me, x, y):
 
 
 def explode(me, x, y):
-    if my.thing_is_dead_or_dying(me):
+    if my.thing_is_dead(me):
         return
 
     my.thing_msg(me, "The staff of lightning explodes in a flash.")

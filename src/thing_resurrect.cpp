@@ -5,6 +5,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
@@ -99,4 +100,57 @@ void Thing::resurrect_tick(void)
   FOR_ALL_THINGS_END()
 
   resurrect();
+}
+
+////////////////////////////////////////////////////////////////////////////
+// tick_resurrect_when
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::tick_resurrect_when(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->tick_resurrect_when);
+  } else {
+    return 0;
+  }
+}
+
+uint32_t Thing::tick_resurrect_when_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->tick_resurrect_when = v);
+  return n;
+}
+
+uint32_t Thing::tick_resurrect_when_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->tick_resurrect_when -= v);
+  return n;
+}
+
+uint32_t Thing::tick_resurrect_when_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->tick_resurrect_when += v);
+  return n;
+}
+
+uint32_t Thing::tick_resurrect_when_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->tick_resurrect_when--);
+  return n;
+}
+
+uint32_t Thing::tick_resurrect_when_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  auto n = (infop()->tick_resurrect_when++);
+  return n;
 }
