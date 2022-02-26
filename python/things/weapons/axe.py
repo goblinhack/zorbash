@@ -16,7 +16,6 @@ def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
         my.thing_msg(me, "The axe glows.")
-    my.thing_stat_att_mod_incr(me, 1)
 
 
 def init_weapon(name, text_name, short_text_name):
@@ -69,7 +68,7 @@ def init_weapon(name, text_name, short_text_name):
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
-    my.tile(self, tile=name + ".1")
+    my.tile(self, tile=name)
 
     my.tp_update(self)
 

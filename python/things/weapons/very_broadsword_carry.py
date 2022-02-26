@@ -9,12 +9,11 @@ def tp_init(name):
     my.gfx_bounce_on_move(self, True)
     my.gfx_equip_carry_anim(self, True)
     my.gfx_short_shadow_caster(self, True)
-    my.gfx_show_outlined(self, True)
     my.is_gfx_anim_synced_with_owner(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy rusty pointy mechanism of justice.")
+    my.text_description(self, "Thy shining pointy mechanism of justice.")
     my.z_depth(self, my.MAP_DEPTH_EQUIP)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
@@ -31,7 +30,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="sword1_rusty_carry")
+    tp_init(name="very_broadsword_carry")
 
 
 init()

@@ -42,29 +42,34 @@ void Game::place_player(void)
       }
       auto t = level->thing_new("player2", point(x, y));
       if (0) {
-        auto W = level->thing_new("staff_descent", point(x, y));
-        t->carry(W);
-        t->enchant_without_stone(W);
-      }
-      if (1) {
-        auto w3 = level->thing_new("double_shovel", point(x, y));
-        t->carry(w3);
-      }
-      if (1) {
-        auto w3 = level->thing_new("sword1_wood", point(x, y));
-        t->carry(w3);
-      }
-      if (1) {
-        auto w3 = level->thing_new("axe", point(x, y));
-        t->carry(w3);
-      }
-      if (1) {
-        auto W = level->thing_new("torch", point(x, y));
-        t->carry(W);
+        auto w = level->thing_new("staff_descent", point(x, y));
+        t->carry(w);
+        t->enchant_without_stone(w);
       }
       if (0) {
-        auto W = level->thing_new("torch", point(x, y));
-        t->carry(W);
+        auto w = level->thing_new("double_shovel", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
+        auto w = level->thing_new("very_broadsword", point(x, y));
+        t->carry(w);
+        t->enchant_without_stone(w);
+      }
+      if (1) {
+        auto w = level->thing_new("sword_wood", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
+        auto w = level->thing_new("axe", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
+        auto w = level->thing_new("torch", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
+        auto w = level->thing_new("torch", point(x, y));
+        t->carry(w);
       }
       {
         auto b = level->thing_new("bag_s", point(x, y));
@@ -74,24 +79,24 @@ void Game::place_player(void)
       IF_DEBUG2
       {
         {
-          auto W = level->thing_new("staff_energy", point(x, y));
-          t->carry(W);
-          t->enchant_without_stone(W);
+          auto w = level->thing_new("staff_energy", point(x, y));
+          t->carry(w);
+          t->enchant_without_stone(w);
         }
         {
-          auto W = level->thing_new("wand_fire", point(x, y));
-          t->carry(W);
-          t->enchant_without_stone(W);
+          auto w = level->thing_new("wand_fire", point(x, y));
+          t->carry(w);
+          t->enchant_without_stone(w);
         }
         {
-          auto W = level->thing_new("wand_cold", point(x, y));
-          t->carry(W);
-          t->enchant_without_stone(W);
+          auto w = level->thing_new("wand_cold", point(x, y));
+          t->carry(w);
+          t->enchant_without_stone(w);
         }
         {
-          auto W = level->thing_new("staff_descent", point(x, y));
-          t->carry(W);
-          t->enchant_without_stone(W);
+          auto w = level->thing_new("staff_descent", point(x, y));
+          t->carry(w);
+          t->enchant_without_stone(w);
         }
         // level->thing_new("belcher", point(x + 3, y));
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
