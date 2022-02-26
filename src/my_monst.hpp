@@ -268,6 +268,11 @@ public:
   // Things not worth saving
   //
   point preferred_bag_position {-1, -1};
+
+  //
+  // If in transit, this is the wid owning me
+  //
+  Widp wid {};
 } ThingItem;
 std::ostream &operator<<(std::ostream &out, Bits< const ThingItemsp & > const my);
 std::istream &operator>>(std::istream &in, Bits< ThingItemsp & > my);
