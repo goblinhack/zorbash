@@ -59,7 +59,7 @@ def tp_init(name, text_name, short_text_name):
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
-    my.tile(self, tile=name + ".1")
+    my.tile(self, tile=name)
 
     my.tp_update(self)
 

@@ -11,20 +11,29 @@ def on_swing(owner, item, x, y):
     my.thing_damage_current_set(owner, damage + enchant)
 
 
+def on_enchant(me, x, y):
+    owner = my.thing_top_owner_id_get(me)
+    if my.thing_is_player(owner):
+        my.thing_msg(me, "The broadsword seems even wider somehow.")
+
+
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.break_chance_d10000(self, 10)
+    my.break_chance_d10000(self, 1)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
+    my.collision_hit_adj(self, True)
     my.collision_hit_priority(self, 6)
+    my.crit_chance_d10000(self, 500)
     my.damage_melee_chance_d1000(self, 1000)
-    my.damage_melee_dice(self, "1d8")
-    my.equip_carry_anim(self, "sword1_carry")
+    my.damage_melee_dice(self, "1d12")
+    my.equip_carry_anim(self, "very_broadsword_carry")
     my.gfx_animated_can_hflip(self, True)
     my.gfx_animated(self, True)
-    my.gfx_anim_use(self, "sword1_swing")
+    my.gfx_anim_use(self, "very_broadsword_swing")
+    my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)
-    my.gold_value_dice(self, "100")
+    my.gold_value_dice(self, "350")
     my.is_able_to_fall(self, True)
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
@@ -32,27 +41,29 @@ def tp_init(name, text_name, short_text_name):
     my.is_collectable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
+    my.on_enchant_do(self, "me.on_enchant()")
     my.is_enchantable(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_metal(self, True)
     my.is_moveable(self, True)
-    my.is_sword(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
-    my.is_weapon_class_a(self, True)
+    my.is_weapon_class_c(self, True)
     my.is_weapon(self, True)
-    my.item_height(self, 5)
-    my.item_width(self, 5)
-    my.long_text_description(self, "A gleaming entry-level short sword. Ideal for beginners or the occasional weekend dungeoneer.")
-    my.noise_on_moving_or_being_carried(self, 10)
+    my.is_wooden(self, True)
+    my.item_height(self, 8)
+    my.stat_att_mod(self, 1)  # means +1 per enchant
+    my.item_width(self, 8)
+    my.long_text_description(self, "A broardsword plus some. The girth of this extreme weapon allows you to additionally attack adjacent targets to your intended target. Also useful for chopping tomatoes.")
+    my.noise_on_moving_or_being_carried(self, 40)
     my.on_swing_do(self, "me.on_swing()")
-    my.rarity(self, my.RARITY_COMMON)
-    my.stamina_on_use(self, 1)
+    my.rarity(self, my.RARITY_UNCOMMON)
+    my.stamina_on_use(self, 3)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy pointy means of justice.")
-    my.text_enchant(self, "+1 DMG")
+    my.text_description(self, "Thy decapitaty means of justice.")
+    my.text_enchant(self, "+1 DMG, +1 ATT")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
@@ -62,7 +73,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="sword1", text_name="short sword", short_text_name="short sword")
+    tp_init(name="very_broadsword", text_name="very broadsword", short_text_name="very broadsword")
 
 
 init()
