@@ -104,9 +104,8 @@ void Game::place_player(void)
         }
         // level->thing_new("belcher", point(x + 3, y));
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
-        level->thing_new("rat_giant", point(x + 1, y - 1));
         level->thing_new("rat_giant", point(x + 1, y));
-        level->thing_new("rat_giant", point(x + 1, y + 1));
+        level->thing_new("rat_giant", point(x + 2, y));
         // level->thing_new("zorb_necro", point(x + 2, y));
         level->thing_new("gargoyle_static", point(x + 2, y - 2));
         // level->thing_new("lava", point(x, y));
