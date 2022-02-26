@@ -19,7 +19,7 @@ def tp_init(name, text_name, short_text_name):
     my.collision_hit_priority(self, 6)
     my.crit_chance_d10000(self, 200)
     my.damage_melee_chance_d1000(self, 1000)
-    my.damage_melee_dice(self, "1d12")
+    my.damage_melee_dice(self, "1d8")
     my.equip_carry_anim(self, "shovel_carry")
     my.gfx_animated_can_hflip(self, True)
     my.gfx_animated(self, True)

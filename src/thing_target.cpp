@@ -303,6 +303,9 @@ bool Thing::victim_attack_best_at(int equip, point *at, int attempt, bool &victi
     auto d = dir_to_direction();
     dx     = d.x;
     dy     = d.y;
+  } else if (at) {
+    dx = 0;
+    dy = 0;
   } else {
     equip_use_offset_get(&dx, &dy, equip);
   }
@@ -554,6 +557,7 @@ bool Thing::victim_attack_best(int equip, point *at)
       for (const auto &d : all_deltas) {
         point at = curr_at + d;
         dbg("Target-attack-best: Try to attack 180 adj with equipped item at %s", at.to_string().c_str());
+        dbg("TARG %d,%d %d,%d", d.x, d.y, at.x, at.y);
         TRACE_AND_INDENT();
         if (victim_attack_best_at(equip, &at, attempt, victim_attacked, victim_overlaps)) {
           ret = true;
