@@ -307,7 +307,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   }
 
   if (item->is_torch()) {
-    update_light_power();
+    light_power_update();
   }
 
   return true;

@@ -588,4 +588,8 @@ void Thing::update(void)
     TRACE_AND_INDENT();
     check_all_carried_items_are_owned();
   }
+
+  if (is_player()) {
+    light_power_update();
+  }
 }

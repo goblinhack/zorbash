@@ -63,7 +63,7 @@ void Thing::light_power_including_torch_effect_get(uint8_t &out_light_power)
   out_light_power = light_power;
 }
 
-void Thing::update_light_power_including_torch_effect(uint8_t &out_light_power)
+void Thing::light_power_update_including_torch_effect(uint8_t &out_light_power)
 {
   TRACE_NO_INDENT();
   uint8_t light_power;
