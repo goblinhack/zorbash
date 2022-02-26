@@ -338,7 +338,7 @@ bool Thing::victim_attack_best_at(int equip, point *at, int attempt, bool &victi
   // If we pressed space then the target is where we are at, so look around
   // for the best thing to hit.
   //
-  if (at && (*at != curr_at)) {
+  if (at) {
     auto                 delta      = *at - curr_at;
     std::vector< point > local_only = {delta};
 
@@ -351,6 +351,12 @@ bool Thing::victim_attack_best_at(int equip, point *at, int attempt, bool &victi
   //
   // Look in the chosen dir first
   //
+  if (at) {
+    if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+    }
+  }
+
   if (dx || dy) {
     std::vector< point > all_deltas = {
         point(dx, dy),
@@ -524,7 +530,8 @@ bool Thing::victim_attack_best(int equip, point *at)
     for (int attempt = 1; attempt <= 3; attempt++) {
       for (const auto &d : all_deltas) {
         point at = curr_at + d;
-        dbg("Target-attack-best: Try to attack two ahead adj with equipped item at %s", at.to_string().c_str());
+        dbg("Target-attack-best: Try to attack two ahead adj (%d,%d) with equipped item at %s", d.x, d.y,
+            at.to_string().c_str());
         TRACE_AND_INDENT();
         if (victim_attack_best_at(equip, &at, attempt, victim_attacked, victim_overlaps)) {
           ret = true;
@@ -582,7 +589,6 @@ bool Thing::victim_attack_best(int equip, point *at)
       for (const auto &d : all_deltas) {
         point at = curr_at + d;
         dbg("Target-attack-best: Try to attack 180 adj with equipped item at %s", at.to_string().c_str());
-        dbg("TARG %d,%d %d,%d", d.x, d.y, at.x, at.y);
         TRACE_AND_INDENT();
         if (victim_attack_best_at(equip, &at, attempt, victim_attacked, victim_overlaps)) {
           ret = true;
