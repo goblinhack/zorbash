@@ -52,6 +52,10 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (1) {
+        auto w = level->thing_new("pike", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
         auto w = level->thing_new("scythe", point(x, y));
         t->carry(w);
       }

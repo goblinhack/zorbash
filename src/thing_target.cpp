@@ -515,6 +515,31 @@ bool Thing::victim_attack_best(int equip, point *at)
     return ret;
   }
 
+  if (item && item->collision_hit_two_tiles_ahead()) {
+    std::vector< point > all_deltas = {
+        point(dx, dy), point(dx * 2, dy * 2), point(0, 0), // For spiderwebs
+    };
+
+    bool ret = false;
+    for (int attempt = 1; attempt <= 3; attempt++) {
+      for (const auto &d : all_deltas) {
+        point at = curr_at + d;
+        dbg("Target-attack-best: Try to attack two ahead adj with equipped item at %s", at.to_string().c_str());
+        TRACE_AND_INDENT();
+        if (victim_attack_best_at(equip, &at, attempt, victim_attacked, victim_overlaps)) {
+          ret = true;
+        }
+        if (victim_attacked) {
+          ret = true;
+        }
+      }
+      if (ret) {
+        break;
+      }
+    }
+    return ret;
+  }
+
   if (item && item->collision_hit_adj()) {
     std::vector< point > all_deltas;
 
