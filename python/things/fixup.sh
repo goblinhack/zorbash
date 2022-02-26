@@ -427,7 +427,7 @@ do
       unused_flag124_set \
       unused_flag125_set \
       unused_flag126_set \
-      unused_flag127_set \
+      collision_hit_two_ahead_set \
       is_flat_set \
       is_target_radial_set \
       is_staff_set \

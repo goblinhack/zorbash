@@ -1593,7 +1593,7 @@ public:
   int unused_flag124(void);
   int unused_flag125(void);
   int unused_flag126(void);
-  int unused_flag127(void);
+  int collision_hit_two_ahead(void);
   int is_flat(void);
   int is_target_radial(void);
   int unused_flag12(void);
