@@ -493,7 +493,7 @@ PyObject *thing_unused_flag123(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag124(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag125(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag126(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag127(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_collision_hit_two_ahead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_flat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_target_radial(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);

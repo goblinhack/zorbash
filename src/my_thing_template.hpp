@@ -524,7 +524,7 @@ private:
   int _unused_flag124 {};
   int _unused_flag125 {};
   int _unused_flag126 {};
-  int _unused_flag127 {};
+  int _collision_hit_two_ahead {};
   int _is_flat {};
   int _is_target_radial {};
   int _unused_flag13 {};
@@ -1420,7 +1420,7 @@ public:
   int unused_flag124(void) const { return _unused_flag124; }
   int unused_flag125(void) const { return _unused_flag125; }
   int unused_flag126(void) const { return _unused_flag126; }
-  int unused_flag127(void) const { return _unused_flag127; }
+  int collision_hit_two_ahead(void) const { return _collision_hit_two_ahead; }
   int is_flat(void) const { return _is_flat; }
   int is_target_radial(void) const { return _is_target_radial; }
   int unused_flag12(void) const { return _unused_flag12; }
@@ -2058,7 +2058,7 @@ public:
   void unused_flag124_set(int v) { _unused_flag124 = v; }
   void unused_flag125_set(int v) { _unused_flag125 = v; }
   void unused_flag126_set(int v) { _unused_flag126 = v; }
-  void unused_flag127_set(int v) { _unused_flag127 = v; }
+  void collision_hit_two_ahead_set(int v) { _collision_hit_two_ahead = v; }
   void is_flat_set(int v) { _is_flat = v; }
   void is_target_radial_set(int v) { _is_target_radial = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }

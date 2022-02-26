@@ -358,7 +358,7 @@ PyObject *level_unused_flag123_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag124_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag125_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag126_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag127_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_collision_hit_two_ahead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_flat_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_target_radial_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag12_at(PyObject *obj, PyObject *args, PyObject *keywds);
