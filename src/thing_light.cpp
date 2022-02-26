@@ -89,23 +89,23 @@ void Thing::init_lights(void)
 
     alpha_scale = 0.75;
     col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 1, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power, 0, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     alpha_scale = 0.5;
     col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power, 1, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     alpha_scale = 0.2;
     col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power, 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     alpha_scale = 0.1;
     col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power, 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     alpha_scale = 0.05;
     col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 5, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_power, 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
     has_light = true;
     dbg("Player created");
@@ -122,7 +122,7 @@ void Thing::init_lights(void)
   }
 }
 
-void Thing::light_update_power(void)
+void Thing::light_scale_update(void)
 {
   TRACE_NO_INDENT();
   float light_power_new = light_power_get();
@@ -144,6 +144,143 @@ void Thing::light_update_power(void)
       light_scale_factor = 0.1;
     }
 
-    l->update_light_scale(light_scale_factor);
+    l->light_scale_update(light_scale_factor);
   }
+}
+
+int Thing::light_power_update(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_infop()) {
+    return initial_light_power_get();
+  }
+
+  uint8_t light_power = infop()->light_power;
+
+  if (! light_power) {
+    light_power = initial_light_power_get();
+  }
+
+  if (is_player()) {
+    light_power = 0;
+  }
+
+  light_power_update_including_torch_effect(light_power);
+  infop()->light_power = light_power;
+
+  light_scale_update();
+  return light_power;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// prev_light_power
+////////////////////////////////////////////////////////////////////////////
+int Thing::prev_light_power_get(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->prev_light_power);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::prev_light_power_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->prev_light_power = v);
+}
+
+int Thing::prev_light_power_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->prev_light_power -= v);
+}
+
+int Thing::prev_light_power_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->prev_light_power += v);
+}
+
+int Thing::prev_light_power_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->prev_light_power--);
+}
+
+int Thing::prev_light_power_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->prev_light_power++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// light_power
+////////////////////////////////////////////////////////////////////////////
+int Thing::initial_light_power_get(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->light_power());
+}
+
+int Thing::light_power_get(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_infop()) {
+    return initial_light_power_get();
+  }
+
+  uint8_t light_power = infop()->light_power;
+
+  if (is_player()) {
+    light_power = 0;
+  }
+
+  light_power_including_torch_effect_get(light_power);
+  infop()->light_power = light_power;
+
+  return light_power;
+}
+
+int Thing::light_power_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->light_power = v);
+}
+
+int Thing::light_power_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->light_power -= v);
+}
+
+int Thing::light_power_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->light_power += v);
+}
+
+int Thing::light_power_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->light_power--);
+}
+
+int Thing::light_power_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->light_power++);
 }

@@ -58,6 +58,10 @@ void Game::place_player(void)
         auto w3 = level->thing_new("axe", point(x, y));
         t->carry(w3);
       }
+      if (1) {
+        auto W = level->thing_new("torch", point(x, y));
+        t->carry(W);
+      }
       if (0) {
         auto W = level->thing_new("torch", point(x, y));
         t->carry(W);

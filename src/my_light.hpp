@@ -73,7 +73,7 @@ public:
   void reset(void);
   void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon_(const char *fmt, va_list args); // compile error without
-  void update_light_scale(float scale);
+  void light_scale_update(float scale);
   void update(void);
 };
 

@@ -1694,7 +1694,7 @@ public:
   int unused_flag98(void);
   int unused_flag99(void);
   int unused_flag9(void);
-  int update_light_power(void);
+  int light_power_update(void);
   int value(const Thingp it);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
@@ -2004,7 +2004,7 @@ public:
   void level_push(void);
   void lifespan_tick(void);
   void light_power_including_torch_effect_get(uint8_t &light_power);
-  void light_update_power(void);
+  void light_scale_update(void);
   void location_check_all_things_at(void);
   void location_check_forced_all_things_at(void);
   void location_check_forced(void);
@@ -2106,7 +2106,7 @@ public:
   void unset_on_fire(void);
   void update_all(void);
   void update_interpolated_position(void);
-  void update_light_power_including_torch_effect(uint8_t &light_power);
+  void light_power_update_including_torch_effect(uint8_t &light_power);
   void update_light(void);
   void update_pos(point, bool immediately);
   void update_tick(void);

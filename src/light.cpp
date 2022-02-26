@@ -117,7 +117,7 @@ Lightp light_new(Thingp owner, point offset, int light_power, int delta, color c
   l->col               = col;
   l->fbo               = fbo;
 
-  l->update_light_scale(1.0);
+  l->light_scale_update(1.0);
 
   // log("Created");
   return l;
@@ -134,13 +134,13 @@ Lightp light_new(Thingp owner, point offset, int light_power)
   l->ray_cast_only    = true;
   l->fbo              = -1;
 
-  l->update_light_scale(1.0);
+  l->light_scale_update(1.0);
 
   // log("Created");
   return l;
 }
 
-void Light::update_light_scale(float scale)
+void Light::light_scale_update(float scale)
 {
   TRACE_AND_INDENT();
 
