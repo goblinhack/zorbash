@@ -12,14 +12,17 @@
 Thingp Thing::in_the_way(const point s, const point e, int x, int y)
 {
   point p(x, y);
-  if (p == s) {
-    return nullptr;
-  }
-  if (p == e) {
-    return nullptr;
-  }
+
+  //
+  // Allow hitting the end point so that a laser hits the final target also
+  //
+
   FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
   {
+    if (t == this) {
+      continue;
+    }
+
     //
     // Occassionally allow goblins to fire through comrades
     //
@@ -42,7 +45,7 @@ Thingp Thing::in_the_way(const point s, const point e, int x, int y)
     }
 
     if (t->is_attackable_by_player() || t->is_attackable_by_monst()) {
-      dbg("This is in the way: %s", t->to_short_string().c_str());
+      dbg2("This is in the way: %s", t->to_short_string().c_str());
       return t;
     }
   }
