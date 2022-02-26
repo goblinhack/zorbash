@@ -4,7 +4,6 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - pike                                                                                                                                       -->
 <!-- - stone cloak, once per level turn to stone? / pass through stone / uses health and degrades                                                 -->
 <!-- - cloak of protection                                                                                                                        -->
 <!-- - cloak of fire protection                                                                                                                   -->
