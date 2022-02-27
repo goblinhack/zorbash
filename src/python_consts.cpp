@@ -52,6 +52,7 @@ void py_my_module_add_stat_consts(void)
   PyModule_AddIntConstant(my_mod, "MAP_PRIO_ALWAYS_BEHIND", MAP_PRIO_ALWAYS_BEHIND);
   PyModule_AddIntConstant(my_mod, "MAP_PRIO_BEHIND", MAP_PRIO_BEHIND);
   PyModule_AddIntConstant(my_mod, "MAP_PRIO_IN_FRONT", MAP_PRIO_IN_FRONT);
+  PyModule_AddIntConstant(my_mod, "MAP_PRIO_IN_FRONT2", MAP_PRIO_IN_FRONT2);
   PyModule_AddIntConstant(my_mod, "MAP_PRIO_NORMAL", MAP_PRIO_NORMAL);
   PyModule_AddIntConstant(my_mod, "RARITY_COMMON", THING_RARITY_COMMON);
   PyModule_AddIntConstant(my_mod, "RARITY_UNCOMMON", THING_RARITY_UNCOMMON);

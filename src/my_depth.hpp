@@ -33,6 +33,7 @@ enum {
   MAP_PRIO_BEHIND,
   MAP_PRIO_NORMAL,
   MAP_PRIO_IN_FRONT,
+  MAP_PRIO_IN_FRONT2,
 };
 
 #endif
