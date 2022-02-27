@@ -70,16 +70,16 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
   auto end   = target->last_blit_at;
 
   if (! start.x && ! start.y) {
-    msg("Misfire!");
     if (is_player()) {
+      msg("Misfire!");
       game->tick_begin("failed to fire projectile");
     }
     return nullptr;
   }
 
   if (! end.x && ! end.y) {
-    msg("Misfire!");
     if (is_player()) {
+      msg("Misfire!");
       game->tick_begin("failed to fire projectile");
     }
     return nullptr;

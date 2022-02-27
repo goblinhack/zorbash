@@ -11,7 +11,31 @@ def on_enchant(me, x, y):
     my.thing_stat_def_mod_incr(me, 2)
 
 
-def do_special(me, x, y):
+def on_waiting(me, x, y):
+    owner = my.thing_top_owner_id_get(me)
+    if not owner:
+        return False
+
+    if my.level_is_wall_at(owner, x, y):
+        stamina = my.thing_stamina_get(owner)
+        new_stamina = int((stamina / 100.0) * 90)
+        my.thing_stamina_set(owner, new_stamina)
+        if my.thing_is_player(owner):
+            my.thing_msg(owner, "You wait inside the wall and feel drained.")
+        return True
+
+    if my.level_is_rock_at(owner, x, y):
+        stamina = my.thing_stamina_get(owner)
+        new_stamina = int((stamina / 100.0) * 80)
+        my.thing_stamina_set(owner, new_stamina)
+        if my.thing_is_player(owner):
+            my.thing_msg(owner, "You wait inside solid rock and feel very drained.")
+        return True
+
+    return False
+
+
+def on_move(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if not owner:
         return False
@@ -21,7 +45,7 @@ def do_special(me, x, y):
         new_stamina = int((stamina / 100.0) * 80)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):
-            my.thing_msg(owner, "You pass through the wall, but feel drained.")
+            my.thing_msg(owner, "You pass into the wall, but feel drained.")
         return True
 
     if my.level_is_rock_at(owner, x, y):
@@ -29,18 +53,10 @@ def do_special(me, x, y):
         new_stamina = int((stamina / 100.0) * 50)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):
-            my.thing_msg(owner, "You pass through solid rock, but feel very drained.")
+            my.thing_msg(owner, "You pass into solid rock, but feel very drained.")
         return True
 
     return False
-
-
-def on_resting(me, x, y):
-    do_special(me, x, y)
-
-
-def on_move(me, x, y):
-    do_special(me, x, y)
 
 
 def tp_init(name, text_name, short_text_name):
@@ -56,7 +72,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_cloak(self, True)
     my.is_tickable(self, True)
     my.on_move_do(self, "me.on_move()")
-    my.on_resting_do(self, "me.on_resting()")
+    my.on_waiting_do(self, "me.on_waiting()")
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)

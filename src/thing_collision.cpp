@@ -552,6 +552,14 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
 
   if (it->is_obs_wall_or_door()) {
     if (is_able_to_walk_through_walls()) {
+      if ((future_pos.x < MAP_BORDER_ROCK) || (future_pos.y < MAP_BORDER_ROCK) ||
+          (future_pos.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (future_pos.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
+        dbg("No; can pass through walls but too close to the edge");
+        if (is_player()) {
+          msg("The wall is too thick here to move");
+        }
+        return true;
+      }
       dbg("No; can pass through walls");
       return false;
     }

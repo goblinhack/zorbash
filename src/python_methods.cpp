@@ -1458,6 +1458,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_awake_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_born_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_resting_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_waiting_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_stuck_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_damage_acid_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_damage_cold_do),

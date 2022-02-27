@@ -6652,6 +6652,12 @@ const std::string &Thing::on_resting_do(void)
   return (tp()->on_resting_do());
 }
 
+const std::string &Thing::on_waiting_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_waiting_do());
+}
+
 const std::string &Thing::on_stuck_do(void)
 {
   TRACE_NO_INDENT();

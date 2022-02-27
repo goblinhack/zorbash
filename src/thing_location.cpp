@@ -54,6 +54,10 @@ void Thing::location_check_forced(void)
   //
   // Need to allow carried items to fall, so avoid owner check
   //
+  solid_rock_tick();
+  if (is_dead) {
+    return;
+  }
   chasm_tick();
   if (is_dead) {
     return;
