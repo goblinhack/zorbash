@@ -651,8 +651,6 @@ private:
   std::string _gold_value_dice_str;
   std::string _health_initial_dice_str;
   std::string _is_allied_with;
-  std::string _target_name_laser;
-  std::string _target_name_radial;
   std::string _lifespan_dice_str;
   std::string _light_color;
   std::string _long_text_description;
@@ -675,19 +673,19 @@ private:
   std::string _on_damage_natural_attack_do;
   std::string _on_damage_necrosis_do;
   std::string _on_damage_poison_do;
+  std::string _on_damage_stat_att_do;
   std::string _on_damage_stat_con_do;
   std::string _on_damage_stat_str_do;
-  std::string _on_damage_stat_att_do;
   std::string _on_death_do;
   std::string _on_death_of_a_follower_do;
   std::string _on_death_of_my_leader_do;
   std::string _on_enchant_do;
   std::string _on_equip_do;
   std::string _on_fall_do;
-  std::string _on_jump_do;
   std::string _on_final_use_do;
   std::string _on_firing_at_something_do;
   std::string _on_idle_tick_freq_dice_str;
+  std::string _on_jump_do;
   std::string _on_lifespan_tick_do;
   std::string _on_move_do;
   std::string _on_open_do;
@@ -706,15 +704,17 @@ private:
   std::string _on_owner_damage_natural_attack_do;
   std::string _on_owner_damage_necrosis_do;
   std::string _on_owner_damage_poison_do;
+  std::string _on_owner_damage_stat_att_do;
   std::string _on_owner_damage_stat_con_do;
   std::string _on_owner_damage_stat_str_do;
-  std::string _on_owner_damage_stat_att_do;
   std::string _on_owner_remove_do;
   std::string _on_polymorphed_do;
+  std::string _on_resting_do;
+  std::string _on_stuck_do;
+  std::string _on_swing_do;
   std::string _on_tick_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
-  std::string _on_swing_do;
   std::string _on_you_are_declared_a_follower_do;
   std::string _on_you_are_declared_leader_do;
   std::string _on_you_are_hit_and_now_dead_do;
@@ -722,7 +722,6 @@ private:
   std::string _on_you_are_on_fire_do;
   std::string _on_you_miss_do;
   std::string _on_you_natural_attack_do;
-  std::string _target_name_projectile;
   std::string _resurrect_dice_str;
   std::string _short_text_name;
   std::string _spawn_group_size_dice_str;
@@ -730,6 +729,9 @@ private:
   std::string _str1;
   std::string _str2;
   std::string _str4;
+  std::string _target_name_laser;
+  std::string _target_name_projectile;
+  std::string _target_name_radial;
   std::string _text_a_or_an;
   std::string _text_debuff;
   std::string _text_description;
@@ -885,8 +887,6 @@ public:
   const std::string &gold_value_dice_str(void) const;
   const std::string &health_initial_dice_str(void) const;
   const std::string &is_allied_with(void) const { return _is_allied_with; }
-  const std::string &target_name_laser(void) const { return _target_name_laser; }
-  const std::string &target_name_radial(void) const { return _target_name_radial; }
   const std::string &lifespan_dice_str(void) const;
   const std::string &light_color(void) const { return _light_color; }
   const std::string &long_text_description_extra(void) const { return _long_text_description_extra; }
@@ -909,19 +909,19 @@ public:
   const std::string &on_damage_natural_attack_do(void) const { return _on_damage_natural_attack_do; }
   const std::string &on_damage_necrosis_do(void) const { return _on_damage_necrosis_do; }
   const std::string &on_damage_poison_do(void) const { return _on_damage_poison_do; }
+  const std::string &on_damage_stat_att_do(void) const { return _on_damage_stat_att_do; }
   const std::string &on_damage_stat_con_do(void) const { return _on_damage_stat_con_do; }
   const std::string &on_damage_stat_str_do(void) const { return _on_damage_stat_str_do; }
-  const std::string &on_damage_stat_att_do(void) const { return _on_damage_stat_att_do; }
   const std::string &on_death_do(void) const { return _on_death_do; }
   const std::string &on_death_of_a_follower_do(void) const { return _on_death_of_a_follower_do; }
   const std::string &on_death_of_my_leader_do(void) const { return _on_death_of_my_leader_do; }
   const std::string &on_enchant_do(void) const { return _on_enchant_do; }
   const std::string &on_equip_do(void) const { return _on_equip_do; }
   const std::string &on_fall_do(void) const { return _on_fall_do; }
-  const std::string &on_jump_do(void) const { return _on_jump_do; }
   const std::string &on_final_use_do(void) const { return _on_final_use_do; }
   const std::string &on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
   const std::string &on_idle_tick_freq_dice_str(void) const;
+  const std::string &on_jump_do(void) const { return _on_jump_do; }
   const std::string &on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
@@ -940,15 +940,17 @@ public:
   const std::string &on_owner_damage_natural_attack_do(void) const { return _on_owner_damage_natural_attack_do; }
   const std::string &on_owner_damage_necrosis_do(void) const { return _on_owner_damage_necrosis_do; }
   const std::string &on_owner_damage_poison_do(void) const { return _on_owner_damage_poison_do; }
+  const std::string &on_owner_damage_stat_att_do(void) const { return _on_owner_damage_stat_att_do; }
   const std::string &on_owner_damage_stat_con_do(void) const { return _on_owner_damage_stat_con_do; }
   const std::string &on_owner_damage_stat_str_do(void) const { return _on_owner_damage_stat_str_do; }
-  const std::string &on_owner_damage_stat_att_do(void) const { return _on_owner_damage_stat_att_do; }
   const std::string &on_owner_remove_do(void) const { return _on_owner_remove_do; }
   const std::string &on_polymorphed_do(void) const { return _on_polymorphed_do; }
+  const std::string &on_resting_do(void) const { return _on_resting_do; }
+  const std::string &on_stuck_do(void) const { return _on_stuck_do; }
+  const std::string &on_swing_do(void) const { return _on_swing_do; }
   const std::string &on_tick_do(void) const { return _on_tick_do; }
   const std::string &on_unequip_do(void) const { return _on_unequip_do; }
   const std::string &on_use_do(void) const { return _on_use_do; }
-  const std::string &on_swing_do(void) const { return _on_swing_do; }
   const std::string &on_you_are_declared_a_follower_do(void) const { return _on_you_are_declared_a_follower_do; }
   const std::string &on_you_are_declared_leader_do(void) const { return _on_you_are_declared_leader_do; }
   const std::string &on_you_are_hit_and_now_dead_do(void) const { return _on_you_are_hit_and_now_dead_do; }
@@ -956,7 +958,6 @@ public:
   const std::string &on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
   const std::string &on_you_miss_do(void) const { return _on_you_miss_do; }
   const std::string &on_you_natural_attack_do(void) const { return _on_you_natural_attack_do; }
-  const std::string &target_name_projectile(void) const { return _target_name_projectile; }
   const std::string &resurrect_dice_str(void) const;
   const std::string &short_text_name(void) const { return _short_text_name; }
   const std::string &spawn_group_size_dice_str(void) const;
@@ -964,6 +965,9 @@ public:
   const std::string &str1(void) const { return _str1; }
   const std::string &str2(void) const { return _str2; }
   const std::string &str4(void) const { return _str4; }
+  const std::string &target_name_laser(void) const { return _target_name_laser; }
+  const std::string &target_name_projectile(void) const { return _target_name_projectile; }
+  const std::string &target_name_radial(void) const { return _target_name_radial; }
   const std::string &text_debuff(void) const { return _text_debuff; }
   const std::string &text_description(void) const { return _text_description; }
   const std::string &text_enchant(void) const { return _text_enchant; }
@@ -1912,6 +1916,8 @@ public:
   void normal_placement_rules_set(int v) { _normal_placement_rules = v; }
   void on_awake_do_set(const std::string &v) { _on_awake_do = v; }
   void on_born_do_set(const std::string &v) { _on_born_do = v; }
+  void on_resting_do_set(const std::string &v) { _on_resting_do = v; }
+  void on_stuck_do_set(const std::string &v) { _on_stuck_do = v; }
   void on_damage_acid_do_set(const std::string &v) { _on_damage_acid_do = v; }
   void on_damage_cold_do_set(const std::string &v) { _on_damage_cold_do = v; }
   void on_damage_crush_do_set(const std::string &v) { _on_damage_crush_do = v; }

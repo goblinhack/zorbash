@@ -11,7 +11,7 @@ def on_enchant(me, x, y):
     my.thing_stat_def_mod_incr(me, 2)
 
 
-def on_move(me, x, y):
+def do_special(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if not owner:
         return False
@@ -35,6 +35,14 @@ def on_move(me, x, y):
     return False
 
 
+def on_resting(me, x, y):
+    do_special(me, x, y)
+
+
+def on_move(me, x, y):
+    do_special(me, x, y)
+
+
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
@@ -48,6 +56,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_cloak(self, True)
     my.is_tickable(self, True)
     my.on_move_do(self, "me.on_move()")
+    my.on_resting_do(self, "me.on_resting()")
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
