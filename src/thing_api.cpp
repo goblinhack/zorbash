@@ -576,6 +576,17 @@ int Thing::is_able_to_see_through_doors(void)
 int Thing::is_able_to_walk_through_walls(void)
 {
   TRACE_NO_INDENT();
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      if (iter->is_able_to_walk_through_walls()) {
+        return true;
+      }
+    }
+  }
+
   return (tp()->is_able_to_walk_through_walls());
 }
 

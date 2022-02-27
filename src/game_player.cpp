@@ -68,11 +68,11 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("sword_wood", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("axe", point(x, y));
         t->carry(w);
       }

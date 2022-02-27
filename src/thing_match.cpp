@@ -1327,50 +1327,8 @@ bool Thing::matches(const std::string &what)
 
 std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
 {
-  if (what == "is_able_to_attack_mobs") {
-    return &Thing::is_able_to_attack_mobs;
-  }
-  if (what == "is_able_to_break_down_doors") {
-    return &Thing::is_able_to_break_down_doors;
-  }
-  if (what == "is_able_to_break_out_of_webs") {
-    return &Thing::is_able_to_break_out_of_webs;
-  }
-  if (what == "is_able_to_collect_keys") {
-    return &Thing::is_able_to_collect_keys;
-  }
   if (what == "ai_detect_secret_doors") {
     return &Thing::ai_detect_secret_doors;
-  }
-  if (what == "is_able_to_enchant_items") {
-    return &Thing::is_able_to_enchant_items;
-  }
-  if (what == "is_able_to_jump") {
-    return &Thing::is_able_to_jump;
-  }
-  if (what == "is_able_to_learn_skills") {
-    return &Thing::is_able_to_learn_skills;
-  }
-  if (what == "is_able_to_open_doors") {
-    return &Thing::is_able_to_open_doors;
-  }
-  if (what == "is_able_to_see_through_doors") {
-    return &Thing::is_able_to_see_through_doors;
-  }
-  if (what == "is_able_to_shove") {
-    return &Thing::is_able_to_shove;
-  }
-  if (what == "is_able_to_walk_through_walls") {
-    return &Thing::is_able_to_walk_through_walls;
-  }
-  if (what == "is_exit_finder") {
-    return &Thing::is_exit_finder;
-  }
-  if (what == "is_item_collector") {
-    return &Thing::is_item_collector;
-  }
-  if (what == "is_explorer") {
-    return &Thing::is_explorer;
   }
   if (what == "ai_resent_count") {
     return &Thing::ai_resent_count;
@@ -1402,6 +1360,21 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "blast_min_radius") {
     return &Thing::blast_min_radius;
   }
+  if (what == "collision_hit_180") {
+    return &Thing::collision_hit_180;
+  }
+  if (what == "collision_hit_360") {
+    return &Thing::collision_hit_360;
+  }
+  if (what == "collision_hit_adj") {
+    return &Thing::collision_hit_adj;
+  }
+  if (what == "collision_hit_two_tiles_ahead") {
+    return &Thing::collision_hit_two_tiles_ahead;
+  }
+  if (what == "damage_received_doubled_from_cold") {
+    return &Thing::damage_received_doubled_from_cold;
+  }
   if (what == "enchant_level") {
     return &Thing::enchant_level;
   }
@@ -1423,29 +1396,17 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "environ_avoids_water") {
     return &Thing::environ_avoids_water;
   }
-  if (what == "is_immune_to_acid") {
-    return &Thing::is_immune_to_acid;
-  }
-  if (what == "is_immune_to_fire") {
-    return &Thing::is_immune_to_fire;
-  }
-  if (what == "is_immune_to_necrosis") {
-    return &Thing::is_immune_to_necrosis;
-  }
-  if (what == "is_immune_to_poison") {
-    return &Thing::is_immune_to_poison;
-  }
-  if (what == "is_immune_to_spiderwebs") {
-    return &Thing::is_immune_to_spiderwebs;
-  }
-  if (what == "is_immune_to_water") {
-    return &Thing::is_immune_to_water;
-  }
   if (what == "gfx_flickers") {
     return &Thing::gfx_flickers;
   }
+  if (what == "gfx_health_bar_shown_when_awake_only") {
+    return &Thing::gfx_health_bar_shown_when_awake_only;
+  }
   if (what == "gfx_long_shadow_caster") {
     return &Thing::gfx_long_shadow_caster;
+  }
+  if (what == "gfx_show_asleep") {
+    return &Thing::gfx_show_asleep;
   }
   if (what == "gfx_solid_shadow") {
     return &Thing::gfx_solid_shadow;
@@ -1453,8 +1414,26 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "gfx_very_short_shadow_caster") {
     return &Thing::gfx_very_short_shadow_caster;
   }
+  if (what == "hunger_is_insatiable") {
+    return &Thing::hunger_is_insatiable;
+  }
+  if (what == "is_able_to_attack_mobs") {
+    return &Thing::is_able_to_attack_mobs;
+  }
+  if (what == "is_able_to_break_down_doors") {
+    return &Thing::is_able_to_break_down_doors;
+  }
+  if (what == "is_able_to_break_out_of_webs") {
+    return &Thing::is_able_to_break_out_of_webs;
+  }
   if (what == "is_able_to_change_levels") {
     return &Thing::is_able_to_change_levels;
+  }
+  if (what == "is_able_to_collect_keys") {
+    return &Thing::is_able_to_collect_keys;
+  }
+  if (what == "is_able_to_enchant_items") {
+    return &Thing::is_able_to_enchant_items;
   }
   if (what == "is_able_to_fall") {
     return &Thing::is_able_to_fall;
@@ -1462,11 +1441,80 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_fire_at") {
     return &Thing::is_able_to_fire_at;
   }
+  if (what == "is_able_to_follow") {
+    return &Thing::is_able_to_follow;
+  }
+  if (what == "is_able_to_jump_attack") {
+    return &Thing::is_able_to_jump_attack;
+  }
+  if (what == "is_able_to_jump_escape") {
+    return &Thing::is_able_to_jump_escape;
+  }
+  if (what == "is_able_to_jump_onto") {
+    return &Thing::is_able_to_jump_onto;
+  }
+  if (what == "is_able_to_jump") {
+    return &Thing::is_able_to_jump;
+  }
+  if (what == "is_able_to_jump_without_tiring") {
+    return &Thing::is_able_to_jump_without_tiring;
+  }
+  if (what == "is_able_to_learn_skills") {
+    return &Thing::is_able_to_learn_skills;
+  }
+  if (what == "is_able_to_move_diagonally") {
+    return &Thing::is_able_to_move_diagonally;
+  }
+  if (what == "is_able_to_open_doors") {
+    return &Thing::is_able_to_open_doors;
+  }
   if (what == "is_able_to_see_in_the_dark") {
     return &Thing::is_able_to_see_in_the_dark;
   }
+  if (what == "is_able_to_see_through_doors") {
+    return &Thing::is_able_to_see_through_doors;
+  }
+  if (what == "is_able_to_shove") {
+    return &Thing::is_able_to_shove;
+  }
+  if (what == "is_able_to_sleep") {
+    return &Thing::is_able_to_sleep;
+  }
   if (what == "is_able_to_tire") {
     return &Thing::is_able_to_tire;
+  }
+  if (what == "is_able_to_use_amulet") {
+    return &Thing::is_able_to_use_amulet;
+  }
+  if (what == "is_able_to_use_armor") {
+    return &Thing::is_able_to_use_armor;
+  }
+  if (what == "is_able_to_use_boots") {
+    return &Thing::is_able_to_use_boots;
+  }
+  if (what == "is_able_to_use_cloak") {
+    return &Thing::is_able_to_use_cloak;
+  }
+  if (what == "is_able_to_use_gauntlet") {
+    return &Thing::is_able_to_use_gauntlet;
+  }
+  if (what == "is_able_to_use_helmet") {
+    return &Thing::is_able_to_use_helmet;
+  }
+  if (what == "is_able_to_use_rings") {
+    return &Thing::is_able_to_use_rings;
+  }
+  if (what == "is_able_to_use_shield") {
+    return &Thing::is_able_to_use_shield;
+  }
+  if (what == "is_able_to_use_wands_or_staffs") {
+    return &Thing::is_able_to_use_wands_or_staffs;
+  }
+  if (what == "is_able_to_use_weapons") {
+    return &Thing::is_able_to_use_weapons;
+  }
+  if (what == "is_able_to_walk_through_walls") {
+    return &Thing::is_able_to_walk_through_walls;
   }
   if (what == "is_acid") {
     return &Thing::is_acid;
@@ -1480,11 +1528,23 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_always_hit") {
     return &Thing::is_always_hit;
   }
+  if (what == "is_amulet") {
+    return &Thing::is_amulet;
+  }
+  if (what == "is_aquatic") {
+    return &Thing::is_aquatic;
+  }
+  if (what == "is_armor") {
+    return &Thing::is_armor;
+  }
   if (what == "is_ascend_dungeon") {
     return &Thing::is_ascend_dungeon;
   }
   if (what == "is_ascend_sewer") {
     return &Thing::is_ascend_sewer;
+  }
+  if (what == "is_asleep_initially") {
+    return &Thing::is_asleep_initially;
   }
   if (what == "is_attackable_by_monst") {
     return &Thing::is_attackable_by_monst;
@@ -1519,32 +1579,29 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_barrel") {
     return &Thing::is_barrel;
   }
+  if (what == "is_biome_dungeon") {
+    return &Thing::is_biome_dungeon;
+  }
+  if (what == "is_biome_swamp") {
+    return &Thing::is_biome_swamp;
+  }
   if (what == "is_bleeder") {
     return &Thing::is_bleeder;
-  }
-  if (what == "is_red_blood_eater") {
-    return &Thing::is_red_blood_eater;
-  }
-  if (what == "is_red_blood") {
-    return &Thing::is_red_blood;
-  }
-  if (what == "is_red_splatter") {
-    return &Thing::is_red_splatter;
-  }
-  if (what == "is_green_blood_eater") {
-    return &Thing::is_green_blood_eater;
-  }
-  if (what == "is_green_blood") {
-    return &Thing::is_green_blood;
-  }
-  if (what == "is_green_splatter") {
-    return &Thing::is_green_splatter;
   }
   if (what == "is_bones") {
     return &Thing::is_bones;
   }
+  if (what == "is_bony") {
+    return &Thing::is_bony;
+  }
+  if (what == "is_boots") {
+    return &Thing::is_boots;
+  }
   if (what == "is_brazier") {
     return &Thing::is_brazier;
+  }
+  if (what == "is_breather") {
+    return &Thing::is_breather;
   }
   if (what == "is_bridge") {
     return &Thing::is_bridge;
@@ -1557,6 +1614,12 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_chasm") {
     return &Thing::is_chasm;
+  }
+  if (what == "is_cloak") {
+    return &Thing::is_cloak;
+  }
+  if (what == "is_cold") {
+    return &Thing::is_cold;
   }
   if (what == "is_collectable") {
     return &Thing::is_collectable;
@@ -1579,6 +1642,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_critical_to_level") {
     return &Thing::is_critical_to_level;
   }
+  if (what == "is_crushable") {
+    return &Thing::is_crushable;
+  }
   if (what == "is_cursor_can_hover_over") {
     return &Thing::is_cursor_can_hover_over;
   }
@@ -1596,6 +1662,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_dead_on_end_of_anim") {
     return &Thing::is_dead_on_end_of_anim;
+  }
+  if (what == "is_dead_on_falling") {
+    return &Thing::is_dead_on_falling;
   }
   if (what == "is_dead_on_shove") {
     return &Thing::is_dead_on_shove;
@@ -1633,9 +1702,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_dry_grass") {
     return &Thing::is_dry_grass;
   }
-  if (what == "is_wet_grass") {
-    return &Thing::is_wet_grass;
-  }
   if (what == "is_enchantable") {
     return &Thing::is_enchantable;
   }
@@ -1651,6 +1717,12 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_ethereal") {
     return &Thing::is_ethereal;
   }
+  if (what == "is_exit_finder") {
+    return &Thing::is_exit_finder;
+  }
+  if (what == "is_explorer") {
+    return &Thing::is_explorer;
+  }
   if (what == "is_explosion") {
     return &Thing::is_explosion;
   }
@@ -1659,6 +1731,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_fire") {
     return &Thing::is_fire;
+  }
+  if (what == "is_flat") {
+    return &Thing::is_flat;
   }
   if (what == "is_floating") {
     return &Thing::is_floating;
@@ -1669,6 +1744,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_floor") {
     return &Thing::is_floor;
   }
+  if (what == "is_flying") {
+    return &Thing::is_flying;
+  }
   if (what == "is_foilage") {
     return &Thing::is_foilage;
   }
@@ -1677,6 +1755,12 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_food") {
     return &Thing::is_food;
+  }
+  if (what == "is_gas_blocker") {
+    return &Thing::is_gas_blocker;
+  }
+  if (what == "is_gauntlet") {
+    return &Thing::is_gauntlet;
   }
   if (what == "is_gfx_anim_synced_with_owner") {
     return &Thing::is_gfx_anim_synced_with_owner;
@@ -1687,11 +1771,29 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_gold") {
     return &Thing::is_gold;
   }
+  if (what == "is_green_blood_eater") {
+    return &Thing::is_green_blood_eater;
+  }
+  if (what == "is_green_blooded") {
+    return &Thing::is_green_blooded;
+  }
+  if (what == "is_green_blood") {
+    return &Thing::is_green_blood;
+  }
+  if (what == "is_green_splatter") {
+    return &Thing::is_green_splatter;
+  }
   if (what == "is_hazard") {
     return &Thing::is_hazard;
   }
   if (what == "is_health_booster") {
     return &Thing::is_health_booster;
+  }
+  if (what == "is_heavy") {
+    return &Thing::is_heavy;
+  }
+  if (what == "is_helmet") {
+    return &Thing::is_helmet;
   }
   if (what == "is_hittable") {
     return &Thing::is_hittable;
@@ -1699,11 +1801,26 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_humanoid") {
     return &Thing::is_humanoid;
   }
-  if (what == "hunger_is_insatiable") {
-    return &Thing::hunger_is_insatiable;
+  if (what == "is_immune_to_acid") {
+    return &Thing::is_immune_to_acid;
   }
-  if (what == "is_toughness_very_hard") {
-    return &Thing::is_toughness_very_hard;
+  if (what == "is_immune_to_cold") {
+    return &Thing::is_immune_to_cold;
+  }
+  if (what == "is_immune_to_fire") {
+    return &Thing::is_immune_to_fire;
+  }
+  if (what == "is_immune_to_necrosis") {
+    return &Thing::is_immune_to_necrosis;
+  }
+  if (what == "is_immune_to_poison") {
+    return &Thing::is_immune_to_poison;
+  }
+  if (what == "is_immune_to_spiderwebs") {
+    return &Thing::is_immune_to_spiderwebs;
+  }
+  if (what == "is_immune_to_water") {
+    return &Thing::is_immune_to_water;
   }
   if (what == "is_intelligent") {
     return &Thing::is_intelligent;
@@ -1713,6 +1830,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_item_carrier") {
     return &Thing::is_item_carrier;
+  }
+  if (what == "is_item_collector") {
+    return &Thing::is_item_collector;
   }
   if (what == "is_item_eater") {
     return &Thing::is_item_eater;
@@ -1753,6 +1873,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_lava") {
     return &Thing::is_lava;
   }
+  if (what == "is_light_blocker_for_monst") {
+    return &Thing::is_light_blocker_for_monst;
+  }
   if (what == "is_light_blocker") {
     return &Thing::is_light_blocker;
   }
@@ -1762,20 +1885,47 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_loggable") {
     return &Thing::is_loggable;
   }
+  if (what == "is_map_beast") {
+    return &Thing::is_map_beast;
+  }
   if (what == "is_meat_eater") {
     return &Thing::is_meat_eater;
   }
   if (what == "is_meat") {
     return &Thing::is_meat;
   }
+  if (what == "is_meltable") {
+    return &Thing::is_meltable;
+  }
   if (what == "is_metal") {
     return &Thing::is_metal;
+  }
+  if (what == "is_minion") {
+    return &Thing::is_minion;
+  }
+  if (what == "is_mob_challenge_class_a") {
+    return &Thing::is_mob_challenge_class_a;
+  }
+  if (what == "is_mob_challenge_class_b") {
+    return &Thing::is_mob_challenge_class_b;
   }
   if (what == "is_mob") {
     return &Thing::is_mob;
   }
-  if (what == "is_minion") {
-    return &Thing::is_minion;
+  if (what == "is_monst_class_a") {
+    return &Thing::is_monst_class_a;
+  }
+  if (what == "is_monst_class_b") {
+    return &Thing::is_monst_class_b;
+  }
+  if (what == "is_monst_class_c") {
+    return &Thing::is_monst_class_c;
+  }
+  if (what == "is_monst_class_d") {
+    return &Thing::is_monst_class_d;
+  }
+  if (what == "is_monst_class_e") {
+    return &Thing::is_monst_class_e;
   }
   if (what == "is_monst") {
     return &Thing::is_monst;
@@ -1795,6 +1945,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_obs_destructable") {
     return &Thing::is_obs_destructable;
   }
+  if (what == "is_obstacle_when_dead") {
+    return &Thing::is_obstacle_when_dead;
+  }
   if (what == "is_obs_wall_or_door") {
     return &Thing::is_obs_wall_or_door;
   }
@@ -1803,6 +1956,15 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_organic") {
     return &Thing::is_organic;
+  }
+  if (what == "is_pink_blood_eater") {
+    return &Thing::is_pink_blood_eater;
+  }
+  if (what == "is_pink_blooded") {
+    return &Thing::is_pink_blooded;
+  }
+  if (what == "is_pink_splatter") {
+    return &Thing::is_pink_splatter;
   }
   if (what == "is_player") {
     return &Thing::is_player;
@@ -1818,6 +1980,18 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_projectile") {
     return &Thing::is_projectile;
+  }
+  if (what == "is_red_blood_eater") {
+    return &Thing::is_red_blood_eater;
+  }
+  if (what == "is_red_blooded") {
+    return &Thing::is_red_blooded;
+  }
+  if (what == "is_red_blood") {
+    return &Thing::is_red_blood;
+  }
+  if (what == "is_red_splatter") {
+    return &Thing::is_red_splatter;
   }
   if (what == "is_removeable_if_out_of_slots") {
     return &Thing::is_removeable_if_out_of_slots;
@@ -1846,6 +2020,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_shallow_water") {
     return &Thing::is_shallow_water;
   }
+  if (what == "is_shield") {
+    return &Thing::is_shield;
+  }
   if (what == "is_shovable") {
     return &Thing::is_shovable;
   }
@@ -1855,17 +2032,23 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_skillstone") {
     return &Thing::is_skillstone;
   }
+  if (what == "is_slippery") {
+    return &Thing::is_slippery;
+  }
   if (what == "is_smoke") {
     return &Thing::is_smoke;
-  }
-  if (what == "is_toughness_soft") {
-    return &Thing::is_toughness_soft;
   }
   if (what == "is_spawner") {
     return &Thing::is_spawner;
   }
+  if (what == "is_spider") {
+    return &Thing::is_spider;
+  }
   if (what == "is_spiderweb") {
     return &Thing::is_spiderweb;
+  }
+  if (what == "is_staff") {
+    return &Thing::is_staff;
   }
   if (what == "is_sticky") {
     return &Thing::is_sticky;
@@ -1875,6 +2058,15 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_sword") {
     return &Thing::is_sword;
+  }
+  if (what == "is_target_radial") {
+    return &Thing::is_target_radial;
+  }
+  if (what == "is_temperature_change_sensitive") {
+    return &Thing::is_temperature_change_sensitive;
+  }
+  if (what == "is_temperature_sensitive") {
+    return &Thing::is_temperature_sensitive;
   }
   if (what == "is_throwable") {
     return &Thing::is_throwable;
@@ -1888,11 +2080,23 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_torch") {
     return &Thing::is_torch;
   }
+  if (what == "is_toughness_hard") {
+    return &Thing::is_toughness_hard;
+  }
+  if (what == "is_toughness_soft") {
+    return &Thing::is_toughness_soft;
+  }
+  if (what == "is_toughness_very_hard") {
+    return &Thing::is_toughness_very_hard;
+  }
   if (what == "is_treasure_chest") {
     return &Thing::is_treasure_chest;
   }
   if (what == "is_treasure_eater") {
     return &Thing::is_treasure_eater;
+  }
+  if (what == "is_treasure") {
+    return &Thing::is_treasure;
   }
   if (what == "is_treasure_type") {
     return &Thing::is_treasure_type;
@@ -1909,6 +2113,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_very_combustible") {
     return &Thing::is_very_combustible;
   }
+  if (what == "is_very_heavy") {
+    return &Thing::is_very_heavy;
+  }
   if (what == "is_wall_dungeon") {
     return &Thing::is_wall_dungeon;
   }
@@ -1921,11 +2128,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_water") {
     return &Thing::is_water;
   }
-  if (what == "is_able_to_use_rings") {
-    return &Thing::is_able_to_use_rings;
-  }
   if (what == "is_weapon") {
     return &Thing::is_weapon;
+  }
+  if (what == "is_wet_grass") {
+    return &Thing::is_wet_grass;
   }
   if (what == "is_wooden") {
     return &Thing::is_wooden;
@@ -1933,323 +2140,77 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "minion_limit") {
     return &Thing::minion_limit;
   }
-  if (what == "is_able_to_jump_escape") {
-    return &Thing::is_able_to_jump_escape;
+  if (what == "move_speed") {
+    return &Thing::move_speed;
   }
-  if (what == "is_able_to_follow") {
-    return &Thing::is_able_to_follow;
+  if (what == "noise_blocker") {
+    return &Thing::noise_blocker;
   }
-  if (what == "is_able_to_use_weapons") {
-    return &Thing::is_able_to_use_weapons;
+  if (what == "noise_decibels_hearing") {
+    return &Thing::noise_decibels_hearing;
   }
-  if (what == "is_bony") {
-    return &Thing::is_bony;
+  if (what == "noise_on_born") {
+    return &Thing::noise_on_born;
   }
-  if (what == "is_pink_blooded") {
-    return &Thing::is_pink_blooded;
+  if (what == "noise_on_jumping") {
+    return &Thing::noise_on_jumping;
   }
-  if (what == "is_pink_splatter") {
-    return &Thing::is_pink_splatter;
+  if (what == "noise_on_moving_or_being_carried") {
+    return &Thing::noise_on_moving_or_being_carried;
   }
-  if (what == "is_green_splatter") {
-    return &Thing::is_green_splatter;
+  if (what == "noise_on_open") {
+    return &Thing::noise_on_open;
   }
-  if (what == "unused_flag1") {
-    return &Thing::unused_flag1;
+  if (what == "noise_on_you_are_hit_and_now_dead") {
+    return &Thing::noise_on_you_are_hit_and_now_dead;
   }
-  if (what == "unused_flag2") {
-    return &Thing::unused_flag2;
+  if (what == "noise_on_you_are_hit_but_still_alive") {
+    return &Thing::noise_on_you_are_hit_but_still_alive;
   }
-  if (what == "unused_flag3") {
-    return &Thing::unused_flag3;
+  if (what == "range_max") {
+    return &Thing::range_max;
   }
-  if (what == "unused_flag4") {
-    return &Thing::unused_flag4;
+  if (what == "stamina_on_use") {
+    return &Thing::stamina_on_use;
   }
-  if (what == "unused_flag5") {
-    return &Thing::unused_flag5;
+  if (what == "stat_att_penalty_when_idle_max") {
+    return &Thing::stat_att_penalty_when_idle_max;
   }
-  if (what == "unused_flag6") {
-    return &Thing::unused_flag6;
+  if (what == "stat_att_penalty_when_idle") {
+    return &Thing::stat_att_penalty_when_idle;
   }
-  if (what == "unused_flag7") {
-    return &Thing::unused_flag7;
+  if (what == "stat_att_penalty_when_in_deep_water") {
+    return &Thing::stat_att_penalty_when_in_deep_water;
   }
-  if (what == "unused_flag8") {
-    return &Thing::unused_flag8;
+  if (what == "stat_att_penalty_when_in_shallow_water") {
+    return &Thing::stat_att_penalty_when_in_shallow_water;
   }
-  if (what == "unused_flag9") {
-    return &Thing::unused_flag9;
+  if (what == "stat_att_penalty_when_stuck_max") {
+    return &Thing::stat_att_penalty_when_stuck_max;
   }
-  if (what == "unused_flag10") {
-    return &Thing::unused_flag10;
+  if (what == "stat_att_penalty_when_stuck") {
+    return &Thing::stat_att_penalty_when_stuck;
   }
-  if (what == "unused_flag11") {
-    return &Thing::unused_flag11;
+  if (what == "stat_def_penalty_when_idle_max") {
+    return &Thing::stat_def_penalty_when_idle_max;
   }
-  if (what == "unused_flag12") {
-    return &Thing::unused_flag12;
+  if (what == "stat_def_penalty_when_idle") {
+    return &Thing::stat_def_penalty_when_idle;
   }
-  if (what == "unused_flag13") {
-    return &Thing::unused_flag13;
+  if (what == "stat_def_penalty_when_in_deep_water") {
+    return &Thing::stat_def_penalty_when_in_deep_water;
   }
-  if (what == "unused_flag14") {
-    return &Thing::unused_flag14;
+  if (what == "stat_def_penalty_when_in_shallow_water") {
+    return &Thing::stat_def_penalty_when_in_shallow_water;
   }
-  if (what == "unused_flag15") {
-    return &Thing::unused_flag15;
+  if (what == "stat_def_penalty_when_stuck_max") {
+    return &Thing::stat_def_penalty_when_stuck_max;
   }
-  if (what == "unused_flag16") {
-    return &Thing::unused_flag16;
+  if (what == "stat_def_penalty_when_stuck") {
+    return &Thing::stat_def_penalty_when_stuck;
   }
-  if (what == "unused_flag17") {
-    return &Thing::unused_flag17;
-  }
-  if (what == "unused_flag18") {
-    return &Thing::unused_flag18;
-  }
-  if (what == "unused_flag19") {
-    return &Thing::unused_flag19;
-  }
-  if (what == "unused_flag20") {
-    return &Thing::unused_flag20;
-  }
-  if (what == "unused_flag21") {
-    return &Thing::unused_flag21;
-  }
-  if (what == "unused_flag22") {
-    return &Thing::unused_flag22;
-  }
-  if (what == "unused_flag23") {
-    return &Thing::unused_flag23;
-  }
-  if (what == "unused_flag24") {
-    return &Thing::unused_flag24;
-  }
-  if (what == "unused_flag25") {
-    return &Thing::unused_flag25;
-  }
-  if (what == "unused_flag26") {
-    return &Thing::unused_flag26;
-  }
-  if (what == "unused_flag27") {
-    return &Thing::unused_flag27;
-  }
-  if (what == "unused_flag28") {
-    return &Thing::unused_flag28;
-  }
-  if (what == "unused_flag29") {
-    return &Thing::unused_flag29;
-  }
-  if (what == "unused_flag30") {
-    return &Thing::unused_flag30;
-  }
-  if (what == "unused_flag31") {
-    return &Thing::unused_flag31;
-  }
-  if (what == "unused_flag32") {
-    return &Thing::unused_flag32;
-  }
-  if (what == "unused_flag33") {
-    return &Thing::unused_flag33;
-  }
-  if (what == "unused_flag34") {
-    return &Thing::unused_flag34;
-  }
-  if (what == "unused_flag35") {
-    return &Thing::unused_flag35;
-  }
-  if (what == "unused_flag36") {
-    return &Thing::unused_flag36;
-  }
-  if (what == "unused_flag37") {
-    return &Thing::unused_flag37;
-  }
-  if (what == "unused_flag38") {
-    return &Thing::unused_flag38;
-  }
-  if (what == "unused_flag39") {
-    return &Thing::unused_flag39;
-  }
-  if (what == "unused_flag40") {
-    return &Thing::unused_flag40;
-  }
-  if (what == "unused_flag41") {
-    return &Thing::unused_flag41;
-  }
-  if (what == "unused_flag42") {
-    return &Thing::unused_flag42;
-  }
-  if (what == "unused_flag43") {
-    return &Thing::unused_flag43;
-  }
-  if (what == "unused_flag44") {
-    return &Thing::unused_flag44;
-  }
-  if (what == "unused_flag45") {
-    return &Thing::unused_flag45;
-  }
-  if (what == "unused_flag46") {
-    return &Thing::unused_flag46;
-  }
-  if (what == "unused_flag47") {
-    return &Thing::unused_flag47;
-  }
-  if (what == "unused_flag48") {
-    return &Thing::unused_flag48;
-  }
-  if (what == "unused_flag49") {
-    return &Thing::unused_flag49;
-  }
-  if (what == "unused_flag50") {
-    return &Thing::unused_flag50;
-  }
-  if (what == "unused_flag51") {
-    return &Thing::unused_flag51;
-  }
-  if (what == "unused_flag52") {
-    return &Thing::unused_flag52;
-  }
-  if (what == "unused_flag53") {
-    return &Thing::unused_flag53;
-  }
-  if (what == "unused_flag54") {
-    return &Thing::unused_flag54;
-  }
-  if (what == "unused_flag55") {
-    return &Thing::unused_flag55;
-  }
-  if (what == "unused_flag56") {
-    return &Thing::unused_flag56;
-  }
-  if (what == "unused_flag57") {
-    return &Thing::unused_flag57;
-  }
-  if (what == "unused_flag58") {
-    return &Thing::unused_flag58;
-  }
-  if (what == "unused_flag59") {
-    return &Thing::unused_flag59;
-  }
-  if (what == "unused_flag60") {
-    return &Thing::unused_flag60;
-  }
-  if (what == "unused_flag61") {
-    return &Thing::unused_flag61;
-  }
-  if (what == "unused_flag62") {
-    return &Thing::unused_flag62;
-  }
-  if (what == "unused_flag63") {
-    return &Thing::unused_flag63;
-  }
-  if (what == "unused_flag64") {
-    return &Thing::unused_flag64;
-  }
-  if (what == "unused_flag65") {
-    return &Thing::unused_flag65;
-  }
-  if (what == "unused_flag66") {
-    return &Thing::unused_flag66;
-  }
-  if (what == "unused_flag67") {
-    return &Thing::unused_flag67;
-  }
-  if (what == "unused_flag68") {
-    return &Thing::unused_flag68;
-  }
-  if (what == "unused_flag69") {
-    return &Thing::unused_flag69;
-  }
-  if (what == "unused_flag70") {
-    return &Thing::unused_flag70;
-  }
-  if (what == "unused_flag71") {
-    return &Thing::unused_flag71;
-  }
-  if (what == "unused_flag72") {
-    return &Thing::unused_flag72;
-  }
-  if (what == "unused_flag73") {
-    return &Thing::unused_flag73;
-  }
-  if (what == "unused_flag74") {
-    return &Thing::unused_flag74;
-  }
-  if (what == "unused_flag75") {
-    return &Thing::unused_flag75;
-  }
-  if (what == "unused_flag76") {
-    return &Thing::unused_flag76;
-  }
-  if (what == "unused_flag77") {
-    return &Thing::unused_flag77;
-  }
-  if (what == "unused_flag78") {
-    return &Thing::unused_flag78;
-  }
-  if (what == "unused_flag79") {
-    return &Thing::unused_flag79;
-  }
-  if (what == "unused_flag80") {
-    return &Thing::unused_flag80;
-  }
-  if (what == "unused_flag81") {
-    return &Thing::unused_flag81;
-  }
-  if (what == "unused_flag82") {
-    return &Thing::unused_flag82;
-  }
-  if (what == "unused_flag83") {
-    return &Thing::unused_flag83;
-  }
-  if (what == "unused_flag84") {
-    return &Thing::unused_flag84;
-  }
-  if (what == "unused_flag85") {
-    return &Thing::unused_flag85;
-  }
-  if (what == "unused_flag86") {
-    return &Thing::unused_flag86;
-  }
-  if (what == "unused_flag87") {
-    return &Thing::unused_flag87;
-  }
-  if (what == "unused_flag88") {
-    return &Thing::unused_flag88;
-  }
-  if (what == "unused_flag89") {
-    return &Thing::unused_flag89;
-  }
-  if (what == "unused_flag90") {
-    return &Thing::unused_flag90;
-  }
-  if (what == "unused_flag91") {
-    return &Thing::unused_flag91;
-  }
-  if (what == "unused_flag92") {
-    return &Thing::unused_flag92;
-  }
-  if (what == "unused_flag93") {
-    return &Thing::unused_flag93;
-  }
-  if (what == "unused_flag94") {
-    return &Thing::unused_flag94;
-  }
-  if (what == "unused_flag95") {
-    return &Thing::unused_flag95;
-  }
-  if (what == "unused_flag96") {
-    return &Thing::unused_flag96;
-  }
-  if (what == "unused_flag97") {
-    return &Thing::unused_flag97;
-  }
-  if (what == "unused_flag98") {
-    return &Thing::unused_flag98;
-  }
-  if (what == "unused_flag99") {
-    return &Thing::unused_flag99;
+  if (what == "temperature") {
+    return &Thing::temperature;
   }
   if (what == "unused_flag100") {
     return &Thing::unused_flag100;
@@ -2281,6 +2242,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag109") {
     return &Thing::unused_flag109;
   }
+  if (what == "unused_flag10") {
+    return &Thing::unused_flag10;
+  }
   if (what == "unused_flag110") {
     return &Thing::unused_flag110;
   }
@@ -2311,6 +2275,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag119") {
     return &Thing::unused_flag119;
   }
+  if (what == "unused_flag11") {
+    return &Thing::unused_flag11;
+  }
   if (what == "unused_flag120") {
     return &Thing::unused_flag120;
   }
@@ -2329,281 +2296,296 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag125") {
     return &Thing::unused_flag125;
   }
-  if (what == "is_able_to_walk_through_walls") {
-    return &Thing::is_able_to_walk_through_walls;
+  if (what == "unused_flag12") {
+    return &Thing::unused_flag12;
   }
-  if (what == "collision_hit_two_tiles_ahead") {
-    return &Thing::collision_hit_two_tiles_ahead;
+  if (what == "unused_flag13") {
+    return &Thing::unused_flag13;
   }
-  if (what == "is_flat") {
-    return &Thing::is_flat;
+  if (what == "unused_flag14") {
+    return &Thing::unused_flag14;
   }
-  if (what == "is_target_radial") {
-    return &Thing::is_target_radial;
+  if (what == "unused_flag15") {
+    return &Thing::unused_flag15;
   }
-  if (what == "is_staff") {
-    return &Thing::is_staff;
+  if (what == "unused_flag16") {
+    return &Thing::unused_flag16;
   }
-  if (what == "collision_hit_adj") {
-    return &Thing::collision_hit_adj;
+  if (what == "unused_flag17") {
+    return &Thing::unused_flag17;
   }
-  if (what == "collision_hit_180") {
-    return &Thing::collision_hit_180;
+  if (what == "unused_flag18") {
+    return &Thing::unused_flag18;
   }
-  if (what == "stamina_on_use") {
-    return &Thing::stamina_on_use;
+  if (what == "unused_flag19") {
+    return &Thing::unused_flag19;
   }
-  if (what == "collision_hit_360") {
-    return &Thing::collision_hit_360;
+  if (what == "unused_flag1") {
+    return &Thing::unused_flag1;
   }
-  if (what == "is_dead_on_falling") {
-    return &Thing::is_dead_on_falling;
+  if (what == "unused_flag20") {
+    return &Thing::unused_flag20;
   }
-  if (what == "is_temperature_sensitive") {
-    return &Thing::is_temperature_sensitive;
+  if (what == "unused_flag21") {
+    return &Thing::unused_flag21;
   }
-  if (what == "move_speed") {
-    return &Thing::move_speed;
+  if (what == "unused_flag22") {
+    return &Thing::unused_flag22;
   }
-  if (what == "damage_received_doubled_from_cold") {
-    return &Thing::damage_received_doubled_from_cold;
+  if (what == "unused_flag23") {
+    return &Thing::unused_flag23;
   }
-  if (what == "is_cold") {
-    return &Thing::is_cold;
+  if (what == "unused_flag24") {
+    return &Thing::unused_flag24;
   }
-  if (what == "is_temperature_change_sensitive") {
-    return &Thing::is_temperature_change_sensitive;
+  if (what == "unused_flag25") {
+    return &Thing::unused_flag25;
   }
-  if (what == "temperature") {
-    return &Thing::temperature;
+  if (what == "unused_flag26") {
+    return &Thing::unused_flag26;
   }
-  if (what == "is_very_heavy") {
-    return &Thing::is_very_heavy;
+  if (what == "unused_flag27") {
+    return &Thing::unused_flag27;
   }
-  if (what == "gfx_health_bar_shown_when_awake_only") {
-    return &Thing::gfx_health_bar_shown_when_awake_only;
+  if (what == "unused_flag28") {
+    return &Thing::unused_flag28;
   }
-  if (what == "gfx_show_asleep") {
-    return &Thing::gfx_show_asleep;
+  if (what == "unused_flag29") {
+    return &Thing::unused_flag29;
   }
-  if (what == "noise_on_jumping") {
-    return &Thing::noise_on_jumping;
+  if (what == "unused_flag2") {
+    return &Thing::unused_flag2;
   }
-  if (what == "noise_on_born") {
-    return &Thing::noise_on_born;
+  if (what == "unused_flag30") {
+    return &Thing::unused_flag30;
   }
-  if (what == "noise_on_open") {
-    return &Thing::noise_on_open;
+  if (what == "unused_flag31") {
+    return &Thing::unused_flag31;
   }
-  if (what == "noise_on_you_are_hit_and_now_dead") {
-    return &Thing::noise_on_you_are_hit_and_now_dead;
+  if (what == "unused_flag32") {
+    return &Thing::unused_flag32;
   }
-  if (what == "noise_on_you_are_hit_but_still_alive") {
-    return &Thing::noise_on_you_are_hit_but_still_alive;
+  if (what == "unused_flag33") {
+    return &Thing::unused_flag33;
   }
-  if (what == "noise_decibels_hearing") {
-    return &Thing::noise_decibels_hearing;
+  if (what == "unused_flag34") {
+    return &Thing::unused_flag34;
   }
-  if (what == "noise_blocker") {
-    return &Thing::noise_blocker;
+  if (what == "unused_flag35") {
+    return &Thing::unused_flag35;
   }
-  if (what == "is_immune_to_cold") {
-    return &Thing::is_immune_to_cold;
+  if (what == "unused_flag36") {
+    return &Thing::unused_flag36;
   }
-  if (what == "is_breather") {
-    return &Thing::is_breather;
+  if (what == "unused_flag37") {
+    return &Thing::unused_flag37;
   }
-  if (what == "noise_on_moving_or_being_carried") {
-    return &Thing::noise_on_moving_or_being_carried;
+  if (what == "unused_flag38") {
+    return &Thing::unused_flag38;
   }
-  if (what == "is_asleep_initially") {
-    return &Thing::is_asleep_initially;
+  if (what == "unused_flag39") {
+    return &Thing::unused_flag39;
   }
-  if (what == "is_able_to_sleep") {
-    return &Thing::is_able_to_sleep;
+  if (what == "unused_flag3") {
+    return &Thing::unused_flag3;
   }
-  if (what == "is_obstacle_when_dead") {
-    return &Thing::is_obstacle_when_dead;
+  if (what == "unused_flag40") {
+    return &Thing::unused_flag40;
   }
-  if (what == "is_gas_blocker") {
-    return &Thing::is_gas_blocker;
+  if (what == "unused_flag41") {
+    return &Thing::unused_flag41;
   }
-  if (what == "noise_blocker") {
-    return &Thing::noise_blocker;
+  if (what == "unused_flag42") {
+    return &Thing::unused_flag42;
   }
-  if (what == "is_light_blocker_for_monst") {
-    return &Thing::is_light_blocker_for_monst;
+  if (what == "unused_flag43") {
+    return &Thing::unused_flag43;
   }
-  if (what == "is_pink_blood_eater") {
-    return &Thing::is_pink_blood_eater;
+  if (what == "unused_flag44") {
+    return &Thing::unused_flag44;
   }
-  if (what == "is_green_blood") {
-    return &Thing::is_green_blood;
+  if (what == "unused_flag45") {
+    return &Thing::unused_flag45;
   }
-  if (what == "is_biome_swamp") {
-    return &Thing::is_biome_swamp;
+  if (what == "unused_flag46") {
+    return &Thing::unused_flag46;
   }
-  if (what == "is_biome_dungeon") {
-    return &Thing::is_biome_dungeon;
+  if (what == "unused_flag47") {
+    return &Thing::unused_flag47;
   }
-  if (what == "is_treasure") {
-    return &Thing::is_treasure;
+  if (what == "unused_flag48") {
+    return &Thing::unused_flag48;
   }
-  if (what == "is_monst_class_e") {
-    return &Thing::is_monst_class_e;
+  if (what == "unused_flag49") {
+    return &Thing::unused_flag49;
   }
-  if (what == "is_green_blood_eater") {
-    return &Thing::is_green_blood_eater;
+  if (what == "unused_flag4") {
+    return &Thing::unused_flag4;
   }
-  if (what == "is_mob_challenge_class_b") {
-    return &Thing::is_mob_challenge_class_b;
+  if (what == "unused_flag50") {
+    return &Thing::unused_flag50;
   }
-  if (what == "is_mob_challenge_class_a") {
-    return &Thing::is_mob_challenge_class_a;
+  if (what == "unused_flag51") {
+    return &Thing::unused_flag51;
   }
-  if (what == "is_monst_class_d") {
-    return &Thing::is_monst_class_d;
+  if (what == "unused_flag52") {
+    return &Thing::unused_flag52;
   }
-  if (what == "is_monst_class_c") {
-    return &Thing::is_monst_class_c;
+  if (what == "unused_flag53") {
+    return &Thing::unused_flag53;
   }
-  if (what == "is_monst_class_b") {
-    return &Thing::is_monst_class_b;
+  if (what == "unused_flag54") {
+    return &Thing::unused_flag54;
   }
-  if (what == "is_monst_class_a") {
-    return &Thing::is_monst_class_a;
+  if (what == "unused_flag55") {
+    return &Thing::unused_flag55;
   }
-  if (what == "stat_att_penalty_when_in_deep_water") {
-    return &Thing::stat_att_penalty_when_in_deep_water;
+  if (what == "unused_flag56") {
+    return &Thing::unused_flag56;
   }
-  if (what == "stat_att_penalty_when_in_shallow_water") {
-    return &Thing::stat_att_penalty_when_in_shallow_water;
+  if (what == "unused_flag57") {
+    return &Thing::unused_flag57;
   }
-  if (what == "stat_att_penalty_when_idle_max") {
-    return &Thing::stat_att_penalty_when_idle_max;
+  if (what == "unused_flag58") {
+    return &Thing::unused_flag58;
   }
-  if (what == "stat_att_penalty_when_idle") {
-    return &Thing::stat_att_penalty_when_idle;
+  if (what == "unused_flag59") {
+    return &Thing::unused_flag59;
   }
-  if (what == "stat_att_penalty_when_stuck") {
-    return &Thing::stat_att_penalty_when_stuck;
+  if (what == "unused_flag5") {
+    return &Thing::unused_flag5;
   }
-  if (what == "stat_att_penalty_when_stuck_max") {
-    return &Thing::stat_att_penalty_when_stuck_max;
+  if (what == "unused_flag60") {
+    return &Thing::unused_flag60;
   }
-  if (what == "stat_def_penalty_when_stuck_max") {
-    return &Thing::stat_def_penalty_when_stuck_max;
+  if (what == "unused_flag61") {
+    return &Thing::unused_flag61;
   }
-  if (what == "stat_def_penalty_when_idle_max") {
-    return &Thing::stat_def_penalty_when_idle_max;
+  if (what == "unused_flag62") {
+    return &Thing::unused_flag62;
   }
-  if (what == "stat_def_penalty_when_in_deep_water") {
-    return &Thing::stat_def_penalty_when_in_deep_water;
+  if (what == "unused_flag63") {
+    return &Thing::unused_flag63;
   }
-  if (what == "stat_def_penalty_when_in_shallow_water") {
-    return &Thing::stat_def_penalty_when_in_shallow_water;
+  if (what == "unused_flag64") {
+    return &Thing::unused_flag64;
   }
-  if (what == "stat_def_penalty_when_stuck") {
-    return &Thing::stat_def_penalty_when_stuck;
+  if (what == "unused_flag65") {
+    return &Thing::unused_flag65;
   }
-  if (what == "stat_def_penalty_when_idle") {
-    return &Thing::stat_def_penalty_when_idle;
+  if (what == "unused_flag66") {
+    return &Thing::unused_flag66;
   }
-  if (what == "is_able_to_move_diagonally") {
-    return &Thing::is_able_to_move_diagonally;
+  if (what == "unused_flag67") {
+    return &Thing::unused_flag67;
   }
-  if (what == "is_meltable") {
-    return &Thing::is_meltable;
+  if (what == "unused_flag68") {
+    return &Thing::unused_flag68;
   }
-  if (what == "is_amulet") {
-    return &Thing::is_amulet;
+  if (what == "unused_flag69") {
+    return &Thing::unused_flag69;
   }
-  if (what == "is_able_to_use_amulet") {
-    return &Thing::is_able_to_use_amulet;
+  if (what == "unused_flag6") {
+    return &Thing::unused_flag6;
   }
-  if (what == "is_able_to_use_helmet") {
-    return &Thing::is_able_to_use_helmet;
+  if (what == "unused_flag70") {
+    return &Thing::unused_flag70;
   }
-  if (what == "is_able_to_use_boots") {
-    return &Thing::is_able_to_use_boots;
+  if (what == "unused_flag71") {
+    return &Thing::unused_flag71;
   }
-  if (what == "is_able_to_use_cloak") {
-    return &Thing::is_able_to_use_cloak;
+  if (what == "unused_flag72") {
+    return &Thing::unused_flag72;
   }
-  if (what == "is_able_to_use_shield") {
-    return &Thing::is_able_to_use_shield;
+  if (what == "unused_flag73") {
+    return &Thing::unused_flag73;
   }
-  if (what == "is_able_to_use_gauntlet") {
-    return &Thing::is_able_to_use_gauntlet;
+  if (what == "unused_flag74") {
+    return &Thing::unused_flag74;
   }
-  if (what == "is_able_to_use_helmet") {
-    return &Thing::is_able_to_use_helmet;
+  if (what == "unused_flag75") {
+    return &Thing::unused_flag75;
   }
-  if (what == "is_helmet") {
-    return &Thing::is_helmet;
+  if (what == "unused_flag76") {
+    return &Thing::unused_flag76;
   }
-  if (what == "is_boots") {
-    return &Thing::is_boots;
+  if (what == "unused_flag77") {
+    return &Thing::unused_flag77;
   }
-  if (what == "is_shield") {
-    return &Thing::is_shield;
+  if (what == "unused_flag78") {
+    return &Thing::unused_flag78;
   }
-  if (what == "is_cloak") {
-    return &Thing::is_cloak;
+  if (what == "unused_flag79") {
+    return &Thing::unused_flag79;
   }
-  if (what == "is_gauntlet") {
-    return &Thing::is_gauntlet;
+  if (what == "unused_flag7") {
+    return &Thing::unused_flag7;
   }
-  if (what == "is_toughness_hard") {
-    return &Thing::is_toughness_hard;
+  if (what == "unused_flag80") {
+    return &Thing::unused_flag80;
   }
-  if (what == "is_red_blooded") {
-    return &Thing::is_red_blooded;
+  if (what == "unused_flag81") {
+    return &Thing::unused_flag81;
   }
-  if (what == "is_green_blooded") {
-    return &Thing::is_green_blooded;
+  if (what == "unused_flag82") {
+    return &Thing::unused_flag82;
   }
-  if (what == "is_able_to_jump_without_tiring") {
-    return &Thing::is_able_to_jump_without_tiring;
+  if (what == "unused_flag83") {
+    return &Thing::unused_flag83;
   }
-  if (what == "is_spider") {
-    return &Thing::is_spider;
+  if (what == "unused_flag84") {
+    return &Thing::unused_flag84;
   }
-  if (what == "is_able_to_jump_attack") {
-    return &Thing::is_able_to_jump_attack;
+  if (what == "unused_flag85") {
+    return &Thing::unused_flag85;
   }
-  if (what == "is_able_to_jump_onto") {
-    return &Thing::is_able_to_jump_onto;
+  if (what == "unused_flag86") {
+    return &Thing::unused_flag86;
   }
-  if (what == "is_crushable") {
-    return &Thing::is_crushable;
+  if (what == "unused_flag87") {
+    return &Thing::unused_flag87;
   }
-  if (what == "is_able_to_use_armor") {
-    return &Thing::is_able_to_use_armor;
+  if (what == "unused_flag88") {
+    return &Thing::unused_flag88;
   }
-  if (what == "is_heavy") {
-    return &Thing::is_heavy;
+  if (what == "unused_flag89") {
+    return &Thing::unused_flag89;
   }
-  if (what == "is_slippery") {
-    return &Thing::is_slippery;
+  if (what == "unused_flag8") {
+    return &Thing::unused_flag8;
   }
-  if (what == "is_armor") {
-    return &Thing::is_armor;
+  if (what == "unused_flag90") {
+    return &Thing::unused_flag90;
   }
-  if (what == "is_flying") {
-    return &Thing::is_flying;
+  if (what == "unused_flag91") {
+    return &Thing::unused_flag91;
   }
-  if (what == "is_map_beast") {
-    return &Thing::is_map_beast;
+  if (what == "unused_flag92") {
+    return &Thing::unused_flag92;
   }
-  if (what == "is_able_to_use_wands_or_staffs") {
-    return &Thing::is_able_to_use_wands_or_staffs;
+  if (what == "unused_flag93") {
+    return &Thing::unused_flag93;
   }
-  if (what == "is_aquatic") {
-    return &Thing::is_aquatic;
+  if (what == "unused_flag94") {
+    return &Thing::unused_flag94;
   }
-  if (what == "range_max") {
-    return &Thing::range_max;
+  if (what == "unused_flag95") {
+    return &Thing::unused_flag95;
+  }
+  if (what == "unused_flag96") {
+    return &Thing::unused_flag96;
+  }
+  if (what == "unused_flag97") {
+    return &Thing::unused_flag97;
+  }
+  if (what == "unused_flag98") {
+    return &Thing::unused_flag98;
+  }
+  if (what == "unused_flag99") {
+    return &Thing::unused_flag99;
+  }
+  if (what == "unused_flag9") {
+    return &Thing::unused_flag9;
   }
 
   DIE("could not find a matches function for [%s]", what.c_str());
