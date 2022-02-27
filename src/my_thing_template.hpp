@@ -102,14 +102,18 @@ private:
   int _blit_right_off {};
   int _blit_top_off {};
   int _break_chance_d10000 {};
-  int _crit_chance_d10000 {};
   int _capacity_height {};
   int _capacity_width {};
   int _charge_count {};
   int _collateral_damage_pct {};
   int _collision_attack {};
   int _collision_check {};
+  int _collision_hit_180 {};
+  int _collision_hit_360 {};
+  int _collision_hit_adj {};
   int _collision_hit_priority {};
+  int _collision_hit_two_tiles_ahead {};
+  int _crit_chance_d10000 {};
   int _damage_acid_chance_d1000 {};
   int _damage_cold_chance_d1000 {};
   int _damage_crush_chance_d1000 {};
@@ -267,6 +271,7 @@ private:
   int _is_cursor_path {};
   int _is_cursor_path_hazard_for_player {};
   int _is_dead_on_end_of_anim {};
+  int _is_dead_on_falling {};
   int _is_dead_on_shove {};
   int _is_debuff {};
   int _is_debug_path {};
@@ -291,6 +296,7 @@ private:
   int _is_explosion {};
   int _is_fearless {};
   int _is_fire {};
+  int _is_flat {};
   int _is_floating {};
   int _is_floor {};
   int _is_floor_deco {};
@@ -398,10 +404,15 @@ private:
   int _is_spawner {};
   int _is_spider {};
   int _is_spiderweb {};
+  int _is_staff {};
   int _is_steal_item_chance_d1000 {};
   int _is_sticky {};
   int _is_stone {};
   int _is_sword {};
+  int _is_target_radial {};
+  int _is_target_select {};
+  int _is_temperature_change_sensitive {};
+  int _is_temperature_sensitive {};
   int _is_the_grid {};
   int _is_throwable {};
   int _is_tickable {}; // e.g. a monst or player or something moveable
@@ -422,7 +433,6 @@ private:
   int _is_used_when_thrown {};
   int _is_very_combustible {};
   int _is_very_heavy {};
-  int _is_target_select {};
   int _is_wall {};
   int _is_wall_dungeon {};
   int _is_wand {};
@@ -454,6 +464,7 @@ private:
   int _rarity {};
   int _spawn_group_radius {};
   int _stamina {};
+  int _stamina_on_use {};
   int _stat_att {};
   int _stat_att_mod {};
   int _stat_att_penalty_when_idle {};
@@ -486,7 +497,6 @@ private:
   int _stat_str {};
   int _stat_str_mod {};
   int _temperature {};
-  int _is_temperature_change_sensitive {};
   int _unused_chance1_d1000 {};
   int _unused_chance2_d1000 {};
   int _unused_chance3_d1000 {};
@@ -523,18 +533,7 @@ private:
   int _unused_flag123 {};
   int _unused_flag124 {};
   int _unused_flag125 {};
-  int _unused_flag126 {};
-  int _collision_hit_two_tiles_ahead {};
-  int _is_flat {};
-  int _is_target_radial {};
   int _unused_flag13 {};
-  int _is_staff {};
-  int _collision_hit_adj {};
-  int _collision_hit_180 {};
-  int _stamina_on_use {};
-  int _collision_hit_360 {};
-  int _is_dead_on_falling {};
-  int _is_temperature_sensitive {};
   int _unused_flag14 {};
   int _unused_flag15 {};
   int _unused_flag16 {};
@@ -1000,13 +999,17 @@ public:
   int blit_right_off(void) const { return _blit_right_off; }
   int blit_top_off(void) const { return _blit_top_off; }
   int break_chance_d10000(void) const { return _break_chance_d10000; }
-  int crit_chance_d10000(void) const { return _crit_chance_d10000; }
   int capacity_height(void) const { return _capacity_height; }
   int capacity_width(void) const { return _capacity_width; }
   int charge_count(void) const { return _charge_count; }
   int collateral_damage_pct(void) const { return _collateral_damage_pct; }
   int collision_check(void) const { return _collision_check; }
+  int collision_hit_180(void) const { return _collision_hit_180; }
+  int collision_hit_360(void) const { return _collision_hit_360; }
+  int collision_hit_adj(void) const { return _collision_hit_adj; }
   int collision_hit_priority(void) const { return _collision_hit_priority; }
+  int collision_hit_two_tiles_ahead(void) const { return _collision_hit_two_tiles_ahead; }
+  int crit_chance_d10000(void) const { return _crit_chance_d10000; }
   int damage_acid_chance_d1000(void) const { return _damage_acid_chance_d1000; }
   int damage_cold_chance_d1000(void) const { return _damage_cold_chance_d1000; }
   int damage_crush_chance_d1000(void) const { return _damage_crush_chance_d1000; }
@@ -1165,6 +1168,7 @@ public:
   int is_cursor_path(void) const { return _is_cursor_path; }
   int is_cursor(void) const { return _is_cursor; }
   int is_dead_on_end_of_anim(void) const { return _is_dead_on_end_of_anim; }
+  int is_dead_on_falling(void) const { return _is_dead_on_falling; }
   int is_dead_on_shove(void) const { return _is_dead_on_shove; }
   int is_debuff(void) const { return _is_debuff; }
   int is_debug_path(void) const { return _is_debug_path; }
@@ -1189,6 +1193,7 @@ public:
   int is_explosion(void) const { return _is_explosion; }
   int is_fearless(void) const { return _is_fearless; }
   int is_fire(void) const { return _is_fire; }
+  int is_flat(void) const { return _is_flat; }
   int is_floating(void) const { return _is_floating; }
   int is_floor_deco(void) const { return _is_floor_deco; }
   int is_floor(void) const { return _is_floor; }
@@ -1295,10 +1300,15 @@ public:
   int is_spawner(void) const { return _is_spawner; }
   int is_spider(void) const { return _is_spider; }
   int is_spiderweb(void) const { return _is_spiderweb; }
+  int is_staff(void) const { return _is_staff; }
   int is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1000; }
   int is_sticky(void) const { return _is_sticky; }
   int is_stone(void) const { return _is_stone; }
   int is_sword(void) const { return _is_sword; }
+  int is_target_radial(void) const { return _is_target_radial; }
+  int is_target_select(void) const { return _is_target_select; }
+  int is_temperature_change_sensitive(void) const { return _is_temperature_change_sensitive; }
+  int is_temperature_sensitive(void) const { return _is_temperature_sensitive; }
   int is_the_grid(void) const { return _is_the_grid; }
   int is_throwable(void) const { return _is_throwable; }
   int is_tickable(void) const { return _is_tickable; }
@@ -1319,7 +1329,6 @@ public:
   int is_used_when_thrown(void) const { return _is_used_when_thrown; }
   int is_very_combustible(void) const { return _is_very_combustible; }
   int is_very_heavy(void) const { return _is_very_heavy; }
-  int is_target_select(void) const { return _is_target_select; }
   int is_wall_dungeon(void) const { return _is_wall_dungeon; }
   int is_wall(void) const { return _is_wall; }
   int is_wand_or_staff(void) const { return _is_wand || _is_staff; }
@@ -1351,13 +1360,16 @@ public:
   int range_max(void) const { return _range_max; }
   int rarity(void) const { return _rarity; }
   int spawn_group_radius(void) const { return _spawn_group_radius; }
+  int stamina_on_use(void) const { return _stamina_on_use; }
   int stamina(void) const { return _stamina; }
+  int stat_att_mod(void) const { return _stat_att_mod; }
   int stat_att_penalty_when_idle_max(void) const { return _stat_att_penalty_when_idle_max; }
   int stat_att_penalty_when_idle(void) const { return _stat_att_penalty_when_idle; }
   int stat_att_penalty_when_in_deep_water(void) const { return _stat_att_penalty_when_in_deep_water; }
   int stat_att_penalty_when_in_shallow_water(void) const { return _stat_att_penalty_when_in_shallow_water; }
   int stat_att_penalty_when_stuck_max(void) const { return _stat_att_penalty_when_stuck_max; }
   int stat_att_penalty_when_stuck(void) const { return _stat_att_penalty_when_stuck; }
+  int stat_att(void) const { return _stat_att; }
   int stat_con_mod(void) const { return _stat_con_mod; }
   int stat_con(void) const { return _stat_con; }
   int stat_def_mod(void) const { return _stat_def_mod; }
@@ -1380,10 +1392,7 @@ public:
   int stats07(void) const { return _stats07; }
   int stats09(void) const { return _stats09; }
   int stat_str_mod(void) const { return _stat_str_mod; }
-  int stat_att_mod(void) const { return _stat_att_mod; }
   int stat_str(void) const { return _stat_str; }
-  int stat_att(void) const { return _stat_att; }
-  int is_temperature_change_sensitive(void) const { return _is_temperature_change_sensitive; }
   int temperature(void) const { return _temperature; }
   int unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
   int unused_chance2_d1000(void) const { return _unused_chance2_d1000; }
@@ -1419,18 +1428,7 @@ public:
   int unused_flag123(void) const { return _unused_flag123; }
   int unused_flag124(void) const { return _unused_flag124; }
   int unused_flag125(void) const { return _unused_flag125; }
-  int unused_flag126(void) const { return _unused_flag126; }
-  int collision_hit_two_tiles_ahead(void) const { return _collision_hit_two_tiles_ahead; }
-  int is_flat(void) const { return _is_flat; }
-  int is_target_radial(void) const { return _is_target_radial; }
   int unused_flag12(void) const { return _unused_flag12; }
-  int is_staff(void) const { return _is_staff; }
-  int collision_hit_adj(void) const { return _collision_hit_adj; }
-  int collision_hit_180(void) const { return _collision_hit_180; }
-  int stamina_on_use(void) const { return _stamina_on_use; }
-  int collision_hit_360(void) const { return _collision_hit_360; }
-  int is_dead_on_falling(void) const { return _is_dead_on_falling; }
-  int is_temperature_sensitive(void) const { return _is_temperature_sensitive; }
   int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag14(void) const { return _unused_flag14; }
   int unused_flag15(void) const { return _unused_flag15; }
@@ -1549,14 +1547,18 @@ public:
   void blit_right_off_set(int v) { _blit_right_off = v; }
   void blit_top_off_set(int v) { _blit_top_off = v; }
   void break_chance_d10000_set(int v) { _break_chance_d10000 = v; }
-  void crit_chance_d10000_set(int v) { _crit_chance_d10000 = v; }
   void capacity_height_set(int v) { _capacity_height = v; }
   void capacity_width_set(int v) { _capacity_width = v; }
   void charge_count_set(int v) { _charge_count = v; }
   void collateral_damage_pct_set(int v) { _collateral_damage_pct = v; }
   void collision_attack_set(int v) { _collision_attack = v; }
   void collision_check_set(int v) { _collision_check = v; }
+  void collision_hit_180_set(int v) { _collision_hit_180 = v; }
+  void collision_hit_360_set(int v) { _collision_hit_360 = v; }
+  void collision_hit_adj_set(int v) { _collision_hit_adj = v; }
   void collision_hit_priority_set(int v) { _collision_hit_priority = v; }
+  void collision_hit_two_tiles_ahead_set(int v) { _collision_hit_two_tiles_ahead = v; }
+  void crit_chance_d10000_set(int v) { _crit_chance_d10000 = v; }
   void damage_acid_chance_d1000_set(int v) { _damage_acid_chance_d1000 = v; }
   void damage_cold_chance_d1000_set(int v) { _damage_cold_chance_d1000 = v; }
   void damage_crush_chance_d1000_set(int v) { _damage_crush_chance_d1000 = v; }
@@ -1718,6 +1720,7 @@ public:
   void is_cursor_path_set(int v) { _is_cursor_path = v; }
   void is_cursor_set(int v) { _is_cursor = v; }
   void is_dead_on_end_of_anim_set(int v) { _is_dead_on_end_of_anim = v; }
+  void is_dead_on_falling_set(int v) { _is_dead_on_falling = v; }
   void is_dead_on_shove_set(int v) { _is_dead_on_shove = v; }
   void is_debuff_set(int v) { _is_debuff = v; }
   void is_debug_path_set(int v) { _is_debug_path = v; }
@@ -1742,6 +1745,7 @@ public:
   void is_explosion_set(int v) { _is_explosion = v; }
   void is_fearless_set(int v) { _is_fearless = v; }
   void is_fire_set(int v) { _is_fire = v; }
+  void is_flat_set(int v) { _is_flat = v; }
   void is_floating_set(int v) { _is_floating = v; }
   void is_floor_deco_set(int v) { _is_floor_deco = v; }
   void is_floor_set(int v) { _is_floor = v; }
@@ -1848,10 +1852,15 @@ public:
   void is_spawner_set(int v) { _is_spawner = v; }
   void is_spider_set(int v) { _is_spider = v; }
   void is_spiderweb_set(int v) { _is_spiderweb = v; }
+  void is_staff_set(int v) { _is_staff = v; }
   void is_steal_item_chance_d1000_set(int v) { _is_steal_item_chance_d1000 = v; }
   void is_sticky_set(int v) { _is_sticky = v; }
   void is_stone_set(int v) { _is_stone = v; }
   void is_sword_set(int v) { _is_sword = v; }
+  void is_target_radial_set(int v) { _is_target_radial = v; }
+  void is_target_select_set(int v) { _is_target_select = v; }
+  void is_temperature_change_sensitive_set(int v) { _is_temperature_change_sensitive = v; }
+  void is_temperature_sensitive_set(int v) { _is_temperature_sensitive = v; }
   void is_the_grid_set(int v) { _is_the_grid = v; }
   void is_throwable_set(int v) { _is_throwable = v; }
   void is_tickable_set(int v) { _is_tickable = v; }
@@ -1872,7 +1881,6 @@ public:
   void is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
   void is_very_combustible_set(int v) { _is_very_combustible = v; }
   void is_very_heavy_set(int v) { _is_very_heavy = v; }
-  void is_target_select_set(int v) { _is_target_select = v; }
   void is_wall_dungeon_set(int v) { _is_wall_dungeon = v; }
   void is_wall_set(int v) { _is_wall = v; }
   void is_wand_set(int v) { _is_wand = v; }
@@ -1884,8 +1892,6 @@ public:
   void is_wooden_set(int v) { _is_wooden = v; }
   void item_height_set(int v) { _item_height = v; }
   void item_width_set(int v) { _item_width = v; }
-  void target_name_laser_set(const std::string &v) { _target_name_laser = v; }
-  void target_name_radial_set(const std::string &v) { _target_name_radial = v; }
   void light_color_set(const std::string &v) { _light_color = v; }
   void light_power_set(int v) { _light_power = v; }
   void long_text_description_extra_set(const std::string &v) { _long_text_description_extra = v; }
@@ -1920,9 +1926,9 @@ public:
   void on_damage_natural_attack_do_set(const std::string &v) { _on_damage_natural_attack_do = v; }
   void on_damage_necrosis_do_set(const std::string &v) { _on_damage_necrosis_do = v; }
   void on_damage_poison_do_set(const std::string &v) { _on_damage_poison_do = v; }
+  void on_damage_stat_att_do_set(const std::string &v) { _on_damage_stat_att_do = v; }
   void on_damage_stat_con_do_set(const std::string &v) { _on_damage_stat_con_do = v; }
   void on_damage_stat_str_do_set(const std::string &v) { _on_damage_stat_str_do = v; }
-  void on_damage_stat_att_do_set(const std::string &v) { _on_damage_stat_att_do = v; }
   void on_death_do_set(const std::string &v) { _on_death_do = v; }
   void on_death_drop_all_items_set(int v) { _on_death_drop_all_items = v; }
   void on_death_is_open_set(int v) { _on_death_is_open = v; }
@@ -1952,15 +1958,15 @@ public:
   void on_owner_damage_natural_attack_do_set(const std::string &v) { _on_owner_damage_natural_attack_do = v; }
   void on_owner_damage_necrosis_do_set(const std::string &v) { _on_owner_damage_necrosis_do = v; }
   void on_owner_damage_poison_do_set(const std::string &v) { _on_owner_damage_poison_do = v; }
+  void on_owner_damage_stat_att_do_set(const std::string &v) { _on_owner_damage_stat_att_do = v; }
   void on_owner_damage_stat_con_do_set(const std::string &v) { _on_owner_damage_stat_con_do = v; }
   void on_owner_damage_stat_str_do_set(const std::string &v) { _on_owner_damage_stat_str_do = v; }
-  void on_owner_damage_stat_att_do_set(const std::string &v) { _on_owner_damage_stat_att_do = v; }
   void on_owner_remove_do_set(const std::string &v) { _on_owner_remove_do = v; }
   void on_polymorphed_do_set(const std::string &v) { _on_polymorphed_do = v; }
+  void on_swing_do_set(const std::string &v) { _on_swing_do = v; }
   void on_tick_do_set(const std::string &v) { _on_tick_do = v; }
   void on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }
   void on_use_do_set(const std::string &v) { _on_use_do = v; }
-  void on_swing_do_set(const std::string &v) { _on_swing_do = v; }
   void on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
   void on_you_are_declared_leader_do_set(const std::string &v) { _on_you_are_declared_leader_do = v; }
   void on_you_are_hit_and_now_dead_do_set(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }
@@ -1968,12 +1974,12 @@ public:
   void on_you_are_on_fire_do_set(const std::string &v) { _on_you_are_on_fire_do = v; }
   void on_you_miss_do_set(const std::string &v) { _on_you_miss_do = v; }
   void on_you_natural_attack_do_set(const std::string &v) { _on_you_natural_attack_do = v; }
-  void target_name_projectile_set(const std::string &v) { _target_name_projectile = v; }
   void range_max_set(int v) { _range_max = v; }
   void rarity_set(int v) { _rarity = v; }
   void short_text_name_set(const std::string &v) { _short_text_name = v; }
   void spawn_group_radius_set(int v) { _spawn_group_radius = v; }
   void spawn_on_shoved_set(const std::string &v) { _spawn_on_shoved = v; }
+  void stamina_on_use_set(int v) { _stamina_on_use = v; }
   void stamina_set(int v) { _stamina = v; }
   void stat_att_mod_set(int v) { _stat_att_mod = v; }
   void stat_att_penalty_when_idle_max_set(int v) { _stat_att_penalty_when_idle_max = v; }
@@ -2009,7 +2015,9 @@ public:
   void str1_set(const std::string &v) { _str1 = v; }
   void str2_set(const std::string &v) { _str2 = v; }
   void str4_set(const std::string &v) { _str4 = v; }
-  void is_temperature_change_sensitive_set(int v) { _is_temperature_change_sensitive = v; }
+  void target_name_laser_set(const std::string &v) { _target_name_laser = v; }
+  void target_name_projectile_set(const std::string &v) { _target_name_projectile = v; }
+  void target_name_radial_set(const std::string &v) { _target_name_radial = v; }
   void temperature_set(int v) { _temperature = v; }
   void text_a_or_an_set(const std::string &v) { _text_a_or_an = v; }
   void text_debuff_set(const std::string &v) { _text_debuff = v; }
@@ -2057,18 +2065,7 @@ public:
   void unused_flag123_set(int v) { _unused_flag123 = v; }
   void unused_flag124_set(int v) { _unused_flag124 = v; }
   void unused_flag125_set(int v) { _unused_flag125 = v; }
-  void unused_flag126_set(int v) { _unused_flag126 = v; }
-  void collision_hit_two_tiles_ahead_set(int v) { _collision_hit_two_tiles_ahead = v; }
-  void is_flat_set(int v) { _is_flat = v; }
-  void is_target_radial_set(int v) { _is_target_radial = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }
-  void is_staff_set(int v) { _is_staff = v; }
-  void collision_hit_adj_set(int v) { _collision_hit_adj = v; }
-  void collision_hit_180_set(int v) { _collision_hit_180 = v; }
-  void stamina_on_use_set(int v) { _stamina_on_use = v; }
-  void collision_hit_360_set(int v) { _collision_hit_360 = v; }
-  void is_dead_on_falling_set(int v) { _is_dead_on_falling = v; }
-  void is_temperature_sensitive_set(int v) { _is_temperature_sensitive = v; }
   void unused_flag13_set(int v) { _unused_flag13 = v; }
   void unused_flag14_set(int v) { _unused_flag14 = v; }
   void unused_flag15_set(int v) { _unused_flag15 = v; }

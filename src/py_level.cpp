@@ -67,8 +67,8 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
                    m.is_monst_class_b || m.is_monst_class_c || m.is_enchantstone || m.is_skillstone ||
                    m.is_monst_class_d || m.is_monst_class_e || m.is_treasure_class_a || m.is_treasure_class_b ||
                    m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
-                   m.is_potion || m.is_wand_or_staff || m.is_ring || m.is_secret_door || m.is_brazier || m.is_barrel ||
-                   m.is_trap || m.is_shallow_water || m.is_deep_water || m.is_floor_deco) {
+                   m.is_potion || m.is_wand_or_staff || m.is_ring || m.is_secret_door || m.is_brazier ||
+                   m.is_barrel || m.is_trap || m.is_shallow_water || m.is_deep_water || m.is_floor_deco) {
           floor_string += Charmap::FLOOR;
         } else {
           floor_string += Charmap::SPACE;
@@ -111,7 +111,8 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
             m.is_monst_class_a || m.is_monst_class_b || m.is_monst_class_c || m.is_enchantstone || m.is_skillstone ||
             m.is_monst_class_d || m.is_monst_class_e || m.is_treasure_class_a || m.is_treasure_class_b ||
             m.is_treasure_class_c || m.is_weapon_class_a || m.is_weapon_class_b || m.is_weapon_class_c ||
-            m.is_potion || m.is_wand_or_staff || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap || m.is_descend_sewer) {
+            m.is_potion || m.is_wand_or_staff || m.is_ring || m.is_brazier || m.is_barrel || m.is_trap ||
+            m.is_descend_sewer) {
           obj_strings += c;
         } else {
           obj_strings += Charmap::SPACE;
@@ -393,6 +394,10 @@ LEVEL_BODY_GET_BOOL_AT(level_ai_resent_count_at, ai_resent_count)
 LEVEL_BODY_GET_BOOL_AT(level_ai_wanderer_at, ai_wanderer)
 LEVEL_BODY_GET_BOOL_AT(level_attack_engulf_chance_d1000_at, attack_engulf_chance_d1000)
 LEVEL_BODY_GET_BOOL_AT(level_attack_undead_at, attack_undead)
+LEVEL_BODY_GET_BOOL_AT(level_collision_hit_180_at, collision_hit_180)
+LEVEL_BODY_GET_BOOL_AT(level_collision_hit_360_at, collision_hit_360)
+LEVEL_BODY_GET_BOOL_AT(level_collision_hit_adj_at, collision_hit_adj)
+LEVEL_BODY_GET_BOOL_AT(level_collision_hit_two_tiles_ahead_at, collision_hit_two_tiles_ahead)
 LEVEL_BODY_GET_BOOL_AT(level_damage_acid_chance_d1000_at, damage_acid_chance_d1000)
 LEVEL_BODY_GET_BOOL_AT(level_damage_cold_chance_d1000_at, damage_cold_chance_d1000)
 LEVEL_BODY_GET_BOOL_AT(level_damage_crush_chance_d1000_at, damage_crush_chance_d1000)
@@ -511,6 +516,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_cursor_can_hover_over_x2_click_at, is_cursor_can
 LEVEL_BODY_GET_BOOL_AT(level_is_cursor_path_at, is_cursor_path)
 LEVEL_BODY_GET_BOOL_AT(level_is_cursor_path_hazard_for_player_at, is_cursor_path_hazard_for_player)
 LEVEL_BODY_GET_BOOL_AT(level_is_dead_on_end_of_anim_at, is_dead_on_end_of_anim)
+LEVEL_BODY_GET_BOOL_AT(level_is_dead_on_falling_at, is_dead_on_falling)
 LEVEL_BODY_GET_BOOL_AT(level_is_dead_on_shove_at, is_dead_on_shove)
 LEVEL_BODY_GET_BOOL_AT(level_is_debuff_at, is_debuff)
 LEVEL_BODY_GET_BOOL_AT(level_is_debug_path_at, is_debug_path)
@@ -544,6 +550,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_explorer_at, is_explorer)
 LEVEL_BODY_GET_BOOL_AT(level_is_explosion_at, is_explosion)
 LEVEL_BODY_GET_BOOL_AT(level_is_fearless_at, is_fearless)
 LEVEL_BODY_GET_BOOL_AT(level_is_fire_at, is_fire)
+LEVEL_BODY_GET_BOOL_AT(level_is_flat_at, is_flat)
 LEVEL_BODY_GET_BOOL_AT(level_is_floating_at, is_floating)
 LEVEL_BODY_GET_BOOL_AT(level_is_floor_at, is_floor)
 LEVEL_BODY_GET_BOOL_AT(level_is_floor_deco_at, is_floor_deco)
@@ -647,10 +654,15 @@ LEVEL_BODY_GET_BOOL_AT(level_is_smoke_at, is_smoke)
 LEVEL_BODY_GET_BOOL_AT(level_is_spawner_at, is_spawner)
 LEVEL_BODY_GET_BOOL_AT(level_is_spider_at, is_spider)
 LEVEL_BODY_GET_BOOL_AT(level_is_spiderweb_at, is_spiderweb)
+LEVEL_BODY_GET_BOOL_AT(level_is_staff_at, is_staff)
 LEVEL_BODY_GET_BOOL_AT(level_is_steal_item_chance_d1000_at, is_steal_item_chance_d1000)
 LEVEL_BODY_GET_BOOL_AT(level_is_sticky_at, is_sticky)
 LEVEL_BODY_GET_BOOL_AT(level_is_stone_at, is_stone)
 LEVEL_BODY_GET_BOOL_AT(level_is_sword_at, is_sword)
+LEVEL_BODY_GET_BOOL_AT(level_is_target_radial_at, is_target_radial)
+LEVEL_BODY_GET_BOOL_AT(level_is_target_select_at, is_target_select)
+LEVEL_BODY_GET_BOOL_AT(level_is_temperature_change_sensitive_at, is_temperature_change_sensitive)
+LEVEL_BODY_GET_BOOL_AT(level_is_temperature_sensitive_at, is_temperature_sensitive)
 LEVEL_BODY_GET_BOOL_AT(level_is_throwable_at, is_throwable)
 LEVEL_BODY_GET_BOOL_AT(level_is_tickable_at, is_tickable)
 LEVEL_BODY_GET_BOOL_AT(level_is_tmp_thing_at, is_tmp_thing)
@@ -667,7 +679,6 @@ LEVEL_BODY_GET_BOOL_AT(level_is_usable_at, is_usable)
 LEVEL_BODY_GET_BOOL_AT(level_is_used_when_thrown_at, is_used_when_thrown)
 LEVEL_BODY_GET_BOOL_AT(level_is_very_combustible_at, is_very_combustible)
 LEVEL_BODY_GET_BOOL_AT(level_is_very_heavy_at, is_very_heavy)
-LEVEL_BODY_GET_BOOL_AT(level_is_target_select_at, is_target_select)
 LEVEL_BODY_GET_BOOL_AT(level_is_visible_at, is_visible)
 LEVEL_BODY_GET_BOOL_AT(level_is_wall_at, is_wall)
 LEVEL_BODY_GET_BOOL_AT(level_is_wall_dungeon_at, is_wall_dungeon)
@@ -685,6 +696,7 @@ LEVEL_BODY_GET_BOOL_AT(level_noise_on_moving_or_being_carried_at, noise_on_movin
 LEVEL_BODY_GET_BOOL_AT(level_noise_on_open_at, noise_on_open)
 LEVEL_BODY_GET_BOOL_AT(level_noise_on_you_are_hit_and_now_dead_at, noise_on_you_are_hit_and_now_dead)
 LEVEL_BODY_GET_BOOL_AT(level_noise_on_you_are_hit_but_still_alive_at, noise_on_you_are_hit_but_still_alive)
+LEVEL_BODY_GET_BOOL_AT(level_stamina_on_use_at, stamina_on_use)
 LEVEL_BODY_GET_BOOL_AT(level_stat_att_penalty_when_idle_at, stat_att_penalty_when_idle)
 LEVEL_BODY_GET_BOOL_AT(level_stat_att_penalty_when_idle_max_at, stat_att_penalty_when_idle_max)
 LEVEL_BODY_GET_BOOL_AT(level_stat_att_penalty_when_in_deep_water_at, stat_att_penalty_when_in_deep_water)
@@ -698,7 +710,6 @@ LEVEL_BODY_GET_BOOL_AT(level_stat_def_penalty_when_in_shallow_water_at, stat_def
 LEVEL_BODY_GET_BOOL_AT(level_stat_def_penalty_when_stuck_at, stat_def_penalty_when_stuck)
 LEVEL_BODY_GET_BOOL_AT(level_stat_def_penalty_when_stuck_max_at, stat_def_penalty_when_stuck_max)
 LEVEL_BODY_GET_BOOL_AT(level_temperature_at, temperature)
-LEVEL_BODY_GET_BOOL_AT(level_is_temperature_change_sensitive_at, is_temperature_change_sensitive)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag100_at, unused_flag100)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag101_at, unused_flag101)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag102_at, unused_flag102)
@@ -727,18 +738,7 @@ LEVEL_BODY_GET_BOOL_AT(level_unused_flag122_at, unused_flag122)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag123_at, unused_flag123)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag124_at, unused_flag124)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag125_at, unused_flag125)
-LEVEL_BODY_GET_BOOL_AT(level_unused_flag126_at, unused_flag126)
-LEVEL_BODY_GET_BOOL_AT(level_collision_hit_two_tiles_ahead_at, collision_hit_two_tiles_ahead)
-LEVEL_BODY_GET_BOOL_AT(level_is_flat_at, is_flat)
-LEVEL_BODY_GET_BOOL_AT(level_is_target_radial_at, is_target_radial)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag12_at, unused_flag12)
-LEVEL_BODY_GET_BOOL_AT(level_is_staff_at, is_staff)
-LEVEL_BODY_GET_BOOL_AT(level_collision_hit_adj_at, collision_hit_adj)
-LEVEL_BODY_GET_BOOL_AT(level_collision_hit_180_at, collision_hit_180)
-LEVEL_BODY_GET_BOOL_AT(level_stamina_on_use_at, stamina_on_use)
-LEVEL_BODY_GET_BOOL_AT(level_collision_hit_360_at, collision_hit_360)
-LEVEL_BODY_GET_BOOL_AT(level_is_dead_on_falling_at, is_dead_on_falling)
-LEVEL_BODY_GET_BOOL_AT(level_is_temperature_sensitive_at, is_temperature_sensitive)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag13_at, unused_flag13)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag14_at, unused_flag14)
 LEVEL_BODY_GET_BOOL_AT(level_unused_flag15_at, unused_flag15)

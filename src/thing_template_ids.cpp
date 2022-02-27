@@ -286,6 +286,7 @@ std::initializer_list< std::string > tps = {
     "staff_energy_carry",
     "staff_lightning",
     "staff_lightning_carry",
+    "stone_cloak",
     "sword",
     "sword_carry",
     "sword_rusty",
