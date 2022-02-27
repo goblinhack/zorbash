@@ -16,7 +16,7 @@ def init_carry(name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy shining pointy mechanism of justice.")
     my.z_depth(self, my.MAP_DEPTH_EQUIP)
-    my.z_prio(self, my.MAP_PRIO_NORMAL)
+    my.z_prio(self, my.MAP_PRIO_IN_FRONT2)
 
     # This should be synced with its owner, but just in case it is not, we have delay set
     delay = 900
