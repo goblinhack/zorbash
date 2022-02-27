@@ -3,7 +3,6 @@ import tp
 
 
 def on_equip(owner, me, x, y):
-    my.topcon("E")
     my.thing_buff_add(owner, "buff_undead_resist")
 
 

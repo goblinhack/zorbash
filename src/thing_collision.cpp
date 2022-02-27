@@ -550,6 +550,13 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
   }
 
+  if (it->is_obs_wall_or_door()) {
+    if (is_able_to_walk_through_walls()) {
+      dbg("No; can pass through walls");
+      return false;
+    }
+  }
+
   if (it->is_flying()) {
     if (things_overlap(me, future_pos, it)) {
       //
