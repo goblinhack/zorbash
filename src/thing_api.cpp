@@ -6646,6 +6646,18 @@ const std::string &Thing::on_born_do(void)
   return (tp()->on_born_do());
 }
 
+const std::string &Thing::on_resting_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_resting_do());
+}
+
+const std::string &Thing::on_stuck_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_stuck_do());
+}
+
 const std::string &Thing::on_death_do(void)
 {
   TRACE_NO_INDENT();

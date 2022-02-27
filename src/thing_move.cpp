@@ -329,7 +329,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         }
         FOR_ALL_THINGS_END()
 
-        stuck_count_incr();
+        stuck();
         return false;
       }
     } else if (is_stuck()) {
@@ -359,7 +359,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       }
       FOR_ALL_THINGS_END()
 
-      stuck_count_incr();
+      stuck();
       return false;
     }
   }

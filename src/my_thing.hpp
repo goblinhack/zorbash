@@ -606,6 +606,8 @@ public:
   const std::string &nutrition_dice_str(void);
   const std::string &on_awake_do(void);
   const std::string &on_born_do(void);
+  const std::string &on_resting_do(void);
+  const std::string &on_stuck_do(void);
   const std::string &on_damage_acid_do(void);
   const std::string &on_damage_cold_do(void);
   const std::string &on_damage_crush_do(void);
@@ -2048,6 +2050,8 @@ public:
   void on_jump(void);
   void on_lifespan_tick(Thingp hitter);
   void on_move(void);
+  void on_resting(void);
+  void on_stuck(void);
   void on_open(void);
   void on_owner_add(Thingp owner);
   void on_owner_remove(Thingp owner);
@@ -2078,6 +2082,7 @@ public:
   void remove_spawner_owner(void);
   void reset_goal_penalty(Thingp attacker);
   void rest(void);
+  void stuck(void);
   void resurrect_forced(void);
   void resurrect_tick(void);
   void resurrect(void);
