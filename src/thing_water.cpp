@@ -14,6 +14,9 @@ void Thing::water_tick(void)
     return;
   }
 
+  log("Water tick");
+  TRACE_AND_INDENT();
+
   if (is_on_fire()) {
     unset_on_fire();
 

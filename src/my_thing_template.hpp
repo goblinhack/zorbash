@@ -710,6 +710,7 @@ private:
   std::string _on_owner_remove_do;
   std::string _on_polymorphed_do;
   std::string _on_resting_do;
+  std::string _on_waiting_do;
   std::string _on_stuck_do;
   std::string _on_swing_do;
   std::string _on_tick_do;
@@ -946,6 +947,7 @@ public:
   const std::string &on_owner_remove_do(void) const { return _on_owner_remove_do; }
   const std::string &on_polymorphed_do(void) const { return _on_polymorphed_do; }
   const std::string &on_resting_do(void) const { return _on_resting_do; }
+  const std::string &on_waiting_do(void) const { return _on_waiting_do; }
   const std::string &on_stuck_do(void) const { return _on_stuck_do; }
   const std::string &on_swing_do(void) const { return _on_swing_do; }
   const std::string &on_tick_do(void) const { return _on_tick_do; }
@@ -1917,6 +1919,7 @@ public:
   void on_awake_do_set(const std::string &v) { _on_awake_do = v; }
   void on_born_do_set(const std::string &v) { _on_born_do = v; }
   void on_resting_do_set(const std::string &v) { _on_resting_do = v; }
+  void on_waiting_do_set(const std::string &v) { _on_waiting_do = v; }
   void on_stuck_do_set(const std::string &v) { _on_stuck_do = v; }
   void on_damage_acid_do_set(const std::string &v) { _on_damage_acid_do = v; }
   void on_damage_cold_do_set(const std::string &v) { _on_damage_cold_do = v; }

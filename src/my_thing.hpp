@@ -401,6 +401,7 @@ public:
   bool fire_at(Thingp item, Thingp target);
   bool fire_at(Thingp target);
   bool fire_choose_target(Thingp item);
+  bool fire_tick(void);
   bool health_boost_would_occur(int v);
   bool idle_check(void);
   bool if_matches_then_dead(const std::string &what, const point p);
@@ -420,6 +421,7 @@ public:
   bool is_on_fire(void);
   bool is_state_sleeping(void);
   bool is_stuck(void);
+  bool is_target_select(Thingp item);
   bool is_to_be_avoided(Thingp attacker);
   bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
@@ -516,7 +518,6 @@ public:
   bool use(Thingp w, UseOptions *options = nullptr);
   bool victim_attack_best_at(int equip, point *at, int attempt, bool &victim_attacked, bool &victim_overlaps);
   bool victim_attack_best(int equip, point *at = nullptr);
-  bool is_target_select(Thingp item);
   bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
@@ -607,6 +608,7 @@ public:
   const std::string &on_awake_do(void);
   const std::string &on_born_do(void);
   const std::string &on_resting_do(void);
+  const std::string &on_waiting_do(void);
   const std::string &on_stuck_do(void);
   const std::string &on_damage_acid_do(void);
   const std::string &on_damage_cold_do(void);
@@ -1871,7 +1873,6 @@ public:
   uint8_t is_visible(void);
   uint8_t z_prio(void);
 
-  bool fire_tick(void);
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
@@ -1913,6 +1914,7 @@ public:
   void buff_tick(void);
   void change_state(int new_state, const std::string &why);
   void chasm_tick(void);
+  void solid_rock_tick(void);
   void check_all_carried_items_are_owned(void);
   void check_all_carried_maps(void);
   void clear_age_map(void);
@@ -2006,6 +2008,7 @@ public:
   void level_push(void);
   void lifespan_tick(void);
   void light_power_including_torch_effect_get(uint8_t &light_power);
+  void light_power_update_including_torch_effect(uint8_t &light_power);
   void light_scale_update(void);
   void location_check_all_things_at(void);
   void location_check_forced_all_things_at(void);
@@ -2050,16 +2053,17 @@ public:
   void on_jump(void);
   void on_lifespan_tick(Thingp hitter);
   void on_move(void);
-  void on_resting(void);
-  void on_stuck(void);
   void on_open(void);
   void on_owner_add(Thingp owner);
   void on_owner_remove(Thingp owner);
   void on_polymorphed(void);
+  void on_resting(void);
+  void on_stuck(void);
   void on_swing(Thingp what);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
+  void on_waiting(void);
   void on_you_are_declared_a_follower(Thingp leader);
   void on_you_are_declared_leader(void);
   void on_you_are_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
@@ -2081,8 +2085,7 @@ public:
   void remove_owner(void);
   void remove_spawner_owner(void);
   void reset_goal_penalty(Thingp attacker);
-  void rest(void);
-  void stuck(void);
+  void resting(void);
   void resurrect_forced(void);
   void resurrect_tick(void);
   void resurrect(void);
@@ -2098,6 +2101,7 @@ public:
   void spawned_owner_set(Thingp spawner_owner);
   void stamina_boost(int v);
   void stats_tick(void);
+  void stuck(void);
   void submerged_offset_set(int);
   void temperature_tick(void);
   void throw_at(Thingp w, Thingp target);
@@ -2111,13 +2115,13 @@ public:
   void unset_on_fire(void);
   void update_all(void);
   void update_interpolated_position(void);
-  void light_power_update_including_torch_effect(uint8_t &light_power);
   void update_light(void);
   void update_pos(point, bool immediately);
   void update_tick(void);
   void update(void);
   void used(Thingp w, Thingp target, bool remove_after_use, UseOptions *options = nullptr);
   void visible(void);
+  void waiting(void);
   void wake(void);
   void water_tick(void);
   void weapon_sheath(void);

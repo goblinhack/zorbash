@@ -47,18 +47,17 @@ void Thing::on_stuck(void)
 
 void Thing::stuck(void)
 {
-  dbg("stuck");
+  dbg("Stuck");
   TRACE_AND_INDENT();
 
   stuck_count_incr();
 
-  if (level->is_rock(curr_at.x, curr_at.y) || level->is_wall(curr_at.x, curr_at.y)) {
-    if (is_player()) {
-      if (infop()->stamina < 0) {
-        msg("You sufficate inside rock!");
-        dead("by suffocation inside solid rock!");
-      } else {
-        msg("You are stuck in solid rock!");
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      if (! iter->on_stuck_do().empty()) {
+        iter->stuck();
       }
     }
   }

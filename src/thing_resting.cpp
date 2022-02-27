@@ -5,6 +5,7 @@
 
 #include "my_globals.hpp"
 #include "my_main.hpp"
+#include "my_monst.hpp"
 #include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_string.hpp"
@@ -42,7 +43,7 @@ void Thing::on_resting(void)
   }
 }
 
-void Thing::rest(void)
+void Thing::resting(void)
 {
   dbg("Resting");
   TRACE_AND_INDENT();
@@ -53,6 +54,16 @@ void Thing::rest(void)
 
   if (d20() < stat_con()) {
     stamina_boost(1);
+  }
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      if (! iter->on_resting_do().empty()) {
+        iter->resting();
+      }
+    }
   }
 
   on_resting();

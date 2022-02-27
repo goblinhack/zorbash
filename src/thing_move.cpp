@@ -257,6 +257,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
             msg("You are so tired but dig deep into your reserves to move!");
           } else {
             msg("You cannot move, you are so tired!");
+            stuck();
             game->tick_begin("too tired to move");
             return false;
           }
@@ -287,6 +288,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           msg("You are held in place and cannot move!");
         }
         dbg("You are held in place");
+        stuck();
         wobble(25);
         return false;
       }
@@ -381,7 +383,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
             }
           }
         } else {
-          rest();
+          resting();
         }
       }
     }
@@ -414,16 +416,16 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 #endif
       }
       msg("You wait...");
+      waiting();
     } else {
       msg("You rest...");
-      rest();
+      resting();
     }
     return false;
   }
 
   //
-  // Do this after wait checks, so the player can bump the tick
-  // if stuck.
+  // Do this after wait checks, so the player can bump the tick if stuck.
   //
   if (is_waiting_to_ascend_dungeon) {
     dbg("Move; no, is waiting to ascend dungeon");
