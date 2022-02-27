@@ -99,6 +99,7 @@ def tp_init(name, text_name):
 
     my.is_buff(self, True)
     my.is_loggable(self, True)
+    my.is_tickable(self, True)
     my.long_text_description(self, "Poison causes you 50 percent less damage.")
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_damage_acid_do(self, "me.on_owner_damage_acid()")

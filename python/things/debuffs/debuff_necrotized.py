@@ -23,6 +23,7 @@ def tp_init(name, text_name):
     my.long_text_description(self, "Your skin is peeling off!")
     my.on_tick_do(self, "me.on_tick()")
     my.text_debuff(self, "You are rotting!")
+    my.is_tickable(self, True)
     my.text_description(self, "Rotting debuff.")
     my.tile(self, tile="debuff_necrotized")
     # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh

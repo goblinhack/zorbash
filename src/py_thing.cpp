@@ -683,15 +683,10 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  //
-  // If not reachable, suppress the msg
-  //
-  if (owner->distance_to_player() < DMAP_IS_PASSABLE) {
-    if (owner->is_monst()) {
-      owner->msg("%s says '%s'", owner->text_The().c_str(), msg);
-    } else {
-      owner->msg("%s", msg);
-    }
+  if (owner->is_monst()) {
+    owner->msg("%s says '%s'", owner->text_The().c_str(), msg);
+  } else {
+    owner->msg("%s", msg);
   }
 
   Py_RETURN_NONE;

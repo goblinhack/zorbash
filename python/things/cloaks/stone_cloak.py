@@ -11,6 +11,30 @@ def on_enchant(me, x, y):
     my.thing_stat_def_mod_incr(me, 2)
 
 
+def on_move(me, x, y):
+    owner = my.thing_top_owner_id_get(me)
+    if not owner:
+        return False
+
+    if my.level_is_wall_at(owner, x, y):
+        stamina = my.thing_stamina_get(owner)
+        new_stamina = int((stamina / 100.0) * 80)
+        my.thing_stamina_set(owner, new_stamina)
+        if my.thing_is_player(owner):
+            my.thing_msg(owner, "You pass through the wall, but feel drained.")
+        return True
+
+    if my.level_is_rock_at(owner, x, y):
+        stamina = my.thing_stamina_get(owner)
+        new_stamina = int((stamina / 100.0) * 50)
+        my.thing_stamina_set(owner, new_stamina)
+        if my.thing_is_player(owner):
+            my.thing_msg(owner, "You pass through solid rock, but feel very drained.")
+        return True
+
+    return False
+
+
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
@@ -22,6 +46,8 @@ def tp_init(name, text_name, short_text_name):
     my.gold_value_dice(self, "500")
     my.is_able_to_fall(self, True)
     my.is_cloak(self, True)
+    my.is_tickable(self, True)
+    my.on_move_do(self, "me.on_move()")
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
@@ -35,12 +61,11 @@ def tp_init(name, text_name, short_text_name):
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_treasure_class_c(self, True)
-    my.stamina_on_use(self, 10)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "A strange dark, almost black, cloak that looks to be covered in shimmering stone dust... It glistens in your torch light as you examine it. It seems magical... but what does it do?")
+    my.long_text_description(self, "A strange, almost black, cloak that looks to be covered in shimmering stone dust... It glistens in your torch light as you examine it. It seems magical... but what does it do?")
     my.noise_on_moving_or_being_carried(self, -20)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
