@@ -816,6 +816,7 @@ public:
   int collision_hit_360(void);
   int collision_hit_adj(void);
   int collision_hit_priority(void);
+  int collision_hit_two_tiles_ahead(void);
   int crit_chance_d10000(void);
   int damage_acid_chance_d1000(void);
   int damage_acid(void);
@@ -1068,11 +1069,11 @@ public:
   int is_cursor_path(void);
   int is_cursor(void);
   int is_dangerous(Thingp);
+  int is_dead_check(void);
   int is_dead_on_end_of_anim(void);
   int is_dead_on_falling(void);
   int is_dead_on_shove(void);
   int is_dead_or_dying(void);
-  int is_dead_check(void);
   int is_debuff(void);
   int is_debug_path(void);
   int is_debug_type(void);
@@ -1096,6 +1097,7 @@ public:
   int is_explosion(void);
   int is_fearless(void);
   int is_fire(void);
+  int is_flat(void);
   int is_floating(void);
   int is_floor_deco(void);
   int is_floor(void);
@@ -1203,10 +1205,13 @@ public:
   int is_spawner(void);
   int is_spider(void);
   int is_spiderweb(void);
+  int is_staff(void);
   int is_steal_item_chance_d1000(void);
   int is_sticky(void);
   int is_stone(void);
   int is_sword(void);
+  int is_target_radial(void);
+  int is_target_select(void);
   int is_temperature_change_sensitive(void);
   int is_temperature_sensitive(void);
   int is_throwable(void);
@@ -1228,11 +1233,10 @@ public:
   int is_used_when_thrown(void);
   int is_very_combustible(void);
   int is_very_heavy(void);
-  int is_target_select(void);
   int is_wall_dungeon(void);
   int is_wall(void);
-  int is_wand(void);
   int is_wand_or_staff(void);
+  int is_wand(void);
   int is_water(void);
   int is_weapon_class_a(void);
   int is_weapon_class_b(void);
@@ -1266,6 +1270,7 @@ public:
   int light_power_incr(void);
   int light_power_initial(void);
   int light_power_set(int);
+  int light_power_update(void);
   int light_power(void);
   int map_beast_carried_count(void);
   int map_beast_count(void);
@@ -1593,12 +1598,7 @@ public:
   int unused_flag123(void);
   int unused_flag124(void);
   int unused_flag125(void);
-  int unused_flag126(void);
-  int collision_hit_two_tiles_ahead(void);
-  int is_flat(void);
-  int is_target_radial(void);
   int unused_flag12(void);
-  int is_staff(void);
   int unused_flag13(void);
   int unused_flag14(void);
   int unused_flag15(void);
@@ -1695,7 +1695,6 @@ public:
   int unused_flag98(void);
   int unused_flag99(void);
   int unused_flag9(void);
-  int light_power_update(void);
   int value(const Thingp it);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);

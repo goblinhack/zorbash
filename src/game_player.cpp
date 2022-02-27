@@ -80,6 +80,14 @@ void Game::place_player(void)
         auto w = level->thing_new("torch", point(x, y));
         t->carry(w);
       }
+      if (1) {
+        auto w = level->thing_new("wooden_cross", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
+        auto w = level->thing_new("stone_cloak", point(x, y));
+        t->carry(w);
+      }
       if (0) {
         auto w = level->thing_new("torch", point(x, y));
         t->carry(w);

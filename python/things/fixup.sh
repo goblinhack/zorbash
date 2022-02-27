@@ -426,7 +426,7 @@ do
       unused_flag123_set \
       unused_flag124_set \
       unused_flag125_set \
-      unused_flag126_set \
+      is_able_to_walk_through_walls_set \
       collision_hit_two_tiles_ahead_set \
       is_flat_set \
       is_target_radial_set \
