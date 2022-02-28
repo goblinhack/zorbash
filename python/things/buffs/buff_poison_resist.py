@@ -15,67 +15,67 @@ def on_owner_remove(me, owner, x, y):
         my.thing_msg(me, "The green glow around you fades.")
 
 
-def on_owner_damage_melee(me, owner, hitter, x, y, damage):
+def on_owner_damage_melee(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_poison(me, owner, hitter, x, y, damage):
+def on_owner_damage_poison(me, owner, hitter, real_hitter, x, y, damage):
     return int(damage / 2)
 
 
-def on_owner_damage_future1(me, owner, hitter, x, y, damage):
+def on_owner_damage_future1(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_future2(me, owner, hitter, x, y, damage):
+def on_owner_damage_future2(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_future3(me, owner, hitter, x, y, damage):
+def on_owner_damage_future3(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_cold(me, owner, hitter, x, y, damage):
+def on_owner_damage_cold(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_fire(me, owner, hitter, x, y, damage):
+def on_owner_damage_fire(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_crush(me, owner, hitter, x, y, damage):
+def on_owner_damage_crush(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_lightning(me, owner, hitter, x, y, damage):
+def on_owner_damage_lightning(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_energy(me, owner, hitter, x, y, damage):
+def on_owner_damage_energy(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_acid(me, owner, hitter, x, y, damage):
+def on_owner_damage_acid(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_digest(me, owner, hitter, x, y, damage):
+def on_owner_damage_digest(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_natural_attack(me, owner, hitter, x, y, damage):
+def on_owner_damage_natural_attack(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_necrosis(me, owner, hitter, x, y, damage):
+def on_owner_damage_necrosis(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_stat_str(me, owner, hitter, x, y, damage):
+def on_owner_damage_stat_str(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_damage_stat_con(me, owner, hitter, x, y, damage):
+def on_owner_damage_stat_con(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 

@@ -43,7 +43,7 @@ void Thing::acid_tick(void)
       if (! t->is_acid()) {
         continue;
       }
-      is_attacked_with_damage_acid(t, t->damage_acid());
+      is_attacked_with_damage_acid(t, t, t->damage_acid());
       break;
     }
     FOR_ALL_THINGS_END()

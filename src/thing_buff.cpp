@@ -192,7 +192,7 @@ void Thing::buff_tick(void)
   }
 }
 
-int Thing::buff_on_damage_poison(Thingp hitter, int damage)
+int Thing::buff_on_damage_poison(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -204,13 +204,13 @@ int Thing::buff_on_damage_poison(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_poison(this, hitter, damage);
+      damage = t->on_owner_damage_poison(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_future1(Thingp hitter, int damage)
+int Thing::buff_on_damage_future1(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -222,13 +222,13 @@ int Thing::buff_on_damage_future1(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_future1(this, hitter, damage);
+      damage = t->on_owner_damage_future1(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_future2(Thingp hitter, int damage)
+int Thing::buff_on_damage_future2(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -240,13 +240,13 @@ int Thing::buff_on_damage_future2(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_future2(this, hitter, damage);
+      damage = t->on_owner_damage_future2(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_future3(Thingp hitter, int damage)
+int Thing::buff_on_damage_future3(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -258,13 +258,13 @@ int Thing::buff_on_damage_future3(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_future3(this, hitter, damage);
+      damage = t->on_owner_damage_future3(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_cold(Thingp hitter, int damage)
+int Thing::buff_on_damage_cold(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -276,13 +276,13 @@ int Thing::buff_on_damage_cold(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_cold(this, hitter, damage);
+      damage = t->on_owner_damage_cold(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_fire(Thingp hitter, int damage)
+int Thing::buff_on_damage_fire(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -294,13 +294,13 @@ int Thing::buff_on_damage_fire(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_fire(this, hitter, damage);
+      damage = t->on_owner_damage_fire(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_crush(Thingp hitter, int damage)
+int Thing::buff_on_damage_crush(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -312,13 +312,13 @@ int Thing::buff_on_damage_crush(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_crush(this, hitter, damage);
+      damage = t->on_owner_damage_crush(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_lightning(Thingp hitter, int damage)
+int Thing::buff_on_damage_lightning(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -330,13 +330,13 @@ int Thing::buff_on_damage_lightning(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_lightning(this, hitter, damage);
+      damage = t->on_owner_damage_lightning(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_energy(Thingp hitter, int damage)
+int Thing::buff_on_damage_energy(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -348,13 +348,13 @@ int Thing::buff_on_damage_energy(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_energy(this, hitter, damage);
+      damage = t->on_owner_damage_energy(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_acid(Thingp hitter, int damage)
+int Thing::buff_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -366,13 +366,13 @@ int Thing::buff_on_damage_acid(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_acid(this, hitter, damage);
+      damage = t->on_owner_damage_acid(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_digest(Thingp hitter, int damage)
+int Thing::buff_on_damage_digest(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -384,13 +384,13 @@ int Thing::buff_on_damage_digest(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_digest(this, hitter, damage);
+      damage = t->on_owner_damage_digest(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_stat_con(Thingp hitter, int damage)
+int Thing::buff_on_damage_stat_con(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -402,13 +402,13 @@ int Thing::buff_on_damage_stat_con(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_stat_con(this, hitter, damage);
+      damage = t->on_owner_damage_stat_con(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_stat_str(Thingp hitter, int damage)
+int Thing::buff_on_damage_stat_str(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -420,13 +420,13 @@ int Thing::buff_on_damage_stat_str(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_stat_str(this, hitter, damage);
+      damage = t->on_owner_damage_stat_str(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_stat_att(Thingp hitter, int damage)
+int Thing::buff_on_damage_stat_att(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -438,13 +438,13 @@ int Thing::buff_on_damage_stat_att(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_stat_att(this, hitter, damage);
+      damage = t->on_owner_damage_stat_att(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_melee(Thingp hitter, int damage)
+int Thing::buff_on_damage_melee(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -456,13 +456,13 @@ int Thing::buff_on_damage_melee(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_melee(this, hitter, damage);
+      damage = t->on_owner_damage_melee(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_necrosis(Thingp hitter, int damage)
+int Thing::buff_on_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -474,13 +474,13 @@ int Thing::buff_on_damage_necrosis(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_necrosis(this, hitter, damage);
+      damage = t->on_owner_damage_necrosis(this, hitter, real_hitter, damage);
     }
   }
   return damage;
 }
 
-int Thing::buff_on_damage_natural_attack(Thingp hitter, int damage)
+int Thing::buff_on_damage_natural_attack(Thingp hitter, Thingp real_hitter, int damage)
 {
   if (! maybe_itemsp()) {
     return damage;
@@ -492,7 +492,7 @@ int Thing::buff_on_damage_natural_attack(Thingp hitter, int damage)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      damage = t->on_owner_damage_natural_attack(this, hitter, damage);
+      damage = t->on_owner_damage_natural_attack(this, hitter, real_hitter, damage);
     }
   }
   return damage;

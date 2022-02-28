@@ -30,7 +30,7 @@ void Thing::solid_rock_tick(void)
     if (is_player()) {
       msg("Your agonized face is carved in stone for the rest of time as you sufficate inside solid rock.");
     }
-    dead("by suffocation inside solid rock!");
+    dead("by suffocation inside solid rock");
   } else {
     if (is_player()) {
       msg("You are stuck in solid rock!");

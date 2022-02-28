@@ -255,6 +255,8 @@ std::initializer_list< std::string > tps = {
     "scythe_carry",
     "scythe_swing",
     "sewer_wall",
+    "ring_shield",
+    "ring_shield_carry",
     "shield_wooden",
     "shield_wooden_carry",
     "shield_wooden_scale",

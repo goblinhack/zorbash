@@ -1040,7 +1040,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
 
 bool Thing::natural_attack(Thingp victim) { return attack(victim, true); }
 
-int Thing::is_attacked_with_damage_melee(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_melee(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1062,7 +1062,7 @@ int Thing::is_attacked_with_damage_melee(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_natural_attack(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_natural_attack(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1084,7 +1084,7 @@ int Thing::is_attacked_with_damage_natural_attack(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_poison(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_poison(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1106,7 +1106,7 @@ int Thing::is_attacked_with_damage_poison(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_necrosis(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1128,7 +1128,7 @@ int Thing::is_attacked_with_damage_necrosis(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_future1(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_future1(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1150,7 +1150,7 @@ int Thing::is_attacked_with_damage_future1(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_future2(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_future2(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1172,7 +1172,7 @@ int Thing::is_attacked_with_damage_future2(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_future3(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_future3(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1194,7 +1194,7 @@ int Thing::is_attacked_with_damage_future3(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_cold(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_cold(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1216,7 +1216,7 @@ int Thing::is_attacked_with_damage_cold(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_fire(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_fire(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1238,7 +1238,7 @@ int Thing::is_attacked_with_damage_fire(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_crush(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_crush(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1260,7 +1260,7 @@ int Thing::is_attacked_with_damage_crush(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_lightning(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_lightning(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1282,7 +1282,7 @@ int Thing::is_attacked_with_damage_lightning(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_energy(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_energy(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1304,7 +1304,7 @@ int Thing::is_attacked_with_damage_energy(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_acid(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;
@@ -1326,7 +1326,7 @@ int Thing::is_attacked_with_damage_acid(Thingp hitter, int damage)
                  attack_digest, damage));
 }
 
-int Thing::is_attacked_with_damage_digest(Thingp hitter, int damage)
+int Thing::is_attacked_with_damage_digest(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   const bool crit             = false;

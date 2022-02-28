@@ -188,20 +188,20 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (attack_poison) {
-    damage = buff_on_damage_poison(real_hitter, damage);
-    damage = on_damage_poison(real_hitter, damage);
+    damage = buff_on_damage_poison(hitter, real_hitter, damage);
+    damage = on_damage_poison(hitter, real_hitter, damage);
   } else if (attack_future1) {
-    damage = buff_on_damage_future1(real_hitter, damage);
-    damage = on_damage_future1(real_hitter, damage);
+    damage = buff_on_damage_future1(hitter, real_hitter, damage);
+    damage = on_damage_future1(hitter, real_hitter, damage);
   } else if (attack_future2) {
-    damage = buff_on_damage_future2(real_hitter, damage);
-    damage = on_damage_future2(real_hitter, damage);
+    damage = buff_on_damage_future2(hitter, real_hitter, damage);
+    damage = on_damage_future2(hitter, real_hitter, damage);
   } else if (attack_future3) {
-    damage = buff_on_damage_future3(real_hitter, damage);
-    damage = on_damage_future3(real_hitter, damage);
+    damage = buff_on_damage_future3(hitter, real_hitter, damage);
+    damage = on_damage_future3(hitter, real_hitter, damage);
   } else if (attack_cold) {
-    damage = buff_on_damage_cold(real_hitter, damage);
-    damage = on_damage_cold(real_hitter, damage);
+    damage = buff_on_damage_cold(hitter, real_hitter, damage);
+    damage = on_damage_cold(hitter, real_hitter, damage);
 
     if (is_on_fire()) {
       if (is_player()) {
@@ -213,32 +213,32 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       smoke->lifespan_set(pcg_random_range(1, 10));
     }
   } else if (attack_fire) {
-    damage = buff_on_damage_fire(real_hitter, damage);
-    damage = on_damage_fire(real_hitter, damage);
+    damage = buff_on_damage_fire(hitter, real_hitter, damage);
+    damage = on_damage_fire(hitter, real_hitter, damage);
   } else if (attack_crush) {
-    damage = buff_on_damage_crush(real_hitter, damage);
-    damage = on_damage_crush(real_hitter, damage);
+    damage = buff_on_damage_crush(hitter, real_hitter, damage);
+    damage = on_damage_crush(hitter, real_hitter, damage);
   } else if (attack_lightning) {
-    damage = buff_on_damage_lightning(real_hitter, damage);
-    damage = on_damage_lightning(real_hitter, damage);
+    damage = buff_on_damage_lightning(hitter, real_hitter, damage);
+    damage = on_damage_lightning(hitter, real_hitter, damage);
   } else if (attack_energy) {
-    damage = buff_on_damage_energy(real_hitter, damage);
-    damage = on_damage_energy(real_hitter, damage);
+    damage = buff_on_damage_energy(hitter, real_hitter, damage);
+    damage = on_damage_energy(hitter, real_hitter, damage);
   } else if (attack_acid) {
-    damage = buff_on_damage_acid(real_hitter, damage);
-    damage = on_damage_acid(real_hitter, damage);
+    damage = buff_on_damage_acid(hitter, real_hitter, damage);
+    damage = on_damage_acid(hitter, real_hitter, damage);
   } else if (attack_digest) {
-    damage = buff_on_damage_digest(real_hitter, damage);
-    damage = on_damage_digest(real_hitter, damage);
+    damage = buff_on_damage_digest(hitter, real_hitter, damage);
+    damage = on_damage_digest(hitter, real_hitter, damage);
   } else if (attack_necrosis) {
-    damage = buff_on_damage_necrosis(real_hitter, damage);
-    damage = on_damage_necrosis(real_hitter, damage);
+    damage = buff_on_damage_necrosis(hitter, real_hitter, damage);
+    damage = on_damage_necrosis(hitter, real_hitter, damage);
   } else if (attack_natural) {
-    damage = buff_on_damage_natural_attack(real_hitter, damage);
-    damage = on_damage_natural_attack(real_hitter, damage);
+    damage = buff_on_damage_natural_attack(hitter, real_hitter, damage);
+    damage = on_damage_natural_attack(hitter, real_hitter, damage);
   } else {
-    damage = buff_on_damage_melee(real_hitter, damage);
-    damage = on_damage_melee(real_hitter, damage);
+    damage = buff_on_damage_melee(hitter, real_hitter, damage);
+    damage = on_damage_melee(hitter, real_hitter, damage);
   }
 
   std::string damage_type;
@@ -614,7 +614,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = buff_on_damage_stat_str(real_hitter, damage);
+          damage = buff_on_damage_stat_str(hitter, real_hitter, damage);
           if (! damage) {
             IF_DEBUG2 { real_hitter->log("No strength damage"); }
             return false;
@@ -651,7 +651,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = buff_on_damage_stat_con(real_hitter, damage);
+          damage = buff_on_damage_stat_con(hitter, real_hitter, damage);
           if (! damage) {
             IF_DEBUG2 { real_hitter->log("No con damage"); }
             return false;

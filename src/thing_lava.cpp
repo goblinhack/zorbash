@@ -56,7 +56,7 @@ void Thing::lava_tick(void)
         continue;
       }
 
-      is_attacked_with_damage_fire(t, t->damage_fire());
+      is_attacked_with_damage_fire(t, t, t->damage_fire());
       break;
     }
     FOR_ALL_THINGS_END()
