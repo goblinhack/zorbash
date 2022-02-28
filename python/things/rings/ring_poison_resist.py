@@ -24,6 +24,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
     my.is_collectable(self, True)
+    my.is_auto_equipped(self, True)
     my.is_combustible(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)

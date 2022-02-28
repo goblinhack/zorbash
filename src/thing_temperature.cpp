@@ -73,7 +73,7 @@ void Thing::temperature_tick(void)
               msg("%s suffers from the extreme cold.", text_The().c_str());
             }
           }
-          is_attacked_with_damage_cold(this, damage);
+          is_attacked_with_damage_cold(this, this, damage);
         }
       } else if (t >= 100) {
         if (! is_immune_to_fire()) {
@@ -93,7 +93,7 @@ void Thing::temperature_tick(void)
             }
           }
           if (fire_tick()) {
-            is_attacked_with_damage_fire(this, damage);
+            is_attacked_with_damage_fire(this, this, damage);
           }
         }
       }
@@ -168,7 +168,7 @@ int Thing::temperature_incr(int v)
             msg("%s suffers from the change in temperature.%%fg=reset$", text_The().c_str());
           }
         }
-        is_attacked_with_damage_fire(this, damage);
+        is_attacked_with_damage_fire(this, this, damage);
       }
     } else if (v < 0) {
       if (T > 0) {
@@ -187,7 +187,7 @@ int Thing::temperature_incr(int v)
             msg("%s suffers from the change in temperature.", text_The().c_str());
           }
         }
-        is_attacked_with_damage_cold(this, damage);
+        is_attacked_with_damage_cold(this, this, damage);
       }
     }
   }

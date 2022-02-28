@@ -14,7 +14,6 @@ def init_carry(name):
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy shining pointy mechanism of justice.")
     my.z_depth(self, my.MAP_DEPTH_EQUIP)
     my.z_prio(self, my.MAP_PRIO_IN_FRONT2)
 

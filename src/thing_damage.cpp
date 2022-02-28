@@ -78,7 +78,7 @@ int Thing::damage_min(void)
   return min_damage + enchant_get();
 }
 
-int Thing::on_damage_stat_str(Thingp hitter, int damage)
+int Thing::on_damage_stat_str(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
@@ -118,7 +118,7 @@ int Thing::on_damage_stat_str(Thingp hitter, int damage)
   return damage;
 }
 
-int Thing::on_damage_stat_att(Thingp hitter, int damage)
+int Thing::on_damage_stat_att(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
@@ -158,7 +158,7 @@ int Thing::on_damage_stat_att(Thingp hitter, int damage)
   return damage;
 }
 
-int Thing::on_owner_damage_stat_con(Thingp owner, Thingp hitter, int damage)
+int Thing::on_owner_damage_stat_con(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -194,7 +194,7 @@ int Thing::on_owner_damage_stat_con(Thingp owner, Thingp hitter, int damage)
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_string().c_str(),
         hitter->to_short_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, (unsigned int) curr_at.x,
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 

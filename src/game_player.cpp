@@ -64,6 +64,10 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (1) {
+        auto w = level->thing_new("ring_shield", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
         auto w = level->thing_new("very_broadsword", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
