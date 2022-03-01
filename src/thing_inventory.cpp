@@ -15,7 +15,6 @@
 void Thing::inventory_particle(Thingp item, uint32_t slot)
 {
   TRACE_NO_INDENT();
-
   dbg("Create inventory particle? %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 

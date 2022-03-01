@@ -63,11 +63,11 @@ void Game::place_player(void)
         auto w = level->thing_new("double_shovel", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("ring_shield", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("very_broadsword", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -84,11 +84,11 @@ void Game::place_player(void)
         auto w = level->thing_new("torch", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("wooden_cross", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("stone_cloak", point(x, y));
         t->carry(w);
       }
