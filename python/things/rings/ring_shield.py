@@ -2,13 +2,13 @@ import my
 import tp
 
 
-def on_owner_add(me, owner, x, y):
+def on_equip(me, owner, x, y):
     if my.thing_is_player(owner):
         my.thing_msg(me, "A protective semi transparent shield surrounds you.")
 
 
 # Called on removing a ring. Not called on death of the owner.
-def on_owner_remove(me, owner, x, y):
+def on_unequip(me, owner, x, y):
     if my.thing_is_player(owner):
         my.thing_msg(me, "The shield around you fades.")
 
@@ -94,6 +94,7 @@ def tp_init(name, text_name, short_text_name):
     my.gold_value_dice(self, "500")
     my.health_initial_dice(self, "1d20")
     my.is_able_to_fall(self, True)
+    my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
     my.is_collectable(self, True)
@@ -114,9 +115,9 @@ def tp_init(name, text_name, short_text_name):
     my.is_very_combustible(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "This magical ring is designed to create a protective shield, mainly from missle weapons. Damage will be reduced by 50 percent whilst this ring is worn.")
+    my.long_text_description(self, "This magical ring is designed to create a protective shield from missles or projectiles. Damage will be reduced by 50 percent for such attacks whilst this ring is worn.")
     my.normal_placement_rules(self, True)
-    my.on_owner_add_do(self, "me.on_owner_add()")
+    # my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_damage_acid_do(self, "me.on_owner_damage_acid()")
     my.on_owner_damage_cold_do(self, "me.on_owner_damage_cold()")
     my.on_owner_damage_crush_do(self, "me.on_owner_damage_crush()")
@@ -126,23 +127,23 @@ def tp_init(name, text_name, short_text_name):
     my.on_owner_damage_future1_do(self, "me.on_owner_damage_future1()")
     my.on_owner_damage_future2_do(self, "me.on_owner_damage_future2()")
     my.on_owner_damage_future3_do(self, "me.on_owner_damage_future3()")
-    my.is_auto_equipped(self, True)
     my.on_owner_damage_lightning_do(self, "me.on_owner_damage_lightning()")
     my.on_owner_damage_melee_do(self, "me.on_owner_damage_melee()")
     my.on_owner_damage_natural_attack_do(self, "me.on_owner_damage_natural_attack()")
     my.on_owner_damage_necrosis_do(self, "me.on_owner_damage_necrosis()")
     my.on_owner_damage_poison_do(self, "me.on_owner_damage_poison()")
+    my.on_equip_do(self, "me.on_equip()")
+    my.on_unequip_do(self, "me.on_unequip()")
     my.on_owner_damage_stat_con_do(self, "me.on_owner_damage_stat_con()")
     my.on_owner_damage_stat_str_do(self, "me.on_owner_damage_stat_str()")
-    my.on_owner_remove_do(self, "me.on_owner_remove()")
-    my.on_unequip_do(self, "me.on_unequip()")
+    # my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.stat_con_mod(self, 3)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Shield ring.")
     my.text_enchant(self, "+1 DEF")
+    my.equip_carry_anim(self, "ring_shield_carry")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
-    my.equip_carry_anim(self, "ring_shield_carry")
 
     my.tile(self, tile=name, delay_ms=100)
 

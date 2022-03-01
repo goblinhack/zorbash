@@ -997,7 +997,8 @@ static void wid_actionbar_configure_over_e(Widp w)
 
 void wid_actionbar_init(void)
 {
-  TRACE_NO_INDENT();
+  DBG("Actionbar init");
+  TRACE_AND_INDENT();
 
   if (! game->level) {
     return;
@@ -1018,10 +1019,12 @@ void wid_actionbar_init(void)
   //
   if (wid_actionbar) {
     DBG("Actionbar init exists close it and recreate");
+    TRACE_AND_INDENT();
     wid_actionbar_fini();
   }
 
   DBG("Actionbar init create");
+  TRACE_AND_INDENT();
 
   bool ui_icon_collect = false;
   if (player->check_anything_to_carry(false)) {

@@ -47,8 +47,15 @@ void wid_inventory_fini(void)
     wid_inventory_bag = nullptr;
   }
 
-  wid_inventory_thing_over     = nullptr;
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected cleared");
+  }
   wid_inventory_thing_selected = nullptr;
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected cleared");
+  }
+  wid_inventory_thing_over = nullptr;
 
   if (wid_inventory_window) {
     wid_destroy(&wid_inventory_window);
@@ -180,6 +187,14 @@ static uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint3
     return true;
   }
 
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected use");
+  }
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected use");
+  }
+
   auto what = wid_inventory_thing_selected;
   if (! what) {
     what = wid_inventory_thing_over;
@@ -215,6 +230,14 @@ static uint8_t wid_inventory_item_option_use_radial(Widp w, int32_t x, int32_t y
 
   if (player->is_dead) {
     return true;
+  }
+
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected select");
+  }
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected select");
   }
 
   auto what = wid_inventory_thing_selected;
@@ -256,6 +279,14 @@ static uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint3
     return true;
   }
 
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected eat");
+  }
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected eat");
+  }
+
   auto what = wid_inventory_thing_selected;
   if (! what) {
     what = wid_inventory_thing_over;
@@ -292,6 +323,14 @@ static uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uin
 
   if (player->is_dead) {
     return true;
+  }
+
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected throw");
+  }
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected throw");
   }
 
   auto what = wid_inventory_thing_selected;
@@ -331,6 +370,14 @@ static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint
     return true;
   }
 
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected drop");
+  }
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected drop");
+  }
+
   auto what = wid_inventory_thing_selected;
   if (! what) {
     what = wid_inventory_thing_over;
@@ -347,6 +394,16 @@ static uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint
       wid_inventory_init();
     }
   }
+
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected post drop");
+  }
+  wid_inventory_thing_selected = nullptr;
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected port drop");
+  }
+  wid_inventory_thing_over = nullptr;
 
   return true;
 }
@@ -569,6 +626,9 @@ void wid_inventory_over_requested(Thingp over)
   if (over == wid_inventory_thing_over) {
     return;
   }
+  if (over) {
+    over->log("Inventory over this thing");
+  }
   game->request_inventory_thing_over    = over;
   game->request_inventory_thing_over_do = true;
 }
@@ -578,6 +638,9 @@ void wid_inventory_select_requested(Thingp selected)
   TRACE_NO_INDENT();
   if (selected == wid_inventory_thing_selected) {
     return;
+  }
+  if (selected) {
+    selected->log("Inventory over this thing");
   }
   game->request_inventory_thing_selected    = selected;
   game->request_inventory_thing_selected_do = true;
@@ -603,19 +666,57 @@ void wid_inventory_select_requested(Thingp selected)
 
 bool wid_inventory_over(Thingp over)
 {
-  TRACE_NO_INDENT();
+  DBG2("Inventory: over");
+  TRACE_AND_INDENT();
   if (over == wid_inventory_thing_over) {
     return true;
   }
+
+  if (over) {
+    if (! over->immediate_owner()) {
+      DBG2("Inventory: over item was dropped in the interim");
+      over                         = nullptr;
+      wid_inventory_thing_selected = nullptr;
+      wid_inventory_thing_over     = nullptr;
+    }
+  }
+
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected over");
+  }
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected over");
+  }
+
   return wid_inventory_create(wid_inventory_thing_selected, over);
 }
 
 bool wid_inventory_select(Thingp selected)
 {
+  DBG2("Inventory: select");
   TRACE_NO_INDENT();
   if (selected == wid_inventory_thing_selected) {
     return true;
   }
+
+  if (selected) {
+    if (! selected->immediate_owner()) {
+      DBG2("Inventory: selected item was dropped in the interim");
+      selected                     = nullptr;
+      wid_inventory_thing_selected = nullptr;
+      wid_inventory_thing_over     = nullptr;
+    }
+  }
+
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected create");
+  }
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected create");
+  }
+
   return wid_inventory_create(selected, wid_inventory_thing_over);
 }
 
@@ -761,6 +862,14 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   wid_inventory_fini();
   wid_inventory_thing_over     = over;
   wid_inventory_thing_selected = selected;
+
+  if (wid_inventory_thing_selected) {
+    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected set");
+  }
+
+  if (wid_inventory_thing_over) {
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected set");
+  }
 
   static int inventory_width  = 108;
   static int inventory_height = 40;
@@ -967,7 +1076,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   }
 
   //
-  // Hightlight the thing we're over, or the selected thing with preference.
+  // Highlight the thing we're over, or the selected thing with preference.
   //
   Thingp item_option = wid_inventory_thing_over;
   if (wid_inventory_thing_selected) {
