@@ -111,7 +111,7 @@ void Thing::msg(const char *fmt, ...)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
 
-  std::string why;
+  std::string why = fmt;
   va_list     args;
 
   auto player = level->player;

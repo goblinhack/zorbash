@@ -14,6 +14,10 @@ def on_unequip(me, owner, x, y):
 
 
 def on_owner_damage(me, owner, hitter, real_hitter, x, y, damage):
+    my.con("me           {} {:X}".format(my.thing_name_get(me), me))
+    my.con("owner        {} {:X}".format(my.thing_name_get(owner), owner))
+    my.con("hitter       {} {:X}".format(my.thing_name_get(hitter), hitter))
+    my.con("real_hitter  {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
     if my.thing_is_player(owner):
         return int(damage / 2)
     return damage
@@ -117,7 +121,6 @@ def tp_init(name, text_name, short_text_name):
     my.item_width(self, 4)
     my.long_text_description(self, "This magical ring is designed to create a protective shield from missles or projectiles. Damage will be reduced by 50 percent for such attacks whilst this ring is worn.")
     my.normal_placement_rules(self, True)
-    # my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_damage_acid_do(self, "me.on_owner_damage_acid()")
     my.on_owner_damage_cold_do(self, "me.on_owner_damage_cold()")
     my.on_owner_damage_crush_do(self, "me.on_owner_damage_crush()")
@@ -136,7 +139,6 @@ def tp_init(name, text_name, short_text_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.on_owner_damage_stat_con_do(self, "me.on_owner_damage_stat_con()")
     my.on_owner_damage_stat_str_do(self, "me.on_owner_damage_stat_str()")
-    # my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.stat_con_mod(self, 3)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Shield ring.")
