@@ -173,6 +173,21 @@ bool Thing::carry(Thingp item, bool can_equip)
     }
   }
 
+  //
+  // If we have no rings yet, equip it
+  //
+  if (can_equip && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring() &&
+      ! equip_id(MONST_EQUIP_RING1)) {
+    if (equip(item, MONST_EQUIP_RING1)) {
+      equipped = true;
+    }
+  } else if (can_equip && is_able_to_use_rings() && item->is_auto_equipped() && item->is_ring() &&
+             ! equip_id(MONST_EQUIP_RING2)) {
+    if (equip(item, MONST_EQUIP_RING2)) {
+      equipped = true;
+    }
+  }
+
   if (equipped) {
     //
     // Continue

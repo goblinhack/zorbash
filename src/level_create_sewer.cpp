@@ -162,19 +162,19 @@ bool Level::create_sewer_pipes(point3d at)
     auto p  = sewers[ n ];
     int  dx = 0, dy = 0;
     switch (pcg_random_range_inclusive(0, 3)) {
-      case 0 :
+      case 0:
         dx = -1;
         dy = 0;
         break;
-      case 1 :
+      case 1:
         dx = 1;
         dy = 0;
         break;
-      case 2 :
+      case 2:
         dx = 0;
         dy = -1;
         break;
-      case 3 :
+      case 3:
         dx = 0;
         dy = 1;
         break;
@@ -377,7 +377,6 @@ void Level::create_sewer_place_walls(int variant, int block_width, int block_hei
       auto Y = y + dy;
       for (auto dx = 0; dx < block_width; dx++) {
         auto X = x + dx;
-        is_wall_set(X, Y);
 
         auto tilename = what + ".";
         tilename += std::to_string(variant);
