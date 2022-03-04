@@ -472,7 +472,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   if (must_attack) {
-    dbg("Must attack");
+    dbg("Must attack at %s", future_pos.to_string().c_str());
     TRACE_AND_INDENT();
 
     if (equip_use(must_attack, MONST_EQUIP_WEAPON, &future_pos)) {
@@ -515,7 +515,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         }
         try_to_shove(future_pos);
       } else if (attack_allowed) {
-        dbg("Try to attack");
+        dbg("Try to attack at %s", future_pos.to_string().c_str());
         TRACE_AND_INDENT();
 
         if (equip_use(must_attack, MONST_EQUIP_WEAPON, &future_pos)) {

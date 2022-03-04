@@ -438,15 +438,8 @@ bool Thing::victim_attack_best_at(int equip, point *at, int attempt, bool &victi
   return false;
 }
 
-bool Thing::victim_attack_best(int equip, point *at)
+bool Thing::victim_attack_best_(int equip, point *at)
 {
-  if (at) {
-    dbg("Target-attack-best: Try to attack with equipped item at %s", at->to_string().c_str());
-  } else {
-    dbg("Target-attack-best: Try to attack with equipped item");
-  }
-  TRACE_AND_INDENT();
-
   int  dx, dy;
   auto item = equip_get(equip);
   if (! item) {
@@ -609,4 +602,25 @@ bool Thing::victim_attack_best(int equip, point *at)
   }
 
   return false;
+}
+
+bool Thing::victim_attack_best(int equip, point *at)
+{
+  if (at) {
+    dbg("Target-attack-best: Try to attack with equipped item at %s", at->to_string().c_str());
+  } else {
+    dbg("Target-attack-best: Try to attack with equipped item");
+  }
+  TRACE_AND_INDENT();
+
+  //
+  // Save the direction as it can change if attacking surrounding things
+  //
+  auto old_dir = dir;
+
+  auto ret = victim_attack_best_(equip, at);
+
+  dir = old_dir;
+
+  return ret;
 }

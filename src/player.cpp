@@ -55,22 +55,22 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
   // Trying to move when moving items?
   //
   switch (game->state) {
-    case Game::STATE_NORMAL : break;
-    case Game::STATE_OPTIONS_FOR_ITEM_MENU : LOG("Ignore player action when choosing item options"); return false;
-    case Game::STATE_INVENTORY : // Currently managing inventory
+    case Game::STATE_NORMAL: break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU: LOG("Ignore player action when choosing item options"); return false;
+    case Game::STATE_INVENTORY: // Currently managing inventory
       LOG("Ignore player action when moving items");
       return false;
-    case Game::STATE_COLLECTING_ITEMS : // Collecting en masse from the level
+    case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
       LOG("Ignore player action when collecting items");
       return false;
-    case Game::STATE_ENCHANTING_ITEMS : LOG("Ignore player action when enchanting items"); return false;
-    case Game::STATE_CHOOSING_SKILLS : LOG("Ignore player action when choosing skills"); return false;
-    case Game::STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
+    case Game::STATE_ENCHANTING_ITEMS: LOG("Ignore player action when enchanting items"); return false;
+    case Game::STATE_CHOOSING_SKILLS: LOG("Ignore player action when choosing skills"); return false;
+    case Game::STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
       LOG("Ignore player action when choosing target");
       return false;
-    case Game::STATE_LOAD_MENU :
-    case Game::STATE_SAVE_MENU :
-    case Game::STATE_QUIT_MENU : LOG("Ignore player action when in menu"); return false;
+    case Game::STATE_LOAD_MENU:
+    case Game::STATE_SAVE_MENU:
+    case Game::STATE_QUIT_MENU: LOG("Ignore player action when in menu"); return false;
   }
 
   if (left || right || up || down) {
@@ -80,22 +80,24 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     }
   }
 
-  double d  = 1.0;
-  double dx = 0.0;
-  double dy = 0.0;
+  point dir;
 
   if (left) {
-    dx = -d;
+    dir.x = -1;
   }
   if (right) {
-    dx = d;
+    dir.x = -1;
   }
   if (up) {
-    dy = -d;
+    dir.y = -1;
   }
   if (down) {
-    dy = d;
+    dir.y = -1;
   }
+  if (! dir.x && ! dir.y) {
+    dir = player->dir_to_direction();
+  }
+  CON("DIR %d,%d", dir.x, dir.y);
 
   if (jump) {
     game->tick_begin("player jumped");
@@ -160,7 +162,7 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     //
     bool moving = player->is_moving;
 
-    auto future_pos     = player->curr_at + point(dx, dy);
+    auto future_pos     = player->curr_at + dir;
     bool shove_allowed  = true;
     bool attack_allowed = true;
     if (wait) {
