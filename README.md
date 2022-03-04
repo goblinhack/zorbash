@@ -1,8 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- weapon swing move bug                                                                                                                        -->
-<!-- weapon swing offset bug                                                                                                                      -->
-<!-- hitting space results in random swing dirs                                                                                                   -->
+<!-- weapon swing on each target                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->

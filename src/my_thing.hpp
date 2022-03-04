@@ -518,6 +518,7 @@ public:
   bool use(Thingp w, UseOptions *options = nullptr);
   bool victim_attack_best_at(int equip, point *at, int attempt, bool &victim_attacked, bool &victim_overlaps);
   bool victim_attack_best(int equip, point *at = nullptr);
+  bool victim_attack_best_(int equip, point *at = nullptr);
   bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);

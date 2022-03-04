@@ -7,6 +7,14 @@
 
 void Thing::lunge(point to)
 {
+  //
+  // Already lunging? This can happen when swinging a weapon that hits in multiple
+  // directions. Don't make the player dizzy and focus on the intial lunge.
+  //
+  if (ts_lunge_begin()) {
+    return;
+  }
+
   dbg("Lunge to %d,%d", to.x, to.y);
   TRACE_AND_INDENT();
 
@@ -28,6 +36,8 @@ float Thing::lunge_curr(void)
   auto t = time_get_time_ms_cached();
 
   if (t >= ts_lunge_end()) {
+    ts_lunge_begin_set(0);
+    ts_lunge_end_set(0);
     return 0;
   }
 

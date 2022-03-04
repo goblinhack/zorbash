@@ -67,7 +67,7 @@ void Game::place_player(void)
         auto w = level->thing_new("ring_shield", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("very_broadsword", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -76,7 +76,7 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_wood", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("axe", point(x, y));
         t->carry(w);
       }
@@ -125,8 +125,9 @@ void Game::place_player(void)
         }
         // level->thing_new("belcher", point(x + 3, y));
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
-        // level->thing_new("rat_giant", point(x + 1, y));
-        // level->thing_new("rat_giant", point(x + 2, y));
+        level->thing_new("rat_giant", point(x - 1, y));
+        level->thing_new("rat_giant", point(x + 1, y));
+        level->thing_new("rat_giant", point(x, y - 1));
         // level->thing_new("zorb_necro", point(x + 2, y));
         // level->thing_new("gargoyle_static", point(x + 2, y - 2));
         // level->thing_new("lava", point(x, y));
