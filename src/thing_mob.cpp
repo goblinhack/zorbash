@@ -179,7 +179,7 @@ void Thing::destroy_minions(Thingp defeater)
       if (o && (o == this)) {
         minion->remove_mob();
         minion->is_resurrection_blocked = true;
-        minion->dead(defeater, "its mob died");
+        minion->dead(defeater, "its creator was destroyed");
       }
     }
   }

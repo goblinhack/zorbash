@@ -253,13 +253,9 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
        best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
 
-  if (is_player()) {
-    con("ATTACK %d %d", best_hit_at.x, best_hit_at.y);
-    auto use_anim = equip_use_anim(equip);
-    if (use_anim) {
-      con("ANIM %d %d", best_hit_at.x, best_hit_at.y);
-      level->thing_new(use_anim->name(), best_hit_at);
-    }
+  auto use_anim = equip_use_anim(equip);
+  if (use_anim && (best_hit_at != use_anim->curr_at)) {
+    level->thing_new(use_anim->name(), best_hit_at);
   }
 
   if (item) {

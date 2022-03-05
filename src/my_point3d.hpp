@@ -169,4 +169,6 @@ public:
 typedef my_apoint3d< int16_t > point3d;
 typedef my_apoint3d< float >   fpoint3d;
 
+static inline point make_point(const point3d &f) { return point(f.x, f.y); }
+
 #endif // _MY_POINT3D_HPP_

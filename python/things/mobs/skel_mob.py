@@ -80,7 +80,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="skel_mob", text_name="skeleton mobber")
+    tp_init(name="skel_mob", text_name="skeleton generator")
 
 
 init()
