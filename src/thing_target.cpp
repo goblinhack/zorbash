@@ -63,7 +63,6 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
 
       if (t->is_mob() || t->is_monst() || t->is_player()) {
         prio += danger_current_level(t);
-        dbg2("Target-attack-best: %s mob prio %d", t->to_short_string().c_str(), prio);
 
         //
         // Make sure we prefer monsts over things like doors if there is
@@ -244,7 +243,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
-bool Thing::victim_attack_found_best(Thingp item, Thingp best, point best_hit_at, bool &victim_attacked,
+bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, bool &victim_attacked,
                                      bool &victim_overlaps)
 {
   victim_attacked = false;
@@ -253,6 +252,15 @@ bool Thing::victim_attack_found_best(Thingp item, Thingp best, point best_hit_at
   dbg2("Target-attack-best: Best target to hit is %s at %s", best->to_string().c_str(),
        best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
+
+  if (is_player()) {
+    con("ATTACK %d %d", best_hit_at.x, best_hit_at.y);
+    auto use_anim = equip_use_anim(equip);
+    if (use_anim) {
+      con("ANIM %d %d", best_hit_at.x, best_hit_at.y);
+      level->thing_new(use_anim->name(), best_hit_at);
+    }
+  }
 
   if (item) {
     on_use(item, best);
@@ -353,7 +361,7 @@ bool Thing::victim_attack_best_at(int equip, point *at, int attempt, bool &victi
   //
   if (at) {
     if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
-      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+      return victim_attack_found_best(equip, item, best, best_hit_at, victim_attacked, victim_overlaps);
     }
   }
 
@@ -362,37 +370,37 @@ bool Thing::victim_attack_best_at(int equip, point *at, int attempt, bool &victi
         point(dx, dy),
     };
     if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
-      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+      return victim_attack_found_best(equip, item, best, best_hit_at, victim_attacked, victim_overlaps);
     }
   }
 
   if (attempt) {
     if (attempt == 1) {
       if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
-        return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+        return victim_attack_found_best(equip, item, best, best_hit_at, victim_attacked, victim_overlaps);
       }
     }
     if (attempt == 2) {
       if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
-        return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+        return victim_attack_found_best(equip, item, best, best_hit_at, victim_attacked, victim_overlaps);
       }
     }
     if (attempt == 3) {
       if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
-        return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+        return victim_attack_found_best(equip, item, best, best_hit_at, victim_attacked, victim_overlaps);
       }
     }
   } else {
     if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
-      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+      return victim_attack_found_best(equip, item, best, best_hit_at, victim_attacked, victim_overlaps);
     }
 
     if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
-      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+      return victim_attack_found_best(equip, item, best, best_hit_at, victim_attacked, victim_overlaps);
     }
 
     if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
-      return victim_attack_found_best(item, best, best_hit_at, victim_attacked, victim_overlaps);
+      return victim_attack_found_best(equip, item, best, best_hit_at, victim_attacked, victim_overlaps);
     }
   }
 

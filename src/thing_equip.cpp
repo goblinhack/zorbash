@@ -547,10 +547,12 @@ void Thing::equip_remove_anim(int equip)
 
 bool Thing::equip_use(bool forced, int equip, point *at)
 {
-  if (at) {
-    dbg("Try to use equipped %s item at %s", equip_name(equip).c_str(), at->to_string().c_str());
-  } else {
-    dbg("Try to use equipped item");
+  if (is_player()) {
+    if (at) {
+      con("Try to use equipped %s item at %s", equip_name(equip).c_str(), at->to_string().c_str());
+    } else {
+      con("Try to use equipped item");
+    }
   }
   TRACE_AND_INDENT();
 
@@ -562,6 +564,14 @@ bool Thing::equip_use(bool forced, int equip, point *at)
     return false;
   }
 
+  //
+  // We have to tick before using equipment else we will lose the hit
+  // message on the first tick.
+  //
+  if (is_player()) {
+    game->tick_begin("player attack");
+  }
+
   TRACE_NO_INDENT();
   if (is_able_to_tire()) {
     if (stamina_get() < 5) {
@@ -570,23 +580,9 @@ bool Thing::equip_use(bool forced, int equip, point *at)
           msg("You are so tired but dig deep and attack!");
         } else {
           msg("You are too tired to attack.");
-          game->tick_begin("too tired to attack");
           return false;
         }
       }
-    }
-  }
-
-  dbg("Find best attack target");
-  TRACE_AND_INDENT();
-  bool attacked = victim_attack_best(equip, at);
-  if (! attacked) {
-    if (is_player() && forced) {
-      //
-      // Swing anyway else it looks odd
-      //
-    } else {
-      return false;
     }
   }
 
@@ -645,6 +641,19 @@ bool Thing::equip_use(bool forced, int equip, point *at)
     }
     use_anim->owner_set(this);
     equip_use_anim_set(use_anim, equip);
+  }
+
+  dbg("Find best attack target");
+  TRACE_AND_INDENT();
+  bool attacked = victim_attack_best(equip, at);
+  if (! attacked) {
+    if (is_player() && forced) {
+      //
+      // Swing anyway else it looks odd
+      //
+    } else {
+      return false;
+    }
   }
 
   //
