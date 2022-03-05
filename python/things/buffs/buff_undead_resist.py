@@ -95,8 +95,6 @@ def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
 
-def init():
-init()
     my.is_buff(self, True)
     my.is_loggable(self, True)
     my.long_text_description(self, "Undead cause half damage.")
@@ -119,5 +117,12 @@ init()
     my.on_owner_damage_stat_str_do(self, "me.on_owner_damage_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.tile(self, tile="buff_undead_resist")
+    # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tp_update(self)
+
+
+def init():
     tp_init(name="buff_undead_resist", text_name="undead resist")
+
+
+init()
