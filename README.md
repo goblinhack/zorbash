@@ -5,7 +5,6 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - cloak of protection                                                                                                                        -->
 <!-- - cloak of fire protection                                                                                                                   -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - boots of shoving / steadfastness                                                                                                           -->
