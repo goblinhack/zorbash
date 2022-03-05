@@ -18,7 +18,7 @@ def tp_init(name, text_name, short_text_name):
     my.gfx_animated(self, True)
     my.gfx_short_shadow_caster(self, True)
     my.gfx_show_outlined(self, True)
-    my.gold_value_dice(self, "500")
+    my.gold_value_dice(self, "750")
     my.health_initial_dice(self, "1d20")
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")

@@ -22,7 +22,7 @@ def on_use(owner, skill, target, x, y):
         my.thing_skill_deactivate(owner, skill)
 
 
-def tp_inti(name, text_name):
+def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
 
@@ -43,7 +43,7 @@ def tp_inti(name, text_name):
 
 
 def init():
-    tp_inti(name="skill_devoted_thrust", text_name="devoted thrust")
+    tp_init(name="skill_devoted_thrust", text_name="devoted thrust")
 
 
 init()
