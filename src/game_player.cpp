@@ -89,7 +89,11 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
-        auto w = level->thing_new("stone_cloak", point(x, y));
+        auto w = level->thing_new("cloak_stone", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
+        auto w = level->thing_new("cloak_protection", point(x, y));
         t->carry(w);
       }
       if (0) {

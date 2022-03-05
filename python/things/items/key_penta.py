@@ -11,6 +11,7 @@ def key_init(name, text_name):
     my.gold_value_dice(self, "100")
     my.is_able_to_fall(self, True)
     my.is_auto_collect_item(self, True)
+    my.is_meltable(self, True)
     my.is_biome_dungeon(self, True)
     my.is_collectable(self, True)
     my.is_collect_as_keys(self, True)
