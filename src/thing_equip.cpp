@@ -634,7 +634,8 @@ bool Thing::equip_use(bool forced, int equip, point *at)
       // If not attacking something at a point, then use the direction of the wielder.
       //
       if (*at == curr_at) {
-        use_anim->move_to(*at + dir_to_direction());
+        auto p = *at + dir_to_direction();
+        use_anim->move_to(p);
       }
     } else {
       use_anim = level->thing_new(used_as, this);

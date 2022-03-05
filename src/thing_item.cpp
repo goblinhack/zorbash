@@ -67,11 +67,18 @@ void Thing::move_carried_items(void)
       }
     }
 
-    if (equip_id_use_anim(e).ok()) {
-      auto w = level->thing_find(equip_id_use_anim(e));
-      if (w) {
-        w->move_to(curr_at);
-        w->dir = dir;
+    //
+    // Don't move the swing animation. This messes up when we have multiple
+    // swings for things like axes, such that this moving animation means
+    // we're not sure where the first swing was.
+    //
+    if (0) {
+      if (equip_id_use_anim(e).ok()) {
+        auto w = level->thing_find(equip_id_use_anim(e));
+        if (w) {
+          w->move_to(curr_at);
+          w->dir = dir;
+        }
       }
     }
   }

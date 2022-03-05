@@ -67,7 +67,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="coffin_mob", text_name="coffin mobber")
+    tp_init(name="coffin_mob", text_name="coffin")
 
 
 init()
