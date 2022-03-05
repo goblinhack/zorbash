@@ -26,7 +26,10 @@ void Thing::killed(Thingp defeater, const char *reason)
   if (is_dying) {
     return;
   }
-  is_dying = true;
+
+  if (! is_dead) {
+    is_dying = true;
+  }
 
   TRACE_NO_INDENT();
   if (is_loggable()) {
@@ -358,6 +361,9 @@ void Thing::killed(Thingp defeater, const char *reason)
           i_set_is_monst = false;
           level->is_monst_unset(curr_at.x, curr_at.y);
         }
+
+        is_dead  = true;
+        is_dying = false;
         return;
       }
     }

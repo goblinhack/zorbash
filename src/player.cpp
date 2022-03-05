@@ -86,18 +86,17 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     dir.x = -1;
   }
   if (right) {
-    dir.x = -1;
+    dir.x = 1;
   }
   if (up) {
     dir.y = -1;
   }
   if (down) {
-    dir.y = -1;
+    dir.y = 1;
   }
   if (! dir.x && ! dir.y) {
     dir = player->dir_to_direction();
   }
-  CON("DIR %d,%d", dir.x, dir.y);
 
   if (jump) {
     game->tick_begin("player jumped");
