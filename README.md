@@ -5,7 +5,6 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - shield ring                                                                                                                                -->
 <!-- - cloak of protection                                                                                                                        -->
 <!-- - cloak of fire protection                                                                                                                   -->
 <!-- - cloak of jelly                                                                                                                             -->

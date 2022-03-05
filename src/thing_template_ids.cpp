@@ -54,6 +54,7 @@ std::initializer_list< std::string > tps = {
     "bridge_ud",
     "bridge_x",
     "buff_aquatic",
+    "buff_missile_resist",
     "buff_poison_resist",
     "buff_slippery",
     "buff_undead_resist",

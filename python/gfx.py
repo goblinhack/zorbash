@@ -504,7 +504,7 @@ def init_tiles_16x16():
         "buff_slippery",
         "buff_aquatic",
         "buff_undead_resist",
-        "",
+        "buff_missile_resist",
         "",
         "",
         "",

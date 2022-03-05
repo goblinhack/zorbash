@@ -16,7 +16,13 @@ def on_owner_remove(me, owner, x, y):
 
 
 def on_owner_damage(me, owner, hitter, real_hitter, x, y, damage):
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
+    # my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
     if my.thing_is_player(owner):
+        if my.thing_is_player(owner):
+            my.thing_msg(me, "You take half damage from the undead attack.")
         return int(damage / 2)
     return damage
 
@@ -91,7 +97,7 @@ def tp_init(name, text_name):
 
     my.is_buff(self, True)
     my.is_loggable(self, True)
-    my.long_text_description(self, "Undead only cause you half damage.")
+    my.long_text_description(self, "Undead cause half damage.")
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_damage_acid_do(self, "me.on_owner_damage_acid()")
     my.on_owner_damage_cold_do(self, "me.on_owner_damage_cold()")
@@ -110,9 +116,7 @@ def tp_init(name, text_name):
     my.on_owner_damage_stat_con_do(self, "me.on_owner_damage_stat_con()")
     my.on_owner_damage_stat_str_do(self, "me.on_owner_damage_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
-    my.text_description(self, "Poison resistant buff.")
     my.tile(self, tile="buff_undead_resist")
-    # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tp_update(self)
 
 

@@ -2,89 +2,12 @@ import my
 import tp
 
 
-def on_equip(me, owner, x, y):
-    if my.thing_is_player(owner):
-        my.thing_msg(me, "A protective semi transparent shield surrounds you.")
+def on_equip(owner, me, x, y):
+    my.thing_buff_add(owner, "buff_missile_resist")
 
 
-# Called on removing a ring. Not called on death of the owner.
-def on_unequip(me, owner, x, y):
-    if my.thing_is_player(owner):
-        my.thing_msg(me, "The shield around you fades.")
-
-
-def on_owner_damage(me, owner, hitter, real_hitter, x, y, damage):
-    my.con("me           {} {:X}".format(my.thing_name_get(me), me))
-    my.con("owner        {} {:X}".format(my.thing_name_get(owner), owner))
-    my.con("hitter       {} {:X}".format(my.thing_name_get(hitter), hitter))
-    my.con("real_hitter  {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
-    if my.thing_is_player(owner):
-        return int(damage / 2)
-    return damage
-
-
-def on_owner_damage_melee(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_poison(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_future1(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_future2(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_future3(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_cold(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_fire(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_crush(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_lightning(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_energy(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_acid(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_digest(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_natural_attack(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_necrosis(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_stat_str(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
-
-
-def on_owner_damage_stat_con(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
+def on_unequip(owner, me, x, y):
+    my.thing_buff_remove(owner, "buff_missile_resist")
 
 
 def tp_init(name, text_name, short_text_name):
@@ -97,6 +20,8 @@ def tp_init(name, text_name, short_text_name):
     my.gfx_show_outlined(self, True)
     my.gold_value_dice(self, "500")
     my.health_initial_dice(self, "1d20")
+    my.on_equip_do(self, "me.on_equip()")
+    my.on_unequip_do(self, "me.on_unequip()")
     my.is_able_to_fall(self, True)
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)

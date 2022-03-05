@@ -20,6 +20,8 @@ def on_owner_damage_melee(me, owner, hitter, real_hitter, x, y, damage):
 
 
 def on_owner_damage_poison(me, owner, hitter, real_hitter, x, y, damage):
+    if my.thing_is_player(owner):
+        my.thing_msg(me, "You take half damage from the poison.")
     return int(damage / 2)
 
 
@@ -120,7 +122,6 @@ def tp_init(name, text_name):
     my.on_owner_damage_stat_str_do(self, "me.on_owner_damage_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.on_tick_do(self, "me.on_tick()")
-    my.text_description(self, "Poison resistant buff.")
     my.tile(self, tile="buff_poison_resist")
     # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tp_update(self)
