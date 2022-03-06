@@ -34,7 +34,7 @@ def explode(me, x, y):
         return
 
     my.thing_msg(me, "The staff of energy explodes in a blaze of power.")
-    my.level_spawn_at_thing(me, "explosion_minor")
+    my.level_spawn_at_thing(me, "explosion_fire")
     my.level_spawn_fire_around_thing(me, "fire")
     my.thing_dead(me, "exploded")
 

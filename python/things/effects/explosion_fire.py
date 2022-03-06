@@ -3,29 +3,30 @@ import tp
 
 
 def on_death(me, x, y):
-    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_e")
-    my.if_matches_then_dead(me, "is_floor", x, y)
-    my.if_matches_then_dead(me, "is_corridor", x, y)
-    my.if_matches_then_dead(me, "is_dirt", x, y)
-    my.level_place_at(me, "chasm1", x, y)
+    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_a")
 
 
 def tp_init(name):
     self = tp.Tp(name)
+    my.damage_fire_chance_d1000(self, 1000)
+    my.damage_fire_dice(self, "1d6")  # This is the damage when the monst fires
     my.gfx_animated(self, True)
     my.gfx_short_shadow_caster(self, True)
     my.gfx_show_outlined(self, True)
     my.is_explosion(self, True)
+    my.is_fire(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
-    my.noise_on_born(self, 100)
+    my.is_tickable(self, True)  # So it can interact with fire
+    my.noise_on_born(self, 70)
     my.on_death_do(self, "me.on_death()")
+    my.temperature(self, 100)
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
-    delay = 50
     my.tile(self, tile="nothing")
+    delay = 25
     my.tile(self, "explosion_fire.1", delay_ms=delay)
     my.tile(self, "explosion_fire.2", delay_ms=delay)
     my.tile(self, "explosion_fire.3", delay_ms=delay)
@@ -40,7 +41,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="explosion_destroy_floor")
+    tp_init(name="explosion_fire")
 
 
 init()
