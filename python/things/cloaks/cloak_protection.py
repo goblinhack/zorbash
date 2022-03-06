@@ -12,8 +12,10 @@ def on_enchant(me, x, y):
 
 
 def on_tick(owner, item, x, y):
+    if not owner:
+        return False
     my.thing_stamina_decr(owner, 2)
-    return False
+    return True
 
 
 def tp_init(name, text_name, short_text_name):

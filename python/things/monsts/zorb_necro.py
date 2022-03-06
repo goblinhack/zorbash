@@ -12,7 +12,7 @@ def on_born(me, x, y):
     my.thing_carry(me, "staff_energy")
 
 
-def on_tick(me, x, y):
+def on_tick(owner, me, x, y):
     if my.pcg_randint(1, 100) < 90:
         return False
 

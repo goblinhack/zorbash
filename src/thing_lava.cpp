@@ -62,8 +62,12 @@ void Thing::lava_tick(void)
     FOR_ALL_THINGS_END()
   } else {
     if (is_player()) {
-      msg("You luckily stand on a sightly cooler rock in the lava!");
-      popup("Hm, toasty!");
+      if (is_immune_to_fire()) {
+        popup("Lovely lava!");
+      } else {
+        msg("You luckily stand on a sightly cooler rock in the lava!");
+        popup("Hm, toasty!");
+      }
     }
   }
 
