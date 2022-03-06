@@ -18,6 +18,7 @@ def key_init(name, text_name):
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
+    my.is_immune_to_cold(self, True)
     my.is_key(self, 1)
     my.is_loggable(self, True)
     my.is_metal(self, True)

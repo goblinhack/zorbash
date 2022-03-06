@@ -20,6 +20,7 @@ def gold_init(name, text_name):
     my.is_gold(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
+    my.is_immune_to_cold(self, True)
     my.is_loggable(self, True)
     my.is_metal(self, True)
     my.is_moveable(self, True)

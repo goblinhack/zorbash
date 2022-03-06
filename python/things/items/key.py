@@ -20,6 +20,7 @@ def key_init(name, text_name):
     my.is_interesting(self, True)
     my.is_meltable(self, True)
     my.is_item(self, True)
+    my.is_immune_to_cold(self, True)
     my.is_key(self, True)
     my.is_loggable(self, True)
     my.is_metal(self, True)
