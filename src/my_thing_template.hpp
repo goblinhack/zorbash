@@ -532,7 +532,7 @@ private:
   int _unused_flag122 {};
   int _unused_flag123 {};
   int _unused_flag124 {};
-  int _unused_flag125 {};
+  int _is_pillar {};
   int _unused_flag13 {};
   int _unused_flag14 {};
   int _unused_flag15 {};
@@ -1433,7 +1433,7 @@ public:
   int unused_flag122(void) const { return _unused_flag122; }
   int unused_flag123(void) const { return _unused_flag123; }
   int unused_flag124(void) const { return _unused_flag124; }
-  int unused_flag125(void) const { return _unused_flag125; }
+  int is_pillar(void) const { return _is_pillar; }
   int unused_flag12(void) const { return _unused_flag12; }
   int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag14(void) const { return _unused_flag14; }
@@ -2073,7 +2073,7 @@ public:
   void unused_flag122_set(int v) { _unused_flag122 = v; }
   void unused_flag123_set(int v) { _unused_flag123 = v; }
   void unused_flag124_set(int v) { _unused_flag124 = v; }
-  void unused_flag125_set(int v) { _unused_flag125 = v; }
+  void is_pillar_set(int v) { _is_pillar = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }
   void unused_flag13_set(int v) { _unused_flag13 = v; }
   void unused_flag14_set(int v) { _unused_flag14 = v; }
