@@ -2174,10 +2174,10 @@ int Thing::unused_flag124(void)
   return (tp()->unused_flag124());
 }
 
-int Thing::unused_flag125(void)
+int Thing::is_pillar(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag125());
+  return (tp()->is_pillar());
 }
 
 int Thing::collision_hit_two_tiles_ahead(void)

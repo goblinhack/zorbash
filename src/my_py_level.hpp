@@ -356,7 +356,7 @@ PyObject *level_unused_flag121_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag122_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag123_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag124_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag125_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_pillar_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_walk_through_walls_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_collision_hit_two_tiles_ahead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_flat_at(PyObject *obj, PyObject *args, PyObject *keywds);

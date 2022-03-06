@@ -1038,7 +1038,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag124() && (what == "unused_flag124")) {
     return true;
   }
-  if (unused_flag125() && (what == "unused_flag125")) {
+  if (is_pillar() && (what == "is_pillar")) {
     return true;
   }
   if (is_able_to_walk_through_walls() && (what == "is_able_to_walk_through_walls")) {
@@ -2293,8 +2293,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag124") {
     return &Thing::unused_flag124;
   }
-  if (what == "unused_flag125") {
-    return &Thing::unused_flag125;
+  if (what == "is_pillar") {
+    return &Thing::is_pillar;
   }
   if (what == "unused_flag12") {
     return &Thing::unused_flag12;

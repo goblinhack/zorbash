@@ -425,7 +425,7 @@ do
       unused_flag122_set \
       unused_flag123_set \
       unused_flag124_set \
-      unused_flag125_set \
+      is_pillar_set \
       is_able_to_walk_through_walls_set \
       collision_hit_two_tiles_ahead_set \
       is_flat_set \

@@ -44,7 +44,8 @@ Thingp Thing::in_the_way(const point s, const point e, int x, int y)
       continue;
     }
 
-    if (t->is_attackable_by_player() || t->is_attackable_by_monst()) {
+    if (t->is_pillar() || t->is_barrel() || t->is_spiderweb() || t->is_attackable_by_player() ||
+        t->is_attackable_by_monst()) {
       dbg2("This is in the way: %s", t->to_short_string().c_str());
       return t;
     }

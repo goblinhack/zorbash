@@ -12,6 +12,7 @@ def tp_init(name, text_name, tiles=[]):
     my.is_always_hit(self, True)
     my.is_floor_deco(self, True)
     my.is_interesting(self, True)
+    my.is_pillar(self, True)
     my.is_obs_wall_or_door(self, True)
     my.text_a_or_an(self, "a")
     my.text_description(self, "An aged and moss-covered stone pillar.")
