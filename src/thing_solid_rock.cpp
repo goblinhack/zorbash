@@ -22,6 +22,10 @@ void Thing::solid_rock_tick(void)
     return;
   }
 
+  if (is_able_to_walk_through_walls()) {
+    return;
+  }
+
   log("Solid rock tick");
   TRACE_AND_INDENT();
 

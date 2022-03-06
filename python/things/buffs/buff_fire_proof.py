@@ -16,10 +16,10 @@ def on_owner_remove(me, owner, x, y):
 
 
 def on_owner_damage(me, owner, hitter, real_hitter, x, y, damage):
-    my.con("me      {} {:X}".format(my.thing_name_get(me), me))
-    my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
-    my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
-    my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
+    # my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
     if my.thing_is_fire(hitter):
         my.thing_msg(me, "You take no damage fire.")
         return 0
