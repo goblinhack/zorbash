@@ -840,10 +840,11 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     dbg("Cannot move to %d,%d will hit obstacle or monst", nh.x, nh.y);
     TRACE_AND_INDENT();
 
-    bool victim_attacked = false;
-    bool victim_overlaps = false;
-    collision_check_and_handle_nearby(nh, &victim_attacked, &victim_overlaps);
-    if (victim_attacked) {
+    AttackOptions attack_options {};
+    attack_options.victim_attacked = false;
+    attack_options.victim_overlaps = false;
+    collision_check_and_handle_nearby(nh, &attack_options);
+    if (attack_options.victim_attacked) {
       dbg("Cannot move to %d,%d, must attack", nh.x, nh.y);
       return true;
     } else {

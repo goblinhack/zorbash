@@ -46,7 +46,7 @@ static void thing_possible_init(void) { thing_colls.resize(0); }
 //
 // Find the thing with the highest priority to hit.
 //
-bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overlaps)
+bool Thing::collision_find_best_target(AttackOptions *attack_options)
 {
   dbg("Collided with or can attack or eat something, find the best");
   TRACE_AND_INDENT();
@@ -55,8 +55,8 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
   auto       me   = this;
   ThingColl *best = nullptr;
 
-  *victim_attacked = false;
-  *victim_overlaps = false;
+  attack_options->victim_attacked = false;
+  attack_options->victim_overlaps = false;
 
   for (auto &cand : thing_colls) {
     auto t = cand.target;
@@ -132,7 +132,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
   }
 
   if (best) {
-    *victim_overlaps = true;
+    attack_options->victim_overlaps = true;
 
     auto victim = best->target;
 
@@ -147,12 +147,12 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
       auto owner = immediate_owner();
       if (owner) {
         if (owner->open_door(victim)) {
-          *victim_attacked = false;
-          ret              = true;
+          attack_options->victim_attacked = false;
+          ret                             = true;
         }
       } else if (open_door(victim)) {
-        *victim_attacked = false;
-        ret              = true;
+        attack_options->victim_attacked = false;
+        ret                             = true;
       }
     }
 
@@ -160,7 +160,7 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
     // If an item is being attacked by fire, do we attack the item or the owner?
     //
     auto owner = immediate_owner();
-    if (! *victim_attacked) {
+    if (! attack_options->victim_attacked) {
       //
       // Carry to eat later. Things attack their food.
       //
@@ -191,14 +191,14 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
               //
               IF_DEBUG1 { owner->log("Eat corpse %s", victim->to_string().c_str()); }
               victim->hide();
-              *victim_attacked = true;
-              ret              = true;
+              attack_options->victim_attacked = true;
+              ret                             = true;
             }
           } else if (owner->is_player()) {
             owner->log("Carry %s", victim->to_string().c_str());
             if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
-              *victim_attacked = true;
-              ret              = true;
+              attack_options->victim_attacked = true;
+              ret                             = true;
             }
           }
         }
@@ -220,8 +220,8 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
                (is_potion_eater() && victim->is_potion())) &&
               try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
             dbg("Don't eat, try to carry %s", victim->to_string().c_str());
-            *victim_attacked = true;
-            ret              = true;
+            attack_options->victim_attacked = true;
+            ret                             = true;
           }
 
           if (is_monst() && victim->is_dead && ! victim->is_player() && eat(victim)) {
@@ -232,8 +232,8 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
             dbg("Eat corpse %s", victim->to_string().c_str());
             victim->hide();
             victim->gc();
-            *victim_attacked = true;
-            ret              = true;
+            attack_options->victim_attacked = true;
+            ret                             = true;
           }
 
           if (is_monst() &&
@@ -242,15 +242,15 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
                (is_green_blood_eater() && victim->is_green_blood()) ||
                (is_pink_blood_eater() && victim->is_pink_blood()) || (is_food_eater() && victim->is_food())) &&
               eat(victim)) {
-            *victim_attacked = true;
-            ret              = true;
+            attack_options->victim_attacked = true;
+            ret                             = true;
           }
 
           if (is_player()) {
             dbg("Don't attack, try to carry %s", victim->to_string().c_str());
             if (try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
-              *victim_attacked = true;
-              ret              = true;
+              attack_options->victim_attacked = true;
+              ret                             = true;
             }
           }
         }
@@ -263,11 +263,11 @@ bool Thing::collision_find_best_target(bool *victim_attacked, bool *victim_overl
     //
     if (is_wand_or_staff() || is_laser() || is_weapon() || is_monst() || (is_player() && game->robot_mode)) {
       dbg("Collision: weapon check for %s", victim->to_string().c_str());
-      if (! *victim_attacked) {
+      if (! attack_options->victim_attacked) {
         dbg("Collision: weapon try to attack for %s", victim->to_string().c_str());
         if (attack(victim)) {
-          *victim_attacked = true;
-          ret              = true;
+          attack_options->victim_attacked = true;
+          ret                             = true;
         } else {
           if (is_loggable()) {
             dbg("Collision: Cannot hit %s", victim->to_string().c_str());
@@ -738,7 +738,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   return false;
 }
 
-bool Thing::collision_check_and_handle(point future_pos, bool *victim_attacked, bool *victim_overlaps, float radius)
+bool Thing::collision_check_and_handle(point future_pos, AttackOptions *attack_options, float radius)
 {
   //
   // Do not include hidden as we use the sword being carried here
@@ -806,7 +806,7 @@ bool Thing::collision_check_and_handle(point future_pos, bool *victim_attacked, 
     return false;
   }
 
-  return (collision_find_best_target(victim_attacked, victim_overlaps));
+  return (collision_find_best_target(attack_options));
 }
 
 //
@@ -910,17 +910,17 @@ bool Thing::collision_check_only(void) { return (collision_check_only(curr_at));
 // Have we hit anything? True on having done something at this (future?)
 // position.
 //
-bool Thing::collision_check_and_handle_nearby(point future_pos, bool *victim_attacked, bool *victim_overlaps)
+bool Thing::collision_check_and_handle_nearby(point future_pos, AttackOptions *attack_options)
 {
-  return (collision_check_and_handle(future_pos, victim_attacked, victim_overlaps, thing_collision_tiles));
+  return (collision_check_and_handle(future_pos, attack_options, thing_collision_tiles));
 }
 
-bool Thing::collision_check_and_handle_at(point future_pos, bool *victim_attacked, bool *victim_overlaps)
+bool Thing::collision_check_and_handle_at(point future_pos, AttackOptions *attack_options)
 {
-  return (collision_check_and_handle(future_pos, victim_attacked, victim_overlaps, 0.0));
+  return (collision_check_and_handle(future_pos, attack_options, 0.0));
 }
 
-bool Thing::collision_check_and_handle_at(bool *victim_attacked, bool *victim_overlaps)
+bool Thing::collision_check_and_handle_at(AttackOptions *attack_options)
 {
-  return (collision_check_and_handle_at(curr_at, victim_attacked, victim_overlaps));
+  return (collision_check_and_handle_at(curr_at, attack_options));
 }

@@ -263,17 +263,18 @@ bool Thing::collision_check_do(void)
     return false;
   }
 
-  bool victim_attacked = false;
-  bool victim_overlaps = false;
-  if (collision_check_and_handle_at(&victim_attacked, &victim_overlaps)) {
-    return victim_attacked;
+  AttackOptions attack_options   = {};
+  attack_options.victim_attacked = false;
+  attack_options.victim_overlaps = false;
+  if (collision_check_and_handle_at(&attack_options)) {
+    return attack_options.victim_attacked;
   }
 
-  if (victim_attacked || victim_overlaps) {
+  if (attack_options.victim_attacked || attack_options.victim_overlaps) {
     move_finish();
     clear_move_path("Collision");
   }
-  return victim_attacked;
+  return attack_options.victim_attacked;
 }
 
 void Thing::tick(void)

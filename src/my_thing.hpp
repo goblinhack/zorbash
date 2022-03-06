@@ -54,6 +54,13 @@ typedef struct {
   bool radial_effect;
 } UseOptions;
 
+typedef struct {
+  bool victim_attacked;
+  bool victim_overlaps;
+  bool allow_hitting_walls;
+  int  attempt;
+} AttackOptions;
+
 typedef class Thing_
 {
 private:
@@ -351,17 +358,17 @@ public:
   bool check_anything_to_carry(bool auto_collect_allowed);
   bool close_door(Thingp door);
   bool collision_add_candidates(Thingp it, point future_pos, int x, int y, int dx, int dy);
-  bool collision_check_and_handle_at(bool *, bool *);
-  bool collision_check_and_handle_at(point future_pos, bool *, bool *);
-  bool collision_check_and_handle_nearby(point future_pos, bool *, bool *);
-  bool collision_check_and_handle(point future_pos, bool *, bool *, float radius);
+  bool collision_check_and_handle_at(AttackOptions *);
+  bool collision_check_and_handle_at(point future_pos, AttackOptions *);
+  bool collision_check_and_handle_nearby(point future_pos, AttackOptions *);
+  bool collision_check_and_handle(point future_pos, AttackOptions *, float radius);
   bool collision_check_and_handle(Thingp it, point future_pos, int x, int y, int dx, int dy);
   bool collision_check_do(void);
   bool collision_check_only(point future_pos);
   bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
   bool collision_check_only(Thingp it, point future_pos, int x, int y);
   bool collision_check_only(void);
-  bool collision_find_best_target(bool *, bool *);
+  bool collision_find_best_target(AttackOptions *attack_options);
   bool collision_obstacle(point);
   bool collision_obstacle(Thingp);
   bool consume(Thingp it);
@@ -517,7 +524,7 @@ public:
   bool unequip(const char *why, int equip, bool allowed_to_recarry);
   bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
   bool use(Thingp w, UseOptions *options = nullptr);
-  bool victim_attack_best_at(int equip, point *at, int attempt, bool &victim_attacked, bool &victim_overlaps);
+  bool victim_attack_best_at(int equip, point *at, AttackOptions *o);
   bool victim_attack_best(int equip, point *at = nullptr);
   bool victim_attack_best_(int equip, point *at = nullptr);
   bool will_avoid_monst(const point p);
@@ -2159,9 +2166,7 @@ public:
   bool victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
                                     std::vector< point > &all_deltas);
   bool victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at);
-  bool victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, bool &victim_attacked,
-                                bool &victim_overlaps);
-
+  bool victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, AttackOptions *o);
 } Thing;
 
 std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my);
