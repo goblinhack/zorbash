@@ -111,6 +111,10 @@ int Thing::health_incr(int v)
   }
   new_infop();
   auto n = (infop()->health += v);
+  if (n > health_max()) {
+    n               = health_max();
+    infop()->health = n;
+  }
   return n;
 }
 
@@ -133,6 +137,10 @@ int Thing::health_incr(void)
   }
   new_infop();
   auto n = (infop()->health++);
+  if (n > health_max()) {
+    n               = health_max();
+    infop()->health = n;
+  }
   return n;
 }
 

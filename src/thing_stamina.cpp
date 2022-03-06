@@ -88,6 +88,10 @@ int Thing::stamina_incr(int v)
   }
   new_infop();
   auto n = (infop()->stamina += v);
+  if (n > stamina_max()) {
+    n                = stamina_max();
+    infop()->stamina = n;
+  }
   return n;
 }
 
@@ -113,6 +117,10 @@ int Thing::stamina_incr(void)
   }
   new_infop();
   auto n = (infop()->stamina++);
+  if (n > stamina_max()) {
+    n                = stamina_max();
+    infop()->stamina = n;
+  }
   return n;
 }
 

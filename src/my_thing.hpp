@@ -336,6 +336,7 @@ public:
   bool buff_find(const std::string &);
   bool buff_find_is_aquatic(void);
   bool buff_find_is_slippery(void);
+  bool buff_find_is_fire_proof(void);
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
   bool buff_use(Thingp it);

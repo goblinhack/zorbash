@@ -46,3 +46,23 @@ bool Thing::buff_find_is_aquatic(void)
   }
   return false;
 }
+
+bool Thing::buff_find_is_fire_proof(void)
+{
+  TRACE_AND_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_immune_to_fire()) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
