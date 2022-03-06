@@ -36,7 +36,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_biome_swamp(self, True)
     my.is_burnable(self, True)
     my.is_collectable(self, True)
-    my.is_able_to_walk_through_walls(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
     my.is_enchantable(self, True)

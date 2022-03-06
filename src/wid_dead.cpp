@@ -40,17 +40,17 @@ static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'q' :
-              case SDLK_ESCAPE :
+              case 'q':
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   wid_dead_destroy();
@@ -89,8 +89,7 @@ void Game::wid_dead_select(const char *reason)
 
   py_call_void_fn("events", "on_player_death", level->dungeon_walk_order_level_no);
 
-  wid_actionbar_fini();
-  wid_thing_info_fini();
+  game->change_state(Game::STATE_NORMAL);
 
   if (wid_dead_window) {
     wid_dead_destroy();
