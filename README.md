@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- monst should collect keys and keys should melt in lava                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
