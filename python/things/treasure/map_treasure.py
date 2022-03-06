@@ -26,6 +26,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_flat(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
+    my.is_immune_to_cold(self, True)
     my.is_loggable(self, True)
     my.is_map_treasure(self, True)
     my.is_moveable(self, True)

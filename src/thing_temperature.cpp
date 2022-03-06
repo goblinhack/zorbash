@@ -22,6 +22,14 @@ void Thing::temperature_tick(void)
   //
   int location_t = 0;
 
+  //
+  // Items being carried in side a chest are insulated.
+  //
+  auto owner = immediate_owner();
+  if (owner && owner->is_bag_item_container()) {
+    temperature_set(0);
+  }
+
   FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_hidden) {
@@ -29,6 +37,13 @@ void Thing::temperature_tick(void)
     }
 
     if (t == this) {
+      continue;
+    }
+
+    //
+    // Ignore carried things
+    //
+    if (t->immediate_owner()) {
       continue;
     }
 
@@ -69,7 +84,7 @@ void Thing::temperature_tick(void)
           } else {
             if (is_player()) {
               msg("%%fg=cyan$%s suffers from the extreme cold.%%fg=reset$", text_The().c_str());
-            } else {
+            } else if (is_alive_monst()) {
               msg("%s suffers from the extreme cold.", text_The().c_str());
             }
           }
@@ -88,7 +103,7 @@ void Thing::temperature_tick(void)
           } else {
             if (is_player()) {
               msg("%%fg=orange$%s suffers from the extreme heat.%%fg=reset$", text_The().c_str());
-            } else if (is_monst()) {
+            } else if (is_alive_monst()) {
               msg("%s suffers from the extreme heat.", text_The().c_str());
             }
           }
