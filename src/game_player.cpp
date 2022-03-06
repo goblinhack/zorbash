@@ -93,6 +93,10 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (1) {
+        auto w = level->thing_new("cloak_fire", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
         auto w = level->thing_new("cloak_protection", point(x, y));
         t->carry(w);
       }
@@ -136,7 +140,7 @@ void Game::place_player(void)
         level->thing_new("gargoyle_static", point(x + 2, y - 2));
         //  level->thing_new("lava", point(x, y));
         level->thing_new("food_frog", point(x + 3, y - 1));
-        // level->thing_new("fire", point(x + 3, y - 1));
+        level->thing_new("fire", point(x + 1, y - 1));
         //  level->thing_new("enchantstone", point(x + 1, y - 1));
         //  level->thing_new("horseshoe", point(x + 2, y - 1));
         //  level->thing_new("four_leaf_clover", point(x + 2, y - 1));
