@@ -2160,12 +2160,13 @@ public:
   ThingAip    aip(void);
 
   bool victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                    std::vector< point > &all_deltas);
+                                    std::vector< point > &all_deltas, AttackOptions *attack_options);
   bool victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                    std::vector< point > &all_deltas);
+                                    std::vector< point > &all_deltas, AttackOptions *attack_options);
   bool victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                    std::vector< point > &all_deltas);
-  bool victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at);
+                                    std::vector< point > &all_deltas, AttackOptions *attack_options);
+  bool victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at,
+                                 AttackOptions *attack_options);
   bool victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, AttackOptions *o);
 } Thing;
 

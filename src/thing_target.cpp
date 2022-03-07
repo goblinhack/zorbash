@@ -31,7 +31,7 @@ bool Thing::is_target_select(Thingp item)
 // in that path, look around for something else.
 //
 bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                         std::vector< point > &all_deltas)
+                                         std::vector< point > &all_deltas, AttackOptions *attack_options)
 {
   bool found_best {};
   int  best_priority = -999;
@@ -59,6 +59,12 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
       if (same_mob(t) || same_leader(t)) {
         dbg2("Target-attack-best: %s no same leader", t->to_short_string().c_str());
         continue;
+      }
+
+      if (t->is_wall()) {
+        if (! attack_options->allow_hitting_walls) {
+          continue;
+        }
       }
 
       if (t->is_mob() || t->is_monst() || t->is_player()) {
@@ -102,8 +108,11 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
+//
+// The only difference here is that we allow the hitting of item
+//
 bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                         std::vector< point > &all_deltas)
+                                         std::vector< point > &all_deltas, AttackOptions *attack_options)
 {
   bool found_best {};
   int  best_priority = -999;
@@ -145,6 +154,12 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
         continue;
       }
 
+      if (t->is_wall()) {
+        if (! attack_options->allow_hitting_walls) {
+          continue;
+        }
+      }
+
       if (t->is_door()) {
         //
         // Ok
@@ -177,8 +192,12 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
+//
+// The difference here from the above is that we mostly allow hitting anything,
+// including things like rock.
+//
 bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, point *best_hit_at,
-                                         std::vector< point > &all_deltas)
+                                         std::vector< point > &all_deltas, AttackOptions *attack_options)
 {
   bool found_best {};
   int  best_priority = -999;
@@ -218,6 +237,12 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
       if (same_mob(t) || same_leader(t)) {
         dbg2("Target-attack-best: %s no same leader", t->to_short_string().c_str());
         continue;
+      }
+
+      if (t->is_wall()) {
+        if (! attack_options->allow_hitting_walls) {
+          continue;
+        }
       }
 
       if (t->is_hittable()) {
@@ -273,19 +298,20 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   return true;
 }
 
-bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at)
+bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at,
+                                      AttackOptions *attack_options)
 {
   std::vector< point > all_deltas = {point(0, 0)};
 
-  if (victim_attack_best_attempt_1(item, curr_at, best, best_hit_at, all_deltas)) {
+  if (victim_attack_best_attempt_1(item, curr_at, best, best_hit_at, all_deltas, attack_options)) {
     return true;
   }
 
-  if (victim_attack_best_attempt_2(item, curr_at, best, best_hit_at, all_deltas)) {
+  if (victim_attack_best_attempt_2(item, curr_at, best, best_hit_at, all_deltas, attack_options)) {
     return true;
   }
 
-  if (victim_attack_best_attempt_3(item, curr_at, best, best_hit_at, all_deltas)) {
+  if (victim_attack_best_attempt_3(item, curr_at, best, best_hit_at, all_deltas, attack_options)) {
     return true;
   }
 
@@ -356,7 +382,7 @@ bool Thing::victim_attack_best_at(int equip, point *at, AttackOptions *attack_op
   // Look in the chosen dir first
   //
   if (at) {
-    if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas, attack_options)) {
       return victim_attack_found_best(equip, item, best, best_hit_at, attack_options);
     }
   }
@@ -365,37 +391,37 @@ bool Thing::victim_attack_best_at(int equip, point *at, AttackOptions *attack_op
     std::vector< point > all_deltas = {
         point(dx, dy),
     };
-    if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas, attack_options)) {
       return victim_attack_found_best(equip, item, best, best_hit_at, attack_options);
     }
   }
 
   if (attack_options->attempt) {
     if (attack_options->attempt == 1) {
-      if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+      if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas, attack_options)) {
         return victim_attack_found_best(equip, item, best, best_hit_at, attack_options);
       }
     }
     if (attack_options->attempt == 2) {
-      if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
+      if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas, attack_options)) {
         return victim_attack_found_best(equip, item, best, best_hit_at, attack_options);
       }
     }
     if (attack_options->attempt == 3) {
-      if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
+      if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas, attack_options)) {
         return victim_attack_found_best(equip, item, best, best_hit_at, attack_options);
       }
     }
   } else {
-    if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas, attack_options)) {
       return victim_attack_found_best(equip, item, best, best_hit_at, attack_options);
     }
 
-    if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    if (victim_attack_best_attempt_2(item, curr_at, &best, &best_hit_at, all_deltas, attack_options)) {
       return victim_attack_found_best(equip, item, best, best_hit_at, attack_options);
     }
 
-    if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas)) {
+    if (victim_attack_best_attempt_3(item, curr_at, &best, &best_hit_at, all_deltas, attack_options)) {
       return victim_attack_found_best(equip, item, best, best_hit_at, attack_options);
     }
   }
