@@ -133,7 +133,9 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
   dbg("Projectile fire %s at %s", target_name_projectile.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
-  if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
+  AttackOptions attack_options       = {};
+  attack_options.allow_hitting_walls = true;
+  if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
     return projectile_fire_at(item, target_name_projectile, best);
   }
 

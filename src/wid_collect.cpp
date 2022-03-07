@@ -383,7 +383,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   auto       width      = br.x - tl.x;
   auto       height     = br.y - tl.y;
 
-  if (items.size() > (height / 3) - 2) {
+  if ((int) items.size() > (height / 3) - 2) {
     wid_collect = new WidPopup("collect", tl, br, nullptr, "", false, true, collect_items.size() * 3);
   } else {
     wid_collect = new WidPopup("collect", tl, br, nullptr, "", false, false, collect_items.size() * 3);

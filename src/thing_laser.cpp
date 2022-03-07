@@ -196,7 +196,9 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, poi
   dbg("Laser fire %s at point %s", target_name_laser.c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
-  if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at)) {
+  AttackOptions attack_options       = {};
+  attack_options.allow_hitting_walls = true;
+  if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
     return laser_fire_at(item, target_name_laser, best, use_options);
   }
 
