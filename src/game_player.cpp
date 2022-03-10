@@ -63,6 +63,10 @@ void Game::place_player(void)
         auto w = level->thing_new("double_shovel", point(x, y));
         t->carry(w);
       }
+      if (0) {
+        auto w = level->thing_new("shovel", point(x, y));
+        t->carry(w);
+      }
       if (1) {
         auto w = level->thing_new("ring_shield", point(x, y));
         t->carry(w);
