@@ -80,7 +80,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_toughness_soft(self, True)
     my.is_treasure_eater(self, True)
     my.light_color(self, "green")
-    my.light_power(self, 2)
+    my.light_dist(self, 2)
     my.long_text_description(self, "Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners leave a trail of corrosive slime in their wake. Avoid this. Cleaners also have a habit of eating your hard fought items.")
     my.monst_size(self, my.MONST_SIZE_LARGE)
     my.move_speed(self, 50)

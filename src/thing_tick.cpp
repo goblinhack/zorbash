@@ -63,7 +63,7 @@ void Thing::achieve_goals_in_life(void)
   //
   // Check torch counts
   //
-  light_power_update();
+  light_dist_update();
 
   //
   // Lifespan tick for carried torches must be before is_hidden check
@@ -171,7 +171,7 @@ void Thing::achieve_goals_in_life(void)
   }
 
   if (is_player()) {
-    light_power_update();
+    light_dist_update();
   } else if (! is_sleeping) {
     if (try_to_escape()) {
       dbg("Try to escape");

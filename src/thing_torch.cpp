@@ -27,7 +27,7 @@ int Thing::torch_count(void)
   return torch_count;
 }
 
-void Thing::light_power_including_torch_effect_get(uint8_t &out_light_power)
+void Thing::light_dist_including_torch_effect_get(uint8_t &out_light_dist)
 {
   TRACE_NO_INDENT();
 
@@ -36,46 +36,45 @@ void Thing::light_power_including_torch_effect_get(uint8_t &out_light_power)
     torch = tp_find("torch");
   }
 
-  int light_power = initial_light_power_get();
-
+  int light_dist = initial_light_dist_get();
   if (is_player()) {
-    light_power = 0;
+    light_dist = 0;
   }
 
   int count = torch_count();
-  light_power += torch->light_power() * count;
+  light_dist += torch->light_dist() * count;
 
   auto max_distance = tp()->distance_vision();
-  if (light_power > max_distance) {
-    light_power = max_distance;
+  if (light_dist > max_distance) {
+    light_dist = max_distance;
   }
 
   if (count == 0) {
     if (is_player()) {
-      light_power = 1;
+      light_dist = 1;
     }
   }
 
-  if (light_power < 0) {
-    light_power = 0;
+  if (light_dist < 0) {
+    light_dist = 0;
   }
 
-  out_light_power = light_power;
+  out_light_dist = light_dist;
 }
 
-void Thing::light_power_update_including_torch_effect(uint8_t &out_light_power)
+void Thing::light_dist_update_including_torch_effect(uint8_t &out_light_dist)
 {
   TRACE_NO_INDENT();
-  uint8_t light_power;
+  uint8_t light_dist;
 
-  light_power_including_torch_effect_get(light_power);
+  light_dist_including_torch_effect_get(light_dist);
 
-  auto prev = prev_light_power_get();
+  auto prev = prev_light_dist_get();
   if (prev) {
-    if (light_power != prev) {
-      if (light_power <= 1) {
+    if (light_dist != prev) {
+      if (light_dist <= 1) {
         msg("You are plunged into darkness.");
-      } else if (light_power < prev) {
+      } else if (light_dist < prev) {
         msg("It gets darker...");
       }
 
@@ -87,6 +86,6 @@ void Thing::light_power_update_including_torch_effect(uint8_t &out_light_power)
     }
   }
 
-  prev_light_power_set(light_power);
-  out_light_power = light_power;
+  prev_light_dist_set(light_dist);
+  out_light_dist = light_dist;
 }

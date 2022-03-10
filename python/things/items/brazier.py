@@ -27,7 +27,7 @@ def tp_init(name, text_name, tiles=[]):
     my.is_shovable(self, True)
     my.is_tickable(self, True)  # for pushing and falling
     my.light_color(self, "orange")
-    my.light_power(self, 2)
+    my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
     my.spawn_on_shoved(self, "fire")
     my.temperature(self, 100)

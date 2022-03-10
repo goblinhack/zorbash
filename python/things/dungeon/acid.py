@@ -18,7 +18,7 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     my.is_tickable(self, True)  # for lifespan tick
     my.lifespan_dice(self, "1d20+20")
     my.light_color(self, "green")
-    my.light_power(self, 2)
+    my.light_dist(self, 2)
     my.text_a_or_an(self, "")
     my.text_description(self, "A pool of hissing acid.")
     my.text_hits(self, "burns")

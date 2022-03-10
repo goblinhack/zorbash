@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - light source broken for ghost                                                                                                              -->
-<!-- - if you hit with an axe then do not hit walls                                                                                               -->
+<!-- - cloak appears in front of door!                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->

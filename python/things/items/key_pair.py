@@ -24,7 +24,7 @@ def key_init(name, text_name):
     my.is_metal(self, True)
     my.is_moveable(self, True)
     my.light_color(self, "yellow")
-    my.light_power(self, 2)
+    my.light_dist(self, 2)
     my.long_text_description(self, "A pair of keys. What more can you say.")
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")

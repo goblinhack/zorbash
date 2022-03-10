@@ -53,7 +53,7 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.is_undead(self, True)
     my.light_color(self, "green")
-    my.light_power(self, 1)
+    my.light_dist(self, 2)
     my.long_text_description(self, "A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 200)

@@ -444,7 +444,7 @@ private:
   int _is_wooden {};
   int _item_height {};
   int _item_width {};
-  int _light_power {};
+  int _light_dist {};
   int _melting_chance_d1000 {};
   int _minion_limit {};
   int _monst_size {};
@@ -1347,7 +1347,7 @@ public:
   int is_wooden(void) const { return _is_wooden; }
   int item_height(void) const { return _item_height ? _item_height : 1; }
   int item_width(void) const { return _item_width ? _item_width : 1; }
-  int light_power(void) const { return _light_power; }
+  int light_dist(void) const { return _light_dist; }
   int melting_chance_d1000(void) const { return _melting_chance_d1000; }
   int minion_limit(void) const { return _minion_limit; }
   int monst_size(void) const { return _monst_size; }
@@ -1899,7 +1899,7 @@ public:
   void item_height_set(int v) { _item_height = v; }
   void item_width_set(int v) { _item_width = v; }
   void light_color_set(const std::string &v) { _light_color = v; }
-  void light_power_set(int v) { _light_power = v; }
+  void light_dist_set(int v) { _light_dist = v; }
   void long_text_description_extra_set(const std::string &v) { _long_text_description_extra = v; }
   void long_text_description_set(const std::string &v) { _long_text_description = v; }
   void melting_chance_d1000_set(int v) { _melting_chance_d1000 = v; }

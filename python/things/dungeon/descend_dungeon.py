@@ -16,7 +16,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.light_color(self, "white")
-    my.light_power(self, 2)
+    my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "%%fg=gold$The way down.")

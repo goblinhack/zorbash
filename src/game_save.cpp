@@ -76,7 +76,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->leader_id);
   out << bits(my.t->lifespan);
   out << bits(my.t->light_col);
-  out << bits(my.t->light_power);
+  out << bits(my.t->light_dist);
   out << bits(my.t->lunge_to);
   out << bits(my.t->mob_id);
   out << bits(my.t->monst_state);
@@ -87,7 +87,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->on_fire_id_anim);
   out << bits(my.t->owner_id);
   out << bits(my.t->poison);
-  out << bits(my.t->prev_light_power);
+  out << bits(my.t->prev_light_dist);
   out << bits(my.t->score);
   out << bits(my.t->spawner_owner_id);
   out << bits(my.t->stamina);
