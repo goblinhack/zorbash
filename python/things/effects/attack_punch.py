@@ -14,7 +14,7 @@ def init1(name, text_name):
     my.is_removeable_if_out_of_slots(self, True)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Punch out.")
-    my.z_depth(self, my.MAP_DEPTH_EQUIP)
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 10

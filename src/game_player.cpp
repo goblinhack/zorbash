@@ -137,10 +137,11 @@ void Game::place_player(void)
         // level->thing_new("rat_giant", point(x + 1, y));
         // level->thing_new("rat_giant", point(x, y - 1));
         //  level->thing_new("zorb_necro", point(x + 2, y));
-        level->thing_new("gargoyle_static", point(x + 2, y - 2));
+        level->thing_new("door_metal", point(x + 2, y));
+        // level->thing_new("gargoyle_static", point(x + 2, y - 2));
         //  level->thing_new("lava", point(x, y));
-        level->thing_new("food_frog", point(x + 3, y - 1));
-        // level->thing_new("fire", point(x + 1, y - 1));
+        // level->thing_new("food_frog", point(x + 3, y - 1));
+        level->thing_new("fire", point(x + 1, y - 1));
         //  level->thing_new("enchantstone", point(x + 1, y - 1));
         //  level->thing_new("horseshoe", point(x + 2, y - 1));
         //  level->thing_new("four_leaf_clover", point(x + 2, y - 1));

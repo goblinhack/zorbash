@@ -15,7 +15,7 @@ def tp_init(name, text_name):
     my.is_tmp_thing(self, True)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Splat attack.")
-    my.z_depth(self, my.MAP_DEPTH_EQUIP)
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 5
