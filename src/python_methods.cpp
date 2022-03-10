@@ -1437,7 +1437,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(left2_tile),
     MY_ADD_PYTHON_TP_FUNCTION(lifespan_dice),
     MY_ADD_PYTHON_TP_FUNCTION(light_color),
-    MY_ADD_PYTHON_TP_FUNCTION(light_power),
+    MY_ADD_PYTHON_TP_FUNCTION(light_dist),
     MY_ADD_PYTHON_TP_FUNCTION(long_text_description),
     MY_ADD_PYTHON_TP_FUNCTION(long_text_description_extra),
     MY_ADD_PYTHON_TP_FUNCTION(melting_chance_d1000),

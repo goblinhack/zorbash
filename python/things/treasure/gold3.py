@@ -25,7 +25,7 @@ def gold_init(name, text_name):
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.light_color(self, "yellow")
-    my.light_power(self, 1)
+    my.light_dist(self, 1)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "an")

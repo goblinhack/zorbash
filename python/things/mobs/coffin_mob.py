@@ -46,7 +46,7 @@ def tp_init(name, text_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "green")
-    my.light_power(self, 3)
+    my.light_dist(self, 3)
     my.long_text_description(self, "A dark gateway for the creatures of the night. Also cheap boarding rates.")
     my.minion_limit(self, 5)
     my.normal_placement_rules(self, True)

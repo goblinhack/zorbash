@@ -590,6 +590,6 @@ void Thing::update(void)
   }
 
   if (is_player()) {
-    light_power_update();
+    light_dist_update();
   }
 }

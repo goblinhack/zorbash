@@ -55,7 +55,7 @@ def tp_init(name, text_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "cyan")
-    my.light_power(self, 1)
+    my.light_dist(self, 1)
     my.long_text_description(self, "A grave portal from which the dead crawl out.")
     my.minion_limit(self, 4)
     my.normal_placement_rules(self, True)

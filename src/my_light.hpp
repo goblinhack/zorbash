@@ -41,11 +41,8 @@ public:
   float flicker {};
   int   flicker_count {};
 
-  float light_scale {};      // Light_scale
-  int   light_power_curr {}; // Current torch light_power
-  int   light_power_orig {}; // Original torch light_power
-  int   light_power_actual {};
-  int   light_power_delta {};
+  float light_power {}; // Light_scale
+  int   light_dist {};
 
   uint16_t max_light_rays {};
 
@@ -73,12 +70,11 @@ public:
   void reset(void);
   void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void topcon_(const char *fmt, va_list args); // compile error without
-  void light_scale_update(float scale);
   void update(void);
 };
 
-extern Lightp light_new(Thingp owner, point offset, int light_power, int light_power_delta, color col, int fbo);
+extern Lightp light_new(Thingp owner, point offset, int light_dist, color col, int fbo);
 
-extern Lightp light_new(Thingp owner, point offset, int light_power);
+extern Lightp light_new(Thingp owner, point offset, int light_dist);
 
 #endif // LIGHT_H

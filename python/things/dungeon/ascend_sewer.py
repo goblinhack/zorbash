@@ -19,7 +19,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "lime")
-    my.light_power(self, 1)
+    my.light_dist(self, 1)
     my.long_text_description(self, "A way out of these stinking sewers!")
     my.minion_limit(self, 5)
     my.on_idle_tick_freq_dice(self, "1d50+50:ascend_sewer.spawn()")

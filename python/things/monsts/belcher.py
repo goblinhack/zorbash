@@ -67,7 +67,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_tickable(self, True)
     my.is_toughness_soft(self, True)
     my.light_color(self, "green")
-    my.light_power(self, 2)
+    my.light_dist(self, 2)
     my.long_text_description(self, "Dungeon belchers are carnivorous plants that have evolved creative means of catching their prey. Beware their stench...")
     my.monst_size(self, my.MONST_SIZE_LARGE)
     my.move_speed(self, 100)

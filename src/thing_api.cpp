@@ -170,7 +170,7 @@ float Thing::distance_vision_get(void)
     return v;
   }
 
-  auto l = light_power_get();
+  auto l = light_dist_get();
   if (l < v) {
     return l;
   }

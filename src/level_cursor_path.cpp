@@ -380,9 +380,6 @@ void Level::cursor_path_create(void)
         break;
       }
     }
-    if (! ok) {
-      TOPCON("You can't see that far.");
-    }
   }
 
   //

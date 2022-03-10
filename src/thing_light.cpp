@@ -23,23 +23,23 @@ std::vector< Lightp > &Thing::light_get(void)
   return no_light;
 }
 
-void Thing::new_light(point offset, int light_power, int delta, color col, int fbo)
+void Thing::new_light(point offset, int light_dist, color col, int fbo)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto l = light_new(this, offset, light_power, delta, col, fbo);
+  auto l = light_new(this, offset, light_dist, col, fbo);
   infop()->light.push_back(l);
-  infop()->light_power = light_power;
-  infop()->light_col   = col;
+  infop()->light_dist = light_dist;
+  infop()->light_col  = col;
 }
 
-void Thing::new_light(point offset, int light_power)
+void Thing::new_light(point offset, int light_dist)
 {
   TRACE_NO_INDENT();
   new_infop();
-  auto l = light_new(this, offset, light_power);
+  auto l = light_new(this, offset, light_dist);
   infop()->light.push_back(l);
-  infop()->light_power = light_power;
+  infop()->light_dist = light_dist;
 }
 
 void Thing::delete_lights(void)
@@ -66,68 +66,75 @@ void Thing::init_lights(void)
     level->player = this;
 
     //
-    // keep the light light_power half the tiles drawn or we get artifacts
+    // keep the light light_dist half the tiles drawn or we get artifacts
     // at the edges of the fbo
     //
     color col = WHITE;
 
-    int light_power = initial_light_power_get();
+    int light_dist = initial_light_dist_get() * TILE_WIDTH;
 
     //
     // This is a raycast only light to mark things as visible
     //
-    float alpha_scale = 1.0;
-
-    new_light(point(0, 0), light_power);
-    new_light(point(0, 0), light_power, 0, col, FBO_FULLMAP_LIGHT);
-    new_light(point(0, 0), light_power, 0, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    new_light(point(0, 0), light_dist);
 
     //
-    // Helps when the light is really low. Gives some local intensity.
+    // This is the light to show areas we have been
     //
-    new_light(point(0, 0), 2, 1, col, FBO_SMALL_POINT_LIGHTS);
+    new_light(point(0, 0), light_dist, col, FBO_FULLMAP_LIGHT);
 
-    alpha_scale = 0.75;
-    col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 0, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    //
+    // And this is the player visible light; this diminishes according
+    // to the number of torch charges.
+    //
+    new_light(point(0, 0), light_dist, col, FBO_PLAYER_VISIBLE_LIGHTING);
 
-    alpha_scale = 0.5;
-    col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 1, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-    alpha_scale = 0.2;
-    col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 2, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-    alpha_scale = 0.1;
-    col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 3, col, FBO_PLAYER_VISIBLE_LIGHTING);
-
-    alpha_scale = 0.05;
-    col.a       = (int) (255.0 * alpha_scale);
-    new_light(point(0, 0), light_power, 4, col, FBO_PLAYER_VISIBLE_LIGHTING);
+    //
+    // This small glow around the player is always present, even in low
+    // lighting and allows you to see a small amount ahead even with no
+    // torch.
+    //
+    new_light(point(0, 0), 2 * TILE_WIDTH, col, FBO_SMALL_POINT_LIGHTS);
 
     has_light = true;
     dbg("Player created");
   } else {
-    if (unlikely(initial_light_power_get())) {
+    if (unlikely(initial_light_dist_get())) {
       std::string l = light_color();
       if (l.empty()) {
         l = "white";
       }
       color c = string2color(l);
-      new_light(point(0, 0), initial_light_power_get(), 1, c, FBO_PLAYER_VISIBLE_LIGHTING);
+      new_light(point(0, 0), initial_light_dist_get() * TILE_WIDTH, c, FBO_PLAYER_VISIBLE_LIGHTING);
       has_light = true;
     }
   }
 }
 
-void Thing::light_scale_update(void)
+int Thing::light_dist_update(void)
 {
   TRACE_NO_INDENT();
-  float light_power_new = light_power_get();
-  if (! light_power_new) {
-    light_power_new = 1;
+
+  if (! maybe_infop()) {
+    return initial_light_dist_get();
+  }
+
+  uint8_t light_dist = infop()->light_dist;
+
+  if (! light_dist) {
+    light_dist = initial_light_dist_get();
+  }
+
+  if (is_player()) {
+    light_dist = 0;
+  }
+
+  light_dist_update_including_torch_effect(light_dist);
+  infop()->light_dist = light_dist;
+
+  float light_dist_new = light_dist_get();
+  if (! light_dist_new) {
+    light_dist_new = 1;
   }
 
   for (auto l : light_get()) {
@@ -139,148 +146,125 @@ void Thing::light_scale_update(void)
       continue;
     }
 
-    float light_scale_factor = light_power_new / (float) l->light_power_orig;
-    if (! light_scale_factor) {
-      light_scale_factor = 0.1;
-    }
-
-    l->light_scale_update(light_scale_factor);
-  }
-}
-
-int Thing::light_power_update(void)
-{
-  TRACE_NO_INDENT();
-
-  if (! maybe_infop()) {
-    return initial_light_power_get();
+    //
+    // The player has a distance they can see. This allows us to see things that are
+    // lit and beyond the current light. The current light distance is scaled by the
+    // torch power.
+    //
+    l->light_power = (float) light_dist_new / (float) initial_light_dist_get();
   }
 
-  uint8_t light_power = infop()->light_power;
-
-  if (! light_power) {
-    light_power = initial_light_power_get();
-  }
-
-  if (is_player()) {
-    light_power = 0;
-  }
-
-  light_power_update_including_torch_effect(light_power);
-  infop()->light_power = light_power;
-
-  light_scale_update();
-  return light_power;
+  return light_dist;
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// prev_light_power
+// prev_light_dist
 ////////////////////////////////////////////////////////////////////////////
-int Thing::prev_light_power_get(void)
+int Thing::prev_light_dist_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_infop()) {
-    return (infop()->prev_light_power);
+    return (infop()->prev_light_dist);
   } else {
     return 0;
   }
 }
 
-int Thing::prev_light_power_set(int v)
+int Thing::prev_light_dist_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->prev_light_power = v);
+  return (infop()->prev_light_dist = v);
 }
 
-int Thing::prev_light_power_decr(int v)
+int Thing::prev_light_dist_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->prev_light_power -= v);
+  return (infop()->prev_light_dist -= v);
 }
 
-int Thing::prev_light_power_incr(int v)
+int Thing::prev_light_dist_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->prev_light_power += v);
+  return (infop()->prev_light_dist += v);
 }
 
-int Thing::prev_light_power_decr(void)
+int Thing::prev_light_dist_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->prev_light_power--);
+  return (infop()->prev_light_dist--);
 }
 
-int Thing::prev_light_power_incr(void)
+int Thing::prev_light_dist_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->prev_light_power++);
+  return (infop()->prev_light_dist++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// light_power
+// light_dist
 ////////////////////////////////////////////////////////////////////////////
-int Thing::initial_light_power_get(void)
+int Thing::initial_light_dist_get(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->light_power());
+  return (tp()->light_dist());
 }
 
-int Thing::light_power_get(void)
+int Thing::light_dist_get(void)
 {
   TRACE_NO_INDENT();
 
   if (! maybe_infop()) {
-    return initial_light_power_get();
+    return initial_light_dist_get();
   }
 
-  uint8_t light_power = infop()->light_power;
+  uint8_t light_dist = infop()->light_dist;
 
   if (is_player()) {
-    light_power = 0;
+    light_dist = 0;
   }
 
-  light_power_including_torch_effect_get(light_power);
-  infop()->light_power = light_power;
+  light_dist_including_torch_effect_get(light_dist);
+  infop()->light_dist = light_dist;
 
-  return light_power;
+  return light_dist;
 }
 
-int Thing::light_power_set(int v)
+int Thing::light_dist_set(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->light_power = v);
+  return (infop()->light_dist = v);
 }
 
-int Thing::light_power_decr(int v)
+int Thing::light_dist_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->light_power -= v);
+  return (infop()->light_dist -= v);
 }
 
-int Thing::light_power_incr(int v)
+int Thing::light_dist_incr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->light_power += v);
+  return (infop()->light_dist += v);
 }
 
-int Thing::light_power_decr(void)
+int Thing::light_dist_decr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->light_power--);
+  return (infop()->light_dist--);
 }
 
-int Thing::light_power_incr(void)
+int Thing::light_dist_incr(void)
 {
   TRACE_NO_INDENT();
   new_infop();
-  return (infop()->light_power++);
+  return (infop()->light_dist++);
 }

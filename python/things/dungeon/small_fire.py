@@ -28,7 +28,7 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.lifespan_dice(self, "1d10+10")
     my.light_color(self, "yellow")
-    my.light_power(self, 3)
+    my.light_dist(self, 3)
     my.on_idle_tick_freq_dice(self, "1d10+10:me.spawn()")
     my.temperature(self, 100)
     my.text_a_or_an(self, "")

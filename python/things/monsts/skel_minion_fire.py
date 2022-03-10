@@ -84,7 +84,7 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.is_undead(self, True)
     my.light_color(self, "yellow")
-    my.light_power(self, 2)
+    my.light_dist(self, 2)
     my.long_text_description(self, "A collection of burning tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)

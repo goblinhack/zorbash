@@ -99,7 +99,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->leader_id);
    in >> bits(my.t->lifespan);
    in >> bits(my.t->light_col);
-   in >> bits(my.t->light_power);
+   in >> bits(my.t->light_dist);
    in >> bits(my.t->lunge_to);
    in >> bits(my.t->mob_id);
    in >> bits(my.t->monst_state);
@@ -110,7 +110,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->on_fire_id_anim);
    in >> bits(my.t->owner_id);
    in >> bits(my.t->poison);
-   in >> bits(my.t->prev_light_power);
+   in >> bits(my.t->prev_light_dist);
    in >> bits(my.t->score);
    in >> bits(my.t->spawner_owner_id);
    in >> bits(my.t->stamina);

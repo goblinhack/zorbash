@@ -105,58 +105,40 @@ void Light::draw_line(int16_t index, const point p0, const point p1)
   }
 }
 
-Lightp light_new(Thingp owner, point offset, int light_power, int delta, color col, int fbo)
+Lightp light_new(Thingp owner, point offset, int light_dist, color col, int fbo)
 {
   TRACE_AND_INDENT();
   auto l = new Light(); // std::make_shared< class Light >();
 
-  l->offset            = offset;
-  l->light_power_orig  = light_power;
-  l->light_power_delta = delta;
-  l->owner             = owner;
-  l->col               = col;
-  l->fbo               = fbo;
-
-  l->light_scale_update(1.0);
-
-  // log("Created");
-  return l;
-}
-
-Lightp light_new(Thingp owner, point offset, int light_power)
-{
-  TRACE_AND_INDENT();
-  auto l = new Light(); // std::make_shared< class Light >();
-
-  l->offset           = offset;
-  l->light_power_orig = light_power;
-  l->owner            = owner;
-  l->ray_cast_only    = true;
-  l->fbo              = -1;
-
-  l->light_scale_update(1.0);
-
-  // log("Created");
-  return l;
-}
-
-void Light::light_scale_update(float scale)
-{
-  TRACE_AND_INDENT();
-
-  int old_light_power_curr   = light_power_orig * light_scale * (float) TILE_WIDTH;
-  int old_light_power_actual = light_power_curr + ((float) light_power_delta * (float) TILE_WIDTH);
-
-  light_scale        = scale;
-  light_power_curr   = light_power_orig * light_scale * (float) TILE_WIDTH;
-  light_power_actual = light_power_curr + ((float) light_power_delta * (float) TILE_WIDTH);
-
-  //
-  // Regenerate the light only if it changes
-  //
-  if ((light_power_curr != old_light_power_curr) || (light_power_actual != old_light_power_actual)) {
-    update();
+  l->offset     = offset;
+  l->light_dist = light_dist;
+  if (! light_dist) {
+    DIE("No light power");
   }
+
+  l->owner = owner;
+  l->col   = col;
+  l->fbo   = fbo;
+  l->update();
+
+  // log("Created");
+  return l;
+}
+
+Lightp light_new(Thingp owner, point offset, int light_dist)
+{
+  TRACE_AND_INDENT();
+  auto l = new Light(); // std::make_shared< class Light >();
+
+  l->offset        = offset;
+  l->light_dist    = light_dist;
+  l->owner         = owner;
+  l->ray_cast_only = true;
+  l->fbo           = -1;
+  l->update();
+
+  // log("Created");
+  return l;
 }
 
 void Light::update(void)
@@ -176,7 +158,7 @@ void Light::update(void)
   for (auto i = 0; i < max_light_rays; i++) {
     float cosr, sinr;
     sincosf(dr * i, &sinr, &cosr);
-    draw_line(i, point(0, 0), point(light_power_actual * cosr, light_power_actual * sinr));
+    draw_line(i, point(0, 0), point(light_dist * cosr, light_dist * sinr));
   }
 }
 
@@ -194,6 +176,10 @@ bool Light::calculate(void)
 #if 0
   std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
 #endif
+
+  if (! level) {
+    return false;
+  }
 
   auto player = level->player;
   if (! player) {
@@ -257,15 +243,26 @@ bool Light::calculate(void)
   //
   level->is_lit_ever_set((int) player->curr_at.x, (int) player->curr_at.y);
 
-#if 0
-  set(walked, player->curr_at.x, player->curr_at.y, true);
-#endif
+  auto light_dist_current = light_dist;
+  if (! light_dist_current) {
+    return false;
+  }
+
+  //
+  // Do not fade ray casting lights as that allows us to see light sources
+  // that are distant even if out own light is poor.
+  //
+  if (! ray_cast_only) {
+    if (owner->is_player()) {
+      light_dist_current = (float) light_dist_current * light_power;
+    }
+  }
 
   //
   // Walk the light rays in a circle. Find the nearest walls and then let
   // the light leak a little.
   //
-  auto d = (light_power_actual / TILE_WIDTH) + 1;
+  auto d = (light_dist_current / TILE_WIDTH) + 1;
   if (likely(((player->curr_at.x >= d) && (player->curr_at.x <= MAP_WIDTH - d) && (player->curr_at.y >= d) &&
               (player->curr_at.y <= MAP_HEIGHT - d)))) {
     //
@@ -283,7 +280,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > light_power_actual)) {
+          if (unlikely(rp->distance > light_dist_current)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -292,9 +289,6 @@ bool Light::calculate(void)
           const uint8_t y   = p1y / TILE_HEIGHT;
 
           AVOID_LOOKING_AT_THE_SAME_TILE()
-#if 0
-          set(walked, x, y, true);
-#endif
           level->is_lit_ever_no_check_set(x, y);      // for AI and jumping
           level->is_lit_currently_no_check_set(x, y); // allows lights to fade
           rp++;
@@ -349,7 +343,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > light_power_actual)) {
+          if (unlikely(rp->distance > light_dist_current)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -404,7 +398,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > light_power_actual)) {
+          if (unlikely(rp->distance > light_dist_current)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -413,9 +407,6 @@ bool Light::calculate(void)
           const uint8_t y   = p1y / TILE_HEIGHT;
 
           AVOID_LOOKING_AT_THE_SAME_TILE()
-#if 0
-          set(walked, x, y, true);
-#endif
           level->is_lit_ever_set(x, y);      // for AI and jumping
           level->is_lit_currently_set(x, y); // allows lights to fade
           rp++;
@@ -470,7 +461,7 @@ bool Light::calculate(void)
           if (unlikely(step >= end_of_points)) {
             break;
           }
-          if (unlikely(rp->distance > light_power_actual)) {
+          if (unlikely(rp->distance > light_dist_current)) {
             break;
           }
           const int16_t p1x = light_pos.x + rp->p.x;
@@ -566,6 +557,7 @@ void Light::render_triangle_fans(void)
   }
 
   glcolor(col);
+
   if (! cached_gl_cmds.size()) {
     blit_init();
     {
@@ -644,6 +636,18 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
   if (player) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
+#if 0
+    //
+    // Paste this code prior to the blend in question
+    //
+    extern int         vals[];
+    extern std::string vals_str[];
+    extern int         g_blend_a;
+    extern int         g_blend_b;
+    CON("glBlendFunc(%s, %s)", vals_str[ g_blend_a ].c_str(), vals_str[ g_blend_b ].c_str());
+    glBlendFunc(vals[ g_blend_a ], vals[ g_blend_b ]);
+#endif
+
     for (auto l : player->light_get()) {
       if (l->ray_cast_only) {
         l->render(true);
@@ -656,6 +660,10 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
     }
   }
 
+  //
+  // Small point lights create a glow around the item and are not blocked by obstacles.
+  // Useful for when you have no torches and want to see something.
+  //
   if (fbo != FBO_SMALL_POINT_LIGHTS) {
     return;
   }
@@ -686,6 +694,9 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
 
 //
 // Draw point source lights
+//
+// Small point lights create a glow around the item and are not blocked by obstacles.
+// Useful for when you have no torches and want to see something.
 //
 void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights)
 {
@@ -730,7 +741,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
 
           auto mid = (blit_br + blit_tl) / 2;
 
-          float light_scale = l->light_power_actual;
+          float light_scale = l->light_dist;
 
           if (t->gfx_flickers()) {
             if (l->flicker_count++ > LIGHT_FLICKER_SPEED) {
@@ -748,7 +759,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           color c = l->col;
 
           //
-          // Fade the lights
+          // Fade the lights according to how recently seen.
           //
           auto scale = ((float) t->level->is_lit_currently_no_check(x, y)) / 255.0;
           c.r        = ((float) c.r) * scale;
@@ -766,7 +777,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
   blit_flush();
 
   //
-  // Add glow to light sources
+  // Add a bit of a fuzzy glow to light sources
   //
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
   blit_init();
@@ -818,7 +829,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
             }
           }
 
-          auto  s   = l->light_power_actual + l->flicker;
+          auto  s   = l->light_dist + l->flicker;
           auto  mid = (blit_br + blit_tl) / 2;
           auto  tlx = mid.x - s;
           auto  tly = mid.y - s;
@@ -827,7 +838,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           color c   = l->col;
 
           //
-          // Fade the lights
+          // Fade the lights according to how recently seen.
           //
           auto scale = ((float) t->level->is_lit_currently_no_check(x, y)) / 255.0;
           c.r        = ((float) c.r) * scale;
