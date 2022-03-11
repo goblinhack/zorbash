@@ -748,6 +748,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
       csum += t->curr_at.x + t->curr_at.y + t->id.id;
       // t->con("LOAD %f %f %d", t->curr_at.x, t->curr_at.y, t->id.id);
       t->init_lights();
+      t->light_dist_update();
     }
   }
 
