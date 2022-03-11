@@ -642,8 +642,6 @@ void Thing::jump_end(void)
   }
   wobble(25);
 
-  move_carried_items();
-
   //
   // We avoid creating particles for item moves when other particles
   // exist to avoid collection loops. This case is safe though, just
@@ -657,14 +655,11 @@ void Thing::jump_end(void)
   collision_check_do();
 
   //
-  // Mainly for explosions
-  //
-  level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_jumping());
-
-  //
   // Need this so that if we land on a chasm we fall immediately
   //
-  location_check_forced();
+  move_to_immediately(curr_at);
+  is_moving = true;
+  move_finish();
 
   infop()->last_failed_jump_at = point(-1, -1);
 }
