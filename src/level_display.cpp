@@ -96,7 +96,7 @@ void Level::display_map_bg_things(void)
     blit_fbo_bind(fbo);
     blit_init();
     glClear(GL_COLOR_BUFFER_BIT);
-    for (auto z = 0; z < MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
+    for (auto z = 0; z <= MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
@@ -123,7 +123,7 @@ void Level::display_map_bg_things(void)
 
     blit_fbo_bind(fbo);
     blit_init();
-    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
+    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z <= MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
