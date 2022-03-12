@@ -125,13 +125,14 @@ public:
   int health_max          = {};
   int keys                = {};
   int lifespan            = {}; // How many things this thing owns.
-  int light_dist         = {}; // Current strength, including torches
+  int light_dist          = {}; // Current strength, including torches
   int monst_state         = {};
-  int movement_remaining       = {};
+  int movement_remaining  = {};
+  int physical_training   = {};
   int necrosis            = {};
   int noise               = {};
   int poison              = {};
-  int prev_light_dist    = {}; // Current strength, including torches
+  int prev_light_dist     = {}; // Current strength, including torches
   int score               = {};
   int stamina             = {};
   int stamina_max         = {};

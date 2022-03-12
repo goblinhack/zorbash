@@ -1390,11 +1390,25 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
     // Walls and doors and other solid object are not damaged by poison
     // or similar effects. Limit it to explosions and the like.
     //
-    auto hitter_tp = hitter->tp();
+    // If the player is hitting these things, then inflict some damage.
+    // But we could also allow occasional improvements due to training
+    // exercises.
+    //
+    bool training = false;
+
     if (is_door()) {
-      if (! hitter_tp->is_explosion() && ! hitter_tp->is_projectile() && ! hitter_tp->is_laser() &&
-          ! hitter_tp->is_weapon() && ! hitter_tp->is_item_magical() && ! hitter_tp->is_fire() &&
-          ! hitter_tp->is_lava() && ! hitter_tp->gfx_attack_anim()) {
+      if (hitter->is_player() && attack_natural) {
+        auto h = hitter->health_decr(pcg_random_range(1, 2));
+        if (h <= 0) {
+          h = health_set(0);
+          hitter->dead("by smashing yourself to death on a door");
+          return false;
+        }
+        hitter->msg("You smash your fists against the door!");
+        training = true;
+      } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser() &&
+                 ! hitter->is_weapon() && ! hitter->is_item_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
+                 ! hitter->gfx_attack_anim()) {
         //
         // Not something that typically damages walls.
         //
@@ -1404,15 +1418,31 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
     }
 
     if (is_wall() || is_rock()) {
-      if (! hitter_tp->is_explosion() && ! hitter_tp->is_projectile() && ! hitter_tp->is_laser() &&
-          ! hitter_tp->is_weapon() && ! hitter_tp->is_item_magical() && ! hitter_tp->is_fire() &&
-          ! hitter_tp->is_lava() && ! hitter_tp->gfx_attack_anim()) {
+      if (hitter->is_player() && attack_natural) {
+        auto h = hitter->health_decr(pcg_random_range(1, 4));
+        if (h <= 0) {
+          h = health_set(0);
+          hitter->dead("by smashing yourself to death on rock");
+          return false;
+        }
+        hitter->msg("You smash your fists against the rock!");
+        training = true;
+      } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser() &&
+                 ! hitter->is_weapon() && ! hitter->is_item_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
+                 ! hitter->gfx_attack_anim()) {
         //
         // Not something that typically damages walls.
         //
         IF_DEBUG2 { hitter->log("No, %s is immune (2)", to_short_string().c_str()); }
         return false;
       }
+    }
+
+    //
+    // Rocky/ninja training mode
+    //
+    if (training) {
+      hitter->physical_training_tick();
     }
 
     if (hitter->is_fire()) {
