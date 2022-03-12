@@ -8,8 +8,7 @@ def on_death_of_a_follower(me, leader, x, y):
 
 
 def on_born(me, x, y):
-    my.thing_msg(me, "Hello mortal!")
-    my.thing_carry(me, "staff_lightning")
+    my.thing_msg(me, "Die mortal!")
 
 
 def on_tick(owner, me, x, y):
@@ -49,9 +48,32 @@ def on_death(me, x, y):
             my.thing_perma_death(follower, "Leader died!")
 
 
+def on_you_natural_attack(me, x, y):
+    sound = f"growl{my.non_pcg_randint(1, 10)}"
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
+
+
+def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
+    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+
+
+def on_you_miss_do(me, hitter, x, y):
+    sound = f"hiss{my.non_pcg_randint(1, 10)}"
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+
+
+def on_firing_at_something(me, target, x, y):  # Return True on doing an action
+    if my.pcg_randint(1, 10) < 3:
+        my.thing_fire_at(me, "laser_lightning", target)
+        return True
+    return False
+
+
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 100)
     my.ai_shove_chance_d1000(self, 200)
@@ -64,6 +86,7 @@ def tp_init(name, text_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.damage_natural_attack_chance_d1000(self, 950)
+    my.gfx_oversized_and_on_floor(self, True)
     my.damage_natural_attack_type(self, "gore")
     my.damage_natural_dice(self, "1d6+10")
     my.damage_necrosis_chance_d1000(self, 50)
@@ -72,10 +95,12 @@ def tp_init(name, text_name):
     my.damage_received_doubled_from_water(self, True)
     my.distance_vision(self, 5)
     my.environ_avoids_fire(self, 100)
+    my.on_firing_at_something_do(self, "me.on_firing_at_something()")
     my.environ_avoids_water(self, 100)
     my.gfx_animated_can_hflip(self, True)
     my.gfx_animated(self, True)
     my.gfx_anim_use(self, "attack_claws")
+    my.is_able_to_fire_at(self, True)
     my.gfx_bounce_on_move(self, True)
     my.gfx_health_bar_shown(self, True)
     my.gfx_short_shadow_caster(self, True)
@@ -88,13 +113,11 @@ def tp_init(name, text_name):
     my.is_able_to_fall(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_shove(self, True)
-    my.is_able_to_use_rings(self, True)
-    my.is_able_to_use_wands_or_staffs(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
     my.is_burnable(self, True)
-    # my.is_carrier_of_treasure_class_b(self, True)
+    my.is_carrier_of_treasure_class_c(self, True)
     my.is_corpse_on_death(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
@@ -116,7 +139,6 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.is_undead(self, True)
     my.long_text_description_extra(self, "This particular mummy is learned in the dark arts. Withered of body, but sharp of mind, beware the abilities of this mummy.")
-    my.long_text_description(self, "Possibly the corpse of one who ventured into this dungeon before. All life is gone now, and what remains is a corpse wrapped in rags. Death is no release for this poor creature. Watch out for its necrotic touch!")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 50)
@@ -129,7 +151,7 @@ def tp_init(name, text_name):
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_miss_do(self, "me.on_you_miss_do()")
     my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
-    my.rarity(self, my.RARITY_COMMON)
+    my.rarity(self, my.RARITY_UNCOMMON)
     my.resurrect_dice(self, "1d10+30")
     my.stat_con(self, 15)
     my.stat_def(self, 11)
@@ -137,17 +159,16 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 16)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A master of the darkest arts.")
     my.text_description(self, "A staggering corpse, covered in tissue paper.")
     my.text_hits(self, "claws")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 300
-    my.tile(self, tile=name + ".1", delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", delay_ms=delay, frame=4)
+    my.tile(self, tile=name + ".1", delay_ms=delay)
+    my.tile(self, tile=name + ".2", delay_ms=delay)
+    my.tile(self, tile=name + ".3", delay_ms=delay)
+    my.tile(self, tile=name + ".4", delay_ms=delay)
 
     my.tile(self, tile=name + ".1.dead", is_dead=True, delay_ms=delay)
     my.tile(self, tile=name + ".2.dead", is_dead=True, delay_ms=delay)
@@ -158,7 +179,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="mummy_necro", text_name="mummu necromancer")
+    tp_init(name="mummy_necro", text_name="mummy necromancer")
 
 
 init()

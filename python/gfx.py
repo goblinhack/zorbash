@@ -7399,14 +7399,14 @@ def init_tiles_16x16():
         "",
         "",
         ############################################################
-        "mummy_necro.1",
-        "mummy_necro.2",
-        "mummy_necro.3",
-        "mummy_necro.4",
-        "mummy_necro.1.dead",
-        "mummy_necro.2.dead",
-        "mummy_necro.3.dead",
-        "mummy_necro.4.dead",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
         "",
         "",
         "",
@@ -10549,6 +10549,7 @@ def init_tiles_24x24():
         "jelly_parent.6.75",
         "jelly_parent.7.75",
         "jelly_parent.8.75",
+        ################################################
         "jelly_parent.1.50",
         "jelly_parent.2.50",
         "jelly_parent.3.50",
@@ -10565,6 +10566,7 @@ def init_tiles_24x24():
         "jelly_parent.6.25",
         "jelly_parent.7.25",
         "jelly_parent.8.25",
+        ################################################
         "spider_giant.1",
         "spider_giant.2",
         "spider_giant.3",
@@ -10581,6 +10583,7 @@ def init_tiles_24x24():
         "",
         "",
         "",
+        ################################################
         "reaper.1.100",
         "reaper.2.100",
         "reaper.1.dead",
@@ -10597,6 +10600,7 @@ def init_tiles_24x24():
         "bat_greater.1.dead",
         "bat_greater.2.dead",
         "bat_greater.3.dead",
+        ################################################
         "",
         "",
         "",
@@ -10613,6 +10617,7 @@ def init_tiles_24x24():
         "bat_lesser.1.dead",
         "bat_lesser.2.dead",
         "bat_lesser.3.dead",
+        ################################################
         "rat_giant.1",
         "rat_giant.2",
         "rat_giant.3",
@@ -10629,6 +10634,7 @@ def init_tiles_24x24():
         "bat_minion.1.dead",
         "bat_minion.2.dead",
         "bat_minion.3.dead",
+        ################################################
         "skel_mob.1.100",
         "skel_mob.2.100",
         "skel_mob.1.75",
@@ -10645,6 +10651,7 @@ def init_tiles_24x24():
         "skel_giant.2.dead",
         "skel_giant.3.dead",
         "skel_giant.4.dead",
+        ################################################
         "ghost_mob.1.100",
         "ghost_mob.2.100",
         "ghost_mob.3.100",
@@ -10661,6 +10668,7 @@ def init_tiles_24x24():
         "ghost_mob.2.25",
         "ghost_mob.3.25",
         "ghost_mob.4.25",
+        ################################################
         "",
         "",
         "",
@@ -10677,6 +10685,7 @@ def init_tiles_24x24():
         "",
         "",
         "",
+        ################################################
         "door_wood.100",
         "door_wood.75",
         "door_wood.50",
@@ -10693,6 +10702,15 @@ def init_tiles_24x24():
         "",
         "",
         "",
+        ################################################
+        "mummy_necro.1",
+        "mummy_necro.2",
+        "mummy_necro.3",
+        "mummy_necro.4",
+        "mummy_necro.1.dead",
+        "mummy_necro.2.dead",
+        "mummy_necro.3.dead",
+        "mummy_necro.4.dead",
         "",
         "",
         "",
@@ -10701,14 +10719,7 @@ def init_tiles_24x24():
         "",
         "",
         "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        ################################################
         "foilage.1",
         "foilage.2",
         "foilage.3",
@@ -10725,6 +10736,7 @@ def init_tiles_24x24():
         "foilage.14",
         "foilage.15",
         "foilage.16",
+        ################################################
         "foilage.17",
         "foilage.18",
         "foilage.19",
@@ -10741,6 +10753,7 @@ def init_tiles_24x24():
         "foilage.30",
         "foilage.31",
         "foilage.32",
+        ################################################
         "",
         "",
         "",
@@ -10775,6 +10788,7 @@ def init_tiles_32x32():
         "entrance.6",
         "entrance.1.open",
         "entrance.2.open",
+        #######################################################################
         "dungeon_icon.1",
         "dungeon_icon.2",
         "dungeon_icon.3",
@@ -10791,6 +10805,7 @@ def init_tiles_32x32():
         "belcher_asleep.1",
         "belcher_asleep.2",
         "belcher_asleep.3",
+        #######################################################################
         "dungeon_icon_loading.1",
         "dungeon_icon_loading.2",
         "dungeon_icon_loading.3",
@@ -10807,6 +10822,7 @@ def init_tiles_32x32():
         "",
         "",
         "",
+        #######################################################################
         "pillar1.1",
         "pillar1.2",
         "pillar1.3",
@@ -10823,6 +10839,7 @@ def init_tiles_32x32():
         "pillar1.14",
         "pillar1.15",
         "pillar1.16",
+        #######################################################################
         "pillar1.17",
         "pillar1.18",
         "pillar1.19",
@@ -10839,14 +10856,11 @@ def init_tiles_32x32():
         "pillar1.30",
         "pillar1.31",
         "pillar1.32",
-        "cleaner.1.100",
-        "cleaner.2.100",
-        "cleaner.1.75",
-        "cleaner.2.75",
-        "cleaner.1.50",
-        "cleaner.2.50",
-        "cleaner.1.25",
-        "cleaner.2.25",
+        #######################################################################
+        "cleaner.1",
+        "cleaner.2",
+        "cleaner.3",
+        "cleaner.4",
         "",
         "",
         "",
@@ -10855,6 +10869,11 @@ def init_tiles_32x32():
         "",
         "",
         "",
+        "",
+        "",
+        "",
+        "",
+        #######################################################################
         "tentacleye.1.100",
         "tentacleye.2.100",
         "tentacleye.3.100",
@@ -10871,6 +10890,7 @@ def init_tiles_32x32():
         "tentacleye.6.dead",
         "tentacleye.7.dead",
         "tentacleye.8.dead",
+        #######################################################################
         "explosion_fire.1",
         "explosion_fire.2",
         "explosion_fire.3",
@@ -10887,6 +10907,7 @@ def init_tiles_32x32():
         "",
         "",
         "",
+        #######################################################################
         "pot_health_effect.1",
         "pot_health_effect.2",
         "pot_health_effect.3",
@@ -10903,6 +10924,7 @@ def init_tiles_32x32():
         "",
         "",
         "",
+        #######################################################################
         "fire.1",
         "fire.2",
         "fire.3",
@@ -10919,6 +10941,7 @@ def init_tiles_32x32():
         "fire.14",
         "fire.15",
         "fire.16",
+        #######################################################################
         "green_splatter.1",
         "green_splatter.2",
         "green_splatter.3",
@@ -10935,6 +10958,7 @@ def init_tiles_32x32():
         "green_splatter.14",
         "",
         "",
+        #######################################################################
         "pink_splatter.1",
         "pink_splatter.2",
         "pink_splatter.3",
@@ -10951,6 +10975,7 @@ def init_tiles_32x32():
         "pink_splatter.14",
         "",
         "",
+        #######################################################################
         "red_splatter.1",
         "red_splatter.2",
         "red_splatter.3",
@@ -10967,6 +10992,7 @@ def init_tiles_32x32():
         "red_splatter.14",
         "",
         "",
+        #######################################################################
         "spiderweb.1",
         "spiderweb.2",
         "spiderweb.3",
@@ -10983,6 +11009,7 @@ def init_tiles_32x32():
         "",
         "",
         "",
+        #######################################################################
         "gargoyle.sleeping.1",
         "gargoyle.sleeping.2",
         "gargoyle.1",

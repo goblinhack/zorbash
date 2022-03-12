@@ -46,13 +46,13 @@ void Thing::level_enter(void)
     if (level->all_animated_things_walk_in_progress) {
       level->all_animated_things_pending_remove[ group ].erase(id);
       level->all_animated_things_pending_add[ group ].insert(std::pair(id, this));
-      dbg3("Pending remove and then add to animated things");
+      dbg2("Pending remove and then add to animated things");
     } else {
       auto result = level->all_animated_things[ group ].insert(std::pair(id, this));
       if (result.second == false) {
         err("Failed to insert into animated thing map");
       }
-      dbg3("Added to pending things");
+      dbg2("Added to pending things");
     }
   }
 

@@ -31,7 +31,7 @@ void Level::assign_leaders_and_followers(void)
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
   if (! cands.size()) {
-    log("Assign leaders and followers: no none found");
+    log("Assign leaders and followers: none found");
     return;
   }
 
