@@ -7,7 +7,9 @@
 #include "my_gl.hpp"
 #include "my_thing.hpp"
 
-void Thing::level_enter(void)
+void Thing::level_rejoin(void) { level_enter(true); }
+
+void Thing::level_enter(bool rejoin)
 {
   TRACE_NO_INDENT();
 
@@ -19,7 +21,9 @@ void Thing::level_enter(void)
   int  group  = group_get();
   auto result = level->all_things[ group ].insert(std::pair(id, this));
   if (result.second == false) {
-    err("Failed to insert into thing map");
+    if (! rejoin) {
+      err("Failed to insert into thing map");
+    }
   }
 
   if (is_interesting()) {
@@ -33,7 +37,9 @@ void Thing::level_enter(void)
     } else {
       auto result = level->all_things_of_interest[ group ].insert(std::pair(id, this));
       if (result.second == false) {
-        err("Failed to insert into active thing map");
+        if (! rejoin) {
+          err("Failed to insert into active thing map");
+        }
       }
       dbg3("Added to interesting things");
     }
@@ -50,7 +56,9 @@ void Thing::level_enter(void)
     } else {
       auto result = level->all_animated_things[ group ].insert(std::pair(id, this));
       if (result.second == false) {
-        err("Failed to insert into animated thing map");
+        if (! rejoin) {
+          err("Failed to insert into animated thing map");
+        }
       }
       dbg2("Added to pending things");
     }

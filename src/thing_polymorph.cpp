@@ -68,14 +68,14 @@ void Thing::polymorph(Tpp into)
     drop_all();
   }
 
+  level_pop();
+  z_depth = tp()->z_depth;
+  level_push();
+
   //
   // Need to re-enter the level to enable animation.
   //
-  level_pop();
-  level_leave();
-  z_depth = tp()->z_depth;
-  level_enter();
-  level_push();
+  level_rejoin();
 
   update();
 
