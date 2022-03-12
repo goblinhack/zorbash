@@ -82,6 +82,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     return false;
   }
 
+  //
+  // Trying to jump to the same location
+  //
+  if (to == curr_at) {
+    return false;
+  }
+
   if (be_careful) {
     dbg("Try to jump carefully %d,%d", to.x, to.y);
   } else {
