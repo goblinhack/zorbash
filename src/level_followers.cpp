@@ -14,6 +14,7 @@
 
 void Level::assign_leaders_and_followers(void)
 {
+  log("Assign leaders and followers");
   TRACE_AND_INDENT();
 
   std::list< Thingp > cands;
@@ -30,6 +31,7 @@ void Level::assign_leaders_and_followers(void)
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
   if (! cands.size()) {
+    log("Assign leaders and followers: no none found");
     return;
   }
 
@@ -38,6 +40,7 @@ void Level::assign_leaders_and_followers(void)
   //
   // Assign members to groups
   //
+  log("Choose followers");
   for (auto t : cands) {
     Thingp group_cand = nullptr;
     dbg("Group cand %s", t->to_short_string().c_str());
@@ -79,6 +82,7 @@ void Level::assign_leaders_and_followers(void)
   //
   // Now choose the leader
   //
+  log("Choose the leaders");
   for (const auto &g : groups) {
     dbg("Group %p", g.first);
 
@@ -93,9 +97,6 @@ void Level::assign_leaders_and_followers(void)
       }
     }
 
-    //
-    // Now choose the leader
-    //
     for (const auto &m : g.second) {
       if (m == leader) {
         dbg("- Leader %s", m->to_short_string().c_str());
