@@ -584,30 +584,29 @@ public:
 
   const fpoint &interpolated_at_get(void);
 
-  const std::string  damage_acid_dice_str(void);
-  const std::string  damage_cold_dice_str(void);
-  const std::string  damage_crush_dice_str(void);
-  const std::string  damage_digest_dice_str(void);
-  const std::string  damage_energy_dice_str(void);
-  const std::string  damage_fire_dice_str(void);
-  const std::string  damage_future1_dice_str(void);
-  const std::string  damage_future2_dice_str(void);
-  const std::string  damage_future3_dice_str(void);
-  const std::string  damage_lightning_dice_str(void);
-  const std::string  damage_melee_dice_str(void);
+  const std::string damage_acid_dice_str(void);
+  const std::string damage_cold_dice_str(void);
+  const std::string damage_crush_dice_str(void);
+  const std::string damage_digest_dice_str(void);
+  const std::string damage_energy_dice_str(void);
+  const std::string damage_fire_dice_str(void);
+  const std::string damage_future1_dice_str(void);
+  const std::string damage_future2_dice_str(void);
+  const std::string damage_future3_dice_str(void);
+  const std::string damage_lightning_dice_str(void);
+  const std::string damage_melee_dice_str(void);
+  const std::string damage_natural_dice_str(void);
+  const std::string damage_necrosis_dice_str(void);
+  const std::string damage_poison_dice_str(void);
+  const std::string danger_level_str(Thingp); // Cannot return reference
+
   const std::string &damage_natural_attack_type(void);
-  const std::string  damage_natural_dice_str(void);
-  const std::string  damage_necrosis_dice_str(void);
-  const std::string  damage_poison_dice_str(void);
-  const std::string  danger_level_str(Thingp); // Cannot return reference
   const std::string &dead_reason_get(void);
   const std::string &equip_carry_anim(void);
   const std::string &gfx_anim_use(void);
   const std::string &gold_value_dice_str(void);
   const std::string &health_initial_dice_str(void);
   const std::string &is_allied_with(void);
-  const std::string &target_name_laser(void);
-  const std::string &target_name_radial(void);
   const std::string &lifespan_dice_str(void);
   const std::string &light_color(void);
   const std::string &long_text_description_extra(void);
@@ -617,9 +616,6 @@ public:
   const std::string &nutrition_dice_str(void);
   const std::string &on_awake_do(void);
   const std::string &on_born_do(void);
-  const std::string &on_resting_do(void);
-  const std::string &on_waiting_do(void);
-  const std::string &on_stuck_do(void);
   const std::string &on_damage_acid_do(void);
   const std::string &on_damage_cold_do(void);
   const std::string &on_damage_crush_do(void);
@@ -634,19 +630,19 @@ public:
   const std::string &on_damage_natural_attack_do(void);
   const std::string &on_damage_necrosis_do(void);
   const std::string &on_damage_poison_do(void);
+  const std::string &on_damage_stat_att_do(void);
   const std::string &on_damage_stat_con_do(void);
   const std::string &on_damage_stat_str_do(void);
-  const std::string &on_damage_stat_att_do(void);
   const std::string &on_death_do(void);
   const std::string &on_death_of_a_follower_do(void);
   const std::string &on_death_of_my_leader_do(void);
   const std::string &on_enchant_do(void);
   const std::string &on_equip_do(void);
   const std::string &on_fall_do(void);
-  const std::string &on_jump_do(void);
   const std::string &on_final_use_do(void);
   const std::string &on_firing_at_something_do(void);
   const std::string &on_idle_tick_freq_dice_str(void);
+  const std::string &on_jump_do(void);
   const std::string &on_lifespan_tick_do(void);
   const std::string &on_move_do(void);
   const std::string &on_open_do(void);
@@ -665,15 +661,18 @@ public:
   const std::string &on_owner_damage_natural_attack_do(void);
   const std::string &on_owner_damage_necrosis_do(void);
   const std::string &on_owner_damage_poison_do(void);
+  const std::string &on_owner_damage_stat_att_do(void);
   const std::string &on_owner_damage_stat_con_do(void);
   const std::string &on_owner_damage_stat_str_do(void);
-  const std::string &on_owner_damage_stat_att_do(void);
   const std::string &on_owner_remove_do(void);
   const std::string &on_polymorphed_do(void);
+  const std::string &on_resting_do(void);
+  const std::string &on_stuck_do(void);
+  const std::string &on_swing_do(void);
   const std::string &on_tick_do(void);
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
-  const std::string &on_swing_do(void);
+  const std::string &on_waiting_do(void);
   const std::string &on_you_are_declared_a_follower_do(void);
   const std::string &on_you_are_declared_leader_do(void);
   const std::string &on_you_are_hit_and_now_dead_do(void);
@@ -681,7 +680,6 @@ public:
   const std::string &on_you_are_on_fire_do(void);
   const std::string &on_you_miss_do(void);
   const std::string &on_you_natural_attack_do(void);
-  const std::string &target_name_projectile(void);
   const std::string &resurrect_dice_str(void);
   const std::string &short_text_name(void);
   const std::string &spawn_group_size_dice_str(void);
@@ -689,6 +687,9 @@ public:
   const std::string &str1(void);
   const std::string &str2(void);
   const std::string &str4(void);
+  const std::string &target_name_laser(void);
+  const std::string &target_name_projectile(void);
+  const std::string &target_name_radial(void);
   const std::string &text_debuff(void);
   const std::string &text_description(void);
   const std::string &text_enchant(void);
@@ -1187,6 +1188,7 @@ public:
   int is_obs_wall_or_door(void);
   int is_openable(void);
   int is_organic(void);
+  int is_pillar(void);
   int is_pink_blood_eater(void);
   int is_pink_blooded(void);
   int is_pink_blood(void);
@@ -1611,7 +1613,6 @@ public:
   int unused_flag122(void);
   int unused_flag123(void);
   int unused_flag124(void);
-  int is_pillar(void);
   int unused_flag12(void);
   int unused_flag13(void);
   int unused_flag14(void);
@@ -1817,56 +1818,68 @@ public:
   ts_t ts_lunge_begin_set(ts_t);
   ts_t ts_lunge_end_set(ts_t);
 
-  uint32_t tick_last_dropped_decr(uint32_t);
-  uint32_t tick_last_dropped_decr(void);
-  uint32_t tick_last_escape_decr(uint32_t);
-  uint32_t tick_last_escape_decr(void);
-  uint32_t tick_last_level_change_decr(uint32_t);
-  uint32_t tick_last_level_change_decr(void);
-  uint32_t tick_last_i_was_attacked_decr(uint32_t);
-  uint32_t tick_last_i_was_attacked_decr(void);
   uint32_t tick_last_location_check_decr(uint32_t);
   uint32_t tick_last_location_check_decr(void);
-  uint32_t tick_last_dropped(void);
-  uint32_t tick_last_escape(void);
-  uint32_t tick_last_level_change(void);
-  uint32_t tick_last_i_was_attacked(void);
-  uint32_t tick_last_location_check(void);
-  uint32_t tick_last_dropped_incr(uint32_t);
-  uint32_t tick_last_dropped_incr(void);
-  uint32_t tick_last_escape_incr(uint32_t);
-  uint32_t tick_last_escape_incr(void);
-  uint32_t tick_last_level_change_incr(uint32_t);
-  uint32_t tick_last_level_change_incr(void);
-  uint32_t tick_last_i_was_attacked_incr(uint32_t);
-  uint32_t tick_last_i_was_attacked_incr(void);
   uint32_t tick_last_location_check_incr(uint32_t);
   uint32_t tick_last_location_check_incr(void);
+  uint32_t tick_last_location_check_set(uint32_t);
+  uint32_t tick_last_location_check(void);
+
+  uint32_t tick_last_i_was_attacked_decr(uint32_t);
+  uint32_t tick_last_i_was_attacked_decr(void);
+  uint32_t tick_last_i_was_attacked_incr(uint32_t);
+  uint32_t tick_last_i_was_attacked_incr(void);
+  uint32_t tick_last_i_was_attacked_set(uint32_t);
+  uint32_t tick_last_i_was_attacked(void);
+
+  uint32_t tick_last_level_change_decr(uint32_t);
+  uint32_t tick_last_level_change_decr(void);
+  uint32_t tick_last_level_change_incr(uint32_t);
+  uint32_t tick_last_level_change_incr(void);
+  uint32_t tick_last_level_change_set(uint32_t);
+  uint32_t tick_last_level_change(void);
+
   uint32_t tick_last_did_something_decr(uint32_t);
   uint32_t tick_last_did_something_decr(void);
-  uint32_t tick_last_did_something(void);
   uint32_t tick_last_did_something_incr(uint32_t);
   uint32_t tick_last_did_something_incr(void);
   uint32_t tick_last_did_something_set(uint32_t);
+  uint32_t tick_last_did_something(void);
+
+  uint32_t tick_last_dropped_decr(uint32_t);
+  uint32_t tick_last_dropped_decr(void);
+  uint32_t tick_last_dropped_incr(uint32_t);
+  uint32_t tick_last_dropped_incr(void);
   uint32_t tick_last_dropped_set(uint32_t);
+  uint32_t tick_last_dropped(void);
+
+  uint32_t tick_last_escape_decr(uint32_t);
+  uint32_t tick_last_escape_decr(void);
+  uint32_t tick_last_escape_incr(uint32_t);
+  uint32_t tick_last_escape_incr(void);
   uint32_t tick_last_escape_set(uint32_t);
-  uint32_t tick_last_level_change_set(uint32_t);
-  uint32_t tick_last_i_was_attacked_set(uint32_t);
-  uint32_t tick_last_location_check_set(uint32_t);
+  uint32_t tick_last_escape(void);
 
   uint32_t tick_resurrect_when_decr(int);
   uint32_t tick_resurrect_when_decr(void);
-  uint32_t tick_resurrect_when(void);
   uint32_t tick_resurrect_when_incr(int);
   uint32_t tick_resurrect_when_incr(void);
   uint32_t tick_resurrect_when_set(int);
+  uint32_t tick_resurrect_when(void);
 
   int movement_remaining_decr(int);
   int movement_remaining_decr(void);
-  int movement_remaining(void);
   int movement_remaining_incr(int);
   int movement_remaining_incr(void);
   int movement_remaining_set(int);
+  int movement_remaining(void);
+
+  int physical_training_decr(int);
+  int physical_training_decr(void);
+  int physical_training_incr(int);
+  int physical_training_incr(void);
+  int physical_training_set(int);
+  int physical_training(void);
 
   uint8_t blit_begin_reflection_submerged(void);
   uint8_t blit_begin_submerged(void);
@@ -1924,7 +1937,6 @@ public:
   void buff_tick(void);
   void change_state(int new_state, const std::string &why);
   void chasm_tick(void);
-  void solid_rock_tick(void);
   void check_all_carried_items_are_owned(void);
   void check_all_carried_maps(void);
   void clear_age_map(void);
@@ -2081,6 +2093,7 @@ public:
   void on_you_natural_attack(void);
   void owner_set(Thingp owner);
   void path_shorten(std::vector< point > &path);
+  void physical_training_tick(void);
   void place_blood(bool force = false);
   void poisoned(void);
   void poison_tick(void);
@@ -2107,6 +2120,7 @@ public:
   void skill_activate(Thingp what);
   void skill_deactivate(Thingp what);
   void skill_remove_all(void);
+  void solid_rock_tick(void);
   void spawned_owner_set(Thingp spawner_owner);
   void stamina_boost(int v);
   void stats_tick(void);

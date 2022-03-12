@@ -81,6 +81,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->mob_id);
   out << bits(my.t->monst_state);
   out << bits(my.t->movement_remaining);
+  out << bits(my.t->physical_training);
   out << bits(my.t->msg);
   out << bits(my.t->necrosis);
   out << bits(my.t->noise);
