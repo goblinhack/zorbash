@@ -257,7 +257,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
             msg("You are so tired but dig deep into your reserves to move!");
           } else {
             msg("You cannot move, you are so tired!");
-            stuck();
+            stuck("too tired to move");
             game->tick_begin("too tired to move");
             return false;
           }
@@ -288,7 +288,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           msg("You are held in place and cannot move!");
         }
         dbg("You are held in place");
-        stuck();
+        stuck("stuck in place");
         wobble(25);
         return false;
       }
@@ -300,7 +300,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       // No getting stuck in webs
       // Also no cleaners stuck in their own gel
       //
-    } else if (is_toughness_soft() && level->is_heavy(curr_at.x, curr_at.y)) {
+    } else if (is_toughness_soft() && ! is_heavy() && level->is_heavy(curr_at.x, curr_at.y)) {
       //
       // Makes sure ghosts (or the cursor!) do not get stuck under barrels
       //
@@ -331,7 +331,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         }
         FOR_ALL_THINGS_END()
 
-        stuck();
+        stuck("stuck under something heavy");
         return false;
       }
     } else if (is_stuck()) {
@@ -361,7 +361,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       }
       FOR_ALL_THINGS_END()
 
-      stuck();
+      stuck("still stuck");
       return false;
     }
   }

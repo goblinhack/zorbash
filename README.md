@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- cleaner stuck                                                                                                                                -->
 <!-- mummy necro attacks minions                                                                                                                  -->
 <!-- mummy necro does not fire                                                                                                                    -->
 <!-- mummy minion follow                                                                                                                          -->
