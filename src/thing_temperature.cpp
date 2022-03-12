@@ -48,9 +48,6 @@ void Thing::temperature_tick(void)
     }
 
     location_t += t->temperature_get();
-    if (t->temperature_get()) {
-      t->con("temp %d / %d", location_t, t->temperature_get());
-    }
   }
   FOR_ALL_THINGS_END()
 

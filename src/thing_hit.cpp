@@ -1152,7 +1152,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
 
     if ((real_hitter->curr_at == curr_at) && real_hitter->is_engulfer()) {
-      reason = "digested in the bowels of " + defeater;
+      reason = "in the bowels of " + defeater;
     }
 
     if (real_hitter == this) {

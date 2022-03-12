@@ -2024,7 +2024,8 @@ public:
   void lava_tick(void);
   void leader_set(Thingp leader);
   void level_change(Levelp);
-  void level_enter(void);
+  void level_enter(bool rejoin = false);
+  void level_rejoin(void);
   void level_leave(void);
   void level_pop(void);
   void level_push(void);
