@@ -14,12 +14,12 @@ void tp_fixup(void)
       tp->is_able_to_tire_set(true);
     }
 
-    if (tp->is_tickable()) {
-      tp->is_interesting_set(true);
-    }
-
     if (tp->is_monst() || tp->is_pack()) {
       tp->is_tickable_set(true);
+    }
+
+    if (tp->is_tickable()) {
+      tp->is_interesting_set(true);
     }
 
     if (! tp->on_tick_do().empty()) {

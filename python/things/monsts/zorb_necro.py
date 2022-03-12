@@ -52,11 +52,10 @@ def on_death(me, x, y):
 def tp_init(name, text_name):
     self = zorb_all.tp_init(name, text_name)
     my.long_text_description_extra(self, "This particular zorblin is learned in the dark arts. Withered of body, but sharp of mind, beware the abilities of this zorblin.")
+    my.on_born_do(self, "me.on_born()")
+    my.on_death_do(self, "me.on_death()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
-    my.on_death_do(self, "me.on_death()")
-    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
-    my.on_born_do(self, "me.on_born()")
     my.text_description(self, "A master of the darkest arts.")
     # my.is_carrier_of_treasure_class_b(self, True)
     my.is_monst_class_b(self, True)

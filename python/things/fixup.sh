@@ -34,7 +34,7 @@ do
     echo $IN
 
     grep -q is_pack $IN
-    if [[ $? -eq 0 ]]; then
+    if [ $? -eq 0 ]; then
         continue
     fi
 

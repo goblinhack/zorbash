@@ -39,7 +39,6 @@ def tp_init(name, text_name, short_text_name):
     my.gfx_health_bar_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)
-    my.gfx_show_outlined(self, True)
     my.health_initial_dice(self, "8d10+40")
     my.hunger_clock_tick_freq(self, 50)
     my.hunger_health_pct(self, 95)
@@ -104,14 +103,10 @@ def tp_init(name, text_name, short_text_name):
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)  # so it appears over things when consuming
 
     delay = 200
-    my.tile(self, tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self, tile=name + ".1", delay_ms=delay)
+    my.tile(self, tile=name + ".2", delay_ms=delay)
+    my.tile(self, tile=name + ".3", delay_ms=delay)
+    my.tile(self, tile=name + ".4", delay_ms=delay)
 
     my.tp_update(self)
 
