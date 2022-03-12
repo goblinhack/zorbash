@@ -2124,7 +2124,7 @@ public:
   void spawned_owner_set(Thingp spawner_owner);
   void stamina_boost(int v);
   void stats_tick(void);
-  void stuck(void);
+  void stuck(const std::string &why);
   void submerged_offset_set(int);
   void temperature_tick(void);
   void throw_at(Thingp w, Thingp target);

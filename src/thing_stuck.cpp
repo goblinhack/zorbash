@@ -45,9 +45,9 @@ void Thing::on_stuck(void)
   }
 }
 
-void Thing::stuck(void)
+void Thing::stuck(const std::string &why)
 {
-  dbg("Stuck");
+  dbg("Stuck: %s", why.c_str());
   TRACE_AND_INDENT();
 
   stuck_count_incr();
@@ -57,7 +57,7 @@ void Thing::stuck(void)
     auto iter = equip_get(e);
     if (iter) {
       if (! iter->on_stuck_do().empty()) {
-        iter->stuck();
+        iter->stuck(why);
       }
     }
   }
