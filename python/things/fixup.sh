@@ -33,6 +33,11 @@ for IN in \
 do
     echo $IN
 
+    grep -q is_pack $IN
+    if [[ $? -eq 0 ]]; then
+        continue
+    fi
+
     sed '1,/self = tp.Tp(/!d' $IN > $PRE
     sed '/self = tp.Tp(/,/z_prio(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
     sed '/z_prio(/,$!d' $IN | tail -n +2 - > $POST
@@ -424,7 +429,7 @@ do
       unused_flag121_set \
       unused_flag122_set \
       unused_flag123_set \
-      unused_flag124_set \
+      is_pack_set \
       is_pillar_set \
       is_able_to_walk_through_walls_set \
       collision_hit_two_tiles_ahead_set \

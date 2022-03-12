@@ -141,9 +141,9 @@ void Game::place_player(void)
         // level->thing_new("rat_giant", point(x + 1, y));
         // level->thing_new("rat_giant", point(x, y - 1));
         //  level->thing_new("zorb_necro", point(x + 2, y));
-        level->thing_new("door_metal", point(x + 2, y));
-        level->thing_new("rock1", point(x + 1, y));
-        level->thing_new("rock1", point(x + 3, y));
+        // level->thing_new("door_metal", point(x + 2, y));
+        // level->thing_new("rock1", point(x + 1, y));
+        // level->thing_new("rock1", point(x + 3, y));
         // level->thing_new("gargoyle_static", point(x + 2, y - 2));
         //  level->thing_new("lava", point(x, y));
         // level->thing_new("food_frog", point(x + 3, y - 1));
@@ -164,11 +164,13 @@ void Game::place_player(void)
         //  level->thing_new("map_beast", point(x, y - 2));
         // level->thing_new("zorb_eldster", point(x + 5, y));
         // level->thing_new("key", point(x + 5, y));
-        //  level->thing_new("zorb_pack", point(x + 2, y));
-        //  level->assign_leaders_and_followers();
         //  level->thing_new("key_pair", point(x - 1, y - 2));
         //  level->thing_new("key_golden", point(x - 1, y + 2));
         //  level->thing_new("key_penta", point(x, y + 12));
+        //
+        // level->thing_new("zorb_pack", point(x + 2, y));
+        level->thing_new("mummy_pack", point(x + 2, y));
+        level->assign_leaders_and_followers();
       }
 
       LOG("INF: Placed player");

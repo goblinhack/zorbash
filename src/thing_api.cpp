@@ -2168,10 +2168,10 @@ int Thing::unused_flag123(void)
   return (tp()->unused_flag123());
 }
 
-int Thing::unused_flag124(void)
+int Thing::is_pack(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag124());
+  return (tp()->is_pack());
 }
 
 int Thing::is_pillar(void)

@@ -1612,7 +1612,7 @@ public:
   int unused_flag121(void);
   int unused_flag122(void);
   int unused_flag123(void);
-  int unused_flag124(void);
+  int is_pack(void);
   int unused_flag12(void);
   int unused_flag13(void);
   int unused_flag14(void);

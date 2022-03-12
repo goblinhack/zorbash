@@ -240,6 +240,8 @@ std::initializer_list< std::string > tps = {
     "mob_explosion",
     "msg",
     "mummy",
+    "mummy_necro",
+    "mummy_pack",
     "pike",
     "pike_carry",
     "pike_swing",

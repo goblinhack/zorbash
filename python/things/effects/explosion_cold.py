@@ -13,8 +13,8 @@ def tp_init(name):
     my.gfx_animated(self, True)
     my.gfx_short_shadow_caster(self, True)
     my.gfx_show_outlined(self, True)
-    my.is_explosion(self, True)
     my.is_cold(self, True)
+    my.is_explosion(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
