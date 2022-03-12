@@ -468,7 +468,7 @@ bool Thing::victim_attack_best_at(int equip, point *at, AttackOptions *attack_op
   return false;
 }
 
-bool Thing::victim_attack_best_(int equip, point *at)
+bool Thing::victim_attack_best_(int equip, point *at, AttackOptions *attack_options)
 {
   int  dx, dy;
   auto item = equip_get(equip);
@@ -489,16 +489,16 @@ bool Thing::victim_attack_best_(int equip, point *at)
 
   //
   // If we are targetting a wall
+  //
   if (at) {
     if (level->is_obs_wall_or_door(*at)) {
+      attack_options->allow_hitting_walls = true;
     }
   }
 
   //
   // Axe hits all around
   //
-  AttackOptions attack_options {};
-
   if (item && item->collision_hit_360()) {
     std::vector< point > all_deltas = {
         point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
@@ -511,11 +511,11 @@ bool Thing::victim_attack_best_(int equip, point *at)
         point at = curr_at + d;
         dbg("Target-attack-best: Try to attack 360 with equipped item at %s", at.to_string().c_str());
         TRACE_AND_INDENT();
-        attack_options.attempt = attempt;
-        if (victim_attack_best_at(equip, &at, &attack_options)) {
+        attack_options->attempt = attempt;
+        if (victim_attack_best_at(equip, &at, attack_options)) {
           ret = true;
         }
-        if (attack_options.victim_attacked) {
+        if (attack_options->victim_attacked) {
           ret = true;
         }
       }
@@ -537,11 +537,11 @@ bool Thing::victim_attack_best_(int equip, point *at)
         point at = curr_at + d;
         dbg("Target-attack-best: Try to attack 180 adj with equipped item at %s", at.to_string().c_str());
         TRACE_AND_INDENT();
-        attack_options.attempt = attempt;
-        if (victim_attack_best_at(equip, &at, &attack_options)) {
+        attack_options->attempt = attempt;
+        if (victim_attack_best_at(equip, &at, attack_options)) {
           ret = true;
         }
-        if (attack_options.victim_attacked) {
+        if (attack_options->victim_attacked) {
           ret = true;
         }
       }
@@ -564,11 +564,11 @@ bool Thing::victim_attack_best_(int equip, point *at)
         dbg("Target-attack-best: Try to attack two ahead adj (%d,%d) with equipped item at %s", d.x, d.y,
             at.to_string().c_str());
         TRACE_AND_INDENT();
-        attack_options.attempt = attempt;
-        if (victim_attack_best_at(equip, &at, &attack_options)) {
+        attack_options->attempt = attempt;
+        if (victim_attack_best_at(equip, &at, attack_options)) {
           ret = true;
         }
-        if (attack_options.victim_attacked) {
+        if (attack_options->victim_attacked) {
           ret = true;
         }
       }
@@ -622,11 +622,11 @@ bool Thing::victim_attack_best_(int equip, point *at)
         point at = curr_at + d;
         dbg("Target-attack-best: Try to attack 180 adj with equipped item at %s", at.to_string().c_str());
         TRACE_AND_INDENT();
-        attack_options.attempt = attempt;
-        if (victim_attack_best_at(equip, &at, &attack_options)) {
+        attack_options->attempt = attempt;
+        if (victim_attack_best_at(equip, &at, attack_options)) {
           ret = true;
         }
-        if (attack_options.victim_attacked) {
+        if (attack_options->victim_attacked) {
           ret = true;
         }
       }
@@ -637,14 +637,14 @@ bool Thing::victim_attack_best_(int equip, point *at)
     return ret;
   }
 
-  if (victim_attack_best_at(equip, at, &attack_options)) {
+  if (victim_attack_best_at(equip, at, attack_options)) {
     return true;
   }
 
   return false;
 }
 
-bool Thing::victim_attack_best(int equip, point *at)
+bool Thing::victim_attack_best(int equip, point *at, AttackOptions *attack_options)
 {
   if (at) {
     dbg("Target-attack-best: Try to attack with equipped item at %s", at->to_string().c_str());
@@ -658,7 +658,7 @@ bool Thing::victim_attack_best(int equip, point *at)
   //
   auto old_dir = dir;
 
-  auto ret = victim_attack_best_(equip, at);
+  auto ret = victim_attack_best_(equip, at, attack_options);
 
   dir = old_dir;
 

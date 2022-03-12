@@ -586,6 +586,8 @@ bool Thing::equip_use(bool forced, int equip, point *at)
     }
   }
 
+  AttackOptions attack_options = {};
+
   TRACE_NO_INDENT();
   std::string used_as;
   auto        item = equip_get(equip);
@@ -600,6 +602,8 @@ bool Thing::equip_use(bool forced, int equip, point *at)
       if (is_player()) {
         msg("You attack with bare fists!");
       }
+
+      attack_options.natural_attack = true;
 
       //
       // Python callback
@@ -646,7 +650,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
 
   dbg("Find best attack target");
   TRACE_AND_INDENT();
-  bool attacked = victim_attack_best(equip, at);
+  bool attacked = victim_attack_best(equip, at, &attack_options);
   if (! attacked) {
     if (is_player() && forced) {
       //
