@@ -58,6 +58,7 @@ typedef struct {
   bool victim_attacked;
   bool victim_overlaps;
   bool allow_hitting_walls;
+  bool natural_attack;
   int  attempt;
 } AttackOptions;
 
@@ -524,9 +525,9 @@ public:
   bool unequip(const char *why, int equip, bool allowed_to_recarry);
   bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
   bool use(Thingp w, UseOptions *options = nullptr);
-  bool victim_attack_best_at(int equip, point *at, AttackOptions *o);
-  bool victim_attack_best(int equip, point *at = nullptr);
-  bool victim_attack_best_(int equip, point *at = nullptr);
+  bool victim_attack_best_at(int equip, point *at, AttackOptions *);
+  bool victim_attack_best(int equip, point *at, AttackOptions *);
+  bool victim_attack_best_(int equip, point *at, AttackOptions *);
   bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
