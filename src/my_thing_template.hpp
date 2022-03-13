@@ -530,7 +530,7 @@ private:
   int _unused_flag12 {};
   int _unused_flag120 {};
   int _unused_flag121 {};
-  int _unused_flag122 {};
+  int _is_able_to_teleport_escape {};
   int _unused_flag123 {};
   int _is_pack {};
   int _is_pillar {};
@@ -1432,7 +1432,7 @@ public:
   int unused_flag11(void) const { return _unused_flag11; }
   int unused_flag120(void) const { return _unused_flag120; }
   int unused_flag121(void) const { return _unused_flag121; }
-  int unused_flag122(void) const { return _unused_flag122; }
+  int is_able_to_teleport_escape(void) const { return _is_able_to_teleport_escape; }
   int unused_flag123(void) const { return _unused_flag123; }
   int is_pack(void) const { return _is_pack; }
   int is_pillar(void) const { return _is_pillar; }
@@ -2073,7 +2073,7 @@ public:
   void unused_flag11_set(int v) { _unused_flag11 = v; }
   void unused_flag120_set(int v) { _unused_flag120 = v; }
   void unused_flag121_set(int v) { _unused_flag121 = v; }
-  void unused_flag122_set(int v) { _unused_flag122 = v; }
+  void is_able_to_teleport_escape_set(int v) { _is_able_to_teleport_escape = v; }
   void unused_flag123_set(int v) { _unused_flag123 = v; }
   void is_pack_set(int v) { _is_pack = v; }
   void is_pillar_set(int v) { _is_pillar = v; }

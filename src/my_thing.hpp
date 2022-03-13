@@ -1611,7 +1611,7 @@ public:
   int unused_flag11(void);
   int unused_flag120(void);
   int unused_flag121(void);
-  int unused_flag122(void);
+  int is_able_to_teleport_escape(void);
   int unused_flag123(void);
   int is_pack(void);
   int unused_flag12(void);

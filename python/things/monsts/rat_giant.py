@@ -103,7 +103,7 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 7)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A rat, no more, no less. Slightly cute. Likely rabid.")
+    my.text_description(self, "A giant dwarf rat, no more, no less. Slightly cute. Rabid.")
     my.text_hits(self, "gores")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_NORMAL)

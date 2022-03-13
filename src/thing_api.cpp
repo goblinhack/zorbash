@@ -2162,10 +2162,10 @@ int Thing::unused_flag121(void)
   return (tp()->unused_flag121());
 }
 
-int Thing::unused_flag122(void)
+int Thing::is_able_to_teleport_escape(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag122());
+  return (tp()->is_able_to_teleport_escape());
 }
 
 int Thing::unused_flag123(void)
