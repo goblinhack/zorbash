@@ -76,7 +76,7 @@ def tp_init(name, text_name):
     my.is_loggable(self, True)
     my.is_meat_eater(self, True)
     my.is_meat(self, True)
-    my.is_monst_class_b(self, True)
+    my.is_monst_class_a(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_poisonous_danger_level(self, 1)
