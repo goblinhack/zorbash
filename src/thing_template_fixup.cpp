@@ -44,6 +44,12 @@ void tp_fixup(void)
       tp->is_temperature_change_sensitive_set(true);
     }
 
+    if (tp->is_poisonous_danger_level()) {
+      if (tp->damage_poison_dice_str().empty()) {
+        DIE("Tp %s needs a poison danger level set?", tp->name().c_str());
+      }
+    }
+
     if (tp->is_flying()) {
       if (tp->is_shovable()) {
         DIE("Tp %s a flying thing that can be shoved, are you sure?", tp->name().c_str());

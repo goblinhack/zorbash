@@ -490,7 +490,7 @@ PyObject *thing_unused_flag119(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag120(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag121(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag122(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_teleport_escape(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag123(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pillar(PyObject *obj, PyObject *args, PyObject *keywds);

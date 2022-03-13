@@ -1032,7 +1032,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag121() && (what == "unused_flag121")) {
     return true;
   }
-  if (unused_flag122() && (what == "unused_flag122")) {
+  if (is_able_to_teleport_escape() && (what == "is_able_to_teleport_escape")) {
     return true;
   }
   if (unused_flag123() && (what == "unused_flag123")) {
@@ -2290,8 +2290,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag121") {
     return &Thing::unused_flag121;
   }
-  if (what == "unused_flag122") {
-    return &Thing::unused_flag122;
+  if (what == "is_able_to_teleport_escape") {
+    return &Thing::is_able_to_teleport_escape;
   }
   if (what == "unused_flag123") {
     return &Thing::unused_flag123;

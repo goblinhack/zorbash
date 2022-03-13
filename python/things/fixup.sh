@@ -427,7 +427,7 @@ do
       unused_flag119_set \
       unused_flag120_set \
       unused_flag121_set \
-      unused_flag122_set \
+      is_able_to_teleport_escape_set \
       unused_flag123_set \
       is_pack_set \
       is_pillar_set \
