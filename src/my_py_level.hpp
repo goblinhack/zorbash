@@ -34,6 +34,7 @@ PyObject *level_enchant_level_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_enchant_max_current_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_environ_avoids_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_necrosis_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_environ_avoids_water_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -40,6 +40,7 @@ def tp_init(name, text_name):
     my.distance_avoid(self, 2)
     my.distance_vision(self, 7)
     my.environ_avoids_acid(self, 100)
+    my.environ_avoids_cold(self, 100)
     my.environ_avoids_fire(self, 10)
     my.environ_avoids_poison(self, 100)
     my.gfx_animated_can_hflip(self, True)
@@ -68,7 +69,6 @@ def tp_init(name, text_name):
     my.is_corpse_on_death(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
-    my.is_food_eater(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_water(self, True)
     my.is_living(self, True)
@@ -91,6 +91,7 @@ def tp_init(name, text_name):
     my.nutrition_dice(self, "1d6")
     my.on_death_do(self, "me.on_death()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
+    my.is_asleep_initially(self, True)
     my.on_you_miss_do(self, "me.on_you_miss_do()")
     my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
     my.rarity(self, my.RARITY_COMMON)
@@ -124,7 +125,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="snake_asp", text_name="an asp")
+    tp_init(name="snake_asp", text_name="asp")
 
 
 init()

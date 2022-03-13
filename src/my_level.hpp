@@ -42,6 +42,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _heatmap {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_able_to_stand_on {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_acid {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cold {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ascend_dungeon {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ascend_sewer {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_barrel {};
@@ -730,6 +731,8 @@ public:
   uint8_t is_able_to_stand_on(const point p);
   uint8_t is_acid(const int x, const int y);
   uint8_t is_acid(const point p);
+  uint8_t is_cold(const int x, const int y);
+  uint8_t is_cold(const point p);
   uint8_t is_ascend_dungeon(const int x, const int y);
   uint8_t is_ascend_dungeon(const point p);
   uint8_t is_ascend_sewer(const int x, const int y);
@@ -944,6 +947,8 @@ public:
   void is_able_to_stand_on_unset(const int x, const int y);
   void is_acid_set(const int x, const int y);
   void is_acid_unset(const int x, const int y);
+  void is_cold_set(const int x, const int y);
+  void is_cold_unset(const int x, const int y);
   void is_ascend_dungeon_set(const int x, const int y);
   void is_ascend_dungeon_unset(const int x, const int y);
   void is_ascend_sewer_set(const int x, const int y);

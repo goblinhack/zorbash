@@ -159,7 +159,7 @@ void Game::place_player(void)
         //  level->thing_new("shield_woodon", point(x, y - 2));
         //  level->thing_new("fire", point(x, y - 2));
         //  level->thing_new("food_frog", point(x, y - 2));
-        level->thing_new("cleaner", point(x + 1, y + 3));
+        // level->thing_new("cleaner", point(x + 1, y + 3));
         //  level->thing_new("thunderstone", point(x, y - 2));
         //  level->thing_new("map_treasure", point(x, y - 2));
         //  level->thing_new("map_beast", point(x, y - 2));
@@ -170,7 +170,7 @@ void Game::place_player(void)
         //  level->thing_new("key_penta", point(x, y + 12));
         //
         // level->thing_new("zorb_pack", point(x + 2, y));
-        level->thing_new("mummy_pack", point(x + 2, y + 12));
+        // level->thing_new("mummy_pack", point(x + 2, y + 12));
         level->assign_leaders_and_followers();
       }
 

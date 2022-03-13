@@ -47,7 +47,11 @@ bool Thing::fire_tick(void)
         }
       }
     } else {
-      hit = false;
+      if (stuck_count() || idle_count()) {
+        hit = true;
+      } else {
+        hit = (d100() < 70);
+      }
     }
   } else if (is_very_combustible() && level->heatmap(at.x, at.y)) {
     //

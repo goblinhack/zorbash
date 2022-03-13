@@ -383,8 +383,8 @@ Tpp tp_random_monst(void)
 
 Tpp tp_random_monst_class_a(void)
 {
-#if 0
-  return tp_find("snake_asp");
+#if 1
+  return tp_find("snake_dreadfire");
 #endif
   TRACE_NO_INDENT();
   if (unlikely(! tp_monst_class_a.size())) {

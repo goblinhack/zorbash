@@ -75,6 +75,7 @@ PyObject *thing_enchant_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_max_set(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_avoids_acid(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_avoids_fire(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_environ_avoids_cold(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_avoids_necrosis(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_avoids_poison(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_environ_avoids_water(PyObject *obj, PyObject *args, PyObject *keywds);

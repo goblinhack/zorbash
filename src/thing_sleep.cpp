@@ -8,6 +8,15 @@
 #include "my_python.hpp"
 #include "my_thing.hpp"
 
+void Thing::sleep(void)
+{
+  change_state(MONST_STATE_SLEEPING, "time to sleep");
+  auto followers = all_followers_get();
+  for (auto f : followers) {
+    f->sleep();
+  }
+}
+
 void Thing::wake(void)
 {
   if (! is_able_to_sleep()) {
@@ -18,6 +27,11 @@ void Thing::wake(void)
 
   dbg("Wake");
   change_state(MONST_STATE_IDLE, "wake up");
+
+  auto followers = all_followers_get();
+  for (auto f : followers) {
+    f->wake();
+  }
 }
 
 void Thing::awake(void)

@@ -9,6 +9,10 @@
 
 void Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count)
 {
+  if (is_sleeping) {
+    return;
+  }
+
   auto t = ts_bounce_begin_set(time_get_time_ms_cached());
   ts_bounce_end_set(t + ms);
 

@@ -7,6 +7,10 @@
 
 void Thing::lunge(point to)
 {
+  if (is_sleeping) {
+    return;
+  }
+
   //
   // Already lunging? This can happen when swinging a weapon that hits in multiple
   // directions. Don't make the player dizzy and focus on the intial lunge.

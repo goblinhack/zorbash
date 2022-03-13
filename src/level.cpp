@@ -72,6 +72,44 @@ void Level::is_acid_unset(const int x, const int y)
   decr(_is_acid, x, y, (uint8_t) 1);
 }
 
+uint8_t Level::is_cold(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_cold, p.x, p.y));
+}
+
+uint8_t Level::is_cold(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_cold, x, y));
+}
+
+void Level::is_cold_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_cold, x, y, (uint8_t) 1);
+}
+
+void Level::is_cold_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_cold, x, y, (uint8_t) 1);
+}
+
 uint8_t Level::is_chasm(const int x, const int y)
 {
   TRACE_NO_INDENT();
@@ -2027,10 +2065,7 @@ bool Level::noise_blocker(const int x, const int y) const
   return (get(_noise_blocker, x, y));
 }
 
-bool Level::noise_blocker_no_check(const int x, const int y) const
-{
-  return (get_no_check(_noise_blocker, x, y));
-}
+bool Level::noise_blocker_no_check(const int x, const int y) const { return (get_no_check(_noise_blocker, x, y)); }
 
 void Level::noise_blocker_set(const int x, const int y)
 {
@@ -2050,10 +2085,7 @@ void Level::noise_blocker_unset(const int x, const int y)
   set(_noise_blocker, x, y, false);
 }
 
-void Level::noise_blocker_no_check_unset(const int x, const int y)
-{
-  set_no_check(_noise_blocker, x, y, false);
-}
+void Level::noise_blocker_no_check_unset(const int x, const int y) { set_no_check(_noise_blocker, x, y, false); }
 
 uint8_t Level::is_gas_poison(const point p) const
 {

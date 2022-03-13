@@ -509,6 +509,12 @@ int Thing::environ_avoids_fire(void)
   return (tp()->environ_avoids_fire());
 }
 
+int Thing::environ_avoids_cold(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->environ_avoids_cold());
+}
+
 int Thing::environ_avoids_poison(void)
 {
   TRACE_NO_INDENT();

@@ -815,7 +815,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       {
         auto index = 0;
         if (maybe_infop()->monst_state) {
-          if (infop()->monst_state == MONST_STATE_SLEEPING) {
+          if (is_sleeping) {
             //
             // Don't show gargoyles when snoozing for example
             //

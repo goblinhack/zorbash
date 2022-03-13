@@ -105,6 +105,9 @@ bool Thing::matches(const std::string &what)
   if (environ_avoids_acid() && (what == "environ_avoids_acid")) {
     return true;
   }
+  if (environ_avoids_cold() && (what == "environ_avoids_cold")) {
+    return true;
+  }
   if (environ_avoids_fire() && (what == "environ_avoids_fire")) {
     return true;
   }
@@ -1383,6 +1386,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "environ_avoids_acid") {
     return &Thing::environ_avoids_acid;
+  }
+  if (what == "environ_avoids_cold") {
+    return &Thing::environ_avoids_cold;
   }
   if (what == "environ_avoids_fire") {
     return &Thing::environ_avoids_fire;
