@@ -373,7 +373,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     // Place braziers first and then update the heatmap
     //
     dbg2("INF: Place braziers");
-    create_dungeon_place_braziers(dungeon, "brazier1");
+    create_dungeon_place_braziers(dungeon, "brazier");
     if (g_errored) {
       return false;
     }

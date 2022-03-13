@@ -136,14 +136,14 @@ def tp_init(name, text_name):
     my.tile(self, tile=name + ".sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self, tile=name + ".sleeping.2", is_sleeping=True, delay_ms=delay)
 
-    my.tile(self, tile=name + ".1.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".5.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".6.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".7.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".8.dead", is_dead=True, is_end_of_anim=True)
+    my.tile(self, tile=name + ".dead.1", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.2", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.3", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.4", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.5", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.6", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.7", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.8", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)
 

@@ -170,10 +170,10 @@ def tp_init(name, text_name):
     my.tile(self, tile=name + ".3", delay_ms=delay)
     my.tile(self, tile=name + ".4", delay_ms=delay)
 
-    my.tile(self, tile=name + ".1.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.dead", is_dead=True, is_end_of_anim=True)
+    my.tile(self, tile=name + ".dead.1", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.2", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.3", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.4", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)
 
