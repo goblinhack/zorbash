@@ -110,7 +110,7 @@ PyObject *level_is_biome_swamp_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_is_bleeder_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bloodied_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bones_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_bony_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_corpse_with_bones_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_boots_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_brazier_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_breather_at(PyObject *obj, PyObject *args, PyObject *keywds);

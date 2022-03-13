@@ -303,7 +303,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.is_attackable_by_monst(self, True)
     my.is_biome_dungeon(self, True)
     my.is_bleeder(self, True)
-    my.is_bony(self, True)
+    my.is_corpse_with_bones(self, True)
     my.is_breather(self, True)
     my.is_burnable(self, True)
     my.is_corpse_on_death(self, True)

@@ -654,7 +654,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_use_weapons() && (what == "is_able_to_use_weapons")) {
     return true;
   }
-  if (is_bony() && (what == "is_bony")) {
+  if (is_corpse_with_bones() && (what == "is_corpse_with_bones")) {
     return true;
   }
   if (is_pink_blooded() && (what == "is_pink_blooded")) {
@@ -1591,8 +1591,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_bones") {
     return &Thing::is_bones;
   }
-  if (what == "is_bony") {
-    return &Thing::is_bony;
+  if (what == "is_corpse_with_bones") {
+    return &Thing::is_corpse_with_bones;
   }
   if (what == "is_boots") {
     return &Thing::is_boots;
