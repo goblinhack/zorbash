@@ -118,19 +118,19 @@ def tp_init(name, text_name):
     my.tile(self, tile=name + ".3.100", is_hp_25_percent=True, delay_ms=delay)
 
     delay = 50
-    my.tile(self, tile=name + ".1.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".5.dead", is_dead=True, is_end_of_anim=True)
+    my.tile(self, tile=name + ".dead.1", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.2", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.3", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.4", is_dead=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.5", is_dead=True, is_end_of_anim=True)
 
     delay = 200
-    my.tile(self, tile=name + ".5.dead", is_resurrecting=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.dead", is_resurrecting=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.dead", is_resurrecting=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.dead", is_resurrecting=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.5", is_resurrecting=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.4", is_resurrecting=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.3", is_resurrecting=True, delay_ms=delay)
+    my.tile(self, tile=name + ".dead.2", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            tile=name + ".1.dead",
+            tile=name + ".dead.1",
             is_resurrecting=True,
             is_end_of_anim=True,
             is_alive_on_end_of_anim=True)

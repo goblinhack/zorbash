@@ -150,16 +150,16 @@ def tp_init(name, text_name):
     my.tile(self, "skeleton.4", is_dir_none=True, delay_ms=delay)
 
     delay = 20
-    my.tile(self, "skeleton.1.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, "skeleton.2.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, "skeleton.3.dead", is_dead=True, delay_ms=delay)
-    my.tile(self, "skeleton.4.dead", is_dead=True, delay_ms=delay, is_end_of_anim=True)
+    my.tile(self, "skeleton.dead.1", is_dead=True, delay_ms=delay)
+    my.tile(self, "skeleton.dead.2", is_dead=True, delay_ms=delay)
+    my.tile(self, "skeleton.dead.3", is_dead=True, delay_ms=delay)
+    my.tile(self, "skeleton.dead.4", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
-    my.tile(self, "skeleton.4.dead", is_resurrecting=True, delay_ms=delay)
-    my.tile(self, "skeleton.3.dead", is_resurrecting=True, delay_ms=delay)
-    my.tile(self, "skeleton.2.dead", is_resurrecting=True, delay_ms=delay)
+    my.tile(self, "skeleton.dead.4", is_resurrecting=True, delay_ms=delay)
+    my.tile(self, "skeleton.dead.3", is_resurrecting=True, delay_ms=delay)
+    my.tile(self, "skeleton.dead.2", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            "skeleton.1.dead",
+            "skeleton.dead.1",
             is_resurrecting=True,
             is_end_of_anim=True,
             is_alive_on_end_of_anim=True)
