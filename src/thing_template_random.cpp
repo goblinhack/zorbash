@@ -383,7 +383,7 @@ Tpp tp_random_monst(void)
 
 Tpp tp_random_monst_class_a(void)
 {
-#if 1
+#if 0
   return tp_find("flameskull");
 #endif
   TRACE_NO_INDENT();
