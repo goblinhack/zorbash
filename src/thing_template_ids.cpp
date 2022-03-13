@@ -291,6 +291,7 @@ std::initializer_list< std::string > tps = {
     "skillstone",
     "small_fire",
     "smoke",
+    "snake_asp",
     "spider_giant",
     "spiderweb",
     "staff_descent",

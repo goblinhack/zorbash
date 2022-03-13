@@ -241,7 +241,7 @@ private:
   int _is_biome_swamp {};
   int _is_bleeder {};
   int _is_bones {};
-  int _is_bony {};
+  int _is_corpse_with_bones {};
   int _is_boots {};
   int _is_brazier {};
   int _is_breather {};
@@ -1144,7 +1144,7 @@ public:
   int is_biome_swamp(void) const { return _is_biome_swamp; }
   int is_bleeder(void) const { return _is_bleeder; }
   int is_bones(void) const { return _is_bones; }
-  int is_bony(void) const { return _is_bony; }
+  int is_corpse_with_bones(void) const { return _is_corpse_with_bones; }
   int is_boots(void) const { return _is_boots; }
   int is_brazier(void) const { return _is_brazier; }
   int is_breather(void) const { return _is_breather; }
@@ -1696,7 +1696,7 @@ public:
   void is_biome_swamp_set(int v) { _is_biome_swamp = v; }
   void is_bleeder_set(int v) { _is_bleeder = v; }
   void is_bones_set(int v) { _is_bones = v; }
-  void is_bony_set(int v) { _is_bony = v; }
+  void is_corpse_with_bones_set(int v) { _is_corpse_with_bones = v; }
   void is_boots_set(int v) { _is_boots = v; }
   void is_brazier_set(int v) { _is_brazier = v; }
   void is_breather_set(int v) { _is_breather = v; }

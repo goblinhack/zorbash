@@ -150,7 +150,7 @@ do
       is_red_blood_eater_set \
       is_red_splatter_set \
       is_bones_set \
-      is_bony_set \
+      is_corpse_with_bones_set \
       is_brazier_set \
       is_bridge_set \
       is_buff_set \

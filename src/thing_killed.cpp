@@ -341,7 +341,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       dbg("Already a corpse, clean it up");
       if (! tick_resurrect_when()) {
-        if (is_bony()) {
+        if (is_corpse_with_bones()) {
           dbg("Can place final bones");
           auto tpp = tp_random_bones();
           if (tpp) {

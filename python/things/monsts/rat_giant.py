@@ -9,14 +9,12 @@ def on_you_natural_attack(me, x, y):
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_you_miss_do(me, hitter, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
 def on_death(me, x, y):
@@ -67,7 +65,7 @@ def tp_init(name, text_name):
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
     my.is_bleeder(self, True)
-    my.is_bony(self, True)
+    my.is_corpse_with_bones(self, True)
     my.is_breather(self, True)
     my.is_corpse_on_death(self, True)
     my.is_crushable(self, True)
@@ -88,7 +86,7 @@ def tp_init(name, text_name):
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.long_text_description(self, "An enormous giant dwarf rat... Blood drips from its teeth. Will eat almost anything, especially you. Sometimes answers to the name of Mr Squeakles.")
-    my.monst_size(self, my.MONST_SIZE_LARGE)
+    my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 10)
     my.normal_placement_rules(self, True)
@@ -118,6 +116,7 @@ def tp_init(name, text_name):
     delay = 1500
     my.tile(self, "rat_giant.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self, "rat_giant.sleeping.2", is_sleeping=True, delay_ms=delay)
+    delay = 150
     my.tile(self, "rat_giant.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)

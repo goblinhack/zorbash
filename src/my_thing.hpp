@@ -1053,7 +1053,7 @@ public:
   int is_biome_swamp(void);
   int is_bleeder(void);
   int is_bones(void);
-  int is_bony(void);
+  int is_corpse_with_bones(void);
   int is_boots(void);
   int is_brazier(void);
   int is_breather(void);

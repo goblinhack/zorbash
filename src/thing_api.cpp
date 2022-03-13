@@ -1406,10 +1406,10 @@ int Thing::is_able_to_use_weapons(void)
   return (tp()->is_able_to_use_weapons());
 }
 
-int Thing::is_bony(void)
+int Thing::is_corpse_with_bones(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_bony());
+  return (tp()->is_corpse_with_bones());
 }
 
 int Thing::is_pink_blooded(void)

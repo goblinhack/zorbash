@@ -118,7 +118,7 @@ def tp_init(name, text_name):
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_miss_do(self, "me.on_you_miss_do()")
     my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
-    my.rarity(self, my.RARITY_COMMON)
+    my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina(self, 100)
     my.stat_con(self, 12)
     my.stat_def(self, 14)

@@ -166,7 +166,7 @@ PyObject *thing_is_biome_swamp(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bleeder(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bloodied(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bones(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_bony(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_corpse_with_bones(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_boots(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_brazier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_breather(PyObject *obj, PyObject *args, PyObject *keywds);

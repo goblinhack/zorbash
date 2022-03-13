@@ -273,6 +273,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       if (it == this) {
         continue;
       }
+
       if (! it->is_alive_monst()) {
         continue;
       }
@@ -283,14 +284,16 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         continue;
       }
 
-      if (! d20roll(stat_str(), it->stat_str_total())) {
-        if (is_player()) {
-          msg("You are held in place and cannot move!");
+      if (is_engulfer() || is_heavy()) {
+        if (! d20roll(stat_str(), it->stat_str_total())) {
+          if (is_player()) {
+            msg("You are held in place and cannot move!");
+          }
+          dbg("You are held in place");
+          stuck("stuck in place");
+          wobble(25);
+          return false;
         }
-        dbg("You are held in place");
-        stuck("stuck in place");
-        wobble(25);
-        return false;
       }
     }
     FOR_ALL_THINGS_END()
