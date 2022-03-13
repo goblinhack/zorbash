@@ -383,7 +383,7 @@ Tpp tp_random_monst(void)
 
 Tpp tp_random_monst_class_a(void)
 {
-#if 0
+#if 1
   return tp_find("snake_dreadfire");
 #endif
   TRACE_NO_INDENT();
