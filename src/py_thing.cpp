@@ -182,6 +182,11 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto what      = std::string(item);
   auto fire_what = tp_find(what);
+  if (! fire_what) {
+    ERR("%s: Cannot find item to fire %s", __FUNCTION__, item);
+    Py_RETURN_NONE;
+  }
+
   if (fire_what->is_projectile()) {
     if (owner->projectile_fire_at(nullptr /* wand */, std::string(item), target)) {
       Py_RETURN_TRUE;
