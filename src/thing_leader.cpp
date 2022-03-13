@@ -4,6 +4,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_thing.hpp"
@@ -201,6 +202,15 @@ void Thing::leader_set(Thingp l)
   } else {
     leader_id_set(NoThingId);
     dbg("Leader unset");
+  }
+
+  //
+  // If the leader is awake, so are we
+  //
+  if (l->is_sleeping) {
+    wake();
+  } else {
+    sleep();
   }
 }
 

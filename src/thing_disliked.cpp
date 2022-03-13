@@ -22,6 +22,12 @@ bool Thing::is_disliked_by_me(const point p)
     }
   }
 
+  if (level->is_cold(p)) {
+    if (environ_avoids_cold()) {
+      return true;
+    }
+  }
+
   if (! is_floating() && ! is_flying()) {
     if (level->is_chasm(p)) {
       return true;
@@ -67,6 +73,12 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
 
   if (level->is_acid(p)) {
     if (environ_avoids_acid()) {
+      return true;
+    }
+  }
+
+  if (level->is_cold(p)) {
+    if (environ_avoids_cold()) {
       return true;
     }
   }

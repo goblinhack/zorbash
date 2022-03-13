@@ -343,8 +343,8 @@ public:
   bool buffbox_id_remove(Thingp what);
   bool buff_find(const std::string &);
   bool buff_find_is_aquatic(void);
-  bool buff_find_is_slippery(void);
   bool buff_find_is_fire_proof(void);
+  bool buff_find_is_slippery(void);
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
   bool buff_use(Thingp it);
@@ -908,6 +908,7 @@ public:
   int enchantstone_count(void);
   int environ_avoids_acid(void);
   int environ_avoids_fire(void);
+  int environ_avoids_cold(void);
   int environ_avoids_necrosis(void);
   int environ_avoids_poison(void);
   int environ_avoids_water(void);
@@ -1910,6 +1911,7 @@ public:
   void animate(void);
   void avoid_tick(void);
   void awake(void);
+  void sleep(void);
   void barrel_tick(void);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);

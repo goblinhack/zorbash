@@ -146,6 +146,7 @@ private:
   int _enchant_max {};
   int _environ_avoids_acid {};
   int _environ_avoids_fire {};
+  int _environ_avoids_cold {};
   int _environ_avoids_necrosis {};
   int _environ_avoids_poison {};
   int _environ_avoids_water {};
@@ -1048,6 +1049,7 @@ public:
   int enchant_max(void) const { return _enchant_max; }
   int environ_avoids_acid(void) const { return _environ_avoids_acid; }
   int environ_avoids_fire(void) const { return _environ_avoids_fire; }
+  int environ_avoids_cold(void) const { return _environ_avoids_cold; }
   int environ_avoids_necrosis(void) const { return _environ_avoids_necrosis; }
   int environ_avoids_poison(void) const { return _environ_avoids_poison; }
   int environ_avoids_water(void) const { return _environ_avoids_water; }
@@ -1598,6 +1600,7 @@ public:
   void enchant_max_set(int v) { _enchant_max = v; }
   void environ_avoids_acid_set(int v) { _environ_avoids_acid = v; }
   void environ_avoids_fire_set(int v) { _environ_avoids_fire = v; }
+  void environ_avoids_cold_set(int v) { _environ_avoids_cold = v; }
   void environ_avoids_necrosis_set(int v) { _environ_avoids_necrosis = v; }
   void environ_avoids_poison_set(int v) { _environ_avoids_poison = v; }
   void environ_avoids_water_set(int v) { _environ_avoids_water = v; }

@@ -26,6 +26,12 @@ bool Thing::is_hated_by_me(const point p)
     }
   }
 
+  if (level->is_cold(p)) {
+    if (environ_avoids_cold()) {
+      return true;
+    }
+  }
+
   if (! is_floating() && ! is_flying() && ! is_able_to_jump()) {
     if (level->is_chasm(p)) {
       return true;
@@ -54,6 +60,12 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
 
   if (level->is_acid(p)) {
     if (environ_avoids_acid()) {
+      return true;
+    }
+  }
+
+  if (level->is_cold(p)) {
+    if (environ_avoids_cold()) {
       return true;
     }
   }
@@ -89,6 +101,12 @@ bool Thing::is_hated_by_me(const Thingp itp)
 
   if (me->environ_avoids_acid()) {
     if (it->is_acid()) {
+      return true;
+    }
+  }
+
+  if (me->environ_avoids_cold()) {
+    if (it->is_cold()) {
       return true;
     }
   }

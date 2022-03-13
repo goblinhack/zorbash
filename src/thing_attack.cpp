@@ -79,6 +79,13 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
+  if (victim->is_cold()) {
+    if (environ_avoids_cold()) {
+      dbg("Cannot attack %s, it is cold", victim->to_string().c_str());
+      return false;
+    }
+  }
+
   //
   // Fire attacks via tick so it can get you when you fall or jump into it.
   //
