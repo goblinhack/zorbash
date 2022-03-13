@@ -1,12 +1,12 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- mummy necro attacks minions                                                                                                                  -->
-<!-- mummy necro does not fire                                                                                                                    -->
-<!-- mummy minion follow                                                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - teletoad                                                                                                                                   -->
+<!-- - teleport effect                                                                                                                           -->
+<!-- - bloat                                                                                                                                      -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - boots of shoving / steadfastness                                                                                                           -->
 <!-- - boots of jumping                                                                                                                           -->
