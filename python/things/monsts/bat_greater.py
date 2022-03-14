@@ -96,12 +96,12 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
     delay = 70
-    my.tile(self, tile=name + ".1", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".5", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".6", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self, tile=name + ".1", delay_ms=delay)
+    my.tile(self, tile=name + ".2", delay_ms=delay)
+    my.tile(self, tile=name + ".3", delay_ms=delay)
+    my.tile(self, tile=name + ".4", delay_ms=delay)
+    my.tile(self, tile=name + ".5", delay_ms=delay)
+    my.tile(self, tile=name + ".6", delay_ms=delay)
 
     my.tile(self, tile=name + ".dead.1", is_dead=True, delay_ms=delay)
     my.tile(self, tile=name + ".dead.2", is_dead=True, delay_ms=delay)
