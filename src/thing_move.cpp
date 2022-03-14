@@ -201,6 +201,13 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   }
 
   //
+  // We need to update the minimap even if they player just waits
+  //
+  if (is_player()) {
+    game->request_update_same_level = true;
+  }
+
+  //
   // Don't let minions wander too far from their mob.
   //
   auto ai  = maybe_aip();
