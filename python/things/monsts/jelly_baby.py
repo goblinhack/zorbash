@@ -110,22 +110,10 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 200
-    my.tile(self, tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.100", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.100", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.100", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.100", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.100", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.100", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.100", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.100", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.100", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.100", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.100", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.100", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self, tile=name + ".1", delay_ms=delay)
+    my.tile(self, tile=name + ".2", delay_ms=delay)
+    my.tile(self, tile=name + ".3", delay_ms=delay)
+    my.tile(self, tile=name + ".4", delay_ms=delay)
 
     my.tp_update(self)
 
