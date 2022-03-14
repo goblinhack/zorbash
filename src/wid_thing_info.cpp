@@ -17,7 +17,6 @@ void wid_thing_info_fini(void)
 {
   TRACE_AND_INDENT();
   DBG("Destroy wid thing info");
-  // backtrace_dump();
   TRACE_AND_INDENT();
 
   game->wid_thing_info_clear_popup();
