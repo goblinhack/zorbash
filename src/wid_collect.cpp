@@ -489,3 +489,4 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   wid_update(wid_collect->wid_text_area->wid_text_area);
   wid_actionbar_init();
 }
+// backtrace_dump();

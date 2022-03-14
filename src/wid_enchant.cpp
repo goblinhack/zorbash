@@ -287,13 +287,19 @@ void Game::wid_enchant_an_item(void)
   point br    = make_point(m + 35, tl.y + 25);
   auto  width = br.x - tl.x;
 
-  wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "", false, true, enchant_items.size() * 3);
+  auto sz = enchant_items.size();
+  if (! sz) {
+    sz = 1;
+  }
+  wid_enchant = new WidPopup("Enchant", tl, br, nullptr, "", false, true, sz * 3);
 
   wid_set_on_key_up(wid_enchant->wid_popup_container, wid_enchant_key_up);
   wid_set_on_key_down(wid_enchant->wid_popup_container, wid_enchant_key_down);
 
-  if (enchant_items.size() == 1) {
-    wid_enchant->log("Want to enchant this?");
+  if (! enchant_items.size()) {
+    wid_enchant->log("You have nothing to enchant");
+  } else if (sz == 1) {
+    wid_enchant->log("Enchant this item?");
   } else {
     wid_enchant->log("Choose something to enchant");
   }
