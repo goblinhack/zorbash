@@ -312,6 +312,7 @@ std::initializer_list< std::string > tps = {
     "sword_wood",
     "sword_wood_carry",
     "sword_wood_swing",
+    "teletoad",
     "tentacleye",
     "the_grid",
     "thunderstone",
