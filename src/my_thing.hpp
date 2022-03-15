@@ -131,7 +131,6 @@ public:
   uint64_t is_in_water                                  : 1 {};
   uint64_t is_jumping                                   : 1 {};
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
-  uint64_t is_waiting                                   : 1 {}; // is waiting on this tick
   uint64_t is_offscreen                                 : 1 {};
   uint64_t is_open                                      : 1 {};
   uint64_t is_resurrected                               : 1 {}; // has finished resurrecting
@@ -145,6 +144,7 @@ public:
   uint64_t is_starving                                  : 1 {};
   uint64_t is_the_grid                                  : 1 {}; // is the backbone of the level
   uint64_t is_the_player                                : 1 {};
+  uint64_t is_waiting                                   : 1 {}; // is waiting on this tick
   uint64_t is_waiting_to_ascend_dungeon                 : 1 {};
   uint64_t is_waiting_to_ascend_sewer                   : 1 {};
   uint64_t is_waiting_to_descend_dungeon                : 1 {};
@@ -177,7 +177,6 @@ public:
   uint64_t i_set_is_foilage                       : 1 {};
   uint64_t i_set_is_food                          : 1 {};
   uint64_t i_set_is_gas_blocker                   : 1 {};
-  uint64_t i_noise_set_blocker                    : 1 {};
   uint64_t i_set_is_gold                          : 1 {};
   uint64_t i_set_is_green_blood                   : 1 {};
   uint64_t i_set_is_hazard                        : 1 {};
@@ -204,12 +203,13 @@ public:
   uint64_t i_set_is_skillstone                    : 1 {};
   uint64_t i_set_is_smoke                         : 1 {};
   uint64_t i_set_is_spiderweb                     : 1 {};
+  uint64_t i_set_is_staff                         : 1 {};
   uint64_t i_set_is_sticky                        : 1 {};
   uint64_t i_set_is_treasure_type                 : 1 {};
   uint64_t i_set_is_wall                          : 1 {};
   uint64_t i_set_is_wand                          : 1 {};
-  uint64_t i_set_is_staff                         : 1 {};
   uint64_t i_set_is_wet_grass                     : 1 {};
+  uint64_t i_set_noise_blocker                    : 1 {};
   uint64_t i_set_water                            : 1 {};
 
   /////////////////////////////////////////////////////////////////////////
@@ -286,17 +286,17 @@ public:
   Thingp immediate_mob(void);
   Thingp immediate_owner(void);
   Thingp immediate_spawned_owner(void);
+  Thingp in_the_way(const point s, const point e, int x, int y);
   Thingp leader(void);
   Thingp most_dangerous_adjacent_thing(void);
   Thingp most_dangerous_visible_thing(void);
+  Thingp projectile_fire_at(Thingp wand, const std::string &item, point at);
+  Thingp projectile_fire_at(Thingp wand, const std::string &item, Thingp target);
+  Thingp spawn_at(const std::string &what);
+  Thingp spawn_at_if_possible(const std::string &what);
   Thingp top_mob(void);
   Thingp top_owner(void);
   Thingp top_spawned_owner(void);
-  Thingp in_the_way(const point s, const point e, int x, int y);
-  Thingp projectile_fire_at(Thingp wand, const std::string &item, Thingp target);
-  Thingp projectile_fire_at(Thingp wand, const std::string &item, point at);
-  Thingp spawn_at(const std::string &what);
-  Thingp spawn_at_if_possible(const std::string &what);
 
   std::vector< Thingp > in_the_way(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_(const point s, const point e, int x0_in, int y0_in, int x1_in, int y1_in,
@@ -491,6 +491,7 @@ public:
   bool state_using_skillstone(void);
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
+  bool teleport_attack(Thingp it = nullptr);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
   bool throw_item_choose_target(Thingp item);
@@ -501,6 +502,7 @@ public:
   bool too_far_from_mob(point p, float delta);
   bool too_far_from_mob(void);
   bool try_harder_to_jump(void);
+  bool try_harder_to_teleport(void);
   bool try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp it);
   bool try_to_carry(Thingp w);
   bool try_to_enchant_items(void);
@@ -513,6 +515,14 @@ public:
   bool try_to_jump(point to, bool carefully, bool *too_far);
   bool try_to_jump_towards_player(void);
   bool try_to_jump(void);
+  bool try_to_teleport_away_from_player(void);
+  bool try_to_teleport_carefree(point to);
+  bool try_to_teleport_carefree(point to, bool *too_far);
+  bool try_to_teleport_carefully(point to);
+  bool try_to_teleport_carefully(point to, bool *too_far);
+  bool try_to_teleport(point to, bool carefully, bool *too_far);
+  bool try_to_teleport_towards_player(void);
+  bool try_to_teleport(void);
   bool try_to_use_amulet(void);
   bool try_to_use_armor(void);
   bool try_to_use_boots(void);
@@ -669,6 +679,7 @@ public:
   const std::string &on_resting_do(void);
   const std::string &on_stuck_do(void);
   const std::string &on_swing_do(void);
+  const std::string &on_teleport_do(void);
   const std::string &on_tick_do(void);
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
@@ -729,6 +740,8 @@ public:
   float wobble_curr(void);
   float how_far_i_can_jump_max(void);
   float how_far_i_can_jump(void);
+  float how_far_i_can_teleport_max(void);
+  float how_far_i_can_teleport(void);
   float update_wobble(void);
 
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool natural_attack, bool poison, bool necrosis,
@@ -884,6 +897,7 @@ public:
   int distance_leader_max(void);
   int distance_minion_vision_shared(void);
   int distance_recruitment_max(void);
+  int distance_teleport(void);
   int distance_throw_decr(int);
   int distance_throw_decr(void);
   int distance_throw_incr(int);
@@ -907,8 +921,8 @@ public:
   int enchant_set(int);
   int enchantstone_count(void);
   int environ_avoids_acid(void);
-  int environ_avoids_fire(void);
   int environ_avoids_cold(void);
+  int environ_avoids_fire(void);
   int environ_avoids_necrosis(void);
   int environ_avoids_poison(void);
   int environ_avoids_water(void);
@@ -1003,6 +1017,10 @@ public:
   int is_able_to_see_through_doors(void);
   int is_able_to_shove(void);
   int is_able_to_sleep(void);
+  int is_able_to_teleport_attack_chance_d1000(void);
+  int is_able_to_teleport_attack(void);
+  int is_able_to_teleport_escape(void);
+  int is_able_to_teleport_without_tiring(void);
   int is_able_to_tire(void);
   int is_able_to_use_amulet(void);
   int is_able_to_use_armor(void);
@@ -1054,7 +1072,6 @@ public:
   int is_biome_swamp(void);
   int is_bleeder(void);
   int is_bones(void);
-  int is_corpse_with_bones(void);
   int is_boots(void);
   int is_brazier(void);
   int is_breather(void);
@@ -1076,6 +1093,7 @@ public:
   int is_combustible(void);
   int is_corpse_on_death(void);
   int is_corpse(void);
+  int is_corpse_with_bones(void);
   int is_corridor(void);
   int is_critical_to_level(void);
   int is_crushable(void);
@@ -1189,6 +1207,7 @@ public:
   int is_obs_wall_or_door(void);
   int is_openable(void);
   int is_organic(void);
+  int is_pack(void);
   int is_pillar(void);
   int is_pink_blood_eater(void);
   int is_pink_blooded(void);
@@ -1606,14 +1625,8 @@ public:
   int unused_flag115(void);
   int unused_flag116(void);
   int unused_flag117(void);
-  int unused_flag118(void);
-  int unused_flag119(void);
   int unused_flag11(void);
-  int unused_flag120(void);
-  int unused_flag121(void);
-  int is_able_to_teleport_escape(void);
   int unused_flag123(void);
-  int is_pack(void);
   int unused_flag12(void);
   int unused_flag13(void);
   int unused_flag14(void);
@@ -1911,7 +1924,6 @@ public:
   void animate(void);
   void avoid_tick(void);
   void awake(void);
-  void sleep(void);
   void barrel_tick(void);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
@@ -2027,10 +2039,10 @@ public:
   void leader_set(Thingp leader);
   void level_change(Levelp);
   void level_enter(bool rejoin = false);
-  void level_rejoin(void);
   void level_leave(void);
   void level_pop(void);
   void level_push(void);
+  void level_rejoin(void);
   void lifespan_tick(void);
   void light_dist_including_torch_effect_get(uint8_t &light_dist);
   void light_dist_update_including_torch_effect(uint8_t &light_dist);
@@ -2084,6 +2096,7 @@ public:
   void on_resting(void);
   void on_stuck(void);
   void on_swing(Thingp what);
+  void on_teleport(void);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
@@ -2123,12 +2136,14 @@ public:
   void skill_activate(Thingp what);
   void skill_deactivate(Thingp what);
   void skill_remove_all(void);
+  void sleep(void);
   void solid_rock_tick(void);
   void spawned_owner_set(Thingp spawner_owner);
   void stamina_boost(int v);
   void stats_tick(void);
   void stuck(const std::string &why);
   void submerged_offset_set(int);
+  void teleport_end(void);
   void temperature_tick(void);
   void throw_at(Thingp w, Thingp target);
   void tick(void);

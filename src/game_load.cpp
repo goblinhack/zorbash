@@ -427,7 +427,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->i_set_is_foilage = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_food = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_gas_blocker = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->i_noise_set_blocker = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->i_set_noise_blocker = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_gold = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_green_blood = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_hazard = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

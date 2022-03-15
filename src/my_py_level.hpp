@@ -349,11 +349,11 @@ PyObject *level_unused_flag114_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag115_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag116_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag117_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag118_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag119_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_teleport_attack_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_distance_teleport_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag11_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag120_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag121_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_teleport_attack_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_teleport_without_tiring_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_teleport_escape_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag123_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_pack_at(PyObject *obj, PyObject *args, PyObject *keywds);
