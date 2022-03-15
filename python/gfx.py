@@ -11872,7 +11872,7 @@ def init_claws_tiles():
 
 
 @timeme
-def init_explosions():
+def init_explosion_major_tiles():
     tiles = [
         "explosion_major.1",
         "explosion_major.2",
@@ -11894,6 +11894,80 @@ def init_explosions():
 
     my.tile_load_arr_sprites(
         file="data/gfx/explosion.tga", name="explosion", width=32, height=64, arr=tiles
+    )
+
+
+@timeme
+def init_teleport_tiles():
+    tiles = [
+        "teleport.1",
+        "teleport.2",
+        "teleport.3",
+        "teleport.4",
+        "teleport.5",
+        "teleport.6",
+        "teleport.7",
+        "teleport.8",
+        "teleport.9",
+        "teleport.10",
+        "teleport.11",
+        "teleport.12",
+        "teleport.13",
+        "teleport.14",
+        "teleport.15",
+        "teleport.16",
+        "teleport.17",
+        "teleport.18",
+        "teleport.19",
+        "teleport.20",
+        "teleport.21",
+        "teleport.22",
+        "teleport.23",
+        "teleport.24",
+        "teleport.25",
+        "teleport.26",
+        "teleport.27",
+        "teleport.28",
+        "teleport.29",
+        "teleport.30",
+        "teleport.31",
+        "teleport.32",
+        "teleport.33",
+        "teleport.34",
+        "teleport.35",
+        "teleport.36",
+        "teleport.37",
+        "teleport.38",
+        "teleport.39",
+        "teleport.40",
+        "teleport.41",
+        "teleport.42",
+        "teleport.43",
+        "teleport.44",
+        "teleport.45",
+        "teleport.46",
+        "teleport.47",
+        "teleport.48",
+        "teleport.49",
+        "teleport.50",
+        "teleport.51",
+        "teleport.52",
+        "teleport.53",
+        "teleport.54",
+        "teleport.55",
+        "teleport.56",
+        "teleport.57",
+        "teleport.58",
+        "teleport.59",
+        "teleport.60",
+        "teleport.61",
+        "teleport.62",
+        "teleport.63",
+        "teleport.64",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/teleport.tga", name="teleport", width=32, height=32, arr=tiles
     )
 
 
@@ -13115,17 +13189,20 @@ def init_progress_bar():
 
 init_chasm()
 init_claws_tiles()
-init_explosions()
 init_effect_descent_tiles()
+init_explosion_major_tiles()
+init_grid_bg()
 init_laser_energy_tiles()
 init_laser_lightning_fork_tiles()
 init_laser_lightning_tiles()
 init_light()
-init_projectile_fire_tiles()
+init_map_treasure()
+init_progress_bar()
 init_projectile_cold_tiles()
+init_projectile_fire_tiles()
 init_projectile_web_tiles()
 init_solid()
-init_map_treasure()
+init_teleport_tiles()
 init_tiles_16x16()
 init_tiles_24x24()
 init_tiles_32x32()
@@ -13134,7 +13211,6 @@ init_tiles_32x32_lava()
 init_tiles_32x32_sewer_water()
 init_tiles_32x32_surface_effects()
 init_tiles_32x32_water()
-init_grid_bg()
 init_title_bg()
 init_title_fg1()
 init_title_fg2()
@@ -13151,4 +13227,3 @@ init_ui_rightbar()
 init_ui_tabs()
 init_ui_tile_bg()
 init_weapons_tiles()
-init_progress_bar()
