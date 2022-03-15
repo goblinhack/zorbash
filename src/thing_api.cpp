@@ -2138,28 +2138,28 @@ int Thing::unused_flag117(void)
   return (tp()->unused_flag117());
 }
 
-int Thing::unused_flag118(void)
+int Thing::is_able_to_teleport_attack_chance_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag118());
+  return (tp()->is_able_to_teleport_attack_chance_d1000());
 }
 
-int Thing::unused_flag119(void)
+int Thing::distance_teleport(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag119());
+  return (tp()->distance_teleport());
 }
 
-int Thing::unused_flag120(void)
+int Thing::is_able_to_teleport_attack(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag120());
+  return (tp()->is_able_to_teleport_attack());
 }
 
-int Thing::unused_flag121(void)
+int Thing::is_able_to_teleport_without_tiring(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag121());
+  return (tp()->is_able_to_teleport_without_tiring());
 }
 
 int Thing::is_able_to_teleport_escape(void)

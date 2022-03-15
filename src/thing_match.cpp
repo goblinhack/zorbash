@@ -1020,16 +1020,19 @@ bool Thing::matches(const std::string &what)
   if (unused_flag117() && (what == "unused_flag117")) {
     return true;
   }
-  if (unused_flag118() && (what == "unused_flag118")) {
+  if (is_able_to_jump_attack_chance_d1000() && (what == "is_able_to_jump_attack_chance_d1000")) {
     return true;
   }
-  if (unused_flag119() && (what == "unused_flag119")) {
+  if (is_able_to_teleport_attack_chance_d1000() && (what == "is_able_to_teleport_attack_chance_d1000")) {
     return true;
   }
-  if (unused_flag120() && (what == "unused_flag120")) {
+  if (distance_teleport() && (what == "distance_teleport")) {
     return true;
   }
-  if (unused_flag121() && (what == "unused_flag121")) {
+  if (is_able_to_teleport_attack() && (what == "is_able_to_teleport_attack")) {
+    return true;
+  }
+  if (is_able_to_teleport_without_tiring() && (what == "is_able_to_teleport_without_tiring")) {
     return true;
   }
   if (is_able_to_teleport_escape() && (what == "is_able_to_teleport_escape")) {
@@ -2275,20 +2278,23 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag117") {
     return &Thing::unused_flag117;
   }
-  if (what == "unused_flag118") {
-    return &Thing::unused_flag118;
+  if (what == "is_able_to_jump_attack_chance_d1000") {
+    return &Thing::is_able_to_jump_attack_chance_d1000;
   }
-  if (what == "unused_flag119") {
-    return &Thing::unused_flag119;
+  if (what == "is_able_to_teleport_attack_chance_d1000") {
+    return &Thing::is_able_to_teleport_attack_chance_d1000;
+  }
+  if (what == "distance_teleport") {
+    return &Thing::distance_teleport;
   }
   if (what == "unused_flag11") {
     return &Thing::unused_flag11;
   }
-  if (what == "unused_flag120") {
-    return &Thing::unused_flag120;
+  if (what == "is_able_to_teleport_attack") {
+    return &Thing::is_able_to_teleport_attack;
   }
-  if (what == "unused_flag121") {
-    return &Thing::unused_flag121;
+  if (what == "is_able_to_teleport_without_tiring") {
+    return &Thing::is_able_to_teleport_without_tiring;
   }
   if (what == "is_able_to_teleport_escape") {
     return &Thing::is_able_to_teleport_escape;

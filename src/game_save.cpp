@@ -372,7 +372,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_foilage ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_food ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gas_blocker ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_noise_set_blocker ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_noise_blocker ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gold ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_green_blood ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_hazard ? 1LLU : 0LLU) << shift; shift++;

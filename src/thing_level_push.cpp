@@ -176,7 +176,7 @@ void Thing::level_push(void)
     level->is_gas_blocker_set(mx, my);
   }
   if (noise_blocker() && ! is_open && ! is_dead) {
-    i_noise_set_blocker = true;
+    i_set_noise_blocker = true;
     level->noise_blocker_set(mx, my);
   }
   if (is_monst()) {

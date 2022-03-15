@@ -58,6 +58,13 @@ bool Thing::ai_escape(void)
     }
   }
 
+  if (is_able_to_teleport_escape()) {
+    if (try_to_teleport()) {
+      dbg("AI escape teleport");
+      return false;
+    }
+  }
+
   if (ai_blocked_completely()) {
     if (is_able_to_jump()) {
       if (try_to_jump()) {

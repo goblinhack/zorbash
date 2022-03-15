@@ -140,13 +140,14 @@ private:
   int _distance_minion_vision_shared {};
   int _distance_mob_max {};
   int _distance_recruitment_max {};
+  int _distance_teleport {};
   int _distance_throw {};
   int _distance_vision {};
   int _enchant_level {};
   int _enchant_max {};
   int _environ_avoids_acid {};
-  int _environ_avoids_fire {};
   int _environ_avoids_cold {};
+  int _environ_avoids_fire {};
   int _environ_avoids_necrosis {};
   int _environ_avoids_poison {};
   int _environ_avoids_water {};
@@ -206,6 +207,10 @@ private:
   int _is_able_to_see_through_doors {};
   int _is_able_to_shove {};
   int _is_able_to_sleep {};
+  int _is_able_to_teleport_attack {};
+  int _is_able_to_teleport_attack_chance_d1000 {};
+  int _is_able_to_teleport_escape {};
+  int _is_able_to_teleport_without_tiring {};
   int _is_able_to_tire {};
   int _is_able_to_use_amulet {};
   int _is_able_to_use_armor {};
@@ -242,7 +247,6 @@ private:
   int _is_biome_swamp {};
   int _is_bleeder {};
   int _is_bones {};
-  int _is_corpse_with_bones {};
   int _is_boots {};
   int _is_brazier {};
   int _is_breather {};
@@ -263,6 +267,7 @@ private:
   int _is_collected_as_gold {};
   int _is_combustible {};
   int _is_corpse_on_death {};
+  int _is_corpse_with_bones {};
   int _is_corridor {};
   int _is_critical_to_level {};
   int _is_crushable {};
@@ -374,6 +379,8 @@ private:
   int _is_obs_wall_or_door {};
   int _is_openable {};
   int _is_organic {};
+  int _is_pack {};
+  int _is_pillar {};
   int _is_pink_blood {};
   int _is_pink_blood_eater {};
   int _is_pink_blooded {};
@@ -525,15 +532,8 @@ private:
   int _unused_flag115 {};
   int _unused_flag116 {};
   int _unused_flag117 {};
-  int _unused_flag118 {};
-  int _unused_flag119 {};
   int _unused_flag12 {};
-  int _unused_flag120 {};
-  int _unused_flag121 {};
-  int _is_able_to_teleport_escape {};
   int _unused_flag123 {};
-  int _is_pack {};
-  int _is_pillar {};
   int _unused_flag13 {};
   int _unused_flag14 {};
   int _unused_flag15 {};
@@ -711,12 +711,13 @@ private:
   std::string _on_owner_remove_do;
   std::string _on_polymorphed_do;
   std::string _on_resting_do;
-  std::string _on_waiting_do;
   std::string _on_stuck_do;
   std::string _on_swing_do;
+  std::string _on_teleport_do;
   std::string _on_tick_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
+  std::string _on_waiting_do;
   std::string _on_you_are_declared_a_follower_do;
   std::string _on_you_are_declared_leader_do;
   std::string _on_you_are_hit_and_now_dead_do;
@@ -924,6 +925,7 @@ public:
   const std::string &on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
   const std::string &on_idle_tick_freq_dice_str(void) const;
   const std::string &on_jump_do(void) const { return _on_jump_do; }
+  const std::string &on_teleport_do(void) const { return _on_teleport_do; }
   const std::string &on_lifespan_tick_do(void) const { return _on_lifespan_tick_do; }
   const std::string &on_move_do(void) const { return _on_move_do; }
   const std::string &on_open_do(void) const { return _on_open_do; }
@@ -1043,13 +1045,14 @@ public:
   int distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
   int distance_mob_max(void) const { return _distance_mob_max; }
   int distance_recruitment_max(void) const { return _distance_recruitment_max; }
+  int distance_teleport(void) const { return _distance_teleport; }
   int distance_throw(void) const { return _distance_throw; }
   int distance_vision(void) const { return _distance_vision; }
   int enchant_level(void) const { return _enchant_level; }
   int enchant_max(void) const { return _enchant_max; }
   int environ_avoids_acid(void) const { return _environ_avoids_acid; }
-  int environ_avoids_fire(void) const { return _environ_avoids_fire; }
   int environ_avoids_cold(void) const { return _environ_avoids_cold; }
+  int environ_avoids_fire(void) const { return _environ_avoids_fire; }
   int environ_avoids_necrosis(void) const { return _environ_avoids_necrosis; }
   int environ_avoids_poison(void) const { return _environ_avoids_poison; }
   int environ_avoids_water(void) const { return _environ_avoids_water; }
@@ -1110,6 +1113,10 @@ public:
   int is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
   int is_able_to_shove(void) const { return _is_able_to_shove; }
   int is_able_to_sleep(void) const { return _is_able_to_sleep; }
+  int is_able_to_teleport_attack_chance_d1000(void) const { return _is_able_to_teleport_attack_chance_d1000; }
+  int is_able_to_teleport_attack(void) const { return _is_able_to_teleport_attack; }
+  int is_able_to_teleport_escape(void) const { return _is_able_to_teleport_escape; }
+  int is_able_to_teleport_without_tiring(void) const { return _is_able_to_teleport_without_tiring; }
   int is_able_to_tire(void) const { return _is_able_to_tire; }
   int is_able_to_use_amulet(void) const { return _is_able_to_use_amulet; }
   int is_able_to_use_armor(void) const { return _is_able_to_use_armor; }
@@ -1146,7 +1153,6 @@ public:
   int is_biome_swamp(void) const { return _is_biome_swamp; }
   int is_bleeder(void) const { return _is_bleeder; }
   int is_bones(void) const { return _is_bones; }
-  int is_corpse_with_bones(void) const { return _is_corpse_with_bones; }
   int is_boots(void) const { return _is_boots; }
   int is_brazier(void) const { return _is_brazier; }
   int is_breather(void) const { return _is_breather; }
@@ -1167,6 +1173,7 @@ public:
   int is_collected_as_gold(void) const { return _is_collected_as_gold; }
   int is_combustible(void) const { return _is_combustible; }
   int is_corpse_on_death(void) const { return _is_corpse_on_death; }
+  int is_corpse_with_bones(void) const { return _is_corpse_with_bones; }
   int is_corridor(void) const { return _is_corridor; }
   int is_critical_to_level(void) const { return _is_critical_to_level; }
   int is_crushable(void) const { return _is_crushable; }
@@ -1277,6 +1284,8 @@ public:
   int is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
   int is_openable(void) const { return _is_openable; }
   int is_organic(void) const { return _is_organic; }
+  int is_pack(void) const { return _is_pack; }
+  int is_pillar(void) const { return _is_pillar; }
   int is_pink_blood_eater(void) const { return _is_pink_blood_eater; }
   int is_pink_blooded(void) const { return _is_pink_blooded; }
   int is_pink_blood(void) const { return _is_pink_blood; }
@@ -1427,15 +1436,8 @@ public:
   int unused_flag115(void) const { return _unused_flag115; }
   int unused_flag116(void) const { return _unused_flag116; }
   int unused_flag117(void) const { return _unused_flag117; }
-  int unused_flag118(void) const { return _unused_flag118; }
-  int unused_flag119(void) const { return _unused_flag119; }
   int unused_flag11(void) const { return _unused_flag11; }
-  int unused_flag120(void) const { return _unused_flag120; }
-  int unused_flag121(void) const { return _unused_flag121; }
-  int is_able_to_teleport_escape(void) const { return _is_able_to_teleport_escape; }
   int unused_flag123(void) const { return _unused_flag123; }
-  int is_pack(void) const { return _is_pack; }
-  int is_pillar(void) const { return _is_pillar; }
   int unused_flag12(void) const { return _unused_flag12; }
   int unused_flag13(void) const { return _unused_flag13; }
   int unused_flag14(void) const { return _unused_flag14; }
@@ -1594,13 +1596,14 @@ public:
   void distance_minion_vision_shared_set(int v) { _distance_minion_vision_shared = v; }
   void distance_mob_max_set(int v) { _distance_mob_max = v; }
   void distance_recruitment_max_set(int v) { _distance_recruitment_max = v; }
+  void distance_teleport_set(int v) { _distance_teleport = v; }
   void distance_throw_set(int v) { _distance_throw = v; }
   void distance_vision_set(int v) { _distance_vision = v; }
   void enchant_level_set(int v) { _enchant_level = v; }
   void enchant_max_set(int v) { _enchant_max = v; }
   void environ_avoids_acid_set(int v) { _environ_avoids_acid = v; }
-  void environ_avoids_fire_set(int v) { _environ_avoids_fire = v; }
   void environ_avoids_cold_set(int v) { _environ_avoids_cold = v; }
+  void environ_avoids_fire_set(int v) { _environ_avoids_fire = v; }
   void environ_avoids_necrosis_set(int v) { _environ_avoids_necrosis = v; }
   void environ_avoids_poison_set(int v) { _environ_avoids_poison = v; }
   void environ_avoids_water_set(int v) { _environ_avoids_water = v; }
@@ -1662,6 +1665,10 @@ public:
   void is_able_to_see_through_doors_set(int v) { _is_able_to_see_through_doors = v; }
   void is_able_to_shove_set(int v) { _is_able_to_shove = v; }
   void is_able_to_sleep_set(int v) { _is_able_to_sleep = v; }
+  void is_able_to_teleport_attack_chance_d1000_set(int v) { _is_able_to_teleport_attack_chance_d1000 = v; }
+  void is_able_to_teleport_attack_set(int v) { _is_able_to_teleport_attack = v; }
+  void is_able_to_teleport_escape_set(int v) { _is_able_to_teleport_escape = v; }
+  void is_able_to_teleport_without_tiring_set(int v) { _is_able_to_teleport_without_tiring = v; }
   void is_able_to_tire_set(int v) { _is_able_to_tire = v; }
   void is_able_to_use_amulet_set(int v) { _is_able_to_use_amulet = v; }
   void is_able_to_use_armor_set(int v) { _is_able_to_use_armor = v; }
@@ -1699,7 +1706,6 @@ public:
   void is_biome_swamp_set(int v) { _is_biome_swamp = v; }
   void is_bleeder_set(int v) { _is_bleeder = v; }
   void is_bones_set(int v) { _is_bones = v; }
-  void is_corpse_with_bones_set(int v) { _is_corpse_with_bones = v; }
   void is_boots_set(int v) { _is_boots = v; }
   void is_brazier_set(int v) { _is_brazier = v; }
   void is_breather_set(int v) { _is_breather = v; }
@@ -1720,6 +1726,7 @@ public:
   void is_collected_as_gold_set(int v) { _is_collected_as_gold = v; }
   void is_combustible_set(int v) { _is_combustible = v; }
   void is_corpse_on_death_set(int v) { _is_corpse_on_death = v; }
+  void is_corpse_with_bones_set(int v) { _is_corpse_with_bones = v; }
   void is_corridor_set(int v) { _is_corridor = v; }
   void is_critical_to_level_set(int v) { _is_critical_to_level = v; }
   void is_crushable_set(int v) { _is_crushable = v; }
@@ -1830,6 +1837,8 @@ public:
   void is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
   void is_openable_set(int v) { _is_openable = v; }
   void is_organic_set(int v) { _is_organic = v; }
+  void is_pack_set(int v) { _is_pack = v; }
+  void is_pillar_set(int v) { _is_pillar = v; }
   void is_pink_blood_eater_set(int v) { _is_pink_blood_eater = v; }
   void is_pink_blooded_set(int v) { _is_pink_blooded = v; }
   void is_pink_blood_set(int v) { _is_pink_blood = v; }
@@ -1921,9 +1930,6 @@ public:
   void normal_placement_rules_set(int v) { _normal_placement_rules = v; }
   void on_awake_do_set(const std::string &v) { _on_awake_do = v; }
   void on_born_do_set(const std::string &v) { _on_born_do = v; }
-  void on_resting_do_set(const std::string &v) { _on_resting_do = v; }
-  void on_waiting_do_set(const std::string &v) { _on_waiting_do = v; }
-  void on_stuck_do_set(const std::string &v) { _on_stuck_do = v; }
   void on_damage_acid_do_set(const std::string &v) { _on_damage_acid_do = v; }
   void on_damage_cold_do_set(const std::string &v) { _on_damage_cold_do = v; }
   void on_damage_crush_do_set(const std::string &v) { _on_damage_crush_do = v; }
@@ -1975,10 +1981,14 @@ public:
   void on_owner_damage_stat_str_do_set(const std::string &v) { _on_owner_damage_stat_str_do = v; }
   void on_owner_remove_do_set(const std::string &v) { _on_owner_remove_do = v; }
   void on_polymorphed_do_set(const std::string &v) { _on_polymorphed_do = v; }
+  void on_resting_do_set(const std::string &v) { _on_resting_do = v; }
+  void on_stuck_do_set(const std::string &v) { _on_stuck_do = v; }
   void on_swing_do_set(const std::string &v) { _on_swing_do = v; }
+  void on_teleport_do_set(const std::string &v) { _on_teleport_do = v; }
   void on_tick_do_set(const std::string &v) { _on_tick_do = v; }
   void on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }
   void on_use_do_set(const std::string &v) { _on_use_do = v; }
+  void on_waiting_do_set(const std::string &v) { _on_waiting_do = v; }
   void on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
   void on_you_are_declared_leader_do_set(const std::string &v) { _on_you_are_declared_leader_do = v; }
   void on_you_are_hit_and_now_dead_do_set(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }
@@ -2068,15 +2078,8 @@ public:
   void unused_flag115_set(int v) { _unused_flag115 = v; }
   void unused_flag116_set(int v) { _unused_flag116 = v; }
   void unused_flag117_set(int v) { _unused_flag117 = v; }
-  void unused_flag118_set(int v) { _unused_flag118 = v; }
-  void unused_flag119_set(int v) { _unused_flag119 = v; }
   void unused_flag11_set(int v) { _unused_flag11 = v; }
-  void unused_flag120_set(int v) { _unused_flag120 = v; }
-  void unused_flag121_set(int v) { _unused_flag121 = v; }
-  void is_able_to_teleport_escape_set(int v) { _is_able_to_teleport_escape = v; }
   void unused_flag123_set(int v) { _unused_flag123 = v; }
-  void is_pack_set(int v) { _is_pack = v; }
-  void is_pillar_set(int v) { _is_pillar = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }
   void unused_flag13_set(int v) { _unused_flag13 = v; }
   void unused_flag14_set(int v) { _unused_flag14 = v; }

@@ -360,6 +360,15 @@ bool Level::tick(void)
       // t->con("WAIT %d", __LINE__);
     }
 
+    if (t->is_jumping) {
+      if ((wait_count > wait_count_max) && ! game->things_are_moving) {
+        t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
+      }
+      game->things_are_moving = true;
+      t->is_waiting           = true;
+      // t->con("WAIT %d", __LINE__);
+    }
+
     //
     // If falling we need to update the z depth and position; and wait.
     //

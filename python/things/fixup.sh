@@ -423,10 +423,10 @@ do
       unused_flag115_set \
       unused_flag116_set \
       unused_flag117_set \
-      unused_flag118_set \
-      unused_flag119_set \
-      unused_flag120_set \
-      unused_flag121_set \
+      is_able_to_jump_attack_chance_d1000_set \
+      distance_teleport_set \
+      is_able_to_teleport_attack_set \
+      is_able_to_teleport_without_tiring_set \
       is_able_to_teleport_escape_set \
       unused_flag123_set \
       is_pack_set \
