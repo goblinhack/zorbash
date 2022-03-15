@@ -8,6 +8,7 @@ my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_d.wav", name="expl
 my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_e.wav", name="explosion_e")
 my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_a.wav", name="lightning_a")
 my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_b.wav", name="lightning_b")
+my.sound_load(volume=1.0, file="data/sounds/abilities/teleport.wav", name="teleport")
 my.sound_load(
     volume=0.25,
     file="data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav",
@@ -230,7 +231,6 @@ my.sound_load(volume=0.25, file="data/sounds/misc/drop.wav", name="drop")
 # my.sound_load(volume=1.0, file="data/sounds/abilities/fire_c.wav",         name="fire_c")
 # my.sound_load(volume=1.0, file="data/sounds/abilities/special_b.wav",      name="special_b")
 # my.sound_load(volume=1.0, file="data/sounds/abilities/spell_a.wav",        name="spell_a")
-# my.sound_load(volume=1.0, file="data/sounds/abilities/teleport.wav",       name="teleport")
 # my.sound_load(volume=1.0, file="data/sounds/abilities/special_a.wav",      name="special_a")
 # my.sound_load(volume=1.0, file="data/sounds/abilities/spell_b.wav",        name="spell_b")
 # my.sound_load(volume=1.0, file="data/sounds/abilities/shoot_b.wav",        name="shoot_b")
