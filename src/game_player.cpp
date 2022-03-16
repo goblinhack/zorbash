@@ -172,6 +172,7 @@ void Game::place_player(void)
         // level->thing_new("zorb_pack", point(x + 2, y));
         // level->thing_new("mummy_pack", point(x + 2, y + 12));
         // level->thing_new("teleport", point(x + 2, y + 2));
+        level->thing_new("teletoad", point(x + 2, y + 2));
         level->assign_leaders_and_followers();
       }
 
