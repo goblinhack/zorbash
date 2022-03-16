@@ -281,8 +281,8 @@ bool Thing::try_to_teleport(point to, bool be_careful, bool *too_far)
 
   point dest(x, y);
 
-  level->thing_new("teleport", curr_at);
-  level->thing_new("teleport", dest);
+  level->thing_new("teleport_in", curr_at);
+  level->thing_new("teleport_out", dest);
 
   move_to_immediately(dest);
 
@@ -549,13 +549,18 @@ bool Thing::teleport_attack(Thingp maybe_victim)
     }
   }
 
-  if (d1000() < tp()->is_able_to_teleport_attack_chance_d1000()) {
-    dbg("Try to teleport attack");
-    TRACE_AND_INDENT();
+  //
+  // Only teleport if moving move that 1 tile
+  //
+  auto p = aip()->move_path;
+  if (p.size() > 1) {
+    if (d1000() < tp()->is_able_to_teleport_attack_chance_d1000()) {
+      dbg("Try to teleport attack");
+      TRACE_AND_INDENT();
 
-    auto p             = aip()->move_path;
-    auto teleport_dist = pcg_random_range(0, p.size());
-    return try_to_teleport_carefully(get(p, teleport_dist));
+      auto teleport_dist = pcg_random_range(2, p.size());
+      return try_to_teleport_carefully(get(p, teleport_dist));
+    }
   }
 
   point last_at; // Previous hop where we were.
