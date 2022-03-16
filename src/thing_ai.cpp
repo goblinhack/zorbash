@@ -363,6 +363,10 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     } else {
       ai->move_path = new_move_path;
 
+      if (teleport_attack(goal.what)) {
+        return true;
+      }
+
       if (jump_attack(goal.what)) {
         return true;
       }

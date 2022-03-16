@@ -51,16 +51,16 @@ bool Thing::ai_escape(void)
   //
   clear_move_path("AI escape");
 
-  if (is_able_to_jump_escape()) {
-    if (try_to_jump()) {
-      dbg("AI escape jump");
+  if (is_able_to_teleport_escape()) {
+    if (try_to_teleport()) {
+      dbg("AI escape teleport");
       return false;
     }
   }
 
-  if (is_able_to_teleport_escape()) {
-    if (try_to_teleport()) {
-      dbg("AI escape teleport");
+  if (is_able_to_jump_escape()) {
+    if (try_to_jump()) {
+      dbg("AI escape jump");
       return false;
     }
   }

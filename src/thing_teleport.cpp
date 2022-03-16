@@ -279,19 +279,12 @@ bool Thing::try_to_teleport(point to, bool be_careful, bool *too_far)
     }
   }
 
-  auto src = (last_blit_tl + last_blit_br) / 2;
-  auto dx  = x - curr_at.x;
-  auto dy  = y - curr_at.y;
-  auto tw  = TILE_WIDTH;
-  auto th  = TILE_HEIGHT;
-  auto sz  = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
-
-  point dest(src.x + dx * tw, src.y + dy * th);
+  point dest(x, y);
 
   level->thing_new("teleport", curr_at);
   level->thing_new("teleport", dest);
 
-  move_to_immediately(point(x, y));
+  move_to_immediately(dest);
 
   //
   // If something moves on the water, make a ripple
@@ -299,7 +292,6 @@ bool Thing::try_to_teleport(point to, bool be_careful, bool *too_far)
   if (is_monst() || is_player()) {
     if (! is_floating() && ! is_flying()) {
       if (level->is_shallow_water((int) curr_at.x, (int) curr_at.y)) {
-        point at(curr_at.x, curr_at.y);
         dbg("Causes ripples");
         TRACE_AND_INDENT();
         if (game->robot_mode) {
@@ -307,11 +299,11 @@ bool Thing::try_to_teleport(point to, bool be_careful, bool *too_far)
           // Faster
           //
           if (pcg_random_range(0, 1000) > 900) {
-            level->thing_new(tp_random_ripple()->name(), at);
+            level->thing_new(tp_random_ripple()->name(), curr_at);
           }
         } else {
           if (pcg_random_range(0, 1000) > 500) {
-            level->thing_new(tp_random_ripple()->name(), at);
+            level->thing_new(tp_random_ripple()->name(), curr_at);
           }
         }
       }
@@ -528,8 +520,11 @@ bool Thing::teleport_attack(Thingp maybe_victim)
     return false;
   }
 
+  dbg("Teleport attack maybe");
+  TRACE_AND_INDENT();
+
   if (maybe_victim) {
-    if (d1000() > tp()->is_able_to_teleport_attack_chance_d1000()) {
+    if (d1000() < tp()->is_able_to_teleport_attack_chance_d1000()) {
       dbg("Try to teleport in direction of escape attack");
       TRACE_AND_INDENT();
 
@@ -544,7 +539,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
       }
     }
 
-    if (d1000() > tp()->is_able_to_teleport_attack_chance_d1000()) {
+    if (d1000() < tp()->is_able_to_teleport_attack_chance_d1000()) {
       dbg("Try to teleport in front attack");
       TRACE_AND_INDENT();
 
@@ -554,7 +549,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
     }
   }
 
-  if (d1000() > tp()->is_able_to_teleport_attack_chance_d1000()) {
+  if (d1000() < tp()->is_able_to_teleport_attack_chance_d1000()) {
     dbg("Try to teleport attack");
     TRACE_AND_INDENT();
 
