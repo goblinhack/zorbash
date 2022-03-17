@@ -1475,15 +1475,18 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
   AI_LOG("Choose immediately adjacent goals");
   TRACE_AND_INDENT();
 
-  bool left;
-  bool right;
-  bool up;
-  bool down;
-  bool wait           = false;
-  bool jump           = false;
-  bool attack         = false;
-  bool shove_allowed  = false;
-  bool attack_allowed = true;
+  bool left   = false;
+  bool right  = false;
+  bool up     = false;
+  bool down   = false;
+  bool wait   = false;
+  bool jump   = false;
+  bool attack = false;
+
+  AttackOptions attack_options {};
+
+  attack_options.shove_allowed  = false;
+  attack_options.attack_allowed = true;
 
   for (int dx = -1; dx <= 1; dx++) {
     for (int dy = -1; dy <= 1; dy++) {
@@ -1516,18 +1519,23 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
             //
             // Try hitting the door
             //
-            left           = dx < 0;
-            right          = dx > 0;
-            up             = dy < 0;
-            down           = dy > 0;
-            attack         = true;
-            attack_allowed = true;
+            left   = dx < 0;
+            right  = dx > 0;
+            up     = dy < 0;
+            down   = dy > 0;
+            attack = true;
+
+            attack_options.attack_allowed = true;
+            if (up || down || left || right) {
+              attack_options.attack_at     = at;
+              attack_options.attack_at_set = true;
+            }
 
             AI_LOG("Trying to break down a door", it);
             if (is_player()) {
               player_tick(left, right, up, down, attack, wait, jump);
             } else if (is_moveable()) {
-              move(curr_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
+              move(curr_at, up, down, left, right, attack, wait, &attack_options);
             }
             return true;
           }
@@ -1538,18 +1546,23 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
             //
             // Try hitting the web
             //
-            left           = dx < 0;
-            right          = dx > 0;
-            up             = dy < 0;
-            down           = dy > 0;
-            attack         = true;
-            attack_allowed = true;
+            left   = dx < 0;
+            right  = dx > 0;
+            up     = dy < 0;
+            down   = dy > 0;
+            attack = true;
+
+            attack_options.attack_allowed = true;
+            if (up || down || left || right) {
+              attack_options.attack_at     = at;
+              attack_options.attack_at_set = true;
+            }
 
             AI_LOG("Trying to break out of a web", it);
             if (is_player()) {
               player_tick(left, right, up, down, attack, wait, jump);
             } else if (is_moveable()) {
-              move(curr_at, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
+              move(curr_at, up, down, left, right, attack, wait, &attack_options);
             }
             return true;
           }
@@ -2012,7 +2025,8 @@ bool Thing::ai_tick(bool recursing)
     if (is_player()) {
       player_tick(left, right, up, down, attack, wait, jump);
     } else if (is_moveable()) {
-      move(curr_at, up, down, left, right, attack, wait, false, false);
+      AttackOptions attack_options {};
+      move(curr_at, up, down, left, right, attack, wait, &attack_options);
     }
   }
 

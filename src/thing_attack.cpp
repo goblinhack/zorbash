@@ -472,9 +472,11 @@ bool Thing::attack(point future_pos)
   bool idle   = false;
 
   verify(MTYPE_THING, this);
-  bool shove_allowed  = true;
-  bool attack_allowed = true;
-  return (move(future_pos, up, down, left, right, attack, idle, shove_allowed, attack_allowed));
+
+  AttackOptions attack_options {};
+  attack_options.shove_allowed  = true;
+  attack_options.attack_allowed = true;
+  return (move(future_pos, up, down, left, right, attack, idle, &attack_options));
 }
 
 bool Thing::attack(Thingp victim, bool prefer_natural_attack)

@@ -545,13 +545,14 @@ void Thing::equip_remove_anim(int equip)
   equip_id_set(NoThingId.id, equip);
 }
 
-bool Thing::equip_use(bool forced, int equip, point *at)
+bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
 {
   if (is_player()) {
-    if (at) {
-      con("Try to use equipped %s item at %s", equip_name(equip).c_str(), at->to_string().c_str());
+    if (attack_options->attack_at_set) {
+      log("Try to use equipped %s item at %s", equip_name(equip).c_str(),
+          attack_options->attack_at.to_string().c_str());
     } else {
-      con("Try to use equipped item");
+      log("Try to use equipped item");
     }
   }
   TRACE_AND_INDENT();
@@ -586,8 +587,6 @@ bool Thing::equip_use(bool forced, int equip, point *at)
     }
   }
 
-  AttackOptions attack_options = {};
-
   TRACE_NO_INDENT();
   std::string used_as;
   auto        item = equip_get(equip);
@@ -603,7 +602,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
         msg("You attack with bare fists!");
       }
 
-      attack_options.natural_attack = true;
+      attack_options->natural_attack = true;
 
       //
       // Python callback
@@ -629,16 +628,16 @@ bool Thing::equip_use(bool forced, int equip, point *at)
     }
 
     Thingp use_anim;
-    if (at) {
-      use_anim                 = level->thing_new(used_as, *at);
+    if (attack_options->attack_at_set) {
+      use_anim                 = level->thing_new(used_as, attack_options->attack_at);
       use_anim->dir            = dir;
       use_anim->is_facing_left = is_facing_left;
 
       //
       // If not attacking something at a point, then use the direction of the wielder.
       //
-      if (*at == curr_at) {
-        auto p = *at + dir_to_direction();
+      if (attack_options->attack_at == curr_at) {
+        auto p = attack_options->attack_at + dir_to_direction();
         use_anim->move_to(p);
       }
     } else {
@@ -650,7 +649,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
 
   dbg("Find best attack target");
   TRACE_AND_INDENT();
-  bool attacked = victim_attack_best(equip, at, &attack_options);
+  bool attacked = victim_attack_best(equip, attack_options);
   if (! attacked) {
     if (is_player() && forced) {
       //
@@ -673,7 +672,7 @@ bool Thing::equip_use(bool forced, int equip, point *at)
   //
   // Only move items if not, for example, claw attack
   //
-  if (! at) {
+  if (! attack_options->attack_at_set) {
     move_carried_items();
   }
 
@@ -684,14 +683,16 @@ bool Thing::equip_use_may_attack(int equip)
 {
   dbg("Equip use and may attack");
   TRACE_AND_INDENT();
-  return equip_use(false, equip);
+  AttackOptions attack_options {};
+  return equip_use(false, equip, &attack_options);
 }
 
 bool Thing::equip_use_must_attack(int equip)
 {
   dbg("Equip use and must attack");
   TRACE_AND_INDENT();
-  return equip_use(true, equip);
+  AttackOptions attack_options {};
+  return equip_use(true, equip, &attack_options);
 }
 
 std::string equip_name(int equip)

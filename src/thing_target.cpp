@@ -318,10 +318,11 @@ bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point
   return false;
 }
 
-bool Thing::victim_attack_best_at(int equip, point *at, AttackOptions *attack_options)
+bool Thing::victim_attack_best_at(int equip, AttackOptions *attack_options)
 {
-  if (at) {
-    dbg("Target-attack-best-at: Try to attack with equipped item at %s", at->to_string().c_str());
+  if (attack_options->attack_at_set) {
+    dbg("Target-attack-best-at: Try to attack with equipped item at %s",
+        attack_options->attack_at.to_string().c_str());
   } else {
     dbg("Target-attack-best-at: Try to attack with equipped item");
   }
@@ -333,7 +334,7 @@ bool Thing::victim_attack_best_at(int equip, point *at, AttackOptions *attack_op
     auto d = dir_to_direction();
     dx     = d.x;
     dy     = d.y;
-  } else if (at) {
+  } else if (attack_options->attack_at_set) {
     dx = 0;
     dy = 0;
   } else {
@@ -368,8 +369,8 @@ bool Thing::victim_attack_best_at(int equip, point *at, AttackOptions *attack_op
   // If we pressed space then the target is where we are at, so look around
   // for the best thing to hit.
   //
-  if (at) {
-    auto                 delta      = *at - curr_at;
+  if (attack_options->attack_at_set) {
+    auto                 delta      = attack_options->attack_at - curr_at;
     std::vector< point > local_only = {delta};
 
     all_deltas = local_only;
@@ -381,7 +382,7 @@ bool Thing::victim_attack_best_at(int equip, point *at, AttackOptions *attack_op
   //
   // Look in the chosen dir first
   //
-  if (at) {
+  if (attack_options->attack_at_set) {
     if (victim_attack_best_attempt_1(item, curr_at, &best, &best_hit_at, all_deltas, attack_options)) {
       return victim_attack_found_best(equip, item, best, best_hit_at, attack_options);
     }
@@ -468,7 +469,7 @@ bool Thing::victim_attack_best_at(int equip, point *at, AttackOptions *attack_op
   return false;
 }
 
-bool Thing::victim_attack_best_(int equip, point *at, AttackOptions *attack_options)
+bool Thing::victim_attack_best_(int equip, AttackOptions *attack_options)
 {
   int  dx, dy;
   auto item = equip_get(equip);
@@ -490,8 +491,8 @@ bool Thing::victim_attack_best_(int equip, point *at, AttackOptions *attack_opti
   //
   // If we are targetting a wall
   //
-  if (at) {
-    if (level->is_obs_wall_or_door(*at)) {
+  if (attack_options->attack_at_set) {
+    if (level->is_obs_wall_or_door(attack_options->attack_at)) {
       attack_options->allow_hitting_walls = true;
     }
   }
@@ -511,8 +512,12 @@ bool Thing::victim_attack_best_(int equip, point *at, AttackOptions *attack_opti
         point at = curr_at + d;
         dbg("Target-attack-best: Try to attack 360 with equipped item at %s", at.to_string().c_str());
         TRACE_AND_INDENT();
-        attack_options->attempt = attempt;
-        if (victim_attack_best_at(equip, &at, attack_options)) {
+
+        attack_options->attempt       = attempt;
+        attack_options->attack_at_set = true;
+        attack_options->attack_at     = at;
+
+        if (victim_attack_best_at(equip, attack_options)) {
           ret = true;
         }
         if (attack_options->victim_attacked) {
@@ -537,8 +542,12 @@ bool Thing::victim_attack_best_(int equip, point *at, AttackOptions *attack_opti
         point at = curr_at + d;
         dbg("Target-attack-best: Try to attack 180 adj with equipped item at %s", at.to_string().c_str());
         TRACE_AND_INDENT();
-        attack_options->attempt = attempt;
-        if (victim_attack_best_at(equip, &at, attack_options)) {
+
+        attack_options->attempt       = attempt;
+        attack_options->attack_at_set = true;
+        attack_options->attack_at     = at;
+
+        if (victim_attack_best_at(equip, attack_options)) {
           ret = true;
         }
         if (attack_options->victim_attacked) {
@@ -564,8 +573,12 @@ bool Thing::victim_attack_best_(int equip, point *at, AttackOptions *attack_opti
         dbg("Target-attack-best: Try to attack two ahead adj (%d,%d) with equipped item at %s", d.x, d.y,
             at.to_string().c_str());
         TRACE_AND_INDENT();
-        attack_options->attempt = attempt;
-        if (victim_attack_best_at(equip, &at, attack_options)) {
+
+        attack_options->attempt       = attempt;
+        attack_options->attack_at_set = true;
+        attack_options->attack_at     = at;
+
+        if (victim_attack_best_at(equip, attack_options)) {
           ret = true;
         }
         if (attack_options->victim_attacked) {
@@ -622,8 +635,10 @@ bool Thing::victim_attack_best_(int equip, point *at, AttackOptions *attack_opti
         point at = curr_at + d;
         dbg("Target-attack-best: Try to attack 180 adj with equipped item at %s", at.to_string().c_str());
         TRACE_AND_INDENT();
-        attack_options->attempt = attempt;
-        if (victim_attack_best_at(equip, &at, attack_options)) {
+        attack_options->attempt       = attempt;
+        attack_options->attack_at_set = true;
+        attack_options->attack_at     = at;
+        if (victim_attack_best_at(equip, attack_options)) {
           ret = true;
         }
         if (attack_options->victim_attacked) {
@@ -637,17 +652,17 @@ bool Thing::victim_attack_best_(int equip, point *at, AttackOptions *attack_opti
     return ret;
   }
 
-  if (victim_attack_best_at(equip, at, attack_options)) {
+  if (victim_attack_best_at(equip, attack_options)) {
     return true;
   }
 
   return false;
 }
 
-bool Thing::victim_attack_best(int equip, point *at, AttackOptions *attack_options)
+bool Thing::victim_attack_best(int equip, AttackOptions *attack_options)
 {
-  if (at) {
-    dbg("Target-attack-best: Try to attack with equipped item at %s", at->to_string().c_str());
+  if (attack_options->attack_at_set) {
+    dbg("Target-attack-best: Try to attack with equipped item at %s", attack_options->attack_at.to_string().c_str());
   } else {
     dbg("Target-attack-best: Try to attack with equipped item");
   }
@@ -658,7 +673,7 @@ bool Thing::victim_attack_best(int equip, point *at, AttackOptions *attack_optio
   //
   auto old_dir = dir;
 
-  auto ret = victim_attack_best_(equip, at, attack_options);
+  auto ret = victim_attack_best_(equip, attack_options);
 
   dir = old_dir;
 
