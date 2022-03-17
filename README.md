@@ -1,11 +1,13 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- hitting space should auto choose a target                                                                                                    -->
+<!-- killed by poisoning should mention the poisoner                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - teletoad                                                                                                                                   -->
-<!-- - teleport effect                                                                                                                           -->
+<!-- - teleport blocka                                                                                                                            -->
+<!-- - teleport boots / check cold immunity                                                                                                       -->
 <!-- - bloat                                                                                                                                      -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - boots of shoving / steadfastness                                                                                                           -->
