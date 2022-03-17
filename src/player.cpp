@@ -161,15 +161,24 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     //
     bool moving = player->is_moving;
 
-    auto future_pos     = player->curr_at + dir;
-    bool shove_allowed  = true;
-    bool attack_allowed = true;
+    auto future_pos = player->curr_at + dir;
+
+    AttackOptions attack_options {};
+    attack_options.shove_allowed  = true;
+    attack_options.attack_allowed = true;
     if (wait) {
-      shove_allowed  = false;
-      attack_allowed = false;
+      attack_options.shove_allowed  = false;
+      attack_options.attack_allowed = false;
     }
 
-    bool moved = player->move(future_pos, up, down, left, right, attack, wait, shove_allowed, attack_allowed);
+    if (attack) {
+      if (up || down || left || right) {
+        attack_options.attack_at     = future_pos;
+        attack_options.attack_at_set = true;
+      }
+    }
+
+    bool moved = player->move(future_pos, up, down, left, right, attack, wait, &attack_options);
 
     if (moved) {
       if (! moving) {

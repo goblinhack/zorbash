@@ -59,7 +59,14 @@ typedef struct {
   bool victim_overlaps;
   bool allow_hitting_walls;
   bool natural_attack;
-  int  attempt;
+  bool shove_allowed;
+  bool attack_allowed;
+  //
+  // If attack_at is not set, we should look around for a target.
+  //
+  bool  attack_at_set;
+  point attack_at;
+  int   attempt;
 } AttackOptions;
 
 typedef class Thing_
@@ -400,7 +407,7 @@ public:
   bool enchant_with_stone(Thingp);
   bool equipped_anything(void);
   bool equip(Thingp w, int equip);
-  bool equip_use(bool forced, int equip, point *at = nullptr);
+  bool equip_use(bool forced, int equip, AttackOptions *);
   bool equip_use_may_attack(int equip);
   bool equip_use_must_attack(int equip);
   bool fall_to_next_level(void);
@@ -445,7 +452,7 @@ public:
   bool move_no_shove_attack_allowed(point future_pos);
   bool move_no_shove_no_attack(point future_pos);
   bool move(point to);
-  bool move(point to, uint8_t u, uint8_t d, uint8_t l, uint8_t r, uint8_t att, uint8_t idl, bool shoveok, bool attok);
+  bool move(point to, uint8_t u, uint8_t d, uint8_t l, uint8_t r, uint8_t att, uint8_t idl, AttackOptions *);
   bool move_to_or_attack_check_only(const point nh);
   bool move_to_or_attack(const point);
   bool move_to_or_escape_check_only(const point nh);
@@ -535,9 +542,9 @@ public:
   bool unequip(const char *why, int equip, bool allowed_to_recarry);
   bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
   bool use(Thingp w, UseOptions *options = nullptr);
-  bool victim_attack_best_at(int equip, point *at, AttackOptions *);
-  bool victim_attack_best(int equip, point *at, AttackOptions *);
-  bool victim_attack_best_(int equip, point *at, AttackOptions *);
+  bool victim_attack_best_at(int equip, AttackOptions *);
+  bool victim_attack_best(int equip, AttackOptions *);
+  bool victim_attack_best_(int equip, AttackOptions *);
   bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);

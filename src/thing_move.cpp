@@ -128,11 +128,13 @@ bool Thing::move(point future_pos)
   bool right           = future_pos.x > curr_at.x;
   bool attack          = false;
   bool wait_or_collect = false;
-  bool shove_allowed   = true;
-  bool attack_allowed  = true;
+
+  AttackOptions attack_options {};
+  attack_options.shove_allowed  = true;
+  attack_options.attack_allowed = true;
 
   verify(MTYPE_THING, this);
-  return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
+  return (move(future_pos, up, down, left, right, attack, wait_or_collect, &attack_options));
 }
 
 bool Thing::move_no_shove_no_attack(point future_pos)
@@ -145,11 +147,13 @@ bool Thing::move_no_shove_no_attack(point future_pos)
   bool right           = future_pos.x > curr_at.x;
   bool attack          = false;
   bool wait_or_collect = false;
-  bool shove_allowed   = false;
-  bool attack_allowed  = false;
+
+  AttackOptions attack_options {};
+  attack_options.shove_allowed  = false;
+  attack_options.attack_allowed = false;
 
   verify(MTYPE_THING, this);
-  return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
+  return (move(future_pos, up, down, left, right, attack, wait_or_collect, &attack_options));
 }
 
 bool Thing::move_no_shove_attack_allowed(point future_pos)
@@ -162,18 +166,20 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
   bool right           = future_pos.x > curr_at.x;
   bool attack          = false;
   bool wait_or_collect = false;
-  bool shove_allowed   = false;
-  bool attack_allowed  = true;
+
+  AttackOptions attack_options {};
+  attack_options.shove_allowed  = false;
+  attack_options.attack_allowed = true;
 
   verify(MTYPE_THING, this);
-  return (move(future_pos, up, down, left, right, attack, wait_or_collect, shove_allowed, attack_allowed));
+  return (move(future_pos, up, down, left, right, attack, wait_or_collect, &attack_options));
 }
 
 bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t must_attack,
-                 uint8_t wait_or_collect, bool shove_allowed, bool attack_allowed)
+                 uint8_t wait_or_collect, AttackOptions *attack_options)
 {
-  TRACE_NO_INDENT();
   dbg("Move");
+  TRACE_AND_INDENT();
 
   if (! is_moveable()) {
     dbg("Cannot move");
@@ -485,7 +491,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     dbg("Must attack at %s", future_pos.to_string().c_str());
     TRACE_AND_INDENT();
 
-    equip_use(must_attack, MONST_EQUIP_WEAPON, &future_pos);
+    equip_use(must_attack, MONST_EQUIP_WEAPON, attack_options);
     return false;
   }
 
@@ -514,17 +520,17 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     if (collision_check_only(future_pos)) {
       dbg("Collided with something");
 
-      if (shove_allowed) {
+      if (attack_options->shove_allowed) {
         dbg("Try to shove");
         if (is_player()) {
           game->tick_begin("player tried to shove");
         }
         try_to_shove(future_pos);
-      } else if (attack_allowed) {
+      } else if (attack_options->attack_allowed) {
         dbg("Try to attack at %s", future_pos.to_string().c_str());
         TRACE_AND_INDENT();
 
-        if (equip_use(must_attack, MONST_EQUIP_WEAPON, &future_pos)) {
+        if (equip_use(must_attack, MONST_EQUIP_WEAPON, attack_options)) {
           clear_move_path("Attacked");
           return true;
         }
