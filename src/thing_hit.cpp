@@ -125,8 +125,8 @@ void Thing::on_you_are_hit_but_dodge_it_do(Thingp hitter)
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_you_are_hit_but_dodge_it_do call [%s] expected mod:function, got %d elems", on_you_are_hit_but_dodge_it_do.c_str(),
-        (int) on_you_are_hit_but_dodge_it_do.size());
+    ERR("Bad on_you_are_hit_but_dodge_it_do call [%s] expected mod:function, got %d elems",
+        on_you_are_hit_but_dodge_it_do.c_str(), (int) on_you_are_hit_but_dodge_it_do.size());
   }
 }
 
@@ -1103,6 +1103,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 
   if (real_hitter != this) {
     if (real_hitter->is_player() || real_hitter->is_monst()) {
+      real_hitter->wobble(25);
+      real_hitter->bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
       wobble(90);
       bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
     }

@@ -550,7 +550,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
   }
 
   //
-  // Only teleport if moving move that 1 tile
+  // Only teleport if moving more that 1 tile
   //
   auto p = aip()->move_path;
   if (p.size() > 1) {
@@ -558,7 +558,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
       dbg("Try to teleport attack");
       TRACE_AND_INDENT();
 
-      auto teleport_dist = pcg_random_range(2, p.size());
+      auto teleport_dist = pcg_random_range(1, p.size() - 1);
       return try_to_teleport_carefully(get(p, teleport_dist));
     }
   }

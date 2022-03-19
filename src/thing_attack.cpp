@@ -843,8 +843,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
-  bool crit   = false;
-  bool missed = false;
+  bool crit            = false;
+  bool missed          = false;
+  bool tried_to_attack = false;
 
   if (d10000() < crit_chance_d10000()) {
     crit = true;
@@ -954,7 +955,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         //
         // We tried to attack, so do not move
         //
-        missed = true;
+        missed          = true;
+        tried_to_attack = true;
       }
     }
   }
@@ -1030,8 +1032,9 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   }
 
   victim->on_you_are_hit_but_dodge_it_do(this);
-  victim->wobble(45);
-  wobble(90);
+  victim->wobble(25);
+  victim->bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
+  wobble(45);
   bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
 
   //
@@ -1050,7 +1053,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     return true;
   }
 
-  return false;
+  return tried_to_attack;
 }
 
 bool Thing::natural_attack(Thingp victim) { return attack(victim, true); }
