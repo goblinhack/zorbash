@@ -289,12 +289,16 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
     if (attack_lunge()) {
       lunge(best_hit_at);
     }
-    level->thing_new(attack_options->used_as, best_hit_at);
+    auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
+    use_anim->owner_set(this);
+    equip_use_anim_set(use_anim, equip);
   } else if (use_anim && (best_hit_at != use_anim->curr_at)) {
     //
     // Or, if there is a swing animation, don't create a duplicate
     //
-    level->thing_new(attack_options->used_as, best_hit_at);
+    auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
+    use_anim->owner_set(this);
+    equip_use_anim_set(use_anim, equip);
   }
 
   if (item) {
