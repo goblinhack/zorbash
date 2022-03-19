@@ -286,6 +286,9 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
     //
     // If no swing animation, then swing.
     //
+    if (attack_lunge()) {
+      lunge(best_hit_at);
+    }
     level->thing_new(attack_options->used_as, best_hit_at);
   } else if (use_anim && (best_hit_at != use_anim->curr_at)) {
     //

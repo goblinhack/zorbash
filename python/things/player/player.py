@@ -327,6 +327,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.light_dist(self, 10)
     my.long_text_description(self, "You. A most noble adventurer of no particular race, gender or creed. Devoid of fear and stout of heart. Likes kittens.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
+    my.attack_lunge(self, True)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 30)
     my.noise_on_jumping(self, 20)

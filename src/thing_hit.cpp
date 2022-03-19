@@ -95,19 +95,19 @@ void Thing::on_you_are_hit_and_now_dead(Thingp hitter,      // an arrow / monst 
 //
 // Python callback upon being miss
 //
-void Thing::on_you_miss_do(Thingp hitter)
+void Thing::on_you_are_hit_but_dodge_it_do(Thingp hitter)
 {
   if (is_dead) {
     return;
   }
 
   TRACE_NO_INDENT();
-  auto on_you_miss_do = tp()->on_you_miss_do();
-  if (std::empty(on_you_miss_do)) {
+  auto on_you_are_hit_but_dodge_it_do = tp()->on_you_are_hit_but_dodge_it_do();
+  if (std::empty(on_you_are_hit_but_dodge_it_do)) {
     return;
   }
 
-  auto t = split_tokens(on_you_miss_do, '.');
+  auto t = split_tokens(on_you_are_hit_but_dodge_it_do, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -125,8 +125,8 @@ void Thing::on_you_miss_do(Thingp hitter)
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_you_miss_do call [%s] expected mod:function, got %d elems", on_you_miss_do.c_str(),
-        (int) on_you_miss_do.size());
+    ERR("Bad on_you_are_hit_but_dodge_it_do call [%s] expected mod:function, got %d elems", on_you_are_hit_but_dodge_it_do.c_str(),
+        (int) on_you_are_hit_but_dodge_it_do.size());
   }
 }
 
