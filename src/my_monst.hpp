@@ -169,8 +169,9 @@ public:
   int8_t map_treasure_count = {}; // How many treasure maps held. Really only care if > 0
   int8_t map_beast_count    = {}; // How many beast maps held. Really only care if > 0
 
-  std::string msg;         // Text that floats on screen
-  std::string dead_reason; // What defeated me
+  std::string msg;           // Text that floats on screen
+  std::string dead_reason;   // What defeated me
+  std::string poison_reason; // What poisoned me
 
   ts_t ts_bounce_begin {};
   ts_t ts_bounce_end {};

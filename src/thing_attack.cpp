@@ -552,7 +552,7 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         damage        = damage_poison_val;
         damage_set    = true;
         attack_poison = true;
-        dbg("Set poison damage %d", damage);
+        victim->poison_reason_set(text_a_or_an());
       }
     }
   }
