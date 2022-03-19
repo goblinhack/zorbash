@@ -85,6 +85,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->capacity_height);
    in >> bits(my.t->capacity_width);
    in >> bits(my.t->dead_reason);
+   in >> bits(my.t->poison_reason);
    in >> bits(my.t->distance_throw);
    in >> bits(my.t->enchant);
    in >> bits(my.t->enchant_max);

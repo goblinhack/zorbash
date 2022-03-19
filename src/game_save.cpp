@@ -62,6 +62,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->capacity_height);
   out << bits(my.t->capacity_width);
   out << bits(my.t->dead_reason);
+  out << bits(my.t->poison_reason);
   out << bits(my.t->distance_throw);
   out << bits(my.t->enchant);
   out << bits(my.t->enchant_max);

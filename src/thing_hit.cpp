@@ -1161,8 +1161,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       if (attack_poison) {
         if (level->is_gas_poison(curr_at.x, curr_at.y)) {
           reason = "by poison gas";
-        } else {
+        } else if (poison_reason_get().empty()) {
           reason = "by poisoning";
+        } else {
+          reason = "by poisoning by " + poison_reason_get();
         }
       } else if (attack_future1) {
         reason = "by future1";
