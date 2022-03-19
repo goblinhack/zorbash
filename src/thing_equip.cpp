@@ -588,8 +588,7 @@ bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
   }
 
   TRACE_NO_INDENT();
-  std::string used_as;
-  auto        item = equip_get(equip);
+  auto item = equip_get(equip);
   if (! item) {
     dbg("No equipped item");
     TRACE_AND_INDENT();
@@ -610,41 +609,43 @@ bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
       on_you_natural_attack();
     }
 
-    used_as = gfx_anim_use();
+    attack_options->used_as = gfx_anim_use();
   } else {
     dbg("Equipped item: %s", item->to_short_string().c_str());
-    used_as = item->gfx_anim_use();
+    attack_options->used_as = item->gfx_anim_use();
   }
 
   TRACE_NO_INDENT();
-  if (! used_as.empty()) {
-    dbg("Used as: %s", used_as.c_str());
+  if (! attack_options->used_as.empty()) {
+    dbg("Used as: %s", attack_options->used_as.c_str());
     TRACE_AND_INDENT();
 
-    auto what = tp_find(used_as);
+    auto what = tp_find(attack_options->used_as);
     if (! what) {
-      err("Could not find use-anim %s", used_as.c_str());
+      err("Could not find use-anim %s", attack_options->used_as.c_str());
       return false;
     }
 
-    Thingp use_anim;
     if (attack_options->attack_at_set) {
-      use_anim                 = level->thing_new(used_as, attack_options->attack_at);
-      use_anim->dir            = dir;
-      use_anim->is_facing_left = is_facing_left;
-
       //
       // If not attacking something at a point, then use the direction of the wielder.
       //
+      auto use_anim            = level->thing_new(attack_options->used_as, attack_options->attack_at);
+      use_anim->dir            = dir;
+      use_anim->is_facing_left = is_facing_left;
+
       if (attack_options->attack_at == curr_at) {
         auto p = attack_options->attack_at + dir_to_direction();
         use_anim->move_to(p);
       }
+
+      use_anim->owner_set(this);
+      equip_use_anim_set(use_anim, equip);
     } else {
-      use_anim = level->thing_new(used_as, this);
+      //
+      // Do not swing. We will look around for a target and swing at that.
+      //
     }
-    use_anim->owner_set(this);
-    equip_use_anim_set(use_anim, equip);
   }
 
   dbg("Find best attack target");
@@ -653,8 +654,13 @@ bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
   if (! attacked) {
     if (is_player() && forced) {
       //
-      // Swing anyway else it looks odd
+      // Swing anyway if we have none, else it looks odd
       //
+      if (! equip_use_anim(equip)) {
+        auto use_anim = level->thing_new(attack_options->used_as, this);
+        use_anim->owner_set(this);
+        equip_use_anim_set(use_anim, equip);
+      }
     } else {
       return false;
     }

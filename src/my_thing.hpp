@@ -55,18 +55,44 @@ typedef struct {
 } UseOptions;
 
 typedef struct {
+  //
+  // Return values
+  //
   bool victim_attacked;
   bool victim_overlaps;
+  //
+  // Allowed to hit solid rock. Normally disabled to avoid weapon damage.
+  // Enabled if you click on a rock.
+  //
   bool allow_hitting_walls;
+  //
+  // Monst is using its natural attack.
+  //
   bool natural_attack;
+  //
+  // Can also shove.
+  //
   bool shove_allowed;
+  //
+  // Used in moving to pass on intent to attack.
+  //
   bool attack_allowed;
   //
   // If attack_at is not set, we should look around for a target.
   //
-  bool  attack_at_set;
+  bool attack_at_set;
+  //
+  // How many attempts to find a target
+  //
+  unsigned char attempt;
+  //
+  // Where we want to attack
+  //
   point attack_at;
-  int   attempt;
+  //
+  // This is the swing animation.
+  //
+  std::string used_as;
 } AttackOptions;
 
 typedef class Thing_

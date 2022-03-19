@@ -1,12 +1,12 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- hitting space should auto choose a target                                                                                                    -->
 <!-- killed by poisoning should mention the poisoner                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - teleport blocka                                                                                                                            -->
+<!-- - teletoad lanch a stream of goo                                                                                                             -->
+<!-- - teleport block                                                                                                                             -->
 <!-- - teleport boots / check cold immunity                                                                                                       -->
 <!-- - bloat                                                                                                                                      -->
 <!-- - cloak of jelly                                                                                                                             -->
@@ -21,7 +21,6 @@
 <!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
 <!-- - swamp                                                                                                                                      -->
 <!-- - swamp wort food                                                                                                                            -->
-<!-- - monst swamp blink toad, can teleport and launch a stream of goo                                                                            -->
 <!-- - ogre and totems?                                                                                                                           -->
 <!-- - swamp level                                                                                                                                -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->

@@ -278,9 +278,20 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
        best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
 
+  //
+  // Swing?
+  //
   auto use_anim = equip_use_anim(equip);
-  if (use_anim && (best_hit_at != use_anim->curr_at)) {
-    level->thing_new(use_anim->name(), best_hit_at);
+  if (! use_anim) {
+    //
+    // If no swing animation, then swing.
+    //
+    level->thing_new(attack_options->used_as, best_hit_at);
+  } else if (use_anim && (best_hit_at != use_anim->curr_at)) {
+    //
+    // Or, if there is a swing animation, don't create a duplicate
+    //
+    level->thing_new(attack_options->used_as, best_hit_at);
   }
 
   if (item) {
