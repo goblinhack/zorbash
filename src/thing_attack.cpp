@@ -843,7 +843,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     }
   }
 
-  bool crit = false;
+  bool crit   = false;
+  bool missed = false;
 
   if (d10000() < crit_chance_d10000()) {
     crit = true;
@@ -953,80 +954,85 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
         //
         // We tried to attack, so do not move
         //
-        return true;
+        missed = true;
       }
     }
   }
 
-  dbg("Do the hit");
-  TRACE_AND_INDENT();
-  if (victim->is_hit(this, crit, attack_natural, attack_poison, attack_necrosis, attack_future1, attack_future2,
-                     attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning, attack_energy,
-                     attack_acid, attack_digest, damage)) {
-    dbg("The attack succeeded");
+  if (! missed) {
+    dbg("Do the hit");
+    TRACE_AND_INDENT();
+    if (victim->is_hit(this, crit, attack_natural, attack_poison, attack_necrosis, attack_future1, attack_future2,
+                       attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning, attack_energy,
+                       attack_acid, attack_digest, damage)) {
+      dbg("The attack succeeded");
 
-    if (victim != this) {
-      if (attack_lunge()) {
-        lunge(victim->curr_at);
-      }
-    }
-    if (attack_eater()) {
-      health_boost(victim->nutrition_get());
-    }
-    if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
-      dead("by foolishness");
-    }
-
-    //
-    // See if the weapon crumbles
-    //
-    auto my_owner = top_owner();
-    if (my_owner) {
-      auto weapon = my_owner->equip_get(MONST_EQUIP_WEAPON);
-      if (weapon) {
-        auto break_chance = weapon->break_chance_d10000();
-        if (victim->is_toughness_soft()) {
-          break_chance /= 2;
-        }
-        if (victim->is_toughness_hard()) {
-          break_chance *= 2;
-        }
-        if (victim->is_toughness_very_hard()) {
-          break_chance *= 2;
-        }
-        if (d20roll_under(stat_luck_total())) {
-          break_chance = 0;
-        }
-        auto roll = d10000();
-        if (roll < break_chance) {
-          weapon->dead("broken");
+      if (victim != this) {
+        if (attack_lunge()) {
+          lunge(victim->curr_at);
         }
       }
+      if (attack_eater()) {
+        health_boost(victim->nutrition_get());
+      }
+      if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
+        dead("by foolishness");
+      }
 
-      auto gauntlet = my_owner->equip_get(MONST_EQUIP_GAUNTLET);
-      if (gauntlet) {
-        auto break_chance = gauntlet->break_chance_d10000();
-        if (victim->is_toughness_soft()) {
-          break_chance /= 2;
+      //
+      // See if the weapon crumbles
+      //
+      auto my_owner = top_owner();
+      if (my_owner) {
+        auto weapon = my_owner->equip_get(MONST_EQUIP_WEAPON);
+        if (weapon) {
+          auto break_chance = weapon->break_chance_d10000();
+          if (victim->is_toughness_soft()) {
+            break_chance /= 2;
+          }
+          if (victim->is_toughness_hard()) {
+            break_chance *= 2;
+          }
+          if (victim->is_toughness_very_hard()) {
+            break_chance *= 2;
+          }
+          if (d20roll_under(stat_luck_total())) {
+            break_chance = 0;
+          }
+          auto roll = d10000();
+          if (roll < break_chance) {
+            weapon->dead("broken");
+          }
         }
-        if (victim->is_toughness_hard()) {
-          break_chance *= 2;
-        }
-        if (victim->is_toughness_very_hard()) {
-          break_chance *= 2;
-        }
-        if (d20roll_under(stat_luck_total())) {
-          break_chance = 0;
-        }
-        if (d10000() < break_chance) {
-          gauntlet->dead("broken");
+
+        auto gauntlet = my_owner->equip_get(MONST_EQUIP_GAUNTLET);
+        if (gauntlet) {
+          auto break_chance = gauntlet->break_chance_d10000();
+          if (victim->is_toughness_soft()) {
+            break_chance /= 2;
+          }
+          if (victim->is_toughness_hard()) {
+            break_chance *= 2;
+          }
+          if (victim->is_toughness_very_hard()) {
+            break_chance *= 2;
+          }
+          if (d20roll_under(stat_luck_total())) {
+            break_chance = 0;
+          }
+          if (d10000() < break_chance) {
+            gauntlet->dead("broken");
+          }
         }
       }
+      return true;
     }
-    return true;
   }
 
-  victim->on_you_miss_do(this);
+  victim->on_you_are_hit_but_dodge_it_do(this);
+  victim->wobble(45);
+  wobble(90);
+  bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
 
   //
   // Missiles?

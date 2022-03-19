@@ -722,7 +722,7 @@ public:
   const std::string &on_you_are_hit_and_now_dead_do(void);
   const std::string &on_you_are_hit_but_still_alive_do(void);
   const std::string &on_you_are_on_fire_do(void);
-  const std::string &on_you_miss_do(void);
+  const std::string &on_you_are_hit_but_dodge_it_do(void);
   const std::string &on_you_natural_attack_do(void);
   const std::string &resurrect_dice_str(void);
   const std::string &short_text_name(void);
@@ -2138,7 +2138,7 @@ public:
   void on_you_are_declared_leader(void);
   void on_you_are_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
-  void on_you_miss_do(Thingp hitter);
+  void on_you_are_hit_but_dodge_it_do(Thingp hitter);
   void on_you_natural_attack(void);
   void owner_set(Thingp owner);
   void path_shorten(std::vector< point > &path);

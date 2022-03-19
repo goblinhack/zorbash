@@ -6733,10 +6733,10 @@ const std::string &Thing::on_lifespan_tick_do(void)
   return (tp()->on_lifespan_tick_do());
 }
 
-const std::string &Thing::on_you_miss_do(void)
+const std::string &Thing::on_you_are_hit_but_dodge_it_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_you_miss_do());
+  return (tp()->on_you_are_hit_but_dodge_it_do());
 }
 
 const std::string &Thing::on_move_do(void)

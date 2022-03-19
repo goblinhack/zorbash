@@ -21,7 +21,7 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
         my.level_spawn_at_thing(me, "gargoyle_podium")
 
 
-def on_you_miss_do(me, hitter, x, y):
+def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
@@ -102,7 +102,7 @@ def tp_init(name, text_name):
     my.on_death_do(self, "me.on_death()")
     my.on_firing_at_something_do(self, "me.on_firing_at_something()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
-    my.on_you_miss_do(self, "me.on_you_miss_do()")
+    my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_con(self, 16)

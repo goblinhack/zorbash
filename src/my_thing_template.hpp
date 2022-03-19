@@ -723,7 +723,7 @@ private:
   std::string _on_you_are_hit_and_now_dead_do;
   std::string _on_you_are_hit_but_still_alive_do;
   std::string _on_you_are_on_fire_do;
-  std::string _on_you_miss_do;
+  std::string _on_you_are_hit_but_dodge_it_do;
   std::string _on_you_natural_attack_do;
   std::string _resurrect_dice_str;
   std::string _short_text_name;
@@ -961,7 +961,7 @@ public:
   const std::string &on_you_are_hit_and_now_dead_do(void) const { return _on_you_are_hit_and_now_dead_do; }
   const std::string &on_you_are_hit_but_still_alive_do(void) const { return _on_you_are_hit_but_still_alive_do; }
   const std::string &on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
-  const std::string &on_you_miss_do(void) const { return _on_you_miss_do; }
+  const std::string &on_you_are_hit_but_dodge_it_do(void) const { return _on_you_are_hit_but_dodge_it_do; }
   const std::string &on_you_natural_attack_do(void) const { return _on_you_natural_attack_do; }
   const std::string &resurrect_dice_str(void) const;
   const std::string &short_text_name(void) const { return _short_text_name; }
@@ -1994,7 +1994,7 @@ public:
   void on_you_are_hit_and_now_dead_do_set(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }
   void on_you_are_hit_but_still_alive_do_set(const std::string &v) { _on_you_are_hit_but_still_alive_do = v; }
   void on_you_are_on_fire_do_set(const std::string &v) { _on_you_are_on_fire_do = v; }
-  void on_you_miss_do_set(const std::string &v) { _on_you_miss_do = v; }
+  void on_you_are_hit_but_dodge_it_do_set(const std::string &v) { _on_you_are_hit_but_dodge_it_do = v; }
   void on_you_natural_attack_do_set(const std::string &v) { _on_you_natural_attack_do = v; }
   void range_max_set(int v) { _range_max = v; }
   void rarity_set(int v) { _rarity = v; }
