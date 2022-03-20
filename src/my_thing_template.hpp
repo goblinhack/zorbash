@@ -460,7 +460,7 @@ private:
   int _noise_blocker {};
   int _noise_decibels_hearing {};
   int _noise_on_born {};
-  int _noise_additional_on_jumping {};
+  int _noise_additional_on_jump_end {};
   int _noise_on_dropping {};
   int _noise_on_open {};
   int _noise_on_you_are_hit_and_now_dead {};
@@ -1366,7 +1366,7 @@ public:
   int noise_blocker(void) const { return _noise_blocker; }
   int noise_decibels_hearing(void) const { return _noise_decibels_hearing; }
   int noise_on_born(void) const { return _noise_on_born; }
-  int noise_additional_on_jumping(void) const { return _noise_additional_on_jumping; }
+  int noise_additional_on_jump_end(void) const { return _noise_additional_on_jump_end; }
   int noise_on_dropping(void) const { return _noise_on_dropping; }
   int noise_on_open(void) const { return _noise_on_open; }
   int noise_on_you_are_hit_and_now_dead(void) const { return _noise_on_you_are_hit_and_now_dead; }
@@ -1922,7 +1922,7 @@ public:
   void noise_blocker_set(int v) { _noise_blocker = v; }
   void noise_decibels_hearing_set(int v) { _noise_decibels_hearing = v; }
   void noise_on_born_set(int v) { _noise_on_born = v; }
-  void noise_additional_on_jumping_set(int v) { _noise_additional_on_jumping = v; }
+  void noise_additional_on_jump_end_set(int v) { _noise_additional_on_jump_end = v; }
   void noise_on_dropping_set(int v) { _noise_on_dropping = v; }
   void noise_on_open_set(int v) { _noise_on_open = v; }
   void noise_on_you_are_hit_and_now_dead_set(int v) { _noise_on_you_are_hit_and_now_dead = v; }

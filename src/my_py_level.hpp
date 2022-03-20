@@ -311,7 +311,7 @@ PyObject *level_move_speed_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_decibels_hearing_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_on_born_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_noise_additional_on_jumping_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_noise_additional_on_jump_end_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_on_dropping_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_on_open_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_on_you_are_hit_and_now_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);

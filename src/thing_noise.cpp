@@ -99,7 +99,7 @@ int Thing::noise_on_jumping(void)
   {
     auto it = equip_get(e);
     if (it) {
-      decibels += it->noise_additional_on_jumping();
+      decibels += it->noise_additional_on_jump_end();
       // it->con("NOISE %d", decibels);
     }
   }
@@ -115,7 +115,7 @@ int Thing::noise_on_jumping(void)
         if (is_equipped(it)) {
           continue;
         }
-        decibels += it->noise_additional_on_jumping();
+        decibels += it->noise_additional_on_jump_end();
         // it->con("NOISE %d", decibels);
       }
     }
@@ -124,7 +124,7 @@ int Thing::noise_on_jumping(void)
     {
       auto it = level->thing_find(id);
       if (it) {
-        decibels += it->noise_additional_on_jumping();
+        decibels += it->noise_additional_on_jump_end();
         // it->con("NOISE %d", decibels);
       }
     }
@@ -133,7 +133,7 @@ int Thing::noise_on_jumping(void)
     {
       auto it = level->thing_find(id);
       if (it) {
-        decibels += it->noise_additional_on_jumping();
+        decibels += it->noise_additional_on_jump_end();
         // it->con("NOISE %d", decibels);
       }
     }
@@ -142,7 +142,7 @@ int Thing::noise_on_jumping(void)
     {
       auto it = level->thing_find(id);
       if (it) {
-        decibels += it->noise_additional_on_jumping();
+        decibels += it->noise_additional_on_jump_end();
         // it->con("NOISE %d", decibels);
       }
     }

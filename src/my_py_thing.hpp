@@ -381,7 +381,7 @@ PyObject *thing_noise_decibels_hearing(PyObject *obj, PyObject *args, PyObject *
 PyObject *thing_noise_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_on_born(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_noise_additional_on_jumping(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_noise_additional_on_jump_end(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_on_dropping(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_on_open(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_on_you_are_hit_and_now_dead(PyObject *obj, PyObject *args, PyObject *keywds);
