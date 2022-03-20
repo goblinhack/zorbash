@@ -12,10 +12,16 @@ def on_enchant(me, x, y):
 
 
 def on_use(owner, item, target, x, y):
-    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health_get(owner)))
-    # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health_get(item)))
-    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health_get(target)))
+    my.topcon("================= USED================= ")
+    my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health_get(owner)))
+    my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health_get(item)))
+    my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health_get(target)))
     return
+
+
+def on_final_use(owner, item, target, x, y):
+    if my.thing_is_player(owner):
+        my.thing_msg(owner, "The boots of teleport disintegrate.")
 
 
 def tp_init(name, text_name, short_text_name):
@@ -35,6 +41,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_collectable(self, True)
     my.is_target_select(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.charge_count(self, 100)
     my.is_droppable(self, True)
     my.noise_additional_on_teleporting(self, 50)
     my.noise_additional_on_jump_end(self, 50)
@@ -55,6 +62,7 @@ def tp_init(name, text_name, short_text_name):
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_use_do(self, "me.on_use()")
+    my.on_final_use_do(self, "me.on_final_use()")
     my.rarity(self, my.RARITY_VERY_RARE)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Boots of teleport.")

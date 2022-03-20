@@ -56,10 +56,13 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     IF_DEBUG2 { player->log("Chosen target"); }
+    TRACE_AND_INDENT();
+
     if (game->request_to_throw_item) {
       auto item = game->request_to_throw_item;
       player->throw_at(item, level->cursor);
     }
+
     if (game->request_to_use_item) {
       auto item = game->request_to_use_item;
 
@@ -72,7 +75,7 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
         player->laser_fire_at(item, item->target_name_laser(), level->cursor->curr_at);
       } else if (! item->target_name_projectile().empty()) {
         player->projectile_fire_at(item, item->target_name_projectile(), level->cursor->curr_at);
-      } else if (! item->is_item_targetted()) {
+      } else if (item->is_item_targetted()) {
         player->item_targetted_use_at(item, level->cursor->curr_at);
       } else {
         TOPCON("Unknown beam weapon: %s.", item->text_the().c_str());
