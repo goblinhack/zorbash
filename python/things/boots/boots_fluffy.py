@@ -54,7 +54,7 @@ def tp_init(name, text_name, short_text_name):
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")
-    my.rarity(self, my.RARITY_COMMON)
+    my.rarity(self, my.RARITY_UNCOMMON)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Fluffy boots.")
     my.text_enchant(self, "-10 decibels")
