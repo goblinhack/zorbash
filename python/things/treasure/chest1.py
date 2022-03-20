@@ -55,7 +55,7 @@ def tp_init(name, text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "A small treasure chest.")
-    my.noise_on_moving_or_being_carried(self, 1)
+    my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_death_drop_all_items(self, True)

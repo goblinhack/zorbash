@@ -46,7 +46,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 5)
     my.item_width(self, 5)
     my.long_text_description(self, "A gleaming entry-level short sword. Ideal for beginners or the occasional weekend dungeoneer.")
-    my.noise_on_moving_or_being_carried(self, 10)
+    my.noise_on_dropping(self, 10)
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_on_use(self, 1)

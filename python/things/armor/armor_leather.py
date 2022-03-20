@@ -38,7 +38,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "Leather armor. Gives slightly more protection than your own skin.")
-    my.noise_on_moving_or_being_carried(self, 10)
+    my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_COMMON)

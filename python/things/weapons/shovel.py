@@ -49,7 +49,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 8)
     my.item_width(self, 8)
     my.long_text_description(self, "A truly inspiring weapon of dread. The shovel. Ideal for light gardening and decapitation.")
-    my.noise_on_moving_or_being_carried(self, 20)
+    my.noise_on_dropping(self, 20)
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_on_use(self, 3)

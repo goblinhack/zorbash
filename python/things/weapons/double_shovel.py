@@ -50,7 +50,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 9)
     my.item_width(self, 9)
     my.long_text_description(self, "A truly dreadful weapon of last resort. The masterwork double bladed shovel. Ideal for allotment use and casual bludgeoning.")
-    my.noise_on_moving_or_being_carried(self, 40)
+    my.noise_on_dropping(self, 40)
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_RARE)
     my.stamina_on_use(self, 3)

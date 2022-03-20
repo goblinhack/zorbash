@@ -460,8 +460,8 @@ private:
   int _noise_blocker {};
   int _noise_decibels_hearing {};
   int _noise_on_born {};
-  int _noise_on_jumping {};
-  int _noise_on_moving_or_being_carried {};
+  int _noise_additional_on_jumping {};
+  int _noise_on_dropping {};
   int _noise_on_open {};
   int _noise_on_you_are_hit_and_now_dead {};
   int _noise_on_you_are_hit_but_still_alive {};
@@ -531,7 +531,7 @@ private:
   int _unused_flag114 {};
   int _unused_flag115 {};
   int _unused_flag116 {};
-  int _unused_flag117 {};
+  int _noise_additional_on_teleporting {};
   int _unused_flag12 {};
   int _unused_flag123 {};
   int _unused_flag13 {};
@@ -1366,8 +1366,8 @@ public:
   int noise_blocker(void) const { return _noise_blocker; }
   int noise_decibels_hearing(void) const { return _noise_decibels_hearing; }
   int noise_on_born(void) const { return _noise_on_born; }
-  int noise_on_jumping(void) const { return _noise_on_jumping; }
-  int noise_on_moving_or_being_carried(void) const { return _noise_on_moving_or_being_carried; }
+  int noise_additional_on_jumping(void) const { return _noise_additional_on_jumping; }
+  int noise_on_dropping(void) const { return _noise_on_dropping; }
   int noise_on_open(void) const { return _noise_on_open; }
   int noise_on_you_are_hit_and_now_dead(void) const { return _noise_on_you_are_hit_and_now_dead; }
   int noise_on_you_are_hit_but_still_alive(void) const { return _noise_on_you_are_hit_but_still_alive; }
@@ -1435,7 +1435,7 @@ public:
   int unused_flag114(void) const { return _unused_flag114; }
   int unused_flag115(void) const { return _unused_flag115; }
   int unused_flag116(void) const { return _unused_flag116; }
-  int unused_flag117(void) const { return _unused_flag117; }
+  int noise_additional_on_teleporting(void) const { return _noise_additional_on_teleporting; }
   int unused_flag11(void) const { return _unused_flag11; }
   int unused_flag123(void) const { return _unused_flag123; }
   int unused_flag12(void) const { return _unused_flag12; }
@@ -1922,8 +1922,8 @@ public:
   void noise_blocker_set(int v) { _noise_blocker = v; }
   void noise_decibels_hearing_set(int v) { _noise_decibels_hearing = v; }
   void noise_on_born_set(int v) { _noise_on_born = v; }
-  void noise_on_jumping_set(int v) { _noise_on_jumping = v; }
-  void noise_on_moving_or_being_carried_set(int v) { _noise_on_moving_or_being_carried = v; }
+  void noise_additional_on_jumping_set(int v) { _noise_additional_on_jumping = v; }
+  void noise_on_dropping_set(int v) { _noise_on_dropping = v; }
   void noise_on_open_set(int v) { _noise_on_open = v; }
   void noise_on_you_are_hit_and_now_dead_set(int v) { _noise_on_you_are_hit_and_now_dead = v; }
   void noise_on_you_are_hit_but_still_alive_set(int v) { _noise_on_you_are_hit_but_still_alive = v; }
@@ -2077,7 +2077,7 @@ public:
   void unused_flag114_set(int v) { _unused_flag114 = v; }
   void unused_flag115_set(int v) { _unused_flag115 = v; }
   void unused_flag116_set(int v) { _unused_flag116 = v; }
-  void unused_flag117_set(int v) { _unused_flag117 = v; }
+  void noise_additional_on_teleporting_set(int v) { _noise_additional_on_teleporting = v; }
   void unused_flag11_set(int v) { _unused_flag11 = v; }
   void unused_flag123_set(int v) { _unused_flag123 = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }

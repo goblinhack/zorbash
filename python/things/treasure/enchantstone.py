@@ -53,7 +53,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "Use this magical stone to bestow powers on other items you carry.")
-    my.noise_on_moving_or_being_carried(self, 10)
+    my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")

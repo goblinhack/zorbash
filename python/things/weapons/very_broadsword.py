@@ -54,7 +54,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 8)
     my.item_width(self, 8)
     my.long_text_description(self, "A broardsword plus some. The girth of this extreme weapon allows you to additionally attack adjacent targets to your intended target. Also useful for chopping tomatoes.")
-    my.noise_on_moving_or_being_carried(self, 40)
+    my.noise_on_dropping(self, 40)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)

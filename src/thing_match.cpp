@@ -1017,7 +1017,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag116() && (what == "unused_flag116")) {
     return true;
   }
-  if (unused_flag117() && (what == "unused_flag117")) {
+  if (noise_additional_on_teleporting() && (what == "noise_additional_on_teleporting")) {
     return true;
   }
   if (is_able_to_jump_attack_chance_d1000() && (what == "is_able_to_jump_attack_chance_d1000")) {
@@ -1104,7 +1104,7 @@ bool Thing::matches(const std::string &what)
   if (gfx_show_asleep() && (what == "gfx_show_asleep")) {
     return true;
   }
-  if (noise_on_jumping() && (what == "noise_on_jumping")) {
+  if (noise_additional_on_jumping() && (what == "noise_additional_on_jumping")) {
     return true;
   }
   if (noise_on_born() && (what == "noise_on_born")) {
@@ -1131,7 +1131,7 @@ bool Thing::matches(const std::string &what)
   if (is_breather() && (what == "is_breather")) {
     return true;
   }
-  if (noise_on_moving_or_being_carried() && (what == "noise_on_moving_or_being_carried")) {
+  if (noise_on_dropping() && (what == "noise_on_dropping")) {
     return true;
   }
   if (is_asleep_initially() && (what == "is_asleep_initially")) {
@@ -2161,11 +2161,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "noise_on_born") {
     return &Thing::noise_on_born;
   }
-  if (what == "noise_on_jumping") {
-    return &Thing::noise_on_jumping;
+  if (what == "noise_additional_on_jumping") {
+    return &Thing::noise_additional_on_jumping;
   }
-  if (what == "noise_on_moving_or_being_carried") {
-    return &Thing::noise_on_moving_or_being_carried;
+  if (what == "noise_on_dropping") {
+    return &Thing::noise_on_dropping;
   }
   if (what == "noise_on_open") {
     return &Thing::noise_on_open;
@@ -2275,8 +2275,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag116") {
     return &Thing::unused_flag116;
   }
-  if (what == "unused_flag117") {
-    return &Thing::unused_flag117;
+  if (what == "noise_additional_on_teleporting") {
+    return &Thing::noise_additional_on_teleporting;
   }
   if (what == "is_able_to_jump_attack_chance_d1000") {
     return &Thing::is_able_to_jump_attack_chance_d1000;

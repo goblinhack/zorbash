@@ -56,7 +56,7 @@ def init_weapon(name, text_name, short_text_name):
     my.item_height(self, 6)
     my.item_width(self, 6)
     my.long_text_description(self, "A gleaming wooden handled axe. It's a bit short and extra hungry for vengeance. Against what, who can say. Take care, as your mighty swing can hit all monsters adjacent to you.")
-    my.noise_on_moving_or_being_carried(self, 15)
+    my.noise_on_dropping(self, 15)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)

@@ -37,7 +37,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 2)
     my.item_width(self, 2)
     my.long_text_description(self, "When carrying these two sticks that have been oddly combined, you somehow know that you will take only half damage from any udead attack. Not bad for some twigs. Item is equipped in the gauntlet slot.")
-    my.noise_on_moving_or_being_carried(self, 5)
+    my.noise_on_dropping(self, 5)
     my.normal_placement_rules(self, True)
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")

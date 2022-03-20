@@ -31,7 +31,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_enchantable(self, True)
     my.is_wooden(self, True)
     my.is_interesting(self, True)
-    my.noise_on_moving_or_being_carried(self, 25)
+    my.noise_on_dropping(self, 25)
     my.is_item(self, True)
     my.collision_hit_priority(self, 6)
     my.is_biome_dungeon(self, True)

@@ -24,7 +24,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "Fried eggs. Just lying on the floor. You'll have to scoop them off the dirt to eat them, but you have no standards, right? Don't even start to ask where they were cooked. Or by whom. On what.")
-    my.noise_on_moving_or_being_carried(self, 1)
+    my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d25")
     my.rarity(self, my.RARITY_COMMON)

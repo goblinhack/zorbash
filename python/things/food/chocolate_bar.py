@@ -27,7 +27,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_width(self, 4)
     my.long_text_description(self, "A chocolate bar. Unwrapped.")
     my.melting_chance_d1000(self, 500)
-    my.noise_on_moving_or_being_carried(self, -10)
+    my.noise_on_dropping(self, -10)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)
