@@ -2099,6 +2099,7 @@ public:
   void move_finish(void);
   void move_set_dir_from_delta(point);
   void move_set_dir_from_dest_or_delta(point delta);
+  void move_set_dir_from_target(Thingp target);
   void move_to_immediately(point to);
   void move_to(point to);
   void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));

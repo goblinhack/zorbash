@@ -252,6 +252,7 @@ std::initializer_list< std::string > tps = {
     "player2",
     "pot_health",
     "pot_health_effect",
+    "projectile_acid",
     "projectile_cold",
     "projectile_fire",
     "projectile_web",

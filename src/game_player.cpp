@@ -144,11 +144,11 @@ void Game::place_player(void)
         // level->thing_new("door_metal", point(x + 2, y));
         // level->thing_new("rock1", point(x + 1, y));
         // level->thing_new("rock1", point(x + 3, y));
-        level->thing_new("gargoyle_static", point(x + 2, y - 2));
+        // level->thing_new("gargoyle_static", point(x + 2, y - 2));
         // level->thing_new("lava", point(x, y));
         // level->thing_new("food_frog", point(x + 3, y - 1));
         // level->thing_new("fire", point(x + 1, y - 1));
-        level->thing_new("enchantstone", point(x + 1, y - 1));
+        // level->thing_new("enchantstone", point(x + 1, y - 1));
         // level->thing_new("horseshoe", point(x + 2, y - 1));
         // level->thing_new("four_leaf_clover", point(x + 2, y - 1));
         // level->thing_new("medal_of_valor", point(x + 2, y - 1));
@@ -168,7 +168,7 @@ void Game::place_player(void)
         // level->thing_new("key_pair", point(x - 1, y - 2));
         // level->thing_new("key_golden", point(x - 1, y + 2));
         // level->thing_new("key_penta", point(x, y + 12));
-        level->thing_new("snake_viper", point(x, y + 2));
+        // level->thing_new("snake_viper", point(x, y + 2));
         //
         // level->thing_new("zorb_pack", point(x + 2, y));
         // level->thing_new("mummy_pack", point(x + 2, y + 12));

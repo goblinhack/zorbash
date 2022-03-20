@@ -54,6 +54,12 @@ void Thing::move_set_dir_from_dest_or_delta(point delta)
   }
 }
 
+void Thing::move_set_dir_from_target(Thingp target)
+{
+  auto delta = target->curr_at - curr_at;
+  move_set_dir_from_delta(delta);
+}
+
 void Thing::move_set_dir_from_delta(point delta)
 {
   //
