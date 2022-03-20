@@ -23,10 +23,12 @@ python/things/gauntlet/__pycache__
 python/things/helmet/__pycache__
 python/things/internal/__pycache__
 python/things/items/__pycache__
+python/things/lasers/__pycache__
 python/things/mobs/__pycache__/
 python/things/monsts/__pycache__
 python/things/player/__pycache__/
 python/things/potions/__pycache__
+python/things/projectiles/__pycache__
 python/things/__pycache__
 python/things/rings/__pycache__
 python/things/shield/__pycache__

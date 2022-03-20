@@ -18,6 +18,8 @@ for IN in \
     doors/*py \
     dungeon/*py \
     effects/*py \
+    lasers/*py \
+    projectiles/*py \
     food/*py \
     internal/*py \
     items/*py \
