@@ -24,7 +24,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "Potted meat. What kind, who knows. Just meat. An unforgettable experience.")
-    my.noise_on_moving_or_being_carried(self, 15)
+    my.noise_on_dropping(self, 15)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d45")
     my.rarity(self, my.RARITY_COMMON)

@@ -25,7 +25,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 2)
     my.item_width(self, 2)
     my.long_text_description(self, "Nutritious and lucky!")
-    my.noise_on_moving_or_being_carried(self, 25)
+    my.noise_on_dropping(self, 25)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d40")
     my.rarity(self, my.RARITY_UNCOMMON)

@@ -27,7 +27,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_width(self, 3)
     my.long_text_description(self, "Chocolate frogs. The food of Gods. May seem out of place in a dungeon and you'd be correct. It is rumored a helpful god left them here for brave adventurers to assist them on their path. Often found in a purple wrapper. Almost looks too good to eat.")
     my.melting_chance_d1000(self, 500)
-    my.noise_on_moving_or_being_carried(self, 1)
+    my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "50+1d100")
     my.rarity(self, my.RARITY_UNCOMMON)

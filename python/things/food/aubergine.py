@@ -23,7 +23,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "An aubergine. Some call it eggplant. This one, well, it's round and a bit puckered and has seen better days. It might be a rock.")
-    my.noise_on_moving_or_being_carried(self, 1)
+    my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)

@@ -1369,13 +1369,15 @@ public:
   int noise_incr(int);
   int noise_incr(void);
   int noise_on_born(void);
-  int noise_on_jumping(void);
-  int noise_on_moving_or_being_carried(void);
+  int noise_additional_on_jumping(void);
+  int noise_on_dropping(void);
   int noise_on_open(void);
   int noise_on_you_are_hit_and_now_dead(void);
   int noise_on_you_are_hit_but_still_alive(void);
   int noise_set(int);
   int noise_total(void);
+  int noise_on_jumping(void);
+  int noise_on_teleporting(void);
   int noise(void);
   int normal_placement_rules(void);
   int nutrition_get(void);
@@ -1658,7 +1660,7 @@ public:
   int unused_flag114(void);
   int unused_flag115(void);
   int unused_flag116(void);
-  int unused_flag117(void);
+  int noise_additional_on_teleporting(void);
   int unused_flag11(void);
   int unused_flag123(void);
   int unused_flag12(void);

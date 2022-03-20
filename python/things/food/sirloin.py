@@ -23,7 +23,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "Sirloin steak. Jusy lying their in the dirt for who knows how long. But you'll still eat it right?")
-    my.noise_on_moving_or_being_carried(self, 1)
+    my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d45")
     my.rarity(self, my.RARITY_COMMON)

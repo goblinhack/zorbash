@@ -23,7 +23,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "A pineapple. How it got here... I mean I just can't explain this one. Just eat it and enjoy the weird dreams tonight.")
-    my.noise_on_moving_or_being_carried(self, 1)
+    my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d20")
     my.rarity(self, my.RARITY_COMMON)

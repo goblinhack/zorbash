@@ -2132,10 +2132,10 @@ int Thing::unused_flag116(void)
   return (tp()->unused_flag116());
 }
 
-int Thing::unused_flag117(void)
+int Thing::noise_additional_on_teleporting(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag117());
+  return (tp()->noise_additional_on_teleporting());
 }
 
 int Thing::is_able_to_teleport_attack_chance_d1000(void)
@@ -2294,10 +2294,10 @@ int Thing::gfx_show_asleep(void)
   return (tp()->gfx_show_asleep());
 }
 
-int Thing::noise_on_jumping(void)
+int Thing::noise_additional_on_jumping(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_on_jumping());
+  return (tp()->noise_additional_on_jumping());
 }
 
 int Thing::noise_on_born(void)
@@ -2342,10 +2342,10 @@ int Thing::is_breather(void)
   return (tp()->is_breather());
 }
 
-int Thing::noise_on_moving_or_being_carried(void)
+int Thing::noise_on_dropping(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_on_moving_or_being_carried());
+  return (tp()->noise_on_dropping());
 }
 
 int Thing::is_asleep_initially(void)

@@ -320,6 +320,9 @@ bool Thing::try_to_teleport(point to, bool be_careful, bool *too_far)
 
   on_teleport();
 
+  level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_teleporting());
+  level->noisemap_in_incr(to.x, to.y, noise_on_teleporting());
+
   dbg("Jump success.");
   teleport_end();
   return true;

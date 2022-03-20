@@ -254,7 +254,7 @@ void Thing::update(void)
   //
   {
     TRACE_NO_INDENT();
-    auto v = tpp->noise_on_moving_or_being_carried();
+    auto v = tpp->noise_on_dropping();
     if (unlikely(v)) {
       noise_set(v);
     }

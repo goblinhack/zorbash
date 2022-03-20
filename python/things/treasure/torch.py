@@ -39,7 +39,7 @@ def tp_init(name, text_name, tiles=[]):
     my.light_color(self, "orange")
     my.light_dist(self, 1)
     my.long_text_description(self, "A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
-    my.noise_on_moving_or_being_carried(self, 1)
+    my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_lifespan_tick_do(self, "me.on_lifespan_tick()")
     my.text_a_or_an(self, "a")

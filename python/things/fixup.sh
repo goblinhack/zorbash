@@ -424,7 +424,7 @@ do
       unused_flag114_set \
       unused_flag115_set \
       unused_flag116_set \
-      unused_flag117_set \
+      noise_additional_on_teleporting_set \
       is_able_to_jump_attack_chance_d1000_set \
       distance_teleport_set \
       is_able_to_teleport_attack_set \
@@ -452,7 +452,7 @@ do
       is_very_heavy_set \
       gfx_health_bar_shown_when_awake_only_set \
       gfx_show_asleep_set \
-      noise_on_jumping_set \
+      noise_additional_on_jumping_set \
       noise_on_born_set \
       noise_on_open_set \
       noise_on_you_are_hit_and_now_dead_set \
@@ -461,7 +461,7 @@ do
       noise_blocker_set \
       is_immune_to_cold_set \
       is_breather_set \
-      noise_on_moving_or_being_carried_set \
+      noise_on_dropping_set \
       is_asleep_initially_set \
       is_able_to_sleep_set \
       is_obstacle_when_dead_set \

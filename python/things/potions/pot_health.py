@@ -109,7 +109,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
-    my.noise_on_moving_or_being_carried(self, 10)
+    my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_fall_do(self, "me.on_fall()")

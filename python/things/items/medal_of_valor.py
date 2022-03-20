@@ -25,7 +25,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 2)
     my.item_width(self, 2)
     my.long_text_description(self, "Even just looking at this medal of valor, you feel more brave. Whomever left it here, probably felt the same...")
-    my.noise_on_moving_or_being_carried(self, 25)
+    my.noise_on_dropping(self, 25)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stat_def_mod(self, 2)

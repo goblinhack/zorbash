@@ -24,7 +24,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "A bottle of imported Gobweiser beer. A local favorite.")
-    my.noise_on_moving_or_being_carried(self, 25)
+    my.noise_on_dropping(self, 25)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d20")
     my.rarity(self, my.RARITY_COMMON)
