@@ -22,6 +22,16 @@ def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
+def on_firing_at_something(me, target, x, y):  # Return True on doing an action
+    if my.pcg_randint(1, 10) < 8:
+        sound = f"growl{my.non_pcg_randint(1, 10)}"
+        if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+            my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+        my.thing_fire_at(me, "projectile_acid", target)
+        return True
+    return False
+
+
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
     my.aggression_level_pct(self, 90)
@@ -37,10 +47,15 @@ def tp_init(name, text_name):
     my.damage_poison_chance_d1000(self, 1000)
     my.damage_poison_dice(self, "1d20+10")
     my.damage_received_doubled_from_fire(self, True)
+    my.is_able_to_fire_at(self, True)
+    my.is_able_to_sleep(self, True)
+    my.is_asleep_initially(self, True)
     my.distance_avoid(self, 2)
+    my.is_immune_to_acid(self, True)
     my.distance_jump(self, 2)
     my.distance_teleport(self, 5)
     my.distance_vision(self, 3)
+    my.on_firing_at_something_do(self, "me.on_firing_at_something()")
     my.environ_avoids_acid(self, 100)
     my.environ_avoids_cold(self, 100)
     my.environ_avoids_fire(self, 10)
@@ -50,6 +65,7 @@ def tp_init(name, text_name):
     my.gfx_anim_use(self, "attack_claws")
     my.gfx_bounce_on_move(self, True)
     my.gfx_health_bar_shown(self, True)
+    my.gfx_show_asleep(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)
     my.health_initial_dice(self, "2d6")
@@ -85,9 +101,11 @@ def tp_init(name, text_name):
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_cold(self, True)
+    my.is_toughness_soft(self, True)
     my.is_immune_to_water(self, True)
     my.is_living(self, True)
     my.is_loggable(self, True)
+    my.gfx_health_bar_shown(self, True)
     my.is_meat_eater(self, True)
     my.is_monst_class_b(self, True)
     my.is_monst(self, True)
@@ -120,6 +138,9 @@ def tp_init(name, text_name):
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
+    delay = 10000
+    my.tile(self, "teletoad.1", is_sleeping=True, delay_ms=delay)
+    my.tile(self, "teletoad.2", is_sleeping=True, delay_ms=delay)
     delay = 150
     my.tile(self, "teletoad.1", delay_ms=delay)
     my.tile(self, "teletoad.2", delay_ms=delay)

@@ -484,6 +484,8 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   dbg("Attack %s", victim->to_string().c_str());
   TRACE_AND_INDENT();
 
+  wake();
+
   idle_count_set(0);
 
   auto owner = top_owner();
