@@ -1104,7 +1104,7 @@ bool Thing::matches(const std::string &what)
   if (gfx_show_asleep() && (what == "gfx_show_asleep")) {
     return true;
   }
-  if (noise_additional_on_jumping() && (what == "noise_additional_on_jumping")) {
+  if (noise_additional_on_jump_end() && (what == "noise_additional_on_jump_end")) {
     return true;
   }
   if (noise_on_born() && (what == "noise_on_born")) {
@@ -2161,8 +2161,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "noise_on_born") {
     return &Thing::noise_on_born;
   }
-  if (what == "noise_additional_on_jumping") {
-    return &Thing::noise_additional_on_jumping;
+  if (what == "noise_additional_on_jump_end") {
+    return &Thing::noise_additional_on_jump_end;
   }
   if (what == "noise_on_dropping") {
     return &Thing::noise_on_dropping;

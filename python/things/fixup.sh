@@ -452,7 +452,7 @@ do
       is_very_heavy_set \
       gfx_health_bar_shown_when_awake_only_set \
       gfx_show_asleep_set \
-      noise_additional_on_jumping_set \
+      noise_additional_on_jump_end_set \
       noise_on_born_set \
       noise_on_open_set \
       noise_on_you_are_hit_and_now_dead_set \

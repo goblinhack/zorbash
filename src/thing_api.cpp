@@ -2294,10 +2294,10 @@ int Thing::gfx_show_asleep(void)
   return (tp()->gfx_show_asleep());
 }
 
-int Thing::noise_additional_on_jumping(void)
+int Thing::noise_additional_on_jump_end(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->noise_additional_on_jumping());
+  return (tp()->noise_additional_on_jump_end());
 }
 
 int Thing::noise_on_born(void)

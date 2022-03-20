@@ -1369,7 +1369,7 @@ public:
   int noise_incr(int);
   int noise_incr(void);
   int noise_on_born(void);
-  int noise_additional_on_jumping(void);
+  int noise_additional_on_jump_end(void);
   int noise_on_dropping(void);
   int noise_on_open(void);
   int noise_on_you_are_hit_and_now_dead(void);

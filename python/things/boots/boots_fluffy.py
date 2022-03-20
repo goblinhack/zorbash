@@ -37,7 +37,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_described_when_hovering_over(self, True)
     my.temperature(self, 50)
     my.is_droppable(self, True)
-    my.noise_additional_on_jumping(self, -50)
+    my.noise_additional_on_jump_end(self, -50)
     my.noise_on_dropping(self, -50)
     my.is_enchantable(self, True)
     my.is_interesting(self, True)
