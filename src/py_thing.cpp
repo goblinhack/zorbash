@@ -432,6 +432,32 @@ PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
+PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     me_id    = 0;
+  static char *kwlist[] = {(char *) "me", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &me_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! me_id) {
+    ERR("%s: No me thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp me = game->thing_find(me_id);
+  if (! me) {
+    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    Py_RETURN_NONE;
+  }
+
+  me->telport_randomly();
+  Py_RETURN_NONE;
+}
+
 PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();

@@ -477,7 +477,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         //
         // Trace all possible jump paths to see if we can jump over
         //
-        auto jump_dist = how_far_i_can_jump_max();
+        auto jump_dist = distance_jump_max_get();
         for (const auto &jp : game->jump_paths) {
           point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
           point jump_end(p.x + jp.end.x, p.y + jp.end.y);
@@ -1194,11 +1194,11 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     int jump_distance;
 
     switch (search_type) {
-      case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED: jump_distance = how_far_i_can_jump_max(); break;
+      case MONST_SEARCH_TYPE_LOCAL_JUMP_ALLOWED: jump_distance = distance_jump_max_get(); break;
       case MONST_SEARCH_TYPE_LOCAL_NO_JUMP: jump_distance = 0; break;
-      case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED: jump_distance = how_far_i_can_jump_max(); break;
+      case MONST_SEARCH_TYPE_GLOBAL_JUMP_ALLOWED: jump_distance = distance_jump_max_get(); break;
       case MONST_SEARCH_TYPE_GLOBAL_NO_JUMP: jump_distance = 0; break;
-      case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED: jump_distance = how_far_i_can_jump_max(); break;
+      case MONST_SEARCH_TYPE_LAST_RESORTS_JUMP_ALLOWED: jump_distance = distance_jump_max_get(); break;
       case MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP: jump_distance = 0; break;
       default: DIE("unexpected search-type case"); break;
     }

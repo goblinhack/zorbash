@@ -21,6 +21,13 @@ def on_enchant(me, x, y):
     my.thing_noise_incr(me, -10)
 
 
+def on_use(owner, item, target, x, y):
+    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health_get(owner)))
+    # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health_get(item)))
+    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health_get(target)))
+    my.thing_teleport_randomly(owner)
+
+
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
@@ -30,6 +37,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_able_to_fall(self, True)
     my.is_boots(self, True)
     my.is_auto_equipped(self, True)
+    my.is_usable(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
@@ -49,17 +57,18 @@ def tp_init(name, text_name, short_text_name):
     my.is_burnable(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.distance_teleport(self, 10)
-    my.long_text_description(self, "Boots on uncontrolled teleport. Sometimes useful, these squeaky boots will randomly teleport you up to 10 tiles away when used. This may be good or bad depending on your situation.")
+    my.distance_teleport(self, 20)
+    my.long_text_description(self, "Boots of uncontrolled emergency teleport. Useful in moments of desperation, these squeaky boots will randomly teleport you up to 20 tiles away when used. This may be good or bad depending on your situation.")
     my.stat_dex_mod(self, 1)
     my.stat_def_mod(self, 1)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")
+    my.on_use_do(self, "me.on_use()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Boots of teleport.")
+    my.text_description(self, "Boots of emergency teleport.")
     my.text_enchant(self, "-10 decibels")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
@@ -72,8 +81,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="boots_teleport",
-        text_name="boots of teleport",
-        short_text_name="boots of teleport",
+        text_name="boots of emergency teleport",
+        short_text_name="boots of emergency teleport",
     )
 
 

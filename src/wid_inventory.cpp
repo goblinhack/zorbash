@@ -1134,6 +1134,21 @@ bool wid_inventory_create(Thingp selected, Thingp over)
         wid_set_text(w, "%%fg=white$U%%fg=reset$se");
       }
       y_at += 3;
+    } else if (item_option->is_usable() && player->is_equipped(item_option)) {
+      //
+      // For example boots of teleport
+      //
+      TRACE_AND_INDENT();
+      auto p = wid_inventory_window;
+      auto w = wid_new_square_button(p, "use");
+
+      point tl = make_point(x_off, y_at);
+      point br = make_point(x_off + width, y_at + 2);
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "%%fg=white$U%%fg=reset$se");
+      y_at += 3;
     }
 
     //

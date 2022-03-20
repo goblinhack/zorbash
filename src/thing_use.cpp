@@ -372,7 +372,12 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     if (preferred_equip == -1) {
       preferred_equip = MONST_EQUIP_BOOTS;
     }
-    if (equip(what, preferred_equip)) {
+    if (what->is_usable() && is_equipped(what)) {
+      used(what, this, false /* remove after use */, use_options);
+      if (is_player()) {
+        game->tick_begin("player used a special ability");
+      }
+    } else if (equip(what, preferred_equip)) {
       if (is_player()) {
         game->tick_begin("player changed boots");
       }

@@ -758,7 +758,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       } else if (attack_fire) {
         msg("%%fg=orange$You burn for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
       } else if (attack_cold) {
-        msg("%%fg=cyan$You blister for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
+        msg("%%fg=cyan$Your skin blisters for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
       } else if (attack_necrosis) {
         msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else {
@@ -1223,7 +1223,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   //
   // This might trigger more damage
   //
-  temperature_incr(hitter->temperature_get());
+  if (real_hitter != this) {
+    temperature_incr(hitter->temperature_get());
+  }
 
   //
   // Python callback

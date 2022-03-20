@@ -1026,9 +1026,6 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_teleport_attack_chance_d1000() && (what == "is_able_to_teleport_attack_chance_d1000")) {
     return true;
   }
-  if (distance_teleport() && (what == "distance_teleport")) {
-    return true;
-  }
   if (is_able_to_teleport_attack() && (what == "is_able_to_teleport_attack")) {
     return true;
   }
@@ -2283,9 +2280,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_able_to_teleport_attack_chance_d1000") {
     return &Thing::is_able_to_teleport_attack_chance_d1000;
-  }
-  if (what == "distance_teleport") {
-    return &Thing::distance_teleport;
   }
   if (what == "unused_flag11") {
     return &Thing::unused_flag11;
