@@ -13126,67 +13126,7 @@ def init_laser_lightning_fork_tiles():
 
 
 @timeme
-def init_projectile_fire_tiles():
-    tiles = [
-        "projectile_fire.1",
-        "projectile_fire.2",
-        "projectile_fire.3",
-        "projectile_fire.4",
-        "projectile_fire.5",
-        "projectile_fire.6",
-        "projectile_fire.7",
-        "projectile_fire.8",
-        "projectile_fire.9",
-        "projectile_fire.10",
-        "projectile_fire.11",
-        "projectile_fire.12",
-        "projectile_fire.13",
-        "projectile_fire.14",
-        "projectile_fire.15",
-        "projectile_fire.16",
-    ]
-
-    my.tile_load_arr_sprites(
-        file="data/gfx/projectile_fire.tga",
-        name="projectile_fire",
-        width=32,
-        height=32,
-        arr=tiles,
-    )
-
-
-@timeme
-def init_projectile_cold_tiles():
-    tiles = [
-        "projectile_cold.1",
-        "projectile_cold.2",
-        "projectile_cold.3",
-        "projectile_cold.4",
-        "projectile_cold.5",
-        "projectile_cold.6",
-        "projectile_cold.7",
-        "projectile_cold.8",
-        "projectile_cold.9",
-        "projectile_cold.10",
-        "projectile_cold.11",
-        "projectile_cold.12",
-        "projectile_cold.13",
-        "projectile_cold.14",
-        "projectile_cold.15",
-        "projectile_cold.16",
-    ]
-
-    my.tile_load_arr_sprites(
-        file="data/gfx/projectile_cold.tga",
-        name="projectile_cold",
-        width=32,
-        height=32,
-        arr=tiles,
-    )
-
-
-@timeme
-def init_projectile_web_tiles():
+def init_projectiles_tiles():
     tiles = [
         "projectile_web.1",
         "projectile_web.2",
@@ -13204,11 +13144,59 @@ def init_projectile_web_tiles():
         "projectile_web.14",
         "projectile_web.15",
         "projectile_web.16",
+        "projectile_fire.1",
+        "projectile_fire.2",
+        "projectile_fire.3",
+        "projectile_fire.4",
+        "projectile_fire.5",
+        "projectile_fire.6",
+        "projectile_fire.7",
+        "projectile_fire.8",
+        "projectile_fire.9",
+        "projectile_fire.10",
+        "projectile_fire.11",
+        "projectile_fire.12",
+        "projectile_fire.13",
+        "projectile_fire.14",
+        "projectile_fire.15",
+        "projectile_fire.16",
+        "projectile_cold.1",
+        "projectile_cold.2",
+        "projectile_cold.3",
+        "projectile_cold.4",
+        "projectile_cold.5",
+        "projectile_cold.6",
+        "projectile_cold.7",
+        "projectile_cold.8",
+        "projectile_cold.9",
+        "projectile_cold.10",
+        "projectile_cold.11",
+        "projectile_cold.12",
+        "projectile_cold.13",
+        "projectile_cold.14",
+        "projectile_cold.15",
+        "projectile_cold.16",
+        "projectile_acid.1",
+        "projectile_acid.2",
+        "projectile_acid.3",
+        "projectile_acid.4",
+        "projectile_acid.5",
+        "projectile_acid.6",
+        "projectile_acid.7",
+        "projectile_acid.8",
+        "projectile_acid.9",
+        "projectile_acid.10",
+        "projectile_acid.11",
+        "projectile_acid.12",
+        "projectile_acid.13",
+        "projectile_acid.14",
+        "projectile_acid.15",
+        "projectile_acid.16",
     ]
 
     my.tile_load_arr_sprites(
-        file="data/gfx/projectile_web.tga",
-        name="projectile_web",
+        file="data/gfx/projectiles.tga",
+        name="projectiles_web",
         width=32,
         height=32,
         arr=tiles,
@@ -13272,9 +13260,7 @@ init_laser_lightning_tiles()
 init_light()
 init_map_treasure()
 init_progress_bar()
-init_projectile_cold_tiles()
-init_projectile_fire_tiles()
-init_projectile_web_tiles()
+init_projectiles_tiles()
 init_solid()
 init_teleport_out_tiles()
 init_teleport_in_tiles()
