@@ -24,7 +24,7 @@ void Level::cursor_path_draw_circle(void)
 
   auto what = game->request_to_throw_item;
   if (! what) {
-    what = game->request_to_fire_item;
+    what = game->request_to_use_item;
     if (! what) {
       return;
     }
@@ -48,7 +48,7 @@ void Level::cursor_path_draw_circle(void)
     if (dist > player->distance_throw_get()) {
       too_far = true;
     }
-  } else if (game->request_to_fire_item) {
+  } else if (game->request_to_use_item) {
     if (dist > what->range_max()) {
       too_far = true;
     }
@@ -241,11 +241,11 @@ void Level::cursor_path_draw(point start, point end)
 
   if (game->request_to_throw_item) {
     cursor_path_draw_circle();
-  } else if (game->request_to_fire_item) {
+  } else if (game->request_to_use_item) {
     //
     // Draw a line instead
     //
-    if (game->request_to_fire_item->blast_max_radius()) {
+    if (game->request_to_use_item->blast_max_radius()) {
       //
       // For wands with a blast effect, show both line and radius
       //
@@ -271,11 +271,11 @@ void Level::cursor_path_draw(const std::vector< point > &move_path)
 
   if (game->request_to_throw_item) {
     cursor_path_draw_circle();
-  } else if (game->request_to_fire_item) {
+  } else if (game->request_to_use_item) {
     //
     // Draw a line instead
     //
-    if (game->request_to_fire_item->blast_max_radius()) {
+    if (game->request_to_use_item->blast_max_radius()) {
       //
       // For wands with a blast effect, show both line and radius
       //
@@ -352,8 +352,8 @@ void Level::cursor_path_create(void)
   // For lasers do not show the cursor (circle) unless the item has a
   // blast radius
   //
-  if (game->request_to_fire_item) {
-    if (! game->request_to_fire_item->blast_max_radius()) {
+  if (game->request_to_use_item) {
+    if (! game->request_to_use_item->blast_max_radius()) {
       return;
     }
   }
@@ -405,8 +405,8 @@ void Level::cursor_path_create(const std::vector< point > &move_path)
   // For lasers do not show the cursor (circle) unless the item has a
   // blast radius
   //
-  if (game->request_to_fire_item) {
-    if (! game->request_to_fire_item->blast_max_radius()) {
+  if (game->request_to_use_item) {
+    if (! game->request_to_use_item->blast_max_radius()) {
       return;
     }
   }

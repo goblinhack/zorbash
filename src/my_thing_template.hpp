@@ -530,7 +530,7 @@ private:
   int _unused_flag113 {};
   int _unused_flag114 {};
   int _unused_flag115 {};
-  int _unused_flag116 {};
+  int _is_item_targetted {};
   int _noise_additional_on_teleporting {};
   int _unused_flag12 {};
   int _unused_flag123 {};
@@ -1434,7 +1434,7 @@ public:
   int unused_flag113(void) const { return _unused_flag113; }
   int unused_flag114(void) const { return _unused_flag114; }
   int unused_flag115(void) const { return _unused_flag115; }
-  int unused_flag116(void) const { return _unused_flag116; }
+  int is_item_targetted(void) const { return _is_item_targetted; }
   int noise_additional_on_teleporting(void) const { return _noise_additional_on_teleporting; }
   int unused_flag11(void) const { return _unused_flag11; }
   int unused_flag123(void) const { return _unused_flag123; }
@@ -2076,7 +2076,7 @@ public:
   void unused_flag113_set(int v) { _unused_flag113 = v; }
   void unused_flag114_set(int v) { _unused_flag114 = v; }
   void unused_flag115_set(int v) { _unused_flag115 = v; }
-  void unused_flag116_set(int v) { _unused_flag116 = v; }
+  void is_item_targetted_set(int v) { _is_item_targetted = v; }
   void noise_additional_on_teleporting_set(int v) { _noise_additional_on_teleporting = v; }
   void unused_flag11_set(int v) { _unused_flag11 = v; }
   void unused_flag123_set(int v) { _unused_flag123 = v; }

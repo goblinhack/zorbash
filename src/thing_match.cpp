@@ -1014,7 +1014,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag115() && (what == "unused_flag115")) {
     return true;
   }
-  if (unused_flag116() && (what == "unused_flag116")) {
+  if (is_item_targetted() && (what == "is_item_targetted")) {
     return true;
   }
   if (noise_additional_on_teleporting() && (what == "noise_additional_on_teleporting")) {
@@ -2269,8 +2269,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag115") {
     return &Thing::unused_flag115;
   }
-  if (what == "unused_flag116") {
-    return &Thing::unused_flag116;
+  if (what == "is_item_targetted") {
+    return &Thing::is_item_targetted;
   }
   if (what == "noise_additional_on_teleporting") {
     return &Thing::noise_additional_on_teleporting;

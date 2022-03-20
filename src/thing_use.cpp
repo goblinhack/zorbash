@@ -377,6 +377,13 @@ bool Thing::use(Thingp what, UseOptions *use_options)
       if (is_player()) {
         game->tick_begin("player used a special ability");
       }
+
+      //
+      // For boots of teleport
+      //
+      if (what->is_target_select()) {
+        ret = item_choose_target(what);
+      }
     } else if (equip(what, preferred_equip)) {
       if (is_player()) {
         game->tick_begin("player changed boots");

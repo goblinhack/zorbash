@@ -27,6 +27,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_able_to_fall(self, True)
     my.is_boots(self, True)
     my.is_auto_equipped(self, True)
+    my.is_item_targetted(self, True)
     my.is_usable(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)

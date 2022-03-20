@@ -320,6 +320,8 @@ public:
   Thingp immediate_owner(void);
   Thingp immediate_spawned_owner(void);
   Thingp in_the_way(const point s, const point e, int x, int y);
+  Thingp item_targetted_use_at(Thingp wand, point at);
+  Thingp item_targetted_use_at(Thingp wand, Thingp target);
   Thingp leader(void);
   Thingp most_dangerous_adjacent_thing(void);
   Thingp most_dangerous_visible_thing(void);
@@ -460,6 +462,7 @@ public:
   bool is_equipped(Thingp item);
   bool is_hated_by_me(const point p);
   bool is_hated_by_me(const Thingp it);
+  bool item_choose_target(Thingp item, Thingp victim = nullptr);
   bool is_on_fire(void);
   bool is_state_sleeping(void);
   bool is_stuck(void);
@@ -525,6 +528,14 @@ public:
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
   bool teleport_attack(Thingp it = nullptr);
+  bool telport_randomly_away_from_player(void);
+  bool telport_randomly_carefree(point to);
+  bool telport_randomly_carefree(point to, bool *too_far);
+  bool telport_randomly_carefully(point to);
+  bool telport_randomly_carefully(point to, bool *too_far);
+  bool telport_randomly(point to, bool carefully, bool *too_far);
+  bool telport_randomly_towards_player(void);
+  bool telport_randomly(void);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
   bool throw_item_choose_target(Thingp item);
@@ -548,14 +559,6 @@ public:
   bool try_to_jump(point to, bool carefully, bool *too_far);
   bool try_to_jump_towards_player(void);
   bool try_to_jump(void);
-  bool telport_randomly_away_from_player(void);
-  bool telport_randomly_carefree(point to);
-  bool telport_randomly_carefree(point to, bool *too_far);
-  bool telport_randomly_carefully(point to);
-  bool telport_randomly_carefully(point to, bool *too_far);
-  bool telport_randomly(point to, bool carefully, bool *too_far);
-  bool telport_randomly_towards_player(void);
-  bool telport_randomly(void);
   bool try_to_use_amulet(void);
   bool try_to_use_armor(void);
   bool try_to_use_boots(void);
@@ -1662,7 +1665,7 @@ public:
   int unused_flag113(void);
   int unused_flag114(void);
   int unused_flag115(void);
-  int unused_flag116(void);
+  int is_item_targetted(void);
   int unused_flag11(void);
   int unused_flag123(void);
   int unused_flag12(void);

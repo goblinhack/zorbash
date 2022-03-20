@@ -180,21 +180,27 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   IF_DEBUG { owner->log("Fire %s at %s", item, target->to_string().c_str()); }
 
-  auto what      = std::string(item);
-  auto fire_what = tp_find(what);
-  if (! fire_what) {
+  auto what  = std::string(item);
+  auto itemp = tp_find(what);
+  if (! itemp) {
     ERR("%s: Cannot find item to fire %s", __FUNCTION__, item);
     Py_RETURN_NONE;
   }
 
-  if (fire_what->is_projectile()) {
+  if (itemp->is_projectile()) {
     if (owner->projectile_fire_at(nullptr /* wand */, std::string(item), target)) {
       Py_RETURN_TRUE;
     } else {
       Py_RETURN_FALSE;
     }
-  } else if (fire_what->is_laser()) {
+  } else if (itemp->is_laser()) {
     if (owner->laser_fire_at(nullptr /* staff */, std::string(item), target)) {
+      Py_RETURN_TRUE;
+    } else {
+      Py_RETURN_FALSE;
+    }
+  } else if (itemp->is_usable()) {
+    if (owner->item_targetted_use_at(nullptr /* wand */, target)) {
       Py_RETURN_TRUE;
     } else {
       Py_RETURN_FALSE;

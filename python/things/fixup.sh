@@ -423,7 +423,7 @@ do
       unused_flag113_set \
       unused_flag114_set \
       unused_flag115_set \
-      unused_flag116_set \
+      is_item_targetted_set \
       noise_additional_on_teleporting_set \
       is_able_to_jump_attack_chance_d1000_set \
       distance_teleport_set \
