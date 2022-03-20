@@ -67,6 +67,8 @@ PyObject *thing_distance_minion_vision_shared_get(PyObject *obj, PyObject *args,
 PyObject *thing_distance_recruitment_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_get(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_distance_teleport_get(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_distance_jump_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_level(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_enchant_max_current_decr(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -393,6 +395,7 @@ PyObject *thing_poisoned_amount_get(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_poisoned_amount_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_poisoned_amount_set(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds);

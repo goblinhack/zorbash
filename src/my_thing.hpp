@@ -548,14 +548,14 @@ public:
   bool try_to_jump(point to, bool carefully, bool *too_far);
   bool try_to_jump_towards_player(void);
   bool try_to_jump(void);
-  bool try_to_teleport_away_from_player(void);
-  bool try_to_teleport_carefree(point to);
-  bool try_to_teleport_carefree(point to, bool *too_far);
-  bool try_to_teleport_carefully(point to);
-  bool try_to_teleport_carefully(point to, bool *too_far);
-  bool try_to_teleport(point to, bool carefully, bool *too_far);
-  bool try_to_teleport_towards_player(void);
-  bool try_to_teleport(void);
+  bool telport_randomly_away_from_player(void);
+  bool telport_randomly_carefree(point to);
+  bool telport_randomly_carefree(point to, bool *too_far);
+  bool telport_randomly_carefully(point to);
+  bool telport_randomly_carefully(point to, bool *too_far);
+  bool telport_randomly(point to, bool carefully, bool *too_far);
+  bool telport_randomly_towards_player(void);
+  bool telport_randomly(void);
   bool try_to_use_amulet(void);
   bool try_to_use_armor(void);
   bool try_to_use_boots(void);
@@ -772,10 +772,10 @@ public:
   float health_pct(void);
   float lunge_curr(void);
   float wobble_curr(void);
-  float how_far_i_can_jump_max(void);
-  float how_far_i_can_jump(void);
-  float how_far_i_can_teleport_max(void);
-  float how_far_i_can_teleport(void);
+  float distance_jump_max_get(void);
+  float distance_jump_with_modifiers_get(void);
+  float distance_teleport_max_get(void);
+  float distance_teleport_with_modifiers_get(void);
   float update_wobble(void);
 
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool natural_attack, bool poison, bool necrosis,
@@ -928,10 +928,12 @@ public:
   int danger_initial_level(void);
   int defence(void);
   int distance_jump(void);
+  int distance_jump_get(void);
   int distance_leader_max(void);
   int distance_minion_vision_shared(void);
   int distance_recruitment_max(void);
   int distance_teleport(void);
+  int distance_teleport_get(void);
   int distance_throw_decr(int);
   int distance_throw_decr(void);
   int distance_throw_incr(int);
@@ -1362,6 +1364,8 @@ public:
   int necrotized_amount_incr(void);
   int necrotized_amount_set(int);
   int necrotized_amount(void);
+  int noise_additional_on_jump_end(void);
+  int noise_additional_on_teleporting(void);
   int noise_blocker(void);
   int noise_decibels_hearing(void);
   int noise_decr(int);
@@ -1369,15 +1373,14 @@ public:
   int noise_incr(int);
   int noise_incr(void);
   int noise_on_born(void);
-  int noise_additional_on_jump_end(void);
   int noise_on_dropping(void);
+  int noise_on_jumping(void);
   int noise_on_open(void);
+  int noise_on_teleporting(void);
   int noise_on_you_are_hit_and_now_dead(void);
   int noise_on_you_are_hit_but_still_alive(void);
   int noise_set(int);
   int noise_total(void);
-  int noise_on_jumping(void);
-  int noise_on_teleporting(void);
   int noise(void);
   int normal_placement_rules(void);
   int nutrition_get(void);
@@ -1660,7 +1663,6 @@ public:
   int unused_flag114(void);
   int unused_flag115(void);
   int unused_flag116(void);
-  int noise_additional_on_teleporting(void);
   int unused_flag11(void);
   int unused_flag123(void);
   int unused_flag12(void);
