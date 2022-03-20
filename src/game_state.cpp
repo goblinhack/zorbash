@@ -82,7 +82,7 @@ void Game::change_state(int new_state)
   wid_actionbar_init();
 
   request_to_throw_item = nullptr;
-  request_to_fire_item  = nullptr;
+  request_to_use_item  = nullptr;
 
   switch (old_state) {
     case STATE_NORMAL:

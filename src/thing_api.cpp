@@ -2126,10 +2126,10 @@ int Thing::unused_flag115(void)
   return (tp()->unused_flag115());
 }
 
-int Thing::unused_flag116(void)
+int Thing::is_item_targetted(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag116());
+  return (tp()->is_item_targetted());
 }
 
 int Thing::noise_additional_on_teleporting(void)

@@ -103,8 +103,8 @@ void Thing::destroy(void)
     game->request_to_throw_item = nullptr;
   }
 
-  if (game->request_to_fire_item == this) {
-    game->request_to_fire_item = nullptr;
+  if (game->request_to_use_item == this) {
+    game->request_to_use_item = nullptr;
   }
 
   if (game->current_wid_thing_info == this) {

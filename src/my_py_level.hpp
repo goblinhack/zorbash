@@ -347,7 +347,7 @@ PyObject *level_unused_flag112_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag113_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag114_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag115_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag116_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_item_targetted_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_additional_on_teleporting_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_teleport_attack_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_distance_teleport_at(PyObject *obj, PyObject *args, PyObject *keywds);

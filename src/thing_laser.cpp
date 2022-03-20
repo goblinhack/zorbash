@@ -64,7 +64,7 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
     return false;
   }
 
-  game->request_to_fire_item = item;
+  game->request_to_use_item = item;
 
   return is_target_select(item);
 }

@@ -486,7 +486,7 @@ PyObject *thing_unused_flag112(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag113(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag114(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag115(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag116(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_item_targetted(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_noise_additional_on_teleporting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_teleport_attack_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_distance_teleport(PyObject *obj, PyObject *args, PyObject *keywds);

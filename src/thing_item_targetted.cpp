@@ -7,10 +7,10 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 
-bool Thing::projectile_choose_target(Thingp item, Thingp victim)
+bool Thing::item_choose_target(Thingp item, Thingp victim)
 {
   TRACE_AND_INDENT();
-  dbg("Trying to target a projectile with: %s", item->to_short_string().c_str());
+  dbg("Trying to target a item with: %s", item->to_short_string().c_str());
 
   if (is_monst() || (game->robot_mode && is_player())) {
     if (! victim) {
@@ -26,12 +26,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim)
 
     used(item, victim, true);
 
-    if (! item->target_name_projectile().empty()) {
-      projectile_fire_at(item, item->target_name_projectile(), victim);
-    } else {
-      err("Unknown projectile: %s.", item->text_the().c_str());
-      return false;
-    }
+    item_targetted_use_at(item, victim);
 
     //
     // Get the damage from the enchanted wand, so the blast inflicts that damage.
@@ -49,7 +44,7 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim)
   return is_target_select(item);
 }
 
-Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_projectile, Thingp target)
+Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -57,9 +52,6 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
   //
 
   TRACE_AND_INDENT();
-  if (target_name_projectile == "") {
-    die("No projectile name");
-  }
 
   auto collatoral_damage = in_the_way(curr_at, target->curr_at, 1);
   if (collatoral_damage.size()) {
@@ -71,56 +63,45 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
 
   if (! start.x && ! start.y) {
     if (is_player()) {
-      msg("Misfire!");
-      game->tick_begin("failed to fire projectile");
+      msg("Failed to use!");
+      game->tick_begin("failed to use item");
     }
     return nullptr;
   }
 
   if (! end.x && ! end.y) {
     if (is_player()) {
-      msg("Misfire!");
-      game->tick_begin("failed to fire projectile");
+      msg("Failed to use!");
+      game->tick_begin("failed to use item");
     }
     return nullptr;
   }
 
   //
-  // The attack is immediate when we create the projectile blast at the target.
+  // The attack is immediate when we create the item blast at the target.
   // Sp, we need to bump the game tick at this point.
   //
   if (is_player()) {
-    game->tick_begin("player fired a projectile");
+    game->tick_begin("player used an item");
     game->change_state(Game::STATE_NORMAL);
   }
 
-  auto projectile = level->thing_new(target_name_projectile, target->curr_at, item ? item : this);
-  if (! projectile) {
-    err("No projectile to fire");
-    if (is_player()) {
-      game->tick_begin("failed to fire projectile");
-    }
-    return nullptr;
-  }
+  dbg("Using named item with: %s at %s", item->to_string().c_str(), target->to_string().c_str());
 
-  dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(), target->to_string().c_str());
-
-  if (! projectile->is_projectile()) {
+  if (! item->is_item_targetted()) {
     if (is_player()) {
-      msg("I don't know how to fire projectile %s.", projectile->text_the().c_str());
+      msg("I don't know how to use %s.", item->text_the().c_str());
       game->tick_begin("player tried to use something they could not");
     }
     return nullptr;
   }
 
-  level->new_projectile(projectile->id, target->id, start, end, 200, true /* follow the target */);
+  on_use(item, target);
 
-  on_use(projectile, target);
-
-  return projectile;
+  return item;
 }
 
-Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_projectile, point at)
+Thingp Thing::item_targetted_use_at(Thingp item, point at)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -130,23 +111,23 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Projectile fire %s at %s", target_name_projectile.c_str(), at.to_string().c_str());
+  dbg("Use %s at %s", item->to_string().c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   AttackOptions attack_options       = {};
   attack_options.allow_hitting_walls = true;
   if (victim_attack_choose_best(nullptr, at, &best, &best_hit_at, &attack_options)) {
-    return projectile_fire_at(item, target_name_projectile, best);
+    return item_targetted_use_at(item, best);
   }
 
   FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
   {
     if (t->is_the_grid) {
-      return projectile_fire_at(item, target_name_projectile, t);
+      return item_targetted_use_at(item, t);
     }
   }
   FOR_ALL_THINGS_END()
 
-  err("No target to fire at");
+  err("No target to use at");
   return nullptr;
 }
