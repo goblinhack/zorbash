@@ -179,6 +179,11 @@ bool Thing::fire_at_target(void)
     return false;
   }
 
+  //
+  // Make sure we face the direction we are firing in
+  //
+  move_set_dir_from_target(target);
+
   return on_firing_at_something(target);
 }
 
