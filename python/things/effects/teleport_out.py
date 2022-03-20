@@ -21,6 +21,7 @@ def tp_init(name):
     my.noise_on_born(self, 100)
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, -100)
+    my.noise_on_born(self, 50)
     my.text_hits(self, "freezes")
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MAJOR)
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
