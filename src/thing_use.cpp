@@ -372,17 +372,18 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     if (preferred_equip == -1) {
       preferred_equip = MONST_EQUIP_BOOTS;
     }
+
+    //
+    // For boots of teleport
+    //
+    if (what->is_target_select()) {
+      return item_choose_target(what);
+    }
+
     if (what->is_usable() && is_equipped(what)) {
       used(what, this, false /* remove after use */, use_options);
       if (is_player()) {
         game->tick_begin("player used a special ability");
-      }
-
-      //
-      // For boots of teleport
-      //
-      if (what->is_target_select()) {
-        ret = item_choose_target(what);
       }
     } else if (equip(what, preferred_equip)) {
       if (is_player()) {

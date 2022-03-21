@@ -135,7 +135,7 @@ float Thing::distance_teleport_max_get(void)
   return d;
 }
 
-bool Thing::telport_randomly(point to, bool be_careful, bool *too_far)
+bool Thing::teleport(point to, bool be_careful, bool *too_far)
 {
   TRACE_NO_INDENT();
 
@@ -377,31 +377,31 @@ bool Thing::telport_randomly(point to, bool be_careful, bool *too_far)
   return true;
 }
 
-bool Thing::telport_randomly_carefully(point p, bool *too_far)
+bool Thing::teleport_carefully(point p, bool *too_far)
 {
   TRACE_NO_INDENT();
-  return telport_randomly(p, true, too_far);
+  return teleport(p, true, too_far);
 }
 
-bool Thing::telport_randomly_carefree(point p, bool *too_far)
+bool Thing::teleport_carefree(point p, bool *too_far)
 {
   TRACE_NO_INDENT();
-  return telport_randomly(p, false, too_far);
+  return teleport(p, false, too_far);
 }
 
-bool Thing::telport_randomly_carefully(point p)
+bool Thing::teleport_carefully(point p)
 {
   TRACE_NO_INDENT();
-  return telport_randomly(p, true, nullptr);
+  return teleport(p, true, nullptr);
 }
 
-bool Thing::telport_randomly_carefree(point p)
+bool Thing::teleport_carefree(point p)
 {
   TRACE_NO_INDENT();
-  return telport_randomly(p, false, nullptr);
+  return teleport(p, false, nullptr);
 }
 
-bool Thing::telport_randomly(void)
+bool Thing::teleport_randomly(void)
 {
   TRACE_NO_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
@@ -418,7 +418,7 @@ bool Thing::telport_randomly(void)
   while (tries-- > 0) {
     int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
-    if (telport_randomly_carefully(point(x, y))) {
+    if (teleport_carefully(point(x, y))) {
       return true;
     }
   }
@@ -426,7 +426,7 @@ bool Thing::telport_randomly(void)
   return false;
 }
 
-bool Thing::telport_randomly_towards_player(void)
+bool Thing::teleport_randomly_towards_player(void)
 {
   TRACE_NO_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
@@ -459,7 +459,7 @@ bool Thing::telport_randomly_towards_player(void)
       continue;
     }
 
-    if (telport_randomly_carefully(point(x, y))) {
+    if (teleport_carefully(point(x, y))) {
       return true;
     }
   }
@@ -467,7 +467,7 @@ bool Thing::telport_randomly_towards_player(void)
   return false;
 }
 
-bool Thing::telport_randomly_away_from_player(void)
+bool Thing::teleport_randomly_away_from_player(void)
 {
   TRACE_NO_INDENT();
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
@@ -491,7 +491,7 @@ bool Thing::telport_randomly_away_from_player(void)
       continue;
     }
 
-    if (telport_randomly_carefree(point(x, y))) {
+    if (teleport_carefree(point(x, y))) {
       return true;
     }
   }
@@ -514,7 +514,7 @@ bool Thing::try_harder_to_teleport(void)
   while (tries-- > 0) {
     int x = pcg_random_range(curr_at.x - d, curr_at.x + d);
     int y = pcg_random_range(curr_at.y - d, curr_at.y + d);
-    if (telport_randomly_carefree(point(x, y))) {
+    if (teleport_carefree(point(x, y))) {
       return true;
     }
   }
@@ -585,9 +585,9 @@ bool Thing::teleport_attack(Thingp maybe_victim)
       auto delta = maybe_victim->curr_at - maybe_victim->last_at;
       if (delta != point(0, 0)) {
         auto dest = maybe_victim->curr_at + (delta * 2);
-        if (! telport_randomly_carefully(dest)) {
+        if (! teleport_carefully(dest)) {
           auto dest = maybe_victim->curr_at + delta;
-          return telport_randomly_carefully(dest);
+          return teleport_carefully(dest);
         }
         return true;
       }
@@ -599,7 +599,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
 
       auto delta = maybe_victim->curr_at - curr_at;
       auto dest  = curr_at + delta;
-      return telport_randomly_carefully(dest);
+      return teleport_carefully(dest);
     }
   }
 
@@ -613,7 +613,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
       TRACE_AND_INDENT();
 
       auto teleport_dist = pcg_random_range(1, p.size() - 1);
-      return telport_randomly_carefully(get(p, teleport_dist));
+      return teleport_carefully(get(p, teleport_dist));
     }
   }
 
@@ -629,7 +629,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
         dbg("Try to teleport onto weakly %s", maybe_victim->to_string().c_str());
         TRACE_AND_INDENT();
 
-        if (telport_randomly_carefree(maybe_victim->curr_at)) {
+        if (teleport_carefree(maybe_victim->curr_at)) {
           return true;
         }
       }

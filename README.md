@@ -1,12 +1,11 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- drag boots and they vanish                                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - teletoad lanch a stream of goo                                                                                                             -->
 <!-- - teleport block                                                                                                                             -->
-<!-- - teleport boots / check cold immunity                                                                                                       -->
 <!-- - bloat                                                                                                                                      -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - boots of shoving / steadfastness                                                                                                           -->
