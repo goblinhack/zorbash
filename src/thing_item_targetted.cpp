@@ -96,8 +96,6 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
     return nullptr;
   }
 
-  on_use(item, target);
-
   return item;
 }
 

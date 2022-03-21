@@ -52,7 +52,7 @@ bool Thing::ai_escape(void)
   clear_move_path("AI escape");
 
   if (is_able_to_teleport_escape()) {
-    if (telport_randomly()) {
+    if (teleport_randomly()) {
       dbg("AI escape teleport");
       return false;
     }
