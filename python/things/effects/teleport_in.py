@@ -20,6 +20,7 @@ def tp_init(name):
     my.light_dist(self, 2)
     my.noise_on_born(self, 100)
     my.noise_on_born(self, 50)
+    my.temperature(self, -100)
     my.on_born_do(self, "me.on_born()")
     my.text_hits(self, "freezes")
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MAJOR)

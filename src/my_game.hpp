@@ -333,8 +333,9 @@ public:
   // Make sure to update thing_fini.cpp to remove these pointers
   //
   Thingp request_to_throw_item {}; // What we are throwing.
-  Thingp request_to_use_item {};  // Projectile or laser we're firing
+  Thingp request_to_use_item {};   // Projectile or laser we're firing
   Thingp current_wid_thing_info {};
+  bool   request_destination_ok {}; // Is the selected position ok?
 
   //
   // Temporary. Global requests

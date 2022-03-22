@@ -326,9 +326,13 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
 
   point dest(x, y);
 
-  level->thing_new("teleport_in", curr_at);
-  level->thing_new("teleport_out", dest);
+  level->thing_new("teleport_out", curr_at);
+  level->thing_new("teleport_in", dest);
 
+  dbg("Teleport to destination.");
+  TRACE_AND_INDENT();
+
+  is_teleporting = true;
   move_to_immediately(dest);
 
   //
@@ -372,7 +376,9 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
   level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_teleporting());
   level->noisemap_in_incr(to.x, to.y, noise_on_teleporting());
 
-  dbg("Jump success.");
+  dbg("Teleport success.");
+  TRACE_AND_INDENT();
+
   teleport_end();
   return true;
 }
@@ -557,6 +563,7 @@ void Thing::teleport_end(void)
   move_to_immediately(curr_at);
   is_moving = true;
   move_finish();
+  is_teleporting = false;
 
   //
   // Reset after the teleporting

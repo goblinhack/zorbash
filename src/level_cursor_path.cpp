@@ -75,8 +75,10 @@ void Level::cursor_path_draw_circle(void)
       }
 
       if (too_far) {
+        game->request_destination_ok = false;
         thing_new("cursor_select_fail_path", point(x, y));
       } else {
+        game->request_destination_ok = true;
         thing_new("cursor_select_path", point(x, y));
       }
     }
@@ -252,7 +254,9 @@ void Level::cursor_path_draw(point start, point end)
       cursor_path_draw_circle();
     }
   } else {
-    cursor_path_draw_line(start, end);
+    if (game->request_destination_ok) {
+      cursor_path_draw_line(start, end);
+    }
   }
 
   //
@@ -282,7 +286,9 @@ void Level::cursor_path_draw(const std::vector< point > &move_path)
       cursor_path_draw_circle();
     }
   } else {
-    cursor_path_draw_line(move_path);
+    if (game->request_destination_ok) {
+      cursor_path_draw_line(move_path);
+    }
   }
 
   //

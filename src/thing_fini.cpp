@@ -100,11 +100,13 @@ void Thing::destroy(void)
   }
 
   if (game->request_to_throw_item == this) {
-    game->request_to_throw_item = nullptr;
+    game->request_to_throw_item  = nullptr;
+    game->request_destination_ok = false;
   }
 
   if (game->request_to_use_item == this) {
-    game->request_to_use_item = nullptr;
+    game->request_to_use_item    = nullptr;
+    game->request_destination_ok = false;
   }
 
   if (game->current_wid_thing_info == this) {

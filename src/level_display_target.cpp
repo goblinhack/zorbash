@@ -41,6 +41,10 @@ void Level::display_target(void)
   start -= pixel_map_at;
   end -= pixel_map_at;
 
+  if (! game->request_destination_ok) {
+    return;
+  }
+
   glPushAttrib(GL_ENABLE_BIT);
   glLineStipple(1, 0xAAAA);
   glEnable(GL_LINE_STIPPLE);

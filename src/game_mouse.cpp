@@ -58,6 +58,18 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
     IF_DEBUG2 { player->log("Chosen target"); }
     TRACE_AND_INDENT();
 
+    //
+    // Check for trying to teleport or fire too far away.
+    //
+    if (! game->request_destination_ok) {
+      if (game->request_to_throw_item) {
+        player->msg("You cannot throw there.");
+      } else {
+        player->msg("You cannot fire there.");
+      }
+      return true;
+    }
+
     if (game->request_to_throw_item) {
       auto item = game->request_to_throw_item;
       player->throw_at(item, level->cursor);
