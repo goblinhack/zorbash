@@ -170,12 +170,15 @@ void Level::cursor_recreate(void)
     }
 
     if (too_far) {
-      cursor = thing_new("cursor_select_fail", curr_at);
+      cursor                       = thing_new("cursor_select_fail", curr_at);
+      game->request_destination_ok = false;
     } else {
-      cursor = thing_new("cursor_select", curr_at);
+      cursor                       = thing_new("cursor_select", curr_at);
+      game->request_destination_ok = true;
     }
   } else {
-    cursor = thing_new("cursor", curr_at);
+    cursor                       = thing_new("cursor", curr_at);
+    game->request_destination_ok = true;
   }
 
   //

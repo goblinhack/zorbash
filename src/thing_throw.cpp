@@ -32,7 +32,8 @@ bool Thing::throw_item_choose_target(Thingp what)
     return false;
   }
 
-  game->request_to_throw_item = what;
+  game->request_to_throw_item  = what;
+  game->request_destination_ok = false;
 
   return is_target_select(what);
 }

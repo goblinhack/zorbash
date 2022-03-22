@@ -52,10 +52,19 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
   //
 
   TRACE_AND_INDENT();
+  dbg("Use item %s at %s", item->to_short_string().c_str(), target->curr_at.to_string().c_str());
 
   auto collatoral_damage = in_the_way(curr_at, target->curr_at, 1);
   if (collatoral_damage.size()) {
     target = collatoral_damage[ 0 ];
+  }
+
+  if (! game->request_to_use_item) {
+    if (is_player()) {
+      msg("Failed to use!");
+      game->tick_begin("failed to use item");
+    }
+    return nullptr;
   }
 
   auto start = last_blit_at;

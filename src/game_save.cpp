@@ -322,6 +322,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_in_lava ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_in_water ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_jumping ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_teleporting ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_moving ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_offscreen ? 1LLU : 0LLU) << shift; shift++;

@@ -804,7 +804,7 @@ void Thing::move_to_immediately(point to)
   move_finish();
 
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
-      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_jumping) {
+      is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_jumping || is_teleporting) {
     //
     // Things like changing level, don't look at the location until
     // the interpolated position is updated else we can look at the
