@@ -59,14 +59,6 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
     target = collatoral_damage[ 0 ];
   }
 
-  if (! game->request_to_use_item) {
-    if (is_player()) {
-      msg("Failed to use!");
-      game->tick_begin("failed to use item");
-    }
-    return nullptr;
-  }
-
   auto start = last_blit_at;
   auto end   = target->last_blit_at;
 

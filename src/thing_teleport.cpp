@@ -298,18 +298,6 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
     }
   }
 
-  //
-  // No sneaky teleporting onto doors to get passed them
-  //
-  if (level->is_obs_wall_or_door(x, y) || level->is_obs_destructable(x, y)) {
-    TRACE_AND_INDENT();
-    dbg("No, teleport failed, into obstacle");
-    if (is_player()) {
-      msg("You can't teleport into solid objects.");
-    }
-    return false;
-  }
-
   if (be_careful) {
     if (! level->is_able_to_stand_on(x, y)) {
       TRACE_AND_INDENT();
@@ -550,6 +538,14 @@ void Thing::teleport_end(void)
 
   if (is_player()) {
     msg("You fade back into existance!");
+  }
+
+  //
+  // No sneaky teleporting onto doors to get passed them
+  //
+  if (level->is_obs_wall_or_door(curr_at.x, curr_at.y) || level->is_obs_destructable(curr_at.x, curr_at.y)) {
+    TRACE_AND_INDENT();
+    dead("teleported into a solid object");
   }
 
   //
