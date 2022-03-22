@@ -63,7 +63,7 @@ void Thing::move_finish(void)
   //
   where_i_dropped_an_item_last_set(point(-1, -1));
 
-  if (is_player()) {
+  if (is_player() && ! is_dead) {
     dbg("Check if anything to carry");
     if (check_anything_to_carry(true)) {
       BOTCON("Press %%fg=yellow$%s%%fg=reset$ or click to collect.",

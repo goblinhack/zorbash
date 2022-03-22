@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- snakes do not get stuck in teleports                                                                                                         -->
 <!-- drag boots and they vanish                                                                                                                   -->
 <!-- teleport stamina                                                                                                                             -->
 <!-- need to know why a weapon breaks                                                                                                             -->
