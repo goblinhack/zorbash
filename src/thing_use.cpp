@@ -383,8 +383,10 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     //
     // For boots of teleport
     //
-    if (what->is_target_select()) {
-      return item_choose_target(what);
+    if (is_equipped(what)) {
+      if (what->is_target_select()) {
+        return item_choose_target(what);
+      }
     }
 
     if (what->is_usable() && is_equipped(what)) {

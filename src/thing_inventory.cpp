@@ -150,7 +150,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
       //
       // No animations when moving stuff around
       //
-      dbg("No; not whil moving items");
+      dbg("No; not while moving items");
       return;
     }
   }
