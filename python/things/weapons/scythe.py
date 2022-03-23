@@ -53,7 +53,7 @@ def tp_init(name, text_name, short_text_name):
     my.noise_on_dropping(self, 20)
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)
-    my.stamina_on_use(self, 3)
+    my.stamina_drain_on_swinging(self, 3)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy swingy means of justice.")
     my.text_enchant(self, "+1 DMG")

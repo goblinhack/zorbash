@@ -1065,9 +1065,6 @@ bool Thing::matches(const std::string &what)
   if (collision_hit_180() && (what == "collision_hit_180")) {
     return true;
   }
-  if (stamina_on_use() && (what == "stamina_on_use")) {
-    return true;
-  }
   if (collision_hit_360() && (what == "collision_hit_360")) {
     return true;
   }
@@ -2175,9 +2172,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "range_max") {
     return &Thing::range_max;
-  }
-  if (what == "stamina_on_use") {
-    return &Thing::stamina_on_use;
   }
   if (what == "stat_att_penalty_when_idle_max") {
     return &Thing::stat_att_penalty_when_idle_max;

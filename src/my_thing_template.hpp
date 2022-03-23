@@ -472,7 +472,8 @@ private:
   int _rarity {};
   int _spawn_group_radius {};
   int _stamina {};
-  int _stamina_on_use {};
+  int _stamina_drain_on_swinging {};
+  int _stamina_drain_on_using {};
   int _stat_att {};
   int _stat_att_mod {};
   int _stat_att_penalty_when_idle {};
@@ -1377,7 +1378,8 @@ public:
   int range_max(void) const { return _range_max; }
   int rarity(void) const { return _rarity; }
   int spawn_group_radius(void) const { return _spawn_group_radius; }
-  int stamina_on_use(void) const { return _stamina_on_use; }
+  int stamina_drain_on_swinging(void) const { return _stamina_drain_on_swinging; }
+  int stamina_drain_on_using(void) const { return _stamina_drain_on_using; }
   int stamina(void) const { return _stamina; }
   int stat_att_mod(void) const { return _stat_att_mod; }
   int stat_att_penalty_when_idle_max(void) const { return _stat_att_penalty_when_idle_max; }
@@ -2001,7 +2003,8 @@ public:
   void short_text_name_set(const std::string &v) { _short_text_name = v; }
   void spawn_group_radius_set(int v) { _spawn_group_radius = v; }
   void spawn_on_shoved_set(const std::string &v) { _spawn_on_shoved = v; }
-  void stamina_on_use_set(int v) { _stamina_on_use = v; }
+  void stamina_drain_on_swinging_set(int v) { _stamina_drain_on_swinging = v; }
+  void stamina_drain_on_using_set(int v) { _stamina_drain_on_using = v; }
   void stamina_set(int v) { _stamina = v; }
   void stat_att_mod_set(int v) { _stat_att_mod = v; }
   void stat_att_penalty_when_idle_max_set(int v) { _stat_att_penalty_when_idle_max = v; }

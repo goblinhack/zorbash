@@ -316,7 +316,8 @@ PyObject *level_noise_on_dropping_at(PyObject *obj, PyObject *args, PyObject *ke
 PyObject *level_noise_on_open_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_on_you_are_hit_and_now_dead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_on_you_are_hit_but_still_alive_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_stamina_on_use_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_stamina_drain_on_swinging(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_stamina_drain_on_using(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_att_penalty_when_idle_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_att_penalty_when_idle_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_att_penalty_when_in_deep_water_at(PyObject *obj, PyObject *args, PyObject *keywds);

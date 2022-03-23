@@ -60,7 +60,7 @@ def init_weapon(name, text_name, short_text_name):
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)
-    my.stamina_on_use(self, 2)
+    my.stamina_drain_on_swinging(self, 2)
     my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy choppy means of justice.")
