@@ -498,7 +498,7 @@ PyObject *thing_unused_flag111(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag112(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag113(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag114(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag115(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_snake(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag123(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag12(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -2120,10 +2120,10 @@ int Thing::unused_flag114(void)
   return (tp()->unused_flag114());
 }
 
-int Thing::unused_flag115(void)
+int Thing::is_snake(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag115());
+  return (tp()->is_snake());
 }
 
 int Thing::is_item_targetted(void)
