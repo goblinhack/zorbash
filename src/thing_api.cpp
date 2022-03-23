@@ -2222,10 +2222,16 @@ int Thing::collision_hit_180(void)
   return (tp()->collision_hit_180());
 }
 
-int Thing::stamina_on_use(void)
+int Thing::stamina_drain_on_swinging(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->stamina_on_use());
+  return (tp()->stamina_drain_on_swinging());
+}
+
+int Thing::stamina_drain_on_using(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->stamina_drain_on_using());
 }
 
 int Thing::collision_hit_360(void)

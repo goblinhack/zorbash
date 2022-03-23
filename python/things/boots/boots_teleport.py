@@ -60,6 +60,7 @@ def tp_init(name, text_name, short_text_name):
     my.on_final_use_do(self, "me.on_final_use()")
     my.on_use_do(self, "me.on_use()")
     my.rarity(self, my.RARITY_VERY_RARE)
+    my.stamina_drain_on_using(self, 100)
     my.stat_dex_mod(self, -1)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Boots of teleport.")

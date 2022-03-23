@@ -1492,7 +1492,8 @@ public:
   int stamina_max_incr(void);
   int stamina_max_set(int);
   int stamina_max(void);
-  int stamina_on_use(void);
+  int stamina_drain_on_swinging(void);
+  int stamina_drain_on_using(void);
   int stamina_set(int);
   int stat_att_decr(int);
   int stat_att_decr(void);

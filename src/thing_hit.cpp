@@ -502,7 +502,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       // Only half stamina damage if you pass con roll
       //
       if (hitter != real_hitter) {
-        auto s = hitter->stamina_on_use();
+        auto s = hitter->stamina_drain_on_swinging();
         if (s) {
           s /= 2;
           if (! s) {
@@ -513,7 +513,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       }
     } else {
       if (hitter != real_hitter) {
-        auto s = hitter->stamina_on_use();
+        auto s = hitter->stamina_drain_on_swinging();
         real_hitter->stamina_decr(s);
       } else {
         real_hitter->stamina_decr(1);

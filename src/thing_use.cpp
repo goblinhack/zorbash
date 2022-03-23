@@ -214,6 +214,23 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     on_use(what);
   }
 
+  //
+  // Stamina drain on use
+  //
+  if (d20roll_under(stat_con_total())) {
+    //
+    // Only half stamina damage if you pass con roll
+    //
+    auto s = what->stamina_drain_on_using();
+    if (s) {
+      s /= 2;
+      if (! s) {
+        s = 1;
+      }
+    }
+    stamina_decr(s);
+  }
+
   auto existing_owner = what->top_owner();
   if (existing_owner != this) {
     if (is_dead) {

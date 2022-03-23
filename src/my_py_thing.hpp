@@ -422,7 +422,8 @@ PyObject *thing_stamina_max_decr(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_stamina_max_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_max(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_max_set(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_stamina_on_use(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_stamina_drain_on_swinging(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_stamina_drain_on_using(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_set(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stat_att_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stat_att_incr(PyObject *obj, PyObject *args, PyObject *keywds);
