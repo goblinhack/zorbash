@@ -619,7 +619,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   //
   // Allow movement into spiderwebs. We will block movement out.
   //
-  if (it->is_spiderweb() && ! is_ethereal() && ! is_spider() && ! is_snake()) {
+  if (it->is_spiderweb() && ! is_ethereal() && ! is_immune_to_spiderwebs()) {
     if (things_overlap(me, future_pos, it)) {
       dbg("No; overlaps and is web; allow movement into");
       return false;

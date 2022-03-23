@@ -22,6 +22,10 @@ void tp_fixup(void)
       tp->is_interesting_set(true);
     }
 
+    if (tp->is_ethereal()) {
+      tp->is_immune_to_spiderwebs_set(true);
+    }
+
     if (! tp->on_tick_do().empty()) {
       if (! tp->is_tickable()) {
         DIE("Tp %s has on tick action but is not tickable?", tp->name().c_str());
