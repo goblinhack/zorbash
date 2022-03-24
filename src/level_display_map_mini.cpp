@@ -21,6 +21,12 @@ void Level::display_map_mini(void)
   float brx = map_mini_br.x * game->config.ascii_gl_width;
   float bry = map_mini_br.y * game->config.ascii_gl_height;
 
+  int offset = 4;
+  tlx += offset;
+  tly += offset;
+  brx += offset;
+  bry += offset;
+
   auto zoom = game->config.ui_pix_zoom;
 
   tlx *= zoom;

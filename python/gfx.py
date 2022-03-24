@@ -129,6 +129,20 @@ def init_ui_rightbar():
 
 
 @timeme
+def init_ui_minimap():
+    tiles = [
+        "ui_minimap",
+    ]
+    my.tile_load_arr(
+        file="data/gfx/ui/ui_minimap.tga",
+        name="ui_minimap",
+        width=128,
+        height=127,
+        arr=tiles,
+    )
+
+
+@timeme
 def init_ui_inventory():
     tiles = [
         "ui_inventory",
@@ -13285,6 +13299,7 @@ init_ui_dead()
 init_ui_health_bar()
 init_ui_inventory()
 init_ui_rightbar()
+init_ui_minimap()
 init_ui_tabs()
 init_ui_tile_bg()
 init_weapons_tiles()

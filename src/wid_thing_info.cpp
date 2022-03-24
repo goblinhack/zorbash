@@ -485,7 +485,18 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
         continue;
       }
 
-      IF_DEBUG2 { t->topcon("over"); }
+      IF_DEBUG2
+      {
+        if (level->is_cursor_path_hazard_for_player(t->curr_at.x, t->curr_at.y)) {
+          t->topcon("over path hazard");
+        } else if (player->ai_obstacle_for_me(t->curr_at)) {
+          t->topcon("over AI obs");
+        } else if (player->collision_obstacle(t->curr_at)) {
+          t->topcon("over coll obs");
+        } else {
+          t->topcon("over");
+        }
+      }
 
       i++;
       if (! wid_thing_info_push_popup(t)) {

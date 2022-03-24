@@ -22,7 +22,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "A long pickled gherkin of massive size.")
+    my.long_text_description(self, "A pickled gherkin. At least you think it is a gherkin.")
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d10")

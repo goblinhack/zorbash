@@ -240,7 +240,8 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_bridge(x, y)) {
           c.a = 200;
         } else if (is_chasm(x, y)) {
-          c.a = 50;
+          c   = PURPLE;
+          c.a = 100;
         } else if (is_shallow_water(x, y)) {
           c.a = 20;
         } else if (is_deep_water(x, y)) {
@@ -279,23 +280,12 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = WHITE;
 
-        bool edge_of_sceen =
-            ((y == miny) && (x >= minx) && (x <= maxx)) || ((y == maxy) && (x >= minx) && (x <= maxx)) ||
-            ((x == minx) && (y >= miny) && (y <= maxy)) || ((x == maxx) && (y >= miny) && (y <= maxy));
-
-        edge_of_sceen = false; // Not sure I like seeing this
-
         if (is_monst(x, y) && has_map_beast) {
           c   = RED;
           c.a = 255;
         } else if (! is_lit_ever(x, y)) {
-          if (edge_of_sceen) {
-            c   = DARKRED;
-            c.a = 100;
-          } else {
-            c   = BLACK;
-            c.a = 100;
-          }
+          c   = BLACK;
+          c.a = 100;
         } else if (is_ascend_dungeon(x, y)) {
           c   = GREEN;
           c.a = 255;
@@ -336,6 +326,9 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           } else {
             c = BROWN2;
           }
+        } else if (is_chasm(x, y)) {
+          c   = PURPLE;
+          c.a = 100;
         } else if (is_shallow_water(x, y)) {
           c = BLUE2;
         } else if (is_deep_water(x, y)) {
@@ -350,16 +343,8 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = DARKGREEN;
         } else if (is_spiderweb(x, y)) {
           c = GRAY50;
-        } else if (edge_of_sceen) {
-          c = GRAY10;
         } else {
           c = BLACK;
-        }
-
-        if (edge_of_sceen) {
-          if (c.a < 255) {
-            c.a = 255;
-          }
         }
 
         if (! is_lit_recently(x, y)) {
@@ -367,18 +352,6 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c.g /= 2;
           c.b /= 2;
         }
-
-#if 0
-        if (!edge_of_sceen) {
-          if (!x || !y) {
-            c = GRAY;
-            c.a = 100;
-          } else if ((x == MAP_WIDTH - 1) || (y == MAP_HEIGHT - 1)) {
-            c = DARKGRAY;
-            c.a = 100;
-          }
-        }
-#endif
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {
           if ((game->map_mini_over.x == x) && (game->map_mini_over.y == y)) {
