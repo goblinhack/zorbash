@@ -65,7 +65,12 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
       if (game->request_to_throw_item) {
         player->msg("You cannot throw there.");
       } else {
-        player->msg("You cannot fire there.");
+        auto item = game->request_to_use_item;
+        if (item && item->is_item_targetted()) {
+          player->msg("You cannot target that location.");
+        } else {
+          player->msg("You cannot fire at that location.");
+        }
       }
       return true;
     }

@@ -195,7 +195,7 @@ void Level::cursor_path_draw_line(point start, point end)
   set(d.val, end.x, end.y, DMAP_IS_GOAL);
   set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-  dbg3("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  // CON("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   dmap_process(&d, dmap_start, dmap_end);
   // dmap_print(&d, start, dmap_start, dmap_end);
@@ -203,6 +203,7 @@ void Level::cursor_path_draw_line(point start, point end)
   game->cursor_move_path = p;
   game->cursor_move_end  = end;
 
+  // CON("Path len %d", (int) p.size());
   for (auto &c : p) {
     if (cursor && cursor->is_visible()) {
       if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
@@ -254,9 +255,7 @@ void Level::cursor_path_draw(point start, point end)
       cursor_path_draw_circle();
     }
   } else {
-    if (game->request_destination_ok) {
-      cursor_path_draw_line(start, end);
-    }
+    cursor_path_draw_line(start, end);
   }
 
   //
@@ -286,9 +285,7 @@ void Level::cursor_path_draw(const std::vector< point > &move_path)
       cursor_path_draw_circle();
     }
   } else {
-    if (game->request_destination_ok) {
-      cursor_path_draw_line(move_path);
-    }
+    cursor_path_draw_line(move_path);
   }
 
   //
@@ -367,6 +364,7 @@ void Level::cursor_path_create(void)
   //
   // No clicking into the dark void
   //
+#if 0
   IF_NODEBUG
   {
     bool ok = false;
@@ -377,7 +375,7 @@ void Level::cursor_path_create(void)
     auto shadow_distance = 3;
     for (int dx = -shadow_distance; dx <= shadow_distance; dx++) {
       for (int dy = -shadow_distance; dy <= shadow_distance; dy++) {
-        if (! is_lit_ever(cursor_at.x + dx, cursor_at.y + dy)) {
+        if (is_lit_ever(cursor_at.x + dx, cursor_at.y + dy)) {
           ok = true;
           break;
         }
@@ -386,7 +384,11 @@ void Level::cursor_path_create(void)
         break;
       }
     }
+    if (! ok) {
+      TOPCON("You cannot see that far");
+    }
   }
+#endif
 
   //
   // If not following the player, draw the path

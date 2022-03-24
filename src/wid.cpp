@@ -805,7 +805,10 @@ static void wid_m_over_e(void)
 
   w = wid_over;
   if (wid_over) {
-    wid_last_over_event = time_get_time_ms_cached();
+    if (! wid_ignore_events(wid_over)) {
+      wid_last_over_event = time_get_time_ms_cached();
+      // CON("mouse over end %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+    }
   }
   wid_over = nullptr;
 
@@ -877,9 +880,11 @@ static uint8_t wid_m_over_b(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_
 
   wid_m_over_e();
 
-  wid_over            = w;
-  wid_last_over_event = time_get_time_ms_cached();
-  // TOPCON("mouse over %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+  wid_over = w;
+  if (! wid_ignore_events(wid_over)) {
+    wid_last_over_event = time_get_time_ms_cached();
+    // CON("mouse over %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+  }
 
   wid_set_mode(w, WID_MODE_OVER);
 
@@ -2319,8 +2324,11 @@ static void wid_destroy_immediate(Widp w)
   }
 
   if (w == wid_over) {
-    wid_over            = nullptr;
-    wid_last_over_event = time_get_time_ms_cached();
+    wid_over = nullptr;
+    if (! wid_ignore_events(w)) {
+      wid_last_over_event = time_get_time_ms_cached();
+      CON("mouse destroy %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+    }
   }
 
   if (w == wid_moving) {
@@ -6525,18 +6533,6 @@ static void wid_tick_all(void)
     DBG3("Handle request to remake inventory");
     wid_inventory_init();
     game->request_remake_inventory = false;
-  }
-
-  //
-  // If not over the map_mini, clear the cursor. This allows us to click on the map
-  // and have the player move to that location.
-  //
-  if (wid_over) {
-    if (game->level) {
-      if (wid_over != wid_map_mini) {
-        game->level->cursor_path_clear();
-      }
-    }
   }
 }
 

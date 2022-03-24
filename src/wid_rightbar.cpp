@@ -1288,22 +1288,23 @@ static bool wid_rightbar_create(void)
     }
   }
 
+  y_at += 9;
+
   //
   // Map
   //
-  y_at += 8;
   {
-    auto w       = wid_new_container(wid_rightbar, "map_mini wid");
+    auto w       = wid_new_square_window("map_mini wid");
     wid_map_mini = w;
-    point tl     = make_point(0, y_at);
-    point br     = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + UI_SIDEBAR_RIGHT_WIDTH);
+    point tl     = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, y_at);
+    point br     = make_point(TERM_WIDTH - 1, y_at + UI_SIDEBAR_RIGHT_WIDTH);
 
     wid_set_pos(w, tl, br);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
-    wid_set_shape_none(w);
-
-    wid_update(wid_rightbar);
+    wid_set_bg_tilename(w, "ui_minimap");
+    wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
+    wid_set_ignore_events(w, true);
+    wid_lower(w);
 
     int tlx, tly, brx, bry;
     wid_get_tl_x_tl_y_br_x_br_y(w, &tlx, &tly, &brx, &bry);

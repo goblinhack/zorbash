@@ -12,6 +12,7 @@ def tp_init(name, tiles=[]):
     my.gfx_solid_shadow(self, True)
     my.health_initial_dice(self, "1d5")
     my.is_able_to_fall(self, True)
+    my.is_interesting(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
     my.is_cursor_can_hover_over(self, True)
@@ -21,6 +22,7 @@ def tp_init(name, tiles=[]):
     my.noise_blocker(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "Thick and sicky looking foilage and roots.")
+    my.long_text_description(self, "Thick and sicky looking foilage and roots. Monsters cannot see through these thick bushes. Use them for cover.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
