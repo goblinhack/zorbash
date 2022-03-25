@@ -8,7 +8,7 @@ def attack(me, thing):
             my.thing_hit(me, thing)
 
 
-def on_death(me, x, y):
+def on_born(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_d")
 
     selection_x, selection_y = my.thing_coords_get(me)
@@ -35,7 +35,7 @@ def tp_init(name):
     my.light_color(self, "yellow")
     my.light_dist(self, 4)
     my.noise_on_born(self, 100)
-    my.on_death_do(self, "me.on_death()")
+    my.on_born_do(self, "me.on_born()")
     my.temperature(self, 100)
     my.text_hits(self, "blasts")
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MAJOR)
@@ -57,12 +57,10 @@ def tp_init(name):
     my.tile(self, tile=name + ".13", delay_ms=delay)
     my.tile(self, tile=name + ".14", delay_ms=delay)
     my.tile(self, tile=name + ".15", delay_ms=delay)
-    my.tile(self,
-        tile=name + ".16",
-        delay_ms=delay,
-        is_end_of_anim=True,
-        is_dead_on_end_of_anim=True,
-    )
+    my.tile(self, tile=name + ".16",
+            delay_ms=delay,
+            is_end_of_anim=True,
+            is_dead_on_end_of_anim=True)
 
     my.tp_update(self)
 

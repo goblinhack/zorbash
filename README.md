@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- click on barrel and attacked monst instgead                                                                                                  -->
-<!-- delay in explosion noise                                                                                                                     -->
 <!-- robot mode stuck                                                                                                                             -->
 <!-- need to know why a weapon breaks                                                                                                             -->
 <!-- ------                                                                                                                                       -->
