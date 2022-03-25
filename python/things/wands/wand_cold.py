@@ -10,14 +10,14 @@ def on_idle(me, x, y):
         my.thing_charge_count_incr(me, 1)
         owner = my.thing_top_owner_id_get(me)
         if my.thing_is_player(owner):
-            my.thing_msg(me, f"%%fg=orange$The {my.thing_name_get(me)} pulses.%%fg=reset$")
+            my.thing_topcon(me, f"%%fg=orange$The {my.thing_name_get(me)} pulses.%%fg=reset$")
 
 
 def explode(me, x, y):
     if my.thing_is_dead(me):
         return
 
-    my.thing_msg(me, "The wand of snowballs explodes, oddly in a fireball.")
+    my.thing_topcon(me, "The wand of snowballs explodes, oddly in a fireball.")
     my.level_spawn_at_thing(me, "explosion_major")
     my.thing_dead(me, "exploded")
 

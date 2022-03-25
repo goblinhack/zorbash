@@ -10,21 +10,21 @@ def on_idle(me, x, y):
         my.thing_charge_count_incr(me, 1)
         owner = my.thing_top_owner_id_get(me)
         if my.thing_is_player(owner):
-            my.thing_msg(owner, f"%%fg=blue$The {my.thing_name_get(me)} pulses.%%fg=reset$")
+            my.thing_topcon(owner, f"%%fg=blue$The {my.thing_name_get(me)} pulses.%%fg=reset$")
 
 
 def explode(me, x, y):
     if my.thing_is_dead(me):
         return
 
-    my.thing_msg(me, "The staff of descent explodes. The earth shakes.")
+    my.thing_topcon(me, "The staff of descent explodes. The earth shakes.")
     my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
     my.thing_dead(me, "exploded")
 
 
 def on_final_use(owner, item, target, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(owner, "The wand crumbles into dust.")
+        my.thing_topcon(owner, "The wand crumbles into dust.")
 
 
 def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):

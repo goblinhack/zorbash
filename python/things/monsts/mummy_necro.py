@@ -4,11 +4,11 @@ import tp
 
 def on_death_of_a_follower(me, leader, x, y):
     if not my.thing_is_dead_or_dying(leader):
-        my.thing_msg(me, "The mummy necromancer begins muttering some unknown words!")
+        my.thing_topcon(me, "The mummy necromancer begins muttering some unknown words!")
 
 
 def on_born(me, x, y):
-    my.thing_msg(me, "Die mortal!")
+    my.thing_topcon(me, "Die mortal!")
 
 
 def on_tick(owner, me, x, y):
@@ -26,8 +26,8 @@ def on_tick(owner, me, x, y):
                 my.thing_polymorph(follower, "mummy")
                 my.thing_resurrect(follower, "arise")
                 my.thing_stat_con_decr(me, 1)
-                my.thing_msg(me, "Arise my minion!")
-                my.thing_msg(follower, "Groan!")
+                my.thing_topcon(me, "Arise my minion!")
+                my.thing_topcon(follower, "Groan!")
                 if my.thing_stat_con(me) <= 1:
                     return True
                 risen += 1
@@ -44,7 +44,7 @@ def on_death(me, x, y):
 
     for follower in followers:
         if my.thing_is_resurrected_or_resurrecting(follower):
-            my.thing_msg(follower, "Free at last!")
+            my.thing_speaks(follower, "Free at last!")
             my.thing_perma_death(follower, "Leader died!")
 
 

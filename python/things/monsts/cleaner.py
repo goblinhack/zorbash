@@ -15,6 +15,21 @@ def on_death(me, x, y):
     my.level_spawn_at_thing(me, "green_splatter")
 
 
+def explode(me, x, y):
+    if my.thing_is_dead(me):
+        return
+
+    my.thing_dead(me, "exploded")
+    my.thing_topcon(me, "The dungeon cleaner erupts in flaming goo!")
+    my.level_spawn_at_thing(me, "explosion_major")
+    my.level_spawn_fire_around_thing(me, "fire")
+    my.level_spawn_at_thing(me, "fire")
+
+
+def on_fire(me, x, y):
+    explode(me, x, y)
+
+
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
     my.aggression_level_pct(self, 100)
@@ -28,6 +43,7 @@ def tp_init(name, text_name, short_text_name):
     my.damage_digest_dice(self, "1d40")
     my.damage_natural_attack_type(self, "burn")
     my.damage_natural_dice(self, "1d20")
+    my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.damage_received_doubled_from_cold(self, True)
     my.damage_received_doubled_from_fire(self, True)
     my.distance_vision(self, 3)

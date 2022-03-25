@@ -15,7 +15,7 @@ def on_swing(owner, item, x, y):
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
-        my.thing_msg(me, "The axe glows.")
+        my.thing_topcon(me, "The axe glows.")
 
 
 def init_weapon(name, text_name, short_text_name):

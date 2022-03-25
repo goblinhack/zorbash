@@ -726,7 +726,7 @@ PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
-PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id = 0;
@@ -755,10 +755,43 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (owner->is_monst()) {
-    owner->msg("%s says '%s'", owner->text_The().c_str(), msg);
+    owner->topcon("%s says '%s'", owner->text_The().c_str(), topcon);
   } else {
-    owner->msg("%s", msg);
+    owner->topcon("%s", topcon);
   }
+
+  Py_RETURN_NONE;
+}
+
+PyObject *thing_topcon(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_AND_INDENT();
+  uint32_t     owner_id = 0;
+  char        *topcon   = nullptr;
+  static char *kwlist[] = {(char *) "owner", (char *) "topcon", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &topcon)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! owner_id) {
+    ERR("%s: No owner thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp owner = game->thing_find(owner_id);
+  if (! owner) {
+    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! topcon) {
+    ERR("%s: No topcon thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  TOPCON("%s", msg);
 
   Py_RETURN_NONE;
 }

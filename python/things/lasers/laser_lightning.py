@@ -24,7 +24,7 @@ def on_use(owner, me, target, x, y):
             if thing != me:
                 if my.thing_possible_to_attack(me, thing):
                     if my.thing_is_player(thing):
-                        my.thing_msg(thing, "Current surges through your body!")
+                        my.thing_topcon(thing, "Current surges through your body!")
 
                     my.thing_fire_at(me, "laser_lightning_fork", thing)
 

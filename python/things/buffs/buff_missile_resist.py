@@ -6,13 +6,13 @@ self = None
 
 def on_owner_add(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "A protective shield surrounds you.")
+        my.thing_topcon(me, "A protective shield surrounds you.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_remove(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "The protective shield around you fades.")
+        my.thing_topcon(me, "The protective shield around you fades.")
 
 
 def on_owner_damage(me, owner, hitter, real_hitter, x, y, damage):
@@ -22,7 +22,7 @@ def on_owner_damage(me, owner, hitter, real_hitter, x, y, damage):
     # my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
     if my.thing_is_projectile(hitter):
         if my.thing_is_player(owner):
-            my.thing_msg(me, "You take half damage from the missile attack.")
+            my.thing_topcon(me, "You take half damage from the missile attack.")
         return int(damage / 2)
     return damage
 
