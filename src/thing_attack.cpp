@@ -440,10 +440,10 @@ bool Thing::possible_to_attack(const Thingp victim)
 
 bool Thing::possible_to_attack_at(point at)
 {
-  bool ret = false;
-
   dbg("Possible to attack? at %s", at.to_string().c_str());
   TRACE_AND_INDENT();
+
+  bool ret = false;
 
   FOR_ALL_COLLISION_THINGS(level, victim, at.x, at.y)
   {
@@ -464,6 +464,9 @@ bool Thing::possible_to_attack_at(point at)
 
 bool Thing::attack(point future_pos)
 {
+  dbg("Attack at %s", future_pos.to_string().c_str());
+  TRACE_AND_INDENT();
+
   bool up     = future_pos.y < curr_at.y;
   bool down   = future_pos.y > curr_at.y;
   bool left   = future_pos.x < curr_at.x;
@@ -476,6 +479,9 @@ bool Thing::attack(point future_pos)
   AttackOptions attack_options {};
   attack_options.shove_allowed  = true;
   attack_options.attack_allowed = true;
+  attack_options.attack_at      = future_pos;
+  attack_options.attack_at_set  = true;
+
   return (move(future_pos, up, down, left, right, attack, idle, &attack_options));
 }
 
