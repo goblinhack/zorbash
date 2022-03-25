@@ -755,9 +755,9 @@ PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (owner->is_monst()) {
-    owner->topcon("%s says '%s'", owner->text_The().c_str(), topcon);
+    owner->topcon("%s says '%s'", owner->text_The().c_str(), msg);
   } else {
-    owner->topcon("%s", topcon);
+    owner->topcon("%s", msg);
   }
 
   Py_RETURN_NONE;
@@ -767,10 +767,10 @@ PyObject *thing_topcon(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id = 0;
-  char        *topcon   = nullptr;
-  static char *kwlist[] = {(char *) "owner", (char *) "topcon", 0};
+  char        *msg      = nullptr;
+  static char *kwlist[] = {(char *) "owner", (char *) "msg", 0};
 
-  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &topcon)) {
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
@@ -786,8 +786,8 @@ PyObject *thing_topcon(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  if (! topcon) {
-    ERR("%s: No topcon thing ID set", __FUNCTION__);
+  if (! msg) {
+    ERR("%s: No msg thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
