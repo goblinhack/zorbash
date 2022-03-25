@@ -529,7 +529,7 @@ private:
   int _unused_flag111 {};
   int _unused_flag112 {};
   int _unused_flag113 {};
-  int _unused_flag114 {};
+  int _gfx_wobbles_when_hit {};
   int _is_snake {};
   int _is_item_targetted {};
   int _noise_additional_on_teleporting {};
@@ -1434,7 +1434,7 @@ public:
   int unused_flag111(void) const { return _unused_flag111; }
   int unused_flag112(void) const { return _unused_flag112; }
   int unused_flag113(void) const { return _unused_flag113; }
-  int unused_flag114(void) const { return _unused_flag114; }
+  int gfx_wobbles_when_hit(void) const { return _gfx_wobbles_when_hit; }
   int is_snake(void) const { return _is_snake; }
   int is_item_targetted(void) const { return _is_item_targetted; }
   int noise_additional_on_teleporting(void) const { return _noise_additional_on_teleporting; }
@@ -2077,7 +2077,7 @@ public:
   void unused_flag111_set(int v) { _unused_flag111 = v; }
   void unused_flag112_set(int v) { _unused_flag112 = v; }
   void unused_flag113_set(int v) { _unused_flag113 = v; }
-  void unused_flag114_set(int v) { _unused_flag114 = v; }
+  void gfx_wobbles_when_hit_set(int v) { _gfx_wobbles_when_hit = v; }
   void is_snake_set(int v) { _is_snake = v; }
   void is_item_targetted_set(int v) { _is_item_targetted = v; }
   void noise_additional_on_teleporting_set(int v) { _noise_additional_on_teleporting = v; }

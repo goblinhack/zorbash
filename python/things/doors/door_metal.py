@@ -24,6 +24,7 @@ def tp_init(name):
     my.gfx_health_bar_autohide(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)
+    my.gfx_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "5d20")
     my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)

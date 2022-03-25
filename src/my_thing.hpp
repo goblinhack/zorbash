@@ -1665,7 +1665,7 @@ public:
   int unused_flag111(void);
   int unused_flag112(void);
   int unused_flag113(void);
-  int unused_flag114(void);
+  int gfx_wobbles_when_hit(void);
   int is_snake(void);
   int is_item_targetted(void);
   int unused_flag11(void);

@@ -422,7 +422,7 @@ do
       unused_flag111_set \
       unused_flag112_set \
       unused_flag113_set \
-      unused_flag114_set \
+      gfx_wobbles_when_hit_set \
       is_snake_set \
       is_item_targetted_set \
       noise_additional_on_teleporting_set \
