@@ -14,7 +14,7 @@ def on_swing(owner, item, x, y):
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
-        my.thing_msg(me, "The broadsword seems even wider somehow.")
+        my.thing_topcon(me, "The broadsword seems even wider somehow.")
 
 
 def tp_init(name, text_name, short_text_name):

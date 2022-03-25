@@ -6,13 +6,13 @@ self = None
 
 def on_owner_add(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "A green glow surrounds you.")
+        my.thing_topcon(me, "A green glow surrounds you.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_remove(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "The green glow around you fades.")
+        my.thing_topcon(me, "The green glow around you fades.")
 
 
 def on_owner_damage_melee(me, owner, hitter, real_hitter, x, y, damage):
@@ -21,7 +21,7 @@ def on_owner_damage_melee(me, owner, hitter, real_hitter, x, y, damage):
 
 def on_owner_damage_poison(me, owner, hitter, real_hitter, x, y, damage):
     if my.thing_is_player(owner):
-        my.thing_msg(me, "You take half damage from the poison.")
+        my.thing_topcon(me, "You take half damage from the poison.")
     return int(damage / 2)
 
 
@@ -88,9 +88,9 @@ def on_tick(owner, item, x, y):
     new_poison = int(poison / 2)
     if my.thing_is_player(owner):
         if new_poison == 0:
-            my.thing_msg(owner, "%%fg=green$The poison has little effect on you!%%fg=reset$")
+            my.thing_topcon(owner, "%%fg=green$The poison has little effect on you!%%fg=reset$")
         else:
-            my.thing_msg(owner, "%%fg=green$The poison fades from your system!%%fg=reset$")
+            my.thing_topcon(owner, "%%fg=green$The poison fades from your system!%%fg=reset$")
     my.thing_poisoned_amount_set(owner, new_poison)
     return True
 

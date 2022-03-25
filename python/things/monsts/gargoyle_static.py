@@ -15,7 +15,7 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     health = my.thing_health_get(me)
     low_health = int((my.thing_health_max(me) / 100.0) * 90)
     if health < low_health:
-        my.thing_msg(me, "Roar! Free at last!")
+        my.thing_speaks(me, "Roar! Free at last!")
         my.thing_popup(me, "Free!")
         my.thing_polymorph(me, "gargoyle_moving")
         my.level_spawn_at_thing(me, "gargoyle_podium")
@@ -36,7 +36,7 @@ def on_awake(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
-    my.thing_msg(me, "Roar! Who dares wake me?")
+    my.thing_speaks(me, "Roar! Who dares wake me?")
     my.thing_popup(me, "Roar!")
 
 
