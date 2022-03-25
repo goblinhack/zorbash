@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_death(me, x, y):
+def on_born(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_a")
 
 
@@ -20,7 +20,7 @@ def tp_init(name):
     my.is_tickable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.noise_on_born(self, 70)
-    my.on_death_do(self, "me.on_death()")
+    my.on_born_do(self, "me.on_born()")
     my.temperature(self, 100)
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
@@ -30,12 +30,10 @@ def tp_init(name):
     my.tile(self, "explosion_fire.1", delay_ms=delay)
     my.tile(self, "explosion_fire.2", delay_ms=delay)
     my.tile(self, "explosion_fire.3", delay_ms=delay)
-    my.tile(self,
-        "explosion_fire.4",
-        delay_ms=delay,
-        is_end_of_anim=True,
-        is_dead_on_end_of_anim=True,
-    )
+    my.tile(self, "explosion_fire.4",
+            delay_ms=delay,
+            is_end_of_anim=True,
+            is_dead_on_end_of_anim=True)
 
     my.tp_update(self)
 

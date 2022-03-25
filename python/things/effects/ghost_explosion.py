@@ -22,11 +22,10 @@ def tp_init(name):
     my.tile(self, tile=name + ".2", delay_ms=delay)
     my.tile(self, tile=name + ".3", delay_ms=delay)
     my.tile(self,
-        tile=name + ".4",
-        delay_ms=delay,
-        is_end_of_anim=True,
-        is_dead_on_end_of_anim=True,
-    )
+            tile=name + ".4",
+            delay_ms=delay,
+            is_end_of_anim=True,
+            is_dead_on_end_of_anim=True)
 
     my.tp_update(self)
 
