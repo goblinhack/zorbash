@@ -1102,9 +1102,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (real_hitter != this) {
-    if (real_hitter->is_player() || real_hitter->is_monst()) {
-      real_hitter->wobble(25);
-      real_hitter->bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
+    if (gfx_wobbles_when_hit()) {
       wobble(90);
       bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
     }

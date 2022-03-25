@@ -59,6 +59,7 @@ def tp_init(name, text_name):
     my.gfx_short_shadow_caster(self, True)
     my.gfx_show_asleep(self, True)
     my.gfx_show_outlined(self, True)
+    my.gfx_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "2d6")
     my.hunger_clock_tick_freq(self, 50)
     my.hunger_health_pct(self, 95)

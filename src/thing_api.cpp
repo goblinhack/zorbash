@@ -2114,10 +2114,10 @@ int Thing::unused_flag113(void)
   return (tp()->unused_flag113());
 }
 
-int Thing::unused_flag114(void)
+int Thing::gfx_wobbles_when_hit(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag114());
+  return (tp()->gfx_wobbles_when_hit());
 }
 
 int Thing::is_snake(void)

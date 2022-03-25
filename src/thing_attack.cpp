@@ -1034,10 +1034,6 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
   }
 
   victim->on_you_are_hit_but_dodge_it_do(this);
-  victim->wobble(25);
-  victim->bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
-  wobble(45);
-  bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
 
   //
   // Missiles?
