@@ -115,6 +115,9 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
     if (level->cursor) {
       if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&
           (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
+        IF_DEBUG2 { player->log("Close enough to attack; check"); }
+        TRACE_AND_INDENT();
+
         int x = level->cursor->curr_at.x;
         int y = level->cursor->curr_at.y;
         FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
@@ -122,6 +125,9 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
           if (t == level->player) {
             continue;
           }
+
+          IF_DEBUG2 { player->log("Close enough to attack %s?", t->to_string().c_str()); }
+          TRACE_AND_INDENT();
 
           if (! t->is_dead) {
             //
@@ -135,7 +141,7 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
             //
             // Attack
             //
-            if (t->is_door() || t->is_monst() || t->is_mob()) {
+            if (t->is_attackable_by_player()) {
               IF_DEBUG2 { player->log("Close enough to attack"); }
               player->attack(level->cursor->curr_at);
               return true;

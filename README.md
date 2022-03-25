@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- click on barrel and attacked monst instgead                                                                                                  -->
 <!-- robot mode stuck                                                                                                                             -->
 <!-- need to know why a weapon breaks                                                                                                             -->
 <!-- ------                                                                                                                                       -->

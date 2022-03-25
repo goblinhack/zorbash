@@ -388,6 +388,7 @@ bool Thing::victim_attack_best_at(int equip, AttackOptions *attack_options)
   // for the best thing to hit.
   //
   if (attack_options->attack_at_set) {
+    dbg("Target-attack-best: Attack only at location %s", attack_options->attack_at.to_string().c_str());
     auto                 delta      = attack_options->attack_at - curr_at;
     std::vector< point > local_only = {delta};
 
