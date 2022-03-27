@@ -32,14 +32,14 @@ void Thing::dmap_modify_terrain_cost(point p, uint8_t *d)
 
       if (will_avoid_monst(point(x, y))) {
         pref += DMAP_LESS_PREFERRED_TERRAIN;
-        dbg("Avoid monst, terrain cost now %d", pref);
+        // dbg("Avoid monst, terrain cost now %d", pref);
       }
     }
   }
 
   if (is_disliked_by_me(p)) {
     pref += DMAP_LESS_PREFERRED_TERRAIN / 2;
-    dbg("Location avoid, terrain cost now %d", pref);
+    // dbg("Location avoid, terrain cost now %d", pref);
   }
 
   if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {

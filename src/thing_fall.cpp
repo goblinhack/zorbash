@@ -260,7 +260,7 @@ bool Thing::fall_to_next_level(void)
 
       IF_DEBUG1
       {
-        FOR_ALL_THINGS(l, t, x, y) { t->log("Landed under thing on new level"); }
+        FOR_ALL_THINGS(l, t, x, y) { t->log("Landed on this thing on new level"); }
         FOR_ALL_THINGS_END()
       }
 
