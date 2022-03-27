@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_main.hpp"
 #include "my_monst.hpp"
@@ -48,12 +49,20 @@ void Thing::resting(void)
   dbg("Resting");
   TRACE_AND_INDENT();
 
-  if ((int) pcg_random_range(0, 200) < stat_str()) {
+  if (game->robot_mode) {
+    //
+    // Ok, cheating a bit. But otherwise it slows down robot mode too much.
+    //
     health_boost(1);
-  }
-
-  if (d20() < stat_con()) {
     stamina_boost(1);
+  } else {
+    if ((int) pcg_random_range(0, 200) < stat_str()) {
+      health_boost(1);
+    }
+
+    if (d20() < stat_con()) {
+      stamina_boost(1);
+    }
   }
 
   FOR_ALL_EQUIP(e)

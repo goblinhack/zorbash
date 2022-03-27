@@ -6,6 +6,7 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - slime can grow into megaslime if satiated                                                                                                  -->
 <!-- - teleport block                                                                                                                             -->
 <!-- - door peep ?                                                                                                                                -->
 <!-- - bloat                                                                                                                                      -->
