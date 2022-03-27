@@ -131,14 +131,14 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
 
 #if 0
-  con("before:");
+  log("before:");
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
 
   dmap_process(&dmap, dmap_start, dmap_end);
 
 #if 0
-  con("after:");
+  log("after:");
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
 
@@ -153,15 +153,22 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
 
 #if 0
   for (auto i : result.path) {
-    set(dmap.val, i.x, i.y, (uint8_t)0);
+    set(dmap.val, i.x, i.y, (uint8_t) 0);
   }
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
-#ifdef ENABLE_DEBUG_AI_WAND_OR_STAFFER
+#ifdef ENABLE_DEBUG_AI_WANDER
   for (auto i : result.path) {
     thing_new("ai_path1", fpoint(i.x, i.y));
   }
 #endif
+
+  std::string goal_path_str = "Path:";
+  for (auto i : result.path) {
+    goal_path_str += " " + i.to_string();
+  }
+  dbg("AI created path %s", goal_path_str.c_str());
+  TRACE_AND_INDENT();
 
   auto hops     = result.path;
   auto hops_len = hops.size();
@@ -213,7 +220,7 @@ bool Thing::ai_choose_wander(point &nh)
   // Choose a new wander location
   //
   aip()->wander_dest = point(0, 0);
-  dest                   = dest_random_get();
+  dest               = dest_random_get();
   dbg("Try wander to %s", dest.to_string().c_str());
 
   //
@@ -243,7 +250,7 @@ bool Thing::ai_choose_wander(point &nh)
   }
 
   aip()->wander_dest = dest;
-#ifdef ENABLE_DEBUG_AI_WAND_OR_STAFFER
+#ifdef ENABLE_DEBUG_AI_WANDER
   thing_new("ai_path2", fpoint(dest.x, dest.y));
 #endif
   dbg("Wander to %d,%d nh %d,%d", dest.x, dest.y, nh.x, nh.y);
@@ -294,7 +301,7 @@ bool Thing::ai_wander(void)
   }
 
   dbg("AI wander");
-  auto tries = THING_AI_WAND_OR_STAFFER_TRIES;
+  auto tries = THING_AI_WANDER_TRIES;
   if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
     tries = 1;
   }
@@ -302,9 +309,7 @@ bool Thing::ai_wander(void)
     point nh;
     if (ai_choose_wander(nh)) {
       if (terrain_cost_get(nh) < DMAP_LESS_PREFERRED_TERRAIN) {
-        if (move_to_or_attack(nh)) {
-          return true;
-        }
+        return true;
       }
 
       //
