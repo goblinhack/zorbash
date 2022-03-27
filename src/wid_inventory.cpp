@@ -438,7 +438,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 0"); // To remove bag or other info
     level->inventory_chosen(9);
     wid_rightbar_init();
     auto what = level->inventory_get();
@@ -451,7 +451,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 1"); // To remove bag or other info
     level->inventory_chosen(0);
     wid_rightbar_init();
     auto what = level->inventory_get();
@@ -464,7 +464,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 2"); // To remove bag or other info
     level->inventory_chosen(1);
     wid_rightbar_init();
     auto what = level->inventory_get();
@@ -477,7 +477,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 3"); // To remove bag or other info
     level->inventory_chosen(2);
     wid_rightbar_init();
     auto what = level->inventory_get();
@@ -490,7 +490,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 4"); // To remove bag or other info
     level->inventory_chosen(3);
     wid_rightbar_init();
     auto what = level->inventory_get();
@@ -503,7 +503,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 5"); // To remove bag or other info
     level->inventory_chosen(4);
     wid_rightbar_init();
     auto what = level->inventory_get();
@@ -516,7 +516,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 6"); // To remove bag or other info
     level->inventory_chosen(5);
     wid_rightbar_init();
     auto what = level->inventory_get();
@@ -529,7 +529,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 7"); // To remove bag or other info
     level->inventory_chosen(6);
     wid_rightbar_init();
     auto what = level->inventory_get();
@@ -542,7 +542,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 8"); // To remove bag or other info
     level->inventory_chosen(7);
     wid_rightbar_init();
     auto what = level->inventory_get();
@@ -555,7 +555,7 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("key 9"); // To remove bag or other info
     level->inventory_chosen(8);
     wid_rightbar_init();
     auto what = level->inventory_get();

@@ -35,14 +35,14 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   // If somewhere bad, escape
   //
   if (terrain_cost_get(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
-    AI_LOG("on bad terrain, escape");
+    AI_LOG("I am on bad terrain, escape");
     TRACE_AND_INDENT();
     if (ai_escape()) {
       return true;
     }
 
     ai->wander_dest = point(0, 0);
-    AI_LOG("cannot escape, try to wander");
+    AI_LOG("I am on bad terrain, and cannot escape. Try to wander.");
     TRACE_AND_INDENT();
     if (ai_wander()) {
       return true;

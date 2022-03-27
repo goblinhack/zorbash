@@ -850,7 +850,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     DBG3("Pressed throw key");
     TRACE_AND_INDENT();
     game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini(); // To remove bag or other info
+    wid_thing_info_fini("throw key"); // To remove bag or other info
     player->throw_item_choose_target(what);
     return true;
   }

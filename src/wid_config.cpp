@@ -210,7 +210,7 @@ void Game::wid_config_top_menu(void)
   wid_rightbar_fini();
   wid_inventory_fini();
   wid_skillbox_fini();
-  wid_thing_info_fini();
+  wid_thing_info_fini("confg top menu");
 
   point tl    = make_point(TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2, TERM_HEIGHT / 2 - 4);
   point br    = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 14);

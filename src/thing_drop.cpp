@@ -115,7 +115,7 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
   }
 
   wid_inventory_fini();
-  wid_thing_info_fini();
+  wid_thing_info_fini("drop item");
 
   if (stolen) {
     dbg("Dropped (being stolen) %s", what->to_short_string().c_str());
@@ -235,7 +235,7 @@ bool Thing::drop_from_ether(Thingp what)
   inventory_shortcuts_remove(what);
 
   wid_inventory_fini();
-  wid_thing_info_fini();
+  wid_thing_info_fini("drop from ether");
 
   point e = (player->last_blit_tl + player->last_blit_br) / 2;
 

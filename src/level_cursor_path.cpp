@@ -202,6 +202,7 @@ void Level::cursor_path_draw_line(point start, point end)
   auto p                 = dmap_solve_allow_diagonal(&d, start);
   game->cursor_move_path = p;
   game->cursor_move_end  = end;
+  game->cursor_moved     = true;
 
   // CON("Path len %d", (int) p.size());
   for (auto &c : p) {
@@ -220,6 +221,7 @@ void Level::cursor_path_draw_line(const std::vector< point > &move_path)
 
   game->cursor_move_path = move_path;
   game->cursor_move_end  = {};
+  game->cursor_moved     = true;
 
   for (auto &c : move_path) {
     if (cursor && cursor->is_visible()) {

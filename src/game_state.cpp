@@ -35,7 +35,7 @@ void Game::change_state(int new_state)
     case STATE_NORMAL:
       // backtrace_dump();
       LOG("State changing to STATE_NORMAL");
-      wid_thing_info_fini();
+      wid_thing_info_fini("change state");
       wid_collect_destroy();
       wid_enchant_destroy();
       wid_choose_skill_destroy();
@@ -51,7 +51,7 @@ void Game::change_state(int new_state)
       break;
     case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
       LOG("State changing to STATE_COLLECTING_ITEMS");
-      wid_thing_info_fini();
+      wid_thing_info_fini("change state");
       wid_collect_destroy();
       LOG("State changed to STATE_COLLECTING_ITEMS");
       break;
@@ -67,12 +67,12 @@ void Game::change_state(int new_state)
       break;
     case STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
       LOG("State changing to STATE_CHOOSING_TARGET");
-      wid_thing_info_fini();
+      wid_thing_info_fini("change state");
       LOG("State changed to STATE_CHOOSING_TARGET");
       break;
     case STATE_LOAD_MENU:
     case STATE_SAVE_MENU:
-    case STATE_QUIT_MENU: wid_thing_info_fini(); break;
+    case STATE_QUIT_MENU: wid_thing_info_fini("change state"); break;
   }
 
   //

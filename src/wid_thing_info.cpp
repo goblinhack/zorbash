@@ -13,10 +13,9 @@
 
 std::list< WidPopup * > wid_thing_info_window;
 
-void wid_thing_info_fini(void)
+void wid_thing_info_fini(const std::string &why)
 {
-  TRACE_AND_INDENT();
-  DBG("Destroy wid thing info");
+  DBG("Destroy wid thing info: %s", why.c_str());
   TRACE_AND_INDENT();
 
   game->wid_thing_info_clear_popup();
@@ -35,8 +34,10 @@ uint8_t wid_thing_info_init(void)
 
 void Game::wid_thing_info_destroy_immediate(void)
 {
+  DBG("Destroy wid thing info immediate");
   TRACE_AND_INDENT();
-  wid_thing_info_fini();
+
+  wid_thing_info_fini("destroy immediate");
 }
 
 void Game::wid_thing_info_destroy_deferred(void)
@@ -47,6 +48,7 @@ void Game::wid_thing_info_destroy_deferred(void)
 
 WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
 {
+  IF_DEBUG1 { t->log("Create thing info popup"); }
   TRACE_AND_INDENT();
 
   auto level = game->level;
@@ -70,12 +72,11 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   }
 
   if (tp->long_text_description().empty()) {
-    wid_thing_info_fini();
+    IF_DEBUG1 { t->log("Create thing info popup; no, has no text"); }
+    wid_thing_info_fini("has no text");
     t->show_botcon_description();
     return nullptr;
   }
-
-  IF_DEBUG1 { t->log("Create popup"); }
 
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", true, false);
 
@@ -174,6 +175,8 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_danger_level(wid_popup_window, t);
   t->show_botcon_description();
 
+  IF_DEBUG1 { t->log("Created thing ingo popup"); }
+
   return wid_popup_window;
 }
 
@@ -260,7 +263,9 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
 bool Game::wid_thing_info_push_popup(Thingp t)
 {
+  IF_DEBUG1 { t->log("Push thing info?"); }
   TRACE_AND_INDENT();
+
   if (t->long_text_description() == "") {
     IF_DEBUG1 { t->log("No; cannot push, no text"); }
     return false;
@@ -448,7 +453,8 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
 
   if (! found_one_with_long_text) {
     for (auto t : ts) {
-      wid_thing_info_fini();
+      IF_DEBUG1 { t->log("Found an item with long text"); }
+      wid_thing_info_fini("has long text");
       t->show_botcon_description();
       return;
     }
@@ -500,7 +506,8 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
 
       i++;
       if (! wid_thing_info_push_popup(t)) {
-        wid_thing_info_fini();
+        IF_DEBUG1 { t->log("Failed to push item"); }
+        wid_thing_info_fini("failed to push item");
         IF_DEBUG1 { t->log("No; cannot push"); }
         compact = true;
         break;
@@ -509,9 +516,10 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   }
 
   if (compact) {
-    DBG3("Create compact");
+    DBG3("Create compact thing info");
     if (! wid_thing_info_create_popup_compact(ts)) {
-      wid_thing_info_fini();
+      DBG3("Failed to create compact thing info");
+      wid_thing_info_fini("failed to create compact thing info");
     }
   }
 

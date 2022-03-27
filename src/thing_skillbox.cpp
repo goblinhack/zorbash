@@ -55,7 +55,7 @@ bool Thing::skillbox_id_insert(Thingp what)
   int item_slot = -1;
   if (free_slot != -1) {
     itemsp()->skillbox_id[ free_slot ] = what->id;
-    item_slot                              = free_slot;
+    item_slot                          = free_slot;
   } else {
     if (skillbox_items >= UI_INVENTORY_QUICK_ITEMS_MAX) {
       msg("No space to carry %s which is not carried.", what->text_the().c_str());
@@ -71,7 +71,7 @@ bool Thing::skillbox_id_insert(Thingp what)
   wid_skillbox_init();
   if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
       (game->state != Game::STATE_COLLECTING_ITEMS)) {
-    wid_thing_info_fini();
+    wid_thing_info_fini("skillbox add");
   }
   level->skillbox_describe(item_slot);
   return true;
@@ -131,7 +131,7 @@ bool Thing::skillbox_id_remove(Thingp what)
       wid_skillbox_init();
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
           (game->state != Game::STATE_COLLECTING_ITEMS)) {
-        wid_thing_info_fini();
+        wid_thing_info_fini("skillbox remove");
       }
       return true;
     }

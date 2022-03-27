@@ -4,7 +4,9 @@
 //
 
 #pragma once
-void    wid_thing_info_fini(void);
+#include <string>
+
+void    wid_thing_info_fini(const std::string &why);
 uint8_t wid_thing_info_init(void);
 
 #include "my_wid.hpp"

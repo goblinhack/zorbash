@@ -216,7 +216,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
   }
 
   if (item->is_collected_as_gold()) {
-    wid_thing_info_fini();
+    wid_thing_info_fini("inventory shortcut add");
     inventory_particle(item, itemsp->inventory_shortcuts.size() - 1);
     item->dead("by being collected");
 
@@ -234,7 +234,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
   }
 
   if (item->is_collect_as_keys()) {
-    wid_thing_info_fini();
+    wid_thing_info_fini("collect item as keys");
     keys_incr(item->is_key());
     inventory_particle(item, itemsp->inventory_shortcuts.size() - 1);
     item->dead("by being collected");
@@ -276,7 +276,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
       } else {
         if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
             (game->state != Game::STATE_COLLECTING_ITEMS)) {
-          wid_thing_info_fini();
+          wid_thing_info_fini("inventory add");
         }
         if (game->robot_mode) {
           inventory_particle(item, i);
@@ -305,7 +305,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
 
   if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
       (game->state != Game::STATE_COLLECTING_ITEMS)) {
-    wid_thing_info_fini();
+    wid_thing_info_fini("inventory add2");
   }
 
   if (game->robot_mode) {
@@ -380,7 +380,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
       level->inventory_describe(game->inventory_highlight_slot);
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
           (game->state != Game::STATE_COLLECTING_ITEMS)) {
-        wid_thing_info_fini();
+        wid_thing_info_fini("inventory remove");
       }
       return true;
     }
@@ -450,7 +450,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
 
       if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
           (game->state != Game::STATE_COLLECTING_ITEMS)) {
-        wid_thing_info_fini();
+        wid_thing_info_fini("inventory remove2");
       }
       return true;
     }
@@ -525,29 +525,29 @@ Thingp Level::inventory_get(const uint32_t slot)
   }
 
   if (slot >= itemsp->inventory_shortcuts.size()) {
-    LOG("Slot %d out of range, max %d", slot, (int) itemsp->inventory_shortcuts.size());
+    DBG("Slot %d out of range, max %d", slot, (int) itemsp->inventory_shortcuts.size());
     return nullptr;
   }
 
   auto thing_id = get(itemsp->inventory_shortcuts, slot);
   if (! thing_id) {
-    LOG("Slot %d has no thing", slot);
+    DBG("Slot %d has no thing", slot);
     return nullptr;
   }
 
   auto t = thing_find(thing_id);
   if (unlikely(! t)) {
-    LOG("Slot %d has no valid thing", slot);
+    DBG("Slot %d has no valid thing", slot);
     return nullptr;
   }
 
-  LOG("Slot %d has %s", slot, t->name().c_str());
+  DBG("Slot %d has %s", slot, t->name().c_str());
   return t;
 }
 
 Thingp Level::inventory_get(void)
 {
-  LOG("Inventory: Get highlight slot %d", game->inventory_highlight_slot);
+  DBG("Inventory: Get highlight slot %d", game->inventory_highlight_slot);
   return inventory_get(game->inventory_highlight_slot);
 }
 
@@ -555,11 +555,11 @@ bool Level::inventory_over(const uint32_t slot)
 {
   TRACE_NO_INDENT();
 
-  LOG("Inventory: Over inventory slot %d", slot);
+  DBG("Inventory: Over inventory slot %d", slot);
   TRACE_AND_INDENT();
 
   if (! player) {
-    LOG("Inventory: Ignore; no player");
+    DBG("Inventory: Ignore; no player");
     return false;
   }
 
@@ -570,13 +570,13 @@ bool Level::inventory_over(const uint32_t slot)
   }
 
   if (slot >= itemsp->inventory_shortcuts.size()) {
-    LOG("Inventory: Ignore; slot out of range");
+    DBG("Inventory: Ignore; slot out of range");
     return false;
   }
 
   auto oid = get(itemsp->inventory_shortcuts, slot);
   if (! oid) {
-    LOG("Inventory: Ignore; nothing at that slot %d", slot + 1);
+    DBG("Inventory: Ignore; nothing at that slot %d", slot + 1);
     inventory_dump();
     return false;
   }
@@ -584,10 +584,10 @@ bool Level::inventory_over(const uint32_t slot)
   Thingp item;
 
   if (slot != game->inventory_highlight_slot) {
-    LOG("Inventory: Request to remake inventory");
+    DBG("Inventory: Request to remake inventory");
     game->request_remake_rightbar  = true;
     game->inventory_highlight_slot = slot;
-    LOG("Inventory: Highlight slot %d", slot);
+    DBG("Inventory: Highlight slot %d", slot);
     item = inventory_describe(slot);
   } else {
     item = inventory_describe(game->inventory_highlight_slot);
@@ -605,7 +605,7 @@ bool Level::inventory_chosen(const uint32_t slot)
 {
   TRACE_NO_INDENT();
 
-  LOG("Inventory: Chosen inventory slot %d", slot);
+  DBG("Inventory: Chosen inventory slot %d", slot);
   TRACE_AND_INDENT();
 
   if (! player) {
@@ -625,7 +625,7 @@ bool Level::inventory_chosen(const uint32_t slot)
     return false;
   }
 
-  LOG("Inventory: Request to remake inventory");
+  DBG("Inventory: Request to remake inventory");
   game->request_remake_rightbar = true;
 
   auto oid = get(itemsp->inventory_shortcuts, slot);
@@ -639,7 +639,7 @@ bool Level::inventory_chosen(const uint32_t slot)
 
   if (slot != game->inventory_highlight_slot) {
     game->inventory_highlight_slot = slot;
-    LOG("Inventory: Highlight slot %d", slot);
+    DBG("Inventory: Highlight slot %d", slot);
 
     item = inventory_describe(slot);
     if (! item) {
@@ -669,7 +669,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
 {
   TRACE_NO_INDENT();
 
-  LOG("Inventory: Assign inventory slot %d", slot);
+  DBG("Inventory: Assign inventory slot %d", slot);
   TRACE_AND_INDENT();
 
   if (! player) {
@@ -686,7 +686,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
     itemsp->inventory_shortcuts.resize(slot + 1);
   }
 
-  LOG("Inventory: Request to remake inventory");
+  DBG("Inventory: Request to remake inventory");
   game->request_remake_rightbar = true;
 
   auto inventory_items = itemsp->inventory_shortcuts.size();
@@ -704,7 +704,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
       set(itemsp->inventory_shortcuts, i, NoThingId);
       if (i == game->inventory_highlight_slot) {
         game->inventory_highlight_slot = slot;
-        LOG("Inventory: Highlight slot %d", slot);
+        DBG("Inventory: Highlight slot %d", slot);
       }
     }
   }
@@ -780,7 +780,7 @@ Thingp Level::inventory_describe(const uint32_t slot)
 {
   TRACE_NO_INDENT();
 
-  LOG("Inventory: Describe slot %d", slot);
+  DBG("Inventory: Describe slot %d", slot);
   TRACE_AND_INDENT();
 
   auto item = inventory_get(slot);
@@ -788,7 +788,7 @@ Thingp Level::inventory_describe(const uint32_t slot)
     IF_DEBUG2 { item->log("Inventory: Describe slot %d", slot); }
     item->describe_when_hovered_over_in_rightbar();
   } else {
-    LOG("Inventory: Describe slot %d => nothing there", slot);
+    DBG("Inventory: Describe slot %d => nothing there", slot);
   }
   return item;
 }
