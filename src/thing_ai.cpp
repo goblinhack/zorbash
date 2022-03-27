@@ -353,11 +353,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
       //
       // Did we try or attempt to try to do something?
       //
-      if (is_player()) {
-        if (! game->tick_requested.empty()) {
-          return true;
-        }
-      } else {
+      if (! game->tick_requested.empty()) {
         return true;
       }
     } else {
