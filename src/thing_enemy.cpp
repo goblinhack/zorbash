@@ -40,14 +40,14 @@ void Thing::enemies_tick(void)
 
     if (--p.second > 0) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: enemy timeout %s (%d timeout)", attacker->to_string().c_str(), p.second);
+        dbg("Robot: enemy timeout %s (%d timeout)", attacker->to_string().c_str(), p.second);
       }
       continue;
     }
 
     if (attacker->is_dead) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: enemy remove as is dead: %s", attacker->to_string().c_str());
+        dbg("Robot: enemy remove as is dead: %s", attacker->to_string().c_str());
       }
       aip()->enemies.erase(p.first);
       return;
@@ -58,7 +58,7 @@ void Thing::enemies_tick(void)
     //
     if (distance(attacker->curr_at, curr_at) > distance_avoid_get()) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: enemy remove as is far away: %s", attacker->to_string().c_str());
+        dbg("Robot: enemy remove as is far away: %s", attacker->to_string().c_str());
       }
       aip()->enemies.erase(p.first);
       return;
@@ -68,7 +68,7 @@ void Thing::enemies_tick(void)
     // Be resentful a bit longer
     //
     if (is_player() && game->robot_mode) {
-      CON("Robot: enemy persists a bit longer: %s", attacker->to_string().c_str());
+      dbg("Robot: enemy persists a bit longer: %s", attacker->to_string().c_str());
     }
     p.second = pcg_random_range(0, 10);
   }

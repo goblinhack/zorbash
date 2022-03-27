@@ -6476,7 +6476,7 @@ static void wid_tick_all(void)
     if (time_have_x_tenths_passed_since(1, game->request_destroy_thing_info)) {
       DBG3("Handle request to destroy thing info");
       game->request_destroy_thing_info = false;
-      wid_thing_info_fini();
+      wid_thing_info_fini("wid request destroy info");
     }
   }
 

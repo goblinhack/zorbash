@@ -159,7 +159,8 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     //
     // If something was being described and we moved, clear it now
     //
-    bool moving = player->is_moving;
+    bool was_moving     = player->is_moving;
+    auto old_thing_info = game->current_wid_thing_info;
 
     auto future_pos = player->curr_at + dir;
 
@@ -180,9 +181,13 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
 
     bool moved = player->move(future_pos, up, down, left, right, attack, wait, &attack_options);
 
+    //
+    // If something was being described and we moved, clear it now
+    //
     if (moved) {
-      if (! moving) {
-        wid_thing_info_fini();
+      if (! was_moving && old_thing_info && (old_thing_info == game->current_wid_thing_info)) {
+        DBG("Player moved; clear thing info");
+        wid_thing_info_fini("player moved");
       }
     }
   }

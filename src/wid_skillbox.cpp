@@ -115,7 +115,7 @@ uint8_t wid_skillbox_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button
       (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_INVENTORY) ||
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
       (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS)) {
-    wid_thing_info_fini();
+    wid_thing_info_fini("skillbox mouse");
     return false;
   }
 

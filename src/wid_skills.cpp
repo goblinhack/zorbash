@@ -81,24 +81,24 @@ static uint8_t wid_skills_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             auto c = wid_event_to_char(key);
             switch (c) {
-              case '1' :
-              case '2' :
-              case '3' :
-              case '4' :
-              case '5' :
-              case '6' :
-              case '7' :
-              case '8' :
-              case '9' : wid_skills_slot(c - '1'); return true;
-              case SDLK_ESCAPE :
+              case '1':
+              case '2':
+              case '3':
+              case '4':
+              case '5':
+              case '6':
+              case '7':
+              case '8':
+              case '9': wid_skills_slot(c - '1'); return true;
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   CON("INF: Skill choose cancelled");
@@ -164,7 +164,7 @@ void Game::wid_choose_skill(void)
   BOTCON("You lucky thing. Time to learn some new skill.");
 
   DBG3("Thing skills create");
-  wid_thing_info_fini();
+  wid_thing_info_fini("choose skill");
   change_state(Game::STATE_CHOOSING_SKILLS);
 
   auto player = game->level->player;

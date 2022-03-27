@@ -101,23 +101,23 @@ static uint8_t wid_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case SDLK_RETURN :
-              case ' ' :
-              case 'n' : game_menu_new_game(nullptr, 0, 0, 0); return true;
-              case 'l' : wid_main_menu_load_game(nullptr, 0, 0, 0); return true;
-              case 'o' : wid_main_menu_config(nullptr, 0, 0, 0); return true;
-              case 'c' : wid_main_menu_credits_game(nullptr, 0, 0, 0); return true;
-              case 'h' : wid_main_menu_hiscores(nullptr, 0, 0, 0); return true;
-              case 'q' : wid_main_menu_quit_game(nullptr, 0, 0, 0); return true;
+              case SDLK_RETURN:
+              case ' ':
+              case 'n': game_menu_new_game(nullptr, 0, 0, 0); return true;
+              case 'l': wid_main_menu_load_game(nullptr, 0, 0, 0); return true;
+              case 'o': wid_main_menu_config(nullptr, 0, 0, 0); return true;
+              case 'c': wid_main_menu_credits_game(nullptr, 0, 0, 0); return true;
+              case 'h': wid_main_menu_hiscores(nullptr, 0, 0, 0); return true;
+              case 'q': wid_main_menu_quit_game(nullptr, 0, 0, 0); return true;
             }
           }
       }
@@ -332,7 +332,7 @@ void Game::wid_main_menu_select(void)
   wid_rightbar_fini();
   wid_inventory_fini();
   wid_skillbox_fini();
-  wid_thing_info_fini();
+  wid_thing_info_fini("main menu select");
   wid_actionbar_fini();
   wid_topcon_fini();
 

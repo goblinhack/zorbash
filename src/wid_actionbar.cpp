@@ -40,8 +40,10 @@ static ts_t wid_last_wait_repeat;
 
 void wid_actionbar_close_all_popups(void)
 {
-  TRACE_NO_INDENT();
-  wid_thing_info_fini();
+  DBG("Close all popups");
+  TRACE_AND_INDENT();
+
+  wid_thing_info_fini("close all popups");
   wid_collect_destroy();
   wid_enchant_destroy();
   wid_choose_skill_destroy();
@@ -955,7 +957,7 @@ static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t bu
   }
 
   game->change_state(Game::STATE_NORMAL);
-  wid_thing_info_fini(); // To remove bag or other info
+  wid_thing_info_fini("actionbar configure"); // To remove bag or other info
   game->wid_config_keyboard_select();
   return true;
 }

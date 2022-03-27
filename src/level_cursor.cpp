@@ -109,19 +109,15 @@ void Level::cursor_move(void)
     if (cursor_at != cursor_old) {
       cursor_old = cursor_at;
       cursor->move_to_immediately(cursor_at);
-      cursor_recreate();
 
-      //
-      // If we've moved, likely we want to look at something else
-      // But only do this if it is the result of a real mouse move
-      // and not just the level auto scrolling.
-      //
-      if (time_have_x_tenths_passed_since(10, ts_created)) {
-        if (! time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
-          wid_thing_info_fini();
-          cursor_describe();
-        }
-      }
+      dbg("cursor move to %d,%d", cursor_at.x, cursor_at.y);
+      TRACE_AND_INDENT();
+
+      game->cursor_moved = true;
+
+      cursor_recreate();
+      wid_thing_info_fini("auto clear");
+      cursor_describe();
     }
   }
 }

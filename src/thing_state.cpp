@@ -20,48 +20,48 @@ void Thing::change_state(int new_state, const std::string &why)
   std::string to;
   std::string from;
   switch (new_state) {
-    case MONST_STATE_IDLE :
+    case MONST_STATE_IDLE:
       sleep_count_set(0);
       is_sleeping = false;
-      to          = "IDLE";
+      to          = "MONST-IDLE";
       break;
-    case MONST_STATE_MOVING :
+    case MONST_STATE_MOVING:
       sleep_count_set(0);
       is_sleeping = false;
-      to          = "MOVING";
+      to          = "MONST-MOVING";
       break;
-    case MONST_STATE_RESTING :
+    case MONST_STATE_RESTING:
       is_sleeping = false;
-      to          = "RESTING";
+      to          = "MONST-RESTING";
       break;
-    case MONST_STATE_OPEN_INVENTORY :
+    case MONST_STATE_OPEN_INVENTORY:
       sleep_count_set(0);
       is_sleeping = false;
-      to          = "OPEN-INVENTORY";
+      to          = "MONST-OPEN-INVENTORY";
       break;
-    case MONST_STATE_USING_ENCHANTSTONE :
+    case MONST_STATE_USING_ENCHANTSTONE:
       sleep_count_set(0);
       is_sleeping = false;
-      to          = "USING-ENCHANTSTONE";
+      to          = "MONST-USING-ENCHANTSTONE";
       break;
-    case MONST_STATE_USING_SKILLSTONE :
+    case MONST_STATE_USING_SKILLSTONE:
       sleep_count_set(0);
       is_sleeping = false;
-      to          = "USING-SKILLSTONE";
+      to          = "MONST-USING-SKILLSTONE";
       break;
-    case MONST_STATE_REPACK_INVENTORY :
+    case MONST_STATE_REPACK_INVENTORY:
       sleep_count_set(0);
       is_sleeping = false;
-      to          = "REPACK";
+      to          = "MONST-REPACK";
       break;
-    case MONST_STATE_SLEEPING :
+    case MONST_STATE_SLEEPING:
       is_sleeping = true;
-      to          = "SLEEPING";
+      to          = "MONST-SLEEPING";
       break;
   }
 
   if (infop()->monst_state == new_state) {
-    dbg("Same state %s, reason: %s", to.c_str(), why.c_str());
+    dbg("Monst same state %s, reason: %s", to.c_str(), why.c_str());
     TRACE_AND_INDENT();
     return;
   }
@@ -74,47 +74,47 @@ void Thing::change_state(int new_state, const std::string &why)
   // Current state
   //
   switch (infop()->monst_state) {
-    case MONST_STATE_IDLE : from = "IDLE"; break;
-    case MONST_STATE_MOVING : from = "MOVING"; break;
-    case MONST_STATE_RESTING : from = "RESTING"; break;
-    case MONST_STATE_REPACK_INVENTORY : from = "REPACK"; break;
-    case MONST_STATE_OPEN_INVENTORY : from = "OPEN-INVENTORY"; break;
-    case MONST_STATE_USING_ENCHANTSTONE :
-      from = "USING-ENCHANTSTONE";
+    case MONST_STATE_IDLE: from = "MONST-IDLE"; break;
+    case MONST_STATE_MOVING: from = "MONST-MOVING"; break;
+    case MONST_STATE_RESTING: from = "MONST-RESTING"; break;
+    case MONST_STATE_REPACK_INVENTORY: from = "MONST-REPACK"; break;
+    case MONST_STATE_OPEN_INVENTORY: from = "MONST-OPEN-INVENTORY"; break;
+    case MONST_STATE_USING_ENCHANTSTONE:
+      from = "MONST-USING-ENCHANTSTONE";
       if (is_player()) {
         wid_enchant_destroy();
       }
       break;
-    case MONST_STATE_USING_SKILLSTONE :
-      from = "USING-SKILLSTONE";
+    case MONST_STATE_USING_SKILLSTONE:
+      from = "MONST-USING-SKILLSTONE";
       if (is_player()) {
         wid_choose_skill_destroy();
       }
       break;
-    case MONST_STATE_SLEEPING : from = "SLEEPING"; break;
+    case MONST_STATE_SLEEPING: from = "MONST-SLEEPING"; break;
   }
 
-  dbg("State change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
+  dbg("Monst state change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
   TRACE_AND_INDENT();
 
   infop()->monst_state = new_state;
   switch (new_state) {
-    case MONST_STATE_IDLE : clear_move_path("State is now idle"); break;
-    case MONST_STATE_MOVING : break;
-    case MONST_STATE_RESTING : break;
-    case MONST_STATE_REPACK_INVENTORY : break;
-    case MONST_STATE_OPEN_INVENTORY :
+    case MONST_STATE_IDLE: clear_move_path("State is now idle"); break;
+    case MONST_STATE_MOVING: break;
+    case MONST_STATE_RESTING: break;
+    case MONST_STATE_REPACK_INVENTORY: break;
+    case MONST_STATE_OPEN_INVENTORY:
       if (is_player()) {
         wid_inventory_init();
         game->request_remake_rightbar = true;
       }
       break;
-    case MONST_STATE_USING_ENCHANTSTONE :
+    case MONST_STATE_USING_ENCHANTSTONE:
       if (is_player()) {
         game->wid_enchant_an_item();
       }
       break;
-    case MONST_STATE_USING_SKILLSTONE :
+    case MONST_STATE_USING_SKILLSTONE:
       if (is_player()) {
         game->wid_choose_skill();
       }

@@ -52,7 +52,7 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
   }
 
   IF_DEBUG2 { player->log("Mouse down"); }
-  wid_thing_info_fini();
+  wid_thing_info_fini("mouse down");
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     IF_DEBUG2 { player->log("Chosen target"); }

@@ -137,6 +137,7 @@ bool Thing::will_avoid_monst(const point p)
     if (me->is_monst()) {
       if (it->is_player()) {
         if (is_dangerous(it)) {
+          dbg("Avoid dangerous: %s", it->to_string().c_str());
           return true;
         }
       }
@@ -145,6 +146,7 @@ bool Thing::will_avoid_monst(const point p)
     if (me->is_meat()) {
       if (it->is_meat_eater() || it->attack_meat()) {
         if (is_dangerous(it)) {
+          dbg("Avoid meat eater: %s", it->to_string().c_str());
           return true;
         }
       }
@@ -153,6 +155,7 @@ bool Thing::will_avoid_monst(const point p)
     if (me->is_humanoid()) {
       if (it->attack_humanoid()) {
         if (is_dangerous(it)) {
+          dbg("Avoid humanoid eater: %s", it->to_string().c_str());
           return true;
         }
       }
@@ -161,6 +164,7 @@ bool Thing::will_avoid_monst(const point p)
     if (me->is_living()) {
       if (it->attack_living()) {
         if (is_dangerous(it)) {
+          dbg("Avoid living eater: %s", it->to_string().c_str());
           return true;
         }
       }
@@ -171,11 +175,13 @@ bool Thing::will_avoid_monst(const point p)
       // But allow baby slimes to attack each other!
       //
       if (it->is_jelly_parent()) {
+        dbg("Avoid jelly eater: %s", it->to_string().c_str());
         return true;
       }
     }
 
     if (is_dangerous(it)) {
+      dbg("Avoid dangerous: %s", it->to_string().c_str());
       return true;
     }
   }

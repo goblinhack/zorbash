@@ -88,20 +88,26 @@ bool Thing::player_is_ready_for_thing_info(void)
   if (game->tick_current <= 1) {
     if (game->tick_requested.empty()) {
       if ((time_get_time_ms() - game->tick_begin_ms) < 50) {
-        return false;
+        if (! game->cursor_moved) {
+          dbg("Not ready for thing info: too soon %ums", time_get_time_ms() - game->tick_begin_ms);
+          return false;
+        }
       }
     }
   }
 
   if (! level->player) {
+    dbg("Not ready for thing info; no level");
     return false;
   }
 
   if (level->player->is_dead || level->player->is_dying) {
+    dbg("Not ready for thing info; dead");
     return false;
   }
 
   if (level->is_starting || level->is_being_destroyed) {
+    dbg("Not ready for thing info; level starting");
     return false;
   }
   return true;

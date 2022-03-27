@@ -381,6 +381,7 @@ public:
   //
   std::vector< point > cursor_move_path;
   point                cursor_move_end;
+  bool                 cursor_moved {};
 
   //
   // Temporary for the status bar

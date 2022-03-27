@@ -74,7 +74,7 @@ void Game::start(void)
   wid_topcon_fini();
   wid_topcon_init();
 
-  wid_thing_info_fini();
+  wid_thing_info_fini("start the game");
   wid_inventory_fini();
 
   wid_skillbox_fini();

@@ -252,7 +252,7 @@ static void wid_collect_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int
 
   auto t = collect_items[ slot ];
   if (t) {
-    wid_thing_info_fini();
+    wid_thing_info_fini("collect over item");
     game->wid_thing_info_create(t);
   }
 }
@@ -273,13 +273,27 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   TRACE_AND_INDENT();
 
   wid_collect_destroy();
-  wid_thing_info_fini();
+  wid_thing_info_fini("collect create");
+
   change_state(Game::STATE_COLLECTING_ITEMS);
 
-  auto player = game->level->player;
+  auto level = game->level;
+  if (! level) {
+    change_state(Game::STATE_NORMAL);
+    ERR("No level");
+    return;
+  }
+
+  auto player = level->player;
   if (! player) {
     change_state(Game::STATE_NORMAL);
     ERR("No player");
+    return;
+  }
+
+  if (game->robot_mode) {
+    change_state(Game::STATE_NORMAL);
+    DBG("Robot collects things without using the UI");
     return;
   }
 
