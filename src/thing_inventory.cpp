@@ -778,8 +778,6 @@ int Level::inventory_get_slot(Thingp item)
 
 Thingp Level::inventory_describe(const uint32_t slot)
 {
-  TRACE_NO_INDENT();
-
   DBG("Inventory: Describe slot %d", slot);
   TRACE_AND_INDENT();
 
