@@ -309,12 +309,12 @@ bool Thing::ai_on_fire_choose_target(point &nh)
 
 bool Thing::ai_on_fire(void)
 {
-  dbg("AI: on fire, try to escape");
+  dbg("On fire, try to escape");
   TRACE_AND_INDENT();
 
   for (auto tries = 1; tries < 10; tries++) {
     point nh;
-    dbg("AI: on fire, try %d", tries);
+    dbg("On fire, try %d", tries);
     if (ai_on_fire_choose_target(nh)) {
       if (move_to_or_escape(nh)) {
         return true;
