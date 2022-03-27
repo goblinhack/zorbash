@@ -203,7 +203,7 @@ bool Thing::path_pop_next_move(void)
           continue;
         }
         switch (try_to_shove_into_hazard(t, delta)) {
-          case THING_SHOVE_TRIED_AND_FAILED :
+          case THING_SHOVE_TRIED_AND_FAILED:
             {
               IF_DEBUG2
               {
@@ -217,7 +217,7 @@ bool Thing::path_pop_next_move(void)
               clear_move_path("Tried to shove but failed");
               return false;
             }
-          case THING_SHOVE_TRIED_AND_PASSED :
+          case THING_SHOVE_TRIED_AND_PASSED:
             {
               IF_DEBUG2
               {
@@ -230,7 +230,7 @@ bool Thing::path_pop_next_move(void)
               clear_move_path("Tried to shove");
               return true;
             }
-          case THING_SHOVE_NEVER_TRIED : break;
+          case THING_SHOVE_NEVER_TRIED: break;
         }
       }
       FOR_ALL_THINGS_END()
@@ -388,6 +388,7 @@ bool Thing::cursor_path_pop_first_move(void)
   //
   // A path to the target does not exist. Jump?
   //
+  dbg("Cursor path does not exist; jump?");
   point future_pos = make_point(cursor->curr_at.x, cursor->curr_at.y);
 
   //

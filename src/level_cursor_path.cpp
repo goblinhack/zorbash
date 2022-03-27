@@ -195,7 +195,7 @@ void Level::cursor_path_draw_line(point start, point end)
   set(d.val, end.x, end.y, DMAP_IS_GOAL);
   set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-  // CON("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  log("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   dmap_process(&d, dmap_start, dmap_end);
   // dmap_print(&d, start, dmap_start, dmap_end);
@@ -204,7 +204,8 @@ void Level::cursor_path_draw_line(point start, point end)
   game->cursor_move_end  = end;
   game->cursor_moved     = true;
 
-  // CON("Path len %d", (int) p.size());
+  log("Created cursor path len %d", (int) p.size());
+
   for (auto &c : p) {
     if (cursor && cursor->is_visible()) {
       if ((c.x == cursor_at.x) && (c.y == cursor_at.y)) {
@@ -403,7 +404,7 @@ void Level::cursor_path_create(void)
 void Level::cursor_path_create(const std::vector< point > &move_path)
 {
   TRACE_AND_INDENT();
-  // backtrace_dump();
+  log("Create cursor path len %d", (int) move_path.size());
 
   if (! cursor) {
     return;

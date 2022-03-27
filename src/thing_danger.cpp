@@ -316,7 +316,7 @@ int Thing::is_dangerous(Thingp it)
     b += 2;
   }
 
-  log("My danger level %d, its %d, %s", a, b, it->to_short_string().c_str());
+  // dbg("My danger level %d, its %d, %s", a, b, it->to_short_string().c_str());
 
   //
   // So giant rats will attack each other if at the same danger level
