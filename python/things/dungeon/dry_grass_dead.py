@@ -14,7 +14,7 @@ def tp_init(name, tiles=[]):
     my.is_dry_grass(self, True)
     my.is_interesting(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description(self, "Burnt not so funky grass.")
+    my.text_description(self, "Burnt grass.")
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 

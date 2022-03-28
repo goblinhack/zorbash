@@ -225,10 +225,10 @@ public:
   void wid_thing_info_add_stat_luck(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_str(WidPopup *w, Thingp t);
   void wid_thing_info_clear_popup(void);
-  void wid_thing_info_create_list(const std::vector< Thingp > &ts);
-  void wid_thing_info_create(Thingp, bool when_hovering_over = false);
-  void wid_thing_info_create_when_hovering_over_list(const std::vector< Thingp > &);
-  void wid_thing_info_create_when_hovering_over(Thingp);
+  bool wid_thing_info_create_list(const std::vector< Thingp > &ts);
+  bool wid_thing_info_create(Thingp, bool when_hovering_over = false);
+  bool wid_thing_info_create_when_hovering_over_list(const std::vector< Thingp > &);
+  bool wid_thing_info_create_when_hovering_over(Thingp);
   void wid_thing_info_destroy_deferred(void);
   void wid_thing_info_destroy_immediate(void);
 
