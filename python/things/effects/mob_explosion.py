@@ -12,11 +12,11 @@ def tp_init(name):
     my.gfx_short_shadow_caster(self, True)
     my.gfx_show_outlined(self, True)
     my.is_explosion(self, True)
-    my.on_born_do(self, "me.on_born()")
     my.is_floating(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.noise_on_born(self, 50)
+    my.on_born_do(self, "me.on_born()")
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 

@@ -519,6 +519,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 
     if (collision_check_only(future_pos)) {
       dbg("Collided with something");
+      TRACE_AND_INDENT();
 
       if (attack_options->shove_allowed) {
         dbg("Try to shove");
@@ -529,6 +530,18 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       } else if (attack_options->attack_allowed) {
         dbg("Try to attack at %s", future_pos.to_string().c_str());
         TRACE_AND_INDENT();
+
+        //
+        // If the cursor is where we are trying to attack, then set the
+        // attack position; this allows us to hit walls interntionally.
+        //
+        if (level->cursor) {
+          if (level->cursor->curr_at == future_pos) {
+            attack_options->attack_at_set = true;
+            attack_options->attack_at     = level->cursor->curr_at;
+            dbg("Try to attack at cursor location");
+          }
+        }
 
         if (equip_use(must_attack, MONST_EQUIP_WEAPON, attack_options)) {
           clear_move_path("Attacked");

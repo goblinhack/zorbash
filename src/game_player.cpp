@@ -47,6 +47,9 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (1) {
+        level->thing_new("wall_dungeon.1", point(x + 1, y));
+      }
+      if (1) {
         auto w = level->thing_new("boots_teleport", point(x, y - 2));
         t->carry(w);
       }
