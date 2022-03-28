@@ -325,7 +325,7 @@ void Game::wid_thing_info_clear_popup(void)
   wid_thing_info_window.clear();
 }
 
-void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
+bool Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
 {
   TRACE_AND_INDENT();
   DBG3("Create wid thing info for %s", t->to_string().c_str());
@@ -336,24 +336,24 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
     // Continue
     //
     IF_DEBUG1 { t->log("Remake thing info"); }
-    return;
+    return false;
   }
 
   TRACE_AND_INDENT();
   if (wid_console_window && wid_console_window->visible) {
     IF_DEBUG1 { t->log("No; console visible"); }
-    return;
+    return false;
   }
 
   if (wid_inventory_window) {
     IF_DEBUG1 { t->log("No; inventory visible"); }
-    return;
+    return false;
   }
 
   if (when_hovering_over) {
     if (! level->is_lit_recently(t->curr_at.x, t->curr_at.y)) {
       IF_DEBUG1 { t->log("No; not lit"); }
-      return;
+      return false;
     }
   }
 
@@ -367,7 +367,7 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   auto player = game->level->player;
   if (! player) {
     ERR("No player");
-    return;
+    return false;
   }
 
   static bool recursion;
@@ -396,9 +396,11 @@ void Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   point mid(TERM_WIDTH / 2, TERM_HEIGHT - 5);
 
   recursion = false;
+
+  return true;
 }
 
-void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
+bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
 {
   TRACE_AND_INDENT();
 
@@ -409,34 +411,34 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
     DBG3("Remake thing info from list");
   } else if (game->state == Game::STATE_COLLECTING_ITEMS) {
     ERR("Ignore, already collecting items");
-    return;
+    return false;
   } else if (game->state == Game::STATE_INVENTORY) {
     DBG3("Ignore, already moving items");
-    return;
+    return false;
   }
 
   TRACE_AND_INDENT();
   if (wid_console_window && wid_console_window->visible) {
     DBG3("No; console visible");
-    return;
+    return false;
   }
 
   if (wid_inventory_window) {
     DBG3("Ignore, inventory is open");
-    return;
+    return false;
   }
 
   auto level = game->get_current_level();
   if (! level) {
     game->change_state(Game::STATE_NORMAL);
     ERR("No level");
-    return;
+    return false;
   }
   auto player = game->level->player;
   if (! player) {
     game->change_state(Game::STATE_NORMAL);
     ERR("No player");
-    return;
+    return false;
   }
 
   //
@@ -453,10 +455,10 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
 
   if (! found_one_with_long_text) {
     for (auto t : ts) {
-      IF_DEBUG1 { t->log("Found an item with long text"); }
-      wid_thing_info_fini("has long text");
+      IF_DEBUG1 { t->log("No long text"); }
+      wid_thing_info_fini("No long text");
       t->show_botcon_description();
-      return;
+      return false;
     }
   }
   TRACE_AND_INDENT();
@@ -483,6 +485,8 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   if (ts.size() > 2) {
     compact = true;
   }
+
+  bool ok = false;
 
   if (! compact) {
     int i = 0;
@@ -512,6 +516,8 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
         compact = true;
         break;
       }
+
+      ok = true;
     }
   }
 
@@ -520,17 +526,20 @@ void Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
     if (! wid_thing_info_create_popup_compact(ts)) {
       DBG3("Failed to create compact thing info");
       wid_thing_info_fini("failed to create compact thing info");
+      ok = false;
     }
   }
 
   recursion = false;
+
+  return ok;
 }
 
-void Game::wid_thing_info_create_when_hovering_over(Thingp t) { wid_thing_info_create(t, true); }
+bool Game::wid_thing_info_create_when_hovering_over(Thingp t) { return wid_thing_info_create(t, true); }
 
-void Game::wid_thing_info_create_when_hovering_over_list(const std::vector< Thingp > &ts)
+bool Game::wid_thing_info_create_when_hovering_over_list(const std::vector< Thingp > &ts)
 {
-  wid_thing_info_create_list(ts);
+  return wid_thing_info_create_list(ts);
 }
 
 void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t)

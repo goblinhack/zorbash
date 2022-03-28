@@ -22,7 +22,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Dungeon salami if you can believe that. Eat at your own risk.")
+    my.long_text_description(self, "Dungeon salami. Eat at your own risk.")
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d40")
