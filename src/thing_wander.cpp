@@ -174,27 +174,34 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   auto hops_len = hops.size();
 
   if (hops_len >= 2) {
-    auto ai       = aip();
-    ai->move_path = result.path;
-    if (ai->move_path.size()) {
-      change_state(MONST_STATE_MOVING, "found a new wander goal");
-    }
-
     auto hop0 = get(hops, hops_len - 1);
     auto hop1 = get(hops, hops_len - 2);
     if (dmap_can_i_move_diagonally(&dmap, start, hop0, hop1)) {
       nh = hop1;
+      hops.resize(hops.size() - 1);
     } else {
       nh = hop0;
     }
+
+    auto ai = aip();
+    std::reverse(hops.begin(), hops.end());
+    ai->move_path = hops;
+    change_state(MONST_STATE_MOVING, "found a new wander goal");
     return true;
-  } else if (hops_len >= 1) {
+  }
+
+  if (hops_len >= 1) {
     auto hop0 = get(hops, hops_len - 1);
     nh        = hop0;
+    auto ai   = aip();
+
+    std::reverse(hops.begin(), hops.end());
+    ai->move_path = hops;
+    change_state(MONST_STATE_MOVING, "found a new wander goal");
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 }
 
 bool Thing::ai_choose_wander(point &nh)
