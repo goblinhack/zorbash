@@ -139,10 +139,11 @@ Thingp Thing::immediate_owner(void)
   }
 
   auto o = immediate_owner_id();
-  if (o == id) {
-    die("Self owned");
-  }
   if (likely(o.ok())) {
+    if (o == id) {
+      DIE("Self owned %" PRIX32 "", id.id);
+    }
+
     auto i = level->thing_find(o);
     if (unlikely(! i)) {
       return nullptr;

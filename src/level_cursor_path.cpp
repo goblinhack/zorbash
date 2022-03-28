@@ -90,6 +90,7 @@ void Level::cursor_path_draw_circle(void)
 //
 void Level::cursor_path_draw_line(point start, point end)
 {
+  dbg("Create cursor draw line %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   Dmap  d {};
@@ -195,7 +196,7 @@ void Level::cursor_path_draw_line(point start, point end)
   set(d.val, end.x, end.y, DMAP_IS_GOAL);
   set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-  log("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   dmap_process(&d, dmap_start, dmap_end);
   // dmap_print(&d, start, dmap_start, dmap_end);
@@ -204,7 +205,7 @@ void Level::cursor_path_draw_line(point start, point end)
   game->cursor_move_end  = end;
   game->cursor_moved     = true;
 
-  log("Created cursor path len %d", (int) p.size());
+  dbg("Created cursor path len %d", (int) p.size());
 
   for (auto &c : p) {
     if (cursor && cursor->is_visible()) {
@@ -239,6 +240,7 @@ void Level::cursor_path_draw_line(const std::vector< point > &move_path)
 //
 void Level::cursor_path_draw(point start, point end)
 {
+  dbg("Create cursor draw %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   if (! player) {
@@ -269,27 +271,14 @@ void Level::cursor_path_draw(point start, point end)
 
 void Level::cursor_path_draw(const std::vector< point > &move_path)
 {
+  dbg("Create cursor move path");
   TRACE_AND_INDENT();
 
   if (! player) {
     return;
   }
 
-  if (game->request_to_throw_item) {
-    cursor_path_draw_circle();
-  } else if (game->request_to_use_item) {
-    //
-    // Draw a line instead
-    //
-    if (game->request_to_use_item->blast_max_radius()) {
-      //
-      // For wands with a blast effect, show both line and radius
-      //
-      cursor_path_draw_circle();
-    }
-  } else {
-    cursor_path_draw_line(move_path);
-  }
+  cursor_path_draw_line(move_path);
 
   //
   // Let's see the path
@@ -396,38 +385,20 @@ void Level::cursor_path_create(void)
   //
   // If not following the player, draw the path
   //
-  if (player) {
-    cursor_path_draw(point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));
-  }
+  cursor_path_draw(point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));
 }
 
 void Level::cursor_path_create(const std::vector< point > &move_path)
 {
+  dbg("Create cursor path len %d", (int) move_path.size());
   TRACE_AND_INDENT();
-  log("Create cursor path len %d", (int) move_path.size());
-
-  if (! cursor) {
-    return;
-  }
 
   cursor_path_clear();
 
   //
-  // For lasers do not show the cursor (circle) unless the item has a
-  // blast radius
-  //
-  if (game->request_to_use_item) {
-    if (! game->request_to_use_item->blast_max_radius()) {
-      return;
-    }
-  }
-
-  //
   // If not following the player, draw the path
   //
-  if (player) {
-    cursor_path_draw(move_path);
-  }
+  cursor_path_draw(move_path);
 }
 
 //

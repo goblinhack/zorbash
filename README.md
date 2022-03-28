@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- robot mode stuck                                                                                                                             -->
 <!-- need to know why a weapon breaks                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
