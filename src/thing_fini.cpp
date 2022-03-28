@@ -96,6 +96,7 @@ void Thing::destroy(void)
   }
 
   if (level->cursor == this) {
+    dbg2("Removed cursor");
     level->cursor = nullptr;
   }
 

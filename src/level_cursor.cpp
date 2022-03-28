@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_ptrcheck.hpp"
@@ -40,9 +39,6 @@ void Level::cursor_check_if_scroll_needed(void)
 void Level::cursor_move(void)
 {
   TRACE_AND_INDENT();
-  if (game->robot_mode) {
-    return;
-  }
 
   if (is_mouse_over_any_bag()) {
     return;
@@ -124,20 +120,13 @@ void Level::cursor_move(void)
 
 void Level::cursor_recreate(void)
 {
+  dbg("Recreate cursor");
   TRACE_AND_INDENT();
-  // backtrace_dump();
 
   //
   // Player might be on another level
   //
-  if (! cursor) {
-    return;
-  }
-
-  //
-  // Distracting when in robot mode
-  //
-  if (game->robot_mode) {
+  if (! player) {
     return;
   }
 
@@ -145,14 +134,19 @@ void Level::cursor_recreate(void)
     return;
   }
 
-  auto curr_at = cursor->curr_at;
-
   auto what = game->request_to_throw_item;
   if (! what) {
     what = game->request_to_use_item;
   }
 
-  cursor->dead("update");
+  point curr_at;
+  if (cursor) {
+    curr_at = cursor->curr_at;
+    cursor->dead("update");
+  } else {
+    curr_at = player->curr_at;
+  }
+
   if (what && (game->state == Game::STATE_CHOOSING_TARGET)) {
     bool too_far = false;
     auto dist    = DISTANCE(player->curr_at.x, player->curr_at.y, curr_at.x, curr_at.y);

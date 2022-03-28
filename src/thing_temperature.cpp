@@ -160,7 +160,7 @@ int Thing::temperature_incr(int v)
     return v;
   }
 
-  log("Increment temp %d", v);
+  dbg2("Increment temp %d", v);
   TRACE_AND_INDENT();
 
   auto T = temperature_get();

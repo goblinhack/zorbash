@@ -350,10 +350,20 @@ bool Thing::path_pop_next_move(void)
 //
 bool Thing::cursor_path_pop_first_move(void)
 {
-  TRACE_NO_INDENT();
+  dbg("Cursor pop first move");
+  TRACE_AND_INDENT();
+
   auto cursor = level->cursor;
   if (! cursor) {
-    return false;
+    dbg("Cursor pop first move: no cursor, recreate");
+    TRACE_AND_INDENT();
+
+    level->cursor_recreate();
+    cursor = level->cursor;
+    if (! cursor) {
+      dbg("Cursor pop first move: no cursor");
+      return false;
+    }
   }
 
   if (game->cursor_move_path.size()) {
