@@ -27,6 +27,7 @@ def tp_init(
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 2)
     my.gfx_shown_in_bg(self, True)
+    my.gfx_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "20d10")
     my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)

@@ -50,6 +50,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
     {
       int prio = t->collision_hit_priority();
       dbg2("Target-attack-best: %s prio %d", t->to_short_string().c_str(), prio);
+      TRACE_AND_INDENT();
 
       if (t->is_dead || t->is_dying) {
         dbg2("Target-attack-best: %s no dead or dying", t->to_short_string().c_str());
@@ -63,6 +64,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
 
       if (t->is_wall()) {
         if (! attack_options->allow_hitting_walls) {
+          dbg2("Target-attack-best: %s no not allowed to hit walls", t->to_short_string().c_str());
           continue;
         }
       }
@@ -131,6 +133,7 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
     {
       int prio = t->collision_hit_priority();
       dbg2("Target-attack-best: %s prio %d", t->to_short_string().c_str(), prio);
+      TRACE_AND_INDENT();
 
       //
       // Get the most important thing to hit.
@@ -156,6 +159,7 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
 
       if (t->is_wall()) {
         if (! attack_options->allow_hitting_walls) {
+          dbg2("Target-attack-best: %s no not allowed to hit walls", t->to_short_string().c_str());
           continue;
         }
       }
@@ -216,6 +220,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
     {
       int prio = t->collision_hit_priority();
       dbg2("Target-attack-best: %s prio %d", t->to_short_string().c_str(), prio);
+      TRACE_AND_INDENT();
 
       //
       // Get the most important thing to hit.
@@ -241,6 +246,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
 
       if (t->is_wall()) {
         if (! attack_options->allow_hitting_walls) {
+          dbg2("Target-attack-best: %s no not allowed to hit walls", t->to_short_string().c_str());
           continue;
         }
       }
@@ -508,7 +514,7 @@ bool Thing::victim_attack_best_(int equip, AttackOptions *attack_options)
   }
 
   //
-  // If we are targetting a wall
+  // Are we allowed to target walls?
   //
   if (attack_options->attack_at_set) {
     if (level->is_obs_wall_or_door(attack_options->attack_at)) {
