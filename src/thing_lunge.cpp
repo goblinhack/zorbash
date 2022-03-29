@@ -24,7 +24,7 @@ void Thing::lunge(point to)
 
   move_finish();
 
-  auto t = ts_lunge_begin_set(time_get_time_ms_cached());
+  auto t = ts_lunge_begin_set(time_game_ms_cached());
   auto p = to - curr_at;
   ts_lunge_end_set(t + 200);
   lunge_to_set(to);
@@ -37,7 +37,7 @@ float Thing::lunge_curr(void)
     return 0;
   }
 
-  auto t = time_get_time_ms_cached();
+  auto t = time_game_ms_cached();
 
   if (t >= ts_lunge_end()) {
     ts_lunge_begin_set(0);

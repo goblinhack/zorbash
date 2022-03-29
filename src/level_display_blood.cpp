@@ -33,11 +33,11 @@ void Level::display_blood(void)
 
   static uint32_t last_pulse_when;
   if (! last_pulse_when) {
-    last_pulse_when = time_get_time_ms_cached();
+    last_pulse_when = time_game_ms_cached();
   }
 
-  if ((time_get_time_ms_cached() - last_pulse_when) > (uint) 100) {
-    last_pulse_when = time_get_time_ms_cached();
+  if ((time_game_ms_cached() - last_pulse_when) > (uint) 100) {
+    last_pulse_when = time_game_ms_cached();
 
     if (player->is_dead) {
       blood.a = 255;

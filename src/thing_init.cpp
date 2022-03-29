@@ -134,8 +134,9 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   if (game->robot_mode) {
     if (! pcg_random_allowed) {
-      con("Error, trying to create a thing outside of game loop");
+      err("Error, trying to create a thing outside of game loop");
       backtrace_dump();
+      DIE("Error, trying to create a thing outside of game loop");
     }
   }
 

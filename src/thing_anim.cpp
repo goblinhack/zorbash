@@ -47,7 +47,7 @@ void Thing::animate(void)
     }
   }
 
-  if (time_get_time_ms_cached() <= ts_anim_delay_end()) {
+  if (time_game_ms_cached() <= ts_anim_delay_end()) {
 #ifdef DEBUG_ANIM
     if (is_debug_type()) {
       con("Waiting on anim frame");
@@ -77,7 +77,7 @@ void Thing::animate(void)
     //
     // If within the animate time of this frame, keep with it.
     //
-    if (ts_next_frame > time_get_time_ms_cached()) {
+    if (ts_next_frame > time_game_ms_cached()) {
 #ifdef DEBUG_ANIM
       if (is_debug_type()) {
         con("Same frame");
@@ -491,5 +491,5 @@ void Thing::animate(void)
     delay /= 2;
   }
 
-  ts_next_frame = time_get_time_ms_cached() + delay;
+  ts_next_frame = time_game_ms_cached() + delay;
 }

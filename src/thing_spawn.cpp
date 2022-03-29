@@ -236,7 +236,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
 
       auto c = level->thing_new(what, point(x, y));
       c->inherit_from(this);
-      c->ts_anim_delay_end_set(time_get_time_ms_cached() + dist * 100);
+      c->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
 
       if (is_spawner()) {
         c->spawned_owner_set(this);
@@ -295,7 +295,7 @@ bool Thing::spawn_radius_range(const std::string &what, uint32_t radius_min, uin
 
       auto c = level->thing_new(what, point(x, y));
       c->inherit_from(this);
-      c->ts_anim_delay_end_set(time_get_time_ms_cached() + dist * 100);
+      c->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
 
       if (is_spawner()) {
         c->spawned_owner_set(this);
@@ -393,7 +393,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
       auto c = level->thing_new(what, spawn_at);
 
       c->inherit_from(this);
-      c->ts_anim_delay_end_set(time_get_time_ms_cached() + dist * 100);
+      c->ts_anim_delay_end_set(time_game_ms_cached() + dist * 100);
 
       if (is_spawner()) {
         c->spawned_owner_set(this);

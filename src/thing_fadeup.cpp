@@ -9,7 +9,7 @@
 
 void Thing::fadeup(float fadeup_height, float fadeup_fade, ts_t ms)
 {
-  auto t = ts_fadeup_begin_set(time_get_time_ms_cached());
+  auto t = ts_fadeup_begin_set(time_game_ms_cached());
   ts_fadeup_end_set(t + ms);
 
   fadeup_height_set(fadeup_height);
@@ -24,7 +24,7 @@ float Thing::fadeup_curr(void)
     return (0.0);
   }
 
-  auto t = time_get_time_ms_cached();
+  auto t = time_game_ms_cached();
 
   if (t >= ts_fadeup_end()) {
     dead("by fadeup finished");

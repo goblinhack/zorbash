@@ -85,7 +85,7 @@ void Level::new_projectile(ThingId id, ThingId victim_id, point start, point sto
     }
   }
 
-  uint32_t now = time_get_time_ms();
+  uint32_t now = time_game_ms();
   new_projectiles.push_back(
       Projectile(this, id, victim_id, start, stop, pixel_map_at, now, now + dur, follow_moving_target));
 }
@@ -120,7 +120,7 @@ void Level::display_projectiles(void)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   blit_init();
-  auto now = time_get_time_ms();
+  auto now = time_game_ms();
   auto e   = std::remove_if(all_projectiles.begin(), all_projectiles.end(), [ =, this ](Projectile &p) {
     float timestep = p.ts_stop - p.ts_start;
     float dt       = ((float) (now - p.ts_start)) / timestep;

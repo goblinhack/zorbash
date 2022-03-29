@@ -88,7 +88,7 @@ void Level::new_laser(ThingId id, ThingId victim_id, point start, point stop, ui
     }
   }
 
-  uint32_t now = time_get_time_ms();
+  uint32_t now = time_game_ms();
   new_lasers.push_back(Laser(this, id, victim_id, start, stop, pixel_map_at, now, now + dur, follow_moving_target));
 }
 
@@ -122,7 +122,7 @@ void Level::display_lasers(void)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   blit_init();
-  auto now = time_get_time_ms();
+  auto now = time_game_ms();
   auto e   = std::remove_if(all_lasers.begin(), all_lasers.end(), [ =, this ](Laser &p) {
     TRACE_NO_INDENT();
     float timestep = p.ts_stop - p.ts_start;

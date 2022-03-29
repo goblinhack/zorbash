@@ -26,9 +26,12 @@ const char *timestamp(char *buf, int32_t len);
 
 ts_t time_get_elapsed_secs(ts_t val, ts_t since);
 ts_t time_get_elapsed_tenths(ts_t val, ts_t since);
-ts_t time_get_time_ms(void);
-ts_t time_get_time_ms_cached(void);
-ts_t time_get_time_ms(void);
+
+ts_t time_game_ms(void);
+ts_t time_game_ms_cached(void);
+
+ts_t time_ms(void);
+ts_t time_ms_cached(void);
 
 void get_timestamp(char *buf, int32_t len);
 
@@ -36,6 +39,7 @@ std::string  current_date(void);
 std::string &string_timestamp(void);
 
 extern ts_t time_now;
-extern ts_t time_delta;
+extern ts_t time_game;
+extern ts_t time_game_delta;
 
 #endif

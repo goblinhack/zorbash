@@ -28,7 +28,8 @@ void sdl_loop(void)
   SDL_Event events[ 10 ];
   int       found;
   int       i;
-  int       frames = 0;
+  int       frames   = 0;
+  bool      too_slow = false;
 
   sdl_mouse_center();
   SDL_SetEventFilter(sdl_filter_events, 0);
@@ -38,7 +39,7 @@ void sdl_loop(void)
   //
   // Wait for events
   //
-  int ui_ts_fast_last = time_get_time_ms();
+  int ui_ts_fast_last = time_game_ms();
   int ui_ts_slow_last = ui_ts_fast_last;
 
   g_main_loop_running = true;
@@ -116,9 +117,14 @@ void sdl_loop(void)
     //
     // Less frequent updates
     //
-    int  ts_now      = time_get_time_ms();
+    int  ts_now      = time_game_ms();
     bool update_slow = (ts_now - ui_ts_slow_last >= UI_UPDATE_SLOW_MS);
     bool update_fast = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
+
+    if (too_slow) {
+      update_slow = false;
+      too_slow    = false;
+    }
 
     //
     // Less frequent updates
@@ -240,7 +246,7 @@ void sdl_loop(void)
         // If the tick ends, start the new tick asap for smoothness.
         //
         if (game->level->tick()) {
-          game->level->tick();
+          too_slow = true;
         }
       }
     }

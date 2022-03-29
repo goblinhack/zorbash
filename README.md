@@ -1,6 +1,16 @@
+
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- things should not sleep if they have been attacked recentyl                                                                                  -->
+<!-- dup message - you wield / you equip                                                                                                          -->
+<!-- topcon with a string ending in space does not appear                                                                                         -->
 <!-- need to know why a weapon breaks                                                                                                             -->
+<!-- ------                                                                                                                                       -->
+<!--                                                                                                                                              -->
+<!-- Performance                                                                                                                                  -->
+<!-- ------                                                                                                                                       -->
+<!-- sudo operf ./zorbash-game --playername discobob --seed victimlake --nodebug --quick-start                                                    -->
+<!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->

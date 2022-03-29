@@ -16,7 +16,7 @@
 #define UI_BOTCON_VIS_HEIGHT         1
 #define UI_BOTCON_VIS_WIDTH          UI_BOTCON_WIDTH
 #define UI_BOTCON_WIDTH              (TERM_WIDTH)
-#define UI_CONSOLE_HEIGHT            500
+#define UI_CONSOLE_HEIGHT            50
 #define UI_CONSOLE_INPUT_COLOR       ORANGE
 #define UI_CONSOLE_TEXT_COLOR        GRAY
 #define UI_CONSOLE_WIDTH             (TERM_WIDTH - 3)
@@ -53,7 +53,7 @@
 #define UI_TOPCON_VIS_WIDTH          UI_TOPCON_WIDTH
 #define UI_TOPCON_WIDTH              (TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH)
 #define UI_UPDATE_FAST_MS            2
-#define UI_UPDATE_SLOW_MS            10 // FPS and game status
+#define UI_UPDATE_SLOW_MS            20 // FPS and game status
 #define UI_WID_POPUP_WIDTH_NORMAL    24
 #define UI_WID_POPUP_WIDTH_WIDE      38
 #define UI_WID_POPUP_WIDTH_WIDEST    48

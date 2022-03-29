@@ -751,7 +751,7 @@ static uint8_t wid_actionbar_wait(Widp w, int32_t x, int32_t y, uint32_t button)
     return true;
   }
 
-  wid_last_wait = time_get_time_ms_cached();
+  wid_last_wait = time_game_ms_cached();
 
   wid_actionbar_close_all_popups();
   TOPCON("You pass the time...");
@@ -790,7 +790,7 @@ static uint8_t wid_actionbar_repeat_wait(Widp w, int32_t x, int32_t y, uint32_t 
     return true;
   }
 
-  wid_last_wait_repeat = time_get_time_ms_cached();
+  wid_last_wait_repeat = time_game_ms_cached();
 
   wid_actionbar_close_all_popups();
   TOPCON("You continue to pass the time...");

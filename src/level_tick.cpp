@@ -77,7 +77,7 @@ void Level::handle_input_events(void)
 
   if (up || down || left || right) {
     if (! game->request_player_move) {
-      game->request_player_move = time_get_time_ms();
+      game->request_player_move = time_ms();
     }
   }
 
@@ -108,7 +108,8 @@ void Level::handle_input_events(void)
         time_boost = 50;
       }
 
-      time_delta += time_boost;
+      time_game_delta += time_boost;
+      // CON("slow boost time T%d", time_boost);
       return;
     }
     time_boost = 0;
@@ -141,7 +142,7 @@ void Level::handle_input_events(void)
 bool Level::tick(void)
 {
   TRACE_NO_INDENT();
-  // log("Tick");
+  // con("Tick");
   //  TOPCON("monsts %d.", monst_count);
 
   handle_input_events();
@@ -175,36 +176,6 @@ bool Level::tick(void)
     dmap_to_player_update();
   }
 
-  //
-  // A new game event has occurred?
-  //
-  if (! game->tick_requested.empty() && ! game->things_are_moving) {
-    game->tick_begin_now();
-
-    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
-    {
-      //
-      // Give things a bit of time to move
-      //
-      if (t->move_speed()) {
-        t->movement_remaining_incr(t->move_speed());
-      } else {
-        //
-        // Things that do not move need to tick too.
-        //
-        t->movement_remaining_incr(1);
-      }
-
-      //
-      // Allow the same thing to hit us again
-      //
-      if (t->maybe_aip()) {
-        t->aip()->recently_hit_by.clear();
-      }
-    }
-    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
-  }
-
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
   {
     int remaining = t->movement_remaining();
@@ -227,23 +198,14 @@ bool Level::tick(void)
       t->movement_remaining_set(0);
     }
 
-    uint32_t tick_begin_ms = time_get_time_ms();
+    uint32_t tick_begin_ms = time_ms();
     t->tick();
-    IF_DEBUG2
     {
-      if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG * 3) {
-        t->log("PERF: Thing took too long, tick duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
+      if ((time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
+        t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", time_ms() - tick_begin_ms,
                THING_TICK_DURATION_TOO_LONG);
       }
     }
-    IF_NODEBUG2
-    {
-      if ((time_get_time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
-        t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", time_get_time_ms() - tick_begin_ms,
-               THING_TICK_DURATION_TOO_LONG);
-      }
-    }
-    // t->con("PERF: Thing took %u ms", time_get_time_ms() - tick_begin_ms);
   }
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
@@ -523,15 +485,21 @@ bool Level::tick(void)
   if (game->things_are_moving) {
     if (ts_created && time_have_x_tenths_passed_since(10, ts_created)) {
       if (game->request_player_move || (player && player->aip()->move_path.size())) {
-        if ((time_get_time_ms() - game->tick_begin_ms) > 100) {
+        if ((time_ms() - game->tick_begin_ms) > 100) {
           game->tick_current_is_too_slow = true;
-          time_delta += 20;
-        } else if ((time_get_time_ms() - game->tick_begin_ms) > 50) {
+          time_game_delta += 100;
+          log("End of tick and too slow (1)");
+          return true;
+        } else if ((time_ms() - game->tick_begin_ms) > 50) {
           game->tick_current_is_too_slow = true;
-          time_delta += 10;
-        } else if ((time_get_time_ms() - game->tick_begin_ms) > 20) {
+          time_game_delta += 50;
+          log("End of tick and too slow (2)");
+          return true;
+        } else if ((time_ms() - game->tick_begin_ms) > 10) {
           game->tick_current_is_too_slow = true;
-          time_delta += 5;
+          time_game_delta += 10;
+          log("End of tick and too slow (3)");
+          return true;
         }
       }
     }
@@ -709,6 +677,36 @@ bool Level::tick(void)
         player->path_pop_next_move();
       }
     }
+  }
+
+  //
+  // A new game event has occurred?
+  //
+  if (! game->tick_requested.empty()) {
+    game->tick_begin_now();
+
+    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+    {
+      //
+      // Give things a bit of time to move
+      //
+      if (t->move_speed()) {
+        t->movement_remaining_incr(t->move_speed());
+      } else {
+        //
+        // Things that do not move need to tick too.
+        //
+        t->movement_remaining_incr(1);
+      }
+
+      //
+      // Allow the same thing to hit us again
+      //
+      if (t->maybe_aip()) {
+        t->aip()->recently_hit_by.clear();
+      }
+    }
+    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
   }
 
   //

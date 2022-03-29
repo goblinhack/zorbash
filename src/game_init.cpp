@@ -66,7 +66,7 @@ void Game::start(void)
   TRACE_AND_INDENT();
   LOG("Start the game!");
 
-  tick_begin_ms = time_get_time_ms();
+  tick_begin_ms = time_ms();
 
   wid_rightbar_fini();
   wid_rightbar_init();

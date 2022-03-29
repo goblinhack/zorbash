@@ -242,7 +242,7 @@ void Thing::level_pop(void)
   }
 
   if (gfx_shown_in_bg()) {
-    level->ts_redraw_bg = time_get_time_ms_cached() + 500;
+    level->ts_redraw_bg = time_game_ms_cached() + 500;
   }
 
 #if 0

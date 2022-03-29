@@ -473,7 +473,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(csum);
 
   out << bits(my.t->ts_created);
-  ts_t ts_saved = time_get_time_ms();
+  ts_t ts_saved = time_game_ms();
   out << bits(ts_saved);
   out << bits(my.t->ts_fade_out_begin);
   out << bits(my.t->ts_fade_in_begin);

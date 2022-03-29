@@ -481,7 +481,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
         //
         // Slow flip
         //
-        auto diff       = time_get_time_ms_cached() - ts_flip_start_get();
+        auto diff       = time_game_ms_cached() - ts_flip_start_get();
         ts_t flip_time  = game->current_move_speed;
         ts_t flip_steps = flip_time;
 
@@ -849,7 +849,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     static uint32_t ts;
     static color    fire_color;
     if (time_have_x_tenths_passed_since(2, ts)) {
-      ts = time_get_time_ms_cached();
+      ts = time_game_ms_cached();
       if (non_pcg_random_range(0, 100) < 20) {
         fire_color = YELLOW;
       } else if (non_pcg_random_range(0, 100) < 50) {
