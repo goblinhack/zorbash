@@ -340,6 +340,7 @@ public:
   //
   // Temporary. Global requests
   //
+  bool request_reset_state {};
   bool request_remake_rightbar {};
   bool request_remake_inventory {};
   bool request_remake_actionbar {};

@@ -46,7 +46,7 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
     }
   }
 
-  uint32_t now = time_get_time_ms();
+  uint32_t now = time_game_ms();
   new_internal_particles.push_back(
       Particle(id, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
@@ -62,7 +62,7 @@ void Level::new_internal_particle(point start, point stop, isize sz, uint32_t du
     return;
   }
 
-  uint32_t now = time_get_time_ms();
+  uint32_t now = time_game_ms();
   new_internal_particles.push_back(
       Particle(NoThingId, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
@@ -98,7 +98,7 @@ void Level::display_internal_particles(void)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   blit_init();
-  auto now = time_get_time_ms();
+  auto now = time_game_ms();
   auto e   = std::remove_if(all_internal_particles.begin(), all_internal_particles.end(), [ =, this ](Particle &p) {
     if (p.removed) {
       return true;
@@ -237,7 +237,7 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
     }
   }
 
-  uint32_t now = time_get_time_ms();
+  uint32_t now = time_game_ms();
   new_external_particles.push_back(
       Particle(id, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
@@ -253,7 +253,7 @@ void Level::new_external_particle(point start, point stop, isize sz, uint32_t du
     return;
   }
 
-  uint32_t now = time_get_time_ms();
+  uint32_t now = time_game_ms();
   new_external_particles.push_back(
       Particle(NoThingId, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
@@ -290,7 +290,7 @@ void Level::display_external_particles(void)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   blit_init();
-  auto now = time_get_time_ms();
+  auto now = time_game_ms();
   auto e   = std::remove_if(all_external_particles.begin(), all_external_particles.end(), [ =, this ](Particle &p) {
     if (p.removed) {
       return true;

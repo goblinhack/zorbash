@@ -67,7 +67,7 @@ void Thing::move_set_dir_from_delta(point delta)
   // idle animation.
   //
   if (is_dir_none()) {
-    ts_next_frame = time_get_time_ms_cached();
+    ts_next_frame = time_game_ms_cached();
   }
 
   if (delta.x < 0) {

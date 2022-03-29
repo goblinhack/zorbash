@@ -13,7 +13,7 @@ void Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_c
     return;
   }
 
-  auto t = ts_bounce_begin_set(time_get_time_ms_cached());
+  auto t = ts_bounce_begin_set(time_game_ms_cached());
   ts_bounce_end_set(t + ms);
 
   bounce_height_set(bounce_height);
@@ -28,7 +28,7 @@ float Thing::bounce_curr(void)
     return (0.0);
   }
 
-  auto t = time_get_time_ms_cached();
+  auto t = time_game_ms_cached();
 
   if (t >= ts_bounce_end()) {
     is_bouncing = false;

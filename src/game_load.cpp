@@ -515,7 +515,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   old_ts_created = l->ts_created;
   in >> bits(l->ts_saved);
   auto dungeon_age = l->ts_saved - l->ts_created;
-  new_ts_created   = time_get_time_ms() - dungeon_age;
+  new_ts_created   = time_game_ms() - dungeon_age;
   l->ts_created    = new_ts_created;
   l->ts_saved      = new_ts_created + dungeon_age;
   in >> bits(l->ts_fade_out_begin);
@@ -656,7 +656,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   l->update_new_level();
   l->ts_redraw_bg         = 1; // Force redraw
-  l->ts_fade_in_begin     = time_get_time_ms_cached();
+  l->ts_fade_in_begin     = time_game_ms_cached();
   l->is_map_changed       = true;
   l->is_map_follow_player = true;
 

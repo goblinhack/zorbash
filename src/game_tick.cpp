@@ -15,7 +15,8 @@
 
 void Game::tick_begin(const std::string &why)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   tick_requested = why;
 
   auto level = game->get_current_level();
@@ -35,7 +36,8 @@ void Game::tick_begin(const std::string &why)
 
 void Game::tick_begin_now(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   std::string why = tick_requested;
   tick_requested  = "";
 
@@ -71,7 +73,7 @@ void Game::tick_begin_now(void)
     CON("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
   }
 
-  game->tick_begin_ms = time_get_time_ms();
+  game->tick_begin_ms = time_ms();
 
   if (level) {
     level->lights_fade();
@@ -79,8 +81,8 @@ void Game::tick_begin_now(void)
 
     auto player = level->player;
     if (player && ! robot_mode) {
-      player->level->fov_calculete(player, &player->aip()->can_see_currently, player->curr_at.x,
-                                   player->curr_at.y, player->distance_vision_get());
+      player->level->fov_calculete(player, &player->aip()->can_see_currently, player->curr_at.x, player->curr_at.y,
+                                   player->distance_vision_get());
     }
 
     //
@@ -99,7 +101,7 @@ void Game::tick_begin_now(void)
 
 void Game::tick_set_speed(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Set how long each tick takes.
@@ -115,7 +117,8 @@ void Game::tick_set_speed(void)
 
 bool Game::tick_end(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   //
   // Move when all things are done moving
   //
@@ -126,24 +129,23 @@ bool Game::tick_end(void)
 
   save_snapshot_check();
 
-  game->tick_duration            = time_get_time_ms() - game->tick_begin_ms;
+  game->tick_duration            = time_ms() - game->tick_begin_ms;
   game->prev_tick_was_too_slow   = game->tick_current_is_too_slow;
   game->tick_current_is_too_slow = false;
 
   auto level = game->get_current_level();
   if (level) {
-    TRACE_AND_INDENT();
     auto player = level->player;
     if (player) {
       CON("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
-          time_get_time_ms() - game->tick_begin_ms, player->to_string().c_str());
+          time_ms() - game->tick_begin_ms, player->to_string().c_str());
     } else {
       CON("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
-          time_get_time_ms() - game->tick_begin_ms, level->to_string().c_str());
+          time_ms() - game->tick_begin_ms, level->to_string().c_str());
     }
   } else {
     CON("Seed (%s) tick %d end, duration %d ms", game->seed_name.c_str(), game->tick_current,
-        time_get_time_ms() - game->tick_begin_ms);
+        time_ms() - game->tick_begin_ms);
   }
 
   CON("-");
@@ -179,12 +181,13 @@ bool Game::tick_end(void)
 
 void Game::tick_update(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   //
   // Work out the current timestep in this move
   //
   if (game->tick_begin_ms) {
-    float move_at       = time_get_time_ms() - game->tick_begin_ms;
+    float move_at       = time_ms() - game->tick_begin_ms;
     float move_duration = game->current_move_speed;
     game->tick_dt       = move_at / move_duration;
     if (game->tick_dt > 1) {

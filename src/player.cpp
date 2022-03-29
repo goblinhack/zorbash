@@ -42,12 +42,12 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
   // Trying to move when the console is visible.
   //
   if (wid_console_window && wid_console_window->visible) {
-    LOG("PLAY Player tick; ignore, console open");
+    LOG("Player tick; ignore, console open");
     return false;
   }
 
   if (game->level->ts_fade_out_begin) {
-    LOG("PLAY Player tick; ignore, level fading im/out");
+    LOG("Player tick; ignore, level fading im/out");
     return false;
   }
 

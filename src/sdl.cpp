@@ -470,7 +470,7 @@ void sdl_event(SDL_Event *event)
                 return;
               }
             }
-            sdl_last_time_for_key = time_get_time_ms_cached();
+            sdl_last_time_for_key = time_game_ms_cached();
           } else {
             //
             // Pressing a different key
@@ -540,7 +540,7 @@ void sdl_event(SDL_Event *event)
             }
           }
 
-          ts = time_get_time_ms_cached();
+          ts = time_game_ms_cached();
         }
 
         sdl_wheel_x = event->wheel.x;
@@ -573,14 +573,14 @@ void sdl_event(SDL_Event *event)
     case SDL_MOUSEBUTTONDOWN:
       {
         mouse_down                    = sdl_get_mouse();
-        sdl_last_mouse_held_down_when = time_get_time_ms_cached();
+        sdl_last_mouse_held_down_when = time_game_ms_cached();
         sdl_held_mouse_x              = sdl_mouse_x;
         sdl_held_mouse_y              = sdl_mouse_y;
 
         DBG2("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x,
              event->button.y, mouse_down);
 
-        auto now             = time_get_time_ms_cached();
+        auto now             = time_game_ms_cached();
         wid_mouse_visible    = 1;
         wid_mouse_two_clicks = (now - mouse_down_when < UI_MOUSE_DOUBLE_CLICK);
 
@@ -902,7 +902,7 @@ void sdl_tick(void)
   }
 
   if ((mx != 0) || (my != 0)) {
-    ts = time_get_time_ms_cached();
+    ts = time_game_ms_cached();
 
     accel *= UI_SCROLL_JOY_SCALE;
 

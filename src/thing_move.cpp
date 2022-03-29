@@ -606,7 +606,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       case THING_DIR_TL:
       case THING_DIR_BL:
         if (! is_facing_left && ! ts_flip_start_get()) {
-          ts_flip_start_set(time_get_time_ms_cached());
+          ts_flip_start_set(time_game_ms_cached());
         }
         break;
 
@@ -614,7 +614,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       case THING_DIR_TR:
       case THING_DIR_BR:
         if (is_facing_left && ! ts_flip_start_get()) {
-          ts_flip_start_set(time_get_time_ms_cached());
+          ts_flip_start_set(time_game_ms_cached());
         }
         break;
     }

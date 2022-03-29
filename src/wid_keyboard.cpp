@@ -368,7 +368,7 @@ static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key)
    * Don't process events too soon. Else the menu might not even have
    * appeared.
    */
-  if (time_get_time_ms() - ctx->created < 100) {
+  if (time_game_ms() - ctx->created < 100) {
     return false;
   }
 
@@ -412,7 +412,7 @@ static uint8_t wid_keyboard_parent_joy_button(Widp w, int32_t x, int32_t y)
    * Don't process events too soon. Else the menu might not even have
    * appeared.
    */
-  if (time_get_time_ms() - ctx->created < 100) {
+  if (time_game_ms() - ctx->created < 100) {
     return false;
   }
 
@@ -493,7 +493,7 @@ static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key)
    * Don't process events too soon. Else the menu might not even have
    * appeared.
    */
-  if (time_get_time_ms() - ctx->created < 100) {
+  if (time_game_ms() - ctx->created < 100) {
     return false;
   }
 
@@ -530,7 +530,7 @@ static uint8_t wid_keyboard_button_joy_button_event(Widp w, int32_t x, int32_t y
    * Don't process events too soon. Else the menu might not even have
    * appeared.
    */
-  if (time_get_time_ms() - ctx->created < 100) {
+  if (time_game_ms() - ctx->created < 100) {
     return false;
   }
 
@@ -615,7 +615,7 @@ static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key)
    * Don't process events too soon. Else the menu might not even have
    * appeared.
    */
-  if (time_get_time_ms() - ctx->created < 100) {
+  if (time_game_ms() - ctx->created < 100) {
     return false;
   }
 
@@ -654,7 +654,7 @@ static void wid_keyboard_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t 
    * a mouse over event immediately which may not be over the focus item
    * and will cause us to move. Annoying.
    */
-  if (time_get_time_ms() - ctx->created < 100) {
+  if (time_game_ms() - ctx->created < 100) {
     return;
   }
 
@@ -917,7 +917,7 @@ Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keybo
   wid_raise(window);
   wid_set_focus(window);
 
-  ctx->created = time_get_time_ms();
+  ctx->created = time_game_ms();
 
   return (window);
 }
