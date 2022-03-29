@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- things should not sleep if they have been attacked recentyl                                                                                  -->
 <!-- dup message - you wield / you equip                                                                                                          -->
 <!-- need to know why a weapon breaks                                                                                                             -->
 <!-- ------                                                                                                                                       -->
