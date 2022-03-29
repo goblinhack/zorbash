@@ -3,7 +3,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- things should not sleep if they have been attacked recentyl                                                                                  -->
 <!-- dup message - you wield / you equip                                                                                                          -->
-<!-- topcon with a string ending in space does not appear                                                                                         -->
 <!-- need to know why a weapon breaks                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
