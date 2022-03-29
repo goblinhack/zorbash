@@ -40,10 +40,12 @@ bool Thing::state_resting(bool &do_something, bool &wait)
 
   AI_LOG("Wait and rest.");
 
+  //
+  // Able to sleep?
+  //
   if (is_able_to_sleep()) {
-    sleep_count_incr();
-    if (sleep_count() > 5) {
-      change_state(MONST_STATE_SLEEPING, "time to sleep");
+    if (game->tick_current - tick_last_i_was_attacked() > 20) {
+      sleep();
     }
   }
 
