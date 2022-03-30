@@ -276,7 +276,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
 
 bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *attack_options)
 {
-  dbg2("Target-attack-best: Best target to swing at at %s", best_hit_at.to_string().c_str());
+  dbg2("Target-attack-best: Best target to swing at %s", best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
 
   auto use_anim = equip_use_anim(equip);
@@ -333,15 +333,13 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
 
     if (item->collision_check_and_handle_at(best_hit_at, attack_options)) {
       lunge(best_hit_at);
-      return true;
     }
   } else {
     if (collision_check_and_handle_at(best_hit_at, attack_options)) {
       lunge(best_hit_at);
-      return true;
     }
   }
-  return true;
+  return attack_options->victim_attacked;
 }
 
 bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at,
