@@ -18,20 +18,24 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
   TRACE_AND_INDENT();
 
   if (! game || ! game->started) {
+    DBG2("Game mouse down; no game or not started");
     return false;
   }
 
   auto level = game->get_current_level();
   if (! level) {
+    DBG2("Game mouse down; no level");
     return false;
   }
 
   auto player = level->player;
   if (! player) {
+    DBG2("Game mouse down; no player");
     return false;
   }
 
   if (player->is_dead) {
+    DBG2("Game mouse down; player dead");
     return true;
   }
 
@@ -39,15 +43,17 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
   // If mid air, we're done. Let other things move.
   //
   if (player->is_jumping) {
+    DBG2("Game mouse down; player jumping");
     return true;
   }
 
   if (! level->cursor) {
-    TRACE_AND_INDENT();
+    DBG2("Game mouse down; no cursor");
     return false;
   }
 
   if (wid_some_recent_event_occurred()) {
+    DBG2("Game mouse down; some recent wid event occurred");
     return false;
   }
 
@@ -55,7 +61,7 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
   wid_thing_info_fini("mouse down");
 
   if (game->state == Game::STATE_CHOOSING_TARGET) {
-    IF_DEBUG2 { player->log("Chosen target"); }
+    IF_DEBUG2 { player->log("Game mouse down; in normal state"); }
     TRACE_AND_INDENT();
 
     //
@@ -108,6 +114,9 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
   }
 
   if (game->state == Game::STATE_NORMAL) {
+    IF_DEBUG2 { player->log("Check if close enough to attack; check"); }
+    TRACE_AND_INDENT();
+
     //
     // Have we moved close enough to attack? Do this prior to checking for
     // double click so we can attack monsts sitting in lava
@@ -198,6 +207,9 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
     if (player->cursor_path_pop_first_move()) {
       return true;
     }
+  } else {
+    IF_DEBUG2 { player->log("Game mouse down; not in normal state"); }
+    TRACE_AND_INDENT();
   }
 
   return false;

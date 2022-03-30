@@ -463,12 +463,12 @@ public:
   bool is_equipped(Thingp item);
   bool is_hated_by_me(const point p);
   bool is_hated_by_me(const Thingp it);
-  bool item_choose_target(Thingp item, Thingp victim = nullptr);
   bool is_on_fire(void);
   bool is_state_sleeping(void);
   bool is_stuck(void);
   bool is_target_select(Thingp item);
   bool is_to_be_avoided(Thingp attacker);
+  bool item_choose_target(Thingp item, Thingp victim = nullptr);
   bool jump_attack(Thingp it = nullptr);
   bool laser_anim_exists(void);
   bool laser_choose_target(Thingp item, Thingp victim = nullptr);
@@ -529,12 +529,12 @@ public:
   bool steal_item_from(Thingp);
   bool steal_treasure_from(Thingp);
   bool teleport_attack(Thingp it = nullptr);
-  bool teleport_randomly_away_from_player(void);
   bool teleport_carefree(point to);
   bool teleport_carefree(point to, bool *too_far);
   bool teleport_carefully(point to);
   bool teleport_carefully(point to, bool *too_far);
   bool teleport(point to, bool carefully, bool *too_far);
+  bool teleport_randomly_away_from_player(void);
   bool teleport_randomly_towards_player(void);
   bool teleport_randomly(void);
   bool thing_sound_play_channel(int chan, const std::string &alias);
@@ -575,6 +575,7 @@ public:
   bool victim_attack_best_at(int equip, AttackOptions *);
   bool victim_attack_best(int equip, AttackOptions *);
   bool victim_attack_best_(int equip, AttackOptions *);
+  bool victim_attack_swing(int equip, point best_hit_at, AttackOptions *attack_options);
   bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);

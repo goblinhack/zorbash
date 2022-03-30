@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- dup message - you wield / you equip                                                                                                          -->
 <!-- need to know why a weapon breaks                                                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -14,6 +13,7 @@
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!-- - crystal chest needs crystal key                                                                                                            -->
+<!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - slime can grow into megaslime if satiated                                                                                                  -->
 <!-- - teleport block                                                                                                                             -->
 <!-- - door peep ?                                                                                                                                -->
