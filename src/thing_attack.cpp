@@ -982,9 +982,11 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
           lunge(victim->curr_at);
         }
       }
+
       if (attack_eater()) {
         health_boost(victim->nutrition_get());
       }
+
       if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
         dead("by foolishness");
       }
@@ -1011,6 +1013,15 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
           }
           auto roll = d10000();
           if (roll < break_chance) {
+            if (my_owner->is_player()) {
+              if (victim->is_wall()) {
+                msg("%%fg=red$%s buckles on the rock wall.%%fg=reset$", weapon->text_The().c_str());
+              } else {
+                msg("%%fg=red$%s is broken.%%fg=reset$", weapon->text_The().c_str());
+              }
+            } else {
+              msg("%%fg=red$%s is broken.%%fg=reset$", weapon->text_The().c_str());
+            }
             weapon->dead("broken");
           }
         }
@@ -1031,6 +1042,15 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
             break_chance = 0;
           }
           if (d10000() < break_chance) {
+            if (my_owner->is_player()) {
+              if (victim->is_wall()) {
+                msg("%%fg=red$%s smashes on the rock wall.%%fg=reset$", weapon->text_The().c_str());
+              } else {
+                msg("%%fg=red$%s disintegrates.%%fg=reset$", weapon->text_The().c_str());
+              }
+            } else {
+              msg("%%fg=red$%s disintegrates.%%fg=reset$", weapon->text_The().c_str());
+            }
             gauntlet->dead("broken");
           }
         }

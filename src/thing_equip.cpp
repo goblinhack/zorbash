@@ -353,7 +353,10 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   if (is_player()) {
     if ((game->tick_current > 1) && ! level->is_starting && ! level->is_being_destroyed && ! is_dead && ! is_dying) {
       if (item->is_dead) {
-        msg("%s is broken.", item->text_The().c_str());
+        //
+        // Don't log this here as we have more info in attack()
+        //
+        // msg("%s is broken.", item->text_The().c_str());
       } else if (item->is_ring()) {
         msg("You slip off the %s.", item->text_the().c_str());
       } else if (item->is_weapon()) {
