@@ -13,6 +13,7 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - slime can grow into megaslime if satiated                                                                                                  -->
 <!-- - teleport block                                                                                                                             -->
 <!-- - door peep ?                                                                                                                                -->
