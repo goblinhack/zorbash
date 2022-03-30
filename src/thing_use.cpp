@@ -353,7 +353,6 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     }
     if (equip(what, preferred_equip)) {
       if (is_player()) {
-        msg("You equip the %s.", what->text_the().c_str());
         game->tick_begin("player changed weapon");
       }
     }
