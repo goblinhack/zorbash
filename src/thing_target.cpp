@@ -274,19 +274,11 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
-bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at,
-                                     AttackOptions *attack_options)
+bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *attack_options)
 {
-  attack_options->victim_attacked = false;
-  attack_options->victim_overlaps = false;
-
-  dbg2("Target-attack-best: Best target to hit is %s at %s", best->to_string().c_str(),
-       best_hit_at.to_string().c_str());
+  dbg2("Target-attack-best: Best target to swing at at %s", best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
 
-  //
-  // Swing?
-  //
   auto use_anim = equip_use_anim(equip);
   if (! use_anim) {
     //
@@ -307,8 +299,38 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
     equip_use_anim_set(use_anim, equip);
   }
 
+  return true;
+}
+
+bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at,
+                                     AttackOptions *attack_options)
+{
+  attack_options->victim_attacked = false;
+  attack_options->victim_overlaps = false;
+
+  if (best) {
+    dbg2("Target-attack-best: Best target to hit is %s at %s", best->to_string().c_str(),
+         best_hit_at.to_string().c_str());
+  } else {
+    dbg2("Target-attack-best: Best target to hit is at %s", best_hit_at.to_string().c_str());
+  }
+  TRACE_AND_INDENT();
+
+  //
+  // Swing the weapon
+  //
+  victim_attack_swing(equip, best_hit_at, attack_options);
+
+  //
+  // Try to attack
+  //
   if (item) {
-    on_use(item, best);
+    if (best) {
+      on_use(item, best);
+    } else {
+      on_use(item);
+    }
+
     if (item->collision_check_and_handle_at(best_hit_at, attack_options)) {
       lunge(best_hit_at);
       return true;
@@ -463,35 +485,8 @@ bool Thing::victim_attack_best_at(int equip, AttackOptions *attack_options)
   // Last resort where we just try and hit where we are pointing.
   //
   auto hit_at = curr_at + point(dx, dy);
-  if (item) {
-    dbg("Target-attack-best: Have equip item %s", item->to_short_string().c_str());
-    TRACE_AND_INDENT();
-
-    on_use(item);
-    if (item->collision_check_and_handle_at(hit_at, attack_options)) {
-      lunge(hit_at);
-      if (attack_options->victim_attacked) {
-        dbg("Target-attack-best: Attacked with equip item");
-        return true;
-      }
-      return false;
-    }
-  } else {
-    dbg("Target-attack-best: No equip item");
-    TRACE_AND_INDENT();
-
-    if (collision_check_and_handle_at(hit_at, attack_options)) {
-      lunge(hit_at);
-      if (attack_options->victim_attacked) {
-        dbg("Target-attack-best: No equip item but attacked");
-        return true;
-      }
-      return false;
-    }
-  }
-
-  dbg("Target-attack-best: No target found");
-  return false;
+  victim_attack_found_best(equip, item, nullptr, hit_at, attack_options);
+  return attack_options->victim_attacked;
 }
 
 bool Thing::victim_attack_best_(int equip, AttackOptions *attack_options)
