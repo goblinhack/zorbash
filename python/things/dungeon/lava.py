@@ -38,7 +38,7 @@ def lava_init(name, text_name, tiles=[]):
 def init():
     lava_init(
         name="lava",
-        text_name="broiling lava",
+        text_name="molten lava",
         tiles=[
             "lava.1",
             "lava.2",
