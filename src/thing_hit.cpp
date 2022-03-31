@@ -207,7 +207,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       if (is_player()) {
         msg("%%fg=green$The cold attack puts out the flames!%%fg=reset$");
       }
-      unset_on_fire();
+      on_fire_unset();
 
       auto smoke = level->thing_new("smoke", curr_at);
       smoke->lifespan_set(pcg_random_range(1, 10));

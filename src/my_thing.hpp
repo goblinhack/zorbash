@@ -2200,7 +2200,7 @@ public:
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
   void unleash_spawners_things(void);
-  void unset_on_fire(void);
+  void on_fire_unset(void);
   void update_all(void);
   void update_interpolated_position(void);
   void update_light(void);

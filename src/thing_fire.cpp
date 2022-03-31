@@ -53,6 +53,18 @@ bool Thing::fire_tick(void)
         hit = (d100() < 70);
       }
     }
+
+    //
+    // Allow flames to fade away
+    //
+    if (hit) {
+      if (d20roll_under(stat_luck_total())) {
+        if (is_player()) {
+          msg("%%fg=green$The flames go out!%%fg=reset$");
+        }
+        on_fire_unset();
+      }
+    }
   } else if (is_very_is_combustible() && level->heatmap(at.x, at.y)) {
     //
     // Too close to the flames

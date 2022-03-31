@@ -18,13 +18,13 @@ int Thing::stat_def_total(void)
   stat = stat_def();
   prev = stat;
   if (stat) {
-    dbg("Def: %d", stat);
+    dbg3("Def: %d", stat);
   }
 
   stat += stat_def_mod();
   if (stat != prev) {
     prev = stat;
-    dbg("Def: with mod (%s): %d", modifier_to_string(stat_def_mod()).c_str(), stat);
+    dbg3("Def: with mod (%s): %d", modifier_to_string(stat_def_mod()).c_str(), stat);
   }
 
   //
@@ -35,7 +35,7 @@ int Thing::stat_def_total(void)
     stat += stat_to_bonus(dex_total);
     if (stat != prev) {
       prev = stat;
-      dbg("Def: with: (dex %d): %d", dex_total, stat);
+      dbg3("Def: with: (dex %d): %d", dex_total, stat);
     }
   }
 
@@ -46,8 +46,8 @@ int Thing::stat_def_total(void)
       stat += iter->stat_def_total();
       if (stat != prev) {
         prev = stat;
-        dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-            modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+        dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+             modifier_to_string(iter->stat_def_mod()).c_str(), stat);
       }
     }
   }
@@ -73,8 +73,8 @@ int Thing::stat_def_total(void)
         stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+          dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+               modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
     }
@@ -86,8 +86,8 @@ int Thing::stat_def_total(void)
         stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+          dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+               modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
     }
@@ -99,8 +99,8 @@ int Thing::stat_def_total(void)
         stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+          dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+               modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
     }
@@ -112,8 +112,8 @@ int Thing::stat_def_total(void)
         stat += iter->stat_def_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Def: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_def_mod()).c_str(), stat);
+          dbg3("Def: with (%s %s): %d", iter->to_short_string().c_str(),
+               modifier_to_string(iter->stat_def_mod()).c_str(), stat);
         }
       }
     }
@@ -124,7 +124,7 @@ int Thing::stat_def_total(void)
     stat += enchant;
     if (stat != prev) {
       prev = stat;
-      dbg("Def: with enchant %d: %d", enchant, stat);
+      dbg3("Def: with enchant %d: %d", enchant, stat);
     }
   }
 
@@ -147,7 +147,7 @@ int Thing::stat_def_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg("AC penalty: stuck %d", p);
+      dbg3("AC penalty: stuck %d", p);
     }
   } else if (idle_count() && stat_att_penalty_when_idle()) {
     int p = stat_def_penalty_when_idle() + idle_count();
@@ -155,7 +155,7 @@ int Thing::stat_def_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg("AC penalty: idle %d", p);
+      dbg3("AC penalty: idle %d", p);
     }
   }
 
@@ -169,7 +169,7 @@ int Thing::stat_def_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg("AC penalty: with (in shallow water %d): %d", p, penalty);
+          dbg3("AC penalty: with (in shallow water %d): %d", p, penalty);
         }
       }
     }
@@ -179,14 +179,14 @@ int Thing::stat_def_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg("AC penalty: with (in deep water %d): %d", p, penalty);
+          dbg3("AC penalty: with (in deep water %d): %d", p, penalty);
         }
       }
     }
   }
 
   if (penalty) {
-    dbg("AC penalty: %d", penalty);
+    dbg3("AC penalty: %d", penalty);
   }
   return penalty;
 }

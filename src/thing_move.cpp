@@ -720,7 +720,7 @@ void Thing::update_interpolated_position(void)
 void Thing::update_pos(point to, bool immediately)
 {
   if (! is_hidden) {
-    dbg("Update pos to %d,%d", to.x, to.y);
+    dbg3("Update pos to %d,%d", to.x, to.y);
   }
   TRACE_AND_INDENT();
 

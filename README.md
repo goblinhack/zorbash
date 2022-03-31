@@ -12,7 +12,6 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - on fire should fade out                                                                                                                    -->
 <!-- - boots of haste                                                                                                                             -->
 <!-- - invisibility wand / and crystals walls (or chest) that reflect, so can use on yourself or ally                                             -->
 <!-- - need allys                                                                                                                                 -->

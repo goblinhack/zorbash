@@ -228,7 +228,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   if (ai->wander_dest != point(0, 0)) {
     if (pcg_random_range(0, 100) < 50) {
-      dbg("Try to continue wander");
+      dbg3("Try to continue wander");
       if (ai_wander()) {
         return true;
       }

@@ -102,7 +102,7 @@ void Thing::fall(float fall_height, ts_t ms)
     if (is_player()) {
       msg("%%fg=green$The fall puts out the flames!%%fg=reset$");
     }
-    unset_on_fire();
+    on_fire_unset();
   }
 
   if (is_player() || is_monst() || is_item()) {
