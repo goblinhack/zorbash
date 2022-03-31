@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- robot is too interested in open chests                                                                                                       -->
 <!-- robot not entering sewer                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
