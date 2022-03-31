@@ -14,7 +14,7 @@ void Thing::lava_tick(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
+  if (is_meltable() || is_burnable() || is_combustible() || is_very_is_combustible()) {
     //
     // Keep going
     //

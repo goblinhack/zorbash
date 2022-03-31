@@ -300,7 +300,7 @@ do
       is_undead_set \
       is_usable_set \
       is_used_when_thrown_set \
-      is_very_combustible_set \
+      is_very_is_combustible_set \
       is_wall_set \
       is_wall_dungeon_set \
       is_wand_set \

@@ -3206,10 +3206,10 @@ int Thing::is_used_when_thrown(void)
   return (tp()->is_used_when_thrown());
 }
 
-int Thing::is_very_combustible(void)
+int Thing::is_very_is_combustible(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_very_combustible());
+  return (tp()->is_very_is_combustible());
 }
 
 int Thing::is_wall_dungeon(void)

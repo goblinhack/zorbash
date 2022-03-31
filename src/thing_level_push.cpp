@@ -151,6 +151,10 @@ void Thing::level_push(void)
     i_set_is_cursor_path_hazard_for_player = true;
     level->is_cursor_path_hazard_for_player_set(mx, my);
   }
+  if (is_combustible()) {
+    i_set_is_combustible = true;
+    level->is_combustible_set(mx, my);
+  }
   if (is_heavy()) {
     i_set_is_heavy = true;
     level->is_heavy_set(mx, my);

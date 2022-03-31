@@ -417,6 +417,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->i_set_is_corpse = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_corridor = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_cursor_path_hazard_for_player = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->i_set_is_combustible = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_deep_water = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_descend_dungeon = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_descend_sewer = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -547,6 +548,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_corpse);
   in >> bits(my.t->_is_corridor);
   in >> bits(my.t->_is_cursor_path_hazard_for_player);
+  in >> bits(my.t->_is_combustible);
   in >> bits(my.t->_is_deep_water);
   in >> bits(my.t->_is_descend_dungeon);
   in >> bits(my.t->_is_descend_sewer);

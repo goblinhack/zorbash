@@ -199,6 +199,7 @@ PyObject *thing_is_crushable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_can_hover_over(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_can_hover_over_x2_click(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_path_hazard_for_player(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_combustible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_path(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dead_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -372,7 +373,7 @@ PyObject *thing_is_treasure_type(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_undead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_used_when_thrown(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_very_combustible(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_very_is_combustible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_very_heavy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_visible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_wall_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);

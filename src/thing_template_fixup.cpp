@@ -32,7 +32,7 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->is_very_combustible()) {
+    if (tp->is_very_is_combustible()) {
       tp->is_combustible_set(true);
     }
 
@@ -40,7 +40,7 @@ void tp_fixup(void)
       tp->is_heavy_set(true);
     }
 
-    if (tp->is_meltable() || tp->is_burnable() || tp->is_combustible() || tp->is_very_combustible()) {
+    if (tp->is_meltable() || tp->is_burnable() || tp->is_combustible() || tp->is_very_is_combustible()) {
       tp->is_temperature_sensitive_set(true);
     }
 
