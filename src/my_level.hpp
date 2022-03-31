@@ -52,6 +52,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_corpse {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_corridor {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_hazard_for_player {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_combustible {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_deep_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_descend_dungeon {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_descend_sewer {};
@@ -752,6 +753,8 @@ public:
   uint8_t is_corridor(const point p);
   uint8_t is_cursor_path_hazard_for_player(const int x, const int y);
   uint8_t is_cursor_path_hazard_for_player(const point p);
+  uint8_t is_combustible(const int x, const int y);
+  uint8_t is_combustible(const point p);
   uint8_t is_deep_water(const int x, const int y);
   uint8_t is_deep_water(const point p);
   uint8_t is_descend_dungeon(const int x, const int y);
@@ -967,6 +970,8 @@ public:
   void is_corridor_unset(const int x, const int y);
   void is_cursor_path_hazard_for_player_set(const int x, const int y);
   void is_cursor_path_hazard_for_player_unset(const int x, const int y);
+  void is_combustible_set(const int x, const int y);
+  void is_combustible_unset(const int x, const int y);
   void is_deep_water_set(const int x, const int y);
   void is_deep_water_unset(const int x, const int y);
   void is_descend_dungeon_set(const int x, const int y);

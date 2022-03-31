@@ -428,6 +428,10 @@ bool Thing::spawn_fire(const std::string &what)
     auto y = curr_at.y + d.y;
     auto p = point(x, y);
 
+    if (! level->is_combustible(x, y)) {
+      continue;
+    }
+
     if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
       continue;
     }

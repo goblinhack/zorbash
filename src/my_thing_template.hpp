@@ -439,7 +439,7 @@ private:
   int _is_undead {};
   int _is_usable {};
   int _is_used_when_thrown {};
-  int _is_very_combustible {};
+  int _is_very_is_combustible {};
   int _is_very_heavy {};
   int _is_wall {};
   int _is_wall_dungeon {};
@@ -1345,7 +1345,7 @@ public:
   int is_undead(void) const { return _is_undead; }
   int is_usable(void) const { return _is_usable; }
   int is_used_when_thrown(void) const { return _is_used_when_thrown; }
-  int is_very_combustible(void) const { return _is_very_combustible; }
+  int is_very_is_combustible(void) const { return _is_very_is_combustible; }
   int is_very_heavy(void) const { return _is_very_heavy; }
   int is_wall_dungeon(void) const { return _is_wall_dungeon; }
   int is_wall(void) const { return _is_wall; }
@@ -1899,7 +1899,7 @@ public:
   void is_undead_set(int v) { _is_undead = v; }
   void is_usable_set(int v) { _is_usable = v; }
   void is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
-  void is_very_combustible_set(int v) { _is_very_combustible = v; }
+  void is_very_is_combustible_set(int v) { _is_very_is_combustible = v; }
   void is_very_heavy_set(int v) { _is_very_heavy = v; }
   void is_wall_dungeon_set(int v) { _is_wall_dungeon = v; }
   void is_wall_set(int v) { _is_wall = v; }

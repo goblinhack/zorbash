@@ -137,6 +137,7 @@ PyObject *level_is_cursor_can_hover_over_at(PyObject *obj, PyObject *args, PyObj
 PyObject *level_is_cursor_can_hover_over_x2_click_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_hazard_for_player_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_end_of_anim_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_falling_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_shove_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -296,7 +297,7 @@ PyObject *level_is_treasure_type_at(PyObject *obj, PyObject *args, PyObject *key
 PyObject *level_is_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_usable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_used_when_thrown_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_very_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_very_is_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_very_heavy_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_target_select_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_visible_at(PyObject *obj, PyObject *args, PyObject *keywds);

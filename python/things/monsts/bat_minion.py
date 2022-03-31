@@ -54,6 +54,7 @@ def tp_init(name, text_name):
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
+    my.is_bleeder(self, True)
     my.is_breather(self, True)
     my.is_corpse_with_bones(self, True)
     my.is_crushable(self, True)

@@ -40,7 +40,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
-    my.is_very_combustible(self, True)
+    my.is_very_is_combustible(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "This magical ring is designed to create a protective shield from missles or projectiles. Damage will be reduced by 50 percent for such attacks whilst this ring is worn.")

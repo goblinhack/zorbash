@@ -362,6 +362,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_corpse ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_corridor ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_cursor_path_hazard_for_player ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_combustible ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_deep_water ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_descend_dungeon ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_descend_sewer ? 1LLU : 0LLU) << shift; shift++;
@@ -504,6 +505,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_corpse);
   out << bits(my.t->_is_corridor);
   out << bits(my.t->_is_cursor_path_hazard_for_player);
+  out << bits(my.t->_is_combustible);
   out << bits(my.t->_is_deep_water);
   out << bits(my.t->_is_descend_dungeon);
   out << bits(my.t->_is_descend_sewer);

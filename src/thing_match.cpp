@@ -285,6 +285,9 @@ bool Thing::matches(const std::string &what)
   if (is_cursor_path_hazard_for_player() && (what == "is_cursor_path_hazard_for_player")) {
     return true;
   }
+  if (is_combustible() && (what == "is_combustible")) {
+    return true;
+  }
   if (is_cursor_path() && (what == "is_cursor_path")) {
     return true;
   }
@@ -621,7 +624,7 @@ bool Thing::matches(const std::string &what)
   if (is_used_when_thrown() && (what == "is_used_when_thrown")) {
     return true;
   }
-  if (is_very_combustible() && (what == "is_very_combustible")) {
+  if (is_very_is_combustible() && (what == "is_very_is_combustible")) {
     return true;
   }
   if (is_wall_dungeon() && (what == "is_wall_dungeon")) {
@@ -1657,6 +1660,9 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_cursor_path_hazard_for_player") {
     return &Thing::is_cursor_path_hazard_for_player;
   }
+  if (what == "is_combustible") {
+    return &Thing::is_combustible;
+  }
   if (what == "is_cursor_path") {
     return &Thing::is_cursor_path;
   }
@@ -2113,8 +2119,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_used_when_thrown") {
     return &Thing::is_used_when_thrown;
   }
-  if (what == "is_very_combustible") {
-    return &Thing::is_very_combustible;
+  if (what == "is_very_is_combustible") {
+    return &Thing::is_very_is_combustible;
   }
   if (what == "is_very_heavy") {
     return &Thing::is_very_heavy;

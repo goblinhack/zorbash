@@ -1629,7 +1629,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
   } else if (t->is_combustible()) {
     w->log("Is combustible.", true);
     printed = true;
-  } else if (t->is_very_combustible()) {
+  } else if (t->is_very_is_combustible()) {
     w->log("Can explode!", true);
     printed = true;
   }

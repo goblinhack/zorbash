@@ -20,6 +20,9 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
     }
   }
 
+  //
+  // Am I a collector of things?
+  //
   if (! is_item_collector()) {
     return -1;
   }
@@ -28,13 +31,40 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
   // Don't try to pick up goblins carrying gold
   //
   if (! item->is_collectable()) {
+    dbg("Worth collecting %s? no, not collectable", item->to_short_string().c_str());
     return -1;
   }
 
   //
-  // Look in the bag.
+  // If it's on fire, might not be a good idea to collect it.
   //
-  if (item->is_bag()) {
+  if (item->is_on_fire()) {
+    if (! is_immune_to_fire()) {
+      dbg("Worth collecting %s? no, it's on fire", item->to_short_string().c_str());
+      return -1;
+    }
+  }
+
+  //
+  // For example a destroyed chest. Best not to collect it.
+  //
+  if (item->is_dead) {
+    dbg("Worth collecting %s? no, it's dead", item->to_short_string().c_str());
+    return -1;
+  }
+
+  //
+  // Don't pick up things we dropped
+  //
+  if (game->tick_current < item->tick_last_dropped() + 1) {
+    dbg("Worth collecting %s? no, was recently dropped", item->to_short_string().c_str());
+    return -1;
+  }
+
+  //
+  // Look in the bag or chest.
+  //
+  if (item->is_bag_item_container()) {
     for (const auto bag_item : item->item_vector()) {
       auto value = worth_collecting(bag_item, would_need_to_drop);
       if (value > 0) {
@@ -44,20 +74,12 @@ int Thing::worth_collecting(Thingp item, Thingp *would_need_to_drop)
     }
 
     //
-    // TODO for the robot.
+    // The player is only able to carry one bag. So stop the robot from collecting more.
     //
     if (game->robot_mode) {
       dbg("Worth collecting %s? no, bag todo", item->to_short_string().c_str());
       return -1;
     }
-  }
-
-  //
-  // Don't pick up things we dropped
-  //
-  if (game->tick_current < item->tick_last_dropped() + 1) {
-    dbg("Worth collecting %s? no, was recently dropped", item->to_short_string().c_str());
-    return -1;
   }
 
   *would_need_to_drop = nullptr;

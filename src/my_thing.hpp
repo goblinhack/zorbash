@@ -199,6 +199,7 @@ public:
   uint64_t i_set_is_corpse                        : 1 {};
   uint64_t i_set_is_corridor                      : 1 {};
   uint64_t i_set_is_cursor_path_hazard_for_player : 1 {};
+  uint64_t i_set_is_combustible                      : 1 {};
   uint64_t i_set_is_deep_water                    : 1 {};
   uint64_t i_set_is_descend_dungeon               : 1 {};
   uint64_t i_set_is_descend_sewer                 : 1 {};
@@ -1308,7 +1309,7 @@ public:
   int is_undead(void);
   int is_usable(void);
   int is_used_when_thrown(void);
-  int is_very_combustible(void);
+  int is_very_is_combustible(void);
   int is_very_heavy(void);
   int is_wall_dungeon(void);
   int is_wall(void);
