@@ -1115,16 +1115,25 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     //
     // Are we carrying a weapon? If not, see if we can do a claw attack
     //
-    if (attack_natural || attack_poison || attack_digest ||
-        ! real_hitter->equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
+    if (real_hitter->is_player()) {
+      //
+      // We can hit this case if we have no sword and are punching.
+      // We don't want to see the natural attack of the player as
+      // we already displayed it during swing attacks.
+      //
+    } else if (attack_natural || attack_poison || attack_digest ||
+               ! real_hitter->equip_id_carry_anim(MONST_EQUIP_WEAPON).ok()) {
+      //
+      // Monster natural attack
+      //
       auto claws = real_hitter->tp()->gfx_anim_use();
       if (claws != "") {
         auto natural_attack_effect = level->thing_new(claws, curr_at);
         natural_attack_effect->bounce(0.1, 0.1, 100, 3);
         natural_attack_effect->move_set_dir_from_delta(delta);
-
-        real_hitter->on_you_natural_attack();
       }
+
+      real_hitter->on_you_natural_attack();
     }
   }
 
