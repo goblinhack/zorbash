@@ -25,7 +25,7 @@ def key_init(name, text_name):
     my.is_moveable(self, True)
     my.light_color(self, "red")
     my.light_dist(self, 1)
-    my.long_text_description(self, "An evil looking set of keys. Probably still works just fine though.")
+    my.long_text_description(self, "An evil looking set of keys. Probably still works just fine though. Translates into five keys when carried.")
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
     my.text_description(self, "An evil looking key.")
