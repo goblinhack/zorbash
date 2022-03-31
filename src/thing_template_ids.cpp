@@ -236,7 +236,7 @@ std::initializer_list< std::string > tps = {
     "key_golden",
     "key_pair",
     "key_penta",
-    "key_single",
+    "key_crystal",
     "laser_energy",
     "laser_lightning",
     "laser_lightning_fork",

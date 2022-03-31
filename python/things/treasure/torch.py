@@ -64,6 +64,7 @@ def init():
             "torch.3",
             "torch.4",
             "torch.5",
+            "torch.6",
         ],
     )
 

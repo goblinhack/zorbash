@@ -25,7 +25,7 @@ def key_init(name, text_name):
     my.is_moveable(self, True)
     my.light_color(self, "yellow")
     my.light_dist(self, 2)
-    my.long_text_description(self, "A magical golden key that transmutates into multiple keys upon carrying.")
+    my.long_text_description(self, "A magical golden key that transmutates into ten keys upon carrying.")
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_RARE)
     my.text_a_or_an(self, "an")
