@@ -18,7 +18,7 @@ void Thing::water_tick(void)
   TRACE_AND_INDENT();
 
   if (is_on_fire()) {
-    unset_on_fire();
+    on_fire_unset();
 
     auto owner = top_owner();
     if (owner) {

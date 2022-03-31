@@ -54,7 +54,7 @@ bool Thing::is_on_fire(void)
   return id.ok();
 }
 
-void Thing::unset_on_fire(void)
+void Thing::on_fire_unset(void)
 {
   TRACE_NO_INDENT();
   auto id = on_fire_anim_id();

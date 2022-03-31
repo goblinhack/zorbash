@@ -18,13 +18,13 @@ int Thing::stat_str_total(void)
   stat = stat_str();
   prev = stat;
   if (stat) {
-    dbg("Str: %d", stat);
+    dbg3("Str: %d", stat);
   }
 
   stat += stat_str_mod();
   if (stat != prev) {
     prev = stat;
-    dbg("Str: with mod (%s): %d", modifier_to_string(stat_str_mod()).c_str(), stat);
+    dbg3("Str: with mod (%s): %d", modifier_to_string(stat_str_mod()).c_str(), stat);
   }
 
   FOR_ALL_EQUIP(e)
@@ -34,7 +34,7 @@ int Thing::stat_str_total(void)
       stat += iter->stat_str_total();
       if (stat != prev) {
         prev = stat;
-        dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
+        dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
             modifier_to_string(iter->stat_str_mod()).c_str(), stat);
       }
     }
@@ -61,7 +61,7 @@ int Thing::stat_str_total(void)
         stat += iter->stat_str_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
@@ -74,7 +74,7 @@ int Thing::stat_str_total(void)
         stat += iter->stat_str_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
@@ -87,7 +87,7 @@ int Thing::stat_str_total(void)
         stat += iter->stat_str_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
@@ -100,7 +100,7 @@ int Thing::stat_str_total(void)
         stat += iter->stat_str_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Str: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
@@ -112,7 +112,7 @@ int Thing::stat_str_total(void)
     stat += enchant;
     if (stat != prev) {
       prev = stat;
-      dbg("Str: with enchant %d: %d", enchant, stat);
+      dbg3("Str: with enchant %d: %d", enchant, stat);
     }
   }
 

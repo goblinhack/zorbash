@@ -18,13 +18,13 @@ int Thing::stat_att_total()
   stat = stat_att();
   prev = stat;
   if (stat) {
-    dbg("Att: %d", stat);
+    dbg3("Att: %d", stat);
   }
 
   stat += stat_att_mod();
   if (stat != prev) {
     prev = stat;
-    dbg("Att: with mod (%s): %d", modifier_to_string(stat_att_mod()).c_str(), stat);
+    dbg3("Att: with mod (%s): %d", modifier_to_string(stat_att_mod()).c_str(), stat);
   }
 
   //
@@ -35,7 +35,7 @@ int Thing::stat_att_total()
     stat += stat_to_bonus(str_total);
     if (stat != prev) {
       prev = stat;
-      dbg("Att: (str %d): %d", str_total, stat);
+      dbg3("Att: (str %d): %d", str_total, stat);
     }
   }
 
@@ -46,7 +46,7 @@ int Thing::stat_att_total()
       stat += iter->stat_att_total();
       if (stat != prev) {
         prev = stat;
-        dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
+        dbg3("Att: with (%s %s): %d", iter->to_short_string().c_str(),
             modifier_to_string(iter->stat_att_mod()).c_str(), stat);
       }
     }
@@ -73,7 +73,7 @@ int Thing::stat_att_total()
         stat += iter->stat_att_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Att: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_att_mod()).c_str(), stat);
         }
       }
@@ -86,7 +86,7 @@ int Thing::stat_att_total()
         stat += iter->stat_att_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Att: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_att_mod()).c_str(), stat);
         }
       }
@@ -99,7 +99,7 @@ int Thing::stat_att_total()
         stat += iter->stat_att_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Att: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_att_mod()).c_str(), stat);
         }
       }
@@ -112,7 +112,7 @@ int Thing::stat_att_total()
         stat += iter->stat_att_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Att: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Att: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_att_mod()).c_str(), stat);
         }
       }
@@ -124,7 +124,7 @@ int Thing::stat_att_total()
     stat += enchant;
     if (stat != prev) {
       prev = stat;
-      dbg("Att: with enchant %d: %d", enchant, stat);
+      dbg3("Att: with enchant %d: %d", enchant, stat);
     }
   }
 
@@ -147,7 +147,7 @@ int Thing::stat_att_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg("Att penalty: stuck %d", p);
+      dbg3("Att penalty: stuck %d", p);
     }
   } else if (idle_count() && stat_att_penalty_when_idle()) {
     int p = stat_att_penalty_when_idle() + idle_count();
@@ -155,7 +155,7 @@ int Thing::stat_att_penalties_total(void)
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
-      dbg("Att penalty: idle %d", p);
+      dbg3("Att penalty: idle %d", p);
     }
   }
 
@@ -169,7 +169,7 @@ int Thing::stat_att_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg("Att penalty: with (in shallow water %d): %d", p, penalty);
+          dbg3("Att penalty: with (in shallow water %d): %d", p, penalty);
         }
       }
     }
@@ -179,14 +179,14 @@ int Thing::stat_att_penalties_total(void)
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
-          dbg("Att penalty: with (in deep water %d): %d", p, penalty);
+          dbg3("Att penalty: with (in deep water %d): %d", p, penalty);
         }
       }
     }
   }
 
   if (penalty) {
-    dbg("Att penalty: %d", penalty);
+    dbg3("Att penalty: %d", penalty);
   }
   return penalty;
 }

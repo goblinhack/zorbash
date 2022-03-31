@@ -18,13 +18,13 @@ int Thing::stat_luck_total(void)
   stat = stat_luck();
   prev = stat;
   if (stat) {
-    dbg("Luck: %d", stat);
+    dbg3("Luck: %d", stat);
   }
 
   stat += stat_luck_mod();
   if (stat != prev) {
     prev = stat;
-    dbg("Luck: with mod (%s): %d", modifier_to_string(stat_luck_mod()).c_str(), stat);
+    dbg3("Luck: with mod (%s): %d", modifier_to_string(stat_luck_mod()).c_str(), stat);
   }
 
   FOR_ALL_EQUIP(e)
@@ -34,7 +34,7 @@ int Thing::stat_luck_total(void)
       stat += iter->stat_luck_total();
       if (stat != prev) {
         prev = stat;
-        dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
+        dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
             modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
       }
     }
@@ -61,7 +61,7 @@ int Thing::stat_luck_total(void)
         stat += iter->stat_luck_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
         }
       }
@@ -74,7 +74,7 @@ int Thing::stat_luck_total(void)
         stat += iter->stat_luck_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
         }
       }
@@ -87,7 +87,7 @@ int Thing::stat_luck_total(void)
         stat += iter->stat_luck_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
         }
       }
@@ -100,7 +100,7 @@ int Thing::stat_luck_total(void)
         stat += iter->stat_luck_total();
         if (stat != prev) {
           prev = stat;
-          dbg("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Luck: with (%s %s): %d", iter->to_short_string().c_str(),
               modifier_to_string(iter->stat_luck_mod()).c_str(), stat);
         }
       }
@@ -112,7 +112,7 @@ int Thing::stat_luck_total(void)
     stat += enchant;
     if (stat != prev) {
       prev = stat;
-      dbg("Luck: with enchant %d: %d", enchant, stat);
+      dbg3("Luck: with enchant %d: %d", enchant, stat);
     }
   }
 
