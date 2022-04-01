@@ -1336,9 +1336,11 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
       //
       // Faster things get more moves and hits
       //
-      if (move_speed() && real_hitter->move_speed()) {
+      auto speed             = move_speed_total();
+      auto real_hitter_speed = real_hitter->move_speed_total();
+      if (speed && real_hitter_speed) {
         auto hit_count     = aip()->recently_hit_by[ real_hitter->id ];
-        auto max_hit_count = real_hitter->move_speed() / move_speed();
+        auto max_hit_count = real_hitter_speed / speed;
 
         if (hit_count >= max_hit_count) {
           IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }

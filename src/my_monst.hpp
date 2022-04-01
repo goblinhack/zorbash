@@ -128,9 +128,9 @@ public:
   int light_dist          = {}; // Current strength, including torches
   int monst_state         = {};
   int movement_remaining  = {};
-  int physical_training   = {};
   int necrosis            = {};
   int noise               = {};
+  int physical_training   = {};
   int poison              = {};
   int prev_light_dist     = {}; // Current strength, including torches
   int score               = {};
@@ -146,6 +146,7 @@ public:
   int stat_dex_mod        = {};
   int stat_luck           = {};
   int stat_luck_mod       = {};
+  int move_speed_mod = {};
   int stats02             = {};
   int stats03             = {};
   int stats04             = {};
