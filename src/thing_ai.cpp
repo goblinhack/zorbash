@@ -1247,6 +1247,11 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
             continue;
           }
+          IF_DEBUG
+          {
+            auto s = string_sprintf("Choose possible descend sewer at @(%d,%d)", o.x, o.y);
+            AI_LOG(s);
+          }
         } else if (level->is_ascend_sewer(o)) {
           //
           // Worth investigating
@@ -1257,11 +1262,13 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
             continue;
           }
-          if ((o.x == curr_at.x) && (o.y == curr_at.y)) {
-            continue;
-          }
           if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
             continue;
+          }
+          IF_DEBUG
+          {
+            auto s = string_sprintf("Choose possible ascend sewer at @(%d,%d)", o.x, o.y);
+            AI_LOG(s);
           }
         } else if (level->is_descend_dungeon(o)) {
           //
@@ -1276,6 +1283,11 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
             continue;
           }
+          IF_DEBUG
+          {
+            auto s = string_sprintf("Choose possible descend dungeon at @(%d,%d)", o.x, o.y);
+            AI_LOG(s);
+          }
         } else if (level->is_ascend_dungeon(o)) {
           //
           // Worth investigating
@@ -1288,6 +1300,11 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
           }
           if (search_type < MONST_SEARCH_TYPE_LAST_RESORTS_NO_JUMP) {
             continue;
+          }
+          IF_DEBUG
+          {
+            auto s = string_sprintf("Choose possible ascend dungeon at @(%d,%d)", o.x, o.y);
+            AI_LOG(s);
           }
         } else {
           //

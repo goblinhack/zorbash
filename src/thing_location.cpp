@@ -5,6 +5,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
@@ -116,27 +117,52 @@ void Thing::location_check_forced(void)
     //
     if (level->is_ascend_dungeon(curr_at.x, curr_at.y) || level->is_ascend_sewer(curr_at.x, curr_at.y)) {
       if (is_player()) {
-        if (game->request_ascend || (curr_at == game->cursor_move_end)) {
+        if (game->robot_mode) {
+          auto ai = maybe_aip();
+          dbg("Location check, over ascend sewer or dungeon (move path len %d)", (int) ai->move_path.size());
+          if (! ai->move_path.size()) {
+            dbg("Location check, set ascend check (1)");
+            ascend_check         = true;
+            game->request_ascend = false;
+          }
+        } else if (game->request_ascend || (curr_at == game->cursor_move_end)) {
+          dbg("Location check, over ascend sewer or dungeon (move end @%d,%d)", game->cursor_move_end.x,
+              game->cursor_move_end.y);
+          dbg("Location check, set ascend check (2)");
           ascend_check         = true;
           game->request_ascend = false;
         }
       } else if (pcg_random_range(0, 100) < 10) {
+        dbg("Location check, set ascend check (3)");
         ascend_check = true;
       }
     }
 
     if (level->is_descend_dungeon(curr_at.x, curr_at.y) || level->is_descend_sewer(curr_at.x, curr_at.y)) {
       if (is_player()) {
-        if (game->request_descend || (curr_at == game->cursor_move_end)) {
+        if (game->robot_mode) {
+          auto ai = maybe_aip();
+          dbg("Location check, over descend sewer or dungeon (move path len %d)", (int) ai->move_path.size());
+          if (! ai->move_path.size()) {
+            dbg("Location check, set descend check (1)");
+            descend_check         = true;
+            game->request_descend = false;
+          }
+        } else if (game->request_descend || (curr_at == game->cursor_move_end)) {
+          dbg("Location check, over descend sewer or dungeon (cursor move end @%d,%d)", game->cursor_move_end.x,
+              game->cursor_move_end.y);
+          dbg("Location check, set descend check (2)");
           descend_check         = true;
           game->request_descend = false;
         }
       } else if (pcg_random_range(0, 100) < 10) {
+        dbg("Location check, set descend check (3)");
         descend_check = true;
       }
     }
 
     if (ascend_check) {
+      dbg("Location check, ascend check");
       if (ascend_dungeon_tick()) {
         dbg("Location check, ascending dungeon");
         return;
@@ -146,7 +172,9 @@ void Thing::location_check_forced(void)
         return;
       }
     }
+
     if (descend_check) {
+      dbg("Location check, descend check");
       if (descend_dungeon_tick()) {
         dbg("Location check, descending dungeon");
         return;
