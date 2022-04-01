@@ -211,6 +211,14 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
+    auto v = tpp->move_speed_mod();
+    if (unlikely(v)) {
+      move_speed_mod_set(v);
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
     auto v = tpp->stat_att_mod();
     if (unlikely(v)) {
       stat_att_mod_set(v);

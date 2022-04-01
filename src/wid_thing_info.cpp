@@ -168,6 +168,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_stat_con(wid_popup_window, t);
   wid_thing_info_add_stat_dex(wid_popup_window, t);
   wid_thing_info_add_stat_luck(wid_popup_window, t);
+  wid_thing_info_add_move_speed(wid_popup_window, t);
   if (t->is_alive_monst() || t->is_player()) {
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -1416,6 +1417,23 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
   } else if (t->stat_luck_mod()) {
     auto stat = t->stat_luck_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck modifier            %3s", modifier_to_string(stat).c_str());
+    w->log(tmp);
+  }
+}
+
+void Game::wid_thing_info_add_move_speed(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  if (t->is_alive_monst() || t->is_player()) {
+    auto speed = t->move_speed_total();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed             %2d%3s", speed,
+             stat_to_bonus_slash_str(speed).c_str());
+    w->log(tmp);
+  } else if (t->move_speed_mod()) {
+    auto speed = t->move_speed_total();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed modifier      %3s", modifier_to_string(speed).c_str());
     w->log(tmp);
   }
 }

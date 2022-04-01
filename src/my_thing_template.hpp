@@ -496,6 +496,7 @@ private:
   int _stat_dex_mod {};
   int _stat_luck {};
   int _stat_luck_mod {};
+  int _move_speed_mod {};
   int _stats02 {};
   int _stats03 {};
   int _stats04 {};
@@ -1083,6 +1084,7 @@ public:
   int gfx_solid_shadow(void) const { return _gfx_solid_shadow; }
   int gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
   int gfx_water(void) const { return _gfx_water; }
+  int gfx_wobbles_when_hit(void) const { return _gfx_wobbles_when_hit; }
   int health_starving_pct(void) const { return _health_starving_pct; }
   int hunger_clock_tick_freq(void) const { return _hunger_clock_tick_freq; }
   int hunger_health_pct(void) const { return _hunger_health_pct; }
@@ -1247,6 +1249,7 @@ public:
   int is_item_magical_eater(void) const { return _is_item_magical_eater; }
   int is_item_magical(void) const { return _is_item_magical; }
   int is_item_organic(void) const { return _is_item_organic; }
+  int is_item_targetted(void) const { return _is_item_targetted; }
   int is_item(void) const { return _is_item; }
   int is_jelly_baby_eater(void) const { return _is_jelly_baby_eater; }
   int is_jelly_baby(void) const { return _is_jelly_baby; }
@@ -1315,6 +1318,7 @@ public:
   int is_skill(void) const { return _is_skill; }
   int is_slippery(void) const { return _is_slippery; }
   int is_smoke(void) const { return _is_smoke; }
+  int is_snake(void) const { return _is_snake; }
   int is_spawner(void) const { return _is_spawner; }
   int is_spider(void) const { return _is_spider; }
   int is_spiderweb(void) const { return _is_spiderweb; }
@@ -1345,8 +1349,8 @@ public:
   int is_undead(void) const { return _is_undead; }
   int is_usable(void) const { return _is_usable; }
   int is_used_when_thrown(void) const { return _is_used_when_thrown; }
-  int is_very_is_combustible(void) const { return _is_very_is_combustible; }
   int is_very_heavy(void) const { return _is_very_heavy; }
+  int is_very_is_combustible(void) const { return _is_very_is_combustible; }
   int is_wall_dungeon(void) const { return _is_wall_dungeon; }
   int is_wall(void) const { return _is_wall; }
   int is_wand_or_staff(void) const { return _is_wand || _is_staff; }
@@ -1364,10 +1368,11 @@ public:
   int minion_limit(void) const { return _minion_limit; }
   int monst_size(void) const { return _monst_size; }
   int move_speed(void) const { return _move_speed; }
+  int noise_additional_on_jump_end(void) const { return _noise_additional_on_jump_end; }
+  int noise_additional_on_teleporting(void) const { return _noise_additional_on_teleporting; }
   int noise_blocker(void) const { return _noise_blocker; }
   int noise_decibels_hearing(void) const { return _noise_decibels_hearing; }
   int noise_on_born(void) const { return _noise_on_born; }
-  int noise_additional_on_jump_end(void) const { return _noise_additional_on_jump_end; }
   int noise_on_dropping(void) const { return _noise_on_dropping; }
   int noise_on_open(void) const { return _noise_on_open; }
   int noise_on_you_are_hit_and_now_dead(void) const { return _noise_on_you_are_hit_and_now_dead; }
@@ -1403,6 +1408,7 @@ public:
   int stat_dex(void) const { return _stat_dex; }
   int stat_luck_mod(void) const { return _stat_luck_mod; }
   int stat_luck(void) const { return _stat_luck; }
+  int move_speed_mod(void) const { return _move_speed_mod; }
   int stats02(void) const { return _stats02; }
   int stats03(void) const { return _stats03; }
   int stats04(void) const { return _stats04; }
@@ -1434,10 +1440,6 @@ public:
   int unused_flag111(void) const { return _unused_flag111; }
   int unused_flag112(void) const { return _unused_flag112; }
   int unused_flag113(void) const { return _unused_flag113; }
-  int gfx_wobbles_when_hit(void) const { return _gfx_wobbles_when_hit; }
-  int is_snake(void) const { return _is_snake; }
-  int is_item_targetted(void) const { return _is_item_targetted; }
-  int noise_additional_on_teleporting(void) const { return _noise_additional_on_teleporting; }
   int unused_flag11(void) const { return _unused_flag11; }
   int unused_flag123(void) const { return _unused_flag123; }
   int unused_flag12(void) const { return _unused_flag12; }
@@ -1636,6 +1638,7 @@ public:
   void gfx_solid_shadow_set(int v) { _gfx_solid_shadow = v; }
   void gfx_very_short_shadow_caster_set(int v) { _gfx_very_short_shadow_caster = v; }
   void gfx_water_set(int v) { _gfx_water = v; }
+  void gfx_wobbles_when_hit_set(int v) { _gfx_wobbles_when_hit = v; }
   void health_starving_pct_set(int v) { _health_starving_pct = v; }
   void hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
   void hunger_health_pct_set(int v) { _hunger_health_pct = v; }
@@ -1802,6 +1805,7 @@ public:
   void is_item_magical_set(int v) { _is_item_magical = v; }
   void is_item_organic_set(int v) { _is_item_organic = v; }
   void is_item_set(int v) { _is_item = v; }
+  void is_item_targetted_set(int v) { _is_item_targetted = v; }
   void is_jelly_baby_eater_set(int v) { _is_jelly_baby_eater = v; }
   void is_jelly_baby_set(int v) { _is_jelly_baby = v; }
   void is_jelly_eater_set(int v) { _is_jelly_eater = v; }
@@ -1869,6 +1873,7 @@ public:
   void is_skillstone_set(int v) { _is_skillstone = v; }
   void is_slippery_set(int v) { _is_slippery = v; }
   void is_smoke_set(int v) { _is_smoke = v; }
+  void is_snake_set(int v) { _is_snake = v; }
   void is_spawner_set(int v) { _is_spawner = v; }
   void is_spider_set(int v) { _is_spider = v; }
   void is_spiderweb_set(int v) { _is_spiderweb = v; }
@@ -1899,8 +1904,8 @@ public:
   void is_undead_set(int v) { _is_undead = v; }
   void is_usable_set(int v) { _is_usable = v; }
   void is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
-  void is_very_is_combustible_set(int v) { _is_very_is_combustible = v; }
   void is_very_heavy_set(int v) { _is_very_heavy = v; }
+  void is_very_is_combustible_set(int v) { _is_very_is_combustible = v; }
   void is_wall_dungeon_set(int v) { _is_wall_dungeon = v; }
   void is_wall_set(int v) { _is_wall = v; }
   void is_wand_set(int v) { _is_wand = v; }
@@ -1921,10 +1926,11 @@ public:
   void monst_size_set(int v) { _monst_size = v; }
   void move_speed_set(int v) { _move_speed = v; }
   void name_set(const std::string &v) { _name = v; }
+  void noise_additional_on_jump_end_set(int v) { _noise_additional_on_jump_end = v; }
+  void noise_additional_on_teleporting_set(int v) { _noise_additional_on_teleporting = v; }
   void noise_blocker_set(int v) { _noise_blocker = v; }
   void noise_decibels_hearing_set(int v) { _noise_decibels_hearing = v; }
   void noise_on_born_set(int v) { _noise_on_born = v; }
-  void noise_additional_on_jump_end_set(int v) { _noise_additional_on_jump_end = v; }
   void noise_on_dropping_set(int v) { _noise_on_dropping = v; }
   void noise_on_open_set(int v) { _noise_on_open = v; }
   void noise_on_you_are_hit_and_now_dead_set(int v) { _noise_on_you_are_hit_and_now_dead = v; }
@@ -1994,9 +2000,9 @@ public:
   void on_you_are_declared_a_follower_do_set(const std::string &v) { _on_you_are_declared_a_follower_do = v; }
   void on_you_are_declared_leader_do_set(const std::string &v) { _on_you_are_declared_leader_do = v; }
   void on_you_are_hit_and_now_dead_do_set(const std::string &v) { _on_you_are_hit_and_now_dead_do = v; }
+  void on_you_are_hit_but_dodge_it_do_set(const std::string &v) { _on_you_are_hit_but_dodge_it_do = v; }
   void on_you_are_hit_but_still_alive_do_set(const std::string &v) { _on_you_are_hit_but_still_alive_do = v; }
   void on_you_are_on_fire_do_set(const std::string &v) { _on_you_are_on_fire_do = v; }
-  void on_you_are_hit_but_dodge_it_do_set(const std::string &v) { _on_you_are_hit_but_dodge_it_do = v; }
   void on_you_natural_attack_do_set(const std::string &v) { _on_you_natural_attack_do = v; }
   void range_max_set(int v) { _range_max = v; }
   void rarity_set(int v) { _rarity = v; }
@@ -2028,6 +2034,7 @@ public:
   void stat_dex_set(int v) { _stat_dex = v; }
   void stat_luck_mod_set(int v) { _stat_luck_mod = v; }
   void stat_luck_set(int v) { _stat_luck = v; }
+  void move_speed_mod_set(int v) { _move_speed_mod = v; }
   void stats02_set(int v) { _stats02 = v; }
   void stats03_set(int v) { _stats03 = v; }
   void stats04_set(int v) { _stats04 = v; }
@@ -2077,10 +2084,6 @@ public:
   void unused_flag111_set(int v) { _unused_flag111 = v; }
   void unused_flag112_set(int v) { _unused_flag112 = v; }
   void unused_flag113_set(int v) { _unused_flag113 = v; }
-  void gfx_wobbles_when_hit_set(int v) { _gfx_wobbles_when_hit = v; }
-  void is_snake_set(int v) { _is_snake = v; }
-  void is_item_targetted_set(int v) { _is_item_targetted = v; }
-  void noise_additional_on_teleporting_set(int v) { _noise_additional_on_teleporting = v; }
   void unused_flag11_set(int v) { _unused_flag11 = v; }
   void unused_flag123_set(int v) { _unused_flag123 = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }

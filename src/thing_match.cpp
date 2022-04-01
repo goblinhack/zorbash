@@ -1077,9 +1077,6 @@ bool Thing::matches(const std::string &what)
   if (is_temperature_sensitive() && (what == "is_temperature_sensitive")) {
     return true;
   }
-  if (move_speed() && (what == "move_speed")) {
-    return true;
-  }
   if (damage_received_doubled_from_cold() && (what == "damage_received_doubled_from_cold")) {
     return true;
   }
@@ -2148,9 +2145,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "minion_limit") {
     return &Thing::minion_limit;
-  }
-  if (what == "move_speed") {
-    return &Thing::move_speed;
   }
   if (what == "noise_blocker") {
     return &Thing::noise_blocker;

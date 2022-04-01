@@ -187,9 +187,12 @@ bool Level::tick(void)
       continue;
     }
 
-    if (t->move_speed()) {
+    auto speed        = t->move_speed_total();
+    auto player_speed = player->move_speed_total();
+
+    if (speed) {
       if (player) {
-        remaining -= player->move_speed();
+        remaining -= player_speed;
       } else {
         remaining -= 100;
       }
@@ -690,8 +693,9 @@ bool Level::tick(void)
       //
       // Give things a bit of time to move
       //
-      if (t->move_speed()) {
-        t->movement_remaining_incr(t->move_speed());
+      auto speed = t->move_speed_total();
+      if (speed) {
+        t->movement_remaining_incr(speed);
       } else {
         //
         // Things that do not move need to tick too.

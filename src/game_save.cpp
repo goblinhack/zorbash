@@ -62,7 +62,6 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->capacity_height);
   out << bits(my.t->capacity_width);
   out << bits(my.t->dead_reason);
-  out << bits(my.t->poison_reason);
   out << bits(my.t->distance_throw);
   out << bits(my.t->enchant);
   out << bits(my.t->enchant_max);
@@ -82,13 +81,14 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->mob_id);
   out << bits(my.t->monst_state);
   out << bits(my.t->movement_remaining);
-  out << bits(my.t->physical_training);
   out << bits(my.t->msg);
   out << bits(my.t->necrosis);
   out << bits(my.t->noise);
   out << bits(my.t->on_fire_id_anim);
   out << bits(my.t->owner_id);
+  out << bits(my.t->physical_training);
   out << bits(my.t->poison);
+  out << bits(my.t->poison_reason);
   out << bits(my.t->prev_light_dist);
   out << bits(my.t->score);
   out << bits(my.t->spawner_owner_id);
@@ -104,6 +104,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->stat_dex_mod);
   out << bits(my.t->stat_luck);
   out << bits(my.t->stat_luck_mod);
+  out << bits(my.t->move_speed_mod);
   out << bits(my.t->stats02);
   out << bits(my.t->stats03);
   out << bits(my.t->stats04);

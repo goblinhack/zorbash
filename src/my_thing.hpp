@@ -933,13 +933,13 @@ public:
   int danger_initial_level(Thingp);
   int danger_initial_level(void);
   int defence(void);
-  int distance_jump(void);
   int distance_jump_get(void);
+  int distance_jump(void);
   int distance_leader_max(void);
   int distance_minion_vision_shared(void);
   int distance_recruitment_max(void);
-  int distance_teleport(void);
   int distance_teleport_get(void);
+  int distance_teleport(void);
   int distance_throw_decr(int);
   int distance_throw_decr(void);
   int distance_throw_incr(int);
@@ -999,6 +999,7 @@ public:
   int gfx_solid_shadow(void);
   int gfx_very_short_shadow_caster(void);
   int gfx_water(void);
+  int gfx_wobbles_when_hit(void);
   int goal_penalty_get(Thingp attacker);
   int gold_decr(int);
   int gold_decr(void);
@@ -1211,6 +1212,7 @@ public:
   int is_item_magical_eater(void);
   int is_item_magical(void);
   int is_item_organic(void);
+  int is_item_targetted(void);
   int is_item(void);
   int is_jelly_baby_eater(void);
   int is_jelly_baby(void);
@@ -1280,6 +1282,7 @@ public:
   int is_skill(void);
   int is_slippery(void);
   int is_smoke(void);
+  int is_snake(void);
   int is_spawner(void);
   int is_spider(void);
   int is_spiderweb(void);
@@ -1309,8 +1312,8 @@ public:
   int is_undead(void);
   int is_usable(void);
   int is_used_when_thrown(void);
-  int is_very_is_combustible(void);
   int is_very_heavy(void);
+  int is_very_is_combustible(void);
   int is_wall_dungeon(void);
   int is_wall(void);
   int is_wand_or_staff(void);
@@ -1485,6 +1488,8 @@ public:
   int spawn_randomly_in_radius_range(const std::string &what, int amount, uint32_t radius_min, uint32_t radius_max);
   int stamina_decr(int);
   int stamina_decr(void);
+  int stamina_drain_on_swinging(void);
+  int stamina_drain_on_using(void);
   int stamina_get(void);
   int stamina_incr(int);
   int stamina_incr(void);
@@ -1494,8 +1499,6 @@ public:
   int stamina_max_incr(void);
   int stamina_max_set(int);
   int stamina_max(void);
-  int stamina_drain_on_swinging(void);
-  int stamina_drain_on_using(void);
   int stamina_set(int);
   int stat_att_decr(int);
   int stat_att_decr(void);
@@ -1507,6 +1510,8 @@ public:
   int stat_att_mod_incr(void);
   int stat_att_mod_set(int);
   int stat_att_mod(void);
+  int move_speed_mod(void);
+  int move_speed_total(void);
   int stat_att_penalties_total(void);
   int stat_att_penalty_when_idle_max(void);
   int stat_att_penalty_when_idle(void);
@@ -1576,6 +1581,11 @@ public:
   int stat_luck_set(int);
   int stat_luck_total(void);
   int stat_luck(void);
+  int move_speed_mod_decr(int);
+  int move_speed_mod_decr(void);
+  int move_speed_mod_incr(int);
+  int move_speed_mod_incr(void);
+  int move_speed_mod_set(int);
   int stats02_decr(int);
   int stats02_decr(void);
   int stats02_incr(int);
@@ -1667,9 +1677,6 @@ public:
   int unused_flag111(void);
   int unused_flag112(void);
   int unused_flag113(void);
-  int gfx_wobbles_when_hit(void);
-  int is_snake(void);
-  int is_item_targetted(void);
   int unused_flag11(void);
   int unused_flag123(void);
   int unused_flag12(void);

@@ -85,7 +85,6 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->capacity_height);
    in >> bits(my.t->capacity_width);
    in >> bits(my.t->dead_reason);
-   in >> bits(my.t->poison_reason);
    in >> bits(my.t->distance_throw);
    in >> bits(my.t->enchant);
    in >> bits(my.t->enchant_max);
@@ -105,13 +104,14 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->mob_id);
    in >> bits(my.t->monst_state);
    in >> bits(my.t->movement_remaining);
-   in >> bits(my.t->physical_training);
    in >> bits(my.t->msg);
    in >> bits(my.t->necrosis);
    in >> bits(my.t->noise);
    in >> bits(my.t->on_fire_id_anim);
    in >> bits(my.t->owner_id);
+   in >> bits(my.t->physical_training);
    in >> bits(my.t->poison);
+   in >> bits(my.t->poison_reason);
    in >> bits(my.t->prev_light_dist);
    in >> bits(my.t->score);
    in >> bits(my.t->spawner_owner_id);
@@ -127,6 +127,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stat_dex_mod);
    in >> bits(my.t->stat_luck);
    in >> bits(my.t->stat_luck_mod);
+   in >> bits(my.t->move_speed_mod);
    in >> bits(my.t->stats02);
    in >> bits(my.t->stats03);
    in >> bits(my.t->stats04);
