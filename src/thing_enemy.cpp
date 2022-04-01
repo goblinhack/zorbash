@@ -109,4 +109,6 @@ void Thing::add_enemy(Thingp attacker)
       aip()->enemies[ attacker->id ] = THING_AI_MAX_RESENT_COUNT;
     }
   }
+
+  change_state(MONST_STATE_IDLE, "move interrupted by an enemy");
 }

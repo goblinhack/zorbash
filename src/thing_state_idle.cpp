@@ -130,8 +130,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     }
 
     //
-    // If really low on health and we have something we can eat, try
-    // that.
+    // If really low on health and we have something we can eat, try that.
     //
     AI_LOG("Idle, health check");
     if (health() < health_max() / 3) {
@@ -146,35 +145,45 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
       }
     }
 
-    if (try_to_enchant_items()) {
-      return true;
-    }
-    if (try_to_use_weapon()) {
-      return true;
-    }
-    if (try_to_use_armor()) {
-      return true;
-    }
-    if (try_to_use_helmet()) {
-      return true;
-    }
-    if (try_to_use_amulet()) {
-      return true;
-    }
-    if (try_to_use_boots()) {
-      return true;
-    }
-    if (try_to_use_gauntlet()) {
-      return true;
-    }
-    if (try_to_use_shield()) {
-      return true;
-    }
-    if (try_to_use_cloak()) {
-      return true;
-    }
-    if (try_to_use_rings()) {
-      return true;
+    //
+    // Not sure if we should try on items if being attacked.
+    //
+    // I mean it might help but it also looks odd standing still looking
+    // through the inventory whilst being attacked.
+    //
+    if (game->tick_current - tick_last_i_was_attacked() < 2) {
+      AI_LOG("Skip trying on items as I was recently attacked");
+    } else {
+      if (try_to_enchant_items()) {
+        return true;
+      }
+      if (try_to_use_weapon()) {
+        return true;
+      }
+      if (try_to_use_armor()) {
+        return true;
+      }
+      if (try_to_use_helmet()) {
+        return true;
+      }
+      if (try_to_use_amulet()) {
+        return true;
+      }
+      if (try_to_use_boots()) {
+        return true;
+      }
+      if (try_to_use_gauntlet()) {
+        return true;
+      }
+      if (try_to_use_shield()) {
+        return true;
+      }
+      if (try_to_use_cloak()) {
+        return true;
+      }
+      if (try_to_use_rings()) {
+        return true;
+      }
     }
 
     //
