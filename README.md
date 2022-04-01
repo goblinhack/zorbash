@@ -1,7 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- robot not entering sewer                                                                                                                     -->
+<!-- bat attacks a lot whilst equipping                                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

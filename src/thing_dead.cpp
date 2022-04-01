@@ -10,7 +10,9 @@
 
 void Thing::dead_(Thingp defeater, const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
+
   char reason[ MAXSTR ];
   vsnprintf(reason, MAXSTR, fmt, args);
   killed(defeater, reason);
@@ -18,7 +20,9 @@ void Thing::dead_(Thingp defeater, const char *fmt, va_list args)
 
 void Thing::dead(Thingp defeater, const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
+
   auto    t = this;
   va_list args;
 
@@ -29,7 +33,9 @@ void Thing::dead(Thingp defeater, const char *fmt, ...)
 
 void Thing::dead_(const char *fmt, va_list args)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
+
   char reason[ MAXSTR ];
   vsnprintf(reason, MAXSTR, fmt, args);
   killed(nullptr, reason);
@@ -37,19 +43,25 @@ void Thing::dead_(const char *fmt, va_list args)
 
 void Thing::dead(Thingp defeater, std::string &reason)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
+
   killed(defeater, reason);
 }
 
 void Thing::dead(const std::string &reason)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
+
   killed(nullptr, reason);
 }
 
 void Thing::dead(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
+
   auto    t = this;
   va_list args;
 
@@ -58,35 +70,37 @@ void Thing::dead(const char *fmt, ...)
   va_end(args);
 }
 
-void Thing::dead_scheduled_(const char *fmt, va_list args)
-{
-  verify(MTYPE_THING, this);
-  char reason[ MAXSTR ];
-  vsnprintf(reason, MAXSTR, fmt, args);
-  is_scheduled_for_death = true;
-  dead_reason_set(std::string(reason));
-}
-
 void Thing::dead_scheduled(const std::string &reason)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
-  killed(nullptr, reason);
+
+  is_scheduled_for_death = true;
+  dead_reason_set(reason);
+  killed(nullptr, reason.c_str());
 }
 
 void Thing::dead_scheduled(const char *fmt, ...)
 {
+  TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
-  auto    t = this;
+
   va_list args;
+  char    reason[ MAXSTR ];
 
   va_start(args, fmt);
-  t->dead_scheduled_(fmt, args);
+  vsnprintf(reason, MAXSTR, fmt, args);
   va_end(args);
+
+  is_scheduled_for_death = true;
+  dead_reason_set(std::string(reason));
+  killed(nullptr, reason);
 }
 
 bool Thing::if_matches_then_dead(const std::string &what, const point p)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   //
   // Don't destroy the floor under critical items
   //

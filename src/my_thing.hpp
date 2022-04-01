@@ -199,7 +199,7 @@ public:
   uint64_t i_set_is_corpse                        : 1 {};
   uint64_t i_set_is_corridor                      : 1 {};
   uint64_t i_set_is_cursor_path_hazard_for_player : 1 {};
-  uint64_t i_set_is_combustible                      : 1 {};
+  uint64_t i_set_is_combustible                   : 1 {};
   uint64_t i_set_is_deep_water                    : 1 {};
   uint64_t i_set_is_descend_dungeon               : 1 {};
   uint64_t i_set_is_descend_sewer                 : 1 {};
@@ -2015,7 +2015,6 @@ public:
   void dead(const std::string &);
   void dead_reason_set(const std::string &);
   void dead_scheduled(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-  void dead_scheduled_(const char *fmt, va_list args);
   void dead_scheduled(const std::string &);
   void dead(Thingp defeater, const char *fmt, ...) __attribute__((format(printf, 3, 4)));
   void dead_(Thingp defeater, const char *fmt, va_list args);

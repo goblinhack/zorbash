@@ -108,9 +108,9 @@ Thingp Thing::top_owner(void)
     return nullptr;
   }
 
-  auto id = immediate_owner_id();
-  if (likely(id.ok())) {
-    auto i = level->thing_find(id);
+  auto oid = immediate_owner_id();
+  if (likely(oid.ok())) {
+    auto i = level->thing_find(oid);
     if (unlikely(! i)) {
       return nullptr;
     }
@@ -138,13 +138,13 @@ Thingp Thing::immediate_owner(void)
     return nullptr;
   }
 
-  auto o = immediate_owner_id();
-  if (likely(o.ok())) {
-    if (o == id) {
+  auto oid = immediate_owner_id();
+  if (likely(oid.ok())) {
+    if (oid == id) {
       DIE("Self owned %" PRIX32 "", id.id);
     }
 
-    auto i = level->thing_find(o);
+    auto i = level->thing_find(oid);
     if (unlikely(! i)) {
       return nullptr;
     }
