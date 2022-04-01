@@ -40,7 +40,6 @@ def tp_init(name, text_name):
     my.distance_avoid(self, 3)
     my.distance_vision(self, 3)
     my.environ_avoids_poison(self, 100)
-    my.gfx_animated_can_hflip(self, True)
     my.gfx_animated(self, True)
     my.gfx_anim_use(self, "attack_claws")
     my.gfx_health_bar_shown(self, True)
