@@ -6,7 +6,7 @@ def explode(me, x, y):
     if my.thing_is_dead(me):
         return
 
-    my.thing_topcon(me, "The enchantstone explodes.")
+    my.thing_msg(me, "The enchantstone explodes.")
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")
     my.level_spawn_at_thing(me, "fire")

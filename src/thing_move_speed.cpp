@@ -107,15 +107,6 @@ int Thing::move_speed_total(void)
     }
   }
 
-  if (stat) {
-    auto enchant = enchant_get();
-    stat += enchant;
-    if (stat != prev) {
-      prev = stat;
-      dbg3("Move speed: with enchant %d: %d", enchant, stat);
-    }
-  }
-
   return stat;
 }
 

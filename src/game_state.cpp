@@ -5,6 +5,7 @@
 
 #include "my_backtrace.hpp"
 #include "my_game.hpp"
+#include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
@@ -14,6 +15,16 @@
 
 void Game::change_state(int new_state)
 {
+  //
+  // Check we are in the game loop. If not, do the reset later.
+  //
+  if (new_state == STATE_NORMAL) {
+    if (! pcg_random_allowed) {
+      game->request_reset_state = true;
+      return;
+    }
+  }
+
   if (wid_over) {
     if (game->level) {
       game->level->cursor_path_clear();

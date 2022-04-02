@@ -60,7 +60,7 @@ void wid_inventory_fini(void)
   if (wid_inventory_window) {
     wid_destroy(&wid_inventory_window);
     game->request_remake_rightbar = true;
-    game->request_reset_state     = true;
+    game->change_state(Game::STATE_NORMAL);
   }
 }
 

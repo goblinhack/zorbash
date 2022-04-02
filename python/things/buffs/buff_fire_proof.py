@@ -6,13 +6,13 @@ self = None
 
 def on_owner_add(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_topcon(me, "A protective red glow surrounds you.")
+        my.thing_msg(me, "A protective red glow surrounds you.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_remove(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_topcon(me, "The protective red glow around you fades.")
+        my.thing_msg(me, "The protective red glow around you fades.")
 
 
 def on_owner_damage(me, owner, hitter, real_hitter, x, y, damage):
@@ -21,7 +21,7 @@ def on_owner_damage(me, owner, hitter, real_hitter, x, y, damage):
     # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
     # my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
     if my.thing_is_fire(hitter):
-        my.thing_topcon(me, "You take no damage fire.")
+        my.thing_msg(me, "You take no damage fire.")
         return 0
     return damage
 
@@ -52,7 +52,7 @@ def on_owner_damage_cold(me, owner, hitter, real_hitter, x, y, damage):
 
 def on_owner_damage_fire(me, owner, hitter, real_hitter, x, y, damage):
     if my.thing_is_player(me):
-        my.thing_topcon(me, "You take no damage from the fire.")
+        my.thing_msg(me, "You take no damage from the fire.")
     return 0
 
 

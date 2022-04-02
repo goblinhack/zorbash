@@ -4,7 +4,7 @@ import zorb_all
 
 def on_death_of_my_leader(me, x, y):
     if not my.thing_is_dead_or_dying(me):
-        my.thing_topcon(me, "The zorblin soldier cries out in rage!")
+        my.thing_msg(me, "The zorblin soldier cries out in rage!")
 
 
 def tp_init(name, text_name):

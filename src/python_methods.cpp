@@ -943,7 +943,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_teleport),
     MY_ADD_PYTHON_FUNCTION(thing_teleport_randomly),
     MY_ADD_PYTHON_FUNCTION(thing_temperature),
-    MY_ADD_PYTHON_FUNCTION(thing_topcon),
+    MY_ADD_PYTHON_FUNCTION(thing_msg),
     MY_ADD_PYTHON_FUNCTION(thing_top_owner_id_get),
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag1),
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag10),

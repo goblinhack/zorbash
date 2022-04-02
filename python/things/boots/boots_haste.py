@@ -7,9 +7,9 @@ self = None
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
-        my.thing_topcon(me, "The boots become a bit less squeaky and yet more speedy.")
+        my.thing_msg(me, "The boots become a bit less squeaky and yet more speedy.")
     my.thing_noise_incr(me, -10)
-    my.move_speed_mod_incr(me, 25)
+    my.thing_move_speed_mod_incr(me, 25)
 
 
 def tp_init(name, text_name, short_text_name):
