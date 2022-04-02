@@ -2102,12 +2102,6 @@ int Thing::unused_flag112(void)
   return (tp()->unused_flag112());
 }
 
-int Thing::unused_flag113(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag113());
-}
-
 int Thing::gfx_wobbles_when_hit(void)
 {
   TRACE_NO_INDENT();

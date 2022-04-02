@@ -1008,7 +1008,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag112() && (what == "unused_flag112")) {
     return true;
   }
-  if (unused_flag113() && (what == "unused_flag113")) {
+  if (shove_strength() && (what == "shove_strength")) {
     return true;
   }
   if (gfx_wobbles_when_hit() && (what == "gfx_wobbles_when_hit")) {
@@ -2254,8 +2254,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag112") {
     return &Thing::unused_flag112;
   }
-  if (what == "unused_flag113") {
-    return &Thing::unused_flag113;
+  if (what == "shove_strength") {
+    return &Thing::shove_strength;
   }
   if (what == "gfx_wobbles_when_hit") {
     return &Thing::gfx_wobbles_when_hit;

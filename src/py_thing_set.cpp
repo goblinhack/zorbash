@@ -148,6 +148,10 @@ THING_BODY_SET_INT(thing_move_speed_mod_decr, move_speed_mod_decr)
 THING_BODY_SET_INT(thing_move_speed_mod_incr, move_speed_mod_incr)
 THING_BODY_SET_INT(thing_move_speed_mod_set, move_speed_mod_set)
 
+THING_BODY_SET_INT(thing_shove_strength_mod_decr, shove_strength_mod_decr)
+THING_BODY_SET_INT(thing_shove_strength_mod_incr, shove_strength_mod_incr)
+THING_BODY_SET_INT(thing_shove_strength_mod_set, shove_strength_mod_set)
+
 THING_BODY_SET_INT(thing_jump_distance_mod_decr, jump_distance_mod_decr)
 THING_BODY_SET_INT(thing_jump_distance_mod_incr, jump_distance_mod_incr)
 THING_BODY_SET_INT(thing_jump_distance_mod_set, jump_distance_mod_set)

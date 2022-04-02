@@ -219,6 +219,14 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
+    auto v = tpp->shove_strength_mod();
+    if (unlikely(v)) {
+      shove_strength_mod_set(v);
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
     auto v = tpp->jump_distance_mod();
     if (unlikely(v)) {
       jump_distance_mod_set(v);

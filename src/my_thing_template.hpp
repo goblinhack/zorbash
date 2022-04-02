@@ -497,6 +497,7 @@ private:
   int _stat_luck {};
   int _stat_luck_mod {};
   int _move_speed_mod {};
+  int _shove_strength_mod {};
   int _jump_distance_mod {};
   int _stats02 {};
   int _stats03 {};
@@ -530,7 +531,7 @@ private:
   int _unused_flag110 {};
   int _unused_flag111 {};
   int _unused_flag112 {};
-  int _unused_flag113 {};
+  int _shove_strength {};
   int _gfx_wobbles_when_hit {};
   int _is_snake {};
   int _is_item_targetted {};
@@ -1410,6 +1411,7 @@ public:
   int stat_luck_mod(void) const { return _stat_luck_mod; }
   int stat_luck(void) const { return _stat_luck; }
   int move_speed_mod(void) const { return _move_speed_mod; }
+  int shove_strength_mod(void) const { return _shove_strength_mod; }
   int jump_distance_mod(void) const { return _jump_distance_mod; }
   int stats02(void) const { return _stats02; }
   int stats03(void) const { return _stats03; }
@@ -1441,7 +1443,7 @@ public:
   int unused_flag110(void) const { return _unused_flag110; }
   int unused_flag111(void) const { return _unused_flag111; }
   int unused_flag112(void) const { return _unused_flag112; }
-  int unused_flag113(void) const { return _unused_flag113; }
+  int shove_strength(void) const { return _shove_strength; }
   int unused_flag11(void) const { return _unused_flag11; }
   int unused_flag123(void) const { return _unused_flag123; }
   int unused_flag12(void) const { return _unused_flag12; }
@@ -2037,6 +2039,7 @@ public:
   void stat_luck_mod_set(int v) { _stat_luck_mod = v; }
   void stat_luck_set(int v) { _stat_luck = v; }
   void move_speed_mod_set(int v) { _move_speed_mod = v; }
+  void shove_strength_mod_set(int v) { _shove_strength_mod = v; }
   void jump_distance_mod_set(int v) { _jump_distance_mod = v; }
   void stats02_set(int v) { _stats02 = v; }
   void stats03_set(int v) { _stats03 = v; }
@@ -2086,7 +2089,7 @@ public:
   void unused_flag110_set(int v) { _unused_flag110 = v; }
   void unused_flag111_set(int v) { _unused_flag111 = v; }
   void unused_flag112_set(int v) { _unused_flag112 = v; }
-  void unused_flag113_set(int v) { _unused_flag113 = v; }
+  void shove_strength_set(int v) { _shove_strength = v; }
   void unused_flag11_set(int v) { _unused_flag11 = v; }
   void unused_flag123_set(int v) { _unused_flag123 = v; }
   void unused_flag12_set(int v) { _unused_flag12 = v; }
