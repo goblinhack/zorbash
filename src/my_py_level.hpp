@@ -352,7 +352,7 @@ PyObject *level_is_snake_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_item_targetted_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_additional_on_teleporting_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_teleport_attack_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_distance_teleport_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_teleport_distance_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag11_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_teleport_attack_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_teleport_without_tiring_at(PyObject *obj, PyObject *args, PyObject *keywds);

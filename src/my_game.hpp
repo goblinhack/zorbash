@@ -224,6 +224,7 @@ public:
   void wid_thing_info_add_stat_dex(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_luck(WidPopup *w, Thingp t);
   void wid_thing_info_add_move_speed(WidPopup *w, Thingp t);
+  void wid_thing_info_add_jump_distance(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_str(WidPopup *w, Thingp t);
   void wid_thing_info_clear_popup(void);
   bool wid_thing_info_create_list(const std::vector< Thingp > &ts);

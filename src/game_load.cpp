@@ -94,6 +94,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->gold);
    in >> bits(my.t->health);
    in >> bits(my.t->health_max);
+   in >> bits(my.t->jump_distance_mod);
    in >> bits(my.t->keys);
    in >> bits(my.t->last_failed_jump_at);
    in >> bits(my.t->leader_id);
@@ -104,6 +105,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->mob_id);
    in >> bits(my.t->monst_state);
    in >> bits(my.t->movement_remaining);
+   in >> bits(my.t->move_speed_mod);
    in >> bits(my.t->msg);
    in >> bits(my.t->necrosis);
    in >> bits(my.t->noise);
@@ -127,7 +129,6 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stat_dex_mod);
    in >> bits(my.t->stat_luck);
    in >> bits(my.t->stat_luck_mod);
-   in >> bits(my.t->move_speed_mod);
    in >> bits(my.t->stats02);
    in >> bits(my.t->stats03);
    in >> bits(my.t->stats04);

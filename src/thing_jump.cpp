@@ -45,95 +45,6 @@ void Thing::on_jump(void)
   }
 }
 
-float Thing::distance_jump_with_modifiers_get(void)
-{
-  TRACE_NO_INDENT();
-  auto d = (float) distance_jump_get() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
-
-  if (stamina_get() < stamina_max() / 2) {
-    d /= 2;
-  }
-
-  if (stamina_get() < stamina_max() / 4) {
-    d /= 2;
-  }
-
-  return d;
-}
-
-float Thing::distance_jump_max_get(void)
-{
-  TRACE_NO_INDENT();
-  auto d = (float) distance_jump_get();
-  return d;
-}
-
-int Thing::distance_jump_get(void)
-{
-  TRACE_NO_INDENT();
-  if (! maybe_infop()) {
-    return 0;
-  }
-
-  auto dist = distance_jump();
-  // con("NOISE %d", dist);
-
-  FOR_ALL_EQUIP(e)
-  {
-    auto it = equip_get(e);
-    if (it) {
-      dist += it->distance_jump_get();
-      // it->con("NOISE %d", dist);
-    }
-  }
-
-  if (maybe_itemsp()) {
-    FOR_ALL_CARRYING(id)
-    {
-      auto it = level->thing_find(id);
-      if (it) {
-        //
-        // Don't count boots for example twice
-        //
-        if (is_equipped(it)) {
-          continue;
-        }
-        dist += it->distance_jump_get();
-        // it->con("NOISE %d", dist);
-      }
-    }
-
-    FOR_ALL_BUFFS_FOR(this, id)
-    {
-      auto it = level->thing_find(id);
-      if (it) {
-        dist += it->distance_jump_get();
-        // it->con("NOISE %d", dist);
-      }
-    }
-
-    FOR_ALL_DEBUFFS_FOR(this, id)
-    {
-      auto it = level->thing_find(id);
-      if (it) {
-        dist += it->distance_jump_get();
-        // it->con("NOISE %d", dist);
-      }
-    }
-
-    FOR_ALL_SKILLS_FOR(this, id)
-    {
-      auto it = level->thing_find(id);
-      if (it) {
-        dist += it->distance_jump_get();
-        // it->con("NOISE %d", dist);
-      }
-    }
-  }
-
-  return dist;
-}
-
 bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 {
   TRACE_NO_INDENT();
@@ -293,7 +204,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // Add some random delta for fun and some for diagonals
   //
-  float d    = distance_jump_with_modifiers_get();
+  float d    = jump_distance_current();
   float dist = distance(curr_at, to);
 
   if (dist > d) {
@@ -544,7 +455,7 @@ bool Thing::try_to_jump(void)
 
   idle_count_set(0);
 
-  float d     = distance_jump_with_modifiers_get();
+  float d     = jump_distance_current();
   int   tries = d * d;
 
   while (tries-- > 0) {
@@ -569,7 +480,7 @@ bool Thing::try_to_jump_towards_player(void)
 
   idle_count_set(0);
 
-  float d     = distance_jump_with_modifiers_get();
+  float d     = jump_distance_current();
   int   tries = d * d;
 
   auto player_at = level->player->curr_at;
@@ -608,7 +519,7 @@ bool Thing::try_to_jump_away_from_player(void)
     return false;
   }
 
-  float d     = distance_jump_with_modifiers_get();
+  float d     = jump_distance_current();
   int   tries = d * d;
 
   auto player_at = level->player->curr_at;
@@ -640,7 +551,7 @@ bool Thing::try_harder_to_jump(void)
     return false;
   }
 
-  float d     = distance_jump_with_modifiers_get();
+  float d     = jump_distance_current();
   int   tries = 100;
 
   while (tries-- > 0) {

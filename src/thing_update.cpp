@@ -219,6 +219,14 @@ void Thing::update(void)
 
   {
     TRACE_NO_INDENT();
+    auto v = tpp->jump_distance_mod();
+    if (unlikely(v)) {
+      jump_distance_mod_set(v);
+    }
+  }
+
+  {
+    TRACE_NO_INDENT();
     auto v = tpp->stat_att_mod();
     if (unlikely(v)) {
       stat_att_mod_set(v);
