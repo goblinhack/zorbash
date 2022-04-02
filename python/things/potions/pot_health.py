@@ -31,17 +31,17 @@ def on_use(owner, item, target, x, y):
     if did_something:
         my.level_spawn_using_items_radius_range(owner, item, target, "pot_health_effect")
         if my.thing_is_player(owner):
-            my.thing_topcon(owner, "%%fg=pink$You glow with renewed health.%%fg=reset$")
+            my.thing_msg(owner, "%%fg=pink$You glow with renewed health.%%fg=reset$")
     else:
         if my.thing_is_player(owner):
-            my.thing_topcon(owner, "Hm. That potion didn't seem to do anything.")
+            my.thing_msg(owner, "Hm. That potion didn't seem to do anything.")
 
 
 def explode(me, x, y):
     if my.thing_is_dead(me):
         return
 
-    my.thing_topcon(me, "The potion of health explodes.")
+    my.thing_msg(me, "The potion of health explodes.")
     my.level_spawn_at_thing(me, "explosion_fire")
     my.level_spawn_fire_around_thing(me, "fire")
     my.thing_dead(me, "exploded")
@@ -62,7 +62,7 @@ def on_fall(me, x, y):
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
-        my.thing_topcon(me, "The potion bubbles.")
+        my.thing_msg(me, "The potion bubbles.")
     enchant = my.thing_enchant_get(me)
     global self
     if enchant == 0:

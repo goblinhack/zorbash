@@ -4,7 +4,7 @@ import zorb_all
 
 def on_death_of_a_follower(me, leader, x, y):
     if not my.thing_is_dead_or_dying(me):
-        my.thing_topcon(me, "The zorblin pirate cries out: Aaar!")
+        my.thing_msg(me, "The zorblin pirate cries out: Aaar!")
 
 
 def on_born(me, x, y):

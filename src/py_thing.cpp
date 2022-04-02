@@ -763,7 +763,7 @@ PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_NONE;
 }
 
-PyObject *thing_topcon(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   uint32_t     owner_id = 0;
@@ -791,7 +791,7 @@ PyObject *thing_topcon(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  TOPCON("%s", msg);
+  owner->msg("%s", msg);
 
   Py_RETURN_NONE;
 }

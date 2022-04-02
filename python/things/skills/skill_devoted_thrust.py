@@ -13,12 +13,12 @@ def on_use(owner, skill, target, x, y):
 
     if bonus > 1:
         if my.thing_is_player(owner):
-            my.thing_topcon(owner, f"%%fg=yellow$You strike with a mighty thrust of {bonus}.%%fg=reset$")
+            my.thing_msg(owner, f"%%fg=yellow$You strike with a mighty thrust of {bonus}.%%fg=reset$")
         my.thing_damage_current_incr(owner, bonus)
         my.thing_stamina_decr(owner, bonus)
     else:
         if my.thing_is_player(owner):
-            my.thing_topcon(owner, "You run out of devotion.")
+            my.thing_msg(owner, "You run out of devotion.")
         my.thing_skill_deactivate(owner, skill)
 
 

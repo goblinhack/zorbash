@@ -487,7 +487,7 @@ PyObject *thing_stuck_count_incr(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_temperature(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_topcon(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag100(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag101(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -6,13 +6,13 @@ self = None
 
 def on_owner_add(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_topcon(me, "You feel at one with the water.")
+        my.thing_msg(me, "You feel at one with the water.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_remove(me, owner, x, y):
     if my.thing_is_player(owner):
-        my.thing_topcon(me, "You return to your normal level of stickiness.")
+        my.thing_msg(me, "You return to your normal level of stickiness.")
 
 
 def tp_init(name, text_name):

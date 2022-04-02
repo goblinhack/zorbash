@@ -20,7 +20,7 @@ def explode(me, x, y):
         return
 
     my.thing_dead(me, "exploded")
-    my.thing_topcon(me, "The dungeon cleaner erupts in flaming goo!")
+    my.thing_msg(me, "The dungeon cleaner erupts in flaming goo!")
     my.level_spawn_at_thing(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")
     my.level_spawn_at_thing(me, "fire")
