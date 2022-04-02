@@ -55,6 +55,8 @@ std::initializer_list< std::string > tps = {
     "boots_teleport_emer_carry",
     "boots_teleport",
     "boots_teleport_carry",
+    "boots_haste",
+    "boots_haste_carry",
     "brazier",
     "bridge_lr",
     "bridge_ud",
