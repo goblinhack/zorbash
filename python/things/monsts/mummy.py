@@ -103,6 +103,7 @@ def tp_init(name, text_name):
     my.stat_dex(self, 10)
     my.stat_luck(self, 10)
     my.stat_str(self, 16)
+    my.shove_strength_mod(self, 1)
     my.text_a_or_an(self, "a")
     my.text_description(self, "A staggering corpse, covered in tissue paper.")
     my.text_hits(self, "claws")

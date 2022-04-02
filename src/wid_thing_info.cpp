@@ -1447,12 +1447,12 @@ void Game::wid_thing_info_add_shove_strength(WidPopup *w, Thingp t)
   if (t->is_alive_monst() || t->is_player()) {
     auto shove_strength = t->shove_strength_total();
     if (shove_strength) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump strength            %3d", shove_strength);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength bonus     %3d", shove_strength);
       w->log(tmp);
     }
   } else if (t->shove_strength_mod()) {
     auto shove_strength = t->shove_strength_total();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump strength modifier   %3d", shove_strength);
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength modifier  %3d", shove_strength);
     w->log(tmp);
   }
 }
@@ -1464,8 +1464,10 @@ void Game::wid_thing_info_add_jump_distance(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto dist = t->jump_distance_total();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance            %3d", dist);
-    w->log(tmp);
+    if (dist) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance            %3d", dist);
+      w->log(tmp);
+    }
   } else if (t->jump_distance_mod()) {
     auto dist = t->jump_distance_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance modifier   %3d", dist);
