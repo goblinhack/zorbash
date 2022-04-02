@@ -131,7 +131,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
 
     dbg("Shove: It strength %d vs me %d", its_strength, stat_str());
 
-    if (! d20roll(stat_str(), its_strength)) {
+    if (! d20roll(stat_str() + shove_strength_total(), its_strength)) {
       if (is_player()) {
         if (it->is_monst()) {
           if (it->is_able_to_shove()) {

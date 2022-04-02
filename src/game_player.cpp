@@ -170,6 +170,7 @@ void Game::place_player(void)
         // level->thing_new("boots_teleport", point(x, y - 2));
         // level->thing_new("barrel", point(x + 1, y + 1));
         // level->thing_new("cleaner", point(x, y + 1));
+        level->thing_new("mummy", point(x, y + 1));
         // level->thing_new("shield_woodon", point(x, y - 2));
         // level->thing_new("fire", point(x, y - 2));
         // level->thing_new("food_frog", point(x, y - 2));
