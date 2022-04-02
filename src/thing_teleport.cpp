@@ -46,10 +46,10 @@ void Thing::on_teleport(void)
   }
 }
 
-float Thing::distance_teleport_with_modifiers_get(void)
+float Thing::teleport_distance_with_modifiers_get(void)
 {
   TRACE_NO_INDENT();
-  auto d = (float) distance_teleport_get() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
+  auto d = (float) teleport_distance_get() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
   if (stamina_get() < stamina_max() / 2) {
     d /= 2;
@@ -62,21 +62,21 @@ float Thing::distance_teleport_with_modifiers_get(void)
   return d;
 }
 
-int Thing::distance_teleport_get(void)
+int Thing::teleport_distance_get(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_infop()) {
     return 0;
   }
 
-  auto dist = distance_teleport();
+  auto dist = teleport_distance();
   // con("TELEPORT %d", dist);
 
   FOR_ALL_EQUIP(e)
   {
     auto it = equip_get(e);
     if (it) {
-      dist += it->distance_teleport_get();
+      dist += it->teleport_distance_get();
       // it->con("TELEPORT %d", dist);
     }
   }
@@ -92,7 +92,7 @@ int Thing::distance_teleport_get(void)
         if (is_equipped(it)) {
           continue;
         }
-        dist += it->distance_teleport_get();
+        dist += it->teleport_distance_get();
         // it->con("TELEPORT %d", dist);
       }
     }
@@ -101,7 +101,7 @@ int Thing::distance_teleport_get(void)
     {
       auto it = level->thing_find(id);
       if (it) {
-        dist += it->distance_teleport_get();
+        dist += it->teleport_distance_get();
         // it->con("TELEPORT %d", dist);
       }
     }
@@ -110,7 +110,7 @@ int Thing::distance_teleport_get(void)
     {
       auto it = level->thing_find(id);
       if (it) {
-        dist += it->distance_teleport_get();
+        dist += it->teleport_distance_get();
         // it->con("TELEPORT %d", dist);
       }
     }
@@ -119,7 +119,7 @@ int Thing::distance_teleport_get(void)
     {
       auto it = level->thing_find(id);
       if (it) {
-        dist += it->distance_teleport_get();
+        dist += it->teleport_distance_get();
         // it->con("TELEPORT %d", dist);
       }
     }
@@ -128,10 +128,10 @@ int Thing::distance_teleport_get(void)
   return dist;
 }
 
-float Thing::distance_teleport_max_get(void)
+float Thing::teleport_distance_max_get(void)
 {
   TRACE_NO_INDENT();
-  auto d = (float) distance_teleport_get();
+  auto d = (float) teleport_distance_get();
   return d;
 }
 
@@ -273,7 +273,7 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
   //
   // Add some random delta for fun and some for diagonals
   //
-  float d    = distance_teleport_with_modifiers_get();
+  float d    = teleport_distance_with_modifiers_get();
   float dist = distance(curr_at, to);
 
   if (dist > d) {
@@ -406,7 +406,7 @@ bool Thing::teleport_randomly(void)
 
   idle_count_set(0);
 
-  float d     = distance_teleport_with_modifiers_get();
+  float d     = teleport_distance_with_modifiers_get();
   int   tries = d * d;
 
   while (tries-- > 0) {
@@ -431,7 +431,7 @@ bool Thing::teleport_randomly_towards_player(void)
 
   idle_count_set(0);
 
-  float d     = distance_teleport_with_modifiers_get();
+  float d     = teleport_distance_with_modifiers_get();
   int   tries = d * d;
 
   auto player_at = level->player->curr_at;
@@ -470,7 +470,7 @@ bool Thing::teleport_randomly_away_from_player(void)
     return false;
   }
 
-  float d     = distance_teleport_with_modifiers_get();
+  float d     = teleport_distance_with_modifiers_get();
   int   tries = d * d;
 
   auto player_at = level->player->curr_at;
@@ -502,7 +502,7 @@ bool Thing::try_harder_to_teleport(void)
     return false;
   }
 
-  float d     = distance_teleport_with_modifiers_get();
+  float d     = teleport_distance_with_modifiers_get();
   int   tries = 100;
 
   while (tries-- > 0) {

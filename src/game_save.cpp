@@ -71,6 +71,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->gold);
   out << bits(my.t->health);
   out << bits(my.t->health_max);
+  out << bits(my.t->jump_distance_mod);
   out << bits(my.t->keys);
   out << bits(my.t->last_failed_jump_at);
   out << bits(my.t->leader_id);
@@ -81,6 +82,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->mob_id);
   out << bits(my.t->monst_state);
   out << bits(my.t->movement_remaining);
+  out << bits(my.t->move_speed_mod);
   out << bits(my.t->msg);
   out << bits(my.t->necrosis);
   out << bits(my.t->noise);
@@ -104,7 +106,6 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->stat_dex_mod);
   out << bits(my.t->stat_luck);
   out << bits(my.t->stat_luck_mod);
-  out << bits(my.t->move_speed_mod);
   out << bits(my.t->stats02);
   out << bits(my.t->stats03);
   out << bits(my.t->stats04);

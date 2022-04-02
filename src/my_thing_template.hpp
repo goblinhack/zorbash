@@ -135,12 +135,12 @@ private:
   int _damage_received_doubled_from_poison {};
   int _damage_received_doubled_from_water {};
   int _distance_avoid {};
-  int _distance_jump {};
+  int _jump_distance {};
   int _distance_leader_max {};
   int _distance_minion_vision_shared {};
   int _distance_mob_max {};
   int _distance_recruitment_max {};
-  int _distance_teleport {};
+  int _teleport_distance {};
   int _distance_throw {};
   int _distance_vision {};
   int _enchant_level {};
@@ -497,6 +497,7 @@ private:
   int _stat_luck {};
   int _stat_luck_mod {};
   int _move_speed_mod {};
+  int _jump_distance_mod {};
   int _stats02 {};
   int _stats03 {};
   int _stats04 {};
@@ -1042,12 +1043,12 @@ public:
   int damage_received_doubled_from_poison(void) const { return _damage_received_doubled_from_poison; }
   int damage_received_doubled_from_water(void) const { return _damage_received_doubled_from_water; }
   int distance_avoid(void) const { return _distance_avoid; }
-  int distance_jump(void) const { return _distance_jump; }
+  int jump_distance(void) const { return _jump_distance; }
   int distance_leader_max(void) const { return _distance_leader_max; }
   int distance_minion_vision_shared(void) const { return _distance_minion_vision_shared; }
   int distance_mob_max(void) const { return _distance_mob_max; }
   int distance_recruitment_max(void) const { return _distance_recruitment_max; }
-  int distance_teleport(void) const { return _distance_teleport; }
+  int teleport_distance(void) const { return _teleport_distance; }
   int distance_throw(void) const { return _distance_throw; }
   int distance_vision(void) const { return _distance_vision; }
   int enchant_level(void) const { return _enchant_level; }
@@ -1409,6 +1410,7 @@ public:
   int stat_luck_mod(void) const { return _stat_luck_mod; }
   int stat_luck(void) const { return _stat_luck; }
   int move_speed_mod(void) const { return _move_speed_mod; }
+  int jump_distance_mod(void) const { return _jump_distance_mod; }
   int stats02(void) const { return _stats02; }
   int stats03(void) const { return _stats03; }
   int stats04(void) const { return _stats04; }
@@ -1595,12 +1597,12 @@ public:
   void damage_received_doubled_from_poison_set(int v) { _damage_received_doubled_from_poison = v; }
   void damage_received_doubled_from_water_set(int v) { _damage_received_doubled_from_water = v; }
   void distance_avoid_set(int v) { _distance_avoid = v; }
-  void distance_jump_set(int v) { _distance_jump = v; }
+  void jump_distance_set(int v) { _jump_distance = v; }
   void distance_leader_max_set(int v) { _distance_leader_max = v; }
   void distance_minion_vision_shared_set(int v) { _distance_minion_vision_shared = v; }
   void distance_mob_max_set(int v) { _distance_mob_max = v; }
   void distance_recruitment_max_set(int v) { _distance_recruitment_max = v; }
-  void distance_teleport_set(int v) { _distance_teleport = v; }
+  void teleport_distance_set(int v) { _teleport_distance = v; }
   void distance_throw_set(int v) { _distance_throw = v; }
   void distance_vision_set(int v) { _distance_vision = v; }
   void enchant_level_set(int v) { _enchant_level = v; }
@@ -2035,6 +2037,7 @@ public:
   void stat_luck_mod_set(int v) { _stat_luck_mod = v; }
   void stat_luck_set(int v) { _stat_luck = v; }
   void move_speed_mod_set(int v) { _move_speed_mod = v; }
+  void jump_distance_mod_set(int v) { _jump_distance_mod = v; }
   void stats02_set(int v) { _stats02 = v; }
   void stats03_set(int v) { _stats03 = v; }
   void stats04_set(int v) { _stats04 = v; }

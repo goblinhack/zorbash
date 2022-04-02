@@ -1136,12 +1136,6 @@ int Thing::is_able_to_jump_onto_chance_d1000(void)
   return (tp()->is_able_to_jump_onto_chance_d1000());
 }
 
-int Thing::distance_jump(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->distance_jump());
-}
-
 int Thing::is_able_to_jump_on_low_hp_chance_d1000(void)
 {
   TRACE_NO_INDENT();
@@ -2144,10 +2138,10 @@ int Thing::is_able_to_teleport_attack_chance_d1000(void)
   return (tp()->is_able_to_teleport_attack_chance_d1000());
 }
 
-int Thing::distance_teleport(void)
+int Thing::teleport_distance(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->distance_teleport());
+  return (tp()->teleport_distance());
 }
 
 int Thing::is_able_to_teleport_attack(void)

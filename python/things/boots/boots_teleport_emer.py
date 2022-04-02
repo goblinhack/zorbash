@@ -21,7 +21,6 @@ def on_use(owner, item, target, x, y):
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
-    my.distance_teleport(self, 20)
     my.equip_carry_anim(self, "boots_teleport_emer_carry")
     my.gfx_short_shadow_caster(self, True)
     my.gold_value_dice(self, "250")
@@ -54,6 +53,7 @@ def tp_init(name, text_name, short_text_name):
     my.on_use_do(self, "me.on_use()")
     my.rarity(self, my.RARITY_RARE)
     my.stat_dex_mod(self, -1)
+    my.teleport_distance(self, 20)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Boots of emergency teleport.")
     my.text_enchant(self, "-10 decibels")

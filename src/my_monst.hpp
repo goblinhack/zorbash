@@ -123,11 +123,13 @@ public:
   int gold                = {};
   int health              = {};
   int health_max          = {};
+  int jump_distance_mod   = {};
   int keys                = {};
   int lifespan            = {}; // How many things this thing owns.
   int light_dist          = {}; // Current strength, including torches
   int monst_state         = {};
   int movement_remaining  = {};
+  int move_speed_mod      = {};
   int necrosis            = {};
   int noise               = {};
   int physical_training   = {};
@@ -146,7 +148,6 @@ public:
   int stat_dex_mod        = {};
   int stat_luck           = {};
   int stat_luck_mod       = {};
-  int move_speed_mod = {};
   int stats02             = {};
   int stats03             = {};
   int stats04             = {};

@@ -52,7 +52,7 @@ void Game::place_player(void)
         level->thing_new("descend_sewer1", point(x + 4, y + 4));
       }
       if (1) {
-        auto w = level->thing_new("boots_haste", point(x, y - 2));
+        auto w = level->thing_new("boots_jumping", point(x, y - 2));
         t->carry(w);
         t->enchant_without_stone(w);
       }

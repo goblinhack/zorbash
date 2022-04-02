@@ -427,7 +427,7 @@ do
       is_item_targetted_set \
       noise_additional_on_teleporting_set \
       is_able_to_jump_attack_chance_d1000_set \
-      distance_teleport_set \
+      teleport_distance_set \
       is_able_to_teleport_attack_set \
       is_able_to_teleport_without_tiring_set \
       is_able_to_teleport_escape_set \

@@ -25,7 +25,6 @@ def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
     my.charge_count(self, 100)
-    my.distance_teleport(self, 20)
     my.equip_carry_anim(self, "boots_teleport_carry")
     my.gfx_short_shadow_caster(self, True)
     my.gold_value_dice(self, "750")
@@ -62,6 +61,7 @@ def tp_init(name, text_name, short_text_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stamina_drain_on_using(self, 100)
     my.stat_dex_mod(self, -1)
+    my.teleport_distance(self, 20)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Boots of teleport.")
     my.text_enchant(self, "-10 decibels")

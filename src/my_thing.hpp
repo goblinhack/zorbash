@@ -778,10 +778,10 @@ public:
   float health_pct(void);
   float lunge_curr(void);
   float wobble_curr(void);
-  float distance_jump_max_get(void);
-  float distance_jump_with_modifiers_get(void);
-  float distance_teleport_max_get(void);
-  float distance_teleport_with_modifiers_get(void);
+  float jump_distance_max_get(void);
+  float jump_distance_current(void);
+  float teleport_distance_max_get(void);
+  float teleport_distance_with_modifiers_get(void);
   float update_wobble(void);
 
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool natural_attack, bool poison, bool necrosis,
@@ -933,13 +933,9 @@ public:
   int danger_initial_level(Thingp);
   int danger_initial_level(void);
   int defence(void);
-  int distance_jump_get(void);
-  int distance_jump(void);
   int distance_leader_max(void);
   int distance_minion_vision_shared(void);
   int distance_recruitment_max(void);
-  int distance_teleport_get(void);
-  int distance_teleport(void);
   int distance_throw_decr(int);
   int distance_throw_decr(void);
   int distance_throw_incr(int);
@@ -1331,6 +1327,14 @@ public:
   int item_height(void);
   int item_slot_charge_count(const uint32_t slot);
   int item_width(void);
+  int jump_distance_mod_decr(int);
+  int jump_distance_mod_decr(void);
+  int jump_distance_mod_incr(int);
+  int jump_distance_mod_incr(void);
+  int jump_distance_mod_set(int);
+  int jump_distance_mod(void);
+  int jump_distance_total(void);
+  int jump_distance(void);
   int keys_decr(int);
   int keys_decr(void);
   int keys_incr(int);
@@ -1366,6 +1370,13 @@ public:
   int minion_count(void);
   int minion_limit(void);
   int monst_size(void);
+  int move_speed_mod_decr(int);
+  int move_speed_mod_decr(void);
+  int move_speed_mod_incr(int);
+  int move_speed_mod_incr(void);
+  int move_speed_mod_set(int);
+  int move_speed_mod(void);
+  int move_speed_total(void);
   int move_speed(void);
   int necrotized_amount_decr(int);
   int necrotized_amount_decr(void);
@@ -1510,8 +1521,6 @@ public:
   int stat_att_mod_incr(void);
   int stat_att_mod_set(int);
   int stat_att_mod(void);
-  int move_speed_mod(void);
-  int move_speed_total(void);
   int stat_att_penalties_total(void);
   int stat_att_penalty_when_idle_max(void);
   int stat_att_penalty_when_idle(void);
@@ -1581,11 +1590,6 @@ public:
   int stat_luck_set(int);
   int stat_luck_total(void);
   int stat_luck(void);
-  int move_speed_mod_decr(int);
-  int move_speed_mod_decr(void);
-  int move_speed_mod_incr(int);
-  int move_speed_mod_incr(void);
-  int move_speed_mod_set(int);
   int stats02_decr(int);
   int stats02_decr(void);
   int stats02_incr(int);
@@ -1648,6 +1652,8 @@ public:
   int stuck_count_set(int);
   int stuck_count(void);
   int submerged_offset_get(void);
+  int teleport_distance_get(void);
+  int teleport_distance(void);
   int temperature_decr(int);
   int temperature_decr(void);
   int temperature_get(void);

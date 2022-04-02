@@ -12,7 +12,7 @@
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!-- - invisibility wand / and crystals walls (or chest) that reflect, so can use on yourself or ally                                             -->
-<!-- - need allys                                                                                                                                 -->
+<!-- - need allies                                                                                                                                -->
 <!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - slime can grow into megaslime if satiated                                                                                                  -->
@@ -21,7 +21,6 @@
 <!-- - bloat                                                                                                                                      -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - boots of shoving / steadfastness                                                                                                           -->
-<!-- - boots of jumping                                                                                                                           -->
 <!-- - boots of hiking / const                                                                                                                    -->
 <!-- - potion of paralysis should paralyse attackers too, so it is useful / vampire?                                                              -->
 <!-- - cursed weapon with bad luck / horseshoe / witches hat?                                                                                     -->
