@@ -11,7 +11,6 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - boots of haste                                                                                                                             -->
 <!-- - invisibility wand / and crystals walls (or chest) that reflect, so can use on yourself or ally                                             -->
 <!-- - need allys                                                                                                                                 -->
 <!-- - crystal chest needs crystal key                                                                                                            -->

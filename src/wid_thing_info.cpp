@@ -1428,12 +1428,11 @@ void Game::wid_thing_info_add_move_speed(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto speed = t->move_speed_total();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed             %2d%3s", speed,
-             stat_to_bonus_slash_str(speed).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed               %3d", speed);
     w->log(tmp);
   } else if (t->move_speed_mod()) {
     auto speed = t->move_speed_total();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed modifier      %3s", modifier_to_string(speed).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed modifier      %3d", speed);
     w->log(tmp);
   }
 }
