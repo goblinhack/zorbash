@@ -1480,6 +1480,14 @@ public:
   int rarity(void);
   int resurrect_when(void);
   int score(void);
+  int shove_strength_mod_decr(int);
+  int shove_strength_mod_decr(void);
+  int shove_strength_mod_incr(int);
+  int shove_strength_mod_incr(void);
+  int shove_strength_mod_set(int);
+  int shove_strength_mod(void);
+  int shove_strength_total(void);
+  int shove_strength(void);
   int skill_enchant_count(const uint32_t slot);
   int skillstone_count(void);
   int sleep_count_decr(int);
@@ -1682,7 +1690,6 @@ public:
   int unused_flag110(void);
   int unused_flag111(void);
   int unused_flag112(void);
-  int unused_flag113(void);
   int unused_flag11(void);
   int unused_flag123(void);
   int unused_flag12(void);

@@ -106,6 +106,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->monst_state);
    in >> bits(my.t->movement_remaining);
    in >> bits(my.t->move_speed_mod);
+   in >> bits(my.t->shove_strength_mod);
    in >> bits(my.t->msg);
    in >> bits(my.t->necrosis);
    in >> bits(my.t->noise);

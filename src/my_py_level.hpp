@@ -346,7 +346,7 @@ PyObject *level_unused_flag10_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag110_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag111_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag112_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag113_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_shove_strength_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_wobbles_when_hit_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_snake_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_item_targetted_at(PyObject *obj, PyObject *args, PyObject *keywds);

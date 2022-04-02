@@ -169,6 +169,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_stat_dex(wid_popup_window, t);
   wid_thing_info_add_stat_luck(wid_popup_window, t);
   wid_thing_info_add_move_speed(wid_popup_window, t);
+  wid_thing_info_add_shove_strength(wid_popup_window, t);
   wid_thing_info_add_jump_distance(wid_popup_window, t);
   if (t->is_alive_monst() || t->is_player()) {
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
@@ -1434,6 +1435,24 @@ void Game::wid_thing_info_add_move_speed(WidPopup *w, Thingp t)
   } else if (t->move_speed_mod()) {
     auto speed = t->move_speed_total();
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed modifier      %3d", speed);
+    w->log(tmp);
+  }
+}
+
+void Game::wid_thing_info_add_shove_strength(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+
+  if (t->is_alive_monst() || t->is_player()) {
+    auto shove_strength = t->shove_strength_total();
+    if (shove_strength) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump strength            %3d", shove_strength);
+      w->log(tmp);
+    }
+  } else if (t->shove_strength_mod()) {
+    auto shove_strength = t->shove_strength_total();
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump strength modifier   %3d", shove_strength);
     w->log(tmp);
   }
 }
