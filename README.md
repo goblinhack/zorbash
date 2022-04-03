@@ -223,7 +223,7 @@
 Zorbash
 -------
 
-Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals and confront Zorbash to win.
+Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
 
 This is work in progress. My plan is to release a minimal viable game this year; 2022. Likely linux
 only with windows to follow later.
