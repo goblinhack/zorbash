@@ -529,7 +529,7 @@ private:
   int _unused_flag109 {};
   int _unused_flag11 {};
   int _unused_flag110 {};
-  int _unused_flag111 {};
+  int _noise_on_moving {};
   int _is_tireless {};
   int _shove_strength {};
   int _gfx_wobbles_when_hit {};
@@ -1441,7 +1441,7 @@ public:
   int unused_flag109(void) const { return _unused_flag109; }
   int unused_flag10(void) const { return _unused_flag10; }
   int unused_flag110(void) const { return _unused_flag110; }
-  int unused_flag111(void) const { return _unused_flag111; }
+  int noise_on_moving(void) const { return _noise_on_moving; }
   int is_tireless(void) const { return _is_tireless; }
   int shove_strength(void) const { return _shove_strength; }
   int unused_flag11(void) const { return _unused_flag11; }
@@ -2087,7 +2087,7 @@ public:
   void unused_flag109_set(int v) { _unused_flag109 = v; }
   void unused_flag10_set(int v) { _unused_flag10 = v; }
   void unused_flag110_set(int v) { _unused_flag110 = v; }
-  void unused_flag111_set(int v) { _unused_flag111 = v; }
+  void noise_on_moving_set(int v) { _noise_on_moving = v; }
   void is_tireless_set(int v) { _is_tireless = v; }
   void shove_strength_set(int v) { _shove_strength = v; }
   void unused_flag11_set(int v) { _unused_flag11 = v; }

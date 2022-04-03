@@ -80,7 +80,9 @@ int Thing::noise_total(void)
     }
   }
 
-  decibels -= stat_dex_mod() * 10;
+  if (is_player() || is_monst()) {
+    decibels -= stat_dex_mod() * 10;
+  }
 
   return decibels;
 }
@@ -148,7 +150,9 @@ int Thing::noise_on_jumping(void)
     }
   }
 
-  decibels -= stat_dex_mod() * 10;
+  if (is_player() || is_monst()) {
+    decibels -= stat_dex_mod() * 10;
+  }
 
   return decibels;
 }
@@ -216,7 +220,9 @@ int Thing::noise_on_teleporting(void)
     }
   }
 
-  decibels -= stat_dex_mod() * 10;
+  if (is_player() || is_monst()) {
+    decibels -= stat_dex_mod() * 10;
+  }
 
   return decibels;
 }

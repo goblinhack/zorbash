@@ -1002,7 +1002,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag110() && (what == "unused_flag110")) {
     return true;
   }
-  if (unused_flag111() && (what == "unused_flag111")) {
+  if (noise_on_moving() && (what == "noise_on_moving")) {
     return true;
   }
   if (is_tireless() && (what == "is_tireless")) {
@@ -2248,8 +2248,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag110") {
     return &Thing::unused_flag110;
   }
-  if (what == "unused_flag111") {
-    return &Thing::unused_flag111;
+  if (what == "noise_on_moving") {
+    return &Thing::noise_on_moving;
   }
   if (what == "is_tireless") {
     return &Thing::is_tireless;

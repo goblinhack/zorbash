@@ -114,7 +114,7 @@ def tp_init(name, text_name):
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 10)
-    my.noise_on_dropping(self, 5)
+    my.noise_on_moving(self, 5)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "zorb_all.on_death()")
     my.on_death_drop_all_items(self, True)

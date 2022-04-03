@@ -1688,7 +1688,7 @@ public:
   int unused_flag109(void);
   int unused_flag10(void);
   int unused_flag110(void);
-  int unused_flag111(void);
+  int noise_on_moving(void);
   int is_tireless(void);
   int unused_flag11(void);
   int unused_flag123(void);

@@ -2089,10 +2089,10 @@ int Thing::unused_flag110(void)
   return (tp()->unused_flag110());
 }
 
-int Thing::unused_flag111(void)
+int Thing::noise_on_moving(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag111());
+  return (tp()->noise_on_moving());
 }
 
 int Thing::is_tireless(void)

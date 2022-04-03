@@ -56,8 +56,8 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (0) {
-        auto w = level->thing_new("gauntlets_shoving", point(x, y - 2));
+      if (1) {
+        auto w = level->thing_new("gauntlets_war", point(x, y - 2));
         t->carry(w);
         t->enchant_without_stone(w);
       }

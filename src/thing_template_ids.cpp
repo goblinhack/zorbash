@@ -220,6 +220,8 @@ std::initializer_list< std::string > tps = {
     "gargoyle_moving",
     "gargoyle_podium",
     "gargoyle_static",
+    "gauntlets_war",
+    "gauntlets_war_carry",
     "gauntlets_shoving",
     "gauntlets_shoving_carry",
     "gem_amber",

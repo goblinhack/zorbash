@@ -508,7 +508,7 @@ PyObject *thing_unused_flag108(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag109(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag110(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag111(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_noise_on_moving(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tireless(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_shove_strength(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
