@@ -181,7 +181,7 @@ void Game::place_player(void)
         // level->thing_new("food_frog", point(x, y - 2));
         // level->thing_new("cleaner", point(x + 1, y + 3));
         // level->thing_new("thunderstone", point(x, y - 2));
-        // level->thing_new("map_treasure", point(x, y - 2));
+        level->thing_new("map_treasure", point(x, y - 2));
         // level->thing_new("map_beast", point(x, y - 2));
         // level->thing_new("zorb_eldster", point(x + 5, y));
         // level->thing_new("key", point(x + 5, y));
@@ -196,6 +196,7 @@ void Game::place_player(void)
         // level->thing_new("teletoad", point(x + 2, y + 2));
         level->assign_leaders_and_followers();
       }
+      level->thing_new("map_treasure", point(x, y - 2));
 
       LOG("INF: Placed player");
 
