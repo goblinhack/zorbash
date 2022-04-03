@@ -421,7 +421,7 @@ do
       unused_flag109_set \
       unused_flag110_set \
       unused_flag111_set \
-      unused_flag112_set \
+      is_tireless_set \
       shove_strength_set \
       gfx_wobbles_when_hit_set \
       is_snake_set \

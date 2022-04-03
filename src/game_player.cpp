@@ -51,7 +51,7 @@ void Game::place_player(void)
         level->thing_new("wall_dungeon.1", point(x, y + 2));
         level->thing_new("descend_sewer1", point(x + 4, y + 4));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("boots_jumping", point(x, y - 2));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -62,7 +62,7 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (1) {
-        auto w = level->thing_new("amulet_jumping", point(x, y - 2));
+        auto w = level->thing_new("amulet_endurance", point(x, y - 2));
         t->carry(w);
       }
       if (0) {

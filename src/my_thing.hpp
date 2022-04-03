@@ -1689,7 +1689,7 @@ public:
   int unused_flag10(void);
   int unused_flag110(void);
   int unused_flag111(void);
-  int unused_flag112(void);
+  int is_tireless(void);
   int unused_flag11(void);
   int unused_flag123(void);
   int unused_flag12(void);
