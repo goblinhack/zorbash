@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- clicking on a treasure chest can accidentally collect an item from wid collect                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -12,19 +11,18 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - invisibility wand / and crystals walls (or chest) that reflect, so can use on yourself or ally                                             -->
-<!-- - need allies                                                                                                                                -->
-<!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - chaos bell of summoning                                                                                                                    -->
-<!-- - slime can grow into megaslime if satiated                                                                                                  -->
+<!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - teleport block                                                                                                                             -->
+<!-- - invisibility wand / and crystals walls (or chest) that reflect, so can use on yourself or ally                                             -->
+<!-- - slime can grow into megaslime if satiated                                                                                                  -->
 <!-- - bloat                                                                                                                                      -->
 <!-- - cloak of jelly                                                                                                                             -->
+<!-- - need allies                                                                                                                                -->
 <!-- - potion of paralysis should paralyse attackers too, so it is useful / vampire?                                                              -->
 <!-- - cursed weapon with bad luck / horseshoe / witches hat?                                                                                     -->
 <!-- - luck trap                                                                                                                                  -->
 <!-- - luck and enchanted stuff                                                                                                                   -->
-<!-- - weight                                                                                                                                     -->
 <!-- - runics on weapons, like vampirism, force, quietus, lightning                                                                               -->
 <!-- - swamp                                                                                                                                      -->
 <!-- - swamp wort food                                                                                                                            -->
