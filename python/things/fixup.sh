@@ -15,6 +15,7 @@ for IN in \
     armor/*py \
     buffs/*py \
     boots/*py \
+    gauntlets/*py \
     debuffs/*py \
     doors/*py \
     dungeon/*py \

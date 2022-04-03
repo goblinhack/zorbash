@@ -10,8 +10,22 @@
 
 bool Thing::ascend_dungeon_tick(void)
 {
-  TRACE_AND_INDENT();
   if (! level->is_ascend_dungeon(curr_at.x, curr_at.y)) {
+    return false;
+  }
+
+  dbg("Ascend dungeon tick");
+  TRACE_AND_INDENT();
+
+  if (game->request_ascend) {
+    //
+    // User has pressed a button, forcing the change
+    //
+  } else if (game->tick_current - tick_last_level_change() <= 1) {
+    if (is_player()) {
+      dbg("Location check, ascend, no too soon");
+    }
+
     return false;
   }
 

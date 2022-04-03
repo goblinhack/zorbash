@@ -14,13 +14,18 @@ bool Thing::descend_dungeon_tick(void)
     return false;
   }
 
+  dbg("Descend dungeon tick");
   TRACE_AND_INDENT();
-  dbg("Descend tick");
 
-  if (game->tick_current - tick_last_level_change() <= 1) {
+  if (game->request_descend) {
+    //
+    // User has pressed a button, forcing the change
+    //
+  } else if (game->tick_current - tick_last_level_change() <= 1) {
     if (is_player()) {
       dbg("Location check, descend, no too soon");
     }
+
     return false;
   }
 
