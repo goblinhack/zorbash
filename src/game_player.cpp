@@ -62,7 +62,7 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (1) {
-        auto w = level->thing_new("amulet_endurance", point(x, y - 2));
+        auto w = level->thing_new("amulet_healing", point(x, y - 2));
         t->carry(w);
       }
       if (0) {
