@@ -250,6 +250,8 @@ Screenshots
 ![Alt text](pics/screenshot.16.png?raw=true "")
 ![Alt text](pics/screenshot.17.png?raw=true "")
 ![Alt text](pics/screenshot.18.png?raw=true "")
+![Alt text](pics/screenshot.19.png?raw=true "")
+![Alt text](pics/screenshot.20.png?raw=true "")
 
 How to build
 ------------
