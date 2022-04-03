@@ -8,7 +8,7 @@ build/windows/windows.xml
 data/gfx
 data/sounds
 python/__pycache__
-python/things/amulet/__pycache__
+python/things/amulets/__pycache__
 python/things/armor/__pycache__/
 python/things/boots/__pycache__
 python/things/buffs/__pycache__
@@ -19,7 +19,7 @@ python/things/doors/__pycache__
 python/things/dungeon/__pycache__
 python/things/effects/__pycache__
 python/things/food/__pycache__
-python/things/gauntlet/__pycache__
+python/things/gauntlets/__pycache__
 python/things/helmet/__pycache__
 python/things/internal/__pycache__
 python/things/items/__pycache__
