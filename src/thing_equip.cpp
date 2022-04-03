@@ -740,3 +740,39 @@ bool Thing::equipped_anything(void)
 
   return false;
 }
+
+int Thing::is_able_to_use_amulet(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_use_amulet());
+}
+
+int Thing::is_able_to_use_helmet(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_use_helmet());
+}
+
+int Thing::is_able_to_use_boots(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_use_boots());
+}
+
+int Thing::is_able_to_use_cloak(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_use_cloak());
+}
+
+int Thing::is_able_to_use_shield(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_use_shield());
+}
+
+int Thing::is_able_to_use_gauntlet(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_use_gauntlet());
+}

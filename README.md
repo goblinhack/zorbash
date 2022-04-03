@@ -17,7 +17,6 @@
 <!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - slime can grow into megaslime if satiated                                                                                                  -->
 <!-- - teleport block                                                                                                                             -->
-<!-- - door peep ?                                                                                                                                -->
 <!-- - bloat                                                                                                                                      -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - boots of shoving / steadfastness                                                                                                           -->

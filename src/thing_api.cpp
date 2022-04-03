@@ -576,6 +576,17 @@ int Thing::is_able_to_fire_at(void)
 int Thing::is_able_to_see_through_doors(void)
 {
   TRACE_NO_INDENT();
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      if (iter->is_able_to_see_through_doors()) {
+        return true;
+      }
+    }
+  }
+
   return (tp()->is_able_to_see_through_doors());
 }
 
@@ -594,18 +605,6 @@ int Thing::is_able_to_walk_through_walls(void)
   }
 
   return (tp()->is_able_to_walk_through_walls());
-}
-
-int Thing::is_immune_to_acid(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_immune_to_acid());
-}
-
-int Thing::is_acid(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_acid());
 }
 
 int Thing::is_alive_monst(void)
@@ -2147,6 +2146,17 @@ int Thing::is_able_to_teleport_attack(void)
 int Thing::is_able_to_teleport_without_tiring(void)
 {
   TRACE_NO_INDENT();
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      if (iter->is_able_to_teleport_without_tiring()) {
+        return true;
+      }
+    }
+  }
+
   return (tp()->is_able_to_teleport_without_tiring());
 }
 
@@ -2528,42 +2538,6 @@ int Thing::is_amulet(void)
   return (tp()->is_amulet());
 }
 
-int Thing::is_able_to_use_amulet(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_use_amulet());
-}
-
-int Thing::is_able_to_use_helmet(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_use_helmet());
-}
-
-int Thing::is_able_to_use_boots(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_use_boots());
-}
-
-int Thing::is_able_to_use_cloak(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_use_cloak());
-}
-
-int Thing::is_able_to_use_shield(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_use_shield());
-}
-
-int Thing::is_able_to_use_gauntlet(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_use_gauntlet());
-}
-
 int Thing::is_helmet(void)
 {
   TRACE_NO_INDENT();
@@ -2615,6 +2589,17 @@ int Thing::is_green_blooded(void)
 int Thing::is_able_to_jump_without_tiring(void)
 {
   TRACE_NO_INDENT();
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      if (iter->is_able_to_jump_without_tiring()) {
+        return true;
+      }
+    }
+  }
+
   return (tp()->is_able_to_jump_without_tiring());
 }
 
