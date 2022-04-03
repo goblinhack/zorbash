@@ -331,6 +331,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.move_speed(self, 100)
     my.noise_additional_on_jump_end(self, 20)
     my.noise_decibels_hearing(self, 30)
+    my.noise_on_moving(self, 50)
     my.on_born_do(self, "player.on_born()")
     my.on_damage_acid_do(self, "player.on_damage_acid()")
     my.on_damage_cold_do(self, "player.on_damage_cold()")

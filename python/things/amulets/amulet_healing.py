@@ -19,10 +19,8 @@ def on_tick(owner, me, x, y):
     # my.topcon("item    {} {:X}".format(my.thing_name_get(me), me))
     if owner:
         old_health = my.thing_health_get(owner)
-        my.topcon("old     {}".format(old_health))
         my.thing_health_incr(owner, 1)
         new_health = my.thing_health_get(owner)
-        my.topcon("old     {}".format(new_health))
         if old_health != new_health:
             my.thing_stamina_decr(owner, 1)
         return True
