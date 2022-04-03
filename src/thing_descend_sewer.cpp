@@ -17,10 +17,15 @@ bool Thing::descend_sewer_tick(void)
   dbg("Descend sewer tick");
   TRACE_AND_INDENT();
 
-  if (game->tick_current - tick_last_level_change() <= 1) {
+  if (game->request_descend) {
+    //
+    // User has pressed a button, forcing the change
+    //
+  } else if (game->tick_current - tick_last_level_change() <= 1) {
     if (is_player()) {
-      dbg("Location check, descend sewer, no too soon");
+      dbg("Location check, descend, no too soon");
     }
+
     return false;
   }
 

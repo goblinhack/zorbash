@@ -119,7 +119,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   if (! it->is_dead) {
     dbg("Shove: It strength %d vs me %d", it->stat_str(), stat_str());
 
-    int its_strength = it->stat_str_total();
+    int its_strength = it->stat_str_total() + it->shove_strength_total();
 
     if (it->is_heavy()) {
       its_strength += 10;
@@ -217,7 +217,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
           return (THING_SHOVE_TRIED_AND_FAILED);
         }
         msg("%%fg=red$%s shoves you into the red death!%%fg=reset$", text_The().c_str());
-      } else if (level->is_water(shove_pos)) {
+      } else if (level->is_deep_water(shove_pos)) {
         if (d20roll_under(stat_luck_total())) {
           if (is_player()) {
             msg("%%fg=red$%s tries to shove you into the depths, but luckily you avoid it!%%fg=reset$",
@@ -226,6 +226,15 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
           return (THING_SHOVE_TRIED_AND_FAILED);
         }
         msg("%%fg=red$%s shoves you into the depths!%%fg=reset$", text_The().c_str());
+      } else if (level->is_water(shove_pos)) {
+        if (d20roll_under(stat_luck_total())) {
+          if (is_player()) {
+            msg("%%fg=red$%s tries to shove you into the puddle, but luckily you avoid it!%%fg=reset$",
+                text_The().c_str());
+          }
+          return (THING_SHOVE_TRIED_AND_FAILED);
+        }
+        msg("%%fg=red$%s shoves you into the puddle!%%fg=reset$", text_The().c_str());
       } else if (level->is_fire(shove_pos)) {
         if (d20roll_under(stat_luck_total())) {
           if (is_player()) {
