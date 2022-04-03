@@ -19,6 +19,8 @@ std::initializer_list< std::string > tps = {
     "amulet_endurance_carry",
     "amulet_peeking",
     "amulet_peeking_carry",
+    "amulet_healing",
+    "amulet_healing_carry",
     "armor_fish_scale",
     "armor_fish_scale_carry",
     "armor_lather",

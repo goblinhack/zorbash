@@ -19,8 +19,6 @@
 <!-- - teleport block                                                                                                                             -->
 <!-- - bloat                                                                                                                                      -->
 <!-- - cloak of jelly                                                                                                                             -->
-<!-- - boots of shoving / steadfastness                                                                                                           -->
-<!-- - boots of hiking / const                                                                                                                    -->
 <!-- - potion of paralysis should paralyse attackers too, so it is useful / vampire?                                                              -->
 <!-- - cursed weapon with bad luck / horseshoe / witches hat?                                                                                     -->
 <!-- - luck trap                                                                                                                                  -->
