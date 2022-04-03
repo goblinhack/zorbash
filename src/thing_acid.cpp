@@ -6,6 +6,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_depth.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
@@ -53,3 +54,27 @@ void Thing::acid_tick(void)
     }
   }
 }
+
+int Thing::is_immune_to_acid(void)
+{
+  TRACE_NO_INDENT();
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      if (iter->is_immune_to_acid()) {
+        return true;
+      }
+    }
+  }
+
+  return (tp()->is_immune_to_acid());
+}
+
+int Thing::is_acid(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_acid());
+}
+
