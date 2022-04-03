@@ -1,6 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- clicking on a treasure chest can accidentally collect an item from wid collect                                                               -->
+<!-- - gauntlet of lion armour (Henry II)                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -49,7 +51,6 @@
 <!-- - crystal collection                                                                                                                         -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
 <!-- ------                                                                                                                                       -->
-<!-- - shield, helmet, boots, amulet, gauntlet, cloak                                                                                             -->
 <!-- - char selection                                                                                                                             -->
 <!-- - level fall through to special level ?                                                                                                      -->
 <!-- - hub shop levels                                                                                                                            -->
@@ -158,7 +159,6 @@
 <!-- - darts / poison darts                                                                                                                       -->
 <!-- - plutonium sword, no wall damage                                                                                                            -->
 <!-- - strength penalties                                                                                                                         -->
-<!-- - gauntlet of lion armour (Henry II)                                                                                                         -->
 <!-- - blessed items resist explosion                                                                                                             -->
 <!-- - warhammer should kill parent jelly in one go                                                                                               -->
 <!-- - warhammer smash skeletton                                                                                                                  -->

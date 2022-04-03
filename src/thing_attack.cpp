@@ -859,6 +859,18 @@ bool Thing::attack(Thingp victim, bool prefer_natural_attack)
     crit = true;
   }
 
+  if (! crit) {
+    if (victim->is_stuck()) {
+      if (d10000() < crit_chance_d10000()) {
+        crit = true;
+      }
+    }
+  }
+
+  if (victim->is_sleeping) {
+    crit = true;
+  }
+
   //
   // See if we can bypass its defences
   //

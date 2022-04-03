@@ -828,7 +828,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           msg("%%fg=orange$%s hits you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str(), hitter->text_the(false).c_str());
         } else if (hitter->is_laser()) {
-          msg("%%fg=orange$%s zaps you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+          msg("%%fg=orange$%s tears you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str(), hitter->text_the().c_str());
         } else if (hitter->is_item_magical()) {
           msg("%%fg=orange$%s blasts you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
@@ -930,8 +930,13 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         }
       } else if (is_alive_monst() || is_mob()) {
         if (crit) {
-          msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
-              damage_type.c_str());
+          if (is_sleeping) {
+            msg("%%fg=red$You CRIT hit %s for %d %sdamage in its sleep!%%fg=reset$", text_the().c_str(), damage,
+                damage_type.c_str());
+          } else {
+            msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
+                damage_type.c_str());
+          }
         } else {
           if (hitter && (hitter != real_hitter)) {
             if (attack_poison) {
