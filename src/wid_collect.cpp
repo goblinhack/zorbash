@@ -207,7 +207,12 @@ static uint8_t wid_collect_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_collect_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+//
+// Have to use mouse down. If we use mouse up, then if we click on an item
+// and the collect window opens up, then we will accidentally collect whatever
+// was under the mouse pointer.
+//
+static uint8_t wid_collect_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
@@ -426,7 +431,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     {
       auto wid_icon = wid_new_square_button(w, "item icon");
       wid_set_int_context(wid_icon, slot);
-      wid_set_on_mouse_up(wid_icon, wid_collect_mouse_up);
+      wid_set_on_mouse_down(wid_icon, wid_collect_mouse_down);
       wid_set_on_mouse_over_begin(wid_icon, wid_collect_mouse_over_begin);
 
       point tl = make_point(0, 0);
@@ -453,7 +458,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     {
       auto wid_item = wid_new_square_button(w, "item name");
       wid_set_int_context(wid_item, slot);
-      wid_set_on_mouse_up(wid_item, wid_collect_mouse_up);
+      wid_set_on_mouse_down(wid_item, wid_collect_mouse_down);
       wid_set_on_mouse_over_begin(wid_item, wid_collect_mouse_over_begin);
 
       point tl = make_point(3, 0);
@@ -488,7 +493,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     point br(3, 3);
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_close");
-    wid_set_on_mouse_up(w, wid_collect_close);
+    wid_set_on_mouse_down(w, wid_collect_close);
   }
 
   {
@@ -497,7 +502,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     point br(wid_width - 0, 3);
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_close");
-    wid_set_on_mouse_up(w, wid_collect_close);
+    wid_set_on_mouse_down(w, wid_collect_close);
   }
 
   wid_update(wid_collect->wid_text_area->wid_text_area);
