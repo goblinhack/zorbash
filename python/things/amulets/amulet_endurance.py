@@ -38,7 +38,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "Amulet of leaping for joy. With this amulet you will feel no stamina drain upon magial item use. Additionally you will not tire whilst swinging weapons.")
+    my.long_text_description(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will no longer tire. This also applied to magical items that may attempt to drain stamine, like boots of jumping.")
     my.noise_additional_on_jump_end(self, 10)
     my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)

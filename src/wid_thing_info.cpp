@@ -136,7 +136,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   }
 
   wid_thing_info_add_enchant(wid_popup_window, t);
-  wid_thing_info_add_rarity(wid_popup_window, t);
   wid_thing_info_add_general_info(wid_popup_window, t);
   wid_thing_info_add_carry_info(wid_popup_window, t);
   //
@@ -553,34 +552,6 @@ void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t)
       w->log("This skill is enchanted.", true);
     } else {
       w->log("Item is enchanted.", true);
-    }
-  }
-}
-
-void Game::wid_thing_info_add_rarity(WidPopup *w, Thingp t)
-{
-  TRACE_AND_INDENT();
-
-  auto tp = t->tp();
-  if (t->is_monst()) {
-    if (tp->rarity() == THING_RARITY_UNCOMMON) {
-      w->log("Monster is uncommon", true);
-    } else if (tp->rarity() == THING_RARITY_RARE) {
-      w->log("Monster is rare.", true);
-    } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-      w->log("Monster is very rare.", true);
-    } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-      w->log("Monster is unique!", true);
-    }
-  } else if (t->is_collectable()) {
-    if (tp->rarity() == THING_RARITY_UNCOMMON) {
-      w->log("Item is uncommon", true);
-    } else if (tp->rarity() == THING_RARITY_RARE) {
-      w->log("Item is rare.", true);
-    } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-      w->log("Item is very rare.", true);
-    } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-      w->log("Item is unique!", true);
     }
   }
 }
@@ -1629,6 +1600,37 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
 
   bool printed = false;
+
+  auto tp = t->tp();
+  if (t->is_monst()) {
+    if (tp->rarity() == THING_RARITY_UNCOMMON) {
+      w->log("Monster is uncommon", true);
+      printed = true;
+    } else if (tp->rarity() == THING_RARITY_RARE) {
+      w->log("Monster is rare.", true);
+      printed = true;
+    } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
+      w->log("Monster is very rare.", true);
+      printed = true;
+    } else if (tp->rarity() == THING_RARITY_UNIQUE) {
+      w->log("Monster is unique!", true);
+      printed = true;
+    }
+  } else if (t->is_collectable()) {
+    if (tp->rarity() == THING_RARITY_UNCOMMON) {
+      w->log("Item is uncommon", true);
+      printed = true;
+    } else if (tp->rarity() == THING_RARITY_RARE) {
+      w->log("Item is rare.", true);
+      printed = true;
+    } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
+      w->log("Item is very rare.", true);
+      printed = true;
+    } else if (tp->rarity() == THING_RARITY_UNIQUE) {
+      w->log("Item is unique!", true);
+      printed = true;
+    }
+  }
 
   if (t->is_monst() && t->environ_avoids_water()) {
     if (t->environ_avoids_water() > 10) {
