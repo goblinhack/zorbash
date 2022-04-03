@@ -13,6 +13,7 @@ OUT=$(mktemp) || exit 1
 
 for IN in \
     armor/*py \
+    amulets/*py \
     buffs/*py \
     boots/*py \
     gauntlets/*py \
