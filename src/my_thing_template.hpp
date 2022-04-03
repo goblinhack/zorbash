@@ -530,7 +530,7 @@ private:
   int _unused_flag11 {};
   int _unused_flag110 {};
   int _unused_flag111 {};
-  int _unused_flag112 {};
+  int _is_tireless {};
   int _shove_strength {};
   int _gfx_wobbles_when_hit {};
   int _is_snake {};
@@ -1442,7 +1442,7 @@ public:
   int unused_flag10(void) const { return _unused_flag10; }
   int unused_flag110(void) const { return _unused_flag110; }
   int unused_flag111(void) const { return _unused_flag111; }
-  int unused_flag112(void) const { return _unused_flag112; }
+  int is_tireless(void) const { return _is_tireless; }
   int shove_strength(void) const { return _shove_strength; }
   int unused_flag11(void) const { return _unused_flag11; }
   int unused_flag123(void) const { return _unused_flag123; }
@@ -2088,7 +2088,7 @@ public:
   void unused_flag10_set(int v) { _unused_flag10 = v; }
   void unused_flag110_set(int v) { _unused_flag110 = v; }
   void unused_flag111_set(int v) { _unused_flag111 = v; }
-  void unused_flag112_set(int v) { _unused_flag112 = v; }
+  void is_tireless_set(int v) { _is_tireless = v; }
   void shove_strength_set(int v) { _shove_strength = v; }
   void unused_flag11_set(int v) { _unused_flag11 = v; }
   void unused_flag123_set(int v) { _unused_flag123 = v; }

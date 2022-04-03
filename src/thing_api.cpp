@@ -2095,10 +2095,10 @@ int Thing::unused_flag111(void)
   return (tp()->unused_flag111());
 }
 
-int Thing::unused_flag112(void)
+int Thing::is_tireless(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag112());
+  return (tp()->is_tireless());
 }
 
 int Thing::gfx_wobbles_when_hit(void)

@@ -70,6 +70,17 @@ int Thing::stamina_decr(int v)
 {
   TRACE_NO_INDENT();
   new_infop();
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      if (iter->is_tireless()) {
+        return true;
+      }
+    }
+  }
+
   auto n = (infop()->stamina -= v);
   if (infop()->stamina < 0) {
     infop()->stamina = 0;
