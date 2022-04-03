@@ -218,7 +218,6 @@ public:
   void wid_thing_info_add_gold_value(WidPopup *w, Thingp t);
   void wid_thing_info_add_health(WidPopup *w, Thingp t);
   void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
-  void wid_thing_info_add_rarity(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_con(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_def(WidPopup *w, Thingp t);
   void wid_thing_info_add_stat_dex(WidPopup *w, Thingp t);
