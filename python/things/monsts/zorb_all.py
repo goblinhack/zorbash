@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_natural_attack(me, x, y):
+def on_you_nat_attack(me, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
@@ -41,7 +41,7 @@ def tp_init(name, text_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
-    my.damage_natural_attack_type(self, "gore")
+    my.damage_nat_attack_type(self, "gore")
     my.damage_natural_dice(self, "1d4+2")
     my.distance_avoid(self, 5)
     my.distance_leader_max(self, 5)
@@ -120,8 +120,8 @@ def tp_init(name, text_name):
     my.on_death_drop_all_items(self, True)
     my.on_you_are_hit_but_dodge_it_do(self, "zorb_all.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "zorb_all.on_you_are_hit_but_still_alive()")
-    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
-    my.on_you_natural_attack_do(self, "zorb_all.on_you_natural_attack()")
+    my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
+    my.on_you_nat_attack_do(self, "zorb_all.on_you_nat_attack()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina(self, 100)
     my.stat_att_penalty_when_idle_max(self, 0)

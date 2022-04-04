@@ -9,7 +9,7 @@ def lava_init(name, text_name, tiles=[]):
     my.collision_hit_priority(self, 100)
     my.damage_fire_chance_d1000(self, 1000)
     my.damage_fire_dice(self, "1d12+6")
-    my.damage_natural_attack_type(self, "burn")
+    my.damage_nat_attack_type(self, "burn")
     my.gfx_glows(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)

@@ -22,7 +22,7 @@ def tp_init(name):
     self = tp.Tp(name, "huge explosion")
     my.damage_fire_chance_d1000(self, 1000)
     my.damage_fire_dice(self, "2d6")
-    my.damage_natural_attack_type(self, "blast")
+    my.damage_nat_attack_type(self, "blast")
     my.gfx_animated(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)

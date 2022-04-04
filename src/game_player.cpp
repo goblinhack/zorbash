@@ -62,7 +62,7 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (1) {
-        auto w = level->thing_new("amulet_healing", point(x, y - 2));
+        auto w = level->thing_new("amulet_endurance", point(x, y - 2));
         t->carry(w);
       }
       if (0) {
@@ -168,6 +168,7 @@ void Game::place_player(void)
         // level->thing_new("food_frog", point(x + 3, y - 1));
         // level->thing_new("fire", point(x + 1, y - 1));
         // level->thing_new("enchantstone", point(x + 1, y - 1));
+        level->thing_new("skillstone", point(x + 1, y - 1));
         level->thing_new("horseshoe", point(x, y - 1));
         level->thing_new("four_leaf_clover", point(x, y - 1));
         level->thing_new("medal_of_valor", point(x, y - 1));

@@ -287,10 +287,10 @@ int Thing::damage_melee_chance_d1000(void)
   return (tp()->damage_melee_chance_d1000());
 }
 
-int Thing::damage_natural_attack_chance_d1000(void)
+int Thing::damage_nat_attack_chance_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_natural_attack_chance_d1000());
+  return (tp()->damage_nat_attack_chance_d1000());
 }
 
 int Thing::is_able_to_shove(void)
@@ -2077,16 +2077,16 @@ int Thing::unused_flag108(void)
   return (tp()->unused_flag108());
 }
 
-int Thing::unused_flag109(void)
+int Thing::is_key_special(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag109());
+  return (tp()->is_key_special());
 }
 
-int Thing::unused_flag110(void)
+int Thing::is_crystal(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag110());
+  return (tp()->is_crystal());
 }
 
 int Thing::noise_on_moving(void)
@@ -3039,6 +3039,12 @@ int Thing::damage_necrosis_chance_d1000(void)
 {
   TRACE_NO_INDENT();
   return (tp()->damage_necrosis_chance_d1000());
+}
+
+int Thing::damage_draining_chance_d1000(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->damage_draining_chance_d1000());
 }
 
 int Thing::is_sticky(void)
@@ -6396,10 +6402,10 @@ const std::string &Thing::on_polymorphed_do(void)
   return (tp()->on_polymorphed_do());
 }
 
-const std::string &Thing::on_you_natural_attack_do(void)
+const std::string &Thing::on_you_nat_attack_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_you_natural_attack_do());
+  return (tp()->on_you_nat_attack_do());
 }
 
 const std::string &Thing::on_born_do(void)
@@ -6672,10 +6678,22 @@ const std::string &Thing::on_owner_damage_necrosis_do(void)
   return (tp()->on_owner_damage_necrosis_do());
 }
 
-const std::string &Thing::on_owner_damage_natural_attack_do(void)
+const std::string &Thing::on_owner_damage_draining_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_natural_attack_do());
+  return (tp()->on_owner_damage_draining_do());
+}
+
+const std::string &Thing::on_owner_damage_stamina_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_owner_damage_stamina_do());
+}
+
+const std::string &Thing::on_owner_damage_nat_attack_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_owner_damage_nat_attack_do());
 }
 
 const std::string &Thing::on_damage_poison_do(void)
@@ -6774,10 +6792,22 @@ const std::string &Thing::on_damage_necrosis_do(void)
   return (tp()->on_damage_necrosis_do());
 }
 
-const std::string &Thing::on_damage_natural_attack_do(void)
+const std::string &Thing::on_damage_draining_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_natural_attack_do());
+  return (tp()->on_damage_draining_do());
+}
+
+const std::string &Thing::on_damage_stamina_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_damage_stamina_do());
+}
+
+const std::string &Thing::on_damage_nat_attack_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_damage_nat_attack_do());
 }
 
 const std::string &Thing::target_name_projectile(void)
@@ -6840,10 +6870,10 @@ const std::string &Thing::text_hits(void)
   return (tp()->text_hits());
 }
 
-const std::string &Thing::damage_natural_attack_type(void)
+const std::string &Thing::damage_nat_attack_type(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_natural_attack_type());
+  return (tp()->damage_nat_attack_type());
 }
 
 const std::string &Thing::text_name(void)

@@ -4,6 +4,7 @@
 //
 
 #include "my_level.hpp"
+#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
@@ -28,7 +29,7 @@ const std::string Thing::damage_natural_dice_str(void)
   return (tp()->damage_natural_dice_str());
 }
 
-int Thing::damage_natural_attack(void)
+int Thing::damage_nat_attack(void)
 {
   TRACE_NO_INDENT();
   auto roll    = tp()->damage_natural_dice().roll();
@@ -37,27 +38,27 @@ int Thing::damage_natural_attack(void)
   return roll + enchant;
 }
 
-int Thing::on_owner_damage_natural_attack(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_damage_nat_attack(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_natural_attack null thing");
+    err("Cannot owner_damage_nat_attack null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_natural_attack null thing");
+    err("Cannot owner_damage_nat_attack null thing");
     return damage;
   }
 
-  auto on_owner_damage_natural_attack = on_owner_damage_natural_attack_do();
-  if (std::empty(on_owner_damage_natural_attack)) {
+  auto on_owner_damage_nat_attack = on_owner_damage_nat_attack_do();
+  if (std::empty(on_owner_damage_nat_attack)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_natural_attack, '.');
+  auto t = split_tokens(on_owner_damage_nat_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -73,32 +74,32 @@ int Thing::on_owner_damage_natural_attack(Thingp owner, Thingp hitter, Thingp re
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_string().c_str(),
         hitter->to_short_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
-                          (unsigned int) curr_at.y, (unsigned int) damage);
+    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, real_hitter->id.id,
+                          (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_natural_attack call [%s] expected mod:function, got %d elems",
-      on_owner_damage_natural_attack.c_str(), (int) on_owner_damage_natural_attack.size());
+  ERR("Bad on_owner_damage_nat_attack call [%s] expected mod:function, got %d elems",
+      on_owner_damage_nat_attack.c_str(), (int) on_owner_damage_nat_attack.size());
 
   return damage;
 }
 
-int Thing::on_damage_natural_attack(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_damage_nat_attack(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
 
   if (! hitter) {
-    err("Cannot damage_natural_attack null thing");
+    err("Cannot damage_nat_attack null thing");
     return damage;
   }
 
-  auto on_damage_natural_attack = on_damage_natural_attack_do();
-  if (std::empty(on_damage_natural_attack)) {
+  auto on_damage_nat_attack = on_damage_nat_attack_do();
+  if (std::empty(on_damage_nat_attack)) {
     return damage;
   }
 
-  auto t = split_tokens(on_damage_natural_attack, '.');
+  auto t = split_tokens(on_damage_nat_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -118,8 +119,39 @@ int Thing::on_damage_natural_attack(Thingp hitter, Thingp real_hitter, int damag
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_damage_natural_attack call [%s] expected mod:function, got %d elems", on_damage_natural_attack.c_str(),
-      (int) on_damage_natural_attack.size());
+  ERR("Bad on_damage_nat_attack call [%s] expected mod:function, got %d elems", on_damage_nat_attack.c_str(),
+      (int) on_damage_nat_attack.size());
+
+  return damage;
+}
+
+int Thing::total_on_damage_nat_attack(Thingp hitter, Thingp real_hitter, int damage)
+{
+  FOR_ALL_BUFFS(item)
+  {
+    auto iter = level->thing_find(item.id);
+    if (iter) {
+      damage = iter->on_owner_damage_nat_attack(this, hitter, real_hitter, damage);
+    }
+  }
+
+  FOR_ALL_DEBUFFS(item)
+  {
+    auto iter = level->thing_find(item.id);
+    if (iter) {
+      damage = iter->on_owner_damage_nat_attack(this, hitter, real_hitter, damage);
+    }
+  }
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      damage = iter->on_owner_damage_nat_attack(this, hitter, real_hitter, damage);
+    }
+  }
+
+  damage = on_damage_nat_attack(hitter, real_hitter, damage);
 
   return damage;
 }

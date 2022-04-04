@@ -130,19 +130,19 @@ void Thing::on_you_are_hit_but_dodge_it_do(Thingp hitter)
   }
 }
 
-void Thing::on_you_natural_attack(void)
+void Thing::on_you_nat_attack(void)
 {
   if (is_dead) {
     return;
   }
 
   TRACE_NO_INDENT();
-  auto on_you_natural_attack = tp()->on_you_natural_attack_do();
-  if (std::empty(on_you_natural_attack)) {
+  auto on_you_nat_attack = tp()->on_you_nat_attack_do();
+  if (std::empty(on_you_nat_attack)) {
     return;
   }
 
-  auto t = split_tokens(on_you_natural_attack, '.');
+  auto t = split_tokens(on_you_nat_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -159,17 +159,17 @@ void Thing::on_you_natural_attack(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_you_natural_attack call [%s] expected mod:function, got %d elems", on_you_natural_attack.c_str(),
-        (int) on_you_natural_attack.size());
+    ERR("Bad on_you_nat_attack call [%s] expected mod:function, got %d elems", on_you_nat_attack.c_str(),
+        (int) on_you_nat_attack.size());
   }
 }
 
 int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
                          Thingp real_hitter, // who fired the arrow?
                          bool crit, bool attack_natural, bool attack_poison, bool attack_necrosis,
-                         bool attack_future1, bool attack_future2, bool attack_future3, bool attack_cold,
-                         bool attack_fire, bool attack_crush, bool attack_lightning, bool attack_energy,
-                         bool attack_acid, bool attack_digest, int damage)
+                         bool attack_stamina, bool attack_future1, bool attack_future2, bool attack_future3,
+                         bool attack_cold, bool attack_fire, bool attack_crush, bool attack_lightning,
+                         bool attack_energy, bool attack_acid, bool attack_digest, int damage)
 {
   TRACE_NO_INDENT();
   if (! hitter) {
@@ -188,20 +188,15 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (attack_poison) {
-    damage = buff_on_damage_poison(hitter, real_hitter, damage);
-    damage = on_damage_poison(hitter, real_hitter, damage);
+    damage = total_on_damage_poison(hitter, real_hitter, damage);
   } else if (attack_future1) {
-    damage = buff_on_damage_future1(hitter, real_hitter, damage);
-    damage = on_damage_future1(hitter, real_hitter, damage);
+    damage = total_on_damage_future1(hitter, real_hitter, damage);
   } else if (attack_future2) {
-    damage = buff_on_damage_future2(hitter, real_hitter, damage);
-    damage = on_damage_future2(hitter, real_hitter, damage);
+    damage = total_on_damage_future2(hitter, real_hitter, damage);
   } else if (attack_future3) {
-    damage = buff_on_damage_future3(hitter, real_hitter, damage);
-    damage = on_damage_future3(hitter, real_hitter, damage);
+    damage = total_on_damage_future3(hitter, real_hitter, damage);
   } else if (attack_cold) {
-    damage = buff_on_damage_cold(hitter, real_hitter, damage);
-    damage = on_damage_cold(hitter, real_hitter, damage);
+    damage = total_on_damage_cold(hitter, real_hitter, damage);
 
     if (is_on_fire()) {
       if (is_player()) {
@@ -213,32 +208,25 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       smoke->lifespan_set(pcg_random_range(1, 10));
     }
   } else if (attack_fire) {
-    damage = buff_on_damage_fire(hitter, real_hitter, damage);
-    damage = on_damage_fire(hitter, real_hitter, damage);
+    damage = total_on_damage_fire(hitter, real_hitter, damage);
   } else if (attack_crush) {
-    damage = buff_on_damage_crush(hitter, real_hitter, damage);
-    damage = on_damage_crush(hitter, real_hitter, damage);
+    damage = total_on_damage_crush(hitter, real_hitter, damage);
   } else if (attack_lightning) {
-    damage = buff_on_damage_lightning(hitter, real_hitter, damage);
-    damage = on_damage_lightning(hitter, real_hitter, damage);
+    damage = total_on_damage_lightning(hitter, real_hitter, damage);
   } else if (attack_energy) {
-    damage = buff_on_damage_energy(hitter, real_hitter, damage);
-    damage = on_damage_energy(hitter, real_hitter, damage);
+    damage = total_on_damage_energy(hitter, real_hitter, damage);
   } else if (attack_acid) {
-    damage = buff_on_damage_acid(hitter, real_hitter, damage);
-    damage = on_damage_acid(hitter, real_hitter, damage);
+    damage = total_on_damage_acid(hitter, real_hitter, damage);
   } else if (attack_digest) {
-    damage = buff_on_damage_digest(hitter, real_hitter, damage);
-    damage = on_damage_digest(hitter, real_hitter, damage);
+    damage = total_on_damage_digest(hitter, real_hitter, damage);
   } else if (attack_necrosis) {
-    damage = buff_on_damage_necrosis(hitter, real_hitter, damage);
-    damage = on_damage_necrosis(hitter, real_hitter, damage);
+    damage = total_on_damage_necrosis(hitter, real_hitter, damage);
+  } else if (attack_stamina) {
+    damage = total_on_damage_draining(hitter, real_hitter, damage);
   } else if (attack_natural) {
-    damage = buff_on_damage_natural_attack(hitter, real_hitter, damage);
-    damage = on_damage_natural_attack(hitter, real_hitter, damage);
+    damage = total_on_damage_nat_attack(hitter, real_hitter, damage);
   } else {
-    damage = buff_on_damage_melee(hitter, real_hitter, damage);
-    damage = on_damage_melee(hitter, real_hitter, damage);
+    damage = total_on_damage_melee(hitter, real_hitter, damage);
   }
 
   std::string damage_type;
@@ -394,7 +382,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   } else if (attack_natural) {
     if (! damage) {
-      damage_type = real_hitter->damage_natural_attack_type();
+      damage_type = real_hitter->damage_nat_attack_type();
       if (is_player()) {
         msg("You take no %s damage!", damage_type.c_str());
       } else if (real_hitter->is_player()) {
@@ -403,7 +391,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       return false;
     } else {
       IF_DEBUG2 { real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = real_hitter->damage_natural_attack_type() + " ";
+      damage_type = real_hitter->damage_nat_attack_type() + " ";
     }
   } else {
     if (! damage) {
@@ -614,7 +602,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = buff_on_damage_stat_str(hitter, real_hitter, damage);
+          damage = total_on_damage_stat_str(hitter, real_hitter, damage);
           if (! damage) {
             IF_DEBUG2 { real_hitter->log("No strength damage"); }
             return false;
@@ -651,7 +639,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = buff_on_damage_stat_con(hitter, real_hitter, damage);
+          damage = total_on_damage_stat_con(hitter, real_hitter, damage);
           if (! damage) {
             IF_DEBUG2 { real_hitter->log("No con damage"); }
             return false;
@@ -791,7 +779,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           popup("%%fg=red$Sizzle!");
         } else if (attack_natural) {
           msg("%%fg=red$%s %s deep!%%fg=reset$", real_hitter->text_The().c_str(),
-              pluralise(real_hitter->damage_natural_attack_type()).c_str());
+              pluralise(real_hitter->damage_nat_attack_type()).c_str());
           popup("%%fg=red$Urk!");
         } else if (attack_energy) {
           msg("%%fg=red$%s blasts you apart!%%fg=reset$", real_hitter->text_The().c_str());
@@ -841,10 +829,10 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               damage_type.c_str());
           popup("%%fg=red$Sizzle!");
         } else if (attack_natural) {
-          if (! real_hitter->damage_natural_attack_type().empty()) {
+          if (! real_hitter->damage_nat_attack_type().empty()) {
             msg("%%fg=orange$%s attacks you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                 damage_type.c_str());
-            popup("%%fg=red$" + capitalise(real_hitter->damage_natural_attack_type()));
+            popup("%%fg=red$" + capitalise(real_hitter->damage_nat_attack_type()));
           } else {
             msg("%%fg=orange$%s bites you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                 damage_type.c_str());
@@ -1133,12 +1121,12 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       //
       auto claws = real_hitter->tp()->gfx_anim_use();
       if (claws != "") {
-        auto natural_attack_effect = level->thing_new(claws, curr_at);
-        natural_attack_effect->bounce(0.1, 0.1, 100, 3);
-        natural_attack_effect->move_set_dir_from_delta(delta);
+        auto nat_attack_effect = level->thing_new(claws, curr_at);
+        nat_attack_effect->bounce(0.1, 0.1, 100, 3);
+        nat_attack_effect->move_set_dir_from_delta(delta);
       }
 
-      real_hitter->on_you_natural_attack();
+      real_hitter->on_you_nat_attack();
     }
   }
 
@@ -1281,9 +1269,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
 // Returns true on the target being dead.
 //
 int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poison, bool attack_necrosis,
-                  bool attack_future1, bool attack_future2, bool attack_future3, bool attack_cold, bool attack_fire,
-                  bool attack_crush, bool attack_lightning, bool attack_energy, bool attack_acid, bool attack_digest,
-                  int damage)
+                  bool attack_stamina, bool attack_future1, bool attack_future2, bool attack_future3,
+                  bool attack_cold, bool attack_fire, bool attack_crush, bool attack_lightning, bool attack_energy,
+                  bool attack_acid, bool attack_digest, int damage)
 {
   TRACE_NO_INDENT();
   if (attack_natural || attack_digest) {
@@ -1474,9 +1462,9 @@ int Thing::is_hit(Thingp hitter, bool crit, bool attack_natural, bool attack_poi
   int hit_and_destroyed;
 
   hit_and_destroyed =
-      ai_hit_actual(hitter, real_hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_future1,
-                    attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                    attack_energy, attack_acid, attack_digest, damage);
+      ai_hit_actual(hitter, real_hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina,
+                    attack_future1, attack_future2, attack_future3, attack_cold, attack_fire, attack_crush,
+                    attack_lightning, attack_energy, attack_acid, attack_digest, damage);
 
   return (hit_and_destroyed);
 }

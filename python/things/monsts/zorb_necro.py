@@ -55,7 +55,7 @@ def tp_init(name, text_name):
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
+    my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
     my.text_description(self, "A master of the darkest arts.")
     # my.is_carrier_of_treasure_class_b(self, True)
     my.is_monst_class_b(self, True)

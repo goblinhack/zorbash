@@ -10,7 +10,7 @@ def tp_init(name):
     self = tp.Tp(name, "teleport_in")
     my.damage_cold_chance_d1000(self, 1000)
     my.damage_cold_dice(self, "2d6")
-    my.damage_natural_attack_type(self, "telefreeze")
+    my.damage_nat_attack_type(self, "telefreeze")
     my.gfx_animated(self, True)
     my.gfx_short_shadow_caster(self, True)
     my.is_floating(self, True)
