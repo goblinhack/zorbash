@@ -996,10 +996,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag108() && (what == "unused_flag108")) {
     return true;
   }
-  if (unused_flag109() && (what == "unused_flag109")) {
+  if (is_key_special() && (what == "is_key_special")) {
     return true;
   }
-  if (unused_flag110() && (what == "unused_flag110")) {
+  if (is_crystal() && (what == "is_crystal")) {
     return true;
   }
   if (noise_on_moving() && (what == "noise_on_moving")) {
@@ -2239,14 +2239,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag108") {
     return &Thing::unused_flag108;
   }
-  if (what == "unused_flag109") {
-    return &Thing::unused_flag109;
+  if (what == "is_key_special") {
+    return &Thing::is_key_special;
   }
   if (what == "unused_flag10") {
     return &Thing::unused_flag10;
   }
-  if (what == "unused_flag110") {
-    return &Thing::unused_flag110;
+  if (what == "is_crystal") {
+    return &Thing::is_crystal;
   }
   if (what == "noise_on_moving") {
     return &Thing::noise_on_moving;

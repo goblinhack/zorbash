@@ -117,7 +117,7 @@ void tp_fixup(void)
     int num_attack_types = 0;
 
     num_attack_types += tp->damage_melee() ? 1 : 0;
-    num_attack_types += tp->damage_natural_attack() ? 1 : 0;
+    num_attack_types += tp->damage_nat_attack() ? 1 : 0;
     num_attack_types += tp->damage_poison() ? 1 : 0;
     num_attack_types += tp->damage_future1() ? 1 : 0;
     num_attack_types += tp->damage_future2() ? 1 : 0;
@@ -130,13 +130,14 @@ void tp_fixup(void)
     num_attack_types += tp->damage_acid() ? 1 : 0;
     num_attack_types += tp->damage_digest() ? 1 : 0;
     num_attack_types += tp->damage_necrosis() ? 1 : 0;
+    num_attack_types += tp->damage_draining() ? 1 : 0;
 
     if (num_attack_types == 1) {
       if (tp->damage_acid() > 0) {
         tp->damage_acid_chance_d1000_set(1000);
       }
-      if (tp->damage_natural_attack() > 0) {
-        tp->damage_natural_attack_chance_d1000_set(1000);
+      if (tp->damage_nat_attack() > 0) {
+        tp->damage_nat_attack_chance_d1000_set(1000);
       }
       if (tp->damage_crush() > 0) {
         tp->damage_crush_chance_d1000_set(1000);
@@ -170,6 +171,9 @@ void tp_fixup(void)
       }
       if (tp->damage_necrosis() > 0) {
         tp->damage_necrosis_chance_d1000_set(1000);
+      }
+      if (tp->damage_draining() > 0) {
+        tp->damage_draining_chance_d1000_set(1000);
       }
       if (tp->damage_poison() > 0) {
         tp->damage_poison_chance_d1000_set(1000);

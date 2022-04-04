@@ -206,6 +206,7 @@ uint8_t sdl_init(void)
   CON("SDL: Version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
   TRACE_AND_INDENT();
 
+  CON("SDL: Init audio");
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
     SDL_MSG_BOX("SDL_Init failed %s", SDL_GetError());
     DIE("SDL_Init failed %s", SDL_GetError());

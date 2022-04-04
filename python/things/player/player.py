@@ -12,7 +12,7 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit5")
 
 
-def on_you_natural_attack(me, x, y):
+def on_you_nat_attack(me, x, y):
     my.sound_play("player_punch")
 
 
@@ -228,11 +228,15 @@ def on_damage_digest(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_natural_attack(me, hitter, x, y, damage):
+def on_damage_nat_attack(me, hitter, x, y, damage):
     return damage
 
 
 def on_damage_necrosis(me, hitter, x, y, damage):
+    return damage
+
+
+def on_damage_draining(me, hitter, x, y, damage):
     return damage
 
 
@@ -259,7 +263,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.collision_hit_priority(self, 6)
-    my.damage_natural_attack_type(self, "punch")
+    my.damage_nat_attack_type(self, "punch")
     my.damage_natural_dice(self, "1d3")
     my.distance_avoid(self, 3)
     my.distance_throw(self, 5)
@@ -344,8 +348,9 @@ def tp_init(name, text_name, short_text_name, title):
     my.on_damage_future3_do(self, "player.on_damage_future3()")
     my.on_damage_lightning_do(self, "player.on_damage_lightning()")
     my.on_damage_melee_do(self, "player.on_damage_melee()")
-    my.on_damage_natural_attack_do(self, "player.on_damage_natural_attack()")
+    my.on_damage_nat_attack_do(self, "player.on_damage_nat_attack()")
     my.on_damage_necrosis_do(self, "player.on_damage_necrosis()")
+    my.on_damage_draining_do(self, "player.on_damage_draining()")
     my.on_damage_poison_do(self, "player.on_damage_poison()")
     my.on_damage_stat_con_do(self, "player.on_damage_stat_con()")
     my.on_damage_stat_str_do(self, "player.on_damage_stat_str()")
@@ -353,7 +358,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.on_death_drop_all_items(self, True)
     my.on_move_do(self, "player.on_move()")
     my.on_you_are_hit_but_still_alive_do(self, "player.on_you_are_hit_but_still_alive()")
-    my.on_you_natural_attack_do(self, "player.on_you_natural_attack()")
+    my.on_you_nat_attack_do(self, "player.on_you_nat_attack()")
     my.stamina(self, 200)
     my.stat_att_penalty_when_idle_max(self, 0)
     my.stat_att_penalty_when_idle(self, 0)

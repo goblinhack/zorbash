@@ -419,8 +419,8 @@ do
       unused_flag106_set \
       unused_flag107_set \
       unused_flag108_set \
-      unused_flag109_set \
-      unused_flag110_set \
+      is_key_special_set \
+      is_crystal_set \
       noise_on_moving_set \
       is_tireless_set \
       shove_strength_set \

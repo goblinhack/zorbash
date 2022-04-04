@@ -12,53 +12,27 @@
 #include "my_thing_template.hpp"
 #include <algorithm>
 
-const Dice &Thing::damage_acid_dice(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_acid_dice());
-}
-
-const std::string Thing::damage_acid_dice_str(void)
-{
-  TRACE_NO_INDENT();
-
-  if (enchant_get()) {
-    return tp()->damage_acid_dice_str() + modifier_to_string(enchant_get());
-  }
-
-  return (tp()->damage_acid_dice_str());
-}
-
-int Thing::damage_acid(void)
-{
-  TRACE_NO_INDENT();
-  auto roll    = tp()->damage_acid_dice().roll();
-  auto enchant = enchant_get();
-  dbg("Damage acid roll %d + enchant %d", roll, enchant);
-  return roll + enchant;
-}
-
-int Thing::on_owner_damage_acid(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_damage_stamina(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_acid null thing");
+    err("Cannot owner_damage_stamina null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_acid null thing");
+    err("Cannot owner_damage_stamina null thing");
     return damage;
   }
 
-  auto on_owner_damage_acid = on_owner_damage_acid_do();
-  if (std::empty(on_owner_damage_acid)) {
+  auto on_owner_damage_stamina = on_owner_damage_stamina_do();
+  if (std::empty(on_owner_damage_stamina)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_acid, '.');
+  auto t = split_tokens(on_owner_damage_stamina, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -78,28 +52,27 @@ int Thing::on_owner_damage_acid(Thingp owner, Thingp hitter, Thingp real_hitter,
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_acid call [%s] expected mod:function, got %d elems", on_owner_damage_acid.c_str(),
-      (int) on_owner_damage_acid.size());
+  ERR("Bad on_owner_damage_stamina call [%s] expected mod:function, got %d elems", on_owner_damage_stamina.c_str(),
+      (int) on_owner_damage_stamina.size());
 
   return damage;
 }
 
-int Thing::on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_damage_stamina(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
-
   if (! hitter) {
-    err("Cannot damage_acid null thing");
+    err("Cannot damage_stamina null thing");
     return damage;
   }
 
-  auto on_damage_acid = on_damage_acid_do();
-  if (std::empty(on_damage_acid)) {
+  auto on_damage_stamina = on_damage_stamina_do();
+  if (std::empty(on_damage_stamina)) {
     return damage;
   }
 
-  auto t = split_tokens(on_damage_acid, '.');
+  auto t = split_tokens(on_damage_stamina, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -119,19 +92,19 @@ int Thing::on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_damage_acid call [%s] expected mod:function, got %d elems", on_damage_acid.c_str(),
-      (int) on_damage_acid.size());
+  ERR("Bad on_damage_stamina call [%s] expected mod:function, got %d elems", on_damage_stamina.c_str(),
+      (int) on_damage_stamina.size());
 
   return damage;
 }
 
-int Thing::total_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::total_on_damage_stamina(Thingp hitter, Thingp real_hitter, int damage)
 {
   FOR_ALL_BUFFS(item)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_damage_acid(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_damage_stamina(this, hitter, real_hitter, damage);
     }
   }
 
@@ -139,7 +112,7 @@ int Thing::total_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_damage_acid(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_damage_stamina(this, hitter, real_hitter, damage);
     }
   }
 
@@ -147,11 +120,11 @@ int Thing::total_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_damage_acid(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_damage_stamina(this, hitter, real_hitter, damage);
     }
   }
 
-  damage = on_damage_acid(hitter, real_hitter, damage);
+  damage = on_damage_stamina(hitter, real_hitter, damage);
 
   return damage;
 }

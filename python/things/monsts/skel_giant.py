@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_natural_attack(me, x, y):
+def on_you_nat_attack(me, x, y):
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
@@ -35,7 +35,7 @@ def tp_init(name, text_name):
     my.attack_meat(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
-    my.damage_natural_attack_type(self, "gore")
+    my.damage_nat_attack_type(self, "gore")
     my.damage_natural_dice(self, "1d6")
     my.damage_received_doubled_from_water(self, True)
     my.distance_avoid(self, 2)
@@ -89,7 +89,7 @@ def tp_init(name, text_name):
     my.on_death_do(self, "me.on_death()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
-    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
+    my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
     my.rarity(self, my.RARITY_COMMON)
     my.resurrect_dice(self, "1d20+30")
     my.stat_con(self, 20)

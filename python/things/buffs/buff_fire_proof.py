@@ -76,7 +76,7 @@ def on_owner_damage_digest(me, owner, hitter, real_hitter, x, y, damage):
     return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def on_owner_damage_natural_attack(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_damage_nat_attack(me, owner, hitter, real_hitter, x, y, damage):
     return on_owner_damage(me, owner, hitter, real_hitter, x, y, damage)
 
 
@@ -111,7 +111,7 @@ def tp_init(name, text_name):
     my.on_owner_damage_future3_do(self, "me.on_owner_damage_future3()")
     my.on_owner_damage_lightning_do(self, "me.on_owner_damage_lightning()")
     my.on_owner_damage_melee_do(self, "me.on_owner_damage_melee()")
-    my.on_owner_damage_natural_attack_do(self, "me.on_owner_damage_natural_attack()")
+    my.on_owner_damage_nat_attack_do(self, "me.on_owner_damage_nat_attack()")
     my.on_owner_damage_necrosis_do(self, "me.on_owner_damage_necrosis()")
     my.on_owner_damage_poison_do(self, "me.on_owner_damage_poison()")
     my.on_owner_damage_stat_con_do(self, "me.on_owner_damage_stat_con()")

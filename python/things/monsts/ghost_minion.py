@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_natural_attack(me, x, y):
+def on_you_nat_attack(me, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
@@ -62,7 +62,7 @@ def tp_init(name, text_name):
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
-    my.on_you_natural_attack_do(self, "me.on_you_natural_attack()")
+    my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_con(self, 10)
     my.stat_def(self, 11)

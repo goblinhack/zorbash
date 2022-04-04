@@ -68,7 +68,7 @@ typedef struct {
   //
   // Monst is using its natural attack.
   //
-  bool natural_attack;
+  bool nat_attack;
   //
   // Can also shove.
   //
@@ -364,7 +364,7 @@ public:
   bool ascend_sewer_tick(void);
   bool ascend_sewer(void);
   bool attack(point future_pos);
-  bool attack(Thingp victim, bool prefer_natural_attack = false);
+  bool attack(Thingp victim, bool prefer_nat_attack = false);
   bool bag_add_test(Thingp);
   bool bag_add(Thingp);
   bool bag_can_place_anywhere(Thingp item, point &pos);
@@ -489,7 +489,7 @@ public:
   bool move_to_or_escape_check_only(const point nh);
   bool move_to_or_escape(const point);
   bool move_to_try(const point, const bool escaping, bool check_only);
-  bool natural_attack(Thingp victim);
+  bool nat_attack(Thingp victim);
   bool on_fire_set(const std::string &why);
   bool on_firing_at_something(Thingp hitter);
   bool on_tick(void);
@@ -596,6 +596,7 @@ public:
   const Dice &damage_acid_dice(void);
   const Dice &damage_digest_dice(void);
   const Dice &damage_necrosis_dice(void);
+  const Dice &damage_draining_dice(void);
 
   const Dice &gold_value_dice(void);
   const Dice &health_initial_dice(void);
@@ -646,10 +647,11 @@ public:
   const std::string damage_melee_dice_str(void);
   const std::string damage_natural_dice_str(void);
   const std::string damage_necrosis_dice_str(void);
+  const std::string damage_draining_dice_str(void);
   const std::string damage_poison_dice_str(void);
   const std::string danger_level_str(Thingp); // Cannot return reference
 
-  const std::string &damage_natural_attack_type(void);
+  const std::string &damage_nat_attack_type(void);
   const std::string &dead_reason_get(void);
   const std::string &equip_carry_anim(void);
   const std::string &gfx_anim_use(void);
@@ -676,8 +678,10 @@ public:
   const std::string &on_damage_future3_do(void);
   const std::string &on_damage_lightning_do(void);
   const std::string &on_damage_melee_do(void);
-  const std::string &on_damage_natural_attack_do(void);
+  const std::string &on_damage_nat_attack_do(void);
   const std::string &on_damage_necrosis_do(void);
+  const std::string &on_damage_draining_do(void);
+  const std::string &on_damage_stamina_do(void);
   const std::string &on_damage_poison_do(void);
   const std::string &on_damage_stat_att_do(void);
   const std::string &on_damage_stat_con_do(void);
@@ -707,8 +711,10 @@ public:
   const std::string &on_owner_damage_future3_do(void);
   const std::string &on_owner_damage_lightning_do(void);
   const std::string &on_owner_damage_melee_do(void);
-  const std::string &on_owner_damage_natural_attack_do(void);
+  const std::string &on_owner_damage_nat_attack_do(void);
   const std::string &on_owner_damage_necrosis_do(void);
+  const std::string &on_owner_damage_draining_do(void);
+  const std::string &on_owner_damage_stamina_do(void);
   const std::string &on_owner_damage_poison_do(void);
   const std::string &on_owner_damage_stat_att_do(void);
   const std::string &on_owner_damage_stat_con_do(void);
@@ -729,7 +735,7 @@ public:
   const std::string &on_you_are_hit_but_dodge_it_do(void);
   const std::string &on_you_are_hit_but_still_alive_do(void);
   const std::string &on_you_are_on_fire_do(void);
-  const std::string &on_you_natural_attack_do(void);
+  const std::string &on_you_nat_attack_do(void);
   const std::string &poison_reason_get(void);
   const std::string &resurrect_dice_str(void);
   const std::string &short_text_name(void);
@@ -784,14 +790,15 @@ public:
   float teleport_distance_with_modifiers_get(void);
   float update_wobble(void);
 
-  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool natural_attack, bool poison, bool necrosis,
-                    bool damage_future1, bool damage_future2, bool damage_future3, bool damage_cold, bool damage_fire,
-                    bool damage_crush, bool damage_lightning, bool damage_energy, bool damage_acid,
-                    bool damage_digest, int dmg);
+  int ai_hit_actual(Thingp hitter, Thingp real_hitter, bool crit, bool attack_natural, bool attack_poison,
+                    bool attack_necrosis, bool attack_stamina, bool attack_future1, bool attack_future2,
+                    bool attack_future3, bool attack_cold, bool attack_fire, bool attack_crush, bool attack_lightning,
+                    bool attack_energy, bool attack_acid, bool attack_digest, int damage);
 
-  int is_hit(Thingp hitter, bool crit, bool natural_attack, bool poison, bool necrosis, bool damage_future1,
-             bool damage_future2, bool damage_future3, bool damage_cold, bool damage_fire, bool damage_crush,
-             bool damage_lightning, bool damage_energy, bool damage_acid, bool damage_digest, int damage);
+  int is_hit(Thingp hitter, bool crit, bool damage_nat_attack, bool damage_poison, bool damage_necrosis,
+             bool damage_draining, bool damage_future1, bool damage_future2, bool damage_future3, bool damage_cold,
+             bool damage_fire, bool damage_crush, bool damage_lightning, bool damage_energy, bool damage_acid,
+             bool damage_digest, int damage);
 
   int aggression_level_pct(void);
   int ai_detect_secret_doors(void);
@@ -812,23 +819,25 @@ public:
   int blast_min_radius(void);
   int bounce_count(void);
   int break_chance_d10000(void);
-  int buff_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_cold(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_crush(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_digest(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_energy(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_fire(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_future1(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_future2(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_future3(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_lightning(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_melee(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_natural_attack(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_poison(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_stat_att(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_stat_con(Thingp hitter, Thingp real_hitter, int damage);
-  int buff_on_damage_stat_str(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_cold(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_crush(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_digest(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_energy(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_fire(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_future1(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_future2(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_future3(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_lightning(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_melee(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_nat_attack(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_draining(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_stamina(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_poison(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_stat_att(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_stat_con(Thingp hitter, Thingp real_hitter, int damage);
+  int total_on_damage_stat_str(Thingp hitter, Thingp real_hitter, int damage);
   int capacity_height(void);
   int capacity_width(void);
   int carried_amulet_count(void);
@@ -916,10 +925,12 @@ public:
   int damage_melee_chance_d1000(void);
   int damage_melee(void);
   int damage_min(void);
-  int damage_natural_attack_chance_d1000(void);
-  int damage_natural_attack(void);
+  int damage_nat_attack_chance_d1000(void);
+  int damage_nat_attack(void);
   int damage_necrosis_chance_d1000(void);
   int damage_necrosis(void);
+  int damage_draining_chance_d1000(void);
+  int damage_draining(void);
   int damage_poison_chance_d1000(void);
   int damage_poison(void);
   int damage_received_doubled_from_acid(void);
@@ -1095,8 +1106,9 @@ public:
   int is_attacked_with_damage_future3(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_melee(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_natural_attack(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_damage_nat_attack(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_damage_draining(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_poison(Thingp hitter, Thingp real_hitter, int damage);
   int is_auto_collect_item(void);
   int is_auto_equipped(void);
@@ -1426,10 +1438,14 @@ public:
   int on_damage_lightning(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_damage_melee(Thingp hitter, Thingp real_hitter, int damage);
   int on_damage_melee(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
-  int on_damage_natural_attack(Thingp hitter, Thingp real_hitter, int damage);
-  int on_damage_natural_attack(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_damage_nat_attack(Thingp hitter, Thingp real_hitter, int damage);
+  int on_damage_nat_attack(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage);
   int on_damage_necrosis(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_damage_draining(Thingp hitter, Thingp real_hitter, int damage);
+  int on_damage_draining(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_damage_stamina(Thingp hitter, Thingp real_hitter, int damage);
+  int on_damage_stamina(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_damage_poison(Thingp hitter, Thingp real_hitter, int damage);
   int on_damage_poison(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_damage_stat_att(Thingp hitter, Thingp real_hitter, int damage);
@@ -1452,8 +1468,10 @@ public:
   int on_owner_damage_future3(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_damage_lightning(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_damage_melee(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
-  int on_owner_damage_natural_attack(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_owner_damage_nat_attack(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_damage_necrosis(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_owner_damage_draining(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_owner_damage_stamina(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_damage_poison(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_damage_stat_att(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_damage_stat_con(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
@@ -1685,9 +1703,9 @@ public:
   int unused_flag106(void);
   int unused_flag107(void);
   int unused_flag108(void);
-  int unused_flag109(void);
+  int is_key_special(void);
   int unused_flag10(void);
-  int unused_flag110(void);
+  int is_crystal(void);
   int noise_on_moving(void);
   int is_tireless(void);
   int unused_flag11(void);
@@ -2171,7 +2189,7 @@ public:
   void on_you_are_hit_and_now_dead(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
   void on_you_are_hit_but_dodge_it_do(Thingp hitter);
   void on_you_are_hit_but_still_alive(Thingp hitter, Thingp real_hitter, bool crit, int dmg);
-  void on_you_natural_attack(void);
+  void on_you_nat_attack(void);
   void owner_set(Thingp owner);
   void path_shorten(std::vector< point > &path);
   void physical_training_tick(void);

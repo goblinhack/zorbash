@@ -28,6 +28,7 @@ PyObject *level_damage_future2_chance_d1000_at(PyObject *obj, PyObject *args, Py
 PyObject *level_damage_future3_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_lightning_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_necrosis_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_damage_draining_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_poison_chance_d1000_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_damage_received_doubled_from_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_enchant_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -341,9 +342,9 @@ PyObject *level_unused_flag105_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag106_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag107_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag108_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag109_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_key_special_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag10_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag110_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_crystal_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_noise_on_moving_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tireless_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_shove_strength_at(PyObject *obj, PyObject *args, PyObject *keywds);
