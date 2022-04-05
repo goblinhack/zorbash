@@ -1,7 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- on_damage_draining                                                                                                                            -->
+<!-- on_damage_draining test                                                                                                                       -->
 <!-- crystal key                                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
