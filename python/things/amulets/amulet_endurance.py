@@ -15,8 +15,8 @@ def on_unequip(owner, me, x, y):
 
 
 def on_owner_damage_stamina(me, owner, hitter, real_hitter, x, y, damage):
-    enchant = my.thing_enchant_get(me)
     damage = int(damage / 2)
+    enchant = my.thing_enchant_get(me)
     damage -= 10 * enchant
     if damage < 0:
         damage = 0
