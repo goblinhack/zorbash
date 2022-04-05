@@ -97,7 +97,7 @@ PyObject *thing_gfx_very_short_shadow_caster(PyObject *obj, PyObject *args, PyOb
 PyObject *thing_gfx_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_wobbles_when_hit(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_health_decr(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_health_get(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_health(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_health_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_health_max_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_health_max_incr(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -423,7 +423,7 @@ PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_drain_on_swinging(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_drain_on_using(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_stamina_get(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_stamina(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_max_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_max_incr(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -40,7 +40,7 @@ void Thing::gas_poison_tick(void)
 
   poisoned_amount_incr(pcg_random_range(1, intensity));
 
-  if (stamina_get()) {
+  if (stamina()) {
     if (is_player()) {
       msg("You choke in the gas.");
     }

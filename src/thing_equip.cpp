@@ -578,7 +578,7 @@ bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
 
   TRACE_NO_INDENT();
   if (is_able_to_tire()) {
-    if (stamina_get() < 5) {
+    if (stamina() < 5) {
       if (is_player()) {
         if (d20roll_under(stat_con_total())) {
           msg("You are so tired but dig deep and attack!");

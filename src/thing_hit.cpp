@@ -380,6 +380,18 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       IF_DEBUG2 { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "rotting ";
     }
+  } else if (attack_stamina) {
+    if (! damage) {
+      if (is_player()) {
+        msg("You take no stamina damage!");
+      } else if (real_hitter->is_player()) {
+        msg("%s takes no stamina damage!", text_The().c_str());
+      }
+      return false;
+    } else {
+      IF_DEBUG2 { real_hitter->log("Attack stamina damage %d on %s", damage, to_short_string().c_str()); }
+      damage_type = "draining ";
+    }
   } else if (attack_natural) {
     if (! damage) {
       damage_type = real_hitter->damage_nat_attack_type();
@@ -475,7 +487,7 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
   }
 
   if (real_hitter->is_able_to_tire()) {
-    if (! real_hitter->stamina_get()) {
+    if (! real_hitter->stamina()) {
       if (real_hitter->is_player()) {
         msg("You are too tired to attack.");
         return false;
@@ -749,6 +761,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         msg("%%fg=cyan$Your skin blisters for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
       } else if (attack_necrosis) {
         msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
+      } else if (attack_stamina) {
+        msg("%%fg=limegreen$Your stamina feels drained!%%fg=reset$");
       } else {
         msg("%%fg=orange$You hurt yourself for %d %sdamage with %s!%%fg=reset$", damage, damage_type.c_str(),
             hitter->text_the().c_str());
@@ -762,6 +776,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           msg("%%fg=red$%s's fangs suck the last sustenance from you!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (attack_necrosis) {
           msg("%%fg=red$%s's withering touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+        } else if (attack_stamina) {
+          msg("%%fg=red$%s's draining touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (hitter->is_weapon()) {
           msg("%%fg=red$%s cuts you down with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               hitter->text_the(false).c_str());
@@ -804,14 +820,20 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         //
         // Hit when not dead yet...
         //
-        if (attack_poison) {
-          msg("%%fg=yellow$%s's fangs poisons you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
-              damage, damage_type.c_str());
-        } else if (attack_necrosis) {
-          msg("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
-        } else if (crit) {
+        if (crit) {
           msg("%%fg=red$%s CRITS you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str());
+          popup("%%fg=red$CRIT!");
+        } else if (attack_poison) {
+          msg("%%fg=yellow$%s's fangs poisons you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
+              damage, damage_type.c_str());
+          popup("%%fg=orange$Poison!");
+        } else if (attack_necrosis) {
+          msg("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
+          popup("%%fg=orange$Wither!");
+        } else if (attack_stamina) {
+          msg("%%fg=limegreen$%s's draining touch weakens you!%%fg=reset$", real_hitter->text_The().c_str());
+          popup("%%fg=orange$Drain!");
         } else if (hitter->is_weapon()) {
           msg("%%fg=orange$%s hits you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str(), hitter->text_the(false).c_str());
@@ -913,6 +935,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
           msg("Your %s is dissolving.", short_text_name().c_str());
         } else if (attack_necrosis) {
           msg("Your %s is rotting.", short_text_name().c_str());
+        } else if (attack_stamina) {
+          msg("Your %s is drained.", short_text_name().c_str());
         } else {
           msg("Your %s is being damaged.", short_text_name().c_str());
         }
@@ -933,6 +957,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
             } else if (attack_necrosis) {
               msg("You rot %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
                   hitter->text_the().c_str());
+            } else if (attack_stamina) {
+              msg("You drain %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                  hitter->text_the().c_str());
             } else if (hitter->is_weapon()) {
               msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
                   hitter->text_the().c_str());
@@ -951,6 +978,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
               msg("You poison %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (attack_necrosis) {
               msg("You rot %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+            } else if (attack_stamina) {
+              msg("You drain %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (hitter->is_weapon()) {
               msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (hitter->is_laser()) {
@@ -1130,14 +1159,30 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     }
   }
 
-  auto h = health_decr(damage);
-  if (h <= 0) {
-    h = health_set(0);
+  //
+  // Not sure if stamina of 0 should kill. I vote yes.
+  //
+  bool is_killed = false;
 
+  if (attack_stamina) {
+    auto h = stamina_decr(damage);
+    if (h <= 0) {
+      h         = stamina_set(0);
+      is_killed = true;
+    }
+  } else {
+    auto h = health_decr(damage);
+    if (h <= 0) {
+      h         = health_set(0);
+      is_killed = true;
+    }
+  }
+
+  if (is_killed) {
     //
     // Record who dun it.
     //
-    dbg("Is killed by (%s) %u damage, health now %d", real_hitter->to_short_string().c_str(), damage, h);
+    dbg("Is killed by (%s) %u damage", real_hitter->to_short_string().c_str(), damage);
     std::string defeater = real_hitter->text_a_or_an();
 
     //
@@ -1194,6 +1239,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
         reason = "by digestion";
       } else if (attack_necrosis) {
         reason = "by rotting";
+      } else if (attack_stamina) {
+        reason = "by draining";
       } else if (attack_natural) {
         reason = "by over friendly biting";
       }
@@ -1208,7 +1255,8 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       real_hitter->consume(this);
     }
   } else {
-    dbg("Is hit by (%s) %u damage, health now %d", real_hitter->to_short_string().c_str(), damage, h);
+    dbg("Is hit by (%s) %u damage, health now %d/%d", real_hitter->to_short_string().c_str(), damage, health(),
+        stamina());
   }
 
   //

@@ -491,17 +491,17 @@ bool Level::tick(void)
         if ((time_ms() - game->tick_begin_ms) > 100) {
           game->tick_current_is_too_slow = true;
           time_game_delta += 100;
-          log("End of tick and too slow (1)");
+          dbg("End of tick and too slow (1)");
           return true;
         } else if ((time_ms() - game->tick_begin_ms) > 50) {
           game->tick_current_is_too_slow = true;
           time_game_delta += 50;
-          log("End of tick and too slow (2)");
+          dbg("End of tick and too slow (2)");
           return true;
         } else if ((time_ms() - game->tick_begin_ms) > 10) {
           game->tick_current_is_too_slow = true;
           time_game_delta += 10;
-          log("End of tick and too slow (3)");
+          dbg("End of tick and too slow (3)");
           return true;
         }
       }

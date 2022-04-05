@@ -16,7 +16,7 @@ bool Thing::state_resting(bool &do_something, bool &wait)
   //
   // If resting, check if we are rested enough.
   //
-  if ((health() >= (health_max() / 4) * 3) && (stamina_get() >= (stamina_max() / 4) * 3)) {
+  if ((health() >= (health_max() / 4) * 3) && (stamina() >= (stamina_max() / 4) * 3)) {
     AI_LOG("Rested enough. Back to work.");
     if (is_player()) {
       game->tick_begin("Robot has rested enough");

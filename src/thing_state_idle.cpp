@@ -87,7 +87,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     //
     // If we're absolutely exhausted, we must rest, threat or no threat
     //
-    if (is_able_to_tire() && (stamina_get() < stamina_max() / 10)) {
+    if (is_able_to_tire() && (stamina() < stamina_max() / 10)) {
       AI_LOG("Very low on stamina, forced to rest");
       if (is_player()) {
         game->tick_begin("Robot is forced to rest, very low on stamina");
@@ -120,7 +120,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     // If we're absolutely exhausted, we must rest, threat or no threat
     //
     AI_LOG("Idle, rest check");
-    if (is_able_to_tire() && (stamina_get() < stamina_max() / 3)) {
+    if (is_able_to_tire() && (stamina() < stamina_max() / 3)) {
       AI_LOG("Low on stamina, rest");
       if (is_player()) {
         game->tick_begin("Robot is low on stamina");
@@ -250,7 +250,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   auto rest = true;
   if ((health() >= (health_max() / 4) * 3)) {
     if (is_able_to_tire()) {
-      if (stamina_get() >= (stamina_max() / 4) * 3) {
+      if (stamina() >= (stamina_max() / 4) * 3) {
         rest = false;
       }
     } else {

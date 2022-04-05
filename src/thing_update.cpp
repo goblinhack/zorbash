@@ -55,7 +55,7 @@ void Thing::update(void)
   //
   // If polymorphed, retain the same health
   //
-  if (! stamina_get()) {
+  if (! stamina()) {
     TRACE_NO_INDENT();
     auto v = tpp->stamina();
     if (unlikely(v)) {

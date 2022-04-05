@@ -29,7 +29,7 @@ void Thing::solid_rock_tick(void)
   log("Solid rock tick");
   TRACE_AND_INDENT();
 
-  if (stamina_get() <= 0) {
+  if (stamina() <= 0) {
     if (is_player()) {
       msg("Your agonized face is carved in stone for the rest of time as you sufficate inside solid rock.");
     }

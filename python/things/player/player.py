@@ -366,7 +366,6 @@ def tp_init(name, text_name, short_text_name, title):
     my.stat_att_penalty_when_in_shallow_water(self, 2)
     my.stat_att_penalty_when_stuck_max(self, 5)
     my.stat_att_penalty_when_stuck(self, 5)
-    my.stat_att(self, 10)
     my.stat_con(self, 10)
     my.stat_def_penalty_when_idle_max(self, 5)
     my.stat_def_penalty_when_idle(self, 5)

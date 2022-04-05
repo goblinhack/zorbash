@@ -19,7 +19,7 @@ void Thing::stamina_boost(int v)
     return;
   }
 
-  auto old_stamina = stamina_get();
+  auto old_stamina = stamina();
   auto new_stamina = old_stamina + v;
   new_stamina      = std::min(new_stamina, max_stamina);
   stamina_set(new_stamina);
@@ -34,7 +34,7 @@ void Thing::stamina_boost(int v)
 ////////////////////////////////////////////////////////////////////////////
 // stamina
 ////////////////////////////////////////////////////////////////////////////
-int Thing::stamina_get(void)
+int Thing::stamina(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
@@ -43,13 +43,13 @@ int Thing::stamina_get(void)
   }
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
-    v += owner->stamina_get();
+    v += owner->stamina();
   }
   if (is_minion()) {
     auto mob = immediate_mob();
     if (mob) {
       auto mob = immediate_mob();
-      v += mob->stamina_get();
+      v += mob->stamina();
     }
   }
   return v;

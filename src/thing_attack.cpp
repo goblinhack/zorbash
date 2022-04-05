@@ -510,7 +510,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Too tired to attack
   //
   if (is_able_to_tire()) {
-    if (stamina_get() < 5) {
+    if (stamina() < 5) {
       if (is_player()) {
         if (d20roll_under(stat_con_total())) {
           msg("You are so tired but dig deep and attack!");
@@ -523,13 +523,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
     }
   }
 
-  auto stat_att = stat_att_total() - stat_att_penalties_total();
+  //
+  // Attack  is 1d20 + stat_att_total - penalties
+  // Defence is        stat_def_total - penalties
+  //
+  auto attack_bonus = stat_att_total() - stat_att_penalties_total();
   if (owner) {
-    stat_att = owner->stat_att_total() - owner->stat_att_penalties_total();
+    attack_bonus = owner->stat_att_total() - owner->stat_att_penalties_total();
   }
 
-  auto stat_att_bonus = stat_to_bonus(stat_att);
-  auto stat_def       = victim->stat_def_total() - victim->stat_def_penalties_total();
+  auto stat_def = victim->stat_def_total() - victim->stat_def_penalties_total();
 
   bool damage_set       = false;
   bool attack_poison    = false;
@@ -718,7 +721,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of necrosis damage?
   //
-  if (! damage_set || prefer_nat_attack) {
+  if (! damage_set) {
     if (d1000() < damage_necrosis_chance_d1000()) {
       int damage_necrosis_val = damage_necrosis();
       if (damage_necrosis_val > 0) {
@@ -733,7 +736,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of stamina damage?
   //
-  if (! damage_set || prefer_nat_attack) {
+  if (! damage_set) {
     if (d1000() < damage_draining_chance_d1000()) {
       int damage_draining_val = damage_draining();
       if (damage_draining_val > 0) {
@@ -752,7 +755,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
     if (d1000() < damage_nat_attack_chance_d1000()) {
       int damage_nat_attack_val = damage_nat_attack();
       if (damage_nat_attack_val > 0) {
-        damage         = damage_nat_attack_val + stat_att_bonus;
+        damage         = damage_nat_attack_val + attack_bonus;
         damage_set     = true;
         attack_natural = true;
         dbg("Set natural damage %d", damage);
@@ -768,7 +771,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   if (! damage_set) {
     if (d1000() < damage_melee_chance_d1000()) {
-      damage = damage_melee() + stat_att_bonus;
+      damage = damage_melee() + attack_bonus;
       if (damage > 0) {
         dbg("Set melee damage %d", damage);
         damage_set = true;
@@ -778,7 +781,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   if (! damage_set) {
     if (owner) {
       if (d1000() < owner->damage_melee_chance_d1000()) {
-        damage = damage_melee() + stat_att_bonus;
+        damage = damage_melee() + attack_bonus;
         if (damage > 0) {
           dbg("Set melee damage %d", damage);
           damage_set = true;
@@ -900,23 +903,27 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
       // You just cannot miss this.
       //
     } else {
+      //
+      // Attack  is 1d20 + stat_att_total - penalties
+      // Defence is        stat_def_total - penalties
+      //
       bool hit      = false;
       int  to_hit   = stat_def;
-      int  i_rolled = d20() + stat_att_bonus;
+      int  i_rolled = d20() + attack_bonus;
 
       if (i_rolled == 20) {
         crit = true;
         hit  = true;
         dbg("Attack on %s: ATT %s DEF %d, to-hit %d, crit rolled %d -> hit", victim->to_short_string().c_str(),
-            modifier_to_string(stat_att).c_str(), stat_def, to_hit, i_rolled);
+            modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled);
       } else if (i_rolled == 1) {
         hit = false;
         dbg("Attack on %s: ATT %s DEF %d, to-hit %d, fumble rolled %d -> miss", victim->to_short_string().c_str(),
-            modifier_to_string(stat_att).c_str(), stat_def, to_hit, i_rolled);
+            modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled);
       } else {
         hit = i_rolled >= to_hit;
         dbg("Attack on %s: ATT %s DEF %d, to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
-            modifier_to_string(stat_att).c_str(), stat_def, to_hit, i_rolled, hit ? "hit" : "miss");
+            modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled, hit ? "hit" : "miss");
       }
 
       //
@@ -938,7 +945,8 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
           }
           popup("It misses!");
         } else {
-          dbg("The attack missed (att modifier %d, AC %d) on %s", stat_att, stat_def, victim->to_string().c_str());
+          dbg("The attack missed (att modifier %d, AC %d) on %s", attack_bonus, stat_def,
+              victim->to_string().c_str());
         }
 
         if (victim != this) {

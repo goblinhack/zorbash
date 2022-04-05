@@ -12,13 +12,13 @@ def on_use(owner, item, target, x, y):
 
     enchant = my.thing_enchant_get(item)
 
-    health = my.thing_health_get(owner)
+    health = my.thing_health(owner)
     new_health = int((my.thing_health_max(owner) / 100.0) * 80 + enchant * 10)
     if new_health > health:
         did_something = True
         my.thing_health_set(owner, new_health)
 
-    stamina = my.thing_stamina_get(owner)
+    stamina = my.thing_stamina(owner)
     new_stamina = int((my.thing_stamina_max(owner) / 100.0) * 80 + enchant * 10)
     if new_stamina > stamina:
         did_something = True

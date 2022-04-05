@@ -13,11 +13,11 @@ float Thing::jump_distance_current(void)
   TRACE_NO_INDENT();
   auto d = (float) jump_distance_total() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
-  if (stamina_get() < stamina_max() / 2) {
+  if (stamina() < stamina_max() / 2) {
     d /= 2;
   }
 
-  if (stamina_get() < stamina_max() / 4) {
+  if (stamina() < stamina_max() / 4) {
     d /= 2;
   }
 

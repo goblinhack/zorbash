@@ -731,12 +731,12 @@ void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_poison_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison dmg%18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison dmg%17s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_poison_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison dmg%18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison dmg%17s", tmp2);
       }
       w->log(tmp);
 
@@ -995,12 +995,12 @@ void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_energy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%17s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
         snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_energy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%17s", tmp2);
       }
       w->log(tmp);
 
@@ -1073,14 +1073,14 @@ void Game::wid_thing_info_add_damage_nat_attack(WidPopup *w, Thingp t)
       } else {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_natural_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%15s",
-                   capitalise(t->damage_nat_attack_type()).c_str(), tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%15s", capitalise(t->damage_nat_attack_type()).c_str(),
+                   tmp2);
         } else {
           min_value += t->enchant_get();
           max_value += t->enchant_get();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_natural_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%15s",
-                   capitalise(t->damage_nat_attack_type()).c_str(), tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%15s", capitalise(t->damage_nat_attack_type()).c_str(),
+                   tmp2);
         }
         w->log(tmp);
       }
@@ -1109,12 +1109,12 @@ void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_digest_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest dmg%18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest dmg%17s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d%s", min_value, max_value, t->damage_digest_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest dmg%18s", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_digest_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest dmg%17s", tmp2);
       }
       w->log(tmp);
 
@@ -1142,12 +1142,12 @@ void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_necrosis_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting dmg%18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting dmg%17s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d%s", min_value, max_value, t->damage_necrosis_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting dmg%18s", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_necrosis_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting dmg%17s", tmp2);
       }
       w->log(tmp);
 
@@ -1175,12 +1175,12 @@ void Game::wid_thing_info_add_damage_draining(WidPopup *w, Thingp t)
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_draining_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drain dmg  %18s", tmp2);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drain dmg  %17s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d%s", min_value, max_value, t->damage_draining_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drain dmg  %18s", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_draining_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drain dmg  %17s", tmp2);
       }
       w->log(tmp);
 
@@ -1200,17 +1200,17 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   char tmp[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    auto ac       = t->stat_att();
-    auto ac_total = t->stat_att_total();
-    if (ac_total != ac) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %2d", ac);
+    auto stat_att       = 10 + t->stat_att();
+    auto stat_att_total = 10 + t->stat_att_total();
+    if (stat_att_total != stat_att) {
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %2d", stat_att_total);
       w->log(tmp);
 
       Thingp curr_armor = t->equip_get(MONST_EQUIP_ARMOR);
       if (curr_armor) {
-        auto ac = curr_armor->stat_att();
-        if (ac) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from armor         %2d", ac);
+        auto stat_att = curr_armor->stat_att();
+        if (stat_att) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from armor         %2d", stat_att);
           w->log(tmp);
         }
         auto mod = curr_armor->stat_att_mod();
@@ -1222,9 +1222,9 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
 
       Thingp curr_shield = t->equip_get(MONST_EQUIP_SHIELD);
       if (curr_shield) {
-        auto ac = curr_shield->stat_att();
-        if (ac) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from shield        %2d", ac);
+        auto stat_att = curr_shield->stat_att();
+        if (stat_att) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from shield        %2d", stat_att);
           w->log(tmp);
         }
         auto mod = curr_shield->stat_att_mod();
@@ -1236,9 +1236,9 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
 
       Thingp curr_helmet = t->equip_get(MONST_EQUIP_HELMET);
       if (curr_helmet) {
-        auto ac = curr_helmet->stat_att();
-        if (ac) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from helmet       %2d", ac);
+        auto stat_att = curr_helmet->stat_att();
+        if (stat_att) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from helmet       %2d", stat_att);
           w->log(tmp);
         }
 
@@ -1251,9 +1251,9 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
 
       Thingp curr_amulet = t->equip_get(MONST_EQUIP_AMULET);
       if (curr_amulet) {
-        auto ac = curr_amulet->stat_att();
-        if (ac) {
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from amulet        %2d", ac);
+        auto stat_att = curr_amulet->stat_att();
+        if (stat_att) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack from amulet        %2d", stat_att);
           w->log(tmp);
         }
 
@@ -1264,7 +1264,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
         }
       }
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %2d", ac);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                    %2d", stat_att);
       w->log(tmp);
     }
   } else if (t->stat_att_mod()) {
@@ -1283,7 +1283,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
     auto ac       = t->stat_def();
     auto ac_total = t->stat_def_total();
     if (ac_total != ac) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                   %2d", ac);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                   %2d", ac_total);
       w->log(tmp);
 
       Thingp curr_armor = t->equip_get(MONST_EQUIP_ARMOR);
