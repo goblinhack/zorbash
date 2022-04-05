@@ -1,9 +1,10 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- on_damage_draining test                                                                                                                       -->
+<!-- multi damage types                                                                                                                           -->
 <!-- crystal key                                                                                                                                  -->
 <!-- sword of draining                                                                                                                            -->
+<!-- how does my.thing_damage_current_set work with enchant                                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

@@ -223,7 +223,7 @@ static void wid_rightbar_stats_over_stat_att_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->stat_att();
+    auto val = 10 + player->stat_att();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your attack roll is %d.", val);
     wid_rightbar_popup->log(tmp, true);
@@ -231,11 +231,11 @@ static void wid_rightbar_stats_over_stat_att_b(Widp w, int32_t relx, int32_t rel
   }
 
   {
-    auto val = player->stat_att();
-    auto tot = player->stat_att_total();
+    auto val = 10 + player->stat_att();
+    auto tot = 10 + player->stat_att_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total attack including all items and modifiers is %d.", val);
+      snprintf(tmp, sizeof(tmp) - 1, "Your total attack including all items and modifiers is %d.", tot);
       wid_rightbar_popup->log(tmp, true);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
@@ -825,7 +825,7 @@ static bool wid_rightbar_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_att_total());
+    snprintf(tmp, sizeof(tmp) - 1, "   %2d", 10 + player->stat_att_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }

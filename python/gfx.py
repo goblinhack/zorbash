@@ -1777,13 +1777,13 @@ def init_tiles_16x16():
         "sword_rusty",
         "sword",
         "cutlass",
+        "sword_draining",
         "very_broadsword",
         "pike",
         "axe",
         "scythe",
         "shovel",
         "double_shovel",
-        "",
         "",
         "",
         "",
@@ -11552,6 +11552,7 @@ def init_chasm():
 @timeme
 def init_weapons_tiles():
     tiles = [
+        #############################################################
         "sword_wood_carry.1",
         "sword_wood_carry.2",
         "sword_wood_carry.3",
@@ -11582,6 +11583,7 @@ def init_weapons_tiles():
         "sword_wood_swing_up.4",
         "sword_wood_swing_up.5",
         "sword_wood_swing_up.6",
+        #############################################################
         "sword_rusty_carry.1",
         "sword_rusty_carry.2",
         "sword_rusty_carry.3",
@@ -11612,6 +11614,7 @@ def init_weapons_tiles():
         "sword_rusty_swing_up.4",
         "sword_rusty_swing_up.5",
         "sword_rusty_swing_up.6",
+        #############################################################
         "sword_carry.1",
         "sword_carry.2",
         "sword_carry.3",
@@ -11642,6 +11645,7 @@ def init_weapons_tiles():
         "sword_swing_up.4",
         "sword_swing_up.5",
         "sword_swing_up.6",
+        #############################################################
         "cutlass_carry.1",
         "cutlass_carry.2",
         "cutlass_carry.3",
@@ -11858,6 +11862,37 @@ def init_weapons_tiles():
         "pike_swing_up.4",
         "pike_swing_up.5",
         "pike_swing_up.6",
+        #############################################################
+        "sword_draining_carry.1",
+        "sword_draining_carry.2",
+        "sword_draining_carry.3",
+        "sword_draining_carry.4",
+        "sword_draining_carry.5",
+        "sword_draining_carry.6",
+        "",
+        "",
+        "",
+        "sword_draining_swing_left.1",
+        "sword_draining_swing_left.2",
+        "sword_draining_swing_left.3",
+        "sword_draining_swing_left.4",
+        "sword_draining_swing_left.5",
+        "sword_draining_swing_left.6",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "sword_draining_swing_up.1",
+        "sword_draining_swing_up.2",
+        "sword_draining_swing_up.3",
+        "sword_draining_swing_up.4",
+        "sword_draining_swing_up.5",
+        "sword_draining_swing_up.6",
     ]
 
     my.tile_load_arr_sprites(
