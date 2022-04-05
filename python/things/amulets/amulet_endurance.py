@@ -15,9 +15,11 @@ def on_unequip(owner, me, x, y):
 
 
 def on_owner_damage_stamina(me, owner, hitter, real_hitter, x, y, damage):
-    my.topcon("STAM")
-    if my.thing_is_player(owner):
-        my.topcon("stam {}".format(damage))
+    enchant = my.thing_enchant_get(me)
+    damage = int(damage / 2)
+    damage -= 10 * enchant
+    if damage < 0:
+        damage = 0
     return damage
 
 
@@ -31,6 +33,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_amulet(self, True)
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
+    my.is_enchantable(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
     my.on_owner_damage_stamina_do(self, "me.on_owner_damage_stamina()")
@@ -43,9 +46,10 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_class_c(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
+    my.text_enchant(self, "-10 stamina DMG")
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will only use half as much stamina as normal. This also applies to magical items that may attempt to drain stamine, like boots of jumping and skills such as Devoted Thrust.")
+    my.long_text_description(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will only use half as much stamina as normal. This also applies to magical items that may attempt to drain stamine, like boots of jumping or skills such as Devoted Thrust. Each enchant will reduce a further 10 points of stamina damage.")
     my.noise_additional_on_jump_end(self, 10)
     my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)

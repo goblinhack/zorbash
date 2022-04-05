@@ -127,6 +127,11 @@ int Thing::on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
 
 int Thing::total_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
 {
+  TRACE_NO_INDENT();
+  if (! maybe_itemsp()) {
+    return damage;
+  }
+
   FOR_ALL_BUFFS(item)
   {
     auto iter = level->thing_find(item.id);
