@@ -96,7 +96,7 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
       if (1) {
-        auto w = level->thing_new("sword_wood", point(x, y));
+        auto w = level->thing_new("sword_draining", point(x, y));
         t->carry(w);
       }
       if (0) {

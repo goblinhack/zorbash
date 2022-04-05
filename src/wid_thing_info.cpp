@@ -1054,7 +1054,7 @@ void Game::wid_thing_info_add_damage_nat_attack(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto damage_natural_dice = t->damage_natural_dice();
     auto min_value           = damage_natural_dice.min_roll();
     auto max_value           = damage_natural_dice.max_roll();
@@ -1102,7 +1102,7 @@ void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto attack_swallow_dice = t->damage_digest_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
@@ -1135,7 +1135,7 @@ void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto attack_swallow_dice = t->damage_necrosis_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
@@ -1168,7 +1168,7 @@ void Game::wid_thing_info_add_damage_draining(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto attack_swallow_dice = t->damage_draining_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
@@ -1199,7 +1199,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto stat_att       = 10 + t->stat_att();
     auto stat_att_total = 10 + t->stat_att_total();
     if (stat_att_total != stat_att) {
@@ -1279,7 +1279,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
     auto ac       = t->stat_def();
     auto ac_total = t->stat_def_total();
     if (ac_total != ac) {
