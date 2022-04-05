@@ -17,7 +17,7 @@ def on_waiting(me, x, y):
         return False
 
     if my.level_is_wall_at(owner, x, y):
-        stamina = my.thing_stamina_get(owner)
+        stamina = my.thing_stamina(owner)
         new_stamina = int((stamina / 100.0) * 90)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):
@@ -25,7 +25,7 @@ def on_waiting(me, x, y):
         return True
 
     if my.level_is_rock_at(owner, x, y):
-        stamina = my.thing_stamina_get(owner)
+        stamina = my.thing_stamina(owner)
         new_stamina = int((stamina / 100.0) * 80)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):
@@ -41,7 +41,7 @@ def on_move(me, x, y):
         return False
 
     if my.level_is_wall_at(owner, x, y):
-        stamina = my.thing_stamina_get(owner)
+        stamina = my.thing_stamina(owner)
         new_stamina = int((stamina / 100.0) * 80)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):
@@ -49,7 +49,7 @@ def on_move(me, x, y):
         return True
 
     if my.level_is_rock_at(owner, x, y):
-        stamina = my.thing_stamina_get(owner)
+        stamina = my.thing_stamina(owner)
         new_stamina = int((stamina / 100.0) * 50)
         my.thing_stamina_set(owner, new_stamina)
         if my.thing_is_player(owner):

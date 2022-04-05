@@ -3,6 +3,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- on_damage_draining test                                                                                                                       -->
 <!-- crystal key                                                                                                                                  -->
+<!-- sword of draining                                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

@@ -12,7 +12,7 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
-    health = my.thing_health_get(me)
+    health = my.thing_health(me)
     low_health = int((my.thing_health_max(me) / 100.0) * 90)
     if health < low_health:
         my.thing_speaks(me, "Roar! Free at last!")

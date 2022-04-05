@@ -5,12 +5,12 @@ self = None
 
 
 def on_use(owner, skill, target, x, y):
-    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health_get(owner)))
-    # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health_get(skill)))
-    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health_get(target)))
+    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
+    # my.topcon("skill  {} {}".format(my.thing_name_get(skill), my.thing_health(skill)))
+    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
     my.level_spawn_using_items_radius_range(owner, skill, target, "skill_devoted_thrust_effect")
     # my.topcon("stam  {}".format((owner)))
-    bonus = int(my.thing_stamina_get(owner) / 2)
+    bonus = int(my.thing_stamina(owner) / 2)
     # my.topcon("bonus {}".format(bonus))
 
     enchant = my.thing_enchant_get(skill)

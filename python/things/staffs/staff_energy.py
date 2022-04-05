@@ -16,9 +16,9 @@ def on_idle(me, x, y):
 
 
 def on_use(owner, item, target, x, y):
-    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health_get(owner)))
-    # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health_get(item)))
-    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health_get(target)))
+    # my.topcon("owner  {} {}".format(my.thing_name_get(owner), my.thing_health(owner)))
+    # my.topcon("item   {} {}".format(my.thing_name_get(item), my.thing_health(item)))
+    # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
     damage = my.thing_damage_energy(item)
     enchant = my.thing_enchant_get(item)
     my.thing_damage_current_set(owner, damage + enchant)

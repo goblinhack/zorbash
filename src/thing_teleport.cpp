@@ -51,11 +51,11 @@ float Thing::teleport_distance_with_modifiers_get(void)
   TRACE_NO_INDENT();
   auto d = (float) teleport_distance_get() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
-  if (stamina_get() < stamina_max() / 2) {
+  if (stamina() < stamina_max() / 2) {
     d /= 2;
   }
 
-  if (stamina_get() < stamina_max() / 4) {
+  if (stamina() < stamina_max() / 4) {
     d /= 2;
   }
 
@@ -202,11 +202,11 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
   }
 
   if (is_able_to_tire()) {
-    if (! stamina_get()) {
+    if (! stamina()) {
       if (is_player()) {
         msg("You are too tired to teleport.");
       }
-      dbg("Too tired to teleport, stamina %d", stamina_get());
+      dbg("Too tired to teleport, stamina %d", stamina());
       return false;
     }
   }
