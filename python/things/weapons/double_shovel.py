@@ -53,7 +53,7 @@ def tp_init(name, text_name, short_text_name):
     my.noise_on_dropping(self, 40)
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_RARE)
-    my.stamina_drain_on_swinging(self, 3)
+    my.stamina_drain_on_attacking(self, 3)
     my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy diggy means of justice.")

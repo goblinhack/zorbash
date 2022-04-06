@@ -481,7 +481,7 @@ int Tp::on_death_is_open(void) const { return _on_death_is_open; }
 int Tp::range_max(void) const { return _range_max; }
 int Tp::rarity(void) const { return _rarity; }
 int Tp::spawn_group_radius(void) const { return _spawn_group_radius; }
-int Tp::stamina_drain_on_swinging(void) const { return _stamina_drain_on_swinging; }
+int Tp::stamina_drain_on_attacking(void) const { return _stamina_drain_on_attacking; }
 int Tp::stamina_drain_on_using(void) const { return _stamina_drain_on_using; }
 int Tp::stamina(void) const { return _stamina; }
 int Tp::stat_att_mod(void) const { return _stat_att_mod; }
@@ -1098,7 +1098,7 @@ void Tp::rarity_set(int v) { _rarity = v; }
 void Tp::short_text_name_set(const std::string &v) { _short_text_name = v; }
 void Tp::spawn_group_radius_set(int v) { _spawn_group_radius = v; }
 void Tp::spawn_on_shoved_set(const std::string &v) { _spawn_on_shoved = v; }
-void Tp::stamina_drain_on_swinging_set(int v) { _stamina_drain_on_swinging = v; }
+void Tp::stamina_drain_on_attacking_set(int v) { _stamina_drain_on_attacking = v; }
 void Tp::stamina_drain_on_using_set(int v) { _stamina_drain_on_using = v; }
 void Tp::stamina_set(int v) { _stamina = v; }
 void Tp::stat_att_mod_set(int v) { _stat_att_mod = v; }
