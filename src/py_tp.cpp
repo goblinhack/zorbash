@@ -257,6 +257,51 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_TRUE;                                                                                                  \
   }
 
+#define TP_BODY_SET_INT_INT(__field__)                                                                               \
+  PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                               \
+  {                                                                                                                  \
+    PyObject *py_class = 0;                                                                                          \
+    char     *tp_name  = 0;                                                                                          \
+    int       value    = 0;                                                                                          \
+    int       value2   = 0;                                                                                          \
+    Tpp       tp;                                                                                                    \
+                                                                                                                     \
+    static char *kwlist[] = {(char *) "class", (char *) "value", (char *) "value2", 0};                              \
+                                                                                                                     \
+    if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|ii", kwlist, &py_class, &value, &value2)) {                   \
+      ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    if (! py_class) {                                                                                                \
+      ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      Py_RETURN_FALSE;                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    tp_name = py_obj_attr_str(py_class, "name");                                                                     \
+    if (! tp_name) {                                                                                                 \
+      ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    PY_DBG("%s(%s -> %d)", __FUNCTION__, tp_name, value);                                                            \
+                                                                                                                     \
+    tp = tp_find(tp_name);                                                                                           \
+    if (unlikely(! tp)) {                                                                                            \
+      ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      goto done;                                                                                                     \
+    }                                                                                                                \
+                                                                                                                     \
+    tp->__field__##_set(value, value2);                                                                              \
+                                                                                                                     \
+  done:                                                                                                              \
+    if (tp_name) {                                                                                                   \
+      myfree(tp_name);                                                                                               \
+    }                                                                                                                \
+                                                                                                                     \
+    Py_RETURN_TRUE;                                                                                                  \
+  }
+
 #define TP_BODY_SET_DOUBLE(__field__)                                                                                \
   PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds)                                               \
   {                                                                                                                  \
@@ -1071,21 +1116,21 @@ TP_BODY_SET_INT(collision_hit_adj)
 TP_BODY_SET_INT(collision_hit_priority)
 TP_BODY_SET_INT(collision_hit_two_tiles_ahead)
 TP_BODY_SET_INT(crit_chance_d10000)
-TP_BODY_SET_INT(damage_acid_chance_d1000)
-TP_BODY_SET_INT(damage_cold_chance_d1000)
-TP_BODY_SET_INT(damage_crush_chance_d1000)
-TP_BODY_SET_INT(damage_digest_chance_d1000)
-TP_BODY_SET_INT(damage_energy_chance_d1000)
-TP_BODY_SET_INT(damage_fire_chance_d1000)
-TP_BODY_SET_INT(damage_future1_chance_d1000)
-TP_BODY_SET_INT(damage_future2_chance_d1000)
-TP_BODY_SET_INT(damage_future3_chance_d1000)
-TP_BODY_SET_INT(damage_lightning_chance_d1000)
-TP_BODY_SET_INT(damage_melee_chance_d1000)
-TP_BODY_SET_INT(damage_nat_attack_chance_d1000)
-TP_BODY_SET_INT(damage_necrosis_chance_d1000)
-TP_BODY_SET_INT(damage_draining_chance_d1000)
-TP_BODY_SET_INT(damage_poison_chance_d1000)
+TP_BODY_SET_INT_INT(damage_acid_chance_d1000)
+TP_BODY_SET_INT_INT(damage_cold_chance_d1000)
+TP_BODY_SET_INT_INT(damage_crush_chance_d1000)
+TP_BODY_SET_INT_INT(damage_digest_chance_d1000)
+TP_BODY_SET_INT_INT(damage_energy_chance_d1000)
+TP_BODY_SET_INT_INT(damage_fire_chance_d1000)
+TP_BODY_SET_INT_INT(damage_future1_chance_d1000)
+TP_BODY_SET_INT_INT(damage_future2_chance_d1000)
+TP_BODY_SET_INT_INT(damage_future3_chance_d1000)
+TP_BODY_SET_INT_INT(damage_lightning_chance_d1000)
+TP_BODY_SET_INT_INT(damage_melee_chance_d1000)
+TP_BODY_SET_INT_INT(damage_nat_attack_chance_d1000)
+TP_BODY_SET_INT_INT(damage_necrosis_chance_d1000)
+TP_BODY_SET_INT_INT(damage_draining_chance_d1000)
+TP_BODY_SET_INT_INT(damage_poison_chance_d1000)
 TP_BODY_SET_INT(damage_received_doubled_from_acid)
 TP_BODY_SET_INT(damage_received_doubled_from_cold)
 TP_BODY_SET_INT(damage_received_doubled_from_fire)

@@ -18,7 +18,7 @@ def tp_init(name):
     self = tp.Tp(name, "reinforced door")
     my.collision_check(self, True)
     my.collision_hit_priority(self, 9)
-    my.damage_crush_chance_d1000(self, 1000)
+    my.damage_crush_chance_d1000(self, 0, 1000)
     my.damage_crush_dice(self, "2d6")
     my.gfx_animated(self, True)
     my.gfx_health_bar_autohide(self, True)

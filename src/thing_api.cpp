@@ -281,18 +281,6 @@ int Thing::crit_chance_d10000(void)
   return chance;
 }
 
-int Thing::damage_melee_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_melee_chance_d1000());
-}
-
-int Thing::damage_nat_attack_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_nat_attack_chance_d1000());
-}
-
 int Thing::is_able_to_shove(void)
 {
   TRACE_NO_INDENT();
@@ -2967,84 +2955,6 @@ int Thing::attack_engulf_chance_d1000(void)
 {
   TRACE_NO_INDENT();
   return (tp()->attack_engulf_chance_d1000());
-}
-
-int Thing::damage_poison_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_poison_chance_d1000());
-}
-
-int Thing::damage_future1_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_future1_chance_d1000());
-}
-
-int Thing::damage_future2_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_future2_chance_d1000());
-}
-
-int Thing::damage_future3_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_future3_chance_d1000());
-}
-
-int Thing::damage_cold_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_cold_chance_d1000());
-}
-
-int Thing::damage_fire_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_fire_chance_d1000());
-}
-
-int Thing::damage_crush_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_crush_chance_d1000());
-}
-
-int Thing::damage_lightning_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_lightning_chance_d1000());
-}
-
-int Thing::damage_energy_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_energy_chance_d1000());
-}
-
-int Thing::damage_acid_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_acid_chance_d1000());
-}
-
-int Thing::damage_digest_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_digest_chance_d1000());
-}
-
-int Thing::damage_necrosis_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_necrosis_chance_d1000());
-}
-
-int Thing::damage_draining_chance_d1000(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_draining_chance_d1000());
 }
 
 int Thing::is_sticky(void)

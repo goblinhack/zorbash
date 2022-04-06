@@ -37,7 +37,7 @@ def tp_init(name, text_name):
     my.attack_meat(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
-    my.damage_nat_attack_chance_d1000(self, 950)
+    my.damage_nat_attack_chance_d1000(self, 0, 950)
     my.damage_nat_attack_type(self, "bite")
     my.damage_natural_dice(self, "1d6+10")
     my.damage_received_doubled_from_fire(self, True)

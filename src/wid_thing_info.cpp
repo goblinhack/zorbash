@@ -145,21 +145,22 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_nutrition(wid_popup_window, t);
   wid_thing_info_add_health(wid_popup_window, t);
   wid_thing_info_add_noise(wid_popup_window, t);
-  wid_thing_info_add_damage_nat_attack(wid_popup_window, t);
-  wid_thing_info_add_damage_melee(wid_popup_window, t);
-  wid_thing_info_add_damage_poison(wid_popup_window, t);
-  wid_thing_info_add_damage_future1(wid_popup_window, t);
-  wid_thing_info_add_damage_future2(wid_popup_window, t);
-  wid_thing_info_add_damage_future3(wid_popup_window, t);
-  wid_thing_info_add_damage_cold(wid_popup_window, t);
-  wid_thing_info_add_damage_fire(wid_popup_window, t);
-  wid_thing_info_add_damage_crush(wid_popup_window, t);
-  wid_thing_info_add_damage_lightning(wid_popup_window, t);
-  wid_thing_info_add_damage_energy(wid_popup_window, t);
-  wid_thing_info_add_damage_acid(wid_popup_window, t);
-  wid_thing_info_add_damage_digest(wid_popup_window, t);
-  wid_thing_info_add_damage_necrosis(wid_popup_window, t);
-  wid_thing_info_add_damage_draining(wid_popup_window, t);
+  int attack_index = 0;
+  wid_thing_info_add_damage_nat_attack(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_melee(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_poison(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_future1(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_future2(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_future3(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_cold(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_fire(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_crush(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_lightning(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_energy(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_acid(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_digest(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_necrosis(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_draining(wid_popup_window, t, attack_index);
   wid_thing_info_add_break_chance(wid_popup_window, t);
   wid_thing_info_add_crit_chance(wid_popup_window, t);
   wid_thing_info_add_attack(wid_popup_window, t);
@@ -227,21 +228,22 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_gold_value(wid_popup_window, t);
     wid_thing_info_add_nutrition(wid_popup_window, t);
     wid_thing_info_add_health(wid_popup_window, t);
-    wid_thing_info_add_damage_nat_attack(wid_popup_window, t);
-    wid_thing_info_add_damage_melee(wid_popup_window, t);
-    wid_thing_info_add_damage_poison(wid_popup_window, t);
-    wid_thing_info_add_damage_future1(wid_popup_window, t);
-    wid_thing_info_add_damage_future2(wid_popup_window, t);
-    wid_thing_info_add_damage_future3(wid_popup_window, t);
-    wid_thing_info_add_damage_cold(wid_popup_window, t);
-    wid_thing_info_add_damage_fire(wid_popup_window, t);
-    wid_thing_info_add_damage_crush(wid_popup_window, t);
-    wid_thing_info_add_damage_lightning(wid_popup_window, t);
-    wid_thing_info_add_damage_energy(wid_popup_window, t);
-    wid_thing_info_add_damage_acid(wid_popup_window, t);
-    wid_thing_info_add_damage_digest(wid_popup_window, t);
-    wid_thing_info_add_damage_necrosis(wid_popup_window, t);
-    wid_thing_info_add_damage_draining(wid_popup_window, t);
+    int attack_index = 0;
+    wid_thing_info_add_damage_nat_attack(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_melee(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_poison(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_future1(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_future2(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_future3(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_cold(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_fire(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_crush(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_lightning(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_energy(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_acid(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_digest(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_necrosis(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_draining(wid_popup_window, t, attack_index);
     wid_thing_info_add_break_chance(wid_popup_window, t);
     wid_thing_info_add_crit_chance(wid_popup_window, t);
     wid_thing_info_add_attack(wid_popup_window, t);
@@ -665,7 +667,7 @@ void Game::wid_thing_info_add_crit_chance(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -717,7 +719,7 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -740,7 +742,7 @@ void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_poison_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_poison_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -750,7 +752,7 @@ void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -773,7 +775,7 @@ void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_future1_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_future1_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -783,7 +785,7 @@ void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_future2(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future2(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -806,7 +808,7 @@ void Game::wid_thing_info_add_damage_future2(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_future2_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_future2_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -816,7 +818,7 @@ void Game::wid_thing_info_add_damage_future2(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_future3(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_future3(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -839,7 +841,7 @@ void Game::wid_thing_info_add_damage_future3(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_future3_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_future3_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -849,7 +851,7 @@ void Game::wid_thing_info_add_damage_future3(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_cold(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_cold(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -872,7 +874,7 @@ void Game::wid_thing_info_add_damage_cold(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_cold_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_cold_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -882,7 +884,7 @@ void Game::wid_thing_info_add_damage_cold(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_fire(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_fire(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -905,7 +907,7 @@ void Game::wid_thing_info_add_damage_fire(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_fire_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_fire_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -915,7 +917,7 @@ void Game::wid_thing_info_add_damage_fire(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -938,7 +940,7 @@ void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_crush_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_crush_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -948,7 +950,7 @@ void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -971,7 +973,7 @@ void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_lightning_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_lightning_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -981,7 +983,7 @@ void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -1004,7 +1006,7 @@ void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_energy_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_energy_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -1014,7 +1016,7 @@ void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_acid(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_acid(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -1037,7 +1039,7 @@ void Game::wid_thing_info_add_damage_acid(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_acid_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_acid_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -1047,7 +1049,7 @@ void Game::wid_thing_info_add_damage_acid(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_nat_attack(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_nat_attack(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -1085,7 +1087,7 @@ void Game::wid_thing_info_add_damage_nat_attack(WidPopup *w, Thingp t)
         w->log(tmp);
       }
 
-      int chance = (int) ((((float) tp->damage_nat_attack_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_nat_attack_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -1095,7 +1097,7 @@ void Game::wid_thing_info_add_damage_nat_attack(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -1118,7 +1120,7 @@ void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_digest_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_digest_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -1128,7 +1130,7 @@ void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -1151,7 +1153,7 @@ void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_necrosis_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_necrosis_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);
@@ -1161,7 +1163,7 @@ void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t)
   }
 }
 
-void Game::wid_thing_info_add_damage_draining(WidPopup *w, Thingp t)
+void Game::wid_thing_info_add_damage_draining(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -1184,7 +1186,7 @@ void Game::wid_thing_info_add_damage_draining(WidPopup *w, Thingp t)
       }
       w->log(tmp);
 
-      int chance = (int) ((((float) tp->damage_draining_chance_d1000()) / 1000.0) * 100.0);
+      int chance = (int) ((((float) tp->damage_draining_chance_d1000(index)) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %19s", tmp2);

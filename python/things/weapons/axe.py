@@ -26,7 +26,7 @@ def init_weapon(name, text_name, short_text_name):
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
     my.crit_chance_d10000(self, 500)
-    my.damage_melee_chance_d1000(self, 1000)
+    my.damage_melee_chance_d1000(self, 0, 1000)
     my.damage_melee_dice(self, "1d6")
     my.equip_carry_anim(self, "axe_carry")
     my.gfx_animated_can_hflip(self, True)

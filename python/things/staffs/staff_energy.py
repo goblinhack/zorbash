@@ -60,7 +60,7 @@ def tp_init(name, text_name, short_text_name):
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
-    my.damage_energy_chance_d1000(self, 1000)
+    my.damage_energy_chance_d1000(self, 0, 1000)
     my.damage_energy_dice(self, "1d20+10")
     my.equip_carry_anim(self, "staff_energy_carry")
     my.gfx_animated(self, True)
