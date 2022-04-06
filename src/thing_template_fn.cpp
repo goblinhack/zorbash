@@ -15,25 +15,25 @@ const std::string &Tp::long_text_description(void) const { return _long_text_des
 const std::string &Tp::name(void) const { return _name; }
 const std::string &Tp::on_awake_do(void) const { return _on_awake_do; }
 const std::string &Tp::on_born_do(void) const { return _on_born_do; }
-const std::string &Tp::on_damage_acid_do(void) const { return _on_damage_acid_do; }
-const std::string &Tp::on_damage_cold_do(void) const { return _on_damage_cold_do; }
-const std::string &Tp::on_damage_crush_do(void) const { return _on_damage_crush_do; }
-const std::string &Tp::on_damage_digest_do(void) const { return _on_damage_digest_do; }
-const std::string &Tp::on_damage_energy_do(void) const { return _on_damage_energy_do; }
-const std::string &Tp::on_damage_fire_do(void) const { return _on_damage_fire_do; }
-const std::string &Tp::on_damage_future1_do(void) const { return _on_damage_future1_do; }
-const std::string &Tp::on_damage_future2_do(void) const { return _on_damage_future2_do; }
-const std::string &Tp::on_damage_future3_do(void) const { return _on_damage_future3_do; }
-const std::string &Tp::on_damage_lightning_do(void) const { return _on_damage_lightning_do; }
-const std::string &Tp::on_damage_melee_do(void) const { return _on_damage_melee_do; }
-const std::string &Tp::on_damage_nat_attack_do(void) const { return _on_damage_nat_attack_do; }
-const std::string &Tp::on_damage_necrosis_do(void) const { return _on_damage_necrosis_do; }
-const std::string &Tp::on_damage_draining_do(void) const { return _on_damage_draining_do; }
-const std::string &Tp::on_damage_stamina_do(void) const { return _on_damage_stamina_do; }
-const std::string &Tp::on_damage_poison_do(void) const { return _on_damage_poison_do; }
-const std::string &Tp::on_damage_stat_att_do(void) const { return _on_damage_stat_att_do; }
-const std::string &Tp::on_damage_stat_con_do(void) const { return _on_damage_stat_con_do; }
-const std::string &Tp::on_damage_stat_str_do(void) const { return _on_damage_stat_str_do; }
+const std::string &Tp::on_receiving_damage_acid_do(void) const { return _on_receiving_damage_acid_do; }
+const std::string &Tp::on_receiving_damage_cold_do(void) const { return _on_receiving_damage_cold_do; }
+const std::string &Tp::on_receiving_damage_crush_do(void) const { return _on_receiving_damage_crush_do; }
+const std::string &Tp::on_receiving_damage_digest_do(void) const { return _on_receiving_damage_digest_do; }
+const std::string &Tp::on_receiving_damage_energy_do(void) const { return _on_receiving_damage_energy_do; }
+const std::string &Tp::on_receiving_damage_fire_do(void) const { return _on_receiving_damage_fire_do; }
+const std::string &Tp::on_receiving_damage_future1_do(void) const { return _on_receiving_damage_future1_do; }
+const std::string &Tp::on_receiving_damage_future2_do(void) const { return _on_receiving_damage_future2_do; }
+const std::string &Tp::on_receiving_damage_future3_do(void) const { return _on_receiving_damage_future3_do; }
+const std::string &Tp::on_receiving_damage_lightning_do(void) const { return _on_receiving_damage_lightning_do; }
+const std::string &Tp::on_receiving_damage_melee_do(void) const { return _on_receiving_damage_melee_do; }
+const std::string &Tp::on_receiving_damage_nat_attack_do(void) const { return _on_receiving_damage_nat_attack_do; }
+const std::string &Tp::on_receiving_damage_necrosis_do(void) const { return _on_receiving_damage_necrosis_do; }
+const std::string &Tp::on_receiving_damage_draining_do(void) const { return _on_receiving_damage_draining_do; }
+const std::string &Tp::on_receiving_damage_stamina_do(void) const { return _on_receiving_damage_stamina_do; }
+const std::string &Tp::on_receiving_damage_poison_do(void) const { return _on_receiving_damage_poison_do; }
+const std::string &Tp::on_receiving_damage_stat_att_do(void) const { return _on_receiving_damage_stat_att_do; }
+const std::string &Tp::on_receiving_damage_stat_con_do(void) const { return _on_receiving_damage_stat_con_do; }
+const std::string &Tp::on_receiving_damage_stat_str_do(void) const { return _on_receiving_damage_stat_str_do; }
 const std::string &Tp::on_death_do(void) const { return _on_death_do; }
 const std::string &Tp::on_death_of_a_follower_do(void) const { return _on_death_of_a_follower_do; }
 const std::string &Tp::on_death_of_my_leader_do(void) const { return _on_death_of_my_leader_do; }
@@ -48,25 +48,25 @@ const std::string &Tp::on_lifespan_tick_do(void) const { return _on_lifespan_tic
 const std::string &Tp::on_move_do(void) const { return _on_move_do; }
 const std::string &Tp::on_open_do(void) const { return _on_open_do; }
 const std::string &Tp::on_owner_add_do(void) const { return _on_owner_add_do; }
-const std::string &Tp::on_owner_damage_acid_do(void) const { return _on_owner_damage_acid_do; }
-const std::string &Tp::on_owner_damage_cold_do(void) const { return _on_owner_damage_cold_do; }
-const std::string &Tp::on_owner_damage_crush_do(void) const { return _on_owner_damage_crush_do; }
-const std::string &Tp::on_owner_damage_digest_do(void) const { return _on_owner_damage_digest_do; }
-const std::string &Tp::on_owner_damage_energy_do(void) const { return _on_owner_damage_energy_do; }
-const std::string &Tp::on_owner_damage_fire_do(void) const { return _on_owner_damage_fire_do; }
-const std::string &Tp::on_owner_damage_future1_do(void) const { return _on_owner_damage_future1_do; }
-const std::string &Tp::on_owner_damage_future2_do(void) const { return _on_owner_damage_future2_do; }
-const std::string &Tp::on_owner_damage_future3_do(void) const { return _on_owner_damage_future3_do; }
-const std::string &Tp::on_owner_damage_lightning_do(void) const { return _on_owner_damage_lightning_do; }
-const std::string &Tp::on_owner_damage_melee_do(void) const { return _on_owner_damage_melee_do; }
-const std::string &Tp::on_owner_damage_nat_attack_do(void) const { return _on_owner_damage_nat_attack_do; }
-const std::string &Tp::on_owner_damage_necrosis_do(void) const { return _on_owner_damage_necrosis_do; }
-const std::string &Tp::on_owner_damage_draining_do(void) const { return _on_owner_damage_draining_do; }
-const std::string &Tp::on_owner_damage_stamina_do(void) const { return _on_owner_damage_stamina_do; }
-const std::string &Tp::on_owner_damage_poison_do(void) const { return _on_owner_damage_poison_do; }
-const std::string &Tp::on_owner_damage_stat_att_do(void) const { return _on_owner_damage_stat_att_do; }
-const std::string &Tp::on_owner_damage_stat_con_do(void) const { return _on_owner_damage_stat_con_do; }
-const std::string &Tp::on_owner_damage_stat_str_do(void) const { return _on_owner_damage_stat_str_do; }
+const std::string &Tp::on_owner_receiving_damage_acid_do(void) const { return _on_owner_receiving_damage_acid_do; }
+const std::string &Tp::on_owner_receiving_damage_cold_do(void) const { return _on_owner_receiving_damage_cold_do; }
+const std::string &Tp::on_owner_receiving_damage_crush_do(void) const { return _on_owner_receiving_damage_crush_do; }
+const std::string &Tp::on_owner_receiving_damage_digest_do(void) const { return _on_owner_receiving_damage_digest_do; }
+const std::string &Tp::on_owner_receiving_damage_energy_do(void) const { return _on_owner_receiving_damage_energy_do; }
+const std::string &Tp::on_owner_receiving_damage_fire_do(void) const { return _on_owner_receiving_damage_fire_do; }
+const std::string &Tp::on_owner_receiving_damage_future1_do(void) const { return _on_owner_receiving_damage_future1_do; }
+const std::string &Tp::on_owner_receiving_damage_future2_do(void) const { return _on_owner_receiving_damage_future2_do; }
+const std::string &Tp::on_owner_receiving_damage_future3_do(void) const { return _on_owner_receiving_damage_future3_do; }
+const std::string &Tp::on_owner_receiving_damage_lightning_do(void) const { return _on_owner_receiving_damage_lightning_do; }
+const std::string &Tp::on_owner_receiving_damage_melee_do(void) const { return _on_owner_receiving_damage_melee_do; }
+const std::string &Tp::on_owner_receiving_damage_nat_attack_do(void) const { return _on_owner_receiving_damage_nat_attack_do; }
+const std::string &Tp::on_owner_receiving_damage_necrosis_do(void) const { return _on_owner_receiving_damage_necrosis_do; }
+const std::string &Tp::on_owner_receiving_damage_draining_do(void) const { return _on_owner_receiving_damage_draining_do; }
+const std::string &Tp::on_owner_receiving_damage_stamina_do(void) const { return _on_owner_receiving_damage_stamina_do; }
+const std::string &Tp::on_owner_receiving_damage_poison_do(void) const { return _on_owner_receiving_damage_poison_do; }
+const std::string &Tp::on_owner_receiving_damage_stat_att_do(void) const { return _on_owner_receiving_damage_stat_att_do; }
+const std::string &Tp::on_owner_receiving_damage_stat_con_do(void) const { return _on_owner_receiving_damage_stat_con_do; }
+const std::string &Tp::on_owner_receiving_damage_stat_str_do(void) const { return _on_owner_receiving_damage_stat_str_do; }
 const std::string &Tp::on_owner_remove_do(void) const { return _on_owner_remove_do; }
 const std::string &Tp::on_polymorphed_do(void) const { return _on_polymorphed_do; }
 const std::string &Tp::on_resting_do(void) const { return _on_resting_do; }
@@ -1023,25 +1023,25 @@ void Tp::noise_on_you_are_hit_but_still_alive_set(int v) { _noise_on_you_are_hit
 void Tp::normal_placement_rules_set(int v) { _normal_placement_rules = v; }
 void Tp::on_awake_do_set(const std::string &v) { _on_awake_do = v; }
 void Tp::on_born_do_set(const std::string &v) { _on_born_do = v; }
-void Tp::on_damage_acid_do_set(const std::string &v) { _on_damage_acid_do = v; }
-void Tp::on_damage_cold_do_set(const std::string &v) { _on_damage_cold_do = v; }
-void Tp::on_damage_crush_do_set(const std::string &v) { _on_damage_crush_do = v; }
-void Tp::on_damage_digest_do_set(const std::string &v) { _on_damage_digest_do = v; }
-void Tp::on_damage_energy_do_set(const std::string &v) { _on_damage_energy_do = v; }
-void Tp::on_damage_fire_do_set(const std::string &v) { _on_damage_fire_do = v; }
-void Tp::on_damage_future1_do_set(const std::string &v) { _on_damage_future1_do = v; }
-void Tp::on_damage_future2_do_set(const std::string &v) { _on_damage_future2_do = v; }
-void Tp::on_damage_future3_do_set(const std::string &v) { _on_damage_future3_do = v; }
-void Tp::on_damage_lightning_do_set(const std::string &v) { _on_damage_lightning_do = v; }
-void Tp::on_damage_melee_do_set(const std::string &v) { _on_damage_melee_do = v; }
-void Tp::on_damage_nat_attack_do_set(const std::string &v) { _on_damage_nat_attack_do = v; }
-void Tp::on_damage_necrosis_do_set(const std::string &v) { _on_damage_necrosis_do = v; }
-void Tp::on_damage_draining_do_set(const std::string &v) { _on_damage_draining_do = v; }
-void Tp::on_damage_stamina_do_set(const std::string &v) { _on_damage_stamina_do = v; }
-void Tp::on_damage_poison_do_set(const std::string &v) { _on_damage_poison_do = v; }
-void Tp::on_damage_stat_att_do_set(const std::string &v) { _on_damage_stat_att_do = v; }
-void Tp::on_damage_stat_con_do_set(const std::string &v) { _on_damage_stat_con_do = v; }
-void Tp::on_damage_stat_str_do_set(const std::string &v) { _on_damage_stat_str_do = v; }
+void Tp::on_receiving_damage_acid_do_set(const std::string &v) { _on_receiving_damage_acid_do = v; }
+void Tp::on_receiving_damage_cold_do_set(const std::string &v) { _on_receiving_damage_cold_do = v; }
+void Tp::on_receiving_damage_crush_do_set(const std::string &v) { _on_receiving_damage_crush_do = v; }
+void Tp::on_receiving_damage_digest_do_set(const std::string &v) { _on_receiving_damage_digest_do = v; }
+void Tp::on_receiving_damage_energy_do_set(const std::string &v) { _on_receiving_damage_energy_do = v; }
+void Tp::on_receiving_damage_fire_do_set(const std::string &v) { _on_receiving_damage_fire_do = v; }
+void Tp::on_receiving_damage_future1_do_set(const std::string &v) { _on_receiving_damage_future1_do = v; }
+void Tp::on_receiving_damage_future2_do_set(const std::string &v) { _on_receiving_damage_future2_do = v; }
+void Tp::on_receiving_damage_future3_do_set(const std::string &v) { _on_receiving_damage_future3_do = v; }
+void Tp::on_receiving_damage_lightning_do_set(const std::string &v) { _on_receiving_damage_lightning_do = v; }
+void Tp::on_receiving_damage_melee_do_set(const std::string &v) { _on_receiving_damage_melee_do = v; }
+void Tp::on_receiving_damage_nat_attack_do_set(const std::string &v) { _on_receiving_damage_nat_attack_do = v; }
+void Tp::on_receiving_damage_necrosis_do_set(const std::string &v) { _on_receiving_damage_necrosis_do = v; }
+void Tp::on_receiving_damage_draining_do_set(const std::string &v) { _on_receiving_damage_draining_do = v; }
+void Tp::on_receiving_damage_stamina_do_set(const std::string &v) { _on_receiving_damage_stamina_do = v; }
+void Tp::on_receiving_damage_poison_do_set(const std::string &v) { _on_receiving_damage_poison_do = v; }
+void Tp::on_receiving_damage_stat_att_do_set(const std::string &v) { _on_receiving_damage_stat_att_do = v; }
+void Tp::on_receiving_damage_stat_con_do_set(const std::string &v) { _on_receiving_damage_stat_con_do = v; }
+void Tp::on_receiving_damage_stat_str_do_set(const std::string &v) { _on_receiving_damage_stat_str_do = v; }
 void Tp::on_death_do_set(const std::string &v) { _on_death_do = v; }
 void Tp::on_death_drop_all_items_set(int v) { _on_death_drop_all_items = v; }
 void Tp::on_death_is_open_set(int v) { _on_death_is_open = v; }
@@ -1057,25 +1057,25 @@ void Tp::on_lifespan_tick_do_set(const std::string &v) { _on_lifespan_tick_do = 
 void Tp::on_move_do_set(const std::string &v) { _on_move_do = v; }
 void Tp::on_open_do_set(const std::string &v) { _on_open_do = v; }
 void Tp::on_owner_add_do_set(const std::string &v) { _on_owner_add_do = v; }
-void Tp::on_owner_damage_acid_do_set(const std::string &v) { _on_owner_damage_acid_do = v; }
-void Tp::on_owner_damage_cold_do_set(const std::string &v) { _on_owner_damage_cold_do = v; }
-void Tp::on_owner_damage_crush_do_set(const std::string &v) { _on_owner_damage_crush_do = v; }
-void Tp::on_owner_damage_digest_do_set(const std::string &v) { _on_owner_damage_digest_do = v; }
-void Tp::on_owner_damage_energy_do_set(const std::string &v) { _on_owner_damage_energy_do = v; }
-void Tp::on_owner_damage_fire_do_set(const std::string &v) { _on_owner_damage_fire_do = v; }
-void Tp::on_owner_damage_future1_do_set(const std::string &v) { _on_owner_damage_future1_do = v; }
-void Tp::on_owner_damage_future2_do_set(const std::string &v) { _on_owner_damage_future2_do = v; }
-void Tp::on_owner_damage_future3_do_set(const std::string &v) { _on_owner_damage_future3_do = v; }
-void Tp::on_owner_damage_lightning_do_set(const std::string &v) { _on_owner_damage_lightning_do = v; }
-void Tp::on_owner_damage_melee_do_set(const std::string &v) { _on_owner_damage_melee_do = v; }
-void Tp::on_owner_damage_nat_attack_do_set(const std::string &v) { _on_owner_damage_nat_attack_do = v; }
-void Tp::on_owner_damage_necrosis_do_set(const std::string &v) { _on_owner_damage_necrosis_do = v; }
-void Tp::on_owner_damage_draining_do_set(const std::string &v) { _on_owner_damage_draining_do = v; }
-void Tp::on_owner_damage_stamina_do_set(const std::string &v) { _on_owner_damage_stamina_do = v; }
-void Tp::on_owner_damage_poison_do_set(const std::string &v) { _on_owner_damage_poison_do = v; }
-void Tp::on_owner_damage_stat_att_do_set(const std::string &v) { _on_owner_damage_stat_att_do = v; }
-void Tp::on_owner_damage_stat_con_do_set(const std::string &v) { _on_owner_damage_stat_con_do = v; }
-void Tp::on_owner_damage_stat_str_do_set(const std::string &v) { _on_owner_damage_stat_str_do = v; }
+void Tp::on_owner_receiving_damage_acid_do_set(const std::string &v) { _on_owner_receiving_damage_acid_do = v; }
+void Tp::on_owner_receiving_damage_cold_do_set(const std::string &v) { _on_owner_receiving_damage_cold_do = v; }
+void Tp::on_owner_receiving_damage_crush_do_set(const std::string &v) { _on_owner_receiving_damage_crush_do = v; }
+void Tp::on_owner_receiving_damage_digest_do_set(const std::string &v) { _on_owner_receiving_damage_digest_do = v; }
+void Tp::on_owner_receiving_damage_energy_do_set(const std::string &v) { _on_owner_receiving_damage_energy_do = v; }
+void Tp::on_owner_receiving_damage_fire_do_set(const std::string &v) { _on_owner_receiving_damage_fire_do = v; }
+void Tp::on_owner_receiving_damage_future1_do_set(const std::string &v) { _on_owner_receiving_damage_future1_do = v; }
+void Tp::on_owner_receiving_damage_future2_do_set(const std::string &v) { _on_owner_receiving_damage_future2_do = v; }
+void Tp::on_owner_receiving_damage_future3_do_set(const std::string &v) { _on_owner_receiving_damage_future3_do = v; }
+void Tp::on_owner_receiving_damage_lightning_do_set(const std::string &v) { _on_owner_receiving_damage_lightning_do = v; }
+void Tp::on_owner_receiving_damage_melee_do_set(const std::string &v) { _on_owner_receiving_damage_melee_do = v; }
+void Tp::on_owner_receiving_damage_nat_attack_do_set(const std::string &v) { _on_owner_receiving_damage_nat_attack_do = v; }
+void Tp::on_owner_receiving_damage_necrosis_do_set(const std::string &v) { _on_owner_receiving_damage_necrosis_do = v; }
+void Tp::on_owner_receiving_damage_draining_do_set(const std::string &v) { _on_owner_receiving_damage_draining_do = v; }
+void Tp::on_owner_receiving_damage_stamina_do_set(const std::string &v) { _on_owner_receiving_damage_stamina_do = v; }
+void Tp::on_owner_receiving_damage_poison_do_set(const std::string &v) { _on_owner_receiving_damage_poison_do = v; }
+void Tp::on_owner_receiving_damage_stat_att_do_set(const std::string &v) { _on_owner_receiving_damage_stat_att_do = v; }
+void Tp::on_owner_receiving_damage_stat_con_do_set(const std::string &v) { _on_owner_receiving_damage_stat_con_do = v; }
+void Tp::on_owner_receiving_damage_stat_str_do_set(const std::string &v) { _on_owner_receiving_damage_stat_str_do = v; }
 void Tp::on_owner_remove_do_set(const std::string &v) { _on_owner_remove_do = v; }
 void Tp::on_polymorphed_do_set(const std::string &v) { _on_polymorphed_do = v; }
 void Tp::on_resting_do_set(const std::string &v) { _on_resting_do = v; }

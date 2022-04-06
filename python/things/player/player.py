@@ -180,71 +180,71 @@ def on_move(me, x, y):
             last_footstep = footstep
 
 
-def on_damage_melee(me, hitter, x, y, damage):
+def on_receiving_damage_melee(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_poison(me, hitter, x, y, damage):
+def on_receiving_damage_poison(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_future1(me, hitter, x, y, damage):
+def on_receiving_damage_future1(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_future2(me, hitter, x, y, damage):
+def on_receiving_damage_future2(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_future3(me, hitter, x, y, damage):
+def on_receiving_damage_future3(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_cold(me, hitter, x, y, damage):
+def on_receiving_damage_cold(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_fire(me, hitter, x, y, damage):
+def on_receiving_damage_fire(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_crush(me, hitter, x, y, damage):
+def on_receiving_damage_crush(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_lightning(me, hitter, x, y, damage):
+def on_receiving_damage_lightning(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_energy(me, hitter, x, y, damage):
+def on_receiving_damage_energy(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_acid(me, hitter, x, y, damage):
+def on_receiving_damage_acid(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_digest(me, hitter, x, y, damage):
+def on_receiving_damage_digest(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_nat_attack(me, hitter, x, y, damage):
+def on_receiving_damage_nat_attack(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_necrosis(me, hitter, x, y, damage):
+def on_receiving_damage_necrosis(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_draining(me, hitter, x, y, damage):
+def on_receiving_damage_draining(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_stat_str(me, hitter, x, y, damage):
+def on_receiving_damage_stat_str(me, hitter, x, y, damage):
     return damage
 
 
-def on_damage_stat_con(me, hitter, x, y, damage):
+def on_receiving_damage_stat_con(me, hitter, x, y, damage):
     return damage
 
 
@@ -337,23 +337,23 @@ def tp_init(name, text_name, short_text_name, title):
     my.noise_decibels_hearing(self, 30)
     my.noise_on_moving(self, 50)
     my.on_born_do(self, "player.on_born()")
-    my.on_damage_acid_do(self, "player.on_damage_acid()")
-    my.on_damage_cold_do(self, "player.on_damage_cold()")
-    my.on_damage_crush_do(self, "player.on_damage_crush()")
-    my.on_damage_digest_do(self, "player.on_damage_digest()")
-    my.on_damage_draining_do(self, "player.on_damage_draining()")
-    my.on_damage_energy_do(self, "player.on_damage_energy()")
-    my.on_damage_fire_do(self, "player.on_damage_fire()")
-    my.on_damage_future1_do(self, "player.on_damage_future1()")
-    my.on_damage_future2_do(self, "player.on_damage_future2()")
-    my.on_damage_future3_do(self, "player.on_damage_future3()")
-    my.on_damage_lightning_do(self, "player.on_damage_lightning()")
-    my.on_damage_melee_do(self, "player.on_damage_melee()")
-    my.on_damage_nat_attack_do(self, "player.on_damage_nat_attack()")
-    my.on_damage_necrosis_do(self, "player.on_damage_necrosis()")
-    my.on_damage_poison_do(self, "player.on_damage_poison()")
-    my.on_damage_stat_con_do(self, "player.on_damage_stat_con()")
-    my.on_damage_stat_str_do(self, "player.on_damage_stat_str()")
+    my.on_receiving_damage_acid_do(self, "player.on_receiving_damage_acid()")
+    my.on_receiving_damage_cold_do(self, "player.on_receiving_damage_cold()")
+    my.on_receiving_damage_crush_do(self, "player.on_receiving_damage_crush()")
+    my.on_receiving_damage_digest_do(self, "player.on_receiving_damage_digest()")
+    my.on_receiving_damage_draining_do(self, "player.on_receiving_damage_draining()")
+    my.on_receiving_damage_energy_do(self, "player.on_receiving_damage_energy()")
+    my.on_receiving_damage_fire_do(self, "player.on_receiving_damage_fire()")
+    my.on_receiving_damage_future1_do(self, "player.on_receiving_damage_future1()")
+    my.on_receiving_damage_future2_do(self, "player.on_receiving_damage_future2()")
+    my.on_receiving_damage_future3_do(self, "player.on_receiving_damage_future3()")
+    my.on_receiving_damage_lightning_do(self, "player.on_receiving_damage_lightning()")
+    my.on_receiving_damage_melee_do(self, "player.on_receiving_damage_melee()")
+    my.on_receiving_damage_nat_attack_do(self, "player.on_receiving_damage_nat_attack()")
+    my.on_receiving_damage_necrosis_do(self, "player.on_receiving_damage_necrosis()")
+    my.on_receiving_damage_poison_do(self, "player.on_receiving_damage_poison()")
+    my.on_receiving_damage_stat_con_do(self, "player.on_receiving_damage_stat_con()")
+    my.on_receiving_damage_stat_str_do(self, "player.on_receiving_damage_stat_str()")
     my.on_death_do(self, "player.on_death()")
     my.on_death_drop_all_items(self, True)
     my.on_move_do(self, "player.on_move()")
