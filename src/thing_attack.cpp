@@ -554,11 +554,13 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   dbg("Set damage types");
   TRACE_AND_INDENT();
 
+  int attack_index = 0;
+
   //
   // Chance of poison damage?
   //
   if (! damage_set || prefer_nat_attack) {
-    if (d1000() < damage_poison_chance_d1000()) {
+    if (d1000() < damage_poison_chance_d1000(attack_index)) {
       int damage_poison_val = damage_poison();
       if (damage_poison_val > 0) {
         damage        = damage_poison_val;
@@ -572,7 +574,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_future1 damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_future1_chance_d1000()) {
+    if (d1000() < damage_future1_chance_d1000(attack_index)) {
       int damage_future1_val = damage_future1();
       if (damage_future1_val > 0) {
         damage         = damage_future1_val;
@@ -587,7 +589,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_future2 damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_future2_chance_d1000()) {
+    if (d1000() < damage_future2_chance_d1000(attack_index)) {
       int damage_future2_val = damage_future2();
       if (damage_future2_val > 0) {
         damage         = damage_future2_val;
@@ -602,7 +604,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_future3 damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_future3_chance_d1000()) {
+    if (d1000() < damage_future3_chance_d1000(attack_index)) {
       int damage_future3_val = damage_future3();
       if (damage_future3_val > 0) {
         damage         = damage_future3_val;
@@ -617,7 +619,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_cold damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_cold_chance_d1000()) {
+    if (d1000() < damage_cold_chance_d1000(attack_index)) {
       int damage_cold_val = damage_cold();
       if (damage_cold_val > 0) {
         damage      = damage_cold_val;
@@ -632,7 +634,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_fire damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_fire_chance_d1000()) {
+    if (d1000() < damage_fire_chance_d1000(attack_index)) {
       int damage_fire_val = damage_fire();
       if (damage_fire_val > 0) {
         damage      = damage_fire_val;
@@ -647,7 +649,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_crush damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_crush_chance_d1000()) {
+    if (d1000() < damage_crush_chance_d1000(attack_index)) {
       int damage_crush_val = damage_crush();
       if (damage_crush_val > 0) {
         damage       = damage_crush_val;
@@ -662,7 +664,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_lightning damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_lightning_chance_d1000()) {
+    if (d1000() < damage_lightning_chance_d1000(attack_index)) {
       int damage_lightning_val = damage_lightning();
       if (damage_lightning_val > 0) {
         damage           = damage_lightning_val;
@@ -677,7 +679,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_energy damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_energy_chance_d1000()) {
+    if (d1000() < damage_energy_chance_d1000(attack_index)) {
       int damage_energy_val = damage_energy();
       if (damage_energy_val > 0) {
         damage        = damage_energy_val;
@@ -692,7 +694,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_acid damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_acid_chance_d1000()) {
+    if (d1000() < damage_acid_chance_d1000(attack_index)) {
       int damage_acid_val = damage_acid();
       if (damage_acid_val > 0) {
         damage      = damage_acid_val;
@@ -707,7 +709,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_digest damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_digest_chance_d1000()) {
+    if (d1000() < damage_digest_chance_d1000(attack_index)) {
       int damage_digest_val = damage_digest();
       if (damage_digest_val > 0) {
         damage        = damage_digest_val;
@@ -722,7 +724,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of necrosis damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_necrosis_chance_d1000()) {
+    if (d1000() < damage_necrosis_chance_d1000(attack_index)) {
       int damage_necrosis_val = damage_necrosis();
       if (damage_necrosis_val > 0) {
         damage          = damage_necrosis_val;
@@ -737,7 +739,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of stamina damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_draining_chance_d1000()) {
+    if (d1000() < damage_draining_chance_d1000(attack_index)) {
       int damage_draining_val = damage_draining();
       if (damage_draining_val > 0) {
         damage         = damage_draining_val;
@@ -752,7 +754,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Bite?
   //
   if (! damage_set || prefer_nat_attack) {
-    if (d1000() < damage_nat_attack_chance_d1000()) {
+    if (d1000() < damage_nat_attack_chance_d1000(attack_index)) {
       int damage_nat_attack_val = damage_nat_attack();
       if (damage_nat_attack_val > 0) {
         damage         = damage_nat_attack_val + attack_bonus;
@@ -770,7 +772,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // else hits.
   //
   if (! damage_set) {
-    if (d1000() < damage_melee_chance_d1000()) {
+    if (d1000() < damage_melee_chance_d1000(attack_index)) {
       damage = damage_melee() + attack_bonus;
       if (damage > 0) {
         dbg("Set melee damage %d", damage);
@@ -780,7 +782,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   }
   if (! damage_set) {
     if (owner) {
-      if (d1000() < owner->damage_melee_chance_d1000()) {
+      if (d1000() < owner->damage_melee_chance_d1000(attack_index)) {
         damage = damage_melee() + attack_bonus;
         if (damage > 0) {
           dbg("Set melee damage %d", damage);

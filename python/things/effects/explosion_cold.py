@@ -8,7 +8,7 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name)
-    my.damage_cold_chance_d1000(self, 1000)
+    my.damage_cold_chance_d1000(self, 0, 1000)
     my.damage_cold_dice(self, "1d6")  # This is the damage when the monst fires
     my.gfx_animated(self, True)
     my.gfx_short_shadow_caster(self, True)

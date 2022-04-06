@@ -34,7 +34,7 @@ def on_use(owner, me, target, x, y):
 #
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.damage_lightning_chance_d1000(self, 1000)
+    my.damage_lightning_chance_d1000(self, 0, 1000)
     my.damage_lightning_dice(self, "1d10+10")  # This is the damage when the monst fires
     my.is_laser(self, True)
     my.is_loggable(self, True)

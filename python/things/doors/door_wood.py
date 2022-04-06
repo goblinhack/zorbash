@@ -18,7 +18,7 @@ def tp_init(name):
     self = tp.Tp(name, "wood door")
     my.collision_check(self, True)
     my.collision_hit_priority(self, 9)
-    my.damage_crush_chance_d1000(self, 1000)
+    my.damage_crush_chance_d1000(self, 0, 1000)
     my.damage_crush_dice(self, "2d6")
     my.damage_received_doubled_from_fire(self, True)
     my.environ_avoids_fire(self, 100)

@@ -129,51 +129,56 @@ void tp_fixup(void)
     num_attack_types += tp->damage_necrosis() ? 1 : 0;
     num_attack_types += tp->damage_draining() ? 1 : 0;
 
+    //
+    // If only a single attack type then make sure it is 1000%
+    //
     if (num_attack_types == 1) {
+      int attack_index = 0;
+
       if (tp->damage_acid() > 0) {
-        tp->damage_acid_chance_d1000_set(1000);
+        tp->damage_acid_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_nat_attack() > 0) {
-        tp->damage_nat_attack_chance_d1000_set(1000);
+        tp->damage_nat_attack_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_crush() > 0) {
-        tp->damage_crush_chance_d1000_set(1000);
+        tp->damage_crush_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_digest() > 0) {
-        tp->damage_digest_chance_d1000_set(1000);
+        tp->damage_digest_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_energy() > 0) {
-        tp->damage_energy_chance_d1000_set(1000);
+        tp->damage_energy_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_fire() > 0) {
-        tp->damage_fire_chance_d1000_set(1000);
+        tp->damage_fire_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_future1() > 0) {
-        tp->damage_future1_chance_d1000_set(1000);
+        tp->damage_future1_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_future2() > 0) {
-        tp->damage_future2_chance_d1000_set(1000);
+        tp->damage_future2_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_future3() > 0) {
-        tp->damage_future3_chance_d1000_set(1000);
+        tp->damage_future3_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_cold() > 0) {
-        tp->damage_cold_chance_d1000_set(1000);
+        tp->damage_cold_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_lightning() > 0) {
-        tp->damage_lightning_chance_d1000_set(1000);
+        tp->damage_lightning_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_melee() > 0) {
-        tp->damage_melee_chance_d1000_set(1000);
+        tp->damage_melee_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_necrosis() > 0) {
-        tp->damage_necrosis_chance_d1000_set(1000);
+        tp->damage_necrosis_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_draining() > 0) {
-        tp->damage_draining_chance_d1000_set(1000);
+        tp->damage_draining_chance_d1000_set(attack_index, 1000);
       }
       if (tp->damage_poison() > 0) {
-        tp->damage_poison_chance_d1000_set(1000);
+        tp->damage_poison_chance_d1000_set(attack_index, 1000);
       }
     }
   }

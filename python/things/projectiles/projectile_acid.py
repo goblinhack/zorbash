@@ -16,7 +16,7 @@ def on_born(me, x, y):
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
     my.collision_check(self, True)
-    my.damage_acid_chance_d1000(self, 1000)
+    my.damage_acid_chance_d1000(self, 0, 1000)
     my.damage_acid_dice(self, "1d10")  # This is the damage when the monst acids
     my.is_acid(self, True)
     my.is_loggable(self, True)

@@ -9,7 +9,7 @@ def spawn(me, x, y):
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
     my.collision_check(self, True)
-    my.damage_fire_chance_d1000(self, 1000)
+    my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "1d3+1")
     my.damage_nat_attack_type(self, "burn")
     my.environ_avoids_water(self, 100)

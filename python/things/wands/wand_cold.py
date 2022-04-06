@@ -34,7 +34,7 @@ def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
-    my.damage_cold_chance_d1000(self, 1000)
+    my.damage_cold_chance_d1000(self, 0, 1000)
     my.damage_cold_dice(self, "1d8+6")
     my.damage_received_doubled_from_fire(self, True)
     my.environ_avoids_water(self, 100)

@@ -7,7 +7,7 @@ def lava_init(name, text_name, tiles=[]):
     my.ai_obstacle(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
-    my.damage_fire_chance_d1000(self, 1000)
+    my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "1d12+6")
     my.damage_nat_attack_type(self, "burn")
     my.gfx_glows(self, True)
