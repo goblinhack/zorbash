@@ -496,7 +496,7 @@ PyObject *thing_unused_flag104(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag105(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag106(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag107(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag108(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_damage_num_attacks(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag123(PyObject *obj, PyObject *args, PyObject *keywds);

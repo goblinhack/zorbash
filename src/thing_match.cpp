@@ -993,7 +993,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag107() && (what == "unused_flag107")) {
     return true;
   }
-  if (unused_flag108() && (what == "unused_flag108")) {
+  if (damage_num_attacks() && (what == "damage_num_attacks")) {
     return true;
   }
   if (is_key_special() && (what == "is_key_special")) {
@@ -2236,8 +2236,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag107") {
     return &Thing::unused_flag107;
   }
-  if (what == "unused_flag108") {
-    return &Thing::unused_flag108;
+  if (what == "damage_num_attacks") {
+    return &Thing::damage_num_attacks;
   }
   if (what == "is_key_special") {
     return &Thing::is_key_special;

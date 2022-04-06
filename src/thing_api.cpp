@@ -2059,10 +2059,10 @@ int Thing::unused_flag107(void)
   return (tp()->unused_flag107());
 }
 
-int Thing::unused_flag108(void)
+int Thing::damage_num_attacks(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag108());
+  return (tp()->damage_num_attacks());
 }
 
 int Thing::is_key_special(void)

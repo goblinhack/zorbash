@@ -1706,7 +1706,7 @@ public:
   int unused_flag105(void);
   int unused_flag106(void);
   int unused_flag107(void);
-  int unused_flag108(void);
+  int damage_num_attacks(void);
   int unused_flag10(void);
   int unused_flag11(void);
   int unused_flag123(void);
