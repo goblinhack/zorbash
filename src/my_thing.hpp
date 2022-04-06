@@ -1510,7 +1510,7 @@ public:
   int spawn_randomly_in_radius_range(const std::string &what, int amount, uint32_t radius_min, uint32_t radius_max);
   int stamina_decr(int);
   int stamina_decr(void);
-  int stamina_drain_on_swinging(void);
+  int stamina_drain_on_attacking(void);
   int stamina_drain_on_using(void);
   int stamina_incr(int);
   int stamina_incr(void);

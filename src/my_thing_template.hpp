@@ -486,7 +486,7 @@ private:
   int _shove_strength_mod {};
   int _spawn_group_radius {};
   int _stamina {};
-  int _stamina_drain_on_swinging {};
+  int _stamina_drain_on_attacking {};
   int _stamina_drain_on_using {};
   int _stat_att {};
   int _stat_att_mod {};
@@ -1409,7 +1409,7 @@ public:
   int shove_strength_mod(void) const;
   int shove_strength(void) const;
   int spawn_group_radius(void) const;
-  int stamina_drain_on_swinging(void) const;
+  int stamina_drain_on_attacking(void) const;
   int stamina_drain_on_using(void) const;
   int stamina(void) const;
   int stat_att_mod(void) const;
@@ -2026,7 +2026,7 @@ public:
   void shove_strength_set(int v);
   void spawn_group_radius_set(int v);
   void spawn_on_shoved_set(const std::string &v);
-  void stamina_drain_on_swinging_set(int v);
+  void stamina_drain_on_attacking_set(int v);
   void stamina_drain_on_using_set(int v);
   void stamina_set(int v);
   void stat_att_mod_set(int v);

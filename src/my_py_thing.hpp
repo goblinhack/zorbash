@@ -419,7 +419,7 @@ PyObject *thing_skill_deactivate(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_spawn_group_radius(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_decr(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_stamina_drain_on_swinging(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_stamina_drain_on_attacking(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_drain_on_using(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_stamina_max_decr(PyObject *obj, PyObject *args, PyObject *keywds);

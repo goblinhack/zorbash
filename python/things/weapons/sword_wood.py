@@ -50,7 +50,7 @@ def tp_init(name, text_name, short_text_name):
     my.noise_on_dropping(self, 5)
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_COMMON)
-    my.stamina_drain_on_swinging(self, 0)
+    my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy wooden means of justice.")
     my.text_enchant(self, "+2 DMG")
