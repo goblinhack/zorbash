@@ -533,7 +533,7 @@ int Tp::unused_flag104(void) const { return _unused_flag104; }
 int Tp::unused_flag105(void) const { return _unused_flag105; }
 int Tp::unused_flag106(void) const { return _unused_flag106; }
 int Tp::unused_flag107(void) const { return _unused_flag107; }
-int Tp::unused_flag108(void) const { return _unused_flag108; }
+int Tp::damage_num_attacks(void) const { return _damage_num_attacks; }
 int Tp::is_key_special(void) const { return _is_key_special; }
 int Tp::unused_flag10(void) const { return _unused_flag10; }
 int Tp::is_crystal(void) const { return _is_crystal; }
@@ -1168,7 +1168,7 @@ void Tp::unused_flag104_set(int v) { _unused_flag104 = v; }
 void Tp::unused_flag105_set(int v) { _unused_flag105 = v; }
 void Tp::unused_flag106_set(int v) { _unused_flag106 = v; }
 void Tp::unused_flag107_set(int v) { _unused_flag107 = v; }
-void Tp::unused_flag108_set(int v) { _unused_flag108 = v; }
+void Tp::damage_num_attacks_set(int v) { _damage_num_attacks = v; }
 void Tp::is_key_special_set(int v) { _is_key_special = v; }
 void Tp::unused_flag10_set(int v) { _unused_flag10 = v; }
 void Tp::is_crystal_set(int v) { _is_crystal = v; }
