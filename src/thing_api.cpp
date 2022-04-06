@@ -6492,232 +6492,232 @@ const std::string &Thing::on_death_of_my_leader_do(void)
   return (tp()->on_death_of_my_leader_do());
 }
 
-const std::string &Thing::on_owner_damage_poison_do(void)
+const std::string &Thing::on_owner_receiving_damage_poison_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_poison_do());
+  return (tp()->on_owner_receiving_damage_poison_do());
 }
 
-const std::string &Thing::on_owner_damage_future1_do(void)
+const std::string &Thing::on_owner_receiving_damage_future1_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_future1_do());
+  return (tp()->on_owner_receiving_damage_future1_do());
 }
 
-const std::string &Thing::on_owner_damage_future2_do(void)
+const std::string &Thing::on_owner_receiving_damage_future2_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_future2_do());
+  return (tp()->on_owner_receiving_damage_future2_do());
 }
 
-const std::string &Thing::on_owner_damage_future3_do(void)
+const std::string &Thing::on_owner_receiving_damage_future3_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_future3_do());
+  return (tp()->on_owner_receiving_damage_future3_do());
 }
 
-const std::string &Thing::on_owner_damage_cold_do(void)
+const std::string &Thing::on_owner_receiving_damage_cold_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_cold_do());
+  return (tp()->on_owner_receiving_damage_cold_do());
 }
 
-const std::string &Thing::on_owner_damage_fire_do(void)
+const std::string &Thing::on_owner_receiving_damage_fire_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_fire_do());
+  return (tp()->on_owner_receiving_damage_fire_do());
 }
 
-const std::string &Thing::on_owner_damage_crush_do(void)
+const std::string &Thing::on_owner_receiving_damage_crush_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_crush_do());
+  return (tp()->on_owner_receiving_damage_crush_do());
 }
 
-const std::string &Thing::on_owner_damage_lightning_do(void)
+const std::string &Thing::on_owner_receiving_damage_lightning_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_lightning_do());
+  return (tp()->on_owner_receiving_damage_lightning_do());
 }
 
-const std::string &Thing::on_owner_damage_energy_do(void)
+const std::string &Thing::on_owner_receiving_damage_energy_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_energy_do());
+  return (tp()->on_owner_receiving_damage_energy_do());
 }
 
-const std::string &Thing::on_owner_damage_acid_do(void)
+const std::string &Thing::on_owner_receiving_damage_acid_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_acid_do());
+  return (tp()->on_owner_receiving_damage_acid_do());
 }
 
-const std::string &Thing::on_owner_damage_digest_do(void)
+const std::string &Thing::on_owner_receiving_damage_digest_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_digest_do());
+  return (tp()->on_owner_receiving_damage_digest_do());
 }
 
-const std::string &Thing::on_owner_damage_stat_con_do(void)
+const std::string &Thing::on_owner_receiving_damage_stat_con_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_stat_con_do());
+  return (tp()->on_owner_receiving_damage_stat_con_do());
 }
 
-const std::string &Thing::on_owner_damage_stat_str_do(void)
+const std::string &Thing::on_owner_receiving_damage_stat_str_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_stat_str_do());
+  return (tp()->on_owner_receiving_damage_stat_str_do());
 }
 
-const std::string &Thing::on_owner_damage_stat_att_do(void)
+const std::string &Thing::on_owner_receiving_damage_stat_att_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_stat_att_do());
+  return (tp()->on_owner_receiving_damage_stat_att_do());
 }
 
-const std::string &Thing::on_owner_damage_melee_do(void)
+const std::string &Thing::on_owner_receiving_damage_melee_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_melee_do());
+  return (tp()->on_owner_receiving_damage_melee_do());
 }
 
-const std::string &Thing::on_owner_damage_necrosis_do(void)
+const std::string &Thing::on_owner_receiving_damage_necrosis_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_necrosis_do());
+  return (tp()->on_owner_receiving_damage_necrosis_do());
 }
 
-const std::string &Thing::on_owner_damage_draining_do(void)
+const std::string &Thing::on_owner_receiving_damage_draining_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_draining_do());
+  return (tp()->on_owner_receiving_damage_draining_do());
 }
 
-const std::string &Thing::on_owner_damage_stamina_do(void)
+const std::string &Thing::on_owner_receiving_damage_stamina_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_stamina_do());
+  return (tp()->on_owner_receiving_damage_stamina_do());
 }
 
-const std::string &Thing::on_owner_damage_nat_attack_do(void)
+const std::string &Thing::on_owner_receiving_damage_nat_attack_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_damage_nat_attack_do());
+  return (tp()->on_owner_receiving_damage_nat_attack_do());
 }
 
-const std::string &Thing::on_damage_poison_do(void)
+const std::string &Thing::on_receiving_damage_poison_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_poison_do());
+  return (tp()->on_receiving_damage_poison_do());
 }
 
-const std::string &Thing::on_damage_future1_do(void)
+const std::string &Thing::on_receiving_damage_future1_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_future1_do());
+  return (tp()->on_receiving_damage_future1_do());
 }
 
-const std::string &Thing::on_damage_future2_do(void)
+const std::string &Thing::on_receiving_damage_future2_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_future2_do());
+  return (tp()->on_receiving_damage_future2_do());
 }
 
-const std::string &Thing::on_damage_future3_do(void)
+const std::string &Thing::on_receiving_damage_future3_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_future3_do());
+  return (tp()->on_receiving_damage_future3_do());
 }
 
-const std::string &Thing::on_damage_cold_do(void)
+const std::string &Thing::on_receiving_damage_cold_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_cold_do());
+  return (tp()->on_receiving_damage_cold_do());
 }
 
-const std::string &Thing::on_damage_fire_do(void)
+const std::string &Thing::on_receiving_damage_fire_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_fire_do());
+  return (tp()->on_receiving_damage_fire_do());
 }
 
-const std::string &Thing::on_damage_crush_do(void)
+const std::string &Thing::on_receiving_damage_crush_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_crush_do());
+  return (tp()->on_receiving_damage_crush_do());
 }
 
-const std::string &Thing::on_damage_lightning_do(void)
+const std::string &Thing::on_receiving_damage_lightning_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_lightning_do());
+  return (tp()->on_receiving_damage_lightning_do());
 }
 
-const std::string &Thing::on_damage_energy_do(void)
+const std::string &Thing::on_receiving_damage_energy_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_energy_do());
+  return (tp()->on_receiving_damage_energy_do());
 }
 
-const std::string &Thing::on_damage_acid_do(void)
+const std::string &Thing::on_receiving_damage_acid_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_acid_do());
+  return (tp()->on_receiving_damage_acid_do());
 }
 
-const std::string &Thing::on_damage_digest_do(void)
+const std::string &Thing::on_receiving_damage_digest_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_digest_do());
+  return (tp()->on_receiving_damage_digest_do());
 }
 
-const std::string &Thing::on_damage_stat_con_do(void)
+const std::string &Thing::on_receiving_damage_stat_con_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_stat_con_do());
+  return (tp()->on_receiving_damage_stat_con_do());
 }
 
-const std::string &Thing::on_damage_stat_str_do(void)
+const std::string &Thing::on_receiving_damage_stat_str_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_stat_str_do());
+  return (tp()->on_receiving_damage_stat_str_do());
 }
 
-const std::string &Thing::on_damage_stat_att_do(void)
+const std::string &Thing::on_receiving_damage_stat_att_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_stat_att_do());
+  return (tp()->on_receiving_damage_stat_att_do());
 }
 
-const std::string &Thing::on_damage_melee_do(void)
+const std::string &Thing::on_receiving_damage_melee_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_melee_do());
+  return (tp()->on_receiving_damage_melee_do());
 }
 
-const std::string &Thing::on_damage_necrosis_do(void)
+const std::string &Thing::on_receiving_damage_necrosis_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_necrosis_do());
+  return (tp()->on_receiving_damage_necrosis_do());
 }
 
-const std::string &Thing::on_damage_draining_do(void)
+const std::string &Thing::on_receiving_damage_draining_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_draining_do());
+  return (tp()->on_receiving_damage_draining_do());
 }
 
-const std::string &Thing::on_damage_stamina_do(void)
+const std::string &Thing::on_receiving_damage_stamina_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_stamina_do());
+  return (tp()->on_receiving_damage_stamina_do());
 }
 
-const std::string &Thing::on_damage_nat_attack_do(void)
+const std::string &Thing::on_receiving_damage_nat_attack_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_damage_nat_attack_do());
+  return (tp()->on_receiving_damage_nat_attack_do());
 }
 
 const std::string &Thing::target_name_projectile(void)

@@ -38,7 +38,7 @@ int Thing::damage_acid(void)
   return roll + enchant;
 }
 
-int Thing::on_owner_damage_acid(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_receiving_damage_acid(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -53,12 +53,12 @@ int Thing::on_owner_damage_acid(Thingp owner, Thingp hitter, Thingp real_hitter,
     return damage;
   }
 
-  auto on_owner_damage_acid = on_owner_damage_acid_do();
-  if (std::empty(on_owner_damage_acid)) {
+  auto on_owner_receiving_damage_acid = on_owner_receiving_damage_acid_do();
+  if (std::empty(on_owner_receiving_damage_acid)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_damage_acid, '.');
+  auto t = split_tokens(on_owner_receiving_damage_acid, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -78,13 +78,13 @@ int Thing::on_owner_damage_acid(Thingp owner, Thingp hitter, Thingp real_hitter,
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_damage_acid call [%s] expected mod:function, got %d elems", on_owner_damage_acid.c_str(),
-      (int) on_owner_damage_acid.size());
+  ERR("Bad on_owner_receiving_damage_acid call [%s] expected mod:function, got %d elems", on_owner_receiving_damage_acid.c_str(),
+      (int) on_owner_receiving_damage_acid.size());
 
   return damage;
 }
 
-int Thing::on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_receiving_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
@@ -94,12 +94,12 @@ int Thing::on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
     return damage;
   }
 
-  auto on_damage_acid = on_damage_acid_do();
-  if (std::empty(on_damage_acid)) {
+  auto on_receiving_damage_acid = on_receiving_damage_acid_do();
+  if (std::empty(on_receiving_damage_acid)) {
     return damage;
   }
 
-  auto t = split_tokens(on_damage_acid, '.');
+  auto t = split_tokens(on_receiving_damage_acid, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -119,24 +119,33 @@ int Thing::on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_damage_acid call [%s] expected mod:function, got %d elems", on_damage_acid.c_str(),
-      (int) on_damage_acid.size());
+  ERR("Bad on_receiving_damage_acid call [%s] expected mod:function, got %d elems", on_receiving_damage_acid.c_str(),
+      (int) on_receiving_damage_acid.size());
 
   return damage;
 }
 
-int Thing::total_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::total_on_receiving_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
     return damage;
   }
 
+  //
+  // Allow the hitter to increase the damage.
+  // And then allow the receive to dampen the damage.
+  //
+#if 0
+  auto victim = this;
+  damage      = on_total_damage_acid(hitter, real_hitter, victim, damage);
+#endif
+
   FOR_ALL_BUFFS(item)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_damage_acid(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_damage_acid(this, hitter, real_hitter, damage);
     }
   }
 
@@ -144,7 +153,7 @@ int Thing::total_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_damage_acid(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_damage_acid(this, hitter, real_hitter, damage);
     }
   }
 
@@ -152,11 +161,11 @@ int Thing::total_on_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_damage_acid(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_damage_acid(this, hitter, real_hitter, damage);
     }
   }
 
-  damage = on_damage_acid(hitter, real_hitter, damage);
+  damage = on_receiving_damage_acid(hitter, real_hitter, damage);
 
   return damage;
 }

@@ -6,9 +6,8 @@ def on_swing(owner, item, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
-    enchant = my.thing_enchant_get(item)
-
     damage = my.thing_damage_melee(item)
+    enchant = my.thing_enchant_get(item)
     my.thing_damage_current_set(owner, damage + enchant)
 
 
