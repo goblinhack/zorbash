@@ -187,16 +187,49 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
     return false;
   }
 
+  auto victim = this;
   if (attack_poison) {
-    damage = total_on_receiving_damage_poison(hitter, real_hitter, damage);
+    damage = real_hitter->total_on_attacking_damage_poison(victim, damage);
+    damage = victim->total_on_receiving_damage_poison(hitter, real_hitter, damage);
   } else if (attack_future1) {
-    damage = total_on_receiving_damage_future1(hitter, real_hitter, damage);
+    real_hitter->total_on_attacking_damage_future1(victim, damage);
+    damage = victim->total_on_receiving_damage_future1(hitter, real_hitter, damage);
   } else if (attack_future2) {
-    damage = total_on_receiving_damage_future2(hitter, real_hitter, damage);
+    real_hitter->total_on_attacking_damage_future2(victim, damage);
+    damage = victim->total_on_receiving_damage_future2(hitter, real_hitter, damage);
   } else if (attack_future3) {
-    damage = total_on_receiving_damage_future3(hitter, real_hitter, damage);
+    real_hitter->total_on_attacking_damage_future3(victim, damage);
+    damage = victim->total_on_receiving_damage_future3(hitter, real_hitter, damage);
+  } else if (attack_fire) {
+    real_hitter->total_on_attacking_damage_fire(victim, damage);
+    damage = victim->total_on_receiving_damage_fire(hitter, real_hitter, damage);
+  } else if (attack_crush) {
+    real_hitter->total_on_attacking_damage_crush(victim, damage);
+    damage = victim->total_on_receiving_damage_crush(hitter, real_hitter, damage);
+  } else if (attack_lightning) {
+    real_hitter->total_on_attacking_damage_lightning(victim, damage);
+    damage = victim->total_on_receiving_damage_lightning(hitter, real_hitter, damage);
+  } else if (attack_energy) {
+    real_hitter->total_on_attacking_damage_energy(victim, damage);
+    damage = victim->total_on_receiving_damage_energy(hitter, real_hitter, damage);
+  } else if (attack_acid) {
+    real_hitter->total_on_attacking_damage_acid(victim, damage);
+    damage = victim->total_on_receiving_damage_acid(hitter, real_hitter, damage);
+  } else if (attack_digest) {
+    real_hitter->total_on_attacking_damage_digest(victim, damage);
+    damage = victim->total_on_receiving_damage_digest(hitter, real_hitter, damage);
+  } else if (attack_necrosis) {
+    real_hitter->total_on_attacking_damage_necrosis(victim, damage);
+    damage = victim->total_on_receiving_damage_necrosis(hitter, real_hitter, damage);
+  } else if (attack_stamina) {
+    real_hitter->total_on_attacking_damage_draining(victim, damage);
+    damage = victim->total_on_receiving_damage_draining(hitter, real_hitter, damage);
+  } else if (attack_natural) {
+    real_hitter->total_on_attacking_damage_nat_attack(victim, damage);
+    damage = victim->total_on_receiving_damage_nat_attack(hitter, real_hitter, damage);
   } else if (attack_cold) {
-    damage = total_on_receiving_damage_cold(hitter, real_hitter, damage);
+    real_hitter->total_on_attacking_damage_cold(victim, damage);
+    damage = victim->total_on_receiving_damage_cold(hitter, real_hitter, damage);
 
     if (is_on_fire()) {
       if (is_player()) {
@@ -207,26 +240,9 @@ int Thing::ai_hit_actual(Thingp hitter,      // an arrow / monst /...
       auto smoke = level->thing_new("smoke", curr_at);
       smoke->lifespan_set(pcg_random_range(1, 10));
     }
-  } else if (attack_fire) {
-    damage = total_on_receiving_damage_fire(hitter, real_hitter, damage);
-  } else if (attack_crush) {
-    damage = total_on_receiving_damage_crush(hitter, real_hitter, damage);
-  } else if (attack_lightning) {
-    damage = total_on_receiving_damage_lightning(hitter, real_hitter, damage);
-  } else if (attack_energy) {
-    damage = total_on_receiving_damage_energy(hitter, real_hitter, damage);
-  } else if (attack_acid) {
-    damage = total_on_receiving_damage_acid(hitter, real_hitter, damage);
-  } else if (attack_digest) {
-    damage = total_on_receiving_damage_digest(hitter, real_hitter, damage);
-  } else if (attack_necrosis) {
-    damage = total_on_receiving_damage_necrosis(hitter, real_hitter, damage);
-  } else if (attack_stamina) {
-    damage = total_on_receiving_damage_draining(hitter, real_hitter, damage);
-  } else if (attack_natural) {
-    damage = total_on_receiving_damage_nat_attack(hitter, real_hitter, damage);
   } else {
-    damage = total_on_receiving_damage_melee(hitter, real_hitter, damage);
+    real_hitter->total_on_attacking_damage_melee(victim, damage);
+    damage = victim->total_on_receiving_damage_melee(hitter, real_hitter, damage);
   }
 
   std::string damage_type;
