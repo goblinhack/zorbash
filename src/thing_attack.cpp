@@ -485,7 +485,7 @@ bool Thing::attack(point future_pos)
   return (move(future_pos, up, down, left, right, attack, idle, &attack_options));
 }
 
-bool Thing::attack(Thingp victim, bool prefer_nat_attack)
+bool Thing::attack(Thingp victim, AttackOptions *attack_options)
 {
   dbg("Attack %s", victim->to_string().c_str());
   TRACE_AND_INDENT();
@@ -534,53 +534,42 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
 
   auto stat_def = victim->stat_def_total() - victim->stat_def_penalties_total();
 
-  bool damage_set       = false;
-  bool attack_poison    = false;
-  bool attack_future1   = false;
-  bool attack_future2   = false;
-  bool attack_future3   = false;
-  bool attack_cold      = false;
-  bool attack_fire      = false;
-  bool attack_crush     = false;
-  bool attack_lightning = false;
-  bool attack_energy    = false;
-  bool attack_acid      = false;
-  bool attack_digest    = false;
-  bool attack_necrosis  = false;
-  bool attack_natural   = false;
-  bool attack_stamina   = false;
-  int  damage           = 0;
+  bool damage_set = false;
+  int  damage     = 0;
 
   dbg("Set damage types");
   TRACE_AND_INDENT();
 
-  int attack_index = 0;
-
   //
   // Chance of poison damage?
   //
-  if (! damage_set || prefer_nat_attack) {
-    if (d1000() < damage_poison_chance_d1000(attack_index)) {
-      int damage_poison_val = damage_poison();
-      if (damage_poison_val > 0) {
-        damage        = damage_poison_val;
-        damage_set    = true;
-        attack_poison = true;
-        victim->poison_reason_set(text_a_or_an());
+  if (! attack_options->attack_poison) {
+    if (! damage_set || attack_options->prefer_nat_attack) {
+      if (d1000() < damage_poison_chance_d1000(attack_options->attack_num)) {
+        int damage_poison_val = damage_poison();
+        if (damage_poison_val > 0) {
+          damage                        = damage_poison_val;
+          damage_set                    = true;
+          attack_options->attack_poison = true;
+          victim->poison_reason_set(text_a_or_an());
+        }
       }
     }
   }
+
   //
   // Chance of attack_future1 damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_future1_chance_d1000(attack_index)) {
-      int damage_future1_val = damage_future1();
-      if (damage_future1_val > 0) {
-        damage         = damage_future1_val;
-        damage_set     = true;
-        attack_future1 = true;
-        dbg("Set future1 damage %d", damage);
+  if (! attack_options->attack_future1) {
+    if (! damage_set) {
+      if (d1000() < damage_future1_chance_d1000(attack_options->attack_num)) {
+        int damage_future1_val = damage_future1();
+        if (damage_future1_val > 0) {
+          damage                         = damage_future1_val;
+          damage_set                     = true;
+          attack_options->attack_future1 = true;
+          dbg("Set future1 damage %d", damage);
+        }
       }
     }
   }
@@ -588,14 +577,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of attack_future2 damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_future2_chance_d1000(attack_index)) {
-      int damage_future2_val = damage_future2();
-      if (damage_future2_val > 0) {
-        damage         = damage_future2_val;
-        damage_set     = true;
-        attack_future2 = true;
-        dbg("Set future2 damage %d", damage);
+  if (! attack_options->attack_future2) {
+    if (! damage_set) {
+      if (d1000() < damage_future2_chance_d1000(attack_options->attack_num)) {
+        int damage_future2_val = damage_future2();
+        if (damage_future2_val > 0) {
+          damage                         = damage_future2_val;
+          damage_set                     = true;
+          attack_options->attack_future2 = true;
+          dbg("Set future2 damage %d", damage);
+        }
       }
     }
   }
@@ -604,12 +595,12 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // Chance of attack_future3 damage?
   //
   if (! damage_set) {
-    if (d1000() < damage_future3_chance_d1000(attack_index)) {
+    if (d1000() < damage_future3_chance_d1000(attack_options->attack_num)) {
       int damage_future3_val = damage_future3();
       if (damage_future3_val > 0) {
-        damage         = damage_future3_val;
-        damage_set     = true;
-        attack_future3 = true;
+        damage                         = damage_future3_val;
+        damage_set                     = true;
+        attack_options->attack_future3 = true;
         dbg("Set future3 damage %d", damage);
       }
     }
@@ -618,14 +609,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of attack_cold damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_cold_chance_d1000(attack_index)) {
-      int damage_cold_val = damage_cold();
-      if (damage_cold_val > 0) {
-        damage      = damage_cold_val;
-        damage_set  = true;
-        attack_cold = true;
-        dbg("Set cold damage %d", damage);
+  if (! attack_options->attack_cold) {
+    if (! damage_set) {
+      if (d1000() < damage_cold_chance_d1000(attack_options->attack_num)) {
+        int damage_cold_val = damage_cold();
+        if (damage_cold_val > 0) {
+          damage                      = damage_cold_val;
+          damage_set                  = true;
+          attack_options->attack_cold = true;
+          dbg("Set cold damage %d", damage);
+        }
       }
     }
   }
@@ -633,14 +626,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of attack_fire damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_fire_chance_d1000(attack_index)) {
-      int damage_fire_val = damage_fire();
-      if (damage_fire_val > 0) {
-        damage      = damage_fire_val;
-        damage_set  = true;
-        attack_fire = true;
-        dbg("Set fire damage %d", damage);
+  if (! attack_options->attack_fire) {
+    if (! damage_set) {
+      if (d1000() < damage_fire_chance_d1000(attack_options->attack_num)) {
+        int damage_fire_val = damage_fire();
+        if (damage_fire_val > 0) {
+          damage                      = damage_fire_val;
+          damage_set                  = true;
+          attack_options->attack_fire = true;
+          dbg("Set fire damage %d", damage);
+        }
       }
     }
   }
@@ -648,14 +643,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of attack_crush damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_crush_chance_d1000(attack_index)) {
-      int damage_crush_val = damage_crush();
-      if (damage_crush_val > 0) {
-        damage       = damage_crush_val;
-        damage_set   = true;
-        attack_crush = true;
-        dbg("Set crush damage %d", damage);
+  if (! attack_options->attack_crush) {
+    if (! damage_set) {
+      if (d1000() < damage_crush_chance_d1000(attack_options->attack_num)) {
+        int damage_crush_val = damage_crush();
+        if (damage_crush_val > 0) {
+          damage                       = damage_crush_val;
+          damage_set                   = true;
+          attack_options->attack_crush = true;
+          dbg("Set crush damage %d", damage);
+        }
       }
     }
   }
@@ -663,14 +660,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of attack_lightning damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_lightning_chance_d1000(attack_index)) {
-      int damage_lightning_val = damage_lightning();
-      if (damage_lightning_val > 0) {
-        damage           = damage_lightning_val;
-        damage_set       = true;
-        attack_lightning = true;
-        dbg("Set lightning damage %d", damage);
+  if (! attack_options->attack_lightning) {
+    if (! damage_set) {
+      if (d1000() < damage_lightning_chance_d1000(attack_options->attack_num)) {
+        int damage_lightning_val = damage_lightning();
+        if (damage_lightning_val > 0) {
+          damage                           = damage_lightning_val;
+          damage_set                       = true;
+          attack_options->attack_lightning = true;
+          dbg("Set lightning damage %d", damage);
+        }
       }
     }
   }
@@ -678,14 +677,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of attack_energy damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_energy_chance_d1000(attack_index)) {
-      int damage_energy_val = damage_energy();
-      if (damage_energy_val > 0) {
-        damage        = damage_energy_val;
-        damage_set    = true;
-        attack_energy = true;
-        dbg("Set energy damage %d", damage);
+  if (! attack_options->attack_energy) {
+    if (! damage_set) {
+      if (d1000() < damage_energy_chance_d1000(attack_options->attack_num)) {
+        int damage_energy_val = damage_energy();
+        if (damage_energy_val > 0) {
+          damage                        = damage_energy_val;
+          damage_set                    = true;
+          attack_options->attack_energy = true;
+          dbg("Set energy damage %d", damage);
+        }
       }
     }
   }
@@ -693,14 +694,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of attack_acid damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_acid_chance_d1000(attack_index)) {
-      int damage_acid_val = damage_acid();
-      if (damage_acid_val > 0) {
-        damage      = damage_acid_val;
-        damage_set  = true;
-        attack_acid = true;
-        dbg("Set acid damage %d", damage);
+  if (! attack_options->attack_acid) {
+    if (! damage_set) {
+      if (d1000() < damage_acid_chance_d1000(attack_options->attack_num)) {
+        int damage_acid_val = damage_acid();
+        if (damage_acid_val > 0) {
+          damage                      = damage_acid_val;
+          damage_set                  = true;
+          attack_options->attack_acid = true;
+          dbg("Set acid damage %d", damage);
+        }
       }
     }
   }
@@ -708,14 +711,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of attack_digest damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_digest_chance_d1000(attack_index)) {
-      int damage_digest_val = damage_digest();
-      if (damage_digest_val > 0) {
-        damage        = damage_digest_val;
-        damage_set    = true;
-        attack_digest = true;
-        dbg("Set digest damage %d", damage);
+  if (! attack_options->attack_digest) {
+    if (! damage_set) {
+      if (d1000() < damage_digest_chance_d1000(attack_options->attack_num)) {
+        int damage_digest_val = damage_digest();
+        if (damage_digest_val > 0) {
+          damage                        = damage_digest_val;
+          damage_set                    = true;
+          attack_options->attack_digest = true;
+          dbg("Set digest damage %d", damage);
+        }
       }
     }
   }
@@ -723,14 +728,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of necrosis damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_necrosis_chance_d1000(attack_index)) {
-      int damage_necrosis_val = damage_necrosis();
-      if (damage_necrosis_val > 0) {
-        damage          = damage_necrosis_val;
-        damage_set      = true;
-        attack_necrosis = true;
-        dbg("Set necro damage %d", damage);
+  if (! attack_options->attack_necrosis) {
+    if (! damage_set) {
+      if (d1000() < damage_necrosis_chance_d1000(attack_options->attack_num)) {
+        int damage_necrosis_val = damage_necrosis();
+        if (damage_necrosis_val > 0) {
+          damage                          = damage_necrosis_val;
+          damage_set                      = true;
+          attack_options->attack_necrosis = true;
+          dbg("Set necro damage %d", damage);
+        }
       }
     }
   }
@@ -738,14 +745,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Chance of stamina damage?
   //
-  if (! damage_set) {
-    if (d1000() < damage_draining_chance_d1000(attack_index)) {
-      int damage_draining_val = damage_draining();
-      if (damage_draining_val > 0) {
-        damage         = damage_draining_val;
-        damage_set     = true;
-        attack_stamina = true;
-        dbg("Set drain damage %d", damage);
+  if (! attack_options->attack_stamina) {
+    if (! damage_set) {
+      if (d1000() < damage_draining_chance_d1000(attack_options->attack_num)) {
+        int damage_draining_val = damage_draining();
+        if (damage_draining_val > 0) {
+          damage                         = damage_draining_val;
+          damage_set                     = true;
+          attack_options->attack_stamina = true;
+          dbg("Set drain damage %d", damage);
+        }
       }
     }
   }
@@ -753,14 +762,16 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   // Bite?
   //
-  if (! damage_set || prefer_nat_attack) {
-    if (d1000() < damage_nat_attack_chance_d1000(attack_index)) {
-      int damage_nat_attack_val = damage_nat_attack();
-      if (damage_nat_attack_val > 0) {
-        damage         = damage_nat_attack_val + attack_bonus;
-        damage_set     = true;
-        attack_natural = true;
-        dbg("Set natural damage %d", damage);
+  if (! attack_options->attack_natural) {
+    if (! damage_set || attack_options->prefer_nat_attack) {
+      if (d1000() < damage_nat_attack_chance_d1000(attack_options->attack_num)) {
+        int damage_nat_attack_val = damage_nat_attack();
+        if (damage_nat_attack_val > 0) {
+          damage                         = damage_nat_attack_val + attack_bonus;
+          damage_set                     = true;
+          attack_options->attack_natural = true;
+          dbg("Set natural damage %d", damage);
+        }
       }
     }
   }
@@ -772,7 +783,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   // else hits.
   //
   if (! damage_set) {
-    if (d1000() < damage_melee_chance_d1000(attack_index)) {
+    if (d1000() < damage_melee_chance_d1000(attack_options->attack_num)) {
       damage = damage_melee() + attack_bonus;
       if (damage > 0) {
         dbg("Set melee damage %d", damage);
@@ -780,9 +791,10 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
       }
     }
   }
+
   if (! damage_set) {
     if (owner) {
-      if (d1000() < owner->damage_melee_chance_d1000(attack_index)) {
+      if (d1000() < owner->damage_melee_chance_d1000(attack_options->attack_num)) {
         damage = damage_melee() + attack_bonus;
         if (damage > 0) {
           dbg("Set melee damage %d", damage);
@@ -797,21 +809,21 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   //
   if (is_engulfer()) {
     if (victim->curr_at == curr_at) {
-      damage           = damage_digest();
-      attack_poison    = false;
-      attack_future1   = false;
-      attack_future2   = false;
-      attack_future3   = false;
-      attack_cold      = false;
-      attack_fire      = false;
-      attack_crush     = false;
-      attack_lightning = false;
-      attack_energy    = false;
-      attack_acid      = false;
-      attack_digest    = true;
-      attack_necrosis  = false;
-      attack_natural   = false;
-      damage_set       = true;
+      damage                           = damage_digest();
+      attack_options->attack_poison    = false;
+      attack_options->attack_future1   = false;
+      attack_options->attack_future2   = false;
+      attack_options->attack_future3   = false;
+      attack_options->attack_cold      = false;
+      attack_options->attack_fire      = false;
+      attack_options->attack_crush     = false;
+      attack_options->attack_lightning = false;
+      attack_options->attack_energy    = false;
+      attack_options->attack_acid      = false;
+      attack_options->attack_digest    = true;
+      attack_options->attack_necrosis  = false;
+      attack_options->attack_natural   = false;
+      damage_set                       = true;
     }
   }
 
@@ -868,7 +880,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
         return true;
       }
     } else if (is_monst()) {
-      attack_natural = true;
+      attack_options->attack_natural = true;
     }
   }
 
@@ -1010,9 +1022,7 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   if (! missed) {
     dbg("Do the hit");
     TRACE_AND_INDENT();
-    if (victim->is_hit(this, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                       attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                       attack_energy, attack_acid, attack_digest, damage)) {
+    if (victim->is_hit(this, attack_options, damage)) {
       dbg("The attack succeeded");
 
       if (victim != this) {
@@ -1118,349 +1128,129 @@ bool Thing::attack(Thingp victim, bool prefer_nat_attack)
   return tried_to_attack;
 }
 
-bool Thing::nat_attack(Thingp victim) { return attack(victim, true); }
+bool Thing::nat_attack(Thingp victim)
+{
+  AttackOptions attack_options {};
+  attack_options.prefer_nat_attack = true;
+  return attack(victim, &attack_options);
+}
 
 int Thing::is_attacked_with_damage_melee(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_digest = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_nat_attack(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = true;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_natural = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_poison(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = true;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_poison = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = true;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_necrosis = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_draining(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  const bool attack_stamina   = true;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_stamina = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_future1(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = true;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_future1 = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_future2(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = true;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_future2 = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_future3(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = true;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_future3 = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_cold(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = true;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_cold = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_fire(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = true;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_fire = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_crush(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = true;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_crush = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_lightning(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = true;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_lightning = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_energy(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = true;
-  const bool attack_acid      = false;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_energy = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = true;
-  const bool attack_digest    = false;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_acid = true;
+  return is_hit(hitter, &attack_options, damage);
 }
 
 int Thing::is_attacked_with_damage_digest(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
-  const bool crit             = false;
-  const bool attack_natural   = false;
-  const bool attack_poison    = false;
-  const bool attack_necrosis  = false;
-  const bool attack_stamina   = false;
-  const bool attack_future1   = false;
-  const bool attack_future2   = false;
-  const bool attack_future3   = false;
-  const bool attack_cold      = false;
-  const bool attack_fire      = false;
-  const bool attack_crush     = false;
-  const bool attack_lightning = false;
-  const bool attack_energy    = false;
-  const bool attack_acid      = false;
-  const bool attack_digest    = true;
-  return (is_hit(hitter, crit, attack_natural, attack_poison, attack_necrosis, attack_stamina, attack_future1,
-                 attack_future2, attack_future3, attack_cold, attack_fire, attack_crush, attack_lightning,
-                 attack_energy, attack_acid, attack_digest, damage));
+  AttackOptions attack_options {};
+  attack_options.attack_digest = true;
+  return is_hit(hitter, &attack_options, damage);
 }

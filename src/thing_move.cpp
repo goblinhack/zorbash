@@ -579,7 +579,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     if (free_attack) {
       TRACE_NO_INDENT();
       dbg("Free attack by %s", t->to_string().c_str());
-      if (t->attack(this)) {
+      AttackOptions attack_options {};
+      if (t->attack(this, &attack_options)) {
         //
         // Too noisy?
         //

@@ -266,7 +266,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
       dbg("Collision: weapon check for %s", victim->to_string().c_str());
       if (! attack_options->victim_attacked) {
         dbg("Collision: weapon try to attack for %s", victim->to_string().c_str());
-        if (attack(victim)) {
+        if (attack(victim, attack_options)) {
           attack_options->victim_attacked = true;
           ret                             = true;
         } else {
