@@ -124,7 +124,7 @@ int Thing::on_receiving_damage_lightning(Thingp hitter, Thingp real_hitter, int 
   return damage;
 }
 
-int Thing::total_on_receiving_damage_lightning(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::get_total_damage_for_on_receiving_damage_lightning(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -246,7 +246,7 @@ int Thing::on_owner_attacking_damage_lightning(Thingp owner, Thingp victim, int 
   return damage;
 }
 
-int Thing::total_on_attacking_damage_lightning(Thingp victim, int damage)
+int Thing::get_total_damage_for_on_attacking_damage_lightning(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {

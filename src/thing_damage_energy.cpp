@@ -124,7 +124,7 @@ int Thing::on_receiving_damage_energy(Thingp hitter, Thingp real_hitter, int dam
   return damage;
 }
 
-int Thing::total_on_receiving_damage_energy(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::get_total_damage_for_on_receiving_damage_energy(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -246,7 +246,7 @@ int Thing::on_owner_attacking_damage_energy(Thingp owner, Thingp victim, int dam
   return damage;
 }
 
-int Thing::total_on_attacking_damage_energy(Thingp victim, int damage)
+int Thing::get_total_damage_for_on_attacking_damage_energy(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
