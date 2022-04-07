@@ -3,12 +3,15 @@ import tp
 
 
 def on_swing(owner, item, x, y):
-    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
-    # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
-    damage = my.thing_damage_melee(item)
-    enchant = my.thing_enchant_get(item)
-    my.thing_damage_current_set(owner, damage + enchant)
+
+
+def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
+    # my.con("on_owner_attacking_damage_melee")
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
+    # my.con("damage  {}".format(damage))
+    return damage + my.thing_enchant_get(me)
 
 
 def on_enchant(me, x, y):
@@ -57,6 +60,7 @@ def init_weapon(name, text_name, short_text_name):
     my.long_text_description(self, "A gleaming wooden handled axe. It's a bit short and extra hungry for vengeance. Against what, who can say. Take care, as your mighty swing can hit all monsters adjacent to you.")
     my.noise_on_dropping(self, 15)
     my.on_enchant_do(self, "me.on_enchant()")
+    my.on_owner_attacking_damage_melee_do(self, "me.on_owner_attacking_damage_melee()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_drain_on_attacking(self, 2)

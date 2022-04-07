@@ -2,7 +2,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- multi damage types                                                                                                                           -->
-<!-- how does my.thing_damage_current_set work with enchant                                                                                       -->
+<!-- when hitting a sleeping snake and it crits, need the dispatch message                                                                        -->
 <!-- sword of draining                                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

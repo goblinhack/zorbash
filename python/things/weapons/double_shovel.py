@@ -3,12 +3,15 @@ import tp
 
 
 def on_swing(owner, item, x, y):
-    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
-    # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
-    damage = my.thing_damage_melee(item)
-    enchant = my.thing_enchant_get(item)
-    my.thing_damage_current_set(owner, damage + enchant)
+
+
+def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
+    # my.con("on_owner_attacking_damage_melee")
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
+    # my.con("damage  {}".format(damage))
+    return damage + my.thing_enchant_get(me)
 
 
 def tp_init(name, text_name, short_text_name):
@@ -51,6 +54,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_width(self, 9)
     my.long_text_description(self, "A truly dreadful weapon of last resort. The masterwork double bladed shovel. Ideal for allotment use and casual bludgeoning.")
     my.noise_on_dropping(self, 40)
+    my.on_owner_attacking_damage_melee_do(self, "me.on_owner_attacking_damage_melee()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_RARE)
     my.stamina_drain_on_attacking(self, 3)
