@@ -248,6 +248,74 @@ def on_receiving_damage_stat_con(me, hitter, x, y, damage):
     return damage
 
 
+def on_attacking_damage_melee(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_poison(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_future1(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_future2(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_future3(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_cold(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_fire(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_crush(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_lightning(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_energy(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_acid(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_digest(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_nat_attack(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_necrosis(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_draining(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_stat_str(me, victim, x, y, damage):
+    return damage
+
+
+def on_attacking_damage_stat_con(me, victim, x, y, damage):
+    return damage
+
+
 def tp_init(name, text_name, short_text_name, title):
     self = tp.Tp(name, text_name, short_text_name)
     my.aggression_level_pct(self, 75)
@@ -354,6 +422,23 @@ def tp_init(name, text_name, short_text_name, title):
     my.on_receiving_damage_poison_do(self, "player.on_receiving_damage_poison()")
     my.on_receiving_damage_stat_con_do(self, "player.on_receiving_damage_stat_con()")
     my.on_receiving_damage_stat_str_do(self, "player.on_receiving_damage_stat_str()")
+    my.on_attacking_damage_acid_do(self, "player.on_attacking_damage_acid()")
+    my.on_attacking_damage_cold_do(self, "player.on_attacking_damage_cold()")
+    my.on_attacking_damage_crush_do(self, "player.on_attacking_damage_crush()")
+    my.on_attacking_damage_digest_do(self, "player.on_attacking_damage_digest()")
+    my.on_attacking_damage_draining_do(self, "player.on_attacking_damage_draining()")
+    my.on_attacking_damage_energy_do(self, "player.on_attacking_damage_energy()")
+    my.on_attacking_damage_fire_do(self, "player.on_attacking_damage_fire()")
+    my.on_attacking_damage_future1_do(self, "player.on_attacking_damage_future1()")
+    my.on_attacking_damage_future2_do(self, "player.on_attacking_damage_future2()")
+    my.on_attacking_damage_future3_do(self, "player.on_attacking_damage_future3()")
+    my.on_attacking_damage_lightning_do(self, "player.on_attacking_damage_lightning()")
+    my.on_attacking_damage_melee_do(self, "player.on_attacking_damage_melee()")
+    my.on_attacking_damage_nat_attack_do(self, "player.on_attacking_damage_nat_attack()")
+    my.on_attacking_damage_necrosis_do(self, "player.on_attacking_damage_necrosis()")
+    my.on_attacking_damage_poison_do(self, "player.on_attacking_damage_poison()")
+    my.on_attacking_damage_stat_con_do(self, "player.on_attacking_damage_stat_con()")
+    my.on_attacking_damage_stat_str_do(self, "player.on_attacking_damage_stat_str()")
     my.on_death_do(self, "player.on_death()")
     my.on_death_drop_all_items(self, True)
     my.on_move_do(self, "player.on_move()")

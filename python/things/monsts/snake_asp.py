@@ -81,7 +81,6 @@ def tp_init(name, text_name):
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_poisonous_danger_level(self, 1)
-    my.is_red_blood_eater(self, True)
     my.is_red_blooded(self, True)
     my.is_shovable(self, True)
     my.is_snake(self, True)

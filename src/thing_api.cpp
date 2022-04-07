@@ -311,36 +311,6 @@ int Thing::collision_check(void)
   return (tp()->collision_check());
 }
 
-int Thing::damage_received_doubled_from_acid(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_received_doubled_from_acid());
-}
-
-int Thing::damage_received_doubled_from_fire(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_received_doubled_from_fire());
-}
-
-int Thing::damage_received_doubled_from_poison(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_received_doubled_from_poison());
-}
-
-int Thing::damage_received_doubled_from_necrosis(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_received_doubled_from_necrosis());
-}
-
-int Thing::damage_received_doubled_from_water(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_received_doubled_from_water());
-}
-
 int Thing::initial_charge_count(void)
 {
   TRACE_NO_INDENT();
@@ -2059,12 +2029,6 @@ int Thing::unused_flag107(void)
   return (tp()->unused_flag107());
 }
 
-int Thing::damage_num_attacks(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_num_attacks());
-}
-
 int Thing::is_key_special(void)
 {
   TRACE_NO_INDENT();
@@ -2236,12 +2200,6 @@ int Thing::is_temperature_sensitive(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_temperature_sensitive());
-}
-
-int Thing::damage_received_doubled_from_cold(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->damage_received_doubled_from_cold());
 }
 
 int Thing::is_cold(void)
@@ -3210,12 +3168,6 @@ int Thing::range_max(void)
 {
   TRACE_NO_INDENT();
   return (tp()->range_max());
-}
-
-int Thing::weapon_damage(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->weapon_damage());
 }
 
 int Thing::is_water(void)
@@ -6180,78 +6132,6 @@ ThingId Thing::on_fire_anim_id_set(ThingId v)
   return (infop()->on_fire_id_anim = v);
 }
 
-////////////////////////////////////////////////////////////////////////////
-// damage_current
-////////////////////////////////////////////////////////////////////////////
-int Thing::damage_current(void)
-{
-  TRACE_NO_INDENT();
-  int v = 0;
-  if (maybe_infop()) {
-    v = infop()->damage_current;
-  }
-  auto owner = immediate_owner();
-  if (owner && (owner != this)) {
-    v += owner->damage_current();
-  }
-  return v;
-}
-
-int Thing::damage_current_set(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->damage_current = v);
-  return n;
-}
-
-int Thing::damage_current_decr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->damage_current -= v);
-  return n;
-}
-
-int Thing::damage_current_incr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->damage_current += v);
-  return n;
-}
-
-int Thing::damage_current_decr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->damage_current--);
-  return n;
-}
-
-int Thing::damage_current_incr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_update_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->damage_current++);
-  return n;
-}
-
 const std::string &Thing::gfx_anim_use(void)
 {
   TRACE_NO_INDENT();
@@ -6490,234 +6370,6 @@ const std::string &Thing::on_death_of_my_leader_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_death_of_my_leader_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_poison_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_poison_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_future1_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_future1_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_future2_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_future2_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_future3_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_future3_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_cold_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_cold_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_fire_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_fire_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_crush_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_crush_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_lightning_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_lightning_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_energy_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_energy_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_acid_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_acid_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_digest_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_digest_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_stat_con_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_stat_con_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_stat_str_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_stat_str_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_stat_att_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_stat_att_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_melee_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_melee_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_necrosis_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_necrosis_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_draining_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_draining_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_stamina_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_stamina_do());
-}
-
-const std::string &Thing::on_owner_receiving_damage_nat_attack_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_nat_attack_do());
-}
-
-const std::string &Thing::on_receiving_damage_poison_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_poison_do());
-}
-
-const std::string &Thing::on_receiving_damage_future1_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_future1_do());
-}
-
-const std::string &Thing::on_receiving_damage_future2_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_future2_do());
-}
-
-const std::string &Thing::on_receiving_damage_future3_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_future3_do());
-}
-
-const std::string &Thing::on_receiving_damage_cold_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_cold_do());
-}
-
-const std::string &Thing::on_receiving_damage_fire_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_fire_do());
-}
-
-const std::string &Thing::on_receiving_damage_crush_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_crush_do());
-}
-
-const std::string &Thing::on_receiving_damage_lightning_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_lightning_do());
-}
-
-const std::string &Thing::on_receiving_damage_energy_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_energy_do());
-}
-
-const std::string &Thing::on_receiving_damage_acid_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_acid_do());
-}
-
-const std::string &Thing::on_receiving_damage_digest_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_digest_do());
-}
-
-const std::string &Thing::on_receiving_damage_stat_con_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_stat_con_do());
-}
-
-const std::string &Thing::on_receiving_damage_stat_str_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_stat_str_do());
-}
-
-const std::string &Thing::on_receiving_damage_stat_att_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_stat_att_do());
-}
-
-const std::string &Thing::on_receiving_damage_melee_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_melee_do());
-}
-
-const std::string &Thing::on_receiving_damage_necrosis_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_necrosis_do());
-}
-
-const std::string &Thing::on_receiving_damage_draining_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_draining_do());
-}
-
-const std::string &Thing::on_receiving_damage_stamina_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_stamina_do());
-}
-
-const std::string &Thing::on_receiving_damage_nat_attack_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_nat_attack_do());
 }
 
 const std::string &Thing::target_name_projectile(void)

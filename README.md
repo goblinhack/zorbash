@@ -17,9 +17,9 @@
 <!-- recharge wands based on enchant                                                                                                              -->
 <!-- - crystal key                                                                                                                                -->
 <!-- - negation                                                                                                                                   -->
-<--- - This scroll contains a powerful anti-magic. When it is released, all creatures (including yourself) and all items lying on the ground      -->
-<--- - within your field of view will be exposed to its blast and stripped of magic  - and creatures animated purely by magic will die. Potions,  -->
-<--- - scrolls, items being held by other creatures and items in your inventory will not be affected.                                             -->
+<!-- - This scroll contains a powerful anti-magic. When it is released, all creatures (including yourself) and all items lying on the ground      -->
+<!-- - within your field of view will be exposed to its blast and stripped of magic  - and creatures animated purely by magic will die. Potions,  -->
+<!-- - scrolls, items being held by other creatures and items in your inventory will not be affected.                                             -->
 <!-- - chaos bell of summoning                                                                                                                    -->
 <!-- - crystal chest needs crystal key                                                                                                            -->
 <!-- - teleport block                                                                                                                             -->
