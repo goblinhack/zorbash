@@ -86,7 +86,9 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  if (hitter->attack(target)) {
+  AttackOptions attack_options {};
+
+  if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
   } else {
     Py_RETURN_FALSE;
