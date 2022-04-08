@@ -1768,6 +1768,11 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     printed = true;
   }
 
+  if (t->num_attacks() > 1) {
+    w->log("Monster has multiple attacks.", true);
+    printed = true;
+  }
+
   if (printed) {
     w->log(UI_LOGGING_EMPTY_LINE);
   }
