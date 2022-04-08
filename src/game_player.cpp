@@ -41,6 +41,10 @@ void Game::place_player(void)
         continue;
       }
       auto t = level->thing_new("player2", point(x, y));
+      if (1) {
+        auto w = level->thing_new("sword_wood", point(x, y));
+        t->carry(w);
+      }
       if (0) {
         auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w);
@@ -100,10 +104,6 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
-        auto w = level->thing_new("sword_wood", point(x, y));
-        t->carry(w);
-      }
-      if (0) {
         auto w = level->thing_new("axe", point(x, y));
         t->carry(w);
       }
@@ -131,7 +131,7 @@ void Game::place_player(void)
         auto w = level->thing_new("torch", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto b = level->thing_new("bag_s", point(x, y));
         t->carry(b);
       }

@@ -1,6 +1,9 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- thing info appearing on level choice                                                                                                         -->
+<!-- level choice is hard to see                                                                                                                 -->
+<!-- bats seem to get stuck                                                                                                                      -->
 <!-- when hitting a sleeping snake and it crits, need the dispatch message                                                                        -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
