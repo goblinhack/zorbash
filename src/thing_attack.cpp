@@ -1117,6 +1117,23 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         attack_count++;
       }
     }
+
+    //
+    // Reset to allow multiple attacks of the same type.
+    //
+    attack_options->attack_poison    = false;
+    attack_options->attack_future1   = false;
+    attack_options->attack_future2   = false;
+    attack_options->attack_future3   = false;
+    attack_options->attack_cold      = false;
+    attack_options->attack_fire      = false;
+    attack_options->attack_crush     = false;
+    attack_options->attack_lightning = false;
+    attack_options->attack_energy    = false;
+    attack_options->attack_acid      = false;
+    attack_options->attack_digest    = false;
+    attack_options->attack_necrosis  = false;
+    attack_options->attack_natural   = false;
   }
 
   if (attack_count) {

@@ -51,21 +51,21 @@ void Game::place_player(void)
         level->thing_new("wall_dungeon.1", point(x, y + 2));
         level->thing_new("descend_sewer1", point(x + 4, y + 4));
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("boots_jumping", point(x, y - 2));
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("gauntlets_lion", point(x, y - 2));
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("amulet_endurance", point(x, y - 2));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_lightning", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -95,8 +95,12 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("sword_draining", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
+        auto w = level->thing_new("sword_wood", point(x, y));
         t->carry(w);
       }
       if (0) {
@@ -168,11 +172,11 @@ void Game::place_player(void)
         // level->thing_new("food_frog", point(x + 3, y - 1));
         // level->thing_new("fire", point(x + 1, y - 1));
         // level->thing_new("enchantstone", point(x + 1, y - 1));
-        level->thing_new("skillstone", point(x + 1, y - 1));
-        level->thing_new("horseshoe", point(x, y - 1));
-        level->thing_new("four_leaf_clover", point(x, y - 1));
-        level->thing_new("medal_of_valor", point(x, y - 1));
-        level->thing_new("wooden_cross", point(x, y - 1));
+        // level->thing_new("skillstone", point(x + 1, y - 1));
+        // level->thing_new("horseshoe", point(x, y - 1));
+        // level->thing_new("four_leaf_clover", point(x, y - 1));
+        // level->thing_new("medal_of_valor", point(x, y - 1));
+        // level->thing_new("wooden_cross", point(x, y - 1));
         // level->thing_new("spiderweb", point(x, y));
         // level->thing_new("armor_lather", point(x, y - 2));
         // level->thing_new("boots_fluffy", point(x, y - 2));
@@ -194,13 +198,12 @@ void Game::place_player(void)
         // level->thing_new("key_golden", point(x - 1, y + 2));
         // level->thing_new("key_penta", point(x, y + 12));
         // level->thing_new("snake_viper", point(x, y + 2));
-        //
         // level->thing_new("zorb_pack", point(x + 2, y));
         // level->thing_new("mummy_pack", point(x + 2, y + 12));
         // level->thing_new("teleport", point(x + 2, y + 2));
         // level->thing_new("teletoad", point(x + 2, y + 2));
-        level->thing_new("flesh_golem", point(x, y + 1));
-        level->thing_new("stone_golem", point(x + 1, y + 1));
+        // level->thing_new("flesh_golem", point(x, y + 1));
+        // level->thing_new("stone_golem", point(x + 1, y + 1));
         level->assign_leaders_and_followers();
       }
 
