@@ -263,6 +263,7 @@ std::initializer_list< std::string > tps = {
     "mob_explosion",
     "msg",
     "mummy",
+    "flesh_golem",
     "mummy_necro",
     "mummy_pack",
     "pike",

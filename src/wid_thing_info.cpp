@@ -497,7 +497,7 @@ bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   if (! compact) {
     int i = 0;
     for (auto t : ts) {
-      if (t->long_text_description().empty()) {
+      if (t->long_text_description().empty() && t->long_text_description_extra().empty()) {
         continue;
       }
 
@@ -686,13 +686,13 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t, int index)
       if (min_value > 0) {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->damage_melee_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%19s", tmp2);
         } else {
           min_value += t->enchant_get();
           max_value += t->enchant_get();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value,
                    curr_weapon->damage_melee_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%19s", tmp2);
         }
         w->log(tmp);
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->short_text_capitalise().c_str());
@@ -706,12 +706,12 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t, int index)
       if (min_value > 0) {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_melee_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%19s", tmp2);
         } else {
           min_value += t->enchant_get();
           max_value += t->enchant_get();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_melee_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee  %21s", tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%19s", tmp2);
         }
         w->log(tmp);
       }
