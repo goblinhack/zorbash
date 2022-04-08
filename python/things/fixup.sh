@@ -417,8 +417,8 @@ do
       unused_flag104_set \
       unused_flag105_set \
       unused_flag106_set \
-      unused_flag107_set \
-      damage_num_attacks_set \
+      is_immune_to_draining_set \
+      num_attacks_set \
       is_key_special_set \
       is_crystal_set \
       noise_on_moving_set \

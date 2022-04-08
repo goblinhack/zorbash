@@ -7,10 +7,10 @@ def on_swing(owner, item, x, y):
 
 
 def on_owner_attacking_damage_stamina(me, owner, victim, x, y, damage):
-    # my.con("on_owner_attacking_damage_stamina")
-    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
-    # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
-    # my.con("damage  {}".format(damage))
+    my.con("on_owner_attacking_damage_stamina")
+    my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
+    my.con("damage  {}".format(damage))
     return damage + my.thing_enchant_get(me) * 3
 
 
@@ -24,7 +24,7 @@ def tp_init(name, text_name, short_text_name):
     my.damage_draining_dice(self, "1d20")
     my.damage_melee_chance_d1000(self, 0, 1000)
     my.damage_melee_dice(self, "1d8")
-    my.damage_num_attacks(self, 2)
+    my.num_attacks(self, 2)
     my.equip_carry_anim(self, "sword_draining_carry")
     my.gfx_animated_can_hflip(self, True)
     my.gfx_animated(self, True)

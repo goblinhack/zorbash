@@ -390,6 +390,13 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       damage_type = "digest ";
     }
   } else if (attack_options->attack_necrosis) {
+    if (is_immune_to_necrosis()) {
+      if (real_hitter->is_player()) {
+        msg("%s is immune to rotting!", text_The().c_str());
+      }
+      return false;
+    }
+
     if (! damage) {
       if (is_player()) {
         msg("You take no necrosis damage!");
@@ -402,6 +409,13 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       damage_type = "rotting ";
     }
   } else if (attack_options->attack_stamina) {
+    if (is_immune_to_draining()) {
+      if (real_hitter->is_player()) {
+        msg("%s is immune to draining attacks!", text_The().c_str());
+      }
+      return false;
+    }
+
     if (! damage) {
       if (is_player()) {
         msg("You take no stamina damage!");
@@ -435,6 +449,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       }
       return false;
     } else {
+      damage_type = "melee ";
       IF_DEBUG2 { real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str()); }
     }
   }
@@ -979,7 +994,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
               msg("You rot %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
                   hitter->text_the().c_str());
             } else if (attack_options->attack_stamina) {
-              msg("You drain %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+              msg("You tire %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
                   hitter->text_the().c_str());
             } else if (hitter->is_weapon()) {
               msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
@@ -1000,7 +1015,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
             } else if (attack_options->attack_necrosis) {
               msg("You rot %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (attack_options->attack_stamina) {
-              msg("You drain %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+              msg("You tire %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (hitter->is_weapon()) {
               msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (hitter->is_laser()) {
@@ -1392,26 +1407,31 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
   // Avoid the lava hitting twice.
   //
   if (maybe_aip()) {
-    if (aip()->recently_hit_by.find(real_hitter->id) != aip()->recently_hit_by.end()) {
-      //
-      // Faster things get more moves and hits
-      //
-      auto speed             = move_speed_total();
-      auto real_hitter_speed = real_hitter->move_speed_total();
-      if (speed && real_hitter_speed) {
-        auto hit_count     = aip()->recently_hit_by[ real_hitter->id ];
-        auto max_hit_count = real_hitter_speed / speed;
+    //
+    // But allows special weapons to attack more than one time.
+    //
+    if (attack_options->attack_num == 0) {
+      if (aip()->recently_hit_by.find(real_hitter->id) != aip()->recently_hit_by.end()) {
+        //
+        // Faster things get more moves and hits
+        //
+        auto speed             = move_speed_total();
+        auto real_hitter_speed = real_hitter->move_speed_total();
+        if (speed && real_hitter_speed) {
+          auto hit_count     = aip()->recently_hit_by[ real_hitter->id ];
+          auto max_hit_count = real_hitter_speed / speed;
 
-        if (hit_count >= max_hit_count) {
+          if (hit_count >= max_hit_count) {
+            IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
+            return false;
+          }
+        } else {
+          //
+          // Static things hit one time
+          //
           IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
           return false;
         }
-      } else {
-        //
-        // Static things hit one time
-        //
-        IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
-        return false;
       }
     }
   }
