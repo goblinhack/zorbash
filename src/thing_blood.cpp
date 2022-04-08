@@ -4,6 +4,7 @@
 //
 
 #include "my_level.hpp"
+#include "my_random.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
@@ -18,6 +19,13 @@ void Thing::place_blood(bool force)
 
   if (! force) {
     if (! is_bloodied()) {
+      return;
+    }
+
+    //
+    // Not too much blood
+    //
+    if (pcg_random_range(1, 100) <= 80) {
       return;
     }
   }

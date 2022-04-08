@@ -407,8 +407,8 @@ do
       unused_flag102_set \
       unused_flag103_set \
       unused_flag104_set \
-      unused_flag105_set \
-      unused_flag106_set \
+      is_lifeless_set \
+      is_magical_set \
       unused_flag10_set \
       unused_flag11_set \
       unused_flag123_set \

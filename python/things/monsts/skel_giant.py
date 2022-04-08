@@ -49,6 +49,7 @@ def tp_init(name, text_name):
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_short_shadow_caster(self, True)
     my.gfx_show_outlined(self, True)
+    my.gfx_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "10d12+50")
     my.is_able_to_change_levels(self, True)
     my.is_able_to_fall(self, True)

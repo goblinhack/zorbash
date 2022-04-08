@@ -984,10 +984,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag104() && (what == "unused_flag104")) {
     return true;
   }
-  if (unused_flag105() && (what == "unused_flag105")) {
+  if (is_lifeless() && (what == "is_lifeless")) {
     return true;
   }
-  if (unused_flag106() && (what == "unused_flag106")) {
+  if (is_magical() && (what == "is_magical")) {
     return true;
   }
   if (is_immune_to_draining() && (what == "is_immune_to_draining")) {
@@ -2227,11 +2227,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag104") {
     return &Thing::unused_flag104;
   }
-  if (what == "unused_flag105") {
-    return &Thing::unused_flag105;
+  if (what == "is_lifeless") {
+    return &Thing::is_lifeless;
   }
-  if (what == "unused_flag106") {
-    return &Thing::unused_flag106;
+  if (what == "is_magical") {
+    return &Thing::is_magical;
   }
   if (what == "is_immune_to_draining") {
     return &Thing::is_immune_to_draining;

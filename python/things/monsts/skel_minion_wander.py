@@ -51,6 +51,7 @@ def tp_init(name, text_name):
     my.gfx_health_bar_shown(self, True)
     my.gfx_short_shadow_caster(self, True)
     my.gfx_show_outlined(self, True)
+    my.gfx_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "3")
     my.is_able_to_fall(self, True)
     my.is_able_to_see_in_the_dark(self, True)
