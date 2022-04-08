@@ -1,9 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- multi damage types                                                                                                                           -->
 <!-- when hitting a sleeping snake and it crits, need the dispatch message                                                                        -->
-<!-- sword of draining                                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
