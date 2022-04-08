@@ -2011,16 +2011,16 @@ int Thing::unused_flag104(void)
   return (tp()->unused_flag104());
 }
 
-int Thing::unused_flag105(void)
+int Thing::is_lifeless(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag105());
+  return (tp()->is_lifeless());
 }
 
-int Thing::unused_flag106(void)
+int Thing::is_magical(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag106());
+  return (tp()->is_magical());
 }
 
 int Thing::is_immune_to_draining(void)

@@ -1801,8 +1801,8 @@ public:
   int unused_flag102(void);
   int unused_flag103(void);
   int unused_flag104(void);
-  int unused_flag105(void);
-  int unused_flag106(void);
+  int is_lifeless(void);
+  int is_magical(void);
   int is_immune_to_draining(void);
   int unused_flag10(void);
   int unused_flag11(void);

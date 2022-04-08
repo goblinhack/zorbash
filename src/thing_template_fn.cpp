@@ -652,8 +652,8 @@ int Tp::unused_flag101(void) const { return _unused_flag101; }
 int Tp::unused_flag102(void) const { return _unused_flag102; }
 int Tp::unused_flag103(void) const { return _unused_flag103; }
 int Tp::unused_flag104(void) const { return _unused_flag104; }
-int Tp::unused_flag105(void) const { return _unused_flag105; }
-int Tp::unused_flag106(void) const { return _unused_flag106; }
+int Tp::is_lifeless(void) const { return _is_lifeless; }
+int Tp::is_magical(void) const { return _is_magical; }
 int Tp::is_immune_to_draining(void) const { return _is_immune_to_draining; }
 int Tp::num_attacks(void) const { return _num_attacks; }
 int Tp::is_key_special(void) const { return _is_key_special; }
@@ -1367,8 +1367,8 @@ void Tp::unused_flag101_set(int v) { _unused_flag101 = v; }
 void Tp::unused_flag102_set(int v) { _unused_flag102 = v; }
 void Tp::unused_flag103_set(int v) { _unused_flag103 = v; }
 void Tp::unused_flag104_set(int v) { _unused_flag104 = v; }
-void Tp::unused_flag105_set(int v) { _unused_flag105 = v; }
-void Tp::unused_flag106_set(int v) { _unused_flag106 = v; }
+void Tp::is_lifeless_set(int v) { _is_lifeless = v; }
+void Tp::is_magical_set(int v) { _is_magical = v; }
 void Tp::is_immune_to_draining_set(int v) { _is_immune_to_draining = v; }
 void Tp::num_attacks_set(int v) { _num_attacks = v; }
 void Tp::is_key_special_set(int v) { _is_key_special = v; }

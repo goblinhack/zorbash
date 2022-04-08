@@ -389,7 +389,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   if (is_monst() || is_player()) {
     if (! must_attack) {
-      if (! is_undead() && ! is_ethereal()) {
+      if (! is_lifeless() && ! is_undead() && ! is_ethereal()) {
         if (up || down || left || right) {
           if (d20() > stat_con()) {
             if (pcg_random_range(0, 100) < 10) {

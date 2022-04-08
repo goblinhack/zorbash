@@ -325,8 +325,8 @@ PyObject *level_unused_flag101_at(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *level_unused_flag102_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag103_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag104_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag105_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag106_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_lifeless_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_magical_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_draining_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_num_attacks_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_key_special_at(PyObject *obj, PyObject *args, PyObject *keywds);

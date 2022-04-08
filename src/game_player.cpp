@@ -180,7 +180,7 @@ void Game::place_player(void)
         // level->thing_new("boots_teleport", point(x, y - 2));
         // level->thing_new("barrel", point(x + 1, y + 1));
         // level->thing_new("cleaner", point(x, y + 1));
-        level->thing_new("mummy_necro", point(x + 5, y + 1));
+        // level->thing_new("mummy_necro", point(x + 5, y + 1));
         // level->thing_new("shield_woodon", point(x, y - 2));
         // level->thing_new("fire", point(x, y - 2));
         // level->thing_new("food_frog", point(x, y - 2));
@@ -200,6 +200,7 @@ void Game::place_player(void)
         // level->thing_new("teleport", point(x + 2, y + 2));
         // level->thing_new("teletoad", point(x + 2, y + 2));
         level->thing_new("flesh_golem", point(x, y + 1));
+        level->thing_new("stone_golem", point(x + 1, y + 1));
         level->assign_leaders_and_followers();
       }
 
