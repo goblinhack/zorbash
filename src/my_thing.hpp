@@ -970,7 +970,7 @@ public:
   int damage_nat_attack(void);
   int damage_necrosis_chance_d1000(int);
   int damage_necrosis(void);
-  int damage_num_attacks(void);
+  int num_attacks(void);
   int damage_poison_chance_d1000(int);
   int damage_poison(void);
   int damage_received_doubled_from_acid(void);
@@ -1803,7 +1803,7 @@ public:
   int unused_flag104(void);
   int unused_flag105(void);
   int unused_flag106(void);
-  int unused_flag107(void);
+  int is_immune_to_draining(void);
   int unused_flag10(void);
   int unused_flag11(void);
   int unused_flag123(void);

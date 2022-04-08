@@ -125,6 +125,8 @@ def tp_init(name, text_name):
     my.is_hittable(self, True)
     my.is_immune_to_cold(self, True)
     my.is_immune_to_necrosis(self, True)
+    my.is_immune_to_draining(self, True)
+    my.is_immune_to_draining(self, True)
     my.is_immune_to_poison(self, True)
     my.is_intelligent(self, True)
     my.is_loggable(self, True)

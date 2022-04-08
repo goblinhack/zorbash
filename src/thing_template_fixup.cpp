@@ -26,6 +26,11 @@ void tp_fixup(void)
       tp->is_immune_to_spiderwebs_set(true);
     }
 
+    if (tp->is_undead()) {
+      tp->is_immune_to_necrosis_set(true);
+      tp->is_immune_to_draining_set(true);
+    }
+
     if (! tp->on_tick_do().empty()) {
       if (! tp->is_tickable()) {
         DIE("Tp %s has on tick action but is not tickable?", tp->name().c_str());
@@ -180,6 +185,10 @@ void tp_fixup(void)
       if (tp->damage_poison() > 0) {
         tp->damage_poison_chance_d1000_set(attack_index, 1000);
       }
+    }
+
+    if ((num_attack_types > 0) && ! tp->num_attacks()) {
+      tp->num_attacks_set(1);
     }
   }
 

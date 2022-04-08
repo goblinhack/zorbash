@@ -524,277 +524,278 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   }
 
   //
-  // Attack  is 1d20 + stat_att_total - penalties
-  // Defence is        stat_def_total - penalties
+  // Allow multiple attacks
   //
-  auto attack_bonus = stat_att_total() - stat_att_penalties_total();
-  if (owner) {
-    attack_bonus = owner->stat_att_total() - owner->stat_att_penalties_total();
-  }
+  bool tried_to_attack = false;
+  int  attack_count    = 0;
 
-  auto stat_def = victim->stat_def_total() - victim->stat_def_penalties_total();
+  for (auto attack_num = 0; attack_num < num_attacks(); attack_num++) {
+    dbg("Attack num #%u", attack_num);
+    TRACE_AND_INDENT();
 
-  bool damage_set = false;
-  int  damage     = 0;
+    attack_options->attack_num = attack_num;
 
-  dbg("Set damage types");
-  TRACE_AND_INDENT();
-
-  //
-  // Chance of poison damage?
-  //
-  if (! attack_options->attack_poison) {
-    if (! damage_set || attack_options->prefer_nat_attack) {
-      if (d1000() < damage_poison_chance_d1000(attack_options->attack_num)) {
-        int damage_poison_val = damage_poison();
-        if (damage_poison_val > 0) {
-          damage                        = damage_poison_val;
-          damage_set                    = true;
-          attack_options->attack_poison = true;
-          victim->poison_reason_set(text_a_or_an());
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of attack_future1 damage?
-  //
-  if (! attack_options->attack_future1) {
-    if (! damage_set) {
-      if (d1000() < damage_future1_chance_d1000(attack_options->attack_num)) {
-        int damage_future1_val = damage_future1();
-        if (damage_future1_val > 0) {
-          damage                         = damage_future1_val;
-          damage_set                     = true;
-          attack_options->attack_future1 = true;
-          dbg("Set future1 damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of attack_future2 damage?
-  //
-  if (! attack_options->attack_future2) {
-    if (! damage_set) {
-      if (d1000() < damage_future2_chance_d1000(attack_options->attack_num)) {
-        int damage_future2_val = damage_future2();
-        if (damage_future2_val > 0) {
-          damage                         = damage_future2_val;
-          damage_set                     = true;
-          attack_options->attack_future2 = true;
-          dbg("Set future2 damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of attack_future3 damage?
-  //
-  if (! damage_set) {
-    if (d1000() < damage_future3_chance_d1000(attack_options->attack_num)) {
-      int damage_future3_val = damage_future3();
-      if (damage_future3_val > 0) {
-        damage                         = damage_future3_val;
-        damage_set                     = true;
-        attack_options->attack_future3 = true;
-        dbg("Set future3 damage %d", damage);
-      }
-    }
-  }
-
-  //
-  // Chance of attack_cold damage?
-  //
-  if (! attack_options->attack_cold) {
-    if (! damage_set) {
-      if (d1000() < damage_cold_chance_d1000(attack_options->attack_num)) {
-        int damage_cold_val = damage_cold();
-        if (damage_cold_val > 0) {
-          damage                      = damage_cold_val;
-          damage_set                  = true;
-          attack_options->attack_cold = true;
-          dbg("Set cold damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of attack_fire damage?
-  //
-  if (! attack_options->attack_fire) {
-    if (! damage_set) {
-      if (d1000() < damage_fire_chance_d1000(attack_options->attack_num)) {
-        int damage_fire_val = damage_fire();
-        if (damage_fire_val > 0) {
-          damage                      = damage_fire_val;
-          damage_set                  = true;
-          attack_options->attack_fire = true;
-          dbg("Set fire damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of attack_crush damage?
-  //
-  if (! attack_options->attack_crush) {
-    if (! damage_set) {
-      if (d1000() < damage_crush_chance_d1000(attack_options->attack_num)) {
-        int damage_crush_val = damage_crush();
-        if (damage_crush_val > 0) {
-          damage                       = damage_crush_val;
-          damage_set                   = true;
-          attack_options->attack_crush = true;
-          dbg("Set crush damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of attack_lightning damage?
-  //
-  if (! attack_options->attack_lightning) {
-    if (! damage_set) {
-      if (d1000() < damage_lightning_chance_d1000(attack_options->attack_num)) {
-        int damage_lightning_val = damage_lightning();
-        if (damage_lightning_val > 0) {
-          damage                           = damage_lightning_val;
-          damage_set                       = true;
-          attack_options->attack_lightning = true;
-          dbg("Set lightning damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of attack_energy damage?
-  //
-  if (! attack_options->attack_energy) {
-    if (! damage_set) {
-      if (d1000() < damage_energy_chance_d1000(attack_options->attack_num)) {
-        int damage_energy_val = damage_energy();
-        if (damage_energy_val > 0) {
-          damage                        = damage_energy_val;
-          damage_set                    = true;
-          attack_options->attack_energy = true;
-          dbg("Set energy damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of attack_acid damage?
-  //
-  if (! attack_options->attack_acid) {
-    if (! damage_set) {
-      if (d1000() < damage_acid_chance_d1000(attack_options->attack_num)) {
-        int damage_acid_val = damage_acid();
-        if (damage_acid_val > 0) {
-          damage                      = damage_acid_val;
-          damage_set                  = true;
-          attack_options->attack_acid = true;
-          dbg("Set acid damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of attack_digest damage?
-  //
-  if (! attack_options->attack_digest) {
-    if (! damage_set) {
-      if (d1000() < damage_digest_chance_d1000(attack_options->attack_num)) {
-        int damage_digest_val = damage_digest();
-        if (damage_digest_val > 0) {
-          damage                        = damage_digest_val;
-          damage_set                    = true;
-          attack_options->attack_digest = true;
-          dbg("Set digest damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of necrosis damage?
-  //
-  if (! attack_options->attack_necrosis) {
-    if (! damage_set) {
-      if (d1000() < damage_necrosis_chance_d1000(attack_options->attack_num)) {
-        int damage_necrosis_val = damage_necrosis();
-        if (damage_necrosis_val > 0) {
-          damage                          = damage_necrosis_val;
-          damage_set                      = true;
-          attack_options->attack_necrosis = true;
-          dbg("Set necro damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Chance of stamina damage?
-  //
-  if (! attack_options->attack_stamina) {
-    if (! damage_set) {
-      if (d1000() < damage_draining_chance_d1000(attack_options->attack_num)) {
-        int damage_draining_val = damage_draining();
-        if (damage_draining_val > 0) {
-          damage                         = damage_draining_val;
-          damage_set                     = true;
-          attack_options->attack_stamina = true;
-          dbg("Set drain damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Bite?
-  //
-  if (! attack_options->attack_natural) {
-    if (! damage_set || attack_options->prefer_nat_attack) {
-      if (d1000() < damage_nat_attack_chance_d1000(attack_options->attack_num)) {
-        int damage_nat_attack_val = damage_nat_attack();
-        if (damage_nat_attack_val > 0) {
-          damage                         = damage_nat_attack_val + attack_bonus;
-          damage_set                     = true;
-          attack_options->attack_natural = true;
-          dbg("Set natural damage %d", damage);
-        }
-      }
-    }
-  }
-
-  //
-  // Melee?
-  //
-  // Not sure if I should keep melee chance as it is the fallback attack if nothing
-  // else hits.
-  //
-  if (! damage_set) {
-    if (d1000() < damage_melee_chance_d1000(attack_options->attack_num)) {
-      damage = damage_melee() + attack_bonus;
-      if (damage > 0) {
-        dbg("Set melee damage %d", damage);
-        damage_set = true;
-      }
-    }
-  }
-
-  if (! damage_set) {
+    //
+    // Attack  is 1d20 + stat_att_total - penalties
+    // Defence is        stat_def_total - penalties
+    //
+    auto attack_bonus = stat_att_total() - stat_att_penalties_total();
     if (owner) {
-      if (d1000() < owner->damage_melee_chance_d1000(attack_options->attack_num)) {
+      attack_bonus = owner->stat_att_total() - owner->stat_att_penalties_total();
+    }
+
+    auto stat_def = victim->stat_def_total() - victim->stat_def_penalties_total();
+
+    bool damage_set = false;
+    int  damage     = 0;
+
+    dbg("Set damage types");
+    TRACE_AND_INDENT();
+
+    //
+    // Chance of poison damage?
+    //
+    if (! attack_options->attack_poison) {
+      if (! damage_set || attack_options->prefer_nat_attack) {
+        if (d1000() < damage_poison_chance_d1000(attack_options->attack_num)) {
+          int damage_poison_val = damage_poison();
+          if (damage_poison_val > 0) {
+            damage                        = damage_poison_val;
+            damage_set                    = true;
+            attack_options->attack_poison = true;
+            victim->poison_reason_set(text_a_or_an());
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of attack_future1 damage?
+    //
+    if (! attack_options->attack_future1) {
+      if (! damage_set) {
+        if (d1000() < damage_future1_chance_d1000(attack_options->attack_num)) {
+          int damage_future1_val = damage_future1();
+          if (damage_future1_val > 0) {
+            damage                         = damage_future1_val;
+            damage_set                     = true;
+            attack_options->attack_future1 = true;
+            dbg("Set future1 damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of attack_future2 damage?
+    //
+    if (! attack_options->attack_future2) {
+      if (! damage_set) {
+        if (d1000() < damage_future2_chance_d1000(attack_options->attack_num)) {
+          int damage_future2_val = damage_future2();
+          if (damage_future2_val > 0) {
+            damage                         = damage_future2_val;
+            damage_set                     = true;
+            attack_options->attack_future2 = true;
+            dbg("Set future2 damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of attack_future3 damage?
+    //
+    if (! damage_set) {
+      if (d1000() < damage_future3_chance_d1000(attack_options->attack_num)) {
+        int damage_future3_val = damage_future3();
+        if (damage_future3_val > 0) {
+          damage                         = damage_future3_val;
+          damage_set                     = true;
+          attack_options->attack_future3 = true;
+          dbg("Set future3 damage %d", damage);
+        }
+      }
+    }
+
+    //
+    // Chance of attack_cold damage?
+    //
+    if (! attack_options->attack_cold) {
+      if (! damage_set) {
+        if (d1000() < damage_cold_chance_d1000(attack_options->attack_num)) {
+          int damage_cold_val = damage_cold();
+          if (damage_cold_val > 0) {
+            damage                      = damage_cold_val;
+            damage_set                  = true;
+            attack_options->attack_cold = true;
+            dbg("Set cold damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of attack_fire damage?
+    //
+    if (! attack_options->attack_fire) {
+      if (! damage_set) {
+        if (d1000() < damage_fire_chance_d1000(attack_options->attack_num)) {
+          int damage_fire_val = damage_fire();
+          if (damage_fire_val > 0) {
+            damage                      = damage_fire_val;
+            damage_set                  = true;
+            attack_options->attack_fire = true;
+            dbg("Set fire damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of attack_crush damage?
+    //
+    if (! attack_options->attack_crush) {
+      if (! damage_set) {
+        if (d1000() < damage_crush_chance_d1000(attack_options->attack_num)) {
+          int damage_crush_val = damage_crush();
+          if (damage_crush_val > 0) {
+            damage                       = damage_crush_val;
+            damage_set                   = true;
+            attack_options->attack_crush = true;
+            dbg("Set crush damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of attack_lightning damage?
+    //
+    if (! attack_options->attack_lightning) {
+      if (! damage_set) {
+        if (d1000() < damage_lightning_chance_d1000(attack_options->attack_num)) {
+          int damage_lightning_val = damage_lightning();
+          if (damage_lightning_val > 0) {
+            damage                           = damage_lightning_val;
+            damage_set                       = true;
+            attack_options->attack_lightning = true;
+            dbg("Set lightning damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of attack_energy damage?
+    //
+    if (! attack_options->attack_energy) {
+      if (! damage_set) {
+        if (d1000() < damage_energy_chance_d1000(attack_options->attack_num)) {
+          int damage_energy_val = damage_energy();
+          if (damage_energy_val > 0) {
+            damage                        = damage_energy_val;
+            damage_set                    = true;
+            attack_options->attack_energy = true;
+            dbg("Set energy damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of attack_acid damage?
+    //
+    if (! attack_options->attack_acid) {
+      if (! damage_set) {
+        if (d1000() < damage_acid_chance_d1000(attack_options->attack_num)) {
+          int damage_acid_val = damage_acid();
+          if (damage_acid_val > 0) {
+            damage                      = damage_acid_val;
+            damage_set                  = true;
+            attack_options->attack_acid = true;
+            dbg("Set acid damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of attack_digest damage?
+    //
+    if (! attack_options->attack_digest) {
+      if (! damage_set) {
+        if (d1000() < damage_digest_chance_d1000(attack_options->attack_num)) {
+          int damage_digest_val = damage_digest();
+          if (damage_digest_val > 0) {
+            damage                        = damage_digest_val;
+            damage_set                    = true;
+            attack_options->attack_digest = true;
+            dbg("Set digest damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of necrosis damage?
+    //
+    if (! attack_options->attack_necrosis) {
+      if (! damage_set) {
+        if (d1000() < damage_necrosis_chance_d1000(attack_options->attack_num)) {
+          int damage_necrosis_val = damage_necrosis();
+          if (damage_necrosis_val > 0) {
+            damage                          = damage_necrosis_val;
+            damage_set                      = true;
+            attack_options->attack_necrosis = true;
+            dbg("Set necro damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Chance of stamina damage?
+    //
+    if (! attack_options->attack_stamina) {
+      if (! damage_set) {
+        if (d1000() < damage_draining_chance_d1000(attack_options->attack_num)) {
+          int damage_draining_val = damage_draining();
+          if (damage_draining_val > 0) {
+            damage                         = damage_draining_val;
+            damage_set                     = true;
+            attack_options->attack_stamina = true;
+            dbg("Set drain damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Bite?
+    //
+    if (! attack_options->attack_natural) {
+      if (! damage_set || attack_options->prefer_nat_attack) {
+        if (d1000() < damage_nat_attack_chance_d1000(attack_options->attack_num)) {
+          int damage_nat_attack_val = damage_nat_attack();
+          if (damage_nat_attack_val > 0) {
+            damage                         = damage_nat_attack_val + attack_bonus;
+            damage_set                     = true;
+            attack_options->attack_natural = true;
+            dbg("Set natural damage %d", damage);
+          }
+        }
+      }
+    }
+
+    //
+    // Melee?
+    //
+    // Not sure if I should keep melee chance as it is the fallback attack if nothing
+    // else hits.
+    //
+    if (! damage_set) {
+      if (d1000() < damage_melee_chance_d1000(attack_options->attack_num)) {
         damage = damage_melee() + attack_bonus;
         if (damage > 0) {
           dbg("Set melee damage %d", damage);
@@ -802,77 +803,77 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         }
       }
     }
-  }
 
-  //
-  // This overrides other damage types. For when we are stuck inside a cleaner
-  //
-  if (is_engulfer()) {
-    if (victim->curr_at == curr_at) {
-      damage                           = damage_digest();
-      attack_options->attack_poison    = false;
-      attack_options->attack_future1   = false;
-      attack_options->attack_future2   = false;
-      attack_options->attack_future3   = false;
-      attack_options->attack_cold      = false;
-      attack_options->attack_fire      = false;
-      attack_options->attack_crush     = false;
-      attack_options->attack_lightning = false;
-      attack_options->attack_energy    = false;
-      attack_options->attack_acid      = false;
-      attack_options->attack_digest    = true;
-      attack_options->attack_necrosis  = false;
-      attack_options->attack_natural   = false;
-      damage_set                       = true;
+    if (! damage_set) {
+      if (owner) {
+        if (d1000() < owner->damage_melee_chance_d1000(attack_options->attack_num)) {
+          damage = damage_melee() + attack_bonus;
+          if (damage > 0) {
+            dbg("Set melee damage %d", damage);
+            damage_set = true;
+          }
+        }
+      }
     }
-  }
 
-  //
-  // If some attack type worked, then make sure we have some damage
-  //
-  if (damage_set) {
-    if (damage < 1) {
-      damage = 1;
+    //
+    // This overrides other damage types. For when we are stuck inside a cleaner
+    //
+    if (is_engulfer()) {
+      if (victim->curr_at == curr_at) {
+        damage                           = damage_digest();
+        attack_options->attack_poison    = false;
+        attack_options->attack_future1   = false;
+        attack_options->attack_future2   = false;
+        attack_options->attack_future3   = false;
+        attack_options->attack_cold      = false;
+        attack_options->attack_fire      = false;
+        attack_options->attack_crush     = false;
+        attack_options->attack_lightning = false;
+        attack_options->attack_energy    = false;
+        attack_options->attack_acid      = false;
+        attack_options->attack_digest    = true;
+        attack_options->attack_necrosis  = false;
+        attack_options->attack_natural   = false;
+        damage_set                       = true;
+      }
     }
-  }
 
-  //
-  // An attack counts as making noise.
-  //
-  if (owner) {
-    level->noisemap_in_incr(curr_at.x, curr_at.y, owner->noise_total());
-  } else {
-    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
-  }
-
-  //
-  // Wake on attack
-  //
-  victim->wake();
-
-  if (damage <= 0) {
-    if (is_player() || (owner && owner->is_player())) {
-      msg("You inflict no damage on %s.", victim->text_the().c_str());
+    //
+    // If some attack type worked, then make sure we have some damage
+    //
+    if (damage_set) {
+      if (damage < 1) {
+        damage = 1;
+      }
     }
-    dbg("Attack failed, no damage");
-    return false;
-  }
 
-  if (is_player()) {
     //
-    // Player always uses their weapon
+    // An attack counts as making noise.
     //
-    if (equip_get(MONST_EQUIP_WEAPON)) {
-      auto delta = victim->curr_at - curr_at;
-      move_set_dir_from_dest_or_delta(delta);
-      equip_use_may_attack(MONST_EQUIP_WEAPON);
-      return true;
+    if (owner) {
+      level->noisemap_in_incr(curr_at.x, curr_at.y, owner->noise_total());
+    } else {
+      level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
     }
-  } else if (is_monst()) {
+
     //
-    // Don't swing weapons at pools of blood.
+    // Wake on attack
     //
-    if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob()) {
+    victim->wake();
+
+    if (damage <= 0) {
+      if (is_player() || (owner && owner->is_player())) {
+        msg("You inflict no damage on %s.", victim->text_the().c_str());
+      }
+      dbg("Attack failed, no damage");
+      return false;
+    }
+
+    if (is_player()) {
+      //
+      // Player always uses their weapon
+      //
       if (equip_get(MONST_EQUIP_WEAPON)) {
         auto delta = victim->curr_at - curr_at;
         move_set_dir_from_dest_or_delta(delta);
@@ -880,88 +881,159 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         return true;
       }
     } else if (is_monst()) {
-      attack_options->attack_natural = true;
-    }
-  }
-
-  bool crit            = false;
-  bool missed          = false;
-  bool tried_to_attack = false;
-
-  if (d10000() < crit_chance_d10000()) {
-    crit = true;
-  }
-
-  if (! crit) {
-    if (victim->is_stuck()) {
-      if (d10000() < crit_chance_d10000()) {
-        crit = true;
-      }
-    }
-  }
-
-  if (victim->is_sleeping) {
-    crit = true;
-  }
-
-  //
-  // See if we can bypass its defences
-  //
-  if (is_player() || is_alive_monst() || (owner && (owner->is_player() || owner->is_alive_monst()))) {
-    if (victim->is_dead) {
       //
-      // It's hard to miss a corpse.
+      // Don't swing weapons at pools of blood.
       //
-    } else if (victim->is_always_hit()) {
-      //
-      // You just cannot miss this.
-      //
-    } else {
-      //
-      // Attack  is 1d20 + stat_att_total - penalties
-      // Defence is        stat_def_total - penalties
-      //
-      bool hit      = false;
-      int  to_hit   = stat_def;
-      int  i_rolled = d20() + attack_bonus;
-
-      if (i_rolled == 20) {
-        crit = true;
-        hit  = true;
-        dbg("Attack on %s: ATT %s DEF %d, to-hit %d, crit rolled %d -> hit", victim->to_short_string().c_str(),
-            modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled);
-      } else if (i_rolled == 1) {
-        hit = false;
-        dbg("Attack on %s: ATT %s DEF %d, to-hit %d, fumble rolled %d -> miss", victim->to_short_string().c_str(),
-            modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled);
-      } else {
-        hit = i_rolled >= to_hit;
-        dbg("Attack on %s: ATT %s DEF %d, to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
-            modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled, hit ? "hit" : "miss");
-      }
-
-      //
-      // Cannot miss (if engulfing?)
-      //
-      if (victim->curr_at == curr_at) {
-        hit = true;
-      }
-
-      if (! hit) {
-        if (is_player() || (owner && owner->is_player())) {
-          msg("You miss %s.", victim->text_the().c_str());
-          popup("You miss!");
-        } else if (victim->is_player()) {
-          if (owner) {
-            msg("%s misses with %s.", owner->text_the().c_str(), text_the().c_str());
-          } else {
-            msg("%s misses.", text_The().c_str());
-          }
-          popup("It misses!");
-        } else {
-          dbg("The attack missed (att modifier %d, AC %d) on %s", attack_bonus, stat_def,
-              victim->to_string().c_str());
+      if (victim->is_alive_monst() || victim->is_door() || victim->is_player() || victim->is_mob()) {
+        if (equip_get(MONST_EQUIP_WEAPON)) {
+          auto delta = victim->curr_at - curr_at;
+          move_set_dir_from_dest_or_delta(delta);
+          equip_use_may_attack(MONST_EQUIP_WEAPON);
+          return true;
         }
+      } else if (is_monst()) {
+        attack_options->attack_natural = true;
+      }
+    }
+
+    bool missed = false;
+
+    if (d10000() < crit_chance_d10000()) {
+      attack_options->crit = true;
+    }
+
+    if (! attack_options->crit) {
+      if (victim->is_stuck()) {
+        if (d10000() < crit_chance_d10000()) {
+          attack_options->crit = true;
+        }
+      }
+    }
+
+    if (victim->is_sleeping) {
+      attack_options->crit = true;
+    }
+
+    //
+    // See if we can bypass its defences
+    //
+    if (is_player() || is_alive_monst() || (owner && (owner->is_player() || owner->is_alive_monst()))) {
+      if (victim->is_dead) {
+        //
+        // It's hard to miss a corpse.
+        //
+      } else if (victim->is_always_hit()) {
+        //
+        // You just cannot miss this.
+        //
+      } else {
+        //
+        // Attack  is 1d20 + stat_att_total - penalties
+        // Defence is        stat_def_total - penalties
+        //
+        bool hit      = false;
+        int  to_hit   = stat_def;
+        int  i_rolled = d20() + attack_bonus;
+
+        if (i_rolled == 20) {
+          attack_options->crit = true;
+          hit                  = true;
+          dbg("Attack on %s: ATT %s DEF %d, to-hit %d, crit rolled %d -> hit", victim->to_short_string().c_str(),
+              modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled);
+        } else if (i_rolled == 1) {
+          hit = false;
+          dbg("Attack on %s: ATT %s DEF %d, to-hit %d, fumble rolled %d -> miss", victim->to_short_string().c_str(),
+              modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled);
+        } else {
+          hit = i_rolled >= to_hit;
+          dbg("Attack on %s: ATT %s DEF %d, to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
+              modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled, hit ? "hit" : "miss");
+        }
+
+        //
+        // Cannot miss (if engulfing?)
+        //
+        if (victim->curr_at == curr_at) {
+          hit = true;
+        }
+
+        if (! hit) {
+          if (is_player() || (owner && owner->is_player())) {
+            msg("You miss %s.", victim->text_the().c_str());
+            popup("You miss!");
+          } else if (victim->is_player()) {
+            if (owner) {
+              msg("%s misses with %s.", owner->text_the().c_str(), text_the().c_str());
+            } else {
+              msg("%s misses.", text_The().c_str());
+            }
+            popup("It misses!");
+          } else {
+            dbg("The attack missed (att modifier %d, AC %d) on %s", attack_bonus, stat_def,
+                victim->to_string().c_str());
+          }
+
+          if (victim != this) {
+            if (attack_lunge()) {
+              lunge(victim->curr_at);
+            }
+          }
+
+          //
+          // An attempt at an attack counts
+          //
+          victim->add_enemy(this);
+
+          //
+          // See if armor crumbles
+          //
+          auto armor = victim->equip_get(MONST_EQUIP_ARMOR);
+          if (armor) {
+            if (d10000() < armor->break_chance_d10000()) {
+              if (is_player()) {
+                msg("%s falls apart.", armor->text_The().c_str());
+                popup("!!!");
+              }
+              armor->dead("broken");
+            }
+          }
+
+          auto shield = victim->equip_get(MONST_EQUIP_SHIELD);
+          if (shield) {
+            if (d10000() < shield->break_chance_d10000()) {
+              if (is_player()) {
+                msg("%s falls apart.", shield->text_The().c_str());
+                popup("!!!");
+              }
+              shield->dead("broken");
+            }
+          }
+
+          auto helmet = victim->equip_get(MONST_EQUIP_HELMET);
+          if (helmet) {
+            if (d10000() < helmet->break_chance_d10000()) {
+              if (is_player()) {
+                msg("%s falls apart.", helmet->text_The().c_str());
+                popup("!!!");
+              }
+              helmet->dead("broken");
+            }
+          }
+
+          //
+          // We tried to attack, so do not move
+          //
+          missed          = true;
+          tried_to_attack = true;
+        }
+      }
+    }
+
+    if (! missed) {
+      dbg("Do the hit");
+      TRACE_AND_INDENT();
+      if (victim->is_hit(this, attack_options, damage)) {
+        dbg("The attack succeeded");
 
         if (victim != this) {
           if (attack_lunge()) {
@@ -969,142 +1041,86 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
           }
         }
 
-        //
-        // An attempt at an attack counts
-        //
-        victim->add_enemy(this);
-
-        //
-        // See if armor crumbles
-        //
-        auto armor = victim->equip_get(MONST_EQUIP_ARMOR);
-        if (armor) {
-          if (d10000() < armor->break_chance_d10000()) {
-            if (is_player()) {
-              msg("%s falls apart.", armor->text_The().c_str());
-              popup("!!!");
-            }
-            armor->dead("broken");
-          }
+        if (attack_eater()) {
+          health_boost(victim->nutrition_get());
         }
 
-        auto shield = victim->equip_get(MONST_EQUIP_SHIELD);
-        if (shield) {
-          if (d10000() < shield->break_chance_d10000()) {
-            if (is_player()) {
-              msg("%s falls apart.", shield->text_The().c_str());
-              popup("!!!");
-            }
-            shield->dead("broken");
-          }
-        }
-
-        auto helmet = victim->equip_get(MONST_EQUIP_HELMET);
-        if (helmet) {
-          if (d10000() < helmet->break_chance_d10000()) {
-            if (is_player()) {
-              msg("%s falls apart.", helmet->text_The().c_str());
-              popup("!!!");
-            }
-            helmet->dead("broken");
-          }
+        if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
+          dead("by foolishness");
         }
 
         //
-        // We tried to attack, so do not move
+        // See if the weapon crumbles
         //
-        missed          = true;
-        tried_to_attack = true;
+        auto my_owner = top_owner();
+        if (my_owner) {
+          auto weapon = my_owner->equip_get(MONST_EQUIP_WEAPON);
+          if (weapon) {
+            auto break_chance = weapon->break_chance_d10000();
+            if (victim->is_toughness_soft()) {
+              break_chance /= 2;
+            }
+            if (victim->is_toughness_hard()) {
+              break_chance *= 2;
+            }
+            if (victim->is_toughness_very_hard()) {
+              break_chance *= 2;
+            }
+            if (d20roll_under(stat_luck_total())) {
+              break_chance = 0;
+            }
+            auto roll = d10000();
+            if (roll < break_chance) {
+              if (my_owner->is_player()) {
+                if (victim->is_wall()) {
+                  msg("%%fg=red$%s buckles on the rock wall.%%fg=reset$", weapon->text_The().c_str());
+                } else {
+                  msg("%%fg=red$%s is broken.%%fg=reset$", weapon->text_The().c_str());
+                }
+              } else {
+                msg("%%fg=red$%s is broken.%%fg=reset$", weapon->text_The().c_str());
+              }
+              weapon->dead("broken");
+            }
+          }
+
+          auto gauntlet = my_owner->equip_get(MONST_EQUIP_GAUNTLET);
+          if (gauntlet) {
+            auto break_chance = gauntlet->break_chance_d10000();
+            if (victim->is_toughness_soft()) {
+              break_chance /= 2;
+            }
+            if (victim->is_toughness_hard()) {
+              break_chance *= 2;
+            }
+            if (victim->is_toughness_very_hard()) {
+              break_chance *= 2;
+            }
+            if (d20roll_under(stat_luck_total())) {
+              break_chance = 0;
+            }
+            if (d10000() < break_chance) {
+              if (my_owner->is_player()) {
+                if (victim->is_wall()) {
+                  msg("%%fg=red$%s smashes on the rock wall.%%fg=reset$", weapon->text_The().c_str());
+                } else {
+                  msg("%%fg=red$%s disintegrates.%%fg=reset$", weapon->text_The().c_str());
+                }
+              } else {
+                msg("%%fg=red$%s disintegrates.%%fg=reset$", weapon->text_The().c_str());
+              }
+              gauntlet->dead("broken");
+            }
+          }
+        }
+
+        attack_count++;
       }
     }
   }
 
-  if (! missed) {
-    dbg("Do the hit");
-    TRACE_AND_INDENT();
-    if (victim->is_hit(this, attack_options, damage)) {
-      dbg("The attack succeeded");
-
-      if (victim != this) {
-        if (attack_lunge()) {
-          lunge(victim->curr_at);
-        }
-      }
-
-      if (attack_eater()) {
-        health_boost(victim->nutrition_get());
-      }
-
-      if (is_destroyed_on_hitting() || is_destroyed_on_hit_or_miss()) {
-        dead("by foolishness");
-      }
-
-      //
-      // See if the weapon crumbles
-      //
-      auto my_owner = top_owner();
-      if (my_owner) {
-        auto weapon = my_owner->equip_get(MONST_EQUIP_WEAPON);
-        if (weapon) {
-          auto break_chance = weapon->break_chance_d10000();
-          if (victim->is_toughness_soft()) {
-            break_chance /= 2;
-          }
-          if (victim->is_toughness_hard()) {
-            break_chance *= 2;
-          }
-          if (victim->is_toughness_very_hard()) {
-            break_chance *= 2;
-          }
-          if (d20roll_under(stat_luck_total())) {
-            break_chance = 0;
-          }
-          auto roll = d10000();
-          if (roll < break_chance) {
-            if (my_owner->is_player()) {
-              if (victim->is_wall()) {
-                msg("%%fg=red$%s buckles on the rock wall.%%fg=reset$", weapon->text_The().c_str());
-              } else {
-                msg("%%fg=red$%s is broken.%%fg=reset$", weapon->text_The().c_str());
-              }
-            } else {
-              msg("%%fg=red$%s is broken.%%fg=reset$", weapon->text_The().c_str());
-            }
-            weapon->dead("broken");
-          }
-        }
-
-        auto gauntlet = my_owner->equip_get(MONST_EQUIP_GAUNTLET);
-        if (gauntlet) {
-          auto break_chance = gauntlet->break_chance_d10000();
-          if (victim->is_toughness_soft()) {
-            break_chance /= 2;
-          }
-          if (victim->is_toughness_hard()) {
-            break_chance *= 2;
-          }
-          if (victim->is_toughness_very_hard()) {
-            break_chance *= 2;
-          }
-          if (d20roll_under(stat_luck_total())) {
-            break_chance = 0;
-          }
-          if (d10000() < break_chance) {
-            if (my_owner->is_player()) {
-              if (victim->is_wall()) {
-                msg("%%fg=red$%s smashes on the rock wall.%%fg=reset$", weapon->text_The().c_str());
-              } else {
-                msg("%%fg=red$%s disintegrates.%%fg=reset$", weapon->text_The().c_str());
-              }
-            } else {
-              msg("%%fg=red$%s disintegrates.%%fg=reset$", weapon->text_The().c_str());
-            }
-            gauntlet->dead("broken");
-          }
-        }
-      }
-      return true;
-    }
+  if (attack_count) {
+    return true;
   }
 
   victim->on_you_are_hit_but_dodge_it_do(this);

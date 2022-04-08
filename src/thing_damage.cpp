@@ -12,10 +12,10 @@
 #include "my_thing.hpp"
 #include <algorithm>
 
-int Thing::damage_num_attacks(void)
+int Thing::num_attacks(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_num_attacks());
+  return (tp()->num_attacks());
 }
 
 int Thing::weapon_damage(void)

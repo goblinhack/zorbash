@@ -990,10 +990,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag106() && (what == "unused_flag106")) {
     return true;
   }
-  if (unused_flag107() && (what == "unused_flag107")) {
+  if (is_immune_to_draining() && (what == "is_immune_to_draining")) {
     return true;
   }
-  if (damage_num_attacks() && (what == "damage_num_attacks")) {
+  if (num_attacks() && (what == "num_attacks")) {
     return true;
   }
   if (is_key_special() && (what == "is_key_special")) {
@@ -2233,11 +2233,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag106") {
     return &Thing::unused_flag106;
   }
-  if (what == "unused_flag107") {
-    return &Thing::unused_flag107;
+  if (what == "is_immune_to_draining") {
+    return &Thing::is_immune_to_draining;
   }
-  if (what == "damage_num_attacks") {
-    return &Thing::damage_num_attacks;
+  if (what == "num_attacks") {
+    return &Thing::num_attacks;
   }
   if (what == "is_key_special") {
     return &Thing::is_key_special;

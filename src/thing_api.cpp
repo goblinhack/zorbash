@@ -2023,10 +2023,10 @@ int Thing::unused_flag106(void)
   return (tp()->unused_flag106());
 }
 
-int Thing::unused_flag107(void)
+int Thing::is_immune_to_draining(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag107());
+  return (tp()->is_immune_to_draining());
 }
 
 int Thing::is_key_special(void)

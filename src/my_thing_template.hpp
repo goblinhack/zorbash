@@ -536,8 +536,8 @@ private:
   int _unused_flag104 {};
   int _unused_flag105 {};
   int _unused_flag106 {};
-  int _unused_flag107 {};
-  int _damage_num_attacks {};
+  int _is_immune_to_draining {};
+  int _num_attacks {};
   int _unused_flag11 {};
   int _unused_flag12 {};
   int _unused_flag123 {};
@@ -1534,8 +1534,8 @@ public:
   int unused_flag104(void) const;
   int unused_flag105(void) const;
   int unused_flag106(void) const;
-  int unused_flag107(void) const;
-  int damage_num_attacks(void) const;
+  int is_immune_to_draining(void) const;
+  int num_attacks(void) const;
   int unused_flag10(void) const;
   int unused_flag11(void) const;
   int unused_flag123(void) const;
@@ -2207,8 +2207,8 @@ public:
   void unused_flag104_set(int v);
   void unused_flag105_set(int v);
   void unused_flag106_set(int v);
-  void unused_flag107_set(int v);
-  void damage_num_attacks_set(int v);
+  void is_immune_to_draining_set(int v);
+  void num_attacks_set(int v);
   void unused_flag10_set(int v);
   void unused_flag11_set(int v);
   void unused_flag123_set(int v);
