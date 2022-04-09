@@ -3,7 +3,7 @@ import tp
 
 
 def on_swing(owner, item, x, y):
-    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"dagger_swing{my.non_pcg_randint(1, 3)}")
+    my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
 
 
 def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):

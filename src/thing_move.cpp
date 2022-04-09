@@ -105,14 +105,6 @@ void Thing::move_finish(void)
       change_state(MONST_STATE_IDLE, "move finished");
     }
   }
-
-  //
-  // Something moved
-  //
-  if (curr_at != last_at) {
-    level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
-    level->is_map_changed_set(curr_at.x, curr_at.y);
-  }
 }
 
 bool Thing::move(point future_pos)
@@ -689,6 +681,8 @@ void Thing::update_interpolated_position(void)
       if (! is_hidden) {
         dbg("End of move position (new %d,%d, old %d,%d)", curr_at.x, curr_at.y, last_at.x, last_at.y);
       }
+      level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
+      level->is_map_changed_set(curr_at.x, curr_at.y);
 
       new_pos = make_fpoint(curr_at);
       last_at = curr_at;

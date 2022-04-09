@@ -79,10 +79,12 @@ int Thing::noise_total(void)
       }
     }
   }
+  // con("NOISE %d", decibels);
 
   if (is_player() || is_monst()) {
     decibels -= stat_dex_mod() * 10;
   }
+  // con("NOISE %d", decibels);
 
   return decibels;
 }

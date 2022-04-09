@@ -132,7 +132,7 @@ void Level::scan(Thingp me, FovMap *fov, int pov_x, int pov_y,
   }
 }
 
-bool Level::fov_calculete(Thingp me, FovMap *fov, int pov_x, int pov_y, int max_radius, bool light_walls)
+bool Level::fov_calculate(Thingp me, FovMap *fov, int pov_x, int pov_y, int max_radius, bool light_walls)
 {
   if (is_oob(pov_x, pov_y)) {
     err("Point of view {%i, %i} is out of bounds.", pov_x, pov_y);

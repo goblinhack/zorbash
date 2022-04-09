@@ -655,6 +655,7 @@ void Level::create_dungeon_place_rocks(Dungeonp d, int variant, int block_width,
           ERR("Rock tile %s not found", tilename.c_str());
           return;
         }
+
         t->tile_curr = tile->global_index;
 
         //
@@ -770,6 +771,7 @@ void Level::create_dungeon_place_floors(Dungeonp d, std::string what, int floor_
           ERR("Floor tile %s not found", tilename.c_str());
           return;
         }
+
         t->tile_curr = tile->global_index;
       }
     }

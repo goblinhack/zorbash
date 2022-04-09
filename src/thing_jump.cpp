@@ -412,6 +412,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
+  //
+  // It looks weird to allow multiple jumps
+  //
+  movement_remaining_set(0);
+
   on_jump();
 
   level->noisemap_in_incr(to.x, to.y, noise_on_jumping());

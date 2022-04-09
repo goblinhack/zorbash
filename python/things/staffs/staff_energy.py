@@ -80,7 +80,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_item_magical(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
-    my.is_debug_type(self, True)
     my.is_spawner(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_treasure_class_b(self, True)
