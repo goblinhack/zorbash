@@ -396,6 +396,7 @@ void Level::create_sewer_place_walls(int variant, int block_width, int block_hei
           ERR("wall tile %s not found", tilename.c_str());
           return;
         }
+
         t->tile_curr = tile->global_index;
 
         //

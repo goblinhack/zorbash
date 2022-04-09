@@ -1286,10 +1286,14 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     dead(real_hitter, reason);
 
     //
-    // Does the attacker feast on success?
+    // Does the attacker feast on success? This is too quick for normal
+    // monsters as the body immediately vanishes into bones. But for an
+    // engulger maybe not.
     //
-    if (real_hitter->can_eat(this)) {
-      real_hitter->consume(this);
+    if (is_engulfer()) {
+      if (real_hitter->can_eat(this)) {
+        real_hitter->consume(this);
+      }
     }
   } else {
     dbg("Is hit by (%s) %u damage, health now %d/%d", real_hitter->to_short_string().c_str(), damage, health(),

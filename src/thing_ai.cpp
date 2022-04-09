@@ -572,7 +572,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
 
           //
           // Ignore tiles we have never seen. This check works as we allow the light to grow
-          // a bit when calling fov_calculete
+          // a bit when calling fov_calculate
           //
           if (! get(ai->can_see_ever.can_see, p.x, p.y)) {
             continue;
@@ -1879,9 +1879,9 @@ bool Thing::ai_tick(bool recursing)
     // We need to grow the light a bit for level explorers
     //
     if (is_explorer()) {
-      level->fov_calculete(this, &ai->can_see_currently, vision_souce.x, vision_souce.y, distance_vision_get() + 1);
+      level->fov_calculate(this, &ai->can_see_currently, vision_souce.x, vision_souce.y, distance_vision_get() + 1);
     } else {
-      level->fov_calculete(this, &ai->can_see_currently, vision_souce.x, vision_souce.y, distance_vision_get());
+      level->fov_calculate(this, &ai->can_see_currently, vision_souce.x, vision_souce.y, distance_vision_get());
     }
 
     //

@@ -364,6 +364,8 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
   level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_teleporting());
   level->noisemap_in_incr(to.x, to.y, noise_on_teleporting());
 
+  movement_remaining_set(0);
+
   dbg("Teleport success.");
   TRACE_AND_INDENT();
 

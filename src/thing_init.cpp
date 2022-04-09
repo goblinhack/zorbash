@@ -118,6 +118,14 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   z_depth = tp()->z_depth;
 
   //
+  // Change state prior to choosing the first tile so we get the
+  // sleep anim immediately.
+  //
+  if (is_asleep_initially()) {
+    change_state(MONST_STATE_SLEEPING, "asleep initially");
+  }
+
+  //
   // Start off up to data with the player
   //
   if (is_tickable()) {
@@ -208,25 +216,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     charge_count_set(tpp->charge_count());
   }
 
-  auto tiles = &tpp->tiles;
-  if (tpp->gfx_animated()) {
-    auto tile = tile_first(tiles);
-    if (tile) {
-      tile_curr = tile->global_index;
-    } else {
-      tile_curr = 0;
-    }
-
-    animate();
-  } else {
-    auto tile = tile_random(tiles);
-    if (tile) {
-      tile_curr = tile->global_index;
-    } else {
-      tile_curr = 0;
-    }
-  }
-
   //
   // Set position prior to attach
   //
@@ -249,10 +238,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
 
   if (is_tmp_thing()) {
     pcg_random_allowed = true;
-  }
-
-  if (is_asleep_initially()) {
-    change_state(MONST_STATE_SLEEPING, "asleep initially");
   }
 
   on_born();
