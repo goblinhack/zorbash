@@ -13,7 +13,6 @@
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
-#include "my_wid_rightbar.hpp"
 #include "stb_image_write.hpp"
 
 int      sdl_shift_held;

@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
@@ -470,11 +469,11 @@ static void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, in
   TRACE_AND_INDENT();
   DBG3("Inventory: Begin over inventory");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_INVENTORY) ||
-      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
+      (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
+      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Inventory: Moving items; ignore");
     return;
   }
@@ -512,11 +511,11 @@ static void wid_rightbar_inventory_over_e(Widp w)
   TRACE_AND_INDENT();
   DBG3("Inventory: End over inventory");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_INVENTORY) ||
-      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
+      (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
+      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Inventory: Moving items; ignore");
     return;
   }
@@ -554,11 +553,11 @@ static void wid_rightbar_stats_over_b(Widp w, int32_t relx, int32_t rely, int32_
   TRACE_AND_INDENT();
   DBG3("Stats: Begin over inventory");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_INVENTORY) ||
-      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
+      (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
+      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Stats: Moving items; ignore");
     return;
   }
@@ -584,11 +583,11 @@ static void wid_rightbar_stats_over_e(Widp w)
   TRACE_AND_INDENT();
   DBG3("Stats: End over inventory");
   TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_CHOOSING_TARGET) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_INVENTORY) ||
-      (game->state == Game::STATE_CHOOSING_SKILLS) || (game->state == Game::STATE_SAVE_MENU) ||
-      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
+      (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
+      (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
+      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
+      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Stats: Moving items; ignore");
     return;
   }

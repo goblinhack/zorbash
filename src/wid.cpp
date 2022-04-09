@@ -6480,59 +6480,73 @@ static void wid_tick_all(void)
     }
   }
 
-  //
-  // If we need to remake the rightbar, do so
-  //
-  if (game->request_remake_rightbar || game->request_remake_skillbox) {
-    DBG3("Handle request to remake inventory");
-    if (wid_rightbar_init()) {
-      game->request_remake_rightbar = false;
-      game->request_remake_skillbox = false;
+  switch (game->state) {
+    case Game::STATE_NORMAL:
+      //
+      // If we need to remake the rightbar, do so
+      //
+      if (game->request_remake_rightbar || game->request_remake_skillbox) {
+        DBG3("Handle request to remake inventory");
+        if (wid_rightbar_init()) {
+          game->request_remake_rightbar = false;
+          game->request_remake_skillbox = false;
 
-      //
-      // Drive closure of the inventory if we're waiting on it.
-      //
-      if (game->robot_mode) {
-        if (game->tick_requested.empty()) {
-          game->tick_begin("close inventory");
+          //
+          // Drive closure of the inventory if we're waiting on it.
+          //
+          if (game->robot_mode) {
+            if (game->tick_requested.empty()) {
+              game->tick_begin("close inventory");
+            }
+          }
         }
+        wid_actionbar_init();
+        game->request_remake_actionbar = false;
       }
-    }
-    wid_actionbar_init();
-    game->request_remake_actionbar = false;
-  }
 
-  //
-  // Update the actionbar
-  //
-  if (game->request_remake_actionbar) {
-    DBG3("Handle request to remake actionhar");
-    wid_actionbar_init();
-    game->request_remake_actionbar = false;
-  }
+      //
+      // Update the actionbar
+      //
+      if (game->request_remake_actionbar) {
+        DBG3("Handle request to remake actionhar");
+        wid_actionbar_init();
+        game->request_remake_actionbar = false;
+      }
 
-  //
-  // Update the inventory if needed
-  //
-  if (game->request_inventory_thing_over_do) {
-    wid_inventory_over(game->request_inventory_thing_over);
-    game->request_inventory_thing_over    = nullptr;
-    game->request_inventory_thing_over_do = false;
-  }
+      //
+      // Update the inventory if needed
+      //
+      if (game->request_inventory_thing_over_do) {
+        wid_inventory_over(game->request_inventory_thing_over);
+        game->request_inventory_thing_over    = nullptr;
+        game->request_inventory_thing_over_do = false;
+      }
 
-  //
-  // Update the inventory if needed
-  //
-  if (game->request_inventory_thing_selected_do) {
-    wid_inventory_select(game->request_inventory_thing_selected);
-    game->request_inventory_thing_selected    = nullptr;
-    game->request_inventory_thing_selected_do = false;
-  }
+      //
+      // Update the inventory if needed
+      //
+      if (game->request_inventory_thing_selected_do) {
+        wid_inventory_select(game->request_inventory_thing_selected);
+        game->request_inventory_thing_selected    = nullptr;
+        game->request_inventory_thing_selected_do = false;
+      }
 
-  if (game->request_remake_inventory) {
-    DBG3("Handle request to remake inventory");
-    wid_inventory_init();
-    game->request_remake_inventory = false;
+      if (game->request_remake_inventory) {
+        DBG3("Handle request to remake inventory");
+        wid_inventory_init();
+        game->request_remake_inventory = false;
+      }
+      break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU:
+    case Game::STATE_INVENTORY:
+    case Game::STATE_COLLECTING_ITEMS:
+    case Game::STATE_ENCHANTING_ITEMS:
+    case Game::STATE_CHOOSING_SKILLS:
+    case Game::STATE_CHOOSING_TARGET:
+    case Game::STATE_CHOOSING_LEVEL:
+    case Game::STATE_LOAD_MENU:
+    case Game::STATE_SAVE_MENU:
+    case Game::STATE_QUIT_MENU: break;
   }
 }
 

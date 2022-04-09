@@ -324,6 +324,7 @@ public:
     STATE_ENCHANTING_ITEMS,      // Upgrading items
     STATE_CHOOSING_SKILLS,       // Choosing skills
     STATE_CHOOSING_TARGET,       // Looking to somewhere to throw at
+    STATE_CHOOSING_LEVEL,        // Choosing the next level
     STATE_LOAD_MENU,
     STATE_SAVE_MENU,
     STATE_QUIT_MENU,
