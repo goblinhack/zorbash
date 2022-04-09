@@ -54,7 +54,7 @@ def tp_init(name, text_name):
     my.hunger_is_insatiable(self, True)
     my.is_able_to_fall(self, True)
     my.is_able_to_jump_escape(self, True)
-    my.is_able_to_jump_randomly_chance_d1000(self, 50)
+    my.is_able_to_jump_randomly_chance_d1000(self, 20)
     my.is_able_to_jump(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_sleep(self, True)

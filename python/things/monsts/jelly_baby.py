@@ -115,6 +115,10 @@ def tp_init(name, text_name):
     my.tile(self, tile=name + ".2", delay_ms=delay)
     my.tile(self, tile=name + ".3", delay_ms=delay)
     my.tile(self, tile=name + ".4", delay_ms=delay)
+    my.tile(self, tile=name + ".5", delay_ms=delay)
+    my.tile(self, tile=name + ".6", delay_ms=delay)
+    my.tile(self, tile=name + ".7", delay_ms=delay)
+    my.tile(self, tile=name + ".8", delay_ms=delay)
 
     my.tp_update(self)
 
