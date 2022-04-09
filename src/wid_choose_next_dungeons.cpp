@@ -26,6 +26,7 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_choose_dungeon.hpp"
 #include "my_wid_popup.hpp"
+#include "my_wid_rightbar.hpp"
 #include "my_wid_topcon.hpp"
 
 #define WID_LEVEL_WIDTH_CHARS  7
@@ -572,6 +573,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
 
   wid_actionbar_close_all_popups();
   wid_actionbar_fini();
+  wid_rightbar_fini();
   wid_hide(wid_topcon_window);
 
   //
