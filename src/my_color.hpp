@@ -95,6 +95,7 @@ public:
   friend bool operator!=(const color &c, const color &b) { return (! (c == b)); }
 };
 
+extern color GRAY5;
 #if 0
 extern color ALICE_BLUE;
 extern color ALICEBLUE;
@@ -267,7 +268,6 @@ extern color GRAY56;
 extern color GRAY57;
 extern color GRAY58;
 extern color GRAY59;
-extern color GRAY5;
 extern color GRAY61;
 extern color GRAY62;
 extern color GRAY63;
