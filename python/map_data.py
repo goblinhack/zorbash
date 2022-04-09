@@ -30,7 +30,7 @@ import my
 # SHALLOW_WATER                 w
 # TRAP                          t
 # WALL                          x
-# WAND_OR_STAFF                          /
+# WAND_OR_STAFF                 /
 
 # MOB_SPAWNER_CLASS_A           g
 # MOB_SPAWNER_CLASS_B           G  always generated
@@ -46,9 +46,9 @@ import my
 # WEAPON_CLASS_B                )
 # WEAPON_CLASS_C                -
 
-# FOOD                          f  always generated
-# GOLD                          o  always generated
-# POTION                        !  always generated
+# FOOD                          f  20 % chance of being generated
+# GOLD                          o  20 % chance
+# POTION                        !  20 % chance
 
 #
 # User defined rooms

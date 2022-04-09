@@ -24,7 +24,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_monst_class_c         = 10;
       d1000_chance_of_creating_monst_class_d         = 0;
       d1000_chance_of_creating_monst_class_e         = 0;
-      d1000_chance_of_creating_mob_challenge_class_a = 1000;
+      d1000_chance_of_creating_mob_challenge_class_a = 500;
       d1000_chance_of_creating_mob_challenge_class_b = 10;
       d1000_chance_of_creating_treasure_class_a      = 1000;
       d1000_chance_of_creating_treasure_class_b      = 10;
@@ -39,7 +39,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_monst_class_c         = 10;
       d1000_chance_of_creating_monst_class_d         = 0;
       d1000_chance_of_creating_monst_class_e         = 0;
-      d1000_chance_of_creating_mob_challenge_class_a = 1000;
+      d1000_chance_of_creating_mob_challenge_class_a = 500;
       d1000_chance_of_creating_mob_challenge_class_b = 500;
       d1000_chance_of_creating_treasure_class_a      = 1000;
       d1000_chance_of_creating_treasure_class_b      = 100;
@@ -54,8 +54,8 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_monst_class_c         = 100;
       d1000_chance_of_creating_monst_class_d         = 10;
       d1000_chance_of_creating_monst_class_e         = 0;
-      d1000_chance_of_creating_mob_challenge_class_a = 1000;
-      d1000_chance_of_creating_mob_challenge_class_b = 1000;
+      d1000_chance_of_creating_mob_challenge_class_a = 500;
+      d1000_chance_of_creating_mob_challenge_class_b = 500;
       d1000_chance_of_creating_treasure_class_a      = 1000;
       d1000_chance_of_creating_treasure_class_b      = 1000;
       d1000_chance_of_creating_treasure_class_c      = 100;
@@ -70,7 +70,7 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_monst_class_d         = 100;
       d1000_chance_of_creating_monst_class_e         = 10;
       d1000_chance_of_creating_mob_challenge_class_a = 500;
-      d1000_chance_of_creating_mob_challenge_class_b = 1000;
+      d1000_chance_of_creating_mob_challenge_class_b = 500;
       d1000_chance_of_creating_treasure_class_a      = 1000;
       d1000_chance_of_creating_treasure_class_b      = 100;
       d1000_chance_of_creating_treasure_class_c      = 1000;
@@ -84,8 +84,8 @@ void Level::chances_of_creating_set(void)
       d1000_chance_of_creating_monst_class_c         = 500;
       d1000_chance_of_creating_monst_class_d         = 500;
       d1000_chance_of_creating_monst_class_e         = 100;
-      d1000_chance_of_creating_mob_challenge_class_a = 200;
-      d1000_chance_of_creating_mob_challenge_class_b = 1000;
+      d1000_chance_of_creating_mob_challenge_class_a = 100;
+      d1000_chance_of_creating_mob_challenge_class_b = 500;
       d1000_chance_of_creating_treasure_class_a      = 10;
       d1000_chance_of_creating_treasure_class_b      = 1000;
       d1000_chance_of_creating_treasure_class_c      = 1000;
