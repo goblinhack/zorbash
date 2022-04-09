@@ -533,7 +533,7 @@ private:
   int _unused_flag101 {};
   int _unused_flag102 {};
   int _unused_flag103 {};
-  int _unused_flag104 {};
+  int _is_dagger {};
   int _is_lifeless {};
   int _is_magical {};
   int _is_immune_to_draining {};
@@ -1531,7 +1531,7 @@ public:
   int unused_flag101(void) const;
   int unused_flag102(void) const;
   int unused_flag103(void) const;
-  int unused_flag104(void) const;
+  int is_dagger(void) const;
   int is_lifeless(void) const;
   int is_magical(void) const;
   int is_immune_to_draining(void) const;
@@ -2204,7 +2204,7 @@ public:
   void unused_flag101_set(int v);
   void unused_flag102_set(int v);
   void unused_flag103_set(int v);
-  void unused_flag104_set(int v);
+  void is_dagger_set(int v);
   void is_lifeless_set(int v);
   void is_magical_set(int v);
   void is_immune_to_draining_set(int v);

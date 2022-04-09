@@ -981,7 +981,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag103() && (what == "unused_flag103")) {
     return true;
   }
-  if (unused_flag104() && (what == "unused_flag104")) {
+  if (is_dagger() && (what == "is_dagger")) {
     return true;
   }
   if (is_lifeless() && (what == "is_lifeless")) {
@@ -2224,8 +2224,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag103") {
     return &Thing::unused_flag103;
   }
-  if (what == "unused_flag104") {
-    return &Thing::unused_flag104;
+  if (what == "is_dagger") {
+    return &Thing::is_dagger;
   }
   if (what == "is_lifeless") {
     return &Thing::is_lifeless;

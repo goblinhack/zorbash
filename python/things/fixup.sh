@@ -406,7 +406,7 @@ do
       unused_flag101_set \
       unused_flag102_set \
       unused_flag103_set \
-      unused_flag104_set \
+      is_dagger_set \
       is_lifeless_set \
       is_magical_set \
       unused_flag10_set \

@@ -872,7 +872,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
   }
 
   static int inventory_width  = 108;
-  static int inventory_height = 40;
+  static int inventory_height = 48;
 
   int left_half  = inventory_width / 2;
   int right_half = inventory_width - left_half;
