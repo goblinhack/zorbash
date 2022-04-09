@@ -1153,12 +1153,7 @@ void sdl_flush_display(bool force)
 {
   TRACE_NO_INDENT();
 
-  IF_NODEBUG
-  {
-    if (! g_opt_quick_start) {
-      force = true;
-    }
-  }
+  IF_NODEBUG { return; }
 
   if (! force) {
     if (g_opt_no_slow_log_flush) {
