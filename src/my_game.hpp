@@ -290,7 +290,8 @@ public:
   //
   // Temporary
   //
-  bool paused {}; // Game is paused choosing a level?
+  bool paused {};             // Game is paused choosing a level?
+  bool is_being_destroyed {}; // Game is ending
 
   uint32_t robot_mode_requested {};
   uint32_t robot_mode_tick_requested {};

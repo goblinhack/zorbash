@@ -205,10 +205,5 @@ void game_display_flames(void)
   auto w = TERM_WIDTH * 2;
   auto h = TERM_HEIGHT * 2;
   game_display_flames_tiles(w, h);
-  static int tick;
-  if (tick > 1) {
-    game_display_flames_change(w, h);
-    tick = 0;
-  }
-  tick++;
+  game_display_flames_change(w, h);
 }
