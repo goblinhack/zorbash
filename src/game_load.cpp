@@ -1150,6 +1150,9 @@ bool Game::load(std::string file_to_load, class Game &target)
 
   free(uncompressed);
   free(compressed);
+
+  game->tick_begin_ms = time_ms();
+
   return true;
 }
 

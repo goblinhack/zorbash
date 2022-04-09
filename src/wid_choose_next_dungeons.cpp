@@ -158,18 +158,18 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int32_t relx, int32_t re
     auto        l = ctx->levels[ y ][ x ];
     std::string bg_tilename;
     switch (l->difficulty_depth) {
-      case -1 : break;
-      case 1 : bg_tilename = "dungeon_icon.1"; break;
-      case 2 : bg_tilename = "dungeon_icon.2"; break;
-      case 3 : bg_tilename = "dungeon_icon.3"; break;
-      case 4 : bg_tilename = "dungeon_icon.4"; break;
-      case 5 : bg_tilename = "dungeon_icon.5"; break;
-      case 6 : bg_tilename = "dungeon_icon.6"; break;
-      case 7 : bg_tilename = "dungeon_icon.7"; break;
-      case 8 : bg_tilename = "dungeon_icon.8"; break;
+      case -1: break;
+      case 1: bg_tilename = "dungeon_icon.1"; break;
+      case 2: bg_tilename = "dungeon_icon.2"; break;
+      case 3: bg_tilename = "dungeon_icon.3"; break;
+      case 4: bg_tilename = "dungeon_icon.4"; break;
+      case 5: bg_tilename = "dungeon_icon.5"; break;
+      case 6: bg_tilename = "dungeon_icon.6"; break;
+      case 7: bg_tilename = "dungeon_icon.7"; break;
+      case 8: bg_tilename = "dungeon_icon.8"; break;
     }
 
-    wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY10);
+    wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY5);
     wid_set_bg_tilename(wid_level_description->wid_popup_container, bg_tilename);
   }
 
@@ -450,27 +450,27 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   std::string bg_tilename;
   if (ctx->levels[ y ][ x ]) {
     switch (l->difficulty_depth) {
-      case -1 : break;
-      case 1 : bg_tilename = "dungeon_icon.1"; break;
-      case 2 : bg_tilename = "dungeon_icon.2"; break;
-      case 3 : bg_tilename = "dungeon_icon.3"; break;
-      case 4 : bg_tilename = "dungeon_icon.4"; break;
-      case 5 : bg_tilename = "dungeon_icon.5"; break;
-      case 6 : bg_tilename = "dungeon_icon.6"; break;
-      case 7 : bg_tilename = "dungeon_icon.7"; break;
-      case 8 : bg_tilename = "dungeon_icon.8"; break;
+      case -1: break;
+      case 1: bg_tilename = "dungeon_icon.1"; break;
+      case 2: bg_tilename = "dungeon_icon.2"; break;
+      case 3: bg_tilename = "dungeon_icon.3"; break;
+      case 4: bg_tilename = "dungeon_icon.4"; break;
+      case 5: bg_tilename = "dungeon_icon.5"; break;
+      case 6: bg_tilename = "dungeon_icon.6"; break;
+      case 7: bg_tilename = "dungeon_icon.7"; break;
+      case 8: bg_tilename = "dungeon_icon.8"; break;
     }
   } else {
     switch (l->difficulty_depth) {
-      case -1 : break;
-      case 1 : bg_tilename = "dungeon_icon_loading.1"; break;
-      case 2 : bg_tilename = "dungeon_icon_loading.2"; break;
-      case 3 : bg_tilename = "dungeon_icon_loading.3"; break;
-      case 4 : bg_tilename = "dungeon_icon_loading.4"; break;
-      case 5 : bg_tilename = "dungeon_icon_loading.5"; break;
-      case 6 : bg_tilename = "dungeon_icon_loading.6"; break;
-      case 7 : bg_tilename = "dungeon_icon_loading.7"; break;
-      case 8 : bg_tilename = "dungeon_icon_loading.8"; break;
+      case -1: break;
+      case 1: bg_tilename = "dungeon_icon_loading.1"; break;
+      case 2: bg_tilename = "dungeon_icon_loading.2"; break;
+      case 3: bg_tilename = "dungeon_icon_loading.3"; break;
+      case 4: bg_tilename = "dungeon_icon_loading.4"; break;
+      case 5: bg_tilename = "dungeon_icon_loading.5"; break;
+      case 6: bg_tilename = "dungeon_icon_loading.6"; break;
+      case 7: bg_tilename = "dungeon_icon_loading.7"; break;
+      case 8: bg_tilename = "dungeon_icon_loading.8"; break;
     }
   }
 
@@ -486,15 +486,15 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
 
   if (l->is_crystal_level) {
     switch (l->difficulty_depth) {
-      case -1 : break;
-      case 1 : fg_tilename = "crystal.1"; break;
-      case 2 : fg_tilename = "crystal.2"; break;
-      case 3 : fg_tilename = "crystal.3"; break;
-      case 4 : fg_tilename = "crystal.4"; break;
-      case 5 : fg_tilename = "crystal.5"; break;
-      case 6 : fg_tilename = "crystal.6"; break;
-      case 7 : fg_tilename = "crystal.7"; break;
-      case 8 : fg_tilename = "crystal.8"; break;
+      case -1: break;
+      case 1: fg_tilename = "crystal.1"; break;
+      case 2: fg_tilename = "crystal.2"; break;
+      case 3: fg_tilename = "crystal.3"; break;
+      case 4: fg_tilename = "crystal.4"; break;
+      case 5: fg_tilename = "crystal.5"; break;
+      case 6: fg_tilename = "crystal.6"; break;
+      case 7: fg_tilename = "crystal.7"; break;
+      case 8: fg_tilename = "crystal.8"; break;
     }
   }
 

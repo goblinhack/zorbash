@@ -2,10 +2,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- thing info appearing on level choice                                                                                                         -->
-<!-- level choice is hard to see                                                                                                                 -->
-<!-- bats seem to get stuck                                                                                                                      -->
+<!-- level choice is hard to see                                                                                                                  -->
+<!-- bats seem to get stuck                                                                                                                       -->
 <!-- when hitting a sleeping snake and it crits, need the dispatch message                                                                        -->
-<!-- 00:05:29.343: ERROR: Text box overflow on [`] height 31 line_count 31 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -16,7 +15,9 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- recharge wands based on enchant                                                                                                              -->
+<!-- - dog pack                                                                                                                                   -->
+<!-- - freeze slimes                                                                                                                              -->
+<!-- - recharge wands based on enchant                                                                                                            -->
 <!-- - crystal key                                                                                                                                -->
 <!-- - negation                                                                                                                                   -->
 <!-- - golems killed by negation                                                                                                                  -->
