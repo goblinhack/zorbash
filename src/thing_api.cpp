@@ -2005,10 +2005,10 @@ int Thing::unused_flag103(void)
   return (tp()->unused_flag103());
 }
 
-int Thing::unused_flag104(void)
+int Thing::is_dagger(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag104());
+  return (tp()->is_dagger());
 }
 
 int Thing::is_lifeless(void)

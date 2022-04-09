@@ -492,7 +492,7 @@ PyObject *thing_unused_flag100(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag101(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag102(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag103(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag104(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_dagger(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_lifeless(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_magical(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_draining(PyObject *obj, PyObject *args, PyObject *keywds);
