@@ -805,19 +805,27 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         tp = tp_random_descend_dungeon();
       }
       if (d->is_food(x, y)) {
-        tp = tp_random_food();
+        if (d1000() < 200) {
+          tp = tp_random_food();
+        }
       }
       if (d->is_gold(x, y)) {
-        tp = tp_random_gold();
+        if (d1000() < 20) {
+          tp = tp_random_gold();
+        }
       }
       if (d->is_key(x, y)) {
         tp = tp_random_key();
       }
       if (d->is_potion(x, y)) {
-        tp = tp_random_potion();
+        if (d1000() < 20) {
+          tp = tp_random_potion();
+        }
       }
       if (d->is_wand_or_staff(x, y)) {
-        tp = tp_random_wand_or_staff();
+        if (d1000() < 20) {
+          tp = tp_random_wand_or_staff();
+        }
       }
       if (d->is_ring(x, y)) {
         tp = tp_random_ring();
@@ -875,7 +883,9 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
             d->is_hazard(x - 1, y - 1) && d->is_hazard(x + 1, y - 1) && d->is_hazard(x - 1, y + 1) &&
             d->is_hazard(x + 1, y + 1)) {
 
-          tp = tp_random_ethereal_mob();
+          if (d1000() < d1000_chance_of_creating_mob_challenge_class_a) {
+            tp = tp_random_ethereal_mob();
+          }
         } else {
           //
           // Else choose a normal mob
