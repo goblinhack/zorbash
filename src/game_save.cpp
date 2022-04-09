@@ -1048,9 +1048,11 @@ void Game::save_config(void)
 void wid_save_destroy(void)
 {
   TRACE_AND_INDENT();
-  delete wid_save;
-  wid_save = nullptr;
-  game->change_state(Game::STATE_NORMAL);
+  if (wid_save) {
+    delete wid_save;
+    wid_save = nullptr;
+    game->change_state(Game::STATE_NORMAL);
+  }
 }
 
 static uint8_t wid_save_key_up(Widp w, const struct SDL_Keysym *key)

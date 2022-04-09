@@ -23,9 +23,11 @@ static std::vector< Thingp > enchant_items;
 void wid_enchant_destroy(void)
 {
   TRACE_AND_INDENT();
-  delete wid_enchant;
-  wid_enchant = nullptr;
-  game->change_state(Game::STATE_NORMAL);
+  if (wid_enchant) {
+    delete wid_enchant;
+    wid_enchant = nullptr;
+    game->change_state(Game::STATE_NORMAL);
+  }
 }
 
 static void wid_enchant_slot(int slot)

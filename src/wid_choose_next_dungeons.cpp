@@ -24,6 +24,7 @@
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_actionbar.hpp"
+#include "my_wid_botcon.hpp"
 #include "my_wid_choose_dungeon.hpp"
 #include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
@@ -52,6 +53,7 @@ public:
       wid_level_contents = nullptr;
       if (game) {
         game->paused = false;
+        game->change_state(Game::STATE_NORMAL);
       }
     }
   }
@@ -516,11 +518,7 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   wid_set_text(b, tmp);
   wid_set_text_lhs(b, true);
   wid_set_text_top(b, true);
-  wid_set_color(b, WID_COLOR_BG, GRAY50);
-
-  if (game->level == l) {
-    wid_set_color(b, WID_COLOR_BG, WHITE);
-  }
+  wid_set_color(b, WID_COLOR_BG, GRAY30);
 }
 
 static void wid_choose_next_dungeons_update_buttons(Widp w)
@@ -570,11 +568,6 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
 
   paused                    = true;
   player->is_changing_level = true;
-
-  wid_actionbar_close_all_popups();
-  wid_actionbar_fini();
-  wid_rightbar_fini();
-  wid_hide(wid_topcon_window);
 
   //
   // Create a context to hold button info so we can update it when the focus changes
@@ -832,4 +825,6 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
   wid_update(window);
   wid_raise(window);
   wid_set_focus(window);
+
+  game->change_state(Game::STATE_CHOOSING_LEVEL);
 }

@@ -57,6 +57,11 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
     return false;
   }
 
+  if (game->state == Game::STATE_CHOOSING_LEVEL) {
+    DBG2("Game mouse down; choosing level");
+    return false;
+  }
+
   IF_DEBUG2 { player->log("Mouse down"); }
   wid_thing_info_fini("mouse down");
 

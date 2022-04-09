@@ -20,7 +20,8 @@
 
 void Level::display(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   bool shake = screen_shake_begin();
   display_map();
   if (shake) {
@@ -50,6 +51,14 @@ void Level::display(void)
   }
 
   if (player) {
+    //
+    // If the player is no longer on the level (maybe choosing the next one)
+    // then do not try to display.
+    //
+    if (player->is_changing_level) {
+      return;
+    }
+
     //
     // If a sewer, then also show the level above as it helps navigation
     //

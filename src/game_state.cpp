@@ -11,7 +11,9 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
+#include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
+#include "my_wid_topcon.hpp"
 
 void Game::change_state(int new_state)
 {
@@ -81,6 +83,22 @@ void Game::change_state(int new_state)
       wid_thing_info_fini("change state");
       LOG("State changed to STATE_CHOOSING_TARGET");
       break;
+    case STATE_CHOOSING_LEVEL: // Looking to change level
+      LOG("State changing to STATE_CHOOSING_LEVEL");
+      wid_actionbar_close_all_popups();
+      wid_hide(wid_topcon_window);
+      wid_rightbar_fini();
+      wid_actionbar_fini();
+      wid_thing_info_fini("change state");
+      request_remake_rightbar  = false;
+      request_remake_inventory = false;
+      request_remake_actionbar = false;
+      request_remake_skillbox  = false;
+      request_remake_debuffbox = false;
+      request_remake_buffbox   = false;
+      request_update_rightbar  = false;
+      LOG("State changed to STATE_CHOOSING_LEVEL");
+      break;
     case STATE_LOAD_MENU:
     case STATE_SAVE_MENU:
     case STATE_QUIT_MENU: wid_thing_info_fini("change state"); break;
@@ -109,6 +127,7 @@ void Game::change_state(int new_state)
         }
       }
       break;
+    case STATE_CHOOSING_LEVEL:
     case STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
       //
       // Don't create the cursor right after selecting. Wait until

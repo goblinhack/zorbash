@@ -274,8 +274,8 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
         // Needs its own slot
         //
       } else {
-        if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-            (game->state != Game::STATE_COLLECTING_ITEMS)) {
+        if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
+            (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
           wid_thing_info_fini("inventory add");
         }
         if (game->robot_mode) {
@@ -303,14 +303,15 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     }
   }
 
-  if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-      (game->state != Game::STATE_COLLECTING_ITEMS)) {
+  if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
+      (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini("inventory add2");
   }
 
   if (game->robot_mode) {
     inventory_particle(item, item_slot);
-  } else if (game->state != Game::STATE_CHOOSING_TARGET && game->state != Game::STATE_INVENTORY) {
+  } else if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
+             (game->state != Game::STATE_INVENTORY)) {
     inventory_particle(item, item_slot);
   } else {
     // no particle, too noisy
@@ -378,8 +379,8 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
       }
 
       level->inventory_describe(game->inventory_highlight_slot);
-      if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-          (game->state != Game::STATE_COLLECTING_ITEMS)) {
+      if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
+          (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini("inventory remove");
       }
       return true;
@@ -448,8 +449,8 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
         level->inventory_describe(game->inventory_highlight_slot);
       }
 
-      if ((game->state != Game::STATE_CHOOSING_TARGET) && (game->state != Game::STATE_INVENTORY) &&
-          (game->state != Game::STATE_COLLECTING_ITEMS)) {
+      if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
+          (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
         wid_thing_info_fini("inventory remove2");
       }
       return true;

@@ -23,9 +23,11 @@ static std::vector< Tpp > skills;
 void wid_choose_skill_destroy(void)
 {
   TRACE_AND_INDENT();
-  delete wid_skills;
-  wid_skills = nullptr;
-  game->change_state(Game::STATE_NORMAL);
+  if (wid_skills) {
+    delete wid_skills;
+    wid_skills = nullptr;
+    game->change_state(Game::STATE_NORMAL);
+  }
 }
 
 static void wid_skills_slot(int slot)

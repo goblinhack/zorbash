@@ -88,8 +88,6 @@ void wid_actionbar_close_all_popups(void)
 
   delete wid_over_wait;
   wid_over_wait = nullptr;
-
-  game->change_state(Game::STATE_NORMAL);
 }
 
 void wid_actionbar_fini(void)

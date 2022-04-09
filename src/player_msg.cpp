@@ -82,6 +82,18 @@ bool Thing::player_is_ready_for_thing_info(void)
     return false;
   }
 
+  if (level->ts_fade_out_begin) {
+    return false;
+  }
+
+  if (level->ts_fade_in_begin) {
+    return false;
+  }
+
+  if (is_changing_level) {
+    return false;
+  }
+
   //
   // No popups before the first tick
   //

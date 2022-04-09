@@ -1255,9 +1255,11 @@ void Game::load_snapshot(void)
 void wid_load_destroy(void)
 {
   TRACE_AND_INDENT();
-  delete wid_load;
-  wid_load = nullptr;
-  game->change_state(Game::STATE_NORMAL);
+  if (wid_load) {
+    delete wid_load;
+    wid_load = nullptr;
+    game->change_state(Game::STATE_NORMAL);
+  }
 }
 
 static uint8_t wid_load_key_up(Widp w, const struct SDL_Keysym *key)
