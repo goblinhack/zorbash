@@ -35,6 +35,9 @@ void Thing::animate(void)
   if (is_gfx_anim_synced_with_owner()) {
     auto owner = top_owner();
     if (owner) {
+      if (owner->is_sleeping) {
+        return;
+      }
       tile = tile_index_to_tile(owner->tile_curr);
       if (tile) {
         auto ntile = tile_get_frame(tmap, tile->frame);

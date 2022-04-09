@@ -5,6 +5,7 @@
 <!-- level choice is hard to see                                                                                                                 -->
 <!-- bats seem to get stuck                                                                                                                      -->
 <!-- when hitting a sleeping snake and it crits, need the dispatch message                                                                        -->
+<!-- 00:05:29.343: ERROR: Text box overflow on [`] height 31 line_count 31 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

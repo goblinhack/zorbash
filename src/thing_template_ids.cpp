@@ -108,6 +108,7 @@ std::initializer_list< std::string > tps = {
     "dirt1",
     "dirt2",
     "dirt3",
+    "dogman",
     "door_metal",
     "door_secret",
     "door_wood",
