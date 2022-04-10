@@ -1164,18 +1164,8 @@ void sdl_flush_display(bool force)
   wid_display_all();
   gl_leave_2d_mode();
   gl_enter_2d_mode(game->config.window_pix_width, game->config.window_pix_height);
-  if (game->config.gfx_inverted) {
-    glLogicOp(GL_COPY_INVERTED);
-    glEnable(GL_COLOR_LOGIC_OP);
-  }
-  blit_fbo_window_pix(FBO_WID);
-  blit_fbo_unbind();
-  if (game->config.gfx_inverted) {
-    glLogicOp(GL_COPY);
-    glDisable(GL_COLOR_LOGIC_OP);
-  }
-  SDL_GL_SwapWindow(sdl_window);
-  GL_ERROR_CHECK();
+
+  sdl_display();
 }
 
 void config_game_pix_zoom_update(void)
