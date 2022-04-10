@@ -105,7 +105,7 @@ void Thing::level_enter(bool rejoin)
   is_waiting_to_ascend_sewer                   = false;
   is_waiting_to_leave_level_has_completed_fall = false;
 
-  game->request_update_rightbar = true;
+  game->request_remake_rightbar = true;
 
   if (is_player()) {
     dbg("Level entered");

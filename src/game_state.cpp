@@ -56,32 +56,38 @@ void Game::change_state(int new_state)
       wid_save_destroy();
       wid_inventory_fini();
       wid_quit_destroy();
+      wid_actionbar_init();
       LOG("State changed to STATE_NORMAL");
       break;
     case STATE_OPTIONS_FOR_ITEM_MENU: LOG("State changed to STATE_OPTIONS_FOR_ITEM_MENU"); break;
     case STATE_INVENTORY: // Currently managing inventory
       LOG("State changed to STATE_INVENTORY");
+      wid_actionbar_init();
       break;
     case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
       LOG("State changing to STATE_COLLECTING_ITEMS");
       wid_thing_info_fini("change state");
       wid_collect_destroy();
       LOG("State changed to STATE_COLLECTING_ITEMS");
+      wid_actionbar_init();
       break;
     case STATE_ENCHANTING_ITEMS:
       LOG("State changing to STATE_ENCHANTING_ITEMS");
       wid_enchant_destroy();
       LOG("State changed to STATE_ENCHANTING_ITEMS");
+      wid_actionbar_init();
       break;
     case STATE_CHOOSING_SKILLS:
       LOG("State changing to STATE_CHOOSING_SKILLS");
       wid_choose_skill_destroy();
       LOG("State changed to STATE_CHOOSING_SKILLS");
+      wid_actionbar_init();
       break;
     case STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
       LOG("State changing to STATE_CHOOSING_TARGET");
       wid_thing_info_fini("change state");
       LOG("State changed to STATE_CHOOSING_TARGET");
+      wid_actionbar_init();
       break;
     case STATE_CHOOSING_LEVEL: // Looking to change level
       LOG("State changing to STATE_CHOOSING_LEVEL");
@@ -96,7 +102,7 @@ void Game::change_state(int new_state)
       request_remake_skillbox  = false;
       request_remake_debuffbox = false;
       request_remake_buffbox   = false;
-      request_update_rightbar  = false;
+      request_remake_rightbar  = false;
       LOG("State changed to STATE_CHOOSING_LEVEL");
       break;
     case STATE_LOAD_MENU:
@@ -108,7 +114,6 @@ void Game::change_state(int new_state)
   // In case some cleanup above changed state
   //
   state = new_state;
-  wid_actionbar_init();
 
   request_destination_ok = false;
   request_to_throw_item  = nullptr;

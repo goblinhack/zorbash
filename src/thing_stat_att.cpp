@@ -205,7 +205,7 @@ int Thing::stat_att_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_att = v);
@@ -216,7 +216,7 @@ int Thing::stat_att_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_att -= v);
@@ -227,7 +227,7 @@ int Thing::stat_att_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_att += v);
@@ -238,7 +238,7 @@ int Thing::stat_att_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_att--);
@@ -249,7 +249,7 @@ int Thing::stat_att_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_att++);

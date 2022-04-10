@@ -133,7 +133,7 @@ int Thing::stat_luck_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck = v);
@@ -144,7 +144,7 @@ int Thing::stat_luck_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck -= v);
@@ -155,7 +155,7 @@ int Thing::stat_luck_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck += v);
@@ -166,7 +166,7 @@ int Thing::stat_luck_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck--);
@@ -177,7 +177,7 @@ int Thing::stat_luck_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck++);
@@ -201,7 +201,7 @@ int Thing::stat_luck_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck_mod = v);
@@ -212,7 +212,7 @@ int Thing::stat_luck_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck_mod -= v);
@@ -223,7 +223,7 @@ int Thing::stat_luck_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck_mod += v);
@@ -234,7 +234,7 @@ int Thing::stat_luck_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck_mod--);
@@ -245,7 +245,7 @@ int Thing::stat_luck_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stat_luck_mod++);

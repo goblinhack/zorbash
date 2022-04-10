@@ -130,7 +130,7 @@ int Thing::temperature_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->temperature = v);
@@ -208,7 +208,7 @@ int Thing::temperature_incr(int v)
   }
 
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
 
   new_infop();

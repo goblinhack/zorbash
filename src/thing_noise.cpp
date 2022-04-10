@@ -233,7 +233,7 @@ int Thing::noise_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->noise = v);
@@ -244,7 +244,7 @@ int Thing::noise_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->noise -= v);
@@ -255,7 +255,7 @@ int Thing::noise_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->noise += v);
@@ -266,7 +266,7 @@ int Thing::noise_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->noise--);
@@ -277,7 +277,7 @@ int Thing::noise_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->noise++);

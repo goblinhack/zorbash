@@ -156,7 +156,7 @@ int Thing::jump_distance_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->jump_distance_mod = v);
@@ -167,7 +167,7 @@ int Thing::jump_distance_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->jump_distance_mod -= v);
@@ -178,7 +178,7 @@ int Thing::jump_distance_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->jump_distance_mod += v);
@@ -189,7 +189,7 @@ int Thing::jump_distance_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->jump_distance_mod--);
@@ -200,7 +200,7 @@ int Thing::jump_distance_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->jump_distance_mod++);

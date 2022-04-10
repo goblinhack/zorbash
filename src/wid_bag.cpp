@@ -76,6 +76,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     wid_set_thing_id2_context(w, bag);
     wid_set_on_mouse_up(w, wid_bag_item_mouse_up);
     wid_set_on_mouse_held(w, wid_bag_item_mouse_held);
+    wid_set_do_not_raise(w, true);
 
     auto tpp   = t->tp();
     auto tiles = &tpp->tiles;

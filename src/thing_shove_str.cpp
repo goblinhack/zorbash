@@ -133,7 +133,7 @@ int Thing::shove_strength_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->shove_strength_mod = v);
@@ -144,7 +144,7 @@ int Thing::shove_strength_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->shove_strength_mod -= v);
@@ -155,7 +155,7 @@ int Thing::shove_strength_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->shove_strength_mod += v);
@@ -166,7 +166,7 @@ int Thing::shove_strength_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->shove_strength_mod--);
@@ -177,7 +177,7 @@ int Thing::shove_strength_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->shove_strength_mod++);

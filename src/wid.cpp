@@ -6555,6 +6555,10 @@ static void wid_tick_all_post_display(void)
   TRACE_AND_INDENT();
   wid_time = time_game_ms_cached();
 
+  if (wid_console_window->visible) {
+    return;
+  }
+
   std::list< Widp > work;
   for (auto &iter : wid_tick_post_display_top_level) {
     auto w = iter.second;
