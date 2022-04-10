@@ -694,7 +694,7 @@ int32_t main(int32_t argc, char *argv[])
   }
 
   if (! sdl_init()) {
-    ERR("SDL: init");
+    ERR("SDL: Init");
   }
 
   if (g_need_restart) {

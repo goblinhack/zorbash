@@ -6512,11 +6512,14 @@ static void wid_tick_all(void)
         wid_actionbar_init();
         game->request_remake_actionbar = false;
       }
+      break;
 
+    case Game::STATE_INVENTORY:
       //
       // Update the inventory if needed
       //
       if (game->request_inventory_thing_over_do) {
+        DBG2("Inventory: handle over thing");
         wid_inventory_over(game->request_inventory_thing_over);
         game->request_inventory_thing_over    = nullptr;
         game->request_inventory_thing_over_do = false;
@@ -6526,6 +6529,7 @@ static void wid_tick_all(void)
       // Update the inventory if needed
       //
       if (game->request_inventory_thing_selected_do) {
+        DBG2("Inventory: handle over selected thing");
         wid_inventory_select(game->request_inventory_thing_selected);
         game->request_inventory_thing_selected    = nullptr;
         game->request_inventory_thing_selected_do = false;
@@ -6538,7 +6542,6 @@ static void wid_tick_all(void)
       }
       break;
     case Game::STATE_OPTIONS_FOR_ITEM_MENU:
-    case Game::STATE_INVENTORY:
     case Game::STATE_COLLECTING_ITEMS:
     case Game::STATE_ENCHANTING_ITEMS:
     case Game::STATE_CHOOSING_SKILLS:
