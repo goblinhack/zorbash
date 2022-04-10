@@ -279,6 +279,21 @@ bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *att
   dbg2("Target-attack-best: Best target to swing at %s", best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
 
+  //
+  // If attacking something like blood, then do a natural attack instead.
+  //
+  if (is_monst()) {
+    if (! level->is_monst(best_hit_at) && ! level->is_wall(best_hit_at) && ! level->is_door(best_hit_at) &&
+        ! level->is_mob(best_hit_at)) {
+      //
+      // Prefer claws
+      //
+      dbg2("Target-attack-best: No monsts at target location");
+      attack_options->used_as           = gfx_anim_use();
+      attack_options->prefer_nat_attack = true;
+    }
+  }
+
   auto use_anim = equip_use_anim(equip);
   if (! use_anim) {
     //
