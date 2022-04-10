@@ -24,6 +24,7 @@
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_choose_dungeon.hpp"
+#include "my_wid_console.hpp"
 #include "my_wid_popup.hpp"
 
 static uint8_t wid_choose_initial_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
@@ -159,27 +160,27 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   if (ctx->levels[ y ][ x ]) {
     switch (node->depth) {
-      case -1 : break;
-      case 1 : bg_tilename = "dungeon_icon.1"; break;
-      case 2 : bg_tilename = "dungeon_icon.2"; break;
-      case 3 : bg_tilename = "dungeon_icon.3"; break;
-      case 4 : bg_tilename = "dungeon_icon.4"; break;
-      case 5 : bg_tilename = "dungeon_icon.5"; break;
-      case 6 : bg_tilename = "dungeon_icon.6"; break;
-      case 7 : bg_tilename = "dungeon_icon.7"; break;
-      case 8 : bg_tilename = "dungeon_icon.8"; break;
+      case -1: break;
+      case 1: bg_tilename = "dungeon_icon.1"; break;
+      case 2: bg_tilename = "dungeon_icon.2"; break;
+      case 3: bg_tilename = "dungeon_icon.3"; break;
+      case 4: bg_tilename = "dungeon_icon.4"; break;
+      case 5: bg_tilename = "dungeon_icon.5"; break;
+      case 6: bg_tilename = "dungeon_icon.6"; break;
+      case 7: bg_tilename = "dungeon_icon.7"; break;
+      case 8: bg_tilename = "dungeon_icon.8"; break;
     }
   } else {
     switch (node->depth) {
-      case -1 : break;
-      case 1 : bg_tilename = "dungeon_icon_loading.1"; break;
-      case 2 : bg_tilename = "dungeon_icon_loading.2"; break;
-      case 3 : bg_tilename = "dungeon_icon_loading.3"; break;
-      case 4 : bg_tilename = "dungeon_icon_loading.4"; break;
-      case 5 : bg_tilename = "dungeon_icon_loading.5"; break;
-      case 6 : bg_tilename = "dungeon_icon_loading.6"; break;
-      case 7 : bg_tilename = "dungeon_icon_loading.7"; break;
-      case 8 : bg_tilename = "dungeon_icon_loading.8"; break;
+      case -1: break;
+      case 1: bg_tilename = "dungeon_icon_loading.1"; break;
+      case 2: bg_tilename = "dungeon_icon_loading.2"; break;
+      case 3: bg_tilename = "dungeon_icon_loading.3"; break;
+      case 4: bg_tilename = "dungeon_icon_loading.4"; break;
+      case 5: bg_tilename = "dungeon_icon_loading.5"; break;
+      case 6: bg_tilename = "dungeon_icon_loading.6"; break;
+      case 7: bg_tilename = "dungeon_icon_loading.7"; break;
+      case 8: bg_tilename = "dungeon_icon_loading.8"; break;
     }
   }
 
@@ -200,15 +201,15 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   if (node->is_key) {
     switch (node->depth) {
-      case -1 : break;
-      case 1 : fg_tilename = "crystal.1"; break;
-      case 2 : fg_tilename = "crystal.2"; break;
-      case 3 : fg_tilename = "crystal.3"; break;
-      case 4 : fg_tilename = "crystal.4"; break;
-      case 5 : fg_tilename = "crystal.5"; break;
-      case 6 : fg_tilename = "crystal.6"; break;
-      case 7 : fg_tilename = "crystal.7"; break;
-      case 8 : fg_tilename = "crystal.8"; break;
+      case -1: break;
+      case 1: fg_tilename = "crystal.1"; break;
+      case 2: fg_tilename = "crystal.2"; break;
+      case 3: fg_tilename = "crystal.3"; break;
+      case 4: fg_tilename = "crystal.4"; break;
+      case 5: fg_tilename = "crystal.5"; break;
+      case 6: fg_tilename = "crystal.6"; break;
+      case 7: fg_tilename = "crystal.7"; break;
+      case 8: fg_tilename = "crystal.8"; break;
     }
   }
 
@@ -776,24 +777,24 @@ static uint8_t wid_choose_initial_dungeons_key_up(Widp w, const struct SDL_Keysy
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        case SDLK_RETURN : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
-        default :
+        case SDLK_RETURN: wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
+        default:
           {
             TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'c' : wid_choose_initial_dungeons_wid_choose_seed(nullptr, 0, 0, 0); return true;
-              case 'r' : wid_choose_initial_dungeons_random(nullptr, 0, 0, 0); return true;
-              case 'e' : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
-              case ' ' :
-              case 'n' : wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
-              case 'b' :
-              case 'q' :
-              case SDLK_ESCAPE : wid_choose_initial_dungeons_go_back(nullptr, 0, 0, 0); return true;
+              case 'c': wid_choose_initial_dungeons_wid_choose_seed(nullptr, 0, 0, 0); return true;
+              case 'r': wid_choose_initial_dungeons_random(nullptr, 0, 0, 0); return true;
+              case 'e': wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
+              case ' ':
+              case 'n': wid_choose_initial_dungeons_enter(nullptr, 0, 0, 0); return true;
+              case 'b':
+              case 'q':
+              case SDLK_ESCAPE: wid_choose_initial_dungeons_go_back(nullptr, 0, 0, 0); return true;
             }
           }
       }

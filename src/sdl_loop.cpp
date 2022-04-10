@@ -13,7 +13,6 @@
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
-#include "my_wid_rightbar.hpp"
 #include "my_wid_topcon.hpp"
 #include "stb_image_write.hpp"
 
@@ -152,19 +151,7 @@ void sdl_loop(void)
           pcg_random_allowed = true;
         } else {
           pcg_random_allowed = false;
-          {
-            //
-            // Must do this before wid_display_all so that the
-            // on screen widgets are updated with the new wid
-            // we are about to make.
-            //
-            if (game->request_update_rightbar) {
-              game->request_update_rightbar = false;
-              wid_rightbar_init();
-            }
-
-            wid_display_all();
-          }
+          wid_display_all();
           pcg_random_allowed = true;
         }
       }

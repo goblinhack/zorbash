@@ -226,14 +226,14 @@ static void wid_choose_next_dungeons_tick(Widp w)
 
   val += delta * step;
 
-  if (val > 255) {
-    val   = 255;
-    delta = -1;
+  if (val > 250) {
+    val   = 250;
+    delta = -2;
   }
 
-  if (val < 200) {
-    val   = 200;
-    delta = 1;
+  if (val < 150) {
+    val   = 150;
+    delta = 2;
   }
 
   {
@@ -248,6 +248,7 @@ static void wid_choose_next_dungeons_tick(Widp w)
         if (game->level == l) {
           color c = WHITE;
           wid_set_color(b, WID_COLOR_BG, c);
+          wid_set_color(b, WID_COLOR_BG, GRAY30);
           wid_update(b);
 
           if (ctx->is_descending) {

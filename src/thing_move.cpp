@@ -640,7 +640,6 @@ void Thing::update_interpolated_position(void)
       }
     }
   }
-  dbg2("Update position step game %f %f", game->tick_dt, step);
 
   auto p = top_owner();
   if ((p && p->is_falling) || is_falling) {

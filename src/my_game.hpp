@@ -352,7 +352,6 @@ public:
   bool request_remake_skillbox {};
   bool request_remake_debuffbox {};
   bool request_remake_buffbox {};
-  bool request_update_rightbar {};
   bool request_update_same_level {};
   bool request_snapshot {}; // Something has requested a game snapshot
   bool saving_snapshot {};

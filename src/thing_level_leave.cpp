@@ -89,5 +89,5 @@ void Thing::level_leave(void)
     }
   }
 
-  game->request_update_rightbar = true;
+  game->request_remake_rightbar = true;
 }

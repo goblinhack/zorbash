@@ -59,7 +59,7 @@ int Thing::stamina_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stamina = v);
@@ -88,7 +88,7 @@ int Thing::stamina_decr(int v)
     infop()->stamina = 0;
   }
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   return n;
 }
@@ -97,7 +97,7 @@ int Thing::stamina_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stamina += v);
@@ -112,7 +112,7 @@ int Thing::stamina_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stamina--);
@@ -126,7 +126,7 @@ int Thing::stamina_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stamina++);
@@ -154,7 +154,7 @@ int Thing::stamina_max_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stamina_max = v);
@@ -165,7 +165,7 @@ int Thing::stamina_max_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stamina_max -= v);
@@ -176,7 +176,7 @@ int Thing::stamina_max_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stamina_max += v);
@@ -187,7 +187,7 @@ int Thing::stamina_max_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stamina_max--);
@@ -198,7 +198,7 @@ int Thing::stamina_max_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_update_rightbar = true;
+    game->request_remake_rightbar = true;
   }
   new_infop();
   auto n = (infop()->stamina_max++);
