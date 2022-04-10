@@ -400,10 +400,8 @@ bool Thing::fall_to_next_level(void)
       }
 
       if (! is_dead) {
-        wake();
-
+        wake("fell");
         movement_remaining_set(0);
-
         on_fall();
       }
 

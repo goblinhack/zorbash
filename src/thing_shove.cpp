@@ -27,7 +27,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
   //
   // Wake on shove
   //
-  it->wake();
+  it->wake("shoved");
 
   if (! it->is_shovable()) {
     dbg("Not able to shove %s", it->to_short_string().c_str());

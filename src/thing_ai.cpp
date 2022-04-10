@@ -1842,7 +1842,7 @@ bool Thing::ai_tick(bool recursing)
   is_sleeping = infop()->monst_state == MONST_STATE_SLEEPING;
   if (is_sleeping) {
     if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_decibels_hearing()) {
-      wake();
+      wake("heard something");
     }
   }
 

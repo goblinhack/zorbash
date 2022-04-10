@@ -490,8 +490,6 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   dbg("Attack %s", victim->to_string().c_str());
   TRACE_AND_INDENT();
 
-  wake();
-
   idle_count_set(0);
 
   auto owner = top_owner();
@@ -857,12 +855,12 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
       level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
     }
 
-    //
-    // Wake on attack
-    //
-    victim->wake();
-
     if (damage <= 0) {
+      //
+      // Wake on attack
+      //
+      victim->wake("attacked, but no damage");
+
       if (is_player() || (owner && owner->is_player())) {
         msg("You inflict no damage on %s.", victim->text_the().c_str());
       }
@@ -878,6 +876,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         auto delta = victim->curr_at - curr_at;
         move_set_dir_from_dest_or_delta(delta);
         equip_use_may_attack(MONST_EQUIP_WEAPON);
+        victim->wake("player attacked");
         return true;
       }
     } else if (is_monst()) {
@@ -889,6 +888,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
           auto delta = victim->curr_at - curr_at;
           move_set_dir_from_dest_or_delta(delta);
           equip_use_may_attack(MONST_EQUIP_WEAPON);
+          victim->wake("monst attacked");
           return true;
         }
       } else if (is_monst()) {
@@ -1135,6 +1135,8 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     attack_options->attack_necrosis  = false;
     attack_options->attack_natural   = false;
   }
+
+  victim->wake("attacked");
 
   if (attack_count) {
     return true;
