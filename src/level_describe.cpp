@@ -80,14 +80,6 @@ void Level::describe(point p)
       continue;
     }
 
-    //
-    // Dead monst clog up the screen
-    //
-    if (t->is_monst() && t->is_dead) {
-      IF_DEBUG2 { t->log("Ignore for describe, monst or dead"); }
-      continue;
-    }
-
     if (t->immediate_owner()) {
       IF_DEBUG2 { t->log("Ignore for describe, has owner"); }
       continue;
