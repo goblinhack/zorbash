@@ -178,6 +178,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_charge_count(wid_popup_window, t);
   wid_thing_info_add_danger_level(wid_popup_window, t);
   t->show_botcon_description();
+  game->current_wid_thing_info = t;
 
   IF_DEBUG1 { t->log("Created thing ingo popup"); }
 
@@ -255,6 +256,8 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
   }
+
+  game->current_wid_thing_info = nullptr;
 
   auto w        = wid_popup_window;
   int  utilized = w->wid_text_area->line_count;

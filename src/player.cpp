@@ -162,8 +162,7 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     //
     bool was_moving     = player->is_moving;
     auto old_thing_info = game->current_wid_thing_info;
-
-    auto future_pos = player->curr_at + dir;
+    auto future_pos     = player->curr_at + dir;
 
     AttackOptions attack_options {};
     attack_options.shove_allowed  = true;
@@ -186,6 +185,7 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
     // If something was being described and we moved, clear it now
     //
     if (moved) {
+      DBG("Player moved");
       if (! was_moving && old_thing_info && (old_thing_info == game->current_wid_thing_info)) {
         DBG("Player moved; clear thing info");
         wid_thing_info_fini("player moved");
