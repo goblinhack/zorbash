@@ -328,16 +328,19 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       DBG("INF: Escape pressed when in inventory");
 
       if (game->in_transit_item) {
+        DBG2("Inventory: Drop in transit item");
         wid_in_transit_item_drop();
         return true;
       }
 
       if (wid_inventory_thing_selected) {
+        DBG2("Inventory: Unselect thing");
         wid_inventory_select_requested(nullptr);
         return true;
       }
 
-      game->change_state(Game::STATE_NORMAL);
+      DBG2("Inventory: Close inventory");
+      wid_inventory_fini();
       return true;
     }
   }

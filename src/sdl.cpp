@@ -65,7 +65,7 @@ on_sdl_key_grab_t    on_sdl_key_grab;
 
 void sdl_fini(void)
 {
-  LOG("SDL: fini");
+  LOG("SDL: Fini");
   TRACE_AND_INDENT();
 
 #ifdef ENABLE_UI_ASCII_MOUSE
@@ -74,21 +74,21 @@ void sdl_fini(void)
 #endif
 
   if (sdl_init_video) {
-    CON("SDL: video quit");
+    CON("SDL: Video quit");
     sdl_init_video = 0;
     SDL_VideoQuit();
   }
 
-  CON("SDL: delete GL context");
+  CON("SDL: Delete GL context");
   SDL_GL_DeleteContext(sdl_context);
 
-  CON("SDL: destroy window");
+  CON("SDL: Destroy window");
   SDL_DestroyWindow(sdl_window);
 
-  CON("SDL: quit");
+  CON("SDL: Quit");
   SDL_Quit();
 
-  CON("SDL: fini done");
+  CON("SDL: Quit done");
 }
 
 static inline void sdl_list_video_size(void)

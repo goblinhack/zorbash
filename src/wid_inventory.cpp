@@ -432,6 +432,24 @@ static uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     return false;
   }
 
+  if (key->scancode == SDL_SCANCODE_ESCAPE) {
+    if (game->in_transit_item) {
+      DBG2("Inventory: Drop in transit item");
+      wid_in_transit_item_drop();
+      return true;
+    }
+
+    if (wid_inventory_thing_selected) {
+      DBG2("Inventory: Unselect thing");
+      wid_inventory_select_requested(nullptr);
+      return true;
+    }
+
+    DBG2("Inventory: Close inventory");
+    wid_inventory_fini();
+    return true;
+  }
+
   //
   // If shift is not held, select inventory
   //
@@ -667,9 +685,10 @@ void wid_inventory_select_requested(Thingp selected)
 
 bool wid_inventory_over(Thingp over)
 {
-  DBG2("Inventory: over");
+  DBG2("Inventory: over a thing");
   TRACE_AND_INDENT();
   if (over == wid_inventory_thing_over) {
+    DBG2("Inventory: over the same thing");
     return true;
   }
 
@@ -690,6 +709,7 @@ bool wid_inventory_over(Thingp over)
     wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected over");
   }
 
+  DBG2("Inventory: create inventory for this thing");
   return wid_inventory_create(wid_inventory_thing_selected, over);
 }
 

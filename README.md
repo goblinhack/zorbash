@@ -1,8 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- thing info appearing on level choice                                                                                                         -->
-<!-- level choice is hard to see                                                                                                                  -->
 <!-- bats seem to get stuck                                                                                                                       -->
 <!-- when hitting a sleeping snake and it crits, need the dispatch message                                                                        -->
 <!-- ------                                                                                                                                       -->
@@ -15,7 +13,7 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - dog pack                                                                                                                                   -->
+<!-- - dog pack / howling ?                                                                                                                       -->
 <!-- - freeze slimes                                                                                                                              -->
 <!-- - recharge wands based on enchant                                                                                                            -->
 <!-- - crystal key                                                                                                                                -->
