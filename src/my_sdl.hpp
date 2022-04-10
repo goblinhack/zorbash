@@ -123,6 +123,7 @@ void sdl_fini(void);
 void sdl_flush_display(bool force = false);
 void sdl_joy_rumble(float strength, ts_t ms);
 void sdl_loop(void);
+void sdl_display(void);
 void sdl_mouse_center(void);
 void sdl_mouse_warp(int x, int y);
 void sdl_screenshot_do(void);

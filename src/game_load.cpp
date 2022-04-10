@@ -771,7 +771,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   LOG("INF: Loaded things for level %d,%d,%d", p.x, p.y, p.z);
 
   my.t->update_map();
-  LOG("INF: updated map for level %d,%d,%d", p.x, p.y, p.z);
+  DBG("INF: Updated map for level %d,%d,%d", p.x, p.y, p.z);
   return (in);
 }
 

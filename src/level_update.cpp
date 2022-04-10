@@ -24,12 +24,12 @@ void Level::update_new_level(void)
   }
 
   if (player) {
-    log("Update new level with player present");
+    dbg("Update new level with player present");
     if (game->level != this) {
-      log("Game level is not set yet.");
+      dbg("Game level is not set yet.");
     }
   } else {
-    log("Update new level with no player present");
+    dbg("Update new level with no player present");
   }
 
   scroll_map_to_player_immediately();

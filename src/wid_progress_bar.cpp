@@ -22,11 +22,12 @@ void wid_progress_bar_destroy(void)
 
 void wid_progress_bar(const std::string &title, float pct)
 {
-  TRACE_NO_INDENT();
-  LOG("Progress bar");
+  DBG("Progress bar");
+  TRACE_AND_INDENT();
 
   if (wid_progress_bar_window) {
     wid_progress_bar_destroy();
+    wid_gc_all();
   }
 
   int tile_num;
