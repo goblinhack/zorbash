@@ -52,9 +52,8 @@ bool Thing::debuffbox_id_insert(Thingp what)
         //
       } else {
         wid_debuffbox_init();
-        if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state != Game::STATE_CHOOSING_TARGET) &&
-                                                               (game->state != Game::STATE_INVENTORY) &&
-                                                               (game->state != Game::STATE_COLLECTING_ITEMS)) {
+        if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
+            (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
           wid_thing_info_fini("debuffbox insert");
         }
         return true;
@@ -79,9 +78,8 @@ bool Thing::debuffbox_id_insert(Thingp what)
   game->previous_slot = item_slot;
 
   wid_debuffbox_init();
-  if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state != Game::STATE_CHOOSING_TARGET) &&
-                                                         (game->state != Game::STATE_INVENTORY) &&
-                                                         (game->state != Game::STATE_COLLECTING_ITEMS)) {
+  if ((game->state != Game::STATE_CHOOSING_LEVEL) && (game->state != Game::STATE_CHOOSING_TARGET) &&
+      (game->state != Game::STATE_INVENTORY) && (game->state != Game::STATE_COLLECTING_ITEMS)) {
     wid_thing_info_fini("debuffbox remove");
   }
   level->debuffbox_describe(item_slot);

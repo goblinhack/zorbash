@@ -2344,7 +2344,7 @@ public:
   void used(Thingp w, Thingp target, bool remove_after_use, UseOptions *options = nullptr);
   void visible(void);
   void waiting(void);
-  void wake(void);
+  void wake(const std::string &reason);
   void water_tick(void);
   void weapon_sheath(void);
   void wobble(float wobble);

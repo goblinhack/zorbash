@@ -340,7 +340,7 @@ void Tp::damage_nat_attack_type_set(const std::string &v) { _damage_nat_attack_t
 
 int Tp::damage_acid_chance_d1000(int index) const
 {
-  if (index >= _damage_acid_chance_d1000.size()) {
+  if (index >= (int) _damage_acid_chance_d1000.size()) {
     return 0;
   }
   return _damage_acid_chance_d1000[ index ];
@@ -356,7 +356,7 @@ int Tp::damage_cold_chance_d1000(int index) const
 
 int Tp::damage_crush_chance_d1000(int index) const
 {
-  if (index >= _damage_crush_chance_d1000.size()) {
+  if (index >= (int) _damage_crush_chance_d1000.size()) {
     return 0;
   }
   return _damage_crush_chance_d1000[ index ];
@@ -364,7 +364,7 @@ int Tp::damage_crush_chance_d1000(int index) const
 
 int Tp::damage_digest_chance_d1000(int index) const
 {
-  if (index >= _damage_digest_chance_d1000.size()) {
+  if (index >= (int) _damage_digest_chance_d1000.size()) {
     return 0;
   }
   return _damage_digest_chance_d1000[ index ];
@@ -372,7 +372,7 @@ int Tp::damage_digest_chance_d1000(int index) const
 
 int Tp::damage_energy_chance_d1000(int index) const
 {
-  if (index >= _damage_energy_chance_d1000.size()) {
+  if (index >= (int) _damage_energy_chance_d1000.size()) {
     return 0;
   }
   return _damage_energy_chance_d1000[ index ];
@@ -380,7 +380,7 @@ int Tp::damage_energy_chance_d1000(int index) const
 
 int Tp::damage_fire_chance_d1000(int index) const
 {
-  if (index >= _damage_fire_chance_d1000.size()) {
+  if (index >= (int) _damage_fire_chance_d1000.size()) {
     return 0;
   }
   return _damage_fire_chance_d1000[ index ];
@@ -388,7 +388,7 @@ int Tp::damage_fire_chance_d1000(int index) const
 
 int Tp::damage_future1_chance_d1000(int index) const
 {
-  if (index >= _damage_future1_chance_d1000.size()) {
+  if (index >= (int) _damage_future1_chance_d1000.size()) {
     return 0;
   }
   return _damage_future1_chance_d1000[ index ];
@@ -396,7 +396,7 @@ int Tp::damage_future1_chance_d1000(int index) const
 
 int Tp::damage_future2_chance_d1000(int index) const
 {
-  if (index >= _damage_future2_chance_d1000.size()) {
+  if (index >= (int) _damage_future2_chance_d1000.size()) {
     return 0;
   }
   return _damage_future2_chance_d1000[ index ];
@@ -404,7 +404,7 @@ int Tp::damage_future2_chance_d1000(int index) const
 
 int Tp::damage_future3_chance_d1000(int index) const
 {
-  if (index >= _damage_future3_chance_d1000.size()) {
+  if (index >= (int) _damage_future3_chance_d1000.size()) {
     return 0;
   }
   return _damage_future3_chance_d1000[ index ];
@@ -412,7 +412,7 @@ int Tp::damage_future3_chance_d1000(int index) const
 
 int Tp::damage_lightning_chance_d1000(int index) const
 {
-  if (index >= _damage_lightning_chance_d1000.size()) {
+  if (index >= (int) _damage_lightning_chance_d1000.size()) {
     return 0;
   }
   return _damage_lightning_chance_d1000[ index ];
@@ -420,7 +420,7 @@ int Tp::damage_lightning_chance_d1000(int index) const
 
 int Tp::damage_melee_chance_d1000(int index) const
 {
-  if (index >= _damage_melee_chance_d1000.size()) {
+  if (index >= (int) _damage_melee_chance_d1000.size()) {
     return 0;
   }
   return _damage_melee_chance_d1000[ index ];
@@ -428,7 +428,7 @@ int Tp::damage_melee_chance_d1000(int index) const
 
 int Tp::damage_nat_attack_chance_d1000(int index) const
 {
-  if (index >= _damage_nat_attack_chance_d1000.size()) {
+  if (index >= (int) _damage_nat_attack_chance_d1000.size()) {
     return 0;
   }
   return _damage_nat_attack_chance_d1000[ index ];
@@ -436,7 +436,7 @@ int Tp::damage_nat_attack_chance_d1000(int index) const
 
 int Tp::damage_necrosis_chance_d1000(int index) const
 {
-  if (index >= _damage_necrosis_chance_d1000.size()) {
+  if (index >= (int) _damage_necrosis_chance_d1000.size()) {
     return 0;
   }
   return _damage_necrosis_chance_d1000[ index ];
@@ -444,7 +444,7 @@ int Tp::damage_necrosis_chance_d1000(int index) const
 
 int Tp::damage_draining_chance_d1000(int index) const
 {
-  if (index >= _damage_draining_chance_d1000.size()) {
+  if (index >= (int) _damage_draining_chance_d1000.size()) {
     return 0;
   }
   return _damage_draining_chance_d1000[ index ];
@@ -452,7 +452,7 @@ int Tp::damage_draining_chance_d1000(int index) const
 
 int Tp::damage_poison_chance_d1000(int index) const
 {
-  if (index >= _damage_poison_chance_d1000.size()) {
+  if (index >= (int) _damage_poison_chance_d1000.size()) {
     return 0;
   }
   return _damage_poison_chance_d1000[ index ];

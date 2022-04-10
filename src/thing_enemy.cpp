@@ -110,5 +110,11 @@ void Thing::add_enemy(Thingp attacker)
     }
   }
 
-  change_state(MONST_STATE_IDLE, "move interrupted by an enemy");
+  //
+  // The attack will wake the monst if it is sleeping anyway. We want to
+  // delay waking if already dead to get a better message.
+  //
+  if (! is_sleeping) {
+    change_state(MONST_STATE_IDLE, "move interrupted by an enemy");
+  }
 }

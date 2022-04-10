@@ -208,9 +208,9 @@ void Thing::leader_set(Thingp l)
   // If the leader is awake, so are we
   //
   if (l->is_sleeping) {
-    wake();
-  } else {
     sleep();
+  } else {
+    wake("leader is awake");
   }
 }
 

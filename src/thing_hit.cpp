@@ -978,13 +978,8 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         }
       } else if (is_alive_monst() || is_mob()) {
         if (attack_options->crit) {
-          if (is_sleeping) {
-            msg("%%fg=red$You CRIT hit %s for %d %sdamage in its sleep!%%fg=reset$", text_the().c_str(), damage,
-                damage_type.c_str());
-          } else {
-            msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
-                damage_type.c_str());
-          }
+          msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
+              damage_type.c_str());
         } else {
           if (hitter && (hitter != real_hitter)) {
             if (attack_options->attack_poison) {
@@ -1094,13 +1089,6 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     if (hitter->on_fire_set("hit by fire due to attacking")) {
       msg("%s sets itself on fire!", hitter->text_The().c_str());
     }
-  }
-
-  //
-  // Interrupt whatever the monster was doing.
-  //
-  if (is_monst() || (is_player() && game->robot_mode)) {
-    change_state(MONST_STATE_IDLE, "monst was attacked");
   }
 
   //
@@ -1229,7 +1217,11 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
 
     if (real_hitter->is_monst() || real_hitter->is_player()) {
       if (is_monst() || is_player()) {
-        reason = "killed by " + defeater;
+        if (is_sleeping) {
+          reason = "killed in its sleep, by " + defeater;
+        } else {
+          reason = "killed by " + defeater;
+        }
       } else {
         reason = "by " + defeater;
       }
@@ -1333,6 +1325,13 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     // Set up noise, for example a door being broken
     //
     level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_you_are_hit_and_now_dead());
+
+    //
+    // Interrupt whatever the monster was doing.
+    //
+    if (is_monst() || (is_player() && game->robot_mode)) {
+      change_state(MONST_STATE_IDLE, "monst was attacked");
+    }
   }
 
   //

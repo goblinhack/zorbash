@@ -92,7 +92,7 @@ void Thing::change_state(int new_state, const std::string &why)
     case MONST_STATE_SLEEPING: from = "MONST-SLEEPING"; break;
   }
 
-  dbg3("Monst state change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
+  dbg2("Monst state change %s -> %s, reason: %s", from.c_str(), to.c_str(), why.c_str());
   TRACE_AND_INDENT();
 
   infop()->monst_state = new_state;
