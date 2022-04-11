@@ -78,6 +78,7 @@ void Config::dump(std::string pfx)
   LOG("%s ascii_gl_height        %u", pfx.c_str(), ascii_gl_height);
   LOG("%s ascii_gl_width         %u", pfx.c_str(), ascii_gl_width);
   LOG("%s debug_mode             %u", pfx.c_str(), debug_mode);
+  LOG("%s ascii_mode             %u", pfx.c_str(), ascii_mode);
   LOG("%s fps_counter            %u", pfx.c_str(), fps_counter);
   LOG("%s game_pix_height        %u", pfx.c_str(), game_pix_height);
   LOG("%s game_pix_scale_height  %f", pfx.c_str(), game_pix_scale_height);

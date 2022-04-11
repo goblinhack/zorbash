@@ -851,6 +851,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.ui_pix_zoom);
   in >> bits(my.t.video_w_h_ratio);
   in >> bits(my.t.debug_mode);
+  in >> bits(my.t.ascii_mode);
   in >> bits(my.t.fps_counter);
   in >> bits(my.t.gfx_allow_highdpi);
   in >> bits(my.t.gfx_borderless);

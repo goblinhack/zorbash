@@ -743,6 +743,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(my.t.ui_pix_zoom);
   out << bits(my.t.video_w_h_ratio);
   out << bits(my.t.debug_mode);
+  out << bits(my.t.ascii_mode);
   out << bits(my.t.fps_counter);
   out << bits(my.t.gfx_allow_highdpi);
   out << bits(my.t.gfx_borderless);

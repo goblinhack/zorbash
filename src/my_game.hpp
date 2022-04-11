@@ -46,16 +46,17 @@ public:
   float ui_pix_zoom           = GAME_DEFAULT_UI_ZOOM;
   float video_w_h_ratio       = {};
 
-  int debug_mode             = {};
-  int fps_counter            = {};
-  int gfx_allow_highdpi      = {};
-  int gfx_borderless         = {};
-  int gfx_fullscreen         = {};
-  int gfx_fullscreen_desktop = {};
-  int gfx_inverted           = {};
-  int gfx_show_hidden        = {};
-  int gfx_vsync_enable       = {};
-  int gfx_vsync_locked       = {};
+  bool ascii_mode             = {};
+  bool debug_mode             = {};
+  bool fps_counter            = {};
+  bool gfx_allow_highdpi      = {};
+  bool gfx_borderless         = {};
+  bool gfx_fullscreen         = {};
+  bool gfx_fullscreen_desktop = {};
+  bool gfx_inverted           = {};
+  bool gfx_show_hidden        = {};
+  bool gfx_vsync_enable       = {};
+  bool gfx_vsync_locked       = {};
 
   int32_t config_pix_height = {};
   int32_t config_pix_width  = {};

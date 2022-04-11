@@ -293,11 +293,7 @@ void Dungeon::make_dungeon(void)
               5,  // R2
               4 /* generations */);
 
-  IF_DEBUG2
-  {
-    LOG("INF: Created, but not populated");
-    dump();
-  }
+  dump();
 }
 
 char *Dungeon::cell_addr(const int x, const int y, const int z)

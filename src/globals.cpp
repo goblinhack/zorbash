@@ -34,6 +34,7 @@ bool g_opt_resume;               // Load last snapshot
 bool g_quitting;                 // Exitting the game
 bool g_render_black_and_white;   // Rendering map in black and white
 bool g_saved_snapshot;           // Just saved a snapshot
+bool g_opt_ascii;                // Ascii mode
 
 // --debug  Basic debug
 // --debug2 Map is visible and memory checks enabled
