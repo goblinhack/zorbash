@@ -22,24 +22,25 @@ void Config::fini(void) { TRACE_AND_INDENT(); }
 void Config::reset(void)
 {
   TRACE_AND_INDENT();
+  ascii_mode            = g_opt_ascii;
+  debug_mode            = false;
+  fps_counter           = false;
   game_pix_scale_height = {};
   game_pix_scale_width  = {};
   game_pix_zoom         = GAME_DEFAULT_PIX_ZOOM;
+  gfx_allow_highdpi     = false;
+  gfx_borderless        = true;
+  gfx_fullscreen        = false;
   one_pixel_height      = {};
   one_pixel_width       = {};
-  tile_pix_height       = {};
-  tile_pix_width        = {};
   tile_pixel_height     = {};
   tile_pixel_width      = {};
+  tile_pix_height       = {};
+  tile_pix_width        = {};
   ui_pix_scale_height   = {};
   ui_pix_scale_width    = {};
   ui_pix_zoom           = GAME_DEFAULT_UI_ZOOM;
   video_w_h_ratio       = {};
-  debug_mode            = false;
-  fps_counter           = false;
-  gfx_allow_highdpi     = false;
-  gfx_borderless        = true;
-  gfx_fullscreen        = false;
 #ifdef __linux__
   //
   // Avoids the top 10 pixels being stolen by gnome menu bar

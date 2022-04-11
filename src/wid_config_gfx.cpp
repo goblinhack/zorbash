@@ -62,6 +62,16 @@ static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int32_t x, int32_t y, 
   return true;
 }
 
+static uint8_t wid_config_ascii_mode_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  CON("INF: Toggle vsync");
+  game->config.ascii_mode = ! game->config.ascii_mode;
+  config_gfx_vsync_update();
+  game->wid_config_gfx_select();
+  return true;
+}
+
 static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
@@ -201,19 +211,19 @@ static uint8_t wid_config_gfx_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'c' : wid_config_gfx_cancel(nullptr, 0, 0, 0); return true;
-              case 's' : wid_config_gfx_save(nullptr, 0, 0, 0); return true;
-              case 'b' :
-              case SDLK_ESCAPE : wid_config_gfx_cancel(nullptr, 0, 0, 0); return true;
+              case 'c': wid_config_gfx_cancel(nullptr, 0, 0, 0); return true;
+              case 's': wid_config_gfx_save(nullptr, 0, 0, 0); return true;
+              case 'b':
+              case SDLK_ESCAPE: wid_config_gfx_cancel(nullptr, 0, 0, 0); return true;
             }
           }
       }
@@ -302,6 +312,40 @@ void Game::wid_config_gfx_select(void)
     wid_set_on_mouse_up(w, wid_config_gfx_cancel);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$C%%fg=reset$ancel");
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // fullscreen desktop
+  /////////////////////////////////////////////////////////////////////////
+  y_at += 1;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "AScii mode");
+
+    point tl = make_point(0, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Fullscreen desktop");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Ascii mode");
+
+    point tl = make_point(width / 2, y_at);
+    point br = make_point(width / 2 + 10, y_at);
+    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_ascii_mode_toggle);
+
+    if (game->config.ascii_mode) {
+      wid_set_text(w, "True");
+    } else {
+      wid_set_text(w, "False");
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////

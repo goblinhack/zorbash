@@ -28,7 +28,7 @@
 #define LEVEL_FADE_OUT_MS     500 // Level end fade animation time
 #define LEVEL_MONST_COUNT_MAX 100 // Monsters max per level. Want more? You're mad...
 
-#define MAP_BORDER_ROCK 3  // Map rock border; keep at 3 as jump AI looks 2 tiles adjacent
+#define MAP_BORDER_ROCK 1  // Map rock border
 #define MAP_BORDER_ROOM 10 // Room border padding
 #define MAP_ROOM_HEIGHT 13 // Max room dimensions
 #define MAP_ROOM_WIDTH  13 // Max room dimensions

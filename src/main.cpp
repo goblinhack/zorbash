@@ -511,6 +511,11 @@ static void parse_args(int32_t argc, char *argv[])
   }
 
   for (i = 1; i < argc; i++) {
+    if (! strcasecmp(argv[ i ], "--ascii") || ! strcasecmp(argv[ i ], "-ascii")) {
+      g_opt_ascii = true;
+      continue;
+    }
+
     if (! strcasecmp(argv[ i ], "--quick-start") || ! strcasecmp(argv[ i ], "-quick-start") ||
         ! strcasecmp(argv[ i ], "--quickstart") || ! strcasecmp(argv[ i ], "-quickstart")) {
       g_opt_quick_start = true;
@@ -689,6 +694,7 @@ int32_t main(int32_t argc, char *argv[])
   IF_DEBUG2
   {
     if (game) {
+      game->config.ascii_mode = g_opt_ascii;
       game->config.debug_mode = g_opt_debug2;
     }
   }
