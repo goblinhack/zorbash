@@ -295,7 +295,7 @@ uint8_t sdl_init(void)
     float dpi;
     if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
       video_unused_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
-      CON("SDL: SDL_WINDOW_ALLOW_HIGHDPI");
+      CON("SDL: Set SDL_WINDOW_ALLOW_HIGHDPI");
     } else {
       ERR("SDL: Cannot enable high DPI");
     }
@@ -320,7 +320,6 @@ uint8_t sdl_init(void)
     SDL_GetWindowSize(sdl_window, &game->config.window_pix_width, &game->config.window_pix_height);
   }
 
-  CON("SDL: Create OpenGL context");
   LOG("SDL: Call SDL_GL_CreateContext(%dx%d)", game->config.window_pix_width, game->config.window_pix_height);
 
   sdl_context = SDL_GL_CreateContext(sdl_window);
@@ -1236,10 +1235,16 @@ void config_game_pix_zoom_update(void)
   CON("SDL: UI zoom                : %f", game->config.ui_pix_zoom);
   CON("SDL: - UI pixel size        : %dx%d", game->config.ui_pix_width, game->config.ui_pix_height);
 
-  TERM_WIDTH                   = TERM_WIDTH_DEF;
-  TERM_HEIGHT                  = TERM_HEIGHT_DEF;
-  game->config.ascii_gl_width  = UI_FONT_LARGE_WIDTH;
-  game->config.ascii_gl_height = UI_FONT_LARGE_HEIGHT;
+  TERM_WIDTH  = TERM_WIDTH_DEF;
+  TERM_HEIGHT = TERM_HEIGHT_DEF;
+
+  if (g_opt_ascii) {
+    game->config.ascii_gl_width  = UI_FONT_ASCII_WIDTH / 10;
+    game->config.ascii_gl_height = UI_FONT_ASCII_HEIGHT / 10;
+  } else {
+    game->config.ascii_gl_width  = UI_FONT_LARGE_WIDTH;
+    game->config.ascii_gl_height = UI_FONT_LARGE_HEIGHT * 2;
+  }
 
   TERM_WIDTH  = game->config.ui_pix_width / game->config.ascii_gl_width;
   TERM_HEIGHT = game->config.ui_pix_height / game->config.ascii_gl_height;
