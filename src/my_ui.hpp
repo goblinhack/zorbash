@@ -48,7 +48,7 @@
 #define UI_TEXT_HIGHLIGHT_COLOR_STR  "white"
 #define UI_TILE_LARGE_HEIGHT         8
 #define UI_TILE_LARGE_WIDTH          8
-#define UI_TOPCON_HEIGHT             10 // Scrollbar limit
+#define UI_TOPCON_HEIGHT             3 // Scrollbar limit
 #define UI_TOPCON_TEXT_COLOR         UI_TEXT_COLOR
 #define UI_TOPCON_VIS_HEIGHT         UI_TOPCON_HEIGHT
 #define UI_TOPCON_VIS_WIDTH          UI_TOPCON_WIDTH
