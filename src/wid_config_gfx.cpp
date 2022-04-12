@@ -69,7 +69,7 @@ static uint8_t wid_config_ascii_mode_toggle(Widp w, int32_t x, int32_t y, uint32
   CON("INF: Toggle vsync");
   game->config.ascii_mode = ! game->config.ascii_mode;
   g_opt_ascii             = game->config.ascii_mode;
-  config_gfx_vsync_update();
+  sdl_config_update_all();
   game->wid_config_gfx_select();
 
   return true;
@@ -489,7 +489,7 @@ void Game::wid_config_gfx_select(void)
     auto w = wid_new_square_button(p, "Term size value");
 
     point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 12, y_at);
+    point br = make_point(width / 2 + 7, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
 
@@ -548,7 +548,7 @@ void Game::wid_config_gfx_select(void)
     auto w = wid_new_square_button(p, "Term size value");
 
     point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 12, y_at);
+    point br = make_point(width / 2 + 7, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
 
@@ -816,7 +816,7 @@ void Game::wid_config_gfx_select(void)
       wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
       wid_set_pos(w, tl, br);
 
-      wid_set_text(w, "Locked on");
+      wid_set_text(w, "True");
     }
   }
 

@@ -17,13 +17,19 @@ color bg2[ TERM_WIDTH_MAX * 2 ][ TERM_HEIGHT_MAX * 2 ];
 
 static void game_display_flames_tiles(int w, int h)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   float bright = 2.5;
 
   blit_init();
   auto tile = tile_find_mand("1.97");
-  auto tw   = game->config.ascii_gl_width / 2;
-  auto th   = game->config.ascii_gl_height / 2;
+  int  tw   = game->config.ascii_gl_width / 2;
+  int  th   = game->config.ascii_gl_height / 2;
+
+  //
+  // Account for rounding
+  //
+  int offset = game->config.ui_pix_height - (th * h);
+
   for (auto x = 0; x < w; x++) {
     for (auto y = 0; y < h - 1; y++) {
       auto c = bg[ x ][ y ];
@@ -71,7 +77,7 @@ static void game_display_flames_tiles(int w, int h)
 
       glcolor(cn);
 
-      tile_blit(tile, point(tw * x, th * (y + 3)), point(tw * (x + 1), th * (y + 4)));
+      tile_blit(tile, point(tw * x, (th * y) + offset), point(tw * (x + 1), (th * (y + 1)) + offset + 1));
     }
   }
   blit_flush();
@@ -79,7 +85,7 @@ static void game_display_flames_tiles(int w, int h)
 
 static void game_display_flames_change(int w, int h)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int flames = 3;
   while (flames--) {
     auto xr = non_pcg_random_range(w / 4, w - w / 4);
@@ -201,7 +207,7 @@ static void game_display_flames_change(int w, int h)
 
 void game_display_flames(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto w = TERM_WIDTH * 2;
   auto h = TERM_HEIGHT * 2;
   game_display_flames_tiles(w, h);

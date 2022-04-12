@@ -310,12 +310,12 @@ static void wid_main_menu_tick(Widp w)
 
   if (! g_opt_player_name.empty()) {
     auto player_name = "Player name: '" + g_opt_player_name + "'";
-    ascii_putf(1, TERM_HEIGHT - 4, YELLOW, BLACK, string_to_wstring(player_name));
+    ascii_putf(1, TERM_HEIGHT - 3, YELLOW, BLACK, string_to_wstring(player_name));
   }
 
   if (! g_opt_seed_name.empty()) {
     auto seed_name = "Seed: '" + g_opt_seed_name + "'";
-    ascii_putf(1, TERM_HEIGHT - 6, YELLOW, BLACK, string_to_wstring(seed_name));
+    ascii_putf(1, TERM_HEIGHT - 4, YELLOW, BLACK, string_to_wstring(seed_name));
   }
 }
 
@@ -338,8 +338,17 @@ void Game::wid_main_menu_select(void)
 
   game->wid_thing_info_destroy_immediate();
 
-  point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 27);
-  point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
+  auto box_height = g_opt_ascii ? 1 : 3;
+
+  int menu_height;
+  if (g_opt_ascii) {
+    menu_height = 9;
+  } else {
+    menu_height = 23;
+  }
+
+  point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - menu_height);
+  point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT);
   auto  width = br.x - tl.x - 2;
 
   wid_main_menu_window = new WidPopup("Main menu", tl, br, nullptr, "nothing", false, false);
@@ -358,85 +367,85 @@ void Game::wid_main_menu_select(void)
     auto w = wid_new_square_button(p, "New Game");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
+    point br = make_point(width, y_at + box_height - 1);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, game_menu_new_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$N%%fg=reset$ew game%%fg=reset$");
   }
-  y_at += 3;
+  y_at += box_height;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Choose player name");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
+    point br = make_point(width, y_at + box_height - 1);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, wid_choose_player_name);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose player name");
   }
-  y_at += 3;
+  y_at += box_height;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Load Game");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
+    point br = make_point(width, y_at + box_height - 1);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, wid_main_menu_load_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$L%%fg=" UI_TEXT_COLOR_STR "$oad game");
   }
-  y_at += 3;
+  y_at += box_height;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Options");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
+    point br = make_point(width, y_at + box_height - 1);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, wid_main_menu_config);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$O%%fg=" UI_TEXT_COLOR_STR "$ptions");
   }
-  y_at += 3;
+  y_at += box_height;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Credits");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
+    point br = make_point(width, y_at + box_height - 1);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, wid_main_menu_credits_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$redits");
   }
-  y_at += 3;
+  y_at += box_height;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Hiscores");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
+    point br = make_point(width, y_at + box_height - 1);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, wid_main_menu_hiscores);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$H%%fg=" UI_TEXT_COLOR_STR "$iscores");
   }
-  y_at += 3;
+  y_at += box_height;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Quit Game");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
+    point br = make_point(width, y_at + box_height - 1);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_on_mouse_up(w, wid_main_menu_quit_game);
     wid_set_pos(w, tl, br);
