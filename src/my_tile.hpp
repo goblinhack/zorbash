@@ -9,22 +9,21 @@
 
 #include "my_color.hpp"
 #include "my_fwd.hpp"
+#include "my_gl.hpp"
 #include "my_point.hpp"
 #include <array>
 
 using Tilemap = std::vector< class Tile * >;
 
 #define TILE_HEIGHT       game->config.tile_height
-#define TILE_HEIGHT_ASCII 48
 #define TILE_HEIGHT_LORES 16
 #define TILE_HEIGHT_MAX   64
 #define TILE_CURSOR       ((wchar_t) ('z' + 6))
-#define TILE_CURSOR_NAME  "1.97" // block
-#define TILE_UNKNOWN_NAME "1.31" // ?
+#define TILE_CURSOR_NAME  "3.98" // arrow
+#define TILE_UNKNOWN_NAME "3.99" // ??
 #define TILE_WIDTH        game->config.tile_width
-#define TILE_WIDTH_ASCII  48 // Tile size of the player
 #define TILE_WIDTH_LORES  16 // Tile size of the player
-#define TILE_WIDTH_MAX    64 // Largest tile for collisions
+#define TILE_WIDTH_MAX    32 // Largest tile for collisions
 
 class Tile
 {
@@ -215,19 +214,18 @@ void        tile_blit_outline_section(const Tilep &tile, const point tile_tl, co
 void        tile_blit_outline_section(uint16_t index, const point tile_tl, const point tile_br, const point tl,
                                       const point br);
 void        tile_blit_outline_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br,
-                                              const point tl, const point br, color color_bl, color color_br,
-                                              color color_tl, color color_tr);
+                                              const point tl, const point br, color color_bl, color color_br, color color_tl,
+                                              color color_tr);
 void        tile_blit_outline_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br,
-                                              const point tl, const point br, color color_bl, color color_br,
-                                              color color_tl, color color_tr, float scale);
+                                              const point tl, const point br, color color_bl, color color_br, color color_tl,
+                                              color color_tr, float scale);
 void  tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
                                         const point br, color color_bl, color color_br, color color_tl,
                                         color color_tr);
 void  tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
-                                        const point br, color color_bl, color color_br, color color_tl,
-                                        color color_tr, float scale);
-void  tile_blit_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl,
-                        const point br);
+                                        const point br, color color_bl, color color_br, color color_tl, color color_tr,
+                                        float scale);
+void  tile_blit_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl, const point br);
 void  tile_blit_section(uint16_t index, const point tile_tl, const point tile_br, const point tl, const point br);
 void  tile_blit_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
                                 const point br, color color_bl, color color_br, color color_tl, color color_tr);
@@ -248,10 +246,10 @@ void  tile_load_arr(std::string file, std::string tex_name, uint32_t width, uint
 void  tile_load_arr(std::string file, std::string tex_name, uint32_t width, uint32_t height, uint32_t nargs,
                     const char *arr[]);
 void  tile_load_arr_sprites(std::string file, std::string name, uint32_t width, uint32_t height,
-                            const std::vector< std::string > &arr);
+                            const std::vector< std::string > &arr, int gl_mode = GL_NEAREST);
 Tilep tile_find(std::string name);
 void  tile_load_arr_sprites(std::string file, std::string tex_name, uint32_t width, uint32_t height, uint32_t nargs,
-                            const char *arr[]);
+                            const char *arr[], int gl_mode = GL_NEAREST);
 int   tile_get_n(Tilemap *tmap, Tile *p);
 Tilep tile_get_frame(Tilemap *tmap, uint32_t frame);
 

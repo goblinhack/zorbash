@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_globals.hpp"
 #include "my_sdl.hpp"
+#include "my_sound.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_popup.hpp"
@@ -67,8 +68,10 @@ static uint8_t wid_config_ascii_mode_toggle(Widp w, int32_t x, int32_t y, uint32
   TRACE_AND_INDENT();
   CON("INF: Toggle vsync");
   game->config.ascii_mode = ! game->config.ascii_mode;
+  g_opt_ascii             = game->config.ascii_mode;
   config_gfx_vsync_update();
   game->wid_config_gfx_select();
+
   return true;
 }
 
@@ -194,6 +197,102 @@ static uint8_t wid_config_gfx_resolution_decr(Widp w, int32_t x, int32_t y, uint
       game->config.window_pix_width  = mode.w;
       game->config.window_pix_height = mode.h;
       local_g_need_restart           = true;
+    }
+  }
+  wid_config_gfx_save(nullptr, 0, 0, 0);
+  sdl_config_update_all();
+  game->wid_config_gfx_select();
+  return true;
+}
+
+static uint8_t wid_config_gfx_term_width_size_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+
+  CON("INF: Decrement term width");
+  if (g_opt_ascii) {
+    game->config.ui_ascii_term_width--;
+    if (game->config.ui_ascii_term_width < 1) {
+      sound_play("bonk");
+      game->config.ui_ascii_term_width = 1;
+    }
+  } else {
+    game->config.ui_gfx_term_width--;
+    if (game->config.ui_gfx_term_width < 1) {
+      sound_play("bonk");
+      game->config.ui_gfx_term_width = 1;
+    }
+  }
+  wid_config_gfx_save(nullptr, 0, 0, 0);
+  sdl_config_update_all();
+  game->wid_config_gfx_select();
+  return true;
+}
+
+static uint8_t wid_config_gfx_term_width_size_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+
+  CON("INF: Decrement term width");
+  if (g_opt_ascii) {
+    game->config.ui_ascii_term_width++;
+    if (game->config.ui_ascii_term_width > TERM_WIDTH_MAX) {
+      sound_play("bonk");
+      game->config.ui_ascii_term_width = TERM_WIDTH_MAX;
+    }
+  } else {
+    game->config.ui_gfx_term_width++;
+    if (game->config.ui_gfx_term_width > TERM_WIDTH_MAX) {
+      sound_play("bonk");
+      game->config.ui_gfx_term_width = TERM_WIDTH_MAX;
+    }
+  }
+  wid_config_gfx_save(nullptr, 0, 0, 0);
+  sdl_config_update_all();
+  game->wid_config_gfx_select();
+  return true;
+}
+
+static uint8_t wid_config_gfx_term_height_size_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+
+  CON("INF: Decrement term height");
+  if (g_opt_ascii) {
+    game->config.ui_ascii_term_height--;
+    if (game->config.ui_ascii_term_height < 1) {
+      sound_play("bonk");
+      game->config.ui_ascii_term_height = 1;
+    }
+  } else {
+    game->config.ui_gfx_term_height--;
+    if (game->config.ui_gfx_term_height < 1) {
+      sound_play("bonk");
+      game->config.ui_gfx_term_height = 1;
+    }
+  }
+  wid_config_gfx_save(nullptr, 0, 0, 0);
+  sdl_config_update_all();
+  game->wid_config_gfx_select();
+  return true;
+}
+
+static uint8_t wid_config_gfx_term_height_size_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+
+  CON("INF: Decrement term height");
+  if (g_opt_ascii) {
+    game->config.ui_ascii_term_height++;
+    if (game->config.ui_ascii_term_height > TERM_WIDTH_MAX) {
+      sound_play("bonk");
+      game->config.ui_ascii_term_height = TERM_WIDTH_MAX;
+    }
+  } else {
+    game->config.ui_gfx_term_height++;
+    if (game->config.ui_gfx_term_height > TERM_WIDTH_MAX) {
+      sound_play("bonk");
+      game->config.ui_gfx_term_height = TERM_WIDTH_MAX;
     }
   }
   wid_config_gfx_save(nullptr, 0, 0, 0);
@@ -366,6 +465,158 @@ void Game::wid_config_gfx_select(void)
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_resolution_decr);
     wid_set_text(w, "-");
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // terminal width
+  /////////////////////////////////////////////////////////////////////////
+  y_at += 1;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Term width");
+
+    point tl = make_point(0, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Term width");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Term size value");
+
+    point tl = make_point(width / 2, y_at);
+    point br = make_point(width / 2 + 12, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+
+    if (g_opt_ascii) {
+      auto res = std::to_string(game->config.ui_ascii_term_width);
+      wid_set_text(w, res);
+    } else {
+      auto res = std::to_string(game->config.ui_gfx_term_width);
+      wid_set_text(w, res);
+    }
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Term width value +");
+
+    point tl = make_point(width / 2 + 13, y_at);
+    point br = make_point(width / 2 + 15, y_at);
+    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_gfx_term_width_size_incr);
+    wid_set_text(w, "+");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Term width value -");
+
+    point tl = make_point(width / 2 + 16, y_at);
+    point br = make_point(width / 2 + 18, y_at);
+    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_gfx_term_width_size_decr);
+    wid_set_text(w, "-");
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // terminal height
+  /////////////////////////////////////////////////////////////////////////
+  y_at += 1;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Term height");
+
+    point tl = make_point(0, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Term height");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Term size value");
+
+    point tl = make_point(width / 2, y_at);
+    point br = make_point(width / 2 + 12, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+
+    if (g_opt_ascii) {
+      auto res = std::to_string(game->config.ui_ascii_term_height);
+      wid_set_text(w, res);
+    } else {
+      auto res = std::to_string(game->config.ui_gfx_term_height);
+      wid_set_text(w, res);
+    }
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Term height value +");
+
+    point tl = make_point(width / 2 + 13, y_at);
+    point br = make_point(width / 2 + 15, y_at);
+    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_gfx_term_height_size_incr);
+    wid_set_text(w, "+");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Term height value -");
+
+    point tl = make_point(width / 2 + 16, y_at);
+    point br = make_point(width / 2 + 18, y_at);
+    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_gfx_term_height_size_decr);
+    wid_set_text(w, "-");
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // ASCII
+  /////////////////////////////////////////////////////////////////////////
+  y_at += 1;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Ascii mode");
+
+    point tl = make_point(0, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Ascii");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Ascii mode");
+
+    point tl = make_point(width / 2, y_at);
+    point br = make_point(width / 2 + 10, y_at);
+    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_pos(w, tl, br);
+    wid_set_on_mouse_up(w, wid_config_ascii_mode_toggle);
+
+    if (game->config.ascii_mode) {
+      wid_set_text(w, "True");
+    } else {
+      wid_set_text(w, "False");
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -631,40 +882,6 @@ void Game::wid_config_gfx_select(void)
     wid_set_on_mouse_up(w, wid_config_other_fps_counter_toggle);
 
     if (game->config.fps_counter) {
-      wid_set_text(w, "True");
-    } else {
-      wid_set_text(w, "False");
-    }
-  }
-
-  /////////////////////////////////////////////////////////////////////////
-  // ASCII
-  /////////////////////////////////////////////////////////////////////////
-  y_at += 1;
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Ascii mode");
-
-    point tl = make_point(0, y_at);
-    point br = make_point(width / 2, y_at);
-    wid_set_shape_none(w);
-    wid_set_pos(w, tl, br);
-    wid_set_text_lhs(w, true);
-    wid_set_text(w, "Ascii");
-  }
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Ascii mode");
-
-    point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 10, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
-    wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_config_ascii_mode_toggle);
-
-    if (game->config.ascii_mode) {
       wid_set_text(w, "True");
     } else {
       wid_set_text(w, "False");

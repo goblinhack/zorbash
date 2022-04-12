@@ -429,14 +429,14 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 }
 
 void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, uint32_t height, uint32_t nargs,
-                           const char *arr[])
+                           const char *arr[], int gl_mode)
 {
   TRACE_AND_INDENT();
   Texp tex;
   Texp tex_black_and_white;
   Texp tex_mask;
 
-  tex_load(&tex, &tex_black_and_white, &tex_mask, file, name, GL_NEAREST);
+  tex_load(&tex, &tex_black_and_white, &tex_mask, file, name, gl_mode);
 
   float fw = 1.0 / (((float) tex_get_width(tex)) / ((float) width));
   float fh = 1.0 / (((float) tex_get_height(tex)) / ((float) height));
@@ -584,14 +584,14 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 }
 
 void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, uint32_t height,
-                           const std::vector< std::string > &arr)
+                           const std::vector< std::string > &arr, int gl_mode)
 {
   TRACE_AND_INDENT();
   Texp tex;
   Texp tex_black_and_white;
   Texp tex_mask;
 
-  tex_load(&tex, &tex_black_and_white, &tex_mask, file, name, GL_NEAREST);
+  tex_load(&tex, &tex_black_and_white, &tex_mask, file, name, gl_mode);
 
   float fw = 1.0 / (((float) tex_get_width(tex)) / ((float) width));
   float fh = 1.0 / (((float) tex_get_height(tex)) / ((float) height));
@@ -1146,17 +1146,16 @@ void tile_blit(const Tilep &tile, const point tl, const point br, const color &c
   y1 = tile->y1;
   y2 = tile->y2;
 
-  auto binding = tile->gl_binding_mask();
+  auto binding = tile->gl_binding();
   glcolor(c);
-  binding = tile->gl_binding();
   blit(binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
 //
 // Blits a whole tile. Y co-ords are inverted.
 //
-static void tile_blit_outline_section(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br,
-                                      const point tl, const point br, float scale)
+static void tile_blit_outline_section(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
+                                      const point br, float scale)
 {
   float x1, x2, y1, y2;
 
@@ -1235,8 +1234,7 @@ void tile_blit(const Tilep &tile, const point tl, const point tr, const point bl
 
 void tile_blit(uint16_t index, const point tl, const point br) { tile_blit(tile_index_to_tile(index), tl, br); }
 
-void tile_blit_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl,
-                       const point br)
+void tile_blit_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl, const point br)
 {
   float x1, x2, y1, y2;
 
@@ -1296,30 +1294,29 @@ void tile_blit_section_colored(uint16_t index, const fpoint &tile_tl, const fpoi
 }
 
 void tile_blit_outline_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br,
-                                       const point tl, const point br, color color_bl, color color_br,
-                                       color color_tl, color color_tr)
+                                       const point tl, const point br, color color_bl, color color_br, color color_tl,
+                                       color color_tr)
 {
   tile_blit_outline_section(tile, tile_tl, tile_br, tl, br, 0.75);
 }
 
 void tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
-                                       const point br, color color_bl, color color_br, color color_tl,
-                                       color color_tr)
+                                       const point br, color color_bl, color color_br, color color_tl, color color_tr)
 {
   tile_blit_outline_section_colored(tile_index_to_tile(index), tile_tl, tile_br, tl, br, color_bl, color_br, color_tl,
                                     color_tr);
 }
 
 void tile_blit_outline_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br,
-                                       const point tl, const point br, color color_bl, color color_br,
-                                       color color_tl, color color_tr, float scale)
+                                       const point tl, const point br, color color_bl, color color_br, color color_tl,
+                                       color color_tr, float scale)
 {
   tile_blit_outline_section(tile, tile_tl, tile_br, tl, br, scale);
 }
 
 void tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
-                                       const point br, color color_bl, color color_br, color color_tl,
-                                       color color_tr, float scale)
+                                       const point br, color color_bl, color color_br, color color_tl, color color_tr,
+                                       float scale)
 {
   tile_blit_outline_section_colored(tile_index_to_tile(index), tile_tl, tile_br, tl, br, color_bl, color_br, color_tl,
                                     color_tr, scale);

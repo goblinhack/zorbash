@@ -21,7 +21,7 @@
 #undef ENABLE_DEBUG_MEM_LEAKS    // Check for leaks at exit
 #undef ENABLE_DEBUG_PTRCHECK     // (VERY SLOW) Debug ptrcheck itself
 #undef ENABLE_DEBUG_THING_SER    // Extra debugging in thing save/load
-#undef ENABLE_DEBUG_TILE         // Astar AI path costs
+#undef ENABLE_DEBUG_TILE         // Debug tile loading
 #undef ENABLE_DEBUG_UI2          // User interface logs with inheritance
 #undef ENABLE_DEBUG_UI_FOCUS     // Which windows we are over
 #undef ENABLE_DEBUG_UI           // User interface logs

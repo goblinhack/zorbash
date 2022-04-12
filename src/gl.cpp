@@ -429,44 +429,44 @@ void fbo_get_size(int fbo, int &w, int &h)
   h = game->config.game_pix_height;
 
   switch (fbo) {
-    case FBO_MAP :
-    case FBO_MAP_HIDDEN :
-    case FBO_MAP_VISIBLE :
-    case FBO_PLAYER_VISIBLE_LIGHTING :
-    case FBO_SCREEN_FADE_IN_AND_OUT :
-    case FBO_SMALL_POINT_LIGHTS :
+    case FBO_MAP:
+    case FBO_MAP_HIDDEN:
+    case FBO_MAP_VISIBLE:
+    case FBO_PLAYER_VISIBLE_LIGHTING:
+    case FBO_SCREEN_FADE_IN_AND_OUT:
+    case FBO_SMALL_POINT_LIGHTS:
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;
-    case FBO_MASK1 :
-    case FBO_MASK2 :
-    case FBO_MASK3 :
-    case FBO_MASK4 :
+    case FBO_MASK1:
+    case FBO_MASK2:
+    case FBO_MASK3:
+    case FBO_MASK4:
       w = game->config.game_pix_width;
       h = game->config.game_pix_height;
       break;
-    case FBO_MAP_MINI :
+    case FBO_MAP_MINI:
       w = MAP_WIDTH;
       h = MAP_HEIGHT;
       break;
-    case FBO_FULLMAP :
-    case FBO_FULLMAP_LIGHT :
-    case FBO_FULLMAP_VISITED :
+    case FBO_FULLMAP:
+    case FBO_FULLMAP_LIGHT:
+    case FBO_FULLMAP_VISITED:
       w = TILE_WIDTH * MAP_WIDTH;
       h = TILE_HEIGHT * MAP_HEIGHT;
       break;
-    case FBO_FULLMAP_MASK1 :
-    case FBO_FULLMAP_MASK2 :
-    case FBO_FULLMAP_MASK3 :
-    case FBO_FULLMAP_MASK4 :
+    case FBO_FULLMAP_MASK1:
+    case FBO_FULLMAP_MASK2:
+    case FBO_FULLMAP_MASK3:
+    case FBO_FULLMAP_MASK4:
       w = TILE_WIDTH * MAP_WIDTH;
       h = TILE_HEIGHT * MAP_HEIGHT;
       break;
-    case FBO_WID :
+    case FBO_WID:
       w = game->config.ui_pix_width;
       h = game->config.ui_pix_height;
       break;
-    case FBO_FINAL :
+    case FBO_FINAL:
       w = game->config.window_pix_width;
       h = game->config.window_pix_height;
       break;

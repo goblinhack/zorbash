@@ -6638,6 +6638,7 @@ void wid_display_all(void)
   gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
 
   blit_fbo_bind_locked(FBO_WID);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glClear(GL_COLOR_BUFFER_BIT);
   glcolor(WHITE);
 
