@@ -12,10 +12,14 @@
 #include <array>
 #include <wchar.h>
 
-#define TERM_HEIGHT_DEF 120
-#define TERM_HEIGHT_MAX TERM_HEIGHT_DEF
-#define TERM_WIDTH_DEF  120
-#define TERM_WIDTH_MAX  TERM_WIDTH_DEF
+#define TERM_ASCII_WIDTH_DEF  100
+#define TERM_ASCII_HEIGHT_DEF 34
+
+#define TERM_GFX_WIDTH_DEF  120
+#define TERM_GFX_HEIGHT_DEF 80
+
+#define TERM_WIDTH_MAX  160
+#define TERM_HEIGHT_MAX 120
 
 typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_Keysym *key);
 typedef int (*ascii_mouse_down_callback)(int x, int y, int button);

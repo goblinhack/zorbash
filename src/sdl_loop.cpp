@@ -11,6 +11,7 @@
 #include "my_random.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
+#include "my_tile.hpp"
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
@@ -239,54 +240,7 @@ void sdl_loop(void)
     }
 
     pcg_random_allowed = false;
-    {
-      blit_fbo_bind(FBO_FINAL);
-      glClear(GL_COLOR_BUFFER_BIT);
-      glcolor(WHITE);
-      glBlendFunc(GL_ONE, GL_ZERO);
-      blit_fbo_window_pix(FBO_MAP);
-
-      //
-      // Draw the map
-      //
-      if (likely(game->level != nullptr)) {
-        game->level->display_map_mini();
-      }
-
-      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-      blit_fbo_window_pix(FBO_WID);
-      blit_fbo_unbind();
-
-      glBlendFunc(GL_ONE, GL_ZERO);
-      if (unlikely(game->config.gfx_inverted)) {
-        glLogicOp(GL_COPY_INVERTED);
-        glEnable(GL_COLOR_LOGIC_OP);
-        blit_fbo_window_pix(FBO_FINAL);
-        glLogicOp(GL_COPY);
-        glDisable(GL_COLOR_LOGIC_OP);
-      } else {
-        blit_fbo_window_pix(FBO_FINAL);
-      }
-
-      //
-      // Screenshot?
-      //
-      if (unlikely(g_do_screenshot)) {
-        g_do_screenshot = 0;
-        sdl_screenshot_do();
-      }
-
-      SDL_Delay(game->config.sdl_delay);
-
-      //
-      // Flip
-      //
-      if (likely(game->config.gfx_vsync_locked)) {
-        SDL_GL_SwapWindow(sdl_window);
-      } else {
-        glFlush();
-      }
-    }
+    sdl_display();
     pcg_random_allowed = true;
 
     //

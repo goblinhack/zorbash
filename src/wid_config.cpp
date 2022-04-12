@@ -37,9 +37,11 @@ void Config::reset(void)
   tile_pixel_width      = {};
   tile_pix_height       = {};
   tile_pix_width        = {};
-  ui_pix_scale_height   = {};
-  ui_pix_scale_width    = {};
   ui_pix_zoom           = GAME_DEFAULT_UI_ZOOM;
+  ui_ascii_term_height  = {TERM_ASCII_HEIGHT_DEF};
+  ui_ascii_term_width   = {TERM_ASCII_WIDTH_DEF};
+  ui_gfx_term_height    = {TERM_GFX_HEIGHT_DEF};
+  ui_gfx_term_width     = {TERM_GFX_WIDTH_DEF};
   video_w_h_ratio       = {};
 #ifdef __linux__
   //

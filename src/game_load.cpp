@@ -837,22 +837,19 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
     return in;
   }
 
+  in >> bits(g_opt_player_name);
+  in >> bits(my.t.ascii_gl_height);
+  in >> bits(my.t.ascii_gl_width);
+  in >> bits(my.t.ascii_mode);
+  in >> bits(my.t.config_pix_height);
+  in >> bits(my.t.config_pix_width);
+  in >> bits(my.t.debug_mode);
+  in >> bits(my.t.fps_counter);
+  in >> bits(my.t.game_pix_height);
   in >> bits(my.t.game_pix_scale_height);
   in >> bits(my.t.game_pix_scale_width);
+  in >> bits(my.t.game_pix_width);
   in >> bits(my.t.game_pix_zoom);
-  in >> bits(my.t.one_pixel_height);
-  in >> bits(my.t.one_pixel_width);
-  in >> bits(my.t.tile_pix_height);
-  in >> bits(my.t.tile_pix_width);
-  in >> bits(my.t.tile_pixel_height);
-  in >> bits(my.t.tile_pixel_width);
-  in >> bits(my.t.ui_pix_scale_height);
-  in >> bits(my.t.ui_pix_scale_width);
-  in >> bits(my.t.ui_pix_zoom);
-  in >> bits(my.t.video_w_h_ratio);
-  in >> bits(my.t.debug_mode);
-  in >> bits(my.t.ascii_mode);
-  in >> bits(my.t.fps_counter);
   in >> bits(my.t.gfx_allow_highdpi);
   in >> bits(my.t.gfx_borderless);
   in >> bits(my.t.gfx_fullscreen);
@@ -860,18 +857,6 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.gfx_inverted);
   in >> bits(my.t.gfx_show_hidden);
   in >> bits(my.t.gfx_vsync_enable);
-  in >> bits(my.t.tile_height);
-  in >> bits(my.t.tile_width);
-  in >> bits(my.t.config_pix_height);
-  in >> bits(my.t.config_pix_width);
-  in >> bits(my.t.game_pix_height);
-  in >> bits(my.t.game_pix_width);
-  in >> bits(my.t.ui_pix_height);
-  in >> bits(my.t.ui_pix_width);
-  in >> bits(my.t.window_pix_height);
-  in >> bits(my.t.window_pix_width);
-  in >> bits(my.t.ascii_gl_height);
-  in >> bits(my.t.ascii_gl_width);
   in >> bits(my.t.key_action0);
   in >> bits(my.t.key_action1);
   in >> bits(my.t.key_action2);
@@ -882,8 +867,10 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.key_action7);
   in >> bits(my.t.key_action8);
   in >> bits(my.t.key_action9);
+  in >> bits(my.t.key_ascend);
   in >> bits(my.t.key_attack);
   in >> bits(my.t.key_console);
+  in >> bits(my.t.key_descend);
   in >> bits(my.t.key_drop);
   in >> bits(my.t.key_eat);
   in >> bits(my.t.key_help);
@@ -903,17 +890,32 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.key_save);
   in >> bits(my.t.key_screenshot);
   in >> bits(my.t.key_throw);
-  in >> bits(my.t.key_descend);
-  in >> bits(my.t.key_ascend);
   in >> bits(my.t.key_use);
   in >> bits(my.t.key_wait_or_collect);
   in >> bits(my.t.key_zoom_in);
   in >> bits(my.t.key_zoom_out);
   in >> bits(my.t.music_volume);
+  in >> bits(my.t.one_pixel_height);
+  in >> bits(my.t.one_pixel_width);
   in >> bits(my.t.sdl_delay);
   in >> bits(my.t.snapshot_freq);
   in >> bits(my.t.sound_volume);
-  in >> bits(g_opt_player_name);
+  in >> bits(my.t.tile_height);
+  in >> bits(my.t.tile_pixel_height);
+  in >> bits(my.t.tile_pixel_width);
+  in >> bits(my.t.tile_pix_height);
+  in >> bits(my.t.tile_pix_width);
+  in >> bits(my.t.tile_width);
+  in >> bits(my.t.ui_pix_height);
+  in >> bits(my.t.ui_pix_width);
+  in >> bits(my.t.ui_pix_zoom);
+  in >> bits(my.t.ui_ascii_term_height);
+  in >> bits(my.t.ui_ascii_term_width);
+  in >> bits(my.t.ui_gfx_term_height);
+  in >> bits(my.t.ui_gfx_term_width);
+  in >> bits(my.t.video_w_h_ratio);
+  in >> bits(my.t.window_pix_height);
+  in >> bits(my.t.window_pix_width);
   // seed name handled below
 
   if (! g_opt_override_debug_level) {

@@ -77,8 +77,8 @@ void Config::dump(std::string pfx)
 
   LOG("%s ascii_gl_height        %u", pfx.c_str(), ascii_gl_height);
   LOG("%s ascii_gl_width         %u", pfx.c_str(), ascii_gl_width);
-  LOG("%s debug_mode             %u", pfx.c_str(), debug_mode);
   LOG("%s ascii_mode             %u", pfx.c_str(), ascii_mode);
+  LOG("%s debug_mode             %u", pfx.c_str(), debug_mode);
   LOG("%s fps_counter            %u", pfx.c_str(), fps_counter);
   LOG("%s game_pix_height        %u", pfx.c_str(), game_pix_height);
   LOG("%s game_pix_scale_height  %f", pfx.c_str(), game_pix_scale_height);
@@ -87,8 +87,8 @@ void Config::dump(std::string pfx)
   LOG("%s game_pix_zoom          %f", pfx.c_str(), game_pix_zoom);
   LOG("%s gfx_allow_highdpi      %u", pfx.c_str(), gfx_allow_highdpi);
   LOG("%s gfx_borderless         %u", pfx.c_str(), gfx_borderless);
-  LOG("%s gfx_fullscreen         %u", pfx.c_str(), gfx_fullscreen);
   LOG("%s gfx_fullscreen_desktop %u", pfx.c_str(), gfx_fullscreen_desktop);
+  LOG("%s gfx_fullscreen         %u", pfx.c_str(), gfx_fullscreen);
   LOG("%s gfx_inverted           %u", pfx.c_str(), gfx_inverted);
   LOG("%s gfx_show_hidden        %u", pfx.c_str(), gfx_show_hidden);
   LOG("%s gfx_vsync_enable       %u", pfx.c_str(), gfx_vsync_enable);
@@ -98,15 +98,17 @@ void Config::dump(std::string pfx)
   LOG("%s sdl_delay              %u", pfx.c_str(), sdl_delay);
   LOG("%s snapshot_freq          %u", pfx.c_str(), snapshot_freq);
   LOG("%s sound_volume           %u", pfx.c_str(), sound_volume);
-  LOG("%s tile_pix_height        %f", pfx.c_str(), tile_pix_height);
-  LOG("%s tile_pix_width         %f", pfx.c_str(), tile_pix_width);
   LOG("%s tile_pixel_height      %f", pfx.c_str(), tile_pixel_height);
   LOG("%s tile_pixel_width       %f", pfx.c_str(), tile_pixel_width);
+  LOG("%s tile_pix_height        %f", pfx.c_str(), tile_pix_height);
+  LOG("%s tile_pix_width         %f", pfx.c_str(), tile_pix_width);
   LOG("%s ui_pix_height          %u", pfx.c_str(), ui_pix_height);
-  LOG("%s ui_pix_scale_height    %f", pfx.c_str(), ui_pix_scale_height);
-  LOG("%s ui_pix_scale_width     %f", pfx.c_str(), ui_pix_scale_width);
   LOG("%s ui_pix_width           %u", pfx.c_str(), ui_pix_width);
   LOG("%s ui_pix_zoom            %f", pfx.c_str(), ui_pix_zoom);
+  LOG("%s ui_ascii_term_height   %u", pfx.c_str(), ui_ascii_term_height);
+  LOG("%s ui_ascii_term_width    %u", pfx.c_str(), ui_ascii_term_width);
+  LOG("%s ui_gfx_term_height     %u", pfx.c_str(), ui_gfx_term_height);
+  LOG("%s ui_gfx_term_width      %u", pfx.c_str(), ui_gfx_term_width);
   LOG("%s video_w_h_ratio        %f", pfx.c_str(), video_w_h_ratio);
   LOG("%s window_pix_height      %u", pfx.c_str(), window_pix_height);
   LOG("%s window_pix_width       %u", pfx.c_str(), window_pix_width);

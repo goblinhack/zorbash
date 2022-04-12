@@ -171,14 +171,8 @@ void pixel_to_ascii(int *x, int *y)
   float mx = *x;
   float my = *y;
 
-  float w = game->config.window_pix_width;
-  float h = game->config.window_pix_height;
-
-  mx /= w;
-  my /= h;
-
-  mx *= TERM_WIDTH;
-  my *= TERM_HEIGHT;
+  mx /= game->config.ascii_gl_width;
+  my /= game->config.ascii_gl_height;
 
   if (mx >= TERM_WIDTH - 1) {
     mx = TERM_WIDTH - 1;
@@ -1025,7 +1019,7 @@ void ascii_putf(int x, int y, color fg, color bg, const std::wstring fmt, ...)
 static void ascii_display_mouse(point mouse_tile_tl, point mouse_tile_br, point mouse_at)
 {
   TRACE_NO_INDENT();
-  glcolor(GREEN);
+  glcolor(WHITE);
 
   blit_init();
   tile_blit(tile_find_mand(TILE_CURSOR_NAME), point(mouse_tile_tl.x, mouse_tile_tl.y),
