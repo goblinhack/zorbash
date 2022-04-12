@@ -51,7 +51,6 @@ static Fontp font_load(std::string name)
     }
 
     f->u_to_c[ c ] = d;
-    f->valid[ d ]  = true;
     c++;
     d++;
   }

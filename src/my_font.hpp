@@ -30,7 +30,6 @@ public:
   Font(void) {}
   ~Font(void) {}
   std::array< int, FONT_MAX_CHAR + 1 >   u_to_c {};
-  std::array< int, FONT_MAX_CHAR + 1 >   valid {};
   std::array< Tilep, FONT_MAX_CHAR + 1 > cache {};
   int                                    tile_index;
   Tilep                                  unicode_to_tile(int u);
