@@ -33,7 +33,6 @@
 #define UI_HEALTH_ICON_STEPS         5
 #define UI_INVENTORY_QUICK_ITEMS_MAX 10
 #define UI_LOGGING_EMPTY_LINE        "`" // Complete hack, char I use to force space
-#define UI_MAP_MINI_SIZE             0.155
 #define UI_MOUSE_DOUBLE_CLICK        500 // Double click time
 #define UI_MOUSE_WHEEL_SCALE         1.0 // How much the wheel mouse moves.
 #define UI_MOUSE_WHEEL_SCALE_MAX     10
@@ -58,7 +57,7 @@
 #define UI_WID_POPUP_WIDTH_NORMAL    24
 #define UI_WID_POPUP_WIDTH_WIDE      38
 #define UI_WID_POPUP_WIDTH_WIDEST    48
-#define UI_WID_SAVE_SLOTS            40 // How many save game slots
+#define UI_WID_SAVE_SLOTS            20 // How many save game slots
 
 #define UI_WID_STYLE_SPARSE_NONE   -1
 #define UI_WID_STYLE_SOLID_NONE    0
