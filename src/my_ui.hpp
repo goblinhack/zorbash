@@ -24,8 +24,8 @@
 #define UI_CURSOR_OTHER_COLOR        WHITE
 #define UI_FONT_LARGE_HEIGHT         8
 #define UI_FONT_LARGE_WIDTH          8
-#define UI_FONT_ASCII_HEIGHT         128
-#define UI_FONT_ASCII_WIDTH          232
+#define UI_FONT_ASCII_HEIGHT         232
+#define UI_FONT_ASCII_WIDTH          128
 #define UI_FONT_PIXEL_SIZE           6
 #define UI_FONT_SMALL_HEIGHT         8
 #define UI_FONT_SMALL_WIDTH          6
