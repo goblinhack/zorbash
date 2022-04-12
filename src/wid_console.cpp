@@ -10,7 +10,6 @@
 #include "my_game.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
-#include "my_ttf.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_console.hpp"

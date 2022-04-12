@@ -4,6 +4,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_font.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_player.hpp"
@@ -264,10 +265,6 @@ uint8_t sdl_init(void)
   // Don't use this. It seemed to mess up graphics on FireGL.
   //
   SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-
-#ifdef ENABLE_GENERATE_TTF
-  return true;
-#endif
 
   uint32_t video_unused_flags;
 
@@ -1171,6 +1168,13 @@ void sdl_flush_display(bool force)
 void config_game_pix_zoom_update(void)
 {
   TRACE_NO_INDENT();
+
+  if (g_opt_ascii) {
+    font_ui = font_ascii;
+  } else {
+    font_ui = font_large;
+  }
+
   game->config.tile_width  = TILE_WIDTH_LORES;
   game->config.tile_height = TILE_HEIGHT_LORES;
 

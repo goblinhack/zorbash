@@ -8,7 +8,6 @@
 #include "my_sdl.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
-#include "my_ttf.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
 #include "my_wid_actionbar.hpp"
