@@ -645,7 +645,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     if (unlikely(! tile)) {
       tile = font_ui->unicode_to_tile(c);
       if (tile == nullptr) {
-        tile = tile_find_mand(TILE_UNKNOWN_NAME);
+        tile = tile_find_mand(TILE_UNKNOWN);
       }
     }
 
@@ -684,7 +684,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
       if (bg.r || bg.g || bg.b || bg.a) {
         static Tilep tile;
         if (unlikely(! tile)) {
-          tile = tile_find_mand(TILE_CURSOR_NAME);
+          tile = tile_find_mand(TILE_BLOCK);
         }
         cell->bg_tile = tile;
       } else {
@@ -1022,7 +1022,7 @@ static void ascii_display_mouse(point mouse_tile_tl, point mouse_tile_br, point 
   glcolor(WHITE);
 
   blit_init();
-  tile_blit(tile_find_mand(TILE_CURSOR_NAME), point(mouse_tile_tl.x, mouse_tile_tl.y),
+  tile_blit(tile_find_mand(TILE_POINTER), point(mouse_tile_tl.x, mouse_tile_tl.y),
             point(mouse_tile_br.x, mouse_tile_br.y));
   blit_flush();
   //
