@@ -21,7 +21,7 @@ class WidPopup;
 #define GAME_MONST_HEALTH_BAR_STEPS 16
 #define GAME_MOST_ZOOMED_IN         5
 #define GAME_MOST_ZOOMED_OUT        1
-#define GAME_DEFAULT_UI_ZOOM        2
+#define GAME_DEFAULT_UI_ZOOM        1
 #define GAME_DEFAULT_PIX_ZOOM       4
 
 typedef class Config_

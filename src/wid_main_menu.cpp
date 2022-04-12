@@ -338,7 +338,7 @@ void Game::wid_main_menu_select(void)
 
   game->wid_thing_info_destroy_immediate();
 
-  point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 23);
+  point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - 27);
   point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
   auto  width = br.x - tl.x - 2;
 
