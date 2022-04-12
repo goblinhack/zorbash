@@ -4,20 +4,22 @@
 //
 
 #include "my_array_bounds_check.hpp"
+#include "my_font.hpp"
 #include "my_main.hpp"
 #include "my_sys.hpp"
-#include "my_ttf.hpp"
 #include "my_ui.hpp"
 #include <map>
 
 Fontp font_small;
 Fontp font_large;
+Fontp font_ascii;
+Fontp font_ui;
 
 static std::map< std::string, Fontp > fonts;
 
 void font_fini(void) { TRACE_AND_INDENT(); }
 
-static Fontp font_load(std::string name, std::string file, int size, int style)
+static Fontp font_load(std::string name)
 {
   TRACE_AND_INDENT();
   auto f = font_find(name);
@@ -31,7 +33,7 @@ static Fontp font_load(std::string name, std::string file, int size, int style)
     return 0;
   }
 
-  f = ttf_new(file, size, style);
+  f = new Font();
 
   auto result = fonts.insert(std::make_pair(name, f));
 
@@ -40,9 +42,19 @@ static Fontp font_load(std::string name, std::string file, int size, int style)
     return f;
   }
 
-#ifdef ENABLE_GENERATE_TTF
-  ttf_read_tga(f, file.c_str(), size);
-#endif
+  uint32_t d = 0;
+  uint32_t c = FONT_MIN_CHAR;
+
+  while (d < FONT_MAX_CHAR) {
+    if (c >= FONT_MAX_CHAR) {
+      break;
+    }
+
+    f->u_to_c[ c ] = d;
+    f->valid[ d ]  = true;
+    c++;
+    d++;
+  }
 
   return f;
 }
@@ -63,31 +75,14 @@ Fontp font_find(std::string file)
   return (result->second);
 }
 
-uint8_t font_init(void)
-{
-  TRACE_AND_INDENT();
-#ifdef ENABLE_GENERATE_TTF
-  //
-  // Generate bitmaps from TTF.
-  //
-  auto tmp = std::string(TTF_PATH) + mybasename(UI_FONT_NAME, __FUNCTION__);
-  ttf_write_tga(tmp, UI_FONT_PIXEL_SIZE, TTF_STYLE_NORMAL);
-
-  DIE("Generated fonts");
-#endif
-
-  font_small             = font_load("font-small", (char *) UI_FONT_NAME, UI_FONT_SMALL_WIDTH, TTF_STYLE_NORMAL);
-  font_small->tile_index = 1;
-
-  font_large             = font_load("font-large", (char *) UI_FONT_NAME, UI_FONT_LARGE_WIDTH, TTF_STYLE_NORMAL);
-  font_large->tile_index = 2;
-
-  return true;
-}
-
 Tilep Font::unicode_to_tile(int u)
 {
-  if ((u < 0) || (u >= TTF_GLYPH_MAX)) {
+  Font *me = this;
+  if (unlikely(! me)) {
+    DIE("No font");
+  }
+
+  if ((u < 0) || (u >= FONT_MAX_CHAR)) {
     if (u == L'?') {
       ERR("unicode char 0x%X/%d -> bad index", u, u);
       return (unicode_to_tile(L'?'));
@@ -100,7 +95,7 @@ Tilep Font::unicode_to_tile(int u)
 
   auto index = get(this->u_to_c, u);
 
-  if ((index < 0) || (index >= TTF_GLYPH_MAX)) {
+  if ((index < 0) || (index >= FONT_MAX_CHAR)) {
     if (u == L'?') {
       ERR("unicode char 0x%X/%d -> bad index %d", u, u, index);
       return (unicode_to_tile(L'?'));
@@ -133,4 +128,26 @@ Tilep Font::unicode_to_tile(int u)
   set(this->cache, index, tile);
 
   return (tile);
+}
+
+uint8_t font_init(void)
+{
+  TRACE_AND_INDENT();
+
+  font_small             = font_load("font-small");
+  font_small->tile_index = 1;
+
+  font_large             = font_load("font-large");
+  font_large->tile_index = 2;
+
+  font_ascii             = font_load("font-ascii");
+  font_ascii->tile_index = 3;
+
+  if (g_opt_ascii) {
+    font_ui = font_ascii;
+  } else {
+    font_ui = font_large;
+  }
+
+  return true;
 }

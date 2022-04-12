@@ -53,7 +53,6 @@ ubuntu_help_full()
     log_warn "For Fedora, you may need to install:"
     log_warn "  dnf install -y findutils"
     log_warn "  dnf install -y SDL2_mixer-devel SDL2_mixer"
-    log_warn "  dnf install -y SDL2_ttf-devel SDL2_ttf"
     log_warn "  dnf install -y SDL2 SDL2-devel"
     log_warn "  dnf install -y SDL2_image SDL2_image-devel"
     log_warn "  dnf install -y python3"
@@ -82,8 +81,6 @@ ubuntu_help_full()
     log_warn "  apt-get install -y libsdl2-dev"
     log_warn "  apt-get install -y libsdl2-mixer-2.0-0"
     log_warn "  apt-get install -y libsdl2-mixer-dev"
-    log_warn "  apt-get install -y libsdl2-ttf-2.0-0"
-    log_warn "  apt-get install -y libsdl2-ttf-dev"
     log_warn "  apt-get install -y libsmpeg-dev"
     log_warn "  apt-get install -y libx11-6"
     log_warn "  apt-get install -y libxext6"
@@ -103,13 +100,11 @@ sdl_help()
         log_warn "Try:"
         log_warn "  pacman -S mingw-w64-x86_64-SDL2"
         log_warn "  pacman -S mingw-w64-x86_64-SDL2_mixer"
-        log_warn "  pacman -S mingw-w64-x86_64-SDL2_ttf"
         ;;
     *Darwin*)
         log_warn "Install MAC ports then install:"
         log_warn "  sudo port install libsdl2"
         log_warn "  sudo port install libsdl2_mixer"
-        log_warn "  sudo port install libsdl2_ttf"
         ;;
     *)
         ubuntu_help_full
@@ -151,12 +146,6 @@ if [ "$SDL2_CONFIG" != "" ]; then
             SDL2_SCORE=`expr $SDL2_SCORE + 1`
             SDL2_MIXER=`find $SDL2_INC_PATH -name SDL_mixer.h`
         fi
-
-        find $SDL2_INC_PATH | grep -q SDL_ttf.h
-        if [ $? -eq 0 ]; then
-            SDL2_SCORE=`expr $SDL2_SCORE + 1`
-            SDL2_TTF=`find $SDL2_INC_PATH -name SDL_ttf.h`
-        fi
     fi
 fi
 
@@ -164,11 +153,10 @@ log_info "SDL2 config                : $SDL2_CONFIG"
 log_info "SDL2 version               : "`$SDL2_CONFIG --version`
 log_info "SDL2 include path          : $SDL2_INC_PATH"
 log_info "SDL2 mixer.h               : $SDL2_MIXER"
-log_info "SDL2 ttf.h                 : $SDL2_TTF"
 #log_info "SDL2 found                 : $SDL2_SCORE"
 
-if [[ $SDL2_SCORE != "2" ]]; then
-    log_err "I need SDL2, SDL2 mixer and SDL2 ttf installed"
+if [[ $SDL2_SCORE != "1" ]]; then
+    log_err "I need SDL2 and SDL2 mixer installed"
     sdl_help
     exit 1
 fi
@@ -198,7 +186,6 @@ fi
 #
 LDLIBS="$SDL_LIBS"
 LDLIBS="$LDLIBS -lSDL2_mixer"
-LDLIBS="$LDLIBS -lSDL2_ttf"
 
 case `uname` in
     *MING*|*MSYS*)
@@ -511,7 +498,6 @@ case `uname` in
         LDLIBS="$LDLIBS -lopengl32"
         LDLIBS="$LDLIBS -lpthread"
         LDLIBS="$LDLIBS /mingw64/lib/libSDL2_mixer.a"
-        LDLIBS="$LDLIBS /mingw64/lib/libSDL2_ttf.a"
 
         #
         # Except it does not work and does not generate pdb files for clang
