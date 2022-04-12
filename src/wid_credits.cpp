@@ -34,17 +34,17 @@ static uint8_t wid_credits_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'b' :
-              case SDLK_ESCAPE :
+              case 'b':
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   wid_credits_destroy();
@@ -78,6 +78,10 @@ static uint8_t wid_credits_mouse_up(Widp w, int32_t x, int32_t y, uint32_t butto
 
 static void game_display_credits_bg(void)
 {
+  if (g_opt_ascii) {
+    return;
+  }
+
   TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -90,6 +94,10 @@ static void game_display_credits_bg(void)
 
 static void game_display_credits_fg(void)
 {
+  if (g_opt_ascii) {
+    return;
+  }
+
   TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

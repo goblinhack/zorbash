@@ -19,8 +19,9 @@ using Tilemap = std::vector< class Tile * >;
 #define TILE_HEIGHT_LORES 16
 #define TILE_HEIGHT_MAX   64
 #define TILE_CURSOR       ((wchar_t) ('z' + 6))
-#define TILE_CURSOR_NAME  "3.98" // arrow
-#define TILE_UNKNOWN_NAME "3.99" // ??
+#define TILE_BLOCK        "3.97" // arrow
+#define TILE_POINTER      "3.98" // arrow
+#define TILE_UNKNOWN      "3.99" // ??
 #define TILE_WIDTH        game->config.tile_width
 #define TILE_WIDTH_LORES  16 // Tile size of the player
 #define TILE_WIDTH_MAX    32 // Largest tile for collisions
