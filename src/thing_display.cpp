@@ -370,7 +370,7 @@ void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point o
     }
 
     if (unlikely(! tile)) {
-      tile = font_small->unicode_to_tile(c);
+      tile = font_pixelart_small->unicode_to_tile(c);
     }
 
     if (tile) {

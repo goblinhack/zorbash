@@ -359,10 +359,12 @@ void Game::wid_main_menu_select(void)
   game->wid_thing_info_destroy_immediate();
 
   auto box_height = g_opt_ascii ? 1 : 3;
+  auto box_step   = g_opt_ascii ? 2 : 3;
+  auto box_style  = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
 
   int menu_height;
   if (g_opt_ascii) {
-    menu_height = 9;
+    menu_height = 15;
   } else {
     menu_height = 23;
   }
@@ -388,12 +390,12 @@ void Game::wid_main_menu_select(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height - 1);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, game_menu_new_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$N%%fg=reset$ew game%%fg=reset$");
   }
-  y_at += box_height;
+  y_at += box_step;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
@@ -401,12 +403,12 @@ void Game::wid_main_menu_select(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height - 1);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_choose_player_name);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_COLOR_STR "$Choose player name");
   }
-  y_at += box_height;
+  y_at += box_step;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
@@ -414,12 +416,12 @@ void Game::wid_main_menu_select(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height - 1);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_main_menu_load_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$L%%fg=" UI_TEXT_COLOR_STR "$oad game");
   }
-  y_at += box_height;
+  y_at += box_step;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
@@ -427,12 +429,12 @@ void Game::wid_main_menu_select(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height - 1);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_main_menu_config);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$O%%fg=" UI_TEXT_COLOR_STR "$ptions");
   }
-  y_at += box_height;
+  y_at += box_step;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
@@ -440,12 +442,12 @@ void Game::wid_main_menu_select(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height - 1);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_main_menu_credits_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$redits");
   }
-  y_at += box_height;
+  y_at += box_step;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
@@ -453,12 +455,12 @@ void Game::wid_main_menu_select(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height - 1);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_main_menu_hiscores);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$H%%fg=" UI_TEXT_COLOR_STR "$iscores");
   }
-  y_at += box_height;
+  y_at += box_step;
   {
     TRACE_NO_INDENT();
     auto p = wid_main_menu_window->wid_text_area->wid_text_area;
@@ -466,7 +468,7 @@ void Game::wid_main_menu_select(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height - 1);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_main_menu_quit_game);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Q%%fg=" UI_TEXT_COLOR_STR "$uit Game");

@@ -11,8 +11,8 @@
 #include "my_ui.hpp"
 #include <map>
 
-Fontp font_small;
-Fontp font_large;
+Fontp font_pixelart_small;
+Fontp font_pixelart_large;
 Fontp font_ascii;
 Fontp font_ui;
 
@@ -134,11 +134,11 @@ uint8_t font_init(void)
 {
   TRACE_AND_INDENT();
 
-  font_small             = font_load("font-small");
-  font_small->tile_index = 1;
+  font_pixelart_small             = font_load("font-pixelart-small");
+  font_pixelart_small->tile_index = 1;
 
-  font_large             = font_load("font-large");
-  font_large->tile_index = 2;
+  font_pixelart_large             = font_load("font-large");
+  font_pixelart_large->tile_index = 2;
 
   font_ascii             = font_load("font-ascii");
   font_ascii->tile_index = 3;
@@ -146,7 +146,7 @@ uint8_t font_init(void)
   if (g_opt_ascii) {
     font_ui = font_ascii;
   } else {
-    font_ui = font_large;
+    font_ui = font_pixelart_large;
   }
 
   return true;
