@@ -4,10 +4,10 @@
 //
 
 #include "my_game.hpp"
-#include "my_wid_notice.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
+#include "my_wid_notice.hpp"
 #include "my_wid_popup.hpp"
 
 static WidPopup *wid_notice_window;
@@ -53,7 +53,7 @@ void wid_notice(std::string s)
 
   auto  m     = TERM_WIDTH / 2;
   auto  n     = TERM_HEIGHT / 2;
-  int   w     = (s.size() / 2) + 3;
+  int   w     = (s.size() / 2) + 2;
   point tl    = make_point(m - w, n - 2);
   point br    = make_point(m + w - 1, n + 2);
   auto  width = br.x - tl.x;

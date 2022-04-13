@@ -4,11 +4,11 @@
 //
 
 #include "my_game.hpp"
-#include "my_wid_notice.hpp"
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
+#include "my_wid_notice.hpp"
 #include "my_wid_popup.hpp"
 
 static int last_vert_scroll_offset = -1;
@@ -978,17 +978,17 @@ static uint8_t wid_config_keyboard_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'b' :
-              case SDLK_ESCAPE : wid_config_keyboard_cancel(nullptr, 0, 0, 0); return true;
+              case 'b':
+              case SDLK_ESCAPE: wid_config_keyboard_cancel(nullptr, 0, 0, 0); return true;
             }
           }
       }
@@ -1017,7 +1017,10 @@ void Game::wid_config_keyboard_select(void)
     wid_config_keyboard_destroy();
   }
 
-  auto  m     = TERM_WIDTH / 2;
+  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
+  auto m                   = TERM_WIDTH / 2;
+
   point tl    = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_TOPCON_VIS_HEIGHT + 2);
   point br    = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
   auto  width = br.x - tl.x;
@@ -1036,7 +1039,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Thine keys of mighty power");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width - 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1049,8 +1052,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 
-    point tl = make_point(0, y_at);
-    point br = make_point(7, y_at + 2);
+    point tl = make_point(1, y_at);
+    point br = make_point(6, y_at + 2);
     wid_set_shape_square(w);
     wid_set_style(w, UI_WID_STYLE_DARK);
     wid_set_on_mouse_up(w, wid_config_keyboard_back);
@@ -1096,35 +1099,41 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "");
 
-    point tl = make_point(0, y_at);
-    point br = make_point(45, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_DARK);
+    point tl = make_point(1, y_at);
+    point br = make_point(45, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_keyboard_profile_wasd);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Use W,A,S,D for moving, arrow keys for map");
   }
-  y_at += 3;
+  y_at += 1;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "");
 
-    point tl = make_point(0, y_at);
-    point br = make_point(45, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_DARK);
+    point tl = make_point(1, y_at);
+    point br = make_point(45, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_keyboard_profile_arrow_keys);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Use arrow keys for moving, W,A,S,D for map");
   }
 
-  y_at += 3;
+  y_at += 2;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "");
 
-    point tl = make_point(0, y_at);
-    point br = make_point(45, y_at + 2);
+    point tl = make_point(1, y_at);
+    point br = make_point(45, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Use double click to jump in chasms or lava)");
@@ -1133,18 +1142,21 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Move up
   ///////////////////////////////////////////////////////////////////////
-  y_at += 3;
+  y_at += 2;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Move up");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_text(w, "Move up");
   }
   {
@@ -1156,7 +1168,10 @@ void Game::wid_config_keyboard_select(void)
     point br = make_point(width / 2 + 20, y_at);
     wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_move_up));
     wid_set_on_mouse_up(w, wid_config_key_move_up);
@@ -1170,7 +1185,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Move left");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1184,7 +1199,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_move_left));
     wid_set_on_mouse_up(w, wid_config_key_move_left);
@@ -1198,7 +1216,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Move down");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1212,7 +1230,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_move_down));
     wid_set_on_mouse_up(w, wid_config_key_move_down);
@@ -1226,7 +1247,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Move right");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1240,7 +1261,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_move_right));
     wid_set_on_mouse_up(w, wid_config_key_move_right);
@@ -1259,7 +1283,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Map up");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1273,7 +1297,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_map_up));
     wid_set_on_mouse_up(w, wid_config_key_map_up);
@@ -1287,7 +1314,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Map left");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1301,7 +1328,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_map_left));
     wid_set_on_mouse_up(w, wid_config_key_map_left);
@@ -1315,7 +1345,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Map down");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1329,7 +1359,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_map_down));
     wid_set_on_mouse_up(w, wid_config_key_map_down);
@@ -1343,7 +1376,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Map right");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1357,7 +1390,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_map_right));
     wid_set_on_mouse_up(w, wid_config_key_map_right);
@@ -1376,7 +1412,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Attack");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1390,7 +1426,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_attack));
     wid_set_on_mouse_up(w, wid_config_key_attack);
@@ -1404,7 +1443,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Wait / collect");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1418,7 +1457,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_wait_or_collect));
     wid_set_on_mouse_up(w, wid_config_key_wait_or_collect);
@@ -1432,7 +1474,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "jump");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1446,7 +1488,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_jump));
     wid_set_on_mouse_up(w, wid_config_key_jump);
@@ -1460,7 +1505,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "throw");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1474,7 +1519,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_throw));
     wid_set_on_mouse_up(w, wid_config_key_throw);
@@ -1488,7 +1536,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Drop");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1502,7 +1550,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_drop));
     wid_set_on_mouse_up(w, wid_config_key_drop);
@@ -1516,7 +1567,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Use");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1530,7 +1581,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_use));
     wid_set_on_mouse_up(w, wid_config_key_use);
@@ -1544,7 +1598,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Eat");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1558,7 +1612,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_eat));
     wid_set_on_mouse_up(w, wid_config_key_eat);
@@ -1572,7 +1629,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "descend");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1586,7 +1643,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_descend));
     wid_set_on_mouse_up(w, wid_config_key_descend);
@@ -1600,7 +1660,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "ascend");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1614,7 +1674,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_ascend));
     wid_set_on_mouse_up(w, wid_config_key_ascend);
@@ -1629,7 +1692,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "inventory mode");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1643,7 +1706,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_inventory));
     wid_set_on_mouse_up(w, wid_config_key_inventory);
@@ -1657,7 +1723,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 0");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1671,7 +1737,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_action0));
     wid_set_on_mouse_up(w, wid_config_key_action0);
@@ -1685,7 +1754,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 1");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1699,7 +1768,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_action1));
     wid_set_on_mouse_up(w, wid_config_key_action1);
@@ -1713,7 +1785,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 2");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1727,7 +1799,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_action2));
     wid_set_on_mouse_up(w, wid_config_key_action2);
@@ -1741,7 +1816,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 3");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1755,7 +1830,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_action3));
     wid_set_on_mouse_up(w, wid_config_key_action3);
@@ -1769,7 +1847,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 4");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1783,7 +1861,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_action4));
     wid_set_on_mouse_up(w, wid_config_key_action4);
@@ -1797,7 +1878,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 5");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1811,7 +1892,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_action5));
     wid_set_on_mouse_up(w, wid_config_key_action5);
@@ -1825,7 +1909,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 6");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1839,7 +1923,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, to_string(game->config.key_action6));
     wid_set_on_mouse_up(w, wid_config_key_action6);
@@ -1853,7 +1940,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 7");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1867,7 +1954,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_action7));
     wid_set_on_mouse_up(w, wid_config_key_action7);
@@ -1881,7 +1971,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 8");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1895,7 +1985,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_action8));
     wid_set_on_mouse_up(w, wid_config_key_action8);
@@ -1909,7 +2002,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inventory action 9");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1923,7 +2016,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_action9));
     wid_set_on_mouse_up(w, wid_config_key_action9);
@@ -1942,7 +2038,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "save");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1956,7 +2052,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_save));
     wid_set_on_mouse_up(w, wid_config_key_save);
@@ -1970,7 +2069,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "load");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -1984,7 +2083,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_load));
     wid_set_on_mouse_up(w, wid_config_key_load);
@@ -1998,7 +2100,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "robot_mode");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -2012,7 +2114,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_robot_mode));
     wid_set_on_mouse_up(w, wid_config_key_robot_mode);
@@ -2031,7 +2136,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "zoom_in");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -2045,7 +2150,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_zoom_in));
     wid_set_on_mouse_up(w, wid_config_key_zoom_in);
@@ -2059,7 +2167,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "zoom_out");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -2073,7 +2181,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_zoom_out));
     wid_set_on_mouse_up(w, wid_config_key_zoom_out);
@@ -2092,7 +2203,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Take a screenshot");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -2106,7 +2217,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_screenshot));
     wid_set_on_mouse_up(w, wid_config_key_screenshot);
@@ -2125,7 +2239,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "quit");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -2139,7 +2253,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_quit));
     wid_set_on_mouse_up(w, wid_config_key_quit);
@@ -2153,7 +2270,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "console");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -2167,7 +2284,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_console));
     wid_set_on_mouse_up(w, wid_config_key_console);
@@ -2181,7 +2301,7 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "help");
 
-    point tl = make_point(0, y_at);
+    point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
@@ -2195,7 +2315,10 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width / 2 + 8, y_at);
     point br = make_point(width / 2 + 20, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_text(w, ::to_string(game->config.key_help));
     wid_set_on_mouse_up(w, wid_config_key_help);
