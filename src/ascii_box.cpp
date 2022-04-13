@@ -20,7 +20,9 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
   static bool      init;
   static const int MAX_UI_SIZE    = 16;
   static const int MAX_UI_BG_SIZE = MAX_UI_SIZE - 2;
-  static std::array< std::array< std::array< Tilep, MAX_UI_SIZE >, MAX_UI_SIZE >, UI_WID_STYLE_MAX > tiles = {};
+  static std::array< std::array< std::array< std::array< Tilep, MAX_UI_SIZE >, MAX_UI_SIZE >, UI_WID_STYLE_MAX >,
+                     UI_TYPES_MAX >
+      tiles = {};
 
   if (style >= UI_WID_STYLE_MAX) {
     ERR("Unimplemented widget style %d", style);
@@ -29,14 +31,31 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
 
   if (! init) {
     init = true;
-    for (auto styles = 0; styles < UI_WID_STYLE_MAX; styles++) {
-      for (auto x = 0; x < MAX_UI_SIZE; x++) {
-        for (auto y = 0; y < MAX_UI_SIZE; y++) {
-          std::string name = "ui" + std::to_string(styles) + "," + std::to_string(x) + "," + std::to_string(y);
-          set(tiles, styles, x, y, tile_find_mand(name));
+    for (auto type = 0; type < UI_TYPES_MAX; type++) {
+      for (auto styles = 0; styles < UI_WID_STYLE_MAX; styles++) {
+        for (auto x = 0; x < MAX_UI_SIZE; x++) {
+          for (auto y = 0; y < MAX_UI_SIZE; y++) {
+            if (type == UI_TYPE_PIXELART) {
+              std::string name =
+                  "ui.pixelart." + std::to_string(styles) + "," + std::to_string(x) + "," + std::to_string(y);
+              set(tiles, type, styles, x, y, tile_find_mand(name));
+            } else {
+              std::string name =
+                  "ui.ascii." + std::to_string(styles) + "," + std::to_string(x) + "," + std::to_string(y);
+              set(tiles, type, styles, x, y, tile_find_mand(name));
+            }
+          }
         }
       }
     }
+  }
+
+  int ui_type;
+
+  if (g_opt_ascii) {
+    ui_type = UI_TYPE_ASCII;
+  } else {
+    ui_type = UI_TYPE_PIXELART;
   }
 
   {
@@ -53,8 +72,7 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
         }
 
         //
-        // The numbers for fg are offset here as "fg1" is really
-        // the ascii letter tile
+        // The numbers for fg are offset here as "fg1" is really the ascii letter tile
         //
         if (fg_tile || (col_fg != COLOR_NONE)) {
           ascii_set_fg2(x, y, fg_tile, tx, ty, dx, dy);
@@ -80,13 +98,13 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     y = y1;
     for (x = x1; x <= x2; x++) {
       if (style >= 0) {
-        ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ 0 ]);
+        ascii_set_bg(x, y, tiles[ ui_type ][ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ 0 ]);
       }
       ascii_set_bg(x, y, col_bg);
     }
     if (style >= 0) {
-      ascii_set_bg(x1, y, tiles[ style ][ 0 ][ 0 ]);
-      ascii_set_bg(x2, y, tiles[ style ][ MAX_UI_SIZE - 1 ][ 0 ]);
+      ascii_set_bg(x1, y, tiles[ ui_type ][ style ][ 0 ][ 0 ]);
+      ascii_set_bg(x2, y, tiles[ ui_type ][ style ][ MAX_UI_SIZE - 1 ][ 0 ]);
     }
     return;
   } else if (unlikely(x1 == x2)) {
@@ -96,20 +114,20 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     x = x1;
     for (y = y1; y <= y2; y++) {
       if (style >= 0) {
-        ascii_set_bg(x, y, tiles[ style ][ 0 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
+        ascii_set_bg(x, y, tiles[ ui_type ][ style ][ 0 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
       }
       ascii_set_bg(x, y, col_bg);
     }
     if (style >= 0) {
-      ascii_set_bg(x, y1, tiles[ style ][ 0 ][ 0 ]);
-      ascii_set_bg(x, y2, tiles[ style ][ 0 ][ MAX_UI_SIZE - 1 ]);
+      ascii_set_bg(x, y1, tiles[ ui_type ][ style ][ 0 ][ 0 ]);
+      ascii_set_bg(x, y2, tiles[ ui_type ][ style ][ 0 ][ MAX_UI_SIZE - 1 ]);
     }
     return;
   } else {
     for (y = y1; y <= y2; y++) {
       for (x = x1; x <= x2; x++) {
         if (style >= 0) {
-          ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
+          ascii_set_bg(x, y, tiles[ ui_type ][ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
         }
         ascii_set_bg(x, y, col_bg);
       }
@@ -118,12 +136,12 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     for (y = y1 + 1; y <= y2; y++) {
       for (x = x1 + 1; x <= x2; x++) {
         if (style >= 0) {
-          ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
+          ascii_set_bg(x, y, tiles[ ui_type ][ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
         }
         ascii_set_bg(x, y, col_bg);
       }
       if (style >= 0) {
-        ascii_set_bg(x1, y2, tiles[ style ][ (x1 % MAX_UI_BG_SIZE) + 1 ][ (y2 % MAX_UI_BG_SIZE) + 1 ]);
+        ascii_set_bg(x1, y2, tiles[ ui_type ][ style ][ (x1 % MAX_UI_BG_SIZE) + 1 ][ (y2 % MAX_UI_BG_SIZE) + 1 ]);
       }
       ascii_set_bg(x1, y2, col_bg);
     }
@@ -131,7 +149,7 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     for (y = y1 + 1; y <= y2 - 1; y++) {
       for (x = x1 + 1; x <= x2 - 1; x++) {
         if (style >= 0) {
-          ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
+          ascii_set_bg(x, y, tiles[ ui_type ][ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
         }
         ascii_set_bg(x, y, col_bg);
       }
@@ -142,7 +160,7 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
     for (y = y1; y <= y2; y++) {
       ascii_set_context(x, y, context);
       if (style >= 0) {
-        ascii_set_bg(x, y, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
+        ascii_set_bg(x, y, tiles[ ui_type ][ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
       }
       ascii_set_bg(x, y, col_bg);
     }
@@ -150,23 +168,23 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
 
   for (x = x1 + 1; x <= x2 - 1; x++) {
     if (style >= 0) {
-      ascii_set_bg(x, y1, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ 0 ]);
-      ascii_set_bg(x, y2, tiles[ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ MAX_UI_SIZE - 1 ]);
+      ascii_set_bg(x, y1, tiles[ ui_type ][ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ 0 ]);
+      ascii_set_bg(x, y2, tiles[ ui_type ][ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ MAX_UI_SIZE - 1 ]);
     }
   }
 
   for (y = y1 + 1; y <= y2 - 1; y++) {
     if (style >= 0) {
-      ascii_set_bg(x1, y, tiles[ style ][ 0 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
-      ascii_set_bg(x2, y, tiles[ style ][ MAX_UI_SIZE - 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
+      ascii_set_bg(x1, y, tiles[ ui_type ][ style ][ 0 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
+      ascii_set_bg(x2, y, tiles[ ui_type ][ style ][ MAX_UI_SIZE - 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
     }
   }
 
   if (style >= 0) {
-    ascii_set_bg(x1, y1, tiles[ style ][ 0 ][ 0 ]);
-    ascii_set_bg(x2, y2, tiles[ style ][ MAX_UI_SIZE - 1 ][ MAX_UI_SIZE - 1 ]);
-    ascii_set_bg(x2, y1, tiles[ style ][ MAX_UI_SIZE - 1 ][ 0 ]);
-    ascii_set_bg(x1, y2, tiles[ style ][ 0 ][ MAX_UI_SIZE - 1 ]);
+    ascii_set_bg(x1, y1, tiles[ ui_type ][ style ][ 0 ][ 0 ]);
+    ascii_set_bg(x2, y2, tiles[ ui_type ][ style ][ MAX_UI_SIZE - 1 ][ MAX_UI_SIZE - 1 ]);
+    ascii_set_bg(x2, y1, tiles[ ui_type ][ style ][ MAX_UI_SIZE - 1 ][ 0 ]);
+    ascii_set_bg(x1, y2, tiles[ ui_type ][ style ][ 0 ][ MAX_UI_SIZE - 1 ]);
   }
 }
 

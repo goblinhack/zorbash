@@ -10,8 +10,8 @@
 #include "my_fwd.hpp"
 #include "my_sdl.hpp"
 
-extern Fontp font_small;
-extern Fontp font_large;
+extern Fontp font_pixelart_small;
+extern Fontp font_pixelart_large;
 extern Fontp font_ascii;
 extern Fontp font_ui;
 

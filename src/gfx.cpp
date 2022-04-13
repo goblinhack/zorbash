@@ -7,7 +7,7 @@
 #include "my_tile.hpp"
 #include "my_ui.hpp"
 
-static void gfx_init_font_small(void)
+static void gfx_init_font_pixelart_small(void)
 {
   std::initializer_list< std::string > tiles = {
       //////////////////////////////////////////////////////////////////
@@ -156,11 +156,11 @@ static void gfx_init_font_small(void)
   };
 
   const std::vector< std::string > arr(tiles);
-  tile_load_arr_sprites("data/fonts/font-small.tga", "font_small", UI_FONT_SMALL_WIDTH, UI_FONT_SMALL_HEIGHT, arr,
-                        GL_NEAREST);
+  tile_load_arr_sprites("data/fonts/font-pixelart-small.tga", "font_pixelart_small", UI_FONT_SMALL_WIDTH,
+                        UI_FONT_SMALL_HEIGHT, arr, GL_NEAREST);
 }
 
-static void gfx_init_font_large(void)
+static void gfx_init_font_pixelart_large(void)
 {
   std::initializer_list< std::string > tiles = {
       //////////////////////////////////////////////////////////////////
@@ -309,8 +309,8 @@ static void gfx_init_font_large(void)
   };
 
   const std::vector< std::string > arr(tiles);
-  tile_load_arr_sprites("data/fonts/font-large.tga", "font_large", UI_FONT_LARGE_WIDTH, UI_FONT_LARGE_HEIGHT, arr,
-                        GL_NEAREST);
+  tile_load_arr_sprites("data/fonts/font-large.tga", "font_pixelart_large", UI_FONT_LARGE_WIDTH, UI_FONT_LARGE_HEIGHT,
+                        arr, GL_NEAREST);
 }
 
 static void gfx_init_font_ascii(void)
@@ -470,8 +470,8 @@ static void gfx_init_ui(void) {}
 
 void gfx_init(void)
 {
-  gfx_init_font_small();
-  gfx_init_font_large();
+  gfx_init_font_pixelart_small();
+  gfx_init_font_pixelart_large();
   gfx_init_font_ascii();
   gfx_init_ui();
   gfx_init0();

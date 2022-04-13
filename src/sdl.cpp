@@ -1171,7 +1171,7 @@ void config_game_pix_zoom_update(void)
   if (g_opt_ascii) {
     font_ui = font_ascii;
   } else {
-    font_ui = font_large;
+    font_ui = font_pixelart_large;
   }
 
   game->config.tile_width  = TILE_WIDTH_LORES;
@@ -1252,13 +1252,13 @@ void config_game_pix_zoom_update(void)
     if (game->config.ascii_mode) {
       font_ui = font_ascii;
     } else {
-      font_ui = font_large;
+      font_ui = font_pixelart_large;
     }
   } else {
     if (g_opt_ascii) {
       font_ui = font_ascii;
     } else {
-      font_ui = font_large;
+      font_ui = font_pixelart_large;
     }
   }
   if (g_opt_ascii) {
