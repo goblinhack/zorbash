@@ -945,6 +945,8 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
     my.t.ui_pix_zoom   = GAME_DEFAULT_UI_ZOOM;
   }
 
+  g_opt_ascii = my.t.ascii_mode;
+
   return (in);
 }
 

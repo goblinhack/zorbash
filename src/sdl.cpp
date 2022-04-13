@@ -1169,8 +1169,10 @@ void config_game_pix_zoom_update(void)
   TRACE_NO_INDENT();
 
   if (g_opt_ascii) {
+    CON("INF: Ascii mode font");
     font_ui = font_ascii;
   } else {
+    CON("INF: Pixelart mode font");
     font_ui = font_pixelart_large;
   }
 
@@ -1248,19 +1250,12 @@ void config_game_pix_zoom_update(void)
     game->config.ascii_gl_height = (float) game->config.ui_pix_height / (float) TERM_HEIGHT;
   }
 
-  if (game) {
-    if (game->config.ascii_mode) {
-      font_ui = font_ascii;
-    } else {
-      font_ui = font_pixelart_large;
-    }
+  if (g_opt_ascii) {
+    font_ui = font_ascii;
   } else {
-    if (g_opt_ascii) {
-      font_ui = font_ascii;
-    } else {
-      font_ui = font_pixelart_large;
-    }
+    font_ui = font_pixelart_large;
   }
+
   if (g_opt_ascii) {
     game->config.ascii_gl_width  = UI_FONT_ASCII_WIDTH / 10;
     game->config.ascii_gl_height = UI_FONT_ASCII_HEIGHT / 10;

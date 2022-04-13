@@ -349,10 +349,16 @@ void Game::wid_config_gfx_select(void)
     wid_config_gfx_destroy();
   }
 
-  auto  m     = TERM_WIDTH / 2;
-  point tl    = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_TOPCON_VIS_HEIGHT - 2);
-  point br    = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
-  auto  width = br.x - tl.x - 2;
+  auto m = TERM_WIDTH / 2;
+
+  point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, TERM_HEIGHT / 2 - 10);
+  point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, TERM_HEIGHT / 2 + 11);
+  if (g_opt_ascii) {
+    tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, TERM_HEIGHT / 2 - 10);
+    br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, TERM_HEIGHT / 2 + 11);
+  }
+
+  auto width = br.x - tl.x - 2;
 
   wid_config_gfx_window = new WidPopup("Gfx select", tl, br, nullptr, "", false, false);
   {
@@ -599,7 +605,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Ascii");
+    wid_set_text(w, "Ascii mode");
   }
   {
     TRACE_AND_INDENT();
@@ -694,14 +700,14 @@ void Game::wid_config_gfx_select(void)
   {
     TRACE_AND_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "High DPI");
+    auto w = wid_new_square_button(p, "High DPI res");
 
     point tl = make_point(0, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "High DPI");
+    wid_set_text(w, "High DPI resolution");
   }
   {
     TRACE_AND_INDENT();
