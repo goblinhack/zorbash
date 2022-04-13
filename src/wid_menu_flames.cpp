@@ -88,7 +88,7 @@ static void game_display_flames_change(int w, int h)
   TRACE_NO_INDENT();
   int flames = 3;
   while (flames--) {
-    auto xr = non_pcg_random_range(w / 4, w - w / 4);
+    auto xr = non_pcg_random_range(w / 8, w - w / 8);
     auto r  = non_pcg_random_range(0, 100);
 
     if (r < 60) {
@@ -134,6 +134,9 @@ static void game_display_flames_change(int w, int h)
     }
 
     int scroll = 5;
+    if (g_opt_ascii) {
+      scroll = 2;
+    }
     while (scroll--) {
       for (auto y = 0; y < h - 1; y++) {
         auto c1      = bg[ x ][ y + 1 ];
@@ -148,6 +151,9 @@ static void game_display_flames_change(int w, int h)
     }
 
     int scroll = 3;
+    if (g_opt_ascii) {
+      scroll = 2;
+    }
     while (scroll--) {
       for (auto y = 0; y < h - 1; y++) {
         auto c1      = bg[ x ][ y + 1 ];
@@ -161,6 +167,9 @@ static void game_display_flames_change(int w, int h)
       continue;
     }
     int scroll = 3;
+    if (g_opt_ascii) {
+      scroll = 2;
+    }
     while (scroll--) {
       for (auto y = 0; y < h - 1; y++) {
         auto c1      = bg[ x ][ y + 1 ];

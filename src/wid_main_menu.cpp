@@ -34,7 +34,7 @@ void wid_main_menu_destroy(void)
 void wid_main_menu_hide(void)
 {
   TRACE_AND_INDENT();
-  wid_hide(wid_main_menu_window->wid_text_area->wid_text_area);
+  wid_hide(wid_main_menu_window->wid_popup_container);
 }
 
 static uint8_t wid_main_menu_load_game(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -364,16 +364,25 @@ void Game::wid_main_menu_select(void)
 
   int menu_height;
   if (g_opt_ascii) {
-    menu_height = 15;
+    menu_height = 14;
   } else {
-    menu_height = 23;
+    menu_height = 22;
   }
 
-  point tl    = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, TERM_HEIGHT - menu_height);
-  point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT);
-  auto  width = br.x - tl.x - 2;
+  point tl;
+  point br;
+  if (g_opt_ascii) {
+    tl                   = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1 - 4, TERM_HEIGHT - menu_height - 2);
+    br                   = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 2);
+    wid_main_menu_window = new WidPopup("Main menu", tl, br, nullptr, "", false, false);
+  } else {
+    tl                   = make_point(TERM_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1 - 4, TERM_HEIGHT - menu_height - 1);
+    br                   = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
+    wid_main_menu_window = new WidPopup("Main menu", tl, br, nullptr, "nothing", false, false);
+  }
 
-  wid_main_menu_window = new WidPopup("Main menu", tl, br, nullptr, "nothing", false, false);
+  auto width = br.x - tl.x - 2;
+
   {
     TRACE_NO_INDENT();
     Widp w = wid_main_menu_window->wid_popup_container;
