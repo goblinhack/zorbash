@@ -10,8 +10,8 @@
 #include <strings.h> // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
-color GRAY5;
-#if 0
+color GRAY;
+color GRAY1;
 color GRAY10;
 color GRAY11;
 color GRAY12;
@@ -22,7 +22,7 @@ color GRAY16;
 color GRAY17;
 color GRAY18;
 color GRAY19;
-color GRAY1;
+color GRAY2;
 color GRAY20;
 color GRAY21;
 color GRAY22;
@@ -33,7 +33,7 @@ color GRAY26;
 color GRAY27;
 color GRAY28;
 color GRAY29;
-color GRAY2;
+color GRAY3;
 color GRAY30;
 color GRAY31;
 color GRAY32;
@@ -44,7 +44,7 @@ color GRAY36;
 color GRAY37;
 color GRAY38;
 color GRAY39;
-color GRAY3;
+color GRAY4;
 color GRAY40;
 color GRAY41;
 color GRAY42;
@@ -55,7 +55,7 @@ color GRAY46;
 color GRAY47;
 color GRAY48;
 color GRAY49;
-color GRAY4;
+color GRAY5;
 color GRAY50;
 color GRAY51;
 color GRAY52;
@@ -66,6 +66,7 @@ color GRAY56;
 color GRAY57;
 color GRAY58;
 color GRAY59;
+color GRAY6;
 color GRAY60;
 color GRAY61;
 color GRAY62;
@@ -76,7 +77,7 @@ color GRAY66;
 color GRAY67;
 color GRAY68;
 color GRAY69;
-color GRAY6;
+color GRAY7;
 color GRAY70;
 color GRAY71;
 color GRAY72;
@@ -87,7 +88,7 @@ color GRAY76;
 color GRAY77;
 color GRAY78;
 color GRAY79;
-color GRAY7;
+color GRAY8;
 color GRAY80;
 color GRAY81;
 color GRAY82;
@@ -98,7 +99,7 @@ color GRAY86;
 color GRAY87;
 color GRAY88;
 color GRAY89;
-color GRAY8;
+color GRAY9;
 color GRAY90;
 color GRAY91;
 color GRAY92;
@@ -109,22 +110,18 @@ color GRAY96;
 color GRAY97;
 color GRAY98;
 color GRAY99;
-color GRAY9;
-color GRAY;
+color GREEN;
 color GREEN1;
 color GREEN2;
 color GREEN3;
 color GREEN4;
-color GREEN;
 color GREEN_YELLOW;
 color GREENYELLOW;
-#endif
 
 void color_init2(void)
 {
   TRACE_AND_INDENT();
   color_set("gray5", &GRAY5, 13, 13, 13, 255);
-#if 0
   color_set("gray10", &GRAY10, 26, 26, 26, 255);
   color_set("gray11", &GRAY11, 28, 28, 28, 255);
   color_set("gray12", &GRAY12, 31, 31, 31, 255);
@@ -230,5 +227,4 @@ void color_init2(void)
   color_set("green4", &GREEN4, 0, 139, 0, 255);
   color_set("green", &GREEN, 0, 255, 0, 255);
   color_set("greenyellow", &GREENYELLOW, 173, 255, 47, 255);
-#endif
 }

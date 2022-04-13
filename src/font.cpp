@@ -137,7 +137,7 @@ uint8_t font_init(void)
   font_pixelart_small             = font_load("font-pixelart-small");
   font_pixelart_small->tile_index = 1;
 
-  font_pixelart_large             = font_load("font-large");
+  font_pixelart_large             = font_load("font-pixelart-large");
   font_pixelart_large->tile_index = 2;
 
   font_ascii             = font_load("font-ascii");

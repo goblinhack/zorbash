@@ -1155,7 +1155,7 @@ static std::wstring wid_get_text_with_cursor(Widp w)
   }
 
   std::wstring t = w->text;
-  std::wstring o = t.substr(0, w->cursor) + TILE_CURSOR + t.substr(w->cursor);
+  std::wstring o = t.substr(0, w->cursor) + TILE_CURSOR_CHAR + t.substr(w->cursor);
 
   return (o);
 }

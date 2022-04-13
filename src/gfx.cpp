@@ -309,7 +309,7 @@ static void gfx_init_font_pixelart_large(void)
   };
 
   const std::vector< std::string > arr(tiles);
-  tile_load_arr_sprites("data/fonts/font-large.tga", "font_pixelart_large", UI_FONT_LARGE_WIDTH, UI_FONT_LARGE_HEIGHT,
+  tile_load_arr_sprites("data/fonts/font-pixelart-large.tga", "font_pixelart_large", UI_FONT_LARGE_WIDTH, UI_FONT_LARGE_HEIGHT,
                         arr, GL_NEAREST);
 }
 
