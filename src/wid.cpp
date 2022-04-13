@@ -1652,6 +1652,39 @@ color wid_get_color(Widp w, wid_color which)
   return (WHITE);
 }
 
+int wid_get_style(Widp w)
+{
+  TRACE_AND_INDENT();
+  uint32_t mode = (__typeof__(mode)) wid_get_mode(w); // for c++, no enum walk
+  wid_cfg *cfg  = &getref(w->cfg, mode);
+
+  if (cfg->style_set) {
+    return (cfg->style);
+  }
+
+  if ((wid_focus == w) && (wid_over == w)) {
+    mode = WID_MODE_OVER;
+    cfg  = &getref(w->cfg, mode);
+    if (cfg->style_set) {
+      return (cfg->style);
+    }
+  }
+
+  mode = WID_MODE_NORMAL;
+  cfg  = &getref(w->cfg, mode);
+  if (cfg->style_set) {
+    return (cfg->style);
+  }
+
+  return UI_WID_STYLE_NORMAL;
+}
+
+void wid_set_style(Widp w, int style)
+{
+  w->cfg[ wid_get_mode(w) ].style     = style;
+  w->cfg[ wid_get_mode(w) ].style_set = true;
+}
+
 //
 // Look at all the widset modes and return the most relevent setting
 //
@@ -2199,7 +2232,7 @@ static Widp wid_new(Widp parent)
   wid_set_mode(w, WID_MODE_NORMAL);
 
   w->visible = true;
-  w->style   = UI_WID_STYLE_SOLID_NONE;
+  wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
 
   return (w);
 }
@@ -2221,7 +2254,7 @@ static Widp wid_new(void)
   wid_set_mode(w, WID_MODE_NORMAL);
 
   w->visible = true;
-  w->style   = UI_WID_STYLE_SOLID_NONE;
+  wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
 
   return (w);
 }
@@ -6263,7 +6296,7 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
   }
 
   if (w->square) {
-    ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, fg2_tile, fg3_tile, L"");
+    ascii_put_box(w_box_args, wid_get_style(w), bg_tile, fg_tile, fg2_tile, fg3_tile, L"");
   } else {
     // shape none
   }
@@ -6937,8 +6970,6 @@ uint8_t wid_is_moving(Widp w)
 
   return false;
 }
-
-void wid_set_style(Widp w, int style) { w->style = style; }
 
 void wid_ignore_events_briefly(void)
 {

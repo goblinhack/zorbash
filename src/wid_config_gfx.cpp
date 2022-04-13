@@ -349,6 +349,9 @@ void Game::wid_config_gfx_select(void)
     wid_config_gfx_destroy();
   }
 
+  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
+
   auto m = TERM_WIDTH / 2;
 
   point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, TERM_HEIGHT / 2 - 10);
@@ -455,7 +458,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2 + 13, y_at);
     point br = make_point(width / 2 + 15, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_resolution_incr);
     wid_set_text(w, "+");
@@ -467,7 +473,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2 + 16, y_at);
     point br = make_point(width / 2 + 18, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_resolution_decr);
     wid_set_text(w, "-");
@@ -514,7 +523,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2 + 13, y_at);
     point br = make_point(width / 2 + 15, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_term_width_size_incr);
     wid_set_text(w, "+");
@@ -526,7 +538,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2 + 16, y_at);
     point br = make_point(width / 2 + 18, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_term_width_size_decr);
     wid_set_text(w, "-");
@@ -573,7 +588,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2 + 13, y_at);
     point br = make_point(width / 2 + 15, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_term_height_size_incr);
     wid_set_text(w, "+");
@@ -585,7 +603,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2 + 16, y_at);
     point br = make_point(width / 2 + 18, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_term_height_size_decr);
     wid_set_text(w, "-");
@@ -594,7 +615,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   // ASCII
   /////////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at += 2;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
@@ -614,7 +635,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2, y_at);
     point br = make_point(width / 2 + 10, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_ascii_mode_toggle);
 
@@ -628,7 +652,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   // fullscreen
   /////////////////////////////////////////////////////////////////////////
-  y_at += 2;
+  y_at += 1;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
@@ -648,7 +672,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2, y_at);
     point br = make_point(width / 2 + 10, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_fullscreen_toggle);
 
@@ -682,7 +709,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2, y_at);
     point br = make_point(width / 2 + 10, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_fullscreen_desktop_toggle);
 
@@ -716,7 +746,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2, y_at);
     point br = make_point(width / 2 + 10, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_allow_highdpi_toggle);
 
@@ -750,7 +783,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2, y_at);
     point br = make_point(width / 2 + 10, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_borderless_toggle);
 
@@ -785,7 +821,10 @@ void Game::wid_config_gfx_select(void)
 
       point tl = make_point(width / 2, y_at);
       point br = make_point(width / 2 + 10, y_at);
-      wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_pos(w, tl, br);
       wid_set_on_mouse_up(w, wid_config_gfx_vsync_enable_toggle);
 
@@ -819,7 +858,10 @@ void Game::wid_config_gfx_select(void)
 
       point tl = make_point(width / 2, y_at);
       point br = make_point(width / 2 + 10, y_at);
-      wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_pos(w, tl, br);
 
       wid_set_text(w, "True");
@@ -849,7 +891,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2, y_at);
     point br = make_point(width / 2 + 10, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_gfx_inverted_toggle);
 
@@ -883,7 +928,10 @@ void Game::wid_config_gfx_select(void)
 
     point tl = make_point(width / 2, y_at);
     point br = make_point(width / 2 + 10, y_at);
-    wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_config_other_fps_counter_toggle);
 
