@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_ascii.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_random.hpp"
@@ -12,26 +13,93 @@
 #include "my_wid_rightbar.hpp"
 #include "my_wid_topcon.hpp"
 
-color bg[ TERM_WIDTH_MAX * 2 ][ TERM_HEIGHT_MAX * 2 ];
-color bg2[ TERM_WIDTH_MAX * 2 ][ TERM_HEIGHT_MAX * 2 ];
+color bg[ TERM_WIDTH_MAX * 2 ][ TERM_HEIGHT_MAX * 2 + 2 ];
+color bg2[ TERM_WIDTH_MAX * 2 ][ TERM_HEIGHT_MAX * 2 + 2 ];
 
 static void game_display_flames_tiles(int w, int h)
 {
   TRACE_NO_INDENT();
   float bright = 2.5;
 
-  blit_init();
   auto tile = tile_find_mand("1.97");
   int  tw   = game->config.ascii_gl_width / 2;
   int  th   = game->config.ascii_gl_height / 2;
+
+  if (g_opt_ascii) {
+    tw = game->config.ascii_gl_width;
+    th = game->config.ascii_gl_height;
+  }
 
   //
   // Account for rounding
   //
   int offset = game->config.ui_pix_height - (th * h);
 
+  static color fg = RED;
+  color        fg2;
+  color        fg3;
+  color        fg4;
+
+  //
+  // This is used to change the color of the logo
+  //
+  if (g_opt_ascii) {
+    static int hue = 0;
+
+    hue = 1;
+    if (hue > 255) {
+      hue = 0;
+    }
+
+    fg   = color_change_hue(fg, hue);
+    fg.a = 255;
+
+    if (fg.r + fg.g + fg.b < 100) {
+      fg = RED;
+    }
+
+    float bright = 1.01;
+    int   r      = (float) fg.r * bright;
+    if (r > 255) {
+      r = 255;
+    }
+    fg.r  = r;
+    int g = (float) fg.g * bright;
+    if (g > 255) {
+      g = 255;
+    }
+    fg.g  = g;
+    int b = (float) fg.b * bright;
+    if (b > 255) {
+      b = 255;
+    }
+    fg.b = b;
+
+    fg2 = fg;
+    fg2.r /= 2;
+    fg2.g /= 2;
+    fg2.b /= 2;
+
+    fg3 = fg;
+    fg3.r /= 3;
+    fg3.g /= 3;
+    fg3.b /= 3;
+
+    fg4 = fg;
+    fg4.r /= 4;
+    fg4.g /= 4;
+    fg4.b /= 4;
+  }
+
+  if (! g_opt_ascii) {
+    blit_init();
+  }
+
+  //
+  // Display the flames
+  //
   for (auto x = 0; x < w; x++) {
-    for (auto y = 0; y < h - 1; y++) {
+    for (auto y = 0; y < h; y++) {
       auto c = bg[ x ][ y ];
 
       int r = (int) (((float) ((int) c.r)) * bright);
@@ -50,84 +118,175 @@ static void game_display_flames_tiles(int w, int h)
 
       color cn(r, g, b, 255);
 
-      if (r < 1) {
-        cn = BLACK;
-        continue;
-      } else if (r < 10) {
-        cn = BLACK;
-      } else if (r < 15) {
-        if (non_pcg_random_range(0, 100) < 50) {
-          cn = BLACK;
-        } else {
-          cn = DARKRED;
-        }
-      } else if (r < 50) {
-        cn = DARKRED;
-      } else if (r < 80) {
-        cn = RED;
-      } else if (r < 120) {
-        cn = ORANGE;
-      } else if (r < 140) {
-        cn = YELLOW;
-      } else if (r < 170) {
-        cn = GRAY90;
+      if (g_opt_ascii) {
+        //
+        // Red flames
+        //
+        cn.g /= 2;
+        cn.b /= 2;
       } else {
-        cn = WHITE;
+        //
+        // Gradiated flames
+        //
+        if (r < 1) {
+          cn = DARKRED;
+          cn.r /= 5;
+          cn.g /= 5;
+          cn.b /= 5;
+          continue;
+        } else if (r < 10) {
+          cn = DARKRED;
+          cn.r /= 6;
+          cn.g /= 6;
+          cn.b /= 6;
+        } else if (r < 15) {
+          if (non_pcg_random_range(0, 100) < 50) {
+            cn = DARKRED;
+            cn.r /= 3;
+            cn.g /= 3;
+            cn.b /= 3;
+          } else {
+            cn = DARKRED;
+          }
+        } else if (r < 50) {
+          cn = DARKRED;
+        } else if (r < 80) {
+          cn = RED;
+        } else if (r < 120) {
+          cn = ORANGE;
+        } else if (r < 140) {
+          cn = YELLOW;
+        } else if (r < 170) {
+          cn = GRAY90;
+        } else {
+          cn = WHITE;
+        }
       }
 
-      glcolor(cn);
-
-      tile_blit(tile, point(tw * x, (th * y) + offset), point(tw * (x + 1), (th * (y + 1)) + offset + 1));
+      if (g_opt_ascii) {
+        ascii_putf(x, y + 1, WHITE, cn, L" ");
+      } else {
+        glcolor(cn);
+        tile_blit(tile, point(tw * x, (th * y) + offset), point(tw * (x + 1), (th * (y + 1)) + offset + 1));
+      }
     }
   }
-  blit_flush();
+
+  if (! g_opt_ascii) {
+    blit_flush();
+  }
+
+  //
+  // Blit the ascii logo
+  //
+  if (g_opt_ascii) {
+    char *zorb[] = {
+        (char *) "@@@@@@  @@@@@  @@@@@@  @@@@@@   @@@@@   @@@@  @@@ @@@",
+        (char *) "@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@@ @@@@@@ @@@ @@@",
+        (char *) "   @@! @@! @@@ @@! @@@ @@! @@@ @@! @@@ !@@    @@! @@@",
+        (char *) "   @!  !@! @!@ !@! @!@ !@  @!@ !@! @!@ !@!    !@! @!@",
+        (char *) "  @!   @!@ !@! @!@!@!  @!@@!@  @!@@!@! !!@!!  @!@!!@!",
+        (char *) " !!    !@! !!! !!@!!   !!!!!!! !!!!!!!  !!!!! !!!@!!!",
+        (char *) " !!    !!! !!! !!! !!  !!! !!! !!!!!!!     !! !!! !!!",
+        (char *) "!!     !!! !!! !!! !!! !!! !!! !!! !!!    !!! !!! !!!",
+        (char *) "!!!!!! !!!!!!! !!! !!! !!!!!!! !!! !!! !!!!!! !!! !!!",
+        (char *) "!!!!!!! !!!!!  !!! !!! !!!!!!  !!! !!! !!!!!  !!! !!!",
+        (char *) "!  : :  !::::  ::  ::: :!::::  ::: : : ::::!  ::  ::!",
+        (char *) ":  :    :       :  :    !  ::   :  : : :   :   :  : !",
+        (char *) ".  .    .       .    .  :  :           .   .        :",
+        (char *) ".       .                  :     . :   .            :",
+        (char *) "        .                              .             ",
+        (char *) "                                       .             ",
+        (char *) "                                       .             ",
+    };
+
+    for (int y = 0; y < ARRAY_SIZE(zorb); y++) {
+      for (int x = 0; x < strlen(zorb[ y ]); x++) {
+        if (zorb[ y ][ x ] == ' ') {
+          continue;
+        }
+
+        int atx = x + ((TERM_WIDTH - 50) / 2);
+        int aty = y + ((TERM_HEIGHT / 2) - 15);
+        if (zorb[ y ][ x ] == '@') {
+          ascii_putf(atx, aty, WHITE, fg, L"@");
+        } else if (zorb[ y ][ x ] == '!') {
+          ascii_putf(atx, aty, WHITE, fg2, L"!");
+        } else if (zorb[ y ][ x ] == ':') {
+          ascii_putf(atx, aty, WHITE, fg4, L":");
+        } else if (zorb[ y ][ x ] == '.') {
+          ascii_putf(atx, aty, WHITE, fg4, L".");
+        }
+      }
+    }
+  }
 }
 
 static void game_display_flames_change(int w, int h)
 {
   TRACE_NO_INDENT();
+
+  //
+  // Spawn new flames
+  //
   int flames = 3;
   while (flames--) {
     auto xr = non_pcg_random_range(w / 8, w - w / 8);
     auto r  = non_pcg_random_range(0, 100);
 
-    if (r < 60) {
-      bg[ xr - 3 ][ h - 1 ] = GRAY10;
-      bg[ xr - 2 ][ h - 1 ] = GRAY10;
-      bg[ xr - 1 ][ h - 1 ] = GRAY10;
-      bg[ xr ][ h - 1 ]     = WHITE;
-      bg[ xr + 1 ][ h - 1 ] = GRAY10;
-      bg[ xr + 2 ][ h - 1 ] = GRAY10;
-      bg[ xr + 3 ][ h - 1 ] = GRAY10;
+    if (r < 5) {
+      bg[ xr - 3 ][ h ] = GRAY10;
+      bg[ xr - 2 ][ h ] = GRAY10;
+      bg[ xr - 1 ][ h ] = WHITE;
+      bg[ xr ][ h ]     = WHITE;
+      bg[ xr + 1 ][ h ] = WHITE;
+      bg[ xr + 2 ][ h ] = GRAY10;
+      bg[ xr + 3 ][ h ] = GRAY10;
+    } else if (r < 60) {
+      bg[ xr - 3 ][ h ] = GRAY10;
+      bg[ xr - 2 ][ h ] = GRAY10;
+      bg[ xr - 1 ][ h ] = GRAY10;
+      bg[ xr ][ h ]     = WHITE;
+      bg[ xr + 1 ][ h ] = GRAY10;
+      bg[ xr + 2 ][ h ] = GRAY10;
+      bg[ xr + 3 ][ h ] = GRAY10;
     } else if (r < 90) {
-      bg[ xr - 1 ][ h - 1 ] = BLACK;
-      bg[ xr - 2 ][ h - 1 ] = BLACK;
-      bg[ xr ][ h - 1 ]     = BLACK;
-      bg[ xr + 1 ][ h - 1 ] = BLACK;
-      bg[ xr + 2 ][ h - 1 ] = BLACK;
+      bg[ xr - 1 ][ h ] = BLACK;
+      bg[ xr - 2 ][ h ] = BLACK;
+      bg[ xr ][ h ]     = BLACK;
+      bg[ xr + 1 ][ h ] = BLACK;
+      bg[ xr + 2 ][ h ] = BLACK;
     }
   }
 
+  //
+  // Some random sparks
+  //
   for (auto x = 0; x < w; x++) {
-    if (non_pcg_random_range(0, 100) < 99) {
+    if (non_pcg_random_range(0, 1000) < 995) {
       continue;
     }
 
-    int sparks = 3;
+    int sparks = 2;
     while (sparks--) {
-      for (auto y = 0; y < h - 1; y++) {
+      for (auto y = h / 2; y < h - 1; y++) {
         auto c0 = bg[ x ][ y ];
         auto c1 = bg[ x ][ y + 1 ];
 
         if (c0.r == 0) {
           if (c1.r > 0) {
-            bg[ x ][ y ] = WHITE;
+            bg[ x ][ y ].r = 200;
+            bg[ x ][ y ].g = 200;
+            bg[ x ][ y ].b = 200;
           }
         }
       }
     }
   }
 
+  //
+  // Scroll the flames at different speeds
+  //
   for (auto x = 0; x < w; x++) {
     if (non_pcg_random_range(0, 100) < 99) {
       continue;
@@ -135,7 +294,7 @@ static void game_display_flames_change(int w, int h)
 
     int scroll = 5;
     if (g_opt_ascii) {
-      scroll = 2;
+      scroll = 1;
     }
     while (scroll--) {
       for (auto y = 0; y < h - 1; y++) {
@@ -145,6 +304,9 @@ static void game_display_flames_change(int w, int h)
     }
   }
 
+  //
+  // Scroll the flames at different speeds
+  //
   for (auto x = 0; x < w; x++) {
     if (non_pcg_random_range(0, 100) < 95) {
       continue;
@@ -162,6 +324,9 @@ static void game_display_flames_change(int w, int h)
     }
   }
 
+  //
+  // Scroll the flames at different speeds
+  //
   for (auto x = 0; x < w; x++) {
     if (non_pcg_random_range(0, 100) < 50) {
       continue;
@@ -178,9 +343,12 @@ static void game_display_flames_change(int w, int h)
     }
   }
 
-  for (auto blend = 0; blend < 3; blend++) {
+  //
+  // Blend the flames
+  //
+  for (auto blend = 0; blend < 2; blend++) {
     for (auto x = 1; x < w - 1; x++) {
-      for (auto y = 1; y < h - 1; y++) {
+      for (auto y = 1; y < h + 1; y++) {
         auto c0 = bg[ x - 1 ][ y - 1 ];
         auto c1 = bg[ x ][ y - 1 ];
         auto c2 = bg[ x + 1 ][ y - 1 ];
@@ -207,7 +375,7 @@ static void game_display_flames_change(int w, int h)
     }
 
     for (auto x = 1; x < w - 1; x++) {
-      for (auto y = 1; y < h - 1; y++) {
+      for (auto y = 1; y < h; y++) {
         bg[ x ][ y ] = bg2[ x ][ y ];
       }
     }
@@ -219,6 +387,12 @@ void game_display_flames(void)
   TRACE_NO_INDENT();
   auto w = TERM_WIDTH * 2;
   auto h = TERM_HEIGHT * 2;
+
+  if (g_opt_ascii) {
+    w = TERM_WIDTH;
+    h = TERM_HEIGHT;
+  }
+
   game_display_flames_tiles(w, h);
   game_display_flames_change(w, h);
 }

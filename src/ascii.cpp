@@ -645,13 +645,13 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     if (unlikely(! tile)) {
       tile = font_ui->unicode_to_tile(c);
       if (tile == nullptr) {
-        tile = tile_find_mand(TILE_UNKNOWN);
+        tile = tile_find_mand(TILE_UNKNOWN_STR);
       }
     }
 
     auto saved_fg = fg;
 
-    auto is_cursor = (c == TILE_CURSOR);
+    auto is_cursor = (c == TILE_CURSOR_CHAR);
     if (unlikely(is_cursor)) {
       static uint32_t last;
       static uint8_t  first = true;
@@ -684,7 +684,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
       if (bg.r || bg.g || bg.b || bg.a) {
         static Tilep tile;
         if (unlikely(! tile)) {
-          tile = tile_find_mand(TILE_BLOCK);
+          tile = tile_find_mand(TILE_BLOCK_STR);
         }
         cell->bg_tile = tile;
       } else {

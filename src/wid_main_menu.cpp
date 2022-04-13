@@ -216,7 +216,7 @@ static uint8_t clamp(float v) // define a function to bound and round the input 
 }
 
 // https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color#8509802
-static color color_change_hue(const color &in, const float fHue)
+color color_change_hue(const color &in, const float fHue)
 {
   color       out;
   const float cosA = cos(fHue * 3.14159265f / 180); // convert degrees to radians

@@ -96,7 +96,6 @@ public:
 };
 
 extern color GRAY5;
-#if 0
 extern color ALICE_BLUE;
 extern color ALICEBLUE;
 extern color ANTIQUEWHITE1;
@@ -2406,7 +2405,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     51, 54, 47, 47                                                                                                   \
   }
-#endif
 
 extern color gl_last_color;
 extern color gl_save_color;
@@ -2455,24 +2453,28 @@ extern color GOLD4;
 extern color GOLD;
 extern color CYAN;
 
-color       color_find(const char *s);
-color       color_to_mono(color a);
-color       gl_color_current(void);
-color       string2color(const char **s);
-color       string2color(const wchar_t **s);
-color       string2color(std::string &s);
-color       string2color(std::string &s, int *len);
-color       string2color(std::wstring &s, int *len);
+color color_find(const char *s);
+color color_to_mono(color a);
+color gl_color_current(void);
+color string2color(const char **s);
+color string2color(const wchar_t **s);
+color string2color(std::string &s);
+color string2color(std::string &s, int *len);
+color string2color(std::wstring &s, int *len);
+color color_change_hue(const color &in, const float fHue);
+
 const char *string2colorname(const char **s);
+
 std::string string2colorname(std::string &s);
-void        color_fini(void);
-void        color_init(void);
-void        color_init1(void);
-void        color_init2(void);
-void        color_init3(void);
-void        color_init4(void);
-void        color_set(std::string name, color *c, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-void        glcolor_restore(void);
-void        glcolor_save(void);
+
+void color_fini(void);
+void color_init(void);
+void color_init1(void);
+void color_init2(void);
+void color_init3(void);
+void color_init4(void);
+void color_set(std::string name, color *c, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+void glcolor_restore(void);
+void glcolor_save(void);
 
 #endif // _MY_COLOR_HPP_
