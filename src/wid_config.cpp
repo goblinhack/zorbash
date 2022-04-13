@@ -215,9 +215,10 @@ void Game::wid_config_top_menu(void)
   wid_skillbox_fini();
   wid_thing_info_fini("confg top menu");
 
-  auto box_height = g_opt_ascii ? 0 : 2;
-  auto box_step   = g_opt_ascii ? 2 : 3;
-  auto box_style  = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
+  auto box_height          = g_opt_ascii ? 0 : 2;
+  auto box_step            = g_opt_ascii ? 2 : 3;
+  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
+  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
 
   point tl = make_point(TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2, TERM_HEIGHT / 2 - 4);
   point br = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 14);
@@ -248,6 +249,9 @@ void Game::wid_config_top_menu(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_graphics);
     wid_set_pos(w, tl, br);
@@ -261,6 +265,9 @@ void Game::wid_config_top_menu(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_sound);
     wid_set_pos(w, tl, br);
@@ -274,6 +281,9 @@ void Game::wid_config_top_menu(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_keyboard);
     wid_set_pos(w, tl, br);
@@ -287,6 +297,9 @@ void Game::wid_config_top_menu(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_other);
     wid_set_pos(w, tl, br);
@@ -300,6 +313,9 @@ void Game::wid_config_top_menu(void)
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_back);
     wid_set_pos(w, tl, br);

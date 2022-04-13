@@ -31,6 +31,7 @@ extern bool g_quitting;                 // Exitting the game
 extern bool g_render_black_and_white;   // Rendering map in black and white
 extern bool g_saved_snapshot;           // Just saved a snapshot
 extern bool g_opt_ascii;                // Ascii mode
+extern bool g_opt_ascii_set;            // Ascii mode forced
 
 // --debug  Basic debug
 // --debug2 Map is visible and memory checks enabled

@@ -480,15 +480,20 @@ static void usage(void)
 
   CON("zorbash, options:");
   CON(" ");
-  CON(" --player-name 'disco bob'   // Set your name");
-  CON(" --quick-start               // Skip menus, start the game");
-  CON(" --resume                    // Load last snapshot");
-  CON(" --debug                     // Basic debug");
-  CON(" --debug2                    // Map is visible and memory checks "
-      "enabled");
-  CON(" --debug3                    // All debugs. Slow.");
-  CON(" --no-debug                  // Disable debug");
-  CON(" --seed <name/number>        // Set the random dungeon seed");
+  CON(" --ascii                     -- Enable ascii graphics.");
+  CON(" --pixelart                  -- Enable pixelart graphics.");
+  CON(" ");
+  CON(" --player-name 'disco bob'   -- Set your name.");
+  CON(" --seed <name/number>        -- Set the random dungeon seed.");
+  CON(" ");
+  CON(" --quick-start               -- Skip menus, start the game.");
+  CON(" --resume                    -- Load last snapshot.");
+  CON(" ");
+  CON(" --debug                     -- Basic debug.");
+  CON(" --debug2                    -- Most debugs. Most useful.");
+  CON(" --debug3                    -- All debugs. Slow.");
+  CON(" ");
+  CON(" --no-debug                  -- Disable debugs.");
   CON(" ");
   CON("Written by goblinhack@gmail.com");
 }
@@ -512,7 +517,14 @@ static void parse_args(int32_t argc, char *argv[])
 
   for (i = 1; i < argc; i++) {
     if (! strcasecmp(argv[ i ], "--ascii") || ! strcasecmp(argv[ i ], "-ascii")) {
-      g_opt_ascii = true;
+      g_opt_ascii     = true;
+      g_opt_ascii_set = true;
+      continue;
+    }
+
+    if (! strcasecmp(argv[ i ], "--pixelart") || ! strcasecmp(argv[ i ], "-pixelart")) {
+      g_opt_ascii     = false;
+      g_opt_ascii_set = true;
       continue;
     }
 
@@ -691,16 +703,18 @@ int32_t main(int32_t argc, char *argv[])
   }
 #endif
 
-  IF_DEBUG2
-  {
-    if (game) {
-      game->config.ascii_mode = g_opt_ascii;
-      game->config.debug_mode = g_opt_debug2;
-    }
-  }
-
   if (! sdl_init()) {
     ERR("SDL: Init");
+  }
+
+  //
+  // Check for overrides.
+  //
+  if (game) {
+    if (g_opt_ascii_set) {
+      parse_args(argc, argv);
+      sdl_config_update_all();
+    }
   }
 
   if (g_need_restart) {
