@@ -215,11 +215,24 @@ void Game::wid_config_top_menu(void)
   wid_skillbox_fini();
   wid_thing_info_fini("confg top menu");
 
-  point tl    = make_point(TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2, TERM_HEIGHT / 2 - 4);
-  point br    = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 14);
-  auto  width = br.x - tl.x - 2;
+  auto box_height = g_opt_ascii ? 0 : 2;
+  auto box_step   = g_opt_ascii ? 2 : 3;
+  auto box_style  = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
 
-  wid_config_top_window = new WidPopup("Config menu", tl, br, nullptr, "nothing", false, false);
+  point tl = make_point(TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2, TERM_HEIGHT / 2 - 4);
+  point br = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 14);
+  if (g_opt_ascii) {
+    tl = make_point(TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2, TERM_HEIGHT / 2 - 4);
+    br = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 6);
+  }
+  auto width = br.x - tl.x - 2;
+
+  if (g_opt_ascii) {
+    wid_config_top_window = new WidPopup("Config menu", tl, br, nullptr, "", false, false);
+  } else {
+    wid_config_top_window = new WidPopup("Config menu", tl, br, nullptr, "nothing", false, false);
+  }
+
   {
     TRACE_AND_INDENT();
     Widp w = wid_config_top_window->wid_popup_container;
@@ -234,60 +247,60 @@ void Game::wid_config_top_menu(void)
     auto w = wid_new_square_button(p, "graphics");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    point br = make_point(width, y_at + box_height);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_graphics);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$G%%fg=reset$raphics");
   }
-  y_at += 3;
+  y_at += box_step;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "sound");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    point br = make_point(width, y_at + box_height);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_sound);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$S%%fg=reset$ound and music");
   }
-  y_at += 3;
+  y_at += box_step;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "keyboard");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    point br = make_point(width, y_at + box_height);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_keyboard);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$K%%fg=reset$eyboard");
   }
-  y_at += 3;
+  y_at += box_step;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Other stuffs");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    point br = make_point(width, y_at + box_height);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_other);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$O%%fg=reset$ther stuffs");
   }
-  y_at += 3;
+  y_at += box_step;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    point br = make_point(width, y_at + box_height);
+    wid_set_style(w, box_style);
     wid_set_on_mouse_up(w, wid_config_top_back);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
