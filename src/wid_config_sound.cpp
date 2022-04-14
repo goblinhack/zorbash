@@ -12,20 +12,25 @@
 #include <SDL_mixer.h>
 
 static WidPopup *wid_config_sound_window;
+static bool      config_changed;
 
 static void wid_config_sound_destroy(void)
 {
   TRACE_AND_INDENT();
   delete wid_config_sound_window;
   wid_config_sound_window = nullptr;
+  config_changed          = false;
 }
 
 static uint8_t wid_config_sound_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   CON("INF: Reload config");
-  game->load_config();
-  sdl_config_update_all();
+  if (config_changed) {
+    config_changed = false;
+    game->load_config();
+    sdl_config_update_all();
+  }
   wid_config_sound_destroy();
   game->wid_config_top_menu();
   return true;
@@ -52,6 +57,7 @@ static uint8_t wid_config_sound_back(Widp w, int32_t x, int32_t y, uint32_t butt
 static uint8_t wid_config_sound_effects_volume_incr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Increment sound volume");
   game->config.sound_volume++;
   if (game->config.sound_volume > MIX_MAX_VOLUME) {
@@ -64,6 +70,7 @@ static uint8_t wid_config_sound_effects_volume_incr(Widp w, int32_t x, int32_t y
 static uint8_t wid_config_sound_effects_volume_decr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Decrement sound volume");
   if (game->config.sound_volume > 0) {
     game->config.sound_volume--;
@@ -77,6 +84,7 @@ static uint8_t wid_config_sound_effects_volume_decr(Widp w, int32_t x, int32_t y
 static uint8_t wid_config_sound_music_volume_incr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Increment music volume");
   game->config.music_volume++;
   if (game->config.music_volume > MIX_MAX_VOLUME) {
@@ -90,6 +98,7 @@ static uint8_t wid_config_sound_music_volume_incr(Widp w, int32_t x, int32_t y, 
 static uint8_t wid_config_sound_music_volume_decr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Decrement music volume");
   if (game->config.music_volume > 0) {
     game->config.music_volume--;
@@ -153,8 +162,8 @@ void Game::wid_config_sound_select(void)
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
   auto m                   = TERM_WIDTH / 2;
 
-  point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, TERM_HEIGHT / 2 - 10);
-  point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, TERM_HEIGHT / 2 + 11);
+  point tl = make_point(m - 16, TERM_HEIGHT / 2 - 5);
+  point br = make_point(m + 16, TERM_HEIGHT / 2 + 6);
 
   auto width = br.x - tl.x - 2;
 
@@ -236,7 +245,7 @@ void Game::wid_config_sound_select(void)
     auto w = wid_new_square_button(p, "Effects volume value");
 
     point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 6, y_at);
+    point br = make_point(width / 2 + 8, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -249,8 +258,8 @@ void Game::wid_config_sound_select(void)
     auto p = wid_config_sound_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Effects value +");
 
-    point tl = make_point(width / 2 + 7, y_at);
-    point br = make_point(width / 2 + 9, y_at);
+    point tl = make_point(width / 2 + 9, y_at);
+    point br = make_point(width / 2 + 11, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -265,8 +274,8 @@ void Game::wid_config_sound_select(void)
     auto p = wid_config_sound_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Effects value -");
 
-    point tl = make_point(width / 2 + 10, y_at);
-    point br = make_point(width / 2 + 12, y_at);
+    point tl = make_point(width / 2 + 12, y_at);
+    point br = make_point(width / 2 + 14, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -296,7 +305,7 @@ void Game::wid_config_sound_select(void)
     auto w = wid_new_square_button(p, "Music volume value");
 
     point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 6, y_at);
+    point br = make_point(width / 2 + 8, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -309,8 +318,8 @@ void Game::wid_config_sound_select(void)
     auto p = wid_config_sound_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Music value +");
 
-    point tl = make_point(width / 2 + 7, y_at);
-    point br = make_point(width / 2 + 9, y_at);
+    point tl = make_point(width / 2 + 9, y_at);
+    point br = make_point(width / 2 + 11, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -325,8 +334,8 @@ void Game::wid_config_sound_select(void)
     auto p = wid_config_sound_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Music value -");
 
-    point tl = make_point(width / 2 + 10, y_at);
-    point br = make_point(width / 2 + 12, y_at);
+    point tl = make_point(width / 2 + 12, y_at);
+    point br = make_point(width / 2 + 14, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);

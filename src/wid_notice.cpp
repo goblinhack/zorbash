@@ -51,12 +51,16 @@ void wid_notice(std::string s)
     wid_notice_destroy();
   }
 
-  auto  m     = TERM_WIDTH / 2;
-  auto  n     = TERM_HEIGHT / 2;
-  int   w     = (s.size() / 2) + 2;
-  point tl    = make_point(m - w, n - 2);
-  point br    = make_point(m + w - 1, n + 2);
-  auto  width = br.x - tl.x;
+  auto  m  = TERM_WIDTH / 2;
+  auto  n  = TERM_HEIGHT / 2;
+  point tl = make_point(0, 0);
+  point br = make_point(s.size() + 3, 8);
+  point offset(m, n);
+  offset.x -= s.size() / 2;
+  tl += offset;
+  br += offset;
+
+  auto width = br.x - tl.x;
 
   wid_notice_window = new WidPopup("Game notice", tl, br, nullptr, "", false, false);
   {
@@ -73,11 +77,12 @@ void wid_notice(std::string s)
     auto w = wid_new_square_button(p, "notice");
 
     point tl = make_point(0, y_at);
-    point br = make_point(width, y_at + 1);
+    point br = make_point(width - 1, y_at + 1);
     wid_set_shape_none(w);
     wid_set_on_mouse_up(w, wid_notice_ok);
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
+    wid_set_style(w, UI_WID_STYLE_OK);
   }
 
   y_at = 3;
@@ -91,7 +96,7 @@ void wid_notice(std::string s)
     wid_set_style(w, UI_WID_STYLE_OK);
     wid_set_on_mouse_up(w, wid_notice_ok);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "ok!");
+    wid_set_text(w, "Ok!");
   }
 
   wid_update(wid_notice_window->wid_text_area->wid_text_area);

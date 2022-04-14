@@ -13,20 +13,25 @@
 
 static WidPopup *wid_config_gfx_window;
 static bool      local_g_need_restart = false;
+static bool      config_changed;
 
 static void wid_config_gfx_destroy(void)
 {
   TRACE_AND_INDENT();
   delete wid_config_gfx_window;
   wid_config_gfx_window = nullptr;
+  config_changed        = false;
 }
 
 static uint8_t wid_config_gfx_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   CON("INF: Reload config");
-  game->load_config();
-  sdl_config_update_all();
+  if (config_changed) {
+    config_changed = false;
+    game->load_config();
+    sdl_config_update_all();
+  }
   wid_config_gfx_destroy();
   game->wid_config_top_menu();
   return true;
@@ -56,6 +61,7 @@ static uint8_t wid_config_gfx_back(Widp w, int32_t x, int32_t y, uint32_t button
 static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Toggle vsync");
   game->config.gfx_vsync_enable = ! game->config.gfx_vsync_enable;
   config_gfx_vsync_update();
@@ -66,6 +72,7 @@ static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int32_t x, int32_t y, 
 static uint8_t wid_config_ascii_mode_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Toggle vsync");
   g_opt_ascii             = ! g_opt_ascii;
   game->config.ascii_mode = g_opt_ascii;
@@ -78,6 +85,7 @@ static uint8_t wid_config_ascii_mode_toggle(Widp w, int32_t x, int32_t y, uint32
 static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Toggle gfx fullscreen");
   game->config.gfx_fullscreen = ! game->config.gfx_fullscreen;
   if (game->config.gfx_fullscreen) {
@@ -91,6 +99,7 @@ static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int32_t x, int32_t y, ui
 static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Toggle gfx fullscreen desktop");
   game->config.gfx_fullscreen_desktop = ! game->config.gfx_fullscreen_desktop;
   if (game->config.gfx_fullscreen_desktop) {
@@ -104,6 +113,7 @@ static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int32_t x, int32
 static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Toggle gfx allow highdpi");
   game->config.gfx_allow_highdpi = ! game->config.gfx_allow_highdpi;
   game->wid_config_gfx_select();
@@ -114,6 +124,7 @@ static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int32_t x, int32_t y,
 static uint8_t wid_config_gfx_borderless_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Toggle gfx borderless");
   game->config.gfx_borderless = ! game->config.gfx_borderless;
   game->wid_config_gfx_select();
@@ -124,6 +135,7 @@ static uint8_t wid_config_gfx_borderless_toggle(Widp w, int32_t x, int32_t y, ui
 static uint8_t wid_config_gfx_inverted_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Toggle inverted");
   game->config.gfx_inverted = ! game->config.gfx_inverted;
   game->wid_config_gfx_select();
@@ -133,6 +145,7 @@ static uint8_t wid_config_gfx_inverted_toggle(Widp w, int32_t x, int32_t y, uint
 static uint8_t wid_config_other_fps_counter_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Toggle fps counter");
   game->config.fps_counter = ! game->config.fps_counter;
   game->wid_config_gfx_select();
@@ -142,6 +155,7 @@ static uint8_t wid_config_other_fps_counter_toggle(Widp w, int32_t x, int32_t y,
 static uint8_t wid_config_gfx_resolution_incr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Increment resolution");
   auto res    = std::to_string(game->config.window_pix_width) + "x" + std::to_string(game->config.window_pix_height);
   auto n      = SDL_GetNumDisplayModes(0);
@@ -175,6 +189,7 @@ static uint8_t wid_config_gfx_resolution_incr(Widp w, int32_t x, int32_t y, uint
 static uint8_t wid_config_gfx_resolution_decr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
   CON("INF: Decrement resolution");
   auto res    = std::to_string(game->config.window_pix_width) + "x" + std::to_string(game->config.window_pix_height);
   auto n      = SDL_GetNumDisplayModes(0);
@@ -208,6 +223,7 @@ static uint8_t wid_config_gfx_resolution_decr(Widp w, int32_t x, int32_t y, uint
 static uint8_t wid_config_gfx_term_width_size_decr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
 
   CON("INF: Decrement term width");
   if (g_opt_ascii) {
@@ -232,6 +248,7 @@ static uint8_t wid_config_gfx_term_width_size_decr(Widp w, int32_t x, int32_t y,
 static uint8_t wid_config_gfx_term_width_size_incr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
 
   CON("INF: Decrement term width");
   if (g_opt_ascii) {
@@ -256,6 +273,7 @@ static uint8_t wid_config_gfx_term_width_size_incr(Widp w, int32_t x, int32_t y,
 static uint8_t wid_config_gfx_term_height_size_decr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
 
   CON("INF: Decrement term height");
   if (g_opt_ascii) {
@@ -280,6 +298,7 @@ static uint8_t wid_config_gfx_term_height_size_decr(Widp w, int32_t x, int32_t y
 static uint8_t wid_config_gfx_term_height_size_incr(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
+  config_changed = true;
 
   CON("INF: Decrement term height");
   if (g_opt_ascii) {
@@ -353,8 +372,8 @@ void Game::wid_config_gfx_select(void)
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
   auto m                   = TERM_WIDTH / 2;
 
-  point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, TERM_HEIGHT / 2 - 10);
-  point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, TERM_HEIGHT / 2 + 11);
+  point tl = make_point(m - 20, TERM_HEIGHT / 2 - 10);
+  point br = make_point(m + 20, TERM_HEIGHT / 2 + 11);
 
   auto width = br.x - tl.x - 2;
 
@@ -628,8 +647,8 @@ void Game::wid_config_gfx_select(void)
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Ascii mode");
 
-    point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 10, y_at);
+    point tl = make_point(29, y_at);
+    point br = make_point(37, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -665,8 +684,8 @@ void Game::wid_config_gfx_select(void)
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen value");
 
-    point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 10, y_at);
+    point tl = make_point(29, y_at);
+    point br = make_point(37, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -702,8 +721,8 @@ void Game::wid_config_gfx_select(void)
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen value");
 
-    point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 10, y_at);
+    point tl = make_point(29, y_at);
+    point br = make_point(37, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -739,8 +758,8 @@ void Game::wid_config_gfx_select(void)
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "High DPI value");
 
-    point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 10, y_at);
+    point tl = make_point(29, y_at);
+    point br = make_point(37, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -776,8 +795,8 @@ void Game::wid_config_gfx_select(void)
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Borderless");
 
-    point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 10, y_at);
+    point tl = make_point(29, y_at);
+    point br = make_point(37, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -814,8 +833,8 @@ void Game::wid_config_gfx_select(void)
       auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync value");
 
-      point tl = make_point(width / 2, y_at);
-      point br = make_point(width / 2 + 10, y_at);
+      point tl = make_point(29, y_at);
+      point br = make_point(37, y_at);
       wid_set_mode(w, WID_MODE_OVER);
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
@@ -851,8 +870,8 @@ void Game::wid_config_gfx_select(void)
       auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync value");
 
-      point tl = make_point(width / 2, y_at);
-      point br = make_point(width / 2 + 10, y_at);
+      point tl = make_point(29, y_at);
+      point br = make_point(37, y_at);
       wid_set_mode(w, WID_MODE_OVER);
       wid_set_style(w, box_highlight_style);
       wid_set_mode(w, WID_MODE_NORMAL);
@@ -884,8 +903,8 @@ void Game::wid_config_gfx_select(void)
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inverted graphics value");
 
-    point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 10, y_at);
+    point tl = make_point(29, y_at);
+    point br = make_point(37, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -921,8 +940,8 @@ void Game::wid_config_gfx_select(void)
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "FPS counter value");
 
-    point tl = make_point(width / 2, y_at);
-    point br = make_point(width / 2 + 10, y_at);
+    point tl = make_point(29, y_at);
+    point br = make_point(37, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
