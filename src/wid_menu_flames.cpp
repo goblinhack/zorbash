@@ -200,8 +200,8 @@ static void game_display_flames_tiles(int w, int h)
         (char *) "                                       .             ",
     };
 
-    for (int y = 0; y < ARRAY_SIZE(zorb); y++) {
-      for (int x = 0; x < strlen(zorb[ y ]); x++) {
+    for (int y = 0; y < (int) ARRAY_SIZE(zorb); y++) {
+      for (int x = 0; x < (int) strlen(zorb[ y ]); x++) {
         if (zorb[ y ][ x ] == ' ') {
           continue;
         }

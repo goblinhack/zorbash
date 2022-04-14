@@ -672,7 +672,7 @@ static void wid_keyboard_destroy(Widp w)
   verify(MTYPE_MISC, ctx);
 
   wid_set_void_context(w, 0);
-  delete ctx;
+  oldptr(MTYPE_MISC, ctx);
 
   wid_keyboard_visible = false;
 }

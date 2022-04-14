@@ -27,7 +27,6 @@ void wid_progress_bar(const std::string &title, float pct)
 
   if (wid_progress_bar_window) {
     wid_progress_bar_destroy();
-    wid_gc_all();
   }
 
   int tile_num;

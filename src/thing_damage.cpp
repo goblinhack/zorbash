@@ -348,7 +348,7 @@ int Tp::damage_acid_chance_d1000(int index) const
 
 int Tp::damage_cold_chance_d1000(int index) const
 {
-  if (index >= _damage_cold_chance_d1000.size()) {
+  if (index >= (int) _damage_cold_chance_d1000.size()) {
     return 0;
   }
   return _damage_cold_chance_d1000[ index ];
