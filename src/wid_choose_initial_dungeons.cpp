@@ -161,16 +161,41 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
   if (ctx->levels[ y ][ x ]) {
     switch (node->depth) {
       case -1: break;
-      case 1: bg_tilename = "dungeon_icon.1"; break;
-      case 2: bg_tilename = "dungeon_icon.2"; break;
-      case 3: bg_tilename = "dungeon_icon.3"; break;
-      case 4: bg_tilename = "dungeon_icon.4"; break;
-      case 5: bg_tilename = "dungeon_icon.5"; break;
-      case 6: bg_tilename = "dungeon_icon.6"; break;
-      case 7: bg_tilename = "dungeon_icon.7"; break;
-      case 8: bg_tilename = "dungeon_icon.8"; break;
+      case 1:
+        bg_tilename = "dungeon_icon.1";
+        wid_set_color(b, WID_COLOR_BG, DARKGREEN);
+        break;
+      case 2:
+        bg_tilename = "dungeon_icon.2";
+        wid_set_color(b, WID_COLOR_BG, OLIVEDRAB);
+        break;
+      case 3:
+        bg_tilename = "dungeon_icon.3";
+        wid_set_color(b, WID_COLOR_BG, YELLOW);
+        break;
+      case 4:
+        bg_tilename = "dungeon_icon.4";
+        wid_set_color(b, WID_COLOR_BG, TAN);
+        break;
+      case 5:
+        bg_tilename = "dungeon_icon.5";
+        wid_set_color(b, WID_COLOR_BG, ORANGE);
+        break;
+      case 6:
+        bg_tilename = "dungeon_icon.6";
+        wid_set_color(b, WID_COLOR_BG, DARKORANGE4);
+        break;
+      case 7:
+        bg_tilename = "dungeon_icon.7";
+        wid_set_color(b, WID_COLOR_BG, RED);
+        break;
+      case 8:
+        bg_tilename = "dungeon_icon.8";
+        wid_set_color(b, WID_COLOR_BG, GRAY50);
+        break;
     }
   } else {
+    wid_set_color(b, WID_COLOR_BG, GRAY);
     switch (node->depth) {
       case -1: break;
       case 1: bg_tilename = "dungeon_icon_loading.1"; break;
@@ -199,6 +224,8 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     fg_tilename = "final_boss_icon";
   }
 
+  wid_set_style(b, UI_WID_STYLE_GRAY);
+
   if (node->is_key) {
     switch (node->depth) {
       case -1: break;
@@ -213,15 +240,19 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     }
   }
 
-  if (! bg_tilename.empty()) {
-    wid_set_bg_tilename(b, bg_tilename);
+  if (! g_opt_ascii) {
+    if (! bg_tilename.empty()) {
+      wid_set_bg_tilename(b, bg_tilename);
+    }
   }
 
   auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (l) {
-    if (! fg_tilename.empty()) {
-      wid_set_fg_tilename(b, fg_tilename);
+    if (! g_opt_ascii) {
+      if (! fg_tilename.empty()) {
+        wid_set_fg_tilename(b, fg_tilename);
+      }
     }
 
     if (node->is_lock) {
@@ -946,14 +977,15 @@ void Game::wid_choose_initial_dungeons(void)
 {
   TRACE_AND_INDENT();
 
+  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
+  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
+
   py_call_void_fn("events", "on_initial_dungeon_menu_select", 0);
 
   pre_init();
 
-  auto box_height          = g_opt_ascii ? 0 : 2;
-  auto box_step            = g_opt_ascii ? 1 : 3;
-  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
-  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
+  auto box_height = g_opt_ascii ? 0 : 2;
+  auto box_step   = g_opt_ascii ? 1 : 3;
 
   if (g_opt_ascii) {
     WID_LEVEL_WIDTH_CHARS  = 3;
@@ -1210,6 +1242,72 @@ void Game::wid_choose_initial_dungeons(void)
 
         tl_y--;
 
+        if (g_opt_ascii) {
+          if (node->is_lock) {
+            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+            point tl(tl_x, tl_y);
+            point br(br_x, br_y);
+
+            br.x = tl.x;
+            br.y = tl.y;
+            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
+            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
+
+            wid_set_pos(b, tl, br);
+            wid_set_color(b, WID_COLOR_BG, ORANGE);
+            wid_set_text(b, "B");
+            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+          }
+
+          if (node->is_key) {
+            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+            point tl(tl_x, tl_y);
+            point br(br_x, br_y);
+
+            br.x = tl.x;
+            br.y = tl.y;
+            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
+            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
+
+            wid_set_pos(b, tl, br);
+            wid_set_color(b, WID_COLOR_BG, YELLOW);
+            wid_set_text(b, "*");
+            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+          }
+
+          if (node->is_ascend_dungeon) {
+            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+            point tl(tl_x, tl_y);
+            point br(br_x, br_y);
+
+            br.x = tl.x;
+            br.y = tl.y;
+            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
+            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
+
+            wid_set_pos(b, tl, br);
+            wid_set_color(b, WID_COLOR_BG, PINK);
+            wid_set_text(b, "@");
+            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+          }
+
+          if (node->is_descend_dungeon) {
+            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+            point tl(tl_x, tl_y);
+            point br(br_x, br_y);
+
+            br.x = tl.x;
+            br.y = tl.y;
+            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
+            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
+
+            wid_set_pos(b, tl, br);
+            wid_set_color(b, WID_COLOR_BG, RED);
+            wid_set_text(b, "Z");
+            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+          }
+        }
+
         //
         // Create connectors between levels
         //
@@ -1226,6 +1324,8 @@ void Game::wid_choose_initial_dungeons(void)
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
             wid_set_fg2_tilename(b, "ud_icon");
+          } else {
+            wid_set_text(b, "|");
           }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
@@ -1243,6 +1343,8 @@ void Game::wid_choose_initial_dungeons(void)
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
             wid_set_fg2_tilename(b, "lr_icon");
+          } else {
+            wid_set_text(b, "_");
           }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
@@ -1260,7 +1362,10 @@ void Game::wid_choose_initial_dungeons(void)
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
             wid_set_fg2_tilename(b, "lr_icon");
+          } else {
+            wid_set_text(b, "_");
           }
+
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
@@ -1276,6 +1381,8 @@ void Game::wid_choose_initial_dungeons(void)
           wid_set_pos(b, tl, br);
           if (! g_opt_ascii) {
             wid_set_fg2_tilename(b, "ud_icon");
+          } else {
+            wid_set_text(b, "|");
           }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
@@ -1283,7 +1390,99 @@ void Game::wid_choose_initial_dungeons(void)
     }
   }
 
-  if (! g_opt_ascii) {
+  if (g_opt_ascii) {
+    if (1) {
+      auto  w  = wid_new_square_button(window, "wid key");
+      point tl = make_point(TERM_WIDTH - 10, 10);
+      point br = make_point(TERM_WIDTH - 4, 10);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "Key:");
+    }
+
+    if (1) {
+      if (1) {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 10, 11);
+        point br = make_point(TERM_WIDTH - 10, 11);
+        wid_set_style(w, UI_WID_STYLE_GRAY);
+        wid_set_color(w, WID_COLOR_BG, ORANGE);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "B");
+      }
+
+      if (1) {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 8, 11);
+        point br = make_point(TERM_WIDTH - 1, 11);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Boss");
+      }
+    }
+
+    if (1) {
+      if (1) {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 10, 12);
+        point br = make_point(TERM_WIDTH - 10, 12);
+        wid_set_style(w, UI_WID_STYLE_GRAY);
+        wid_set_color(w, WID_COLOR_BG, YELLOW);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "*");
+      }
+
+      if (1) {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 8, 12);
+        point br = make_point(TERM_WIDTH - 1, 12);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Crystal");
+      }
+    }
+
+    if (1) {
+      if (1) {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 10, 13);
+        point br = make_point(TERM_WIDTH - 10, 13);
+        wid_set_style(w, UI_WID_STYLE_GRAY);
+        wid_set_color(w, WID_COLOR_BG, RED);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Z");
+      }
+
+      if (1) {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 8, 13);
+        point br = make_point(TERM_WIDTH - 1, 13);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Zorbash");
+      }
+    }
+
+    if (1) {
+      if (1) {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 10, 14);
+        point br = make_point(TERM_WIDTH - 10, 14);
+        wid_set_style(w, UI_WID_STYLE_GRAY);
+        wid_set_color(w, WID_COLOR_BG, PINK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "@");
+      }
+
+      if (1) {
+        auto  w  = wid_new_square_button(window, "wid key");
+        point tl = make_point(TERM_WIDTH - 8, 14);
+        point br = make_point(TERM_WIDTH - 1, 14);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "You");
+      }
+    }
+  } else {
     int y = TERM_HEIGHT - 36;
 
     {
