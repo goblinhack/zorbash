@@ -11,8 +11,9 @@
 #include "my_wid_notice.hpp"
 #include "my_wid_popup.hpp"
 
-static int last_vert_scroll_offset = -1;
-WidPopup  *wid_config_keyboard_window;
+static int  last_vert_scroll_offset = -1;
+WidPopup   *wid_config_keyboard_window;
+static bool config_changed;
 
 static void wid_config_check_for_conflicts(SDL_Keysym code)
 {
@@ -171,6 +172,8 @@ static void wid_config_check_for_conflicts(SDL_Keysym code)
 void wid_config_keyboard_destroy(void)
 {
   TRACE_AND_INDENT();
+  config_changed = false;
+
   if (! wid_config_keyboard_window) {
     return;
   }
@@ -190,7 +193,11 @@ static uint8_t wid_config_keyboard_cancel(Widp w, int32_t x, int32_t y, uint32_t
 {
   TRACE_AND_INDENT();
   CON("INF: Reload config");
-  game->load_config();
+  if (config_changed) {
+    config_changed = false;
+    game->load_config();
+    sdl_config_update_all();
+  }
   wid_config_keyboard_destroy();
   if (game->started) {
     //
@@ -236,6 +243,7 @@ static uint8_t wid_config_keyboard_back(Widp w, int32_t x, int32_t y, uint32_t b
 static void wid_config_key_move_left_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed             = true;
   game->config.key_move_left = {};
   wid_config_check_for_conflicts(code);
   game->config.key_move_left = code;
@@ -245,6 +253,7 @@ static void wid_config_key_move_left_set(SDL_Keysym code)
 static void wid_config_key_move_right_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed              = true;
   game->config.key_move_right = {};
   wid_config_check_for_conflicts(code);
   game->config.key_move_right = code;
@@ -254,6 +263,7 @@ static void wid_config_key_move_right_set(SDL_Keysym code)
 static void wid_config_key_move_up_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_move_up = {};
   wid_config_check_for_conflicts(code);
   game->config.key_move_up = code;
@@ -263,6 +273,7 @@ static void wid_config_key_move_up_set(SDL_Keysym code)
 static void wid_config_key_move_down_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed             = true;
   game->config.key_move_down = {};
   wid_config_check_for_conflicts(code);
   game->config.key_move_down = code;
@@ -272,6 +283,7 @@ static void wid_config_key_move_down_set(SDL_Keysym code)
 static void wid_config_key_map_left_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed            = true;
   game->config.key_map_left = {};
   wid_config_check_for_conflicts(code);
   game->config.key_map_left = code;
@@ -281,6 +293,7 @@ static void wid_config_key_map_left_set(SDL_Keysym code)
 static void wid_config_key_map_right_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed             = true;
   game->config.key_map_right = {};
   wid_config_check_for_conflicts(code);
   game->config.key_map_right = code;
@@ -290,6 +303,7 @@ static void wid_config_key_map_right_set(SDL_Keysym code)
 static void wid_config_key_map_up_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed          = true;
   game->config.key_map_up = {};
   wid_config_check_for_conflicts(code);
   game->config.key_map_up = code;
@@ -299,6 +313,7 @@ static void wid_config_key_map_up_set(SDL_Keysym code)
 static void wid_config_key_map_down_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed            = true;
   game->config.key_map_down = {};
   wid_config_check_for_conflicts(code);
   game->config.key_map_down = code;
@@ -308,6 +323,7 @@ static void wid_config_key_map_down_set(SDL_Keysym code)
 static void wid_config_key_attack_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed          = true;
   game->config.key_attack = {};
   wid_config_check_for_conflicts(code);
   game->config.key_attack = code;
@@ -317,6 +333,7 @@ static void wid_config_key_attack_set(SDL_Keysym code)
 static void wid_config_key_wait_or_collect_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed                   = true;
   game->config.key_wait_or_collect = {};
   wid_config_check_for_conflicts(code);
   game->config.key_wait_or_collect = code;
@@ -326,6 +343,7 @@ static void wid_config_key_wait_or_collect_set(SDL_Keysym code)
 static void wid_config_key_jump_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed        = true;
   game->config.key_jump = {};
   wid_config_check_for_conflicts(code);
   game->config.key_jump = code;
@@ -335,6 +353,7 @@ static void wid_config_key_jump_set(SDL_Keysym code)
 static void wid_config_key_throw_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed         = true;
   game->config.key_throw = {};
   wid_config_check_for_conflicts(code);
   game->config.key_throw = code;
@@ -344,6 +363,7 @@ static void wid_config_key_throw_set(SDL_Keysym code)
 static void wid_config_key_inventory_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed             = true;
   game->config.key_inventory = {};
   wid_config_check_for_conflicts(code);
   game->config.key_inventory = code;
@@ -353,6 +373,7 @@ static void wid_config_key_inventory_set(SDL_Keysym code)
 static void wid_config_key_drop_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed        = true;
   game->config.key_drop = {};
   wid_config_check_for_conflicts(code);
   game->config.key_drop = code;
@@ -362,6 +383,7 @@ static void wid_config_key_drop_set(SDL_Keysym code)
 static void wid_config_key_use_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed       = true;
   game->config.key_use = {};
   wid_config_check_for_conflicts(code);
   game->config.key_use = code;
@@ -371,6 +393,7 @@ static void wid_config_key_use_set(SDL_Keysym code)
 static void wid_config_key_ascend_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed          = true;
   game->config.key_ascend = {};
   wid_config_check_for_conflicts(code);
   game->config.key_ascend = code;
@@ -380,6 +403,7 @@ static void wid_config_key_ascend_set(SDL_Keysym code)
 static void wid_config_key_descend_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_descend = {};
   wid_config_check_for_conflicts(code);
   game->config.key_descend = code;
@@ -389,6 +413,7 @@ static void wid_config_key_descend_set(SDL_Keysym code)
 static void wid_config_key_eat_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed       = true;
   game->config.key_eat = {};
   wid_config_check_for_conflicts(code);
   game->config.key_eat = code;
@@ -398,6 +423,7 @@ static void wid_config_key_eat_set(SDL_Keysym code)
 static void wid_config_key_action0_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_action0 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action0 = code;
@@ -407,6 +433,7 @@ static void wid_config_key_action0_set(SDL_Keysym code)
 static void wid_config_key_action1_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_action1 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action1 = code;
@@ -416,6 +443,7 @@ static void wid_config_key_action1_set(SDL_Keysym code)
 static void wid_config_key_action2_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_action2 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action2 = code;
@@ -425,6 +453,7 @@ static void wid_config_key_action2_set(SDL_Keysym code)
 static void wid_config_key_action3_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_action3 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action3 = code;
@@ -434,6 +463,7 @@ static void wid_config_key_action3_set(SDL_Keysym code)
 static void wid_config_key_action4_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_action4 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action4 = code;
@@ -443,6 +473,7 @@ static void wid_config_key_action4_set(SDL_Keysym code)
 static void wid_config_key_action5_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_action5 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action5 = code;
@@ -452,6 +483,7 @@ static void wid_config_key_action5_set(SDL_Keysym code)
 static void wid_config_key_action6_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_action6 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action6 = code;
@@ -461,6 +493,7 @@ static void wid_config_key_action6_set(SDL_Keysym code)
 static void wid_config_key_action7_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_action7 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action7 = code;
@@ -470,6 +503,7 @@ static void wid_config_key_action7_set(SDL_Keysym code)
 static void wid_config_key_action8_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_action8 = {};
   wid_config_check_for_conflicts(code);
   game->config.key_action8 = code;
@@ -488,6 +522,7 @@ static void wid_config_key_action9_set(SDL_Keysym code)
 static void wid_config_key_save_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed        = true;
   game->config.key_save = {};
   wid_config_check_for_conflicts(code);
   game->config.key_save = code;
@@ -497,6 +532,7 @@ static void wid_config_key_save_set(SDL_Keysym code)
 static void wid_config_key_load_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed        = true;
   game->config.key_load = {};
   wid_config_check_for_conflicts(code);
   game->config.key_load = code;
@@ -506,6 +542,7 @@ static void wid_config_key_load_set(SDL_Keysym code)
 static void wid_config_key_robot_mode_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed              = true;
   game->config.key_robot_mode = {};
   wid_config_check_for_conflicts(code);
   game->config.key_robot_mode = code;
@@ -515,6 +552,7 @@ static void wid_config_key_robot_mode_set(SDL_Keysym code)
 static void wid_config_key_zoom_in_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_zoom_in = {};
   wid_config_check_for_conflicts(code);
   game->config.key_zoom_in = code;
@@ -524,6 +562,7 @@ static void wid_config_key_zoom_in_set(SDL_Keysym code)
 static void wid_config_key_zoom_out_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed            = true;
   game->config.key_zoom_out = {};
   wid_config_check_for_conflicts(code);
   game->config.key_zoom_out = code;
@@ -533,6 +572,7 @@ static void wid_config_key_zoom_out_set(SDL_Keysym code)
 static void wid_config_key_help_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed        = true;
   game->config.key_help = {};
   wid_config_check_for_conflicts(code);
   game->config.key_help = code;
@@ -542,6 +582,7 @@ static void wid_config_key_help_set(SDL_Keysym code)
 static void wid_config_key_console_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed           = true;
   game->config.key_console = {};
   wid_config_check_for_conflicts(code);
   game->config.key_console = code;
@@ -551,6 +592,7 @@ static void wid_config_key_console_set(SDL_Keysym code)
 static void wid_config_key_quit_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed        = true;
   game->config.key_quit = {};
   wid_config_check_for_conflicts(code);
   game->config.key_quit = code;
@@ -560,6 +602,7 @@ static void wid_config_key_quit_set(SDL_Keysym code)
 static void wid_config_key_screenshot_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
+  config_changed              = true;
   game->config.key_screenshot = {};
   wid_config_check_for_conflicts(code);
   game->config.key_screenshot = code;
@@ -571,6 +614,7 @@ static void grab_key(const std::string which)
   TRACE_AND_INDENT();
   wid_notice("Press a key for " + which);
   g_grab_next_key = true;
+  config_changed  = true;
 }
 
 static uint8_t wid_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t y, uint32_t button)
@@ -578,6 +622,7 @@ static uint8_t wid_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t
   TRACE_AND_INDENT();
   SDL_Keysym k;
 
+  config_changed           = true;
   game->config.key_move_up = {};
   k.sym                    = SDLK_UP;
   wid_config_check_for_conflicts(k);
@@ -628,6 +673,7 @@ static uint8_t wid_config_keyboard_profile_wasd(Widp w, int32_t x, int32_t y, ui
   TRACE_AND_INDENT();
   SDL_Keysym k;
 
+  config_changed           = true;
   game->config.key_move_up = {};
   k.sym                    = SDLK_w;
   wid_config_check_for_conflicts(k);
@@ -678,6 +724,7 @@ static uint8_t wid_config_key_move_left(Widp w, int32_t x, int32_t y, uint32_t b
   TRACE_AND_INDENT();
   grab_key("move left");
   on_sdl_key_grab = wid_config_key_move_left_set;
+  config_changed  = true;
   return true;
 }
 
@@ -686,6 +733,7 @@ static uint8_t wid_config_key_move_right(Widp w, int32_t x, int32_t y, uint32_t 
   TRACE_AND_INDENT();
   grab_key("move right");
   on_sdl_key_grab = wid_config_key_move_right_set;
+  config_changed  = true;
   return true;
 }
 
@@ -694,6 +742,7 @@ static uint8_t wid_config_key_move_up(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("move up");
   on_sdl_key_grab = wid_config_key_move_up_set;
+  config_changed  = true;
   return true;
 }
 
@@ -702,6 +751,7 @@ static uint8_t wid_config_key_move_down(Widp w, int32_t x, int32_t y, uint32_t b
   TRACE_AND_INDENT();
   grab_key("move down");
   on_sdl_key_grab = wid_config_key_move_down_set;
+  config_changed  = true;
   return true;
 }
 
@@ -710,6 +760,7 @@ static uint8_t wid_config_key_map_left(Widp w, int32_t x, int32_t y, uint32_t bu
   TRACE_AND_INDENT();
   grab_key("map left");
   on_sdl_key_grab = wid_config_key_map_left_set;
+  config_changed  = true;
   return true;
 }
 
@@ -718,6 +769,7 @@ static uint8_t wid_config_key_map_right(Widp w, int32_t x, int32_t y, uint32_t b
   TRACE_AND_INDENT();
   grab_key("map right");
   on_sdl_key_grab = wid_config_key_map_right_set;
+  config_changed  = true;
   return true;
 }
 
@@ -726,6 +778,7 @@ static uint8_t wid_config_key_map_up(Widp w, int32_t x, int32_t y, uint32_t butt
   TRACE_AND_INDENT();
   grab_key("map up");
   on_sdl_key_grab = wid_config_key_map_up_set;
+  config_changed  = true;
   return true;
 }
 
@@ -734,6 +787,7 @@ static uint8_t wid_config_key_map_down(Widp w, int32_t x, int32_t y, uint32_t bu
   TRACE_AND_INDENT();
   grab_key("map down");
   on_sdl_key_grab = wid_config_key_map_down_set;
+  config_changed  = true;
   return true;
 }
 
@@ -742,6 +796,7 @@ static uint8_t wid_config_key_attack(Widp w, int32_t x, int32_t y, uint32_t butt
   TRACE_AND_INDENT();
   grab_key("attack");
   on_sdl_key_grab = wid_config_key_attack_set;
+  config_changed  = true;
   return true;
 }
 
@@ -750,6 +805,7 @@ static uint8_t wid_config_key_wait_or_collect(Widp w, int32_t x, int32_t y, uint
   TRACE_AND_INDENT();
   grab_key("wait or collect");
   on_sdl_key_grab = wid_config_key_wait_or_collect_set;
+  config_changed  = true;
   return true;
 }
 
@@ -758,6 +814,7 @@ static uint8_t wid_config_key_jump(Widp w, int32_t x, int32_t y, uint32_t button
   TRACE_AND_INDENT();
   grab_key("jump");
   on_sdl_key_grab = wid_config_key_jump_set;
+  config_changed  = true;
   return true;
 }
 
@@ -766,6 +823,7 @@ static uint8_t wid_config_key_throw(Widp w, int32_t x, int32_t y, uint32_t butto
   TRACE_AND_INDENT();
   grab_key("item throw");
   on_sdl_key_grab = wid_config_key_throw_set;
+  config_changed  = true;
   return true;
 }
 
@@ -774,6 +832,7 @@ static uint8_t wid_config_key_inventory(Widp w, int32_t x, int32_t y, uint32_t b
   TRACE_AND_INDENT();
   grab_key("show inventory");
   on_sdl_key_grab = wid_config_key_inventory_set;
+  config_changed  = true;
   return true;
 }
 
@@ -782,6 +841,7 @@ static uint8_t wid_config_key_drop(Widp w, int32_t x, int32_t y, uint32_t button
   TRACE_AND_INDENT();
   grab_key("item drop");
   on_sdl_key_grab = wid_config_key_drop_set;
+  config_changed  = true;
   return true;
 }
 
@@ -790,6 +850,7 @@ static uint8_t wid_config_key_use(Widp w, int32_t x, int32_t y, uint32_t button)
   TRACE_AND_INDENT();
   grab_key("item use");
   on_sdl_key_grab = wid_config_key_use_set;
+  config_changed  = true;
   return true;
 }
 
@@ -798,6 +859,7 @@ static uint8_t wid_config_key_descend(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("item descend");
   on_sdl_key_grab = wid_config_key_descend_set;
+  config_changed  = true;
   return true;
 }
 
@@ -806,6 +868,7 @@ static uint8_t wid_config_key_ascend(Widp w, int32_t x, int32_t y, uint32_t butt
   TRACE_AND_INDENT();
   grab_key("item ascend");
   on_sdl_key_grab = wid_config_key_ascend_set;
+  config_changed  = true;
   return true;
 }
 
@@ -814,6 +877,7 @@ static uint8_t wid_config_key_eat(Widp w, int32_t x, int32_t y, uint32_t button)
   TRACE_AND_INDENT();
   grab_key("item eat");
   on_sdl_key_grab = wid_config_key_eat_set;
+  config_changed  = true;
   return true;
 }
 
@@ -822,6 +886,7 @@ static uint8_t wid_config_key_action0(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 0");
   on_sdl_key_grab = wid_config_key_action0_set;
+  config_changed  = true;
   return true;
 }
 
@@ -830,6 +895,7 @@ static uint8_t wid_config_key_action1(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 1");
   on_sdl_key_grab = wid_config_key_action1_set;
+  config_changed  = true;
   return true;
 }
 
@@ -838,6 +904,7 @@ static uint8_t wid_config_key_action2(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 2");
   on_sdl_key_grab = wid_config_key_action2_set;
+  config_changed  = true;
   return true;
 }
 
@@ -846,6 +913,7 @@ static uint8_t wid_config_key_action3(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 3");
   on_sdl_key_grab = wid_config_key_action3_set;
+  config_changed  = true;
   return true;
 }
 
@@ -854,6 +922,7 @@ static uint8_t wid_config_key_action4(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 4");
   on_sdl_key_grab = wid_config_key_action4_set;
+  config_changed  = true;
   return true;
 }
 
@@ -862,6 +931,7 @@ static uint8_t wid_config_key_action5(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 5");
   on_sdl_key_grab = wid_config_key_action5_set;
+  config_changed  = true;
   return true;
 }
 
@@ -870,6 +940,7 @@ static uint8_t wid_config_key_action6(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 6");
   on_sdl_key_grab = wid_config_key_action6_set;
+  config_changed  = true;
   return true;
 }
 
@@ -878,6 +949,7 @@ static uint8_t wid_config_key_action7(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 7");
   on_sdl_key_grab = wid_config_key_action7_set;
+  config_changed  = true;
   return true;
 }
 
@@ -886,6 +958,7 @@ static uint8_t wid_config_key_action8(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 8");
   on_sdl_key_grab = wid_config_key_action8_set;
+  config_changed  = true;
   return true;
 }
 
@@ -894,6 +967,7 @@ static uint8_t wid_config_key_action9(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("action 9");
   on_sdl_key_grab = wid_config_key_action9_set;
+  config_changed  = true;
   return true;
 }
 
@@ -902,6 +976,7 @@ static uint8_t wid_config_key_save(Widp w, int32_t x, int32_t y, uint32_t button
   TRACE_AND_INDENT();
   grab_key("save game");
   on_sdl_key_grab = wid_config_key_save_set;
+  config_changed  = true;
   return true;
 }
 
@@ -910,6 +985,7 @@ static uint8_t wid_config_key_load(Widp w, int32_t x, int32_t y, uint32_t button
   TRACE_AND_INDENT();
   grab_key("load game");
   on_sdl_key_grab = wid_config_key_load_set;
+  config_changed  = true;
   return true;
 }
 
@@ -918,6 +994,7 @@ static uint8_t wid_config_key_robot_mode(Widp w, int32_t x, int32_t y, uint32_t 
   TRACE_AND_INDENT();
   grab_key("robot_mode game");
   on_sdl_key_grab = wid_config_key_robot_mode_set;
+  config_changed  = true;
   return true;
 }
 
@@ -926,6 +1003,7 @@ static uint8_t wid_config_key_zoom_in(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("zoom in");
   on_sdl_key_grab = wid_config_key_zoom_in_set;
+  config_changed  = true;
   return true;
 }
 
@@ -934,6 +1012,7 @@ static uint8_t wid_config_key_zoom_out(Widp w, int32_t x, int32_t y, uint32_t bu
   TRACE_AND_INDENT();
   grab_key("zoom out");
   on_sdl_key_grab = wid_config_key_zoom_out_set;
+  config_changed  = true;
   return true;
 }
 
@@ -942,6 +1021,7 @@ static uint8_t wid_config_key_help(Widp w, int32_t x, int32_t y, uint32_t button
   TRACE_AND_INDENT();
   grab_key("help");
   on_sdl_key_grab = wid_config_key_help_set;
+  config_changed  = true;
   return true;
 }
 
@@ -950,6 +1030,7 @@ static uint8_t wid_config_key_console(Widp w, int32_t x, int32_t y, uint32_t but
   TRACE_AND_INDENT();
   grab_key("toggle console");
   on_sdl_key_grab = wid_config_key_console_set;
+  config_changed  = true;
   return true;
 }
 
@@ -958,6 +1039,7 @@ static uint8_t wid_config_key_quit(Widp w, int32_t x, int32_t y, uint32_t button
   TRACE_AND_INDENT();
   grab_key("quit");
   on_sdl_key_grab = wid_config_key_quit_set;
+  config_changed  = true;
   return true;
 }
 
@@ -965,6 +1047,7 @@ static uint8_t wid_config_key_screenshot(Widp w, int32_t x, int32_t y, uint32_t 
 {
   TRACE_AND_INDENT();
   grab_key("screenshot grab");
+  config_changed  = true;
   on_sdl_key_grab = wid_config_key_screenshot_set;
   return true;
 }
@@ -1164,8 +1247,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
     wid_set_mode(w, WID_MODE_OVER);
@@ -1197,8 +1280,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1228,8 +1311,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1259,8 +1342,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1295,8 +1378,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1326,8 +1409,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1357,8 +1440,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1388,8 +1471,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1424,8 +1507,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1455,8 +1538,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1486,8 +1569,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1517,8 +1600,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1548,8 +1631,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1579,8 +1662,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1610,8 +1693,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1641,8 +1724,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1672,8 +1755,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1704,8 +1787,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1735,8 +1818,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1766,8 +1849,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1797,8 +1880,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1828,8 +1911,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1859,8 +1942,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1890,8 +1973,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1921,8 +2004,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1952,8 +2035,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1983,8 +2066,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2014,8 +2097,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2050,8 +2133,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2081,8 +2164,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2112,8 +2195,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2148,8 +2231,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2179,8 +2262,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2215,8 +2298,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2251,8 +2334,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2282,8 +2365,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "console");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -2313,8 +2396,8 @@ void Game::wid_config_keyboard_select(void)
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "value");
 
-    point tl = make_point(width / 2 + 8, y_at);
-    point br = make_point(width / 2 + 20, y_at);
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
