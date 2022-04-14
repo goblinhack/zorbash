@@ -39,7 +39,10 @@ void wid_progress_bar(const std::string &title, float pct)
     tile_num = 1;
   }
 
-  std::string tilename = "progress_bar." + std::to_string(tile_num);
+  std::string tilename = "progress_bar.pixelart." + std::to_string(tile_num);
+  if (g_opt_ascii) {
+    tilename = "progress_bar.ascii." + std::to_string(tile_num);
+  }
 
   auto  m  = TERM_WIDTH / 2;
   auto  n  = TERM_HEIGHT / 2;

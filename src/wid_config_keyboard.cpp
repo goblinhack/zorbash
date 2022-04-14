@@ -1104,8 +1104,8 @@ void Game::wid_config_keyboard_select(void)
   auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
   auto m                   = TERM_WIDTH / 2;
 
-  point tl    = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_TOPCON_VIS_HEIGHT + 2);
-  point br    = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
+  point tl    = make_point(m - 24, UI_TOPCON_VIS_HEIGHT + 2);
+  point br    = make_point(m + 24, UI_ACTIONBAR_TL_Y - 2);
   auto  width = br.x - tl.x;
 
   wid_config_keyboard_window = new WidPopup("Keyboard select", tl, br, nullptr, "", false, true);
@@ -1154,7 +1154,7 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width - 17, y_at);
     point br = make_point(width - 12, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_OK);
+    wid_set_style(w, UI_WID_STYLE_GREEN);
     wid_set_on_mouse_up(w, wid_config_keyboard_save);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Save");
@@ -1166,7 +1166,7 @@ void Game::wid_config_keyboard_select(void)
 
     point tl = make_point(width - 10, y_at);
     point br = make_point(width - 3, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    wid_set_style(w, UI_WID_STYLE_RED);
     wid_set_on_mouse_up(w, wid_config_keyboard_cancel);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Cancel");

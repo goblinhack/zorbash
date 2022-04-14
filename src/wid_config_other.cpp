@@ -204,7 +204,7 @@ void Game::wid_config_other_select(void)
 
     point tl = make_point(width - 15, y_at);
     point br = make_point(width - 10, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_OK);
+    wid_set_style(w, UI_WID_STYLE_GREEN);
     wid_set_on_mouse_up(w, wid_config_other_save);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
@@ -216,7 +216,7 @@ void Game::wid_config_other_select(void)
 
     point tl = make_point(width - 8, y_at);
     point br = make_point(width - 1, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    wid_set_style(w, UI_WID_STYLE_RED);
     wid_set_on_mouse_up(w, wid_config_other_cancel);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$C%%fg=reset$ancel");

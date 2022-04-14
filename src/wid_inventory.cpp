@@ -829,7 +829,7 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
     wid_set_style(w, UI_WID_STYLE_DARK);
     if (wid_inventory_thing_selected) {
       if (wid_inventory_thing_selected == t) {
-        wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+        wid_set_style(w, UI_WID_STYLE_RED);
       }
     }
     wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
@@ -1032,7 +1032,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
 
           if (wid_inventory_thing_selected) {
             if (wid_inventory_thing_selected == t) {
-              wid_set_style(wid_icon, UI_WID_STYLE_HIGHLIGHTED);
+              wid_set_style(wid_icon, UI_WID_STYLE_RED);
             }
           }
         } else {
@@ -1059,7 +1059,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
 
           if (wid_inventory_thing_selected) {
             if (wid_inventory_thing_selected == t) {
-              wid_set_style(wid_item, UI_WID_STYLE_HIGHLIGHTED);
+              wid_set_style(wid_item, UI_WID_STYLE_RED);
             }
           }
         } else {

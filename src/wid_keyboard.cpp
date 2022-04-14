@@ -846,7 +846,7 @@ Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keybo
     wid_set_show_cursor(w, true);
     wid_set_on_key_down(w, wid_keyboard_text_input_key_event);
     wid_set_void_context(w, ctx);
-    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    wid_set_style(w, UI_WID_STYLE_RED);
 
     wid_set_color(w, WID_COLOR_BG, GRAY20);
     wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
@@ -905,11 +905,11 @@ Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keybo
         wid_set_int_context(b, focus);
 
         if (! strcasecmp(keys[ y ][ x ], "CANCL")) {
-          wid_set_style(b, UI_WID_STYLE_HIGHLIGHTED);
+          wid_set_style(b, UI_WID_STYLE_RED);
         }
 
         if (! strcasecmp(keys[ y ][ x ], "OK")) {
-          wid_set_style(b, UI_WID_STYLE_OK);
+          wid_set_style(b, UI_WID_STYLE_GREEN);
         }
       }
     }

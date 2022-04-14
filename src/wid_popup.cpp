@@ -43,6 +43,10 @@ WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile,
   int   inner_w  = inner_br.x - inner_tl.x;
   int   inner_h  = inner_br.y - inner_tl.y;
 
+  if (g_opt_ascii) {
+    title_tile = nullptr;
+  }
+
   int tile_size;
   if (title_tile) {
     tile_size = 4;
