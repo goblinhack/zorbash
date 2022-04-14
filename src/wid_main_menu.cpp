@@ -158,11 +158,11 @@ static void game_display_title_bg(void)
 
 static void game_display_title_fg1(void)
 {
+  TRACE_AND_INDENT();
   if (g_opt_ascii) {
     return;
   }
 
-  TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -174,11 +174,11 @@ static void game_display_title_fg1(void)
 
 static void game_display_title_fg2(void)
 {
+  TRACE_AND_INDENT();
   if (g_opt_ascii) {
     return;
   }
 
-  TRACE_AND_INDENT();
   static color fg    = WHITE;
   static int   delta = 10;
   static int   red   = 255;
@@ -238,11 +238,11 @@ color color_change_hue(const color &in, const float fHue)
 
 static void game_display_title_fg3(void)
 {
+  TRACE_AND_INDENT();
   if (g_opt_ascii) {
     return;
   }
 
-  TRACE_AND_INDENT();
   static color fg  = RED;
   static int   hue = 0;
 
@@ -287,11 +287,11 @@ static void game_display_title_fg3(void)
 
 static void game_display_title_fg4(void)
 {
+  TRACE_AND_INDENT();
   if (g_opt_ascii) {
     return;
   }
 
-  TRACE_AND_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

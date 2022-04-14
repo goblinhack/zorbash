@@ -133,36 +133,39 @@ void Game::wid_credits_select(void)
   wid_set_on_key_up(wid_credits_window->wid_popup_container, wid_credits_key_up);
   wid_set_on_key_down(wid_credits_window->wid_popup_container, wid_credits_key_down);
 
+  if (! g_opt_ascii) {
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+  }
   wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
   wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
   wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
   wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
+
   wid_credits_window->log("%%fg=white$Development");
   wid_credits_window->log("Neil McGill (goblinhack@gmail.com)");
   wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
@@ -174,13 +177,7 @@ void Game::wid_credits_select(void)
   wid_credits_window->log("Markus Heichelbech");
   wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
   wid_credits_window->log("%%fg=white$Sounds");
-  wid_credits_window->log("Oryx, TiesWijnen, danielvj, Adam N, Deathscyp, Dersuperanton");
-  wid_credits_window->log("RobinHood76, uEffects, Konstati, Danjocross, XxChr0nosxX");
-  wid_credits_window->log("Rico Casazza. qubodup. tim.kahn, vmgraw, Michel88, launemax");
-  wid_credits_window->log("ChrisReierson");
-  wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_credits_window->log("%%fg=white$Testers");
-  wid_credits_window->log("Stuicy, Goblinhack");
+  wid_credits_window->log("See README.md");
 
   {
     TRACE_AND_INDENT();

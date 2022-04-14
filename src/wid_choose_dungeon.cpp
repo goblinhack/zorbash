@@ -91,6 +91,10 @@ point3d wid_choose_dungeon_grid_to_level_coord(int x, int y)
 void wid_choose_dungeons_bg(void)
 {
   TRACE_NO_INDENT();
+  if (g_opt_ascii) {
+    return;
+  }
+
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -102,6 +106,10 @@ void wid_choose_dungeons_bg(void)
 
 void wid_choose_dungeon_border(Widp b, Levelp l)
 {
+  if (g_opt_ascii) {
+    return;
+  }
+
   int tlx, tly, brx, bry;
   wid_get_tl_x_tl_y_br_x_br_y(b, &tlx, &tly, &brx, &bry);
 
