@@ -585,7 +585,7 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     //
     auto b = ctx->wid_enter;
     wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$E%%fg=" UI_TEXT_COLOR_STR "$nter the Dungeon");
-    wid_set_style(b, UI_WID_STYLE_OK);
+    wid_set_style(b, UI_WID_STYLE_GREEN);
     wid_set_color(b, WID_COLOR_BG, c);
     wid_set_shape_square(b);
     wid_update(b);

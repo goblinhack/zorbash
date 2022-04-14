@@ -50,7 +50,7 @@ WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool 
       wid_set_shape_none(wid_text_box_container);
     } else {
       wid_text_box_container = wid_new_square_window("wid text box");
-      wid_set_style(wid_text_box_container, UI_WID_STYLE_OK);
+      wid_set_style(wid_text_box_container, UI_WID_STYLE_GREEN);
     }
     wid_set_pos(wid_text_box_container, tl, br);
   }
@@ -62,7 +62,7 @@ WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool 
     wid_text_area = wid_new_square_button(wid_text_box_container, "wid text inner area");
     wid_set_pos(wid_text_area, tl, br);
     wid_set_shape_none(wid_text_area);
-    // wid_set_style(wid_text_area, UI_WID_STYLE_HIGHLIGHTED);
+    // wid_set_style(wid_text_area, UI_WID_STYLE_RED);
 
     w = br.x - tl.x;
     h = br.y - tl.y;

@@ -1130,7 +1130,7 @@ void wid_actionbar_init(void)
       wid_set_bg_tilename(w, "ui_icon_robot_on");
       wid_set_on_tick(w, wid_actionbar_ai_tick);
     }
-    wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+    wid_set_style(w, UI_WID_STYLE_RED);
     x_at += option_width;
   }
 

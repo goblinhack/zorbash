@@ -63,7 +63,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     wid_set_style(w, UI_WID_STYLE_DARK);
 
     if (t == wid_inventory_thing_selected) {
-      wid_set_style(w, UI_WID_STYLE_HIGHLIGHTED);
+      wid_set_style(w, UI_WID_STYLE_RED);
     }
 
     bag->log("+ item %s at %d,%d", t->to_string().c_str(), t->itemsp()->bag_position.x, t->itemsp()->bag_position.y);

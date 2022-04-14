@@ -82,7 +82,7 @@ void wid_notice(std::string s)
     wid_set_on_mouse_up(w, wid_notice_ok);
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
-    wid_set_style(w, UI_WID_STYLE_OK);
+    wid_set_style(w, UI_WID_STYLE_GREEN);
   }
 
   y_at = 3;
@@ -93,7 +93,7 @@ void wid_notice(std::string s)
 
     point tl = make_point(width / 2 - 4, y_at);
     point br = make_point(width / 2 + 4, y_at + 2);
-    wid_set_style(w, UI_WID_STYLE_OK);
+    wid_set_style(w, UI_WID_STYLE_GREEN);
     wid_set_on_mouse_up(w, wid_notice_ok);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Ok!");

@@ -13301,45 +13301,91 @@ def init_projectiles_tiles():
 
 
 @timeme
-def init_progress_bar():
+def init_progress_bar_pixelart():
     tiles = [
-        "progress_bar.1",
-        "progress_bar.2",
-        "progress_bar.3",
-        "progress_bar.4",
-        "progress_bar.5",
-        "progress_bar.6",
-        "progress_bar.7",
-        "progress_bar.8",
-        "progress_bar.9",
-        "progress_bar.10",
-        "progress_bar.11",
-        "progress_bar.12",
-        "progress_bar.13",
-        "progress_bar.14",
-        "progress_bar.15",
-        "progress_bar.16",
-        "progress_bar.17",
-        "progress_bar.18",
-        "progress_bar.19",
-        "progress_bar.20",
-        "progress_bar.21",
-        "progress_bar.22",
-        "progress_bar.23",
-        "progress_bar.24",
-        "progress_bar.25",
-        "progress_bar.26",
-        "progress_bar.27",
-        "progress_bar.28",
-        "progress_bar.29",
-        "progress_bar.30",
-        "progress_bar.31",
-        "progress_bar.32",
+        "progress_bar.pixelart.1",
+        "progress_bar.pixelart.2",
+        "progress_bar.pixelart.3",
+        "progress_bar.pixelart.4",
+        "progress_bar.pixelart.5",
+        "progress_bar.pixelart.6",
+        "progress_bar.pixelart.7",
+        "progress_bar.pixelart.8",
+        "progress_bar.pixelart.9",
+        "progress_bar.pixelart.10",
+        "progress_bar.pixelart.11",
+        "progress_bar.pixelart.12",
+        "progress_bar.pixelart.13",
+        "progress_bar.pixelart.14",
+        "progress_bar.pixelart.15",
+        "progress_bar.pixelart.16",
+        "progress_bar.pixelart.17",
+        "progress_bar.pixelart.18",
+        "progress_bar.pixelart.19",
+        "progress_bar.pixelart.20",
+        "progress_bar.pixelart.21",
+        "progress_bar.pixelart.22",
+        "progress_bar.pixelart.23",
+        "progress_bar.pixelart.24",
+        "progress_bar.pixelart.25",
+        "progress_bar.pixelart.26",
+        "progress_bar.pixelart.27",
+        "progress_bar.pixelart.28",
+        "progress_bar.pixelart.29",
+        "progress_bar.pixelart.30",
+        "progress_bar.pixelart.31",
+        "progress_bar.pixelart.32",
     ]
 
     my.tile_load_arr_sprites(
         file="data/gfx/ui/pixelart/progress_bar.tga",
-        name="progress_bar",
+        name="progress_bar.pixelart",
+        width=256,
+        height=32,
+        arr=tiles,
+    )
+
+
+@timeme
+def init_progress_bar_ascii():
+    tiles = [
+        "progress_bar.ascii.1",
+        "progress_bar.ascii.2",
+        "progress_bar.ascii.3",
+        "progress_bar.ascii.4",
+        "progress_bar.ascii.5",
+        "progress_bar.ascii.6",
+        "progress_bar.ascii.7",
+        "progress_bar.ascii.8",
+        "progress_bar.ascii.9",
+        "progress_bar.ascii.10",
+        "progress_bar.ascii.11",
+        "progress_bar.ascii.12",
+        "progress_bar.ascii.13",
+        "progress_bar.ascii.14",
+        "progress_bar.ascii.15",
+        "progress_bar.ascii.16",
+        "progress_bar.ascii.17",
+        "progress_bar.ascii.18",
+        "progress_bar.ascii.19",
+        "progress_bar.ascii.20",
+        "progress_bar.ascii.21",
+        "progress_bar.ascii.22",
+        "progress_bar.ascii.23",
+        "progress_bar.ascii.24",
+        "progress_bar.ascii.25",
+        "progress_bar.ascii.26",
+        "progress_bar.ascii.27",
+        "progress_bar.ascii.28",
+        "progress_bar.ascii.29",
+        "progress_bar.ascii.30",
+        "progress_bar.ascii.31",
+        "progress_bar.ascii.32",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/ui/ascii/progress_bar.tga",
+        name="progress_bar.ascii",
         width=256,
         height=32,
         arr=tiles,
@@ -13356,7 +13402,8 @@ init_laser_lightning_fork_tiles()
 init_laser_lightning_tiles()
 init_light()
 init_map_treasure()
-init_progress_bar()
+init_progress_bar_pixelart()
+init_progress_bar_ascii()
 init_projectiles_tiles()
 init_solid()
 init_teleport_out_tiles()

@@ -1363,22 +1363,33 @@ void Game::wid_load_select(void)
     return;
   }
 
-  int   popup_width = 100;
-  auto  m           = TERM_WIDTH / 2;
-  point tl          = make_point(m - popup_width / 2, UI_TOPCON_VIS_HEIGHT + 2);
-  point br          = make_point(m + popup_width / 2, tl.y + 52);
-  auto  width       = br.x - tl.x;
+  auto  m     = TERM_WIDTH / 2;
+  auto  h     = TERM_HEIGHT / 2;
+  point tl    = make_point(m - 40, h - 7);
+  point br    = make_point(m + 40, h + 8);
+  auto  width = br.x - tl.x;
 
   wid_load = new WidPopup("Game load", tl, br, tile_find_mand("load"), "", false, false);
   wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
   wid_set_on_key_down(wid_load->wid_popup_container, wid_load_key_down);
 
+  //
+  // Close icon
+  //
   {
-    auto  w = wid_new_square_button(wid_load->wid_popup_container, "wid inventory window close");
-    point tl(width - 3, 0);
-    point br(width - 0, 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "ui_icon_close");
+    auto w = wid_new_square_button(wid_load->wid_popup_container, "wid inventory window close");
+    if (g_opt_ascii) {
+      point tl(width - 2, 0);
+      point br(width - 0, 2);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "X");
+      wid_set_style(w, UI_WID_STYLE_RED);
+    } else {
+      point tl(width - 3, 0);
+      point br(width - 0, 3);
+      wid_set_pos(w, tl, br);
+      wid_set_bg_tilename(w, "ui_icon_close");
+    }
     wid_set_on_mouse_up(w, wid_load_cancel);
   }
 

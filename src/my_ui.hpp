@@ -56,13 +56,12 @@
 #define UI_UPDATE_SLOW_MS            20 // FPS and game status
 #define UI_WID_POPUP_WIDTH_NORMAL    24
 #define UI_WID_POPUP_WIDTH_WIDE      38
-#define UI_WID_POPUP_WIDTH_WIDEST    48
-#define UI_WID_SAVE_SLOTS            20 // How many save game slots
+#define UI_WID_SAVE_SLOTS            10 // How many save game slots
 
 #define UI_WID_STYLE_SPARSE_NONE   -1
 #define UI_WID_STYLE_SOLID_NONE    0
-#define UI_WID_STYLE_OK            1
-#define UI_WID_STYLE_HIGHLIGHTED   2
+#define UI_WID_STYLE_GREEN            1
+#define UI_WID_STYLE_RED   2
 #define UI_WID_STYLE_NORMAL        3
 #define UI_WID_STYLE_DARK          4
 #define UI_WID_STYLE_SOLID_DEFAULT 5
