@@ -1143,11 +1143,14 @@ void Game::wid_save_select(void)
     return;
   }
 
-  auto  m     = TERM_WIDTH / 2;
-  auto  h     = TERM_HEIGHT / 2;
-  point tl    = make_point(m - 40, h - 7);
-  point br    = make_point(m + 40, h + 8);
-  auto  width = br.x - tl.x;
+  auto  m  = TERM_WIDTH / 2;
+  auto  h  = TERM_HEIGHT / 2;
+  point tl = make_point(m - 40, h - 7);
+  point br = make_point(m + 40, h + 8);
+  if (! g_opt_ascii) {
+    br.y += 3;
+  }
+  auto width = br.x - tl.x;
 
   wid_save = new WidPopup("Game save", tl, br, tile_find_mand("save"), "", false, false);
   wid_set_on_key_up(wid_save->wid_popup_container, wid_save_key_up);

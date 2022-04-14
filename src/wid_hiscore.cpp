@@ -34,16 +34,16 @@ static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case SDLK_ESCAPE :
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   wid_hiscore_destroy();
@@ -83,8 +83,9 @@ void Game::wid_hiscores_show(void)
   }
 
   auto  m     = TERM_WIDTH / 2;
-  point tl    = make_point(m - 50, UI_TOPCON_VIS_HEIGHT + 2);
-  point br    = make_point(m + 50, tl.y + 52);
+  auto  mh    = TERM_HEIGHT / 2;
+  point tl    = make_point(m - 49, mh - 14);
+  point br    = make_point(m + 49, mh + 14);
   auto  width = br.x - tl.x;
 
   wid_hiscore_window = new WidPopup("Gone, but not forgotten...", tl, br, nullptr, "", false, false);
@@ -100,7 +101,6 @@ void Game::wid_hiscores_show(void)
 
   wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
   wid_hiscore_window->log("Gone, but not forgotten...");
-  wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
   wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
 
   std::vector< HiScore >::iterator h     = game->config.hiscores.hiscores.begin();
@@ -120,8 +120,8 @@ void Game::wid_hiscores_show(void)
 
     char tmp[ 200 ];
 
-    int name_field_len        = 15;
-    int when_field_len        = 25;
+    int name_field_len        = 17;
+    int when_field_len        = 20;
     int defeated_by_field_len = 40;
 
     if (first) {
@@ -162,24 +162,31 @@ void Game::wid_hiscores_show(void)
              name.c_str(), when_field_len, when.c_str(), h->level_reached, defeated_by_field_len,
              defeated_by.c_str());
 
-    wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
+    if (! g_opt_ascii_set) {
+      wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
+    }
     wid_hiscore_window->log(tmp);
     h++;
   }
 
+  //
+  // Close icon
+  //
   {
-    TRACE_AND_INDENT();
-    auto p = wid_hiscore_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "hiscore");
-
-    point tl = make_point(28, 47);
-    point br = make_point(width - 28, 49);
-
-    wid_set_style(w, UI_WID_STYLE_RED);
+    auto w = wid_new_square_button(wid_hiscore_window->wid_popup_container, "wid inventory window close");
+    if (g_opt_ascii) {
+      point tl(width - 2, 0);
+      point br(width - 0, 2);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "X");
+      wid_set_style(w, UI_WID_STYLE_RED);
+    } else {
+      point tl(width - 3, 0);
+      point br(width - 0, 3);
+      wid_set_pos(w, tl, br);
+      wid_set_bg_tilename(w, "ui_icon_close");
+    }
     wid_set_on_mouse_up(w, wid_hiscore_mouse_up);
-
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "Close");
   }
 
   wid_update(wid_hiscore_window->wid_text_area->wid_text_area);

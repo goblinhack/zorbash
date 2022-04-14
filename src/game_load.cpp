@@ -1363,11 +1363,14 @@ void Game::wid_load_select(void)
     return;
   }
 
-  auto  m     = TERM_WIDTH / 2;
-  auto  h     = TERM_HEIGHT / 2;
-  point tl    = make_point(m - 40, h - 7);
-  point br    = make_point(m + 40, h + 8);
-  auto  width = br.x - tl.x;
+  auto  m  = TERM_WIDTH / 2;
+  auto  h  = TERM_HEIGHT / 2;
+  point tl = make_point(m - 40, h - 7);
+  point br = make_point(m + 40, h + 8);
+  if (! g_opt_ascii) {
+    br.y += 3;
+  }
+  auto width = br.x - tl.x;
 
   wid_load = new WidPopup("Game load", tl, br, tile_find_mand("load"), "", false, false);
   wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
