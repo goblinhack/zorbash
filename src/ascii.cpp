@@ -171,6 +171,10 @@ void pixel_to_ascii(int *x, int *y)
   float mx = *x;
   float my = *y;
 
+  if (unlikely(! game)) {
+    DIE("No game");
+  }
+
   mx /= game->config.ascii_gl_width;
   my /= game->config.ascii_gl_height;
 

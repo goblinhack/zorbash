@@ -1187,12 +1187,14 @@ void wid_set_name(Widp w, std::string name)
 void wid_set_debug(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->debug = val;
 }
 
 void wid_set_text(Widp w, std::wstring text)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   if (text == L"") {
     w->text = L"";
   } else {
@@ -1212,102 +1214,119 @@ void wid_set_text(Widp w, std::wstring text)
 void wid_set_text(Widp w, std::string text)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   wid_set_text(w, string_to_wstring(text));
 }
 
 void wid_set_text(Widp w, int v)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   wid_set_text(w, std::to_string(v));
 }
 
 uint8_t wid_get_received_input(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->received_input);
 }
 
 void wid_set_received_input(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->received_input = val;
 }
 
 uint32_t wid_get_cursor(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->cursor);
 }
 
 void wid_set_cursor(Widp w, uint32_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->cursor = val;
 }
 
 int32_t wid_get_width(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (wid_get_br_x(w) - wid_get_tl_x(w)) + 1;
 }
 
 int32_t wid_get_height(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (wid_get_br_y(w) - wid_get_tl_y(w)) + 1;
 }
 
 uint8_t wid_get_focusable(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->focus_order);
 }
 
 void wid_set_focusable(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->focus_order = val;
 }
 
 uint8_t wid_get_show_cursor(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->show_cursor);
 }
 
 void wid_set_show_cursor(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->show_cursor = val;
 }
 
 uint8_t wid_get_do_not_raise(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->do_not_raise);
 }
 
 void wid_set_do_not_raise(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->do_not_raise = val;
 }
 
 uint8_t wid_get_do_not_lower(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->do_not_lower);
 }
 
 void wid_set_do_not_lower(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->do_not_lower = val;
 }
 
 uint8_t wid_get_moveable(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   if (w->moveable_set) {
     return (w->moveable);
   }
@@ -1318,6 +1337,7 @@ uint8_t wid_get_moveable(Widp w)
 void wid_set_moveable(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->moveable     = val;
   w->moveable_set = true;
 
@@ -1328,6 +1348,7 @@ void wid_set_moveable(Widp w, uint8_t val)
 uint8_t wid_get_moveable_horiz(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   if (w->moveable_horiz_set) {
     return (w->moveable_horiz);
   }
@@ -1338,6 +1359,7 @@ uint8_t wid_get_moveable_horiz(Widp w)
 void wid_set_moveable_horiz(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->moveable_horiz     = val;
   w->moveable_horiz_set = true;
 }
@@ -1345,6 +1367,7 @@ void wid_set_moveable_horiz(Widp w, uint8_t val)
 uint8_t wid_get_moveable_vert(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   if (w->moveable_vert_set) {
     return (w->moveable_vert);
   }
@@ -1355,6 +1378,7 @@ uint8_t wid_get_moveable_vert(Widp w)
 void wid_set_moveable_vert(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->moveable_vert     = val;
   w->moveable_vert_set = true;
 }
@@ -1362,6 +1386,7 @@ void wid_set_moveable_vert(Widp w, uint8_t val)
 uint8_t wid_get_moveable_bounded(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   if (w->moveable_bounded_set) {
     return (w->moveable_bounded);
   }
@@ -1372,6 +1397,7 @@ uint8_t wid_get_moveable_bounded(Widp w)
 void wid_set_moveable_bounded(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->moveable_bounded     = val;
   w->moveable_bounded_set = true;
 }
@@ -1379,6 +1405,7 @@ void wid_set_moveable_bounded(Widp w, uint8_t val)
 uint8_t wid_get_moveable_no_user_scroll(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   if (w->moveable_no_user_scroll_set) {
     return (w->moveable_no_user_scroll);
   }
@@ -1389,6 +1416,7 @@ uint8_t wid_get_moveable_no_user_scroll(Widp w)
 void wid_set_moveable_no_user_scroll(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->moveable_no_user_scroll     = val;
   w->moveable_no_user_scroll_set = true;
 }
@@ -1396,54 +1424,63 @@ void wid_set_moveable_no_user_scroll(Widp w, uint8_t val)
 uint8_t wid_get_text_lhs(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->text_lhs);
 }
 
 void wid_set_text_lhs(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->text_lhs = val;
 }
 
 uint8_t wid_get_text_rhs(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->text_rhs);
 }
 
 void wid_set_text_rhs(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->text_rhs = true;
 }
 
 uint8_t wid_get_text_centerx(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->text_centerx);
 }
 
 void wid_set_text_centerx(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->text_centerx = val;
 }
 
 uint8_t wid_get_text_top(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->text_top);
 }
 
 void wid_set_text_top(Widp w, uint8_t val)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   w->text_top = val;
 }
 
 uint8_t wid_get_text_bot(Widp w)
 {
   TRACE_AND_INDENT();
+  verify(MTYPE_WID, w);
   return (w->text_bot);
 }
 
@@ -5592,6 +5629,7 @@ void wid_mouse_up(uint32_t button, int32_t x, int32_t y)
   if (unlikely(! w)) {
     return;
   }
+  verify(MTYPE_WID, w);
 
   // TOPCON("wid [%s] mouse up.", w->name.c_str());
   if ((w->on_mouse_up && (w->on_mouse_up)(w, x, y, button)) || wid_get_moveable(w)) {

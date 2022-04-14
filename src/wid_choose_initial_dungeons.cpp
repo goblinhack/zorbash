@@ -110,8 +110,8 @@ static wid_choose_initial_dungeons_ctx *g_ctx;
 static void wid_choose_initial_dungeons_destroy(Widp w);
 static void wid_choose_initial_dungeons_set_focus(wid_choose_initial_dungeons_ctx *ctx, int focusx, int focusy);
 
-#define WID_LEVEL_WIDTH_CHARS  7
-#define WID_LEVEL_HEIGHT_CHARS 7
+static int WID_LEVEL_WIDTH_CHARS  = 7;
+static int WID_LEVEL_HEIGHT_CHARS = 7;
 
 static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeons_ctx *ctx, Widp b, int x, int y)
 {
@@ -950,6 +950,19 @@ void Game::wid_choose_initial_dungeons(void)
 
   pre_init();
 
+  auto box_height          = g_opt_ascii ? 0 : 2;
+  auto box_step            = g_opt_ascii ? 1 : 3;
+  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
+  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
+
+  if (g_opt_ascii) {
+    WID_LEVEL_WIDTH_CHARS  = 3;
+    WID_LEVEL_HEIGHT_CHARS = 3;
+  } else {
+    WID_LEVEL_WIDTH_CHARS  = 7;
+    WID_LEVEL_HEIGHT_CHARS = 7;
+  }
+
   //
   // Create a context to hold button info so we can update it when the focus changes
   //
@@ -1033,7 +1046,23 @@ void Game::wid_choose_initial_dungeons(void)
   int   y_at  = TERM_HEIGHT - 21;
   int   x_at  = TERM_WIDTH - width - 2;
 
-  y_at += 3;
+  if (g_opt_ascii) {
+    y_at = TERM_HEIGHT - 12;
+  } else {
+    y_at += 3;
+  }
+
+  if (g_opt_ascii) {
+    TRACE_NO_INDENT();
+    Widp w = wid_new_square_button(window, "Container");
+
+    point tl = make_point(x_at, y_at + 6);
+    point br = make_point(x_at + width, y_at + 10);
+
+    wid_set_pos(w, tl, br);
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+  }
+
   {
     TRACE_NO_INDENT();
     Widp w = wid_new_square_button(window, "Enter");
@@ -1048,46 +1077,58 @@ void Game::wid_choose_initial_dungeons(void)
   }
 
   y_at += 5;
+  if (g_opt_ascii) {
+    y_at += 2;
+  }
 
   {
     TRACE_NO_INDENT();
     auto w = wid_new_square_button(window, "Choose seed");
 
     point tl = make_point(x_at, y_at);
-    point br = make_point(x_at + width, y_at + 2);
+    point br = make_point(x_at + width, y_at + box_height);
 
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_choose_initial_dungeons_wid_choose_seed);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$hange seed");
   }
 
-  y_at += 3;
+  y_at += box_step;
   {
     TRACE_NO_INDENT();
     Widp w = wid_new_square_button(window, "Reroll");
 
     point tl = make_point(x_at, y_at);
-    point br = make_point(x_at + width, y_at + 2);
+    point br = make_point(x_at + width, y_at + box_height);
 
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_choose_initial_dungeons_random);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$R%%fg=" UI_TEXT_COLOR_STR "$andom dungeon");
   }
 
-  y_at += 3;
+  y_at += box_step;
   {
     TRACE_NO_INDENT();
     Widp w = wid_new_square_button(window, "Back");
 
     point tl = make_point(x_at, y_at);
-    point br = make_point(x_at + width, y_at + 2);
+    point br = make_point(x_at + width, y_at + box_height);
 
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_choose_initial_dungeons_go_back);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$B%%fg=" UI_TEXT_COLOR_STR "$ack?");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
   }
 
   /*
@@ -1183,7 +1224,9 @@ void Game::wid_choose_initial_dungeons(void)
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_fg2_tilename(b, "ud_icon");
+          if (! g_opt_ascii) {
+            wid_set_fg2_tilename(b, "ud_icon");
+          }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
@@ -1198,7 +1241,9 @@ void Game::wid_choose_initial_dungeons(void)
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_fg2_tilename(b, "lr_icon");
+          if (! g_opt_ascii) {
+            wid_set_fg2_tilename(b, "lr_icon");
+          }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
@@ -1213,7 +1258,9 @@ void Game::wid_choose_initial_dungeons(void)
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_fg2_tilename(b, "lr_icon");
+          if (! g_opt_ascii) {
+            wid_set_fg2_tilename(b, "lr_icon");
+          }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
@@ -1227,14 +1274,16 @@ void Game::wid_choose_initial_dungeons(void)
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_fg2_tilename(b, "ud_icon");
+          if (! g_opt_ascii) {
+            wid_set_fg2_tilename(b, "ud_icon");
+          }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
       }
     }
   }
 
-  {
+  if (! g_opt_ascii) {
     int y = TERM_HEIGHT - 36;
 
     {
@@ -1254,7 +1303,9 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_bg_tilename(b, "dungeon_icon.1");
+      if (! g_opt_ascii) {
+        wid_set_bg_tilename(b, "dungeon_icon.1");
+      }
 
       tl.x += 2;
       br.x = TERM_WIDTH - 5;
@@ -1273,7 +1324,9 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_bg_tilename(b, "dungeon_icon.2");
+      if (! g_opt_ascii) {
+        wid_set_bg_tilename(b, "dungeon_icon.2");
+      }
 
       tl.x += 2;
       br.x = TERM_WIDTH - 5;
@@ -1292,7 +1345,9 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_bg_tilename(b, "dungeon_icon.3");
+      if (! g_opt_ascii) {
+        wid_set_bg_tilename(b, "dungeon_icon.3");
+      }
 
       tl.x += 2;
       br.x = TERM_WIDTH - 5;
@@ -1311,7 +1366,9 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_bg_tilename(b, "dungeon_icon.4");
+      if (! g_opt_ascii) {
+        wid_set_bg_tilename(b, "dungeon_icon.4");
+      }
 
       tl.x += 2;
       br.x = TERM_WIDTH - 5;
@@ -1330,7 +1387,9 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_bg_tilename(b, "dungeon_icon.5");
+      if (! g_opt_ascii) {
+        wid_set_bg_tilename(b, "dungeon_icon.5");
+      }
 
       tl.x += 2;
       br.x = TERM_WIDTH - 5;
@@ -1349,7 +1408,9 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_bg_tilename(b, "dungeon_icon.6");
+      if (! g_opt_ascii) {
+        wid_set_bg_tilename(b, "dungeon_icon.6");
+      }
 
       tl.x += 2;
       br.x = TERM_WIDTH - 5;
@@ -1368,7 +1429,9 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_bg_tilename(b, "dungeon_icon.7");
+      if (! g_opt_ascii) {
+        wid_set_bg_tilename(b, "dungeon_icon.7");
+      }
 
       tl.x += 2;
       br.x = TERM_WIDTH - 5;
@@ -1387,7 +1450,9 @@ void Game::wid_choose_initial_dungeons(void)
 
       wid_set_pos(b, tl, br);
       wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
-      wid_set_bg_tilename(b, "dungeon_icon.8");
+      if (! g_opt_ascii) {
+        wid_set_bg_tilename(b, "dungeon_icon.8");
+      }
 
       tl.x += 2;
       br.x = TERM_WIDTH - 5;
