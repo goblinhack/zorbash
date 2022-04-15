@@ -10,8 +10,8 @@
 //
 // Grid chunks are used to construct the levels and the overall dungeon
 //
-#define DUNGEON_GRID_CHUNK_HEIGHT  4  // Levels are split into grids. Each grid can have a room.
-#define DUNGEON_GRID_CHUNK_WIDTH   4  // Rooms across and down
+#define DUNGEON_GRID_CHUNK_HEIGHT  2  // Levels are split into grids. Each grid can have a room.
+#define DUNGEON_GRID_CHUNK_WIDTH   6  // Rooms across and down
 #define DUNGEONS_GRID_CHUNK_HEIGHT 10 // The whole underworld
 #define DUNGEONS_GRID_CHUNK_WIDTH  10 //
 #define DUNGEONS_MAX_DEPTH         8  // Max difficulty level
@@ -29,13 +29,13 @@
 #define LEVEL_MONST_COUNT_MAX 100 // Monsters max per level. Want more? You're mad...
 
 #define MAP_BORDER_ROCK 1  // Map rock border
-#define MAP_BORDER_ROOM 10 // Room border padding
+#define MAP_BORDER_ROOM 2  // Room border padding
 #define MAP_ROOM_HEIGHT 13 // Max room dimensions
 #define MAP_ROOM_WIDTH  13 // Max room dimensions
 
 #define LEVELS_ACROSS MAP_WIDTH // World size; no world yet...
 #define LEVELS_DOWN   MAP_HEIGHT
-#define LEVELS_DEEP   DUNGEONS_GRID_CHUNK_HEIGHT * 2
+#define LEVELS_DEEP   (DUNGEONS_GRID_CHUNK_HEIGHT * 2)
 
 #define MAP_HEIGHT ((DUNGEON_GRID_CHUNK_HEIGHT * MAP_ROOM_HEIGHT) + (MAP_BORDER_ROOM * 2))
 #define MAP_WIDTH  ((DUNGEON_GRID_CHUNK_WIDTH * MAP_ROOM_WIDTH) + (MAP_BORDER_ROOM * 2))

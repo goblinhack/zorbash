@@ -352,69 +352,69 @@ void Nodes::dump(void)
       auto oy   = (y * step) + center;
       auto node = getn(x, y);
       if (node->has_door_down) {
-        set(out, oy + 1, ox, '|');
-        set(out, oy + 2, ox, '|');
+        set(out, ox, oy + 1, '|');
+        set(out, ox, oy + 2, '|');
       }
       if (node->has_door_up) {
-        set(out, oy - 1, ox, '|');
-        set(out, oy - 2, ox, '|');
+        set(out, ox, oy - 1, '|');
+        set(out, ox, oy - 2, '|');
       }
       if (node->has_door_left) {
-        set(out, oy, ox - 1, '-');
-        set(out, oy, ox - 2, '-');
+        set(out, ox - 1, oy, '-');
+        set(out, ox - 2, oy, '-');
       }
       if (node->has_door_right) {
-        set(out, oy, ox + 1, '-');
-        set(out, oy, ox + 2, '-');
+        set(out, ox + 1, oy, '-');
+        set(out, ox + 2, oy, '-');
       }
       if (node->has_secret_exit_down) {
-        set(out, oy + 1, ox, '?');
-        set(out, oy + 2, ox, '?');
+        set(out, ox, oy + 1, '?');
+        set(out, ox, oy + 2, '?');
       }
       if (node->has_secret_exit_up) {
-        set(out, oy - 1, ox, '?');
-        set(out, oy - 2, ox, '?');
+        set(out, ox, oy - 1, '?');
+        set(out, ox, oy - 2, '?');
       }
       if (node->has_secret_exit_left) {
-        set(out, oy, ox - 1, '?');
-        set(out, oy, ox - 2, '?');
+        set(out, ox - 1, oy, '?');
+        set(out, ox - 2, oy, '?');
       }
       if (node->has_secret_exit_right) {
-        set(out, oy, ox + 1, '?');
-        set(out, oy, ox + 2, '?');
+        set(out, ox + 1, oy, '?');
+        set(out, ox + 2, oy, '?');
       }
       if (node->dir_up) {
-        set(out, oy + 1, ox - 1, '^');
+        set(out, ox - 1, oy + 1, '^');
       }
       if (node->dir_down) {
-        set(out, oy - 1, ox + 1, 'v');
+        set(out, ox + 1, oy - 1, 'v');
       }
       if (node->dir_left) {
-        set(out, oy + 1, ox - 1, '<');
+        set(out, ox - 1, oy + 1, '<');
       }
       if (node->dir_right) {
-        set(out, oy + 1, ox + 1, '>');
+        set(out, ox + 1, oy + 1, '>');
       }
 
       auto t = 0;
       if (node->is_ascend_dungeon) {
-        set(out, oy, ox - 1, 'S');
+        set(out, ox - 1, oy, 'S');
         t++;
       }
       if (node->is_descend_dungeon) {
-        set(out, oy, ox - 1, 'E');
+        set(out, ox - 1, oy, 'E');
         t++;
       }
       if (node->is_lock) {
-        set(out, oy, ox - 1, 'D');
+        set(out, ox - 1, oy, 'D');
         t++;
       }
       if (node->is_key) {
-        set(out, oy, ox - 1, 'K');
+        set(out, ox - 1, oy, 'K');
         t++;
       }
       if (node->is_secret) {
-        set(out, oy, ox - 1, 's');
+        set(out, ox - 1, oy, 's');
         t++;
       }
 
@@ -424,14 +424,14 @@ void Nodes::dump(void)
       }
 
       if (node->depth == depth_obstacle) {
-        set(out, oy, ox, 'O');
+        set(out, ox, oy, 'O');
       } else if (node->depth) {
-        set(out, oy, ox, (char) ('0' + node->depth));
+        set(out, ox, oy, (char) ('0' + node->depth));
       } else {
-        set(out, oy, ox, '.');
+        set(out, ox, oy, '.');
       }
       if (node->on_critical_path) {
-        set(out, oy - 1, ox - 1, '*');
+        set(out, ox - 1, oy - 1, '*');
       }
     }
   }
@@ -439,7 +439,7 @@ void Nodes::dump(void)
   for (auto y = 0; y < grid_height * step; y++) {
     std::string s;
     for (auto x = 0; x < grid_width * step; x++) {
-      s += get(out, y, x);
+      s += get(out, x, y);
     }
     if (s != "") {
       LOG("Node-grid: [%s]", s.c_str());
@@ -678,19 +678,19 @@ point Nodes::random_dir(void)
   auto dx = 0, dy = 0;
 
   switch (pcg_random_range(0, 4)) {
-    case 0 :
+    case 0:
       dx = -1;
       dy = 0;
       break;
-    case 1 :
+    case 1:
       dx = 1;
       dy = 0;
       break;
-    case 2 :
+    case 2:
       dx = 0;
       dy = -1;
       break;
-    case 3 :
+    case 3:
       dx = 0;
       dy = 1;
       break;
@@ -701,19 +701,19 @@ point Nodes::random_dir(void)
 void Nodes::random_dir(int *dx, int *dy)
 {
   switch (pcg_random_range(0, 4)) {
-    case 0 :
+    case 0:
       *dx = -1;
       *dy = 0;
       break;
-    case 1 :
+    case 1:
       *dx = 1;
       *dy = 0;
       break;
-    case 2 :
+    case 2:
       *dx = 0;
       *dy = -1;
       break;
-    case 3 :
+    case 3:
       *dx = 0;
       *dy = 1;
       break;
@@ -760,6 +760,8 @@ void Nodes::init_nodes(void)
 
   if (! is_dungeon) {
     obstacles /= 10;
+  } else {
+    obstacles /= 5;
   }
 
   while (obstacles--) {
