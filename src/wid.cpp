@@ -806,7 +806,7 @@ static void wid_m_over_e(void)
   w = wid_over;
   if (wid_over) {
     if (! wid_ignore_events(wid_over)) {
-      wid_last_over_event = time_game_ms_cached();
+      wid_last_over_event = time_ms_cached();
       // CON("mouse over end %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
     }
   }
@@ -882,7 +882,7 @@ static uint8_t wid_m_over_b(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_
 
   wid_over = w;
   if (! wid_ignore_events(wid_over)) {
-    wid_last_over_event = time_game_ms_cached();
+    wid_last_over_event = time_ms_cached();
     // CON("mouse over %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
   }
 
@@ -2396,7 +2396,7 @@ static void wid_destroy_immediate(Widp w)
   if (w == wid_over) {
     wid_over = nullptr;
     if (! wid_ignore_events(w)) {
-      wid_last_over_event = time_game_ms_cached();
+      wid_last_over_event = time_ms_cached();
       CON("mouse destroy %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
     }
   }
@@ -5192,7 +5192,7 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
   ascii_mouse_y = y;
 
   if (relx || rely) {
-    wid_last_mouse_motion = time_game_ms_cached();
+    wid_last_mouse_motion = time_ms_cached();
   }
 
   wid_refresh_overlay_count += 1;
@@ -5447,7 +5447,7 @@ void wid_joy_button(int32_t x, int32_t y)
     if (get(sdl_joy_buttons, b)) {
       if (time_have_x_tenths_passed_since(2, get(ts, b))) {
         changed = true;
-        set(ts, b, time_game_ms_cached());
+        set(ts, b, time_ms_cached());
       }
     }
   }
@@ -5545,7 +5545,7 @@ void wid_mouse_down(uint32_t button, int32_t x, int32_t y)
     }
 
     if (game) {
-      game->last_mouse_down = time_game_ms_cached();
+      game->last_mouse_down = time_ms_cached();
     }
 
     return;
@@ -5561,7 +5561,7 @@ void wid_mouse_down(uint32_t button, int32_t x, int32_t y)
   if (game_mouse_down(x, y, button)) {
     sound_play("click");
     if (game) {
-      game->last_mouse_down = time_game_ms_cached();
+      game->last_mouse_down = time_ms_cached();
     }
   }
 }
@@ -6517,7 +6517,7 @@ void wid_gc_all(void)
 static void wid_tick_all(void)
 {
   TRACE_AND_INDENT();
-  wid_time = time_game_ms_cached();
+  wid_time = time_ms_cached();
 
   std::list< Widp > work;
   for (auto &iter : wid_tick_top_level) {
@@ -6627,7 +6627,7 @@ static void wid_tick_all(void)
 static void wid_tick_all_post_display(void)
 {
   TRACE_AND_INDENT();
-  wid_time = time_game_ms_cached();
+  wid_time = time_ms_cached();
 
   if (wid_console_window->visible) {
     return;
@@ -7015,7 +7015,7 @@ void wid_ignore_events_briefly(void)
     return;
   }
 
-  wid_ignore_events_briefly_ts = time_game_ms_cached();
+  wid_ignore_events_briefly_ts = time_ms_cached();
 }
 
 bool wid_some_recent_event_occurred(void)

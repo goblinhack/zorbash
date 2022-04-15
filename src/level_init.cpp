@@ -68,7 +68,7 @@ void Level::clear(void)
   _is_treasure_type           = {};
   _is_wall                    = {};
 
-  ts_created = time_game_ms();
+  ts_created = time_ms();
   ts_saved   = 0;
 
   tick_created = game->tick_current;

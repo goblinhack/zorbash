@@ -24,10 +24,10 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
 
   is_level_type_dungeon = true;
 
-  uint32_t start = time_game_ms();
+  uint32_t start = time_ms();
 
   while (true) {
-    uint32_t start   = time_game_ms();
+    uint32_t start   = time_ms();
     auto     dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
     if (dungeon->failed) {
       log("INF: create dungeon, failed, retry");
@@ -36,7 +36,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
       continue;
     }
 
-    log("INF: Create dungeon layout took %u ms", time_game_ms() - start);
+    log("INF: Create dungeon layout took %u ms", time_ms() - start);
 
     //
     // Check we have a dungeon start
@@ -500,7 +500,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     break;
   }
 
-  log("INF: Populated dungeon at (%d,%d,%d) took %u ms", at.x, at.y, at.z, time_game_ms() - start);
+  log("INF: Populated dungeon at (%d,%d,%d) took %u ms", at.x, at.y, at.z, time_ms() - start);
   return true;
 }
 

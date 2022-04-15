@@ -72,7 +72,7 @@ void Thing::fall(float fall_height, ts_t ms)
     return;
   }
 
-  auto t = ts_fall_begin_set(time_game_ms_cached());
+  auto t = ts_fall_begin_set(time_ms_cached());
   ts_fall_end_set(t + ms);
 
   fall_height_set(fall_height);
@@ -116,7 +116,7 @@ float Thing::fall_curr(void)
     return 0;
   }
 
-  auto ts = time_game_ms_cached();
+  auto ts = time_ms_cached();
 
   if (ts >= ts_fall_end()) {
     is_falling = false;
@@ -146,7 +146,7 @@ float Thing::fall_curr(void)
 
     if (is_player()) {
       dbg("Player is waiting to complete the fall");
-      level->ts_fade_out_begin = time_game_ms_cached();
+      level->ts_fade_out_begin = time_ms_cached();
     }
 
     is_waiting_to_leave_level_has_completed_fall = true;
@@ -387,7 +387,7 @@ bool Thing::fall_to_next_level(void)
 
       if (is_player()) {
         game->tick_begin("finished fall to next level");
-        level->ts_fade_in_begin = time_game_ms_cached();
+        level->ts_fade_in_begin = time_ms_cached();
         level->update_new_level();
       }
 

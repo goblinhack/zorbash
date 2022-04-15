@@ -117,7 +117,7 @@ void Level::display_internal_particles(void)
     float t  = p.ts_stop - p.ts_start;
     float dt = ((float) (now - p.ts_start)) / t;
     // con("dt %f", dt);
-    if (dt > 1) {
+    if (dt >= 1) {
       if (p.id.id) {
         auto t = thing_find(p.id);
         if (t) {
@@ -309,7 +309,7 @@ void Level::display_external_particles(void)
     float t  = p.ts_stop - p.ts_start;
     float dt = ((float) (now - p.ts_start)) / t;
     // con("dt %f", dt);
-    if (dt > 1) {
+    if (dt >= 1) {
       if (p.id.id) {
         auto t = thing_find(p.id);
         if (t) {

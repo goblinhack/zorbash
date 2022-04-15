@@ -18,7 +18,6 @@ void Level::dump(std::string pfx, std::ostream &out)
   out << pfx << "cursor_at          " << cursor_at << std::endl;
   out << pfx << "cursor_old         " << cursor_old << std::endl;
   out << pfx << "map_at             " << map_at << std::endl;
-  out << pfx << "is_map_follow_player  " << is_map_follow_player << std::endl;
   out << pfx << "map_wanted_at      " << map_wanted_at << std::endl;
   out << pfx << "ts_created         " << ts_created << std::endl;
 

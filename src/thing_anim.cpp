@@ -14,6 +14,7 @@
 void Thing::animate(void)
 {
   TRACE_NO_INDENT();
+
   Tilep tile;
   auto  tpp = tp();
 

@@ -43,7 +43,7 @@ void Game::wid_thing_info_destroy_immediate(void)
 void Game::wid_thing_info_destroy_deferred(void)
 {
   TRACE_AND_INDENT();
-  request_destroy_thing_info = time_game_ms_cached();
+  request_destroy_thing_info = time_ms_cached();
 }
 
 WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)

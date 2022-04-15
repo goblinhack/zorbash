@@ -90,7 +90,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   game->started = true;
   is_starting   = false;
 
-  ts_fade_in_begin = time_game_ms_cached();
+  ts_fade_in_begin = time_ms_cached();
 
   things_gc_force();
 

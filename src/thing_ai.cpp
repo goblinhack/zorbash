@@ -420,35 +420,27 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     for (int x = minx; x <= maxx; x++) {
       point p(x, y);
 
-      LOG("%d %d %d", __LINE__, x, y);
       if (! get(ai->can_see_ever.can_see, x, y)) {
         continue;
       }
-      LOG("%d", __LINE__);
 
       if (too_far_from_mob(p)) {
         continue;
       }
-      LOG("%d", __LINE__);
 
       if (too_far_from_leader(p)) {
         if (distance_from_leader() < too_far_from_leader(p)) {
           continue;
         }
       }
-      LOG("%d", __LINE__);
 
       set(walked, x, y, true);
 
-      LOG("%d", __LINE__);
       if (! ai_obstacle_for_me(p)) {
-        LOG("%d", __LINE__);
         set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
         continue;
       }
-      LOG("%d", __LINE__);
 
-      LOG("%d %d %d", __LINE__, x, y);
       //
       // If a member of the same team is in the way, do not try to
       // jump over them. Better to walk around so you can attack
@@ -463,7 +455,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         }
         FOR_ALL_THINGS_END();
       }
-      LOG("%d %d %d", __LINE__, x, y);
 
       //
       // So if we get here this thing is an AI obstacle. Can we jump over it?
@@ -476,7 +467,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
       }
 
-      LOG("%d %d %d", __LINE__, x, y);
       //
       // Can jump but only if not tired.
       //
@@ -485,21 +475,17 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         // Trace all possible jump paths to see if we can jump over
         //
         auto jump_dist = jump_distance_max_get();
-        LOG("%d", __LINE__);
         for (const auto &jp : game->jump_paths) {
           point jump_begin(p.x + jp.begin.x, p.y + jp.begin.y);
           point jump_end(p.x + jp.end.x, p.y + jp.end.y);
-          LOG("%d", __LINE__);
 
           if (level->is_oob(jump_begin)) {
             continue;
           }
 
-          LOG("%d", __LINE__);
           if (level->is_oob(jump_end)) {
             continue;
           }
-          LOG("%d", __LINE__);
 
           //
           // No jump begin/end from a chasm or barrel for example
@@ -507,12 +493,10 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (is_disliked_by_me(jump_begin) || ai_obstacle_for_me(jump_begin)) {
             continue;
           }
-          LOG("%d", __LINE__);
 
           if (is_disliked_by_me(jump_end) || ai_obstacle_for_me(jump_end)) {
             continue;
           }
-          LOG("%d", __LINE__);
 
           //
           // Must be able to see the begin/end.
@@ -520,7 +504,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (! get(ai->can_see_ever.can_see, jump_begin.x, jump_begin.y)) {
             continue;
           }
-          LOG("%d", __LINE__);
 
           //
           // Too far?
@@ -530,7 +513,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             continue;
           }
 
-          LOG("%d", __LINE__);
           //
           // Check we really need to jump over all things in the path.
           //
@@ -552,7 +534,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             }
           }
 
-          LOG("%d", __LINE__);
           if (jump) {
             for (const auto &jump_over : jp.path) {
               auto j = jump_over + p;
@@ -560,7 +541,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
             }
           }
         }
-        LOG("%d", __LINE__);
       }
     }
   }
@@ -575,7 +555,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         for (int x = minx; x <= maxx; x++) {
           point p(x, y);
 
-          LOG("%d %d %d", __LINE__, x, y);
           if (p.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
             continue;
           }
@@ -1622,7 +1601,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
 
 void Thing::ai_get_next_hop(void)
 {
-  log("AI get nexthop");
+  dbg2("AI get nexthop");
   TRACE_AND_INDENT();
 
   //

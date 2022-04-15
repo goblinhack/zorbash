@@ -30,12 +30,12 @@ void Level::display(void)
 
   display_external_particles();
 
-  if (ts_redraw_bg && (time_game_ms_cached() > ts_redraw_bg)) {
+  if (ts_redraw_bg && (time_ms_cached() > ts_redraw_bg)) {
     ts_redraw_bg = 0;
 
     auto delta = 0;
     if (ts_fade_in_begin) {
-      delta = time_game_ms_cached() - ts_fade_in_begin;
+      delta = time_ms_cached() - ts_fade_in_begin;
     }
 
     g_render_black_and_white = true;
@@ -46,7 +46,7 @@ void Level::display(void)
     // Reset the fade in timestamp as the above is a bit slow
     //
     if (ts_fade_in_begin) {
-      ts_fade_in_begin = time_game_ms_cached() - delta;
+      ts_fade_in_begin = time_ms_cached() - delta;
     }
   }
 
@@ -349,8 +349,7 @@ void Level::display_map(void)
   fade_out_finished = false;
 
   if (fade_out) {
-    if ((time_game_ms_cached() < ts_fade_out_begin) ||
-        (time_game_ms_cached() - ts_fade_out_begin > LEVEL_FADE_OUT_MS)) {
+    if ((time_ms_cached() < ts_fade_out_begin) || (time_ms_cached() - ts_fade_out_begin > LEVEL_FADE_OUT_MS)) {
       is_map_mini_valid = false;
       ts_fade_out_begin = 0;
       fade_out_finished = true;
@@ -361,7 +360,7 @@ void Level::display_map(void)
   }
 
   if (fade_in) {
-    if ((time_game_ms_cached() < ts_fade_in_begin) || (time_game_ms_cached() - ts_fade_in_begin > LEVEL_FADE_IN_MS)) {
+    if ((time_ms_cached() < ts_fade_in_begin) || (time_ms_cached() - ts_fade_in_begin > LEVEL_FADE_IN_MS)) {
       is_map_mini_valid = false;
       ts_fade_in_begin  = 0;
       if (player) {

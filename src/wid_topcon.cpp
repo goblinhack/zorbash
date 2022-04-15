@@ -127,7 +127,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 4   6
     // 1 2 3
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_left = true;
     game->request_player_down = true;
@@ -138,7 +138,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 4   6
     // 1 2 3
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_down = true;
     return false; // To avoid click noise
@@ -148,7 +148,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 4   6
     // 1 2 3
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_right = true;
     game->request_player_down  = true;
@@ -159,7 +159,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 4   6
     // 1 2 3
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_left = true;
     return false; // To avoid click noise
@@ -169,7 +169,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 4   6
     // 1 2 3
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_right = true;
     return false; // To avoid click noise
@@ -179,7 +179,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 4   6
     // 1 2 3
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_left = true;
     game->request_player_up   = true;
@@ -190,7 +190,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 4   6
     // 1 2 3
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_up = true;
     return false; // To avoid click noise
@@ -200,7 +200,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // 4   6
     // 1 2 3
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_right = true;
     game->request_player_up    = true;
@@ -215,7 +215,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_wait_or_collect = true;
     return false; // To avoid click noise
@@ -225,7 +225,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_left = true;
     return false; // To avoid click noise
@@ -235,7 +235,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_right = true;
     return false; // To avoid click noise
@@ -245,7 +245,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_up = true;
     return false; // To avoid click noise
@@ -255,7 +255,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
     if (! game->request_player_move) {
-      game->request_player_move = time_game_ms();
+      game->request_player_move = time_ms();
     }
     game->request_player_down = true;
     return false; // To avoid click noise

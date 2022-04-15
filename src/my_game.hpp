@@ -407,6 +407,7 @@ public:
   // When the last tick started. Used for looking at spikes in time.
   //
   ts_t tick_begin_ms {};
+  ts_t tick_begin_game_ms {};
 
   //
   // Auto generated

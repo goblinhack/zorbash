@@ -53,7 +53,7 @@ void Level::display_gas(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16
   static int      r;
   static uint32_t last_anim_change;
   if (time_have_x_tenths_passed_since(2, last_anim_change)) {
-    last_anim_change = time_game_ms();
+    last_anim_change = time_ms();
     r++;
   }
 

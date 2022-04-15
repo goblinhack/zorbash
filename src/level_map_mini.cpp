@@ -19,13 +19,13 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
       if (! time_have_x_tenths_passed_since(1, last_rendered)) {
         return;
       }
-      last_rendered = time_game_ms_cached();
+      last_rendered = time_ms_cached();
     }
   } else {
     if (! time_have_x_tenths_passed_since(1, last_rendered)) {
       return;
     }
-    last_rendered = time_game_ms_cached();
+    last_rendered = time_ms_cached();
   }
 
   gl_enter_2d_mode(MAP_WIDTH + 1, MAP_HEIGHT + 1);

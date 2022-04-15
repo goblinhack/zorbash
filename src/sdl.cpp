@@ -455,7 +455,7 @@ void sdl_event(SDL_Event *event)
               //
               // Fast repeat
               //
-              if (! time_have_x_hundredths_passed_since(5, sdl_last_time_for_key)) {
+              if (! time_have_x_hundredths_passed_since(10, sdl_last_time_for_key)) {
                 return;
               }
             } else {
@@ -466,7 +466,7 @@ void sdl_event(SDL_Event *event)
                 return;
               }
             }
-            sdl_last_time_for_key = time_game_ms_cached();
+            sdl_last_time_for_key = time_ms();
           } else {
             //
             // Pressing a different key
@@ -479,6 +479,10 @@ void sdl_event(SDL_Event *event)
         wid_key_down(key, sdl_mouse_x, sdl_mouse_y);
 
         sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
+
+        if (game && game->level) {
+          game->level->handle_input_events();
+        }
         break;
       }
     case SDL_KEYUP:
@@ -536,7 +540,7 @@ void sdl_event(SDL_Event *event)
             }
           }
 
-          ts = time_game_ms_cached();
+          ts = time_ms();
         }
 
         sdl_wheel_x = event->wheel.x;
@@ -569,14 +573,14 @@ void sdl_event(SDL_Event *event)
     case SDL_MOUSEBUTTONDOWN:
       {
         mouse_down                    = sdl_get_mouse();
-        sdl_last_mouse_held_down_when = time_game_ms_cached();
+        sdl_last_mouse_held_down_when = time_ms();
         sdl_held_mouse_x              = sdl_mouse_x;
         sdl_held_mouse_y              = sdl_mouse_y;
 
         DBG2("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x,
              event->button.y, mouse_down);
 
-        auto now             = time_game_ms_cached();
+        auto now             = time_ms();
         wid_mouse_visible    = 1;
         wid_mouse_two_clicks = (now - mouse_down_when < UI_MOUSE_DOUBLE_CLICK);
 
@@ -898,7 +902,7 @@ void sdl_tick(void)
   }
 
   if ((mx != 0) || (my != 0)) {
-    ts = time_game_ms_cached();
+    ts = time_ms();
 
     accel *= UI_SCROLL_JOY_SCALE;
 

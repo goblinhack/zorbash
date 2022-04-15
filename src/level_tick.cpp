@@ -91,30 +91,24 @@ void Level::handle_input_events(void)
   // After a small delay handle the player move. This allows for diagonal moves to be handled without generating two
   // key presses.
   //
-  if (((player && player->aip()->move_path.size()) || game->request_player_move) &&
-      time_have_x_hundredths_passed_since(15, game->request_player_move)) {
+  if (((player && player->aip()->move_path.size()) || game->request_player_move)) {
+    //    && time_have_x_hundredths_passed_since(15, game->request_player_move))
+
     //
     // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete
     // sooner and should result in the flag below being cleared.
     //
-    static int time_boost = 0;
-    if (game->things_are_moving) {
-      if (! time_boost) {
-        time_boost = 10;
-      } else {
-        time_boost += 10;
-      }
-      if (time_boost > 50) {
-        time_boost = 50;
-      }
-
-      time_game_delta += time_boost;
-      // CON("slow boost time T%d", time_boost);
-      return;
+    dbg("Fast forward loop ");
+    while (game->things_are_moving) {
+      time_game_delta += 50;
+      level->display_internal_particles();
+      level->display_external_particles();
+      level->tick();
     }
-    time_boost = 0;
+    dbg("Fast forward end ");
 
     game->request_player_move = 0;
+    game->tick_end();
 
     bool wait_or_collect = false;
     bool jump            = false;
@@ -133,19 +127,18 @@ void Level::handle_input_events(void)
     game->request_player_wait_or_collect = false;
 
     if (up || down || left || right || wait_or_collect) {
-      // TOPCON("%d%d%d%d", up, down, left, right);
-      player_tick(left, right, up, down, attack, wait_or_collect, jump);
+      if (player_tick(left, right, up, down, attack, wait_or_collect, jump)) {
+        tick_begin_now();
+      }
     }
   }
 }
 
 bool Level::tick(void)
 {
-  TRACE_NO_INDENT();
-  // con("Tick");
+  dbg("Tick thing-moving %d", game->things_are_moving);
+  TRACE_AND_INDENT();
   //  TOPCON("monsts %d.", monst_count);
-
-  handle_input_events();
 
   if (! game->started) {
     return false;
@@ -165,7 +158,10 @@ bool Level::tick(void)
     }
   }
 
+  game->tick_update();
+
   handle_all_pending_things();
+
   things_gc_if_possible();
 
   //
@@ -275,8 +271,6 @@ bool Level::tick(void)
     FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
   }
 
-  game->tick_update();
-
   //
   // Update the cursor position. But only if the mouse has moved. So if the
   // player is moving via keyboard alone, we don't pollute the screen.
@@ -316,15 +310,6 @@ bool Level::tick(void)
     //
     // Check if we finished moving above. If not, keep waiting.
     //
-    if (t->is_jumping) {
-      if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
-      }
-      game->things_are_moving = true;
-      t->is_waiting           = true;
-      // t->con("WAIT %d", __LINE__);
-    }
-
     if (t->is_jumping) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
         t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
@@ -488,20 +473,9 @@ bool Level::tick(void)
   if (game->things_are_moving) {
     if (ts_created && time_have_x_tenths_passed_since(10, ts_created)) {
       if (game->request_player_move || (player && player->aip()->move_path.size())) {
-        if ((time_ms() - game->tick_begin_ms) > 100) {
-          game->tick_current_is_too_slow = true;
-          time_game_delta += 100;
-          dbg("End of tick and too slow (1)");
-          return true;
-        } else if ((time_ms() - game->tick_begin_ms) > 50) {
-          game->tick_current_is_too_slow = true;
-          time_game_delta += 50;
-          dbg("End of tick and too slow (2)");
-          return true;
-        } else if ((time_ms() - game->tick_begin_ms) > 10) {
+        if ((time_ms() - game->tick_begin_ms) > game->current_move_speed) {
           game->tick_current_is_too_slow = true;
           time_game_delta += 10;
-          dbg("End of tick and too slow (3)");
           return true;
         }
       }
@@ -685,33 +659,7 @@ bool Level::tick(void)
   //
   // A new game event has occurred?
   //
-  if (! game->tick_requested.empty()) {
-    game->tick_begin_now();
-
-    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
-    {
-      //
-      // Give things a bit of time to move
-      //
-      auto speed = t->move_speed_total();
-      if (speed) {
-        t->movement_remaining_incr(speed);
-      } else {
-        //
-        // Things that do not move need to tick too.
-        //
-        t->movement_remaining_incr(1);
-      }
-
-      //
-      // Allow the same thing to hit us again
-      //
-      if (t->maybe_aip()) {
-        t->aip()->recently_hit_by.clear();
-      }
-    }
-    FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
-  }
+  tick_begin_now();
 
   //
   // Only update robot mode if things have stopped moving so we get
@@ -722,6 +670,45 @@ bool Level::tick(void)
   }
 
   return false;
+}
+
+void Level::tick_begin_now(void)
+{
+  dbg("Tick begin now");
+  TRACE_AND_INDENT();
+
+  //
+  // A new game event has occurred?
+  //
+  if (game->tick_requested.empty()) {
+    return;
+  }
+
+  game->tick_begin_now();
+
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+  {
+    //
+    // Give things a bit of time to move
+    //
+    auto speed = t->move_speed_total();
+    if (speed) {
+      t->movement_remaining_incr(speed);
+    } else {
+      //
+      // Things that do not move need to tick too.
+      //
+      t->movement_remaining_incr(1);
+    }
+
+    //
+    // Allow the same thing to hit us again
+    //
+    if (t->maybe_aip()) {
+      t->aip()->recently_hit_by.clear();
+    }
+  }
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 }
 
 void Level::update_all_ticks(void)
