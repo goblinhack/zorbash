@@ -15,14 +15,14 @@ void Level::display_anim(void)
   TRACE_AND_INDENT();
   static uint32_t anim_speed;
   if (! anim_speed) {
-    anim_speed = time_game_ms_cached();
+    anim_speed = time_ms_cached();
   }
 
-  if ((time_game_ms_cached() - anim_speed) < (uint) 20) {
+  if ((time_ms_cached() - anim_speed) < (uint) 20) {
     return;
   }
 
-  anim_speed = time_game_ms_cached();
+  anim_speed = time_ms_cached();
 
   //
   // Slow timer to scroll the water.

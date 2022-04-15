@@ -264,18 +264,18 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   auto duration = THING_JUMP_SPEED_MS;
 
   if (is_offscreen) {
-    duration /= 2;
+    duration /= 4;
   }
 
   //
   // Check the number of things jumping is not slowing the game too much
   //
   if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
-    duration /= 2;
+    duration /= 4;
   }
 
   if (game->robot_mode) {
-    duration /= 2;
+    duration /= 4;
   }
 
   point dest(src.x + dx * tw, src.y + dy * th);

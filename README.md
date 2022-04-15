@@ -2,6 +2,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- bats seem to get stuck                                                                                                                       -->
+<!-- click on foilage does not attack or move                                                                                                     -->
+<!-- diagonal move followed by normal move does not work                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

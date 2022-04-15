@@ -933,7 +933,6 @@ public:
   void fade_in_no_check_unset(const int x, const int y);
   void fade_in_unset(const int x, const int y);
   void fini(void);
-  void tiles_get(void);
   void gfx_water_set(const int x, const int y);
   void gfx_water_unset(const int x, const int y);
   void handle_all_pending_things(int group);
@@ -950,8 +949,6 @@ public:
   void is_able_to_stand_on_unset(const int x, const int y);
   void is_acid_set(const int x, const int y);
   void is_acid_unset(const int x, const int y);
-  void is_cold_set(const int x, const int y);
-  void is_cold_unset(const int x, const int y);
   void is_ascend_dungeon_set(const int x, const int y);
   void is_ascend_dungeon_unset(const int x, const int y);
   void is_ascend_sewer_set(const int x, const int y);
@@ -964,14 +961,16 @@ public:
   void is_bridge_unset(const int x, const int y);
   void is_chasm_set(const int x, const int y);
   void is_chasm_unset(const int x, const int y);
+  void is_cold_set(const int x, const int y);
+  void is_cold_unset(const int x, const int y);
+  void is_combustible_set(const int x, const int y);
+  void is_combustible_unset(const int x, const int y);
   void is_corpse_set(const int x, const int y);
   void is_corpse_unset(const int x, const int y);
   void is_corridor_set(const int x, const int y);
   void is_corridor_unset(const int x, const int y);
   void is_cursor_path_hazard_for_player_set(const int x, const int y);
   void is_cursor_path_hazard_for_player_unset(const int x, const int y);
-  void is_combustible_set(const int x, const int y);
-  void is_combustible_unset(const int x, const int y);
   void is_deep_water_set(const int x, const int y);
   void is_deep_water_unset(const int x, const int y);
   void is_descend_dungeon_set(const int x, const int y);
@@ -1136,7 +1135,9 @@ public:
   void things_gc_force(void);
   void things_gc_if_possible(void);
   void things_tick(void);
+  void tick_begin_now(void);
   void tick_gas_poison(void);
+  void tiles_get(void);
   void update_all_ticks(void);
   void update_deep_water(void);
   void update_hazard_tile_map(void);

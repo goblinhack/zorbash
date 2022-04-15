@@ -1297,7 +1297,7 @@ static bool wid_rightbar_create(void)
     auto w       = wid_new_square_window("map_mini wid");
     wid_map_mini = w;
     point tl     = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, y_at);
-    point br     = make_point(TERM_WIDTH - 1, y_at + UI_SIDEBAR_RIGHT_WIDTH);
+    point br     = make_point(TERM_WIDTH - 1, y_at + UI_SIDEBAR_RIGHT_WIDTH / (MAP_WIDTH / MAP_HEIGHT));
 
     wid_set_pos(w, tl, br);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);

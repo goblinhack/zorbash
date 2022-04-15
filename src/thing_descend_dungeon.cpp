@@ -30,7 +30,7 @@ bool Thing::descend_dungeon_tick(void)
   }
 
   if (is_player()) {
-    level->ts_fade_out_begin      = time_game_ms_cached();
+    level->ts_fade_out_begin      = time_ms_cached();
     level->fbo_light              = sdl_fbo_save(FBO_FULLMAP_LIGHT);
     is_waiting_to_descend_dungeon = true;
     return true;
@@ -154,7 +154,7 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
         is_changing_level = false;
         dbg("Moved to next level entrance");
         if (is_player()) {
-          level->ts_fade_in_begin = time_game_ms_cached();
+          level->ts_fade_in_begin = time_ms_cached();
           level->update_new_level();
 
           if (game->robot_mode) {

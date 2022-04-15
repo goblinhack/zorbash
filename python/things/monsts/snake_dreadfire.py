@@ -94,7 +94,7 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.long_text_description(self, "Dreadfire snakes are just that, a combination of fire and dread. Fast, venomous and with a spit to die for, best to stay well away.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
-    my.move_speed(self, 400)
+    my.move_speed(self, 300)
     my.noise_decibels_hearing(self, 10)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")

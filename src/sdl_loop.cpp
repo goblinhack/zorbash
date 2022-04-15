@@ -39,7 +39,7 @@ void sdl_loop(void)
   //
   // Wait for events
   //
-  int ui_ts_fast_last = time_game_ms();
+  int ui_ts_fast_last = time_ms();
   int ui_ts_slow_last = ui_ts_fast_last;
 
   g_main_loop_running = true;
@@ -117,7 +117,7 @@ void sdl_loop(void)
     //
     // Less frequent updates
     //
-    int  ts_now      = time_game_ms();
+    int  ts_now      = time_ms();
     bool update_slow = (ts_now - ui_ts_slow_last >= UI_UPDATE_SLOW_MS);
     bool update_fast = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
 

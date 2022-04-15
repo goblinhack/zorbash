@@ -662,12 +662,12 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 
       if (first) {
         first = false;
-        last  = time_game_ms_cached();
+        last  = time_ms_cached();
       }
 
       if (time_have_x_tenths_passed_since(10, last)) {
         fg   = UI_CURSOR_COLOR;
-        last = time_game_ms_cached();
+        last = time_ms_cached();
       } else if (time_have_x_tenths_passed_since(5, last)) {
         fg = UI_CURSOR_COLOR;
       } else {

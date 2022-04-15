@@ -327,7 +327,7 @@ static void wid_choose_initial_dungeons_mouse_over(Widp w, int32_t relx, int32_t
    * a mouse over event immediately which may not be over the focus item
    * and will cause us to move. Annoying.
    */
-  if (time_game_ms() - ctx->created < 100) {
+  if (time_ms() - ctx->created < 100) {
     return;
   }
 
@@ -1671,5 +1671,5 @@ void Game::wid_choose_initial_dungeons(void)
     wid_set_focus(window);
   }
 
-  ctx->created = time_game_ms();
+  ctx->created = time_ms();
 }

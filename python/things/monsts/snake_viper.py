@@ -87,7 +87,7 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.long_text_description(self, "A three foot long snake with brilliant jade green scales. This snake is renowned for being highly venomous, but is not particularly aggressive. Best to avoid.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
-    my.move_speed(self, 400)
+    my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 10)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")

@@ -219,6 +219,6 @@ void Game::place_player(void)
     }
   }
 
-  level->ts_fade_in_begin = time_game_ms_cached();
+  level->ts_fade_in_begin = time_ms_cached();
   level->ts_redraw_bg     = 1; // Force redraw
 }

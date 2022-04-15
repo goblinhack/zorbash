@@ -73,7 +73,8 @@ void Game::tick_begin_now(void)
     CON("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
   }
 
-  game->tick_begin_ms = time_ms();
+  game->tick_begin_ms      = time_ms();
+  game->tick_begin_game_ms = time_game_ms();
 
   if (level) {
     level->lights_fade();
@@ -176,6 +177,9 @@ bool Game::tick_end(void)
   //
   wid_actionbar_init();
 
+  tick_begin_ms = 0;
+  tick_dt       = 0;
+
   return true;
 }
 
@@ -187,7 +191,7 @@ void Game::tick_update(void)
   // Work out the current timestep in this move
   //
   if (game->tick_begin_ms) {
-    float move_at       = time_ms() - game->tick_begin_ms;
+    float move_at       = time_game_ms() - game->tick_begin_game_ms;
     float move_duration = game->current_move_speed;
     game->tick_dt       = move_at / move_duration;
     if (game->tick_dt > 1) {

@@ -303,7 +303,7 @@ static void game_display_title_fg4(void)
     if (frame > 64) {
       frame = 1;
     }
-    ts = time_game_ms_cached();
+    ts = time_ms_cached();
   }
 
   std::string t = "title_fg4_" + std::to_string(frame);

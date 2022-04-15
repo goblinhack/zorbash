@@ -179,7 +179,7 @@ void Level::scroll_map_to_player(void)
 
   mouse_at             = -1;
   mouse_old            = -1;
-  ts_redraw_bg         = time_game_ms_cached() + 500;
+  ts_redraw_bg         = time_ms_cached() + 500;
   is_map_follow_player = true;
 
   map_wanted_at = make_fpoint(player->curr_at) - fpoint(TILES_ACROSS / 2, TILES_DOWN / 2);

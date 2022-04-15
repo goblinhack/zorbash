@@ -99,7 +99,7 @@ bool Thing::player_is_ready_for_thing_info(void)
   //
   if (game->tick_current <= 1) {
     if (game->tick_requested.empty()) {
-      if ((time_game_ms() - game->tick_begin_ms) < 50) {
+      if ((time_ms() - game->tick_begin_ms) < 50) {
         if (! game->cursor_moved) {
           dbg("Not ready for thing info: too soon %ums", time_ms() - game->tick_begin_ms);
           return false;

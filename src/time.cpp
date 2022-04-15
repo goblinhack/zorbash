@@ -11,9 +11,23 @@
 #include "my_sys.hpp"
 #include "my_time.hpp"
 
-ts_t        time_now;
-ts_t        time_game;
-ts_t        time_game_delta;
+//
+// This is the actual time
+//
+ts_t time_now;
+
+//
+// This is the game time. Game time starts out the same as normal time, but if
+// things are slow or we need to end a tick, then we can fast forward time. All
+// thing animation and movement is based off of this time.
+//
+ts_t time_game;
+
+//
+// And this is how we fast forward time
+//
+ts_t time_game_delta;
+
 static char buf_[ MAXSHORTSTR ];
 
 ts_t time_ms_cached(void) { return time_now; }
@@ -21,6 +35,12 @@ ts_t time_ms_cached(void) { return time_now; }
 ts_t time_ms(void)
 {
   time_now = SDL_GetTicks();
+
+  //
+  // Update the game time too
+  //
+  time_game = time_now + time_game_delta;
+
   return time_now;
 }
 
@@ -85,55 +105,55 @@ const char *timestamp(char *buf, int len)
 
 bool time_have_x_hundredths_passed_since(ts_t val, ts_t since)
 {
-  time_game_ms();
+  time_ms();
 
   //
   // Cater for negative future times.
   //
-  ts_t delay = time_game - since;
+  ts_t delay = time_now - since;
 
   return ((ts_t) (delay / 10) > (ts_t) val);
 }
 
 bool time_have_x_ms_passed_since(ts_t val, ts_t since)
 {
-  time_game_ms();
+  time_ms();
 
   //
   // Cater for negative future times.
   //
-  ts_t delay = time_game - since;
+  ts_t delay = time_now - since;
 
   return ((ts_t) (delay) >= (ts_t) val);
 }
 
 bool time_have_x_tenths_passed_since(ts_t val, ts_t since)
 {
-  time_game_ms();
+  time_ms();
 
   //
   // Cater for negative future times.
   //
-  ts_t delay = time_game - since;
+  ts_t delay = time_now - since;
 
   return ((ts_t) (delay / 100) >= (ts_t) val);
 }
 
 bool time_have_x_secs_passed_since(ts_t val, ts_t since)
 {
-  time_game_ms();
+  time_ms();
 
   //
   // Cater for negative future times.
   //
-  ts_t delay = time_game - since;
+  ts_t delay = time_now - since;
 
   return ((ts_t) (delay / ONESEC) >= (ts_t) val);
 }
 
 ts_t time_get_elapsed_secs(ts_t val, ts_t since)
 {
-  time_game_ms();
+  time_ms();
 
   ts_t delay = val - since;
 
@@ -142,7 +162,7 @@ ts_t time_get_elapsed_secs(ts_t val, ts_t since)
 
 ts_t time_get_elapsed_tenths(ts_t val, ts_t since)
 {
-  time_game_ms();
+  time_ms();
 
   ts_t delay = val - since;
 

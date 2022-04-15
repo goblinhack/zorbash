@@ -88,7 +88,7 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.long_text_description(self, "A two foot long snake with shiny yellow irises and a cutely upturned snout giving it the appearance of a small spike. It seems friendly and definitely non non venomous. Want to pet it...?")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
-    my.move_speed(self, 300)
+    my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 10)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d6")

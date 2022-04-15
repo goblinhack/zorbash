@@ -6,6 +6,7 @@ def tp_init(name, tiles=[]):
     self = tp.Tp(name, "spiderweb")
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
+    my.gfx_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1d20")
     my.is_able_to_fall(self, True)
     my.is_attackable_by_monst(self, True)
