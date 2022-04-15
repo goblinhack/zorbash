@@ -1266,7 +1266,10 @@ void config_game_pix_zoom_update(void)
   game->config.ascii_gl_width  = game->config.ui_pix_width / TERM_WIDTH;
   game->config.ascii_gl_height = game->config.ui_pix_height / TERM_HEIGHT;
 
+  CON("SDL: Terminal");
   CON("SDL: - ascii gl size        : %ux%u", game->config.ascii_gl_width, game->config.ascii_gl_height);
   CON("SDL: - term size            : %dx%d", TERM_WIDTH, TERM_HEIGHT);
   CON("SDL: - width to height ratio: %f", game->config.video_w_h_ratio);
+  CON("SDL: Map");
+  CON("SDL: - map size             : %dx%d", MAP_WIDTH, MAP_HEIGHT);
 }

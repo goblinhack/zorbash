@@ -220,17 +220,17 @@ void Level::chances_of_creating_set(void)
   }
 
   log("Chance of creating at difficulty depth %d:", difficulty_depth);
-  log("- d1000 monst_class_a       %u", d1000_chance_of_creating_monst_class_a);
-  log("- d1000 monst_class_b       %u", d1000_chance_of_creating_monst_class_b);
-  log("- d1000 monst_class_c       %u", d1000_chance_of_creating_monst_class_c);
-  log("- d1000 monst_class_d       %u", d1000_chance_of_creating_monst_class_d);
-  log("- d1000 monst_class_e       %u", d1000_chance_of_creating_monst_class_e);
+  log("- d1000 monst_class_a         %u", d1000_chance_of_creating_monst_class_a);
+  log("- d1000 monst_class_b         %u", d1000_chance_of_creating_monst_class_b);
+  log("- d1000 monst_class_c         %u", d1000_chance_of_creating_monst_class_c);
+  log("- d1000 monst_class_d         %u", d1000_chance_of_creating_monst_class_d);
+  log("- d1000 monst_class_e         %u", d1000_chance_of_creating_monst_class_e);
   log("- d1000 mob_challenge_class_a %u", d1000_chance_of_creating_mob_challenge_class_a);
   log("- d1000 mob_challenge_class_b %u", d1000_chance_of_creating_mob_challenge_class_b);
-  log("- d1000 treasure_class_a    %u", d1000_chance_of_creating_treasure_class_a);
-  log("- d1000 treasure_class_b    %u", d1000_chance_of_creating_treasure_class_b);
-  log("- d1000 treasure_class_c    %u", d1000_chance_of_creating_treasure_class_c);
-  log("- d1000 weapon_class_a      %u", d1000_chance_of_creating_weapon_class_a);
-  log("- d1000 weapon_class_b      %u", d1000_chance_of_creating_weapon_class_b);
-  log("- d1000 weapon_class_c      %u", d1000_chance_of_creating_weapon_class_c);
+  log("- d1000 treasure_class_a      %u", d1000_chance_of_creating_treasure_class_a);
+  log("- d1000 treasure_class_b      %u", d1000_chance_of_creating_treasure_class_b);
+  log("- d1000 treasure_class_c      %u", d1000_chance_of_creating_treasure_class_c);
+  log("- d1000 weapon_class_a        %u", d1000_chance_of_creating_weapon_class_a);
+  log("- d1000 weapon_class_b        %u", d1000_chance_of_creating_weapon_class_b);
+  log("- d1000 weapon_class_c        %u", d1000_chance_of_creating_weapon_class_c);
 }

@@ -104,10 +104,10 @@ bool Level::create_sewer_pipes(point3d at)
     return false;
   }
 
-  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > pipes_template = {};
-  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > sewer_pipe     = {};
-  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > final_pipes    = {};
-  std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > failed         = {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > pipes_template = {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > sewer_pipe     = {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > final_pipes    = {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > failed         = {};
 
   //
   // Draw some random pipes
@@ -216,7 +216,7 @@ bool Level::create_sewer_pipes(point3d at)
       b = sewers[ pcg_random_range(0, sewers.size()) ];
     }
 
-    std::array< std::array< bool, MAP_WIDTH >, MAP_HEIGHT > walked = {};
+    std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > walked = {};
     int                                                     tries  = 0;
     while (tries < 1000) {
       set(final_pipes, a.x, a.y, true);
