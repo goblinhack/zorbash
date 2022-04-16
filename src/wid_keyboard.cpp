@@ -416,61 +416,61 @@ static uint8_t wid_keyboard_parent_joy_button(Widp w, int32_t x, int32_t y)
     return false;
   }
 
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_A ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_A ]) {
     (ctx->selected)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_B ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_B ]) {
     (ctx->cancelled)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_X ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_X ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_Y ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_Y ]) {
     (ctx->selected)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_TOP_LEFT ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_TOP_LEFT ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_TOP_RIGHT ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_TOP_RIGHT ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_LEFT_STICK_DOWN ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_LEFT_STICK_DOWN ]) {
     (ctx->selected)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_RIGHT_STICK_DOWN ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_RIGHT_STICK_DOWN ]) {
     (ctx->selected)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_START ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_START ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_XBOX ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_XBOX ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_BACK ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_BACK ]) {
     (ctx->cancelled)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_UP ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_UP ]) {
     wid_keyboard_focus_up(ctx);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_DOWN ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_DOWN ]) {
     wid_keyboard_focus_down(ctx);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_LEFT ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_LEFT ]) {
     wid_keyboard_focus_left(ctx);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_RIGHT ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_RIGHT ]) {
     wid_keyboard_focus_right(ctx);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_LEFT_FIRE ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_LEFT_FIRE ]) {
     (ctx->selected)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_RIGHT_FIRE ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_RIGHT_FIRE ]) {
     (ctx->selected)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
@@ -534,65 +534,65 @@ static uint8_t wid_keyboard_button_joy_button_event(Widp w, int32_t x, int32_t y
     return false;
   }
 
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_A ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_A ]) {
     ret = wid_keyboard_mouse_event(w, ctx->focusx, ctx->focusy);
   }
 
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_B ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_B ]) {
     (ctx->selected)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_X ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_X ]) {
     SDL_Keysym key = {};
     key.sym        = SDLK_BACKSPACE;
     wid_keyboard_text_input_key_event(ctx->input, &key);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_Y ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_Y ]) {
     (ctx->selected)(ctx->w, wid_get_text(ctx->input));
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_TOP_LEFT ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_TOP_LEFT ]) {
     SDL_Keysym key = {};
     key.sym        = SDLK_LEFT;
     wid_keyboard_text_input_key_event(ctx->input, &key);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_TOP_RIGHT ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_TOP_RIGHT ]) {
     SDL_Keysym key = {};
     key.sym        = SDLK_RIGHT;
     wid_keyboard_text_input_key_event(ctx->input, &key);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_LEFT_STICK_DOWN ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_LEFT_STICK_DOWN ]) {
     wid_keyboard_mouse_event(w, ctx->focusx, ctx->focusy);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_RIGHT_STICK_DOWN ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_RIGHT_STICK_DOWN ]) {
     wid_keyboard_mouse_event(w, ctx->focusx, ctx->focusy);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_START ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_START ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_XBOX ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_XBOX ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_BACK ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_BACK ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_UP ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_UP ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_DOWN ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_DOWN ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_LEFT ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_LEFT ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_RIGHT ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_RIGHT ]) {
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_LEFT_FIRE ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_LEFT_FIRE ]) {
     SDL_Keysym key = {};
     key.sym        = SDLK_BACKSPACE;
     wid_receive_input(ctx->input, &key);
     ret = true;
   }
-  if (sdl_joy_buttons[ SDL_JOY_BUTTON_RIGHT_FIRE ]) {
+  if (sdl.joy_buttons[ SDL_JOY_BUTTON_RIGHT_FIRE ]) {
     wid_keyboard_mouse_event(w, ctx->focusx, ctx->focusy);
     ret = true;
   }

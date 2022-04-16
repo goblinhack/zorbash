@@ -5364,63 +5364,63 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
 void wid_fake_joy_button(int32_t x, int32_t y)
 {
   TRACE_AND_INDENT();
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_A)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_A)) {
     wid_mouse_down(SDL_BUTTON_LEFT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_B)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_B)) {
     wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_X)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_X)) {
     wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_Y)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_Y)) {
     wid_mouse_down(2, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_TOP_LEFT)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_TOP_LEFT)) {
     wid_mouse_down(SDL_BUTTON_LEFT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_TOP_RIGHT)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_TOP_RIGHT)) {
     wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_STICK_DOWN)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_LEFT_STICK_DOWN)) {
     wid_mouse_down(SDL_BUTTON_LEFT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_STICK_DOWN)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_RIGHT_STICK_DOWN)) {
     wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_START)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_START)) {
     wid_mouse_down(SDL_BUTTON_LEFT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_XBOX)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_XBOX)) {
     wid_mouse_down(SDL_BUTTON_LEFT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_BACK)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_BACK)) {
     wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_UP)) {
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_DOWN)) {
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_LEFT)) {
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE)) {
     wid_mouse_down(SDL_BUTTON_LEFT, x, y);
     return;
   }
-  if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE)) {
+  if (get(sdl.joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE)) {
     wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
     return;
   }
@@ -5444,7 +5444,7 @@ void wid_joy_button(int32_t x, int32_t y)
   int                                        b;
 
   for (b = 0; b < SDL_MAX_BUTTONS; b++) {
-    if (get(sdl_joy_buttons, b)) {
+    if (get(sdl.joy_buttons, b)) {
       if (time_have_x_tenths_passed_since(2, get(ts, b))) {
         changed = true;
         set(ts, b, time_ms_cached());
@@ -6661,8 +6661,8 @@ void wid_mouse_hide(int value)
     if (visible) {
       sdl_mouse_warp(saved_mouse_x, saved_mouse_y);
     } else {
-      saved_mouse_x = sdl_mouse_x;
-      saved_mouse_y = sdl_mouse_y;
+      saved_mouse_x = sdl.mouse_x;
+      saved_mouse_y = sdl.mouse_y;
     }
   }
 }
@@ -6690,11 +6690,11 @@ void wid_mouse_move(Widp w)
   int32_t x = (tlx + brx) / 2.0;
   int32_t y = (tly + bry) / 2.0;
 
-  saved_mouse_x = sdl_mouse_x;
-  saved_mouse_y = sdl_mouse_y;
+  saved_mouse_x = sdl.mouse_x;
+  saved_mouse_y = sdl.mouse_y;
 
-  sdl_mouse_x = x;
-  sdl_mouse_y = y;
+  sdl.mouse_x = x;
+  sdl.mouse_y = y;
 }
 
 //

@@ -81,7 +81,7 @@ void sdl_loop(void)
     //
     // Reset joystick handling before we poll and update.
     //
-    if (unlikely(sdl_joy_axes != nullptr)) {
+    if (unlikely(sdl.joy_axes != nullptr)) {
       sdl_tick();
     }
 
@@ -185,8 +185,8 @@ void sdl_loop(void)
       //
       SDL_PumpEvents();
 
-      sdl_wheel_x = 0;
-      sdl_wheel_y = 0;
+      sdl.wheel_x = 0;
+      sdl.wheel_y = 0;
 
       found = SDL_PeepEvents(events, ARRAY_SIZE(events), SDL_GETEVENT, SDL_QUIT, SDL_LASTEVENT);
 
@@ -194,23 +194,26 @@ void sdl_loop(void)
         sdl_event(&events[ i ]);
       }
 
+      sdl_key_repeat_events();
+
       //
       // Mouse held?
       //
       if (unlikely(! found)) {
         auto mouse_down = sdl_get_mouse();
         if (mouse_down) {
-          if (sdl_last_mouse_held_down_when) {
-            if (time_have_x_hundredths_passed_since(10, sdl_last_mouse_held_down_when)) {
-              if (sdl_held_mouse_x && sdl_held_mouse_y) {
-                DBG2("SDL: Mouse DOWN: held: Button %d now at %d,%d initially at %d,%d", mouse_down, sdl_mouse_x,
-                     sdl_mouse_y, sdl_held_mouse_x, sdl_held_mouse_y);
-                wid_mouse_held(mouse_down, sdl_held_mouse_x, sdl_held_mouse_y);
-                sdl_held_mouse_x = 0;
-                sdl_held_mouse_y = 0;
+          if (sdl.last_mouse_held_down_when) {
+            if (time_have_x_hundredths_passed_since(10, sdl.last_mouse_held_down_when)) {
+              if (sdl.held_mouse_x && sdl.held_mouse_y) {
+                DBG2("SDL: Mouse DOWN: held: Button %d now at %d,%d initially at %d,%d", mouse_down, sdl.mouse_x,
+                     sdl.mouse_y, sdl.held_mouse_x, sdl.held_mouse_y);
+                wid_mouse_held(sdl.mouse_down, sdl.held_mouse_x, sdl.held_mouse_y);
+                sdl.held_mouse_x = 0;
+                sdl.held_mouse_y = 0;
               } else {
-                DBG2("SDL: Mouse DOWN: held: Button %d now at %d,%d", mouse_down, sdl_mouse_x, sdl_mouse_y);
-                wid_mouse_held(mouse_down, sdl_mouse_x, sdl_mouse_y);
+                DBG2("SDL: Mouse DOWN: held: Button %d now at %d,%d", sdl.mouse_down, sdl.mouse_x,
+                     sdl.mouse_y);
+                wid_mouse_held(sdl.mouse_down, sdl.mouse_x, sdl.mouse_y);
               }
             }
           }
@@ -314,7 +317,7 @@ void sdl_display(void)
     // Flip
     //
     if (likely(game->config.gfx_vsync_locked)) {
-      SDL_GL_SwapWindow(sdl_window);
+      SDL_GL_SwapWindow(sdl.window);
     } else {
       glFlush();
     }

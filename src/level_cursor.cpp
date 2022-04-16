@@ -56,13 +56,13 @@ void Level::cursor_move(void)
     return;
   }
 
-  if ((sdl_wheel_x != 0) || (sdl_wheel_y != 0)) {
+  if ((sdl.wheel_x != 0) || (sdl.wheel_y != 0)) {
     if (wid_find_under_mouse_when_scrolling()) {
       return;
     }
 
-    float dx = -sdl_wheel_x;
-    float dy = -sdl_wheel_y;
+    float dx = -sdl.wheel_x;
+    float dy = -sdl.wheel_y;
 
     //
     // Move faster when more zoomed out.
@@ -88,13 +88,13 @@ void Level::cursor_move(void)
   // Dampen mouse moves at level start
   //
   if (ts_created && time_have_x_tenths_passed_since(2, ts_created)) {
-    mouse_at = sdl_mouse_tick;
+    mouse_at = sdl.mouse_tick;
     if (mouse_at > mouse_old) {
       mouse_old       = mouse_at;
       is_cursor_found = false;
     }
   } else {
-    mouse_at             = sdl_mouse_tick;
+    mouse_at             = sdl.mouse_tick;
     mouse_old            = mouse_at;
     is_map_follow_player = true;
   }
