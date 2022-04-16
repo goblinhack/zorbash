@@ -70,12 +70,6 @@ void Level::handle_input_events(void)
     is_map_follow_player = false;
   }
 
-  auto   level  = game->level;
-  Thingp player = nullptr;
-  if (level) {
-    player = level->player;
-  }
-
   //
   // After a small delay handle the player move. This allows for diagonal moves to be handled without generating two
   // key presses.
@@ -87,17 +81,18 @@ void Level::handle_input_events(void)
     // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete
     // sooner and should result in the flag below being cleared.
     //
-    dbg("Fast forward loop ");
-    while (game->things_are_moving) {
-      time_game_delta += 50;
-      level->display_internal_particles();
-      level->display_external_particles();
-      level->tick();
+    if (game->things_are_moving) {
+      dbg("Fast forward loop ");
+      do {
+        time_game_delta += 50;
+        display_internal_particles();
+        display_external_particles();
+        tick();
+      } while (game->things_are_moving);
+      dbg("Fast forward end ");
     }
-    dbg("Fast forward end ");
 
     game->request_player_move = 0;
-    game->tick_end();
 
     bool jump            = false;
     bool attack          = false;
@@ -123,10 +118,6 @@ void Level::handle_input_events(void)
 
 bool Level::tick(void)
 {
-  dbg("Tick thing-moving %d", game->things_are_moving);
-  TRACE_AND_INDENT();
-  //  TOPCON("monsts %d.", monst_count);
-
   if (! game->started) {
     return false;
   }
@@ -145,6 +136,23 @@ bool Level::tick(void)
     }
   }
 
+  //
+  // Is there a tick in progress?
+  //
+  if (! game->tick_begin_ms) {
+    if (game->things_are_moving) {
+      ERR("No tick in progress but things are still moving");
+    }
+    return false;
+  }
+
+  if (game->things_are_moving) {
+    dbg("Tick (things still moving)");
+  } else {
+    dbg("Tick");
+  }
+  TRACE_AND_INDENT();
+
   game->tick_update();
 
   handle_all_pending_things();
@@ -159,6 +167,14 @@ bool Level::tick(void)
     dmap_to_player_update();
   }
 
+  //
+  // For all things that move, like monsters, or those that do not, like
+  // wands, and even those that do not move but can be destroyed, like
+  // walls. Omits things like floors, corridors, the grid; those that
+  // generally do nothing or are hidden.
+  //
+  game->things_are_moving = false;
+
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
   {
     int remaining = t->movement_remaining();
@@ -169,6 +185,11 @@ bool Level::tick(void)
     if (t->is_waiting) {
       continue;
     }
+
+    //
+    // While moves remain, things are still moving
+    //
+    game->things_are_moving = true;
 
     auto speed        = t->move_speed_total();
     auto player_speed = player->move_speed_total();
@@ -194,14 +215,6 @@ bool Level::tick(void)
     }
   }
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
-
-  //
-  // For all things that move, like monsters, or those that do not, like
-  // wands, and even those that do not move but can be destroyed, like
-  // walls. Omits things like floors, corridors, the grid; those that
-  // generally do nothing or are hidden.
-  //
-  game->things_are_moving = false;
 
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
@@ -358,23 +371,6 @@ bool Level::tick(void)
             // w->con("WAIT EQUIP %d", __LINE__);
             // t->con("WAIT %d", __LINE__);
           }
-        }
-      }
-
-      if (t->ts_flip_start_get() && ! (t->is_dead || t->is_scheduled_for_death)) {
-        if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on flipping thing longer than expected: %s", t->to_dbg_string().c_str());
-        }
-
-        game->things_are_moving = true;
-        t->is_waiting           = true;
-        // t->con("WAIT %d", __LINE__);
-
-        //
-        // Make sure offscreen animation occurs.
-        //
-        if (t->is_offscreen) {
-          t->ts_flip_start_set(0);
         }
       }
     }
@@ -543,11 +539,12 @@ bool Level::tick(void)
   //
   // Fast moving things may still have stuff to do
   //
-  bool work_to_do = false;
+  bool work_to_do = game->things_are_moving;
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
   {
     if (t->movement_remaining() > 0) {
-      work_to_do = true;
+      work_to_do              = true;
+      game->things_are_moving = true;
     }
     t->is_waiting = false;
   }
@@ -556,13 +553,23 @@ bool Level::tick(void)
     return true;
   }
 
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+  {
+    if (t->is_moving) {
+      t->err("Thing is still moving and about to end the tick");
+    }
+  }
+  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
+
   //
   // We've finished waiting on all things, bump the game tick.
   //
+  dbg("Level tick about to end");
+  TRACE_AND_INDENT();
   bool tick_done = game->tick_end();
 
   if (tick_done) {
-    DBG("Level tick done");
+    dbg("Level tick done");
     TRACE_AND_INDENT();
 
     handle_all_pending_things();
@@ -602,11 +609,11 @@ bool Level::tick(void)
 
   if (tick_done) {
     if (player && game->robot_mode) {
-      DBG("Level tick done and in robot mode");
+      dbg("Level tick done and in robot mode");
       TRACE_AND_INDENT();
 
       if (game->robot_mode_tick_requested) {
-        DBG("Robot: tick requested");
+        dbg("Robot: tick requested");
         TRACE_AND_INDENT();
 
         game->robot_mode_tick_requested = false;
@@ -618,21 +625,21 @@ bool Level::tick(void)
       }
 
       if (game->tick_requested.empty()) {
-        DBG("Robot: no tick requested");
+        dbg("Robot: no tick requested");
         TRACE_AND_INDENT();
 
         //
         // We can get stuck with timing with the inventory open. So make sure we close it.
         //
         if (game->state != Game::STATE_NORMAL) {
-          DBG("Robot: reset to normal state");
+          dbg("Robot: reset to normal state");
           player->change_state(MONST_STATE_IDLE, "reset to normal state");
         }
 
-        DBG("Robot: no new tick was requested, so tick anyway");
+        dbg("Robot: no new tick was requested, so tick anyway");
         game->robot_mode_tick();
       } else {
-        DBG("Robot: a new tick was requested");
+        dbg("Robot: a new tick was requested");
       }
     } else if (player) {
       if (game->robot_mode) {
