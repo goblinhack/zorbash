@@ -919,8 +919,8 @@ Widp is_mouse_over_any_bag(void)
     // If we are in the portion of the lower screen above the itembar
     // then do not scroll
     //
-    int x = sdl_mouse_x;
-    int y = sdl_mouse_y;
+    int x = sdl.mouse_x;
+    int y = sdl.mouse_y;
     pixel_to_ascii(&x, &y);
 
     static int tlx, tly, brx, bry, cached;

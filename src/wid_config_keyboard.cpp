@@ -723,8 +723,8 @@ static uint8_t wid_config_key_move_left(Widp w, int32_t x, int32_t y, uint32_t b
 {
   TRACE_AND_INDENT();
   grab_key("move left");
-  on_sdl_key_grab = wid_config_key_move_left_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_move_left_set;
+  config_changed      = true;
   return true;
 }
 
@@ -732,8 +732,8 @@ static uint8_t wid_config_key_move_right(Widp w, int32_t x, int32_t y, uint32_t 
 {
   TRACE_AND_INDENT();
   grab_key("move right");
-  on_sdl_key_grab = wid_config_key_move_right_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_move_right_set;
+  config_changed      = true;
   return true;
 }
 
@@ -741,8 +741,8 @@ static uint8_t wid_config_key_move_up(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("move up");
-  on_sdl_key_grab = wid_config_key_move_up_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_move_up_set;
+  config_changed      = true;
   return true;
 }
 
@@ -750,8 +750,8 @@ static uint8_t wid_config_key_move_down(Widp w, int32_t x, int32_t y, uint32_t b
 {
   TRACE_AND_INDENT();
   grab_key("move down");
-  on_sdl_key_grab = wid_config_key_move_down_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_move_down_set;
+  config_changed      = true;
   return true;
 }
 
@@ -759,8 +759,8 @@ static uint8_t wid_config_key_map_left(Widp w, int32_t x, int32_t y, uint32_t bu
 {
   TRACE_AND_INDENT();
   grab_key("map left");
-  on_sdl_key_grab = wid_config_key_map_left_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_map_left_set;
+  config_changed      = true;
   return true;
 }
 
@@ -768,8 +768,8 @@ static uint8_t wid_config_key_map_right(Widp w, int32_t x, int32_t y, uint32_t b
 {
   TRACE_AND_INDENT();
   grab_key("map right");
-  on_sdl_key_grab = wid_config_key_map_right_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_map_right_set;
+  config_changed      = true;
   return true;
 }
 
@@ -777,8 +777,8 @@ static uint8_t wid_config_key_map_up(Widp w, int32_t x, int32_t y, uint32_t butt
 {
   TRACE_AND_INDENT();
   grab_key("map up");
-  on_sdl_key_grab = wid_config_key_map_up_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_map_up_set;
+  config_changed      = true;
   return true;
 }
 
@@ -786,8 +786,8 @@ static uint8_t wid_config_key_map_down(Widp w, int32_t x, int32_t y, uint32_t bu
 {
   TRACE_AND_INDENT();
   grab_key("map down");
-  on_sdl_key_grab = wid_config_key_map_down_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_map_down_set;
+  config_changed      = true;
   return true;
 }
 
@@ -795,8 +795,8 @@ static uint8_t wid_config_key_attack(Widp w, int32_t x, int32_t y, uint32_t butt
 {
   TRACE_AND_INDENT();
   grab_key("attack");
-  on_sdl_key_grab = wid_config_key_attack_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_attack_set;
+  config_changed      = true;
   return true;
 }
 
@@ -804,8 +804,8 @@ static uint8_t wid_config_key_wait_or_collect(Widp w, int32_t x, int32_t y, uint
 {
   TRACE_AND_INDENT();
   grab_key("wait or collect");
-  on_sdl_key_grab = wid_config_key_wait_or_collect_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_wait_or_collect_set;
+  config_changed      = true;
   return true;
 }
 
@@ -813,8 +813,8 @@ static uint8_t wid_config_key_jump(Widp w, int32_t x, int32_t y, uint32_t button
 {
   TRACE_AND_INDENT();
   grab_key("jump");
-  on_sdl_key_grab = wid_config_key_jump_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_jump_set;
+  config_changed      = true;
   return true;
 }
 
@@ -822,8 +822,8 @@ static uint8_t wid_config_key_throw(Widp w, int32_t x, int32_t y, uint32_t butto
 {
   TRACE_AND_INDENT();
   grab_key("item throw");
-  on_sdl_key_grab = wid_config_key_throw_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_throw_set;
+  config_changed      = true;
   return true;
 }
 
@@ -831,8 +831,8 @@ static uint8_t wid_config_key_inventory(Widp w, int32_t x, int32_t y, uint32_t b
 {
   TRACE_AND_INDENT();
   grab_key("show inventory");
-  on_sdl_key_grab = wid_config_key_inventory_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_inventory_set;
+  config_changed      = true;
   return true;
 }
 
@@ -840,8 +840,8 @@ static uint8_t wid_config_key_drop(Widp w, int32_t x, int32_t y, uint32_t button
 {
   TRACE_AND_INDENT();
   grab_key("item drop");
-  on_sdl_key_grab = wid_config_key_drop_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_drop_set;
+  config_changed      = true;
   return true;
 }
 
@@ -849,8 +849,8 @@ static uint8_t wid_config_key_use(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("item use");
-  on_sdl_key_grab = wid_config_key_use_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_use_set;
+  config_changed      = true;
   return true;
 }
 
@@ -858,8 +858,8 @@ static uint8_t wid_config_key_descend(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("item descend");
-  on_sdl_key_grab = wid_config_key_descend_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_descend_set;
+  config_changed      = true;
   return true;
 }
 
@@ -867,8 +867,8 @@ static uint8_t wid_config_key_ascend(Widp w, int32_t x, int32_t y, uint32_t butt
 {
   TRACE_AND_INDENT();
   grab_key("item ascend");
-  on_sdl_key_grab = wid_config_key_ascend_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_ascend_set;
+  config_changed      = true;
   return true;
 }
 
@@ -876,8 +876,8 @@ static uint8_t wid_config_key_eat(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("item eat");
-  on_sdl_key_grab = wid_config_key_eat_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_eat_set;
+  config_changed      = true;
   return true;
 }
 
@@ -885,8 +885,8 @@ static uint8_t wid_config_key_action0(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 0");
-  on_sdl_key_grab = wid_config_key_action0_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action0_set;
+  config_changed      = true;
   return true;
 }
 
@@ -894,8 +894,8 @@ static uint8_t wid_config_key_action1(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 1");
-  on_sdl_key_grab = wid_config_key_action1_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action1_set;
+  config_changed      = true;
   return true;
 }
 
@@ -903,8 +903,8 @@ static uint8_t wid_config_key_action2(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 2");
-  on_sdl_key_grab = wid_config_key_action2_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action2_set;
+  config_changed      = true;
   return true;
 }
 
@@ -912,8 +912,8 @@ static uint8_t wid_config_key_action3(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 3");
-  on_sdl_key_grab = wid_config_key_action3_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action3_set;
+  config_changed      = true;
   return true;
 }
 
@@ -921,8 +921,8 @@ static uint8_t wid_config_key_action4(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 4");
-  on_sdl_key_grab = wid_config_key_action4_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action4_set;
+  config_changed      = true;
   return true;
 }
 
@@ -930,8 +930,8 @@ static uint8_t wid_config_key_action5(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 5");
-  on_sdl_key_grab = wid_config_key_action5_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action5_set;
+  config_changed      = true;
   return true;
 }
 
@@ -939,8 +939,8 @@ static uint8_t wid_config_key_action6(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 6");
-  on_sdl_key_grab = wid_config_key_action6_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action6_set;
+  config_changed      = true;
   return true;
 }
 
@@ -948,8 +948,8 @@ static uint8_t wid_config_key_action7(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 7");
-  on_sdl_key_grab = wid_config_key_action7_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action7_set;
+  config_changed      = true;
   return true;
 }
 
@@ -957,8 +957,8 @@ static uint8_t wid_config_key_action8(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 8");
-  on_sdl_key_grab = wid_config_key_action8_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action8_set;
+  config_changed      = true;
   return true;
 }
 
@@ -966,8 +966,8 @@ static uint8_t wid_config_key_action9(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("action 9");
-  on_sdl_key_grab = wid_config_key_action9_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_action9_set;
+  config_changed      = true;
   return true;
 }
 
@@ -975,8 +975,8 @@ static uint8_t wid_config_key_save(Widp w, int32_t x, int32_t y, uint32_t button
 {
   TRACE_AND_INDENT();
   grab_key("save game");
-  on_sdl_key_grab = wid_config_key_save_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_save_set;
+  config_changed      = true;
   return true;
 }
 
@@ -984,8 +984,8 @@ static uint8_t wid_config_key_load(Widp w, int32_t x, int32_t y, uint32_t button
 {
   TRACE_AND_INDENT();
   grab_key("load game");
-  on_sdl_key_grab = wid_config_key_load_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_load_set;
+  config_changed      = true;
   return true;
 }
 
@@ -993,8 +993,8 @@ static uint8_t wid_config_key_robot_mode(Widp w, int32_t x, int32_t y, uint32_t 
 {
   TRACE_AND_INDENT();
   grab_key("robot_mode game");
-  on_sdl_key_grab = wid_config_key_robot_mode_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_robot_mode_set;
+  config_changed      = true;
   return true;
 }
 
@@ -1002,8 +1002,8 @@ static uint8_t wid_config_key_zoom_in(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("zoom in");
-  on_sdl_key_grab = wid_config_key_zoom_in_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_zoom_in_set;
+  config_changed      = true;
   return true;
 }
 
@@ -1011,8 +1011,8 @@ static uint8_t wid_config_key_zoom_out(Widp w, int32_t x, int32_t y, uint32_t bu
 {
   TRACE_AND_INDENT();
   grab_key("zoom out");
-  on_sdl_key_grab = wid_config_key_zoom_out_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_zoom_out_set;
+  config_changed      = true;
   return true;
 }
 
@@ -1020,8 +1020,8 @@ static uint8_t wid_config_key_help(Widp w, int32_t x, int32_t y, uint32_t button
 {
   TRACE_AND_INDENT();
   grab_key("help");
-  on_sdl_key_grab = wid_config_key_help_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_help_set;
+  config_changed      = true;
   return true;
 }
 
@@ -1029,8 +1029,8 @@ static uint8_t wid_config_key_console(Widp w, int32_t x, int32_t y, uint32_t but
 {
   TRACE_AND_INDENT();
   grab_key("toggle console");
-  on_sdl_key_grab = wid_config_key_console_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_console_set;
+  config_changed      = true;
   return true;
 }
 
@@ -1038,8 +1038,8 @@ static uint8_t wid_config_key_quit(Widp w, int32_t x, int32_t y, uint32_t button
 {
   TRACE_AND_INDENT();
   grab_key("quit");
-  on_sdl_key_grab = wid_config_key_quit_set;
-  config_changed  = true;
+  sdl.on_sdl_key_grab = wid_config_key_quit_set;
+  config_changed      = true;
   return true;
 }
 
@@ -1047,8 +1047,8 @@ static uint8_t wid_config_key_screenshot(Widp w, int32_t x, int32_t y, uint32_t 
 {
   TRACE_AND_INDENT();
   grab_key("screenshot grab");
-  config_changed  = true;
-  on_sdl_key_grab = wid_config_key_screenshot_set;
+  config_changed      = true;
+  sdl.on_sdl_key_grab = wid_config_key_screenshot_set;
   return true;
 }
 

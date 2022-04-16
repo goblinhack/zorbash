@@ -70,17 +70,6 @@ void Level::handle_input_events(void)
     is_map_follow_player = false;
   }
 
-  bool up    = state[ sdlk_to_scancode(game->config.key_move_up) ];
-  bool down  = state[ sdlk_to_scancode(game->config.key_move_down) ];
-  bool left  = state[ sdlk_to_scancode(game->config.key_move_left) ];
-  bool right = state[ sdlk_to_scancode(game->config.key_move_right) ];
-
-  if (up || down || left || right) {
-    if (! game->request_player_move) {
-      game->request_player_move = time_ms();
-    }
-  }
-
   auto   level  = game->level;
   Thingp player = nullptr;
   if (level) {
@@ -110,15 +99,13 @@ void Level::handle_input_events(void)
     game->request_player_move = 0;
     game->tick_end();
 
-    bool wait_or_collect = false;
     bool jump            = false;
     bool attack          = false;
-
-    up              = up || game->request_player_up;
-    down            = down || game->request_player_down;
-    right           = right || game->request_player_right;
-    left            = left || game->request_player_left;
-    wait_or_collect = wait_or_collect || game->request_player_wait_or_collect;
+    bool up              = game->request_player_up;
+    bool down            = game->request_player_down;
+    bool right           = game->request_player_right;
+    bool left            = game->request_player_left;
+    bool wait_or_collect = game->request_player_wait_or_collect;
 
     game->request_player_up              = false;
     game->request_player_down            = false;
@@ -275,7 +262,7 @@ bool Level::tick(void)
   // Update the cursor position. But only if the mouse has moved. So if the
   // player is moving via keyboard alone, we don't pollute the screen.
   //
-  if ((sdl_wheel_x != 0) || (sdl_wheel_y != 0)) {
+  if ((sdl.wheel_x != 0) || (sdl.wheel_y != 0)) {
     cursor_move();
   } else if (! time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
     cursor_move();

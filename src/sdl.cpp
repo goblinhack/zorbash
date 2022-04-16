@@ -16,53 +16,7 @@
 #include "my_wid_console.hpp"
 #include "stb_image_write.hpp"
 
-int      sdl_shift_held;
-uint8_t  sdl_init_video;
-uint32_t mouse_down;
-uint32_t mouse_down_when;
-uint32_t sdl_last_mouse_held_down_when;
-
-ts_t sdl_last_time_for_key;
-
-int sdl_mouse_x;
-int sdl_mouse_y;
-int sdl_held_mouse_x;
-int sdl_held_mouse_y;
-int sdl_wheel_x;
-int sdl_wheel_y;
-int sdl_mouse_tick;
-
-int sdl_key_repeat_count;
-
-int sdl_left_fire;
-int sdl_right_fire;
-
-int sdl_joy1_right;
-int sdl_joy1_left;
-int sdl_joy1_down;
-int sdl_joy1_up;
-
-int sdl_joy2_right;
-int sdl_joy2_left;
-int sdl_joy2_down;
-int sdl_joy2_up;
-
-std::array< uint8_t, SDL_MAX_BUTTONS > sdl_joy_buttons;
-
-static SDL_Joystick *joy;
-static SDL_Haptic   *haptic;
-
-int *sdl_joy_axes;
-int  sdl_joy_deadzone = 8000;
-int  sdl_joy_index;
-int  sdl_joy_naxes;
-int  sdl_joy_nbuttons;
-int  sdl_joy_balls;
-
-SDL_Window          *sdl_window;  // Our window handle
-static SDL_GLContext sdl_context; // Our opengl context handle
-SDL_Keysym           sdl_grabbed_key;
-on_sdl_key_grab_t    on_sdl_key_grab;
+sdl_t sdl;
 
 void sdl_fini(void)
 {
@@ -74,17 +28,17 @@ void sdl_fini(void)
   SDL_ShowCursor(1);
 #endif
 
-  if (sdl_init_video) {
+  if (sdl.init_video) {
     CON("SDL: Video quit");
-    sdl_init_video = 0;
+    sdl.init_video = 0;
     SDL_VideoQuit();
   }
 
   CON("SDL: Delete GL context");
-  SDL_GL_DeleteContext(sdl_context);
+  SDL_GL_DeleteContext(sdl.context);
 
   CON("SDL: Destroy window");
-  SDL_DestroyWindow(sdl_window);
+  SDL_DestroyWindow(sdl.window);
 
   CON("SDL: Quit");
   SDL_Quit();
@@ -107,11 +61,11 @@ static inline void sdl_list_video_size(void)
 void sdl_joy_rumble(float strength, ts_t ms)
 {
   TRACE_NO_INDENT();
-  if (! haptic) {
+  if (! sdl.haptic) {
     return;
   }
 
-  SDL_HapticRumblePlay(haptic, strength, ms);
+  SDL_HapticRumblePlay(sdl.haptic, strength, ms);
 }
 
 static void sdl_init_rumble(void)
@@ -119,28 +73,28 @@ static void sdl_init_rumble(void)
   LOG("SDL: Init rumble:");
   TRACE_AND_INDENT();
 
-  if (! haptic) {
-    haptic = SDL_HapticOpenFromJoystick(joy);
-    if (! haptic) {
+  if (! sdl.haptic) {
+    sdl.haptic = SDL_HapticOpenFromJoystick(sdl.joy);
+    if (! sdl.haptic) {
       LOG("- Couldn't initialize SDL rumble: %s", SDL_GetError());
       SDL_ClearError();
       return;
     }
   }
 
-  if (! SDL_HapticRumbleSupported(haptic)) {
+  if (! SDL_HapticRumbleSupported(sdl.haptic)) {
     LOG("- No SDL rumble support: %s", SDL_GetError());
     SDL_ClearError();
     return;
   }
 
-  if (SDL_HapticRumbleInit(haptic) != 0) {
+  if (SDL_HapticRumbleInit(sdl.haptic) != 0) {
     LOG("- SDL rumble nit failed: %s", SDL_GetError());
     SDL_ClearError();
     return;
   }
 
-  LOG("- Opened Haptic for joy index %d", sdl_joy_index);
+  LOG("- Opened Haptic for joy index %d", sdl.joy_index);
 }
 
 static void sdl_init_joystick(void)
@@ -159,16 +113,16 @@ static void sdl_init_joystick(void)
   LOG("- Init joystick");
   SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 
-  sdl_joy_index = 0;
-  for (sdl_joy_index = 0; sdl_joy_index < SDL_NumJoysticks(); ++sdl_joy_index) {
+  sdl.joy_index = 0;
+  for (sdl.joy_index = 0; sdl.joy_index < SDL_NumJoysticks(); ++sdl.joy_index) {
 
-    if (SDL_IsGameController(sdl_joy_index)) {
-      controller = SDL_GameControllerOpen(sdl_joy_index);
+    if (SDL_IsGameController(sdl.joy_index)) {
+      controller = SDL_GameControllerOpen(sdl.joy_index);
       if (controller) {
         LOG("- Found gamecontroller");
         break;
       } else {
-        WARN("Could not open gamecontroller %i: %s", sdl_joy_index, SDL_GetError());
+        WARN("Could not open gamecontroller %i: %s", sdl.joy_index, SDL_GetError());
         SDL_ClearError();
       }
     }
@@ -179,17 +133,17 @@ static void sdl_init_joystick(void)
     return;
   }
 
-  joy = SDL_JoystickOpen(sdl_joy_index);
-  if (joy) {
-    LOG("- Opened Joystick  : %d", sdl_joy_index);
+  sdl.joy = SDL_JoystickOpen(sdl.joy_index);
+  if (sdl.joy) {
+    LOG("- Opened Joystick  : %d", sdl.joy_index);
     LOG("- Name             : %s", SDL_JoystickNameForIndex(0));
-    LOG("- Number of Axes   : %d", SDL_JoystickNumAxes(joy));
-    LOG("- Number of Buttons: %d", SDL_JoystickNumButtons(joy));
-    LOG("- Number of Balls  : %d", SDL_JoystickNumBalls(joy));
+    LOG("- Number of Axes   : %d", SDL_JoystickNumAxes(sdl.joy));
+    LOG("- Number of Buttons: %d", SDL_JoystickNumButtons(sdl.joy));
+    LOG("- Number of Balls  : %d", SDL_JoystickNumBalls(sdl.joy));
 
-    sdl_joy_naxes    = SDL_JoystickNumAxes(joy);
-    sdl_joy_nbuttons = SDL_JoystickNumButtons(joy);
-    sdl_joy_balls    = SDL_JoystickNumBalls(joy);
+    sdl.joy_naxes    = SDL_JoystickNumAxes(sdl.joy);
+    sdl.joy_nbuttons = SDL_JoystickNumButtons(sdl.joy);
+    sdl.joy_balls    = SDL_JoystickNumBalls(sdl.joy);
   } else {
     WARN("Couldn't open Joystick 0");
   }
@@ -226,7 +180,7 @@ uint8_t sdl_init(void)
     sdl_init_rumble();
   }
 
-  sdl_init_video = 1;
+  sdl.init_video = 1;
 
   sdl_list_video_size();
 
@@ -302,9 +256,9 @@ uint8_t sdl_init(void)
   }
 
   CON("SDL: Create window");
-  sdl_window = SDL_CreateWindow("zorbash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, video_width, video_height,
-                                video_unused_flags);
-  if (! sdl_window) {
+  sdl.window = SDL_CreateWindow("zorbash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, video_width,
+                                    video_height, video_unused_flags);
+  if (! sdl.window) {
     ERR("Couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
 
     SDL_MSG_BOX("Couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
@@ -315,15 +269,15 @@ uint8_t sdl_init(void)
   }
 
   if (video_unused_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
-    SDL_GL_GetDrawableSize(sdl_window, &game->config.window_pix_width, &game->config.window_pix_height);
+    SDL_GL_GetDrawableSize(sdl.window, &game->config.window_pix_width, &game->config.window_pix_height);
   } else {
-    SDL_GetWindowSize(sdl_window, &game->config.window_pix_width, &game->config.window_pix_height);
+    SDL_GetWindowSize(sdl.window, &game->config.window_pix_width, &game->config.window_pix_height);
   }
 
   LOG("SDL: Call SDL_GL_CreateContext(%dx%d)", game->config.window_pix_width, game->config.window_pix_height);
 
-  sdl_context = SDL_GL_CreateContext(sdl_window);
-  if (! sdl_context) {
+  sdl.context = SDL_GL_CreateContext(sdl.window);
+  if (! sdl.context) {
     SDL_ClearError();
     ERR("SDL_GL_CreateContext failed %s", SDL_GetError());
     SDL_MSG_BOX("SDL_GL_CreateContext failed %s", SDL_GetError());
@@ -332,7 +286,7 @@ uint8_t sdl_init(void)
 
   LOG("SDL: Call SDL_GL_CreateContext(%dx%d) done", game->config.window_pix_width, game->config.window_pix_height);
 
-  if (SDL_GL_MakeCurrent(sdl_window, sdl_context) < 0) {
+  if (SDL_GL_MakeCurrent(sdl.window, sdl.context) < 0) {
     SDL_ClearError();
     ERR("SDL_GL_MakeCurrent failed %s", SDL_GetError());
     SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
@@ -353,14 +307,14 @@ uint8_t sdl_init(void)
     glClearColor(0, 0, 0, 0);
   }
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_ACCUM_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-  SDL_GL_SwapWindow(sdl_window);
+  SDL_GL_SwapWindow(sdl.window);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_ACCUM_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-  SDL_GL_SwapWindow(sdl_window);
+  SDL_GL_SwapWindow(sdl.window);
 
   config_game_pix_zoom_update();
 
   LOG("SDL: Call SDL_SetWindowTitle");
-  SDL_SetWindowTitle(sdl_window, "zorbash");
+  SDL_SetWindowTitle(sdl.window, "zorbash");
 
   CON("SDL: OpenGL Vendor   : %s", glGetString(GL_VENDOR));
   CON("SDL: OpenGL Renderer : %s", glGetString(GL_RENDERER));
@@ -394,360 +348,6 @@ uint8_t sdl_init(void)
   return true;
 }
 
-int sdl_filter_events(void *userdata, SDL_Event *event)
-{
-  TRACE_NO_INDENT();
-
-  switch (event->type) {
-    // This is important!  Queue it if we want to quit. */
-    case SDL_QUIT: return 1;
-
-    // Mouse and keyboard events go to threads */
-    case SDL_MOUSEMOTION:
-    case SDL_MOUSEBUTTONDOWN:
-    case SDL_MOUSEBUTTONUP:
-    case SDL_MOUSEWHEEL:
-    case SDL_KEYDOWN:
-    case SDL_KEYUP:
-    case SDL_CONTROLLERDEVICEADDED:
-    case SDL_CONTROLLERBUTTONDOWN:
-    case SDL_CONTROLLERBUTTONUP:
-    case SDL_CONTROLLERAXISMOTION:
-    case SDL_JOYAXISMOTION: // Joystick axis motion
-    case SDL_JOYBALLMOTION: // Joystick trackball motion
-    case SDL_JOYHATMOTION:  // Joystick hat position change
-    case SDL_JOYBUTTONDOWN: // Joystick button pressed
-    case SDL_JOYBUTTONUP:   // Joystick button released
-      return 1;
-
-    // Drop all other events
-    default: return 0;
-  }
-}
-
-void sdl_event(SDL_Event *event)
-{
-  TRACE_NO_INDENT();
-  SDL_Keysym *key;
-
-  wid_mouse_two_clicks = false;
-
-  static struct SDL_Keysym last_key_pressed;
-
-  switch (event->type) {
-    case SDL_KEYDOWN:
-      {
-        key = &event->key.keysym;
-
-        DBG2("SDL: Keyboard: Key pressed keycode 0x%08" PRIX32 " = %s %d", event->key.keysym.sym,
-             SDL_GetKeyName(event->key.keysym.sym), key->mod);
-
-        {
-          //
-          // SDL2 has no auto repeat.
-          //
-          if (! memcmp(&last_key_pressed, key, sizeof(*key))) {
-            //
-            // Pressing the same key
-            //
-            sdl_key_repeat_count++;
-            if (sdl_key_repeat_count > 1) {
-              //
-              // Fast repeat
-              //
-              if (! time_have_x_hundredths_passed_since(10, sdl_last_time_for_key)) {
-                return;
-              }
-            } else {
-              //
-              // First press
-              //
-              if (! time_have_x_hundredths_passed_since(5000, sdl_last_time_for_key)) {
-                return;
-              }
-            }
-            sdl_last_time_for_key = time_ms();
-          } else {
-            //
-            // Pressing a different key
-            //
-            sdl_key_repeat_count = 0;
-          }
-          last_key_pressed = *key;
-        }
-
-        wid_key_down(key, sdl_mouse_x, sdl_mouse_y);
-
-        sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
-
-        if (game && game->level) {
-          game->level->handle_input_events();
-        }
-        break;
-      }
-    case SDL_KEYUP:
-      {
-        if (g_grab_next_key) {
-          DBG2("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
-               SDL_GetKeyName(event->key.keysym.sym), SDL_GetScancodeName(event->key.keysym.scancode));
-
-          g_grab_next_key = false;
-          sdl_grabbed_key = sdlk_normalize(event->key.keysym);
-          if (on_sdl_key_grab) {
-            (*on_sdl_key_grab)(sdl_grabbed_key);
-          }
-          return;
-        }
-
-        sdl_key_repeat_count  = 0;
-        sdl_last_time_for_key = 0;
-        memset(&last_key_pressed, 0, sizeof(*key));
-
-        DBG2("SDL: Keyboard: Key released keycode 0x%08" PRIX32 " = %s", event->key.keysym.sym,
-             SDL_GetKeyName(event->key.keysym.sym));
-
-        key = &event->key.keysym;
-
-        wid_key_up(key, sdl_mouse_x, sdl_mouse_y);
-
-        sdl_shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
-        break;
-      }
-    case SDL_TEXTINPUT:
-      {
-        DBG2("SDL: Keyboard: Text input \"%s\" in window %d", event->text.text, event->text.windowID);
-        break;
-      }
-    case SDL_MOUSEWHEEL:
-      {
-        DBG2("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
-             event->wheel.windowID);
-
-        sdl_get_mouse();
-
-        static double accel = 1.0;
-
-        {
-          static ts_t ts;
-
-          if (time_have_x_tenths_passed_since(5, ts)) {
-            accel = 1.0;
-          } else {
-            accel *= UI_MOUSE_WHEEL_SCALE;
-
-            if (accel > UI_MOUSE_WHEEL_SCALE_MAX) {
-              accel = UI_MOUSE_WHEEL_SCALE_MAX;
-            }
-          }
-
-          ts = time_ms();
-        }
-
-        sdl_wheel_x = event->wheel.x;
-        sdl_wheel_y = event->wheel.y;
-
-        sdl_wheel_x *= accel;
-        sdl_wheel_y *= accel;
-
-        //
-        // Negative wheel x so side scrolls seem natural. Could just be
-        // a dumb macos thing to ifdef?
-        //
-        wid_mouse_visible = 1;
-        sdl_mouse_tick++;
-        wid_mouse_motion(sdl_mouse_x, sdl_mouse_y, 0, 0, -sdl_wheel_x, sdl_wheel_y);
-        break;
-      }
-    case SDL_MOUSEMOTION:
-      {
-        mouse_down = sdl_get_mouse();
-
-        DBG2("SDL: Mouse: Moved to %d,%d (%d,%d) state %d", event->motion.x, event->motion.y, event->motion.xrel,
-             event->motion.yrel, mouse_down);
-
-        wid_mouse_visible = 1;
-        sdl_mouse_tick++;
-        wid_mouse_motion(sdl_mouse_x, sdl_mouse_y, event->motion.xrel, event->motion.yrel, 0, 0);
-        break;
-      }
-    case SDL_MOUSEBUTTONDOWN:
-      {
-        mouse_down                    = sdl_get_mouse();
-        sdl_last_mouse_held_down_when = time_ms();
-        sdl_held_mouse_x              = sdl_mouse_x;
-        sdl_held_mouse_y              = sdl_mouse_y;
-
-        DBG2("SDL: Mouse DOWN: button %d pressed at %d,%d state %X", event->button.button, event->button.x,
-             event->button.y, mouse_down);
-
-        auto now             = time_ms();
-        wid_mouse_visible    = 1;
-        wid_mouse_two_clicks = (now - mouse_down_when < UI_MOUSE_DOUBLE_CLICK);
-
-        wid_mouse_down(event->button.button, sdl_mouse_x, sdl_mouse_y);
-        mouse_down_when = now;
-        break;
-      }
-    case SDL_MOUSEBUTTONUP:
-      {
-        mouse_down                    = sdl_get_mouse();
-        sdl_last_mouse_held_down_when = 0;
-        sdl_held_mouse_x              = 0;
-        sdl_held_mouse_y              = 0;
-
-        DBG2("SDL: Mouse UP: button %d released at %d,%d state %d", event->button.button, event->button.x,
-             event->button.y, mouse_down);
-
-        wid_mouse_up(event->button.button, sdl_mouse_x, sdl_mouse_y);
-        break;
-      }
-    case SDL_JOYAXISMOTION:
-      {
-        DBG2("SDL: Joystick %d: Axis %d moved by %d", event->jaxis.which, event->jaxis.axis, event->jaxis.value);
-
-        int axis  = event->jaxis.axis;
-        int value = event->jaxis.value;
-
-        if (! sdl_joy_axes) {
-          sdl_joy_axes = (int *) myzalloc(sizeof(int) * sdl_joy_naxes, "joy axes");
-        }
-
-        sdl_joy_axes[ axis ] = value;
-
-        sdl_left_fire  = false;
-        sdl_right_fire = false;
-
-        if (sdl_joy_axes[ 2 ] > sdl_joy_deadzone) {
-          DBG2("SDL: left fire");
-          sdl_left_fire = true;
-          set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t) 1);
-        } else {
-          set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t) 0);
-        }
-
-        if (sdl_joy_axes[ 5 ] > sdl_joy_deadzone) {
-          DBG2("SDL: right fire");
-          sdl_right_fire = true;
-          set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t) 1);
-        } else {
-          set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t) 0);
-        }
-
-        if (sdl_right_fire || sdl_left_fire) {
-          sdl_get_mouse();
-          wid_joy_button(sdl_mouse_x, sdl_mouse_y);
-        }
-
-        break;
-      }
-    case SDL_JOYBALLMOTION:
-      {
-        DBG2("SDL: Joystick %d: Ball %d moved by %d,%d", event->jball.which, event->jball.ball, event->jball.xrel,
-             event->jball.yrel);
-        break;
-      }
-    case SDL_JOYHATMOTION:
-      {
-        DBG2("SDL: Joystick %d: Hat %d moved to ", event->jhat.which, event->jhat.hat);
-
-        switch (event->jhat.value) {
-          case SDL_HAT_CENTERED: break;
-          case SDL_HAT_UP:
-            {
-              DBG2("SDL: UP");
-              sdl_joy2_up = true;
-              break;
-            }
-          case SDL_HAT_RIGHTUP:
-            {
-              DBG2("SDL: RIGHTUP");
-              sdl_joy2_right = true;
-              sdl_joy2_up    = true;
-              break;
-            }
-          case SDL_HAT_RIGHT:
-            {
-              DBG2("SDL: RIGHT");
-              sdl_joy2_right = true;
-              break;
-            }
-          case SDL_HAT_RIGHTDOWN:
-            {
-              DBG2("SDL: RIGHTDOWN");
-              sdl_joy2_right = true;
-              sdl_joy2_down  = true;
-              break;
-            }
-          case SDL_HAT_DOWN:
-            {
-              DBG2("SDL: DOWN");
-              sdl_joy2_down = true;
-              break;
-            }
-          case SDL_HAT_LEFTDOWN:
-            {
-              DBG2("SDL: LEFTDOWN");
-              sdl_joy2_left = true;
-              sdl_joy2_down = true;
-              break;
-            }
-          case SDL_HAT_LEFT:
-            {
-              DBG2("SDL: LEFT");
-              sdl_joy2_left = true;
-              break;
-            }
-          case SDL_HAT_LEFTUP:
-            {
-              sdl_joy2_left = true;
-              sdl_joy2_up   = true;
-              DBG2("SDL: LEFTUP");
-              break;
-            }
-          default: DBG2("SDL: UNKNOWN"); break;
-        }
-        break;
-      }
-    case SDL_JOYBUTTONDOWN:
-      {
-        DBG2("SDL: Joystick %d: Button %d pressed", event->jbutton.which, event->jbutton.button);
-        set(sdl_joy_buttons, event->jbutton.button, (uint8_t) 1);
-        sdl_get_mouse();
-        wid_joy_button(sdl_mouse_x, sdl_mouse_y);
-        break;
-      }
-    case SDL_JOYBUTTONUP:
-      {
-        DBG2("SDL: Joystick %d: Button %d released", event->jbutton.which, event->jbutton.button);
-        set(sdl_joy_buttons, event->jbutton.button, (uint8_t) 0);
-        break;
-      }
-    case SDL_CLIPBOARDUPDATE:
-      {
-        DBG2("SDL: Clipboard updated");
-        break;
-      }
-    case SDL_QUIT:
-      {
-#ifdef ENABLE_UI_ASCII_MOUSE
-        SDL_ShowCursor(1);
-#endif
-        DIE("Quit requested");
-        break;
-      }
-    case SDL_USEREVENT:
-      {
-        DBG2("SDL: User event %d", event->user.code);
-        break;
-      }
-    default:
-      {
-        DBG2("SDL: Unknown event %d", event->type);
-        break;
-      }
-  }
-}
-
 int sdl_get_mouse(void)
 {
   TRACE_NO_INDENT();
@@ -766,8 +366,8 @@ int sdl_get_mouse(void)
   x *= game->config.window_pix_width / game->config.config_pix_width;
   y *= game->config.window_pix_height / game->config.config_pix_height;
 
-  sdl_mouse_x = x;
-  sdl_mouse_y = y;
+  sdl.mouse_x = x;
+  sdl.mouse_y = y;
 
   return (button);
 }
@@ -801,67 +401,67 @@ void sdl_mouse_warp(int x, int y)
     y = game->config.window_pix_height - border;
   }
 
-  SDL_WarpMouseInWindow(sdl_window, x, y);
+  SDL_WarpMouseInWindow(sdl.window, x, y);
 
-  sdl_mouse_x = x;
-  sdl_mouse_y = y;
+  sdl.mouse_x = x;
+  sdl.mouse_y = y;
 }
 
 void sdl_tick(void)
 {
   TRACE_NO_INDENT();
-  sdl_left_fire = false;
-  sdl_left_fire = true;
+  sdl.left_fire = false;
+  sdl.left_fire = true;
 
-  sdl_joy1_right = false;
-  sdl_joy1_left  = false;
-  sdl_joy1_down  = false;
-  sdl_joy1_up    = false;
+  sdl.joy1_right = false;
+  sdl.joy1_left  = false;
+  sdl.joy1_down  = false;
+  sdl.joy1_up    = false;
 
-  sdl_joy2_right = false;
-  sdl_joy2_left  = false;
-  sdl_joy2_down  = false;
-  sdl_joy2_up    = false;
+  sdl.joy2_right = false;
+  sdl.joy2_left  = false;
+  sdl.joy2_down  = false;
+  sdl.joy2_up    = false;
 
   sdl_get_mouse();
 
   //
   // Right stick
   //
-  if (sdl_joy_axes[ 3 ] > sdl_joy_deadzone) {
+  if (sdl.joy_axes[ 3 ] > sdl.joy_deadzone) {
     DBG2("SDL: right stick, right");
-    sdl_joy1_right = true;
+    sdl.joy1_right = true;
 
-    incr(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT);
-    wid_joy_button(sdl_mouse_x, sdl_mouse_y);
-    decr(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT);
+    incr(sdl.joy_buttons, SDL_JOY_BUTTON_RIGHT);
+    wid_joy_button(sdl.mouse_x, sdl.mouse_y);
+    decr(sdl.joy_buttons, SDL_JOY_BUTTON_RIGHT);
   }
 
-  if (sdl_joy_axes[ 3 ] < -sdl_joy_deadzone) {
+  if (sdl.joy_axes[ 3 ] < -sdl.joy_deadzone) {
     DBG2("SDL: right stick, left");
-    sdl_joy1_left = true;
+    sdl.joy1_left = true;
 
-    incr(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT);
-    wid_joy_button(sdl_mouse_x, sdl_mouse_y);
-    decr(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT);
+    incr(sdl.joy_buttons, SDL_JOY_BUTTON_LEFT);
+    wid_joy_button(sdl.mouse_x, sdl.mouse_y);
+    decr(sdl.joy_buttons, SDL_JOY_BUTTON_LEFT);
   }
 
-  if (sdl_joy_axes[ 4 ] > sdl_joy_deadzone) {
+  if (sdl.joy_axes[ 4 ] > sdl.joy_deadzone) {
     DBG2("SDL: right stick, down");
-    sdl_joy1_down = true;
+    sdl.joy1_down = true;
 
-    incr(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN);
-    wid_joy_button(sdl_mouse_x, sdl_mouse_y);
-    decr(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN);
+    incr(sdl.joy_buttons, SDL_JOY_BUTTON_DOWN);
+    wid_joy_button(sdl.mouse_x, sdl.mouse_y);
+    decr(sdl.joy_buttons, SDL_JOY_BUTTON_DOWN);
   }
 
-  if (sdl_joy_axes[ 4 ] < -sdl_joy_deadzone) {
+  if (sdl.joy_axes[ 4 ] < -sdl.joy_deadzone) {
     DBG2("SDL: right stick, up");
-    sdl_joy1_up = true;
+    sdl.joy1_up = true;
 
-    incr(sdl_joy_buttons, SDL_JOY_BUTTON_UP);
-    wid_joy_button(sdl_mouse_x, sdl_mouse_y);
-    decr(sdl_joy_buttons, SDL_JOY_BUTTON_UP);
+    incr(sdl.joy_buttons, SDL_JOY_BUTTON_UP);
+    wid_joy_button(sdl.mouse_x, sdl.mouse_y);
+    decr(sdl.joy_buttons, SDL_JOY_BUTTON_UP);
   }
 
   //
@@ -870,28 +470,28 @@ void sdl_tick(void)
   int mx = 0;
   int my = 0;
 
-  if (sdl_joy_axes[ 0 ] > sdl_joy_deadzone) {
+  if (sdl.joy_axes[ 0 ] > sdl.joy_deadzone) {
     DBG2("SDL: left stick, right");
-    sdl_joy2_right = true;
-    mx             = 1;
+    sdl.joy2_right = true;
+    mx                 = 1;
   }
 
-  if (sdl_joy_axes[ 0 ] < -sdl_joy_deadzone) {
+  if (sdl.joy_axes[ 0 ] < -sdl.joy_deadzone) {
     DBG2("SDL: left stick, left");
-    sdl_joy2_left = true;
-    mx            = -1;
+    sdl.joy2_left = true;
+    mx                = -1;
   }
 
-  if (sdl_joy_axes[ 1 ] > sdl_joy_deadzone) {
+  if (sdl.joy_axes[ 1 ] > sdl.joy_deadzone) {
     DBG2("SDL: left stick, down");
-    sdl_joy2_down = true;
-    my            = 1;
+    sdl.joy2_down = true;
+    my                = 1;
   }
 
-  if (sdl_joy_axes[ 1 ] < -sdl_joy_deadzone) {
+  if (sdl.joy_axes[ 1 ] < -sdl.joy_deadzone) {
     DBG2("SDL: left stick, up");
-    sdl_joy2_up = true;
-    my          = -1;
+    sdl.joy2_up = true;
+    my              = -1;
   }
 
   static double accel = 1.0;
@@ -910,8 +510,8 @@ void sdl_tick(void)
       accel = UI_SCROLL_JOY_SCALE_MAX;
     }
 
-    double x = sdl_mouse_x + ((double) mx * accel);
-    double y = sdl_mouse_y + ((double) my * accel);
+    double x = sdl.mouse_x + ((double) mx * accel);
+    double y = sdl.mouse_y + ((double) my * accel);
 
     if (x < 0) {
       x = 0;
