@@ -121,6 +121,13 @@ bool Game::tick_end(void)
   TRACE_NO_INDENT();
 
   //
+  // Sanity
+  //
+  if (game->things_are_moving) {
+    ERR("Trying to end a tick while things are still moving");
+  }
+
+  //
   // Move when all things are done moving
   //
   if (game->tick_completed == game->tick_current) {
