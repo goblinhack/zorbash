@@ -33,8 +33,6 @@ float Thing::jump_distance_max_get(void)
 
 int Thing::jump_distance_total(void)
 {
-  TRACE_AND_INDENT();
-
   int stat = 0;
   int prev = 0;
 
@@ -43,6 +41,7 @@ int Thing::jump_distance_total(void)
   if (stat) {
     dbg3("Jump distance: %d", stat);
   }
+  TRACE_AND_INDENT();
 
   stat += jump_distance_mod();
   if (stat != prev) {
