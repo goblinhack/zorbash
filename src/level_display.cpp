@@ -22,6 +22,10 @@ void Level::display(void)
 {
   TRACE_NO_INDENT();
 
+  if (g_opt_ascii) {
+    return;
+  }
+
   bool shake = screen_shake_begin();
   display_map();
   if (shake) {

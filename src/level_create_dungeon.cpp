@@ -1053,7 +1053,11 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
       dbg("INF: Creating %s", tp->name().c_str());
       auto t = thing_new(tp->name(), point(x, y));
       if (t) {
-        if (t->is_weapon()) {
+        if (t->is_ascend_dungeon()) {
+          if (prev_levels.size()) {
+            t->open();
+          }
+        } else if (t->is_weapon()) {
           if (r && r->is_secret) {
             t->enchant_randomly();
           }

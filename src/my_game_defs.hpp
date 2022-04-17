@@ -10,7 +10,7 @@
 //
 // Grid chunks are used to construct the levels and the overall dungeon
 //
-#define DUNGEON_GRID_CHUNK_HEIGHT  2  // Levels are split into grids. Each grid can have a room.
+#define DUNGEON_GRID_CHUNK_HEIGHT  6  // Levels are split into grids. Each grid can have a room.
 #define DUNGEON_GRID_CHUNK_WIDTH   6  // Rooms across and down
 #define DUNGEONS_GRID_CHUNK_HEIGHT 10 // The whole underworld
 #define DUNGEONS_GRID_CHUNK_WIDTH  10 //

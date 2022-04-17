@@ -524,6 +524,7 @@ public:
   bool on_tick(void);
   bool open_door(Thingp door);
   bool open(Thingp it);
+  bool open(void);
   bool particle_anim_exists(void);
   bool path_pop_next_move(void);
   bool place(const std::string &what, const point p);
