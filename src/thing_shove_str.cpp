@@ -10,21 +10,20 @@
 
 int Thing::shove_strength_total(void)
 {
-  TRACE_AND_INDENT();
-
   int stat = 0;
   int prev = 0;
 
   stat = shove_strength();
   prev = stat;
   if (stat) {
-    dbg3("Move speed: %d", stat);
+    dbg3("Shove strength: %d", stat);
   }
+  TRACE_AND_INDENT();
 
   stat += shove_strength_mod();
   if (stat != prev) {
     prev = stat;
-    dbg3("Move speed: with mod (%s): %d", modifier_to_string(shove_strength_mod()).c_str(), stat);
+    dbg3("Shove strength: with mod (%s): %d", modifier_to_string(shove_strength_mod()).c_str(), stat);
   }
 
   FOR_ALL_EQUIP(e)
@@ -34,7 +33,7 @@ int Thing::shove_strength_total(void)
       stat += iter->shove_strength_total();
       if (stat != prev) {
         prev = stat;
-        dbg3("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+        dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
              modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
       }
     }
@@ -61,7 +60,7 @@ int Thing::shove_strength_total(void)
         stat += iter->shove_strength_total();
         if (stat != prev) {
           prev = stat;
-          dbg3("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
                modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
         }
       }
@@ -74,7 +73,7 @@ int Thing::shove_strength_total(void)
         stat += iter->shove_strength_total();
         if (stat != prev) {
           prev = stat;
-          dbg3("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
                modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
         }
       }
@@ -87,7 +86,7 @@ int Thing::shove_strength_total(void)
         stat += iter->shove_strength_total();
         if (stat != prev) {
           prev = stat;
-          dbg3("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
                modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
         }
       }
@@ -100,7 +99,7 @@ int Thing::shove_strength_total(void)
         stat += iter->shove_strength_total();
         if (stat != prev) {
           prev = stat;
-          dbg3("Move speed: with (%s %s): %d", iter->to_short_string().c_str(),
+          dbg3("Shove strength: with (%s %s): %d", iter->to_short_string().c_str(),
                modifier_to_string(iter->shove_strength_mod()).c_str(), stat);
         }
       }

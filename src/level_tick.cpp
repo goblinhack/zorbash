@@ -142,6 +142,32 @@ bool Level::tick(void)
 
   things_gc_if_possible();
 
+  if (fade_out_finished) {
+    if (player && player->is_waiting_to_descend_dungeon) {
+      if (! player->descend_dungeon()) {
+        player->err("Failed to descend dungeon");
+      }
+    }
+    if (player && player->is_waiting_to_ascend_dungeon) {
+      if (! player->ascend_dungeon()) {
+        player->err("Failed to ascend dungeon");
+      }
+    }
+    if (player && player->is_waiting_to_descend_sewer) {
+      if (! player->descend_sewer()) {
+        player->err("Failed to descend sewer");
+      }
+    }
+    if (player && player->is_waiting_to_ascend_sewer) {
+      if (! player->ascend_sewer()) {
+        player->err("Failed to ascend sewer");
+      }
+    }
+    if (player && player->is_waiting_to_leave_level_has_completed_fall) {
+      player->fall_to_next_level();
+    }
+  }
+
   //
   // Update the cursor position. But only if the mouse has moved. So if the
   // player is moving via keyboard alone, we don't pollute the screen.
@@ -182,32 +208,6 @@ bool Level::tick(void)
   if (! game->tick_begin_ms) {
     if (game->things_are_moving) {
       ERR("No tick in progress but things are still moving");
-    }
-
-    if (fade_out_finished) {
-      if (player && player->is_waiting_to_descend_dungeon) {
-        if (! player->descend_dungeon()) {
-          player->err("Failed to descend dungeon");
-        }
-      }
-      if (player && player->is_waiting_to_ascend_dungeon) {
-        if (! player->ascend_dungeon()) {
-          player->err("Failed to ascend dungeon");
-        }
-      }
-      if (player && player->is_waiting_to_descend_sewer) {
-        if (! player->descend_sewer()) {
-          player->err("Failed to descend sewer");
-        }
-      }
-      if (player && player->is_waiting_to_ascend_sewer) {
-        if (! player->ascend_sewer()) {
-          player->err("Failed to ascend sewer");
-        }
-      }
-      if (player && player->is_waiting_to_leave_level_has_completed_fall) {
-        player->fall_to_next_level();
-      }
     }
 
     //
@@ -258,12 +258,10 @@ bool Level::tick(void)
     //
     game->things_are_moving = true;
 
-    auto speed        = t->move_speed_total();
-    auto player_speed = player->move_speed_total();
-
+    auto speed = t->move_speed_total();
     if (speed) {
       if (player) {
-        remaining -= player_speed;
+        remaining -= player->move_speed_total();
       } else {
         remaining -= 100;
       }
@@ -342,9 +340,6 @@ bool Level::tick(void)
     // If falling we need to update the z depth and position; and wait.
     //
     if (t->is_falling) {
-      if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on falling thing longer than expected: %s", t->to_dbg_string().c_str());
-      }
       game->things_are_moving = true;
       t->is_waiting           = true;
       // t->con("WAIT %d", __LINE__);

@@ -10,8 +10,6 @@
 
 int Thing::move_speed_total(void)
 {
-  TRACE_AND_INDENT();
-
   int stat = 0;
   int prev = 0;
 
@@ -20,6 +18,7 @@ int Thing::move_speed_total(void)
   if (stat) {
     dbg3("Move speed: %d", stat);
   }
+  TRACE_AND_INDENT();
 
   stat += move_speed_mod();
   if (stat != prev) {
