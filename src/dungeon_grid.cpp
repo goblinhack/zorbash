@@ -760,8 +760,6 @@ void Nodes::init_nodes(void)
 
   if (! is_dungeon) {
     obstacles /= 10;
-  } else {
-    obstacles /= 5;
   }
 
   while (obstacles--) {
