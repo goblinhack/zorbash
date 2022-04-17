@@ -22,6 +22,7 @@ void Game::change_state(int new_state)
   //
   if (new_state == STATE_NORMAL) {
     if (! pcg_random_allowed) {
+      LOG("Defer changing state to STATE_NORMAL");
       game->request_reset_state = true;
       return;
     }
@@ -47,7 +48,7 @@ void Game::change_state(int new_state)
   switch (new_state) {
     case STATE_NORMAL:
       // backtrace_dump();
-      LOG("State changing to STATE_NORMAL");
+      LOG("Game state changing to STATE_NORMAL");
       wid_thing_info_fini("change state");
       wid_collect_destroy();
       wid_enchant_destroy();
@@ -57,40 +58,40 @@ void Game::change_state(int new_state)
       wid_inventory_fini();
       wid_quit_destroy();
       wid_actionbar_init();
-      LOG("State changed to STATE_NORMAL");
+      LOG("Game state changed to STATE_NORMAL");
       break;
-    case STATE_OPTIONS_FOR_ITEM_MENU: LOG("State changed to STATE_OPTIONS_FOR_ITEM_MENU"); break;
+    case STATE_OPTIONS_FOR_ITEM_MENU: LOG("Game state changed to STATE_OPTIONS_FOR_ITEM_MENU"); break;
     case STATE_INVENTORY: // Currently managing inventory
-      LOG("State changed to STATE_INVENTORY");
+      LOG("Game state changed to STATE_INVENTORY");
       wid_actionbar_init();
       break;
     case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
-      LOG("State changing to STATE_COLLECTING_ITEMS");
+      LOG("Game state changing to STATE_COLLECTING_ITEMS");
       wid_thing_info_fini("change state");
       wid_collect_destroy();
-      LOG("State changed to STATE_COLLECTING_ITEMS");
+      LOG("Game state changed to STATE_COLLECTING_ITEMS");
       wid_actionbar_init();
       break;
     case STATE_ENCHANTING_ITEMS:
-      LOG("State changing to STATE_ENCHANTING_ITEMS");
+      LOG("Game state changing to STATE_ENCHANTING_ITEMS");
       wid_enchant_destroy();
-      LOG("State changed to STATE_ENCHANTING_ITEMS");
+      LOG("Game state changed to STATE_ENCHANTING_ITEMS");
       wid_actionbar_init();
       break;
     case STATE_CHOOSING_SKILLS:
-      LOG("State changing to STATE_CHOOSING_SKILLS");
+      LOG("Game state changing to STATE_CHOOSING_SKILLS");
       wid_choose_skill_destroy();
-      LOG("State changed to STATE_CHOOSING_SKILLS");
+      LOG("Game state changed to STATE_CHOOSING_SKILLS");
       wid_actionbar_init();
       break;
     case STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
-      LOG("State changing to STATE_CHOOSING_TARGET");
+      LOG("Game state changing to STATE_CHOOSING_TARGET");
       wid_thing_info_fini("change state");
-      LOG("State changed to STATE_CHOOSING_TARGET");
+      LOG("Game state changed to STATE_CHOOSING_TARGET");
       wid_actionbar_init();
       break;
     case STATE_CHOOSING_LEVEL: // Looking to change level
-      LOG("State changing to STATE_CHOOSING_LEVEL");
+      LOG("Game state changing to STATE_CHOOSING_LEVEL");
       wid_actionbar_close_all_popups();
       wid_hide(wid_topcon_window);
       wid_rightbar_fini();
@@ -103,7 +104,7 @@ void Game::change_state(int new_state)
       request_remake_debuffbox = false;
       request_remake_buffbox   = false;
       request_remake_rightbar  = false;
-      LOG("State changed to STATE_CHOOSING_LEVEL");
+      LOG("Game state changed to STATE_CHOOSING_LEVEL");
       break;
     case STATE_LOAD_MENU:
     case STATE_SAVE_MENU:
@@ -128,7 +129,7 @@ void Game::change_state(int new_state)
       if (level) {
         level->cursor_recreate();
         if (level->cursor) {
-          level->cursor->clear_move_path("State change");
+          level->cursor->clear_move_path("Game state change");
         }
       }
       break;

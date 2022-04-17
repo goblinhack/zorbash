@@ -216,12 +216,13 @@ void Level::update_map_things_to_stand_on(void)
 
 void Level::update_map(void)
 {
-  dbg("Update map start");
+  dbg("Update map");
+  TRACE_AND_INDENT();
+
   update_hazard_tile_map();
   update_water_next_to_lava();
   update_things_next_to_a_chasm();
   update_deep_water();
   update_hazard_tile_map();
   update_map_things_to_stand_on();
-  dbg("Update map end");
 }

@@ -6,17 +6,18 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
+#include "my_wid_inventory.hpp"
 
 bool Thing::state_open_inventory(void)
 {
-  TRACE_NO_INDENT();
   AI_LOG("Open inventory.");
+  TRACE_AND_INDENT();
 
   //
   // Wait for the inventory to be remade
   //
   if (is_player()) {
-    if (game->request_remake_rightbar) {
+    if (wid_inventory_window) {
       AI_LOG("Wait on inventory.");
       return true;
     }
@@ -50,6 +51,8 @@ bool Thing::state_repack_inventory(void)
   if (is_player()) {
     game->tick_begin("repacked bag");
   }
+
+  TRACE_AND_INDENT();
 
   //
   // Need to go back to reseting, as this resets failed jumps once fully rested
