@@ -521,22 +521,6 @@ bool Level::tick(void)
   }
 
   //
-  // Sanity chack that all things are done
-  //
-  IF_DEBUG2
-  {
-    if (1) {
-      FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
-      {
-        if (t->is_moving) {
-          t->err("Thing is still moving and about to end the tick");
-        }
-      }
-      FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
-    }
-  }
-
-  //
   // We've finished waiting on all things, bump the game tick.
   //
   dbg("Level tick about to end");
