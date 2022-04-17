@@ -80,7 +80,9 @@ void Level::display(void)
 
 void Level::update(void)
 {
+  dbg("Update");
   TRACE_AND_INDENT();
+
   if (is_map_changed) {
     is_map_changed = false;
     update_map();

@@ -143,6 +143,13 @@ bool Level::tick(void)
     if (game->things_are_moving) {
       ERR("No tick in progress but things are still moving");
     }
+
+    //
+    // The last tick is done, but there is work to do in the next tick
+    //
+    if (! game->tick_requested.empty()) {
+      tick_begin_now();
+    }
     return false;
   }
 
@@ -553,13 +560,21 @@ bool Level::tick(void)
     return true;
   }
 
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+  //
+  // Sanity chack that all things are done
+  //
+  IF_DEBUG2
   {
-    if (t->is_moving) {
-      t->err("Thing is still moving and about to end the tick");
+    if (1) {
+      FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+      {
+        if (t->is_moving) {
+          t->err("Thing is still moving and about to end the tick");
+        }
+      }
+      FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
     }
   }
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
   //
   // We've finished waiting on all things, bump the game tick.
@@ -615,7 +630,6 @@ bool Level::tick(void)
       if (game->robot_mode_tick_requested) {
         dbg("Robot: tick requested");
         TRACE_AND_INDENT();
-
         game->robot_mode_tick_requested = false;
         if (game->robot_mode) {
           player->ai_tick();
@@ -668,9 +682,6 @@ bool Level::tick(void)
 
 void Level::tick_begin_now(void)
 {
-  dbg("Tick begin now");
-  TRACE_AND_INDENT();
-
   //
   // A new game event has occurred?
   //
@@ -678,8 +689,12 @@ void Level::tick_begin_now(void)
     return;
   }
 
+  dbg("Tick begin now");
+  TRACE_AND_INDENT();
   game->tick_begin_now();
 
+  dbg("Tick add movement to all things");
+  TRACE_AND_INDENT();
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
   {
     //

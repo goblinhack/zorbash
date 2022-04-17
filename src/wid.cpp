@@ -6545,7 +6545,7 @@ static void wid_tick_all(void)
   //
   if (game->request_destroy_thing_info) {
     if (time_have_x_tenths_passed_since(1, game->request_destroy_thing_info)) {
-      DBG3("Handle request to destroy thing info");
+      DBG2("Handle request to destroy thing info");
       game->request_destroy_thing_info = false;
       wid_thing_info_fini("wid request destroy info");
     }
@@ -6557,7 +6557,7 @@ static void wid_tick_all(void)
       // If we need to remake the rightbar, do so
       //
       if (game->request_remake_rightbar || game->request_remake_skillbox) {
-        DBG3("Handle request to remake inventory");
+        DBG2("Handle request to remake inventory");
         if (wid_rightbar_init()) {
           game->request_remake_rightbar = false;
           game->request_remake_skillbox = false;
@@ -6579,7 +6579,7 @@ static void wid_tick_all(void)
       // Update the actionbar
       //
       if (game->request_remake_actionbar) {
-        DBG3("Handle request to remake actionhar");
+        DBG2("Handle request to remake actionhar");
         wid_actionbar_init();
         game->request_remake_actionbar = false;
       }
@@ -6607,7 +6607,7 @@ static void wid_tick_all(void)
       }
 
       if (game->request_remake_inventory) {
-        DBG3("Handle request to remake inventory");
+        DBG2("Handle request to remake inventory");
         wid_inventory_init();
         game->request_remake_inventory = false;
       }

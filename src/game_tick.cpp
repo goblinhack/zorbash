@@ -21,7 +21,6 @@ void Game::tick_begin(const std::string &why)
 
   auto level = game->get_current_level();
   if (level) {
-    TRACE_AND_INDENT();
     auto player = level->player;
 
     if (player) {
@@ -60,7 +59,6 @@ void Game::tick_begin_now(void)
 
   auto level = game->get_current_level();
   if (level) {
-    TRACE_AND_INDENT();
     auto player = level->player;
     if (player) {
       CON("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
@@ -72,6 +70,7 @@ void Game::tick_begin_now(void)
   } else {
     CON("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
   }
+  TRACE_AND_INDENT();
 
   game->tick_begin_ms      = time_ms();
   game->tick_begin_game_ms = time_game_ms();
