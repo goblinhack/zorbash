@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
@@ -78,6 +79,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     return nullptr;
   }
 
+  backtrace_dump();
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", true, false);
 
   wid_popup_window->t = t;
@@ -205,6 +207,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   point tl     = make_point(0, TERM_HEIGHT - 2 - height);
   point br     = make_point(UI_SIDEBAR_LEFT_WIDTH, TERM_HEIGHT - 2);
 
+  backtrace_dump();
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", false, false /* vert */);
 
   wid_raise(wid_popup_window->wid_popup_container);

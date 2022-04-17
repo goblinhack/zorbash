@@ -6619,6 +6619,7 @@ static void wid_tick_all(void)
     case Game::STATE_CHOOSING_TARGET:
     case Game::STATE_CHOOSING_LEVEL:
     case Game::STATE_LOAD_MENU:
+    case Game::STATE_KEYBOARD_MENU:
     case Game::STATE_SAVE_MENU:
     case Game::STATE_QUIT_MENU: break;
   }

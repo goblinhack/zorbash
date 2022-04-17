@@ -329,9 +329,10 @@ public:
     STATE_CHOOSING_SKILLS,       // Choosing skills
     STATE_CHOOSING_TARGET,       // Looking to somewhere to throw at
     STATE_CHOOSING_LEVEL,        // Choosing the next level
-    STATE_LOAD_MENU,
-    STATE_SAVE_MENU,
-    STATE_QUIT_MENU,
+    STATE_KEYBOARD_MENU,         // Keyboard optionds
+    STATE_LOAD_MENU,             // Loading a game
+    STATE_SAVE_MENU,             // Saving a game
+    STATE_QUIT_MENU,             // Pondering quitting
   };
   int state {STATE_NORMAL};
   int fast_move_speed {THING_MOVE_SPEED_FAST_MS};    // Robot and/or move via cursor

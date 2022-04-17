@@ -107,6 +107,7 @@ void Game::change_state(int new_state)
       LOG("Game state changed to STATE_CHOOSING_LEVEL");
       break;
     case STATE_LOAD_MENU:
+    case STATE_KEYBOARD_MENU:
     case STATE_SAVE_MENU:
     case STATE_QUIT_MENU: wid_thing_info_fini("change state"); break;
   }

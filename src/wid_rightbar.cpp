@@ -473,7 +473,8 @@ static void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, in
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
       (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
-      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Inventory: Moving items; ignore");
     return;
   }
@@ -515,7 +516,8 @@ static void wid_rightbar_inventory_over_e(Widp w)
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
       (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
-      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Inventory: Moving items; ignore");
     return;
   }
@@ -557,7 +559,8 @@ static void wid_rightbar_stats_over_b(Widp w, int32_t relx, int32_t rely, int32_
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
       (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
-      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Stats: Moving items; ignore");
     return;
   }
@@ -587,7 +590,8 @@ static void wid_rightbar_stats_over_e(Widp w)
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
       (game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_CHOOSING_SKILLS) ||
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
-      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Stats: Moving items; ignore");
     return;
   }

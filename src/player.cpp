@@ -70,6 +70,7 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
       LOG("Ignore player action when choosing target");
       return false;
     case Game::STATE_LOAD_MENU:
+    case Game::STATE_KEYBOARD_MENU:
     case Game::STATE_SAVE_MENU:
     case Game::STATE_QUIT_MENU: LOG("Ignore player action when in menu"); return false;
   }

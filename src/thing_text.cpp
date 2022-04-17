@@ -264,6 +264,7 @@ void Thing::show_botcon_description(void)
     case Game::STATE_LOAD_MENU: skip_showing_keys_to_use = true; break;
     case Game::STATE_SAVE_MENU: skip_showing_keys_to_use = true; break;
     case Game::STATE_QUIT_MENU: skip_showing_keys_to_use = true; break;
+    case Game::STATE_KEYBOARD_MENU: skip_showing_keys_to_use = true; break;
   }
 
   //
