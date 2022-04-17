@@ -16,13 +16,12 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta)
 {
   TRACE_NO_INDENT();
 
-  dbg("Try to shove, %s delta %d,%d", it->to_short_string().c_str(), (int) delta.x, (int) delta.y);
-  TRACE_AND_INDENT();
-
   if (! is_able_to_shove()) {
-    dbg("Not able to shove");
     return (THING_SHOVE_NEVER_TRIED);
   }
+
+  dbg("Try to shove, %s delta %d,%d", it->to_short_string().c_str(), (int) delta.x, (int) delta.y);
+  TRACE_AND_INDENT();
 
   //
   // Wake on shove
