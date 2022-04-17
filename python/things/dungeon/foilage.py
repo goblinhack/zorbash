@@ -18,6 +18,7 @@ def tp_init(name, tiles=[]):
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_foilage(self, True)
+    my.is_hittable(self, True)
     my.is_interesting(self, True)
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.long_text_description(self, "Thick and sicky looking foilage and roots. Monsters cannot see through these thick bushes. Use them for cover.")

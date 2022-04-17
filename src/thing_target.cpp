@@ -491,6 +491,14 @@ bool Thing::victim_attack_best_at(int equip, AttackOptions *attack_options)
     return false;
   }
 
+  //
+  // If we clicked on a specific bit to hit, do not fallback to last resorts
+  // as we end up swinging twice.
+  //
+  if (attack_options->attack_at_set) {
+    return false;
+  }
+
   dbg("Target-attack-best: Last resorts");
   TRACE_AND_INDENT();
 
