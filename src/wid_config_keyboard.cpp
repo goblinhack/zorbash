@@ -621,7 +621,7 @@ static void grab_key(const std::string which)
 static uint8_t wid_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  SDL_Keysym k;
+  SDL_Keysym k {};
 
   config_changed           = true;
   game->config.key_move_up = {};
@@ -672,7 +672,7 @@ static uint8_t wid_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t
 static uint8_t wid_config_keyboard_profile_wasd(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  SDL_Keysym k = {};
+  SDL_Keysym k {};
 
   config_changed           = true;
   game->config.key_move_up = {};
