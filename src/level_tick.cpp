@@ -137,6 +137,16 @@ bool Level::tick(void)
   }
 
   //
+  // Update the cursor position. But only if the mouse has moved. So if the
+  // player is moving via keyboard alone, we don't pollute the screen.
+  //
+  if ((sdl.wheel_x != 0) || (sdl.wheel_y != 0)) {
+    cursor_move();
+  } else if (! time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
+    cursor_move();
+  }
+
+  //
   // Is there a tick in progress?
   //
   if (! game->tick_begin_ms) {
@@ -276,16 +286,6 @@ bool Level::tick(void)
       }
     }
     FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
-  }
-
-  //
-  // Update the cursor position. But only if the mouse has moved. So if the
-  // player is moving via keyboard alone, we don't pollute the screen.
-  //
-  if ((sdl.wheel_x != 0) || (sdl.wheel_y != 0)) {
-    cursor_move();
-  } else if (! time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
-    cursor_move();
   }
 
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
