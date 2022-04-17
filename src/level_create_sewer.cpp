@@ -124,9 +124,9 @@ bool Level::create_sewer_pipes(point3d at)
   }
 
   TRACE_NO_INDENT();
-  for (auto y = MAP_BORDER_ROCK; y < MAP_WIDTH - MAP_BORDER_ROCK;
+  for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK;
        y += pcg_random_range(min_pipe_distance, max_pipe_distance)) {
-    for (auto x = MAP_BORDER_ROCK; x < MAP_HEIGHT - MAP_BORDER_ROCK; x++) {
+    for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
       set(pipes_template, x, y, true);
     }
   }
@@ -139,7 +139,7 @@ bool Level::create_sewer_pipes(point3d at)
 
   TRACE_NO_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
-    for (auto x = 0; x < MAP_HEIGHT; x++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_THINGS(prev, t, x, y)
       {
         if (t->is_descend_sewer()) {
@@ -298,7 +298,7 @@ bool Level::create_sewer_pipes(point3d at)
 
   TRACE_NO_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
-    for (auto x = 0; x < MAP_HEIGHT; x++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
       point p(x, y);
       if (get(final_pipes, x, y)) {
         (void) thing_new("corridor2", p);
@@ -314,7 +314,7 @@ bool Level::create_sewer_pipes(point3d at)
 
 #if 0
   for (auto y = 0; y < MAP_HEIGHT; y++) {
-    for (auto x = 0; x < MAP_HEIGHT; x++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
       if (get(failed, x, y)) {
         printf("F");
       } else if (get(sewer_pipe, x, y)) {
