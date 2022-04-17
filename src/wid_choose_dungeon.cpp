@@ -35,7 +35,7 @@ void wid_show_dungeon_contents(Levelp l)
   std::map< std::string, int > treasure_contents;
 
   for (auto x = 0; x < MAP_WIDTH; x++) {
-    for (auto y = 0; y < MAP_WIDTH; y++) {
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
       FOR_ALL_THINGS_THAT_INTERACT(l, t, x, y)
       {
         if (t->is_monst() || t->is_mob()) {
