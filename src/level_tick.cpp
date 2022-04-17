@@ -136,6 +136,12 @@ bool Level::tick(void)
     }
   }
 
+  game->tick_update();
+
+  handle_all_pending_things();
+
+  things_gc_if_possible();
+
   //
   // Update the cursor position. But only if the mouse has moved. So if the
   // player is moving via keyboard alone, we don't pollute the screen.
@@ -147,11 +153,61 @@ bool Level::tick(void)
   }
 
   //
+  // Even if a tick is not running, we need to animate all things
+  //
+  FOR_ALL_THING_GROUPS(group)
+  {
+    ;
+    FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t)
+    {
+      t->animate();
+      t->update_interpolated_position();
+      t->fall_curr();
+    }
+    FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
+
+    FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t)
+    {
+      if (t->is_scheduled_for_death) {
+        t->is_scheduled_for_death = false;
+        t->dead(t->dead_reason_get());
+      }
+    }
+    FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
+  }
+
+  //
   // Is there a tick in progress?
   //
   if (! game->tick_begin_ms) {
     if (game->things_are_moving) {
       ERR("No tick in progress but things are still moving");
+    }
+
+    if (fade_out_finished) {
+      if (player && player->is_waiting_to_descend_dungeon) {
+        if (! player->descend_dungeon()) {
+          player->err("Failed to descend dungeon");
+        }
+      }
+      if (player && player->is_waiting_to_ascend_dungeon) {
+        if (! player->ascend_dungeon()) {
+          player->err("Failed to ascend dungeon");
+        }
+      }
+      if (player && player->is_waiting_to_descend_sewer) {
+        if (! player->descend_sewer()) {
+          player->err("Failed to descend sewer");
+        }
+      }
+      if (player && player->is_waiting_to_ascend_sewer) {
+        if (! player->ascend_sewer()) {
+          player->err("Failed to ascend sewer");
+        }
+      }
+      if (player && player->is_waiting_to_leave_level_has_completed_fall) {
+        player->fall_to_next_level();
+      }
     }
 
     //
@@ -164,17 +220,11 @@ bool Level::tick(void)
   }
 
   if (game->things_are_moving) {
-    dbg("Tick (things still moving)");
+    dbg("Tick (things are still moving)");
   } else {
     dbg("Tick");
   }
   TRACE_AND_INDENT();
-
-  game->tick_update();
-
-  handle_all_pending_things();
-
-  things_gc_if_possible();
 
   //
   // Update the player map if needed. It is quite slow.
@@ -250,44 +300,6 @@ bool Level::tick(void)
   static int       wait_count;
   wait_count++;
 
-  //
-  // Animate anything that needs it
-  //
-  FOR_ALL_THING_GROUPS(group)
-  {
-    ;
-    FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t)
-    {
-      t->animate();
-      t->update_interpolated_position();
-      t->fall_curr();
-
-      //
-      // We need to check all animated things are finished moving as they
-      // may not intersect with all interactive things. i.e a carried
-      // sword animation.
-      //
-      if (t->is_moving) {
-        if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-          t->con("Waiting on animated moving thing longer than expected: %s", t->to_dbg_string().c_str());
-        }
-        game->things_are_moving = true;
-        t->is_waiting           = true;
-        // t->con("WAIT %d", __LINE__);
-      }
-    }
-    FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
-
-    FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t)
-    {
-      if (t->is_scheduled_for_death) {
-        t->is_scheduled_for_death = false;
-        t->dead(t->dead_reason_get());
-      }
-    }
-    FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
-  }
-
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
   {
     //
@@ -362,22 +374,20 @@ bool Level::tick(void)
       // t->con("WAIT %d", __LINE__);
     }
 
-    if (game->robot_mode) {
-      FOR_ALL_EQUIP(e)
-      {
-        auto equip_id = t->equip_id_use_anim(e);
-        if (equip_id.ok()) {
-          auto w = thing_find(equip_id);
-          if (w && ! (w->is_dead || w->is_scheduled_for_death)) {
-            if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-              w->con("Waiting on this");
-              t->con("This is the owner");
-            }
-            game->things_are_moving = true;
-            t->is_waiting           = true;
-            // w->con("WAIT EQUIP %d", __LINE__);
-            // t->con("WAIT %d", __LINE__);
+    FOR_ALL_EQUIP(e)
+    {
+      auto equip_id = t->equip_id_use_anim(e);
+      if (equip_id.ok()) {
+        auto w = thing_find(equip_id);
+        if (w && ! (w->is_dead || w->is_scheduled_for_death)) {
+          if ((wait_count > wait_count_max) && ! game->things_are_moving) {
+            w->con("Waiting on this");
+            t->con("This is the owner");
           }
+          game->things_are_moving = true;
+          t->is_waiting           = true;
+          // w->con("WAIT EQUIP %d", __LINE__);
+          // t->con("WAIT %d", __LINE__);
         }
       }
     }
@@ -414,51 +424,6 @@ bool Level::tick(void)
     }
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
-
-  if (fade_out_finished) {
-    if (player && player->is_waiting_to_descend_dungeon) {
-      if (! player->descend_dungeon()) {
-        player->err("Failed to descend dungeon");
-      }
-      if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on descending player thing longer than expected: %s", player->to_dbg_string().c_str());
-      }
-      game->things_are_moving = true;
-    }
-    if (player && player->is_waiting_to_ascend_dungeon) {
-      if (! player->ascend_dungeon()) {
-        player->err("Failed to ascend dungeon");
-      }
-      if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on ascending player thing longer than expected: %s", player->to_dbg_string().c_str());
-      }
-      game->things_are_moving = true;
-    }
-    if (player && player->is_waiting_to_descend_sewer) {
-      if (! player->descend_sewer()) {
-        player->err("Failed to descend sewer");
-      }
-      if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on descending sewer player thing longer than expected: %s",
-                    player->to_dbg_string().c_str());
-      }
-      game->things_are_moving = true;
-    }
-    if (player && player->is_waiting_to_ascend_sewer) {
-      if (! player->ascend_sewer()) {
-        player->err("Failed to ascend sewer");
-      }
-      if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        player->con("Waiting on ascending sewer player thing longer than expected: %s",
-                    player->to_dbg_string().c_str());
-      }
-      game->things_are_moving = true;
-    }
-    if (player && player->is_waiting_to_leave_level_has_completed_fall) {
-      player->fall_to_next_level();
-      game->things_are_moving = true;
-    }
-  }
 
   if (game->things_are_moving) {
     if (ts_created && time_have_x_tenths_passed_since(10, ts_created)) {
