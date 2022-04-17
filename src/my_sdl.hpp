@@ -87,8 +87,8 @@ typedef struct sdl_t_ {
   SDL_Window   *window {};  // Our window handle
 } sdl_t;
 
-#define SDL_KEY_REPEAT_HUNDREDTHS_FIRST 12
-#define SDL_KEY_REPEAT_HUNDREDTHS_NEXT  7
+#define SDL_KEY_REPEAT_HUNDREDTHS_FIRST 20
+#define SDL_KEY_REPEAT_HUNDREDTHS_NEXT  10
 
 extern sdl_t sdl;
 

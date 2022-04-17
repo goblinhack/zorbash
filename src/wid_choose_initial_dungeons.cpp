@@ -679,11 +679,12 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
 
         if (l) {
           int tlx, tly, brx, bry;
-          int sz = MAP_WIDTH * 3;
-          tlx    = game->config.ui_pix_width - sz;
-          tly    = 0;
-          brx    = game->config.ui_pix_width;
-          bry    = sz;
+          int szh = MAP_HEIGHT * 3;
+          int szw = MAP_WIDTH * 3;
+          tlx     = game->config.ui_pix_width - szw;
+          tly     = 0;
+          brx     = game->config.ui_pix_width;
+          bry     = szh;
 
           gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
           glcolor(WHITE);

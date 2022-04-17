@@ -1,9 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- bats seem to get stuck                                                                                                                       -->
+<!-- bats seem to get stuck on braziers                                                                                                           -->
 <!-- click on foilage does not attack or move                                                                                                     -->
-<!-- diagonal move followed by normal move does not work                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

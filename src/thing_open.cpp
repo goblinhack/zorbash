@@ -67,3 +67,34 @@ bool Thing::open(Thingp it)
 
   return true;
 }
+
+bool Thing::open(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! is_openable()) {
+    return false;
+  }
+
+  if (is_open) {
+    return false;
+  }
+
+  if (is_dead) {
+    return false;
+  }
+
+  IF_DEBUG1 { log("Open"); }
+
+  level_pop();
+  is_open = true;
+  level_push();
+
+  on_open();
+  update_light();
+  level->request_dmap_to_player_update = true;
+
+  level->noisemap_in_incr(curr_at.x, curr_at.y, noise_on_open());
+
+  return true;
+}
