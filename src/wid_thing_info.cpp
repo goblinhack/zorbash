@@ -1394,7 +1394,7 @@ void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
     }
   }
 
-  if (t->is_monst()) {
+  if (t->is_alive_monst()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level hearing     %4d", t->noise_decibels_hearing());
     w->log(tmp);
   }
