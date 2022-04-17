@@ -312,7 +312,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       //
       // Makes sure ghosts (or the cursor!) do not get stuck under barrels
       //
-      if (! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
+      if (! is_flying() && ! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
         if (is_player()) {
           if (level->is_barrel(curr_at.x, curr_at.y)) {
             msg("You are trapped under a barrel!");
