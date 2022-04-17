@@ -148,7 +148,22 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
             // If the door is not broken, we can close it
             //
             if (t->is_door() && t->is_open) {
-              t->close_door(t);
+              IF_DEBUG2 { player->log("Close door"); }
+              TRACE_AND_INDENT();
+              game->tick_begin("close door");
+              if (! player->close_door(t)) {
+                IF_DEBUG2 { player->log("Failed to close door"); }
+              }
+              return true;
+            }
+
+            if (t->is_door() && ! t->is_open) {
+              IF_DEBUG2 { player->log("Open door"); }
+              TRACE_AND_INDENT();
+              game->tick_begin("open door");
+              if (! player->open_door(t)) {
+                IF_DEBUG2 { player->log("Failed to open door"); }
+              }
               return true;
             }
 

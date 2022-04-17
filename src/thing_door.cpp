@@ -8,49 +8,53 @@
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
-bool Thing::open_door(Thingp it)
+bool Thing::open_door(Thingp door)
 {
   if (! is_monst() && ! is_player()) {
+    dbg("Cannot open %s", door->to_short_string().c_str());
     return false;
   }
 
   if (is_on_fire()) {
-    if (! it->is_on_fire()) {
+    if (! door->is_on_fire()) {
       if (is_player()) {
         msg("The door is ablaze!");
       }
-      it->on_fire_set("opened flaming door");
+      door->on_fire_set("opened flaming door");
     }
   }
 
-  if (! it->is_door()) {
+  if (! door->is_door()) {
+    dbg("Cannot open %s", door->to_short_string().c_str());
     return false;
   }
 
-  if (it->is_open) {
+  if (door->is_open) {
+    dbg("Cannot open %s: already open", door->to_short_string().c_str());
     return false;
   }
 
-  if (it->is_dead) {
+  if (door->is_dead) {
+    dbg("Cannot open %s: is dead", door->to_short_string().c_str());
     return false;
   }
 
-  dbg("Open door");
+  dbg("Open door: %s", door->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (keys()) {
     keys_decr();
-    IF_DEBUG1 { it->log("Open"); }
-    it->level_pop();
-    it->is_open = true;
-    it->level_push();
+    IF_DEBUG1 { door->log("Open"); }
+    door->level_pop();
+    door->is_open = true;
+    door->level_push();
 
     if (is_player()) {
       msg("The door creaks open.");
     }
 
-    it->on_open();
-    level->noisemap_in_incr(it->curr_at.x, it->curr_at.y, it->noise_on_open());
+    door->on_open();
+    level->noisemap_in_incr(door->curr_at.x, door->curr_at.y, door->noise_on_open());
 
     update_light();
     level->request_dmap_to_player_update = true;
@@ -68,51 +72,53 @@ bool Thing::open_door(Thingp it)
   return false;
 }
 
-bool Thing::close_door(Thingp it)
+bool Thing::close_door(Thingp door)
 {
   if (is_on_fire()) {
-    if (! it->is_on_fire()) {
+    if (! door->is_on_fire()) {
       if (is_player()) {
         msg("The door is ablaze!");
       }
-      it->on_fire_set("closed flaming door");
+      door->on_fire_set("closed flaming door");
     }
   }
 
-  if (! it->is_door()) {
+  if (! door->is_door()) {
     return false;
   }
 
-  if (! it->is_open) {
+  if (! door->is_open) {
     return false;
   }
 
-  if (it->is_dead) {
+  if (door->is_dead) {
     return false;
   }
 
   dbg("Close door");
   TRACE_AND_INDENT();
 
-  IF_DEBUG1 { it->log("Close"); }
-  it->level_pop();
-  it->is_open = false;
-  it->level_push();
+  IF_DEBUG1 { door->log("Close"); }
+  door->level_pop();
+  door->is_open = false;
+  door->level_push();
 
   //
   // Slamming the door on a thing for crush damage
   //
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, it->curr_at.x, it->curr_at.y)
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, door->curr_at.x, door->curr_at.y)
   {
     if (t == this) {
       continue;
     }
 
-    if (t->is_monst() || t->is_player()) {
+    if (! t->is_monst() && ! t->is_player()) {
       continue;
     }
 
-    is_attacked_with_damage_crush(it, it, it->damage_crush());
+    t->log("Is in the way of a door being closed");
+    TRACE_AND_INDENT();
+    t->is_attacked_with_damage_crush(door, door, door->damage_crush());
   }
   FOR_ALL_THINGS_END()
 
@@ -125,7 +131,7 @@ bool Thing::close_door(Thingp it)
     msg("The door slams shut.");
   }
 
-  level->noisemap_in_incr(it->curr_at.x, it->curr_at.y, it->noise_on_open());
+  level->noisemap_in_incr(door->curr_at.x, door->curr_at.y, door->noise_on_open());
 
   update_light();
   level->request_dmap_to_player_update = true;
