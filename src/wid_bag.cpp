@@ -686,8 +686,9 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 
   if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
-      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
-      (game->state == Game::STATE_QUIT_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_SAVE_MENU) ||
+      (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
+      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("Ignore");
     return false;
   }

@@ -34,7 +34,7 @@ void wid_debuffbox_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t 
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
       (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("debuffbox: Moving items; ignore");
     return;
   }
@@ -76,7 +76,7 @@ void wid_debuffbox_mouse_over_end(Widp w)
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
       (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_ENCHANTING_ITEMS)) {
+      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
     DBG3("debuffbox: Moving items; ignore");
     return;
   }
