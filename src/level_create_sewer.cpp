@@ -97,7 +97,8 @@ bool Level::create_sewer(point3d at, uint32_t seed)
 
 bool Level::create_sewer_pipes(point3d at)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   auto prev = get(game->world.levels, at.x, at.y, at.z - 1);
   if (! prev) {
     err("no previous level for sewer");
@@ -114,6 +115,7 @@ bool Level::create_sewer_pipes(point3d at)
   //
   auto min_pipe_distance = 10;
   auto max_pipe_distance = 20;
+  TRACE_NO_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK;
        x += pcg_random_range(min_pipe_distance, max_pipe_distance)) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -121,6 +123,7 @@ bool Level::create_sewer_pipes(point3d at)
     }
   }
 
+  TRACE_NO_INDENT();
   for (auto y = MAP_BORDER_ROCK; y < MAP_WIDTH - MAP_BORDER_ROCK;
        y += pcg_random_range(min_pipe_distance, max_pipe_distance)) {
     for (auto x = MAP_BORDER_ROCK; x < MAP_HEIGHT - MAP_BORDER_ROCK; x++) {
@@ -134,6 +137,7 @@ bool Level::create_sewer_pipes(point3d at)
   std::vector< point > sewers;
   auto                 got_count = 0;
 
+  TRACE_NO_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_HEIGHT; x++) {
       FOR_ALL_THINGS(prev, t, x, y)
@@ -158,6 +162,7 @@ bool Level::create_sewer_pipes(point3d at)
   //
   // Draw a line from the sewer to a nearby pipe
   //
+  TRACE_NO_INDENT();
   for (auto n = 0U; n < sewers.size(); n++) {
     auto p  = sewers[ n ];
     int  dx = 0, dy = 0;
@@ -209,6 +214,7 @@ bool Level::create_sewer_pipes(point3d at)
   //
   // For each sewer, try to find another
   //
+  TRACE_NO_INDENT();
   for (auto n = 0U; n < sewers.size(); n++) {
     auto a = sewers[ n ];
     auto b = sewers[ pcg_random_range(0, sewers.size()) ];
@@ -290,6 +296,7 @@ bool Level::create_sewer_pipes(point3d at)
     }
   }
 
+  TRACE_NO_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_HEIGHT; x++) {
       point p(x, y);
