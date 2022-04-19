@@ -573,7 +573,7 @@ bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
   // message on the first tick.
   //
   if (is_player()) {
-    game->tick_begin("player attack");
+    game->tick_begin("player attacked");
   }
 
   TRACE_NO_INDENT();

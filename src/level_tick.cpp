@@ -40,6 +40,10 @@ void Level::handle_all_pending_things(void)
 
 void Level::handle_input_events(void)
 {
+  if (game->robot_mode) {
+    return;
+  }
+
   //
   // Trying to scroll the map?
   //
@@ -421,12 +425,14 @@ void Level::tick(void)
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
   if (game->things_are_moving) {
-    if (ts_created && time_have_x_tenths_passed_since(10, ts_created)) {
-      if (game->request_player_move || (player && player->aip()->move_path.size())) {
-        if ((time_ms() - game->tick_begin_ms) > game->current_move_speed) {
-          game->tick_current_is_too_slow = true;
-          time_game_delta += 10;
-          return;
+    if (! game->robot_mode) {
+      if (ts_created && time_have_x_tenths_passed_since(10, ts_created)) {
+        if (game->request_player_move || (player && player->aip()->move_path.size())) {
+          if ((time_ms() - game->tick_begin_ms) > game->current_move_speed) {
+            game->tick_current_is_too_slow = true;
+            time_game_delta += 10;
+            return;
+          }
         }
       }
     }
