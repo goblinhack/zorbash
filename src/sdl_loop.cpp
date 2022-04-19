@@ -121,11 +121,6 @@ void sdl_loop(void)
     bool update_slow = (ts_now - ui_ts_slow_last >= UI_UPDATE_SLOW_MS);
     bool update_fast = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
 
-    if (too_slow) {
-      update_slow = false;
-      too_slow    = false;
-    }
-
     //
     // Less frequent updates
     //
@@ -211,8 +206,7 @@ void sdl_loop(void)
                 sdl.held_mouse_x = 0;
                 sdl.held_mouse_y = 0;
               } else {
-                DBG2("SDL: Mouse DOWN: held: Button %d now at %d,%d", sdl.mouse_down, sdl.mouse_x,
-                     sdl.mouse_y);
+                DBG2("SDL: Mouse DOWN: held: Button %d now at %d,%d", sdl.mouse_down, sdl.mouse_x, sdl.mouse_y);
                 wid_mouse_held(sdl.mouse_down, sdl.mouse_x, sdl.mouse_y);
               }
             }
@@ -236,9 +230,7 @@ void sdl_loop(void)
         //
         // If the tick ends, start the new tick asap for smoothness.
         //
-        if (game->level->tick()) {
-          too_slow = true;
-        }
+        game->level->tick();
       }
     }
 

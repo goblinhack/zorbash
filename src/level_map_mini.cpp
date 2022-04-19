@@ -218,8 +218,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           // Have both? Overlay the monsters
           //
           if (has_map_beast) {
-            c   = RED;
-            c.a = 255;
+            c = RED;
           } else {
             continue;
           }
@@ -280,9 +279,10 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = WHITE;
 
+        bool no_fade = false;
         if (is_monst(x, y) && has_map_beast) {
-          c   = RED;
-          c.a = 255;
+          c       = RED;
+          no_fade = true;
         } else if (! is_lit_ever(x, y)) {
           c   = BLACK;
           c.a = 100;
@@ -293,9 +293,11 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c   = PURPLE;
           c.a = 255;
         } else if (is_monst(x, y)) {
-          c = RED;
+          c       = RED;
+          no_fade = true;
         } else if (is_mob(x, y)) {
-          c = PINK;
+          c       = PINK;
+          no_fade = true;
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = WHITE;
         } else if (is_door(x, y)) {
@@ -347,10 +349,12 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = BLACK;
         }
 
-        if (! is_lit_recently(x, y)) {
-          c.r /= 2;
-          c.g /= 2;
-          c.b /= 2;
+        if (! no_fade) {
+          if (! is_lit_recently(x, y)) {
+            c.r /= 2;
+            c.g /= 2;
+            c.b /= 2;
+          }
         }
 
         if ((x > 0) && (y > 0) && (x < MAP_WIDTH) && (y < MAP_HEIGHT)) {

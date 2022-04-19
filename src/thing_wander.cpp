@@ -110,6 +110,11 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   //
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
+      if (is_disliked_by_me(point(x, y))) {
+        set(dmap.val, x, y, DMAP_IS_WALL);
+        continue;
+      }
+
       auto c = terrain_cost_get(point(x, y));
       if (collision_obstacle(point(x, y))) {
         set(dmap.val, x, y, DMAP_IS_WALL);

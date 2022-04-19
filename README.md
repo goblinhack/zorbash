@@ -11,6 +11,8 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
+<!-- - boiling steam over water when fireball passes                                                                                              -->
 <!-- - dog pack / howling ?                                                                                                                       -->
 <!-- - freeze slimes                                                                                                                              -->
 <!-- - recharge wands based on enchant                                                                                                            -->

@@ -73,19 +73,31 @@ bool Thing::path_pop_next_move(void)
     if (is_disliked_by_me(future_pos) || level->is_barrel(future_pos) || level->is_brazier(future_pos)) {
       IF_DEBUG2
       {
-        auto s = string_sprintf("Next position %d,%d is a hazard", (int) future_pos.x, (int) future_pos.y);
+        auto s = string_sprintf("Next position %d,%d is a hazard (move path size %d)", (int) future_pos.x,
+                                (int) future_pos.y, (int) ai->move_path.size());
         AI_LOG(s);
       }
 
-      TRACE_NO_INDENT();
+      TRACE_AND_INDENT();
       if (ai->move_path.size()) {
         auto jump_pos = ai->move_path[ 0 ];
         ai->move_path.erase(ai->move_path.begin());
 
+        IF_DEBUG2
+        {
+          if (is_disliked_by_me(jump_pos)) {
+            auto s = string_sprintf("Jump pos %d,%d (is disliked)", (int) jump_pos.x, (int) jump_pos.y);
+            AI_LOG(s);
+          } else {
+            auto s = string_sprintf("Jump pos %d,%d", (int) jump_pos.x, (int) jump_pos.y);
+            AI_LOG(s);
+          }
+        }
+
         //
         // If the thing we are going to land on is also a hazard, can we jump further?
         //
-        TRACE_NO_INDENT();
+        TRACE_AND_INDENT();
         if (is_disliked_by_me(jump_pos) && ai->move_path.size()) {
           IF_DEBUG2
           {
