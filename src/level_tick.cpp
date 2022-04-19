@@ -116,18 +116,18 @@ void Level::handle_input_events(void)
   }
 }
 
-bool Level::tick(void)
+void Level::tick(void)
 {
   if (! game->started) {
-    return false;
+    return;
   }
 
   if (game->paused) {
-    return false;
+    return;
   }
 
   if (ts_fade_in_begin) {
-    return false;
+    return;
   }
 
   if (! cursor) {
@@ -216,7 +216,7 @@ bool Level::tick(void)
     if (! game->tick_requested.empty()) {
       tick_begin_now();
     }
-    return false;
+    return;
   }
 
   if (game->things_are_moving) {
@@ -426,66 +426,17 @@ bool Level::tick(void)
         if ((time_ms() - game->tick_begin_ms) > game->current_move_speed) {
           game->tick_current_is_too_slow = true;
           time_game_delta += 10;
-          return true;
+          return;
         }
       }
     }
 
-    return false;
+    return;
   }
 
   debug_path_clear();
 
   wait_count = 0;
-
-  //
-  // Stop rapid pickup/drop events if particles are still in progress
-  // Don't move this priot to update_interpolated_position or see flicker
-  // in jumping.
-  //
-  if (player && player->particle_anim_exists()) {
-    return false;
-  }
-
-  //
-  // The robot needs to be more deterministic and less loosy goosey
-  //
-  if (game->robot_mode) {
-    //
-    // No moving if weapons have not finished firing
-    //
-    if (all_projectiles.size()) {
-      return false;
-    }
-
-    if (new_projectiles.size()) {
-      return false;
-    }
-
-    if (all_lasers.size()) {
-      return false;
-    }
-
-    if (new_lasers.size()) {
-      return false;
-    }
-
-    if (all_internal_particles.size()) {
-      return false;
-    }
-
-    if (new_internal_particles.size()) {
-      return false;
-    }
-
-    if (all_external_particles.size()) {
-      return false;
-    }
-
-    if (new_external_particles.size()) {
-      return false;
-    }
-  }
 
   //
   // If things have stopped moving, perform location checks on where they
@@ -517,7 +468,56 @@ bool Level::tick(void)
   }
   FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
   if (work_to_do) {
-    return true;
+    return;
+  }
+
+  //
+  // Stop rapid pickup/drop events if particles are still in progress
+  // Don't move this priot to update_interpolated_position or see flicker
+  // in jumping.
+  //
+  if (player && player->particle_anim_exists()) {
+    return;
+  }
+
+  //
+  // The robot needs to be more deterministic and less loosy goosey
+  //
+  if (game->robot_mode) {
+    //
+    // No moving if weapons have not finished firing
+    //
+    if (all_projectiles.size()) {
+      return;
+    }
+
+    if (new_projectiles.size()) {
+      return;
+    }
+
+    if (all_lasers.size()) {
+      return;
+    }
+
+    if (new_lasers.size()) {
+      return;
+    }
+
+    if (all_internal_particles.size()) {
+      return;
+    }
+
+    if (new_internal_particles.size()) {
+      return;
+    }
+
+    if (all_external_particles.size()) {
+      return;
+    }
+
+    if (new_external_particles.size()) {
+      return;
+    }
   }
 
   //
@@ -612,16 +612,6 @@ bool Level::tick(void)
   // A new game event has occurred?
   //
   tick_begin_now();
-
-  //
-  // Only update robot mode if things have stopped moving so we get
-  // consistent random behaviour.
-  //
-  if (! game->tick_requested.empty()) {
-    return true;
-  }
-
-  return false;
 }
 
 void Level::tick_begin_now(void)

@@ -107,7 +107,7 @@ void Game::tick_set_speed(void)
   // Set how long each tick takes.
   //
   if (game->robot_mode) {
-    game->current_move_speed = game->fast_move_speed;
+    game->current_move_speed = game->slow_move_speed;
   } else if (! game->cursor_move_path.empty()) {
     game->current_move_speed = game->fast_move_speed;
   } else {

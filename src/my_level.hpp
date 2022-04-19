@@ -691,7 +691,6 @@ public:
   bool screen_shake_begin(void);
   bool skillbox_chosen(const uint32_t slot);
   bool skillbox_over(const uint32_t slot);
-  bool tick(void);
 
   int get_total_monst_hp_level(void);
   int get_total_monst_damage_level(void);
@@ -1137,6 +1136,7 @@ public:
   void things_tick(void);
   void tick_begin_now(void);
   void tick_gas_poison(void);
+  void tick(void);
   void tiles_get(void);
   void update_all_ticks(void);
   void update_deep_water(void);

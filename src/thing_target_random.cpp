@@ -9,6 +9,9 @@
 
 point Thing::dest_random_get(int d)
 {
+  dbg("Get random target");
+  TRACE_AND_INDENT();
+
   if (! d) {
     if (is_player()) {
       d = MAP_WIDTH / 2;
@@ -41,11 +44,18 @@ point Thing::dest_random_get(int d)
     point   start = wander_source;
     int16_t dx    = pcg_random_range(-d, d);
     int16_t dy    = pcg_random_range(-d, d);
-    if (! dx && ! dy) {
+
+    //
+    // Not too close. If we choose one tile adjacent then we may try to walk
+    // onto adjacent lava instead of jumping over it.
+    //
+    if ((abs(dx) <= 1) && (abs(dy) <= 1)) {
       continue;
     }
 
     dbg("Try: %s", start.to_string().c_str());
+    TRACE_AND_INDENT();
+
     auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
@@ -66,6 +76,7 @@ point Thing::dest_random_get(int d)
           }
         }
 
+        dbg("Get random target => %d,%d", x, y);
         return point(x, y);
       }
     }
@@ -80,11 +91,18 @@ point Thing::dest_random_get(int d)
     point   start = wander_source;
     int16_t dx    = pcg_random_range(-d, d);
     int16_t dy    = pcg_random_range(-d, d);
-    if (! dx && ! dy) {
+
+    //
+    // Not too close. If we choose one tile adjacent then we may try to walk
+    // onto adjacent lava instead of jumping over it.
+    //
+    if ((abs(dx) <= 1) && (abs(dy) <= 1)) {
       continue;
     }
 
     dbg("Try (2): %s", start.to_string().c_str());
+    TRACE_AND_INDENT();
+
     auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
@@ -98,6 +116,7 @@ point Thing::dest_random_get(int d)
       }
     }
 
+    dbg("Get random target => %d,%d", x, y);
     return point(x, y);
   }
 
@@ -107,10 +126,18 @@ point Thing::dest_random_get(int d)
   point   start = wander_source;
   int16_t dx    = pcg_random_range(-d, d);
   int16_t dy    = pcg_random_range(-d, d);
-  if (! dx && ! dy) {
+
+  //
+  // Not too close. If we choose one tile adjacent then we may try to walk
+  // onto adjacent lava instead of jumping over it.
+  //
+  if ((abs(dx) <= 1) && (abs(dy) <= 1)) {
     return start;
   }
+
   dbg("Try (3): %s", start.to_string().c_str());
+  TRACE_AND_INDENT();
+
   auto x = std::min(std::max(MAP_BORDER_ROCK, start.x + dx), MAP_WIDTH - MAP_BORDER_ROCK);
   auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
@@ -120,5 +147,6 @@ point Thing::dest_random_get(int d)
     }
   }
 
+  dbg("Get random target => %d,%d", x, y);
   return point(x, y);
 }
