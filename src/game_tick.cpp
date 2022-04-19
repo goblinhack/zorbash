@@ -200,6 +200,7 @@ void Game::tick_update(void)
     float move_at       = time_game_ms() - game->tick_begin_game_ms;
     float move_duration = game->current_move_speed;
     game->tick_dt       = move_at / move_duration;
+    // CON("dt %f speed %d", game->tick_dt, game->current_move_speed);
     if (game->tick_dt > 1) {
       game->tick_dt = 1;
     }
