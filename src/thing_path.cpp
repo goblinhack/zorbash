@@ -11,6 +11,9 @@
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
 
+//
+// Return true on success.
+//
 bool Thing::path_pop_next_move(void)
 {
   bool too_far = false;
@@ -86,10 +89,10 @@ bool Thing::path_pop_next_move(void)
         IF_DEBUG2
         {
           if (is_disliked_by_me(jump_pos)) {
-            auto s = string_sprintf("Jump pos %d,%d (is disliked)", (int) jump_pos.x, (int) jump_pos.y);
+            auto s = string_sprintf("Next jump pos %d,%d (is disliked)", (int) jump_pos.x, (int) jump_pos.y);
             AI_LOG(s);
           } else {
-            auto s = string_sprintf("Jump pos %d,%d", (int) jump_pos.x, (int) jump_pos.y);
+            auto s = string_sprintf("Next jump pos %d,%d", (int) jump_pos.x, (int) jump_pos.y);
             AI_LOG(s);
           }
         }
@@ -132,6 +135,20 @@ bool Thing::path_pop_next_move(void)
             infop()->last_failed_jump_at = curr_at;
             return false;
           }
+        } else if (is_disliked_by_me(jump_pos)) {
+          IF_DEBUG2
+          {
+            auto s = string_sprintf("Fianl jump position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
+            AI_LOG(s);
+          }
+
+          //
+          // Give up. Don't bump the tick. This allows the monst to try an alternative path.
+          //
+          AI_LOG("Failed to jump cannot jump over hazards");
+          clear_move_path("Failed to jump cannot jump over all hazards");
+          infop()->last_failed_jump_at = curr_at;
+          return false;
         } else if (try_to_jump_carefully(jump_pos, &too_far)) {
           AI_LOG("Jumped carefully");
           if (is_player()) {
@@ -183,7 +200,8 @@ bool Thing::path_pop_next_move(void)
           }
 
           if (is_player() && game->robot_mode) {
-            game->tick_begin("Failed to jump");
+            AI_LOG("Failed to jump carefully; try wandering instead");
+            return ai_wander();
           }
           return false;
         }

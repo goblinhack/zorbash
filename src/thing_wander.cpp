@@ -299,8 +299,17 @@ bool Thing::ai_wander(void)
 
     if (is_able_to_jump()) {
       dbg("Blocked on all sides, try jumping");
-      if (try_harder_to_jump()) {
-        return true;
+      if (health() < health_max() / 5) {
+        //
+        // May jump into something bad out of desperation
+        //
+        if (try_harder_to_jump()) {
+          return true;
+        }
+      } else {
+        if (try_to_jump()) {
+          return true;
+        }
       }
     }
     dbg("AI wander blocked");
@@ -310,8 +319,17 @@ bool Thing::ai_wander(void)
   if (ai_blocked()) {
     dbg("Blocked on all sides except current pos, try jumping");
     if (is_able_to_jump()) {
-      if (try_harder_to_jump()) {
-        return true;
+      //
+      // May jump into something bad out of desperation
+      //
+      if (health() < health_max() / 5) {
+        if (try_to_jump()) {
+          return true;
+        }
+      } else {
+        if (try_harder_to_jump()) {
+          return true;
+        }
       }
     }
 
