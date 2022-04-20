@@ -777,31 +777,32 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       //
       if (attack_options->attack_poison) {
         if (level->is_gas_poison(curr_at.x, curr_at.y)) {
-          msg("%%fg=yellow$Poison burns your lungs for %s%d damage!%%fg=reset$", damage_type.c_str(), damage);
+          real_hitter->msg("%%fg=yellow$Poison burns your lungs for %s%d damage!%%fg=reset$", damage_type.c_str(),
+                           damage);
         } else {
-          msg("%%fg=yellow$Poison circulates through your veins for %s%d damage!%%fg=reset$", damage_type.c_str(),
-              damage);
+          real_hitter->msg("%%fg=yellow$Poison circulates through your veins for %s%d damage!%%fg=reset$",
+                           damage_type.c_str(), damage);
         }
       } else if (hitter->is_weapon()) {
-        msg("%%fg=orange$You hit yourself for %d %sdamage with %s!%%fg=reset$", damage, damage_type.c_str(),
-            hitter->text_the().c_str());
+        real_hitter->msg("%%fg=orange$You hit yourself for %d %sdamage with %s!%%fg=reset$", damage,
+                         damage_type.c_str(), hitter->text_the().c_str());
       } else if (hitter->is_laser()) {
-        msg("%%fg=orange$You zap yourself for %d %sdamage with %s!%%fg=reset$", damage, damage_type.c_str(),
-            hitter->text_the().c_str());
+        real_hitter->msg("%%fg=orange$You zap yourself for %d %sdamage with %s!%%fg=reset$", damage,
+                         damage_type.c_str(), hitter->text_the().c_str());
       } else if (hitter->is_item_magical()) {
-        msg("%%fg=orange$You blast yourself for %d %sdamage with %s!%%fg=reset$", damage, damage_type.c_str(),
-            hitter->text_the().c_str());
+        real_hitter->msg("%%fg=orange$You blast yourself for %d %sdamage with %s!%%fg=reset$", damage,
+                         damage_type.c_str(), hitter->text_the().c_str());
       } else if (attack_options->attack_fire) {
-        msg("%%fg=orange$You burn for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
+        real_hitter->msg("%%fg=orange$You burn for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
       } else if (attack_options->attack_cold) {
-        msg("%%fg=cyan$Your skin blisters for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
+        real_hitter->msg("%%fg=cyan$Your skin blisters for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
       } else if (attack_options->attack_necrosis) {
-        msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
+        real_hitter->msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
       } else if (attack_options->attack_stamina) {
-        msg("%%fg=limegreen$Your stamina feels drained!%%fg=reset$");
+        real_hitter->msg("%%fg=limegreen$Your stamina feels drained!%%fg=reset$");
       } else {
-        msg("%%fg=orange$You hurt yourself for %d %sdamage with %s!%%fg=reset$", damage, damage_type.c_str(),
-            hitter->text_the().c_str());
+        real_hitter->msg("%%fg=orange$You hurt yourself for %d %sdamage with %s!%%fg=reset$", damage,
+                         damage_type.c_str(), hitter->text_the().c_str());
       }
     } else {
       if (is_dead || is_dying) {

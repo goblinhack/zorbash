@@ -116,6 +116,24 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
     return false;
   }
 
+  IF_DEBUG2
+  {
+    AI_LOG("All goals:");
+    TRACE_AND_INDENT();
+    for (auto &g : goalmaps) {
+      AI_LOG("Goalmap:");
+      TRACE_AND_INDENT();
+      for (const auto &goal : g.goals) {
+        auto s = string_sprintf("Goal, prio %d score %d @(%d,%d) %s", (int) goal.prio, (int) goal.score,
+                                (int) goal.at.x, (int) goal.at.y, goal.msg.c_str());
+        AI_LOG(s);
+      }
+    }
+  }
+
+  AI_LOG("Process goals:");
+  TRACE_AND_INDENT();
+
   for (auto &g : goalmaps) {
     IF_DEBUG2
     {
@@ -831,7 +849,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
-        AI_LOG("Can see cand", it);
+        // AI_LOG("Can see cand", it);
 
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           continue;
@@ -883,7 +901,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           }
         }
 
-        AI_LOG("Can see", it);
+        // AI_LOG("Can see", it);
 
         auto goal_penalty = goal_penalty_get(it);
 
@@ -961,7 +979,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           // then it's not really fair to use that knowledge.
           //
           if (lit_recently) {
-            dbg("AI: Consider attacking? %s%s%s%s", it->to_short_string().c_str(), is_enemy(it) ? ", is enemy" : "",
+            dbg("AI: Consider attacking (my health %d, its health %d) ? %s%s%s%s", my_health, it_health,
+                it->to_short_string().c_str(), is_enemy(it) ? ", is enemy" : "",
                 is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
 
             if (is_enemy(it) && (dist <= max_dist)) {
@@ -1000,10 +1019,14 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               }
             } else if (it->is_mob() && is_able_to_attack_mobs()) {
               //
-              // Very close, high priority attack
+              // Very close, very high priority attack as they can spawn much danger!
               //
-              GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-mob", it);
-            } else if (possible_to_attack(it)) {
+              GOAL_ADD(GOAL_PRIO_VERY_HIGH, 100 + (int) (max_dist - dist) * health_diff - goal_penalty,
+                       "attack-nearby-mob", it);
+            } else if (it->is_alive_monst() && possible_to_attack(it)) {
+              //
+              // The alive monst check is to avoid attacking pools of blood.
+              //
               if (dist < 2) {
                 //
                 // Very close, high priority attack
