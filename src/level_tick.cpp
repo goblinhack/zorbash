@@ -79,8 +79,6 @@ void Level::handle_input_events(void)
   // key presses.
   //
   if (((player && player->aip()->move_path.size()) || game->request_player_move)) {
-    //    && time_have_x_hundredths_passed_since(15, game->request_player_move))
-
     //
     // Move time along a bit if the player is waiting to move. This will cause movements and jumps to complete
     // sooner and should result in the flag below being cleared.
@@ -146,32 +144,6 @@ void Level::tick(void)
 
   things_gc_if_possible();
 
-  if (fade_out_finished) {
-    if (player && player->is_waiting_to_descend_dungeon) {
-      if (! player->descend_dungeon()) {
-        player->err("Failed to descend dungeon");
-      }
-    }
-    if (player && player->is_waiting_to_ascend_dungeon) {
-      if (! player->ascend_dungeon()) {
-        player->err("Failed to ascend dungeon");
-      }
-    }
-    if (player && player->is_waiting_to_descend_sewer) {
-      if (! player->descend_sewer()) {
-        player->err("Failed to descend sewer");
-      }
-    }
-    if (player && player->is_waiting_to_ascend_sewer) {
-      if (! player->ascend_sewer()) {
-        player->err("Failed to ascend sewer");
-      }
-    }
-    if (player && player->is_waiting_to_leave_level_has_completed_fall) {
-      player->fall_to_next_level();
-    }
-  }
-
   //
   // Update the cursor position. But only if the mouse has moved. So if the
   // player is moving via keyboard alone, we don't pollute the screen.
@@ -210,6 +182,53 @@ void Level::tick(void)
   // Is there a tick in progress?
   //
   if (! game->tick_begin_ms) {
+    //
+    // If the level has started, we can enter robot mode.
+    //
+    if (! ts_fade_in_begin) {
+      if (game->robot_mode_requested != game->robot_mode) {
+        LOG("INF: Pressed requested robot change");
+        game->robot_mode                = game->robot_mode_requested;
+        game->robot_mode_tick_requested = true;
+        wid_actionbar_robot_mode_update();
+        if (game->robot_mode) {
+          game->tick_begin("robot mode");
+          LOG("INF: Robot mode");
+        } else {
+          LOG("INF: Robot mode off");
+        }
+      }
+    }
+
+    //
+    // Check for level transitions
+    //
+    if (fade_out_finished) {
+      if (player && player->is_waiting_to_descend_dungeon) {
+        if (! player->descend_dungeon()) {
+          player->err("Failed to descend dungeon");
+        }
+      }
+      if (player && player->is_waiting_to_ascend_dungeon) {
+        if (! player->ascend_dungeon()) {
+          player->err("Failed to ascend dungeon");
+        }
+      }
+      if (player && player->is_waiting_to_descend_sewer) {
+        if (! player->descend_sewer()) {
+          player->err("Failed to descend sewer");
+        }
+      }
+      if (player && player->is_waiting_to_ascend_sewer) {
+        if (! player->ascend_sewer()) {
+          player->err("Failed to ascend sewer");
+        }
+      }
+      if (player && player->is_waiting_to_leave_level_has_completed_fall) {
+        player->fall_to_next_level();
+      }
+    }
+
     if (game->things_are_moving) {
       ERR("No tick in progress but things are still moving");
     }
@@ -533,6 +552,24 @@ void Level::tick(void)
   TRACE_AND_INDENT();
   bool tick_done = game->tick_end();
 
+  //
+  // Check for robot mode changes
+  //
+  if (! ts_fade_in_begin) {
+    if (game->robot_mode_requested != game->robot_mode) {
+      LOG("INF: Pressed requested robot change");
+      game->robot_mode                = game->robot_mode_requested;
+      game->robot_mode_tick_requested = true;
+      wid_actionbar_robot_mode_update();
+      if (game->robot_mode) {
+        game->tick_begin("robot mode");
+        LOG("INF: Robot mode");
+      } else {
+        LOG("INF: Robot mode off");
+      }
+    }
+  }
+
   if (tick_done) {
     dbg("Level tick done");
     TRACE_AND_INDENT();
@@ -552,24 +589,6 @@ void Level::tick(void)
     } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
     CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
 #endif
-  }
-
-  //
-  // If the level has started, we can enter robot mode.
-  //
-  if (! ts_fade_in_begin) {
-    if (game->robot_mode_requested != game->robot_mode) {
-      LOG("INF: Pressed requested robot change");
-      game->robot_mode                = game->robot_mode_requested;
-      game->robot_mode_tick_requested = true;
-      wid_actionbar_robot_mode_update();
-      if (game->robot_mode) {
-        game->tick_begin("robot mode");
-        LOG("INF: Robot mode");
-      } else {
-        LOG("INF: Robot mode off");
-      }
-    }
   }
 
   if (tick_done) {

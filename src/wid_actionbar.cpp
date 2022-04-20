@@ -159,6 +159,7 @@ void wid_actionbar_robot_mode_toggle(void)
 
   wid_actionbar_close_all_popups();
   game->robot_mode_requested = ! game->robot_mode_requested;
+  DBG3("Actionbar robot: robot_mode_requested %d robot_mode %d", game->robot_mode_requested, game->robot_mode);
   wid_actionbar_init();
 }
 
