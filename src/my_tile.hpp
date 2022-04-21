@@ -35,6 +35,9 @@ public:
   Tile(const class Tile *tile);
 
   std::string name;
+  std::string ascii_char;
+  std::string ascii_fg;
+  std::string ascii_bg;
 
   //
   // Grabbed by a template

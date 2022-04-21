@@ -470,7 +470,8 @@ def tp_init(name, text_name, short_text_name, title):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 900
-    my.tile(self, tile=name + ".1", is_dir_left=True, is_moving=True, delay_ms=delay, frame=1)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="none",
+            tile=name + ".1", is_dir_left=True, is_moving=True, delay_ms=delay, frame=1)
     my.tile(self, tile=name + ".2", is_dir_left=True, is_moving=True, delay_ms=delay, frame=2)
     my.tile(self, tile=name + ".3", is_dir_left=True, is_moving=True, delay_ms=delay, frame=3)
     my.tile(self, tile=name + ".4", is_dir_left=True, is_moving=True, delay_ms=delay, frame=4)
