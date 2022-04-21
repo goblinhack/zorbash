@@ -28,8 +28,7 @@ void sdl_loop(void)
   SDL_Event events[ 10 ];
   int       found;
   int       i;
-  int       frames   = 0;
-  bool      too_slow = false;
+  int       frames = 0;
 
   sdl_mouse_center();
   SDL_SetEventFilter(sdl_filter_events, 0);

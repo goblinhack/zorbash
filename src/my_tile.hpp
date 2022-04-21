@@ -38,6 +38,8 @@ public:
   std::string ascii_char;
   std::string ascii_fg;
   std::string ascii_bg;
+  color       ascii_fg_col;
+  color       ascii_bg_col;
 
   //
   // Grabbed by a template

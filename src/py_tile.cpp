@@ -375,11 +375,15 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
       if (ascii_char) {
         tile->ascii_char = ascii_char;
       }
+
       if (ascii_bg) {
-        tile->ascii_bg = ascii_bg;
+        tile->ascii_bg     = ascii_bg;
+        tile->ascii_bg_col = color_find(ascii_bg);
       }
+
       if (ascii_fg) {
-        tile->ascii_fg = ascii_fg;
+        tile->ascii_fg     = ascii_fg;
+        tile->ascii_fg_col = color_find(ascii_fg);
       }
 
       tile->is_yyy5                = is_yyy5;
