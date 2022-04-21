@@ -10,66 +10,68 @@
 #include <strings.h> // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
-color LIGHTGREEN;
+color HOT_PINK;
+color HOTPINK;
 color HOTPINK1;
 color HOTPINK2;
 color HOTPINK3;
 color HOTPINK4;
-color HOT_PINK;
-color HOTPINK;
+color INDIAN_RED;
+color INDIANRED;
 color INDIANRED1;
 color INDIANRED2;
 color INDIANRED3;
 color INDIANRED4;
-color INDIAN_RED;
-color INDIANRED;
+color IVORY;
 color IVORY1;
 color IVORY2;
 color IVORY3;
 color IVORY4;
-color IVORY;
+color KHAKI;
 color KHAKI1;
 color KHAKI2;
 color KHAKI3;
 color KHAKI4;
-color KHAKI;
 color LAVENDER;
+color LEMON_CHIFFON;
+color LEMONCHIFFON;
 color LEMONCHIFFON1;
 color LEMONCHIFFON2;
 color LEMONCHIFFON3;
 color LEMONCHIFFON4;
-color LEMON_CHIFFON;
-color LEMONCHIFFON;
+color LIGHTBLUE;
 color LIGHTBLUE1;
 color LIGHTBLUE2;
 color LIGHTBLUE3;
 color LIGHTBLUE4;
-color LIGHTBLUE;
 color LIGHTCORAL;
+color LIGHTCYAN;
 color LIGHTCYAN1;
 color LIGHTCYAN2;
 color LIGHTCYAN3;
 color LIGHTCYAN4;
-color LIGHTCYAN;
 color LIGHTGRAY;
+color LIGHTGREEN;
+color LIGHTGREY;
+color LIGHTPINK;
 color LIGHTPINK1;
 color LIGHTPINK2;
 color LIGHTPINK3;
 color LIGHTPINK4;
-color LIGHTPINK;
 color LIGHTSEAGREEN;
+color LIGHTSKYBLUE;
 color LIGHTSKYBLUE1;
 color LIGHTSKYBLUE2;
 color LIGHTSKYBLUE3;
 color LIGHTSKYBLUE4;
-color LIGHTSKYBLUE;
 color LIGHTSLATEBLUE;
 color LIGHTSLATEGRAY;
+color LIGHTSLATEGREY;
 
 void color_init3(void)
 {
   TRACE_AND_INDENT();
-  color_set("lightgreen", &LIGHTGREEN, 144, 238, 144, 255);
+
   color_set("hotpink1", &HOTPINK1, 255, 110, 180, 255);
   color_set("hotpink2", &HOTPINK2, 238, 106, 167, 255);
   color_set("hotpink3", &HOTPINK3, 205, 96, 144, 255);
@@ -109,6 +111,8 @@ void color_init3(void)
   color_set("lightcyan4", &LIGHTCYAN4, 122, 139, 139, 255);
   color_set("lightcyan", &LIGHTCYAN, 224, 255, 255, 255);
   color_set("lightgray", &LIGHTGRAY, 211, 211, 211, 255);
+  color_set("lightgrey", &LIGHTGREY, 211, 211, 211, 255);
+  color_set("lightgreen", &LIGHTGREEN, 144, 238, 144, 255);
   color_set("lightpink1", &LIGHTPINK1, 255, 174, 185, 255);
   color_set("lightpink2", &LIGHTPINK2, 238, 162, 173, 255);
   color_set("lightpink3", &LIGHTPINK3, 205, 140, 149, 255);
@@ -122,4 +126,5 @@ void color_init3(void)
   color_set("lightskyblue", &LIGHTSKYBLUE, 135, 206, 250, 255);
   color_set("lightslateblue", &LIGHTSLATEBLUE, 132, 112, 255, 255);
   color_set("lightslategray", &LIGHTSLATEGRAY, 119, 136, 153, 255);
+  color_set("lightslategrey", &LIGHTSLATEGREY, 119, 136, 153, 255);
 }

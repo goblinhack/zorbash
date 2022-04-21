@@ -470,71 +470,125 @@ def tp_init(name, text_name, short_text_name, title):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 900
-    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="none",
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
             tile=name + ".1", is_dir_left=True, is_moving=True, delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", is_dir_left=True, is_moving=True, delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", is_dir_left=True, is_moving=True, delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", is_dir_left=True, is_moving=True, delay_ms=delay, frame=4)
-    my.tile(self, tile=name + ".5", is_dir_left=True, is_moving=True, delay_ms=delay, frame=5)
-    my.tile(self, tile=name + ".6", is_dir_left=True, is_moving=True, delay_ms=delay, frame=6)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".2", is_dir_left=True, is_moving=True, delay_ms=delay, frame=2)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".3", is_dir_left=True, is_moving=True, delay_ms=delay, frame=3)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".4", is_dir_left=True, is_moving=True, delay_ms=delay, frame=4)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".5", is_dir_left=True, is_moving=True, delay_ms=delay, frame=5)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".6", is_dir_left=True, is_moving=True, delay_ms=delay, frame=6)
 
-    my.tile(self, tile=name + ".1", is_dir_up=True, is_moving=True, delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", is_dir_up=True, is_moving=True, delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", is_dir_up=True, is_moving=True, delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", is_dir_up=True, is_moving=True, delay_ms=delay, frame=4)
-    my.tile(self, tile=name + ".5", is_dir_up=True, is_moving=True, delay_ms=delay, frame=5)
-    my.tile(self, tile=name + ".6", is_dir_up=True, is_moving=True, delay_ms=delay, frame=6)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".1", is_dir_up=True, is_moving=True, delay_ms=delay, frame=1)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".2", is_dir_up=True, is_moving=True, delay_ms=delay, frame=2)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".3", is_dir_up=True, is_moving=True, delay_ms=delay, frame=3)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".4", is_dir_up=True, is_moving=True, delay_ms=delay, frame=4)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".5", is_dir_up=True, is_moving=True, delay_ms=delay, frame=5)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".6", is_dir_up=True, is_moving=True, delay_ms=delay, frame=6)
 
-    my.tile(self, tile=name + ".1", is_dir_down=True, is_moving=True, delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", is_dir_down=True, is_moving=True, delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", is_dir_down=True, is_moving=True, delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", is_dir_down=True, is_moving=True, delay_ms=delay, frame=4)
-    my.tile(self, tile=name + ".5", is_dir_down=True, is_moving=True, delay_ms=delay, frame=5)
-    my.tile(self, tile=name + ".6", is_dir_down=True, is_moving=True, delay_ms=delay, frame=6)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".1", is_dir_down=True, is_moving=True, delay_ms=delay, frame=1)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".2", is_dir_down=True, is_moving=True, delay_ms=delay, frame=2)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".3", is_dir_down=True, is_moving=True, delay_ms=delay, frame=3)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".4", is_dir_down=True, is_moving=True, delay_ms=delay, frame=4)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".5", is_dir_down=True, is_moving=True, delay_ms=delay, frame=5)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".6", is_dir_down=True, is_moving=True, delay_ms=delay, frame=6)
 
-    my.tile(self, tile=name + ".1", is_dir_right=True, is_moving=True, delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", is_dir_right=True, is_moving=True, delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", is_dir_right=True, is_moving=True, delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", is_dir_right=True, is_moving=True, delay_ms=delay, frame=4)
-    my.tile(self, tile=name + ".5", is_dir_right=True, is_moving=True, delay_ms=delay, frame=5)
-    my.tile(self, tile=name + ".6", is_dir_right=True, is_moving=True, delay_ms=delay, frame=6)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".1", is_dir_right=True, is_moving=True, delay_ms=delay, frame=1)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".2", is_dir_right=True, is_moving=True, delay_ms=delay, frame=2)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".3", is_dir_right=True, is_moving=True, delay_ms=delay, frame=3)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".4", is_dir_right=True, is_moving=True, delay_ms=delay, frame=4)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".5", is_dir_right=True, is_moving=True, delay_ms=delay, frame=5)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".6", is_dir_right=True, is_moving=True, delay_ms=delay, frame=6)
 
-    my.tile(self, tile=name + ".1", is_dir_left=True, delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", is_dir_left=True, delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", is_dir_left=True, delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", is_dir_left=True, delay_ms=delay, frame=4)
-    my.tile(self, tile=name + ".5", is_dir_left=True, delay_ms=delay, frame=5)
-    my.tile(self, tile=name + ".6", is_dir_left=True, delay_ms=delay, frame=6)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".1", is_dir_left=True, delay_ms=delay, frame=1)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".2", is_dir_left=True, delay_ms=delay, frame=2)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".3", is_dir_left=True, delay_ms=delay, frame=3)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".4", is_dir_left=True, delay_ms=delay, frame=4)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".5", is_dir_left=True, delay_ms=delay, frame=5)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".6", is_dir_left=True, delay_ms=delay, frame=6)
 
-    my.tile(self, tile=name + ".1", is_dir_up=True, delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", is_dir_up=True, delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", is_dir_up=True, delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", is_dir_up=True, delay_ms=delay, frame=4)
-    my.tile(self, tile=name + ".5", is_dir_up=True, delay_ms=delay, frame=5)
-    my.tile(self, tile=name + ".6", is_dir_up=True, delay_ms=delay, frame=6)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".1", is_dir_up=True, delay_ms=delay, frame=1)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".2", is_dir_up=True, delay_ms=delay, frame=2)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".3", is_dir_up=True, delay_ms=delay, frame=3)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".4", is_dir_up=True, delay_ms=delay, frame=4)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".5", is_dir_up=True, delay_ms=delay, frame=5)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".6", is_dir_up=True, delay_ms=delay, frame=6)
 
-    my.tile(self, tile=name + ".1", is_dir_down=True, delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", is_dir_down=True, delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", is_dir_down=True, delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", is_dir_down=True, delay_ms=delay, frame=4)
-    my.tile(self, tile=name + ".5", is_dir_down=True, delay_ms=delay, frame=5)
-    my.tile(self, tile=name + ".6", is_dir_down=True, delay_ms=delay, frame=6)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".1", is_dir_down=True, delay_ms=delay, frame=1)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".2", is_dir_down=True, delay_ms=delay, frame=2)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".3", is_dir_down=True, delay_ms=delay, frame=3)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".4", is_dir_down=True, delay_ms=delay, frame=4)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".5", is_dir_down=True, delay_ms=delay, frame=5)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".6", is_dir_down=True, delay_ms=delay, frame=6)
 
-    my.tile(self, tile=name + ".1", is_dir_right=True, delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", is_dir_right=True, delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", is_dir_right=True, delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", is_dir_right=True, delay_ms=delay, frame=4)
-    my.tile(self, tile=name + ".5", is_dir_right=True, delay_ms=delay, frame=5)
-    my.tile(self, tile=name + ".6", is_dir_right=True, delay_ms=delay, frame=6)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".1", is_dir_right=True, delay_ms=delay, frame=1)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".2", is_dir_right=True, delay_ms=delay, frame=2)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".3", is_dir_right=True, delay_ms=delay, frame=3)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".4", is_dir_right=True, delay_ms=delay, frame=4)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".5", is_dir_right=True, delay_ms=delay, frame=5)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".6", is_dir_right=True, delay_ms=delay, frame=6)
 
-    my.tile(self, tile=name + ".1", is_dir_none=True, delay_ms=delay, frame=1)
-    my.tile(self, tile=name + ".2", is_dir_none=True, delay_ms=delay, frame=2)
-    my.tile(self, tile=name + ".3", is_dir_none=True, delay_ms=delay, frame=3)
-    my.tile(self, tile=name + ".4", is_dir_none=True, delay_ms=delay, frame=4)
-    my.tile(self, tile=name + ".5", is_dir_none=True, delay_ms=delay, frame=5)
-    my.tile(self, tile=name + ".6", is_dir_none=True, delay_ms=delay, frame=6)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".1", is_dir_none=True, delay_ms=delay, frame=1)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".2", is_dir_none=True, delay_ms=delay, frame=2)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".3", is_dir_none=True, delay_ms=delay, frame=3)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".4", is_dir_none=True, delay_ms=delay, frame=4)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".5", is_dir_none=True, delay_ms=delay, frame=5)
+    my.tile(self, ascii_char="@", ascii_fg="pink", ascii_bg="",
+            tile=name + ".6", is_dir_none=True, delay_ms=delay, frame=6)
 
-    my.tile(self, tile=name + ".dead", is_dead=True)
+    my.tile(self, ascii_char="@", ascii_fg="grey", ascii_bg="",
+            tile=name + ".dead", is_dead=True)
 
     my.tp_update(self)
 

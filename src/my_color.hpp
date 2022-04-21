@@ -95,130 +95,160 @@ public:
   friend bool operator!=(const color &c, const color &b) { return (! (c == b)); }
 };
 
-extern color GRAY5;
 extern color ALICE_BLUE;
 extern color ALICEBLUE;
+extern color ANTIQUE_WHITE;
+extern color ANTIQUEWHITE;
 extern color ANTIQUEWHITE1;
 extern color ANTIQUEWHITE2;
 extern color ANTIQUEWHITE3;
 extern color ANTIQUEWHITE4;
-extern color ANTIQUE_WHITE;
-extern color ANTIQUEWHITE;
+extern color AQUAMARINE;
 extern color AQUAMARINE1;
 extern color AQUAMARINE2;
 extern color AQUAMARINE3;
 extern color AQUAMARINE4;
-extern color AQUAMARINE;
+extern color AZURE;
 extern color AZURE1;
 extern color AZURE2;
 extern color AZURE3;
 extern color AZURE4;
-extern color AZURE;
 extern color BEIGE;
+extern color BISQUE;
 extern color BISQUE1;
 extern color BISQUE2;
 extern color BISQUE3;
 extern color BISQUE4;
-extern color BISQUE;
+extern color BLACK;
 extern color BLANCHEDALMOND;
+extern color BLUE;
+extern color BLUE1;
+extern color BLUE2;
+extern color BLUE3;
+extern color BLUE4;
 extern color BLUE_VIOLET;
 extern color BLUEVIOLET;
+extern color BROWN;
+extern color BROWN1;
+extern color BROWN2;
+extern color BROWN3;
+extern color BROWN4;
+extern color BURLYWOOD;
 extern color BURLYWOOD1;
 extern color BURLYWOOD2;
 extern color BURLYWOOD3;
 extern color BURLYWOOD4;
-extern color BURLYWOOD;
+extern color CADET_BLUE;
+extern color CADETBLUE;
 extern color CADETBLUE1;
 extern color CADETBLUE2;
 extern color CADETBLUE3;
 extern color CADETBLUE4;
-extern color CADET_BLUE;
-extern color CADETBLUE;
+extern color CHARTREUSE;
 extern color CHARTREUSE1;
 extern color CHARTREUSE2;
 extern color CHARTREUSE3;
 extern color CHARTREUSE4;
-extern color CHARTREUSE;
+extern color CHOCOLATE;
 extern color CHOCOLATE1;
 extern color CHOCOLATE2;
 extern color CHOCOLATE3;
 extern color CHOCOLATE4;
-extern color CHOCOLATE;
+extern color COLOR_NONE;
+extern color CORAL;
 extern color CORAL1;
 extern color CORAL2;
 extern color CORAL3;
 extern color CORAL4;
-extern color CORAL;
 extern color CORNFLOWER_BLUE;
 extern color CORNFLOWERBLUE;
+extern color CORNSILK;
 extern color CORNSILK1;
 extern color CORNSILK2;
 extern color CORNSILK3;
 extern color CORNSILK4;
-extern color CORNSILK;
+extern color CYAN;
 extern color CYAN1;
 extern color CYAN2;
 extern color CYAN3;
 extern color CYAN4;
+extern color DARKBLUE;
 extern color DARKCYAN;
+extern color DARKGRAY;
+extern color DARKGREEN;
+extern color DARKGREY;
 extern color DARKKHAKI;
 extern color DARKMAGENTA;
+extern color DARKOLIVEGREEN;
 extern color DARKOLIVEGREEN1;
 extern color DARKOLIVEGREEN2;
 extern color DARKOLIVEGREEN3;
 extern color DARKOLIVEGREEN4;
-extern color DARKOLIVEGREEN;
+extern color DARKORANGE;
 extern color DARKORANGE1;
 extern color DARKORANGE2;
 extern color DARKORANGE3;
 extern color DARKORANGE4;
-extern color DARKORANGE;
+extern color DARKRED;
+extern color DARKSEAGREEN;
 extern color DARKSEAGREEN1;
 extern color DARKSEAGREEN2;
 extern color DARKSEAGREEN3;
 extern color DARKSEAGREEN4;
-extern color DARKSEAGREEN;
 extern color DARKSLATEBLUE;
-extern color DARKSLATEBLUE;
-extern color VDARKSLATEBLUE;
-extern color VVDARKSLATEBLUE;
+extern color DARKSLATEGRAY;
 extern color DARKSLATEGRAY1;
 extern color DARKSLATEGRAY2;
 extern color DARKSLATEGRAY3;
 extern color DARKSLATEGRAY4;
-extern color DARKSLATEGRAY;
+extern color DARKSLATEGREY;
+extern color DARKSLATEGREY1;
+extern color DARKSLATEGREY2;
+extern color DARKSLATEGREY3;
+extern color DARKSLATEGREY4;
 extern color DARKTURQUOISE;
 extern color DARKVIOLET;
+extern color DEEP_PINK;
+extern color DEEPPINK;
 extern color DEEPPINK1;
 extern color DEEPPINK2;
 extern color DEEPPINK3;
 extern color DEEPPINK4;
-extern color DEEP_PINK;
-extern color DEEPPINK;
+extern color DEEPSKYBLUE;
 extern color DEEPSKYBLUE1;
 extern color DEEPSKYBLUE2;
 extern color DEEPSKYBLUE3;
 extern color DEEPSKYBLUE4;
-extern color DEEPSKYBLUE;
 extern color DIM_GRAY;
 extern color DIMGRAY;
+extern color DIM_GREY;
+extern color DIMGREY;
+extern color DODGER_BLUE;
+extern color DODGERBLUE;
 extern color DODGERBLUE1;
 extern color DODGERBLUE2;
 extern color DODGERBLUE3;
 extern color DODGERBLUE4;
-extern color DODGER_BLUE;
-extern color DODGERBLUE;
+extern color FIREBRICK;
 extern color FIREBRICK1;
 extern color FIREBRICK2;
 extern color FIREBRICK3;
 extern color FIREBRICK4;
-extern color FIREBRICK;
 extern color FLORAL_WHITE;
 extern color FLORALWHITE;
 extern color FOREST_GREEN;
+extern color FORESTGREEN;
 extern color GAINSBORO;
 extern color GHOST_WHITE;
 extern color GHOSTWHITE;
+extern color GOLD;
+extern color GOLD1;
+extern color GOLD2;
+extern color GOLD3;
+extern color GOLD4;
+extern color GRAY;
+extern color GRAY1;
+extern color GRAY10;
 extern color GRAY11;
 extern color GRAY12;
 extern color GRAY13;
@@ -228,7 +258,8 @@ extern color GRAY16;
 extern color GRAY17;
 extern color GRAY18;
 extern color GRAY19;
-extern color GRAY1;
+extern color GRAY2;
+extern color GRAY20;
 extern color GRAY21;
 extern color GRAY22;
 extern color GRAY23;
@@ -238,7 +269,9 @@ extern color GRAY26;
 extern color GRAY27;
 extern color GRAY28;
 extern color GRAY29;
-extern color GRAY2;
+extern color GRAY3;
+extern color GRAY30;
+extern color GRAY31;
 extern color GRAY32;
 extern color GRAY33;
 extern color GRAY34;
@@ -247,7 +280,8 @@ extern color GRAY36;
 extern color GRAY37;
 extern color GRAY38;
 extern color GRAY39;
-extern color GRAY3;
+extern color GRAY4;
+extern color GRAY40;
 extern color GRAY41;
 extern color GRAY42;
 extern color GRAY43;
@@ -257,7 +291,8 @@ extern color GRAY46;
 extern color GRAY47;
 extern color GRAY48;
 extern color GRAY49;
-extern color GRAY4;
+extern color GRAY5;
+extern color GRAY50;
 extern color GRAY51;
 extern color GRAY52;
 extern color GRAY53;
@@ -267,6 +302,8 @@ extern color GRAY56;
 extern color GRAY57;
 extern color GRAY58;
 extern color GRAY59;
+extern color GRAY6;
+extern color GRAY60;
 extern color GRAY61;
 extern color GRAY62;
 extern color GRAY63;
@@ -276,7 +313,8 @@ extern color GRAY66;
 extern color GRAY67;
 extern color GRAY68;
 extern color GRAY69;
-extern color GRAY6;
+extern color GRAY7;
+extern color GRAY70;
 extern color GRAY71;
 extern color GRAY72;
 extern color GRAY73;
@@ -286,7 +324,8 @@ extern color GRAY76;
 extern color GRAY77;
 extern color GRAY78;
 extern color GRAY79;
-extern color GRAY7;
+extern color GRAY8;
+extern color GRAY80;
 extern color GRAY81;
 extern color GRAY82;
 extern color GRAY83;
@@ -296,7 +335,8 @@ extern color GRAY86;
 extern color GRAY87;
 extern color GRAY88;
 extern color GRAY89;
-extern color GRAY8;
+extern color GRAY9;
+extern color GRAY90;
 extern color GRAY91;
 extern color GRAY92;
 extern color GRAY93;
@@ -306,97 +346,200 @@ extern color GRAY96;
 extern color GRAY97;
 extern color GRAY98;
 extern color GRAY99;
-extern color GRAY9;
+extern color GREEN;
 extern color GREEN1;
 extern color GREEN2;
 extern color GREEN3;
 extern color GREEN4;
 extern color GREEN_YELLOW;
 extern color GREENYELLOW;
+extern color GREY;
+extern color GREY1;
+extern color GREY10;
+extern color GREY11;
+extern color GREY12;
+extern color GREY13;
+extern color GREY14;
+extern color GREY15;
+extern color GREY16;
+extern color GREY17;
+extern color GREY18;
+extern color GREY19;
+extern color GREY2;
+extern color GREY20;
+extern color GREY21;
+extern color GREY22;
+extern color GREY23;
+extern color GREY24;
+extern color GREY25;
+extern color GREY26;
+extern color GREY27;
+extern color GREY28;
+extern color GREY29;
+extern color GREY3;
+extern color GREY30;
+extern color GREY31;
+extern color GREY32;
+extern color GREY33;
+extern color GREY34;
+extern color GREY35;
+extern color GREY36;
+extern color GREY37;
+extern color GREY38;
+extern color GREY39;
+extern color GREY4;
+extern color GREY40;
+extern color GREY41;
+extern color GREY42;
+extern color GREY43;
+extern color GREY44;
+extern color GREY45;
+extern color GREY46;
+extern color GREY47;
+extern color GREY48;
+extern color GREY49;
+extern color GREY5;
+extern color GREY50;
+extern color GREY51;
+extern color GREY52;
+extern color GREY53;
+extern color GREY54;
+extern color GREY55;
+extern color GREY56;
+extern color GREY57;
+extern color GREY58;
+extern color GREY59;
+extern color GREY6;
+extern color GREY60;
+extern color GREY61;
+extern color GREY62;
+extern color GREY63;
+extern color GREY64;
+extern color GREY65;
+extern color GREY66;
+extern color GREY67;
+extern color GREY68;
+extern color GREY69;
+extern color GREY7;
+extern color GREY70;
+extern color GREY71;
+extern color GREY72;
+extern color GREY73;
+extern color GREY74;
+extern color GREY75;
+extern color GREY76;
+extern color GREY77;
+extern color GREY78;
+extern color GREY79;
+extern color GREY8;
+extern color GREY80;
+extern color GREY81;
+extern color GREY82;
+extern color GREY83;
+extern color GREY84;
+extern color GREY85;
+extern color GREY86;
+extern color GREY87;
+extern color GREY88;
+extern color GREY89;
+extern color GREY9;
+extern color GREY90;
+extern color GREY91;
+extern color GREY92;
+extern color GREY93;
+extern color GREY94;
+extern color GREY95;
+extern color GREY96;
+extern color GREY97;
+extern color GREY98;
+extern color GREY99;
+extern color HOT_PINK;
+extern color HOTPINK;
 extern color HOTPINK1;
 extern color HOTPINK2;
 extern color HOTPINK3;
 extern color HOTPINK4;
-extern color HOT_PINK;
-extern color HOTPINK;
+extern color INDIAN_RED;
+extern color INDIANRED;
 extern color INDIANRED1;
 extern color INDIANRED2;
 extern color INDIANRED3;
 extern color INDIANRED4;
-extern color INDIAN_RED;
-extern color INDIANRED;
+extern color IVORY;
 extern color IVORY1;
 extern color IVORY2;
 extern color IVORY3;
 extern color IVORY4;
-extern color IVORY;
+extern color KHAKI;
 extern color KHAKI1;
 extern color KHAKI2;
 extern color KHAKI3;
 extern color KHAKI4;
-extern color KHAKI;
 extern color LAVENDER;
+extern color LEMON_CHIFFON;
+extern color LEMONCHIFFON;
 extern color LEMONCHIFFON1;
 extern color LEMONCHIFFON2;
 extern color LEMONCHIFFON3;
 extern color LEMONCHIFFON4;
-extern color LEMON_CHIFFON;
-extern color LEMONCHIFFON;
+extern color LIGHTBLUE;
 extern color LIGHTBLUE1;
 extern color LIGHTBLUE2;
 extern color LIGHTBLUE3;
 extern color LIGHTBLUE4;
 extern color LIGHTCORAL;
+extern color LIGHTCYAN;
 extern color LIGHTCYAN1;
 extern color LIGHTCYAN2;
 extern color LIGHTCYAN3;
 extern color LIGHTCYAN4;
-extern color LIGHTCYAN;
 extern color LIGHTGRAY;
 extern color LIGHTGREEN;
+extern color LIGHTGREY;
+extern color LIGHTPINK;
 extern color LIGHTPINK1;
 extern color LIGHTPINK2;
 extern color LIGHTPINK3;
 extern color LIGHTPINK4;
-extern color LIGHTPINK;
 extern color LIGHTSEAGREEN;
+extern color LIGHTSKYBLUE;
 extern color LIGHTSKYBLUE1;
 extern color LIGHTSKYBLUE2;
 extern color LIGHTSKYBLUE3;
 extern color LIGHTSKYBLUE4;
-extern color LIGHTSKYBLUE;
 extern color LIGHTSLATEBLUE;
 extern color LIGHTSLATEGRAY;
+extern color LIGHTSLATEGREY;
+extern color LIGHTSTEELBLUE;
 extern color LIGHTSTEELBLUE1;
 extern color LIGHTSTEELBLUE2;
 extern color LIGHTSTEELBLUE3;
 extern color LIGHTSTEELBLUE4;
-extern color LIGHTSTEELBLUE;
+extern color LIGHTYELLOW;
 extern color LIGHTYELLOW1;
 extern color LIGHTYELLOW2;
 extern color LIGHTYELLOW3;
 extern color LIGHTYELLOW4;
-extern color LIGHTYELLOW;
-extern color LIMEGREEN;
 extern color LIME;
+extern color LIMEGREEN;
 extern color LINEN;
+extern color MAGENTA;
 extern color MAGENTA1;
 extern color MAGENTA2;
 extern color MAGENTA3;
 extern color MAGENTA4;
-extern color MAGENTA;
+extern color MAROON;
 extern color MAROON1;
 extern color MAROON2;
 extern color MAROON3;
 extern color MAROON4;
-extern color MAROON;
 extern color MEDIUMAQUAMARINE;
 extern color MEDIUMBLUE;
+extern color MEDIUMPURPLE;
 extern color MEDIUMPURPLE1;
 extern color MEDIUMPURPLE2;
 extern color MEDIUMPURPLE3;
 extern color MEDIUMPURPLE4;
-extern color MEDIUMPURPLE;
 extern color MEDIUMSEAGREEN;
 extern color MEDIUMSLATEBLUE;
 extern color MEDIUMSPRINGGREEN;
@@ -405,132 +548,145 @@ extern color MEDIUMVIOLETRED;
 extern color MIDNIGHTBLUE;
 extern color MINTCREAM;
 extern color MOCCASIN;
-extern color NAVYBLUE;
 extern color NAVY;
+extern color NAVYBLUE;
+extern color OLIVE_DRAB;
+extern color OLIVEDRAB;
 extern color OLIVEDRAB1;
 extern color OLIVEDRAB2;
 extern color OLIVEDRAB3;
 extern color OLIVEDRAB4;
-extern color OLIVE_DRAB;
-extern color OLIVEDRAB;
+extern color ORANGE;
 extern color ORANGE1;
 extern color ORANGE2;
 extern color ORANGE3;
 extern color ORANGE4;
+extern color ORANGERED;
 extern color ORANGERED1;
 extern color ORANGERED2;
 extern color ORANGERED3;
 extern color ORANGERED4;
-extern color ORANGERED;
+extern color PALEGREEN;
 extern color PALEGREEN1;
 extern color PALEGREEN2;
 extern color PALEGREEN3;
 extern color PALEGREEN4;
-extern color PALEGREEN;
+extern color PALETURQUOISE;
 extern color PALETURQUOISE1;
 extern color PALETURQUOISE2;
 extern color PALETURQUOISE3;
 extern color PALETURQUOISE4;
-extern color PALETURQUOISE;
+extern color PALEVIOLETRED;
 extern color PALEVIOLETRED1;
 extern color PALEVIOLETRED2;
 extern color PALEVIOLETRED3;
 extern color PALEVIOLETRED4;
-extern color PALEVIOLETRED;
+extern color PEACHPUFF;
 extern color PEACHPUFF1;
 extern color PEACHPUFF2;
 extern color PEACHPUFF3;
 extern color PEACHPUFF4;
-extern color PEACHPUFF;
 extern color PERU;
+extern color PINK;
 extern color PINK1;
 extern color PINK2;
 extern color PINK3;
 extern color PINK4;
+extern color PLUM;
 extern color PLUM1;
 extern color PLUM2;
 extern color PLUM3;
 extern color PLUM4;
-extern color PLUM;
 extern color POWDERBLUE;
+extern color PURPLE;
 extern color PURPLE1;
 extern color PURPLE2;
 extern color PURPLE3;
 extern color PURPLE4;
+extern color RED;
 extern color RED1;
 extern color RED2;
 extern color RED3;
 extern color RED4;
 extern color SADDLE_BROWN;
 extern color SADDLEBROWN;
+extern color SEAGREEN;
 extern color SEAGREEN1;
 extern color SEAGREEN2;
 extern color SEAGREEN3;
 extern color SEAGREEN4;
-extern color SEAGREEN;
+extern color SIENNA;
 extern color SIENNA1;
 extern color SIENNA2;
 extern color SIENNA3;
 extern color SIENNA4;
-extern color SIENNA;
+extern color SKYBLUE;
 extern color SKYBLUE1;
 extern color SKYBLUE2;
 extern color SKYBLUE3;
 extern color SKYBLUE4;
-extern color SKYBLUE;
+extern color SLATEBLUE;
 extern color SLATEBLUE1;
 extern color SLATEBLUE2;
 extern color SLATEBLUE3;
 extern color SLATEBLUE4;
-extern color SLATEBLUE;
+extern color SLATEGRAY;
 extern color SLATEGRAY1;
 extern color SLATEGRAY2;
 extern color SLATEGRAY3;
 extern color SLATEGRAY4;
-extern color SLATEGRAY;
+extern color SLATEGREY;
+extern color SLATEGREY1;
+extern color SLATEGREY2;
+extern color SLATEGREY3;
+extern color SLATEGREY4;
+extern color SNOW;
 extern color SNOW1;
 extern color SNOW2;
 extern color SNOW3;
 extern color SNOW4;
-extern color SNOW;
+extern color SPRINGGREEN;
 extern color SPRINGGREEN1;
 extern color SPRINGGREEN2;
 extern color SPRINGGREEN3;
 extern color SPRINGGREEN4;
-extern color SPRINGGREEN;
+extern color STEELBLUE;
 extern color STEELBLUE1;
 extern color STEELBLUE2;
 extern color STEELBLUE3;
 extern color STEELBLUE4;
-extern color STEELBLUE;
+extern color TAN;
 extern color TAN1;
 extern color TAN2;
 extern color TAN3;
 extern color TAN4;
-extern color TAN;
+extern color THISTLE;
 extern color THISTLE1;
 extern color THISTLE2;
 extern color THISTLE3;
 extern color THISTLE4;
-extern color THISTLE;
+extern color TOMATO;
 extern color TOMATO1;
 extern color TOMATO2;
 extern color TOMATO3;
 extern color TOMATO4;
-extern color TOMATO;
+extern color TURQUOISE;
 extern color TURQUOISE1;
 extern color TURQUOISE2;
 extern color TURQUOISE3;
 extern color TURQUOISE4;
-extern color TURQUOISE;
+extern color VDARKSLATEBLUE;
 extern color VIOLET;
+extern color VIOLETRED;
 extern color VIOLETRED1;
 extern color VIOLETRED2;
 extern color VIOLETRED3;
 extern color VIOLETRED4;
-extern color VIOLETRED;
+extern color VVDARKSLATEBLUE;
+extern color WHITE;
 extern color WHITE_SMOKE;
 extern color WHITESMOKE;
+extern color YELLOW;
 extern color YELLOW1;
 extern color YELLOW2;
 extern color YELLOW3;
@@ -549,6 +705,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 223, 204, 255                                                                                               \
   }
+#define CONST_ANTIQUEWHITE                                                                                           \
+  {                                                                                                                  \
+    250, 235, 215, 255                                                                                               \
+  }
 #define CONST_ANTIQUEWHITE3                                                                                          \
   {                                                                                                                  \
     205, 192, 176, 255                                                                                               \
@@ -557,11 +717,11 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 131, 120, 255                                                                                               \
   }
-#define CONST_ANTIQUEWHITE                                                                                           \
-  {                                                                                                                  \
-    250, 235, 215, 255                                                                                               \
-  }
 #define CONST_AQUAMARINE1                                                                                            \
+  {                                                                                                                  \
+    127, 255, 212, 255                                                                                               \
+  }
+#define CONST_AQUAMARINE                                                                                             \
   {                                                                                                                  \
     127, 255, 212, 255                                                                                               \
   }
@@ -577,10 +737,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     69, 139, 116, 255                                                                                                \
   }
-#define CONST_AQUAMARINE                                                                                             \
-  {                                                                                                                  \
-    127, 255, 212, 255                                                                                               \
-  }
 #define CONST_AZURE1                                                                                                 \
   {                                                                                                                  \
     240, 255, 255, 255                                                                                               \
@@ -589,6 +745,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     224, 238, 238, 255                                                                                               \
   }
+#define CONST_AZURE                                                                                                  \
+  {                                                                                                                  \
+    240, 255, 255, 255                                                                                               \
+  }
 #define CONST_AZURE3                                                                                                 \
   {                                                                                                                  \
     193, 205, 205, 255                                                                                               \
@@ -596,10 +756,6 @@ extern color YELLOWGREEN;
 #define CONST_AZURE4                                                                                                 \
   {                                                                                                                  \
     131, 139, 139, 255                                                                                               \
-  }
-#define CONST_AZURE                                                                                                  \
-  {                                                                                                                  \
-    240, 255, 255, 255                                                                                               \
   }
 #define CONST_BEIGE                                                                                                  \
   {                                                                                                                  \
@@ -613,6 +769,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 213, 183, 255                                                                                               \
   }
+#define CONST_BISQUE                                                                                                 \
+  {                                                                                                                  \
+    255, 228, 196, 255                                                                                               \
+  }
 #define CONST_BISQUE3                                                                                                \
   {                                                                                                                  \
     205, 183, 158, 255                                                                                               \
@@ -621,21 +781,17 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 125, 107, 255                                                                                               \
   }
-#define CONST_BISQUE                                                                                                 \
-  {                                                                                                                  \
-    255, 228, 196, 255                                                                                               \
-  }
 #define CONST_BLACK                                                                                                  \
   {                                                                                                                  \
     0, 0, 0, 255                                                                                                     \
   }
-#define CONST_NONE                                                                                                   \
-  {                                                                                                                  \
-    0, 0, 0, 0                                                                                                       \
-  }
 #define CONST_BLANCHEDALMOND                                                                                         \
   {                                                                                                                  \
     255, 235, 205, 255                                                                                               \
+  }
+#define CONST_BLUE                                                                                                   \
+  {                                                                                                                  \
+    0, 0, 255, 255                                                                                                   \
   }
 #define CONST_BLUE1                                                                                                  \
   {                                                                                                                  \
@@ -653,10 +809,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     0, 0, 139, 255                                                                                                   \
   }
-#define CONST_BLUE                                                                                                   \
-  {                                                                                                                  \
-    0, 0, 255, 255                                                                                                   \
-  }
 #define CONST_BLUEVIOLET                                                                                             \
   {                                                                                                                  \
     138, 43, 226, 255                                                                                                \
@@ -664,6 +816,10 @@ extern color YELLOWGREEN;
 #define CONST_BROWN1                                                                                                 \
   {                                                                                                                  \
     255, 64, 64, 255                                                                                                 \
+  }
+#define CONST_BROWN                                                                                                  \
+  {                                                                                                                  \
+    165, 42, 42, 255                                                                                                 \
   }
 #define CONST_BROWN2                                                                                                 \
   {                                                                                                                  \
@@ -677,13 +833,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 35, 35, 255                                                                                                 \
   }
-#define CONST_BROWN                                                                                                  \
-  {                                                                                                                  \
-    165, 42, 42, 255                                                                                                 \
-  }
 #define CONST_BURLYWOOD1                                                                                             \
   {                                                                                                                  \
     255, 211, 155, 255                                                                                               \
+  }
+#define CONST_BURLYWOOD                                                                                              \
+  {                                                                                                                  \
+    222, 184, 135, 255                                                                                               \
   }
 #define CONST_BURLYWOOD2                                                                                             \
   {                                                                                                                  \
@@ -696,10 +852,6 @@ extern color YELLOWGREEN;
 #define CONST_BURLYWOOD4                                                                                             \
   {                                                                                                                  \
     139, 115, 85, 255                                                                                                \
-  }
-#define CONST_BURLYWOOD                                                                                              \
-  {                                                                                                                  \
-    222, 184, 135, 255                                                                                               \
   }
 #define CONST_CADETBLUE1                                                                                             \
   {                                                                                                                  \
@@ -725,6 +877,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     127, 255, 0, 255                                                                                                 \
   }
+#define CONST_CHARTREUSE                                                                                             \
+  {                                                                                                                  \
+    127, 255, 0, 255                                                                                                 \
+  }
 #define CONST_CHARTREUSE2                                                                                            \
   {                                                                                                                  \
     118, 238, 0, 255                                                                                                 \
@@ -737,13 +893,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     69, 139, 0, 255                                                                                                  \
   }
-#define CONST_CHARTREUSE                                                                                             \
-  {                                                                                                                  \
-    127, 255, 0, 255                                                                                                 \
-  }
 #define CONST_CHOCOLATE1                                                                                             \
   {                                                                                                                  \
     255, 127, 36, 255                                                                                                \
+  }
+#define CONST_CHOCOLATE                                                                                              \
+  {                                                                                                                  \
+    210, 105, 30, 255                                                                                                \
   }
 #define CONST_CHOCOLATE2                                                                                             \
   {                                                                                                                  \
@@ -757,10 +913,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 69, 19, 255                                                                                                 \
   }
-#define CONST_CHOCOLATE                                                                                              \
-  {                                                                                                                  \
-    210, 105, 30, 255                                                                                                \
-  }
 #define CONST_CORAL1                                                                                                 \
   {                                                                                                                  \
     255, 114, 86, 255                                                                                                \
@@ -769,6 +921,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 106, 80, 255                                                                                                \
   }
+#define CONST_CORAL                                                                                                  \
+  {                                                                                                                  \
+    255, 127, 80, 255                                                                                                \
+  }
 #define CONST_CORAL3                                                                                                 \
   {                                                                                                                  \
     205, 91, 69, 255                                                                                                 \
@@ -776,10 +932,6 @@ extern color YELLOWGREEN;
 #define CONST_CORAL4                                                                                                 \
   {                                                                                                                  \
     139, 62, 47, 255                                                                                                 \
-  }
-#define CONST_CORAL                                                                                                  \
-  {                                                                                                                  \
-    255, 127, 80, 255                                                                                                \
   }
 #define CONST_CORNFLOWERBLUE                                                                                         \
   {                                                                                                                  \
@@ -793,6 +945,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 232, 205, 255                                                                                               \
   }
+#define CONST_CORNSILK                                                                                               \
+  {                                                                                                                  \
+    255, 248, 220, 255                                                                                               \
+  }
 #define CONST_CORNSILK3                                                                                              \
   {                                                                                                                  \
     205, 200, 177, 255                                                                                               \
@@ -801,9 +957,9 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 136, 120, 255                                                                                               \
   }
-#define CONST_CORNSILK                                                                                               \
+#define CONST_CYAN                                                                                                   \
   {                                                                                                                  \
-    255, 248, 220, 255                                                                                               \
+    0, 255, 255, 255                                                                                                 \
   }
 #define CONST_CYAN1                                                                                                  \
   {                                                                                                                  \
@@ -821,10 +977,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     0, 139, 139, 255                                                                                                 \
   }
-#define CONST_CYAN                                                                                                   \
-  {                                                                                                                  \
-    0, 255, 255, 255                                                                                                 \
-  }
 #define CONST_DARKBLUE                                                                                               \
   {                                                                                                                  \
     0, 0, 139, 255                                                                                                   \
@@ -840,6 +992,10 @@ extern color YELLOWGREEN;
 #define CONST_DARKGREEN                                                                                              \
   {                                                                                                                  \
     0, 100, 0, 255                                                                                                   \
+  }
+#define CONST_DARKGREY                                                                                               \
+  {                                                                                                                  \
+    169, 169, 169, 255                                                                                               \
   }
 #define CONST_DARKKHAKI                                                                                              \
   {                                                                                                                  \
@@ -877,6 +1033,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 118, 0, 255                                                                                                 \
   }
+#define CONST_DARKORANGE                                                                                             \
+  {                                                                                                                  \
+    255, 140, 0, 255                                                                                                 \
+  }
 #define CONST_DARKORANGE3                                                                                            \
   {                                                                                                                  \
     205, 102, 0, 255                                                                                                 \
@@ -885,10 +1045,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 69, 0, 255                                                                                                  \
   }
-#define CONST_DARKORANGE                                                                                             \
-  {                                                                                                                  \
-    255, 140, 0, 255                                                                                                 \
-  }
 #define CONST_DARKRED                                                                                                \
   {                                                                                                                  \
     139, 0, 0, 255                                                                                                   \
@@ -896,6 +1052,10 @@ extern color YELLOWGREEN;
 #define CONST_DARKSEAGREEN1                                                                                          \
   {                                                                                                                  \
     193, 255, 193, 255                                                                                               \
+  }
+#define CONST_DARKSEAGREEN                                                                                           \
+  {                                                                                                                  \
+    143, 188, 143, 255                                                                                               \
   }
 #define CONST_DARKSEAGREEN2                                                                                          \
   {                                                                                                                  \
@@ -908,10 +1068,6 @@ extern color YELLOWGREEN;
 #define CONST_DARKSEAGREEN4                                                                                          \
   {                                                                                                                  \
     105, 139, 105, 255                                                                                               \
-  }
-#define CONST_DARKSEAGREEN                                                                                           \
-  {                                                                                                                  \
-    143, 188, 143, 255                                                                                               \
   }
 #define CONST_DARKSLATEBLUE                                                                                          \
   {                                                                                                                  \
@@ -929,13 +1085,33 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     121, 205, 205, 255                                                                                               \
   }
+#define CONST_DARKSLATEGRAY                                                                                          \
+  {                                                                                                                  \
+    47, 79, 79, 255                                                                                                  \
+  }
 #define CONST_DARKSLATEGRAY4                                                                                         \
   {                                                                                                                  \
     82, 139, 139, 255                                                                                                \
   }
-#define CONST_DARKSLATEGRAY                                                                                          \
+#define CONST_DARKSLATEGREY1                                                                                         \
+  {                                                                                                                  \
+    151, 255, 255, 255                                                                                               \
+  }
+#define CONST_DARKSLATEGREY2                                                                                         \
+  {                                                                                                                  \
+    141, 238, 238, 255                                                                                               \
+  }
+#define CONST_DARKSLATEGREY3                                                                                         \
+  {                                                                                                                  \
+    121, 205, 205, 255                                                                                               \
+  }
+#define CONST_DARKSLATEGREY                                                                                          \
   {                                                                                                                  \
     47, 79, 79, 255                                                                                                  \
+  }
+#define CONST_DARKSLATEGREY4                                                                                         \
+  {                                                                                                                  \
+    82, 139, 139, 255                                                                                                \
   }
 #define CONST_DARKTURQUOISE                                                                                          \
   {                                                                                                                  \
@@ -953,6 +1129,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 18, 137, 255                                                                                                \
   }
+#define CONST_DEEPPINK                                                                                               \
+  {                                                                                                                  \
+    255, 20, 147, 255                                                                                                \
+  }
 #define CONST_DEEPPINK3                                                                                              \
   {                                                                                                                  \
     205, 16, 118, 255                                                                                                \
@@ -961,9 +1141,9 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 10, 80, 255                                                                                                 \
   }
-#define CONST_DEEPPINK                                                                                               \
+#define CONST_DEEPSKYBLUE                                                                                            \
   {                                                                                                                  \
-    255, 20, 147, 255                                                                                                \
+    0, 191, 255, 255                                                                                                 \
   }
 #define CONST_DEEPSKYBLUE1                                                                                           \
   {                                                                                                                  \
@@ -981,11 +1161,11 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     0, 104, 139, 255                                                                                                 \
   }
-#define CONST_DEEPSKYBLUE                                                                                            \
-  {                                                                                                                  \
-    0, 191, 255, 255                                                                                                 \
-  }
 #define CONST_DIMGRAY                                                                                                \
+  {                                                                                                                  \
+    105, 105, 105, 255                                                                                               \
+  }
+#define CONST_DIMGREY                                                                                                \
   {                                                                                                                  \
     105, 105, 105, 255                                                                                               \
   }
@@ -997,6 +1177,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     28, 134, 238, 255                                                                                                \
   }
+#define CONST_DODGERBLUE                                                                                             \
+  {                                                                                                                  \
+    30, 144, 255, 255                                                                                                \
+  }
 #define CONST_DODGERBLUE3                                                                                            \
   {                                                                                                                  \
     24, 116, 205, 255                                                                                                \
@@ -1005,13 +1189,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     16, 78, 139, 255                                                                                                 \
   }
-#define CONST_DODGERBLUE                                                                                             \
-  {                                                                                                                  \
-    30, 144, 255, 255                                                                                                \
-  }
 #define CONST_FIREBRICK1                                                                                             \
   {                                                                                                                  \
     255, 48, 48, 255                                                                                                 \
+  }
+#define CONST_FIREBRICK                                                                                              \
+  {                                                                                                                  \
+    178, 34, 34, 255                                                                                                 \
   }
 #define CONST_FIREBRICK2                                                                                             \
   {                                                                                                                  \
@@ -1024,10 +1208,6 @@ extern color YELLOWGREEN;
 #define CONST_FIREBRICK4                                                                                             \
   {                                                                                                                  \
     139, 26, 26, 255                                                                                                 \
-  }
-#define CONST_FIREBRICK                                                                                              \
-  {                                                                                                                  \
-    178, 34, 34, 255                                                                                                 \
   }
 #define CONST_FLORALWHITE                                                                                            \
   {                                                                                                                  \
@@ -1053,6 +1233,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 201, 0, 255                                                                                                 \
   }
+#define CONST_GOLD                                                                                                   \
+  {                                                                                                                  \
+    255, 215, 0, 255                                                                                                 \
+  }
 #define CONST_GOLD3                                                                                                  \
   {                                                                                                                  \
     205, 173, 0, 255                                                                                                 \
@@ -1060,10 +1244,6 @@ extern color YELLOWGREEN;
 #define CONST_GOLD4                                                                                                  \
   {                                                                                                                  \
     139, 117, 0, 255                                                                                                 \
-  }
-#define CONST_GOLD                                                                                                   \
-  {                                                                                                                  \
-    255, 215, 0, 255                                                                                                 \
   }
 #define CONST_GRAY10                                                                                                 \
   {                                                                                                                  \
@@ -1076,6 +1256,10 @@ extern color YELLOWGREEN;
 #define CONST_GRAY12                                                                                                 \
   {                                                                                                                  \
     31, 31, 31, 255                                                                                                  \
+  }
+#define CONST_GRAY1                                                                                                  \
+  {                                                                                                                  \
+    3, 3, 3, 255                                                                                                     \
   }
 #define CONST_GRAY13                                                                                                 \
   {                                                                                                                  \
@@ -1101,13 +1285,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     46, 46, 46, 255                                                                                                  \
   }
+#define CONST_GRAY                                                                                                   \
+  {                                                                                                                  \
+    190, 190, 190, 255                                                                                               \
+  }
 #define CONST_GRAY19                                                                                                 \
   {                                                                                                                  \
     48, 48, 48, 255                                                                                                  \
-  }
-#define CONST_GRAY1                                                                                                  \
-  {                                                                                                                  \
-    3, 3, 3, 255                                                                                                     \
   }
 #define CONST_GRAY20                                                                                                 \
   {                                                                                                                  \
@@ -1129,6 +1313,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     61, 61, 61, 255                                                                                                  \
   }
+#define CONST_GRAY2                                                                                                  \
+  {                                                                                                                  \
+    5, 5, 5, 255                                                                                                     \
+  }
 #define CONST_GRAY25                                                                                                 \
   {                                                                                                                  \
     64, 64, 64, 255                                                                                                  \
@@ -1148,10 +1336,6 @@ extern color YELLOWGREEN;
 #define CONST_GRAY29                                                                                                 \
   {                                                                                                                  \
     74, 74, 74, 255                                                                                                  \
-  }
-#define CONST_GRAY2                                                                                                  \
-  {                                                                                                                  \
-    5, 5, 5, 255                                                                                                     \
   }
 #define CONST_GRAY30                                                                                                 \
   {                                                                                                                  \
@@ -1185,6 +1369,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     94, 94, 94, 255                                                                                                  \
   }
+#define CONST_GRAY3                                                                                                  \
+  {                                                                                                                  \
+    8, 8, 8, 255                                                                                                     \
+  }
 #define CONST_GRAY38                                                                                                 \
   {                                                                                                                  \
     97, 97, 97, 255                                                                                                  \
@@ -1193,13 +1381,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     99, 99, 99, 255                                                                                                  \
   }
-#define CONST_GRAY3                                                                                                  \
-  {                                                                                                                  \
-    8, 8, 8, 255                                                                                                     \
-  }
 #define CONST_GRAY40                                                                                                 \
   {                                                                                                                  \
     102, 102, 102, 255                                                                                               \
+  }
+#define CONST_GRAY4                                                                                                  \
+  {                                                                                                                  \
+    10, 10, 10, 255                                                                                                  \
   }
 #define CONST_GRAY41                                                                                                 \
   {                                                                                                                  \
@@ -1237,10 +1425,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     125, 125, 125, 255                                                                                               \
   }
-#define CONST_GRAY4                                                                                                  \
-  {                                                                                                                  \
-    10, 10, 10, 255                                                                                                  \
-  }
 #define CONST_GRAY50                                                                                                 \
   {                                                                                                                  \
     127, 127, 127, 255                                                                                               \
@@ -1248,6 +1432,10 @@ extern color YELLOWGREEN;
 #define CONST_GRAY51                                                                                                 \
   {                                                                                                                  \
     130, 130, 130, 255                                                                                               \
+  }
+#define CONST_GRAY5                                                                                                  \
+  {                                                                                                                  \
+    13, 13, 13, 255                                                                                                  \
   }
 #define CONST_GRAY52                                                                                                 \
   {                                                                                                                  \
@@ -1281,10 +1469,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     150, 150, 150, 255                                                                                               \
   }
-#define CONST_GRAY5                                                                                                  \
-  {                                                                                                                  \
-    13, 13, 13, 255                                                                                                  \
-  }
 #define CONST_GRAY60                                                                                                 \
   {                                                                                                                  \
     153, 153, 153, 255                                                                                               \
@@ -1292,6 +1476,10 @@ extern color YELLOWGREEN;
 #define CONST_GRAY61                                                                                                 \
   {                                                                                                                  \
     156, 156, 156, 255                                                                                               \
+  }
+#define CONST_GRAY6                                                                                                  \
+  {                                                                                                                  \
+    15, 15, 15, 255                                                                                                  \
   }
 #define CONST_GRAY62                                                                                                 \
   {                                                                                                                  \
@@ -1325,10 +1513,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     176, 176, 176, 255                                                                                               \
   }
-#define CONST_GRAY6                                                                                                  \
-  {                                                                                                                  \
-    15, 15, 15, 255                                                                                                  \
-  }
 #define CONST_GRAY70                                                                                                 \
   {                                                                                                                  \
     179, 179, 179, 255                                                                                               \
@@ -1336,6 +1520,10 @@ extern color YELLOWGREEN;
 #define CONST_GRAY71                                                                                                 \
   {                                                                                                                  \
     181, 181, 181, 255                                                                                               \
+  }
+#define CONST_GRAY7                                                                                                  \
+  {                                                                                                                  \
+    18, 18, 18, 255                                                                                                  \
   }
 #define CONST_GRAY72                                                                                                 \
   {                                                                                                                  \
@@ -1369,10 +1557,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     201, 201, 201, 255                                                                                               \
   }
-#define CONST_GRAY7                                                                                                  \
-  {                                                                                                                  \
-    18, 18, 18, 255                                                                                                  \
-  }
 #define CONST_GRAY80                                                                                                 \
   {                                                                                                                  \
     204, 204, 204, 255                                                                                               \
@@ -1380,6 +1564,10 @@ extern color YELLOWGREEN;
 #define CONST_GRAY81                                                                                                 \
   {                                                                                                                  \
     207, 207, 207, 255                                                                                               \
+  }
+#define CONST_GRAY8                                                                                                  \
+  {                                                                                                                  \
+    20, 20, 20, 255                                                                                                  \
   }
 #define CONST_GRAY82                                                                                                 \
   {                                                                                                                  \
@@ -1413,10 +1601,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     227, 227, 227, 255                                                                                               \
   }
-#define CONST_GRAY8                                                                                                  \
-  {                                                                                                                  \
-    20, 20, 20, 255                                                                                                  \
-  }
 #define CONST_GRAY90                                                                                                 \
   {                                                                                                                  \
     229, 229, 229, 255                                                                                               \
@@ -1428,6 +1612,10 @@ extern color YELLOWGREEN;
 #define CONST_GRAY92                                                                                                 \
   {                                                                                                                  \
     235, 235, 235, 255                                                                                               \
+  }
+#define CONST_GRAY9                                                                                                  \
+  {                                                                                                                  \
+    23, 23, 23, 255                                                                                                  \
   }
 #define CONST_GRAY93                                                                                                 \
   {                                                                                                                  \
@@ -1457,13 +1645,9 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     252, 252, 252, 255                                                                                               \
   }
-#define CONST_GRAY9                                                                                                  \
+#define CONST_GREEN                                                                                                  \
   {                                                                                                                  \
-    23, 23, 23, 255                                                                                                  \
-  }
-#define CONST_GRAY                                                                                                   \
-  {                                                                                                                  \
-    190, 190, 190, 255                                                                                               \
+    0, 255, 0, 255                                                                                                   \
   }
 #define CONST_GREEN1                                                                                                 \
   {                                                                                                                  \
@@ -1481,13 +1665,409 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     0, 139, 0, 255                                                                                                   \
   }
-#define CONST_GREEN                                                                                                  \
-  {                                                                                                                  \
-    0, 255, 0, 255                                                                                                   \
-  }
 #define CONST_GREENYELLOW                                                                                            \
   {                                                                                                                  \
     173, 255, 47, 255                                                                                                \
+  }
+#define CONST_GREY10                                                                                                 \
+  {                                                                                                                  \
+    26, 26, 26, 255                                                                                                  \
+  }
+#define CONST_GREY11                                                                                                 \
+  {                                                                                                                  \
+    28, 28, 28, 255                                                                                                  \
+  }
+#define CONST_GREY12                                                                                                 \
+  {                                                                                                                  \
+    31, 31, 31, 255                                                                                                  \
+  }
+#define CONST_GREY1                                                                                                  \
+  {                                                                                                                  \
+    3, 3, 3, 255                                                                                                     \
+  }
+#define CONST_GREY13                                                                                                 \
+  {                                                                                                                  \
+    33, 33, 33, 255                                                                                                  \
+  }
+#define CONST_GREY14                                                                                                 \
+  {                                                                                                                  \
+    36, 36, 36, 255                                                                                                  \
+  }
+#define CONST_GREY15                                                                                                 \
+  {                                                                                                                  \
+    38, 38, 38, 255                                                                                                  \
+  }
+#define CONST_GREY16                                                                                                 \
+  {                                                                                                                  \
+    41, 41, 41, 255                                                                                                  \
+  }
+#define CONST_GREY17                                                                                                 \
+  {                                                                                                                  \
+    43, 43, 43, 255                                                                                                  \
+  }
+#define CONST_GREY18                                                                                                 \
+  {                                                                                                                  \
+    46, 46, 46, 255                                                                                                  \
+  }
+#define CONST_GREY                                                                                                   \
+  {                                                                                                                  \
+    190, 190, 190, 255                                                                                               \
+  }
+#define CONST_GREY19                                                                                                 \
+  {                                                                                                                  \
+    48, 48, 48, 255                                                                                                  \
+  }
+#define CONST_GREY20                                                                                                 \
+  {                                                                                                                  \
+    51, 51, 51, 255                                                                                                  \
+  }
+#define CONST_GREY21                                                                                                 \
+  {                                                                                                                  \
+    54, 54, 54, 255                                                                                                  \
+  }
+#define CONST_GREY22                                                                                                 \
+  {                                                                                                                  \
+    56, 56, 56, 255                                                                                                  \
+  }
+#define CONST_GREY23                                                                                                 \
+  {                                                                                                                  \
+    59, 59, 59, 255                                                                                                  \
+  }
+#define CONST_GREY24                                                                                                 \
+  {                                                                                                                  \
+    61, 61, 61, 255                                                                                                  \
+  }
+#define CONST_GREY2                                                                                                  \
+  {                                                                                                                  \
+    5, 5, 5, 255                                                                                                     \
+  }
+#define CONST_GREY25                                                                                                 \
+  {                                                                                                                  \
+    64, 64, 64, 255                                                                                                  \
+  }
+#define CONST_GREY26                                                                                                 \
+  {                                                                                                                  \
+    66, 66, 66, 255                                                                                                  \
+  }
+#define CONST_GREY27                                                                                                 \
+  {                                                                                                                  \
+    69, 69, 69, 255                                                                                                  \
+  }
+#define CONST_GREY28                                                                                                 \
+  {                                                                                                                  \
+    71, 71, 71, 255                                                                                                  \
+  }
+#define CONST_GREY29                                                                                                 \
+  {                                                                                                                  \
+    74, 74, 74, 255                                                                                                  \
+  }
+#define CONST_GREY30                                                                                                 \
+  {                                                                                                                  \
+    77, 77, 77, 255                                                                                                  \
+  }
+#define CONST_GREY31                                                                                                 \
+  {                                                                                                                  \
+    79, 79, 79, 255                                                                                                  \
+  }
+#define CONST_GREY32                                                                                                 \
+  {                                                                                                                  \
+    82, 82, 82, 255                                                                                                  \
+  }
+#define CONST_GREY33                                                                                                 \
+  {                                                                                                                  \
+    84, 84, 84, 255                                                                                                  \
+  }
+#define CONST_GREY34                                                                                                 \
+  {                                                                                                                  \
+    87, 87, 87, 255                                                                                                  \
+  }
+#define CONST_GREY35                                                                                                 \
+  {                                                                                                                  \
+    89, 89, 89, 255                                                                                                  \
+  }
+#define CONST_GREY36                                                                                                 \
+  {                                                                                                                  \
+    92, 92, 92, 255                                                                                                  \
+  }
+#define CONST_GREY37                                                                                                 \
+  {                                                                                                                  \
+    94, 94, 94, 255                                                                                                  \
+  }
+#define CONST_GREY3                                                                                                  \
+  {                                                                                                                  \
+    8, 8, 8, 255                                                                                                     \
+  }
+#define CONST_GREY38                                                                                                 \
+  {                                                                                                                  \
+    97, 97, 97, 255                                                                                                  \
+  }
+#define CONST_GREY39                                                                                                 \
+  {                                                                                                                  \
+    99, 99, 99, 255                                                                                                  \
+  }
+#define CONST_GREY40                                                                                                 \
+  {                                                                                                                  \
+    102, 102, 102, 255                                                                                               \
+  }
+#define CONST_GREY4                                                                                                  \
+  {                                                                                                                  \
+    10, 10, 10, 255                                                                                                  \
+  }
+#define CONST_GREY41                                                                                                 \
+  {                                                                                                                  \
+    105, 105, 105, 255                                                                                               \
+  }
+#define CONST_GREY42                                                                                                 \
+  {                                                                                                                  \
+    107, 107, 107, 255                                                                                               \
+  }
+#define CONST_GREY43                                                                                                 \
+  {                                                                                                                  \
+    110, 110, 110, 255                                                                                               \
+  }
+#define CONST_GREY44                                                                                                 \
+  {                                                                                                                  \
+    112, 112, 112, 255                                                                                               \
+  }
+#define CONST_GREY45                                                                                                 \
+  {                                                                                                                  \
+    115, 115, 115, 255                                                                                               \
+  }
+#define CONST_GREY46                                                                                                 \
+  {                                                                                                                  \
+    117, 117, 117, 255                                                                                               \
+  }
+#define CONST_GREY47                                                                                                 \
+  {                                                                                                                  \
+    120, 120, 120, 255                                                                                               \
+  }
+#define CONST_GREY48                                                                                                 \
+  {                                                                                                                  \
+    122, 122, 122, 255                                                                                               \
+  }
+#define CONST_GREY49                                                                                                 \
+  {                                                                                                                  \
+    125, 125, 125, 255                                                                                               \
+  }
+#define CONST_GREY50                                                                                                 \
+  {                                                                                                                  \
+    127, 127, 127, 255                                                                                               \
+  }
+#define CONST_GREY51                                                                                                 \
+  {                                                                                                                  \
+    130, 130, 130, 255                                                                                               \
+  }
+#define CONST_GREY5                                                                                                  \
+  {                                                                                                                  \
+    13, 13, 13, 255                                                                                                  \
+  }
+#define CONST_GREY52                                                                                                 \
+  {                                                                                                                  \
+    133, 133, 133, 255                                                                                               \
+  }
+#define CONST_GREY53                                                                                                 \
+  {                                                                                                                  \
+    135, 135, 135, 255                                                                                               \
+  }
+#define CONST_GREY54                                                                                                 \
+  {                                                                                                                  \
+    138, 138, 138, 255                                                                                               \
+  }
+#define CONST_GREY55                                                                                                 \
+  {                                                                                                                  \
+    140, 140, 140, 255                                                                                               \
+  }
+#define CONST_GREY56                                                                                                 \
+  {                                                                                                                  \
+    143, 143, 143, 255                                                                                               \
+  }
+#define CONST_GREY57                                                                                                 \
+  {                                                                                                                  \
+    145, 145, 145, 255                                                                                               \
+  }
+#define CONST_GREY58                                                                                                 \
+  {                                                                                                                  \
+    148, 148, 148, 255                                                                                               \
+  }
+#define CONST_GREY59                                                                                                 \
+  {                                                                                                                  \
+    150, 150, 150, 255                                                                                               \
+  }
+#define CONST_GREY60                                                                                                 \
+  {                                                                                                                  \
+    153, 153, 153, 255                                                                                               \
+  }
+#define CONST_GREY61                                                                                                 \
+  {                                                                                                                  \
+    156, 156, 156, 255                                                                                               \
+  }
+#define CONST_GREY6                                                                                                  \
+  {                                                                                                                  \
+    15, 15, 15, 255                                                                                                  \
+  }
+#define CONST_GREY62                                                                                                 \
+  {                                                                                                                  \
+    158, 158, 158, 255                                                                                               \
+  }
+#define CONST_GREY63                                                                                                 \
+  {                                                                                                                  \
+    161, 161, 161, 255                                                                                               \
+  }
+#define CONST_GREY64                                                                                                 \
+  {                                                                                                                  \
+    163, 163, 163, 255                                                                                               \
+  }
+#define CONST_GREY65                                                                                                 \
+  {                                                                                                                  \
+    166, 166, 166, 255                                                                                               \
+  }
+#define CONST_GREY66                                                                                                 \
+  {                                                                                                                  \
+    168, 168, 168, 255                                                                                               \
+  }
+#define CONST_GREY67                                                                                                 \
+  {                                                                                                                  \
+    171, 171, 171, 255                                                                                               \
+  }
+#define CONST_GREY68                                                                                                 \
+  {                                                                                                                  \
+    173, 173, 173, 255                                                                                               \
+  }
+#define CONST_GREY69                                                                                                 \
+  {                                                                                                                  \
+    176, 176, 176, 255                                                                                               \
+  }
+#define CONST_GREY70                                                                                                 \
+  {                                                                                                                  \
+    179, 179, 179, 255                                                                                               \
+  }
+#define CONST_GREY71                                                                                                 \
+  {                                                                                                                  \
+    181, 181, 181, 255                                                                                               \
+  }
+#define CONST_GREY7                                                                                                  \
+  {                                                                                                                  \
+    18, 18, 18, 255                                                                                                  \
+  }
+#define CONST_GREY72                                                                                                 \
+  {                                                                                                                  \
+    184, 184, 184, 255                                                                                               \
+  }
+#define CONST_GREY73                                                                                                 \
+  {                                                                                                                  \
+    186, 186, 186, 255                                                                                               \
+  }
+#define CONST_GREY74                                                                                                 \
+  {                                                                                                                  \
+    189, 189, 189, 255                                                                                               \
+  }
+#define CONST_GREY75                                                                                                 \
+  {                                                                                                                  \
+    191, 191, 191, 255                                                                                               \
+  }
+#define CONST_GREY76                                                                                                 \
+  {                                                                                                                  \
+    194, 194, 194, 255                                                                                               \
+  }
+#define CONST_GREY77                                                                                                 \
+  {                                                                                                                  \
+    196, 196, 196, 255                                                                                               \
+  }
+#define CONST_GREY78                                                                                                 \
+  {                                                                                                                  \
+    199, 199, 199, 255                                                                                               \
+  }
+#define CONST_GREY79                                                                                                 \
+  {                                                                                                                  \
+    201, 201, 201, 255                                                                                               \
+  }
+#define CONST_GREY80                                                                                                 \
+  {                                                                                                                  \
+    204, 204, 204, 255                                                                                               \
+  }
+#define CONST_GREY81                                                                                                 \
+  {                                                                                                                  \
+    207, 207, 207, 255                                                                                               \
+  }
+#define CONST_GREY8                                                                                                  \
+  {                                                                                                                  \
+    20, 20, 20, 255                                                                                                  \
+  }
+#define CONST_GREY82                                                                                                 \
+  {                                                                                                                  \
+    209, 209, 209, 255                                                                                               \
+  }
+#define CONST_GREY83                                                                                                 \
+  {                                                                                                                  \
+    212, 212, 212, 255                                                                                               \
+  }
+#define CONST_GREY84                                                                                                 \
+  {                                                                                                                  \
+    214, 214, 214, 255                                                                                               \
+  }
+#define CONST_GREY85                                                                                                 \
+  {                                                                                                                  \
+    217, 217, 217, 255                                                                                               \
+  }
+#define CONST_GREY86                                                                                                 \
+  {                                                                                                                  \
+    219, 219, 219, 255                                                                                               \
+  }
+#define CONST_GREY87                                                                                                 \
+  {                                                                                                                  \
+    222, 222, 222, 255                                                                                               \
+  }
+#define CONST_GREY88                                                                                                 \
+  {                                                                                                                  \
+    224, 224, 224, 255                                                                                               \
+  }
+#define CONST_GREY89                                                                                                 \
+  {                                                                                                                  \
+    227, 227, 227, 255                                                                                               \
+  }
+#define CONST_GREY90                                                                                                 \
+  {                                                                                                                  \
+    229, 229, 229, 255                                                                                               \
+  }
+#define CONST_GREY91                                                                                                 \
+  {                                                                                                                  \
+    232, 232, 232, 255                                                                                               \
+  }
+#define CONST_GREY92                                                                                                 \
+  {                                                                                                                  \
+    235, 235, 235, 255                                                                                               \
+  }
+#define CONST_GREY9                                                                                                  \
+  {                                                                                                                  \
+    23, 23, 23, 255                                                                                                  \
+  }
+#define CONST_GREY93                                                                                                 \
+  {                                                                                                                  \
+    237, 237, 237, 255                                                                                               \
+  }
+#define CONST_GREY94                                                                                                 \
+  {                                                                                                                  \
+    240, 240, 240, 255                                                                                               \
+  }
+#define CONST_GREY95                                                                                                 \
+  {                                                                                                                  \
+    242, 242, 242, 255                                                                                               \
+  }
+#define CONST_GREY96                                                                                                 \
+  {                                                                                                                  \
+    245, 245, 245, 255                                                                                               \
+  }
+#define CONST_GREY97                                                                                                 \
+  {                                                                                                                  \
+    247, 247, 247, 255                                                                                               \
+  }
+#define CONST_GREY98                                                                                                 \
+  {                                                                                                                  \
+    250, 250, 250, 255                                                                                               \
+  }
+#define CONST_GREY99                                                                                                 \
+  {                                                                                                                  \
+    252, 252, 252, 255                                                                                               \
   }
 #define CONST_HOTPINK1                                                                                               \
   {                                                                                                                  \
@@ -1497,6 +2077,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 106, 167, 255                                                                                               \
   }
+#define CONST_HOTPINK                                                                                                \
+  {                                                                                                                  \
+    255, 105, 180, 255                                                                                               \
+  }
 #define CONST_HOTPINK3                                                                                               \
   {                                                                                                                  \
     205, 96, 144, 255                                                                                                \
@@ -1505,13 +2089,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 58, 98, 255                                                                                                 \
   }
-#define CONST_HOTPINK                                                                                                \
-  {                                                                                                                  \
-    255, 105, 180, 255                                                                                               \
-  }
 #define CONST_INDIANRED1                                                                                             \
   {                                                                                                                  \
     255, 106, 106, 255                                                                                               \
+  }
+#define CONST_INDIANRED                                                                                              \
+  {                                                                                                                  \
+    205, 92, 92, 255                                                                                                 \
   }
 #define CONST_INDIANRED2                                                                                             \
   {                                                                                                                  \
@@ -1525,9 +2109,9 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 58, 58, 255                                                                                                 \
   }
-#define CONST_INDIANRED                                                                                              \
+#define CONST_INK                                                                                                    \
   {                                                                                                                  \
-    205, 92, 92, 255                                                                                                 \
+    51, 54, 47, 47                                                                                                   \
   }
 #define CONST_IVORY1                                                                                                 \
   {                                                                                                                  \
@@ -1537,6 +2121,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 238, 224, 255                                                                                               \
   }
+#define CONST_IVORY                                                                                                  \
+  {                                                                                                                  \
+    255, 255, 240, 255                                                                                               \
+  }
 #define CONST_IVORY3                                                                                                 \
   {                                                                                                                  \
     205, 205, 193, 255                                                                                               \
@@ -1544,10 +2132,6 @@ extern color YELLOWGREEN;
 #define CONST_IVORY4                                                                                                 \
   {                                                                                                                  \
     139, 139, 131, 255                                                                                               \
-  }
-#define CONST_IVORY                                                                                                  \
-  {                                                                                                                  \
-    255, 255, 240, 255                                                                                               \
   }
 #define CONST_KHAKI1                                                                                                 \
   {                                                                                                                  \
@@ -1557,6 +2141,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 230, 133, 255                                                                                               \
   }
+#define CONST_KHAKI                                                                                                  \
+  {                                                                                                                  \
+    240, 230, 140, 255                                                                                               \
+  }
 #define CONST_KHAKI3                                                                                                 \
   {                                                                                                                  \
     205, 198, 115, 255                                                                                               \
@@ -1564,10 +2152,6 @@ extern color YELLOWGREEN;
 #define CONST_KHAKI4                                                                                                 \
   {                                                                                                                  \
     139, 134, 78, 255                                                                                                \
-  }
-#define CONST_KHAKI                                                                                                  \
-  {                                                                                                                  \
-    240, 230, 140, 255                                                                                               \
   }
 #define CONST_LAVENDER                                                                                               \
   {                                                                                                                  \
@@ -1581,14 +2165,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 233, 191, 255                                                                                               \
   }
-#define CONST_LEMONCHIFFON3                                                                                          \
-  {                                                                                                                  \
-    205, 201, 165, 255                                                                                               \
-  }
-#define CONST_LEMONCHIFFON4                                                                                          \
-  {                                                                                                                  \
-    139, 137, 112, 255                                                                                               \
-  }
 #define CONST_LEMON_CHIFFON                                                                                          \
   {                                                                                                                  \
     255, 250, 205, 255                                                                                               \
@@ -1597,9 +2173,21 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     255, 250, 205, 255                                                                                               \
   }
+#define CONST_LEMONCHIFFON3                                                                                          \
+  {                                                                                                                  \
+    205, 201, 165, 255                                                                                               \
+  }
+#define CONST_LEMONCHIFFON4                                                                                          \
+  {                                                                                                                  \
+    139, 137, 112, 255                                                                                               \
+  }
 #define CONST_LIGHTBLUE1                                                                                             \
   {                                                                                                                  \
     191, 239, 255, 255                                                                                               \
+  }
+#define CONST_LIGHTBLUE                                                                                              \
+  {                                                                                                                  \
+    173, 216, 230, 255                                                                                               \
   }
 #define CONST_LIGHTBLUE2                                                                                             \
   {                                                                                                                  \
@@ -1613,10 +2201,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     104, 131, 139, 255                                                                                               \
   }
-#define CONST_LIGHTBLUE                                                                                              \
-  {                                                                                                                  \
-    173, 216, 230, 255                                                                                               \
-  }
 #define CONST_LIGHTCORAL                                                                                             \
   {                                                                                                                  \
     240, 128, 128, 255                                                                                               \
@@ -1629,6 +2213,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     209, 238, 238, 255                                                                                               \
   }
+#define CONST_LIGHTCYAN                                                                                              \
+  {                                                                                                                  \
+    224, 255, 255, 255                                                                                               \
+  }
 #define CONST_LIGHTCYAN3                                                                                             \
   {                                                                                                                  \
     180, 205, 205, 255                                                                                               \
@@ -1636,10 +2224,6 @@ extern color YELLOWGREEN;
 #define CONST_LIGHTCYAN4                                                                                             \
   {                                                                                                                  \
     122, 139, 139, 255                                                                                               \
-  }
-#define CONST_LIGHTCYAN                                                                                              \
-  {                                                                                                                  \
-    224, 255, 255, 255                                                                                               \
   }
 #define CONST_LIGHTGRAY                                                                                              \
   {                                                                                                                  \
@@ -1649,6 +2233,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     144, 238, 144, 255                                                                                               \
   }
+#define CONST_LIGHTGREY                                                                                              \
+  {                                                                                                                  \
+    211, 211, 211, 255                                                                                               \
+  }
 #define CONST_LIGHTPINK1                                                                                             \
   {                                                                                                                  \
     255, 174, 185, 255                                                                                               \
@@ -1656,6 +2244,10 @@ extern color YELLOWGREEN;
 #define CONST_LIGHTPINK2                                                                                             \
   {                                                                                                                  \
     238, 162, 173, 255                                                                                               \
+  }
+#define CONST_LIGHTPINK                                                                                              \
+  {                                                                                                                  \
+    255, 182, 193, 255                                                                                               \
   }
 #define CONST_LIGHTPINK3                                                                                             \
   {                                                                                                                  \
@@ -1665,10 +2257,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 95, 101, 255                                                                                                \
   }
-#define CONST_LIGHTPINK                                                                                              \
-  {                                                                                                                  \
-    255, 182, 193, 255                                                                                               \
-  }
 #define CONST_LIGHTSEAGREEN                                                                                          \
   {                                                                                                                  \
     32, 178, 170, 255                                                                                                \
@@ -1676,6 +2264,10 @@ extern color YELLOWGREEN;
 #define CONST_LIGHTSKYBLUE1                                                                                          \
   {                                                                                                                  \
     176, 226, 255, 255                                                                                               \
+  }
+#define CONST_LIGHTSKYBLUE                                                                                           \
+  {                                                                                                                  \
+    135, 206, 250, 255                                                                                               \
   }
 #define CONST_LIGHTSKYBLUE2                                                                                          \
   {                                                                                                                  \
@@ -1689,10 +2281,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     96, 123, 139, 255                                                                                                \
   }
-#define CONST_LIGHTSKYBLUE                                                                                           \
-  {                                                                                                                  \
-    135, 206, 250, 255                                                                                               \
-  }
 #define CONST_LIGHTSLATEBLUE                                                                                         \
   {                                                                                                                  \
     132, 112, 255, 255                                                                                               \
@@ -1701,9 +2289,17 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     119, 136, 153, 255                                                                                               \
   }
+#define CONST_LIGHTSLATEGREY                                                                                         \
+  {                                                                                                                  \
+    119, 136, 153, 255                                                                                               \
+  }
 #define CONST_LIGHTSTEELBLUE1                                                                                        \
   {                                                                                                                  \
     202, 225, 255, 255                                                                                               \
+  }
+#define CONST_LIGHTSTEELBLUE                                                                                         \
+  {                                                                                                                  \
+    176, 196, 222, 255                                                                                               \
   }
 #define CONST_LIGHTSTEELBLUE2                                                                                        \
   {                                                                                                                  \
@@ -1717,10 +2313,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     110, 123, 139, 255                                                                                               \
   }
-#define CONST_LIGHTSTEELBLUE                                                                                         \
-  {                                                                                                                  \
-    176, 196, 222, 255                                                                                               \
-  }
 #define CONST_LIGHTYELLOW1                                                                                           \
   {                                                                                                                  \
     255, 255, 224, 255                                                                                               \
@@ -1728,6 +2320,10 @@ extern color YELLOWGREEN;
 #define CONST_LIGHTYELLOW2                                                                                           \
   {                                                                                                                  \
     238, 238, 209, 255                                                                                               \
+  }
+#define CONST_LIGHTYELLOW                                                                                            \
+  {                                                                                                                  \
+    255, 255, 224, 255                                                                                               \
   }
 #define CONST_LIGHTYELLOW3                                                                                           \
   {                                                                                                                  \
@@ -1737,15 +2333,11 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 139, 122, 255                                                                                               \
   }
-#define CONST_LIGHTYELLOW                                                                                            \
-  {                                                                                                                  \
-    255, 255, 224, 255                                                                                               \
-  }
-#define CONST_LIMEGREEN                                                                                              \
+#define CONST_LIME                                                                                                   \
   {                                                                                                                  \
     50, 205, 50, 255                                                                                                 \
   }
-#define CONST_LIME                                                                                                   \
+#define CONST_LIMEGREEN                                                                                              \
   {                                                                                                                  \
     50, 205, 50, 255                                                                                                 \
   }
@@ -1761,6 +2353,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 0, 238, 255                                                                                                 \
   }
+#define CONST_MAGENTA                                                                                                \
+  {                                                                                                                  \
+    255, 0, 255, 255                                                                                                 \
+  }
 #define CONST_MAGENTA3                                                                                               \
   {                                                                                                                  \
     205, 0, 205, 255                                                                                                 \
@@ -1769,13 +2365,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 0, 139, 255                                                                                                 \
   }
-#define CONST_MAGENTA                                                                                                \
-  {                                                                                                                  \
-    255, 0, 255, 255                                                                                                 \
-  }
 #define CONST_MAROON1                                                                                                \
   {                                                                                                                  \
     255, 52, 179, 255                                                                                                \
+  }
+#define CONST_MAROON                                                                                                 \
+  {                                                                                                                  \
+    176, 48, 96, 255                                                                                                 \
   }
 #define CONST_MAROON2                                                                                                \
   {                                                                                                                  \
@@ -1789,10 +2385,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 28, 98, 255                                                                                                 \
   }
-#define CONST_MAROON                                                                                                 \
-  {                                                                                                                  \
-    176, 48, 96, 255                                                                                                 \
-  }
 #define CONST_MEDIUMAQUAMARINE                                                                                       \
   {                                                                                                                  \
     102, 205, 170, 255                                                                                               \
@@ -1805,6 +2397,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     171, 130, 255, 255                                                                                               \
   }
+#define CONST_MEDIUMPURPLE                                                                                           \
+  {                                                                                                                  \
+    147, 112, 219, 255                                                                                               \
+  }
 #define CONST_MEDIUMPURPLE2                                                                                          \
   {                                                                                                                  \
     159, 121, 238, 255                                                                                               \
@@ -1816,10 +2412,6 @@ extern color YELLOWGREEN;
 #define CONST_MEDIUMPURPLE4                                                                                          \
   {                                                                                                                  \
     93, 71, 139, 255                                                                                                 \
-  }
-#define CONST_MEDIUMPURPLE                                                                                           \
-  {                                                                                                                  \
-    147, 112, 219, 255                                                                                               \
   }
 #define CONST_MEDIUMSEAGREEN                                                                                         \
   {                                                                                                                  \
@@ -1853,13 +2445,25 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     255, 228, 181, 255                                                                                               \
   }
+#define CONST_NAVY                                                                                                   \
+  {                                                                                                                  \
+    0, 0, 128, 255                                                                                                   \
+  }
 #define CONST_NAVYBLUE                                                                                               \
   {                                                                                                                  \
     0, 0, 128, 255                                                                                                   \
   }
-#define CONST_NAVY                                                                                                   \
+#define CONST_NONE                                                                                                   \
   {                                                                                                                  \
-    0, 0, 128, 255                                                                                                   \
+    0, 0, 0, 0                                                                                                       \
+  }
+#define CONST_OLIVE_DRAB                                                                                             \
+  {                                                                                                                  \
+    107, 142, 35, 255                                                                                                \
+  }
+#define CONST_OLIVEDRAB                                                                                              \
+  {                                                                                                                  \
+    107, 142, 35, 255                                                                                                \
   }
 #define CONST_OLIVEDRAB1                                                                                             \
   {                                                                                                                  \
@@ -1877,14 +2481,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     105, 139, 34, 255                                                                                                \
   }
-#define CONST_OLIVE_DRAB                                                                                             \
-  {                                                                                                                  \
-    107, 142, 35, 255                                                                                                \
-  }
-#define CONST_OLIVEDRAB                                                                                              \
-  {                                                                                                                  \
-    107, 142, 35, 255                                                                                                \
-  }
 #define CONST_ORANGE1                                                                                                \
   {                                                                                                                  \
     255, 165, 0, 255                                                                                                 \
@@ -1892,6 +2488,10 @@ extern color YELLOWGREEN;
 #define CONST_ORANGE2                                                                                                \
   {                                                                                                                  \
     238, 154, 0, 255                                                                                                 \
+  }
+#define CONST_ORANGE                                                                                                 \
+  {                                                                                                                  \
+    255, 165, 0, 255                                                                                                 \
   }
 #define CONST_ORANGE3                                                                                                \
   {                                                                                                                  \
@@ -1901,10 +2501,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 90, 0, 255                                                                                                  \
   }
-#define CONST_ORANGE                                                                                                 \
-  {                                                                                                                  \
-    255, 165, 0, 255                                                                                                 \
-  }
 #define CONST_ORANGERED1                                                                                             \
   {                                                                                                                  \
     255, 69, 0, 255                                                                                                  \
@@ -1912,6 +2508,10 @@ extern color YELLOWGREEN;
 #define CONST_ORANGERED2                                                                                             \
   {                                                                                                                  \
     238, 64, 0, 255                                                                                                  \
+  }
+#define CONST_ORANGERED                                                                                              \
+  {                                                                                                                  \
+    255, 69, 0, 255                                                                                                  \
   }
 #define CONST_ORANGERED3                                                                                             \
   {                                                                                                                  \
@@ -1921,13 +2521,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 37, 0, 255                                                                                                  \
   }
-#define CONST_ORANGERED                                                                                              \
-  {                                                                                                                  \
-    255, 69, 0, 255                                                                                                  \
-  }
 #define CONST_PALEGREEN1                                                                                             \
   {                                                                                                                  \
     154, 255, 154, 255                                                                                               \
+  }
+#define CONST_PALEGREEN                                                                                              \
+  {                                                                                                                  \
+    152, 251, 152, 255                                                                                               \
   }
 #define CONST_PALEGREEN2                                                                                             \
   {                                                                                                                  \
@@ -1941,13 +2541,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     84, 139, 84, 255                                                                                                 \
   }
-#define CONST_PALEGREEN                                                                                              \
-  {                                                                                                                  \
-    152, 251, 152, 255                                                                                               \
-  }
 #define CONST_PALETURQUOISE1                                                                                         \
   {                                                                                                                  \
     187, 255, 255, 255                                                                                               \
+  }
+#define CONST_PALETURQUOISE                                                                                          \
+  {                                                                                                                  \
+    175, 238, 238, 255                                                                                               \
   }
 #define CONST_PALETURQUOISE2                                                                                         \
   {                                                                                                                  \
@@ -1961,13 +2561,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     102, 139, 139, 255                                                                                               \
   }
-#define CONST_PALETURQUOISE                                                                                          \
-  {                                                                                                                  \
-    175, 238, 238, 255                                                                                               \
-  }
 #define CONST_PALEVIOLETRED1                                                                                         \
   {                                                                                                                  \
     255, 130, 171, 255                                                                                               \
+  }
+#define CONST_PALEVIOLETRED                                                                                          \
+  {                                                                                                                  \
+    219, 112, 147, 255                                                                                               \
   }
 #define CONST_PALEVIOLETRED2                                                                                         \
   {                                                                                                                  \
@@ -1981,10 +2581,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 71, 93, 255                                                                                                 \
   }
-#define CONST_PALEVIOLETRED                                                                                          \
-  {                                                                                                                  \
-    219, 112, 147, 255                                                                                               \
-  }
 #define CONST_PEACHPUFF1                                                                                             \
   {                                                                                                                  \
     255, 218, 185, 255                                                                                               \
@@ -1993,6 +2589,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 203, 173, 255                                                                                               \
   }
+#define CONST_PEACHPUFF                                                                                              \
+  {                                                                                                                  \
+    255, 218, 185, 255                                                                                               \
+  }
 #define CONST_PEACHPUFF3                                                                                             \
   {                                                                                                                  \
     205, 175, 149, 255                                                                                               \
@@ -2000,10 +2600,6 @@ extern color YELLOWGREEN;
 #define CONST_PEACHPUFF4                                                                                             \
   {                                                                                                                  \
     139, 119, 101, 255                                                                                               \
-  }
-#define CONST_PEACHPUFF                                                                                              \
-  {                                                                                                                  \
-    255, 218, 185, 255                                                                                               \
   }
 #define CONST_PERU                                                                                                   \
   {                                                                                                                  \
@@ -2017,6 +2613,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 169, 184, 255                                                                                               \
   }
+#define CONST_PINK                                                                                                   \
+  {                                                                                                                  \
+    255, 192, 203, 255                                                                                               \
+  }
 #define CONST_PINK3                                                                                                  \
   {                                                                                                                  \
     205, 145, 158, 255                                                                                               \
@@ -2025,13 +2625,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 99, 108, 255                                                                                                \
   }
-#define CONST_PINK                                                                                                   \
-  {                                                                                                                  \
-    255, 192, 203, 255                                                                                               \
-  }
 #define CONST_PLUM1                                                                                                  \
   {                                                                                                                  \
     255, 187, 255, 255                                                                                               \
+  }
+#define CONST_PLUM                                                                                                   \
+  {                                                                                                                  \
+    221, 160, 221, 255                                                                                               \
   }
 #define CONST_PLUM2                                                                                                  \
   {                                                                                                                  \
@@ -2045,10 +2645,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 102, 139, 255                                                                                               \
   }
-#define CONST_PLUM                                                                                                   \
-  {                                                                                                                  \
-    221, 160, 221, 255                                                                                               \
-  }
 #define CONST_POWDERBLUE                                                                                             \
   {                                                                                                                  \
     176, 224, 230, 255                                                                                               \
@@ -2056,6 +2652,10 @@ extern color YELLOWGREEN;
 #define CONST_PURPLE1                                                                                                \
   {                                                                                                                  \
     155, 48, 255, 255                                                                                                \
+  }
+#define CONST_PURPLE                                                                                                 \
+  {                                                                                                                  \
+    160, 32, 240, 255                                                                                                \
   }
 #define CONST_PURPLE2                                                                                                \
   {                                                                                                                  \
@@ -2069,10 +2669,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     85, 26, 139, 255                                                                                                 \
   }
-#define CONST_PURPLE                                                                                                 \
-  {                                                                                                                  \
-    160, 32, 240, 255                                                                                                \
-  }
 #define CONST_RED1                                                                                                   \
   {                                                                                                                  \
     255, 0, 0, 255                                                                                                   \
@@ -2081,6 +2677,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 0, 0, 255                                                                                                   \
   }
+#define CONST_RED                                                                                                    \
+  {                                                                                                                  \
+    255, 0, 0, 255                                                                                                   \
+  }
 #define CONST_RED3                                                                                                   \
   {                                                                                                                  \
     205, 0, 0, 255                                                                                                   \
@@ -2088,10 +2688,6 @@ extern color YELLOWGREEN;
 #define CONST_RED4                                                                                                   \
   {                                                                                                                  \
     139, 0, 0, 255                                                                                                   \
-  }
-#define CONST_RED                                                                                                    \
-  {                                                                                                                  \
-    255, 0, 0, 255                                                                                                   \
   }
 #define CONST_SADDLE_BROWN                                                                                           \
   {                                                                                                                  \
@@ -2125,6 +2721,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     255, 130, 71, 255                                                                                                \
   }
+#define CONST_SIENNA                                                                                                 \
+  {                                                                                                                  \
+    160, 82, 45, 255                                                                                                 \
+  }
 #define CONST_SIENNA2                                                                                                \
   {                                                                                                                  \
     238, 121, 66, 255                                                                                                \
@@ -2137,13 +2737,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 71, 38, 255                                                                                                 \
   }
-#define CONST_SIENNA                                                                                                 \
-  {                                                                                                                  \
-    160, 82, 45, 255                                                                                                 \
-  }
 #define CONST_SKYBLUE1                                                                                               \
   {                                                                                                                  \
     135, 206, 255, 255                                                                                               \
+  }
+#define CONST_SKYBLUE                                                                                                \
+  {                                                                                                                  \
+    135, 206, 235, 255                                                                                               \
   }
 #define CONST_SKYBLUE2                                                                                               \
   {                                                                                                                  \
@@ -2157,9 +2757,9 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     74, 112, 139, 255                                                                                                \
   }
-#define CONST_SKYBLUE                                                                                                \
+#define CONST_SLATEBLUE                                                                                              \
   {                                                                                                                  \
-    135, 206, 235, 255                                                                                               \
+    106, 90, 205, 255                                                                                                \
   }
 #define CONST_SLATEBLUE1                                                                                             \
   {                                                                                                                  \
@@ -2177,9 +2777,9 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     71, 60, 139, 255                                                                                                 \
   }
-#define CONST_SLATEBLUE                                                                                              \
+#define CONST_SLATEGRAY                                                                                              \
   {                                                                                                                  \
-    106, 90, 205, 255                                                                                                \
+    112, 128, 144, 255                                                                                               \
   }
 #define CONST_SLATEGRAY1                                                                                             \
   {                                                                                                                  \
@@ -2197,9 +2797,25 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     108, 123, 139, 255                                                                                               \
   }
-#define CONST_SLATEGRAY                                                                                              \
+#define CONST_SLATEGREY                                                                                              \
   {                                                                                                                  \
     112, 128, 144, 255                                                                                               \
+  }
+#define CONST_SLATEGREY1                                                                                             \
+  {                                                                                                                  \
+    198, 226, 255, 255                                                                                               \
+  }
+#define CONST_SLATEGREY2                                                                                             \
+  {                                                                                                                  \
+    185, 211, 238, 255                                                                                               \
+  }
+#define CONST_SLATEGREY3                                                                                             \
+  {                                                                                                                  \
+    159, 182, 205, 255                                                                                               \
+  }
+#define CONST_SLATEGREY4                                                                                             \
+  {                                                                                                                  \
+    108, 123, 139, 255                                                                                               \
   }
 #define CONST_SNOW1                                                                                                  \
   {                                                                                                                  \
@@ -2209,6 +2825,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 233, 233, 255                                                                                               \
   }
+#define CONST_SNOW                                                                                                   \
+  {                                                                                                                  \
+    255, 250, 250, 255                                                                                               \
+  }
 #define CONST_SNOW3                                                                                                  \
   {                                                                                                                  \
     205, 201, 201, 255                                                                                               \
@@ -2217,9 +2837,9 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 137, 137, 255                                                                                               \
   }
-#define CONST_SNOW                                                                                                   \
+#define CONST_SPRINGGREEN                                                                                            \
   {                                                                                                                  \
-    255, 250, 250, 255                                                                                               \
+    0, 255, 127, 255                                                                                                 \
   }
 #define CONST_SPRINGGREEN1                                                                                           \
   {                                                                                                                  \
@@ -2236,10 +2856,6 @@ extern color YELLOWGREEN;
 #define CONST_SPRINGGREEN4                                                                                           \
   {                                                                                                                  \
     0, 139, 69, 255                                                                                                  \
-  }
-#define CONST_SPRINGGREEN                                                                                            \
-  {                                                                                                                  \
-    0, 255, 127, 255                                                                                                 \
   }
 #define CONST_STEELBLUE1                                                                                             \
   {                                                                                                                  \
@@ -2265,6 +2881,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     255, 165, 79, 255                                                                                                \
   }
+#define CONST_TAN                                                                                                    \
+  {                                                                                                                  \
+    210, 180, 140, 255                                                                                               \
+  }
 #define CONST_TAN2                                                                                                   \
   {                                                                                                                  \
     238, 154, 73, 255                                                                                                \
@@ -2277,13 +2897,13 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 90, 43, 255                                                                                                 \
   }
-#define CONST_TAN                                                                                                    \
-  {                                                                                                                  \
-    210, 180, 140, 255                                                                                               \
-  }
 #define CONST_THISTLE1                                                                                               \
   {                                                                                                                  \
     255, 225, 255, 255                                                                                               \
+  }
+#define CONST_THISTLE                                                                                                \
+  {                                                                                                                  \
+    216, 191, 216, 255                                                                                               \
   }
 #define CONST_THISTLE2                                                                                               \
   {                                                                                                                  \
@@ -2297,10 +2917,6 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     139, 123, 139, 255                                                                                               \
   }
-#define CONST_THISTLE                                                                                                \
-  {                                                                                                                  \
-    216, 191, 216, 255                                                                                               \
-  }
 #define CONST_TOMATO1                                                                                                \
   {                                                                                                                  \
     255, 99, 71, 255                                                                                                 \
@@ -2309,6 +2925,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 92, 66, 255                                                                                                 \
   }
+#define CONST_TOMATO                                                                                                 \
+  {                                                                                                                  \
+    255, 99, 71, 255                                                                                                 \
+  }
 #define CONST_TOMATO3                                                                                                \
   {                                                                                                                  \
     205, 79, 57, 255                                                                                                 \
@@ -2316,10 +2936,6 @@ extern color YELLOWGREEN;
 #define CONST_TOMATO4                                                                                                \
   {                                                                                                                  \
     139, 54, 38, 255                                                                                                 \
-  }
-#define CONST_TOMATO                                                                                                 \
-  {                                                                                                                  \
-    255, 99, 71, 255                                                                                                 \
   }
 #define CONST_TURQUOISE1                                                                                             \
   {                                                                                                                  \
@@ -2349,6 +2965,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     255, 62, 150, 255                                                                                                \
   }
+#define CONST_VIOLETRED                                                                                              \
+  {                                                                                                                  \
+    208, 32, 144, 255                                                                                                \
+  }
 #define CONST_VIOLETRED2                                                                                             \
   {                                                                                                                  \
     238, 58, 140, 255                                                                                                \
@@ -2360,10 +2980,6 @@ extern color YELLOWGREEN;
 #define CONST_VIOLETRED4                                                                                             \
   {                                                                                                                  \
     139, 34, 82, 255                                                                                                 \
-  }
-#define CONST_VIOLETRED                                                                                              \
-  {                                                                                                                  \
-    208, 32, 144, 255                                                                                                \
   }
 #define CONST_WHITE                                                                                                  \
   {                                                                                                                  \
@@ -2385,6 +3001,10 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     238, 238, 0, 255                                                                                                 \
   }
+#define CONST_YELLOW                                                                                                 \
+  {                                                                                                                  \
+    255, 255, 0, 255                                                                                                 \
+  }
 #define CONST_YELLOW3                                                                                                \
   {                                                                                                                  \
     205, 205, 0, 255                                                                                                 \
@@ -2397,61 +3017,9 @@ extern color YELLOWGREEN;
   {                                                                                                                  \
     154, 205, 50, 255                                                                                                \
   }
-#define CONST_YELLOW                                                                                                 \
-  {                                                                                                                  \
-    255, 255, 0, 255                                                                                                 \
-  }
-#define CONST_INK                                                                                                    \
-  {                                                                                                                  \
-    51, 54, 47, 47                                                                                                   \
-  }
 
 extern color gl_last_color;
 extern color gl_save_color;
-
-extern color BLACK;
-extern color BLUE;
-extern color COLOR_NONE;
-extern color DARKRED;
-extern color GRAY10;
-extern color GRAY20;
-extern color GRAY30;
-extern color GRAY31;
-extern color GRAY50;
-extern color GRAY60;
-extern color GRAY70;
-extern color GRAY80;
-extern color GRAY90;
-extern color GRAY;
-extern color GREEN;
-extern color ORANGE;
-extern color PURPLE;
-extern color RED;
-extern color WHITE;
-extern color YELLOW;
-extern color DARKBLUE;
-extern color DARKGREEN;
-extern color BROWN;
-extern color BLUE1;
-extern color BLUE2;
-extern color BLUE4;
-extern color BLUE3;
-extern color PINK;
-extern color DARKGRAY;
-extern color GRAY40;
-extern color LIGHTBLUE;
-extern color LIGHTGREEN;
-extern color FORESTGREEN;
-extern color BROWN1;
-extern color BROWN2;
-extern color BROWN3;
-extern color BROWN4;
-extern color GOLD1;
-extern color GOLD2;
-extern color GOLD3;
-extern color GOLD4;
-extern color GOLD;
-extern color CYAN;
 
 color color_find(const char *s);
 color color_to_mono(color a);
