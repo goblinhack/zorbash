@@ -11,6 +11,7 @@
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
+#include "my_unicode.hpp"
 #include "my_wid.hpp"
 #include "my_wid_console.hpp"
 #include "slre.hpp"
@@ -240,7 +241,9 @@ static void wid_console_wid_create(void)
         wid_set_pos(prefix, tl, br);
         wid_set_text_lhs(prefix, true);
         wid_set_shape_none(prefix);
-        wid_set_text(prefix, L"\u0084");
+        std::wstring s;
+        s += UNICODE_NEWLINE;
+        wid_set_text(prefix, s);
         wid_set_color(child, WID_COLOR_BG, COLOR_NONE);
         wid_set_color(child, WID_COLOR_TEXT_FG, UI_CONSOLE_INPUT_COLOR);
       } else {

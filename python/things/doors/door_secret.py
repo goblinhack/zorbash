@@ -24,52 +24,52 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".1")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".2")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".3")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".4")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".5")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".6")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".7")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".8")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".9")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".10")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".11")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".12")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".13")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".14")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".15")
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="#", ascii_bg="gray", ascii_fg="white",
             tile=name + ".16")
 
     my.tp_update(self)

@@ -53,8 +53,8 @@ def tp_init(
             my.tile(self, t)
     else:
         my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
-            tile=name)
+                ascii_char="#", ascii_bg="gray", ascii_fg="white",
+                tile=name)
 
     if left1_tiles is not None:
         for t in left1_tiles:
