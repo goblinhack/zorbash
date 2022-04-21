@@ -11,7 +11,9 @@ def tp_init(name):
     my.z_depth(self, my.MAP_DEPTH_THE_GRID)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
-    my.tile(self, tile=name)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name)
     my.tp_update(self)
 
 

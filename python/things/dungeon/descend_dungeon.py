@@ -24,14 +24,30 @@ def tp_init(name, text_name, short_text_name):
     my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
 
     delay = 50
-    my.tile(self, tile=name + ".1", is_dir_none=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2", is_dir_none=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3", is_dir_none=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4", is_dir_none=True, delay_ms=delay)
-    my.tile(self, tile=name + ".5", is_dir_none=True, delay_ms=delay)
-    my.tile(self, tile=name + ".6", is_dir_none=True, delay_ms=delay)
-    my.tile(self, tile=name + ".7", is_dir_none=True, delay_ms=delay)
-    my.tile(self, tile=name + ".8", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".1", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".2", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".3", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".4", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".5", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".6", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".7", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".8", is_dir_none=True, delay_ms=delay)
 
     my.tp_update(self)
 

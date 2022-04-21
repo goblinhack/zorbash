@@ -262,22 +262,24 @@ static void game_display_flames_change(int w, int h)
   //
   // Some random sparks
   //
-  for (auto x = 0; x < w; x++) {
-    if (non_pcg_random_range(0, 1000) < 995) {
-      continue;
-    }
+  if (! g_opt_ascii) {
+    for (auto x = 0; x < w; x++) {
+      if (non_pcg_random_range(0, 1000) < 995) {
+        continue;
+      }
 
-    int sparks = 2;
-    while (sparks--) {
-      for (auto y = h / 2; y < h - 1; y++) {
-        auto c0 = bg[ x ][ y ];
-        auto c1 = bg[ x ][ y + 1 ];
+      int sparks = 2;
+      while (sparks--) {
+        for (auto y = h / 2; y < h - 1; y++) {
+          auto c0 = bg[ x ][ y ];
+          auto c1 = bg[ x ][ y + 1 ];
 
-        if (c0.r == 0) {
-          if (c1.r > 0) {
-            bg[ x ][ y ].r = 200;
-            bg[ x ][ y ].g = 200;
-            bg[ x ][ y ].b = 200;
+          if (c0.r == 0) {
+            if (c1.r > 0) {
+              bg[ x ][ y ].r = 255;
+              bg[ x ][ y ].g = 200;
+              bg[ x ][ y ].b = 200;
+            }
           }
         }
       }
@@ -346,38 +348,79 @@ static void game_display_flames_change(int w, int h)
   //
   // Blend the flames
   //
-  for (auto blend = 0; blend < 2; blend++) {
-    for (auto x = 1; x < w - 1; x++) {
-      for (auto y = 1; y < h + 1; y++) {
-        auto c0 = bg[ x - 1 ][ y - 1 ];
-        auto c1 = bg[ x ][ y - 1 ];
-        auto c2 = bg[ x + 1 ][ y - 1 ];
-        auto c3 = bg[ x - 1 ][ y ];
-        auto c4 = bg[ x ][ y ];
-        auto c5 = bg[ x + 1 ][ y ];
-        auto c6 = bg[ x - 1 ][ y + 1 ];
-        auto c7 = bg[ x ][ y + 1 ];
-        auto c8 = bg[ x + 1 ][ y + 1 ];
+  static int blend_max = 2;
+  if (g_opt_ascii) {
+    if (non_pcg_random_range(0, 100) < 20) {
+      blend_max = 1;
+    }
+    if (non_pcg_random_range(0, 100) < 20) {
+      blend_max = 2;
+    }
+    if (non_pcg_random_range(0, 100) < 20) {
+      blend_max = 3;
+    }
+    for (auto blend = 0; blend < blend_max; blend++) {
+      for (auto x = 1; x < w; x++) {
+        for (auto y = 1; y < h; y++) {
+          auto c0 = bg[ x - 1 ][ y - 1 ];
+          auto c1 = bg[ x ][ y - 1 ];
+          auto c2 = bg[ x + 1 ][ y - 1 ];
+          auto c3 = bg[ x - 1 ][ y ];
+          auto c4 = bg[ x ][ y ];
+          auto c5 = bg[ x + 1 ][ y ];
+          auto c6 = bg[ x - 1 ][ y + 1 ];
+          auto c7 = bg[ x ][ y + 1 ];
+          auto c8 = bg[ x + 1 ][ y + 1 ];
 
-        int r = ((int) c0.r + (int) c1.r + (int) c2.r + (int) c3.r + (int) c4.r + (int) c5.r + (int) c6.r +
-                 (int) c7.r + (int) c8.r) /
-                9;
-        int g = ((int) c0.g + (int) c1.g + (int) c2.g + (int) c3.g + (int) c4.g + (int) c5.g + (int) c6.g +
-                 (int) c7.g + (int) c8.g) /
-                9;
-        int b = ((int) c0.b + (int) c1.b + (int) c2.b + (int) c3.b + (int) c4.b + (int) c5.b + (int) c6.b +
-                 (int) c7.b + (int) c8.b) /
-                9;
-        int a = 255;
+          int r = ((int) c0.r + (int) c1.r + (int) c2.r + (int) c3.r + (int) c4.r + (int) c5.r + (int) c6.r +
+                   (int) c7.r + (int) c8.r) /
+                  10;
+          int g = ((int) c0.g + (int) c1.g + (int) c2.g + (int) c3.g + (int) c4.g + (int) c5.g + (int) c6.g +
+                   (int) c7.g + (int) c8.g) /
+                  10;
+          int b = ((int) c0.b + (int) c1.b + (int) c2.b + (int) c3.b + (int) c4.b + (int) c5.b + (int) c6.b +
+                   (int) c7.b + (int) c8.b) /
+                  9;
+          int a = 255;
 
-        bg2[ x ][ y ] = color(r, g, b, a);
+          bg2[ x ][ y ] = color(r, g, b, a);
+        }
       }
     }
+  } else {
+    for (auto blend = 0; blend < blend_max; blend++) {
+      for (auto x = 1; x < w; x++) {
+        for (auto y = 1; y < h; y++) {
+          auto c0 = bg[ x - 1 ][ y - 1 ];
+          auto c1 = bg[ x ][ y - 1 ];
+          auto c2 = bg[ x + 1 ][ y - 1 ];
+          auto c3 = bg[ x - 1 ][ y ];
+          auto c4 = bg[ x ][ y ];
+          auto c5 = bg[ x + 1 ][ y ];
+          auto c6 = bg[ x - 1 ][ y + 1 ];
+          auto c7 = bg[ x ][ y + 1 ];
+          auto c8 = bg[ x + 1 ][ y + 1 ];
 
-    for (auto x = 1; x < w - 1; x++) {
-      for (auto y = 1; y < h; y++) {
-        bg[ x ][ y ] = bg2[ x ][ y ];
+          int r = ((int) c0.r + (int) c1.r + (int) c2.r + (int) c3.r + (int) c4.r + (int) c5.r + (int) c6.r +
+                   (int) c7.r + (int) c8.r) /
+                  10;
+          int g = ((int) c0.g + (int) c1.g + (int) c2.g + (int) c3.g + (int) c4.g + (int) c5.g + (int) c6.g +
+                   (int) c7.g + (int) c8.g) /
+                  10;
+          int b = ((int) c0.b + (int) c1.b + (int) c2.b + (int) c3.b + (int) c4.b + (int) c5.b + (int) c6.b +
+                   (int) c7.b + (int) c8.b) /
+                  10;
+          int a = 255;
+
+          bg2[ x ][ y ] = color(r, g, b, a);
+        }
       }
+    }
+  }
+
+  for (auto x = 1; x < w; x++) {
+    for (auto y = 1; y < h; y++) {
+      bg[ x ][ y ] = bg2[ x ][ y ];
     }
   }
 }

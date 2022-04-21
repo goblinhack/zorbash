@@ -113,38 +113,102 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 200
-    my.tile(self, tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".5.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".6.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".7.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".8.100", is_hp_100_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".5.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".6.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".7.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".8.75", is_hp_75_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".5.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".6.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".7.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".8.50", is_hp_50_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".2.25", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".3.25", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".4.25", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".5.25", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".6.25", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".7.25", is_hp_25_percent=True, delay_ms=delay)
-    my.tile(self, tile=name + ".8.25", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".4.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".5.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".6.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".7.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".8.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".1.75", is_hp_75_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".2.75", is_hp_75_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".3.75", is_hp_75_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".4.75", is_hp_75_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".5.75", is_hp_75_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".6.75", is_hp_75_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".7.75", is_hp_75_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".8.75", is_hp_75_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".1.50", is_hp_50_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".2.50", is_hp_50_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".3.50", is_hp_50_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".4.50", is_hp_50_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".5.50", is_hp_50_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".6.50", is_hp_50_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".7.50", is_hp_50_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".8.50", is_hp_50_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".2.25", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".3.25", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".4.25", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".5.25", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".6.25", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".7.25", is_hp_25_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".8.25", is_hp_25_percent=True, delay_ms=delay)
 
     my.tp_update(self)
 

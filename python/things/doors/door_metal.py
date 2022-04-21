@@ -54,15 +54,33 @@ def tp_init(name):
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
-    my.tile(self, tile=name + ".100", is_hp_100_percent=True)
-    my.tile(self, tile=name + ".75", is_hp_75_percent=True)
-    my.tile(self, tile=name + ".50", is_hp_50_percent=True)
-    my.tile(self, tile=name + ".25", is_hp_25_percent=True)
-    my.tile(self, tile=name + ".dead", is_dead=True)
-    my.tile(self, tile=name + ".open", is_hp_100_percent=True, is_open=True)
-    my.tile(self, tile=name + ".open", is_hp_75_percent=True, is_open=True)
-    my.tile(self, tile=name + ".open", is_hp_50_percent=True, is_open=True)
-    my.tile(self, tile=name + ".open", is_hp_25_percent=True, is_open=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".100", is_hp_100_percent=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".75", is_hp_75_percent=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".50", is_hp_50_percent=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".25", is_hp_25_percent=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".dead", is_dead=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".open", is_hp_100_percent=True, is_open=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".open", is_hp_75_percent=True, is_open=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".open", is_hp_50_percent=True, is_open=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".open", is_hp_25_percent=True, is_open=True)
 
     my.tp_update(self)
 

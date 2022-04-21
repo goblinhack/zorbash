@@ -122,12 +122,24 @@ def tp_init(name, text_name, short_text_name):
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
-    my.tile(self, tile=name + ".1", delay_ms=500)
-    my.tile(self, tile=name + ".2", delay_ms=500)
-    my.tile(self, tile=name + ".3", delay_ms=500)
-    my.tile(self, tile=name + ".4", delay_ms=500)
-    my.tile(self, tile=name + ".5", delay_ms=500)
-    my.tile(self, tile=name + ".6", delay_ms=500)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".1", delay_ms=500)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".2", delay_ms=500)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".3", delay_ms=500)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".4", delay_ms=500)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".5", delay_ms=500)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".6", delay_ms=500)
 
     my.tp_update(self)
 

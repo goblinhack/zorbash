@@ -41,9 +41,15 @@ def tp_init(name, text_name):
     my.text_description(self, "Devoted thrust skill.")
     my.text_enchant(self, "+10 percent DMG")
     my.text_skill(self, "Redirect health to damage, costing stamina")
-    my.tile(self, tile=name)
-    my.tile(self, tile=name + "_activated")
-    my.tile(self, tile=name + "_inactive")
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + "_activated")
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + "_inactive")
     # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tp_update(self)
 
