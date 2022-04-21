@@ -25,7 +25,9 @@ def tp_init(name):
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
-    my.tile(self, tile="nothing")
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile="nothing")
     delay = 25
     my.tile(self, "explosion_fire.1", delay_ms=delay)
     my.tile(self, "explosion_fire.2", delay_ms=delay)

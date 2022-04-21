@@ -26,7 +26,9 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     for t in tiles:
-        my.tile(self, tile=t)
+        my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=t)
 
     my.tp_update(self)
 

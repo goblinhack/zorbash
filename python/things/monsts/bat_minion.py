@@ -95,16 +95,34 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
     delay = 70
-    my.tile(self, tile=name + ".1.100", delay_ms=delay)
-    my.tile(self, tile=name + ".2.100", delay_ms=delay)
-    my.tile(self, tile=name + ".3.100", delay_ms=delay)
-    my.tile(self, tile=name + ".4.100", delay_ms=delay)
-    my.tile(self, tile=name + ".5.100", delay_ms=delay)
-    my.tile(self, tile=name + ".6.100", delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".1.100", delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".2.100", delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".3.100", delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".4.100", delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".5.100", delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".6.100", delay_ms=delay)
 
-    my.tile(self, tile=name + ".dead.1", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".dead.2", is_dead=True, delay_ms=delay)
-    my.tile(self, tile=name + ".dead.3", is_dead=True, is_end_of_anim=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".dead.1", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".dead.2", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".dead.3", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)
 

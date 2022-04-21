@@ -24,10 +24,18 @@ def tp_init(name, text_name):
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
-    my.tile(self, tile=name + ".100", is_hp_100_percent=True)
-    my.tile(self, tile=name + ".75", is_hp_75_percent=True)
-    my.tile(self, tile=name + ".50", is_hp_50_percent=True)
-    my.tile(self, tile=name + ".25", is_hp_25_percent=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".100", is_hp_100_percent=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".75", is_hp_75_percent=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".50", is_hp_50_percent=True)
+    my.tile(self,
+            ascii_char="X", ascii_bg="", ascii_fg="white",
+            tile=name + ".25", is_hp_25_percent=True)
 
     my.tp_update(self)
 
