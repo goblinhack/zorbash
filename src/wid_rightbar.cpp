@@ -72,8 +72,8 @@ static void wid_rightbar_stats_over_def_b(Widp w, int32_t relx, int32_t rely, in
   wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Defense    ");
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   wid_rightbar_popup->log(
-      "Your armor factor is your main defense against melee attacks. An attacker must roll more than your AC to hit "
-      "you, so a higher AC is better.",
+      "Your armor factor is your main defense against melee attacks. An attacker must roll more than your defense to "
+      "hit you, so a higher value is better.",
       true);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 

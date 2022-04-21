@@ -13,6 +13,7 @@
 #include "my_sys.hpp"
 #include "my_thing_template.hpp"
 #include "my_ui.hpp"
+#include "my_unicode.hpp"
 
 struct ascii_ ascii;
 
@@ -649,13 +650,13 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     if (unlikely(! tile)) {
       tile = font_ui->unicode_to_tile(c);
       if (tile == nullptr) {
-        tile = tile_find_mand(TILE_UNKNOWN_STR);
+        tile = tile_find_mand(UNICODE_WTF_STR);
       }
     }
 
     auto saved_fg = fg;
 
-    auto is_cursor = (c == TILE_CURSOR_CHAR);
+    auto is_cursor = (c == UNICODE_CURSOR);
     if (unlikely(is_cursor)) {
       static uint32_t last;
       static uint8_t  first = true;
@@ -688,7 +689,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
       if (bg.r || bg.g || bg.b || bg.a) {
         static Tilep tile;
         if (unlikely(! tile)) {
-          tile = tile_find_mand(TILE_BLOCK_STR);
+          tile = tile_find_mand(UNICODE_BLOCK_STR);
         }
         cell->bg_tile = tile;
       } else {
@@ -1026,7 +1027,7 @@ static void ascii_display_mouse(point mouse_tile_tl, point mouse_tile_br, point 
   glcolor(WHITE);
 
   blit_init();
-  tile_blit(tile_find_mand(TILE_POINTER), point(mouse_tile_tl.x, mouse_tile_tl.y),
+  tile_blit(tile_find_mand(UNICODE_POINTER_STR), point(mouse_tile_tl.x, mouse_tile_tl.y),
             point(mouse_tile_br.x, mouse_tile_br.y));
   blit_flush();
   //
