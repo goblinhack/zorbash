@@ -1,6 +1,10 @@
 
 #pragma once
 
+#include <string>
+
+wchar_t unicode_alias_to_char(const std::string &i);
+
 #define UNICODE_0x20                 /* 32	*/ L' ' // space
 #define UNICODE_SPACE                UNICODE_0x20
 #define UNICODE_0x21                 /* 33	*/ L'!' // exclamation_mark
