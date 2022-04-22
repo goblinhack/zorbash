@@ -8,6 +8,7 @@
 #include "my_gl.hpp"
 #include "my_random.hpp"
 #include "my_sys.hpp"
+#include "my_unicode.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
@@ -21,7 +22,7 @@ static void game_display_flames_tiles(int w, int h)
   TRACE_NO_INDENT();
   float bright = 2.5;
 
-  auto tile = tile_find_mand("1.97");
+  auto tile = tile_find_mand(UNICODE_BLOCK_STR);
   int  tw   = game->config.ascii_gl_width / 2;
   int  th   = game->config.ascii_gl_height / 2;
 

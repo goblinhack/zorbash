@@ -61,7 +61,7 @@ void Thing::goal_penalty_tick(void)
 
     if (attacker->is_dead) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: Remove goal penalty, is dead: %s", attacker->to_string().c_str());
+        dbg("Robot: Remove goal penalty, is dead: %s", attacker->to_string().c_str());
       }
       ai->goal_penalty.erase(p.first);
       return;
@@ -69,13 +69,13 @@ void Thing::goal_penalty_tick(void)
 
     if (--p.second > 0) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: goal penalty: %s (%d timeout)", attacker->to_string().c_str(), p.second);
+        dbg("Robot: goal penalty: %s (%d timeout)", attacker->to_string().c_str(), p.second);
       }
       continue;
     }
 
     if (is_player() && game->robot_mode) {
-      CON("Robot: Remove goal penalty: %s (%d timeout)", attacker->to_string().c_str(), p.second);
+      dbg("Robot: Remove goal penalty: %s (%d timeout)", attacker->to_string().c_str(), p.second);
     }
 
     ai->goal_penalty.erase(p.first);
@@ -96,13 +96,13 @@ void Thing::add_goal_penalty(Thingp attacker)
   if (! penalty) {
     penalty = 20;
     if (is_player() && game->robot_mode) {
-      CON("Robot: Set new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
+      dbg("Robot: Set new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
     } else {
       dbg("Set new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
     }
   } else {
     if (is_player() && game->robot_mode) {
-      CON("Robot: Increment new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
+      dbg("Robot: Increment new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
     } else {
       dbg("Increment new goal penalty %s to %d", attacker->to_string().c_str(), penalty);
     }
