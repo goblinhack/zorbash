@@ -96,7 +96,7 @@ void Thing::add_enemy(Thingp attacker)
 
   if (! aip()->enemies[ attacker->id ]) {
     if (is_player() && game->robot_mode) {
-      CON("Robot: enemy add %s", attacker->to_string().c_str());
+      dbg("Robot: enemy add %s", attacker->to_string().c_str());
     } else {
       dbg("Add new enemy %s", attacker->to_string().c_str());
     }

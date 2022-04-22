@@ -650,7 +650,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     if (unlikely(! tile)) {
       tile = font_ui->unicode_to_tile(c);
       if (tile == nullptr) {
-        tile = tile_find_mand(UNICODE_WTF_STR);
+        tile = tile_find_mand(UNICODE_UNKNOWN_STR);
       }
     }
 

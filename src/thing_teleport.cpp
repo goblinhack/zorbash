@@ -286,7 +286,7 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
 
     if (be_careful) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: Cannot teleport as far as it would like");
+        dbg("Robot: Cannot teleport as far as it would like");
       }
       if (too_far) {
         *too_far = true;

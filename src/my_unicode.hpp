@@ -283,17 +283,19 @@ wchar_t unicode_alias_to_char(const std::string &i);
 #define UNICODE_0xbf                 /* 191 */ L'¿'
 #define UNICODE_0xc0                 /* 192 */ L'À' // cursor
 #define UNICODE_CURSOR               UNICODE_0xc0
+#define UNICODE_CURSOR_STR           "3.160"
 #define UNICODE_0xc1                 /* 193 */ L'Á' // block
 #define UNICODE_BLOCK                UNICODE_0xc1
-#define UNICODE_BLOCK_STR            "3.193"
+#define UNICODE_BLOCK_STR            "3.161"
 #define UNICODE_0xc2                 /* 194 */ L'Â' // pointer
 #define UNICODE_POINTER              UNICODE_0xc2
-#define UNICODE_POINTER_STR          "3.194"
+#define UNICODE_POINTER_STR          "3.162"
 #define UNICODE_0xc3                 /* 195 */ L'Ã' // wtf
-#define UNICODE_WTF                  UNICODE_0xc3
-#define UNICODE_WTF_STR              "3.195"
+#define UNICODE_UNKNOWN              UNICODE_0xc3
+#define UNICODE_UNKNOWN_STR          "3.163"
 #define UNICODE_0xc4                 /* 196 */ L'Ä' // newline
 #define UNICODE_NEWLINE              UNICODE_0xc4
+#define UNICODE_NEWLINE_STR          "3.164"
 #define UNICODE_0xc5                 /* 197 */ L'Å'
 #define UNICODE_0xc6                 /* 198 */ L'Æ'
 #define UNICODE_0xc7                 /* 199 */ L'Ç'

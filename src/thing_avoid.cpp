@@ -244,7 +244,7 @@ void Thing::avoid_tick(void)
 
     if (attacker->is_dead) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: Remove avoid, is dead: %s", attacker->to_string().c_str());
+        dbg("Robot: Remove avoid, is dead: %s", attacker->to_string().c_str());
       }
       aip()->avoid.erase(p.first);
       return;
@@ -252,7 +252,7 @@ void Thing::avoid_tick(void)
 
     if (--p.second > 0) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: Avoid: %s (%d count)", attacker->to_string().c_str(), p.second);
+        dbg("Robot: Avoid: %s (%d count)", attacker->to_string().c_str(), p.second);
       }
       continue;
     }
@@ -262,7 +262,7 @@ void Thing::avoid_tick(void)
     //
     if (distance(attacker->curr_at, curr_at) > distance_avoid_get()) {
       if (is_player() && game->robot_mode) {
-        CON("Robot: Remove avoid: %s", attacker->to_string().c_str());
+        dbg("Robot: Remove avoid: %s", attacker->to_string().c_str());
       }
       aip()->avoid.erase(p.first);
       return;
@@ -292,7 +292,7 @@ void Thing::add_avoid(Thingp attacker)
 
   if (! aip()->avoid[ attacker->id ]) {
     if (is_player() && game->robot_mode) {
-      CON("Robot: Add new avoid %s", attacker->to_string().c_str());
+      dbg("Robot: Add new avoid %s", attacker->to_string().c_str());
     } else {
       dbg("Add new avoid %s", attacker->to_string().c_str());
     }
