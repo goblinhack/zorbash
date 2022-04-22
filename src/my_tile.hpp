@@ -30,7 +30,7 @@ public:
   Tile(const class Tile *tile);
 
   std::string name;
-  std::string ascii_char;
+  wchar_t     ascii_char = {};
   std::string ascii_fg;
   std::string ascii_bg;
   color       ascii_fg_col;

@@ -17,7 +17,7 @@ def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
 
     if bot3_tiles is not None:
         for t in bot3_tiles:
-            my.bot3_tile(self, t, ascii_char=".", ascii_bg="", ascii_fg="white")
+            my.bot3_tile(self, t, ascii_char="middle_dot", ascii_bg="", ascii_fg="white")
     else:
         my.bot3_tile(self, name, ascii_char=".", ascii_bg="", ascii_fg="white")
 

@@ -10,6 +10,7 @@
 #include "my_sys.hpp"
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"
+#include "my_unicode.hpp"
 
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
@@ -191,10 +192,10 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
   int is_alive_on_end_of_anim = 0;
   int is_resurrecting         = 0;
 
-  char *tile_name  = nullptr;
-  char *ascii_char = nullptr;
-  char *ascii_bg   = nullptr;
-  char *ascii_fg   = nullptr;
+  char *tile_name      = nullptr;
+  char *ascii_char_str = nullptr;
+  char *ascii_bg       = nullptr;
+  char *ascii_fg       = nullptr;
 
   static char *kwlist[] = {(char *) "class",
                            (char *) "tile",
@@ -233,9 +234,9 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
                            0};
 
   if (! PyArg_ParseTupleAndKeywords(
-          args, keywds, "O|ssssiiisiiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &tile_name, &ascii_char, &ascii_bg,
-          &ascii_fg, &delay_ms, &frame, &is_moving, &is_jumping, &begin_jump, &is_outline, &left, &right, &up, &down,
-          &none, &is_yyy5, &is_yyy6, &is_yyy7, &is_yyy8, &is_yyy9, &is_invisible, &is_hp_25_percent,
+          args, keywds, "O|ssssiiisiiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &tile_name, &ascii_char_str,
+          &ascii_bg, &ascii_fg, &delay_ms, &frame, &is_moving, &is_jumping, &begin_jump, &is_outline, &left, &right,
+          &up, &down, &none, &is_yyy5, &is_yyy6, &is_yyy7, &is_yyy8, &is_yyy9, &is_invisible, &is_hp_25_percent,
           &is_hp_50_percent, &is_hp_75_percent, &is_hp_100_percent, &is_in_water, &is_sleeping, &is_open, &is_dead,
           &is_end_of_anim, &is_dead_on_end_of_anim, &is_resurrecting, &is_alive_on_end_of_anim)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -372,8 +373,8 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
       tile->frame     = frame;
       tile->is_moving = is_moving;
 
-      if (ascii_char) {
-        tile->ascii_char = ascii_char;
+      if (ascii_char_str) {
+        tile->ascii_char = unicode_alias_to_char(ascii_char_str);
       }
 
       if (ascii_bg) {
