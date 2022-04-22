@@ -84,7 +84,7 @@ def init_ui_tile_bg():
 
 
 @timeme
-def init_ui_health_bar():
+def init_ui_health_bar_pixelart():
     tiles = [
         "health_bar_17",
         "health_bar_16",
@@ -107,7 +107,38 @@ def init_ui_health_bar():
     ]
     my.tile_load_arr(
         file="data/gfx/ui/pixelart/ui_health_bar.tga",
-        name="ui_health_bar",
+        name="ui_health_bar_pixelart",
+        width=128,
+        height=8,
+        arr=tiles,
+    )
+
+
+@timeme
+def init_ui_health_bar_ascii():
+    tiles = [
+        "health_bar_ascii_17",
+        "health_bar_ascii_16",
+        "health_bar_ascii_15",
+        "health_bar_ascii_14",
+        "health_bar_ascii_13",
+        "health_bar_ascii_12",
+        "health_bar_ascii_11",
+        "health_bar_ascii_10",
+        "health_bar_ascii_9",
+        "health_bar_ascii_8",
+        "health_bar_ascii_7",
+        "health_bar_ascii_6",
+        "health_bar_ascii_5",
+        "health_bar_ascii_4",
+        "health_bar_ascii_3",
+        "health_bar_ascii_2",
+        "health_bar_ascii_1",
+        "health_bar_ascii_0",
+    ]
+    my.tile_load_arr(
+        file="data/gfx/ui/ascii/ui_health_bar.tga",
+        name="ui_health_bar_ascii",
         width=128,
         height=8,
         arr=tiles,
@@ -13426,7 +13457,8 @@ init_ui_circle()
 init_ui_credits_bg()
 init_ui_credits_fg()
 init_ui_dead()
-init_ui_health_bar()
+init_ui_health_bar_ascii()
+init_ui_health_bar_pixelart()
 init_ui_inventory()
 init_ui_rightbar()
 init_ui_minimap()

@@ -776,7 +776,7 @@ static void wid_topcon_wid_create(void)
     wid_topcon_container = wid_new_container(wid_topcon_window, "wid topcon container");
     wid_set_pos(wid_topcon_container, tl, br);
     wid_set_shape_square(wid_topcon_container);
-    wid_set_style(wid_topcon_container, 1);
+    wid_set_style(wid_topcon_container, UI_WID_STYLE_DARK);
     color c = GRAY;
     c.a     = 150;
     wid_set_color(wid_topcon_container, WID_COLOR_BG, c);
