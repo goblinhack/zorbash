@@ -74,7 +74,7 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("pike", point(x, y));
         t->carry(w);
       }
@@ -90,11 +90,11 @@ void Game::place_player(void)
         auto w = level->thing_new("shovel", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("ring_shield", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("very_broadsword", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -103,7 +103,7 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_draining", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("axe", point(x, y));
         t->carry(w);
       }
