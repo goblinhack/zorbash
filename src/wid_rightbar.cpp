@@ -634,9 +634,12 @@ static bool wid_rightbar_pixelart_create(void)
 
   wid_rightbar_fini();
 
+  int width = UI_SIDEBAR_RIGHT_WIDTH;
+  int y_at  = 6;
+
   {
     TRACE_AND_INDENT();
-    point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
+    point tl = make_point(TERM_WIDTH - width, 0);
     point br = make_point(TERM_WIDTH - 1, UI_SIDEBAR_RIGHT_HEIGHT);
 
     wid_rightbar = wid_new_square_window("wid rightbar");
@@ -651,8 +654,6 @@ static bool wid_rightbar_pixelart_create(void)
     wid_lower(wid_rightbar);
   }
 
-  int y_at = 6;
-
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "level no");
@@ -662,7 +663,7 @@ static bool wid_rightbar_pixelart_create(void)
     //
     // Level nos are divided by 2 as we have sewer levels under each level
     //
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
+    point br = make_point(width - 1, y_at + 1);
 
     auto s = dynprintf("Level %u", level->num());
     wid_set_pos(w, tl, br);
@@ -679,7 +680,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "Seed");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
+    point br = make_point(width - 1, y_at + 1);
 
     auto s = dynprintf("%%fg=gray$%s", game->seed_name.c_str());
     wid_set_pos(w, tl, br);
@@ -696,7 +697,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "title name");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
+    point br = make_point(width - 1, y_at + 1);
 
     wid_set_pos(w, tl, br);
     wid_set_text(w, player->title());
@@ -712,7 +713,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(1, y_at - 2);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at - 2);
+    point br = make_point(width - 1, y_at - 2);
 
     wid_set_pos(w, tl, br);
     auto g = dynprintf(
@@ -734,7 +735,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
 
     int i     = ((float) player->health() / (float) player->health_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
@@ -750,7 +751,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "health-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at + 1);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
+    point br = make_point(tl.x + width - 4, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
@@ -770,7 +771,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stamina-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
@@ -786,7 +787,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stamina-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at + 1);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
+    point br = make_point(tl.x + width - 4, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
@@ -806,13 +807,13 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(4, y_at + 1);
-    point br = make_point(4 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(4 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_def_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_def_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -825,13 +826,13 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at + 1);
-    point br = make_point(9 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(9 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", 10 + player->stat_att_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -844,13 +845,13 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(14, y_at + 1);
-    point br = make_point(14 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(14 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_str_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -865,13 +866,13 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(4, y_at + 1);
-    point br = make_point(4 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(4 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_con_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -884,13 +885,13 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at + 1);
-    point br = make_point(9 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(9 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_dex_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -903,13 +904,13 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(14, y_at + 1);
-    point br = make_point(14 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(14 + tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_luck_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -1107,7 +1108,7 @@ static bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        auto tile = tile_n(tiles, activated ? 2 : 1);
+        auto tile = tile_find_mand(t->tp()->name() + (activated ? "_activated" : "_inactive"));
         if (unlikely(! tile)) {
           item++;
           continue;
@@ -1274,7 +1275,7 @@ static bool wid_rightbar_pixelart_create(void)
           continue;
         }
 
-        auto tile = tile_n(tiles, activated ? 2 : 1);
+        auto tile = tile_n(tiles, activated ? 1 : 2);
         if (unlikely(! tile)) {
           item++;
           continue;
@@ -1304,8 +1305,8 @@ static bool wid_rightbar_pixelart_create(void)
   {
     auto w       = wid_new_square_window("map_mini wid");
     wid_map_mini = w;
-    point tl     = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, y_at);
-    point br     = make_point(TERM_WIDTH - 1, y_at + UI_SIDEBAR_RIGHT_WIDTH / (MAP_WIDTH / MAP_HEIGHT));
+    point tl     = make_point(TERM_WIDTH - width, y_at);
+    point br     = make_point(TERM_WIDTH - 1, y_at + width / (MAP_WIDTH / MAP_HEIGHT));
 
     wid_set_pos(w, tl, br);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
@@ -1346,9 +1347,12 @@ static bool wid_rightbar_ascii_create(void)
 
   wid_rightbar_fini();
 
+  int width = UI_SIDEBAR_RIGHT_WIDTH;
+  int y_at  = 0;
+
   {
     TRACE_AND_INDENT();
-    point tl = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, 0);
+    point tl = make_point(TERM_WIDTH - width, 0);
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
 
     wid_rightbar = wid_new_square_window("wid rightbar");
@@ -1358,20 +1362,13 @@ static bool wid_rightbar_ascii_create(void)
     wid_lower(wid_rightbar);
   }
 
-  int y_at = 0;
-
   {
     TRACE_AND_INDENT();
     auto w = wid_new_square_button(wid_rightbar, "level no");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(0, y_at - 1);
-
-    //
-    // Level nos are divided by 2 as we have sewer levels under each level
-    //
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
-
-    auto s = dynprintf("Level %u", level->num());
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    auto  s  = dynprintf("Level %u", level->num());
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
@@ -1386,7 +1383,7 @@ static bool wid_rightbar_ascii_create(void)
     auto w = wid_new_plain(wid_rightbar, "Seed");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    point br = make_point(width - 1, y_at);
 
     auto s = dynprintf("%%fg=gray$%s", game->seed_name.c_str());
     wid_set_pos(w, tl, br);
@@ -1403,7 +1400,7 @@ static bool wid_rightbar_ascii_create(void)
     auto w = wid_new_plain(wid_rightbar, "title name");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    point br = make_point(width - 1, y_at);
 
     wid_set_pos(w, tl, br);
     wid_set_text(w, player->title());
@@ -1417,9 +1414,9 @@ static bool wid_rightbar_ascii_create(void)
     TRACE_AND_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Stats");
     point tl = make_point(0, y_at);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "Score Cash Keys");
+    wid_set_text(w, "Score  Cash Keys");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
 
@@ -1429,10 +1426,10 @@ static bool wid_rightbar_ascii_create(void)
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    point br = make_point(width - 1, y_at);
 
     wid_set_pos(w, tl, br);
-    auto g = dynprintf("%%fg=gray$%06d %%fg=white$%%fg=green$$%%fg=gray$%03d %%fg=yellow$k%%fg=gray$%d",
+    auto g = dynprintf(" %%fg=gray$%06d %%fg=white$%%fg=green$$%%fg=gray$%03d  %%fg=yellow$k%%fg=gray$%d",
                        player->score(), player->gold(), player->keys());
     wid_set_text(w, g);
     wid_set_text_lhs(w, true);
@@ -1447,7 +1444,7 @@ static bool wid_rightbar_ascii_create(void)
     TRACE_AND_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Vitality");
     point tl = make_point(0, y_at);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Vitality");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
@@ -1462,7 +1459,7 @@ static bool wid_rightbar_ascii_create(void)
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
 
     int i     = ((float) player->health() / (float) player->health_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
@@ -1477,7 +1474,7 @@ static bool wid_rightbar_ascii_create(void)
     TRACE_AND_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Health");
     point tl = make_point(0, y_at);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Health");
     wid_set_shape_none(w);
@@ -1490,7 +1487,7 @@ static bool wid_rightbar_ascii_create(void)
     auto w = wid_new_plain(wid_rightbar, "health-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
+    point br = make_point(tl.x + width - 4, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
@@ -1510,7 +1507,7 @@ static bool wid_rightbar_ascii_create(void)
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point br = make_point(tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
 
     int i     = ((float) player->stamina() / (float) player->stamina_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
@@ -1525,7 +1522,7 @@ static bool wid_rightbar_ascii_create(void)
     TRACE_AND_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Health");
     point tl = make_point(0, y_at);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Stamina");
     wid_set_shape_none(w);
@@ -1538,7 +1535,7 @@ static bool wid_rightbar_ascii_create(void)
     auto w = wid_new_plain(wid_rightbar, "stamina-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
+    point br = make_point(tl.x + width - 4, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
@@ -1554,7 +1551,7 @@ static bool wid_rightbar_ascii_create(void)
     TRACE_AND_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Stats");
     point tl = make_point(0, y_at);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Stats");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
@@ -1589,7 +1586,7 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_def_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_def_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -1622,7 +1619,7 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", 10 + player->stat_att_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -1655,7 +1652,7 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_str_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -1690,7 +1687,7 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_con_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -1723,7 +1720,7 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_dex_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -1756,7 +1753,7 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
-    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    char tmp[ width + 1 ];
     snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_luck_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
@@ -1771,22 +1768,55 @@ static bool wid_rightbar_ascii_create(void)
   }
 
   //
-  // Display the shortcuts
+  // Print equipped items
   //
   {
+    TRACE_AND_INDENT();
+    auto w = wid_new_square_button(wid_rightbar, "Equipped");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(0, y_at);
+    point br = make_point(width, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Equipped");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+  }
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = player->equip_get(e);
+    if (iter) {
+      {
+        y_at += 1;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "equipment");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, iter->tp()->short_text_capitalise());
+        wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
+        wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+        wid_update(w);
+      }
+    }
+  }
+
+  //
+  // Display the shortcuts
+  //
+  if (1) {
     {
       TRACE_AND_INDENT();
+      y_at += 1;
       auto w = wid_new_square_button(wid_rightbar, "Shortcuts");
       wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
       point tl = make_point(0, y_at);
-      point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at);
+      point br = make_point(width, y_at);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Shortcuts");
       wid_set_style(w, UI_WID_STYLE_NORMAL);
     }
-    y_at += 1;
-
-    int width = UI_SIDEBAR_RIGHT_WIDTH;
 
     for (auto slot = 0; slot < (int) UI_INVENTORY_QUICK_ITEMS_MAX; slot++) {
       Thingp t = nullptr;
@@ -1798,302 +1828,321 @@ static bool wid_rightbar_ascii_create(void)
         }
       }
 
-      {
-        auto w = wid_new_square_button(wid_rightbar, "item slot");
+      if (! t) {
+        continue;
+      }
 
+      {
+        y_at += 1;
+        auto  w  = wid_new_square_button(wid_rightbar, "item slot");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
         wid_set_pos(w, tl, br);
         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
         wid_set_int_context(w, slot);
-
-        if (t) {
-          wid_set_text(w, std::to_string(slot) + " " + t->tp()->short_text_name());
-
-          if (wid_inventory_thing_selected) {
-            if (wid_inventory_thing_selected == t) {
-              wid_set_style(w, UI_WID_STYLE_RED);
-            }
-          }
-        } else {
-          wid_set_text(w, std::to_string(slot) + " -");
-        }
         wid_set_text_lhs(w, true);
+
+        wid_set_text(w, std::to_string(slot) + " " + t->tp()->short_text_capitalise());
+        wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
+        wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
         wid_update(w);
       }
-
-      y_at += 1;
     }
   }
 
-  if (0) {
-    //
-    // Skills
-    //
-    y_at += 8;
-    {
-      std::vector< Widp > wid_skillbox_items;
+  //
+  // Active skills
+  //
+  if (1) {
+    bool                got_one = false;
+    std::vector< Widp > wid_skillbox_items;
+    uint8_t             item = 0;
+    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
+      if (item < itemsp->skillbox_id.size()) {
+        auto thing_id = get(itemsp->skillbox_id, item);
+        if (! thing_id) {
+          item++;
+          continue;
+        }
 
-      uint8_t item = 0;
-      for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
-        //
-        // slot number
-        //
-        auto slot(std::to_string(i));
+        auto t         = level->thing_find(thing_id);
+        bool activated = false;
 
-        //
-        // Always create the slot even if empty as we use this for particles
-        //
-        auto  s  = "skill slot" + std::to_string(i);
-        auto  w  = wid_new_plain(wid_rightbar, s);
-        auto  x  = (i % 5) * 3 + 1;
-        auto  y  = (i / 5) * 3 + 1 + y_at;
-        point tl = make_point(x, y);
-        point br = make_point(x + 1, y + 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-
-        if (item < itemsp->skillbox_id.size()) {
-          auto thing_id = get(itemsp->skillbox_id, item);
-          if (! thing_id) {
-            item++;
-            continue;
-          }
-
-          auto t         = level->thing_find(thing_id);
-          bool activated = false;
-
-          for (auto id : itemsp->skills) {
-            auto o = level->thing_find(id);
-            if (o) {
-              if (o == t) {
-                activated = o->is_activated;
-              }
+        for (auto id : itemsp->skills) {
+          auto o = level->thing_find(id);
+          if (o) {
+            if (o == t) {
+              activated = o->is_activated;
             }
           }
-
-          auto tiles = &t->tp()->tiles;
-
-          if (! tiles) {
-            item++;
-            continue;
-          }
-
-          auto tile = tile_n(tiles, activated ? 2 : 1);
-          if (unlikely(! tile)) {
-            item++;
-            continue;
-          }
-
-          wid_set_fg_tile(w, tile);
-
-          //
-          // If choosing a target, highlight the item
-          //
-          if (i == game->skillbox_highlight_slot) {
-            wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-          } else {
-            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY60);
-          }
-
-          wid_set_on_mouse_over_begin(w, wid_skillbox_mouse_over_begin);
-          wid_set_on_mouse_over_end(w, wid_skillbox_mouse_over_end);
-          wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
-          wid_set_int_context(w, i);
-
-          //
-          // Print enchant count. This overrides the above. If you have
-          // both I'm not sure how to represent that.
-          //
-          auto enchant_count = player->skill_enchant_count(i);
-          if (enchant_count > 9) {
-            auto tile = tile_find_mand("item_enchant_N");
-            wid_set_fg3_tile(w, tile);
-          } else if (enchant_count > 0) {
-            auto tile = tile_find_mand("item_enchant_" + std::to_string(enchant_count));
-            wid_set_fg3_tile(w, tile);
-          }
         }
-        item++;
+
+        if (! activated) {
+          continue;
+        }
+        got_one = true;
+        break;
       }
+      item++;
     }
-
-    //
-    // Buffs
-    //
-    y_at += 8;
-    {
-      std::vector< Widp > wid_buffbox_items;
-
-      uint8_t item = 0;
-      for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
-        //
-        // slot number
-        //
-        auto slot(std::to_string(i));
-
-        //
-        // Always create the slot even if empty as we use this for particles
-        //
-        auto  s  = "buff slot" + std::to_string(i);
-        auto  w  = wid_new_plain(wid_rightbar, s);
-        auto  x  = (i % 5) * 3 + 1;
-        auto  y  = (i / 5) * 3 + 1 + y_at;
-        point tl = make_point(x, y);
-        point br = make_point(x + 1, y + 1);
-
+    if (got_one) {
+      {
+        TRACE_AND_INDENT();
+        y_at += 1;
+        auto w = wid_new_square_button(wid_rightbar, "Skills");
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at);
         wid_set_pos(w, tl, br);
-        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+        wid_set_text(w, "Active Skills");
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_update(w);
+      }
+      {
+        std::vector< Widp > wid_skillbox_items;
 
-        if (item < itemsp->buffbox_id.size()) {
-          auto thing_id = get(itemsp->buffbox_id, item);
-          if (! thing_id) {
-            item++;
-            continue;
-          }
+        uint8_t item = 0;
+        for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
+          if (item < itemsp->skillbox_id.size()) {
+            auto thing_id = get(itemsp->skillbox_id, item);
+            if (! thing_id) {
+              item++;
+              continue;
+            }
 
-          auto t         = level->thing_find(thing_id);
-          bool activated = false;
+            auto t         = level->thing_find(thing_id);
+            bool activated = false;
 
-          for (auto id : itemsp->buffs) {
-            auto o = level->thing_find(id);
-            if (o) {
-              if (o == t) {
-                activated = o->is_activated;
+            for (auto id : itemsp->skills) {
+              auto o = level->thing_find(id);
+              if (o) {
+                if (o == t) {
+                  activated = o->is_activated;
+                }
               }
             }
+
+            if (! activated) {
+              continue;
+            }
+
+            y_at += 1;
+            auto  w  = wid_new_plain(wid_rightbar, "Skill");
+            point tl = make_point(0, y_at);
+            point br = make_point(width - 1, y_at);
+
+            wid_set_pos(w, tl, br);
+            wid_set_mode(w, WID_MODE_OVER);
+            wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+            wid_set_mode(w, WID_MODE_NORMAL);
+            wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+            wid_set_on_mouse_over_begin(w, wid_skillbox_mouse_over_begin);
+            wid_set_on_mouse_over_end(w, wid_skillbox_mouse_over_end);
+            wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
+            wid_set_int_context(w, i);
+            wid_set_text_lhs(w, true);
+            wid_set_text(w, t->tp()->short_text_capitalise());
+            wid_update(w);
           }
-
-          auto tiles = &t->tp()->tiles;
-
-          if (! tiles) {
-            item++;
-            continue;
-          }
-
-          auto tile = tile_n(tiles, activated ? 2 : 1);
-          if (unlikely(! tile)) {
-            item++;
-            continue;
-          }
-
-          wid_set_fg_tile(w, tile);
-
-          //
-          // If choosing a target, highlight the item
-          //
-          wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-
-          wid_set_on_mouse_over_begin(w, wid_buffbox_mouse_over_begin);
-          wid_set_on_mouse_over_end(w, wid_buffbox_mouse_over_end);
-
-          wid_set_int_context(w, i);
+          item++;
         }
-        item++;
       }
     }
+  }
 
-    //
-    // Debuffs
-    //
-    y_at += 8;
-    {
-      std::vector< Widp > wid_debuffbox_items;
+  //
+  // Inactive skills
+  //
+  if (1) {
+    bool                got_one = false;
+    std::vector< Widp > wid_skillbox_items;
+    uint8_t             item = 0;
+    for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
+      if (item < itemsp->skillbox_id.size()) {
+        auto thing_id = get(itemsp->skillbox_id, item);
+        if (! thing_id) {
+          item++;
+          continue;
+        }
 
-      uint8_t item = 0;
-      for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
-        //
-        // slot number
-        //
-        auto slot(std::to_string(i));
+        auto t         = level->thing_find(thing_id);
+        bool activated = false;
 
-        //
-        // Always create the slot even if empty as we use this for particles
-        //
-        auto  s  = "debuff slot" + std::to_string(i);
-        auto  w  = wid_new_plain(wid_rightbar, s);
-        auto  x  = (i % 5) * 3 + 1;
-        auto  y  = (i / 5) * 3 + 1 + y_at;
-        point tl = make_point(x, y);
-        point br = make_point(x + 1, y + 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-
-        if (item < itemsp->debuffbox_id.size()) {
-          auto thing_id = get(itemsp->debuffbox_id, item);
-          if (! thing_id) {
-            item++;
-            continue;
-          }
-
-          auto t         = level->thing_find(thing_id);
-          bool activated = false;
-
-          for (auto id : itemsp->debuffs) {
-            auto o = level->thing_find(id);
-            if (o) {
-              if (o == t) {
-                activated = o->is_activated;
-              }
+        for (auto id : itemsp->skills) {
+          auto o = level->thing_find(id);
+          if (o) {
+            if (o == t) {
+              activated = o->is_activated;
             }
           }
-
-          auto tiles = &t->tp()->tiles;
-
-          if (! tiles) {
-            item++;
-            continue;
-          }
-
-          auto tile = tile_n(tiles, activated ? 2 : 1);
-          if (unlikely(! tile)) {
-            item++;
-            continue;
-          }
-
-          wid_set_fg_tile(w, tile);
-
-          //
-          // If choosing a target, highlight the item
-          //
-          wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-
-          wid_set_on_mouse_over_begin(w, wid_debuffbox_mouse_over_begin);
-          wid_set_on_mouse_over_end(w, wid_debuffbox_mouse_over_end);
-
-          wid_set_int_context(w, i);
         }
-        item++;
+
+        if (activated) {
+          continue;
+        }
+        got_one = true;
+        break;
+      }
+      item++;
+    }
+    if (got_one) {
+      {
+        TRACE_AND_INDENT();
+        y_at += 1;
+        auto w = wid_new_square_button(wid_rightbar, "Skills");
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Inactive Skills");
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_update(w);
+      }
+      {
+        std::vector< Widp > wid_skillbox_items;
+
+        uint8_t item = 0;
+        for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
+          if (item < itemsp->skillbox_id.size()) {
+            auto thing_id = get(itemsp->skillbox_id, item);
+            if (! thing_id) {
+              item++;
+              continue;
+            }
+
+            auto t         = level->thing_find(thing_id);
+            bool activated = false;
+
+            for (auto id : itemsp->skills) {
+              auto o = level->thing_find(id);
+              if (o) {
+                if (o == t) {
+                  activated = o->is_activated;
+                }
+              }
+            }
+
+            if (activated) {
+              continue;
+            }
+
+            y_at += 1;
+            auto  w  = wid_new_plain(wid_rightbar, "Skill");
+            point tl = make_point(0, y_at);
+            point br = make_point(width - 1, y_at);
+
+            wid_set_pos(w, tl, br);
+            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+            wid_set_on_mouse_over_begin(w, wid_skillbox_mouse_over_begin);
+            wid_set_on_mouse_over_end(w, wid_skillbox_mouse_over_end);
+            wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
+            wid_set_int_context(w, i);
+            wid_set_text_lhs(w, true);
+            wid_set_text(w, t->tp()->short_text_capitalise());
+            wid_update(w);
+          }
+          item++;
+        }
       }
     }
+  }
 
-    y_at += 9;
-
-    //
-    // Map
-    //
+  //
+  // Print buffs
+  //
+  if (1) {
+    bool    got_one = false;
+    ThingId unused;
+    FOR_ALL_BUFFS_FOR(player, id)
     {
-      auto w       = wid_new_square_window("map_mini wid");
-      wid_map_mini = w;
-      point tl     = make_point(TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH, y_at);
-      point br     = make_point(TERM_WIDTH - 1, y_at + UI_SIDEBAR_RIGHT_WIDTH / (MAP_WIDTH / MAP_HEIGHT));
+      got_one = true;
+      unused  = id;
+    }
+    if (got_one) {
+      {
+        TRACE_AND_INDENT();
+        y_at += 1;
+        auto w = wid_new_square_button(wid_rightbar, "Buffs");
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Buffs");
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+      }
+      {
+        FOR_ALL_BUFFS_FOR(player, id)
+        {
+          auto iter = level->thing_find(id);
+          if (iter) {
+            y_at += 1;
+            TRACE_AND_INDENT();
+            auto  w  = wid_new_square_button(wid_rightbar, "buffs");
+            point tl = make_point(0, y_at);
+            point br = make_point(width - 1, y_at);
+            wid_set_pos(w, tl, br);
+            wid_set_mode(w, WID_MODE_OVER);
+            wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+            wid_set_mode(w, WID_MODE_NORMAL);
+            wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+            wid_set_text_lhs(w, true);
+            wid_set_text(w, iter->tp()->short_text_capitalise());
+            wid_set_on_mouse_over_begin(w, wid_buffbox_mouse_over_begin);
+            wid_set_on_mouse_over_end(w, wid_buffbox_mouse_over_end);
+            wid_update(w);
+          }
+        }
+      }
+    }
+  }
 
-      wid_set_pos(w, tl, br);
-      wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-      wid_set_bg_tilename(w, "ui_minimap");
-      wid_set_style(w, UI_WID_STYLE_SOLID_NONE);
-      wid_set_ignore_events(w, true);
-      wid_lower(w);
-
-      int tlx, tly, brx, bry;
-      wid_get_tl_x_tl_y_br_x_br_y(w, &tlx, &tly, &brx, &bry);
-
-      level->map_mini_tl.x = tlx;
-      level->map_mini_tl.y = tly;
-      level->map_mini_br.x = brx;
-      level->map_mini_br.y = bry;
+  //
+  // Debuffs
+  //
+  if (1) {
+    bool    got_one = false;
+    ThingId unused;
+    FOR_ALL_DEBUFFS_FOR(player, id)
+    {
+      got_one = true;
+      unused  = id;
+    }
+    if (got_one) {
+      {
+        TRACE_AND_INDENT();
+        y_at += 1;
+        auto w = wid_new_square_button(wid_rightbar, "Debuffs");
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Debuffs");
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+      }
+      {
+        FOR_ALL_DEBUFFS_FOR(player, id)
+        {
+          auto iter = level->thing_find(id);
+          if (iter) {
+            y_at += 1;
+            TRACE_AND_INDENT();
+            auto  w  = wid_new_square_button(wid_rightbar, "debuffs");
+            point tl = make_point(0, y_at);
+            point br = make_point(width - 1, y_at);
+            wid_set_pos(w, tl, br);
+            wid_set_mode(w, WID_MODE_OVER);
+            wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+            wid_set_mode(w, WID_MODE_NORMAL);
+            wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+            wid_set_text_lhs(w, true);
+            wid_set_text(w, iter->tp()->short_text_capitalise());
+            wid_set_on_mouse_over_begin(w, wid_debuffbox_mouse_over_begin);
+            wid_set_on_mouse_over_end(w, wid_debuffbox_mouse_over_end);
+            wid_update(w);
+          }
+        }
+      }
     }
   }
 
