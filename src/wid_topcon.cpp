@@ -793,7 +793,7 @@ static void wid_topcon_wid_create(void)
     for (row = 0; row < UI_TOPCON_HEIGHT; row++) {
       row_bottom--;
       point tl = make_point(0, row_bottom);
-      point br = make_point(UI_TOPCON_WIDTH, row_bottom);
+      point br = make_point(UI_TOPCON_WIDTH - 1, row_bottom);
 
       TRACE_NO_INDENT();
       child = wid_new_container(wid_topcon_container, "");

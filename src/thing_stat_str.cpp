@@ -35,7 +35,7 @@ int Thing::stat_str_total(void)
       if (stat != prev) {
         prev = stat;
         dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-            modifier_to_string(iter->stat_str_mod()).c_str(), stat);
+             modifier_to_string(iter->stat_str_mod()).c_str(), stat);
       }
     }
   }
@@ -62,7 +62,7 @@ int Thing::stat_str_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_str_mod()).c_str(), stat);
+               modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
     }
@@ -75,7 +75,7 @@ int Thing::stat_str_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_str_mod()).c_str(), stat);
+               modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
     }
@@ -88,7 +88,7 @@ int Thing::stat_str_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_str_mod()).c_str(), stat);
+               modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
     }
@@ -101,7 +101,7 @@ int Thing::stat_str_total(void)
         if (stat != prev) {
           prev = stat;
           dbg3("Str: with (%s %s): %d", iter->to_short_string().c_str(),
-              modifier_to_string(iter->stat_str_mod()).c_str(), stat);
+               modifier_to_string(iter->stat_str_mod()).c_str(), stat);
         }
       }
     }
