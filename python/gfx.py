@@ -108,7 +108,7 @@ def init_ui_health_bar_pixelart():
     my.tile_load_arr(
         file="data/gfx/ui/pixelart/ui_health_bar.tga",
         name="ui_health_bar_pixelart",
-        width=128,
+        width=144,
         height=8,
         arr=tiles,
     )
@@ -153,7 +153,7 @@ def init_ui_rightbar():
     my.tile_load_arr(
         file="data/gfx/ui/pixelart/ui_rightbar.tga",
         name="ui_rightbar",
-        width=128,
+        width=144,
         height=416,
         arr=tiles,
     )

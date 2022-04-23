@@ -805,15 +805,15 @@ static bool wid_rightbar_pixelart_create(void)
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(0, y_at + 1);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point tl = make_point(4, y_at + 1);
+    point br = make_point(4 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_def_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_def_total());
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_def_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -824,15 +824,15 @@ static bool wid_rightbar_pixelart_create(void)
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(5, y_at + 1);
-    point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point tl = make_point(9, y_at + 1);
+    point br = make_point(9 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", 10 + player->stat_att_total());
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", 10 + player->stat_att_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -843,15 +843,15 @@ static bool wid_rightbar_pixelart_create(void)
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(10, y_at + 1);
-    point br = make_point(10 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point tl = make_point(14, y_at + 1);
+    point br = make_point(14 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_str_total());
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_str_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -864,15 +864,15 @@ static bool wid_rightbar_pixelart_create(void)
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(0, y_at + 1);
-    point br = make_point(0 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point tl = make_point(4, y_at + 1);
+    point br = make_point(4 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_con_total());
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_con_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -883,15 +883,15 @@ static bool wid_rightbar_pixelart_create(void)
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(5, y_at + 1);
-    point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point tl = make_point(9, y_at + 1);
+    point br = make_point(9 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_dex_total());
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_dex_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -902,15 +902,15 @@ static bool wid_rightbar_pixelart_create(void)
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(10, y_at + 1);
-    point br = make_point(10 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    point tl = make_point(14, y_at + 1);
+    point br = make_point(14 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_luck_total());
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_luck_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -940,7 +940,7 @@ static bool wid_rightbar_pixelart_create(void)
       // Always create the slot even if empty as we use this for
       // particles when dropping items.
       //
-      auto x = (i % 5) * 3 + 1;
+      auto x = (i % 5) * 3 + 2;
       auto y = (i / 5) * 3 + 1 + y_at;
 
       {
@@ -1073,7 +1073,7 @@ static bool wid_rightbar_pixelart_create(void)
       //
       auto  s  = "skill slot" + std::to_string(i);
       auto  w  = wid_new_plain(wid_rightbar, s);
-      auto  x  = (i % 5) * 3 + 1;
+      auto  x  = (i % 5) * 3 + 2;
       auto  y  = (i / 5) * 3 + 1 + y_at;
       point tl = make_point(x, y);
       point br = make_point(x + 1, y + 1);
@@ -1165,7 +1165,7 @@ static bool wid_rightbar_pixelart_create(void)
       //
       auto  s  = "buff slot" + std::to_string(i);
       auto  w  = wid_new_plain(wid_rightbar, s);
-      auto  x  = (i % 5) * 3 + 1;
+      auto  x  = (i % 5) * 3 + 2;
       auto  y  = (i / 5) * 3 + 1 + y_at;
       point tl = make_point(x, y);
       point br = make_point(x + 1, y + 1);
@@ -1240,7 +1240,7 @@ static bool wid_rightbar_pixelart_create(void)
       //
       auto  s  = "debuff slot" + std::to_string(i);
       auto  w  = wid_new_plain(wid_rightbar, s);
-      auto  x  = (i % 5) * 3 + 1;
+      auto  x  = (i % 5) * 3 + 2;
       auto  y  = (i / 5) * 3 + 1 + y_at;
       point tl = make_point(x, y);
       point br = make_point(x + 1, y + 1);
