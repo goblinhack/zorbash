@@ -139,7 +139,7 @@ def init_ui_health_bar_ascii():
     my.tile_load_arr(
         file="data/gfx/ui/ascii/ui_health_bar.tga",
         name="ui_health_bar_ascii",
-        width=128,
+        width=144,
         height=8,
         arr=tiles,
     )

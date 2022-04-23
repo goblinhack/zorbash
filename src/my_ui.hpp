@@ -41,7 +41,7 @@
 #define UI_SCROLL_JOY_SCALE_MAX      1.5
 #define UI_SIDEBAR_LEFT_WIDTH        29
 #define UI_SIDEBAR_RIGHT_HEIGHT      51
-#define UI_SIDEBAR_RIGHT_WIDTH       16
+#define UI_SIDEBAR_RIGHT_WIDTH       (g_opt_ascii ? 18 : 16)
 #define UI_TEXT_COLOR                GRAY // Default text color
 #define UI_TEXT_COLOR_STR            "gray"
 #define UI_TEXT_HIGHLIGHT_COLOR_STR  "white"

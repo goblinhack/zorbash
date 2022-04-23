@@ -696,7 +696,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "title name");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
 
     wid_set_pos(w, tl, br);
     wid_set_text(w, player->title());
@@ -712,7 +712,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(1, y_at - 2);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at - 2);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at - 2);
 
     wid_set_pos(w, tl, br);
     auto g = dynprintf(
@@ -806,7 +806,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at + 1);
-    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_def_b);
@@ -825,7 +825,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(5, y_at + 1);
-    point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+    point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
@@ -844,7 +844,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(10, y_at + 1);
-    point br = make_point(10 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+    point br = make_point(10 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
@@ -865,7 +865,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at + 1);
-    point br = make_point(0 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+    point br = make_point(0 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
@@ -884,7 +884,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(5, y_at + 1);
-    point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+    point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
@@ -903,7 +903,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(10, y_at + 1);
-    point br = make_point(10 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
+    point br = make_point(10 + tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
@@ -1362,31 +1362,31 @@ static bool wid_rightbar_ascii_create(void)
 
   {
     TRACE_AND_INDENT();
-    auto w = wid_new_plain(wid_rightbar, "level no");
+    auto w = wid_new_square_button(wid_rightbar, "level no");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
 
     //
     // Level nos are divided by 2 as we have sewer levels under each level
     //
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
 
     auto s = dynprintf("Level %u", level->num());
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
-    wid_set_shape_none(w);
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
     myfree(s);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
 
-  y_at += 1;
   {
+    y_at += 1;
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Seed");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(0, y_at - 1);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at + 1);
+    point tl = make_point(0, y_at);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
 
     auto s = dynprintf("%%fg=gray$%s", game->seed_name.c_str());
     wid_set_pos(w, tl, br);
@@ -1397,13 +1397,13 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
 
-  y_at += 1;
   {
+    y_at += 1;
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "title name");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(0, y_at - 1);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at + 1);
+    point tl = make_point(0, y_at);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
 
     wid_set_pos(w, tl, br);
     wid_set_text(w, player->title());
@@ -1412,14 +1412,24 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
 
-  y_at += 2;
+  {
+    y_at += 1;
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_square_button(wid_rightbar, "Stats");
+    point tl = make_point(0, y_at);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Score Cash Keys");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+  }
 
   {
+    y_at += 1;
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-    point tl = make_point(1, y_at - 1);
-    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at - 1);
+    point tl = make_point(0, y_at - 1);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
 
     wid_set_pos(w, tl, br);
     auto g = dynprintf("%%fg=gray$%06d %%fg=white$%%fg=green$$%%fg=gray$%03d %%fg=yellow$k%%fg=gray$%d",
@@ -1432,9 +1442,21 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
 
+  {
+    y_at += 1;
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_square_button(wid_rightbar, "Vitality");
+    point tl = make_point(0, y_at);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Vitality");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+  }
+
   ///////////////////////////////////////////////////////////////////////////
   // Health
   ///////////////////////////////////////////////////////////////////////////
+  y_at += 1;
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
@@ -1478,301 +1500,333 @@ static bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
-  y_at += 2;
 
-  if (0) {
-    ///////////////////////////////////////////////////////////////////////////
-    // stamina
-    ///////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////
+  // Stamina
+  ///////////////////////////////////////////////////////////////////////////
+  y_at += 1;
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "Health-bar");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(0, y_at);
+    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+    wid_set_pos(w, tl, br);
+
+    int i     = ((float) player->stamina() / (float) player->stamina_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
+    i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
+    i         = std::max(i, 0);
+    auto icon = "health_bar_ascii_" + std::to_string(i);
+    wid_set_fg_tilename(w, icon);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Health");
+    point tl = make_point(0, y_at);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Stamina");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stamina-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(3, y_at);
+    point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+
+    std::string s = std::to_string(player->stamina()) + "/" + std::to_string(player->stamina_max());
+    wid_set_text(w, s);
+    wid_set_text_rhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+  }
+
+  {
+    y_at += 1;
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_square_button(wid_rightbar, "Stats");
+    point tl = make_point(0, y_at);
+    point br = make_point(UI_SIDEBAR_RIGHT_WIDTH - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Stats");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+  }
+
+  ///////////////////////////////////////////////////////////////////////////
+  // DEF
+  ///////////////////////////////////////////////////////////////////////////
+  y_at += 1;
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Def");
+    point tl = make_point(0, y_at);
+    point br = make_point(2, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Def");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_def_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(3, y_at);
+    point br = make_point(4, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_def_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_def_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+  }
+  ///////////////////////////////////////////////////////////////////////////
+  // ATT
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Att");
+    point tl = make_point(6, y_at);
+    point br = make_point(8, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Att");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(9, y_at);
+    point br = make_point(10, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", 10 + player->stat_att_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+  }
+  ///////////////////////////////////////////////////////////////////////////
+  // STR
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Str");
+    point tl = make_point(12, y_at);
+    point br = make_point(14, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Str");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(15, y_at);
+    point br = make_point(16, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_str_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+  }
+  y_at += 1;
+
+  ///////////////////////////////////////////////////////////////////////////
+  // CON
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Con");
+    point tl = make_point(0, y_at);
+    point br = make_point(2, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Con");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(3, y_at);
+    point br = make_point(4, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_con_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+  }
+  ///////////////////////////////////////////////////////////////////////////
+  // DEX
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Dex");
+    point tl = make_point(6, y_at);
+    point br = make_point(8, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Dex");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(9, y_at);
+    point br = make_point(10, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_dex_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+  }
+  ///////////////////////////////////////////////////////////////////////////
+  // LUCK
+  ///////////////////////////////////////////////////////////////////////////
+  {
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_plain(wid_rightbar, "Lck");
+    point tl = make_point(12, y_at);
+    point br = make_point(14, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Lck");
+    wid_set_shape_none(w);
+    wid_set_text_lhs(w, true);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+  }
+  {
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "stats1-value");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(15, y_at);
+    point br = make_point(16, tl.y);
+    wid_set_pos(w, tl, br);
+    wid_set_shape_none(w);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+
+    char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
+    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_luck_total());
+    wid_set_text(w, tmp);
+    wid_set_text_lhs(w, true);
+    wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+  }
+  y_at += 1;
+
+  auto itemsp = player->maybe_itemsp();
+  if (! itemsp) {
+    ERR("No itemsp for player");
+    return false;
+  }
+
+  //
+  // Display the shortcuts
+  //
+  {
     {
       TRACE_AND_INDENT();
-      auto w = wid_new_plain(wid_rightbar, "stamina-bar");
+      auto w = wid_new_square_button(wid_rightbar, "Shortcuts");
       wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
       point tl = make_point(0, y_at);
-      point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 1, tl.y);
+      point br = make_point(UI_SIDEBAR_RIGHT_WIDTH, y_at);
       wid_set_pos(w, tl, br);
-      wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-      wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
-
-      int i     = ((float) player->stamina() / (float) player->stamina_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
-      i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
-      i         = std::max(i, 0);
-      auto icon = "health_bar_" + std::to_string(i);
-      wid_set_fg_tilename(w, icon);
-    }
-    {
-      TRACE_AND_INDENT();
-      auto w = wid_new_plain(wid_rightbar, "stamina-value");
-      wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-      point tl = make_point(3, y_at + 1);
-      point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH - 4, tl.y);
-      wid_set_pos(w, tl, br);
-      wid_set_shape_none(w);
-      wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-      wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
-
-      std::string s = std::to_string(player->stamina()) + "/" + std::to_string(player->stamina_max());
-      wid_set_text(w, s);
-      wid_set_text_rhs(w, true);
-    }
-    y_at += 2;
-
-    ///////////////////////////////////////////////////////////////////////////
-    // DEF
-    ///////////////////////////////////////////////////////////////////////////
-    {
-      TRACE_AND_INDENT();
-      auto w = wid_new_plain(wid_rightbar, "stats1-value");
-      wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-      point tl = make_point(0, y_at + 1);
-      point br = make_point(tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-      wid_set_pos(w, tl, br);
-      wid_set_shape_none(w);
-      wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_def_b);
-      wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-
-      char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-      snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_def_total());
-      wid_set_text(w, tmp);
-      wid_set_text_lhs(w, true);
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    // ATT
-    ///////////////////////////////////////////////////////////////////////////
-    {
-      TRACE_AND_INDENT();
-      auto w = wid_new_plain(wid_rightbar, "stats1-value");
-      wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-      point tl = make_point(5, y_at + 1);
-      point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-      wid_set_pos(w, tl, br);
-      wid_set_shape_none(w);
-      wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
-      wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-
-      char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-      snprintf(tmp, sizeof(tmp) - 1, "   %2d", 10 + player->stat_att_total());
-      wid_set_text(w, tmp);
-      wid_set_text_lhs(w, true);
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    // STR
-    ///////////////////////////////////////////////////////////////////////////
-    {
-      TRACE_AND_INDENT();
-      auto w = wid_new_plain(wid_rightbar, "stats1-value");
-      wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-      point tl = make_point(10, y_at + 1);
-      point br = make_point(10 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-      wid_set_pos(w, tl, br);
-      wid_set_shape_none(w);
-      wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
-      wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-
-      char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-      snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_str_total());
-      wid_set_text(w, tmp);
-      wid_set_text_lhs(w, true);
+      wid_set_text(w, "Shortcuts");
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
     }
     y_at += 1;
 
-    ///////////////////////////////////////////////////////////////////////////
-    // CON
-    ///////////////////////////////////////////////////////////////////////////
-    {
-      TRACE_AND_INDENT();
-      auto w = wid_new_plain(wid_rightbar, "stats1-value");
-      wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-      point tl = make_point(0, y_at + 1);
-      point br = make_point(0 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-      wid_set_pos(w, tl, br);
-      wid_set_shape_none(w);
-      wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
-      wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    int width = UI_SIDEBAR_RIGHT_WIDTH;
 
-      char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-      snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_con_total());
-      wid_set_text(w, tmp);
-      wid_set_text_lhs(w, true);
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    // DEX
-    ///////////////////////////////////////////////////////////////////////////
-    {
-      TRACE_AND_INDENT();
-      auto w = wid_new_plain(wid_rightbar, "stats1-value");
-      wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-      point tl = make_point(5, y_at + 1);
-      point br = make_point(5 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-      wid_set_pos(w, tl, br);
-      wid_set_shape_none(w);
-      wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
-      wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
+    for (auto slot = 0; slot < (int) UI_INVENTORY_QUICK_ITEMS_MAX; slot++) {
+      Thingp t = nullptr;
 
-      char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-      snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_dex_total());
-      wid_set_text(w, tmp);
-      wid_set_text_lhs(w, true);
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    // LUCK
-    ///////////////////////////////////////////////////////////////////////////
-    {
-      TRACE_AND_INDENT();
-      auto w = wid_new_plain(wid_rightbar, "stats1-value");
-      wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-      point tl = make_point(10, y_at + 1);
-      point br = make_point(10 + tl.x + UI_SIDEBAR_RIGHT_WIDTH, tl.y);
-      wid_set_pos(w, tl, br);
-      wid_set_shape_none(w);
-      wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
-      wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-
-      char tmp[ UI_SIDEBAR_RIGHT_WIDTH + 1 ];
-      snprintf(tmp, sizeof(tmp) - 1, "   %2d", player->stat_luck_total());
-      wid_set_text(w, tmp);
-      wid_set_text_lhs(w, true);
-    }
-
-    y_at += 3;
-
-    auto itemsp = player->maybe_itemsp();
-    if (! itemsp) {
-      ERR("No itemsp for player");
-      return false;
-    }
-
-    //
-    // Inventory items
-    //
-    {
-      std::vector< Widp > wid_inventory_items;
-
-      uint8_t item = 0;
-      for (auto i = 0U; i < UI_INVENTORY_QUICK_ITEMS_MAX; i++) {
-        //
-        // slot number
-        //
-        auto slot(std::to_string(i));
-
-        //
-        // Always create the slot even if empty as we use this for
-        // particles when dropping items.
-        //
-        auto x = (i % 5) * 3 + 1;
-        auto y = (i / 5) * 3 + 1 + y_at;
-
-        {
-          auto  w  = wid_new_plain(wid_rightbar, "inventory slot bg");
-          point tl = make_point(x - 1, y - 1);
-          point br = make_point(x + 2, y + 2);
-          wid_set_shape_none(w);
-          wid_set_pos(w, tl, br);
-          wid_set_int_context(w, i);
-          wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
-          wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
+      if (slot < (int) player->itemsp()->inventory_shortcuts.size()) {
+        auto thing_id = get(player->itemsp()->inventory_shortcuts, slot);
+        if (thing_id.ok()) {
+          t = level->thing_find(thing_id);
         }
+      }
 
-        auto  s  = "inventory slot" + std::to_string(i);
-        auto  w  = wid_new_plain(wid_rightbar, s);
-        point tl = make_point(x, y);
-        point br = make_point(x + 1, y + 1);
+      {
+        auto w = wid_new_square_button(wid_rightbar, "item slot");
 
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
         wid_set_pos(w, tl, br);
-        wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
+        wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+        wid_set_int_context(w, slot);
 
-        if (item < itemsp->inventory_shortcuts.size()) {
-          auto thing_id = get(itemsp->inventory_shortcuts, item);
-          if (! thing_id) {
-            item++;
-            continue;
-          }
+        if (t) {
+          wid_set_text(w, std::to_string(slot) + " " + t->tp()->short_text_name());
 
-          auto t = level->thing_find(thing_id);
-          if (unlikely(! t)) {
-            continue;
-          }
-
-          auto tpp   = t->tp();
-          auto tiles = &tpp->tiles;
-
-          if (! tiles) {
-            item++;
-            continue;
-          }
-
-          auto tile = tile_first(tiles);
-          if (unlikely(! tile)) {
-            item++;
-            continue;
-          }
-
-          wid_set_fg_tile(w, tile);
-
-          //
-          // If choosing a target, highlight the item
-          //
-          if (i == game->inventory_highlight_slot) {
-            wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-          } else {
-            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY80);
-          }
-
-          //
-          // Print highlighted weapon
-          //
-          auto weapon = player->equip_get(MONST_EQUIP_WEAPON);
-          if (weapon) {
-            auto equip_id = weapon->id;
-            auto thing_id = get(itemsp->inventory_shortcuts, i);
-            if (thing_id == equip_id) {
-              static Tilep tile;
-              if (unlikely(! tile)) {
-                tile = tile_find_mand("item_equiped");
-              }
-              if (i == game->inventory_highlight_slot) {
-                wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-              } else {
-                wid_set_color(w, WID_COLOR_TEXT_FG, GRAY90);
-              }
-              wid_set_fg2_tile(w, tile);
+          if (wid_inventory_thing_selected) {
+            if (wid_inventory_thing_selected == t) {
+              wid_set_style(w, UI_WID_STYLE_RED);
             }
           }
-
-          //
-          // Print item count
-          //
-          auto item_count = player->item_slot_charge_count(i);
-          if (item_count > 9) {
-            auto tile = tile_find_mand("item_count_N");
-            wid_set_fg3_tile(w, tile);
-          } else if (item_count > 1) {
-            auto tile = tile_find_mand("item_count_" + std::to_string(item_count));
-            wid_set_fg3_tile(w, tile);
-          }
-
-          //
-          // Print enchant count. This overrides the above. If you have
-          // both I'm not sure how to represent that.
-          //
-          auto enchant_count = player->item_enchant_count(i);
-          if (enchant_count > 9) {
-            auto tile = tile_find_mand("item_enchant_N");
-            wid_set_fg3_tile(w, tile);
-          } else if (enchant_count > 0) {
-            auto tile = tile_find_mand("item_enchant_" + std::to_string(enchant_count));
-            wid_set_fg3_tile(w, tile);
-          }
-
-          wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
-          wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
-          wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-          wid_set_int_context(w, i);
+        } else {
+          wid_set_text(w, std::to_string(slot) + " -");
         }
-        item++;
+        wid_set_text_lhs(w, true);
+        wid_update(w);
       }
-    }
 
+      y_at += 1;
+    }
+  }
+
+  if (0) {
     //
     // Skills
     //
