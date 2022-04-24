@@ -22,10 +22,6 @@ void Level::display(void)
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_ascii) {
-    return;
-  }
-
   bool shake = screen_shake_begin();
   display_map();
   if (shake) {
@@ -485,8 +481,10 @@ void Level::display_map(void)
 
     IF_NODEBUG2
     {
-      glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
-      blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
+      if (! g_opt_ascii) {
+        glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
+        blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
+      }
     }
 
     //
@@ -521,20 +519,22 @@ void Level::display_map(void)
 
     IF_NODEBUG2
     {
-      if (fade_out) {
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        display_fade_out();
-        blit_fbo_bind(FBO_MAP);
-        glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
-        blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
-      }
+      if (! g_opt_ascii) {
+        if (fade_out) {
+          glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+          display_fade_out();
+          blit_fbo_bind(FBO_MAP);
+          glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
+          blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
+        }
 
-      if (fade_in) {
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        display_fade_in();
-        blit_fbo_bind(FBO_MAP);
-        glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
-        blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
+        if (fade_in) {
+          glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+          display_fade_in();
+          blit_fbo_bind(FBO_MAP);
+          glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_DST_ALPHA);
+          blit_fbo_game_pix(FBO_SCREEN_FADE_IN_AND_OUT);
+        }
       }
     }
   }

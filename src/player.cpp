@@ -47,6 +47,8 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
   }
 
   if (game->level->ts_fade_out_begin) {
+    if (! g_opt_ascii) {
+    }
     LOG("Player tick; ignore, level fading im/out");
     return false;
   }

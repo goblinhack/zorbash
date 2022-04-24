@@ -467,7 +467,7 @@ static void wid_rightbar_stats_over_popup_e(Widp w)
 static void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_AND_INDENT();
-  DBG3("Inventory: Begin over inventory");
+  DBG2("Inventory: Begin over inventory");
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
@@ -475,27 +475,27 @@ static void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, in
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
       (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
       (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    DBG3("Inventory: Moving items; ignore");
+    DBG2("Inventory: Moving items; ignore");
     return;
   }
 
   if (game->in_transit_item) {
-    DBG3("Inventory: In transit item; ignore");
+    DBG2("Inventory: In transit item; ignore");
     return;
   }
 
   auto level = game->get_current_level();
   if (! level) {
-    DBG3("Inventory: No level; ignore");
+    DBG2("Inventory: No level; ignore");
     return;
   }
 
   auto slot = wid_get_int_context(w);
 
-  DBG3("Inventory: Begin over inventory slot %d", slot);
+  DBG2("Inventory: Begin over inventory slot %d", slot);
   TRACE_AND_INDENT();
   if (! level->inventory_over(slot)) {
-    DBG3("Inventory: Not over anything");
+    DBG2("Inventory: Not over anything");
     return;
   }
 
@@ -510,7 +510,7 @@ static void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, in
 static void wid_rightbar_inventory_over_e(Widp w)
 {
   TRACE_AND_INDENT();
-  DBG3("Inventory: End over inventory");
+  DBG2("Inventory: End over inventory");
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
@@ -518,24 +518,24 @@ static void wid_rightbar_inventory_over_e(Widp w)
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
       (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
       (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    DBG3("Inventory: Moving items; ignore");
+    DBG2("Inventory: Moving items; ignore");
     return;
   }
 
   if (game->in_transit_item) {
-    DBG3("Inventory: In transit item; ignore");
+    DBG2("Inventory: In transit item; ignore");
     return;
   }
 
   auto level = game->get_current_level();
   if (! level) {
-    DBG3("Inventory: No level; ignore");
+    DBG2("Inventory: No level; ignore");
     return;
   }
 
   auto slot = wid_get_int_context(w);
 
-  DBG3("Inventory: Over inventory slot %d", slot);
+  DBG2("Inventory: Over inventory slot %d", slot);
   TRACE_AND_INDENT();
   if (! level->inventory_over(slot)) {
     return;
@@ -553,7 +553,7 @@ static void wid_rightbar_inventory_over_e(Widp w)
 static void wid_rightbar_stats_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_AND_INDENT();
-  DBG3("Stats: Begin over inventory");
+  DBG2("Stats: Begin over inventory");
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
@@ -561,30 +561,32 @@ static void wid_rightbar_stats_over_b(Widp w, int32_t relx, int32_t rely, int32_
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
       (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
       (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    DBG3("Stats: Moving items; ignore");
+    DBG2("Stats: Moving items; ignore");
     return;
   }
 
   if (game->in_transit_item) {
-    DBG3("Stats: In transit item; ignore");
+    DBG2("Stats: In transit item; ignore");
     return;
   }
 
   auto level = game->get_current_level();
   if (! level) {
-    DBG3("Stats: No level; ignore");
+    DBG2("Stats: No level; ignore");
     return;
   }
 
   if (level->player) {
     game->wid_thing_info_create(level->player);
+  } else {
+    DBG2("Stats: No player");
   }
 }
 
 static void wid_rightbar_stats_over_e(Widp w)
 {
   TRACE_AND_INDENT();
-  DBG3("Stats: End over inventory");
+  DBG2("Stats: End over inventory");
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_COLLECTING_ITEMS) ||
@@ -592,18 +594,18 @@ static void wid_rightbar_stats_over_e(Widp w)
       (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
       (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
       (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    DBG3("Stats: Moving items; ignore");
+    DBG2("Stats: Moving items; ignore");
     return;
   }
 
   if (game->in_transit_item) {
-    DBG3("Stats: In transit item; ignore");
+    DBG2("Stats: In transit item; ignore");
     return;
   }
 
   auto level = game->get_current_level();
   if (! level) {
-    DBG3("Stats: No level; ignore");
+    DBG2("Stats: No level; ignore");
     return;
   }
 
@@ -620,7 +622,7 @@ static void wid_rightbar_stats_over_e(Widp w)
 static bool wid_rightbar_pixelart_create(void)
 {
   TRACE_AND_INDENT();
-  DBG3("Remake rightbar");
+  DBG2("Remake rightbar");
 
   auto level = game->get_current_level();
   if (! level) {
@@ -1326,14 +1328,14 @@ static bool wid_rightbar_pixelart_create(void)
 
   wid_update(wid_rightbar);
 
-  DBG3("Remade rightbar");
+  DBG2("Remade rightbar");
   return true;
 }
 
 static bool wid_rightbar_ascii_create(void)
 {
   TRACE_AND_INDENT();
-  DBG3("Remake rightbar");
+  DBG2("Remake rightbar");
 
   auto level = game->get_current_level();
   if (! level) {
@@ -2148,7 +2150,7 @@ static bool wid_rightbar_ascii_create(void)
 
   wid_update(wid_rightbar);
 
-  DBG3("Remade rightbar");
+  DBG2("Remade rightbar");
   return true;
 }
 

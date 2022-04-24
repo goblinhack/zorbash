@@ -209,7 +209,9 @@ void Level::display_lasers(void)
         t->err("No tile for laser, animstep %d, frame %d, steps %d", animstep, frame, steps);
         break;
       }
-      tile_blit(tile, old_p1, p1, old_p2, p2);
+      if (! g_opt_ascii) {
+        tile_blit(tile, old_p1, p1, old_p2, p2);
+      }
     }
 
     return false;
