@@ -172,7 +172,9 @@ void Level::display_projectiles(void)
     point bl = make_point(mid + perp - step / 2);
     point br = make_point(mid + perp + step / 2);
 
-    tile_blit(get(p.tiles, frame), tl, tr, bl, br);
+    if (! g_opt_ascii) {
+      tile_blit(get(p.tiles, frame), tl, tr, bl, br);
+    }
 #if 0
       //
       // Debug

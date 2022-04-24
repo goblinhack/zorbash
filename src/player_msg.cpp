@@ -79,18 +79,26 @@ bool Thing::player_is_ready_for_thing_info(void)
   verify(MTYPE_THING, this);
 
   if (! level) {
+    dbg("Not ready for thing info; no level");
     return false;
   }
 
   if (level->ts_fade_out_begin) {
+    if (! g_opt_ascii) {
+    }
+    dbg("Not ready for thing info; fading out");
     return false;
   }
 
   if (level->ts_fade_in_begin) {
+    if (! g_opt_ascii) {
+    }
+    dbg("Not ready for thing info; fading in");
     return false;
   }
 
   if (is_changing_level) {
+    dbg("Not ready for thing info; changing level");
     return false;
   }
 

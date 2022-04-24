@@ -197,7 +197,9 @@ void Level::display_internal_particles(void)
       std::swap(blit_tl.x, blit_br.x);
     }
 
-    tile_blit_outline(tile, blit_tl, blit_br, WHITE);
+    if (! g_opt_ascii) {
+      tile_blit_outline(tile, blit_tl, blit_br, WHITE);
+    }
 
     return false;
   });
@@ -383,7 +385,9 @@ void Level::display_external_particles(void)
       std::swap(blit_tl.x, blit_br.x);
     }
 
-    tile_blit_outline(tile, blit_tl, blit_br, WHITE);
+    if (! g_opt_ascii) {
+      tile_blit_outline(tile, blit_tl, blit_br, WHITE);
+    }
 
     return false;
     });
