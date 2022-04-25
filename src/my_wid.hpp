@@ -99,6 +99,7 @@ typedef void (*on_mouse_focus_end_t)(Widp);
 typedef void (*on_mouse_over_begin_t)(Widp, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
 typedef void (*on_mouse_over_end_t)(Widp);
 typedef void (*on_tick_t)(Widp);
+typedef void (*on_display_t)(Widp, point tl, point br);
 typedef void (*on_tick_post_display_t)(Widp);
 
 uint32_t wid_get_cursor(Widp);
@@ -239,6 +240,7 @@ void  wid_set_on_mouse_over_end(Widp, on_mouse_over_end_t fn);
 void  wid_set_on_mouse_up(Widp, on_mouse_up_t fn);
 void  wid_set_on_tick_post_display(Widp, on_tick_post_display_t fn);
 void  wid_set_on_tick(Widp, on_tick_t fn);
+void  wid_set_on_display(Widp, on_display_t fn);
 void  wid_set_pos_pct(Widp, fpoint tl, fpoint br);
 void  wid_set_pos(Widp, point tl, point br);
 void  wid_set_prev(Widp w, Widp);
@@ -569,6 +571,7 @@ public:
   on_destroy_t           on_destroy {};
   on_destroy_begin_t     on_destroy_begin {};
   on_tick_t              on_tick {};
+  on_display_t           on_display {};
   on_tick_post_display_t on_tick_post_display {};
 };
 

@@ -788,6 +788,10 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 {
   TRACE_NO_INDENT();
 
+  if (g_opt_ascii) {
+    return;
+  }
+
   auto tpp = tp();
 
   //
@@ -983,6 +987,10 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 void Thing::blit(int fbo)
 {
   TRACE_NO_INDENT();
+
+  if (g_opt_ascii) {
+    return;
+  }
 
   point blit_tl, blit_br;
   Tilep tile = {};

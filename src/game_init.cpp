@@ -105,13 +105,13 @@ void Game::start(void)
   CON("%%fg=green$Version " MYVER "%%fg=reset$");
   CON("Press %%fg=yellow$<tab>%%fg=reset$ to complete commands.");
   CON("Press %%fg=yellow$?%%fg=reset$ to show command options.");
-  CON("You can also enter raw python code here.");
+  CON("You can also enter python code here.");
 
   wid_botcon_fini();
   wid_botcon_init();
 
   wid_visible(wid_botcon_window);
-  BOTCON("Press 'h' for help.");
+  BOTCON("Press 'h' to see key bindings.");
 
   place_player();
 }

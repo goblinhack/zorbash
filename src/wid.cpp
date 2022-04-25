@@ -1864,27 +1864,23 @@ void wid_set_on_destroy_begin(Widp w, on_destroy_t fn)
   w->on_destroy_begin = fn;
 }
 
+void wid_set_on_display(Widp w, on_display_t fn)
+{
+  TRACE_AND_INDENT();
+  w->on_display = fn;
+}
+
 void wid_set_on_tick(Widp w, on_tick_t fn)
 {
   TRACE_AND_INDENT();
-  if (! fn) {
-    ERR("No ticker function set");
-  }
-
   w->on_tick = fn;
-
   wid_tree5_tick_wids_insert(w);
 }
 
 void wid_set_on_tick_post_display(Widp w, on_tick_post_display_t fn)
 {
   TRACE_AND_INDENT();
-  if (! fn) {
-    ERR("No tick_post_displayer function set");
-  }
-
   w->on_tick_post_display = fn;
-
   wid_tree6_tick_post_display_wids_insert(w);
 }
 
@@ -6332,6 +6328,10 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
   } else {
     w_box_args.col_text = get(w->cfg, WID_MODE_NORMAL).colors[ WID_COLOR_TEXT_FG ];
     w_box_args.col_bg   = get(w->cfg, WID_MODE_NORMAL).colors[ WID_COLOR_BG ];
+  }
+
+  if (w->on_display) {
+    (w->on_display)(w, tl, br);
   }
 
   if (w->square) {

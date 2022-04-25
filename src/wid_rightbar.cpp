@@ -21,7 +21,7 @@
 
 static bool wid_rightbar_create(void);
 
-Widp wid_item_popup {};
+Widp wid_asciimap {};
 Widp wid_rightbar {};
 Widp wid_map_mini {};
 
@@ -30,7 +30,8 @@ static WidPopup *wid_rightbar_popup;
 void wid_rightbar_fini(void)
 {
   TRACE_AND_INDENT();
-  wid_destroy(&wid_item_popup);
+  CON("DESTROY");
+  wid_destroy(&wid_asciimap);
   wid_destroy(&wid_rightbar);
   wid_destroy(&wid_map_mini);
 
@@ -633,8 +634,6 @@ static bool wid_rightbar_pixelart_create(void)
   if (! player) {
     return false;
   }
-
-  wid_rightbar_fini();
 
   int width = UI_SIDEBAR_RIGHT_WIDTH;
   int y_at  = 6;
@@ -1346,8 +1345,6 @@ static bool wid_rightbar_ascii_create(void)
   if (! player) {
     return false;
   }
-
-  wid_rightbar_fini();
 
   int width = UI_SIDEBAR_RIGHT_WIDTH;
   int y_at  = 0;
@@ -2154,9 +2151,39 @@ static bool wid_rightbar_ascii_create(void)
   return true;
 }
 
+static void wid_asciimap_display(Widp w, point tl, point br) { CON("%p %d,%d %d,%d", w, tl.x, tl.y, br.x, br.y); }
+
 static bool wid_rightbar_create(void)
 {
+  wid_rightbar_fini();
+
+  auto level = game->get_current_level();
+  if (! level) {
+    return false;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return false;
+  }
+
   if (g_opt_ascii) {
+    if (g_opt_ascii) {
+      int width  = TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH - UI_SIDEBAR_LEFT_WIDTH - 1;
+      int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 3;
+
+      CON("%d %d", width, height);
+      TRACE_AND_INDENT();
+      point tl = make_point(UI_SIDEBAR_LEFT_WIDTH, UI_TOPCON_VIS_HEIGHT);
+      point br = tl + point(width, height);
+
+      wid_asciimap = wid_new_square_window("wid rightbar");
+      wid_set_style(wid_asciimap, UI_WID_STYLE_NORMAL);
+      wid_set_pos(wid_asciimap, tl, br);
+      wid_set_on_display(wid_asciimap, wid_asciimap_display);
+      wid_lower(wid_asciimap);
+    }
+
     return wid_rightbar_ascii_create();
   } else {
     return wid_rightbar_pixelart_create();
