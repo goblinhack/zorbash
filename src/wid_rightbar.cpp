@@ -642,7 +642,7 @@ static bool wid_rightbar_pixelart_create(void)
   {
     TRACE_AND_INDENT();
     point tl = make_point(TERM_WIDTH - width, 0);
-    point br = make_point(TERM_WIDTH - 1, UI_SIDEBAR_RIGHT_HEIGHT);
+    point br = make_point(TERM_WIDTH - 1, UI_SIDEBAR_RIGHT_PIXELART_HEIGHT);
 
     wid_rightbar = wid_new_square_window("wid rightbar");
     wid_set_ignore_scroll_events(wid_rightbar, true);
@@ -753,7 +753,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "health-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at + 1);
-    point br = make_point(tl.x + width - 4, tl.y);
+    point br = make_point(tl.x + width - 5, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
 
@@ -789,7 +789,7 @@ static bool wid_rightbar_pixelart_create(void)
     auto w = wid_new_plain(wid_rightbar, "stamina-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at + 1);
-    point br = make_point(tl.x + width - 4, tl.y);
+    point br = make_point(tl.x + width - 5, tl.y);
     wid_set_pos(w, tl, br);
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
@@ -799,7 +799,7 @@ static bool wid_rightbar_pixelart_create(void)
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
   }
-  y_at += 2;
+  y_at += 3;
 
   ///////////////////////////////////////////////////////////////////////////
   // DEF
