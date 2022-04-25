@@ -102,7 +102,7 @@ void Level::update(void)
 void Level::display_map_bg_things(void)
 {
   TRACE_AND_INDENT();
-  auto fbo = FBO_FULLMAP;
+  auto fbo = FBO_PIXELART_FULLMAP;
   gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -399,8 +399,8 @@ void Level::display_map(void)
     // This renders a single player light to the gray background
     // so we can see where we have been
     //
-    blit_fbo_bind(FBO_FULLMAP_LIGHT);
-    lights_render(light_minx, light_miny, light_maxx, light_maxy, FBO_FULLMAP_LIGHT);
+    blit_fbo_bind(FBO_PIXELART_FULLMAP_LIGHT);
+    lights_render(light_minx, light_miny, light_maxx, light_maxy, FBO_PIXELART_FULLMAP_LIGHT);
 
     //
     // Render a dark background with point lights that look dramatic
@@ -430,20 +430,20 @@ void Level::display_map(void)
     float bot   = (float) Y / h;
 
     blit_init();
-    blit(fbo_tex_id[ FBO_FULLMAP ], left, top, right, bot, 0, 0, game->config.game_pix_width,
+    blit(fbo_tex_id[ FBO_PIXELART_FULLMAP ], left, top, right, bot, 0, 0, game->config.game_pix_width,
          game->config.game_pix_height);
     blit_flush();
 
     glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
 
     blit_init();
-    blit(fbo_tex_id[ FBO_FULLMAP_LIGHT ], left, top, right, bot, 0, 0, game->config.game_pix_width,
+    blit(fbo_tex_id[ FBO_PIXELART_FULLMAP_LIGHT ], left, top, right, bot, 0, 0, game->config.game_pix_width,
          game->config.game_pix_height);
     blit_flush();
 
     glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
     blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
-    // sdl_fbo_dump(FBO_FULLMAP_LIGHT, "FULLMAP");
+    // sdl_fbo_dump(FBO_PIXELART_FULLMAP_LIGHT, "FULLMAP");
   }
 
   if (! frozen) {
@@ -560,9 +560,9 @@ void Level::display_map(void)
     glClear(GL_COLOR_BUFFER_BIT);
     blit_fbo_bind(FBO_MAP_VISIBLE);
     glClear(GL_COLOR_BUFFER_BIT);
-    blit_fbo_bind(FBO_FULLMAP);
+    blit_fbo_bind(FBO_PIXELART_FULLMAP);
     glClear(GL_COLOR_BUFFER_BIT);
-    blit_fbo_bind(FBO_FULLMAP_LIGHT);
+    blit_fbo_bind(FBO_PIXELART_FULLMAP_LIGHT);
     glClear(GL_COLOR_BUFFER_BIT);
     blit_fbo_bind(FBO_PLAYER_VISIBLE_LIGHTING);
     glClear(GL_COLOR_BUFFER_BIT);

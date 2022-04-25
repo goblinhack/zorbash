@@ -456,7 +456,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
     game->level->fbo_light.clear();
   } else if (game->level == my.t) {
     LOG("INF: Save lightmap");
-    game->level->fbo_light = sdl_fbo_save(FBO_FULLMAP_LIGHT);
+    game->level->fbo_light = sdl_fbo_save(FBO_PIXELART_FULLMAP_LIGHT);
     LOG("INF: Saved lightmap");
   } else {
     /*

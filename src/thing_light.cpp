@@ -81,7 +81,7 @@ void Thing::init_lights(void)
     //
     // This is the light to show areas we have been
     //
-    new_light(point(0, 0), light_dist, col, FBO_FULLMAP_LIGHT);
+    new_light(point(0, 0), light_dist, col, FBO_PIXELART_FULLMAP_LIGHT);
 
     //
     // And this is the player visible light; this diminishes according

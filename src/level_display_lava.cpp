@@ -22,11 +22,11 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
   int fbo_mask2;
   int fbo_mask3;
   int fbo_mask4;
-  if (fbo == FBO_FULLMAP) {
-    fbo_mask1 = FBO_FULLMAP_MASK1;
-    fbo_mask2 = FBO_FULLMAP_MASK2;
-    fbo_mask3 = FBO_FULLMAP_MASK3;
-    fbo_mask4 = FBO_FULLMAP_MASK4;
+  if (fbo == FBO_PIXELART_FULLMAP) {
+    fbo_mask1 = FBO_PIXELART_FULLMAP_MASK1;
+    fbo_mask2 = FBO_PIXELART_FULLMAP_MASK2;
+    fbo_mask3 = FBO_PIXELART_FULLMAP_MASK3;
+    fbo_mask4 = FBO_PIXELART_FULLMAP_MASK4;
   } else {
     fbo_mask1 = FBO_MASK1;
     fbo_mask2 = FBO_MASK2;
@@ -154,7 +154,7 @@ void Level::display_lava(int fbo, int16_t minx, int16_t miny, int16_t maxx, int1
       int brx = tlx + (2 * TILE_WIDTH);
       int bry = tly + (2 * TILE_HEIGHT);
 
-      if (fbo != FBO_FULLMAP) {
+      if (fbo != FBO_PIXELART_FULLMAP) {
         tlx -= pixel_map_at.x;
         tly -= pixel_map_at.y;
         brx -= pixel_map_at.x;
