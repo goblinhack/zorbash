@@ -39,7 +39,7 @@ void Level::update_new_level(void)
   //
   // Load what we were able to see previously
   //
-  sdl_fbo_load(FBO_FULLMAP_LIGHT, fbo_light);
+  sdl_fbo_load(FBO_PIXELART_FULLMAP_LIGHT, fbo_light);
 }
 
 //

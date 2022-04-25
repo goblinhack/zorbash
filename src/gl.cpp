@@ -449,16 +449,16 @@ void fbo_get_size(int fbo, int &w, int &h)
       w = MAP_WIDTH;
       h = MAP_HEIGHT;
       break;
-    case FBO_FULLMAP:
-    case FBO_FULLMAP_LIGHT:
-    case FBO_FULLMAP_VISITED:
+    case FBO_PIXELART_FULLMAP:
+    case FBO_PIXELART_FULLMAP_LIGHT:
+    case FBO_PIXELART_FULLMAP_VISITED:
       w = TILE_WIDTH * MAP_WIDTH;
       h = TILE_HEIGHT * MAP_HEIGHT;
       break;
-    case FBO_FULLMAP_MASK1:
-    case FBO_FULLMAP_MASK2:
-    case FBO_FULLMAP_MASK3:
-    case FBO_FULLMAP_MASK4:
+    case FBO_PIXELART_FULLMAP_MASK1:
+    case FBO_PIXELART_FULLMAP_MASK2:
+    case FBO_PIXELART_FULLMAP_MASK3:
+    case FBO_PIXELART_FULLMAP_MASK4:
       w = TILE_WIDTH * MAP_WIDTH;
       h = TILE_HEIGHT * MAP_HEIGHT;
       break;
@@ -466,6 +466,7 @@ void fbo_get_size(int fbo, int &w, int &h)
       w = game->config.ui_pix_width;
       h = game->config.ui_pix_height;
       break;
+    case FBO_ASCII_FULLMAP:
     case FBO_FINAL:
       w = game->config.window_pix_width;
       h = game->config.window_pix_height;

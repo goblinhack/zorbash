@@ -788,10 +788,6 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_ascii) {
-    return;
-  }
-
   auto tpp = tp();
 
   //
@@ -824,7 +820,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   auto h = health();
   auto m = health_max();
 
-  auto lit = (fbo == FBO_FULLMAP) || level->is_lit_currently_no_check(curr_at.x, curr_at.y);
+  auto lit = (fbo == FBO_PIXELART_FULLMAP) || level->is_lit_currently_no_check(curr_at.x, curr_at.y);
 
   if (tile && ! tile->is_invisible && ! is_dead && ! reflection && lit &&
       (gfx_health_bar_shown() || (gfx_health_bar_autohide() && (h < m)))) {
@@ -896,7 +892,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   // Means it has been lit, but light does fade
   //
   uint8_t fade = level->is_lit_currently(curr_at.x, curr_at.y);
-  if (fbo == FBO_FULLMAP) {
+  if (fbo == FBO_PIXELART_FULLMAP) {
     c.a = 255;
   } else if (light_dist_get()) {
     c.a = fade;
@@ -988,10 +984,6 @@ void Thing::blit(int fbo)
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_ascii) {
-    return;
-  }
-
   point blit_tl, blit_br;
   Tilep tile = {};
 
@@ -1001,7 +993,7 @@ void Thing::blit(int fbo)
   //
   // If blitting to the background, ignore scroll
   //
-  if (fbo == FBO_FULLMAP) {
+  if (fbo == FBO_PIXELART_FULLMAP) {
     point pre_effect_blit_tl;
     point pre_effect_blit_br;
 
@@ -1029,7 +1021,7 @@ void Thing::blit_upside_down(int fbo)
   Tilep tile = {};
   auto  tpp  = tp();
 
-  if (fbo == FBO_FULLMAP) {
+  if (fbo == FBO_PIXELART_FULLMAP) {
     point pre_effect_blit_tl;
     point pre_effect_blit_br;
 

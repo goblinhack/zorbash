@@ -33,7 +33,7 @@ bool Thing::descend_sewer_tick(void)
     if (level->world_at.z & 1) {
       dbg("Descending sewer");
       level->ts_fade_out_begin    = time_ms_cached();
-      level->fbo_light            = sdl_fbo_save(FBO_FULLMAP_LIGHT);
+      level->fbo_light            = sdl_fbo_save(FBO_PIXELART_FULLMAP_LIGHT);
       is_waiting_to_descend_sewer = true;
       move_finish();
       return true;

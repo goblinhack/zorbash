@@ -31,7 +31,7 @@ bool Thing::ascend_sewer_tick(void)
 
   if (is_player()) {
     level->ts_fade_out_begin   = time_ms_cached();
-    level->fbo_light           = sdl_fbo_save(FBO_FULLMAP_LIGHT);
+    level->fbo_light           = sdl_fbo_save(FBO_PIXELART_FULLMAP_LIGHT);
     is_waiting_to_ascend_sewer = true;
     return true;
   } else {

@@ -677,7 +677,7 @@ void Light::render_triangle_fans(void)
 {
   point light_pos = owner->last_blit_at;
 
-  if (fbo == FBO_FULLMAP_LIGHT) {
+  if (fbo == FBO_PIXELART_FULLMAP_LIGHT) {
     light_pos = cached_light_pos;
     gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
   } else if (fbo == FBO_PLAYER_VISIBLE_LIGHTING) {
@@ -732,7 +732,7 @@ void Light::render_triangle_fans(void)
     glTranslatef(-light_offset.x, -light_offset.y, 0);
   }
 
-  if (fbo == FBO_FULLMAP_LIGHT) {
+  if (fbo == FBO_PIXELART_FULLMAP_LIGHT) {
     gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
   }
 }
