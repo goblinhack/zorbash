@@ -1103,6 +1103,11 @@ void wid_actionbar_pixelart_init(void)
   if (player->check_anything_to_carry(false)) {
     ui_icon_collect = true;
   }
+  //
+  // I don't like this - it is missing a key and makes things more complex?
+  //
+  ui_icon_collect = false;
+
   bool ui_icon_close = false;
 
   if (wid_popup_exists()) {
@@ -1368,6 +1373,11 @@ void wid_actionbar_ascii_init(void)
   if (player->check_anything_to_carry(false)) {
     ui_icon_collect = true;
   }
+  //
+  // I don't like this - it is missing a key and makes things more complex?
+  //
+  ui_icon_collect = false;
+
   bool ui_icon_close = false;
 
   if (wid_popup_exists()) {
@@ -1428,7 +1438,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_quit);
     wid_set_on_mouse_over_begin(w, wid_actionbar_quit_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_quit_over_e);
-    wid_set_text(w, "Quit");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$q%%fg=" UI_TEXT_COLOR_STR "$uit");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1444,7 +1454,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_configure);
     wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_e);
-    wid_set_text(w, "Keys");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$h%%fg=" UI_TEXT_COLOR_STR "$elp");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1460,7 +1470,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_robot);
     wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_e);
-    wid_set_text(w, "Robot");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$r%%fg=" UI_TEXT_COLOR_STR "$obot");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1481,7 +1491,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_ascend);
     wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_e);
-    wid_set_text(w, "Ascend");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$<%%fg=" UI_TEXT_COLOR_STR "$Ascend");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1497,7 +1507,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_descend);
     wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_e);
-    wid_set_text(w, "Descend");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$>%%fg=" UI_TEXT_COLOR_STR "$Descend");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1513,7 +1523,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_save);
     wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_save_over_e);
-    wid_set_text(w, "Save");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$s%%fg=" UI_TEXT_COLOR_STR "$ave");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1529,7 +1539,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_load);
     wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_load_over_e);
-    wid_set_text(w, "Load");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$l%%fg=" UI_TEXT_COLOR_STR "$oad");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1545,7 +1555,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_inventory);
     wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_e);
-    wid_set_text(w, "Inventory");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$i%%fg=" UI_TEXT_COLOR_STR "$nventory");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1562,7 +1572,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_held(w, wid_actionbar_repeat_wait);
     wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_e);
-    wid_set_text(w, "Wait");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$.%%fg=" UI_TEXT_COLOR_STR "$ wait");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1578,7 +1588,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_collect);
     wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_e);
-    wid_set_text(w, "Collect");
+    wid_set_text(w, "collect");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
@@ -1594,7 +1604,7 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_close);
     wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_close_over_e);
-    wid_set_text(w, "Close");
+    wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$ESC%%fg=" UI_TEXT_COLOR_STR "$ Close");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);

@@ -466,7 +466,6 @@ void fbo_get_size(int fbo, int &w, int &h)
       w = game->config.ui_pix_width;
       h = game->config.ui_pix_height;
       break;
-    case FBO_ASCII_FULLMAP:
     case FBO_FINAL:
       w = game->config.window_pix_width;
       h = game->config.window_pix_height;

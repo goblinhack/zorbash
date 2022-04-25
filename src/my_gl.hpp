@@ -255,11 +255,10 @@ extern PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 #define FBO_PIXELART_FULLMAP_MASK4   14
 #define FBO_PIXELART_FULLMAP_LIGHT   15
 #define FBO_PIXELART_FULLMAP_VISITED 16
-#define FBO_ASCII_FULLMAP            17
-#define FBO_FINAL                    18
-#define FBO_SCREEN_FADE_IN_AND_OUT   19
-#define FBO_SMALL_POINT_LIGHTS       20
-#define FBO_MAP_DEBUG                21 // MUST BE LAST
+#define FBO_FINAL                    17
+#define FBO_SCREEN_FADE_IN_AND_OUT   18
+#define FBO_SMALL_POINT_LIGHTS       19
+#define FBO_MAP_DEBUG                20 // MUST BE LAST
 #define FBO_MAP_DEBUG_END            (FBO_MAP_DEBUG + (DUNGEONS_GRID_CHUNK_WIDTH * DUNGEONS_GRID_CHUNK_HEIGHT))
 #define MAX_FBO                      (FBO_MAP_DEBUG_END + 1)
 
