@@ -127,13 +127,18 @@ static void wid_actionbar_quit_over_b(Widp w, int32_t relx, int32_t rely, int32_
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
-  int height = 5;
+  int width  = 32;
+  int height = 6;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -221,13 +226,19 @@ static void wid_actionbar_robot_over_b(Widp w, int32_t relx, int32_t rely, int32
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
-  int height = 20;
+  int width  = 32;
+  int height = 19;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -335,13 +346,19 @@ static void wid_actionbar_load_over_b(Widp w, int32_t relx, int32_t rely, int32_
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
-  int height = 10;
+  int width  = 32;
+  int height = 9;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -406,13 +423,19 @@ static void wid_actionbar_save_over_b(Widp w, int32_t relx, int32_t rely, int32_
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
+  int width  = 32;
   int height = 10;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -475,13 +498,19 @@ static void wid_actionbar_ascend_over_b(Widp w, int32_t relx, int32_t rely, int3
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
+  int width  = 32;
   int height = 9;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -544,13 +573,19 @@ static void wid_actionbar_descend_over_b(Widp w, int32_t relx, int32_t rely, int
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
+  int width  = 32;
   int height = 8;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    tly -= 1;
+    bry -= 2;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -621,13 +656,19 @@ static void wid_actionbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, i
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
-  int height = 10;
+  int width  = 32;
+  int height = 11;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -638,7 +679,8 @@ static void wid_actionbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, i
 
   wid_over_inventory->log("Select this to see your hard earned loot.");
   wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
-  wid_over_inventory->log("NOTE: that you are able to carry at most one extra bag, so use space wisely");
+  wid_over_inventory->log("NOTE: that you are able to carry at most one extra bag, so use space wisely.");
+  wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
 }
 
 static void wid_actionbar_inventory_over_e(Widp w)
@@ -701,13 +743,19 @@ static void wid_actionbar_collect_over_b(Widp w, int32_t relx, int32_t rely, int
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
+  int width  = 32;
   int height = 10;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -808,13 +856,19 @@ static void wid_actionbar_wait_over_b(Widp w, int32_t relx, int32_t rely, int32_
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
-  int height = 13;
+  int width  = 32;
+  int height = 12;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -878,13 +932,19 @@ static void wid_actionbar_zoom_in_over_b(Widp w, int32_t relx, int32_t rely, int
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
+  int width  = 32;
   int height = 6;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -906,13 +966,19 @@ static void wid_actionbar_zoom_out_over_b(Widp w, int32_t relx, int32_t rely, in
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
+  int width  = 32;
   int height = 6;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -971,13 +1037,19 @@ static void wid_actionbar_configure_over_b(Widp w, int32_t relx, int32_t rely, i
   int32_t bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int width  = 30;
-  int height = 6;
+  int width  = 32;
+  int height = 7;
 
   tlx -= width / 2;
   brx += width / 2;
   tly -= height;
-  bry -= 4;
+
+  if (g_opt_ascii) {
+    bry -= 2;
+    tly -= 1;
+  } else {
+    bry -= 4;
+  }
 
   point tl(tlx, tly);
   point br(brx, bry);
@@ -1263,6 +1335,9 @@ void wid_actionbar_ascii_init(void)
   DBG("Actionbar init");
   TRACE_AND_INDENT();
 
+  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
+
   if (! game->level) {
     return;
   }
@@ -1354,7 +1429,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_quit_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_quit_over_e);
     wid_set_text(w, "Quit");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
 
@@ -1367,7 +1445,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_e);
     wid_set_text(w, "Keys");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
 
@@ -1379,11 +1460,14 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_up(w, wid_actionbar_robot);
     wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_e);
-    wid_set_text(w, "Robot On");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_text(w, "Robot");
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     if (game->robot_mode) {
       wid_set_on_tick(w, wid_actionbar_ai_tick);
-      wid_set_text(w, "Robot off");
+      wid_set_text(w, "Manual");
       wid_set_style(w, UI_WID_STYLE_RED);
     }
     x_at += option_width + 1;
@@ -1398,7 +1482,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_e);
     wid_set_text(w, "Ascend");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
 
@@ -1411,7 +1498,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_e);
     wid_set_text(w, "Descend");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
 
@@ -1424,7 +1514,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_save_over_e);
     wid_set_text(w, "Save");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
 
@@ -1437,7 +1530,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_load_over_e);
     wid_set_text(w, "Load");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
 
@@ -1450,7 +1546,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_e);
     wid_set_text(w, "Inventory");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
 
@@ -1464,7 +1563,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_e);
     wid_set_text(w, "Wait");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
 
@@ -1477,7 +1579,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_e);
     wid_set_text(w, "Collect");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
 
@@ -1490,7 +1595,10 @@ void wid_actionbar_ascii_init(void)
     wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_b);
     wid_set_on_mouse_over_end(w, wid_actionbar_close_over_e);
     wid_set_text(w, "Close");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
     x_at += option_width + 1;
   }
   wid_update(wid_actionbar);
