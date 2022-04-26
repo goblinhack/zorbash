@@ -395,8 +395,8 @@ bool Thing::unequip_me_from_owner(const char *why, bool allowed_to_recarry)
 //
 bool Thing::equip(Thingp item, int equip)
 {
-  TRACE_NO_INDENT();
-  auto equip_tp = item->tp();
+  dbg("Try to equip: %s", item->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   if (equip_get(equip) == item) {
     dbg("Re-equipping: %s", item->to_short_string().c_str());
@@ -429,6 +429,7 @@ bool Thing::equip(Thingp item, int equip)
 
   unequip("equip new", equip, true);
 
+  auto equip_tp      = item->tp();
   auto carry_anim_as = equip_tp->equip_carry_anim();
   if (carry_anim_as.empty()) {
     err("Could not equip %s as has no carry anim", item->to_short_string().c_str());

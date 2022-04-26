@@ -43,7 +43,6 @@ def tp_init(name, text_name, short_text_name):
     my.equip_carry_anim(self, "staff_lightning_carry")
     my.gfx_animated(self, True)
     my.gfx_short_shadow_caster(self, True)
-    my.gfx_show_outlined(self, True)
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_fall(self, True)

@@ -26,7 +26,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     return false;
   }
 
-  dbg("Try to carry %s", item->to_short_string().c_str());
+  dbg("Try to carry: %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   auto top_owner = item->top_owner();
@@ -81,6 +81,9 @@ bool Thing::carry(Thingp item, bool can_equip)
       }
     }
   }
+
+  dbg("Check if item can be equipped");
+  TRACE_AND_INDENT();
 
   //
   // If we have no weapon yet, equip it
@@ -188,10 +191,33 @@ bool Thing::carry(Thingp item, bool can_equip)
     }
   }
 
+  //
+  // We need to drop from the existing owner before trying to add to our bad.
+  // For example this might be an item in a bag
+  //
+  auto existing_owner = item->immediate_owner();
+  if (existing_owner) {
+    dbg("Drop from existing owner");
+    TRACE_AND_INDENT();
+    if (existing_owner == this) {
+      //
+      // We hit this case when unequipping items
+      //
+      dbg("Already owned: %s", item->to_short_string().c_str());
+    } else {
+      dbg("Drop from existing owner");
+      existing_owner->drop(item);
+    }
+  }
+
+  dbg("Check if thing can be added to a bag");
+  TRACE_AND_INDENT();
+
   if (equipped) {
     //
     // Continue
     //
+    dbg("Thing is equipped, no need to add to a bag");
   } else if (is_monst() || (top_owner && top_owner->is_monst())) {
     //
     // Always carry
@@ -221,19 +247,6 @@ bool Thing::carry(Thingp item, bool can_equip)
       }
     }
     return false;
-  }
-
-  auto existing_owner = item->immediate_owner();
-  if (existing_owner) {
-    if (existing_owner == this) {
-      //
-      // We hit this case when unequipping items
-      //
-      dbg("Already owned: %s", item->to_short_string().c_str());
-    } else {
-      dbg("Drop from existing owner");
-      existing_owner->drop(item);
-    }
   }
 
   bool already_carried = false;
@@ -328,11 +341,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   return true;
 }
 
-bool Thing::try_to_carry(Thingp item)
-{
-  dbg("Try to carry: %s", item->to_short_string().c_str());
-  return carry(item);
-}
+bool Thing::try_to_carry(Thingp item) { return carry(item); }
 
 std::list< Thingp > Thing::anything_to_carry_at(point at)
 {

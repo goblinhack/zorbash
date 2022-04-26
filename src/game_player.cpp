@@ -55,10 +55,8 @@ void Game::place_player(void)
         level->thing_new("wall_dungeon.1", point(x, y + 2));
         level->thing_new("descend_sewer1", point(x + 4, y + 4));
       }
-      if (0) {
-        auto w = level->thing_new("boots_jumping", point(x, y - 2));
-        t->carry(w);
-        t->enchant_without_stone(w);
+      if (1) {
+        level->thing_new("boots_jumping", point(x, y - 2));
       }
       if (0) {
         auto w = level->thing_new("gauntlets_lion", point(x, y - 2));
@@ -135,17 +133,20 @@ void Game::place_player(void)
         auto w = level->thing_new("torch", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto b = level->thing_new("bag_s", point(x, y));
         t->carry(b);
+      }
+      if (1) {
+        auto b = level->thing_new("chest1", point(x, y));
+        auto w = level->thing_new("wooden_cross", point(x, y));
+        b->carry(w);
       }
 
       IF_DEBUG2
       {
-        if (0) {
-          auto w = level->thing_new("staff_energy", point(x, y));
-          t->carry(w);
-          t->enchant_without_stone(w);
+        if (1) {
+          level->thing_new("staff_energy", point(x, y + 1));
         }
         if (0) {
           auto w = level->thing_new("wand_fire", point(x, y));

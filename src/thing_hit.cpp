@@ -875,7 +875,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           msg("%%fg=orange$%s hits you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str(), hitter->text_the(false).c_str());
         } else if (hitter->is_laser()) {
-          msg("%%fg=orange$%s tears you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
+          msg("%%fg=orange$%s zaps you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str(), hitter->text_the().c_str());
         } else if (hitter->is_item_magical()) {
           msg("%%fg=orange$%s blasts you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
