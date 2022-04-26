@@ -8,10 +8,14 @@
 
 void Game::display(void)
 {
-  TRACE_AND_INDENT();
-  if (! level) {
+  //
+  // ASCII mode is displayed via a widget - see wid_asciimap_display
+  //
+  if (! g_opt_ascii) {
     return;
   }
 
-  level->display();
+  if (level) {
+    level->display_pixelart();
+  }
 }

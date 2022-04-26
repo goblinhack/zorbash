@@ -2110,7 +2110,8 @@ public:
   void blit_end_submerged(uint8_t submerged);
   void blit_floor_chasm(point tl, point br, const ThingTiles *tiles);
   void blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, const bool reflection);
-  void blit(int fbo);
+  void blit_pixelart(int fbo);
+  void blit_ascii(point tl, point br, point p);
   void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);

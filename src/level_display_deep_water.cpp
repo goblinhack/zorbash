@@ -14,7 +14,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-void Level::display_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy)
+void Level::display_pixelart_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy)
 {
   TRACE_AND_INDENT();
   int fbo_mask1;
@@ -123,7 +123,7 @@ void Level::display_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx
         if (! tpp->is_deep_water()) {
           continue;
         }
-        t->blit(fbo);
+        t->blit_pixelart(fbo);
       }
       FOR_ALL_THINGS_END()
     }

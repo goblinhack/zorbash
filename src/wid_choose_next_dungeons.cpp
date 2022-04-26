@@ -349,7 +349,7 @@ static void wid_choose_next_dungeons_post_display_tick(Widp w)
             gl_enter_2d_mode(game->config.ui_pix_width, game->config.ui_pix_height);
             glcolor(WHITE);
             blit_fbo_bind_locked(FBO_WID);
-            l->display_map_debug(ctx->focusx, ctx->focusy, tlx, tly, brx, bry);
+            l->display_pixelart_map_debug(ctx->focusx, ctx->focusy, tlx, tly, brx, bry);
             blit_fbo_unbind_locked();
           }
         }
