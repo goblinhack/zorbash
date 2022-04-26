@@ -92,7 +92,7 @@ void Level::new_laser(ThingId id, ThingId victim_id, point start, point stop, ui
   new_lasers.push_back(Laser(this, id, victim_id, start, stop, pixel_map_at, now, now + dur, follow_moving_target));
 }
 
-void Level::display_lasers(void)
+void Level::display_pixelart_lasers(void)
 {
   TRACE_NO_INDENT();
 #if 0

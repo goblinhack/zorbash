@@ -13,7 +13,7 @@
 #include "my_tile.hpp"
 #include "my_ui.hpp"
 
-void Level::display_map_mini(void)
+void Level::display_pixelart_map_mini(void)
 {
   float tlx = map_mini_tl.x * game->config.ascii_gl_width;
   float tly = map_mini_tl.y * game->config.ascii_gl_height;

@@ -87,8 +87,8 @@ void Level::handle_input_events(void)
       dbg("Fast forward loop ");
       do {
         time_game_delta += 50;
-        display_internal_particles();
-        display_external_particles();
+        display_pixelart_internal_particles();
+        display_pixelart_external_particles();
         tick();
       } while (game->things_are_moving);
       dbg("Fast forward end ");

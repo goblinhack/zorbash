@@ -900,28 +900,36 @@ public:
   void debug_path_draw_line(const std::vector< point > &move_path);
   void describe(point at);
   void describe(Thingp);
-  void display_anim(void);
-  void display_blood(void);
-  void display_deep_water(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t maxy);
-  void display_external_particles(void);
-  void display_fade_in(void);
-  void display_fade_out(void);
-  void display_gas(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
-  void display_internal_particles(void);
-  void display_lasers(void);
-  void display_lava(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
-  void display_map_bg_things(void);
-  void display_map_debug(int x, int y);
-  void display_map_debug(int x, int y, int tlx, int tly, int brx, int bly);
-  void display_map_fg2_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
-  void display_map_fg_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
-  void display_map_mini(void);
-  void display_map_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t, const int16_t);
+  void display_tick_animation(void);
+  void display_ascii_map(point tl, point br);
+  void display_pixelart_blood(void);
+  void display_pixelart_deep_water(const int fbo, const int16_t minx, const int16_t miny, const int16_t,
+                                   const int16_t maxy);
+  void display_pixelart_external_particles(void);
+  void display_pixelart_fade_in(void);
+  void display_pixelart_fade_out(void);
+  void display_pixelart_gas(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
+  void display_pixelart_internal_particles(void);
+  void display_pixelart_lasers(void);
+  void display_pixelart_lava(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
+                             const int16_t);
+  void display_pixelart_map_bg_things(void);
+  void display_map_set_bounds(void);
+  void display_pixelart_map_debug(int x, int y);
+  void display_pixelart_map_debug(int x, int y, int tlx, int tly, int brx, int bly);
+  void display_pixelart_map_fg2_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t,
+                                       const int16_t);
+  void display_pixelart_map_fg_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t,
+                                      const int16_t);
+  void display_pixelart_map_mini(void);
+  void display_pixelart_map_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t,
+                                   const int16_t);
   void display_map(void);
-  void display_projectiles(void);
+  void display_pixelart(void);
+  void display_pixelart_projectiles(void);
   void display_target(void);
-  void display(void);
-  void display_water(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy);
+  void display_pixelart_water(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
+                              const int16_t maxy);
   void dmap_to_player_update(void);
   void dump(std::string prefix);
   void dump(std::string prefix, std::ostream &out);

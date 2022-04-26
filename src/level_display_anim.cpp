@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_tile.hpp"
 
-void Level::display_anim(void)
+void Level::display_tick_animation(void)
 {
   TRACE_AND_INDENT();
   static uint32_t anim_speed;

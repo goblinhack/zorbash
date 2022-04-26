@@ -67,7 +67,7 @@ void Level::new_internal_particle(point start, point stop, isize sz, uint32_t du
       Particle(NoThingId, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
 
-void Level::display_internal_particles(void)
+void Level::display_pixelart_internal_particles(void)
 {
   TRACE_AND_INDENT();
 #if 0
@@ -260,7 +260,7 @@ void Level::new_external_particle(point start, point stop, isize sz, uint32_t du
       Particle(NoThingId, start, stop, pixel_map_at, sz, now, now + dur, tile, hflip, make_visible_at_end));
 }
 
-void Level::display_external_particles(void)
+void Level::display_pixelart_external_particles(void)
 {
   TRACE_AND_INDENT();
 #if 0

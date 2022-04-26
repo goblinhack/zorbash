@@ -90,7 +90,7 @@ void Level::new_projectile(ThingId id, ThingId victim_id, point start, point sto
       Projectile(this, id, victim_id, start, stop, pixel_map_at, now, now + dur, follow_moving_target));
 }
 
-void Level::display_projectiles(void)
+void Level::display_pixelart_projectiles(void)
 {
   TRACE_NO_INDENT();
 #if 0

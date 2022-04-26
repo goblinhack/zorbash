@@ -13,7 +13,7 @@
 #include "my_tile.hpp"
 #include "my_ui.hpp"
 
-void Level::display_map_debug(int x, int y)
+void Level::display_pixelart_map_debug(int x, int y)
 {
   float tlx = map_debug_tl.x * game->config.ascii_gl_width;
   float tly = map_debug_tl.y * game->config.ascii_gl_height;
@@ -29,7 +29,7 @@ void Level::display_map_debug(int x, int y)
   blit_flush();
 }
 
-void Level::display_map_debug(int x, int y, int tlx, int tly, int brx, int bry)
+void Level::display_pixelart_map_debug(int x, int y, int tlx, int tly, int brx, int bry)
 {
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

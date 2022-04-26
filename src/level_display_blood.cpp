@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_tile.hpp"
 
-void Level::display_blood(void)
+void Level::display_pixelart_blood(void)
 {
   TRACE_AND_INDENT();
   if (! player) {

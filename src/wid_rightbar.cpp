@@ -2151,7 +2151,20 @@ static bool wid_rightbar_ascii_create(void)
   return true;
 }
 
-static void wid_asciimap_display(Widp w, point tl, point br) { CON("%p %d,%d %d,%d", w, tl.x, tl.y, br.x, br.y); }
+static void wid_asciimap_display(Widp w, point tl, point br)
+{
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  level->display_ascii_map(tl, br);
+}
 
 static bool wid_rightbar_create(void)
 {

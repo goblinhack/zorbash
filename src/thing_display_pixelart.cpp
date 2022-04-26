@@ -17,10 +17,6 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
 
-  if (g_opt_ascii) {
-    return;
-  }
-
   if (g_render_black_and_white) {
     return;
   }
@@ -204,10 +200,6 @@ void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const po
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
 
-  if (g_opt_ascii) {
-    return;
-  }
-
   if (g_render_black_and_white) {
     return;
   }
@@ -242,10 +234,6 @@ void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, 
 {
   TRACE_NO_INDENT();
   IF_DEBUG2 { return; }
-
-  if (g_opt_ascii) {
-    return;
-  }
 
   if (g_render_black_and_white) {
     return;
@@ -330,10 +318,6 @@ static int blit_msg_strlen(std::string const &text)
 void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point oblit_br)
 {
   TRACE_NO_INDENT();
-
-  if (g_opt_ascii) {
-    return;
-  }
 
   Tilep tile;
   auto  text_iter = text.begin();
@@ -774,10 +758,6 @@ void Thing::blit_end_reflection_submerged(uint8_t submerged)
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_ascii) {
-    return;
-  }
-
   blit_flush();
   glTranslatef(0, submerged, 0);
   glDisable(GL_SCISSOR_TEST);
@@ -787,10 +767,6 @@ void Thing::blit_end_reflection_submerged(uint8_t submerged)
 void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, bool reflection)
 {
   TRACE_NO_INDENT();
-
-  if (g_opt_ascii) {
-    return;
-  }
 
   auto tpp = tp();
 
@@ -984,13 +960,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   is_blitted = true;
 }
 
-void Thing::blit(int fbo)
+void Thing::blit_pixelart(int fbo)
 {
   TRACE_NO_INDENT();
-
-  if (g_opt_ascii) {
-    return;
-  }
 
   point blit_tl, blit_br;
   Tilep tile = {};
@@ -1020,10 +992,6 @@ void Thing::blit(int fbo)
 void Thing::blit_upside_down(int fbo)
 {
   TRACE_NO_INDENT();
-
-  if (g_opt_ascii) {
-    return;
-  }
 
   point blit_tl, blit_br;
   Tilep tile = {};

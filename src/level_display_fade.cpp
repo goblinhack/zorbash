@@ -11,7 +11,7 @@
 #include "my_thing.hpp"
 #include "my_tile.hpp"
 
-void Level::display_fade_out(void)
+void Level::display_pixelart_fade_out(void)
 {
   int   lines = 1000;
   float step  = RAD_360 / (float) lines;
@@ -59,7 +59,7 @@ void Level::display_fade_out(void)
   blit_fbo_unbind();
 }
 
-void Level::display_fade_in(void)
+void Level::display_pixelart_fade_in(void)
 {
   int   lines = 1000;
   float step  = RAD_360 / (float) lines;
