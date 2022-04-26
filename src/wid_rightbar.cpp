@@ -30,7 +30,6 @@ static WidPopup *wid_rightbar_popup;
 void wid_rightbar_fini(void)
 {
   TRACE_AND_INDENT();
-  CON("DESTROY");
   wid_destroy(&wid_asciimap);
   wid_destroy(&wid_rightbar);
   wid_destroy(&wid_map_mini);
