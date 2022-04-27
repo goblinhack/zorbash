@@ -73,7 +73,7 @@ bool Thing::skill_remove(Thingp what)
     return false;
   }
 
-  Thingp o = top_owner();
+  Thingp o = what->top_owner();
   if (o) {
     if (o->is_player()) {
       o->skillbox_id_remove(what);
