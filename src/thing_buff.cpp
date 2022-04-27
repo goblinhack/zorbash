@@ -66,8 +66,11 @@ bool Thing::buff_remove(Thingp what)
     return false;
   }
 
-  if (is_player()) {
-    buffbox_id_remove(what);
+  Thingp o = what->top_owner();
+  if (o) {
+    if (o->is_player()) {
+      o->buffbox_id_remove(what);
+    }
   }
 
   what->remove_owner();
