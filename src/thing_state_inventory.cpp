@@ -27,10 +27,10 @@ bool Thing::state_open_inventory(void)
   // Then close it. This is really just visual feedback.
   //
   if (is_player()) {
-    change_state(MONST_STATE_REPACK_INVENTORY, "repack inventory");
+    change_state(MONST_STATE_REPACK_INVENTORY, "Robot repack inventory");
     game->tick_begin("Robot finished collecting");
   } else {
-    change_state(MONST_STATE_IDLE, "close inventory");
+    change_state(MONST_STATE_IDLE, "Monst stop looking in inventory");
   }
 
   return true;
