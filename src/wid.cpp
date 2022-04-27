@@ -6562,15 +6562,6 @@ static void wid_tick_all(void)
         if (wid_rightbar_init()) {
           game->request_remake_rightbar = false;
           game->request_remake_skillbox = false;
-
-          //
-          // Drive closure of the inventory if we're waiting on it.
-          //
-          if (game->robot_mode) {
-            if (game->tick_requested.empty()) {
-              game->tick_begin("close inventory");
-            }
-          }
         }
         wid_actionbar_init();
         game->request_remake_actionbar = false;
@@ -6583,6 +6574,17 @@ static void wid_tick_all(void)
         DBG2("Handle request to remake actionhar");
         wid_actionbar_init();
         game->request_remake_actionbar = false;
+      }
+
+      //
+      // Drive closure of the inventory if we're waiting on it.
+      //
+      if (wid_inventory_window) {
+        if (game->robot_mode) {
+          if (game->tick_requested.empty()) {
+            game->tick_begin("Robot close inventory");
+          }
+        }
       }
       break;
 

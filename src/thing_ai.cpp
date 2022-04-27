@@ -185,7 +185,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 
               IF_DEBUG
               {
-                auto s = string_sprintf("Accept goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
+                auto s = string_sprintf("Accept avoid goal score %d @(%d,%d) %s", (int) goal.score, (int) goal.at.x,
                                         (int) goal.at.y, goal.msg.c_str());
                 AI_LOG(s);
               }
@@ -365,6 +365,7 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
       // Try to move. It might not work and we end up attacking.
       //
       if (cursor_path_pop_first_move()) {
+        AI_LOG("Successfully popped move");
         return true;
       }
 
@@ -372,6 +373,11 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
       // Did we try or attempt to try to do something?
       //
       if (! game->tick_requested.empty()) {
+        IF_DEBUG
+        {
+          auto s = string_sprintf("Successfully requested a tick: %s", game->tick_requested.c_str());
+          AI_LOG(s);
+        }
         return true;
       }
     } else {

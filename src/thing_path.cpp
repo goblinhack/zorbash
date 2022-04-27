@@ -305,6 +305,14 @@ bool Thing::path_pop_next_move(void)
           return true;
         }
       }
+
+      IF_DEBUG2
+      {
+        auto s = string_sprintf("Cannot pass hazard at %s, failed to move", future_pos.to_string().c_str());
+        AI_LOG(s);
+      }
+
+      clear_move_path("Could not move");
       return false;
     }
 
