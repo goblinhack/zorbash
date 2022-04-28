@@ -2349,6 +2349,7 @@ public:
   void wake(const std::string &reason);
   void water_tick(void);
   void weapon_sheath(void);
+  void weapon_check_for_damage(Thingp weapon, Thingp victim);
   void wobble(float wobble);
   void wobble_set(float);
 

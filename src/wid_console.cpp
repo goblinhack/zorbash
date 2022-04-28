@@ -4,7 +4,6 @@
 //
 
 #include <SDL.h>
-#include <algorithm>
 
 #include "my_command.hpp"
 #include "my_game.hpp"

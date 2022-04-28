@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include <algorithm>
 #include <set>
 
 #include "my_thing.hpp"

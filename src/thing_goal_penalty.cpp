@@ -6,7 +6,6 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include <algorithm>
 #include <set>
 
 int Thing::goal_penalty_get(Thingp attacker)

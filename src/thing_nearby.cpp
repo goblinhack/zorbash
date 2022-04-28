@@ -8,7 +8,6 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
-#include <algorithm>
 #include <set>
 
 Thingp Thing::most_dangerous_adjacent_thing(void)

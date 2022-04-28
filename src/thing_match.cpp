@@ -6,7 +6,6 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "slre.hpp"
-#include <algorithm>
 
 bool Thing::matches(const std::string &what)
 {

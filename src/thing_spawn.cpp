@@ -3,7 +3,6 @@
 // See the README.md file for license info.
 //
 
-#include <algorithm>
 #include <math.h>
 
 #include "my_game.hpp"

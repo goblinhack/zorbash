@@ -9,7 +9,6 @@
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
-#include <algorithm>
 
 bool Thing::possible_to_attack(const Thingp victim)
 {
@@ -989,35 +988,17 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
           //
           auto armor = victim->equip_get(MONST_EQUIP_ARMOR);
           if (armor) {
-            if (d10000() < armor->break_chance_d10000()) {
-              if (is_player()) {
-                msg("%s falls apart.", armor->text_The().c_str());
-                popup("!!!");
-              }
-              armor->dead("broken");
-            }
+            weapon_check_for_damage(armor, victim);
           }
 
           auto shield = victim->equip_get(MONST_EQUIP_SHIELD);
           if (shield) {
-            if (d10000() < shield->break_chance_d10000()) {
-              if (is_player()) {
-                msg("%s falls apart.", shield->text_The().c_str());
-                popup("!!!");
-              }
-              shield->dead("broken");
-            }
+            weapon_check_for_damage(shield, victim);
           }
 
           auto helmet = victim->equip_get(MONST_EQUIP_HELMET);
           if (helmet) {
-            if (d10000() < helmet->break_chance_d10000()) {
-              if (is_player()) {
-                msg("%s falls apart.", helmet->text_The().c_str());
-                popup("!!!");
-              }
-              helmet->dead("broken");
-            }
+            weapon_check_for_damage(helmet, victim);
           }
 
           //
@@ -1056,61 +1037,12 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         if (my_owner) {
           auto weapon = my_owner->equip_get(MONST_EQUIP_WEAPON);
           if (weapon) {
-            auto break_chance = weapon->break_chance_d10000();
-            if (victim->is_toughness_soft()) {
-              break_chance /= 2;
-            }
-            if (victim->is_toughness_hard()) {
-              break_chance *= 2;
-            }
-            if (victim->is_toughness_very_hard()) {
-              break_chance *= 2;
-            }
-            if (d20roll_under(stat_luck_total())) {
-              break_chance = 0;
-            }
-            auto roll = d10000();
-            if (roll < break_chance) {
-              if (my_owner->is_player()) {
-                if (victim->is_wall()) {
-                  msg("%%fg=red$%s buckles on the rock wall.%%fg=reset$", weapon->text_The().c_str());
-                } else {
-                  msg("%%fg=red$%s is broken.%%fg=reset$", weapon->text_The().c_str());
-                }
-              } else {
-                msg("%%fg=red$%s is broken.%%fg=reset$", weapon->text_The().c_str());
-              }
-              weapon->dead("broken");
-            }
+            weapon_check_for_damage(weapon, victim);
           }
 
           auto gauntlet = my_owner->equip_get(MONST_EQUIP_GAUNTLET);
           if (gauntlet) {
-            auto break_chance = gauntlet->break_chance_d10000();
-            if (victim->is_toughness_soft()) {
-              break_chance /= 2;
-            }
-            if (victim->is_toughness_hard()) {
-              break_chance *= 2;
-            }
-            if (victim->is_toughness_very_hard()) {
-              break_chance *= 2;
-            }
-            if (d20roll_under(stat_luck_total())) {
-              break_chance = 0;
-            }
-            if (d10000() < break_chance) {
-              if (my_owner->is_player()) {
-                if (victim->is_wall()) {
-                  msg("%%fg=red$%s smashes on the rock wall.%%fg=reset$", weapon->text_The().c_str());
-                } else {
-                  msg("%%fg=red$%s disintegrates.%%fg=reset$", weapon->text_The().c_str());
-                }
-              } else {
-                msg("%%fg=red$%s disintegrates.%%fg=reset$", weapon->text_The().c_str());
-              }
-              gauntlet->dead("broken");
-            }
+            weapon_check_for_damage(gauntlet, victim);
           }
         }
 

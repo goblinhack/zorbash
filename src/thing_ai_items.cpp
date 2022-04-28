@@ -6,7 +6,6 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include <algorithm>
 #include <set>
 
 bool Thing::try_to_enchant_items(void)
