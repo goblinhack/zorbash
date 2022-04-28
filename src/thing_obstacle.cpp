@@ -307,6 +307,13 @@ bool Thing::ai_obstacle(Thingp it)
       return false;
     }
 
+    //
+    // Dead/extinguished braziers
+    //
+    if (it->is_dead) {
+      return false;
+    }
+
     if (! it->is_open) {
       if (it->is_door()) {
         if (is_able_to_open_doors()) {
@@ -464,6 +471,13 @@ bool Tp::ai_obstacle(Thingp it)
 
   if (it->is_brazier() || it->is_barrel() || it->is_obs_wall_or_door()) {
     if (is_able_to_walk_through_walls()) {
+      return false;
+    }
+
+    //
+    // Dead/extinguished braziers
+    //
+    if (it->is_dead) {
       return false;
     }
 

@@ -335,7 +335,7 @@ public:
     STATE_QUIT_MENU,             // Pondering quitting
   };
   int state {STATE_NORMAL};
-  int fast_move_speed {THING_MOVE_SPEED_FAST_MS};    // Robot and/or move via cursor
+  int fast_move_speed {THING_MOVE_SPEED_FAST_MS};    // Moving when you have a cursor path
   int slow_move_speed {THING_MOVE_SPEED_SLOW_MS};    // Normal speed of all things
   int current_move_speed {THING_MOVE_SPEED_SLOW_MS}; // Current speed
 

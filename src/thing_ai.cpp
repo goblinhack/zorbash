@@ -881,7 +881,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Don't attack your fellow minion
         //
-        if (it->is_minion() && (it->top_mob() == top_mob())) {
+        if (it->is_minion() && it->top_mob() && (it->top_mob() == top_mob())) {
           AI_LOG("Fellow minion", it);
           continue;
         }

@@ -339,9 +339,6 @@ bool Thing::ai_wander(void)
 
   dbg("AI wander");
   auto tries = THING_AI_WANDER_TRIES;
-  if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
-    tries = 1;
-  }
   while (tries-- > 0) {
     point nh;
     if (ai_choose_wander(nh)) {

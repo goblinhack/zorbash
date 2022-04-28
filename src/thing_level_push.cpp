@@ -228,8 +228,13 @@ void Thing::level_push(void)
     level->is_smoke_set(mx, my);
   }
   if (is_brazier()) {
-    i_set_is_brazier = true;
-    level->is_brazier_set(mx, my);
+    //
+    // Dead/extinguished braziers are not an obstacel
+    //
+    if (! is_dead) {
+      i_set_is_brazier = true;
+      level->is_brazier_set(mx, my);
+    }
   }
   if (is_barrel()) {
     i_set_is_barrel = true;
