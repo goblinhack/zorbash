@@ -8,7 +8,6 @@
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-#include <algorithm>
 #include <vector>
 
 std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug {};

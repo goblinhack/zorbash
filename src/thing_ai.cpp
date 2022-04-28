@@ -11,7 +11,6 @@
 #include "my_sprintf.hpp"
 #include "my_template.hpp"
 #include "my_thing.hpp"
-#include <algorithm>
 #include <set>
 
 #define GOAL_PRIO_VERY_HIGH 0

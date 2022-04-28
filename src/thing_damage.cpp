@@ -10,7 +10,6 @@
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
-#include <algorithm>
 
 int Thing::num_attacks(void)
 {

@@ -8,7 +8,6 @@
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_popup.hpp"
-#include <algorithm>
 #include <set>
 
 void Thing::change_state(int new_state, const std::string &why)

@@ -8,7 +8,6 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
-#include <algorithm>
 
 bool Thing::ai_blocked(void)
 {

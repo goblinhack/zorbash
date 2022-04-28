@@ -10,7 +10,6 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-#include <algorithm>
 
 int Thing::on_owner_receiving_damage_stat_att(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {

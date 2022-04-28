@@ -10,7 +10,6 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-#include <algorithm>
 
 const Dice &Thing::damage_draining_dice(void)
 {
