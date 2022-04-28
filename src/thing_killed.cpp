@@ -362,8 +362,14 @@ void Thing::killed(Thingp defeater, const char *reason)
           level->is_monst_unset(curr_at.x, curr_at.y);
         }
 
+        //
+        // This pop/push is necessary to update the map so that things
+        // like braziers, now dead, are not a heat source.
+        //
+        level_pop();
         is_dead  = true;
         is_dying = false;
+        level_push();
         return;
       }
     }
