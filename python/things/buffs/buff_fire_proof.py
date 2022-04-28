@@ -117,10 +117,10 @@ def tp_init(name, text_name):
     my.on_owner_receiving_damage_stat_con_do(self, "me.on_owner_receiving_damage_stat_con()")
     my.on_owner_receiving_damage_stat_str_do(self, "me.on_owner_receiving_damage_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
+    # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tile(self,
             ascii_char="X", ascii_bg="", ascii_fg="white",
             tile="buff_fire_proof")
-    # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tp_update(self)
 
 

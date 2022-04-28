@@ -26,10 +26,10 @@ def tp_init(name, text_name):
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.text_description(self, "You are as slippery as a banana buff.")
+    # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tile(self,
             ascii_char="X", ascii_bg="", ascii_fg="white",
             tile="buff_slippery")
-    # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tp_update(self)
 
 
