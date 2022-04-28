@@ -116,6 +116,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
   //
   if (use_options && use_options->radial_effect) {
     dbg("Firing radial effect");
+    TRACE_AND_INDENT();
 
     auto laser = level->thing_new(target_name_laser, target->curr_at, item ? item : this);
     if (! laser) {
@@ -131,10 +132,21 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
     on_use(laser, target);
   } else {
     dbg("Firing laser effect");
+    TRACE_AND_INDENT();
 
     auto collatoral_damage = in_the_way(curr_at, target->curr_at);
     if (collatoral_damage.size()) {
+      dbg("Firing laser effect (collatoral damage)");
+      TRACE_AND_INDENT();
+
       for (auto target : collatoral_damage) {
+        //
+        // Ignore things that are too close
+        //
+        if (target->curr_at == curr_at) {
+          continue;
+        }
+
         auto laser = level->thing_new(target_name_laser, target->curr_at, item ? item : this);
         if (! laser) {
           err("No laser to fire");
@@ -146,6 +158,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
 
         dbg("Firing named laser (at collatoral damage) with: %s at %s dist %f", laser->to_string().c_str(),
             target->to_string().c_str(), distance(curr_at, target->curr_at));
+        TRACE_AND_INDENT();
 
         level->new_laser(laser->id, target->id, start, end, game->current_move_speed, true /* follow */);
 
@@ -157,6 +170,12 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
         on_use(laser, target);
       }
     } else {
+      //
+      // Nothing in the way
+      //
+      dbg("Firing laser effect (nothing in the way)");
+      TRACE_AND_INDENT();
+
       auto laser = level->thing_new(target_name_laser, target->curr_at, item ? item : this);
       if (! laser) {
         err("No laser to fire");
@@ -168,6 +187,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
 
       dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(), target->to_string().c_str(),
           distance(curr_at, target->curr_at));
+      TRACE_AND_INDENT();
 
       level->new_laser(laser->id, target->id, start, end, game->current_move_speed, true /* follow */);
 
