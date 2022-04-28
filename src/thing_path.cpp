@@ -138,7 +138,7 @@ bool Thing::path_pop_next_move(void)
         } else if (is_disliked_by_me(jump_pos)) {
           IF_DEBUG2
           {
-            auto s = string_sprintf("Fianl jump position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
+            auto s = string_sprintf("Final jump position %d,%d is also a hazard", (int) jump_pos.x, (int) jump_pos.y);
             AI_LOG(s);
           }
 

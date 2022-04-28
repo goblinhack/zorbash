@@ -985,7 +985,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           // then it's not really fair to use that knowledge.
           //
           if (lit_recently) {
-            dbg("AI: Consider attacking (my health %d, its health %d) ? %s%s%s%s", my_health, it_health,
+            dbg("AI: Consider (my health %d, its health %d) ? %s%s%s%s", my_health, it_health,
                 it->to_short_string().c_str(), is_enemy(it) ? ", is enemy" : "",
                 is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
 

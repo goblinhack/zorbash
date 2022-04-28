@@ -352,6 +352,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.hunger_health_pct(self, 5)
     my.is_able_to_attack_mobs(self, True)
     my.is_able_to_break_down_doors(self, True)
+    my.is_debug_type(self, True)
     my.is_able_to_break_out_of_webs(self, True)
     my.is_able_to_change_levels(self, True)
     my.is_able_to_collect_keys(self, True)
