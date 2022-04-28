@@ -191,10 +191,6 @@ void Level::heatmap_print(point at, point tl, point br)
     std::string debug;
     for (x = minx; x < maxx; x++) {
       point p(x, y);
-      if (heatmap(x, y) > 0) {
-        debug += string_sprintf("%2d", heatmap(x, y));
-        continue;
-      }
       if (p == at) {
         debug += (" @");
         continue;
@@ -217,6 +213,10 @@ void Level::heatmap_print(point at, point tl, point br)
       }
       if (is_mob(x, y)) {
         debug += (" m");
+        continue;
+      }
+      if (heatmap(x, y) > 0) {
+        debug += string_sprintf("%2d", heatmap(x, y));
         continue;
       }
       if (is_floor(x, y)) {

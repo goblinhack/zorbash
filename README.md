@@ -2,7 +2,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
-<!-- robot did not collect keys                                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

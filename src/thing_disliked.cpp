@@ -58,7 +58,7 @@ bool Thing::is_disliked_by_me(const point p)
         return true;
       }
     } else if (avoid_level >= 10) {
-      if (heat >= 5) {
+      if (heat >= 9) {
         // log("%s is disliked line %d", p.to_string().c_str(), __LINE__);
         return true;
       }
@@ -103,6 +103,14 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
   // .111.
   // .....
   //
+  //
+  // Lava fire looks like:
+  // ..... .....
+  // .AAA. .LLL.
+  // .A8A. .L.L.
+  // .AAA. .LLL.
+  // ..... .....
+  //
   int  heat        = level->heatmap(p);
   auto avoid_level = environ_avoids_fire();
   if (damage_received_doubled_from_fire()) {
@@ -113,7 +121,7 @@ bool Tp::is_disliked_by_me(Levelp level, point p) const
       return true;
     }
   } else if (avoid_level >= 10) {
-    if (heat >= 5) {
+    if (heat >= 9) {
       return true;
     }
   }
@@ -281,7 +289,7 @@ bool Thing::is_disliked_by_me(const Thingp itp)
         return true;
       }
     } else if (avoid_level >= 10) {
-      if (heat >= 5) {
+      if (heat >= 9) {
         // log("%s is disliked line %d", it->to_string().c_str(), __LINE__);
         return true;
       }
