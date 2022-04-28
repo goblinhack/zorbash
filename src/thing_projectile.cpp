@@ -61,9 +61,27 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
     die("No projectile name");
   }
 
+  //
+  // Projectiles hit the first thing in the way. But ignore if it hits
+  // ourselves. i.e. if we're in foilage
+  //
   auto collatoral_damage = in_the_way(curr_at, target->curr_at, 1);
   if (collatoral_damage.size()) {
     target = collatoral_damage[ 0 ];
+
+    //
+    // Choose the next thing, if the thing that is in the way is on
+    // our tile
+    //
+    if (target && (target->curr_at == curr_at)) {
+      if (collatoral_damage.size()) {
+        target = collatoral_damage[ 0 ];
+        if (! target) {
+          err("No target after removing things in the way");
+          return nullptr;
+        }
+      }
+    }
   }
 
   auto start = last_blit_at;
