@@ -36,7 +36,7 @@ void Thing::blit_floor_chasm(point tl, point br, const ThingTiles *tiles)
   }
 
   auto  dh  = 5;
-  float fdh = ((1.0 / maxdepth) / (float) TILE_HEIGHT) * dh;
+  float fdh = ((1.0 / maxdepth) / ((float) TILE_HEIGHT)) * dh;
 
   if (depth) {
     point tl2 = tl;

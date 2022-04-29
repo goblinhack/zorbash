@@ -22,12 +22,12 @@ def on_enchant(me, x, y):
 
 def init_weapon(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.break_chance_d10000(self, 10)
     my.collision_check(self, True)
     my.collision_hit_360(self, True)
     my.collision_hit_priority(self, 10)
     my.collision_hit_priority(self, 6)
     my.crit_chance_d10000(self, 500)
+    my.damaged_chance_d10000(self, 10)
     my.damage_melee_chance_d1000(self, 0, 1000)
     my.damage_melee_dice(self, "1d6")
     my.equip_carry_anim(self, "axe_carry")

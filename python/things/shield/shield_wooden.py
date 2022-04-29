@@ -14,7 +14,7 @@ def on_enchant(me, x, y):
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
-    my.break_chance_d10000(self, 20)
+    my.damaged_chance_d10000(self, 20)
     my.enchant_max(self, 5)
     my.equip_carry_anim(self, "shield_wooden_carry")
     my.gfx_short_shadow_caster(self, True)

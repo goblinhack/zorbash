@@ -803,7 +803,7 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
         if (exists) {
           step++;
           if (count > 1) {
-            wid_progress_bar("Loading...", (float) step / (float) count);
+            wid_progress_bar("Loading...", ((float) step) / ((float) count));
           }
 
           LOG("INF: Loading level %d,%d,%d", p.x, p.y, p.z);
@@ -1408,7 +1408,7 @@ void Game::wid_load_select(void)
     Game tmp;
     auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
-    wid_progress_bar("Scanning...", (float) slot / (float) UI_WID_SAVE_SLOTS);
+    wid_progress_bar("Scanning...", ((float) slot) / ((float) UI_WID_SAVE_SLOTS));
 
     if (slot == UI_WID_SAVE_SLOTS - 1) {
       tmp_file = saved_dir + "saved-snapshot";

@@ -201,7 +201,7 @@ public:
   void wid_main_menu_select(void);
   void wid_save_select(void);
   void wid_thing_info_add_attack(WidPopup *w, Thingp t);
-  void wid_thing_info_add_break_chance(WidPopup *w, Thingp t);
+  void wid_thing_info_add_damaged_chance(WidPopup *w, Thingp t);
   void wid_thing_info_add_carry_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
   void wid_thing_info_add_crit_chance(WidPopup *w, Thingp t);

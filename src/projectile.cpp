@@ -122,7 +122,7 @@ void Level::display_pixelart_projectiles(void)
   auto now = time_game_ms();
   auto e   = std::remove_if(all_projectiles.begin(), all_projectiles.end(), [ =, this ](Projectile &p) {
     float timestep = p.ts_stop - p.ts_start;
-    float dt       = ((float) (now - p.ts_start)) / timestep;
+    float dt       = (((float) (now) -p.ts_start)) / timestep;
 
     Thingp t;
 
@@ -159,7 +159,7 @@ void Level::display_pixelart_projectiles(void)
     perp        = rotate_radians(perp, ninety_deg);
     perp /= 2;
 
-    int frame = (int) ((float) Projectile::max_frames * dt);
+    int frame = (int) (((float) Projectile::max_frames) * dt);
     if (frame >= Projectile::max_frames) {
       frame = Projectile::max_frames - 1;
     }

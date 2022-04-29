@@ -246,8 +246,8 @@ bool Thing::drop_from_ether(Thingp what)
   }
 
   auto s = (w->abs_tl + w->abs_br) / 2;
-  s.x    = (int) (((float) game->config.game_pix_width / (float) TERM_WIDTH) * (float) s.x);
-  s.y    = (int) (((float) game->config.game_pix_height / (float) TERM_HEIGHT) * (float) s.y);
+  s.x    = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) s.x));
+  s.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) s.y));
 
   game->level->new_external_particle(id, s, e, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
                                      tile_index_to_tile(what->tile_curr),

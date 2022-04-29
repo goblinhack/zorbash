@@ -32,6 +32,7 @@ int Thing::damage_future1(void)
 {
   TRACE_NO_INDENT();
   auto roll    = tp()->damage_future1_dice().roll();
+  roll         = weapon_damage_modify(roll);
   auto enchant = enchant_get();
   dbg("Damage future1 roll %d + enchant %d", roll, enchant);
   return roll + enchant;

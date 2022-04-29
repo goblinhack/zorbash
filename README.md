@@ -10,6 +10,13 @@
 <!-- sudo operf ./zorbash-game --playername discobob --seed victimlake --nodebug --quick-start                                                    -->
 <!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
 <!-- ------                                                                                                                                       -->
+<!-- Accessibilit                                                                                                                                 -->
+<!-- ------                                                                                                                                       -->
+<!-- letter outline                                                                                                                               -->
+<!-- no lighting effects mode                                                                                                                     -->
+<!-- keyboard only mode                                                                                                                           -->
+<!-- keyboard only mode single hand                                                                                                               -->
+<!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->

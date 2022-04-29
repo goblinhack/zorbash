@@ -15,7 +15,25 @@ int Thing::weapon_damaged_pct(void)
   if (! damaged_count()) {
     return 0;
   }
-  return (int) (((float) (damaged_count() / health_initial())) * 100.0);
+  return (int) (((((float) damaged_count())) / (((float) health_max()))) * 100.0);
+}
+
+//
+// Take account of the state of the weapon
+//
+int Thing::weapon_damage_modify(int damage)
+{
+  if (! damaged_count()) {
+    return damage;
+  }
+
+  int damage_in = damage;
+  damage -= (int) ceil(((((float) damage)) / 100.0) * ((float) weapon_damaged_pct()));
+  dbg("Weapon is damaged, hits for %d -> %d", damage_in, damage);
+  if (damage < 0) {
+    damage = 0;
+  }
+  return damage;
 }
 
 //
@@ -34,39 +52,39 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
   //
   // Enchantment is already factored in here
   //
-  auto break_chance = weapon->break_chance_d10000();
+  auto damaged_chance = weapon->damaged_chance_d10000();
   if (victim->is_soft()) {
-    break_chance /= 2;
+    damaged_chance /= 2;
   }
 
   if (victim->is_acid()) {
     if (! weapon->is_immune_to_acid()) {
-      break_chance *= 2;
+      damaged_chance *= 2;
       if (weapon->damage_received_doubled_from_acid()) {
-        break_chance *= 2;
+        damaged_chance *= 2;
       }
     }
   }
 
   if (victim->is_hard()) {
-    break_chance *= 2;
+    damaged_chance *= 2;
     shatter = true;
   }
 
   if (victim->is_very_hard()) {
-    break_chance *= 2;
+    damaged_chance *= 2;
     shatter = true;
   }
 
   if (d20roll_under(stat_luck_total())) {
-    break_chance = 0;
+    damaged_chance = 0;
   }
 
   //
   // See if the weapon is damaged.
   //
   auto roll = d10000();
-  if (roll > break_chance) {
+  if (roll > damaged_chance) {
     return;
   }
 

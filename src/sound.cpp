@@ -130,7 +130,7 @@ bool sound_play(const std::string &alias)
     return false;
   }
 
-  float volume = sound->second->volume * ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
+  float volume = sound->second->volume * (((float) game->config.sound_volume) / ((float) MIX_MAX_VOLUME));
 
   volume *= MIX_MAX_VOLUME;
 
@@ -171,7 +171,7 @@ bool sound_play_channel(int channel, const std::string &alias)
     return false;
   }
 
-  float volume = sound->second->volume * ((float) game->config.sound_volume / (float) MIX_MAX_VOLUME);
+  float volume = sound->second->volume * (((float) game->config.sound_volume) / ((float) MIX_MAX_VOLUME));
 
   volume *= MIX_MAX_VOLUME;
 

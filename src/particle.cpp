@@ -114,7 +114,7 @@ void Level::display_pixelart_internal_particles(void)
     }
 
     float t  = p.ts_stop - p.ts_start;
-    float dt = ((float) (now - p.ts_start)) / t;
+    float dt = (((float) (now) - p.ts_start)) / t;
     // con("dt %f", dt);
     if (dt >= 1) {
       if (p.id.id) {
@@ -145,7 +145,7 @@ void Level::display_pixelart_internal_particles(void)
     point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
     point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
-    int oy = sin(RAD_180 * dt) * (float) p.height;
+    int oy = sin(RAD_180 * dt) * ((float) p.height);
 
     blit_tl.y -= oy;
     blit_br.y -= oy;
@@ -308,7 +308,7 @@ void Level::display_pixelart_external_particles(void)
     }
 
     float t  = p.ts_stop - p.ts_start;
-    float dt = ((float) (now - p.ts_start)) / t;
+    float dt = (((float) (now) - p.ts_start)) / t;
     // con("dt %f", dt);
     if (dt >= 1) {
       if (p.id.id) {
@@ -343,7 +343,7 @@ void Level::display_pixelart_external_particles(void)
     point blit_tl(at.x - (sz.w / 2), at.y - (sz.h / 2));
     point blit_br(at.x + (sz.w / 2), at.y + (sz.h / 2));
 
-    int oy = sin(RAD_180 * dt) * (float) p.height;
+    int oy = sin(RAD_180 * dt) * ((float) p.height);
 
     blit_tl.y -= oy;
     blit_br.y -= oy;

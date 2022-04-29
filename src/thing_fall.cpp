@@ -135,7 +135,7 @@ float Thing::fall_curr(void)
     return 0;
   }
 
-  float time_step = (float) (ts - ts_fall_begin()) / (float) (ts_fall_end() - ts_fall_begin());
+  float time_step = ((float) (ts) -ts_fall_begin()) / ((float) (ts_fall_end()) - ts_fall_begin());
   dbg("Is currently falling, dt %f", time_step);
 
   //
@@ -391,7 +391,7 @@ bool Thing::fall_to_next_level(void)
         level->update_new_level();
       }
 
-      if (tp()->health_initial_dice_str() != "") {
+      if (health_max()) {
         auto h = health_decr(fall_damage);
         if (h <= 0) {
           h = health_set(0);

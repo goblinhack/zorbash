@@ -244,7 +244,7 @@ int Tp::blit_bot_off(void) const { return _blit_bot_off; }
 int Tp::blit_left_off(void) const { return _blit_left_off; }
 int Tp::blit_right_off(void) const { return _blit_right_off; }
 int Tp::blit_top_off(void) const { return _blit_top_off; }
-int Tp::break_chance_d10000(void) const { return _break_chance_d10000; }
+int Tp::damaged_chance_d10000(void) const { return _damaged_chance_d10000; }
 int Tp::capacity_height(void) const { return _capacity_height; }
 int Tp::capacity_width(void) const { return _capacity_width; }
 int Tp::charge_count(void) const { return _charge_count; }
@@ -305,7 +305,7 @@ int Tp::gfx_solid_shadow(void) const { return _gfx_solid_shadow; }
 int Tp::gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
 int Tp::gfx_water(void) const { return _gfx_water; }
 int Tp::gfx_wobbles_when_hit(void) const { return _gfx_wobbles_when_hit; }
-int Tp::health_starving_pct(void) const { return _health_starving_pct; }
+int Tp::hunger_starving_pct(void) const { return _hunger_starving_pct; }
 int Tp::hunger_clock_tick_freq(void) const { return _hunger_clock_tick_freq; }
 int Tp::hunger_health_pct(void) const { return _hunger_health_pct; }
 int Tp::hunger_is_insatiable(void) const { return _hunger_is_insatiable; }
@@ -782,7 +782,7 @@ void Tp::blit_bot_off_set(int v) { _blit_bot_off = v; }
 void Tp::blit_left_off_set(int v) { _blit_left_off = v; }
 void Tp::blit_right_off_set(int v) { _blit_right_off = v; }
 void Tp::blit_top_off_set(int v) { _blit_top_off = v; }
-void Tp::break_chance_d10000_set(int v) { _break_chance_d10000 = v; }
+void Tp::damaged_chance_d10000_set(int v) { _damaged_chance_d10000 = v; }
 void Tp::capacity_height_set(int v) { _capacity_height = v; }
 void Tp::capacity_width_set(int v) { _capacity_width = v; }
 void Tp::charge_count_set(int v) { _charge_count = v; }
@@ -846,7 +846,7 @@ void Tp::gfx_solid_shadow_set(int v) { _gfx_solid_shadow = v; }
 void Tp::gfx_very_short_shadow_caster_set(int v) { _gfx_very_short_shadow_caster = v; }
 void Tp::gfx_water_set(int v) { _gfx_water = v; }
 void Tp::gfx_wobbles_when_hit_set(int v) { _gfx_wobbles_when_hit = v; }
-void Tp::health_starving_pct_set(int v) { _health_starving_pct = v; }
+void Tp::hunger_starving_pct_set(int v) { _hunger_starving_pct = v; }
 void Tp::hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
 void Tp::hunger_health_pct_set(int v) { _hunger_health_pct = v; }
 void Tp::hunger_is_insatiable_set(int v) { _hunger_is_insatiable = v; }

@@ -56,10 +56,10 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
       point shadow_tl = shadow_bl;
       point shadow_tr = shadow_br;
 
-      shadow_tl.x += (float) TILE_WIDTH * dx;
-      shadow_tl.y += (float) TILE_WIDTH * dy;
-      shadow_tr.x += (float) TILE_WIDTH * dx;
-      shadow_tr.y += (float) TILE_WIDTH * dy;
+      shadow_tl.x += ((float) TILE_WIDTH) * dx;
+      shadow_tl.y += ((float) TILE_WIDTH) * dy;
+      shadow_tr.x += ((float) TILE_WIDTH) * dx;
+      shadow_tr.y += ((float) TILE_WIDTH) * dy;
 
       tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
     }
@@ -70,10 +70,10 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
       point shadow_tl = shadow_tr;
       point shadow_bl = shadow_br;
 
-      shadow_tl.x += (float) TILE_WIDTH * (dx - 1.5);
-      shadow_tl.y += (float) TILE_WIDTH * dy;
-      shadow_bl.x += (float) TILE_WIDTH * (dx - 1.5);
-      shadow_bl.y += (float) TILE_WIDTH * dy;
+      shadow_tl.x += ((float) TILE_WIDTH) * (dx - 1.5);
+      shadow_tl.y += ((float) TILE_WIDTH) * dy;
+      shadow_bl.x += ((float) TILE_WIDTH) * (dx - 1.5);
+      shadow_bl.y += ((float) TILE_WIDTH) * dy;
 
       tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
     }
@@ -84,10 +84,10 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
       point shadow_tr = shadow_tl;
       point shadow_br = shadow_bl;
 
-      shadow_tr.x += (float) TILE_WIDTH * (dx + 1.5);
-      shadow_tr.y += (float) TILE_WIDTH * dy;
-      shadow_br.x += (float) TILE_WIDTH * (dx + 1.5);
-      shadow_br.y += (float) TILE_WIDTH * dy;
+      shadow_tr.x += ((float) TILE_WIDTH) * (dx + 1.5);
+      shadow_tr.y += ((float) TILE_WIDTH) * dy;
+      shadow_br.x += ((float) TILE_WIDTH) * (dx + 1.5);
+      shadow_br.y += ((float) TILE_WIDTH) * dy;
 
       tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
     }
@@ -143,20 +143,20 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
     }
 
     if (unlikely(tpp->gfx_very_short_shadow_caster())) {
-      shadow_tl.x += (float) TILE_WIDTH * dx * 4;
-      shadow_tr.x += (float) TILE_WIDTH * dx * 4;
-      shadow_tl.y += (float) TILE_WIDTH * dy * 4;
-      shadow_tr.y += (float) TILE_WIDTH * dy * 4;
+      shadow_tl.x += ((float) TILE_WIDTH) * dx * 4;
+      shadow_tr.x += ((float) TILE_WIDTH) * dx * 4;
+      shadow_tl.y += ((float) TILE_WIDTH) * dy * 4;
+      shadow_tr.y += ((float) TILE_WIDTH) * dy * 4;
     } else if (unlikely(tpp->gfx_short_shadow_caster())) {
-      shadow_tl.x += (float) TILE_WIDTH * dx * 10;
-      shadow_tr.x += (float) TILE_WIDTH * dx * 10;
-      shadow_tl.y += (float) TILE_WIDTH * dy * 10;
-      shadow_tr.y += (float) TILE_WIDTH * dy * 10;
+      shadow_tl.x += ((float) TILE_WIDTH) * dx * 10;
+      shadow_tr.x += ((float) TILE_WIDTH) * dx * 10;
+      shadow_tl.y += ((float) TILE_WIDTH) * dy * 10;
+      shadow_tr.y += ((float) TILE_WIDTH) * dy * 10;
     } else { /* long shadow */
-      shadow_tl.x += (float) TILE_WIDTH * dx * 20;
-      shadow_tr.x += (float) TILE_WIDTH * dx * 20;
-      shadow_tl.y += (float) TILE_WIDTH * dy * 20;
-      shadow_tr.y += (float) TILE_WIDTH * dy * 20;
+      shadow_tl.x += ((float) TILE_WIDTH) * dx * 20;
+      shadow_tr.x += ((float) TILE_WIDTH) * dx * 20;
+      shadow_tl.y += ((float) TILE_WIDTH) * dy * 20;
+      shadow_tr.y += ((float) TILE_WIDTH) * dy * 20;
     }
 
     if (shadow_tl.x > shadow_tr.x) {
@@ -425,8 +425,8 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   float X     = at.x;
   float Y     = at.y;
 
-  blit_tl.x = (float) X * tilew;
-  blit_tl.y = (float) Y * tileh;
+  blit_tl.x = ((float) X) * tilew;
+  blit_tl.y = ((float) Y) * tileh;
   blit_br.x = blit_tl.x + tilew;
   blit_br.y = blit_tl.y + tileh;
 
@@ -810,7 +810,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       // Only show health when awake
       //
     } else {
-      int h_step = (1.0 - ((float) h / (float) m)) * GAME_MONST_HEALTH_BAR_STEPS;
+      int h_step = (1.0 - (((float) h) / ((float) m))) * GAME_MONST_HEALTH_BAR_STEPS;
       h_step     = std::min(h_step, GAME_MONST_HEALTH_BAR_STEPS);
       h_step     = std::max(h_step, 1);
       auto y     = blit_br.y - ((1.0 - tile->py1 /* pct */) * tile->pix_height);

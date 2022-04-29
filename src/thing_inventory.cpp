@@ -37,8 +37,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     }
 
     auto p = (w->abs_tl + w->abs_br) / 2;
-    p.x    = (int) (((float) game->config.game_pix_width / (float) TERM_WIDTH) * (float) p.x);
-    p.y    = (int) (((float) game->config.game_pix_height / (float) TERM_HEIGHT) * (float) p.y);
+    p.x    = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) p.x));
+    p.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) p.y));
 
     int value = item->gold_value();
     int particle_count;
@@ -92,8 +92,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     msg("You collect the key.");
 
     auto p = (w->abs_tl + w->abs_br) / 2;
-    p.x    = (int) (((float) game->config.game_pix_width / (float) TERM_WIDTH) * (float) p.x);
-    p.y    = (int) (((float) game->config.game_pix_height / (float) TERM_HEIGHT) * (float) p.y);
+    p.x    = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) p.x));
+    p.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) p.y));
 
     point s = (last_blit_tl + last_blit_br) / 2;
     point j(pcg_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2, pcg_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
@@ -114,8 +114,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     }
 
     auto p = (w->abs_tl + w->abs_br) / 2;
-    p.x    = (int) (((float) game->config.game_pix_width / (float) TERM_WIDTH) * (float) p.x);
-    p.y    = (int) (((float) game->config.game_pix_height / (float) TERM_HEIGHT) * (float) p.y);
+    p.x    = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) p.x));
+    p.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) p.y));
 
     dbg("Yes; create inventory particle");
     level->new_external_particle(item->id, (last_blit_tl + last_blit_br) / 2, p, isize(TILE_WIDTH, TILE_HEIGHT),
@@ -179,8 +179,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
     }
 
     where_from   = (w->abs_tl + w->abs_br) / 2;
-    where_from.x = (int) (((float) game->config.game_pix_width / (float) TERM_WIDTH) * (float) where_from.x);
-    where_from.y = (int) (((float) game->config.game_pix_height / (float) TERM_HEIGHT) * (float) where_from.y);
+    where_from.x = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) where_from.x));
+    where_from.y = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) where_from.y));
   } else {
     where_from = (last_blit_tl + last_blit_br) / 2;
   }

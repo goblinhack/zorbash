@@ -60,17 +60,17 @@ static void game_display_flames_tiles(int w, int h)
     }
 
     float bright = 1.01;
-    int   r      = (float) fg.r * bright;
+    int   r      = ((float) fg.r) * bright;
     if (r > 255) {
       r = 255;
     }
     fg.r  = r;
-    int g = (float) fg.g * bright;
+    int g = ((float) fg.g) * bright;
     if (g > 255) {
       g = 255;
     }
     fg.g  = g;
-    int b = (float) fg.b * bright;
+    int b = ((float) fg.b) * bright;
     if (b > 255) {
       b = 255;
     }
@@ -103,9 +103,9 @@ static void game_display_flames_tiles(int w, int h)
     for (auto y = 0; y < h; y++) {
       auto c = bg[ x ][ y ];
 
-      int r = (int) (((float) ((int) c.r)) * bright);
-      int g = (int) (((float) ((int) c.g)) * bright);
-      int b = (int) (((float) ((int) c.b)) * bright);
+      int r = (int) ((((float) ((int) c.r))) * bright);
+      int g = (int) ((((float) ((int) c.g))) * bright);
+      int b = (int) ((((float) ((int) c.b))) * bright);
 
       if (r > 255) {
         r = 255;

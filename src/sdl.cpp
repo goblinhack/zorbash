@@ -54,7 +54,7 @@ static inline void sdl_list_video_size(void)
   for (i = 0; i < SDL_GetNumDisplayModes(0); ++i) {
     SDL_DisplayMode mode;
     SDL_GetDisplayMode(0, i, &mode);
-    LOG("+ SDL video            : %dx%d available, ratio %f", mode.w, mode.h, (float) mode.w / (float) mode.h);
+    LOG("+ SDL video            : %dx%d available, ratio %f", mode.w, mode.h, ((float) mode.w) / ((float) mode.h));
   }
 }
 
@@ -256,8 +256,8 @@ uint8_t sdl_init(void)
   }
 
   CON("SDL: Create window");
-  sdl.window = SDL_CreateWindow("zorbash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, video_width,
-                                    video_height, video_unused_flags);
+  sdl.window = SDL_CreateWindow("zorbash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, video_width, video_height,
+                                video_unused_flags);
   if (! sdl.window) {
     ERR("Couldn't set windowed display %ux%u: %s", video_width, video_height, SDL_GetError());
 
@@ -473,25 +473,25 @@ void sdl_tick(void)
   if (sdl.joy_axes[ 0 ] > sdl.joy_deadzone) {
     DBG2("SDL: left stick, right");
     sdl.joy2_right = true;
-    mx                 = 1;
+    mx             = 1;
   }
 
   if (sdl.joy_axes[ 0 ] < -sdl.joy_deadzone) {
     DBG2("SDL: left stick, left");
     sdl.joy2_left = true;
-    mx                = -1;
+    mx            = -1;
   }
 
   if (sdl.joy_axes[ 1 ] > sdl.joy_deadzone) {
     DBG2("SDL: left stick, down");
     sdl.joy2_down = true;
-    my                = 1;
+    my            = 1;
   }
 
   if (sdl.joy_axes[ 1 ] < -sdl.joy_deadzone) {
     DBG2("SDL: left stick, up");
     sdl.joy2_up = true;
-    my              = -1;
+    my          = -1;
   }
 
   static double accel = 1.0;
@@ -845,13 +845,13 @@ void config_game_pix_zoom_update(void)
   if (TERM_WIDTH >= TERM_WIDTH_MAX) {
     LOG("SDL: Exceeded console hit max width  : %d", TERM_WIDTH);
     TERM_WIDTH                  = TERM_WIDTH_MAX;
-    game->config.ascii_gl_width = (float) game->config.ui_pix_width / (float) TERM_WIDTH;
+    game->config.ascii_gl_width = ((float) game->config.ui_pix_width) / ((float) TERM_WIDTH);
   }
 
   if (TERM_HEIGHT >= TERM_HEIGHT_MAX) {
     LOG("SDL: Exceeded console hit max height : %d", TERM_HEIGHT);
     TERM_HEIGHT                  = TERM_HEIGHT_MAX;
-    game->config.ascii_gl_height = (float) game->config.ui_pix_height / (float) TERM_HEIGHT;
+    game->config.ascii_gl_height = ((float) game->config.ui_pix_height) / ((float) TERM_HEIGHT);
   }
 
   if (g_opt_ascii) {

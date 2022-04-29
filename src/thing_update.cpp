@@ -45,6 +45,9 @@ void Thing::update(void)
   //
   if (! health()) {
     TRACE_NO_INDENT();
+    //
+    // Well it wont be the same health, it is a dice roll
+    //
     auto v = tpp->health_initial();
     if (unlikely(v)) {
       health_set(v);

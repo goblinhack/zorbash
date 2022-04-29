@@ -259,17 +259,17 @@ static void game_display_title_fg3(void)
   }
 
   float bright = 1.01;
-  int   r      = (float) fg.r * bright;
+  int   r      = ((float) fg.r) * bright;
   if (r > 255) {
     r = 255;
   }
   fg.r  = r;
-  int g = (float) fg.g * bright;
+  int g = ((float) fg.g) * bright;
   if (g > 255) {
     g = 255;
   }
   fg.g  = g;
-  int b = (float) fg.b * bright;
+  int b = ((float) fg.b) * bright;
   if (b > 255) {
     b = 255;
   }

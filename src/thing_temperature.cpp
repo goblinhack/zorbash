@@ -66,7 +66,7 @@ void Thing::temperature_tick(void)
     return;
   }
 
-  t = (int) ((float) t * 0.5);
+  t = (int) (((float) t) * 0.5);
   temperature_set(t);
 
   if (is_temperature_sensitive()) {

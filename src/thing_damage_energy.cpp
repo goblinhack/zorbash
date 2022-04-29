@@ -32,6 +32,7 @@ int Thing::damage_energy(void)
 {
   TRACE_NO_INDENT();
   auto roll    = tp()->damage_energy_dice().roll();
+  roll         = weapon_damage_modify(roll);
   auto enchant = enchant_get();
   dbg("Damage energy roll %d + enchant %d", roll, enchant);
   return roll + enchant;

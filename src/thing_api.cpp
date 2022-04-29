@@ -67,24 +67,6 @@ int Thing::nutrition_get(void)
   return (tp()->nutrition_dice().roll());
 }
 
-const Dice &Thing::health_initial_dice(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->health_initial_dice());
-}
-
-const std::string &Thing::health_initial_dice_str(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->health_initial_dice_str());
-}
-
-int Thing::health_initial(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->health_initial_dice().roll());
-}
-
 const Dice &Thing::gold_value_dice(void)
 {
   TRACE_NO_INDENT();
@@ -255,11 +237,11 @@ int Thing::melting_chance_d1000(void)
   return (tp()->melting_chance_d1000());
 }
 
-int Thing::break_chance_d10000(void)
+int Thing::damaged_chance_d10000(void)
 {
   TRACE_NO_INDENT();
 
-  int chance = tp()->break_chance_d10000();
+  int chance = tp()->damaged_chance_d10000();
   int e      = enchant_level();
   while (e-- > 0) {
     chance /= 2;
@@ -489,18 +471,6 @@ int Thing::environ_avoids_water(void)
 {
   TRACE_NO_INDENT();
   return (tp()->environ_avoids_water());
-}
-
-int Thing::hunger_health_pct(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->hunger_health_pct());
-}
-
-int Thing::health_starving_pct(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->health_starving_pct());
 }
 
 int Thing::is_able_to_change_levels(void)
@@ -1003,12 +973,6 @@ int Thing::is_humanoid(void)
   return (tp()->is_humanoid());
 }
 
-int Thing::hunger_is_insatiable(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->hunger_is_insatiable());
-}
-
 int Thing::is_very_hard(void)
 {
   TRACE_NO_INDENT();
@@ -1313,12 +1277,6 @@ int Thing::is_able_to_jump_escape(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_able_to_jump_escape());
-}
-
-int Thing::hunger_clock_tick_freq(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->hunger_clock_tick_freq());
 }
 
 int Thing::is_able_to_follow(void)
@@ -2577,48 +2535,6 @@ int Thing::collateral_damage_pct(void)
 {
   TRACE_NO_INDENT();
   return tp()->collateral_damage_pct();
-}
-
-int Thing::aggression_level_pct(void)
-{
-  TRACE_NO_INDENT();
-
-  int aggression = tp()->aggression_level_pct();
-
-  if (is_able_to_follow()) {
-    //
-    // Followers are more cockey if they have a leader
-    //
-    auto l = leader();
-    if (l) {
-      //
-      // If the leader is dead, be timid
-      //
-      if (l->is_dead) {
-        return (aggression / 4);
-      }
-
-      //
-      // If the leader is weak, be timid
-      //
-      if (l->health() < l->health_initial() / 3) {
-        return (aggression / 2);
-      }
-
-      //
-      // A strong leader
-      //
-      aggression += 20;
-    } else {
-      aggression += 10 * follower_count();
-    }
-  }
-
-  if (aggression > 100) {
-    aggression = 100;
-  }
-
-  return aggression;
 }
 
 int Thing::is_able_to_see_in_the_dark(void)

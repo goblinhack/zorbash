@@ -151,7 +151,7 @@ int Thing::light_dist_update(void)
     // lit and beyond the current light. The current light distance is scaled by the
     // torch power.
     //
-    l->light_power = (float) light_dist_new / (float) initial_light_dist_get();
+    l->light_power = ((float) light_dist_new) / ((float) initial_light_dist_get());
   }
 
   return light_dist;

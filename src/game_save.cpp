@@ -701,7 +701,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const class World & > const my
         if (l) {
           step++;
           if (count > 1) {
-            wid_progress_bar("Saving...", (float) step / (float) count);
+            wid_progress_bar("Saving...", ((float) step) / ((float) count));
           }
 
           exists = true;

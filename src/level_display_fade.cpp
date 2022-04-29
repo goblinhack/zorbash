@@ -14,8 +14,8 @@
 void Level::display_pixelart_fade_out(void)
 {
   int   lines = 1000;
-  float step  = RAD_360 / (float) lines;
-  float ts    = (float) (time_ms_cached() - ts_fade_out_begin) / LEVEL_FADE_OUT_MS;
+  float step  = RAD_360 / ((float) lines);
+  float ts    = ((float) (time_ms_cached()) - ts_fade_out_begin) / LEVEL_FADE_OUT_MS;
   if (ts >= 1) {
     return;
   }
@@ -29,7 +29,7 @@ void Level::display_pixelart_fade_out(void)
   glClear(GL_COLOR_BUFFER_BIT);
   glcolor(WHITE);
 
-  float rad = (1.0 - ts) * (float) game->config.game_pix_width / 2;
+  float rad = (1.0 - ts) * ((float) game->config.game_pix_width) / 2;
   float a   = (1.0 - ts) * 255;
 
   blit_init();
@@ -62,8 +62,8 @@ void Level::display_pixelart_fade_out(void)
 void Level::display_pixelart_fade_in(void)
 {
   int   lines = 1000;
-  float step  = RAD_360 / (float) lines;
-  float ts    = (float) (time_ms_cached() - ts_fade_in_begin) / LEVEL_FADE_IN_MS;
+  float step  = RAD_360 / ((float) lines);
+  float ts    = ((float) (time_ms_cached()) - ts_fade_in_begin) / LEVEL_FADE_IN_MS;
   if (ts >= 1) {
     return;
   }
@@ -77,7 +77,7 @@ void Level::display_pixelart_fade_in(void)
   glClear(GL_COLOR_BUFFER_BIT);
   glcolor(WHITE);
 
-  float rad = ts * (float) game->config.game_pix_width / 2;
+  float rad = ts * ((float) game->config.game_pix_width) / 2;
   float a   = ts * 255;
 
   blit_init();

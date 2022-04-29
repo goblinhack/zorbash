@@ -49,7 +49,7 @@ void Thing::on_teleport(void)
 float Thing::teleport_distance_with_modifiers_get(void)
 {
   TRACE_NO_INDENT();
-  auto d = (float) teleport_distance_get() + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
+  auto d = ((float) teleport_distance_get()) + ceil(0.5 + (pcg_random_range(0, 100) / 100.0));
 
   if (stamina() < stamina_max() / 2) {
     d /= 2;
@@ -131,7 +131,7 @@ int Thing::teleport_distance_get(void)
 float Thing::teleport_distance_max_get(void)
 {
   TRACE_NO_INDENT();
-  auto d = (float) teleport_distance_get();
+  auto d = ((float) teleport_distance_get());
   return d;
 }
 
@@ -629,7 +629,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
     //
     // If the things is near death, pounce
     //
-    if (maybe_victim->health() < maybe_victim->health_initial() / 10) {
+    if (maybe_victim->health() < maybe_victim->health_max() / 10) {
       {
         dbg("Try to teleport onto weakly %s", maybe_victim->to_string().c_str());
         TRACE_AND_INDENT();
