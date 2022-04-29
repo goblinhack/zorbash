@@ -51,6 +51,7 @@ bool Thing::enchant_with_stone(Thingp what)
 
   what->on_enchant();
   what->enchant_incr(1);
+  what->damaged_count_set(0);
 
   //
   // Drop an enchantstone
@@ -82,6 +83,7 @@ bool Thing::enchant_without_stone(Thingp what)
 
   what->on_enchant();
   what->enchant_incr(1);
+  what->damaged_count_set(0);
 
   return true;
 }
@@ -101,6 +103,7 @@ void Thing::enchant_randomly(void)
     }
     enchant_incr(1);
   }
+  damaged_count_set(0);
 }
 
 int Thing::enchantstone_count(void)

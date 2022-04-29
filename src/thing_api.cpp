@@ -1009,10 +1009,10 @@ int Thing::hunger_is_insatiable(void)
   return (tp()->hunger_is_insatiable());
 }
 
-int Thing::is_toughness_very_hard(void)
+int Thing::is_very_hard(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_toughness_very_hard());
+  return (tp()->is_very_hard());
 }
 
 int Thing::is_intelligent(void)
@@ -2514,10 +2514,10 @@ int Thing::is_gauntlet(void)
   return (tp()->is_gauntlet());
 }
 
-int Thing::is_toughness_hard(void)
+int Thing::is_hard(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_toughness_hard());
+  return (tp()->is_hard());
 }
 
 int Thing::is_red_blooded(void)
@@ -2879,10 +2879,10 @@ int Thing::is_smoke(void)
   return (tp()->is_smoke());
 }
 
-int Thing::is_toughness_soft(void)
+int Thing::is_soft(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_toughness_soft());
+  return (tp()->is_soft());
 }
 
 int Thing::is_spawner(void)
@@ -3047,10 +3047,10 @@ int Thing::is_used_when_thrown(void)
   return (tp()->is_used_when_thrown());
 }
 
-int Thing::is_very_is_combustible(void)
+int Thing::is_very_combustible(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_very_is_combustible());
+  return (tp()->is_very_combustible());
 }
 
 int Thing::is_wall_dungeon(void)
@@ -5077,6 +5077,54 @@ int Thing::sleep_count_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->sleep_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// damaged_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::damaged_count(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->damaged_count);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::damaged_count_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count = v);
+}
+
+int Thing::damaged_count_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count -= v);
+}
+
+int Thing::damaged_count_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count += v);
+}
+
+int Thing::damaged_count_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count--);
+}
+
+int Thing::damaged_count_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->damaged_count++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

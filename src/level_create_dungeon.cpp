@@ -1039,7 +1039,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
       // Don't place items where they would catch fire immediately.
       //
       if (heatmap(x, y)) {
-        if (tp->is_very_is_combustible()) {
+        if (tp->is_very_combustible()) {
           continue;
         }
       }
@@ -1338,7 +1338,7 @@ void Level::create_dungeon_place_random_floor_deco(Dungeonp d)
       // Don't place items where they would catch fire immediately.
       //
       if (heatmap(x, y)) {
-        if (tp->is_very_is_combustible()) {
+        if (tp->is_very_combustible()) {
           continue;
         }
       }

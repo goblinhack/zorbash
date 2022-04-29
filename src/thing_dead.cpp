@@ -116,7 +116,7 @@ bool Thing::if_matches_then_dead(const std::string &what, const point p)
 
   FOR_ALL_THINGS(level, t, p.x, p.y)
   {
-    if (t->is_toughness_very_hard()) {
+    if (t->is_very_hard()) {
       continue;
     }
 

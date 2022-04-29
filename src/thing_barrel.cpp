@@ -14,7 +14,7 @@ void Thing::barrel_tick(void)
     return;
   }
 
-  if (! is_toughness_soft() && ! is_barrel()) {
+  if (! is_soft() && ! is_barrel()) {
     return;
   }
 

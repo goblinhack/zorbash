@@ -53,7 +53,7 @@ def tp_init(name, text_name):
     my.is_loggable(self, True)
     my.is_shovable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
-    my.is_very_is_combustible(self, True)
+    my.is_very_combustible(self, True)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_fall_do(self, "me.on_fall()")
