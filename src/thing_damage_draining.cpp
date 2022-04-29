@@ -32,6 +32,7 @@ int Thing::damage_draining(void)
 {
   TRACE_NO_INDENT();
   auto roll    = tp()->damage_draining_dice().roll();
+  roll         = weapon_damage_modify(roll);
   auto enchant = enchant_get();
   dbg("Damage stamina roll %d + enchant %d", roll, enchant);
   return roll + enchant;

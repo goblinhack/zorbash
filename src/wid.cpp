@@ -3680,14 +3680,14 @@ static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
       if (trough_height - scrollbar_height == 0.0f) {
         pct = 0.0f;
       } else {
-        pct = ((float) wid_get_tl_y(scrollbar) - (float) wid_get_tl_y(scrollbar->parent)) /
-              (float) (trough_height - scrollbar_height);
+        pct = (((float) wid_get_tl_y(scrollbar)) - ((float) wid_get_tl_y(scrollbar->parent))) /
+              ((float) (trough_height - scrollbar_height));
       }
 
       owner->offset.y = -miny;
       owner->offset.y -= (pct * (child_height - height));
 
-      float n = (float) wid_get_tl_y(scrollbar->parent) + pct * (float) (trough_height - scrollbar_height);
+      float n = ((float) wid_get_tl_y(scrollbar->parent)) + pct * ((float) (trough_height - scrollbar_height));
       scrollbar->key.tl.y = (int) ceil(n);
 
       wid_tree_detach(scrollbar);
@@ -3712,7 +3712,7 @@ static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
       owner->offset.x = -minx;
       owner->offset.x -= (pct * (child_width - width));
 
-      float n             = (float) wid_get_tl_x(scrollbar->parent) + pct * (float) (trough_width - scrollbar_width);
+      float n = ((float) wid_get_tl_x(scrollbar->parent)) + pct * ((float) (trough_width - scrollbar_width));
       scrollbar->key.tl.x = (int) ceil(n);
 
       wid_tree_detach(scrollbar);

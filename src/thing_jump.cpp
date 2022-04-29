@@ -710,7 +710,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
     //
     // If the things is near death, pounce
     //
-    if (maybe_victim->health() < maybe_victim->health_initial() / 10) {
+    if (maybe_victim->health() < maybe_victim->health_max() / 10) {
       {
         dbg("Try to jump onto weakly %s", maybe_victim->to_string().c_str());
         TRACE_AND_INDENT();

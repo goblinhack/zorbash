@@ -744,7 +744,7 @@ static bool wid_rightbar_pixelart_create(void)
     point br = make_point(tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
 
-    int i     = ((float) player->health() / (float) player->health_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
+    int i     = (((float) player->health()) / ((float) player->health_max())) * ((float) UI_HEALTH_BAR_STEPS) - 1;
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_" + std::to_string(i);
@@ -784,7 +784,7 @@ static bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
 
-    int i     = ((float) player->stamina() / (float) player->stamina_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
+    int i     = (((float) player->stamina() / ((float) player->stamina_max()))) * ((float) UI_HEALTH_BAR_STEPS - 1);
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_" + std::to_string(i);
@@ -1485,7 +1485,7 @@ static bool wid_rightbar_ascii_create(void)
     point br = make_point(tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
 
-    int i     = ((float) player->health() / (float) player->health_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
+    int i     = (((float) player->health() / ((float) player->health_max()))) * ((float) UI_HEALTH_BAR_STEPS - 1);
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_ascii_" + std::to_string(i);
@@ -1533,7 +1533,7 @@ static bool wid_rightbar_ascii_create(void)
     point br = make_point(tl.x + width - 1, tl.y);
     wid_set_pos(w, tl, br);
 
-    int i     = ((float) player->stamina() / (float) player->stamina_max()) * (float) UI_HEALTH_BAR_STEPS - 1;
+    int i     = (((float) player->stamina() / ((float) player->stamina_max()))) * ((float) UI_HEALTH_BAR_STEPS - 1);
     i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
     i         = std::max(i, 0);
     auto icon = "health_bar_ascii_" + std::to_string(i);

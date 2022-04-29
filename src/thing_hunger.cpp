@@ -71,7 +71,7 @@ void Thing::hunger_update(void)
   auto old_is_hungry = is_hungry;
   is_hungry          = health() <= hungry_at;
 
-  int starving_at = (int) ((double) health_max() * ((double) tpp->health_starving_pct() / 100.0));
+  int starving_at = (int) ((double) health_max() * ((double) tpp->hunger_starving_pct() / 100.0));
 
   auto old_is_starving = is_starving;
   is_starving          = health() <= starving_at;
@@ -89,4 +89,28 @@ void Thing::hunger_update(void)
       dbg("Is no longer hungry");
     }
   }
+}
+
+int Thing::hunger_is_insatiable(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->hunger_is_insatiable());
+}
+
+int Thing::hunger_clock_tick_freq(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->hunger_clock_tick_freq());
+}
+
+int Thing::hunger_health_pct(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->hunger_health_pct());
+}
+
+int Thing::hunger_starving_pct(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->hunger_starving_pct());
 }

@@ -34,7 +34,7 @@ void World::fini(void)
         if (l) {
           step++;
           if (count > 1) {
-            wid_progress_bar("Dismantling the dungeon...", (float) step / (float) count);
+            wid_progress_bar("Dismantling the dungeon...", ((float) step) / ((float) count));
           }
           l->fini();
           delete l;

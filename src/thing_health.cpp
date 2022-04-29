@@ -60,7 +60,7 @@ bool Thing::is_bloodied(void)
 float Thing::health_pct(void)
 {
   TRACE_NO_INDENT();
-  float pct = ((float) health() / (float) health_max()) * 100;
+  float pct = (((float) health()) / ((float) health_max())) * 100;
   return pct;
 }
 
@@ -74,10 +74,13 @@ int Thing::health(void)
   if (maybe_infop()) {
     v = infop()->health;
   }
+  /*
+   * Why do we do this? It makes looking at weapon health hard
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
     v += owner->health();
   }
+   */
   return v;
 }
 
@@ -210,4 +213,22 @@ int Thing::health_max_incr(void)
   new_infop();
   auto n = (infop()->health_max++);
   return n;
+}
+
+const Dice &Thing::health_initial_dice(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->health_initial_dice());
+}
+
+const std::string &Thing::health_initial_dice_str(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->health_initial_dice_str());
+}
+
+int Thing::health_initial(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->health_initial_dice().roll());
 }

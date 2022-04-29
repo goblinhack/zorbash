@@ -147,8 +147,8 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
   TRACE_AND_INDENT();
   Texp tex = tex_load(file, name, GL_NEAREST);
 
-  float fw = 1.0 / (((float) tex_get_width(tex)) / ((float) width));
-  float fh = 1.0 / (((float) tex_get_height(tex)) / ((float) height));
+  float fw = 1.0 / ((((float) tex_get_width(tex))) / (((float) width)));
+  float fh = 1.0 / ((((float) tex_get_height(tex))) / (((float) height)));
 
   int x   = 0;
   int y   = 0;
@@ -186,8 +186,8 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
       t->tex        = tex;
       t->set_gl_binding(tex_get_gl_binding(tex));
 
-      t->x1 = fw * (float) (x);
-      t->y1 = fh * (float) (y);
+      t->x1 = fw * ((float) (x));
+      t->y1 = fh * ((float) (y));
       t->x2 = t->x1 + fw;
       t->y2 = t->y1 + fh;
 
@@ -254,10 +254,10 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 #endif
         }
 
-        t->px1 = ((float) (MIN.x - off.x)) / (float) pixel_size.w;
-        t->px2 = ((float) (MAX.x - off.x + 1)) / (float) pixel_size.w;
-        t->py1 = ((float) (MIN.y - off.y)) / (float) pixel_size.h;
-        t->py2 = ((float) (MAX.y - off.y + 1)) / (float) pixel_size.h;
+        t->px1 = (((float) (MIN.x) - off.x)) / ((float) pixel_size.w);
+        t->px2 = (((float) (MAX.x) - off.x + 1)) / ((float) pixel_size.w);
+        t->py1 = (((float) (MIN.y) - off.y)) / ((float) pixel_size.h);
+        t->py2 = (((float) (MAX.y) - off.y + 1)) / ((float) pixel_size.h);
       }
 #endif
 
@@ -292,8 +292,8 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
   TRACE_AND_INDENT();
   Texp tex = tex_load(file, name, GL_NEAREST);
 
-  float fw = 1.0 / (((float) tex_get_width(tex)) / ((float) width));
-  float fh = 1.0 / (((float) tex_get_height(tex)) / ((float) height));
+  float fw = 1.0 / ((((float) tex_get_width(tex))) / (((float) width)));
+  float fh = 1.0 / ((((float) tex_get_height(tex))) / (((float) height)));
 
   int x   = 0;
   int y   = 0;
@@ -331,8 +331,8 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
       t->tex        = tex;
       t->set_gl_binding(tex_get_gl_binding(tex));
 
-      t->x1 = fw * (float) (x);
-      t->y1 = fh * (float) (y);
+      t->x1 = fw * ((float) (x));
+      t->y1 = fh * ((float) (y));
       t->x2 = t->x1 + fw;
       t->y2 = t->y1 + fh;
 
@@ -399,10 +399,10 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 #endif
         }
 
-        t->px1 = ((float) (MIN.x - off.x)) / (float) pixel_size.w;
-        t->px2 = ((float) (MAX.x - off.x + 1)) / (float) pixel_size.w;
-        t->py1 = ((float) (MIN.y - off.y)) / (float) pixel_size.h;
-        t->py2 = ((float) (MAX.y - off.y + 1)) / (float) pixel_size.h;
+        t->px1 = (((float) (MIN.x) - off.x)) / ((float) pixel_size.w);
+        t->px2 = (((float) (MAX.x) - off.x + 1)) / ((float) pixel_size.w);
+        t->py1 = (((float) (MIN.y) - off.y)) / ((float) pixel_size.h);
+        t->py2 = (((float) (MAX.y) - off.y + 1)) / ((float) pixel_size.h);
       }
 #endif
 
@@ -441,8 +441,8 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 
   tex_load(&tex, &tex_black_and_white, &tex_mask, file, name, gl_mode);
 
-  float fw = 1.0 / (((float) tex_get_width(tex)) / ((float) width));
-  float fh = 1.0 / (((float) tex_get_height(tex)) / ((float) height));
+  float fw = 1.0 / ((((float) tex_get_width(tex))) / (((float) width)));
+  float fh = 1.0 / ((((float) tex_get_height(tex))) / (((float) height)));
 
   int x   = 0;
   int y   = 0;
@@ -486,8 +486,8 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
       t->set_gl_binding_black_and_white(tex_get_gl_binding(tex_black_and_white));
       t->set_gl_binding_mask(tex_get_gl_binding(tex_mask));
 
-      t->x1 = fw * (float) (x);
-      t->y1 = fh * (float) (y);
+      t->x1 = fw * ((float) (x));
+      t->y1 = fh * ((float) (y));
       t->x2 = t->x1 + fw;
       t->y2 = t->y1 + fh;
 
@@ -554,10 +554,10 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 #endif
         }
 
-        t->px1 = ((float) (MIN.x - off.x)) / (float) pixel_size.w;
-        t->px2 = ((float) (MAX.x - off.x + 1)) / (float) pixel_size.w;
-        t->py1 = ((float) (MIN.y - off.y)) / (float) pixel_size.h;
-        t->py2 = ((float) (MAX.y - off.y + 1)) / (float) pixel_size.h;
+        t->px1 = (((float) (MIN.x) - off.x)) / ((float) pixel_size.w);
+        t->px2 = (((float) (MAX.x) - off.x + 1)) / ((float) pixel_size.w);
+        t->py1 = (((float) (MIN.y) - off.y)) / ((float) pixel_size.h);
+        t->py2 = (((float) (MAX.y) - off.y + 1)) / ((float) pixel_size.h);
       }
 #endif
 
@@ -596,8 +596,8 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 
   tex_load(&tex, &tex_black_and_white, &tex_mask, file, name, gl_mode);
 
-  float fw = 1.0 / (((float) tex_get_width(tex)) / ((float) width));
-  float fh = 1.0 / (((float) tex_get_height(tex)) / ((float) height));
+  float fw = 1.0 / ((((float) tex_get_width(tex))) / (((float) width)));
+  float fh = 1.0 / ((((float) tex_get_height(tex))) / (((float) height)));
 
   int x   = 0;
   int y   = 0;
@@ -637,8 +637,8 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
       t->set_gl_binding_black_and_white(tex_get_gl_binding(tex_black_and_white));
       t->set_gl_binding_mask(tex_get_gl_binding(tex_mask));
 
-      t->x1 = fw * (float) (x);
-      t->y1 = fh * (float) (y);
+      t->x1 = fw * ((float) (x));
+      t->y1 = fh * ((float) (y));
       t->x2 = t->x1 + fw;
       t->y2 = t->y1 + fh;
 
@@ -704,10 +704,10 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 #endif
         }
 
-        t->px1 = ((float) (MIN.x - off.x)) / (float) pixel_size.w;
-        t->px2 = ((float) (MAX.x - off.x + 1)) / (float) pixel_size.w;
-        t->py1 = ((float) (MIN.y - off.y)) / (float) pixel_size.h;
-        t->py2 = ((float) (MAX.y - off.y + 1)) / (float) pixel_size.h;
+        t->px1 = (((float) (MIN.x) - off.x)) / ((float) pixel_size.w);
+        t->px2 = (((float) (MAX.x) - off.x + 1)) / ((float) pixel_size.w);
+        t->py1 = (((float) (MIN.y) - off.y)) / ((float) pixel_size.h);
+        t->py2 = (((float) (MAX.y) - off.y + 1)) / ((float) pixel_size.h);
       }
 #endif
 

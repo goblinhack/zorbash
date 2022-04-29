@@ -140,10 +140,10 @@ if (player) {
   map_at.y /= TILE_HEIGHT;
 
 #ifdef LIMIT_SCROLLING_TO_MAP
-  map_at.x = std::max(map_at.x, (float) 0.0);
-  map_at.y = std::max(map_at.y, (float) 0.0);
-  map_at.x = std::min(map_at.x, (float) MAP_WIDTH - TILES_ACROSS);
-  map_at.y = std::min(map_at.y, (float) MAP_HEIGHT - TILES_DOWN);
+  map_at.x = std::max(map_at.x, ((float) 0.0));
+  map_at.y = std::max(map_at.y, ((float) 0.0));
+  map_at.x = std::min(map_at.x, ((float) MAP_WIDTH) - TILES_ACROSS);
+  map_at.y = std::min(map_at.y, ((float) MAP_HEIGHT) - TILES_DOWN);
 #endif
 
   {
@@ -242,10 +242,10 @@ void Level::scroll_map_set_target(void)
     //
     // Auto scroll if we cross these limits
     //
-    float x1 = ((float) TILES_ACROSS / 2) - x_sensitivity;
-    float x2 = ((float) TILES_ACROSS / 2) + x_sensitivity;
-    float y1 = ((float) TILES_DOWN / 2) - y_sensitivity;
-    float y2 = ((float) TILES_DOWN / 2) + y_sensitivity;
+    float x1 = (((float) TILES_ACROSS) / 2) - x_sensitivity;
+    float x2 = (((float) TILES_ACROSS) / 2) + x_sensitivity;
+    float y1 = (((float) TILES_DOWN) / 2) - y_sensitivity;
+    float y2 = (((float) TILES_DOWN) / 2) + y_sensitivity;
 
     //
     // Auto scroll

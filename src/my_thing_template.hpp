@@ -118,7 +118,7 @@ private:
   int _blit_off {};
   int _blit_right_off {};
   int _blit_top_off {};
-  int _break_chance_d10000 {};
+  int _damaged_chance_d10000 {};
   int _capacity_height {};
   int _capacity_width {};
   int _charge_count {};
@@ -178,7 +178,7 @@ private:
   int _gfx_very_short_shadow_caster {};
   int _gfx_water {};
   int _gfx_wobbles_when_hit {};
-  int _health_starving_pct {};
+  int _hunger_starving_pct {};
   int _hunger_clock_tick_freq {};
   int _hunger_health_pct {};
   int _hunger_is_insatiable {};
@@ -860,6 +860,7 @@ public:
   const int damage_draining(void) const;
   const int damage_poison(void) const;
   const int health_initial(void) const;
+  const int health_initial_max_roll(void) const;
   const int on_idle_tick_freq(void) const;
   const int spawn_group_size(void) const;
   const int lifespan(void) const;
@@ -1103,7 +1104,7 @@ public:
   int blit_left_off(void) const;
   int blit_right_off(void) const;
   int blit_top_off(void) const;
-  int break_chance_d10000(void) const;
+  int damaged_chance_d10000(void) const;
   int capacity_height(void) const;
   int capacity_width(void) const;
   int charge_count(void) const;
@@ -1178,7 +1179,7 @@ public:
   int gfx_very_short_shadow_caster(void) const;
   int gfx_water(void) const;
   int gfx_wobbles_when_hit(void) const;
-  int health_starving_pct(void) const;
+  int hunger_starving_pct(void) const;
   int hunger_clock_tick_freq(void) const;
   int hunger_health_pct(void) const;
   int hunger_is_insatiable(void) const;
@@ -1657,7 +1658,7 @@ public:
   void blit_left_off_set(int v);
   void blit_right_off_set(int v);
   void blit_top_off_set(int v);
-  void break_chance_d10000_set(int v);
+  void damaged_chance_d10000_set(int v);
   void capacity_height_set(int v);
   void capacity_width_set(int v);
   void charge_count_set(int v);
@@ -1719,7 +1720,7 @@ public:
   void gfx_very_short_shadow_caster_set(int v);
   void gfx_water_set(int v);
   void gfx_wobbles_when_hit_set(int v);
-  void health_starving_pct_set(int v);
+  void hunger_starving_pct_set(int v);
   void hunger_clock_tick_freq_set(int v);
   void hunger_health_pct_set(int v);
   void hunger_is_insatiable_set(int v);

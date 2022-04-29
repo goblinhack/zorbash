@@ -59,13 +59,13 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
   }
 
   {
-    float dx = 1.0 / ((float) x2 - (float) x1 + 1);
-    float dy = 1.0 / ((float) y2 - (float) y1 + 1);
+    float dx = 1.0 / (((float) x2) - ((float) x1) + 1);
+    float dy = 1.0 / (((float) y2) - ((float) y1) + 1);
 
     for (x = x1; x <= x2; x++) {
       for (y = y1; y <= y2; y++) {
-        float tx = (float) (x - x1) * dx;
-        float ty = (float) (y - y1) * dy;
+        float tx = ((float) (x) - x1) * dx;
+        float ty = ((float) (y) - y1) * dy;
         if (bg_tile || (col_bg != COLOR_NONE)) {
           ascii_set_bg2(x, y, bg_tile, tx, ty, dx, dy);
           ascii_set_bg2(x, y, col_bg);

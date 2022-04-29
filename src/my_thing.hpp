@@ -858,9 +858,8 @@ public:
   float teleport_distance_with_modifiers_get(void);
   float update_wobble(void);
 
-  int ai_detect_secret_doors(void);
-  int weapon_damaged_pct(void);
   int aggression_level_pct(void);
+  int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, AttackOptions *, int damage);
   int ai_obstacle(void);
@@ -878,7 +877,6 @@ public:
   int blast_max_radius(void);
   int blast_min_radius(void);
   int bounce_count(void);
-  int break_chance_d10000(void);
   int capacity_height(void);
   int capacity_width(void);
   int carried_amulet_count(void);
@@ -948,6 +946,13 @@ public:
   int damage_current_incr(void);
   int damage_current_set(int);
   int damage_current(void);
+  int damaged_chance_d10000(void);
+  int damaged_count_decr(int);
+  int damaged_count_decr(void);
+  int damaged_count_incr(int);
+  int damaged_count_incr(void);
+  int damaged_count_set(int);
+  int damaged_count(void);
   int damage_digest_chance_d1000(int);
   int damage_digest(void);
   int damage_draining_chance_d1000(int);
@@ -972,7 +977,6 @@ public:
   int damage_nat_attack(void);
   int damage_necrosis_chance_d1000(int);
   int damage_necrosis(void);
-  int num_attacks(void);
   int damage_poison_chance_d1000(int);
   int damage_poison(void);
   int damage_received_doubled_from_acid(void);
@@ -1109,7 +1113,7 @@ public:
   int health_max_set(int);
   int health_max(void);
   int health_set(int);
-  int health_starving_pct(void);
+  int hunger_starving_pct(void);
   int health(void);
   int hunger_clock_tick_freq(void);
   int hunger_health_pct(void);
@@ -1234,6 +1238,7 @@ public:
   int is_cursor_path_hazard_for_player(void);
   int is_cursor_path(void);
   int is_cursor(void);
+  int is_dagger(void);
   int is_dangerous(Thingp);
   int is_dead_check(void);
   int is_dead_on_end_of_anim(void);
@@ -1280,6 +1285,7 @@ public:
   int is_green_blooded(void);
   int is_green_blood(void);
   int is_green_splatter(void);
+  int is_hard(void);
   int is_hazard(void);
   int is_health_booster(void);
   int is_heavy(void);
@@ -1289,6 +1295,7 @@ public:
   int is_humanoid(void);
   int is_immune_to_acid(void);
   int is_immune_to_cold(void);
+  int is_immune_to_draining(void);
   int is_immune_to_fire(void);
   int is_immune_to_necrosis(void);
   int is_immune_to_poison(void);
@@ -1313,10 +1320,12 @@ public:
   int is_key(void);
   int is_laser(void);
   int is_lava(void);
+  int is_lifeless(void);
   int is_light_blocker_for_monst(void);
   int is_light_blocker(void);
   int is_living(void);
   int is_loggable(void);
+  int is_magical(void);
   int is_map_beast(void);
   int is_map_treasure(void);
   int is_meat_eater(void);
@@ -1374,6 +1383,7 @@ public:
   int is_slippery(void);
   int is_smoke(void);
   int is_snake(void);
+  int is_soft(void);
   int is_spawner(void);
   int is_spider(void);
   int is_spiderweb(void);
@@ -1391,9 +1401,6 @@ public:
   int is_tireless(void);
   int is_tmp_thing(void);
   int is_torch(void);
-  int is_hard(void);
-  int is_soft(void);
-  int is_very_hard(void);
   int is_treasure_chest(void);
   int is_treasure_class_a(void);
   int is_treasure_class_b(void);
@@ -1404,8 +1411,9 @@ public:
   int is_undead(void);
   int is_usable(void);
   int is_used_when_thrown(void);
-  int is_very_heavy(void);
   int is_very_combustible(void);
+  int is_very_hard(void);
+  int is_very_heavy(void);
   int is_wall_dungeon(void);
   int is_wall(void);
   int is_wand_or_staff(void);
@@ -1500,6 +1508,7 @@ public:
   int noise_total(void);
   int noise(void);
   int normal_placement_rules(void);
+  int num_attacks(void);
   int nutrition_get(void);
   int on_attacking_damage_acid(Thingp victim, int damage);
   int on_attacking_damage_cold(Thingp victim, int damage);
@@ -1618,12 +1627,6 @@ public:
   int sleep_count_incr(void);
   int sleep_count_set(int);
   int sleep_count(void);
-  int damaged_count_decr(int);
-  int damaged_count_decr(void);
-  int damaged_count_incr(int);
-  int damaged_count_incr(void);
-  int damaged_count_set(int);
-  int damaged_count(void);
   int spawned_count_decr(int);
   int spawned_count_decr(void);
   int spawned_count_incr(int);
@@ -1808,10 +1811,6 @@ public:
   int unused_flag101(void);
   int unused_flag102(void);
   int unused_flag103(void);
-  int is_dagger(void);
-  int is_lifeless(void);
-  int is_magical(void);
-  int is_immune_to_draining(void);
   int unused_flag10(void);
   int unused_flag11(void);
   int unused_flag123(void);
@@ -1913,6 +1912,8 @@ public:
   int unused_flag99(void);
   int unused_flag9(void);
   int value(const Thingp it);
+  int weapon_damaged_pct(void);
+  int weapon_damage_modify(int damage);
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);

@@ -154,7 +154,7 @@ void Light::update(void)
   //
   // First generate the right ray lengths.
   //
-  float dr = RAD_360 / (float) max_light_rays;
+  float dr = RAD_360 / ((float) max_light_rays);
   for (auto i = 0; i < max_light_rays; i++) {
     float cosr, sinr;
     sincosf(dr * i, &sinr, &cosr);
@@ -254,7 +254,7 @@ bool Light::calculate(void)
   //
   if (! ray_cast_only) {
     if (owner->is_player()) {
-      light_dist_current = (float) light_dist_current * light_power;
+      light_dist_current = ((float) light_dist_current) * light_power;
     }
   }
 
@@ -875,7 +875,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
 
           if (t->gfx_flickers()) {
             if (l->flicker_count++ > LIGHT_FLICKER_SPEED) {
-              l->flicker       = (((float) non_pcg_random_range(0, (int) light_scale)) / 8.0);
+              l->flicker       = ((((float) non_pcg_random_range(0, (int) light_scale))) / 8.0);
               l->flicker_count = 0;
             }
             light_scale -= l->flicker;
@@ -891,11 +891,11 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           //
           // Fade the lights according to how recently seen.
           //
-          auto scale = ((float) t->level->is_lit_currently_no_check(x, y)) / 255.0;
-          c.r        = ((float) c.r) * scale;
-          c.g        = ((float) c.g) * scale;
-          c.b        = ((float) c.b) * scale;
-          c.a        = ((float) c.a) * scale;
+          auto scale = (((float) t->level->is_lit_currently_no_check(x, y))) / 255.0;
+          c.r        = (((float) c.r)) * scale;
+          c.g        = (((float) c.g)) * scale;
+          c.b        = (((float) c.b)) * scale;
+          c.a        = (((float) c.a)) * scale;
 
           glcolor(c);
           blit(g_light_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
@@ -970,11 +970,11 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           //
           // Fade the lights according to how recently seen.
           //
-          auto scale = ((float) t->level->is_lit_currently_no_check(x, y)) / 255.0;
-          c.r        = ((float) c.r) * scale;
-          c.g        = ((float) c.g) * scale;
-          c.b        = ((float) c.b) * scale;
-          c.a        = ((float) c.a) * scale;
+          auto scale = (((float) t->level->is_lit_currently_no_check(x, y))) / 255.0;
+          c.r        = (((float) c.r)) * scale;
+          c.g        = (((float) c.g)) * scale;
+          c.b        = (((float) c.b)) * scale;
+          c.a        = (((float) c.a)) * scale;
 
           glcolor(c);
           blit(g_glow_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);

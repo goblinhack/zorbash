@@ -22,8 +22,8 @@ def on_enchant(me, x, y):
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
-    my.break_chance_d10000(self, 1000)
     my.collision_hit_priority(self, 6)
+    my.damaged_chance_d10000(self, 1000)
     my.enchant_max(self, 10)
     my.equip_carry_anim(self, "armor_fish_scale_carry")
     my.gfx_short_shadow_caster(self, True)

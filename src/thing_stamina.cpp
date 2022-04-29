@@ -41,10 +41,13 @@ int Thing::stamina(void)
   if (maybe_infop()) {
     v = infop()->stamina;
   }
+  /*
+   * Why do we do this? It makes looking at weapon health hard
   auto owner = immediate_owner();
   if (owner && (owner != this)) {
     v += owner->stamina();
   }
+  */
   if (is_minion()) {
     auto mob = immediate_mob();
     if (mob) {

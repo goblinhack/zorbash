@@ -178,10 +178,10 @@ void Level::display_map(void)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     auto  Y     = h - pixel_map_at.y - game->config.game_pix_height;
-    float left  = (float) (pixel_map_at.x) / w;
-    float top   = (float) (Y + game->config.game_pix_height) / h;
-    float right = (float) (pixel_map_at.x + game->config.game_pix_width) / w;
-    float bot   = (float) Y / h;
+    float left  = ((float) (pixel_map_at.x)) / w;
+    float top   = ((float) (Y) + game->config.game_pix_height) / h;
+    float right = ((float) (pixel_map_at.x) + game->config.game_pix_width) / w;
+    float bot   = ((float) Y) / h;
 
     blit_init();
     blit(fbo_tex_id[ FBO_PIXELART_FULLMAP ], left, top, right, bot, 0, 0, game->config.game_pix_width,

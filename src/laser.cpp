@@ -125,7 +125,7 @@ void Level::display_pixelart_lasers(void)
   auto e   = std::remove_if(all_lasers.begin(), all_lasers.end(), [ =, this ](Laser &p) {
     TRACE_NO_INDENT();
     float timestep = p.ts_stop - p.ts_start;
-    float dt       = ((float) (now - p.ts_start)) / timestep;
+    float dt       = (((float) (now) -p.ts_start)) / timestep;
 
     Thingp t;
 
@@ -171,7 +171,7 @@ void Level::display_pixelart_lasers(void)
     point old_p1;
     point old_p2;
 
-    int frame = (int) ((float) Laser::max_frames * dt);
+    int frame = (int) (((float) Laser::max_frames) * dt);
     if (frame >= Laser::max_frames) {
       frame = Laser::max_frames - 1;
     }

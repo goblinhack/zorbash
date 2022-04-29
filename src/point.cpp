@@ -7,7 +7,7 @@
 #include "my_point.hpp"
 #include <math.h>
 
-float distance(const fpoint &a, const fpoint &b) { return ((float) DISTANCE(a.x, a.y, b.x, b.y)); }
+float distance(const fpoint &a, const fpoint &b) { return (((float) DISTANCE(a.x, a.y, b.x, b.y))); }
 
 float distance(const point a, const point b)
 {
