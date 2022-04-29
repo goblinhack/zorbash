@@ -57,25 +57,41 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
     damaged_chance /= 2;
   }
 
-  if (victim->is_acid()) {
-    if (! weapon->is_immune_to_acid()) {
-      damaged_chance *= 2;
-      if (weapon->damage_received_doubled_from_acid()) {
+  if (! is_acid()) {
+    if (victim->is_acid()) {
+      if (! weapon->is_immune_to_acid()) {
         damaged_chance *= 2;
+        if (weapon->damage_received_doubled_from_acid()) {
+          damaged_chance *= 2;
+        }
       }
     }
   }
 
-  if (victim->is_hard()) {
-    damaged_chance *= 2;
-    shatter = true;
+  //
+  // If the thing we're hitting is harder than us, then increase
+  // the chance of damage.
+  //
+  if (! is_hard()) {
+    if (victim->is_hard()) {
+      damaged_chance *= 2;
+      shatter = true;
+    }
   }
 
-  if (victim->is_very_hard()) {
-    damaged_chance *= 2;
-    shatter = true;
+  if (! is_very_hard()) {
+    if (victim->is_very_hard()) {
+      //
+      // This will be * 4 as the above will pass too.
+      //
+      damaged_chance *= 2;
+      shatter = true;
+    }
   }
 
+  //
+  // If you roll under luck, no damage.
+  //
   if (d20roll_under(stat_luck_total())) {
     damaged_chance = 0;
   }

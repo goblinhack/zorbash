@@ -2,7 +2,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
-<!-- weapon damage percentage ?                                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -15,7 +14,7 @@
 <!-- letter outline                                                                                                                               -->
 <!-- no lighting effects mode                                                                                                                     -->
 <!-- keyboard only mode                                                                                                                           -->
-<!-- keyboard only mode single hand                                                                                                               -->
+<!-- keyboard only mode single hand i.e. no key combinations                                                                                      -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
