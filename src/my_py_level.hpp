@@ -275,9 +275,9 @@ PyObject *level_is_throwable_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_is_tickable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tmp_thing_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_torch_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_toughness_hard_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_toughness_soft_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_toughness_very_hard_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_hard_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_soft_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_very_hard_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_chest_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_treasure_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -285,7 +285,7 @@ PyObject *level_is_treasure_type_at(PyObject *obj, PyObject *args, PyObject *key
 PyObject *level_is_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_usable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_used_when_thrown_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_very_is_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_very_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_very_heavy_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_target_select_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_visible_at(PyObject *obj, PyObject *args, PyObject *keywds);

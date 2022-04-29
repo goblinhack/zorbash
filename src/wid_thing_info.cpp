@@ -654,6 +654,21 @@ void Game::wid_thing_info_add_break_chance(WidPopup *w, Thingp t)
       w->log(tmp);
     }
   }
+
+  auto damaged = t->weapon_damaged_pct();
+  if (damaged) {
+    int damaged = (int) ((((float) t->weapon_damaged_pct()) / 10000.0) * 100.0);
+    if (damaged < 5) {
+      float damaged = ((((float) t->weapon_damaged_pct()) / 10000.0) * 100.0);
+      snprintf(tmp2, sizeof(tmp2) - 1, "%3.2f pct", damaged);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Damaged percent  %10s", tmp2);
+      w->log(tmp);
+    } else {
+      snprintf(tmp2, sizeof(tmp2) - 1, "%d pct", damaged);
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Damaged percent  %10s", tmp2);
+      w->log(tmp);
+    }
+  }
 }
 
 void Game::wid_thing_info_add_crit_chance(WidPopup *w, Thingp t)
@@ -1734,7 +1749,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
   } else if (t->is_combustible()) {
     w->log("Is combustible.", true);
     printed = true;
-  } else if (t->is_very_is_combustible()) {
+  } else if (t->is_very_combustible()) {
     w->log("Can explode!", true);
     printed = true;
   }

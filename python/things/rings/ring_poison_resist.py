@@ -39,7 +39,7 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
-    my.is_very_is_combustible(self, True)
+    my.is_very_combustible(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.long_text_description(self, "Eat drink and be merry while wearing this ring, for poison can do you no harm. Please wear responsibly...")

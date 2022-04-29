@@ -979,79 +979,79 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         }
       } else if (is_alive_monst() || is_mob()) {
         if (attack_options->crit) {
-          msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
-              damage_type.c_str());
+          real_hitter->msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
+                           damage_type.c_str());
         } else {
           if (hitter && (hitter != real_hitter)) {
             if (attack_options->attack_poison) {
-              msg("You poison %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                  hitter->text_the().c_str());
+              real_hitter->msg("You poison %s for %d %sdamage with %s.", text_the().c_str(), damage,
+                               damage_type.c_str(), hitter->text_the().c_str());
             } else if (attack_options->attack_necrosis) {
-              msg("You rot %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                  hitter->text_the().c_str());
+              real_hitter->msg("You rot %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                               hitter->text_the().c_str());
             } else if (attack_options->attack_stamina) {
-              msg("You tire %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                  hitter->text_the().c_str());
+              real_hitter->msg("You tire %s for %d %sdamage with %s.", text_the().c_str(), damage,
+                               damage_type.c_str(), hitter->text_the().c_str());
             } else if (hitter->is_weapon()) {
-              msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                  hitter->text_the().c_str());
+              real_hitter->msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                               hitter->text_the().c_str());
             } else if (hitter->is_laser()) {
-              msg("You zap %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                  hitter->text_the().c_str());
+              real_hitter->msg("You zap %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                               hitter->text_the().c_str());
             } else if (hitter->is_item_magical()) {
-              msg("You blast %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                  hitter->text_the().c_str());
+              real_hitter->msg("You blast %s for %d %sdamage with %s.", text_the().c_str(), damage,
+                               damage_type.c_str(), hitter->text_the().c_str());
             } else {
-              msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                  hitter->text_the().c_str());
+              real_hitter->msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                               hitter->text_the().c_str());
             }
           } else {
             if (attack_options->attack_poison) {
-              msg("You poison %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+              real_hitter->msg("You poison %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (attack_options->attack_necrosis) {
-              msg("You rot %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+              real_hitter->msg("You rot %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (attack_options->attack_stamina) {
-              msg("You tire %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+              real_hitter->msg("You tire %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (hitter->is_weapon()) {
-              msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+              real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (hitter->is_laser()) {
-              msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+              real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (hitter->is_item_magical()) {
-              msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+              real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else {
-              msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+              real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             }
           }
         }
       } else if (is_item()) {
         if (hitter->is_weapon()) {
-          msg("You hit %s.", text_the().c_str());
+          real_hitter->msg("You hit %s.", text_the().c_str());
         } else if (hitter->is_laser()) {
-          msg("You zap %s.", text_the().c_str());
+          real_hitter->msg("You zap %s.", text_the().c_str());
         } else if (hitter->is_item_magical()) {
-          msg("You blast %s.", text_the().c_str());
+          real_hitter->msg("You blast %s.", text_the().c_str());
         } else {
-          msg("You hit %s.", text_the().c_str());
+          real_hitter->msg("You hit %s.", text_the().c_str());
         }
       } else if (is_rock() || is_wall_dungeon()) {
         if (hitter->is_weapon()) {
-          msg("You hit %s, why though?", text_the().c_str());
+          real_hitter->msg("You hit %s, why though?", text_the().c_str());
         } else if (hitter->is_laser()) {
-          msg("You zap %s, why though?", text_the().c_str());
+          real_hitter->msg("You zap %s, why though?", text_the().c_str());
         } else if (hitter->is_item_magical()) {
-          msg("You blast %s, why though?", text_the().c_str());
+          real_hitter->msg("You blast %s, why though?", text_the().c_str());
         } else {
-          msg("You hit %s, why though?", text_the().c_str());
+          real_hitter->msg("You hit %s, why though?", text_the().c_str());
         }
       } else {
         if (hitter->is_weapon()) {
-          msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
         } else if (hitter->is_laser()) {
-          msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
         } else if (hitter->is_item_magical()) {
-          msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
         } else {
-          msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
         }
       }
     } else {
@@ -1456,7 +1456,7 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
   //
   // Allow rocks on the main level to be destoryed; but not in the border
   //
-  if (is_toughness_very_hard()) {
+  if (is_very_hard()) {
     if ((curr_at.x < MAP_BORDER_ROCK) || (curr_at.y < MAP_BORDER_ROCK) ||
         (curr_at.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
       IF_DEBUG2 { hitter->log("Cannot hit: %s is very_hard", to_short_string().c_str()); }

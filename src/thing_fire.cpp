@@ -11,7 +11,7 @@
 
 bool Thing::fire_tick(void)
 {
-  if (is_meltable() || is_burnable() || is_combustible() || is_very_is_combustible()) {
+  if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
     //
     // Keep going
     //
@@ -65,7 +65,7 @@ bool Thing::fire_tick(void)
         on_fire_unset();
       }
     }
-  } else if (is_very_is_combustible() && level->heatmap(at.x, at.y)) {
+  } else if (is_very_combustible() && level->heatmap(at.x, at.y)) {
     //
     // Too close to the flames
     //
@@ -106,7 +106,7 @@ bool Thing::fire_tick(void)
 
       hit = (d100() < 20);
 
-      if (is_meltable() || is_burnable() || is_combustible() || is_very_is_combustible()) {
+      if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
         hit = true;
       }
 

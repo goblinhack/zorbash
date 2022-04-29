@@ -556,9 +556,9 @@ int Tp::is_throwable(void) const { return _is_throwable; }
 int Tp::is_tickable(void) const { return _is_tickable; }
 int Tp::is_tmp_thing(void) const { return _is_tmp_thing; }
 int Tp::is_torch(void) const { return _is_torch; }
-int Tp::is_toughness_hard(void) const { return _is_toughness_hard; }
-int Tp::is_toughness_soft(void) const { return _is_toughness_soft; }
-int Tp::is_toughness_very_hard(void) const { return _is_toughness_very_hard; }
+int Tp::is_hard(void) const { return _is_hard; }
+int Tp::is_soft(void) const { return _is_soft; }
+int Tp::is_very_hard(void) const { return _is_very_hard; }
 int Tp::is_treasure_chest(void) const { return _is_treasure_chest; }
 int Tp::is_treasure_class_a(void) const { return _is_treasure_class_a; }
 int Tp::is_treasure_class_b(void) const { return _is_treasure_class_b; }
@@ -570,7 +570,7 @@ int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_very_heavy(void) const { return _is_very_heavy; }
-int Tp::is_very_is_combustible(void) const { return _is_very_is_combustible; }
+int Tp::is_very_combustible(void) const { return _is_very_combustible; }
 int Tp::is_wall_dungeon(void) const { return _is_wall_dungeon; }
 int Tp::is_wall(void) const { return _is_wall; }
 int Tp::is_wand_or_staff(void) const { return _is_wand || _is_staff; }
@@ -1098,9 +1098,9 @@ void Tp::is_throwable_set(int v) { _is_throwable = v; }
 void Tp::is_tickable_set(int v) { _is_tickable = v; }
 void Tp::is_tmp_thing_set(int v) { _is_tmp_thing = v; }
 void Tp::is_torch_set(int v) { _is_torch = v; }
-void Tp::is_toughness_hard_set(int v) { _is_toughness_hard = v; }
-void Tp::is_toughness_soft_set(int v) { _is_toughness_soft = v; }
-void Tp::is_toughness_very_hard_set(int v) { _is_toughness_very_hard = v; }
+void Tp::is_hard_set(int v) { _is_hard = v; }
+void Tp::is_soft_set(int v) { _is_soft = v; }
+void Tp::is_very_hard_set(int v) { _is_very_hard = v; }
 void Tp::is_treasure_chest_set(int v) { _is_treasure_chest = v; }
 void Tp::is_treasure_class_a_set(int v) { _is_treasure_class_a = v; }
 void Tp::is_treasure_class_b_set(int v) { _is_treasure_class_b = v; }
@@ -1112,7 +1112,7 @@ void Tp::is_undead_set(int v) { _is_undead = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
 void Tp::is_very_heavy_set(int v) { _is_very_heavy = v; }
-void Tp::is_very_is_combustible_set(int v) { _is_very_is_combustible = v; }
+void Tp::is_very_combustible_set(int v) { _is_very_combustible = v; }
 void Tp::is_wall_dungeon_set(int v) { _is_wall_dungeon = v; }
 void Tp::is_wall_set(int v) { _is_wall = v; }
 void Tp::is_wand_set(int v) { _is_wand = v; }

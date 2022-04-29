@@ -346,7 +346,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     //
     dbg("No; ignore corpse");
   } else if (is_fire() &&
-             (it->is_meltable() || it->is_burnable() || it->is_very_is_combustible() || it->is_combustible())) {
+             (it->is_meltable() || it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
@@ -356,7 +356,7 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     } else {
       dbg("No; cannot burn %s, no overlap", it->to_short_string().c_str());
     }
-  } else if (is_lava() && (it->is_burnable() || it->is_very_is_combustible() || it->is_combustible())) {
+  } else if (is_lava() && (it->is_burnable() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
@@ -450,7 +450,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   if (it->is_monst()) {
     if (is_barrel()) {
       if (things_overlap(me, future_pos, it)) {
-        if (it->is_toughness_soft()) {
+        if (it->is_soft()) {
           dbg("Overlaps; barrel can splat soft monst");
           return false;
         } else if (it->is_flying()) {

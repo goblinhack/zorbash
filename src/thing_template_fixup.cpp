@@ -37,15 +37,19 @@ void tp_fixup(void)
       }
     }
 
-    if (tp->is_very_is_combustible()) {
+    if (tp->is_very_combustible()) {
       tp->is_combustible_set(true);
+    }
+
+    if (tp->is_very_hard()) {
+      tp->is_hard_set(true);
     }
 
     if (tp->is_very_heavy()) {
       tp->is_heavy_set(true);
     }
 
-    if (tp->is_meltable() || tp->is_burnable() || tp->is_combustible() || tp->is_very_is_combustible()) {
+    if (tp->is_meltable() || tp->is_burnable() || tp->is_combustible() || tp->is_very_combustible()) {
       tp->is_temperature_sensitive_set(true);
     }
 

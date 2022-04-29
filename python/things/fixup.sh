@@ -354,9 +354,9 @@ do
       is_tireless \
       is_tmp_thing \
       is_torch \
-      is_toughness_hard \
-      is_toughness_soft \
-      is_toughness_very_hard \
+      is_hard \
+      is_soft \
+      is_very_hard \
       is_treasure \
       is_treasure_chest \
       is_treasure_class_a \
@@ -368,7 +368,7 @@ do
       is_usable \
       is_used_when_thrown \
       is_very_heavy \
-      is_very_is_combustible \
+      is_very_combustible \
       is_wall \
       is_wall_dungeon \
       is_wand \

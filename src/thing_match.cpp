@@ -407,7 +407,7 @@ bool Thing::matches(const std::string &what)
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) {
     return true;
   }
-  if (is_toughness_very_hard() && (what == "is_toughness_very_hard")) {
+  if (is_very_hard() && (what == "is_very_hard")) {
     return true;
   }
   if (is_intelligent() && (what == "is_intelligent")) {
@@ -572,7 +572,7 @@ bool Thing::matches(const std::string &what)
   if (is_smoke() && (what == "is_smoke")) {
     return true;
   }
-  if (is_toughness_soft() && (what == "is_toughness_soft")) {
+  if (is_soft() && (what == "is_soft")) {
     return true;
   }
   if (is_spawner() && (what == "is_spawner")) {
@@ -623,7 +623,7 @@ bool Thing::matches(const std::string &what)
   if (is_used_when_thrown() && (what == "is_used_when_thrown")) {
     return true;
   }
-  if (is_very_is_combustible() && (what == "is_very_is_combustible")) {
+  if (is_very_combustible() && (what == "is_very_combustible")) {
     return true;
   }
   if (is_wall_dungeon() && (what == "is_wall_dungeon")) {
@@ -1265,7 +1265,7 @@ bool Thing::matches(const std::string &what)
   if (is_gauntlet() && (what == "is_gauntlet")) {
     return true;
   }
-  if (is_toughness_hard() && (what == "is_toughness_hard")) {
+  if (is_hard() && (what == "is_hard")) {
     return true;
   }
   if (is_red_blooded() && (what == "is_red_blooded")) {
@@ -2085,14 +2085,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_torch") {
     return &Thing::is_torch;
   }
-  if (what == "is_toughness_hard") {
-    return &Thing::is_toughness_hard;
+  if (what == "is_hard") {
+    return &Thing::is_hard;
   }
-  if (what == "is_toughness_soft") {
-    return &Thing::is_toughness_soft;
+  if (what == "is_soft") {
+    return &Thing::is_soft;
   }
-  if (what == "is_toughness_very_hard") {
-    return &Thing::is_toughness_very_hard;
+  if (what == "is_very_hard") {
+    return &Thing::is_very_hard;
   }
   if (what == "is_treasure_chest") {
     return &Thing::is_treasure_chest;
@@ -2115,8 +2115,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_used_when_thrown") {
     return &Thing::is_used_when_thrown;
   }
-  if (what == "is_very_is_combustible") {
-    return &Thing::is_very_is_combustible;
+  if (what == "is_very_combustible") {
+    return &Thing::is_very_combustible;
   }
   if (what == "is_very_heavy") {
     return &Thing::is_very_heavy;

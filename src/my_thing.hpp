@@ -859,6 +859,7 @@ public:
   float update_wobble(void);
 
   int ai_detect_secret_doors(void);
+  int weapon_damaged_pct(void);
   int aggression_level_pct(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, AttackOptions *, int damage);
@@ -1390,9 +1391,9 @@ public:
   int is_tireless(void);
   int is_tmp_thing(void);
   int is_torch(void);
-  int is_toughness_hard(void);
-  int is_toughness_soft(void);
-  int is_toughness_very_hard(void);
+  int is_hard(void);
+  int is_soft(void);
+  int is_very_hard(void);
   int is_treasure_chest(void);
   int is_treasure_class_a(void);
   int is_treasure_class_b(void);
@@ -1404,7 +1405,7 @@ public:
   int is_usable(void);
   int is_used_when_thrown(void);
   int is_very_heavy(void);
-  int is_very_is_combustible(void);
+  int is_very_combustible(void);
   int is_wall_dungeon(void);
   int is_wall(void);
   int is_wand_or_staff(void);
@@ -1617,6 +1618,12 @@ public:
   int sleep_count_incr(void);
   int sleep_count_set(int);
   int sleep_count(void);
+  int damaged_count_decr(int);
+  int damaged_count_decr(void);
+  int damaged_count_incr(int);
+  int damaged_count_incr(void);
+  int damaged_count_set(int);
+  int damaged_count(void);
   int spawned_count_decr(int);
   int spawned_count_decr(void);
   int spawned_count_incr(int);

@@ -10,6 +10,17 @@
 //
 // See if the weapon crumbles
 //
+int Thing::weapon_damaged_pct(void)
+{
+  if (! damaged_count()) {
+    return 0;
+  }
+  return (int) (((float) (damaged_count() / health_initial())) * 100.0);
+}
+
+//
+// See if the weapon crumbles
+//
 void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
 {
   auto my_owner = weapon->top_owner();
@@ -24,7 +35,7 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
   // Enchantment is already factored in here
   //
   auto break_chance = weapon->break_chance_d10000();
-  if (victim->is_toughness_soft()) {
+  if (victim->is_soft()) {
     break_chance /= 2;
   }
 
@@ -37,12 +48,12 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
     }
   }
 
-  if (victim->is_toughness_hard()) {
+  if (victim->is_hard()) {
     break_chance *= 2;
     shatter = true;
   }
 
-  if (victim->is_toughness_very_hard()) {
+  if (victim->is_very_hard()) {
     break_chance *= 2;
     shatter = true;
   }
@@ -58,6 +69,8 @@ void Thing::weapon_check_for_damage(Thingp weapon, Thingp victim)
   if (roll > break_chance) {
     return;
   }
+
+  weapon->damaged_count_incr(1);
 
   //
   // Decrement the items health. If it gets too damaged, it is dead.

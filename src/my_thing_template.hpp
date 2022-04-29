@@ -433,9 +433,9 @@ private:
   int _is_tireless {};
   int _is_tmp_thing {};
   int _is_torch {};
-  int _is_toughness_hard {};
-  int _is_toughness_soft {};
-  int _is_toughness_very_hard {};
+  int _is_hard {};
+  int _is_soft {};
+  int _is_very_hard {};
   int _is_treasure {};
   int _is_treasure_chest {};
   int _is_treasure_class_a {};
@@ -447,7 +447,7 @@ private:
   int _is_usable {};
   int _is_used_when_thrown {};
   int _is_very_heavy {};
-  int _is_very_is_combustible {};
+  int _is_very_combustible {};
   int _is_wall {};
   int _is_wall_dungeon {};
   int _is_wand {};
@@ -1432,9 +1432,9 @@ public:
   int is_tireless(void) const;
   int is_tmp_thing(void) const;
   int is_torch(void) const;
-  int is_toughness_hard(void) const;
-  int is_toughness_soft(void) const;
-  int is_toughness_very_hard(void) const;
+  int is_hard(void) const;
+  int is_soft(void) const;
+  int is_very_hard(void) const;
   int is_treasure_chest(void) const;
   int is_treasure_class_a(void) const;
   int is_treasure_class_b(void) const;
@@ -1446,7 +1446,7 @@ public:
   int is_usable(void) const;
   int is_used_when_thrown(void) const;
   int is_very_heavy(void) const;
-  int is_very_is_combustible(void) const;
+  int is_very_combustible(void) const;
   int is_wall_dungeon(void) const;
   int is_wall(void) const;
   int is_wand_or_staff(void) const;
@@ -1974,9 +1974,9 @@ public:
   void is_tireless_set(int v);
   void is_tmp_thing_set(int v);
   void is_torch_set(int v);
-  void is_toughness_hard_set(int v);
-  void is_toughness_soft_set(int v);
-  void is_toughness_very_hard_set(int v);
+  void is_hard_set(int v);
+  void is_soft_set(int v);
+  void is_very_hard_set(int v);
   void is_treasure_chest_set(int v);
   void is_treasure_class_a_set(int v);
   void is_treasure_class_b_set(int v);
@@ -1988,7 +1988,7 @@ public:
   void is_usable_set(int v);
   void is_used_when_thrown_set(int v);
   void is_very_heavy_set(int v);
-  void is_very_is_combustible_set(int v);
+  void is_very_combustible_set(int v);
   void is_wall_dungeon_set(int v);
   void is_wall_set(int v);
   void is_wand_set(int v);

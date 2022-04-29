@@ -165,6 +165,7 @@ public:
   int8_t bounce_count       = {}; // Graphical bounce count
   int8_t charge_count       = {}; // Wand charges
   int8_t sleep_count        = {}; // How long asleep
+  int8_t damaged_count      = {}; // How much a weapon is damaged.
   int8_t follower_count     = {}; // How many followers this leader has
   int8_t minion_count       = {}; // How many minions this mob has
   int8_t owned_count        = {}; // How many things own me
