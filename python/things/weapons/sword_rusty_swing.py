@@ -4,7 +4,6 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name)
-    my.collision_check(self, True)
     my.gfx_animated_can_hflip(self, True)
     my.gfx_animated_can_vflip(self, True)
     my.gfx_animated(self, True)

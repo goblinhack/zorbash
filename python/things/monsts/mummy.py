@@ -93,7 +93,7 @@ def tp_init(name, text_name):
     my.noise_decibels_hearing(self, 50)
     my.noise_on_moving(self, 5)
     my.normal_placement_rules(self, True)
-    my.num_attacks(self, 2)
+    my.attacks_per_round(self, 2)
     my.on_death_do(self, "me.on_death()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")

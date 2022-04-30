@@ -322,13 +322,13 @@ PyObject *level_stat_def_penalty_when_stuck_max_at(PyObject *obj, PyObject *args
 PyObject *level_temperature_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag100_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag101_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag102_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag103_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_attack_no_msg_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_attack_owner_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dagger_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_lifeless_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_magical_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_draining_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_num_attacks_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_attacks_per_round_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_key_special_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag10_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_crystal_at(PyObject *obj, PyObject *args, PyObject *keywds);

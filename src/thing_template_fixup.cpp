@@ -141,7 +141,7 @@ void tp_fixup(void)
     //
     // If only a single attack type then make sure it is 1000%
     //
-    if (tp->num_attacks() <= 1) {
+    if (tp->attacks_per_round() <= 1) {
       if (num_attack_types == 1) {
         int attack_index = 0;
 
@@ -193,8 +193,8 @@ void tp_fixup(void)
       }
     }
 
-    if ((num_attack_types > 0) && ! tp->num_attacks()) {
-      tp->num_attacks_set(1);
+    if ((num_attack_types > 0) && ! tp->attacks_per_round()) {
+      tp->attacks_per_round_set(1);
     }
   }
 

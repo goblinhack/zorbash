@@ -22,10 +22,7 @@ def on_enchant(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.collision_check(self, True)
     my.collision_hit_adj(self, True)
-    my.collision_hit_priority(self, 10)
-    my.collision_hit_priority(self, 6)
     my.crit_chance_d10000(self, 500)
     my.damaged_chance_d10000(self, 1)
     my.damage_melee_chance_d1000(self, 0, 1000)

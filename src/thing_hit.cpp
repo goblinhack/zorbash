@@ -218,7 +218,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   } else if (attack_options->attack_necrosis) {
     real_hitter->get_total_damage_for_on_attacking_damage_necrosis(victim, damage);
     damage = victim->get_total_damage_for_on_receiving_damage_necrosis(hitter, real_hitter, damage);
-  } else if (attack_options->attack_stamina) {
+  } else if (attack_options->attack_draining) {
     real_hitter->get_total_damage_for_on_attacking_damage_draining(victim, damage);
     damage = victim->get_total_damage_for_on_receiving_damage_draining(hitter, real_hitter, damage);
   } else if (attack_options->attack_natural) {
@@ -408,7 +408,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       IF_DEBUG2 { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "rotting ";
     }
-  } else if (attack_options->attack_stamina) {
+  } else if (attack_options->attack_draining) {
     if (is_immune_to_draining()) {
       if (real_hitter->is_player()) {
         msg("%s is immune to draining attacks!", text_The().c_str());
@@ -775,7 +775,11 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       //
       // You hit yourself
       //
-      if (attack_options->attack_poison) {
+      if (real_hitter->attack_no_msg() || hitter->attack_no_msg()) {
+        //
+        // Things like radiation damage from a sword of plutonium are quiet attacks
+        //
+      } else if (attack_options->attack_poison) {
         if (level->is_gas_poison(curr_at.x, curr_at.y)) {
           real_hitter->msg("%%fg=yellow$Poison burns your lungs for %s%d damage!%%fg=reset$", damage_type.c_str(),
                            damage);
@@ -798,7 +802,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         real_hitter->msg("%%fg=cyan$Your skin blisters for %d %sdamage!%%fg=reset$", damage, damage_type.c_str());
       } else if (attack_options->attack_necrosis) {
         real_hitter->msg("%%fg=limegreen$Your skin is falling away in chunks!%%fg=reset$");
-      } else if (attack_options->attack_stamina) {
+      } else if (attack_options->attack_draining) {
         real_hitter->msg("%%fg=limegreen$Your stamina feels drained!%%fg=reset$");
       } else {
         real_hitter->msg("%%fg=orange$You hurt yourself for %d %sdamage with %s!%%fg=reset$", damage,
@@ -813,7 +817,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           msg("%%fg=red$%s's fangs suck the last sustenance from you!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (attack_options->attack_necrosis) {
           msg("%%fg=red$%s's withering touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
-        } else if (attack_options->attack_stamina) {
+        } else if (attack_options->attack_draining) {
           msg("%%fg=red$%s's draining touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (hitter->is_weapon()) {
           msg("%%fg=red$%s cuts you down with %s!%%fg=reset$", real_hitter->text_The().c_str(),
@@ -868,7 +872,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         } else if (attack_options->attack_necrosis) {
           msg("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
           popup("%%fg=orange$Wither!");
-        } else if (attack_options->attack_stamina) {
+        } else if (attack_options->attack_draining) {
           msg("%%fg=limegreen$%s's draining touch weakens you!%%fg=reset$", real_hitter->text_The().c_str());
           popup("%%fg=orange$Drain!");
         } else if (hitter->is_weapon()) {
@@ -972,7 +976,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           msg("Your %s is dissolving.", short_text_name().c_str());
         } else if (attack_options->attack_necrosis) {
           msg("Your %s is rotting.", short_text_name().c_str());
-        } else if (attack_options->attack_stamina) {
+        } else if (attack_options->attack_draining) {
           msg("Your %s is drained.", short_text_name().c_str());
         } else {
           msg("Your %s is being damaged.", short_text_name().c_str());
@@ -989,7 +993,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
             } else if (attack_options->attack_necrosis) {
               real_hitter->msg("You rot %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
                                hitter->text_the().c_str());
-            } else if (attack_options->attack_stamina) {
+            } else if (attack_options->attack_draining) {
               real_hitter->msg("You tire %s for %d %sdamage with %s.", text_the().c_str(), damage,
                                damage_type.c_str(), hitter->text_the().c_str());
             } else if (hitter->is_weapon()) {
@@ -1010,7 +1014,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
               real_hitter->msg("You poison %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (attack_options->attack_necrosis) {
               real_hitter->msg("You rot %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-            } else if (attack_options->attack_stamina) {
+            } else if (attack_options->attack_draining) {
               real_hitter->msg("You tire %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (hitter->is_weapon()) {
               real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
@@ -1190,7 +1194,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   //
   bool is_killed = false;
 
-  if (attack_options->attack_stamina) {
+  if (attack_options->attack_draining) {
     auto h = stamina_decr(damage);
     if (h <= 0) {
       h         = stamina_set(0);
@@ -1269,7 +1273,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         reason = "by digestion";
       } else if (attack_options->attack_necrosis) {
         reason = "by rotting";
-      } else if (attack_options->attack_stamina) {
+      } else if (attack_options->attack_draining) {
         reason = "by draining";
       } else if (attack_options->attack_natural) {
         reason = "by over friendly biting";

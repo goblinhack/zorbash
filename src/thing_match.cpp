@@ -974,10 +974,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag101() && (what == "unused_flag101")) {
     return true;
   }
-  if (unused_flag102() && (what == "unused_flag102")) {
+  if (attack_no_msg() && (what == "attack_no_msg")) {
     return true;
   }
-  if (unused_flag103() && (what == "unused_flag103")) {
+  if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) {
     return true;
   }
   if (is_dagger() && (what == "is_dagger")) {
@@ -992,7 +992,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_draining() && (what == "is_immune_to_draining")) {
     return true;
   }
-  if (num_attacks() && (what == "num_attacks")) {
+  if (attacks_per_round() && (what == "attacks_per_round")) {
     return true;
   }
   if (is_key_special() && (what == "is_key_special")) {
@@ -2217,11 +2217,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag101") {
     return &Thing::unused_flag101;
   }
-  if (what == "unused_flag102") {
-    return &Thing::unused_flag102;
+  if (what == "attack_no_msg") {
+    return &Thing::attack_no_msg;
   }
-  if (what == "unused_flag103") {
-    return &Thing::unused_flag103;
+  if (what == "is_able_to_attack_owner") {
+    return &Thing::is_able_to_attack_owner;
   }
   if (what == "is_dagger") {
     return &Thing::is_dagger;
@@ -2235,8 +2235,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_immune_to_draining") {
     return &Thing::is_immune_to_draining;
   }
-  if (what == "num_attacks") {
-    return &Thing::num_attacks;
+  if (what == "attacks_per_round") {
+    return &Thing::attacks_per_round;
   }
   if (what == "is_key_special") {
     return &Thing::is_key_special;

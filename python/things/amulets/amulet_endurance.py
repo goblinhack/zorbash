@@ -14,7 +14,7 @@ def on_unequip(owner, me, x, y):
         my.thing_msg(me, "Your feel your normal tired old self!")
 
 
-def on_owner_receiving_damage_stamina(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_damage_draining(me, owner, hitter, real_hitter, x, y, damage):
     damage = int(damage / 2)
     enchant = my.thing_enchant_get(me)
     damage -= 10 * enchant
@@ -47,12 +47,12 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will only use half as much stamina as normal. This also applies to magical items that may attempt to drain stamine, like boots of jumping or skills such as Devoted Thrust. Each enchant will reduce a further 10 points of stamina damage.")
+    my.long_text_description(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will only use half as much stamina as normal. This also applies to magical items that may attempt to drain stamina, like boots of jumping or skills such as Devoted Thrust. Each enchant will reduce a further 10 points of stamina damage.")
     my.noise_additional_on_jump_end(self, 10)
     my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)
     my.on_equip_do(self, "me.on_equip()")
-    my.on_owner_receiving_damage_stamina_do(self, "me.on_owner_receiving_damage_stamina()")
+    my.on_owner_receiving_damage_draining_do(self, "me.on_owner_receiving_damage_draining()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_RARE)
     my.text_a_or_an(self, "a")

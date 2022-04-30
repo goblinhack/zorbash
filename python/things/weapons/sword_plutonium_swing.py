@@ -106,7 +106,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="sword_draining_swing")
+    tp_init(name="sword_plutonium_swing")
 
 
 init()

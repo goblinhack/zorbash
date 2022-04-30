@@ -10,7 +10,7 @@
 
 PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   static char *kwlist[] = {(char *) "id", 0};
 
@@ -54,7 +54,7 @@ PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   static char *kwlist[]  = {(char *) "hitter", (char *) "target", 0};
@@ -88,6 +88,659 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
 
   AttackOptions attack_options {};
 
+  hitter->log("Attack hit");
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_draining(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set      = true;
+  attack_options.damage          = damage;
+  attack_options.attack_draining = true;
+
+  hitter->log("Attack with stamina damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set  = true;
+  attack_options.damage      = damage;
+  attack_options.attack_acid = true;
+
+  hitter->log("Attack with acid damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set  = true;
+  attack_options.damage      = damage;
+  attack_options.attack_cold = true;
+
+  hitter->log("Attack with cold damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set   = true;
+  attack_options.damage       = damage;
+  attack_options.attack_crush = true;
+
+  hitter->log("Attack with crush damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_digest(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set    = true;
+  attack_options.damage        = damage;
+  attack_options.attack_digest = true;
+
+  hitter->log("Attack with digest damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set    = true;
+  attack_options.damage        = damage;
+  attack_options.attack_energy = true;
+
+  hitter->log("Attack with energy damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set  = true;
+  attack_options.damage      = damage;
+  attack_options.attack_fire = true;
+
+  hitter->log("Attack with fire damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_future1(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set     = true;
+  attack_options.damage         = damage;
+  attack_options.attack_future1 = true;
+
+  hitter->log("Attack with future1 damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_future2(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set     = true;
+  attack_options.damage         = damage;
+  attack_options.attack_future2 = true;
+
+  hitter->log("Attack with future2 damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_future3(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set     = true;
+  attack_options.damage         = damage;
+  attack_options.attack_future3 = true;
+
+  hitter->log("Attack with future3 damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_lightning(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set       = true;
+  attack_options.damage           = damage;
+  attack_options.attack_lightning = true;
+
+  hitter->log("Attack with lightning damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_necrosis(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set      = true;
+  attack_options.damage          = damage;
+  attack_options.attack_necrosis = true;
+
+  hitter->log("Attack with necrosis damage, %d", damage);
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    Py_RETURN_TRUE;
+  } else {
+    Py_RETURN_FALSE;
+  }
+}
+
+PyObject *thing_hit_damage_poison(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     hitter_id = 0;
+  uint32_t     victim_id = 0;
+  int          damage    = 0;
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  if (! hitter_id) {
+    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    Py_RETURN_NONE;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    Py_RETURN_NONE;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    Py_RETURN_NONE;
+  }
+
+  AttackOptions attack_options {};
+  attack_options.damage_set    = true;
+  attack_options.damage        = damage;
+  attack_options.attack_poison = true;
+
+  hitter->log("Attack with poison damage, %d", damage);
+  TRACE_AND_INDENT();
+
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
   } else {
@@ -97,7 +750,7 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   static char *kwlist[]  = {(char *) "hitter", (char *) "target", 0};
@@ -142,7 +795,7 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
 
 PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     owner_id  = 0;
   char        *item      = nullptr;
   uint32_t     victim_id = 0;
@@ -215,7 +868,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_death_by(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id        = 0;
   char        *reason    = nullptr;
   uint32_t     killer_id = 0;
@@ -261,7 +914,7 @@ PyObject *thing_death_by(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_dead(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *reason   = nullptr;
   static char *kwlist[] = {(char *) "t", (char *) "reason", 0};
@@ -295,7 +948,7 @@ PyObject *thing_dead(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *reason   = nullptr;
   static char *kwlist[] = {(char *) "t", (char *) "reason", 0};
@@ -328,7 +981,7 @@ PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *reason   = nullptr;
   static char *kwlist[] = {(char *) "t", (char *) "reason", 0};
@@ -361,7 +1014,7 @@ PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *what     = nullptr;
   static char *kwlist[] = {(char *) "t", (char *) "what", 0};
@@ -409,7 +1062,7 @@ PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *into     = nullptr;
   static char *kwlist[] = {(char *) "t", (char *) "into", 0};
@@ -442,7 +1095,7 @@ PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   static char *kwlist[] = {(char *) "t", 0};
 
@@ -468,7 +1121,7 @@ PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywd
 
 PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   int          x        = -1;
   int          y        = -1;
@@ -502,7 +1155,7 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   uint32_t     owner_id = 0;
   static char *kwlist[] = {(char *) "t", (char *) "owner", 0};
@@ -540,7 +1193,7 @@ PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     id       = 0;
   uint32_t     owner_id = 0;
   static char *kwlist[] = {(char *) "t", (char *) "owner", 0};
@@ -578,7 +1231,7 @@ PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *what     = nullptr;
   static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
@@ -616,7 +1269,7 @@ PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *what     = nullptr;
   static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
@@ -654,7 +1307,7 @@ PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *what     = nullptr;
   static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
@@ -692,7 +1345,7 @@ PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *what     = nullptr;
   static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
@@ -730,7 +1383,7 @@ PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *msg      = nullptr;
   static char *kwlist[] = {(char *) "owner", (char *) "msg", 0};
@@ -767,7 +1420,7 @@ PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *msg      = nullptr;
   static char *kwlist[] = {(char *) "owner", (char *) "msg", 0};
@@ -800,7 +1453,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *msg      = nullptr;
   static char *kwlist[] = {(char *) "owner", (char *) "msg", 0};
@@ -838,7 +1491,7 @@ PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char    *name     = 0;
   uint32_t owner_id = 0;
 
@@ -877,7 +1530,7 @@ PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t owner_id = 0;
   char    *name     = 0;
   int      channel  = 0;
@@ -916,7 +1569,7 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
 
 PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
 
@@ -958,7 +1611,7 @@ PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject 
 
 PyObject *level_spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t id     = 0;
   uint32_t radius = 0;
 
@@ -995,7 +1648,7 @@ PyObject *level_spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyO
 
 PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
 
@@ -1038,7 +1691,7 @@ PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
 
