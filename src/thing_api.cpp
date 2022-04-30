@@ -1951,16 +1951,16 @@ int Thing::unused_flag101(void)
   return (tp()->unused_flag101());
 }
 
-int Thing::unused_flag102(void)
+int Thing::attack_no_msg(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag102());
+  return (tp()->attack_no_msg());
 }
 
-int Thing::unused_flag103(void)
+int Thing::is_able_to_attack_owner(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag103());
+  return (tp()->is_able_to_attack_owner());
 }
 
 int Thing::is_dagger(void)

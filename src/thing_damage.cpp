@@ -11,10 +11,10 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
-int Thing::num_attacks(void)
+int Thing::attacks_per_round(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->num_attacks());
+  return (tp()->attacks_per_round());
 }
 
 int Thing::weapon_damage(void)
@@ -595,12 +595,6 @@ const std::string &Thing::on_owner_receiving_damage_draining_do(void)
   return (tp()->on_owner_receiving_damage_draining_do());
 }
 
-const std::string &Thing::on_owner_receiving_damage_stamina_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_damage_stamina_do());
-}
-
 const std::string &Thing::on_owner_receiving_damage_nat_attack_do(void)
 {
   TRACE_NO_INDENT();
@@ -707,12 +701,6 @@ const std::string &Thing::on_receiving_damage_draining_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_receiving_damage_draining_do());
-}
-
-const std::string &Thing::on_receiving_damage_stamina_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_receiving_damage_stamina_do());
 }
 
 const std::string &Thing::on_receiving_damage_nat_attack_do(void)
@@ -823,12 +811,6 @@ const std::string &Thing::on_owner_attacking_damage_draining_do(void)
   return (tp()->on_owner_attacking_damage_draining_do());
 }
 
-const std::string &Thing::on_owner_attacking_damage_stamina_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_damage_stamina_do());
-}
-
 const std::string &Thing::on_owner_attacking_damage_nat_attack_do(void)
 {
   TRACE_NO_INDENT();
@@ -935,12 +917,6 @@ const std::string &Thing::on_attacking_damage_draining_do(void)
 {
   TRACE_NO_INDENT();
   return (tp()->on_attacking_damage_draining_do());
-}
-
-const std::string &Thing::on_attacking_damage_stamina_do(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->on_attacking_damage_stamina_do());
 }
 
 const std::string &Thing::on_attacking_damage_nat_attack_do(void)

@@ -174,7 +174,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- - holy water cures poison                                                                                                                    -->
 <!-- - darts / poison darts                                                                                                                       -->
-<!-- - plutonium sword, no wall damage                                                                                                            -->
 <!-- - strength penalties                                                                                                                         -->
 <!-- - blessed items resist explosion                                                                                                             -->
 <!-- - warhammer should kill parent jelly in one go                                                                                               -->

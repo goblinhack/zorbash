@@ -41,8 +41,12 @@ void Game::place_player(void)
         continue;
       }
       auto t = level->thing_new("player2", point(x, y));
-      if (1) {
+      if (0) {
         auto w = level->thing_new("sword_wood", point(x, y));
+        t->carry(w);
+      }
+      if (1) {
+        auto w = level->thing_new("sword_plutonium", point(x, y));
         t->carry(w);
       }
       if (0) {

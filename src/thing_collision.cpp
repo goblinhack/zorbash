@@ -177,7 +177,9 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
           //
           // This is an odd one.
           //
-          err("Trying to attack self: %s", victim->to_string().c_str());
+          if (! is_able_to_attack_owner()) {
+            err("Trying to attack self: %s", victim->to_string().c_str());
+          }
         } else if (owner->can_eat(victim)) {
           //
           // Eat corpse?

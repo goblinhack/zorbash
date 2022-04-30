@@ -386,7 +386,7 @@ do
       noise_on_you_are_hit_and_now_dead \
       noise_on_you_are_hit_but_still_alive \
       normal_placement_rules \
-      num_attacks \
+      attacks_per_round \
       on_death_drop_all_items \
       shove_strength \
       spawn_group_radius \
@@ -409,8 +409,8 @@ do
       unused_flag10 \
       unused_flag100 \
       unused_flag101 \
-      unused_flag102 \
-      unused_flag103 \
+      attack_no_msg \
+      is_able_to_attack_owner \
       unused_flag11 \
       unused_flag12 \
       unused_flag123 \

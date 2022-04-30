@@ -6,19 +6,16 @@ def on_swing(owner, item, x, y):
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
 
 
-def on_owner_attacking_damage_stamina(me, owner, victim, x, y, damage):
-    my.con("on_owner_attacking_damage_stamina")
-    my.con("me      {} {:X}".format(my.thing_name_get(me), me))
-    my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
-    my.con("damage  {}".format(damage))
+def on_owner_attacking_damage_draining(me, owner, victim, x, y, damage):
+    # my.con("on_owner_attacking_damage_draining")
+    # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
+    # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
+    # my.con("damage  {}".format(damage))
     return damage + my.thing_enchant_get(me) * 3
 
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.collision_check(self, True)
-    my.collision_hit_priority(self, 10)
-    my.collision_hit_priority(self, 6)
     my.damaged_chance_d10000(self, 5)
     my.damage_draining_chance_d1000(self, 1, 1000)
     my.damage_draining_dice(self, "1d20")
@@ -35,7 +32,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
-    my.is_burnable(self, True)
     my.is_collectable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
@@ -53,16 +49,16 @@ def tp_init(name, text_name, short_text_name):
     my.is_weapon(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "This magical sword deals additional stamina draining damage to suck the will to live out of your opponents.")
+    my.long_text_description(self, "This magical sword deals additional draining damage to suck the will to live out of your opponents.")
     my.noise_on_dropping(self, 5)
-    my.num_attacks(self, 2)
-    my.on_owner_attacking_damage_stamina_do(self, "me.on_owner_attacking_damage_stamina()")
+    my.attacks_per_round(self, 2)
+    my.on_owner_attacking_damage_draining_do(self, "me.on_owner_attacking_damage_draining()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy tiring means of justice.")
-    my.text_enchant(self, "+3 DMG")
+    my.text_enchant(self, "+3 DMG stam")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 

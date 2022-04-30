@@ -16,9 +16,6 @@ def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.collision_check(self, True)
-    my.collision_hit_priority(self, 10)
-    my.collision_hit_priority(self, 6)
     my.crit_chance_d10000(self, 200)
     my.damaged_chance_d10000(self, 20)
     my.damage_melee_chance_d1000(self, 0, 1000)

@@ -19,13 +19,6 @@ def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def on_tick(owner, me, x, y):
-    if my.thing_health(me) < my.thing_health_max(me):
-        my.thing_health_incr(me, 1)
-        return True
-    return False
-
-
 def on_receiving_damage_lightning(me, hitter, x, y, damage):
     # my.topcon("hitter  {} {}".format(my.thing_name_get(hitter), my.thing_health(hitter)))
     owner = my.thing_top_owner_id_get(hitter)
@@ -92,13 +85,13 @@ def tp_init(name, text_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.is_tireless(self, True)
-    my.long_text_description(self, "A hideous progeny of animated flesh that wishes to add your skin to its body mass. Golems are immune to cold, poison and stamina/draining attacks. They also gain health from lightning. Golems are also able to slowly recharge health. Reknowed for being no fun at parties.")
+    my.long_text_description(self, "A hideous progeny of animated flesh that wishes to add your skin to its body mass. Golems are immune to cold, poison and draining attacks. They also gain health from lightning. Golems are also able to slowly recharge health. Reknowed for being no fun at parties.")
     my.monst_size(self, my.MONST_SIZE_LARGE)
     my.move_speed(self, 30)
     my.noise_decibels_hearing(self, 100)
     my.noise_on_moving(self, 20)
     my.normal_placement_rules(self, True)
-    my.num_attacks(self, 2)
+    my.attacks_per_round(self, 2)
     my.on_receiving_damage_lightning_do(self, "me.on_receiving_damage_lightning()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")

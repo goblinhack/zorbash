@@ -38,6 +38,7 @@ def tp_init(name, text_name, short_text_name):
     my.damage_lightning_dice(self, "1d10+10")  # This is the damage when the monst fires
     my.is_laser(self, True)
     my.is_loggable(self, True)
+    my.is_able_to_attack_owner(self, True)
     my.is_no_tile(self, True)
     my.is_usable(self, True)
     my.on_born_do(self, "me.on_born()")

@@ -32,9 +32,9 @@ int Thing::damage_melee(void)
 {
   TRACE_NO_INDENT();
   auto roll    = tp()->damage_melee_dice().roll();
-  roll         = weapon_damage_modify(roll);
   auto enchant = enchant_get();
-  dbg("Damage melee roll %d + enchant %d", roll, enchant);
+  roll         = weapon_damage_modify(roll);
+  dbg("Damage melee roll %s => roll %d + enchant %d", tp()->damage_melee_dice_str().c_str(), roll, enchant);
   return roll + enchant;
 }
 
