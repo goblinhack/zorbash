@@ -17,9 +17,9 @@ def on_tick(owner, me, x, y):
             if my.pcg_randint(1, 100) > 10:
                 my.thing_hit_damage_draining(me, target, my.pcg_randint(1, 4))
             elif my.pcg_randint(1, 100) > 10:
-                my.thing_hit_damage_health(me, target, my.pcg_randint(1, 4))
+                my.thing_hit_damage_health(me, target, my.pcg_randint(1, 10))
             else:
-                my.thing_hit_damage_poison(me, target, my.pcg_randint(1, 4))
+                my.thing_hit_damage_poison(me, target, my.pcg_randint(1, 20))
 
             if my.thing_is_player(owner):
                 my.topcon("You feel sick.")
