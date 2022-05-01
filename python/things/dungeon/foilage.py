@@ -29,7 +29,9 @@ def tp_init(name, tiles=[]):
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
     for t in tiles:
-        my.tile(self, t)
+        my.tile(self,
+                ascii_char="aries", ascii_bg="", ascii_fg="green",
+                tile=t)
 
     my.tp_update(self)
 

@@ -2205,21 +2205,23 @@ static bool wid_rightbar_create(void)
   }
 
   if (g_opt_ascii) {
-    if (g_opt_ascii) {
-      int width  = TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH - UI_SIDEBAR_LEFT_WIDTH - 1;
-      int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 3;
+    int width  = TERM_WIDTH - UI_SIDEBAR_RIGHT_WIDTH - UI_SIDEBAR_LEFT_WIDTH - 1;
+    int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 3;
 
-      CON("%d %d", width, height);
-      TRACE_AND_INDENT();
-      point tl = make_point(UI_SIDEBAR_LEFT_WIDTH, UI_TOPCON_VIS_HEIGHT);
-      point br = tl + point(width, height);
+    TRACE_AND_INDENT();
+    point tl = make_point(UI_SIDEBAR_LEFT_WIDTH, UI_TOPCON_VIS_HEIGHT);
+    point br = tl + point(width, height);
 
-      wid_asciimap = wid_new_square_window("wid rightbar");
-      wid_set_style(wid_asciimap, UI_WID_STYLE_NORMAL);
-      wid_set_pos(wid_asciimap, tl, br);
-      wid_set_on_display(wid_asciimap, wid_asciimap_display);
-      wid_lower(wid_asciimap);
-    }
+    wid_asciimap = wid_new_square_window("wid asciimap");
+    wid_set_style(wid_asciimap, UI_WID_STYLE_SPARSE_NONE);
+    wid_set_pos(wid_asciimap, tl, br);
+    wid_set_on_display(wid_asciimap, wid_asciimap_display);
+    wid_set_ignore_scroll_events(wid_asciimap, true);
+    wid_set_ignore_events(wid_asciimap, true);
+    wid_set_do_not_raise(wid_asciimap, true);
+    wid_lower(wid_asciimap);
+
+    config_game_pix_zoom_update();
 
     return wid_rightbar_ascii_create();
   } else {

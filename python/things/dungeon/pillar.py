@@ -21,8 +21,8 @@ def tp_init(name, text_name, tiles=[]):
 
     for t in tiles:
         my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
-            tile=t)
+                ascii_char="|", ascii_bg="", ascii_fg="white",
+                tile=t)
 
     my.tp_update(self)
 

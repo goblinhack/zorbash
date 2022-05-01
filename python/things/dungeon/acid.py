@@ -27,8 +27,8 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
 
     for t in tiles:
         my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
-            tile=t)
+                ascii_char="middle_dot", ascii_bg="", ascii_fg="green",
+                tile=t)
 
     my.tp_update(self)
 

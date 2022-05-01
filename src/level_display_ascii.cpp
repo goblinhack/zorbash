@@ -29,8 +29,8 @@ void Level::display_ascii_map(point tl, point br)
 
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
         {
-          t->blit_ascii(tl, br, p);
           t->animate();
+          t->blit_ascii(tl, br, p);
         }
         FOR_ALL_THINGS_END()
 
