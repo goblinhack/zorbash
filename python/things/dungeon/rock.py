@@ -49,13 +49,10 @@ def tp_init(
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
-    if tiles is not None:
-        for t in tiles:
-            my.tile(self, t)
-    else:
+    for t in tiles:
         my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
-            tile=name)
+                ascii_char="#", ascii_bg="brown", ascii_fg="black",
+                tile=t)
 
     if left1_tiles is not None:
         for t in left1_tiles:

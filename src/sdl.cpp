@@ -14,6 +14,7 @@
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
+#include "my_wid_rightbar.hpp"
 #include "stb_image_write.hpp"
 
 sdl_t sdl;
@@ -815,8 +816,23 @@ void config_game_pix_zoom_update(void)
   float tiles_across = game->config.game_pix_width / TILE_WIDTH;
   float tiles_down   = game->config.game_pix_height / TILE_HEIGHT;
 
-  TILES_ACROSS = (int) tiles_across;
-  TILES_DOWN   = (int) tiles_down;
+  if (g_opt_ascii) {
+    if (wid_asciimap) {
+      int32_t tlx;
+      int32_t tly;
+      int32_t brx;
+      int32_t bry;
+      wid_get_tl_x_tl_y_br_x_br_y(wid_asciimap, &tlx, &tly, &brx, &bry);
+      TILES_ACROSS = brx - tlx + 1;
+      TILES_DOWN   = bry - tly + 1;
+    } else {
+      TILES_ACROSS = MAP_WIDTH;
+      TILES_DOWN   = MAP_HEIGHT;
+    }
+  } else {
+    TILES_ACROSS = (int) tiles_across;
+    TILES_DOWN   = (int) tiles_down;
+  }
 
   game->config.tile_pix_width  = game->config.one_pixel_width * TILE_WIDTH;
   game->config.tile_pix_height = game->config.one_pixel_height * TILE_HEIGHT;

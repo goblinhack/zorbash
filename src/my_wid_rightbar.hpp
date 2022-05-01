@@ -14,4 +14,5 @@ bool wid_rightbar_init(void);
 //
 extern Widp wid_rightbar_window;
 extern Widp wid_map_mini;
+extern Widp wid_asciimap;
 extern bool is_mouse_over_rightbar(void);

@@ -20,6 +20,9 @@ def chasm_init(name, text_name, tiles=[]):
     my.z_depth(self, my.MAP_DEPTH_CHASM)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
+    my.tile(self,
+            ascii_char="four_dots", ascii_bg="", ascii_fg="blue",
+            tile="nothing")
     my.tp_update(self)
 
 

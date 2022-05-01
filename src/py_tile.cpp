@@ -377,12 +377,14 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         tile->ascii_char = unicode_alias_to_char(ascii_char_str);
       }
 
-      if (ascii_bg) {
+      tile->ascii_bg_col = COLOR_NONE;
+      if (ascii_bg && *ascii_bg) {
         tile->ascii_bg     = ascii_bg;
         tile->ascii_bg_col = color_find(ascii_bg);
       }
 
-      if (ascii_fg) {
+      tile->ascii_fg_col = WHITE;
+      if (ascii_fg && *ascii_fg) {
         tile->ascii_fg     = ascii_fg;
         tile->ascii_fg_col = color_find(ascii_fg);
       }

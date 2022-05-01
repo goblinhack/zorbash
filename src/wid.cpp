@@ -6330,10 +6330,6 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
     w_box_args.col_bg   = get(w->cfg, WID_MODE_NORMAL).colors[ WID_COLOR_BG ];
   }
 
-  if (w->on_display) {
-    (w->on_display)(w, tl, br);
-  }
-
   if (w->square) {
     ascii_put_box(w_box_args, wid_get_style(w), bg_tile, fg_tile, fg2_tile, fg3_tile, L"");
   } else {
@@ -6352,6 +6348,10 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
         set(wid_on_screen_at, x, y, w);
       }
     }
+  }
+
+  if (w->on_display) {
+    (w->on_display)(w, tl, br);
   }
 
   if (! text.empty()) {
