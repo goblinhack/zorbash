@@ -18,9 +18,7 @@
 void Level::cursor_check_if_scroll_needed(void)
 {
   TRACE_AND_INDENT();
-  //
-  // Not sure why I have this and what it does :)
-  //
+
   if (is_map_follow_player) {
     if (cursor) {
       if (player) {
