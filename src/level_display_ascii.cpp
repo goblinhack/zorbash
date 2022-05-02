@@ -21,6 +21,11 @@
 void Level::display_ascii_map(point tl, point br)
 {
   display_map_set_bounds();
+  cursor_check_if_scroll_needed();
+  cursor_find_on_visible_things(minx, miny, maxx, maxy);
+
+  ts_fade_in_begin  = 0;
+  ts_fade_out_begin = 0;
 
   for (auto z = 0; z < MAP_DEPTH; z++) {
     for (auto y = miny; y < maxy; y++) {

@@ -292,6 +292,11 @@ void Level::scroll_map_set_target(void)
     }
 
     auto d = 0.3;
+
+    if (g_opt_ascii) {
+      d = 1;
+    }
+
     if (sdl.mouse_x >= game->config.window_pix_width - 1) {
       map_wanted_at.x += d;
     }

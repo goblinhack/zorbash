@@ -21,18 +21,24 @@ void Thing::cursor_hover_over_check(void)
   mx /= game->config.game_pix_scale_width;
   my /= game->config.game_pix_scale_height;
 
-  if ((mx >= tblit_tl.x) && (mx <= tblit_br.x)) {
-    if ((my >= tblit_tl.y) && (my <= tblit_br.y)) {
-      if (is_mouse_over_rightbar()) {
-        return;
-      }
+  if (g_opt_ascii) {
+    mx = ascii_mouse_x;
+    my = ascii_mouse_y;
+  }
 
-      if (level->cursor_at != curr_at) {
-        level->cursor_at = curr_at;
-
-        level->cursor_describe();
-      }
-      level->is_cursor_found = true;
+  //
+  // Are we hovering over the last blit position of this thing?
+  //
+  if ((mx >= tblit_tl.x) && (mx <= tblit_br.x) && (my >= tblit_tl.y) && (my <= tblit_br.y)) {
+    if (is_mouse_over_rightbar()) {
+      return;
     }
+
+    if (level->cursor_at != curr_at) {
+      level->cursor_at = curr_at;
+
+      level->cursor_describe();
+    }
+    level->is_cursor_found = true;
   }
 }

@@ -61,4 +61,9 @@ void Thing::blit_ascii(point tl, point br, point p)
   }
   ascii_set_fg(x, y, tile->ascii_char);
   ascii_set_fg(x, y, tile->ascii_fg_col);
+
+  last_blit_br = point(x, y);
+  last_blit_tl = point(x, y);
+  last_blit_at = point(x, y);
+  is_blitted   = true;
 }
