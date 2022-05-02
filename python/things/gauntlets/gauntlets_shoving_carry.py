@@ -19,22 +19,16 @@ def tp_init(name):
     # This should be synced with its owner, but just in case it is not, we have delay set
     delay = 900
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
             tile=name + ".1", delay_ms=delay, frame=1)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
             tile=name + ".2", delay_ms=delay, frame=2)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
             tile=name + ".3", delay_ms=delay, frame=3)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
             tile=name + ".4", delay_ms=delay, frame=4)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
             tile=name + ".5", delay_ms=delay, frame=5)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
             tile=name + ".6", delay_ms=delay, frame=6)
 
     my.tp_update(self)
