@@ -14,6 +14,7 @@
 void Level::scroll_map_do(bool fast)
 {
   TRACE_AND_INDENT();
+
   if (! fast) {
     //
     // Not sure why I have this :)
@@ -24,6 +25,11 @@ void Level::scroll_map_do(bool fast)
   }
 
   if (game->is_being_destroyed || is_being_destroyed) {
+    return;
+  }
+
+  if (g_opt_ascii) {
+    map_at = map_wanted_at;
     return;
   }
 
@@ -117,15 +123,19 @@ if (player) {
     }
   } else {
     //
-    // Else following the cursor or mouse. Bigger chunks are less sick
-    // inducing.
+    // Else following the cursor or mouse. Bigger chunks are less sick inducing.
     //
     if (fast) {
       map_at.x -= dx;
       map_at.y -= dy;
     } else {
-      map_at.x -= dx / bigstep;
-      map_at.y -= dy / bigstep;
+      if (g_opt_ascii) {
+        map_at.x -= ceil(dx / bigstep);
+        map_at.y -= ceil(dy / bigstep);
+      } else {
+        map_at.x -= dx / bigstep;
+        map_at.y -= dy / bigstep;
+      }
     }
   }
 
@@ -240,6 +250,14 @@ void Level::scroll_map_set_target(void)
     y_sensitivity = sensitivity;
 
     //
+    // This is how many tiles away from the map current point that we scroll.
+    //
+    if (g_opt_ascii) {
+      x_sensitivity = 10;
+      y_sensitivity = 10;
+    }
+
+    //
     // Auto scroll if we cross these limits
     //
     float x1 = (((float) TILES_ACROSS) / 2) - x_sensitivity;
@@ -267,8 +285,7 @@ void Level::scroll_map_set_target(void)
     }
   } else if (cursor && ! is_map_follow_player) {
     //
-    // Allow the player to scroll around the scene of carnage
-    // once dead
+    // Allow the player to scroll around the scene of carnage once dead
     //
     if (player && player->is_dead) {
       return;

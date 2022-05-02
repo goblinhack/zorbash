@@ -112,28 +112,28 @@ def tp_init(name, text_name):
 
     delay = 200
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + ".4", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + ".5", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + ".6", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + ".7", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + ".8", delay_ms=delay)
 
     my.tp_update(self)
