@@ -91,32 +91,32 @@ def tp_init(name, text_name, short_text_name):
 
     delay = 200
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + "_awake.1", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + "_awake.2", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + "_awake.3", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + "_awake.4", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + "_dead.1", delay_ms=delay, is_dead=True)
     delay = 500
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + "_asleep.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + "_asleep.2", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + "_asleep.3", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_char="m", ascii_bg="", ascii_fg="white",
             tile=name + "_asleep.2", is_sleeping=True, delay_ms=delay)
 
     my.tp_update(self)
