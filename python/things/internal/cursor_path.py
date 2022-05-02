@@ -18,7 +18,7 @@ def tp_init(name):
 
     delay = 50
     my.tile(self,
-            ascii_char="block", ascii_bg="lightblue", ascii_fg="",
+            ascii_bg_char="block", ascii_bg_col="lightblue4", ascii_fg_col="",
             tile=name + ".1", delay_ms=delay)
 
     my.tp_update(self)

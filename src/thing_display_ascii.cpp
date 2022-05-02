@@ -48,19 +48,23 @@ void Thing::blit_ascii(point tl, point br, point p)
     return;
   }
 
-  if (! tile->ascii_char) {
-    return;
-  }
-
   int x = tl.x + (p.x - level->minx);
   int y = tl.y + (p.y - level->miny);
 
-  if (tile->ascii_bg_col != COLOR_NONE) {
-    ascii_set_bg(x, y, tile->ascii_bg_col);
+  if (tile->ascii_bg_col_col != COLOR_NONE) {
+    ascii_set_bg(x, y, tile->ascii_bg_col_col);
     ascii_set_bg(x, y, UNICODE_BLOCK);
   }
-  ascii_set_fg(x, y, tile->ascii_char);
-  ascii_set_fg(x, y, tile->ascii_fg_col);
+
+  if (tile->ascii_bg_char) {
+    ascii_set_bg(x, y, tile->ascii_bg_char);
+    ascii_set_bg(x, y, tile->ascii_bg_col_col);
+  }
+
+  if (tile->ascii_fg_char) {
+    ascii_set_fg(x, y, tile->ascii_fg_char);
+    ascii_set_fg(x, y, tile->ascii_fg_col_col);
+  }
 
   last_blit_br = point(x, y);
   last_blit_tl = point(x, y);

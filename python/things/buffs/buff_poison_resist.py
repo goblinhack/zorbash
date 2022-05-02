@@ -129,7 +129,7 @@ def tp_init(name, text_name):
     my.on_tick_do(self, "me.on_tick()")
     # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile="buff_poison_resist")
     my.tp_update(self)
 

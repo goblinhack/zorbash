@@ -121,6 +121,14 @@ void sdl_loop(void)
     bool update_fast = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
 
     //
+    // Widget updates need to be immediate in ascii mode.
+    //
+    if (g_opt_ascii) {
+      update_slow = true;
+      update_fast = true;
+    }
+
+    //
     // Less frequent updates
     //
     if (unlikely(update_slow)) {

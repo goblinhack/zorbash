@@ -70,6 +70,25 @@ void Level::cursor_move(void)
     dx *= scale;
     dy *= scale;
 
+    if (g_opt_ascii) {
+      int step = 1;
+      if (dx > 0) {
+        dx = step;
+      }
+      if (dy > 0) {
+        dy = step;
+      }
+      if (dx < -1) {
+        dx = -step;
+      }
+      if (dy < -1) {
+        dy = -step;
+      }
+
+      map_wanted_at += fpoint(dx, dy);
+      return;
+    }
+
     map_wanted_at += fpoint(dx, dy);
     is_map_follow_player = false;
     return;

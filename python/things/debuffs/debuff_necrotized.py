@@ -27,7 +27,7 @@ def tp_init(name, text_name):
     my.text_description(self, "Rotting debuff.")
     # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile="debuff_necrotized")
     my.tp_update(self)
 
