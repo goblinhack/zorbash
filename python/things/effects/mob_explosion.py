@@ -22,13 +22,13 @@ def tp_init(name):
 
     delay = 100
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
             tile=name + ".4",

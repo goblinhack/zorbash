@@ -126,9 +126,10 @@ Tile::Tile(const class Tile *tile)
   is_end_of_anim         = tile->is_end_of_anim;
   is_dead_on_end_of_anim = tile->is_dead_on_end_of_anim;
   internal_has_dir_anim  = tile->internal_has_dir_anim;
-  ascii_char             = tile->ascii_char;
-  ascii_bg               = tile->ascii_bg;
-  ascii_fg               = tile->ascii_fg;
+  ascii_fg_char          = tile->ascii_fg_char;
+  ascii_bg_char          = tile->ascii_bg_char;
+  ascii_bg_col           = tile->ascii_bg_col;
+  ascii_fg_col           = tile->ascii_fg_col;
 
   index        = 0;
   global_index = all_tiles_array.size() + 1;

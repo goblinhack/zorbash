@@ -25,16 +25,16 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tile(self,
-            ascii_char="middle_dot", ascii_bg="", ascii_fg="green",
+            ascii_fg_char="middle_dot", ascii_bg_col="", ascii_fg_col="green",
             tile=name + ".100", is_hp_100_percent=True)
     my.tile(self,
-            ascii_char="middle_dot", ascii_bg="", ascii_fg="green",
+            ascii_fg_char="middle_dot", ascii_bg_col="", ascii_fg_col="green",
             tile=name + ".75", is_hp_75_percent=True)
     my.tile(self,
-            ascii_char="middle_dot", ascii_bg="", ascii_fg="green",
+            ascii_fg_char="middle_dot", ascii_bg_col="", ascii_fg_col="green",
             tile=name + ".50", is_hp_50_percent=True)
     my.tile(self,
-            ascii_char="middle_dot", ascii_bg="", ascii_fg="green",
+            ascii_fg_char="middle_dot", ascii_bg_col="", ascii_fg_col="green",
             tile=name + ".25", is_hp_25_percent=True)
 
     my.tp_update(self)

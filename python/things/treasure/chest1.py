@@ -68,13 +68,13 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile="chest1", delay_ms=1000)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".open", is_open=True)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".open", is_dead=True)
     my.tp_update(self)
 

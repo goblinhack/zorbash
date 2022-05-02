@@ -16,25 +16,25 @@ def tp_init(name):
 
     delay = 25
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".4", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".5", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".6", delay_ms=delay)
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile=name + ".7", delay_ms=delay)
     my.tile(self,
         tile=name + ".8",

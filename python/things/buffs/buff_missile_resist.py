@@ -118,7 +118,7 @@ def tp_init(name, text_name):
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tile(self,
-            ascii_char="X", ascii_bg="", ascii_fg="white",
+            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
             tile="buff_missile_resist")
     my.tp_update(self)
 

@@ -148,10 +148,14 @@ void Level::tick(void)
   // Update the cursor position. But only if the mouse has moved. So if the
   // player is moving via keyboard alone, we don't pollute the screen.
   //
-  if ((sdl.wheel_x != 0) || (sdl.wheel_y != 0)) {
+  if (g_opt_ascii) {
     cursor_move();
-  } else if (! time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
-    cursor_move();
+  } else {
+    if ((sdl.wheel_x != 0) || (sdl.wheel_y != 0)) {
+      cursor_move();
+    } else if (! time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
+      cursor_move();
+    }
   }
 
   //

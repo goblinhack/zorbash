@@ -30,7 +30,7 @@ def tp_init(name, tiles=[]):
 
     for t in tiles:
         my.tile(self,
-                ascii_char="aries", ascii_bg="", ascii_fg="green",
+                ascii_fg_char="aries", ascii_bg_col="", ascii_fg_col="green",
                 tile=t)
 
     my.tp_update(self)

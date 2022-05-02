@@ -641,6 +641,13 @@ void Thing::update_interpolated_position(void)
     }
   }
 
+  //
+  // In ascii mode, moves are immediate
+  //
+  if (g_opt_ascii) {
+    step = 1;
+  }
+
   auto p = top_owner();
   if ((p && p->is_falling) || is_falling) {
     if (z_depth == MAP_DEPTH_LAVA) {
