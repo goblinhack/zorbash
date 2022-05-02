@@ -13,6 +13,7 @@
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
+#include "my_wid_asciimap.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_rightbar.hpp"
 #include "stb_image_write.hpp"
@@ -312,7 +313,7 @@ uint8_t sdl_init(void)
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_ACCUM_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
   SDL_GL_SwapWindow(sdl.window);
 
-  config_game_pix_zoom_update();
+  wid_asciimap_update();
 
   LOG("SDL: Call SDL_SetWindowTitle");
   SDL_SetWindowTitle(sdl.window, "zorbash");
