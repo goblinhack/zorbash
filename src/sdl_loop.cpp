@@ -238,7 +238,6 @@ void sdl_loop(void)
       if (likely(! g_errored)) {
         if (likely(game->level != nullptr)) {
           if (found || game->tick_begin_ms) {
-            TOPCON("T");
             game->level->tick();
             pcg_random_allowed = false;
             wid_display_all();

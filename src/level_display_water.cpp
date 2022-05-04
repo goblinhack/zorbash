@@ -175,7 +175,7 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
     set(water[ 1 ], 7, 7, tile_find("sewer_water8h"));
   }
 
-  auto z = MAP_DEPTH_WATER;
+  auto z = MAP_DEPTH_LIQUID;
 
   /////////////////////////////////////////////////////////////////////
   // Draw white mask tiles only

@@ -650,11 +650,11 @@ void Thing::update_interpolated_position(void)
 
   auto p = top_owner();
   if ((p && p->is_falling) || is_falling) {
-    if (z_depth == MAP_DEPTH_LAVA) {
+    if (z_depth == MAP_DEPTH_LIQUID) {
       //
       // If we change the depth, it is displayed as white
       //
-    } else if (z_depth == MAP_DEPTH_WATER) {
+    } else if (z_depth == MAP_DEPTH_LIQUID) {
       //
       // If we change the depth, it is displayed as white
       //
