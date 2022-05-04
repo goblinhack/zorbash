@@ -292,6 +292,7 @@ public:
   uint64_t debug                 : 1 {};
   uint64_t is_being_dropped      : 1 {};
   uint64_t is_blitted            : 1 {};
+  uint64_t is_gfx_animated       : 1 {};
   uint64_t inited_tiles          : 1 {};
   uint64_t has_external_particle : 1 {}; // current in motion particle
   uint64_t has_internal_particle : 1 {}; // current in motion particle
@@ -1070,8 +1071,6 @@ public:
   int gfx_animated_can_hflip(void);
   int gfx_animated_can_vflip(void);
   int gfx_animated_no_dir(void);
-  int gfx_animated(void);
-  int gfx_attack_anim(void);
   int gfx_bounce_always(void);
   int gfx_bounce_on_move(void);
   int gfx_dead_anim(void);
@@ -2387,6 +2386,10 @@ public:
   bool victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at,
                                  AttackOptions *attack_options);
   bool victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, AttackOptions *o);
+
+  inline int gfx_animated(void) { return is_gfx_animated; }
+
+  int gfx_attack_anim(void);
 } Thing;
 
 std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my);

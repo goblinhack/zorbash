@@ -92,6 +92,11 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
    */
   is_the_player = tp()->is_player();
 
+  /*
+   * Cached as used often
+   */
+  is_gfx_animated = tp()->gfx_animated();
+
   //
   // Make sure we have the ability to carry items.
   //

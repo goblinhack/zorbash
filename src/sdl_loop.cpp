@@ -133,6 +133,10 @@ void sdl_loop(void)
           }
         }
       }
+
+      pcg_random_allowed = false;
+      wid_display_all();
+      pcg_random_allowed = true;
     }
 
     //
@@ -151,18 +155,6 @@ void sdl_loop(void)
         if (game->start_requested) {
           game->start_requested = false;
           game->start();
-        }
-
-        if (wid_console_window && wid_console_window->visible) {
-          pcg_random_allowed = false;
-          {
-            wid_display_all();
-          }
-          pcg_random_allowed = true;
-        } else {
-          pcg_random_allowed = false;
-          wid_display_all();
-          pcg_random_allowed = true;
         }
       }
 
@@ -248,6 +240,9 @@ void sdl_loop(void)
           if (found || game->tick_begin_ms) {
             TOPCON("T");
             game->level->tick();
+            pcg_random_allowed = false;
+            wid_display_all();
+            pcg_random_allowed = true;
           }
         }
       }
