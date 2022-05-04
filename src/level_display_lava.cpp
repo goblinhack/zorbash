@@ -104,7 +104,7 @@ void Level::display_pixelart_lava(int fbo, int16_t minx, int16_t miny, int16_t m
     set(lava, 7, 7, tile_find("lava8h"));
   }
 
-  auto z = MAP_DEPTH_LAVA;
+  auto z = MAP_DEPTH_LIQUID;
 
   /////////////////////////////////////////////////////////////////////
   // Draw white mask tiles only

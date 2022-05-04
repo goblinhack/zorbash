@@ -35,7 +35,6 @@ void Level::display_ascii_map(point tl, point br)
 
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
         {
-          cnt++;
           if (t->gfx_animated()) {
             t->animate();
           }
@@ -48,5 +47,4 @@ void Level::display_ascii_map(point tl, point br)
       }
     }
   }
-  TOPCON("D %d %d %d %d cnt %d", minx, miny, maxx, maxy, cnt);
 }

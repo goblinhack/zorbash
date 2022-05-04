@@ -50,7 +50,7 @@ void Thing::lava_tick(void)
   }
 
   if (hit) {
-    FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LAVA)
+    FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LIQUID)
     {
       if (! t->is_lava()) {
         continue;

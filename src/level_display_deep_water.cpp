@@ -101,7 +101,7 @@ void Level::display_pixelart_deep_water(int fbo, int16_t minx, int16_t miny, int
     set(deep_water, 7, 7, tile_find("deep_water8h"));
   }
 
-  auto z = MAP_DEPTH_WATER;
+  auto z = MAP_DEPTH_LIQUID;
 
   /////////////////////////////////////////////////////////////////////
   // Draw white mask tiles only

@@ -3804,7 +3804,7 @@ void Dungeon::water_fixup_shallows(void)
           is_wall(x + 1, y) || is_wall(x - 1, y + 1) || is_wall(x, y + 1) || is_wall(x + 1, y + 1) ||
           is_rock(x - 1, y - 1) || is_rock(x, y - 1) || is_rock(x + 1, y - 1) || is_rock(x - 1, y) || is_rock(x, y) ||
           is_rock(x + 1, y) || is_rock(x - 1, y + 1) || is_rock(x, y + 1) || is_rock(x + 1, y + 1)) {
-        putc(x, y, MAP_DEPTH_WATER, Charmap::SHALLOW_WATER);
+        putc(x, y, MAP_DEPTH_LIQUID, Charmap::SHALLOW_WATER);
       }
     }
   }
@@ -3830,9 +3830,9 @@ void Dungeon::water_fixup(void)
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
       if (get(cand, x, y)) {
         if (pcg_random_range(0, 100) < 95) {
-          putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
+          putc(x, y, MAP_DEPTH_LIQUID, Charmap::DEEP_WATER);
         } else {
-          putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
+          putc(x, y, MAP_DEPTH_LIQUID, Charmap::SPACE);
           putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
         }
       }
@@ -3852,7 +3852,7 @@ void Dungeon::add_remaining(void)
         putc(x, y, MAP_DEPTH_OBJ, Charmap::ROCK);
       }
 
-      putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
+      putc(x, y, MAP_DEPTH_LIQUID, Charmap::SPACE);
       putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
 
       if (pcg_random_range(0, 100) < 20) {
@@ -4429,7 +4429,7 @@ void Dungeon::water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int 
     for (y = 2; y < maze_h - 2; y++) {
       if (get(map_curr, x, y)) {
         if (! is_anything_at(x, y)) {
-          putc(x, y, MAP_DEPTH_WATER, Charmap::SHALLOW_WATER);
+          putc(x, y, MAP_DEPTH_LIQUID, Charmap::SHALLOW_WATER);
         }
       }
     }

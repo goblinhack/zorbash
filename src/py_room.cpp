@@ -168,10 +168,10 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
           set(r->data, x, y, MAP_DEPTH_FLOOR2, floor2_string[ x ]);
         }
         if (water_string[ x ] != ' ') {
-          set(r->data, x, y, MAP_DEPTH_WATER, water_string[ x ]);
+          set(r->data, x, y, MAP_DEPTH_LIQUID, water_string[ x ]);
         }
         if (lava_string[ x ] != ' ') {
-          set(r->data, x, y, MAP_DEPTH_LAVA, lava_string[ x ]);
+          set(r->data, x, y, MAP_DEPTH_LIQUID, lava_string[ x ]);
         }
         if (chasm_string[ x ] != ' ') {
           set(r->data, x, y, MAP_DEPTH_CHASM, chasm_string[ x ]);
