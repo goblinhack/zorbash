@@ -13,6 +13,7 @@
 #include "my_sys.hpp"
 #include "my_tile.hpp"
 #include "my_ui.hpp"
+#include "my_wid_asciimap.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
 #include "stb_image_write.hpp"
@@ -38,8 +39,9 @@ void sdl_loop(void)
   //
   // Wait for events
   //
-  int ui_ts_fast_last = time_ms();
-  int ui_ts_slow_last = ui_ts_fast_last;
+  int ui_ts_fast_last      = time_ms();
+  int ui_ts_slow_last      = ui_ts_fast_last;
+  int ui_ts_very_slow_last = ui_ts_fast_last;
 
   g_main_loop_running = true;
 
@@ -116,16 +118,21 @@ void sdl_loop(void)
     //
     // Less frequent updates
     //
-    int  ts_now      = time_ms();
-    bool update_slow = (ts_now - ui_ts_slow_last >= UI_UPDATE_SLOW_MS);
-    bool update_fast = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
+    int  ts_now           = time_ms();
+    bool update_very_slow = (ts_now - ui_ts_very_slow_last >= UI_UPDATE_VERY_SLOW_MS);
+    bool update_slow      = (ts_now - ui_ts_slow_last >= UI_UPDATE_SLOW_MS);
+    bool update_fast      = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
 
-    //
-    // Widget updates need to be immediate in ascii mode.
-    //
-    if (g_opt_ascii) {
-      update_slow = true;
-      update_fast = true;
+    if (unlikely(update_very_slow)) {
+      ui_ts_very_slow_last = ts_now;
+
+      if (likely(! g_errored)) {
+        if (g_opt_ascii) {
+          if (likely(game->level != nullptr)) {
+            game->level->tick();
+          }
+        }
+      }
     }
 
     //
@@ -230,14 +237,19 @@ void sdl_loop(void)
           break;
         }
       }
-    }
 
-    if (likely(! g_errored)) {
-      if (likely(game->level != nullptr)) {
-        //
-        // If the tick ends, start the new tick asap for smoothness.
-        //
-        game->level->tick();
+      //
+      // If the user has moved the mouse, tick to allow the cursor to move.
+      //
+      // Ot if a tick has started, tick quickly.
+      //
+      if (likely(! g_errored)) {
+        if (likely(game->level != nullptr)) {
+          if (found || game->tick_begin_ms) {
+            TOPCON("T");
+            game->level->tick();
+          }
+        }
       }
     }
 

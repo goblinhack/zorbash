@@ -409,10 +409,8 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
             t->blit_pixelart(fbo);
           }
 
-          if (unlikely(game->robot_mode)) {
-            if (unlikely(t->gfx_animated())) {
-              t->animate();
-            }
+          if (unlikely(t->gfx_animated())) {
+            t->animate();
           }
         }
         FOR_ALL_THINGS_END()

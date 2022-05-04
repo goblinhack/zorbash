@@ -17,6 +17,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"
+#include "my_wid_asciimap.hpp"
 
 void Level::display_ascii_map(point tl, point br)
 {
@@ -34,7 +35,9 @@ void Level::display_ascii_map(point tl, point br)
 
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
         {
-          t->animate();
+          if (t->gfx_animated()) {
+            t->animate();
+          }
           t->blit_ascii(tl, br, p);
         }
         FOR_ALL_THINGS_END()

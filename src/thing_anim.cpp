@@ -23,6 +23,11 @@ void Thing::animate(void)
     return;
   }
 
+  if (! gfx_animated()) {
+    err("Trying to animate non animated thing");
+    return;
+  }
+
   if (is_tmp_thing()) {
     if (game->tick_current_is_too_slow) {
       dead_scheduled("by end of anim; too slow");
