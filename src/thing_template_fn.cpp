@@ -273,7 +273,6 @@ int Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
 int Tp::gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
 int Tp::gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
 int Tp::gfx_animated_no_dir(void) const { return _gfx_animated_no_dir; }
-int Tp::gfx_animated(void) const { return _gfx_animated; }
 int Tp::gfx_attack_anim(void) const { return _gfx_attack_anim; }
 int Tp::gfx_bounce_always(void) const { return _gfx_bounce_always; }
 int Tp::gfx_bounce_on_move(void) const { return _gfx_bounce_on_move; }

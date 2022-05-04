@@ -28,13 +28,14 @@ void Level::display_ascii_map(point tl, point br)
   ts_fade_in_begin  = 0;
   ts_fade_out_begin = 0;
 
-  for (auto z = 0; z < MAP_DEPTH; z++) {
+  for (auto z = (int) MAP_DEPTH_FLOOR; z <= MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         point p(x, y);
 
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
         {
+          cnt++;
           if (t->gfx_animated()) {
             t->animate();
           }
@@ -47,4 +48,5 @@ void Level::display_ascii_map(point tl, point br)
       }
     }
   }
+  TOPCON("D %d %d %d %d cnt %d", minx, miny, maxx, maxy, cnt);
 }

@@ -1149,7 +1149,6 @@ public:
   int gfx_animated_can_hflip(void) const;
   int gfx_animated_can_vflip(void) const;
   int gfx_animated_no_dir(void) const;
-  int gfx_animated(void) const;
   int gfx_attack_anim(void) const;
   int gfx_bounce_always(void) const;
   int gfx_bounce_on_move(void) const;
@@ -2318,6 +2317,8 @@ public:
   void damage_necrosis_chance_d1000_set(int index, int v);
   void damage_draining_chance_d1000_set(int index, int v);
   void damage_poison_chance_d1000_set(int index, int v);
+
+  inline int gfx_animated(void) const { return _gfx_animated; }
 };
 
 Tilep tp_first_tile(class Tp *);

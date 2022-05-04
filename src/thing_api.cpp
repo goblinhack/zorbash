@@ -323,12 +323,6 @@ int Thing::gfx_animated_no_dir(void)
   return (tp()->gfx_animated_no_dir());
 }
 
-int Thing::gfx_animated(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_animated());
-}
-
 int Thing::gfx_attack_anim(void)
 {
   TRACE_NO_INDENT();
