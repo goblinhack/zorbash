@@ -203,12 +203,12 @@ void die(void)
 static void find_executable(void)
 {
   TRACE_AND_INDENT();
-  char       *parent_dir         = 0;
-  char       *curr_dir           = 0;
+  char *      parent_dir         = 0;
+  char *      curr_dir           = 0;
   std::string exec_name          = "";
-  char       *exec_expanded_name = 0;
-  char       *path               = 0;
-  char       *tmp;
+  char *      exec_expanded_name = 0;
+  char *      path               = 0;
+  char *      tmp;
 
   exec_name = mybasename(ARGV[ 0 ], __FUNCTION__);
   CON("INI: Will use EXEC_NAME as '%s'", exec_name.c_str());
@@ -713,9 +713,10 @@ int32_t main(int32_t argc, char *argv[])
   if (game) {
     if (g_opt_ascii_set) {
       parse_args(argc, argv);
-      sdl_config_update_all();
     }
   }
+
+  sdl_config_update_all();
 
   if (g_need_restart) {
     CON("FIN: Restart");

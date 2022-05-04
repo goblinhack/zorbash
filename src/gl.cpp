@@ -92,6 +92,10 @@ void gl_enter_2d_mode(void)
   //
   // 2D projection
   //
+  //
+  //
+  CON("INI: glOrtho(%d,%d)", game->config.game_pix_width, game->config.game_pix_height);
+
   glOrtho(0,                            // left
           game->config.game_pix_width,  // right
           game->config.game_pix_height, // bottom
@@ -590,7 +594,7 @@ void blit_init(void)
   //
   // Make the end a bit smaller so we have plenty of headroom.
   //
-  gl_array_buf_end = (__typeof__(gl_array_buf_end)) ((char *) gl_array_buf) + ((gl_array_size_required * 2) / 3);
+  gl_array_buf_end = (__typeof__(gl_array_buf_end))((char *) gl_array_buf) + ((gl_array_size_required * 2) / 3);
 
   bufp     = gl_array_buf;
   bufp_end = gl_array_buf_end;
@@ -1125,7 +1129,7 @@ static void setupPalette(HDC hDC)
   TRACE_AND_INDENT();
   int                   pixelFormat = GetPixelFormat(hDC);
   PIXELFORMATDESCRIPTOR pfd;
-  LOGPALETTE           *pPal;
+  LOGPALETTE *          pPal;
   int                   paletteSize;
 
   DescribePixelFormat(hDC, pixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
@@ -1189,7 +1193,7 @@ void gl_ext_init(void)
   wc.hInstance     = hInstance;
   wc.hIcon         = LoadIcon(nullptr, IDI_APPLICATION);
   wc.hCursor       = LoadCursor(nullptr, IDC_ARROW);
-  wc.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
+  wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
   wc.lpszMenuName  = nullptr;
   wc.lpszClassName = g_szClassName;
   wc.hIconSm       = LoadIcon(nullptr, IDI_APPLICATION);
