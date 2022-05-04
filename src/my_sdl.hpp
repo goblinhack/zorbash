@@ -8,6 +8,7 @@
 #define _MY_SDL_HPP_
 
 #include <SDL.h>
+#include <array>
 
 #include "c_plus_plus_serializer.hpp"
 #include "my_command.hpp"
@@ -71,10 +72,10 @@ typedef struct sdl_t_ {
   uint32_t last_mouse_held_down_when {};
   uint32_t mouse_down_ts {};
 
-  SDL_Haptic   *haptic {};
+  SDL_Haptic *  haptic {};
   SDL_Joystick *joy {};
 
-  int                                   *joy_axes {};
+  int *                                  joy_axes {};
   std::array< uint8_t, SDL_MAX_BUTTONS > joy_buttons {};
 
   typedef void (*on_sdl_key_grab_t)(SDL_Keysym);
@@ -84,7 +85,7 @@ typedef struct sdl_t_ {
   ts_t key_repeat_this_key {};
 
   SDL_GLContext context {}; // Our opengl context handle
-  SDL_Window   *window {};  // Our window handle
+  SDL_Window *  window {};  // Our window handle
 } sdl_t;
 
 #define SDL_KEY_REPEAT_HUNDREDTHS_FIRST 20

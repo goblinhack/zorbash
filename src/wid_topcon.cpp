@@ -718,6 +718,10 @@ void wid_topcon_log(std::string s)
   TRACE_NO_INDENT();
   int chars_per_line = UI_TOPCON_WIDTH;
 
+  if (! TERM_WIDTH) {
+    DIE("No TERM_WIDTH set");
+  }
+
   auto d = split(s, chars_per_line);
 
   if (d) {

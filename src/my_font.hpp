@@ -7,6 +7,8 @@
 #ifndef _MY_FONT_HPP_
 #define _MY_FONT_HPP_
 
+#include <array>
+
 #include "my_fwd.hpp"
 #include "my_sdl.hpp"
 

@@ -7,6 +7,7 @@
 #ifndef _MY_GAME_HPP_
 #define _MY_GAME_HPP_
 
+#include <array>
 #include <list>
 #include <vector>
 
