@@ -374,7 +374,7 @@ public:
   if (! (level)->is_oob(x, y)) {                                                                                     \
     FOR_ALL_THING_PRIO_GROUPS                                                                                        \
     {                                                                                                                \
-      for (auto t : getref(level->all_things_ptr_at[ _group_ ], x, y)) {
+      for (auto t : level->all_things_ptr_at[ _group_ ][ x ][ y ]) {
 
 #define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)
 
@@ -382,7 +382,7 @@ public:
   if (! (level)->is_oob(x, y)) {                                                                                     \
     static Thingp things_to_walk[ MAP_SLOTS ];                                                                       \
     {                                                                                                                \
-      auto _vec_               = getptr(level->all_things_ptr_at[ THING_GROUP_TMP ], x, y);                          \
+      auto _vec_               = &level->all_things_ptr_at[ THING_GROUP_TMP ][ x ][ y ];                             \
       auto things_to_walk_size = _vec_->size();                                                                      \
       for (size_t idx = 0; idx < things_to_walk_size; idx++)                                                         \
         things_to_walk[ idx ] = (*_vec_)[ idx ];                                                                     \
@@ -394,7 +394,7 @@ public:
 #define FOR_TMP_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                 \
   if (! (level)->is_oob(x, y)) {                                                                                     \
     {                                                                                                                \
-      for (auto t : getref(level->all_things_ptr_at[ THING_GROUP_TMP ], x, y)) {
+      for (auto t : level->all_things_ptr_at[ THING_GROUP_TMP ][ x ][ y ]) {
 
 #define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)
 
