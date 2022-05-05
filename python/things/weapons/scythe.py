@@ -16,9 +16,9 @@ def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.collision_hit_360(self, True)
     my.crit_chance_d10000(self, 1000)
     my.damaged_chance_d10000(self, 5)
-    my.collision_hit_360(self, True)
     my.damage_melee_chance_d1000(self, 0, 1000)
     my.damage_melee_dice(self, "3d6")
     my.equip_carry_anim(self, "scythe_carry")

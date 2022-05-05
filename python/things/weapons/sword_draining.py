@@ -16,6 +16,7 @@ def on_owner_attacking_damage_draining(me, owner, victim, x, y, damage):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.attacks_per_round(self, 2)
     my.damaged_chance_d10000(self, 5)
     my.damage_draining_chance_d1000(self, 1, 1000)
     my.damage_draining_dice(self, "1d20")
@@ -51,7 +52,6 @@ def tp_init(name, text_name, short_text_name):
     my.item_width(self, 4)
     my.long_text_description(self, "This magical sword deals additional draining damage to suck the will to live out of your opponents.")
     my.noise_on_dropping(self, 5)
-    my.attacks_per_round(self, 2)
     my.on_owner_attacking_damage_draining_do(self, "me.on_owner_attacking_damage_draining()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_COMMON)
