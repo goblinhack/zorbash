@@ -41,6 +41,11 @@ void Thing::update(void)
   int  carried = 0;
 
   //
+  // Cached as used often
+  //
+  is_gfx_animated = tp()->gfx_animated();
+
+  //
   // If polymorphed, retain the same health
   //
   if (! health()) {

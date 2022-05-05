@@ -335,7 +335,7 @@ void Level::display_pixelart_map_bg_things(void)
     blit_fbo_bind(fbo);
     blit_init();
     glClear(GL_COLOR_BUFFER_BIT);
-    for (auto z = 0; z <= MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
+    for (auto z = 0; z <= MAP_DEPTH_OBJ; z++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
@@ -362,7 +362,8 @@ void Level::display_pixelart_map_bg_things(void)
 
     blit_fbo_bind(fbo);
     blit_init();
-    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z <= MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
+    int z = MAP_DEPTH_OBJ;
+    {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
@@ -390,29 +391,27 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
 
+  FOR_ALL_THING_GROUPS(group)
+  {
+    ;
+    FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t) { t->animate(); }
+    FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
+  }
+
   //
   // Blit the floor
   //
   blit_fbo_bind(fbo);
   blit_init();
 
-  for (auto z = 0; z < MAP_DEPTH_OBJ; z++) {
+  for (auto z = 0; z <= MAP_DEPTH_FLOOR2; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         //
         // NOTE: if level pop/push happens here then we can end up missing this
         // thing in the blit as we are using the unsafe(faster) walker.
         //
-        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
-        {
-          if (z <= MAP_DEPTH_FLOOR2) {
-            t->blit_pixelart(fbo);
-          }
-
-          if (unlikely(t->gfx_animated())) {
-            t->animate();
-          }
-        }
+        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
         FOR_ALL_THINGS_END()
 
         FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_pixelart(fbo); }
@@ -433,7 +432,8 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
   //
   blit_fbo_bind(fbo);
   blit_init();
-  for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH_OBJ; z++) {
+  int z = MAP_DEPTH_OBJ;
+  {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
@@ -461,7 +461,7 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
 
   blit_fbo_bind(fbo);
   blit_init();
-  for (auto z = (int) MAP_DEPTH_OBJ; z <= MAP_DEPTH_LAST_FG_MAP_TYPE; z++) {
+  for (auto z = (int) MAP_DEPTH_OBJ; z <= MAP_DEPTH_OBJ; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
@@ -509,7 +509,7 @@ void Level::display_pixelart_map_fg2_things(int fbo, const int16_t minx, const i
 
   blit_fbo_bind(fbo);
   blit_init();
-  for (auto z = (int) MAP_DEPTH_LAST_FG_MAP_TYPE + 1; z < MAP_DEPTH; z++) {
+  for (auto z = (int) MAP_DEPTH_EXPLOSION_MAJOR; z < MAP_DEPTH; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)

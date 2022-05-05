@@ -18,11 +18,13 @@
 void Level::handle_all_pending_things(int group)
 {
   for (auto &i : all_animated_things_pending_remove[ group ]) {
+    // i.second->con("pending remove");
     all_animated_things[ group ].erase(i.first);
   }
   all_animated_things_pending_remove[ group ] = {};
 
   for (auto &i : all_animated_things_pending_add[ group ]) {
+    // i.second->con("pending add");
     all_animated_things[ group ].insert(i);
   }
   all_animated_things_pending_add[ group ] = {};

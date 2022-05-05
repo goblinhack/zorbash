@@ -87,15 +87,15 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   tp_id = tpp->id;
   tp_or_update();
 
-  /*
-   * Cache this flag so that polymorphing works
-   */
-  is_the_player = tp()->is_player();
-
-  /*
-   * Cached as used often
-   */
+  //
+  // Cached as used often
+  //
   is_gfx_animated = tp()->gfx_animated();
+
+  //
+  // Cache this flag so that polymorphing works
+  //
+  is_the_player = tp()->is_player();
 
   //
   // Make sure we have the ability to carry items.

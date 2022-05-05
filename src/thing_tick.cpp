@@ -282,6 +282,18 @@ void Thing::tick(void)
   dbg("Tick %d", game->tick_current);
   TRACE_AND_INDENT();
 
+  //
+  // This is expensive to calculate when moving, but it should not
+  // change during the tick, so do it now.
+  //
+  auto infop = maybe_infop();
+  if (infop) {
+    move_speed_curr_set(move_speed_total());
+  }
+
+  //
+  // Allow incremental movement
+  //
   update_interpolated_position();
 
   if (unlikely(is_dead)) {
