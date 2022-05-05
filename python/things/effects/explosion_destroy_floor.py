@@ -26,7 +26,7 @@ def tp_init(name):
 
     delay = 50
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
             tile="nothing")
     my.tile(self, "explosion_fire.1", delay_ms=delay)
     my.tile(self, "explosion_fire.2", delay_ms=delay)

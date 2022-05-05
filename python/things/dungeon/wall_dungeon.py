@@ -56,99 +56,99 @@ def tp_init(
 
     if left1_tiles is not None:
         for t in left1_tiles:
-            my.left1_tile(self, t)
+            my.left1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.left1_tile(self, left1_tile=name)
+        my.left1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", left1_tile=name)
 
     if right1_tiles is not None:
         for t in right1_tiles:
-            my.right1_tile(self, t)
+            my.right1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.right1_tile(self, right1_tile=name)
+        my.right1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", right1_tile=name)
 
     if top1_tiles is not None:
         for t in top1_tiles:
-            my.top1_tile(self, t)
+            my.top1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.top1_tile(self, top1_tile=name)
+        my.top1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", top1_tile=name)
 
     if bot1_tiles is not None:
         for t in bot1_tiles:
-            my.bot1_tile(self, t)
+            my.bot1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.bot1_tile(self, bot1_tile=name)
+        my.bot1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", bot1_tile=name)
 
     if tl1_tiles is not None:
         for t in tl1_tiles:
-            my.tl1_tile(self, t)
+            my.tl1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.tl1_tile(self, tl1_tile=name)
+        my.tl1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tl1_tile=name)
 
     if tr1_tiles is not None:
         for t in tr1_tiles:
-            my.tr1_tile(self, t)
+            my.tr1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.tr1_tile(self, tr1_tile=name)
+        my.tr1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tr1_tile=name)
 
     if bl1_tiles is not None:
         for t in bl1_tiles:
-            my.bl1_tile(self, t)
+            my.bl1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.bl1_tile(self, bl1_tile=name)
+        my.bl1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", bl1_tile=name)
 
     if br1_tiles is not None:
         for t in br1_tiles:
-            my.br1_tile(self, t)
+            my.br1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.br1_tile(self, br1_tile=name)
+        my.br1_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", br1_tile=name)
 
     if left2_tiles is not None:
         for t in left2_tiles:
-            my.left2_tile(self, t)
+            my.left2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.left2_tile(self, left2_tile=name)
+        my.left2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", left2_tile=name)
 
     if right2_tiles is not None:
         for t in right2_tiles:
-            my.right2_tile(self, t)
+            my.right2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.right2_tile(self, right2_tile=name)
+        my.right2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", right2_tile=name)
 
     if top2_tiles is not None:
         for t in top2_tiles:
-            my.top2_tile(self, t)
+            my.top2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.top2_tile(self, top2_tile=name)
+        my.top2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", top2_tile=name)
 
     if bot2_tiles is not None:
         for t in bot2_tiles:
-            my.bot2_tile(self, t)
+            my.bot2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.bot2_tile(self, bot2_tile=name)
+        my.bot2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", bot2_tile=name)
 
     if tl2_tiles is not None:
         for t in tl2_tiles:
-            my.tl2_tile(self, t)
+            my.tl2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.tl2_tile(self, tl2_tile=name)
+        my.tl2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tl2_tile=name)
 
     if tr2_tiles is not None:
         for t in tr2_tiles:
-            my.tr2_tile(self, t)
+            my.tr2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.tr2_tile(self, tr2_tile=name)
+        my.tr2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tr2_tile=name)
 
     if bl2_tiles is not None:
         for t in bl2_tiles:
-            my.bl2_tile(self, t)
+            my.bl2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.bl2_tile(self, bl2_tile=name)
+        my.bl2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", bl2_tile=name)
 
     if br2_tiles is not None:
         for t in br2_tiles:
-            my.br2_tile(self, t)
+            my.br2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", tile=t)
     else:
-        my.br2_tile(self, br2_tile=name)
+        my.br2_tile(self, ascii_fg_char="#", ascii_bg_col="gray", ascii_fg_col="black", br2_tile=name)
 
     my.tp_update(self)
 

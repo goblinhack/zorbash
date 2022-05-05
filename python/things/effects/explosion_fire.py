@@ -26,7 +26,7 @@ def tp_init(name):
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
             tile="nothing")
     delay = 25
     my.tile(self, "explosion_fire.1", delay_ms=delay)
