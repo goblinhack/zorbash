@@ -2,6 +2,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- click on door does not attack                                                                                                                -->
+<!-- cannot seem to hit bat                                                                                                                       -->
+<!-- keep hitting wall when targetting moving bat                                                                                                 -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
