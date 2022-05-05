@@ -252,7 +252,7 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
   /////////////////////////////////////////////////////////////////////
   blit_init();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
+  for (int z = MAP_DEPTH_OBJ; z < MAP_DEPTH; z++) {
     for (auto y = miny; y < maxy - 1; y++) {
       for (auto x = minx; x < maxx - 1; x++) {
         if (likely(! get_no_check(tile_map, x, y + 1))) {

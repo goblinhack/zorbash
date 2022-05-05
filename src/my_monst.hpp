@@ -130,6 +130,7 @@ public:
   int monst_state         = {};
   int movement_remaining  = {};
   int move_speed_mod      = {};
+  int move_speed_curr     = {};
   int shove_strength_mod  = {};
   int necrosis            = {};
   int noise               = {};

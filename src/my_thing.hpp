@@ -1483,6 +1483,7 @@ public:
   int move_speed_mod(void);
   int move_speed_total(void);
   int move_speed(void);
+  int move_speed_curr(void);
   int necrotized_amount_decr(int);
   int necrotized_amount_decr(void);
   int necrotized_amount_incr(int);
@@ -2108,13 +2109,13 @@ public:
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);
+  void blit_ascii(point tl, point br, point p);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
   void blit_floor_chasm(point tl, point br, const ThingTiles *tiles);
   void blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep tile, color c, const bool reflection);
-  void blit_pixelart(int fbo);
-  void blit_ascii(point tl, point br, point p);
   void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
+  void blit_pixelart(int fbo);
   void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_shadow(const Tpp &tp, const Tilep &tile, const point tl, const point br);
   void blit_text(std::string const &, color c, point tl, point br);
@@ -2249,6 +2250,7 @@ public:
   void move_set_dir_from_delta(point);
   void move_set_dir_from_dest_or_delta(point delta);
   void move_set_dir_from_target(Thingp target);
+  void move_speed_curr_set(int);
   void move_to_immediately(point to);
   void move_to(point to);
   void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
@@ -2350,8 +2352,8 @@ public:
   void waiting(void);
   void wake(const std::string &reason);
   void water_tick(void);
-  void weapon_sheath(void);
   void weapon_check_for_damage(Thingp weapon, Thingp victim);
+  void weapon_sheath(void);
   void wobble(float wobble);
   void wobble_set(float);
 

@@ -123,6 +123,9 @@ void sdl_loop(void)
     bool update_slow      = (ts_now - ui_ts_slow_last >= UI_UPDATE_SLOW_MS);
     bool update_fast      = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
 
+    //
+    // In ascii mode update the screen more slowly to save CPU
+    //
     if (unlikely(update_very_slow)) {
       ui_ts_very_slow_last = ts_now;
 
@@ -176,9 +179,7 @@ void sdl_loop(void)
       // Clean up dead widgets.
       //
       pcg_random_allowed = false;
-      {
-        wid_gc_all();
-      }
+      wid_gc_all();
       pcg_random_allowed = true;
 
       //
@@ -239,11 +240,17 @@ void sdl_loop(void)
         if (likely(game->level != nullptr)) {
           if (found || game->tick_begin_ms) {
             game->level->tick();
-            pcg_random_allowed = false;
-            wid_display_all();
-            pcg_random_allowed = true;
           }
         }
+      }
+
+      //
+      // If the user has moved the mouse or we're in the intro, update the widgets.
+      //
+      if (found || ! game->level) {
+        pcg_random_allowed = false;
+        wid_display_all();
+        pcg_random_allowed = true;
       }
     }
 

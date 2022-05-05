@@ -181,3 +181,17 @@ int Thing::move_speed_mod_incr(void)
   auto n = (infop()->move_speed_mod++);
   return n;
 }
+
+int Thing::move_speed_curr(void)
+{
+  TRACE_NO_INDENT();
+  auto n = infop();
+  return n->move_speed_curr;
+}
+
+void Thing::move_speed_curr_set(int speed)
+{
+  TRACE_NO_INDENT();
+  auto n             = infop();
+  n->move_speed_curr = speed;
+}

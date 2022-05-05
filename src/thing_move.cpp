@@ -631,8 +631,14 @@ void Thing::update_interpolated_position(void)
   // Handle fast moving things
   //
   if (level->player) {
-    auto speed        = move_speed_total();
-    auto player_speed = level->player->move_speed_total();
+    auto player_speed = level->player->move_speed_curr();
+
+    int  speed = 0;
+    auto infop = maybe_infop();
+    if (infop) {
+      speed = move_speed_curr();
+    }
+
     if (speed) {
       step *= (((float) speed)) / player_speed;
       if (step > 1) {
