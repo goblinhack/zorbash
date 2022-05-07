@@ -154,17 +154,29 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button)
               if (! player->close_door(t)) {
                 IF_DEBUG2 { player->log("Failed to close door"); }
               }
+
+              //
+              // Not sure why closing a door would fail, but I don't think we should
+              // fall through to attack.
+              //
               return true;
             }
 
+            //
+            // Try to open the door with a key.
+            //
             if (t->is_door() && ! t->is_open) {
               IF_DEBUG2 { player->log("Open door"); }
               TRACE_AND_INDENT();
               game->tick_begin("open door");
-              if (! player->open_door(t)) {
+              if (player->open_door(t)) {
                 IF_DEBUG2 { player->log("Failed to open door"); }
+                return true;
               }
-              return true;
+
+              //
+              // Fall through to attack the door (if opening failed or we had no key).
+              //
             }
 
             //
