@@ -11,7 +11,7 @@ import time
 # import logging
 # import datetime
 
-timeme_enabled = true
+timeme_enabled = True
 
 #
 # Unused
