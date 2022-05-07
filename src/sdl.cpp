@@ -862,13 +862,13 @@ void config_game_pix_zoom_update(void)
   if (TERM_WIDTH >= TERM_WIDTH_MAX) {
     LOG("SDL: Exceeded console hit max width  : %d", TERM_WIDTH);
     TERM_WIDTH                  = TERM_WIDTH_MAX;
-    game->config.ascii_gl_width = ((float) game->config.ui_pix_width) / ((float) TERM_WIDTH);
+    game->config.ascii_gl_width = ceil(((float) game->config.ui_pix_height) / ((float) TERM_WIDTH));
   }
 
   if (TERM_HEIGHT >= TERM_HEIGHT_MAX) {
     LOG("SDL: Exceeded console hit max height : %d", TERM_HEIGHT);
     TERM_HEIGHT                  = TERM_HEIGHT_MAX;
-    game->config.ascii_gl_height = ((float) game->config.ui_pix_height) / ((float) TERM_HEIGHT);
+    game->config.ascii_gl_height = ceil(((float) game->config.ui_pix_height) / ((float) TERM_HEIGHT));
   }
 
   if (g_opt_ascii) {
@@ -877,13 +877,6 @@ void config_game_pix_zoom_update(void)
     font_ui = font_pixelart_large;
   }
 
-  if (g_opt_ascii) {
-    game->config.ascii_gl_width  = UI_FONT_ASCII_WIDTH / 10;
-    game->config.ascii_gl_height = UI_FONT_ASCII_HEIGHT / 10;
-  } else {
-    game->config.ascii_gl_width  = UI_FONT_LARGE_WIDTH;
-    game->config.ascii_gl_height = UI_FONT_LARGE_HEIGHT * 2;
-  }
   game->config.ascii_gl_width  = ceil(((float) game->config.ui_pix_width) / ((float) TERM_WIDTH));
   game->config.ascii_gl_height = ceil(((float) game->config.ui_pix_height) / ((float) TERM_HEIGHT));
 
