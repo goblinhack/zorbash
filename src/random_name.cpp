@@ -23,9 +23,4 @@ std::string random_name(int len)
   }
 }
 
-uint32_t string_to_hash(const std::string &str)
-{
-  std::hash< std::string > hasher;
-  uint32_t                 hashed = static_cast< uint32_t >(hasher(str) % 0xffffffff); // returns std::size_t
-  return hashed;
-}
+uint32_t string_to_hash(const std::string &str) { return static_cast< uint32_t >(std::hash< std::string > {}(str)); }
