@@ -11,7 +11,7 @@ import time
 # import logging
 # import datetime
 
-timeme_enabled = True
+timeme_enabled = False
 
 #
 # Unused
@@ -62,15 +62,16 @@ def timeme(py_function):
 
 
 def find_plugins(directory, pattern):
+    all_files = []
     for root, dirs, files in os.walk(directory):
-        #
-        # Ensure walk order is the same across platforms
-        #
-        files.sort()
         for f in sorted(files):
             if fnmatch.fnmatch(f, pattern):
                 filename = os.path.normcase(os.path.join(root, f))
-                yield filename
+                all_files.append(filename)
+
+    all_files.sort()
+    for f in all_files:
+        yield f
 
 
 @timeme
