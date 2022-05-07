@@ -59,7 +59,6 @@ void Game::set_seed(void)
   }
   seed = string_to_hash(seed_name);
   pcg_srand(seed);
-  CON("Creating level, name '%s', seed %lu", seed_name.c_str(), seed);
 }
 
 void Game::start(void)
