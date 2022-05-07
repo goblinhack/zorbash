@@ -63,6 +63,10 @@ def timeme(py_function):
 
 def find_plugins(directory, pattern):
     for root, dirs, files in os.walk(directory):
+        #
+        # Ensure walk order is the same across platforms
+        #
+        files.sort()
         for f in sorted(files):
             if fnmatch.fnmatch(f, pattern):
                 filename = os.path.normcase(os.path.join(root, f))
