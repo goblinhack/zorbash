@@ -31,7 +31,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     delay = 2500
     for t in tiles:
         my.tile(self,
-                ascii_fg_char=">", ascii_bg_col="", ascii_fg_col="white",
+                ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="white",
                 tile=t, delay_ms=delay)
 
     my.tp_update(self)

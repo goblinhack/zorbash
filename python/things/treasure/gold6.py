@@ -34,7 +34,7 @@ def gold_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_none=True)
 
     my.tp_update(self)

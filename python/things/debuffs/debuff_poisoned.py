@@ -27,7 +27,7 @@ def tp_init(name, text_name):
     my.text_description(self, "Poisoned debuff.")
     # my.z_prio(self, my.MAP_PRIO_NORMAL) # End marker for fixup.sh
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="debuff_poisoned")
     my.tp_update(self)
 

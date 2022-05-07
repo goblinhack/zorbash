@@ -21,7 +21,7 @@ def chasm_init(name, text_name, tiles=[]):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tile(self,
-            ascii_fg_char="four_dots", ascii_bg_col="", ascii_fg_col="steelblue",
+            ascii_fg_char="four_dots", ascii_bg_col_name="", ascii_fg_col_name="steelblue",
             tile="nothing")
     my.tp_update(self)
 

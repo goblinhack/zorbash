@@ -18,14 +18,14 @@ def tp_init(name):
 
     delay = 200  # too fast and you don't see it
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=delay)
     delay = 100  # too fast and you don't see it
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
             tile=name + ".4",

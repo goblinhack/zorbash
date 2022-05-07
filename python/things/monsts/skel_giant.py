@@ -107,144 +107,144 @@ def tp_init(name, text_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_left=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", is_dir_left=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", is_dir_left=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", is_dir_left=True, is_moving=True, delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_up=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", is_dir_up=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", is_dir_up=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", is_dir_up=True, is_moving=True, delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_down=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", is_dir_down=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", is_dir_down=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", is_dir_down=True, is_moving=True, delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_right=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", is_dir_right=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", is_dir_right=True, is_moving=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", is_dir_right=True, is_moving=True, delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_left=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", is_dir_left=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", is_dir_left=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", is_dir_left=True, delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_up=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", is_dir_up=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", is_dir_up=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", is_dir_up=True, delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_down=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", is_dir_down=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", is_dir_down=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", is_dir_down=True, delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_right=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", is_dir_right=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", is_dir_right=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", is_dir_right=True, delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", is_dir_none=True, delay_ms=delay)
 
     delay = 20
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".dead.1", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".dead.2", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".dead.3", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".dead.4", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".dead.4", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".dead.3", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".dead.2", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
             tile=name + ".dead.1",

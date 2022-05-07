@@ -21,13 +21,13 @@ def init1(name, text_name):
 
     delay = 20
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=delay, is_dir_down=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=delay, is_dir_down=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", delay_ms=delay, is_dir_down=True)
     my.tile(self,
             tile=name + ".4",
@@ -37,13 +37,13 @@ def init1(name, text_name):
             is_dead_on_end_of_anim=True)
 
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=delay, is_dir_up=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=delay, is_dir_up=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", delay_ms=delay, is_dir_up=True)
     my.tile(self,
             tile=name + ".4",
@@ -53,13 +53,13 @@ def init1(name, text_name):
             is_dead_on_end_of_anim=True)
 
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=delay, is_dir_left=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=delay, is_dir_left=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", delay_ms=delay, is_dir_left=True)
     my.tile(self,
             tile=name + ".4",
@@ -69,13 +69,13 @@ def init1(name, text_name):
             is_dead_on_end_of_anim=True)
 
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=delay, is_dir_right=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=delay, is_dir_right=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", delay_ms=delay, is_dir_right=True)
     my.tile(self,
             tile=name + ".4",
@@ -85,13 +85,13 @@ def init1(name, text_name):
             is_dead_on_end_of_anim=True)
 
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=delay, is_dir_none=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=delay, is_dir_none=True)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", delay_ms=delay, is_dir_none=True)
     my.tile(self,
             tile=name + ".4",

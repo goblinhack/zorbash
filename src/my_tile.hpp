@@ -30,12 +30,13 @@ public:
   Tile(const class Tile *tile);
 
   std::string name;
-  wchar_t     ascii_fg_char = {};
-  wchar_t     ascii_bg_char = {};
-  std::string ascii_fg_col;
-  std::string ascii_bg_col;
-  color       ascii_fg_col_col;
-  color       ascii_bg_col_col;
+  wchar_t     ascii_fg_char {};
+  wchar_t     ascii_bg_char {};
+  std::string ascii_fg_col_name;
+  std::string ascii_bg_col_name;
+  color       ascii_fg_col_value;
+  color       ascii_bg_col_value;
+  bool        ascii_set {};
 
   //
   // Grabbed by a template

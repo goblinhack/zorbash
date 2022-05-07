@@ -195,15 +195,15 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
   char *tile_name         = nullptr;
   char *ascii_fg_char_str = nullptr;
   char *ascii_bg_char_str = nullptr;
-  char *ascii_bg_col      = nullptr;
-  char *ascii_fg_col      = nullptr;
+  char *ascii_bg_col_name = nullptr;
+  char *ascii_fg_col_name = nullptr;
 
   static char *kwlist[] = {(char *) "class",
                            (char *) "tile",
                            (char *) "ascii_fg_char",
                            (char *) "ascii_bg_char",
-                           (char *) "ascii_bg_col",
-                           (char *) "ascii_fg_col",
+                           (char *) "ascii_bg_col_name",
+                           (char *) "ascii_fg_col_name",
                            (char *) "delay_ms",
                            (char *) "frame",
                            (char *) "is_moving",
@@ -237,10 +237,10 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
 
   if (! PyArg_ParseTupleAndKeywords(
           args, keywds, "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &tile_name, &ascii_fg_char_str,
-          &ascii_bg_char_str, &ascii_bg_col, &ascii_fg_col, &delay_ms, &frame, &is_moving, &is_jumping, &begin_jump,
-          &is_outline, &left, &right, &up, &down, &none, &is_yyy5, &is_yyy6, &is_yyy7, &is_yyy8, &is_yyy9,
-          &is_invisible, &is_hp_25_percent, &is_hp_50_percent, &is_hp_75_percent, &is_hp_100_percent, &is_in_water,
-          &is_sleeping, &is_open, &is_dead, &is_end_of_anim, &is_dead_on_end_of_anim, &is_resurrecting,
+          &ascii_bg_char_str, &ascii_bg_col_name, &ascii_fg_col_name, &delay_ms, &frame, &is_moving, &is_jumping,
+          &begin_jump, &is_outline, &left, &right, &up, &down, &none, &is_yyy5, &is_yyy6, &is_yyy7, &is_yyy8,
+          &is_yyy9, &is_invisible, &is_hp_25_percent, &is_hp_50_percent, &is_hp_75_percent, &is_hp_100_percent,
+          &is_in_water, &is_sleeping, &is_open, &is_dead, &is_end_of_anim, &is_dead_on_end_of_anim, &is_resurrecting,
           &is_alive_on_end_of_anim)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -377,23 +377,27 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
       tile->is_moving = is_moving;
 
       if (ascii_fg_char_str) {
+        tile->ascii_set     = true;
         tile->ascii_fg_char = unicode_alias_to_char(ascii_fg_char_str);
       }
 
       if (ascii_bg_char_str) {
+        tile->ascii_set     = true;
         tile->ascii_bg_char = unicode_alias_to_char(ascii_bg_char_str);
       }
 
-      tile->ascii_bg_col_col = COLOR_NONE;
-      if (ascii_bg_col && *ascii_bg_col) {
-        tile->ascii_bg_col     = ascii_bg_col;
-        tile->ascii_bg_col_col = color_find(ascii_bg_col);
+      tile->ascii_bg_col_value = COLOR_NONE;
+      if (ascii_bg_col_name && *ascii_bg_col_name) {
+        tile->ascii_set          = true;
+        tile->ascii_bg_col_name  = ascii_bg_col_name;
+        tile->ascii_bg_col_value = color_find(ascii_bg_col_name);
       }
 
-      tile->ascii_fg_col_col = WHITE;
-      if (ascii_fg_col && *ascii_fg_col) {
-        tile->ascii_fg_col     = ascii_fg_col;
-        tile->ascii_fg_col_col = color_find(ascii_fg_col);
+      tile->ascii_fg_col_value = WHITE;
+      if (ascii_fg_col_name && *ascii_fg_col_name) {
+        tile->ascii_set          = true;
+        tile->ascii_fg_col_name  = ascii_fg_col_name;
+        tile->ascii_fg_col_value = color_find(ascii_fg_col_name);
       }
 
       tile->is_yyy5                = is_yyy5;

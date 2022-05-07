@@ -91,32 +91,32 @@ def tp_init(name, text_name, short_text_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + "_awake.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + "_awake.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + "_awake.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + "_awake.4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + "_dead.1", delay_ms=delay, is_dead=True)
     delay = 500
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + "_asleep.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + "_asleep.2", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + "_asleep.3", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + "_asleep.2", is_sleeping=True, delay_ms=delay)
 
     my.tp_update(self)

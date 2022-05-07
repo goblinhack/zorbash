@@ -31,7 +31,7 @@ def lava_init(name, text_name, tiles=[]):
     delay = 200
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="L", ascii_bg_col="orange", ascii_fg_col="white",
+                ascii_fg_char="L", ascii_bg_col_name="orange", ascii_fg_col_name="white",
                 tile=t, delay_ms=delay)
 
     my.tp_update(self)

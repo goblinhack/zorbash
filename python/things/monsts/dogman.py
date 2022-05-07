@@ -118,22 +118,22 @@ def tp_init(name, text_name):
 
     delay = 900
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=delay, frame=1)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=delay, frame=2)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", delay_ms=delay, frame=3)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", delay_ms=delay, frame=4)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".5", delay_ms=delay, frame=5)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col="", ascii_fg_col="white",
+            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".6", delay_ms=delay, frame=6)
     my.tile(self, "dogman.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self, "dogman.sleeping.2", is_sleeping=True, delay_ms=delay)
