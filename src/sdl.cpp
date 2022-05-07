@@ -884,8 +884,8 @@ void config_game_pix_zoom_update(void)
     game->config.ascii_gl_width  = UI_FONT_LARGE_WIDTH;
     game->config.ascii_gl_height = UI_FONT_LARGE_HEIGHT * 2;
   }
-  game->config.ascii_gl_width  = game->config.ui_pix_width / TERM_WIDTH;
-  game->config.ascii_gl_height = game->config.ui_pix_height / TERM_HEIGHT;
+  game->config.ascii_gl_width  = ceil(((float) game->config.ui_pix_width) / ((float) TERM_WIDTH));
+  game->config.ascii_gl_height = ceil(((float) game->config.ui_pix_height) / ((float) TERM_HEIGHT));
 
   CON("SDL: Terminal");
   CON("SDL: - ascii gl size        : %ux%u", game->config.ascii_gl_width, game->config.ascii_gl_height);
