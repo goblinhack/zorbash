@@ -862,7 +862,7 @@ void config_game_pix_zoom_update(void)
   if (TERM_WIDTH >= TERM_WIDTH_MAX) {
     LOG("SDL: Exceeded console hit max width  : %d", TERM_WIDTH);
     TERM_WIDTH                  = TERM_WIDTH_MAX;
-    game->config.ascii_gl_width = ceil(((float) game->config.ui_pix_height) / ((float) TERM_WIDTH));
+    game->config.ascii_gl_width = floor(((float) game->config.ui_pix_height) / ((float) TERM_WIDTH));
   }
 
   if (TERM_HEIGHT >= TERM_HEIGHT_MAX) {
@@ -877,7 +877,7 @@ void config_game_pix_zoom_update(void)
     font_ui = font_pixelart_large;
   }
 
-  game->config.ascii_gl_width  = ceil(((float) game->config.ui_pix_width) / ((float) TERM_WIDTH));
+  game->config.ascii_gl_width  = floor(((float) game->config.ui_pix_width) / ((float) TERM_WIDTH));
   game->config.ascii_gl_height = ceil(((float) game->config.ui_pix_height) / ((float) TERM_HEIGHT));
 
   CON("SDL: Terminal");
