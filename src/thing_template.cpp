@@ -70,6 +70,7 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_name, const
   if (tp_find(name)) {
     ERR("Thing template name [%s] already used", name.c_str());
   }
+  CON("Load [%s] ", name.c_str());
 
   auto tp = new Tp();
   tp->name_set(name);
