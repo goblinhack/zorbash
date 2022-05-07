@@ -32,7 +32,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
 
   game->seed = seedval;
 
-  CON("LEVEL CREATE SRAND %d", seedval);
+  CON("LEVEL CREATE SRAND game seed %u %u %u %u %u ", game->seed, seedval, world_at.x, world_at.y, world_at.z);
   pcg_srand(seedval);
 
   is_starting = true;
