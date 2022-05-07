@@ -5181,6 +5181,14 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
   TRACE_AND_INDENT();
   int got_one = false;
 
+  //
+  // To avoid lag, just grab the current mouse position.
+  //
+  SDL_GetMouseState(&x, &y);
+
+  //
+  // Map to ascii
+  //
   pixel_to_ascii(&x, &y);
   if (! ascii_ok(x, y)) {
     return;
