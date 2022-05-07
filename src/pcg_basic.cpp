@@ -78,11 +78,7 @@ void pcg32_srandom_r(pcg32_random_t *rng, uint64_t initstate, uint64_t initseq)
   pcg32_random_r(rng);
 }
 
-void pcg32_srandom(uint64_t seed, uint64_t seq)
-{
-  LOG("SRAND %lu", seed);
-  pcg32_srandom_r(&pcg32_global, seed, seq);
-}
+void pcg32_srandom(uint64_t seed, uint64_t seq) { pcg32_srandom_r(&pcg32_global, seed, seq); }
 
 // pcg32_random()
 // pcg32_random_r(rng)
