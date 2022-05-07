@@ -26,7 +26,11 @@ void sdl_loop(void)
   TRACE_NO_INDENT();
   LOG("SDL: main loop");
 
-  SDL_Event events[ 10 ];
+  //
+  // Keep this low to avoid too much lag when processing mouse motion
+  // events, that redraw the cursor path.
+  //
+  SDL_Event events[ 2 ];
   int       found;
   int       i;
   int       frames = 0;
@@ -192,10 +196,19 @@ void sdl_loop(void)
 
       found = SDL_PeepEvents(events, ARRAY_SIZE(events), SDL_GETEVENT, SDL_QUIT, SDL_LASTEVENT);
 
+      //
+      // Only process one mouse motion event; and when we do we only look at the latest
+      // mouse position, to avoid perception of lag. Mouse motion events can be expensive
+      // as we redraw the cursor path.
+      //
+      bool processed_mouse_motion_event = false;
       for (i = 0; i < found; ++i) {
-        sdl_event(&events[ i ]);
+        sdl_event(&events[ i ], processed_mouse_motion_event);
       }
 
+      //
+      // Handle key auto repeat
+      //
       sdl_key_repeat_events();
 
       //
@@ -233,7 +246,6 @@ void sdl_loop(void)
 
       //
       // If the user has moved the mouse, tick to allow the cursor to move.
-      //
       // Ot if a tick has started, tick quickly.
       //
       if (likely(! g_errored)) {

@@ -47,7 +47,7 @@ int sdl_filter_events(void *userdata, SDL_Event *event)
   }
 }
 
-void sdl_event(SDL_Event *event)
+void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
 {
   TRACE_NO_INDENT();
   SDL_Keysym *key;
@@ -174,7 +174,10 @@ void sdl_event(SDL_Event *event)
         //
         wid_mouse_visible = 1;
         sdl.mouse_tick++;
-        wid_mouse_motion(sdl.mouse_x, sdl.mouse_y, 0, 0, -sdl.wheel_x, sdl.wheel_y);
+        if (! processed_mouse_motion_event) {
+          wid_mouse_motion(sdl.mouse_x, sdl.mouse_y, 0, 0, -sdl.wheel_x, sdl.wheel_y);
+          processed_mouse_motion_event = true;
+        }
         break;
       }
     case SDL_MOUSEMOTION:
@@ -186,7 +189,10 @@ void sdl_event(SDL_Event *event)
 
         wid_mouse_visible = 1;
         sdl.mouse_tick++;
-        wid_mouse_motion(sdl.mouse_x, sdl.mouse_y, event->motion.xrel, event->motion.yrel, 0, 0);
+        if (! processed_mouse_motion_event) {
+          wid_mouse_motion(sdl.mouse_x, sdl.mouse_y, event->motion.xrel, event->motion.yrel, 0, 0);
+          processed_mouse_motion_event = true;
+        }
         break;
       }
     case SDL_MOUSEBUTTONDOWN:

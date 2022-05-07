@@ -48,6 +48,9 @@ void Thing::blit_ascii(point tl, point br, point p)
     return;
   }
 
+  //
+  // This is for walls that can be composed of multiple tiles.
+  //
   if (! tile->ascii_set) {
     auto tmap = &tpp->tiles;
     tile      = tile_first(tmap);
