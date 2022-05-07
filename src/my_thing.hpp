@@ -192,12 +192,12 @@ public:
   uint64_t is_facing_left                               : 1 {};
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
+  uint64_t is_gfx_animated                              : 1 {};
   uint64_t is_hidden                                    : 1 {};
   uint64_t is_hungry                                    : 1 {};
   uint64_t is_in_lava                                   : 1 {};
   uint64_t is_in_water                                  : 1 {};
   uint64_t is_jumping                                   : 1 {};
-  uint64_t is_teleporting                               : 1 {};
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
   uint64_t is_offscreen                                 : 1 {};
   uint64_t is_open                                      : 1 {};
@@ -210,6 +210,7 @@ public:
   uint64_t is_scheduled_for_jump_end                    : 1 {};
   uint64_t is_sleeping                                  : 1 {};
   uint64_t is_starving                                  : 1 {};
+  uint64_t is_teleporting                               : 1 {};
   uint64_t is_the_grid                                  : 1 {}; // is the backbone of the level
   uint64_t is_the_player                                : 1 {};
   uint64_t is_waiting                                   : 1 {}; // is waiting on this tick
@@ -230,10 +231,10 @@ public:
   uint64_t i_set_is_brazier                       : 1 {};
   uint64_t i_set_is_bridge                        : 1 {};
   uint64_t i_set_is_chasm                         : 1 {};
+  uint64_t i_set_is_combustible                   : 1 {};
   uint64_t i_set_is_corpse                        : 1 {};
   uint64_t i_set_is_corridor                      : 1 {};
   uint64_t i_set_is_cursor_path_hazard_for_player : 1 {};
-  uint64_t i_set_is_combustible                   : 1 {};
   uint64_t i_set_is_deep_water                    : 1 {};
   uint64_t i_set_is_descend_dungeon               : 1 {};
   uint64_t i_set_is_descend_sewer                 : 1 {};
@@ -292,7 +293,6 @@ public:
   uint64_t debug                 : 1 {};
   uint64_t is_being_dropped      : 1 {};
   uint64_t is_blitted            : 1 {};
-  uint64_t is_gfx_animated       : 1 {};
   uint64_t inited_tiles          : 1 {};
   uint64_t has_external_particle : 1 {}; // current in motion particle
   uint64_t has_internal_particle : 1 {}; // current in motion particle

@@ -50,7 +50,6 @@ public:
   uint32_t ui_gfx_term_height   = {};
   uint32_t ui_gfx_term_width    = {};
 
-  bool ascii_mode             = {};
   bool debug_mode             = {};
   bool fps_counter            = {};
   bool gfx_allow_highdpi      = {};

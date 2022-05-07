@@ -22,7 +22,6 @@ void Config::fini(void) { TRACE_AND_INDENT(); }
 void Config::reset(void)
 {
   TRACE_AND_INDENT();
-  ascii_mode            = g_opt_ascii;
   debug_mode            = false;
   fps_counter           = false;
   game_pix_scale_height = {};
