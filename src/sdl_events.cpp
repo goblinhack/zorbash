@@ -165,6 +165,10 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         sdl.wheel_x = event->wheel.x;
         sdl.wheel_y = event->wheel.y;
 
+#ifdef __APPLE__
+        sdl.wheel_x = -sdl.wheel_x;
+#endif
+
         sdl.wheel_x *= accel;
         sdl.wheel_y *= accel;
 
