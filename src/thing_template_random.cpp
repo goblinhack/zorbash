@@ -368,7 +368,10 @@ static Tpp tp_get_with_rarity_filter(Tpidmap &m)
 static Tpp tp_get_with_no_rarity_filter(Tpidmap &m)
 {
   TRACE_NO_INDENT();
-  return get(m, pcg_rand() % m.size());
+  auto index = pcg_rand() % m.size();
+  auto tp    = get(m, index);
+  CON("RAND %lu %s", index, tp->name().c_str());
+  return tp;
 }
 
 Tpp tp_random_monst(void)
