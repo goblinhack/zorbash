@@ -21,6 +21,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
   if (player) {
     TOPCON("A new dungeon level is coming into being...");
   }
+  CON("DUNG RAND %d", pcg32_random());
 
   is_level_type_dungeon = true;
 
