@@ -34,28 +34,28 @@ def key_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".1", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".2", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".3", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".4", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".5", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".6", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".7", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="yellow",
+            ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".8", delay_ms=100)
 
     my.tp_update(self)
