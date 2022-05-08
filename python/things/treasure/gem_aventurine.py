@@ -30,13 +30,13 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="diamond", ascii_bg_col_name="", ascii_fg_col_name="forestgreen",
             tile=name + ".1", is_dir_none=True, delay_ms=2000)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="diamond", ascii_bg_col_name="", ascii_fg_col_name="forestgreen",
             tile=name + ".2", is_dir_none=True, delay_ms=50)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="diamond", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".3", is_dir_none=True, delay_ms=50)
 
     my.tp_update(self)

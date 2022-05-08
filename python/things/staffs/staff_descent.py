@@ -85,22 +85,22 @@ def tp_init(name, text_name, short_text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".5", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".6", delay_ms=100)
 
     my.tp_update(self)
