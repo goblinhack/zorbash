@@ -14,13 +14,10 @@ def tp_init(name):
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="nothing")
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=50)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=50, is_end_of_anim=True, is_dead_on_end_of_anim=True)
 
     my.tp_update(self)

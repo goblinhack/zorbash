@@ -41,7 +41,7 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="down_triangle", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="bag_s", delay_ms=1000)
     my.tp_update(self)
 

@@ -36,28 +36,28 @@ def gold_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".1", is_dir_none=True, delay_ms=50)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".2", is_dir_none=True, delay_ms=50)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".3", is_dir_none=True, delay_ms=50)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".4", is_dir_none=True, delay_ms=50)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".5", is_dir_none=True, delay_ms=50)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".6", is_dir_none=True, delay_ms=50)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".7", is_dir_none=True, delay_ms=50)
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="yellow",
             tile=name + ".8", is_dir_none=True, delay_ms=50)
 
     my.tp_update(self)
