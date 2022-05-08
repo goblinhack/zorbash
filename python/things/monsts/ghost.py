@@ -75,17 +75,39 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     delay = 200
-    my.tile(self, "ghost.1", delay_ms=delay)
-    my.tile(self, "ghost.2", delay_ms=delay)
-    my.tile(self, "ghost.3", delay_ms=delay)
-    my.tile(self, "ghost.4", delay_ms=delay)
-    my.tile(self, "ghost.5", delay_ms=delay)
-    my.tile(self, "ghost.6", delay_ms=delay)
-    my.tile(self, "ghost.7", delay_ms=delay, is_invisible=True)
-    my.tile(self, "ghost.8", delay_ms=delay, is_invisible=True)
-    my.tile(self, "ghost.9", delay_ms=delay, is_invisible=True)
-    my.tile(self, "ghost.10", delay_ms=delay, is_invisible=True)
-    my.tile(self, "ghost.11", delay_ms=delay, is_invisible=True)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.5", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.6", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.7", delay_ms=delay, is_invisible=True)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.8", delay_ms=delay, is_invisible=True)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.9", delay_ms=delay, is_invisible=True)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.10", delay_ms=delay, is_invisible=True)
+    my.tile(self,
+            ascii_fg_char="g", ascii_bg_col_name="", ascii_fg_col_name="gray",
+            tile="ghost.11", delay_ms=delay, is_invisible=True)
 
     my.tp_update(self)
 
