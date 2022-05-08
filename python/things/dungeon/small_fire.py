@@ -39,7 +39,7 @@ def tp_init(name, text_name):
 
     delay = 75
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="re",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="orange",
