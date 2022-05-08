@@ -3,6 +3,9 @@
 <!-- ------                                                                                                                                       -->
 <!-- cannot seem to hit bat                                                                                                                       -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
+<!-- ascii wheel scroll                                                                                                                           -->
+<!-- monst skel fire ascii                                                                                                                        -->
+<!-- monst ascii dead colors                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
