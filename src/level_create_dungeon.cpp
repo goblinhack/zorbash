@@ -1680,18 +1680,24 @@ void Level::place_foilage(Dungeonp d)
   TRACE_AND_INDENT();
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
-      if (! d->is_anything_at(x, y) || d->is_foilage(x, y)) {
-        auto tp = tp_random_foilage();
-        if (unlikely(! tp)) {
-          return;
-        }
-
-        if (heatmap(x, y)) {
-          continue;
-        }
-
-        (void) thing_new(tp->name(), point(x, y));
+      if (! d->is_foilage(x, y)) {
+        continue;
       }
+      if (is_rock(x, y) || is_wall(x, y)) {
+        continue;
+      }
+      if (heatmap(x, y)) {
+        continue;
+      }
+      if (is_water(x, y)) {
+        continue;
+      }
+      auto tp = tp_random_foilage();
+      if (unlikely(! tp)) {
+        return;
+      }
+
+      (void) thing_new(tp->name(), point(x, y));
     }
   }
 }
