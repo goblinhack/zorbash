@@ -110,27 +110,27 @@ def tp_init(name, text_name):
 
     delay = 150
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="rat_giant.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="rat_giant.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="rat_giant.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="rat_giant.4", delay_ms=delay)
     delay = 1500
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="rat_giant.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="rat_giant.sleeping.2", is_sleeping=True, delay_ms=delay)
     delay = 150
     my.tile(self,
-            ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
             tile="rat_giant.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
