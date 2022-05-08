@@ -86,6 +86,7 @@ def load_one_plugin(filename):
         return
 
     my.log("PYC: - loading init plugin: " + filename)
+    my.log("PYC: - loading init plugin: " + filename)
 
     mod_name, file_ext = os.path.splitext(os.path.split(filename)[-1])
 

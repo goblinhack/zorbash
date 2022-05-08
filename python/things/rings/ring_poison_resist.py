@@ -55,7 +55,7 @@ def tp_init(name, text_name, short_text_name):
     my.equip_carry_anim(self, "ring_poison_resist_carry")
 
     my.tile(self,
-            ascii_fg_char="X", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name, delay_ms=100)
 
     my.tp_update(self)
