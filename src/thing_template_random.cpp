@@ -75,10 +75,7 @@ static Tpidmap tp_treasure_class_c;
 void tp_random_init(void)
 {
   TRACE_NO_INDENT();
-  uint32_t index = 0;
   for (auto &tp : tp_id_map) {
-    CON("RAND %lu %s", index, tp->name().c_str());
-    index++;
     if (tp->is_ascend_dungeon()) {
       tp_ascend_dungeon.push_back(tp);
     }
