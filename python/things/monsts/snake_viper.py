@@ -109,18 +109,38 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 150
-    my.tile(self, "snake_viper.1", delay_ms=delay)
-    my.tile(self, "snake_viper.2", delay_ms=delay)
-    my.tile(self, "snake_viper.3", delay_ms=delay)
-    my.tile(self, "snake_viper.4", delay_ms=delay)
-    my.tile(self, "snake_viper.5", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="snake_viper.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="snake_viper.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="snake_viper.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="snake_viper.4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="snake_viper.5", delay_ms=delay)
     delay = 1500
-    my.tile(self, "snake_viper.sleeping.1", is_sleeping=True, delay_ms=delay)
-    my.tile(self, "snake_viper.sleeping.2", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="snake_viper.sleeping.1", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="snake_viper.sleeping.2", is_sleeping=True, delay_ms=delay)
     delay = 150
-    my.tile(self, "snake_viper.dead.1", is_dead=True, delay_ms=delay)
-    my.tile(self, "snake_viper.dead.2", is_dead=True, delay_ms=delay)
-    my.tile(self, "snake_viper.dead.3", is_dead=True, delay_ms=delay, is_end_of_anim=True)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="snake_viper.dead.1", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="snake_viper.dead.2", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="snake_viper.dead.3", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
     my.tp_update(self)
 

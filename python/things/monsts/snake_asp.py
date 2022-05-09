@@ -110,18 +110,38 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 150
-    my.tile(self, "snake_asp.1", delay_ms=delay)
-    my.tile(self, "snake_asp.2", delay_ms=delay)
-    my.tile(self, "snake_asp.3", delay_ms=delay)
-    my.tile(self, "snake_asp.4", delay_ms=delay)
-    my.tile(self, "snake_asp.5", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="snake_asp.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="snake_asp.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="snake_asp.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="snake_asp.4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="snake_asp.5", delay_ms=delay)
     delay = 1500
-    my.tile(self, "snake_asp.sleeping.1", is_sleeping=True, delay_ms=delay)
-    my.tile(self, "snake_asp.sleeping.2", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="snake_asp.sleeping.1", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="snake_asp.sleeping.2", is_sleeping=True, delay_ms=delay)
     delay = 150
-    my.tile(self, "snake_asp.dead.1", is_dead=True, delay_ms=delay)
-    my.tile(self, "snake_asp.dead.2", is_dead=True, delay_ms=delay)
-    my.tile(self, "snake_asp.dead.3", is_dead=True, delay_ms=delay, is_end_of_anim=True)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="snake_asp.dead.1", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="snake_asp.dead.2", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="s", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="snake_asp.dead.3", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
     my.tp_update(self)
 
