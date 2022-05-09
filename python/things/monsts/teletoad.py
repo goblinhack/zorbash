@@ -138,19 +138,43 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 10000
-    my.tile(self, "teletoad.1", is_sleeping=True, delay_ms=delay)
-    my.tile(self, "teletoad.2", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.1", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.2", is_sleeping=True, delay_ms=delay)
     delay = 150
-    my.tile(self, "teletoad.1", delay_ms=delay)
-    my.tile(self, "teletoad.2", delay_ms=delay)
-    my.tile(self, "teletoad.3", delay_ms=delay)
-    my.tile(self, "teletoad.4", delay_ms=delay)
-    my.tile(self, "teletoad.5", delay_ms=delay)
-    my.tile(self, "teletoad.6", delay_ms=delay)
-    my.tile(self, "teletoad.7", delay_ms=delay)
-    my.tile(self, "teletoad.8", delay_ms=delay)
-    my.tile(self, "teletoad.9", delay_ms=delay)
-    my.tile(self, "teletoad.dead", is_dead=True, is_end_of_anim=True)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.5", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.6", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.7", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.8", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.9", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            tile="teletoad.dead", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)
 
