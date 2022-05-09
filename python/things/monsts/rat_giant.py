@@ -130,7 +130,7 @@ def tp_init(name, text_name):
             tile="rat_giant.sleeping.2", is_sleeping=True, delay_ms=delay)
     delay = 150
     my.tile(self,
-            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="r", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile="rat_giant.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
