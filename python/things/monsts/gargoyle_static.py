@@ -118,13 +118,25 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     delay = 10000
-    my.tile(self, "gargoyle.sleeping.1", is_sleeping=True, delay_ms=delay)
-    my.tile(self, "gargoyle.sleeping.2", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            tile="gargoyle.sleeping.1", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            tile="gargoyle.sleeping.2", is_sleeping=True, delay_ms=delay)
     delay = 300
-    my.tile(self, "gargoyle.1", delay_ms=delay)
-    my.tile(self, "gargoyle.2", delay_ms=delay)
-    my.tile(self, "gargoyle.3", delay_ms=delay)
-    my.tile(self, "gargoyle.dead", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            tile="gargoyle.1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            tile="gargoyle.2", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray40",
+            tile="gargoyle.3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="G", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="gargoyle.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
 
