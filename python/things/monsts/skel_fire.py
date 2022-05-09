@@ -125,62 +125,152 @@ def tp_init(name, text_name):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 200
-    my.tile(self, "skel_fire.1", is_dir_left=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.2", is_dir_left=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.3", is_dir_left=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.4", is_dir_left=True, is_moving=True, delay_ms=delay)
-
-    my.tile(self, "skel_fire.1", is_dir_up=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.2", is_dir_up=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.3", is_dir_up=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.4", is_dir_up=True, is_moving=True, delay_ms=delay)
-
-    my.tile(self, "skel_fire.1", is_dir_down=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.2", is_dir_down=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.3", is_dir_down=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.4", is_dir_down=True, is_moving=True, delay_ms=delay)
-
-    my.tile(self, "skel_fire.1", is_dir_right=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.2", is_dir_right=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.3", is_dir_right=True, is_moving=True, delay_ms=delay)
-    my.tile(self, "skel_fire.4", is_dir_right=True, is_moving=True, delay_ms=delay)
-
-    my.tile(self, "skel_fire.1", is_dir_left=True, delay_ms=delay)
-    my.tile(self, "skel_fire.2", is_dir_left=True, delay_ms=delay)
-    my.tile(self, "skel_fire.3", is_dir_left=True, delay_ms=delay)
-    my.tile(self, "skel_fire.4", is_dir_left=True, delay_ms=delay)
-
-    my.tile(self, "skel_fire.1", is_dir_up=True, delay_ms=delay)
-    my.tile(self, "skel_fire.2", is_dir_up=True, delay_ms=delay)
-    my.tile(self, "skel_fire.3", is_dir_up=True, delay_ms=delay)
-    my.tile(self, "skel_fire.4", is_dir_up=True, delay_ms=delay)
-
-    my.tile(self, "skel_fire.1", is_dir_down=True, delay_ms=delay)
-    my.tile(self, "skel_fire.2", is_dir_down=True, delay_ms=delay)
-    my.tile(self, "skel_fire.3", is_dir_down=True, delay_ms=delay)
-    my.tile(self, "skel_fire.4", is_dir_down=True, delay_ms=delay)
-
-    my.tile(self, "skel_fire.1", is_dir_right=True, delay_ms=delay)
-    my.tile(self, "skel_fire.2", is_dir_right=True, delay_ms=delay)
-    my.tile(self, "skel_fire.3", is_dir_right=True, delay_ms=delay)
-    my.tile(self, "skel_fire.4", is_dir_right=True, delay_ms=delay)
-
-    my.tile(self, "skel_fire.1", is_dir_none=True, delay_ms=delay)
-    my.tile(self, "skel_fire.2", is_dir_none=True, delay_ms=delay)
-    my.tile(self, "skel_fire.3", is_dir_none=True, delay_ms=delay)
-    my.tile(self, "skel_fire.4", is_dir_none=True, delay_ms=delay)
-
-    delay = 20
-    my.tile(self, "skel_fire.dead.1", is_dead=True, delay_ms=delay)
-    my.tile(self, "skel_fire.dead.2", is_dead=True, delay_ms=delay)
-    my.tile(self, "skel_fire.dead.3", is_dead=True, delay_ms=delay)
-    my.tile(self, "skel_fire.dead.4", is_dead=True, delay_ms=delay, is_end_of_anim=True)
-
-    my.tile(self, "skel_fire.dead.4", is_resurrecting=True, delay_ms=delay)
-    my.tile(self, "skel_fire.dead.3", is_resurrecting=True, delay_ms=delay)
-    my.tile(self, "skel_fire.dead.2", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            "skel_fire.dead.1",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.1", is_dir_left=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.2", is_dir_left=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.3", is_dir_left=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.4", is_dir_left=True, is_moving=True, delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.1", is_dir_up=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.2", is_dir_up=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.3", is_dir_up=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.4", is_dir_up=True, is_moving=True, delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.1", is_dir_down=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.2", is_dir_down=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.3", is_dir_down=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.4", is_dir_down=True, is_moving=True, delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.1", is_dir_right=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.2", is_dir_right=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.3", is_dir_right=True, is_moving=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.4", is_dir_right=True, is_moving=True, delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.1", is_dir_left=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.2", is_dir_left=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.3", is_dir_left=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.4", is_dir_left=True, delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.1", is_dir_up=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.2", is_dir_up=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.3", is_dir_up=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.4", is_dir_up=True, delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.1", is_dir_down=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.2", is_dir_down=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.3", is_dir_down=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.4", is_dir_down=True, delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.1", is_dir_right=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.2", is_dir_right=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.3", is_dir_right=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.4", is_dir_right=True, delay_ms=delay)
+
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.1", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.2", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.3", is_dir_none=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.4", is_dir_none=True, delay_ms=delay)
+
+    #
+    # Resurrecting
+    #
+    delay = 20
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.dead.1", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.dead.2", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.dead.3", is_dead=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            tile="skel_fire.dead.4", is_dead=True, delay_ms=delay, is_end_of_anim=True)
+
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="skel_fire.dead.4", is_resurrecting=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="skel_fire.dead.3", is_resurrecting=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            tile="skel_fire.dead.2", is_resurrecting=True, delay_ms=delay)
+    my.tile(self,
+            tile="skel_fire.dead.1",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             is_resurrecting=True,
             is_end_of_anim=True,
             is_alive_on_end_of_anim=True)
