@@ -78,27 +78,27 @@ def tp_init(name, text_name):
 
     delay = 1000
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".2", delay_ms=delay)
 
     delay = 20
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".dead.1", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".dead.2", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".dead.3", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".dead.4", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".dead.5", is_dead=True, is_end_of_anim=True)
 
     my.tile(self,
@@ -114,6 +114,7 @@ def tp_init(name, text_name):
             ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray10",
             tile=name + ".dead.2", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
+            ascii_fg_char="R", ascii_bg_col_name="", ascii_fg_col_name="gray10",
             tile=name + ".dead.1",
             is_resurrecting=True,
             is_end_of_anim=True,
