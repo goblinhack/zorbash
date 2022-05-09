@@ -178,16 +178,16 @@ def tp_init(name, text_name):
             tile=name + ".4", delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".dead.1", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".dead.2", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".dead.3", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray20",
             tile=name + ".dead.4", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)
