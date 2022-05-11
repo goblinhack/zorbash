@@ -255,54 +255,61 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
-  auto src      = (last_blit_tl + last_blit_br) / 2;
-  auto dx       = x - curr_at.x;
-  auto dy       = y - curr_at.y;
-  auto tw       = TILE_WIDTH;
-  auto th       = TILE_HEIGHT;
-  auto sz       = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
-  auto duration = THING_JUMP_SPEED_MS;
-
-  if (is_offscreen) {
-    duration /= 4;
-  }
-
-  //
-  // Check the number of things jumping is not slowing the game too much
-  //
-  if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
-    duration /= 4;
-  }
-
-  if (game->robot_mode) {
-    duration /= 4;
-  }
-
+  auto  src = (last_blit_tl + last_blit_br) / 2;
+  auto  dx  = x - curr_at.x;
+  auto  dy  = y - curr_at.y;
+  auto  tw  = TILE_WIDTH;
+  auto  th  = TILE_HEIGHT;
+  auto  sz  = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
   point dest(src.x + dx * tw, src.y + dy * th);
+  auto  duration = THING_JUMP_SPEED_MS;
 
-  if (is_player()) {
-    //
-    // So the player is visible above light
-    //
-    level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false,
-                                 true /* make_visible_at_end */);
+  //
+  // Ascii mode, jump is imdediate
+  //
+  if (g_opt_ascii) {
+    duration = 0;
   } else {
-    //
-    // If offscreen and in robot mode, then jump quicker, so the robot does
-    // not have to wait so long/
-    //
-    if (game->robot_mode) {
-      if (! level->is_lit_currently(make_point(curr_at.x, curr_at.y)) &&
-          ! level->is_lit_currently(make_point(to.x, to.y))) {
-        duration = 0;
-      }
+    if (is_offscreen) {
+      duration /= 4;
     }
 
-    level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false,
-                                 true /* make_visible_at_end */);
+    //
+    // Check the number of things jumping is not slowing the game too much
+    //
+    if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
+      duration /= 4;
+    }
+
+    if (game->robot_mode) {
+      duration /= 4;
+    }
+
+    if (is_player()) {
+      //
+      // So the player is visible above light
+      //
+      level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false,
+                                   true /* make_visible_at_end */);
+    } else {
+      //
+      // If offscreen and in robot mode, then jump quicker, so the robot does
+      // not have to wait so long/
+      //
+      if (game->robot_mode) {
+        if (! level->is_lit_currently(make_point(curr_at.x, curr_at.y)) &&
+            ! level->is_lit_currently(make_point(to.x, to.y))) {
+          duration = 0;
+        }
+      }
+
+      level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false,
+                                   true /* make_visible_at_end */);
+    }
+
+    is_jumping = true;
   }
 
-  is_jumping = true;
   move_to_immediately(point(x, y));
 
   //
@@ -315,15 +322,17 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto w  = level->thing_find(id);
       if (w) {
         w->move_to_immediately(curr_at);
-        w->is_jumping = true;
-        if (is_player()) {
-          level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                       true /* make_visible_at_end */);
-        } else {
-          level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                       true /* make_visible_at_end */);
+        if (! g_opt_ascii) {
+          w->is_jumping = true;
+          if (is_player()) {
+            level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                         true /* make_visible_at_end */);
+          } else {
+            level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                         true /* make_visible_at_end */);
+          }
         }
       }
     }
@@ -333,18 +342,20 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto w  = level->thing_find(equip_id_use_anim(e));
       if (w) {
         w->move_to_immediately(curr_at);
-        w->is_jumping = true;
-        //
-        // No, the weapon is shown as carry anim
-        //
-        if (is_player()) {
-          level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                       true /* make_visible_at_end */);
-        } else {
-          level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                       true /* make_visible_at_end */);
+        if (! g_opt_ascii) {
+          w->is_jumping = true;
+          //
+          // No, the weapon is shown as carry anim
+          //
+          if (is_player()) {
+            level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                         true /* make_visible_at_end */);
+          } else {
+            level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
+                                         true /* make_visible_at_end */);
+          }
         }
       }
     }

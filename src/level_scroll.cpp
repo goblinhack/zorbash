@@ -28,11 +28,6 @@ void Level::scroll_map_do(bool fast)
     return;
   }
 
-  if (g_opt_ascii) {
-    map_at = map_wanted_at;
-    return;
-  }
-
   const float vbigstep  = 1;
   const float bigstep   = 4;
   const float medstep   = 16;
@@ -94,6 +89,13 @@ if (player) {
         // dx *= TILE_WIDTH;
         // dx = (int) ceil(dx);
         // dx /= TILE_WIDTH;
+        if (g_opt_ascii) {
+          if (dx < 0) {
+            dx = -1;
+          } else if (dx > 0) {
+            dx = 1;
+          }
+        }
         map_at.x += dx;
       }
 
@@ -118,6 +120,13 @@ if (player) {
         // dy *= TILE_HEIGHT;
         // dy = (int) ceil(dy);
         // dy /= TILE_HEIGHT;
+        if (g_opt_ascii) {
+          if (dy < 0) {
+            dy = -1;
+          } else if (dy > 0) {
+            dy = 1;
+          }
+        }
         map_at.y += dy;
       }
     }
@@ -125,13 +134,13 @@ if (player) {
     //
     // Else following the cursor or mouse. Bigger chunks are less sick inducing.
     //
-    if (fast) {
+    if (g_opt_ascii) {
       map_at.x -= dx;
       map_at.y -= dy;
     } else {
-      if (g_opt_ascii) {
-        map_at.x -= ceil(dx / bigstep);
-        map_at.y -= ceil(dy / bigstep);
+      if (fast) {
+        map_at.x -= dx;
+        map_at.y -= dy;
       } else {
         map_at.x -= dx / bigstep;
         map_at.y -= dy / bigstep;
@@ -142,12 +151,14 @@ if (player) {
   //
   // Round to pixels
   //
-  map_at.x *= TILE_WIDTH;
-  map_at.y *= TILE_HEIGHT;
-  map_at.x = (int) map_at.x;
-  map_at.y = (int) map_at.y;
-  map_at.x /= TILE_WIDTH;
-  map_at.y /= TILE_HEIGHT;
+  if (! g_opt_ascii) {
+    map_at.x *= TILE_WIDTH;
+    map_at.y *= TILE_HEIGHT;
+    map_at.x = (int) map_at.x;
+    map_at.y = (int) map_at.y;
+    map_at.x /= TILE_WIDTH;
+    map_at.y /= TILE_HEIGHT;
+  }
 
 #ifdef LIMIT_SCROLLING_TO_MAP
   map_at.x = std::max(map_at.x, ((float) 0.0));
@@ -252,10 +263,8 @@ void Level::scroll_map_set_target(void)
     //
     // This is how many tiles away from the map current point that we scroll.
     //
-    if (g_opt_ascii) {
-      x_sensitivity = 10;
-      y_sensitivity = 10;
-    }
+    x_sensitivity = 10;
+    y_sensitivity = 10;
 
     //
     // Auto scroll if we cross these limits
@@ -292,10 +301,6 @@ void Level::scroll_map_set_target(void)
     }
 
     auto d = 0.3;
-
-    if (g_opt_ascii) {
-      d = 1;
-    }
 
     if (sdl.mouse_x >= game->config.window_pix_width - 1) {
       map_wanted_at.x += d;
