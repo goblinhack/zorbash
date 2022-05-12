@@ -96,7 +96,7 @@ public:
   AsciiCell(void) {}
 };
 
-static std::array< std::array< AsciiCell, TERM_WIDTH_MAX >, TERM_HEIGHT_MAX > cells;
+static std::array< std::array< AsciiCell, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX > cells;
 
 void ascii_init(void) {}
 

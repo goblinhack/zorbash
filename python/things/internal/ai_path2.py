@@ -10,12 +10,12 @@ def tp_init(name):
     my.is_removeable_if_out_of_slots(self, True)
     my.is_tmp_thing(self, True)
     my.text_description(self, "AI path.")
-    my.z_depth(self, my.MAP_DEPTH_OBJ)
+    my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     delay = 50
     my.tile(self,
-            ascii_fg_char="Z", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_bg_char="block", ascii_bg_col_name="darkred", ascii_fg_col_name="",
             tile=name + ".1", delay_ms=delay)
 
     my.tp_update(self)

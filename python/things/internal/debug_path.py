@@ -16,7 +16,9 @@ def tp_init(name):
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
-    my.tile(self, "ai_path1.1")
+    my.tile(self,
+            ascii_bg_char="block", ascii_bg_col_name="darkblue", ascii_fg_col_name="",
+            tile="ai_path1.1")
 
     my.tp_update(self)
 

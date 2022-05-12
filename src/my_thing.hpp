@@ -2357,9 +2357,9 @@ public:
   void wobble(float wobble);
   void wobble_set(float);
 
-  const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *stat_const_bag(void);
+  const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *stat_const_bag(void);
 
-  std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *bag_get(void);
+  std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *bag_get(void);
 
   static std::function< int(Thingp) > matches_to_func(const std::string &what);
 

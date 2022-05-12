@@ -6438,7 +6438,7 @@ const std::string &Thing::equip_carry_anim(void)
   return (tp()->equip_carry_anim());
 }
 
-std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::bag_get(void)
+std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing::bag_get(void)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
@@ -6452,7 +6452,7 @@ std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::bag_g
   }
 }
 
-const std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > *Thing::stat_const_bag(void)
+const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing::stat_const_bag(void)
 {
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
