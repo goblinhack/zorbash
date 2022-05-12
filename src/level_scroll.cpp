@@ -167,11 +167,11 @@ if (player) {
     if (map_at.y < 0) {
       map_at.y = 0;
     }
-    if (map_at.x > MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1)) {
-      map_at.x = MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1);
+    if (map_at.x > MAP_WIDTH - TILES_VISIBLE_ACROSS) {
+      map_at.x = MAP_WIDTH - TILES_VISIBLE_ACROSS;
     }
-    if (map_at.y > MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1)) {
-      map_at.y = MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1);
+    if (map_at.y > MAP_HEIGHT - TILES_VISIBLE_DOWN) {
+      map_at.y = MAP_HEIGHT - TILES_VISIBLE_DOWN;
     }
   }
 

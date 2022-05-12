@@ -56,6 +56,11 @@ void Level::display_map_set_bounds(void)
   miny = std::max(0, (int) map_at.y - border);
   maxy = std::min(MAP_HEIGHT, (int) miny + TILES_VISIBLE_DOWN + (border * 2));
 
+  if (g_opt_ascii) {
+    minx = map_at.x;
+    miny = map_at.y;
+  }
+
   map_tl = point(minx, miny);
   map_br = point(maxx, maxy);
 
