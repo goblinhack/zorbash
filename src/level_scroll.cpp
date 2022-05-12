@@ -160,12 +160,20 @@ if (player) {
     map_at.y /= TILE_HEIGHT;
   }
 
-#ifdef LIMIT_SCROLLING_TO_MAP
-  map_at.x = std::max(map_at.x, ((float) 0.0));
-  map_at.y = std::max(map_at.y, ((float) 0.0));
-  map_at.x = std::min(map_at.x, ((float) MAP_WIDTH) - TILES_ACROSS);
-  map_at.y = std::min(map_at.y, ((float) MAP_HEIGHT) - TILES_DOWN);
-#endif
+  if (g_opt_ascii) {
+    if (map_at.x < 0) {
+      map_at.x = 0;
+    }
+    if (map_at.y < 0) {
+      map_at.y = 0;
+    }
+    if (map_at.x > MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1)) {
+      map_at.x = MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1);
+    }
+    if (map_at.y > MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1)) {
+      map_at.y = MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1);
+    }
+  }
 
   {
     auto dx = map_at.x - map_wanted_at.x;
@@ -203,7 +211,12 @@ void Level::scroll_map_to_player(void)
   ts_redraw_bg         = time_ms_cached() + 500;
   is_map_follow_player = true;
 
-  map_wanted_at = make_fpoint(player->curr_at) - fpoint(TILES_ACROSS / 2, TILES_DOWN / 2);
+  //
+  // Make sure we know the map size before trying to scroll
+  //
+  wid_rightbar_init();
+
+  map_wanted_at = make_fpoint(player->curr_at) - fpoint(TILES_VISIBLE_ACROSS / 2, TILES_VISIBLE_DOWN / 2);
 
   scroll_map_set_target();
   scroll_map_do(true);
@@ -267,12 +280,20 @@ void Level::scroll_map_set_target(void)
     y_sensitivity = 10;
 
     //
+    // The smaller the number, the further from the edge of the map we scroll.
+    //
+    if (g_opt_ascii) {
+      x_sensitivity = 4;
+      y_sensitivity = 4;
+    }
+
+    //
     // Auto scroll if we cross these limits
     //
-    float x1 = (((float) TILES_ACROSS) / 2) - x_sensitivity;
-    float x2 = (((float) TILES_ACROSS) / 2) + x_sensitivity;
-    float y1 = (((float) TILES_DOWN) / 2) - y_sensitivity;
-    float y2 = (((float) TILES_DOWN) / 2) + y_sensitivity;
+    float x1 = (((float) TILES_VISIBLE_ACROSS) / 2) - x_sensitivity;
+    float x2 = (((float) TILES_VISIBLE_ACROSS) / 2) + x_sensitivity;
+    float y1 = (((float) TILES_VISIBLE_DOWN) / 2) - y_sensitivity;
+    float y2 = (((float) TILES_VISIBLE_DOWN) / 2) + y_sensitivity;
 
     //
     // Auto scroll
@@ -316,21 +337,21 @@ void Level::scroll_map_set_target(void)
     }
   }
 
-#ifdef LIMIT_SCROLLING_TO_MAP
   //
   // Don't allow scrolling off the map
   //
-  if (map_wanted_at.x < 0) {
-    map_wanted_at.x = 0;
+  if (g_opt_ascii) {
+    if (map_wanted_at.x < 0) {
+      map_wanted_at.x = 0;
+    }
+    if (map_wanted_at.y < 0) {
+      map_wanted_at.y = 0;
+    }
+    if (map_wanted_at.x > MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1)) {
+      map_wanted_at.x = MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1);
+    }
+    if (map_wanted_at.y > MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1)) {
+      map_wanted_at.y = MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1);
+    }
   }
-  if (map_wanted_at.y < 0) {
-    map_wanted_at.y = 0;
-  }
-  if (map_wanted_at.x > MAP_WIDTH - 1) {
-    map_wanted_at.x = MAP_WIDTH - 1;
-  }
-  if (map_wanted_at.y > MAP_HEIGHT - 1) {
-    map_wanted_at.y = MAP_HEIGHT - 1;
-  }
-#endif
 }

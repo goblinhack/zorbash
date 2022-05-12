@@ -51,10 +51,10 @@ void Level::display_map_set_bounds(void)
 
   int border = MAP_BORDER_ROCK + 2;
   minx       = std::max(0, (int) map_at.x - border);
-  maxx       = std::min(MAP_WIDTH, (int) minx + TILES_ACROSS + (border * 2));
+  maxx       = std::min(MAP_WIDTH, (int) minx + TILES_VISIBLE_ACROSS + (border * 2));
 
   miny = std::max(0, (int) map_at.y - border);
-  maxy = std::min(MAP_HEIGHT, (int) miny + TILES_DOWN + (border * 2));
+  maxy = std::min(MAP_HEIGHT, (int) miny + TILES_VISIBLE_DOWN + (border * 2));
 
   map_tl = point(minx, miny);
   map_br = point(maxx, maxy);

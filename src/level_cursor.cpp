@@ -23,7 +23,7 @@ void Level::cursor_check_if_scroll_needed(void)
     if (cursor) {
       if (player) {
         auto d = distance(player->curr_at, cursor->curr_at);
-        if (d > std::min(TILES_ACROSS, TILES_DOWN)) {
+        if (d > std::min(TILES_VISIBLE_ACROSS, TILES_VISIBLE_DOWN)) {
           cursor->move_to_immediately(player->curr_at);
         }
       }
@@ -71,22 +71,16 @@ void Level::cursor_move(void)
     dy *= scale;
 
     if (g_opt_ascii) {
-      int step = 1;
-      if (dx > 0) {
-        dx = step;
+      if (dx < 0) {
+        dx = -1;
+      } else if (dx > 0) {
+        dx = 1;
       }
-      if (dy > 0) {
-        dy = step;
+      if (dy < 0) {
+        dy = -1;
+      } else if (dy > 0) {
+        dy = 1;
       }
-      if (dx < -1) {
-        dx = -step;
-      }
-      if (dy < -1) {
-        dy = -step;
-      }
-
-      map_wanted_at += fpoint(dx, dy);
-      return;
     }
 
     map_wanted_at += fpoint(dx, dy);
