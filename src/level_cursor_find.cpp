@@ -76,5 +76,5 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
   }
 
 done:
-  game->wid_thing_info_destroy_deferred();
+  return;
 }

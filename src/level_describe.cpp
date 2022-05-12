@@ -24,7 +24,7 @@ void Level::describe(point p)
   TRACE_AND_INDENT();
   bool got_one_with_long_text = false;
 
-  dbg2("Level describe @%d,%d", p.x, p.y);
+  dbg("Level describe @%d,%d", p.x, p.y);
   TRACE_AND_INDENT();
 
   if (! player) {
