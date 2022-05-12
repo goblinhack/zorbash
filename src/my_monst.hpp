@@ -261,7 +261,7 @@ public:
   std::vector< ThingId > buffbox_id;          // Which buffs are in which slot
   std::vector< ThingId > debuffbox_id;        // Which debuffs are in which slot
 
-  std::array< std::array< ThingId, MAX_BAG_WIDTH >, MAX_BAG_HEIGHT > bag {};
+  std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > bag {};
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

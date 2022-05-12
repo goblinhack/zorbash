@@ -174,7 +174,7 @@ void Light::reset(void)
 bool Light::calculate(void)
 {
 #if 0
-  std::array< std::array<bool, MAP_WIDTH>, MAP_HEIGHT> walked = {};
+  std::array< std::array<bool, MAP_HEIGHT>, MAP_WIDTH> walked = {};
 #endif
 
   if (! level) {

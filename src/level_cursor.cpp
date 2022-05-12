@@ -84,6 +84,7 @@ void Level::cursor_move(void)
     }
 
     map_wanted_at += fpoint(dx, dy);
+    TOPCON("wheel %f,%f want %f,%f", dx, dy, map_wanted_at.x, map_wanted_at.y);
     is_map_follow_player = false;
     return;
   }
