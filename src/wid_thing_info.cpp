@@ -3,7 +3,7 @@
 // See the README.md file for license info.
 //
 
-//#include "my_backtrace.hpp"
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
@@ -17,6 +17,7 @@ std::list< WidPopup * > wid_thing_info_window;
 void wid_thing_info_fini(const std::string &why)
 {
   DBG("Destroy wid thing info: %s", why.c_str());
+  // backtrace_dump();
   TRACE_AND_INDENT();
 
   game->wid_thing_info_clear_popup();

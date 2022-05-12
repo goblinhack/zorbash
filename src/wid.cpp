@@ -6550,7 +6550,7 @@ static void wid_tick_all(void)
   }
 
   //
-  // If we need to destroy the thing indo, do so
+  // If we need to destroy the thing info, do so
   //
   if (game->request_destroy_thing_info) {
     if (time_have_x_tenths_passed_since(1, game->request_destroy_thing_info)) {
