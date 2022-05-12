@@ -131,7 +131,7 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
     maxy = dmap_start.y;
   }
 
-  auto border = TILES_ACROSS / 2;
+  auto border = TILES_VISIBLE_ACROSS / 2;
   minx -= border;
   miny -= border;
   maxx += border;

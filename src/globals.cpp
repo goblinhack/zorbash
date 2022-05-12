@@ -47,7 +47,10 @@ bool g_opt_debug3; // As above but show the entire level
 std::string g_opt_seed_name;
 std::string g_opt_player_name;
 
-int TILES_ACROSS;
-int TILES_DOWN;
+//
+// The number of tiles on screen.
+//
+int TILES_VISIBLE_ACROSS;
+int TILES_VISIBLE_DOWN;
 
 int g_last_logged_callframes_depth;

@@ -323,7 +323,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       if (w) {
         w->move_to_immediately(curr_at);
         if (! g_opt_ascii) {
+          //
+          // Ascii mode, jump is imdediate
+          //
           w->is_jumping = true;
+
           if (is_player()) {
             level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
                                          (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
@@ -343,7 +347,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       if (w) {
         w->move_to_immediately(curr_at);
         if (! g_opt_ascii) {
+          //
+          // Ascii mode, jump is imdediate
+          //
           w->is_jumping = true;
+
           //
           // No, the weapon is shown as carry anim
           //

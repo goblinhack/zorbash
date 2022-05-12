@@ -112,7 +112,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
         dx            = d.x / D;
         dy            = d.y / D;
 
-        if (distance(o, p) > TILES_ACROSS / 2) {
+        if (distance(o, p) > TILES_VISIBLE_ACROSS / 2) {
           return;
         }
       }

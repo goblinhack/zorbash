@@ -40,8 +40,11 @@ extern bool g_opt_debug1;
 extern bool g_opt_debug2;
 extern bool g_opt_debug3;
 
-extern int TILES_ACROSS;
-extern int TILES_DOWN;
+//
+// The number of tiles on screen.
+//
+extern int TILES_VISIBLE_ACROSS;
+extern int TILES_VISIBLE_DOWN;
 
 #define DEBUG1 (unlikely(g_opt_debug1))
 #define DEBUG2 (unlikely(g_opt_debug2))

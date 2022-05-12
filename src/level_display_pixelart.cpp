@@ -92,10 +92,10 @@ void Level::display_map(void)
   // For light sources we need to draw a bit off map as the light
   // has a radius
   //
-  light_minx = std::max(0, minx - TILES_ACROSS);
-  light_maxx = std::min(MAP_HEIGHT, maxx + TILES_ACROSS);
-  light_miny = std::max(0, miny - TILES_DOWN);
-  light_maxy = std::min(MAP_HEIGHT, maxy + TILES_DOWN);
+  light_minx = std::max(0, minx - TILES_VISIBLE_ACROSS);
+  light_maxx = std::min(MAP_HEIGHT, maxx + TILES_VISIBLE_ACROSS);
+  light_miny = std::max(0, miny - TILES_VISIBLE_DOWN);
+  light_maxy = std::min(MAP_HEIGHT, maxy + TILES_VISIBLE_DOWN);
 
   display_tick_animation();
 

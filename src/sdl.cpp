@@ -824,15 +824,15 @@ void config_game_pix_zoom_update(void)
       int32_t brx;
       int32_t bry;
       wid_get_tl_x_tl_y_br_x_br_y(wid_asciimap, &tlx, &tly, &brx, &bry);
-      TILES_ACROSS = brx - tlx + 1;
-      TILES_DOWN   = bry - tly + 1;
+      TILES_VISIBLE_ACROSS = brx - tlx + 1;
+      TILES_VISIBLE_DOWN   = bry - tly + 1;
     } else {
-      TILES_ACROSS = MAP_WIDTH;
-      TILES_DOWN   = MAP_HEIGHT;
+      TILES_VISIBLE_ACROSS = MAP_WIDTH;
+      TILES_VISIBLE_DOWN   = MAP_HEIGHT;
     }
   } else {
-    TILES_ACROSS = (int) tiles_across;
-    TILES_DOWN   = (int) tiles_down;
+    TILES_VISIBLE_ACROSS = (int) tiles_across;
+    TILES_VISIBLE_DOWN   = (int) tiles_down;
   }
 
   game->config.tile_pix_width  = game->config.one_pixel_width * TILE_WIDTH;
@@ -840,8 +840,8 @@ void config_game_pix_zoom_update(void)
 
   game->config.video_w_h_ratio = (double) game->config.game_pix_width / (double) game->config.game_pix_height;
 
-  game->config.tile_pixel_width  = game->config.game_pix_width / TILES_ACROSS;
-  game->config.tile_pixel_height = game->config.game_pix_height / TILES_DOWN;
+  game->config.tile_pixel_width  = game->config.game_pix_width / TILES_VISIBLE_ACROSS;
+  game->config.tile_pixel_height = game->config.game_pix_height / TILES_VISIBLE_DOWN;
 
   CON("SDL: Window:");
   CON("SDL: - config pixel size    : %dx%d", game->config.config_pix_width, game->config.config_pix_height);
