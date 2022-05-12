@@ -42,15 +42,15 @@ bool wid_asciimap_init(void)
     return false;
   }
 
-  int width  = TERM_WIDTH - UI_SIDEBAR_LEFT_WIDTH - UI_SIDEBAR_RIGHT_WIDTH;
-  int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 3;
+  int width  = TERM_WIDTH - UI_SIDEBAR_LEFT_WIDTH - UI_SIDEBAR_RIGHT_WIDTH - 1;
+  int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 2;
 
   TRACE_AND_INDENT();
   point tl = make_point(UI_SIDEBAR_LEFT_WIDTH + 1, UI_TOPCON_VIS_HEIGHT);
-  point br = tl + point(width - 1, height);
+  point br = tl + point(width - 1, height - 1);
 
   wid_asciimap = wid_new_square_window("wid asciimap");
-  wid_set_style(wid_asciimap, UI_WID_STYLE_SPARSE_NONE);
+  wid_set_style(wid_asciimap, UI_WID_STYLE_DARK);
   wid_set_pos(wid_asciimap, tl, br);
   wid_set_on_display(wid_asciimap, wid_asciimap_display);
   wid_set_ignore_scroll_events(wid_asciimap, true);
