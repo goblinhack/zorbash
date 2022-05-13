@@ -128,8 +128,8 @@ Tile::Tile(const class Tile *tile)
   internal_has_dir_anim  = tile->internal_has_dir_anim;
   ascii_fg_char          = tile->ascii_fg_char;
   ascii_bg_char          = tile->ascii_bg_char;
-  ascii_bg_col_name           = tile->ascii_bg_col_name;
-  ascii_fg_col_name           = tile->ascii_fg_col_name;
+  ascii_bg_col_name      = tile->ascii_bg_col_name;
+  ascii_fg_col_name      = tile->ascii_fg_col_name;
 
   index        = 0;
   global_index = all_tiles_array.size() + 1;
