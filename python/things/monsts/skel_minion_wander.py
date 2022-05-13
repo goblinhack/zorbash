@@ -228,29 +228,29 @@ def tp_init(name, text_name):
     #
     delay = 20
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray10",
             tile="skeleton.dead.1", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray10",
             tile="skeleton.dead.2", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray10",
             tile="skeleton.dead.3", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray10",
             tile="skeleton.dead.4", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="skeleton.dead.4", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="skeleton.dead.3", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="skeleton.dead.2", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="k", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile="skeleton.dead.1",
             is_resurrecting=True,
             is_end_of_anim=True,
