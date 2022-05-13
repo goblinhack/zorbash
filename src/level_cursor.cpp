@@ -15,7 +15,7 @@
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
 
-void Level::cursor_check_if_scroll_needed(void)
+void Level::cursor_warp_check(void)
 {
   TRACE_AND_INDENT();
 

@@ -294,7 +294,7 @@ void Level::display_map(void)
   //
   // If the cursor is too far away, warp it
   //
-  cursor_check_if_scroll_needed();
+  cursor_warp_check();
   cursor_find_on_visible_things(minx, miny, maxx, maxy);
 
   display_pixelart_blood();
