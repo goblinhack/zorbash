@@ -386,7 +386,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
         tile->ascii_bg_char = unicode_alias_to_char(ascii_bg_char_str);
       }
 
-      tile->ascii_bg_col_value = BLACK;
+      tile->ascii_bg_col_value = COLOR_NONE;
       tile->ascii_fg_col_value = WHITE;
 
       if (ascii_bg_col_name && *ascii_bg_col_name) {

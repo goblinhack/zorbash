@@ -134,12 +134,6 @@ void Level::tick(void)
     return;
   }
 
-  if (! cursor) {
-    if (player) {
-      cursor = thing_new("cursor", player->curr_at);
-    }
-  }
-
   game->tick_update();
 
   handle_all_pending_things();
@@ -157,6 +151,12 @@ void Level::tick(void)
       cursor_move();
     } else if (! time_have_x_tenths_passed_since(10, wid_last_mouse_motion)) {
       cursor_move();
+    }
+  }
+
+  if (! cursor) {
+    if (player) {
+      cursor = thing_new("cursor", player->curr_at);
     }
   }
 

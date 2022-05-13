@@ -32,7 +32,9 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     for t in tiles:
-        my.tile(self, t)
+        my.tile(self,
+                ascii_fg_char="-", ascii_bg_col_name="brown", ascii_fg_col_name="black",
+                tile=t)
 
     if bot3_tiles is not None:
         for t in bot3_tiles:
