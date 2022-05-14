@@ -1891,56 +1891,6 @@ void Level::fade_in_unset(const int x, const int y)
 
 void Level::fade_in_no_check_unset(const int x, const int y) { set_no_check(_fade_in_map, x, y, (uint8_t) 0); }
 
-uint8_t Level::is_lit_ever(const point p)
-{
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
-  return (get(_is_lit_ever, p.x, p.y));
-}
-
-uint8_t Level::is_lit_ever_no_check(const point p) { return (get_no_check(_is_lit_ever, p.x, p.y)); }
-
-uint8_t Level::is_lit_ever(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
-  return (get(_is_lit_ever, x, y));
-}
-
-uint8_t Level::is_lit_ever_no_check(const int x, const int y) { return (get_no_check(_is_lit_ever, x, y)); }
-
-void Level::is_lit_ever_set(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-
-  if (! get(_is_lit_ever, x, y)) {
-    set(_fade_in_map, x, y, (uint8_t) 1);
-  }
-  set(_is_lit_ever, x, y, true);
-}
-
-void Level::is_lit_ever_no_check_set(const int x, const int y)
-{
-  if (! get_no_check(_is_lit_ever, x, y)) {
-    set_no_check(_fade_in_map, x, y, (uint8_t) 1);
-  }
-  set_no_check(_is_lit_ever, x, y, true);
-}
-
-void Level::is_lit_ever_unset(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  set(_is_lit_ever, x, y, false);
-}
-
-void Level::is_lit_ever_no_check_unset(const int x, const int y) { set_no_check(_is_lit_ever, x, y, false); }
-
 //
 // Used in lighting, so inlined
 //
@@ -2279,81 +2229,6 @@ void Level::is_obs_destructable_unset(const int x, const int y)
 void Level::is_obs_destructable_no_check_unset(const int x, const int y)
 {
   set_no_check(_is_obs_destructable, x, y, false);
-}
-
-uint8_t Level::is_lit_currently(const point p)
-{
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
-  return (get(_is_lit_currently, p.x, p.y));
-}
-
-uint8_t Level::is_lit_currently_no_check(const point p) { return (get_no_check(_is_lit_currently, p.x, p.y)); }
-
-//
-// Note light fades
-//
-uint8_t Level::is_lit_recently(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
-  //
-  // So anything older than 10 ticks we consider no lit recently
-  //
-  return (get(_is_lit_currently, x, y) > 250);
-}
-
-//
-// Note light fades
-//
-uint8_t Level::is_lit_currently(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
-  return (get(_is_lit_currently, x, y));
-}
-
-uint8_t Level::is_lit_currently_no_check(const int x, const int y) { return (get_no_check(_is_lit_currently, x, y)); }
-
-void Level::is_lit_currently_no_check_set(const int x, const int y)
-{
-  auto l = getptr_no_check(_is_lit_currently, x, y);
-  if (*l == 0) {
-    *l = 255;
-  } else if (*l < 255) {
-    (*l)++;
-  }
-}
-
-void Level::is_lit_currently_set(const int x, const int y)
-{
-  auto l = getptr(_is_lit_currently, x, y);
-  if (*l == 0) {
-    *l = 255;
-  } else if (*l < 255) {
-    (*l)++;
-  }
-}
-
-void Level::is_lit_currently_no_check_set(const int x, const int y, uint8_t v)
-{
-  set_no_check(_is_lit_currently, x, y, v);
-}
-
-void Level::is_lit_currently_unset(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  set(_is_lit_currently, x, y, (uint8_t) 0);
-}
-
-void Level::is_lit_currently_no_check_unset(const int x, const int y)
-{
-  set_no_check(_is_lit_currently, x, y, (uint8_t) 0);
 }
 
 uint32_t Level::get_is_map_changed(const int x, const int y)

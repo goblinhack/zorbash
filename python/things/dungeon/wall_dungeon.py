@@ -51,7 +51,7 @@ def tp_init(
     if tiles is not None:
         for t in tiles:
             my.tile(self,
-                    ascii_fg_char="#", ascii_bg_col_name="darkgreen", ascii_fg_col_name="black",
+                    ascii_fg_char="#", ascii_bg_col_name="snow", ascii_fg_col_name="black",
                     tile=t)
 
     if left1_tiles is not None:
