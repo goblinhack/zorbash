@@ -162,7 +162,7 @@ void Game::wid_hiscores_show(void)
              name.c_str(), when_field_len, when.c_str(), h->level_reached, defeated_by_field_len,
              defeated_by.c_str());
 
-    if (! g_opt_ascii_set) {
+    if (! g_opt_ascii) {
       wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
     }
     wid_hiscore_window->log(tmp);

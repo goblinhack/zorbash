@@ -59,23 +59,43 @@ void Thing::blit_ascii(point tl, point br, point p)
   int x = tl.x + (p.x - level->minx);
   int y = tl.y + (p.y - level->miny);
 
-  if (tile->ascii_bg_col_value != COLOR_NONE) {
-    ascii_set_bg(x, y, tile->ascii_bg_col_value);
-    ascii_set_bg(x, y, UNICODE_BLOCK);
+  if (level->is_lit_currently(curr_at)) {
+    if (tile->ascii_bg_col_value != COLOR_NONE) {
+      ascii_set_bg(x, y, tile->ascii_bg_col_value);
+      ascii_set_bg(x, y, UNICODE_BLOCK);
+    }
+
+    if (tile->ascii_bg_char) {
+      ascii_set_bg(x, y, tile->ascii_bg_char);
+      ascii_set_bg(x, y, tile->ascii_bg_col_value);
+    }
+
+    if (tile->ascii_fg_char) {
+      ascii_set_fg(x, y, tile->ascii_fg_char);
+      ascii_set_fg(x, y, tile->ascii_fg_col_value);
+    }
+  } else if (level->is_lit_ever(curr_at)) {
+    if (gfx_shown_in_bg()) {
+      if (tile->ascii_bg_col_value != COLOR_NONE) {
+        ascii_set_bg(x, y, GRAY20);
+        ascii_set_bg(x, y, UNICODE_BLOCK);
+      }
+
+      if (tile->ascii_bg_char) {
+        ascii_set_bg(x, y, tile->ascii_bg_char);
+        ascii_set_bg(x, y, GRAY20);
+      }
+
+      if (tile->ascii_fg_char) {
+        ascii_set_fg(x, y, tile->ascii_fg_char);
+        ascii_set_fg(x, y, GRAY30);
+      }
+    }
   }
 
-  if (tile->ascii_bg_char) {
-    ascii_set_bg(x, y, tile->ascii_bg_char);
-    ascii_set_bg(x, y, tile->ascii_bg_col_value);
-  }
-
-  if (tile->ascii_fg_char) {
-    ascii_set_fg(x, y, tile->ascii_fg_char);
-    ascii_set_fg(x, y, tile->ascii_fg_col_value);
-  }
-
-  last_blit_br = point(x, y);
-  last_blit_tl = point(x, y);
-  last_blit_at = point(x, y);
-  is_blitted   = true;
+  last_ascii_at = point(x, y);
+  last_blit_at  = point(curr_at.x * TILE_WIDTH, curr_at.y * TILE_HEIGHT);
+  last_blit_tl  = last_blit_at;
+  last_blit_br  = point((curr_at.x + 1) * TILE_WIDTH, (curr_at.y + 1) * TILE_HEIGHT);
+  is_blitted    = true;
 }

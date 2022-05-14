@@ -757,6 +757,10 @@ void Light::render(int ray_cast_only)
     return;
   }
 
+  if (g_opt_ascii) {
+    return;
+  }
+
   render_triangle_fans();
 }
 

@@ -344,6 +344,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   in >> bits(my.t->last_at);
   in >> bits(my.t->curr_at);
   in >> bits(my.t->last_attached);
+  in >> bits(my.t->last_ascii_at);
   in >> bits(my.t->last_blit_br);
   in >> bits(my.t->last_blit_tl);
   in >> bits(my.t->last_blit_at);
