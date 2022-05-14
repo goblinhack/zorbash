@@ -18,16 +18,17 @@ def tp_init(name):
 
     delay = 200  # too fast and you don't see it
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_bg_char="block", ascii_bg_col_name="orange", ascii_fg_col_name="",
             tile=name + ".1", delay_ms=delay)
     delay = 100  # too fast and you don't see it
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_bg_char="block", ascii_bg_col_name="orange", ascii_fg_col_name="",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_bg_char="block", ascii_bg_col_name="orange", ascii_fg_col_name="",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
+            ascii_bg_char="block", ascii_bg_col_name="orange", ascii_fg_col_name="",
             tile=name + ".4",
             delay_ms=delay,
             is_end_of_anim=True,

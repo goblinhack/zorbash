@@ -26,13 +26,20 @@ def tp_init(name):
 
     delay = 50
     my.tile(self,
-            ascii_fg_char="E", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_bg_char="block", ascii_bg_col_name="cyan", ascii_fg_col_name="",
             tile="nothing")
-    my.tile(self, "explosion_fire.1", delay_ms=delay)
-    my.tile(self, "explosion_fire.2", delay_ms=delay)
-    my.tile(self, "explosion_fire.3", delay_ms=delay)
     my.tile(self,
-            "explosion_fire.4",
+            ascii_bg_char="block", ascii_bg_col_name="cyan", ascii_fg_col_name="",
+            tile="explosion_fire.1", delay_ms=delay)
+    my.tile(self,
+            ascii_bg_char="block", ascii_bg_col_name="cyan", ascii_fg_col_name="",
+            tile="explosion_fire.2", delay_ms=delay)
+    my.tile(self,
+            ascii_bg_char="block", ascii_bg_col_name="cyan", ascii_fg_col_name="",
+            tile="explosion_fire.3", delay_ms=delay)
+    my.tile(self,
+            ascii_bg_char="block", ascii_bg_col_name="cyan", ascii_fg_col_name="",
+            tile="explosion_fire.4",
             delay_ms=delay,
             is_end_of_anim=True,
             is_dead_on_end_of_anim=True)
