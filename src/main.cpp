@@ -518,13 +518,13 @@ static void parse_args(int32_t argc, char *argv[])
   for (i = 1; i < argc; i++) {
     if (! strcasecmp(argv[ i ], "--ascii") || ! strcasecmp(argv[ i ], "-ascii")) {
       g_opt_ascii     = true;
-      g_opt_ascii_set = true;
+      g_opt_ascii_override = true;
       continue;
     }
 
     if (! strcasecmp(argv[ i ], "--pixelart") || ! strcasecmp(argv[ i ], "-pixelart")) {
       g_opt_ascii     = false;
-      g_opt_ascii_set = true;
+      g_opt_ascii_override = true;
       continue;
     }
 
@@ -711,7 +711,7 @@ int32_t main(int32_t argc, char *argv[])
   // Check for overrides.
   //
   if (game) {
-    if (g_opt_ascii_set) {
+    if (g_opt_ascii_override) {
       parse_args(argc, argv);
     }
   }
