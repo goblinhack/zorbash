@@ -57,7 +57,7 @@ static const int matrix_table[ 8 ][ 4 ] = {
 };
 
 // Cast visiblity using shadowcasting.
-void Level::scan(Thingp me, FovMap *fov, int pov_x, int pov_y,
+void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int pov_y,
                  int   distance, // Polar distance from POV.
                  float view_slope_high, float view_slope_low, int max_radius, int octant, bool light_walls)
 {
@@ -111,7 +111,10 @@ void Level::scan(Thingp me, FovMap *fov, int pov_x, int pov_y,
     }
 
     if (angle * angle + distance * distance <= radius_squared && (light_walls || ! light_blocker)) {
-      set(fov->can_see, map_x, map_y, true);
+      set(fov_curr->can_see, map_x, map_y, true);
+      if (fov_ever) {
+        set(fov_ever->can_see, map_x, map_y, true);
+      }
     }
 
     if (prev_tile_blocked && ! light_blocker) { // Wall -> floor.
@@ -120,7 +123,8 @@ void Level::scan(Thingp me, FovMap *fov, int pov_x, int pov_y,
 
     if (! prev_tile_blocked && light_blocker) { // Floor -> wall.
       // Get the last sequence of floors as a view and recurse into them.
-      scan(me, fov, pov_x, pov_y, distance + 1, view_slope_high, tile_slope_high, max_radius, octant, light_walls);
+      scan(me, fov_curr, fov_ever, pov_x, pov_y, distance + 1, view_slope_high, tile_slope_high, max_radius, octant,
+           light_walls);
     }
 
     prev_tile_blocked = light_blocker;
@@ -128,18 +132,20 @@ void Level::scan(Thingp me, FovMap *fov, int pov_x, int pov_y,
 
   if (! prev_tile_blocked) {
     // Tail-recurse into the current view.
-    scan(me, fov, pov_x, pov_y, distance + 1, view_slope_high, view_slope_low, max_radius, octant, light_walls);
+    scan(me, fov_curr, fov_ever, pov_x, pov_y, distance + 1, view_slope_high, view_slope_low, max_radius, octant,
+         light_walls);
   }
 }
 
-bool Level::fov_calculate(Thingp me, FovMap *fov, int pov_x, int pov_y, int max_radius, bool light_walls)
+bool Level::fov_calculate(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int pov_y, int max_radius,
+                          bool light_walls)
 {
   if (is_oob(pov_x, pov_y)) {
     err("Point of view {%i, %i} is out of bounds.", pov_x, pov_y);
     return false;
   }
 
-  fov->can_see = {};
+  fov_curr->can_see = {};
 
   if (max_radius <= 0) {
     int max_radius_x = std::max(MAP_WIDTH - pov_x, pov_x);
@@ -149,10 +155,11 @@ bool Level::fov_calculate(Thingp me, FovMap *fov, int pov_x, int pov_y, int max_
 
   /* recursive shadow casting */
   for (int octant = 0; octant < 8; ++octant) {
-    scan(me, fov, pov_x, pov_y, 1, 1.0, 0.0, max_radius, octant, light_walls);
+    scan(me, fov_curr, fov_ever, pov_x, pov_y, 1, 1.0, 0.0, max_radius, octant, light_walls);
   }
 
-  set(fov->can_see, pov_x, pov_y, true);
+  set(fov_curr->can_see, pov_x, pov_y, true);
+  set(fov_ever->can_see, pov_x, pov_y, true);
 
   return true;
 }

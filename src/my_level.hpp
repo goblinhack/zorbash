@@ -15,6 +15,7 @@
 #include "my_fwd.hpp"
 #include "my_game_defs.hpp"
 #include "my_laser.hpp"
+#include "my_level_fov.hpp"
 #include "my_particle.hpp"
 #include "my_point3d.hpp"
 #include "my_projectile.hpp"
@@ -93,6 +94,12 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wet_grass {};
 
   std::array< std::array< uint32_t, MAP_HEIGHT >, MAP_WIDTH > _is_map_changed {};
+
+  //
+  // This is what the player has seen on this level, now and forever.
+  //
+  FovMap can_see_currently; // Shadowcasting of what can be seen currently
+  FovMap can_see_ever;      // Shadowcasting of what can be seen ever on this level
 
   //
   // Holds noise as it fades around the level
@@ -1172,11 +1179,12 @@ public:
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);
   std::deque< Thingp > flood_fill_things(point, std::function< int(Thingp) > filter);
 
-  void scan(Thingp me, struct FovMap_ *fov, int pov_x, int pov_y,
+  void scan(Thingp me, struct FovMap_ *fov_curr, struct FovMap_ *fov_ever, int pov_x, int pov_y,
             int   distance, // Polar distance from POV.
             float view_slope_high, float view_slope_low, int max_radius, int octant, bool light_walls);
 
-  bool fov_calculate(Thingp me, struct FovMap_ *fov, int pov_x, int pov_y, int max_radius, bool light_walls = true);
+  bool fov_calculate(Thingp me, struct FovMap_ *fov_curr, struct FovMap_ *fov_ever, int pov_x, int pov_y,
+                     int max_radius, bool light_walls = true);
 };
 
 #endif

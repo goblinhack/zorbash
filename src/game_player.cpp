@@ -9,6 +9,7 @@
 #include "my_globals.hpp"
 #include "my_globals_extra.hpp"
 #include "my_level.hpp"
+#include "my_monst.hpp"
 #include "my_random.hpp"
 #include "my_random_name.hpp"
 #include "my_sys.hpp"
@@ -28,7 +29,7 @@ void Game::place_player(void)
   //
   // Place the player if we do not have one.
   //
-  if (! game->level) {
+  if (! level) {
     ERR("No level for player");
     return;
   }
@@ -230,4 +231,10 @@ void Game::place_player(void)
 
   level->ts_fade_in_begin = time_ms_cached();
   level->ts_redraw_bg     = 1; // Force redraw
+
+  auto player = level->player;
+  if (player) {
+    level->fov_calculate(player, &level->can_see_currently, &level->can_see_ever, player->curr_at.x,
+                         player->curr_at.y, player->distance_vision_get());
+  }
 }

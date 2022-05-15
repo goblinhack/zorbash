@@ -295,6 +295,12 @@ public:
 
   Dmap dmap_can_see; // What the monster can reach during AI
 
+  //
+  // This is flushed when the monster changes level.
+  //
+  // For the player we store this on the level context so we can see the
+  // contents of old levels.
+  //
   FovMap can_see_currently; // Shadowcasting of what can be seen currently
   FovMap can_see_ever;      // Shadowcasting of what can be seen ever on this level
 

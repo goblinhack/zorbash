@@ -21,26 +21,8 @@
 
 void Level::display_ascii_map(point tl, point br)
 {
-  int light_minx;
-  int light_maxx;
-  int light_miny;
-  int light_maxy;
-
   display_map_set_bounds();
-
-  //
-  // For light sources we need to draw a bit off map as the light
-  // has a radius
-  //
-  light_minx = std::max(0, minx - TILES_VISIBLE_ACROSS);
-  light_maxx = std::min(MAP_HEIGHT, maxx + TILES_VISIBLE_ACROSS);
-  light_miny = std::max(0, miny - TILES_VISIBLE_DOWN);
-  light_maxy = std::min(MAP_HEIGHT, maxy + TILES_VISIBLE_DOWN);
-
   display_tick_animation();
-
-  lights_render(light_minx, light_miny, light_maxx, light_maxy, FBO_PLAYER_VISIBLE_LIGHTING);
-
   cursor_find_on_visible_things(minx, miny, maxx, maxy);
 
   ts_fade_in_begin  = 0;

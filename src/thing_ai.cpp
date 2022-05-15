@@ -1909,9 +1909,11 @@ bool Thing::ai_tick(bool recursing)
     // We need to grow the light a bit for level explorers
     //
     if (is_explorer()) {
-      level->fov_calculate(this, &ai->can_see_currently, vision_souce.x, vision_souce.y, distance_vision_get() + 1);
+      level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, vision_souce.x, vision_souce.y,
+                           distance_vision_get() + 1);
     } else {
-      level->fov_calculate(this, &ai->can_see_currently, vision_souce.x, vision_souce.y, distance_vision_get());
+      level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, vision_souce.x, vision_souce.y,
+                           distance_vision_get());
     }
 
     //
@@ -1920,18 +1922,6 @@ bool Thing::ai_tick(bool recursing)
     if (map_treasure_available()) {
       for (int y = miny; y <= maxy; y++) {
         for (int x = minx; x <= maxx; x++) {
-          set(ai->can_see_ever.can_see, x, y, true);
-        }
-      }
-    }
-
-    //
-    // Anything we can see currently, set into the "have ever seen" array
-    //
-    for (int y = miny; y <= maxy; y++) {
-      for (int x = minx; x <= maxx; x++) {
-        if (ai->can_see_currently.can_see[ x ][ y ]) {
-          IF_DEBUG3 { (void) level->thing_new("ai_path2", point(x, y)); }
           set(ai->can_see_ever.can_see, x, y, true);
         }
       }

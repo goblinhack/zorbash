@@ -59,7 +59,7 @@ void Thing::blit_ascii(point tl, point br, point p)
   int x = tl.x + (p.x - level->minx);
   int y = tl.y + (p.y - level->miny);
 
-  if (level->is_lit_currently(curr_at)) {
+  if (get(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
     if (tile->ascii_bg_col_value != COLOR_NONE) {
       ascii_set_bg(x, y, UNICODE_BLOCK);
       ascii_set_bg(x, y, tile->ascii_bg_col_value);
@@ -74,7 +74,7 @@ void Thing::blit_ascii(point tl, point br, point p)
       ascii_set_fg(x, y, tile->ascii_fg_char);
       ascii_set_fg(x, y, tile->ascii_fg_col_value);
     }
-  } else if (level->is_lit_ever(curr_at)) {
+  } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
     if (gfx_shown_in_bg()) {
 
       if (tile->ascii_bg_col_value != COLOR_NONE) {
