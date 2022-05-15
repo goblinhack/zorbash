@@ -209,7 +209,7 @@ void Level::tick(void)
     //
     // Check for level transitions
     //
-    if (! g_opt_ascii || fade_out_finished) {
+    if (g_opt_ascii || fade_out_finished) {
       if (player && player->is_waiting_to_descend_dungeon) {
         if (! player->descend_dungeon()) {
           player->err("Failed to descend dungeon");
@@ -249,7 +249,7 @@ void Level::tick(void)
   }
 
   if (game->things_are_moving) {
-    dbg("Tick (things are still moving)");
+    dbg("Tick (things are moving)");
   } else {
     dbg("Tick");
   }
@@ -400,6 +400,9 @@ void Level::tick(void)
 
     FOR_ALL_EQUIP(e)
     {
+      //
+      // Check for any use animations e.g. a jelly's attack with green splatter anim.
+      //
       auto equip_id = t->equip_id_use_anim(e);
       if (equip_id.ok()) {
         auto w = thing_find(equip_id);
@@ -554,7 +557,7 @@ void Level::tick(void)
   //
   // We've finished waiting on all things, bump the game tick.
   //
-  dbg("Level tick about to end");
+  dbg("Level tick about to end as finshed on waiting");
   TRACE_AND_INDENT();
   bool tick_done = game->tick_end();
 
