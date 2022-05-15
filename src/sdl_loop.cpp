@@ -133,11 +133,14 @@ void sdl_loop(void)
     if (unlikely(update_very_slow)) {
       ui_ts_very_slow_last = ts_now;
 
+      //
+      // This tick is for either
+      // a) ascii mode
+      // b) when in pixeal art mode and between levels and waiting for level fade in
+      //
       if (likely(! g_errored)) {
-        if (g_opt_ascii) {
-          if (likely(game->level != nullptr)) {
-            game->level->tick();
-          }
+        if (likely(game->level != nullptr)) {
+          game->level->tick();
         }
       }
 
@@ -246,7 +249,7 @@ void sdl_loop(void)
 
       //
       // If the user has moved the mouse, tick to allow the cursor to move.
-      // Ot if a tick has started, tick quickly.
+      // Or if a tick has started, tick quickly.
       //
       if (likely(! g_errored)) {
         if (likely(game->level != nullptr)) {
