@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_sys.hpp"
@@ -103,25 +104,25 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_lava(x, y)) {
           c = ORANGE;
         } else if (is_wall(x, y)) {
-          if (is_lit_ever(x, y)) {
+          if (get(can_see_ever.can_see, x, y)) {
             c = GRAY80;
           } else {
             c = GRAY70;
           }
         } else if (is_rock(x, y)) {
-          if (is_lit_ever(x, y)) {
+          if (get(can_see_ever.can_see, x, y)) {
             c = GRAY70;
           } else {
             c = GRAY60;
           }
         } else if (is_floor(x, y) || is_corridor(x, y)) {
-          if (is_lit_ever(x, y)) {
+          if (get(can_see_ever.can_see, x, y)) {
             c = GRAY40;
           } else {
             c = GRAY20;
           }
         } else if (is_bridge(x, y)) {
-          if (is_lit_ever(x, y)) {
+          if (get(can_see_ever.can_see, x, y)) {
             c = BROWN1;
           } else {
             c = BROWN2;
@@ -150,7 +151,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c.b /= 2;
         }
 
-        if (! is_lit_ever(x, y)) {
+        if (! get(can_see_ever.can_see, x, y)) {
           c.r /= 2;
           c.g /= 2;
           c.b /= 2;
@@ -283,7 +284,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         if (is_monst(x, y) && has_map_beast) {
           c       = RED;
           no_fade = true;
-        } else if (! is_lit_ever(x, y)) {
+        } else if (! get(can_see_ever.can_see, x, y)) {
           c   = BLACK;
           c.a = 100;
         } else if (is_ascend_dungeon(x, y)) {
@@ -305,25 +306,25 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_lava(x, y)) {
           c = ORANGE;
         } else if (is_wall(x, y)) {
-          if (is_lit_ever(x, y)) {
+          if (get(can_see_ever.can_see, x, y)) {
             c = GRAY50;
           } else {
             c = GRAY20;
           }
         } else if (is_rock(x, y)) {
-          if (is_lit_ever(x, y)) {
+          if (get(can_see_ever.can_see, x, y)) {
             c = GRAY70;
           } else {
             c = GRAY60;
           }
         } else if (is_floor(x, y) || is_corridor(x, y)) {
-          if (is_lit_ever(x, y)) {
+          if (get(can_see_ever.can_see, x, y)) {
             c = GRAY20;
           } else {
             c = GRAY10;
           }
         } else if (is_bridge(x, y)) {
-          if (is_lit_ever(x, y)) {
+          if (get(can_see_ever.can_see, x, y)) {
             c = BROWN1;
           } else {
             c = BROWN2;

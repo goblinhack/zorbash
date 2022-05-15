@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_player.hpp"
@@ -36,7 +37,7 @@ bool Level::create_wandering_monster(void)
     auto x = pcg_random_range(MAP_BORDER_ROOM, MAP_WIDTH - MAP_BORDER_ROOM);
     auto y = pcg_random_range(MAP_BORDER_ROOM, MAP_HEIGHT - MAP_BORDER_ROOM);
 
-    if (is_lit_currently(x, y)) {
+    if (get(can_see_currently.can_see, x, y)) {
       return false;
     }
 

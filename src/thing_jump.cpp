@@ -189,7 +189,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       // If we have a treasure map, allow wandering
       //
     } else {
-      if (! level->is_lit_ever(x, y)) {
+      if (! get(level->can_see_ever.can_see, x, y)) {
         IF_DEBUG2 { dbg("No, is not lit or visited"); }
 
         if (is_player()) {
