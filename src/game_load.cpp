@@ -597,6 +597,9 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   in >> bits(my.t->_is_map_changed);
 
+  in >> bits(my.t->can_see_currently);
+  in >> bits(my.t->can_see_ever);
+
   in >> bits(my.t->prev_levels);
   in >> bits(my.t->next_levels);
 

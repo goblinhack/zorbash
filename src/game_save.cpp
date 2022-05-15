@@ -554,6 +554,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   out << bits(my.t->_is_map_changed);
 
+  out << bits(my.t->can_see_currently);
+  out << bits(my.t->can_see_ever);
+
   out << bits(my.t->prev_levels);
   out << bits(my.t->next_levels);
 

@@ -68,6 +68,9 @@ void Level::clear(void)
   _is_treasure_type           = {};
   _is_wall                    = {};
 
+  can_see_currently = {};
+  can_see_ever      = {};
+
   ts_created = time_ms();
   ts_saved   = 0;
 
