@@ -459,8 +459,10 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
     LOG("INF: Save level snapshot");
     game->level->fbo_light.clear();
   } else if (game->level == my.t) {
-    LOG("INF: Save lightmap");
-    game->level->fbo_light = sdl_fbo_save(FBO_PIXELART_FULLMAP_LIGHT);
+    if (! g_opt_ascii) {
+      LOG("INF: Save lightmap");
+      game->level->fbo_light = sdl_fbo_save(FBO_PIXELART_FULLMAP_LIGHT);
+    }
     LOG("INF: Saved lightmap");
   } else {
     /*

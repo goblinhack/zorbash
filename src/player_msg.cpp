@@ -83,16 +83,12 @@ bool Thing::player_is_ready_for_thing_info(void)
     return false;
   }
 
-  if (level->ts_fade_out_begin) {
-    if (! g_opt_ascii) {
-    }
+  if (! g_opt_ascii && level->ts_fade_out_begin) {
     dbg("Not ready for thing info; fading out");
     return false;
   }
 
-  if (level->ts_fade_in_begin) {
-    if (! g_opt_ascii) {
-    }
+  if (! g_opt_ascii && level->ts_fade_in_begin) {
     dbg("Not ready for thing info; fading in");
     return false;
   }

@@ -89,8 +89,7 @@ void Level::display_map(void)
   display_map_set_bounds();
 
   //
-  // For light sources we need to draw a bit off map as the light
-  // has a radius
+  // For light sources we need to draw a bit off map as the light has a radius
   //
   light_minx = std::max(0, minx - TILES_VISIBLE_ACROSS);
   light_maxx = std::min(MAP_HEIGHT, maxx + TILES_VISIBLE_ACROSS);

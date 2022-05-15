@@ -130,7 +130,7 @@ void Level::tick(void)
     return;
   }
 
-  if (ts_fade_in_begin) {
+  if (! g_opt_ascii && ts_fade_in_begin) {
     return;
   }
 
@@ -191,7 +191,7 @@ void Level::tick(void)
     //
     // If the level has started, we can enter robot mode.
     //
-    if (! ts_fade_in_begin) {
+    if (g_opt_ascii || ! ts_fade_in_begin) {
       if (game->robot_mode_requested != game->robot_mode) {
         LOG("INF: Pressed requested robot change");
         game->robot_mode                = game->robot_mode_requested;
@@ -209,7 +209,7 @@ void Level::tick(void)
     //
     // Check for level transitions
     //
-    if (fade_out_finished) {
+    if (! g_opt_ascii || fade_out_finished) {
       if (player && player->is_waiting_to_descend_dungeon) {
         if (! player->descend_dungeon()) {
           player->err("Failed to descend dungeon");
@@ -561,7 +561,7 @@ void Level::tick(void)
   //
   // Check for robot mode changes
   //
-  if (! ts_fade_in_begin) {
+  if (g_opt_ascii || ! ts_fade_in_begin) {
     if (game->robot_mode_requested != game->robot_mode) {
       LOG("INF: Pressed requested robot change");
       game->robot_mode                = game->robot_mode_requested;
