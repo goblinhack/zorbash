@@ -2,7 +2,8 @@
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
 //
-//
+
+#include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
@@ -71,7 +72,7 @@ point Thing::dest_random_get(int d)
         continue;
       } else {
         if (is_player()) {
-          if (! level->is_lit_currently(x, y)) {
+          if (! get(level->can_see_currently.can_see, x, y)) {
             continue;
           }
         }
@@ -111,7 +112,7 @@ point Thing::dest_random_get(int d)
     }
 
     if (is_player()) {
-      if (! level->is_lit_currently(x, y)) {
+      if (! get(level->can_see_currently.can_see, x, y)) {
         continue;
       }
     }
@@ -142,7 +143,7 @@ point Thing::dest_random_get(int d)
   auto y = std::min(std::max(MAP_BORDER_ROCK, start.y + dy), MAP_HEIGHT - MAP_BORDER_ROCK);
 
   if (is_player()) {
-    if (! level->is_lit_currently(x, y)) {
+    if (! get(level->can_see_currently.can_see, x, y)) {
       return point(x, y);
     }
   }
