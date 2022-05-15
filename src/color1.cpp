@@ -166,11 +166,13 @@ color LIMEGREEN;
 color VDARKSLATEBLUE;
 color VVDARKSLATEBLUE;
 
+color DEEPBLUE;
+color PALEBLUE;
+
 void color_init1(void)
 {
   TRACE_AND_INDENT();
 
-  color_set("aliceblue", &ALICEBLUE, 240, 248, 255, 255);
   color_set("antiquewhite1", &ANTIQUEWHITE1, 255, 239, 219, 255);
   color_set("antiquewhite2", &ANTIQUEWHITE2, 238, 223, 204, 255);
   color_set("antiquewhite3", &ANTIQUEWHITE3, 205, 192, 176, 255);
@@ -244,8 +246,8 @@ void color_init1(void)
   color_set("darkblue", &DARKBLUE, 0, 0, 139, 255);
   color_set("darkcyan", &DARKCYAN, 0, 139, 139, 255);
   color_set("darkgray", &DARKGRAY, 169, 169, 169, 255);
-  color_set("darkgrey", &DARKGREY, 169, 169, 169, 255);
   color_set("darkgreen", &DARKGREEN, 0, 100, 0, 255);
+  color_set("darkgrey", &DARKGREY, 169, 169, 169, 255);
   color_set("darkkhaki", &DARKKHAKI, 189, 183, 107, 255);
   color_set("darkmagenta", &DARKMAGENTA, 139, 0, 139, 255);
   color_set("darkolivegreen1", &DARKOLIVEGREEN1, 202, 255, 112, 255);
@@ -266,17 +268,19 @@ void color_init1(void)
   color_set("darkseagreen", &DARKSEAGREEN, 143, 188, 143, 255);
   color_set("darkslateblue", &DARKSLATEBLUE, 72, 61, 139, 255);
   color_set("darkslategray1", &DARKSLATEGRAY1, 151, 255, 255, 255);
-  color_set("darkslategrey1", &DARKSLATEGREY1, 151, 255, 255, 255);
   color_set("darkslategray2", &DARKSLATEGRAY2, 141, 238, 238, 255);
-  color_set("darkslategrey2", &DARKSLATEGREY2, 141, 238, 238, 255);
   color_set("darkslategray3", &DARKSLATEGRAY3, 121, 205, 205, 255);
-  color_set("darkslategrey3", &DARKSLATEGREY3, 121, 205, 205, 255);
   color_set("darkslategray4", &DARKSLATEGRAY4, 82, 139, 139, 255);
-  color_set("darkslategrey4", &DARKSLATEGREY4, 82, 139, 139, 255);
   color_set("darkslategray", &DARKSLATEGRAY, 47, 79, 79, 255);
+  color_set("darkslategrey1", &DARKSLATEGREY1, 151, 255, 255, 255);
+  color_set("darkslategrey2", &DARKSLATEGREY2, 141, 238, 238, 255);
+  color_set("darkslategrey3", &DARKSLATEGREY3, 121, 205, 205, 255);
+  color_set("darkslategrey4", &DARKSLATEGREY4, 82, 139, 139, 255);
   color_set("darkslategrey", &DARKSLATEGREY, 47, 79, 79, 255);
   color_set("darkturquoise", &DARKTURQUOISE, 0, 206, 209, 255);
   color_set("darkviolet", &DARKVIOLET, 148, 0, 211, 255);
+  color_set("deepblue2", &DEEPBLUE, 12, 50, 80, 255);
+  color_set("deepblue", &DEEPBLUE, 12, 20, 50, 255);
   color_set("deeppink1", &DEEPPINK1, 255, 20, 147, 255);
   color_set("deeppink2", &DEEPPINK2, 238, 18, 137, 255);
   color_set("deeppink3", &DEEPPINK3, 205, 16, 118, 255);
@@ -311,6 +315,8 @@ void color_init1(void)
   color_set("limegreen", &LIMEGREEN, 50, 205, 50, 255);
   color_set("lime", &LIME, 50, 205, 50, 255);
   color_set("none", &COLOR_NONE, 0, 0, 0, 0);
+  color_set("paleblue2", &PALEBLUE, 75, 120, 200, 255);
+  color_set("paleblue", &PALEBLUE, 75, 75, 150, 255);
   color_set("vdarkslateblue", &VDARKSLATEBLUE, 42, 31, 109, 255);
   color_set("vvdarkslateblue", &VVDARKSLATEBLUE, 32, 21, 99, 255);
 }
