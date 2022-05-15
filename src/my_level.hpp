@@ -34,7 +34,6 @@ public:
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _noise_blocker {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker_for_monst {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_lit_ever {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_destructable {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_wall_or_door {};
 
@@ -72,7 +71,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_heavy {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_key {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lava {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lit_currently {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_currently_pixelart_raycast_lit {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_monst {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_pink_blood {};
@@ -801,10 +800,10 @@ public:
   uint8_t is_lava(const int x, const int y);
   uint8_t is_lava(const point p);
   uint8_t is_lava_no_check(const int x, const int y);
-  uint8_t is_lit_currently(const int x, const int y);
-  uint8_t is_lit_currently(const point p);
-  uint8_t is_lit_currently_no_check(const int x, const int y);
-  uint8_t is_lit_currently_no_check(const point p);
+  uint8_t is_currently_pixelart_raycast_lit(const int x, const int y);
+  uint8_t is_currently_pixelart_raycast_lit(const point p);
+  uint8_t is_currently_pixelart_raycast_lit_no_check(const int x, const int y);
+  uint8_t is_currently_pixelart_raycast_lit_no_check(const point p);
   uint8_t is_lit_ever(const int x, const int y);
   uint8_t is_lit_ever(const point p);
   uint8_t is_lit_ever_no_check(const int x, const int y);
@@ -1035,11 +1034,11 @@ public:
   void is_light_blocker_no_check_unset(const int x, const int y);
   void is_light_blocker_set(const int x, const int y);
   void is_light_blocker_unset(const int x, const int y);
-  void is_lit_currently_no_check_set(const int x, const int y);
-  void is_lit_currently_no_check_set(const int x, const int y, uint8_t v);
-  void is_lit_currently_no_check_unset(const int x, const int y);
-  void is_lit_currently_set(const int x, const int y);
-  void is_lit_currently_unset(const int x, const int y);
+  void is_currently_pixelart_raycast_lit_no_check_set(const int x, const int y);
+  void is_currently_pixelart_raycast_lit_no_check_set(const int x, const int y, uint8_t v);
+  void is_currently_pixelart_raycast_lit_no_check_unset(const int x, const int y);
+  void is_currently_pixelart_raycast_lit_set(const int x, const int y);
+  void is_currently_pixelart_raycast_lit_unset(const int x, const int y);
   void is_lit_ever_no_check_set(const int x, const int y);
   void is_lit_ever_no_check_unset(const int x, const int y);
   void is_lit_ever_set(const int x, const int y);

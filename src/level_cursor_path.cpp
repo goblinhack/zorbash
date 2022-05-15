@@ -353,35 +353,6 @@ void Level::cursor_path_create(void)
   }
 
   //
-  // No clicking into the dark void
-  //
-#if 0
-  IF_NODEBUG
-  {
-    bool ok = false;
-
-    //
-    // But allow us to walk into the shadows as the light has a bit of blurring.
-    //
-    auto shadow_distance = 3;
-    for (int dx = -shadow_distance; dx <= shadow_distance; dx++) {
-      for (int dy = -shadow_distance; dy <= shadow_distance; dy++) {
-        if (is_lit_ever(cursor_at.x + dx, cursor_at.y + dy)) {
-          ok = true;
-          break;
-        }
-      }
-      if (ok) {
-        break;
-      }
-    }
-    if (! ok) {
-      TOPCON("You cannot see that far");
-    }
-  }
-#endif
-
-  //
   // If not following the player, draw the path
   //
   cursor_path_draw(point(player->curr_at.x, player->curr_at.y), point(cursor_at.x, cursor_at.y));

@@ -297,8 +297,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       // not have to wait so long/
       //
       if (game->robot_mode) {
-        if (! level->is_lit_currently(make_point(curr_at.x, curr_at.y)) &&
-            ! level->is_lit_currently(make_point(to.x, to.y))) {
+        if (! get(level->can_see_currently.can_see, curr_at.x, curr_at.y) &&
+            ! get(level->can_see_currently.can_see, to.x, to.y)) {
           duration = 0;
         }
       }
