@@ -146,7 +146,9 @@ float Thing::fall_curr(void)
 
     if (is_player()) {
       dbg("Player is waiting to complete the fall");
-      level->ts_fade_out_begin = time_ms_cached();
+      if (! g_opt_ascii) {
+        level->ts_fade_out_begin = time_ms_cached();
+      }
     }
 
     is_waiting_to_leave_level_has_completed_fall = true;

@@ -1834,7 +1834,7 @@ bool Thing::ai_tick(bool recursing)
     return false;
   }
 
-  if (level->ts_fade_in_begin) {
+  if (! g_opt_ascii && level->ts_fade_in_begin) {
     return false;
   }
 

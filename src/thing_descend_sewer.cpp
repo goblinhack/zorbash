@@ -32,10 +32,13 @@ bool Thing::descend_sewer_tick(void)
   if (is_player()) {
     if (level->world_at.z & 1) {
       dbg("Descending sewer");
-      level->ts_fade_out_begin    = time_ms_cached();
-      level->fbo_light            = sdl_fbo_save(FBO_PIXELART_FULLMAP_LIGHT);
+      if (! g_opt_ascii) {
+        level->ts_fade_out_begin = time_ms_cached();
+        level->fbo_light         = sdl_fbo_save(FBO_PIXELART_FULLMAP_LIGHT);
+      }
       is_waiting_to_descend_sewer = true;
       move_finish();
+      dbg("Descend sewer on move finish");
       return true;
     }
   } else {
@@ -62,6 +65,7 @@ bool Thing::descend_sewer(void)
   TRACE_AND_INDENT();
 
   if (! maybe_infop()) {
+    dbg("Descend sewer; cannot descend, no infop");
     return false;
   }
 
@@ -71,6 +75,7 @@ bool Thing::descend_sewer(void)
       //
       // Don't descend if player is on the same level
       //
+      dbg("Descend sewer; no, player is on same level");
       return false;
     }
   }
@@ -79,6 +84,7 @@ bool Thing::descend_sewer(void)
 
   if (next_level.z >= LEVELS_DEEP) {
     fall_into_the_void();
+    dbg("Descend sewer; no, fell off the end reality");
     return false;
   }
 
