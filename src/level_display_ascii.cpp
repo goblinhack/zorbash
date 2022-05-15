@@ -23,6 +23,7 @@ void Level::display_ascii_map(point tl, point br)
 {
   display_map_set_bounds();
   display_tick_animation();
+
   cursor_find_on_visible_things(minx, miny, maxx, maxy);
 
   ts_fade_in_begin  = 0;

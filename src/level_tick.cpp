@@ -131,6 +131,7 @@ void Level::tick(void)
   }
 
   if (! g_opt_ascii && ts_fade_in_begin) {
+    CON("WAOT");
     return;
   }
 
@@ -233,6 +234,7 @@ void Level::tick(void)
       if (player && player->is_waiting_to_leave_level_has_completed_fall) {
         player->fall_to_next_level();
       }
+      fade_out_finished = false;
     }
 
     if (game->things_are_moving) {

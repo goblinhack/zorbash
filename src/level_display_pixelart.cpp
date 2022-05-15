@@ -80,13 +80,12 @@ void Level::display_pixelart(void)
 
 void Level::display_map(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   int light_minx;
   int light_maxx;
   int light_miny;
   int light_maxy;
-
-  display_map_set_bounds();
 
   //
   // For light sources we need to draw a bit off map as the light has a radius
@@ -96,12 +95,12 @@ void Level::display_map(void)
   light_miny = std::max(0, miny - TILES_VISIBLE_DOWN);
   light_maxy = std::min(MAP_HEIGHT, maxy + TILES_VISIBLE_DOWN);
 
+  display_map_set_bounds();
   display_tick_animation();
 
-  bool fade_out     = ts_fade_out_begin != 0;
-  bool fade_in      = ts_fade_in_begin != 0;
-  bool frozen       = player ? player->is_changing_level : false;
-  fade_out_finished = false;
+  bool fade_out = ts_fade_out_begin != 0;
+  bool fade_in  = ts_fade_in_begin != 0;
+  bool frozen   = player ? player->is_changing_level : false;
 
   if (fade_out) {
     if ((time_ms_cached() < ts_fade_out_begin) || (time_ms_cached() - ts_fade_out_begin > LEVEL_FADE_OUT_MS)) {
@@ -323,7 +322,8 @@ void Level::display_map(void)
 
 void Level::display_pixelart_map_bg_things(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   auto fbo = FBO_PIXELART_FULLMAP;
   gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
 
@@ -386,7 +386,8 @@ void Level::display_pixelart_map_bg_things(void)
 void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
                                         const int16_t maxy)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
 
@@ -454,7 +455,8 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
 void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
                                            const int16_t maxy)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
 
@@ -502,7 +504,8 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
 void Level::display_pixelart_map_fg2_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
                                             const int16_t maxy)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
 
