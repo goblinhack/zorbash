@@ -492,7 +492,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_noise_blocker);
   out << bits(my.t->_is_light_blocker);
   out << bits(my.t->_is_light_blocker_for_monst);
-  out << bits(my.t->_is_lit_ever);
   out << bits(my.t->_is_obs_destructable);
   out << bits(my.t->_is_obs_wall_or_door);
 
@@ -531,7 +530,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_heavy);
   out << bits(my.t->_is_key);
   out << bits(my.t->_is_lava);
-  out << bits(my.t->_is_lit_currently);
+  out << bits(my.t->_is_currently_pixelart_raycast_lit);
   out << bits(my.t->_is_mob);
   out << bits(my.t->_is_monst);
   out << bits(my.t->_is_pink_blood);

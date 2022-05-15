@@ -75,7 +75,7 @@ void Thing::level_enter(bool rejoin)
     //
     blit_fbo_bind(FBO_PIXELART_FULLMAP_LIGHT);
     glClear(GL_COLOR_BUFFER_BIT);
-    level->_is_lit_currently = {};
+    level->_is_currently_pixelart_raycast_lit = {};
   }
   level_push();
 

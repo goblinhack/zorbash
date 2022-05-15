@@ -800,7 +800,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   auto h = health();
   auto m = health_max();
 
-  auto lit = (fbo == FBO_PIXELART_FULLMAP) || level->is_lit_currently_no_check(curr_at.x, curr_at.y);
+  auto lit = (fbo == FBO_PIXELART_FULLMAP) || level->is_currently_pixelart_raycast_lit_no_check(curr_at.x, curr_at.y);
 
   if (tile && ! tile->is_invisible && ! is_dead && ! reflection && lit &&
       (gfx_health_bar_shown() || (gfx_health_bar_autohide() && (h < m)))) {
@@ -871,7 +871,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   //
   // Means it has been lit, but light does fade
   //
-  uint8_t fade = level->is_lit_currently(curr_at.x, curr_at.y);
+  uint8_t fade = level->is_currently_pixelart_raycast_lit(curr_at.x, curr_at.y);
   if (fbo == FBO_PIXELART_FULLMAP) {
     c.a = 255;
   } else if (light_dist_get()) {

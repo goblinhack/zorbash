@@ -535,7 +535,6 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_noise_blocker);
   in >> bits(my.t->_is_light_blocker);
   in >> bits(my.t->_is_light_blocker_for_monst);
-  in >> bits(my.t->_is_lit_ever);
   in >> bits(my.t->_is_obs_destructable);
   in >> bits(my.t->_is_obs_wall_or_door);
 
@@ -574,7 +573,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_heavy);
   in >> bits(my.t->_is_key);
   in >> bits(my.t->_is_lava);
-  in >> bits(my.t->_is_lit_currently);
+  in >> bits(my.t->_is_currently_pixelart_raycast_lit);
   in >> bits(my.t->_is_mob);
   in >> bits(my.t->_is_monst);
   in >> bits(my.t->_is_pink_blood);

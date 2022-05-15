@@ -238,11 +238,6 @@ bool Light::calculate(void)
     last_y = y;                                                                                                      \
   }
 
-  //
-  // Make sure the current tile is always marked visited.
-  //
-  level->is_lit_ever_set((int) player->curr_at.x, (int) player->curr_at.y);
-
   auto light_dist_current = light_dist;
   if (! light_dist_current) {
     return false;
@@ -290,8 +285,7 @@ bool Light::calculate(void)
             const uint8_t y   = p1y / TILE_HEIGHT;
 
             AVOID_LOOKING_AT_THE_SAME_TILE()
-            level->is_lit_ever_no_check_set(x, y);      // for AI and jumping
-            level->is_lit_currently_no_check_set(x, y); // allows lights to fade
+            level->is_currently_pixelart_raycast_lit_no_check_set(x, y); // allows lights to fade
             rp++;
 
             //
@@ -407,8 +401,7 @@ bool Light::calculate(void)
             const uint8_t y   = p1y / TILE_HEIGHT;
 
             AVOID_LOOKING_AT_THE_SAME_TILE()
-            level->is_lit_ever_set(x, y);      // for AI and jumping
-            level->is_lit_currently_set(x, y); // allows lights to fade
+            level->is_currently_pixelart_raycast_lit_set(x, y); // allows lights to fade
             rp++;
 
             //
@@ -529,8 +522,7 @@ bool Light::calculate(void)
           const uint8_t y   = p1y / TILE_HEIGHT;
 
           AVOID_LOOKING_AT_THE_SAME_TILE()
-          level->is_lit_ever_set(x, y);      // for AI and jumping
-          level->is_lit_currently_set(x, y); // allows lights to fade
+          level->is_currently_pixelart_raycast_lit_set(x, y); // allows lights to fade
           rp++;
 
           //
@@ -641,7 +633,7 @@ bool Light::calculate(void)
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       for (auto x = 0; x < MAP_WIDTH; x++) {
         if ((x == (int)player->curr_at.x) && (y == (int)player->curr_at.y)) {
-          if (level->is_lit_ever(x, y)) {
+          if (level->is_currently_pixelart_raycast_lit(x, y)) {
             printf("*");
           } else {
             printf("o");
@@ -658,7 +650,7 @@ bool Light::calculate(void)
           if (level->is_obs_wall_or_door(x, y)) {
             printf("X");
           } else {
-            if (level->is_lit_ever(x, y)) {
+            if (level->is_currently_pixelart_raycast_lit(x, y)) {
               printf(",");
             } else {
               printf(" ");
@@ -861,7 +853,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
             continue;
           }
 
-          if (! is_lit_currently_no_check(t->curr_at.x, t->curr_at.y)) {
+          if (! is_currently_pixelart_raycast_lit_no_check(t->curr_at.x, t->curr_at.y)) {
             continue;
           }
 
@@ -895,7 +887,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           //
           // Fade the lights according to how recently seen.
           //
-          auto scale = (((float) t->level->is_lit_currently_no_check(x, y))) / 255.0;
+          auto scale = (((float) t->level->is_currently_pixelart_raycast_lit_no_check(x, y))) / 255.0;
           c.r        = (((float) c.r)) * scale;
           c.g        = (((float) c.g)) * scale;
           c.b        = (((float) c.b)) * scale;
@@ -945,7 +937,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
             continue;
           }
 
-          if (! is_lit_currently_no_check(t->curr_at.x, t->curr_at.y)) {
+          if (! is_currently_pixelart_raycast_lit_no_check(t->curr_at.x, t->curr_at.y)) {
             continue;
           }
 
@@ -974,7 +966,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           //
           // Fade the lights according to how recently seen.
           //
-          auto scale = (((float) t->level->is_lit_currently_no_check(x, y))) / 255.0;
+          auto scale = (((float) t->level->is_currently_pixelart_raycast_lit_no_check(x, y))) / 255.0;
           c.r        = (((float) c.r)) * scale;
           c.g        = (((float) c.g)) * scale;
           c.b        = (((float) c.b)) * scale;
@@ -1000,11 +992,11 @@ void Level::lights_fade(void)
   TRACE_AND_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      auto v = is_lit_currently_no_check(x, y);
+      auto v = is_currently_pixelart_raycast_lit_no_check(x, y);
       if (v > 10) {
-        is_lit_currently_no_check_set(x, y, v - 10);
+        is_currently_pixelart_raycast_lit_no_check_set(x, y, v - 10);
       } else {
-        is_lit_currently_no_check_set(x, y, 0);
+        is_currently_pixelart_raycast_lit_no_check_set(x, y, 0);
       }
     }
   }
@@ -1054,15 +1046,18 @@ void Level::lights_update_same_level(void)
   }
 }
 
-uint8_t Level::is_lit_currently(const point p)
+uint8_t Level::is_currently_pixelart_raycast_lit(const point p)
 {
   if (unlikely(is_oob(p.x, p.y))) {
     return false;
   }
-  return (get(_is_lit_currently, p.x, p.y));
+  return (get(_is_currently_pixelart_raycast_lit, p.x, p.y));
 }
 
-uint8_t Level::is_lit_currently_no_check(const point p) { return (get_no_check(_is_lit_currently, p.x, p.y)); }
+uint8_t Level::is_currently_pixelart_raycast_lit_no_check(const point p)
+{
+  return (get_no_check(_is_currently_pixelart_raycast_lit, p.x, p.y));
+}
 
 //
 // Note light fades
@@ -1075,25 +1070,28 @@ uint8_t Level::is_lit_recently(const int x, const int y)
   //
   // So anything older than 10 ticks we consider not lit recently
   //
-  return (get(_is_lit_currently, x, y) > 250);
+  return (get(_is_currently_pixelart_raycast_lit, x, y) > 250);
 }
 
 //
 // Note light fades
 //
-uint8_t Level::is_lit_currently(const int x, const int y)
+uint8_t Level::is_currently_pixelart_raycast_lit(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return false;
   }
-  return (get(_is_lit_currently, x, y));
+  return (get(_is_currently_pixelart_raycast_lit, x, y));
 }
 
-uint8_t Level::is_lit_currently_no_check(const int x, const int y) { return (get_no_check(_is_lit_currently, x, y)); }
-
-void Level::is_lit_currently_no_check_set(const int x, const int y)
+uint8_t Level::is_currently_pixelart_raycast_lit_no_check(const int x, const int y)
 {
-  auto l = getptr_no_check(_is_lit_currently, x, y);
+  return (get_no_check(_is_currently_pixelart_raycast_lit, x, y));
+}
+
+void Level::is_currently_pixelart_raycast_lit_no_check_set(const int x, const int y)
+{
+  auto l = getptr_no_check(_is_currently_pixelart_raycast_lit, x, y);
   if (g_opt_ascii) {
     *l = 1;
     return;
@@ -1106,9 +1104,12 @@ void Level::is_lit_currently_no_check_set(const int x, const int y)
   }
 }
 
-void Level::is_lit_currently_set(const int x, const int y)
+void Level::is_currently_pixelart_raycast_lit_set(const int x, const int y)
 {
-  auto l = getptr(_is_lit_currently, x, y);
+  auto l = getptr(_is_currently_pixelart_raycast_lit, x, y);
+  //
+  // If not lit, push to full brightness. Else just allow the light to fade in.
+  //
   if (*l == 0) {
     *l = 255;
   } else if (*l < 255) {
@@ -1116,70 +1117,20 @@ void Level::is_lit_currently_set(const int x, const int y)
   }
 }
 
-void Level::is_lit_currently_no_check_set(const int x, const int y, uint8_t v)
+void Level::is_currently_pixelart_raycast_lit_no_check_set(const int x, const int y, uint8_t v)
 {
-  set_no_check(_is_lit_currently, x, y, v);
+  set_no_check(_is_currently_pixelart_raycast_lit, x, y, v);
 }
 
-void Level::is_lit_currently_unset(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  set(_is_lit_currently, x, y, (uint8_t) 0);
-}
-
-void Level::is_lit_currently_no_check_unset(const int x, const int y)
-{
-  set_no_check(_is_lit_currently, x, y, (uint8_t) 0);
-}
-
-uint8_t Level::is_lit_ever(const point p)
-{
-  if (unlikely(is_oob(p.x, p.y))) {
-    return false;
-  }
-  return (get(_is_lit_ever, p.x, p.y));
-}
-
-uint8_t Level::is_lit_ever_no_check(const point p) { return (get_no_check(_is_lit_ever, p.x, p.y)); }
-
-uint8_t Level::is_lit_ever(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return false;
-  }
-  return (get(_is_lit_ever, x, y));
-}
-
-uint8_t Level::is_lit_ever_no_check(const int x, const int y) { return (get_no_check(_is_lit_ever, x, y)); }
-
-void Level::is_lit_ever_set(const int x, const int y)
+void Level::is_currently_pixelart_raycast_lit_unset(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return;
   }
-
-  if (! get(_is_lit_ever, x, y)) {
-    set(_fade_in_map, x, y, (uint8_t) 1);
-  }
-  set(_is_lit_ever, x, y, true);
+  set(_is_currently_pixelart_raycast_lit, x, y, (uint8_t) 0);
 }
 
-void Level::is_lit_ever_no_check_set(const int x, const int y)
+void Level::is_currently_pixelart_raycast_lit_no_check_unset(const int x, const int y)
 {
-  if (! get_no_check(_is_lit_ever, x, y)) {
-    set_no_check(_fade_in_map, x, y, (uint8_t) 1);
-  }
-  set_no_check(_is_lit_ever, x, y, true);
+  set_no_check(_is_currently_pixelart_raycast_lit, x, y, (uint8_t) 0);
 }
-
-void Level::is_lit_ever_unset(const int x, const int y)
-{
-  if (unlikely(is_oob(x, y))) {
-    return;
-  }
-  set(_is_lit_ever, x, y, false);
-}
-
-void Level::is_lit_ever_no_check_unset(const int x, const int y) { set_no_check(_is_lit_ever, x, y, false); }
