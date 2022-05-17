@@ -131,7 +131,6 @@ void Level::tick(void)
   }
 
   if (! g_opt_ascii && ts_fade_in_begin) {
-    CON("WAOT");
     return;
   }
 

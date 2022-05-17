@@ -59,31 +59,31 @@ def tp_init(name):
     my.z_prio(self, my.MAP_PRIO_NORMAL)
 
     my.tile(self,
-            ascii_fg_char="+", ascii_bg_col_name="brown", ascii_fg_col_name="white",
+            ascii_fg_char="+", ascii_bg_col_name="brown", ascii_fg_col_name="black",
             tile=name + ".100", is_hp_100_percent=True)
     my.tile(self,
-            ascii_fg_char="+", ascii_bg_col_name="brown", ascii_fg_col_name="white",
+            ascii_fg_char="+", ascii_bg_col_name="brown", ascii_fg_col_name="black",
             tile=name + ".75", is_hp_75_percent=True)
     my.tile(self,
-            ascii_fg_char="+", ascii_bg_col_name="brown", ascii_fg_col_name="white",
+            ascii_fg_char="+", ascii_bg_col_name="brown", ascii_fg_col_name="black",
             tile=name + ".50", is_hp_50_percent=True)
     my.tile(self,
-            ascii_fg_char="+", ascii_bg_col_name="brown", ascii_fg_col_name="white",
+            ascii_fg_char="+", ascii_bg_col_name="brown", ascii_fg_col_name="black",
             tile=name + ".25", is_hp_25_percent=True)
     my.tile(self,
-            ascii_fg_char="+", ascii_bg_col_name="red", ascii_fg_col_name="white",
+            ascii_fg_char="+", ascii_bg_col_name="red", ascii_fg_col_name="black",
             tile=name + ".dead", is_dead=True)
     my.tile(self,
-            ascii_fg_char="'", ascii_bg_col_name="brown", ascii_fg_col_name="white",
+            ascii_fg_char="'", ascii_bg_col_name="brown", ascii_fg_col_name="black",
             tile=name + ".open", is_hp_100_percent=True, is_open=True)
     my.tile(self,
-            ascii_fg_char="'", ascii_bg_col_name="brown", ascii_fg_col_name="white",
+            ascii_fg_char="'", ascii_bg_col_name="brown", ascii_fg_col_name="black",
             tile=name + ".open", is_hp_75_percent=True, is_open=True)
     my.tile(self,
-            ascii_fg_char="'", ascii_bg_col_name="brown", ascii_fg_col_name="white",
+            ascii_fg_char="'", ascii_bg_col_name="brown", ascii_fg_col_name="black",
             tile=name + ".open", is_hp_50_percent=True, is_open=True)
     my.tile(self,
-            ascii_fg_char="'", ascii_bg_col_name="brown", ascii_fg_col_name="white",
+            ascii_fg_char="'", ascii_bg_col_name="brown", ascii_fg_col_name="black",
             tile=name + ".open", is_hp_25_percent=True, is_open=True)
 
     my.tp_update(self)

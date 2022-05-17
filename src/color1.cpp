@@ -10,14 +10,6 @@
 #include <strings.h> // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
-color ALICE_BLUE;
-color ALICEBLUE;
-color ANTIQUE_WHITE;
-color ANTIQUEWHITE;
-color ANTIQUEWHITE1;
-color ANTIQUEWHITE2;
-color ANTIQUEWHITE3;
-color ANTIQUEWHITE4;
 color AQUAMARINE;
 color AQUAMARINE1;
 color AQUAMARINE2;
@@ -123,6 +115,7 @@ color DARKSLATEGREY3;
 color DARKSLATEGREY4;
 color DARKTURQUOISE;
 color DARKVIOLET;
+color DEEPBLUE;
 color DEEP_PINK;
 color DEEPPINK;
 color DEEPPINK1;
@@ -161,23 +154,17 @@ color GOLD1;
 color GOLD2;
 color GOLD3;
 color GOLD4;
+color LAVA;
 color LIME;
 color LIMEGREEN;
+color PALEBLUE;
 color VDARKSLATEBLUE;
 color VVDARKSLATEBLUE;
-
-color DEEPBLUE;
-color PALEBLUE;
 
 void color_init1(void)
 {
   TRACE_AND_INDENT();
 
-  color_set("antiquewhite1", &ANTIQUEWHITE1, 255, 239, 219, 255);
-  color_set("antiquewhite2", &ANTIQUEWHITE2, 238, 223, 204, 255);
-  color_set("antiquewhite3", &ANTIQUEWHITE3, 205, 192, 176, 255);
-  color_set("antiquewhite4", &ANTIQUEWHITE4, 139, 131, 120, 255);
-  color_set("antiquewhite", &ANTIQUEWHITE, 250, 235, 215, 255);
   color_set("aquamarine1", &AQUAMARINE1, 127, 255, 212, 255);
   color_set("aquamarine2", &AQUAMARINE2, 118, 238, 198, 255);
   color_set("aquamarine3", &AQUAMARINE3, 102, 205, 170, 255);
@@ -312,6 +299,7 @@ void color_init1(void)
   color_set("gold3", &GOLD3, 205, 173, 0, 255);
   color_set("gold4", &GOLD4, 139, 117, 0, 255);
   color_set("gold", &GOLD, 255, 215, 0, 255);
+  color_set("lava", &LAVA, 207, 16, 32, 255);
   color_set("limegreen", &LIMEGREEN, 50, 205, 50, 255);
   color_set("lime", &LIME, 50, 205, 50, 255);
   color_set("none", &COLOR_NONE, 0, 0, 0, 0);
