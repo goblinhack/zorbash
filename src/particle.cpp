@@ -20,7 +20,13 @@
 void Level::new_internal_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
                                   bool hflip, bool make_visible_at_end)
 {
-  TRACE_AND_INDENT();
+  if (g_opt_ascii) {
+    err("No ascii mode");
+    return;
+  }
+
+  TRACE_NO_INDENT();
+
   DBG3("Create new internal particle");
 
   if (unlikely(! tile)) {
@@ -53,7 +59,13 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
 void Level::new_internal_particle(point start, point stop, isize sz, uint32_t dur, const Tilep tile, bool hflip,
                                   bool make_visible_at_end)
 {
-  TRACE_AND_INDENT();
+  if (g_opt_ascii) {
+    err("No ascii mode");
+    return;
+  }
+
+  TRACE_NO_INDENT();
+
   DBG3("Create new internal particle");
 
   if (unlikely(! tile)) {
@@ -68,7 +80,8 @@ void Level::new_internal_particle(point start, point stop, isize sz, uint32_t du
 
 void Level::display_pixelart_internal_particles(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
 #if 0
   CON("-");
   for (auto p : all_internal_particles) {
@@ -114,7 +127,7 @@ void Level::display_pixelart_internal_particles(void)
     }
 
     float t  = p.ts_stop - p.ts_start;
-    float dt = (((float) (now) - p.ts_start)) / t;
+    float dt = (((float) (now) -p.ts_start)) / t;
     // con("dt %f", dt);
     if (dt >= 1) {
       if (p.id.id) {
@@ -210,8 +223,12 @@ void Level::display_pixelart_internal_particles(void)
 void Level::new_external_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
                                   bool hflip, bool make_visible_at_end)
 {
-  TRACE_AND_INDENT();
-  DBG3("Create new external particle");
+  if (g_opt_ascii) {
+    err("No ascii mode");
+    return;
+  }
+
+  TRACE_NO_INDENT();
 
   if (unlikely(! tile)) {
     err("No external particle tile");
@@ -246,7 +263,13 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
 void Level::new_external_particle(point start, point stop, isize sz, uint32_t dur, const Tilep tile, bool hflip,
                                   bool make_visible_at_end)
 {
-  TRACE_AND_INDENT();
+  if (g_opt_ascii) {
+    err("No ascii mode");
+    return;
+  }
+
+  TRACE_NO_INDENT();
+
   DBG3("Create new external particle");
 
   if (unlikely(! tile)) {
@@ -261,7 +284,8 @@ void Level::new_external_particle(point start, point stop, isize sz, uint32_t du
 
 void Level::display_pixelart_external_particles(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
 #if 0
   CON("-");
   for (auto p : all_external_particles) {
@@ -308,7 +332,7 @@ void Level::display_pixelart_external_particles(void)
     }
 
     float t  = p.ts_stop - p.ts_start;
-    float dt = (((float) (now) - p.ts_start)) / t;
+    float dt = (((float) (now) -p.ts_start)) / t;
     // con("dt %f", dt);
     if (dt >= 1) {
       if (p.id.id) {
@@ -405,7 +429,7 @@ bool Thing::particle_anim_exists(void) { return has_internal_particle || has_ext
 
 void Thing::delete_particle(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Don't remove immediately in case we are walking the particles.

@@ -13,7 +13,7 @@ def tp_init(name):
     my.is_tmp_thing(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "Cursor.")
-    my.z_depth(self, my.MAP_DEPTH_OBJ)
+    my.z_depth(self, my.MAP_DEPTH_CURSOR)
     my.z_prio(self, my.MAP_PRIO_IN_FRONT)
 
     delay = 50

@@ -96,6 +96,10 @@ void Level::cursor_path_draw_line(point start, point end)
   point dmap_start = start;
   point dmap_end   = end;
 
+  if (! get(can_see_ever.can_see, end.x, end.y)) {
+    return;
+  }
+
   int minx, miny, maxx, maxy;
   if (dmap_start.x < dmap_end.x) {
     minx = dmap_start.x;

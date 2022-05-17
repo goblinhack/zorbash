@@ -1,9 +1,10 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- can walk through walls in ascii mode                                                                                                         -->
 <!-- cannot seem to hit bat                                                                                                                       -->
-<!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- monst skel fire ascii                                                                                                                        -->
+<!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

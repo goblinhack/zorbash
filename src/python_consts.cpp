@@ -38,6 +38,7 @@ void py_my_module_add_stat_consts(void)
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_LIQUID", MAP_DEPTH_LIQUID);
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_EXPLOSION_MAJOR", MAP_DEPTH_EXPLOSION_MAJOR);
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_EXPLOSION_MINOR", MAP_DEPTH_EXPLOSION_MINOR);
+  PyModule_AddIntConstant(my_mod, "MAP_DEPTH_CURSOR", MAP_DEPTH_CURSOR);
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_MESSAGE", MAP_DEPTH_MESSAGE);
   PyModule_AddIntConstant(my_mod, "CHANNEL_FOOTSTEPS", CHANNEL_FOOTSTEPS);
   PyModule_AddIntConstant(my_mod, "CHANNEL_MISC", CHANNEL_MISC);

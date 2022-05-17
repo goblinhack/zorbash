@@ -13,12 +13,12 @@ def tp_init(name):
     my.is_tmp_thing(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "Cursor path.")
-    my.z_depth(self, my.MAP_DEPTH_OBJ)
+    my.z_depth(self, my.MAP_DEPTH_CURSOR)
     my.z_prio(self, my.MAP_PRIO_BEHIND)
 
     delay = 50
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="lightblue4", ascii_fg_col_name="",
+            ascii_bg_char="block", ascii_bg_col_name="vdarkslateblue", ascii_fg_col_name="",
             tile=name + ".1", delay_ms=delay)
 
     my.tp_update(self)
