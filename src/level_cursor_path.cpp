@@ -136,9 +136,11 @@ void Level::cursor_path_draw_line(point start, point end)
   }
 
   //
-  // Set up obstacles for the search
+  // If standing on a hazard, then plot a course that allows travel over hazards.
+  // Or likewise if the cursor is on a hazard.
   //
-  if (is_cursor_path_hazard_for_player(player->curr_at.x, player->curr_at.y)) {
+  if (is_cursor_path_hazard_for_player(player->curr_at.x, player->curr_at.y) ||
+      (cursor && is_cursor_path_hazard_for_player(cursor->curr_at.x, cursor->curr_at.y))) {
     //
     // Just map the shortest path outta here
     //
@@ -151,40 +153,10 @@ void Level::cursor_path_draw_line(point start, point end)
         }
       }
     }
-  } else if (cursor && is_cursor_path_hazard_for_player(cursor->curr_at.x, cursor->curr_at.y)) {
-    //
-    // If the cursor is on a hazard we can plot a course via hazards.
-    //
-    for (auto y = miny; y < maxy; y++) {
-      for (auto x = minx; x < maxx; x++) {
-        if (is_obs_wall_or_door(x, y)) {
-          set(d.val, x, y, DMAP_IS_WALL);
-        } else {
-          set(d.val, x, y, DMAP_IS_PASSABLE);
-        }
-      }
-    }
-  } else if (player->collision_obstacle(player->curr_at)) {
-    //
-    // If already on a hazard we can plot a course via hazards.
-    //
+  } else {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         if (is_cursor_path_hazard_for_player(x, y) || is_obs_wall_or_door(x, y)) {
-          set(d.val, x, y, DMAP_IS_WALL);
-        } else {
-          set(d.val, x, y, DMAP_IS_PASSABLE);
-        }
-      }
-    }
-  } else {
-    //
-    // Else avoid all hazards as we are not standing on one
-    //
-    for (auto y = miny; y < maxy; y++) {
-      for (auto x = minx; x < maxx; x++) {
-        if (is_cursor_path_hazard_for_player(x, y) || player->ai_obstacle_for_me(make_point(x, y)) ||
-            player->collision_obstacle(point(x, y))) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);

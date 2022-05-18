@@ -265,7 +265,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   auto  duration = THING_JUMP_SPEED_MS;
 
   //
-  // Ascii mode, jump is imdediate
+  // Ascii mode, jump is immediate
   //
   if (g_opt_ascii) {
     duration = 0;
