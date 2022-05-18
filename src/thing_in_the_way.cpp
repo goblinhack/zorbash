@@ -17,7 +17,7 @@ Thingp Thing::in_the_way(const point s, const point e, int x, int y)
   // Allow hitting the end point so that a laser hits the final target also
   //
 
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
+  FOR_ALL_COLLISION_THINGS(level, t, x, y)
   {
     if (t == this) {
       continue;
@@ -46,7 +46,7 @@ Thingp Thing::in_the_way(const point s, const point e, int x, int y)
 
     if (t->is_pillar() || t->is_barrel() || t->is_spiderweb() || t->is_attackable_by_player() ||
         t->is_attackable_by_monst()) {
-      dbg2("This is in the way: %s", t->to_short_string().c_str());
+      dbg("This is in the way: %s", t->to_short_string().c_str());
       return t;
     }
   }

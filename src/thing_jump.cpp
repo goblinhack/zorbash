@@ -181,7 +181,18 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   FOR_ALL_THINGS_END()
 
   //
-  // Block jumping over doors
+  // Block jumping over walls.
+  //
+  if (in_the_way(curr_at, to, 1).size()) {
+    if (is_player()) {
+      msg("You can't jump over that.");
+    }
+    dbg("You can't jump over that");
+    return false;
+  }
+
+  //
+  // Block jumping over doors into dark rooms.
   //
   if (is_player()) {
     if (map_treasure_count()) {

@@ -102,6 +102,7 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
 
   if (jump) {
     game->tick_begin("player jumped");
+    DBG("Player jumped");
 
     if (game->cursor_move_path.size()) {
       //
@@ -113,6 +114,11 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
           player->clear_move_path("Tried to jump");
           break;
         }
+
+        //
+        // It's not good to try alternatives as the jump path might not be in s straight line.
+        //
+        break;
       }
     } else if (level->cursor && (level->cursor->curr_at == player->curr_at)) {
       auto  player_move_delta = player->dir_to_direction();
