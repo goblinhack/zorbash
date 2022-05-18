@@ -1,9 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- can walk through walls in ascii mode                                                                                                         -->
-<!-- cannot seem to hit bat                                                                                                                       -->
-<!-- monst skel fire ascii                                                                                                                        -->
+<!-- click on wall ends up attacking wall at end of move path                                                                                     -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

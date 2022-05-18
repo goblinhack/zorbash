@@ -436,7 +436,6 @@ bool Thing::cursor_path_pop_first_move(void)
   //
   // A path to the target does not exist. Jump?
   //
-  dbg("Cursor path does not exist; jump?");
   point future_pos = make_point(cursor->curr_at.x, cursor->curr_at.y);
 
   //
@@ -456,15 +455,22 @@ bool Thing::cursor_path_pop_first_move(void)
   //
   // If not adjacent, try and jump.
   //
-  if (is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
-    if (try_to_jump_carefully(future_pos)) {
-      game->tick_begin("player tried to jump");
-      return true;
+  if (get(level->can_see_ever.can_see, future_pos.x, future_pos.y)) {
+    dbg("Cursor path does not exist; jump?");
+    if (is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
+      if (try_to_jump_carefully(future_pos)) {
+        game->tick_begin("player tried to jump");
+        return true;
+      }
+    } else {
+      if (try_to_jump_carefree(future_pos)) {
+        game->tick_begin("player tried to jump");
+        return true;
+      }
     }
   } else {
-    if (try_to_jump_carefree(future_pos)) {
-      game->tick_begin("player tried to jump");
-      return true;
+    if (is_player()) {
+      msg("You cannot see to move there.");
     }
   }
 
