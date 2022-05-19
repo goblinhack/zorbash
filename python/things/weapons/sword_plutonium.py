@@ -7,8 +7,12 @@ def on_swing(owner, item, x, y):
 
 
 def on_tick(owner, me, x, y):
+    if not owner:
+        return False
+
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+
     #
     # Radiation damage
     #
