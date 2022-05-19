@@ -69,16 +69,22 @@ void Thing::blit_ascii(point tl, point br, point p)
   if (lit) {
     if (tile->ascii_bg_col_value != COLOR_NONE) {
       ascii_set_bg(x, y, UNICODE_BLOCK);
+      color c = tile->ascii_bg_col_value;
+      c.a     = tile->ascii_alpha;
       ascii_set_bg(x, y, tile->ascii_bg_col_value);
     }
 
     if (tile->ascii_bg_char) {
       ascii_set_bg(x, y, tile->ascii_bg_char);
-      ascii_set_bg(x, y, tile->ascii_bg_col_value);
+      color c = tile->ascii_bg_col_value;
+      c.a     = tile->ascii_alpha;
+      ascii_set_bg(x, y, c);
     }
 
     if (tile->ascii_fg_char) {
       ascii_set_fg(x, y, tile->ascii_fg_char);
+      color c = tile->ascii_fg_col_value;
+      c.a     = tile->ascii_alpha;
       ascii_set_fg(x, y, tile->ascii_fg_col_value);
     }
   } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
@@ -89,6 +95,7 @@ void Thing::blit_ascii(point tl, point br, point p)
         c.r     = ((int) (c.r / 4) * 1);
         c.g     = ((int) (c.g / 5) * 1);
         c.b     = ((int) (c.b / 2) * 1);
+        c.a     = tile->ascii_alpha;
         ascii_set_bg(x, y, c);
       }
 
@@ -98,6 +105,7 @@ void Thing::blit_ascii(point tl, point br, point p)
         c.r     = ((int) (c.r / 4) * 1);
         c.g     = ((int) (c.g / 5) * 1);
         c.b     = ((int) (c.b / 2) * 1);
+        c.a     = tile->ascii_alpha;
         ascii_set_bg(x, y, c);
       }
 
@@ -107,6 +115,7 @@ void Thing::blit_ascii(point tl, point br, point p)
         c.r     = ((int) (c.r / 2) * 1);
         c.g     = ((int) (c.g / 2) * 1);
         c.b     = ((int) (c.b / 2) * 1);
+        c.a     = tile->ascii_alpha;
         ascii_set_fg(x, y, c);
       }
     }

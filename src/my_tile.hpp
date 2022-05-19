@@ -32,6 +32,7 @@ public:
   std::string name;
   wchar_t     ascii_fg_char {};
   wchar_t     ascii_bg_char {};
+  uint8_t     ascii_alpha {255};
   std::string ascii_fg_col_name;
   std::string ascii_bg_col_name;
   color       ascii_fg_col_value;
