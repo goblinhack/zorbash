@@ -19,46 +19,46 @@ def tp_init(name, text_name):
 
     delay = 5
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".4", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".5", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".6", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".7", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".8", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".9", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".10", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".11", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".12", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".13", delay_ms=delay)
     my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="red", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".14",
             delay_ms=delay,
             is_end_of_anim=True,
