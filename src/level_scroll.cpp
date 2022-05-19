@@ -274,17 +274,14 @@ void Level::scroll_map_set_target(void)
     y_sensitivity = sensitivity;
 
     //
-    // This is how many tiles away from the map current point that we scroll.
-    //
-    x_sensitivity = 10;
-    y_sensitivity = 10;
-
-    //
     // The smaller the number, the further from the edge of the map we scroll.
     //
     if (g_opt_ascii) {
       x_sensitivity = 4;
       y_sensitivity = 4;
+    } else {
+      x_sensitivity = 1;
+      y_sensitivity = 1;
     }
 
     //
