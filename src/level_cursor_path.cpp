@@ -136,6 +136,13 @@ void Level::cursor_path_draw_line(point start, point end)
   }
 
   //
+  // If clicking on a wall, don't walk into it.
+  //
+  if (cursor && is_obs_wall_or_door(cursor->curr_at.x, cursor->curr_at.y)) {
+    return;
+  }
+
+  //
   // If standing on a hazard, then plot a course that allows travel over hazards.
   // Or likewise if the cursor is on a hazard.
   //
