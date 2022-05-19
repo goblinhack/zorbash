@@ -130,6 +130,7 @@ Tile::Tile(const class Tile *tile)
   ascii_bg_char          = tile->ascii_bg_char;
   ascii_bg_col_name      = tile->ascii_bg_col_name;
   ascii_fg_col_name      = tile->ascii_fg_col_name;
+  ascii_alpha            = tile->ascii_alpha;
 
   index        = 0;
   global_index = all_tiles_array.size() + 1;
