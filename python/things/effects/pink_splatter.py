@@ -21,59 +21,59 @@ def tp_init(name, text_name):
     delay = 5
     my.tile(self,
             tile="pink_splatter.1",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.2",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.3",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.4",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.5",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.6",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.7",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.8",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.9",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.10",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.11",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.12",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.13",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
             tile="pink_splatter.14",
-            ascii_bg_char="block", ascii_bg_col_name="pink", ascii_fg_col_name="",
+            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay,
             is_end_of_anim=True,
             is_dead_on_end_of_anim=True)

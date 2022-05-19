@@ -76,6 +76,9 @@ void Thing::blit_ascii(point tl, point br, point p)
 
     if (tile->ascii_bg_char) {
       ascii_set_bg(x, y, tile->ascii_bg_char);
+    }
+
+    if (tile->ascii_bg_col_value != COLOR_NONE) {
       color c = tile->ascii_bg_col_value;
       c.a     = tile->ascii_alpha;
       ascii_set_bg(x, y, c);
@@ -83,6 +86,9 @@ void Thing::blit_ascii(point tl, point br, point p)
 
     if (tile->ascii_fg_char) {
       ascii_set_fg(x, y, tile->ascii_fg_char);
+    }
+
+    if (tile->ascii_fg_col_value != COLOR_NONE) {
       color c = tile->ascii_fg_col_value;
       c.a     = tile->ascii_alpha;
       ascii_set_fg(x, y, tile->ascii_fg_col_value);
