@@ -318,13 +318,9 @@ bool Game::wid_thing_info_push_popup(Thingp t)
   for (auto w : wid_thing_info_window) {
     wid_update(w->wid_text_area->wid_text_area);
   }
-#if 0
+
   wid_move_to_top(w->wid_popup_container);
-  TOPCON("%d", wid_get_br_y(w->wid_popup_container));
-  if (wid_get_br_y(w->wid_popup_container) > 20) {
-    wid_move_delta(w->wid_popup_container, 0, UI_TOPCON_VIS_HEIGHT);
-  }
-#endif
+  wid_move_delta(w->wid_popup_container, 0, existing_height + UI_TOPCON_VIS_HEIGHT);
 
   if (wid_get_tl_y(w->wid_popup_container) < 0) {
     delete w;
