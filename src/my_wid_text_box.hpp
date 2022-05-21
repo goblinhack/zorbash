@@ -10,6 +10,12 @@
 #include "my_main.hpp"
 #include "my_wid.hpp"
 
+typedef enum {
+  TEXT_FORMAT_NONE,
+  TEXT_FORMAT_LHS,
+  TEXT_FORMAT_RHS,
+} wid_text_format;
+
 class WidTextBox
 {
 private:
@@ -35,10 +41,10 @@ public:
   WidTextBox(point tl, point br, Widp, bool horiz_scroll = true, bool vert_scoll = true, int scroll_height = -1);
 
 private:
-  void log_(std::wstring str, bool lhs, bool rhs);
+  void log_(std::wstring str, wid_text_format format = TEXT_FORMAT_NONE, std::string color = "");
 
 public:
-  void log(std::string s, bool lhs = false, bool rhs = false);
-  void log(std::wstring s, bool lhs = false, bool rhs = false);
+  void log(std::string s, wid_text_format format = TEXT_FORMAT_NONE, std::string color = "");
+  void log(std::wstring s, wid_text_format format = TEXT_FORMAT_NONE, std::string color = "");
 };
 #endif

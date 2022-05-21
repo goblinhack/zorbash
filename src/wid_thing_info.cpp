@@ -134,17 +134,19 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_popup_window->log("It's dead, Jim");
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   } else {
-    wid_popup_window->log(tp->long_text_description(), true);
-    wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_popup_window->log(tp->long_text_description(), TEXT_FORMAT_LHS, "pink");
 
-    if (! tp->long_text_description_extra().empty()) {
-      wid_popup_window->log(tp->long_text_description_extra(), true);
-      wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
+    if (! tp->long_text_description2().empty()) {
+      wid_popup_window->log(tp->long_text_description2(), TEXT_FORMAT_LHS, "yellow");
+    }
+
+    if (! tp->long_text_description3().empty()) {
+      wid_popup_window->log(tp->long_text_description3(), TEXT_FORMAT_LHS, "orange");
     }
   }
 
-  wid_thing_info_add_enchant(wid_popup_window, t);
   wid_thing_info_add_general_info(wid_popup_window, t);
+  wid_thing_info_add_enchant(wid_popup_window, t);
   wid_thing_info_add_carry_info(wid_popup_window, t);
   //
   // Not sure if we will have shops
@@ -209,7 +211,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     return nullptr;
   }
 
-  auto  height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT;
+  auto  height = TERM_HEIGHT;
   point tl     = make_point(0, TERM_HEIGHT - 2 - height);
   point br     = make_point(UI_SIDEBAR_LEFT_WIDTH, TERM_HEIGHT - 2);
 
@@ -299,7 +301,7 @@ bool Game::wid_thing_info_push_popup(Thingp t)
     }
   }
 
-  auto  height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT;
+  auto  height = TERM_HEIGHT;
   point tl     = make_point(0, TERM_HEIGHT - 2 - height);
   point br     = make_point(UI_SIDEBAR_LEFT_WIDTH, TERM_HEIGHT - 2);
 
@@ -316,8 +318,15 @@ bool Game::wid_thing_info_push_popup(Thingp t)
   for (auto w : wid_thing_info_window) {
     wid_update(w->wid_text_area->wid_text_area);
   }
+#if 0
+  wid_move_to_top(w->wid_popup_container);
+  TOPCON("%d", wid_get_br_y(w->wid_popup_container));
+  if (wid_get_br_y(w->wid_popup_container) > 20) {
+    wid_move_delta(w->wid_popup_container, 0, UI_TOPCON_VIS_HEIGHT);
+  }
+#endif
 
-  if (wid_get_tl_y(w->wid_popup_container) <= UI_TOPCON_VIS_HEIGHT) {
+  if (wid_get_tl_y(w->wid_popup_container) < 0) {
     delete w;
     IF_DEBUG1 { t->log("No; cannot fit"); }
     return false;
@@ -410,8 +419,6 @@ bool Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
       wid_thing_info_push_popup(o);
     }
   }
-
-  point mid(TERM_WIDTH / 2, TERM_HEIGHT - 5);
 
   recursion = false;
 
@@ -509,7 +516,8 @@ bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   if (! compact) {
     int i = 0;
     for (auto t : ts) {
-      if (t->long_text_description().empty() && t->long_text_description_extra().empty()) {
+      if (t->long_text_description().empty() && t->long_text_description2().empty() &&
+          t->long_text_description3().empty()) {
         continue;
       }
 
@@ -565,9 +573,9 @@ void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   if (t->enchant_get()) {
     if (t->is_skill()) {
-      w->log("This skill is enchanted.", true);
+      w->log("This skill is enchanted.", TEXT_FORMAT_LHS);
     } else {
-      w->log("Item is enchanted.", true);
+      w->log("Item is enchanted.", TEXT_FORMAT_LHS);
     }
   }
 }
@@ -1533,7 +1541,6 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
   const std::string danger_level = player->danger_level_str(t);
   w->log(danger_level);
-  w->log(UI_LOGGING_EMPTY_LINE);
 
   auto monst_max_damage = t->damage_max();
   if (monst_max_damage != 0) {
@@ -1548,16 +1555,12 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
 
     if (monst_defeat_count == 1) {
       w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hit!");
-      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (monst_defeat_count <= 2) {
       w->log("%%fg=red$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
-      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (monst_defeat_count <= 10) {
       w->log("%%fg=orange$Could defeat you in " + std::to_string(monst_defeat_count) + " hits");
-      w->log(UI_LOGGING_EMPTY_LINE);
     } else {
       w->log("Could defeat you eventually.");
-      w->log(UI_LOGGING_EMPTY_LINE);
     }
   }
 
@@ -1575,18 +1578,14 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     if (player_defeat_count == 1) {
       w->log("You could beat it in " + std::to_string(player_defeat_count) + " hit.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits");
-      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (player_defeat_count <= 2) {
       w->log("You could beat it in " + std::to_string(player_defeat_count) + " hits.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
-      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (player_defeat_count <= 10) {
       w->log("You could beat it in " + std::to_string(player_defeat_count) + " hits.");
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
-      w->log(UI_LOGGING_EMPTY_LINE);
     } else {
       w->log("%%fg=red$Takes many hits to defeat...");
-      w->log(UI_LOGGING_EMPTY_LINE);
     }
   }
 }
@@ -1606,23 +1605,23 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
   auto items = t->itemsp()->carrying.size();
 
   if (t->is_open) {
-    w->log("It's open.", true);
+    w->log("It's open.", TEXT_FORMAT_LHS);
 
     //
     // Can see inside bags or chests, so log.
     //
     if (t->is_bag_item_container()) {
       if (items > 3) {
-        w->log("Looks to be full of presents.", true);
+        w->log("Looks to be full of presents.", TEXT_FORMAT_LHS);
         w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 1) {
-        w->log("Looks like it contains a few things.", true);
+        w->log("Looks like it contains a few things.", TEXT_FORMAT_LHS);
         w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 0) {
-        w->log("Looks like it contains something.", true);
+        w->log("Looks like it contains something.", TEXT_FORMAT_LHS);
         w->log(UI_LOGGING_EMPTY_LINE);
       } else {
-        w->log("Is empty.", true);
+        w->log("Is empty.", TEXT_FORMAT_LHS);
         w->log(UI_LOGGING_EMPTY_LINE);
       }
     }
@@ -1631,20 +1630,20 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     // Cannot see inside a chest, so no log
     //
     if (t->is_treasure_chest()) {
-      w->log("Looks to be locked.", true);
+      w->log("Looks to be locked.", TEXT_FORMAT_LHS);
       w->log(UI_LOGGING_EMPTY_LINE);
     } else if (t->is_bag()) {
       if (items > 3) {
-        w->log("Looks to be bulging with presents.", true);
+        w->log("Looks to be bulging with presents.", TEXT_FORMAT_LHS);
         w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 1) {
-        w->log("Looks like it contains a few things.", true);
+        w->log("Looks like it contains a few things.", TEXT_FORMAT_LHS);
         w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 0) {
-        w->log("Looks like it contains something.", true);
+        w->log("Looks like it contains something.", TEXT_FORMAT_LHS);
         w->log(UI_LOGGING_EMPTY_LINE);
       } else {
-        w->log("Looks like it is empty.", true);
+        w->log("Looks like it is empty.", TEXT_FORMAT_LHS);
         w->log(UI_LOGGING_EMPTY_LINE);
       }
     }
@@ -1655,146 +1654,123 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
 
-  bool printed = false;
-
   auto tp = t->tp();
   if (t->is_monst()) {
     if (tp->rarity() == THING_RARITY_UNCOMMON) {
-      w->log("Monster is uncommon", true);
-      printed = true;
+      w->log("Monster is uncommon", TEXT_FORMAT_LHS);
     } else if (tp->rarity() == THING_RARITY_RARE) {
-      w->log("Monster is rare.", true);
-      printed = true;
+      w->log("Monster is rare.", TEXT_FORMAT_LHS);
     } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-      w->log("Monster is very rare.", true);
-      printed = true;
+      w->log("Monster is very rare.", TEXT_FORMAT_LHS);
     } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-      w->log("Monster is unique!", true);
-      printed = true;
+      w->log("Monster is unique!", TEXT_FORMAT_LHS);
     }
   } else if (t->is_collectable()) {
     if (tp->rarity() == THING_RARITY_UNCOMMON) {
-      w->log("Item is uncommon", true);
-      printed = true;
+      w->log("Item is uncommon", TEXT_FORMAT_LHS);
     } else if (tp->rarity() == THING_RARITY_RARE) {
-      w->log("Item is rare.", true);
-      printed = true;
+      w->log("Item is rare.", TEXT_FORMAT_LHS);
     } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
-      w->log("Item is very rare.", true);
-      printed = true;
+      w->log("Item is very rare.", TEXT_FORMAT_LHS);
     } else if (tp->rarity() == THING_RARITY_UNIQUE) {
-      w->log("Item is unique!", true);
-      printed = true;
+      w->log("Item is unique!", TEXT_FORMAT_LHS);
     }
   }
 
+  std::string hates;
+
   if (t->is_monst() && t->environ_avoids_water()) {
     if (t->environ_avoids_water() > 10) {
-      w->log("Hates water.", true);
-      printed = true;
-    } else {
-      w->log("Avoids water.", true);
-      printed = true;
+      if (! hates.empty()) {
+        hates += "/";
+      }
+      hates += "water";
     }
   }
 
   if (t->is_monst() && t->environ_avoids_acid()) {
     if (t->environ_avoids_acid() > 10) {
-      w->log("Hates acid.", true);
-      printed = true;
-    } else {
-      w->log("Avoids acid.", true);
-      printed = true;
+      if (! hates.empty()) {
+        hates += "/";
+      }
+      hates += "acid";
     }
   }
 
   if (t->is_monst() && t->environ_avoids_cold()) {
     if (t->environ_avoids_cold() > 10) {
-      w->log("Hates cold.", true);
-      printed = true;
-    } else {
-      w->log("Avoids cold.", true);
-      printed = true;
+      if (! hates.empty()) {
+        hates += "/";
+      }
+      hates += "cold";
     }
   }
 
   if (t->is_monst() && t->environ_avoids_fire()) {
     if (t->environ_avoids_fire() > 10) {
-      w->log("Hates fire.", true);
-      printed = true;
-    } else {
-      w->log("Avoids fire.", true);
-      printed = true;
+      if (! hates.empty()) {
+        hates += "/";
+      }
+      hates += "fire";
     }
   } else if (t->is_meltable()) {
-    w->log("Can melt.", true);
-    printed = true;
+    w->log("Can melt.", TEXT_FORMAT_LHS);
   } else if (t->is_burnable()) {
     if (t->is_monst() || t->is_player()) {
       //
       // Too obvious
-      // w->log("Can catch fire.", true);
+      // w->log("Can catch fire.", TEXT_FORMAT_LHS);
       //
     } else {
-      w->log("Item can burn.", true);
-      printed = true;
+      w->log("Item can burn.", TEXT_FORMAT_LHS);
     }
   } else if (t->is_combustible()) {
-    w->log("Is combustible.", true);
-    printed = true;
+    w->log("Is combustible.", TEXT_FORMAT_LHS);
   } else if (t->is_very_combustible()) {
-    w->log("Can explode!", true);
-    printed = true;
+    w->log("Can explode!", TEXT_FORMAT_LHS);
   }
 
   if (t->is_item()) {
     if (t->temperature() < 0) {
-      w->log("Is cold to the touch.", true);
-      printed = true;
+      w->log("Is cold to the touch.", TEXT_FORMAT_LHS);
     } else if (t->temperature() > 0) {
-      w->log("Is warm to the touch.", true);
-      printed = true;
+      w->log("Is warm to the touch.", TEXT_FORMAT_LHS);
     }
   }
 
   if (t->is_staff()) {
-    w->log("Item hits all in path.", true);
-    printed = true;
+    w->log("Item hits all in path.", TEXT_FORMAT_LHS);
   }
 
   if (t->is_wand()) {
-    w->log("Item hits first in path.", true);
-    printed = true;
+    w->log("Item hits first in path.", TEXT_FORMAT_LHS);
   }
 
   if (t->collision_hit_360()) {
-    w->log("Item hits surrounding tiles.", true);
-    printed = true;
+    w->log("Item hits surrounding tiles.", TEXT_FORMAT_LHS);
   }
 
   if (t->collision_hit_180()) {
-    w->log("Item hits front and behind.", true);
-    printed = true;
+    w->log("Item hits front and behind.", TEXT_FORMAT_LHS);
   }
 
   if (t->collision_hit_two_tiles_ahead()) {
-    w->log("Item hits the two tiles ahead.", true);
-    printed = true;
+    w->log("Item hits the two tiles ahead.", TEXT_FORMAT_LHS);
   }
 
   if (t->collision_hit_adj()) {
-    w->log("Item hits adjacent tiles.", true);
-    printed = true;
+    w->log("Item hits adjacent tiles.", TEXT_FORMAT_LHS);
   }
 
   if (t->attacks_per_round() > 1) {
-    w->log("Monster has multiple attacks.", true);
-    printed = true;
+    w->log("Monster has multiple attacks.", TEXT_FORMAT_LHS, "red");
   }
 
-  if (printed) {
-    w->log(UI_LOGGING_EMPTY_LINE);
+  if (hates.size()) {
+    w->log("Hates " + hates, TEXT_FORMAT_LHS, "red");
   }
+
+  w->log(UI_LOGGING_EMPTY_LINE);
 }
 
 void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)

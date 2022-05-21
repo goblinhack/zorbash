@@ -74,7 +74,7 @@ void wid_rightbar_stats_over_def_b(Widp w, int32_t relx, int32_t rely, int32_t w
   wid_rightbar_popup->log(
       "Your armor factor is your main defense against melee attacks. An attacker must roll more than your defense to "
       "hit you, so a higher value is better.",
-      true);
+      TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
@@ -91,7 +91,7 @@ void wid_rightbar_stats_over_def_b(Widp w, int32_t relx, int32_t rely, int32_t w
     auto val = player->stat_def();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your base defense is %d.", val);
-    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
 
@@ -101,10 +101,10 @@ void wid_rightbar_stats_over_def_b(Widp w, int32_t relx, int32_t rely, int32_t w
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total defense including all items and modifiers is %d.", tot);
-      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
-      wid_rightbar_popup->log("You currently have no armor bonuses", true);
+      wid_rightbar_popup->log("You currently have no armor bonuses", TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
@@ -139,9 +139,9 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rely, int3
   wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
   wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Strength");
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
-  wid_rightbar_popup->log("Your strength. 10 is for a normal puny human and gives no bonus.", true);
+  wid_rightbar_popup->log("Your strength. 10 is for a normal puny human and gives no bonus.", TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
-  wid_rightbar_popup->log("Strength gives you bonuses to hitting, jumping and shoving monsters.", true);
+  wid_rightbar_popup->log("Strength gives you bonuses to hitting, jumping and shoving monsters.", TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
@@ -158,7 +158,7 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rely, int3
     auto val = player->stat_str();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your strength is %d.", val);
-    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
 
@@ -168,10 +168,10 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rely, int3
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total strength including all items and modifiers is %d.", val);
-      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
-      wid_rightbar_popup->log("You currently have no strength bonuses", true);
+      wid_rightbar_popup->log("You currently have no strength bonuses", TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
@@ -206,9 +206,9 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int32_t relx, int32_t rely, int3
   wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
   wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Attack");
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
-  wid_rightbar_popup->log("Your attack roll. 10 is for a normal puny human and gives no bonus.", true);
+  wid_rightbar_popup->log("Your attack roll. 10 is for a normal puny human and gives no bonus.", TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
-  wid_rightbar_popup->log("Roll more than another creature's defense to hit.", true);
+  wid_rightbar_popup->log("Roll more than another creature's defense to hit.", TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
@@ -225,7 +225,7 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int32_t relx, int32_t rely, int3
     auto val = 10 + player->stat_att();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your attack roll is %d.", val);
-    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
 
@@ -235,10 +235,10 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int32_t relx, int32_t rely, int3
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total attack including all items and modifiers is %d.", tot);
-      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
-      wid_rightbar_popup->log("You currently have no attack bonuses", true);
+      wid_rightbar_popup->log("You currently have no attack bonuses", TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
@@ -273,12 +273,12 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rely, int3
   wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
   wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Constitution");
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
-  wid_rightbar_popup->log("Your constitution. 10 is for a normal sickly human and gives no bonus.", true);
+  wid_rightbar_popup->log("Your constitution. 10 is for a normal sickly human and gives no bonus.", TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   wid_rightbar_popup->log(
       "Constitution gives you bonuses for hunger, weapon stamina, poison resistance and pushing that "
       "bit harder to attack when utterly exhausted.",
-      true);
+      TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
@@ -295,7 +295,7 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rely, int3
     auto val = player->stat_con();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your constitution is %d.", val);
-    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
 
@@ -305,10 +305,10 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rely, int3
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total constitution including all items and modifiers is %d.", val);
-      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
-      wid_rightbar_popup->log("You currently have no constitution bonuses", true);
+      wid_rightbar_popup->log("You currently have no constitution bonuses", TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
@@ -343,12 +343,13 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rely, int3
   wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
   wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Dexterity");
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
-  wid_rightbar_popup->log("Your dexterity. 10 is for a normal human, whatever that is and gives no bonus.", true);
+  wid_rightbar_popup->log("Your dexterity. 10 is for a normal human, whatever that is and gives no bonus.",
+                          TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   wid_rightbar_popup->log(
       "Dexterity gives you bonuses for defense, noise dampening and helps you find your "
       "way across tricky bridges.",
-      true);
+      TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
@@ -365,7 +366,7 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rely, int3
     auto val = player->stat_dex();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your dexterity is %d.", val);
-    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
 
@@ -375,10 +376,10 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rely, int3
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total dexterity including all items and modifiers is %d.", val);
-      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
-      wid_rightbar_popup->log("You currently have no dexterity bonuses", true);
+      wid_rightbar_popup->log("You currently have no dexterity bonuses", TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
@@ -413,12 +414,12 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t rely, int
   wid_rightbar_popup = new WidPopup("Robot", tl, br, nullptr, "", false, false);
   wid_rightbar_popup->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Luck");
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
-  wid_rightbar_popup->log("Your luck factor. 10 is for a normal unlucky human and gives no bonus.", true);
+  wid_rightbar_popup->log("Your luck factor. 10 is for a normal unlucky human and gives no bonus.", TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   wid_rightbar_popup->log(
       "Luck gives you bonuses for finding surprise enchanted items and making bridges "
       "less likely to collapse, and avoiding setting off traps.",
-      true);
+      TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
 
   auto level = game->get_current_level();
@@ -435,7 +436,7 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t rely, int
     auto val = player->stat_luck();
     char tmp[ MAXSHORTSTR ];
     snprintf(tmp, sizeof(tmp) - 1, "Your luck is %d.", val);
-    wid_rightbar_popup->log(tmp, true);
+    wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
 
@@ -445,10 +446,10 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t rely, int
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total luck including all items and modifiers is %d.", val);
-      wid_rightbar_popup->log(tmp, true);
+      wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
-      wid_rightbar_popup->log("You currently have no luck bonuses", true);
+      wid_rightbar_popup->log("You currently have no luck bonuses", TEXT_FORMAT_LHS);
       wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }

@@ -13,7 +13,7 @@ def on_born(me, x, y):
 
 def tp_init(name, text_name):
     self = zorb_all.tp_init(name, text_name)
-    my.long_text_description_extra(self, "This particular zorblin is learned in the dark zorbliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
+    my.long_text_description2(self, "This particular zorblin is learned in the dark zorbliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
     my.on_born_do(self, "me.on_born()")

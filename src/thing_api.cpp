@@ -6120,10 +6120,16 @@ const std::string &Thing::long_text_description(void)
   return (tp()->long_text_description());
 }
 
-const std::string &Thing::long_text_description_extra(void)
+const std::string &Thing::long_text_description2(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->long_text_description_extra());
+  return (tp()->long_text_description2());
+}
+
+const std::string &Thing::long_text_description3(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->long_text_description3());
 }
 
 const std::string &Thing::text_unused1(void)

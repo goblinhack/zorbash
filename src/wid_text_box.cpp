@@ -5,6 +5,7 @@
 
 #include <SDL.h>
 
+#include "my_color.hpp"
 #include "my_sdl.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
@@ -133,7 +134,7 @@ WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool 
 //
 // Get the wid on the bottom of the list/screen.
 //
-void WidTextBox::log_(std::wstring str, bool lhs, bool rhs)
+void WidTextBox::log_(std::wstring str, wid_text_format format, std::string color)
 {
   TRACE_AND_INDENT();
   Widp tmp {};
@@ -178,19 +179,22 @@ void WidTextBox::log_(std::wstring str, bool lhs, bool rhs)
   }
 
   if (text_wid) {
-    if (lhs) {
+    if (format == TEXT_FORMAT_LHS) {
       wid_set_text_lhs(text_wid, true);
-    }
-    if (rhs) {
+    } else if (format == TEXT_FORMAT_RHS) {
       wid_set_text_rhs(text_wid, true);
     }
+  }
+
+  if (! color.empty()) {
+    wid_set_color(text_wid, WID_COLOR_TEXT_FG, color_find(color.c_str()));
   }
 }
 
 //
 // Log a message to the text_box
 //
-void WidTextBox::log(std::string s, bool lhs, bool rhs)
+void WidTextBox::log(std::string s, wid_text_format format, std::string color)
 {
   TRACE_AND_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
@@ -203,7 +207,7 @@ void WidTextBox::log(std::string s, bool lhs, bool rhs)
       // Handles %%fg=...$ with no text due to a split
       //
       if (length_without_format(c)) {
-        log_(string_to_wstring(c), lhs, rhs);
+        log_(string_to_wstring(c), format, color);
       }
     }
   }
@@ -212,7 +216,7 @@ void WidTextBox::log(std::string s, bool lhs, bool rhs)
 //
 // Log a message to the text_box
 //
-void WidTextBox::log(std::wstring s, bool lhs, bool rhs)
+void WidTextBox::log(std::wstring s, wid_text_format format, std::string color)
 {
   TRACE_AND_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
@@ -221,7 +225,7 @@ void WidTextBox::log(std::wstring s, bool lhs, bool rhs)
 
   if (d) {
     for (const auto &c : *d) {
-      log_(c, lhs, rhs);
+      log_(c, format, color);
     }
   }
 }

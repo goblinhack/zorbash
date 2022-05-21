@@ -10,7 +10,8 @@ const std::string &Tp::equip_carry_anim(void) const { return _equip_carry_anim; 
 const std::string &Tp::gfx_anim_use(void) const { return _gfx_anim_use; }
 const std::string &Tp::is_allied_with(void) const { return _is_allied_with; }
 const std::string &Tp::light_color(void) const { return _light_color; }
-const std::string &Tp::long_text_description_extra(void) const { return _long_text_description_extra; }
+const std::string &Tp::long_text_description2(void) const { return _long_text_description2; }
+const std::string &Tp::long_text_description3(void) const { return _long_text_description3; }
 const std::string &Tp::long_text_description(void) const { return _long_text_description; }
 const std::string &Tp::name(void) const { return _name; }
 const std::string &Tp::on_attacking_damage_acid_do(void) const { return _on_attacking_damage_acid_do; }
@@ -1115,7 +1116,8 @@ void Tp::item_height_set(int v) { _item_height = v; }
 void Tp::item_width_set(int v) { _item_width = v; }
 void Tp::light_color_set(const std::string &v) { _light_color = v; }
 void Tp::light_dist_set(int v) { _light_dist = v; }
-void Tp::long_text_description_extra_set(const std::string &v) { _long_text_description_extra = v; }
+void Tp::long_text_description3_set(const std::string &v) { _long_text_description3 = v; }
+void Tp::long_text_description2_set(const std::string &v) { _long_text_description2 = v; }
 void Tp::long_text_description_set(const std::string &v) { _long_text_description = v; }
 void Tp::melting_chance_d1000_set(int v) { _melting_chance_d1000 = v; }
 void Tp::minion_limit_set(int v) { _minion_limit = v; }

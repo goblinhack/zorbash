@@ -43,17 +43,17 @@ static uint8_t wid_error_key_up(Widp w, const struct SDL_Keysym *key)
   }
 
   switch (key->mod) {
-    case KMOD_LCTRL :
-    case KMOD_RCTRL :
-    default :
+    case KMOD_LCTRL:
+    case KMOD_RCTRL:
+    default:
       switch (key->sym) {
-        default :
+        default:
           {
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case '\n' :
-              case SDLK_ESCAPE :
+              case '\n':
+              case SDLK_ESCAPE:
                 {
                   TRACE_AND_INDENT();
                   wid_error_destroy();
@@ -118,7 +118,7 @@ void wid_error(std::string error)
     auto bt = new Backtrace();
     bt->init();
     auto s = bt->to_string();
-    wid_error_window->log(s, true, false);
+    wid_error_window->log(s, TEXT_FORMAT_LHS);
   }
 
   {

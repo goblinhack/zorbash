@@ -92,19 +92,19 @@ WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile,
 //
 // Log a message to the popup
 //
-void WidPopup::log(std::string s, bool lhs, bool rhs)
+void WidPopup::log(std::string s, wid_text_format format, std::string color)
 {
   TRACE_AND_INDENT();
-  wid_text_area->log(s, lhs, rhs);
+  wid_text_area->log(s, format, color);
 }
 
 //
 // Log a message to the popup
 //
-void WidPopup::log(std::wstring s, bool lhs, bool rhs)
+void WidPopup::log(std::wstring s, wid_text_format format, std::string color)
 {
   TRACE_AND_INDENT();
-  wid_text_area->log(s, lhs, rhs);
+  wid_text_area->log(s, format, color);
 }
 
 void wid_popup_test(void)
