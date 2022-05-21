@@ -1,7 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- need jump notifications if you can see the monst                                                                                             -->
+<!-- jelly was lunging at nothing                                                                                                                 -->
+<!-- torches and other light sources should cast alpha                                                                                            -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
