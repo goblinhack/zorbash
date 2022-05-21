@@ -39,7 +39,7 @@
 #define UI_POPUP_TEXT_COLOR              UI_TEXT_COLOR
 #define UI_SCROLL_JOY_SCALE              1.0
 #define UI_SCROLL_JOY_SCALE_MAX          1.5
-#define UI_SIDEBAR_LEFT_WIDTH            29
+#define UI_SIDEBAR_LEFT_WIDTH            30
 #define UI_SIDEBAR_RIGHT_PIXELART_HEIGHT 52
 #define UI_SIDEBAR_RIGHT_WIDTH           18
 #define UI_TEXT_COLOR                    GRAY // Default text color
