@@ -785,8 +785,8 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         if (d1000() < damage_draining_chance_d1000(attack_options->attack_num)) {
           int damage_draining_val = damage_draining();
           if (damage_draining_val > 0) {
-            attack_options->damage         = damage_draining_val;
-            attack_options->damage_set     = true;
+            attack_options->damage          = damage_draining_val;
+            attack_options->damage_set      = true;
             attack_options->attack_draining = true;
             dbg("Set drain damage %d", attack_options->damage);
           }
@@ -990,11 +990,11 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
             popup("You miss!");
           } else if (victim->is_player()) {
             if (owner) {
-              msg("%s misses with %s.", owner->text_the().c_str(), text_the().c_str());
+              msg("%s misses you with %s.", owner->text_the().c_str(), text_the().c_str());
             } else {
-              msg("%s misses.", text_The().c_str());
+              msg("%s misses you.", text_The().c_str());
             }
-            popup("It misses!");
+            popup("It misses you!");
           } else {
             dbg("The attack missed (att modifier %d, AC %d) on %s", attack_bonus, stat_def,
                 victim->to_string().c_str());
