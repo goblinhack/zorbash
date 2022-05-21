@@ -887,9 +887,11 @@ void config_game_pix_zoom_update(void)
   // If we overflow the screen, try to cut a few rows and columns off
   //
   while (game->config.ascii_gl_width * TERM_WIDTH > game->config.ui_pix_width) {
+    CON("SDL: - reduce term width");
     TERM_WIDTH--;
   }
   while (game->config.ascii_gl_height * TERM_HEIGHT > game->config.ui_pix_height) {
+    CON("SDL: - reduce term height");
     TERM_HEIGHT--;
   }
 

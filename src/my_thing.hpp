@@ -697,7 +697,8 @@ public:
   const std::string &is_allied_with(void);
   const std::string &lifespan_dice_str(void);
   const std::string &light_color(void);
-  const std::string &long_text_description_extra(void);
+  const std::string &long_text_description2(void);
+  const std::string &long_text_description3(void);
   const std::string &long_text_description(void);
   const std::string &msg_get(void);
   const std::string &name(void);

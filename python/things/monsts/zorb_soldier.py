@@ -9,7 +9,7 @@ def on_death_of_my_leader(me, x, y):
 
 def tp_init(name, text_name):
     self = zorb_all.tp_init(name, text_name)
-    my.long_text_description_extra(self, "This particular zorblin has is a battle hardened veteran of many wars.")
+    my.long_text_description2(self, "This particular zorblin has is a battle hardened veteran of many wars.")
     my.on_death_of_my_leader_do(self, "me.on_death_of_my_leader()")
     my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
     my.text_description(self, "A grizzled war-weary soldier.")

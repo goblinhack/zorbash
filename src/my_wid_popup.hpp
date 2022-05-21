@@ -33,8 +33,8 @@ public:
            bool horiz_scroll = true, bool vert_scoll = true, int vert_scroll_size = -1);
 
 public:
-  void log(std::string s, bool lhs = false, bool rhs = false);
-  void log(std::wstring s, bool lhs = false, bool rhs = false);
+  void log(std::string s, wid_text_format format = TEXT_FORMAT_NONE, std::string color = "");
+  void log(std::wstring s, wid_text_format format = TEXT_FORMAT_NONE, std::string color = "");
 };
 
 extern void wid_popup_test(void);

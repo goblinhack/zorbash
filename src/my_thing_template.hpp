@@ -663,7 +663,8 @@ private:
   std::string _lifespan_dice_str;
   std::string _light_color;
   std::string _long_text_description;
-  std::string _long_text_description_extra;
+  std::string _long_text_description2;
+  std::string _long_text_description3;
   std::string _name;
   std::string _nutrition_dice_str;
   std::string _on_attacking_damage_acid_do;
@@ -946,7 +947,8 @@ public:
   const std::string &is_allied_with(void) const;
   const std::string &lifespan_dice_str(void) const;
   const std::string &light_color(void) const;
-  const std::string &long_text_description_extra(void) const;
+  const std::string &long_text_description2(void) const;
+  const std::string &long_text_description3(void) const;
   const std::string &long_text_description(void) const;
   const std::string &name(void) const;
   const std::string &nutrition_dice_str(void) const;
@@ -1996,7 +1998,8 @@ public:
   void jump_distance_set(int v);
   void light_color_set(const std::string &v);
   void light_dist_set(int v);
-  void long_text_description_extra_set(const std::string &v);
+  void long_text_description2_set(const std::string &v);
+  void long_text_description3_set(const std::string &v);
   void long_text_description_set(const std::string &v);
   void melting_chance_d1000_set(int v);
   void minion_limit_set(int v);

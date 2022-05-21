@@ -21,7 +21,6 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
                                   bool hflip, bool make_visible_at_end)
 {
   if (g_opt_ascii) {
-    err("No ascii mode");
     return;
   }
 
@@ -60,7 +59,6 @@ void Level::new_internal_particle(point start, point stop, isize sz, uint32_t du
                                   bool make_visible_at_end)
 {
   if (g_opt_ascii) {
-    err("No ascii mode");
     return;
   }
 
@@ -224,7 +222,6 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
                                   bool hflip, bool make_visible_at_end)
 {
   if (g_opt_ascii) {
-    err("No ascii mode");
     return;
   }
 
@@ -264,7 +261,6 @@ void Level::new_external_particle(point start, point stop, isize sz, uint32_t du
                                   bool make_visible_at_end)
 {
   if (g_opt_ascii) {
-    err("No ascii mode");
     return;
   }
 
