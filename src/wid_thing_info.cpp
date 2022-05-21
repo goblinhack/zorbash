@@ -1618,7 +1618,6 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
         w->log(UI_LOGGING_EMPTY_LINE);
       } else {
         w->log("Is empty.", TEXT_FORMAT_LHS);
-        w->log(UI_LOGGING_EMPTY_LINE);
       }
     }
   } else {
@@ -1640,7 +1639,6 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
         w->log(UI_LOGGING_EMPTY_LINE);
       } else {
         w->log("Looks like it is empty.", TEXT_FORMAT_LHS);
-        w->log(UI_LOGGING_EMPTY_LINE);
       }
     }
   }

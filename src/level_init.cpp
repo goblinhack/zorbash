@@ -71,6 +71,7 @@ void Level::clear(void)
   can_see_ever      = {};
 
   ts_created = time_ms();
+  ts_entered = ts_created;
   ts_saved   = 0;
 
   tick_created = game->tick_current;

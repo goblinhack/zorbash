@@ -453,14 +453,19 @@ void Level::tick(void)
   }
   FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
 
+  //
+  // If things are still moving, we need to wait.
+  //
   if (game->things_are_moving) {
     if (! game->robot_mode) {
-      if (ts_created && time_have_x_tenths_passed_since(10, ts_created)) {
+      if (ts_entered && time_have_x_tenths_passed_since(10, ts_entered)) {
+        //
+        // If the player is waiting to move, do we need to bump the time and make things faster.
+        //
         if (game->request_player_move || (player && player->aip()->move_path.size())) {
           if ((time_ms() - game->tick_begin_ms) > game->current_move_speed) {
             game->tick_current_is_too_slow = true;
             time_game_delta += 10;
-            return;
           }
         }
       }

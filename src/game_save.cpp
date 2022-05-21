@@ -485,6 +485,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->ts_created);
   ts_t ts_saved = time_ms();
   out << bits(ts_saved);
+  out << bits(my.t->ts_created);
   out << bits(my.t->ts_fade_out_begin);
   out << bits(my.t->ts_fade_in_begin);
 

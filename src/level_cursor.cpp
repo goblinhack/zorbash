@@ -116,7 +116,7 @@ void Level::cursor_move(void)
   //
   // Dampen mouse moves at level start
   //
-  if (ts_created && time_have_x_tenths_passed_since(2, ts_created)) {
+  if (ts_entered && time_have_x_tenths_passed_since(2, ts_entered)) {
     mouse_at = sdl.mouse_tick;
     if (mouse_at > mouse_old) {
       mouse_old       = mouse_at;

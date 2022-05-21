@@ -83,6 +83,9 @@ bool Thing::player_is_ready_for_thing_info(void)
     return false;
   }
 
+  //
+  // While fading in out, we don't want popups.
+  //
   if (! g_opt_ascii && level->ts_fade_out_begin) {
     dbg("Not ready for thing info; fading out");
     return false;
@@ -93,6 +96,17 @@ bool Thing::player_is_ready_for_thing_info(void)
     return false;
   }
 
+  //
+  // This is really for ascii mode, as there is no fade in/out.
+  //
+  if (level->ts_entered && ! time_have_x_tenths_passed_since(10, level->ts_entered)) {
+    dbg("Not ready for thing info; changing level");
+    return false;
+  }
+
+  //
+  // While changing level, popups are confusing
+  //
   if (is_changing_level) {
     dbg("Not ready for thing info; changing level");
     return false;
