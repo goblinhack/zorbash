@@ -526,6 +526,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   new_ts_created   = time_ms() - dungeon_age;
   l->ts_created    = new_ts_created;
   l->ts_saved      = new_ts_created + dungeon_age;
+  l->ts_entered    = new_ts_created;
   in >> bits(l->ts_fade_out_begin);
   in >> bits(l->ts_fade_in_begin);
 

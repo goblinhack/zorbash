@@ -16,7 +16,6 @@ void Thing::level_enter(bool rejoin)
   if (is_loggable()) {
     dbg("Enter level %s", level->to_string().c_str());
   }
-  TRACE_AND_INDENT();
 
   int  group  = group_get();
   auto result = level->all_things[ group ].insert(std::pair(id, this));
@@ -117,5 +116,9 @@ void Thing::level_enter(bool rejoin)
   if (is_player()) {
     level->fov_calculate(this, &level->can_see_currently, &level->can_see_ever, curr_at.x, curr_at.y,
                          distance_vision_get());
+  }
+
+  if (is_player()) {
+    level->ts_entered = time_ms();
   }
 }

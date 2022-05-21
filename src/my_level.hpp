@@ -116,7 +116,17 @@ public:
   // When this Level was made. Used to restore timestamps relative to this.
   //
   ts_t ts_created {};
+  //
+  // When the player/sucker entered this level.
+  //
+  ts_t ts_entered {};
+  //
+  // When we saved this level. Used to restore other timestamps.
+  //
   ts_t ts_saved {};
+  //
+  // Fade in/out (only for pixel art mode)
+  //
   ts_t ts_fade_out_begin {};
   ts_t ts_fade_in_begin {};
 
