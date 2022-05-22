@@ -4,6 +4,7 @@ import tp
 
 def init_carry(name):
     self = tp.Tp(name)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_anim_synced_with_owner(self, True)

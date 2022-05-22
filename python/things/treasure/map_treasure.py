@@ -10,6 +10,7 @@ def on_enchant(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.collision_hit_priority(self, 0)
     my.collision_hit_priority(self, 6)
     my.enchant_max(self, 1)

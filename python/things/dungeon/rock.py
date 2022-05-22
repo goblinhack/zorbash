@@ -24,10 +24,14 @@ def tp_init(
 ):
 
     self = tp.Tp(name, "rock")
+    my.gfx_ascii_mode_shown(self, True)
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 1)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.gfx_shown_in_bg(self, True)
+    my.gfx_ascii_mode_color_spread_green(self, 50)
+    my.gfx_ascii_mode_color_spread_red(self, 50)
+    my.gfx_ascii_mode_color_spread_blue(self, 10)
     my.health_initial_dice(self, "999")
     my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)
@@ -51,7 +55,7 @@ def tp_init(
 
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="#", ascii_bg_col_name="gray80", ascii_fg_col_name="black",
+                ascii_fg_char="#", ascii_bg_col_name="burlywood", ascii_fg_col_name="black",
                 tile=t)
 
     if left1_tiles is not None:

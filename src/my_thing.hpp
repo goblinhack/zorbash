@@ -167,9 +167,14 @@ public:
   uint16_t frame_count {};
   int16_t  tp_id {-1}; // Common settings
 
-  uint8_t alpha {255}; // For fading
   uint8_t z_depth {};
   uint8_t laser_count {};
+
+  //
+  // Used for alpha fading and giving tiles slightly sifferent colors when
+  // in ascii mode; to help with visibility.
+  //
+  color blit_color;
 
   uint64_t dir : 4 {}; // Direction
 
@@ -193,7 +198,7 @@ public:
   uint64_t is_facing_left                               : 1 {};
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
-  uint64_t is_gfx_pixelart_animated                              : 1 {};
+  uint64_t is_gfx_pixelart_animated                     : 1 {};
   uint64_t is_hidden                                    : 1 {};
   uint64_t is_hungry                                    : 1 {};
   uint64_t is_in_lava                                   : 1 {};
@@ -1069,7 +1074,7 @@ public:
   int get_total_damage_for_on_receiving_damage_stat_att(Thingp hitter, Thingp real_hitter, int damage);
   int get_total_damage_for_on_receiving_damage_stat_con(Thingp hitter, Thingp real_hitter, int damage);
   int get_total_damage_for_on_receiving_damage_stat_str(Thingp hitter, Thingp real_hitter, int damage);
-  int unused_flag102(void);
+  int gfx_ascii_mode_shown(void);
   int gfx_pixelart_animated_can_hflip(void);
   int gfx_pixelart_animated_can_vflip(void);
   int gfx_pixelart_animated_no_dir(void);
@@ -1806,8 +1811,8 @@ public:
   int unused_chance4_d1000(void);
   int unused_chance5_d1000(void);
   int unused_chance6_d1000(void);
-  int gfx_ascii_color_spread_green(void);
-  int gfx_ascii_color_spread_red(void);
+  int gfx_ascii_mode_color_spread_green(void);
+  int gfx_ascii_mode_color_spread_red(void);
   int unused_flag10(void);
   int unused_flag11(void);
   int unused_flag123(void);
@@ -1905,8 +1910,8 @@ public:
   int unused_flag95(void);
   int unused_flag96(void);
   int unused_flag97(void);
-  int gfx_ascii_color_spread_alpha(void);
-  int gfx_ascii_color_spread_blue(void);
+  int gfx_ascii_mode_color_spread_alpha(void);
+  int gfx_ascii_mode_color_spread_blue(void);
   int unused_flag9(void);
   int value(const Thingp it);
   int weapon_damaged_pct(void);

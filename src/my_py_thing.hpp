@@ -509,8 +509,8 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_temperature(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_gfx_ascii_color_spread_green(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_gfx_ascii_color_spread_red(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_ascii_mode_color_spread_green(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_ascii_mode_color_spread_red(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag11(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag123(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -608,8 +608,8 @@ PyObject *thing_unused_flag94(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag95(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag96(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag97(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_gfx_ascii_color_spread_alpha(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_gfx_ascii_color_spread_blue(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_ascii_mode_color_spread_alpha(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_ascii_mode_color_spread_blue(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #endif

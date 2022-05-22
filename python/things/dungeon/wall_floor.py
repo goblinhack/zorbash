@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     self = tp.Tp(name)
+    my.gfx_ascii_mode_shown(self, False)
     my.gfx_shown_in_bg(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_floor(self, True)

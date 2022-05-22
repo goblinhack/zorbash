@@ -351,9 +351,9 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   in >> bits(T);
   my.t->ts_next_frame = load(T);
   in >> bits(my.t->tile_curr);
-  in >> bits(my.t->alpha);
   in >> bits(my.t->z_depth);
   in >> bits(my.t->laser_count);
+  in >> bits(my.t->blit_color);
   uint8_t dir;
   in >> dir;
   my.t->dir = dir;

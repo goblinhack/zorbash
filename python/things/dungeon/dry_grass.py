@@ -11,6 +11,7 @@ def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "dry grass")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shadow_very_short(self, True)
     my.gfx_shown_in_bg(self, True)

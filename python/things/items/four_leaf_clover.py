@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.gold_value_dice(self, "1")
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)

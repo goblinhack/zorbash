@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "spiderweb")
+    my.gfx_ascii_mode_shown(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
     my.gfx_pixelart_wobbles_when_hit(self, True)

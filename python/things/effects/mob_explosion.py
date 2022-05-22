@@ -8,6 +8,7 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)

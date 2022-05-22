@@ -962,16 +962,16 @@ bool Thing::matches(const std::string &what)
   if (unused_flag97() && (what == "unused_flag97")) {
     return true;
   }
-  if (gfx_ascii_color_spread_alpha() && (what == "gfx_ascii_color_spread_alpha")) {
+  if (gfx_ascii_mode_color_spread_alpha() && (what == "gfx_ascii_mode_color_spread_alpha")) {
     return true;
   }
-  if (gfx_ascii_color_spread_blue() && (what == "gfx_ascii_color_spread_blue")) {
+  if (gfx_ascii_mode_color_spread_blue() && (what == "gfx_ascii_mode_color_spread_blue")) {
     return true;
   }
-  if (gfx_ascii_color_spread_green() && (what == "gfx_ascii_color_spread_green")) {
+  if (gfx_ascii_mode_color_spread_green() && (what == "gfx_ascii_mode_color_spread_green")) {
     return true;
   }
-  if (gfx_ascii_color_spread_red() && (what == "gfx_ascii_color_spread_red")) {
+  if (gfx_ascii_mode_color_spread_red() && (what == "gfx_ascii_mode_color_spread_red")) {
     return true;
   }
   if (attack_no_msg() && (what == "attack_no_msg")) {
@@ -2211,11 +2211,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "temperature") {
     return &Thing::temperature;
   }
-  if (what == "gfx_ascii_color_spread_green") {
-    return &Thing::gfx_ascii_color_spread_green;
+  if (what == "gfx_ascii_mode_color_spread_green") {
+    return &Thing::gfx_ascii_mode_color_spread_green;
   }
-  if (what == "gfx_ascii_color_spread_red") {
-    return &Thing::gfx_ascii_color_spread_red;
+  if (what == "gfx_ascii_mode_color_spread_red") {
+    return &Thing::gfx_ascii_mode_color_spread_red;
   }
   if (what == "attack_no_msg") {
     return &Thing::attack_no_msg;
@@ -2577,11 +2577,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag97") {
     return &Thing::unused_flag97;
   }
-  if (what == "gfx_ascii_color_spread_alpha") {
-    return &Thing::gfx_ascii_color_spread_alpha;
+  if (what == "gfx_ascii_mode_color_spread_alpha") {
+    return &Thing::gfx_ascii_mode_color_spread_alpha;
   }
-  if (what == "gfx_ascii_color_spread_blue") {
-    return &Thing::gfx_ascii_color_spread_blue;
+  if (what == "gfx_ascii_mode_color_spread_blue") {
+    return &Thing::gfx_ascii_mode_color_spread_blue;
   }
   if (what == "unused_flag9") {
     return &Thing::unused_flag9;

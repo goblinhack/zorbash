@@ -95,6 +95,7 @@ def on_owner_receiving_damage_stat_con(me, owner, hitter, real_hitter, x, y, dam
 def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
 
     my.is_buff(self, True)
     my.is_loggable(self, True)

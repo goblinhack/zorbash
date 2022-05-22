@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "dry trampled grass")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shadow_very_short(self, True)
     my.gfx_shown_in_bg(self, True)

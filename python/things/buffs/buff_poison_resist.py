@@ -102,6 +102,7 @@ def on_tick(owner, item, x, y):
 def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
 
     my.is_buff(self, True)
     my.is_loggable(self, True)

@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name)
+    my.gfx_ascii_mode_shown(self, True)
     my.is_loggable(self, False)
     my.is_moveable(self, True)
     my.is_msg(self, True)

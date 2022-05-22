@@ -8,6 +8,7 @@ def spawn(me, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.collision_check(self, True)
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "1d3+1")

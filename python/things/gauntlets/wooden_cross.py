@@ -12,6 +12,7 @@ def on_unequip(owner, me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.equip_carry_anim(self, "wooden_cross_carry")
     my.gold_value_dice(self, "1")
     my.is_able_to_fall(self, True)

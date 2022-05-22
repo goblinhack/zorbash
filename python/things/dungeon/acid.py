@@ -4,6 +4,7 @@ import tp
 
 def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.ai_obstacle(self, True)
     my.damage_acid_chance_d1000(self, 0, 1000)
     my.damage_acid_dice(self, "1d3+1")

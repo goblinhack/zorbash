@@ -16,6 +16,7 @@ def on_owner_attacking_damage_draining(me, owner, victim, x, y, damage):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.attacks_per_round(self, 2)
     my.damaged_chance_d10000(self, 5)
     my.damage_draining_chance_d1000(self, 1, 1000)

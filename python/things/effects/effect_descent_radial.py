@@ -14,6 +14,7 @@ def on_born(me, x, y):
 #
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.blast_max_radius(self, 2)
     my.collision_check(self, True)
     my.is_loggable(self, True)

@@ -16,6 +16,7 @@ def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.damaged_chance_d10000(self, 5)
     my.damage_melee_chance_d1000(self, 0, 1000)
     my.damage_melee_dice(self, "1d4")

@@ -22,6 +22,7 @@ def on_enchant(me, x, y):
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.collision_hit_priority(self, 6)
     my.damaged_chance_d10000(self, 1000)
     my.enchant_max(self, 10)

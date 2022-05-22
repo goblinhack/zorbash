@@ -20,6 +20,7 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name, "huge explosion")
+    my.gfx_ascii_mode_shown(self, True)
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "2d6")
     my.damage_nat_attack_type(self, "blast")

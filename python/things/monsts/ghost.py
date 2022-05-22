@@ -13,6 +13,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.aggression_level_pct(self, 100)
     my.ai_wanderer(self, True)
     my.attack_humanoid(self, True)

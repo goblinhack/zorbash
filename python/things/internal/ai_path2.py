@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name, name)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.is_debug_path(self, True)
     my.is_moveable(self, True)
