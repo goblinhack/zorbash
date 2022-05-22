@@ -4,8 +4,8 @@ import tp
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_short_shadow_caster(self, True)
-    my.gfx_wobbles_when_hit(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_wobbles_when_hit(self, True)
     my.is_biome_dungeon(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)

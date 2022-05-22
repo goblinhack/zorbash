@@ -4,9 +4,9 @@ import tp
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_animated(self, True)
     my.gfx_oversized_and_on_floor(self, True)
-    my.gfx_short_shadow_caster(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
     my.gfx_shown_in_bg(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)

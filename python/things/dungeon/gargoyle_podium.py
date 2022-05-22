@@ -5,8 +5,8 @@ import tp
 def tp_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
     my.gfx_oversized_and_on_floor(self, True)
-    my.gfx_short_shadow_caster(self, True)
-    my.gfx_show_outlined(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)
     my.text_a_or_an(self, "an")
     my.text_description(self, "An empty podium. With claw marks.")

@@ -4,11 +4,11 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name)
-    my.gfx_animated_can_hflip(self, True)
-    my.gfx_animated(self, True)
-    my.gfx_bounce_on_move(self, True)
-    my.gfx_equip_carry_anim(self, True)
-    my.is_gfx_anim_synced_with_owner(self, True)
+    my.gfx_pixelart_animated_can_hflip(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_bounce_on_move(self, True)
+    my.gfx_pixelart_equip_carry_anim(self, True)
+    my.gfx_pixelart_anim_synced_with_owner(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")

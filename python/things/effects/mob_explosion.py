@@ -8,9 +8,9 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name)
-    my.gfx_animated(self, True)
-    my.gfx_short_shadow_caster(self, True)
-    my.gfx_show_outlined(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.is_explosion(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)

@@ -4,12 +4,12 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name)
-    my.gfx_animated_can_hflip(self, True)
-    my.gfx_animated_can_vflip(self, True)
-    my.gfx_animated(self, True)
-    my.gfx_attack_anim(self, True)
-    my.gfx_short_shadow_caster(self, True)
-    my.gfx_show_outlined(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_animated_can_hflip(self, True)
+    my.gfx_pixelart_animated_can_vflip(self, True)
+    my.gfx_pixelart_attack_anim(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.is_removeable_if_out_of_slots(self, True)

@@ -90,7 +90,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   // Cached as used often
   //
-  is_gfx_animated = tp()->gfx_animated();
+  is_gfx_pixelart_animated = tp()->gfx_pixelart_animated();
 
   //
   // Cache this flag so that polymorphing works
@@ -196,7 +196,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     level->dmap_to_player_update();
   }
 
-  if (tpp->gfx_animated_can_hflip()) {
+  if (tpp->gfx_pixelart_animated_can_hflip()) {
     dir            = THING_DIR_LEFT;
     is_facing_left = true;
   } else {
@@ -229,7 +229,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     update_interpolated_position();
   }
 
-  if (gfx_bounce_always()) {
+  if (gfx_pixelart_bounce_always()) {
     bounce(0.3, 1.0, 400 + pcg_random_range(0, 100), 255);
   }
 

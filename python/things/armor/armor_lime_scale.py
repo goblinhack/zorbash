@@ -18,7 +18,7 @@ def tp_init(name, text_name, short_text_name):
     my.damaged_chance_d10000(self, 100)
     my.enchant_max(self, 10)
     my.equip_carry_anim(self, "armor_lime_scale_carry")
-    my.gfx_short_shadow_caster(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "50")
     my.is_able_to_fall(self, True)
     my.is_armor(self, True)

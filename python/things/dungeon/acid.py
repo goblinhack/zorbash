@@ -8,7 +8,7 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     my.damage_acid_chance_d1000(self, 0, 1000)
     my.damage_acid_dice(self, "1d3+1")
     my.damage_nat_attack_type(self, "burn")
-    my.gfx_show_outlined(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)
     my.is_acid(self, True)
     my.is_hazard(self, True)

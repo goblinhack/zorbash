@@ -5,9 +5,9 @@ import tp
 def key_init(name, text_name):
     self = tp.Tp(name, text_name)
     my.collision_hit_priority(self, 6)
-    my.gfx_animated(self, True)
-    my.gfx_bounce_always(self, True)
-    my.gfx_short_shadow_caster(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_bounce_always(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "100")
     my.is_able_to_fall(self, True)
     my.is_auto_collect_item(self, True)

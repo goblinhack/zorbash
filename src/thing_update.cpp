@@ -43,7 +43,7 @@ void Thing::update(void)
   //
   // Cached as used often
   //
-  is_gfx_animated = tp()->gfx_animated();
+  is_gfx_pixelart_animated = tp()->gfx_pixelart_animated();
 
   //
   // If polymorphed, retain the same health
@@ -325,7 +325,7 @@ void Thing::update(void)
   //
   if (! ts_next_frame) {
     auto tiles = &tpp->tiles;
-    if (tpp->gfx_animated()) {
+    if (tpp->gfx_pixelart_animated()) {
       auto tile = tile_first(tiles);
       if (tile) {
         tile_curr = tile->global_index;

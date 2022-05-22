@@ -142,12 +142,12 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
       dy = std::min(m, dy);
     }
 
-    if (unlikely(tpp->gfx_very_short_shadow_caster())) {
+    if (unlikely(tpp->gfx_pixelart_shadow_very_short())) {
       shadow_tl.x += ((float) TILE_WIDTH) * dx * 4;
       shadow_tr.x += ((float) TILE_WIDTH) * dx * 4;
       shadow_tl.y += ((float) TILE_WIDTH) * dy * 4;
       shadow_tr.y += ((float) TILE_WIDTH) * dy * 4;
-    } else if (unlikely(tpp->gfx_short_shadow_caster())) {
+    } else if (unlikely(tpp->gfx_pixelart_shadow_short())) {
       shadow_tl.x += ((float) TILE_WIDTH) * dx * 10;
       shadow_tr.x += ((float) TILE_WIDTH) * dx * 10;
       shadow_tl.y += ((float) TILE_WIDTH) * dy * 10;
@@ -185,7 +185,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
     shadow_br.x -= bh;
 
     color c = BLACK;
-    if (likely(! tpp->gfx_solid_shadow())) {
+    if (likely(! tpp->gfx_pixelart_shadow_solid())) {
       c.a = 150;
     }
 
@@ -211,7 +211,7 @@ void Thing::blit_player_owned_shadow(const Tpp &tpp, const Tilep &tile, const po
   float dy = game->config.one_pixel_width;
 
   color c = BLACK;
-  if (likely(! tpp->gfx_solid_shadow())) {
+  if (likely(! tpp->gfx_pixelart_shadow_solid())) {
     c.a = 150;
   }
 
@@ -403,7 +403,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     blit = false;
   } else if (unlikely(is_hidden)) {
     blit = false;
-  } else if (unlikely(tpp->gfx_attack_anim() || tpp->gfx_equip_carry_anim())) {
+  } else if (unlikely(tpp->gfx_pixelart_attack_anim() || tpp->gfx_pixelart_equip_carry_anim())) {
     //
     // Hide weapons that have swung
     //
@@ -478,7 +478,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   auto falling = is_falling || (owner && owner->is_falling);
 
   if (likely(! falling)) {
-    if (unlikely(tpp->gfx_animated_can_hflip())) {
+    if (unlikely(tpp->gfx_pixelart_animated_can_hflip())) {
       if (ts_flip_start_get()) {
         //
         // Slow flip
@@ -516,7 +516,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
       }
     }
 
-    if (unlikely(tpp->gfx_animated_can_vflip())) {
+    if (unlikely(tpp->gfx_pixelart_animated_can_vflip())) {
       if (is_dir_down() || is_dir_br() || is_dir_bl()) {
         std::swap(blit_tl.y, blit_br.y);
       }
@@ -634,8 +634,8 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   }
 
   if (unlikely(is_in_water || is_monst() || is_item() || is_treasure_type() || is_skillstone() || is_player() ||
-               is_wet_grass() || is_foilage() || tpp->gfx_attack_anim() || tpp->gfx_on_fire_anim() ||
-               tpp->gfx_equip_carry_anim())) {
+               is_wet_grass() || is_foilage() || tpp->gfx_pixelart_attack_anim() || tpp->gfx_on_fire_anim() ||
+               tpp->gfx_pixelart_equip_carry_anim())) {
 
     //
     // Render the weapon and player on the same tile rules
@@ -778,8 +778,8 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   }
 
   if (! g_render_black_and_white) {
-    if (unlikely(tpp->gfx_very_short_shadow_caster() || tpp->gfx_short_shadow_caster() ||
-                 tpp->gfx_long_shadow_caster())) {
+    if (unlikely(tpp->gfx_pixelart_shadow_very_short() || tpp->gfx_pixelart_shadow_short() ||
+                 tpp->gfx_pixelart_shadow_long())) {
       if (auto submerged = blit_begin_submerged()) {
 
         blit_shadow(tpp, tile, blit_tl, blit_br);
@@ -803,9 +803,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   auto lit = (fbo == FBO_PIXELART_FULLMAP) || level->is_currently_pixelart_raycast_lit_no_check(curr_at.x, curr_at.y);
 
   if (tile && ! tile->is_invisible && ! is_dead && ! reflection && lit &&
-      (gfx_health_bar_shown() || (gfx_health_bar_autohide() && (h < m)))) {
+      (gfx_pixelart_health_bar_shown() || (gfx_pixelart_health_bar_autohide() && (h < m)))) {
 
-    if (is_sleeping && gfx_health_bar_shown_when_awake_only()) {
+    if (is_sleeping && gfx_pixelart_health_bar_shown_when_awake_only()) {
       //
       // Only show health when awake
       //
@@ -826,7 +826,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
             //
             // Don't show gargoyles when snoozing for example
             //
-            if (gfx_show_asleep()) {
+            if (gfx_pixelart_show_asleep_anim()) {
               index = 1;
             }
           }
@@ -893,7 +893,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     glTranslatef(-mid.x, -mid.y, 0);
   }
 
-  bool outline = tpp->gfx_show_outlined();
+  bool outline = tpp->gfx_pixelart_show_outlined();
 
   if (! g_render_black_and_white) {
     if (reflection) {

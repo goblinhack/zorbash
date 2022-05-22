@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name, name)
-    my.gfx_animated(self, True)
+    my.gfx_pixelart_animated(self, True)
     my.is_debug_path(self, True)
     my.is_moveable(self, True)
     my.is_removeable_if_out_of_slots(self, True)

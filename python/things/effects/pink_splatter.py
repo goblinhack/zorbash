@@ -4,11 +4,11 @@ import tp
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_animated_can_hflip(self, True)
-    my.gfx_animated_can_vflip(self, True)
-    my.gfx_animated(self, True)
-    my.gfx_attack_anim(self, True)
-    my.gfx_show_outlined(self, True)
+    my.gfx_pixelart_animated_can_hflip(self, True)
+    my.gfx_pixelart_animated_can_vflip(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_attack_anim(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.is_moveable(self, True)
     my.is_pink_splatter(self, True)
     my.is_removeable_if_out_of_slots(self, True)

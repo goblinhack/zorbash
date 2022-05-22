@@ -4,7 +4,6 @@ import tp
 
 def lava_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
-    my.gfx_shown_in_bg(self, True)
     my.ai_obstacle(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
@@ -12,6 +11,7 @@ def lava_init(name, text_name, tiles=[]):
     my.damage_fire_dice(self, "1d12+6")
     my.damage_nat_attack_type(self, "burn")
     my.gfx_glows(self, True)
+    my.gfx_shown_in_bg(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
     my.is_cursor_can_hover_over_x2_click(self, True)

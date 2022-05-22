@@ -6,7 +6,7 @@ def tp_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
     my.ai_obstacle(self, True)
     my.environ_avoids_fire(self, 1)
-    my.gfx_animated(self, True)
+    my.gfx_pixelart_animated(self, True)
     my.gfx_shown_in_bg(self, True)
     my.gfx_water(self, True)
     my.is_able_to_fall(self, True)

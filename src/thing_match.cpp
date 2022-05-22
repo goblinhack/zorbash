@@ -140,13 +140,13 @@ bool Thing::matches(const std::string &what)
   if (gfx_flickers() && (what == "gfx_flickers")) {
     return true;
   }
-  if (gfx_long_shadow_caster() && (what == "gfx_long_shadow_caster")) {
+  if (gfx_pixelart_shadow_long() && (what == "gfx_pixelart_shadow_long")) {
     return true;
   }
-  if (gfx_solid_shadow() && (what == "gfx_solid_shadow")) {
+  if (gfx_pixelart_shadow_solid() && (what == "gfx_pixelart_shadow_solid")) {
     return true;
   }
-  if (gfx_very_short_shadow_caster() && (what == "gfx_very_short_shadow_caster")) {
+  if (gfx_pixelart_shadow_very_short() && (what == "gfx_pixelart_shadow_very_short")) {
     return true;
   }
   if (is_able_to_change_levels() && (what == "is_able_to_change_levels")) {
@@ -383,7 +383,7 @@ bool Thing::matches(const std::string &what)
   if (is_food() && (what == "is_food")) {
     return true;
   }
-  if (is_gfx_anim_synced_with_owner() && (what == "is_gfx_anim_synced_with_owner")) {
+  if (gfx_pixelart_anim_synced_with_owner() && (what == "gfx_pixelart_anim_synced_with_owner")) {
     return true;
   }
   if (is_glass() && (what == "is_glass")) {
@@ -962,16 +962,16 @@ bool Thing::matches(const std::string &what)
   if (unused_flag97() && (what == "unused_flag97")) {
     return true;
   }
-  if (unused_flag98() && (what == "unused_flag98")) {
+  if (gfx_ascii_color_spread_alpha() && (what == "gfx_ascii_color_spread_alpha")) {
     return true;
   }
-  if (unused_flag99() && (what == "unused_flag99")) {
+  if (gfx_ascii_color_spread_blue() && (what == "gfx_ascii_color_spread_blue")) {
     return true;
   }
-  if (unused_flag100() && (what == "unused_flag100")) {
+  if (gfx_ascii_color_spread_green() && (what == "gfx_ascii_color_spread_green")) {
     return true;
   }
-  if (unused_flag101() && (what == "unused_flag101")) {
+  if (gfx_ascii_color_spread_red() && (what == "gfx_ascii_color_spread_red")) {
     return true;
   }
   if (attack_no_msg() && (what == "attack_no_msg")) {
@@ -1010,7 +1010,7 @@ bool Thing::matches(const std::string &what)
   if (shove_strength() && (what == "shove_strength")) {
     return true;
   }
-  if (gfx_wobbles_when_hit() && (what == "gfx_wobbles_when_hit")) {
+  if (gfx_pixelart_wobbles_when_hit() && (what == "gfx_pixelart_wobbles_when_hit")) {
     return true;
   }
   if (is_snake() && (what == "is_snake")) {
@@ -1091,10 +1091,10 @@ bool Thing::matches(const std::string &what)
   if (is_very_heavy() && (what == "is_very_heavy")) {
     return true;
   }
-  if (gfx_health_bar_shown_when_awake_only() && (what == "gfx_health_bar_shown_when_awake_only")) {
+  if (gfx_pixelart_health_bar_shown_when_awake_only() && (what == "gfx_pixelart_health_bar_shown_when_awake_only")) {
     return true;
   }
-  if (gfx_show_asleep() && (what == "gfx_show_asleep")) {
+  if (gfx_pixelart_show_asleep_anim() && (what == "gfx_pixelart_show_asleep_anim")) {
     return true;
   }
   if (noise_additional_on_jump_end() && (what == "noise_additional_on_jump_end")) {
@@ -1401,20 +1401,20 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "gfx_flickers") {
     return &Thing::gfx_flickers;
   }
-  if (what == "gfx_health_bar_shown_when_awake_only") {
-    return &Thing::gfx_health_bar_shown_when_awake_only;
+  if (what == "gfx_pixelart_health_bar_shown_when_awake_only") {
+    return &Thing::gfx_pixelart_health_bar_shown_when_awake_only;
   }
-  if (what == "gfx_long_shadow_caster") {
-    return &Thing::gfx_long_shadow_caster;
+  if (what == "gfx_pixelart_shadow_long") {
+    return &Thing::gfx_pixelart_shadow_long;
   }
-  if (what == "gfx_show_asleep") {
-    return &Thing::gfx_show_asleep;
+  if (what == "gfx_pixelart_show_asleep_anim") {
+    return &Thing::gfx_pixelart_show_asleep_anim;
   }
-  if (what == "gfx_solid_shadow") {
-    return &Thing::gfx_solid_shadow;
+  if (what == "gfx_pixelart_shadow_solid") {
+    return &Thing::gfx_pixelart_shadow_solid;
   }
-  if (what == "gfx_very_short_shadow_caster") {
-    return &Thing::gfx_very_short_shadow_caster;
+  if (what == "gfx_pixelart_shadow_very_short") {
+    return &Thing::gfx_pixelart_shadow_very_short;
   }
   if (what == "hunger_is_insatiable") {
     return &Thing::hunger_is_insatiable;
@@ -1767,8 +1767,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_gauntlet") {
     return &Thing::is_gauntlet;
   }
-  if (what == "is_gfx_anim_synced_with_owner") {
-    return &Thing::is_gfx_anim_synced_with_owner;
+  if (what == "gfx_pixelart_anim_synced_with_owner") {
+    return &Thing::gfx_pixelart_anim_synced_with_owner;
   }
   if (what == "is_glass") {
     return &Thing::is_glass;
@@ -2211,11 +2211,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "temperature") {
     return &Thing::temperature;
   }
-  if (what == "unused_flag100") {
-    return &Thing::unused_flag100;
+  if (what == "gfx_ascii_color_spread_green") {
+    return &Thing::gfx_ascii_color_spread_green;
   }
-  if (what == "unused_flag101") {
-    return &Thing::unused_flag101;
+  if (what == "gfx_ascii_color_spread_red") {
+    return &Thing::gfx_ascii_color_spread_red;
   }
   if (what == "attack_no_msg") {
     return &Thing::attack_no_msg;
@@ -2256,8 +2256,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "shove_strength") {
     return &Thing::shove_strength;
   }
-  if (what == "gfx_wobbles_when_hit") {
-    return &Thing::gfx_wobbles_when_hit;
+  if (what == "gfx_pixelart_wobbles_when_hit") {
+    return &Thing::gfx_pixelart_wobbles_when_hit;
   }
   if (what == "is_snake") {
     return &Thing::is_snake;
@@ -2577,11 +2577,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag97") {
     return &Thing::unused_flag97;
   }
-  if (what == "unused_flag98") {
-    return &Thing::unused_flag98;
+  if (what == "gfx_ascii_color_spread_alpha") {
+    return &Thing::gfx_ascii_color_spread_alpha;
   }
-  if (what == "unused_flag99") {
-    return &Thing::unused_flag99;
+  if (what == "gfx_ascii_color_spread_blue") {
+    return &Thing::gfx_ascii_color_spread_blue;
   }
   if (what == "unused_flag9") {
     return &Thing::unused_flag9;

@@ -9,9 +9,9 @@ def spawn(me, x, y):
 def tp_init(name, tiles=[], left1_tiles=[]):
     # my.is_mob(self, True) # don't set to avoid auto place
     self = tp.Tp(name)
-    my.gfx_animated(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.gfx_shown_in_bg(self, True)
-    my.gfx_show_outlined(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
     my.is_descend_sewer(self, True)

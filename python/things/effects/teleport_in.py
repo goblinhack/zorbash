@@ -11,8 +11,8 @@ def tp_init(name):
     my.damage_cold_chance_d1000(self, 0, 1000)
     my.damage_cold_dice(self, "2d6")
     my.damage_nat_attack_type(self, "telefreeze")
-    my.gfx_animated(self, True)
-    my.gfx_short_shadow_caster(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
