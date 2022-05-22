@@ -16,6 +16,7 @@ def on_open(me, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.capacity_height(self, 8)
     my.capacity_width(self, 8)
     my.collision_hit_priority(self, 6)

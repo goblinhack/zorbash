@@ -8,6 +8,7 @@ import tp
 #
 def chasm_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.ai_obstacle(self, True)
     my.is_biome_dungeon(self, True)
     my.is_chasm(self, True)

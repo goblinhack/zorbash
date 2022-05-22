@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.collision_hit_priority(self, 6)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)

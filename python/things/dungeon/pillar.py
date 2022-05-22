@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.ai_obstacle(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_shadow_short(self, True)

@@ -37,6 +37,7 @@ def on_fall(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.blast_max_radius(self, 2)
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 5)

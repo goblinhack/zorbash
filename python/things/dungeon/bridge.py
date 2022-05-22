@@ -14,6 +14,7 @@ def on_death(me, x, y):
 
 def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name, "bridge")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_shown_in_bg(self, True)
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_fall(self, True)

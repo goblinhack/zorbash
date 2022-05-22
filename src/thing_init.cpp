@@ -191,11 +191,17 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     clear_can_see_ever();
   }
 
+  //
+  // Create the large player dmap
+  //
   if (tpp->is_player()) {
     level->player = this;
     level->dmap_to_player_update();
   }
 
+  //
+  // Some things are symetrical and can flip.
+  //
   if (tpp->gfx_pixelart_animated_can_hflip()) {
     dir            = THING_DIR_LEFT;
     is_facing_left = true;
@@ -204,6 +210,9 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     is_facing_left = false;
   }
 
+  //
+  // Make sure you face teh ame was as your owner
+  //
   if (owner) {
     dir            = owner->dir;
     is_facing_left = owner->is_facing_left;
@@ -211,12 +220,18 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
 
   update();
 
+  //
+  // Some things start life open
+  //
   if (unlikely(tpp->is_ascend_dungeon())) {
     if (level->world_at.z > 1) {
       is_open = true;
     }
   }
 
+  //
+  // e.g. wand charges
+  //
   if (unlikely(tpp->charge_count())) {
     charge_count_set(tpp->charge_count());
   }
@@ -229,22 +244,58 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     update_interpolated_position();
   }
 
+  //
+  // e.g. keys
+  //
   if (gfx_pixelart_bounce_always()) {
     bounce(0.3, 1.0, 400 + pcg_random_range(0, 100), 255);
   }
 
+  //
+  // Init light sources like torches
+  //
   init_lights();
 
+  //
+  // Initialize random color spread.
+  //
+  if (gfx_ascii_mode_color_spread_red()) {
+    blit_color.r = 128 + pcg_random_range(0, gfx_ascii_mode_color_spread_red() * 2) - (gfx_ascii_mode_color_spread_red() / 2);
+  }
+  if (gfx_ascii_mode_color_spread_green()) {
+    blit_color.g =
+        128 + pcg_random_range(0, gfx_ascii_mode_color_spread_green() * 2) - (gfx_ascii_mode_color_spread_green() / 2);
+  }
+  if (gfx_ascii_mode_color_spread_blue()) {
+    blit_color.b = 128 + pcg_random_range(0, gfx_ascii_mode_color_spread_blue() * 2) - (gfx_ascii_mode_color_spread_blue() / 2);
+  }
+  if (gfx_ascii_mode_color_spread_alpha()) {
+    blit_color.a =
+        128 + pcg_random_range(0, gfx_ascii_mode_color_spread_alpha() * 2) - (gfx_ascii_mode_color_spread_alpha() / 2);
+  }
+
+  //
+  // Keep track of the monsts per level so we don't get too many
+  //
   if (is_monst()) {
     level->monst_count++;
   }
 
+  //
+  // The grid is the perma background matrix like substrate that is the ether of this universe!
+  //
   is_the_grid = tp()->is_the_grid();
 
+  //
+  // Reset fixed randomization.
+  //
   if (is_tmp_thing()) {
     pcg_random_allowed = true;
   }
 
+  //
+  // Do on born actions.
+  //
   on_born();
 
   //

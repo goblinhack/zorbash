@@ -270,7 +270,7 @@ int Tp::environ_avoids_fire(void) const { return _environ_avoids_fire; }
 int Tp::environ_avoids_necrosis(void) const { return _environ_avoids_necrosis; }
 int Tp::environ_avoids_poison(void) const { return _environ_avoids_poison; }
 int Tp::environ_avoids_water(void) const { return _environ_avoids_water; }
-int Tp::unused_flag102(void) const { return _unused_flag102; }
+int Tp::gfx_ascii_mode_shown(void) const { return _gfx_ascii_mode_shown; }
 int Tp::gfx_pixelart_animated_can_hflip(void) const { return _gfx_pixelart_animated_can_hflip; }
 int Tp::gfx_pixelart_animated_can_vflip(void) const { return _gfx_pixelart_animated_can_vflip; }
 int Tp::gfx_pixelart_animated_no_dir(void) const { return _gfx_pixelart_animated_no_dir; }
@@ -637,8 +637,8 @@ int Tp::unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
 int Tp::unused_chance4_d1000(void) const { return _unused_chance4_d1000; }
 int Tp::unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
 int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
-int Tp::gfx_ascii_color_spread_green(void) const { return _gfx_ascii_color_spread_green; }
-int Tp::gfx_ascii_color_spread_red(void) const { return _gfx_ascii_color_spread_red; }
+int Tp::gfx_ascii_mode_color_spread_green(void) const { return _gfx_ascii_mode_color_spread_green; }
+int Tp::gfx_ascii_mode_color_spread_red(void) const { return _gfx_ascii_mode_color_spread_red; }
 int Tp::attack_no_msg(void) const { return _attack_no_msg; }
 int Tp::is_able_to_attack_owner(void) const { return _is_able_to_attack_owner; }
 int Tp::is_dagger(void) const { return _is_dagger; }
@@ -748,8 +748,8 @@ int Tp::unused_flag94(void) const { return _unused_flag94; }
 int Tp::unused_flag95(void) const { return _unused_flag95; }
 int Tp::unused_flag96(void) const { return _unused_flag96; }
 int Tp::unused_flag97(void) const { return _unused_flag97; }
-int Tp::gfx_ascii_color_spread_alpha(void) const { return _gfx_ascii_color_spread_alpha; }
-int Tp::gfx_ascii_color_spread_blue(void) const { return _gfx_ascii_color_spread_blue; }
+int Tp::gfx_ascii_mode_color_spread_alpha(void) const { return _gfx_ascii_mode_color_spread_alpha; }
+int Tp::gfx_ascii_mode_color_spread_blue(void) const { return _gfx_ascii_mode_color_spread_blue; }
 int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
 
@@ -809,7 +809,7 @@ void Tp::environ_avoids_necrosis_set(int v) { _environ_avoids_necrosis = v; }
 void Tp::environ_avoids_poison_set(int v) { _environ_avoids_poison = v; }
 void Tp::environ_avoids_water_set(int v) { _environ_avoids_water = v; }
 void Tp::equip_carry_anim_set(const std::string &v) { _equip_carry_anim = v; }
-void Tp::unused_flag102_set(int v) { _unused_flag102 = v; }
+void Tp::gfx_ascii_mode_shown_set(int v) { _gfx_ascii_mode_shown = v; }
 void Tp::gfx_pixelart_animated_can_hflip_set(int v) { _gfx_pixelart_animated_can_hflip = v; }
 void Tp::gfx_pixelart_animated_can_vflip_set(int v) { _gfx_pixelart_animated_can_vflip = v; }
 void Tp::gfx_pixelart_animated_no_dir_set(int v) { _gfx_pixelart_animated_no_dir = v; }
@@ -1361,8 +1361,8 @@ void Tp::unused_chance3_d1000_set(int v) { _unused_chance3_d1000 = v; }
 void Tp::unused_chance4_d1000_set(int v) { _unused_chance4_d1000 = v; }
 void Tp::unused_chance5_d1000_set(int v) { _unused_chance5_d1000 = v; }
 void Tp::unused_chance6_d1000_set(int v) { _unused_chance6_d1000 = v; }
-void Tp::gfx_ascii_color_spread_green_set(int v) { _gfx_ascii_color_spread_green = v; }
-void Tp::gfx_ascii_color_spread_red_set(int v) { _gfx_ascii_color_spread_red = v; }
+void Tp::gfx_ascii_mode_color_spread_green_set(int v) { _gfx_ascii_mode_color_spread_green = v; }
+void Tp::gfx_ascii_mode_color_spread_red_set(int v) { _gfx_ascii_mode_color_spread_red = v; }
 void Tp::unused_flag10_set(int v) { _unused_flag10 = v; }
 void Tp::unused_flag11_set(int v) { _unused_flag11 = v; }
 void Tp::unused_flag123_set(int v) { _unused_flag123 = v; }
@@ -1460,8 +1460,8 @@ void Tp::unused_flag94_set(int v) { _unused_flag94 = v; }
 void Tp::unused_flag95_set(int v) { _unused_flag95 = v; }
 void Tp::unused_flag96_set(int v) { _unused_flag96 = v; }
 void Tp::unused_flag97_set(int v) { _unused_flag97 = v; }
-void Tp::gfx_ascii_color_spread_alpha_set(int v) { _gfx_ascii_color_spread_alpha = v; }
-void Tp::gfx_ascii_color_spread_blue_set(int v) { _gfx_ascii_color_spread_blue = v; }
+void Tp::gfx_ascii_mode_color_spread_alpha_set(int v) { _gfx_ascii_mode_color_spread_alpha = v; }
+void Tp::gfx_ascii_mode_color_spread_blue_set(int v) { _gfx_ascii_mode_color_spread_blue = v; }
 void Tp::unused_flag9_set(int v) { _unused_flag9 = v; }
 void Tp::weapon_damage_set(int v) { _weapon_damage = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }

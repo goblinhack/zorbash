@@ -34,6 +34,7 @@ def on_tick(owner, me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.attack_no_msg(self, True)
     my.attacks_per_round(self, 1)
     my.damaged_chance_d10000(self, 1)

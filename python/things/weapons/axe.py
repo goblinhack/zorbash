@@ -22,6 +22,7 @@ def on_enchant(me, x, y):
 
 def init_weapon(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.collision_hit_360(self, True)
     my.crit_chance_d10000(self, 500)
     my.damaged_chance_d10000(self, 10)

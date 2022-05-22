@@ -9,6 +9,7 @@ def on_lifespan_tick(owner, me, x, y):
 
 def tp_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.charge_count(self, 10)
     my.collision_hit_priority(self, 1)
     my.collision_hit_priority(self, 6)

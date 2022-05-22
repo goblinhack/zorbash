@@ -320,8 +320,6 @@ PyObject *level_stat_def_penalty_when_in_shallow_water_at(PyObject *obj, PyObjec
 PyObject *level_stat_def_penalty_when_stuck_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_def_penalty_when_stuck_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_temperature_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_gfx_ascii_color_spread_green_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_gfx_ascii_color_spread_red_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_no_msg_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_attack_owner_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dagger_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -447,8 +445,6 @@ PyObject *level_unused_flag94_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag95_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag96_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag97_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_gfx_ascii_color_spread_alpha_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_gfx_ascii_color_spread_blue_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag9_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

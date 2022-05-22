@@ -14,6 +14,7 @@ def on_enchant(me, x, y):
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.damaged_chance_d10000(self, 100)
     my.enchant_max(self, 2)
     my.equip_carry_anim(self, "shield_woodon_carry")

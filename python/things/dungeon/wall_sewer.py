@@ -24,6 +24,7 @@ def tp_init(
 ):
 
     self = tp.Tp(name)
+    my.gfx_ascii_mode_shown(self, True)
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 2)
     my.gfx_pixelart_wobbles_when_hit(self, True)

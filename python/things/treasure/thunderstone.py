@@ -36,6 +36,7 @@ def on_use(owner, me, target, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.blast_max_radius(self, 4)
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)

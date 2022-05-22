@@ -24,6 +24,7 @@ def on_final_use(owner, item, target, x, y):
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.charge_count(self, 100)
     my.equip_carry_anim(self, "boots_teleport_carry")
     my.gfx_pixelart_shadow_short(self, True)

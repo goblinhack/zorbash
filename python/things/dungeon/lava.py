@@ -4,6 +4,7 @@ import tp
 
 def lava_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.ai_obstacle(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)

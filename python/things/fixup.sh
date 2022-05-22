@@ -44,7 +44,9 @@ do
     fi
 
     sed '1,/self = tp.Tp(/!d' $IN > $PRE
+    my.gfx_ascii_mode_shown(self, True)
     sed '/self = tp.Tp(/,/z_prio(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
+    my.gfx_ascii_mode_shown(self, True)
     sed '/z_prio(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \

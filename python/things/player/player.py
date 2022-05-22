@@ -318,6 +318,7 @@ def on_attacking_damage_stat_con(me, victim, x, y, damage):
 
 def tp_init(name, text_name, short_text_name, title):
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.aggression_level_pct(self, 25)
     my.ai_detect_secret_doors(self, True)
     my.ai_resent_count(self, 20)

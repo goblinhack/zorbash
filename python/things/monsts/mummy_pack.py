@@ -16,6 +16,7 @@ def on_you_are_declared_a_follower(me, leader, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.distance_leader_max(self, 5)
     my.distance_recruitment_max(self, 7)
     my.is_able_to_follow(self, True)

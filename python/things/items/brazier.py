@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 2)
     my.damage_crush_chance_d1000(self, 0, 1000)

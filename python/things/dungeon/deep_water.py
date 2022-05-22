@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.ai_obstacle(self, True)
     my.environ_avoids_fire(self, 1)
     my.gfx_pixelart_animated(self, True)

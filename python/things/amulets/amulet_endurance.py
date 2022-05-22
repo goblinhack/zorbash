@@ -26,6 +26,7 @@ def on_owner_receiving_damage_draining(me, owner, hitter, real_hitter, x, y, dam
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.equip_carry_anim(self, "amulet_endurance_carry")
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "1250")

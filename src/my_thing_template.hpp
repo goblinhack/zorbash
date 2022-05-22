@@ -152,7 +152,7 @@ private:
   int _environ_avoids_necrosis {};
   int _environ_avoids_poison {};
   int _environ_avoids_water {};
-  int _unused_flag102 {};
+  int _gfx_ascii_mode_shown {};
   int _gfx_pixelart_animated {};
   int _gfx_pixelart_animated_can_hflip {};
   int _gfx_pixelart_animated_can_vflip {};
@@ -529,8 +529,8 @@ private:
   int _unused_chance6_d1000 {};
   int _unused_flag1 {};
   int _unused_flag10 {};
-  int _gfx_ascii_color_spread_green {};
-  int _gfx_ascii_color_spread_red {};
+  int _gfx_ascii_mode_color_spread_green {};
+  int _gfx_ascii_mode_color_spread_red {};
   int _attack_no_msg {};
   int _is_able_to_attack_owner {};
   int _is_dagger {};
@@ -634,8 +634,8 @@ private:
   int _unused_flag95 {};
   int _unused_flag96 {};
   int _unused_flag97 {};
-  int _gfx_ascii_color_spread_alpha {};
-  int _gfx_ascii_color_spread_blue {};
+  int _gfx_ascii_mode_color_spread_alpha {};
+  int _gfx_ascii_mode_color_spread_blue {};
   int _weapon_damage {};
   int _weapon_use_distance {};
 
@@ -1147,7 +1147,7 @@ public:
   int environ_avoids_poison(void) const;
   int environ_avoids_water(void) const;
   int get_danger_level(void);
-  int unused_flag102(void) const;
+  int gfx_ascii_mode_shown(void) const;
   int gfx_pixelart_animated_can_hflip(void) const;
   int gfx_pixelart_animated_can_vflip(void) const;
   int gfx_pixelart_animated_no_dir(void) const;
@@ -1521,8 +1521,8 @@ public:
   int unused_chance4_d1000(void) const;
   int unused_chance5_d1000(void) const;
   int unused_chance6_d1000(void) const;
-  int gfx_ascii_color_spread_green(void) const;
-  int gfx_ascii_color_spread_red(void) const;
+  int gfx_ascii_mode_color_spread_green(void) const;
+  int gfx_ascii_mode_color_spread_red(void) const;
   int attack_no_msg(void) const;
   int is_able_to_attack_owner(void) const;
   int is_dagger(void) const;
@@ -1627,8 +1627,8 @@ public:
   int unused_flag95(void) const;
   int unused_flag96(void) const;
   int unused_flag97(void) const;
-  int gfx_ascii_color_spread_alpha(void) const;
-  int gfx_ascii_color_spread_blue(void) const;
+  int gfx_ascii_mode_color_spread_alpha(void) const;
+  int gfx_ascii_mode_color_spread_blue(void) const;
   int unused_flag9(void) const;
   int weapon_damage(void) const;
 
@@ -1686,7 +1686,7 @@ public:
   void environ_avoids_poison_set(int v);
   void environ_avoids_water_set(int v);
   void equip_carry_anim_set(const std::string &v);
-  void unused_flag102_set(int v);
+  void gfx_ascii_mode_shown_set(int v);
   void gfx_pixelart_animated_can_hflip_set(int v);
   void gfx_pixelart_animated_can_vflip_set(int v);
   void gfx_pixelart_animated_no_dir_set(int v);
@@ -2191,8 +2191,8 @@ public:
   void unused_chance4_d1000_set(int v);
   void unused_chance5_d1000_set(int v);
   void unused_chance6_d1000_set(int v);
-  void gfx_ascii_color_spread_green_set(int v);
-  void gfx_ascii_color_spread_red_set(int v);
+  void gfx_ascii_mode_color_spread_green_set(int v);
+  void gfx_ascii_mode_color_spread_red_set(int v);
   void attack_no_msg_set(int v);
   void is_able_to_attack_owner_set(int v);
   void is_dagger_set(int v);
@@ -2297,8 +2297,8 @@ public:
   void unused_flag95_set(int v);
   void unused_flag96_set(int v);
   void unused_flag97_set(int v);
-  void gfx_ascii_color_spread_alpha_set(int v);
-  void gfx_ascii_color_spread_blue_set(int v);
+  void gfx_ascii_mode_color_spread_alpha_set(int v);
+  void gfx_ascii_mode_color_spread_blue_set(int v);
   void unused_flag9_set(int v);
   void weapon_damage_set(int v);
   void weapon_use_distance_set(int v);

@@ -5,6 +5,7 @@ import tp
 def tp_init(name):
     text_name = "cursor path"
     self = tp.Tp(name, text_name)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.is_cursor_path(self, True)
     my.is_floating(self, True)

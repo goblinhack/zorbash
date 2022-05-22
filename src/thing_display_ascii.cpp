@@ -66,63 +66,105 @@ void Thing::blit_ascii(point tl, point br, point p)
     lit = true;
   }
 
-  if (lit) {
-    if (tile->ascii_bg_col_value != COLOR_NONE) {
-      ascii_set_bg(x, y, UNICODE_BLOCK);
-      color c = tile->ascii_bg_col_value;
-      c.a     = tile->ascii_alpha;
-      ascii_set_bg(x, y, tile->ascii_bg_col_value);
-    }
+  //
+  // For things liek walls we color them differently so it is easier to see.
+  //
+  int adjust_r = 0;
 
-    if (tile->ascii_bg_char) {
-      ascii_set_bg(x, y, tile->ascii_bg_char);
-    }
+  if (gfx_ascii_mode_color_spread_red()) {
+    adjust_r = ((int) blit_color.r - 128);
+  }
 
-    if (tile->ascii_bg_col_value != COLOR_NONE) {
-      color c = tile->ascii_bg_col_value;
-      c.a     = tile->ascii_alpha;
-      ascii_set_bg(x, y, c);
-    }
-
-    if (tile->ascii_fg_char) {
-      ascii_set_fg(x, y, tile->ascii_fg_char);
-    }
-
-    if (tile->ascii_fg_col_value != COLOR_NONE) {
-      color c = tile->ascii_fg_col_value;
-      c.a     = tile->ascii_alpha;
-      ascii_set_fg(x, y, tile->ascii_fg_col_value);
-    }
-  } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
-    if (gfx_shown_in_bg()) {
+  if (gfx_ascii_mode_shown()) {
+    if (lit) {
+      //
+      // e.g dungeon floor
+      //
       if (tile->ascii_bg_col_value != COLOR_NONE) {
         ascii_set_bg(x, y, UNICODE_BLOCK);
         color c = tile->ascii_bg_col_value;
-        c.r     = ((int) (c.r / 4) * 1);
-        c.g     = ((int) (c.g / 5) * 1);
-        c.b     = ((int) (c.b / 2) * 1);
         c.a     = tile->ascii_alpha;
-        ascii_set_bg(x, y, c);
+        c       = RED;
+        if (adjust_r) {
+          c   = color_change_hue(c, adjust_r);
+          c.a = 255;
+        }
+        ascii_set_bg(x, y, tile->ascii_bg_col_value);
       }
 
       if (tile->ascii_bg_char) {
         ascii_set_bg(x, y, tile->ascii_bg_char);
+      }
+
+      if (tile->ascii_bg_col_value != COLOR_NONE) {
         color c = tile->ascii_bg_col_value;
-        c.r     = ((int) (c.r / 4) * 1);
-        c.g     = ((int) (c.g / 5) * 1);
-        c.b     = ((int) (c.b / 2) * 1);
         c.a     = tile->ascii_alpha;
+        if (adjust_r) {
+          c   = color_change_hue(c, adjust_r);
+          c.a = 255;
+        }
         ascii_set_bg(x, y, c);
       }
 
       if (tile->ascii_fg_char) {
         ascii_set_fg(x, y, tile->ascii_fg_char);
+      }
+
+      if (tile->ascii_fg_col_value != COLOR_NONE) {
         color c = tile->ascii_fg_col_value;
-        c.r     = ((int) (c.r / 2) * 1);
-        c.g     = ((int) (c.g / 2) * 1);
-        c.b     = ((int) (c.b / 2) * 1);
         c.a     = tile->ascii_alpha;
-        ascii_set_fg(x, y, c);
+        if (adjust_r) {
+          c   = color_change_hue(c, adjust_r);
+          c.a = 255;
+        }
+        ascii_set_fg(x, y, tile->ascii_fg_col_value);
+      }
+    } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
+      //
+      // e.g unlit dungeon floor
+      //
+      if (gfx_shown_in_bg()) {
+        if (tile->ascii_bg_col_value != COLOR_NONE) {
+          ascii_set_bg(x, y, UNICODE_BLOCK);
+          color c = tile->ascii_bg_col_value;
+          c.r     = ((int) (c.r / 4) * 1);
+          c.g     = ((int) (c.g / 5) * 1);
+          c.b     = ((int) (c.b / 2) * 1);
+          c.a     = tile->ascii_alpha;
+          if (adjust_r) {
+            c   = color_change_hue(c, adjust_r);
+            c.a = 255;
+          }
+          ascii_set_bg(x, y, c);
+        }
+
+        if (tile->ascii_bg_char) {
+          ascii_set_bg(x, y, tile->ascii_bg_char);
+          color c = tile->ascii_bg_col_value;
+          c.r     = ((int) (c.r / 4) * 1);
+          c.g     = ((int) (c.g / 5) * 1);
+          c.b     = ((int) (c.b / 2) * 1);
+          c.a     = tile->ascii_alpha;
+          if (adjust_r) {
+            c   = color_change_hue(c, adjust_r);
+            c.a = 255;
+          }
+          ascii_set_bg(x, y, c);
+        }
+
+        if (tile->ascii_fg_char) {
+          ascii_set_fg(x, y, tile->ascii_fg_char);
+          color c = tile->ascii_fg_col_value;
+          c.r     = ((int) (c.r / 2) * 1);
+          c.g     = ((int) (c.g / 2) * 1);
+          c.b     = ((int) (c.b / 2) * 1);
+          c.a     = tile->ascii_alpha;
+          if (adjust_r) {
+            c   = color_change_hue(c, adjust_r);
+            c.a = 255;
+          }
+          ascii_set_fg(x, y, c);
+        }
       }
     }
   }
