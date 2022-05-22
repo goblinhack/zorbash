@@ -276,10 +276,15 @@ void Level::describe(point p)
       if (hover_over_things.size() > 1) {
         auto        k = ::to_string(game->config.key_wait_or_collect);
         std::string text;
-        if (k == ".") {
-          text = "Multiple things here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+
+        if (player->curr_at == p) {
+          if (k == ".") {
+            text = "Multiple things here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+          } else {
+            text = "Multiple things here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+          }
         } else {
-          text = "Multiple things here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+          text = "Multiple things here.";
         }
         BOTCON("%s", text.c_str());
       }
@@ -290,10 +295,14 @@ void Level::describe(point p)
       if (hover_over_things.size() > 1) {
         auto        k = ::to_string(game->config.key_wait_or_collect);
         std::string text;
-        if (k == ".") {
-          text = "Something is here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+        if (player->curr_at == p) {
+          if (k == ".") {
+            text = "Something is here. Press %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+          } else {
+            text = "Something is here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+          }
         } else {
-          text = "Something is here. %%fg=yellow$" + k + "%%fg=reset$ to collect.";
+          text = "Something is here.";
         }
         BOTCON("%s", text.c_str());
       }

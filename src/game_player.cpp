@@ -188,7 +188,7 @@ void Game::place_player(void)
         // level->thing_new("medal_of_valor", point(x, y - 1));
         // level->thing_new("wooden_cross", point(x, y - 1));
         // level->thing_new("spiderweb", point(x, y));
-        level->thing_new("armor_lather", point(x, y - 2));
+        level->thing_new("armor_lather", point(x, y));
         level->thing_new("boots_fluffy", point(x, y - 2));
         // level->thing_new("boots_silence", point(x, y - 2));
         //  level->thing_new("boots_teleport", point(x, y - 2));
