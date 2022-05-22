@@ -9,7 +9,7 @@
 void Thing::dir_set_none(void)
 {
   TRACE_NO_INDENT();
-  if (tp()->gfx_animated_no_dir()) {
+  if (tp()->gfx_pixelart_animated_no_dir()) {
     return;
   }
 
@@ -30,7 +30,7 @@ uint8_t Thing::is_dir_none(void)
 void Thing::dir_set_down(void)
 {
   TRACE_NO_INDENT();
-  if (tp()->gfx_animated_no_dir()) {
+  if (tp()->gfx_pixelart_animated_no_dir()) {
     return;
   }
 
@@ -49,7 +49,7 @@ uint8_t Thing::is_dir_down(void)
 void Thing::dir_set_up(void)
 {
   TRACE_NO_INDENT();
-  if (tp()->gfx_animated_no_dir()) {
+  if (tp()->gfx_pixelart_animated_no_dir()) {
     return;
   }
 
@@ -68,7 +68,7 @@ uint8_t Thing::is_dir_up(void)
 void Thing::dir_set_left(void)
 {
   TRACE_NO_INDENT();
-  if (tp()->gfx_animated_no_dir()) {
+  if (tp()->gfx_pixelart_animated_no_dir()) {
     return;
   }
 
@@ -87,7 +87,7 @@ uint8_t Thing::is_dir_left(void)
 void Thing::dir_set_right(void)
 {
   TRACE_NO_INDENT();
-  if (tp()->gfx_animated_no_dir()) {
+  if (tp()->gfx_pixelart_animated_no_dir()) {
     return;
   }
 
@@ -106,7 +106,7 @@ uint8_t Thing::is_dir_right(void)
 void Thing::dir_set_tl(void)
 {
   TRACE_NO_INDENT();
-  if (tp()->gfx_animated_no_dir()) {
+  if (tp()->gfx_pixelart_animated_no_dir()) {
     return;
   }
 
@@ -125,7 +125,7 @@ uint8_t Thing::is_dir_tl(void)
 void Thing::dir_set_bl(void)
 {
   TRACE_NO_INDENT();
-  if (tp()->gfx_animated_no_dir()) {
+  if (tp()->gfx_pixelart_animated_no_dir()) {
     return;
   }
 
@@ -144,7 +144,7 @@ uint8_t Thing::is_dir_bl(void)
 void Thing::dir_set_tr(void)
 {
   TRACE_NO_INDENT();
-  if (tp()->gfx_animated_no_dir()) {
+  if (tp()->gfx_pixelart_animated_no_dir()) {
     return;
   }
 
@@ -163,7 +163,7 @@ uint8_t Thing::is_dir_tr(void)
 void Thing::dir_set_br(void)
 {
   TRACE_NO_INDENT();
-  if (tp()->gfx_animated_no_dir()) {
+  if (tp()->gfx_pixelart_animated_no_dir()) {
     return;
   }
 

@@ -16,7 +16,7 @@ def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
     my.equip_carry_anim(self, "boots_jumping_carry")
-    my.gfx_short_shadow_caster(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "750")
     my.is_able_to_fall(self, True)
     my.is_auto_equipped(self, True)

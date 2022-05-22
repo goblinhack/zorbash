@@ -24,7 +24,7 @@ void Thing::blit_ascii(point tl, point br, point p)
     blit = false;
   } else if (unlikely(is_hidden)) {
     blit = false;
-  } else if (unlikely(tpp->gfx_attack_anim() || tpp->gfx_equip_carry_anim())) {
+  } else if (unlikely(tpp->gfx_pixelart_attack_anim() || tpp->gfx_pixelart_equip_carry_anim())) {
     //
     // Hide weapons that have swung
     //

@@ -473,7 +473,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Bounce rings and weapons
   //
-  if (gfx_bounce_on_move()) {
+  if (gfx_pixelart_bounce_on_move()) {
     if (bounce_curr() == 0) {
       bounce(0.2 /* height */, 0.1 /* fade */, 200, 3);
     }
@@ -589,7 +589,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
-  if (tp()->gfx_animated_can_hflip()) {
+  if (tp()->gfx_pixelart_animated_can_hflip()) {
     switch (dir) {
       case THING_DIR_NONE:
       case THING_DIR_DOWN:

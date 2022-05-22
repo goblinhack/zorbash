@@ -6,7 +6,7 @@ def tp_init(name, tiles=[]):
     self = tp.Tp(name, "webball")
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
-    my.gfx_show_outlined(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.health_initial_dice(self, "1d40")
     my.is_able_to_fall(self, True)
     my.is_attackable_by_monst(self, True)

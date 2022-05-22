@@ -193,7 +193,7 @@ public:
   uint64_t is_facing_left                               : 1 {};
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
-  uint64_t is_gfx_animated                              : 1 {};
+  uint64_t is_gfx_pixelart_animated                              : 1 {};
   uint64_t is_hidden                                    : 1 {};
   uint64_t is_hungry                                    : 1 {};
   uint64_t is_in_lava                                   : 1 {};
@@ -1069,30 +1069,30 @@ public:
   int get_total_damage_for_on_receiving_damage_stat_att(Thingp hitter, Thingp real_hitter, int damage);
   int get_total_damage_for_on_receiving_damage_stat_con(Thingp hitter, Thingp real_hitter, int damage);
   int get_total_damage_for_on_receiving_damage_stat_str(Thingp hitter, Thingp real_hitter, int damage);
-  int gfx_an_animation_only(void);
-  int gfx_animated_can_hflip(void);
-  int gfx_animated_can_vflip(void);
-  int gfx_animated_no_dir(void);
-  int gfx_bounce_always(void);
-  int gfx_bounce_on_move(void);
-  int gfx_dead_anim(void);
-  int gfx_equip_carry_anim(void);
+  int unused_flag102(void);
+  int gfx_pixelart_animated_can_hflip(void);
+  int gfx_pixelart_animated_can_vflip(void);
+  int gfx_pixelart_animated_no_dir(void);
+  int gfx_pixelart_bounce_always(void);
+  int gfx_pixelart_bounce_on_move(void);
+  int unused_flag103(void);
+  int gfx_pixelart_equip_carry_anim(void);
   int gfx_flickers(void);
   int gfx_glows(void);
-  int gfx_health_bar_autohide(void);
-  int gfx_health_bar_shown(void);
-  int gfx_health_bar_shown_when_awake_only(void);
-  int gfx_long_shadow_caster(void);
+  int gfx_pixelart_health_bar_autohide(void);
+  int gfx_pixelart_health_bar_shown(void);
+  int gfx_pixelart_health_bar_shown_when_awake_only(void);
+  int gfx_pixelart_shadow_long(void);
   int gfx_on_fire_anim(void);
   int gfx_oversized_and_on_floor(void);
-  int gfx_short_shadow_caster(void);
-  int gfx_show_asleep(void);
+  int gfx_pixelart_shadow_short(void);
+  int gfx_pixelart_show_asleep_anim(void);
   int gfx_shown_in_bg(void);
-  int gfx_show_outlined(void);
-  int gfx_solid_shadow(void);
-  int gfx_very_short_shadow_caster(void);
+  int gfx_pixelart_show_outlined(void);
+  int gfx_pixelart_shadow_solid(void);
+  int gfx_pixelart_shadow_very_short(void);
   int gfx_water(void);
-  int gfx_wobbles_when_hit(void);
+  int gfx_pixelart_wobbles_when_hit(void);
   int goal_penalty_get(Thingp attacker);
   int gold_decr(int);
   int gold_decr(void);
@@ -1281,7 +1281,7 @@ public:
   int is_food(void);
   int is_gas_blocker(void);
   int is_gauntlet(void);
-  int is_gfx_anim_synced_with_owner(void);
+  int gfx_pixelart_anim_synced_with_owner(void);
   int is_glass(void);
   int is_gold(void);
   int is_green_blood_eater(void);
@@ -1806,8 +1806,8 @@ public:
   int unused_chance4_d1000(void);
   int unused_chance5_d1000(void);
   int unused_chance6_d1000(void);
-  int unused_flag100(void);
-  int unused_flag101(void);
+  int gfx_ascii_color_spread_green(void);
+  int gfx_ascii_color_spread_red(void);
   int unused_flag10(void);
   int unused_flag11(void);
   int unused_flag123(void);
@@ -1905,8 +1905,8 @@ public:
   int unused_flag95(void);
   int unused_flag96(void);
   int unused_flag97(void);
-  int unused_flag98(void);
-  int unused_flag99(void);
+  int gfx_ascii_color_spread_alpha(void);
+  int gfx_ascii_color_spread_blue(void);
   int unused_flag9(void);
   int value(const Thingp it);
   int weapon_damaged_pct(void);
@@ -2391,9 +2391,9 @@ public:
                                  AttackOptions *attack_options);
   bool victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, AttackOptions *o);
 
-  inline int gfx_animated(void) { return is_gfx_animated; }
+  inline int gfx_pixelart_animated(void) { return is_gfx_pixelart_animated; }
 
-  int gfx_attack_anim(void);
+  int gfx_pixelart_attack_anim(void);
 } Thing;
 
 std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my);

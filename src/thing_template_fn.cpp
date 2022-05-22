@@ -270,31 +270,31 @@ int Tp::environ_avoids_fire(void) const { return _environ_avoids_fire; }
 int Tp::environ_avoids_necrosis(void) const { return _environ_avoids_necrosis; }
 int Tp::environ_avoids_poison(void) const { return _environ_avoids_poison; }
 int Tp::environ_avoids_water(void) const { return _environ_avoids_water; }
-int Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
-int Tp::gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
-int Tp::gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
-int Tp::gfx_animated_no_dir(void) const { return _gfx_animated_no_dir; }
-int Tp::gfx_attack_anim(void) const { return _gfx_attack_anim; }
-int Tp::gfx_bounce_always(void) const { return _gfx_bounce_always; }
-int Tp::gfx_bounce_on_move(void) const { return _gfx_bounce_on_move; }
-int Tp::gfx_dead_anim(void) const { return _gfx_dead_anim; }
-int Tp::gfx_equip_carry_anim(void) const { return _gfx_equip_carry_anim; }
+int Tp::unused_flag102(void) const { return _unused_flag102; }
+int Tp::gfx_pixelart_animated_can_hflip(void) const { return _gfx_pixelart_animated_can_hflip; }
+int Tp::gfx_pixelart_animated_can_vflip(void) const { return _gfx_pixelart_animated_can_vflip; }
+int Tp::gfx_pixelart_animated_no_dir(void) const { return _gfx_pixelart_animated_no_dir; }
+int Tp::gfx_pixelart_attack_anim(void) const { return _gfx_pixelart_attack_anim; }
+int Tp::gfx_pixelart_bounce_always(void) const { return _gfx_pixelart_bounce_always; }
+int Tp::gfx_pixelart_bounce_on_move(void) const { return _gfx_pixelart_bounce_on_move; }
+int Tp::unused_flag103(void) const { return _unused_flag103; }
+int Tp::gfx_pixelart_equip_carry_anim(void) const { return _gfx_pixelart_equip_carry_anim; }
 int Tp::gfx_flickers(void) const { return _gfx_flickers; }
 int Tp::gfx_glows(void) const { return _gfx_glows; }
-int Tp::gfx_health_bar_autohide(void) const { return _gfx_health_bar_autohide; }
-int Tp::gfx_health_bar_shown(void) const { return _gfx_health_bar_shown; }
-int Tp::gfx_health_bar_shown_when_awake_only(void) const { return _gfx_health_bar_shown_when_awake_only; }
-int Tp::gfx_long_shadow_caster(void) const { return _gfx_long_shadow_caster; }
+int Tp::gfx_pixelart_health_bar_autohide(void) const { return _gfx_pixelart_health_bar_autohide; }
+int Tp::gfx_pixelart_health_bar_shown(void) const { return _gfx_pixelart_health_bar_shown; }
+int Tp::gfx_pixelart_health_bar_shown_when_awake_only(void) const { return _gfx_pixelart_health_bar_shown_when_awake_only; }
+int Tp::gfx_pixelart_shadow_long(void) const { return _gfx_pixelart_shadow_long; }
 int Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
 int Tp::gfx_oversized_and_on_floor(void) const { return _gfx_oversized_and_on_floor; }
-int Tp::gfx_short_shadow_caster(void) const { return _gfx_short_shadow_caster; }
-int Tp::gfx_show_asleep(void) const { return _gfx_show_asleep; }
+int Tp::gfx_pixelart_shadow_short(void) const { return _gfx_pixelart_shadow_short; }
+int Tp::gfx_pixelart_show_asleep_anim(void) const { return _gfx_pixelart_show_asleep_anim; }
 int Tp::gfx_shown_in_bg(void) const { return _gfx_shown_in_bg; }
-int Tp::gfx_show_outlined(void) const { return _gfx_show_outlined; }
-int Tp::gfx_solid_shadow(void) const { return _gfx_solid_shadow; }
-int Tp::gfx_very_short_shadow_caster(void) const { return _gfx_very_short_shadow_caster; }
+int Tp::gfx_pixelart_show_outlined(void) const { return _gfx_pixelart_show_outlined; }
+int Tp::gfx_pixelart_shadow_solid(void) const { return _gfx_pixelart_shadow_solid; }
+int Tp::gfx_pixelart_shadow_very_short(void) const { return _gfx_pixelart_shadow_very_short; }
 int Tp::gfx_water(void) const { return _gfx_water; }
-int Tp::gfx_wobbles_when_hit(void) const { return _gfx_wobbles_when_hit; }
+int Tp::gfx_pixelart_wobbles_when_hit(void) const { return _gfx_pixelart_wobbles_when_hit; }
 int Tp::hunger_starving_pct(void) const { return _hunger_starving_pct; }
 int Tp::hunger_clock_tick_freq(void) const { return _hunger_clock_tick_freq; }
 int Tp::hunger_health_pct(void) const { return _hunger_health_pct; }
@@ -431,7 +431,7 @@ int Tp::is_food_eater(void) const { return _is_food_eater; }
 int Tp::is_food(void) const { return _is_food; }
 int Tp::is_gas_blocker(void) const { return _is_gas_blocker; }
 int Tp::is_gauntlet(void) const { return _is_gauntlet; }
-int Tp::is_gfx_anim_synced_with_owner(void) const { return _is_gfx_anim_synced_with_owner; }
+int Tp::gfx_pixelart_anim_synced_with_owner(void) const { return _gfx_pixelart_anim_synced_with_owner; }
 int Tp::is_glass(void) const { return _is_glass; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_green_blood_eater(void) const { return _is_green_blood_eater; }
@@ -637,8 +637,8 @@ int Tp::unused_chance3_d1000(void) const { return _unused_chance3_d1000; }
 int Tp::unused_chance4_d1000(void) const { return _unused_chance4_d1000; }
 int Tp::unused_chance5_d1000(void) const { return _unused_chance5_d1000; }
 int Tp::unused_chance6_d1000(void) const { return _unused_chance6_d1000; }
-int Tp::unused_flag100(void) const { return _unused_flag100; }
-int Tp::unused_flag101(void) const { return _unused_flag101; }
+int Tp::gfx_ascii_color_spread_green(void) const { return _gfx_ascii_color_spread_green; }
+int Tp::gfx_ascii_color_spread_red(void) const { return _gfx_ascii_color_spread_red; }
 int Tp::attack_no_msg(void) const { return _attack_no_msg; }
 int Tp::is_able_to_attack_owner(void) const { return _is_able_to_attack_owner; }
 int Tp::is_dagger(void) const { return _is_dagger; }
@@ -748,8 +748,8 @@ int Tp::unused_flag94(void) const { return _unused_flag94; }
 int Tp::unused_flag95(void) const { return _unused_flag95; }
 int Tp::unused_flag96(void) const { return _unused_flag96; }
 int Tp::unused_flag97(void) const { return _unused_flag97; }
-int Tp::unused_flag98(void) const { return _unused_flag98; }
-int Tp::unused_flag99(void) const { return _unused_flag99; }
+int Tp::gfx_ascii_color_spread_alpha(void) const { return _gfx_ascii_color_spread_alpha; }
+int Tp::gfx_ascii_color_spread_blue(void) const { return _gfx_ascii_color_spread_blue; }
 int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
 
@@ -809,33 +809,33 @@ void Tp::environ_avoids_necrosis_set(int v) { _environ_avoids_necrosis = v; }
 void Tp::environ_avoids_poison_set(int v) { _environ_avoids_poison = v; }
 void Tp::environ_avoids_water_set(int v) { _environ_avoids_water = v; }
 void Tp::equip_carry_anim_set(const std::string &v) { _equip_carry_anim = v; }
-void Tp::gfx_an_animation_only_set(int v) { _gfx_an_animation_only = v; }
-void Tp::gfx_animated_can_hflip_set(int v) { _gfx_animated_can_hflip = v; }
-void Tp::gfx_animated_can_vflip_set(int v) { _gfx_animated_can_vflip = v; }
-void Tp::gfx_animated_no_dir_set(int v) { _gfx_animated_no_dir = v; }
-void Tp::gfx_animated_set(int v) { _gfx_animated = v; }
+void Tp::unused_flag102_set(int v) { _unused_flag102 = v; }
+void Tp::gfx_pixelart_animated_can_hflip_set(int v) { _gfx_pixelart_animated_can_hflip = v; }
+void Tp::gfx_pixelart_animated_can_vflip_set(int v) { _gfx_pixelart_animated_can_vflip = v; }
+void Tp::gfx_pixelart_animated_no_dir_set(int v) { _gfx_pixelart_animated_no_dir = v; }
+void Tp::gfx_pixelart_animated_set(int v) { _gfx_pixelart_animated = v; }
 void Tp::gfx_anim_use_set(const std::string &v) { _gfx_anim_use = v; }
-void Tp::gfx_attack_anim_set(int v) { _gfx_attack_anim = v; }
-void Tp::gfx_bounce_always_set(int v) { _gfx_bounce_always = v; }
-void Tp::gfx_bounce_on_move_set(int v) { _gfx_bounce_on_move = v; }
-void Tp::gfx_dead_anim_set(int v) { _gfx_dead_anim = v; }
-void Tp::gfx_equip_carry_anim_set(int v) { _gfx_equip_carry_anim = v; }
+void Tp::gfx_pixelart_attack_anim_set(int v) { _gfx_pixelart_attack_anim = v; }
+void Tp::gfx_pixelart_bounce_always_set(int v) { _gfx_pixelart_bounce_always = v; }
+void Tp::gfx_pixelart_bounce_on_move_set(int v) { _gfx_pixelart_bounce_on_move = v; }
+void Tp::unused_flag103_set(int v) { _unused_flag103 = v; }
+void Tp::gfx_pixelart_equip_carry_anim_set(int v) { _gfx_pixelart_equip_carry_anim = v; }
 void Tp::gfx_flickers_set(int v) { _gfx_flickers = v; }
 void Tp::gfx_glows_set(int v) { _gfx_glows = v; }
-void Tp::gfx_health_bar_autohide_set(int v) { _gfx_health_bar_autohide = v; }
-void Tp::gfx_health_bar_shown_set(int v) { _gfx_health_bar_shown = v; }
-void Tp::gfx_health_bar_shown_when_awake_only_set(int v) { _gfx_health_bar_shown_when_awake_only = v; }
-void Tp::gfx_long_shadow_caster_set(int v) { _gfx_long_shadow_caster = v; }
+void Tp::gfx_pixelart_health_bar_autohide_set(int v) { _gfx_pixelart_health_bar_autohide = v; }
+void Tp::gfx_pixelart_health_bar_shown_set(int v) { _gfx_pixelart_health_bar_shown = v; }
+void Tp::gfx_pixelart_health_bar_shown_when_awake_only_set(int v) { _gfx_pixelart_health_bar_shown_when_awake_only = v; }
+void Tp::gfx_pixelart_shadow_long_set(int v) { _gfx_pixelart_shadow_long = v; }
 void Tp::gfx_on_fire_anim_set(int v) { _gfx_on_fire_anim = v; }
 void Tp::gfx_oversized_and_on_floor_set(int v) { _gfx_oversized_and_on_floor = v; }
-void Tp::gfx_short_shadow_caster_set(int v) { _gfx_short_shadow_caster = v; }
-void Tp::gfx_show_asleep_set(int v) { _gfx_show_asleep = v; }
+void Tp::gfx_pixelart_shadow_short_set(int v) { _gfx_pixelart_shadow_short = v; }
+void Tp::gfx_pixelart_show_asleep_anim_set(int v) { _gfx_pixelart_show_asleep_anim = v; }
 void Tp::gfx_shown_in_bg_set(int v) { _gfx_shown_in_bg = v; }
-void Tp::gfx_show_outlined_set(int v) { _gfx_show_outlined = v; }
-void Tp::gfx_solid_shadow_set(int v) { _gfx_solid_shadow = v; }
-void Tp::gfx_very_short_shadow_caster_set(int v) { _gfx_very_short_shadow_caster = v; }
+void Tp::gfx_pixelart_show_outlined_set(int v) { _gfx_pixelart_show_outlined = v; }
+void Tp::gfx_pixelart_shadow_solid_set(int v) { _gfx_pixelart_shadow_solid = v; }
+void Tp::gfx_pixelart_shadow_very_short_set(int v) { _gfx_pixelart_shadow_very_short = v; }
 void Tp::gfx_water_set(int v) { _gfx_water = v; }
-void Tp::gfx_wobbles_when_hit_set(int v) { _gfx_wobbles_when_hit = v; }
+void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_hit = v; }
 void Tp::hunger_starving_pct_set(int v) { _hunger_starving_pct = v; }
 void Tp::hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
 void Tp::hunger_health_pct_set(int v) { _hunger_health_pct = v; }
@@ -973,7 +973,7 @@ void Tp::is_food_eater_set(int v) { _is_food_eater = v; }
 void Tp::is_food_set(int v) { _is_food = v; }
 void Tp::is_gas_blocker_set(int v) { _is_gas_blocker = v; }
 void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
-void Tp::is_gfx_anim_synced_with_owner_set(int v) { _is_gfx_anim_synced_with_owner = v; }
+void Tp::gfx_pixelart_anim_synced_with_owner_set(int v) { _gfx_pixelart_anim_synced_with_owner = v; }
 void Tp::is_glass_set(int v) { _is_glass = v; }
 void Tp::is_gold_set(int v) { _is_gold = v; }
 void Tp::is_green_blood_eater_set(int v) { _is_green_blood_eater = v; }
@@ -1361,8 +1361,8 @@ void Tp::unused_chance3_d1000_set(int v) { _unused_chance3_d1000 = v; }
 void Tp::unused_chance4_d1000_set(int v) { _unused_chance4_d1000 = v; }
 void Tp::unused_chance5_d1000_set(int v) { _unused_chance5_d1000 = v; }
 void Tp::unused_chance6_d1000_set(int v) { _unused_chance6_d1000 = v; }
-void Tp::unused_flag100_set(int v) { _unused_flag100 = v; }
-void Tp::unused_flag101_set(int v) { _unused_flag101 = v; }
+void Tp::gfx_ascii_color_spread_green_set(int v) { _gfx_ascii_color_spread_green = v; }
+void Tp::gfx_ascii_color_spread_red_set(int v) { _gfx_ascii_color_spread_red = v; }
 void Tp::unused_flag10_set(int v) { _unused_flag10 = v; }
 void Tp::unused_flag11_set(int v) { _unused_flag11 = v; }
 void Tp::unused_flag123_set(int v) { _unused_flag123 = v; }
@@ -1460,8 +1460,8 @@ void Tp::unused_flag94_set(int v) { _unused_flag94 = v; }
 void Tp::unused_flag95_set(int v) { _unused_flag95 = v; }
 void Tp::unused_flag96_set(int v) { _unused_flag96 = v; }
 void Tp::unused_flag97_set(int v) { _unused_flag97 = v; }
-void Tp::unused_flag98_set(int v) { _unused_flag98 = v; }
-void Tp::unused_flag99_set(int v) { _unused_flag99 = v; }
+void Tp::gfx_ascii_color_spread_alpha_set(int v) { _gfx_ascii_color_spread_alpha = v; }
+void Tp::gfx_ascii_color_spread_blue_set(int v) { _gfx_ascii_color_spread_blue = v; }
 void Tp::unused_flag9_set(int v) { _unused_flag9 = v; }
 void Tp::weapon_damage_set(int v) { _weapon_damage = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }

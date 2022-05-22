@@ -82,10 +82,10 @@ do
       environ_avoids_poison \
       environ_avoids_water \
       gfx_an_animation_only \
-      gfx_animated \
-      gfx_animated_can_hflip \
-      gfx_animated_can_vflip \
-      gfx_animated_no_dir \
+      gfx_pixelart_animated \
+      gfx_pixelart_animated_can_hflip \
+      gfx_pixelart_animated_can_vflip \
+      gfx_pixelart_animated_no_dir \
       gfx_attack_anim \
       gfx_bounce_always \
       gfx_bounce_on_move \

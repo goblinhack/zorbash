@@ -32,7 +32,7 @@ def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
     my.equip_carry_anim(self, "amulet_healing_carry")
-    my.gfx_short_shadow_caster(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "1250")
     my.is_able_to_fall(self, True)
     my.is_amulet(self, True)

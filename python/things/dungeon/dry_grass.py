@@ -11,9 +11,9 @@ def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "dry grass")
-    my.gfx_short_shadow_caster(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
+    my.gfx_pixelart_shadow_very_short(self, True)
     my.gfx_shown_in_bg(self, True)
-    my.gfx_very_short_shadow_caster(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
     my.is_burnable(self, True)

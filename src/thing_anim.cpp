@@ -23,7 +23,7 @@ void Thing::animate(void)
     return;
   }
 
-  if (! gfx_animated()) {
+  if (! gfx_pixelart_animated()) {
     err("Trying to animate non animated thing");
     return;
   }
@@ -38,7 +38,7 @@ void Thing::animate(void)
   //
   // If this thing has an owner, sync the anim tiles so the weapon moves as the player does.
   //
-  if (is_gfx_anim_synced_with_owner()) {
+  if (gfx_pixelart_anim_synced_with_owner()) {
     auto owner = top_owner();
     if (owner) {
       if (owner->is_sleeping) {
@@ -432,7 +432,7 @@ void Thing::animate(void)
   // If we could not find a tile, warn but don't use the dead tile
   //
   if (! chose_tile) {
-    if (is_dead && ! gfx_dead_anim()) {
+    if (is_dead && ! unused_flag103()) {
       //
       // ignore
       //

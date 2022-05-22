@@ -4,9 +4,9 @@ import tp
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_animated(self, True)
     my.gfx_oversized_and_on_floor(self, True)
-    my.gfx_show_outlined(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)
     my.is_loggable(self, True)
     my.is_red_splatter(self, True)

@@ -30,7 +30,7 @@ def tp_init(name, text_name, short_text_name):
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
     my.environ_avoids_fire(self, 10)
-    my.gfx_short_shadow_caster(self, True)
+    my.gfx_pixelart_shadow_short(self, True)
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)

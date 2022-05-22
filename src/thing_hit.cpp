@@ -516,7 +516,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   auto delta = curr_at - hitter->curr_at;
 
   if (real_hitter != this) {
-    if (real_hitter->tp()->gfx_bounce_on_move()) {
+    if (real_hitter->tp()->gfx_pixelart_bounce_on_move()) {
       real_hitter->bounce(0.5, 0.1, 100, 3);
       real_hitter->move_set_dir_from_delta(delta);
     }
@@ -1154,7 +1154,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   }
 
   if (real_hitter != this) {
-    if (gfx_wobbles_when_hit()) {
+    if (gfx_pixelart_wobbles_when_hit()) {
       wobble(90);
       bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
     }
@@ -1511,7 +1511,7 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
         training = true;
       } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser() &&
                  ! hitter->is_weapon() && ! hitter->is_item_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
-                 ! hitter->gfx_attack_anim()) {
+                 ! hitter->gfx_pixelart_attack_anim()) {
         //
         // Not something that typically damages walls.
         //
@@ -1532,7 +1532,7 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
         training = true;
       } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser() &&
                  ! hitter->is_weapon() && ! hitter->is_item_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
-                 ! hitter->gfx_attack_anim()) {
+                 ! hitter->gfx_pixelart_attack_anim()) {
         //
         // Not something that typically damages walls.
         //

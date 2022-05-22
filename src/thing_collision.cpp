@@ -73,7 +73,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
     //
     // Skip things that aren't really hitable.
     //
-    if (t->tp()->gfx_equip_carry_anim()) {
+    if (t->tp()->gfx_pixelart_equip_carry_anim()) {
       if (is_loggable()) {
         dbg("Collision-candidate: Ignore %s skip, not hittable", t->to_string().c_str());
       }
@@ -501,7 +501,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     return false;
   }
 
-  if (me_tp->gfx_attack_anim()) {
+  if (me_tp->gfx_pixelart_attack_anim()) {
     if (it_tp->is_monst()) {
       //
       // Weapon hits monster or mob.

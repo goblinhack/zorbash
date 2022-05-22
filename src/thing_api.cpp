@@ -299,52 +299,52 @@ int Thing::initial_charge_count(void)
   return (tp()->charge_count());
 }
 
-int Thing::gfx_an_animation_only(void)
+int Thing::unused_flag102(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_an_animation_only());
+  return (tp()->unused_flag102());
 }
 
-int Thing::gfx_animated_can_hflip(void)
+int Thing::gfx_pixelart_animated_can_hflip(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_animated_can_hflip());
+  return (tp()->gfx_pixelart_animated_can_hflip());
 }
 
-int Thing::gfx_animated_can_vflip(void)
+int Thing::gfx_pixelart_animated_can_vflip(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_animated_can_vflip());
+  return (tp()->gfx_pixelart_animated_can_vflip());
 }
 
-int Thing::gfx_animated_no_dir(void)
+int Thing::gfx_pixelart_animated_no_dir(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_animated_no_dir());
+  return (tp()->gfx_pixelart_animated_no_dir());
 }
 
-int Thing::gfx_attack_anim(void)
+int Thing::gfx_pixelart_attack_anim(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_attack_anim());
+  return (tp()->gfx_pixelart_attack_anim());
 }
 
-int Thing::gfx_bounce_always(void)
+int Thing::gfx_pixelart_bounce_always(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_bounce_always());
+  return (tp()->gfx_pixelart_bounce_always());
 }
 
-int Thing::gfx_bounce_on_move(void)
+int Thing::gfx_pixelart_bounce_on_move(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_bounce_on_move());
+  return (tp()->gfx_pixelart_bounce_on_move());
 }
 
-int Thing::gfx_dead_anim(void)
+int Thing::unused_flag103(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_dead_anim());
+  return (tp()->unused_flag103());
 }
 
 int Thing::gfx_flickers(void)
@@ -359,22 +359,22 @@ int Thing::gfx_glows(void)
   return (tp()->gfx_glows());
 }
 
-int Thing::gfx_health_bar_autohide(void)
+int Thing::gfx_pixelart_health_bar_autohide(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_health_bar_autohide());
+  return (tp()->gfx_pixelart_health_bar_autohide());
 }
 
-int Thing::gfx_health_bar_shown(void)
+int Thing::gfx_pixelart_health_bar_shown(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_health_bar_shown());
+  return (tp()->gfx_pixelart_health_bar_shown());
 }
 
-int Thing::gfx_long_shadow_caster(void)
+int Thing::gfx_pixelart_shadow_long(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_long_shadow_caster());
+  return (tp()->gfx_pixelart_shadow_long());
 }
 
 int Thing::gfx_on_fire_anim(void)
@@ -389,10 +389,10 @@ int Thing::gfx_oversized_and_on_floor(void)
   return (tp()->gfx_oversized_and_on_floor());
 }
 
-int Thing::gfx_short_shadow_caster(void)
+int Thing::gfx_pixelart_shadow_short(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_short_shadow_caster());
+  return (tp()->gfx_pixelart_shadow_short());
 }
 
 int Thing::gfx_shown_in_bg(void)
@@ -401,22 +401,22 @@ int Thing::gfx_shown_in_bg(void)
   return (tp()->gfx_shown_in_bg());
 }
 
-int Thing::gfx_show_outlined(void)
+int Thing::gfx_pixelart_show_outlined(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_show_outlined());
+  return (tp()->gfx_pixelart_show_outlined());
 }
 
-int Thing::gfx_solid_shadow(void)
+int Thing::gfx_pixelart_shadow_solid(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_solid_shadow());
+  return (tp()->gfx_pixelart_shadow_solid());
 }
 
-int Thing::gfx_very_short_shadow_caster(void)
+int Thing::gfx_pixelart_shadow_very_short(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_very_short_shadow_caster());
+  return (tp()->gfx_pixelart_shadow_very_short());
 }
 
 int Thing::gfx_water(void)
@@ -425,10 +425,10 @@ int Thing::gfx_water(void)
   return (tp()->gfx_water());
 }
 
-int Thing::gfx_equip_carry_anim(void)
+int Thing::gfx_pixelart_equip_carry_anim(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_equip_carry_anim());
+  return (tp()->gfx_pixelart_equip_carry_anim());
 }
 
 int Thing::environ_avoids_acid(void)
@@ -1921,28 +1921,28 @@ int Thing::unused_flag97(void)
   return (tp()->unused_flag97());
 }
 
-int Thing::unused_flag98(void)
+int Thing::gfx_ascii_color_spread_alpha(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag98());
+  return (tp()->gfx_ascii_color_spread_alpha());
 }
 
-int Thing::unused_flag99(void)
+int Thing::gfx_ascii_color_spread_blue(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag99());
+  return (tp()->gfx_ascii_color_spread_blue());
 }
 
-int Thing::unused_flag100(void)
+int Thing::gfx_ascii_color_spread_green(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag100());
+  return (tp()->gfx_ascii_color_spread_green());
 }
 
-int Thing::unused_flag101(void)
+int Thing::gfx_ascii_color_spread_red(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag101());
+  return (tp()->gfx_ascii_color_spread_red());
 }
 
 int Thing::attack_no_msg(void)
@@ -2005,10 +2005,10 @@ int Thing::is_tireless(void)
   return (tp()->is_tireless());
 }
 
-int Thing::gfx_wobbles_when_hit(void)
+int Thing::gfx_pixelart_wobbles_when_hit(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_wobbles_when_hit());
+  return (tp()->gfx_pixelart_wobbles_when_hit());
 }
 
 int Thing::is_snake(void)
@@ -2178,16 +2178,16 @@ int Thing::is_very_heavy(void)
   return (tp()->is_very_heavy());
 }
 
-int Thing::gfx_health_bar_shown_when_awake_only(void)
+int Thing::gfx_pixelart_health_bar_shown_when_awake_only(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_health_bar_shown_when_awake_only());
+  return (tp()->gfx_pixelart_health_bar_shown_when_awake_only());
 }
 
-int Thing::gfx_show_asleep(void)
+int Thing::gfx_pixelart_show_asleep_anim(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_show_asleep());
+  return (tp()->gfx_pixelart_show_asleep_anim());
 }
 
 int Thing::noise_additional_on_jump_end(void)
@@ -2537,10 +2537,10 @@ int Thing::is_able_to_see_in_the_dark(void)
   return (tp()->is_able_to_see_in_the_dark());
 }
 
-int Thing::is_gfx_anim_synced_with_owner(void)
+int Thing::gfx_pixelart_anim_synced_with_owner(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_gfx_anim_synced_with_owner());
+  return (tp()->gfx_pixelart_anim_synced_with_owner());
 }
 
 int Thing::is_item_magical(void)
