@@ -346,7 +346,7 @@ const std::string Thing::danger_level_str(Thingp it)
   } else if (delta >= 0) {
     return "%%fg=orange$Caution advised";
   } else if (delta >= -10) {
-    return "%%fg=green$Slight caution needed";
+    return "%%fg=yellow$Slight caution needed";
   } else if (delta >= -20) {
     return "%%fg=green$Mostly harmless";
   } else if (delta >= -30) {
