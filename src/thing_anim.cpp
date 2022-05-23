@@ -98,8 +98,23 @@ void Thing::animate(void)
     //
     // Stop the animation here?
     //
-    if (tile_is_end_of_anim(tile)) {
-      if (tile_is_dead_on_end_of_anim(tile)) {
+    bool is_end_of_anim = tile_is_end_of_anim(tile);
+    if (g_opt_ascii) {
+      is_end_of_anim |= tile_is_end_of_ascii_anim(tile);
+    }
+
+    bool is_dead_on_end_of_anim = tile_is_dead_on_end_of_anim(tile);
+    if (g_opt_ascii) {
+      is_dead_on_end_of_anim |= tile_is_dead_on_end_of_ascii_anim(tile);
+    }
+
+    bool is_alive_on_end_of_anim = tile_is_alive_on_end_of_anim(tile);
+    if (g_opt_ascii) {
+      is_alive_on_end_of_anim |= tile_is_alive_on_end_of_ascii_anim(tile);
+    }
+
+    if (is_end_of_anim) {
+      if (is_dead_on_end_of_anim) {
 #ifdef DEBUG_ANIM
         if (is_debug_type()) {
           con("Mark as dead");
@@ -108,7 +123,7 @@ void Thing::animate(void)
         dead_scheduled("by end of anim");
       }
 
-      if (tile_is_alive_on_end_of_anim(tile)) {
+      if (is_alive_on_end_of_anim) {
 #ifdef DEBUG_ANIM
         if (is_debug_type()) {
           con("Mark as alive");

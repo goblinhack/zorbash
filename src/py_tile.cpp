@@ -162,36 +162,39 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
   PyObject *py_class = 0;
   char     *tp_name  = 0;
 
-  int delay_ms                = 0;
-  int ascii_alpha             = 255;
-  int frame                   = 0;
-  int is_moving               = 0;
-  int is_jumping              = 0;
-  int begin_jump              = 0;
-  int is_outline              = 0;
-  int left                    = 0;
-  int right                   = 0;
-  int up                      = 0;
-  int down                    = 0;
-  int none                    = 0;
-  int is_yyy5                 = 0;
-  int is_yyy6                 = 0;
-  int is_yyy7                 = 0;
-  int is_yyy8                 = 0;
-  int is_yyy9                 = 0;
-  int is_invisible            = 0;
-  int is_hp_25_percent        = 0;
-  int is_hp_50_percent        = 0;
-  int is_hp_75_percent        = 0;
-  int is_hp_100_percent       = 0;
-  int is_in_water             = 0;
-  int is_sleeping             = 0;
-  int is_open                 = 0;
-  int is_dead                 = 0;
-  int is_end_of_anim          = 0;
-  int is_dead_on_end_of_anim  = 0;
-  int is_alive_on_end_of_anim = 0;
-  int is_resurrecting         = 0;
+  int delay_ms                      = 0;
+  int ascii_alpha                   = 255;
+  int frame                         = 0;
+  int is_moving                     = 0;
+  int is_jumping                    = 0;
+  int begin_jump                    = 0;
+  int is_outline                    = 0;
+  int left                          = 0;
+  int right                         = 0;
+  int up                            = 0;
+  int down                          = 0;
+  int none                          = 0;
+  int is_yyy5                       = 0;
+  int is_yyy6                       = 0;
+  int is_yyy7                       = 0;
+  int is_yyy8                       = 0;
+  int is_yyy9                       = 0;
+  int is_invisible                  = 0;
+  int is_hp_25_percent              = 0;
+  int is_hp_50_percent              = 0;
+  int is_hp_75_percent              = 0;
+  int is_hp_100_percent             = 0;
+  int is_in_water                   = 0;
+  int is_sleeping                   = 0;
+  int is_open                       = 0;
+  int is_dead                       = 0;
+  int is_end_of_anim                = 0;
+  int is_end_of_ascii_anim          = 0;
+  int is_dead_on_end_of_anim        = 0;
+  int is_dead_on_end_of_ascii_anim  = 0;
+  int is_alive_on_end_of_anim       = 0;
+  int is_alive_on_end_of_ascii_anim = 0;
+  int is_resurrecting               = 0;
 
   char *tile_name         = nullptr;
   char *ascii_fg_char_str = nullptr;
@@ -232,18 +235,22 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
                            (char *) "is_open",
                            (char *) "is_dead",
                            (char *) "is_end_of_anim",
+                           (char *) "is_end_of_ascii_anim",
                            (char *) "is_dead_on_end_of_anim",
-                           (char *) "is_resurrecting",
+                           (char *) "is_dead_on_end_of_ascii_anim",
                            (char *) "is_alive_on_end_of_anim",
+                           (char *) "is_alive_on_end_of_ascii_anim",
+                           (char *) "is_resurrecting",
                            0};
 
   if (! PyArg_ParseTupleAndKeywords(
-          args, keywds, "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &tile_name, &ascii_fg_char_str,
+          args, keywds, "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &tile_name, &ascii_fg_char_str,
           &ascii_bg_char_str, &ascii_bg_col_name, &ascii_fg_col_name, &ascii_alpha, &delay_ms, &frame, &is_moving,
           &is_jumping, &begin_jump, &is_outline, &left, &right, &up, &down, &none, &is_yyy5, &is_yyy6, &is_yyy7,
           &is_yyy8, &is_yyy9, &is_invisible, &is_hp_25_percent, &is_hp_50_percent, &is_hp_75_percent,
-          &is_hp_100_percent, &is_in_water, &is_sleeping, &is_open, &is_dead, &is_end_of_anim,
-          &is_dead_on_end_of_anim, &is_resurrecting, &is_alive_on_end_of_anim)) {
+          &is_hp_100_percent, &is_in_water, &is_sleeping, &is_open, &is_dead, &is_end_of_anim, &is_end_of_ascii_anim,
+          &is_dead_on_end_of_anim, &is_dead_on_end_of_ascii_anim, &is_alive_on_end_of_anim,
+          &is_alive_on_end_of_ascii_anim, &is_resurrecting)) {
     ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
@@ -419,15 +426,18 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
       tile->is_open                = is_open;
       tile->is_dead                = is_dead;
       tile->is_end_of_anim         = is_end_of_anim;
+      tile->is_end_of_ascii_anim   = is_end_of_ascii_anim;
       tile->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
       if (is_dead_on_end_of_anim) {
         tp->is_dead_on_end_of_anim_set(true);
       }
-      tile->is_alive_on_end_of_anim = is_alive_on_end_of_anim;
+      tile->is_dead_on_end_of_ascii_anim = is_dead_on_end_of_ascii_anim;
       if (is_alive_on_end_of_anim) {
         tp->is_alive_on_end_of_anim_set(true);
       }
-      tile->is_resurrecting = is_resurrecting;
+      tile->is_alive_on_end_of_anim       = is_alive_on_end_of_anim;
+      tile->is_alive_on_end_of_ascii_anim = is_alive_on_end_of_ascii_anim;
+      tile->is_resurrecting               = is_resurrecting;
 
       if (tile->is_hp_25_percent || tile->is_hp_50_percent || tile->is_hp_75_percent || tile->is_hp_100_percent) {
         tp->internal_has_hp_anim_set(true);

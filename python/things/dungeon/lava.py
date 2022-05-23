@@ -25,7 +25,7 @@ def lava_init(name, text_name, tiles=[]):
     my.light_dist(self, 1)
     my.temperature(self, 800)
     my.text_a_or_an(self, "")
-    my.text_description(self, "%%fg=orange$Freshly scented lava%%fg=reset$ (self, double click to move onto).")
+    my.text_description(self, "%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto).")
     my.text_hits(self, "tickles")
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
     my.z_prio(self, my.MAP_PRIO_NORMAL)
