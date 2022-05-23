@@ -91,46 +91,50 @@ Tile::Tile(const class Tile *tile)
   tex_black_and_white = tile->tex_black_and_white;
   tex_mask            = tile->tex_mask;
   std::copy(mbegin(tile->pix), mend(tile->pix), mbegin(pix));
-  delay_ms               = tile->delay_ms;
-  dir                    = tile->dir;
-  is_join_node           = tile->is_join_node;
-  is_join_left           = tile->is_join_left;
-  is_join_bot            = tile->is_join_bot;
-  is_join_right          = tile->is_join_right;
-  is_join_top            = tile->is_join_top;
-  is_join_horiz          = tile->is_join_horiz;
-  is_join_vert           = tile->is_join_vert;
-  is_join_l90            = tile->is_join_l90;
-  is_join_l              = tile->is_join_l;
-  is_join_l270           = tile->is_join_l270;
-  is_join_l180           = tile->is_join_l180;
-  is_join_t270           = tile->is_join_t270;
-  is_join_t180           = tile->is_join_t180;
-  is_join_t90            = tile->is_join_t90;
-  is_join_t              = tile->is_join_t;
-  is_join_x              = tile->is_join_x;
-  is_moving              = tile->is_moving;
-  is_yyy5                = tile->is_yyy5;
-  is_yyy6                = tile->is_yyy6;
-  is_yyy7                = tile->is_yyy7;
-  is_yyy8                = tile->is_yyy8;
-  is_yyy9                = tile->is_yyy9;
-  is_invisible           = tile->is_invisible;
-  is_hp_25_percent       = tile->is_hp_25_percent;
-  is_hp_50_percent       = tile->is_hp_50_percent;
-  is_hp_75_percent       = tile->is_hp_75_percent;
-  is_hp_100_percent      = tile->is_hp_100_percent;
-  is_sleeping            = tile->is_sleeping;
-  is_open                = tile->is_open;
-  is_dead                = tile->is_dead;
-  is_end_of_anim         = tile->is_end_of_anim;
-  is_dead_on_end_of_anim = tile->is_dead_on_end_of_anim;
-  internal_has_dir_anim  = tile->internal_has_dir_anim;
-  ascii_fg_char          = tile->ascii_fg_char;
-  ascii_bg_char          = tile->ascii_bg_char;
-  ascii_bg_col_name      = tile->ascii_bg_col_name;
-  ascii_fg_col_name      = tile->ascii_fg_col_name;
-  ascii_alpha            = tile->ascii_alpha;
+  delay_ms                      = tile->delay_ms;
+  dir                           = tile->dir;
+  is_join_node                  = tile->is_join_node;
+  is_join_left                  = tile->is_join_left;
+  is_join_bot                   = tile->is_join_bot;
+  is_join_right                 = tile->is_join_right;
+  is_join_top                   = tile->is_join_top;
+  is_join_horiz                 = tile->is_join_horiz;
+  is_join_vert                  = tile->is_join_vert;
+  is_join_l90                   = tile->is_join_l90;
+  is_join_l                     = tile->is_join_l;
+  is_join_l270                  = tile->is_join_l270;
+  is_join_l180                  = tile->is_join_l180;
+  is_join_t270                  = tile->is_join_t270;
+  is_join_t180                  = tile->is_join_t180;
+  is_join_t90                   = tile->is_join_t90;
+  is_join_t                     = tile->is_join_t;
+  is_join_x                     = tile->is_join_x;
+  is_moving                     = tile->is_moving;
+  is_yyy5                       = tile->is_yyy5;
+  is_yyy6                       = tile->is_yyy6;
+  is_yyy7                       = tile->is_yyy7;
+  is_yyy8                       = tile->is_yyy8;
+  is_yyy9                       = tile->is_yyy9;
+  is_invisible                  = tile->is_invisible;
+  is_hp_25_percent              = tile->is_hp_25_percent;
+  is_hp_50_percent              = tile->is_hp_50_percent;
+  is_hp_75_percent              = tile->is_hp_75_percent;
+  is_hp_100_percent             = tile->is_hp_100_percent;
+  is_sleeping                   = tile->is_sleeping;
+  is_open                       = tile->is_open;
+  is_dead                       = tile->is_dead;
+  is_end_of_anim                = tile->is_end_of_anim;
+  is_end_of_ascii_anim          = tile->is_end_of_ascii_anim;
+  is_dead_on_end_of_anim        = tile->is_dead_on_end_of_anim;
+  is_dead_on_end_of_ascii_anim  = tile->is_dead_on_end_of_ascii_anim;
+  is_alive_on_end_of_anim       = tile->is_alive_on_end_of_anim;
+  is_alive_on_end_of_ascii_anim = tile->is_alive_on_end_of_ascii_anim;
+  internal_has_dir_anim         = tile->internal_has_dir_anim;
+  ascii_fg_char                 = tile->ascii_fg_char;
+  ascii_bg_char                 = tile->ascii_bg_char;
+  ascii_bg_col_name             = tile->ascii_bg_col_name;
+  ascii_fg_col_name             = tile->ascii_fg_col_name;
+  ascii_alpha                   = tile->ascii_alpha;
 
   index        = 0;
   global_index = all_tiles_array.size() + 1;
@@ -773,11 +777,11 @@ Tilep tile_find_mand(std::string name)
   return (result->second);
 }
 
-int32_t tile_get_width(Tilep tile) { return (tile->pix_width); }
-
 std::string tile_get_name(Tilep tile) { return (tile->name); }
 
-int32_t tile_get_height(Tilep tile) { return (tile->pix_height); }
+int tile_get_width(Tilep tile) { return (tile->pix_width); }
+
+int tile_get_height(Tilep tile) { return (tile->pix_height); }
 
 Texp tile_get_tex(Tilep tile) { return (tile->tex); }
 
@@ -955,9 +959,15 @@ uint8_t tile_is_dead(Tilep t) { return (t->is_dead); }
 
 uint8_t tile_is_end_of_anim(Tilep t) { return (t->is_end_of_anim); }
 
+uint8_t tile_is_end_of_ascii_anim(Tilep t) { return (t->is_end_of_ascii_anim); }
+
 uint8_t tile_is_dead_on_end_of_anim(Tilep t) { return (t->is_dead_on_end_of_anim); }
 
+uint8_t tile_is_dead_on_end_of_ascii_anim(Tilep t) { return (t->is_dead_on_end_of_ascii_anim); }
+
 uint8_t tile_is_alive_on_end_of_anim(Tilep t) { return (t->is_alive_on_end_of_anim); }
+
+uint8_t tile_is_alive_on_end_of_ascii_anim(Tilep t) { return (t->is_alive_on_end_of_ascii_anim); }
 
 uint8_t tile_is_resurrecting(Tilep t) { return (t->is_resurrecting); }
 

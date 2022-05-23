@@ -96,42 +96,45 @@ public:
   uint8_t frame {};
   uint8_t dir {};
 
-  bool internal_has_dir_anim   : 1 {};
-  bool is_alive_on_end_of_anim : 1 {};
-  bool is_dead                 : 1 {};
-  bool is_dead_on_end_of_anim  : 1 {};
-  bool is_end_of_anim          : 1 {};
-  bool is_hp_100_percent       : 1 {};
-  bool is_hp_25_percent        : 1 {};
-  bool is_hp_50_percent        : 1 {};
-  bool is_hp_75_percent        : 1 {};
-  bool is_invisible            : 1 {};
-  bool is_join_bot             : 1 {};
-  bool is_join_horiz           : 1 {};
-  bool is_join_l               : 1 {};
-  bool is_join_l180            : 1 {};
-  bool is_join_l270            : 1 {};
-  bool is_join_l90             : 1 {};
-  bool is_join_left            : 1 {};
-  bool is_join_node            : 1 {};
-  bool is_join_right           : 1 {};
-  bool is_join_t               : 1 {};
-  bool is_join_t180            : 1 {};
-  bool is_join_t270            : 1 {};
-  bool is_join_t90             : 1 {};
-  bool is_join_top             : 1 {};
-  bool is_join_vert            : 1 {};
-  bool is_join_x               : 1 {};
-  bool is_moving               : 1 {};
-  bool is_open                 : 1 {};
-  bool is_outline              : 1 {};
-  bool is_resurrecting         : 1 {};
-  bool is_sleeping             : 1 {};
-  bool is_yyy5                 : 1 {};
-  bool is_yyy6                 : 1 {};
-  bool is_yyy7                 : 1 {};
-  bool is_yyy8                 : 1 {};
-  bool is_yyy9                 : 1 {};
+  bool internal_has_dir_anim         : 1 {};
+  bool is_alive_on_end_of_anim       : 1 {};
+  bool is_alive_on_end_of_ascii_anim : 1 {};
+  bool is_dead                       : 1 {};
+  bool is_dead_on_end_of_anim        : 1 {};
+  bool is_dead_on_end_of_ascii_anim  : 1 {};
+  bool is_end_of_anim                : 1 {};
+  bool is_end_of_ascii_anim          : 1 {};
+  bool is_hp_100_percent             : 1 {};
+  bool is_hp_25_percent              : 1 {};
+  bool is_hp_50_percent              : 1 {};
+  bool is_hp_75_percent              : 1 {};
+  bool is_invisible                  : 1 {};
+  bool is_join_bot                   : 1 {};
+  bool is_join_horiz                 : 1 {};
+  bool is_join_l                     : 1 {};
+  bool is_join_l180                  : 1 {};
+  bool is_join_l270                  : 1 {};
+  bool is_join_l90                   : 1 {};
+  bool is_join_left                  : 1 {};
+  bool is_join_node                  : 1 {};
+  bool is_join_right                 : 1 {};
+  bool is_join_t                     : 1 {};
+  bool is_join_t180                  : 1 {};
+  bool is_join_t270                  : 1 {};
+  bool is_join_t90                   : 1 {};
+  bool is_join_top                   : 1 {};
+  bool is_join_vert                  : 1 {};
+  bool is_join_x                     : 1 {};
+  bool is_moving                     : 1 {};
+  bool is_open                       : 1 {};
+  bool is_outline                    : 1 {};
+  bool is_resurrecting               : 1 {};
+  bool is_sleeping                   : 1 {};
+  bool is_yyy5                       : 1 {};
+  bool is_yyy6                       : 1 {};
+  bool is_yyy7                       : 1 {};
+  bool is_yyy8                       : 1 {};
+  bool is_yyy9                       : 1 {};
 
 private:
   int32_t _gl_binding {};
@@ -149,113 +152,122 @@ public:
 
 typedef class Tile *Tilep;
 
-Tilep       string2tile(const char **s);
-Tilep       string2tile(std::string &s, int *len);
-Tilep       string2tile(std::wstring &s, int *len);
-Tilep       tile_find_mand(std::string name);
-Tilep       tile_first(Tilemap *root);
-Tilep       tile_from_surface(struct SDL_Surface *surface, std::string optional_file, std::string name);
-Tilep       tile_index_to_tile(uint16_t i);
-Tilep       tile_n(Tilemap *root, int n);
-Tilep       tile_next(Tilemap *root, Tilep in);
-Tilep       tile_random(Tilemap *root);
-class Tex  *tile_get_tex(Tilep);
-int32_t     tile_get_height(Tilep);
-int32_t     tile_get_width(Tilep);
+class Tex *tile_get_tex(Tilep);
+
+int tile_get_height(Tilep);
+int tile_get_width(Tilep);
+int tile_get_n(Tilemap *tmap, Tile *p);
+
 std::string tile_get_name(Tilep);
 std::string tile_name(Tilep);
-uint32_t    tile_delay_ms(Tilep);
-uint32_t    tile_frame(Tilep);
-uint32_t    tile_get_index(Tilep);
-uint32_t    tile_move(Tilep);
-uint8_t     gfx_outline_index_offset(Tilep);
-uint8_t     tile_init(void);
-uint8_t     tile_is_alive_on_end_of_anim(Tilep);
-uint8_t     tile_is_dead(Tilep);
-uint8_t     tile_is_dead_on_end_of_anim(Tilep);
-uint8_t     tile_is_dir_bl(Tilep);
-uint8_t     tile_is_dir_br(Tilep);
-uint8_t     tile_is_dir_down(Tilep);
-uint8_t     tile_is_dir_left(Tilep);
-uint8_t     tile_is_dir_none(Tilep);
-uint8_t     tile_is_dir_right(Tilep);
-uint8_t     tile_is_dir_tl(Tilep);
-uint8_t     tile_is_dir_tr(Tilep);
-uint8_t     tile_is_dir_up(Tilep);
-uint8_t     tile_is_end_of_anim(Tilep);
-uint8_t     tile_is_hp_100_percent(Tilep);
-uint8_t     tile_is_hp_25_percent(Tilep);
-uint8_t     tile_is_hp_50_percent(Tilep);
-uint8_t     tile_is_hp_75_percent(Tilep);
-uint8_t     tile_is_invisible(Tilep);
-uint8_t     tile_is_moving(Tilep);
-uint8_t     tile_is_open(Tilep);
-uint8_t     tile_is_resurrecting(Tilep);
-uint8_t     tile_is_sleeping(Tilep);
-uint8_t     tile_is_yyy5(Tilep);
-uint8_t     tile_is_yyy6(Tilep);
-uint8_t     tile_is_yyy7(Tilep);
-uint8_t     tile_is_yyy8(Tilep);
-uint8_t     tile_is_yyy9(Tilep);
-void        tile_blit(const Tilep &tile, const point tl, const point br);
-void        tile_blit(const Tilep &tile, const point tl, const point br, const color &c);
-void        tile_blit(const Tilep &tile, const point tl, const point tr, const point bl, const point br);
-void        tile_blit(const Tilep &tile, const point at);
-void        tile_blit(const class Tp *&tp, const Tilep &tile, const point tl, const point br);
-void        tile_blit(const class Tp *&tp, uint16_t index, const point tl, const point br);
-void        tile_blit(uint16_t index, const point tl, const point br);
-void        tile_blit(uint16_t index, const point at);
-void        tile_blit_at(const Tilep &tile, const point tl, const point br);
-void        tile_blit_at(uint16_t index, const point tl, const point br);
-void        tile_blit_colored(Tilep tile, point tl, point br, color color_tl, color color_tr, color color_bl,
-                              color color_br);
-void        tile_blit_colored_fat(class Tp *tp, Tilep tile, point tl, point br, color color_tl, color color_tr,
-                                  color color_bl, color color_br);
-void        tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c);
-void        tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c, const color &o);
-void        tile_blit_outline(uint16_t index, const point tl, const point br, const color &c);
-void        tile_blit_outline_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl,
-                                      const point br);
-void        tile_blit_outline_section(uint16_t index, const point tile_tl, const point tile_br, const point tl,
-                                      const point br);
-void        tile_blit_outline_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br,
-                                              const point tl, const point br, color color_bl, color color_br, color color_tl,
-                                              color color_tr);
-void        tile_blit_outline_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br,
-                                              const point tl, const point br, color color_bl, color color_br, color color_tl,
-                                              color color_tr, float scale);
-void  tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
-                                        const point br, color color_bl, color color_br, color color_tl,
-                                        color color_tr);
-void  tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
-                                        const point br, color color_bl, color color_br, color color_tl, color color_tr,
-                                        float scale);
-void  tile_blit_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl, const point br);
-void  tile_blit_section(uint16_t index, const point tile_tl, const point tile_br, const point tl, const point br);
-void  tile_blit_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
-                                const point br, color color_bl, color color_br, color color_tl, color color_tr);
-void  tile_blit_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
-                                const point br, color color_bl, color color_br, color color_tl, color color_tr);
-void  tile_blit_shadow(const class Tp *&tp, const Tilep &tile, const point tl, const point br);
-void  tile_blit_shadow(const class Tp *&tp, uint16_t index, const point tl, const point br);
-void  tile_blit_shadow_section(const class Tp *&tp, const Tilep &tile, const point tile_tl, const point tile_br,
-                               const point tl, const point br);
-void  tile_blit_shadow_section(const class Tp *&tp, uint16_t index, const point tile_tl, const point tile_br,
-                               const point tl, const point br);
-void  tile_fini(void);
-void  tile_free(Tilep);
-void  tile_get_coords(Tilep, float *x1, float *y1, float *x2, float *y2);
-void  tile_load(std::string file, uint32_t width, uint32_t height, uint32_t nargs, ...);
-void  tile_load_arr(std::string file, std::string tex_name, uint32_t width, uint32_t height,
-                    const std::vector< std::string > &arr);
-void  tile_load_arr(std::string file, std::string tex_name, uint32_t width, uint32_t height, uint32_t nargs,
-                    const char *arr[]);
-void  tile_load_arr_sprites(std::string file, std::string name, uint32_t width, uint32_t height,
-                            const std::vector< std::string > &arr, int gl_mode = GL_NEAREST);
+
+Tilep string2tile(const char **s);
+Tilep string2tile(std::string &s, int *len);
+Tilep string2tile(std::wstring &s, int *len);
+Tilep tile_find_mand(std::string name);
+Tilep tile_first(Tilemap *root);
+Tilep tile_from_surface(struct SDL_Surface *surface, std::string optional_file, std::string name);
+Tilep tile_index_to_tile(uint16_t i);
+Tilep tile_next(Tilemap *root, Tilep in);
+Tilep tile_n(Tilemap *root, int n);
+Tilep tile_random(Tilemap *root);
 Tilep tile_find(std::string name);
-void  tile_load_arr_sprites(std::string file, std::string tex_name, uint32_t width, uint32_t height, uint32_t nargs,
-                            const char *arr[], int gl_mode = GL_NEAREST);
-int   tile_get_n(Tilemap *tmap, Tile *p);
 Tilep tile_get_frame(Tilemap *tmap, uint32_t frame);
+
+uint32_t tile_delay_ms(Tilep);
+uint32_t tile_frame(Tilep);
+uint32_t tile_get_index(Tilep);
+uint32_t tile_move(Tilep);
+
+uint8_t gfx_outline_index_offset(Tilep);
+uint8_t tile_init(void);
+uint8_t tile_is_alive_on_end_of_anim(Tilep);
+uint8_t tile_is_alive_on_end_of_ascii_anim(Tilep);
+uint8_t tile_is_dead_on_end_of_anim(Tilep);
+uint8_t tile_is_dead_on_end_of_ascii_anim(Tilep);
+uint8_t tile_is_dead(Tilep);
+uint8_t tile_is_dir_bl(Tilep);
+uint8_t tile_is_dir_br(Tilep);
+uint8_t tile_is_dir_down(Tilep);
+uint8_t tile_is_dir_left(Tilep);
+uint8_t tile_is_dir_none(Tilep);
+uint8_t tile_is_dir_right(Tilep);
+uint8_t tile_is_dir_tl(Tilep);
+uint8_t tile_is_dir_tr(Tilep);
+uint8_t tile_is_dir_up(Tilep);
+uint8_t tile_is_end_of_anim(Tilep);
+uint8_t tile_is_end_of_ascii_anim(Tilep);
+uint8_t tile_is_hp_100_percent(Tilep);
+uint8_t tile_is_hp_25_percent(Tilep);
+uint8_t tile_is_hp_50_percent(Tilep);
+uint8_t tile_is_hp_75_percent(Tilep);
+uint8_t tile_is_invisible(Tilep);
+uint8_t tile_is_moving(Tilep);
+uint8_t tile_is_open(Tilep);
+uint8_t tile_is_resurrecting(Tilep);
+uint8_t tile_is_sleeping(Tilep);
+uint8_t tile_is_yyy5(Tilep);
+uint8_t tile_is_yyy6(Tilep);
+uint8_t tile_is_yyy7(Tilep);
+uint8_t tile_is_yyy8(Tilep);
+uint8_t tile_is_yyy9(Tilep);
+
+void tile_blit(const Tilep &tile, const point tl, const point br);
+void tile_blit(const Tilep &tile, const point tl, const point br, const color &c);
+void tile_blit(const Tilep &tile, const point tl, const point tr, const point bl, const point br);
+void tile_blit(const Tilep &tile, const point at);
+void tile_blit(const class Tp *&tp, const Tilep &tile, const point tl, const point br);
+void tile_blit(const class Tp *&tp, uint16_t index, const point tl, const point br);
+void tile_blit(uint16_t index, const point tl, const point br);
+void tile_blit(uint16_t index, const point at);
+void tile_blit_at(const Tilep &tile, const point tl, const point br);
+void tile_blit_at(uint16_t index, const point tl, const point br);
+void tile_blit_colored(Tilep tile, point tl, point br, color color_tl, color color_tr, color color_bl,
+                       color color_br);
+void tile_blit_colored_fat(class Tp *tp, Tilep tile, point tl, point br, color color_tl, color color_tr,
+                           color color_bl, color color_br);
+void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c);
+void tile_blit_outline(const Tilep &tile, const point tl, const point br, const color &c, const color &o);
+void tile_blit_outline(uint16_t index, const point tl, const point br, const color &c);
+void tile_blit_outline_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl,
+                               const point br);
+void tile_blit_outline_section(uint16_t index, const point tile_tl, const point tile_br, const point tl,
+                               const point br);
+void tile_blit_outline_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br,
+                                       const point tl, const point br, color color_bl, color color_br, color color_tl,
+                                       color color_tr);
+void tile_blit_outline_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br,
+                                       const point tl, const point br, color color_bl, color color_br, color color_tl,
+                                       color color_tr, float scale);
+void tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
+                                       const point br, color color_bl, color color_br, color color_tl,
+                                       color color_tr);
+void tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
+                                       const point br, color color_bl, color color_br, color color_tl, color color_tr,
+                                       float scale);
+void tile_blit_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl, const point br);
+void tile_blit_section(uint16_t index, const point tile_tl, const point tile_br, const point tl, const point br);
+void tile_blit_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
+                               const point br, color color_bl, color color_br, color color_tl, color color_tr);
+void tile_blit_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
+                               const point br, color color_bl, color color_br, color color_tl, color color_tr);
+void tile_blit_shadow(const class Tp *&tp, const Tilep &tile, const point tl, const point br);
+void tile_blit_shadow(const class Tp *&tp, uint16_t index, const point tl, const point br);
+void tile_blit_shadow_section(const class Tp *&tp, const Tilep &tile, const point tile_tl, const point tile_br,
+                              const point tl, const point br);
+void tile_blit_shadow_section(const class Tp *&tp, uint16_t index, const point tile_tl, const point tile_br,
+                              const point tl, const point br);
+void tile_fini(void);
+void tile_free(Tilep);
+void tile_get_coords(Tilep, float *x1, float *y1, float *x2, float *y2);
+void tile_load(std::string file, uint32_t width, uint32_t height, uint32_t nargs, ...);
+void tile_load_arr(std::string file, std::string tex_name, uint32_t width, uint32_t height,
+                   const std::vector< std::string > &arr);
+void tile_load_arr(std::string file, std::string tex_name, uint32_t width, uint32_t height, uint32_t nargs,
+                   const char *arr[]);
+void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, uint32_t height,
+                           const std::vector< std::string > &arr, int gl_mode = GL_NEAREST);
+void tile_load_arr_sprites(std::string file, std::string tex_name, uint32_t width, uint32_t height, uint32_t nargs,
+                           const char *arr[], int gl_mode = GL_NEAREST);
 
 #endif
