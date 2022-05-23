@@ -1909,7 +1909,7 @@ public:
   int unused_flag94(void);
   int unused_flag95(void);
   int unused_flag96(void);
-  int unused_flag97(void);
+  int gfx_ascii_mode_color_spread_hue(void);
   int gfx_ascii_mode_color_spread_alpha(void);
   int gfx_ascii_mode_color_spread_blue(void);
   int unused_flag9(void);
@@ -2116,6 +2116,7 @@ public:
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);
+  void blit_ascii_adjust_color(color &c);
   void blit_ascii(point tl, point br, point p);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);

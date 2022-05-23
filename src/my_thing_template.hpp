@@ -633,7 +633,7 @@ private:
   int _unused_flag94 {};
   int _unused_flag95 {};
   int _unused_flag96 {};
-  int _unused_flag97 {};
+  int _gfx_ascii_mode_color_spread_hue {};
   int _gfx_ascii_mode_color_spread_alpha {};
   int _gfx_ascii_mode_color_spread_blue {};
   int _weapon_damage {};
@@ -1626,7 +1626,7 @@ public:
   int unused_flag94(void) const;
   int unused_flag95(void) const;
   int unused_flag96(void) const;
-  int unused_flag97(void) const;
+  int gfx_ascii_mode_color_spread_hue(void) const;
   int gfx_ascii_mode_color_spread_alpha(void) const;
   int gfx_ascii_mode_color_spread_blue(void) const;
   int unused_flag9(void) const;
@@ -2296,7 +2296,7 @@ public:
   void unused_flag94_set(int v);
   void unused_flag95_set(int v);
   void unused_flag96_set(int v);
-  void unused_flag97_set(int v);
+  void gfx_ascii_mode_color_spread_hue_set(int v);
   void gfx_ascii_mode_color_spread_alpha_set(int v);
   void gfx_ascii_mode_color_spread_blue_set(int v);
   void unused_flag9_set(int v);

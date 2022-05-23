@@ -1915,10 +1915,10 @@ int Thing::unused_flag96(void)
   return (tp()->unused_flag96());
 }
 
-int Thing::unused_flag97(void)
+int Thing::gfx_ascii_mode_color_spread_hue(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag97());
+  return (tp()->gfx_ascii_mode_color_spread_hue());
 }
 
 int Thing::gfx_ascii_mode_color_spread_alpha(void)
