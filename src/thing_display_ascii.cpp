@@ -13,6 +13,74 @@
 #include "my_ui.hpp"
 #include "my_unicode.hpp"
 
+//
+// For things liek walls we color them differently so it is easier to see.
+//
+void Thing::blit_ascii_adjust_color(color &c)
+{
+  if (gfx_ascii_mode_color_spread_hue()) {
+    c   = color_change_hue(c, blit_color.r);
+    c.a = 255;
+    return;
+  }
+
+  if (c.r) {
+    if (gfx_ascii_mode_color_spread_red()) {
+      int adjust  = ((int) blit_color.r - 128);
+      int new_col = ((int) c.r) + adjust;
+      if (new_col < 0) {
+        new_col = 0;
+      }
+      if (new_col > 255) {
+        new_col = 255;
+      }
+      c.r = new_col;
+    }
+  }
+
+  if (c.g) {
+    if (gfx_ascii_mode_color_spread_green()) {
+      int adjust  = ((int) blit_color.g - 128);
+      int new_col = ((int) c.g) + adjust;
+      if (new_col < 0) {
+        new_col = 0;
+      }
+      if (new_col > 255) {
+        new_col = 255;
+      }
+      c.g = new_col;
+    }
+  }
+
+  if (c.b) {
+    if (gfx_ascii_mode_color_spread_blue()) {
+      int adjust  = ((int) blit_color.b - 128);
+      int new_col = ((int) c.b) + adjust;
+      if (new_col < 0) {
+        new_col = 0;
+      }
+      if (new_col > 255) {
+        new_col = 255;
+      }
+      c.b = new_col;
+    }
+  }
+
+  if (c.a) {
+    if (gfx_ascii_mode_color_spread_alpha()) {
+      int adjust  = ((int) blit_color.a - 128);
+      int new_col = ((int) c.a) + adjust;
+      if (new_col < 0) {
+        new_col = 0;
+      }
+      if (new_col > 255) {
+        new_col = 255;
+      }
+      c.a = new_col;
+    }
+  }
+}
+
 void Thing::blit_ascii(point tl, point br, point p)
 {
   TRACE_NO_INDENT();
@@ -66,15 +134,6 @@ void Thing::blit_ascii(point tl, point br, point p)
     lit = true;
   }
 
-  //
-  // For things liek walls we color them differently so it is easier to see.
-  //
-  int adjust_r = 0;
-
-  if (gfx_ascii_mode_color_spread_red()) {
-    adjust_r = ((int) blit_color.r - 128);
-  }
-
   if (gfx_ascii_mode_shown()) {
     if (lit) {
       //
@@ -85,10 +144,7 @@ void Thing::blit_ascii(point tl, point br, point p)
         color c = tile->ascii_bg_col_value;
         c.a     = tile->ascii_alpha;
         c       = RED;
-        if (adjust_r) {
-          c   = color_change_hue(c, adjust_r);
-          c.a = 255;
-        }
+        blit_ascii_adjust_color(c);
         ascii_set_bg(x, y, tile->ascii_bg_col_value);
       }
 
@@ -99,10 +155,7 @@ void Thing::blit_ascii(point tl, point br, point p)
       if (tile->ascii_bg_col_value != COLOR_NONE) {
         color c = tile->ascii_bg_col_value;
         c.a     = tile->ascii_alpha;
-        if (adjust_r) {
-          c   = color_change_hue(c, adjust_r);
-          c.a = 255;
-        }
+        blit_ascii_adjust_color(c);
         ascii_set_bg(x, y, c);
       }
 
@@ -113,10 +166,7 @@ void Thing::blit_ascii(point tl, point br, point p)
       if (tile->ascii_fg_col_value != COLOR_NONE) {
         color c = tile->ascii_fg_col_value;
         c.a     = tile->ascii_alpha;
-        if (adjust_r) {
-          c   = color_change_hue(c, adjust_r);
-          c.a = 255;
-        }
+        blit_ascii_adjust_color(c);
         ascii_set_fg(x, y, tile->ascii_fg_col_value);
       }
     } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
@@ -131,10 +181,7 @@ void Thing::blit_ascii(point tl, point br, point p)
           c.g     = ((int) (c.g / 5) * 1);
           c.b     = ((int) (c.b / 2) * 1);
           c.a     = tile->ascii_alpha;
-          if (adjust_r) {
-            c   = color_change_hue(c, adjust_r);
-            c.a = 255;
-          }
+          blit_ascii_adjust_color(c);
           ascii_set_bg(x, y, c);
         }
 
@@ -145,10 +192,7 @@ void Thing::blit_ascii(point tl, point br, point p)
           c.g     = ((int) (c.g / 5) * 1);
           c.b     = ((int) (c.b / 2) * 1);
           c.a     = tile->ascii_alpha;
-          if (adjust_r) {
-            c   = color_change_hue(c, adjust_r);
-            c.a = 255;
-          }
+          blit_ascii_adjust_color(c);
           ascii_set_bg(x, y, c);
         }
 
@@ -159,10 +203,7 @@ void Thing::blit_ascii(point tl, point br, point p)
           c.g     = ((int) (c.g / 2) * 1);
           c.b     = ((int) (c.b / 2) * 1);
           c.a     = tile->ascii_alpha;
-          if (adjust_r) {
-            c   = color_change_hue(c, adjust_r);
-            c.a = 255;
-          }
+          blit_ascii_adjust_color(c);
           ascii_set_fg(x, y, c);
         }
       }

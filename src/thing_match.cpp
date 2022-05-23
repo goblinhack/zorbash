@@ -959,7 +959,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag96() && (what == "unused_flag96")) {
     return true;
   }
-  if (unused_flag97() && (what == "unused_flag97")) {
+  if (gfx_ascii_mode_color_spread_hue() && (what == "gfx_ascii_mode_color_spread_hue")) {
     return true;
   }
   if (gfx_ascii_mode_color_spread_alpha() && (what == "gfx_ascii_mode_color_spread_alpha")) {
@@ -2574,8 +2574,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag96") {
     return &Thing::unused_flag96;
   }
-  if (what == "unused_flag97") {
-    return &Thing::unused_flag97;
+  if (what == "gfx_ascii_mode_color_spread_hue") {
+    return &Thing::gfx_ascii_mode_color_spread_hue;
   }
   if (what == "gfx_ascii_mode_color_spread_alpha") {
     return &Thing::gfx_ascii_mode_color_spread_alpha;

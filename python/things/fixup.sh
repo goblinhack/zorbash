@@ -60,6 +60,8 @@ do
       attack_living \
       attack_lunge \
       attack_meat \
+      attack_no_msg \
+      attacks_per_round \
       attack_undead \
       collateral_damage_pct \
       collision_check \
@@ -84,10 +86,7 @@ do
       environ_avoids_poison \
       environ_avoids_water \
       gfx_an_animation_only \
-      gfx_pixelart_animated \
-      gfx_pixelart_animated_can_hflip \
-      gfx_pixelart_animated_can_vflip \
-      gfx_pixelart_animated_no_dir \
+      gfx_ascii_mode_color_spread_hue \
       gfx_attack_anim \
       gfx_bounce_always \
       gfx_bounce_on_move \
@@ -101,6 +100,10 @@ do
       gfx_long_shadow_caster \
       gfx_on_fire_anim \
       gfx_oversized_and_on_floor \
+      gfx_pixelart_animated \
+      gfx_pixelart_animated_can_hflip \
+      gfx_pixelart_animated_can_vflip \
+      gfx_pixelart_animated_no_dir \
       gfx_show_asleep \
       gfx_shown_in_bg \
       gfx_show_outlined \
@@ -111,6 +114,7 @@ do
       hunger_clock_tick_freq \
       hunger_is_insatiable \
       is_able_to_attack_mobs \
+      is_able_to_attack_owner \
       is_able_to_break_down_doors \
       is_able_to_break_out_of_webs \
       is_able_to_change_levels \
@@ -245,6 +249,7 @@ do
       is_green_blood_eater \
       is_green_blooded \
       is_green_splatter \
+      is_hard \
       is_hazard \
       is_health_booster \
       is_heavy \
@@ -339,6 +344,7 @@ do
       is_slippery \
       is_smoke \
       is_snake \
+      is_soft \
       is_spawner \
       is_spider \
       is_spiderweb \
@@ -356,9 +362,6 @@ do
       is_tireless \
       is_tmp_thing \
       is_torch \
-      is_hard \
-      is_soft \
-      is_very_hard \
       is_treasure \
       is_treasure_chest \
       is_treasure_class_a \
@@ -369,8 +372,9 @@ do
       is_undead \
       is_usable \
       is_used_when_thrown \
-      is_very_heavy \
       is_very_combustible \
+      is_very_hard \
+      is_very_heavy \
       is_wall \
       is_wall_dungeon \
       is_wand \
@@ -388,7 +392,6 @@ do
       noise_on_you_are_hit_and_now_dead \
       noise_on_you_are_hit_but_still_alive \
       normal_placement_rules \
-      attacks_per_round \
       on_death_drop_all_items \
       shove_strength \
       spawn_group_radius \
@@ -409,10 +412,6 @@ do
       temperature \
       unused_flag1 \
       unused_flag10 \
-      unused_flag100 \
-      unused_flag101 \
-      attack_no_msg \
-      is_able_to_attack_owner \
       unused_flag11 \
       unused_flag12 \
       unused_flag123 \
@@ -508,9 +507,8 @@ do
       unused_flag94 \
       unused_flag95 \
       unused_flag96 \
-      unused_flag97 \
-      unused_flag98 \
-      unused_flag99 \
+      gfx_ascii_mode_color_spread_hue \
+      gfx_ascii_mode_color_spread_hue \
       on_death_is_open
     do
         grep -q $arg $PAYLOAD

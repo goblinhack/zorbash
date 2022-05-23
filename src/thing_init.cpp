@@ -257,21 +257,27 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   init_lights();
 
   //
-  // Initialize random color spread.
+  // Initialize random color spread. 128 means no change.
   //
+  if (gfx_ascii_mode_color_spread_hue()) {
+    blit_color.r =
+        128 + pcg_random_range(0, gfx_ascii_mode_color_spread_hue() * 2) - (gfx_ascii_mode_color_spread_hue() / 2);
+  }
   if (gfx_ascii_mode_color_spread_red()) {
-    blit_color.r = 128 + pcg_random_range(0, gfx_ascii_mode_color_spread_red() * 2) - (gfx_ascii_mode_color_spread_red() / 2);
+    blit_color.r =
+        128 + pcg_random_range(0, gfx_ascii_mode_color_spread_red() * 2) - (gfx_ascii_mode_color_spread_red() / 2);
   }
   if (gfx_ascii_mode_color_spread_green()) {
-    blit_color.g =
-        128 + pcg_random_range(0, gfx_ascii_mode_color_spread_green() * 2) - (gfx_ascii_mode_color_spread_green() / 2);
+    blit_color.g = 128 + pcg_random_range(0, gfx_ascii_mode_color_spread_green() * 2) -
+                   (gfx_ascii_mode_color_spread_green() / 2);
   }
   if (gfx_ascii_mode_color_spread_blue()) {
-    blit_color.b = 128 + pcg_random_range(0, gfx_ascii_mode_color_spread_blue() * 2) - (gfx_ascii_mode_color_spread_blue() / 2);
+    blit_color.b =
+        128 + pcg_random_range(0, gfx_ascii_mode_color_spread_blue() * 2) - (gfx_ascii_mode_color_spread_blue() / 2);
   }
   if (gfx_ascii_mode_color_spread_alpha()) {
-    blit_color.a =
-        128 + pcg_random_range(0, gfx_ascii_mode_color_spread_alpha() * 2) - (gfx_ascii_mode_color_spread_alpha() / 2);
+    blit_color.a = 128 + pcg_random_range(0, gfx_ascii_mode_color_spread_alpha() * 2) -
+                   (gfx_ascii_mode_color_spread_alpha() / 2);
   }
 
   //
