@@ -4857,6 +4857,16 @@ void wid_move_delta_pct(Widp w, double dx, double dy)
   wid_update_internal(w);
 }
 
+void wid_move_to(Widp w, int x, int y)
+{
+  TRACE_AND_INDENT();
+  if (w->parent) {
+    wid_move_delta(w, x - wid_get_tl_x(w->parent), y - wid_get_tl_y(w->parent));
+  } else {
+    wid_move_delta(w, x - wid_get_tl_x(w), y - wid_get_tl_y(w));
+  }
+}
+
 void wid_move_to_bottom(Widp w)
 {
   TRACE_AND_INDENT();

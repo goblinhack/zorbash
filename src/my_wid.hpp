@@ -199,6 +199,7 @@ void  wid_move_to_top(Widp);
 void  wid_move_to_vert_pct_in(Widp w, double pct, double in);
 void  wid_move_to_vert_pct(Widp w, double pct);
 void  wid_move_to_y_off(Widp w, int32_t off);
+void  wid_move_to(Widp w, int32_t x, int32_t y);
 void  wid_raise(Widp);
 void  wid_resize(Widp w, int32_t width, int32_t height);
 void  wid_scroll_text(Widp);

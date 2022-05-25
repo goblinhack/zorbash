@@ -326,18 +326,14 @@ void Thing::update(void)
   if (! ts_next_frame) {
     auto tiles = &tpp->tiles;
     if (tpp->gfx_pixelart_animated()) {
-      auto tile = tile_first(tiles);
-      if (tile) {
-        tile_curr = tile->global_index;
-      } else {
-        tile_curr = 0;
-      }
-
       animate();
     } else {
       auto tile = tile_random(tiles);
       if (tile) {
         tile_curr = tile->global_index;
+        if (is_debug_type()) {
+          con("Tile init (random): %s", tile_name(tile).c_str());
+        }
       } else {
         tile_curr = 0;
       }

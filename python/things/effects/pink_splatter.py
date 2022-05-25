@@ -22,6 +22,8 @@ def tp_init(name, text_name):
     delay = 5
     my.tile(self,
             tile="pink_splatter.1",
+            is_end_of_ascii_anim=True,
+            is_dead_on_end_of_ascii_anim=True,
             ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="pink",
             delay_ms=delay)
     my.tile(self,
