@@ -85,6 +85,9 @@ void Thing::blit_ascii(point tl, point br, point p)
 {
   TRACE_NO_INDENT();
 
+  is_offscreen = false;
+  frame_count  = game->frame_count;
+
   auto tpp  = tp();
   auto blit = true;
 
