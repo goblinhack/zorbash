@@ -545,6 +545,13 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
     delay /= 2;
   }
 
+  //
+  // Quicker anims if offscreen
+  //
+  if (is_offscreen) {
+    delay = 0;
+  }
+
   ts_next_frame = time_game_ms_cached() + delay;
 
   if (is_end_of_anim) {
