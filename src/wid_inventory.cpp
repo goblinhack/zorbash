@@ -892,16 +892,18 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected set");
   }
 
-  static int inventory_width  = 108;
+  static int inventory_width  = 110;
   static int inventory_height = 48;
 
   int left_half  = inventory_width / 2;
   int right_half = inventory_width - left_half;
+  int top_half   = inventory_height / 2;
+  int bot_half   = inventory_height - top_half;
 
   {
     TRACE_AND_INDENT();
-    point tl = make_point(TERM_WIDTH / 2 - left_half, TERM_HEIGHT - 6 - (inventory_height - 1));
-    point br = make_point(TERM_WIDTH / 2 + right_half - 1, TERM_HEIGHT - 6);
+    point tl = make_point(TERM_WIDTH / 2 - left_half, TERM_HEIGHT / 2 - top_half);
+    point br = make_point(TERM_WIDTH / 2 + right_half - 1, TERM_HEIGHT / 2 + bot_half - 1);
 
     wid_inventory_window = wid_new_square_window("wid inventory");
     wid_set_pos(wid_inventory_window, tl, br);

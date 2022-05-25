@@ -181,7 +181,7 @@ def init_ui_inventory():
     my.tile_load_arr(
         file="data/gfx/ui/pixelart/ui_inventory.tga",
         name="ui_inventory",
-        width=864,
+        width=880,
         height=384,
         arr=tiles,
     )
