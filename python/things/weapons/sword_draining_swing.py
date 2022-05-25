@@ -19,6 +19,8 @@ def tp_init(name):
 
     delay = 20
     my.tile(self,
+            is_end_of_ascii_anim=True,
+            is_dead_on_end_of_ascii_anim=True,
             ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + "_left.1", delay_ms=delay, is_dir_left=True)
     my.tile(self,
@@ -40,7 +42,10 @@ def tp_init(name):
             is_dir_left=True,
             is_end_of_anim=True,
             is_dead_on_end_of_anim=True)
+
     my.tile(self,
+            is_end_of_ascii_anim=True,
+            is_dead_on_end_of_ascii_anim=True,
             ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + "_left.1", delay_ms=delay, is_dir_right=True)
     my.tile(self,
@@ -62,7 +67,10 @@ def tp_init(name):
             is_dir_right=True,
             is_end_of_anim=True,
             is_dead_on_end_of_anim=True)
+
     my.tile(self,
+            is_end_of_ascii_anim=True,
+            is_dead_on_end_of_ascii_anim=True,
             ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + "_up.1", delay_ms=delay, is_dir_up=True)
     my.tile(self,
@@ -84,7 +92,10 @@ def tp_init(name):
             is_dir_up=True,
             is_end_of_anim=True,
             is_dead_on_end_of_anim=True)
+
     my.tile(self,
+            is_end_of_ascii_anim=True,
+            is_dead_on_end_of_ascii_anim=True,
             ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + "_up.1", delay_ms=delay, is_dir_down=True)
     my.tile(self,

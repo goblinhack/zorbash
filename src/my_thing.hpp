@@ -19,6 +19,7 @@
 #include "my_thing_ai.hpp"
 #include "my_thing_defs.hpp"
 #include "my_thing_id.hpp"
+#include "my_tile.hpp"
 #include "my_time.hpp"
 
 typedef enum {
@@ -2113,6 +2114,7 @@ public:
   void ai_log(const std::string &msg);
   void ai_log(const std::string &msg, Thingp it);
   void animate(void);
+  void animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles);
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);

@@ -224,7 +224,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
   for (auto t : ts) {
     auto name = t->short_text_capitalise();
-    snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s%%fg=reset$", name.c_str());
+    snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
       if (*c == ' ') {
         *c = '`';
@@ -272,7 +272,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
   auto w        = wid_popup_window;
   int  utilized = w->wid_text_area->line_count;
-  wid_move_delta(w->wid_popup_container, 0, height - utilized - 1);
+  wid_move_to(w->wid_popup_container, 0, UI_TOPCON_VIS_HEIGHT);
   wid_resize(w->wid_popup_container, -1, utilized + 1);
 
   wid_update(w->wid_text_area->wid_text_area);
