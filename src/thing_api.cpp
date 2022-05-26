@@ -6492,6 +6492,9 @@ int Thing::group_get(void)
   if (is_critical_to_level()) {
     return THING_GROUP_PRIO_MED;
   }
+  if (is_player()) {
+    return THING_GROUP_PRIO_MED;
+  }
   if (is_tmp_thing()) {
     return THING_GROUP_TMP;
   }
