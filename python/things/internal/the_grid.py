@@ -10,7 +10,7 @@ def tp_init(name):
     my.text_a_or_an(self, "the")
     my.text_description(self, "The grid.")
     my.z_depth(self, my.MAP_DEPTH_THE_GRID)
-    my.z_prio(self, my.MAP_PRIO_NORMAL)
+    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
 
     my.tile(self, tile=name)
     my.tp_update(self)

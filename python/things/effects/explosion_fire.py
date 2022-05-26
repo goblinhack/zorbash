@@ -24,7 +24,7 @@ def tp_init(name):
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, 100)
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
-    my.z_prio(self, my.MAP_PRIO_IN_FRONT)
+    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
 
     my.tile(self,
             ascii_bg_char="block", ascii_bg_col_name="orange", ascii_fg_col_name="",

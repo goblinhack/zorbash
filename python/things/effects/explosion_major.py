@@ -40,7 +40,7 @@ def tp_init(name):
     my.temperature(self, 100)
     my.text_hits(self, "blasts")
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MAJOR)
-    my.z_prio(self, my.MAP_PRIO_IN_FRONT)
+    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
 
     delay = 50
     my.tile(self,

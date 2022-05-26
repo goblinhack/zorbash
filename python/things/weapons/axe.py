@@ -68,7 +68,7 @@ def init_weapon(name, text_name, short_text_name):
     my.text_description(self, "Thy choppy means of justice.")
     my.text_enchant(self, "+1 DMG, +1 ATT")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_PRIO_ITEM)
 
     my.tile(self,
             ascii_fg_char="up_arrow", ascii_bg_col_name="", ascii_fg_col_name="white",

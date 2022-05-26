@@ -12,7 +12,7 @@ def tp_init(name):
     my.is_tmp_thing(self, True)
     my.text_description(self, "AI path.")
     my.z_depth(self, my.MAP_DEPTH_CURSOR)
-    my.z_prio(self, my.MAP_PRIO_NORMAL)
+    my.z_prio(self, my.MAP_PRIO_CURSOR)
 
     delay = 50
     my.tile(self,

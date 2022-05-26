@@ -12,7 +12,7 @@ def tp_init(name):
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
-    my.z_prio(self, my.MAP_PRIO_IN_FRONT)
+    my.z_prio(self, my.MAP_PRIO_EFFECT)
 
     my.tile(self,
             tile="nothing")
