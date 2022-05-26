@@ -458,9 +458,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     if (! get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
       if (DISTANCE(curr_at.x, curr_at.y, level->player->curr_at.x, level->player->curr_at.y) >
           DISTANCE(to.x, to.y, level->player->curr_at.x, level->player->curr_at.y)) {
-        msg("%s jumps away!", text_The().c_str());
-      } else {
         msg("%s jumps closer!", text_The().c_str());
+      } else {
+        msg("%s jumps away!", text_The().c_str());
       }
     } else if (! get(level->player->aip()->can_see_currently.can_see, to.x, to.y)) {
       msg("%s lands!", text_The().c_str());
