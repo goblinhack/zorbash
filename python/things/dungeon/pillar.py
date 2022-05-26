@@ -18,7 +18,7 @@ def tp_init(name, text_name, tiles=[]):
     my.text_a_or_an(self, "a")
     my.text_description(self, "An aged and moss-covered stone pillar.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_NORMAL)
+    my.z_prio(self, my.MAP_PRIO_ITEM)
 
     for t in tiles:
         my.tile(self,

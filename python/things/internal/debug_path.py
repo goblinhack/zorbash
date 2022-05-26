@@ -15,7 +15,7 @@ def tp_init(name):
     my.text_a_or_an(self, "the")
     my.text_description(self, "debug path.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_PRIO_CURSOR)
 
     my.tile(self,
             ascii_bg_char="block", ascii_bg_col_name="darkblue", ascii_fg_col_name="",

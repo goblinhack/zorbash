@@ -19,7 +19,7 @@ def tp_init(name):
     my.noise_on_born(self, 50)
     my.on_born_do(self, "me.on_born()")
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
-    my.z_prio(self, my.MAP_PRIO_IN_FRONT)
+    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
 
     delay = 100
     my.tile(self,

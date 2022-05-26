@@ -16,7 +16,7 @@ def tp_init(name, text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "Claw attack.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_IN_FRONT)
+    my.z_prio(self, my.MAP_PRIO_EFFECT)
 
     delay = 5
     my.tile(self,

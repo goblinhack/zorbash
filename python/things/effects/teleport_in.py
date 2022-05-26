@@ -25,7 +25,7 @@ def tp_init(name):
     my.temperature(self, -100)
     my.text_hits(self, "freezes")
     my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MAJOR)
-    my.z_prio(self, my.MAP_PRIO_IN_FRONT)
+    my.z_prio(self, my.MAP_PRIO_EFFECT)
 
     delay = 5
     my.tile(self,

@@ -38,7 +38,7 @@ def tp_init(name, text_name):
     my.text_description(self, "Fire.")
     my.text_hits(self, "burns")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_IN_FRONT)
+    my.z_prio(self, my.MAP_PRIO_FIRE)
 
     delay = 75
     my.tile(self,

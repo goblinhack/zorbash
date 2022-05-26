@@ -52,7 +52,7 @@ def tp_init(name, text_name, short_text_name):
     my.text_description(self, "A ring of poison resist.")
     my.text_enchant(self, "+1 CON")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_PRIO_ITEM)
     my.equip_carry_anim(self, "ring_poison_resist_carry")
 
     my.tile(self,

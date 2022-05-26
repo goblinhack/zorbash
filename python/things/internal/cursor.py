@@ -15,7 +15,7 @@ def tp_init(name):
     my.text_a_or_an(self, "the")
     my.text_description(self, "Cursor.")
     my.z_depth(self, my.MAP_DEPTH_CURSOR)
-    my.z_prio(self, my.MAP_PRIO_IN_FRONT)
+    my.z_prio(self, my.MAP_PRIO_CURSOR)
 
     delay = 50
     my.tile(self,

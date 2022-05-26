@@ -48,7 +48,7 @@ def tp_init(name, text_name, short_text_name):
     my.text_description(self, "Leather armor.")
     my.text_enchant(self, "+1 DEF")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_PRIO_ITEM)
 
     my.tile(self,
             ascii_fg_char="[", ascii_bg_col_name="", ascii_fg_col_name="white",

@@ -28,7 +28,7 @@ def tp_init(name, tiles=[]):
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thick and sticky spiderweb.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_IN_FRONT)  # so appears behind spider
+    my.z_prio(self, my.MAP_PRIO_WEB)
 
     for t in tiles:
         my.tile(self, t)

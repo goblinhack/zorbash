@@ -137,7 +137,7 @@ def tp_init(name, text_name):
     my.text_description(self, "A hopping mad teletoad.")
     my.text_hits(self, "splats")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_NORMAL)
+    my.z_prio(self, my.MAP_PRIO_MONST)
 
     delay = 10000
     my.tile(self,
