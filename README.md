@@ -1,7 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- jelly was lunging at nothing                                                                                                                 -->
+<!-- miss messages missing                                                                                                                        -->
 <!-- torches and other light sources should cast alpha                                                                                            -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- ------                                                                                                                                       -->

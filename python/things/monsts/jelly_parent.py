@@ -42,7 +42,6 @@ def tp_init(name, text_name):
     my.environ_avoids_fire(self, 100)
     my.gfx_anim_use(self, "green_splatter")
     my.gfx_oversized_and_on_floor(self, True)
-    my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)

@@ -251,9 +251,12 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
         }
       }
 
-      if (t->is_hittable()) {
+      if (can_eat(t)) {
+        prio += t->nutrition_get();
+        dbg2("Target-attack-best: %s monst prio %d eat", t->to_short_string().c_str(), prio);
+      } else if (t->is_hittable()) {
         prio += danger_current_level(t);
-        dbg2("Target-attack-best: %s monst prio %d", t->to_short_string().c_str(), prio);
+        dbg2("Target-attack-best: %s monst prio %d hittable", t->to_short_string().c_str(), prio);
       } else {
         dbg2("Target-attack-best: %s ignore3 %d", t->to_short_string().c_str(), prio);
         continue;
@@ -499,15 +502,19 @@ bool Thing::victim_attack_best_at(int equip, AttackOptions *attack_options)
     return false;
   }
 
-  dbg("Target-attack-best: Last resorts");
-  TRACE_AND_INDENT();
-
   //
   // Last resort where we just try and hit where we are pointing.
   //
-  auto hit_at = curr_at + point(dx, dy);
-  victim_attack_found_best(equip, item, nullptr, hit_at, attack_options);
-  return attack_options->victim_attacked;
+  if (is_player()) {
+    dbg("Target-attack-best: Last resorts");
+    TRACE_AND_INDENT();
+
+    auto hit_at = curr_at + point(dx, dy);
+    victim_attack_found_best(equip, item, nullptr, hit_at, attack_options);
+    return attack_options->victim_attacked;
+  }
+
+  return false;
 }
 
 bool Thing::victim_attack_best_(int equip, AttackOptions *attack_options)
