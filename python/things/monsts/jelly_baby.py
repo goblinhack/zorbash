@@ -12,10 +12,6 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
 
 
 def on_death(me, x, y):
-    if my.pcg_randint(1, 100) < 40:
-        my.level_spawn_next_to(me, "jelly_baby")
-    if my.pcg_randint(1, 100) < 40:
-        my.level_spawn_next_to(me, "jelly_baby")
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.non_pcg_randint(1, 9)}")
 
 
