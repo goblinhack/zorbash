@@ -26,7 +26,7 @@ def tp_init(name, text_name):
     my.on_tick_do(self, "me.on_tick()")
     my.text_debuff(self, "You are poisoned")
     my.text_description(self, "Poisoned debuff.")
-    # my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     my.tile(self,
             tile="debuff_poisoned")
     my.tp_update(self)

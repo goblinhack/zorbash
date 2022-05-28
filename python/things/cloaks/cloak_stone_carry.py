@@ -14,7 +14,7 @@ def tp_init(name):
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_CARRY)
+    my.z_prio(self, my.MAP_Z_PRIO_CARRY)
 
     # This should be synced with its owner, but just in case it is not, we have delay set
     delay = 900

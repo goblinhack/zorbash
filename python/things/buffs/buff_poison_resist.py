@@ -128,7 +128,7 @@ def tp_init(name, text_name):
     my.on_owner_receiving_damage_stat_str_do(self, "me.on_owner_receiving_damage_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.on_tick_do(self, "me.on_tick()")
-    # my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     my.tile(self,
             tile="buff_poison_resist")
     my.tp_update(self)

@@ -26,7 +26,7 @@ def tp_init(name, tiles=[]):
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thick and sticky webball.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_WEB)
+    my.z_prio(self, my.MAP_Z_PRIO_WEB)
 
     for t in tiles:
         my.tile(self, t)

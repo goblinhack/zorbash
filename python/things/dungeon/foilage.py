@@ -27,7 +27,7 @@ def tp_init(name, tiles=[]):
     my.text_a_or_an(self, "the")
     my.text_description(self, "Thick and sicky looking foilage and roots.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_FOILAGE)
+    my.z_prio(self, my.MAP_Z_PRIO_FOILAGE)
 
     for t in tiles:
         my.tile(self,

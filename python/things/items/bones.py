@@ -14,7 +14,7 @@ def tp_init(name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "Some poor creature's remnants.")
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
 
     my.tile(self,
             ascii_fg_char=",", ascii_bg_col_name="", ascii_fg_col_name="white",

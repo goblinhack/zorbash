@@ -27,7 +27,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.text_a_or_an(self, "a")
     my.text_description(self, "A slime coated sewer pipe.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
 
     delay = 1000
     for t in tiles:

@@ -116,7 +116,7 @@ def tp_init(name, text_name):
     my.text_description(self, "A fearsome gargoyle.")
     my.text_hits(self, "slashes")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
 
     delay = 10000
     my.tile(self,

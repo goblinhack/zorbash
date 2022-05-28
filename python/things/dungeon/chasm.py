@@ -19,7 +19,7 @@ def chasm_init(name, text_name, tiles=[]):
     my.text_a_or_an(self, "a")
     my.text_description(self, "%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump into).")
     my.z_depth(self, my.MAP_DEPTH_CHASM)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
 
     my.tile(self,
             ascii_fg_char="four_dots", ascii_bg_col_name="black", ascii_fg_col_name="steelblue",

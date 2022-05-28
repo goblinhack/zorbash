@@ -27,7 +27,7 @@ def tp_init(name, tiles=[]):
     my.text_a_or_an(self, "the")
     my.text_description(self, "Parched grass.")
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
 
     for t in tiles:
         my.tile(self, delay_ms=300,

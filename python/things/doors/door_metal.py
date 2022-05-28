@@ -53,7 +53,7 @@ def tp_init(name):
     my.text_a_or_an(self, "the")
     my.text_description(self, "A metal door that's not for opening.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
 
     my.tile(self,
             ascii_fg_char="+", ascii_bg_col_name="gray20", ascii_fg_col_name="white",

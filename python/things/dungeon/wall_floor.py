@@ -11,7 +11,7 @@ def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     my.text_a_or_an(self, "the")
     my.text_description(self, "The unwashed dungeon foundation.")
     my.z_depth(self, my.MAP_DEPTH_FLOOR)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
 
     for t in tiles:
         my.tile(self, t)

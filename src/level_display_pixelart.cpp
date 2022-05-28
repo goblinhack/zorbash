@@ -498,7 +498,7 @@ void Level::display_pixelart_map_fg2_things(int fbo, const int16_t minx, const i
 
   blit_fbo_bind(fbo);
   blit_init();
-  for (auto z = (int) MAP_DEPTH_EXPLOSION_MAJOR; z < MAP_DEPTH; z++) {
+  for (auto z = (int) MAP_DEPTH_TOP; z < MAP_DEPTH; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)

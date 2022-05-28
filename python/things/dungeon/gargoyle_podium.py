@@ -12,7 +12,7 @@ def tp_init(name, text_name, tiles=[]):
     my.text_a_or_an(self, "an")
     my.text_description(self, "An empty podium. With claw marks.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
 
     for t in tiles:
         my.tile(self,
