@@ -1,5 +1,6 @@
 import my
 import tp
+import _common_sword_swing
 
 
 def tp_init(name):
@@ -11,114 +12,7 @@ def tp_init(name):
     my.gfx_pixelart_attack_anim(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
-    my.is_loggable(self, True)
-    my.is_moveable(self, True)
-    my.is_removeable_if_out_of_slots(self, True)
-    my.text_a_or_an(self, "a")
-    my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_SWING)
-
-    delay = 50
-    my.tile(self,
-            is_end_of_ascii_anim=True,
-            is_dead_on_end_of_ascii_anim=True,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.1", delay_ms=delay, is_dir_left=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.2", delay_ms=delay, is_dir_left=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.3", delay_ms=delay, is_dir_left=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.4", delay_ms=delay, is_dir_left=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.5", delay_ms=delay, is_dir_left=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.6",
-            delay_ms=delay,
-            is_dir_left=True,
-            is_end_of_anim=True,
-            is_dead_on_end_of_anim=True)
-
-    my.tile(self,
-            is_end_of_ascii_anim=True,
-            is_dead_on_end_of_ascii_anim=True,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.1", delay_ms=delay, is_dir_right=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.2", delay_ms=delay, is_dir_right=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.3", delay_ms=delay, is_dir_right=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.4", delay_ms=delay, is_dir_right=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.5", delay_ms=delay, is_dir_right=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_left.6",
-            delay_ms=delay,
-            is_dir_right=True,
-            is_end_of_anim=True,
-            is_dead_on_end_of_anim=True)
-
-    my.tile(self,
-            is_end_of_ascii_anim=True,
-            is_dead_on_end_of_ascii_anim=True,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.1", delay_ms=delay, is_dir_up=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.2", delay_ms=delay, is_dir_up=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.3", delay_ms=delay, is_dir_up=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.4", delay_ms=delay, is_dir_up=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.5", delay_ms=delay, is_dir_up=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.6",
-            delay_ms=delay,
-            is_dir_up=True,
-            is_end_of_anim=True,
-            is_dead_on_end_of_anim=True)
-
-    my.tile(self,
-            is_end_of_ascii_anim=True,
-            is_dead_on_end_of_ascii_anim=True,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.1", delay_ms=delay, is_dir_down=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.2", delay_ms=delay, is_dir_down=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.3", delay_ms=delay, is_dir_down=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.4", delay_ms=delay, is_dir_down=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.5", delay_ms=delay, is_dir_down=True)
-    my.tile(self,
-            ascii_bg_char="", ascii_bg_col_name="", ascii_fg_col_name="red",
-            tile=name + "_up.6",
-            delay_ms=delay,
-            is_dir_down=True,
-            is_end_of_anim=True,
-            is_dead_on_end_of_anim=True)
-
+    _common_sword_swing.init(self, name)
     my.tp_update(self)
 
 
