@@ -11,6 +11,7 @@
 // Map depths are used to group objects together into similar types.
 // They are also used as a rough way to sort order for displaying.
 // The z-prio below is used for finer granularity sort ordering.
+//
 enum {
   MAP_DEPTH_FLOOR,
   MAP_DEPTH_FLOOR2,
@@ -21,6 +22,11 @@ enum {
   MAP_DEPTH,
 };
 
+//
+// This is a sub level of sorting in addition ot MAP_DEPTH. It allows
+// for example OBJs to be sorted. It's really only used for that layer
+// but could potentially be used by others.
+//
 enum {
   MAP_Z_PRIO_ALWAYS_BEHIND, // e.g. Dungeon entrance, walls
   MAP_Z_PRIO_BEHIND,        // e.g. Gargoyle podium

@@ -43,9 +43,9 @@ do
         continue
     fi
 
-    sed '1,/# start sort marker(/!d' $IN > $PRE
-    sed '/# start sort marker/,/# end sort marker(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
-    sed '/# end sort marker(/,$!d' $IN | tail -n +2 - > $POST
+    sed '1,/start sort marker/!d' $IN > $PRE
+    sed '/start sort marker/,/end sort marker/!d' $IN | tail -n +1 - | grep -v "sort marker" | sort > $PAYLOAD
+    sed '/end sort marker/,$!d' $IN | tail -n +1 - > $POST
 
     for arg in \
       aggression_level_pct \
@@ -526,5 +526,4 @@ do
     if [ "$1" = "do" ]; then
         mv $OUT $IN
     fi
-
 done
