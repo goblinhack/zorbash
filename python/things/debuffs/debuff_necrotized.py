@@ -17,8 +17,9 @@ def on_tick(owner, item, x, y):
 def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
 
+    my.gfx_ascii_mode_shown(self, True)
     my.is_debuff(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
@@ -26,7 +27,9 @@ def tp_init(name, text_name):
     my.on_tick_do(self, "me.on_tick()")
     my.text_debuff(self, "You are rotting!")
     my.text_description(self, "Rotting debuff.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    # end sort marker
     my.tile(self,
             tile="debuff_necrotized")
     my.tp_update(self)

@@ -8,10 +8,11 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name, "teleport_in")
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.damage_cold_chance_d1000(self, 0, 1000)
     my.damage_cold_dice(self, "2d6")
     my.damage_nat_attack_type(self, "telefreeze")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_floating(self, True)
@@ -24,8 +25,10 @@ def tp_init(name):
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, -100)
     my.text_hits(self, "freezes")
+    my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_TOP)
     my.z_prio(self, my.MAP_Z_PRIO_EFFECT)
+    # end sort marker
 
     delay = 5
     my.tile(self,

@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "dry trampled grass")
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shadow_very_short(self, True)
@@ -16,8 +17,10 @@ def tp_init(name, tiles=[]):
     my.is_interesting(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "Burnt grass.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     for t in tiles:
         my.tile(self,

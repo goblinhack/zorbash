@@ -26,7 +26,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.aggression_level_pct(self, 75)
     my.ai_detect_secret_doors(self, True)
     my.ai_resent_count(self, 20)
@@ -52,6 +52,7 @@ def tp_init(name, text_name):
     my.environ_avoids_fire(self, 10)
     my.environ_avoids_poison(self, 100)
     my.gfx_anim_use(self, "attack_claws")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
@@ -144,6 +145,8 @@ def tp_init(name, text_name):
     my.stat_str(self, 8)
     my.text_a_or_an(self, "a")
     my.text_hits(self, "claws")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
+    # end sort marker
     return self

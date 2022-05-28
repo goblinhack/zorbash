@@ -16,11 +16,12 @@ def on_open(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name, "reinforced door")
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 9)
     my.damage_crush_chance_d1000(self, 0, 1000)
     my.damage_crush_dice(self, "2d6")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_health_bar_autohide(self, True)
@@ -52,8 +53,10 @@ def tp_init(name):
     my.stat_def(self, 20)
     my.text_a_or_an(self, "the")
     my.text_description(self, "A metal door that's not for opening.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="+", ascii_bg_col_name="gray20", ascii_fg_col_name="white",

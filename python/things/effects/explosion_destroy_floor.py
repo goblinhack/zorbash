@@ -12,6 +12,7 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name)
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
@@ -22,8 +23,10 @@ def tp_init(name):
     my.is_tickable(self, True)
     my.noise_on_born(self, 100)
     my.on_born_do(self, "me.on_born()")
+    my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 50
     my.tile(self,

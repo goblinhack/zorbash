@@ -4,11 +4,12 @@ import tp
 
 def tp_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 2)
     my.damage_crush_chance_d1000(self, 0, 1000)
     my.damage_crush_dice(self, "1d6")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_flickers(self, True)
     my.gfx_glows(self, True)
     my.gfx_oversized_and_on_floor(self, True)
@@ -34,8 +35,10 @@ def tp_init(name, text_name, tiles=[]):
     my.temperature(self, 100)
     my.text_a_or_an(self, "a")
     my.text_description(self, "A beacon of light in this blighted place.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 100
     for t in tiles:

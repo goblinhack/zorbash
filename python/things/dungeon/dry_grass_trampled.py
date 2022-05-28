@@ -11,6 +11,7 @@ def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "trampled grass")
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_shown_in_bg(self, True)
     my.is_able_to_fall(self, True)
@@ -24,8 +25,10 @@ def tp_init(name, tiles=[]):
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.text_a_or_an(self, "the")
     my.text_description(self, "Trampled grass.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     for t in tiles:
         my.tile(self,

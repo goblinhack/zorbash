@@ -44,6 +44,9 @@ void py_my_module_add_stat_consts(void)
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_TOP", MAP_DEPTH_TOP);
   PyModule_AddIntConstant(my_mod, "MAP_HEIGHT", MAP_HEIGHT);
   PyModule_AddIntConstant(my_mod, "MAP_WIDTH", MAP_WIDTH);
+  PyModule_AddIntConstant(my_mod, "MAP_TICK_PRIO_VERY_HIGH", MAP_TICK_PRIO_VERY_HIGH);
+  PyModule_AddIntConstant(my_mod, "MAP_TICK_PRIO_HIGH", MAP_TICK_PRIO_HIGH);
+  PyModule_AddIntConstant(my_mod, "MAP_TICK_PRIO_NORMAL", MAP_TICK_PRIO_NORMAL);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_ALWAYS_BEHIND", MAP_Z_PRIO_ALWAYS_BEHIND);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_BARREL", MAP_Z_PRIO_BARREL);
   PyModule_AddIntConstant(my_mod, "MAP_Z_PRIO_BEHIND", MAP_Z_PRIO_BEHIND);

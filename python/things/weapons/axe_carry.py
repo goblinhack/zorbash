@@ -4,6 +4,7 @@ import tp
 
 def init_carry(name):
     self = tp.Tp(name)
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -15,8 +16,10 @@ def init_carry(name):
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_CARRY)
+    # end sort marker
 
     # This should be synced with its owner, but just in case it is not, we have delay set
     delay = 900

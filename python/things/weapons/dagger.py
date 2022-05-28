@@ -16,12 +16,13 @@ def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.damaged_chance_d10000(self, 5)
     my.damage_melee_chance_d1000(self, 0, 1000)
     my.damage_melee_dice(self, "1d4")
     my.equip_carry_anim(self, "dagger_carry")
     my.gfx_anim_use(self, "dagger_swing")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
@@ -58,8 +59,10 @@ def tp_init(name, text_name, short_text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy stabby means of justice.")
     my.text_enchant(self, "+1 DMG")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="up_arrow", ascii_bg_col_name="", ascii_fg_col_name="white",

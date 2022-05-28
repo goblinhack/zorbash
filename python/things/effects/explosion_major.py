@@ -20,10 +20,11 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name, "huge explosion")
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "2d6")
     my.damage_nat_attack_type(self, "blast")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
@@ -39,8 +40,10 @@ def tp_init(name):
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, 100)
     my.text_hits(self, "blasts")
+    my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_TOP)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 50
     my.tile(self,

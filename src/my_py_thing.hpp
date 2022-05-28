@@ -606,7 +606,7 @@ PyObject *thing_unused_flag92(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag93(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag94(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag95(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag96(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_tick_prio(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_mode_color_spread_hue(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_mode_color_spread_alpha(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_mode_color_spread_blue(PyObject *obj, PyObject *args, PyObject *keywds);

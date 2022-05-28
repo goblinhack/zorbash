@@ -4,13 +4,16 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name)
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_floating(self, True)
     my.is_tickable(self, True)
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_EFFECT)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="block", ascii_bg_col_name="", ascii_fg_col_name="pink",

@@ -26,7 +26,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 10)
     my.ai_shove_chance_d1000(self, 200)
@@ -43,6 +43,7 @@ def tp_init(name, text_name):
     my.distance_vision(self, 7)
     my.environ_avoids_water(self, 100)
     my.gfx_anim_use(self, "attack_claws")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -103,8 +104,10 @@ def tp_init(name, text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "A monstrous skeleton, possibly unfriendly.")
     my.text_hits(self, "claws")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
+    # end sort marker
 
     delay = 200
     my.tile(self,

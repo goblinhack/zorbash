@@ -40,4 +40,11 @@ enum {
   MAP_Z_PRIO_EFFECT,        // Potion effects
 };
 
+enum {
+  MAP_TICK_PRIO_VERY_HIGH, // e.g. Lasers
+  MAP_TICK_PRIO_HIGH,
+  MAP_TICK_PRIO_NORMAL,
+  MAP_TICK_PRIO,
+};
+
 #endif

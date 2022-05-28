@@ -9,6 +9,7 @@ def spawn(me, x, y):
 def tp_init(name, tiles=[], left1_tiles=[]):
     # my.is_mob(self, True) # don't set to avoid auto place
     self = tp.Tp(name, "sewer pipe", "sewer")
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_show_outlined(self, True)
@@ -26,8 +27,10 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.on_idle_tick_freq_dice(self, "1d50+50:descend_sewer.spawn()")
     my.text_a_or_an(self, "a")
     my.text_description(self, "A slime coated sewer pipe.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 2500
     for t in tiles:

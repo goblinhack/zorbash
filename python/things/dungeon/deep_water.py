@@ -4,9 +4,10 @@ import tp
 
 def tp_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.ai_obstacle(self, True)
     my.environ_avoids_fire(self, 1)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_shown_in_bg(self, True)
     my.gfx_water(self, True)
@@ -17,8 +18,10 @@ def tp_init(name, text_name, tiles=[]):
     my.is_hazard(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "A pool of deep dank water, with things in it.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 1250
     for t in tiles:

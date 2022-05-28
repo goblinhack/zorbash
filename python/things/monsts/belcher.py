@@ -17,7 +17,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
@@ -32,6 +32,7 @@ def tp_init(name, text_name, short_text_name):
     my.environ_avoids_acid(self, True)
     my.environ_avoids_fire(self, 100)
     my.gfx_anim_use(self, "green_splatter")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
@@ -87,8 +88,10 @@ def tp_init(name, text_name, short_text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "A gaseous belcher. But don't call it that to its face.")
     my.text_hits(self, "burns")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_CONSUMER)  # so it appears over things when consuming
+    # end sort marker
 
     delay = 200
     my.tile(self,

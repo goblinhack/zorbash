@@ -8,14 +8,17 @@ import tp
 #
 def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name)
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_shown_in_bg(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_floor(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "The unwashed dungeon floor.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     for t in tiles:
         my.tile(self,

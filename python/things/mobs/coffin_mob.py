@@ -16,7 +16,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.ai_shove_chance_d1000(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)
@@ -25,6 +25,7 @@ def tp_init(name, text_name):
     my.environ_avoids_acid(self, 100)
     my.environ_avoids_fire(self, 10)
     my.environ_avoids_water(self, 100)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_glows(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -56,8 +57,10 @@ def tp_init(name, text_name):
     my.on_idle_tick_freq_dice(self, "1d10+10:me.on_idle_tick_freq_dice()")
     my.text_a_or_an(self, "a")
     my.text_description(self, "A cursed coffin, spawning all manner of surprises.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
+    # end sort marker
 
     delay = 200
     my.tile(self,

@@ -443,7 +443,7 @@ PyObject *level_unused_flag92_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag93_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag94_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag95_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag96_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_tick_prio_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_ascii_mode_color_spread_hue_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag9_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds);

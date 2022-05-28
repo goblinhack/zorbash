@@ -1908,7 +1908,7 @@ public:
   int unused_flag93(void);
   int unused_flag94(void);
   int unused_flag95(void);
-  int unused_flag96(void);
+  int tick_prio(void);
   int gfx_ascii_mode_color_spread_hue(void);
   int gfx_ascii_mode_color_spread_alpha(void);
   int gfx_ascii_mode_color_spread_blue(void);

@@ -31,8 +31,9 @@ def on_use(owner, skill, target, x, y):
 def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
 
+    my.gfx_ascii_mode_shown(self, True)
     my.is_enchantable(self, True)
     my.is_loggable(self, True)
     my.is_skill(self, True)
@@ -42,7 +43,9 @@ def tp_init(name, text_name):
     my.text_description(self, "Devoted thrust skill.")
     my.text_enchant(self, "+10 percent DMG")
     my.text_skill(self, "Redirect health to damage, costing stamina")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    # end sort marker
     my.tile(self,
             tile=name)
     my.tile(self,

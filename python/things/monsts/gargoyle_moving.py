@@ -27,7 +27,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 100)
     my.attack_humanoid(self, True)
@@ -38,6 +38,7 @@ def tp_init(name, text_name):
     my.damage_natural_dice(self, "1d6+2")
     my.distance_vision(self, 10)
     my.gfx_anim_use(self, "attack_claws")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)
@@ -92,8 +93,10 @@ def tp_init(name, text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "A fearsome gargoyle.")
     my.text_hits(self, "slashes")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     delay = 300
     my.tile(self,

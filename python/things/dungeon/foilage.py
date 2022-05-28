@@ -4,9 +4,10 @@ import tp
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "foilage")
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_shadow_long(self, True)
     my.gfx_pixelart_shadow_solid(self, True)
@@ -26,8 +27,10 @@ def tp_init(name, tiles=[]):
     my.noise_blocker(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "Thick and sicky looking foilage and roots.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_FOILAGE)
+    # end sort marker
 
     for t in tiles:
         my.tile(self,

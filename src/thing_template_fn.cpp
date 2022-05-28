@@ -746,7 +746,7 @@ int Tp::unused_flag92(void) const { return _unused_flag92; }
 int Tp::unused_flag93(void) const { return _unused_flag93; }
 int Tp::unused_flag94(void) const { return _unused_flag94; }
 int Tp::unused_flag95(void) const { return _unused_flag95; }
-int Tp::unused_flag96(void) const { return _unused_flag96; }
+int Tp::tick_prio(void) const { return _tick_prio; }
 int Tp::gfx_ascii_mode_color_spread_hue(void) const { return _gfx_ascii_mode_color_spread_hue; }
 int Tp::gfx_ascii_mode_color_spread_alpha(void) const { return _gfx_ascii_mode_color_spread_alpha; }
 int Tp::gfx_ascii_mode_color_spread_blue(void) const { return _gfx_ascii_mode_color_spread_blue; }
@@ -1458,7 +1458,7 @@ void Tp::unused_flag92_set(int v) { _unused_flag92 = v; }
 void Tp::unused_flag93_set(int v) { _unused_flag93 = v; }
 void Tp::unused_flag94_set(int v) { _unused_flag94 = v; }
 void Tp::unused_flag95_set(int v) { _unused_flag95 = v; }
-void Tp::unused_flag96_set(int v) { _unused_flag96 = v; }
+void Tp::tick_prio_set(int v) { _tick_prio = v; }
 void Tp::gfx_ascii_mode_color_spread_hue_set(int v) { _gfx_ascii_mode_color_spread_hue = v; }
 void Tp::gfx_ascii_mode_color_spread_alpha_set(int v) { _gfx_ascii_mode_color_spread_alpha = v; }
 void Tp::gfx_ascii_mode_color_spread_blue_set(int v) { _gfx_ascii_mode_color_spread_blue = v; }

@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name)
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -14,8 +15,10 @@ def tp_init(name):
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.noise_on_born(self, 21)
+    my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 200  # too fast and you don't see it
     my.tile(self,

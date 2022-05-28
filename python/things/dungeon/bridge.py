@@ -14,6 +14,7 @@ def on_death(me, x, y):
 
 def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name, "bridge")
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_shown_in_bg(self, True)
     my.health_initial_dice(self, "20+1d10")
@@ -29,8 +30,10 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.on_death_do(self, "bridge.on_death()")
     my.text_a_or_an(self, "the")
     my.text_description(self, "Shaky bridge.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     for t in tiles:
         my.tile(self,
