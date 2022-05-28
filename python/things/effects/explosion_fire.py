@@ -8,9 +8,10 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "1d6")  # This is the damage when the monst fires
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
@@ -23,8 +24,10 @@ def tp_init(name):
     my.noise_on_born(self, 70)
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, 100)
+    my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_bg_char="block", ascii_bg_col_name="orange", ascii_fg_col_name="",

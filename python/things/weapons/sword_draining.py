@@ -16,7 +16,7 @@ def on_owner_attacking_damage_draining(me, owner, victim, x, y, damage):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.attacks_per_round(self, 2)
     my.damaged_chance_d10000(self, 5)
     my.damage_draining_chance_d1000(self, 1, 1000)
@@ -25,6 +25,7 @@ def tp_init(name, text_name, short_text_name):
     my.damage_melee_dice(self, "1d8")
     my.equip_carry_anim(self, "sword_draining_carry")
     my.gfx_anim_use(self, "sword_draining_swing")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
@@ -60,8 +61,10 @@ def tp_init(name, text_name, short_text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy tiring means of justice.")
     my.text_enchant(self, "+3 DMG stam")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="up_arrow", ascii_bg_col_name="", ascii_fg_col_name="white",

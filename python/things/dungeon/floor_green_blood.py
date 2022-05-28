@@ -4,8 +4,9 @@ import tp
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_hit_priority(self, 2)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated_can_vflip(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -21,8 +22,10 @@ def tp_init(name, text_name):
     my.nutrition_dice(self, "1d4")
     my.text_a_or_an(self, "a")
     my.text_description(self, "An artwork comprised mainly of green blood.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="middle_dot", ascii_bg_col_name="", ascii_fg_col_name="green",

@@ -31,8 +31,9 @@ def on_tick(owner, me, x, y):
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.equip_carry_anim(self, "amulet_healing_carry")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "1250")
     my.is_able_to_fall(self, True)
@@ -63,8 +64,10 @@ def tp_init(name, text_name, short_text_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Amuler of healing.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="\"", ascii_bg_col_name="", ascii_fg_col_name="white",

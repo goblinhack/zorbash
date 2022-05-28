@@ -24,12 +24,13 @@ def tp_init(
 ):
 
     self = tp.Tp(name, "rock")
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 1)
+    my.gfx_ascii_mode_color_spread_hue(self, 50)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.gfx_shown_in_bg(self, True)
-    my.gfx_ascii_mode_color_spread_hue(self, 50)
     my.health_initial_dice(self, "999")
     my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)
@@ -48,8 +49,10 @@ def tp_init(
     my.noise_blocker(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "Rocky the rock.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     for t in tiles:
         my.tile(self,

@@ -15,10 +15,11 @@ def on_born(me, x, y):
 #
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_check(self, True)
     my.damage_cold_chance_d1000(self, 0, 1000)
     my.damage_cold_dice(self, "1d10")  # This is the damage when the monst colds
+    my.gfx_ascii_mode_shown(self, True)
     my.is_cold(self, True)
     my.is_loggable(self, True)
     my.is_no_tile(self, True)
@@ -27,8 +28,10 @@ def tp_init(name, text_name, short_text_name):
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, -100)
     my.text_a_or_an(self, "a")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     my.tp_update(self)
 

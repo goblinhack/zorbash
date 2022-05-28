@@ -8,12 +8,13 @@ def spawn(me, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_check(self, True)
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "1d3+1")
     my.damage_nat_attack_type(self, "burn")
     my.environ_avoids_water(self, 100)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_flickers(self, True)
     my.gfx_on_fire_anim(self, True)
     my.gfx_oversized_and_on_floor(self, True)
@@ -35,8 +36,10 @@ def tp_init(name, text_name):
     my.text_a_or_an(self, "")
     my.text_description(self, "Fire embers.")
     my.text_hits(self, "burns")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_FIRE)
+    # end sort marker
 
     delay = 75
     my.tile(self,

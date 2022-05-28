@@ -4,11 +4,12 @@ import tp
 
 def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.ai_obstacle(self, True)
     my.damage_acid_chance_d1000(self, 0, 1000)
     my.damage_acid_dice(self, "1d3+1")
     my.damage_nat_attack_type(self, "burn")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)
     my.is_acid(self, True)
@@ -23,8 +24,10 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     my.text_a_or_an(self, "")
     my.text_description(self, "A pool of hissing acid.")
     my.text_hits(self, "burns")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     for t in tiles:
         my.tile(self,

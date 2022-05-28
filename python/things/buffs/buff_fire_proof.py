@@ -95,8 +95,9 @@ def on_owner_receiving_damage_stat_con(me, owner, hitter, real_hitter, x, y, dam
 def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
 
+    my.gfx_ascii_mode_shown(self, True)
     my.is_buff(self, True)
     my.is_loggable(self, True)
     my.long_text_description(self, "You bask in the hottest of fires.")
@@ -118,7 +119,9 @@ def tp_init(name, text_name):
     my.on_owner_receiving_damage_stat_con_do(self, "me.on_owner_receiving_damage_stat_con()")
     my.on_owner_receiving_damage_stat_str_do(self, "me.on_owner_receiving_damage_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    # end sort marker
     my.tile(self,
             tile="buff_fire_proof")
     my.tp_update(self)

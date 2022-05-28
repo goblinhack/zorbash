@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gold_value_dice(self, "1")
     my.is_able_to_fall(self, True)
@@ -33,8 +34,10 @@ def tp_init(name, text_name, short_text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "A medal of valor.")
     my.text_enchant(self, "+1 DEF")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="*", ascii_bg_col_name="", ascii_fg_col_name="magenta",

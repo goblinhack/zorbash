@@ -14,11 +14,12 @@ def on_enchant(me, x, y):
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_hit_priority(self, 6)
     my.damaged_chance_d10000(self, 5)
     my.enchant_max(self, 5)
     my.equip_carry_anim(self, "armor_leather_carry")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "5")
     my.is_able_to_fall(self, True)
@@ -47,8 +48,10 @@ def tp_init(name, text_name, short_text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "Leather armor.")
     my.text_enchant(self, "+1 DEF")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="[", ascii_bg_col_name="", ascii_fg_col_name="white",

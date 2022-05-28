@@ -4,8 +4,9 @@ import tp
 
 def gold_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_hit_priority(self, 6)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shadow_very_short(self, True)
     my.gold_value_dice(self, "20+1d25")
@@ -31,8 +32,10 @@ def gold_init(name, text_name):
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "an")
     my.text_description(self, "Some gold goins.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="circle", ascii_bg_col_name="", ascii_fg_col_name="yellow",

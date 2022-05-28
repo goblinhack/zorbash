@@ -26,6 +26,8 @@ def on_you_are_declared_a_follower(me, leader, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
+    # start sort marker
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.gfx_ascii_mode_shown(self, True)
     my.is_able_to_follow(self, True)
     my.is_allied_with(self, "zorb_pack")

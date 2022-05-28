@@ -4,9 +4,10 @@ import tp
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "spiderweb")
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1d20")
     my.is_able_to_fall(self, True)
@@ -27,8 +28,10 @@ def tp_init(name, tiles=[]):
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thick and sticky spiderweb.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_WEB)
+    # end sort marker
 
     for t in tiles:
         my.tile(self, t)

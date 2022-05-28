@@ -16,10 +16,11 @@ def on_open(me, x, y):
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.capacity_height(self, 8)
     my.capacity_width(self, 8)
     my.collision_hit_priority(self, 6)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_able_to_fall(self, True)
@@ -65,8 +66,10 @@ def tp_init(name, text_name):
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.text_a_or_an(self, "a")
     my.text_description(self, "A small treasure chest.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",

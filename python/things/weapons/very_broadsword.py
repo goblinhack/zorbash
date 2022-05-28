@@ -22,7 +22,7 @@ def on_enchant(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_hit_adj(self, True)
     my.crit_chance_d10000(self, 500)
     my.damaged_chance_d10000(self, 1)
@@ -30,6 +30,7 @@ def tp_init(name, text_name, short_text_name):
     my.damage_melee_dice(self, "2d12")
     my.equip_carry_anim(self, "very_broadsword_carry")
     my.gfx_anim_use(self, "very_broadsword_swing")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -66,8 +67,10 @@ def tp_init(name, text_name, short_text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "Thy decapitaty means of justice.")
     my.text_enchant(self, "+1 DMG, +1 ATT")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="up_arrow", ascii_bg_col_name="", ascii_fg_col_name="white",

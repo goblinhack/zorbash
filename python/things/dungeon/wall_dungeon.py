@@ -24,11 +24,12 @@ def tp_init(
 ):
 
     self = tp.Tp(name, "dungeon wall")
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 2)
-    my.gfx_pixelart_wobbles_when_hit(self, True)
     my.gfx_ascii_mode_color_spread_hue(self, 50)
+    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_pixelart_wobbles_when_hit(self, True)
     my.gfx_shown_in_bg(self, True)
     my.health_initial_dice(self, "25d10")
     my.is_always_hit(self, True)
@@ -47,8 +48,10 @@ def tp_init(
     my.noise_blocker(self, True)
     my.text_a_or_an(self, "a")
     my.text_description(self, "A moss covered wall.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     if tiles is not None:
         for t in tiles:

@@ -1909,10 +1909,10 @@ int Thing::unused_flag95(void)
   return (tp()->unused_flag95());
 }
 
-int Thing::unused_flag96(void)
+int Thing::tick_prio(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag96());
+  return (tp()->tick_prio());
 }
 
 int Thing::gfx_ascii_mode_color_spread_hue(void)

@@ -8,6 +8,7 @@ def on_fall(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name)
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -19,8 +20,10 @@ def tp_init(name):
     my.on_fall_do(self, "me.on_fall()")
     my.text_a_or_an(self, "")
     my.text_description(self, "Whisps of smoke.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 150
     my.tile(self,

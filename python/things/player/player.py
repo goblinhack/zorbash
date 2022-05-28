@@ -318,7 +318,7 @@ def on_attacking_damage_stat_con(me, victim, x, y, damage):
 
 def tp_init(name, text_name, short_text_name, title):
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.aggression_level_pct(self, 25)
     my.ai_detect_secret_doors(self, True)
     my.ai_resent_count(self, 20)
@@ -341,6 +341,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.environ_avoids_fire(self, 10)
     my.environ_avoids_poison(self, 100)
     my.gfx_anim_use(self, "attack_punch")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_flickers(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
@@ -398,9 +399,9 @@ def tp_init(name, text_name, short_text_name, title):
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
     my.light_dist(self, 10)
-    my.long_text_description(self, "You.")
     my.long_text_description2(self, "A most noble adventurer of no particular race, gender or creed. Devoid of fear and stout of heart.")
     my.long_text_description3(self, "Likes kittens.")
+    my.long_text_description(self, "You.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
     my.noise_additional_on_jump_end(self, 20)
@@ -468,8 +469,10 @@ def tp_init(name, text_name, short_text_name, title):
     my.text_description(self, "Our most noble adventurer. Press 'h' for help.")
     my.text_hits(self, "hits")
     my.text_title(self, title)
+    my.tick_prio(self, my.MAP_TICK_PRIO_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_PLAYER)
+    # end sort marker
 
     delay = 900
     my.tile(self, ascii_fg_char="@", ascii_fg_col_name="pink", ascii_bg_col_name="",

@@ -4,13 +4,14 @@ import tp
 
 def lava_init(name, text_name, tiles=[]):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.ai_obstacle(self, True)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "1d12+6")
     my.damage_nat_attack_type(self, "burn")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_glows(self, True)
     my.gfx_shown_in_bg(self, True)
     my.is_able_to_fall(self, True)
@@ -27,8 +28,10 @@ def lava_init(name, text_name, tiles=[]):
     my.text_a_or_an(self, "")
     my.text_description(self, "%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto).")
     my.text_hits(self, "tickles")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 200
     for t in tiles:

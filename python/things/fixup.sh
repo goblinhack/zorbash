@@ -43,11 +43,9 @@ do
         continue
     fi
 
-    sed '1,/self = tp.Tp(/!d' $IN > $PRE
-    my.gfx_ascii_mode_shown(self, True)
-    sed '/self = tp.Tp(/,/z_prio(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
-    my.gfx_ascii_mode_shown(self, True)
-    sed '/z_prio(/,$!d' $IN | tail -n +2 - > $POST
+    sed '1,/# start sort marker(/!d' $IN > $PRE
+    sed '/# start sort marker/,/# end sort marker(/!d' $IN | tail -n +2 - | sort > $PAYLOAD
+    sed '/# end sort marker(/,$!d' $IN | tail -n +2 - > $POST
 
     for arg in \
       aggression_level_pct \
@@ -506,7 +504,7 @@ do
       unused_flag93 \
       unused_flag94 \
       unused_flag95 \
-      unused_flag96 \
+      tick_prio \
       gfx_ascii_mode_color_spread_hue \
       gfx_ascii_mode_color_spread_hue \
       on_death_is_open

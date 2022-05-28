@@ -33,7 +33,7 @@ def on_firing_at_something(me, target, x, y):  # Return True on doing an action
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 100)
     my.ai_wanderer(self, True)
@@ -50,6 +50,7 @@ def tp_init(name, text_name):
     my.distance_vision(self, 8)
     my.environ_avoids_cold(self, 10)
     my.gfx_anim_use(self, "attack_claws")
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
@@ -107,8 +108,10 @@ def tp_init(name, text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "A floating fire hazard.")
     my.text_hits(self, "slashes")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     delay = 100
     my.tile(self,

@@ -4,6 +4,7 @@ import tp
 
 def tp_init(name, text_name):
     self = tp.Tp(name, text_name)
+    # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated_can_vflip(self, True)
@@ -16,8 +17,10 @@ def tp_init(name, text_name):
     my.is_tmp_thing(self, True)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Splat attack.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 5
     my.tile(self,

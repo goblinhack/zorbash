@@ -14,6 +14,8 @@ def on_enchant(me, x, y):
 def tp_init(name, text_name, short_text_name):
     global self
     self = tp.Tp(name, text_name, short_text_name)
+    # start sort marker
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.gfx_ascii_mode_shown(self, True)
     my.damaged_chance_d10000(self, 100)
     my.enchant_max(self, 2)
@@ -56,6 +58,7 @@ def tp_init(name, text_name, short_text_name):
     my.text_enchant(self, "+1 DEF")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="[", ascii_bg_col_name="", ascii_fg_col_name="white",

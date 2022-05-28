@@ -4,8 +4,9 @@ import tp
 
 def key_init(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_hit_priority(self, 6)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_always(self, True)
     my.gfx_pixelart_shadow_short(self, True)
@@ -30,8 +31,10 @@ def key_init(name, text_name):
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
     my.text_description(self, "An evil looking key.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="purple",

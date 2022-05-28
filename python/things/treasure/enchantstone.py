@@ -27,10 +27,11 @@ def on_fall(me, x, y):
 
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
     my.environ_avoids_fire(self, 10)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)
@@ -61,8 +62,10 @@ def tp_init(name, text_name, short_text_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
     my.text_description(self, "A glowing enchantstone.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    # end sort marker
 
     my.tile(self,
             ascii_fg_char="diamond_solid", ascii_bg_col_name="", ascii_fg_col_name="white",

@@ -18,8 +18,9 @@ def on_owner_remove(me, owner, x, y):
 def tp_init(name, text_name):
     global self
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
 
+    my.gfx_ascii_mode_shown(self, True)
     my.is_buff(self, True)
     my.is_loggable(self, True)
     my.is_slippery(self, True)
@@ -27,7 +28,9 @@ def tp_init(name, text_name):
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.text_description(self, "You are as slippery as a banana buff.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    # end sort marker
     my.tile(self,
             tile="buff_slippery")
     my.tp_update(self)

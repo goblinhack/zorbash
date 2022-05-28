@@ -8,6 +8,7 @@ def init(self, name):
     my.text_a_or_an(self, "a")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_SWING)
+    # end sort marker
 
     delay = 20
     my.tile(self,

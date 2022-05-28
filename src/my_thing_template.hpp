@@ -632,7 +632,7 @@ private:
   int _unused_flag93 {};
   int _unused_flag94 {};
   int _unused_flag95 {};
-  int _unused_flag96 {};
+  int _tick_prio {};
   int _gfx_ascii_mode_color_spread_hue {};
   int _gfx_ascii_mode_color_spread_alpha {};
   int _gfx_ascii_mode_color_spread_blue {};
@@ -1625,7 +1625,7 @@ public:
   int unused_flag93(void) const;
   int unused_flag94(void) const;
   int unused_flag95(void) const;
-  int unused_flag96(void) const;
+  int tick_prio(void) const;
   int gfx_ascii_mode_color_spread_hue(void) const;
   int gfx_ascii_mode_color_spread_alpha(void) const;
   int gfx_ascii_mode_color_spread_blue(void) const;
@@ -2295,7 +2295,7 @@ public:
   void unused_flag93_set(int v);
   void unused_flag94_set(int v);
   void unused_flag95_set(int v);
-  void unused_flag96_set(int v);
+  void tick_prio_set(int v);
   void gfx_ascii_mode_color_spread_hue_set(int v);
   void gfx_ascii_mode_color_spread_alpha_set(int v);
   void gfx_ascii_mode_color_spread_blue_set(int v);

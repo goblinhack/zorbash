@@ -4,8 +4,9 @@ import tp
 
 def init1(name, text_name):
     self = tp.Tp(name, text_name)
-    my.gfx_ascii_mode_shown(self, True)
+    # start sort marker
     my.collision_check(self, True)
+    my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated_can_vflip(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -17,8 +18,10 @@ def init1(name, text_name):
     my.is_removeable_if_out_of_slots(self, True)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Punch out.")
+    my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
+    # end sort marker
 
     delay = 20
     my.tile(self,

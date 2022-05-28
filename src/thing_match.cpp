@@ -956,7 +956,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag95() && (what == "unused_flag95")) {
     return true;
   }
-  if (unused_flag96() && (what == "unused_flag96")) {
+  if (tick_prio() && (what == "tick_prio")) {
     return true;
   }
   if (gfx_ascii_mode_color_spread_hue() && (what == "gfx_ascii_mode_color_spread_hue")) {
@@ -2571,8 +2571,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag95") {
     return &Thing::unused_flag95;
   }
-  if (what == "unused_flag96") {
-    return &Thing::unused_flag96;
+  if (what == "tick_prio") {
+    return &Thing::tick_prio;
   }
   if (what == "gfx_ascii_mode_color_spread_hue") {
     return &Thing::gfx_ascii_mode_color_spread_hue;
