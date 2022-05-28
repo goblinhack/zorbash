@@ -21,12 +21,11 @@ void Level::dump(std::string pfx)
   LOG("%s map_wanted_at      %s", pfx.c_str(), map_wanted_at.to_string().c_str());
 
   LOG("%s all_things", pfx.c_str());
-  FOR_ALL_THING_GROUPS(group)
   {
     for (auto x = 0; x < MAP_WIDTH; ++x) {
       for (auto y = 0; y < MAP_HEIGHT; ++y) {
         for (auto z = 0; z < MAP_SLOTS; ++z) {
-          auto id = get(all_things_id_at[ group ], x, y, z);
+          auto id = get(all_things_id_at, x, y, z);
           if (id.ok()) {
             auto t = thing_find(id);
             if (unlikely(! t)) {

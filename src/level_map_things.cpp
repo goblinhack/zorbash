@@ -8,9 +8,9 @@
 #include "my_thing.hpp"
 #include <cinttypes> // PRIX32
 
-void Level::put_thing(int x, int y, ThingId id, int group)
+void Level::put_thing(int x, int y, ThingId id)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto t = thing_find(id);
   if (unlikely(! t)) {
     return;
@@ -36,7 +36,7 @@ void Level::put_thing(int x, int y, ThingId id, int group)
 do_retry:
   free_slot = -1;
   for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-    auto idp = &getref(all_things_id_at[ group ], x, y, slot);
+    auto idp = &getref(all_things_id_at, x, y, slot);
     if (idp->id == id.id) {
       IF_DEBUG3 { t->log("Found %" PRIX32 " at %u,%u slot %u", id.id, x, y, slot); }
       return;
@@ -48,10 +48,10 @@ do_retry:
   }
 
   if (free_slot != -1) {
-    auto idp = &getref(all_things_id_at[ group ], x, y, free_slot);
-    all_things_ptr_at[ group ][ x ][ y ].push_back(t);
+    auto idp = &getref(all_things_id_at, x, y, free_slot);
+    all_things_ptr_at[ x ][ y ].push_back(t);
 
-    sort(all_things_ptr_at[ group ][ x ][ y ].begin(), all_things_ptr_at[ group ][ x ][ y ].end(),
+    sort(all_things_ptr_at[ x ][ y ].begin(), all_things_ptr_at[ x ][ y ].end(),
          [](const Thingp &a, const Thingp &b) -> bool { return a->z_prio() < b->z_prio(); });
 
     IF_DEBUG3 { t->log("Put thing %p %" PRIX32 " at %u,%u slot %u", t, id.id, x, y, free_slot); }
@@ -66,7 +66,7 @@ do_retry:
   if (retry < MAP_SLOTS) {
     t->log("Out of thing slots at map (%d,%d) for put of %" PRIX32 ", try to cleanup", x, y, id.id);
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-      auto idp = &getref(all_things_id_at[ group ], x, y, slot);
+      auto idp = &getref(all_things_id_at, x, y, slot);
       if (idp->id) {
         auto t = thing_find(*idp);
         if (unlikely(! t)) {
@@ -86,12 +86,12 @@ do_retry:
   t->log("Out of thing slots at map (%d,%d) for put of %" PRIX32 ", see below:", x, y, id.id);
 
   for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-    auto idp = &getref(all_things_id_at[ group ], x, y, slot);
+    auto idp = &getref(all_things_id_at, x, y, slot);
     LOG("- slot %u %" PRIX32 "", slot, idp->id);
   }
 
   for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-    auto idp = &getref(all_things_id_at[ group ], x, y, slot);
+    auto idp = &getref(all_things_id_at, x, y, slot);
     if (idp->id) {
       auto t = thing_find(*idp);
       if (unlikely(! t)) {
@@ -105,15 +105,11 @@ do_retry:
   t->err("Out of thing slots at map (%d,%d) for put of %" PRIX32 "", x, y, id.id);
 }
 
-void Level::put_thing(point p, ThingId id, int group)
-{
-  TRACE_AND_INDENT();
-  put_thing(p.x, p.y, id, group);
-}
+void Level::put_thing(point p, ThingId id) { put_thing(p.x, p.y, id); }
 
-void Level::remove_thing(int x, int y, ThingId id, int group)
+void Level::remove_thing(int x, int y, ThingId id)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto t = thing_find(id);
   if (unlikely(! t)) {
     ERR("Oob at map (%d,%d) for remove of %" PRIX32 "", x, y, id.id);
@@ -126,10 +122,10 @@ void Level::remove_thing(int x, int y, ThingId id, int group)
   }
 
   for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-    auto idp = &getref(all_things_id_at[ group ], x, y, slot);
+    auto idp = &getref(all_things_id_at, x, y, slot);
     if (idp->id == id.id) {
       idp->id = 0;
-      auto v  = &all_things_ptr_at[ group ][ x ][ y ];
+      auto v  = &all_things_ptr_at[ x ][ y ];
       auto b  = v->begin();
       auto e  = v->end();
 
@@ -159,7 +155,7 @@ void Level::remove_thing(int x, int y, ThingId id, int group)
       {
         for (auto x = 0; x < MAP_WIDTH; x++) {
           for (auto y = 0; y < MAP_HEIGHT; y++) {
-            auto v = &all_things_ptr_at[ group ][ x ][ y ];
+            auto v = &all_things_ptr_at[ x ][ y ];
             auto b = v->begin();
             auto e = v->end();
 
@@ -180,10 +176,9 @@ void Level::remove_thing(int x, int y, ThingId id, int group)
 
 void Level::check_thing(Thingp t)
 {
-  TRACE_AND_INDENT();
-  int group = t->group_get();
-  int x     = t->curr_at.x;
-  int y     = t->curr_at.y;
+  TRACE_NO_INDENT();
+  int x = t->curr_at.x;
+  int y = t->curr_at.y;
 
   if (unlikely(is_oob(x, y))) {
     t->err("Oob thing");
@@ -191,7 +186,7 @@ void Level::check_thing(Thingp t)
   }
 
   for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-    auto idp = &getref(all_things_id_at[ group ], x, y, slot);
+    auto idp = &getref(all_things_id_at, x, y, slot);
     if (idp->id == t->id.id) {
       return;
     }
@@ -199,8 +194,4 @@ void Level::check_thing(Thingp t)
   t->err("Did not find thing in any slot");
 }
 
-void Level::remove_thing(point p, ThingId id, int group)
-{
-  TRACE_AND_INDENT();
-  remove_thing(p.x, p.y, id, group);
-}
+void Level::remove_thing(point p, ThingId id) { remove_thing(p.x, p.y, id); }

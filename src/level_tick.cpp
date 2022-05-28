@@ -15,29 +15,24 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_console.hpp"
 
-void Level::handle_all_pending_things(int group)
-{
-  for (auto &i : all_animated_things_pending_remove[ group ]) {
-    // i.second->con("pending remove");
-    all_animated_things[ group ].erase(i.first);
-  }
-  all_animated_things_pending_remove[ group ] = {};
-
-  for (auto &i : all_animated_things_pending_add[ group ]) {
-    // i.second->con("pending add");
-    all_animated_things[ group ].insert(i);
-  }
-  all_animated_things_pending_add[ group ] = {};
-
-  for (auto &i : all_things_pending_fall[ group ]) {
-    i.second->fall_to_next_level();
-  }
-  all_things_pending_fall[ group ] = {};
-}
-
 void Level::handle_all_pending_things(void)
 {
-  FOR_ALL_THING_GROUPS(group) { handle_all_pending_things(group); }
+  for (auto &i : all_animated_things_pending_remove) {
+    // i.second->con("pending remove");
+    all_animated_things.erase(i.first);
+  }
+  all_animated_things_pending_remove = {};
+
+  for (auto &i : all_animated_things_pending_add) {
+    // i.second->con("pending add");
+    all_animated_things.insert(i);
+  }
+  all_animated_things_pending_add = {};
+
+  for (auto &i : all_things_pending_fall) {
+    i.second->fall_to_next_level();
+  }
+  all_things_pending_fall = {};
 }
 
 void Level::handle_input_events(void)
@@ -163,10 +158,9 @@ void Level::tick(void)
   //
   // Even if a tick is not running, we need to animate all things
   //
-  FOR_ALL_THING_GROUPS(group)
   {
     ;
-    FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t)
+    FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
     {
       t->animate();
       t->update_interpolated_position();
@@ -174,7 +168,7 @@ void Level::tick(void)
     }
     FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
 
-    FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t)
+    FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
     {
       if (t->is_scheduled_for_death) {
         t->is_scheduled_for_death = false;
@@ -697,9 +691,8 @@ void Level::tick_begin_now(void)
 void Level::update_all_ticks(void)
 {
   TRACE_AND_INDENT();
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto &i : all_things_of_interest[ group ]) {
+    for (auto &i : all_things_of_interest) {
       auto t = i.second;
       t->update_tick();
     }

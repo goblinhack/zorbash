@@ -6481,24 +6481,4 @@ const std::string &Thing::title(void)
   }
 }
 
-int Thing::group_get(void)
-{
-  if (is_laser()) {
-    return THING_GROUP_PRIO_HIGH;
-  }
-  if (is_projectile()) {
-    return THING_GROUP_PRIO_HIGH;
-  }
-  if (is_critical_to_level()) {
-    return THING_GROUP_PRIO_MED;
-  }
-  if (is_player()) {
-    return THING_GROUP_PRIO_MED;
-  }
-  if (is_tmp_thing()) {
-    return THING_GROUP_TMP;
-  }
-  return THING_GROUP_PRIO_NORMAL;
-}
-
 bool Thing::is_state_sleeping(void) { return is_sleeping; }

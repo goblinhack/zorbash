@@ -143,7 +143,7 @@ public:
   point grid_at;
 
   //
-  // Levels are group into difficulty levels
+  // Levels are grouped into difficulty levels
   //
   int difficulty_depth {};
   int dungeon_walk_order_level_no {};
@@ -216,20 +216,10 @@ public:
   //
   uint32_t seed {};
 
-#define MAX_THING_GROUPS              4
-#define THING_GROUP_PRIO_HIGH         0
-#define THING_GROUP_PRIO_MED          1
-#define THING_GROUP_PRIO_NORMAL       2
-#define THING_GROUP_TMP               3
-#define FOR_ALL_THING_GROUPS(_group_) for (auto _group_ = 0; _group_ < MAX_THING_GROUPS; _group_++)
-
-#define FOR_ALL_THING_PRIO_GROUPS                                                                                    \
-  for (auto _group_ = THING_GROUP_PRIO_HIGH; _group_ <= THING_GROUP_PRIO_NORMAL; _group_++)
-
   //
   // Everything thing on the level. Not all in the game, just this level.
   //
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_things {};
+  std::map< ThingId, Thingp > all_things {};
 
   //
   // For all things that move, like monsters, or those that do not, like
@@ -237,41 +227,36 @@ public:
   // walls. Omits things like floors, corridors, the grid; those that
   // generally do nothing or are hidden.
   //
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_things_of_interest {};
+  bool                        all_things_of_interest_walk_in_progress {};
+  std::map< ThingId, Thingp > all_things_of_interest {};
+  std::map< ThingId, Thingp > all_things_of_interest_pending_add {};
+  std::map< ThingId, Thingp > all_things_of_interest_pending_remove {};
 
   //
-  // These are used to add/remove to all_things_of_interest when walking
-  // is done; aboids the map becoming invalidated due to changes.
+  // A smaller set of things that are animated. This is more efficient to
+  // talk as it is called per frame.
   //
-  bool all_things_of_interest_walk_in_progress {};
-
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_things_of_interest_pending_add {};
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_things_of_interest_pending_remove {};
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_animated_things {};
-
-  bool all_animated_things_walk_in_progress {};
-
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_animated_things_pending_add {};
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_animated_things_pending_remove {};
+  bool                        all_animated_things_walk_in_progress {};
+  std::map< ThingId, Thingp > all_animated_things {};
+  std::map< ThingId, Thingp > all_animated_things_pending_add {};
+  std::map< ThingId, Thingp > all_animated_things_pending_remove {};
 
   //
   // This is for things that do not tick, like water; that need to fall
   //
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_things_pending_fall {};
+  std::map< ThingId, Thingp > all_things_pending_fall {};
 
   //
   // All things that are to be destroyed
   //
-  std::array< std::map< ThingId, Thingp >, MAX_THING_GROUPS > all_things_to_be_destroyed {};
+  std::map< ThingId, Thingp > all_things_to_be_destroyed {};
 
   //
   // All thing IDs
   //
-  std::array< std::array< std::array< std::array< ThingId, MAP_SLOTS >, MAP_HEIGHT >, MAP_WIDTH >, MAX_THING_GROUPS >
-      all_things_id_at {};
+  std::array< std::array< std::array< ThingId, MAP_SLOTS >, MAP_HEIGHT >, MAP_WIDTH > all_things_id_at {};
 
-  std::array< std::array< std::array< std::vector< Thingp >, MAP_HEIGHT >, MAP_WIDTH >, MAX_THING_GROUPS >
-      all_things_ptr_at {};
+  std::array< std::array< std::vector< Thingp >, MAP_HEIGHT >, MAP_WIDTH > all_things_ptr_at {};
 
   //
   // This is what we've lit on this level, so we can restore it
@@ -363,10 +348,10 @@ public:
   Level(void);
   ~Level(void);
 
-  void remove_thing(int x, int y, ThingId id, int group);
-  void remove_thing(point p, ThingId id, int group);
-  void put_thing(int x, int y, ThingId id, int group);
-  void put_thing(point p, ThingId id, int group);
+  void remove_thing(int x, int y, ThingId id);
+  void remove_thing(point p, ThingId id);
+  void put_thing(int x, int y, ThingId id);
+  void put_thing(point p, ThingId id);
   void check_thing(Thingp t);
 
 #define JOIN1(X, Y) X##Y
@@ -375,9 +360,8 @@ public:
 #define FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                   \
   if (! (level)->is_oob(x, y)) {                                                                                     \
     static Thingp things_to_walk[ MAP_SLOTS ];                                                                       \
-    FOR_ALL_THING_PRIO_GROUPS                                                                                        \
     {                                                                                                                \
-      auto _vec_               = getptr(level->all_things_ptr_at[ _group_ ], x, y);                                  \
+      auto _vec_               = getptr(level->all_things_ptr_at, x, y);                                             \
       auto things_to_walk_size = _vec_->size();                                                                      \
       for (size_t idx = 0; idx < things_to_walk_size; idx++)                                                         \
         things_to_walk[ idx ] = (*_vec_)[ idx ];                                                                     \
@@ -388,29 +372,10 @@ public:
 
 #define FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                 \
   if (! (level)->is_oob(x, y)) {                                                                                     \
-    FOR_ALL_THING_PRIO_GROUPS                                                                                        \
     {                                                                                                                \
-      for (auto t : level->all_things_ptr_at[ _group_ ][ x ][ y ]) {
+      for (auto t : level->all_things_ptr_at[ x ][ y ]) {
 
 #define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)
-
-#define FOR_TMP_THINGS_WALKER(level, t, x, y)                                                                        \
-  if (! (level)->is_oob(x, y)) {                                                                                     \
-    static Thingp things_to_walk[ MAP_SLOTS ];                                                                       \
-    {                                                                                                                \
-      auto _vec_               = &level->all_things_ptr_at[ THING_GROUP_TMP ][ x ][ y ];                             \
-      auto things_to_walk_size = _vec_->size();                                                                      \
-      for (size_t idx = 0; idx < things_to_walk_size; idx++)                                                         \
-        things_to_walk[ idx ] = (*_vec_)[ idx ];                                                                     \
-      for (size_t idx = 0; idx < things_to_walk_size; idx++) {                                                       \
-        Thingp t;                                                                                                    \
-        t = things_to_walk[ idx ];                                                                                   \
-        verify(MTYPE_THING, t);
-
-#define FOR_TMP_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                 \
-  if (! (level)->is_oob(x, y)) {                                                                                     \
-    {                                                                                                                \
-      for (auto t : level->all_things_ptr_at[ THING_GROUP_TMP ][ x ][ y ]) {
 
 #define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)
 
@@ -423,12 +388,11 @@ public:
 // Things that can move or fall or catch fire etc...
 //
 #define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t)                                                              \
-  FOR_ALL_THING_PRIO_GROUPS                                                                                          \
   {                                                                                                                  \
     level->all_things_of_interest_walk_in_progress = true;                                                           \
-    auto c                                         = level->all_things_of_interest[ _group_ ];                       \
-    auto i                                         = level->all_things_of_interest[ _group_ ].begin();               \
-    while (i != level->all_things_of_interest[ _group_ ].end()) {                                                    \
+    auto c                                         = level->all_things_of_interest;                                  \
+    auto i                                         = level->all_things_of_interest.begin();                          \
+    while (i != level->all_things_of_interest.end()) {                                                               \
       auto t = i->second;                                                                                            \
       /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
       i++;                                                                                                           \
@@ -440,43 +404,42 @@ public:
       verify(MTYPE_THING, t);
 
 #define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)                                                             \
-  if (i == level->all_things_of_interest[ _group_ ].end()) {                                                         \
+  if (i == level->all_things_of_interest.end()) {                                                                    \
     break;                                                                                                           \
   }                                                                                                                  \
   }                                                                                                                  \
   level->all_things_of_interest_walk_in_progress = false;                                                            \
-  level->handle_all_pending_things(_group_);                                                                         \
+  level->handle_all_pending_things();                                                                                \
   }
 
-#define FOR_ALL_ANIMATED_THINGS_LEVEL(level, group, t)                                                               \
+#define FOR_ALL_ANIMATED_THINGS_LEVEL(level, t)                                                                      \
   {                                                                                                                  \
     level->all_animated_things_walk_in_progress = true;                                                              \
-    auto c                                      = level->all_animated_things[ group ];                               \
-    auto i                                      = level->all_animated_things[ group ].begin();                       \
-    while (i != level->all_animated_things[ group ].end()) {                                                         \
+    auto c                                      = level->all_animated_things;                                        \
+    auto i                                      = level->all_animated_things.begin();                                \
+    while (i != level->all_animated_things.end()) {                                                                  \
       auto t = i->second;                                                                                            \
       i++;                                                                                                           \
       verify(MTYPE_THING, t);
 
 #define FOR_ALL_ANIMATED_THINGS_LEVEL_END(level)                                                                     \
-  if (i == level->all_animated_things[ group ].end()) {                                                              \
+  if (i == level->all_animated_things.end()) {                                                                       \
     break;                                                                                                           \
   }                                                                                                                  \
   }                                                                                                                  \
   level->all_animated_things_walk_in_progress = false;                                                               \
-  level->handle_all_pending_things(group);                                                                           \
+  level->handle_all_pending_things();                                                                                \
   }
 
 //
 // Things that make decisions or have a lifespan
 //
 #define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(level, t)                                                              \
-  FOR_ALL_THING_PRIO_GROUPS                                                                                          \
   {                                                                                                                  \
     level->all_things_of_interest_walk_in_progress = true;                                                           \
-    auto c                                         = level->all_things_of_interest[ _group_ ];                       \
-    auto i                                         = level->all_things_of_interest[ _group_ ].begin();               \
-    while (i != level->all_things_of_interest[ _group_ ].end()) {                                                    \
+    auto c                                         = level->all_things_of_interest;                                  \
+    auto i                                         = level->all_things_of_interest.begin();                          \
+    while (i != level->all_things_of_interest.end()) {                                                               \
       auto t = i->second;                                                                                            \
       /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
       i++;                                                                                                           \
@@ -489,12 +452,12 @@ public:
       verify(MTYPE_THING, t);
 
 #define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(level)                                                             \
-  if (i == level->all_things_of_interest[ _group_ ].end()) {                                                         \
+  if (i == level->all_things_of_interest.end()) {                                                                    \
     break;                                                                                                           \
   }                                                                                                                  \
   }                                                                                                                  \
   level->all_things_of_interest_walk_in_progress = false;                                                            \
-  level->handle_all_pending_things(_group_);                                                                         \
+  level->handle_all_pending_things();                                                                                \
   }
 
 #define FOR_ALL_GRID_THINGS(level, t, x, y)                                                                          \
@@ -514,15 +477,6 @@ public:
 
 #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)                                                                   \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (t->z_depth != z) {                                                                                             \
-    continue;                                                                                                        \
-  }                                                                                                                  \
-  if (t->is_hidden) {                                                                                                \
-    continue;                                                                                                        \
-  }
-
-#define FOR_TMP_THINGS_AT_DEPTH(level, t, x, y, z)                                                                   \
-  FOR_TMP_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
   if (t->z_depth != z) {                                                                                             \
     continue;                                                                                                        \
   }                                                                                                                  \
@@ -620,13 +574,13 @@ public:
 // Cursor path is the highlighted path the player follows.
 //
 #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)                                                                   \
-  FOR_TMP_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
+  FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
   if (! t->is_cursor_path()) {                                                                                       \
     continue;                                                                                                        \
   }
 
 #define FOR_ALL_DEBUG_PATH_THINGS(level, t, x, y)                                                                    \
-  FOR_TMP_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
+  FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
   if (! t->is_debug_path()) {                                                                                        \
     continue;                                                                                                        \
   }
@@ -958,7 +912,6 @@ public:
   void fini(void);
   void gfx_water_set(const int x, const int y);
   void gfx_water_unset(const int x, const int y);
-  void handle_all_pending_things(int group);
   void handle_all_pending_things(void);
   void handle_input_events(void);
   void heatmap_incr(const int x, const int y);

@@ -1107,7 +1107,6 @@ public:
   int gold_set(int);
   int gold_value(void);
   int gold(void);
-  int group_get(void);
   int health_boost(int v);
   int health_decr(int);
   int health_decr(void);
