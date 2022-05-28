@@ -9,7 +9,6 @@ def tp_init(name, text_name):
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated_can_vflip(self, True)
     my.gfx_pixelart_animated(self, True)
-    my.gfx_pixelart_show_outlined(self, True)
     my.health_initial_dice(self, "1d4")
     my.is_able_to_fall(self, True)
     my.is_attackable_by_monst(self, True)
