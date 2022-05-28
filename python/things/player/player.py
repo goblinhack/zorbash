@@ -469,7 +469,7 @@ def tp_init(name, text_name, short_text_name, title):
     my.text_hits(self, "hits")
     my.text_title(self, title)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_PLAYER)
+    my.z_prio(self, my.MAP_Z_PRIO_PLAYER)
 
     delay = 900
     my.tile(self, ascii_fg_char="@", ascii_fg_col_name="pink", ascii_bg_col_name="",

@@ -49,7 +49,7 @@ def tp_init(
     my.text_a_or_an(self, "the")
     my.text_description(self, "Rocky the rock.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
 
     for t in tiles:
         my.tile(self,

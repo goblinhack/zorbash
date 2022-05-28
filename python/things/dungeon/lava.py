@@ -28,7 +28,7 @@ def lava_init(name, text_name, tiles=[]):
     my.text_description(self, "%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto).")
     my.text_hits(self, "tickles")
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
-    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
 
     delay = 200
     for t in tiles:

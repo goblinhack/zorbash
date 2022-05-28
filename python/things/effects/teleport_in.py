@@ -24,8 +24,8 @@ def tp_init(name):
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, -100)
     my.text_hits(self, "freezes")
-    my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MAJOR)
-    my.z_prio(self, my.MAP_PRIO_EFFECT)
+    my.z_depth(self, my.MAP_DEPTH_TOP)
+    my.z_prio(self, my.MAP_Z_PRIO_EFFECT)
 
     delay = 5
     my.tile(self,

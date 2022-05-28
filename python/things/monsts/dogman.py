@@ -117,7 +117,7 @@ def tp_init(name, text_name):
     my.text_description(self, "A perma panting dogman.")
     my.text_hits(self, "gores")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_MONST)
+    my.z_prio(self, my.MAP_Z_PRIO_MONST)
 
     delay = 900
     my.tile(self,

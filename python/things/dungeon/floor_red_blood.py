@@ -23,7 +23,7 @@ def tp_init(name, text_name):
     my.text_a_or_an(self, "a")
     my.text_description(self, "An artwork comprised mainly of blood.")
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
 
     my.tile(self,
             ascii_fg_char="middle_dot", ascii_bg_col_name="", ascii_fg_col_name="red",

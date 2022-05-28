@@ -14,8 +14,8 @@ def tp_init(name):
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.noise_on_born(self, 21)
-    my.z_depth(self, my.MAP_DEPTH_EXPLOSION_MINOR)
-    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
 
     delay = 200  # too fast and you don't see it
     my.tile(self,

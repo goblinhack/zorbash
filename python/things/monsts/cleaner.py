@@ -117,7 +117,7 @@ def tp_init(name, text_name, short_text_name):
     my.text_description(self, "A dungeon auto cleaner jelly thingy.")
     my.text_hits(self, "burns")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_CONSUMER)  # so it appears over things when consuming
+    my.z_prio(self, my.MAP_Z_PRIO_CONSUMER)  # so it appears over things when consuming
 
     delay = 200
     my.tile(self,

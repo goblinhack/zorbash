@@ -24,7 +24,7 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     my.text_description(self, "A pool of hissing acid.")
     my.text_hits(self, "burns")
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
-    my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
 
     for t in tiles:
         my.tile(self,

@@ -75,7 +75,7 @@ def tp_init(name, text_name):
     my.text_description(self, "The angry spirit of one long passed.")
     my.text_hits(self, "touches")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
 
     delay = 200
     my.tile(self,

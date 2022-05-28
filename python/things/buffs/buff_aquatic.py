@@ -26,7 +26,7 @@ def tp_init(name, text_name):
     my.long_text_description(self, "You feel at home in the water and will suffer no more water penalties for either attack or defence when in shallow or deep water. Always beware of puddles though.")
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
-    # my.z_prio(self, my.MAP_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
+    # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     my.tile(self,
             tile="buff_aquatic")
     my.tp_update(self)
