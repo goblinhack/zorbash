@@ -472,9 +472,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   }
 
   uint32_t csum = 0;
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : my.t->all_things[ group ]) {
+    for (auto p : my.t->all_things) {
       auto t = p.second;
       csum += t->curr_at.x + t->curr_at.y + t->id.id;
       // t->con("SAVE %f %f %d", t->curr_at.x, t->curr_at.y, t->id.id);
@@ -627,9 +626,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
 #ifdef ENABLE_DEBUG_THING_SER
   LOG("INF: Check things");
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : my.t->all_things[ group ]) {
+    for (auto p : my.t->all_things) {
       auto t = p.second;
       my.t->check_thing(t);
     }
@@ -638,7 +636,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
 #if 0
   LOG("INF: Saved slots");
-  FOR_ALL_THING_GROUPS(group) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
@@ -653,12 +650,11 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 #endif
 
   LOG("INF: Save things");
-  FOR_ALL_THING_GROUPS(group)
   {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-          auto id = get(my.t->all_things_id_at[ group ], x, y, slot);
+          auto id = get(my.t->all_things_id_at, x, y, slot);
           if (id.ok()) {
             const Thingp t = my.t->thing_find(id);
             if (unlikely(! t)) {

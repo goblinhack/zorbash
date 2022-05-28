@@ -391,12 +391,8 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
 
-  FOR_ALL_THING_GROUPS(group)
-  {
-    ;
-    FOR_ALL_ANIMATED_THINGS_LEVEL(this, group, t) { t->animate(); }
-    FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
-  }
+  FOR_ALL_ANIMATED_THINGS_LEVEL(this, t) { t->animate(); }
+  FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
 
   //
   // Blit the floor
@@ -412,9 +408,6 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
         // thing in the blit as we are using the unsafe(faster) walker.
         //
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
-        FOR_ALL_THINGS_END()
-
-        FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_pixelart(fbo); }
         FOR_ALL_THINGS_END()
       }
     }
@@ -437,9 +430,6 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
-        FOR_ALL_THINGS_END()
-
-        FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_pixelart(fbo); }
         FOR_ALL_THINGS_END()
       }
     }
@@ -489,9 +479,6 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
           }
         }
         FOR_ALL_THINGS_END()
-
-        FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_pixelart(fbo); }
-        FOR_ALL_THINGS_END()
       }
     }
   }
@@ -524,9 +511,6 @@ void Level::display_pixelart_map_fg2_things(int fbo, const int16_t minx, const i
             }
           }
         }
-        FOR_ALL_THINGS_END()
-
-        FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_pixelart(fbo); }
         FOR_ALL_THINGS_END()
       }
     }

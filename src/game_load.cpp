@@ -677,7 +677,6 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
 #if 0
   LOG("INF: Loaded slots");
-  FOR_ALL_THING_GROUPS(group) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
@@ -694,9 +693,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   //
   // Operate on a copy, not live data that might change as we add things
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    auto ids = my.t->all_things_id_at[ group ];
+    auto ids = my.t->all_things_id_at;
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -756,9 +754,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   // and may not have been loaded yet when reiniting.
   //
   uint32_t csum = 0;
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : l->all_things[ group ]) {
+    for (auto p : l->all_things) {
       auto t = p.second;
       csum += t->curr_at.x + t->curr_at.y + t->id.id;
       // t->con("LOAD %f %f %d", t->curr_at.x, t->curr_at.y, t->id.id);

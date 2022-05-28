@@ -130,7 +130,7 @@ float Thing::fall_curr(void)
     // Things that do not tick, like bones, need to fall on the end of the tick
     //
     if (! is_tickable()) {
-      level->all_things_pending_fall[ group_get() ].insert(std::pair(id, this));
+      level->all_things_pending_fall.insert(std::pair(id, this));
     }
     return 0;
   }

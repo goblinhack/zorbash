@@ -17,9 +17,8 @@ bool Thing::ai_obstacle_for_me(point p)
   //
   // Avoid threats and treat them as obstacles
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto &t : get(level->all_things_ptr_at[ group ], p.x, p.y)) {
+    for (auto &t : get(level->all_things_ptr_at, p.x, p.y)) {
       if (unlikely(! t)) {
         continue;
       }
@@ -53,9 +52,8 @@ bool Tp::ai_obstacle_for_me(Levelp level, point p)
   //
   // Avoid threats and treat them as obstacles
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto &t : get(level->all_things_ptr_at[ group ], p.x, p.y)) {
+    for (auto &t : get(level->all_things_ptr_at, p.x, p.y)) {
       if (unlikely(! t)) {
         continue;
       }

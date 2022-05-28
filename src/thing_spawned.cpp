@@ -113,9 +113,8 @@ void Thing::destroy_spawned(Thingp defeater)
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : level->all_things[ group ]) {
+    for (auto p : level->all_things) {
       auto spawner = p.second;
       auto o       = spawner->immediate_spawned_owner();
       if (o && (o == this)) {
@@ -140,9 +139,8 @@ void Thing::unleash_spawners_things(void)
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : level->all_things[ group ]) {
+    for (auto p : level->all_things) {
       auto spawner = p.second;
       auto o       = spawner->immediate_spawned_owner();
       if (o && (o == this)) {

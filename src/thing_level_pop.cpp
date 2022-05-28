@@ -238,8 +238,7 @@ void Thing::level_pop(void)
     i_set_water = false;
     level->gfx_water_unset(mx, my);
   }
-  int group = group_get();
-  level->remove_thing(last_attached.x, last_attached.y, id, group);
+  level->remove_thing(last_attached.x, last_attached.y, id);
 
   if (is_lava() || is_fire()) {
     level->is_heatmap_valid = false;

@@ -42,9 +42,6 @@ void Level::display_ascii_map(point tl, point br)
           t->blit_ascii(tl, br, p);
         }
         FOR_ALL_THINGS_END()
-
-        FOR_TMP_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_ascii(tl, br, p); }
-        FOR_ALL_THINGS_END()
       }
     }
   }

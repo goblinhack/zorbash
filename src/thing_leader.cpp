@@ -243,9 +243,8 @@ void Thing::release_followers(void)
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : level->all_things[ group ]) {
+    for (auto p : level->all_things) {
       auto follower = p.second;
       auto o        = follower->leader();
       if (o && (o == this)) {
@@ -282,9 +281,8 @@ void Thing::notify_followers_of_death_of_my_leader(void)
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : level->all_things[ group ]) {
+    for (auto p : level->all_things) {
       auto follower = p.second;
       auto o        = follower->leader();
       if (o && (o == this)) {
@@ -309,9 +307,8 @@ std::list< Thingp > Thing::all_followers_get(void)
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : level->all_things[ group ]) {
+    for (auto p : level->all_things) {
       auto follower = p.second;
       auto leader   = follower->leader();
       if (leader && (leader == this)) {

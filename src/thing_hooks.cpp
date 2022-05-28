@@ -191,9 +191,8 @@ void Thing::remove_all_references()
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group)
     {
-      for (auto p : level->all_things[ group ]) {
+      for (auto p : level->all_things) {
         auto t = p.second;
         auto o = t->immediate_owner();
         if (o == this) {
@@ -209,9 +208,8 @@ void Thing::remove_all_references()
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group)
     {
-      for (auto p : level->all_things[ group ]) {
+      for (auto p : level->all_things) {
         auto t = p.second;
         auto o = t->immediate_mob();
         if (o == this) {
@@ -227,9 +225,8 @@ void Thing::remove_all_references()
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group)
     {
-      for (auto p : level->all_things[ group ]) {
+      for (auto p : level->all_things) {
         auto t = p.second;
         auto o = t->leader();
         if (o == this) {
@@ -245,9 +242,8 @@ void Thing::remove_all_references()
     //
     // Slow, but not used too often
     //
-    FOR_ALL_THING_GROUPS(group)
     {
-      for (auto p : level->all_things[ group ]) {
+      for (auto p : level->all_things) {
         auto t = p.second;
         auto o = t->immediate_spawned_owner();
         if (o == this) {
@@ -259,9 +255,8 @@ void Thing::remove_all_references()
 
   IF_DEBUG3
   {
-    FOR_ALL_THING_GROUPS(group)
     {
-      for (auto p : level->all_things[ group ]) {
+      for (auto p : level->all_things) {
         auto t = p.second;
         if (t == this) {
           continue;
@@ -300,8 +295,7 @@ void Thing::remove_all_references()
       }
     }
 
-    int group = group_get();
-    for (auto p : level->all_things_of_interest[ group ]) {
+    for (auto p : level->all_things_of_interest) {
       auto t = p.second;
       if (t == this) {
         continue;
@@ -339,7 +333,7 @@ void Thing::remove_all_references()
       }
     }
 
-    for (auto p : level->all_animated_things[ group ]) {
+    for (auto p : level->all_animated_things) {
       auto t = p.second;
       if (t == this) {
         continue;

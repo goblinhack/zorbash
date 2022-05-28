@@ -171,9 +171,8 @@ void Thing::destroy_minions(Thingp defeater)
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : level->all_things[ group ]) {
+    for (auto p : level->all_things) {
       auto minion = p.second;
       auto o      = minion->immediate_mob();
       if (o && (o == this)) {
@@ -202,9 +201,8 @@ void Thing::unleash_minions(void)
   //
   // Slow, but not used too often
   //
-  FOR_ALL_THING_GROUPS(group)
   {
-    for (auto p : level->all_things[ group ]) {
+    for (auto p : level->all_things) {
       auto minion = p.second;
       auto o      = minion->immediate_mob();
       if (o && (o == this)) {
