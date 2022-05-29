@@ -69,17 +69,25 @@ void Level::things_gc(bool force)
     delete t;
   }
 
-  {
-    for (auto &i : all_things_of_interest_pending_remove) {
-      all_things_of_interest.erase(i.first);
-    }
-    all_things_of_interest_pending_remove = {};
-
-    for (auto &i : all_things_of_interest_pending_add) {
-      all_things_of_interest.insert(i);
-    }
-    all_things_of_interest_pending_add = {};
+  for (auto &i : interesting_things_pending_remove) {
+    interesting_things.erase(i.first);
   }
+  interesting_things_pending_remove = {};
+
+  for (auto &i : interesting_things_pending_add) {
+    interesting_things.insert(i);
+  }
+  interesting_things_pending_add = {};
+
+  for (auto &i : tickable_things_pending_remove) {
+    tickable_things.erase(i.first);
+  }
+  tickable_things_pending_remove = {};
+
+  for (auto &i : tickable_things_pending_add) {
+    tickable_things.insert(i);
+  }
+  tickable_things_pending_add = {};
 }
 
 void Level::things_gc_force(void)

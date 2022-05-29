@@ -22,13 +22,13 @@ void Level::assign_leaders_and_followers(void)
   //
   // Fist get all candidate followers
   //
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+  FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_able_to_follow()) {
       cands.push_back(t);
     }
   }
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
+  FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 
   if (! cands.size()) {
     log("Assign leaders and followers: none found");

@@ -163,7 +163,7 @@ void Game::place_player(void)
           t->carry(w);
           t->enchant_without_stone(w);
         }
-        if (0) {
+        if (1) {
           auto w = level->thing_new("staff_descent", point(x, y));
           t->carry(w);
           t->enchant_without_stone(w);

@@ -78,7 +78,7 @@ def tp_init(name, text_name, short_text_name):
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")
     my.text_description(self, "A wand of snowballs.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
+    my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker

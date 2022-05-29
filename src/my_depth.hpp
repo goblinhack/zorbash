@@ -48,8 +48,9 @@ enum {
 
 enum {
   MAP_TICK_PRIO_VERY_HIGH, // e.g. Lasers
-  MAP_TICK_PRIO_HIGH,
-  MAP_TICK_PRIO_NORMAL,
+  MAP_TICK_PRIO_HIGH,      // Player
+  MAP_TICK_PRIO_NORMAL,    // Monsters
+  MAP_TICK_PRIO_LOW,       // Sewers, braziers
   MAP_TICK_PRIO,
 };
 

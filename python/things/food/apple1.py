@@ -20,7 +20,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_loggable(self, True)
     my.is_organic(self, True)
     my.is_throwable(self, True)
-    my.is_tickable(self, True)
     my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
@@ -31,7 +30,6 @@ def tp_init(name, text_name, short_text_name):
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Juicy apple.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker

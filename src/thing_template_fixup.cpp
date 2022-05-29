@@ -37,6 +37,12 @@ void tp_fixup(void)
       }
     }
 
+    if (! tp->on_idle_tick_freq_dice_str().empty()) {
+      if (! tp->is_tickable()) {
+        DIE("Tp %s has idle tick action but is not tickable?", tp->name().c_str());
+      }
+    }
+
     if (tp->is_very_combustible()) {
       tp->is_combustible_set(true);
     }

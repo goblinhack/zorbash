@@ -16,7 +16,6 @@ def tp_init(name):
     my.is_loggable(self, True)
     my.is_removeable_if_out_of_slots(self, True)
     my.is_smoke(self, True)
-    my.is_tickable(self, True)  # for lifespan tick
     my.on_fall_do(self, "me.on_fall()")
     my.text_a_or_an(self, "")
     my.text_description(self, "Whisps of smoke.")

@@ -26,7 +26,6 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_flat(self, True)
     my.is_interesting(self, True)
-    my.is_tickable(self, True)
     my.on_death_do(self, "bridge.on_death()")
     my.text_a_or_an(self, "the")
     my.text_description(self, "Shaky bridge.")

@@ -126,7 +126,7 @@ void Level::place_the_grid(void)
 int Level::get_total_monst_hp_level(void)
 {
   int hp = 0;
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_monst()) {
       hp += t->health_max();
@@ -136,14 +136,14 @@ int Level::get_total_monst_hp_level(void)
       hp += t->health_max() * t->minion_limit();
     }
   }
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return hp;
 }
 
 int Level::get_total_monst_damage_level(void)
 {
   int damage = 0;
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_mob() || t->is_monst()) {
       damage += t->damage_melee_dice().max_roll();
@@ -162,32 +162,32 @@ int Level::get_total_monst_damage_level(void)
       damage += t->damage_natural_dice().max_roll();
     }
   }
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return damage;
 }
 
 int Level::get_total_loot_level(void)
 {
   int value = 0;
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_treasure() || t->is_weapon() || t->is_wand_or_staff()) {
       value += t->gold_value();
     }
   }
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return value;
 }
 
 int Level::get_total_food_level(void)
 {
   int value = 0;
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_food()) {
       value += t->nutrition_get();
     }
   }
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
   return value;
 }

@@ -44,7 +44,6 @@ def tp_init(name):
     my.is_interesting(self, True)
     my.is_light_blocker(self, True)
     my.is_obs_wall_or_door(self, True)
-    my.is_tickable(self, True)  # So it can interact with fire
     my.noise_blocker(self, True)
     my.noise_on_open(self, 60)
     my.noise_on_you_are_hit_and_now_dead(self, 70)
@@ -57,7 +56,6 @@ def tp_init(name):
     my.stat_def(self, 20)
     my.text_a_or_an(self, "the")
     my.text_description(self, "A door covered in claw marks.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

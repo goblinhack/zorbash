@@ -16,7 +16,7 @@ def tp_init(name):
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.text_a_or_an(self, "a")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
+    my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_CARRY)
     # end sort marker

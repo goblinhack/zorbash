@@ -27,7 +27,6 @@ def tp_init(name, text_name, tiles=[]):
     my.is_floor_deco(self, True)
     my.is_heavy(self, True)
     my.is_shovable(self, True)
-    my.is_tickable(self, True)  # for pushing and falling
     my.light_color(self, "orange")
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
@@ -35,7 +34,6 @@ def tp_init(name, text_name, tiles=[]):
     my.temperature(self, 100)
     my.text_a_or_an(self, "a")
     my.text_description(self, "A beacon of light in this blighted place.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

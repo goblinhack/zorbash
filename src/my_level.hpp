@@ -222,24 +222,32 @@ public:
   std::map< ThingId, Thingp > all_things {};
 
   //
-  // For all things that move, like monsters, or those that do not, like
-  // wands, and even those that do not move but can be destroyed, like
-  // walls. Omits things like floors, corridors, the grid; those that
-  // generally do nothing or are hidden.
+  // For all things that move, like monsters, or those that do not, like wands, and even those that do not move but
+  // can be destroyed, like walls. Omits things like floors, corridors, the grid; those that generally do nothing or
+  // are hidden.
   //
-  bool                        all_things_of_interest_walk_in_progress {};
-  std::map< ThingId, Thingp > all_things_of_interest {};
-  std::map< ThingId, Thingp > all_things_of_interest_pending_add {};
-  std::map< ThingId, Thingp > all_things_of_interest_pending_remove {};
+  bool                        interesting_things_walk_in_progress {};
+  std::map< ThingId, Thingp > interesting_things {};
+  std::map< ThingId, Thingp > interesting_things_pending_add {};
+  std::map< ThingId, Thingp > interesting_things_pending_remove {};
+
+  //
+  // Only things that actively do something in the level tick, like
+  // monsters or maybe magical items that do something per tick.
+  //
+  bool                        tickable_things_walk_in_progress {};
+  std::map< ThingId, Thingp > tickable_things {};
+  std::map< ThingId, Thingp > tickable_things_pending_add {};
+  std::map< ThingId, Thingp > tickable_things_pending_remove {};
 
   //
   // A smaller set of things that are animated. This is more efficient to
   // talk as it is called per frame.
   //
-  bool                        all_animated_things_walk_in_progress {};
-  std::map< ThingId, Thingp > all_animated_things {};
-  std::map< ThingId, Thingp > all_animated_things_pending_add {};
-  std::map< ThingId, Thingp > all_animated_things_pending_remove {};
+  bool                        animated_things_walk_in_progress {};
+  std::map< ThingId, Thingp > animated_things {};
+  std::map< ThingId, Thingp > animated_things_pending_add {};
+  std::map< ThingId, Thingp > animated_things_pending_remove {};
 
   //
   // This is for things that do not tick, like water; that need to fall
@@ -252,10 +260,13 @@ public:
   std::map< ThingId, Thingp > all_things_to_be_destroyed {};
 
   //
-  // All thing IDs
+  // All thing IDs at a given map cell
   //
   std::array< std::array< std::array< ThingId, MAP_SLOTS >, MAP_HEIGHT >, MAP_WIDTH > all_things_id_at {};
 
+  //
+  // All thing pointers at a given map cell
+  //
   std::array< std::array< std::vector< Thingp >, MAP_HEIGHT >, MAP_WIDTH > all_things_ptr_at {};
 
   //
@@ -334,8 +345,8 @@ public:
   bool  map_debug_valid {};
 
   //
-  // We regenerate this map every player move, and indicates the shortest
-  // path to the player. Used for sound effects and lighting checks.
+  // We regenerate this map every player move, and indicates the shortest path to the player. Used for sound effects
+  // and lighting checks.
   //
   Dmap dmap_to_player;
 
@@ -387,12 +398,12 @@ public:
 //
 // Things that can move or fall or catch fire etc...
 //
-#define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t)                                                              \
+#define FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t)                                                                \
   {                                                                                                                  \
-    level->all_things_of_interest_walk_in_progress = true;                                                           \
-    auto c                                         = level->all_things_of_interest;                                  \
-    auto i                                         = level->all_things_of_interest.begin();                          \
-    while (i != level->all_things_of_interest.end()) {                                                               \
+    level->interesting_things_walk_in_progress = true;                                                               \
+    auto c                                     = level->interesting_things;                                          \
+    auto i                                     = level->interesting_things.begin();                                  \
+    while (i != level->interesting_things.end()) {                                                                   \
       auto t = i->second;                                                                                            \
       /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
       i++;                                                                                                           \
@@ -403,60 +414,54 @@ public:
                                                                                                                      \
       verify(MTYPE_THING, t);
 
-#define FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)                                                             \
-  if (i == level->all_things_of_interest.end()) {                                                                    \
+#define FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)                                                               \
+  if (i == level->interesting_things.end()) {                                                                        \
     break;                                                                                                           \
   }                                                                                                                  \
   }                                                                                                                  \
-  level->all_things_of_interest_walk_in_progress = false;                                                            \
+  level->interesting_things_walk_in_progress = false;                                                                \
+  level->handle_all_pending_things();                                                                                \
+  }
+
+//
+// Things that can move or fall or catch fire etc...
+//
+#define FOR_ALL_TICKABLE_THINGS_ON_LEVEL(level, t)                                                                   \
+  {                                                                                                                  \
+    level->tickable_things_walk_in_progress = true;                                                                  \
+    auto c                                  = level->tickable_things;                                                \
+    auto i                                  = level->tickable_things.begin();                                        \
+    while (i != level->tickable_things.end()) {                                                                      \
+      auto t = i->second;                                                                                            \
+      /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
+      i++;                                                                                                           \
+      verify(MTYPE_THING, t);
+
+#define FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(level)                                                                  \
+  if (i == level->tickable_things.end()) {                                                                           \
+    break;                                                                                                           \
+  }                                                                                                                  \
+  }                                                                                                                  \
+  level->tickable_things_walk_in_progress = false;                                                                   \
   level->handle_all_pending_things();                                                                                \
   }
 
 #define FOR_ALL_ANIMATED_THINGS_LEVEL(level, t)                                                                      \
   {                                                                                                                  \
-    level->all_animated_things_walk_in_progress = true;                                                              \
-    auto c                                      = level->all_animated_things;                                        \
-    auto i                                      = level->all_animated_things.begin();                                \
-    while (i != level->all_animated_things.end()) {                                                                  \
+    level->animated_things_walk_in_progress = true;                                                                  \
+    auto c                                  = level->animated_things;                                                \
+    auto i                                  = level->animated_things.begin();                                        \
+    while (i != level->animated_things.end()) {                                                                      \
       auto t = i->second;                                                                                            \
       i++;                                                                                                           \
       verify(MTYPE_THING, t);
 
 #define FOR_ALL_ANIMATED_THINGS_LEVEL_END(level)                                                                     \
-  if (i == level->all_animated_things.end()) {                                                                       \
+  if (i == level->animated_things.end()) {                                                                           \
     break;                                                                                                           \
   }                                                                                                                  \
   }                                                                                                                  \
-  level->all_animated_things_walk_in_progress = false;                                                               \
-  level->handle_all_pending_things();                                                                                \
-  }
-
-//
-// Things that make decisions or have a lifespan
-//
-#define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(level, t)                                                              \
-  {                                                                                                                  \
-    level->all_things_of_interest_walk_in_progress = true;                                                           \
-    auto c                                         = level->all_things_of_interest;                                  \
-    auto i                                         = level->all_things_of_interest.begin();                          \
-    while (i != level->all_things_of_interest.end()) {                                                               \
-      auto t = i->second;                                                                                            \
-      /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
-      i++;                                                                                                           \
-      if (t->is_hidden) {                                                                                            \
-        if (! t->is_tickable()) { /* e.g. carried wand */                                                            \
-          continue;                                                                                                  \
-        }                                                                                                            \
-      }                                                                                                              \
-                                                                                                                     \
-      verify(MTYPE_THING, t);
-
-#define FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(level)                                                             \
-  if (i == level->all_things_of_interest.end()) {                                                                    \
-    break;                                                                                                           \
-  }                                                                                                                  \
-  }                                                                                                                  \
-  level->all_things_of_interest_walk_in_progress = false;                                                            \
+  level->animated_things_walk_in_progress = false;                                                                   \
   level->handle_all_pending_things();                                                                                \
   }
 

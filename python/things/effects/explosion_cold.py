@@ -19,7 +19,6 @@ def tp_init(name):
     my.is_explosion(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
-    my.is_tickable(self, True)  # So it can interact with fire
     my.noise_on_born(self, 70)
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, 100)

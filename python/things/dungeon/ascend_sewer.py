@@ -27,7 +27,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.on_idle_tick_freq_dice(self, "1d50+50:ascend_sewer.spawn()")
     my.text_a_or_an(self, "a")
     my.text_description(self, "A slime coated sewer pipe.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
+    my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
