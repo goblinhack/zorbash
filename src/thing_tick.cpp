@@ -283,8 +283,7 @@ void Thing::tick(void)
   TRACE_AND_INDENT();
 
   //
-  // This is expensive to calculate when moving, but it should not
-  // change during the tick, so do it now.
+  // This is expensive to calculate when moving, but it should not change during the tick, so do it now.
   //
   auto infop = maybe_infop();
   if (infop) {

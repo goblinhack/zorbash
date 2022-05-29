@@ -103,7 +103,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_moveable(self, True)
     my.is_potion(self, True)
     my.is_throwable(self, True)
-    my.is_tickable(self, True)  # So it can interact with fire
     my.is_treasure_class_b(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)

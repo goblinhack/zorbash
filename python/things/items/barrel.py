@@ -54,7 +54,6 @@ def tp_init(name, text_name):
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
     my.is_shovable(self, True)
-    my.is_tickable(self, True)  # So it can interact with fire
     my.is_very_combustible(self, True)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
@@ -62,7 +61,6 @@ def tp_init(name, text_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
     my.text_description(self, "A barrel of oil. Why? Don't ask.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BARREL)
     # end sort marker

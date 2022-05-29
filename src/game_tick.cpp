@@ -164,11 +164,11 @@ bool Game::tick_end(void)
     // For debugging consistent randomness
     //
     uint32_t h = 0;
-    FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(level, t) {
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t) {
       h += (int)t->curr_at.x;
       h += (int)t->curr_at.y;
       t->con("THING AT");
-    } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(level)
+    } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
     LOG("TICK %d hash %u rand %d", tick_current, h, pcg_random_range(1, 10000));
 #endif
   }

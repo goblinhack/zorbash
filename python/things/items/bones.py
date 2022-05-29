@@ -14,7 +14,6 @@ def tp_init(name):
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
     my.text_description(self, "Some poor creature's remnants.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker

@@ -53,7 +53,6 @@ def tp_init(name):
     my.stat_def(self, 20)
     my.text_a_or_an(self, "the")
     my.text_description(self, "A metal door that's not for opening.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

@@ -32,7 +32,6 @@ def key_init(name, text_name):
     my.rarity(self, my.RARITY_RARE)
     my.text_a_or_an(self, "an")
     my.text_description(self, "A magical golden key.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker

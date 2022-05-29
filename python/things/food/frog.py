@@ -23,7 +23,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_meltable(self, True)
     my.is_organic(self, True)
     my.is_throwable(self, True)
-    my.is_tickable(self, True)
     my.is_usable(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
@@ -35,7 +34,6 @@ def tp_init(name, text_name, short_text_name):
     my.rarity(self, my.RARITY_UNCOMMON)
     my.text_a_or_an(self, "a")
     my.text_description(self, "The food of the Gods: a chocolate frog.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker

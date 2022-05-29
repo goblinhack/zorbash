@@ -13,11 +13,11 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)
     my.is_acid(self, True)
+    my.is_tickable(self, True)  # for lifespan
     my.is_hazard(self, True)
     my.is_loggable(self, True)
     my.is_meat_eater(self, True)
     my.is_removeable_if_out_of_slots(self, True)
-    my.is_tickable(self, True)  # for lifespan tick
     my.lifespan_dice(self, "1d20+20")
     my.light_color(self, "green")
     my.light_dist(self, 2)

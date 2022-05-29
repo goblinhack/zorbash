@@ -16,7 +16,6 @@ def tp_init(name):
     my.is_explosion(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
-    my.is_tickable(self, True)
     my.noise_on_born(self, 50)
     my.on_born_do(self, "me.on_born()")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)

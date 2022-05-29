@@ -73,7 +73,6 @@ def tp_init(name, text_name, short_text_name):
     my.gold_value_dice(self, "500")
     my.is_able_to_fall(self, True)
     my.is_cloak(self, True)
-    my.is_tickable(self, True)
     my.on_move_do(self, "me.on_move()")
     my.on_waiting_do(self, "me.on_waiting()")
     my.is_auto_equipped(self, True)

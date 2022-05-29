@@ -269,7 +269,7 @@ bool Thing::fall_to_next_level(void)
       if (is_player()) {
         game->level = l;
         msg("%%fg=red$You tumble into the void!%%fg=reset$");
-        popup("Aargh");
+        popup("Aargh!");
       } else {
         if (distance_to_player() >= DMAP_IS_PASSABLE) {
           if (is_monst()) {

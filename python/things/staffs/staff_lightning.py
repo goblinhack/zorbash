@@ -36,7 +36,7 @@ def on_fall(me, x, y):
 def tp_init(name, text_name, short_text_name):
     self = tp.Tp(name, text_name, short_text_name)
     # start sort marker
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
+    my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.gfx_ascii_mode_shown(self, True)
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 5)

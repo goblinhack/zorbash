@@ -32,8 +32,6 @@ def tp_init(name):
     my.is_fire(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
-    my.is_tickable(self, True)
-    my.is_tickable(self, True)  # So it can interact with fire
     my.light_color(self, "yellow")
     my.light_dist(self, 4)
     my.noise_on_born(self, 100)

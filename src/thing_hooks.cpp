@@ -295,7 +295,7 @@ void Thing::remove_all_references()
       }
     }
 
-    for (auto p : level->all_things_of_interest) {
+    for (auto p : level->interesting_things) {
       auto t = p.second;
       if (t == this) {
         continue;
@@ -333,7 +333,7 @@ void Thing::remove_all_references()
       }
     }
 
-    for (auto p : level->all_animated_things) {
+    for (auto p : level->animated_things) {
       auto t = p.second;
       if (t == this) {
         continue;

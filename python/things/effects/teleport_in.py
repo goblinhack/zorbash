@@ -17,7 +17,6 @@ def tp_init(name):
     my.gfx_pixelart_shadow_short(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
-    my.is_tickable(self, True)  # So it can interact with fire
     my.light_color(self, "cyan")
     my.light_dist(self, 2)
     my.noise_on_born(self, 100)

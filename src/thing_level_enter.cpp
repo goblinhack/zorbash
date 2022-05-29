@@ -28,12 +28,12 @@ void Thing::level_enter(bool rejoin)
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
-    if (level->all_things_of_interest_walk_in_progress) {
-      level->all_things_of_interest_pending_remove.erase(id);
-      level->all_things_of_interest_pending_add.insert(std::pair(id, this));
+    if (level->interesting_things_walk_in_progress) {
+      level->interesting_things_pending_remove.erase(id);
+      level->interesting_things_pending_add.insert(std::pair(id, this));
       dbg3("Pending remove and then add to interesting things");
     } else {
-      auto result = level->all_things_of_interest.insert(std::pair(id, this));
+      auto result = level->interesting_things.insert(std::pair(id, this));
       if (result.second == false) {
         if (! rejoin) {
           err("Failed to insert into active thing map");
@@ -43,16 +43,35 @@ void Thing::level_enter(bool rejoin)
     }
   }
 
+  if (is_tickable()) {
+    //
+    // If doing a walk, we must be careful and cannot modify the map
+    //
+    if (level->tickable_things_walk_in_progress) {
+      level->tickable_things_pending_remove.erase(id);
+      level->tickable_things_pending_add.insert(std::pair(id, this));
+      dbg3("Pending remove and then add to tickable things");
+    } else {
+      auto result = level->tickable_things.insert(std::pair(id, this));
+      if (result.second == false) {
+        if (! rejoin) {
+          err("Failed to insert into active thing map");
+        }
+      }
+      dbg3("Added to tickable things");
+    }
+  }
+
   if (gfx_pixelart_animated()) {
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
-    if (level->all_animated_things_walk_in_progress) {
-      level->all_animated_things_pending_remove.erase(id);
-      level->all_animated_things_pending_add.insert(std::pair(id, this));
+    if (level->animated_things_walk_in_progress) {
+      level->animated_things_pending_remove.erase(id);
+      level->animated_things_pending_add.insert(std::pair(id, this));
       dbg3("Pending remove and then add to animated things");
     } else {
-      auto result = level->all_animated_things.insert(std::pair(id, this));
+      auto result = level->animated_things.insert(std::pair(id, this));
       if (result.second == false) {
         if (! rejoin) {
           err("Failed to insert into animated thing map");

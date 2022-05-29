@@ -60,14 +60,29 @@ void Thing::level_leave(void)
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
-    if (level->all_things_of_interest_walk_in_progress) {
-      level->all_things_of_interest_pending_add.erase(id);
-      level->all_things_of_interest_pending_remove.insert(std::pair(id, this));
+    if (level->interesting_things_walk_in_progress) {
+      level->interesting_things_pending_add.erase(id);
+      level->interesting_things_pending_remove.insert(std::pair(id, this));
       dbg3("Pending remove from interesting things");
     } else {
-      level->all_things_of_interest.erase(id);
-      level->all_things_of_interest_pending_add.erase(id);
+      level->interesting_things.erase(id);
+      level->interesting_things_pending_add.erase(id);
       dbg3("Removed from interesting things");
+    }
+  }
+
+  if (is_tickable()) {
+    //
+    // If doing a walk, we must be careful and cannot modify the map
+    //
+    if (level->tickable_things_walk_in_progress) {
+      level->tickable_things_pending_add.erase(id);
+      level->tickable_things_pending_remove.insert(std::pair(id, this));
+      dbg3("Pending remove from tickable things");
+    } else {
+      level->tickable_things.erase(id);
+      level->tickable_things_pending_add.erase(id);
+      dbg3("Removed from tickable things");
     }
   }
 
@@ -75,13 +90,13 @@ void Thing::level_leave(void)
     //
     // If doing a walk, we must be careful and cannot modify the map
     //
-    if (level->all_animated_things_walk_in_progress) {
-      level->all_animated_things_pending_add.erase(id);
-      level->all_animated_things_pending_remove.insert(std::pair(id, this));
+    if (level->animated_things_walk_in_progress) {
+      level->animated_things_pending_add.erase(id);
+      level->animated_things_pending_remove.insert(std::pair(id, this));
       dbg3("Pending remove from animated things");
     } else {
-      level->all_animated_things.erase(id);
-      level->all_animated_things_pending_add.erase(id);
+      level->animated_things.erase(id);
+      level->animated_things_pending_add.erase(id);
       dbg3("Removed from animated things");
     }
   }

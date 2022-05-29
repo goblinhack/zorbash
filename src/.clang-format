@@ -1,6 +1,7 @@
 ---
 Language:        Cpp
 # BasedOnStyle:  LLVM
+ReflowComments : true
 AccessModifierOffset: -2
 AlignAfterOpenBracket: Align
 AlignConsecutiveMacros: true

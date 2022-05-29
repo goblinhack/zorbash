@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_depth.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_player.hpp"
@@ -17,17 +18,17 @@
 
 void Level::handle_all_pending_things(void)
 {
-  for (auto &i : all_animated_things_pending_remove) {
+  for (auto &i : animated_things_pending_remove) {
     // i.second->con("pending remove");
-    all_animated_things.erase(i.first);
+    animated_things.erase(i.first);
   }
-  all_animated_things_pending_remove = {};
+  animated_things_pending_remove = {};
 
-  for (auto &i : all_animated_things_pending_add) {
+  for (auto &i : animated_things_pending_add) {
     // i.second->con("pending add");
-    all_animated_things.insert(i);
+    animated_things.insert(i);
   }
-  all_animated_things_pending_add = {};
+  animated_things_pending_add = {};
 
   for (auto &i : all_things_pending_fall) {
     i.second->fall_to_next_level();
@@ -136,8 +137,8 @@ void Level::tick(void)
   things_gc_if_possible();
 
   //
-  // Update the cursor position. But only if the mouse has moved. So if the
-  // player is moving via keyboard alone, we don't pollute the screen.
+  // Update the cursor position. But only if the mouse has moved. So if the player is moving via keyboard alone, we
+  // don't pollute the screen.
   //
   if (g_opt_ascii) {
     cursor_move();
@@ -259,53 +260,62 @@ void Level::tick(void)
   }
 
   //
-  // For all things that move, like monsters, or those that do not, like
-  // wands, and even those that do not move but can be destroyed, like
-  // walls. Omits things like floors, corridors, the grid; those that
-  // generally do nothing or are hidden.
+  // For all things that move, like monsters, or those that do not, like wands, and even those that do not move but
+  // can be destroyed, like walls. Omits things like floors, corridors, the grid; those that generally do nothing or
+  // are hidden.
   //
   game->things_are_moving = false;
 
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
-  {
-    int remaining = t->movement_remaining();
-    if (remaining <= 0) {
-      continue;
-    }
-
-    if (t->is_waiting) {
-      continue;
-    }
-
-    //
-    // While moves remain, things are still moving
-    //
-    game->things_are_moving = true;
-
-    auto speed = t->move_speed_total();
-    if (speed) {
-      if (player) {
-        remaining -= player->move_speed_total();
-      } else {
-        remaining -= 100;
-      }
-      t->movement_remaining_set(remaining);
-    } else {
-      t->movement_remaining_set(0);
-    }
-
-    uint32_t tick_begin_ms = time_ms();
-    t->tick();
+  //
+  // Tick things in a priority order, so lasers hit first, then the player,
+  // then monsters etc...
+  //
+  for (uint8_t tick_prio = MAP_TICK_PRIO_VERY_HIGH; tick_prio < MAP_TICK_PRIO; tick_prio++) {
+    FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
     {
-      if ((time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
-        t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", time_ms() - tick_begin_ms,
-               THING_TICK_DURATION_TOO_LONG);
+      if (likely(t->tick_prio() != tick_prio)) {
+        continue;
+      }
+
+      int remaining = t->movement_remaining();
+      if (remaining <= 0) {
+        continue;
+      }
+
+      if (t->is_waiting) {
+        continue;
+      }
+
+      //
+      // While moves remain, things are still moving
+      //
+      game->things_are_moving = true;
+
+      auto speed = t->move_speed_total();
+      if (speed) {
+        if (player) {
+          remaining -= player->move_speed_total();
+        } else {
+          remaining -= 100;
+        }
+        t->movement_remaining_set(remaining);
+      } else {
+        t->movement_remaining_set(0);
+      }
+
+      uint32_t tick_begin_ms = time_ms();
+      t->tick();
+      {
+        if ((time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
+          t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", time_ms() - tick_begin_ms,
+                 THING_TICK_DURATION_TOO_LONG);
+        }
       }
     }
+    FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
   }
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
 
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_scheduled_for_jump_end) {
       t->is_scheduled_for_jump_end = false;
@@ -316,13 +326,13 @@ void Level::tick(void)
       t->dead(t->dead_reason_get());
     }
   }
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
   static const int wait_count_max = THING_TICK_WAIT_TOO_LONG;
   static int       wait_count;
   wait_count++;
 
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     //
     // Wait for animation end. Only if the thing is onscreen
@@ -445,7 +455,7 @@ void Level::tick(void)
       }
     }
   }
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
   //
   // If things are still moving, we need to wait.
@@ -478,7 +488,7 @@ void Level::tick(void)
   // location checks on the ends of moves, but this is a backup and will
   // also handle things that do not move, like a wand that is now on fire.
   //
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     //
     // Need to do this even for dead things, so corpses don't hover over
@@ -486,13 +496,13 @@ void Level::tick(void)
     //
     t->location_check();
   }
-  FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
   //
   // Fast moving things may still have stuff to do
   //
   bool work_to_do = game->things_are_moving;
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+  FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
     if (t->movement_remaining() > 0) {
       work_to_do              = true;
@@ -500,7 +510,7 @@ void Level::tick(void)
     }
     t->is_waiting = false;
   }
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
+  FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
   if (work_to_do) {
     return;
   }
@@ -591,11 +601,11 @@ void Level::tick(void)
     // For debugging consistent randomness
     //
     float h = 0;
-    FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL(this, t) {
+    FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t) {
       h += t->curr_at.x;
       h += t->curr_at.y;
       t->con("at %f,%f", t->curr_at.x, t->curr_at.y);
-    } FOR_ALL_THINGS_THAT_INTERACT_ON_LEVEL_END(this)
+    } FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
     CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
 #endif
   }
@@ -659,11 +669,12 @@ void Level::tick_begin_now(void)
 
   dbg("Tick begin now");
   TRACE_AND_INDENT();
+
   game->tick_begin_now();
 
   dbg("Tick add movement to all things");
   TRACE_AND_INDENT();
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL(this, t)
+  FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
     //
     // Give things a bit of time to move
@@ -685,16 +696,19 @@ void Level::tick_begin_now(void)
       t->aip()->recently_hit_by.clear();
     }
   }
-  FOR_ALL_THINGS_THAT_DO_STUFF_ON_LEVEL_END(this)
+  FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 }
 
 void Level::update_all_ticks(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
-    for (auto &i : all_things_of_interest) {
+    for (auto &i : interesting_things) {
       auto t = i.second;
       t->update_tick();
     }
   }
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 }
