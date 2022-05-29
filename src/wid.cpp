@@ -27,6 +27,7 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_inventory.hpp"
+#include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
@@ -6581,6 +6582,7 @@ static void wid_tick_all(void)
           game->request_remake_rightbar = false;
           game->request_remake_skillbox = false;
         }
+        wid_leftbar_init();
         wid_actionbar_init();
         game->request_remake_actionbar = false;
       }
