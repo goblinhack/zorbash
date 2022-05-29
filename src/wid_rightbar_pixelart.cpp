@@ -40,7 +40,7 @@ bool wid_rightbar_pixelart_create(void)
 
   {
     DBG2("Remake rightbar container");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     point tl = make_point(TERM_WIDTH - width, 0);
     point br = make_point(TERM_WIDTH - 1, UI_RIGHTBAR_PIXELART_HEIGHT);
 
@@ -58,7 +58,7 @@ bool wid_rightbar_pixelart_create(void)
 
   {
     DBG2("Remake rightbar level");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "level no");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
@@ -80,7 +80,7 @@ bool wid_rightbar_pixelart_create(void)
   y_at += 1;
   {
     DBG2("Remake rightbar seed");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Seed");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
@@ -98,7 +98,7 @@ bool wid_rightbar_pixelart_create(void)
   y_at += 2;
   {
     DBG2("Remake rightbar title");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "title name");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
@@ -115,7 +115,7 @@ bool wid_rightbar_pixelart_create(void)
 
   {
     DBG2("Remake rightbar gold and keys");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(1, y_at - 2);
@@ -138,7 +138,7 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   {
     DBG2("Remake rightbar health-bar");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
@@ -155,7 +155,7 @@ bool wid_rightbar_pixelart_create(void)
   }
   {
     DBG2("Remake rightbar health-value");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "health-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at + 1);
@@ -176,7 +176,7 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   {
     DBG2("Remake rightbar stamina-bar");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stamina-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
@@ -193,7 +193,7 @@ bool wid_rightbar_pixelart_create(void)
   }
   {
     DBG2("Remake rightbar stamina-value");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stamina-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at + 1);
@@ -214,7 +214,7 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   {
     DBG2("Remake rightbar stats");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(4, y_at + 1);
@@ -234,7 +234,7 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   {
     DBG2("Remake rightbar stats");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at + 1);
@@ -254,7 +254,7 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   {
     DBG2("Remake rightbar stats");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(14, y_at + 1);
@@ -276,7 +276,7 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   {
     DBG2("Remake rightbar stats");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(4, y_at + 1);
@@ -296,7 +296,7 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   {
     DBG2("Remake rightbar stats");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at + 1);
@@ -316,7 +316,7 @@ bool wid_rightbar_pixelart_create(void)
   ///////////////////////////////////////////////////////////////////////////
   {
     DBG2("Remake rightbar stats");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(14, y_at + 1);
