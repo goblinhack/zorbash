@@ -11,6 +11,7 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
+#include "my_wid_leftbar.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
@@ -95,6 +96,7 @@ void Game::change_state(int new_state)
       wid_actionbar_close_all_popups();
       wid_hide(wid_topcon_window);
       wid_rightbar_fini();
+      wid_leftbar_fini();
       wid_actionbar_fini();
       wid_thing_info_fini("change state");
       request_remake_rightbar  = false;

@@ -16,6 +16,7 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_inventory.hpp"
+#include "my_wid_leftbar.hpp"
 #include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
@@ -71,6 +72,9 @@ void Game::start(void)
 
   wid_rightbar_fini();
   wid_rightbar_init();
+
+  wid_leftbar_fini();
+  wid_leftbar_init();
 
   wid_topcon_fini();
   wid_topcon_init();

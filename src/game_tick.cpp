@@ -12,6 +12,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
+#include "my_wid_leftbar.hpp"
 
 void Game::tick_begin(const std::string &why)
 {
@@ -182,6 +183,11 @@ bool Game::tick_end(void)
   // Recreate as we might need to show location specific icons, like aacend ot descend
   //
   wid_actionbar_init();
+
+  //
+  // Update the leftbar with what is now visible.
+  //
+  wid_leftbar_init();
 
   tick_begin_ms = 0;
   tick_dt       = 0;

@@ -20,6 +20,7 @@
 #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_error.hpp"
+#include "my_wid_leftbar.hpp"
 #include "my_wid_popup.hpp"
 #include "my_wid_progress_bar.hpp"
 #include "my_wid_rightbar.hpp"
@@ -502,22 +503,22 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   TRACE_AND_INDENT();
   auto l = my.t;
 
-  l->player                             = nullptr;
-  l->cursor                             = nullptr;
-  l->all_things_id_at                   = {};
-  l->all_things_ptr_at                  = {};
-  l->all_things                         = {};
-  l->interesting_things                 = {};
-  l->interesting_things_pending_add     = {};
-  l->interesting_things_pending_remove  = {};
-  l->tickable_things                    = {};
-  l->tickable_things_pending_add        = {};
-  l->tickable_things_pending_remove     = {};
-  l->animated_things                = {};
-  l->animated_things_pending_add    = {};
-  l->animated_things_pending_remove = {};
-  l->all_things_to_be_destroyed         = {};
-  l->all_things_pending_fall            = {};
+  l->player                            = nullptr;
+  l->cursor                            = nullptr;
+  l->all_things_id_at                  = {};
+  l->all_things_ptr_at                 = {};
+  l->all_things                        = {};
+  l->interesting_things                = {};
+  l->interesting_things_pending_add    = {};
+  l->interesting_things_pending_remove = {};
+  l->tickable_things                   = {};
+  l->tickable_things_pending_add       = {};
+  l->tickable_things_pending_remove    = {};
+  l->animated_things                   = {};
+  l->animated_things_pending_add       = {};
+  l->animated_things_pending_remove    = {};
+  l->all_things_to_be_destroyed        = {};
+  l->all_things_pending_fall           = {};
 
   uint32_t csum_in = 0;
   in >> bits(csum_in);
@@ -1155,6 +1156,8 @@ bool Game::load(std::string file_to_load, class Game &target)
     wid_visible(wid_botcon_window);
     wid_rightbar_fini();
     wid_rightbar_init();
+    wid_leftbar_fini();
+    wid_leftbar_init();
     wid_actionbar_init();
   }
 
