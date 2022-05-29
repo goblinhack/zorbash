@@ -10,7 +10,7 @@ def tp_init(name):
     my.is_the_grid(self, True)
     my.text_a_or_an(self, "the")
     my.text_description(self, "The grid.")
-
+    # end sort marker
     my.tile(self, tile=name)
     my.tp_update(self)
 

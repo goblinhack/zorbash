@@ -13,12 +13,6 @@ def tp_init(name):
     my.gfx_pixelart_attack_anim(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
-    my.is_loggable(self, True)
-    my.is_moveable(self, True)
-    my.is_removeable_if_out_of_slots(self, True)
-    my.text_a_or_an(self, "a")
-    my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_SWING)
     # end sort marker
     _common_sword_swing.init(self, name)
     my.tp_update(self)
