@@ -20,9 +20,6 @@
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 
-//
-// Create the test
-//
 bool wid_rightbar_pixelart_create(void)
 {
   DBG2("Remake rightbar");
@@ -38,14 +35,14 @@ bool wid_rightbar_pixelart_create(void)
     return false;
   }
 
-  int width = UI_SIDEBAR_RIGHT_WIDTH;
+  int width = UI_RIGHTBAR_WIDTH;
   int y_at  = 6;
 
   {
     DBG2("Remake rightbar container");
     TRACE_AND_INDENT();
     point tl = make_point(TERM_WIDTH - width, 0);
-    point br = make_point(TERM_WIDTH - 1, UI_SIDEBAR_RIGHT_PIXELART_HEIGHT);
+    point br = make_point(TERM_WIDTH - 1, UI_RIGHTBAR_PIXELART_HEIGHT);
 
     wid_rightbar = wid_new_square_window("wid rightbar");
     wid_set_ignore_scroll_events(wid_rightbar, true);

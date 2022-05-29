@@ -13,6 +13,7 @@
 #include "my_wid.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_keyboard.hpp"
+#include "my_wid_leftbar.hpp"
 #include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
@@ -41,6 +42,7 @@ void Game::wid_choose_player_name_select(void)
   CON("Choose player name menu");
 
   wid_rightbar_fini();
+  wid_leftbar_fini();
   wid_inventory_fini();
   wid_skillbox_fini();
   wid_thing_info_fini("choose name");

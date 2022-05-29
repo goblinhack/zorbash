@@ -35,7 +35,7 @@ bool wid_rightbar_ascii_create(void)
     return false;
   }
 
-  int width = UI_SIDEBAR_RIGHT_WIDTH;
+  int width = UI_RIGHTBAR_WIDTH;
   int y_at  = 0;
 
   {
