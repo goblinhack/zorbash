@@ -13,6 +13,7 @@ def tp_init(name):
     my.gfx_pixelart_attack_anim(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
+    # end sort marker
     _common_sword_swing.init(self, name)
     my.tp_update(self)
 
