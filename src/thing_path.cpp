@@ -29,7 +29,7 @@ bool Thing::path_pop_next_move(void)
 
   TRACE_NO_INDENT();
   std::string s = "";
-  IF_DEBUG2
+  IF_DEBUG3
   {
     for (auto p : ai->move_path) {
       s += " " + p.to_string();

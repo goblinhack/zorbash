@@ -224,7 +224,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   // Some things start life open
   //
   if (unlikely(tpp->is_ascend_dungeon())) {
-    if (level->world_at.z > 1) {
+    if (level->dungeon_walk_order_level_no > 1) {
       is_open = true;
     }
   }

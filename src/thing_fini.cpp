@@ -94,7 +94,13 @@ void Thing::destroy(void)
     level->player = nullptr;
   }
 
-  level->wid_leftbar_things.remove(id);
+  {
+    if (std::find(level->wid_leftbar_things.begin(), level->wid_leftbar_things.end(), id) !=
+        level->wid_leftbar_things.end()) {
+      dbg2("Remove from wid leftbar");
+      level->wid_leftbar_things.remove(id);
+    }
+  }
 
   if (level->cursor == this) {
     dbg2("Removed cursor");
