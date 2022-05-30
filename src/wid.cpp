@@ -427,7 +427,6 @@ void wid_set_thing_id_context(Widp w, Thingp t)
     return;
   }
   w->thing_id_context = t->id;
-  t->itemsp()->wid    = w;
 }
 
 ThingId wid_get_thing_id_context(Widp w)
@@ -448,7 +447,6 @@ void wid_set_thing_id2_context(Widp w, Thingp t)
     return;
   }
   w->thing_id2_context = t->id;
-  t->itemsp()->wid     = w;
 }
 
 ThingId wid_get_thing_id2_context(Widp w)
@@ -6578,11 +6576,11 @@ static void wid_tick_all(void)
       //
       if (game->request_remake_rightbar || game->request_remake_skillbox) {
         DBG2("Handle request to remake inventory");
+        wid_leftbar_init();
         if (wid_rightbar_init()) {
           game->request_remake_rightbar = false;
           game->request_remake_skillbox = false;
         }
-        wid_leftbar_init();
         wid_actionbar_init();
         game->request_remake_actionbar = false;
       }

@@ -10,6 +10,7 @@
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_inventory.hpp"
+#include "my_wid_leftbar.hpp"
 #include "my_wid_popup.hpp"
 
 std::list< WidPopup * > wid_thing_info_window;
@@ -82,6 +83,8 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     t->show_botcon_description();
     return nullptr;
   }
+
+  wid_leftbar_fini();
 
   //  backtrace_dump();
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", true, false);
@@ -214,6 +217,8 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   auto  height = TERM_HEIGHT;
   point tl     = make_point(0, TERM_HEIGHT - 2 - height);
   point br     = make_point(UI_LEFTBAR_WIDTH, TERM_HEIGHT - 2);
+
+  wid_leftbar_fini();
 
   //  backtrace_dump();
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", false, false /* vert */);

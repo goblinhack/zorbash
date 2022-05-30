@@ -825,6 +825,8 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
   if (t) {
     t->log("Set as equip");
     wid_set_thing_id_context(w, t);
+    t->itemsp()->wid = w;
+
     wid_set_bg_tile(w, t);
     wid_set_style(w, UI_WID_STYLE_DARK);
     if (wid_inventory_thing_selected) {
@@ -832,6 +834,7 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
         wid_set_style(w, UI_WID_STYLE_RED);
       }
     }
+
     wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
     wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
     wid_set_on_mouse_up(w, wid_bag_item_mouse_up);

@@ -35,8 +35,9 @@ static void wid_leftbar_ascii_display(Widp w, point tl, point br)
   t->blit_ascii_at(tl);
 }
 
-static void wid_leftbar_ascii_describe(Thingp t, int &y_at, int width)
+static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int width)
 {
+  level->wid_leftbar_things.push_back(t->id);
 
   y_at += 1;
   {
@@ -61,6 +62,28 @@ static void wid_leftbar_ascii_describe(Thingp t, int &y_at, int width)
     wid_set_text(w, "(Deceased)");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     return;
+  }
+
+  if (t->is_door() || t->is_ascend_dungeon() || t->is_descend_dungeon()) {
+    if (t->is_open) {
+      y_at += 1;
+      TRACE_NO_INDENT();
+      auto  w  = wid_new_square_button(wid_leftbar, "(Open)");
+      point tl = make_point(0, y_at);
+      point br = make_point(width - 1, y_at);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "(Open)");
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+    } else {
+      y_at += 1;
+      TRACE_NO_INDENT();
+      auto  w  = wid_new_square_button(wid_leftbar, "(Closed)");
+      point tl = make_point(0, y_at);
+      point br = make_point(width - 1, y_at);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "(Closed)");
+      wid_set_style(w, UI_WID_STYLE_NORMAL);
+    }
   }
 
   {
@@ -162,7 +185,7 @@ bool wid_leftbar_ascii_create(void)
       continue;
     }
 
-    wid_leftbar_ascii_describe(t, y_at, width);
+    wid_leftbar_ascii_describe(level, t, y_at, width);
   }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
 
@@ -183,7 +206,7 @@ bool wid_leftbar_ascii_create(void)
       continue;
     }
 
-    wid_leftbar_ascii_describe(t, y_at, width);
+    wid_leftbar_ascii_describe(level, t, y_at, width);
   }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
 
@@ -200,7 +223,25 @@ bool wid_leftbar_ascii_create(void)
       continue;
     }
 
-    wid_leftbar_ascii_describe(t, y_at, width);
+    wid_leftbar_ascii_describe(level, t, y_at, width);
+  }
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
+
+  ///////////////////////////////////////////////////////////////////////////
+  // Important environment items
+  ///////////////////////////////////////////////////////////////////////////
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(game->level, t)
+  {
+    if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon() &&
+        ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel()) {
+      continue;
+    }
+
+    if (! level->can_see_unimpeded(player->curr_at.x, player->curr_at.y, t->curr_at.x, t->curr_at.y)) {
+      continue;
+    }
+
+    wid_leftbar_ascii_describe(level, t, y_at, width);
   }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
 
