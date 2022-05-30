@@ -9,6 +9,7 @@
 
 #include <deque>
 #include <functional>
+#include <list>
 #include <map>
 
 #include "my_dmap.hpp"
@@ -288,6 +289,11 @@ public:
   Thingp cursor     = {};
   Thingp highlight  = {};
   Thingp hover_over = {};
+
+  //
+  // Things that are shown on the left bar.
+  //
+  std::list< ThingId > wid_leftbar_things;
 
   //
   // Tile maps for rendering solid blocks of water etc...

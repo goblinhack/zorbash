@@ -27,6 +27,11 @@ void wid_leftbar_fini(void)
 
   delete wid_leftbar_popup;
   wid_leftbar_popup = nullptr;
+
+  auto level = game->get_current_level();
+  if (level) {
+    level->wid_leftbar_things = {};
+  }
 }
 
 bool wid_leftbar_init(void)
@@ -43,6 +48,8 @@ bool wid_leftbar_create(void)
   if (! level) {
     return false;
   }
+
+  level->wid_leftbar_things = {};
 
   auto player = level->player;
   if (! player) {

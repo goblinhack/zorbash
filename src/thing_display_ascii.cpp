@@ -81,6 +81,105 @@ void Thing::blit_ascii_adjust_color(color &c)
   }
 }
 
+void Thing::blit_ascii_at(point p, bool lit)
+{
+  TRACE_NO_INDENT();
+
+  if (is_no_tile()) {
+    return;
+  }
+
+  auto tile = tile_index_to_tile(tile_curr);
+  if (! tile) {
+    return;
+  }
+
+  //
+  // This is for walls that can be composed of multiple tiles.
+  //
+  if (! tile->ascii_set) {
+    auto tpp  = tp();
+    auto tmap = &tpp->tiles;
+    tile      = tile_first(tmap);
+  }
+
+  if (gfx_ascii_mode_shown()) {
+    if (lit) {
+      //
+      // e.g dungeon floor
+      //
+      if (tile->ascii_bg_col_value != COLOR_NONE) {
+        ascii_set_bg(p.x, p.y, UNICODE_BLOCK);
+        color c = tile->ascii_bg_col_value;
+        c.a     = tile->ascii_alpha;
+        c       = RED;
+        blit_ascii_adjust_color(c);
+        ascii_set_bg(p.x, p.y, tile->ascii_bg_col_value);
+      }
+
+      if (tile->ascii_bg_char) {
+        ascii_set_bg(p.x, p.y, tile->ascii_bg_char);
+      }
+
+      if (tile->ascii_bg_col_value != COLOR_NONE) {
+        color c = tile->ascii_bg_col_value;
+        c.a     = tile->ascii_alpha;
+        blit_ascii_adjust_color(c);
+        ascii_set_bg(p.x, p.y, c);
+      }
+
+      if (tile->ascii_fg_char) {
+        ascii_set_fg(p.x, p.y, tile->ascii_fg_char);
+      }
+
+      if (tile->ascii_fg_col_value != COLOR_NONE) {
+        color c = tile->ascii_fg_col_value;
+        c.a     = tile->ascii_alpha;
+        blit_ascii_adjust_color(c);
+        ascii_set_fg(p.x, p.y, tile->ascii_fg_col_value);
+      }
+    } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
+      //
+      // e.g unlit dungeon floor
+      //
+      if (gfx_shown_in_bg()) {
+        if (tile->ascii_bg_col_value != COLOR_NONE) {
+          ascii_set_bg(p.x, p.y, UNICODE_BLOCK);
+          color c = tile->ascii_bg_col_value;
+          c.r     = ((int) (c.r / 4) * 1);
+          c.g     = ((int) (c.g / 5) * 1);
+          c.b     = ((int) (c.b / 2) * 1);
+          c.a     = tile->ascii_alpha;
+          blit_ascii_adjust_color(c);
+          ascii_set_bg(p.x, p.y, c);
+        }
+
+        if (tile->ascii_bg_char) {
+          ascii_set_bg(p.x, p.y, tile->ascii_bg_char);
+          color c = tile->ascii_bg_col_value;
+          c.r     = ((int) (c.r / 4) * 1);
+          c.g     = ((int) (c.g / 5) * 1);
+          c.b     = ((int) (c.b / 2) * 1);
+          c.a     = tile->ascii_alpha;
+          blit_ascii_adjust_color(c);
+          ascii_set_bg(p.x, p.y, c);
+        }
+
+        if (tile->ascii_fg_char) {
+          ascii_set_fg(p.x, p.y, tile->ascii_fg_char);
+          color c = tile->ascii_fg_col_value;
+          c.r     = ((int) (c.r / 2) * 1);
+          c.g     = ((int) (c.g / 2) * 1);
+          c.b     = ((int) (c.b / 2) * 1);
+          c.a     = tile->ascii_alpha;
+          blit_ascii_adjust_color(c);
+          ascii_set_fg(p.x, p.y, c);
+        }
+      }
+    }
+  }
+}
+
 void Thing::blit_ascii(point tl, point br, point p)
 {
   TRACE_NO_INDENT();
@@ -110,23 +209,6 @@ void Thing::blit_ascii(point tl, point br, point p)
     return;
   }
 
-  if (is_no_tile()) {
-    return;
-  }
-
-  auto tile = tile_index_to_tile(tile_curr);
-  if (! tile) {
-    return;
-  }
-
-  //
-  // This is for walls that can be composed of multiple tiles.
-  //
-  if (! tile->ascii_set) {
-    auto tmap = &tpp->tiles;
-    tile      = tile_first(tmap);
-  }
-
   int x = tl.x + (p.x - level->minx);
   int y = tl.y + (p.y - level->miny);
 
@@ -137,81 +219,7 @@ void Thing::blit_ascii(point tl, point br, point p)
     lit = true;
   }
 
-  if (gfx_ascii_mode_shown()) {
-    if (lit) {
-      //
-      // e.g dungeon floor
-      //
-      if (tile->ascii_bg_col_value != COLOR_NONE) {
-        ascii_set_bg(x, y, UNICODE_BLOCK);
-        color c = tile->ascii_bg_col_value;
-        c.a     = tile->ascii_alpha;
-        c       = RED;
-        blit_ascii_adjust_color(c);
-        ascii_set_bg(x, y, tile->ascii_bg_col_value);
-      }
-
-      if (tile->ascii_bg_char) {
-        ascii_set_bg(x, y, tile->ascii_bg_char);
-      }
-
-      if (tile->ascii_bg_col_value != COLOR_NONE) {
-        color c = tile->ascii_bg_col_value;
-        c.a     = tile->ascii_alpha;
-        blit_ascii_adjust_color(c);
-        ascii_set_bg(x, y, c);
-      }
-
-      if (tile->ascii_fg_char) {
-        ascii_set_fg(x, y, tile->ascii_fg_char);
-      }
-
-      if (tile->ascii_fg_col_value != COLOR_NONE) {
-        color c = tile->ascii_fg_col_value;
-        c.a     = tile->ascii_alpha;
-        blit_ascii_adjust_color(c);
-        ascii_set_fg(x, y, tile->ascii_fg_col_value);
-      }
-    } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
-      //
-      // e.g unlit dungeon floor
-      //
-      if (gfx_shown_in_bg()) {
-        if (tile->ascii_bg_col_value != COLOR_NONE) {
-          ascii_set_bg(x, y, UNICODE_BLOCK);
-          color c = tile->ascii_bg_col_value;
-          c.r     = ((int) (c.r / 4) * 1);
-          c.g     = ((int) (c.g / 5) * 1);
-          c.b     = ((int) (c.b / 2) * 1);
-          c.a     = tile->ascii_alpha;
-          blit_ascii_adjust_color(c);
-          ascii_set_bg(x, y, c);
-        }
-
-        if (tile->ascii_bg_char) {
-          ascii_set_bg(x, y, tile->ascii_bg_char);
-          color c = tile->ascii_bg_col_value;
-          c.r     = ((int) (c.r / 4) * 1);
-          c.g     = ((int) (c.g / 5) * 1);
-          c.b     = ((int) (c.b / 2) * 1);
-          c.a     = tile->ascii_alpha;
-          blit_ascii_adjust_color(c);
-          ascii_set_bg(x, y, c);
-        }
-
-        if (tile->ascii_fg_char) {
-          ascii_set_fg(x, y, tile->ascii_fg_char);
-          color c = tile->ascii_fg_col_value;
-          c.r     = ((int) (c.r / 2) * 1);
-          c.g     = ((int) (c.g / 2) * 1);
-          c.b     = ((int) (c.b / 2) * 1);
-          c.a     = tile->ascii_alpha;
-          blit_ascii_adjust_color(c);
-          ascii_set_fg(x, y, c);
-        }
-      }
-    }
-  }
+  blit_ascii_at(point(x, y), lit);
 
   last_ascii_at = point(x, y);
   last_blit_tl  = point(curr_at.x * TILE_WIDTH, curr_at.y * TILE_HEIGHT);
