@@ -94,6 +94,8 @@ void Thing::destroy(void)
     level->player = nullptr;
   }
 
+  level->wid_leftbar_things.remove(id);
+
   if (level->cursor == this) {
     dbg2("Removed cursor");
     level->cursor = nullptr;

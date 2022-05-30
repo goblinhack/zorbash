@@ -14,8 +14,30 @@
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_leftbar.hpp"
 
+static void wid_leftbar_ascii_display(Widp w, point tl, point br)
+{
+  auto level = game->get_current_level();
+  if (! level) {
+    return;
+  }
+
+  auto player = level->player;
+  if (! player) {
+    return;
+  }
+
+  auto id = wid_get_thing_id_context(w);
+  auto t  = level->thing_find(id);
+  if (! t) {
+    return;
+  }
+
+  t->blit_ascii_at(tl);
+}
+
 static void wid_leftbar_ascii_describe(Thingp t, int &y_at, int width)
 {
+
   y_at += 1;
   {
     TRACE_NO_INDENT();
@@ -41,23 +63,15 @@ static void wid_leftbar_ascii_describe(Thingp t, int &y_at, int width)
     return;
   }
 
-  auto tile = tile_index_to_tile(t->tile_curr);
-  if (! tile) {
-    if (! tile->ascii_set) {
-      auto tmap = &t->tp()->tiles;
-      tile      = tile_first(tmap);
-    }
-  }
-
   {
     TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_leftbar, "It tile");
     point tl = make_point(width + 1, y_at);
     point br = make_point(width + 1, y_at);
     wid_set_pos(w, tl, br);
-    wid_set_fg_tile(w, tile);
-    // wid_set_text(w, "x");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_thing_id_context(w, t);
+    wid_set_on_display(w, wid_leftbar_ascii_display);
   }
 
   if (t->is_monst()) {
