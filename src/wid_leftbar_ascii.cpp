@@ -27,8 +27,10 @@ static void wid_leftbar_ascii_display(Widp w, point tl, point br)
   }
 
   auto id = wid_get_thing_id_context(w);
-  auto t  = level->thing_find(id);
+  LOG("Leftbar describe %X", id.id);
+  auto t = level->thing_find_optional(id);
   if (! t) {
+    t->err("Leftbar describe %X failed", id.id);
     return;
   }
 
@@ -38,6 +40,7 @@ static void wid_leftbar_ascii_display(Widp w, point tl, point br)
 static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int width)
 {
   level->wid_leftbar_things.push_back(t->id);
+  t->log("Leftbar add %X", t->id.id);
 
   y_at += 1;
   {
@@ -50,6 +53,39 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     wid_set_text(w, s);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     myfree(s);
+  }
+
+  if (t->is_on_fire()) {
+    y_at += 1;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_leftbar, "(On fire)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(On fire)");
+    wid_set_style(w, UI_WID_STYLE_RED);
+  }
+
+  if (t->is_falling) {
+    y_at += 1;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_leftbar, "(Falling)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Falling)");
+    wid_set_style(w, UI_WID_STYLE_RED);
+  }
+
+  if (t->is_sleeping) {
+    y_at += 1;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_leftbar, "(Sleeping)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Sleeping)");
+    wid_set_style(w, UI_WID_STYLE_RED);
   }
 
   if (t->is_dead) {

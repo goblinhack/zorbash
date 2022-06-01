@@ -386,7 +386,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   for (const auto w : item_vector()) {
     w->move_to_immediately(curr_at);
-    w->is_jumping = true;
+    if (! g_opt_ascii) {
+      w->is_jumping = true;
+    }
   }
 
   auto on_fire_id = on_fire_anim_id();
@@ -396,7 +398,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     auto w  = level->thing_find(id);
     if (w) {
       w->move_to_immediately(curr_at);
-      w->is_jumping = true;
+      if (! g_opt_ascii) {
+        w->is_jumping = true;
+      }
       if (is_player()) {
         level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
                                      (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
@@ -498,6 +502,11 @@ bool Thing::try_to_jump_carefree(point p)
 bool Thing::try_to_jump(void)
 {
   TRACE_NO_INDENT();
+
+  if (! is_able_to_jump_attack()) {
+    return false;
+  }
+
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
@@ -523,6 +532,11 @@ bool Thing::try_to_jump(void)
 bool Thing::try_to_jump_towards_player(void)
 {
   TRACE_NO_INDENT();
+
+  if (! is_able_to_jump_attack()) {
+    return false;
+  }
+
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
@@ -596,6 +610,11 @@ bool Thing::try_to_jump_away_from_player(void)
 bool Thing::try_harder_to_jump(void)
 {
   TRACE_NO_INDENT();
+
+  if (! is_able_to_jump_attack()) {
+    return false;
+  }
+
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
