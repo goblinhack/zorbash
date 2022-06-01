@@ -17,7 +17,6 @@
 void callstack_dump(void)
 {
   TRACE_AND_INDENT();
-  IF_NODEBUG2 { return; }
 
   static int done;
   if (done) {

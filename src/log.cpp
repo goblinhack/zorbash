@@ -349,6 +349,9 @@ static void err_(const char *fmt, va_list args)
   }
   nested_error = true;
 
+  callstack_dump();
+  backtrace_dump();
+
   char buf[ MAXLONGSTR ];
   int  len;
 
@@ -372,9 +375,6 @@ static void err_(const char *fmt, va_list args)
   putchar('\n');
 
   wid_console_log(buf);
-
-  callstack_dump();
-  backtrace_dump();
 
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
   nested_error = false;
@@ -496,6 +496,9 @@ static void msgerr_(const char *fmt, va_list args)
   char buf[ MAXLONGSTR ];
   int  len;
 
+  callstack_dump();
+  backtrace_dump();
+
   buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
@@ -517,9 +520,6 @@ static void msgerr_(const char *fmt, va_list args)
 
   wid_console_log(buf);
 
-  callstack_dump();
-  backtrace_dump();
-
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
@@ -539,6 +539,9 @@ static void sdl_msgerr_(const char *fmt, va_list args)
   int ts_len;
 #endif
   int len;
+
+  callstack_dump();
+  backtrace_dump();
 
   buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
@@ -562,9 +565,6 @@ static void sdl_msgerr_(const char *fmt, va_list args)
 
   fprintf(stderr, "%s\n", buf);
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
-
-  callstack_dump();
-  backtrace_dump();
 
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }

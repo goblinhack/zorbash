@@ -166,6 +166,9 @@ void Thing::err_(const char *fmt, va_list args)
   }
   nested_error = true;
 
+  callstack_dump();
+  backtrace_dump();
+
   verify(MTYPE_THING, this);
   auto t = this;
   char buf[ MAXLONGSTR ];
@@ -184,9 +187,6 @@ void Thing::err_(const char *fmt, va_list args)
   putf(MY_STDERR, buf);
 
   fprintf(stderr, "%s\n", buf);
-
-  callstack_dump();
-  backtrace_dump();
 
   wid_console_log(buf);
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();

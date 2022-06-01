@@ -95,7 +95,11 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "(Deceased)");
+    if (t->is_monst()) {
+      wid_set_text(w, "(Deceased)");
+    } else {
+      wid_set_text(w, "(Broken)");
+    }
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     return;
   }

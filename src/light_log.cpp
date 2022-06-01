@@ -111,6 +111,9 @@ void Light::err_(const char *fmt, va_list args)
   char buf[ MAXLONGSTR ];
   int  len;
 
+  callstack_dump();
+  backtrace_dump();
+
   buf[ 0 ] = '\0';
   get_timestamp(buf, MAXLONGSTR);
   len = (int) strlen(buf);
@@ -124,9 +127,6 @@ void Light::err_(const char *fmt, va_list args)
   putf(MY_STDERR, buf);
 
   fprintf(stderr, "%s\n", buf);
-
-  callstack_dump();
-  backtrace_dump();
 
   wid_console_log(buf);
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
