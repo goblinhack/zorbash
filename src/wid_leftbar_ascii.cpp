@@ -16,6 +16,8 @@
 
 static void wid_leftbar_ascii_display(Widp w, point tl, point br)
 {
+  TRACE_NO_INDENT();
+
   auto level = game->get_current_level();
   if (! level) {
     return;
@@ -27,18 +29,27 @@ static void wid_leftbar_ascii_display(Widp w, point tl, point br)
   }
 
   auto id = wid_get_thing_id_context(w);
-  LOG("Leftbar describe %X", id.id);
-  auto t = level->thing_find_optional(id);
-  if (! t) {
-    t->err("Leftbar describe %X failed", id.id);
+
+  //
+  // If the thing is destroyed it should have removed itself from this list.
+  // So if we don't find it, we cannot display it.
+  //
+  if (std::find(level->wid_leftbar_things.begin(), level->wid_leftbar_things.end(), id) ==
+      level->wid_leftbar_things.end()) {
     return;
   }
 
-  t->blit_ascii_at(tl);
+  LOG("Leftbar describe %X", id.id);
+  auto t = level->thing_find(id);
+  if (t) {
+    t->blit_ascii_at(tl);
+  }
 }
 
 static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int width)
 {
+  TRACE_NO_INDENT();
+
   level->wid_leftbar_things.push_back(t->id);
   t->log("Leftbar add %X", t->id.id);
 
@@ -180,8 +191,8 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
 
 bool wid_leftbar_ascii_create(void)
 {
-  TRACE_AND_INDENT();
   DBG2("Remake leftbar");
+  TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
