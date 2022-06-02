@@ -11,13 +11,13 @@ def on_born(me, x, y):
     my.thing_carry(me, "wand_fire")
 
 
-def tp_init(name, text_name):
-    self = zorb_all.tp_init(name, text_name)
-    my.long_text_description2(self, "This particular zorblin is well trained in the martial arts and prefers to fight bare fisted.")
+def tp_init(name, text_long_name):
+    self = zorb_all.tp_init(name, text_long_name)
+    my.text_long_description2(self, "This particular zorblin is well trained in the martial arts and prefers to fight bare fisted.")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
     my.on_born_do(self, "me.on_born()")
-    my.text_description(self, "A master in physical punishment.")
+    my.text_short_description(self, "A master in physical punishment.")
     my.stat_str(self, 12)
     my.distance_avoid(self, 5)
     my.text_hits(self, "hits")
@@ -75,7 +75,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zorb_priest", text_name="zorblin priest")
+    tp_init(name="zorb_priest", text_long_name="zorblin priest")
 
 
 init()

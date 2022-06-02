@@ -11,9 +11,9 @@ def on_enchant(me, x, y):
     my.thing_stat_def_mod_incr(me, 2)
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 6)
     my.damaged_chance_d10000(self, 100)
@@ -41,15 +41,15 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Lime scale armor. Very tough while it lasts. Which is not long...")
     my.noise_on_dropping(self, 20)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_def_mod(self, 5)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Lime scale mail armor.")
     my.text_enchant(self, "+2 DEF")
+    my.text_long_description(self, "Lime scale armor. Very tough while it lasts. Which is not long...")
+    my.text_short_description(self, "Lime scale mail armor.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -65,8 +65,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="armor_lime_scale",
-        text_name="lime scale armor",
-        short_text_name="lime scale armor",
+        text_long_name="lime scale armor",
+        text_short_name="lime scale armor",
     )
 
 

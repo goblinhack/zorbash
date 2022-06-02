@@ -14,8 +14,8 @@ def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
     return damage + my.thing_enchant_get(me)
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.damaged_chance_d10000(self, 200)
     my.damage_melee_chance_d1000(self, 0, 1000)
@@ -51,15 +51,15 @@ def tp_init(name, text_name, short_text_name):
     my.is_weapon(self, True)
     my.item_height(self, 5)
     my.item_width(self, 5)
-    my.long_text_description(self, "A rusting short sword. Ideal for absolutely no one.")
     my.noise_on_dropping(self, 10)
     my.on_owner_attacking_damage_melee_do(self, "me.on_owner_attacking_damage_melee()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 1)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy rusty means of justice.")
     my.text_enchant(self, "+1 DMG")
+    my.text_long_description(self, "A rusting short sword. Ideal for absolutely no one.")
+    my.text_short_description(self, "Thy rusty means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -75,8 +75,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="sword_rusty",
-        text_name="rusty short sword",
-        short_text_name="rusty short sword",
+        text_long_name="rusty short sword",
+        text_short_name="rusty short sword",
     )
 
 

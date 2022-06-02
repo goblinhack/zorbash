@@ -18,9 +18,9 @@ def on_tick(owner, item, x, y):
     return True
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.gfx_ascii_mode_shown(self, True)
@@ -50,14 +50,14 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "A finely embroidered cloak that offers modest protection against attack.")
+    my.text_long_description(self, "A finely embroidered cloak that offers modest protection against attack.")
     my.noise_on_dropping(self, -20)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_def_mod(self, 2)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Cloak of protection.")
+    my.text_short_description(self, "Cloak of protection.")
     my.text_enchant(self, "+2 DEF")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -73,8 +73,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="cloak_protection",
-        text_name="cloak of protection",
-        short_text_name="cloak of protection",
+        text_long_name="cloak of protection",
+        text_short_name="cloak of protection",
     )
 
 

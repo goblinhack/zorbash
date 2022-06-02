@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name, tiles=[]):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name, tiles=[]):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_obstacle(self, True)
     my.gfx_ascii_mode_shown(self, True)
@@ -17,7 +17,7 @@ def tp_init(name, text_name, tiles=[]):
     my.is_obs_wall_or_door(self, True)
     my.is_pillar(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "An aged and moss-covered stone pillar.")
+    my.text_short_description(self, "An aged and moss-covered stone pillar.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -34,7 +34,7 @@ def tp_init(name, text_name, tiles=[]):
 def init():
     tp_init(
         name="pillar1",
-        text_name="stone pillar",
+        text_long_name="stone pillar",
         tiles=[
             "pillar1.1",
             "pillar1.2",

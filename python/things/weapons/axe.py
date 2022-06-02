@@ -20,8 +20,8 @@ def on_enchant(me, x, y):
         my.thing_msg(me, "The axe glows.")
 
 
-def init_weapon(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def init_weapon(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_360(self, True)
     my.crit_chance_d10000(self, 500)
@@ -57,7 +57,6 @@ def init_weapon(name, text_name, short_text_name):
     my.is_wooden(self, True)
     my.item_height(self, 6)
     my.item_width(self, 6)
-    my.long_text_description(self, "A gleaming wooden handled axe. It's a bit short and extra hungry for vengeance. Against what, who can say. Take care, as your mighty swing can hit all monsters adjacent to you.")
     my.noise_on_dropping(self, 15)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_owner_attacking_damage_melee_do(self, "me.on_owner_attacking_damage_melee()")
@@ -66,8 +65,9 @@ def init_weapon(name, text_name, short_text_name):
     my.stamina_drain_on_attacking(self, 2)
     my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy choppy means of justice.")
     my.text_enchant(self, "+1 DMG, +1 ATT")
+    my.text_long_description(self, "A gleaming wooden handled axe. It's a bit short and extra hungry for vengeance. Against what, who can say. Take care, as your mighty swing can hit all monsters adjacent to you.")
+    my.text_short_description(self, "Thy choppy means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -81,7 +81,7 @@ def init_weapon(name, text_name, short_text_name):
 
 
 def init():
-    init_weapon(name="axe", text_name="short axe", short_text_name="short axe")
+    init_weapon(name="axe", text_long_name="short axe", text_short_name="short axe")
 
 
 init()

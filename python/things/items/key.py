@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def key_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def key_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_mode_shown(self, True)
@@ -28,10 +28,10 @@ def key_init(name, text_name):
     my.is_moveable(self, True)
     my.light_color(self, "yellow")
     my.light_dist(self, 2)
-    my.long_text_description(self, "A key that leadeth places undreamt of, or next door.")
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
-    my.text_description(self, "A key.")
+    my.text_long_description(self, "A key that leadeth places undreamt of, or next door.")
+    my.text_short_description(self, "A key.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
@@ -65,7 +65,7 @@ def key_init(name, text_name):
 
 
 def init():
-    key_init(name="key", text_name="key")
+    key_init(name="key", text_long_name="key")
 
 
 init()

@@ -28,9 +28,9 @@ def on_tick(owner, me, x, y):
     return False
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.equip_carry_anim(self, "amulet_healing_carry")
     my.gfx_ascii_mode_shown(self, True)
@@ -54,7 +54,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "Amulet of healing. Watch with joy as your health recovers automatically. Watch out though, for each health unit restored, you lose one stamina.")
     my.noise_additional_on_jump_end(self, 10)
     my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)
@@ -63,7 +62,8 @@ def tp_init(name, text_name, short_text_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_VERY_RARE)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Amuler of healing.")
+    my.text_long_description(self, "Amulet of healing. Watch with joy as your health recovers automatically. Watch out though, for each health unit restored, you lose one stamina.")
+    my.text_short_description(self, "Amuler of healing.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -79,8 +79,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="amulet_healing",
-        text_name="amulet of healing",
-        short_text_name="amulet of healing",
+        text_long_name="amulet of healing",
+        text_short_name="amulet of healing",
     )
 
 

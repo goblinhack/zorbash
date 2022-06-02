@@ -28,8 +28,8 @@ def on_receiving_damage_lightning(me, hitter, x, y, damage):
     return 0
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 100)
@@ -88,8 +88,6 @@ def tp_init(name, text_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.is_tireless(self, True)
-    my.long_text_description2(self, "Golems are able to slowly recharge health and are reknowed for being no fun at parties.")
-    my.long_text_description(self, "A hideous progeny of animated flesh that wishes to add your skin to its body mass. Golems are immune to cold, poison and draining attacks. They gain health from lightning.")
     my.monst_size(self, my.MONST_SIZE_LARGE)
     my.move_speed(self, 30)
     my.noise_decibels_hearing(self, 100)
@@ -107,8 +105,10 @@ def tp_init(name, text_name):
     my.stat_luck(self, 1)
     my.stat_str(self, 19)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A flesh golem.")
     my.text_hits(self, "claws")
+    my.text_long_description2(self, "Golems are able to slowly recharge health and are reknowed for being no fun at parties.")
+    my.text_long_description(self, "A hideous progeny of animated flesh that wishes to add your skin to its body mass. Golems are immune to cold, poison and draining attacks. They gain health from lightning.")
+    my.text_short_description(self, "A flesh golem.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -145,7 +145,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="flesh_golem", text_name="flesh golem")
+    tp_init(name="flesh_golem", text_long_name="flesh golem")
 
 
 init()

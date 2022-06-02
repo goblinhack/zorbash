@@ -14,7 +14,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.is_cursor_can_hover_over(self, True)
     my.is_floor(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description(self, "The unwashed dungeon floor.")
+    my.text_short_description(self, "The unwashed dungeon floor.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

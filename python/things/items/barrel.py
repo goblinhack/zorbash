@@ -25,8 +25,8 @@ def on_death(me, x, y):
     explode(me, x, y)
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_obstacle(self, True)
     my.collision_check(self, True)
@@ -60,7 +60,7 @@ def tp_init(name, text_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A barrel of oil. Why? Don't ask.")
+    my.text_short_description(self, "A barrel of oil. Why? Don't ask.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BARREL)
     # end sort marker
@@ -73,7 +73,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="barrel", text_name="barrel")
+    tp_init(name="barrel", text_long_name="barrel")
 
 
 init()

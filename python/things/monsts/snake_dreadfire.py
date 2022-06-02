@@ -30,8 +30,8 @@ def on_firing_at_something(me, target, x, y):  # Return True on doing an action
     return False
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 90)
     my.ai_resent_count(self, 1)
@@ -94,7 +94,6 @@ def tp_init(name, text_name):
     my.is_snake(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
-    my.long_text_description(self, "Dreadfire snakes are just that, a combination of fire and dread. Fast, venomous and with a spit to die for, best to stay well away.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 300)
     my.noise_decibels_hearing(self, 10)
@@ -113,8 +112,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 7)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A highly volatile dreadfire snake.")
     my.text_hits(self, "gores")
+    my.text_long_description(self, "Dreadfire snakes are just that, a combination of fire and dread. Fast, venomous and with a spit to die for, best to stay well away.")
+    my.text_short_description(self, "A highly volatile dreadfire snake.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -158,7 +158,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="snake_dreadfire", text_name="dreadfire snake")
+    tp_init(name="snake_dreadfire", text_long_name="dreadfire snake")
 
 
 init()

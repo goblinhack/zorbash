@@ -66,16 +66,16 @@ def on_enchant(me, x, y):
     enchant = my.thing_enchant_get(me)
     global self
     if enchant == 0:
-        my.long_text_description(self, "Restores you to 80 percent health")
+        my.text_long_description(self, "Restores you to 80 percent health")
     elif enchant == 0:
-        my.long_text_description(self, "Restores you to 90 percent health")
+        my.text_long_description(self, "Restores you to 90 percent health")
     else:
-        my.long_text_description(self, "Restores you to full health")
+        my.text_long_description(self, "Restores you to full health")
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
@@ -109,7 +109,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
     my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
@@ -118,8 +117,9 @@ def tp_init(name, text_name, short_text_name):
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A potion of health restoration.")
     my.text_enchant(self, "+10 percent health and stamina")
+    my.text_long_description(self, "Restores your health and stamina to at least 80 percent. You'll feel like your old self again. Only even more awesome.")
+    my.text_short_description(self, "A potion of health restoration.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -150,8 +150,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="pot_health",
-        text_name="potion of health awesomeness",
-        short_text_name="potion of health",
+        text_long_name="potion of health awesomeness",
+        text_short_name="potion of health",
     )
 
 

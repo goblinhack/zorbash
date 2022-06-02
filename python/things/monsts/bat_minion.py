@@ -24,8 +24,8 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 100)
@@ -74,7 +74,6 @@ def tp_init(name, text_name):
     my.is_soft(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
-    my.long_text_description(self, "A friendly little blood sucking bat.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 300)
     my.noise_decibels_hearing(self, 0)
@@ -91,8 +90,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 2)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A little bat.")
     my.text_hits(self, "claws")
+    my.text_long_description(self, "A friendly little blood sucking bat.")
+    my.text_short_description(self, "A little bat.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -132,7 +132,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="bat_minion", text_name="little fluffy bat")
+    tp_init(name="bat_minion", text_long_name="little fluffy bat")
 
 
 init()

@@ -21,9 +21,9 @@ def on_enchant(me, x, y):
     my.thing_shove_strength_mod_incr(me, 1)
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.equip_carry_anim(self, "gauntlets_war_carry")
     my.gfx_ascii_mode_shown(self, True)
@@ -47,7 +47,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "Gauntlets of war. Providing a hefty strength and defense bonus, these gauntlets mean business.?")
     my.noise_additional_on_jump_end(self, -50)
     my.noise_on_dropping(self, -50)
     my.noise_on_moving(self, 25)
@@ -59,8 +58,9 @@ def tp_init(name, text_name, short_text_name):
     my.stat_def_mod(self, 3)
     my.stat_str_mod(self, 5)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Gauntlets of war.")
     my.text_enchant(self, "+1 str, +1 def, +1 shove")
+    my.text_long_description(self, "Gauntlets of war. Providing a hefty strength and defense bonus, these gauntlets mean business.?")
+    my.text_short_description(self, "Gauntlets of war.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -76,8 +76,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="gauntlets_war",
-        text_name="gauntlets of war",
-        short_text_name="gauntlets of war",
+        text_long_name="gauntlets of war",
+        text_short_name="gauntlets of war",
     )
 
 

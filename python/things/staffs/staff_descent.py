@@ -35,8 +35,8 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.gfx_ascii_mode_shown(self, True)
@@ -74,7 +74,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_width(self, 4)
     my.target_name_laser(self, "effect_descent")
     my.target_name_radial(self, "effect_descent_radial")
-    my.long_text_description(self, "This most dangerous wand can transport its target to the next level by the most efficacious means possible...")
+    my.text_long_description(self, "This most dangerous wand can transport its target to the next level by the most efficacious means possible...")
     my.noise_on_dropping(self, 5)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
@@ -83,7 +83,7 @@ def tp_init(name, text_name, short_text_name):
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A staff of descent.")
+    my.text_short_description(self, "A staff of descent.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
@@ -113,8 +113,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="staff_descent",
-        text_name="staff of sudden descent",
-        short_text_name="staff of descent",
+        text_long_name="staff of sudden descent",
+        text_short_name="staff of descent",
     )
 
 

@@ -30,8 +30,8 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
@@ -67,7 +67,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Discharges a single ball of ice at an ungrateful recipient...")
     my.noise_on_dropping(self, 5)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
@@ -77,7 +76,8 @@ def tp_init(name, text_name, short_text_name):
     my.target_name_projectile(self, "projectile_cold")
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A wand of snowballs.")
+    my.text_long_description(self, "Discharges a single ball of ice at an ungrateful recipient...")
+    my.text_short_description(self, "A wand of snowballs.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -106,7 +106,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="wand_cold", text_name="wand of snowballs", short_text_name="wand of snowballs")
+    tp_init(name="wand_cold", text_long_name="wand of snowballs", text_short_name="wand of snowballs")
 
 
 init()

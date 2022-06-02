@@ -7,8 +7,8 @@ def on_lifespan_tick(owner, me, x, y):
         my.thing_msg(me, "One of your torches fizzles out.")
 
 
-def tp_init(name, text_name, tiles=[]):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name, tiles=[]):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.charge_count(self, 10)
     my.collision_hit_priority(self, 1)
@@ -40,12 +40,12 @@ def tp_init(name, text_name, tiles=[]):
     my.lifespan_dice(self, "1d300+100")
     my.light_color(self, "orange")
     my.light_dist(self, 1)
-    my.long_text_description(self, "A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_lifespan_tick_do(self, "me.on_lifespan_tick()")
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A small beacon of light in this blighted place.")
+    my.text_long_description(self, "A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
+    my.text_short_description(self, "A small beacon of light in this blighted place.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -63,7 +63,7 @@ def tp_init(name, text_name, tiles=[]):
 def init():
     tp_init(
         name="torch",
-        text_name="torch",
+        text_long_name="torch",
         tiles=[
             "torch.1",
             "torch.2",

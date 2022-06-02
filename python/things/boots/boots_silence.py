@@ -21,9 +21,9 @@ def on_enchant(me, x, y):
     my.thing_noise_incr(me, -10)
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.equip_carry_anim(self, "boots_silence_carry")
     my.gfx_ascii_mode_shown(self, True)
@@ -48,7 +48,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "Sneakers of silence. Be the most stylish creature in the dungeon with these superb noise cancelling sneakers. Their springy soles also lend you a small amount of defense from would be aggressors, whom no doubt covet these fine vessels of footery.")
     my.noise_additional_on_jump_end(self, -50)
     my.noise_on_dropping(self, -200)
     my.normal_placement_rules(self, True)
@@ -59,8 +58,9 @@ def tp_init(name, text_name, short_text_name):
     my.stat_def_mod(self, 1)
     my.stat_dex_mod(self, 1)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Sneakers of silence.")
     my.text_enchant(self, "-10 decibels")
+    my.text_long_description(self, "Sneakers of silence. Be the most stylish creature in the dungeon with these superb noise cancelling sneakers. Their springy soles also lend you a small amount of defense from would be aggressors, whom no doubt covet these fine vessels of footery.")
+    my.text_short_description(self, "Sneakers of silence.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -76,8 +76,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="boots_silence",
-        text_name="sneakers of silence",
-        short_text_name="sneakers of silence",
+        text_long_name="sneakers of silence",
+        text_short_name="sneakers of silence",
     )
 
 

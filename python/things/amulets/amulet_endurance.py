@@ -23,9 +23,9 @@ def on_owner_receiving_damage_draining(me, owner, hitter, real_hitter, x, y, dam
     return damage
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.equip_carry_anim(self, "amulet_endurance_carry")
     my.gfx_ascii_mode_shown(self, True)
@@ -49,7 +49,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will only use half as much stamina as normal. This also applies to magical items that may attempt to drain stamina, like boots of jumping or skills such as Devoted Thrust. Each enchant will reduce a further 10 points of stamina damage.")
     my.noise_additional_on_jump_end(self, 10)
     my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)
@@ -58,8 +57,9 @@ def tp_init(name, text_name, short_text_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_RARE)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Amuler of endurance.")
     my.text_enchant(self, "-10 stamina DMG")
+    my.text_long_description(self, "Amulet of endurance. Leap for joy whilst wearing this amulet for you will only use half as much stamina as normal. This also applies to magical items that may attempt to drain stamina, like boots of jumping or skills such as Devoted Thrust. Each enchant will reduce a further 10 points of stamina damage.")
+    my.text_short_description(self, "Amuler of endurance.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -75,8 +75,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="amulet_endurance",
-        text_name="amulet of endurance",
-        short_text_name="amulet of endurance",
+        text_long_name="amulet of endurance",
+        text_short_name="amulet of endurance",
     )
 
 

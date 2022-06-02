@@ -14,8 +14,8 @@ def on_you_are_declared_a_follower(me, leader, x, y):
     my.thing_polymorph(me, "mummy")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.gfx_ascii_mode_shown(self, True)
@@ -34,7 +34,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="mummy_pack", text_name="mummy pack")
+    tp_init(name="mummy_pack", text_long_name="mummy pack")
 
 
 init()

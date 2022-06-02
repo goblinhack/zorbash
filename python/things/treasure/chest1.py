@@ -14,8 +14,8 @@ def on_open(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "door_open")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.capacity_height(self, 8)
     my.capacity_width(self, 8)
@@ -56,7 +56,6 @@ def tp_init(name, text_name):
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "A small treasure chest.")
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
@@ -65,7 +64,8 @@ def tp_init(name, text_name):
     my.on_open_do(self, "me.on_open()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A small treasure chest.")
+    my.text_long_description(self, "A small treasure chest.")
+    my.text_short_description(self, "A small treasure chest.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -84,7 +84,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="chest1", text_name="small treasure chest")
+    tp_init(name="chest1", text_long_name="small treasure chest")
 
 
 init()

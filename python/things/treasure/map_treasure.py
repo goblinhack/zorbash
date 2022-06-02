@@ -8,8 +8,8 @@ def on_enchant(me, x, y):
         my.thing_msg(me, "The map glows. It seems full of knowledge.")
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 0)
     my.collision_hit_priority(self, 6)
@@ -37,12 +37,12 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "When carrying this magical map you are able to see all the treasure, food and keys on the current level.")
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.text_a_or_an(self, "a")
-    my.text_description(self, "An aged treasure map.")
+    my.text_long_description(self, "When carrying this magical map you are able to see all the treasure, food and keys on the current level.")
+    my.text_short_description(self, "An aged treasure map.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -56,7 +56,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="map_treasure", text_name="treasure map", short_text_name="treasure map")
+    tp_init(name="map_treasure", text_long_name="treasure map", text_short_name="treasure map")
 
 
 init()

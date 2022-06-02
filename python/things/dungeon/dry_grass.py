@@ -26,7 +26,7 @@ def tp_init(name, tiles=[]):
     my.is_interesting(self, True)
     my.on_you_are_hit_and_now_dead_do(self, "dry_grass.on_you_are_hit_and_now_dead()")
     my.text_a_or_an(self, "the")
-    my.text_description(self, "Parched grass.")
+    my.text_short_description(self, "Parched grass.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

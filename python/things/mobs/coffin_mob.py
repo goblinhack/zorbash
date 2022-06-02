@@ -14,8 +14,8 @@ def on_death(me, x, y):
     my.level_spawn_at_thing(me, "mob_explosion")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_shove_chance_d1000(self, 200)
     my.collision_check(self, True)
@@ -50,13 +50,13 @@ def tp_init(name, text_name):
     my.is_tickable(self, True)
     my.light_color(self, "green")
     my.light_dist(self, 3)
-    my.long_text_description(self, "A dark gateway for the creatures of the night. Also cheap boarding rates.")
     my.minion_limit(self, 5)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_idle_tick_freq_dice(self, "1d10+10:me.on_idle_tick_freq_dice()")
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A cursed coffin, spawning all manner of surprises.")
+    my.text_long_description(self, "A dark gateway for the creatures of the night. Also cheap boarding rates.")
+    my.text_short_description(self, "A cursed coffin, spawning all manner of surprises.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -80,7 +80,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="coffin_mob", text_name="coffin")
+    tp_init(name="coffin_mob", text_long_name="coffin")
 
 
 init()

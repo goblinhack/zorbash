@@ -13,8 +13,8 @@ def on_born(me, x, y):
 #
 # This is an internal only object to cold projectiles from monsters
 #
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_check(self, True)
     my.damage_cold_chance_d1000(self, 0, 1000)
@@ -37,7 +37,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="projectile_cold", text_name="snowball", short_text_name="snowball")
+    tp_init(name="projectile_cold", text_long_name="snowball", text_short_name="snowball")
 
 
 init()

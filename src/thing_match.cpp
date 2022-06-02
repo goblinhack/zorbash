@@ -12,7 +12,7 @@ bool Thing::matches(const std::string &what)
   if (strisregexp(what.c_str())) {
     struct slre slre;
     if (slre_compile(&slre, what.c_str())) {
-      auto name = short_text_name();
+      auto name = text_short_name();
       if (slre_match(&slre, name.c_str(), name.size(), 0 /* captures */)) {
         return true;
       }
@@ -1321,7 +1321,7 @@ bool Thing::matches(const std::string &what)
     return true;
   }
 
-  return (what == short_text_name());
+  return (what == text_short_name());
 }
 
 std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)

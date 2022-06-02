@@ -7,9 +7,9 @@ def on_death_of_a_follower(me, leader, x, y):
         my.thing_msg(me, "The zorblin leader cries out in rage!")
 
 
-def tp_init(name, text_name):
-    self = zorb_all.tp_init(name, text_name)
-    my.long_text_description2(self, "This particular zorblin has risen through the ranks. As tough as stone nails in a stone coffin, this zorblin is not prepared to take any of your cheek.")
+def tp_init(name, text_long_name):
+    self = zorb_all.tp_init(name, text_long_name)
+    my.text_long_description2(self, "This particular zorblin has risen through the ranks. As tough as stone nails in a stone coffin, this zorblin is not prepared to take any of your cheek.")
     my.health_initial_dice(self, "2d10")
     my.health_initial_dice(self, "2d10+4")
     my.is_able_to_use_weapons(self, True)
@@ -21,7 +21,7 @@ def tp_init(name, text_name):
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
     my.stat_str(self, 12)
-    my.text_description(self, "A grizzled war-weary zorblin.")
+    my.text_short_description(self, "A grizzled war-weary zorblin.")
 
     delay = 300
     my.tile(self,
@@ -69,7 +69,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zorb_captain", text_name="zorblin leader")
+    tp_init(name="zorb_captain", text_long_name="zorblin leader")
 
 
 init()

@@ -22,8 +22,8 @@ def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 5)
     my.ai_resent_count(self, 1)
@@ -87,7 +87,6 @@ def tp_init(name, text_name):
     my.is_snake(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
-    my.long_text_description(self, "A three foot long snake with brilliant jade green scales. This snake is renowned for being highly venomous, but is not particularly aggressive. Best to avoid.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 10)
@@ -105,8 +104,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 7)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A highly venomous jade viper.")
     my.text_hits(self, "gores")
+    my.text_long_description(self, "A three foot long snake with brilliant jade green scales. This snake is renowned for being highly venomous, but is not particularly aggressive. Best to avoid.")
+    my.text_short_description(self, "A highly venomous jade viper.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -150,7 +150,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="snake_viper", text_name="jade viper")
+    tp_init(name="snake_viper", text_long_name="jade viper")
 
 
 init()

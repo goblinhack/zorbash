@@ -32,8 +32,8 @@ def on_tick(owner, me, x, y):
     return False
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.attack_no_msg(self, True)
     my.attacks_per_round(self, 1)
@@ -72,15 +72,15 @@ def tp_init(name, text_name, short_text_name):
     my.is_weapon(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "This glowing and very heavy sword offers supreme damage potential and durability. Crafted from the core of a long gone power source of the ancients, you must take care as prolonged exposure to this sword will make you weak and sick. But maybe it is worth it?")
     my.noise_on_dropping(self, 5)
     my.on_swing_do(self, "me.on_swing()")
     my.on_tick_do(self, "me.on_tick()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_att_mod(self, 2)  # means +2 per enchant
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy nuclear means of justice.")
     my.text_enchant(self, "+1 DMG, +2 ATT")
+    my.text_long_description(self, "This glowing and very heavy sword offers supreme damage potential and durability. Crafted from the core of a long gone power source of the ancients, you must take care as prolonged exposure to this sword will make you weak and sick. But maybe it is worth it?")
+    my.text_short_description(self, "Thy nuclear means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -96,8 +96,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="sword_plutonium",
-        text_name="sword of plutonium",
-        short_text_name="sword of plutonium",
+        text_long_name="sword of plutonium",
+        text_short_name="sword of plutonium",
     )
 
 

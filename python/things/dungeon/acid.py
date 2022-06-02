@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
-    self = tp.Tp(name, text_name, short_text_name)
+def acid_init(name, text_long_name, text_short_name, tiles=[], left_tiles=[]):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.ai_obstacle(self, True)
     my.damage_acid_chance_d1000(self, 0, 1000)
@@ -13,17 +13,17 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
     my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)
     my.is_acid(self, True)
-    my.is_tickable(self, True)  # for lifespan
     my.is_hazard(self, True)
     my.is_loggable(self, True)
     my.is_meat_eater(self, True)
     my.is_removeable_if_out_of_slots(self, True)
+    my.is_tickable(self, True)  # for lifespan
     my.lifespan_dice(self, "1d20+20")
     my.light_color(self, "green")
     my.light_dist(self, 2)
     my.text_a_or_an(self, "")
-    my.text_description(self, "A pool of hissing acid.")
     my.text_hits(self, "burns")
+    my.text_short_description(self, "A pool of hissing acid.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -40,8 +40,8 @@ def acid_init(name, text_name, short_text_name, tiles=[], left_tiles=[]):
 def init():
     acid_init(
         name="acid1",
-        text_name="hissing acid",
-        short_text_name="acid",
+        text_long_name="hissing acid",
+        text_short_name="acid",
         tiles=[
             "acid1.1",
             "acid1.2",

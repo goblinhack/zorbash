@@ -99,16 +99,15 @@ def on_tick(owner, item, x, y):
     return True
 
 
-def tp_init(name, text_name):
+def tp_init(name, text_long_name):
     global self
-    self = tp.Tp(name, text_name)
+    self = tp.Tp(name, text_long_name)
     # start sort marker
 
     my.gfx_ascii_mode_shown(self, True)
     my.is_buff(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
-    my.long_text_description(self, "Poison causes you 50 percent less damage.")
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_receiving_damage_acid_do(self, "me.on_owner_receiving_damage_acid()")
     my.on_owner_receiving_damage_cold_do(self, "me.on_owner_receiving_damage_cold()")
@@ -129,6 +128,7 @@ def tp_init(name, text_name):
     my.on_owner_receiving_damage_stat_str_do(self, "me.on_owner_receiving_damage_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.on_tick_do(self, "me.on_tick()")
+    my.text_long_description(self, "Poison causes you 50 percent less damage.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     # end sort marker
@@ -138,7 +138,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="buff_poison_resist", text_name="poison resist")
+    tp_init(name="buff_poison_resist", text_long_name="poison resist")
 
 
 init()

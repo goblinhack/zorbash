@@ -10,9 +10,9 @@ const std::string &Tp::equip_carry_anim(void) const { return _equip_carry_anim; 
 const std::string &Tp::gfx_anim_use(void) const { return _gfx_anim_use; }
 const std::string &Tp::is_allied_with(void) const { return _is_allied_with; }
 const std::string &Tp::light_color(void) const { return _light_color; }
-const std::string &Tp::long_text_description2(void) const { return _long_text_description2; }
-const std::string &Tp::long_text_description3(void) const { return _long_text_description3; }
-const std::string &Tp::long_text_description(void) const { return _long_text_description; }
+const std::string &Tp::text_long_description2(void) const { return _text_long_description2; }
+const std::string &Tp::text_long_description3(void) const { return _text_long_description3; }
+const std::string &Tp::text_long_description(void) const { return _text_long_description; }
 const std::string &Tp::name(void) const { return _name; }
 const std::string &Tp::on_attacking_damage_acid_do(void) const { return _on_attacking_damage_acid_do; }
 const std::string &Tp::on_attacking_damage_cold_do(void) const { return _on_attacking_damage_cold_do; }
@@ -196,7 +196,7 @@ const std::string &Tp::on_you_are_hit_but_still_alive_do(void) const { return _o
 const std::string &Tp::on_you_are_on_fire_do(void) const { return _on_you_are_on_fire_do; }
 const std::string &Tp::on_you_are_hit_but_dodge_it_do(void) const { return _on_you_are_hit_but_dodge_it_do; }
 const std::string &Tp::on_you_nat_attack_do(void) const { return _on_you_nat_attack_do; }
-const std::string &Tp::short_text_name(void) const { return _short_text_name; }
+const std::string &Tp::text_short_name(void) const { return _text_short_name; }
 const std::string &Tp::spawn_on_shoved(void) const { return _spawn_on_shoved; }
 const std::string &Tp::str1(void) const { return _str1; }
 const std::string &Tp::str2(void) const { return _str2; }
@@ -205,10 +205,10 @@ const std::string &Tp::target_name_laser(void) const { return _target_name_laser
 const std::string &Tp::target_name_projectile(void) const { return _target_name_projectile; }
 const std::string &Tp::target_name_radial(void) const { return _target_name_radial; }
 const std::string &Tp::text_debuff(void) const { return _text_debuff; }
-const std::string &Tp::text_description(void) const { return _text_description; }
+const std::string &Tp::text_short_description(void) const { return _text_short_description; }
 const std::string &Tp::text_enchant(void) const { return _text_enchant; }
 const std::string &Tp::text_hits(void) const { return _text_hits; }
-const std::string &Tp::text_name(void) const { return _text_name; }
+const std::string &Tp::text_long_name(void) const { return _text_long_name; }
 const std::string &Tp::text_skill(void) const { return _text_skill; }
 const std::string &Tp::text_title(void) const { return _text_title; }
 const std::string &Tp::text_unused1(void) const { return _text_unused1; }
@@ -1116,9 +1116,9 @@ void Tp::item_height_set(int v) { _item_height = v; }
 void Tp::item_width_set(int v) { _item_width = v; }
 void Tp::light_color_set(const std::string &v) { _light_color = v; }
 void Tp::light_dist_set(int v) { _light_dist = v; }
-void Tp::long_text_description3_set(const std::string &v) { _long_text_description3 = v; }
-void Tp::long_text_description2_set(const std::string &v) { _long_text_description2 = v; }
-void Tp::long_text_description_set(const std::string &v) { _long_text_description = v; }
+void Tp::text_long_description3_set(const std::string &v) { _text_long_description3 = v; }
+void Tp::text_long_description2_set(const std::string &v) { _text_long_description2 = v; }
+void Tp::text_long_description_set(const std::string &v) { _text_long_description = v; }
 void Tp::melting_chance_d1000_set(int v) { _melting_chance_d1000 = v; }
 void Tp::minion_limit_set(int v) { _minion_limit = v; }
 void Tp::monst_size_set(int v) { _monst_size = v; }
@@ -1297,7 +1297,7 @@ void Tp::on_you_are_on_fire_do_set(const std::string &v) { _on_you_are_on_fire_d
 void Tp::on_you_nat_attack_do_set(const std::string &v) { _on_you_nat_attack_do = v; }
 void Tp::range_max_set(int v) { _range_max = v; }
 void Tp::rarity_set(int v) { _rarity = v; }
-void Tp::short_text_name_set(const std::string &v) { _short_text_name = v; }
+void Tp::text_short_name_set(const std::string &v) { _text_short_name = v; }
 void Tp::shove_strength_mod_set(int v) { _shove_strength_mod = v; }
 void Tp::shove_strength_set(int v) { _shove_strength = v; }
 void Tp::spawn_group_radius_set(int v) { _spawn_group_radius = v; }
@@ -1345,10 +1345,10 @@ void Tp::target_name_radial_set(const std::string &v) { _target_name_radial = v;
 void Tp::temperature_set(int v) { _temperature = v; }
 void Tp::text_a_or_an_set(const std::string &v) { _text_a_or_an = v; }
 void Tp::text_debuff_set(const std::string &v) { _text_debuff = v; }
-void Tp::text_description_set(const std::string &v) { _text_description = v; }
+void Tp::text_short_description_set(const std::string &v) { _text_short_description = v; }
 void Tp::text_enchant_set(const std::string &v) { _text_enchant = v; }
 void Tp::text_hits_set(const std::string &v) { _text_hits = v; }
-void Tp::text_name_set(const std::string &v) { _text_name = v; }
+void Tp::text_long_name_set(const std::string &v) { _text_long_name = v; }
 void Tp::text_skill_set(const std::string &v) { _text_skill = v; }
 void Tp::text_title_set(const std::string &v) { _text_title = v; }
 void Tp::text_unused1_set(const std::string &v) { _text_unused1 = v; }

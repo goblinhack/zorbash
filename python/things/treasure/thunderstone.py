@@ -34,8 +34,8 @@ def on_use(owner, me, target, x, y):
     my.level_spawn_using_items_radius_range(owner, me, target, "explosion_destroy_floor")
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.blast_max_radius(self, 4)
     my.collision_hit_priority(self, 5)
@@ -66,7 +66,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_used_when_thrown(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "This most dangerous stone can devistate any are where it is thrown. Be careful where you drop it...")
     my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
@@ -74,7 +73,8 @@ def tp_init(name, text_name, short_text_name):
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A harmless looking brownish stone.")
+    my.text_long_description(self, "This most dangerous stone can devistate any are where it is thrown. Be careful where you drop it...")
+    my.text_short_description(self, "A harmless looking brownish stone.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -88,7 +88,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="thunderstone", text_name="thunderstone", short_text_name="thunderstone")
+    tp_init(name="thunderstone", text_long_name="thunderstone", text_short_name="thunderstone")
 
 
 init()

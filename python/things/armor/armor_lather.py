@@ -19,9 +19,9 @@ def on_enchant(me, x, y):
     my.thing_stat_def_mod_incr(me, 1)
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 6)
     my.damaged_chance_d10000(self, 5)
@@ -47,7 +47,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Lathered armor. Not to be confused with leather armor, this armor is leathery with a fine soapy film to help you wriggle out of sticky situations. Apart from that it is mostly useless.")
     my.noise_on_dropping(self, -10)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
@@ -56,8 +55,9 @@ def tp_init(name, text_name, short_text_name):
     my.rarity(self, my.RARITY_COMMON)
     my.stat_def_mod(self, 2)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Lathered armor.")
     my.text_enchant(self, "+2 DEF")
+    my.text_long_description(self, "Lathered armor. Not to be confused with leather armor, this armor is leathery with a fine soapy film to help you wriggle out of sticky situations. Apart from that it is mostly useless.")
+    my.text_short_description(self, "Lathered armor.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -73,8 +73,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="armor_lather",
-        text_name="lathered armor",
-        short_text_name="lathered armor",
+        text_long_name="lathered armor",
+        text_short_name="lathered armor",
     )
 
 

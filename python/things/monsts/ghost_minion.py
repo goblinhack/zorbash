@@ -11,8 +11,8 @@ def on_death(me, x, y):
     my.level_spawn_at_thing(me, "ghost_explosion")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.attack_humanoid(self, True)
@@ -59,7 +59,6 @@ def tp_init(name, text_name):
     my.is_undead(self, True)
     my.light_color(self, "green")
     my.light_dist(self, 2)
-    my.long_text_description(self, "A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 0)
@@ -73,8 +72,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 7)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "The angry spirit of one long passed.")
     my.text_hits(self, "touches")
+    my.text_long_description(self, "A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
+    my.text_short_description(self, "The angry spirit of one long passed.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -119,7 +119,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="ghost_minion", text_name="ghost")
+    tp_init(name="ghost_minion", text_long_name="ghost")
 
 
 init()

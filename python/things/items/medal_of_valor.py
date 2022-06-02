@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gold_value_dice(self, "1")
@@ -26,14 +26,14 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 2)
     my.item_width(self, 2)
-    my.long_text_description(self, "Even just looking at this medal of valor, you feel more brave. Whomever left it here, probably felt the same...")
     my.noise_on_dropping(self, 25)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stat_def_mod(self, 2)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A medal of valor.")
     my.text_enchant(self, "+1 DEF")
+    my.text_long_description(self, "Even just looking at this medal of valor, you feel more brave. Whomever left it here, probably felt the same...")
+    my.text_short_description(self, "A medal of valor.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
@@ -46,7 +46,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="medal_of_valor", text_name="medal of valor", short_text_name="medal of valor")
+    tp_init(name="medal_of_valor", text_long_name="medal of valor", text_short_name="medal of valor")
 
 
 init()

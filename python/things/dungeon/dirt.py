@@ -13,7 +13,7 @@ def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     my.is_cursor_can_hover_over(self, True)
     my.is_dirt(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description(self, "Some dirt, what more can I say?")
+    my.text_short_description(self, "Some dirt, what more can I say?")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)

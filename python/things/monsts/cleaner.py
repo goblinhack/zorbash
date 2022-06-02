@@ -30,8 +30,8 @@ def on_fire(me, x, y):
     explode(me, x, y)
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_wanderer(self, True)
@@ -97,7 +97,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_eater(self, True)
     my.light_color(self, "green")
     my.light_dist(self, 2)
-    my.long_text_description(self, "Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners leave a trail of corrosive slime in their wake. Avoid this. Cleaners also have a habit of eating your hard fought items.")
     my.monst_size(self, my.MONST_SIZE_LARGE)
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 50)
@@ -115,8 +114,9 @@ def tp_init(name, text_name, short_text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 14)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A dungeon auto cleaner jelly thingy.")
     my.text_hits(self, "burns")
+    my.text_long_description(self, "Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners leave a trail of corrosive slime in their wake. Avoid this. Cleaners also have a habit of eating your hard fought items.")
+    my.text_short_description(self, "A dungeon auto cleaner jelly thingy.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_CONSUMER)  # so it appears over things when consuming
@@ -140,7 +140,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="cleaner", text_name="dungeon cleaner", short_text_name="cleaner")
+    tp_init(name="cleaner", text_long_name="dungeon cleaner", text_short_name="cleaner")
 
 
 init()

@@ -10,8 +10,8 @@ def on_unequip(owner, me, x, y):
     my.thing_buff_remove(owner, "buff_missile_resist")
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.blast_max_radius(self, 2)
     my.collision_hit_priority(self, 5)
@@ -44,14 +44,14 @@ def tp_init(name, text_name, short_text_name):
     my.is_very_combustible(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "This magical ring is designed to create a protective shield from missles or projectiles. Damage will be reduced by 50 percent for such attacks whilst this ring is worn.")
     my.normal_placement_rules(self, True)
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.stat_con_mod(self, 3)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Shield ring.")
     my.text_enchant(self, "+1 DEF")
+    my.text_long_description(self, "This magical ring is designed to create a protective shield from missles or projectiles. Damage will be reduced by 50 percent for such attacks whilst this ring is worn.")
+    my.text_short_description(self, "Shield ring.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -67,8 +67,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="ring_shield",
-        text_name="shield ring",
-        short_text_name="shield ring",
+        text_long_name="shield ring",
+        text_short_name="shield ring",
     )
 
 

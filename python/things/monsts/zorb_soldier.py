@@ -7,12 +7,12 @@ def on_death_of_my_leader(me, x, y):
         my.thing_msg(me, "The zorblin soldier cries out in rage!")
 
 
-def tp_init(name, text_name):
-    self = zorb_all.tp_init(name, text_name)
-    my.long_text_description2(self, "This particular zorblin has is a battle hardened veteran of many wars.")
+def tp_init(name, text_long_name):
+    self = zorb_all.tp_init(name, text_long_name)
+    my.text_long_description2(self, "This particular zorblin has is a battle hardened veteran of many wars.")
     my.on_death_of_my_leader_do(self, "me.on_death_of_my_leader()")
     my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
-    my.text_description(self, "A grizzled war-weary soldier.")
+    my.text_short_description(self, "A grizzled war-weary soldier.")
     my.is_able_to_use_armor(self, True)
     my.is_monst_class_b(self, True)
     my.is_biome_dungeon(self, True)
@@ -68,7 +68,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zorb_soldier", text_name="zorblin soldier")
+    tp_init(name="zorb_soldier", text_long_name="zorblin soldier")
 
 
 init()

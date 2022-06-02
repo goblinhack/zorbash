@@ -11,13 +11,13 @@ def on_born(me, x, y):
     my.thing_carry(me, "wand_fire")
 
 
-def tp_init(name, text_name):
-    self = zorb_all.tp_init(name, text_name)
-    my.long_text_description2(self, "This particular zorblin is learned in the dark zorbliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
+def tp_init(name, text_long_name):
+    self = zorb_all.tp_init(name, text_long_name)
+    my.text_long_description2(self, "This particular zorblin is learned in the dark zorbliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
     my.on_born_do(self, "me.on_born()")
-    my.text_description(self, "A master of the dark zorbliny arts.")
+    my.text_short_description(self, "A master of the dark zorbliny arts.")
     my.is_carrier_of_treasure_class_b(self, True)
     my.stat_str(self, 8)
     my.is_monst_class_c(self, True)
@@ -74,7 +74,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zorb_wizard", text_name="zorblin wizard")
+    tp_init(name="zorb_wizard", text_long_name="zorblin wizard")
 
 
 init()

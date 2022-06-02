@@ -77,7 +77,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     return nullptr;
   }
 
-  if (tp->long_text_description().empty()) {
+  if (tp->text_long_description().empty()) {
     IF_DEBUG1 { t->log("Create thing info popup; no, has no text"); }
     wid_thing_info_fini("has no text");
     t->show_botcon_description();
@@ -129,7 +129,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   }
 
-  auto name = t->short_text_and_state_capitalised();
+  auto name = t->text_short_and_state_capitalised();
   wid_popup_window->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$" + name);
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
@@ -137,14 +137,14 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_popup_window->log("It's dead, Jim");
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   } else {
-    wid_popup_window->log(tp->long_text_description(), TEXT_FORMAT_LHS, "pink");
+    wid_popup_window->log(tp->text_long_description(), TEXT_FORMAT_LHS, "pink");
 
-    if (! tp->long_text_description2().empty()) {
-      wid_popup_window->log(tp->long_text_description2(), TEXT_FORMAT_LHS, "yellow");
+    if (! tp->text_long_description2().empty()) {
+      wid_popup_window->log(tp->text_long_description2(), TEXT_FORMAT_LHS, "yellow");
     }
 
-    if (! tp->long_text_description3().empty()) {
-      wid_popup_window->log(tp->long_text_description3(), TEXT_FORMAT_LHS, "orange");
+    if (! tp->text_long_description3().empty()) {
+      wid_popup_window->log(tp->text_long_description3(), TEXT_FORMAT_LHS, "orange");
     }
   }
 
@@ -228,7 +228,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   char tmp[ MAXSHORTSTR ];
 
   for (auto t : ts) {
-    auto name = t->short_text_and_state_capitalised();
+    auto name = t->text_short_and_state_capitalised();
     snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
       if (*c == ' ') {
@@ -291,7 +291,7 @@ bool Game::wid_thing_info_push_popup(Thingp t)
   IF_DEBUG1 { t->log("Push thing info?"); }
   TRACE_AND_INDENT();
 
-  if (t->long_text_description() == "") {
+  if (t->text_long_description() == "") {
     IF_DEBUG1 { t->log("No; cannot push, no text"); }
     return false;
   }
@@ -473,7 +473,7 @@ bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   //
   bool found_one_with_long_text = false;
   for (auto t : ts) {
-    if (! t->long_text_description().empty()) {
+    if (! t->text_long_description().empty()) {
       found_one_with_long_text = true;
       break;
     }
@@ -517,8 +517,8 @@ bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   if (! compact) {
     int i = 0;
     for (auto t : ts) {
-      if (t->long_text_description().empty() && t->long_text_description2().empty() &&
-          t->long_text_description3().empty()) {
+      if (t->text_long_description().empty() && t->text_long_description2().empty() &&
+          t->text_long_description3().empty()) {
         continue;
       }
 
@@ -728,7 +728,7 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t, int index)
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
         }
         w->log(tmp);
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->short_text_and_state_capitalised().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->text_short_and_state_capitalised().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Weapon %20s", tmp2);
         w->log(tmp);
       }

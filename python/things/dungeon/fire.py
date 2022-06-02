@@ -6,8 +6,8 @@ def spawn(me, x, y):
     my.level_spawn_fire_around_thing(me, "small_fire")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.collision_check(self, True)
     my.damage_fire_chance_d1000(self, 0, 1000)
@@ -36,8 +36,8 @@ def tp_init(name, text_name):
     my.on_idle_tick_freq_dice(self, "1d5+5:me.spawn()")
     my.temperature(self, 100)
     my.text_a_or_an(self, "")
-    my.text_description(self, "Fire.")
     my.text_hits(self, "burns")
+    my.text_short_description(self, "Fire.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_FIRE)
@@ -96,7 +96,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="fire", text_name="fire")
+    tp_init(name="fire", text_long_name="fire")
 
 
 init()

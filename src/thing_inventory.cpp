@@ -744,7 +744,7 @@ void Level::inventory_dump(void)
       continue;
     }
 
-    con("Inventory: slot: %d -> %s", i + 1, t->short_text_name().c_str());
+    con("Inventory: slot: %d -> %s", i + 1, t->text_short_name().c_str());
   }
 }
 

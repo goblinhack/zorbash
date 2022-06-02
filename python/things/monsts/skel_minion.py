@@ -28,8 +28,8 @@ def on_death(me, x, y):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones2")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 10)
@@ -85,7 +85,6 @@ def tp_init(name, text_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.is_undead(self, True)
-    my.long_text_description(self, "A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 50)
@@ -103,8 +102,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 10)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "The bones of one surprised to be moving again.")
     my.text_hits(self, "claws")
+    my.text_long_description(self, "A collection of tortured bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
+    my.text_short_description(self, "The bones of one surprised to be moving again.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -265,7 +265,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="skel_minion", text_name="skeleton")
+    tp_init(name="skel_minion", text_long_name="skeleton")
 
 
 init()

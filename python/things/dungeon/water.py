@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name, tiles=[]):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name, tiles=[]):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_obstacle(self, True)
     my.environ_avoids_fire(self, 1)
@@ -16,7 +16,7 @@ def tp_init(name, text_name, tiles=[]):
     my.is_hazard(self, True)
     my.is_shallow_water(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description(self, "Some shallow water.")
+    my.text_short_description(self, "Some shallow water.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -34,7 +34,7 @@ def tp_init(name, text_name, tiles=[]):
 def init():
     tp_init(
         name="water1",
-        text_name="water",
+        text_long_name="water",
         tiles=[
             "water1.1",
             "water1.2",

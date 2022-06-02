@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_mode_shown(self, True)
@@ -23,13 +23,13 @@ def tp_init(name, text_name, short_text_name):
     my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Ripe slice of melon. With a dash of ginger and less dirt on it, this might be nice.")
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "10+1d10")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Slice of melon.")
+    my.text_long_description(self, "Ripe slice of melon. With a dash of ginger and less dirt on it, this might be nice.")
+    my.text_short_description(self, "Slice of melon.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker
@@ -41,7 +41,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="food_melon1", text_name="slice of melon", short_text_name="slice of melon")
+    tp_init(name="food_melon1", text_long_name="slice of melon", text_short_name="slice of melon")
 
 
 init()

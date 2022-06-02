@@ -54,9 +54,9 @@ def on_enchant(me, x, y):
     my.thing_charge_count_incr(me, 5)
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.gfx_ascii_mode_shown(self, True)
@@ -94,7 +94,7 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 4)
     my.item_width(self, 4)
     my.target_name_laser(self, "laser_energy")
-    my.long_text_description(self, "Discharges a powerful ray of energy upon an unwitting recipient...")
+    my.text_long_description(self, "Discharges a powerful ray of energy upon an unwitting recipient...")
     my.noise_on_dropping(self, 5)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
@@ -105,7 +105,7 @@ def tp_init(name, text_name, short_text_name):
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A staff of energy.")
+    my.text_short_description(self, "A staff of energy.")
     my.text_enchant(self, "+5 CHARGE, +1 DMG")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -136,8 +136,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="staff_energy",
-        text_name="staff of dept of energy",
-        short_text_name="staff of energy",
+        text_long_name="staff of dept of energy",
+        text_short_name="staff of energy",
     )
 
 

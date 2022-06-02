@@ -25,8 +25,8 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
@@ -54,14 +54,14 @@ def tp_init(name, text_name, short_text_name):
     my.is_usable(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Use this magical stone to bestow powers on other items you carry.")
     my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A glowing enchantstone.")
+    my.text_long_description(self, "Use this magical stone to bestow powers on other items you carry.")
+    my.text_short_description(self, "A glowing enchantstone.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -75,7 +75,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="enchantstone", text_name="enchantstone", short_text_name="enchantstone")
+    tp_init(name="enchantstone", text_long_name="enchantstone", text_short_name="enchantstone")
 
 
 init()

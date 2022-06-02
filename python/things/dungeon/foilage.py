@@ -23,10 +23,10 @@ def tp_init(name, tiles=[]):
     my.is_hittable(self, True)
     my.is_interesting(self, True)
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
-    my.long_text_description(self, "Thick and sicky looking foilage and roots. Monsters cannot see through these thick bushes. Use them for cover.")
     my.noise_blocker(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description(self, "Thick and sicky looking foilage and roots.")
+    my.text_long_description(self, "Thick and sicky looking foilage and roots. Monsters cannot see through these thick bushes. Use them for cover.")
+    my.text_short_description(self, "Thick and sicky looking foilage and roots.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_FOILAGE)

@@ -14,8 +14,8 @@ def on_owner_attacking_damage_draining(me, owner, victim, x, y, damage):
     return damage + my.thing_enchant_get(me) * 3
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.attacks_per_round(self, 2)
     my.damaged_chance_d10000(self, 5)
@@ -52,15 +52,15 @@ def tp_init(name, text_name, short_text_name):
     my.is_weapon(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "This magical sword deals additional draining damage to suck the will to live out of your opponents.")
     my.noise_on_dropping(self, 5)
     my.on_owner_attacking_damage_draining_do(self, "me.on_owner_attacking_damage_draining()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy tiring means of justice.")
     my.text_enchant(self, "+3 DMG stam")
+    my.text_long_description(self, "This magical sword deals additional draining damage to suck the will to live out of your opponents.")
+    my.text_short_description(self, "Thy tiring means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -76,8 +76,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="sword_draining",
-        text_name="sword of draining",
-        short_text_name="sword of draining",
+        text_long_name="sword of draining",
+        text_short_name="sword of draining",
     )
 
 

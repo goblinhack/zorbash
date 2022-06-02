@@ -16,7 +16,7 @@ def tp_init(name, tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_wet_grass(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description(self, "Tall and oddly healthy subterranean grass.")
+    my.text_short_description(self, "Tall and oddly healthy subterranean grass.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)

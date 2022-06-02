@@ -24,8 +24,8 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 10)
@@ -84,7 +84,6 @@ def tp_init(name, text_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.is_undead(self, True)
-    my.long_text_description(self, "A monstrous skeleton. It towers above you. It seems unhappy. Quite what body this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this. Watch, these can rise again!")
     my.monst_size(self, my.MONST_SIZE_GIANT)
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 50)
@@ -102,8 +101,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 21)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A monstrous skeleton, possibly unfriendly.")
     my.text_hits(self, "claws")
+    my.text_long_description(self, "A monstrous skeleton. It towers above you. It seems unhappy. Quite what body this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this. Watch, these can rise again!")
+    my.text_short_description(self, "A monstrous skeleton, possibly unfriendly.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -264,7 +264,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="skel_giant", text_name="giant skeleton")
+    tp_init(name="skel_giant", text_long_name="giant skeleton")
 
 
 init()

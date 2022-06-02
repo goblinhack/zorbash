@@ -49,14 +49,14 @@ def on_death(me, x, y):
             my.thing_perma_death(follower, "Leader died!")
 
 
-def tp_init(name, text_name):
-    self = zorb_all.tp_init(name, text_name)
-    my.long_text_description2(self, "This particular zorblin is learned in the dark arts. Withered of body, but sharp of mind, beware the abilities of this zorblin.")
+def tp_init(name, text_long_name):
+    self = zorb_all.tp_init(name, text_long_name)
+    my.text_long_description2(self, "This particular zorblin is learned in the dark arts. Withered of body, but sharp of mind, beware the abilities of this zorblin.")
     my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "me.on_death()")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
-    my.text_description(self, "A master of the darkest arts.")
+    my.text_short_description(self, "A master of the darkest arts.")
     # my.is_carrier_of_treasure_class_b(self, True)
     my.is_monst_class_b(self, True)
     my.is_biome_dungeon(self, True)
@@ -116,7 +116,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zorb_necro", text_name="zorblin necromancer")
+    tp_init(name="zorb_necro", text_long_name="zorblin necromancer")
 
 
 init()

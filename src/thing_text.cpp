@@ -31,12 +31,12 @@ std::string Thing::text_a_or_an(void)
   if (out == "") {
     auto prefix = tpp->text_a_or_an();
     if (prefix == "") {
-      out = tpp->text_name();
+      out = tpp->text_long_name();
     } else {
-      out = prefix + " " + tpp->text_name();
+      out = prefix + " " + tpp->text_long_name();
     }
   } else {
-    out += tpp->text_name();
+    out += tpp->text_long_name();
   }
 
   return (out);
@@ -60,7 +60,7 @@ std::string Thing::text_the(bool include_owner)
   auto t_o = top_owner();
   if (include_owner) {
     if (t_o && ! t_o->is_player()) {
-      out += t_o->text_name();
+      out += t_o->text_long_name();
       out += "'s ";
     }
   }
@@ -77,7 +77,7 @@ std::string Thing::text_the(bool include_owner)
     }
   }
 
-  out += tpp->text_name();
+  out += tpp->text_long_name();
 
   return (out);
 }
@@ -100,12 +100,12 @@ std::string Thing::text_the_no_dying(bool include_owner)
   auto t_o = top_owner();
   if (include_owner) {
     if (t_o && ! t_o->is_player()) {
-      out += t_o->text_name();
+      out += t_o->text_long_name();
       out += "'s ";
     }
   }
 
-  out += tpp->text_name();
+  out += tpp->text_long_name();
 
   return (out);
 }
@@ -126,7 +126,7 @@ std::string Thing::text_The_no_dying(void)
   return (out);
 }
 
-std::string Thing::short_text_a_or_an(void)
+std::string Thing::text_short_a_or_an(void)
 {
   TRACE_NO_INDENT();
   auto tpp = tp();
@@ -149,18 +149,18 @@ std::string Thing::short_text_a_or_an(void)
   if (out == "") {
     auto prefix = tpp->text_a_or_an();
     if (prefix == "") {
-      out = tpp->short_text_name();
+      out = tpp->text_short_name();
     } else {
-      out = prefix + " " + tpp->short_text_name();
+      out = prefix + " " + tpp->text_short_name();
     }
   } else {
-    out += tpp->short_text_name();
+    out += tpp->text_short_name();
   }
 
   return (out);
 }
 
-std::string Thing::short_text_the(void)
+std::string Thing::text_short_the(void)
 {
   TRACE_NO_INDENT();
   auto tpp = tp();
@@ -182,15 +182,15 @@ std::string Thing::short_text_the(void)
     }
   }
 
-  out += tpp->short_text_name();
+  out += tpp->text_short_name();
 
   return (out);
 }
 
-std::string Thing::short_text_The(void)
+std::string Thing::text_short_The(void)
 {
   TRACE_NO_INDENT();
-  auto out = short_text_the();
+  auto out = text_short_the();
   out[ 0 ] = toupper(out[ 0 ]);
   return (out);
 }
@@ -198,10 +198,10 @@ std::string Thing::short_text_The(void)
 //
 // foo bar -> Foo Bar
 //
-std::string Thing::short_text_capitalised(void)
+std::string Thing::text_short_capitalised(void)
 {
   TRACE_NO_INDENT();
-  std::string out = text_name();
+  std::string out = text_long_name();
 
   char *b          = (char *) out.c_str();
   char *e          = b + out.size();
@@ -223,7 +223,7 @@ std::string Thing::short_text_capitalised(void)
   return out;
 }
 
-std::string Thing::short_text_and_state_capitalised(void)
+std::string Thing::text_short_and_state_capitalised(void)
 {
   TRACE_NO_INDENT();
   std::string out;
@@ -240,7 +240,7 @@ std::string Thing::short_text_and_state_capitalised(void)
     }
   }
 
-  out += text_name();
+  out += text_long_name();
 
   char *b          = (char *) out.c_str();
   char *e          = b + out.size();
@@ -269,7 +269,7 @@ std::string Thing::short_text_and_state_capitalised(void)
 void Thing::show_botcon_description(void)
 {
   TRACE_NO_INDENT();
-  auto text = text_description();
+  auto text = text_short_description();
 
   bool skip_showing_keys_to_use = true;
   switch (game->state) {

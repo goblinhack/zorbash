@@ -6,8 +6,8 @@ import tp
 # NOTE: chasm tiles are not blitted explicitly. Instead a floor tile
 # will check for the presence of a chasm beneath it and blit the chasm
 #
-def chasm_init(name, text_name, tiles=[]):
-    self = tp.Tp(name, text_name)
+def chasm_init(name, text_long_name, tiles=[]):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_obstacle(self, True)
     my.gfx_ascii_mode_shown(self, True)
@@ -18,7 +18,7 @@ def chasm_init(name, text_name, tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_hazard(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump into).")
+    my.text_short_description(self, "%%fg=red$A yawning chasm to the unknown below%%fg=reset$ (double click to jump into).")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_CHASM)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -31,7 +31,7 @@ def chasm_init(name, text_name, tiles=[]):
 
 
 def init():
-    chasm_init(name="chasm1", text_name="yawning chasm", tiles=[])
+    chasm_init(name="chasm1", text_long_name="yawning chasm", tiles=[])
 
 
 init()

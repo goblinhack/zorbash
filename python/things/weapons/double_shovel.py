@@ -14,8 +14,8 @@ def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
     return damage + my.thing_enchant_get(me)
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_180(self, True)
     my.crit_chance_d10000(self, 500)
@@ -52,7 +52,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_wooden(self, True)
     my.item_height(self, 9)
     my.item_width(self, 9)
-    my.long_text_description(self, "A truly dreadful weapon of last resort. The masterwork double bladed shovel. Ideal for allotment use and casual bludgeoning.")
     my.noise_on_dropping(self, 40)
     my.on_owner_attacking_damage_melee_do(self, "me.on_owner_attacking_damage_melee()")
     my.on_swing_do(self, "me.on_swing()")
@@ -60,8 +59,9 @@ def tp_init(name, text_name, short_text_name):
     my.stamina_drain_on_attacking(self, 3)
     my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy diggy means of justice.")
     my.text_enchant(self, "+1 DMG, +1 ATT")
+    my.text_long_description(self, "A truly dreadful weapon of last resort. The masterwork double bladed shovel. Ideal for allotment use and casual bludgeoning.")
+    my.text_short_description(self, "Thy diggy means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -75,7 +75,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="double_shovel", text_name="double shovel", short_text_name="double shovel")
+    tp_init(name="double_shovel", text_long_name="double shovel", text_short_name="double shovel")
 
 
 init()

@@ -6114,22 +6114,22 @@ const std::string &Thing::light_color(void)
   return (tp()->light_color());
 }
 
-const std::string &Thing::long_text_description(void)
+const std::string &Thing::text_long_description(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->long_text_description());
+  return (tp()->text_long_description());
 }
 
-const std::string &Thing::long_text_description2(void)
+const std::string &Thing::text_long_description2(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->long_text_description2());
+  return (tp()->text_long_description2());
 }
 
-const std::string &Thing::long_text_description3(void)
+const std::string &Thing::text_long_description3(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->long_text_description3());
+  return (tp()->text_long_description3());
 }
 
 const std::string &Thing::text_unused1(void)
@@ -6342,10 +6342,10 @@ const std::string &Thing::target_name_projectile(void)
   return (tp()->target_name_projectile());
 }
 
-const std::string &Thing::short_text_name(void)
+const std::string &Thing::text_short_name(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->short_text_name());
+  return (tp()->text_short_name());
 }
 
 const std::string &Thing::spawn_on_shoved(void)
@@ -6378,10 +6378,10 @@ const std::string &Thing::is_allied_with(void)
   return (tp()->is_allied_with());
 }
 
-const std::string &Thing::text_description(void)
+const std::string &Thing::text_short_description(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->text_description());
+  return (tp()->text_short_description());
 }
 
 const std::string &Thing::text_enchant(void)
@@ -6402,10 +6402,10 @@ const std::string &Thing::damage_nat_attack_type(void)
   return (tp()->damage_nat_attack_type());
 }
 
-const std::string &Thing::text_name(void)
+const std::string &Thing::text_long_name(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->text_name());
+  return (tp()->text_long_name());
 }
 
 const std::string &Thing::text_skill(void)

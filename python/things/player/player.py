@@ -316,8 +316,8 @@ def on_attacking_damage_stat_con(me, victim, x, y, damage):
     return damage
 
 
-def tp_init(name, text_name, short_text_name, title):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name, title):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.aggression_level_pct(self, 25)
     my.ai_detect_secret_doors(self, True)
@@ -399,9 +399,6 @@ def tp_init(name, text_name, short_text_name, title):
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
     my.light_dist(self, 10)
-    my.long_text_description2(self, "A most noble adventurer of no particular race, gender or creed. Devoid of fear and stout of heart.")
-    my.long_text_description3(self, "Likes kittens.")
-    my.long_text_description(self, "You.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
     my.noise_additional_on_jump_end(self, 20)
@@ -466,8 +463,11 @@ def tp_init(name, text_name, short_text_name, title):
     my.stat_luck(self, 10)
     my.stat_str(self, 10)
     my.text_a_or_an(self, "the")
-    my.text_description(self, "Our most noble adventurer. Press 'h' for help.")
     my.text_hits(self, "hits")
+    my.text_long_description2(self, "A most noble adventurer of no particular race, gender or creed. Devoid of fear and stout of heart.")
+    my.text_long_description3(self, "Likes kittens.")
+    my.text_long_description(self, "You.")
+    my.text_short_description(self, "Our most noble adventurer. Press 'h' for help.")
     my.text_title(self, title)
     my.tick_prio(self, my.MAP_TICK_PRIO_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -601,15 +601,15 @@ def tp_init(name, text_name, short_text_name, title):
 def init():
     tp_init(
         name="player1",
-        text_name="noble warrior",
+        text_long_name="noble warrior",
         title="Ser Hackalot",
-        short_text_name="you",
+        text_short_name="you",
     )
     tp_init(
         name="player2",
-        text_name="noble warrior",
+        text_long_name="noble warrior",
         title="Ser Deadalot",
-        short_text_name="you",
+        text_short_name="you",
     )
 
 
