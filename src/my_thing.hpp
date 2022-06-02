@@ -378,8 +378,6 @@ public:
   Thingp top_spawned_owner(void);
 
   std::vector< Thingp > in_the_way(const point s, const point e, size_t max_elems = 0);
-  std::vector< Thingp > in_the_way_(const point s, const point e, int x0_in, int y0_in, int x1_in, int y1_in,
-                                    int flag, size_t max_elems);
 
   bool ai_blocked_completely(void);
   bool ai_blocked(void);
@@ -1937,19 +1935,20 @@ public:
 
   std::size_t light_count(void);
 
-  std::string short_text_The(void);
+  std::string short_text_and_state_capitalised(void);
+  std::string short_text_capitalised(void);
   std::string short_text_a_or_an(void);
-  std::string short_text_capitalise(void);
   std::string short_text_the(void);
-  std::string text_The(void);
-  std::string text_The_no_dying(void);
+  std::string short_text_The(void);
   std::string text_a_or_an(void);
   std::string text_the(bool include_owner = false);
   std::string text_the_no_dying(bool include_owner = false);
+  std::string text_The_no_dying(void);
+  std::string text_The(void);
   std::string to_dbg_saved_string(void);
   std::string to_dbg_string(void);
-  std::string to_string(void);
   std::string to_short_string(void);
+  std::string to_string(void);
 
   std::vector< Lightp > &light_get(void);
 

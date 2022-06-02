@@ -1070,93 +1070,23 @@ static void ascii_map_thing_replace(int x, int y, Tilep tile, color c)
   ascii_set_bg(x, y, c);
 }
 
-static void do_ascii_line(int x0_in, int y0_in, int x1_in, int y1_in, int flag, Tilep tile, color c)
-{
-  TRACE_NO_INDENT();
-  float temp;
-  float dx;
-  float dy;
-  float tdy;
-  float dydx;
-  float p;
-  float x;
-  float y;
-  float i;
-
-  float x0 = x0_in;
-  float y0 = y0_in;
-  float x1 = x1_in;
-  float y1 = y1_in;
-
-  if (x0 > x1) {
-    temp = x0;
-    x0   = x1;
-    x1   = temp;
-
-    temp = y0;
-    y0   = y1;
-    y1   = temp;
-  }
-
-  dx = x1 - x0;
-  dy = y1 - y0;
-
-  tdy  = 2.0 * dy;
-  dydx = tdy - (2.0 * dx);
-
-  p = tdy - dx;
-  x = x0;
-  y = y0;
-
-  if (flag == 0) {
-    ascii_map_thing_replace((int) x, (int) y, tile, c);
-  } else if (flag == 1) {
-    ascii_map_thing_replace((int) y, (int) x, tile, c);
-  } else if (flag == 2) {
-    ascii_map_thing_replace((int) y, (int) -x, tile, c);
-  } else if (flag == 3) {
-    ascii_map_thing_replace((int) x, (int) -y, tile, c);
-  }
-
-  for (i = 1; i <= dx; i++) {
-    x++;
-
-    if (p < 0) {
-      p += tdy;
-    } else {
-      p += dydx;
-      y++;
-    }
-
-    if (flag == 0) {
-      ascii_map_thing_replace((int) x, (int) y, tile, c);
-    } else if (flag == 1) {
-      ascii_map_thing_replace((int) y, (int) x, tile, c);
-    } else if (flag == 2) {
-      ascii_map_thing_replace((int) y, (int) -x, tile, c);
-    } else if (flag == 3) {
-      ascii_map_thing_replace((int) x, (int) -y, tile, c);
-    }
-  }
-}
-
 void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep tile, color c)
 {
-  TRACE_NO_INDENT();
-  float slope = 100.0;
+  int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+  int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+  int err = dx + dy, e2; /* error value e_xy */
 
-  if (x0 != x1) {
-    slope = (y1 - y0) * (1.0 / (x1 - x0));
-  }
-
-  if ((0 <= slope) && (slope <= 1)) {
-    do_ascii_line(x0, y0, x1, y1, 0, tile, c);
-  } else if ((-1 <= slope) && (slope <= 0)) {
-    do_ascii_line(x0, -y0, x1, -y1, 3, tile, c);
-  } else if (slope > 1) {
-    do_ascii_line(y0, x0, y1, x1, 1, tile, c);
-  } else {
-    do_ascii_line(-y0, x0, -y1, x1, 2, tile, c);
+  for (;;) { /* loop */
+    ascii_map_thing_replace(x0, y0, tile, c);
+    e2 = 2 * err;
+    if (e2 >= dy) {
+      err += dy;
+      x0 += sx;
+    } /* e_xy+e_x > 0 */
+    if (e2 <= dx) {
+      err += dx;
+      y0 += sy;
+    } /* e_xy+e_y < 0 */
   }
 }
 

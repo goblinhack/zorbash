@@ -39,10 +39,10 @@ void wid_show_dungeon_contents(Levelp l)
       FOR_ALL_THINGS_THAT_INTERACT(l, t, x, y)
       {
         if (t->is_monst() || t->is_mob()) {
-          monst_contents[ t->short_text_capitalise() ]++;
+          monst_contents[ t->short_text_and_state_capitalised() ]++;
         }
         if (t->is_treasure()) {
-          treasure_contents[ t->short_text_capitalise() ]++;
+          treasure_contents[ t->short_text_and_state_capitalised() ]++;
         }
       }
       FOR_ALL_THINGS_END();

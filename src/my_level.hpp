@@ -629,9 +629,9 @@ public:
   Tpp tp_random_weapon_class_b(const point p);
 
   bool buffbox_over(const uint32_t slot);
-  bool can_see_(int x0_in, int y0_in, int x1_in, int y1_in, int flag);
   bool can_see_obstacle(int x, int y);
   bool can_see_unimpeded(int x0, int y0, int x1, int y1);
+  bool can_see_unimpeded(const point &start, const point &end);
   bool create_dungeon(point3d at, uint32_t seed);
   bool create_sewer_pipes(point3d at);
   bool create_sewer(point3d at, uint32_t seed);

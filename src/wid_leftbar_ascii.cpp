@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
@@ -50,6 +51,20 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
 {
   TRACE_NO_INDENT();
 
+  auto player = level->player;
+
+  if (t->is_player()) {
+    return;
+  }
+
+  if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+    return;
+  }
+
+  if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
+    return;
+  }
+
   level->wid_leftbar_things.push_back(t->id);
   t->log("Leftbar add %X", t->id.id);
 
@@ -59,7 +74,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     auto  w  = wid_new_square_button(wid_leftbar, "It");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
-    auto  s  = dynprintf("%%fg=gray$%s", t->short_text_capitalise().c_str());
+    auto  s  = dynprintf("%%fg=gray$%s", t->short_text_capitalised().c_str());
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
@@ -107,7 +122,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     if (t->is_monst()) {
-      wid_set_text(w, "(Deceased)");
+      wid_set_text(w, "(Dead)");
     } else {
       wid_set_text(w, "(Broken)");
     }
@@ -228,14 +243,6 @@ bool wid_leftbar_ascii_create(void)
       continue;
     }
 
-    if (t->is_player()) {
-      continue;
-    }
-
-    if (! level->can_see_unimpeded(player->curr_at.x, player->curr_at.y, t->curr_at.x, t->curr_at.y)) {
-      continue;
-    }
-
     wid_leftbar_ascii_describe(level, t, y_at, width);
   }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
@@ -246,14 +253,6 @@ bool wid_leftbar_ascii_create(void)
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(game->level, t)
   {
     if (! t->is_dead) {
-      continue;
-    }
-
-    if (t->is_player()) {
-      continue;
-    }
-
-    if (! level->can_see_unimpeded(player->curr_at.x, player->curr_at.y, t->curr_at.x, t->curr_at.y)) {
       continue;
     }
 
@@ -270,10 +269,6 @@ bool wid_leftbar_ascii_create(void)
       continue;
     }
 
-    if (! level->can_see_unimpeded(player->curr_at.x, player->curr_at.y, t->curr_at.x, t->curr_at.y)) {
-      continue;
-    }
-
     wid_leftbar_ascii_describe(level, t, y_at, width);
   }
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
@@ -285,10 +280,6 @@ bool wid_leftbar_ascii_create(void)
   {
     if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon() &&
         ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel()) {
-      continue;
-    }
-
-    if (! level->can_see_unimpeded(player->curr_at.x, player->curr_at.y, t->curr_at.x, t->curr_at.y)) {
       continue;
     }
 

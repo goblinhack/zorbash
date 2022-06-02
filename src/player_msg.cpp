@@ -184,7 +184,7 @@ void Thing::msg(const char *fmt, ...)
       return;
     }
 
-    if (! level->can_see_unimpeded(player->curr_at.x, player->curr_at.y, curr_at.x, curr_at.y)) {
+    if (! level->can_see_unimpeded(player->curr_at, curr_at)) {
       dbg("Cannot directly see for msg: %s", why.c_str());
       TRACE_AND_INDENT();
       va_start(args, fmt);

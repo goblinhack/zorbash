@@ -384,7 +384,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, u
       // For pack spawning make sure all followers can see each other
       //
       if (is_able_to_follow()) {
-        if (! level->can_see_unimpeded(spawn_at.x, spawn_at.y, curr_at.x, curr_at.y)) {
+        if (! level->can_see_unimpeded(spawn_at, curr_at)) {
           continue;
         }
       }
