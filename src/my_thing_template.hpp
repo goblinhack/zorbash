@@ -919,7 +919,7 @@ public:
   void resurrect_dice_set(const std::string &);
   void spawn_group_size_dice_set(const std::string &);
 
-  std::string short_text_capitalise(void) const;
+  std::string short_text_capitalised(void) const;
   std::string text_a_or_an(void) const;
   std::string to_string(void);
   std::string to_short_string(void);

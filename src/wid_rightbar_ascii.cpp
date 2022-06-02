@@ -481,7 +481,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_pos(w, tl, br);
         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, iter->tp()->short_text_capitalise());
+        wid_set_text(w, iter->short_text_and_state_capitalised());
         wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
         wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -530,7 +530,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_int_context(w, slot);
         wid_set_text_lhs(w, true);
 
-        wid_set_text(w, std::to_string(slot) + " " + t->tp()->short_text_capitalise());
+        wid_set_text(w, std::to_string(slot) + " " + t->short_text_and_state_capitalised());
         wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
         wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -630,7 +630,7 @@ bool wid_rightbar_ascii_create(void)
             wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
             wid_set_int_context(w, i);
             wid_set_text_lhs(w, true);
-            wid_set_text(w, t->tp()->short_text_capitalise());
+            wid_set_text(w, t->short_text_and_state_capitalised());
             wid_update(w);
           }
           item++;
@@ -727,7 +727,7 @@ bool wid_rightbar_ascii_create(void)
             wid_set_on_mouse_up(w, wid_skillbox_item_mouse_up);
             wid_set_int_context(w, i);
             wid_set_text_lhs(w, true);
-            wid_set_text(w, t->tp()->short_text_capitalise());
+            wid_set_text(w, t->short_text_and_state_capitalised());
             wid_update(w);
           }
           item++;
@@ -775,7 +775,7 @@ bool wid_rightbar_ascii_create(void)
             wid_set_mode(w, WID_MODE_NORMAL);
             wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
             wid_set_text_lhs(w, true);
-            wid_set_text(w, iter->tp()->short_text_capitalise());
+            wid_set_text(w, iter->short_text_and_state_capitalised());
             wid_set_on_mouse_over_begin(w, wid_buffbox_mouse_over_begin);
             wid_set_on_mouse_over_end(w, wid_buffbox_mouse_over_end);
             wid_update(w);
@@ -824,7 +824,7 @@ bool wid_rightbar_ascii_create(void)
             wid_set_mode(w, WID_MODE_NORMAL);
             wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
             wid_set_text_lhs(w, true);
-            wid_set_text(w, iter->tp()->short_text_capitalise());
+            wid_set_text(w, iter->short_text_and_state_capitalised());
             wid_set_on_mouse_over_begin(w, wid_debuffbox_mouse_over_begin);
             wid_set_on_mouse_over_end(w, wid_debuffbox_mouse_over_end);
             wid_update(w);

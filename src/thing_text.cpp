@@ -198,7 +198,32 @@ std::string Thing::short_text_The(void)
 //
 // foo bar -> Foo Bar
 //
-std::string Thing::short_text_capitalise(void)
+std::string Thing::short_text_capitalised(void)
+{
+  TRACE_NO_INDENT();
+  std::string out = text_name();
+
+  char *b          = (char *) out.c_str();
+  char *e          = b + out.size();
+  char *c          = b;
+  bool  word_start = true;
+  while (c < e) {
+    if (word_start) {
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
+      word_start = false;
+    } else if (*c == ' ') {
+      word_start = true;
+    }
+
+    c++;
+  }
+
+  return out;
+}
+
+std::string Thing::short_text_and_state_capitalised(void)
 {
   TRACE_NO_INDENT();
   std::string out;

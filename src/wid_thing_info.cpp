@@ -129,7 +129,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   }
 
-  auto name = t->short_text_capitalise();
+  auto name = t->short_text_and_state_capitalised();
   wid_popup_window->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$" + name);
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
@@ -228,7 +228,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   char tmp[ MAXSHORTSTR ];
 
   for (auto t : ts) {
-    auto name = t->short_text_capitalise();
+    auto name = t->short_text_and_state_capitalised();
     snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
       if (*c == ' ') {
@@ -728,7 +728,7 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t, int index)
           snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
         }
         w->log(tmp);
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->short_text_capitalise().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", curr_weapon->short_text_and_state_capitalised().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Weapon %20s", tmp2);
         w->log(tmp);
       }
