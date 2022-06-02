@@ -23,7 +23,7 @@ static WidPopup *wid_leftbar_popup;
 
 void wid_leftbar_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_destroy(&wid_leftbar);
 
   delete wid_leftbar_popup;
@@ -37,12 +37,13 @@ void wid_leftbar_fini(void)
 
 bool wid_leftbar_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return wid_leftbar_create();
 }
 
 bool wid_leftbar_create(void)
 {
+  TRACE_NO_INDENT();
   wid_leftbar_fini();
 
   auto level = game->get_current_level();
