@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name, tiles=[]):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name, tiles=[]):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 2)
@@ -33,7 +33,7 @@ def tp_init(name, text_name, tiles=[]):
     my.spawn_on_shoved(self, "fire")
     my.temperature(self, 100)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A beacon of light in this blighted place.")
+    my.text_short_description(self, "A beacon of light in this blighted place.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
@@ -54,7 +54,7 @@ def tp_init(name, text_name, tiles=[]):
 def init():
     tp_init(
         name="brazier",
-        text_name="brazier",
+        text_long_name="brazier",
         tiles=[
             "brazier.1",
             "brazier.2",

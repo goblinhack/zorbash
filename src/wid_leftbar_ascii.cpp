@@ -74,7 +74,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     auto  w  = wid_new_square_button(wid_leftbar, "It");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
-    auto  s  = dynprintf("%%fg=gray$%s", t->short_text_capitalised().c_str());
+    auto  s  = dynprintf("%%fg=gray$%s", t->text_short_capitalised().c_str());
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
     wid_set_style(w, UI_WID_STYLE_NORMAL);

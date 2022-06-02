@@ -72,8 +72,8 @@ def on_firing_at_something(me, target, x, y):  # Return True on doing an action
     return False
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 100)
@@ -138,7 +138,6 @@ def tp_init(name, text_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.is_undead(self, True)
-    my.long_text_description(self, "A corpse wrapped in once fine linens and bathed in the essence of evil. Unlike most corpses, this one likes to wander around with its minions. Beware of the dark powers this mummy can wield. Likes to keep pet snakes.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 50)
@@ -160,8 +159,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 16)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A mummy necromancer.")
     my.text_hits(self, "claws")
+    my.text_long_description(self, "A corpse wrapped in once fine linens and bathed in the essence of evil. Unlike most corpses, this one likes to wander around with its minions. Beware of the dark powers this mummy can wield. Likes to keep pet snakes.")
+    my.text_short_description(self, "A mummy necromancer.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -198,7 +198,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="mummy_necro", text_name="mummy necromancer")
+    tp_init(name="mummy_necro", text_long_name="mummy necromancer")
 
 
 init()

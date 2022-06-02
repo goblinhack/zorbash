@@ -14,8 +14,8 @@ def on_born(me, x, y):
 #
 # This is an internal only object to fire lasers from monsters
 #
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.damage_lightning_chance_d1000(self, 0, 1000)
     my.damage_lightning_dice(self, "1d10")  # This is the damage when the monst fires
@@ -38,8 +38,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="laser_lightning_fork",
-        text_name="fork lightning",
-        short_text_name="fork lightning",
+        text_long_name="fork lightning",
+        text_short_name="fork lightning",
     )
 
 

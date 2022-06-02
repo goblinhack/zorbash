@@ -2,9 +2,9 @@ import zorb_all
 import my
 
 
-def tp_init(name, text_name):
-    self = zorb_all.tp_init(name, text_name)
-    my.text_description(self, "A very lesser and a bit insecure zorblin.")
+def tp_init(name, text_long_name):
+    self = zorb_all.tp_init(name, text_long_name)
+    my.text_short_description(self, "A very lesser and a bit insecure zorblin.")
     my.is_able_to_use_weapons(self, True)
     my.is_monst_class_b(self, True)
     my.is_biome_dungeon(self, True)
@@ -57,7 +57,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zorb_single", text_name="lesser zorblin")
+    tp_init(name="zorb_single", text_long_name="lesser zorblin")
 
 
 init()

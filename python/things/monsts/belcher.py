@@ -15,8 +15,8 @@ def on_death(me, x, y):
     my.level_spawn_at_thing(me, "green_splatter")
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_wanderer(self, True)
@@ -70,7 +70,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_tickable(self, True)
     my.light_color(self, "green")
     my.light_dist(self, 2)
-    my.long_text_description(self, "Dungeon belchers are carnivorous plants that have evolved creative means of catching their prey. Beware their stench...")
     my.monst_size(self, my.MONST_SIZE_LARGE)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 50)
@@ -86,8 +85,9 @@ def tp_init(name, text_name, short_text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 10)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A gaseous belcher. But don't call it that to its face.")
     my.text_hits(self, "burns")
+    my.text_long_description(self, "Dungeon belchers are carnivorous plants that have evolved creative means of catching their prey. Beware their stench...")
+    my.text_short_description(self, "A gaseous belcher. But don't call it that to its face.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_CONSUMER)  # so it appears over things when consuming
@@ -127,7 +127,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="belcher", text_name="dungeon belcher", short_text_name="belcher")
+    tp_init(name="belcher", text_long_name="dungeon belcher", text_short_name="belcher")
 
 
 init()

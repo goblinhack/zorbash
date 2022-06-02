@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 0)
     my.collision_hit_priority(self, 6)
@@ -29,11 +29,11 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "This magical map can show you the position of all monsters on the level as they move around.")
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "An aged beast map.")
+    my.text_long_description(self, "This magical map can show you the position of all monsters on the level as they move around.")
+    my.text_short_description(self, "An aged beast map.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -47,7 +47,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="map_beast", text_name="beast map", short_text_name="beast map")
+    tp_init(name="map_beast", text_long_name="beast map", text_short_name="beast map")
 
 
 init()

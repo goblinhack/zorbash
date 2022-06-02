@@ -10,8 +10,8 @@ def on_born(me, x, y):
 #
 # This is an internal only object to fire lasers from monsters
 #
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.blast_max_radius(self, 2)
     my.collision_check(self, True)
@@ -33,8 +33,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="effect_descent",
-        text_name="beam of destruction",
-        short_text_name="beam of descent",
+        text_long_name="beam of destruction",
+        text_short_name="beam of descent",
     )
 
 

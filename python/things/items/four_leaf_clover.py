@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gold_value_dice(self, "1")
@@ -26,15 +26,15 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 2)
     my.item_width(self, 2)
-    my.long_text_description(self, "Nutritious and lucky!")
     my.noise_on_dropping(self, 25)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d40")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stat_luck_mod(self, 4)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A four leaf clover.")
     my.text_enchant(self, "+1 LUCK")
+    my.text_long_description(self, "Nutritious and lucky!")
+    my.text_short_description(self, "A four leaf clover.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
@@ -47,7 +47,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="four_leaf_clover", text_name="four-leaf clover", short_text_name="four-leaf clover")
+    tp_init(name="four_leaf_clover", text_long_name="four-leaf clover", text_short_name="four-leaf clover")
 
 
 init()

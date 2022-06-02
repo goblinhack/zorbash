@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 6)
     my.environ_avoids_fire(self, 100)
@@ -26,14 +26,14 @@ def tp_init(name, text_name, short_text_name):
     my.is_usable(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "Chocolate frogs. The food of Gods. May seem out of place in a dungeon and you'd be correct. It is rumored a helpful god left them here for brave adventurers to assist them on their path. Often found in a purple wrapper. Almost looks too good to eat.")
     my.melting_chance_d1000(self, 500)
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "50+1d100")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "The food of the Gods: a chocolate frog.")
+    my.text_long_description(self, "Chocolate frogs. The food of Gods. May seem out of place in a dungeon and you'd be correct. It is rumored a helpful god left them here for brave adventurers to assist them on their path. Often found in a purple wrapper. Almost looks too good to eat.")
+    my.text_short_description(self, "The food of the Gods: a chocolate frog.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
     # end sort marker
@@ -45,7 +45,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="food_frog", text_name="chocolate frog", short_text_name="choc frog")
+    tp_init(name="food_frog", text_long_name="chocolate frog", text_short_name="choc frog")
 
 
 init()

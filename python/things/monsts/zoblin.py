@@ -24,8 +24,8 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 100)
@@ -83,7 +83,6 @@ def tp_init(name, text_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.is_undead(self, True)
-    my.long_text_description(self, "A once proud zorblin, this poor creature has been resurrected as a zombie!")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 50)
@@ -100,8 +99,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 8)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A staggering zorblin zombie, a zoblin!")
     my.text_hits(self, "claws")
+    my.text_long_description(self, "A once proud zorblin, this poor creature has been resurrected as a zombie!")
+    my.text_short_description(self, "A staggering zorblin zombie, a zoblin!")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -158,7 +158,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zoblin", text_name="zoblin")
+    tp_init(name="zoblin", text_long_name="zoblin")
 
 
 init()

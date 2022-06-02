@@ -13,8 +13,8 @@ def on_born(me, x, y):
 #
 # This is an internal only object to fire projectiles from monsters
 #
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_check(self, True)
     my.damage_fire_chance_d1000(self, 0, 1000)
@@ -38,7 +38,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="projectile_fire", text_name="fireball", short_text_name="fireball")
+    tp_init(name="projectile_fire", text_long_name="fireball", text_short_name="fireball")
 
 
 init()

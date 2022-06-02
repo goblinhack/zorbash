@@ -3,8 +3,8 @@ import tp
 
 
 def tp_init(name):
-    text_name = "cursor path"
-    self = tp.Tp(name, text_name)
+    text_long_name = "cursor path"
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -14,7 +14,7 @@ def tp_init(name):
     my.is_removeable_if_out_of_slots(self, True)
     my.is_tmp_thing(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description(self, "Cursor path.")
+    my.text_short_description(self, "Cursor path.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_CURSOR)

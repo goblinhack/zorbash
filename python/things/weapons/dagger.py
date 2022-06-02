@@ -14,8 +14,8 @@ def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
     return damage + my.thing_enchant_get(me)
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.damaged_chance_d10000(self, 5)
     my.damage_melee_chance_d1000(self, 0, 1000)
@@ -49,7 +49,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_weapon(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "A short dagger. Ideal for cutting vegetables and enemies.")
     my.noise_on_dropping(self, 5)
     my.on_owner_attacking_damage_melee_do(self, "me.on_owner_attacking_damage_melee()")
     my.on_swing_do(self, "me.on_swing()")
@@ -57,8 +56,9 @@ def tp_init(name, text_name, short_text_name):
     my.stamina_drain_on_attacking(self, 0)
     my.stat_dex_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy stabby means of justice.")
     my.text_enchant(self, "+1 DMG")
+    my.text_long_description(self, "A short dagger. Ideal for cutting vegetables and enemies.")
+    my.text_short_description(self, "Thy stabby means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -74,8 +74,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="dagger",
-        text_name="dagger",
-        short_text_name="dagger",
+        text_long_name="dagger",
+        text_short_name="dagger",
     )
 
 

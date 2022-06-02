@@ -1060,7 +1060,7 @@ bool wid_inventory_create(Thingp selected, Thingp over)
         wid_set_on_mouse_up(wid_item, wid_slot_item_mouse_up);
 
         if (t) {
-          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->short_text_name());
+          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_short_name());
 
           if (wid_inventory_thing_selected) {
             if (wid_inventory_thing_selected == t) {

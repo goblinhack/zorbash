@@ -27,8 +27,8 @@ def on_jump(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "squelch")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 10)
@@ -95,8 +95,6 @@ def tp_init(name, text_name):
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
-    my.long_text_description2(self, "This is an adult. It will eat its own children, and you!")
-    my.long_text_description(self, "Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when threatened and dividing when defeated.")
     my.monst_size(self, my.MONST_SIZE_LARGE)
     my.move_speed(self, 80)
     my.noise_decibels_hearing(self, 50)
@@ -113,8 +111,10 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 15)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A gargantuan pile of sentient jelly.")
     my.text_hits(self, "splats")
+    my.text_long_description2(self, "This is an adult. It will eat its own children, and you!")
+    my.text_long_description(self, "Jelly jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when threatened and dividing when defeated.")
+    my.text_short_description(self, "A gargantuan pile of sentient jelly.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -222,7 +222,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="jelly_parent", text_name="jelly jumper")
+    tp_init(name="jelly_parent", text_long_name="jelly jumper")
 
 
 init()

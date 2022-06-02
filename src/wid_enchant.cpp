@@ -350,9 +350,9 @@ void Game::wid_enchant_an_item(void)
       wid_set_style(wid_item, UI_WID_STYLE_DARK);
 
       if (slot < 9) {
-        wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->text_name() + ", " + t->text_enchant());
+        wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->text_long_name() + ", " + t->text_enchant());
       } else {
-        wid_set_text(wid_item, t->text_name() + ", " + t->text_enchant());
+        wid_set_text(wid_item, t->text_long_name() + ", " + t->text_enchant());
       }
 
       wid_set_text_lhs(wid_item, true);

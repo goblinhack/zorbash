@@ -20,8 +20,8 @@ def on_enchant(me, x, y):
         my.thing_msg(me, "The broadsword seems even wider somehow.")
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_adj(self, True)
     my.crit_chance_d10000(self, 500)
@@ -56,7 +56,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_weapon(self, True)
     my.item_height(self, 8)
     my.item_width(self, 8)
-    my.long_text_description(self, "A broardsword plus some. The girth of this extreme weapon allows you to additionally attack adjacent targets to your intended target. Also useful for chopping tomatoes.")
     my.noise_on_dropping(self, 40)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_owner_attacking_damage_melee_do(self, "me.on_owner_attacking_damage_melee()")
@@ -65,8 +64,9 @@ def tp_init(name, text_name, short_text_name):
     my.stamina_drain_on_attacking(self, 3)
     my.stat_att_mod(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy decapitaty means of justice.")
     my.text_enchant(self, "+1 DMG, +1 ATT")
+    my.text_long_description(self, "A broardsword plus some. The girth of this extreme weapon allows you to additionally attack adjacent targets to your intended target. Also useful for chopping tomatoes.")
+    my.text_short_description(self, "Thy decapitaty means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -80,7 +80,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="very_broadsword", text_name="very broadsword", short_text_name="very broadsword")
+    tp_init(name="very_broadsword", text_long_name="very broadsword", text_short_name="very broadsword")
 
 
 init()

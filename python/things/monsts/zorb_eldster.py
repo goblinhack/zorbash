@@ -7,12 +7,12 @@ def on_death_of_a_follower(me, leader, x, y):
         my.thing_msg(me, "The zorblin eldster cries out in rage!")
 
 
-def tp_init(name, text_name):
-    self = zorb_all.tp_init(name, text_name)
-    my.long_text_description2(self, "This particular zorblin is world weary and longing for an early retirement. Can you help?.")
+def tp_init(name, text_long_name):
+    self = zorb_all.tp_init(name, text_long_name)
+    my.text_long_description2(self, "This particular zorblin is world weary and longing for an early retirement. Can you help?.")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
-    my.text_description(self, "A very war-weary goblin.")
+    my.text_short_description(self, "A very war-weary goblin.")
     my.is_carrier_of_treasure_class_b(self, True)
     my.is_carrier_of_weapon_class_a(self, True)
     my.stat_str(self, 8)
@@ -67,7 +67,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="zorb_eldster", text_name="zorblin eldster")
+    tp_init(name="zorb_eldster", text_long_name="zorblin eldster")
 
 
 init()

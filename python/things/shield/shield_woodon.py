@@ -11,9 +11,9 @@ def on_enchant(me, x, y):
     my.thing_stat_def_incr(me, 1)
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.gfx_ascii_mode_shown(self, True)
@@ -46,15 +46,15 @@ def tp_init(name, text_name, short_text_name):
     my.is_biome_dungeon(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Woodon shield. Yes. Woodon. This is a low quality shield sprayed with patented Woodon (tm), to give a nice woody sheen. Not to be confused with an actual wooden shield made of actual wood.")
-    my.long_text_description2(self, "This shield gives a measly +1 to defense and is liable to break. 30 day return policy.")
-    my.long_text_description3(self, "30 day return policy.")
+    my.text_long_description(self, "Woodon shield. Yes. Woodon. This is a low quality shield sprayed with patented Woodon (tm), to give a nice woody sheen. Not to be confused with an actual wooden shield made of actual wood.")
+    my.text_long_description2(self, "This shield gives a measly +1 to defense and is liable to break. 30 day return policy.")
+    my.text_long_description3(self, "30 day return policy.")
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_def_mod(self, 1)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Woodon shield.")
+    my.text_short_description(self, "Woodon shield.")
     my.text_enchant(self, "+1 DEF")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -70,8 +70,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="shield_woodon",
-        text_name="woodon shield",
-        short_text_name="woodon shield",
+        text_long_name="woodon shield",
+        text_short_name="woodon shield",
     )
 
 

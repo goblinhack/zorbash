@@ -21,9 +21,9 @@ def on_final_use(owner, item, target, x, y):
         my.thing_msg(owner, "The boots of teleport disintegrate.")
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.charge_count(self, 100)
     my.equip_carry_anim(self, "boots_teleport_carry")
@@ -52,7 +52,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_usable(self, True)
     my.item_height(self, 3)
     my.item_width(self, 3)
-    my.long_text_description(self, "Boots of teleport. With these boots you can travel with impunity across the level. Beware the cold of the void, however.")
     my.noise_additional_on_jump_end(self, 50)
     my.noise_additional_on_teleporting(self, 50)
     my.noise_on_dropping(self, 50)
@@ -65,8 +64,9 @@ def tp_init(name, text_name, short_text_name):
     my.stat_dex_mod(self, -1)
     my.teleport_distance(self, 20)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Boots of teleport.")
     my.text_enchant(self, "-10 decibels")
+    my.text_long_description(self, "Boots of teleport. With these boots you can travel with impunity across the level. Beware the cold of the void, however.")
+    my.text_short_description(self, "Boots of teleport.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -82,8 +82,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="boots_teleport",
-        text_name="boots of teleport",
-        short_text_name="boots of teleport",
+        text_long_name="boots of teleport",
+        text_short_name="boots of teleport",
     )
 
 

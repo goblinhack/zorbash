@@ -213,10 +213,10 @@ std::string Tp::text_a_or_an(void) const { return _text_a_or_an; }
 //
 // foo bar -> Foo Bar
 //
-std::string Tp::short_text_capitalised(void) const
+std::string Tp::text_short_capitalised(void) const
 {
   TRACE_NO_INDENT();
-  std::string out        = text_name();
+  std::string out        = text_long_name();
   char       *b          = (char *) out.c_str();
   char       *e          = b + out.size();
   char       *c          = b;

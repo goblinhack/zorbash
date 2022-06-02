@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def lava_init(name, text_name, tiles=[]):
-    self = tp.Tp(name, text_name)
+def lava_init(name, text_long_name, tiles=[]):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_obstacle(self, True)
     my.collision_check(self, True)
@@ -26,8 +26,8 @@ def lava_init(name, text_name, tiles=[]):
     my.light_dist(self, 1)
     my.temperature(self, 800)
     my.text_a_or_an(self, "")
-    my.text_description(self, "%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto).")
     my.text_hits(self, "tickles")
+    my.text_short_description(self, "%%fg=orange$Freshly scented lava%%fg=reset$ (double click to move onto).")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -45,7 +45,7 @@ def lava_init(name, text_name, tiles=[]):
 def init():
     lava_init(
         name="lava",
-        text_name="molten lava",
+        text_long_name="molten lava",
         tiles=[
             "lava.1",
             "lava.2",

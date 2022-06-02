@@ -4,18 +4,18 @@ import my
 class Tp:
     """thing template"""
 
-    def __init__(self, name, text_name=None, short_text_name=None):
+    def __init__(self, name, text_long_name=None, text_short_name=None):
         self.name = name
 
-        if text_name is None:
-            self.text_name = name
+        if text_long_name is None:
+            self.text_long_name = name
         else:
-            self.text_name = text_name
+            self.text_long_name = text_long_name
 
-        if short_text_name is None:
-            self.short_text_name = self.text_name
+        if text_short_name is None:
+            self.text_short_name = self.text_long_name
         else:
-            self.short_text_name = short_text_name
+            self.text_short_name = text_short_name
 
         #
         # Load it into the game engine

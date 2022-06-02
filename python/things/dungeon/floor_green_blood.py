@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.collision_hit_priority(self, 2)
     my.gfx_ascii_mode_shown(self, True)
@@ -21,7 +21,7 @@ def tp_init(name, text_name):
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
     my.text_a_or_an(self, "a")
-    my.text_description(self, "An artwork comprised mainly of green blood.")
+    my.text_short_description(self, "An artwork comprised mainly of green blood.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -44,14 +44,14 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="floor_green_blood1", text_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood2", text_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood3", text_name="pool of fluorescent blood with bits in it")
-    tp_init(name="floor_green_blood4", text_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood5", text_name="pool of yucky fluorescent blood")
-    tp_init(name="floor_green_blood6", text_name="pool of icky fluorescent blood")
-    tp_init(name="floor_green_blood7", text_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood8", text_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood1", text_long_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood2", text_long_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood3", text_long_name="pool of fluorescent blood with bits in it")
+    tp_init(name="floor_green_blood4", text_long_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood5", text_long_name="pool of yucky fluorescent blood")
+    tp_init(name="floor_green_blood6", text_long_name="pool of icky fluorescent blood")
+    tp_init(name="floor_green_blood7", text_long_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood8", text_long_name="pool of fluorescent blood")
 
 
 init()

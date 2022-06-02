@@ -26,8 +26,8 @@ def on_born(me, x, y):
     my.thing_carry(me, "dagger")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 90)
     my.ai_resent_count(self, 100)
@@ -94,9 +94,6 @@ def tp_init(name, text_name):
     my.is_shovable(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
-    my.long_text_description2(self, "Dogmen have amazing hearing and are hard to creep up on.")
-    my.long_text_description3(self, "Where the dogwomen live is a well kept secret.")
-    my.long_text_description(self, "A mildly odorous dogman. Half man, half mutt and blessed with the intellectual capabilities of a human, this poor creature is often very confused as to where it is.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 1)
@@ -115,8 +112,11 @@ def tp_init(name, text_name):
     my.stat_luck(self, 8)
     my.stat_str(self, 8)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A perma panting dogman.")
     my.text_hits(self, "gores")
+    my.text_long_description2(self, "Dogmen have amazing hearing and are hard to creep up on.")
+    my.text_long_description3(self, "Where the dogwomen live is a well kept secret.")
+    my.text_long_description(self, "A mildly odorous dogman. Half man, half mutt and blessed with the intellectual capabilities of a human, this poor creature is often very confused as to where it is.")
+    my.text_short_description(self, "A perma panting dogman.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -161,7 +161,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="dogman", text_name="dogman")
+    tp_init(name="dogman", text_long_name="dogman")
 
 
 init()

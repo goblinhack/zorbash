@@ -181,9 +181,9 @@ void Thing::killed(Thingp defeater, const char *reason)
             if (distance <= 1) {
               msg("You see %s crash open.", text_the().c_str());
             } else if (distance < DMAP_IS_PASSABLE) {
-              msg("The hear the noise of a %s crashing open.", short_text_a_or_an().c_str());
+              msg("The hear the noise of a %s crashing open.", text_short_a_or_an().c_str());
             } else {
-              msg("The hear the distant noise of %s crashing open.", short_text_a_or_an().c_str());
+              msg("The hear the distant noise of %s crashing open.", text_short_a_or_an().c_str());
             }
           }
         }
@@ -313,7 +313,7 @@ void Thing::killed(Thingp defeater, const char *reason)
             // Already logged
             //
           } else if (top_owner() == player) {
-            msg("Your %s is destroyed.", short_text_name().c_str());
+            msg("Your %s is destroyed.", text_short_name().c_str());
           } else {
             msg("%s is destroyed, %s.", The_no_dying.c_str(), reason);
           }

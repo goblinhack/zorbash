@@ -15,18 +15,18 @@ def on_owner_remove(me, owner, x, y):
         my.thing_msg(me, "You return to your normal level of stickiness.")
 
 
-def tp_init(name, text_name):
+def tp_init(name, text_long_name):
     global self
-    self = tp.Tp(name, text_name)
+    self = tp.Tp(name, text_long_name)
     # start sort marker
 
     my.gfx_ascii_mode_shown(self, True)
     my.is_aquatic(self, True)
     my.is_buff(self, True)
     my.is_loggable(self, True)
-    my.long_text_description(self, "You feel at home in the water and will suffer no more water penalties for either attack or defence when in shallow or deep water. Always beware of puddles though.")
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
+    my.text_long_description(self, "You feel at home in the water and will suffer no more water penalties for either attack or defence when in shallow or deep water. Always beware of puddles though.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     # end sort marker
@@ -36,7 +36,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="buff_aquatic", text_name="aquatic lover")
+    tp_init(name="buff_aquatic", text_long_name="aquatic lover")
 
 
 init()

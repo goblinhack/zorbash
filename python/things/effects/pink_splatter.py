@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
@@ -16,7 +16,7 @@ def tp_init(name, text_name):
     my.is_removeable_if_out_of_slots(self, True)
     my.is_tmp_thing(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Splat attack.")
+    my.text_short_description(self, "Splat attack.")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -88,7 +88,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="pink_splatter", text_name="pink slime splatter")
+    tp_init(name="pink_splatter", text_long_name="pink slime splatter")
 
 
 init()

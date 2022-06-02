@@ -7,8 +7,8 @@ def on_you_nat_attack(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 100)
     my.ai_resent_count(self, 100)
@@ -59,7 +59,6 @@ def tp_init(name, text_name):
     my.is_resurrectable(self, True)
     my.is_tickable(self, True)
     my.is_undead(self, True)
-    my.long_text_description(self, "A lesser reaper. You cannot defeat what does not live!")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 0)
@@ -73,8 +72,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 25)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A lesser reaper. Death incarnate.")
     my.text_hits(self, "claws")
+    my.text_long_description(self, "A lesser reaper. You cannot defeat what does not live!")
+    my.text_short_description(self, "A lesser reaper. Death incarnate.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -128,7 +128,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="reaper", text_name="reaper")
+    tp_init(name="reaper", text_long_name="reaper")
 
 
 init()

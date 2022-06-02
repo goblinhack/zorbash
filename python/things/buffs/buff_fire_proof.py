@@ -92,15 +92,14 @@ def on_owner_receiving_damage_stat_con(me, owner, hitter, real_hitter, x, y, dam
     return on_owner_receiving_damage(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def tp_init(name, text_name):
+def tp_init(name, text_long_name):
     global self
-    self = tp.Tp(name, text_name)
+    self = tp.Tp(name, text_long_name)
     # start sort marker
 
     my.gfx_ascii_mode_shown(self, True)
     my.is_buff(self, True)
     my.is_loggable(self, True)
-    my.long_text_description(self, "You bask in the hottest of fires.")
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_receiving_damage_acid_do(self, "me.on_owner_receiving_damage_acid()")
     my.on_owner_receiving_damage_cold_do(self, "me.on_owner_receiving_damage_cold()")
@@ -119,6 +118,7 @@ def tp_init(name, text_name):
     my.on_owner_receiving_damage_stat_con_do(self, "me.on_owner_receiving_damage_stat_con()")
     my.on_owner_receiving_damage_stat_str_do(self, "me.on_owner_receiving_damage_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
+    my.text_long_description(self, "You bask in the hottest of fires.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
     # end sort marker
@@ -128,7 +128,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="buff_fire_proof", text_name="fire proof")
+    tp_init(name="buff_fire_proof", text_long_name="fire proof")
 
 
 init()

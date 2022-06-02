@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.capacity_height(self, 12)
     my.capacity_width(self, 12)
@@ -36,12 +36,12 @@ def tp_init(name, text_name):
     my.is_treasure(self, True)
     my.item_height(self, 8)
     my.item_width(self, 8)
-    my.long_text_description(self, "A large leathery brown bag.")
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_death_drop_all_items(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A large brown bag.")
+    my.text_long_description(self, "A large leathery brown bag.")
+    my.text_short_description(self, "A large brown bag.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -54,7 +54,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="bag_l", text_name="large bag")
+    tp_init(name="bag_l", text_long_name="large bag")
 
 
 init()

@@ -13,8 +13,8 @@ def on_born(me, x, y):
 #
 # This is an internal only object to acid projectiles from monsters
 #
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_check(self, True)
     my.damage_acid_chance_d1000(self, 0, 1000)
@@ -36,7 +36,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="projectile_acid", text_name="acidball", short_text_name="acidball")
+    tp_init(name="projectile_acid", text_long_name="acidball", text_short_name="acidball")
 
 
 init()

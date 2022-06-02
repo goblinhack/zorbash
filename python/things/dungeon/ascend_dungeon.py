@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
@@ -22,7 +22,7 @@ def tp_init(name, text_name, short_text_name):
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description(self, "%%fg=gold$The way up.")
+    my.text_short_description(self, "%%fg=gold$The way up.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -76,7 +76,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="entrance", text_name="dungeon entrance", short_text_name="entrance")
+    tp_init(name="entrance", text_long_name="dungeon entrance", text_short_name="entrance")
 
 
 init()

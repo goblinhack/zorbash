@@ -14,8 +14,8 @@ def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
     return damage + my.thing_enchant_get(me)
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.crit_chance_d10000(self, 200)
     my.damaged_chance_d10000(self, 50)
@@ -51,15 +51,15 @@ def tp_init(name, text_name, short_text_name):
     my.is_wooden(self, True)
     my.item_height(self, 8)
     my.item_width(self, 8)
-    my.long_text_description(self, "A truly inspiring weapon of dread. The shovel. Ideal for light gardening and decapitation.")
     my.noise_on_dropping(self, 20)
     my.on_owner_attacking_damage_melee_do(self, "me.on_owner_attacking_damage_melee()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_drain_on_attacking(self, 3)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Thy diggy means of justice.")
     my.text_enchant(self, "+1 DMG")
+    my.text_long_description(self, "A truly inspiring weapon of dread. The shovel. Ideal for light gardening and decapitation.")
+    my.text_short_description(self, "Thy diggy means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -73,7 +73,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="shovel", text_name="shovel", short_text_name="shovel")
+    tp_init(name="shovel", text_long_name="shovel", text_short_name="shovel")
 
 
 init()

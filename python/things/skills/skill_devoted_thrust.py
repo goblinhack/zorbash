@@ -28,20 +28,20 @@ def on_use(owner, skill, target, x, y):
         my.thing_skill_deactivate(owner, skill)
 
 
-def tp_init(name, text_name):
+def tp_init(name, text_long_name):
     global self
-    self = tp.Tp(name, text_name)
+    self = tp.Tp(name, text_long_name)
     # start sort marker
 
     my.gfx_ascii_mode_shown(self, True)
     my.is_enchantable(self, True)
     my.is_loggable(self, True)
     my.is_skill(self, True)
-    my.long_text_description(self, "Uses half of your stamina points up in one mighty strike.\n\nCan be used multiple times, but beware, your stamina will rapidly drop and you may end up unable to attack or jump away. Each enchant will add 10 percent to the damage, but will take the additional bonus off your stamina. Provides additional strength bonus of +1")
     my.on_use_do(self, "me.on_use()")
     my.stat_str_mod(self, 1)
-    my.text_description(self, "Devoted thrust skill.")
     my.text_enchant(self, "+10 percent DMG")
+    my.text_long_description(self, "Uses half of your stamina points up in one mighty strike.\n\nCan be used multiple times, but beware, your stamina will rapidly drop and you may end up unable to attack or jump away. Each enchant will add 10 percent to the damage, but will take the additional bonus off your stamina. Provides additional strength bonus of +1")
+    my.text_short_description(self, "Devoted thrust skill.")
     my.text_skill(self, "Redirect health to damage, costing stamina")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     # my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND) # End marker for fixup.sh
@@ -56,7 +56,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="skill_devoted_thrust", text_name="devoted thrust")
+    tp_init(name="skill_devoted_thrust", text_long_name="devoted thrust")
 
 
 init()

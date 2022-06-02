@@ -48,9 +48,9 @@ def on_move(me, x, y):
     return on_waiting(me, x, y)
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.gfx_ascii_mode_shown(self, True)
@@ -81,14 +81,14 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "A brilliant fiery red cloak.")
+    my.text_long_description(self, "A brilliant fiery red cloak.")
     my.noise_on_dropping(self, -20)
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_def_mod(self, 1)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Cloak of fire protection.")
+    my.text_short_description(self, "Cloak of fire protection.")
     my.text_enchant(self, "+1 DEF")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -104,8 +104,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="cloak_fire",
-        text_name="fire cloak",
-        short_text_name="fire cloak",
+        text_long_name="fire cloak",
+        text_short_name="fire cloak",
     )
 
 

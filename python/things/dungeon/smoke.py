@@ -18,7 +18,7 @@ def tp_init(name):
     my.is_smoke(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.text_a_or_an(self, "")
-    my.text_description(self, "Whisps of smoke.")
+    my.text_short_description(self, "Whisps of smoke.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)

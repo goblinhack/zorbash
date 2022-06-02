@@ -10,8 +10,8 @@ def on_unequip(owner, me, x, y):
     my.thing_buff_remove(owner, "buff_poison_resist")
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.blast_max_radius(self, 2)
     my.collision_hit_priority(self, 5)
@@ -43,14 +43,14 @@ def tp_init(name, text_name, short_text_name):
     my.is_very_combustible(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.long_text_description(self, "Eat drink and be merry while wearing this ring, for poison can do you no harm. Please wear responsibly...")
     my.normal_placement_rules(self, True)
     my.on_equip_do(self, "me.on_equip()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.stat_con_mod(self, 3)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A ring of poison resist.")
     my.text_enchant(self, "+1 CON")
+    my.text_long_description(self, "Eat drink and be merry while wearing this ring, for poison can do you no harm. Please wear responsibly...")
+    my.text_short_description(self, "A ring of poison resist.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ITEM)
@@ -67,8 +67,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="ring_poison_resist",
-        text_name="ring of poison loving",
-        short_text_name="ring of poison resist",
+        text_long_name="ring of poison loving",
+        text_short_name="ring of poison resist",
     )
 
 

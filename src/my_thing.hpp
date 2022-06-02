@@ -701,9 +701,9 @@ public:
   const std::string &is_allied_with(void);
   const std::string &lifespan_dice_str(void);
   const std::string &light_color(void);
-  const std::string &long_text_description2(void);
-  const std::string &long_text_description3(void);
-  const std::string &long_text_description(void);
+  const std::string &text_long_description2(void);
+  const std::string &text_long_description3(void);
+  const std::string &text_long_description(void);
   const std::string &msg_get(void);
   const std::string &name(void);
   const std::string &nutrition_dice_str(void);
@@ -814,7 +814,7 @@ public:
   const std::string &on_you_nat_attack_do(void);
   const std::string &poison_reason_get(void);
   const std::string &resurrect_dice_str(void);
-  const std::string &short_text_name(void);
+  const std::string &text_short_name(void);
   const std::string &spawn_group_size_dice_str(void);
   const std::string &spawn_on_shoved(void);
   const std::string &str1(void);
@@ -824,10 +824,10 @@ public:
   const std::string &target_name_projectile(void);
   const std::string &target_name_radial(void);
   const std::string &text_debuff(void);
-  const std::string &text_description(void);
+  const std::string &text_short_description(void);
   const std::string &text_enchant(void);
   const std::string &text_hits(void);
-  const std::string &text_name(void);
+  const std::string &text_long_name(void);
   const std::string &text_skill(void);
   const std::string &text_title(void);
   const std::string &text_unused1(void);
@@ -1935,11 +1935,11 @@ public:
 
   std::size_t light_count(void);
 
-  std::string short_text_and_state_capitalised(void);
-  std::string short_text_capitalised(void);
-  std::string short_text_a_or_an(void);
-  std::string short_text_the(void);
-  std::string short_text_The(void);
+  std::string text_short_and_state_capitalised(void);
+  std::string text_short_capitalised(void);
+  std::string text_short_a_or_an(void);
+  std::string text_short_the(void);
+  std::string text_short_The(void);
   std::string text_a_or_an(void);
   std::string text_the(bool include_owner = false);
   std::string text_the_no_dying(bool include_owner = false);

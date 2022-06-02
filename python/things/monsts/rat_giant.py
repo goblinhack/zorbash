@@ -21,8 +21,8 @@ def on_death(me, x, y):
     my.sound_play("squeaky_toy")
 
 
-def tp_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def tp_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.aggression_level_pct(self, 20)
     my.ai_resent_count(self, 10)
@@ -87,7 +87,6 @@ def tp_init(name, text_name):
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
-    my.long_text_description(self, "An enormous giant dwarf rat... Blood drips from its teeth. Will eat almost anything, especially you. Sometimes answers to the name of Mr Squeakles.")
     my.monst_size(self, my.MONST_SIZE_NORMAL)
     my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 10)
@@ -105,8 +104,9 @@ def tp_init(name, text_name):
     my.stat_luck(self, 10)
     my.stat_str(self, 7)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A giant dwarf rat, no more, no less. Slightly cute. Rabid.")
     my.text_hits(self, "gores")
+    my.text_long_description(self, "An enormous giant dwarf rat... Blood drips from its teeth. Will eat almost anything, especially you. Sometimes answers to the name of Mr Squeakles.")
+    my.text_short_description(self, "A giant dwarf rat, no more, no less. Slightly cute. Rabid.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
@@ -141,7 +141,7 @@ def tp_init(name, text_name):
 
 
 def init():
-    tp_init(name="rat_giant", text_name="giant dwarf rat")
+    tp_init(name="rat_giant", text_long_name="giant dwarf rat")
 
 
 init()

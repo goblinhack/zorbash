@@ -10,8 +10,8 @@ def on_unequip(owner, me, x, y):
     my.thing_buff_remove(owner, "buff_undead_resist")
 
 
-def tp_init(name, text_name, short_text_name):
-    self = tp.Tp(name, text_name, short_text_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.equip_carry_anim(self, "wooden_cross_carry")
     my.gfx_ascii_mode_shown(self, True)
@@ -38,7 +38,6 @@ def tp_init(name, text_name, short_text_name):
     my.is_treasure_type(self, True)
     my.item_height(self, 2)
     my.item_width(self, 2)
-    my.long_text_description(self, "When carrying these two sticks that have been oddly combined, you somehow know that you will take only half damage from any udead attack. Not bad for some twigs. Item is equipped in the gauntlet slot.")
     my.noise_on_dropping(self, 5)
     my.normal_placement_rules(self, True)
     my.on_equip_do(self, "me.on_equip()")
@@ -46,8 +45,9 @@ def tp_init(name, text_name, short_text_name):
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stat_def_mod(self, 1)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A pair of sticks.")
     my.text_enchant(self, "+1 DEF")
+    my.text_long_description(self, "When carrying these two sticks that have been oddly combined, you somehow know that you will take only half damage from any udead attack. Not bad for some twigs. Item is equipped in the gauntlet slot.")
+    my.text_short_description(self, "A pair of sticks.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -61,7 +61,7 @@ def tp_init(name, text_name, short_text_name):
 
 
 def init():
-    tp_init(name="wooden_cross", text_name="wooden cross", short_text_name="wooden cross")
+    tp_init(name="wooden_cross", text_long_name="wooden cross", text_short_name="wooden cross")
 
 
 init()

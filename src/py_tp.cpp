@@ -34,25 +34,25 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  char *tp_text_name = py_obj_attr_str(py_class, "text_name");
-  if (! tp_text_name) {
-    ERR("tp_load: Missing tp text_name");
+  char *tp_text_long_name = py_obj_attr_str(py_class, "text_long_name");
+  if (! tp_text_long_name) {
+    ERR("tp_load: Missing tp text_long_name");
     Py_RETURN_FALSE;
   }
 
-  char *tp_short_text_name = py_obj_attr_str(py_class, "short_text_name");
-  if (! tp_short_text_name) {
-    ERR("tp_load: Missing tp short_text_name");
+  char *tp_text_short_name = py_obj_attr_str(py_class, "text_short_name");
+  if (! tp_text_short_name) {
+    ERR("tp_load: Missing tp text_short_name");
     Py_RETURN_FALSE;
   }
 
   int id;
   tp_get_id(tp_name, &id);
-  tp_load(id, tp_name, tp_text_name, tp_short_text_name);
+  tp_load(id, tp_name, tp_text_long_name, tp_text_short_name);
 
   myfree(tp_name);
-  myfree(tp_text_name);
-  myfree(tp_short_text_name);
+  myfree(tp_text_long_name);
+  myfree(tp_text_short_name);
 
   Py_RETURN_TRUE;
 }
@@ -1275,9 +1275,9 @@ TP_BODY_SET_STRING(health_initial_dice)
 TP_BODY_SET_STRING(is_allied_with)
 TP_BODY_SET_STRING(lifespan_dice)
 TP_BODY_SET_STRING(light_color)
-TP_BODY_SET_STRING(long_text_description)
-TP_BODY_SET_STRING(long_text_description2)
-TP_BODY_SET_STRING(long_text_description3)
+TP_BODY_SET_STRING(text_long_description)
+TP_BODY_SET_STRING(text_long_description2)
+TP_BODY_SET_STRING(text_long_description3)
 TP_BODY_SET_STRING(name)
 TP_BODY_SET_STRING(nutrition_dice)
 TP_BODY_SET_STRING(on_awake_do)
@@ -1396,10 +1396,10 @@ TP_BODY_SET_STRING(target_name_projectile)
 TP_BODY_SET_STRING(target_name_radial)
 TP_BODY_SET_STRING(text_a_or_an)
 TP_BODY_SET_STRING(text_debuff)
-TP_BODY_SET_STRING(text_description)
+TP_BODY_SET_STRING(text_short_description)
 TP_BODY_SET_STRING(text_enchant)
 TP_BODY_SET_STRING(text_hits)
-TP_BODY_SET_STRING(text_name)
+TP_BODY_SET_STRING(text_long_name)
 TP_BODY_SET_STRING(text_skill)
 TP_BODY_SET_STRING(text_title)
 TP_BODY_SET_STRING(text_unused)

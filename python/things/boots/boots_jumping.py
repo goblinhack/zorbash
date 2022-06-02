@@ -12,9 +12,9 @@ def on_enchant(me, x, y):
     my.thing_jump_distance_mod_incr(me, 1)
 
 
-def tp_init(name, text_name, short_text_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_name, short_text_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.equip_carry_anim(self, "boots_jumping_carry")
     my.gfx_ascii_mode_shown(self, True)
@@ -41,7 +41,6 @@ def tp_init(name, text_name, short_text_name):
     my.item_height(self, 3)
     my.item_width(self, 3)
     my.jump_distance_mod(self, 1)
-    my.long_text_description(self, "Boots of jumping. With these boots you can bound with impunity across chasms. Well, maybe.")
     my.noise_additional_on_jump_end(self, 50)
     my.noise_on_dropping(self, 50)
     my.normal_placement_rules(self, True)
@@ -50,8 +49,9 @@ def tp_init(name, text_name, short_text_name):
     my.stamina_drain_on_using(self, 10)
     my.stat_dex_mod(self, 1)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "Boots of jumping.")
     my.text_enchant(self, "+1 tile")
+    my.text_long_description(self, "Boots of jumping. With these boots you can bound with impunity across chasms. Well, maybe.")
+    my.text_short_description(self, "Boots of jumping.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -67,8 +67,8 @@ def tp_init(name, text_name, short_text_name):
 def init():
     tp_init(
         name="boots_jumping",
-        text_name="boots of jumping",
-        short_text_name="boots of jumping",
+        text_long_name="boots of jumping",
+        text_short_name="boots of jumping",
     )
 
 

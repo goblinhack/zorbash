@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def gold_init(name, text_name):
-    self = tp.Tp(name, text_name)
+def gold_init(name, text_long_name):
+    self = tp.Tp(name, text_long_name)
     # start sort marker
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_mode_shown(self, True)
@@ -33,7 +33,7 @@ def gold_init(name, text_name):
     my.light_dist(self, 1)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description(self, "A gold goin.")
+    my.text_short_description(self, "A gold goin.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -68,7 +68,7 @@ def gold_init(name, text_name):
 
 
 def init():
-    gold_init(name="gold1", text_name="lone gold coin")
+    gold_init(name="gold1", text_long_name="lone gold coin")
 
 
 init()
