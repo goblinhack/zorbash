@@ -47,28 +47,23 @@ static void wid_leftbar_ascii_display(Widp w, point tl, point br)
   }
 }
 
-static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int width)
+static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int width, bool allow_carried = false,
+                                       bool first = false)
 {
   TRACE_NO_INDENT();
+
+  static point at;
+  if (first) {
+    at = point(-1, -1);
+  }
 
   //
   // Covers carried or equipped items
   //
-  if (t->is_hidden) {
-    return;
-  }
-
-  auto player = level->player;
-  if (t->is_player()) {
-    return;
-  }
-
-  if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
-    return;
-  }
-
-  if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
-    return;
+  if (! allow_carried) {
+    if (t->immediate_owner()) {
+      return;
+    }
   }
 
   level->wid_leftbar_things.push_back(t->id);
@@ -82,7 +77,12 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point br = make_point(width - 1, y_at);
     auto  s  = dynprintf("%%fg=gray$%s", t->text_short_capitalised().c_str());
     wid_set_pos(w, tl, br);
-    wid_set_text(w, s);
+    if (t->immediate_owner()) {
+      wid_set_text(w, "+ " + std::string(s));
+      wid_set_text_lhs(w, true);
+    } else {
+      wid_set_text(w, s);
+    }
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     myfree(s);
   }
@@ -117,7 +117,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Falling)");
-    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
 
   if (t->is_sleeping) {
@@ -128,7 +128,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Sleeping)");
-    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
 
   if (t->is_dead) {
@@ -145,7 +145,6 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     }
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     y_at += 1;
-    return;
   }
 
   if (t->is_door() || t->is_ascend_dungeon() || t->is_descend_dungeon()) {
@@ -170,45 +169,68 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     }
   }
 
-  if (t->is_monst()) {
-    y_at += 1;
-    {
-      TRACE_NO_INDENT();
-      auto  w  = wid_new_plain(wid_leftbar, "Health-bar");
-      point tl = make_point(0, y_at);
-      point br = make_point(tl.x + width - 1, tl.y);
-      wid_set_pos(w, tl, br);
+  if (! t->is_dead) {
+    if (t->is_monst()) {
+      y_at += 1;
+      {
+        TRACE_NO_INDENT();
+        auto  w  = wid_new_plain(wid_leftbar, "Health-bar");
+        point tl = make_point(0, y_at);
+        point br = make_point(tl.x + width - 1, tl.y);
+        wid_set_pos(w, tl, br);
 
-      int i     = (((float) t->health() / ((float) t->health_max()))) * ((float) UI_HEALTH_BAR_STEPS - 1);
-      i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
-      i         = std::max(i, 0);
-      auto icon = "health_bar_ascii_" + std::to_string(i);
-      wid_set_fg_tilename(w, icon);
-    }
-    {
-      TRACE_NO_INDENT();
-      auto  w  = wid_new_plain(wid_leftbar, "Health");
-      point tl = make_point(0, y_at);
-      point br = make_point(width - 1, y_at);
-      wid_set_pos(w, tl, br);
-      wid_set_text(w, "Health");
-      wid_set_shape_none(w);
-      wid_set_text_lhs(w, true);
-    }
-    {
-      TRACE_NO_INDENT();
-      auto  w  = wid_new_plain(wid_leftbar, "health-value");
-      point tl = make_point(3, y_at);
-      point br = make_point(tl.x + width - 4, tl.y);
-      wid_set_pos(w, tl, br);
-      wid_set_shape_none(w);
+        int i     = (((float) t->health() / ((float) t->health_max()))) * ((float) UI_HEALTH_BAR_STEPS - 1);
+        i         = std::min(i, UI_HEALTH_BAR_STEPS - 1);
+        i         = std::max(i, 0);
+        auto icon = "health_bar_ascii_" + std::to_string(i);
+        wid_set_fg_tilename(w, icon);
+      }
+      {
+        TRACE_NO_INDENT();
+        auto  w  = wid_new_plain(wid_leftbar, "Health");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Health");
+        wid_set_shape_none(w);
+        wid_set_text_lhs(w, true);
+      }
+      {
+        TRACE_NO_INDENT();
+        auto  w  = wid_new_plain(wid_leftbar, "health-value");
+        point tl = make_point(3, y_at);
+        point br = make_point(tl.x + width - 4, tl.y);
+        wid_set_pos(w, tl, br);
+        wid_set_shape_none(w);
 
-      std::string s = std::to_string(t->health()) + "/" + std::to_string(t->health_max());
-      wid_set_text(w, s);
-      wid_set_text_rhs(w, true);
+        std::string s = std::to_string(t->health()) + "/" + std::to_string(t->health_max());
+        wid_set_text(w, s);
+        wid_set_text_rhs(w, true);
+      }
     }
   }
-  y_at += 1;
+
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = t->equip_get(e);
+    if (iter) {
+      wid_leftbar_ascii_describe(level, iter, y_at, width, "+ ");
+    }
+  }
+
+  if (t->curr_at == at) {
+    //
+    // Things at the same location are grouped
+    //
+  } else if (t->immediate_owner()) {
+    //
+    // Carried items are grouped
+    //
+  } else {
+    y_at += 1;
+  }
+
+  at = t->curr_at;
 }
 
 bool wid_leftbar_ascii_create(void)
@@ -241,58 +263,150 @@ bool wid_leftbar_ascii_create(void)
     wid_lower(wid_leftbar);
   }
 
-  ///////////////////////////////////////////////////////////////////////////
-  // Monsters (alive)
-  ///////////////////////////////////////////////////////////////////////////
-  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
   {
-    if (! t->is_alive_monst()) {
-      continue;
+    ///////////////////////////////////////////////////////////////////////////
+    // Monsters (alive)
+    ///////////////////////////////////////////////////////////////////////////
+    std::vector< Thingp > m;
+    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
+    {
+      if (! t->is_alive_monst()) {
+        continue;
+      }
+
+      auto player = level->player;
+      if (t->is_player()) {
+        continue;
+      }
+
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+        continue;
+      }
+
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
+        continue;
+      }
+
+      m.push_back(t);
     }
+    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-    wid_leftbar_ascii_describe(level, t, y_at, width);
+    sort(m.begin(), m.end(), [](Thingp a, Thingp b) -> bool { return a->curr_at > b->curr_at; });
+
+    for (auto n : m) {
+      wid_leftbar_ascii_describe(level, n, y_at, width, false /* allow carried */);
+    }
   }
-  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-  ///////////////////////////////////////////////////////////////////////////
-  // Monsters (dead)
-  ///////////////////////////////////////////////////////////////////////////
-  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
   {
-    if (! t->is_dead) {
-      continue;
+    ///////////////////////////////////////////////////////////////////////////
+    // Monsters (dead)
+    ///////////////////////////////////////////////////////////////////////////
+    std::vector< Thingp > m;
+    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
+    {
+      if (! t->is_dead) {
+        continue;
+      }
+
+      auto player = level->player;
+      if (t->is_player()) {
+        continue;
+      }
+
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+        continue;
+      }
+
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
+        continue;
+      }
+
+      m.push_back(t);
     }
+    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-    wid_leftbar_ascii_describe(level, t, y_at, width);
+    sort(m.begin(), m.end(), [](Thingp a, Thingp b) -> bool { return a->curr_at > b->curr_at; });
+
+    for (auto n : m) {
+      wid_leftbar_ascii_describe(level, n, y_at, width, false /* allow carried */);
+    }
   }
-  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-  ///////////////////////////////////////////////////////////////////////////
-  // Items
-  ///////////////////////////////////////////////////////////////////////////
-  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
   {
-    if (! t->is_item()) {
-      continue;
+    ///////////////////////////////////////////////////////////////////////////
+    // Items
+    ///////////////////////////////////////////////////////////////////////////
+    std::vector< Thingp > m;
+    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
+    {
+      if (! t->is_item()) {
+        continue;
+      }
+
+      auto player = level->player;
+      if (t->is_player()) {
+        continue;
+      }
+
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+        continue;
+      }
+
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
+        continue;
+      }
+
+      m.push_back(t);
     }
+    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-    wid_leftbar_ascii_describe(level, t, y_at, width);
+    sort(m.begin(), m.end(), [](Thingp a, Thingp b) -> bool { return a->curr_at > b->curr_at; });
+
+    bool first = true;
+    for (auto n : m) {
+      wid_leftbar_ascii_describe(level, n, y_at, width, false /* allow carried */, first);
+      first = false;
+    }
   }
-  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-  ///////////////////////////////////////////////////////////////////////////
-  // Important environment items
-  ///////////////////////////////////////////////////////////////////////////
-  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
   {
-    if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon() &&
-        ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel()) {
-      continue;
-    }
+    ///////////////////////////////////////////////////////////////////////////
+    // Important environment items
+    ///////////////////////////////////////////////////////////////////////////
+    std::vector< Thingp > m;
+    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
+    {
+      if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon() &&
+          ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel()) {
+        continue;
+      }
 
-    wid_leftbar_ascii_describe(level, t, y_at, width);
+      auto player = level->player;
+      if (t->is_player()) {
+        continue;
+      }
+
+      if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+        continue;
+      }
+
+      if (! level->can_see_unimpeded(player->curr_at, t->curr_at)) {
+        continue;
+      }
+
+      m.push_back(t);
+    }
+    FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
+
+    sort(m.begin(), m.end(), [](Thingp a, Thingp b) -> bool { return a->curr_at > b->curr_at; });
+
+    bool first = true;
+    for (auto n : m) {
+      wid_leftbar_ascii_describe(level, n, y_at, width, false /* allow carried */, first);
+      first = false;
+    }
   }
-  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
   wid_update(wid_leftbar);
 
