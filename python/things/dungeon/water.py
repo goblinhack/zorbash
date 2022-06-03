@@ -9,6 +9,8 @@ def tp_init(name, text_long_name, tiles=[]):
     my.environ_avoids_fire(self, 1)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_ascii_animated(self, True)
+    my.gfx_ascii_mode_color_spread_blue(self, 50)
     my.gfx_water(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)

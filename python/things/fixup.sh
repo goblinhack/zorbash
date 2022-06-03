@@ -94,7 +94,7 @@ do
       gfx_glows \
       gfx_health_bar_autohide \
       gfx_health_bar_shown \
-      gfx_health_bar_shown_when_awake_only \
+      gfx_health_bar_only_when_awake \
       gfx_long_shadow_caster \
       gfx_on_fire_anim \
       gfx_oversized_and_on_floor \
@@ -503,7 +503,7 @@ do
       unused_flag92 \
       unused_flag93 \
       unused_flag94 \
-      unused_flag95 \
+      gfx_ascii_animated \
       tick_prio \
       gfx_ascii_mode_color_spread_hue \
       gfx_ascii_mode_color_spread_hue \

@@ -459,12 +459,6 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
         {
           t->blit_pixelart(fbo);
 
-          if (unlikely(game->robot_mode)) {
-            if (unlikely(t->gfx_pixelart_animated())) {
-              t->animate();
-            }
-          }
-
           //
           // Sanity checks
           //
@@ -501,16 +495,7 @@ void Level::display_pixelart_map_fg2_things(int fbo, const int16_t minx, const i
   for (auto z = (int) MAP_DEPTH_TOP; z < MAP_DEPTH; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
-        {
-          t->blit_pixelart(fbo);
-
-          if (unlikely(game->robot_mode)) {
-            if (unlikely(t->gfx_pixelart_animated())) {
-              t->animate();
-            }
-          }
-        }
+        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
         FOR_ALL_THINGS_END()
       }
     }

@@ -38,7 +38,7 @@ int Thing::damage_nat_attack(void)
   return roll + enchant;
 }
 
-int Thing::on_owner_receiving_damage_nat_attack(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_receiving_dmg_nat_attack(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -53,12 +53,12 @@ int Thing::on_owner_receiving_damage_nat_attack(Thingp owner, Thingp hitter, Thi
     return damage;
   }
 
-  auto on_owner_receiving_damage_nat_attack = on_owner_receiving_damage_nat_attack_do();
-  if (std::empty(on_owner_receiving_damage_nat_attack)) {
+  auto on_owner_receiving_dmg_nat_attack = on_owner_receiving_dmg_nat_attack_do();
+  if (std::empty(on_owner_receiving_dmg_nat_attack)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_receiving_damage_nat_attack, '.');
+  auto t = split_tokens(on_owner_receiving_dmg_nat_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -78,13 +78,13 @@ int Thing::on_owner_receiving_damage_nat_attack(Thingp owner, Thingp hitter, Thi
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_receiving_damage_nat_attack call [%s] expected mod:function, got %d elems",
-      on_owner_receiving_damage_nat_attack.c_str(), (int) on_owner_receiving_damage_nat_attack.size());
+  ERR("Bad on_owner_receiving_dmg_nat_attack call [%s] expected mod:function, got %d elems",
+      on_owner_receiving_dmg_nat_attack.c_str(), (int) on_owner_receiving_dmg_nat_attack.size());
 
   return damage;
 }
 
-int Thing::on_receiving_damage_nat_attack(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_receiving_dmg_nat_attack(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
@@ -94,12 +94,12 @@ int Thing::on_receiving_damage_nat_attack(Thingp hitter, Thingp real_hitter, int
     return damage;
   }
 
-  auto on_receiving_damage_nat_attack = on_receiving_damage_nat_attack_do();
-  if (std::empty(on_receiving_damage_nat_attack)) {
+  auto on_receiving_dmg_nat_attack = on_receiving_dmg_nat_attack_do();
+  if (std::empty(on_receiving_dmg_nat_attack)) {
     return damage;
   }
 
-  auto t = split_tokens(on_receiving_damage_nat_attack, '.');
+  auto t = split_tokens(on_receiving_dmg_nat_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -119,13 +119,13 @@ int Thing::on_receiving_damage_nat_attack(Thingp hitter, Thingp real_hitter, int
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_receiving_damage_nat_attack call [%s] expected mod:function, got %d elems",
-      on_receiving_damage_nat_attack.c_str(), (int) on_receiving_damage_nat_attack.size());
+  ERR("Bad on_receiving_dmg_nat_attack call [%s] expected mod:function, got %d elems",
+      on_receiving_dmg_nat_attack.c_str(), (int) on_receiving_dmg_nat_attack.size());
 
   return damage;
 }
 
-int Thing::get_total_damage_for_on_receiving_damage_nat_attack(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::get_total_damage_for_on_receiving_dmg_nat_attack(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -136,7 +136,7 @@ int Thing::get_total_damage_for_on_receiving_damage_nat_attack(Thingp hitter, Th
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_nat_attack(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_nat_attack(this, hitter, real_hitter, damage);
     }
   }
 
@@ -144,7 +144,7 @@ int Thing::get_total_damage_for_on_receiving_damage_nat_attack(Thingp hitter, Th
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_nat_attack(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_nat_attack(this, hitter, real_hitter, damage);
     }
   }
 
@@ -152,16 +152,16 @@ int Thing::get_total_damage_for_on_receiving_damage_nat_attack(Thingp hitter, Th
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_nat_attack(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_nat_attack(this, hitter, real_hitter, damage);
     }
   }
 
-  damage = on_receiving_damage_nat_attack(hitter, real_hitter, damage);
+  damage = on_receiving_dmg_nat_attack(hitter, real_hitter, damage);
 
   return damage;
 }
 
-int Thing::on_attacking_damage_nat_attack(Thingp victim, int damage)
+int Thing::on_attacking_dmg_nat_attack(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
@@ -170,12 +170,12 @@ int Thing::on_attacking_damage_nat_attack(Thingp victim, int damage)
     return damage;
   }
 
-  auto on_attacking_damage_nat_attack = on_attacking_damage_nat_attack_do();
-  if (std::empty(on_attacking_damage_nat_attack)) {
+  auto on_attacking_dmg_nat_attack = on_attacking_dmg_nat_attack_do();
+  if (std::empty(on_attacking_dmg_nat_attack)) {
     return damage;
   }
 
-  auto t = split_tokens(on_attacking_damage_nat_attack, '.');
+  auto t = split_tokens(on_attacking_dmg_nat_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -195,13 +195,13 @@ int Thing::on_attacking_damage_nat_attack(Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_attacking_damage_nat_attack call [%s] expected mod:function, got %d elems",
-      on_attacking_damage_nat_attack.c_str(), (int) on_attacking_damage_nat_attack.size());
+  ERR("Bad on_attacking_dmg_nat_attack call [%s] expected mod:function, got %d elems",
+      on_attacking_dmg_nat_attack.c_str(), (int) on_attacking_dmg_nat_attack.size());
 
   return damage;
 }
 
-int Thing::on_owner_attacking_damage_nat_attack(Thingp owner, Thingp victim, int damage)
+int Thing::on_owner_attacking_dmg_nat_attack(Thingp owner, Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -216,12 +216,12 @@ int Thing::on_owner_attacking_damage_nat_attack(Thingp owner, Thingp victim, int
     return damage;
   }
 
-  auto on_owner_attacking_damage_nat_attack = on_owner_attacking_damage_nat_attack_do();
-  if (std::empty(on_owner_attacking_damage_nat_attack)) {
+  auto on_owner_attacking_dmg_nat_attack = on_owner_attacking_dmg_nat_attack_do();
+  if (std::empty(on_owner_attacking_dmg_nat_attack)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_attacking_damage_nat_attack, '.');
+  auto t = split_tokens(on_owner_attacking_dmg_nat_attack, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -241,13 +241,13 @@ int Thing::on_owner_attacking_damage_nat_attack(Thingp owner, Thingp victim, int
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attacking_damage_nat_attack call [%s] expected mod:function, got %d elems",
-      on_owner_attacking_damage_nat_attack.c_str(), (int) on_owner_attacking_damage_nat_attack.size());
+  ERR("Bad on_owner_attacking_dmg_nat_attack call [%s] expected mod:function, got %d elems",
+      on_owner_attacking_dmg_nat_attack.c_str(), (int) on_owner_attacking_dmg_nat_attack.size());
 
   return damage;
 }
 
-int Thing::get_total_damage_for_on_attacking_damage_nat_attack(Thingp victim, int damage)
+int Thing::get_total_damage_for_on_attacking_dmg_nat_attack(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -258,7 +258,7 @@ int Thing::get_total_damage_for_on_attacking_damage_nat_attack(Thingp victim, in
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_nat_attack(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_nat_attack(this, victim, damage);
     }
   }
 
@@ -266,7 +266,7 @@ int Thing::get_total_damage_for_on_attacking_damage_nat_attack(Thingp victim, in
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_nat_attack(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_nat_attack(this, victim, damage);
     }
   }
 
@@ -274,11 +274,11 @@ int Thing::get_total_damage_for_on_attacking_damage_nat_attack(Thingp victim, in
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_nat_attack(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_nat_attack(this, victim, damage);
     }
   }
 
-  damage = on_attacking_damage_nat_attack(victim, damage);
+  damage = on_attacking_dmg_nat_attack(victim, damage);
 
   return damage;
 }

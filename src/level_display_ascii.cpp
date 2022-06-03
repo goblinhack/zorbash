@@ -36,7 +36,7 @@ void Level::display_ascii_map(point tl, point br)
 
         FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
         {
-          if (t->gfx_pixelart_animated()) {
+          if (t->is_gfx_ascii_animated) {
             t->animate();
           }
           t->blit_ascii(tl, br, p);

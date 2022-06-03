@@ -43,7 +43,8 @@ void Thing::update(void)
   //
   // Cached as used often
   //
-  is_gfx_pixelart_animated = tp()->gfx_pixelart_animated();
+  is_gfx_pixelart_animated = tpp->gfx_pixelart_animated();
+  is_gfx_ascii_animated    = tpp->gfx_ascii_animated();
 
   //
   // If polymorphed, retain the same health
@@ -325,7 +326,7 @@ void Thing::update(void)
   //
   if (! ts_next_frame) {
     auto tiles = &tpp->tiles;
-    if (tpp->gfx_pixelart_animated()) {
+    if (is_gfx_pixelart_animated || is_gfx_ascii_animated) {
       animate();
     } else {
       auto tile = tile_random(tiles);

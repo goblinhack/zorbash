@@ -180,139 +180,139 @@ def on_move(me, x, y):
             last_footstep = footstep
 
 
-def on_receiving_damage_melee(me, hitter, x, y, damage):
+def on_receiving_dmg_melee(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_poison(me, hitter, x, y, damage):
+def on_receiving_dmg_poison(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_future1(me, hitter, x, y, damage):
+def on_receiving_dmg_future1(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_future2(me, hitter, x, y, damage):
+def on_receiving_dmg_future2(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_future3(me, hitter, x, y, damage):
+def on_receiving_dmg_future3(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_cold(me, hitter, x, y, damage):
+def on_receiving_dmg_cold(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_fire(me, hitter, x, y, damage):
+def on_receiving_dmg_fire(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_crush(me, hitter, x, y, damage):
+def on_receiving_dmg_crush(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_lightning(me, hitter, x, y, damage):
+def on_receiving_dmg_lightning(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_energy(me, hitter, x, y, damage):
+def on_receiving_dmg_energy(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_acid(me, hitter, x, y, damage):
+def on_receiving_dmg_acid(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_digest(me, hitter, x, y, damage):
+def on_receiving_dmg_digest(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_nat_attack(me, hitter, x, y, damage):
+def on_receiving_dmg_nat_attack(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_necrosis(me, hitter, x, y, damage):
+def on_receiving_dmg_necrosis(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_draining(me, hitter, x, y, damage):
+def on_receiving_dmg_draining(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_stat_str(me, hitter, x, y, damage):
+def on_receiving_dmg_stat_str(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_damage_stat_con(me, hitter, x, y, damage):
+def on_receiving_dmg_stat_con(me, hitter, x, y, damage):
     return damage
 
 
-def on_attacking_damage_melee(me, victim, x, y, damage):
+def on_attacking_dmg_melee(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_poison(me, victim, x, y, damage):
+def on_attacking_dmg_poison(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_future1(me, victim, x, y, damage):
+def on_attacking_dmg_future1(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_future2(me, victim, x, y, damage):
+def on_attacking_dmg_future2(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_future3(me, victim, x, y, damage):
+def on_attacking_dmg_future3(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_cold(me, victim, x, y, damage):
+def on_attacking_dmg_cold(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_fire(me, victim, x, y, damage):
+def on_attacking_dmg_fire(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_crush(me, victim, x, y, damage):
+def on_attacking_dmg_crush(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_lightning(me, victim, x, y, damage):
+def on_attacking_dmg_lightning(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_energy(me, victim, x, y, damage):
+def on_attacking_dmg_energy(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_acid(me, victim, x, y, damage):
+def on_attacking_dmg_acid(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_digest(me, victim, x, y, damage):
+def on_attacking_dmg_digest(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_nat_attack(me, victim, x, y, damage):
+def on_attacking_dmg_nat_attack(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_necrosis(me, victim, x, y, damage):
+def on_attacking_dmg_necrosis(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_draining(me, victim, x, y, damage):
+def on_attacking_dmg_draining(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_stat_str(me, victim, x, y, damage):
+def on_attacking_dmg_stat_str(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_damage_stat_con(me, victim, x, y, damage):
+def on_attacking_dmg_stat_con(me, victim, x, y, damage):
     return damage
 
 
@@ -404,44 +404,44 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.noise_additional_on_jump_end(self, 20)
     my.noise_decibels_hearing(self, 30)
     my.noise_on_moving(self, 50)
-    my.on_attacking_damage_acid_do(self, "player.on_attacking_damage_acid()")
-    my.on_attacking_damage_cold_do(self, "player.on_attacking_damage_cold()")
-    my.on_attacking_damage_crush_do(self, "player.on_attacking_damage_crush()")
-    my.on_attacking_damage_digest_do(self, "player.on_attacking_damage_digest()")
-    my.on_attacking_damage_draining_do(self, "player.on_attacking_damage_draining()")
-    my.on_attacking_damage_energy_do(self, "player.on_attacking_damage_energy()")
-    my.on_attacking_damage_fire_do(self, "player.on_attacking_damage_fire()")
-    my.on_attacking_damage_future1_do(self, "player.on_attacking_damage_future1()")
-    my.on_attacking_damage_future2_do(self, "player.on_attacking_damage_future2()")
-    my.on_attacking_damage_future3_do(self, "player.on_attacking_damage_future3()")
-    my.on_attacking_damage_lightning_do(self, "player.on_attacking_damage_lightning()")
-    my.on_attacking_damage_melee_do(self, "player.on_attacking_damage_melee()")
-    my.on_attacking_damage_nat_attack_do(self, "player.on_attacking_damage_nat_attack()")
-    my.on_attacking_damage_necrosis_do(self, "player.on_attacking_damage_necrosis()")
-    my.on_attacking_damage_poison_do(self, "player.on_attacking_damage_poison()")
-    my.on_attacking_damage_stat_con_do(self, "player.on_attacking_damage_stat_con()")
-    my.on_attacking_damage_stat_str_do(self, "player.on_attacking_damage_stat_str()")
+    my.on_attacking_dmg_acid_do(self, "player.on_attacking_dmg_acid()")
+    my.on_attacking_dmg_cold_do(self, "player.on_attacking_dmg_cold()")
+    my.on_attacking_dmg_crush_do(self, "player.on_attacking_dmg_crush()")
+    my.on_attacking_dmg_digest_do(self, "player.on_attacking_dmg_digest()")
+    my.on_attacking_dmg_draining_do(self, "player.on_attacking_dmg_draining()")
+    my.on_attacking_dmg_energy_do(self, "player.on_attacking_dmg_energy()")
+    my.on_attacking_dmg_fire_do(self, "player.on_attacking_dmg_fire()")
+    my.on_attacking_dmg_future1_do(self, "player.on_attacking_dmg_future1()")
+    my.on_attacking_dmg_future2_do(self, "player.on_attacking_dmg_future2()")
+    my.on_attacking_dmg_future3_do(self, "player.on_attacking_dmg_future3()")
+    my.on_attacking_dmg_lightning_do(self, "player.on_attacking_dmg_lightning()")
+    my.on_attacking_dmg_melee_do(self, "player.on_attacking_dmg_melee()")
+    my.on_attacking_dmg_nat_attack_do(self, "player.on_attacking_dmg_nat_attack()")
+    my.on_attacking_dmg_necrosis_do(self, "player.on_attacking_dmg_necrosis()")
+    my.on_attacking_dmg_poison_do(self, "player.on_attacking_dmg_poison()")
+    my.on_attacking_dmg_stat_con_do(self, "player.on_attacking_dmg_stat_con()")
+    my.on_attacking_dmg_stat_str_do(self, "player.on_attacking_dmg_stat_str()")
     my.on_born_do(self, "player.on_born()")
     my.on_death_do(self, "player.on_death()")
     my.on_death_drop_all_items(self, True)
     my.on_move_do(self, "player.on_move()")
-    my.on_receiving_damage_acid_do(self, "player.on_receiving_damage_acid()")
-    my.on_receiving_damage_cold_do(self, "player.on_receiving_damage_cold()")
-    my.on_receiving_damage_crush_do(self, "player.on_receiving_damage_crush()")
-    my.on_receiving_damage_digest_do(self, "player.on_receiving_damage_digest()")
-    my.on_receiving_damage_draining_do(self, "player.on_receiving_damage_draining()")
-    my.on_receiving_damage_energy_do(self, "player.on_receiving_damage_energy()")
-    my.on_receiving_damage_fire_do(self, "player.on_receiving_damage_fire()")
-    my.on_receiving_damage_future1_do(self, "player.on_receiving_damage_future1()")
-    my.on_receiving_damage_future2_do(self, "player.on_receiving_damage_future2()")
-    my.on_receiving_damage_future3_do(self, "player.on_receiving_damage_future3()")
-    my.on_receiving_damage_lightning_do(self, "player.on_receiving_damage_lightning()")
-    my.on_receiving_damage_melee_do(self, "player.on_receiving_damage_melee()")
-    my.on_receiving_damage_nat_attack_do(self, "player.on_receiving_damage_nat_attack()")
-    my.on_receiving_damage_necrosis_do(self, "player.on_receiving_damage_necrosis()")
-    my.on_receiving_damage_poison_do(self, "player.on_receiving_damage_poison()")
-    my.on_receiving_damage_stat_con_do(self, "player.on_receiving_damage_stat_con()")
-    my.on_receiving_damage_stat_str_do(self, "player.on_receiving_damage_stat_str()")
+    my.on_receiving_dmg_acid_do(self, "player.on_receiving_dmg_acid()")
+    my.on_receiving_dmg_cold_do(self, "player.on_receiving_dmg_cold()")
+    my.on_receiving_dmg_crush_do(self, "player.on_receiving_dmg_crush()")
+    my.on_receiving_dmg_digest_do(self, "player.on_receiving_dmg_digest()")
+    my.on_receiving_dmg_draining_do(self, "player.on_receiving_dmg_draining()")
+    my.on_receiving_dmg_energy_do(self, "player.on_receiving_dmg_energy()")
+    my.on_receiving_dmg_fire_do(self, "player.on_receiving_dmg_fire()")
+    my.on_receiving_dmg_future1_do(self, "player.on_receiving_dmg_future1()")
+    my.on_receiving_dmg_future2_do(self, "player.on_receiving_dmg_future2()")
+    my.on_receiving_dmg_future3_do(self, "player.on_receiving_dmg_future3()")
+    my.on_receiving_dmg_lightning_do(self, "player.on_receiving_dmg_lightning()")
+    my.on_receiving_dmg_melee_do(self, "player.on_receiving_dmg_melee()")
+    my.on_receiving_dmg_nat_attack_do(self, "player.on_receiving_dmg_nat_attack()")
+    my.on_receiving_dmg_necrosis_do(self, "player.on_receiving_dmg_necrosis()")
+    my.on_receiving_dmg_poison_do(self, "player.on_receiving_dmg_poison()")
+    my.on_receiving_dmg_stat_con_do(self, "player.on_receiving_dmg_stat_con()")
+    my.on_receiving_dmg_stat_str_do(self, "player.on_receiving_dmg_stat_str()")
     my.on_you_are_hit_but_still_alive_do(self, "player.on_you_are_hit_but_still_alive()")
     my.on_you_nat_attack_do(self, "player.on_you_nat_attack()")
     my.stamina(self, 100)

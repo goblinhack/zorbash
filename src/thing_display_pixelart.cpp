@@ -805,7 +805,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   if (tile && ! tile->is_invisible && ! is_dead && ! reflection && lit &&
       (gfx_pixelart_health_bar_shown() || (gfx_pixelart_health_bar_autohide() && (h < m)))) {
 
-    if (is_sleeping && gfx_pixelart_health_bar_shown_when_awake_only()) {
+    if (is_sleeping && gfx_pixelart_health_bar_only_when_awake()) {
       //
       // Only show health when awake
       //

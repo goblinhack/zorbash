@@ -953,7 +953,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag94() && (what == "unused_flag94")) {
     return true;
   }
-  if (unused_flag95() && (what == "unused_flag95")) {
+  if (gfx_ascii_animated() && (what == "gfx_ascii_animated")) {
     return true;
   }
   if (tick_prio() && (what == "tick_prio")) {
@@ -1091,7 +1091,7 @@ bool Thing::matches(const std::string &what)
   if (is_very_heavy() && (what == "is_very_heavy")) {
     return true;
   }
-  if (gfx_pixelart_health_bar_shown_when_awake_only() && (what == "gfx_pixelart_health_bar_shown_when_awake_only")) {
+  if (gfx_pixelart_health_bar_only_when_awake() && (what == "gfx_pixelart_health_bar_only_when_awake")) {
     return true;
   }
   if (gfx_pixelart_show_asleep_anim() && (what == "gfx_pixelart_show_asleep_anim")) {
@@ -1401,8 +1401,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "gfx_flickers") {
     return &Thing::gfx_flickers;
   }
-  if (what == "gfx_pixelart_health_bar_shown_when_awake_only") {
-    return &Thing::gfx_pixelart_health_bar_shown_when_awake_only;
+  if (what == "gfx_pixelart_health_bar_only_when_awake") {
+    return &Thing::gfx_pixelart_health_bar_only_when_awake;
   }
   if (what == "gfx_pixelart_shadow_long") {
     return &Thing::gfx_pixelart_shadow_long;
@@ -2568,8 +2568,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag94") {
     return &Thing::unused_flag94;
   }
-  if (what == "unused_flag95") {
-    return &Thing::unused_flag95;
+  if (what == "gfx_ascii_animated") {
+    return &Thing::gfx_ascii_animated;
   }
   if (what == "tick_prio") {
     return &Thing::tick_prio;

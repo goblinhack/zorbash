@@ -74,7 +74,7 @@ int Thing::stamina_decr(int v)
   TRACE_NO_INDENT();
   new_infop();
 
-  v = get_total_damage_for_on_receiving_damage_draining(this, this, v);
+  v = get_total_damage_for_on_receiving_dmg_draining(this, this, v);
 
   FOR_ALL_EQUIP(e)
   {

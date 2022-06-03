@@ -67,7 +67,7 @@ def tp_init(name, text_long_name):
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)
-    my.gfx_pixelart_health_bar_shown_when_awake_only(self, True)
+    my.gfx_pixelart_health_bar_only_when_awake(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.health_initial_dice(self, "7d8+20")

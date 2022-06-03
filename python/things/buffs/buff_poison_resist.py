@@ -15,73 +15,73 @@ def on_owner_remove(me, owner, x, y):
         my.thing_msg(me, "The green glow around you fades.")
 
 
-def on_owner_receiving_damage_melee(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_melee(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_poison(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
     if my.thing_is_player(owner):
         my.thing_msg(me, "You take half damage from the poison.")
     return int(damage / 2)
 
 
-def on_owner_receiving_damage_future1(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_future1(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_future2(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_future2(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_future3(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_future3(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_cold(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_cold(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_fire(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_fire(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_crush(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_crush(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_lightning(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_lightning(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_energy(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_energy(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_acid(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_acid(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_digest(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_digest(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_nat_attack(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_nat_attack(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_necrosis(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_necrosis(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_draining(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_draining(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_stat_str(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_stat_str(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receiving_damage_stat_con(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receiving_dmg_stat_con(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
@@ -109,23 +109,23 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
-    my.on_owner_receiving_damage_acid_do(self, "me.on_owner_receiving_damage_acid()")
-    my.on_owner_receiving_damage_cold_do(self, "me.on_owner_receiving_damage_cold()")
-    my.on_owner_receiving_damage_crush_do(self, "me.on_owner_receiving_damage_crush()")
-    my.on_owner_receiving_damage_digest_do(self, "me.on_owner_receiving_damage_digest()")
-    my.on_owner_receiving_damage_draining_do(self, "me.on_owner_receiving_damage_draining()")
-    my.on_owner_receiving_damage_energy_do(self, "me.on_owner_receiving_damage_energy()")
-    my.on_owner_receiving_damage_fire_do(self, "me.on_owner_receiving_damage_fire()")
-    my.on_owner_receiving_damage_future1_do(self, "me.on_owner_receiving_damage_future1()")
-    my.on_owner_receiving_damage_future2_do(self, "me.on_owner_receiving_damage_future2()")
-    my.on_owner_receiving_damage_future3_do(self, "me.on_owner_receiving_damage_future3()")
-    my.on_owner_receiving_damage_lightning_do(self, "me.on_owner_receiving_damage_lightning()")
-    my.on_owner_receiving_damage_melee_do(self, "me.on_owner_receiving_damage_melee()")
-    my.on_owner_receiving_damage_nat_attack_do(self, "me.on_owner_receiving_damage_nat_attack()")
-    my.on_owner_receiving_damage_necrosis_do(self, "me.on_owner_receiving_damage_necrosis()")
-    my.on_owner_receiving_damage_poison_do(self, "me.on_owner_receiving_damage_poison()")
-    my.on_owner_receiving_damage_stat_con_do(self, "me.on_owner_receiving_damage_stat_con()")
-    my.on_owner_receiving_damage_stat_str_do(self, "me.on_owner_receiving_damage_stat_str()")
+    my.on_owner_receiving_dmg_acid_do(self, "me.on_owner_receiving_dmg_acid()")
+    my.on_owner_receiving_dmg_cold_do(self, "me.on_owner_receiving_dmg_cold()")
+    my.on_owner_receiving_dmg_crush_do(self, "me.on_owner_receiving_dmg_crush()")
+    my.on_owner_receiving_dmg_digest_do(self, "me.on_owner_receiving_dmg_digest()")
+    my.on_owner_receiving_dmg_draining_do(self, "me.on_owner_receiving_dmg_draining()")
+    my.on_owner_receiving_dmg_energy_do(self, "me.on_owner_receiving_dmg_energy()")
+    my.on_owner_receiving_dmg_fire_do(self, "me.on_owner_receiving_dmg_fire()")
+    my.on_owner_receiving_dmg_future1_do(self, "me.on_owner_receiving_dmg_future1()")
+    my.on_owner_receiving_dmg_future2_do(self, "me.on_owner_receiving_dmg_future2()")
+    my.on_owner_receiving_dmg_future3_do(self, "me.on_owner_receiving_dmg_future3()")
+    my.on_owner_receiving_dmg_lightning_do(self, "me.on_owner_receiving_dmg_lightning()")
+    my.on_owner_receiving_dmg_melee_do(self, "me.on_owner_receiving_dmg_melee()")
+    my.on_owner_receiving_dmg_nat_attack_do(self, "me.on_owner_receiving_dmg_nat_attack()")
+    my.on_owner_receiving_dmg_necrosis_do(self, "me.on_owner_receiving_dmg_necrosis()")
+    my.on_owner_receiving_dmg_poison_do(self, "me.on_owner_receiving_dmg_poison()")
+    my.on_owner_receiving_dmg_stat_con_do(self, "me.on_owner_receiving_dmg_stat_con()")
+    my.on_owner_receiving_dmg_stat_str_do(self, "me.on_owner_receiving_dmg_stat_str()")
     my.on_owner_remove_do(self, "me.on_owner_remove()")
     my.on_tick_do(self, "me.on_tick()")
     my.text_long_description(self, "Poison causes you 50 percent less damage.")
