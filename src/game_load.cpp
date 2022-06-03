@@ -517,6 +517,9 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   l->animated_things                   = {};
   l->animated_things_pending_add       = {};
   l->animated_things_pending_remove    = {};
+  l->describable_things                = {};
+  l->describable_things_pending_add    = {};
+  l->describable_things_pending_remove = {};
   l->all_things_to_be_destroyed        = {};
   l->all_things_pending_fall           = {};
 

@@ -88,6 +88,16 @@ void Level::things_gc(bool force)
     tickable_things.insert(i);
   }
   tickable_things_pending_add = {};
+
+  for (auto &i : describable_things_pending_remove) {
+    describable_things.erase(i.first);
+  }
+  describable_things_pending_remove = {};
+
+  for (auto &i : describable_things_pending_add) {
+    describable_things.insert(i);
+  }
+  describable_things_pending_add = {};
 }
 
 void Level::things_gc_force(void)

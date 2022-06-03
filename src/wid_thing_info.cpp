@@ -206,10 +206,12 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   if (! level) {
     return nullptr;
   }
+
   auto player = level->player;
   if (! player) {
     return nullptr;
   }
+
   if (! player->player_is_ready_for_thing_info()) {
     return nullptr;
   }
@@ -291,7 +293,7 @@ bool Game::wid_thing_info_push_popup(Thingp t)
   IF_DEBUG1 { t->log("Push thing info?"); }
   TRACE_AND_INDENT();
 
-  if (t->text_long_description() == "") {
+  if (t->text_long_description().empty()) {
     IF_DEBUG1 { t->log("No; cannot push, no text"); }
     return false;
   }
