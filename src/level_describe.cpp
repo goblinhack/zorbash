@@ -87,7 +87,7 @@ void Level::describe(point p)
     }
 
     if (t->is_described_when_hovering_over()) {
-      if (! t->text_short_description().empty() || ! t->text_long_description().empty()) {
+      if (! t->text_long_description().empty()) {
         IF_DEBUG2 { t->log("Add to describe"); }
         got_one_with_long_text |= ! t->text_long_description().empty();
         push_back_if_unique(hover_over_things, t);
@@ -140,7 +140,7 @@ void Level::describe(point p)
     }
 
     if (t->is_described_when_hovering_over()) {
-      if (! t->text_short_description().empty() || ! t->text_long_description().empty()) {
+      if (! t->text_long_description().empty()) {
         IF_DEBUG2 { t->log("Add to describe"); }
         got_one_with_long_text |= ! t->text_long_description().empty();
         push_back_if_unique(hover_over_things, t);
@@ -198,7 +198,7 @@ void Level::describe(point p)
     }
 
     if (t->is_described_when_hovering_over()) {
-      if (! t->text_short_description().empty() || ! t->text_long_description().empty()) {
+      if (! t->text_long_description().empty()) {
         got_one_with_long_text |= ! t->text_long_description().empty();
         IF_DEBUG2 { t->log("Add to describe"); }
         push_back_if_unique(hover_over_things, t);

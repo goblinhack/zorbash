@@ -8,7 +8,7 @@
 
 bool Level::can_see_obstacle(int x, int y)
 {
-  if (is_wall(x, y) || is_door(x, y) || is_rock(x, y)) {
+  if (is_obs_wall_or_door(x, y)) {
     return true;
   }
 

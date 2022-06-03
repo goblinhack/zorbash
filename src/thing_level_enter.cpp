@@ -62,6 +62,25 @@ void Thing::level_enter(bool rejoin)
     }
   }
 
+  if (is_described_when_hovering_over()) {
+    //
+    // If doing a walk, we must be careful and cannot modify the map
+    //
+    if (level->describable_things_walk_in_progress) {
+      level->describable_things_pending_remove.erase(id);
+      level->describable_things_pending_add.insert(std::pair(id, this));
+      dbg3("Pending remove and then add to describable things");
+    } else {
+      auto result = level->describable_things.insert(std::pair(id, this));
+      if (result.second == false) {
+        if (! rejoin) {
+          err("Failed to insert into active thing map");
+        }
+      }
+      dbg3("Added to describable things");
+    }
+  }
+
   if (gfx_pixelart_animated()) {
     //
     // If doing a walk, we must be careful and cannot modify the map

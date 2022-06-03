@@ -51,8 +51,14 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
 {
   TRACE_NO_INDENT();
 
-  auto player = level->player;
+  //
+  // Covers carried or equipped items
+  //
+  if (t->is_hidden) {
+    return;
+  }
 
+  auto player = level->player;
   if (t->is_player()) {
     return;
   }
@@ -79,6 +85,17 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     wid_set_text(w, s);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     myfree(s);
+  }
+
+  {
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_plain(wid_leftbar, "It tile");
+    point tl = make_point(width + 1, y_at);
+    point br = make_point(width + 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_thing_id_context(w, t);
+    wid_set_on_display(w, wid_leftbar_ascii_display);
   }
 
   if (t->is_on_fire()) {
@@ -127,6 +144,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_text(w, "(Broken)");
     }
     wid_set_style(w, UI_WID_STYLE_NORMAL);
+    y_at += 1;
     return;
   }
 
@@ -150,17 +168,6 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_text(w, "(Closed)");
       wid_set_style(w, UI_WID_STYLE_NORMAL);
     }
-  }
-
-  {
-    TRACE_NO_INDENT();
-    auto  w  = wid_new_plain(wid_leftbar, "It tile");
-    point tl = make_point(width + 1, y_at);
-    point br = make_point(width + 1, y_at);
-    wid_set_pos(w, tl, br);
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
-    wid_set_thing_id_context(w, t);
-    wid_set_on_display(w, wid_leftbar_ascii_display);
   }
 
   if (t->is_monst()) {
@@ -237,7 +244,7 @@ bool wid_leftbar_ascii_create(void)
   ///////////////////////////////////////////////////////////////////////////
   // Monsters (alive)
   ///////////////////////////////////////////////////////////////////////////
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(game->level, t)
+  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
   {
     if (! t->is_alive_monst()) {
       continue;
@@ -245,12 +252,12 @@ bool wid_leftbar_ascii_create(void)
 
     wid_leftbar_ascii_describe(level, t, y_at, width);
   }
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
+  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
   ///////////////////////////////////////////////////////////////////////////
   // Monsters (dead)
   ///////////////////////////////////////////////////////////////////////////
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(game->level, t)
+  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
   {
     if (! t->is_dead) {
       continue;
@@ -258,12 +265,12 @@ bool wid_leftbar_ascii_create(void)
 
     wid_leftbar_ascii_describe(level, t, y_at, width);
   }
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
+  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
   ///////////////////////////////////////////////////////////////////////////
   // Items
   ///////////////////////////////////////////////////////////////////////////
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(game->level, t)
+  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
   {
     if (! t->is_item()) {
       continue;
@@ -271,12 +278,12 @@ bool wid_leftbar_ascii_create(void)
 
     wid_leftbar_ascii_describe(level, t, y_at, width);
   }
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
+  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
   ///////////////////////////////////////////////////////////////////////////
   // Important environment items
   ///////////////////////////////////////////////////////////////////////////
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(game->level, t)
+  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(game->level, t)
   {
     if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon() &&
         ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel()) {
@@ -285,7 +292,7 @@ bool wid_leftbar_ascii_create(void)
 
     wid_leftbar_ascii_describe(level, t, y_at, width);
   }
-  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(game->level)
+  FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
   wid_update(wid_leftbar);
 

@@ -251,6 +251,14 @@ public:
   std::map< ThingId, Thingp > animated_things_pending_remove {};
 
   //
+  // Only things that have a description when we hover over.
+  //
+  bool                        describable_things_walk_in_progress {};
+  std::map< ThingId, Thingp > describable_things {};
+  std::map< ThingId, Thingp > describable_things_pending_add {};
+  std::map< ThingId, Thingp > describable_things_pending_remove {};
+
+  //
   // This is for things that do not tick, like water; that need to fall
   //
   std::map< ThingId, Thingp > all_things_pending_fall {};
@@ -449,6 +457,29 @@ public:
   }                                                                                                                  \
   }                                                                                                                  \
   level->tickable_things_walk_in_progress = false;                                                                   \
+  level->handle_all_pending_things();                                                                                \
+  }
+
+//
+// Things that can move or fall or catch fire etc...
+//
+#define FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL(level, t)                                                                \
+  {                                                                                                                  \
+    level->describable_things_walk_in_progress = true;                                                               \
+    auto c                                     = level->describable_things;                                          \
+    auto i                                     = level->describable_things.begin();                                  \
+    while (i != level->describable_things.end()) {                                                                   \
+      auto t = i->second;                                                                                            \
+      /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
+      i++;                                                                                                           \
+      verify(MTYPE_THING, t);
+
+#define FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(level)                                                               \
+  if (i == level->describable_things.end()) {                                                                        \
+    break;                                                                                                           \
+  }                                                                                                                  \
+  }                                                                                                                  \
+  level->describable_things_walk_in_progress = false;                                                                \
   level->handle_all_pending_things();                                                                                \
   }
 
