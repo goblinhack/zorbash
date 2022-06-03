@@ -324,6 +324,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_fadeup                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_falling                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_pixelart_animated                     ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_gfx_ascii_animated                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hidden                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hungry                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_in_lava                                   ? 1LLU : 0LLU) << shift; shift++;

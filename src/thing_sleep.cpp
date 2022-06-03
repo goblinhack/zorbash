@@ -16,3 +16,65 @@ void Thing::sleep(void)
     f->sleep();
   }
 }
+
+bool Thing::is_state_sleeping(void) { return is_sleeping; }
+
+int Thing::is_asleep_initially(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_asleep_initially());
+}
+
+int Thing::is_able_to_sleep(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_sleep());
+}
+
+////////////////////////////////////////////////////////////////////////////
+// sleep_count
+////////////////////////////////////////////////////////////////////////////
+int Thing::sleep_count(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->sleep_count);
+  } else {
+    return 0;
+  }
+}
+
+int Thing::sleep_count_set(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->sleep_count = v);
+}
+
+int Thing::sleep_count_decr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->sleep_count -= v);
+}
+
+int Thing::sleep_count_incr(int v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->sleep_count += v);
+}
+
+int Thing::sleep_count_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->sleep_count--);
+}
+
+int Thing::sleep_count_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->sleep_count++);
+}

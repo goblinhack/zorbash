@@ -384,6 +384,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->is_fadeup                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_falling                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_gfx_pixelart_animated                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->is_gfx_ascii_animated                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_hidden                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_hungry                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->is_in_lava                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

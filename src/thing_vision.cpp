@@ -5,6 +5,7 @@
 
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 bool Level::can_see_obstacle(int x, int y)
 {
@@ -55,4 +56,24 @@ point Thing::vision_source_get(void)
     }
   }
   return curr_at;
+}
+
+float Thing::distance_vision_get(void)
+{
+  TRACE_NO_INDENT();
+
+  //
+  // Limit vision by torch light if needed.
+  //
+  auto v = tp()->distance_vision();
+
+  if (is_able_to_see_in_the_dark()) {
+    return v;
+  }
+
+  auto l = light_dist_get();
+  if (l < v) {
+    return l;
+  }
+  return v;
 }

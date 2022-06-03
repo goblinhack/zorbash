@@ -38,7 +38,7 @@ int Thing::damage_acid(void)
   return roll + enchant;
 }
 
-int Thing::on_owner_receiving_damage_acid(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_receiving_dmg_acid(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -53,12 +53,12 @@ int Thing::on_owner_receiving_damage_acid(Thingp owner, Thingp hitter, Thingp re
     return damage;
   }
 
-  auto on_owner_receiving_damage_acid = on_owner_receiving_damage_acid_do();
-  if (std::empty(on_owner_receiving_damage_acid)) {
+  auto on_owner_receiving_dmg_acid = on_owner_receiving_dmg_acid_do();
+  if (std::empty(on_owner_receiving_dmg_acid)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_receiving_damage_acid, '.');
+  auto t = split_tokens(on_owner_receiving_dmg_acid, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -78,13 +78,13 @@ int Thing::on_owner_receiving_damage_acid(Thingp owner, Thingp hitter, Thingp re
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_receiving_damage_acid call [%s] expected mod:function, got %d elems",
-      on_owner_receiving_damage_acid.c_str(), (int) on_owner_receiving_damage_acid.size());
+  ERR("Bad on_owner_receiving_dmg_acid call [%s] expected mod:function, got %d elems",
+      on_owner_receiving_dmg_acid.c_str(), (int) on_owner_receiving_dmg_acid.size());
 
   return damage;
 }
 
-int Thing::on_receiving_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_receiving_dmg_acid(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
@@ -94,12 +94,12 @@ int Thing::on_receiving_damage_acid(Thingp hitter, Thingp real_hitter, int damag
     return damage;
   }
 
-  auto on_receiving_damage_acid = on_receiving_damage_acid_do();
-  if (std::empty(on_receiving_damage_acid)) {
+  auto on_receiving_dmg_acid = on_receiving_dmg_acid_do();
+  if (std::empty(on_receiving_dmg_acid)) {
     return damage;
   }
 
-  auto t = split_tokens(on_receiving_damage_acid, '.');
+  auto t = split_tokens(on_receiving_dmg_acid, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -119,13 +119,13 @@ int Thing::on_receiving_damage_acid(Thingp hitter, Thingp real_hitter, int damag
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_receiving_damage_acid call [%s] expected mod:function, got %d elems", on_receiving_damage_acid.c_str(),
-      (int) on_receiving_damage_acid.size());
+  ERR("Bad on_receiving_dmg_acid call [%s] expected mod:function, got %d elems", on_receiving_dmg_acid.c_str(),
+      (int) on_receiving_dmg_acid.size());
 
   return damage;
 }
 
-int Thing::get_total_damage_for_on_receiving_damage_acid(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::get_total_damage_for_on_receiving_dmg_acid(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -145,7 +145,7 @@ int Thing::get_total_damage_for_on_receiving_damage_acid(Thingp hitter, Thingp r
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_acid(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_acid(this, hitter, real_hitter, damage);
     }
   }
 
@@ -153,7 +153,7 @@ int Thing::get_total_damage_for_on_receiving_damage_acid(Thingp hitter, Thingp r
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_acid(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_acid(this, hitter, real_hitter, damage);
     }
   }
 
@@ -161,16 +161,16 @@ int Thing::get_total_damage_for_on_receiving_damage_acid(Thingp hitter, Thingp r
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_acid(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_acid(this, hitter, real_hitter, damage);
     }
   }
 
-  damage = on_receiving_damage_acid(hitter, real_hitter, damage);
+  damage = on_receiving_dmg_acid(hitter, real_hitter, damage);
 
   return damage;
 }
 
-int Thing::on_attacking_damage_acid(Thingp victim, int damage)
+int Thing::on_attacking_dmg_acid(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
@@ -179,12 +179,12 @@ int Thing::on_attacking_damage_acid(Thingp victim, int damage)
     return damage;
   }
 
-  auto on_attacking_damage_acid = on_attacking_damage_acid_do();
-  if (std::empty(on_attacking_damage_acid)) {
+  auto on_attacking_dmg_acid = on_attacking_dmg_acid_do();
+  if (std::empty(on_attacking_dmg_acid)) {
     return damage;
   }
 
-  auto t = split_tokens(on_attacking_damage_acid, '.');
+  auto t = split_tokens(on_attacking_dmg_acid, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -204,13 +204,13 @@ int Thing::on_attacking_damage_acid(Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_attacking_damage_acid call [%s] expected mod:function, got %d elems", on_attacking_damage_acid.c_str(),
-      (int) on_attacking_damage_acid.size());
+  ERR("Bad on_attacking_dmg_acid call [%s] expected mod:function, got %d elems", on_attacking_dmg_acid.c_str(),
+      (int) on_attacking_dmg_acid.size());
 
   return damage;
 }
 
-int Thing::on_owner_attacking_damage_acid(Thingp owner, Thingp victim, int damage)
+int Thing::on_owner_attacking_dmg_acid(Thingp owner, Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -225,12 +225,12 @@ int Thing::on_owner_attacking_damage_acid(Thingp owner, Thingp victim, int damag
     return damage;
   }
 
-  auto on_owner_attacking_damage_acid = on_owner_attacking_damage_acid_do();
-  if (std::empty(on_owner_attacking_damage_acid)) {
+  auto on_owner_attacking_dmg_acid = on_owner_attacking_dmg_acid_do();
+  if (std::empty(on_owner_attacking_dmg_acid)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_attacking_damage_acid, '.');
+  auto t = split_tokens(on_owner_attacking_dmg_acid, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -250,13 +250,13 @@ int Thing::on_owner_attacking_damage_acid(Thingp owner, Thingp victim, int damag
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attacking_damage_acid call [%s] expected mod:function, got %d elems",
-      on_owner_attacking_damage_acid.c_str(), (int) on_owner_attacking_damage_acid.size());
+  ERR("Bad on_owner_attacking_dmg_acid call [%s] expected mod:function, got %d elems",
+      on_owner_attacking_dmg_acid.c_str(), (int) on_owner_attacking_dmg_acid.size());
 
   return damage;
 }
 
-int Thing::get_total_damage_for_on_attacking_damage_acid(Thingp victim, int damage)
+int Thing::get_total_damage_for_on_attacking_dmg_acid(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -267,7 +267,7 @@ int Thing::get_total_damage_for_on_attacking_damage_acid(Thingp victim, int dama
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_acid(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_acid(this, victim, damage);
     }
   }
 
@@ -275,7 +275,7 @@ int Thing::get_total_damage_for_on_attacking_damage_acid(Thingp victim, int dama
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_acid(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_acid(this, victim, damage);
     }
   }
 
@@ -283,11 +283,11 @@ int Thing::get_total_damage_for_on_attacking_damage_acid(Thingp victim, int dama
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_acid(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_acid(this, victim, damage);
     }
   }
 
-  damage = on_attacking_damage_acid(victim, damage);
+  damage = on_attacking_dmg_acid(victim, damage);
 
   return damage;
 }

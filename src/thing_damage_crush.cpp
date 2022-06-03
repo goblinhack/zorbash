@@ -38,7 +38,7 @@ int Thing::damage_crush(void)
   return roll + enchant;
 }
 
-int Thing::on_owner_receiving_damage_crush(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_receiving_dmg_crush(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -53,12 +53,12 @@ int Thing::on_owner_receiving_damage_crush(Thingp owner, Thingp hitter, Thingp r
     return damage;
   }
 
-  auto on_owner_receiving_damage_crush = on_owner_receiving_damage_crush_do();
-  if (std::empty(on_owner_receiving_damage_crush)) {
+  auto on_owner_receiving_dmg_crush = on_owner_receiving_dmg_crush_do();
+  if (std::empty(on_owner_receiving_dmg_crush)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_receiving_damage_crush, '.');
+  auto t = split_tokens(on_owner_receiving_dmg_crush, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -78,13 +78,13 @@ int Thing::on_owner_receiving_damage_crush(Thingp owner, Thingp hitter, Thingp r
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_receiving_damage_crush call [%s] expected mod:function, got %d elems",
-      on_owner_receiving_damage_crush.c_str(), (int) on_owner_receiving_damage_crush.size());
+  ERR("Bad on_owner_receiving_dmg_crush call [%s] expected mod:function, got %d elems",
+      on_owner_receiving_dmg_crush.c_str(), (int) on_owner_receiving_dmg_crush.size());
 
   return damage;
 }
 
-int Thing::on_receiving_damage_crush(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_receiving_dmg_crush(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
@@ -93,12 +93,12 @@ int Thing::on_receiving_damage_crush(Thingp hitter, Thingp real_hitter, int dama
     return damage;
   }
 
-  auto on_receiving_damage_crush = on_receiving_damage_crush_do();
-  if (std::empty(on_receiving_damage_crush)) {
+  auto on_receiving_dmg_crush = on_receiving_dmg_crush_do();
+  if (std::empty(on_receiving_dmg_crush)) {
     return damage;
   }
 
-  auto t = split_tokens(on_receiving_damage_crush, '.');
+  auto t = split_tokens(on_receiving_dmg_crush, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -118,13 +118,13 @@ int Thing::on_receiving_damage_crush(Thingp hitter, Thingp real_hitter, int dama
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_receiving_damage_crush call [%s] expected mod:function, got %d elems",
-      on_receiving_damage_crush.c_str(), (int) on_receiving_damage_crush.size());
+  ERR("Bad on_receiving_dmg_crush call [%s] expected mod:function, got %d elems",
+      on_receiving_dmg_crush.c_str(), (int) on_receiving_dmg_crush.size());
 
   return damage;
 }
 
-int Thing::get_total_damage_for_on_receiving_damage_crush(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::get_total_damage_for_on_receiving_dmg_crush(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -135,7 +135,7 @@ int Thing::get_total_damage_for_on_receiving_damage_crush(Thingp hitter, Thingp 
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_crush(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_crush(this, hitter, real_hitter, damage);
     }
   }
 
@@ -143,7 +143,7 @@ int Thing::get_total_damage_for_on_receiving_damage_crush(Thingp hitter, Thingp 
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_crush(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_crush(this, hitter, real_hitter, damage);
     }
   }
 
@@ -151,16 +151,16 @@ int Thing::get_total_damage_for_on_receiving_damage_crush(Thingp hitter, Thingp 
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_crush(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_crush(this, hitter, real_hitter, damage);
     }
   }
 
-  damage = on_receiving_damage_crush(hitter, real_hitter, damage);
+  damage = on_receiving_dmg_crush(hitter, real_hitter, damage);
 
   return damage;
 }
 
-int Thing::on_attacking_damage_crush(Thingp victim, int damage)
+int Thing::on_attacking_dmg_crush(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
@@ -169,12 +169,12 @@ int Thing::on_attacking_damage_crush(Thingp victim, int damage)
     return damage;
   }
 
-  auto on_attacking_damage_crush = on_attacking_damage_crush_do();
-  if (std::empty(on_attacking_damage_crush)) {
+  auto on_attacking_dmg_crush = on_attacking_dmg_crush_do();
+  if (std::empty(on_attacking_dmg_crush)) {
     return damage;
   }
 
-  auto t = split_tokens(on_attacking_damage_crush, '.');
+  auto t = split_tokens(on_attacking_dmg_crush, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -194,13 +194,13 @@ int Thing::on_attacking_damage_crush(Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_attacking_damage_crush call [%s] expected mod:function, got %d elems",
-      on_attacking_damage_crush.c_str(), (int) on_attacking_damage_crush.size());
+  ERR("Bad on_attacking_dmg_crush call [%s] expected mod:function, got %d elems",
+      on_attacking_dmg_crush.c_str(), (int) on_attacking_dmg_crush.size());
 
   return damage;
 }
 
-int Thing::on_owner_attacking_damage_crush(Thingp owner, Thingp victim, int damage)
+int Thing::on_owner_attacking_dmg_crush(Thingp owner, Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -215,12 +215,12 @@ int Thing::on_owner_attacking_damage_crush(Thingp owner, Thingp victim, int dama
     return damage;
   }
 
-  auto on_owner_attacking_damage_crush = on_owner_attacking_damage_crush_do();
-  if (std::empty(on_owner_attacking_damage_crush)) {
+  auto on_owner_attacking_dmg_crush = on_owner_attacking_dmg_crush_do();
+  if (std::empty(on_owner_attacking_dmg_crush)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_attacking_damage_crush, '.');
+  auto t = split_tokens(on_owner_attacking_dmg_crush, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -240,13 +240,13 @@ int Thing::on_owner_attacking_damage_crush(Thingp owner, Thingp victim, int dama
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attacking_damage_crush call [%s] expected mod:function, got %d elems",
-      on_owner_attacking_damage_crush.c_str(), (int) on_owner_attacking_damage_crush.size());
+  ERR("Bad on_owner_attacking_dmg_crush call [%s] expected mod:function, got %d elems",
+      on_owner_attacking_dmg_crush.c_str(), (int) on_owner_attacking_dmg_crush.size());
 
   return damage;
 }
 
-int Thing::get_total_damage_for_on_attacking_damage_crush(Thingp victim, int damage)
+int Thing::get_total_damage_for_on_attacking_dmg_crush(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -257,7 +257,7 @@ int Thing::get_total_damage_for_on_attacking_damage_crush(Thingp victim, int dam
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_crush(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_crush(this, victim, damage);
     }
   }
 
@@ -265,7 +265,7 @@ int Thing::get_total_damage_for_on_attacking_damage_crush(Thingp victim, int dam
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_crush(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_crush(this, victim, damage);
     }
   }
 
@@ -273,11 +273,11 @@ int Thing::get_total_damage_for_on_attacking_damage_crush(Thingp victim, int dam
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_crush(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_crush(this, victim, damage);
     }
   }
 
-  damage = on_attacking_damage_crush(victim, damage);
+  damage = on_attacking_dmg_crush(victim, damage);
 
   return damage;
 }

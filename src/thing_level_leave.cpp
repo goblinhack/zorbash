@@ -101,7 +101,7 @@ void Thing::level_leave(void)
     }
   }
 
-  if (gfx_pixelart_animated()) {
+  if (is_gfx_pixelart_animated) {
     //
     // If doing a walk, we must be careful and cannot modify the map
     //

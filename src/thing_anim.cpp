@@ -589,11 +589,6 @@ void Thing::animate(void)
   TRACE_AND_INDENT();
 #endif
 
-  if (! gfx_pixelart_animated()) {
-    err("Trying to animate non animated thing");
-    return;
-  }
-
   auto tpp  = tp();
   auto tmap = &tpp->tiles;
   if (unlikely(! tmap)) {
@@ -627,7 +622,7 @@ void Thing::animate(void)
   //
   // If for whatever reason we had no tile, but expect one, just choose the first.
   //
-  if (tpp->gfx_pixelart_animated()) {
+  if (tpp->gfx_pixelart_animated() || tpp->gfx_ascii_animated()) {
     auto tile = tile_first(tiles);
     if (tile) {
       tile_curr = tile->global_index;

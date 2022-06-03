@@ -139,26 +139,6 @@ int Thing::ai_obstacle(void)
   return (tp()->ai_obstacle());
 }
 
-float Thing::distance_vision_get(void)
-{
-  TRACE_NO_INDENT();
-
-  //
-  // Limit vision by torch light if needed.
-  //
-  auto v = tp()->distance_vision();
-
-  if (is_able_to_see_in_the_dark()) {
-    return v;
-  }
-
-  auto l = light_dist_get();
-  if (l < v) {
-    return l;
-  }
-  return v;
-}
-
 int Thing::attack_eater(void)
 {
   TRACE_NO_INDENT();
@@ -1903,12 +1883,6 @@ int Thing::unused_flag94(void)
   return (tp()->unused_flag94());
 }
 
-int Thing::unused_flag95(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag95());
-}
-
 int Thing::tick_prio(void)
 {
   TRACE_NO_INDENT();
@@ -2178,10 +2152,10 @@ int Thing::is_very_heavy(void)
   return (tp()->is_very_heavy());
 }
 
-int Thing::gfx_pixelart_health_bar_shown_when_awake_only(void)
+int Thing::gfx_pixelart_health_bar_only_when_awake(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_pixelart_health_bar_shown_when_awake_only());
+  return (tp()->gfx_pixelart_health_bar_only_when_awake());
 }
 
 int Thing::gfx_pixelart_show_asleep_anim(void)
@@ -2242,18 +2216,6 @@ int Thing::noise_on_dropping(void)
 {
   TRACE_NO_INDENT();
   return (tp()->noise_on_dropping());
-}
-
-int Thing::is_asleep_initially(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_asleep_initially());
-}
-
-int Thing::is_able_to_sleep(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_sleep());
 }
 
 int Thing::is_obstacle_when_dead(void)
@@ -4942,54 +4904,6 @@ int Thing::charge_count_incr(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// sleep_count
-////////////////////////////////////////////////////////////////////////////
-int Thing::sleep_count(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->sleep_count);
-  } else {
-    return 0;
-  }
-}
-
-int Thing::sleep_count_set(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->sleep_count = v);
-}
-
-int Thing::sleep_count_decr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->sleep_count -= v);
-}
-
-int Thing::sleep_count_incr(int v)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->sleep_count += v);
-}
-
-int Thing::sleep_count_decr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->sleep_count--);
-}
-
-int Thing::sleep_count_incr(void)
-{
-  TRACE_NO_INDENT();
-  new_infop();
-  return (infop()->sleep_count++);
-}
-
-////////////////////////////////////////////////////////////////////////////
 // damaged_count
 ////////////////////////////////////////////////////////////////////////////
 int Thing::damaged_count(void)
@@ -6480,5 +6394,3 @@ const std::string &Thing::title(void)
     return g_opt_player_name;
   }
 }
-
-bool Thing::is_state_sleeping(void) { return is_sleeping; }

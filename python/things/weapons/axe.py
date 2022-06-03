@@ -6,8 +6,8 @@ def on_swing(owner, item, x, y):
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_swing{my.non_pcg_randint(1, 3)}")
 
 
-def on_owner_attacking_damage_melee(me, owner, victim, x, y, damage):
-    # my.con("on_owner_attacking_damage_melee")
+def on_owner_attacking_dmg_melee(me, owner, victim, x, y, damage):
+    # my.con("on_owner_attacking_dmg_melee")
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
@@ -59,7 +59,7 @@ def init_weapon(name, text_long_name, text_short_name):
     my.item_width(self, 6)
     my.noise_on_dropping(self, 15)
     my.on_enchant_do(self, "me.on_enchant()")
-    my.on_owner_attacking_damage_melee_do(self, "me.on_owner_attacking_damage_melee()")
+    my.on_owner_attacking_dmg_melee_do(self, "me.on_owner_attacking_dmg_melee()")
     my.on_swing_do(self, "me.on_swing()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_drain_on_attacking(self, 2)

@@ -19,7 +19,7 @@ def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def on_receiving_damage_lightning(me, hitter, x, y, damage):
+def on_receiving_dmg_lightning(me, hitter, x, y, damage):
     # my.topcon("hitter  {} {}".format(my.thing_name_get(hitter), my.thing_health(hitter)))
     owner = my.thing_top_owner_id_get(hitter)
     if (owner and my.thing_is_player(owner)) or my.thing_is_player(hitter):
@@ -93,7 +93,7 @@ def tp_init(name, text_long_name):
     my.noise_decibels_hearing(self, 100)
     my.noise_on_moving(self, 20)
     my.normal_placement_rules(self, True)
-    my.on_receiving_damage_lightning_do(self, "me.on_receiving_damage_lightning()")
+    my.on_receiving_dmg_lightning_do(self, "me.on_receiving_dmg_lightning()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
     my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")

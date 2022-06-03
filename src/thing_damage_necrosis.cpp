@@ -38,7 +38,7 @@ int Thing::damage_necrosis(void)
   return roll + enchant;
 }
 
-int Thing::on_owner_receiving_damage_necrosis(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_receiving_dmg_necrosis(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -53,12 +53,12 @@ int Thing::on_owner_receiving_damage_necrosis(Thingp owner, Thingp hitter, Thing
     return damage;
   }
 
-  auto on_owner_receiving_damage_necrosis = on_owner_receiving_damage_necrosis_do();
-  if (std::empty(on_owner_receiving_damage_necrosis)) {
+  auto on_owner_receiving_dmg_necrosis = on_owner_receiving_dmg_necrosis_do();
+  if (std::empty(on_owner_receiving_dmg_necrosis)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_receiving_damage_necrosis, '.');
+  auto t = split_tokens(on_owner_receiving_dmg_necrosis, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -78,13 +78,13 @@ int Thing::on_owner_receiving_damage_necrosis(Thingp owner, Thingp hitter, Thing
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_receiving_damage_necrosis call [%s] expected mod:function, got %d elems",
-      on_owner_receiving_damage_necrosis.c_str(), (int) on_owner_receiving_damage_necrosis.size());
+  ERR("Bad on_owner_receiving_dmg_necrosis call [%s] expected mod:function, got %d elems",
+      on_owner_receiving_dmg_necrosis.c_str(), (int) on_owner_receiving_dmg_necrosis.size());
 
   return damage;
 }
 
-int Thing::on_receiving_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
@@ -93,12 +93,12 @@ int Thing::on_receiving_damage_necrosis(Thingp hitter, Thingp real_hitter, int d
     return damage;
   }
 
-  auto on_receiving_damage_necrosis = on_receiving_damage_necrosis_do();
-  if (std::empty(on_receiving_damage_necrosis)) {
+  auto on_receiving_dmg_necrosis = on_receiving_dmg_necrosis_do();
+  if (std::empty(on_receiving_dmg_necrosis)) {
     return damage;
   }
 
-  auto t = split_tokens(on_receiving_damage_necrosis, '.');
+  auto t = split_tokens(on_receiving_dmg_necrosis, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -118,13 +118,13 @@ int Thing::on_receiving_damage_necrosis(Thingp hitter, Thingp real_hitter, int d
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_receiving_damage_necrosis call [%s] expected mod:function, got %d elems",
-      on_receiving_damage_necrosis.c_str(), (int) on_receiving_damage_necrosis.size());
+  ERR("Bad on_receiving_dmg_necrosis call [%s] expected mod:function, got %d elems",
+      on_receiving_dmg_necrosis.c_str(), (int) on_receiving_dmg_necrosis.size());
 
   return damage;
 }
 
-int Thing::get_total_damage_for_on_receiving_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::get_total_damage_for_on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -135,7 +135,7 @@ int Thing::get_total_damage_for_on_receiving_damage_necrosis(Thingp hitter, Thin
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_necrosis(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_necrosis(this, hitter, real_hitter, damage);
     }
   }
 
@@ -143,7 +143,7 @@ int Thing::get_total_damage_for_on_receiving_damage_necrosis(Thingp hitter, Thin
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_necrosis(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_necrosis(this, hitter, real_hitter, damage);
     }
   }
 
@@ -151,16 +151,16 @@ int Thing::get_total_damage_for_on_receiving_damage_necrosis(Thingp hitter, Thin
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_receiving_damage_necrosis(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receiving_dmg_necrosis(this, hitter, real_hitter, damage);
     }
   }
 
-  damage = on_receiving_damage_necrosis(hitter, real_hitter, damage);
+  damage = on_receiving_dmg_necrosis(hitter, real_hitter, damage);
 
   return damage;
 }
 
-int Thing::on_attacking_damage_necrosis(Thingp victim, int damage)
+int Thing::on_attacking_dmg_necrosis(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
@@ -169,12 +169,12 @@ int Thing::on_attacking_damage_necrosis(Thingp victim, int damage)
     return damage;
   }
 
-  auto on_attacking_damage_necrosis = on_attacking_damage_necrosis_do();
-  if (std::empty(on_attacking_damage_necrosis)) {
+  auto on_attacking_dmg_necrosis = on_attacking_dmg_necrosis_do();
+  if (std::empty(on_attacking_dmg_necrosis)) {
     return damage;
   }
 
-  auto t = split_tokens(on_attacking_damage_necrosis, '.');
+  auto t = split_tokens(on_attacking_dmg_necrosis, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -194,13 +194,13 @@ int Thing::on_attacking_damage_necrosis(Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_attacking_damage_necrosis call [%s] expected mod:function, got %d elems",
-      on_attacking_damage_necrosis.c_str(), (int) on_attacking_damage_necrosis.size());
+  ERR("Bad on_attacking_dmg_necrosis call [%s] expected mod:function, got %d elems",
+      on_attacking_dmg_necrosis.c_str(), (int) on_attacking_dmg_necrosis.size());
 
   return damage;
 }
 
-int Thing::on_owner_attacking_damage_necrosis(Thingp owner, Thingp victim, int damage)
+int Thing::on_owner_attacking_dmg_necrosis(Thingp owner, Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -215,12 +215,12 @@ int Thing::on_owner_attacking_damage_necrosis(Thingp owner, Thingp victim, int d
     return damage;
   }
 
-  auto on_owner_attacking_damage_necrosis = on_owner_attacking_damage_necrosis_do();
-  if (std::empty(on_owner_attacking_damage_necrosis)) {
+  auto on_owner_attacking_dmg_necrosis = on_owner_attacking_dmg_necrosis_do();
+  if (std::empty(on_owner_attacking_dmg_necrosis)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_attacking_damage_necrosis, '.');
+  auto t = split_tokens(on_owner_attacking_dmg_necrosis, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -240,13 +240,13 @@ int Thing::on_owner_attacking_damage_necrosis(Thingp owner, Thingp victim, int d
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attacking_damage_necrosis call [%s] expected mod:function, got %d elems",
-      on_owner_attacking_damage_necrosis.c_str(), (int) on_owner_attacking_damage_necrosis.size());
+  ERR("Bad on_owner_attacking_dmg_necrosis call [%s] expected mod:function, got %d elems",
+      on_owner_attacking_dmg_necrosis.c_str(), (int) on_owner_attacking_dmg_necrosis.size());
 
   return damage;
 }
 
-int Thing::get_total_damage_for_on_attacking_damage_necrosis(Thingp victim, int damage)
+int Thing::get_total_damage_for_on_attacking_dmg_necrosis(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -257,7 +257,7 @@ int Thing::get_total_damage_for_on_attacking_damage_necrosis(Thingp victim, int 
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_necrosis(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_necrosis(this, victim, damage);
     }
   }
 
@@ -265,7 +265,7 @@ int Thing::get_total_damage_for_on_attacking_damage_necrosis(Thingp victim, int 
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_necrosis(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_necrosis(this, victim, damage);
     }
   }
 
@@ -273,11 +273,11 @@ int Thing::get_total_damage_for_on_attacking_damage_necrosis(Thingp victim, int 
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_attacking_damage_necrosis(this, victim, damage);
+      damage = iter->on_owner_attacking_dmg_necrosis(this, victim, damage);
     }
   }
 
-  damage = on_attacking_damage_necrosis(victim, damage);
+  damage = on_attacking_dmg_necrosis(victim, damage);
 
   return damage;
 }
