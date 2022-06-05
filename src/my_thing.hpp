@@ -2116,7 +2116,7 @@ public:
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);
-  void blit_ascii_adjust_color(color &c);
+  void blit_ascii_adjust_color(color &c, bool fg);
   void blit_ascii(point tl, point br, point p);
   void blit_ascii_at(point tl, bool lit = true);
   void blit_end_reflection_submerged(uint8_t submerged);

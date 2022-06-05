@@ -19,6 +19,8 @@ void Thing::init_hue(void)
   if (gfx_ascii_mode_color_spread_hue()) {
     blit_color.r = 128 + non_pcg_random_range(0, gfx_ascii_mode_color_spread_hue() * 2) -
                    (gfx_ascii_mode_color_spread_hue() / 2);
+    blit_color.g = 128 + non_pcg_random_range(0, gfx_ascii_mode_color_spread_hue() * 2) -
+                   (gfx_ascii_mode_color_spread_hue() / 2);
   }
 
   if (gfx_ascii_mode_color_spread_red()) {
