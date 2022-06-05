@@ -10,6 +10,7 @@ def chasm_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_obstacle(self, True)
+    my.gfx_ascii_mode_color_spread_hue(self, 50)
     my.gfx_ascii_mode_shown(self, True)
     my.is_biome_dungeon(self, True)
     my.is_chasm(self, True)
