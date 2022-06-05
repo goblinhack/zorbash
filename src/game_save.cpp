@@ -454,9 +454,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   IF_DEBUG3 { my.t->log("Save"); }
 
   if (game->saving_snapshot) {
-    /*
-     * Faster
-     */
+    //
+    // Faster
+    //
     LOG("INF: Save level snapshot");
     game->level->fbo_light.clear();
   } else if (game->level == my.t) {
@@ -466,9 +466,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
     }
     LOG("INF: Saved lightmap");
   } else {
-    /*
-     * No light for non current levels
-     */
+    //
+    // No light for non current levels
+    //
     game->level->fbo_light.clear();
   }
 
@@ -477,7 +477,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
     for (auto p : my.t->all_things) {
       auto t = p.second;
       csum += t->curr_at.x + t->curr_at.y + t->id.id;
-      // t->con("SAVE %f %f %d", t->curr_at.x, t->curr_at.y, t->id.id);
+      t->con("SAVE %d,%d %d", t->curr_at.x, t->curr_at.y, t->id.id);
     }
   }
   out << bits(csum);
@@ -485,7 +485,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->ts_created);
   ts_t ts_saved = time_ms();
   out << bits(ts_saved);
-  out << bits(my.t->ts_created);
   out << bits(my.t->ts_fade_out_begin);
   out << bits(my.t->ts_fade_in_begin);
 
@@ -626,8 +625,10 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->fbo_light);
 
 #ifdef ENABLE_DEBUG_THING_SER
-  LOG("INF: Check things");
   {
+    LOG("INF: Check things");
+    TRACE_AND_INDENT();
+
     for (auto p : my.t->all_things) {
       auto t = p.second;
       my.t->check_thing(t);
@@ -635,14 +636,17 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   }
 #endif
 
-#if 0
-  LOG("INF: Saved slots");
+#ifdef ENABLE_DEBUG_THING_SER
+  {
+    LOG("INF: Saved slots");
+    TRACE_AND_INDENT();
+
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-          auto id = get(my.t->all_things_id_at[group], x, y, slot);
+          auto id = get(my.t->all_things_id_at, x, y, slot);
           if (id.ok()) {
-            CON("save slot %d @ %d,%d group %d : %" PRIX32, slot, x, y, group, id.id);
+            CON("save slot %d @ %d,%d : %" PRIX32, slot, x, y, id.id);
           }
         }
       }
@@ -650,8 +654,10 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   }
 #endif
 
-  LOG("INF: Save things");
   {
+    LOG("INF: Save things");
+    TRACE_AND_INDENT();
+
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
@@ -663,7 +669,9 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
               return out;
             }
 
-            // t->con("Save");
+#ifdef ENABLE_DEBUG_THING_SER
+            t->con("Save");
+#endif
             out << bits(t);
           }
         }
@@ -1230,7 +1238,7 @@ void Game::wid_save_select(void)
 
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
-    y_at ++;
+    y_at++;
   }
   game_load_headers_only = false;
   wid_update(wid_save->wid_text_area->wid_text_area);

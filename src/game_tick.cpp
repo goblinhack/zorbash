@@ -80,12 +80,6 @@ void Game::tick_begin_now(void)
     level->lights_fade();
     level->tick_gas_poison();
 
-    auto player = level->player;
-    if (player) {
-      player->level->fov_calculate(player, &level->can_see_currently, &level->can_see_ever, player->curr_at.x,
-                                   player->curr_at.y, player->distance_vision_get());
-    }
-
     //
     // Update the heatmap before the next tick
     //

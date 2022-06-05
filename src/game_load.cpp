@@ -683,25 +683,31 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   auto p = l->world_at;
   LOG("INF: Loading things for level %d,%d,%d", p.x, p.y, p.z);
 
-#if 0
-  LOG("INF: Loaded slots");
+#ifdef ENABLE_DEBUG_THING_SER
+  {
+    LOG("INF: Loaded slots");
+    TRACE_AND_INDENT();
+
     for (auto x = 0; x < MAP_WIDTH; x++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-          auto id = get(my.t->all_things_id_at[group], x, y, slot);
+          auto id = get(my.t->all_things_id_at, x, y, slot);
           if (id.ok()) {
-            CON("Load save slot %d @ %d,%d group %d : %" PRIX32, slot, x, y, group, id.id);
+            CON("Load save slot %d @ %d,%d : %" PRIX32, slot, x, y, id.id);
           }
         }
       }
     }
   }
 #endif
-  TRACE_AND_INDENT();
+
   //
   // Operate on a copy, not live data that might change as we add things
   //
   {
+    LOG("INF: Load things");
+    TRACE_AND_INDENT();
+
     auto ids = my.t->all_things_id_at;
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -726,22 +732,20 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
                   "%d,%d slot %d: found %" PRIX32 ", expected %" PRIX32,
                   x, y, slot, t->id.id, id.id);
 
-              if (0) {
-                for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-                  auto id = get(ids, x, y, slot);
-                  CON("slot %d : %" PRIX32, slot, id.id);
-                }
+#ifdef ENABLE_DEBUG_THING_SER
+              for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+                auto id = get(ids, x, y, slot);
+                CON("slot %d : %" PRIX32, slot, id.id);
               }
+#endif
 
               return in;
             }
 
             t->reinit();
-            // t->con("LOADED @%d,%d %X", t->curr_at.x, t->curr_at.y, t->id.id);
 
-            // CON("From save file  : %s", t->debug_str.c_str());
-            // CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
 #ifdef ENABLE_DEBUG_THING_SER
+            t->con("LOADED @%d,%d %X [%s]", t->curr_at.x, t->curr_at.y, t->id.id, t->debug_str.c_str());
             if (t->to_dbg_saved_string() != t->debug_str) {
               CON("From save file  : %s", t->debug_str.c_str());
               CON("Newly created as: %s", t->to_dbg_saved_string().c_str());
@@ -766,7 +770,9 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
     for (auto p : l->all_things) {
       auto t = p.second;
       csum += t->curr_at.x + t->curr_at.y + t->id.id;
-      // t->con("LOAD %f %f %d", t->curr_at.x, t->curr_at.y, t->id.id);
+#ifdef ENABLE_DEBUG_THING_SER
+      t->con("LOAD %d,%d id %X", t->curr_at.x, t->curr_at.y, t->id.id);
+#endif
       t->init_lights();
       t->light_dist_update();
     }
@@ -1462,7 +1468,7 @@ void Game::wid_load_select(void)
 
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
-    y_at ++;
+    y_at++;
   }
   game_load_headers_only = false;
   wid_update(wid_load->wid_text_area->wid_text_area);

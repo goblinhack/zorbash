@@ -234,7 +234,6 @@ void Game::place_player(void)
 
   auto player = level->player;
   if (player) {
-    level->fov_calculate(player, &level->can_see_currently, &level->can_see_ever, player->curr_at.x,
-                         player->curr_at.y, player->distance_vision_get());
+    player->light_dist_update();
   }
 }
