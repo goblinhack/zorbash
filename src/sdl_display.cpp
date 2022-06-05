@@ -79,6 +79,8 @@ void sdl_display(void)
 
 void sdl_display_reset(void)
 {
+  CON("SDL: Video reset");
+
   config_game_gfx_update();
 
   wid_thing_info_fini("gfx toggle"); // To remove bag or other info
