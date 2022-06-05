@@ -15,6 +15,7 @@
 #include "my_wid.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_bag.hpp"
+#include "my_wid_botcon.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
@@ -111,6 +112,17 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
     game->request_descend = true;
     game->tick_begin("descend");
+    return false; // To avoid click noise
+  }
+
+  if (sdlk_eq(*key, game->config.key_gfx_toggle)) {
+    g_opt_ascii = ! g_opt_ascii;
+    sdl_display_reset();
+    if (g_opt_ascii) {
+      BOTCON("ASCII mode");
+    } else {
+      BOTCON("Pixel art mode");
+    }
     return false; // To avoid click noise
   }
 

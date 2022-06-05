@@ -883,6 +883,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.key_attack);
   in >> bits(my.t.key_console);
   in >> bits(my.t.key_descend);
+  in >> bits(my.t.key_gfx_toggle);
   in >> bits(my.t.key_drop);
   in >> bits(my.t.key_eat);
   in >> bits(my.t.key_help);
