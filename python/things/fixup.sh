@@ -502,7 +502,7 @@ do
       unused_flag91 \
       unused_flag92 \
       unused_flag93 \
-      unused_flag94 \
+      gfx_ascii_mode_color_is_animated \
       gfx_ascii_animated \
       tick_prio \
       gfx_ascii_mode_color_spread_hue \

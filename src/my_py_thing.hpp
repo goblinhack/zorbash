@@ -604,7 +604,7 @@ PyObject *thing_unused_flag90(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag91(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag92(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag93(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag94(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_ascii_mode_color_is_animated(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_animated(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_tick_prio(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_mode_color_spread_hue(PyObject *obj, PyObject *args, PyObject *keywds);

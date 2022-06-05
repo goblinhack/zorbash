@@ -950,7 +950,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag93() && (what == "unused_flag93")) {
     return true;
   }
-  if (unused_flag94() && (what == "unused_flag94")) {
+  if (gfx_ascii_mode_color_is_animated() && (what == "gfx_ascii_mode_color_is_animated")) {
     return true;
   }
   if (gfx_ascii_animated() && (what == "gfx_ascii_animated")) {
@@ -2565,8 +2565,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag93") {
     return &Thing::unused_flag93;
   }
-  if (what == "unused_flag94") {
-    return &Thing::unused_flag94;
+  if (what == "gfx_ascii_mode_color_is_animated") {
+    return &Thing::gfx_ascii_mode_color_is_animated;
   }
   if (what == "gfx_ascii_animated") {
     return &Thing::gfx_ascii_animated;

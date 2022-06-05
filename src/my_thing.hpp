@@ -1905,7 +1905,7 @@ public:
   int unused_flag91(void);
   int unused_flag92(void);
   int unused_flag93(void);
-  int unused_flag94(void);
+  int gfx_ascii_mode_color_is_animated(void);
   int tick_prio(void);
   int gfx_ascii_mode_color_spread_hue(void);
   int gfx_ascii_mode_color_spread_alpha(void);
@@ -2222,6 +2222,7 @@ public:
   void inherit_from(Thingp it);
   void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);
   void init_lights(void);
+  void init_hue(void);
   void interpolated_at_set(fpoint v);
   void inventory_particle(Thingp what, uint32_t slot);
   void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);

@@ -12,8 +12,8 @@ def lava_init(name, text_long_name, tiles=[]):
     my.damage_fire_dice(self, "1d12+6")
     my.damage_nat_attack_type(self, "burn")
     my.gfx_ascii_animated(self, True)
-    my.gfx_ascii_mode_color_spread_blue(self, 50)
-    my.gfx_ascii_mode_color_spread_red(self, 50)
+    my.gfx_ascii_mode_color_spread_hue(self, 20)
+    my.gfx_ascii_mode_color_is_animated(self, True)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_glows(self, True)
     my.gfx_shown_in_bg(self, True)
@@ -39,28 +39,7 @@ def lava_init(name, text_long_name, tiles=[]):
     delay = 200
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="L", ascii_bg_col_name="orange", ascii_fg_col_name="white",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="L", ascii_bg_col_name="orange2", ascii_fg_col_name="white",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="L", ascii_bg_col_name="red2", ascii_fg_col_name="orange",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="L", ascii_bg_col_name="red", ascii_fg_col_name="orange",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="L", ascii_bg_col_name="red3", ascii_fg_col_name="orange",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="L", ascii_bg_col_name="red4", ascii_fg_col_name="orange",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="L", ascii_bg_col_name="red", ascii_fg_col_name="orange",
-                tile=t, delay_ms=delay)
-        my.tile(self,
-                ascii_fg_char="L", ascii_bg_col_name="red4", ascii_fg_col_name="orange",
+                ascii_fg_char="L", ascii_bg_col_name="red", ascii_fg_col_name="white",
                 tile=t, delay_ms=delay)
 
     my.tp_update(self)

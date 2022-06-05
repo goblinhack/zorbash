@@ -15,6 +15,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.gfx_water(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
+    my.gfx_ascii_mode_color_is_animated(self, True)
     my.is_deep_water(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hazard(self, True)
@@ -28,7 +29,7 @@ def tp_init(name, text_long_name, tiles=[]):
     delay = 1250
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="~", ascii_bg_col_name="deepblue", ascii_fg_col_name="deepblue2",
+                ascii_fg_char="~", ascii_bg_col_name="paleblue2", ascii_fg_col_name="black",
                 tile=t, delay_ms=delay)
 
     my.tp_update(self)

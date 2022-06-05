@@ -682,7 +682,7 @@ int Tp::unused_flag90(void) const { return _unused_flag90; }
 int Tp::unused_flag91(void) const { return _unused_flag91; }
 int Tp::unused_flag92(void) const { return _unused_flag92; }
 int Tp::unused_flag93(void) const { return _unused_flag93; }
-int Tp::unused_flag94(void) const { return _unused_flag94; }
+int Tp::gfx_ascii_mode_color_is_animated(void) const { return _gfx_ascii_mode_color_is_animated; }
 int Tp::gfx_ascii_animated(void) const { return _gfx_ascii_animated; }
 int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
@@ -1352,7 +1352,7 @@ void Tp::unused_flag90_set(int v) { _unused_flag90 = v; }
 void Tp::unused_flag91_set(int v) { _unused_flag91 = v; }
 void Tp::unused_flag92_set(int v) { _unused_flag92 = v; }
 void Tp::unused_flag93_set(int v) { _unused_flag93 = v; }
-void Tp::unused_flag94_set(int v) { _unused_flag94 = v; }
+void Tp::gfx_ascii_mode_color_is_animated_set(int v) { _gfx_ascii_mode_color_is_animated = v; }
 void Tp::gfx_ascii_animated_set(int v) { _gfx_ascii_animated = v; }
 void Tp::unused_flag9_set(int v) { _unused_flag9 = v; }
 void Tp::weapon_damage_set(int v) { _weapon_damage = v; }
