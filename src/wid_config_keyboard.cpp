@@ -1216,7 +1216,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Use W,A,S,D for moving, arrow keys for map");
   }
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1286,7 +1286,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Move left
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1317,7 +1317,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Move down
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1348,7 +1348,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Move right
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1384,7 +1384,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Map up
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1415,7 +1415,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Map left
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1446,7 +1446,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Map down
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1477,7 +1477,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Map right
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1513,7 +1513,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // gfx_toggle
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1541,11 +1541,12 @@ void Game::wid_config_keyboard_select(void)
     wid_set_text(w, ::to_string(game->config.key_gfx_toggle));
     wid_set_on_mouse_up(w, wid_config_key_gfx_toggle);
   }
+  y_at ++;
 
   ///////////////////////////////////////////////////////////////////////
   // attack
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1576,7 +1577,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // wait / collect
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1607,7 +1608,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // jump
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1638,7 +1639,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // throw
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1669,7 +1670,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // drop
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1700,7 +1701,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // use
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1731,7 +1732,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // eat
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1762,7 +1763,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // descend
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1793,7 +1794,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // ascend
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1825,7 +1826,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Inventory
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1856,7 +1857,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action0
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1887,7 +1888,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action1
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1918,7 +1919,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action2
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1949,7 +1950,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action3
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1980,7 +1981,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action4
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2011,7 +2012,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action5
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2042,7 +2043,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action6
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2073,7 +2074,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action7
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2104,7 +2105,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action8
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2135,7 +2136,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action9
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2171,7 +2172,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // save
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2202,7 +2203,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // load
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2233,7 +2234,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // robot_mode
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2269,7 +2270,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // zoom_in
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2300,7 +2301,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // zoom_out
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2336,7 +2337,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // screenshot
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2372,7 +2373,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // quit
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2403,7 +2404,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // console
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2434,7 +2435,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // help
   ///////////////////////////////////////////////////////////////////////
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;

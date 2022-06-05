@@ -286,7 +286,7 @@ void Game::wid_config_sound_select(void)
     wid_set_text(w, "-");
   }
 
-  y_at += 1;
+  y_at ++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_sound_window->wid_text_area->wid_text_area;

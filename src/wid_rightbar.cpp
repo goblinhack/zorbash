@@ -663,9 +663,9 @@ bool is_mouse_over_rightbar(void)
   // Add some border
   //
   tlx -= 1;
-  brx += 1;
+  brx ++;
   tly -= 1;
-  bry += 1;
+  bry ++;
 
   if ((x >= tlx) && (x < brx) && (y >= tly)) {
     // CON("    rightbar %d %d %d", tlx, brx, x);
