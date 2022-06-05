@@ -73,9 +73,9 @@ static uint8_t wid_config_ascii_mode_toggle(Widp w, int32_t x, int32_t y, uint32
 {
   TRACE_AND_INDENT();
   config_changed = true;
-  CON("INF: Toggle vsync");
+  CON("INF: Toggle gfx");
   g_opt_ascii = ! g_opt_ascii;
-  sdl_config_update_all();
+  sdl_display_reset();
   game->wid_config_gfx_select();
 
   return true;

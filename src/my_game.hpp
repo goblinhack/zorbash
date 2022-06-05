@@ -109,6 +109,7 @@ public:
   SDL_Keysym key_screenshot      = {};
   SDL_Keysym key_throw           = {};
   SDL_Keysym key_descend         = {};
+  SDL_Keysym key_gfx_toggle      = {};
   SDL_Keysym key_ascend          = {};
   SDL_Keysym key_use             = {};
   SDL_Keysym key_wait_or_collect = {};

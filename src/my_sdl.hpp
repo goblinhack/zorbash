@@ -122,13 +122,14 @@ uint8_t sdl_user_exit(struct tokens_t_ *tokens, void *context);
 
 void config_game_pix_zoom_in(void);
 void config_game_pix_zoom_out(void);
-void config_game_pix_zoom_update(void);
+void config_game_gfx_update(void);
 void config_gfx_inverted_toggle(void);
 void config_gfx_lights_toggle(void);
 void config_gfx_map_mini_toggle(void);
 void config_gfx_vsync_update(void);
 void sdl_config_update_all(void);
 void sdl_display(void);
+void sdl_display_reset(void);
 void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event);
 void sdl_exit(void);
 void sdl_fbo_dump(int fbo, const std::string &name);

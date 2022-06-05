@@ -113,8 +113,8 @@ void Game::start(void)
 
   wid_botcon_fini();
   wid_botcon_init();
-
   wid_visible(wid_botcon_window);
+
   BOTCON("Press 'h' to see key bindings.");
 
   place_player();

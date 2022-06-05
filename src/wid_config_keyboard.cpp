@@ -139,6 +139,10 @@ static void wid_config_check_for_conflicts(SDL_Keysym code)
     TOPCON("%%fg=orange$Conflicting key, disabling key robot mode%%fg=reset$");
     game->config.key_robot_mode = {};
   }
+  if (sdlk_eq(game->config.key_gfx_toggle, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key gfx toggle%%fg=reset$");
+    game->config.key_gfx_toggle = {};
+  }
   if (sdlk_eq(game->config.key_descend, code)) {
     TOPCON("%%fg=orange$Conflicting key, disabling key descend%%fg=reset$");
     game->config.key_descend = {};
@@ -398,6 +402,16 @@ static void wid_config_key_ascend_set(SDL_Keysym code)
   game->config.key_ascend = {};
   wid_config_check_for_conflicts(code);
   game->config.key_ascend = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_gfx_toggle_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed              = true;
+  game->config.key_gfx_toggle = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_gfx_toggle = code;
   game->wid_config_keyboard_select();
 }
 
@@ -851,6 +865,15 @@ static uint8_t wid_config_key_use(Widp w, int32_t x, int32_t y, uint32_t button)
   TRACE_AND_INDENT();
   grab_key("item use");
   sdl.on_sdl_key_grab = wid_config_key_use_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_gfx_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("item gfx_toggle");
+  sdl.on_sdl_key_grab = wid_config_key_gfx_toggle_set;
   config_changed      = true;
   return true;
 }
@@ -1486,6 +1509,38 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   y_at++;
   ///////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////
+  // gfx_toggle
+  ///////////////////////////////////////////////////////////////////////
+  y_at += 1;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "gfx_toggle");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Gfx toggle");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_gfx_toggle));
+    wid_set_on_mouse_up(w, wid_config_key_gfx_toggle);
+  }
 
   ///////////////////////////////////////////////////////////////////////
   // attack

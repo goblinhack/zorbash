@@ -729,7 +729,7 @@ void sdl_config_update_all(void)
 {
   TRACE_NO_INDENT();
   CON("SDL: OpenGL leave 2D mode");
-  config_game_pix_zoom_update();
+  config_game_gfx_update();
   config_gfx_vsync_update();
   CON("SDL: OpenGL enter 2D mode");
   gl_init_2d_mode();
@@ -770,7 +770,7 @@ void sdl_flush_display(bool force)
   sdl_display();
 }
 
-void config_game_pix_zoom_update(void)
+void config_game_gfx_update(void)
 {
   TRACE_NO_INDENT();
 
