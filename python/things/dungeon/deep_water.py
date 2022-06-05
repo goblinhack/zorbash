@@ -8,6 +8,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.ai_obstacle(self, True)
     my.environ_avoids_fire(self, 1)
     my.gfx_ascii_animated(self, True)
+    my.gfx_ascii_mode_color_is_animated(self, True)
     my.gfx_ascii_mode_color_spread_blue(self, 10)
     my.gfx_ascii_mode_color_spread_green(self, 40)
     my.gfx_ascii_mode_color_spread_red(self, 20)
@@ -17,7 +18,6 @@ def tp_init(name, text_long_name, tiles=[]):
     my.gfx_water(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
-    my.gfx_ascii_mode_color_is_animated(self, True)
     my.is_deep_water(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hazard(self, True)
@@ -28,10 +28,10 @@ def tp_init(name, text_long_name, tiles=[]):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 
-    delay = 1250
+    delay = 2500
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="~", ascii_bg_col_name="lightblue2", ascii_fg_col_name="lightblue1",
+                ascii_fg_char="~", ascii_bg_col_name="deepwater", ascii_fg_col_name="black",
                 tile=t, delay_ms=delay)
 
     my.tp_update(self)

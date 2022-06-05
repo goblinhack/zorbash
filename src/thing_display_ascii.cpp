@@ -174,9 +174,9 @@ void Thing::blit_ascii_at(point p, bool lit)
         if (tile->ascii_fg_char) {
           ascii_set_fg(p.x, p.y, tile->ascii_fg_char);
           color c = tile->ascii_fg_col_value;
-          c.r     = ((int) (c.r / 2) * 1);
-          c.g     = ((int) (c.g / 2) * 1);
-          c.b     = ((int) (c.b / 2) * 1);
+          c.r     = ((int) (c.r / 4) * 1);
+          c.g     = ((int) (c.g / 4) * 1);
+          c.b     = ((int) (c.b / 4) * 1);
           c.a     = tile->ascii_alpha;
           blit_ascii_adjust_color(c, fg);
           ascii_set_fg(p.x, p.y, c);

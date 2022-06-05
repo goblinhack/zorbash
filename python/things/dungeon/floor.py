@@ -9,9 +9,9 @@ import tp
 def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name)
     # start sort marker
-    my.gfx_ascii_mode_color_spread_red(self, 20)
-    my.gfx_ascii_mode_color_spread_green(self, 20)
     my.gfx_ascii_mode_color_spread_blue(self, 20)
+    my.gfx_ascii_mode_color_spread_green(self, 20)
+    my.gfx_ascii_mode_color_spread_red(self, 20)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_shown_in_bg(self, True)
     my.is_cursor_can_hover_over(self, True)
@@ -26,7 +26,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
 
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="middle_dot", ascii_bg_col_name="black", ascii_fg_col_name="gray",
+                ascii_fg_char="middle_dot", ascii_bg_col_name="black", ascii_fg_col_name="white",
                 tile=t)
 
     if bot3_tiles is not None:

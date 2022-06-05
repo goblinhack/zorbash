@@ -1,6 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- odd white pattern when scrolling                                                                                                             -->
+<!-- barrel should not be in i path                                                                                                               -->
 <!-- torches and other light sources should cast alpha                                                                                            -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- ------                                                                                                                                       -->
