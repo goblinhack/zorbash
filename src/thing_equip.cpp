@@ -638,9 +638,15 @@ bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
       use_anim->dir            = dir;
       use_anim->is_facing_left = is_facing_left;
 
-      if (attack_options->attack_at == curr_at) {
-        auto p = attack_options->attack_at + dir_to_direction();
-        use_anim->move_to(p);
+      //
+      // Not sure why we have this. If you are on a web and hit the web then this moves
+      // the animation off of the web.
+      //
+      if (0) {
+        if (attack_options->attack_at == curr_at) {
+          auto p = attack_options->attack_at + dir_to_direction();
+          use_anim->move_to(p);
+        }
       }
 
       use_anim->owner_set(this);
