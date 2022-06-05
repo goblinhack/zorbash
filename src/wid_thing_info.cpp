@@ -149,6 +149,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   }
 
   wid_thing_info_add_general_info(wid_popup_window, t);
+
   wid_thing_info_add_enchant(wid_popup_window, t);
   wid_thing_info_add_carry_info(wid_popup_window, t);
   //
@@ -185,7 +186,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_move_speed(wid_popup_window, t);
   wid_thing_info_add_shove_strength(wid_popup_window, t);
   wid_thing_info_add_jump_distance(wid_popup_window, t);
-  if (t->is_alive_monst() || t->is_player()) {
+  if (t->is_alive_monst()) {
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   }
   wid_thing_info_add_charge_count(wid_popup_window, t);
@@ -1778,7 +1779,9 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     w->log("Hates " + hates, TEXT_FORMAT_LHS, "red");
   }
 
-  w->log(UI_LOGGING_EMPTY_LINE);
+  if (t->is_monst() || t->is_item() || t->is_player()) {
+    w->log(UI_LOGGING_EMPTY_LINE);
+  }
 }
 
 void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)
