@@ -1877,10 +1877,10 @@ int Thing::unused_flag93(void)
   return (tp()->unused_flag93());
 }
 
-int Thing::unused_flag94(void)
+int Thing::gfx_ascii_mode_color_is_animated(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag94());
+  return (tp()->gfx_ascii_mode_color_is_animated());
 }
 
 int Thing::tick_prio(void)

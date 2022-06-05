@@ -19,7 +19,7 @@
 void Thing::blit_ascii_adjust_color(color &c)
 {
   if (gfx_ascii_mode_color_spread_hue()) {
-    c   = color_change_hue(c, blit_color.r);
+    c   = color_change_hue(c, ((int) blit_color.r) - 128);
     c.a = 255;
     return;
   }
@@ -112,9 +112,8 @@ void Thing::blit_ascii_at(point p, bool lit)
         ascii_set_bg(p.x, p.y, UNICODE_BLOCK);
         color c = tile->ascii_bg_col_value;
         c.a     = tile->ascii_alpha;
-        c       = RED;
         blit_ascii_adjust_color(c);
-        ascii_set_bg(p.x, p.y, tile->ascii_bg_col_value);
+        ascii_set_bg(p.x, p.y, c);
       }
 
       if (tile->ascii_bg_char) {
@@ -136,7 +135,7 @@ void Thing::blit_ascii_at(point p, bool lit)
         color c = tile->ascii_fg_col_value;
         c.a     = tile->ascii_alpha;
         blit_ascii_adjust_color(c);
-        ascii_set_fg(p.x, p.y, tile->ascii_fg_col_value);
+        ascii_set_fg(p.x, p.y, c);
       }
     } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
       //

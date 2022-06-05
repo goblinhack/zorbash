@@ -533,16 +533,8 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
   //
   ts_t delay = tile_delay_ms(tile);
 
-  //
-  // Worried this might cause things to move to destinations at slightly
-  // different times and break repeatability.
-  //
-  if (! game->robot_mode) {
-    if (delay) {
-      delay = delay + (non_pcg_rand() % delay) / 5;
-    }
-  } else {
-    delay /= 2;
+  if (delay) {
+    delay += (non_pcg_rand() % delay) / 2;
   }
 
   //
@@ -552,7 +544,16 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
     delay = 0;
   }
 
-  ts_next_frame = time_game_ms_cached() + delay;
+  if (! ts_next_frame) {
+    ts_t delay = tile_delay_ms(tile);
+    if (delay) {
+      ts_next_frame = time_game_ms_cached() + (non_pcg_rand() % delay) / 2;
+    } else {
+      ts_next_frame = time_game_ms_cached();
+    }
+  } else {
+    ts_next_frame = time_game_ms_cached() + delay;
+  }
 
   if (is_end_of_anim) {
     if (is_dead_on_end_of_anim) {
@@ -575,6 +576,13 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
       is_dead         = false;
       tile            = tile_first(tmap);
     }
+  }
+
+  //
+  // Animated hue
+  //
+  if (gfx_ascii_mode_color_is_animated()) {
+    init_hue();
   }
 }
 

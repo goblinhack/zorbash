@@ -634,7 +634,7 @@ private:
   int _unused_flag91 {};
   int _unused_flag92 {};
   int _unused_flag93 {};
-  int _unused_flag94 {};
+  int _gfx_ascii_mode_color_is_animated {};
   int _gfx_ascii_animated {};
   int _weapon_damage {};
   int _weapon_use_distance {};
@@ -1627,7 +1627,7 @@ public:
   int unused_flag91(void) const;
   int unused_flag92(void) const;
   int unused_flag93(void) const;
-  int unused_flag94(void) const;
+  int gfx_ascii_mode_color_is_animated(void) const;
   int gfx_ascii_animated(void) const;
   int unused_flag9(void) const;
   int weapon_damage(void) const;
@@ -2297,7 +2297,7 @@ public:
   void unused_flag91_set(int v);
   void unused_flag92_set(int v);
   void unused_flag93_set(int v);
-  void unused_flag94_set(int v);
+  void gfx_ascii_mode_color_is_animated_set(int v);
   void gfx_ascii_animated_set(int v);
   void unused_flag9_set(int v);
   void weapon_damage_set(int v);

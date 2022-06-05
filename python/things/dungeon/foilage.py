@@ -11,6 +11,7 @@ def tp_init(name, tiles=[]):
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_shadow_long(self, True)
     my.gfx_pixelart_shadow_solid(self, True)
+    my.gfx_ascii_mode_color_spread_hue(self, 50)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.gfx_shown_in_bg(self, True)
     my.health_initial_dice(self, "1d5")
