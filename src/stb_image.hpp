@@ -4952,9 +4952,9 @@ static int stbi__create_png_image_raw(stbi__png *a, stbi_uc *raw, stbi__uint32 r
       cur += output_bytes;
       prior += output_bytes;
     } else {
-      raw += 1;
-      cur += 1;
-      prior += 1;
+      raw ++;
+      cur ++;
+      prior ++;
     }
 
     // this is a little gross, so that we don't switch per-pixel or per-component
@@ -5712,7 +5712,7 @@ static int stbi__high_bit(unsigned int z)
     z >>= 2;
   }
   if (z >= 0x00002) {
-    n += 1; /* >>=  1;*/
+    n ++; /* >>=  1;*/
   }
   return n;
 }

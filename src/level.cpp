@@ -1863,7 +1863,7 @@ void Level::fade_in_incr(const int x, const int y)
   }
   auto v = get(_fade_in_map, x, y);
   if (v < 255) {
-    v += 1;
+    v ++;
     set(_fade_in_map, x, y, v);
   } else {
     set(_fade_in_map, x, y, (uint8_t) 255);
@@ -1874,7 +1874,7 @@ void Level::fade_in_no_check_incr(const int x, const int y)
 {
   auto v = get_no_check(_fade_in_map, x, y);
   if (v < 255) {
-    v += 1;
+    v ++;
     set_no_check(_fade_in_map, x, y, v);
   } else {
     set(_fade_in_map, x, y, (uint8_t) 255);

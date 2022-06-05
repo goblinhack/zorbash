@@ -1462,7 +1462,7 @@ void Game::wid_load_select(void)
 
     wid_set_pos(w, tl, br);
     wid_set_text(w, s);
-    y_at += 1;
+    y_at ++;
   }
   game_load_headers_only = false;
   wid_update(wid_load->wid_text_area->wid_text_area);

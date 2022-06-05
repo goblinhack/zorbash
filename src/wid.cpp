@@ -5209,7 +5209,7 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
     wid_last_mouse_motion = time_ms_cached();
   }
 
-  wid_refresh_overlay_count += 1;
+  wid_refresh_overlay_count ++;
 
   if (wid_mouse_motion_recursion) {
     return;

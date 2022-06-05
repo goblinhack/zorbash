@@ -5061,18 +5061,18 @@ next:
 #elif (LZO_ABI_BIG_ENDIAN)
     if ((v >> (64 - CHAR_BIT)) == 0) do {
       v <<= CHAR_BIT;
-      m_len += 1;
+      m_len ++;
     } while ((v >> (64 - CHAR_BIT)) == 0);
 #elif (LZO_ABI_LITTLE_ENDIAN) && defined(lzo_bitops_cttz64)
     m_len += lzo_bitops_cttz64(v) / CHAR_BIT;
 #elif (LZO_ABI_LITTLE_ENDIAN)
     if ((v & UCHAR_MAX) == 0) do {
       v >>= CHAR_BIT;
-      m_len += 1;
+      m_len ++;
     } while ((v & UCHAR_MAX) == 0);
 #else
     if (ip[m_len] == m_pos[m_len]) do {
-      m_len += 1;
+      m_len ++;
     } while (ip[m_len] == m_pos[m_len]);
 #endif
 #elif (LZO_OPT_UNALIGNED32)
@@ -5095,45 +5095,45 @@ next:
 #elif (LZO_ABI_BIG_ENDIAN)
     if ((v >> (32 - CHAR_BIT)) == 0) do {
       v <<= CHAR_BIT;
-      m_len += 1;
+      m_len ++;
     } while ((v >> (32 - CHAR_BIT)) == 0);
 #elif (LZO_ABI_LITTLE_ENDIAN) && defined(lzo_bitops_cttz32)
     m_len += lzo_bitops_cttz32(v) / CHAR_BIT;
 #elif (LZO_ABI_LITTLE_ENDIAN)
     if ((v & UCHAR_MAX) == 0) do {
       v >>= CHAR_BIT;
-      m_len += 1;
+      m_len ++;
     } while ((v & UCHAR_MAX) == 0);
 #else
     if (ip[m_len] == m_pos[m_len]) do {
-      m_len += 1;
+      m_len ++;
     } while (ip[m_len] == m_pos[m_len]);
 #endif
 #else
     if __lzo_unlikely(ip[m_len] == m_pos[m_len]) {
       do {
-        m_len += 1;
+        m_len ++;
         if (ip[m_len] != m_pos[m_len])
           break;
-        m_len += 1;
+        m_len ++;
         if (ip[m_len] != m_pos[m_len])
           break;
-        m_len += 1;
+        m_len ++;
         if (ip[m_len] != m_pos[m_len])
           break;
-        m_len += 1;
+        m_len ++;
         if (ip[m_len] != m_pos[m_len])
           break;
-        m_len += 1;
+        m_len ++;
         if (ip[m_len] != m_pos[m_len])
           break;
-        m_len += 1;
+        m_len ++;
         if (ip[m_len] != m_pos[m_len])
           break;
-        m_len += 1;
+        m_len ++;
         if (ip[m_len] != m_pos[m_len])
           break;
-        m_len += 1;
+        m_len ++;
         if __lzo_unlikely(ip + m_len >= ip_end)
           goto m_len_done;
       } while (ip[m_len] == m_pos[m_len]);

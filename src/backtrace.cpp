@@ -154,7 +154,7 @@ std::string Backtrace::to_string(void)
       cur[ n_sym ] = '\0';
 
       if (starts_with(cur, "__Z")) {
-        cur += 1;
+        cur ++;
       }
 
       auto demangled = cppDemangle(cur);
@@ -235,7 +235,7 @@ void Backtrace::log(void)
       cur[ n_sym ] = '\0';
 
       if (starts_with(cur, "__Z")) {
-        cur += 1;
+        cur ++;
       }
 
       auto demangled = cppDemangle(cur);

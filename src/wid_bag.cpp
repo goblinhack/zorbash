@@ -942,9 +942,9 @@ Widp is_mouse_over_any_bag(void)
     // Add some border
     //
     tlx -= 1;
-    brx += 1;
+    brx ++;
     tly -= 1;
-    bry += 1;
+    bry ++;
 
     if ((x >= tlx) && (x < brx) && (y >= tly)) {
       // CON("    inventory %d %d %d", tlx, brx, x);
