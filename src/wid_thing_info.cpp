@@ -293,7 +293,7 @@ bool Game::wid_thing_info_push_popup(Thingp t)
   IF_DEBUG1 { t->log("Push thing info?"); }
   TRACE_AND_INDENT();
 
-  if (t->text_long_description().empty()) {
+  if (t->text_long_description() == "") {
     IF_DEBUG1 { t->log("No; cannot push, no text"); }
     return false;
   }
@@ -428,7 +428,7 @@ bool Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   return true;
 }
 
-bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
+bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
 {
   TRACE_AND_INDENT();
 
@@ -470,8 +470,7 @@ bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   }
 
   //
-  // If we cannot show anything with long text, just show a
-  // short description.
+  // If we cannot show anything with long text, just show a short description.
   //
   bool found_one_with_long_text = false;
   for (auto t : ts) {
@@ -497,6 +496,17 @@ bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
     }
   }
 
+  //
+  // Filter out things like floor tiles.
+  //
+  std::vector< Thingp > ts_new;
+  for (auto t : ts) {
+    if (! t->text_long_description().empty()) {
+      ts_new.push_back(t);
+    }
+  }
+  ts = ts_new;
+
   wid_thing_info_destroy_immediate();
   request_destroy_thing_info = 0;
 
@@ -519,8 +529,7 @@ bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   if (! compact) {
     int i = 0;
     for (auto t : ts) {
-      if (t->text_long_description().empty() && t->text_long_description2().empty() &&
-          t->text_long_description3().empty()) {
+      if (t->text_long_description().empty()) {
         continue;
       }
 
@@ -562,13 +571,6 @@ bool Game::wid_thing_info_create_list(const std::vector< Thingp > &ts)
   recursion = false;
 
   return ok;
-}
-
-bool Game::wid_thing_info_create_when_hovering_over(Thingp t) { return wid_thing_info_create(t, true); }
-
-bool Game::wid_thing_info_create_when_hovering_over_list(const std::vector< Thingp > &ts)
-{
-  return wid_thing_info_create_list(ts);
 }
 
 void Game::wid_thing_info_add_enchant(WidPopup *w, Thingp t)
