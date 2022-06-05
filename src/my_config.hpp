@@ -4,8 +4,8 @@
 //
 
 #pragma once
-#ifndef _MY_DEFS_HPP_
-#define _MY_DEFS_HPP_
+#ifndef _MY_CONFIG_HPP_
+#define _MY_CONFIG_HPP_
 
 #define ENABLE_ASSERT                        // Abort on errors
 #define ENABLE_CRASH_HANDLER                 // Intercept SEGV

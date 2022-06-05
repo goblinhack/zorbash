@@ -154,6 +154,10 @@ int Thing::light_dist_update(void)
     l->light_power = ((float) light_dist_new) / ((float) initial_light_dist_get());
   }
 
+  if (is_player()) {
+    level->fov_calculate(this, &level->can_see_currently, &level->can_see_ever, curr_at.x, curr_at.y, light_dist);
+  }
+
   return light_dist;
 }
 
