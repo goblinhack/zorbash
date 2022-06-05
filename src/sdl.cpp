@@ -687,10 +687,10 @@ uint8_t config_gfx_vsync_enable(tokens_t *tokens, void *context)
   }
 
   if (game->config.gfx_vsync_enable) {
-    CON("INF: Vsync enabled");
+    CON("SDL: Vsync enabled");
     SDL_GL_SetSwapInterval(1);
   } else {
-    CON("INF: Vsync disabled");
+    CON("SDL: Vsync disabled");
     SDL_GL_SetSwapInterval(0);
   }
   GL_ERROR_CHECK();
@@ -720,7 +720,7 @@ uint8_t config_errored(tokens_t *tokens, void *context)
 {
   TRACE_NO_INDENT();
   g_errored = false;
-  CON("INF: Errored mode cleared");
+  CON("SDL: Errored mode cleared");
   wid_hide(wid_console_window);
   return true;
 }
@@ -772,13 +772,14 @@ void sdl_flush_display(bool force)
 
 void config_game_gfx_update(void)
 {
-  TRACE_NO_INDENT();
+  CON("SDL: Video update");
+  TRACE_AND_INDENT();
 
   if (g_opt_ascii) {
-    CON("INF: Ascii mode font");
+    CON("SDL: Ascii mode font");
     font_ui = font_ascii;
   } else {
-    CON("INF: Pixelart mode font");
+    CON("SDL: Pixelart mode font");
     font_ui = font_pixelart_large;
   }
 
