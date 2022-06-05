@@ -87,7 +87,7 @@ void Level::describe(point p)
     }
 
     if (t->is_described_when_hovering_over()) {
-      if (! t->text_long_description().empty()) {
+      if (! t->text_short_description().empty() || ! t->text_long_description().empty()) {
         IF_DEBUG2 { t->log("Add to describe"); }
         got_one_with_long_text |= ! t->text_long_description().empty();
         push_back_if_unique(hover_over_things, t);
@@ -140,7 +140,7 @@ void Level::describe(point p)
     }
 
     if (t->is_described_when_hovering_over()) {
-      if (! t->text_long_description().empty()) {
+      if (! t->text_short_description().empty() || ! t->text_long_description().empty()) {
         IF_DEBUG2 { t->log("Add to describe"); }
         got_one_with_long_text |= ! t->text_long_description().empty();
         push_back_if_unique(hover_over_things, t);
@@ -198,7 +198,7 @@ void Level::describe(point p)
     }
 
     if (t->is_described_when_hovering_over()) {
-      if (! t->text_long_description().empty()) {
+      if (! t->text_short_description().empty() || ! t->text_long_description().empty()) {
         got_one_with_long_text |= ! t->text_long_description().empty();
         IF_DEBUG2 { t->log("Add to describe"); }
         push_back_if_unique(hover_over_things, t);
@@ -272,7 +272,7 @@ void Level::describe(point p)
 
   if (hover_over_things.size() > 1) {
     dbg2("Describe @%d,%d; found %d things", p.x, p.y, (int) hover_over_things.size());
-    if (game->wid_thing_info_create_when_hovering_over_list(hover_over_things)) {
+    if (game->wid_thing_info_create_list(hover_over_things)) {
       if (hover_over_things.size() > 1) {
         auto        k = ::to_string(game->config.key_wait_or_collect);
         std::string text;
@@ -291,7 +291,7 @@ void Level::describe(point p)
     }
   } else if (hover_over_things.size()) {
     dbg2("Describe @%d,%d; found %d thing", p.x, p.y, (int) hover_over_things.size());
-    if (game->wid_thing_info_create_when_hovering_over_list(hover_over_things)) {
+    if (game->wid_thing_info_create_list(hover_over_things)) {
       if (hover_over_things.size() > 1) {
         auto        k = ::to_string(game->config.key_wait_or_collect);
         std::string text;
@@ -395,7 +395,7 @@ void Level::describe(Thingp t)
   wid_thing_info_fini("describe2");
 
   dbg2("Describe %s?", t->to_string().c_str());
-  if (t->text_long_description().empty()) {
+  if (! t->text_short_description().empty() || ! t->text_long_description().empty()) {
     dbg2("Describe %s; has no text", t->to_string().c_str());
     t->show_botcon_description();
     return;
@@ -403,5 +403,5 @@ void Level::describe(Thingp t)
 
   std::vector< Thingp > hover_over_things;
   hover_over_things.push_back(t);
-  game->wid_thing_info_create_when_hovering_over_list(hover_over_things);
+  game->wid_thing_info_create_list(hover_over_things);
 }

@@ -153,10 +153,8 @@ public:
   bool wid_bag_move_item(Thingp t);
   bool wid_thing_info_push_popup(Thingp t);
 
-  bool wid_thing_info_create_list(const std::vector< Thingp > &ts);
+  bool wid_thing_info_create_list(std::vector< Thingp > &ts);
   bool wid_thing_info_create(Thingp, bool when_hovering_over = false);
-  bool wid_thing_info_create_when_hovering_over_list(const std::vector< Thingp > &);
-  bool wid_thing_info_create_when_hovering_over(Thingp);
   void display(void);
   void fini(void);
   void init_jump_paths(void);
