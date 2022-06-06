@@ -3,7 +3,8 @@
 <!-- ------                                                                                                                                       -->
 <!-- warrior jumps away                                                                                                                           -->
 <!-- odd white pattern when scrolling                                                                                                             -->
-<!-- barrel should not be in i path                                                                                                               -->
+<!-- barrel should not block cursor in path                                                                                                       -->
+<!-- ethereal monsts should not block cursor path                                                                                                 -->
 <!-- add (stuck) for webs                                                                                                                         -->
 <!-- (dead) for skelton?                                                                                                                          -->
 <!-- (dead) extra nl                                                                                                                              -->

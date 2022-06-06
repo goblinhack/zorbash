@@ -109,13 +109,13 @@ def tp_init(name, text_long_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".1.100", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".2.100", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".3.100", delay_ms=delay)
 
     delay = 50
@@ -137,16 +137,16 @@ def tp_init(name, text_long_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.5", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.4", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.3", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray20",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.2", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
             tile=name + ".dead.1",

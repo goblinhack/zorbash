@@ -3,10 +3,13 @@
 // See the README.md file for license info.
 //
 
+#include <SDL_mixer.h>
+
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_sound.hpp"
 #include "my_thing.hpp"
-#include <SDL_mixer.h>
 
 bool Thing::thing_sound_play(const std::string &alias)
 {
@@ -90,6 +93,7 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
     return true;
   }
 
+  // con("SOUND %s dist %d", alias.c_str(), distance);
   auto sound = all_sound.find(alias);
   if (sound == all_sound.end()) {
     ERR("Cannot find sound %s", alias.c_str());
@@ -99,16 +103,25 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
   float volume = sound->second->volume * (((float) game->config.sound_volume) / ((float) MIX_MAX_VOLUME));
 
   volume *= MIX_MAX_VOLUME;
+  // con("  - vol %f", volume);
 
   if (distance == DMAP_IS_WALL) {
     volume /= 2;
+    // con("  - vol(a) %f", volume);
   } else {
-    volume -= distance;
+    volume -= (distance * distance);
+    // con("  - vol(b) %f", volume);
+  }
+
+  if (! get(player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+    volume /= 4;
+    // con("  - vol(c) %f", volume);
   }
 
   if (volume <= 0) {
     return true;
   }
+  // con("  - vol(final) %f", volume);
 
   Mix_VolumeChunk(sound->second->chunk, volume);
 
