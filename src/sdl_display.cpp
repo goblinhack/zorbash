@@ -13,9 +13,12 @@
 #include "my_sys.hpp"
 #include "my_tile.hpp"
 #include "my_ui.hpp"
+#include "my_wid_actionbar.hpp"
 #include "my_wid_asciimap.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
+#include "my_wid_leftbar.hpp"
+#include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
 #include "stb_image_write.hpp"
@@ -81,9 +84,13 @@ void sdl_display_reset(void)
 {
   CON("SDL: Video reset");
 
-  config_game_gfx_update();
-
+  wid_rightbar_fini();
+  wid_leftbar_fini();
+  wid_actionbar_fini();
+  wid_botcon_fini();
   wid_thing_info_fini("gfx toggle"); // To remove bag or other info
+
+  config_game_gfx_update();
 
   game->request_remake_rightbar  = true;
   game->request_remake_inventory = true;
@@ -92,8 +99,6 @@ void sdl_display_reset(void)
   game->request_remake_debuffbox = true;
   game->request_remake_buffbox   = true;
 
-  sdl_flush_display(true);
-
   if (game->level) {
     game->level->scroll_map_to_player_immediately();
   }
@@ -101,4 +106,7 @@ void sdl_display_reset(void)
   wid_botcon_fini();
   wid_botcon_init();
   wid_visible(wid_botcon_window);
+
+  wid_gc_all();
+  wid_display_all();
 }
