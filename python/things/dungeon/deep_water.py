@@ -9,8 +9,8 @@ def tp_init(name, text_long_name, tiles=[]):
     my.environ_avoids_fire(self, 1)
     my.gfx_ascii_animated(self, True)
     my.gfx_ascii_mode_color_is_animated(self, True)
-    my.gfx_ascii_mode_color_spread_blue(self, 10)
-    my.gfx_ascii_mode_color_spread_green(self, 40)
+    my.gfx_ascii_mode_color_spread_blue(self, 20)
+    my.gfx_ascii_mode_color_spread_green(self, 50)
     my.gfx_ascii_mode_color_spread_red(self, 20)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -28,7 +28,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 
-    delay = 2500
+    delay = 3000
     for t in tiles:
         my.tile(self,
                 ascii_fg_char="~", ascii_bg_col_name="deepwater", ascii_fg_col_name="black",
