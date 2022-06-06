@@ -2,6 +2,13 @@ import my
 import tp
 
 
+def on_tick(owner, me, x, y):
+    if my.pcg_randint(1, 100) > 98:
+        my.level_spawn_at_thing(me, "smoke")
+        return True
+    return False
+
+
 def lava_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # start sort marker
@@ -13,11 +20,13 @@ def lava_init(name, text_long_name, tiles=[]):
     my.damage_nat_attack_type(self, "burn")
     my.gfx_ascii_animated(self, True)
     my.gfx_ascii_mode_color_is_animated(self, True)
+    my.on_tick_do(self, "me.on_tick()")
     my.gfx_ascii_mode_color_spread_hue(self, 20)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_glows(self, True)
     my.gfx_shown_in_bg(self, True)
     my.is_able_to_fall(self, True)
+    my.is_tickable(self, True)
     my.is_biome_dungeon(self, True)
     my.is_cursor_can_hover_over_x2_click(self, True)
     my.is_cursor_path_hazard_for_player(self, True)
