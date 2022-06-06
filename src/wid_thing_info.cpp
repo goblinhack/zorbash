@@ -482,10 +482,19 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
   }
 
   if (! found_one_with_long_text) {
+    Thingp best = nullptr;
     for (auto t : ts) {
-      IF_DEBUG1 { t->log("No long text"); }
+      if (! best) {
+        best = t;
+      } else if (t->z_depth > best->z_depth) {
+        best = t;
+      } else if ((t->z_depth == best->z_depth) && (t->z_prio() > best->z_prio())) {
+        best = t;
+      }
+    }
+    if (best) {
       wid_thing_info_fini("No long text");
-      t->show_botcon_description();
+      best->show_botcon_description();
       return false;
     }
   }
