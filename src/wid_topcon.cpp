@@ -115,6 +115,9 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return false; // To avoid click noise
   }
 
+  //
+  // Toggle gfx mode
+  //
   if (sdlk_eq(*key, game->config.key_gfx_toggle)) {
     g_opt_ascii = ! g_opt_ascii;
     sdl_display_reset();

@@ -1,9 +1,15 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- warrior jumps away                                                                                                                           -->
 <!-- odd white pattern when scrolling                                                                                                             -->
 <!-- barrel should not be in i path                                                                                                               -->
+<!-- add (stuck) for webs                                                                                                                         -->
+<!-- (dead) for skelton?                                                                                                                          -->
+<!-- (dead) extra nl                                                                                                                              -->
+<!-- enchantstone extra nl                                                                                                                        -->
 <!-- torches and other light sources should cast alpha                                                                                            -->
+<!-- odd white pattern when scrolling                                                                                                             -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
