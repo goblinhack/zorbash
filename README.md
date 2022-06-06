@@ -1,6 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- grass should take prio over floor for short desc                                                                                             -->
+<!-- ghosts not attacking                                                                                                                         -->
 <!-- warrior jumps away                                                                                                                           -->
 <!-- odd white pattern when scrolling                                                                                                             -->
 <!-- barrel should not block cursor in path                                                                                                       -->
