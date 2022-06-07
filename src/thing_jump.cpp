@@ -456,9 +456,10 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   level->noisemap_in_incr(to.x, to.y, noise_on_jumping());
 
   //
-  // In ascii mode jumps look like immediate moves, so give more feedback.
+  // In ascii mode jumps look like immediate moves, so give more feedback but only
+  // for monsters.
   //
-  if (level->player) {
+  if (! is_player() && level->player) {
     if (! get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
       if (DISTANCE(curr_at.x, curr_at.y, level->player->curr_at.x, level->player->curr_at.y) >
           DISTANCE(to.x, to.y, level->player->curr_at.x, level->player->curr_at.y)) {
