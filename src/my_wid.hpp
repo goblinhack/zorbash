@@ -308,7 +308,7 @@ public:
   uint64_t key {};
 };
 
-struct tree_wid_key_cmp : public std::binary_function< class tree_wid_key, class tree_wid_key, bool > {
+struct tree_wid_key_cmp {
   bool operator()(const tree_wid_key &lhs, const tree_wid_key &rhs) const
   {
     if (lhs.priority < rhs.priority) {
