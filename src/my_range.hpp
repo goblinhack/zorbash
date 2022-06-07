@@ -5,6 +5,8 @@
 
 #pragma once
 #include <vector>
+#include <algorithm>
+#include <random>
 
 //
 // Create a vector of numbers
@@ -27,8 +29,6 @@ template < class T > std::vector< T > make_range(T start, T stop)
 //
 // Create a vector of numbers and then shuffle them
 //
-#include <algorithm>
-#include <random>
 extern std::default_random_engine     rng;
 template < class T > std::vector< T > make_shuffled_range(const size_t how_many)
 {
