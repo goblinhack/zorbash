@@ -7,6 +7,7 @@
 #include <libgen.h>
 #include <sstream>
 #include <string>
+#include <algorithm>
 
 #include "my_ptrcheck.hpp"
 #include "my_sdl.hpp"
