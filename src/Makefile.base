@@ -15,7 +15,7 @@ GAME_SOURCE := $(wildcard *.cpp) $(wildcard *.S)
 GAME_OBJECTS :=\
 	$(addprefix $(BUILD_DIR)/,$(addsuffix .o,$(basename $(GAME_SOURCE))))
 
-DEP_FILES := $(patsubst %.o,%.d,$(GAME_OBJECTS))
+DEP_FILES := $(GAME_OBJECTS:.o=.d)
 DEP_FLAGS = -MMD -MP
 
 $(BUILD_DIR): ; mkdir -p $(BUILD_DIR)
@@ -28,15 +28,13 @@ $(BUILD_DIR)/%.o: %.S
 	$(CC) $(DEP_FLAGS) -c -o $@ $<
 
 $(TARGET_GAME): $(GAME_OBJECTS)
-	/bin/rm -f ../$(TARGET_GAME)
-	$(CC) $(LDFLAGS) $(GAME_OBJECTS) $(LDLIBS) -o $(TARGET_GAME)
-	cp $(TARGET_GAME) ..
+	cd $(BUILD_DIR); $(CC) $(LDFLAGS) $(notdir $(GAME_OBJECTS)) $(LDLIBS) -o ../$(TARGET_GAME)
+	cp -f $(TARGET_GAME) ..
 
 clean:
 	rm -f ../$(TARGET_GAME) ../stdout.txt ../stderr.txt
 	rm -f $(TARGET_GAME) stdout.txt stderr.txt
 	rm -rf $(BUILD_DIR)
-	mkdir -p $(BUILD_DIR)
 
 clobber: clean
 	rm -f ramdisk_data.cpp $(wildcard ramdisk_data*.S)
