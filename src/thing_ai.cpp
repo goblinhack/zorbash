@@ -690,7 +690,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     }
   }
 
-#if 0
   if (is_debug_type()) {
     con("This is what I can see:");
     for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -733,7 +732,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       printf("\n");
     }
   }
-#endif
 
   //
   // Check for changes in the dmap worthy of note
@@ -824,10 +822,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
       point p = l->curr_at;
       GOAL_ADD(GOAL_PRIO_HIGH, 100, "follow-leader", l);
     }
-  }
-
-  if (is_debug_type()) {
-    log("Choose can see goals %d,%d to %d,%d", minx, miny, maxx, maxy);
   }
 
   for (int y = miny; y <= maxy; y++) {
@@ -1028,10 +1022,12 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               //
               GOAL_ADD(GOAL_PRIO_VERY_HIGH, 100 + (int) (max_dist - dist) * health_diff - goal_penalty,
                        "attack-nearby-mob", it);
-            } else if (it->is_alive_monst() && possible_to_attack(it)) {
+            } else if ((it->is_alive_monst() || it->is_player()) && possible_to_attack(it)) {
               //
               // The alive monst check is to avoid attacking pools of blood.
               //
+              AI_LOG("Possible to attack alive monst", it);
+
               if (dist < 2) {
                 //
                 // Very close, high priority attack
@@ -1354,7 +1350,6 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     }
   }
 
-#if 0
   if (is_debug_type()) {
     con("This is what I am searching (type %d):", search_type);
     for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -1408,7 +1403,6 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
       log("%s", s.c_str());
     }
   }
-#endif
 
   //
   // Choose goals (higher scores, lower costs are preferred)
@@ -1966,7 +1960,6 @@ bool Thing::ai_tick(bool recursing)
     }
   }
 
-#if 0
   if (is_debug_type()) {
     con("This is my field of view:");
     con("  .  - can see currently");
@@ -2006,7 +1999,7 @@ bool Thing::ai_tick(bool recursing)
       printf("\n");
     }
   }
-#endif
+
   switch (infop()->monst_state) {
     case MONST_STATE_IDLE:
       if (state_idle(threat, minx, miny, maxx, maxy)) {

@@ -539,6 +539,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           clear_move_path("Attacked");
           return true;
         }
+      } else {
+        dbg("Cannot shove or attack");
       }
       dbg("Move failed");
       lunge(future_pos);
