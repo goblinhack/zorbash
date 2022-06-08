@@ -9,8 +9,13 @@ import tp
 def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     self = tp.Tp(name)
     # start sort marker
+    my.gfx_ascii_mode_color_spread_blue(self, 20)
+    my.gfx_ascii_mode_color_spread_green(self, 20)
+    my.gfx_ascii_mode_color_spread_red(self, 20)
     my.gfx_ascii_mode_shown(self, True)
+    my.gfx_shown_in_bg(self, True)
     my.is_cursor_can_hover_over(self, True)
+    my.is_described_when_hovering_over(self, True)
     my.is_dirt(self, True)
     my.text_a_or_an(self, "the")
     my.text_short_description(self, "Some dirt, what more can I say?")
