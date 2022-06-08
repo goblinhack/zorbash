@@ -40,7 +40,6 @@ static void wid_leftbar_ascii_display(Widp w, point tl, point br)
     return;
   }
 
-  LOG("Leftbar describe %X", id.id);
   auto t = level->thing_find(id);
   if (t) {
     t->blit_ascii_at(tl);
@@ -69,7 +68,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
   level->wid_leftbar_things.push_back(t->id);
   t->log("Leftbar add %X", t->id.id);
 
-  y_at ++;
+  y_at++;
   {
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "It");
@@ -99,7 +98,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
   }
 
   if (t->is_on_fire()) {
-    y_at ++;
+    y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "(On fire)");
     point tl = make_point(0, y_at);
@@ -110,7 +109,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
   }
 
   if (t->is_falling) {
-    y_at ++;
+    y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "(Falling)");
     point tl = make_point(0, y_at);
@@ -121,7 +120,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
   }
 
   if (t->is_sleeping) {
-    y_at ++;
+    y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "(Sleeping)");
     point tl = make_point(0, y_at);
@@ -132,7 +131,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
   }
 
   if (t->is_dead) {
-    y_at ++;
+    y_at++;
     TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_leftbar, "(Deceased)");
     point tl = make_point(0, y_at);
@@ -144,12 +143,12 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_text(w, "(Broken)");
     }
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    y_at ++;
+    y_at++;
   }
 
   if (t->is_door() || t->is_ascend_dungeon() || t->is_descend_dungeon()) {
     if (t->is_open) {
-      y_at ++;
+      y_at++;
       TRACE_NO_INDENT();
       auto  w  = wid_new_square_button(wid_leftbar, "(Open)");
       point tl = make_point(0, y_at);
@@ -158,7 +157,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_text(w, "(Open)");
       wid_set_style(w, UI_WID_STYLE_NORMAL);
     } else {
-      y_at ++;
+      y_at++;
       TRACE_NO_INDENT();
       auto  w  = wid_new_square_button(wid_leftbar, "(Closed)");
       point tl = make_point(0, y_at);
@@ -171,7 +170,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
 
   if (! t->is_dead) {
     if (t->is_monst()) {
-      y_at ++;
+      y_at++;
       {
         TRACE_NO_INDENT();
         auto  w  = wid_new_plain(wid_leftbar, "Health-bar");
@@ -227,7 +226,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     // Carried items are grouped
     //
   } else {
-    y_at ++;
+    y_at++;
   }
 
   at = t->curr_at;

@@ -357,7 +357,7 @@ bool Thing::path_pop_next_move(void)
     }
   }
 
-  if (! aip()->move_path.empty()) {
+  if (is_player() && aip()->move_path.size()) {
     AI_LOG("Try to move, no shove, no attack as have move path");
     if (move_no_shove_no_attack(future_pos)) {
       return true;

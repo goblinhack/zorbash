@@ -6,6 +6,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_random.hpp"
 #include "my_thing.hpp"
 
 bool Thing::is_target_select(Thingp item)
@@ -291,9 +292,17 @@ bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *att
       //
       // Prefer claws
       //
-      dbg2("Target-attack-best: No monsts at target location");
-      attack_options->used_as           = gfx_anim_use();
-      attack_options->prefer_nat_attack = true;
+      if (level->player && (level->player->curr_at == best_hit_at)) {
+        if (pcg_random_range(0, 100) < 10) {
+          dbg2("Target-attack-best: Player, use claws randomly");
+          attack_options->used_as           = gfx_anim_use();
+          attack_options->prefer_nat_attack = true;
+        }
+      } else {
+        dbg2("Target-attack-best: No monsts at target location, prefer nat attack");
+        attack_options->used_as           = gfx_anim_use();
+        attack_options->prefer_nat_attack = true;
+      }
     }
   }
 

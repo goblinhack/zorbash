@@ -173,15 +173,23 @@ void Thing::msg(const char *fmt, ...)
     return;
   }
 
+  //
+  // If this is a monst attacking, do we want to see the message?
+  //
   if (! is_player()) {
-    int distance = distance_to_player();
-    if (distance >= DMAP_IS_PASSABLE) {
-      dbg("Too far to see msg: %s", why.c_str());
-      TRACE_AND_INDENT();
-      va_start(args, fmt);
-      log_(fmt, args);
-      va_end(args);
-      return;
+    //
+    // If a ghost is in a wall and trying to attack the player, we must allow that even though the DMAP will say wall.
+    //
+    if (! is_ethereal()) {
+      int distance = distance_to_player();
+      if (distance >= DMAP_IS_PASSABLE) {
+        dbg("Too far to see (dist %d) msg: %s", distance, why.c_str());
+        TRACE_AND_INDENT();
+        va_start(args, fmt);
+        log_(fmt, args);
+        va_end(args);
+        return;
+      }
     }
 
     if (! level->can_see_unimpeded(player->curr_at, curr_at)) {
