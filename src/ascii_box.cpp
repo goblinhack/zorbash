@@ -24,6 +24,10 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
                      UI_TYPES_MAX >
       tiles = {};
 
+  if (style == UI_WID_STYLE_SPARSE_NONE) {
+    return;
+  }
+
   if (style >= UI_WID_STYLE_MAX) {
     ERR("Unimplemented widget style %d", style);
     return;
@@ -64,8 +68,8 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
 
     for (x = x1; x <= x2; x++) {
       for (y = y1; y <= y2; y++) {
-        float tx = ((float) (x) - x1) * dx;
-        float ty = ((float) (y) - y1) * dy;
+        float tx = ((float) (x) -x1) * dx;
+        float ty = ((float) (y) -y1) * dy;
         if (bg_tile || (col_bg != COLOR_NONE)) {
           ascii_set_bg2(x, y, bg_tile, tx, ty, dx, dy);
           ascii_set_bg2(x, y, col_bg);

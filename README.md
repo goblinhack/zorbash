@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- odd white pattern when scrolling                                                                                                             -->
 <!-- barrel should not block cursor in path                                                                                                       -->
 <!-- ethereal monsts should not block cursor path                                                                                                 -->
 <!-- add (stuck) for webs                                                                                                                         -->

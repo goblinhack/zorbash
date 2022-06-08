@@ -1495,7 +1495,7 @@ void Game::wid_choose_initial_dungeons(void)
       wid_set_text(b, "Key:");
     }
 
-    y ++;
+    y++;
     {
       Widp  b = wid_new_square_button(window, "wid key");
       point tl(TERM_WIDTH - 12, y);
