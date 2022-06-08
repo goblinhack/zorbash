@@ -554,6 +554,7 @@ void ascii_set_fg4(int x, int y, const wchar_t c) { ascii_set_fg4(x, y, font_ui-
 void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 {
   TRACE_NO_INDENT();
+
   Tilep tile;
   int   bg_set    = false;
   auto  text_iter = text.begin();
@@ -561,6 +562,10 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
   // printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n",
   // text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y,
   // scissors_br.x, scissors_br.y, scissors_enabled);
+
+  //
+  // Check for out of bounds. Cannot check for x here as a message could start off screen and end on screen.
+  //
   if (unlikely(y < 0)) {
     return;
   }
@@ -642,11 +647,17 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
       }
     }
 
+    //
+    // Outside the scissors, ignore
+    //
     if (unlikely(! ascii_ok_for_scissors(x, y))) {
       x++;
       continue;
     }
 
+    //
+    // If not found print a ? tile
+    //
     if (unlikely(! tile)) {
       tile = font_ui->unicode_to_tile(c);
       if (tile == nullptr) {
@@ -656,6 +667,9 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 
     auto saved_fg = fg;
 
+    //
+    // Use a special char to represent the cursor. A bit of a hack.
+    //
     auto is_cursor = (c == UNICODE_CURSOR);
     if (unlikely(is_cursor)) {
       static uint32_t last;
@@ -666,6 +680,9 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
         last  = time_ms_cached();
       }
 
+      //
+      // Allow the cursor to change color. A bit of a hack. Again.
+      //
       if (time_have_x_tenths_passed_since(10, last)) {
         fg   = UI_CURSOR_COLOR;
         last = time_ms_cached();
@@ -686,6 +703,9 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     cell->fg_color_br = fg;
 
     if (bg_set) {
+      //
+      // If we are displaying a color in the background then use a solid tile.
+      //
       if (bg.r || bg.g || bg.b || bg.a) {
         static Tilep tile;
         if (unlikely(! tile)) {
@@ -693,6 +713,9 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
         }
         cell->bg_tile = tile;
       } else {
+        //
+        // Else clear the background
+        //
         cell->bg_tile = 0;
       }
 
@@ -1108,10 +1131,7 @@ void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color
 static void ascii_blit(void)
 {
   TRACE_NO_INDENT();
-  //
-  // Get the mouse position to use. We use this to find the mouse tile that
-  // we are over.
-  //
+
   int   x;
   int   y;
   float tile_x;
@@ -1141,6 +1161,9 @@ static void ascii_blit(void)
       tile_br.x = tile_x + dw;
       tile_br.y = tile_y + dh;
 
+      //
+      // Get the mouse position to use. We use this to find the mouse tile that we are over.
+      //
       if (! mouse_found) {
         if ((mx < tile_br.x) && (my < tile_br.y) && (mx >= tile_tl.x) && (my >= tile_tl.y)) {
           mouse_found = true;
