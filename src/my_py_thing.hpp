@@ -180,7 +180,7 @@ PyObject *thing_is_bloodied(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bones(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_boots(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_brazier(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_breather(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_ait_breather(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bridge(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_buff(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_burnable(PyObject *obj, PyObject *args, PyObject *keywds);

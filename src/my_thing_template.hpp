@@ -259,7 +259,7 @@ private:
   int _is_bones {};
   int _is_boots {};
   int _is_brazier {};
-  int _is_breather {};
+  int _is_ait_breather {};
   int _is_bridge {};
   int _is_buff {};
   int _is_burnable {};
@@ -1253,7 +1253,7 @@ public:
   int is_bones(void) const;
   int is_boots(void) const;
   int is_brazier(void) const;
-  int is_breather(void) const;
+  int is_ait_breather(void) const;
   int is_bridge(void) const;
   int is_buff(void) const;
   int is_burnable(void) const;
@@ -1795,7 +1795,7 @@ public:
   void is_bones_set(int v);
   void is_boots_set(int v);
   void is_brazier_set(int v);
-  void is_breather_set(int v);
+  void is_ait_breather_set(int v);
   void is_bridge_set(int v);
   void is_buff_set(int v);
   void is_burnable_set(int v);

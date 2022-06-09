@@ -1223,7 +1223,7 @@ public:
   int is_bones(void);
   int is_boots(void);
   int is_brazier(void);
-  int is_breather(void);
+  int is_ait_breather(void);
   int is_bridge(void);
   int is_buff(void);
   int is_burnable(void);
@@ -2036,6 +2036,13 @@ public:
   uint32_t tick_last_i_was_attacked_incr(void);
   uint32_t tick_last_i_was_attacked_set(uint32_t);
   uint32_t tick_last_i_was_attacked(void);
+
+  uint32_t tick_last_i_attacked_decr(uint32_t);
+  uint32_t tick_last_i_attacked_decr(void);
+  uint32_t tick_last_i_attacked_incr(uint32_t);
+  uint32_t tick_last_i_attacked_incr(void);
+  uint32_t tick_last_i_attacked_set(uint32_t);
+  uint32_t tick_last_i_attacked(void);
 
   uint32_t tick_last_level_change_decr(uint32_t);
   uint32_t tick_last_level_change_decr(void);

@@ -175,7 +175,7 @@ do
       is_bones \
       is_boots \
       is_brazier \
-      is_breather \
+      is_ait_breather \
       is_bridge \
       is_buff \
       is_burnable \

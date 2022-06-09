@@ -2206,10 +2206,10 @@ int Thing::is_immune_to_cold(void)
   return (tp()->is_immune_to_cold());
 }
 
-int Thing::is_breather(void)
+int Thing::is_ait_breather(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_breather());
+  return (tp()->is_ait_breather());
 }
 
 int Thing::noise_on_dropping(void)
@@ -5393,6 +5393,54 @@ uint32_t Thing::tick_last_i_was_attacked_incr(void)
   TRACE_NO_INDENT();
   new_infop();
   return (infop()->tick_last_i_was_attacked++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// tick_last_i_attacked
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::tick_last_i_attacked(void)
+{
+  TRACE_NO_INDENT();
+  if (maybe_infop()) {
+    return (infop()->tick_last_i_attacked);
+  } else {
+    return 0;
+  }
+}
+
+uint32_t Thing::tick_last_i_attacked_set(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_attacked = v);
+}
+
+uint32_t Thing::tick_last_i_attacked_decr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_attacked -= v);
+}
+
+uint32_t Thing::tick_last_i_attacked_incr(uint32_t v)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_attacked += v);
+}
+
+uint32_t Thing::tick_last_i_attacked_decr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_attacked--);
+}
+
+uint32_t Thing::tick_last_i_attacked_incr(void)
+{
+  TRACE_NO_INDENT();
+  new_infop();
+  return (infop()->tick_last_i_attacked++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

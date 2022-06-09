@@ -1124,7 +1124,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) {
     return true;
   }
-  if (is_breather() && (what == "is_breather")) {
+  if (is_ait_breather() && (what == "is_ait_breather")) {
     return true;
   }
   if (noise_on_dropping() && (what == "noise_on_dropping")) {
@@ -1605,8 +1605,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_brazier") {
     return &Thing::is_brazier;
   }
-  if (what == "is_breather") {
-    return &Thing::is_breather;
+  if (what == "is_ait_breather") {
+    return &Thing::is_ait_breather;
   }
   if (what == "is_bridge") {
     return &Thing::is_bridge;
