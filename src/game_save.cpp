@@ -370,7 +370,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_combustible                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_corpse                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_corridor                      ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_cursor_path_hazard_for_player ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_cursor_path_hazard            ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_cursor_path_blocker           ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_deep_water                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_descend_dungeon               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_descend_sewer                 ? 1LLU : 0LLU) << shift; shift++;
@@ -500,8 +501,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_fade_in_map);
   out << bits(my.t->_gfx_water);
   out << bits(my.t->_heatmap);
-  out << bits(my.t->_noisemap);
-  out << bits(my.t->_noisemap_in);
   out << bits(my.t->_is_able_to_stand_on);
   out << bits(my.t->_is_acid);
   out << bits(my.t->_is_ascend_dungeon);
@@ -510,10 +509,12 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_brazier);
   out << bits(my.t->_is_bridge);
   out << bits(my.t->_is_chasm);
+  out << bits(my.t->_is_combustible);
   out << bits(my.t->_is_corpse);
   out << bits(my.t->_is_corridor);
-  out << bits(my.t->_is_cursor_path_hazard_for_player);
-  out << bits(my.t->_is_combustible);
+  out << bits(my.t->_is_currently_pixelart_raycast_lit);
+  out << bits(my.t->_is_cursor_path_blocker);
+  out << bits(my.t->_is_cursor_path_hazard);
   out << bits(my.t->_is_deep_water);
   out << bits(my.t->_is_descend_dungeon);
   out << bits(my.t->_is_descend_sewer);
@@ -532,7 +533,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_heavy);
   out << bits(my.t->_is_key);
   out << bits(my.t->_is_lava);
-  out << bits(my.t->_is_currently_pixelart_raycast_lit);
   out << bits(my.t->_is_mob);
   out << bits(my.t->_is_monst);
   out << bits(my.t->_is_pink_blood);
@@ -552,6 +552,8 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_wall);
   out << bits(my.t->_is_wand_or_staff);
   out << bits(my.t->_is_wet_grass);
+  out << bits(my.t->_noisemap);
+  out << bits(my.t->_noisemap_in);
 
   out << bits(my.t->_is_map_changed);
 

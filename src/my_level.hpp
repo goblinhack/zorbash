@@ -32,11 +32,11 @@ public:
   // These are caches for fast lookup in display code
   //
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_gas_blocker {};
-  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _noise_blocker {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker_for_monst {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_destructable {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_wall_or_door {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _noise_blocker {};
 
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _fade_in_map {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _gfx_water {};
@@ -53,7 +53,9 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_combustible {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_corpse {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_corridor {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_hazard_for_player {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_currently_pixelart_raycast_lit {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_blocker {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cursor_path_hazard {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_deep_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_descend_dungeon {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_descend_sewer {};
@@ -72,7 +74,6 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_heavy {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_key {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lava {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_currently_pixelart_raycast_lit {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_monst {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_pink_blood {};
@@ -762,8 +763,10 @@ public:
   uint8_t is_corpse(const point p);
   uint8_t is_corridor(const int x, const int y);
   uint8_t is_corridor(const point p);
-  uint8_t is_cursor_path_hazard_for_player(const int x, const int y);
-  uint8_t is_cursor_path_hazard_for_player(const point p);
+  uint8_t is_cursor_path_hazard(const int x, const int y);
+  uint8_t is_cursor_path_hazard(const point p);
+  uint8_t is_cursor_path_blocker(const int x, const int y);
+  uint8_t is_cursor_path_blocker(const point p);
   uint8_t is_combustible(const int x, const int y);
   uint8_t is_combustible(const point p);
   uint8_t is_deep_water(const int x, const int y);
@@ -797,6 +800,8 @@ public:
   uint8_t is_gold(const point p);
   uint8_t is_green_blood(const int x, const int y);
   uint8_t is_green_blood(const point p);
+  uint8_t is_blocker(const int x, const int y);
+  uint8_t is_blocker(const point p);
   uint8_t is_hazard(const int x, const int y);
   uint8_t is_hazard(const point p);
   uint8_t is_heavy(const int x, const int y);
@@ -892,7 +897,6 @@ public:
   void create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth, int dungeon_walk_order_level_no);
   void create_sewer_place_remaining_walls(const std::string &what);
   void create_sewer_place_walls(int variant, int block_width, int block_height, int tries);
-  void cursor_warp_check(void);
   void cursor_describe(void);
   void cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy);
   void cursor_move(void);
@@ -906,42 +910,37 @@ public:
   void cursor_path_draw(point start, point end);
   void cursor_path_draw(void);
   void cursor_recreate(void);
+  void cursor_warp_check(void);
   void debug_path_clear(void);
   void debug_path_create(const std::vector< point > &move_path);
   void debug_path_draw(const std::vector< point > &move_path);
   void debug_path_draw_line(const std::vector< point > &move_path);
   void describe(point at);
   void describe(Thingp);
-  void display_tick_animation(void);
   void display_ascii_map(point tl, point br);
+  void display_map_set_bounds(void);
+  void display_map(void);
   void display_pixelart_blood(void);
-  void display_pixelart_deep_water(const int fbo, const int16_t minx, const int16_t miny, const int16_t,
-                                   const int16_t maxy);
+  void display_pixelart_deep_water(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_external_particles(void);
   void display_pixelart_fade_in(void);
   void display_pixelart_fade_out(void);
-  void display_pixelart_gas(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t);
+  void display_pixelart_gas(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_internal_particles(void);
   void display_pixelart_lasers(void);
-  void display_pixelart_lava(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                             const int16_t);
+  void display_pixelart_lava(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_map_bg_things(void);
-  void display_map_set_bounds(void);
   void display_pixelart_map_debug(int x, int y);
   void display_pixelart_map_debug(int x, int y, int tlx, int tly, int brx, int bly);
-  void display_pixelart_map_fg2_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t,
-                                       const int16_t);
-  void display_pixelart_map_fg_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t,
-                                      const int16_t);
+  void display_pixelart_map_fg2_things(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
+  void display_pixelart_map_fg_things(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_map_mini(void);
-  void display_pixelart_map_things(const int fbo, const int16_t minx, const int16_t miny, const int16_t,
-                                   const int16_t);
-  void display_map(void);
-  void display_pixelart(void);
+  void display_pixelart_map_things(const int, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_projectiles(void);
+  void display_pixelart(void);
+  void display_pixelart_water(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_target(void);
-  void display_pixelart_water(const int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                              const int16_t maxy);
+  void display_tick_animation(void);
   void dmap_to_player_update(void);
   void dump(std::string prefix);
   void dump(std::string prefix, std::ostream &out);
@@ -973,6 +972,8 @@ public:
   void is_ascend_sewer_unset(const int x, const int y);
   void is_barrel_set(const int x, const int y);
   void is_barrel_unset(const int x, const int y);
+  void is_blocker_set(const int x, const int y);
+  void is_blocker_unset(const int x, const int y);
   void is_brazier_set(const int x, const int y);
   void is_brazier_unset(const int x, const int y);
   void is_bridge_set(const int x, const int y);
@@ -987,8 +988,15 @@ public:
   void is_corpse_unset(const int x, const int y);
   void is_corridor_set(const int x, const int y);
   void is_corridor_unset(const int x, const int y);
-  void is_cursor_path_hazard_for_player_set(const int x, const int y);
-  void is_cursor_path_hazard_for_player_unset(const int x, const int y);
+  void is_currently_pixelart_raycast_lit_no_check_set(const int x, const int y);
+  void is_currently_pixelart_raycast_lit_no_check_set(const int x, const int y, uint8_t v);
+  void is_currently_pixelart_raycast_lit_no_check_unset(const int x, const int y);
+  void is_currently_pixelart_raycast_lit_set(const int x, const int y);
+  void is_currently_pixelart_raycast_lit_unset(const int x, const int y);
+  void is_cursor_path_blocker_set(const int x, const int y);
+  void is_cursor_path_blocker_unset(const int x, const int y);
+  void is_cursor_path_hazard_set(const int x, const int y);
+  void is_cursor_path_hazard_unset(const int x, const int y);
   void is_deep_water_set(const int x, const int y);
   void is_deep_water_unset(const int x, const int y);
   void is_descend_dungeon_set(const int x, const int y);
@@ -1039,11 +1047,6 @@ public:
   void is_light_blocker_no_check_unset(const int x, const int y);
   void is_light_blocker_set(const int x, const int y);
   void is_light_blocker_unset(const int x, const int y);
-  void is_currently_pixelart_raycast_lit_no_check_set(const int x, const int y);
-  void is_currently_pixelart_raycast_lit_no_check_set(const int x, const int y, uint8_t v);
-  void is_currently_pixelart_raycast_lit_no_check_unset(const int x, const int y);
-  void is_currently_pixelart_raycast_lit_set(const int x, const int y);
-  void is_currently_pixelart_raycast_lit_unset(const int x, const int y);
   void is_lit_ever_no_check_set(const int x, const int y);
   void is_lit_ever_no_check_unset(const int x, const int y);
   void is_lit_ever_set(const int x, const int y);

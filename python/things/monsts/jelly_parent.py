@@ -12,14 +12,23 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
 
 
 def on_death(me, x, y):
+    splits = False
     if my.pcg_randint(1, 100) < 40:
         my.level_spawn_next_to(me, "jelly_baby")
+        splits = True
     if my.pcg_randint(1, 100) < 40:
         my.level_spawn_next_to(me, "jelly_baby")
+        splits = True
     if my.pcg_randint(1, 100) < 40:
         my.level_spawn_next_to(me, "jelly_baby")
+        splits = True
     if my.pcg_randint(1, 100) < 40:
         my.level_spawn_next_to(me, "jelly_baby")
+        splits = True
+
+    if splits:
+        my.thing_speaks(me, "The jelly splits!")
+
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.non_pcg_randint(1, 9)}")
 
 

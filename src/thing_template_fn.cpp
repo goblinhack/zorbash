@@ -333,7 +333,7 @@ int Tp::is_crushable(void) const { return _is_crushable; }
 int Tp::is_crystal(void) const { return _is_crystal; }
 int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
 int Tp::is_cursor_can_hover_over_x2_click(void) const { return _is_cursor_can_hover_over_x2_click; }
-int Tp::is_cursor_path_hazard_for_player(void) const { return _is_cursor_path_hazard_for_player; }
+int Tp::is_cursor_path_hazard(void) const { return _is_cursor_path_hazard; }
 int Tp::is_cursor_path(void) const { return _is_cursor_path; }
 int Tp::is_cursor(void) const { return _is_cursor; }
 int Tp::is_dagger(void) const { return _is_dagger; }
@@ -681,7 +681,7 @@ int Tp::unused_flag8(void) const { return _unused_flag8; }
 int Tp::unused_flag90(void) const { return _unused_flag90; }
 int Tp::unused_flag91(void) const { return _unused_flag91; }
 int Tp::unused_flag92(void) const { return _unused_flag92; }
-int Tp::unused_flag93(void) const { return _unused_flag93; }
+int Tp::is_cursor_path_blocker(void) const { return _is_cursor_path_blocker; }
 int Tp::gfx_ascii_mode_color_is_animated(void) const { return _gfx_ascii_mode_color_is_animated; }
 int Tp::gfx_ascii_animated(void) const { return _gfx_ascii_animated; }
 int Tp::unused_flag9(void) const { return _unused_flag9; }
@@ -875,7 +875,7 @@ void Tp::is_crushable_set(int v) { _is_crushable = v; }
 void Tp::is_crystal_set(int v) { _is_crystal = v; }
 void Tp::is_cursor_can_hover_over_set(int v) { _is_cursor_can_hover_over = v; }
 void Tp::is_cursor_can_hover_over_x2_click_set(int v) { _is_cursor_can_hover_over_x2_click = v; }
-void Tp::is_cursor_path_hazard_for_player_set(int v) { _is_cursor_path_hazard_for_player = v; }
+void Tp::is_cursor_path_hazard_set(int v) { _is_cursor_path_hazard = v; }
 void Tp::is_cursor_path_set(int v) { _is_cursor_path = v; }
 void Tp::is_cursor_set(int v) { _is_cursor = v; }
 void Tp::is_dagger_set(int v) { _is_dagger = v; }
@@ -1351,7 +1351,7 @@ void Tp::unused_flag8_set(int v) { _unused_flag8 = v; }
 void Tp::unused_flag90_set(int v) { _unused_flag90 = v; }
 void Tp::unused_flag91_set(int v) { _unused_flag91 = v; }
 void Tp::unused_flag92_set(int v) { _unused_flag92 = v; }
-void Tp::unused_flag93_set(int v) { _unused_flag93 = v; }
+void Tp::is_cursor_path_blocker_set(int v) { _is_cursor_path_blocker = v; }
 void Tp::gfx_ascii_mode_color_is_animated_set(int v) { _gfx_ascii_mode_color_is_animated = v; }
 void Tp::gfx_ascii_animated_set(int v) { _gfx_ascii_animated = v; }
 void Tp::unused_flag9_set(int v) { _unused_flag9 = v; }

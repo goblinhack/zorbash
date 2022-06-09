@@ -286,7 +286,7 @@ private:
   int _is_cursor_can_hover_over {};
   int _is_cursor_can_hover_over_x2_click {};
   int _is_cursor_path {};
-  int _is_cursor_path_hazard_for_player {};
+  int _is_cursor_path_hazard {};
   int _is_dagger {};
   int _is_dead_on_end_of_anim {};
   int _is_dead_on_falling {};
@@ -633,7 +633,7 @@ private:
   int _unused_flag90 {};
   int _unused_flag91 {};
   int _unused_flag92 {};
-  int _unused_flag93 {};
+  int _is_cursor_path_blocker {};
   int _gfx_ascii_mode_color_is_animated {};
   int _gfx_ascii_animated {};
   int _weapon_damage {};
@@ -1278,7 +1278,7 @@ public:
   int is_crystal(void) const;
   int is_cursor_can_hover_over(void) const;
   int is_cursor_can_hover_over_x2_click(void) const;
-  int is_cursor_path_hazard_for_player(void) const;
+  int is_cursor_path_hazard(void) const;
   int is_cursor_path(void) const;
   int is_cursor(void) const;
   int is_dagger(void) const;
@@ -1626,7 +1626,7 @@ public:
   int unused_flag90(void) const;
   int unused_flag91(void) const;
   int unused_flag92(void) const;
-  int unused_flag93(void) const;
+  int is_cursor_path_blocker(void) const;
   int gfx_ascii_mode_color_is_animated(void) const;
   int gfx_ascii_animated(void) const;
   int unused_flag9(void) const;
@@ -1820,7 +1820,7 @@ public:
   void is_crystal_set(int v);
   void is_cursor_can_hover_over_set(int v);
   void is_cursor_can_hover_over_x2_click_set(int v);
-  void is_cursor_path_hazard_for_player_set(int v);
+  void is_cursor_path_hazard_set(int v);
   void is_cursor_path_set(int v);
   void is_cursor_set(int v);
   void is_dagger_set(int v);
@@ -2296,7 +2296,7 @@ public:
   void unused_flag90_set(int v);
   void unused_flag91_set(int v);
   void unused_flag92_set(int v);
-  void unused_flag93_set(int v);
+  void is_cursor_path_blocker_set(int v);
   void gfx_ascii_mode_color_is_animated_set(int v);
   void gfx_ascii_animated_set(int v);
   void unused_flag9_set(int v);

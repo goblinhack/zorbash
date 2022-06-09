@@ -146,12 +146,12 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     if (! tp->text_long_description3().empty()) {
       wid_popup_window->log(tp->text_long_description3(), TEXT_FORMAT_LHS, "orange");
     }
+
+    wid_thing_info_add_general_info(wid_popup_window, t);
+    wid_thing_info_add_enchant(wid_popup_window, t);
+    wid_thing_info_add_carry_info(wid_popup_window, t);
   }
 
-  wid_thing_info_add_general_info(wid_popup_window, t);
-
-  wid_thing_info_add_enchant(wid_popup_window, t);
-  wid_thing_info_add_carry_info(wid_popup_window, t);
   //
   // Not sure if we will have shops
   //
@@ -545,7 +545,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
 
       IF_DEBUG2
       {
-        if (level->is_cursor_path_hazard_for_player(t->curr_at.x, t->curr_at.y)) {
+        if (level->is_cursor_path_hazard(t->curr_at.x, t->curr_at.y)) {
           t->topcon("over path hazard");
         } else if (player->ai_obstacle_for_me(t->curr_at)) {
           t->topcon("over AI obs");

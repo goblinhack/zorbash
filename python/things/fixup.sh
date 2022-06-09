@@ -202,7 +202,7 @@ do
       is_cursor_can_hover_over \
       is_cursor_can_hover_over_x2_click \
       is_cursor_path \
-      is_cursor_path_hazard_for_player \
+      is_cursor_path_hazard \
       is_dagger \
       is_dead_on_end_of_anim \
       is_dead_on_falling \
@@ -501,7 +501,7 @@ do
       unused_flag90 \
       unused_flag91 \
       unused_flag92 \
-      unused_flag93 \
+      is_cursor_path_blocker \
       gfx_ascii_mode_color_is_animated \
       gfx_ascii_animated \
       tick_prio \

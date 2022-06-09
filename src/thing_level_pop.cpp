@@ -138,9 +138,13 @@ void Thing::level_pop(void)
     i_set_is_hazard = false;
     level->is_hazard_unset(mx, my);
   }
-  if (i_set_is_cursor_path_hazard_for_player) {
-    i_set_is_cursor_path_hazard_for_player = false;
-    level->is_cursor_path_hazard_for_player_unset(mx, my);
+  if (i_set_is_cursor_path_hazard) {
+    i_set_is_cursor_path_hazard = false;
+    level->is_cursor_path_hazard_unset(mx, my);
+  }
+  if (i_set_is_cursor_path_blocker) {
+    i_set_is_cursor_path_blocker = false;
+    level->is_cursor_path_blocker_unset(mx, my);
   }
   if (i_set_is_combustible) {
     i_set_is_combustible = false;

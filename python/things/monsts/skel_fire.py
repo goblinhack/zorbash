@@ -20,6 +20,8 @@ def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
 
 
 def on_death(me, x, y):
+    my.thing_speaks(me, "The skeleton collapses into a smouldering pile of bones!")
+
     if my.non_pcg_randint(1, 2) == 1:
         if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "bones1"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones1")

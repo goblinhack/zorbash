@@ -863,10 +863,16 @@ int Thing::is_explosion(void)
   return (tp()->is_explosion());
 }
 
-int Thing::is_cursor_path_hazard_for_player(void)
+int Thing::is_cursor_path_hazard(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_cursor_path_hazard_for_player());
+  return (tp()->is_cursor_path_hazard());
+}
+
+int Thing::is_cursor_path_blocker(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_cursor_path_blocker());
 }
 
 int Thing::is_heavy(void)
@@ -1869,12 +1875,6 @@ int Thing::unused_flag92(void)
 {
   TRACE_NO_INDENT();
   return (tp()->unused_flag92());
-}
-
-int Thing::unused_flag93(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->unused_flag93());
 }
 
 int Thing::gfx_ascii_mode_color_is_animated(void)
