@@ -213,6 +213,10 @@ public:
   // When we were last attacked
   //
   uint32_t tick_last_i_was_attacked {};
+  //
+  // When we last attacked
+  //
+  uint32_t tick_last_i_attacked {};
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

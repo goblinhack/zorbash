@@ -19,7 +19,7 @@ void Thing::gas_poison_tick(void)
     return;
   }
 
-  if (! is_breather()) {
+  if (! is_ait_breather()) {
     return;
   }
 

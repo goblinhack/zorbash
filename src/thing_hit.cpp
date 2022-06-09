@@ -1307,6 +1307,11 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   //
   tick_last_i_was_attacked_set(game->tick_current);
 
+  //
+  // So we can tell when things are attacking us
+  //
+  real_hitter->tick_last_i_attacked_set(game->tick_current);
+
   if (is_player()) {
     score_incr(damage);
   }

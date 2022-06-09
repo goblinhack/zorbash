@@ -308,7 +308,7 @@ int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_bones(void) const { return _is_bones; }
 int Tp::is_boots(void) const { return _is_boots; }
 int Tp::is_brazier(void) const { return _is_brazier; }
-int Tp::is_breather(void) const { return _is_breather; }
+int Tp::is_ait_breather(void) const { return _is_ait_breather; }
 int Tp::is_bridge(void) const { return _is_bridge; }
 int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_burnable(void) const { return _is_burnable; }
@@ -850,7 +850,7 @@ void Tp::is_bleeder_set(int v) { _is_bleeder = v; }
 void Tp::is_bones_set(int v) { _is_bones = v; }
 void Tp::is_boots_set(int v) { _is_boots = v; }
 void Tp::is_brazier_set(int v) { _is_brazier = v; }
-void Tp::is_breather_set(int v) { _is_breather = v; }
+void Tp::is_ait_breather_set(int v) { _is_ait_breather = v; }
 void Tp::is_bridge_set(int v) { _is_bridge = v; }
 void Tp::is_buff_set(int v) { _is_buff = v; }
 void Tp::is_burnable_set(int v) { _is_burnable = v; }

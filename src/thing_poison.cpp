@@ -31,7 +31,7 @@ void Thing::poison_tick(void)
   int    poison = old_poison;
 
   if (poison) {
-    auto new_poison = poison / 2;
+    int new_poison = poison - 1;
 
     if (poison) {
       if (d20() < stat_con()) {
@@ -46,7 +46,7 @@ void Thing::poison_tick(void)
     // Do not let poison go to zero if still in the gas. This stops messages that
     // look like you have recovered.
     //
-    if (is_breather()) {
+    if (is_ait_breather()) {
       auto intensity = level->is_gas_poison(curr_at.x, curr_at.y) / 10;
       if (intensity) {
         if (! new_poison) {
