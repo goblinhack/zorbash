@@ -18,6 +18,8 @@ def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
 
 
 def on_death(me, x, y):
+    my.thing_speaks(me, "The dogman howls mournfully!")
+
     sound = f"growl{my.non_pcg_randint(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)

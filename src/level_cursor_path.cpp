@@ -138,7 +138,7 @@ void Level::cursor_path_draw_line(point start, point end)
   //
   // If clicking on a wall, don't walk into it.
   //
-  if (cursor && is_obs_wall_or_door(cursor->curr_at.x, cursor->curr_at.y)) {
+  if (cursor && is_cursor_path_blocker(cursor->curr_at.x, cursor->curr_at.y)) {
     return;
   }
 
@@ -146,14 +146,14 @@ void Level::cursor_path_draw_line(point start, point end)
   // If standing on a hazard, then plot a course that allows travel over hazards.
   // Or likewise if the cursor is on a hazard.
   //
-  if (is_cursor_path_hazard_for_player(player->curr_at.x, player->curr_at.y) ||
-      (cursor && is_cursor_path_hazard_for_player(cursor->curr_at.x, cursor->curr_at.y))) {
+  if (is_cursor_path_hazard(player->curr_at.x, player->curr_at.y) ||
+      (cursor && is_cursor_path_hazard(cursor->curr_at.x, cursor->curr_at.y))) {
     //
     // Just map the shortest path outta here
     //
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_obs_wall_or_door(x, y)) {
+        if (is_cursor_path_blocker(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -163,7 +163,7 @@ void Level::cursor_path_draw_line(point start, point end)
   } else {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        if (is_cursor_path_hazard_for_player(x, y) || is_obs_wall_or_door(x, y)) {
+        if (is_cursor_path_blocker(x, y) || is_cursor_path_hazard(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         } else {
           set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -381,4 +381,80 @@ void Level::cursor_path_clear(void)
       FOR_ALL_THINGS_END()
     }
   }
+}
+
+uint8_t Level::is_cursor_path_hazard(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_cursor_path_hazard, p.x, p.y));
+}
+
+uint8_t Level::is_cursor_path_hazard(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_cursor_path_hazard, x, y));
+}
+
+void Level::is_cursor_path_hazard_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_cursor_path_hazard, x, y, (uint8_t) 1);
+}
+
+void Level::is_cursor_path_hazard_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_cursor_path_hazard, x, y, (uint8_t) 1);
+}
+
+uint8_t Level::is_cursor_path_blocker(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_cursor_path_blocker, p.x, p.y));
+}
+
+uint8_t Level::is_cursor_path_blocker(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_cursor_path_blocker, x, y));
+}
+
+void Level::is_cursor_path_blocker_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_is_cursor_path_blocker, x, y, (uint8_t) 1);
+}
+
+void Level::is_cursor_path_blocker_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_is_cursor_path_blocker, x, y, (uint8_t) 1);
 }

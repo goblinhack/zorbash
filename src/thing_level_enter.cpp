@@ -149,5 +149,15 @@ void Thing::level_enter(bool rejoin)
     level->player = this;
     game->set_meta_data(level);
     level->ts_entered = time_ms();
+
+    //
+    // This is needed so when entering a new level, like a sewer, we are not left in the dark!
+    //
+    if (! g_loading) {
+      //
+      // Except when loading; as this involves counting torches which may not yet be loaded.
+      //
+      light_dist_update();
+    }
   }
 }

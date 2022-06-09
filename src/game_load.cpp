@@ -426,7 +426,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   my.t->i_set_is_combustible                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_corpse                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_corridor                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  my.t->i_set_is_cursor_path_hazard_for_player = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->i_set_is_cursor_path_hazard            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+  my.t->i_set_is_cursor_path_blocker           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_deep_water                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_descend_dungeon               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->i_set_is_descend_sewer                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -550,8 +551,6 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_fade_in_map);
   in >> bits(my.t->_gfx_water);
   in >> bits(my.t->_heatmap);
-  in >> bits(my.t->_noisemap);
-  in >> bits(my.t->_noisemap_in);
   in >> bits(my.t->_is_able_to_stand_on);
   in >> bits(my.t->_is_acid);
   in >> bits(my.t->_is_ascend_dungeon);
@@ -560,10 +559,12 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_brazier);
   in >> bits(my.t->_is_bridge);
   in >> bits(my.t->_is_chasm);
+  in >> bits(my.t->_is_combustible);
   in >> bits(my.t->_is_corpse);
   in >> bits(my.t->_is_corridor);
-  in >> bits(my.t->_is_cursor_path_hazard_for_player);
-  in >> bits(my.t->_is_combustible);
+  in >> bits(my.t->_is_currently_pixelart_raycast_lit);
+  in >> bits(my.t->_is_cursor_path_blocker);
+  in >> bits(my.t->_is_cursor_path_hazard);
   in >> bits(my.t->_is_deep_water);
   in >> bits(my.t->_is_descend_dungeon);
   in >> bits(my.t->_is_descend_sewer);
@@ -582,7 +583,6 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_heavy);
   in >> bits(my.t->_is_key);
   in >> bits(my.t->_is_lava);
-  in >> bits(my.t->_is_currently_pixelart_raycast_lit);
   in >> bits(my.t->_is_mob);
   in >> bits(my.t->_is_monst);
   in >> bits(my.t->_is_pink_blood);
@@ -602,6 +602,8 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_wall);
   in >> bits(my.t->_is_wand_or_staff);
   in >> bits(my.t->_is_wet_grass);
+  in >> bits(my.t->_noisemap);
+  in >> bits(my.t->_noisemap_in);
 
   in >> bits(my.t->_is_map_changed);
 

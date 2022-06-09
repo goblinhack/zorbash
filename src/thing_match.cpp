@@ -281,7 +281,10 @@ bool Thing::matches(const std::string &what)
   if (is_cursor_can_hover_over_x2_click() && (what == "is_cursor_can_hover_over_x2_click")) {
     return true;
   }
-  if (is_cursor_path_hazard_for_player() && (what == "is_cursor_path_hazard_for_player")) {
+  if (is_cursor_path_hazard() && (what == "is_cursor_path_hazard")) {
+    return true;
+  }
+  if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) {
     return true;
   }
   if (is_combustible() && (what == "is_combustible")) {
@@ -947,7 +950,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag92() && (what == "unused_flag92")) {
     return true;
   }
-  if (unused_flag93() && (what == "unused_flag93")) {
+  if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) {
     return true;
   }
   if (gfx_ascii_mode_color_is_animated() && (what == "gfx_ascii_mode_color_is_animated")) {
@@ -1653,8 +1656,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_cursor_can_hover_over_x2_click") {
     return &Thing::is_cursor_can_hover_over_x2_click;
   }
-  if (what == "is_cursor_path_hazard_for_player") {
-    return &Thing::is_cursor_path_hazard_for_player;
+  if (what == "is_cursor_path_hazard") {
+    return &Thing::is_cursor_path_hazard;
+  }
+  if (what == "is_cursor_path_blocker") {
+    return &Thing::is_cursor_path_blocker;
   }
   if (what == "is_combustible") {
     return &Thing::is_combustible;
@@ -2562,8 +2568,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag92") {
     return &Thing::unused_flag92;
   }
-  if (what == "unused_flag93") {
-    return &Thing::unused_flag93;
+  if (what == "is_cursor_path_blocker") {
+    return &Thing::is_cursor_path_blocker;
   }
   if (what == "gfx_ascii_mode_color_is_animated") {
     return &Thing::gfx_ascii_mode_color_is_animated;

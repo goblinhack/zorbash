@@ -124,7 +124,8 @@ PyObject *level_is_cursor_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_can_hover_over_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_can_hover_over_x2_click_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_cursor_path_hazard_for_player_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_cursor_path_hazard_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_cursor_path_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_end_of_anim_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dead_on_falling_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -440,7 +441,7 @@ PyObject *level_unused_flag8_at(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *level_unused_flag90_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag91_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag92_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag93_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_cursor_path_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag9_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywds);
 #endif

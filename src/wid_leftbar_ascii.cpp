@@ -144,9 +144,32 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     }
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     y_at++;
+  } else if (t->is_monst() && (t->stuck_count() > 1)) {
+    y_at++;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_leftbar, "(Stuck)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Stuck)");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    y_at++;
+  } else if (t->is_monst() && (t->idle_count() > 1)) {
+    y_at++;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_leftbar, "(Idle)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Idle)");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    y_at++;
   }
 
-  if (t->is_door() || t->is_ascend_dungeon() || t->is_descend_dungeon()) {
+  Attacking
+
+      if (t->is_door() || t->is_ascend_dungeon() || t->is_descend_dungeon())
+  {
     if (t->is_open) {
       y_at++;
       TRACE_NO_INDENT();

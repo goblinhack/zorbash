@@ -146,9 +146,13 @@ void Thing::level_push(void)
     i_set_is_hazard = true;
     level->is_hazard_set(mx, my);
   }
-  if (is_cursor_path_hazard_for_player()) {
-    i_set_is_cursor_path_hazard_for_player = true;
-    level->is_cursor_path_hazard_for_player_set(mx, my);
+  if (is_cursor_path_hazard()) {
+    i_set_is_cursor_path_hazard = true;
+    level->is_cursor_path_hazard_set(mx, my);
+  }
+  if (is_cursor_path_blocker()) {
+    i_set_is_cursor_path_blocker = true;
+    level->is_cursor_path_blocker_set(mx, my);
   }
   if (is_combustible()) {
     i_set_is_combustible = true;

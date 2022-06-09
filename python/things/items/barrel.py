@@ -48,6 +48,7 @@ def tp_init(name, text_long_name):
     my.is_biome_dungeon(self, True)
     my.is_burnable(self, True)
     my.is_cursor_can_hover_over(self, True)
+    my.is_cursor_path_blocker(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_heavy(self, True)
     my.is_hittable(self, True)

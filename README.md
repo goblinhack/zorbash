@@ -1,8 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- barrel should not block cursor in path                                                                                                       -->
-<!-- ethereal monsts should not block cursor path                                                                                                 -->
 <!-- add (stuck) for webs                                                                                                                         -->
 <!-- (dead) for skelton?                                                                                                                          -->
 <!-- (dead) extra nl                                                                                                                              -->
