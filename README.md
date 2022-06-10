@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- add (stuck) for webs                                                                                                                         -->
 <!-- (dead) for skelton?                                                                                                                          -->
 <!-- (dead) extra nl                                                                                                                              -->
 <!-- enchantstone extra nl                                                                                                                        -->

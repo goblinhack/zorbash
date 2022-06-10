@@ -137,7 +137,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
-    if (t->is_monst()) {
+    if (t->is_undead()) {
+      wid_set_text(w, "(Vanquished)");
+    } else if (t->is_monst()) {
       wid_set_text(w, "(Dead)");
     } else {
       wid_set_text(w, "(Broken)");

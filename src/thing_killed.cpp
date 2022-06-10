@@ -3,6 +3,7 @@
 // See the README.md file for license info.
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
@@ -312,13 +313,31 @@ void Thing::killed(Thingp defeater, const char *reason)
             //
             // Already logged
             //
-          } else if (top_owner() == player) {
+          } else if (top_owner() == defeater) {
             msg("Your %s is destroyed.", text_short_name().c_str());
           } else {
             msg("%s is destroyed, %s.", The_no_dying.c_str(), reason);
           }
 
           defeater->score_add(this);
+        } else if (defeater->is_monst() && player->level &&
+                   get(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+
+          if (is_monst()) {
+            if (is_undead()) {
+              msg("%%fg=white$%s is vanquished, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            } else if (is_jelly()) {
+              msg("%%fg=white$%s is splattered, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            } else {
+              msg("%%fg=white$%s is dead, %s.%%fg=reset$", The_no_dying.c_str(), reason);
+            }
+          } else if (on_death_is_open()) {
+            msg("%s opens the %s.", defeater->text_The_no_dying().c_str(), text_short_name().c_str());
+          } else if (top_owner() == defeater) {
+            msg("%s's %s is destroyed.", defeater->text_The_no_dying().c_str(), text_short_name().c_str());
+          } else {
+            msg("%s is destroyed, %s.", The_no_dying.c_str(), reason);
+          }
         } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
           if (is_undead()) {
             msg("You hear the distant cry of the undead...");
