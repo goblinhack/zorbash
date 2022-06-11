@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- (dead) extra nl                                                                                                                              -->
 <!-- enchantstone extra nl                                                                                                                        -->
 <!-- torches and other light sources should cast alpha                                                                                            -->
 <!-- odd white pattern when scrolling                                                                                                             -->
