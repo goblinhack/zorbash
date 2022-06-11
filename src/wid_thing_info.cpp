@@ -1787,7 +1787,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     w->log("Hates " + hates, TEXT_FORMAT_LHS, "red");
   }
 
-  if (t->is_monst() || t->is_item() || t->is_player()) {
+  if (t->is_monst() || t->is_player()) {
     w->log(UI_LOGGING_EMPTY_LINE);
   }
 }
