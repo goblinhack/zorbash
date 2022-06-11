@@ -102,6 +102,7 @@ void Level::cursor_move(void)
     } else {
       map_wanted_at += fpoint(dx, dy);
     }
+    // TOPCON("(%f,%f d %f,%f)", map_wanted_at.x, map_wanted_at.y, dx, dy);
     is_map_follow_player = false;
     return;
   }

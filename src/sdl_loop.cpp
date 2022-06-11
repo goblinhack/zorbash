@@ -27,10 +27,14 @@ void sdl_loop(void)
   LOG("SDL: main loop");
 
   //
-  // Keep this low to avoid too much lag when processing mouse motion
-  // events, that redraw the cursor path.
+  // Keep this lowish to avoid too much lag when processing mouse motion events, that redraw the cursor path.
   //
-  SDL_Event events[ 2 ];
+  // 2 - seems too slow as it adds a noticeable lag when you do a wheel mouse event after a lot of mouse moves.
+  // 3 - still some lag
+  // 4 - seems ok
+  // 10 - too much lag now due to cursor redraws
+  //
+  SDL_Event events[ 4 ];
   int       found;
   int       i;
   int       frames = 0;

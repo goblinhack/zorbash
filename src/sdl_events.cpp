@@ -165,6 +165,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         sdl.wheel_x = event->wheel.x;
         sdl.wheel_y = event->wheel.y;
 
+        //
+        // Negative wheel x so side scrolls seem natural. Could just be a dumb macos thing to ifdef?
+        //
 #ifdef __APPLE__
         sdl.wheel_x = -sdl.wheel_x;
 #endif
@@ -172,10 +175,6 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         sdl.wheel_x *= accel;
         sdl.wheel_y *= accel;
 
-        //
-        // Negative wheel x so side scrolls seem natural. Could just be
-        // a dumb macos thing to ifdef?
-        //
         wid_mouse_visible = 1;
         sdl.mouse_tick++;
         if (! processed_mouse_motion_event) {
