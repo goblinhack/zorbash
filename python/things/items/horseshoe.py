@@ -38,7 +38,7 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="*", ascii_bg_col_name="", ascii_fg_col_name="gray90",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gray90",
             tile=name, delay_ms=100)
 
     my.tp_update(self)
