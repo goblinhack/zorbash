@@ -144,7 +144,7 @@ void Thing::blit_ascii_at(point p, bool lit)
         blit_ascii_adjust_color(c, fg);
         ascii_set_fg(p.x, p.y, c);
       }
-    } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y)) {
+    } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y) || g_opt_debug2) {
       //
       // e.g unlit dungeon floor
       //
@@ -219,7 +219,6 @@ void Thing::blit_ascii(point tl, point br, point p)
   int y = tl.y + (p.y - level->miny);
 
   auto lit = get(level->can_see_currently.can_see, curr_at.x, curr_at.y);
-  IF_DEBUG2 { lit = true; }
 
   if (is_cursor() || is_cursor_path()) {
     lit = true;
