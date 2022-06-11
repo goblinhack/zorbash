@@ -27,7 +27,7 @@ def on_death(me, x, y):
         splits = True
 
     if splits:
-        my.thing_speaks(me, "The jelly splits!")
+        my.thing_msg(me, "The jelly splits!")
 
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.non_pcg_randint(1, 9)}")
 
