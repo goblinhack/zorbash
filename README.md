@@ -1,9 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- enchantstone extra nl                                                                                                                        -->
 <!-- torches and other light sources should cast alpha                                                                                            -->
-<!-- odd white pattern when scrolling                                                                                                             -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
