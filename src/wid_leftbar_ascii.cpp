@@ -15,6 +15,8 @@
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_leftbar.hpp"
 
+static point wid_leftbar_last_thing_position;
+
 static void wid_leftbar_ascii_display(Widp w, point tl, point br)
 {
   TRACE_NO_INDENT();
@@ -51,9 +53,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
 {
   TRACE_NO_INDENT();
 
-  static point at;
-  if (first) {
-    at = point(-1, -1);
+  auto player = level->player;
+  if (! player) {
+    return;
   }
 
   //
@@ -174,6 +176,21 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
 
+  if (player && t->maybe_aip()) {
+    for (auto p1 : t->aip()->move_path) {
+      if (p1 == player->curr_at) {
+        y_at++;
+        TRACE_NO_INDENT();
+        auto  w  = wid_new_square_button(wid_leftbar, "(Hunting)");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "(Hunting)");
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+      }
+    }
+  }
+
   if (t->is_door() || t->is_ascend_dungeon() || t->is_descend_dungeon()) {
     if (t->is_open) {
       y_at++;
@@ -245,7 +262,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     }
   }
 
-  if (t->curr_at == at) {
+  if (t->curr_at == wid_leftbar_last_thing_position) {
     //
     // Things at the same location are grouped
     //
@@ -257,7 +274,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     y_at++;
   }
 
-  at = t->curr_at;
+  wid_leftbar_last_thing_position = t->curr_at;
 }
 
 bool wid_leftbar_ascii_create(void)
@@ -290,6 +307,7 @@ bool wid_leftbar_ascii_create(void)
     wid_lower(wid_leftbar);
   }
 
+  wid_leftbar_last_thing_position = point(-1, -1);
   {
     ///////////////////////////////////////////////////////////////////////////
     // Monsters (alive)

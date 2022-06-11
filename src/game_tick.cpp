@@ -186,7 +186,6 @@ bool Game::tick_end(void)
   tick_begin_ms = 0;
   tick_dt       = 0;
 
-  // TOPCON("LEFT");
   return true;
 }
 
