@@ -68,7 +68,6 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
   }
 
   level->wid_leftbar_things.push_back(t->id);
-  t->log("Leftbar add %X", t->id.id);
 
   y_at++;
   {
