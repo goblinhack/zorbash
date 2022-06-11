@@ -880,6 +880,18 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 
   IF_DEBUG2 { c.a = 255; }
 
+  //
+  // Dim non currently lit areas
+  //
+  {
+    auto lit = get(level->can_see_currently.can_see, curr_at.x, curr_at.y);
+    if (! lit) {
+      c.r /= 2;
+      c.g /= 2;
+      c.b /= 2;
+    }
+  }
+
   glcolor(c);
 
   auto wobble = update_wobble();
