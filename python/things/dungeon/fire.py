@@ -15,7 +15,7 @@ def tp_init(name, text_long_name):
     my.damage_nat_attack_type(self, "fire")
     my.environ_avoids_water(self, 100)
     my.gfx_ascii_mode_shown(self, True)
-    my.gfx_flickers(self, True)
+    my.gfx_pixelart_flickers(self, True)
     my.gfx_on_fire_anim(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)

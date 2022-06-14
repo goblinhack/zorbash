@@ -327,10 +327,10 @@ int Thing::unused_flag103(void)
   return (tp()->unused_flag103());
 }
 
-int Thing::gfx_flickers(void)
+int Thing::gfx_pixelart_flickers(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_flickers());
+  return (tp()->gfx_pixelart_flickers());
 }
 
 int Thing::gfx_glows(void)

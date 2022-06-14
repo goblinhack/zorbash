@@ -59,6 +59,111 @@ public:
   friend bool operator!=(const color &c, const color &b) { return (! (c == b)); }
 };
 
+//
+// As above, but integer based so we can go beyond 255 when adding light sources, but of course we need to average out
+// eventually.
+//
+class fcolor
+{
+public:
+  float r {};
+  float g {};
+  float b {};
+  float a {};
+
+  //
+  // For merging lights
+  //
+  int count {};
+
+  fcolor(void) : r(0), g(0), b(0), a(0) {}
+
+  fcolor(float r, float g, float b) : r(r), g(g), b(b), a(255) {}
+
+  fcolor(float r, float g, float b, float a) : r(r), g(g), b(b), a(a) {}
+
+  fcolor(const fcolor &c) : r(c.r), g(c.g), b(c.b), a(c.a), count(c.count) {}
+
+  friend fcolor operator+(fcolor c, fcolor b) { return (fcolor(c.r + b.r, c.g + b.g, c.b + b.b, c.a + b.a)); }
+
+  friend fcolor operator-(fcolor c, fcolor b) { return (fcolor(c.r - b.r, c.g - b.g, c.b - b.b, c.a - b.a)); }
+
+  friend fcolor operator/(fcolor c, fcolor b) { return (fcolor(c.r / b.r, c.g / b.g, c.b / b.b, c.a / b.a)); }
+
+  friend fcolor operator*(fcolor c, fcolor b) { return (fcolor(c.r * b.r, c.g * b.g, c.b * b.b, c.a * b.a)); }
+
+  friend fcolor operator/(fcolor c, float b) { return (fcolor(c.r / b, c.g / b, c.b / b, c.a / b)); }
+
+  void operator*=(float c)
+  {
+    r *= c;
+    g *= c;
+    b *= c;
+    a *= c;
+  }
+
+  void operator/=(float c)
+  {
+    r /= c;
+    g /= c;
+    b /= c;
+    a /= c;
+  }
+
+  void operator+=(fcolor i)
+  {
+    r += i.r;
+    g += i.g;
+    b += i.b;
+    a += i.a;
+  }
+
+  friend bool operator==(const fcolor &c, const fcolor &b)
+  {
+    return (c.r == b.r) && (c.g == b.g) && (c.b == b.b) && (c.a == b.a);
+  }
+
+  friend bool operator!=(const fcolor &c, const fcolor &b) { return (! (c == b)); }
+
+  fcolor(color c) : r(c.r), g(c.g), b(c.b), a(c.a) {}
+
+  color tocolor(void)
+  {
+    color c;
+    float cnt = count;
+
+    c.r = r;
+    if (cnt) {
+      c.r /= cnt;
+    }
+    if (c.r > 255) {
+      c.r = 255;
+    }
+
+    c.g = g;
+    if (cnt) {
+      c.g /= cnt;
+    }
+    if (c.g > 255) {
+      c.g = 255;
+    }
+
+    c.b = b;
+    if (cnt) {
+      c.b /= cnt;
+    }
+    if (c.b > 255) {
+      c.b = 255;
+    }
+
+    c.a = 255;
+
+    return c;
+  }
+};
+
+extern fcolor FCOLOR_NONE;
+
 extern color AQUAMARINE;
 extern color AQUAMARINE1;
 extern color AQUAMARINE2;

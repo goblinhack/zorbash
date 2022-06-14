@@ -94,8 +94,6 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wand_or_staff {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_wet_grass {};
 
-  std::array< std::array< uint32_t, MAP_HEIGHT >, MAP_WIDTH > _is_map_changed {};
-
   //
   // This is what the player has seen on this level, now and forever.
   //
@@ -294,7 +292,7 @@ public:
   //
   // Only used in ascii mode and updated per frame
   //
-  std::array< std::array< color, MAP_HEIGHT >, MAP_WIDTH > _ascii_light_source {};
+  std::array< std::array< fcolor, MAP_HEIGHT >, MAP_WIDTH > _ascii_light_source {};
 
   //
   // Update thing_fini.cpp when adding more references to Thingp
@@ -710,10 +708,10 @@ public:
   bool skillbox_chosen(const uint32_t slot);
   bool skillbox_over(const uint32_t slot);
 
-  int get_total_monst_hp_level(void);
-  int get_total_monst_damage_level(void);
-  int get_total_loot_level(void);
-  int get_total_food_level(void);
+  int total_monst_hp_level(void);
+  int total_monst_damage_level(void);
+  int total_loot_level(void);
+  int total_food_level(void);
 
   float wobble_curr(void) const;
   float update_wobble(void);
@@ -721,7 +719,7 @@ public:
   friend std::istream &operator>>(std::istream &in, Bits< Levelp & > my);
   friend std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my);
 
-  int inventory_get_slot(Thingp item);
+  int inventory_slot(Thingp item);
 
   std::string to_string(void);
 
@@ -1159,6 +1157,7 @@ public:
   void update_deep_water(void);
   void update_hazard_tile_map(void);
   void update_heatmap(void);
+  void update_light_ascii_map(void);
   void update_map_debug(int x, int y);
   void update_map_mini(bool showing_two_levels, bool show_faded);
   void update_map_things_to_stand_on(void);
@@ -1172,34 +1171,24 @@ public:
   void update_water_next_to_lava(void);
   void wobble_set(float);
 
-  uint32_t get_is_map_changed(const int x, const int y);
-  uint32_t get_is_map_changed(const point p);
-  uint32_t get_is_map_changed_no_check(const int x, const int y);
-  uint32_t get_is_map_changed_no_check(const point p);
-  void     is_map_changed_no_check_set(const int x, const int y);
-  void     is_map_changed_no_check_set(const int x, const int y, uint32_t v);
-  void     is_map_changed_no_check_unset(const int x, const int y);
-  void     is_map_changed_set(const int x, const int y);
-  void     is_map_changed_unset(const int x, const int y);
-
   uint8_t is_lava(const int x, const int y);
   uint8_t is_lava(const point p);
   uint8_t is_lava_no_check(const int x, const int y);
   void    is_lava_set(const int x, const int y);
   void    is_lava_unset(const int x, const int y);
 
-  color get_ascii_light_source(const int x, const int y);
-  color get_ascii_light_source(const point p);
-  color get_ascii_light_source_no_check(const int x, const int y);
-  color get_ascii_light_source_no_check(const point p);
-  void  ascii_light_source_set(const point p, color v);
-  void  ascii_light_source_set(const int x, const int y, color v);
-  void  ascii_light_source_set_no_check(const point p, color v);
-  void  ascii_light_source_set_no_check(const int x, const int y, color v);
-  void  ascii_light_source_unset(const point p);
-  void  ascii_light_source_unset(const int x, const int y);
-  void  ascii_light_source_unset_no_check(const point p);
-  void  ascii_light_source_unset_no_check(const int x, const int y);
+  fcolor ascii_light_source(const int x, const int y);
+  fcolor ascii_light_source(const point p);
+  fcolor ascii_light_source_no_check(const int x, const int y);
+  fcolor ascii_light_source_no_check(const point p);
+  void   ascii_light_source_set(const point p, fcolor &v);
+  void   ascii_light_source_set(const int x, const int y, fcolor &v);
+  void   ascii_light_source_set_no_check(const point p, fcolor &v);
+  void   ascii_light_source_set_no_check(const int x, const int y, fcolor &v);
+  void   ascii_light_source_unset(const point p);
+  void   ascii_light_source_unset(const int x, const int y);
+  void   ascii_light_source_unset_no_check(const point p);
+  void   ascii_light_source_unset_no_check(const int x, const int y);
 
   std::deque< point >  flood_fill(point) const;
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);

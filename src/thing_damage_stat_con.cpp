@@ -98,7 +98,7 @@ int Thing::on_receiving_dmg_stat_con(Thingp hitter, Thingp real_hitter, int dama
   return damage;
 }
 
-int Thing::get_total_damage_for_on_receiving_dmg_stat_con(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::total_damage_for_on_receiving_dmg_stat_con(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -220,7 +220,7 @@ int Thing::on_owner_attacking_dmg_stat_con(Thingp owner, Thingp victim, int dama
   return damage;
 }
 
-int Thing::get_total_damage_for_on_attacking_dmg_stat_con(Thingp victim, int damage)
+int Thing::total_damage_for_on_attacking_dmg_stat_con(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {

@@ -90,7 +90,7 @@ do
       gfx_bounce_on_move \
       gfx_dead_anim \
       gfx_equip_carry_anim \
-      gfx_flickers \
+      gfx_pixelart_flickers \
       gfx_glows \
       gfx_health_bar_autohide \
       gfx_health_bar_shown \

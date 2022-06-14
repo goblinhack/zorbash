@@ -191,47 +191,47 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
 
   auto victim = this;
   if (attack_options->attack_poison) {
-    damage = real_hitter->get_total_damage_for_on_attacking_dmg_poison(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_poison(hitter, real_hitter, damage);
+    damage = real_hitter->total_damage_for_on_attacking_dmg_poison(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_poison(hitter, real_hitter, damage);
   } else if (attack_options->attack_future1) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_future1(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_future1(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_future1(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_future1(hitter, real_hitter, damage);
   } else if (attack_options->attack_future2) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_future2(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_future2(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_future2(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_future2(hitter, real_hitter, damage);
   } else if (attack_options->attack_future3) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_future3(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_future3(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_future3(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_future3(hitter, real_hitter, damage);
   } else if (attack_options->attack_fire) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_fire(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_fire(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_fire(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_fire(hitter, real_hitter, damage);
   } else if (attack_options->attack_crush) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_crush(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_crush(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_crush(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_crush(hitter, real_hitter, damage);
   } else if (attack_options->attack_lightning) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_lightning(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_lightning(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_lightning(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_lightning(hitter, real_hitter, damage);
   } else if (attack_options->attack_energy) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_energy(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_energy(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_energy(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_energy(hitter, real_hitter, damage);
   } else if (attack_options->attack_acid) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_acid(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_acid(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_acid(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_acid(hitter, real_hitter, damage);
   } else if (attack_options->attack_digest) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_digest(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_digest(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_digest(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_digest(hitter, real_hitter, damage);
   } else if (attack_options->attack_necrosis) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_necrosis(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_necrosis(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_necrosis(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_necrosis(hitter, real_hitter, damage);
   } else if (attack_options->attack_draining) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_draining(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_draining(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_draining(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_draining(hitter, real_hitter, damage);
   } else if (attack_options->attack_natural) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_nat_attack(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_nat_attack(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_nat_attack(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_nat_attack(hitter, real_hitter, damage);
   } else if (attack_options->attack_cold) {
-    real_hitter->get_total_damage_for_on_attacking_dmg_cold(victim, damage);
-    damage = victim->get_total_damage_for_on_receiving_dmg_cold(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_cold(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_cold(hitter, real_hitter, damage);
 
     if (is_on_fire()) {
       if (is_player()) {
@@ -248,11 +248,11 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     // Use this to see if we increase the damage due to any buffs of abilities
     // of the sword.
     //
-    real_hitter->get_total_damage_for_on_attacking_dmg_melee(victim, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_melee(victim, damage);
     //
     // And use this for damage reduction on the victim.
     //
-    damage = victim->get_total_damage_for_on_receiving_dmg_melee(hitter, real_hitter, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_melee(hitter, real_hitter, damage);
   }
 
   std::string damage_type;
@@ -655,7 +655,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = get_total_damage_for_on_receiving_dmg_stat_str(hitter, real_hitter, damage);
+          damage = total_damage_for_on_receiving_dmg_stat_str(hitter, real_hitter, damage);
           if (! damage) {
             IF_DEBUG2 { real_hitter->log("No strength damage"); }
             return false;
@@ -692,7 +692,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           } else {
             damage = 1;
           }
-          damage = get_total_damage_for_on_receiving_dmg_stat_con(hitter, real_hitter, damage);
+          damage = total_damage_for_on_receiving_dmg_stat_con(hitter, real_hitter, damage);
           if (! damage) {
             IF_DEBUG2 { real_hitter->log("No con damage"); }
             return false;

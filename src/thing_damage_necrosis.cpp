@@ -124,7 +124,7 @@ int Thing::on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int dama
   return damage;
 }
 
-int Thing::get_total_damage_for_on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::total_damage_for_on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -246,7 +246,7 @@ int Thing::on_owner_attacking_dmg_necrosis(Thingp owner, Thingp victim, int dama
   return damage;
 }
 
-int Thing::get_total_damage_for_on_attacking_dmg_necrosis(Thingp victim, int damage)
+int Thing::total_damage_for_on_attacking_dmg_necrosis(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {

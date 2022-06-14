@@ -137,7 +137,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_water() && (what == "is_immune_to_water")) {
     return true;
   }
-  if (gfx_flickers() && (what == "gfx_flickers")) {
+  if (gfx_pixelart_flickers() && (what == "gfx_pixelart_flickers")) {
     return true;
   }
   if (gfx_pixelart_shadow_long() && (what == "gfx_pixelart_shadow_long")) {
@@ -1401,8 +1401,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "environ_avoids_water") {
     return &Thing::environ_avoids_water;
   }
-  if (what == "gfx_flickers") {
-    return &Thing::gfx_flickers;
+  if (what == "gfx_pixelart_flickers") {
+    return &Thing::gfx_pixelart_flickers;
   }
   if (what == "gfx_pixelart_health_bar_only_when_awake") {
     return &Thing::gfx_pixelart_health_bar_only_when_awake;

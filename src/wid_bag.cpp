@@ -95,7 +95,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     //
     // Show a small visible button key
     //
-    auto slot = game->level->inventory_get_slot(t);
+    auto slot = game->level->inventory_slot(t);
     if (slot != -1) {
       auto w = wid_new_square_button(wid_bag_container, "wid_bag button" + t->to_string());
       wid_set_pos(w, tl, tl);

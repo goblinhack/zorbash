@@ -123,7 +123,7 @@ void Level::place_the_grid(void)
   }
 }
 
-int Level::get_total_monst_hp_level(void)
+int Level::total_monst_hp_level(void)
 {
   int hp = 0;
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
@@ -140,7 +140,7 @@ int Level::get_total_monst_hp_level(void)
   return hp;
 }
 
-int Level::get_total_monst_damage_level(void)
+int Level::total_monst_damage_level(void)
 {
   int damage = 0;
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
@@ -166,7 +166,7 @@ int Level::get_total_monst_damage_level(void)
   return damage;
 }
 
-int Level::get_total_loot_level(void)
+int Level::total_loot_level(void)
 {
   int value = 0;
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
@@ -179,7 +179,7 @@ int Level::get_total_loot_level(void)
   return value;
 }
 
-int Level::get_total_food_level(void)
+int Level::total_food_level(void)
 {
   int value = 0;
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)

@@ -210,7 +210,7 @@ int Tp::gfx_ascii_mode_color_spread_green(void) const { return _gfx_ascii_mode_c
 int Tp::gfx_ascii_mode_color_spread_hue(void) const { return _gfx_ascii_mode_color_spread_hue; }
 int Tp::gfx_ascii_mode_color_spread_red(void) const { return _gfx_ascii_mode_color_spread_red; }
 int Tp::gfx_ascii_mode_shown(void) const { return _gfx_ascii_mode_shown; }
-int Tp::gfx_flickers(void) const { return _gfx_flickers; }
+int Tp::gfx_pixelart_flickers(void) const { return _gfx_pixelart_flickers; }
 int Tp::gfx_glows(void) const { return _gfx_glows; }
 int Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
 int Tp::gfx_oversized_and_on_floor(void) const { return _gfx_oversized_and_on_floor; }
@@ -750,7 +750,7 @@ void Tp::gfx_ascii_mode_color_spread_green_set(int v) { _gfx_ascii_mode_color_sp
 void Tp::gfx_ascii_mode_color_spread_hue_set(int v) { _gfx_ascii_mode_color_spread_hue = v; }
 void Tp::gfx_ascii_mode_color_spread_red_set(int v) { _gfx_ascii_mode_color_spread_red = v; }
 void Tp::gfx_ascii_mode_shown_set(int v) { _gfx_ascii_mode_shown = v; }
-void Tp::gfx_flickers_set(int v) { _gfx_flickers = v; }
+void Tp::gfx_pixelart_flickers_set(int v) { _gfx_pixelart_flickers = v; }
 void Tp::gfx_glows_set(int v) { _gfx_glows = v; }
 void Tp::gfx_on_fire_anim_set(int v) { _gfx_on_fire_anim = v; }
 void Tp::gfx_oversized_and_on_floor_set(int v) { _gfx_oversized_and_on_floor = v; }

@@ -160,7 +160,7 @@ private:
   int _gfx_ascii_mode_color_spread_hue {};
   int _gfx_ascii_mode_color_spread_red {};
   int _gfx_ascii_mode_shown {};
-  int _gfx_flickers {};
+  int _gfx_pixelart_flickers {};
   int _gfx_glows {};
   int _gfx_on_fire_anim {};
   int _gfx_oversized_and_on_floor {};
@@ -1155,7 +1155,7 @@ public:
   int gfx_ascii_mode_color_spread_hue(void) const;
   int gfx_ascii_mode_color_spread_red(void) const;
   int gfx_ascii_mode_shown(void) const;
-  int gfx_flickers(void) const;
+  int gfx_pixelart_flickers(void) const;
   int gfx_glows(void) const;
   int gfx_on_fire_anim(void) const;
   int gfx_oversized_and_on_floor(void) const;
@@ -1695,7 +1695,7 @@ public:
   void gfx_ascii_mode_color_spread_hue_set(int v);
   void gfx_ascii_mode_color_spread_red_set(int v);
   void gfx_ascii_mode_shown_set(int v);
-  void gfx_flickers_set(int v);
+  void gfx_pixelart_flickers_set(int v);
   void gfx_glows_set(int v);
   void gfx_on_fire_anim_set(int v);
   void gfx_oversized_and_on_floor_set(int v);
