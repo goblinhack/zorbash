@@ -10,7 +10,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.damage_crush_chance_d1000(self, 0, 1000)
     my.damage_crush_dice(self, "1d6")
     my.gfx_ascii_mode_shown(self, True)
-    my.gfx_flickers(self, True)
+    my.gfx_pixelart_flickers(self, True)
     my.gfx_glows(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)

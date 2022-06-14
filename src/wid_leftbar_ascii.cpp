@@ -117,7 +117,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Falling)");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, UI_WID_STYLE_RED);
   }
 
   if (t->is_sleeping) {
@@ -128,7 +128,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Sleeping)");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, UI_WID_STYLE_DARK);
   }
 
   if (t->is_dead) {
@@ -145,7 +145,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     } else {
       wid_set_text(w, "(Broken)");
     }
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, UI_WID_STYLE_DARK);
   } else if (t->is_monst() && (game->tick_current - t->tick_last_i_attacked() < 2)) {
     y_at++;
     TRACE_NO_INDENT();
@@ -154,7 +154,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Attacking)");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, UI_WID_STYLE_RED);
   } else if (t->is_monst() && (t->stuck_count() > 1)) {
     y_at++;
     TRACE_NO_INDENT();
@@ -163,7 +163,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Stuck)");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, UI_WID_STYLE_RED);
   } else if (t->is_monst() && (t->idle_count() > 1)) {
     y_at++;
     TRACE_NO_INDENT();
@@ -172,7 +172,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Idle)");
-    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_style(w, UI_WID_STYLE_DARK);
   }
 
   if (player && t->maybe_aip()) {
@@ -185,7 +185,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
         point br = make_point(width - 1, y_at);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "(Hunting)");
-        wid_set_style(w, UI_WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_DARK);
       }
     }
   }
@@ -199,7 +199,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       point br = make_point(width - 1, y_at);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Open)");
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      wid_set_style(w, UI_WID_STYLE_GREEN);
     } else {
       y_at++;
       TRACE_NO_INDENT();
@@ -208,7 +208,7 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       point br = make_point(width - 1, y_at);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Closed)");
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      wid_set_style(w, UI_WID_STYLE_DARK);
     }
   }
 

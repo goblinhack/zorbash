@@ -143,19 +143,19 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int32_t relx, int32_t re
     wid_level_description->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Level reconn");
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 
-    snprintf(tmp, sizeof(tmp) - 1, "Monst HP estimate %u", l->get_total_monst_hp_level());
+    snprintf(tmp, sizeof(tmp) - 1, "Monst HP estimate %u", l->total_monst_hp_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 
-    snprintf(tmp, sizeof(tmp) - 1, "Monst damage est. %u", l->get_total_monst_damage_level());
+    snprintf(tmp, sizeof(tmp) - 1, "Monst damage est. %u", l->total_monst_damage_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 
-    snprintf(tmp, sizeof(tmp) - 1, "Loot value est.   %u", l->get_total_loot_level());
+    snprintf(tmp, sizeof(tmp) - 1, "Loot value est.   %u", l->total_loot_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 
-    snprintf(tmp, sizeof(tmp) - 1, "Food HP est.      %u", l->get_total_food_level());
+    snprintf(tmp, sizeof(tmp) - 1, "Food HP est.      %u", l->total_food_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
 
     auto        l = ctx->levels[ y ][ x ];

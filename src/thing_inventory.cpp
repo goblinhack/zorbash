@@ -748,7 +748,7 @@ void Level::inventory_dump(void)
   }
 }
 
-int Level::inventory_get_slot(Thingp item)
+int Level::inventory_slot(Thingp item)
 {
   TRACE_NO_INDENT();
 

@@ -10,6 +10,8 @@
 #include <strings.h> // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
+fcolor FCOLOR_NONE;
+
 color AQUAMARINE;
 color AQUAMARINE1;
 color AQUAMARINE2;

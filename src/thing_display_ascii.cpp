@@ -14,9 +14,9 @@
 #include "my_unicode.hpp"
 
 //
-// For things liek walls we color them differently so it is easier to see.
+// For things like walls we color them differently so it is easier to see.
 //
-void Thing::blit_ascii_adjust_color(color &c, bool fg)
+void Thing::blit_ascii_adjust_color2(color &c, bool fg)
 {
   if (gfx_ascii_mode_color_spread_hue()) {
     if (fg) {
@@ -83,6 +83,49 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg)
       c.a = new_col;
     }
   }
+}
+
+//
+// Adjust tile for light source color
+//
+void Thing::blit_ascii_adjust_color(color &c, bool fg)
+{
+  blit_ascii_adjust_color2(c, fg);
+
+  fcolor l = level->ascii_light_source_no_check(curr_at);
+
+  if (! fg) {
+    return;
+  }
+
+  if (l == COLOR_NONE) {
+    return;
+  }
+
+  if (l == BLACK) {
+    return;
+  }
+
+  color c2  = l.tocolor();
+  float dim = 0.5;
+
+  int r = ((((float) c.r) * dim) + (float) c2.r) / 2;
+  if (r > 255) {
+    r = 255;
+  }
+  c.r = r;
+
+  int g = ((((float) c.g) * dim) + (float) c2.g) / 2;
+  if (g > 255) {
+    g = 255;
+  }
+  c.g = g;
+
+  int b = ((((float) c.b) * dim) + (float) c2.b) / 2;
+  if (b > 255) {
+    b = 255;
+  }
+  c.b = b;
 }
 
 void Thing::blit_ascii_at(point p, bool lit)

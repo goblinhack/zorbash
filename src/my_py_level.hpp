@@ -28,7 +28,7 @@ PyObject *level_environ_avoids_poison_at(PyObject *obj, PyObject *args, PyObject
 PyObject *level_environ_avoids_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_gfx_flickers_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_gfx_pixelart_flickers_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_pixelart_health_bar_only_when_awake_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_pixelart_shadow_long_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_pixelart_show_asleep_anim_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -869,7 +869,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
 
           float light_scale = l->light_dist;
 
-          if (t->gfx_flickers()) {
+          if (t->gfx_pixelart_flickers()) {
             if (l->flicker_count++ > LIGHT_FLICKER_SPEED) {
               l->flicker       = ((((float) non_pcg_random_range(0, (int) light_scale))) / 8.0);
               l->flicker_count = 0;
@@ -949,7 +949,7 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
             continue;
           }
 
-          if (t->gfx_flickers()) {
+          if (t->gfx_pixelart_flickers()) {
             if (non_pcg_random_range(0, 100) < 10) {
               l->flicker = non_pcg_random_range(0, 10);
             }

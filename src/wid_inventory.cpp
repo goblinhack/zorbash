@@ -844,7 +844,7 @@ static void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, 
     //
     // Show a small visible button key
     //
-    auto slot = game->level->inventory_get_slot(t);
+    auto slot = game->level->inventory_slot(t);
     if (slot != -1) {
       auto w = wid_new_square_button(parent, "wid_bag button" + t->to_string());
       wid_set_pos(w, tl, tl);

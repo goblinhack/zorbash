@@ -74,7 +74,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_idle_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_noise(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_stuck_count(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_gfx_flickers(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_pixelart_flickers(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_health_bar_only_when_awake(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_shadow_long(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_show_asleep_anim(PyObject *obj, PyObject *args, PyObject *keywds);

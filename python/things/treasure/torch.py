@@ -14,7 +14,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.collision_hit_priority(self, 1)
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_mode_shown(self, True)
-    my.gfx_flickers(self, True)
+    my.gfx_pixelart_flickers(self, True)
     my.gfx_glows(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
