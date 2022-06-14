@@ -292,6 +292,11 @@ public:
   /////////////////////////////////////////////////////////////////////////
 
   //
+  // Only used in ascii mode and updated per frame
+  //
+  std::array< std::array< color, MAP_HEIGHT >, MAP_WIDTH > _ascii_light_source {};
+
+  //
   // Update thing_fini.cpp when adding more references to Thingp
   //
   Thingp player     = {};
@@ -808,9 +813,6 @@ public:
   uint8_t is_heavy(const point p);
   uint8_t is_key(const int x, const int y);
   uint8_t is_key(const point p);
-  uint8_t is_lava(const int x, const int y);
-  uint8_t is_lava(const point p);
-  uint8_t is_lava_no_check(const int x, const int y);
   uint8_t is_currently_pixelart_raycast_lit(const int x, const int y);
   uint8_t is_currently_pixelart_raycast_lit(const point p);
   uint8_t is_currently_pixelart_raycast_lit_no_check(const int x, const int y);
@@ -1037,8 +1039,6 @@ public:
   void is_heavy_unset(const int x, const int y);
   void is_key_set(const int x, const int y);
   void is_key_unset(const int x, const int y);
-  void is_lava_set(const int x, const int y);
-  void is_lava_unset(const int x, const int y);
   void is_light_blocker_for_monst_no_check_set(const int x, const int y);
   void is_light_blocker_for_monst_no_check_unset(const int x, const int y);
   void is_light_blocker_for_monst_set(const int x, const int y);
@@ -1051,11 +1051,6 @@ public:
   void is_lit_ever_no_check_unset(const int x, const int y);
   void is_lit_ever_set(const int x, const int y);
   void is_lit_ever_unset(const int x, const int y);
-  void is_map_changed_no_check_set(const int x, const int y);
-  void is_map_changed_no_check_set(const int x, const int y, uint32_t v);
-  void is_map_changed_no_check_unset(const int x, const int y);
-  void is_map_changed_set(const int x, const int y);
-  void is_map_changed_unset(const int x, const int y);
   void is_mob_set(const int x, const int y);
   void is_mob_unset(const int x, const int y);
   void is_monst_set(const int x, const int y);
@@ -1181,6 +1176,30 @@ public:
   uint32_t get_is_map_changed(const point p);
   uint32_t get_is_map_changed_no_check(const int x, const int y);
   uint32_t get_is_map_changed_no_check(const point p);
+  void     is_map_changed_no_check_set(const int x, const int y);
+  void     is_map_changed_no_check_set(const int x, const int y, uint32_t v);
+  void     is_map_changed_no_check_unset(const int x, const int y);
+  void     is_map_changed_set(const int x, const int y);
+  void     is_map_changed_unset(const int x, const int y);
+
+  uint8_t is_lava(const int x, const int y);
+  uint8_t is_lava(const point p);
+  uint8_t is_lava_no_check(const int x, const int y);
+  void    is_lava_set(const int x, const int y);
+  void    is_lava_unset(const int x, const int y);
+
+  color get_ascii_light_source(const int x, const int y);
+  color get_ascii_light_source(const point p);
+  color get_ascii_light_source_no_check(const int x, const int y);
+  color get_ascii_light_source_no_check(const point p);
+  void  ascii_light_source_set(const point p, color v);
+  void  ascii_light_source_set(const int x, const int y, color v);
+  void  ascii_light_source_set_no_check(const point p, color v);
+  void  ascii_light_source_set_no_check(const int x, const int y, color v);
+  void  ascii_light_source_unset(const point p);
+  void  ascii_light_source_unset(const int x, const int y);
+  void  ascii_light_source_unset_no_check(const point p);
+  void  ascii_light_source_unset_no_check(const int x, const int y);
 
   std::deque< point >  flood_fill(point) const;
   std::deque< point >  flood_fill_points(point, std::function< int(Thingp) > filter);
