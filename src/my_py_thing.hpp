@@ -603,7 +603,7 @@ PyObject *thing_unused_flag89(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag90(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag91(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag92(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_jump_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_path_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_mode_color_is_animated(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_animated(PyObject *obj, PyObject *args, PyObject *keywds);

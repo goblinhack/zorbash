@@ -115,7 +115,6 @@ public:
     r += i.r;
     g += i.g;
     b += i.b;
-    a += i.a;
   }
 
   friend bool operator==(const fcolor &c, const fcolor &b)
@@ -130,32 +129,26 @@ public:
   color tocolor(void)
   {
     color c;
-    float cnt = count;
 
-    c.r = r;
-    if (cnt) {
-      c.r /= cnt;
+    if (count == 0) {
+      c.r = r;
+      c.g = g;
+      c.b = b;
+    } else {
+      c.r = r / count;
+      c.g = g / count;
+      c.b = b / count;
     }
+
     if (c.r > 255) {
       c.r = 255;
-    }
-
-    c.g = g;
-    if (cnt) {
-      c.g /= cnt;
     }
     if (c.g > 255) {
       c.g = 255;
     }
-
-    c.b = b;
-    if (cnt) {
-      c.b /= cnt;
-    }
     if (c.b > 255) {
       c.b = 255;
     }
-
     c.a = 255;
 
     return c;

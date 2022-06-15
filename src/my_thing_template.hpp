@@ -632,7 +632,7 @@ private:
   int _unused_flag9 {};
   int _unused_flag90 {};
   int _unused_flag91 {};
-  int _unused_flag92 {};
+  int _is_jump_blocker {};
   int _is_cursor_path_blocker {};
   int _gfx_ascii_mode_color_is_animated {};
   int _gfx_ascii_animated {};
@@ -1625,7 +1625,7 @@ public:
   int unused_flag8(void) const;
   int unused_flag90(void) const;
   int unused_flag91(void) const;
-  int unused_flag92(void) const;
+  int is_jump_blocker(void) const;
   int is_cursor_path_blocker(void) const;
   int gfx_ascii_mode_color_is_animated(void) const;
   int gfx_ascii_animated(void) const;
@@ -2295,7 +2295,7 @@ public:
   void unused_flag8_set(int v);
   void unused_flag90_set(int v);
   void unused_flag91_set(int v);
-  void unused_flag92_set(int v);
+  void is_jump_blocker_set(int v);
   void is_cursor_path_blocker_set(int v);
   void gfx_ascii_mode_color_is_animated_set(int v);
   void gfx_ascii_animated_set(int v);

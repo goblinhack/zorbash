@@ -183,9 +183,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // Block jumping over walls.
   //
-  if (in_the_way(curr_at, to, 1).size()) {
+  auto obstacles = in_the_way_for_jumping(curr_at, to, 1);
+  if (obstacles.size()) {
     if (is_player()) {
-      msg("You can't jump over that.");
+      auto t = obstacles[ 0 ];
+      msg("You can't jump over %s!", t->text_the().c_str());
     }
     dbg("You can't jump over that");
     return false;

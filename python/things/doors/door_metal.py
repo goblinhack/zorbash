@@ -40,6 +40,7 @@ def tp_init(name):
     my.is_gas_blocker(self, True)
     my.is_hittable(self, True)
     my.is_interesting(self, True)
+    my.is_jump_blocker(self, True)
     my.is_light_blocker(self, True)
     my.is_obs_wall_or_door(self, True)
     my.noise_blocker(self, True)

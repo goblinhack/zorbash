@@ -1,7 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- torches and other light sources should cast alpha                                                                                            -->
+<!-- if you click on a sewer from far away, it does not enter                                                                                     -->
+<!-- if you try to hit a monster whilst in a web, the message is rubbish                                                                          -->
 <!-- ascii check list - particles / lasers / gas / water / projectiles / jumping                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

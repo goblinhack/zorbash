@@ -41,6 +41,7 @@ def tp_init(
     my.is_described_when_hovering_over(self, True)
     my.is_gas_blocker(self, True)
     my.is_hittable(self, True)
+    my.is_jump_blocker(self, True)
     my.is_light_blocker(self, True)
     my.is_obs_wall_or_door(self, True)
     my.is_rock(self, True)

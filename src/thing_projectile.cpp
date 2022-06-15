@@ -65,7 +65,7 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
   // Projectiles hit the first thing in the way. But ignore if it hits
   // ourselves. i.e. if we're in foilage
   //
-  auto collatoral_damage = in_the_way(curr_at, target->curr_at, 1);
+  auto collatoral_damage = in_the_way_for_firing(curr_at, target->curr_at, 1);
   if (collatoral_damage.size()) {
     target = collatoral_damage[ 0 ];
 

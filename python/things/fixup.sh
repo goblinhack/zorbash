@@ -500,7 +500,7 @@ do
       unused_flag9 \
       unused_flag90 \
       unused_flag91 \
-      unused_flag92 \
+      is_jump_blocker \
       is_cursor_path_blocker \
       gfx_ascii_mode_color_is_animated \
       gfx_ascii_animated \
