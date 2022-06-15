@@ -105,7 +105,7 @@ def init():
     tp_init(
         name="cloak_fire",
         text_long_name="fire cloak",
-        text_short_name="fire cloak",
+        text_short_name="cloak, fire",
     )
 
 

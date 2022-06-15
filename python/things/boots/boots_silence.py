@@ -77,7 +77,7 @@ def init():
     tp_init(
         name="boots_silence",
         text_long_name="sneakers of silence",
-        text_short_name="sneakers of silence",
+        text_short_name="boots, quiet",
     )
 
 

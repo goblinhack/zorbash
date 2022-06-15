@@ -273,7 +273,7 @@ bool Thing::carry(Thingp item, bool can_equip)
         return true;
       }
 
-      if (item->is_collect_as_keys()) {
+      if (item->is_collected_as_keys()) {
         dbg("Auto carry as keys");
         return true;
       }

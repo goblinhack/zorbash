@@ -14,8 +14,8 @@ def on_open(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "door_open")
 
 
-def tp_init(name, text_long_name):
-    self = tp.Tp(name, text_long_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.capacity_height(self, 8)
     my.capacity_width(self, 8)
@@ -84,7 +84,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="chest1", text_long_name="small treasure chest")
+    tp_init(name="chest1", text_long_name="small treasure chest", text_short_name="chest, small")
 
 
 init()

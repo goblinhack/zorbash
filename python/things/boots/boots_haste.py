@@ -68,7 +68,7 @@ def init():
     tp_init(
         name="boots_haste",
         text_long_name="boots of haste",
-        text_short_name="boots of haste",
+        text_short_name="boots, haste",
     )
 
 

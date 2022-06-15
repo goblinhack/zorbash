@@ -77,7 +77,7 @@ def init():
     tp_init(
         name="armor_fish_scale",
         text_long_name="fish scale armor",
-        text_short_name="fish scale armor",
+        text_short_name="armor, fish",
     )
 
 

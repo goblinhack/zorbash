@@ -66,7 +66,7 @@ def init():
     tp_init(
         name="armor_lime_scale",
         text_long_name="lime scale armor",
-        text_short_name="lime scale armor",
+        text_short_name="armor, lime",
     )
 
 

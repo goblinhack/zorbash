@@ -257,7 +257,7 @@ bool Thing::matches(const std::string &what)
   if (is_collectable() && (what == "is_collectable")) {
     return true;
   }
-  if (is_collect_as_keys() && (what == "is_collect_as_keys")) {
+  if (is_collected_as_keys() && (what == "is_collected_as_keys")) {
     return true;
   }
   if (is_collected_as_gold() && (what == "is_collected_as_gold")) {
@@ -1629,8 +1629,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_collectable") {
     return &Thing::is_collectable;
   }
-  if (what == "is_collect_as_keys") {
-    return &Thing::is_collect_as_keys;
+  if (what == "is_collected_as_keys") {
+    return &Thing::is_collected_as_keys;
   }
   if (what == "is_collected_as_gold") {
     return &Thing::is_collected_as_gold;

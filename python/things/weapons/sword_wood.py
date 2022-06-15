@@ -74,7 +74,7 @@ def init():
     tp_init(
         name="sword_wood",
         text_long_name="wooden short sword",
-        text_short_name="wooden short sword",
+        text_short_name="sword, short",
     )
 
 

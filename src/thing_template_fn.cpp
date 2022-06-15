@@ -322,7 +322,7 @@ int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_cloak(void) const { return _is_cloak; }
 int Tp::is_cold(void) const { return _is_cold; }
 int Tp::is_collectable(void) const { return _is_collectable; }
-int Tp::is_collect_as_keys(void) const { return _is_collect_as_keys; }
+int Tp::is_collected_as_keys(void) const { return _is_collected_as_keys; }
 int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
 int Tp::is_combustible(void) const { return _is_combustible; }
 int Tp::is_corpse_on_death(void) const { return _is_corpse_on_death; }
@@ -864,7 +864,7 @@ void Tp::is_chasm_set(int v) { _is_chasm = v; }
 void Tp::is_cloak_set(int v) { _is_cloak = v; }
 void Tp::is_cold_set(int v) { _is_cold = v; }
 void Tp::is_collectable_set(int v) { _is_collectable = v; }
-void Tp::is_collect_as_keys_set(int v) { _is_collect_as_keys = v; }
+void Tp::is_collected_as_keys_set(int v) { _is_collected_as_keys = v; }
 void Tp::is_collected_as_gold_set(int v) { _is_collected_as_gold = v; }
 void Tp::is_combustible_set(int v) { _is_combustible = v; }
 void Tp::is_corpse_on_death_set(int v) { _is_corpse_on_death = v; }

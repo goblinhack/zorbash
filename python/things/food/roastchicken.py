@@ -44,7 +44,7 @@ def init():
     tp_init(
         name="food_roastchicken",
         text_long_name="roast chicken",
-        text_short_name="roast chicken",
+        text_short_name="roast chkn",
     )
 
 

@@ -66,7 +66,7 @@ bool wid_rightbar_ascii_create(void)
   }
 
   {
-    y_at ++;
+    y_at++;
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Seed");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -83,7 +83,7 @@ bool wid_rightbar_ascii_create(void)
   }
 
   {
-    y_at ++;
+    y_at++;
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "title name");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -98,7 +98,7 @@ bool wid_rightbar_ascii_create(void)
   }
 
   {
-    y_at ++;
+    y_at++;
     TRACE_AND_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Stats");
     point tl = make_point(0, y_at);
@@ -109,7 +109,7 @@ bool wid_rightbar_ascii_create(void)
   }
 
   {
-    y_at ++;
+    y_at++;
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -127,8 +127,28 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
   }
 
+  if (player->stuck_count() > 1) {
+    y_at++;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_rightbar, "(Stuck)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Stuck)");
+    wid_set_style(w, UI_WID_STYLE_RED);
+  } else if (player->is_sleeping) {
+    y_at++;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_rightbar, "(Sleeping)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Sleeping)");
+    wid_set_style(w, UI_WID_STYLE_DARK);
+  }
+
   {
-    y_at ++;
+    y_at++;
     TRACE_AND_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Vitality");
     point tl = make_point(0, y_at);
@@ -141,7 +161,7 @@ bool wid_rightbar_ascii_create(void)
   ///////////////////////////////////////////////////////////////////////////
   // Health
   ///////////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
@@ -189,7 +209,7 @@ bool wid_rightbar_ascii_create(void)
   ///////////////////////////////////////////////////////////////////////////
   // Stamina
   ///////////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
@@ -235,7 +255,7 @@ bool wid_rightbar_ascii_create(void)
   }
 
   {
-    y_at ++;
+    y_at++;
     TRACE_AND_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Stats");
     point tl = make_point(0, y_at);
@@ -248,7 +268,7 @@ bool wid_rightbar_ascii_create(void)
   ///////////////////////////////////////////////////////////////////////////
   // DEF
   ///////////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Def");
@@ -346,7 +366,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
   }
-  y_at ++;
+  y_at++;
 
   ///////////////////////////////////////////////////////////////////////////
   // CON
@@ -447,7 +467,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
   }
-  y_at ++;
+  y_at++;
 
   auto itemsp = player->maybe_itemsp();
   if (! itemsp) {
@@ -473,7 +493,7 @@ bool wid_rightbar_ascii_create(void)
     auto iter = player->equip_get(e);
     if (iter) {
       {
-        y_at ++;
+        y_at++;
         TRACE_AND_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "equipment");
         point tl = make_point(0, y_at);
@@ -496,7 +516,7 @@ bool wid_rightbar_ascii_create(void)
   if (1) {
     {
       TRACE_AND_INDENT();
-      y_at ++;
+      y_at++;
       auto w = wid_new_square_button(wid_rightbar, "Shortcuts");
       wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
       point tl = make_point(0, y_at);
@@ -521,7 +541,7 @@ bool wid_rightbar_ascii_create(void)
       }
 
       {
-        y_at ++;
+        y_at++;
         auto  w  = wid_new_square_button(wid_rightbar, "item slot");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -577,7 +597,7 @@ bool wid_rightbar_ascii_create(void)
     if (got_one) {
       {
         TRACE_AND_INDENT();
-        y_at ++;
+        y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Skills");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
         point tl = make_point(0, y_at);
@@ -615,7 +635,7 @@ bool wid_rightbar_ascii_create(void)
               continue;
             }
 
-            y_at ++;
+            y_at++;
             auto  w  = wid_new_plain(wid_rightbar, "Skill");
             point tl = make_point(0, y_at);
             point br = make_point(width - 1, y_at);
@@ -677,7 +697,7 @@ bool wid_rightbar_ascii_create(void)
     if (got_one) {
       {
         TRACE_AND_INDENT();
-        y_at ++;
+        y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Skills");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
         point tl = make_point(0, y_at);
@@ -715,7 +735,7 @@ bool wid_rightbar_ascii_create(void)
               continue;
             }
 
-            y_at ++;
+            y_at++;
             auto  w  = wid_new_plain(wid_rightbar, "Skill");
             point tl = make_point(0, y_at);
             point br = make_point(width - 1, y_at);
@@ -750,7 +770,7 @@ bool wid_rightbar_ascii_create(void)
     if (got_one) {
       {
         TRACE_AND_INDENT();
-        y_at ++;
+        y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Buffs");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
         point tl = make_point(0, y_at);
@@ -764,7 +784,7 @@ bool wid_rightbar_ascii_create(void)
         {
           auto iter = level->thing_find(id);
           if (iter) {
-            y_at ++;
+            y_at++;
             TRACE_AND_INDENT();
             auto  w  = wid_new_square_button(wid_rightbar, "buffs");
             point tl = make_point(0, y_at);
@@ -799,7 +819,7 @@ bool wid_rightbar_ascii_create(void)
     if (got_one) {
       {
         TRACE_AND_INDENT();
-        y_at ++;
+        y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Debuffs");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
         point tl = make_point(0, y_at);
@@ -813,7 +833,7 @@ bool wid_rightbar_ascii_create(void)
         {
           auto iter = level->thing_find(id);
           if (iter) {
-            y_at ++;
+            y_at++;
             TRACE_AND_INDENT();
             auto  w  = wid_new_square_button(wid_rightbar, "debuffs");
             point tl = make_point(0, y_at);

@@ -273,7 +273,7 @@ private:
   int _is_cloak {};
   int _is_cold {};
   int _is_collectable {};
-  int _is_collect_as_keys {};
+  int _is_collected_as_keys {};
   int _is_collected_as_gold {};
   int _is_combustible {};
   int _is_corpse_on_death {};
@@ -1267,7 +1267,7 @@ public:
   int is_cloak(void) const;
   int is_cold(void) const;
   int is_collectable(void) const;
-  int is_collect_as_keys(void) const;
+  int is_collected_as_keys(void) const;
   int is_collected_as_gold(void) const;
   int is_combustible(void) const;
   int is_corpse_on_death(void) const;
@@ -1809,7 +1809,7 @@ public:
   void is_cloak_set(int v);
   void is_cold_set(int v);
   void is_collectable_set(int v);
-  void is_collect_as_keys_set(int v);
+  void is_collected_as_keys_set(int v);
   void is_collected_as_gold_set(int v);
   void is_combustible_set(int v);
   void is_corpse_on_death_set(int v);

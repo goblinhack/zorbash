@@ -75,7 +75,7 @@ def init():
     tp_init(
         name="boots_teleport_emer",
         text_long_name="boots of emergency teleport",
-        text_short_name="boots of emergency teleport",
+        text_short_name="boots emtele",
     )
 
 

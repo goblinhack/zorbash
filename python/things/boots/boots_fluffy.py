@@ -76,7 +76,7 @@ def init():
     tp_init(
         name="boots_fluffy",
         text_long_name="fluffy boots",
-        text_short_name="fluffy boots",
+        text_short_name="boots, fluff",
     )
 
 
