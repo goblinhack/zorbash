@@ -190,7 +190,7 @@ PyObject *thing_is_chasm(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cloak(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cold(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_collectable(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_collect_as_keys(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_collected_as_keys(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_collected_as_gold(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_combustible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_corpse_on_death(PyObject *obj, PyObject *args, PyObject *keywds);

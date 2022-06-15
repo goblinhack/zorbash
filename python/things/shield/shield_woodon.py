@@ -71,7 +71,7 @@ def init():
     tp_init(
         name="shield_woodon",
         text_long_name="woodon shield",
-        text_short_name="woodon shield",
+        text_short_name="shld, woodon",
     )
 
 

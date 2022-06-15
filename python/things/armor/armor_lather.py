@@ -74,7 +74,7 @@ def init():
     tp_init(
         name="armor_lather",
         text_long_name="lathered armor",
-        text_short_name="lathered armor",
+        text_short_name="armor, lathr",
     )
 
 

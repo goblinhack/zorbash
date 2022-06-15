@@ -80,7 +80,7 @@ def init():
     tp_init(
         name="amulet_healing",
         text_long_name="amulet of healing",
-        text_short_name="amulet of healing",
+        text_short_name="amulet, heal",
     )
 
 

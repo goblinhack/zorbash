@@ -1239,7 +1239,7 @@ public:
   int is_cloak(void);
   int is_cold(void);
   int is_collectable(void);
-  int is_collect_as_keys(void);
+  int is_collected_as_keys(void);
   int is_collected_as_gold(void);
   int is_combustible(void);
   int is_corpse_on_death(void);

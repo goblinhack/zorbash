@@ -79,7 +79,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     return;
   }
 
-  if (item->is_collect_as_keys()) {
+  if (item->is_collected_as_keys()) {
     dbg("Inventory particle %s is collected as key", item->to_short_string().c_str());
 
     std::string name = "gold and keys";
@@ -233,7 +233,7 @@ bool Thing::inventory_shortcuts_insert(Thingp item)
     return true;
   }
 
-  if (item->is_collect_as_keys()) {
+  if (item->is_collected_as_keys()) {
     wid_thing_info_fini("collect item as keys");
     keys_incr(item->is_key());
     inventory_particle(item, itemsp->inventory_shortcuts.size() - 1);

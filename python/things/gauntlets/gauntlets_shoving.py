@@ -76,7 +76,7 @@ def init():
     tp_init(
         name="gauntlets_shoving",
         text_long_name="gauntlets of shoving",
-        text_short_name="gauntlets of shoving",
+        text_short_name="gaunt, shove",
     )
 
 

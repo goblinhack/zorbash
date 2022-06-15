@@ -112,7 +112,7 @@ PyObject *level_is_chasm_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cloak_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_collectable_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_collect_as_keys_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_collected_as_keys_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_collected_as_gold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_combustible_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_corpse_at(PyObject *obj, PyObject *args, PyObject *keywds);

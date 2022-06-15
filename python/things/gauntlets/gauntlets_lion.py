@@ -69,7 +69,7 @@ def init():
     tp_init(
         name="gauntlets_lion",
         text_long_name="gauntlets of lion armor",
-        text_short_name="gauntlets of lion armor",
+        text_short_name="gaunt, lion",
     )
 
 

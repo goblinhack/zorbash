@@ -18,6 +18,14 @@ void tp_fixup(void)
       tp->is_tickable_set(true);
     }
 
+    if (tp->is_item()) {
+      if (! tp->is_collected_as_keys() && ! tp->is_collected_as_gold()) {
+        if (tp->text_short_name().size() > 13) {
+          DIE("Tp %s short name is too long and will be truncated?", tp->name().c_str());
+        }
+      }
+    }
+
     if (tp->is_tickable()) {
       tp->is_interesting_set(true);
     }

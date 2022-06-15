@@ -46,7 +46,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="medal_of_valor", text_long_name="medal of valor", text_short_name="medal of valor")
+    tp_init(name="medal_of_valor", text_long_name="medal of valor", text_short_name="medal valor")
 
 
 init()

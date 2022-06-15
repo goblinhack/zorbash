@@ -120,17 +120,6 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     wid_set_style(w, UI_WID_STYLE_RED);
   }
 
-  if (t->is_sleeping) {
-    y_at++;
-    TRACE_NO_INDENT();
-    auto  w  = wid_new_square_button(wid_leftbar, "(Sleeping)");
-    point tl = make_point(0, y_at);
-    point br = make_point(width - 1, y_at);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "(Sleeping)");
-    wid_set_style(w, UI_WID_STYLE_DARK);
-  }
-
   if (t->is_dead) {
     y_at++;
     TRACE_NO_INDENT();
@@ -146,33 +135,46 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_text(w, "(Broken)");
     }
     wid_set_style(w, UI_WID_STYLE_DARK);
-  } else if (t->is_monst() && (game->tick_current - t->tick_last_i_attacked() < 2)) {
-    y_at++;
-    TRACE_NO_INDENT();
-    auto  w  = wid_new_square_button(wid_leftbar, "(Attacking)");
-    point tl = make_point(0, y_at);
-    point br = make_point(width - 1, y_at);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "(Attacking)");
-    wid_set_style(w, UI_WID_STYLE_RED);
-  } else if (t->is_monst() && (t->stuck_count() > 1)) {
-    y_at++;
-    TRACE_NO_INDENT();
-    auto  w  = wid_new_square_button(wid_leftbar, "(Stuck)");
-    point tl = make_point(0, y_at);
-    point br = make_point(width - 1, y_at);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "(Stuck)");
-    wid_set_style(w, UI_WID_STYLE_RED);
-  } else if (t->is_monst() && (t->idle_count() > 1)) {
-    y_at++;
-    TRACE_NO_INDENT();
-    auto  w  = wid_new_square_button(wid_leftbar, "(Idle)");
-    point tl = make_point(0, y_at);
-    point br = make_point(width - 1, y_at);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "(Idle)");
-    wid_set_style(w, UI_WID_STYLE_DARK);
+  } else {
+    if (t->is_monst() && (game->tick_current - t->tick_last_i_attacked() < 2)) {
+      y_at++;
+      TRACE_NO_INDENT();
+      auto  w  = wid_new_square_button(wid_leftbar, "(Attacking)");
+      point tl = make_point(0, y_at);
+      point br = make_point(width - 1, y_at);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "(Attacking)");
+      wid_set_style(w, UI_WID_STYLE_RED);
+    }
+
+    if (t->stuck_count() > 1) {
+      y_at++;
+      TRACE_NO_INDENT();
+      auto  w  = wid_new_square_button(wid_leftbar, "(Stuck)");
+      point tl = make_point(0, y_at);
+      point br = make_point(width - 1, y_at);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "(Stuck)");
+      wid_set_style(w, UI_WID_STYLE_RED);
+    } else if (t->is_sleeping) {
+      y_at++;
+      TRACE_NO_INDENT();
+      auto  w  = wid_new_square_button(wid_leftbar, "(Sleeping)");
+      point tl = make_point(0, y_at);
+      point br = make_point(width - 1, y_at);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "(Sleeping)");
+      wid_set_style(w, UI_WID_STYLE_DARK);
+    } else if (t->is_monst() && (t->idle_count() > 1)) {
+      y_at++;
+      TRACE_NO_INDENT();
+      auto  w  = wid_new_square_button(wid_leftbar, "(Idle)");
+      point tl = make_point(0, y_at);
+      point br = make_point(width - 1, y_at);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "(Idle)");
+      wid_set_style(w, UI_WID_STYLE_DARK);
+    }
   }
 
   if (player && t->maybe_aip()) {
@@ -253,11 +255,21 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     }
   }
 
-  FOR_ALL_EQUIP(e)
+  //
+  // Display all items as one block, and then a blank line
+  //
   {
-    auto iter = t->equip_get(e);
-    if (iter) {
-      wid_leftbar_ascii_describe(level, iter, y_at, width, "+ ");
+    int orig_y_at = y_at;
+    FOR_ALL_EQUIP(e)
+    {
+      auto iter = t->equip_get(e);
+      if (iter) {
+        wid_leftbar_ascii_describe(level, iter, y_at, width, "+ ");
+      }
+    }
+
+    if (orig_y_at != y_at) {
+      y_at++;
     }
   }
 
@@ -319,9 +331,6 @@ bool wid_leftbar_ascii_create(void)
       }
 
       auto player = level->player;
-      if (t->is_player()) {
-        continue;
-      }
 
       if (! get(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
         continue;

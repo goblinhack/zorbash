@@ -201,7 +201,7 @@ std::string Thing::text_short_The(void)
 std::string Thing::text_short_capitalised(void)
 {
   TRACE_NO_INDENT();
-  std::string out = text_long_name();
+  std::string out = text_short_name();
 
   char *b          = (char *) out.c_str();
   char *e          = b + out.size();
@@ -240,7 +240,7 @@ std::string Thing::text_short_and_state_capitalised(void)
     }
   }
 
-  out += text_long_name();
+  out += text_short_name();
 
   char *b          = (char *) out.c_str();
   char *e          = b + out.size();

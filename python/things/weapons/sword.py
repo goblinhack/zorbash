@@ -70,7 +70,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="sword", text_long_name="short sword", text_short_name="short sword")
+    tp_init(name="sword", text_long_name="short sword", text_short_name="sword, short")
 
 
 init()

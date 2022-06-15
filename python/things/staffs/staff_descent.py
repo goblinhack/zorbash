@@ -114,7 +114,7 @@ def init():
     tp_init(
         name="staff_descent",
         text_long_name="staff of sudden descent",
-        text_short_name="staff of descent",
+        text_short_name="staff descent",
     )
 
 

@@ -677,10 +677,10 @@ int Thing::is_collectable(void)
   return (tp()->is_collectable());
 }
 
-int Thing::is_collect_as_keys(void)
+int Thing::is_collected_as_keys(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_collect_as_keys());
+  return (tp()->is_collected_as_keys());
 }
 
 int Thing::is_collected_as_gold(void)

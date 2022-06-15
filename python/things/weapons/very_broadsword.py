@@ -80,7 +80,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="very_broadsword", text_long_name="very broadsword", text_short_name="very broadsword")
+    tp_init(name="very_broadsword", text_long_name="very broadsword", text_short_name="sword, vbroad")
 
 
 init()

@@ -65,7 +65,7 @@ def init():
     tp_init(
         name="amulet_peeking",
         text_long_name="amulet of peeking",
-        text_short_name="amulet of peeking",
+        text_short_name="amulet, peek",
     )
 
 

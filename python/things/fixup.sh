@@ -189,7 +189,7 @@ do
       is_cloak \
       is_cold \
       is_collectable \
-      is_collect_as_keys \
+      is_collected_as_keys \
       is_collected_as_gold \
       is_combustible \
       is_corpse_on_death \
