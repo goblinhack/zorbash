@@ -31,6 +31,13 @@ void Level::update_light_ascii_map(void)
       {
         for (auto &l : t->light_get()) {
           //
+          // In pixel art mode we have more lights. Ignore those.
+          //
+          if (l->fbo != FBO_PLAYER_VISIBLE_LIGHTING) {
+            continue;
+          }
+
+          //
           // Skip lights that are in blocked off rooms the player cannot see
           //
           if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) {
@@ -64,8 +71,6 @@ void Level::update_light_ascii_map(void)
               o += c;
               o.count++;
               ascii_light_source_set_no_check(x, y, o);
-              fcolor o2 = ascii_light_source_no_check(x, y);
-              printf("oc %d\n", o2.count);
             }
           }
         }

@@ -94,7 +94,17 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg)
 
   fcolor l = level->ascii_light_source_no_check(curr_at);
 
+  //
+  // Looks odd if we brighten the floor
+  //
   if (! fg) {
+    return;
+  }
+
+  //
+  // Do not brighten things like wall fg that is black
+  //
+  if (c == BLACK) {
     return;
   }
 
@@ -102,26 +112,22 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg)
     return;
   }
 
-  if (l == BLACK) {
-    return;
-  }
-
   color c2  = l.tocolor();
   float dim = 0.5;
 
-  int r = ((((float) c.r) * dim) + (float) c2.r) / 2;
+  int r = (((float) c.r) * dim) + c2.r;
   if (r > 255) {
     r = 255;
   }
   c.r = r;
 
-  int g = ((((float) c.g) * dim) + (float) c2.g) / 2;
+  int g = (((float) c.g) * dim) + c2.g;
   if (g > 255) {
     g = 255;
   }
   c.g = g;
 
-  int b = ((((float) c.b) * dim) + (float) c2.b) / 2;
+  int b = (((float) c.b) * dim) + c2.b;
   if (b > 255) {
     b = 255;
   }

@@ -947,7 +947,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag91() && (what == "unused_flag91")) {
     return true;
   }
-  if (unused_flag92() && (what == "unused_flag92")) {
+  if (is_jump_blocker() && (what == "is_jump_blocker")) {
     return true;
   }
   if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) {
@@ -2565,8 +2565,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag91") {
     return &Thing::unused_flag91;
   }
-  if (what == "unused_flag92") {
-    return &Thing::unused_flag92;
+  if (what == "is_jump_blocker") {
+    return &Thing::is_jump_blocker;
   }
   if (what == "is_cursor_path_blocker") {
     return &Thing::is_cursor_path_blocker;

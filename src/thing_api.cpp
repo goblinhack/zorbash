@@ -1871,10 +1871,10 @@ int Thing::unused_flag91(void)
   return (tp()->unused_flag91());
 }
 
-int Thing::unused_flag92(void)
+int Thing::is_jump_blocker(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag92());
+  return (tp()->is_jump_blocker());
 }
 
 int Thing::gfx_ascii_mode_color_is_animated(void)

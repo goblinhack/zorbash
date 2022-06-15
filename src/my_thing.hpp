@@ -365,7 +365,8 @@ public:
   Thingp immediate_mob(void);
   Thingp immediate_owner(void);
   Thingp immediate_spawned_owner(void);
-  Thingp in_the_way(const point s, const point e, int x, int y);
+  Thingp in_the_way_for_jumping(const point s, const point e, int x, int y);
+  Thingp in_the_way_for_firing(const point s, const point e, int x, int y);
   Thingp item_targetted_use_at(Thingp wand, point at);
   Thingp item_targetted_use_at(Thingp wand, Thingp target);
   Thingp leader(void);
@@ -379,7 +380,8 @@ public:
   Thingp top_owner(void);
   Thingp top_spawned_owner(void);
 
-  std::vector< Thingp > in_the_way(const point s, const point e, size_t max_elems = 0);
+  std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
+  std::vector< Thingp > in_the_way_for_firing(const point s, const point e, size_t max_elems = 0);
 
   bool ai_blocked_completely(void);
   bool ai_blocked(void);
@@ -1910,7 +1912,7 @@ public:
   int unused_flag8(void);
   int unused_flag90(void);
   int unused_flag91(void);
-  int unused_flag92(void);
+  int is_jump_blocker(void);
   int unused_flag9(void);
   int value(const Thingp it);
   int weapon_damaged_pct(void);
