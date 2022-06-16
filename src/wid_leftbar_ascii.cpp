@@ -44,7 +44,7 @@ static void wid_leftbar_ascii_display(Widp w, point tl, point br)
 
   auto t = level->thing_find(id);
   if (t) {
-    t->blit_ascii_at(tl);
+    t->blit_ascii_at(tl, true /* lit */, true /* leftbar */);
   }
 }
 
