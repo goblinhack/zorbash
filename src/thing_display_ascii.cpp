@@ -159,6 +159,12 @@ void Thing::blit_ascii_at(point p, bool lit)
   const bool bg = false;
   const bool fg = true;
 
+  //
+  // In debug mode, show all monstersj
+  //
+  bool shown_in_bg = gfx_shown_in_bg();
+  IF_DEBUG2 { shown_in_bg = true; }
+
   if (gfx_ascii_mode_shown()) {
     if (lit) {
       //
@@ -197,7 +203,7 @@ void Thing::blit_ascii_at(point p, bool lit)
       //
       // e.g unlit dungeon floor
       //
-      if (gfx_shown_in_bg()) {
+      if (shown_in_bg) {
         if (tile->ascii_bg_col_value != COLOR_NONE) {
           ascii_set_bg(p.x, p.y, UNICODE_BLOCK);
           color c = tile->ascii_bg_col_value;

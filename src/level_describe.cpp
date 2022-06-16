@@ -65,6 +65,20 @@ void Level::describe(point p)
     int y = p.y;
     IF_DEBUG2 { t->log("Active thing cand for describe"); }
     TRACE_AND_INDENT();
+
+    //
+    // Don't allow snooping of monsters we cannot see
+    //
+    if (! get(can_see_currently.can_see, x, y) && t->is_monst()) {
+      IF_DEBUG2
+      {
+        //
+        // Allow snooping in debug mode
+        //
+      }
+      else { continue; }
+    }
+
     if (! get(can_see_currently.can_see, x, y) && ! get(can_see_ever.can_see, x, y)) {
       TRACE_AND_INDENT();
       IF_DEBUG2
@@ -110,6 +124,20 @@ void Level::describe(point p)
     int y = p.y;
     IF_DEBUG2 { t->log("Interesting thing cand for describe"); }
     TRACE_AND_INDENT();
+
+    //
+    // Don't allow snooping of monsters we cannot see
+    //
+    if (! get(can_see_currently.can_see, x, y) && t->is_monst()) {
+      IF_DEBUG2
+      {
+        //
+        // Allow snooping in debug mode
+        //
+      }
+      else { continue; }
+    }
+
     if (! get(can_see_currently.can_see, x, y) && ! get(can_see_ever.can_see, x, y)) {
       TRACE_AND_INDENT();
       IF_DEBUG2
@@ -163,6 +191,20 @@ void Level::describe(point p)
     int y = p.y;
     IF_DEBUG2 { t->log("All thing cand for describe"); }
     TRACE_AND_INDENT();
+
+    //
+    // Don't allow snooping of monsters we cannot see
+    //
+    if (! get(can_see_currently.can_see, x, y) && t->is_monst()) {
+      IF_DEBUG2
+      {
+        //
+        // Allow snooping in debug mode
+        //
+      }
+      else { continue; }
+    }
+
     if (! get(can_see_currently.can_see, x, y) && ! get(can_see_ever.can_see, x, y)) {
       TRACE_AND_INDENT();
       IF_DEBUG2
