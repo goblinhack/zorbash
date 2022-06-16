@@ -11,6 +11,7 @@
 #include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_sdl.hpp"
+#include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
@@ -133,6 +134,20 @@ static uint8_t wid_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
+  }
+
+  //
+  // Toggle gfx mode
+  //
+  if (sdlk_eq(*key, game->config.key_gfx_toggle)) {
+    g_opt_ascii = ! g_opt_ascii;
+    sdl_display_reset();
+    if (g_opt_ascii) {
+      BOTCON("ASCII mode");
+    } else {
+      BOTCON("Pixel art mode");
+    }
+    game->wid_main_menu_select();
   }
 
   //
@@ -326,7 +341,14 @@ static void wid_main_menu_tick(Widp w)
   game_display_title_fg3();
   game_display_title_fg4();
 
-  ascii_putf(1, TERM_HEIGHT - 2, GREEN, BLACK, L"Version " MYVER);
+  ascii_putf(1, 1, GREEN, BLACK, L"Version " MYVER);
+
+  {
+    auto        k    = ::to_string(game->config.key_gfx_toggle);
+    std::string text = " Press %%fg=yellow$" + k + "%%fg=reset$ to toggle the graphics mode.";
+    ascii_putf(TERM_WIDTH / 2 - (length_without_format(text) / 2), TERM_HEIGHT - 1, YELLOW, BLACK,
+               string_to_wstring(text));
+  }
 
   if (game->started) {
     wid_main_menu_destroy();
@@ -334,12 +356,12 @@ static void wid_main_menu_tick(Widp w)
 
   if (! g_opt_player_name.empty()) {
     auto player_name = "Player name: '" + g_opt_player_name + "'";
-    ascii_putf(1, TERM_HEIGHT - 3, YELLOW, BLACK, string_to_wstring(player_name));
+    ascii_putf(1, 2, YELLOW, BLACK, string_to_wstring(player_name));
   }
 
   if (! g_opt_seed_name.empty()) {
     auto seed_name = "Seed: '" + g_opt_seed_name + "'";
-    ascii_putf(1, TERM_HEIGHT - 4, YELLOW, BLACK, string_to_wstring(seed_name));
+    ascii_putf(1, 3, YELLOW, BLACK, string_to_wstring(seed_name));
   }
 }
 

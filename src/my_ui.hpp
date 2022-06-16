@@ -73,7 +73,7 @@
 #define UI_WID_STYLE_RED             2
 #define UI_WID_STYLE_SOLID_DEFAULT   5
 #define UI_WID_STYLE_SOLID_NONE      0
-#define UI_WID_STYLE_SPARSE_NONE     -1
+#define UI_WID_STYLE_SPARSE_NONE     -1 // Used for widgets with their own backgrounds
 #define UI_WID_STYLE_VERT_DARK       8
 #define UI_WID_STYLE_VERT_LIGHT      9
 

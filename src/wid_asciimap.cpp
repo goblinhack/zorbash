@@ -50,7 +50,7 @@ bool wid_asciimap_init(void)
   point br = tl + point(width - 1, height - 1);
 
   wid_asciimap = wid_new_square_window("wid asciimap");
-  wid_set_style(wid_asciimap, UI_WID_STYLE_SPARSE_NONE);
+  wid_set_shape_none(wid_asciimap);
   wid_set_pos(wid_asciimap, tl, br);
   wid_set_on_display(wid_asciimap, wid_asciimap_display);
   wid_set_ignore_scroll_events(wid_asciimap, true);
