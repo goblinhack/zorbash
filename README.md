@@ -245,13 +245,13 @@ only with windows to follow later.
 
 Comments and suggestions welcome.
 
-Ascii and pixel art modes
+Ascii and pixel art modes (can be toggled)
 -------------------------
 
 <p align="center">
-<img alt="Light" src="pics/pixelart/screenshot.1.png" width="45%">
+<img alt="Pixel art" src="pics/pixelart/screenshot.1.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Dark" src="pics/ascii/screenshot.1.png" width="45%">
+<img alt="Ascii art" src="pics/ascii/screenshot.1.png" width="45%">
 </p>
 
 Yet More Screenshots
