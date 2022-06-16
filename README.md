@@ -247,7 +247,12 @@ Comments and suggestions welcome.
 
 Screenshots
 -----------
-![Alt text](pics/screenshot.1.png?raw=true "")
+
+<p float="left">
+<img src="/pics/screenshot.1.png" width="100" />
+<img src="/pics/screenshot.1.png" width="100" />
+</p>
+
 ![Alt text](pics/screenshot.2.png?raw=true "")
 ![Alt text](pics/screenshot.3.png?raw=true "")
 ![Alt text](pics/screenshot.4.png?raw=true "")
