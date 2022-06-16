@@ -114,7 +114,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       wid_set_bg_tilename(w, "ui_tile_bg");
       wid_set_fg_tilename(w, tile->name);
       wid_set_color(w, WID_COLOR_BG, WHITE);
-      wid_set_style(w, UI_WID_STYLE_SPARSE_NONE);
     }
 
     wid_update(wid_popup_window->wid_popup_container);
