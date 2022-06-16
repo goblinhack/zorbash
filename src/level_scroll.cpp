@@ -161,17 +161,17 @@ if (player) {
   }
 
   if (g_opt_ascii) {
-    if (map_at.x < 0) {
-      map_at.x = 0;
-    }
-    if (map_at.y < 0) {
-      map_at.y = 0;
-    }
     if (map_at.x > MAP_WIDTH - TILES_VISIBLE_ACROSS) {
       map_at.x = MAP_WIDTH - TILES_VISIBLE_ACROSS;
     }
     if (map_at.y > MAP_HEIGHT - TILES_VISIBLE_DOWN) {
       map_at.y = MAP_HEIGHT - TILES_VISIBLE_DOWN;
+    }
+    if (map_at.x < 0) {
+      map_at.x = 0;
+    }
+    if (map_at.y < 0) {
+      map_at.y = 0;
     }
   }
 
@@ -338,17 +338,17 @@ void Level::scroll_map_set_target(void)
   // Don't allow scrolling off the map
   //
   if (g_opt_ascii) {
-    if (map_wanted_at.x < 0) {
-      map_wanted_at.x = 0;
-    }
-    if (map_wanted_at.y < 0) {
-      map_wanted_at.y = 0;
-    }
     if (map_wanted_at.x > MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1)) {
       map_wanted_at.x = MAP_WIDTH - (TILES_VISIBLE_ACROSS - 1);
     }
     if (map_wanted_at.y > MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1)) {
       map_wanted_at.y = MAP_HEIGHT - (TILES_VISIBLE_DOWN - 1);
+    }
+    if (map_wanted_at.x < 0) {
+      map_wanted_at.x = 0;
+    }
+    if (map_wanted_at.y < 0) {
+      map_wanted_at.y = 0;
     }
   }
 }
