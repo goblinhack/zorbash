@@ -119,39 +119,39 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_AC_BACK) || (k.sym == SDLK_AC_BACK)) {
-    return "AC Back";
+    return "<AC Back>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AC_BOOKMARKS) || (k.sym == SDLK_AC_BOOKMARKS)) {
-    return "AC Bookmarks";
+    return "<AC Bookmarks>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AC_FORWARD) || (k.sym == SDLK_AC_FORWARD)) {
-    return "AC Forward";
+    return "<AC Forward>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AC_HOME) || (k.sym == SDLK_AC_HOME)) {
-    return "AC Home";
+    return "<AC Home>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AC_REFRESH) || (k.sym == SDLK_AC_REFRESH)) {
-    return "AC Refresh";
+    return "<AC Refresh>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AC_SEARCH) || (k.sym == SDLK_AC_SEARCH)) {
-    return "AC Search";
+    return "<AC Search>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AC_STOP) || (k.sym == SDLK_AC_STOP)) {
-    return "AC Stop";
+    return "<AC Stop>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AGAIN) || (k.sym == SDLK_AGAIN)) {
-    return "Again";
+    return "<Again>";
   }
 
   if ((k.scancode == SDL_SCANCODE_ALTERASE) || (k.sym == SDLK_ALTERASE)) {
-    return "AltErase";
+    return "<AltErase>";
   }
 
   if ((k.scancode == SDL_SCANCODE_APOSTROPHE) || (k.sym == SDLK_QUOTE)) {
@@ -159,27 +159,27 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_APPLICATION) || (k.sym == SDLK_APPLICATION)) {
-    return "Application";
+    return "<Application>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AUDIOMUTE) || (k.sym == SDLK_AUDIOMUTE)) {
-    return "AudioMute";
+    return "<AudioMute>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AUDIONEXT) || (k.sym == SDLK_AUDIONEXT)) {
-    return "AudioNext";
+    return "<AudioNext>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AUDIOPLAY) || (k.sym == SDLK_AUDIOPLAY)) {
-    return "AudioPlay";
+    return "<AudioPlay>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AUDIOPREV) || (k.sym == SDLK_AUDIOPREV)) {
-    return "AudioPrev";
+    return "<AudioPrev>";
   }
 
   if ((k.scancode == SDL_SCANCODE_AUDIOSTOP) || (k.sym == SDLK_AUDIOSTOP)) {
-    return "AudioStop";
+    return "<AudioStop>";
   }
 
   if ((k.scancode == SDL_SCANCODE_B) || (k.sym == SDLK_b)) {
@@ -191,15 +191,15 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_BACKSPACE) || (k.sym == SDLK_BACKSPACE)) {
-    return "Backspace";
+    return "<Backspace>";
   }
 
   if ((k.scancode == SDL_SCANCODE_BRIGHTNESSDOWN) || (k.sym == SDLK_BRIGHTNESSDOWN)) {
-    return "BrightnessDown";
+    return "<BrightnessDown>";
   }
 
   if ((k.scancode == SDL_SCANCODE_BRIGHTNESSUP) || (k.sym == SDLK_BRIGHTNESSUP)) {
-    return "BrightnessUp";
+    return "<BrightnessUp>";
   }
 
   if ((k.scancode == SDL_SCANCODE_C) || (k.sym == SDLK_c)) {
@@ -207,23 +207,23 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_CALCULATOR) || (k.sym == SDLK_CALCULATOR)) {
-    return "Calculator";
+    return "<Calculator>";
   }
 
   if ((k.scancode == SDL_SCANCODE_CANCEL) || (k.sym == SDLK_CANCEL)) {
-    return "Cancel";
+    return "<Cancel>";
   }
 
   if ((k.scancode == SDL_SCANCODE_CAPSLOCK) || (k.sym == SDLK_CAPSLOCK)) {
-    return "CapsLock";
+    return "<CapsLock>";
   }
 
   if ((k.scancode == SDL_SCANCODE_CLEAR) || (k.sym == SDLK_CLEAR)) {
-    return "Clear";
+    return "<Clear>";
   }
 
   if ((k.scancode == SDL_SCANCODE_CLEARAGAIN) || (k.sym == SDLK_CLEARAGAIN)) {
-    return "Clear / Again";
+    return "<Clear / Again>";
   }
 
   if ((k.scancode == SDL_SCANCODE_COMMA) || (k.sym == SDLK_COMMA)) {
@@ -231,27 +231,27 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_COMPUTER) || (k.sym == SDLK_COMPUTER)) {
-    return "Computer";
+    return "<Computer>";
   }
 
   if ((k.scancode == SDL_SCANCODE_COPY) || (k.sym == SDLK_COPY)) {
-    return "Copy";
+    return "<Copy>";
   }
 
   if ((k.scancode == SDL_SCANCODE_CRSEL) || (k.sym == SDLK_CRSEL)) {
-    return "CrSel";
+    return "<CrSel>";
   }
 
   if ((k.scancode == SDL_SCANCODE_CURRENCYSUBUNIT) || (k.sym == SDLK_CURRENCYSUBUNIT)) {
-    return "CurrencySubUnit";
+    return "<CurrencySubUnit>";
   }
 
   if ((k.scancode == SDL_SCANCODE_CURRENCYUNIT) || (k.sym == SDLK_CURRENCYUNIT)) {
-    return "CurrencyUnit";
+    return "<CurrencyUnit>";
   }
 
   if ((k.scancode == SDL_SCANCODE_CUT) || (k.sym == SDLK_CUT)) {
-    return "Cut";
+    return "<Cut>";
   }
 
   if ((k.scancode == SDL_SCANCODE_D) || (k.sym == SDLK_d)) {
@@ -259,19 +259,19 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_DECIMALSEPARATOR) || (k.sym == SDLK_DECIMALSEPARATOR)) {
-    return "DecimalSeparator";
+    return "<DecimalSeparator>";
   }
 
   if ((k.scancode == SDL_SCANCODE_DELETE) || (k.sym == SDLK_DELETE)) {
-    return "Delete";
+    return "<Delete>";
   }
 
   if ((k.scancode == SDL_SCANCODE_DISPLAYSWITCH) || (k.sym == SDLK_DISPLAYSWITCH)) {
-    return "DisplaySwitch";
+    return "<DisplaySwitch>";
   }
 
   if ((k.scancode == SDL_SCANCODE_DOWN) || (k.sym == SDLK_DOWN)) {
-    return "Down";
+    return "<Down>";
   }
 
   if ((k.scancode == SDL_SCANCODE_E) || (k.sym == SDLK_e)) {
@@ -279,11 +279,11 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_EJECT) || (k.sym == SDLK_EJECT)) {
-    return "Eject";
+    return "<Eject>";
   }
 
   if ((k.scancode == SDL_SCANCODE_END) || (k.sym == SDLK_END)) {
-    return "End";
+    return "<End>";
   }
 
   if ((k.scancode == SDL_SCANCODE_EQUALS) || (k.sym == SDLK_EQUALS)) {
@@ -291,15 +291,15 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_ESCAPE) || (k.sym == SDLK_ESCAPE)) {
-    return "Escape";
+    return "<Escape>";
   }
 
   if ((k.scancode == SDL_SCANCODE_EXECUTE) || (k.sym == SDLK_EXECUTE)) {
-    return "Execute";
+    return "<Execute>";
   }
 
   if ((k.scancode == SDL_SCANCODE_EXSEL) || (k.sym == SDLK_EXSEL)) {
-    return "ExSel";
+    return "<ExSel>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F) || (k.sym == SDLK_f)) {
@@ -307,103 +307,103 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_F1) || (k.sym == SDLK_F1)) {
-    return "F1";
+    return "<F1>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F10) || (k.sym == SDLK_F10)) {
-    return "F10";
+    return "<F10>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F11) || (k.sym == SDLK_F11)) {
-    return "F11";
+    return "<F11>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F12) || (k.sym == SDLK_F12)) {
-    return "F12";
+    return "<F12>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F13) || (k.sym == SDLK_F13)) {
-    return "F13";
+    return "<F13>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F14) || (k.sym == SDLK_F14)) {
-    return "F14";
+    return "<F14>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F15) || (k.sym == SDLK_F15)) {
-    return "F15";
+    return "<F15>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F16) || (k.sym == SDLK_F16)) {
-    return "F16";
+    return "<F16>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F17) || (k.sym == SDLK_F17)) {
-    return "F17";
+    return "<F17>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F18) || (k.sym == SDLK_F18)) {
-    return "F18";
+    return "<F18>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F19) || (k.sym == SDLK_F19)) {
-    return "F19";
+    return "<F19>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F2) || (k.sym == SDLK_F2)) {
-    return "F2";
+    return "<F2>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F20) || (k.sym == SDLK_F20)) {
-    return "F20";
+    return "<F20>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F21) || (k.sym == SDLK_F21)) {
-    return "F21";
+    return "<F21>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F22) || (k.sym == SDLK_F22)) {
-    return "F22";
+    return "<F22>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F23) || (k.sym == SDLK_F23)) {
-    return "F23";
+    return "<F23>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F24) || (k.sym == SDLK_F24)) {
-    return "F24";
+    return "<F24>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F3) || (k.sym == SDLK_F3)) {
-    return "F3";
+    return "<F3>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F4) || (k.sym == SDLK_F4)) {
-    return "F4";
+    return "<F4>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F5) || (k.sym == SDLK_F5)) {
-    return "F5";
+    return "<F5>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F6) || (k.sym == SDLK_F6)) {
-    return "F6";
+    return "<F6>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F7) || (k.sym == SDLK_F7)) {
-    return "F7";
+    return "<F7>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F8) || (k.sym == SDLK_F8)) {
-    return "F8";
+    return "<F8>";
   }
 
   if ((k.scancode == SDL_SCANCODE_F9) || (k.sym == SDLK_F9)) {
-    return "F9";
+    return "<F9>";
   }
 
   if ((k.scancode == SDL_SCANCODE_FIND) || (k.sym == SDLK_FIND)) {
-    return "Find";
+    return "<Find>";
   }
 
   if ((k.scancode == SDL_SCANCODE_G) || (k.sym == SDLK_g)) {
@@ -419,11 +419,11 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_HELP) || (k.sym == SDLK_HELP)) {
-    return "Help";
+    return "<Help>";
   }
 
   if ((k.scancode == SDL_SCANCODE_HOME) || (k.sym == SDLK_HOME)) {
-    return "Home";
+    return "<Home>";
   }
 
   if ((k.scancode == SDL_SCANCODE_I) || (k.sym == SDLK_i)) {
@@ -431,7 +431,7 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_INSERT) || (k.sym == SDLK_INSERT)) {
-    return "Insert";
+    return "<Insert>";
   }
 
   if ((k.scancode == SDL_SCANCODE_J) || (k.sym == SDLK_j)) {
@@ -443,251 +443,251 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_KBDILLUMDOWN) || (k.sym == SDLK_KBDILLUMDOWN)) {
-    return "KBDIllumDown";
+    return "<KBDIllumDown>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KBDILLUMTOGGLE) || (k.sym == SDLK_KBDILLUMTOGGLE)) {
-    return "KBDIllumToggle";
+    return "<KBDIllumToggle>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KBDILLUMUP) || (k.sym == SDLK_KBDILLUMUP)) {
-    return "KBDIllumUp";
+    return "<KBDIllumUp>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_0) || (k.sym == SDLK_KP_0)) {
-    return "KP 0";
+    return "<KP 0>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_00) || (k.sym == SDLK_KP_00)) {
-    return "KP 00";
+    return "<KP 00>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_000) || (k.sym == SDLK_KP_000)) {
-    return "KP 000";
+    return "<KP 000>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_1) || (k.sym == SDLK_KP_1)) {
-    return "KP 1";
+    return "<KP 1>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_2) || (k.sym == SDLK_KP_2)) {
-    return "KP 2";
+    return "<KP 2>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_3) || (k.sym == SDLK_KP_3)) {
-    return "KP 3";
+    return "<KP 3>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_4) || (k.sym == SDLK_KP_4)) {
-    return "KP 4";
+    return "<KP 4>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_5) || (k.sym == SDLK_KP_5)) {
-    return "KP 5";
+    return "<KP 5>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_6) || (k.sym == SDLK_KP_6)) {
-    return "KP 6";
+    return "<KP 6>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_7) || (k.sym == SDLK_KP_7)) {
-    return "KP 7";
+    return "<KP 7>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_8) || (k.sym == SDLK_KP_8)) {
-    return "KP 8";
+    return "<KP 8>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_9) || (k.sym == SDLK_KP_9)) {
-    return "KP 9";
+    return "<KP 9>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_A) || (k.sym == SDLK_KP_A)) {
-    return "KP A";
+    return "<KP A>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_AMPERSAND) || (k.sym == SDLK_KP_AMPERSAND)) {
-    return "KP &";
+    return "<KP &>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_AT) || (k.sym == SDLK_KP_AT)) {
-    return "KP @";
+    return "<KP @>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_B) || (k.sym == SDLK_KP_B)) {
-    return "KP B";
+    return "<KP B>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_BACKSPACE) || (k.sym == SDLK_KP_BACKSPACE)) {
-    return "KP Backspace";
+    return "<KP Backspace>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_BINARY) || (k.sym == SDLK_KP_BINARY)) {
-    return "KP Binary";
+    return "<KP Binary>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_C) || (k.sym == SDLK_KP_C)) {
-    return "KP C";
+    return "<KP C>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_CLEAR) || (k.sym == SDLK_KP_CLEAR)) {
-    return "KP Clear";
+    return "<KP Clear>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_COLON) || (k.sym == SDLK_KP_COLON)) {
-    return "KP :";
+    return "<KP :>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_COMMA) || (k.sym == SDLK_KP_COMMA)) {
-    return "KP ,";
+    return "<KP ,>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_D) || (k.sym == SDLK_KP_D)) {
-    return "KP D";
+    return "<KP D>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_DBLAMPERSAND) || (k.sym == SDLK_KP_DBLAMPERSAND)) {
-    return "KP &&";
+    return "<KP &&>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_DECIMAL) || (k.sym == SDLK_KP_DECIMAL)) {
-    return "KP Decimal";
+    return "<KP Decimal>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_DIVIDE) || (k.sym == SDLK_KP_DIVIDE)) {
-    return "KP /";
+    return "<KP />";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_E) || (k.sym == SDLK_KP_E)) {
-    return "KP E";
+    return "<KP E>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_ENTER) || (k.sym == SDLK_KP_ENTER)) {
-    return "KP Enter";
+    return "<KP Enter>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_EQUALS) || (k.sym == SDLK_KP_EQUALS)) {
-    return "KP =";
+    return "<KP =>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_EQUALSAS400) || (k.sym == SDLK_KP_EQUALSAS400)) {
-    return "KP = (AS400)";
+    return "<KP = (AS400)>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_EXCLAM) || (k.sym == SDLK_KP_EXCLAM)) {
-    return "KP !";
+    return "<KP !>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_F) || (k.sym == SDLK_KP_F)) {
-    return "KP F";
+    return "<KP F>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_GREATER) || (k.sym == SDLK_KP_GREATER)) {
-    return "KP >";
+    return "<KP >>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_HASH) || (k.sym == SDLK_KP_HASH)) {
-    return "KP #";
+    return "<KP #>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_HEXADECIMAL) || (k.sym == SDLK_KP_HEXADECIMAL)) {
-    return "KP Hexadecimal";
+    return "<KP Hexadecimal>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_LEFTBRACE) || (k.sym == SDLK_KP_LEFTBRACE)) {
-    return "KP {";
+    return "<KP {>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_LEFTPAREN) || (k.sym == SDLK_KP_LEFTPAREN)) {
-    return "KP (";
+    return "<KP (>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_LESS) || (k.sym == SDLK_KP_LESS)) {
-    return "KP <";
+    return "<KP <>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_MEMADD) || (k.sym == SDLK_KP_MEMADD)) {
-    return "KP MemAdd";
+    return "<KP MemAdd>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_MEMCLEAR) || (k.sym == SDLK_KP_MEMCLEAR)) {
-    return "KP MemClear";
+    return "<KP MemClear>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_MEMDIVIDE) || (k.sym == SDLK_KP_MEMDIVIDE)) {
-    return "KP MemDivide";
+    return "<KP MemDivide>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_MEMMULTIPLY) || (k.sym == SDLK_KP_MEMMULTIPLY)) {
-    return "KP MemMultiply";
+    return "<KP MemMultiply>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_MEMRECALL) || (k.sym == SDLK_KP_MEMRECALL)) {
-    return "KP MemRecall";
+    return "<KP MemRecall>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_MEMSTORE) || (k.sym == SDLK_KP_MEMSTORE)) {
-    return "KP MemStore";
+    return "<KP MemStore>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_MEMSUBTRACT) || (k.sym == SDLK_KP_MEMSUBTRACT)) {
-    return "KP MemSubtract";
+    return "<KP MemSubtract>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_MINUS) || (k.sym == SDLK_KP_MINUS)) {
-    return "KP -";
+    return "<KP ->";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_MULTIPLY) || (k.sym == SDLK_KP_MULTIPLY)) {
-    return "KP *";
+    return "<KP *>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_OCTAL) || (k.sym == SDLK_KP_OCTAL)) {
-    return "KP Octal";
+    return "<KP Octal>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_PERCENT) || (k.sym == SDLK_KP_PERCENT)) {
-    return "KP %";
+    return "<KP %>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_PERIOD) || (k.sym == SDLK_KP_PERIOD)) {
-    return "KP .";
+    return "<KP .>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_PLUS) || (k.sym == SDLK_KP_PLUS)) {
-    return "KP +";
+    return "<KP +>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_PLUSMINUS) || (k.sym == SDLK_KP_PLUSMINUS)) {
-    return "KP +/-";
+    return "<KP +/->";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_POWER) || (k.sym == SDLK_KP_POWER)) {
-    return "KP ^";
+    return "<KP ^>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_RIGHTBRACE) || (k.sym == SDLK_KP_RIGHTBRACE)) {
-    return "KP }";
+    return "<KP }>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_RIGHTPAREN) || (k.sym == SDLK_KP_RIGHTPAREN)) {
-    return "KP )";
+    return "<KP )>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_SPACE) || (k.sym == SDLK_KP_SPACE)) {
-    return "KP Space";
+    return "<KP Space>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_TAB) || (k.sym == SDLK_KP_TAB)) {
-    return "KP Tab";
+    return "<KP Tab>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_VERTICALBAR) || (k.sym == SDLK_KP_VERTICALBAR)) {
-    return "KP |";
+    return "<KP |>";
   }
 
   if ((k.scancode == SDL_SCANCODE_KP_XOR) || (k.sym == SDLK_KP_XOR)) {
-    return "KP XOR";
+    return "<KP XOR>";
   }
 
   if ((k.scancode == SDL_SCANCODE_L) || (k.sym == SDLK_l)) {
@@ -703,15 +703,15 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_MAIL) || (k.sym == SDLK_MAIL)) {
-    return "Mail";
+    return "<Mail>";
   }
 
   if ((k.scancode == SDL_SCANCODE_MEDIASELECT) || (k.sym == SDLK_MEDIASELECT)) {
-    return "MediaSelect";
+    return "<MediaSelect>";
   }
 
   if ((k.scancode == SDL_SCANCODE_MENU) || (k.sym == SDLK_MENU)) {
-    return "Menu";
+    return "<Menu>";
   }
 
   if ((k.scancode == SDL_SCANCODE_MINUS) || (k.sym == SDLK_MINUS)) {
@@ -719,11 +719,11 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_MODE) || (k.sym == SDLK_MODE)) {
-    return "Mode";
+    return "<Mode>";
   }
 
   if ((k.scancode == SDL_SCANCODE_MUTE) || (k.sym == SDLK_MUTE)) {
-    return "Mute";
+    return "<Mute>";
   }
 
   if ((k.scancode == SDL_SCANCODE_N) || (k.sym == SDLK_n)) {
@@ -731,7 +731,7 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_NUMLOCKCLEAR) || (k.sym == SDLK_NUMLOCKCLEAR)) {
-    return "Numlock";
+    return "<Numlock>";
   }
 
   if ((k.scancode == SDL_SCANCODE_O) || (k.sym == SDLK_o)) {
@@ -739,11 +739,11 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_OPER) || (k.sym == SDLK_OPER)) {
-    return "Oper";
+    return "<Oper>";
   }
 
   if ((k.scancode == SDL_SCANCODE_OUT) || (k.sym == SDLK_OUT)) {
-    return "Out";
+    return "<Out>";
   }
 
   if ((k.scancode == SDL_SCANCODE_P) || (k.sym == SDLK_p)) {
@@ -751,19 +751,19 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_PAGEDOWN) || (k.sym == SDLK_PAGEDOWN)) {
-    return "PageDown";
+    return "<PageDown>";
   }
 
   if ((k.scancode == SDL_SCANCODE_PAGEUP) || (k.sym == SDLK_PAGEUP)) {
-    return "PageUp";
+    return "<PageUp>";
   }
 
   if ((k.scancode == SDL_SCANCODE_PASTE) || (k.sym == SDLK_PASTE)) {
-    return "Paste";
+    return "<Paste>";
   }
 
   if ((k.scancode == SDL_SCANCODE_PAUSE) || (k.sym == SDLK_PAUSE)) {
-    return "Pause";
+    return "<Pause>";
   }
 
   if ((k.scancode == SDL_SCANCODE_PERIOD) || (k.sym == SDLK_PERIOD)) {
@@ -771,15 +771,15 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_POWER) || (k.sym == SDLK_POWER)) {
-    return "Power";
+    return "<Power>";
   }
 
   if ((k.scancode == SDL_SCANCODE_PRINTSCREEN) || (k.sym == SDLK_PRINTSCREEN)) {
-    return "PrintScreen";
+    return "<PrintScreen>";
   }
 
   if ((k.scancode == SDL_SCANCODE_PRIOR) || (k.sym == SDLK_PRIOR)) {
-    return "Prior";
+    return "<Prior>";
   }
 
   if ((k.scancode == SDL_SCANCODE_Q) || (k.sym == SDLK_q)) {
@@ -791,11 +791,11 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_RETURN) || (k.sym == SDLK_RETURN)) {
-    return "Return";
+    return "<Return>";
   }
 
   if ((k.scancode == SDL_SCANCODE_RETURN2) || (k.sym == SDLK_RETURN2)) {
-    return "Return";
+    return "<Return>";
   }
 
   if ((k.scancode == SDL_SCANCODE_RIGHTBRACKET) || (k.sym == SDLK_RIGHTBRACKET)) {
@@ -807,11 +807,11 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_SCROLLLOCK) || (k.sym == SDLK_SCROLLLOCK)) {
-    return "ScrollLock";
+    return "<ScrollLock>";
   }
 
   if ((k.scancode == SDL_SCANCODE_SELECT) || (k.sym == SDLK_SELECT)) {
-    return "Select";
+    return "<Select>";
   }
 
   if ((k.scancode == SDL_SCANCODE_SEMICOLON) || (k.sym == SDLK_SEMICOLON)) {
@@ -819,7 +819,7 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_SEPARATOR) || (k.sym == SDLK_SEPARATOR)) {
-    return "Separator";
+    return "<Separator>";
   }
 
   if ((k.scancode == SDL_SCANCODE_SLASH) || (k.sym == SDLK_SLASH)) {
@@ -827,19 +827,19 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_SLEEP) || (k.sym == SDLK_SLEEP)) {
-    return "Sleep";
+    return "<Sleep>";
   }
 
   if ((k.scancode == SDL_SCANCODE_SPACE) || (k.sym == SDLK_SPACE)) {
-    return "Space";
+    return "<Space>";
   }
 
   if ((k.scancode == SDL_SCANCODE_STOP) || (k.sym == SDLK_STOP)) {
-    return "Stop";
+    return "<Stop>";
   }
 
   if ((k.scancode == SDL_SCANCODE_SYSREQ) || (k.sym == SDLK_SYSREQ)) {
-    return "SysReq";
+    return "<SysReq>";
   }
 
   if ((k.scancode == SDL_SCANCODE_T) || (k.sym == SDLK_t)) {
@@ -847,11 +847,11 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_TAB) || (k.sym == SDLK_TAB)) {
-    return "Tab";
+    return "<TAB>";
   }
 
   if ((k.scancode == SDL_SCANCODE_THOUSANDSSEPARATOR) || (k.sym == SDLK_THOUSANDSSEPARATOR)) {
-    return "ThousandsSeparator";
+    return "<ThousandsSeparator>";
   }
 
   if ((k.scancode == SDL_SCANCODE_U) || (k.sym == SDLK_u)) {
@@ -859,11 +859,11 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_UNDO) || (k.sym == SDLK_UNDO)) {
-    return "Undo";
+    return "<Undo>";
   }
 
   if ((k.scancode == SDL_SCANCODE_UP) || (k.sym == SDLK_UP)) {
-    return "Up";
+    return "<Up>";
   }
 
   if ((k.scancode == SDL_SCANCODE_V) || (k.sym == SDLK_v)) {
@@ -871,11 +871,11 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_VOLUMEDOWN) || (k.sym == SDLK_VOLUMEDOWN)) {
-    return "VolumeDown";
+    return "<VolumeDown>";
   }
 
   if ((k.scancode == SDL_SCANCODE_VOLUMEUP) || (k.sym == SDLK_VOLUMEUP)) {
-    return "VolumeUp";
+    return "<VolumeUp>";
   }
 
   if ((k.scancode == SDL_SCANCODE_W) || (k.sym == SDLK_w)) {
@@ -883,7 +883,7 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k)
   }
 
   if ((k.scancode == SDL_SCANCODE_WWW) || (k.sym == SDLK_WWW)) {
-    return "WWW";
+    return "<WWW>";
   }
 
   if ((k.scancode == SDL_SCANCODE_X) || (k.sym == SDLK_x)) {
@@ -986,83 +986,83 @@ SDL_Keysym sdlk_normalize(SDL_Keysym k_in)
   if ((k.mod & KMOD_LSHIFT) || (k.mod & KMOD_RSHIFT)) {
     k.mod &= ~KMOD_SHIFT;
     switch (k.sym) {
-      case SDLK_COMMA :
+      case SDLK_COMMA:
         // <
         k.sym = SDLK_LESS;
         return k;
-      case SDLK_MINUS :
+      case SDLK_MINUS:
         // _
         k.sym = SDLK_MINUS;
         return k;
-      case SDLK_PERIOD :
+      case SDLK_PERIOD:
         // >
         k.sym = SDLK_GREATER;
         return k;
-      case SDLK_SLASH :
+      case SDLK_SLASH:
         // ?
         k.sym = SDLK_QUESTION;
         return k;
-      case SDLK_EQUALS :
+      case SDLK_EQUALS:
         // +
         k.sym = SDLK_PLUS;
         return k;
-      case SDLK_0 :
+      case SDLK_0:
         // )
         k.sym = SDLK_RIGHTPAREN;
         return k;
-      case SDLK_1 :
+      case SDLK_1:
         // !
         k.sym = SDLK_EXCLAIM;
         return k;
-      case SDLK_2 :
+      case SDLK_2:
         // @
         k.sym = SDLK_AT;
         return k;
-      case SDLK_3 :
+      case SDLK_3:
         // #
         k.sym = SDLK_HASH;
         return k;
-      case SDLK_4 :
+      case SDLK_4:
         // $
         k.sym = SDLK_DOLLAR;
         return k;
-      case SDLK_5 :
+      case SDLK_5:
         // %
         k.sym = SDLK_PERCENT;
         return k;
-      case SDLK_6 :
+      case SDLK_6:
         // ^
         k.sym = SDLK_CARET;
         return k;
-      case SDLK_7 :
+      case SDLK_7:
         // &
         k.sym = SDLK_AMPERSAND;
         return k;
-      case SDLK_8 :
+      case SDLK_8:
         // *
         k.sym = SDLK_ASTERISK;
         return k;
-      case SDLK_9 :
+      case SDLK_9:
         // (
         k.sym = SDLK_LEFTPAREN;
         return k;
-      case SDLK_SEMICOLON :
+      case SDLK_SEMICOLON:
         // :
         k.sym = SDLK_COLON;
         return k;
-      case SDLK_LEFTBRACKET :
+      case SDLK_LEFTBRACKET:
         // {
         k.sym = SDLK_LEFTBRACKET;
         return k;
-      case SDLK_BACKSLASH :
+      case SDLK_BACKSLASH:
         // |
         k.sym = SDLK_KP_VERTICALBAR;
         return k;
-      case SDLK_RIGHTBRACKET :
+      case SDLK_RIGHTBRACKET:
         // }
         k.sym = SDLK_RIGHTBRACKET;
         return k;
-      case SDLK_HASH :
+      case SDLK_HASH:
         // ~
         //
         // Not sure about this one for tilde in US and UK keyboards
