@@ -248,10 +248,7 @@ Comments and suggestions welcome.
 Screenshots
 -----------
 
-<p float="left">
-<img src="/pics/screenshot.1.png" width="50%" />
-<img src="/pics/screenshot.1.png" width="50%" />
-</p>
+![alt-text-1](pics/screenshot.1.png "title-1") ![alt-text-2](pics/screenshot.1.png "title-2")
 
 ![Alt text](pics/screenshot.2.png?raw=true "")
 ![Alt text](pics/screenshot.3.png?raw=true "")
