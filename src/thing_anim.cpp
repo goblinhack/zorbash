@@ -555,6 +555,16 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
     ts_next_frame = time_game_ms_cached() + delay;
   }
 
+  //
+  // For water we don't care if the frames change really fast. We just want to avoid pauses where all the water stops
+  // animating.
+  //
+  if (g_opt_ascii) {
+    if (is_water()) {
+      ts_next_frame = time_game_ms_cached() + (non_pcg_rand() % delay);
+    }
+  }
+
   if (is_end_of_anim) {
     if (is_dead_on_end_of_anim) {
 #ifdef DEBUG_ANIM
