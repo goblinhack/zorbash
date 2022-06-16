@@ -1,7 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- widen ascii map ?                                                                                                                            -->
+<!-- asp appears as white in light                                                                                                                -->
 <!-- somtimes clicking far off does nothing                                                                                                       -->
 <!-- ascii check list - particles / lasers / gas / projectiles / explosions                                                                       -->
 <!-- ------                                                                                                                                       -->

@@ -13,7 +13,6 @@
 #include "my_ui.hpp"
 #include "my_wid_leftbar.hpp"
 #include "my_wid_popup.hpp"
-#include "my_wid_thing_info.hpp"
 
 static bool wid_leftbar_create(void);
 
@@ -55,10 +54,6 @@ bool wid_leftbar_create(void)
 
   auto player = level->player;
   if (! player) {
-    return false;
-  }
-
-  if (wid_thing_info_window.size()) {
     return false;
   }
 

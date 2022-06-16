@@ -35,6 +35,27 @@ uint8_t wid_thing_info_init(void)
   return true;
 }
 
+//
+// If the mouse is too far to the left then do not obscure the map with the thing info
+//
+static void wid_thing_info_placement(point &tl, point &br, int height)
+{
+  tl = make_point(0, TERM_HEIGHT - 2 - height);
+  br = make_point(UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
+
+  int offset = 4;
+
+  if (g_opt_ascii) {
+    if (ascii_mouse_x <= TERM_WIDTH / 2) {
+      tl = make_point(TERM_WIDTH / 2 + offset, TERM_HEIGHT - 2 - height);
+      br = make_point(TERM_WIDTH / 2 + offset + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
+    } else {
+      tl = make_point(UI_LEFTBAR_WIDTH + offset, TERM_HEIGHT - 2 - height);
+      br = make_point(UI_LEFTBAR_WIDTH + offset + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
+    }
+  }
+}
+
 void Game::wid_thing_info_destroy_immediate(void)
 {
   DBG("Destroy wid thing info immediate");
@@ -83,8 +104,6 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     t->show_botcon_description();
     return nullptr;
   }
-
-  wid_leftbar_fini();
 
   //  backtrace_dump();
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", true, false);
@@ -215,11 +234,13 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     return nullptr;
   }
 
-  auto  height = TERM_HEIGHT;
-  point tl     = make_point(0, TERM_HEIGHT - 2 - height);
-  point br     = make_point(UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
-
-  wid_leftbar_fini();
+  //
+  // If the mouse is too far to the left then do not obscure the map with the thing info
+  //
+  int   height = TERM_HEIGHT;
+  point tl;
+  point br;
+  wid_thing_info_placement(tl, br, height);
 
   //  backtrace_dump();
   auto wid_popup_window = new WidPopup("Thing info", tl, br, nullptr, "", false, false /* vert */);
@@ -307,9 +328,13 @@ bool Game::wid_thing_info_push_popup(Thingp t)
     }
   }
 
-  auto  height = TERM_HEIGHT;
-  point tl     = make_point(0, TERM_HEIGHT - 2 - height);
-  point br     = make_point(UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
+  //
+  // If the mouse is too far to the left then do not obscure the map with the thing info
+  //
+  int   height = TERM_HEIGHT;
+  point tl;
+  point br;
+  wid_thing_info_placement(tl, br, height);
 
   auto w = game->wid_thing_info_create_popup(t, tl, br);
   if (unlikely(! w)) {
