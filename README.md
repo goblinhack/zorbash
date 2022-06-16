@@ -3,7 +3,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- widen ascii map ?                                                                                                                            -->
 <!-- somtimes clicking far off does nothing                                                                                                       -->
-<!-- if you try to hit a monster whilst in a web, the message is rubbish                                                                          -->
 <!-- ascii check list - particles / lasers / gas / projectiles / explosions                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
