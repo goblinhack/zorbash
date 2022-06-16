@@ -2128,10 +2128,10 @@ public:
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);
-  void blit_ascii_adjust_color(color &c, bool fg);
+  void blit_ascii_adjust_color(color &c, bool fg, bool leftbar);
   void blit_ascii_adjust_color2(color &c, bool fg);
-  void blit_ascii(point tl, point br, point p);
-  void blit_ascii_at(point tl, bool lit = true);
+  void blit_ascii(point tl, point br, point p, bool leftbar = false);
+  void blit_ascii_at(point tl, bool lit = true, bool leftbar = false);
   void blit_end_reflection_submerged(uint8_t submerged);
   void blit_end_submerged(uint8_t submerged);
   void blit_floor_chasm(point tl, point br, const ThingTiles *tiles);
