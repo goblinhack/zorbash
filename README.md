@@ -245,8 +245,10 @@ only with windows to follow later.
 
 Comments and suggestions welcome.
 
-Ascii and pixel art modes (can be toggled)
--------------------------
+Pixel art and ascii mode options
+--------------------------------
+
+Press <TAB> to switch between modes during the game.
 
 <p align="center">
 <img alt="Pixel art" src="pics/pixelart/screenshot.1.png" width="45%">
