@@ -32,7 +32,7 @@
 #define UI_HEALTH_BAR_STEPS          18 // How many graduations on health bar
 #define UI_HEALTH_ICON_STEPS         5
 #define UI_INVENTORY_QUICK_ITEMS_MAX 10
-#define UI_LEFTBAR_WIDTH             30
+#define UI_LEFTBAR_WIDTH             UI_HEALTH_BAR_STEPS
 #define UI_LOGGING_EMPTY_LINE        "`" // Complete hack, char I use to force space
 #define UI_MOUSE_DOUBLE_CLICK        500 // Double click time
 #define UI_MOUSE_WHEEL_SCALE         1.0 // How much the wheel mouse moves.
@@ -45,6 +45,7 @@
 #define UI_TEXT_COLOR                GRAY // Default text color
 #define UI_TEXT_COLOR_STR            "gray"
 #define UI_TEXT_HIGHLIGHT_COLOR_STR  "white"
+#define UI_THING_INFO_WIDTH          30
 #define UI_TILE_PIXELART_HEIGHT      8
 #define UI_TILE_PIXELART_WIDTH       8
 #define UI_TOPCON_HEIGHT             (g_opt_ascii ? 3 : 5) // Scrollbar limit

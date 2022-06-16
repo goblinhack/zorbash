@@ -1939,7 +1939,9 @@ public:
   std::size_t light_count(void);
 
   std::string text_short_and_state_capitalised(void);
+  std::string text_long_and_state_capitalised(void);
   std::string text_short_capitalised(void);
+  std::string text_long_capitalised(void);
   std::string text_short_a_or_an(void);
   std::string text_short_the(void);
   std::string text_short_The(void);

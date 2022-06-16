@@ -223,6 +223,31 @@ std::string Thing::text_short_capitalised(void)
   return out;
 }
 
+std::string Thing::text_long_capitalised(void)
+{
+  TRACE_NO_INDENT();
+  std::string out = text_long_name();
+
+  char *b          = (char *) out.c_str();
+  char *e          = b + out.size();
+  char *c          = b;
+  bool  word_start = true;
+  while (c < e) {
+    if (word_start) {
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
+      word_start = false;
+    } else if (*c == ' ') {
+      word_start = true;
+    }
+
+    c++;
+  }
+
+  return out;
+}
+
 std::string Thing::text_short_and_state_capitalised(void)
 {
   TRACE_NO_INDENT();
@@ -241,6 +266,49 @@ std::string Thing::text_short_and_state_capitalised(void)
   }
 
   out += text_short_name();
+
+  char *b          = (char *) out.c_str();
+  char *e          = b + out.size();
+  char *c          = b;
+  bool  word_start = true;
+  while (c < e) {
+    if (word_start) {
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
+      word_start = false;
+    } else if (*c == ' ') {
+      word_start = true;
+    }
+
+    c++;
+  }
+
+  if (enchant_get()) {
+    out += " +" + std::to_string(enchant_get());
+  }
+
+  return out;
+}
+
+std::string Thing::text_long_and_state_capitalised(void)
+{
+  TRACE_NO_INDENT();
+  std::string out;
+
+  if (is_player() || is_monst()) {
+    if (is_dead) {
+      if (is_undead()) {
+        out += "extra dead ";
+      } else {
+        out += "dead ";
+      }
+    } else if (is_dying) {
+      out += "dying ";
+    }
+  }
+
+  out += text_long_name();
 
   char *b          = (char *) out.c_str();
   char *e          = b + out.size();
