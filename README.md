@@ -248,7 +248,12 @@ Comments and suggestions welcome.
 Screenshots
 -----------
 
-![alt-text-1](pics/screenshot.1.png "title-1") ![alt-text-2](pics/screenshot.1.png "title-2")
+
+<p align="center">
+<img alt="Light" src="pics/screenshot.1.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img alt="Dark" src="pics/screenshot.1.png" width="45%">
+</p>
 
 ![Alt text](pics/screenshot.2.png?raw=true "")
 ![Alt text](pics/screenshot.3.png?raw=true "")
