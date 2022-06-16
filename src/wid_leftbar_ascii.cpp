@@ -303,7 +303,7 @@ bool wid_leftbar_ascii_create(void)
     return false;
   }
 
-  int width = UI_HEALTH_BAR_STEPS;
+  int width = UI_LEFTBAR_WIDTH;
   int y_at  = 0;
 
   {

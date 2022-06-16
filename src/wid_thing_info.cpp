@@ -128,7 +128,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
   }
 
-  auto name = t->text_short_and_state_capitalised();
+  auto name = t->text_long_and_state_capitalised();
   wid_popup_window->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$" + name);
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
@@ -217,7 +217,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
   auto  height = TERM_HEIGHT;
   point tl     = make_point(0, TERM_HEIGHT - 2 - height);
-  point br     = make_point(UI_LEFTBAR_WIDTH, TERM_HEIGHT - 2);
+  point br     = make_point(UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
 
   wid_leftbar_fini();
 
@@ -229,7 +229,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   char tmp[ MAXSHORTSTR ];
 
   for (auto t : ts) {
-    auto name = t->text_short_and_state_capitalised();
+    auto name = t->text_long_and_state_capitalised();
     snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
       if (*c == ' ') {
@@ -309,7 +309,7 @@ bool Game::wid_thing_info_push_popup(Thingp t)
 
   auto  height = TERM_HEIGHT;
   point tl     = make_point(0, TERM_HEIGHT - 2 - height);
-  point br     = make_point(UI_LEFTBAR_WIDTH, TERM_HEIGHT - 2);
+  point br     = make_point(UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
 
   auto w = game->wid_thing_info_create_popup(t, tl, br);
   if (unlikely(! w)) {
