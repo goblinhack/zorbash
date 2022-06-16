@@ -249,8 +249,8 @@ Screenshots
 -----------
 
 <p float="left">
-<img src="/pics/screenshot.1.png" width="100" />
-<img src="/pics/screenshot.1.png" width="100" />
+<img src="/pics/screenshot.1.png" width="50%" />
+<img src="/pics/screenshot.1.png" width="50%" />
 </p>
 
 ![Alt text](pics/screenshot.2.png?raw=true "")
