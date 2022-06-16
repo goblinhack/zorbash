@@ -245,35 +245,38 @@ only with windows to follow later.
 
 Comments and suggestions welcome.
 
-Screenshots
------------
-
+Ascii and pixel art modes
+-------------------------
 
 <p align="center">
-<img alt="Light" src="pics/screenshot.1.png" width="45%">
+<img alt="Light" src="pics/pixelart/screenshot.1.png" width="45%">
 &nbsp; &nbsp; &nbsp; &nbsp;
-<img alt="Dark" src="pics/screenshot.1.png" width="45%">
+<img alt="Dark" src="pics/ascii/screenshot.1.png" width="45%">
 </p>
 
-![Alt text](pics/screenshot.2.png?raw=true "")
-![Alt text](pics/screenshot.3.png?raw=true "")
-![Alt text](pics/screenshot.4.png?raw=true "")
-![Alt text](pics/screenshot.5.png?raw=true "")
-![Alt text](pics/screenshot.6.png?raw=true "")
-![Alt text](pics/screenshot.7.png?raw=true "")
-![Alt text](pics/screenshot.8.png?raw=true "")
-![Alt text](pics/screenshot.9.png?raw=true "")
-![Alt text](pics/screenshot.10.png?raw=true "")
-![Alt text](pics/screenshot.11.png?raw=true "")
-![Alt text](pics/screenshot.12.png?raw=true "")
-![Alt text](pics/screenshot.13.png?raw=true "")
-![Alt text](pics/screenshot.14.png?raw=true "")
-![Alt text](pics/screenshot.15.png?raw=true "")
-![Alt text](pics/screenshot.16.png?raw=true "")
-![Alt text](pics/screenshot.17.png?raw=true "")
-![Alt text](pics/screenshot.18.png?raw=true "")
-![Alt text](pics/screenshot.19.png?raw=true "")
-![Alt text](pics/screenshot.20.png?raw=true "")
+Yet More Screenshots
+--------------------
+
+![Alt text](pics/pixelart/screenshot.1.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.2.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.3.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.4.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.5.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.6.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.7.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.8.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.9.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.10.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.11.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.12.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.13.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.14.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.15.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.16.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.17.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.18.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.19.png?raw=true "")
+![Alt text](pics/pixelart/screenshot.20.png?raw=true "")
 
 How to build
 ------------
