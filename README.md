@@ -251,7 +251,7 @@ Pixel art and ascii mode options
 Press <TAB> to switch between modes during the game.
 
 <p align="center">
-<img alt="Pixel art" src="pics/pixelart/screenshot.1.png" width="45%">
+<img alt="Pixel art" src="pics/pixelart/screenshot.1.png" width="25%">
 &nbsp; &nbsp; &nbsp; &nbsp;
 <img alt="Ascii art" src="pics/ascii/screenshot.1.png" width="45%">
 </p>
