@@ -564,14 +564,46 @@ uint8_t config_fps_counter_set(tokens_t *tokens, void *context)
 
   if (! s || (*s == '\0')) {
     game->config.fps_counter = true;
-    CON("FPS counter enabled (default)");
+    TOPCON("FPS counter enabled (default)");
   } else {
     game->config.fps_counter = strtol(s, 0, 10) ? 1 : 0;
     if (game->config.fps_counter) {
-      CON("FPS counter enabled");
+      TOPCON("FPS counter enabled");
     } else {
-      CON("FPS counter disabled");
+      TOPCON("FPS counter disabled");
     }
+  }
+
+  return true;
+}
+
+//
+// User wants to change the debug level
+//
+uint8_t config_debug_set(tokens_t *tokens, void *context)
+{
+  TRACE_NO_INDENT();
+
+  char *s = tokens->args[ 2 ];
+
+  if (! s || (*s == '\0')) {
+    g_opt_debug1 = false;
+    g_opt_debug2 = false;
+    g_opt_debug3 = false;
+  } else {
+    g_opt_debug1 = false;
+    g_opt_debug2 = false;
+    g_opt_debug3 = false;
+    switch (strtol(s, 0, 10) ? 1 : 0) {
+      case 0: break;
+      default: g_opt_debug1 = true; break;
+    }
+  }
+
+  if (g_opt_debug1) {
+    TOPCON("Debug: on");
+  } else {
+    TOPCON("Debug: off");
   }
 
   return true;
@@ -586,10 +618,10 @@ void config_gfx_inverted_toggle(void)
 
   if (! game->config.gfx_inverted) {
     game->config.gfx_inverted = true;
-    CON("GFX inverted enabled");
+    TOPCON("GFX inverted enabled");
   } else {
     game->config.gfx_inverted = false;
-    CON("GFX inverted disabled");
+    TOPCON("GFX inverted disabled");
   }
 }
 
@@ -604,14 +636,14 @@ uint8_t config_gfx_inverted_set(tokens_t *tokens, void *context)
 
   if (! s || (*s == '\0')) {
     game->config.gfx_inverted = true;
-    CON("GFX inverted enabled (default)");
+    TOPCON("GFX inverted enabled (default)");
   } else {
     int val                   = strtol(s, 0, 10) ? 1 : 0;
     game->config.gfx_inverted = val;
     if (game->config.gfx_inverted) {
-      CON("GFX inverted enabled");
+      TOPCON("GFX inverted enabled");
     } else {
-      CON("GFX inverted disabled");
+      TOPCON("GFX inverted disabled");
     }
   }
 
@@ -654,7 +686,7 @@ uint8_t config_game_pix_zoom_set(tokens_t *tokens, void *context)
 
   if (! s || (*s == '\0')) {
     game->config.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
-    CON("GFX: gfx zoom enabled (default)");
+    TOPCON("GFX: gfx zoom enabled (default)");
   } else {
     int val                    = strtol(s, 0, 10);
     game->config.game_pix_zoom = val;
@@ -687,10 +719,10 @@ uint8_t config_gfx_vsync_enable(tokens_t *tokens, void *context)
   }
 
   if (game->config.gfx_vsync_enable) {
-    CON("SDL: Vsync enabled");
+    TOPCON("SDL: Vsync enabled");
     SDL_GL_SetSwapInterval(1);
   } else {
-    CON("SDL: Vsync disabled");
+    TOPCON("SDL: Vsync disabled");
     SDL_GL_SetSwapInterval(0);
   }
   GL_ERROR_CHECK();
@@ -720,7 +752,7 @@ uint8_t config_errored(tokens_t *tokens, void *context)
 {
   TRACE_NO_INDENT();
   g_errored = false;
-  CON("SDL: Errored mode cleared");
+  TOPCON("SDL: Errored mode cleared");
   wid_hide(wid_console_window);
   return true;
 }
