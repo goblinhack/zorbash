@@ -103,7 +103,7 @@ do
       gfx_pixelart_animated_can_vflip \
       gfx_pixelart_animated_no_dir \
       gfx_show_asleep \
-      gfx_shown_in_bg \
+      gfx_pixelart_shown_in_bg \
       gfx_show_outlined \
       gfx_solid_shadow \
       gfx_very_short_shadow_caster \
@@ -496,7 +496,7 @@ do
       unused_flag88 \
       unused_flag89 \
       unused_flag9 \
-      unused_flag90 \
+      gfx_ascii_shown_in_bg \
       gfx_ascii_fade_with_dist \
       is_jump_blocker \
       is_cursor_path_blocker \

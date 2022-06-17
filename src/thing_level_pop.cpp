@@ -244,7 +244,7 @@ void Thing::level_pop(void)
     level->is_heatmap_valid = false;
   }
 
-  if (gfx_shown_in_bg()) {
+  if (gfx_pixelart_shown_in_bg()) {
     level->ts_redraw_bg = time_ms_cached() + 500;
   }
 

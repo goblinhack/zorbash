@@ -11,9 +11,10 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     self = tp.Tp(name, "sewer pipe", "sewer")
     # start sort marker
     my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_show_outlined(self, True)
-    my.gfx_shown_in_bg(self, True)
     my.is_ascend_sewer(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)

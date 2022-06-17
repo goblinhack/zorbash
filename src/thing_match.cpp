@@ -935,7 +935,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag89() && (what == "unused_flag89")) {
     return true;
   }
-  if (unused_flag90() && (what == "unused_flag90")) {
+  if (gfx_ascii_shown_in_bg() && (what == "gfx_ascii_shown_in_bg")) {
     return true;
   }
   if (gfx_ascii_fade_with_dist() && (what == "gfx_ascii_fade_with_dist")) {
@@ -2541,8 +2541,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag8") {
     return &Thing::unused_flag8;
   }
-  if (what == "unused_flag90") {
-    return &Thing::unused_flag90;
+  if (what == "gfx_ascii_shown_in_bg") {
+    return &Thing::gfx_ascii_shown_in_bg;
   }
   if (what == "gfx_ascii_fade_with_dist") {
     return &Thing::gfx_ascii_fade_with_dist;

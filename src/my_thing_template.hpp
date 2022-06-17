@@ -183,7 +183,7 @@ private:
   int _gfx_pixelart_show_asleep_anim {};
   int _gfx_pixelart_show_outlined {};
   int _gfx_pixelart_wobbles_when_hit {};
-  int _gfx_shown_in_bg {};
+  int _gfx_pixelart_shown_in_bg {};
   int _gfx_water {};
   int _hunger_clock_tick_freq {};
   int _hunger_health_pct {};
@@ -626,7 +626,7 @@ private:
   int _unused_flag88 {};
   int _unused_flag89 {};
   int _unused_flag9 {};
-  int _unused_flag90 {};
+  int _gfx_ascii_shown_in_bg {};
   int _gfx_ascii_fade_with_dist {};
   int _is_jump_blocker {};
   int _is_cursor_path_blocker {};
@@ -1173,7 +1173,7 @@ public:
   int gfx_pixelart_show_asleep_anim(void) const;
   int gfx_pixelart_show_outlined(void) const;
   int gfx_pixelart_wobbles_when_hit(void) const;
-  int gfx_shown_in_bg(void) const;
+  int gfx_pixelart_shown_in_bg(void) const;
   int gfx_water(void) const;
   int hunger_clock_tick_freq(void) const;
   int hunger_health_pct(void) const;
@@ -1615,7 +1615,7 @@ public:
   int unused_flag88(void) const;
   int unused_flag89(void) const;
   int unused_flag8(void) const;
-  int unused_flag90(void) const;
+  int gfx_ascii_shown_in_bg(void) const;
   int gfx_ascii_fade_with_dist(void) const;
   int is_jump_blocker(void) const;
   int is_cursor_path_blocker(void) const;
@@ -1710,7 +1710,7 @@ public:
   void gfx_pixelart_show_asleep_anim_set(int v);
   void gfx_pixelart_show_outlined_set(int v);
   void gfx_pixelart_wobbles_when_hit_set(int v);
-  void gfx_shown_in_bg_set(int v);
+  void gfx_pixelart_shown_in_bg_set(int v);
   void gfx_water_set(int v);
   void hunger_clock_tick_freq_set(int v);
   void hunger_health_pct_set(int v);
@@ -2281,7 +2281,7 @@ public:
   void unused_flag88_set(int v);
   void unused_flag89_set(int v);
   void unused_flag8_set(int v);
-  void unused_flag90_set(int v);
+  void gfx_ascii_shown_in_bg_set(int v);
   void gfx_ascii_fade_with_dist_set(int v);
   void is_jump_blocker_set(int v);
   void is_cursor_path_blocker_set(int v);

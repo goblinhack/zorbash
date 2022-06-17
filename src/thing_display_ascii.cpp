@@ -196,7 +196,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
   //
   // In debug mode, show all monstersj
   //
-  bool shown_in_bg = gfx_shown_in_bg();
+  bool shown_in_bg = gfx_ascii_shown_in_bg();
 
   IF_DEBUG2 { shown_in_bg = true; }
   IF_DEBUG2 { lit = true; }

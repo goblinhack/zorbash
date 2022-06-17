@@ -1104,7 +1104,7 @@ public:
   int gfx_pixelart_show_asleep_anim(void);
   int gfx_pixelart_show_outlined(void);
   int gfx_pixelart_wobbles_when_hit(void);
-  int gfx_shown_in_bg(void);
+  int gfx_pixelart_shown_in_bg(void);
   int gfx_water(void);
   int goal_penalty_get(Thingp attacker);
   int gold_decr(int);
@@ -1905,7 +1905,7 @@ public:
   int unused_flag88(void);
   int unused_flag89(void);
   int unused_flag8(void);
-  int unused_flag90(void);
+  int gfx_ascii_shown_in_bg(void);
   int gfx_ascii_fade_with_dist(void);
   int is_jump_blocker(void);
   int unused_flag9(void);

@@ -232,7 +232,7 @@ int Tp::gfx_pixelart_shadow_very_short(void) const { return _gfx_pixelart_shadow
 int Tp::gfx_pixelart_show_asleep_anim(void) const { return _gfx_pixelart_show_asleep_anim; }
 int Tp::gfx_pixelart_show_outlined(void) const { return _gfx_pixelart_show_outlined; }
 int Tp::gfx_pixelart_wobbles_when_hit(void) const { return _gfx_pixelart_wobbles_when_hit; }
-int Tp::gfx_shown_in_bg(void) const { return _gfx_shown_in_bg; }
+int Tp::gfx_pixelart_shown_in_bg(void) const { return _gfx_pixelart_shown_in_bg; }
 int Tp::gfx_water(void) const { return _gfx_water; }
 int Tp::hunger_clock_tick_freq(void) const { return _hunger_clock_tick_freq; }
 int Tp::hunger_health_pct(void) const { return _hunger_health_pct; }
@@ -674,7 +674,7 @@ int Tp::unused_flag87(void) const { return _unused_flag87; }
 int Tp::unused_flag88(void) const { return _unused_flag88; }
 int Tp::unused_flag89(void) const { return _unused_flag89; }
 int Tp::unused_flag8(void) const { return _unused_flag8; }
-int Tp::unused_flag90(void) const { return _unused_flag90; }
+int Tp::gfx_ascii_shown_in_bg(void) const { return _gfx_ascii_shown_in_bg; }
 int Tp::gfx_ascii_fade_with_dist(void) const { return _gfx_ascii_fade_with_dist; }
 int Tp::is_jump_blocker(void) const { return _is_jump_blocker; }
 int Tp::is_cursor_path_blocker(void) const { return _is_cursor_path_blocker; }
@@ -769,7 +769,7 @@ void Tp::gfx_pixelart_shadow_very_short_set(int v) { _gfx_pixelart_shadow_very_s
 void Tp::gfx_pixelart_show_asleep_anim_set(int v) { _gfx_pixelart_show_asleep_anim = v; }
 void Tp::gfx_pixelart_show_outlined_set(int v) { _gfx_pixelart_show_outlined = v; }
 void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_hit = v; }
-void Tp::gfx_shown_in_bg_set(int v) { _gfx_shown_in_bg = v; }
+void Tp::gfx_pixelart_shown_in_bg_set(int v) { _gfx_pixelart_shown_in_bg = v; }
 void Tp::gfx_water_set(int v) { _gfx_water = v; }
 void Tp::hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
 void Tp::hunger_health_pct_set(int v) { _hunger_health_pct = v; }
@@ -1340,7 +1340,7 @@ void Tp::unused_flag87_set(int v) { _unused_flag87 = v; }
 void Tp::unused_flag88_set(int v) { _unused_flag88 = v; }
 void Tp::unused_flag89_set(int v) { _unused_flag89 = v; }
 void Tp::unused_flag8_set(int v) { _unused_flag8 = v; }
-void Tp::unused_flag90_set(int v) { _unused_flag90 = v; }
+void Tp::gfx_ascii_shown_in_bg_set(int v) { _gfx_ascii_shown_in_bg = v; }
 void Tp::gfx_ascii_fade_with_dist_set(int v) { _gfx_ascii_fade_with_dist = v; }
 void Tp::is_jump_blocker_set(int v) { _is_jump_blocker = v; }
 void Tp::is_cursor_path_blocker_set(int v) { _is_cursor_path_blocker = v; }

@@ -271,12 +271,12 @@ void Thing::level_push(void)
   }
 
   if (! is_hidden) {
-    if (gfx_shown_in_bg()) {
+    if (gfx_pixelart_shown_in_bg()) {
       level->ts_redraw_bg = time_ms_cached() + 1000;
     }
   }
 
-  if (gfx_shown_in_bg()) {
+  if (gfx_pixelart_shown_in_bg()) {
     level->ts_redraw_bg = time_ms_cached() + 500;
   }
 

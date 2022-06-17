@@ -597,7 +597,7 @@ PyObject *thing_unused_flag87(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag88(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag89(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag90(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_ascii_shown_in_bg(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_fade_with_dist(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_jump_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cursor_path_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
