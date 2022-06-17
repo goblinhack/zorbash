@@ -991,6 +991,8 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
           //
           victim->add_enemy(this);
 
+          victim->wake("missed, but should still wake");
+
           //
           // See if armor crumbles
           //

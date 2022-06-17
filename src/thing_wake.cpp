@@ -14,7 +14,7 @@ void Thing::wake(const std::string &reason)
     return;
   }
 
-  if (! is_able_to_sleep()) {
+  if (! is_sleeping) {
     return;
   }
 
@@ -35,10 +35,6 @@ void Thing::wake(const std::string &reason)
 void Thing::awake(void)
 {
   if (is_dead || is_dying) {
-    return;
-  }
-
-  if (! is_able_to_sleep()) {
     return;
   }
 

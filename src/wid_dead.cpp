@@ -114,6 +114,7 @@ void Game::wid_dead_select(const char *reason)
   auto  width = br.x - tl.x - 1;
 
   wid_dead_window = new WidPopup("Game dead", tl, br, nullptr, "ui_dead", false, false);
+
   wid_set_on_key_up(wid_dead_window->wid_popup_container, wid_dead_key_up);
   wid_set_on_key_down(wid_dead_window->wid_popup_container, wid_dead_key_down);
   wid_raise(wid_dead_window->wid_popup_container);
@@ -125,22 +126,26 @@ void Game::wid_dead_select(const char *reason)
   wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
   wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
   wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-  wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+
+  if (! g_opt_ascii) {
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
+  }
+
   if (game->robot_mode) {
     wid_dead_window->log("Deactivated...");
   } else {

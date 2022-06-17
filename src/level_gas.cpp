@@ -76,6 +76,18 @@ void Level::tick_gas_poison(void)
   }
 #endif
 
+  //
+  // Anything less than 9 will cause gas to spread more
+  //
+  int reduction;
+  if (pcg_random_range(0, 100) < 80) {
+    reduction = 9;
+  } else if (pcg_random_range(0, 100) < 50) {
+    reduction = 8;
+  } else {
+    reduction = 7;
+  }
+
   for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; y++) {
     uint16_t x = DUNGEON_GAS_RESOLUTION;
 
@@ -145,7 +157,7 @@ void Level::tick_gas_poison(void)
         gi = 0;
       }
 
-      *n++ = (ga + gb + gc + gd + ge + gf + gg + gh + gi) / 9;
+      *n++ = (ga + gb + gc + gd + ge + gf + gg + gh + gi) / reduction;
     }
   }
 

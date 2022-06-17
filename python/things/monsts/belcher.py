@@ -8,7 +8,7 @@ def on_you_nat_attack(me, x, y):
 
 def on_idle(me, x, y):
     if not my.thing_is_sleeping(me):
-        my.level_spawn_gas_poison_around_thing(me, 2)
+        my.level_spawn_gas_poison_around_thing(me, 1)
 
 
 def on_death(me, x, y):
@@ -90,8 +90,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.text_long_description(self, "Dungeon belchers are carnivorous plants that have evolved creative means of catching their prey. Beware their stench...")
     my.text_short_description(self, "A gaseous belcher. But don't call it that to its face.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_CONSUMER)  # so it appears over things when consuming
+    my.z_depth(self, my.MAP_DEPTH_FLOOR2)
+    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
     delay = 200
