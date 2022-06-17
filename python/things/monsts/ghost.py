@@ -23,6 +23,7 @@ def tp_init(name, text_long_name):
     my.damage_cold_dice(self, "1")
     my.distance_vision(self, 10)
     my.gfx_anim_use(self, "attack_claws")
+    my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_glows(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)

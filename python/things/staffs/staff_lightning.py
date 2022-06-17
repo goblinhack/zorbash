@@ -67,6 +67,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_usable(self, True)
     my.is_target_select(self, True)
     my.is_staff(self, True)
+    my.gfx_ascii_fade_with_dist(self, True)
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)

@@ -499,7 +499,7 @@ do
       unused_flag89 \
       unused_flag9 \
       unused_flag90 \
-      unused_flag91 \
+      gfx_ascii_fade_with_dist \
       is_jump_blocker \
       is_cursor_path_blocker \
       gfx_ascii_mode_color_is_animated \

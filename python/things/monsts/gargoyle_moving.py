@@ -38,6 +38,7 @@ def tp_init(name, text_long_name):
     my.damage_natural_dice(self, "1d6+2")
     my.distance_vision(self, 10)
     my.gfx_anim_use(self, "attack_claws")
+    my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)

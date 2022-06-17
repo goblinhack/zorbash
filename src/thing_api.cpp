@@ -1865,10 +1865,10 @@ int Thing::unused_flag90(void)
   return (tp()->unused_flag90());
 }
 
-int Thing::unused_flag91(void)
+int Thing::gfx_ascii_fade_with_dist(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag91());
+  return (tp()->gfx_ascii_fade_with_dist());
 }
 
 int Thing::is_jump_blocker(void)

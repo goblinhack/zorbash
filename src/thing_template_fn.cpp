@@ -679,7 +679,7 @@ int Tp::unused_flag88(void) const { return _unused_flag88; }
 int Tp::unused_flag89(void) const { return _unused_flag89; }
 int Tp::unused_flag8(void) const { return _unused_flag8; }
 int Tp::unused_flag90(void) const { return _unused_flag90; }
-int Tp::unused_flag91(void) const { return _unused_flag91; }
+int Tp::gfx_ascii_fade_with_dist(void) const { return _gfx_ascii_fade_with_dist; }
 int Tp::is_jump_blocker(void) const { return _is_jump_blocker; }
 int Tp::is_cursor_path_blocker(void) const { return _is_cursor_path_blocker; }
 int Tp::gfx_ascii_mode_color_is_animated(void) const { return _gfx_ascii_mode_color_is_animated; }
@@ -1349,7 +1349,7 @@ void Tp::unused_flag88_set(int v) { _unused_flag88 = v; }
 void Tp::unused_flag89_set(int v) { _unused_flag89 = v; }
 void Tp::unused_flag8_set(int v) { _unused_flag8 = v; }
 void Tp::unused_flag90_set(int v) { _unused_flag90 = v; }
-void Tp::unused_flag91_set(int v) { _unused_flag91 = v; }
+void Tp::gfx_ascii_fade_with_dist_set(int v) { _gfx_ascii_fade_with_dist = v; }
 void Tp::is_jump_blocker_set(int v) { _is_jump_blocker = v; }
 void Tp::is_cursor_path_blocker_set(int v) { _is_cursor_path_blocker = v; }
 void Tp::gfx_ascii_mode_color_is_animated_set(int v) { _gfx_ascii_mode_color_is_animated = v; }
