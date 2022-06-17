@@ -126,7 +126,7 @@ void Level::display_map(void)
   pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
   if (! frozen) {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     //
     // Generate an FBO with all light sources merged together
     //
@@ -162,7 +162,7 @@ void Level::display_map(void)
   }
 
   if (! frozen) {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     //
     // Generate the non visited map with the light inverted on it
     // to hide visible areas
@@ -199,7 +199,7 @@ void Level::display_map(void)
   }
 
   if (! frozen) {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     //
     // Generate the currently visible map
     //
@@ -249,7 +249,7 @@ void Level::display_map(void)
   }
 
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     //
     // This is the final map output
     //
@@ -428,9 +428,17 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
   int z = MAP_DEPTH_OBJ;
   {
     for (auto y = miny; y < maxy; y++) {
-      for (auto x = minx; x < maxx; x++) {
-        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
-        FOR_ALL_THINGS_END()
+      for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
+        for (auto x = minx; x < maxx; x++) {
+          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          {
+            if (t->z_prio() != z_prio) {
+              continue;
+            }
+            t->blit_pixelart(fbo);
+          }
+          FOR_ALL_THINGS_END()
+        }
       }
     }
   }
@@ -440,7 +448,7 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
 }
 
 //
-// Things above the floor but behind the light
+// Blit objects that are in front of small lights so that the player is not lost in lava glow
 //
 void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
                                            const int16_t maxy)
@@ -454,20 +462,26 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
   blit_init();
   for (auto z = (int) MAP_DEPTH_OBJ; z <= MAP_DEPTH_OBJ; z++) {
     for (auto y = miny; y < maxy; y++) {
-      for (auto x = minx; x < maxx; x++) {
-        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
-        {
-          t->blit_pixelart(fbo);
-
-          //
-          // Sanity checks
-          //
-          IF_DEBUG2
+      for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
+        for (auto x = minx; x < maxx; x++) {
+          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
           {
-            if (! t->is_moving && ! t->is_jumping && ! t->is_falling) {
-              if (t->curr_at != make_point(t->interpolated_at_get())) {
-                t->die("Thing is not where its interpolated to be; is at %f,%f", t->interpolated_at_get().x,
-                       t->interpolated_at_get().y);
+            if (t->z_prio() != z_prio) {
+              continue;
+            }
+
+            t->blit_pixelart(fbo);
+
+            //
+            // Sanity checks
+            //
+            IF_DEBUG2
+            {
+              if (! t->is_moving && ! t->is_jumping && ! t->is_falling) {
+                if (t->curr_at != make_point(t->interpolated_at_get())) {
+                  t->die("Thing is not where its interpolated to be; is at %f,%f", t->interpolated_at_get().x,
+                         t->interpolated_at_get().y);
+                }
               }
             }
           }

@@ -44,6 +44,7 @@ enum {
   MAP_Z_PRIO_SWING,         // Attack animations
   MAP_Z_PRIO_CONSUMER,      // e.g. a gelatinous cube
   MAP_Z_PRIO_EFFECT,        // Potion effects
+  MAP_Z_PRIO_LAST,
 };
 
 enum {
