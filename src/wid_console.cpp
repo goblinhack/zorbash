@@ -48,6 +48,7 @@ uint8_t wid_console_init(void)
   TRACE_AND_INDENT();
   wid_console_inited = true;
 
+  command_add(config_debug_set, "set debug [0123]", "set debug level");
   command_add(config_fps_counter_set, "set fps [01]", "enable frames per sec counter");
   command_add(config_gfx_inverted_set, "set gfx inverted [01]", "enable reverse colors");
   command_add(config_game_pix_zoom_set, "set gfx zoom [0123456789]", "map zoom");

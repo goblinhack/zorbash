@@ -111,6 +111,7 @@ std::vector< uint8_t > sdl_fbo_save(int fbo);
 
 uint8_t config_errored(tokensp, void *context);
 uint8_t config_fps_counter_set(tokensp, void *context);
+uint8_t config_debug_set(tokensp, void *context);
 uint8_t config_game_pix_zoom_set(tokensp, void *context);
 uint8_t config_gfx_inverted_set(tokensp, void *context);
 uint8_t config_gfx_lights_set(tokensp, void *context);
