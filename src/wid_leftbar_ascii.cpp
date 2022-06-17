@@ -209,7 +209,11 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       point tl = make_point(0, y_at);
       point br = make_point(width - 1, y_at);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "(Closed)");
+      if (t->is_door()) {
+        wid_set_text(w, "(Locked)");
+      } else {
+        wid_set_text(w, "(Closed)");
+      }
       wid_set_style(w, UI_WID_STYLE_DARK);
     }
   }
