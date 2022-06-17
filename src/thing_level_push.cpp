@@ -46,10 +46,6 @@ void Thing::level_push(void)
     i_set_is_green_blood = true;
     level->is_green_blood_set(mx, my);
   }
-  if (is_pink_blood()) {
-    i_set_is_pink_blood = true;
-    level->is_pink_blood_set(mx, my);
-  }
   if (is_chasm()) {
     i_set_is_chasm = true;
     level->is_chasm_set(mx, my);

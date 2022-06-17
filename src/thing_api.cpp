@@ -1307,18 +1307,6 @@ int Thing::is_corpse_with_bones(void)
   return (tp()->is_corpse_with_bones());
 }
 
-int Thing::is_pink_blooded(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_pink_blooded());
-}
-
-int Thing::is_pink_splatter(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_pink_splatter());
-}
-
 int Thing::is_green_splatter(void)
 {
   TRACE_NO_INDENT();
@@ -2224,22 +2212,10 @@ int Thing::is_obstacle_when_dead(void)
   return (tp()->is_obstacle_when_dead());
 }
 
-int Thing::is_pink_blood_eater(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_pink_blood_eater());
-}
-
 int Thing::is_green_blood(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_green_blood());
-}
-
-int Thing::is_pink_blood(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_pink_blood());
 }
 
 int Thing::is_biome_swamp(void)

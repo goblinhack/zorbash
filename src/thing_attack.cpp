@@ -262,26 +262,6 @@ bool Thing::possible_to_attack(const Thingp victim)
       }
     }
 
-    if (me->is_pink_blood_eater()) {
-      if (! victim->is_attackable_by_monst()) {
-        dbg("No, cannot attack %s, not is_attackable by blood eating monst", victim->to_string().c_str());
-        return false;
-      }
-
-      if (victim->is_pink_blood()) {
-        //
-        // Doesn't matter if dead, if it can eat you...
-        //
-        if (victim->is_dead) {
-          dbg("Can eat dead blood: %s", victim->to_string().c_str());
-          return true;
-        }
-
-        dbg("Can attack blood or blood: %s", victim->to_string().c_str());
-        return true;
-      }
-    }
-
     if (me->attack_humanoid()) {
       if (victim->is_humanoid()) {
         if (! victim->is_dead) {

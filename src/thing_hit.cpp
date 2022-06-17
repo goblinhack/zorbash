@@ -1144,9 +1144,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   // Splat graphics
   //
   if (is_monst() || is_player()) {
-    if (is_pink_blooded()) {
-      level->thing_new(tp_random_pink_splatter()->name(), curr_at);
-    } else if (is_green_blooded()) {
+    if (is_green_blooded()) {
       level->thing_new(tp_random_green_splatter()->name(), curr_at);
     } else if (is_red_blooded()) {
       level->thing_new(tp_random_red_splatter()->name(), curr_at);

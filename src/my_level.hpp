@@ -76,7 +76,6 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lava {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_monst {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_pink_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_potion {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_red_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_ring {};
@@ -825,8 +824,6 @@ public:
   uint8_t is_monst(const int x, const int y);
   uint8_t is_monst(const point p);
   uint8_t is_monst_or_player(const point p);
-  uint8_t is_pink_blood(const int x, const int y);
-  uint8_t is_pink_blood(const point p);
   uint8_t is_potion(const int x, const int y);
   uint8_t is_potion(const point p);
   uint8_t is_red_blood(const int x, const int y);
@@ -1061,8 +1058,6 @@ public:
   void is_obs_wall_or_door_no_check_unset(const int x, const int y);
   void is_obs_wall_or_door_set(const int x, const int y);
   void is_obs_wall_or_door_unset(const int x, const int y);
-  void is_pink_blood_set(const int x, const int y);
-  void is_pink_blood_unset(const int x, const int y);
   void is_potion_set(const int x, const int y);
   void is_potion_unset(const int x, const int y);
   void is_red_blood_set(const int x, const int y);

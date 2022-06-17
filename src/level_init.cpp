@@ -29,7 +29,6 @@ void Level::clear(void)
   _is_ascend_sewer                   = {};
   _is_red_blood                      = {};
   _is_green_blood                    = {};
-  _is_pink_blood                     = {};
   _is_bridge                         = {};
   _is_chasm                          = {};
   _is_corpse                         = {};
