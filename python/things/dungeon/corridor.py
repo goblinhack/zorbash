@@ -6,7 +6,8 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name)
     # start sort marker
     my.gfx_ascii_mode_shown(self, True)
-    my.gfx_shown_in_bg(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_pixelart_shown_in_bg(self, True)
     my.is_corridor(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)

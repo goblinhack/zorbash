@@ -67,9 +67,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   }
 
   if (be_careful) {
-    dbg("Try to jump carefully %d,%d", to.x, to.y);
+    con("Try to jump carefully %d,%d", to.x, to.y);
   } else {
-    dbg("Try to jump to %d,%d", to.x, to.y);
+    con("Try to jump to %d,%d", to.x, to.y);
   }
   TRACE_AND_INDENT();
 
@@ -124,7 +124,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   auto x = to.x;
   auto y = to.y;
 
-  dbg("Try jump to %d,%d", x, y);
+  con("Try jump to %d,%d", x, y);
   TRACE_AND_INDENT();
 
   if (level->is_oob(x, y)) {
@@ -474,7 +474,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
-  dbg("Jump success.");
+  con("Jump success.");
   return true;
 }
 

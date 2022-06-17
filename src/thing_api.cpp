@@ -375,10 +375,10 @@ int Thing::gfx_pixelart_shadow_short(void)
   return (tp()->gfx_pixelart_shadow_short());
 }
 
-int Thing::gfx_shown_in_bg(void)
+int Thing::gfx_pixelart_shown_in_bg(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_shown_in_bg());
+  return (tp()->gfx_pixelart_shown_in_bg());
 }
 
 int Thing::gfx_pixelart_show_outlined(void)
@@ -1847,10 +1847,10 @@ int Thing::unused_flag89(void)
   return (tp()->unused_flag89());
 }
 
-int Thing::unused_flag90(void)
+int Thing::gfx_ascii_shown_in_bg(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag90());
+  return (tp()->gfx_ascii_shown_in_bg());
 }
 
 int Thing::gfx_ascii_fade_with_dist(void)

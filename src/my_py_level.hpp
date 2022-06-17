@@ -434,7 +434,7 @@ PyObject *level_unused_flag87_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag88_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag89_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag8_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag90_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_gfx_ascii_shown_in_bg_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_ascii_fade_with_dist_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_jump_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_cursor_path_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -339,7 +339,7 @@ void Level::display_pixelart_map_bg_things(void)
         for (auto x = 0; x < MAP_WIDTH; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
           {
-            if (! t->gfx_shown_in_bg()) {
+            if (! t->gfx_pixelart_shown_in_bg()) {
               continue;
             }
             if (z <= MAP_DEPTH_FLOOR2) {
@@ -367,7 +367,7 @@ void Level::display_pixelart_map_bg_things(void)
         for (auto x = 0; x < MAP_WIDTH; x++) {
           FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
           {
-            if (! t->gfx_shown_in_bg()) {
+            if (! t->gfx_pixelart_shown_in_bg()) {
               continue;
             }
             t->blit_pixelart(fbo);

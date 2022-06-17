@@ -13,7 +13,8 @@ def tp_init(name, tiles=[]):
     self = tp.Tp(name, "trampled grass")
     # start sort marker
     my.gfx_ascii_mode_shown(self, True)
-    my.gfx_shown_in_bg(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_pixelart_shown_in_bg(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
     my.is_burnable(self, True)
