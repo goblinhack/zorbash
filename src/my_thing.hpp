@@ -1911,7 +1911,7 @@ public:
   int unused_flag89(void);
   int unused_flag8(void);
   int unused_flag90(void);
-  int unused_flag91(void);
+  int gfx_ascii_fade_with_dist(void);
   int is_jump_blocker(void);
   int unused_flag9(void);
   int value(const Thingp it);

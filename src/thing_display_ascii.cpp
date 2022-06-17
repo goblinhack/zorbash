@@ -90,13 +90,17 @@ void Thing::blit_ascii_adjust_color2(color &c, bool fg)
 //
 void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
 {
+  //
+  // If shown on the left bar we want the original color
+  //
   if (left_bar) {
     return;
   }
 
+  //
+  // Adjust for hue etc
+  //
   blit_ascii_adjust_color2(c, fg);
-
-  fcolor l = level->ascii_light_source_no_check(curr_at);
 
   //
   // Looks odd if we brighten the floor
@@ -112,30 +116,56 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
     return;
   }
 
-  if (l == COLOR_NONE) {
-    return;
-  }
+  //
+  // For monsters and the like, if we combine colors then we lose information, like what type of snake it is. It's
+  // better instead to just fade the colors with distance.
+  //
+  if (gfx_ascii_fade_with_dist()) {
+    float max_mag = level->player ? level->player->light_dist_get() : 1.0;
+    if (max_mag <= 0.1) {
+      max_mag = 0.1;
+    }
+    float mag = 1.0 - (((float) distance_to_player() - 1) / max_mag);
 
-  color c2  = l.tocolor();
-  float dim = 0.5;
+    IF_DEBUG2 { mag = 1.0; }
 
-  int r = (((float) c.r) * dim) + c2.r;
-  if (r > 255) {
-    r = 255;
-  }
-  c.r = r;
+    c.r = ((float) c.r) * mag;
+    c.g = ((float) c.g) * mag;
+    c.b = ((float) c.b) * mag;
+  } else {
+    //
+    // Else combine the light sources, so we get a nice lava glow.
+    //
 
-  int g = (((float) c.g) * dim) + c2.g;
-  if (g > 255) {
-    g = 255;
-  }
-  c.g = g;
+    //
+    // Get the combined light on this tile
+    //
+    fcolor combined_light = level->ascii_light_source_no_check(curr_at);
+    if (combined_light == COLOR_NONE) {
+      return;
+    }
 
-  int b = (((float) c.b) * dim) + c2.b;
-  if (b > 255) {
-    b = 255;
+    float dim                  = 0.5;
+    color combined_light_color = combined_light.tocolor();
+
+    int r = (((float) c.r) * dim) + combined_light_color.r;
+    if (r > 255) {
+      r = 255;
+    }
+    c.r = r;
+
+    int g = (((float) c.g) * dim) + combined_light_color.g;
+    if (g > 255) {
+      g = 255;
+    }
+    c.g = g;
+
+    int b = (((float) c.b) * dim) + combined_light_color.b;
+    if (b > 255) {
+      b = 255;
+    }
+    c.b = b;
   }
-  c.b = b;
 }
 
 void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
@@ -167,7 +197,9 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
   // In debug mode, show all monstersj
   //
   bool shown_in_bg = gfx_shown_in_bg();
+
   IF_DEBUG2 { shown_in_bg = true; }
+  IF_DEBUG2 { lit = true; }
 
   if (gfx_ascii_mode_shown()) {
     if (lit) {

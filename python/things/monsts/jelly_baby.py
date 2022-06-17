@@ -37,6 +37,7 @@ def tp_init(name, text_long_name):
     my.distance_vision(self, 5)
     my.environ_avoids_fire(self, 100)
     my.gfx_anim_use(self, "green_splatter")
+    my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)

@@ -24,6 +24,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.damage_melee_dice(self, "2d10")
     my.equip_carry_anim(self, "double_shovel_carry")
     my.gfx_anim_use(self, "double_shovel_swing")
+    my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
