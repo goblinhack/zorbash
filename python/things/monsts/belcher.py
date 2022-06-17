@@ -90,7 +90,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.text_long_description(self, "Dungeon belchers are carnivorous plants that have evolved creative means of catching their prey. Beware their stench...")
     my.text_short_description(self, "A gaseous belcher. But don't call it that to its face.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_depth(self, my.MAP_DEPTH_FLOOR2)
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
