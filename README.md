@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- somtimes clicking far off does nothing                                                                                                       -->
 <!-- ascii check list - particles / lasers / gas / projectiles / explosions                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

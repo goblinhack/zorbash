@@ -35,6 +35,7 @@ def tp_init(name, text_long_name):
     my.damage_crush_dice(self, "2d6")
     my.damage_received_doubled_from_fire(self, True)
     my.environ_avoids_fire(self, 100)
+    my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_mode_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_shadow_short(self, True)
