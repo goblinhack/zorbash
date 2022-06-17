@@ -269,7 +269,6 @@ public:
   uint64_t i_set_is_necrotic_danger_level   : 1 {};
   uint64_t i_set_is_obs_destructable        : 1 {};
   uint64_t i_set_is_obs_wall_or_door        : 1 {};
-  uint64_t i_set_is_pink_blood              : 1 {};
   uint64_t i_set_is_poisonous_danger_level  : 1 {};
   uint64_t i_set_is_potion                  : 1 {};
   uint64_t i_set_is_red_blood               : 1 {};
@@ -1369,10 +1368,6 @@ public:
   int is_organic(void);
   int is_pack(void);
   int is_pillar(void);
-  int is_pink_blood_eater(void);
-  int is_pink_blooded(void);
-  int is_pink_blood(void);
-  int is_pink_splatter(void);
   int is_player(void);
   int is_poisonous_danger_level(void);
   int is_potion_eater(void);

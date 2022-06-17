@@ -665,12 +665,6 @@ bool Thing::matches(const std::string &what)
   if (is_corpse_with_bones() && (what == "is_corpse_with_bones")) {
     return true;
   }
-  if (is_pink_blooded() && (what == "is_pink_blooded")) {
-    return true;
-  }
-  if (is_pink_splatter() && (what == "is_pink_splatter")) {
-    return true;
-  }
   if (is_green_splatter() && (what == "is_green_splatter")) {
     return true;
   }
@@ -1146,9 +1140,6 @@ bool Thing::matches(const std::string &what)
     return true;
   }
   if (noise_blocker() && (what == "noise_blocker")) {
-    return true;
-  }
-  if (is_pink_blood_eater() && (what == "is_pink_blood_eater")) {
     return true;
   }
   if (is_green_blood() && (what == "is_green_blood")) {
@@ -1967,15 +1958,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "is_organic") {
     return &Thing::is_organic;
-  }
-  if (what == "is_pink_blood_eater") {
-    return &Thing::is_pink_blood_eater;
-  }
-  if (what == "is_pink_blooded") {
-    return &Thing::is_pink_blooded;
-  }
-  if (what == "is_pink_splatter") {
-    return &Thing::is_pink_splatter;
   }
   if (what == "is_player") {
     return &Thing::is_player;

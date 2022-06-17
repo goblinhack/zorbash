@@ -64,14 +64,6 @@ bool Thing::will_avoid_monst(const Thingp it)
     }
   }
 
-  if (me->is_pink_blood()) {
-    if (it->is_pink_blood_eater()) {
-      if (is_dangerous(it)) {
-        return true;
-      }
-    }
-  }
-
   if (me->is_humanoid()) {
     if (it->attack_humanoid()) {
       if (is_dangerous(it)) {

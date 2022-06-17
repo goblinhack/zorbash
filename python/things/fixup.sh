@@ -314,8 +314,6 @@ do
       is_organic \
       is_pack \
       is_pillar \
-      is_pink_blood_eater \
-      is_pink_blooded \
       is_pink_splatter \
       is_player \
       is_poisonous_danger_level \

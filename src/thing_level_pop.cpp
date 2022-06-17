@@ -30,10 +30,6 @@ void Thing::level_pop(void)
     i_set_is_green_blood = false;
     level->is_green_blood_unset(mx, my);
   }
-  if (i_set_is_pink_blood) {
-    i_set_is_pink_blood = false;
-    level->is_pink_blood_unset(mx, my);
-  }
   if (i_set_is_chasm) {
     i_set_is_chasm = false;
     level->is_chasm_unset(mx, my);

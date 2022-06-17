@@ -446,10 +446,6 @@ int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_organic(void) const { return _is_organic; }
 int Tp::is_pack(void) const { return _is_pack; }
 int Tp::is_pillar(void) const { return _is_pillar; }
-int Tp::is_pink_blood_eater(void) const { return _is_pink_blood_eater; }
-int Tp::is_pink_blooded(void) const { return _is_pink_blooded; }
-int Tp::is_pink_blood(void) const { return _is_pink_blood; }
-int Tp::is_pink_splatter(void) const { return _is_pink_splatter; }
 int Tp::is_player(void) const { return _is_player; }
 int Tp::is_poisonous_danger_level(void) const { return _is_poisonous_danger_level; }
 int Tp::is_potion_eater(void) const { return _is_potion_eater; }
@@ -988,10 +984,6 @@ void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
 void Tp::is_pack_set(int v) { _is_pack = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
-void Tp::is_pink_blood_eater_set(int v) { _is_pink_blood_eater = v; }
-void Tp::is_pink_blooded_set(int v) { _is_pink_blooded = v; }
-void Tp::is_pink_blood_set(int v) { _is_pink_blood = v; }
-void Tp::is_pink_splatter_set(int v) { _is_pink_splatter = v; }
 void Tp::is_player_set(int v) { _is_player = v; }
 void Tp::is_poisonous_danger_level_set(int v) { _is_poisonous_danger_level = v; }
 void Tp::is_potion_eater_set(int v) { _is_potion_eater = v; }

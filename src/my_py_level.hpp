@@ -236,10 +236,6 @@ PyObject *level_is_obs_wall_or_door_at(PyObject *obj, PyObject *args, PyObject *
 PyObject *level_is_on_firing_at_something(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_openable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_organic_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_pink_blood_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_pink_blood_eater_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_pink_blooded_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_pink_splatter_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_player_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_poisonous_danger_level_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_potion_at(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -190,15 +190,6 @@ bool Thing::is_disliked_by_me(const Thingp itp)
     }
   }
 
-  if (me->is_pink_blood()) {
-    if (it->is_pink_blood_eater()) {
-      if (is_dangerous(itp)) {
-        // log("%s is disliked line %d", it->to_string().c_str(), __LINE__);
-        return true;
-      }
-    }
-  }
-
   if (me->is_humanoid()) {
     if (it->attack_humanoid()) {
       if (is_dangerous(itp)) {
