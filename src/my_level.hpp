@@ -923,6 +923,7 @@ public:
   void display_pixelart_fade_in(void);
   void display_pixelart_fade_out(void);
   void display_pixelart_gas(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
+  void display_ascii_gas(const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_internal_particles(void);
   void display_pixelart_lasers(void);
   void display_pixelart_lava(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);

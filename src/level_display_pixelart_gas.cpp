@@ -17,7 +17,7 @@
 
 void Level::display_pixelart_gas(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
 #define GAS_TILES 16
   static std::array< Tilep, GAS_TILES > gas;

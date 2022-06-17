@@ -147,6 +147,7 @@ void Game::place_player(void)
         auto w = level->thing_new("wooden_cross", point(x, y));
         b->carry(w);
       }
+      // level->thing_new("belcher", point(x + 3, y));
 
       IF_DEBUG2
       {
@@ -168,7 +169,6 @@ void Game::place_player(void)
           t->carry(w);
           t->enchant_without_stone(w);
         }
-        // level->thing_new("belcher", point(x + 3, y));
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
         // level->thing_new("rat_giant", point(x - 1, y));
         // level->thing_new("rat_giant", point(x + 1, y));
