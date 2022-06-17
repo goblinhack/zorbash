@@ -14,6 +14,7 @@ def chasm_init(name, text_long_name, tiles=[]):
     my.gfx_ascii_mode_shown(self, True)
     my.is_biome_dungeon(self, True)
     my.is_chasm(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
     my.is_cursor_can_hover_over_x2_click(self, True)
     my.is_cursor_path_hazard(self, True)
     my.is_described_when_hovering_over(self, True)
