@@ -177,7 +177,7 @@ void Game::place_player(void)
         // level->thing_new("door_metal", point(x + 2, y));
         // level->thing_new("rock1", point(x + 1, y));
         // level->thing_new("rock1", point(x + 3, y));
-        // level->thing_new("gargoyle_static", point(x + 2, y - 2));
+        level->thing_new("gargoyle_static", point(x + 2, y - 2));
         // level->thing_new("lava", point(x, y));
         // level->thing_new("food_frog", point(x + 3, y - 1));
         // level->thing_new("fire", point(x + 1, y - 1));

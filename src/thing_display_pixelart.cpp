@@ -813,8 +813,8 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       int h_step = (1.0 - (((float) h) / ((float) m))) * GAME_MONST_HEALTH_BAR_STEPS;
       h_step     = std::min(h_step, GAME_MONST_HEALTH_BAR_STEPS);
       h_step     = std::max(h_step, 1);
-      auto y     = blit_br.y - ((1.0 - tile->py1 /* pct */) * tile->pix_height);
-      auto x     = (blit_tl.x + blit_br.x) / 2;
+      int y      = blit_br.y - ((1.0 - tile->py1 /* pct */) * tile->pix_height);
+      int x      = (blit_tl.x + blit_br.x) / 2;
 
       //
       // Add health bar
@@ -824,7 +824,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
         if (maybe_infop()->monst_state) {
           if (is_sleeping) {
             //
-            // Don't show gargoyles when snoozing for example
+            // If asleep and we are allowed to show the Zzz animation. Not for gargoyles when asleep.
             //
             if (gfx_pixelart_show_asleep_anim()) {
               index = 1;
@@ -832,6 +832,10 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           }
         }
 
+        //
+        // Index 0 is the normal healthbar
+        // Index 1 is the healthbar + Zzz animation
+        //
         auto tile = get(game->tile_cache_health, index, h_step);
         if (unlikely(! tile)) {
           //
