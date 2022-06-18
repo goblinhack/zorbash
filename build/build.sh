@@ -714,8 +714,6 @@ else
     log_die "Build failed"
     exit 1
 fi
-    log_die "Build failed"
-    exit 1
 
 cd ..
 exit 0
