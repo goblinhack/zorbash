@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- fix dead widget for ascii mode                                                                                                               -->
 <!-- fix invent  widget for ascii mode                                                                                                            -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->
 <!-- fix enchant  widget for ascii mode                                                                                                           -->
@@ -43,7 +42,7 @@
 <!-- - bloat                                                                                                                                      -->
 <!-- - cloak of jelly                                                                                                                             -->
 <!-- - need allies                                                                                                                                -->
-<!-- - potion of paralysis should paralyse attackers too, so it is useful / vampire?                                                              -->
+<!-- - potion of paralysis                                                                                                                        -->
 <!-- - cursed weapon with bad luck / horseshoe / witches hat?                                                                                     -->
 <!-- - luck trap                                                                                                                                  -->
 <!-- - luck and enchanted stuff                                                                                                                   -->
