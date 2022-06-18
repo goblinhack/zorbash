@@ -5,7 +5,7 @@
 <!-- fix invent  widget for ascii mode                                                                                                            -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->
 <!-- fix enchant  widget for ascii mode                                                                                                           -->
-<!-- ascii check list - particles / lasers / gas / projectiles / explosions                                                                       -->
+<!-- ascii check list - particles / lasers / projectiles / explosions                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -13,9 +13,9 @@
 <!-- sudo operf ./zorbash-game --playername discobob --seed victimlake --nodebug --quick-start                                                    -->
 <!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
 <!-- ------                                                                                                                                       -->
-<!-- Accessibilit                                                                                                                                 -->
+<!--                                                                                                                                              -->
+<!-- Accessibility                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
-<!-- letter outline                                                                                                                               -->
 <!-- no lighting effects mode                                                                                                                     -->
 <!-- keyboard only mode                                                                                                                           -->
 <!-- keyboard only mode single hand i.e. no key combinations                                                                                      -->
@@ -71,7 +71,6 @@
 <!-- - different sound for bosses                                                                                                                 -->
 <!-- - crystal collection                                                                                                                         -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
-<!-- ------                                                                                                                                       -->
 <!-- - char selection                                                                                                                             -->
 <!-- - level fall through to special level ?                                                                                                      -->
 <!-- - hub shop levels                                                                                                                            -->
