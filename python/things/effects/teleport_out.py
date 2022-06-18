@@ -12,7 +12,7 @@ def tp_init(name):
     my.damage_cold_chance_d1000(self, 0, 1000)
     my.damage_cold_dice(self, "2d6")
     my.damage_nat_attack_type(self, "telefreeze")
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_floating(self, True)

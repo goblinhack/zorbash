@@ -31,7 +31,7 @@ def init_weapon(name, text_long_name, text_short_name):
     my.equip_carry_anim(self, "axe_carry")
     my.gfx_anim_use(self, "axe_swing")
     my.gfx_ascii_fade_with_dist(self, True)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)

@@ -932,7 +932,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag88() && (what == "unused_flag88")) {
     return true;
   }
-  if (unused_flag89() && (what == "unused_flag89")) {
+  if (gfx_ascii_shown_as_gray_in_shadow() && (what == "gfx_ascii_shown_as_gray_in_shadow")) {
     return true;
   }
   if (gfx_ascii_shown_in_bg() && (what == "gfx_ascii_shown_in_bg")) {
@@ -947,7 +947,7 @@ bool Thing::matches(const std::string &what)
   if (is_cursor_path_blocker() && (what == "is_cursor_path_blocker")) {
     return true;
   }
-  if (gfx_ascii_mode_color_is_animated() && (what == "gfx_ascii_mode_color_is_animated")) {
+  if (gfx_ascii_color_is_animated() && (what == "gfx_ascii_color_is_animated")) {
     return true;
   }
   if (gfx_ascii_animated() && (what == "gfx_ascii_animated")) {
@@ -956,19 +956,19 @@ bool Thing::matches(const std::string &what)
   if (tick_prio() && (what == "tick_prio")) {
     return true;
   }
-  if (gfx_ascii_mode_color_spread_hue() && (what == "gfx_ascii_mode_color_spread_hue")) {
+  if (gfx_ascii_color_spread_hue() && (what == "gfx_ascii_color_spread_hue")) {
     return true;
   }
-  if (gfx_ascii_mode_color_spread_alpha() && (what == "gfx_ascii_mode_color_spread_alpha")) {
+  if (gfx_ascii_color_spread_alpha() && (what == "gfx_ascii_color_spread_alpha")) {
     return true;
   }
-  if (gfx_ascii_mode_color_spread_blue() && (what == "gfx_ascii_mode_color_spread_blue")) {
+  if (gfx_ascii_color_spread_blue() && (what == "gfx_ascii_color_spread_blue")) {
     return true;
   }
-  if (gfx_ascii_mode_color_spread_green() && (what == "gfx_ascii_mode_color_spread_green")) {
+  if (gfx_ascii_color_spread_green() && (what == "gfx_ascii_color_spread_green")) {
     return true;
   }
-  if (gfx_ascii_mode_color_spread_red() && (what == "gfx_ascii_mode_color_spread_red")) {
+  if (gfx_ascii_color_spread_red() && (what == "gfx_ascii_color_spread_red")) {
     return true;
   }
   if (attack_no_msg() && (what == "attack_no_msg")) {
@@ -2199,11 +2199,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "temperature") {
     return &Thing::temperature;
   }
-  if (what == "gfx_ascii_mode_color_spread_green") {
-    return &Thing::gfx_ascii_mode_color_spread_green;
+  if (what == "gfx_ascii_color_spread_green") {
+    return &Thing::gfx_ascii_color_spread_green;
   }
-  if (what == "gfx_ascii_mode_color_spread_red") {
-    return &Thing::gfx_ascii_mode_color_spread_red;
+  if (what == "gfx_ascii_color_spread_red") {
+    return &Thing::gfx_ascii_color_spread_red;
   }
   if (what == "attack_no_msg") {
     return &Thing::attack_no_msg;
@@ -2535,8 +2535,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag88") {
     return &Thing::unused_flag88;
   }
-  if (what == "unused_flag89") {
-    return &Thing::unused_flag89;
+  if (what == "gfx_ascii_shown_as_gray_in_shadow") {
+    return &Thing::gfx_ascii_shown_as_gray_in_shadow;
   }
   if (what == "unused_flag8") {
     return &Thing::unused_flag8;
@@ -2553,8 +2553,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_cursor_path_blocker") {
     return &Thing::is_cursor_path_blocker;
   }
-  if (what == "gfx_ascii_mode_color_is_animated") {
-    return &Thing::gfx_ascii_mode_color_is_animated;
+  if (what == "gfx_ascii_color_is_animated") {
+    return &Thing::gfx_ascii_color_is_animated;
   }
   if (what == "gfx_ascii_animated") {
     return &Thing::gfx_ascii_animated;
@@ -2562,14 +2562,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "tick_prio") {
     return &Thing::tick_prio;
   }
-  if (what == "gfx_ascii_mode_color_spread_hue") {
-    return &Thing::gfx_ascii_mode_color_spread_hue;
+  if (what == "gfx_ascii_color_spread_hue") {
+    return &Thing::gfx_ascii_color_spread_hue;
   }
-  if (what == "gfx_ascii_mode_color_spread_alpha") {
-    return &Thing::gfx_ascii_mode_color_spread_alpha;
+  if (what == "gfx_ascii_color_spread_alpha") {
+    return &Thing::gfx_ascii_color_spread_alpha;
   }
-  if (what == "gfx_ascii_mode_color_spread_blue") {
-    return &Thing::gfx_ascii_mode_color_spread_blue;
+  if (what == "gfx_ascii_color_spread_blue") {
+    return &Thing::gfx_ascii_color_spread_blue;
   }
   if (what == "unused_flag9") {
     return &Thing::unused_flag9;

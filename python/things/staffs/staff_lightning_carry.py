@@ -6,7 +6,7 @@ def tp_init(name):
     self = tp.Tp(name)
     # start sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)

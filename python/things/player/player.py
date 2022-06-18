@@ -341,7 +341,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.environ_avoids_fire(self, 10)
     my.environ_avoids_poison(self, 100)
     my.gfx_anim_use(self, "attack_punch")
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
     my.gfx_pixelart_flickers(self, True)

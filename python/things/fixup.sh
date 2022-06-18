@@ -84,7 +84,7 @@ do
       environ_avoids_poison \
       environ_avoids_water \
       gfx_an_animation_only \
-      gfx_ascii_mode_color_spread_hue \
+      gfx_ascii_color_spread_hue \
       gfx_attack_anim \
       gfx_bounce_always \
       gfx_bounce_on_move \
@@ -494,17 +494,17 @@ do
       unused_flag86 \
       unused_flag87 \
       unused_flag88 \
-      unused_flag89 \
+      gfx_ascii_shown_as_gray_in_shadow \
       unused_flag9 \
       gfx_ascii_shown_in_bg \
       gfx_ascii_fade_with_dist \
       is_jump_blocker \
       is_cursor_path_blocker \
-      gfx_ascii_mode_color_is_animated \
+      gfx_ascii_color_is_animated \
       gfx_ascii_animated \
       tick_prio \
-      gfx_ascii_mode_color_spread_hue \
-      gfx_ascii_mode_color_spread_hue \
+      gfx_ascii_color_spread_hue \
+      gfx_ascii_color_spread_hue \
       on_death_is_open
     do
         grep -q $arg $PAYLOAD

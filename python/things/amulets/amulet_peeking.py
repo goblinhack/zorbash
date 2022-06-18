@@ -19,7 +19,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.equip_carry_anim(self, "amulet_peeking_carry")
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "250")
     my.is_able_to_fall(self, True)

@@ -19,7 +19,7 @@ def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # start sort marker
 
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.is_debuff(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)

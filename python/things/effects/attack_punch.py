@@ -6,7 +6,7 @@ def init1(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # start sort marker
     my.collision_check(self, True)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated_can_vflip(self, True)
     my.gfx_pixelart_animated(self, True)

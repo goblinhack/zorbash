@@ -17,7 +17,7 @@ def tp_init(name, text_long_name, text_short_name):
     # start sort marker
     my.blast_max_radius(self, 2)
     my.collision_check(self, True)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.is_loggable(self, True)
     my.is_no_tile(self, True)
     my.is_usable(self, True)

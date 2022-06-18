@@ -20,7 +20,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.capacity_height(self, 8)
     my.capacity_width(self, 8)
     my.collision_hit_priority(self, 6)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_able_to_fall(self, True)

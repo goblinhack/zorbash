@@ -19,7 +19,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.collision_check(self, True)
     my.damage_acid_chance_d1000(self, 0, 1000)
     my.damage_acid_dice(self, "1d10")  # This is the damage when the monst acids
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.is_acid(self, True)
     my.is_loggable(self, True)
     my.is_no_tile(self, True)

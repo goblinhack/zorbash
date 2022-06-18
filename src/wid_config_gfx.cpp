@@ -69,7 +69,7 @@ static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int32_t x, int32_t y, 
   return true;
 }
 
-static uint8_t wid_config_ascii_mode_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_ascii_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -653,7 +653,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_config_ascii_mode_toggle);
+    wid_set_on_mouse_up(w, wid_config_ascii_toggle);
 
     if (g_opt_ascii) {
       wid_set_text(w, "True");

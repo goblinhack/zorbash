@@ -27,7 +27,7 @@ def tp_init(
     # start sort marker
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 2)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)

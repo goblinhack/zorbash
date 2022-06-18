@@ -12,8 +12,9 @@ def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "trampled grass")
     # start sort marker
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)

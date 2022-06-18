@@ -9,7 +9,7 @@ def on_fall(me, x, y):
 def tp_init(name):
     self = tp.Tp(name)
     # start sort marker
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
