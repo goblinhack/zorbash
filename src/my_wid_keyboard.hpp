@@ -61,9 +61,11 @@ typedef struct {
    */
   int is_new;
 
+  size_t max_len {};
+
 } wid_keyboard_ctx;
 
 Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keyboard_event_t selected,
-                  wid_keyboard_event_t cancelled);
+                  wid_keyboard_event_t cancelled, size_t max_len);
 
 extern int wid_keyboard_visible;

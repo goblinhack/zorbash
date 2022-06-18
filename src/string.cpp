@@ -293,25 +293,25 @@ int32_t strisregexp(const char *in)
   return false;
 }
 
-size_t strlcpy_(char *dst, const char *src, size_t maxlen)
+size_t strlcpy_(char *dst, const char *src, size_t max_len)
 {
   TRACE_AND_INDENT();
   size_t srclen = strlen(src);
-  if (maxlen > 0) {
-    uint32_t len = std::min(srclen, maxlen - 1);
+  if (max_len > 0) {
+    uint32_t len = std::min(srclen, max_len - 1);
     memcpy(dst, src, len);
     dst[ len ] = '\0';
   }
   return (srclen);
 }
 
-size_t strlcat_(char *dst, const char *src, size_t maxlen)
+size_t strlcat_(char *dst, const char *src, size_t max_len)
 {
   TRACE_AND_INDENT();
   uint32_t dstlen = strlen(dst);
   uint32_t srclen = strlen(src);
-  if (dstlen < maxlen) {
-    strlcpy_(dst + dstlen, src, maxlen - dstlen);
+  if (dstlen < max_len) {
+    strlcpy_(dst + dstlen, src, max_len - dstlen);
   }
   return (dstlen + srclen);
 }

@@ -261,6 +261,7 @@ void  wid_set_text_top(Widp, uint8_t val);
 void  wid_set_text(Widp, int);
 void  wid_set_text(Widp, std::string);
 void  wid_set_text(Widp, std::wstring);
+void  wid_set_text_max_len(Widp, size_t);
 void  wid_set_thing_id2_context(Widp w, Thingp);
 void  wid_set_thing_id_context(Widp w, Thingp);
 void  wid_set_top(Widp, uint8_t val);
@@ -554,6 +555,7 @@ public:
   // Text that appears on the wid.
   //
   std::wstring text {};
+  size_t       max_len {};
 
   //
   // Action handlers

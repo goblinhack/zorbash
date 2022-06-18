@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- need name limit                                                                                                                              -->
 <!-- fix dead widget for ascii mode                                                                                                               -->
 <!-- fix invent  widget for ascii mode                                                                                                            -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->

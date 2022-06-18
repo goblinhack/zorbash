@@ -341,7 +341,7 @@ static void wid_main_menu_tick(Widp w)
   game_display_title_fg3();
   game_display_title_fg4();
 
-  ascii_putf(1, 1, GREEN, BLACK, L"Version " MYVER);
+  ascii_putf(1, 1, GREEN, BLACK, L"Version: " MYVER);
 
   {
     auto        k    = ::to_string(game->config.key_gfx_toggle);
