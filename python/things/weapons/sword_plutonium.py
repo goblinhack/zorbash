@@ -21,8 +21,6 @@ def on_tick(owner, me, x, y):
             target = owner
             if my.pcg_randint(1, 100) > 10:
                 my.thing_hit_damage_draining(me, target, my.pcg_randint(1, 4))
-            elif my.pcg_randint(1, 100) > 10:
-                my.thing_hit_damage_health(me, target, my.pcg_randint(1, 10))
             else:
                 my.thing_hit_damage_poison(me, target, my.pcg_randint(1, 20))
 
