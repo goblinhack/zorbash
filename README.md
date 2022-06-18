@@ -300,7 +300,7 @@ Pixelart Screenshots
 How to build
 ------------
 
-- On Linux: (Ubuntu 21.04)
+- On Linux: (Ubuntu)
 <pre>
     sh ./RUNME
 </pre>
@@ -321,6 +321,12 @@ How to build
 <!-- </pre>                                                                -->
 
 If it doesn't build, just email goblinhack@gmail.com for help
+
+Hardware Specs
+--------------
+The game should run fine on low end PCs, a half decent graphics card and
+likely > 4g of RAM. If graphics is a limitation, you could run it in ascii
+mode.
 
 Dependancies
 ------------
