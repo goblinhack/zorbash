@@ -106,7 +106,7 @@ void Game::start(void)
   CON("%%fg=red$.  .      .     .    .  :  :           .   .        :%%fg=reset$");
   CON("%%fg=red$.         .                :     . :   .            :%%fg=reset$");
   CON("%%fg=red$.  . .  : . :   .  : .  :  ::   :. : . ..  .   .  : :%%fg=reset$");
-  CON("%%fg=green$Version " MYVER "%%fg=reset$");
+  CON("%%fg=green$Version: " MYVER "%%fg=reset$");
   CON("Press %%fg=yellow$<tab>%%fg=reset$ to complete commands.");
   CON("Press %%fg=yellow$?%%fg=reset$ to show command options.");
   CON("You can also enter python code here.");

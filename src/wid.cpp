@@ -1191,6 +1191,8 @@ void wid_set_debug(Widp w, uint8_t val)
   w->debug = val;
 }
 
+void wid_set_text_max_len(Widp w, size_t max_len) { w->max_len = max_len; }
+
 void wid_set_text(Widp w, std::wstring text)
 {
   TRACE_AND_INDENT();
@@ -1203,6 +1205,12 @@ void wid_set_text(Widp w, std::wstring text)
     }
 
     w->text = text;
+  }
+
+  if (w->max_len) {
+    if (w->text.size() > w->max_len) {
+      w->text.resize(w->max_len);
+    }
   }
 
   auto len = w->text.size();

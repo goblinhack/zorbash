@@ -43,6 +43,6 @@ void Game::wid_choose_seed_select(void)
   if (seed.empty()) {
     seed = game->seed_name;
   }
-  wid_choose_seed =
-      wid_keyboard(string_to_wstring(seed), L"Enter a name or number for the dungeon seed", selected, cancelled);
+  wid_choose_seed = wid_keyboard(string_to_wstring(seed), L"Enter a name or number for the dungeon seed", selected,
+                                 cancelled, UI_RIGHTBAR_WIDTH);
 }

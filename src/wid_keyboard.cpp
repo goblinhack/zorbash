@@ -772,7 +772,7 @@ static void wid_keyboard_bg_tick(Widp w)
 }
 
 Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keyboard_event_t selected,
-                  wid_keyboard_event_t cancelled)
+                  wid_keyboard_event_t cancelled, size_t max_len)
 {
   TRACE_AND_INDENT();
   wid_keyboard_visible = true;
@@ -787,9 +787,10 @@ Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keybo
   ctx->cancelled        = cancelled;
   ctx->selected         = selected;
 
-  Widp window = wid_new_square_window("wid keyboard");
-  ctx->w      = window;
-  ctx->is_new = true;
+  Widp window  = wid_new_square_window("wid keyboard");
+  ctx->w       = window;
+  ctx->is_new  = true;
+  ctx->max_len = max_len;
 
   /*
    * Main window
@@ -847,6 +848,10 @@ Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keybo
     wid_set_on_key_down(w, wid_keyboard_text_input_key_event);
     wid_set_void_context(w, ctx);
     wid_set_style(w, UI_WID_STYLE_RED);
+
+    if (max_len) {
+      wid_set_text_max_len(w, max_len);
+    }
 
     wid_set_color(w, WID_COLOR_BG, GRAY20);
     wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
