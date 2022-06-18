@@ -1,6 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- need name limit                                                                                                                              -->
 <!-- fix dead widget for ascii mode                                                                                                               -->
 <!-- fix invent  widget for ascii mode                                                                                                            -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->
@@ -269,12 +270,19 @@ Press <TAB> to switch between modes during the game.
 <img alt="Ascii art" src="pics/ascii/screenshot.3.png" width="45%">
 </p>
 
+<p align="center">
+<img alt="Pixel art" src="pics/pixelart/screenshot.4.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img alt="Ascii art" src="pics/ascii/screenshot.4.png" width="45%">
+</p>
+
 Ascii Screenshots
 -----------------
 
 ![Alt text](pics/ascii/screenshot.1.png?raw=true "")
 ![Alt text](pics/ascii/screenshot.2.png?raw=true "")
 ![Alt text](pics/ascii/screenshot.3.png?raw=true "")
+![Alt text](pics/ascii/screenshot.4.png?raw=true "")
 
 Pixelart Screenshots
 --------------------
