@@ -13,6 +13,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.gfx_ascii_mode_color_spread_green(self, 20)
     my.gfx_ascii_mode_color_spread_red(self, 5)
     my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_water(self, True)
     my.is_able_to_fall(self, True)

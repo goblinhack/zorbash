@@ -16,7 +16,7 @@
 //
 // For things like walls we color them differently so it is easier to see.
 //
-void Thing::blit_ascii_adjust_color2(color &c, bool fg)
+void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
 {
   if (gfx_ascii_mode_color_spread_hue()) {
     if (fg) {
@@ -100,7 +100,7 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   //
   // Adjust for hue etc
   //
-  blit_ascii_adjust_color2(c, fg);
+  blit_ascii_adjust_color_hue(c, fg);
 
   //
   // Looks odd if we brighten the floor
@@ -237,16 +237,19 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
       }
     } else if (get(level->can_see_ever.can_see, curr_at.x, curr_at.y) || g_opt_debug2) {
       //
-      // e.g unlit dungeon floor
+      // e.g unlit areas like the dungeon floor
       //
       if (shown_in_bg) {
         if (tile->ascii_bg_col_value != COLOR_NONE) {
           ascii_set_bg(p.x, p.y, UNICODE_BLOCK);
           color c = tile->ascii_bg_col_value;
-          c.r     = ((int) (c.r / 4) * 1);
-          c.g     = ((int) (c.g / 5) * 1);
-          c.b     = ((int) (c.b / 2) * 1);
-          c.a     = tile->ascii_alpha;
+          //
+          // Apply a nice tint.
+          //
+          c.r = ((int) (c.r / 4));
+          c.g = ((int) (c.g / 5));
+          c.b = ((int) (c.b / 2));
+          c.a = tile->ascii_alpha;
           blit_ascii_adjust_color(c, bg, left_bar);
           ascii_set_bg(p.x, p.y, c);
         }
@@ -254,10 +257,13 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
         if (tile->ascii_bg_char) {
           ascii_set_bg(p.x, p.y, tile->ascii_bg_char);
           color c = tile->ascii_bg_col_value;
-          c.r     = ((int) (c.r / 4) * 1);
-          c.g     = ((int) (c.g / 5) * 1);
-          c.b     = ((int) (c.b / 2) * 1);
-          c.a     = tile->ascii_alpha;
+          //
+          // Apply a nice tint.
+          //
+          c.r = ((int) (c.r / 4));
+          c.g = ((int) (c.g / 5));
+          c.b = ((int) (c.b / 2));
+          c.a = tile->ascii_alpha;
           blit_ascii_adjust_color(c, bg, left_bar);
           ascii_set_bg(p.x, p.y, c);
         }
@@ -265,11 +271,13 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
         if (tile->ascii_fg_char) {
           ascii_set_fg(p.x, p.y, tile->ascii_fg_char);
           color c = tile->ascii_fg_col_value;
-          c.r     = ((int) (c.r / 4) * 1);
-          c.g     = ((int) (c.g / 4) * 1);
-          c.b     = ((int) (c.b / 4) * 1);
-          c.a     = tile->ascii_alpha;
-          blit_ascii_adjust_color(c, fg, left_bar);
+          //
+          // Don't hue adjust fg chars in the shadows. It just makes it harder to see.
+          //
+          c.r = ((int) (c.r / 4));
+          c.g = ((int) (c.g / 4));
+          c.b = ((int) (c.b / 4));
+          c.a = tile->ascii_alpha;
           ascii_set_fg(p.x, p.y, c);
         }
       }

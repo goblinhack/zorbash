@@ -1,6 +1,10 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- fix dead widget for ascii mode                                                                                                               -->
+<!-- fix invent  widget for ascii mode                                                                                                            -->
+<!-- fix collect  widget for ascii mode                                                                                                           -->
+<!-- fix enchant  widget for ascii mode                                                                                                           -->
 <!-- ascii check list - particles / lasers / gas / projectiles / explosions                                                                       -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -326,7 +330,8 @@ Hardware Specs
 --------------
 The game should run fine on low end PCs, a half decent graphics card and
 likely > 4g of RAM. If graphics is a limitation, you could run it in ascii
-mode.
+mode. I'd be interested in knowing of any low end specs that people get
+this PC working on.
 
 Dependancies
 ------------

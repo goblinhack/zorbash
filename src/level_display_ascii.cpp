@@ -37,14 +37,17 @@ void Level::update_light_ascii_map(void)
             continue;
           }
 
+          auto t = l->owner;
+          if (t->is_player()) {
+            continue;
+          }
+
           //
           // Skip lights that are in blocked off rooms the player cannot see
           //
           if (get(dmap_to_player.val, t->curr_at.x, t->curr_at.y) >= DMAP_IS_PASSABLE) {
             continue;
           }
-
-          auto t = l->owner;
 
           int light_scale = l->light_dist / TILE_WIDTH;
 

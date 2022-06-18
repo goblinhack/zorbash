@@ -13,7 +13,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.gfx_ascii_mode_color_spread_green(self, 20)
     my.gfx_ascii_mode_color_spread_red(self, 20)
     my.gfx_ascii_mode_shown(self, True)
-    my.gfx_ascii_shown_in_bg(self, False)
+    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
