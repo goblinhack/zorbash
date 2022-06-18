@@ -2124,7 +2124,7 @@ public:
   void awake(void);
   void barrel_tick(void);
   void blit_ascii_adjust_color(color &c, bool fg, bool leftbar);
-  void blit_ascii_adjust_color2(color &c, bool fg);
+  void blit_ascii_adjust_color_hue(color &c, bool fg);
   void blit_ascii(point tl, point br, point p, bool leftbar = false);
   void blit_ascii_at(point tl, bool lit = true, bool leftbar = false);
   void blit_end_reflection_submerged(uint8_t submerged);

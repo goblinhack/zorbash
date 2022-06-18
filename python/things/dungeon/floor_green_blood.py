@@ -7,6 +7,7 @@ def tp_init(name, text_long_name):
     # start sort marker
     my.collision_hit_priority(self, 2)
     my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated_can_vflip(self, True)
     my.gfx_pixelart_animated(self, True)

@@ -37,6 +37,7 @@ def tp_init(name, text_long_name):
     my.environ_avoids_fire(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)

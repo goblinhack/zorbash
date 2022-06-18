@@ -147,7 +147,7 @@ void Game::place_player(void)
         auto w = level->thing_new("wooden_cross", point(x, y));
         b->carry(w);
       }
-      level->thing_new("belcher", point(x + 3, y));
+      // level->thing_new("belcher", point(x + 3, y));
 
       IF_DEBUG2
       {
