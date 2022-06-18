@@ -432,7 +432,7 @@ PyObject *level_unused_flag85_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag86_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag87_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag88_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag89_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_gfx_ascii_shown_as_gray_in_shadow_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag8_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_ascii_shown_in_bg_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_gfx_ascii_fade_with_dist_at(PyObject *obj, PyObject *args, PyObject *keywds);

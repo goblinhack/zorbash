@@ -11,7 +11,7 @@ def tp_init(name):
     # start sort marker
     my.damage_cold_chance_d1000(self, 0, 1000)
     my.damage_cold_dice(self, "1d6")  # This is the damage when the monst fires
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)

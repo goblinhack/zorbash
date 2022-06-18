@@ -8,7 +8,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.collision_hit_priority(self, 6)
     my.environ_avoids_fire(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)

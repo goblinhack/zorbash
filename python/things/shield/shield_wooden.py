@@ -16,7 +16,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.damaged_chance_d10000(self, 20)
     my.enchant_max(self, 5)
     my.equip_carry_anim(self, "shield_wooden_carry")

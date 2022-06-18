@@ -39,7 +39,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.blast_max_radius(self, 2)
     my.charge_count(self, 3)
     my.collision_hit_priority(self, 5)

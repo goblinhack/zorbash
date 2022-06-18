@@ -5,7 +5,7 @@ import tp
 def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # start sort marker
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)

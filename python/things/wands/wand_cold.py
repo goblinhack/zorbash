@@ -40,7 +40,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.damage_received_doubled_from_fire(self, True)
     my.environ_avoids_water(self, 100)
     my.equip_carry_anim(self, "wand_cold_carry")
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "300")

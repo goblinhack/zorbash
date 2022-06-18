@@ -8,7 +8,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.collision_hit_priority(self, 0)
     my.collision_hit_priority(self, 6)
     my.environ_avoids_fire(self, 100)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gold_value_dice(self, "600")
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)

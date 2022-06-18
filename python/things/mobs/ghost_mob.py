@@ -25,7 +25,7 @@ def tp_init(name, text_long_name):
     my.environ_avoids_fire(self, 10)
     my.environ_avoids_water(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_glows(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)

@@ -7,7 +7,7 @@ def tp_init(name, tiles=[]):
     # start sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.health_initial_dice(self, "1d40")
     my.is_able_to_fall(self, True)

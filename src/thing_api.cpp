@@ -279,10 +279,10 @@ int Thing::initial_charge_count(void)
   return (tp()->charge_count());
 }
 
-int Thing::gfx_ascii_mode_shown(void)
+int Thing::gfx_ascii_shown(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_mode_shown());
+  return (tp()->gfx_ascii_shown());
 }
 
 int Thing::gfx_pixelart_animated_can_hflip(void)
@@ -1841,10 +1841,10 @@ int Thing::unused_flag88(void)
   return (tp()->unused_flag88());
 }
 
-int Thing::unused_flag89(void)
+int Thing::gfx_ascii_shown_as_gray_in_shadow(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag89());
+  return (tp()->gfx_ascii_shown_as_gray_in_shadow());
 }
 
 int Thing::gfx_ascii_shown_in_bg(void)
@@ -1865,10 +1865,10 @@ int Thing::is_jump_blocker(void)
   return (tp()->is_jump_blocker());
 }
 
-int Thing::gfx_ascii_mode_color_is_animated(void)
+int Thing::gfx_ascii_color_is_animated(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_mode_color_is_animated());
+  return (tp()->gfx_ascii_color_is_animated());
 }
 
 int Thing::tick_prio(void)
@@ -1877,34 +1877,34 @@ int Thing::tick_prio(void)
   return (tp()->tick_prio());
 }
 
-int Thing::gfx_ascii_mode_color_spread_hue(void)
+int Thing::gfx_ascii_color_spread_hue(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_mode_color_spread_hue());
+  return (tp()->gfx_ascii_color_spread_hue());
 }
 
-int Thing::gfx_ascii_mode_color_spread_alpha(void)
+int Thing::gfx_ascii_color_spread_alpha(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_mode_color_spread_alpha());
+  return (tp()->gfx_ascii_color_spread_alpha());
 }
 
-int Thing::gfx_ascii_mode_color_spread_blue(void)
+int Thing::gfx_ascii_color_spread_blue(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_mode_color_spread_blue());
+  return (tp()->gfx_ascii_color_spread_blue());
 }
 
-int Thing::gfx_ascii_mode_color_spread_green(void)
+int Thing::gfx_ascii_color_spread_green(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_mode_color_spread_green());
+  return (tp()->gfx_ascii_color_spread_green());
 }
 
-int Thing::gfx_ascii_mode_color_spread_red(void)
+int Thing::gfx_ascii_color_spread_red(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_mode_color_spread_red());
+  return (tp()->gfx_ascii_color_spread_red());
 }
 
 int Thing::attack_no_msg(void)

@@ -591,7 +591,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
   //
   // Animated hue
   //
-  if (gfx_ascii_mode_color_is_animated()) {
+  if (gfx_ascii_color_is_animated()) {
     init_hue();
   }
 }

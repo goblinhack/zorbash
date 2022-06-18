@@ -12,8 +12,9 @@ def on_you_are_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "dry grass")
     # start sort marker
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shadow_very_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)

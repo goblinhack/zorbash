@@ -14,7 +14,7 @@ def tp_init(name, text_long_name):
     my.damage_fire_dice(self, "1d6+1")
     my.damage_nat_attack_type(self, "fire")
     my.environ_avoids_water(self, 100)
-    my.gfx_ascii_mode_shown(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_on_fire_anim(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)

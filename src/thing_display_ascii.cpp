@@ -18,7 +18,7 @@
 //
 void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
 {
-  if (gfx_ascii_mode_color_spread_hue()) {
+  if (gfx_ascii_color_spread_hue()) {
     if (fg) {
       c = color_change_hue(c, ((int) blit_color.r) - 128);
     } else {
@@ -29,7 +29,7 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
   }
 
   if (c.r) {
-    if (gfx_ascii_mode_color_spread_red()) {
+    if (gfx_ascii_color_spread_red()) {
       int adjust  = ((int) blit_color.r - 128);
       int new_col = ((int) c.r) + adjust;
       if (new_col < 0) {
@@ -43,7 +43,7 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
   }
 
   if (c.g) {
-    if (gfx_ascii_mode_color_spread_green()) {
+    if (gfx_ascii_color_spread_green()) {
       int adjust  = ((int) blit_color.g - 128);
       int new_col = ((int) c.g) + adjust;
       if (new_col < 0) {
@@ -57,7 +57,7 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
   }
 
   if (c.b) {
-    if (gfx_ascii_mode_color_spread_blue()) {
+    if (gfx_ascii_color_spread_blue()) {
       int adjust  = ((int) blit_color.b - 128);
       int new_col = ((int) c.b) + adjust;
       if (new_col < 0) {
@@ -71,7 +71,7 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
   }
 
   if (c.a) {
-    if (gfx_ascii_mode_color_spread_alpha()) {
+    if (gfx_ascii_color_spread_alpha()) {
       int adjust  = ((int) blit_color.a - 128);
       int new_col = ((int) c.a) + adjust;
       if (new_col < 0) {
@@ -201,7 +201,7 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
   IF_DEBUG2 { shown_in_bg = true; }
   IF_DEBUG2 { lit = true; }
 
-  if (gfx_ascii_mode_shown()) {
+  if (gfx_ascii_shown()) {
     if (lit) {
       //
       // e.g dungeon floor
@@ -274,10 +274,20 @@ void Thing::blit_ascii_at(point p, bool lit, bool left_bar)
           //
           // Don't hue adjust fg chars in the shadows. It just makes it harder to see.
           //
-          c.r = ((int) (c.r / 4));
-          c.g = ((int) (c.g / 4));
-          c.b = ((int) (c.b / 4));
-          c.a = tile->ascii_alpha;
+          if (gfx_ascii_shown_as_gray_in_shadow()) {
+            //
+            // Show items plainly so it is easier to see.
+            //
+            c = GRAY20;
+          } else {
+            //
+            // Dim the char substantially.
+            //
+            c.r = ((int) (c.r / 4));
+            c.g = ((int) (c.g / 4));
+            c.b = ((int) (c.b / 4));
+            c.a = tile->ascii_alpha;
+          }
           ascii_set_fg(p.x, p.y, c);
         }
       }
