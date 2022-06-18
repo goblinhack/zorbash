@@ -78,9 +78,27 @@ tech_support()
         /mingw64/bin/gcc.exe --version 2>/dev/null # msys2
         echo
 
+        log_info "DEBUG: Python:"
+        echo =====================================================
+        set -x
+        which python
+        python --version
+        which python3-config
+        python3-config
+        python3-config --prefix
+        python3-config --includes
+        python3-config --libs
+        python3-config --cflags
+        python3-config --ldflags
+        set +x
+        echo
+
         log_info "DEBUG: Make:"
         echo =====================================================
+        set -x
         which make
+        make --version
+        set +x
         echo
 
         log_info "DEBUG: Makefile:"

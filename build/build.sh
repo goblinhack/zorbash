@@ -135,9 +135,6 @@ gcc_help()
     exit 1
 }
 
-log_info "Make path                  : "`which make`
-log_info "Make version               : "`make --version`
-
 SDL2_SCORE=0
 
 if [ "$SDL2_CONFIG" != "" ]; then
