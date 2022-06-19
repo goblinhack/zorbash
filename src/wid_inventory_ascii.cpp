@@ -49,7 +49,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected set");
   }
 
-  static int inventory_width  = 110;
+  static int inventory_width  = 112;
   static int inventory_height = 34;
 
   int left_half  = inventory_width / 2;
@@ -166,7 +166,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       {
         auto  wid_icon = wid_new_square_button(wid_slot, "item slot");
         point tl       = make_point(0, 0);
-        point br       = make_point(2, 2);
+        point br       = make_point(0, 0);
         wid_set_pos(wid_icon, tl, br);
         wid_set_int_context(wid_icon, slot);
         wid_set_on_mouse_over_begin(wid_icon, wid_slot_item_mouse_over_begin);
@@ -174,13 +174,13 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
         wid_set_on_mouse_up(wid_icon, wid_slot_item_mouse_up);
 
         if (t) {
-          auto tiles = &t->tp()->tiles;
-          if (tiles) {
-            auto tile = tile_first(tiles);
-            if (tile) {
-              wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-              wid_set_fg_tile(wid_icon, tile);
-            }
+          auto tile = tile_index_to_tile(t->tile_curr);
+          if (tile) {
+            wid_set_style(wid_icon, UI_WID_STYLE_DARK);
+            std::wstring text;
+            text += tile->ascii_fg_char;
+            wid_set_text(wid_icon, text);
+            wid_set_color(wid_icon, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
           }
 
           if (wid_inventory_thing_selected) {
@@ -198,14 +198,15 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       {
         auto wid_item = wid_new_square_button(wid_slot, "item slot");
 
-        point tl = make_point(3, 0);
-        point br = make_point(width - 1, 2);
+        point tl = make_point(2, 0);
+        point br = make_point(width - 1, 0);
         wid_set_pos(wid_item, tl, br);
         wid_set_style(wid_item, UI_WID_STYLE_DARK);
         wid_set_int_context(wid_item, slot);
         wid_set_on_mouse_over_begin(wid_item, wid_slot_item_mouse_over_begin);
         wid_set_on_mouse_over_end(wid_item, wid_slot_item_mouse_over_end);
         wid_set_on_mouse_up(wid_item, wid_slot_item_mouse_up);
+        wid_set_color(wid_item, WID_COLOR_TEXT_FG, WHITE);
 
         if (t) {
           wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_short_name());
@@ -216,6 +217,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
             }
           }
         } else {
+          wid_set_color(wid_item, WID_COLOR_TEXT_FG, GRAY50);
           wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". empty, drag items here");
         }
         wid_set_text_lhs(wid_item, true);
@@ -223,7 +225,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
         wid_update(wid_item);
       }
 
-      y_at += 3;
+      y_at += 1;
     }
   }
 
@@ -234,8 +236,8 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     int tlx, tly, brx, bry;
     wid_get_tl_x_tl_y_br_x_br_y(wid_inventory_window, &tlx, &tly, &brx, &bry);
     tlx += 77;
-    tly += 5;
-    brx -= 1;
+    tly += 2;
+    brx -= 3;
     bry -= 2;
     game->wid_thing_info_clear_popup();
     if (wid_inventory_thing_selected) {
@@ -258,7 +260,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   }
 
   if (item_option) {
-    int y_at  = 28;
+    int y_at  = 25;
     int x_off = 22;
     int width = 21;
 
@@ -380,22 +382,22 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   int y_at = 2;
 
   //
-  // Stamina
+  // helmet
   //
   {
     point tl = point(9, y_at);
-    point br = point(12, y_at + 3);
+    point br = point(11, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_HELMET, tl, br, "equip_helmet");
   }
 
-  y_at += 5;
+  y_at += 4;
 
   //
   // gauntlet
   //
   {
     point tl = point(3, y_at);
-    point br = point(6, y_at + 3);
+    point br = point(5, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_GAUNTLET, tl, br, "equip_gauntlet");
   }
 
@@ -403,7 +405,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   // amulet
   {
     point tl = point(9, y_at);
-    point br = point(12, y_at + 3);
+    point br = point(11, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_AMULET, tl, br, "equip_amulet");
   }
 
@@ -412,18 +414,18 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   //
   {
     point tl = point(15, y_at);
-    point br = point(18, y_at + 3);
+    point br = point(17, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_CLOAK, tl, br, "equip_cloak");
   }
 
-  y_at += 5;
+  y_at += 4;
 
   //
   // shield
   //
   {
     point tl = point(3, y_at);
-    point br = point(6, y_at + 3);
+    point br = point(5, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_SHIELD, tl, br, "equip_shield");
   }
 
@@ -432,7 +434,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   //
   {
     point tl = point(9, y_at);
-    point br = point(12, y_at + 3);
+    point br = point(11, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_ARMOR, tl, br, "equip_armor");
   }
 
@@ -441,18 +443,18 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   //
   {
     point tl = point(15, y_at);
-    point br = point(18, y_at + 3);
+    point br = point(17, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_WEAPON, tl, br, "equip_weapon");
   }
 
-  y_at += 5;
+  y_at += 4;
 
   //
   // ring1
   //
   {
     point tl = point(3, y_at);
-    point br = point(6, y_at + 3);
+    point br = point(5, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_RING1, tl, br, "equip_ring1", "equip_ring");
   }
 
@@ -461,7 +463,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   //
   {
     point tl = point(9, y_at);
-    point br = point(12, y_at + 3);
+    point br = point(11, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_BOOTS, tl, br, "equip_boots");
   }
 
@@ -470,7 +472,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   //
   {
     point tl = point(15, y_at);
-    point br = point(18, y_at + 3);
+    point br = point(17, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_RING2, tl, br, "equip_ring2", "equip_ring");
   }
 

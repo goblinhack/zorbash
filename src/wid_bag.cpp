@@ -85,11 +85,21 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     auto tiles = &tpp->tiles;
 
     auto tile = tile_first(tiles);
-    if (tile) {
-      wid_set_fg_tile(w, tile);
-    } else {
+    if (! tile) {
       bag->err("+ no tile item %s at %d,%d", t->to_string().c_str(), t->itemsp()->bag_position.x,
                t->itemsp()->bag_position.y);
+    }
+
+    if (g_opt_ascii) {
+      auto tile = tile_index_to_tile(t->tile_curr);
+      if (tile) {
+        std::wstring text;
+        text += tile->ascii_fg_char;
+        wid_set_text(w, text);
+        wid_set_color(w, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
+      }
+    } else {
+      wid_set_fg_tile(w, tile);
     }
 
     //
@@ -99,7 +109,11 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     if (slot != -1) {
       auto w = wid_new_square_button(wid_bag_container, "wid_bag button" + t->to_string());
       wid_set_pos(w, tl, tl);
-      wid_set_fg_tilename(w, "key_" + std::to_string(slot + 1));
+      if (g_opt_ascii) {
+        wid_set_text(w, std::to_string(slot + 1));
+      } else {
+        wid_set_fg_tilename(w, "key_" + std::to_string(slot + 1));
+      }
       wid_set_text_lhs(w, true);
       wid_set_text_top(w, true);
     }

@@ -831,7 +831,7 @@ static void wid_mouse_over_end(void)
 }
 
 static uint8_t wid_mouse_over_begin(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_t rely, int32_t wheelx,
-                            int32_t wheely)
+                                    int32_t wheely)
 {
   TRACE_AND_INDENT();
   if (! wid_mouse_visible) {
@@ -1641,7 +1641,18 @@ void wid_set_fg_tile(Widp w, Thingp t)
 
   auto tile = tile_first(tiles);
   if (tile) {
-    wid_set_fg_tile(w, tile);
+    if (g_opt_ascii) {
+      auto tile = tile_index_to_tile(t->tile_curr);
+      if (tile) {
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        std::wstring text;
+        text += tile->ascii_fg_char;
+        wid_set_text(w, text);
+        wid_set_color(w, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
+      }
+    } else {
+      wid_set_fg_tile(w, tile);
+    }
   }
 }
 

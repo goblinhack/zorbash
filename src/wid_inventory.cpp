@@ -821,7 +821,19 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
     wid_set_thing_id_context(w, t);
     t->itemsp()->wid = w;
 
-    wid_set_bg_tile(w, t);
+    if (g_opt_ascii) {
+      auto tile = tile_index_to_tile(t->tile_curr);
+      if (tile) {
+        wid_set_style(w, UI_WID_STYLE_DARK);
+        std::wstring text;
+        text += tile->ascii_fg_char;
+        wid_set_text(w, text);
+        wid_set_color(w, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
+      }
+    } else {
+      wid_set_bg_tile(w, t);
+    }
+
     wid_set_style(w, UI_WID_STYLE_DARK);
     if (wid_inventory_thing_selected) {
       if (wid_inventory_thing_selected == t) {
@@ -855,6 +867,35 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
       wid_set_bg_tilename(w, tile_name);
     }
     wid_set_style(w, UI_WID_STYLE_DARK);
+  }
+
+  if (g_opt_ascii) {
+    auto w = wid_new_square_button(parent, wid_name);
+
+    point title_tl = tl;
+    point title_br = tl;
+
+    title_tl.x -= 1;
+    title_br.x += 4;
+
+    title_tl.y--;
+    title_br.y = title_tl.y;
+
+    wid_set_pos(w, title_tl, title_br);
+    wid_set_text(w, capitalise(equip_name(equip)));
+    wid_set_text_lhs(w, true);
+    switch (equip) {
+      case MONST_EQUIP_HELMET: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_AMULET: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_GAUNTLET: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+      case MONST_EQUIP_CLOAK: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+      case MONST_EQUIP_SHIELD: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_ARMOR: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+      case MONST_EQUIP_WEAPON: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_RING1: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+      case MONST_EQUIP_BOOTS: wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;
+      case MONST_EQUIP_RING2: wid_set_color(w, WID_COLOR_TEXT_FG, GOLD); break;
+    }
   }
 }
 
