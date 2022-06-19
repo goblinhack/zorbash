@@ -74,7 +74,7 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 7)
     my.text_a_or_an(self, "a")
     my.text_hits(self, "touches")
-    my.text_long_description(self, "A spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
+    my.text_long_description(self, "The spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     my.text_short_description(self, "The angry spirit of one long passed.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

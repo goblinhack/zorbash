@@ -113,7 +113,7 @@ static uint8_t wid_actionbar_quit(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_quit_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_quit_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -149,7 +149,7 @@ static void wid_actionbar_quit_over_b(Widp w, int32_t relx, int32_t rely, int32_
   wid_over_quit->log("Select this to abandon all hope.");
 }
 
-static void wid_actionbar_quit_over_e(Widp w)
+static void wid_actionbar_quit_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -212,7 +212,7 @@ static uint8_t wid_actionbar_robot(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static void wid_actionbar_robot_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_robot_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -259,7 +259,7 @@ static void wid_actionbar_robot_over_b(Widp w, int32_t relx, int32_t rely, int32
       "character while in robot mode.");
 }
 
-static void wid_actionbar_robot_over_e(Widp w)
+static void wid_actionbar_robot_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -296,12 +296,12 @@ static uint8_t wid_actionbar_close(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static void wid_actionbar_close_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_close_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 }
 
-static void wid_actionbar_close_over_e(Widp w) { TRACE_NO_INDENT(); }
+static void wid_actionbar_close_over_end(Widp w) { TRACE_NO_INDENT(); }
 
 static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
 {
@@ -332,7 +332,7 @@ static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_load_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_load_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -372,7 +372,7 @@ static void wid_actionbar_load_over_b(Widp w, int32_t relx, int32_t rely, int32_
   wid_over_load->log("NOTE: auto load will create snapshots you can load to recover.");
 }
 
-static void wid_actionbar_load_over_e(Widp w)
+static void wid_actionbar_load_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -409,7 +409,7 @@ static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_save_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_save_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -449,7 +449,7 @@ static void wid_actionbar_save_over_b(Widp w, int32_t relx, int32_t rely, int32_
   wid_over_save->log("NOTE: auto save will occasionally also perform saves for you.");
 }
 
-static void wid_actionbar_save_over_e(Widp w)
+static void wid_actionbar_save_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -484,7 +484,7 @@ static uint8_t wid_actionbar_ascend(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-static void wid_actionbar_ascend_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_ascend_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -524,7 +524,7 @@ static void wid_actionbar_ascend_over_b(Widp w, int32_t relx, int32_t rely, int3
       "us face it; probably not...");
 }
 
-static void wid_actionbar_ascend_over_e(Widp w)
+static void wid_actionbar_ascend_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -559,7 +559,7 @@ static uint8_t wid_actionbar_descend(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static void wid_actionbar_descend_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_descend_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -599,7 +599,7 @@ static void wid_actionbar_descend_over_b(Widp w, int32_t relx, int32_t rely, int
       "there.");
 }
 
-static void wid_actionbar_descend_over_e(Widp w)
+static void wid_actionbar_descend_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -642,7 +642,7 @@ static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static void wid_actionbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_inventory_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -683,7 +683,7 @@ static void wid_actionbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, i
   wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
 }
 
-static void wid_actionbar_inventory_over_e(Widp w)
+static void wid_actionbar_inventory_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -729,7 +729,7 @@ static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static void wid_actionbar_collect_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_collect_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -769,7 +769,7 @@ static void wid_actionbar_collect_over_b(Widp w, int32_t relx, int32_t rely, int
   wid_over_collect->log("NOTE: that you are able to carry at most one extra bag, so use space wisely");
 }
 
-static void wid_actionbar_collect_over_e(Widp w)
+static void wid_actionbar_collect_over_end(Widp w)
 {
   TRACE_NO_INDENT();
   delete wid_over_collect;
@@ -846,7 +846,7 @@ static uint8_t wid_actionbar_repeat_wait(Widp w, int32_t x, int32_t y, uint32_t 
   return true;
 }
 
-static void wid_actionbar_wait_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_wait_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -886,7 +886,7 @@ static void wid_actionbar_wait_over_b(Widp w, int32_t relx, int32_t rely, int32_
       "wandering monsters.");
 }
 
-static void wid_actionbar_wait_over_e(Widp w)
+static void wid_actionbar_wait_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -922,7 +922,7 @@ static uint8_t wid_actionbar_zoom_in(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static void wid_actionbar_zoom_in_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_zoom_in_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -956,7 +956,7 @@ static void wid_actionbar_zoom_in_over_b(Widp w, int32_t relx, int32_t rely, int
   wid_over_zoom_in->log("Select this to zoom out of the map.");
 }
 
-static void wid_actionbar_zoom_out_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_zoom_out_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -990,7 +990,7 @@ static void wid_actionbar_zoom_out_over_b(Widp w, int32_t relx, int32_t rely, in
   wid_over_zoom_out->log("Select this to zoom into the map.");
 }
 
-static void wid_actionbar_zoom_in_over_e(Widp w)
+static void wid_actionbar_zoom_in_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -998,7 +998,7 @@ static void wid_actionbar_zoom_in_over_e(Widp w)
   wid_over_zoom_in = nullptr;
 }
 
-static void wid_actionbar_zoom_out_over_e(Widp w)
+static void wid_actionbar_zoom_out_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -1027,7 +1027,7 @@ static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static void wid_actionbar_configure_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_configure_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_NO_INDENT();
 
@@ -1060,7 +1060,7 @@ static void wid_actionbar_configure_over_b(Widp w, int32_t relx, int32_t rely, i
   wid_over_keyboard->log("Select this to change the default key settings.");
 }
 
-static void wid_actionbar_configure_over_e(Widp w)
+static void wid_actionbar_configure_over_end(Widp w)
 {
   TRACE_NO_INDENT();
 
@@ -1166,8 +1166,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_actionbar_close);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_end);
     x_at += option_width;
   }
 
@@ -1178,8 +1178,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_quit");
     wid_set_on_mouse_up(w, wid_actionbar_quit);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_quit_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_quit_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_quit_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_quit_over_end);
     x_at += option_width;
   }
 
@@ -1190,8 +1190,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_config");
     wid_set_on_mouse_up(w, wid_actionbar_configure);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_end);
     x_at += option_width;
   }
 
@@ -1202,8 +1202,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_robot");
     wid_set_on_mouse_up(w, wid_actionbar_robot);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_end);
     if (game->robot_mode) {
       wid_set_bg_tilename(w, "ui_icon_robot_on");
       wid_set_on_tick(w, wid_actionbar_ai_tick);
@@ -1219,8 +1219,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_ascend");
     wid_set_on_mouse_up(w, wid_actionbar_ascend);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_end);
     x_at += option_width;
   }
 
@@ -1231,8 +1231,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_descend");
     wid_set_on_mouse_up(w, wid_actionbar_descend);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_end);
     x_at += option_width;
   }
 
@@ -1243,8 +1243,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_save");
     wid_set_on_mouse_up(w, wid_actionbar_save);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_save_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_save_over_end);
     x_at += option_width;
   }
 
@@ -1255,8 +1255,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_load");
     wid_set_on_mouse_up(w, wid_actionbar_load);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_load_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_load_over_end);
     x_at += option_width;
   }
 
@@ -1267,8 +1267,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_zoom_in");
     wid_set_on_mouse_up(w, wid_actionbar_zoom_in);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_zoom_in_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_zoom_in_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_zoom_in_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_zoom_in_over_end);
     x_at += option_width;
   }
 
@@ -1279,8 +1279,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_zoom_out");
     wid_set_on_mouse_up(w, wid_actionbar_zoom_out);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_zoom_out_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_zoom_out_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_zoom_out_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_zoom_out_over_end);
     x_at += option_width;
   }
 
@@ -1291,8 +1291,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_inventory");
     wid_set_on_mouse_up(w, wid_actionbar_inventory);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_end);
     x_at += option_width;
   }
 
@@ -1304,8 +1304,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_bg_tilename(w, "ui_icon_wait");
     wid_set_on_mouse_down(w, wid_actionbar_wait);
     wid_set_on_mouse_held(w, wid_actionbar_repeat_wait);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_end);
     x_at += option_width;
   }
 
@@ -1316,8 +1316,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_collect");
     wid_set_on_mouse_up(w, wid_actionbar_collect);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_end);
     x_at += option_width;
   }
 
@@ -1328,8 +1328,8 @@ void wid_actionbar_pixelart_init(void)
     wid_set_pos(w, tl, br);
     wid_set_bg_tilename(w, "ui_icon_close");
     wid_set_on_mouse_up(w, wid_actionbar_close);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_end);
     x_at += option_width;
   }
   wid_update(wid_actionbar);
@@ -1436,8 +1436,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_quit);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_quit_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_quit_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_quit_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_quit_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$q%%fg=" UI_TEXT_COLOR_STR "$uit");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1452,8 +1452,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_configure);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_configure_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_configure_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$h%%fg=" UI_TEXT_COLOR_STR "$elp");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1468,8 +1468,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_robot);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_robot_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_robot_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$r%%fg=" UI_TEXT_COLOR_STR "$obot");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1489,8 +1489,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_ascend);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_ascend_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_ascend_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$<%%fg=" UI_TEXT_COLOR_STR "$Ascend");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1505,8 +1505,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_descend);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_descend_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_descend_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$>%%fg=" UI_TEXT_COLOR_STR "$Descend");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1521,8 +1521,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_save);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_save_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_save_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_save_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$s%%fg=" UI_TEXT_COLOR_STR "$ave");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1537,8 +1537,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_load);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_load_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_load_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_load_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$l%%fg=" UI_TEXT_COLOR_STR "$oad");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1553,8 +1553,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_inventory);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_inventory_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_inventory_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$i%%fg=" UI_TEXT_COLOR_STR "$nventory");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1570,8 +1570,8 @@ void wid_actionbar_ascii_init(void)
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_down(w, wid_actionbar_wait);
     wid_set_on_mouse_held(w, wid_actionbar_repeat_wait);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_wait_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_wait_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$.%%fg=" UI_TEXT_COLOR_STR "$ wait");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1586,8 +1586,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_collect);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_collect_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_collect_over_end);
     wid_set_text(w, "collect");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
@@ -1602,8 +1602,8 @@ void wid_actionbar_ascii_init(void)
     point br = make_point(x_at + option_width - 1, option_height - 1);
     wid_set_pos(w, tl, br);
     wid_set_on_mouse_up(w, wid_actionbar_close);
-    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_b);
-    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_e);
+    wid_set_on_mouse_over_begin(w, wid_actionbar_close_over_begin);
+    wid_set_on_mouse_over_end(w, wid_actionbar_close_over_end);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$ESC%%fg=" UI_TEXT_COLOR_STR "$ Close");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
