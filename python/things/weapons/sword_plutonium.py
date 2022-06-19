@@ -93,11 +93,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(
-        name="sword_plutonium",
-        text_long_name="sword of plutonium",
-        text_short_name="sword, pluton",
-    )
+    tp_init(name="sword_plutonium", text_long_name="sword of plutonium", text_short_name="sword, pluton")
 
 
 init()

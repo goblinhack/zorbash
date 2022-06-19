@@ -73,11 +73,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(
-        name="dagger",
-        text_long_name="dagger",
-        text_short_name="dagger",
-    )
+    tp_init(name="dagger", text_long_name="dagger", text_short_name="dagger")
 
 
 init()

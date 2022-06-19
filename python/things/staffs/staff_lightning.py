@@ -108,11 +108,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(
-        name="staff_lightning",
-        text_long_name="staff of lightning",
-        text_short_name="staff, lghtn",
-    )
+    tp_init(name="staff_lightning", text_long_name="staff of lightning", text_short_name="staff, lghtn")
 
 
 init()

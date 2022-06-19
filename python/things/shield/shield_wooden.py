@@ -67,11 +67,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(
-        name="shield_wooden",
-        text_long_name="wooden shield",
-        text_short_name="shield, wood",
-    )
+    tp_init(name="shield_wooden", text_long_name="wooden shield", text_short_name="shield, wood")
 
 
 init()

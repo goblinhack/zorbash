@@ -7,8 +7,8 @@ def on_lifespan_tick(owner, me, x, y):
         my.thing_msg(me, "One of your torches fizzles out.")
 
 
-def tp_init(name, text_long_name, tiles=[]):
-    self = tp.Tp(name, text_long_name)
+def tp_init(name, text_long_name, text_short_name, tiles=[]):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.charge_count(self, 10)
     my.collision_hit_priority(self, 1)
@@ -63,18 +63,15 @@ def tp_init(name, text_long_name, tiles=[]):
 
 
 def init():
-    tp_init(
-        name="torch",
-        text_long_name="torch",
-        tiles=[
-            "torch.1",
-            "torch.2",
-            "torch.3",
-            "torch.4",
-            "torch.5",
-            "torch.6",
-        ],
-    )
+    tp_init(name="torch", text_long_name="torch", text_short_name="torch",
+            tiles=[
+                "torch.1",
+                "torch.2",
+                "torch.3",
+                "torch.4",
+                "torch.5",
+                "torch.6",
+            ])
 
 
 init()

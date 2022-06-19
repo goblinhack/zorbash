@@ -74,11 +74,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(
-        name="sword_rusty",
-        text_long_name="rusty short sword",
-        text_short_name="sword, rusty",
-    )
+    tp_init(name="sword_rusty", text_long_name="rusty short sword", text_short_name="sword, rusty")
 
 
 init()

@@ -148,11 +148,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(
-        name="pot_health",
-        text_long_name="potion of health awesomeness",
-        text_short_name="pot. health",
-    )
+    tp_init(name="pot_health", text_long_name="potion of health awesomeness", text_short_name="pot. health")
 
 
 init()
