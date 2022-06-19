@@ -228,8 +228,10 @@ bool Thing::bag_compress(void)
   // Only players can compress bag contents. Monst just carry everything
   //
   auto o = top_owner();
-  if (o && ! o->is_player()) {
-    return false;
+  if (o && o->is_player()) {
+    //
+    // ok
+    //
   } else if (! is_player()) {
     return false;
   }
