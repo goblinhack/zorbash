@@ -14,6 +14,7 @@
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_leftbar.hpp"
+#include "my_wid_thing_info.hpp"
 
 static point wid_leftbar_last_thing_position;
 
@@ -46,6 +47,26 @@ static void wid_leftbar_ascii_display(Widp w, point tl, point br)
   if (t) {
     t->blit_ascii_at(tl, true /* lit */, true /* leftbar */);
   }
+}
+
+static void wid_leftbar_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+  TRACE_NO_INDENT();
+
+  auto id = wid_get_thing_id_context(w);
+
+  auto t = game->level->thing_find_optional(id);
+  if (unlikely(! t)) {
+    return;
+  }
+
+  game->wid_thing_info_create(t);
+}
+
+static void wid_leftbar_over_end(Widp w)
+{
+  TRACE_NO_INDENT();
+  wid_thing_info_fini("leftbar");
 }
 
 static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int width, bool allow_carried = false,
@@ -84,6 +105,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_text(w, s);
     }
     wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+    wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+    wid_set_thing_id_context(w, t);
     myfree(s);
   }
 
@@ -96,6 +120,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_thing_id_context(w, t);
     wid_set_on_display(w, wid_leftbar_ascii_display);
+    wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+    wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+    wid_set_thing_id_context(w, t);
   }
 
   if (t->is_on_fire()) {
@@ -107,6 +134,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(On fire)");
     wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+    wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+    wid_set_thing_id_context(w, t);
   }
 
   if (t->is_falling) {
@@ -118,6 +148,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Falling)");
     wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+    wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+    wid_set_thing_id_context(w, t);
   }
 
   if (t->is_dead) {
@@ -135,6 +168,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_text(w, "(Broken)");
     }
     wid_set_style(w, UI_WID_STYLE_DARK);
+    wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+    wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+    wid_set_thing_id_context(w, t);
   } else {
     if (t->is_monst() && (game->tick_current - t->tick_last_i_attacked() < 2)) {
       y_at++;
@@ -145,6 +181,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Attacking)");
       wid_set_style(w, UI_WID_STYLE_RED);
+      wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+      wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+      wid_set_thing_id_context(w, t);
     }
 
     if (t->stuck_count() > 1) {
@@ -156,6 +195,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Stuck)");
       wid_set_style(w, UI_WID_STYLE_RED);
+      wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+      wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+      wid_set_thing_id_context(w, t);
     } else if (t->is_sleeping) {
       y_at++;
       TRACE_NO_INDENT();
@@ -165,6 +207,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Sleeping)");
       wid_set_style(w, UI_WID_STYLE_DARK);
+      wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+      wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+      wid_set_thing_id_context(w, t);
     } else if (t->is_monst() && (t->idle_count() > 1)) {
       y_at++;
       TRACE_NO_INDENT();
@@ -174,6 +219,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Idle)");
       wid_set_style(w, UI_WID_STYLE_DARK);
+      wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+      wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+      wid_set_thing_id_context(w, t);
     }
   }
 
@@ -188,6 +236,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
         wid_set_pos(w, tl, br);
         wid_set_text(w, "(Hunting)");
         wid_set_style(w, UI_WID_STYLE_DARK);
+        wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+        wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+        wid_set_thing_id_context(w, t);
       }
     }
   }
@@ -202,6 +253,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
       wid_set_pos(w, tl, br);
       wid_set_text(w, "(Open)");
       wid_set_style(w, UI_WID_STYLE_GREEN);
+      wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+      wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+      wid_set_thing_id_context(w, t);
     } else {
       y_at++;
       TRACE_NO_INDENT();
@@ -215,6 +269,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
         wid_set_text(w, "(Closed)");
       }
       wid_set_style(w, UI_WID_STYLE_DARK);
+      wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+      wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+      wid_set_thing_id_context(w, t);
     }
   }
 
@@ -233,6 +290,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
         i         = std::max(i, 0);
         auto icon = "health_bar_ascii_" + std::to_string(i);
         wid_set_fg_tilename(w, icon);
+        wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+        wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+        wid_set_thing_id_context(w, t);
       }
       {
         TRACE_NO_INDENT();
@@ -243,6 +303,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
         wid_set_text(w, "Health");
         wid_set_shape_none(w);
         wid_set_text_lhs(w, true);
+        wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+        wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+        wid_set_thing_id_context(w, t);
       }
       {
         TRACE_NO_INDENT();
@@ -255,6 +318,9 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
         std::string s = std::to_string(t->health()) + "/" + std::to_string(t->health_max());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
+        wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+        wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+        wid_set_thing_id_context(w, t);
       }
     }
   }

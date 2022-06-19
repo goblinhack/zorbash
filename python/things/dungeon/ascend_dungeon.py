@@ -22,6 +22,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_interesting(self, True)
     my.light_color(self, "yellow")
     my.light_dist(self, 2)
+    my.text_long_description(self, "This imposing doorway leads up to the previous level.")
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "the")
     my.text_short_description(self, "%%fg=gold$The way up.")

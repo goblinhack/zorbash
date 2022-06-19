@@ -794,7 +794,7 @@ static void wid_mfocus_begin(Widp w)
   }
 }
 
-static void wid_m_over_e(void)
+static void wid_mouse_over_end(void)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -830,7 +830,7 @@ static void wid_m_over_e(void)
   }
 }
 
-static uint8_t wid_m_over_b(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_t rely, int32_t wheelx,
+static uint8_t wid_mouse_over_begin(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_t rely, int32_t wheelx,
                             int32_t wheely)
 {
   TRACE_AND_INDENT();
@@ -878,7 +878,7 @@ static uint8_t wid_m_over_b(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_
     return false;
   }
 
-  wid_m_over_e();
+  wid_mouse_over_end();
 
   wid_over = w;
   if (! wid_ignore_events(wid_over)) {
@@ -2324,7 +2324,7 @@ static void wid_destroy_immediate_internal(Widp w)
   // This can easily lead to recursion. Do we need it?
   //
   // if (wid_over == w) {
-  //     wid_m_over_e();
+  //     wid_mouse_over_end();
   // }
 
   if (wid_moving == w) {
@@ -2459,7 +2459,7 @@ static void wid_destroy_delay(Widp *wp, int32_t delay)
   // This can easily lead to recursion. Do we need it?
   //
   // if (wid_over == w) {
-  //     wid_m_over_e();
+  //     wid_mouse_over_end();
   // }
 
   if (wid_moving == w) {
@@ -3471,7 +3471,7 @@ void wid_hide(Widp w)
   w->visible = false;
 
   if (wid_over == w) {
-    wid_m_over_e();
+    wid_mouse_over_end();
   }
 
   if (wid_moving == w) {
@@ -3479,7 +3479,7 @@ void wid_hide(Widp w)
   }
 
   if (wid_get_top_parent(wid_over) == w) {
-    wid_m_over_e();
+    wid_mouse_over_end();
   }
 
   if (wid_get_top_parent(wid_moving) == w) {
@@ -5270,7 +5270,7 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
     // Over a new wid.
     //
 
-    while (w && ! wid_m_over_b(w, x, y, relx, rely, wheelx, wheely)) {
+    while (w && ! wid_mouse_over_begin(w, x, y, relx, rely, wheelx, wheely)) {
       w = w->parent;
     }
 
@@ -5290,7 +5290,7 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
 
     w = wid_mouse_motion_handler(x, y, relx, rely, wheelx, wheely);
     if (w) {
-      if (wid_m_over_b(w, x, y, relx, rely, wheelx, wheely)) {
+      if (wid_mouse_over_begin(w, x, y, relx, rely, wheelx, wheely)) {
         over = true;
       }
 
@@ -5351,7 +5351,7 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
   }
 
   if (! over) {
-    wid_m_over_e();
+    wid_mouse_over_end();
   }
 
   //

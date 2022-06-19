@@ -15,10 +15,10 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rely, int3
 void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
 void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
 void wid_rightbar_stats_over_popup_e(Widp w);
-void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-void wid_rightbar_inventory_over_e(Widp w);
-void wid_rightbar_stats_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-void wid_rightbar_stats_over_e(Widp w);
+void wid_rightbar_inventory_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+void wid_rightbar_inventory_over_end(Widp w);
+void wid_rightbar_stats_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+void wid_rightbar_stats_over_end(Widp w);
 bool wid_rightbar_pixelart_create(void);
 bool wid_rightbar_asciimap_create(void);
 

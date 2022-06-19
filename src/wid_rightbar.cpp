@@ -465,7 +465,7 @@ void wid_rightbar_stats_over_popup_e(Widp w)
   wid_rightbar_popup = nullptr;
 }
 
-void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_inventory_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_AND_INDENT();
   DBG2("Inventory: Begin over inventory");
@@ -508,7 +508,7 @@ void wid_rightbar_inventory_over_b(Widp w, int32_t relx, int32_t rely, int32_t w
   }
 }
 
-void wid_rightbar_inventory_over_e(Widp w)
+void wid_rightbar_inventory_over_end(Widp w)
 {
   TRACE_AND_INDENT();
   DBG2("Inventory: End over inventory");
@@ -551,7 +551,7 @@ void wid_rightbar_inventory_over_e(Widp w)
   //
 }
 
-void wid_rightbar_stats_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_stats_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
   TRACE_AND_INDENT();
   DBG2("Stats: Begin over inventory");
@@ -584,7 +584,7 @@ void wid_rightbar_stats_over_b(Widp w, int32_t relx, int32_t rely, int32_t wheel
   }
 }
 
-void wid_rightbar_stats_over_e(Widp w)
+void wid_rightbar_stats_over_end(Widp w)
 {
   TRACE_AND_INDENT();
   DBG2("Stats: End over inventory");

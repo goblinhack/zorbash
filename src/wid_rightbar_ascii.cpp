@@ -61,8 +61,8 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text(w, s);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     myfree(s);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
 
   {
@@ -78,8 +78,8 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text(w, s);
     wid_set_shape_none(w);
     myfree(s);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
 
   {
@@ -93,8 +93,8 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, player->title());
     wid_set_shape_none(w);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
 
   {
@@ -123,8 +123,8 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);
     myfree(g);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
 
   if (player->stuck_count() > 1) {
@@ -175,8 +175,8 @@ bool wid_rightbar_ascii_create(void)
     i         = std::max(i, 0);
     auto icon = "health_bar_ascii_" + std::to_string(i);
     wid_set_fg_tilename(w, icon);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
   {
     TRACE_AND_INDENT();
@@ -187,8 +187,8 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text(w, "Health");
     wid_set_shape_none(w);
     wid_set_text_lhs(w, true);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
   {
     TRACE_AND_INDENT();
@@ -202,8 +202,8 @@ bool wid_rightbar_ascii_create(void)
     std::string s = std::to_string(player->health()) + "/" + std::to_string(player->health_max());
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
 
   ///////////////////////////////////////////////////////////////////////////
@@ -223,8 +223,8 @@ bool wid_rightbar_ascii_create(void)
     i         = std::max(i, 0);
     auto icon = "health_bar_ascii_" + std::to_string(i);
     wid_set_fg_tilename(w, icon);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
   {
     TRACE_AND_INDENT();
@@ -235,8 +235,8 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text(w, "Stamina");
     wid_set_shape_none(w);
     wid_set_text_lhs(w, true);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
   {
     TRACE_AND_INDENT();
@@ -250,8 +250,8 @@ bool wid_rightbar_ascii_create(void)
     std::string s = std::to_string(player->stamina()) + "/" + std::to_string(player->stamina_max());
     wid_set_text(w, s);
     wid_set_text_rhs(w, true);
-    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_b);
-    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_e);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
 
   {
@@ -502,8 +502,8 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
         wid_set_text_lhs(w, true);
         wid_set_text(w, iter->text_short_and_state_capitalised());
-        wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
-        wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
+        wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_begin);
+        wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_end);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
         wid_update(w);
       }
@@ -551,8 +551,8 @@ bool wid_rightbar_ascii_create(void)
         wid_set_text_lhs(w, true);
 
         wid_set_text(w, std::to_string(slot) + " " + t->text_short_and_state_capitalised());
-        wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_b);
-        wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_e);
+        wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_begin);
+        wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_end);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
         wid_update(w);
       }
