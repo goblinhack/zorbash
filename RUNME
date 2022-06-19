@@ -90,6 +90,7 @@ tech_support()
         python3-config --libs
         python3-config --cflags
         python3-config --ldflags
+        python3-config --ldflags --embed
         set +x
         echo
 

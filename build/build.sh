@@ -433,14 +433,25 @@ cd ..
 #
 # 3.8 added --embed for -lpython
 #
-Python_LIBS=`$Python_CONFIG --ldflags --embed 2>/dev/null`
-if [ $? -ne 0 ]; then
-    Python_LIBS=`$Python_CONFIG --ldflags`
-    if [ $? -ne 0 ]; then
-        log_err "Please install Python 3. $Python_CONFIG failed."
-        exit 1
-    fi
-fi
+case `uname` in
+    *Darwin*)
+        Python_LIBS=`$Python_CONFIG --ldflags`
+        if [ $? -ne 0 ]; then
+            log_err "Please install Python 3. $Python_CONFIG failed."
+            exit 1
+        fi
+      ;;
+      *)
+        Python_LIBS=`$Python_CONFIG --ldflags --embed 2>/dev/null`
+        if [ $? -ne 0 ]; then
+            Python_LIBS=`$Python_CONFIG --ldflags`
+            if [ $? -ne 0 ]; then
+                log_err "Please install Python 3. $Python_CONFIG failed."
+                exit 1
+            fi
+        fi
+      ;;
+esac
 
 #
 # Filter some junk out of the python config that can cause link errors
