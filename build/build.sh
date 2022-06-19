@@ -430,25 +430,36 @@ mv Makefile.tmp Makefile
 
 cd ..
 
-#
-# 3.8 added --embed for -lpython
-#
+PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
+
 case `uname` in
     *Darwin*)
+        echo $PYTHONPATH | grep -q -i anaconda
+        if [[ $? -eq 0 ]];
+        then
+          log_info "Python anaconda is installed"
+          Python_LIBS=`$Python_CONFIG --ldflags`
+          if [ $? -ne 0 ]; then
+              log_err "Please install Python 3. $Python_CONFIG failed."
+              exit 1
+          fi
+        else
+          log_info "Python anaconda is not installed"
+          Python_LIBS=`$Python_CONFIG --ldflags --embed 2>/dev/null`
+          if [ $? -ne 0 ]; then
+              Python_LIBS=`$Python_CONFIG --ldflags`
+              if [ $? -ne 0 ]; then
+                  log_err "Please install Python 3. $Python_CONFIG failed."
+                  exit 1
+              fi
+          fi
+        fi
+      ;;
+    *)
         Python_LIBS=`$Python_CONFIG --ldflags`
         if [ $? -ne 0 ]; then
             log_err "Please install Python 3. $Python_CONFIG failed."
             exit 1
-        fi
-      ;;
-      *)
-        Python_LIBS=`$Python_CONFIG --ldflags --embed 2>/dev/null`
-        if [ $? -ne 0 ]; then
-            Python_LIBS=`$Python_CONFIG --ldflags`
-            if [ $? -ne 0 ]; then
-                log_err "Please install Python 3. $Python_CONFIG failed."
-                exit 1
-            fi
         fi
       ;;
 esac
@@ -572,7 +583,6 @@ if [[ $OPT_DEV1 != "" ]]; then
     WERROR="-Werror"
 fi
 
-PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
 echo "#define MYVER \"$MYVER\"" >> $CONFIG_H
 echo "#define PYVER \"$PYVER\"" >> $CONFIG_H
 
