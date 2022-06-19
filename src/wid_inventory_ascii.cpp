@@ -379,7 +379,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   DBG2("Current equip:");
   player->dump_equip();
 
-  int y_at = 2;
+  int y_at = 5;
 
   //
   // helmet

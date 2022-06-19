@@ -1,6 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- shortcuts do nothing                                                                                                                         -->
+<!-- get rid of numbers for buffs and debuffs                                                                                                     -->
 <!-- fix invent  widget for ascii mode                                                                                                            -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->
 <!-- fix enchant  widget for ascii mode                                                                                                           -->
