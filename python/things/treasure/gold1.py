@@ -2,8 +2,8 @@ import my
 import tp
 
 
-def gold_init(name, text_long_name):
-    self = tp.Tp(name, text_long_name)
+def gold_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_shown(self, True)
@@ -68,7 +68,7 @@ def gold_init(name, text_long_name):
 
 
 def init():
-    gold_init(name="gold1", text_long_name="lone gold coin")
+    gold_init(name="gold1", text_long_name="lone gold coin", text_short_name="lone gold coin")
 
 
 init()
