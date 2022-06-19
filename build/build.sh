@@ -456,10 +456,13 @@ case `uname` in
         fi
       ;;
     *)
-        Python_LIBS=`$Python_CONFIG --ldflags`
+        Python_LIBS=`$Python_CONFIG --ldflags --embed 2>/dev/null`
         if [ $? -ne 0 ]; then
-            log_err "Please install Python 3. $Python_CONFIG failed."
-            exit 1
+            Python_LIBS=`$Python_CONFIG --ldflags`
+            if [ $? -ne 0 ]; then
+                log_err "Please install Python 3. $Python_CONFIG failed."
+                exit 1
+            fi
         fi
       ;;
 esac
