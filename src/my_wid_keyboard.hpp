@@ -61,7 +61,7 @@ typedef struct {
    */
   int is_new;
 
-  size_t max_len = {};
+  size_t max_len;
 
 } wid_keyboard_ctx;
 
