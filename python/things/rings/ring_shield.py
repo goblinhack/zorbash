@@ -65,11 +65,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(
-        name="ring_shield",
-        text_long_name="shield ring",
-        text_short_name="ring, shield",
-    )
+    tp_init(name="ring_shield", text_long_name="shield ring", text_short_name="ring, shield")
 
 
 init()

@@ -75,11 +75,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(
-        name="sword_draining",
-        text_long_name="sword of draining",
-        text_short_name="sword, draing",
-    )
+    tp_init(name="sword_draining", text_long_name="sword of draining", text_short_name="sword, draing")
 
 
 init()
