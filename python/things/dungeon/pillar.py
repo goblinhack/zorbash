@@ -15,6 +15,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_able_to_fall(self, True)
     my.is_always_hit(self, True)
     my.is_cursor_path_blocker(self, True)
+    my.is_described_when_hovering_over(self, True)
     my.is_floor_deco(self, True)
     my.is_interesting(self, True)
     my.is_jump_blocker(self, True)
