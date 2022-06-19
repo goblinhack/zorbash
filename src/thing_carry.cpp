@@ -338,6 +338,13 @@ bool Thing::carry(Thingp item, bool can_equip)
     light_dist_update();
   }
 
+  //
+  // Pack bags when items are added to them
+  //
+  if (is_bag_item_container()) {
+    bag_compress();
+  }
+
   return true;
 }
 

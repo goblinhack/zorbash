@@ -232,6 +232,10 @@ bool Thing::bag_compress(void)
     //
     // ok
     //
+  } else if (! o && is_bag_item_container()) {
+    //
+    // ok. When a bag is created it has no owner. It should still be packed though.
+    //
   } else if (! is_player()) {
     return false;
   }
