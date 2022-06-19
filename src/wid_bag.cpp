@@ -902,7 +902,12 @@ WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, con
     }
     wid_set_ignore_scroll_events(wid_bag_container, true);
     wid_set_pos(wid_bag_container, tl, br);
-    wid_set_style(wid_bag_container, UI_WID_STYLE_BAG);
+
+    if (g_opt_ascii) {
+      wid_set_style(wid_bag_container, UI_WID_STYLE_GREEN);
+    } else {
+      wid_set_style(wid_bag_container, UI_WID_STYLE_BAG);
+    }
 
     wid_set_on_tick(wid_bag_container, wid_bag_tick);
     wid_set_thing_id_context(wid_bag_container, bag);
@@ -942,9 +947,9 @@ Widp is_mouse_over_any_bag(void)
     // Add some border
     //
     tlx -= 1;
-    brx ++;
+    brx++;
     tly -= 1;
-    bry ++;
+    bry++;
 
     if ((x >= tlx) && (x < brx) && (y >= tly)) {
       // CON("    inventory %d %d %d", tlx, brx, x);
