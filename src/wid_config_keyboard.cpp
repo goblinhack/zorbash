@@ -59,6 +59,46 @@ static void wid_config_check_for_conflicts(SDL_Keysym code)
     TOPCON("%%fg=orange$Conflicting key, disabling key action9%%fg=reset$");
     game->config.key_action9 = {};
   }
+  if (sdlk_eq(game->config.key_skill0, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill0%%fg=reset$");
+    game->config.key_skill0 = {};
+  }
+  if (sdlk_eq(game->config.key_skill1, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill1%%fg=reset$");
+    game->config.key_skill1 = {};
+  }
+  if (sdlk_eq(game->config.key_skill2, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill2%%fg=reset$");
+    game->config.key_skill2 = {};
+  }
+  if (sdlk_eq(game->config.key_skill3, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill3%%fg=reset$");
+    game->config.key_skill3 = {};
+  }
+  if (sdlk_eq(game->config.key_skill4, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill4%%fg=reset$");
+    game->config.key_skill4 = {};
+  }
+  if (sdlk_eq(game->config.key_skill5, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill5%%fg=reset$");
+    game->config.key_skill5 = {};
+  }
+  if (sdlk_eq(game->config.key_skill6, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill6%%fg=reset$");
+    game->config.key_skill6 = {};
+  }
+  if (sdlk_eq(game->config.key_skill7, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill7%%fg=reset$");
+    game->config.key_skill7 = {};
+  }
+  if (sdlk_eq(game->config.key_skill8, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill8%%fg=reset$");
+    game->config.key_skill8 = {};
+  }
+  if (sdlk_eq(game->config.key_skill9, code)) {
+    TOPCON("%%fg=orange$Conflicting key, disabling key skill9%%fg=reset$");
+    game->config.key_skill9 = {};
+  }
   if (sdlk_eq(game->config.key_attack, code)) {
     TOPCON("%%fg=orange$Conflicting key, disabling key attack.%%fg=reset$");
     game->config.key_attack = {};
@@ -534,6 +574,105 @@ static void wid_config_key_action9_set(SDL_Keysym code)
   game->wid_config_keyboard_select();
 }
 
+static void wid_config_key_skill0_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_skill0 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill0 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_skill1_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_skill1 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill1 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_skill2_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_skill2 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill2 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_skill3_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_skill3 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill3 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_skill4_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_skill4 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill4 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_skill5_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_skill5 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill5 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_skill6_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_skill6 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill6 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_skill7_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_skill7 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill7 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_skill8_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  config_changed          = true;
+  game->config.key_skill8 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill8 = code;
+  game->wid_config_keyboard_select();
+}
+
+static void wid_config_key_skill9_set(SDL_Keysym code)
+{
+  TRACE_AND_INDENT();
+  game->config.key_skill9 = {};
+  wid_config_check_for_conflicts(code);
+  game->config.key_skill9 = code;
+  game->wid_config_keyboard_select();
+}
+
 static void wid_config_key_save_set(SDL_Keysym code)
 {
   TRACE_AND_INDENT();
@@ -995,6 +1134,96 @@ static uint8_t wid_config_key_action9(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
+static uint8_t wid_config_key_skill0(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 0");
+  sdl.on_sdl_key_grab = wid_config_key_skill0_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_skill1(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 1");
+  sdl.on_sdl_key_grab = wid_config_key_skill1_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_skill2(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 2");
+  sdl.on_sdl_key_grab = wid_config_key_skill2_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_skill3(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 3");
+  sdl.on_sdl_key_grab = wid_config_key_skill3_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_skill4(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 4");
+  sdl.on_sdl_key_grab = wid_config_key_skill4_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_skill5(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 5");
+  sdl.on_sdl_key_grab = wid_config_key_skill5_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_skill6(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 6");
+  sdl.on_sdl_key_grab = wid_config_key_skill6_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_skill7(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 7");
+  sdl.on_sdl_key_grab = wid_config_key_skill7_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_skill8(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 8");
+  sdl.on_sdl_key_grab = wid_config_key_skill8_set;
+  config_changed      = true;
+  return true;
+}
+
+static uint8_t wid_config_key_skill9(Widp w, int32_t x, int32_t y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  grab_key("skill 9");
+  sdl.on_sdl_key_grab = wid_config_key_skill9_set;
+  config_changed      = true;
+  return true;
+}
+
 static uint8_t wid_config_key_save(Widp w, int32_t x, int32_t y, uint32_t button)
 {
   TRACE_AND_INDENT();
@@ -1216,7 +1445,7 @@ void Game::wid_config_keyboard_select(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Use W,A,S,D for moving, arrow keys for map");
   }
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1286,7 +1515,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Move left
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1317,7 +1546,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Move down
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1348,7 +1577,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Move right
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1384,7 +1613,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Map up
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1415,7 +1644,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Map left
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1446,7 +1675,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Map down
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1477,7 +1706,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Map right
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1513,7 +1742,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // gfx_toggle
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1541,12 +1770,12 @@ void Game::wid_config_keyboard_select(void)
     wid_set_text(w, ::to_string(game->config.key_gfx_toggle));
     wid_set_on_mouse_up(w, wid_config_key_gfx_toggle);
   }
-  y_at ++;
+  y_at++;
 
   ///////////////////////////////////////////////////////////////////////
   // attack
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1577,7 +1806,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // wait / collect
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1608,7 +1837,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // jump
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1639,7 +1868,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // throw
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1670,7 +1899,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // drop
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1701,7 +1930,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // use
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1732,7 +1961,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // eat
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1763,7 +1992,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // descend
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1794,7 +2023,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // ascend
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1826,7 +2055,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // Inventory
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1857,7 +2086,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action0
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1888,7 +2117,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action1
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1919,7 +2148,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action2
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1950,7 +2179,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action3
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -1981,7 +2210,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action4
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2012,7 +2241,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action5
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2043,7 +2272,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action6
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2074,7 +2303,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action7
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2105,7 +2334,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action8
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2136,7 +2365,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // action9
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2165,6 +2394,319 @@ void Game::wid_config_keyboard_select(void)
     wid_set_on_mouse_up(w, wid_config_key_action9);
   }
 
+  y_at++;
+
+  ///////////////////////////////////////////////////////////////////////
+  // skill0
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 0");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 0");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_skill0));
+    wid_set_on_mouse_up(w, wid_config_key_skill0);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // skill1
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 1");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 1");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_skill1));
+    wid_set_on_mouse_up(w, wid_config_key_skill1);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // skill2
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 2");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 2");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_skill2));
+    wid_set_on_mouse_up(w, wid_config_key_skill2);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // skill3
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 3");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 3");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_skill3));
+    wid_set_on_mouse_up(w, wid_config_key_skill3);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // skill4
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 4");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 4");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_skill4));
+    wid_set_on_mouse_up(w, wid_config_key_skill4);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // skill5
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 5");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 5");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_skill5));
+    wid_set_on_mouse_up(w, wid_config_key_skill5);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // skill6
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 6");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 6");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, to_string(game->config.key_skill6));
+    wid_set_on_mouse_up(w, wid_config_key_skill6);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // skill7
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 7");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 7");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_skill7));
+    wid_set_on_mouse_up(w, wid_config_key_skill7);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // skill8
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 8");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 8");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_skill8));
+    wid_set_on_mouse_up(w, wid_config_key_skill8);
+  }
+  ///////////////////////////////////////////////////////////////////////
+  // skill9
+  ///////////////////////////////////////////////////////////////////////
+  y_at++;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "Inventory skill 9");
+
+    point tl = make_point(1, y_at);
+    point br = make_point(width / 2, y_at);
+    wid_set_shape_none(w);
+    wid_set_pos(w, tl, br);
+    wid_set_text_lhs(w, true);
+    wid_set_text(w, "Activate skill 9");
+  }
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "value");
+
+    point tl = make_point(width / 2 + 7, y_at);
+    point br = make_point(width / 2 + 21, y_at);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, ::to_string(game->config.key_skill9));
+    wid_set_on_mouse_up(w, wid_config_key_skill9);
+  }
+
   ///////////////////////////////////////////////////////////////////////
   y_at++;
   ///////////////////////////////////////////////////////////////////////
@@ -2172,7 +2714,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // save
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2203,7 +2745,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // load
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2234,7 +2776,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // robot_mode
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2270,7 +2812,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // zoom_in
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2301,7 +2843,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // zoom_out
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2337,7 +2879,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // screenshot
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2373,7 +2915,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // quit
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2404,7 +2946,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // console
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;
@@ -2435,7 +2977,7 @@ void Game::wid_config_keyboard_select(void)
   ///////////////////////////////////////////////////////////////////////
   // help
   ///////////////////////////////////////////////////////////////////////
-  y_at ++;
+  y_at++;
   {
     TRACE_AND_INDENT();
     auto p = wid_config_keyboard_window->wid_text_area->wid_text_area;

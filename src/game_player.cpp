@@ -68,7 +68,7 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("skill_devoted_thrust", point(x, y - 2));
         t->skill_add(w);
       }

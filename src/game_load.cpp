@@ -884,6 +884,16 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.key_action7);
   in >> bits(my.t.key_action8);
   in >> bits(my.t.key_action9);
+  in >> bits(my.t.key_skill0);
+  in >> bits(my.t.key_skill1);
+  in >> bits(my.t.key_skill2);
+  in >> bits(my.t.key_skill3);
+  in >> bits(my.t.key_skill4);
+  in >> bits(my.t.key_skill5);
+  in >> bits(my.t.key_skill6);
+  in >> bits(my.t.key_skill7);
+  in >> bits(my.t.key_skill8);
+  in >> bits(my.t.key_skill9);
   in >> bits(my.t.key_ascend);
   in >> bits(my.t.key_attack);
   in >> bits(my.t.key_console);

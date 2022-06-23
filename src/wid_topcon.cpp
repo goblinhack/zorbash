@@ -381,234 +381,226 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       return true;
     }
 
-    if (sdl.shift_held) {
-      //
-      // If shift is held, select skills
-      //
-      if (sdlk_eq(*key, game->config.key_action0)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(9);
-        wid_rightbar_init();
-        return true;
+    if (sdlk_eq(*key, game->config.key_skill0)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(9);
+      wid_rightbar_init();
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_skill1)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(0);
+      wid_rightbar_init();
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_skill2)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(1);
+      wid_rightbar_init();
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_skill3)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(2);
+      wid_rightbar_init();
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_skill4)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(3);
+      wid_rightbar_init();
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_skill5)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(4);
+      wid_rightbar_init();
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_skill6)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(5);
+      wid_rightbar_init();
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_skill7)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(6);
+      wid_rightbar_init();
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_skill8)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(7);
+      wid_rightbar_init();
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_skill9)) {
+      LOG("INF: Pressed skill skill key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("skill key"); // To remove bag or other info
+      level->skillbox_chosen(8);
+      wid_rightbar_init();
+      return true;
+    }
+
+    if (sdlk_eq(*key, game->config.key_action0)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(9);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-      if (sdlk_eq(*key, game->config.key_action1)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(0);
-        wid_rightbar_init();
-        return true;
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_action1)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(0);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-      if (sdlk_eq(*key, game->config.key_action2)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(1);
-        wid_rightbar_init();
-        return true;
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_action2)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(1);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-      if (sdlk_eq(*key, game->config.key_action3)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(2);
-        wid_rightbar_init();
-        return true;
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_action3)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(2);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-      if (sdlk_eq(*key, game->config.key_action4)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(3);
-        wid_rightbar_init();
-        return true;
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_action4)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(3);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-      if (sdlk_eq(*key, game->config.key_action5)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(4);
-        wid_rightbar_init();
-        return true;
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_action5)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(4);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-      if (sdlk_eq(*key, game->config.key_action6)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(5);
-        wid_rightbar_init();
-        return true;
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_action6)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(5);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-      if (sdlk_eq(*key, game->config.key_action7)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(6);
-        wid_rightbar_init();
-        return true;
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_action7)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(6);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-      if (sdlk_eq(*key, game->config.key_action8)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(7);
-        wid_rightbar_init();
-        return true;
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_action8)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(7);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-      if (sdlk_eq(*key, game->config.key_action9)) {
-        LOG("INF: Pressed skill action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->skillbox_chosen(8);
-        wid_rightbar_init();
-        return true;
+      return true;
+    }
+    if (sdlk_eq(*key, game->config.key_action9)) {
+      LOG("INF: Pressed action key");
+      TRACE_AND_INDENT();
+      game->change_state(Game::STATE_NORMAL);
+      wid_thing_info_fini("action key"); // To remove bag or other info
+      level->inventory_chosen(8);
+      wid_rightbar_init();
+      auto what = level->inventory_get();
+      if (what) {
+        wid_inventory_select_requested(what);
       }
-    } else {
-      //
-      // If shift is not held, select inventory
-      //
-      if (sdlk_eq(*key, game->config.key_action0)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(9);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
-      if (sdlk_eq(*key, game->config.key_action1)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(0);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
-      if (sdlk_eq(*key, game->config.key_action2)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(1);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
-      if (sdlk_eq(*key, game->config.key_action3)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(2);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
-      if (sdlk_eq(*key, game->config.key_action4)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(3);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
-      if (sdlk_eq(*key, game->config.key_action5)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(4);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
-      if (sdlk_eq(*key, game->config.key_action6)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(5);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
-      if (sdlk_eq(*key, game->config.key_action7)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(6);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
-      if (sdlk_eq(*key, game->config.key_action8)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(7);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
-      if (sdlk_eq(*key, game->config.key_action9)) {
-        LOG("INF: Pressed action key");
-        TRACE_AND_INDENT();
-        game->change_state(Game::STATE_NORMAL);
-        wid_thing_info_fini("action key"); // To remove bag or other info
-        level->inventory_chosen(8);
-        wid_rightbar_init();
-        auto what = level->inventory_get();
-        if (what) {
-          wid_inventory_select_requested(what);
-        }
-        return true;
-      }
+      return true;
     }
   }
 
