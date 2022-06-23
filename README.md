@@ -3,7 +3,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- shortcuts do nothing                                                                                                                         -->
 <!-- get rid of numbers for buffs and debuffs                                                                                                     -->
-<!-- fix invent  widget for ascii mode                                                                                                            -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->
 <!-- fix enchant  widget for ascii mode                                                                                                           -->
 <!-- ascii check list - particles / lasers / projectiles / explosions                                                                             -->
@@ -17,7 +16,6 @@
 <!--                                                                                                                                              -->
 <!-- Accessibility                                                                                                                                -->
 <!-- ------                                                                                                                                       -->
-<!-- no lighting effects mode                                                                                                                     -->
 <!-- keyboard only mode                                                                                                                           -->
 <!-- keyboard only mode single hand i.e. no key combinations                                                                                      -->
 <!-- ------                                                                                                                                       -->
