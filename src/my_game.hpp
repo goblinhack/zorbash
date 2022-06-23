@@ -87,6 +87,16 @@ public:
   SDL_Keysym key_action7         = {};
   SDL_Keysym key_action8         = {};
   SDL_Keysym key_action9         = {};
+  SDL_Keysym key_skill0          = {};
+  SDL_Keysym key_skill1          = {};
+  SDL_Keysym key_skill2          = {};
+  SDL_Keysym key_skill3          = {};
+  SDL_Keysym key_skill4          = {};
+  SDL_Keysym key_skill5          = {};
+  SDL_Keysym key_skill6          = {};
+  SDL_Keysym key_skill7          = {};
+  SDL_Keysym key_skill8          = {};
+  SDL_Keysym key_skill9          = {};
   SDL_Keysym key_attack          = {};
   SDL_Keysym key_console         = {};
   SDL_Keysym key_drop            = {};
