@@ -550,7 +550,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_int_context(w, slot);
         wid_set_text_lhs(w, true);
 
-        wid_set_text(w, std::to_string(slot) + " " + t->text_short_and_state_capitalised());
+        wid_set_text(w, std::to_string((slot + 1) % 10) + " " + t->text_short_and_state_capitalised());
         wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_begin);
         wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_end);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
