@@ -1656,13 +1656,10 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     if (t->is_bag_item_container()) {
       if (items > 3) {
         w->log("Looks to be full of presents.", TEXT_FORMAT_LHS);
-        w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 1) {
         w->log("Looks like it contains a few things.", TEXT_FORMAT_LHS);
-        w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 0) {
         w->log("Looks like it contains something.", TEXT_FORMAT_LHS);
-        w->log(UI_LOGGING_EMPTY_LINE);
       } else {
         w->log("Is empty.", TEXT_FORMAT_LHS);
       }
@@ -1673,17 +1670,13 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
     //
     if (t->is_treasure_chest()) {
       w->log("Looks to be locked.", TEXT_FORMAT_LHS);
-      w->log(UI_LOGGING_EMPTY_LINE);
     } else if (t->is_bag()) {
       if (items > 3) {
         w->log("Looks to be bulging with presents.", TEXT_FORMAT_LHS);
-        w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 1) {
         w->log("Looks like it contains a few things.", TEXT_FORMAT_LHS);
-        w->log(UI_LOGGING_EMPTY_LINE);
       } else if (items > 0) {
         w->log("Looks like it contains something.", TEXT_FORMAT_LHS);
-        w->log(UI_LOGGING_EMPTY_LINE);
       } else {
         w->log("Looks like it is empty.", TEXT_FORMAT_LHS);
       }
