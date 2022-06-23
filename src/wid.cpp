@@ -6588,6 +6588,16 @@ static void wid_tick_all(void)
     }
   }
 
+  //
+  // Update the inventory if needed. This is valid in both normal and inventory states.
+  //
+  if (game->request_inventory_thing_selected_do) {
+    DBG2("Inventory: handle over selected thing");
+    wid_inventory_select(game->request_inventory_thing_selected);
+    game->request_inventory_thing_selected    = nullptr;
+    game->request_inventory_thing_selected_do = false;
+  }
+
   switch (game->state) {
     case Game::STATE_NORMAL:
       //
@@ -6623,6 +6633,7 @@ static void wid_tick_all(void)
           }
         }
       }
+
       break;
 
     case Game::STATE_INVENTORY:
@@ -6634,16 +6645,6 @@ static void wid_tick_all(void)
         wid_inventory_over(game->request_inventory_thing_over);
         game->request_inventory_thing_over    = nullptr;
         game->request_inventory_thing_over_do = false;
-      }
-
-      //
-      // Update the inventory if needed
-      //
-      if (game->request_inventory_thing_selected_do) {
-        DBG2("Inventory: handle over selected thing");
-        wid_inventory_select(game->request_inventory_thing_selected);
-        game->request_inventory_thing_selected    = nullptr;
-        game->request_inventory_thing_selected_do = false;
       }
 
       if (game->request_remake_inventory) {

@@ -2,7 +2,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- shortcuts do nothing                                                                                                                         -->
-<!-- get rid of numbers for buffs and debuffs                                                                                                     -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->
 <!-- fix enchant  widget for ascii mode                                                                                                           -->
 <!-- ascii check list - particles / lasers / projectiles / explosions                                                                             -->
