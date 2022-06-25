@@ -25,6 +25,9 @@ public:
   //
   point pixel_start;
   point pixel_stop;
+  //
+  // Map scroll offset
+  //
   point pixel_map_at;
   //
   // Duration
@@ -45,7 +48,7 @@ public:
   Levelp    level {};
   ThingId   id {};
   ThingId   victim_id {};
-  LaserInfo info;
+  LaserInfo info {};
 
   //
   // Animation frames
