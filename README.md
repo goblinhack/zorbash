@@ -4,6 +4,7 @@
 <!-- popup over str/dex is too large                                                                                                              -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->
 <!-- fix enchant  widget for ascii mode                                                                                                           -->
+<!-- click through a monster should it attack?                                                                                                    -->
 <!-- ascii check list - particles / lasers / projectiles / explosions                                                                             -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

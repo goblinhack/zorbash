@@ -13,6 +13,7 @@
 #include "my_tile.hpp"
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
+#include "my_wid_popups.hpp"
 #include "my_wid_thing_info.hpp"
 
 void Level::cursor_warp_check(void)

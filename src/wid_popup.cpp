@@ -16,12 +16,6 @@
 #include "my_wid_text_box.hpp"
 #include "slre.hpp"
 
-bool wid_popup_exists(void)
-{
-  return (wid_collect || wid_skills || wid_enchant || wid_load || wid_save || wid_config_keyboard_window ||
-          wid_quit_window || wid_inventory_window);
-}
-
 WidPopup::~WidPopup()
 {
   wid_destroy(&wid_popup_container);
@@ -107,76 +101,13 @@ void WidPopup::log(std::wstring s, wid_text_format format, std::string color)
   wid_text_area->log(s, format, color);
 }
 
-void wid_popup_test(void)
+//
+// Get rid of trailing empty lines
+//
+void WidPopup::compress(void)
 {
-  TRACE_AND_INDENT();
-  std::vector< std::string > items;
-  items.push_back("text 1111111111111111");
-  items.push_back("text 2222222222222222");
-  items.push_back("text 3333333333333333");
-  items.push_back("text 4444444444444444");
-  items.push_back("text 5555555555555555");
-  items.push_back("text 1111111111111111");
-  items.push_back("text 2222222222222222");
-  items.push_back("text 3333333333333333");
-  items.push_back("text 4444444444444444");
-  items.push_back("text 5555555555555555");
-  items.push_back("text 1111111111111111");
-  items.push_back("text 2222222222222222");
-  items.push_back("text 3333333333333333");
-  items.push_back("text 4444444444444444");
-  items.push_back("text 5555555555555555");
+  TRACE_NO_INDENT();
 
-  point tl    = make_point(20, 20);
-  point br    = make_point(50, 45);
-  auto  width = br.x - tl.x;
-
-  auto wid_enchant = new WidPopup("Top level", tl, br, nullptr, "", false, true);
-
-  int y_at = 3;
-  for (auto slot = 0; slot < (int) items.size(); slot++) {
-    auto  p  = wid_enchant->wid_text_area->wid_text_area;
-    auto  w  = wid_new_container(p, "item slot");
-    point tl = make_point(0, y_at);
-    point br = make_point(width - 3, y_at + 2);
-    wid_set_pos(w, tl, br);
-    wid_set_shape_none(w);
-    wid_set_text(w, "xxxxxxxxx");
-
-    {
-      auto  wid_icon = wid_new_square_button(w, "item icon");
-      point tl       = make_point(0, 0);
-      point br       = make_point(2, 2);
-      wid_set_pos(wid_icon, tl, br);
-
-      auto tile = tile_find("player1.1");
-      if (tile) {
-        wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-        wid_set_fg_tile(wid_icon, tile);
-      }
-    }
-
-    {
-      auto  item     = items[ slot ];
-      auto  wid_item = wid_new_square_button(w, "item name");
-      point tl       = make_point(3, 0);
-      point br       = make_point(width - 2, 2);
-      wid_set_pos(wid_item, tl, br);
-      wid_set_style(wid_item, UI_WID_STYLE_DARK);
-      wid_set_int_context(w, slot);
-      wid_set_text(wid_item, item.c_str());
-      wid_set_text_lhs(wid_item, true);
-      wid_update(wid_item);
-
-      if (slot == 0) {
-        wid_item->debug = true;
-      }
-    }
-
-    y_at += 3;
-  }
-
-  wid_update(wid_enchant->wid_text_area->wid_text_area);
-
-  wid_actionbar_init();
+  int utilized = wid_text_area->line_count;
+  wid_resize(wid_popup_container, -1, utilized + 1);
 }

@@ -16,7 +16,6 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_inventory.hpp"
-#include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"

@@ -13,6 +13,7 @@
 #include "my_wid_botcon.hpp"
 #include "my_wid_error.hpp"
 #include "my_wid_popup.hpp"
+#include "my_wid_popups.hpp"
 #include "my_wid_topcon.hpp"
 
 static WidPopup *wid_error_window;

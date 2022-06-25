@@ -16,7 +16,6 @@
 #include "my_wid_buffbox.hpp"
 #include "my_wid_debuffbox.hpp"
 #include "my_wid_inventory.hpp"
-#include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 
