@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- close does not work on ascii inventory                                                                                                       -->
 <!-- clicking on inv item does not always show item                                                                                               -->
 <!-- popup over str/dex is too large                                                                                                              -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->

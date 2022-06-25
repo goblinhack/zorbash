@@ -73,15 +73,6 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   }
 
   {
-    auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
-    point tl(inventory_width - 3, 0);
-    point br(inventory_width - 1, 2);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "X");
-    wid_set_style(w, UI_WID_STYLE_RED);
-  }
-
-  {
     auto  w  = wid_new_square_button(wid_inventory_window, "wid inventory tab bag1");
     point tl = point(23, 1);
     point br = point(26, 1);
@@ -474,6 +465,25 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     point tl = point(15, y_at);
     point br = point(17, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_RING2, tl, br, "equip_ring2", "equip_ring");
+  }
+  {
+    auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
+    point tl(inventory_width - 3, 0);
+    point br(inventory_width - 1, 2);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "X");
+    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_on_mouse_up(w, wid_inventory_close);
+  }
+
+  {
+    auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
+    point tl(0, 0);
+    point br(2, 2);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "X");
+    wid_set_style(w, UI_WID_STYLE_RED);
+    wid_set_on_mouse_up(w, wid_inventory_close);
   }
 
   wid_update(wid_inventory_window);
