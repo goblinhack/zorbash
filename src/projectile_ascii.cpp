@@ -31,8 +31,8 @@ void Level::display_ascii_projectiles(void)
   blit_init();
   auto now = time_game_ms();
   auto e   = std::remove_if(all_projectiles.begin(), all_projectiles.end(), [ =, this ](Projectile &p) {
-    float timestep = p.ts_stop - p.ts_start;
-    float dt       = (((float) (now) -p.ts_start)) / timestep;
+    float timestep = p.info.ts_stop - p.info.ts_start;
+    float dt       = (((float) (now) -p.info.ts_start)) / timestep;
 
     Thingp t;
 
@@ -49,15 +49,15 @@ void Level::display_ascii_projectiles(void)
       return true;
     }
 
-    if (p.follow_moving_target) {
+    if (p.info.follow_moving_target) {
       auto t = thing_find_optional(p.victim_id);
       if (t) {
-        p.stop = t->last_blit_at;
+        p.info.pixel_stop = t->last_blit_at;
       }
     }
 
-    auto start = p.start - p.pixel_map_at;
-    auto stop  = p.stop - p.pixel_map_at;
+    auto start = p.info.pixel_start - p.info.pixel_map_at;
+    auto stop  = p.info.pixel_stop - p.info.pixel_map_at;
 
     auto   dist  = distance(start, stop);
     auto   steps = (int) ceil(dist) / TILE_WIDTH;

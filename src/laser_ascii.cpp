@@ -22,35 +22,21 @@ void Level::display_ascii_lasers(void)
 {
   TRACE_NO_INDENT();
 
-#if 0
-  CON("-");
-  for (auto p : all_lasers) {
-    CON("all int p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
-  }
-  for (auto p : new_lasers) {
-    CON("new int p %d,%d to %d,%d %s", p.start.x, p.start.y, p.stop.x, p.stop.y, p.tile->name.c_str());
-  }
-#endif
-
   //
   // std::remove_if iterates over the whole vector and moves all "selected"
   // entries "to the end". std::erase resizes the container.
   //
   // Future: std::erase_if();
   //
-  glcolor(WHITE);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-  blit_init();
   auto now = time_game_ms();
-  auto e   = std::remove_if(all_lasers.begin(), all_lasers.end(), [ =, this ](Laser &p) {
+  auto e   = std::remove_if(all_lasers.begin(), all_lasers.end(), [ =, this ](Laser &l) {
     TRACE_NO_INDENT();
-    float timestep = p.ts_stop - p.ts_start;
-    float dt       = (((float) (now) -p.ts_start)) / timestep;
+    float timestep = l.info.ts_stop - l.info.ts_start;
+    float dt       = (((float) (now) -l.info.ts_start)) / timestep;
 
     Thingp t;
 
-    t = thing_find(p.id);
+    t = thing_find(l.id);
     if (unlikely(! t)) {
       return true;
     }
@@ -67,15 +53,15 @@ void Level::display_ascii_lasers(void)
       return true;
     }
 
-    if (p.follow_moving_target) {
-      auto t = thing_find_optional(p.victim_id);
+    if (l.info.follow_moving_target) {
+      auto t = thing_find_optional(l.victim_id);
       if (t) {
-        p.stop = t->last_blit_at;
+        l.info.pixel_stop = t->last_blit_at;
       }
     }
 
-    auto start = p.start - p.pixel_map_at;
-    auto stop  = p.stop - p.pixel_map_at;
+    auto start = l.info.pixel_start - l.info.pixel_map_at;
+    auto stop  = l.info.pixel_stop - l.info.pixel_map_at;
 
     auto   dist  = distance(start, stop);
     auto   steps = (int) ceil(dist) / TILE_WIDTH;
@@ -116,13 +102,13 @@ void Level::display_ascii_lasers(void)
 
       TRACE_NO_INDENT();
       if (animstep == 1) {
-        tile = get(p.tiles, frame, 0);
-      } else if ((animstep >= steps) || (animstep >= (int) p.tiles.size())) {
-        tile = get(p.tiles, frame, Laser::max_frames - 1);
-      } else if (animstep >= (int) p.tiles.size()) {
-        tile = get(p.tiles, frame, (frame % (p.tiles.size() - 2)) + 1);
+        tile = get(l.tiles, frame, 0);
+      } else if ((animstep >= steps) || (animstep >= (int) l.tiles.size())) {
+        tile = get(l.tiles, frame, Laser::max_frames - 1);
+      } else if (animstep >= (int) l.tiles.size()) {
+        tile = get(l.tiles, frame, (frame % (l.tiles.size() - 2)) + 1);
       } else {
-        tile = get(p.tiles, frame, animstep);
+        tile = get(l.tiles, frame, animstep);
       }
 
       if (unlikely(! tile)) {

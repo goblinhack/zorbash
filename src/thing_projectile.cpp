@@ -131,7 +131,14 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
     return nullptr;
   }
 
-  level->new_projectile(projectile->id, target->id, start, end, 200, true /* follow the target */);
+  ProjectileInfo info {};
+  info.pixel_start          = start;
+  info.pixel_stop           = end;
+  info.map_start            = curr_at;
+  info.map_stop             = target->curr_at;
+  info.follow_moving_target = true;
+  info.pixel_map_at         = level->pixel_map_at;
+  level->new_projectile(projectile->id, target->id, info, 200);
 
   on_use(projectile, target);
 
