@@ -634,7 +634,7 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
     } else {
       snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->gold_value_dice_str().c_str());
     }
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value        %16s", tmp2);
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value Zorkmids %14s", tmp2);
     w->log(tmp);
   }
 }

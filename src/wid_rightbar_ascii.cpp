@@ -104,7 +104,7 @@ bool wid_rightbar_ascii_create(void)
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "Score  Cash Keys");
+    wid_set_text(w, "Score Zorks Keys");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
 
