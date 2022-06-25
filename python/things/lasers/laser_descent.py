@@ -27,9 +27,22 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
-    my.tile(self,
-            ascii_bg_char="block", ascii_bg_col_name="blue", ascii_fg_col_name="",
-            ascii_alpha=200)
+    my.tile(self, ascii_bg_char="1", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="2", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="3", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="4", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="5", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="6", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="7", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="8", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="1", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="2", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="3", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="4", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="5", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="6", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="7", ascii_bg_col_name="blue", ascii_alpha=200)
+    my.tile(self, ascii_bg_char="8", ascii_bg_col_name="blue", ascii_alpha=200)
 
     my.tp_update(self)
 

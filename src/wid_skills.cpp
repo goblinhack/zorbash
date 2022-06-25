@@ -271,28 +271,13 @@ void Game::wid_choose_skill(void)
       point tl = make_point(0, 0);
       point br = make_point(2, 2);
 
-      if (g_opt_ascii) {
-        tl = make_point(1, 0);
-        br = make_point(1, 0);
-      }
-
       wid_set_pos(wid_icon, tl, br);
 
       auto tiles = &tpp->tiles;
       if (tiles) {
         auto tile = tile_first(tiles);
-        if (g_opt_ascii) {
-          if (tile) {
-            wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-            std::wstring text;
-            text += tile->ascii_fg_char;
-            wid_set_text(wid_icon, text);
-            wid_set_color(wid_icon, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
-          }
-        } else {
-          wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-          wid_set_fg_tile(wid_icon, tile);
-        }
+        wid_set_style(wid_icon, UI_WID_STYLE_DARK);
+        wid_set_fg_tile(wid_icon, tile);
       }
 
       wid_update(wid_icon);
