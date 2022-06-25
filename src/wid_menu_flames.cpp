@@ -10,7 +10,6 @@
 #include "my_sys.hpp"
 #include "my_unicode.hpp"
 #include "my_wid_botcon.hpp"
-#include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_topcon.hpp"
 

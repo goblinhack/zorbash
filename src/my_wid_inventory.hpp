@@ -4,7 +4,9 @@
 //
 
 #pragma once
+
 #include "my_fwd.hpp"
+#include "my_point.hpp"
 #include "my_sys.hpp"
 
 bool wid_inventory_create_ascii(Thingp, Thingp);

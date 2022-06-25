@@ -17,6 +17,7 @@
 #include "my_wid_actionbar.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_popup.hpp"
+#include "my_wid_popups.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
@@ -147,6 +148,7 @@ static void wid_actionbar_quit_over_begin(Widp w, int32_t relx, int32_t rely, in
   wid_over_quit->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Quit game");
   wid_over_quit->log(UI_LOGGING_EMPTY_LINE);
   wid_over_quit->log("Select this to abandon all hope.");
+  wid_over_quit->compress();
 }
 
 static void wid_actionbar_quit_over_end(Widp w)
@@ -257,6 +259,7 @@ static void wid_actionbar_robot_over_begin(Widp w, int32_t relx, int32_t rely, i
   wid_over_robot_mode->log(
       "Goblinhack cannot be held responsible for the death, dismemberment or otherwise damage caused to a player "
       "character while in robot mode.");
+  wid_over_robot_mode->compress();
 }
 
 static void wid_actionbar_robot_over_end(Widp w)
@@ -370,6 +373,7 @@ static void wid_actionbar_load_over_begin(Widp w, int32_t relx, int32_t rely, in
   wid_over_load->log("Select this to load a previous game.");
   wid_over_load->log(UI_LOGGING_EMPTY_LINE);
   wid_over_load->log("NOTE: auto load will create snapshots you can load to recover.");
+  wid_over_load->compress();
 }
 
 static void wid_actionbar_load_over_end(Widp w)
@@ -447,6 +451,7 @@ static void wid_actionbar_save_over_begin(Widp w, int32_t relx, int32_t rely, in
   wid_over_save->log("Select this to save your current progress");
   wid_over_save->log(UI_LOGGING_EMPTY_LINE);
   wid_over_save->log("NOTE: auto save will occasionally also perform saves for you.");
+  wid_over_save->compress();
 }
 
 static void wid_actionbar_save_over_end(Widp w)
@@ -522,6 +527,7 @@ static void wid_actionbar_ascend_over_begin(Widp w, int32_t relx, int32_t rely, 
   wid_over_ascend->log(
       "Select this to ascend cowardly to the previous level. I mean you might have a good reason, but let's both of "
       "us face it; probably not...");
+  wid_over_ascend->compress();
 }
 
 static void wid_actionbar_ascend_over_end(Widp w)
@@ -597,6 +603,7 @@ static void wid_actionbar_descend_over_begin(Widp w, int32_t relx, int32_t rely,
   wid_over_descend->log(
       "Select this to descend to the next level. If you dare... I mean seriously, there could be trouble down "
       "there.");
+  wid_over_descend->compress();
 }
 
 static void wid_actionbar_descend_over_end(Widp w)
@@ -681,6 +688,7 @@ static void wid_actionbar_inventory_over_begin(Widp w, int32_t relx, int32_t rel
   wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
   wid_over_inventory->log("NOTE: that you are able to carry at most one extra bag, so use space wisely.");
   wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
+  wid_over_inventory->compress();
 }
 
 static void wid_actionbar_inventory_over_end(Widp w)
@@ -767,6 +775,7 @@ static void wid_actionbar_collect_over_begin(Widp w, int32_t relx, int32_t rely,
   wid_over_collect->log("Select this to collect loot at your location.");
   wid_over_collect->log(UI_LOGGING_EMPTY_LINE);
   wid_over_collect->log("NOTE: that you are able to carry at most one extra bag, so use space wisely");
+  wid_over_collect->compress();
 }
 
 static void wid_actionbar_collect_over_end(Widp w)
@@ -884,6 +893,7 @@ static void wid_actionbar_wait_over_begin(Widp w, int32_t relx, int32_t rely, in
   wid_over_wait->log(
       "Eventually your stamina and health will improve, but watch out for "
       "wandering monsters.");
+  wid_over_wait->compress();
 }
 
 static void wid_actionbar_wait_over_end(Widp w)
@@ -954,6 +964,7 @@ static void wid_actionbar_zoom_in_over_begin(Widp w, int32_t relx, int32_t rely,
   wid_over_zoom_in->log(UI_LOGGING_EMPTY_LINE);
 
   wid_over_zoom_in->log("Select this to zoom out of the map.");
+  wid_over_zoom_in->compress();
 }
 
 static void wid_actionbar_zoom_out_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
@@ -988,6 +999,7 @@ static void wid_actionbar_zoom_out_over_begin(Widp w, int32_t relx, int32_t rely
   wid_over_zoom_out->log(UI_LOGGING_EMPTY_LINE);
 
   wid_over_zoom_out->log("Select this to zoom into the map.");
+  wid_over_zoom_out->compress();
 }
 
 static void wid_actionbar_zoom_in_over_end(Widp w)
@@ -1058,6 +1070,7 @@ static void wid_actionbar_configure_over_begin(Widp w, int32_t relx, int32_t rel
   wid_over_keyboard->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Configure keyboard");
   wid_over_keyboard->log(UI_LOGGING_EMPTY_LINE);
   wid_over_keyboard->log("Select this to change the default key settings.");
+  wid_over_keyboard->compress();
 }
 
 static void wid_actionbar_configure_over_end(Widp w)

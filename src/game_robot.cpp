@@ -8,7 +8,6 @@
 #include "my_monst.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include "my_wid_popup.hpp"
 
 void Game::robot_mode_tick(void)
 {

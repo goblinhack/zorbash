@@ -17,6 +17,7 @@
 #include "my_wid_debuffbox.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_popup.hpp"
+#include "my_wid_popups.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 
@@ -102,12 +103,12 @@ void wid_rightbar_stats_over_def_b(Widp w, int32_t relx, int32_t rely, int32_t w
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total defense including all items and modifiers is %d.", tot);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
       wid_rightbar_popup->log("You currently have no armor bonuses", TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
+
+  wid_rightbar_popup->compress();
 
   game->wid_thing_info_create(level->player);
 }
@@ -169,12 +170,11 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rely, int3
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total strength including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
       wid_rightbar_popup->log("You currently have no strength bonuses", TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
+  wid_rightbar_popup->compress();
 
   game->wid_thing_info_create(level->player);
 }
@@ -236,12 +236,12 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int32_t relx, int32_t rely, int3
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total attack including all items and modifiers is %d.", tot);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
       wid_rightbar_popup->log("You currently have no attack bonuses", TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
+
+  wid_rightbar_popup->compress();
 
   game->wid_thing_info_create(level->player);
 }
@@ -306,12 +306,12 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rely, int3
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total constitution including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
       wid_rightbar_popup->log("You currently have no constitution bonuses", TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
+
+  wid_rightbar_popup->compress();
 
   game->wid_thing_info_create(level->player);
 }
@@ -377,12 +377,12 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rely, int3
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total dexterity including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
       wid_rightbar_popup->log("You currently have no dexterity bonuses", TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
+
+  wid_rightbar_popup->compress();
 
   game->wid_thing_info_create(level->player);
 }
@@ -447,12 +447,12 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t rely, int
       char tmp[ MAXSHORTSTR ];
       snprintf(tmp, sizeof(tmp) - 1, "Your total luck including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     } else {
       wid_rightbar_popup->log("You currently have no luck bonuses", TEXT_FORMAT_LHS);
-      wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
     }
   }
+
+  wid_rightbar_popup->compress();
 
   game->wid_thing_info_create(level->player);
 }
@@ -663,9 +663,9 @@ bool is_mouse_over_rightbar(void)
   // Add some border
   //
   tlx -= 1;
-  brx ++;
+  brx++;
   tly -= 1;
-  bry ++;
+  bry++;
 
   if ((x >= tlx) && (x < brx) && (y >= tly)) {
     // CON("    rightbar %d %d %d", tlx, brx, x);

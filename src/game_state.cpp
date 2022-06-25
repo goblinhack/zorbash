@@ -12,6 +12,7 @@
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_leftbar.hpp"
+#include "my_wid_popups.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
