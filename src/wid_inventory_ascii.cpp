@@ -49,6 +49,9 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected set");
   }
 
+  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
+
   static int inventory_width  = 112;
   static int inventory_height = 34;
 
@@ -261,32 +264,41 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       auto w = wid_new_square_button(p, "eat");
 
       point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      point br = make_point(x_off + width, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_eat);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "%%fg=white$E%%fg=reset$at");
-      y_at += 3;
+      y_at += 2;
     } else if (! item_option->target_name_laser().empty()) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
 
       point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      point br = make_point(x_off + width, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "%%fg=white$U%%fg=reset$se (choose target)");
-      y_at += 3;
+      y_at += 2;
     } else if (item_option->is_usable() && ! player->is_equipped(item_option)) {
       TRACE_AND_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
 
       point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      point br = make_point(x_off + width, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
       if (item_option->is_weapon()) {
@@ -300,7 +312,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       } else {
         wid_set_text(w, "%%fg=white$U%%fg=reset$se");
       }
-      y_at += 3;
+      y_at += 2;
     } else if (item_option->is_usable() && player->is_equipped(item_option)) {
       //
       // For example boots of teleport
@@ -310,12 +322,15 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       auto w = wid_new_square_button(p, "use");
 
       point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      point br = make_point(x_off + width, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "%%fg=white$U%%fg=reset$se");
-      y_at += 3;
+      y_at += 2;
     }
 
     //
@@ -327,12 +342,15 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       auto w = wid_new_square_button(p, "use");
 
       point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      point br = make_point(x_off + width, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_use_radial);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "Use radially");
-      y_at += 3;
+      wid_set_text(w, "%%fg=reset$Use radially");
+      y_at += 2;
     }
 
     if (item_option->is_throwable()) {
@@ -341,12 +359,15 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       auto w = wid_new_square_button(p, "throw");
 
       point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      point br = make_point(x_off + width, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_throw);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "%%fg=white$T%%fg=reset$hrow");
-      y_at += 3;
+      y_at += 2;
     }
 
     {
@@ -355,8 +376,11 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
       auto w = wid_new_square_button(p, "drop");
 
       point tl = make_point(x_off, y_at);
-      point br = make_point(x_off + width, y_at + 2);
-      wid_set_style(w, UI_WID_STYLE_NORMAL);
+      point br = make_point(x_off + width, y_at);
+      wid_set_mode(w, WID_MODE_OVER);
+      wid_set_style(w, box_highlight_style);
+      wid_set_mode(w, WID_MODE_NORMAL);
+      wid_set_style(w, box_style);
       wid_set_on_mouse_up(w, wid_inventory_item_option_drop);
       wid_set_pos(w, tl, br);
       wid_set_text(w, "%%fg=white$D%%fg=reset$rop");
