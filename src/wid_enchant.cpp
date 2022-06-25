@@ -300,12 +300,15 @@ void Game::wid_enchant_an_item(void)
   static int wid_width  = 70;
   int        left_half  = wid_width / 2;
   int        right_half = wid_width - left_half;
-  point      tl         = make_point(m - left_half, UI_TOPCON_VIS_HEIGHT + 10);
-  point      br         = make_point(m + right_half, tl.y + 25);
+  point      tl;
+  point      br;
 
   if (g_opt_ascii) {
     tl = make_point(m - left_half, TERM_HEIGHT / 2 - 7);
     br = make_point(m + right_half, TERM_HEIGHT / 2 + 7);
+  } else {
+    tl = make_point(m - left_half, TERM_HEIGHT / 2 - 14);
+    br = make_point(m + right_half, TERM_HEIGHT / 2 + 14);
   }
 
   auto width = br.x - tl.x;
