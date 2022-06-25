@@ -394,6 +394,9 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   }
   BOTCON("You lucky thing. Choose an item to collect.");
 
+  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
+
   auto       m          = TERM_WIDTH / 2;
   static int wid_width  = 70;
   int        left_half  = wid_width / 2;
@@ -489,7 +492,10 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
         point tl = make_point(3, 0);
         point br = make_point(width - 3, 0);
         wid_set_pos(wid_item, tl, br);
-        wid_set_style(wid_item, UI_WID_STYLE_DARK);
+        wid_set_mode(wid_item, WID_MODE_OVER);
+        wid_set_style(wid_item, box_highlight_style);
+        wid_set_mode(wid_item, WID_MODE_NORMAL);
+        wid_set_style(wid_item, box_style);
       } else {
         point tl = make_point(3, 0);
         point br = make_point(width - 3, 2);
@@ -522,6 +528,9 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     }
   }
 
+  //
+  // Close icons
+  //
   if (g_opt_ascii) {
     {
       auto  w = wid_new_square_button(wid_collect->wid_popup_container, "wid collect window close");
