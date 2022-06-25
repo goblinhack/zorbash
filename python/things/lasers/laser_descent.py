@@ -27,12 +27,16 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
+    my.tile(self,
+            ascii_bg_char="block", ascii_bg_col_name="blue", ascii_fg_col_name="",
+            ascii_alpha=200)
+
     my.tp_update(self)
 
 
 def init():
     tp_init(
-        name="effect_descent",
+        name="laser_descent",
         text_long_name="beam of destruction",
         text_short_name="beam of descent",
     )

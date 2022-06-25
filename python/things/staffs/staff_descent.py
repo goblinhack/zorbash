@@ -73,7 +73,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)
-    my.target_name_laser(self, "effect_descent")
+    my.target_name_laser(self, "laser_descent")
     my.target_name_radial(self, "effect_descent_radial")
     my.text_long_description(self, "This most dangerous wand can transport its target to the next level by the most efficacious means possible...")
     my.noise_on_dropping(self, 5)
