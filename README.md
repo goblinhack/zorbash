@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- clicking on inv item does not always show item                                                                                               -->
 <!-- popup over str/dex is too large                                                                                                              -->
 <!-- fix collect  widget for ascii mode                                                                                                           -->
 <!-- fix enchant  widget for ascii mode                                                                                                           -->

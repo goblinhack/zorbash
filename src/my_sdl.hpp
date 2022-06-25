@@ -41,6 +41,7 @@ enum {
 
 typedef struct sdl_t_ {
   int exiting {};
+  int event_count {};
   int held_mouse_x {};
   int held_mouse_y {};
   int init_video {};

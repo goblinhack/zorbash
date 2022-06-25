@@ -59,6 +59,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
   switch (event->type) {
     case SDL_KEYDOWN:
       {
+        sdl.event_count++;
         key = &event->key.keysym;
 
         DBG2("SDL: Keyboard: Key pressed keycode 0x%08" PRIX32 " = %s %d", event->key.keysym.sym,
@@ -106,6 +107,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       }
     case SDL_KEYUP:
       {
+        sdl.event_count++;
         if (g_grab_next_key) {
           DBG2("SDL: Keyboard: Grabbed 0x%08" PRIX32 " = %s / %s", event->key.keysym.sym,
                SDL_GetKeyName(event->key.keysym.sym), SDL_GetScancodeName(event->key.keysym.scancode));
@@ -134,11 +136,14 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       }
     case SDL_TEXTINPUT:
       {
+        sdl.event_count++;
+        sdl.event_count++;
         DBG2("SDL: Keyboard: Text input \"%s\" in window %d", event->text.text, event->text.windowID);
         break;
       }
     case SDL_MOUSEWHEEL:
       {
+        sdl.event_count++;
         DBG2("SDL: Mouse: Wheel scrolled %d in x and %d in y in window %d", event->wheel.x, event->wheel.y,
              event->wheel.windowID);
 
@@ -185,6 +190,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       }
     case SDL_MOUSEMOTION:
       {
+        sdl.event_count++;
         sdl.mouse_down = sdl_get_mouse();
 
         DBG2("SDL: Mouse: Moved to %d,%d (%d,%d) state %d", event->motion.x, event->motion.y, event->motion.xrel,
@@ -200,6 +206,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       }
     case SDL_MOUSEBUTTONDOWN:
       {
+        sdl.event_count++;
         sdl.mouse_down                = sdl_get_mouse();
         sdl.last_mouse_held_down_when = time_ms();
         sdl.held_mouse_x              = sdl.mouse_x;
@@ -218,6 +225,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       }
     case SDL_MOUSEBUTTONUP:
       {
+        sdl.event_count++;
         sdl.mouse_down                = sdl_get_mouse();
         sdl.last_mouse_held_down_when = 0;
         sdl.held_mouse_x              = 0;
@@ -231,6 +239,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       }
     case SDL_JOYAXISMOTION:
       {
+        sdl.event_count++;
         DBG2("SDL: Joystick %d: Axis %d moved by %d", event->jaxis.which, event->jaxis.axis, event->jaxis.value);
 
         int axis  = event->jaxis.axis;
@@ -270,12 +279,14 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       }
     case SDL_JOYBALLMOTION:
       {
+        sdl.event_count++;
         DBG2("SDL: Joystick %d: Ball %d moved by %d,%d", event->jball.which, event->jball.ball, event->jball.xrel,
              event->jball.yrel);
         break;
       }
     case SDL_JOYHATMOTION:
       {
+        sdl.event_count++;
         DBG2("SDL: Joystick %d: Hat %d moved to ", event->jhat.which, event->jhat.hat);
 
         switch (event->jhat.value) {
@@ -338,6 +349,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       }
     case SDL_JOYBUTTONDOWN:
       {
+        sdl.event_count++;
         DBG2("SDL: Joystick %d: Button %d pressed", event->jbutton.which, event->jbutton.button);
         set(sdl.joy_buttons, event->jbutton.button, (uint8_t) 1);
         sdl_get_mouse();
@@ -346,6 +358,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
       }
     case SDL_JOYBUTTONUP:
       {
+        sdl.event_count++;
         DBG2("SDL: Joystick %d: Button %d released", event->jbutton.which, event->jbutton.button);
         set(sdl.joy_buttons, event->jbutton.button, (uint8_t) 0);
         break;
