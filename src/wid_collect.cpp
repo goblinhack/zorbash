@@ -400,8 +400,14 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
   int        right_half = wid_width - left_half;
   point      tl         = make_point(m - left_half, UI_TOPCON_VIS_HEIGHT + 10);
   point      br         = make_point(m + right_half, tl.y + 25);
-  auto       width      = br.x - tl.x;
-  auto       height     = br.y - tl.y;
+
+  if (g_opt_ascii) {
+    tl = make_point(m - left_half, TERM_HEIGHT / 2 - 7);
+    br = make_point(m + right_half, TERM_HEIGHT / 2 + 7);
+  }
+
+  auto width  = br.x - tl.x;
+  auto height = br.y - tl.y;
 
   if ((int) items.size() > (height / 3) - 2) {
     wid_collect = new WidPopup("collect", tl, br, nullptr, "", false, true, collect_items.size() * 3);
@@ -437,16 +443,33 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
 
       point tl = make_point(0, 0);
       point br = make_point(2, 2);
+
+      if (g_opt_ascii) {
+        tl = make_point(1, 0);
+        br = make_point(1, 0);
+      }
+
       wid_set_pos(wid_icon, tl, br);
 
       if (t) {
-        auto tpp   = t->tp();
-        auto tiles = &tpp->tiles;
-        if (tiles) {
-          auto tile = tile_first(tiles);
+        if (g_opt_ascii) {
+          auto tile = tile_index_to_tile(t->tile_curr);
           if (tile) {
             wid_set_style(wid_icon, UI_WID_STYLE_DARK);
-            wid_set_fg_tile(wid_icon, tile);
+            std::wstring text;
+            text += tile->ascii_fg_char;
+            wid_set_text(wid_icon, text);
+            wid_set_color(wid_icon, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
+          }
+        } else {
+          auto tpp   = t->tp();
+          auto tiles = &tpp->tiles;
+          if (tiles) {
+            auto tile = tile_first(tiles);
+            if (tile) {
+              wid_set_style(wid_icon, UI_WID_STYLE_DARK);
+              wid_set_fg_tile(wid_icon, tile);
+            }
           }
         }
       } else {
@@ -462,10 +485,17 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
       wid_set_on_mouse_down(wid_item, wid_collect_mouse_down);
       wid_set_on_mouse_over_begin(wid_item, wid_collect_mouse_over_begin);
 
-      point tl = make_point(3, 0);
-      point br = make_point(width - 3, 2);
-      wid_set_pos(wid_item, tl, br);
-      wid_set_style(wid_item, UI_WID_STYLE_DARK);
+      if (g_opt_ascii) {
+        point tl = make_point(3, 0);
+        point br = make_point(width - 3, 0);
+        wid_set_pos(wid_item, tl, br);
+        wid_set_style(wid_item, UI_WID_STYLE_DARK);
+      } else {
+        point tl = make_point(3, 0);
+        point br = make_point(width - 3, 2);
+        wid_set_pos(wid_item, tl, br);
+        wid_set_style(wid_item, UI_WID_STYLE_DARK);
+      }
 
       if (t) {
         std::string text;
@@ -475,7 +505,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
 
         text += t->text_short_description();
         if (! t->gold_value_dice_str().empty()) {
-          text += " Value " + t->gold_value_dice_str() + " gold";
+          text += " Value " + t->gold_value_dice_str() + " zorkmids.";
         }
         wid_set_text(wid_item, text);
       }
@@ -485,28 +515,52 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     }
     wid_update(w);
 
-    y_at += 3;
+    if (g_opt_ascii) {
+      y_at += 1;
+    } else {
+      y_at += 3;
+    }
   }
 
-  {
-    auto  w = wid_new_square_button(wid_collect->wid_popup_container, "wid collect window close");
-    point tl(0, 0);
-    point br(3, 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "ui_icon_close");
-    wid_set_on_mouse_down(w, wid_collect_close);
-  }
+  if (g_opt_ascii) {
+    {
+      auto  w = wid_new_square_button(wid_collect->wid_popup_container, "wid collect window close");
+      point tl(0, 0);
+      point br(2, 2);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "X");
+      wid_set_style(w, UI_WID_STYLE_RED);
+      wid_set_on_mouse_up(w, wid_collect_close);
+    }
+    {
+      auto  w = wid_new_square_button(wid_collect->wid_popup_container, "wid collect window close");
+      point tl(wid_width - 2, 0);
+      point br(wid_width - 0, 2);
+      wid_set_pos(w, tl, br);
+      wid_set_text(w, "X");
+      wid_set_style(w, UI_WID_STYLE_RED);
+      wid_set_on_mouse_up(w, wid_collect_close);
+    }
+  } else {
+    {
+      auto  w = wid_new_square_button(wid_collect->wid_popup_container, "wid collect window close");
+      point tl(0, 0);
+      point br(3, 3);
+      wid_set_pos(w, tl, br);
+      wid_set_bg_tilename(w, "ui_icon_close");
+      wid_set_on_mouse_down(w, wid_collect_close);
+    }
 
-  {
-    auto  w = wid_new_square_button(wid_collect->wid_popup_container, "wid collect window close");
-    point tl(wid_width - 3, 0);
-    point br(wid_width - 0, 3);
-    wid_set_pos(w, tl, br);
-    wid_set_bg_tilename(w, "ui_icon_close");
-    wid_set_on_mouse_down(w, wid_collect_close);
+    {
+      auto  w = wid_new_square_button(wid_collect->wid_popup_container, "wid collect window close");
+      point tl(wid_width - 3, 0);
+      point br(wid_width - 0, 3);
+      wid_set_pos(w, tl, br);
+      wid_set_bg_tilename(w, "ui_icon_close");
+      wid_set_on_mouse_down(w, wid_collect_close);
+    }
   }
 
   wid_update(wid_collect->wid_text_area->wid_text_area);
   wid_actionbar_init();
 }
-// backtrace_dump();

@@ -466,6 +466,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     point br = point(17, y_at + 2);
     wid_inventory_add_equip(wid_inventory_window, MONST_EQUIP_RING2, tl, br, "equip_ring2", "equip_ring");
   }
+
   {
     auto  w = wid_new_square_button(wid_inventory_window, "wid inventory window close");
     point tl(inventory_width - 3, 0);

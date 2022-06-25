@@ -15,7 +15,6 @@ def tp_init(name, text_long_name, text_short_name):
     # start sort marker
     my.equip_carry_anim(self, "wooden_cross_carry")
     my.gfx_ascii_shown(self, True)
-    my.gold_value_dice(self, "1")
     my.is_able_to_fall(self, True)
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)

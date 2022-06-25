@@ -7,7 +7,6 @@ def tp_init(name, text_long_name, text_short_name):
     # start sort marker
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
-    my.gold_value_dice(self, "1")
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
