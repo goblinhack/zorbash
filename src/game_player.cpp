@@ -162,7 +162,7 @@ void Game::place_player(void)
         if (0) {
           level->thing_new("staff_energy", point(x, y + 1));
         }
-        if (0) {
+        if (1) {
           auto w = level->thing_new("wand_fire", point(x, y));
           t->carry(w);
           t->enchant_without_stone(w);
@@ -191,10 +191,10 @@ void Game::place_player(void)
         // level->thing_new("fire", point(x + 1, y - 1));
         // level->thing_new("enchantstone", point(x + 1, y - 1));
         // level->thing_new("skillstone", point(x + 1, y - 1));
-        level->thing_new("horseshoe", point(x, y));
-        level->thing_new("four_leaf_clover", point(x, y));
-        level->thing_new("medal_of_valor", point(x, y));
-        level->thing_new("wooden_cross", point(x, y));
+        // level->thing_new("horseshoe", point(x, y));
+        // level->thing_new("four_leaf_clover", point(x, y));
+        // level->thing_new("medal_of_valor", point(x, y));
+        // level->thing_new("wooden_cross", point(x, y));
         // level->thing_new("spiderweb", point(x, y));
         // level->thing_new("armor_lather", point(x, y));
         // level->thing_new("boots_fluffy", point(x, y - 2));
