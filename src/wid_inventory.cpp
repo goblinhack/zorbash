@@ -431,12 +431,20 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
     if (game->in_transit_item) {
       DBG2("Inventory: Drop in transit item");
       wid_in_transit_item_drop();
+      //
+      // It's too annoying to press escape twice to clear the highlighted thing
+      //
+      wid_inventory_fini();
       return true;
     }
 
     if (wid_inventory_thing_selected) {
       DBG2("Inventory: Unselect thing");
       wid_inventory_select_requested(nullptr);
+      //
+      // It's too annoying to press escape twice to clear the highlighted thing
+      //
+      wid_inventory_fini();
       return true;
     }
 
