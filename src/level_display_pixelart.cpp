@@ -221,8 +221,8 @@ void Level::display_map(void)
     //
     // I want to see lasers on top of things like the entrance and not under.
     //
-    display_pixelart_lasers();
-    display_pixelart_projectiles();
+    display_lasers();
+    display_projectiles();
 
     //
     // So we can see monsts jump over walls
