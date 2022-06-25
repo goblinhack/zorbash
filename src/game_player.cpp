@@ -142,11 +142,11 @@ void Game::place_player(void)
         auto b = level->thing_new("bag_s", point(x, y));
         t->carry(b);
       }
-      if (1) {
+      if (0) {
         auto b = level->thing_new("enchantstone", point(x, y));
         t->carry(b);
       }
-      if (1) {
+      if (0) {
         auto b = level->thing_new("skillstone", point(x, y));
         t->carry(b);
       }
@@ -167,7 +167,7 @@ void Game::place_player(void)
           t->carry(w);
           t->enchant_without_stone(w);
         }
-        if (0) {
+        if (1) {
           auto w = level->thing_new("wand_cold", point(x, y));
           t->carry(w);
           t->enchant_without_stone(w);
