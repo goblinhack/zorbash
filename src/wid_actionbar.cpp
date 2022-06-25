@@ -369,7 +369,6 @@ static void wid_actionbar_load_over_begin(Widp w, int32_t relx, int32_t rely, in
   wid_over_load = new WidPopup("Load game", tl, br, nullptr, "", false, false);
   wid_over_load->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Load game");
   wid_over_load->log(UI_LOGGING_EMPTY_LINE);
-
   wid_over_load->log("Select this to load a previous game.");
   wid_over_load->log(UI_LOGGING_EMPTY_LINE);
   wid_over_load->log("NOTE: auto load will create snapshots you can load to recover.");
@@ -447,7 +446,6 @@ static void wid_actionbar_save_over_begin(Widp w, int32_t relx, int32_t rely, in
   wid_over_save = new WidPopup("Save game", tl, br, nullptr, "", false, false);
   wid_over_save->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Save game");
   wid_over_save->log(UI_LOGGING_EMPTY_LINE);
-
   wid_over_save->log("Select this to save your current progress");
   wid_over_save->log(UI_LOGGING_EMPTY_LINE);
   wid_over_save->log("NOTE: auto save will occasionally also perform saves for you.");
@@ -523,7 +521,6 @@ static void wid_actionbar_ascend_over_begin(Widp w, int32_t relx, int32_t rely, 
   wid_over_ascend = new WidPopup("Ascend", tl, br, nullptr, "", false, false);
   wid_over_ascend->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Ascend");
   wid_over_ascend->log(UI_LOGGING_EMPTY_LINE);
-
   wid_over_ascend->log(
       "Select this to ascend cowardly to the previous level. I mean you might have a good reason, but let's both of "
       "us face it; probably not...");
@@ -599,7 +596,6 @@ static void wid_actionbar_descend_over_begin(Widp w, int32_t relx, int32_t rely,
   wid_over_descend = new WidPopup("Descend", tl, br, nullptr, "", false, false);
   wid_over_descend->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Descend");
   wid_over_descend->log(UI_LOGGING_EMPTY_LINE);
-
   wid_over_descend->log(
       "Select this to descend to the next level. If you dare... I mean seriously, there could be trouble down "
       "there.");
@@ -683,11 +679,9 @@ static void wid_actionbar_inventory_over_begin(Widp w, int32_t relx, int32_t rel
   wid_over_inventory = new WidPopup("Inventory", tl, br, nullptr, "", false, false);
   wid_over_inventory->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Inventory");
   wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
-
   wid_over_inventory->log("Select this to see your hard earned loot.");
   wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
   wid_over_inventory->log("NOTE: that you are able to carry at most one extra bag, so use space wisely.");
-  wid_over_inventory->log(UI_LOGGING_EMPTY_LINE);
   wid_over_inventory->compress();
 }
 
@@ -771,7 +765,6 @@ static void wid_actionbar_collect_over_begin(Widp w, int32_t relx, int32_t rely,
   wid_over_collect = new WidPopup("Collect loot", tl, br, nullptr, "", false, false);
   wid_over_collect->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Collect loot");
   wid_over_collect->log(UI_LOGGING_EMPTY_LINE);
-
   wid_over_collect->log("Select this to collect loot at your location.");
   wid_over_collect->log(UI_LOGGING_EMPTY_LINE);
   wid_over_collect->log("NOTE: that you are able to carry at most one extra bag, so use space wisely");
@@ -885,7 +878,6 @@ static void wid_actionbar_wait_over_begin(Widp w, int32_t relx, int32_t rely, in
   wid_over_wait = new WidPopup("Wait/rest", tl, br, nullptr, "", false, false);
   wid_over_wait->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Wait/rest");
   wid_over_wait->log(UI_LOGGING_EMPTY_LINE);
-
   wid_over_wait->log("Select this to pass one turn waiting.");
   wid_over_wait->log(UI_LOGGING_EMPTY_LINE);
   wid_over_wait->log("Hold down to pass multiple turns.");
@@ -962,7 +954,6 @@ static void wid_actionbar_zoom_in_over_begin(Widp w, int32_t relx, int32_t rely,
   wid_over_zoom_in = new WidPopup("Zoom out", tl, br, nullptr, "", false, false);
   wid_over_zoom_in->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Zoom out");
   wid_over_zoom_in->log(UI_LOGGING_EMPTY_LINE);
-
   wid_over_zoom_in->log("Select this to zoom out of the map.");
   wid_over_zoom_in->compress();
 }
@@ -997,7 +988,6 @@ static void wid_actionbar_zoom_out_over_begin(Widp w, int32_t relx, int32_t rely
   wid_over_zoom_out = new WidPopup("Zoom in", tl, br, nullptr, "", false, false);
   wid_over_zoom_out->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Zoom in");
   wid_over_zoom_out->log(UI_LOGGING_EMPTY_LINE);
-
   wid_over_zoom_out->log("Select this to zoom into the map.");
   wid_over_zoom_out->compress();
 }
