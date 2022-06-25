@@ -83,6 +83,9 @@ void Level::update_light_ascii_map(void)
   }
 }
 
+//
+// Display the level
+//
 void Level::display_ascii_map(point tl, point br)
 {
   display_map_set_bounds();
@@ -111,4 +114,10 @@ void Level::display_ascii_map(point tl, point br)
       }
     }
   }
+
+  //
+  // Lastly draw top lever weapon effects
+  //
+  display_lasers();
+  display_projectiles();
 }

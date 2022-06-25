@@ -914,7 +914,12 @@ public:
   void debug_path_draw_line(const std::vector< point > &move_path);
   void describe(point at);
   void describe(Thingp);
+  void display_ascii_gas(point tl, point br, const int16_t, const int16_t, const int16_t, const int16_t);
+  void display_ascii_lasers(void);
   void display_ascii_map(point tl, point br);
+  void display_ascii_projectiles(void);
+  void display_lasers(void);
+  void display_projectiles(void);
   void display_map_set_bounds(void);
   void display_map(void);
   void display_pixelart_blood(void);
@@ -923,7 +928,6 @@ public:
   void display_pixelart_fade_in(void);
   void display_pixelart_fade_out(void);
   void display_pixelart_gas(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
-  void display_ascii_gas(point tl, point br, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_internal_particles(void);
   void display_pixelart_lasers(void);
   void display_pixelart_lava(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
