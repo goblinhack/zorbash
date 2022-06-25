@@ -164,6 +164,16 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return false;
   }
 
+  if (sdlk_eq(*key, game->config.key_quit)) {
+    LOG("INF: Pressed quit key");
+    TRACE_AND_INDENT();
+    wid_actionbar_robot_mode_off();
+    game->change_state(Game::STATE_NORMAL);
+    wid_thing_info_fini("quit key"); // To remove bag or other info
+    game->quit_select();
+    return true;
+  }
+
   //
   // Stop rapid pickup/drop events if particles are still in progress.
   // Robot mode waits anyway.
@@ -297,16 +307,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->change_state(Game::STATE_NORMAL);
       return true;
     }
-  }
-
-  if (sdlk_eq(*key, game->config.key_quit)) {
-    LOG("INF: Pressed quit key");
-    TRACE_AND_INDENT();
-    wid_actionbar_robot_mode_off();
-    game->change_state(Game::STATE_NORMAL);
-    wid_thing_info_fini("quit key"); // To remove bag or other info
-    game->quit_select();
-    return true;
   }
 
   if (game->robot_mode) {
