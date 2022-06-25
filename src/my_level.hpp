@@ -1107,8 +1107,8 @@ public:
   void new_external_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep, bool hflip, bool vis);
   void new_internal_particle(point start, point end, isize sz, uint32_t dur, Tilep tile, bool, bool vis);
   void new_internal_particle(ThingId, point start, point end, isize sz, uint32_t dur, Tilep, bool hflip, bool vis);
-  void new_laser(ThingId id, ThingId victim_id, point start, point stop, uint32_t dur, bool follow);
-  void new_projectile(ThingId id, ThingId victim_id, point start, point stop, uint32_t dur, bool follow);
+  void new_laser(ThingId id, ThingId victim_id, LaserInfo, uint32_t dur);
+  void new_projectile(ThingId id, ThingId victim_id, ProjectileInfo, uint32_t dur);
   void noise_blocker_no_check_set(const int x, const int y);
   void noise_blocker_no_check_unset(const int x, const int y);
   void noise_blocker_set(const int x, const int y);

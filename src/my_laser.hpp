@@ -12,22 +12,40 @@
 #include "my_thing_id.hpp"
 #include "my_tile.hpp"
 
+class LaserInfo
+{
+public:
+  //
+  // Map co-ordinates
+  //
+  point map_start;
+  point map_stop;
+  //
+  // Onscreen pixel co-ordinates
+  //
+  point pixel_start;
+  point pixel_stop;
+  point pixel_map_at;
+  //
+  // Duration
+  //
+  uint32_t ts_start {};
+  uint32_t ts_stop {};
+  //
+  // Flags
+  //
+  bool follow_moving_target {};
+};
+
 typedef class Laser_
 {
 public:
-  Laser_(Levelp level, ThingId thing_id, ThingId victim_id, point start, point stop, point pixel_map_at,
-         uint32_t ts_start, uint32_t ts_stop, bool follow_moving_target);
+  Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info);
 
-  Levelp  level {};
-  ThingId id {};
-  ThingId victim_id {};
-  point   start;
-  point   stop;
-  point   pixel_map_at;
-
-  uint32_t ts_start {};
-  uint32_t ts_stop {};
-  bool     follow_moving_target {};
+  Levelp    level {};
+  ThingId   id {};
+  ThingId   victim_id {};
+  LaserInfo info;
 
   //
   // Animation frames

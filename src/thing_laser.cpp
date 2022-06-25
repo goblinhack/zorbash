@@ -160,7 +160,14 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
             target->to_string().c_str(), distance(curr_at, target->curr_at));
         TRACE_AND_INDENT();
 
-        level->new_laser(laser->id, target->id, start, end, game->current_move_speed, true /* follow */);
+        LaserInfo info {};
+        info.pixel_start          = start;
+        info.pixel_stop           = end;
+        info.map_start            = curr_at;
+        info.map_stop             = target->curr_at;
+        info.follow_moving_target = true;
+        info.pixel_map_at         = level->pixel_map_at;
+        level->new_laser(laser->id, target->id, info, game->current_move_speed);
 
         //
         // This is needed for secondary lasers
@@ -189,7 +196,14 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
           distance(curr_at, target->curr_at));
       TRACE_AND_INDENT();
 
-      level->new_laser(laser->id, target->id, start, end, game->current_move_speed, true /* follow */);
+      LaserInfo info {};
+      info.pixel_start          = start;
+      info.pixel_stop           = end;
+      info.map_start            = curr_at;
+      info.map_stop             = target->curr_at;
+      info.follow_moving_target = true;
+      info.pixel_map_at         = level->pixel_map_at;
+      level->new_laser(laser->id, target->id, info, game->current_move_speed);
 
       //
       // This is needed for secondary lasers
