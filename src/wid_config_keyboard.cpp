@@ -1389,16 +1389,12 @@ void Game::wid_config_keyboard_select(void)
     auto w = wid_new_square_button(p, "Back");
 
     point tl = make_point(1, y_at);
-    point br = make_point(6, y_at + 2);
+    point br = make_point(8, y_at + 2);
     wid_set_shape_square(w);
     wid_set_style(w, UI_WID_STYLE_DARK);
     wid_set_on_mouse_up(w, wid_config_keyboard_back);
     wid_set_pos(w, tl, br);
-    if (started) {
-      wid_set_text(w, "Resume");
-    } else {
-      wid_set_text(w, "Back");
-    }
+    wid_set_text(w, "Back");
   }
   {
     TRACE_AND_INDENT();
