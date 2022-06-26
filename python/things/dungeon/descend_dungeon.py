@@ -5,9 +5,9 @@ import tp
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
-    my.gfx_ascii_shown(self, True)
-    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
@@ -20,10 +20,10 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.light_color(self, "white")
-    my.text_long_description(self, "This dark entrance leads to the next level of the dungeon.")
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "the")
+    my.text_long_description(self, "This dark entrance leads to the next level of the dungeon.")
     my.text_short_description(self, "%%fg=gold$The way down.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

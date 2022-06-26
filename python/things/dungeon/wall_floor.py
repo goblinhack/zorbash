@@ -5,8 +5,8 @@ import tp
 def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     self = tp.Tp(name)
     # start sort marker
-    my.gfx_ascii_shown(self, False)
     my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_ascii_shown(self, False)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_floor(self, True)

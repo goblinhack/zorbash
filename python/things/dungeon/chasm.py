@@ -11,9 +11,9 @@ def chasm_init(name, text_long_name, tiles=[]):
     # start sort marker
     my.ai_obstacle(self, True)
     my.gfx_ascii_color_spread_hue(self, 20)
-    my.gfx_ascii_shown(self, True)
-    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_ascii_shown(self, True)
     my.is_biome_dungeon(self, True)
     my.is_chasm(self, True)
     my.is_cursor_can_hover_over_x2_click(self, True)
