@@ -82,6 +82,9 @@ void Level::display_map(void)
 {
   TRACE_NO_INDENT();
 
+  point tl(minx, miny);
+  point br(maxx, maxy);
+
   int light_minx;
   int light_maxx;
   int light_miny;
@@ -221,8 +224,8 @@ void Level::display_map(void)
     //
     // I want to see lasers on top of things like the entrance and not under.
     //
-    display_lasers();
-    display_projectiles();
+    display_lasers(tl, br);
+    display_projectiles(tl, br);
 
     //
     // So we can see monsts jump over walls

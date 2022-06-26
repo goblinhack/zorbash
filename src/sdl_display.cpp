@@ -88,6 +88,7 @@ void sdl_display_reset(void)
   wid_leftbar_fini();
   wid_actionbar_fini();
   wid_botcon_fini();
+  wid_asciimap_fini();
   wid_thing_info_fini("gfx toggle"); // To remove bag or other info
 
   config_game_gfx_update();
@@ -106,6 +107,7 @@ void sdl_display_reset(void)
   wid_botcon_fini();
   wid_botcon_init();
   wid_visible(wid_botcon_window);
+  wid_asciimap_init();
 
   wid_gc_all();
   wid_display_all();

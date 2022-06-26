@@ -999,7 +999,12 @@ Tilep tile_random(Tilemap *tmap)
   if (unlikely(tiles->empty())) {
     return nullptr;
   }
-  auto tile = ((*tiles)[ non_pcg_rand() % tiles->size() ]);
+  auto index = non_pcg_rand() % tiles->size();
+  auto tile  = (*tiles)[ index ];
+  if (unlikely(! tile)) {
+    ERR("no tile at index #%d, max %d", (int) index, (int) tiles->size());
+    return nullptr;
+  }
   return tile_index_to_tile(tile->global_index);
 }
 
@@ -1015,7 +1020,12 @@ Tilep tile_n(Tilemap *tmap, int n)
   if (unlikely(tiles->empty())) {
     return nullptr;
   }
-  auto tile = ((*tiles)[ n % tiles->size() ]);
+  auto index = n % tiles->size();
+  auto tile  = (*tiles)[ index ];
+  if (unlikely(! tile)) {
+    ERR("no tile at index #%d, max %d", (int) index, (int) tiles->size());
+    return nullptr;
+  }
   return tile_index_to_tile(tile->global_index);
 }
 

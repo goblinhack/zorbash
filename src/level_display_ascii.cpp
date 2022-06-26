@@ -118,6 +118,6 @@ void Level::display_ascii_map(point tl, point br)
   //
   // Lastly draw top lever weapon effects
   //
-  display_lasers();
-  display_projectiles();
+  display_lasers(tl, br);
+  display_projectiles(tl, br);
 }

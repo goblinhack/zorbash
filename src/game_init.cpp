@@ -14,6 +14,7 @@
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
+#include "my_wid_asciimap.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_leftbar.hpp"
@@ -86,6 +87,7 @@ void Game::start(void)
   wid_skillbox_init();
 
   wid_actionbar_init();
+  wid_asciimap_init();
 
   wid_visible(wid_topcon_window);
   TOPCON("Welcome to the lair of the dread monster, %%fg=red$Zorbash%%fg=reset$.");

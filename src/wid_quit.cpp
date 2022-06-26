@@ -10,6 +10,7 @@
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
+#include "my_wid_asciimap.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_popup.hpp"
 #include "my_wid_topcon.hpp"
@@ -65,6 +66,7 @@ static uint8_t wid_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
     wid_actionbar_fini();
     wid_botcon_fini();
     wid_botcon_init();
+    wid_asciimap_fini();
     game->fini();
     game->wid_main_menu_select();
   } else {

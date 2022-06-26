@@ -18,7 +18,7 @@
 #include "my_tile.hpp"
 #include "my_vector_bounds_check.hpp"
 
-void Level::display_ascii_projectiles(void)
+void Level::display_ascii_projectiles(point tl, point br)
 {
   TRACE_NO_INDENT();
 

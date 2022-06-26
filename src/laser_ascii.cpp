@@ -19,7 +19,7 @@
 #include "my_tile.hpp"
 #include "my_vector_bounds_check.hpp"
 
-void Level::display_ascii_lasers(void)
+void Level::display_ascii_lasers(point tl, point br)
 {
   TRACE_NO_INDENT();
 
@@ -72,7 +72,14 @@ void Level::display_ascii_lasers(void)
     auto tiles = &t->tp()->tiles;
     auto tile  = tile_n(tiles, frame);
     if (tile) {
-      ascii_draw_line(start.x, start.y, stop.x, stop.y, tile, tile->ascii_bg_col_value);
+      int x0 = tl.x + (start.x - minx);
+      int y0 = tl.y + (start.y - miny);
+      int x1 = tl.x + (stop.x - minx);
+      int y1 = tl.y + (stop.y - miny);
+
+      color c = tile->ascii_fg_col_value;
+      c.a     = tile->ascii_alpha;
+      ascii_draw_line_fg4(x0, y0, x1, y1, tile->ascii_fg_char, c);
     }
 
     return false;

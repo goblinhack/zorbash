@@ -87,11 +87,20 @@ void Level::new_laser(ThingId id, ThingId victim_id, LaserInfo info, uint32_t du
 
   uint32_t now  = time_game_ms();
   info.ts_start = now;
-  info.ts_stop  = now + dur;
+
+  //
+  // The ascii display is a bit slower, so to avoid not seeing the laser in all its glory, bump the duration.
+  //
+  if (g_opt_ascii) {
+    dur *= 8;
+  }
+
+  info.ts_stop = now + dur;
+
   new_lasers.push_back(Laser(this, id, victim_id, info));
 }
 
-void Level::display_lasers(void)
+void Level::display_lasers(point tl, point br)
 {
   TRACE_NO_INDENT();
 
@@ -113,9 +122,9 @@ void Level::display_lasers(void)
   }
 
   if (g_opt_ascii) {
-    display_ascii_lasers();
+    display_ascii_lasers(tl, br);
   } else {
-    display_pixelart_lasers();
+    display_pixelart_lasers(tl, br);
   }
 }
 

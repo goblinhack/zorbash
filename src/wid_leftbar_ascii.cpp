@@ -49,7 +49,7 @@ static void wid_leftbar_ascii_display(Widp w, point tl, point br)
   }
 }
 
-static void wid_leftbar_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_leftbar_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
