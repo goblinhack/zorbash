@@ -11,6 +11,35 @@ PAYLOAD=$(mktemp) || exit 1
 POST=$(mktemp) || exit 1
 OUT=$(mktemp) || exit 1
 
+for i in \
+    armor \
+    amulets \
+    buffs \
+    boots \
+    gauntlets \
+    debuffs \
+    doors \
+    dungeon \
+    effects \
+    lasers \
+    projectiles \
+    food \
+    internal \
+    items \
+    mobs \
+    monsts \
+    player \
+    potions \
+    rings \
+    skills \
+    treasure \
+    wands \
+    weapopy
+do
+  cp .flake8 $i/
+  git add $i/.flake8
+done
+
 for IN in \
     armor/*py \
     amulets/*py \

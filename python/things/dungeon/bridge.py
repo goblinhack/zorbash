@@ -16,9 +16,9 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name, "bridge")
     # start sort marker
     my.gfx_ascii_color_spread_hue(self, 30)
-    my.gfx_ascii_shown(self, True)
-    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
+    my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_fall(self, True)
