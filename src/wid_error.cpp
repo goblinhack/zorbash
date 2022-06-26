@@ -79,13 +79,6 @@ static uint8_t wid_error_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_error_mouse_up(Widp w, int x, int y, uint32_t button)
-{
-  TRACE_AND_INDENT();
-  wid_error_destroy();
-  return true;
-}
-
 void wid_error(std::string error)
 {
   TRACE_AND_INDENT();
@@ -95,9 +88,8 @@ void wid_error(std::string error)
     wid_error_destroy();
   }
 
-  point tl    = make_point(5, 5);
-  point br    = make_point(TERM_WIDTH - 5, TERM_HEIGHT - 5);
-  auto  width = br.x - tl.x;
+  point tl = make_point(5, 5);
+  point br = make_point(TERM_WIDTH - 5, TERM_HEIGHT - 5);
 
   wid_error_window = new WidPopup("Game error", tl, br, tile_find_mand("bug"), "");
   wid_set_on_key_up(wid_error_window->wid_popup_container, wid_error_key_up);
@@ -120,21 +112,6 @@ void wid_error(std::string error)
     bt->init();
     auto s = bt->to_string();
     wid_error_window->log(s, TEXT_FORMAT_LHS);
-  }
-
-  {
-    TRACE_AND_INDENT();
-    auto p = wid_error_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "dismiss");
-
-    point tl = make_point(10, TERM_HEIGHT - 23);
-    point br = make_point(width - 10, TERM_HEIGHT - 19);
-
-    wid_set_style(w, UI_WID_STYLE_DARK);
-    wid_set_on_mouse_up(w, wid_error_mouse_up);
-
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "ok");
   }
 
   wid_update(wid_error_window->wid_text_area->wid_text_area);
