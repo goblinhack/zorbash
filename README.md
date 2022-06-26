@@ -1,6 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- player is not longer animated !                                                                                                              -->
 <!-- click through a monster should it attack?                                                                                                    -->
 <!-- ascii check list - particles / lasers / projectiles / explosions                                                                             -->
 <!-- ascii beast and treasure map                                                                                                                 -->
