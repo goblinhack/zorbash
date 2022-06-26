@@ -70,7 +70,7 @@ WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool 
   }
 
   {
-    int32_t row;
+    int row;
 
     Widp child {};
     Widp prev {};

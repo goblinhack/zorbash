@@ -25,7 +25,7 @@ public:
   std::string    name_alias;
   Mix_Music     *m    = {};
   unsigned char *data = {};
-  int32_t        len  = {};
+  int        len  = {};
   uint32_t       rate = 44100;
 };
 

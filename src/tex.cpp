@@ -46,7 +46,7 @@ public:
   std::string  name;
   uint32_t     width              = {};
   uint32_t     height             = {};
-  int32_t      gl_surface_binding = {};
+  int      gl_surface_binding = {};
   SDL_Surface *surface            = {};
 };
 
@@ -83,12 +83,12 @@ void tex_free(Texp tex)
   delete (tex);
 }
 
-static unsigned char *load_raw_image(std::string filename, int32_t *x, int32_t *y, int32_t *comp)
+static unsigned char *load_raw_image(std::string filename, int *x, int *y, int *comp)
 {
   TRACE_AND_INDENT();
   unsigned char *file_data;
   unsigned char *image_data = 0;
-  int32_t        len;
+  int        len;
 
   file_data = file_load(filename.c_str(), &len);
   if (! file_data) {
@@ -119,7 +119,7 @@ static SDL_Surface *load_image(std::string filename)
   uint32_t       rmask, gmask, bmask, amask;
   unsigned char *image_data;
   SDL_Surface   *surf;
-  int32_t        x, y, comp;
+  int        x, y, comp;
 
   image_data = load_raw_image(filename, &x, &y, &comp);
   if (! image_data) {
@@ -177,7 +177,7 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
   unsigned char *image_data;
   SDL_Surface   *surf1 = 0;
   SDL_Surface   *surf2 = 0;
-  int32_t        x, y, comp;
+  int        x, y, comp;
 
   image_data = load_raw_image(filename, &x, &y, &comp);
   if (! image_data) {
@@ -324,8 +324,8 @@ static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std
   uint32_t owidth  = iwidth;
   uint32_t oheight = iheight;
 
-  int32_t  ix;
-  int32_t  iy;
+  int  ix;
+  int  iy;
   uint32_t ox;
   uint32_t oy;
 
@@ -335,9 +335,9 @@ static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std
   newptr(MTYPE_SDL, out2, "SDL_CreateRGBSurface18");
 
   oy = 0;
-  for (iy = 0; iy < (int32_t) iheight; iy++) {
+  for (iy = 0; iy < (int) iheight; iy++) {
     ox = 0;
-    for (ix = 0; ix < (int32_t) iwidth; ix++) {
+    for (ix = 0; ix < (int) iwidth; ix++) {
       color c1;
       getPixelFast(in, ix, iy, c1);
       color   c2  = c1;
@@ -452,8 +452,8 @@ Texp tex_from_surface(SDL_Surface *surface, std::string file, std::string name, 
   //
   // Get the number of channels in the SDL surface
   //
-  int32_t channels      = surface->format->BytesPerPixel;
-  int32_t textureFormat = 0;
+  int channels      = surface->format->BytesPerPixel;
+  int textureFormat = 0;
 
   if (channels == 4) {
     //
@@ -531,7 +531,7 @@ Texp tex_from_surface(SDL_Surface *surface, std::string file, std::string name, 
   return t;
 }
 
-int32_t tex_get_gl_binding(Texp tex)
+int tex_get_gl_binding(Texp tex)
 {
   TRACE_AND_INDENT();
   return (tex->gl_surface_binding);

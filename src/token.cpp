@@ -161,7 +161,7 @@ void tokens_print(tokens_t *tokens)
   printf("\n");
 }
 
-void tokens_print_to(tokens_t *tokens, char *output, int32_t output_size)
+void tokens_print_to(tokens_t *tokens, char *output, int output_size)
 {
   TRACE_AND_INDENT();
   uint32_t cnt;

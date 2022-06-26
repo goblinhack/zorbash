@@ -19,7 +19,7 @@ void wid_notice_destroy(void)
   wid_notice_window = nullptr;
 }
 
-static uint8_t wid_notice_ok(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_notice_ok(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_notice_destroy();

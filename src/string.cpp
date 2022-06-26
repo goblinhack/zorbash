@@ -53,9 +53,9 @@ void strrepc(char *s, const char *replace_set, char replace_with)
  * substr("foo.zip", -4, 4) -> "zip"
  */
 #if 0
-static char *substr (const char *in, int32_t pos, int32_t len)
+static char *substr (const char *in, int pos, int len)
 { TRACE_AND_INDENT();
-  int32_t slen;
+  int slen;
   char *out;
 
   if (!in) {
@@ -110,9 +110,9 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
   TRACE_AND_INDENT();
   char       *buf;
   const char *at;
-  int32_t     newlen;
-  int32_t     oldlen;
-  int32_t     len;
+  int     newlen;
+  int     oldlen;
+  int     len;
 
   if (! in || ! look_for || ! replace_with) {
     return 0;
@@ -159,8 +159,8 @@ char *strappend(const char *in, const char *append)
 {
   TRACE_AND_INDENT();
   char   *buf;
-  int32_t newlen;
-  int32_t len;
+  int newlen;
+  int len;
 
   if (! in || ! append) {
     return 0;
@@ -188,8 +188,8 @@ char *strprepend(const char *in, const char *prepend)
 {
   TRACE_AND_INDENT();
   char   *buf;
-  int32_t newlen;
-  int32_t len;
+  int newlen;
+  int len;
 
   if (! in || ! prepend) {
     return 0;
@@ -270,7 +270,7 @@ void strchopc(char *s, char c)
   *(end + 1) = '\0';
 }
 
-int32_t strisregexp(const char *in)
+int strisregexp(const char *in)
 {
   TRACE_AND_INDENT();
   const char *a = in;
@@ -1220,12 +1220,12 @@ Tpp string2tp(const std::wstring &s, int *len)
  *
  * returns 0 on success
  */
-int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used, const char *fmt, ...)
+int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
 {
   TRACE_AND_INDENT();
-  int32_t freespace;
-  int32_t needspace;
-  int32_t usedspace;
+  int freespace;
+  int needspace;
+  int usedspace;
   va_list ap;
   char   *tmp;
 

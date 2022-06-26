@@ -61,14 +61,14 @@ public:
   bool gfx_vsync_enable       = {};
   bool gfx_vsync_locked       = {};
 
-  int32_t config_pix_height = {};
-  int32_t config_pix_width  = {};
-  int32_t game_pix_height   = {};
-  int32_t game_pix_width    = {};
-  int32_t ui_pix_height     = {};
-  int32_t ui_pix_width      = {};
-  int32_t window_pix_height = {};
-  int32_t window_pix_width  = {};
+  int config_pix_height = {};
+  int config_pix_width  = {};
+  int game_pix_height   = {};
+  int game_pix_width    = {};
+  int ui_pix_height     = {};
+  int ui_pix_width      = {};
+  int window_pix_height = {};
+  int window_pix_width  = {};
 
   uint16_t ascii_gl_height = {};
   uint16_t ascii_gl_width  = {};
@@ -445,9 +445,9 @@ public:
   void                 set_meta_data(Levelp);
 };
 
-extern uint8_t  game_mouse_down(int32_t x, int32_t y, uint32_t button);
-extern uint8_t  game_mouse_up(int32_t x, int32_t y, uint32_t button);
-extern uint8_t  game_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+extern uint8_t  game_mouse_down(int x, int y, uint32_t button);
+extern uint8_t  game_mouse_up(int x, int y, uint32_t button);
+extern uint8_t  game_mouse_motion(int x, int y, int relx, int rely, int wheelx, int wheely);
 extern void     wid_main_menu_hide(void);
 extern void     wid_main_menu_destroy(void);
 extern void     game_display_flames(void);

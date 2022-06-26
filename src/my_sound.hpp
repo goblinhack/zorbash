@@ -41,7 +41,7 @@ public:
   std::string    alias;
   Mix_Chunk     *chunk = {};
   unsigned char *data  = {};
-  int32_t        len   = {};
+  int        len   = {};
   float          volume {};
 };
 

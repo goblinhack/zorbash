@@ -72,7 +72,7 @@
   w = (0x00ff00ffLU & w) + (0x00ff00ffLU & (w >> 8));                                                                \
   w = (0x0000ffffLU & w) + (0x0000ffffLU & (w >> 16));
 
-static inline int32_t bitcount(int32_t w)
+static inline int bitcount(int w)
 {
   w = (0x55555555LU & w) + (0x55555555LU & (w >> 1));
   w = (0x33333333LU & w) + (0x33333333LU & (w >> 2));

@@ -498,10 +498,10 @@ static void usage(void)
   CON("Written by goblinhack@gmail.com");
 }
 
-static void parse_args(int32_t argc, char *argv[])
+static void parse_args(int argc, char *argv[])
 {
   TRACE_AND_INDENT();
-  int32_t i;
+  int i;
 
   //
   // Parse format args
@@ -637,7 +637,7 @@ static std::string create_appdata_dir(void)
   return std::string(appdata);
 }
 
-int32_t main(int32_t argc, char *argv[])
+int main(int argc, char *argv[])
 {
   TRACE_NO_INDENT();
   ARGV = argv;

@@ -169,7 +169,7 @@ ts_t time_get_elapsed_tenths(ts_t val, ts_t since)
   return ((ts_t) (delay / (ONESEC / 10)));
 }
 
-void get_timestamp(char *buf, int32_t len)
+void get_timestamp(char *buf, int len)
 {
 #ifdef ENABLE_LOG_TIMESTAMPS
   char tmp[ MAXSTR ];

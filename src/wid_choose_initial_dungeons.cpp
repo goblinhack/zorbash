@@ -27,8 +27,8 @@
 #include "my_wid_console.hpp"
 #include "my_wid_popup.hpp"
 
-static uint8_t wid_choose_initial_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
-static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int32_t y, uint32_t button);
+static uint8_t wid_choose_initial_dungeons_enter(Widp w, int x, int y, uint32_t button);
+static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int x, int y, uint32_t button);
 
 class wid_choose_initial_dungeons_ctx
 {
@@ -312,7 +312,7 @@ static void wid_choose_initial_dungeons_set_focus(wid_choose_initial_dungeons_ct
   wid_choose_initial_dungeons_update_buttons(ctx->w);
 }
 
-static void wid_choose_initial_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_choose_initial_dungeons_mouse_over(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
   wid_choose_initial_dungeons_ctx *ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(w);
@@ -697,7 +697,7 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
   }
 }
 
-static uint8_t wid_choose_initial_dungeons_go_back(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_initial_dungeons_go_back(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
   wid_choose_initial_dungeons_destroy(wid_get_top_parent(w));
@@ -706,7 +706,7 @@ static uint8_t wid_choose_initial_dungeons_go_back(Widp w, int32_t x, int32_t y,
   return true;
 }
 
-static uint8_t wid_choose_initial_dungeons_random(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_initial_dungeons_random(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
@@ -719,7 +719,7 @@ static uint8_t wid_choose_initial_dungeons_random(Widp w, int32_t x, int32_t y, 
   return true;
 }
 
-static uint8_t wid_choose_initial_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_initial_dungeons_enter(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
@@ -750,7 +750,7 @@ static uint8_t wid_choose_initial_dungeons_enter(Widp w, int32_t x, int32_t y, u
   return true;
 }
 
-static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
@@ -793,7 +793,7 @@ static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int32_t x, int
   return true;
 }
 
-static uint8_t wid_choose_initial_dungeons_wid_choose_seed(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_initial_dungeons_wid_choose_seed(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
   wid_choose_initial_dungeons_destroy(wid_get_top_parent(w));
@@ -1193,10 +1193,10 @@ void Game::wid_choose_initial_dungeons(void)
     wid_set_pos(button_container, tl, br);
     wid_set_void_context(button_container, ctx);
 
-    int32_t ptl_x;
-    int32_t ptl_y;
-    int32_t pbr_x;
-    int32_t pbr_y;
+    int ptl_x;
+    int ptl_y;
+    int pbr_x;
+    int pbr_y;
     wid_get_tl_x_tl_y_br_x_br_y(button_container, &ptl_x, &ptl_y, &pbr_x, &pbr_y);
 
     game_grid_node_walk(ctx);
@@ -1231,10 +1231,10 @@ void Game::wid_choose_initial_dungeons(void)
 
         wid_choose_initial_dungeons_update_button(ctx, b, x, y);
 
-        int32_t tl_x;
-        int32_t tl_y;
-        int32_t br_x;
-        int32_t br_y;
+        int tl_x;
+        int tl_y;
+        int br_x;
+        int br_y;
         wid_get_tl_x_tl_y_br_x_br_y(b, &tl_x, &tl_y, &br_x, &br_y);
         tl_x -= ptl_x;
         tl_y -= ptl_y;

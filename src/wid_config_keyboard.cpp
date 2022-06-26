@@ -234,7 +234,7 @@ void wid_config_keyboard_destroy(void)
   }
 }
 
-static uint8_t wid_config_keyboard_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_keyboard_cancel(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   CON("INF: Reload config");
@@ -255,7 +255,7 @@ static uint8_t wid_config_keyboard_cancel(Widp w, int32_t x, int32_t y, uint32_t
   return true;
 }
 
-static uint8_t wid_config_keyboard_save(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_keyboard_save(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   CON("INF: Save config");
@@ -271,7 +271,7 @@ static uint8_t wid_config_keyboard_save(Widp w, int32_t x, int32_t y, uint32_t b
   return true;
 }
 
-static uint8_t wid_config_keyboard_back(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_keyboard_back(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_config_keyboard_destroy();
@@ -771,7 +771,7 @@ static void grab_key(const std::string which)
   config_changed  = true;
 }
 
-static uint8_t wid_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_keyboard_profile_arrow_keys(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   SDL_Keysym k {};
@@ -822,7 +822,7 @@ static uint8_t wid_config_keyboard_profile_arrow_keys(Widp w, int32_t x, int32_t
   return true;
 }
 
-static uint8_t wid_config_keyboard_profile_wasd(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_keyboard_profile_wasd(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   SDL_Keysym k {};
@@ -873,7 +873,7 @@ static uint8_t wid_config_keyboard_profile_wasd(Widp w, int32_t x, int32_t y, ui
   return true;
 }
 
-static uint8_t wid_config_key_move_left(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_move_left(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("move left");
@@ -882,7 +882,7 @@ static uint8_t wid_config_key_move_left(Widp w, int32_t x, int32_t y, uint32_t b
   return true;
 }
 
-static uint8_t wid_config_key_move_right(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_move_right(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("move right");
@@ -891,7 +891,7 @@ static uint8_t wid_config_key_move_right(Widp w, int32_t x, int32_t y, uint32_t 
   return true;
 }
 
-static uint8_t wid_config_key_move_up(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_move_up(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("move up");
@@ -900,7 +900,7 @@ static uint8_t wid_config_key_move_up(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_move_down(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_move_down(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("move down");
@@ -909,7 +909,7 @@ static uint8_t wid_config_key_move_down(Widp w, int32_t x, int32_t y, uint32_t b
   return true;
 }
 
-static uint8_t wid_config_key_map_left(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_map_left(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("map left");
@@ -918,7 +918,7 @@ static uint8_t wid_config_key_map_left(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static uint8_t wid_config_key_map_right(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_map_right(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("map right");
@@ -927,7 +927,7 @@ static uint8_t wid_config_key_map_right(Widp w, int32_t x, int32_t y, uint32_t b
   return true;
 }
 
-static uint8_t wid_config_key_map_up(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_map_up(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("map up");
@@ -936,7 +936,7 @@ static uint8_t wid_config_key_map_up(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_map_down(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_map_down(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("map down");
@@ -945,7 +945,7 @@ static uint8_t wid_config_key_map_down(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static uint8_t wid_config_key_attack(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_attack(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("attack");
@@ -954,7 +954,7 @@ static uint8_t wid_config_key_attack(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_wait_or_collect(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_wait_or_collect(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("wait or collect");
@@ -963,7 +963,7 @@ static uint8_t wid_config_key_wait_or_collect(Widp w, int32_t x, int32_t y, uint
   return true;
 }
 
-static uint8_t wid_config_key_jump(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_jump(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("jump");
@@ -972,7 +972,7 @@ static uint8_t wid_config_key_jump(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static uint8_t wid_config_key_throw(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_throw(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("item throw");
@@ -981,7 +981,7 @@ static uint8_t wid_config_key_throw(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-static uint8_t wid_config_key_inventory(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_inventory(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("show inventory");
@@ -990,7 +990,7 @@ static uint8_t wid_config_key_inventory(Widp w, int32_t x, int32_t y, uint32_t b
   return true;
 }
 
-static uint8_t wid_config_key_drop(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_drop(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("item drop");
@@ -999,7 +999,7 @@ static uint8_t wid_config_key_drop(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static uint8_t wid_config_key_use(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_use(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("item use");
@@ -1008,7 +1008,7 @@ static uint8_t wid_config_key_use(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static uint8_t wid_config_key_gfx_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_gfx_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("item gfx_toggle");
@@ -1017,7 +1017,7 @@ static uint8_t wid_config_key_gfx_toggle(Widp w, int32_t x, int32_t y, uint32_t 
   return true;
 }
 
-static uint8_t wid_config_key_descend(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_descend(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("item descend");
@@ -1026,7 +1026,7 @@ static uint8_t wid_config_key_descend(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_ascend(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_ascend(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("item ascend");
@@ -1035,7 +1035,7 @@ static uint8_t wid_config_key_ascend(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_eat(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_eat(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("item eat");
@@ -1044,7 +1044,7 @@ static uint8_t wid_config_key_eat(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static uint8_t wid_config_key_action0(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action0(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 0");
@@ -1053,7 +1053,7 @@ static uint8_t wid_config_key_action0(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_action1(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action1(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 1");
@@ -1062,7 +1062,7 @@ static uint8_t wid_config_key_action1(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_action2(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action2(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 2");
@@ -1071,7 +1071,7 @@ static uint8_t wid_config_key_action2(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_action3(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action3(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 3");
@@ -1080,7 +1080,7 @@ static uint8_t wid_config_key_action3(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_action4(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action4(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 4");
@@ -1089,7 +1089,7 @@ static uint8_t wid_config_key_action4(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_action5(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action5(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 5");
@@ -1098,7 +1098,7 @@ static uint8_t wid_config_key_action5(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_action6(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action6(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 6");
@@ -1107,7 +1107,7 @@ static uint8_t wid_config_key_action6(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_action7(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action7(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 7");
@@ -1116,7 +1116,7 @@ static uint8_t wid_config_key_action7(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_action8(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action8(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 8");
@@ -1125,7 +1125,7 @@ static uint8_t wid_config_key_action8(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_action9(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_action9(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("action 9");
@@ -1134,7 +1134,7 @@ static uint8_t wid_config_key_action9(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_skill0(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill0(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 0");
@@ -1143,7 +1143,7 @@ static uint8_t wid_config_key_skill0(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_skill1(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill1(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 1");
@@ -1152,7 +1152,7 @@ static uint8_t wid_config_key_skill1(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_skill2(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill2(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 2");
@@ -1161,7 +1161,7 @@ static uint8_t wid_config_key_skill2(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_skill3(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill3(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 3");
@@ -1170,7 +1170,7 @@ static uint8_t wid_config_key_skill3(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_skill4(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill4(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 4");
@@ -1179,7 +1179,7 @@ static uint8_t wid_config_key_skill4(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_skill5(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill5(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 5");
@@ -1188,7 +1188,7 @@ static uint8_t wid_config_key_skill5(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_skill6(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill6(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 6");
@@ -1197,7 +1197,7 @@ static uint8_t wid_config_key_skill6(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_skill7(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill7(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 7");
@@ -1206,7 +1206,7 @@ static uint8_t wid_config_key_skill7(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_skill8(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill8(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 8");
@@ -1215,7 +1215,7 @@ static uint8_t wid_config_key_skill8(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_skill9(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_skill9(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("skill 9");
@@ -1224,7 +1224,7 @@ static uint8_t wid_config_key_skill9(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_key_save(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_save(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("save game");
@@ -1233,7 +1233,7 @@ static uint8_t wid_config_key_save(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static uint8_t wid_config_key_load(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_load(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("load game");
@@ -1242,7 +1242,7 @@ static uint8_t wid_config_key_load(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static uint8_t wid_config_key_robot_mode(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_robot_mode(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("robot_mode game");
@@ -1251,7 +1251,7 @@ static uint8_t wid_config_key_robot_mode(Widp w, int32_t x, int32_t y, uint32_t 
   return true;
 }
 
-static uint8_t wid_config_key_zoom_in(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_zoom_in(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("zoom in");
@@ -1260,7 +1260,7 @@ static uint8_t wid_config_key_zoom_in(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_zoom_out(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_zoom_out(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("zoom out");
@@ -1269,7 +1269,7 @@ static uint8_t wid_config_key_zoom_out(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static uint8_t wid_config_key_help(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_help(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("help");
@@ -1278,7 +1278,7 @@ static uint8_t wid_config_key_help(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static uint8_t wid_config_key_console(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_console(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("toggle console");
@@ -1287,7 +1287,7 @@ static uint8_t wid_config_key_console(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_config_key_quit(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_quit(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("quit");
@@ -1296,7 +1296,7 @@ static uint8_t wid_config_key_quit(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static uint8_t wid_config_key_screenshot(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_key_screenshot(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   grab_key("screenshot grab");

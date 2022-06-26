@@ -18,7 +18,7 @@ typedef struct tokens_t_ {
 } tokens_t;
 
 tokens_t *tokens_tostring(const char *input, tokens_t *);
-void      tokens_print_to(tokens_t *, char *output, int32_t output_size);
+void      tokens_print_to(tokens_t *, char *output, int output_size);
 void      tokens_print(tokens_t *);
 void      tokens_test(void);
 #endif

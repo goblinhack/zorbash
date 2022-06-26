@@ -33,7 +33,7 @@
 #define WID_LEVEL_WIDTH_CHARS  7
 #define WID_LEVEL_HEIGHT_CHARS 7
 
-static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button);
+static uint8_t wid_choose_next_dungeons_enter(Widp w, int x, int y, uint32_t button);
 static void    wid_choose_next_dungeons_update_buttons(Widp w);
 
 static WidPopup *wid_level_description;
@@ -113,7 +113,7 @@ static void wid_choose_next_dungeons_set_focus(wid_choose_next_dungeons_ctx *ctx
   wid_choose_next_dungeons_update_buttons(ctx->w);
 }
 
-static void wid_choose_next_dungeons_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
   wid_choose_next_dungeons_ctx *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
@@ -358,7 +358,7 @@ static void wid_choose_next_dungeons_post_display_tick(Widp w)
   }
 }
 
-static uint8_t wid_choose_next_dungeons_enter(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_next_dungeons_enter(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
 
@@ -667,10 +667,10 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
     wid_set_pos(button_container, tl, br);
     wid_set_void_context(button_container, ctx);
 
-    int32_t ptl_x;
-    int32_t ptl_y;
-    int32_t pbr_x;
-    int32_t pbr_y;
+    int ptl_x;
+    int ptl_y;
+    int pbr_x;
+    int pbr_y;
     wid_get_tl_x_tl_y_br_x_br_y(button_container, &ptl_x, &ptl_y, &pbr_x, &pbr_y);
 
     /*
@@ -697,10 +697,10 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
 
         wid_choose_next_dungeons_update_button(ctx, b, x, y);
 
-        int32_t tl_x;
-        int32_t tl_y;
-        int32_t br_x;
-        int32_t br_y;
+        int tl_x;
+        int tl_y;
+        int br_x;
+        int br_y;
         wid_get_tl_x_tl_y_br_x_br_y(b, &tl_x, &tl_y, &br_x, &br_y);
         tl_x -= ptl_x;
         tl_y -= ptl_y;

@@ -16,25 +16,25 @@ bool wid_inventory_init(void);
 bool wid_inventory_over(Thingp);
 bool wid_inventory_select(Thingp);
 
-uint8_t wid_inventory_close(Widp w, int32_t x, int32_t y, uint32_t button);
-uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint32_t button);
-uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint32_t button);
-uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uint32_t button);
-uint8_t wid_inventory_item_option_use_radial(Widp w, int32_t x, int32_t y, uint32_t button);
-uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint32_t button);
+uint8_t wid_inventory_close(Widp w, int x, int y, uint32_t button);
+uint8_t wid_inventory_item_option_drop(Widp w, int x, int y, uint32_t button);
+uint8_t wid_inventory_item_option_eat(Widp w, int x, int y, uint32_t button);
+uint8_t wid_inventory_item_option_throw(Widp w, int x, int y, uint32_t button);
+uint8_t wid_inventory_item_option_use_radial(Widp w, int x, int y, uint32_t button);
+uint8_t wid_inventory_item_option_use(Widp w, int x, int y, uint32_t button);
 uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key);
 uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key);
-uint8_t wid_right_bar_inventory_open(class Wid *w, int32_t x, int32_t y, uint32_t button);
+uint8_t wid_right_bar_inventory_open(class Wid *w, int x, int y, uint32_t button);
 
 void wid_inventory_fini(void);
-void wid_inventory_mouse_over_tab_bag1(Widp w, int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
-void wid_inventory_mouse_over_tab_bag2(Widp w, int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
+void wid_inventory_mouse_over_tab_bag1(Widp w, int x, int y, int wheelx, int wheely);
+void wid_inventory_mouse_over_tab_bag2(Widp w, int x, int y, int wheelx, int wheely);
 void wid_inventory_over_requested(Thingp over);
 void wid_inventory_select_requested(Thingp selected);
 void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const char *wid_name);
 void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const char *wid_name, const char *tile_name);
-uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button);
-void    wid_slot_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+uint8_t wid_slot_item_mouse_up(Widp w, int x, int y, uint32_t button);
+void    wid_slot_item_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely);
 void    wid_slot_item_mouse_over_end(Widp w);
 
 extern class WidBag   *wid_inventory_bag;

@@ -15,8 +15,8 @@
 #include "my_wid_console.hpp"
 #include "slre.hpp"
 
-static int32_t wid_console_inited;
-static int32_t wid_console_exiting;
+static int wid_console_inited;
+static int wid_console_exiting;
 static void    wid_console_wid_create(void);
 
 Widp wid_console_container {};
@@ -82,7 +82,7 @@ static void wid_console_reset_scroll(void)
 static void wid_console_log_(std::wstring s)
 {
   TRACE_AND_INDENT();
-  static int32_t log_wid_console_buffered_lines;
+  static int log_wid_console_buffered_lines;
 
   if (wid_console_exiting) {
     return;
@@ -207,7 +207,7 @@ static void wid_console_wid_create(void)
   }
 
   {
-    int32_t row;
+    int row;
     int     row_bottom = UI_CONSOLE_HEIGHT - 1;
 
     Widp child {};

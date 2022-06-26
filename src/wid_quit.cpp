@@ -27,7 +27,7 @@ void wid_quit_destroy(void)
   }
 }
 
-static uint8_t wid_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_quit_yes(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
   if (game->started) {
@@ -76,7 +76,7 @@ static uint8_t wid_quit_yes(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static uint8_t wid_quit_no(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_quit_no(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
   wid_quit_destroy();

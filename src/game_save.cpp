@@ -1144,7 +1144,7 @@ static uint8_t wid_save_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_save_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_save_mouse_up(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   auto slot = wid_get_int_context(w);
@@ -1153,7 +1153,7 @@ static uint8_t wid_save_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static uint8_t wid_save_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_save_cancel(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_save_destroy();
