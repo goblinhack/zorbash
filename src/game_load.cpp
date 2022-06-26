@@ -1110,7 +1110,7 @@ bool Game::load(std::string file_to_load, class Game &target)
   auto     vec = read_lzo_file(file_to_load, &uncompressed_len, &cs);
   if (vec.size() <= 0) {
     if (! game_load_headers_only) {
-      wid_error("load error, empty file?");
+      wid_error("load error, empty file [" + file_to_load + "] ?");
     }
     return false;
   }
@@ -1240,6 +1240,10 @@ void Game::load(int slot)
   game->fini();
 
   auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
+
+  if (slot == UI_WID_SAVE_SLOTS - 1) {
+    save_file = saved_dir + "saved-snapshot";
+  }
 
   LOG("-");
   CON("INF: Loading %s", save_file.c_str());
