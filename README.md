@@ -316,11 +316,11 @@ Pixelart Screenshots
 How to build
 ------------
 
-- On Linux: (Ubuntu)
+- On Linux: (Ubuntu 22.04)
 <pre>
     sh ./RUNME
 </pre>
-- On MacOS (needs Mac Ports/Homebrew):
+- On MacOS (needs Mac Ports/Homebrew). Does not work with anaconda (help wanted):
 <pre>
     sh ./RUNME
 </pre>
