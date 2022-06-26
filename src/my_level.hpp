@@ -915,11 +915,10 @@ public:
   void describe(point at);
   void describe(Thingp);
   void display_ascii_gas(point tl, point br, const int16_t, const int16_t, const int16_t, const int16_t);
-  void display_ascii_lasers(void);
+  void display_ascii_lasers(point tl, point br);
   void display_ascii_map(point tl, point br);
-  void display_ascii_projectiles(void);
-  void display_lasers(void);
-  void display_projectiles(void);
+  void display_ascii_projectiles(point tl, point br);
+  void display_lasers(point tl, point br);
   void display_map_set_bounds(void);
   void display_map(void);
   void display_pixelart_blood(void);
@@ -929,7 +928,7 @@ public:
   void display_pixelart_fade_out(void);
   void display_pixelart_gas(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_internal_particles(void);
-  void display_pixelart_lasers(void);
+  void display_pixelart_lasers(point tl, point br);
   void display_pixelart_lava(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_map_bg_things(void);
   void display_pixelart_map_debug(int x, int y);
@@ -938,9 +937,10 @@ public:
   void display_pixelart_map_fg_things(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_map_mini(void);
   void display_pixelart_map_things(const int, const int16_t, const int16_t, const int16_t, const int16_t);
-  void display_pixelart_projectiles(void);
+  void display_pixelart_projectiles(point tl, point br);
   void display_pixelart(void);
   void display_pixelart_water(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
+  void display_projectiles(point tl, point br);
   void display_target(void);
   void display_tick_animation(void);
   void dmap_to_player_update(void);

@@ -87,7 +87,7 @@ void Level::new_projectile(ThingId id, ThingId victim_id, ProjectileInfo info, u
   new_projectiles.push_back(Projectile(this, id, victim_id, info));
 }
 
-void Level::display_projectiles(void)
+void Level::display_projectiles(point tl, point br)
 {
   TRACE_NO_INDENT();
 
@@ -109,9 +109,9 @@ void Level::display_projectiles(void)
   }
 
   if (g_opt_ascii) {
-    display_ascii_projectiles();
+    display_ascii_projectiles(tl, br);
   } else {
-    display_pixelart_projectiles();
+    display_pixelart_projectiles(tl, br);
   }
 }
 

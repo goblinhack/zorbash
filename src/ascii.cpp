@@ -237,7 +237,7 @@ bool ascii_is_empty(int x, int y)
   return true;
 }
 
-void ascii_set_fg(int x, int y, color c)
+void ascii_set_fg(int x, int y, color col)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -245,13 +245,13 @@ void ascii_set_fg(int x, int y, color c)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->fg_color_tl = c;
-  cell->fg_color_tr = c;
-  cell->fg_color_bl = c;
-  cell->fg_color_br = c;
+  cell->fg_color_tl = col;
+  cell->fg_color_tr = col;
+  cell->fg_color_bl = col;
+  cell->fg_color_br = col;
 }
 
-void ascii_set_bg(int x, int y, color c)
+void ascii_set_bg(int x, int y, color col)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -259,13 +259,13 @@ void ascii_set_bg(int x, int y, color c)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->bg_color_tl = c;
-  cell->bg_color_tr = c;
-  cell->bg_color_bl = c;
-  cell->bg_color_br = c;
+  cell->bg_color_tl = col;
+  cell->bg_color_tr = col;
+  cell->bg_color_bl = col;
+  cell->bg_color_br = col;
 }
 
-void ascii_set_bg2(int x, int y, color c)
+void ascii_set_bg2(int x, int y, color col)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -273,13 +273,13 @@ void ascii_set_bg2(int x, int y, color c)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->bg2_color_tl = c;
-  cell->bg2_color_tr = c;
-  cell->bg2_color_bl = c;
-  cell->bg2_color_br = c;
+  cell->bg2_color_tl = col;
+  cell->bg2_color_tr = col;
+  cell->bg2_color_bl = col;
+  cell->bg2_color_br = col;
 }
 
-void ascii_set_fg2(int x, int y, color c)
+void ascii_set_fg2(int x, int y, color col)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -287,13 +287,13 @@ void ascii_set_fg2(int x, int y, color c)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->fg2_color_tl = c;
-  cell->fg2_color_tr = c;
-  cell->fg2_color_bl = c;
-  cell->fg2_color_br = c;
+  cell->fg2_color_tl = col;
+  cell->fg2_color_tr = col;
+  cell->fg2_color_bl = col;
+  cell->fg2_color_br = col;
 }
 
-void ascii_set_fg3(int x, int y, color c)
+void ascii_set_fg3(int x, int y, color col)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -301,13 +301,13 @@ void ascii_set_fg3(int x, int y, color c)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->fg3_color_tl = c;
-  cell->fg3_color_tr = c;
-  cell->fg3_color_bl = c;
-  cell->fg3_color_br = c;
+  cell->fg3_color_tl = col;
+  cell->fg3_color_tr = col;
+  cell->fg3_color_bl = col;
+  cell->fg3_color_br = col;
 }
 
-void ascii_set_fg4(int x, int y, color c)
+void ascii_set_fg4(int x, int y, color col)
 {
   if (unlikely(! ascii_ok_for_scissors(x, y))) {
     return;
@@ -315,10 +315,10 @@ void ascii_set_fg4(int x, int y, color c)
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
 
-  cell->fg4_color_tl = c;
-  cell->fg4_color_tr = c;
-  cell->fg4_color_bl = c;
-  cell->fg4_color_br = c;
+  cell->fg4_color_tl = col;
+  cell->fg4_color_tr = col;
+  cell->fg4_color_bl = col;
+  cell->fg4_color_br = col;
 }
 
 void ascii_set_context(int x, int y, void *context)
@@ -409,11 +409,11 @@ void ascii_set_bg2(int x, int y, const Tilep tile, float tx, float ty, float dx,
 
 void ascii_set_bg(int x, int y, const char *tilename) { ascii_set_bg(x, y, tile_find(tilename)); }
 
-void ascii_set_bg(int x, int y, const wchar_t c) { ascii_set_bg(x, y, font_ui->unicode_to_tile(c)); }
+void ascii_set_bg(int x, int y, const wchar_t ch) { ascii_set_bg(x, y, font_ui->unicode_to_tile(ch)); }
 
 void ascii_set_bg2(int x, int y, const char *tilename) { ascii_set_bg2(x, y, tile_find(tilename)); }
 
-void ascii_set_bg2(int x, int y, const wchar_t c) { ascii_set_bg2(x, y, font_ui->unicode_to_tile(c)); }
+void ascii_set_bg2(int x, int y, const wchar_t ch) { ascii_set_bg2(x, y, font_ui->unicode_to_tile(ch)); }
 
 void ascii_set_fg(int x, int y, const Texp tex, float tx, float ty, float dx, float dy)
 {
@@ -537,19 +537,19 @@ void ascii_set_fg4(int x, int y, const Tilep tile, float tx, float ty, float dx,
 
 void ascii_set_fg(int x, int y, const char *tilename) { ascii_set_fg(x, y, tile_find(tilename)); }
 
-void ascii_set_fg(int x, int y, const wchar_t c) { ascii_set_fg(x, y, font_ui->unicode_to_tile(c)); }
+void ascii_set_fg(int x, int y, const wchar_t ch) { ascii_set_fg(x, y, font_ui->unicode_to_tile(ch)); }
 
 void ascii_set_fg2(int x, int y, const char *tilename) { ascii_set_fg2(x, y, tile_find(tilename)); }
 
-void ascii_set_fg2(int x, int y, const wchar_t c) { ascii_set_fg2(x, y, font_ui->unicode_to_tile(c)); }
+void ascii_set_fg2(int x, int y, const wchar_t ch) { ascii_set_fg2(x, y, font_ui->unicode_to_tile(ch)); }
 
 void ascii_set_fg3(int x, int y, const char *tilename) { ascii_set_fg3(x, y, tile_find(tilename)); }
 
-void ascii_set_fg3(int x, int y, const wchar_t c) { ascii_set_fg3(x, y, font_ui->unicode_to_tile(c)); }
+void ascii_set_fg3(int x, int y, const wchar_t ch) { ascii_set_fg3(x, y, font_ui->unicode_to_tile(ch)); }
 
 void ascii_set_fg4(int x, int y, const char *tilename) { ascii_set_fg4(x, y, tile_find(tilename)); }
 
-void ascii_set_fg4(int x, int y, const wchar_t c) { ascii_set_fg4(x, y, font_ui->unicode_to_tile(c)); }
+void ascii_set_fg4(int x, int y, const wchar_t ch) { ascii_set_fg4(x, y, font_ui->unicode_to_tile(ch)); }
 
 void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 {
@@ -580,7 +580,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
 
   tile            = nullptr;
   bool    got_pct = false;
-  wchar_t c       = 0;
+  wchar_t ch      = 0;
 
   for (;;) {
     if (text.end() - text_iter <= 0) {
@@ -593,12 +593,12 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
       }
       got_pct = false;
     } else {
-      c = *text_iter;
+      ch = *text_iter;
       text_iter++;
 
       auto len = text.end() - text_iter;
       if (len > 0) {
-        if (unlikely(c == L'%')) {
+        if (unlikely(ch == L'%')) {
           got_pct = true;
           if ((len > 3) && (std::string(text_iter, text_iter + 3) == "fg=")) {
             text_iter += 3;
@@ -659,7 +659,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     // If not found print a ? tile
     //
     if (unlikely(! tile)) {
-      tile = font_ui->unicode_to_tile(c);
+      tile = font_ui->unicode_to_tile(ch);
       if (tile == nullptr) {
         tile = tile_find_mand(UNICODE_UNKNOWN_STR);
       }
@@ -670,7 +670,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
     //
     // Use a special char to represent the cursor. A bit of a hack.
     //
-    auto is_cursor = (c == UNICODE_CURSOR);
+    auto is_cursor = (ch == UNICODE_CURSOR);
     if (unlikely(is_cursor)) {
       static uint32_t last;
       static uint8_t  first = true;
@@ -740,7 +740,7 @@ int ascii_strlen(std::wstring const &text)
   int  x         = 0;
 
   bool    got_pct = false;
-  wchar_t c       = 0;
+  wchar_t ch      = 0;
 
   for (;;) {
     if (text.end() - text_iter <= 0) {
@@ -753,11 +753,11 @@ int ascii_strlen(std::wstring const &text)
       }
       got_pct = false;
     } else {
-      c = *text_iter;
+      ch = *text_iter;
       text_iter++;
 
       if (text_iter != text.end()) {
-        if (c == L'%') {
+        if (ch == L'%') {
           if (text_iter != text.end()) {
             if (*text_iter == L'%') {
               text_iter++;
@@ -825,14 +825,14 @@ int ascii_strlen(std::wstring const &text, std::wstring *col)
   int  x         = 0;
 
   for (;;) {
-    auto c = *text_iter;
+    auto ch = *text_iter;
     text_iter++;
 
-    if (c == L'\0') {
+    if (ch == L'\0') {
       break;
     }
 
-    if (c == L'%') {
+    if (ch == L'%') {
       if (text_iter != text.end()) {
         if (*text_iter == L'%') {
           text_iter++;
@@ -892,14 +892,14 @@ std::string ascii_strip(std::string const &text)
   std::string out;
 
   for (;;) {
-    auto c = *text_iter;
+    auto ch = *text_iter;
     text_iter++;
 
-    if (c == '\0') {
+    if (ch == '\0') {
       break;
     }
 
-    if (c == '%') {
+    if (ch == '%') {
       if (text_iter != text.end()) {
         if (*text_iter == '%') {
           text_iter++;
@@ -939,7 +939,7 @@ std::string ascii_strip(std::string const &text)
         continue;
       }
     }
-    out += c;
+    out += ch;
     x++;
   }
   return (out);
@@ -1060,7 +1060,7 @@ static void ascii_display_mouse(point mouse_tile_tl, point mouse_tile_br, point 
 }
 #endif
 
-void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep tile, color c)
+void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep tile, color col)
 {
   TRACE_NO_INDENT();
   int x;
@@ -1069,38 +1069,46 @@ void ascii_put_bg_square(int tlx, int tly, int brx, int bry, Tilep tile, color c
   for (x = tlx; x <= brx; x++) {
     for (y = tly; y <= bry; y++) {
       ascii_set_bg(x, y, tile);
-      ascii_set_bg(x, y, c);
+      ascii_set_bg(x, y, col);
     }
   }
 }
 
-void ascii_put_bg_square(int tlx, int tly, int brx, int bry, const char *tilename, color c)
+void ascii_put_bg_square(int tlx, int tly, int brx, int bry, const char *tilename, color col)
 {
   TRACE_NO_INDENT();
-  ascii_put_bg_square(tlx, tly, brx, bry, tile_find(tilename), c);
+  ascii_put_bg_square(tlx, tly, brx, bry, tile_find(tilename), col);
 }
 
-void ascii_put_bg_square(int tlx, int tly, int brx, int bry, wchar_t what, color c)
+void ascii_put_bg_square(int tlx, int tly, int brx, int bry, wchar_t what, color col)
 {
   TRACE_NO_INDENT();
-  ascii_put_bg_square(tlx, tly, brx, bry, font_ui->unicode_to_tile(what), c);
+  ascii_put_bg_square(tlx, tly, brx, bry, font_ui->unicode_to_tile(what), col);
 }
 
-static void ascii_map_thing_replace(int x, int y, Tilep tile, color c)
+static void ascii_map_thing_replace(int x, int y, Tilep tile, color col)
 {
   TRACE_NO_INDENT();
   ascii_set_bg(x, y, tile);
-  ascii_set_bg(x, y, c);
+  ascii_set_bg(x, y, col);
 }
 
-void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep tile, color c)
+typedef void (*ascii_draw_char_fn)(int x, int y, wchar_t ch);
+typedef void (*ascii_draw_col_fn)(int x, int y, color col);
+
+static void ascii_draw_line_fn(int x0, int y0, int x1, int y1, wchar_t ch, color col, ascii_draw_char_fn fn1,
+                               ascii_draw_col_fn fn2)
 {
   int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
   int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
   int err = dx + dy, e2; /* error value e_xy */
 
   for (;;) { /* loop */
-    ascii_map_thing_replace(x0, y0, tile, c);
+    (*fn1)(x0, y0, ch);
+    (*fn2)(x0, y0, col);
+    if (x0 == x1 && y0 == y1) {
+      break;
+    }
     e2 = 2 * err;
     if (e2 >= dy) {
       err += dy;
@@ -1113,16 +1121,69 @@ void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep tile, color c)
   }
 }
 
-void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c)
+void ascii_draw_line_fg4(int x0, int y0, int x1, int y1, wchar_t ch, color col)
 {
-  TRACE_NO_INDENT();
-  ascii_draw_line(x0, y0, x1, y1, font_ui->unicode_to_tile(what), c);
+  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_fg4, ascii_set_fg4);
 }
 
-void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color c)
+void ascii_draw_line_fg3(int x0, int y0, int x1, int y1, wchar_t ch, color col)
+{
+  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_fg3, ascii_set_fg3);
+}
+
+void ascii_draw_line_fg2(int x0, int y0, int x1, int y1, wchar_t ch, color col)
+{
+  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_fg2, ascii_set_fg2);
+}
+
+void ascii_draw_line_fg(int x0, int y0, int x1, int y1, wchar_t ch, color col)
+{
+  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_fg, ascii_set_fg);
+}
+
+void ascii_draw_line_bg2(int x0, int y0, int x1, int y1, wchar_t ch, color col)
+{
+  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_bg2, ascii_set_bg2);
+}
+
+void ascii_draw_line_bg(int x0, int y0, int x1, int y1, wchar_t ch, color col)
+{
+  ascii_draw_line_fn(x0, y0, x1, y1, ch, col, ascii_set_bg, ascii_set_bg);
+}
+
+void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep tile, color col)
+{
+  int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+  int dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+  int err = dx + dy, e2; /* error value e_xy */
+
+  for (;;) { /* loop */
+    ascii_map_thing_replace(x0, y0, tile, col);
+    if (x0 == x1 && y0 == y1) {
+      break;
+    }
+    e2 = 2 * err;
+    if (e2 >= dy) {
+      err += dy;
+      x0 += sx;
+    } /* e_xy+e_x > 0 */
+    if (e2 <= dx) {
+      err += dx;
+      y0 += sy;
+    } /* e_xy+e_y < 0 */
+  }
+}
+
+void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color col)
 {
   TRACE_NO_INDENT();
-  ascii_draw_line(x0, y0, x1, y1, tile_find(tilename), c);
+  ascii_draw_line(x0, y0, x1, y1, font_ui->unicode_to_tile(what), col);
+}
+
+void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, color col)
+{
+  TRACE_NO_INDENT();
+  ascii_draw_line(x0, y0, x1, y1, tile_find(tilename), col);
 }
 
 //

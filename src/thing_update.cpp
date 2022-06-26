@@ -325,6 +325,7 @@ void Thing::update(void)
   // If not already animating, then start it
   //
   if (! ts_next_frame) {
+    TRACE_NO_INDENT();
     auto tiles = &tpp->tiles;
     if (is_gfx_pixelart_animated || is_gfx_ascii_animated) {
       animate();
@@ -345,6 +346,7 @@ void Thing::update(void)
   // Auto carry of weapons?
   //
   if (is_able_to_use_weapons()) {
+    TRACE_NO_INDENT();
     dbg("Is weapon equipper");
     TRACE_AND_INDENT();
 
@@ -369,6 +371,7 @@ void Thing::update(void)
   }
 
   if (is_able_to_use_wands_or_staffs()) {
+    TRACE_NO_INDENT();
     dbg("Is wand equipper");
     TRACE_AND_INDENT();
 
@@ -393,6 +396,7 @@ void Thing::update(void)
   }
 
   if (is_able_to_use_rings()) {
+    TRACE_NO_INDENT();
     dbg("Is ring equipper");
     TRACE_AND_INDENT();
 
@@ -417,6 +421,7 @@ void Thing::update(void)
   }
 
   if (is_bag_item_container()) {
+    TRACE_NO_INDENT();
     dbg("Is bag item container");
     TRACE_AND_INDENT();
 
@@ -439,6 +444,7 @@ void Thing::update(void)
       }
     }
   } else if (is_item_carrier()) {
+    TRACE_NO_INDENT();
     dbg("Is item carrier");
     TRACE_AND_INDENT();
 
@@ -466,6 +472,7 @@ void Thing::update(void)
   // Initial equp of weapons
   //
   if (is_able_to_use_weapons()) {
+    TRACE_NO_INDENT();
     dbg("Weapon equip");
     TRACE_AND_INDENT();
 
@@ -480,6 +487,7 @@ void Thing::update(void)
   // Initial equip of armor
   //
   if (is_able_to_use_armor()) {
+    TRACE_NO_INDENT();
     dbg("Armor equip");
     TRACE_AND_INDENT();
 
@@ -494,6 +502,7 @@ void Thing::update(void)
   // Initial equp of wand
   //
   if (is_able_to_use_wands_or_staffs()) {
+    TRACE_NO_INDENT();
     dbg("Wand equip");
     TRACE_AND_INDENT();
 
@@ -508,6 +517,7 @@ void Thing::update(void)
   // Initial equp of rings
   //
   if (is_able_to_use_rings()) {
+    TRACE_NO_INDENT();
     dbg("Rings equip");
     TRACE_AND_INDENT();
 
@@ -537,6 +547,7 @@ void Thing::update(void)
   // Initial equip of helmet
   //
   if (is_able_to_use_helmet()) {
+    TRACE_NO_INDENT();
     dbg("Helmet equip");
     TRACE_AND_INDENT();
 
@@ -551,6 +562,7 @@ void Thing::update(void)
   // Initial equip of amulet
   //
   if (is_able_to_use_amulet()) {
+    TRACE_NO_INDENT();
     dbg("Amulet equip");
     TRACE_AND_INDENT();
 
@@ -565,6 +577,7 @@ void Thing::update(void)
   // Initial equip of boots
   //
   if (is_able_to_use_boots()) {
+    TRACE_NO_INDENT();
     dbg("Boos equip");
     TRACE_AND_INDENT();
 
@@ -579,6 +592,7 @@ void Thing::update(void)
   // Initial equip of gauntlet
   //
   if (is_able_to_use_gauntlet()) {
+    TRACE_NO_INDENT();
     dbg("Gauntlet equip");
     TRACE_AND_INDENT();
 
@@ -593,6 +607,7 @@ void Thing::update(void)
   // Initial equip of cloak
   //
   if (is_able_to_use_cloak()) {
+    TRACE_NO_INDENT();
     dbg("Cloak equip");
     TRACE_AND_INDENT();
 
@@ -607,6 +622,7 @@ void Thing::update(void)
   // Initial equip of shield
   //
   if (is_able_to_use_shield()) {
+    TRACE_NO_INDENT();
     dbg("Shield equip");
     TRACE_AND_INDENT();
 
@@ -617,15 +633,18 @@ void Thing::update(void)
     }
   }
 
+  TRACE_NO_INDENT();
   hunger_update();
 
   if (carried && (is_monst() || is_player())) {
+    TRACE_NO_INDENT();
     dbg("Final item list:");
     TRACE_AND_INDENT();
     check_all_carried_items_are_owned();
   }
 
   if (is_player()) {
+    TRACE_NO_INDENT();
     light_dist_update();
   }
 }

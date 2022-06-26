@@ -26,18 +26,13 @@ static void wid_asciimap_display(Widp w, point tl, point br);
 void wid_asciimap_fini(void)
 {
   TRACE_AND_INDENT();
+  CON("OLD %p", wid_asciimap);
   wid_destroy(&wid_asciimap);
 }
 
 bool wid_asciimap_init(void)
 {
-  auto level = game->get_current_level();
-  if (! level) {
-    return false;
-  }
-
-  auto player = level->player;
-  if (! player) {
+  if (! g_opt_ascii) {
     return false;
   }
 
@@ -49,6 +44,7 @@ bool wid_asciimap_init(void)
   point br = tl + point(width - 1, height - 1);
 
   wid_asciimap = wid_new_square_window("wid asciimap");
+  CON("NEW %p", wid_asciimap);
   wid_set_shape_none(wid_asciimap);
   wid_set_pos(wid_asciimap, tl, br);
   wid_set_on_display(wid_asciimap, wid_asciimap_display);
@@ -67,10 +63,10 @@ void wid_asciimap_update(void)
   TRACE_NO_INDENT();
 
   if (wid_asciimap) {
-    int32_t tlx;
-    int32_t tly;
-    int32_t brx;
-    int32_t bry;
+    int tlx;
+    int tly;
+    int brx;
+    int bry;
     wid_get_tl_x_tl_y_br_x_br_y(wid_asciimap, &tlx, &tly, &brx, &bry);
     TILES_VISIBLE_ACROSS = brx - tlx + 1;
     TILES_VISIBLE_DOWN   = bry - tly + 1;

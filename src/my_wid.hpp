@@ -88,8 +88,7 @@ typedef uint8_t (*on_key_down_t)(Widp, const struct SDL_Keysym *);
 typedef uint8_t (*on_key_up_t)(Widp, const struct SDL_Keysym *);
 typedef uint8_t (*on_mouse_down_t)(Widp, int32_t x, int32_t y, uint32_t button);
 typedef uint8_t (*on_mouse_held_t)(Widp, int32_t x, int32_t y, uint32_t button);
-typedef uint8_t (*on_mouse_motion_t)(Widp, int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx,
-                                     int32_t wheely);
+typedef uint8_t (*on_mouse_motion_t)(Widp, int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wx, int32_t wy);
 typedef uint8_t (*on_mouse_up_t)(Widp, int32_t x, int32_t y, uint32_t button);
 
 typedef void (*on_destroy_begin_t)(Widp);

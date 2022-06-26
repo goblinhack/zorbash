@@ -266,7 +266,7 @@ void sdl_loop(void)
       //
       // If the user has moved the mouse or we're in the intro, update the widgets.
       //
-      if (found || ! game->level) {
+      if (processed_mouse_motion_event || ! game->level) {
         pcg_random_allowed = false;
         wid_display_all();
         pcg_random_allowed = true;

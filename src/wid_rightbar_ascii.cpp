@@ -858,5 +858,5 @@ bool wid_rightbar_ascii_create(void)
 
   DBG2("Remade rightbar");
 
-  return wid_asciimap_init();
+  return true;
 }
