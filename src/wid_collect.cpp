@@ -214,7 +214,7 @@ static uint8_t wid_collect_key_down(Widp w, const struct SDL_Keysym *key)
 // and the collect window opens up, then we will accidentally collect whatever
 // was under the mouse pointer.
 //
-static uint8_t wid_collect_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_collect_mouse_down(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
@@ -235,7 +235,7 @@ static uint8_t wid_collect_mouse_down(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static void wid_collect_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_collect_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
   int slot = wid_get_int_context(w);
@@ -264,7 +264,7 @@ static void wid_collect_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int
   }
 }
 
-static uint8_t wid_collect_close(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_collect_close(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Thing collect: close");
   TRACE_AND_INDENT();

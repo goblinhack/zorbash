@@ -137,17 +137,17 @@ public:
   bool is_yyy9                       : 1 {};
 
 private:
-  int32_t _gl_binding {};
-  int32_t _gl_binding_black_and_white {};
-  int32_t _gl_binding_mask {};
+  int _gl_binding {};
+  int _gl_binding_black_and_white {};
+  int _gl_binding_mask {};
 
 public:
-  int32_t gl_binding(void) const;
-  int32_t gl_binding_black_and_white(void) const;
-  int32_t gl_binding_mask(void) const;
-  void    set_gl_binding(int32_t v);
-  void    set_gl_binding_black_and_white(int32_t v);
-  void    set_gl_binding_mask(int32_t v);
+  int gl_binding(void) const;
+  int gl_binding_black_and_white(void) const;
+  int gl_binding_mask(void) const;
+  void    set_gl_binding(int v);
+  void    set_gl_binding_black_and_white(int v);
+  void    set_gl_binding_mask(int v);
 };
 
 typedef class Tile *Tilep;

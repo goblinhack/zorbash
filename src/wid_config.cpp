@@ -131,7 +131,7 @@ static void wid_config_top_destroy(void)
   wid_config_top_window = nullptr;
 }
 
-static uint8_t wid_config_top_graphics(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_top_graphics(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
@@ -139,7 +139,7 @@ static uint8_t wid_config_top_graphics(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static uint8_t wid_config_top_keyboard(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_top_keyboard(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
@@ -147,7 +147,7 @@ static uint8_t wid_config_top_keyboard(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static uint8_t wid_config_top_sound(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_top_sound(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
@@ -155,7 +155,7 @@ static uint8_t wid_config_top_sound(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-static uint8_t wid_config_top_other(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_top_other(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
@@ -163,7 +163,7 @@ static uint8_t wid_config_top_other(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-static uint8_t wid_config_top_back(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_top_back(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();

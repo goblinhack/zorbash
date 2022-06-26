@@ -23,7 +23,7 @@ static void wid_config_gfx_destroy(void)
   config_changed        = false;
 }
 
-static uint8_t wid_config_gfx_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_cancel(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   CON("INF: Reload config");
@@ -37,7 +37,7 @@ static uint8_t wid_config_gfx_cancel(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_gfx_save(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_save(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   CON("INF: Save config");
@@ -50,7 +50,7 @@ static uint8_t wid_config_gfx_save(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static uint8_t wid_config_gfx_back(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_back(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_config_gfx_destroy();
@@ -58,7 +58,7 @@ static uint8_t wid_config_gfx_back(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -69,7 +69,7 @@ static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int32_t x, int32_t y, 
   return true;
 }
 
-static uint8_t wid_config_ascii_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_ascii_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -81,7 +81,7 @@ static uint8_t wid_config_ascii_toggle(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -95,7 +95,7 @@ static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int32_t x, int32_t y, ui
   return true;
 }
 
-static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -109,7 +109,7 @@ static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int32_t x, int32
   return true;
 }
 
-static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -120,7 +120,7 @@ static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int32_t x, int32_t y,
   return true;
 }
 
-static uint8_t wid_config_gfx_borderless_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_borderless_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -131,7 +131,7 @@ static uint8_t wid_config_gfx_borderless_toggle(Widp w, int32_t x, int32_t y, ui
   return true;
 }
 
-static uint8_t wid_config_gfx_inverted_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_inverted_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -141,7 +141,7 @@ static uint8_t wid_config_gfx_inverted_toggle(Widp w, int32_t x, int32_t y, uint
   return true;
 }
 
-static uint8_t wid_config_other_fps_counter_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_other_fps_counter_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -151,7 +151,7 @@ static uint8_t wid_config_other_fps_counter_toggle(Widp w, int32_t x, int32_t y,
   return true;
 }
 
-static uint8_t wid_config_gfx_resolution_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_resolution_incr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -185,7 +185,7 @@ static uint8_t wid_config_gfx_resolution_incr(Widp w, int32_t x, int32_t y, uint
   return true;
 }
 
-static uint8_t wid_config_gfx_resolution_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_resolution_decr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -219,7 +219,7 @@ static uint8_t wid_config_gfx_resolution_decr(Widp w, int32_t x, int32_t y, uint
   return true;
 }
 
-static uint8_t wid_config_gfx_term_width_size_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_term_width_size_decr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -244,7 +244,7 @@ static uint8_t wid_config_gfx_term_width_size_decr(Widp w, int32_t x, int32_t y,
   return true;
 }
 
-static uint8_t wid_config_gfx_term_width_size_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_term_width_size_incr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -269,7 +269,7 @@ static uint8_t wid_config_gfx_term_width_size_incr(Widp w, int32_t x, int32_t y,
   return true;
 }
 
-static uint8_t wid_config_gfx_term_height_size_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_term_height_size_decr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -294,7 +294,7 @@ static uint8_t wid_config_gfx_term_height_size_decr(Widp w, int32_t x, int32_t y
   return true;
 }
 
-static uint8_t wid_config_gfx_term_height_size_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_gfx_term_height_size_incr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;

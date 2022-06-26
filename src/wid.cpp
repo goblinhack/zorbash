@@ -100,8 +100,8 @@ ts_t wid_last_mouse_motion;
 // Widget moving
 //
 static Widp    wid_moving {};
-static int32_t wid_moving_last_x;
-static int32_t wid_moving_last_y;
+static int wid_moving_last_x;
+static int wid_moving_last_y;
 
 static ts_t wid_time;
 
@@ -113,10 +113,10 @@ const ts_t wid_destroy_delay_ms = 200;
 //
 // Prototypes.
 //
-static void    wid_destroy_delay(Widp *wp, int32_t delay);
-static uint8_t wid_scroll_trough_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button);
-static uint8_t wid_scroll_trough_mouse_motion(Widp w, int32_t x, int32_t y, int32_t relx, int32_t rely,
-                                              int32_t wheelx, int32_t wheely);
+static void    wid_destroy_delay(Widp *wp, int delay);
+static uint8_t wid_scroll_trough_mouse_down(Widp w, int x, int y, uint32_t button);
+static uint8_t wid_scroll_trough_mouse_motion(Widp w, int x, int y, int relx, int rely,
+                                              int wheelx, int wheely);
 static void    wid_find_first_focus(void);
 static void    wid_find_top_focus(void);
 static void    wid_destroy_immediate(Widp w);
@@ -140,8 +140,8 @@ static void    wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_sci
 //
 // Child sort priority
 //
-static int32_t wid_highest_priority = 1;
-static int32_t wid_lowest_priority  = -1;
+static int wid_highest_priority = 1;
+static int wid_lowest_priority  = -1;
 
 //
 // History for all text widgets.
@@ -202,10 +202,10 @@ void wid_dump(Widp w, int depth)
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
 
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
@@ -239,48 +239,48 @@ int wid_count(Widp w, int depth)
   return count;
 }
 
-int32_t wid_get_tl_x(Widp w)
+int wid_get_tl_x(Widp w)
 {
   TRACE_AND_INDENT();
-  int32_t cx = (w->key.tl.x + w->key.br.x) / 2.0;
+  int cx = (w->key.tl.x + w->key.br.x) / 2.0;
 
   return (cx - (cx - w->key.tl.x));
 }
 
-int32_t wid_get_tl_y(Widp w)
+int wid_get_tl_y(Widp w)
 {
   TRACE_AND_INDENT();
-  int32_t cy = (w->key.tl.y + w->key.br.y) / 2.0;
+  int cy = (w->key.tl.y + w->key.br.y) / 2.0;
 
   return (cy - (cy - w->key.tl.y));
 }
 
-int32_t wid_get_br_x(Widp w)
+int wid_get_br_x(Widp w)
 {
   TRACE_AND_INDENT();
-  int32_t cx = (w->key.tl.x + w->key.br.x) / 2.0;
+  int cx = (w->key.tl.x + w->key.br.x) / 2.0;
 
   return (cx + (w->key.br.x - cx));
 }
 
-int32_t wid_get_br_y(Widp w)
+int wid_get_br_y(Widp w)
 {
   TRACE_AND_INDENT();
-  int32_t cy = (w->key.tl.y + w->key.br.y) / 2.0;
+  int cy = (w->key.tl.y + w->key.br.y) / 2.0;
 
   return (cy + (w->key.br.y - cy));
 }
 
-void wid_get_tl_x_tl_y_br_x_br_y(Widp w, int32_t *tl_x, int32_t *tl_y, int32_t *br_x, int32_t *br_y)
+void wid_get_tl_x_tl_y_br_x_br_y(Widp w, int *tl_x, int *tl_y, int *br_x, int *br_y)
 {
   TRACE_AND_INDENT();
-  const int32_t tlx = w->key.tl.x;
-  const int32_t tly = w->key.tl.y;
-  const int32_t brx = w->key.br.x;
-  const int32_t bry = w->key.br.y;
+  const int tlx = w->key.tl.x;
+  const int tly = w->key.tl.y;
+  const int brx = w->key.br.x;
+  const int bry = w->key.br.y;
 
-  const int32_t cx = (tlx + brx) / 2.0;
-  const int32_t cy = (tly + bry) / 2.0;
+  const int cx = (tlx + brx) / 2.0;
+  const int cy = (tly + bry) / 2.0;
 
   *tl_x = cx - (cx - tlx);
   *tl_y = cy - (cy - tly);
@@ -355,10 +355,10 @@ void wid_set_pos_pct(Widp w, fpoint tl, fpoint br)
     br.y = wid_get_height(w->parent) - 1;
   }
 
-  int32_t key_tl_x = tl.x;
-  int32_t key_tl_y = tl.y;
-  int32_t key_br_x = br.x;
-  int32_t key_br_y = br.y;
+  int key_tl_x = tl.x;
+  int key_tl_y = tl.y;
+  int key_br_x = br.x;
+  int key_br_y = br.y;
 
   //
   // Child postion is relative from the parent.
@@ -723,7 +723,7 @@ uint8_t wid_ignore_being_destroyed(Widp w)
   return false;
 }
 
-static void wid_mouse_motion_begin(Widp w, int32_t x, int32_t y)
+static void wid_mouse_motion_begin(Widp w, int x, int y)
 {
   TRACE_AND_INDENT();
   wid_mouse_motion_end();
@@ -830,8 +830,8 @@ static void wid_mouse_over_end(void)
   }
 }
 
-static uint8_t wid_mouse_over_begin(Widp w, uint32_t x, uint32_t y, int32_t relx, int32_t rely, int32_t wheelx,
-                                    int32_t wheely)
+static uint8_t wid_mouse_over_begin(Widp w, uint32_t x, uint32_t y, int relx, int rely, int wheelx,
+                                    int wheely)
 {
   TRACE_AND_INDENT();
   if (! wid_mouse_visible) {
@@ -1261,14 +1261,14 @@ void wid_set_cursor(Widp w, uint32_t val)
   w->cursor = val;
 }
 
-int32_t wid_get_width(Widp w)
+int wid_get_width(Widp w)
 {
   TRACE_AND_INDENT();
   verify(MTYPE_WID, w);
   return (wid_get_br_x(w) - wid_get_tl_x(w)) + 1;
 }
 
-int32_t wid_get_height(Widp w)
+int wid_get_height(Widp w)
 {
   TRACE_AND_INDENT();
   verify(MTYPE_WID, w);
@@ -1510,7 +1510,7 @@ void wid_set_text_centery(Widp w, uint8_t val)
   w->text_centery = val;
 }
 
-uint8_t wid_get_text_pos(Widp w, int32_t *x, int32_t *y)
+uint8_t wid_get_text_pos(Widp w, int *x, int *y)
 {
   TRACE_AND_INDENT();
   if (w->text_pos_set) {
@@ -1523,7 +1523,7 @@ uint8_t wid_get_text_pos(Widp w, int32_t *x, int32_t *y)
   return false;
 }
 
-void wid_set_text_pos(Widp w, uint8_t val, int32_t x, int32_t y)
+void wid_set_text_pos(Widp w, uint8_t val, int x, int y)
 {
   TRACE_AND_INDENT();
   w->text_pos.x   = x;
@@ -2431,13 +2431,13 @@ static void wid_destroy_immediate(Widp w)
   delete w;
 }
 
-static void wid_destroy_delay(Widp *wp, int32_t delay)
+static void wid_destroy_delay(Widp *wp, int delay)
 {
   TRACE_AND_INDENT();
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
 
   if (! wp) {
     return;
@@ -2801,14 +2801,14 @@ Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner
   point tl;
   point br;
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
-  int32_t ptlx;
-  int32_t ptly;
-  int32_t pbrx;
-  int32_t pbry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
+  int ptlx;
+  int ptly;
+  int pbrx;
+  int pbry;
 
   //
   // Make the trough line up with the scrolling window.
@@ -2855,14 +2855,14 @@ Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owne
   point tl;
   point br;
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
-  int32_t ptlx;
-  int32_t ptly;
-  int32_t pbrx;
-  int32_t pbry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
+  int ptlx;
+  int ptly;
+  int pbrx;
+  int pbry;
 
   //
   // Make the trough line up with the scrolling window.
@@ -3508,11 +3508,11 @@ void wid_hide(Widp w)
   }
 }
 
-static uint8_t wid_scroll_trough_mouse_down(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_scroll_trough_mouse_down(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
-  int32_t dx;
-  int32_t dy;
+  int dx;
+  int dy;
 
   std::vector< Widp > worklist;
   for (auto &iter : w->children_display_sorted) {
@@ -3558,12 +3558,12 @@ static uint8_t wid_scroll_trough_mouse_down(Widp w, int32_t x, int32_t y, uint32
   return true;
 }
 
-static uint8_t wid_scroll_trough_mouse_motion(Widp w, int32_t x, int32_t y, int32_t relx, int32_t rely,
-                                              int32_t wheelx, int32_t wheely)
+static uint8_t wid_scroll_trough_mouse_motion(Widp w, int x, int y, int relx, int rely,
+                                              int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
-  int32_t dx;
-  int32_t dy;
+  int dx;
+  int dy;
 
   if ((SDL_BUTTON(SDL_BUTTON_LEFT) & SDL_GetMouseState(0, 0)) || wheely || wheelx) {
 
@@ -3638,7 +3638,7 @@ static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
     for (auto &iter : owner->tree2_children_unsorted) {
       auto child = iter.second;
 
-      int32_t tl_x, tl_y, br_x, br_y;
+      int tl_x, tl_y, br_x, br_y;
 
       wid_get_tl_x_tl_y_br_x_br_y(child, &tl_x, &tl_y, &br_x, &br_y);
 
@@ -3669,7 +3669,7 @@ static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
     }
   }
 
-  int32_t ptl_x, ptl_y, pbr_x, pbr_y;
+  int ptl_x, ptl_y, pbr_x, pbr_y;
   wid_get_tl_x_tl_y_br_x_br_y(owner, &ptl_x, &ptl_y, &pbr_x, &pbr_y);
 
   minx -= ptl_x;
@@ -3742,7 +3742,7 @@ static void wid_adjust_scrollbar(Widp scrollbar, Widp owner)
   }
 }
 
-void wid_get_children_size(Widp owner, int32_t *w, int32_t *h)
+void wid_get_children_size(Widp owner, int *w, int *h)
 {
   TRACE_AND_INDENT();
   double  height       = wid_get_height(owner);
@@ -3763,10 +3763,10 @@ void wid_get_children_size(Widp owner, int32_t *w, int32_t *h)
 
     auto child = iter.second;
 
-    int32_t tminx = wid_get_tl_x(child) - wid_get_tl_x(child->parent);
-    int32_t tminy = wid_get_tl_y(child) - wid_get_tl_y(child->parent);
-    int32_t tmaxx = wid_get_br_x(child) - wid_get_tl_x(child->parent);
-    int32_t tmaxy = wid_get_br_y(child) - wid_get_tl_y(child->parent);
+    int tminx = wid_get_tl_x(child) - wid_get_tl_x(child->parent);
+    int tminy = wid_get_tl_y(child) - wid_get_tl_y(child->parent);
+    int tmaxx = wid_get_br_x(child) - wid_get_tl_x(child->parent);
+    int tmaxy = wid_get_br_y(child) - wid_get_tl_y(child->parent);
 
     if (first) {
       minx  = tminx;
@@ -3819,10 +3819,10 @@ void wid_get_children_size(Widp owner, int32_t *w, int32_t *h)
 static void wid_update_internal(Widp w)
 {
   TRACE_AND_INDENT();
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
 
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
@@ -3901,8 +3901,8 @@ void wid_update_mouse(void)
   // So if we are now over a new widget that was created on top of the
   // mouse, we activate it.
   //
-  int32_t x;
-  int32_t y;
+  int x;
+  int y;
 
   SDL_GetMouseState(&x, &y);
 
@@ -4230,7 +4230,7 @@ static uint8_t wid_receive_unhandled_input(const SDL_Keysym *key)
     return true;
   }
 
-  switch ((int32_t) key->sym) {
+  switch ((int) key->sym) {
     case '?': game->wid_config_keyboard_select(); break;
 
     case SDLK_ESCAPE:
@@ -4270,7 +4270,7 @@ static uint8_t wid_receive_unhandled_input(const SDL_Keysym *key)
   return true;
 }
 
-Widp wid_find_at(int32_t x, int32_t y)
+Widp wid_find_at(int x, int y)
 {
   TRACE_AND_INDENT();
   auto w = get(wid_on_screen_at, x, y);
@@ -4326,7 +4326,7 @@ Widp wid_find_under_mouse_when_scrolling(void)
   return w;
 }
 
-static Widp wid_key_down_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
+static Widp wid_key_down_handler_at(Widp w, int x, int y, uint8_t strict)
 {
   TRACE_AND_INDENT();
   if (unlikely(! w)) {
@@ -4402,7 +4402,7 @@ static Widp wid_key_down_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict
   return nullptr;
 }
 
-static Widp wid_key_up_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
+static Widp wid_key_up_handler_at(Widp w, int x, int y, uint8_t strict)
 {
   TRACE_AND_INDENT();
   if (unlikely(! w)) {
@@ -4469,7 +4469,7 @@ static Widp wid_key_up_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
   return nullptr;
 }
 
-static Widp wid_joy_button_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
+static Widp wid_joy_button_handler_at(Widp w, int x, int y, uint8_t strict)
 {
   TRACE_AND_INDENT();
   if (unlikely(! w)) {
@@ -4523,7 +4523,7 @@ static Widp wid_joy_button_handler_at(Widp w, int32_t x, int32_t y, uint8_t stri
   return nullptr;
 }
 
-static Widp wid_mouse_down_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
+static Widp wid_mouse_down_handler_at(Widp w, int x, int y, uint8_t strict)
 {
   TRACE_AND_INDENT();
   if (unlikely(! w)) {
@@ -4601,7 +4601,7 @@ static Widp wid_mouse_down_handler_at(Widp w, int32_t x, int32_t y, uint8_t stri
   return nullptr;
 }
 
-static Widp wid_mouse_held_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
+static Widp wid_mouse_held_handler_at(Widp w, int x, int y, uint8_t strict)
 {
   TRACE_AND_INDENT();
   if (unlikely(! w)) {
@@ -4675,7 +4675,7 @@ static Widp wid_mouse_held_handler_at(Widp w, int32_t x, int32_t y, uint8_t stri
   return nullptr;
 }
 
-static Widp wid_mouse_up_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict)
+static Widp wid_mouse_up_handler_at(Widp w, int x, int y, uint8_t strict)
 {
   TRACE_AND_INDENT();
   if (unlikely(! w)) {
@@ -4749,7 +4749,7 @@ static Widp wid_mouse_up_handler_at(Widp w, int32_t x, int32_t y, uint8_t strict
   return nullptr;
 }
 
-static void wid_children_move_delta_internal(Widp w, int32_t dx, int32_t dy)
+static void wid_children_move_delta_internal(Widp w, int dx, int dy)
 {
   TRACE_AND_INDENT();
   //
@@ -4790,7 +4790,7 @@ static void wid_children_move_delta_internal(Widp w, int32_t dx, int32_t dy)
   }
 }
 
-static void wid_move_delta_internal(Widp w, int32_t dx, int32_t dy)
+static void wid_move_delta_internal(Widp w, int dx, int dy)
 {
   TRACE_AND_INDENT();
   wid_tree_detach(w);
@@ -4836,7 +4836,7 @@ static void wid_move_delta_internal(Widp w, int32_t dx, int32_t dy)
   }
 }
 
-void wid_move_delta(Widp w, int32_t dx, int32_t dy)
+void wid_move_delta(Widp w, int dx, int dy)
 {
   TRACE_AND_INDENT();
   wid_move_delta_internal(w, dx, dy);
@@ -4844,7 +4844,7 @@ void wid_move_delta(Widp w, int32_t dx, int32_t dy)
   wid_update_internal(w);
 }
 
-void wid_resize(Widp w, int32_t width, int32_t height)
+void wid_resize(Widp w, int width, int height)
 {
   TRACE_AND_INDENT();
   wid_tree_detach(w);
@@ -4895,7 +4895,7 @@ void wid_move_to_bottom(Widp w)
   }
 }
 
-void wid_move_to_y_off(Widp w, int32_t off)
+void wid_move_to_y_off(Widp w, int off)
 {
   TRACE_AND_INDENT();
   wid_move_delta(w, 0, off);
@@ -5017,7 +5017,7 @@ void wid_move_to_top(Widp w)
   }
 }
 
-static Widp wid_joy_button_handler(int32_t x, int32_t y)
+static Widp wid_joy_button_handler(int x, int y)
 {
   TRACE_AND_INDENT();
   for (auto iter = wid_top_level.rbegin(); iter != wid_top_level.rend(); ++iter) {
@@ -5038,7 +5038,7 @@ static Widp wid_joy_button_handler(int32_t x, int32_t y)
   return nullptr;
 }
 
-static Widp wid_mouse_down_handler(int32_t x, int32_t y)
+static Widp wid_mouse_down_handler(int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5086,7 +5086,7 @@ static Widp wid_mouse_down_handler(int32_t x, int32_t y)
   return nullptr;
 }
 
-static Widp wid_mouse_held_handler(int32_t x, int32_t y)
+static Widp wid_mouse_held_handler(int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5134,7 +5134,7 @@ static Widp wid_mouse_held_handler(int32_t x, int32_t y)
   return nullptr;
 }
 
-static Widp wid_mouse_up_handler(int32_t x, int32_t y)
+static Widp wid_mouse_up_handler(int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5182,7 +5182,7 @@ static Widp wid_mouse_up_handler(int32_t x, int32_t y)
   return nullptr;
 }
 
-static Widp wid_mouse_motion_handler(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static Widp wid_mouse_motion_handler(int x, int y, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5204,7 +5204,7 @@ static Widp wid_mouse_motion_handler(int32_t x, int32_t y, int32_t relx, int32_t
 //
 static int wid_mouse_motion_recursion;
 
-void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_mouse_motion(int x, int y, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
   int got_one = false;
@@ -5394,7 +5394,7 @@ void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t 
 //
 // If no handler for this button, fake a mouse event.
 //
-void wid_fake_joy_button(int32_t x, int32_t y)
+void wid_fake_joy_button(int x, int y)
 {
   TRACE_AND_INDENT();
   if (get(sdl.joy_buttons, SDL_JOY_BUTTON_A)) {
@@ -5459,7 +5459,7 @@ void wid_fake_joy_button(int32_t x, int32_t y)
   }
 }
 
-void wid_joy_button(int32_t x, int32_t y)
+void wid_joy_button(int x, int y)
 {
   TRACE_AND_INDENT();
   pixel_to_ascii(&x, &y);
@@ -5542,7 +5542,7 @@ void wid_joy_button(int32_t x, int32_t y)
   }
 }
 
-void wid_mouse_down(uint32_t button, int32_t x, int32_t y)
+void wid_mouse_down(uint32_t button, int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5599,7 +5599,7 @@ void wid_mouse_down(uint32_t button, int32_t x, int32_t y)
   }
 }
 
-void wid_mouse_held(uint32_t button, int32_t x, int32_t y)
+void wid_mouse_held(uint32_t button, int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5644,7 +5644,7 @@ void wid_mouse_held(uint32_t button, int32_t x, int32_t y)
   }
 }
 
-void wid_mouse_up(uint32_t button, int32_t x, int32_t y)
+void wid_mouse_up(uint32_t button, int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5676,7 +5676,7 @@ void wid_mouse_up(uint32_t button, int32_t x, int32_t y)
   game_mouse_up(x, y, button);
 }
 
-static Widp wid_key_down_handler(int32_t x, int32_t y)
+static Widp wid_key_down_handler(int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5743,7 +5743,7 @@ static Widp wid_key_down_handler(int32_t x, int32_t y)
   return nullptr;
 }
 
-static Widp wid_key_up_handler(int32_t x, int32_t y)
+static Widp wid_key_up_handler(int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5858,7 +5858,7 @@ int g_blend_b;
   glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
 #endif
 
-void wid_key_down(const struct SDL_Keysym *key, int32_t x, int32_t y)
+void wid_key_down(const struct SDL_Keysym *key, int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -5962,7 +5962,7 @@ try_parent:
   wid_receive_unhandled_input(key);
 }
 
-void wid_key_up(const struct SDL_Keysym *key, int32_t x, int32_t y)
+void wid_key_up(const struct SDL_Keysym *key, int x, int y)
 {
   TRACE_AND_INDENT();
   Widp w {};
@@ -6035,7 +6035,7 @@ try_parent:
 //
 // Get the onscreen co-ords of the widget, clipped to the parent.
 //
-void wid_get_abs_coords(Widp w, int32_t *tlx, int32_t *tly, int32_t *brx, int32_t *bry)
+void wid_get_abs_coords(Widp w, int *tlx, int *tly, int *brx, int *bry)
 {
   TRACE_AND_INDENT();
   Widp p {};
@@ -6055,10 +6055,10 @@ void wid_get_abs_coords(Widp w, int32_t *tlx, int32_t *tly, int32_t *brx, int32_
   }
 
 #if 0
-  int32_t ptlx;
-  int32_t ptly;
-  int32_t pbrx;
-  int32_t pbry;
+  int ptlx;
+  int ptly;
+  int pbrx;
+  int pbry;
 
   if (w->parent) {
     wid_get_abs_coords(w->parent, &ptlx, &ptly, &pbrx, &pbry);
@@ -6090,13 +6090,13 @@ void wid_get_abs_coords(Widp w, int32_t *tlx, int32_t *tly, int32_t *brx, int32_
 //
 // Get the onscreen co-ords of the widget, clipped to the parent.
 //
-void wid_get_abs(Widp w, int32_t *x, int32_t *y)
+void wid_get_abs(Widp w, int *x, int *y)
 {
   TRACE_AND_INDENT();
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
 
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
@@ -6107,8 +6107,8 @@ void wid_get_abs(Widp w, int32_t *x, int32_t *y)
 void wid_get_pct(Widp w, double *px, double *py)
 {
   TRACE_AND_INDENT();
-  int32_t x;
-  int32_t y;
+  int x;
+  int y;
 
   wid_get_abs(w, &x, &y);
 
@@ -6135,20 +6135,20 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
 {
   TRACE_AND_INDENT();
   wid_total_count++;
-  int32_t clip_height = 0;
-  int32_t clip_width  = 0;
+  int clip_height = 0;
+  int clip_width  = 0;
   uint8_t hidden;
   uint8_t always_hidden;
-  int32_t owidth;
-  int32_t oheight;
-  int32_t otlx;
-  int32_t otly;
-  int32_t obrx;
-  int32_t obry;
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int owidth;
+  int oheight;
+  int otlx;
+  int otly;
+  int obrx;
+  int obry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
 #if 0
   Widp p {};
 #endif
@@ -6297,10 +6297,10 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
 
     auto p = w->parent;
     while (p) {
-      int32_t ptlx;
-      int32_t ptly;
-      int32_t pbrx;
-      int32_t pbry;
+      int ptlx;
+      int ptly;
+      int pbrx;
+      int pbry;
       wid_get_abs_coords(p, &ptlx, &ptly, &pbrx, &pbry);
 
       if (ptlx > sciss_tlx) {
@@ -6391,9 +6391,9 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
   }
 
   if (! text.empty()) {
-    int32_t x, y;
-    int32_t xpc, ypc;
-    int32_t width, height;
+    int x, y;
+    int xpc, ypc;
+    int width, height;
 
     //
     // Manually specified text position.
@@ -6402,8 +6402,8 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
     height = 0;
 
     if (wid_get_text_pos(w, &xpc, &ypc)) {
-      x = (owidth * xpc) - ((int32_t) width / 2) + otlx;
-      y = (oheight * ypc) - ((int32_t) height / 2) + otly;
+      x = (owidth * xpc) - ((int) width / 2) + otlx;
+      y = (oheight * ypc) - ((int) height / 2) + otly;
     } else {
       //
       // Position the text
@@ -6412,7 +6412,7 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
         //
         // If the text is too big, center it on the cursor.
         //
-        x = ((owidth - (int32_t) width) / 2) + otlx;
+        x = ((owidth - (int) width) / 2) + otlx;
 
         uint32_t c_width = (width / (double) text.length());
 
@@ -6420,21 +6420,21 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
       } else if (wid_get_text_lhs(w)) {
         x = otlx;
       } else if (wid_get_text_centerx(w)) {
-        x = ((owidth - (int32_t) width) / 2) + otlx;
+        x = ((owidth - (int) width) / 2) + otlx;
       } else if (wid_get_text_rhs(w)) {
-        x = obrx - (int32_t) width + 1;
+        x = obrx - (int) width + 1;
       } else {
-        x = ((owidth - (int32_t) width) / 2) + otlx;
+        x = ((owidth - (int) width) / 2) + otlx;
       }
 
       if (wid_get_text_top(w)) {
         y = otly;
       } else if (wid_get_text_centery(w)) {
-        y = ((oheight - (int32_t) height) / 2) + otly;
+        y = ((oheight - (int) height) / 2) + otly;
       } else if (wid_get_text_bot(w)) {
-        y = obry - (int32_t) height + 1;
+        y = obry - (int) height + 1;
       } else {
-        y = ((oheight - (int32_t) height) / 2) + otly;
+        y = ((oheight - (int) height) / 2) + otly;
       }
     }
 
@@ -6712,12 +6712,12 @@ void wid_mouse_hide(int value)
 void wid_mouse_warp(Widp w)
 {
   TRACE_AND_INDENT();
-  int32_t tlx, tly, brx, bry;
+  int tlx, tly, brx, bry;
 
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int32_t x = (tlx + brx) / 2.0;
-  int32_t y = (tly + bry) / 2.0;
+  int x = (tlx + brx) / 2.0;
+  int y = (tly + bry) / 2.0;
 
   sdl_mouse_warp(x, y);
 }
@@ -6725,12 +6725,12 @@ void wid_mouse_warp(Widp w)
 void wid_mouse_move(Widp w)
 {
   TRACE_AND_INDENT();
-  int32_t tlx, tly, brx, bry;
+  int tlx, tly, brx, bry;
 
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-  int32_t x = (tlx + brx) / 2.0;
-  int32_t y = (tly + bry) / 2.0;
+  int x = (tlx + brx) / 2.0;
+  int y = (tly + bry) / 2.0;
 
   saved_mouse_x = sdl.mouse_x;
   saved_mouse_y = sdl.mouse_y;
@@ -6868,11 +6868,11 @@ void wid_move_to_pct(Widp w, double x, double y)
   wid_move_delta(w, dx, dy);
 }
 
-void wid_move_to_abs(Widp w, int32_t x, int32_t y)
+void wid_move_to_abs(Widp w, int x, int y)
 {
   TRACE_AND_INDENT();
-  int32_t dx = x - wid_get_tl_x(w);
-  int32_t dy = y - wid_get_tl_y(w);
+  int dx = x - wid_get_tl_x(w);
+  int dy = y - wid_get_tl_y(w);
 
   wid_move_delta(w, dx, dy);
 }
@@ -6897,11 +6897,11 @@ void wid_move_to_pct_centered(Widp w, double x, double y)
   wid_move_delta(w, dx, dy);
 }
 
-void wid_move_to_abs_centered(Widp w, int32_t x, int32_t y)
+void wid_move_to_abs_centered(Widp w, int x, int y)
 {
   TRACE_AND_INDENT();
-  int32_t dx = x - wid_get_tl_x(w);
-  int32_t dy = y - wid_get_tl_y(w);
+  int dx = x - wid_get_tl_x(w);
+  int dy = y - wid_get_tl_y(w);
 
   dx -= (wid_get_br_x(w) - wid_get_tl_x(w)) / 2;
   dy -= (wid_get_br_y(w) - wid_get_tl_y(w)) / 2;
@@ -6909,8 +6909,8 @@ void wid_move_to_abs_centered(Widp w, int32_t x, int32_t y)
   wid_move_delta(w, dx, dy);
 }
 
-static void wid_move_enqueue(Widp w, int32_t moving_start_x, int32_t moving_start_y, int32_t moving_end_x,
-                             int32_t moving_end_y, uint32_t ms)
+static void wid_move_enqueue(Widp w, int moving_start_x, int moving_start_y, int moving_end_x,
+                             int moving_end_y, uint32_t ms)
 {
   TRACE_AND_INDENT();
   w->moving_start.x  = moving_start_x;
@@ -6986,17 +6986,17 @@ void wid_move_to_pct_in(Widp w, double x, double y, uint32_t ms)
   wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 
-void wid_move_to_abs_in(Widp w, int32_t x, int32_t y, uint32_t ms)
+void wid_move_to_abs_in(Widp w, int x, int y, uint32_t ms)
 {
   TRACE_AND_INDENT();
   wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 
-void wid_move_delta_in(Widp w, int32_t dx, int32_t dy, uint32_t ms)
+void wid_move_delta_in(Widp w, int dx, int dy, uint32_t ms)
 {
   TRACE_AND_INDENT();
-  int32_t x = wid_get_tl_x(w);
-  int32_t y = wid_get_tl_y(w);
+  int x = wid_get_tl_x(w);
+  int y = wid_get_tl_y(w);
 
   wid_move_enqueue(w, x, y, x + dx, y + dy, ms);
 }
@@ -7027,7 +7027,7 @@ void wid_move_to_pct_centered_in(Widp w, double x, double y, uint32_t ms)
   wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 
-void wid_move_to_abs_centered_in(Widp w, int32_t x, int32_t y, uint32_t ms)
+void wid_move_to_abs_centered_in(Widp w, int x, int y, uint32_t ms)
 {
   TRACE_AND_INDENT();
   x -= (wid_get_br_x(w) - wid_get_tl_x(w)) / 2;
@@ -7036,7 +7036,7 @@ void wid_move_to_abs_centered_in(Widp w, int32_t x, int32_t y, uint32_t ms)
   wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 
-void wid_move_to_centered_in(Widp w, int32_t x, int32_t y, uint32_t ms)
+void wid_move_to_centered_in(Widp w, int x, int y, uint32_t ms)
 {
   TRACE_AND_INDENT();
   wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);

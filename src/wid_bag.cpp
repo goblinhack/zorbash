@@ -147,7 +147,7 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
   wid_inventory_select_requested(t);
 }
 
-uint8_t wid_in_transit_item_place(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   DBG3("Place in transit item");
@@ -508,7 +508,7 @@ uint8_t wid_in_transit_item_drop(void)
   return true;
 }
 
-uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_bag_item_mouse_up(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   DBG3("Mouse down, item select");
@@ -531,7 +531,7 @@ uint8_t wid_bag_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-uint8_t wid_bag_item_mouse_held(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_bag_item_mouse_held(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   DBG3("Mouse held down, item select");
@@ -659,7 +659,7 @@ bool Game::wid_bag_move_item(Thingp t)
   return true;
 }
 
-void wid_bag_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_bag_item_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   if (game->in_transit_item) {
     return;

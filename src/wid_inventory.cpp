@@ -67,7 +67,7 @@ bool wid_inventory_init(void)
   return wid_inventory_create(nullptr, nullptr);
 }
 
-uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_right_bar_inventory_open(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: open");
   TRACE_AND_INDENT();
@@ -84,7 +84,7 @@ uint8_t wid_right_bar_inventory_open(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-uint8_t wid_inventory_close(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_inventory_close(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: close");
   TRACE_AND_INDENT();
@@ -93,7 +93,7 @@ uint8_t wid_inventory_close(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-void wid_inventory_mouse_over_tab_bag1(Widp w, int32_t x, int32_t y, int32_t wheelx, int32_t wheely)
+void wid_inventory_mouse_over_tab_bag1(Widp w, int x, int y, int wheelx, int wheely)
 {
   DBG2("Inventory: bag1");
   TRACE_AND_INDENT();
@@ -114,7 +114,7 @@ void wid_inventory_mouse_over_tab_bag1(Widp w, int32_t x, int32_t y, int32_t whe
   wid_inventory_init();
 }
 
-void wid_inventory_mouse_over_tab_bag2(Widp w, int32_t x, int32_t y, int32_t wheelx, int32_t wheely)
+void wid_inventory_mouse_over_tab_bag2(Widp w, int x, int y, int wheelx, int wheely)
 {
   DBG2("Inventory: bag2");
   TRACE_AND_INDENT();
@@ -164,7 +164,7 @@ uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
   return false;
 }
 
-uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_inventory_item_option_use(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options use");
   TRACE_AND_INDENT();
@@ -209,7 +209,7 @@ uint8_t wid_inventory_item_option_use(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-uint8_t wid_inventory_item_option_use_radial(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_inventory_item_option_use_radial(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options use radial");
   TRACE_AND_INDENT();
@@ -256,7 +256,7 @@ uint8_t wid_inventory_item_option_use_radial(Widp w, int32_t x, int32_t y, uint3
   return true;
 }
 
-uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_inventory_item_option_eat(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options eat");
   TRACE_AND_INDENT();
@@ -302,7 +302,7 @@ uint8_t wid_inventory_item_option_eat(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_inventory_item_option_throw(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options throw");
   TRACE_AND_INDENT();
@@ -347,7 +347,7 @@ uint8_t wid_inventory_item_option_throw(Widp w, int32_t x, int32_t y, uint32_t b
   return true;
 }
 
-uint8_t wid_inventory_item_option_drop(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_inventory_item_option_drop(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options drop");
   TRACE_AND_INDENT();
@@ -726,7 +726,7 @@ bool wid_inventory_select(Thingp selected)
   return wid_inventory_create(selected, wid_inventory_thing_over);
 }
 
-void wid_slot_item_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_slot_item_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
   if (game->in_transit_item) {
@@ -766,7 +766,7 @@ void wid_slot_item_mouse_over_end(Widp w)
   BOTCON(" ");
 }
 
-uint8_t wid_slot_item_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t wid_slot_item_mouse_up(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Mouse down, item select");
   TRACE_AND_INDENT();

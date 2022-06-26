@@ -660,7 +660,7 @@ static void wid_topcon_replace(Widp w, std::wstring str)
 static void wid_topcon_log_(std::wstring s)
 {
   TRACE_NO_INDENT();
-  static int32_t log_wid_topcon_buffered_lines;
+  static int log_wid_topcon_buffered_lines;
 
   if (! s.size()) {
     return;
@@ -795,7 +795,7 @@ static void wid_topcon_wid_create(void)
 
   TRACE_NO_INDENT();
   {
-    int32_t row;
+    int row;
     int     row_bottom = h;
 
     Widp child {};

@@ -93,7 +93,7 @@ void wid_botcon_clear(void)
 static void wid_botcon_log_(std::wstring s)
 {
   TRACE_AND_INDENT();
-  static int32_t log_wid_botcon_buffered_lines;
+  static int log_wid_botcon_buffered_lines;
 
   wid_botcon_reset_scroll();
 
@@ -202,7 +202,7 @@ static void wid_botcon_wid_create(void)
   }
 
   {
-    int32_t row;
+    int row;
     int     row_bottom = h - 1;
 
     Widp child {};

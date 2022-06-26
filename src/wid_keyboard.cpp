@@ -277,7 +277,7 @@ static uint8_t wid_keyboard_mouse_event(Widp w, int focusx, int focusy)
   return true;
 }
 
-static uint8_t wid_keyboard_button_mouse_event(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_keyboard_button_mouse_event(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   int focus  = wid_get_int_context(w);
@@ -401,7 +401,7 @@ static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_keyboard_parent_joy_button(Widp w, int32_t x, int32_t y)
+static uint8_t wid_keyboard_parent_joy_button(Widp w, int x, int y)
 {
   TRACE_AND_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
@@ -519,7 +519,7 @@ static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key)
   return false;
 }
 
-static uint8_t wid_keyboard_button_joy_button_event(Widp w, int32_t x, int32_t y)
+static uint8_t wid_keyboard_button_joy_button_event(Widp w, int x, int y)
 {
   TRACE_AND_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
@@ -639,7 +639,7 @@ static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key)
   return false;
 }
 
-static void wid_keyboard_mouse_over(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_keyboard_mouse_over(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);

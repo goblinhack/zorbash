@@ -25,7 +25,7 @@ uint8_t wid_buffbox_init(void)
   return true;
 }
 
-void wid_buffbox_mouse_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_buffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
   DBG3("buffbox: Begin over buffbox");

@@ -44,7 +44,7 @@ bool wid_rightbar_init(void)
   return wid_rightbar_create();
 }
 
-void wid_rightbar_stats_over_def_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_stats_over_def_b(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -52,10 +52,10 @@ void wid_rightbar_stats_over_def_b(Widp w, int32_t relx, int32_t rely, int32_t w
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 40;
@@ -112,7 +112,7 @@ void wid_rightbar_stats_over_def_b(Widp w, int32_t relx, int32_t rely, int32_t w
   game->wid_thing_info_create(level->player);
 }
 
-void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_stats_over_stat_str_b(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -120,10 +120,10 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rely, int3
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 40;
@@ -178,7 +178,7 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int32_t relx, int32_t rely, int3
   game->wid_thing_info_create(level->player);
 }
 
-void wid_rightbar_stats_over_stat_att_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_stats_over_stat_att_b(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -186,10 +186,10 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int32_t relx, int32_t rely, int3
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 40;
@@ -245,7 +245,7 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int32_t relx, int32_t rely, int3
   game->wid_thing_info_create(level->player);
 }
 
-void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_stats_over_stat_con_b(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -253,10 +253,10 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rely, int3
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 40;
@@ -315,7 +315,7 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int32_t relx, int32_t rely, int3
   game->wid_thing_info_create(level->player);
 }
 
-void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_stats_over_stat_dex_b(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -323,10 +323,10 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rely, int3
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 40;
@@ -386,7 +386,7 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int32_t relx, int32_t rely, int3
   game->wid_thing_info_create(level->player);
 }
 
-void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_stats_over_stat_luck_b(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -394,10 +394,10 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int32_t relx, int32_t rely, int
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 40;
@@ -464,7 +464,7 @@ void wid_rightbar_stats_over_popup_e(Widp w)
   wid_rightbar_popup = nullptr;
 }
 
-void wid_rightbar_inventory_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_inventory_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
   DBG2("Inventory: Begin over inventory");
@@ -550,7 +550,7 @@ void wid_rightbar_inventory_over_end(Widp w)
   //
 }
 
-void wid_rightbar_stats_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+void wid_rightbar_stats_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
   DBG2("Stats: Begin over inventory");

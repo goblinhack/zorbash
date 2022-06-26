@@ -852,10 +852,10 @@ void config_game_gfx_update(void)
 
   if (g_opt_ascii) {
     if (wid_asciimap) {
-      int32_t tlx;
-      int32_t tly;
-      int32_t brx;
-      int32_t bry;
+      int tlx;
+      int tly;
+      int brx;
+      int bry;
       wid_get_tl_x_tl_y_br_x_br_y(wid_asciimap, &tlx, &tly, &brx, &bry);
       TILES_VISIBLE_ACROSS = brx - tlx + 1;
       TILES_VISIBLE_DOWN   = bry - tly + 1;

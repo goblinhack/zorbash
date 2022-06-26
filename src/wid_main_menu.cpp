@@ -39,14 +39,14 @@ void wid_main_menu_hide(void)
   wid_hide(wid_main_menu_window->wid_popup_container);
 }
 
-static uint8_t wid_main_menu_load_game(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_load_game(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->wid_load_select();
   return false;
 }
 
-static uint8_t wid_main_menu_config(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_config(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->wid_config_top_menu();
@@ -54,7 +54,7 @@ static uint8_t wid_main_menu_config(Widp w, int32_t x, int32_t y, uint32_t butto
   return false;
 }
 
-static uint8_t game_menu_new_game(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t game_menu_new_game(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_main_menu_hide();
@@ -63,7 +63,7 @@ static uint8_t game_menu_new_game(Widp w, int32_t x, int32_t y, uint32_t button)
   return false;
 }
 
-static uint8_t wid_choose_player_name(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_choose_player_name(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->wid_choose_player_name_select();
@@ -71,7 +71,7 @@ static uint8_t wid_choose_player_name(Widp w, int32_t x, int32_t y, uint32_t but
   return false;
 }
 
-static uint8_t wid_main_menu_credits_game(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_credits_game(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->wid_credits_select();
@@ -79,7 +79,7 @@ static uint8_t wid_main_menu_credits_game(Widp w, int32_t x, int32_t y, uint32_t
   return false;
 }
 
-static uint8_t wid_main_menu_quit_game(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_quit_game(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->quit_select();
@@ -87,7 +87,7 @@ static uint8_t wid_main_menu_quit_game(Widp w, int32_t x, int32_t y, uint32_t bu
   return false;
 }
 
-static uint8_t wid_main_menu_hiscores(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_main_menu_hiscores(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   game->wid_hiscores_show();

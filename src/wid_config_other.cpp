@@ -22,7 +22,7 @@ static void wid_config_other_destroy(void)
   config_changed          = false;
 }
 
-static uint8_t wid_config_other_cancel(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_other_cancel(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   CON("INF: Reload config");
@@ -36,7 +36,7 @@ static uint8_t wid_config_other_cancel(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static uint8_t wid_config_other_save(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_other_save(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   CON("INF: Save config");
@@ -46,7 +46,7 @@ static uint8_t wid_config_other_save(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_other_back(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_other_back(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_config_other_destroy();
@@ -54,7 +54,7 @@ static uint8_t wid_config_other_back(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static uint8_t wid_config_debug_mode_toggle(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_debug_mode_toggle(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -66,7 +66,7 @@ static uint8_t wid_config_debug_mode_toggle(Widp w, int32_t x, int32_t y, uint32
   return true;
 }
 
-static uint8_t wid_config_other_sdl_delay_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_other_sdl_delay_incr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -76,7 +76,7 @@ static uint8_t wid_config_other_sdl_delay_incr(Widp w, int32_t x, int32_t y, uin
   return true;
 }
 
-static uint8_t wid_config_other_sdl_delay_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_other_sdl_delay_decr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -86,7 +86,7 @@ static uint8_t wid_config_other_sdl_delay_decr(Widp w, int32_t x, int32_t y, uin
   return true;
 }
 
-static uint8_t wid_config_other_snapshot_freq_incr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_other_snapshot_freq_incr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;
@@ -96,7 +96,7 @@ static uint8_t wid_config_other_snapshot_freq_incr(Widp w, int32_t x, int32_t y,
   return true;
 }
 
-static uint8_t wid_config_other_snapshot_freq_decr(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_config_other_snapshot_freq_decr(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   config_changed = true;

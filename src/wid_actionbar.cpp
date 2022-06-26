@@ -99,7 +99,7 @@ void wid_actionbar_fini(void)
   }
 }
 
-static uint8_t wid_actionbar_quit(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_quit(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar quit");
   TRACE_NO_INDENT();
@@ -114,7 +114,7 @@ static uint8_t wid_actionbar_quit(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_quit_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_quit_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -122,10 +122,10 @@ static void wid_actionbar_quit_over_begin(Widp w, int32_t relx, int32_t rely, in
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -207,14 +207,14 @@ void wid_actionbar_robot_mode_off(void)
   wid_actionbar_init();
 }
 
-static uint8_t wid_actionbar_robot(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_robot(Widp w, int x, int y, uint32_t button)
 {
   TRACE_NO_INDENT();
   wid_actionbar_robot_mode_toggle();
   return true;
 }
 
-static void wid_actionbar_robot_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_robot_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -222,10 +222,10 @@ static void wid_actionbar_robot_over_begin(Widp w, int32_t relx, int32_t rely, i
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -276,7 +276,7 @@ static void wid_actionbar_ai_tick(Widp w)
   game->robot_mode_tick_requested = true;
 }
 
-static uint8_t wid_actionbar_close(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_close(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar close");
   TRACE_NO_INDENT();
@@ -299,14 +299,14 @@ static uint8_t wid_actionbar_close(Widp w, int32_t x, int32_t y, uint32_t button
   return true;
 }
 
-static void wid_actionbar_close_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_close_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 }
 
 static void wid_actionbar_close_over_end(Widp w) { TRACE_NO_INDENT(); }
 
-static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_load(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar load");
   TRACE_NO_INDENT();
@@ -335,7 +335,7 @@ static uint8_t wid_actionbar_load(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_load_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_load_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -343,10 +343,10 @@ static void wid_actionbar_load_over_begin(Widp w, int32_t relx, int32_t rely, in
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -383,7 +383,7 @@ static void wid_actionbar_load_over_end(Widp w)
   wid_over_load = nullptr;
 }
 
-static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_save(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar save");
   TRACE_NO_INDENT();
@@ -412,7 +412,7 @@ static uint8_t wid_actionbar_save(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_save_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_save_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -420,10 +420,10 @@ static void wid_actionbar_save_over_begin(Widp w, int32_t relx, int32_t rely, in
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -460,7 +460,7 @@ static void wid_actionbar_save_over_end(Widp w)
   wid_over_save = nullptr;
 }
 
-static uint8_t wid_actionbar_ascend(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_ascend(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar ascend");
   TRACE_NO_INDENT();
@@ -487,7 +487,7 @@ static uint8_t wid_actionbar_ascend(Widp w, int32_t x, int32_t y, uint32_t butto
   return true;
 }
 
-static void wid_actionbar_ascend_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_ascend_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -495,10 +495,10 @@ static void wid_actionbar_ascend_over_begin(Widp w, int32_t relx, int32_t rely, 
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -535,7 +535,7 @@ static void wid_actionbar_ascend_over_end(Widp w)
   wid_over_ascend = nullptr;
 }
 
-static uint8_t wid_actionbar_descend(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_descend(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar descend");
   TRACE_NO_INDENT();
@@ -562,7 +562,7 @@ static uint8_t wid_actionbar_descend(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static void wid_actionbar_descend_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_descend_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -570,10 +570,10 @@ static void wid_actionbar_descend_over_begin(Widp w, int32_t relx, int32_t rely,
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -610,7 +610,7 @@ static void wid_actionbar_descend_over_end(Widp w)
   wid_over_descend = nullptr;
 }
 
-static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_inventory(Widp w, int x, int y, uint32_t button)
 {
   DBG("Actionbar inventory");
   TRACE_NO_INDENT();
@@ -645,7 +645,7 @@ static uint8_t wid_actionbar_inventory(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static void wid_actionbar_inventory_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_inventory_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -653,10 +653,10 @@ static void wid_actionbar_inventory_over_begin(Widp w, int32_t relx, int32_t rel
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -693,7 +693,7 @@ static void wid_actionbar_inventory_over_end(Widp w)
   wid_over_inventory = nullptr;
 }
 
-static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_collect(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar collect");
   TRACE_NO_INDENT();
@@ -731,7 +731,7 @@ static uint8_t wid_actionbar_collect(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static void wid_actionbar_collect_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_collect_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
@@ -739,10 +739,10 @@ static void wid_actionbar_collect_over_begin(Widp w, int32_t relx, int32_t rely,
     return;
   }
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -778,7 +778,7 @@ static void wid_actionbar_collect_over_end(Widp w)
   wid_over_collect = nullptr;
 }
 
-static uint8_t wid_actionbar_wait(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_wait(Widp w, int x, int y, uint32_t button)
 {
   DBG("Actionbar wait");
   TRACE_NO_INDENT();
@@ -809,7 +809,7 @@ static uint8_t wid_actionbar_wait(Widp w, int32_t x, int32_t y, uint32_t button)
   return true;
 }
 
-static uint8_t wid_actionbar_repeat_wait(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_repeat_wait(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar wait");
   TRACE_NO_INDENT();
@@ -848,14 +848,14 @@ static uint8_t wid_actionbar_repeat_wait(Widp w, int32_t x, int32_t y, uint32_t 
   return true;
 }
 
-static void wid_actionbar_wait_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_wait_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -896,7 +896,7 @@ static void wid_actionbar_wait_over_end(Widp w)
   wid_over_wait = nullptr;
 }
 
-static uint8_t wid_actionbar_zoom_out(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_zoom_out(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar zoom out");
   TRACE_NO_INDENT();
@@ -910,7 +910,7 @@ static uint8_t wid_actionbar_zoom_out(Widp w, int32_t x, int32_t y, uint32_t but
   return true;
 }
 
-static uint8_t wid_actionbar_zoom_in(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_zoom_in(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar zoom in");
   TRACE_NO_INDENT();
@@ -924,14 +924,14 @@ static uint8_t wid_actionbar_zoom_in(Widp w, int32_t x, int32_t y, uint32_t butt
   return true;
 }
 
-static void wid_actionbar_zoom_in_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_zoom_in_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -958,14 +958,14 @@ static void wid_actionbar_zoom_in_over_begin(Widp w, int32_t relx, int32_t rely,
   wid_over_zoom_in->compress();
 }
 
-static void wid_actionbar_zoom_out_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_zoom_out_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;
@@ -1008,7 +1008,7 @@ static void wid_actionbar_zoom_out_over_end(Widp w)
   wid_over_zoom_out = nullptr;
 }
 
-static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_actionbar_configure(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Actionbar configure");
   TRACE_NO_INDENT();
@@ -1029,14 +1029,14 @@ static uint8_t wid_actionbar_configure(Widp w, int32_t x, int32_t y, uint32_t bu
   return true;
 }
 
-static void wid_actionbar_configure_over_begin(Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+static void wid_actionbar_configure_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
 
-  int32_t tlx;
-  int32_t tly;
-  int32_t brx;
-  int32_t bry;
+  int tlx;
+  int tly;
+  int brx;
+  int bry;
   wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
   int width  = 32;

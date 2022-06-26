@@ -37,8 +37,8 @@ char *strprepend(const char *in, const char *prepend);
 int length_without_format(const std::string &);
 int length_without_format(const std::wstring &);
 
-int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used, const char *fmt, ...);
-int32_t strisregexp(const char *in);
+int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...);
+int strisregexp(const char *in);
 
 shared_vector_string  split(const char *in, int max_line_len);
 shared_vector_string  split(const std::string &, int max_line_len);

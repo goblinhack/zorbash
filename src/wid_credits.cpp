@@ -69,7 +69,7 @@ static uint8_t wid_credits_key_down(Widp w, const struct SDL_Keysym *key)
   return true;
 }
 
-static uint8_t wid_credits_mouse_up(Widp w, int32_t x, int32_t y, uint32_t button)
+static uint8_t wid_credits_mouse_up(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_credits_destroy();
