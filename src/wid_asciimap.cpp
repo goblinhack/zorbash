@@ -26,7 +26,6 @@ static void wid_asciimap_display(Widp w, point tl, point br);
 void wid_asciimap_fini(void)
 {
   TRACE_AND_INDENT();
-  CON("OLD %p", wid_asciimap);
   wid_destroy(&wid_asciimap);
 }
 
