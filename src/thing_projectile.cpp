@@ -61,6 +61,10 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
     die("No projectile name");
   }
 
+  if (is_player()) {
+    msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+  }
+
   //
   // Projectiles hit the first thing in the way. But ignore if it hits
   // ourselves. i.e. if we're in foilage

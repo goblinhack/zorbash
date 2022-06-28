@@ -36,8 +36,7 @@ def tp_init(name, tiles=[]):
     # end sort marker
 
     for t in tiles:
-        my.tile(self,
-                ascii_fg_char="cross", ascii_fg_col_name="white", tile=t)
+        my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", tile=t)
 
     my.tp_update(self)
 

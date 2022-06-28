@@ -7,6 +7,7 @@
 #include <math.h>
 #include <vector>
 
+#include "my_ascii.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_point.hpp"
@@ -59,40 +60,27 @@ void Level::display_ascii_projectiles(point tl, point br)
     auto start = p.info.pixel_start - p.info.pixel_map_at;
     auto stop  = p.info.pixel_stop - p.info.pixel_map_at;
 
-    auto   dist  = distance(start, stop);
-    auto   steps = (int) ceil(dist) / TILE_WIDTH;
-    fpoint diff(stop.x - start.x, stop.y - start.y);
-    fpoint step       = diff / steps;
-    float  ninety_deg = RAD_360 / 4;
-
-    fpoint perp = step;
-    perp        = rotate_radians(perp, ninety_deg);
-    perp /= 2;
-
     int frame = (int) (((float) Projectile::max_frames) * dt);
     if (frame >= Projectile::max_frames) {
       frame = Projectile::max_frames - 1;
     }
 
-    fpoint mid(start.x + (diff.x * dt), start.y + (diff.y * dt));
+    auto tiles = &t->tp()->tiles;
+    auto tile  = tile_n(tiles, frame);
+    if (tile) {
+      int x0 = tl.x + (start.x - minx);
+      int y0 = tl.y + (start.y - miny);
+      int x1 = tl.x + (stop.x - minx);
+      int y1 = tl.y + (stop.y - miny);
 
-    point tl = make_point(mid - perp - step / 2);
-    point tr = make_point(mid - perp + step / 2);
-    point bl = make_point(mid + perp - step / 2);
-    point br = make_point(mid + perp + step / 2);
+      int x = x0 + (frame * ((float) (x1 - x0) / (float) Projectile::max_frames));
+      int y = y0 + (frame * ((float) (y1 - y0) / (float) Projectile::max_frames));
 
-    if (! g_opt_ascii) {
-      tile_blit(get(p.tiles, frame), tl, tr, bl, br);
+      color c = tile->ascii_fg_col_value;
+      c.a     = tile->ascii_alpha;
+      ascii_set_fg4(x, y, tile->ascii_fg_char);
+      ascii_set_fg4(x, y, c);
     }
-#if 0
-      //
-      // Debug
-      //
-      gl_blitline(tl.x, tl.y, tr.x, tr.y);
-      gl_blitline(tr.x, tr.y, br.x, br.y);
-      gl_blitline(br.x, br.y, bl.x, bl.y);
-      gl_blitline(bl.x, bl.y, tl.x, tl.y);
-#endif
 
     return false;
   });

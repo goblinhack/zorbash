@@ -358,9 +358,9 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
         //
         // msg("%s is broken.", item->text_The().c_str());
       } else if (item->is_ring()) {
-        msg("You slip off the %s.", item->text_the().c_str());
+        msg("You slip off %s.", item->text_the().c_str());
       } else if (item->is_weapon()) {
-        msg("You unwield the %s.", item->text_the().c_str());
+        msg("You unwield %s.", item->text_the().c_str());
       } else {
         msg("You take off on %s.", item->text_the().c_str());
       }
@@ -470,9 +470,9 @@ bool Thing::equip(Thingp item, int equip)
 
   if (is_player()) {
     if (item->is_ring()) {
-      msg("You slip on the %s.", item->text_the().c_str());
+      msg("You slip on %s.", item->text_the().c_str());
     } else if (item->is_weapon()) {
-      msg("You wield the %s.", item->text_the().c_str());
+      msg("You wield %s.", item->text_the().c_str());
     } else {
       msg("You put on %s.", item->text_the().c_str());
     }

@@ -83,7 +83,7 @@ void Level::display_ascii_lasers(point tl, point br)
     }
 
     return false;
-    });
+  });
 
   all_lasers.erase(e, all_lasers.end());
 }
