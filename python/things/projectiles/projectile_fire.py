@@ -7,7 +7,7 @@ def on_born(me, x, y):
     for thing in my.level_get_all(me, selection_x, selection_y):
         if my.thing_possible_to_attack(me, thing):
             my.thing_hit(me, thing)
-    my.level_spawn_at_thing(me, "explosion_fire")
+    my.level_spawn_thing_at(me, "explosion_fire")
 
 
 #

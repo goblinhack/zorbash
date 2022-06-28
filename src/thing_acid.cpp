@@ -77,4 +77,3 @@ int Thing::is_acid(void)
   TRACE_NO_INDENT();
   return (tp()->is_acid());
 }
-

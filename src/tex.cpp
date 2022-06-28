@@ -46,7 +46,7 @@ public:
   std::string  name;
   uint32_t     width              = {};
   uint32_t     height             = {};
-  int      gl_surface_binding = {};
+  int          gl_surface_binding = {};
   SDL_Surface *surface            = {};
 };
 
@@ -88,7 +88,7 @@ static unsigned char *load_raw_image(std::string filename, int *x, int *y, int *
   TRACE_AND_INDENT();
   unsigned char *file_data;
   unsigned char *image_data = 0;
-  int        len;
+  int            len;
 
   file_data = file_load(filename.c_str(), &len);
   if (! file_data) {
@@ -119,7 +119,7 @@ static SDL_Surface *load_image(std::string filename)
   uint32_t       rmask, gmask, bmask, amask;
   unsigned char *image_data;
   SDL_Surface   *surf;
-  int        x, y, comp;
+  int            x, y, comp;
 
   image_data = load_raw_image(filename, &x, &y, &comp);
   if (! image_data) {
@@ -177,7 +177,7 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
   unsigned char *image_data;
   SDL_Surface   *surf1 = 0;
   SDL_Surface   *surf2 = 0;
-  int        x, y, comp;
+  int            x, y, comp;
 
   image_data = load_raw_image(filename, &x, &y, &comp);
   if (! image_data) {
@@ -324,8 +324,8 @@ static std::pair< Texp, Texp > tex_sprite(SDL_Surface *in, std::string file, std
   uint32_t owidth  = iwidth;
   uint32_t oheight = iheight;
 
-  int  ix;
-  int  iy;
+  int      ix;
+  int      iy;
   uint32_t ox;
   uint32_t oy;
 

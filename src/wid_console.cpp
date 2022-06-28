@@ -15,9 +15,9 @@
 #include "my_wid_console.hpp"
 #include "slre.hpp"
 
-static int wid_console_inited;
-static int wid_console_exiting;
-static void    wid_console_wid_create(void);
+static int  wid_console_inited;
+static int  wid_console_exiting;
+static void wid_console_wid_create(void);
 
 Widp wid_console_container {};
 Widp wid_console_vert_scroll {};
@@ -208,7 +208,7 @@ static void wid_console_wid_create(void)
 
   {
     int row;
-    int     row_bottom = UI_CONSOLE_HEIGHT - 1;
+    int row_bottom = UI_CONSOLE_HEIGHT - 1;
 
     Widp child {};
     Widp prev {};

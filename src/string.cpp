@@ -3,11 +3,11 @@
 // See the README.md file for license info.
 //
 
+#include <algorithm>
 #include <iostream>
 #include <libgen.h>
 #include <sstream>
 #include <string>
-#include <algorithm>
 
 #include "my_ptrcheck.hpp"
 #include "my_sdl.hpp"
@@ -110,9 +110,9 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
   TRACE_AND_INDENT();
   char       *buf;
   const char *at;
-  int     newlen;
-  int     oldlen;
-  int     len;
+  int         newlen;
+  int         oldlen;
+  int         len;
 
   if (! in || ! look_for || ! replace_with) {
     return 0;
@@ -158,9 +158,9 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
 char *strappend(const char *in, const char *append)
 {
   TRACE_AND_INDENT();
-  char   *buf;
-  int newlen;
-  int len;
+  char *buf;
+  int   newlen;
+  int   len;
 
   if (! in || ! append) {
     return 0;
@@ -187,9 +187,9 @@ char *strappend(const char *in, const char *append)
 char *strprepend(const char *in, const char *prepend)
 {
   TRACE_AND_INDENT();
-  char   *buf;
-  int newlen;
-  int len;
+  char *buf;
+  int   newlen;
+  int   len;
 
   if (! in || ! prepend) {
     return 0;
@@ -278,15 +278,15 @@ int strisregexp(const char *in)
 
   while ((c = *a++)) {
     switch (c) {
-      case '[' : return 1;
-      case ']' : return 1;
-      case '{' : return 1;
-      case '}' : return 1;
-      case '+' : return 1;
-      case '$' : return 1;
-      case '^' : return 1;
-      case '-' : return 1;
-      case '*' : return 1;
+      case '[': return 1;
+      case ']': return 1;
+      case '{': return 1;
+      case '}': return 1;
+      case '+': return 1;
+      case '$': return 1;
+      case '^': return 1;
+      case '-': return 1;
+      case '*': return 1;
     }
   }
 
@@ -333,14 +333,14 @@ void strnoescape(char *uncompressed)
     }
 
     switch (*s++) {
-      case 'n' : *t++ = '\n'; break;
-      case 't' : *t++ = '\t'; break;
-      case '%' : *t++ = '%'; break;
-      case '#' : *t++ = '@'; break;
-      case '\"' : *t++ = '\"'; break;
-      case '\'' : *t++ = '\''; break;
-      case '\\' : *t++ = '\\'; break;
-      default :
+      case 'n': *t++ = '\n'; break;
+      case 't': *t++ = '\t'; break;
+      case '%': *t++ = '%'; break;
+      case '#': *t++ = '@'; break;
+      case '\"': *t++ = '\"'; break;
+      case '\'': *t++ = '\''; break;
+      case '\\': *t++ = '\\'; break;
+      default:
         {
           char *o = s - 1;
           char  orig;
@@ -1223,9 +1223,9 @@ Tpp string2tp(const std::wstring &s, int *len)
 int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
 {
   TRACE_AND_INDENT();
-  int freespace;
-  int needspace;
-  int usedspace;
+  int     freespace;
+  int     needspace;
+  int     usedspace;
   va_list ap;
   char   *tmp;
 

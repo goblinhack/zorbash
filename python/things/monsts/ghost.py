@@ -8,7 +8,7 @@ def on_you_nat_attack(me, x, y):
 
 
 def on_death(me, x, y):
-    my.level_spawn_at_thing(me, "ghost_explosion")
+    my.level_spawn_thing_at(me, "ghost_explosion")
 
 
 def tp_init(name, text_long_name):

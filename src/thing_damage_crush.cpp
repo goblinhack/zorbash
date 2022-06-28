@@ -118,8 +118,8 @@ int Thing::on_receiving_dmg_crush(Thingp hitter, Thingp real_hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_receiving_dmg_crush call [%s] expected mod:function, got %d elems",
-      on_receiving_dmg_crush.c_str(), (int) on_receiving_dmg_crush.size());
+  ERR("Bad on_receiving_dmg_crush call [%s] expected mod:function, got %d elems", on_receiving_dmg_crush.c_str(),
+      (int) on_receiving_dmg_crush.size());
 
   return damage;
 }
@@ -194,8 +194,8 @@ int Thing::on_attacking_dmg_crush(Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_attacking_dmg_crush call [%s] expected mod:function, got %d elems",
-      on_attacking_dmg_crush.c_str(), (int) on_attacking_dmg_crush.size());
+  ERR("Bad on_attacking_dmg_crush call [%s] expected mod:function, got %d elems", on_attacking_dmg_crush.c_str(),
+      (int) on_attacking_dmg_crush.size());
 
   return damage;
 }

@@ -1646,7 +1646,7 @@ PyObject *level_spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyO
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_spawn_thing_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   char    *what = nullptr;
@@ -1689,7 +1689,7 @@ PyObject *level_spawn_at_thing(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_at_thing_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *level_spawn_thing_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   char    *what = nullptr;

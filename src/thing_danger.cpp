@@ -14,13 +14,13 @@ int Tp::get_danger_level(void)
   danger_level = health_initial_max_roll() / 10;
 
   if (is_undead()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_lifeless()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_sticky()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_spiderweb()) {
     danger_level += 5;
@@ -98,13 +98,13 @@ int Thing::danger_initial_level(void)
   danger_level = health_max() / 10;
 
   if (is_undead()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_lifeless()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_sticky()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_spiderweb()) {
     danger_level += 5;
@@ -193,13 +193,13 @@ int Thing::danger_current_level(void)
   danger_level = health() / 10;
 
   if (is_undead()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_lifeless()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_sticky()) {
-    danger_level ++;
+    danger_level++;
   }
   if (is_spiderweb()) {
     danger_level += 5;

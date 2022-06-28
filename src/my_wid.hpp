@@ -592,7 +592,7 @@ void wid_ignore_events_briefly(void);
 bool wid_some_recent_event_occurred(void);
 
 extern bool                                                              wid_mouse_two_clicks;
-extern const int                                                     wid_destroy_delay_ms;
+extern const int                                                         wid_destroy_delay_ms;
 extern int                                                               wid_mouse_visible;
 extern std::array< std::array< Widp, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX > wid_on_screen_at;
 extern ts_t                                                              wid_ignore_events_briefly_ts;
