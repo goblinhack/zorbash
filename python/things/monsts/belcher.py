@@ -12,7 +12,7 @@ def on_idle(me, x, y):
 
 
 def on_death(me, x, y):
-    my.level_spawn_at_thing(me, "green_splatter")
+    my.level_spawn_thing_at(me, "green_splatter")
 
 
 def tp_init(name, text_long_name, text_short_name):

@@ -4,9 +4,9 @@
 //
 
 #pragma once
-#include <vector>
 #include <algorithm>
 #include <random>
+#include <vector>
 
 //
 // Create a vector of numbers

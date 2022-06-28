@@ -203,7 +203,7 @@ static void wid_botcon_wid_create(void)
 
   {
     int row;
-    int     row_bottom = h - 1;
+    int row_bottom = h - 1;
 
     Widp child {};
     Widp prev {};

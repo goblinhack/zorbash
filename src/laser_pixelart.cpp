@@ -124,7 +124,7 @@ void Level::display_pixelart_lasers(point tl, point br)
     }
 
     return false;
-    });
+  });
 
   blit_flush();
 

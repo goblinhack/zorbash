@@ -141,4 +141,3 @@ void gfx_init7(void)
                   arr);
   }
 }
-

@@ -24,7 +24,7 @@ def on_death(me, x, y):
     else:
         if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "bones2"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones2")
-    my.level_spawn_at_thing(me, "mob_explosion")
+    my.level_spawn_thing_at(me, "mob_explosion")
 
 
 def tp_init(name, text_long_name):

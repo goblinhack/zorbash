@@ -796,7 +796,7 @@ static void wid_topcon_wid_create(void)
   TRACE_NO_INDENT();
   {
     int row;
-    int     row_bottom = h;
+    int row_bottom = h;
 
     Widp child {};
     Widp prev {};

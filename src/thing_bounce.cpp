@@ -51,7 +51,7 @@ float Thing::bounce_curr(void)
     return 0;
   }
 
-  float time_step = ((float) (t) - ts_bounce_begin()) / ((float) (ts_bounce_end()) - ts_bounce_begin());
+  float time_step = ((float) (t) -ts_bounce_begin()) / ((float) (ts_bounce_end()) - ts_bounce_begin());
 
   float height = 1.0;
 

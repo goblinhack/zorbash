@@ -3,7 +3,7 @@ import tp
 
 
 def on_born(me, x, y):
-    it = my.level_spawn_at_thing(me, "webball")
+    it = my.level_spawn_thing_at(me, "webball")
     if it != 0:
         my.thing_set_mob(me, it)
 

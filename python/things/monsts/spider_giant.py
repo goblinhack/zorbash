@@ -25,7 +25,7 @@ def on_death(me, x, y):
 
 
 def on_born(me, x, y):
-    it = my.level_spawn_at_thing(me, "spiderweb")
+    it = my.level_spawn_thing_at(me, "spiderweb")
     if it != 0:
         my.thing_set_mob(me, it)
 

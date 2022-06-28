@@ -142,12 +142,12 @@ private:
   int _gl_binding_mask {};
 
 public:
-  int gl_binding(void) const;
-  int gl_binding_black_and_white(void) const;
-  int gl_binding_mask(void) const;
-  void    set_gl_binding(int v);
-  void    set_gl_binding_black_and_white(int v);
-  void    set_gl_binding_mask(int v);
+  int  gl_binding(void) const;
+  int  gl_binding_black_and_white(void) const;
+  int  gl_binding_mask(void) const;
+  void set_gl_binding(int v);
+  void set_gl_binding_black_and_white(int v);
+  void set_gl_binding_mask(int v);
 };
 
 typedef class Tile *Tilep;

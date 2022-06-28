@@ -9,7 +9,7 @@ all: pre
 	(cd src; $(MAKE) $@)
 
 format:
-	git diff -U0 HEAD^ | clang-format-diff -i -p1
+	build/format.sh
 
 clean:
 	(cd src; $(MAKE) $@)

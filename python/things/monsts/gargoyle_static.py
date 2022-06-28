@@ -18,7 +18,7 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
         my.thing_speaks(me, "Roar! Free at last!")
         my.thing_popup(me, "Free!")
         my.thing_polymorph(me, "gargoyle_moving")
-        my.level_spawn_at_thing(me, "gargoyle_podium")
+        my.level_spawn_thing_at(me, "gargoyle_podium")
 
 
 def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):

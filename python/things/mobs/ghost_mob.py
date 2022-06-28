@@ -10,7 +10,7 @@ def on_idle_tick_freq_dice(me, x, y):
 
 
 def on_death(me, x, y):
-    my.level_spawn_at_thing(me, "mob_explosion")
+    my.level_spawn_thing_at(me, "mob_explosion")
 
 
 def tp_init(name, text_long_name):

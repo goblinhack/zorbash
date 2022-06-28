@@ -77,7 +77,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
 
-  y_at ++;
+  y_at++;
   {
     DBG2("Remake rightbar seed");
     TRACE_NO_INDENT();
@@ -269,7 +269,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
-  y_at ++;
+  y_at++;
 
   ///////////////////////////////////////////////////////////////////////////
   // CON

@@ -903,4 +903,3 @@ bool wid_inventory_create(Thingp selected, Thingp over)
     return wid_inventory_create_pixelart(selected, over);
   }
 }
-

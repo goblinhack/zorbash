@@ -8,11 +8,11 @@ def on_you_nat_attack(me, x, y):
 
 def on_idle(me, x, y):
     if not my.level_is_acid_at(me, x, y):
-        my.level_spawn_at_thing(me, "acid1")
+        my.level_spawn_thing_at(me, "acid1")
 
 
 def on_death(me, x, y):
-    my.level_spawn_at_thing(me, "green_splatter")
+    my.level_spawn_thing_at(me, "green_splatter")
 
 
 def explode(me, x, y):
@@ -21,9 +21,9 @@ def explode(me, x, y):
 
     my.thing_dead(me, "exploded")
     my.thing_msg(me, "The dungeon cleaner erupts in flaming goo!")
-    my.level_spawn_at_thing(me, "explosion_major")
+    my.level_spawn_thing_at(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")
-    my.level_spawn_at_thing(me, "fire")
+    my.level_spawn_thing_at(me, "fire")
 
 
 def on_fire(me, x, y):

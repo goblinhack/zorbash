@@ -1,8 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- need you fire the ... msg                                                                                                                    -->
-<!-- cannot test a wand on floor tile                                                                                                             -->
+<!-- sound fix needed for projectils                                                                                                              -->
 <!-- ascii check list - particles / projectiles / explosions                                                                                      -->
 <!-- ascii beast and treasure map                                                                                                                 -->
 <!-- ------                                                                                                                                       -->

@@ -64,7 +64,7 @@ public:
     WEAPON_CLASS_B      = ')',
     WEAPON_CLASS_C      = '-',
     WALL                = 'x',
-    WAND_OR_STAFF                = '/',
+    WAND_OR_STAFF       = '/',
     RING                = 'R',
   };
 

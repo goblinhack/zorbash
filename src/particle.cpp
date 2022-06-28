@@ -409,7 +409,7 @@ void Level::display_pixelart_external_particles(void)
     }
 
     return false;
-    });
+  });
   all_external_particles.erase(e, all_external_particles.end());
 
   blit_flush();

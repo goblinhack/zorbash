@@ -99,9 +99,9 @@ ts_t wid_last_mouse_motion;
 //
 // Widget moving
 //
-static Widp    wid_moving {};
-static int wid_moving_last_x;
-static int wid_moving_last_y;
+static Widp wid_moving {};
+static int  wid_moving_last_x;
+static int  wid_moving_last_y;
 
 static ts_t wid_time;
 
@@ -115,8 +115,7 @@ const ts_t wid_destroy_delay_ms = 200;
 //
 static void    wid_destroy_delay(Widp *wp, int delay);
 static uint8_t wid_scroll_trough_mouse_down(Widp w, int x, int y, uint32_t button);
-static uint8_t wid_scroll_trough_mouse_motion(Widp w, int x, int y, int relx, int rely,
-                                              int wheelx, int wheely);
+static uint8_t wid_scroll_trough_mouse_motion(Widp w, int x, int y, int relx, int rely, int wheelx, int wheely);
 static void    wid_find_first_focus(void);
 static void    wid_find_top_focus(void);
 static void    wid_destroy_immediate(Widp w);
@@ -830,8 +829,7 @@ static void wid_mouse_over_end(void)
   }
 }
 
-static uint8_t wid_mouse_over_begin(Widp w, uint32_t x, uint32_t y, int relx, int rely, int wheelx,
-                                    int wheely)
+static uint8_t wid_mouse_over_begin(Widp w, uint32_t x, uint32_t y, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
   if (! wid_mouse_visible) {
@@ -3558,8 +3556,7 @@ static uint8_t wid_scroll_trough_mouse_down(Widp w, int x, int y, uint32_t butto
   return true;
 }
 
-static uint8_t wid_scroll_trough_mouse_motion(Widp w, int x, int y, int relx, int rely,
-                                              int wheelx, int wheely)
+static uint8_t wid_scroll_trough_mouse_motion(Widp w, int x, int y, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_AND_INDENT();
   int dx;
@@ -6135,20 +6132,20 @@ static void wid_display(Widp w, uint8_t disable_scissor, uint8_t *updated_scisso
 {
   TRACE_AND_INDENT();
   wid_total_count++;
-  int clip_height = 0;
-  int clip_width  = 0;
+  int     clip_height = 0;
+  int     clip_width  = 0;
   uint8_t hidden;
   uint8_t always_hidden;
-  int owidth;
-  int oheight;
-  int otlx;
-  int otly;
-  int obrx;
-  int obry;
-  int tlx;
-  int tly;
-  int brx;
-  int bry;
+  int     owidth;
+  int     oheight;
+  int     otlx;
+  int     otly;
+  int     obrx;
+  int     obry;
+  int     tlx;
+  int     tly;
+  int     brx;
+  int     bry;
 #if 0
   Widp p {};
 #endif
@@ -6909,8 +6906,8 @@ void wid_move_to_abs_centered(Widp w, int x, int y)
   wid_move_delta(w, dx, dy);
 }
 
-static void wid_move_enqueue(Widp w, int moving_start_x, int moving_start_y, int moving_end_x,
-                             int moving_end_y, uint32_t ms)
+static void wid_move_enqueue(Widp w, int moving_start_x, int moving_start_y, int moving_end_x, int moving_end_y,
+                             uint32_t ms)
 {
   TRACE_AND_INDENT();
   w->moving_start.x  = moving_start_x;

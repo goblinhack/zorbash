@@ -76,7 +76,10 @@ void Level::describe(point p)
         // Allow snooping in debug mode
         //
       }
-      else { continue; }
+      else
+      {
+        continue;
+      }
     }
 
     if (! get(can_see_currently.can_see, x, y) && ! get(can_see_ever.can_see, x, y)) {
@@ -87,7 +90,10 @@ void Level::describe(point p)
         // Allow snooping in debug mode
         //
       }
-      else { continue; }
+      else
+      {
+        continue;
+      }
     }
 
     if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
@@ -135,7 +141,10 @@ void Level::describe(point p)
         // Allow snooping in debug mode
         //
       }
-      else { continue; }
+      else
+      {
+        continue;
+      }
     }
 
     if (! get(can_see_currently.can_see, x, y) && ! get(can_see_ever.can_see, x, y)) {
@@ -146,7 +155,10 @@ void Level::describe(point p)
         // Allow snooping in debug mode
         //
       }
-      else { continue; }
+      else
+      {
+        continue;
+      }
     }
 
     if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
@@ -202,7 +214,10 @@ void Level::describe(point p)
         // Allow snooping in debug mode
         //
       }
-      else { continue; }
+      else
+      {
+        continue;
+      }
     }
 
     if (! get(can_see_currently.can_see, x, y) && ! get(can_see_ever.can_see, x, y)) {
@@ -213,7 +228,10 @@ void Level::describe(point p)
         // Allow snooping in debug mode
         //
       }
-      else { continue; }
+      else
+      {
+        continue;
+      }
     }
 
     if (t->immediate_owner() || t->is_player() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {

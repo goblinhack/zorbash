@@ -299,10 +299,7 @@ static uint8_t wid_actionbar_close(Widp w, int x, int y, uint32_t button)
   return true;
 }
 
-static void wid_actionbar_close_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
-{
-  TRACE_NO_INDENT();
-}
+static void wid_actionbar_close_over_begin(Widp w, int relx, int rely, int wheelx, int wheely) { TRACE_NO_INDENT(); }
 
 static void wid_actionbar_close_over_end(Widp w) { TRACE_NO_INDENT(); }
 

@@ -118,8 +118,8 @@ int Thing::on_receiving_dmg_future2(Thingp hitter, Thingp real_hitter, int damag
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_receiving_dmg_future2 call [%s] expected mod:function, got %d elems",
-      on_receiving_dmg_future2.c_str(), (int) on_receiving_dmg_future2.size());
+  ERR("Bad on_receiving_dmg_future2 call [%s] expected mod:function, got %d elems", on_receiving_dmg_future2.c_str(),
+      (int) on_receiving_dmg_future2.size());
 
   return damage;
 }
@@ -194,8 +194,8 @@ int Thing::on_attacking_dmg_future2(Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_attacking_dmg_future2 call [%s] expected mod:function, got %d elems",
-      on_attacking_dmg_future2.c_str(), (int) on_attacking_dmg_future2.size());
+  ERR("Bad on_attacking_dmg_future2 call [%s] expected mod:function, got %d elems", on_attacking_dmg_future2.c_str(),
+      (int) on_attacking_dmg_future2.size());
 
   return damage;
 }

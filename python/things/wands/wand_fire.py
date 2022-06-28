@@ -18,9 +18,9 @@ def explode(me, x, y):
         return
 
     my.thing_msg(me, "The wand of fireballs explodes, predictably in a fireball.")
-    my.level_spawn_at_thing(me, "explosion_major")
+    my.level_spawn_thing_at(me, "explosion_major")
     my.level_spawn_fire_around_thing(me, "fire")
-    my.level_spawn_at_thing(me, "fire")
+    my.level_spawn_thing_at(me, "fire")
     my.thing_dead(me, "exploded")
 
 
