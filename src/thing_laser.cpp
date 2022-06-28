@@ -83,6 +83,10 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
     die("No laser name");
   }
 
+  if (is_player()) {
+    msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+  }
+
   auto start = last_blit_at;
   auto end   = target->last_blit_at;
 
