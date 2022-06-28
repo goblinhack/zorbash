@@ -2,9 +2,8 @@ import my
 import tp
 
 
-def tp_init(name):
-    text_long_name = "the grid"
-    self = tp.Tp(name, text_long_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.gfx_ascii_shown(self, False)
     my.is_the_grid(self, True)
@@ -16,7 +15,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="the_grid")
+    tp_init("the_grid", "ground", "ground")
 
 
 init()

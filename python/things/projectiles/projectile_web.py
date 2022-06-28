@@ -28,6 +28,23 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=255, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=255, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=255, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=255, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=255, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=200, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=200, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=200, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=200, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=100, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=100, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=100, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=100, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=50, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=50, tile="nothing")
+    my.tile(self, ascii_fg_char="cross", ascii_fg_col_name="white", ascii_alpha=50, tile="nothing")
+
     my.tp_update(self)
 
 

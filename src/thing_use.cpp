@@ -497,7 +497,7 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     dbg("Trying to drink: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
-      msg("You quaff the %s.", what->text_the().c_str());
+      msg("You quaff %s.", what->text_the().c_str());
     }
     used(what, this, true /* remove after use */);
     if (is_player()) {
@@ -507,7 +507,7 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     dbg("Trying to wave: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     if (is_player()) {
-      msg("You wave the %s.", what->text_the().c_str());
+      msg("You wave %s.", what->text_the().c_str());
     }
     used(what, this, false /* remove after use */, use_options);
     if (is_player()) {
