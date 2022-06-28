@@ -35,7 +35,7 @@ bool Thing::state_moving(void)
   if (is_player()) {
     game->tick_begin("Robot move");
   }
-  path_pop_next_move();
+  path_pop_next_move(THING_MOVE_REASON_AI);
 
   return true;
 }

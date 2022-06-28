@@ -14,7 +14,7 @@
 //
 // Return true on success.
 //
-bool Thing::path_pop_next_move(void)
+bool Thing::path_pop_next_move(ThingMoveReason reason)
 {
   bool too_far = false;
 
@@ -357,10 +357,33 @@ bool Thing::path_pop_next_move(void)
     }
   }
 
+  //
+  // If moving along a path and we bump into a monster, just stop. Don't auto attack as that might lead to bad things.
+  //
+  // However, if at the start of the path and trying to click through a monster, allow that.
+  //
+  // e.g.
+  //     end       start
+  //      |          |
+  //      v          v
+  //      ......m@....   (no attack)
+  //
+  //     end       start
+  //      |          |
+  //      v          v
+  //      e.........m@   (attack)
+  //
   if (is_player() && aip()->move_path.size()) {
-    AI_LOG("Try to move, no shove, no attack as have move path");
-    if (move_no_shove_no_attack(future_pos)) {
-      return true;
+    if (reason == THING_MOVE_REASON_MOUSE) {
+      AI_LOG("Try to move, no shove, attack allowed as mouse clicked");
+      if (move_no_shove_attack_allowed(future_pos)) {
+        return true;
+      }
+    } else {
+      AI_LOG("Try to move, no shove, no attack as have move path");
+      if (move_no_shove_no_attack(future_pos)) {
+        return true;
+      }
     }
   } else {
     if (possible_to_attack_at(future_pos)) {
@@ -394,7 +417,7 @@ bool Thing::path_pop_next_move(void)
 //
 // true on having performed an action
 //
-bool Thing::cursor_path_pop_first_move(void)
+bool Thing::cursor_path_pop_first_move(ThingMoveReason reason)
 {
   dbg("Cursor pop first move");
   TRACE_AND_INDENT();
@@ -422,7 +445,7 @@ bool Thing::cursor_path_pop_first_move(void)
     aip()->move_path = game->cursor_move_path;
     game->cursor_move_path.clear();
 
-    if (path_pop_next_move()) {
+    if (path_pop_next_move(reason)) {
       dbg("Move to cursor next hop");
       if (game->cursor_move_path.empty()) {
         level->cursor_path_create();
