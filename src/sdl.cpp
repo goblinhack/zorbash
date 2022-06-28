@@ -365,8 +365,12 @@ int sdl_get_mouse(void)
     return (button);
   }
 
+  /*
+   * I'm not sure we want this - at the least it needs rounding
+   *
   x *= game->config.window_pix_width / game->config.config_pix_width;
   y *= game->config.window_pix_height / game->config.config_pix_height;
+  */
 
   sdl.mouse_x = x;
   sdl.mouse_y = y;
