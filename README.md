@@ -1,8 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- after entering and leaving the sewers, scrolling was stuck and config key could not exit                                                     -->
-<!-- player is not longer animated !                                                                                                              -->
+<!-- after entering and leaving the sewers, scrolling was stuck                                                                                   -->
 <!-- click through a monster should it attack?                                                                                                    -->
 <!-- ascii check list - particles / lasers / projectiles / explosions                                                                             -->
 <!-- ascii beast and treasure map                                                                                                                 -->
