@@ -53,12 +53,12 @@ void Level::display_ascii_projectiles(point tl, point br)
     if (p.info.follow_moving_target) {
       auto t = thing_find_optional(p.victim_id);
       if (t) {
-        p.info.pixel_stop = t->last_blit_at;
+        p.info.map_stop = t->curr_at;
       }
     }
 
-    auto start = p.info.pixel_start - p.info.pixel_map_at;
-    auto stop  = p.info.pixel_stop - p.info.pixel_map_at;
+    auto start = p.info.map_start;
+    auto stop  = p.info.map_stop;
 
     int frame = (int) (((float) Projectile::max_frames) * dt);
     if (frame >= Projectile::max_frames) {
@@ -77,7 +77,6 @@ void Level::display_ascii_projectiles(point tl, point br)
       int y = y0 + (frame * ((float) (y1 - y0) / (float) Projectile::max_frames));
 
       color c = tile->ascii_fg_col_value;
-      c.a     = tile->ascii_alpha;
       ascii_set_fg4(x, y, tile->ascii_fg_char);
       ascii_set_fg4(x, y, c);
     }
