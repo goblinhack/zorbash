@@ -1,9 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- after entering and leaving the sewers, scrolling was stuck                                                                                   -->
-<!-- click through a monster should it attack?                                                                                                    -->
-<!-- ascii check list - particles / lasers / projectiles / explosions                                                                             -->
+<!-- ascii check list - particles / projectiles / explosions                                                                                      -->
 <!-- ascii beast and treasure map                                                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

@@ -28,6 +28,11 @@ typedef enum {
   THING_SHOVE_NEVER_TRIED,
 } ThingShoved;
 
+typedef enum {
+  THING_MOVE_REASON_MOUSE,
+  THING_MOVE_REASON_AI,
+} ThingMoveReason;
+
 typedef struct {
   uint16_t tile_outline;
   uint16_t bl1_tile;
@@ -454,7 +459,7 @@ public:
   bool collision_obstacle(Thingp);
   bool consume(Thingp it);
   bool coords_get(point &blit_tl, point &blit_br, point &pre_blit_tl, point &pre_blit_br, Tilep &tile, bool refl);
-  bool cursor_path_pop_first_move(void);
+  bool cursor_path_pop_first_move(ThingMoveReason);
   bool debuff_add_if_not_found(Tpp what);
   bool debuff_add(Thingp it);
   bool debuff_add(Tpp what);
@@ -540,7 +545,7 @@ public:
   bool open(Thingp it);
   bool open(void);
   bool particle_anim_exists(void);
-  bool path_pop_next_move(void);
+  bool path_pop_next_move(ThingMoveReason);
   bool place(const std::string &what, const point p);
   bool player_is_ready_for_messages(std::string &why);
   bool player_is_ready_for_messages(void);

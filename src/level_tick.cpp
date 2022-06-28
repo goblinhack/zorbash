@@ -622,7 +622,7 @@ void Level::tick(void)
         if (game->robot_mode) {
           player->ai_tick();
         } else if (player->aip()->move_path.size()) {
-          player->path_pop_next_move();
+          player->path_pop_next_move(THING_MOVE_REASON_AI);
         }
       }
 
@@ -647,7 +647,7 @@ void Level::tick(void)
       if (game->robot_mode) {
         player->ai_tick();
       } else if (player->aip()->move_path.size()) {
-        player->path_pop_next_move();
+        player->path_pop_next_move(THING_MOVE_REASON_AI);
       }
     }
   }
