@@ -34,7 +34,7 @@ for i in \
     skills \
     treasure \
     wands \
-    weapopy
+    weapons
 do
   cp .flake8 $i/
   git add $i/.flake8

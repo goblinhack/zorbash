@@ -55,6 +55,10 @@ def tp_init(name, text_long_name):
     my.is_described_when_hovering_over(self, True)
     my.is_heavy(self, True)
     my.is_hittable(self, True)
+    my.is_immune_to_cold(self, True)
+    my.is_immune_to_draining(self, True)
+    my.is_immune_to_necrosis(self, True)
+    my.is_immune_to_poison(self, True)
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
     my.is_shovable(self, True)

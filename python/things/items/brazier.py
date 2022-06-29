@@ -28,6 +28,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_fire(self, True)
     my.is_floor_deco(self, True)
     my.is_heavy(self, True)
+    my.is_immune_to_fire(self, True)
     my.is_shovable(self, True)
     my.light_color(self, "orange")
     my.light_dist(self, 2)

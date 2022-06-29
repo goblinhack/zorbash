@@ -162,22 +162,21 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
 
-      if (0) {
-        level->thing_new("barrel", point(x + 2, y + 1));
-        level->thing_new("rat_giant", point(x + 3, y + 1));
-      }
-
       IF_DEBUG2
       {
         if (0) {
+          level->thing_new("barrel", point(x + 2, y + 1));
+          level->thing_new("rat_giant", point(x + 3, y + 1));
+        }
+        if (0) {
           level->thing_new("staff_energy", point(x, y + 1));
         }
-        if (1) {
+        if (0) {
           auto w = level->thing_new("wand_cold", point(x, y));
           t->carry(w);
           t->enchant_without_stone(w);
         }
-        if (1) {
+        if (0) {
           auto w = level->thing_new("staff_descent", point(x, y));
           t->carry(w);
           t->enchant_without_stone(w);
