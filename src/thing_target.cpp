@@ -37,7 +37,7 @@ bool Thing::victim_attack_best_attempt_1(Thingp item, point at, Thingp *best, po
   bool found_best {};
   int  best_priority = -999;
 
-  dbg2("Target-attack-best: Try to find something to attack, attempt 1");
+  dbg2("Target-attack-best: Try to find something to attack at (%d,%d), attempt 1", at.x, at.y);
   TRACE_AND_INDENT();
 
   *best = nullptr;
@@ -120,7 +120,7 @@ bool Thing::victim_attack_best_attempt_2(Thingp item, point at, Thingp *best, po
   bool found_best {};
   int  best_priority = -999;
 
-  dbg2("Target-attack-best: Try to find something to attack, attempt 2");
+  dbg2("Target-attack-best: Try to find something to attack at (%d,%d), attempt 2", at.x, at.y);
   TRACE_AND_INDENT();
 
   *best = nullptr;
@@ -207,7 +207,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
   bool found_best {};
   int  best_priority = -999;
 
-  dbg2("Target-attack-best: Try to find something to attack, attempt 3");
+  dbg2("Target-attack-best: Try to find something to attack at (%d,%d), attempt 3", at.x, at.y);
   TRACE_AND_INDENT();
 
   *best = nullptr;
@@ -374,15 +374,15 @@ bool Thing::victim_attack_choose_best(Thingp item, point at, Thingp *best, point
 {
   std::vector< point > all_deltas = {point(0, 0)};
 
-  if (victim_attack_best_attempt_1(item, curr_at, best, best_hit_at, all_deltas, attack_options)) {
+  if (victim_attack_best_attempt_1(item, at, best, best_hit_at, all_deltas, attack_options)) {
     return true;
   }
 
-  if (victim_attack_best_attempt_2(item, curr_at, best, best_hit_at, all_deltas, attack_options)) {
+  if (victim_attack_best_attempt_2(item, at, best, best_hit_at, all_deltas, attack_options)) {
     return true;
   }
 
-  if (victim_attack_best_attempt_3(item, curr_at, best, best_hit_at, all_deltas, attack_options)) {
+  if (victim_attack_best_attempt_3(item, at, best, best_hit_at, all_deltas, attack_options)) {
     return true;
   }
 

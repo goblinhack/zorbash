@@ -14,6 +14,7 @@ def on_born(me, x, y):
     selection_x, selection_y = my.thing_coords_get(me)
     for dx in range(-1, 2):
         for dy in range(-1, 2):
+            my.spawn_at(me, "small_fire", x + dx, y + dy)
             for thing in my.level_get_all(me, selection_x + dx, selection_y + dy):
                 attack(me, thing)
 

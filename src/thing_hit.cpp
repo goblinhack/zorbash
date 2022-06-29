@@ -258,6 +258,15 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   std::string damage_type;
 
   if (attack_options->attack_poison) {
+    if (is_immune_to_poison()) {
+      if (real_hitter->is_player()) {
+        if (is_alive_monst()) {
+          msg("%s is immune to poison damage!", text_The().c_str());
+        }
+      }
+      return false;
+    }
+
     if (! damage) {
       if (is_player()) {
         msg("You take no poison damage!");
@@ -306,6 +315,15 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       damage_type = "damage_future3 ";
     }
   } else if (attack_options->attack_cold) {
+    if (is_immune_to_cold()) {
+      if (real_hitter->is_player()) {
+        if (is_alive_monst()) {
+          msg("%s is immune to cold damage!", text_The().c_str());
+        }
+      }
+      return false;
+    }
+
     if (! damage) {
       if (is_player()) {
         msg("You take no cold damage!");
@@ -318,6 +336,15 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       damage_type = "cold ";
     }
   } else if (attack_options->attack_fire) {
+    if (is_immune_to_fire()) {
+      if (real_hitter->is_player()) {
+        if (is_alive_monst()) {
+          msg("%s is immune to fire damage!", text_The().c_str());
+        }
+      }
+      return false;
+    }
+
     if (! damage) {
       if (is_player()) {
         msg("You take no fire damage!");
@@ -371,6 +398,15 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       damage_type = "energy ";
     }
   } else if (attack_options->attack_acid) {
+    if (is_immune_to_acid()) {
+      if (real_hitter->is_player()) {
+        if (is_alive_monst()) {
+          msg("%s is immune to acid damage!", text_The().c_str());
+        }
+      }
+      return false;
+    }
+
     if (! damage) {
       if (is_player()) {
         msg("You take no acid damage!");
@@ -395,9 +431,11 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       damage_type = "digest ";
     }
   } else if (attack_options->attack_necrosis) {
-    if (is_immune_to_necrosis()) {
+    if (is_immune_to_cold()) {
       if (real_hitter->is_player()) {
-        msg("%s is immune to rotting!", text_The().c_str());
+        if (is_alive_monst()) {
+          msg("%s is immune to rotting!", text_The().c_str());
+        }
       }
       return false;
     }
@@ -416,7 +454,9 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   } else if (attack_options->attack_draining) {
     if (is_immune_to_draining()) {
       if (real_hitter->is_player()) {
-        msg("%s is immune to draining attacks!", text_The().c_str());
+        if (is_alive_monst()) {
+          msg("%s is immune to draining attacks!", text_The().c_str());
+        }
       }
       return false;
     }
@@ -536,28 +576,33 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     }
 
     //
-    // Different weapons have different drain on stamina.
+    // If hitting with a weapon, tire the wielder
     //
-    if (d20roll_under(stat_con_total())) {
+    if (hitter->is_weapon()) {
       //
-      // Only half stamina damage if you pass con roll
+      // Different weapons have different drain on stamina.
       //
-      if (hitter != real_hitter) {
-        auto s = hitter->stamina_drain_on_attacking();
-        if (s) {
-          s /= 2;
-          if (! s) {
-            s = 1;
+      if (d20roll_under(stat_con_total())) {
+        //
+        // Only half stamina damage if you pass con roll
+        //
+        if (hitter != real_hitter) {
+          auto s = hitter->stamina_drain_on_attacking();
+          if (s) {
+            s /= 2;
+            if (! s) {
+              s = 1;
+            }
           }
+          real_hitter->stamina_decr(s);
         }
-        real_hitter->stamina_decr(s);
-      }
-    } else {
-      if (hitter != real_hitter) {
-        auto s = hitter->stamina_drain_on_attacking();
-        real_hitter->stamina_decr(s);
       } else {
-        real_hitter->stamina_decr(1);
+        if (hitter != real_hitter) {
+          auto s = hitter->stamina_drain_on_attacking();
+          real_hitter->stamina_decr(s);
+        } else {
+          real_hitter->stamina_decr(1);
+        }
       }
     }
   }
