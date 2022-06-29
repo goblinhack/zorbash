@@ -128,8 +128,10 @@ bool Thing::will_avoid_monst(const point p)
     if (me->is_monst()) {
       if (it->is_player()) {
         if (is_dangerous(it)) {
-          dbg("Avoid dangerous: %s", it->to_string().c_str());
-          return true;
+          if (health() < health_max() / 4) {
+            dbg("Avoid dangerous as I am weak: %s", it->to_string().c_str());
+            return true;
+          }
         }
       }
     }
@@ -137,8 +139,10 @@ bool Thing::will_avoid_monst(const point p)
     if (me->is_meat()) {
       if (it->is_meat_eater() || it->attack_meat()) {
         if (is_dangerous(it)) {
-          dbg("Avoid meat eater: %s", it->to_string().c_str());
-          return true;
+          if (health() < health_max() / 4) {
+            dbg("Avoid meat eater as I am weak: %s", it->to_string().c_str());
+            return true;
+          }
         }
       }
     }
@@ -146,8 +150,10 @@ bool Thing::will_avoid_monst(const point p)
     if (me->is_humanoid()) {
       if (it->attack_humanoid()) {
         if (is_dangerous(it)) {
-          dbg("Avoid humanoid eater: %s", it->to_string().c_str());
-          return true;
+          if (health() < health_max() / 4) {
+            dbg("Avoid humanoid eater as I am weak: %s", it->to_string().c_str());
+            return true;
+          }
         }
       }
     }
@@ -155,8 +161,10 @@ bool Thing::will_avoid_monst(const point p)
     if (me->is_living()) {
       if (it->attack_living()) {
         if (is_dangerous(it)) {
-          dbg("Avoid living eater: %s", it->to_string().c_str());
-          return true;
+          if (health() < health_max() / 4) {
+            dbg("Avoid living eater as I am weak: %s", it->to_string().c_str());
+            return true;
+          }
         }
       }
     }
@@ -172,8 +180,10 @@ bool Thing::will_avoid_monst(const point p)
     }
 
     if (is_dangerous(it)) {
-      dbg("Avoid dangerous: %s", it->to_string().c_str());
-      return true;
+      if (health() < health_max() / 4) {
+        dbg("Avoid dangerous: %s", it->to_string().c_str());
+        return true;
+      }
     }
   }
   FOR_ALL_THINGS_END()
