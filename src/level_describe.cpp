@@ -67,6 +67,13 @@ void Level::describe(point p)
     TRACE_AND_INDENT();
 
     //
+    // We show the player info in the inventory, so skip it here.
+    //
+    if (t->is_player()) {
+      continue;
+    }
+
+    //
     // Don't allow snooping of monsters we cannot see
     //
     if (! get(can_see_currently.can_see, x, y) && t->is_monst()) {
@@ -130,6 +137,13 @@ void Level::describe(point p)
     int y = p.y;
     IF_DEBUG2 { t->log("Interesting thing cand for describe"); }
     TRACE_AND_INDENT();
+
+    //
+    // We show the player info in the inventory, so skip it here.
+    //
+    if (t->is_player()) {
+      continue;
+    }
 
     //
     // Don't allow snooping of monsters we cannot see
@@ -203,6 +217,13 @@ void Level::describe(point p)
     int y = p.y;
     IF_DEBUG2 { t->log("All thing cand for describe"); }
     TRACE_AND_INDENT();
+
+    //
+    // We show the player info in the inventory, so skip it here.
+    //
+    if (t->is_player()) {
+      continue;
+    }
 
     //
     // Don't allow snooping of monsters we cannot see
