@@ -156,13 +156,16 @@ void Game::place_player(void)
         b->carry(w);
       }
       // level->thing_new("belcher", point(x + 3, y));
-      if (1) {
+      if (0) {
         auto w = level->thing_new("wand_fire", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      level->thing_new("barrel", point(x + 2, y + 1));
-      level->thing_new("rat_giant", point(x + 3, y + 1));
+
+      if (0) {
+        level->thing_new("barrel", point(x + 2, y + 1));
+        level->thing_new("rat_giant", point(x + 3, y + 1));
+      }
 
       IF_DEBUG2
       {
