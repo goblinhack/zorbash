@@ -577,7 +577,9 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
   return c;
 }
 
-Thingp Thing::spawn_at(const std::string &what)
+Thingp Thing::spawn_at(const std::string &what) { return spawn_at(what, curr_at); }
+
+Thingp Thing::spawn_at(const std::string &what, point p)
 {
   dbg("Spawn thing at: %s", what.c_str());
   TRACE_AND_INDENT();
@@ -586,9 +588,9 @@ Thingp Thing::spawn_at(const std::string &what)
   if (is_spawner()) {
     dbg("Spawn spawned owned thing at: %s", what.c_str());
     TRACE_AND_INDENT();
-    it = level->thing_new(what, curr_at, this);
+    it = level->thing_new(what, p, this);
   } else {
-    it = level->thing_new(what, curr_at);
+    it = level->thing_new(what, p);
   }
 
   it->inherit_from(this);
@@ -602,7 +604,7 @@ Thingp Thing::spawn_at(const std::string &what)
   return it;
 }
 
-Thingp Thing::spawn_owned_thing_at(const std::string &what)
+Thingp Thing::spawn_owned_thing_at_my_position(const std::string &what)
 {
   dbg("Spawn owned thing at: %s", what.c_str());
   TRACE_AND_INDENT();

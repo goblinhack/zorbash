@@ -8,19 +8,20 @@
 #define _MY_PY_TP_HPP_
 #include <Python.h>
 
-PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_spawn_thing_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_spawn_owned_thing_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_spawn_thing_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define TP_SET_PROTO(__field__) PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds);
 
@@ -42,7 +43,7 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds);
 #__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__                                    \
   }
 
-TP_SET_PROTO(aggression_level_pct)
+TP_SET_PROTO(aggression_pct)
 TP_SET_PROTO(ai_detect_secret_doors)
 TP_SET_PROTO(ai_obstacle)
 TP_SET_PROTO(ai_resent_count)

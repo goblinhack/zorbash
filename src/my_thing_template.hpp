@@ -98,7 +98,7 @@ private:
   std::vector< int > _damage_draining_chance_d1000 {};
   std::vector< int > _damage_poison_chance_d1000 {};
 
-  int _aggression_level_pct {};
+  int _aggression_pct {};
   int _ai_detect_secret_doors {};
   int _ai_obstacle {};
   int _ai_resent_count {};
@@ -1075,7 +1075,7 @@ public:
   const std::string &text_unused3(void) const;
   const std::string &text_unused(void) const;
 
-  int aggression_level_pct(void) const;
+  int aggression_pct(void) const;
   int ai_detect_secret_doors(void) const;
   int ai_obstacle(void) const;
   int ai_resent_count(void) const;
@@ -1624,7 +1624,7 @@ public:
   int unused_flag9(void) const;
   int weapon_damage(void) const;
 
-  void aggression_level_pct_set(int v);
+  void aggression_pct_set(int v);
   void ai_detect_secret_doors_set(int v);
   void ai_obstacle_set(int v);
   void ai_resent_count_set(int v);

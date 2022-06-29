@@ -379,7 +379,8 @@ public:
   Thingp projectile_fire_at(Thingp wand, const std::string &item, point at);
   Thingp projectile_fire_at(Thingp wand, const std::string &item, Thingp target);
   Thingp spawn_at(const std::string &what);
-  Thingp spawn_owned_thing_at(const std::string &what);
+  Thingp spawn_at(const std::string &what, point p);
+  Thingp spawn_owned_thing_at_my_position(const std::string &what);
   Thingp spawn_at_if_possible(const std::string &what);
   Thingp top_mob(void);
   Thingp top_owner(void);
@@ -875,7 +876,7 @@ public:
   float teleport_distance_with_modifiers_get(void);
   float update_wobble(void);
 
-  int aggression_level_pct(void);
+  int aggression_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
   int ai_hit_actual(Thingp hitter, Thingp real_hitter, AttackOptions *, int damage);

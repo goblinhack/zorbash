@@ -77,7 +77,7 @@ do
     sed '/end sort marker/,$!d' $IN | tail -n +1 - > $POST
 
     for arg in \
-      aggression_level_pct \
+      aggression_pct \
       ai_detect_secret_doors \
       ai_obstacle \
       ai_resent_count \

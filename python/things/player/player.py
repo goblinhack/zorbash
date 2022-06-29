@@ -319,7 +319,7 @@ def on_attacking_dmg_stat_con(me, victim, x, y, damage):
 def tp_init(name, text_long_name, text_short_name, title):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
-    my.aggression_level_pct(self, 25)
+    my.aggression_pct(self, 25)
     my.ai_detect_secret_doors(self, True)
     my.ai_resent_count(self, 20)
     my.ai_shove_chance_d1000(self, 50)

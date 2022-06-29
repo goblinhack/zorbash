@@ -4,7 +4,7 @@ import tp
 
 def on_tick(owner, me, x, y):
     if my.pcg_randint(1, 100) > 98:
-        my.level_spawn_thing_at(me, "smoke")
+        my.spawn_at_my_position(me, "smoke")
         return True
     return False
 

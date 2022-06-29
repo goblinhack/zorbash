@@ -387,7 +387,7 @@ done:
   Py_RETURN_TRUE;
 }
 
-PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   char    *what = nullptr;
@@ -429,7 +429,7 @@ PyObject *level_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   char    *what = nullptr;
@@ -471,7 +471,7 @@ PyObject *level_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObje
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   char    *what       = nullptr;
@@ -647,7 +647,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
   char    *what = nullptr;
@@ -701,7 +701,7 @@ PyObject *level_place_at(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-TP_BODY_SET_INT(aggression_level_pct)
+TP_BODY_SET_INT(aggression_pct)
 TP_BODY_SET_INT(ai_detect_secret_doors)
 TP_BODY_SET_INT(ai_obstacle)
 TP_BODY_SET_INT(ai_resent_count)

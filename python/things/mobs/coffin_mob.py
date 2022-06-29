@@ -6,12 +6,12 @@ def on_idle_tick_freq_dice(me, x, y):
     #
     # Make sure to only spawn minions so they have the is_minion flag set
     #
-    if my.level_spawn_next_to(me, "bat_minion"):
+    if my.spawn_next_to(me, "bat_minion"):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_BIRTH, "bones2")
 
 
 def on_death(me, x, y):
-    my.level_spawn_thing_at(me, "mob_explosion")
+    my.spawn_at_my_position(me, "mob_explosion")
 
 
 def tp_init(name, text_long_name):

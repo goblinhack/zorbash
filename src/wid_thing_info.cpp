@@ -211,7 +211,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   t->show_botcon_description();
   game->current_wid_thing_info = t;
 
-  IF_DEBUG1 { t->log("Created thing ingo popup"); }
+  IF_DEBUG1 { t->log("Created thing info popup"); }
 
   wid_popup_window->compress();
   return wid_popup_window;

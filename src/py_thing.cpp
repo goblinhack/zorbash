@@ -1567,7 +1567,7 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
   Py_RETURN_TRUE;
 }
 
-PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   char    *what = nullptr;
@@ -1609,7 +1609,7 @@ PyObject *level_spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject 
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t id     = 0;
@@ -1646,7 +1646,7 @@ PyObject *level_spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyO
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_thing_at(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   char    *what = nullptr;
@@ -1689,7 +1689,7 @@ PyObject *level_spawn_thing_at(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_owned_thing_at(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   char    *what = nullptr;
@@ -1725,14 +1725,14 @@ PyObject *level_spawn_owned_thing_at(PyObject *obj, PyObject *args, PyObject *ke
     Py_RETURN_FALSE;
   }
 
-  auto it = t->spawn_owned_thing_at(std::string(what));
+  auto it = t->spawn_owned_thing_at_my_position(std::string(what));
   if (it) {
     return Py_BuildValue("I", it->id);
   }
   Py_RETURN_FALSE;
 }
 
-PyObject *level_spawn_thing_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   char    *what = nullptr;

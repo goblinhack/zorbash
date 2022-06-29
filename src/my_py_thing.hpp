@@ -9,7 +9,7 @@
 #include <Python.h>
 
 PyObject *level_is_able_to_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_aggression_level_pct(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_aggression_pct(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_detect_secret_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_resent_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_wanderer(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -3,7 +3,7 @@ import tp
 
 
 def spawn(me, x, y):
-    my.level_spawn_next_to(me, "jelly_baby")
+    my.spawn_next_to(me, "jelly_baby")
 
 
 def tp_init(name, tiles=[], left1_tiles=[]):
