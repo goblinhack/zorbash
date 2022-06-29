@@ -115,7 +115,7 @@ Thingp Thing::top_owner(void)
       return nullptr;
     }
     if (unlikely(i->immediate_owner_id().ok())) {
-      return i->immediate_owner();
+      return i->top_owner();
     }
     return i;
   } else {

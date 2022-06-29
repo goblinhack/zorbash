@@ -541,8 +541,8 @@ bool Thing::spawn_gas_poison(int radius)
 
 Thingp Thing::spawn_at_if_possible(const std::string &what)
 {
-  TRACE_NO_INDENT();
-  dbg("Spawn under: %s", what.c_str());
+  dbg("Spawn at if possible: %s", what.c_str());
+  TRACE_AND_INDENT();
 
   std::vector< point > possible;
   auto                 x = curr_at.x;
@@ -579,34 +579,42 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
 
 Thingp Thing::spawn_at(const std::string &what)
 {
-  TRACE_NO_INDENT();
-  dbg("Spawn under: %s", what.c_str());
+  dbg("Spawn thing at: %s", what.c_str());
+  TRACE_AND_INDENT();
 
-  std::vector< point > possible;
-  auto                 x = curr_at.x;
-  auto                 y = curr_at.y;
-  auto                 p = point(x, y);
-
-  possible.push_back(p);
-
-  auto cands = possible.size();
-  if (! cands) {
-    return nullptr;
-  }
-
-  auto chosen = possible[ pcg_random_range(0, cands) ];
-
-  auto c = level->thing_new(what, chosen);
-  c->inherit_from(this);
+  Thingp it;
   if (is_spawner()) {
-    c->spawned_owner_set(this);
+    dbg("Spawn spawned owned thing at: %s", what.c_str());
+    TRACE_AND_INDENT();
+    it = level->thing_new(what, curr_at, this);
+  } else {
+    it = level->thing_new(what, curr_at);
   }
+
+  it->inherit_from(this);
 
   //
   // Check if we are newly spawned over a chasm
   // Or if something we spawned at needs to react to us
   //
-  c->location_check_forced_all_things_at();
+  it->location_check_forced_all_things_at();
 
-  return c;
+  return it;
+}
+
+Thingp Thing::spawn_owned_thing_at(const std::string &what)
+{
+  dbg("Spawn owned thing at: %s", what.c_str());
+  TRACE_AND_INDENT();
+
+  auto it = level->thing_new(what, curr_at, this);
+  it->inherit_from(this);
+
+  //
+  // Check if we are newly spawned over a chasm
+  // Or if something we spawned at needs to react to us
+  //
+  it->location_check_forced_all_things_at();
+
+  return it;
 }
