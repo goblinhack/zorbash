@@ -103,7 +103,7 @@ void Level::describe(point p)
       }
     }
 
-    if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
+    if (t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
       IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }
@@ -175,7 +175,7 @@ void Level::describe(point p)
       }
     }
 
-    if (t->is_cursor() || t->is_player() || t->is_cursor_path() || t->is_the_grid) {
+    if (t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
       IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }
@@ -255,7 +255,7 @@ void Level::describe(point p)
       }
     }
 
-    if (t->immediate_owner() || t->is_player() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
+    if (t->immediate_owner() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
       IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }
@@ -264,11 +264,6 @@ void Level::describe(point p)
     // Only show the player as fallback if we have nothing else
     //
     if (hover_over_things.size()) {
-      if (t->is_player()) {
-        IF_DEBUG2 { t->log("Ignore for describe, showing something better"); }
-        continue;
-      }
-
       //
       // Dead monst clog up the screen. Unless we have nothing else.
       //
