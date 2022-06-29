@@ -1689,6 +1689,49 @@ PyObject *level_spawn_thing_at(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
+PyObject *level_spawn_owned_thing_at(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  char    *what = nullptr;
+  uint32_t id   = 0;
+
+  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
+
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+    ERR("%s: Bad args", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! what) {
+    ERR("%s: Missing 'what'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  PY_DBG("%s(%X, %s)", __FUNCTION__, id, what);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
+
+  auto t = level->thing_find(ThingId(id));
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  auto it = t->spawn_owned_thing_at(std::string(what));
+  if (it) {
+    return Py_BuildValue("I", it->id);
+  }
+  Py_RETURN_FALSE;
+}
+
 PyObject *level_spawn_thing_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
