@@ -1,8 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- sound fix needed for projectils                                                                                                              -->
-<!-- ascii check list - particles / projectiles / explosions                                                                                      -->
+<!-- ascii check list - explosions                                                                                                                -->
 <!-- ascii beast and treasure map                                                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
