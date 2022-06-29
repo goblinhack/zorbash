@@ -3,7 +3,7 @@ import tp
 
 
 def spawn(me, x, y):
-    my.level_spawn_fire_around_thing(me, "fire")
+    my.spawn_fire_around_thing(me, "fire")
 
 
 def tp_init(name, text_long_name):

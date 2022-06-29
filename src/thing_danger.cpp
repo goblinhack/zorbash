@@ -65,7 +65,7 @@ int Tp::get_danger_level(void)
     danger_level += 20;
   }
 
-  danger_level += aggression_level_pct() / 10;
+  danger_level += aggression_pct() / 10;
 
   danger_level += damage_melee_dice().max_roll();
   danger_level += damage_poison_dice().max_roll();
@@ -160,7 +160,7 @@ int Thing::danger_initial_level(void)
 
   danger_level += damage_max();
 
-  danger_level += aggression_level_pct() / 10;
+  danger_level += aggression_pct() / 10;
 
   //
   // Low on health, reduce the level
@@ -255,7 +255,7 @@ int Thing::danger_current_level(void)
 
   danger_level += damage_max();
 
-  danger_level += aggression_level_pct() / 10;
+  danger_level += aggression_pct() / 10;
 
   //
   // Leaders are stronger with more followers

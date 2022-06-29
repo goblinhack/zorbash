@@ -8,17 +8,17 @@ def on_you_nat_attack(me, x, y):
 
 def on_idle(me, x, y):
     if not my.thing_is_sleeping(me):
-        my.level_spawn_gas_poison_around_thing(me, 1)
+        my.spawn_gas_poison_around_thing(me, 1)
 
 
 def on_death(me, x, y):
-    my.level_spawn_thing_at(me, "green_splatter")
+    my.spawn_at_my_position(me, "green_splatter")
 
 
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
-    my.aggression_level_pct(self, 100)
+    my.aggression_pct(self, 100)
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
     my.attack_engulf_chance_d1000(self, 1000)

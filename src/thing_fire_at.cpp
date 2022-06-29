@@ -248,7 +248,7 @@ bool Thing::fire_at(Thingp target)
     }
   }
 
-  if (d100() > aggression_level_pct()) {
+  if (d100() > aggression_pct()) {
     return false;
   }
 

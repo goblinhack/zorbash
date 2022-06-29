@@ -18,7 +18,7 @@ def explode(me, x, y):
         return
 
     my.thing_msg(me, "The staff of descent explodes. The earth shakes.")
-    my.level_spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+    my.spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
     my.thing_dead(me, "exploded")
 
 

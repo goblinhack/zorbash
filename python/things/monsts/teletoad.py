@@ -36,7 +36,7 @@ def on_firing_at_something(me, target, x, y):  # Return True on doing an action
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # start sort marker
-    my.aggression_level_pct(self, 100)
+    my.aggression_pct(self, 100)
     my.ai_resent_count(self, 90)
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)

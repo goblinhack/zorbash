@@ -111,7 +111,7 @@
 THING_BODY_GET_BOOL(level_is_able_to_fire_at, is_able_to_fire_at)
 THING_BODY_GET_BOOL(level_is_attackable_by_monst, is_attackable_by_monst)
 THING_BODY_GET_BOOL(level_is_attackable_by_player, is_attackable_by_player)
-THING_BODY_GET_BOOL(thing_aggression_level_pct, aggression_level_pct)
+THING_BODY_GET_BOOL(thing_aggression_pct, aggression_pct)
 THING_BODY_GET_BOOL(thing_ai_detect_secret_doors, ai_detect_secret_doors)
 THING_BODY_GET_BOOL(thing_ai_resent_count, ai_resent_count)
 THING_BODY_GET_BOOL(thing_ai_wanderer, ai_wanderer)

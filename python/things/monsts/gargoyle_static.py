@@ -18,7 +18,7 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
         my.thing_speaks(me, "Roar! Free at last!")
         my.thing_popup(me, "Free!")
         my.thing_polymorph(me, "gargoyle_moving")
-        my.level_spawn_thing_at(me, "gargoyle_podium")
+        my.spawn_at_my_position(me, "gargoyle_podium")
 
 
 def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
@@ -53,7 +53,7 @@ def on_firing_at_something(me, target, x, y):  # Return True on doing an action
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # start sort marker
-    my.aggression_level_pct(self, 100)
+    my.aggression_pct(self, 100)
     my.ai_resent_count(self, 100)
     my.attack_humanoid(self, True)
     my.attack_meat(self, True)

@@ -156,11 +156,13 @@ void Game::place_player(void)
         b->carry(w);
       }
       // level->thing_new("belcher", point(x + 3, y));
-      if (0) {
+      if (1) {
         auto w = level->thing_new("wand_fire", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
       }
+      level->thing_new("barrel", point(x + 2, y + 1));
+      level->thing_new("rat_giant", point(x + 3, y + 1));
 
       IF_DEBUG2
       {
@@ -200,7 +202,6 @@ void Game::place_player(void)
         // level->thing_new("boots_fluffy", point(x, y - 2));
         // level->thing_new("boots_silence", point(x, y - 2));
         // level->thing_new("boots_teleport", point(x, y - 2));
-        // level->thing_new("barrel", point(x + 1, y + 1));
         // level->thing_new("cleaner", point(x, y + 1));
         // level->thing_new("mummy_necro", point(x + 5, y + 1));
         // level->thing_new("shield_woodon", point(x, y - 2));

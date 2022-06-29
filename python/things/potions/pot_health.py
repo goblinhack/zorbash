@@ -29,7 +29,7 @@ def on_use(owner, item, target, x, y):
         my.thing_poisoned_amount_set(owner, 0)
 
     if did_something:
-        my.level_spawn_using_items_radius_range(owner, item, target, "pot_health_effect")
+        my.spawn_using_items_radius_range(owner, item, target, "pot_health_effect")
         if my.thing_is_player(owner):
             my.thing_msg(owner, "%%fg=pink$You glow with renewed health.%%fg=reset$")
     else:
@@ -42,8 +42,8 @@ def explode(me, x, y):
         return
 
     my.thing_msg(me, "The potion of health explodes.")
-    my.level_spawn_thing_at(me, "explosion_fire")
-    my.level_spawn_fire_around_thing(me, "fire")
+    my.spawn_at_my_position(me, "explosion_fire")
+    my.spawn_fire_around_thing(me, "fire")
     my.thing_dead(me, "exploded")
 
 

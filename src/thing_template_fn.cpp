@@ -150,7 +150,7 @@ const std::string &Tp::text_unused2(void) const { return _text_unused2; }
 const std::string &Tp::text_unused3(void) const { return _text_unused3; }
 const std::string &Tp::text_unused(void) const { return _text_unused; }
 
-int Tp::aggression_level_pct(void) const { return _aggression_level_pct; }
+int Tp::aggression_pct(void) const { return _aggression_pct; }
 int Tp::ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
 int Tp::ai_resent_count(void) const { return _ai_resent_count; }
@@ -683,7 +683,7 @@ int Tp::gfx_ascii_animated(void) const { return _gfx_ascii_animated; }
 int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
 
-void Tp::aggression_level_pct_set(int v) { _aggression_level_pct = v; }
+void Tp::aggression_pct_set(int v) { _aggression_pct = v; }
 void Tp::ai_detect_secret_doors_set(int v) { _ai_detect_secret_doors = v; }
 void Tp::ai_obstacle_set(int v) { _ai_obstacle = v; }
 void Tp::ai_resent_count_set(int v) { _ai_resent_count = v; }

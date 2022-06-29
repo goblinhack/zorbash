@@ -8,9 +8,9 @@ def explode(me, x, y):
 
     my.thing_dead(me, "exploded")
     my.thing_msg(me, "The oil filled barrel explodes. Health and safety have been alerted.")
-    my.level_spawn_thing_at(me, "explosion_major")
-    my.level_spawn_fire_around_thing(me, "fire")
-    my.level_spawn_thing_at(me, "fire")
+    my.spawn_at_my_position(me, "explosion_major")
+    my.spawn_fire_around_thing(me, "fire")
+    my.spawn_at_my_position(me, "fire")
 
 
 def on_fire(me, x, y):

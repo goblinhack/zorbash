@@ -7,11 +7,11 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-int Thing::aggression_level_pct(void)
+int Thing::aggression_pct(void)
 {
   TRACE_NO_INDENT();
 
-  int aggression = tp()->aggression_level_pct();
+  int aggression = tp()->aggression_pct();
 
   if (is_able_to_follow()) {
     //
