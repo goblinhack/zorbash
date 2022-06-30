@@ -1909,7 +1909,7 @@ public:
   int unused_flag85(void);
   int unused_flag86(void);
   int unused_flag87(void);
-  int unused_flag88(void);
+  int is_able_to_swim(void);
   int gfx_ascii_shown_as_gray_in_shadow(void);
   int unused_flag8(void);
   int gfx_ascii_shown_in_bg(void);

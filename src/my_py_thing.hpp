@@ -8,7 +8,6 @@
 #define _MY_PY_THING_HPP_
 #include <Python.h>
 
-PyObject *level_is_able_to_fire_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_aggression_pct(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_detect_secret_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_resent_count(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -594,7 +593,7 @@ PyObject *thing_unused_flag84(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag85(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag86(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag87(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag88(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_swim(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_shown_as_gray_in_shadow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_shown_in_bg(PyObject *obj, PyObject *args, PyObject *keywds);

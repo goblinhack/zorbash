@@ -522,7 +522,7 @@ do
       unused_flag85 \
       unused_flag86 \
       unused_flag87 \
-      unused_flag88 \
+      is_able_to_swim \
       gfx_ascii_shown_as_gray_in_shadow \
       unused_flag9 \
       gfx_ascii_shown_in_bg \

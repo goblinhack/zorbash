@@ -165,6 +165,9 @@ int Thing::stat_def_penalties_total(void)
     if (level->is_water(curr_at)) {
       int p = stat_def_penalty_when_in_shallow_water();
       if (p) {
+        if (is_able_to_swim()) {
+          p /= 2;
+        }
         penalty += p;
         if (penalty != prev) {
           prev = penalty;
@@ -175,6 +178,15 @@ int Thing::stat_def_penalties_total(void)
     if (level->is_deep_water(curr_at)) {
       int p = stat_def_penalty_when_in_deep_water();
       if (p) {
+        if (is_able_to_swim()) {
+          p /= 2;
+        }
+        if (is_heavy()) {
+          p *= 2;
+        }
+        if (is_stone()) {
+          p *= 2;
+        }
         penalty += p;
         if (penalty != prev) {
           prev = penalty;

@@ -108,7 +108,6 @@
     }                                                                                                                \
   }
 
-THING_BODY_GET_BOOL(level_is_able_to_fire_at, is_able_to_fire_at)
 THING_BODY_GET_BOOL(level_is_attackable_by_monst, is_attackable_by_monst)
 THING_BODY_GET_BOOL(level_is_attackable_by_player, is_attackable_by_player)
 THING_BODY_GET_BOOL(thing_aggression_pct, aggression_pct)
@@ -547,7 +546,7 @@ THING_BODY_GET_BOOL(thing_unused_flag84, unused_flag84)
 THING_BODY_GET_BOOL(thing_unused_flag85, unused_flag85)
 THING_BODY_GET_BOOL(thing_unused_flag86, unused_flag86)
 THING_BODY_GET_BOOL(thing_unused_flag87, unused_flag87)
-THING_BODY_GET_BOOL(thing_unused_flag88, unused_flag88)
+THING_BODY_GET_BOOL(thing_is_able_to_swim, is_able_to_swim)
 THING_BODY_GET_BOOL(thing_gfx_ascii_shown_as_gray_in_shadow, gfx_ascii_shown_as_gray_in_shadow)
 THING_BODY_GET_BOOL(thing_unused_flag8, unused_flag8)
 THING_BODY_GET_BOOL(thing_gfx_ascii_shown_in_bg, gfx_ascii_shown_in_bg)
