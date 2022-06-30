@@ -806,8 +806,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         clear_move_path("robot was hit while moving");
       } else {
         //
-        // Allow the robot to continue resting as it might have been
-        // trying to eat food to recover.
+        // Allow the robot to continue resting as it might have been trying to eat food to recover.
         //
       }
     } else {
@@ -1132,7 +1131,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s is on fire!", text_The().c_str());
       }
       if (is_monst() || (is_player() && game->robot_mode)) {
-        change_state(MONST_STATE_IDLE, "monst was set on fire");
+        change_state(MONST_STATE_IDLE, "was set on fire");
       }
     }
   } else if (is_on_fire()) {
@@ -1388,7 +1387,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     // Interrupt whatever the monster was doing.
     //
     if (is_monst() || (is_player() && game->robot_mode)) {
-      change_state(MONST_STATE_IDLE, "monst was attacked");
+      change_state(MONST_STATE_IDLE, "was attacked");
     }
   }
 

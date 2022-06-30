@@ -15,7 +15,9 @@
 void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth,
                    int dungeon_walk_order_level_no)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
+  pcg_random_allowed = true;
 
   if (difficulty_depth > DUNGEONS_MAX_DEPTH) {
     difficulty_depth = DUNGEONS_MAX_DEPTH;
@@ -100,18 +102,21 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   }
 
   created();
+
+  pcg_random_allowed = false;
 }
 
 void Level::created(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   assign_leaders_and_followers();
 }
 
 void Level::place_the_grid(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       (void) thing_new("the_grid", point(x, y));

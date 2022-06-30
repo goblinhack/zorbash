@@ -52,11 +52,9 @@ pcg32_random_t pcg32_global = PCG32_INITIALIZER;
 
 uint32_t pcg32_random_r(pcg32_random_t *rng)
 {
-  if (game->robot_mode) {
-    if (! pcg_random_allowed) {
-      TRACE_AND_INDENT();
-      DIE("Trying to use pcg randomness outside of game logic part");
-    }
+  if (! pcg_random_allowed) {
+    TRACE_AND_INDENT();
+    DIE("Trying to use pcg randomness outside of game logic part");
   }
 
   uint64_t oldstate   = rng->state;

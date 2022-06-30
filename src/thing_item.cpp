@@ -107,17 +107,8 @@ void Thing::move_carried_items(void)
           // No ripples
           //
         } else {
-          if (game->robot_mode) {
-            //
-            // Faster
-            //
-            if (pcg_random_range(0, 1000) > 900) {
-              level->thing_new(tp_random_ripple()->name(), at);
-            }
-          } else {
-            if (pcg_random_range(0, 1000) > 500) {
-              level->thing_new(tp_random_ripple()->name(), at);
-            }
+          if (pcg_random_range(0, 1000) > 500) {
+            level->thing_new(tp_random_ripple()->name(), at);
           }
         }
       }

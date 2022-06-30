@@ -244,17 +244,13 @@ void Thing::avoid_tick(void)
     }
 
     if (attacker->is_dead) {
-      if (is_player() && game->robot_mode) {
-        dbg("Robot: Remove avoid, is dead: %s", attacker->to_string().c_str());
-      }
+      dbg("Remove avoid, is dead: %s", attacker->to_string().c_str());
       aip()->avoid.erase(p.first);
       return;
     }
 
     if (--p.second > 0) {
-      if (is_player() && game->robot_mode) {
-        dbg("Robot: Avoid: %s (%d count)", attacker->to_string().c_str(), p.second);
-      }
+      dbg("Avoid: %s (%d count)", attacker->to_string().c_str(), p.second);
       continue;
     }
 
@@ -262,9 +258,7 @@ void Thing::avoid_tick(void)
     // If far enough away start to forget this enemy
     //
     if (distance(attacker->curr_at, curr_at) > distance_avoid_get()) {
-      if (is_player() && game->robot_mode) {
-        dbg("Robot: Remove avoid: %s", attacker->to_string().c_str());
-      }
+      dbg("Remove avoid: %s", attacker->to_string().c_str());
       aip()->avoid.erase(p.first);
       return;
     }
@@ -292,11 +286,7 @@ void Thing::add_avoid(Thingp attacker)
   }
 
   if (! aip()->avoid[ attacker->id ]) {
-    if (is_player() && game->robot_mode) {
-      dbg("Robot: Add new avoid %s", attacker->to_string().c_str());
-    } else {
-      dbg("Add new avoid %s", attacker->to_string().c_str());
-    }
+    dbg("Add new avoid %s", attacker->to_string().c_str());
     aip()->avoid[ attacker->id ] += 2;
   } else {
     dbg("Increment old avoid %s", attacker->to_string().c_str());

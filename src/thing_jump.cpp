@@ -294,10 +294,6 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       duration /= 4;
     }
 
-    if (game->robot_mode) {
-      duration /= 4;
-    }
-
     if (is_player()) {
       //
       // So the player is visible above light
@@ -306,14 +302,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
                                    true /* make_visible_at_end */);
     } else {
       //
-      // If offscreen and in robot mode, then jump quicker, so the robot does
-      // not have to wait so long/
+      // If offscreen, then jump quicker, so the we do not have to wait so long.
       //
-      if (game->robot_mode) {
-        if (! get(level->can_see_currently.can_see, curr_at.x, curr_at.y) &&
-            ! get(level->can_see_currently.can_see, to.x, to.y)) {
-          duration = 0;
-        }
+      if (! get(level->can_see_currently.can_see, curr_at.x, curr_at.y) &&
+          ! get(level->can_see_currently.can_see, to.x, to.y)) {
+        duration = 0;
       }
 
       level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false,
@@ -424,17 +417,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         point at(curr_at.x, curr_at.y);
         dbg("Causes ripples");
         TRACE_AND_INDENT();
-        if (game->robot_mode) {
-          //
-          // Faster
-          //
-          if (pcg_random_range(0, 1000) > 900) {
-            level->thing_new(tp_random_ripple()->name(), at);
-          }
-        } else {
-          if (pcg_random_range(0, 1000) > 500) {
-            level->thing_new(tp_random_ripple()->name(), at);
-          }
+        if (pcg_random_range(0, 1000) > 500) {
+          level->thing_new(tp_random_ripple()->name(), at);
         }
       }
     }
