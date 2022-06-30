@@ -623,7 +623,7 @@ private:
   int _unused_flag85 {};
   int _unused_flag86 {};
   int _unused_flag87 {};
-  int _unused_flag88 {};
+  int _is_able_to_swim {};
   int _gfx_ascii_shown_as_gray_in_shadow {};
   int _unused_flag9 {};
   int _gfx_ascii_shown_in_bg {};
@@ -1612,7 +1612,7 @@ public:
   int unused_flag85(void) const;
   int unused_flag86(void) const;
   int unused_flag87(void) const;
-  int unused_flag88(void) const;
+  int is_able_to_swim(void) const;
   int gfx_ascii_shown_as_gray_in_shadow(void) const;
   int unused_flag8(void) const;
   int gfx_ascii_shown_in_bg(void) const;
@@ -2278,7 +2278,7 @@ public:
   void unused_flag85_set(int v);
   void unused_flag86_set(int v);
   void unused_flag87_set(int v);
-  void unused_flag88_set(int v);
+  void is_able_to_swim_set(int v);
   void gfx_ascii_shown_as_gray_in_shadow_set(int v);
   void unused_flag8_set(int v);
   void gfx_ascii_shown_in_bg_set(int v);

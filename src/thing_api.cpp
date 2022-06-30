@@ -1835,10 +1835,10 @@ int Thing::unused_flag87(void)
   return (tp()->unused_flag87());
 }
 
-int Thing::unused_flag88(void)
+int Thing::is_able_to_swim(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag88());
+  return (tp()->is_able_to_swim());
 }
 
 int Thing::gfx_ascii_shown_as_gray_in_shadow(void)

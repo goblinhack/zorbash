@@ -671,7 +671,7 @@ int Tp::unused_flag84(void) const { return _unused_flag84; }
 int Tp::unused_flag85(void) const { return _unused_flag85; }
 int Tp::unused_flag86(void) const { return _unused_flag86; }
 int Tp::unused_flag87(void) const { return _unused_flag87; }
-int Tp::unused_flag88(void) const { return _unused_flag88; }
+int Tp::is_able_to_swim(void) const { return _is_able_to_swim; }
 int Tp::gfx_ascii_shown_as_gray_in_shadow(void) const { return _gfx_ascii_shown_as_gray_in_shadow; }
 int Tp::unused_flag8(void) const { return _unused_flag8; }
 int Tp::gfx_ascii_shown_in_bg(void) const { return _gfx_ascii_shown_in_bg; }
@@ -1337,7 +1337,7 @@ void Tp::unused_flag84_set(int v) { _unused_flag84 = v; }
 void Tp::unused_flag85_set(int v) { _unused_flag85 = v; }
 void Tp::unused_flag86_set(int v) { _unused_flag86 = v; }
 void Tp::unused_flag87_set(int v) { _unused_flag87 = v; }
-void Tp::unused_flag88_set(int v) { _unused_flag88 = v; }
+void Tp::is_able_to_swim_set(int v) { _is_able_to_swim = v; }
 void Tp::gfx_ascii_shown_as_gray_in_shadow_set(int v) { _gfx_ascii_shown_as_gray_in_shadow = v; }
 void Tp::unused_flag8_set(int v) { _unused_flag8 = v; }
 void Tp::gfx_ascii_shown_in_bg_set(int v) { _gfx_ascii_shown_in_bg = v; }

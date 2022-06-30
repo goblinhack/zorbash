@@ -929,7 +929,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag87() && (what == "unused_flag87")) {
     return true;
   }
-  if (unused_flag88() && (what == "unused_flag88")) {
+  if (is_able_to_swim() && (what == "is_able_to_swim")) {
     return true;
   }
   if (gfx_ascii_shown_as_gray_in_shadow() && (what == "gfx_ascii_shown_as_gray_in_shadow")) {
@@ -2532,8 +2532,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag87") {
     return &Thing::unused_flag87;
   }
-  if (what == "unused_flag88") {
-    return &Thing::unused_flag88;
+  if (what == "is_able_to_swim") {
+    return &Thing::is_able_to_swim;
   }
   if (what == "gfx_ascii_shown_as_gray_in_shadow") {
     return &Thing::gfx_ascii_shown_as_gray_in_shadow;
