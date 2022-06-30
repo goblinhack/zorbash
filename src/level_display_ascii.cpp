@@ -84,8 +84,69 @@ void Level::update_light_ascii_map(void)
 }
 
 //
-// Display the level
+// Display treasure if carrying a map; could be for just this level or all levels if enchanted.
 //
+void Level::display_ascii_treasure_map(point tl, point br)
+{
+  if (! player) {
+    return;
+  }
+
+  if (player->map_treasure_available()) {
+    for (auto z = (int) 0; z < MAP_DEPTH; z++) {
+      for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+          point p(x, y);
+
+          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          {
+            if (t->is_key() || t->is_food() || t->is_treasure_type() || t->is_skillstone() || t->is_enchantstone()) {
+              if (t->is_gfx_ascii_animated) {
+                t->animate();
+              }
+
+              t->blit_ascii(tl, br, p, true);
+            }
+          }
+          FOR_ALL_THINGS_END()
+        }
+      }
+    }
+  }
+}
+
+//
+// Beast map
+//
+void Level::display_ascii_beast_map(point tl, point br)
+{
+  if (! player) {
+    return;
+  }
+
+  if (player->map_beast_count() > 0) {
+    for (auto z = (int) 0; z < MAP_DEPTH; z++) {
+      for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+          point p(x, y);
+
+          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          {
+            if (t->is_monst() || t->is_spiderweb() || t->is_mob()) {
+              if (t->is_gfx_ascii_animated) {
+                t->animate();
+              }
+
+              t->blit_ascii(tl, br, p, true);
+            }
+          }
+          FOR_ALL_THINGS_END()
+        }
+      }
+    }
+  }
+}
+
 void Level::display_ascii_map(point tl, point br)
 {
   display_map_set_bounds();
@@ -114,6 +175,9 @@ void Level::display_ascii_map(point tl, point br)
       }
     }
   }
+
+  display_ascii_treasure_map(tl, br);
+  display_ascii_beast_map(tl, br);
 
   //
   // Lastly draw top lever weapon effects

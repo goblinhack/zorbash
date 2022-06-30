@@ -155,9 +155,26 @@ void Game::place_player(void)
         auto w = level->thing_new("wooden_cross", point(x, y));
         b->carry(w);
       }
-      // level->thing_new("belcher", point(x + 3, y));
       if (0) {
         auto w = level->thing_new("wand_fire", point(x, y));
+        t->carry(w);
+        t->enchant_without_stone(w);
+      }
+      if (0) {
+        auto w = level->thing_new("map_treasure", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
+        auto w = level->thing_new("map_beast", point(x, y));
+        t->carry(w);
+      }
+      if (0) {
+        auto w = level->thing_new("wand_cold", point(x, y));
+        t->carry(w);
+        t->enchant_without_stone(w);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
       }
@@ -171,16 +188,7 @@ void Game::place_player(void)
         if (0) {
           level->thing_new("staff_energy", point(x, y + 1));
         }
-        if (0) {
-          auto w = level->thing_new("wand_cold", point(x, y));
-          t->carry(w);
-          t->enchant_without_stone(w);
-        }
-        if (0) {
-          auto w = level->thing_new("staff_descent", point(x, y));
-          t->carry(w);
-          t->enchant_without_stone(w);
-        }
+        // level->thing_new("belcher", point(x + 3, y));
         // level->thing_new("gargoyle_moving", point(x + 2, y - 5));
         // level->thing_new("rat_giant", point(x - 1, y));
         // level->thing_new("rat_giant", point(x + 1, y));
@@ -211,8 +219,6 @@ void Game::place_player(void)
         // level->thing_new("food_frog", point(x, y - 2));
         // level->thing_new("cleaner", point(x + 1, y + 3));
         // level->thing_new("thunderstone", point(x, y - 2));
-        // level->thing_new("map_treasure", point(x, y));
-        // level->thing_new("map_beast", point(x, y));
         // level->thing_new("zorb_eldster", point(x + 5, y));
         // level->thing_new("key", point(x + 5, y));
         // level->thing_new("key_pair", point(x - 1, y - 2));

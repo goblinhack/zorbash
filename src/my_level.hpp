@@ -914,10 +914,12 @@ public:
   void debug_path_draw_line(const std::vector< point > &move_path);
   void describe(point at);
   void describe(Thingp);
+  void display_ascii_beast_map(point tl, point br);
   void display_ascii_gas(point tl, point br, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_ascii_lasers(point tl, point br);
   void display_ascii_map(point tl, point br);
   void display_ascii_projectiles(point tl, point br);
+  void display_ascii_treasure_map(point tl, point br);
   void display_lasers(point tl, point br);
   void display_map_set_bounds(void);
   void display_map(void);
