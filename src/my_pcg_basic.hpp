@@ -36,7 +36,7 @@
 
 typedef struct pcg_state_setseq_64 pcg32_random_t;
 
-extern bool pcg_random_allowed;
+extern int pcg_random_allowed;
 
 extern uint32_t pcg32_random_r(pcg32_random_t *rng);
 extern void     pcg32_srandom_r(pcg32_random_t *rng, uint64_t initstate, uint64_t initseq);

@@ -35,7 +35,7 @@
 
 // state for global RNGs
 
-bool pcg_random_allowed = true;
+int pcg_random_allowed;
 
 struct pcg_state_setseq_64 { // Internals are *Private*.
   uint64_t state;            // RNG state.  All values are possible.

@@ -266,14 +266,14 @@ void Game::wid_config_other_select(void)
   {
     TRACE_AND_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "Snapshot save freq");
+    auto w = wid_new_square_button(p, "Snapshot turn freq");
 
     point tl = make_point(1, y_at);
     point br = make_point(width / 2, y_at);
     wid_set_shape_none(w);
     wid_set_pos(w, tl, br);
     wid_set_text_lhs(w, true);
-    wid_set_text(w, "Snapshot save freq");
+    wid_set_text(w, "Snapshot turn freq");
   }
   {
     TRACE_AND_INDENT();

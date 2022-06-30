@@ -116,7 +116,7 @@ void Level::handle_input_events(void)
   }
 }
 
-void Level::tick(void)
+void Level::tick_(void)
 {
   if (! game->started) {
     return;
@@ -656,6 +656,13 @@ void Level::tick(void)
   // A new game event has occurred?
   //
   tick_begin_now();
+}
+
+void Level::tick(void)
+{
+  pcg_random_allowed++;
+  tick_();
+  pcg_random_allowed--;
 }
 
 void Level::tick_begin_now(void)

@@ -109,7 +109,6 @@ void sdl_loop(void)
     }
     old_g_errored = g_errored;
 
-    pcg_random_allowed = false;
     {
       gl_leave_2d_mode();
       gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
@@ -121,7 +120,6 @@ void sdl_loop(void)
       gl_leave_2d_mode();
       gl_enter_2d_mode(game->config.window_pix_width, game->config.window_pix_height);
     }
-    pcg_random_allowed = true;
 
     //
     // Less frequent updates
@@ -144,15 +142,11 @@ void sdl_loop(void)
       //
       if (likely(! g_errored)) {
         if (likely(game->level != nullptr)) {
-          pcg_random_allowed = true;
           game->level->tick();
-          pcg_random_allowed = false;
         }
       }
 
-      pcg_random_allowed = false;
       wid_display_all();
-      pcg_random_allowed = true;
     }
 
     //
@@ -191,9 +185,7 @@ void sdl_loop(void)
       //
       // Clean up dead widgets.
       //
-      pcg_random_allowed = false;
       wid_gc_all();
-      pcg_random_allowed = true;
 
       //
       // Read events
@@ -260,9 +252,7 @@ void sdl_loop(void)
       if (likely(! g_errored)) {
         if (likely(game->level != nullptr)) {
           if (found || game->tick_begin_ms) {
-            pcg_random_allowed = true;
             game->level->tick();
-            pcg_random_allowed = false;
           }
         }
       }
@@ -271,15 +261,11 @@ void sdl_loop(void)
       // If the user has moved the mouse or we're in the intro, update the widgets.
       //
       if (processed_mouse_motion_event || ! game->level) {
-        pcg_random_allowed = false;
         wid_display_all();
-        pcg_random_allowed = true;
       }
     }
 
-    pcg_random_allowed = false;
     sdl_display();
-    pcg_random_allowed = true;
 
     //
     // Config change?

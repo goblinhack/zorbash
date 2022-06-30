@@ -9,6 +9,7 @@
 //
 #include "my_fwd.hpp"
 #include "my_point.hpp"
+#include "my_random.hpp"
 #include <vector>
 
 class DungeonNode
@@ -126,7 +127,9 @@ public:
   Nodes(int grid_width, int grid_height, bool is_dungeon)
       : grid_width(grid_width), grid_height(grid_height), is_dungeon(is_dungeon)
   {
+    pcg_random_allowed++;
     finish_constructor();
+    pcg_random_allowed--;
   }
 
   Nodes() { finish_constructor(); }

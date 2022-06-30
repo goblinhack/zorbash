@@ -17,7 +17,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
 {
   TRACE_NO_INDENT();
 
-  pcg_random_allowed = true;
+  pcg_random_allowed++;
 
   if (difficulty_depth > DUNGEONS_MAX_DEPTH) {
     difficulty_depth = DUNGEONS_MAX_DEPTH;
@@ -103,7 +103,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
 
   created();
 
-  pcg_random_allowed = false;
+  pcg_random_allowed--;
 }
 
 void Level::created(void)
