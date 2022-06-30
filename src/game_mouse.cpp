@@ -6,13 +6,14 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_random.hpp"
 #include "my_sound.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_wid.hpp"
 #include "my_wid_thing_info.hpp"
 
-uint8_t game_mouse_down(int x, int y, uint32_t button)
+static uint8_t game_mouse_down_(int x, int y, uint32_t button)
 {
   DBG2("Game mouse down");
   TRACE_AND_INDENT();
@@ -248,11 +249,21 @@ uint8_t game_mouse_down(int x, int y, uint32_t button)
   return false;
 }
 
+uint8_t game_mouse_down(int x, int y, uint32_t button)
+{
+  pcg_random_allowed++;
+  auto ret = game_mouse_down_(x, y, button);
+  pcg_random_allowed--;
+  return ret;
+}
+
 uint8_t game_mouse_up(int x, int y, uint32_t button) { return false; }
 
-uint8_t game_mouse_motion(int x, int y, int relx, int rely, int wheelx, int wheely)
+static uint8_t game_mouse_motion_(int x, int y, int relx, int rely, int wheelx, int wheely)
 {
+  DBG2("Game mouse motion");
   TRACE_AND_INDENT();
+
   auto level = game->get_current_level();
   if (! level) {
     return false;
@@ -298,4 +309,12 @@ uint8_t game_mouse_motion(int x, int y, int relx, int rely, int wheelx, int whee
 #endif
 
   return true;
+}
+
+uint8_t game_mouse_motion(int x, int y, int relx, int rely, int wheelx, int wheely)
+{
+  pcg_random_allowed++;
+  auto ret = game_mouse_motion_(x, y, relx, rely, wheelx, wheely);
+  pcg_random_allowed--;
+  return ret;
 }

@@ -143,15 +143,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     tick_last_did_something_set(game->tick_current);
   }
 
-  //
-  // Must do this after TP assignment or logging will fail
-  //
-  if (! pcg_random_allowed) {
-    err("Error, trying to create a thing outside of game loop");
-    backtrace_dump();
-    DIE("Error, trying to create a thing outside of game loop");
-  }
-
   if (is_tmp_thing()) {
     game->world.alloc_tmp_thing_id(this);
   } else {

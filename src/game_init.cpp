@@ -29,12 +29,14 @@ void Game::pre_init(void)
 {
   TRACE_AND_INDENT();
 
+  pcg_random_allowed++;
   set_seed();
 
   current_level = point3d(0, 0, 0);
   level         = nullptr;
 
   world.clear();
+  pcg_random_allowed--;
 }
 
 void Game::init(void)
@@ -68,6 +70,7 @@ void Game::start(void)
   TRACE_AND_INDENT();
   LOG("Start the game!");
 
+  pcg_random_allowed++;
   tick_begin_ms      = 0;
   tick_begin_game_ms = 0;
 
@@ -120,4 +123,5 @@ void Game::start(void)
   BOTCON("Press 'h' to see key bindings.");
 
   place_player();
+  pcg_random_allowed--;
 }

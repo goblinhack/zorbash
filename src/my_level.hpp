@@ -1154,6 +1154,7 @@ public:
   void tick_begin_now(void);
   void tick_gas_poison(void);
   void tick(void);
+  void tick_(void);
   void tiles_get(void);
   void update_all_ticks(void);
   void update_deep_water(void);

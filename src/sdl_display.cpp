@@ -25,7 +25,6 @@
 
 void sdl_display(void)
 {
-  pcg_random_allowed = false;
   {
     blit_fbo_bind(FBO_FINAL);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -77,7 +76,6 @@ void sdl_display(void)
       glFlush();
     }
   }
-  pcg_random_allowed = true;
 }
 
 void sdl_display_reset(void)

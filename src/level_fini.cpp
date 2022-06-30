@@ -3,13 +3,15 @@
 // See the README.md file for license info.
 //
 
+#include <cinttypes> // PRIX32
+
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
-#include <cinttypes> // PRIX32
 
 Level::~Level(void)
 {
@@ -25,6 +27,10 @@ Level::~Level(void)
 
 void Level::fini(void)
 {
+  TRACE_NO_INDENT();
+
+  pcg_random_allowed++;
+
   IF_DEBUG2
   {
     log("-");
@@ -105,4 +111,12 @@ void Level::fini(void)
     log("Destroyed, seed %u", seed);
     log("-");
   }
+
+  if (game->request_reset_state) {
+    CON("Handle deferred state to STATE_NORMAL");
+    game->change_state(Game::STATE_NORMAL);
+    game->request_reset_state = false;
+  }
+
+  pcg_random_allowed--;
 }

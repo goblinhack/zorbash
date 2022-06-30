@@ -875,6 +875,7 @@ int main(int argc, char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   CON("INI: Load dungeon thing templates");
+  pcg_random_allowed++;
   tp_init();
   if (g_errored) {
     goto loop;
@@ -929,6 +930,7 @@ loop:
   wid_toggle_hidden(wid_console_window);
 
   config_gfx_vsync_update();
+  pcg_random_allowed--;
 
   g_opt_no_slow_log_flush = false;
   TRACE_NO_INDENT();
