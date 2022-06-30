@@ -275,6 +275,12 @@ Press <TAB> to switch between modes during the game.
 <img alt="Ascii art" src="pics/ascii/screenshot.5.png" width="45%">
 </p>
 
+<p align="center">
+<img alt="Pixel art" src="pics/pixelart/screenshot.6.png" width="45%">
+&nbsp; &nbsp; &nbsp; &nbsp;
+<img alt="Ascii art" src="pics/ascii/screenshot.6.png" width="45%">
+</p>
+
 Ascii Screenshots
 -----------------
 
