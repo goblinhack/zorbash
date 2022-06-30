@@ -154,7 +154,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
 
   if (is_tmp_thing()) {
     game->world.alloc_tmp_thing_id(this);
-    pcg_random_allowed = false;
   } else {
     game->world.alloc_thing_id(this);
   }
@@ -271,13 +270,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   // The grid is the perma background matrix like substrate that is the ether of this universe!
   //
   is_the_grid = tp()->is_the_grid();
-
-  //
-  // Reset fixed randomization.
-  //
-  if (is_tmp_thing()) {
-    pcg_random_allowed = true;
-  }
 
   //
   // Do on born actions.
