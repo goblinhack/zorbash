@@ -178,7 +178,7 @@ void Thing::move_carried_items_immediately(void)
   }
 }
 
-bool Thing::is_carrying_item(void)
+bool Thing::is_carrying_an_item(void)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -191,7 +191,7 @@ bool Thing::is_carrying_item(void)
 
   auto owner = top_owner();
   if (owner) {
-    return owner->is_carrying_item();
+    return owner->is_carrying_an_item();
   }
 
   return false;

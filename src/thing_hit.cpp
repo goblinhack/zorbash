@@ -640,7 +640,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   // Try to steal instead of attacking?
   //
   if (real_hitter->is_item_eater()) {
-    if (is_carrying_item()) {
+    if (is_carrying_an_item()) {
       if (real_hitter->steal_item_from(this)) {
         return true;
       }
