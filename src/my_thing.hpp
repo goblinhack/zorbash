@@ -506,7 +506,7 @@ public:
   bool inventory_shortcuts_remove(Thingp what, Thingp target);
   bool is_blocking_terrain(const Thingp it);
   bool is_bloodied(void);
-  bool is_carrying_item(void);
+  bool is_carrying_an_item(void);
   bool is_carrying_treasure(void);
   bool is_disliked_by_me(const point p);
   bool is_disliked_by_me(const Thingp it);

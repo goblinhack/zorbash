@@ -115,7 +115,7 @@ int Thing::danger_initial_level(void)
   if (is_able_to_shove()) {
     danger_level++;
   }
-  if (is_carrying_item()) {
+  if (is_carrying_an_item()) {
     danger_level++;
   }
   if (is_acid()) {
@@ -210,7 +210,7 @@ int Thing::danger_current_level(void)
   if (is_able_to_shove()) {
     danger_level++;
   }
-  if (is_carrying_item()) {
+  if (is_carrying_an_item()) {
     danger_level++;
   }
   if (is_acid()) {

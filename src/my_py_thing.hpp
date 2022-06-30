@@ -184,7 +184,7 @@ PyObject *thing_is_ait_breather(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_is_bridge(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_buff(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_burnable(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_carrying_item(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_carrying_an_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrying_treasure(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_chasm(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cloak(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -309,8 +309,6 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
     blit = false;
   } else if (unlikely(is_hidden)) {
     blit = false;
-  } else if (immediate_owner()) {
-    blit = false;
   } else if (unlikely(tpp->gfx_pixelart_attack_anim() || tpp->gfx_pixelart_equip_carry_anim())) {
     //
     // Hide weapons that have swung
@@ -320,6 +318,30 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
     }
   } else if (is_cursor() || is_cursor_path() || is_the_grid) {
     blit = true;
+  }
+
+  auto owner = immediate_owner();
+  if (owner) {
+    //
+    // Prevent items inside bags/chests being seen. This also works for falling.
+    //
+    if (owner->is_bag_item_container()) {
+      blit = false;
+    }
+
+    //
+    // In ascii mode we do not show equipped items
+    //
+    if (is_usable() && owner->is_equipped(this)) {
+      blit = false;
+    }
+
+    //
+    // In ascii mode we do not show carried items
+    //
+    if (gfx_pixelart_equip_carry_anim()) {
+      blit = false;
+    }
   }
 
   if (! blit) {
