@@ -146,12 +146,10 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   // Must do this after TP assignment or logging will fail
   //
-  if (game->robot_mode) {
-    if (! pcg_random_allowed) {
-      err("Error, trying to create a thing outside of game loop");
-      backtrace_dump();
-      DIE("Error, trying to create a thing outside of game loop");
-    }
+  if (! pcg_random_allowed) {
+    err("Error, trying to create a thing outside of game loop");
+    backtrace_dump();
+    DIE("Error, trying to create a thing outside of game loop");
   }
 
   if (is_tmp_thing()) {

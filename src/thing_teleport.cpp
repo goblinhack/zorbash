@@ -331,17 +331,8 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
       if (level->is_shallow_water((int) curr_at.x, (int) curr_at.y)) {
         dbg("Causes ripples");
         TRACE_AND_INDENT();
-        if (game->robot_mode) {
-          //
-          // Faster
-          //
-          if (pcg_random_range(0, 1000) > 900) {
-            level->thing_new(tp_random_ripple()->name(), curr_at);
-          }
-        } else {
-          if (pcg_random_range(0, 1000) > 500) {
-            level->thing_new(tp_random_ripple()->name(), curr_at);
-          }
+        if (pcg_random_range(0, 1000) > 500) {
+          level->thing_new(tp_random_ripple()->name(), curr_at);
         }
       }
     }

@@ -39,16 +39,12 @@ void Thing::enemies_tick(void)
     }
 
     if (--p.second > 0) {
-      if (is_player() && game->robot_mode) {
-        dbg("Robot: enemy timeout %s (%d timeout)", attacker->to_string().c_str(), p.second);
-      }
+      dbg("Enemy timeout %s (%d timeout)", attacker->to_string().c_str(), p.second);
       continue;
     }
 
     if (attacker->is_dead) {
-      if (is_player() && game->robot_mode) {
-        dbg("Robot: enemy remove as is dead: %s", attacker->to_string().c_str());
-      }
+      dbg("Enemy remove as is dead: %s", attacker->to_string().c_str());
       aip()->enemies.erase(p.first);
       return;
     }
@@ -57,9 +53,7 @@ void Thing::enemies_tick(void)
     // If far enough away start to forget this enemy
     //
     if (distance(attacker->curr_at, curr_at) > distance_avoid_get()) {
-      if (is_player() && game->robot_mode) {
-        dbg("Robot: enemy remove as is far away: %s", attacker->to_string().c_str());
-      }
+      dbg("Enemy remove as is far away: %s", attacker->to_string().c_str());
       aip()->enemies.erase(p.first);
       return;
     }
@@ -67,9 +61,7 @@ void Thing::enemies_tick(void)
     //
     // Be resentful a bit longer
     //
-    if (is_player() && game->robot_mode) {
-      dbg("Robot: enemy persists a bit longer: %s", attacker->to_string().c_str());
-    }
+    dbg("Enemy persists a bit longer: %s", attacker->to_string().c_str());
     p.second = pcg_random_range(0, 10);
   }
 }
@@ -95,11 +87,7 @@ void Thing::add_enemy(Thingp attacker)
   }
 
   if (! aip()->enemies[ attacker->id ]) {
-    if (is_player() && game->robot_mode) {
-      dbg("Robot: enemy add %s", attacker->to_string().c_str());
-    } else {
-      dbg("Add new enemy %s", attacker->to_string().c_str());
-    }
+    dbg("Add new enemy %s", attacker->to_string().c_str());
     aip()->enemies[ attacker->id ] = ai_resent_count();
   } else {
     dbg("Increment old enemy %s", attacker->to_string().c_str());
