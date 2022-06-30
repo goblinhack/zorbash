@@ -47,6 +47,15 @@ void Thing::temperature_tick(void)
       continue;
     }
 
+    //
+    // So bats can flyu over lava
+    //
+    if (t->is_lava()) {
+      if (is_flying()) {
+        continue;
+      }
+    }
+
     location_t += t->temperature_get();
   }
   FOR_ALL_THINGS_END()
