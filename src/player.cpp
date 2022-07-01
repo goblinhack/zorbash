@@ -74,6 +74,7 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
     case Game::STATE_KEYBOARD_MENU:
     case Game::STATE_SAVE_MENU:
     case Game::STATE_QUIT_MENU: LOG("Ignore player action when in menu"); return false;
+    default: ERR("Unhandled game state"); return false;
   }
 
   if (left || right || up || down) {

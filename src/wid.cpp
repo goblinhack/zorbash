@@ -6660,6 +6660,7 @@ static void wid_tick_all(void)
     case Game::STATE_KEYBOARD_MENU:
     case Game::STATE_SAVE_MENU:
     case Game::STATE_QUIT_MENU: break;
+    default: ERR("Unhandled game state"); break;
   }
 }
 

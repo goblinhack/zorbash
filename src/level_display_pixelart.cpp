@@ -18,12 +18,12 @@
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"
 
-void Level::display_pixelart(void)
+void Level::display_pixelart_map(void)
 {
   TRACE_NO_INDENT();
 
   bool shake = screen_shake_begin();
-  display_map();
+  display_pixelart_map_all();
   if (shake) {
     screen_shake_end();
   }
@@ -78,7 +78,204 @@ void Level::display_pixelart(void)
   }
 }
 
-void Level::display_map(void)
+void Level::display_pixelart_map_bg_things(void)
+{
+  TRACE_NO_INDENT();
+
+  auto fbo = FBO_PIXELART_FULLMAP;
+  gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glcolor(WHITE);
+
+  {
+    blit_fbo_bind(fbo);
+    blit_init();
+    glClear(GL_COLOR_BUFFER_BIT);
+    for (auto z = 0; z <= MAP_DEPTH_OBJ; z++) {
+      for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          {
+            if (! t->gfx_pixelart_shown_in_bg()) {
+              continue;
+            }
+            if (z <= MAP_DEPTH_FLOOR2) {
+              t->blit_pixelart(fbo);
+            }
+          }
+          FOR_ALL_THINGS_END()
+        }
+      }
+    }
+    blit_flush();
+
+    display_pixelart_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+    display_pixelart_deep_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+    display_pixelart_lava(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
+
+    blit_fbo_bind(fbo);
+    blit_init();
+    int z = MAP_DEPTH_OBJ;
+    {
+      for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          {
+            if (! t->gfx_pixelart_shown_in_bg()) {
+              continue;
+            }
+            t->blit_pixelart(fbo);
+          }
+          FOR_ALL_THINGS_END()
+        }
+      }
+    }
+    blit_flush();
+    blit_fbo_unbind();
+  }
+
+  gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
+}
+
+void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
+                                        const int16_t maxy)
+{
+  TRACE_NO_INDENT();
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glcolor(WHITE);
+
+  FOR_ALL_ANIMATED_THINGS_LEVEL(this, t) { t->animate(); }
+  FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
+
+  //
+  // Blit the floor
+  //
+  blit_fbo_bind(fbo);
+  blit_init();
+
+  for (auto z = 0; z <= MAP_DEPTH_FLOOR2; z++) {
+    for (auto y = miny; y < maxy; y++) {
+      for (auto x = minx; x < maxx; x++) {
+        //
+        // NOTE: if level pop/push happens here then we can end up missing this
+        // thing in the blit as we are using the unsafe(faster) walker.
+        //
+        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
+        FOR_ALL_THINGS_END()
+      }
+    }
+  }
+  blit_flush();
+
+  display_pixelart_water(fbo, minx, miny, maxx, maxy);
+  display_pixelart_deep_water(fbo, minx, miny, maxx, maxy);
+  display_pixelart_lava(fbo, minx, miny, maxx, maxy);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glcolor(WHITE);
+
+  //
+  // Blit stuff on top of the floor and water
+  //
+  blit_fbo_bind(fbo);
+  blit_init();
+  int z = MAP_DEPTH_OBJ;
+  {
+    for (auto y = miny; y < maxy; y++) {
+      for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
+        for (auto x = minx; x < maxx; x++) {
+          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          {
+            if (t->z_prio() != z_prio) {
+              continue;
+            }
+            t->blit_pixelart(fbo);
+          }
+          FOR_ALL_THINGS_END()
+        }
+      }
+    }
+  }
+  blit_flush();
+
+  glcolor(WHITE);
+}
+
+//
+// Blit objects that are in front of small lights so that the player is not lost in lava glow
+//
+void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
+                                           const int16_t maxy)
+{
+  TRACE_NO_INDENT();
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glcolor(WHITE);
+
+  blit_fbo_bind(fbo);
+  blit_init();
+  for (auto z = (int) MAP_DEPTH_OBJ; z <= MAP_DEPTH_OBJ; z++) {
+    for (auto y = miny; y < maxy; y++) {
+      for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
+        for (auto x = minx; x < maxx; x++) {
+          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          {
+            if (t->z_prio() != z_prio) {
+              continue;
+            }
+
+            t->blit_pixelart(fbo);
+
+            //
+            // Sanity checks
+            //
+            IF_DEBUG2
+            {
+              if (! t->is_moving && ! t->is_jumping && ! t->is_falling) {
+                if (t->curr_at != make_point(t->interpolated_at_get())) {
+                  t->die("Thing is not where its interpolated to be; is at %f,%f", t->interpolated_at_get().x,
+                         t->interpolated_at_get().y);
+                }
+              }
+            }
+          }
+        }
+        FOR_ALL_THINGS_END()
+      }
+    }
+  }
+  blit_flush();
+}
+
+//
+// Things above the light
+//
+void Level::display_pixelart_map_fg2_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
+                                            const int16_t maxy)
+{
+  TRACE_NO_INDENT();
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glcolor(WHITE);
+
+  blit_fbo_bind(fbo);
+  blit_init();
+  for (auto z = (int) MAP_DEPTH_TOP; z < MAP_DEPTH; z++) {
+    for (auto y = miny; y < maxy; y++) {
+      for (auto x = minx; x < maxx; x++) {
+        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
+        FOR_ALL_THINGS_END()
+      }
+    }
+  }
+  blit_flush();
+}
+
+void Level::display_pixelart_map_all(void)
 {
   TRACE_NO_INDENT();
 
@@ -321,201 +518,4 @@ void Level::display_map(void)
     glClear(GL_COLOR_BUFFER_BIT);
     blit_fbo_unbind();
   }
-}
-
-void Level::display_pixelart_map_bg_things(void)
-{
-  TRACE_NO_INDENT();
-
-  auto fbo = FBO_PIXELART_FULLMAP;
-  gl_enter_2d_mode(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT);
-
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glcolor(WHITE);
-
-  {
-    blit_fbo_bind(fbo);
-    blit_init();
-    glClear(GL_COLOR_BUFFER_BIT);
-    for (auto z = 0; z <= MAP_DEPTH_OBJ; z++) {
-      for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_WIDTH; x++) {
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
-          {
-            if (! t->gfx_pixelart_shown_in_bg()) {
-              continue;
-            }
-            if (z <= MAP_DEPTH_FLOOR2) {
-              t->blit_pixelart(fbo);
-            }
-          }
-          FOR_ALL_THINGS_END()
-        }
-      }
-    }
-    blit_flush();
-
-    display_pixelart_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
-    display_pixelart_deep_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
-    display_pixelart_lava(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolor(WHITE);
-
-    blit_fbo_bind(fbo);
-    blit_init();
-    int z = MAP_DEPTH_OBJ;
-    {
-      for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_WIDTH; x++) {
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
-          {
-            if (! t->gfx_pixelart_shown_in_bg()) {
-              continue;
-            }
-            t->blit_pixelart(fbo);
-          }
-          FOR_ALL_THINGS_END()
-        }
-      }
-    }
-    blit_flush();
-    blit_fbo_unbind();
-  }
-
-  gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
-}
-
-void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                                        const int16_t maxy)
-{
-  TRACE_NO_INDENT();
-
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glcolor(WHITE);
-
-  FOR_ALL_ANIMATED_THINGS_LEVEL(this, t) { t->animate(); }
-  FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
-
-  //
-  // Blit the floor
-  //
-  blit_fbo_bind(fbo);
-  blit_init();
-
-  for (auto z = 0; z <= MAP_DEPTH_FLOOR2; z++) {
-    for (auto y = miny; y < maxy; y++) {
-      for (auto x = minx; x < maxx; x++) {
-        //
-        // NOTE: if level pop/push happens here then we can end up missing this
-        // thing in the blit as we are using the unsafe(faster) walker.
-        //
-        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
-        FOR_ALL_THINGS_END()
-      }
-    }
-  }
-  blit_flush();
-
-  display_pixelart_water(fbo, minx, miny, maxx, maxy);
-  display_pixelart_deep_water(fbo, minx, miny, maxx, maxy);
-  display_pixelart_lava(fbo, minx, miny, maxx, maxy);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glcolor(WHITE);
-
-  //
-  // Blit stuff on top of the floor and water
-  //
-  blit_fbo_bind(fbo);
-  blit_init();
-  int z = MAP_DEPTH_OBJ;
-  {
-    for (auto y = miny; y < maxy; y++) {
-      for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
-        for (auto x = minx; x < maxx; x++) {
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
-          {
-            if (t->z_prio() != z_prio) {
-              continue;
-            }
-            t->blit_pixelart(fbo);
-          }
-          FOR_ALL_THINGS_END()
-        }
-      }
-    }
-  }
-  blit_flush();
-
-  glcolor(WHITE);
-}
-
-//
-// Blit objects that are in front of small lights so that the player is not lost in lava glow
-//
-void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                                           const int16_t maxy)
-{
-  TRACE_NO_INDENT();
-
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glcolor(WHITE);
-
-  blit_fbo_bind(fbo);
-  blit_init();
-  for (auto z = (int) MAP_DEPTH_OBJ; z <= MAP_DEPTH_OBJ; z++) {
-    for (auto y = miny; y < maxy; y++) {
-      for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
-        for (auto x = minx; x < maxx; x++) {
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
-          {
-            if (t->z_prio() != z_prio) {
-              continue;
-            }
-
-            t->blit_pixelart(fbo);
-
-            //
-            // Sanity checks
-            //
-            IF_DEBUG2
-            {
-              if (! t->is_moving && ! t->is_jumping && ! t->is_falling) {
-                if (t->curr_at != make_point(t->interpolated_at_get())) {
-                  t->die("Thing is not where its interpolated to be; is at %f,%f", t->interpolated_at_get().x,
-                         t->interpolated_at_get().y);
-                }
-              }
-            }
-          }
-        }
-        FOR_ALL_THINGS_END()
-      }
-    }
-  }
-  blit_flush();
-}
-
-//
-// Things above the light
-//
-void Level::display_pixelart_map_fg2_things(int fbo, const int16_t minx, const int16_t miny, const int16_t maxx,
-                                            const int16_t maxy)
-{
-  TRACE_NO_INDENT();
-
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glcolor(WHITE);
-
-  blit_fbo_bind(fbo);
-  blit_init();
-  for (auto z = (int) MAP_DEPTH_TOP; z < MAP_DEPTH; z++) {
-    for (auto y = miny; y < maxy; y++) {
-      for (auto x = minx; x < maxx; x++) {
-        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
-        FOR_ALL_THINGS_END()
-      }
-    }
-  }
-  blit_flush();
 }
