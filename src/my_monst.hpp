@@ -120,7 +120,8 @@ public:
   int distance_throw      = {};
   int enchant             = {};
   int enchant_max         = {};
-  int gold                = {};
+  int gold                = {-1};
+  int nutrition           = {-1};
   int health              = {};
   int health_max          = {};
   int jump_distance_mod   = {};

@@ -49,42 +49,6 @@ int Thing::spawn_group_size(void)
   return (tp()->spawn_group_size_dice().roll());
 }
 
-const Dice &Thing::nutrition_dice(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->nutrition_dice());
-}
-
-const std::string &Thing::nutrition_dice_str(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->nutrition_dice_str());
-}
-
-int Thing::nutrition_get(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->nutrition_dice().roll());
-}
-
-const Dice &Thing::gold_value_dice(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gold_value_dice());
-}
-
-const std::string &Thing::gold_value_dice_str(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gold_value_dice_str());
-}
-
-int Thing::gold_value(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gold_value_dice().roll());
-}
-
 const Dice &Thing::lifespan_dice(void)
 {
   TRACE_NO_INDENT();
@@ -683,12 +647,6 @@ int Thing::is_collected_as_keys(void)
   return (tp()->is_collected_as_keys());
 }
 
-int Thing::is_collected_as_gold(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_collected_as_gold());
-}
-
 int Thing::is_combustible(void)
 {
   TRACE_NO_INDENT();
@@ -927,12 +885,6 @@ int Thing::is_food(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_food());
-}
-
-int Thing::is_gold(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_gold());
 }
 
 int Thing::is_hazard(void)
@@ -3534,80 +3486,6 @@ void Thing::submerged_offset_set(int v)
   TRACE_NO_INDENT();
   new_infop();
   infop()->submerged_offset = v;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// gold
-////////////////////////////////////////////////////////////////////////////
-int Thing::gold(void)
-{
-  TRACE_NO_INDENT();
-  if (maybe_infop()) {
-    return (infop()->gold);
-  } else {
-    return 0;
-  }
-}
-
-int Thing::gold_set(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_remake_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->gold = v);
-  return n;
-}
-
-int Thing::gold_decr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_remake_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->gold -= v);
-  if (infop()->gold < 0) {
-    infop()->gold = 0;
-  }
-  return n;
-}
-
-int Thing::gold_incr(int v)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_remake_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->gold += v);
-  return n;
-}
-
-int Thing::gold_decr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_remake_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->gold--);
-  if (infop()->gold < 0) {
-    infop()->gold = 0;
-  }
-  return n;
-}
-
-int Thing::gold_incr(void)
-{
-  TRACE_NO_INDENT();
-  if (is_player()) {
-    game->request_remake_rightbar = true;
-  }
-  new_infop();
-  auto n = (infop()->gold++);
-  return n;
 }
 
 ////////////////////////////////////////////////////////////////////////////

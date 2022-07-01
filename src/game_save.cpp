@@ -69,6 +69,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->fadeup_height);
   out << bits(my.t->fall_height);
   out << bits(my.t->gold);
+  out << bits(my.t->nutrition);
   out << bits(my.t->health);
   out << bits(my.t->health_max);
   out << bits(my.t->jump_distance_mod);
