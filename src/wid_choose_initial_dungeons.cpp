@@ -1366,7 +1366,6 @@ void Game::wid_choose_initial_dungeons(void)
           } else {
             wid_set_text(b, "_");
           }
-
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
