@@ -80,11 +80,18 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     IF_DEBUG1 { t->log("Create thing info popup; no level"); }
     return nullptr;
   }
+
+  if (! level->should_display_map()) {
+    ERR("Trying to display thing info when the map is not being displayed");
+    return nullptr;
+  }
+
   auto player = level->player;
   if (! player) {
     IF_DEBUG1 { t->log("Create thing info popup; no player"); }
     return nullptr;
   }
+
   if (! player->player_is_ready_for_thing_info()) {
     IF_DEBUG1 { t->log("Create thing info popup; not ready for thing info"); }
     return nullptr;
@@ -223,6 +230,11 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
   auto level = game->level;
   if (! level) {
+    return nullptr;
+  }
+
+  if (! level->should_display_map()) {
+    ERR("Trying to display thing info when the map is not being displayed");
     return nullptr;
   }
 
