@@ -23,6 +23,8 @@
 
 void Level::update_light_ascii_map(void)
 {
+  TRACE_NO_INDENT();
+
   _ascii_light_source = {};
 
   for (auto y = miny; y < maxy; y++) {
@@ -88,6 +90,8 @@ void Level::update_light_ascii_map(void)
 //
 void Level::display_ascii_treasure_map(point tl, point br)
 {
+  TRACE_NO_INDENT();
+
   if (! player) {
     return;
   }
@@ -120,6 +124,8 @@ void Level::display_ascii_treasure_map(point tl, point br)
 //
 void Level::display_ascii_beast_map(point tl, point br)
 {
+  TRACE_NO_INDENT();
+
   if (! player) {
     return;
   }
@@ -149,6 +155,12 @@ void Level::display_ascii_beast_map(point tl, point br)
 
 void Level::display_ascii_map(point tl, point br)
 {
+  TRACE_NO_INDENT();
+
+  if (! should_display_map()) {
+    return;
+  }
+
   display_map_set_bounds();
   display_tick_animation();
 

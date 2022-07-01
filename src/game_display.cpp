@@ -16,6 +16,6 @@ void Game::display(void)
   }
 
   if (level) {
-    level->display_pixelart();
+    level->display_pixelart_map();
   }
 }

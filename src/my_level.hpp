@@ -940,7 +940,9 @@ public:
   void display_pixelart_map_mini(void);
   void display_pixelart_map_things(const int, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_projectiles(point tl, point br);
-  void display_pixelart(void);
+  void display_pixelart_map(void);
+  void display_pixelart_map_all(void);
+  bool should_display_map(void);
   void display_pixelart_water(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_projectiles(point tl, point br);
   void display_target(void);
