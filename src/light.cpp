@@ -23,13 +23,15 @@ static int  g_glow_overlay_texid;
 
 Light::Light(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   newptr(MTYPE_LIGHT, this, "Light");
 }
 
 Light::~Light(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   verify(MTYPE_LIGHT, this);
   if (is_being_destroyed) {
     die("Death recursion");
@@ -107,7 +109,8 @@ void Light::draw_line(int16_t index, const point p0, const point p1)
 
 Lightp light_new(Thingp owner, point offset, int light_dist, color col, int fbo)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   auto l = new Light(); // std::make_shared< class Light >();
 
   l->offset     = offset;
@@ -127,7 +130,8 @@ Lightp light_new(Thingp owner, point offset, int light_dist, color col, int fbo)
 
 Lightp light_new(Thingp owner, point offset, int light_dist)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   auto l = new Light(); // std::make_shared< class Light >();
 
   l->offset        = offset;
@@ -143,7 +147,7 @@ Lightp light_new(Thingp owner, point offset, int light_dist)
 
 void Light::update(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   level          = owner->level;
   max_light_rays = LIGHT_MAX_RAYS;
@@ -162,7 +166,7 @@ void Light::update(void)
   }
 }
 
-void Light::destroy(void) { TRACE_AND_INDENT(); }
+void Light::destroy(void) { TRACE_NO_INDENT(); }
 
 void Light::reset(void)
 {
@@ -758,7 +762,8 @@ void Light::render(int ray_cast_only)
 
 void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   if (player) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
@@ -826,7 +831,8 @@ void Level::lights_render(int minx, int miny, int maxx, int maxy, int fbo)
 //
 void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   blit_init();
   for (auto y = miny; y < maxy; y++) {
     for (auto x = minx; x < maxx; x++) {
@@ -989,7 +995,8 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
 //
 void Level::lights_fade(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       auto v = is_currently_pixelart_raycast_lit_no_check(x, y);
@@ -1007,7 +1014,8 @@ void Level::lights_fade(void)
 //
 void Level::lights_update_new_level(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_LIGHTS_AT(this, t, x, y)
@@ -1031,7 +1039,8 @@ void Level::lights_update_new_level(void)
 //
 void Level::lights_update_same_level(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_LIGHTS_AT(this, t, x, y)
