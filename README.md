@@ -2,7 +2,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- cannot shove brazier                                                                                                                         -->
-<!-- 2nd level is not lit                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
