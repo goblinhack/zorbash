@@ -99,7 +99,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
           last_key_pressed = *key;
         }
 
+        pcg_random_allowed++;
         wid_key_down(key, sdl.mouse_x, sdl.mouse_y);
+        pcg_random_allowed--;
 
         sdl.shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
 
@@ -129,7 +131,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
 
         key = &event->key.keysym;
 
+        pcg_random_allowed++;
         wid_key_up(key, sdl.mouse_x, sdl.mouse_y);
+        pcg_random_allowed--;
 
         sdl.shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
         break;
@@ -219,7 +223,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         wid_mouse_visible    = 1;
         wid_mouse_two_clicks = (now - sdl.mouse_down_when < UI_MOUSE_DOUBLE_CLICK);
 
+        pcg_random_allowed++;
         wid_mouse_down(event->button.button, sdl.mouse_x, sdl.mouse_y);
+        pcg_random_allowed--;
         sdl.mouse_down_when = now;
         break;
       }
@@ -234,7 +240,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         DBG2("SDL: Mouse UP: button %d released at %d,%d state %d", event->button.button, event->button.x,
              event->button.y, sdl.mouse_down);
 
+        pcg_random_allowed++;
         wid_mouse_up(event->button.button, sdl.mouse_x, sdl.mouse_y);
+        pcg_random_allowed--;
         break;
       }
     case SDL_JOYAXISMOTION:
@@ -272,7 +280,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
 
         if (sdl.right_fire || sdl.left_fire) {
           sdl_get_mouse();
+          pcg_random_allowed++;
           wid_joy_button(sdl.mouse_x, sdl.mouse_y);
+          pcg_random_allowed--;
         }
 
         break;
@@ -353,7 +363,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         DBG2("SDL: Joystick %d: Button %d pressed", event->jbutton.which, event->jbutton.button);
         set(sdl.joy_buttons, event->jbutton.button, (uint8_t) 1);
         sdl_get_mouse();
+        pcg_random_allowed++;
         wid_joy_button(sdl.mouse_x, sdl.mouse_y);
+        pcg_random_allowed--;
         break;
       }
     case SDL_JOYBUTTONUP:
