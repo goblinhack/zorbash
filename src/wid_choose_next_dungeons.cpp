@@ -30,8 +30,8 @@
 #include "my_wid_rightbar.hpp"
 #include "my_wid_topcon.hpp"
 
-#define WID_LEVEL_WIDTH_CHARS  7
-#define WID_LEVEL_HEIGHT_CHARS 7
+static int WID_LEVEL_WIDTH_CHARS  = 7;
+static int WID_LEVEL_HEIGHT_CHARS = 7;
 
 static uint8_t wid_choose_next_dungeons_enter(Widp w, int x, int y, uint32_t button);
 static void    wid_choose_next_dungeons_update_buttons(Widp w);
@@ -172,8 +172,10 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
       case 8: bg_tilename = "dungeon_icon.8"; break;
     }
 
-    wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY5);
-    wid_set_bg_tilename(wid_level_description->wid_popup_container, bg_tilename);
+    wid_set_style(wid_level_description->wid_popup_container, UI_WID_STYLE_GRAY);
+    if (! g_opt_ascii) {
+      wid_set_bg_tilename(wid_level_description->wid_popup_container, bg_tilename);
+    }
   }
 
   IF_DEBUG
@@ -491,20 +493,9 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
         wid_set_color(b, WID_COLOR_BG, GRAY50);
         break;
     }
-  } else {
-    wid_set_color(b, WID_COLOR_BG, GRAY);
-    switch (l->difficulty_depth) {
-      case -1: break;
-      case 1: bg_tilename = "dungeon_icon_loading.1"; break;
-      case 2: bg_tilename = "dungeon_icon_loading.2"; break;
-      case 3: bg_tilename = "dungeon_icon_loading.3"; break;
-      case 4: bg_tilename = "dungeon_icon_loading.4"; break;
-      case 5: bg_tilename = "dungeon_icon_loading.5"; break;
-      case 6: bg_tilename = "dungeon_icon_loading.6"; break;
-      case 7: bg_tilename = "dungeon_icon_loading.7"; break;
-      case 8: bg_tilename = "dungeon_icon_loading.8"; break;
-    }
   }
+
+  wid_set_style(b, UI_WID_STYLE_GRAY);
 
   std::string fg_tilename;
 
@@ -606,6 +597,14 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
   paused                    = true;
   player->is_changing_level = true;
 
+  if (g_opt_ascii) {
+    WID_LEVEL_WIDTH_CHARS  = 3;
+    WID_LEVEL_HEIGHT_CHARS = 3;
+  } else {
+    WID_LEVEL_WIDTH_CHARS  = 7;
+    WID_LEVEL_HEIGHT_CHARS = 7;
+  }
+
   //
   // Create a context to hold button info so we can update it when the focus changes
   //
@@ -706,9 +705,9 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
     int pbr_y;
     wid_get_tl_x_tl_y_br_x_br_y(button_container, &ptl_x, &ptl_y, &pbr_x, &pbr_y);
 
-    /*
-     * Create the buttons
-     */
+    //
+    // Create the buttons
+    //
     for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
       for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
         auto l = ctx->levels[ y ][ x ];
@@ -790,6 +789,72 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
           if (l->grid_at == alt->grid_at + point(1, 0)) {
             has_door_left = true;
             ctx->prev_levels[ y ][ x ].push_back(alt);
+          }
+        }
+
+        if (g_opt_ascii) {
+          if (l->is_boss_level) {
+            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+            point tl(tl_x, tl_y);
+            point br(br_x, br_y);
+
+            br.x = tl.x;
+            br.y = tl.y;
+            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
+            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
+
+            wid_set_pos(b, tl, br);
+            wid_set_color(b, WID_COLOR_BG, ORANGE);
+            wid_set_text(b, "B");
+            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+          }
+
+          if (l->is_crystal_level) {
+            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+            point tl(tl_x, tl_y);
+            point br(br_x, br_y);
+
+            br.x = tl.x;
+            br.y = tl.y;
+            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
+            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
+
+            wid_set_pos(b, tl, br);
+            wid_set_color(b, WID_COLOR_BG, YELLOW);
+            wid_set_text(b, "*");
+            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+          }
+
+          if (l == game->level) {
+            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+            point tl(tl_x, tl_y);
+            point br(br_x, br_y);
+
+            br.x = tl.x;
+            br.y = tl.y;
+            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
+            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
+
+            wid_set_pos(b, tl, br);
+            wid_set_color(b, WID_COLOR_BG, PINK);
+            wid_set_text(b, "@");
+            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
+          }
+
+          if (l->is_final_boss_level) {
+            Widp  b = wid_new_square_button(button_container, "wid level grid connector");
+            point tl(tl_x, tl_y);
+            point br(br_x, br_y);
+
+            br.x = tl.x;
+            br.y = tl.y;
+            tl.y += WID_LEVEL_HEIGHT_CHARS - 1;
+            br.y += WID_LEVEL_HEIGHT_CHARS - 1;
+
+            wid_set_pos(b, tl, br);
+            wid_set_color(b, WID_COLOR_BG, RED);
+            wid_set_text(b, "Z");
+            wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
           }
         }
 

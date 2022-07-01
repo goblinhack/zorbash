@@ -472,8 +472,11 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
         auto alt_loc = l->world_at + point3d(delta.x, 0, delta.y * 2);
         auto alt_l   = get(game->world.levels, alt_loc.x, alt_loc.y, alt_loc.z);
         if (! alt_l) {
-          l->err("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
-          DIE("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
+          //
+          // Seems to happen somtimes during world exit. Safe to ignore?
+          //
+          l->log("Have node but no level at %d,%d, delta %d,%d", x, y, delta.x, delta.y);
+          continue;
         }
 
         if (alt->walk_order_level_no < node->walk_order_level_no) {
@@ -1208,9 +1211,9 @@ void Game::wid_choose_initial_dungeons(void)
 
     game_grid_node_walk(ctx);
 
-    /*
-     * Create the buttons
-     */
+    //
+    // Create the buttons
+    //
     for (auto x = 0; x < ctx->nodes->grid_width; x++) {
       for (auto y = 0; y < ctx->nodes->grid_height; y++) {
         auto node = ctx->nodes->getn(x, y);
