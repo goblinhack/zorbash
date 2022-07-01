@@ -173,8 +173,16 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
     }
 
     wid_set_style(wid_level_description->wid_popup_container, UI_WID_STYLE_GRAY);
-    if (! g_opt_ascii) {
-      wid_set_bg_tilename(wid_level_description->wid_popup_container, bg_tilename);
+    switch (l->difficulty_depth) {
+      case -1: break;
+      case 1: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, DARKGREEN); break;
+      case 2: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, OLIVEDRAB); break;
+      case 3: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, YELLOW); break;
+      case 4: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, TAN); break;
+      case 5: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, ORANGE); break;
+      case 6: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, DARKORANGE4); break;
+      case 7: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, RED); break;
+      case 8: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY50); break;
     }
   }
 
@@ -259,7 +267,10 @@ static void wid_choose_next_dungeons_tick(Widp w)
               Widp b    = ctx->buttons[ n_at.y ][ n_at.x ];
               if (b) {
                 color c = WHITE;
-                c.a     = val;
+                if (g_opt_ascii) {
+                  c = GREEN;
+                }
+                c.a = val;
                 wid_set_color(b, WID_COLOR_BG, c);
                 wid_update(b);
                 wid_set_on_mouse_down(b, wid_choose_next_dungeons_enter);
@@ -273,7 +284,10 @@ static void wid_choose_next_dungeons_tick(Widp w)
               Widp b    = ctx->buttons[ n_at.y ][ n_at.x ];
               if (b) {
                 color c = WHITE;
-                c.a     = val;
+                if (g_opt_ascii) {
+                  c = GREEN;
+                }
+                c.a = val;
                 wid_set_color(b, WID_COLOR_BG, c);
                 wid_update(b);
                 wid_set_on_mouse_down(b, wid_choose_next_dungeons_enter);
@@ -546,7 +560,6 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   wid_set_text(b, tmp);
   wid_set_text_lhs(b, true);
   wid_set_text_top(b, true);
-  wid_set_color(b, WID_COLOR_BG, GRAY30);
 }
 
 static void wid_choose_next_dungeons_update_buttons(Widp w)
