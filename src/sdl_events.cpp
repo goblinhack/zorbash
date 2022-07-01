@@ -389,7 +389,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
   }
 }
 
-void sdl_key_repeat_events(void)
+static void sdl_key_repeat_events_(void)
 {
   TRACE_NO_INDENT();
 
@@ -540,4 +540,11 @@ void sdl_key_repeat_events(void)
   old_right    = right;
   old_wait     = wait;
   old_movement = movement;
+}
+
+void sdl_key_repeat_events(void)
+{
+  pcg_random_allowed++;
+  sdl_key_repeat_events_();
+  pcg_random_allowed--;
 }
