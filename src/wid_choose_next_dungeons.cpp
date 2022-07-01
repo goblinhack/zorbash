@@ -458,16 +458,41 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   if (ctx->levels[ y ][ x ]) {
     switch (l->difficulty_depth) {
       case -1: break;
-      case 1: bg_tilename = "dungeon_icon.1"; break;
-      case 2: bg_tilename = "dungeon_icon.2"; break;
-      case 3: bg_tilename = "dungeon_icon.3"; break;
-      case 4: bg_tilename = "dungeon_icon.4"; break;
-      case 5: bg_tilename = "dungeon_icon.5"; break;
-      case 6: bg_tilename = "dungeon_icon.6"; break;
-      case 7: bg_tilename = "dungeon_icon.7"; break;
-      case 8: bg_tilename = "dungeon_icon.8"; break;
+      case 1:
+        bg_tilename = "dungeon_icon.1";
+        wid_set_color(b, WID_COLOR_BG, DARKGREEN);
+        break;
+      case 2:
+        bg_tilename = "dungeon_icon.2";
+        wid_set_color(b, WID_COLOR_BG, OLIVEDRAB);
+        break;
+      case 3:
+        bg_tilename = "dungeon_icon.3";
+        wid_set_color(b, WID_COLOR_BG, YELLOW);
+        break;
+      case 4:
+        bg_tilename = "dungeon_icon.4";
+        wid_set_color(b, WID_COLOR_BG, TAN);
+        break;
+      case 5:
+        bg_tilename = "dungeon_icon.5";
+        wid_set_color(b, WID_COLOR_BG, ORANGE);
+        break;
+      case 6:
+        bg_tilename = "dungeon_icon.6";
+        wid_set_color(b, WID_COLOR_BG, DARKORANGE4);
+        break;
+      case 7:
+        bg_tilename = "dungeon_icon.7";
+        wid_set_color(b, WID_COLOR_BG, RED);
+        break;
+      case 8:
+        bg_tilename = "dungeon_icon.8";
+        wid_set_color(b, WID_COLOR_BG, GRAY50);
+        break;
     }
   } else {
+    wid_set_color(b, WID_COLOR_BG, GRAY);
     switch (l->difficulty_depth) {
       case -1: break;
       case 1: bg_tilename = "dungeon_icon_loading.1"; break;
@@ -505,16 +530,24 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
     }
   }
 
+  if (! g_opt_ascii) {
+    if (! bg_tilename.empty()) {
+      wid_set_bg_tilename(b, bg_tilename);
+    }
+  }
+
   if (game->level == l) {
     fg_tilename = "you_are_here_icon";
   }
 
-  if (! bg_tilename.empty()) {
-    wid_set_bg_tilename(b, bg_tilename);
-  }
+  if (! g_opt_ascii) {
+    if (! bg_tilename.empty()) {
+      wid_set_bg_tilename(b, bg_tilename);
+    }
 
-  if (! fg_tilename.empty()) {
-    wid_set_fg_tilename(b, fg_tilename);
+    if (! fg_tilename.empty()) {
+      wid_set_fg_tilename(b, fg_tilename);
+    }
   }
 
   char tmp[ MAXSHORTSTR ];
@@ -774,7 +807,11 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_fg2_tilename(b, "ud_icon");
+          if (! g_opt_ascii) {
+            wid_set_fg2_tilename(b, "ud_icon");
+          } else {
+            wid_set_text(b, "|");
+          }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
@@ -789,7 +826,11 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_fg2_tilename(b, "lr_icon");
+          if (! g_opt_ascii) {
+            wid_set_fg2_tilename(b, "lr_icon");
+          } else {
+            wid_set_text(b, "_");
+          }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
@@ -804,7 +845,11 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_fg2_tilename(b, "lr_icon");
+          if (! g_opt_ascii) {
+            wid_set_fg2_tilename(b, "lr_icon");
+          } else {
+            wid_set_text(b, "_");
+          }
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
 
@@ -818,7 +863,12 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
           br.y = tl.y;
 
           wid_set_pos(b, tl, br);
-          wid_set_fg2_tilename(b, "ud_icon");
+          if (! g_opt_ascii) {
+            wid_set_fg2_tilename(b, "ud_icon");
+          } else {
+            wid_set_text(b, "|");
+          }
+          wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
           wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
         }
       }

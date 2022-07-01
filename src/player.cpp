@@ -6,13 +6,14 @@
 #include "my_game.hpp"
 #include "my_player.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_thing_info.hpp"
 
-bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
+static bool player_tick_(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
 {
   TRACE_AND_INDENT();
 
@@ -201,4 +202,12 @@ bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wa
   }
 
   return true;
+}
+
+bool player_tick(bool left, bool right, bool up, bool down, bool attack, bool wait, bool jump)
+{
+  pcg_random_allowed++;
+  auto ret = player_tick_(left, right, up, down, attack, wait, jump);
+  pcg_random_allowed--;
+  return ret;
 }
