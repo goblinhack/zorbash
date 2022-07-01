@@ -22,6 +22,10 @@ void Level::display_pixelart_map(void)
 {
   TRACE_NO_INDENT();
 
+  if (! should_display_map()) {
+    return;
+  }
+
   bool shake = screen_shake_begin();
   display_pixelart_map_all();
   if (shake) {
