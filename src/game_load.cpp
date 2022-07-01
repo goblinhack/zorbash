@@ -93,6 +93,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->fadeup_height);
    in >> bits(my.t->fall_height);
    in >> bits(my.t->gold);
+   in >> bits(my.t->nutrition);
    in >> bits(my.t->health);
    in >> bits(my.t->health_max);
    in >> bits(my.t->jump_distance_mod);
