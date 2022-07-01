@@ -116,12 +116,16 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
         dbg("Move to next level entrance");
         is_changing_level = true;
 
-        dbg("Level change");
-        level_change(l);
-        tick_last_level_change_set(game->tick_current);
-
+        //
+        // Need to do this prior to level change as level_change will update the lighting; and we don't want to do
+        // that at the old position.
+        //
         dbg("Level change move to destination");
         move_to_immediately(point(x, y));
+
+        dbg("Level change and enter");
+        level_change(l);
+        tick_last_level_change_set(game->tick_current);
 
         dbg("Level change move carried items");
         move_carried_items_immediately();

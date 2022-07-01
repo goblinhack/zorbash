@@ -103,6 +103,7 @@ void Thing::level_change(Levelp l)
   }
 
   dbg("Changed level");
+  TRACE_AND_INDENT();
 
   if (is_player()) {
     l->scroll_map_to_player();
@@ -184,7 +185,9 @@ bool Thing::move_away_from_entrance(void)
     }
 
     dbg("Move away from entrance, to %d,%d", x, y);
+    TRACE_AND_INDENT();
     move_to_immediately(point(x, y));
+
     return true;
   }
 
