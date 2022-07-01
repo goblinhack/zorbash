@@ -187,7 +187,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         wid_mouse_visible = 1;
         sdl.mouse_tick++;
         if (! processed_mouse_motion_event) {
+          pcg_random_allowed++;
           wid_mouse_motion(sdl.mouse_x, sdl.mouse_y, 0, 0, -sdl.wheel_x, sdl.wheel_y);
+          pcg_random_allowed--;
           processed_mouse_motion_event = true;
         }
         break;
@@ -203,7 +205,9 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         wid_mouse_visible = 1;
         sdl.mouse_tick++;
         if (! processed_mouse_motion_event) {
+          pcg_random_allowed++;
           wid_mouse_motion(sdl.mouse_x, sdl.mouse_y, event->motion.xrel, event->motion.yrel, 0, 0);
+          pcg_random_allowed--;
           processed_mouse_motion_event = true;
         }
         break;
