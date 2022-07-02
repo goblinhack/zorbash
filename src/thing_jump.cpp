@@ -49,6 +49,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
 {
   TRACE_NO_INDENT();
 
+  point original_destination = to;
+  point original_start       = curr_at;
+
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_waiting_to_leave_level_has_completed_fall ||
       is_jumping) {
@@ -63,6 +66,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // Trying to jump to the same location
   //
   if (to == curr_at) {
+    if (is_player()) {
+      msg("You fail to jump there.");
+    }
     return false;
   }
 
@@ -220,11 +226,20 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   float d    = jump_distance_current();
   float dist = distance(curr_at, to);
 
+  //
+  // Check if trying to jump too far.
+  //
   if (dist > d) {
-    auto u = (to - curr_at);
+    //
+    // Yep. Trying to jump too far.
+    //
+    fpoint u = (make_fpoint(to) - make_fpoint(curr_at));
     u.unit();
     u *= d;
-    to = curr_at + u;
+
+    fpoint fto = make_fpoint(curr_at) + u;
+
+    to = make_point(fto);
     x  = to.x;
     y  = to.y;
 
@@ -249,7 +264,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     TRACE_AND_INDENT();
     dbg("No, jump failed, into obstacle");
     if (is_player()) {
-      msg("You can't jump into solid objects.");
+      if (point(x, y) == original_destination) {
+        msg("You can't jump into solid objects.");
+      } else {
+        msg("You can't jump there; something is in the way.");
+      }
     }
     return false;
   }
@@ -458,7 +477,26 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
-  dbg("Jump success.");
+  dbg("Jump success to %d,%d.", curr_at.x, curr_at.y);
+
+  if (is_player()) {
+    if (curr_at == original_start) {
+      msg("You jump on the spot.");
+    } else if (curr_at == original_destination) {
+      msg("You jump.");
+    } else {
+      if (level->is_lava(curr_at)) {
+        msg("You jump joyfully into the lava!");
+      } else if (level->is_lava(curr_at)) {
+        msg("You jump into the chasm!");
+      } else if (level->is_hazard(curr_at)) {
+        msg("You jump into the unexpected.");
+      } else {
+        msg("You jump, but not as far as you'd like.");
+      }
+    }
+  }
+
   return true;
 }
 

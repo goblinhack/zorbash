@@ -66,7 +66,7 @@ void Game::change_state(int new_state)
   //
   state = new_state;
 
-  CON("Game state change: %s->%s", state_to_string(old_state).c_str(), state_to_string(new_state).c_str());
+  CON("Game state change: %s -> %s", state_to_string(old_state).c_str(), state_to_string(new_state).c_str());
   switch (new_state) {
     case STATE_NORMAL:
       // backtrace_dump();
