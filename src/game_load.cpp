@@ -790,6 +790,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   my.t->update_map();
   DBG("INF: Updated map for level %d,%d,%d", p.x, p.y, p.z);
+
   return (in);
 }
 
@@ -842,6 +843,7 @@ std::istream &operator>>(std::istream &in, Bits< class World & > my)
       }
     }
   }
+
   wid_progress_bar_destroy();
   return (in);
 }

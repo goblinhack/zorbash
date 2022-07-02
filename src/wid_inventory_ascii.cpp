@@ -203,7 +203,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
         wid_set_color(wid_item, WID_COLOR_TEXT_FG, WHITE);
 
         if (t) {
-          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_short_name());
+          wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_long_name());
 
           if (wid_inventory_thing_selected) {
             if (wid_inventory_thing_selected == t) {
