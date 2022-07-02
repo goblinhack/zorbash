@@ -12,7 +12,7 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
         my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "player_hit5")
 
 
-def on_you_nat_attack(me, x, y):
+def on_you_nat_att(me, x, y):
     my.sound_play("player_punch")
 
 
@@ -228,7 +228,7 @@ def on_receiving_dmg_digest(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_dmg_nat_attack(me, hitter, x, y, damage):
+def on_receiving_dmg_nat_att(me, hitter, x, y, damage):
     return damage
 
 
@@ -296,7 +296,7 @@ def on_attacking_dmg_digest(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_dmg_nat_attack(me, victim, x, y, damage):
+def on_attacking_dmg_nat_att(me, victim, x, y, damage):
     return damage
 
 
@@ -332,7 +332,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.collision_hit_priority(self, 6)
-    my.damage_nat_attack_type(self, "punch")
+    my.damage_nat_att_type(self, "punch")
     my.damage_natural_dice(self, "1d3")
     my.distance_avoid(self, 3)
     my.distance_throw(self, 5)
@@ -417,7 +417,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_attacking_dmg_future3_do(self, "player.on_attacking_dmg_future3()")
     my.on_attacking_dmg_lightning_do(self, "player.on_attacking_dmg_lightning()")
     my.on_attacking_dmg_melee_do(self, "player.on_attacking_dmg_melee()")
-    my.on_attacking_dmg_nat_attack_do(self, "player.on_attacking_dmg_nat_attack()")
+    my.on_attacking_dmg_nat_att_do(self, "player.on_attacking_dmg_nat_att()")
     my.on_attacking_dmg_necrosis_do(self, "player.on_attacking_dmg_necrosis()")
     my.on_attacking_dmg_poison_do(self, "player.on_attacking_dmg_poison()")
     my.on_attacking_dmg_stat_con_do(self, "player.on_attacking_dmg_stat_con()")
@@ -438,13 +438,13 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_receiving_dmg_future3_do(self, "player.on_receiving_dmg_future3()")
     my.on_receiving_dmg_lightning_do(self, "player.on_receiving_dmg_lightning()")
     my.on_receiving_dmg_melee_do(self, "player.on_receiving_dmg_melee()")
-    my.on_receiving_dmg_nat_attack_do(self, "player.on_receiving_dmg_nat_attack()")
+    my.on_receiving_dmg_nat_att_do(self, "player.on_receiving_dmg_nat_att()")
     my.on_receiving_dmg_necrosis_do(self, "player.on_receiving_dmg_necrosis()")
     my.on_receiving_dmg_poison_do(self, "player.on_receiving_dmg_poison()")
     my.on_receiving_dmg_stat_con_do(self, "player.on_receiving_dmg_stat_con()")
     my.on_receiving_dmg_stat_str_do(self, "player.on_receiving_dmg_stat_str()")
     my.on_you_are_hit_but_still_alive_do(self, "player.on_you_are_hit_but_still_alive()")
-    my.on_you_nat_attack_do(self, "player.on_you_nat_attack()")
+    my.on_you_nat_att_do(self, "player.on_you_nat_att()")
     my.stamina(self, 100)
     my.stat_att_penalty_when_idle_max(self, 0)
     my.stat_att_penalty_when_idle(self, 0)

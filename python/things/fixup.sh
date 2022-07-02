@@ -113,17 +113,29 @@ do
       environ_avoids_poison \
       environ_avoids_water \
       gfx_an_animation_only \
-      gfx_ascii_color_spread_hue \
+      gfx_ascii_animated \
+      gfx_ascii_color_is_animated \
+      gfx_ascii_bg_color_spread_blue \
+      gfx_ascii_bg_color_spread_green \
+      gfx_ascii_bg_color_spread_hue \
+      gfx_ascii_bg_color_spread_red \
+      gfx_ascii_fade_with_dist \
+      gfx_ascii_fg_color_is_animated \
+      gfx_ascii_fg_color_spread_blue \
+      gfx_ascii_fg_color_spread_green \
+      gfx_ascii_fg_color_spread_hue \
+      gfx_ascii_fg_color_spread_red \
+      gfx_ascii_shown_as_gray_in_shadow \
+      gfx_ascii_shown_in_bg \
       gfx_attack_anim \
       gfx_bounce_always \
       gfx_bounce_on_move \
       gfx_dead_anim \
       gfx_equip_carry_anim \
-      gfx_pixelart_flickers \
       gfx_glows \
       gfx_health_bar_autohide \
-      gfx_health_bar_shown \
       gfx_health_bar_only_when_awake \
+      gfx_health_bar_shown \
       gfx_long_shadow_caster \
       gfx_on_fire_anim \
       gfx_oversized_and_on_floor \
@@ -131,8 +143,9 @@ do
       gfx_pixelart_animated_can_hflip \
       gfx_pixelart_animated_can_vflip \
       gfx_pixelart_animated_no_dir \
-      gfx_show_asleep \
+      gfx_pixelart_flickers \
       gfx_pixelart_shown_in_bg \
+      gfx_show_asleep \
       gfx_show_outlined \
       gfx_solid_shadow \
       gfx_very_short_shadow_caster \
@@ -163,6 +176,7 @@ do
       is_able_to_see_through_doors \
       is_able_to_shove \
       is_able_to_sleep \
+      is_able_to_swim \
       is_able_to_teleport_attack \
       is_able_to_teleport_escape \
       is_able_to_teleport_without_tiring \
@@ -179,6 +193,7 @@ do
       is_able_to_use_weapons \
       is_able_to_walk_through_walls \
       is_acid \
+      is_ait_breather \
       is_alive_on_end_of_anim \
       is_always_hit \
       is_amulet \
@@ -204,7 +219,6 @@ do
       is_bones \
       is_boots \
       is_brazier \
-      is_ait_breather \
       is_bridge \
       is_buff \
       is_burnable \
@@ -218,8 +232,8 @@ do
       is_cloak \
       is_cold \
       is_collectable \
-      is_collected_as_keys \
       is_collected_as_gold \
+      is_collected_as_keys \
       is_combustible \
       is_corpse_on_death \
       is_corpse_with_bones \
@@ -231,6 +245,7 @@ do
       is_cursor_can_hover_over \
       is_cursor_can_hover_over_x2_click \
       is_cursor_path \
+      is_cursor_path_blocker \
       is_cursor_path_hazard \
       is_dagger \
       is_dead_on_end_of_anim \
@@ -306,6 +321,7 @@ do
       is_jelly_baby_eater \
       is_jelly_eater \
       is_jelly_parent \
+      is_jump_blocker \
       is_key \
       is_key_special \
       is_laser \
@@ -435,6 +451,7 @@ do
       stat_def_penalty_when_stuck_max \
       teleport_distance \
       temperature \
+      tick_prio \
       unused_flag1 \
       unused_flag10 \
       unused_flag11 \
@@ -522,18 +539,7 @@ do
       unused_flag85 \
       unused_flag86 \
       unused_flag87 \
-      is_able_to_swim \
-      gfx_ascii_shown_as_gray_in_shadow \
       unused_flag9 \
-      gfx_ascii_shown_in_bg \
-      gfx_ascii_fade_with_dist \
-      is_jump_blocker \
-      is_cursor_path_blocker \
-      gfx_ascii_color_is_animated \
-      gfx_ascii_animated \
-      tick_prio \
-      gfx_ascii_color_spread_hue \
-      gfx_ascii_color_spread_hue \
       on_death_is_open
     do
         grep -q $arg $PAYLOAD

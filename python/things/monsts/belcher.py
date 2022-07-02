@@ -2,7 +2,7 @@ import my
 import tp
 
 
-def on_you_nat_attack(me, x, y):
+def on_you_nat_att(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, "squelch")
 
 
@@ -25,7 +25,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.damage_digest_dice(self, "1d10")
-    my.damage_nat_attack_type(self, "burn")
+    my.damage_nat_att_type(self, "burn")
     my.damage_natural_dice(self, "1d20")
     my.damage_received_doubled_from_fire(self, True)
     my.distance_vision(self, 5)
@@ -78,7 +78,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "1d4")
     my.on_death_do(self, "me.on_death()")
     my.on_idle_tick_freq_dice(self, "1d5:me.on_idle()")
-    my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
+    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_con(self, 20)
     my.stat_def(self, 0)

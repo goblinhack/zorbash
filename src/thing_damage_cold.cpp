@@ -38,7 +38,7 @@ int Thing::damage_cold(void)
   return roll + enchant;
 }
 
-int Thing::on_owner_receiving_dmg_cold(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_receive_dmg_cold(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -53,12 +53,12 @@ int Thing::on_owner_receiving_dmg_cold(Thingp owner, Thingp hitter, Thingp real_
     return damage;
   }
 
-  auto on_owner_receiving_dmg_cold = on_owner_receiving_dmg_cold_do();
-  if (std::empty(on_owner_receiving_dmg_cold)) {
+  auto on_owner_receive_dmg_cold = on_owner_receive_dmg_cold_do();
+  if (std::empty(on_owner_receive_dmg_cold)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_receiving_dmg_cold, '.');
+  auto t = split_tokens(on_owner_receive_dmg_cold, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -78,8 +78,8 @@ int Thing::on_owner_receiving_dmg_cold(Thingp owner, Thingp hitter, Thingp real_
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_receiving_dmg_cold call [%s] expected mod:function, got %d elems",
-      on_owner_receiving_dmg_cold.c_str(), (int) on_owner_receiving_dmg_cold.size());
+  ERR("Bad on_owner_receive_dmg_cold call [%s] expected mod:function, got %d elems",
+      on_owner_receive_dmg_cold.c_str(), (int) on_owner_receive_dmg_cold.size());
 
   return damage;
 }
@@ -135,7 +135,7 @@ int Thing::total_damage_for_on_receiving_dmg_cold(Thingp hitter, Thingp real_hit
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_dmg_cold(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_cold(this, hitter, real_hitter, damage);
     }
   }
 
@@ -143,7 +143,7 @@ int Thing::total_damage_for_on_receiving_dmg_cold(Thingp hitter, Thingp real_hit
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_dmg_cold(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_cold(this, hitter, real_hitter, damage);
     }
   }
 
@@ -151,7 +151,7 @@ int Thing::total_damage_for_on_receiving_dmg_cold(Thingp hitter, Thingp real_hit
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_receiving_dmg_cold(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_cold(this, hitter, real_hitter, damage);
     }
   }
 
@@ -200,7 +200,7 @@ int Thing::on_attacking_dmg_cold(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::on_owner_attacking_dmg_cold(Thingp owner, Thingp victim, int damage)
+int Thing::on_owner_attack_dmg_cold(Thingp owner, Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -215,12 +215,12 @@ int Thing::on_owner_attacking_dmg_cold(Thingp owner, Thingp victim, int damage)
     return damage;
   }
 
-  auto on_owner_attacking_dmg_cold = on_owner_attacking_dmg_cold_do();
-  if (std::empty(on_owner_attacking_dmg_cold)) {
+  auto on_owner_attack_dmg_cold = on_owner_attack_dmg_cold_do();
+  if (std::empty(on_owner_attack_dmg_cold)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_attacking_dmg_cold, '.');
+  auto t = split_tokens(on_owner_attack_dmg_cold, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -240,8 +240,8 @@ int Thing::on_owner_attacking_dmg_cold(Thingp owner, Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attacking_dmg_cold call [%s] expected mod:function, got %d elems",
-      on_owner_attacking_dmg_cold.c_str(), (int) on_owner_attacking_dmg_cold.size());
+  ERR("Bad on_owner_attack_dmg_cold call [%s] expected mod:function, got %d elems",
+      on_owner_attack_dmg_cold.c_str(), (int) on_owner_attack_dmg_cold.size());
 
   return damage;
 }
@@ -257,7 +257,7 @@ int Thing::total_damage_for_on_attacking_dmg_cold(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_dmg_cold(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_cold(this, victim, damage);
     }
   }
 
@@ -265,7 +265,7 @@ int Thing::total_damage_for_on_attacking_dmg_cold(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_dmg_cold(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_cold(this, victim, damage);
     }
   }
 
@@ -273,7 +273,7 @@ int Thing::total_damage_for_on_attacking_dmg_cold(Thingp victim, int damage)
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_attacking_dmg_cold(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_cold(this, victim, damage);
     }
   }
 

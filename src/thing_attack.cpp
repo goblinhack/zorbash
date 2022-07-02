@@ -559,7 +559,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     // Chance of poison damage?
     //
     if (! attack_options->attack_poison) {
-      if (! attack_options->damage_set || attack_options->prefer_nat_attack) {
+      if (! attack_options->damage_set || attack_options->prefer_nat_att) {
         if (d1000() < damage_poison_chance_d1000(attack_options->attack_num)) {
           int damage_poison_val = damage_poison();
           if (damage_poison_val > 0) {
@@ -778,11 +778,11 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     // Bite?
     //
     if (! attack_options->attack_natural) {
-      if (! attack_options->damage_set || attack_options->prefer_nat_attack) {
-        if (d1000() < damage_nat_attack_chance_d1000(attack_options->attack_num)) {
-          int damage_nat_attack_val = damage_nat_attack();
-          if (damage_nat_attack_val > 0) {
-            attack_options->damage         = damage_nat_attack_val + attack_bonus;
+      if (! attack_options->damage_set || attack_options->prefer_nat_att) {
+        if (d1000() < damage_nat_att_chance_d1000(attack_options->attack_num)) {
+          int damage_nat_att_val = damage_nat_att();
+          if (damage_nat_att_val > 0) {
+            attack_options->damage         = damage_nat_att_val + attack_bonus;
             attack_options->damage_set     = true;
             attack_options->attack_natural = true;
             dbg("Set natural damage %d", attack_options->damage);
@@ -1107,10 +1107,10 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   return tried_to_attack;
 }
 
-bool Thing::nat_attack(Thingp victim)
+bool Thing::nat_att(Thingp victim)
 {
   AttackOptions attack_options {};
-  attack_options.prefer_nat_attack = true;
+  attack_options.prefer_nat_att = true;
   return attack(victim, &attack_options);
 }
 
@@ -1122,7 +1122,7 @@ int Thing::is_attacked_with_damage_melee(Thingp hitter, Thingp real_hitter, int 
   return is_hit(hitter, &attack_options, damage);
 }
 
-int Thing::is_attacked_with_damage_nat_attack(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::is_attacked_with_damage_nat_att(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   AttackOptions attack_options {};

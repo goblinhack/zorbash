@@ -956,21 +956,6 @@ bool Thing::matches(const std::string &what)
   if (tick_prio() && (what == "tick_prio")) {
     return true;
   }
-  if (gfx_ascii_color_spread_hue() && (what == "gfx_ascii_color_spread_hue")) {
-    return true;
-  }
-  if (gfx_ascii_color_spread_alpha() && (what == "gfx_ascii_color_spread_alpha")) {
-    return true;
-  }
-  if (gfx_ascii_color_spread_blue() && (what == "gfx_ascii_color_spread_blue")) {
-    return true;
-  }
-  if (gfx_ascii_color_spread_green() && (what == "gfx_ascii_color_spread_green")) {
-    return true;
-  }
-  if (gfx_ascii_color_spread_red() && (what == "gfx_ascii_color_spread_red")) {
-    return true;
-  }
   if (attack_no_msg() && (what == "attack_no_msg")) {
     return true;
   }
@@ -2199,12 +2184,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "temperature") {
     return &Thing::temperature;
   }
-  if (what == "gfx_ascii_color_spread_green") {
-    return &Thing::gfx_ascii_color_spread_green;
-  }
-  if (what == "gfx_ascii_color_spread_red") {
-    return &Thing::gfx_ascii_color_spread_red;
-  }
   if (what == "attack_no_msg") {
     return &Thing::attack_no_msg;
   }
@@ -2561,15 +2540,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "tick_prio") {
     return &Thing::tick_prio;
-  }
-  if (what == "gfx_ascii_color_spread_hue") {
-    return &Thing::gfx_ascii_color_spread_hue;
-  }
-  if (what == "gfx_ascii_color_spread_alpha") {
-    return &Thing::gfx_ascii_color_spread_alpha;
-  }
-  if (what == "gfx_ascii_color_spread_blue") {
-    return &Thing::gfx_ascii_color_spread_blue;
   }
   if (what == "unused_flag9") {
     return &Thing::unused_flag9;

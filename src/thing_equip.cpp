@@ -605,12 +605,12 @@ bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
         msg("You attack with bare fists!");
       }
 
-      attack_options->nat_attack = true;
+      attack_options->nat_att = true;
 
       //
       // Python callback
       //
-      on_you_nat_attack();
+      on_you_nat_att();
     }
 
     attack_options->used_as = gfx_anim_use();

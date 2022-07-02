@@ -321,7 +321,7 @@ void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point o
 
   Tilep tile;
   auto  text_iter = text.begin();
-  fg.a            = blit_color.a;
+  fg.a            = blit_fg_color.a;
 
   tile = nullptr;
 
@@ -344,7 +344,7 @@ void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point o
         auto tmp = std::string(text_iter, text.end());
         int  len = 0;
         fg       = string2color(tmp, &len);
-        fg.a     = blit_color.a;
+        fg.a     = blit_fg_color.a;
         text_iter += len + 1;
         continue;
       } else if (std::string(text_iter, text_iter + 3) == "tp=") {

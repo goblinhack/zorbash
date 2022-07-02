@@ -18,69 +18,137 @@
 //
 void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
 {
-  if (gfx_ascii_color_spread_hue()) {
-    if (fg) {
-      c = color_change_hue(c, ((int) blit_color.r) - 128);
-    } else {
-      c = color_change_hue(c, ((int) blit_color.g) - 128);
+  if (fg) {
+    if (gfx_ascii_fg_color_spread_hue()) {
+      if (fg) {
+        c = color_change_hue(c, ((int) blit_fg_color.r) - 128);
+      } else {
+        c = color_change_hue(c, ((int) blit_fg_color.g) - 128);
+      }
+      c.a = 255;
+      return;
     }
-    c.a = 255;
-    return;
-  }
 
-  if (c.r) {
-    if (gfx_ascii_color_spread_red()) {
-      int adjust  = ((int) blit_color.r - 128);
-      int new_col = ((int) c.r) + adjust;
-      if (new_col < 0) {
-        new_col = 0;
+    if (c.r) {
+      if (gfx_ascii_fg_color_spread_red()) {
+        int adjust  = ((int) blit_fg_color.r - 128);
+        int new_col = ((int) c.r) + adjust;
+        if (new_col < 0) {
+          new_col = 0;
+        }
+        if (new_col > 255) {
+          new_col = 255;
+        }
+        c.r = new_col;
       }
-      if (new_col > 255) {
-        new_col = 255;
-      }
-      c.r = new_col;
     }
-  }
 
-  if (c.g) {
-    if (gfx_ascii_color_spread_green()) {
-      int adjust  = ((int) blit_color.g - 128);
-      int new_col = ((int) c.g) + adjust;
-      if (new_col < 0) {
-        new_col = 0;
+    if (c.g) {
+      if (gfx_ascii_fg_color_spread_green()) {
+        int adjust  = ((int) blit_fg_color.g - 128);
+        int new_col = ((int) c.g) + adjust;
+        if (new_col < 0) {
+          new_col = 0;
+        }
+        if (new_col > 255) {
+          new_col = 255;
+        }
+        c.g = new_col;
       }
-      if (new_col > 255) {
-        new_col = 255;
-      }
-      c.g = new_col;
     }
-  }
 
-  if (c.b) {
-    if (gfx_ascii_color_spread_blue()) {
-      int adjust  = ((int) blit_color.b - 128);
-      int new_col = ((int) c.b) + adjust;
-      if (new_col < 0) {
-        new_col = 0;
+    if (c.b) {
+      if (gfx_ascii_fg_color_spread_blue()) {
+        int adjust  = ((int) blit_fg_color.b - 128);
+        int new_col = ((int) c.b) + adjust;
+        if (new_col < 0) {
+          new_col = 0;
+        }
+        if (new_col > 255) {
+          new_col = 255;
+        }
+        c.b = new_col;
       }
-      if (new_col > 255) {
-        new_col = 255;
-      }
-      c.b = new_col;
     }
-  }
 
-  if (c.a) {
-    if (gfx_ascii_color_spread_alpha()) {
-      int adjust  = ((int) blit_color.a - 128);
-      int new_col = ((int) c.a) + adjust;
-      if (new_col < 0) {
-        new_col = 0;
+    if (c.a) {
+      if (gfx_ascii_fg_color_spread_alpha()) {
+        int adjust  = ((int) blit_fg_color.a - 128);
+        int new_col = ((int) c.a) + adjust;
+        if (new_col < 0) {
+          new_col = 0;
+        }
+        if (new_col > 255) {
+          new_col = 255;
+        }
+        c.a = new_col;
       }
-      if (new_col > 255) {
-        new_col = 255;
+    }
+  } else {
+    if (gfx_ascii_bg_color_spread_hue()) {
+      if (fg) {
+        c = color_change_hue(c, ((int) blit_bg_color.r) - 128);
+      } else {
+        c = color_change_hue(c, ((int) blit_bg_color.g) - 128);
       }
-      c.a = new_col;
+      c.a = 255;
+      return;
+    }
+
+    if (c.r) {
+      if (gfx_ascii_bg_color_spread_red()) {
+        int adjust  = ((int) blit_bg_color.r - 128);
+        int new_col = ((int) c.r) + adjust;
+        if (new_col < 0) {
+          new_col = 0;
+        }
+        if (new_col > 255) {
+          new_col = 255;
+        }
+        c.r = new_col;
+      }
+    }
+
+    if (c.g) {
+      if (gfx_ascii_bg_color_spread_green()) {
+        int adjust  = ((int) blit_bg_color.g - 128);
+        int new_col = ((int) c.g) + adjust;
+        if (new_col < 0) {
+          new_col = 0;
+        }
+        if (new_col > 255) {
+          new_col = 255;
+        }
+        c.g = new_col;
+      }
+    }
+
+    if (c.b) {
+      if (gfx_ascii_bg_color_spread_blue()) {
+        int adjust  = ((int) blit_bg_color.b - 128);
+        int new_col = ((int) c.b) + adjust;
+        if (new_col < 0) {
+          new_col = 0;
+        }
+        if (new_col > 255) {
+          new_col = 255;
+        }
+        c.b = new_col;
+      }
+    }
+
+    if (c.a) {
+      if (gfx_ascii_bg_color_spread_alpha()) {
+        int adjust  = ((int) blit_bg_color.a - 128);
+        int new_col = ((int) c.a) + adjust;
+        if (new_col < 0) {
+          new_col = 0;
+        }
+        if (new_col > 255) {
+          new_col = 255;
+        }
+        c.a = new_col;
+      }
     }
   }
 }
@@ -136,6 +204,15 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
     //
     // Else combine the light sources, so we get a nice lava glow.
     //
+
+    //
+    // This prevents the L in lave from appearing reddish. Not sure if I want this for other things too.
+    //
+    if (fg) {
+      if (! light_color().empty()) {
+        return;
+      }
+    }
 
     //
     // Get the combined light on this tile

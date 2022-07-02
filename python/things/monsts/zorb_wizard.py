@@ -15,7 +15,7 @@ def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
     my.text_long_description2(self, "This particular zorblin is learned in the dark zorbliny arts. They worship their dark lord who lives in his dark lair. They also prefer dark chocolate.")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
+    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.on_born_do(self, "me.on_born()")
     my.text_short_description(self, "A master of the dark zorbliny arts.")
     my.is_carrier_of_treasure_class_b(self, True)

@@ -11,7 +11,7 @@ def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
     my.text_long_description2(self, "This particular zorblin has is a battle hardened veteran of many wars.")
     my.on_death_of_my_leader_do(self, "me.on_death_of_my_leader()")
-    my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
+    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.text_short_description(self, "A grizzled war-weary soldier.")
     my.is_able_to_use_armor(self, True)
     my.is_monst_class_b(self, True)

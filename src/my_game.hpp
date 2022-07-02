@@ -226,7 +226,7 @@ public:
   void wid_thing_info_add_damage_future3(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_melee(WidPopup *w, Thingp t, int index);
-  void wid_thing_info_add_damage_nat_attack(WidPopup *w, Thingp t, int index);
+  void wid_thing_info_add_damage_nat_att(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_poison(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_danger_level(WidPopup *w, Thingp t);

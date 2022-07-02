@@ -11,7 +11,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-int Thing::on_owner_receiving_dmg_stat_con(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_receive_dmg_stat_con(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -26,12 +26,12 @@ int Thing::on_owner_receiving_dmg_stat_con(Thingp owner, Thingp hitter, Thingp r
     return damage;
   }
 
-  auto on_owner_receiving_dmg_stat_con = on_owner_receiving_dmg_stat_con_do();
-  if (std::empty(on_owner_receiving_dmg_stat_con)) {
+  auto on_owner_receive_dmg_stat_con = on_owner_receive_dmg_stat_con_do();
+  if (std::empty(on_owner_receive_dmg_stat_con)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_receiving_dmg_stat_con, '.');
+  auto t = split_tokens(on_owner_receive_dmg_stat_con, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -51,8 +51,8 @@ int Thing::on_owner_receiving_dmg_stat_con(Thingp owner, Thingp hitter, Thingp r
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_receiving_dmg_stat_con call [%s] expected mod:function, got %d elems",
-      on_owner_receiving_dmg_stat_con.c_str(), (int) on_owner_receiving_dmg_stat_con.size());
+  ERR("Bad on_owner_receive_dmg_stat_con call [%s] expected mod:function, got %d elems",
+      on_owner_receive_dmg_stat_con.c_str(), (int) on_owner_receive_dmg_stat_con.size());
 
   return damage;
 }
@@ -109,7 +109,7 @@ int Thing::total_damage_for_on_receiving_dmg_stat_con(Thingp hitter, Thingp real
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_dmg_stat_con(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_stat_con(this, hitter, real_hitter, damage);
     }
   }
 
@@ -117,7 +117,7 @@ int Thing::total_damage_for_on_receiving_dmg_stat_con(Thingp hitter, Thingp real
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receiving_dmg_stat_con(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_stat_con(this, hitter, real_hitter, damage);
     }
   }
 
@@ -125,7 +125,7 @@ int Thing::total_damage_for_on_receiving_dmg_stat_con(Thingp hitter, Thingp real
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_receiving_dmg_stat_con(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_stat_con(this, hitter, real_hitter, damage);
     }
   }
 
@@ -174,7 +174,7 @@ int Thing::on_attacking_dmg_stat_con(Thingp victim, int damage)
   return damage;
 }
 
-int Thing::on_owner_attacking_dmg_stat_con(Thingp owner, Thingp victim, int damage)
+int Thing::on_owner_attack_dmg_stat_con(Thingp owner, Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
@@ -189,12 +189,12 @@ int Thing::on_owner_attacking_dmg_stat_con(Thingp owner, Thingp victim, int dama
     return damage;
   }
 
-  auto on_owner_attacking_dmg_stat_con = on_owner_attacking_dmg_stat_con_do();
-  if (std::empty(on_owner_attacking_dmg_stat_con)) {
+  auto on_owner_attack_dmg_stat_con = on_owner_attack_dmg_stat_con_do();
+  if (std::empty(on_owner_attack_dmg_stat_con)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_attacking_dmg_stat_con, '.');
+  auto t = split_tokens(on_owner_attack_dmg_stat_con, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -214,8 +214,8 @@ int Thing::on_owner_attacking_dmg_stat_con(Thingp owner, Thingp victim, int dama
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attacking_dmg_stat_con call [%s] expected mod:function, got %d elems",
-      on_owner_attacking_dmg_stat_con.c_str(), (int) on_owner_attacking_dmg_stat_con.size());
+  ERR("Bad on_owner_attack_dmg_stat_con call [%s] expected mod:function, got %d elems",
+      on_owner_attack_dmg_stat_con.c_str(), (int) on_owner_attack_dmg_stat_con.size());
 
   return damage;
 }
@@ -231,7 +231,7 @@ int Thing::total_damage_for_on_attacking_dmg_stat_con(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_dmg_stat_con(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_stat_con(this, victim, damage);
     }
   }
 
@@ -239,7 +239,7 @@ int Thing::total_damage_for_on_attacking_dmg_stat_con(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attacking_dmg_stat_con(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_stat_con(this, victim, damage);
     }
   }
 
@@ -247,7 +247,7 @@ int Thing::total_damage_for_on_attacking_dmg_stat_con(Thingp victim, int damage)
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_attacking_dmg_stat_con(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_stat_con(this, victim, damage);
     }
   }
 

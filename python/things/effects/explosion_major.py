@@ -24,7 +24,7 @@ def tp_init(name):
     # start sort marker
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "2d6")
-    my.damage_nat_attack_type(self, "blast")
+    my.damage_nat_att_type(self, "blast")
     my.gfx_ascii_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)

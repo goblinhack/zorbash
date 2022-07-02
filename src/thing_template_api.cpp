@@ -172,7 +172,7 @@ void               Tp::damage_draining_dice_set(const std::string &v)
 }
 
 const Dice        &Tp::damage_natural_dice(void) const { return _damage_natural_dice; }
-const int          Tp::damage_nat_attack(void) const { return _damage_natural_dice.roll(); }
+const int          Tp::damage_nat_att(void) const { return _damage_natural_dice.roll(); }
 const std::string &Tp::damage_natural_dice_str(void) const { return _damage_natural_dice_str; }
 void               Tp::damage_natural_dice_set(const std::string &v)
 {

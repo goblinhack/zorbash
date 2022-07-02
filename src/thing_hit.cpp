@@ -130,19 +130,19 @@ void Thing::on_you_are_hit_but_dodge_it_do(Thingp hitter)
   }
 }
 
-void Thing::on_you_nat_attack(void)
+void Thing::on_you_nat_att(void)
 {
   if (is_dead) {
     return;
   }
 
   TRACE_NO_INDENT();
-  auto on_you_nat_attack = tp()->on_you_nat_attack_do();
-  if (std::empty(on_you_nat_attack)) {
+  auto on_you_nat_att = tp()->on_you_nat_att_do();
+  if (std::empty(on_you_nat_att)) {
     return;
   }
 
-  auto t = split_tokens(on_you_nat_attack, '.');
+  auto t = split_tokens(on_you_nat_att, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -159,8 +159,8 @@ void Thing::on_you_nat_attack(void)
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
-    ERR("Bad on_you_nat_attack call [%s] expected mod:function, got %d elems", on_you_nat_attack.c_str(),
-        (int) on_you_nat_attack.size());
+    ERR("Bad on_you_nat_att call [%s] expected mod:function, got %d elems", on_you_nat_att.c_str(),
+        (int) on_you_nat_att.size());
   }
 }
 
@@ -227,8 +227,8 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     real_hitter->total_damage_for_on_attacking_dmg_draining(victim, damage);
     damage = victim->total_damage_for_on_receiving_dmg_draining(hitter, real_hitter, damage);
   } else if (attack_options->attack_natural) {
-    real_hitter->total_damage_for_on_attacking_dmg_nat_attack(victim, damage);
-    damage = victim->total_damage_for_on_receiving_dmg_nat_attack(hitter, real_hitter, damage);
+    real_hitter->total_damage_for_on_attacking_dmg_nat_att(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_nat_att(hitter, real_hitter, damage);
   } else if (attack_options->attack_cold) {
     real_hitter->total_damage_for_on_attacking_dmg_cold(victim, damage);
     damage = victim->total_damage_for_on_receiving_dmg_cold(hitter, real_hitter, damage);
@@ -474,7 +474,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     }
   } else if (attack_options->attack_natural) {
     if (! damage) {
-      damage_type = real_hitter->damage_nat_attack_type();
+      damage_type = real_hitter->damage_nat_att_type();
       if (is_player()) {
         msg("You take no %s damage!", damage_type.c_str());
       } else if (real_hitter->is_player()) {
@@ -483,7 +483,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       return false;
     } else {
       IF_DEBUG2 { real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = real_hitter->damage_nat_attack_type() + " ";
+      damage_type = real_hitter->damage_nat_att_type() + " ";
     }
   } else {
     if (! damage) {
@@ -885,7 +885,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           popup("%%fg=red$Sizzle!");
         } else if (attack_options->attack_natural) {
           msg("%%fg=red$%s %s deep!%%fg=reset$", real_hitter->text_The().c_str(),
-              pluralise(real_hitter->damage_nat_attack_type()).c_str());
+              pluralise(real_hitter->damage_nat_att_type()).c_str());
           popup("%%fg=red$Urk!");
         } else if (attack_options->attack_energy) {
           msg("%%fg=red$%s blasts you apart!%%fg=reset$", real_hitter->text_The().c_str());
@@ -941,10 +941,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
               damage_type.c_str());
           popup("%%fg=red$Sizzle!");
         } else if (attack_options->attack_natural) {
-          if (! real_hitter->damage_nat_attack_type().empty()) {
+          if (! real_hitter->damage_nat_att_type().empty()) {
             msg("%%fg=orange$%s attacks you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                 damage_type.c_str());
-            popup("%%fg=red$" + capitalise(real_hitter->damage_nat_attack_type()));
+            popup("%%fg=red$" + capitalise(real_hitter->damage_nat_att_type()));
           } else {
             msg("%%fg=orange$%s bites you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                 damage_type.c_str());
@@ -1227,12 +1227,12 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       //
       auto claws = real_hitter->tp()->gfx_anim_use();
       if (claws != "") {
-        auto nat_attack_effect = level->thing_new(claws, curr_at);
-        nat_attack_effect->bounce(0.1, 0.1, 100, 3);
-        nat_attack_effect->move_set_dir_from_delta(delta);
+        auto nat_att_effect = level->thing_new(claws, curr_at);
+        nat_att_effect->bounce(0.1, 0.1, 100, 3);
+        nat_att_effect->move_set_dir_from_delta(delta);
       }
 
-      real_hitter->on_you_nat_attack();
+      real_hitter->on_you_nat_att();
     }
   }
 
