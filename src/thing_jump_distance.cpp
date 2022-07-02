@@ -12,7 +12,7 @@ float Thing::jump_distance_current(void)
 {
   TRACE_NO_INDENT();
 
-  auto d = (float) jump_distance_total();
+  float d = (float) jump_distance_total();
 
   if (is_player()) {
     d += 0.5 + ((pcg_random_range(0, 100) / 100.0));
