@@ -130,7 +130,7 @@ void Game::wid_dead_select(const char *reason)
     wid_dead_window->log("`     .------------.     `");
     wid_dead_window->log("`    /     Rest     \\    `");
     wid_dead_window->log("`   /       In       \\   `");
-    wid_dead_window->log("`  /       Peace      \\  `");
+    wid_dead_window->log("`  /      Pieces      \\  `");
     wid_dead_window->log("`  |                  |  `");
     wid_dead_window->log("`  |                  |  `");
 
@@ -192,6 +192,7 @@ void Game::wid_dead_select(const char *reason)
         "`%%fg=yellow$*%%fg=reset$ |     %%fg=yellow$*%%fg=reset$        %%fg=yellow$*%%fg=reset$   |  `");
     wid_dead_window->log(
         "%%fg=green$_|'''%%fg=reset$__%%fg=green$'\"|%%fg=reset$__%%fg=green$.'\"'.\"|'..%%fg=reset$|%%fg=green$___");
+    wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
   } else {
     wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
     wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
