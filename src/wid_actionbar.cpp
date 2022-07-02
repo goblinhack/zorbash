@@ -1477,7 +1477,6 @@ void wid_actionbar_ascii_init(void)
     wid_set_style(w, box_style);
     if (game->robot_mode) {
       wid_set_on_tick(w, wid_actionbar_ai_tick);
-      wid_set_text(w, "Manual");
       wid_set_style(w, UI_WID_STYLE_RED);
     }
     x_at += option_width + 1;
