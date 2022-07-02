@@ -296,12 +296,12 @@ bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *att
         if (pcg_random_range(0, 100) < 10) {
           dbg2("Target-attack-best: Player, use claws randomly");
           attack_options->used_as           = gfx_anim_use();
-          attack_options->prefer_nat_attack = true;
+          attack_options->prefer_nat_att = true;
         }
       } else {
         dbg2("Target-attack-best: No monsts at target location, prefer nat attack");
         attack_options->used_as           = gfx_anim_use();
-        attack_options->prefer_nat_attack = true;
+        attack_options->prefer_nat_att = true;
       }
     }
   }

@@ -19,7 +19,7 @@ def tp_init(name, text_long_name):
     my.is_biome_dungeon(self, True)
     my.is_carrier_of_weapon_class_b(self, True)
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
+    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.stat_str(self, 12)
     my.text_short_description(self, "A grizzled war-weary zorblin.")
 

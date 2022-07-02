@@ -1817,46 +1817,10 @@ int Thing::is_jump_blocker(void)
   return (tp()->is_jump_blocker());
 }
 
-int Thing::gfx_ascii_color_is_animated(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_color_is_animated());
-}
-
 int Thing::tick_prio(void)
 {
   TRACE_NO_INDENT();
   return (tp()->tick_prio());
-}
-
-int Thing::gfx_ascii_color_spread_hue(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_color_spread_hue());
-}
-
-int Thing::gfx_ascii_color_spread_alpha(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_color_spread_alpha());
-}
-
-int Thing::gfx_ascii_color_spread_blue(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_color_spread_blue());
-}
-
-int Thing::gfx_ascii_color_spread_green(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_color_spread_green());
-}
-
-int Thing::gfx_ascii_color_spread_red(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_ascii_color_spread_red());
 }
 
 int Thing::attack_no_msg(void)
@@ -5924,12 +5888,6 @@ const std::string &Thing::target_name_radial(void)
   return (tp()->target_name_radial());
 }
 
-const std::string &Thing::light_color(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->light_color());
-}
-
 const std::string &Thing::text_long_description(void)
 {
   TRACE_NO_INDENT();
@@ -5972,10 +5930,10 @@ const std::string &Thing::on_polymorphed_do(void)
   return (tp()->on_polymorphed_do());
 }
 
-const std::string &Thing::on_you_nat_attack_do(void)
+const std::string &Thing::on_you_nat_att_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_you_nat_attack_do());
+  return (tp()->on_you_nat_att_do());
 }
 
 const std::string &Thing::on_born_do(void)
@@ -6212,10 +6170,10 @@ const std::string &Thing::text_hits(void)
   return (tp()->text_hits());
 }
 
-const std::string &Thing::damage_nat_attack_type(void)
+const std::string &Thing::damage_nat_att_type(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_nat_attack_type());
+  return (tp()->damage_nat_att_type());
 }
 
 const std::string &Thing::text_long_name(void)

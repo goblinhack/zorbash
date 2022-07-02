@@ -163,10 +163,10 @@ int Thing::damage_melee_chance_d1000(int index)
   return (tp()->damage_melee_chance_d1000(index));
 }
 
-int Thing::damage_nat_attack_chance_d1000(int index)
+int Thing::damage_nat_att_chance_d1000(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_nat_attack_chance_d1000(index));
+  return (tp()->damage_nat_att_chance_d1000(index));
 }
 
 int Thing::damage_poison_chance_d1000(int index)
@@ -313,10 +313,10 @@ void Tp::damage_melee_chance_d1000_set(int index, int v)
   _damage_melee_chance_d1000[ index ] = v;
 }
 
-void Tp::damage_nat_attack_chance_d1000_set(int index, int v)
+void Tp::damage_nat_att_chance_d1000_set(int index, int v)
 {
-  _damage_nat_attack_chance_d1000.resize(index + 1);
-  _damage_nat_attack_chance_d1000[ index ] = v;
+  _damage_nat_att_chance_d1000.resize(index + 1);
+  _damage_nat_att_chance_d1000[ index ] = v;
 }
 
 void Tp::damage_necrosis_chance_d1000_set(int index, int v)
@@ -335,7 +335,7 @@ void Tp::damage_poison_chance_d1000_set(int index, int v)
   _damage_poison_chance_d1000[ index ] = v;
 }
 
-void Tp::damage_nat_attack_type_set(const std::string &v) { _damage_nat_attack_type = v; }
+void Tp::damage_nat_att_type_set(const std::string &v) { _damage_nat_att_type = v; }
 
 int Tp::damage_acid_chance_d1000(int index) const
 {
@@ -425,12 +425,12 @@ int Tp::damage_melee_chance_d1000(int index) const
   return _damage_melee_chance_d1000[ index ];
 }
 
-int Tp::damage_nat_attack_chance_d1000(int index) const
+int Tp::damage_nat_att_chance_d1000(int index) const
 {
-  if (index >= (int) _damage_nat_attack_chance_d1000.size()) {
+  if (index >= (int) _damage_nat_att_chance_d1000.size()) {
     return 0;
   }
-  return _damage_nat_attack_chance_d1000[ index ];
+  return _damage_nat_att_chance_d1000[ index ];
 }
 
 int Tp::damage_necrosis_chance_d1000(int index) const
@@ -493,112 +493,112 @@ int Thing::damage_received_doubled_from_cold(void)
   return (tp()->damage_received_doubled_from_cold());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_poison_do(void)
+const std::string &Thing::on_owner_receive_dmg_poison_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_poison_do());
+  return (tp()->on_owner_receive_dmg_poison_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_future1_do(void)
+const std::string &Thing::on_owner_receive_dmg_future1_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_future1_do());
+  return (tp()->on_owner_receive_dmg_future1_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_future2_do(void)
+const std::string &Thing::on_owner_receive_dmg_future2_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_future2_do());
+  return (tp()->on_owner_receive_dmg_future2_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_future3_do(void)
+const std::string &Thing::on_owner_receive_dmg_future3_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_future3_do());
+  return (tp()->on_owner_receive_dmg_future3_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_cold_do(void)
+const std::string &Thing::on_owner_receive_dmg_cold_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_cold_do());
+  return (tp()->on_owner_receive_dmg_cold_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_fire_do(void)
+const std::string &Thing::on_owner_receive_dmg_fire_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_fire_do());
+  return (tp()->on_owner_receive_dmg_fire_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_crush_do(void)
+const std::string &Thing::on_owner_receive_dmg_crush_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_crush_do());
+  return (tp()->on_owner_receive_dmg_crush_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_lightning_do(void)
+const std::string &Thing::on_owner_receive_dmg_lightning_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_lightning_do());
+  return (tp()->on_owner_receive_dmg_lightning_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_energy_do(void)
+const std::string &Thing::on_owner_receive_dmg_energy_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_energy_do());
+  return (tp()->on_owner_receive_dmg_energy_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_acid_do(void)
+const std::string &Thing::on_owner_receive_dmg_acid_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_acid_do());
+  return (tp()->on_owner_receive_dmg_acid_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_digest_do(void)
+const std::string &Thing::on_owner_receive_dmg_digest_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_digest_do());
+  return (tp()->on_owner_receive_dmg_digest_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_stat_con_do(void)
+const std::string &Thing::on_owner_receive_dmg_stat_con_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_stat_con_do());
+  return (tp()->on_owner_receive_dmg_stat_con_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_stat_str_do(void)
+const std::string &Thing::on_owner_receive_dmg_stat_str_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_stat_str_do());
+  return (tp()->on_owner_receive_dmg_stat_str_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_stat_att_do(void)
+const std::string &Thing::on_owner_receive_dmg_stat_att_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_stat_att_do());
+  return (tp()->on_owner_receive_dmg_stat_att_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_melee_do(void)
+const std::string &Thing::on_owner_receive_dmg_melee_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_melee_do());
+  return (tp()->on_owner_receive_dmg_melee_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_necrosis_do(void)
+const std::string &Thing::on_owner_receive_dmg_necrosis_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_necrosis_do());
+  return (tp()->on_owner_receive_dmg_necrosis_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_draining_do(void)
+const std::string &Thing::on_owner_receive_dmg_draining_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_draining_do());
+  return (tp()->on_owner_receive_dmg_draining_do());
 }
 
-const std::string &Thing::on_owner_receiving_dmg_nat_attack_do(void)
+const std::string &Thing::on_owner_receive_dmg_nat_att_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receiving_dmg_nat_attack_do());
+  return (tp()->on_owner_receive_dmg_nat_att_do());
 }
 
 const std::string &Thing::on_receiving_dmg_poison_do(void)
@@ -703,118 +703,118 @@ const std::string &Thing::on_receiving_dmg_draining_do(void)
   return (tp()->on_receiving_dmg_draining_do());
 }
 
-const std::string &Thing::on_receiving_dmg_nat_attack_do(void)
+const std::string &Thing::on_receiving_dmg_nat_att_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_receiving_dmg_nat_attack_do());
+  return (tp()->on_receiving_dmg_nat_att_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_poison_do(void)
+const std::string &Thing::on_owner_attack_dmg_poison_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_poison_do());
+  return (tp()->on_owner_attack_dmg_poison_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_future1_do(void)
+const std::string &Thing::on_owner_attack_dmg_future1_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_future1_do());
+  return (tp()->on_owner_attack_dmg_future1_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_future2_do(void)
+const std::string &Thing::on_owner_attack_dmg_future2_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_future2_do());
+  return (tp()->on_owner_attack_dmg_future2_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_future3_do(void)
+const std::string &Thing::on_owner_attack_dmg_future3_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_future3_do());
+  return (tp()->on_owner_attack_dmg_future3_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_cold_do(void)
+const std::string &Thing::on_owner_attack_dmg_cold_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_cold_do());
+  return (tp()->on_owner_attack_dmg_cold_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_fire_do(void)
+const std::string &Thing::on_owner_attack_dmg_fire_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_fire_do());
+  return (tp()->on_owner_attack_dmg_fire_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_crush_do(void)
+const std::string &Thing::on_owner_attack_dmg_crush_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_crush_do());
+  return (tp()->on_owner_attack_dmg_crush_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_lightning_do(void)
+const std::string &Thing::on_owner_attack_dmg_lightning_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_lightning_do());
+  return (tp()->on_owner_attack_dmg_lightning_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_energy_do(void)
+const std::string &Thing::on_owner_attack_dmg_energy_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_energy_do());
+  return (tp()->on_owner_attack_dmg_energy_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_acid_do(void)
+const std::string &Thing::on_owner_attack_dmg_acid_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_acid_do());
+  return (tp()->on_owner_attack_dmg_acid_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_digest_do(void)
+const std::string &Thing::on_owner_attack_dmg_digest_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_digest_do());
+  return (tp()->on_owner_attack_dmg_digest_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_stat_con_do(void)
+const std::string &Thing::on_owner_attack_dmg_stat_con_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_stat_con_do());
+  return (tp()->on_owner_attack_dmg_stat_con_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_stat_str_do(void)
+const std::string &Thing::on_owner_attack_dmg_stat_str_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_stat_str_do());
+  return (tp()->on_owner_attack_dmg_stat_str_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_stat_att_do(void)
+const std::string &Thing::on_owner_attack_dmg_stat_att_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_stat_att_do());
+  return (tp()->on_owner_attack_dmg_stat_att_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_melee_do(void)
+const std::string &Thing::on_owner_attack_dmg_melee_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_melee_do());
+  return (tp()->on_owner_attack_dmg_melee_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_necrosis_do(void)
+const std::string &Thing::on_owner_attack_dmg_necrosis_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_necrosis_do());
+  return (tp()->on_owner_attack_dmg_necrosis_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_draining_do(void)
+const std::string &Thing::on_owner_attack_dmg_draining_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_draining_do());
+  return (tp()->on_owner_attack_dmg_draining_do());
 }
 
-const std::string &Thing::on_owner_attacking_dmg_nat_attack_do(void)
+const std::string &Thing::on_owner_attack_dmg_nat_att_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attacking_dmg_nat_attack_do());
+  return (tp()->on_owner_attack_dmg_nat_att_do());
 }
 
 const std::string &Thing::on_attacking_dmg_poison_do(void)
@@ -919,8 +919,8 @@ const std::string &Thing::on_attacking_dmg_draining_do(void)
   return (tp()->on_attacking_dmg_draining_do());
 }
 
-const std::string &Thing::on_attacking_dmg_nat_attack_do(void)
+const std::string &Thing::on_attacking_dmg_nat_att_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_attacking_dmg_nat_attack_do());
+  return (tp()->on_attacking_dmg_nat_att_do());
 }

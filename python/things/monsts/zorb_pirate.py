@@ -17,7 +17,7 @@ def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
     my.text_long_description2(self, "This particular zorblin was once a ruthless adventurer who plundered the seas in their mighty pirate ship, but due to a series of unfortunate and inexplicable events has now found themselves wandering the halls of this dungeon looking for the odd piece of eight.")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
-    my.on_you_nat_attack_do(self, "me.on_you_nat_attack()")
+    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.on_born_do(self, "me.on_born()")
     my.text_short_description(self, "A one-eyed pirate zorblin.")
     my.is_carrier_of_treasure_class_c(self, True)

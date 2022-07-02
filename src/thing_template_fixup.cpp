@@ -137,7 +137,7 @@ void tp_fixup(void)
     int num_attack_types = 0;
 
     num_attack_types += tp->damage_melee() ? 1 : 0;
-    num_attack_types += tp->damage_nat_attack() ? 1 : 0;
+    num_attack_types += tp->damage_nat_att() ? 1 : 0;
     num_attack_types += tp->damage_poison() ? 1 : 0;
     num_attack_types += tp->damage_future1() ? 1 : 0;
     num_attack_types += tp->damage_future2() ? 1 : 0;
@@ -162,8 +162,8 @@ void tp_fixup(void)
         if (tp->damage_acid() > 0) {
           tp->damage_acid_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_nat_attack() > 0) {
-          tp->damage_nat_attack_chance_d1000_set(attack_index, 1000);
+        if (tp->damage_nat_att() > 0) {
+          tp->damage_nat_att_chance_d1000_set(attack_index, 1000);
         }
         if (tp->damage_crush() > 0) {
           tp->damage_crush_chance_d1000_set(attack_index, 1000);

@@ -298,7 +298,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   out << bits(my.t->tile_curr);
   out << bits(my.t->z_depth);
   out << bits(my.t->laser_count);
-  out << bits(my.t->blit_color);
+  out << bits(my.t->blit_bg_color);
+  out << bits(my.t->blit_fg_color);
   uint8_t dir = my.t->dir;
   out << bits(dir);
 

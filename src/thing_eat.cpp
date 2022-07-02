@@ -197,7 +197,7 @@ bool Thing::eat(Thingp victim)
       dbg("Eating %s", victim->text_the().c_str());
 
       if (victim->is_monst() || victim->is_player()) {
-        return nat_attack(victim);
+        return nat_att(victim);
       } else {
         return consume(victim);
       }
