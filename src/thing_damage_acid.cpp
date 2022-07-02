@@ -250,8 +250,8 @@ int Thing::on_owner_attack_dmg_acid(Thingp owner, Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attack_dmg_acid call [%s] expected mod:function, got %d elems",
-      on_owner_attack_dmg_acid.c_str(), (int) on_owner_attack_dmg_acid.size());
+  ERR("Bad on_owner_attack_dmg_acid call [%s] expected mod:function, got %d elems", on_owner_attack_dmg_acid.c_str(),
+      (int) on_owner_attack_dmg_acid.size());
 
   return damage;
 }
