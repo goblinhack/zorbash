@@ -355,7 +355,7 @@ void Level::tick_(void)
       }
       game->things_are_moving = true;
       t->is_waiting           = true;
-      // t->con("WAIT %d", __LINE__);
+      // t->con("WAIT %d moving", __LINE__);
     }
 
     //
@@ -367,7 +367,7 @@ void Level::tick_(void)
       }
       game->things_are_moving = true;
       t->is_waiting           = true;
-      // t->con("WAIT %d", __LINE__);
+      // t->con("WAIT %d jumping", __LINE__);
     }
 
     //
@@ -527,40 +527,45 @@ void Level::tick_(void)
   //
   // The robot needs to be more deterministic and less loosy goosey
   //
-  if (game->robot_mode) {
+  if (0) {
     //
-    // No moving if weapons have not finished firing
+    // No, it slows the game too much. Let's live with some non determinism.
     //
-    if (all_projectiles.size()) {
-      return;
-    }
+    if (game->robot_mode) {
+      //
+      // No moving if weapons have not finished firing
+      //
+      if (all_projectiles.size()) {
+        return;
+      }
 
-    if (new_projectiles.size()) {
-      return;
-    }
+      if (new_projectiles.size()) {
+        return;
+      }
 
-    if (all_lasers.size()) {
-      return;
-    }
+      if (all_lasers.size()) {
+        return;
+      }
 
-    if (new_lasers.size()) {
-      return;
-    }
+      if (new_lasers.size()) {
+        return;
+      }
 
-    if (all_internal_particles.size()) {
-      return;
-    }
+      if (all_internal_particles.size()) {
+        return;
+      }
 
-    if (new_internal_particles.size()) {
-      return;
-    }
+      if (new_internal_particles.size()) {
+        return;
+      }
 
-    if (all_external_particles.size()) {
-      return;
-    }
+      if (all_external_particles.size()) {
+        return;
+      }
 
-    if (new_external_particles.size()) {
-      return;
+      if (new_external_particles.size()) {
+        return;
+      }
     }
   }
 

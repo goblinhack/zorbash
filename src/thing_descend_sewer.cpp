@@ -27,6 +27,15 @@ bool Thing::descend_sewer_tick(void)
     }
 
     return false;
+  } else if (game->tick_current - tick_last_i_attacked() <= 1) {
+    //
+    // If this is the robot and we attack something next to a sewer, don't automatically descend.
+    //
+    if (is_player()) {
+      dbg("Location check, descend, no busy attacking");
+    }
+
+    return false;
   }
 
   if (is_player()) {
