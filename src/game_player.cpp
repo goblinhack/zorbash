@@ -252,5 +252,9 @@ void Game::place_player(void)
   auto player = level->player;
   if (player) {
     player->light_dist_update();
+    if (0) {
+      player->health_max_incr(200);
+      player->health_incr(200);
+    }
   }
 }
