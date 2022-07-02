@@ -290,6 +290,13 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   }
 
   //
+  // Items have gold set to -1 until we determine how many coins they have.
+  //
+  if (is_player() || is_monst()) {
+    gold_value();
+  }
+
+  //
   // We should not create things until we have fully loaded.
   //
   if (g_loading) {

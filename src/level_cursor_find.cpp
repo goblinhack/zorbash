@@ -19,13 +19,33 @@
 void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx,
                                           const int16_t maxy)
 {
-  TRACE_AND_INDENT();
-  if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
-      (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_ENCHANTING_ITEMS) ||
-      (game->state == Game::STATE_SAVE_MENU) || (game->state == Game::STATE_LOAD_MENU) ||
-      (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
-      (game->state == Game::STATE_CHOOSING_SKILLS)) {
-    return;
+  TRACE_NO_INDENT();
+
+  switch (game->state) {
+    case Game::STATE_NORMAL: break;
+    case Game::STATE_OPTIONS_FOR_ITEM_MENU: // Drop, throw etc and item
+      return;
+    case Game::STATE_INVENTORY: // Currently managing inventory
+      return;
+    case Game::STATE_COLLECTING_ITEMS: // Collecting en masse from the level
+      return;
+    case Game::STATE_ENCHANTING_ITEMS: // Upgrading items
+      return;
+    case Game::STATE_CHOOSING_SKILLS: // Choosing skills
+      return;
+    case Game::STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
+      break;
+    case Game::STATE_CHOOSING_LEVEL: // Choosing the next level
+      return;
+    case Game::STATE_KEYBOARD_MENU: // Keyboard optionds
+      return;
+    case Game::STATE_LOAD_MENU: // Loading a game
+      return;
+    case Game::STATE_SAVE_MENU: // Saving a game
+      return;
+    case Game::STATE_QUIT_MENU: // Pondering quitting
+      return;
+    default: err("Unhandled game state"); return;
   }
 
   if (wid_find_under_mouse()) {
@@ -34,6 +54,7 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
 
   dbg3("Cursor find on visible things");
   TRACE_AND_INDENT();
+
   if ((game->map_mini_over.x > 0) && (game->map_mini_over.y > 0)) {
     //
     // Don't move onto lava unless double click

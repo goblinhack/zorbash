@@ -50,7 +50,7 @@ void Game::change_state(int new_state)
   switch (new_state) {
     case STATE_NORMAL:
       // backtrace_dump();
-      LOG("Game state changing to STATE_NORMAL");
+      CON("Game state changing to STATE_NORMAL");
       wid_thing_info_fini("change state");
       wid_collect_destroy();
       wid_enchant_destroy();
@@ -60,40 +60,40 @@ void Game::change_state(int new_state)
       wid_inventory_fini();
       wid_quit_destroy();
       wid_actionbar_init();
-      LOG("Game state changed to STATE_NORMAL");
+      CON("Game state changed to STATE_NORMAL");
       break;
-    case STATE_OPTIONS_FOR_ITEM_MENU: LOG("Game state changed to STATE_OPTIONS_FOR_ITEM_MENU"); break;
+    case STATE_OPTIONS_FOR_ITEM_MENU: CON("Game state changed to STATE_OPTIONS_FOR_ITEM_MENU"); break;
     case STATE_INVENTORY: // Currently managing inventory
-      LOG("Game state changed to STATE_INVENTORY");
+      CON("Game state changed to STATE_INVENTORY");
       wid_actionbar_init();
       break;
     case STATE_COLLECTING_ITEMS: // Collecting en masse from the level
-      LOG("Game state changing to STATE_COLLECTING_ITEMS");
+      CON("Game state changing to STATE_COLLECTING_ITEMS");
       wid_thing_info_fini("change state");
       wid_collect_destroy();
-      LOG("Game state changed to STATE_COLLECTING_ITEMS");
+      CON("Game state changed to STATE_COLLECTING_ITEMS");
       wid_actionbar_init();
       break;
     case STATE_ENCHANTING_ITEMS:
-      LOG("Game state changing to STATE_ENCHANTING_ITEMS");
+      CON("Game state changing to STATE_ENCHANTING_ITEMS");
       wid_enchant_destroy();
-      LOG("Game state changed to STATE_ENCHANTING_ITEMS");
+      CON("Game state changed to STATE_ENCHANTING_ITEMS");
       wid_actionbar_init();
       break;
     case STATE_CHOOSING_SKILLS:
-      LOG("Game state changing to STATE_CHOOSING_SKILLS");
+      CON("Game state changing to STATE_CHOOSING_SKILLS");
       wid_choose_skill_destroy();
-      LOG("Game state changed to STATE_CHOOSING_SKILLS");
+      CON("Game state changed to STATE_CHOOSING_SKILLS");
       wid_actionbar_init();
       break;
     case STATE_CHOOSING_TARGET: // Looking to somewhere to throw at
-      LOG("Game state changing to STATE_CHOOSING_TARGET");
+      CON("Game state changing to STATE_CHOOSING_TARGET");
       wid_thing_info_fini("change state");
-      LOG("Game state changed to STATE_CHOOSING_TARGET");
+      CON("Game state changed to STATE_CHOOSING_TARGET");
       wid_actionbar_init();
       break;
     case STATE_CHOOSING_LEVEL: // Looking to change level
-      LOG("Game state changing to STATE_CHOOSING_LEVEL");
+      CON("Game state changing to STATE_CHOOSING_LEVEL");
       wid_actionbar_close_all_popups();
       wid_hide(wid_topcon_window);
       wid_rightbar_fini();
@@ -107,7 +107,7 @@ void Game::change_state(int new_state)
       request_remake_debuffbox = false;
       request_remake_buffbox   = false;
       request_remake_rightbar  = false;
-      LOG("Game state changed to STATE_CHOOSING_LEVEL");
+      CON("Game state changed to STATE_CHOOSING_LEVEL");
       break;
     case STATE_LOAD_MENU:
     case STATE_KEYBOARD_MENU:
