@@ -119,8 +119,8 @@ int Thing::on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damag
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_receiving_dmg_nat_att call [%s] expected mod:function, got %d elems",
-      on_receiving_dmg_nat_att.c_str(), (int) on_receiving_dmg_nat_att.size());
+  ERR("Bad on_receiving_dmg_nat_att call [%s] expected mod:function, got %d elems", on_receiving_dmg_nat_att.c_str(),
+      (int) on_receiving_dmg_nat_att.size());
 
   return damage;
 }
@@ -195,8 +195,8 @@ int Thing::on_attacking_dmg_nat_att(Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_attacking_dmg_nat_att call [%s] expected mod:function, got %d elems",
-      on_attacking_dmg_nat_att.c_str(), (int) on_attacking_dmg_nat_att.size());
+  ERR("Bad on_attacking_dmg_nat_att call [%s] expected mod:function, got %d elems", on_attacking_dmg_nat_att.c_str(),
+      (int) on_attacking_dmg_nat_att.size());
 
   return damage;
 }

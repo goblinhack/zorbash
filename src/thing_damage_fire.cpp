@@ -240,8 +240,8 @@ int Thing::on_owner_attack_dmg_fire(Thingp owner, Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attack_dmg_fire call [%s] expected mod:function, got %d elems",
-      on_owner_attack_dmg_fire.c_str(), (int) on_owner_attack_dmg_fire.size());
+  ERR("Bad on_owner_attack_dmg_fire call [%s] expected mod:function, got %d elems", on_owner_attack_dmg_fire.c_str(),
+      (int) on_owner_attack_dmg_fire.size());
 
   return damage;
 }
