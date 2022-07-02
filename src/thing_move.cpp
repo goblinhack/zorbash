@@ -654,7 +654,7 @@ void Thing::update_interpolated_position(void)
   }
 
   //
-  // In ascii mode, moves are immediate
+  // As we have no smooth movement in ascii mode, just move immediately
   //
   if (g_opt_ascii) {
     step = 1;
@@ -796,7 +796,14 @@ void Thing::move_to(point to)
   auto delta = to - curr_at;
   move_set_dir_from_dest_or_delta(delta);
 
-  update_pos(to, false);
+  //
+  // As we have no smooth movement in ascii mode, just move immediately
+  //
+  if (g_opt_ascii) {
+    update_pos(to, true);
+  } else {
+    update_pos(to, false);
+  }
 }
 
 void Thing::move_delta(point delta)
@@ -814,7 +821,14 @@ void Thing::move_delta(point delta)
     return;
   }
 
-  update_pos(curr_at + delta, false);
+  //
+  // As we have no smooth movement in ascii mode, just move immediately
+  //
+  if (g_opt_ascii) {
+    update_pos(curr_at + delta, true);
+  } else {
+    update_pos(curr_at + delta, false);
+  }
 }
 
 void Thing::move_to_immediately(point to)

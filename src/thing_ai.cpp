@@ -1838,8 +1838,7 @@ bool Thing::ai_tick(bool recursing)
   }
 
   //
-  // Set up the extent of the AI, choosing smaller areas for monsters for
-  // speed.
+  // Set up the extent of the AI, choosing smaller areas for monsters for speed.
   //
   const float dx = distance_vision_get();
   const float dy = dx;
