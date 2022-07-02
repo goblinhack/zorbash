@@ -40,7 +40,7 @@ def tp_init(name, text_long_name):
     my.damage_nat_att_type(self, "bite")
     my.damage_natural_dice(self, "1d8+2")
     my.damage_poison_chance_d1000(self, 0, 100)
-    my.damage_poison_dice(self, "2d8+1")
+    my.damage_poison_dice(self, "1d4+1")
     my.distance_avoid(self, 3)
     my.distance_vision(self, 3)
     my.environ_avoids_poison(self, 100)

@@ -945,15 +945,15 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         if (i_rolled == 20) {
           attack_options->crit = true;
           hit                  = true;
-          dbg("Attack on %s: ATT %s DEF %d, to-hit %d, crit rolled %d -> hit", victim->to_short_string().c_str(),
+          con("Attack on %s: ATT %s DEF %d, to-hit %d, crit rolled %d -> hit", victim->to_short_string().c_str(),
               modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled);
         } else if (i_rolled == 1) {
           hit = false;
-          dbg("Attack on %s: ATT %s DEF %d, to-hit %d, fumble rolled %d -> miss", victim->to_short_string().c_str(),
+          con("Attack on %s: ATT %s DEF %d, to-hit %d, fumble rolled %d -> miss", victim->to_short_string().c_str(),
               modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled);
         } else {
           hit = i_rolled >= to_hit;
-          dbg("Attack on %s: ATT %s DEF %d, to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
+          con("Attack on %s: ATT %s DEF %d, to-hit %d, rolled %d -> %s", victim->to_short_string().c_str(),
               modifier_to_string(attack_bonus).c_str(), stat_def, to_hit, i_rolled, hit ? "hit" : "miss");
         }
 

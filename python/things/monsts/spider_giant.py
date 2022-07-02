@@ -51,7 +51,7 @@ def tp_init(name, text_long_name):
     my.damage_nat_att_type(self, "gore")
     my.damage_natural_dice(self, "1d8+3")
     my.damage_poison_chance_d1000(self, 0, 100)
-    my.damage_poison_dice(self, "2d8+2")
+    my.damage_poison_dice(self, "2d8")
     my.damage_received_doubled_from_fire(self, True)
     my.distance_avoid(self, 5)
     my.distance_mob_max(self, 5)
