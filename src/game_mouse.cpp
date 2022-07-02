@@ -121,9 +121,6 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
   }
 
   if (game->state == Game::STATE_NORMAL) {
-    IF_DEBUG2 { player->log("Check if close enough to attack; check"); }
-    TRACE_AND_INDENT();
-
     //
     // Have we moved close enough to attack? Do this prior to checking for
     // double click so we can attack monsts sitting in lava
@@ -131,7 +128,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     if (level->cursor) {
       if ((std::abs(player->curr_at.x - level->cursor->curr_at.x) <= 1) &&
           (std::abs(player->curr_at.y - level->cursor->curr_at.y) <= 1)) {
-        IF_DEBUG2 { player->log("Close enough to attack; check"); }
+        IF_DEBUG2 { player->log("Close enough to attack check"); }
         TRACE_AND_INDENT();
 
         int x = level->cursor->curr_at.x;
@@ -142,7 +139,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
             continue;
           }
 
-          IF_DEBUG2 { player->log("Close enough to attack %s?", t->to_string().c_str()); }
+          IF_DEBUG2 { player->log("Yes; close enough to attack %s?", t->to_string().c_str()); }
           TRACE_AND_INDENT();
 
           if (! t->is_dead) {
@@ -192,12 +189,32 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           }
         }
         FOR_ALL_THINGS_END()
+
+        //
+        // 2nd try, see if we can shove it. Like a brazier for example.
+        //
+        IF_DEBUG2 { player->log("Close enough to shove check"); }
+        TRACE_AND_INDENT();
+
+        FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
+        {
+          if (t == level->player) {
+            continue;
+          }
+
+          if (t->is_shovable()) {
+            IF_DEBUG2 { player->log("Yes; close enough to shove %s?", t->to_string().c_str()); }
+            TRACE_AND_INDENT();
+            player->try_to_shove(level->cursor->curr_at);
+            return true;
+          }
+        }
+        FOR_ALL_THINGS_END()
       }
     }
 
     //
-    // If hovering over a double click thing then don't jump in unless
-    // the user really means it.
+    // If hovering over a double click thing then don't jump in unless the user really means it.
     //
     if (! wid_mouse_two_clicks) {
       auto to = level->cursor->curr_at;
