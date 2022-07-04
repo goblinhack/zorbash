@@ -425,6 +425,15 @@ bool Thing::equip(Thingp item, int equip)
   auto immediate_owner = item->immediate_owner();
   if (immediate_owner) {
     immediate_owner->itemsp()->carrying.remove(item->id);
+
+    //
+    // If we are equipping a sword inside a bag, then the bag is really no longer owning this.
+    // Change to the player.
+    //
+    auto top_owner = item->top_owner();
+    if (immediate_owner != top_owner) {
+      item->owner_set(top_owner);
+    }
   }
 
   unequip("equip new", equip, true);
