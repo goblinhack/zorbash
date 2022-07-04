@@ -1270,9 +1270,9 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     if (real_hitter->is_monst() || real_hitter->is_player()) {
       if (is_monst() || is_player()) {
         if (is_sleeping) {
-          reason = "killed in its sleep, by " + defeater;
+          reason = "in its sleep, by " + defeater;
         } else {
-          reason = "killed by " + defeater;
+          reason = "by " + defeater;
         }
       } else {
         reason = "by " + defeater;
