@@ -83,8 +83,7 @@ if (player) {
       if (step > 0) {
         auto dx = (map_wanted_at.x - map_at.x) / step;
         //
-        // This used to be a thing when I did not have pixel
-        // accurate map and rounded pixels were a thing.
+        // This used to be a thing when I did not have pixel accurate map and rounded pixels were a thing.
         //
         // dx *= TILE_WIDTH;
         // dx = (int) ceil(dx);
@@ -277,8 +276,8 @@ void Level::scroll_map_set_target(void)
     // The smaller the number, the further from the edge of the map we scroll.
     //
     if (g_opt_ascii) {
-      x_sensitivity = 4;
-      y_sensitivity = 4;
+      x_sensitivity = 8;
+      y_sensitivity = 8;
     } else {
       x_sensitivity = 1;
       y_sensitivity = 1;
