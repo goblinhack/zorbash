@@ -29,7 +29,7 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.is_organic(self, True)
-    my.is_treasure_class_a(self, True)
+    my.is_treasure_class_c(self, True)
     my.is_treasure(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)

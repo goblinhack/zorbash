@@ -15,9 +15,9 @@ def on_owner_remove(me, owner, x, y):
         my.thing_msg(me, "You return to your normal level of stickiness.")
 
 
-def tp_init(name, text_long_name):
+def tp_init(name, text_long_name, text_short_name):
     global self
-    self = tp.Tp(name, text_long_name)
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
 
     my.gfx_ascii_shown(self, True)
@@ -37,7 +37,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_slippery", text_long_name="slippery as the banana")
+    tp_init(name="buff_slippery", text_long_name="slippery as the banana", text_short_name="slippery")
 
 
 init()
