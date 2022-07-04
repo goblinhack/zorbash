@@ -32,28 +32,28 @@ def tp_init(name, text_long_name, text_short_name):
 
     delay = 50
     my.tile(self,
-            ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".1", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".2", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".3", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".4", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".5", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".6", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".7", is_dir_none=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="omega", ascii_bg_col_name="", ascii_fg_col_name="gold",
             tile=name + ".8", is_dir_none=True, delay_ms=delay)
 
     my.tp_update(self)
