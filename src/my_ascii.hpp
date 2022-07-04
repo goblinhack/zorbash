@@ -13,7 +13,7 @@
 #include <wchar.h>
 
 #define TERM_ASCII_WIDTH_DEF  120
-#define TERM_ASCII_HEIGHT_DEF 40
+#define TERM_ASCII_HEIGHT_DEF 46
 
 #define TERM_GFX_WIDTH_DEF  120
 #define TERM_GFX_HEIGHT_DEF 80

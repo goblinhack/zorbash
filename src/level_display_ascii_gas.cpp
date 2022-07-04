@@ -32,7 +32,7 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
   for (auto y = miny; y < maxy - 1; y++) {
     for (auto x = minx; x < maxx - 1; x++) {
 
-      int intensity = is_gas_poison_no_check(x, y);
+      int intensity = is_gas_poison(x, y);
       if (intensity == 0) {
         continue;
       }

@@ -39,12 +39,12 @@ bool wid_asciimap_init(void)
   int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 2;
 
   TRACE_AND_INDENT();
-  point tl = make_point(UI_LEFTBAR_WIDTH + 1, UI_TOPCON_VIS_HEIGHT);
+  point tl = make_point(UI_LEFTBAR_WIDTH + 3, UI_TOPCON_VIS_HEIGHT);
   point br = tl + point(width - 1, height - 1);
 
   wid_asciimap = wid_new_square_window("wid asciimap");
-  CON("NEW %p", wid_asciimap);
   wid_set_shape_none(wid_asciimap);
+  // wid_set_style(wid_asciimap, UI_WID_STYLE_RED);
   wid_set_pos(wid_asciimap, tl, br);
   wid_set_on_display(wid_asciimap, wid_asciimap_display);
   wid_set_ignore_scroll_events(wid_asciimap, true);

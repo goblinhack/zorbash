@@ -175,11 +175,15 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         sdl.wheel_y = event->wheel.y;
 
         //
-        // Negative wheel x so side scrolls seem natural. Could just be a dumb macos thing to ifdef?
+        // Handle "natural" scrolling direction.
         //
-#ifdef __APPLE__
-        sdl.wheel_x = -sdl.wheel_x;
-#endif
+        if (game->config.mouse_wheel_lr_negated) {
+          sdl.wheel_x = -sdl.wheel_x;
+        }
+
+        if (game->config.mouse_wheel_ud_negated) {
+          sdl.wheel_y = -sdl.wheel_y;
+        }
 
         sdl.wheel_x *= accel;
         sdl.wheel_y *= accel;

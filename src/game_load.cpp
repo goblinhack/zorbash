@@ -541,7 +541,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->ts_fade_out_begin);
   in >> bits(l->ts_fade_in_begin);
 
-  in >> bits(my.t->gas_poison);
+  in >> bits(my.t->gas_poison_cloud);
 
   in >> bits(my.t->_is_gas_blocker);
   in >> bits(my.t->_noise_blocker);
@@ -878,6 +878,8 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.gfx_inverted);
   in >> bits(my.t.gfx_show_hidden);
   in >> bits(my.t.gfx_vsync_enable);
+  in >> bits(my.t.mouse_wheel_lr_negated);
+  in >> bits(my.t.mouse_wheel_ud_negated);
   in >> bits(my.t.key_action0);
   in >> bits(my.t.key_action1);
   in >> bits(my.t.key_action2);

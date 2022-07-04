@@ -70,7 +70,7 @@ void Level::display_pixelart_gas(int fbo, int16_t minx, int16_t miny, int16_t ma
           for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
             uint16_t gx        = x * DUNGEON_GAS_RESOLUTION + dx;
             uint16_t gy        = y * DUNGEON_GAS_RESOLUTION + dy;
-            uint8_t  intensity = gas_poison[ gy ][ gx ];
+            uint8_t  intensity = gas_poison_cloud[ gx ][ gy ];
 
             if (! intensity) {
               continue;
