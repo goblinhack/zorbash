@@ -121,19 +121,19 @@ def tp_init(name, text_long_name):
 
     delay = 50
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.1", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.2", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.3", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.4", is_dead=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray10",
+            ascii_fg_char="z", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name + ".dead.5", is_dead=True, is_end_of_anim=True)
 
     delay = 200
