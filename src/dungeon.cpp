@@ -2892,11 +2892,11 @@ bool Dungeon::rooms_move_closer_together(void)
   // This is slow and causes jitter in the game when a monst falls
   // into a chasm.
   //
-  auto attempts_to_move_rooms_closer = 5;
+  int attempts_to_move_rooms_closer = pcg_random_range(0, 30);
 
   choose_room_doors();
 
-  while (attempts_to_move_rooms_closer--) {
+  while (attempts_to_move_rooms_closer-- > 0) {
     center_room_layout();
 
     for (unsigned int rs = 0; rs < (unsigned int) all_placed_rooms.size(); rs++) {

@@ -5,6 +5,7 @@
 
 #include <math.h>
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
@@ -534,7 +535,7 @@ bool Thing::spawn_gas_poison(int radius)
   uint16_t gy =
       (chosen.y * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
 
-  level->gas_poison[ gy ][ gx ] = 254;
+  set(level->gas_poison_cloud, gx, gy, (uint8_t) 254);
 
   return true;
 }

@@ -16,7 +16,7 @@
 #include "my_wid_thing_info.hpp"
 #include <SDL_mixer.h>
 
-static WidPopup *wid_config_top_window;
+WidPopup *wid_config_top_window;
 
 void Config::fini(void) { TRACE_AND_INDENT(); }
 
@@ -48,6 +48,8 @@ void Config::reset(void)
   gfx_show_hidden        = false;
   gfx_vsync_enable       = true;
   gfx_vsync_locked       = false;
+  mouse_wheel_lr_negated = false;
+  mouse_wheel_ud_negated = false;
   config_pix_height      = {};
   config_pix_width       = {};
   game_pix_height        = {};
@@ -131,11 +133,19 @@ static void wid_config_top_destroy(void)
   wid_config_top_window = nullptr;
 }
 
-static uint8_t wid_config_top_graphics(Widp w, int x, int y, uint32_t button)
+static uint8_t wid_config_top_gfx(Widp w, int x, int y, uint32_t button)
 {
   TRACE_AND_INDENT();
   wid_config_top_destroy();
   game->wid_config_gfx_select();
+  return true;
+}
+
+static uint8_t wid_config_top_mouse(Widp w, int x, int y, uint32_t button)
+{
+  TRACE_AND_INDENT();
+  wid_config_top_destroy();
+  game->wid_config_mouse_select();
   return true;
 }
 
@@ -188,7 +198,8 @@ static uint8_t wid_config_top_key_up(Widp w, const struct SDL_Keysym *key)
             TRACE_AND_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
-              case 'g': wid_config_top_graphics(nullptr, 0, 0, 0); return true;
+              case 'g': wid_config_top_gfx(nullptr, 0, 0, 0); return true;
+              case 'm': wid_config_top_mouse(nullptr, 0, 0, 0); return true;
               case 's': wid_config_top_sound(nullptr, 0, 0, 0); return true;
               case 'k': wid_config_top_keyboard(nullptr, 0, 0, 0); return true;
               case 'o': wid_config_top_other(nullptr, 0, 0, 0); return true;
@@ -233,10 +244,10 @@ void Game::wid_config_top_menu(void)
   auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
 
   point tl = make_point(TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2, TERM_HEIGHT / 2 - 4);
-  point br = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 14);
+  point br = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 15);
   if (g_opt_ascii) {
     tl = make_point(TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2, TERM_HEIGHT / 2 - 4);
-    br = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 6);
+    br = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 8);
   }
   auto width = br.x - tl.x - 2;
 
@@ -257,7 +268,7 @@ void Game::wid_config_top_menu(void)
   {
     TRACE_AND_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
-    auto w = wid_new_square_button(p, "graphics");
+    auto w = wid_new_square_button(p, "gfx");
 
     point tl = make_point(0, y_at);
     point br = make_point(width, y_at + box_height);
@@ -265,9 +276,25 @@ void Game::wid_config_top_menu(void)
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
-    wid_set_on_mouse_up(w, wid_config_top_graphics);
+    wid_set_on_mouse_up(w, wid_config_top_gfx);
     wid_set_pos(w, tl, br);
     wid_set_text(w, "%%fg=white$G%%fg=reset$raphics");
+  }
+  y_at += box_step;
+  {
+    TRACE_AND_INDENT();
+    auto p = wid_config_top_window->wid_text_area->wid_text_area;
+    auto w = wid_new_square_button(p, "mouse");
+
+    point tl = make_point(0, y_at);
+    point br = make_point(width, y_at + box_height);
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_style(w, box_highlight_style);
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_style(w, box_style);
+    wid_set_on_mouse_up(w, wid_config_top_mouse);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "%%fg=white$M%%fg=reset$ouse");
   }
   y_at += box_step;
   {

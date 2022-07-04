@@ -2,13 +2,17 @@
 // Copyright goblinhack@gmail.com
 // See the README.md file for license info.
 //
+
+#include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
 #include "my_random.hpp"
 
 void Level::tick_gas_poison(void)
 {
-  static std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
-      old_gas {};
+  TRACE_NO_INDENT();
+
+  std::array< std::array< uint8_t, MAP_HEIGHT * DUNGEON_GAS_RESOLUTION >, MAP_WIDTH * DUNGEON_GAS_RESOLUTION >
+      old_gas_poison_cloud {};
 
 #if 0
   IF_DEBUG2
@@ -21,7 +25,7 @@ void Level::tick_gas_poison(void)
         for (uint16_t x = DUNGEON_GAS_RESOLUTION; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION;
              x++) {
           if (pcg_random_range(0, 100) < 10) {
-            gas_poison[ x ][ y ] = 9;
+            gas_poison_cloud[ x ][ y ] = 9;
           }
         }
       }
@@ -29,16 +33,17 @@ void Level::tick_gas_poison(void)
   }
 #endif
 
-  old_gas = gas_poison;
+  old_gas_poison_cloud = gas_poison_cloud;
 
+  TRACE_NO_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
       if (is_gas_blocker(x, y)) {
         for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
           for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
-            uint16_t gx            = x * DUNGEON_GAS_RESOLUTION + dx;
-            uint16_t gy            = y * DUNGEON_GAS_RESOLUTION + dy;
-            gas_poison[ gy ][ gx ] = 255;
+            uint16_t gx = x * DUNGEON_GAS_RESOLUTION + dx;
+            uint16_t gy = y * DUNGEON_GAS_RESOLUTION + dy;
+            set(gas_poison_cloud, gx, gy, (uint8_t) 255);
           }
         }
       } else {
@@ -49,8 +54,8 @@ void Level::tick_gas_poison(void)
           for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
             uint16_t gx = x * DUNGEON_GAS_RESOLUTION + dx;
             uint16_t gy = y * DUNGEON_GAS_RESOLUTION + dy;
-            if (gas_poison[ gy ][ gx ] == 255) {
-              gas_poison[ gy ][ gx ] = 0;
+            if (get(gas_poison_cloud, gx, gy) == 255) {
+              set(gas_poison_cloud, gx, gy, (uint8_t) 0);
             }
           }
         }
@@ -63,7 +68,7 @@ void Level::tick_gas_poison(void)
   for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; y++) {
     uint16_t x = DUNGEON_GAS_RESOLUTION;
     for (; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; x++) {
-      uint8_t n = gas_poison[ y ][ x ];
+      uint8_t n = gas_poison_cloud[ x ][ y ];
       if (n == 255) {
         printf("X");
       } else if (n) {
@@ -88,23 +93,24 @@ void Level::tick_gas_poison(void)
     reduction = 7;
   }
 
+  TRACE_NO_INDENT();
   for (uint16_t y = DUNGEON_GAS_RESOLUTION; y < (MAP_HEIGHT * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; y++) {
     uint16_t x = DUNGEON_GAS_RESOLUTION;
 
     // a b c
     // d e f
     // g h i
-    uint8_t *a = &old_gas[ y - 1 ][ x - 1 ];
-    uint8_t *b = a + 1;
-    uint8_t *c = b + 1;
-    uint8_t *d = &old_gas[ y ][ x - 1 ];
-    uint8_t *e = d + 1;
-    uint8_t *f = e + 1;
-    uint8_t *g = &old_gas[ y + 1 ][ x - 1 ];
-    uint8_t *h = g + 1;
-    uint8_t *i = h + 1;
+    uint8_t *a = getptr(old_gas_poison_cloud, x - 1, y - 1);
+    uint8_t *b = getptr(old_gas_poison_cloud, x, y - 1);
+    uint8_t *c = getptr(old_gas_poison_cloud, x + 1, y - 1);
+    uint8_t *d = getptr(old_gas_poison_cloud, x - 1, y);
+    uint8_t *e = getptr(old_gas_poison_cloud, x, y);
+    uint8_t *f = getptr(old_gas_poison_cloud, x + 1, y);
+    uint8_t *g = getptr(old_gas_poison_cloud, x - 1, y + 1);
+    uint8_t *h = getptr(old_gas_poison_cloud, x, y + 1);
+    uint8_t *i = getptr(old_gas_poison_cloud, x + 1, y + 1);
 
-    uint8_t *n = &gas_poison[ y ][ x ];
+    uint8_t *n = getptr(gas_poison_cloud, x, y);
 
     for (; x < (MAP_WIDTH * DUNGEON_GAS_RESOLUTION) - DUNGEON_GAS_RESOLUTION; x++) {
       uint8_t ga = *a++;
@@ -161,7 +167,7 @@ void Level::tick_gas_poison(void)
     }
   }
 
-  old_gas = gas_poison;
+  old_gas_poison_cloud = gas_poison_cloud;
 
   //
   // Update the level gas intensity per tile
@@ -173,7 +179,7 @@ void Level::tick_gas_poison(void)
         for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
           uint16_t gx = x * DUNGEON_GAS_RESOLUTION + dx;
           uint16_t gy = y * DUNGEON_GAS_RESOLUTION + dy;
-          int      i  = gas_poison[ gy ][ gx ];
+          int      i  = gas_poison_cloud[ gx ][ gy ];
           if (i == 255) {
             continue;
           }
@@ -190,15 +196,17 @@ void Level::tick_gas_poison(void)
 
 void Level::poison_gas_explosion(point at)
 {
+  TRACE_NO_INDENT();
+
   if (is_gas_poison_no_check(at.x, at.y) < 5) {
     return;
   }
 
   for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
     for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
-      uint16_t gx            = at.x * DUNGEON_GAS_RESOLUTION + dx;
-      uint16_t gy            = at.y * DUNGEON_GAS_RESOLUTION + dy;
-      gas_poison[ gy ][ gx ] = 0;
+      uint16_t gx                  = at.x * DUNGEON_GAS_RESOLUTION + dx;
+      uint16_t gy                  = at.y * DUNGEON_GAS_RESOLUTION + dy;
+      gas_poison_cloud[ gx ][ gy ] = 0;
     }
   }
   is_gas_poison_no_check_set(at.x, at.y, 0);

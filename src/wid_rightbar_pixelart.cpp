@@ -732,7 +732,7 @@ bool wid_rightbar_pixelart_create(void)
     auto w       = wid_new_square_window("map_mini wid");
     wid_map_mini = w;
     point tl     = make_point(TERM_WIDTH - width, y_at);
-    point br     = make_point(TERM_WIDTH - 1, y_at + width / (MAP_WIDTH / MAP_HEIGHT));
+    point br     = make_point(TERM_WIDTH - 1, y_at + width);
 
     wid_set_pos(w, tl, br);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);

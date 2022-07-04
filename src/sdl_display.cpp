@@ -80,8 +80,9 @@ void sdl_display(void)
 
 void sdl_display_reset(void)
 {
-  CON("SDL: Video reset");
+  CON("SDL: Video resetting");
 
+  wid_console_fini();
   wid_rightbar_fini();
   wid_leftbar_fini();
   wid_actionbar_fini();
@@ -102,6 +103,10 @@ void sdl_display_reset(void)
     game->level->scroll_map_to_player_immediately();
   }
 
+  wid_console_init();
+  wid_hide(wid_console_window);
+  sdl_flush_display();
+
   wid_botcon_fini();
   wid_botcon_init();
   wid_visible(wid_botcon_window);
@@ -109,4 +114,7 @@ void sdl_display_reset(void)
 
   wid_gc_all();
   wid_display_all();
+
+  CON("SDL: Video reset");
+  sdl_flush_display();
 }

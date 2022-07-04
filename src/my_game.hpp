@@ -61,6 +61,9 @@ public:
   bool gfx_vsync_enable       = {};
   bool gfx_vsync_locked       = {};
 
+  bool mouse_wheel_lr_negated = {};
+  bool mouse_wheel_ud_negated = {};
+
   int config_pix_height = {};
   int config_pix_width  = {};
   int game_pix_height   = {};
@@ -161,10 +164,10 @@ public:
   bool save(std::string save_file);
   bool tick_end();
   bool wid_bag_move_item(Thingp t);
-  bool wid_thing_info_push_popup(Thingp t);
-
   bool wid_thing_info_create_list(std::vector< Thingp > &ts);
   bool wid_thing_info_create(Thingp, bool when_hovering_over = false);
+  bool wid_thing_info_push_popup(Thingp t);
+
   void display(void);
   void fini(void);
   void init_jump_paths(void);
@@ -197,6 +200,7 @@ public:
   void wid_collect_create(const std::list< Thingp > items);
   void wid_config_gfx_select(void);
   void wid_config_keyboard_select(void);
+  void wid_config_mouse_select(void);
   void wid_config_other_select(void);
   void wid_config_sound_select(void);
   void wid_config_top_menu(void);
@@ -210,13 +214,13 @@ public:
   void wid_main_menu_select(void);
   void wid_save_select(void);
   void wid_thing_info_add_attack(WidPopup *w, Thingp t);
-  void wid_thing_info_add_damaged_chance(WidPopup *w, Thingp t);
   void wid_thing_info_add_carry_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
   void wid_thing_info_add_crit_chance(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_acid(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_cold(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_crush(WidPopup *w, Thingp t, int index);
+  void wid_thing_info_add_damaged_chance(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_digest(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_draining(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_energy(WidPopup *w, Thingp t, int index);

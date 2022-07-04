@@ -19,12 +19,13 @@
 #include "my_wid_inventory.hpp"
 #include "my_wid_leftbar.hpp"
 #include "my_wid_popup.hpp"
+#include "my_wid_popups.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_skillbox.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
 
-static WidPopup *wid_main_menu_window;
+WidPopup *wid_main_menu_window;
 
 void wid_main_menu_destroy(void)
 {
@@ -341,27 +342,30 @@ static void wid_main_menu_tick(Widp w)
   game_display_title_fg3();
   game_display_title_fg4();
 
-  ascii_putf(1, 1, GREEN, BLACK, L"Version: " MYVER);
-
-  {
-    auto        k    = ::to_string(game->config.key_gfx_toggle);
-    std::string text = " Press %%fg=yellow$" + k + "%%fg=reset$ to toggle the graphics mode.";
-    ascii_putf(TERM_WIDTH / 2 - (length_without_format(text) / 2), TERM_HEIGHT - 1, YELLOW, BLACK,
-               string_to_wstring(text));
-  }
-
   if (game->started) {
     wid_main_menu_destroy();
   }
 
-  if (! g_opt_player_name.empty()) {
-    auto player_name = "Player name: '" + g_opt_player_name + "'";
-    ascii_putf(1, 2, YELLOW, BLACK, string_to_wstring(player_name));
-  }
+  //
+  // Only show details on the main window; to avoid having to handle ascii mode changes in sub menus
+  //
+  if (wid_main_menu_window) {
+    ascii_putf(1, 1, GREEN, BLACK, L"Version: " MYVER);
 
-  if (! g_opt_seed_name.empty()) {
-    auto seed_name = "Seed: '" + g_opt_seed_name + "'";
-    ascii_putf(1, 3, YELLOW, BLACK, string_to_wstring(seed_name));
+    auto        k    = ::to_string(game->config.key_gfx_toggle);
+    std::string text = " Press %%fg=yellow$" + k + "%%fg=reset$ to toggle the graphics mode.";
+    ascii_putf(TERM_WIDTH / 2 - (length_without_format(text) / 2), TERM_HEIGHT - 1, YELLOW, BLACK,
+               string_to_wstring(text));
+
+    if (! g_opt_player_name.empty()) {
+      auto player_name = "Player name: '" + g_opt_player_name + "'";
+      ascii_putf(1, 2, YELLOW, BLACK, string_to_wstring(player_name));
+    }
+
+    if (! g_opt_seed_name.empty()) {
+      auto seed_name = "Seed: '" + g_opt_seed_name + "'";
+      ascii_putf(1, 3, YELLOW, BLACK, string_to_wstring(seed_name));
+    }
   }
 }
 

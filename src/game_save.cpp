@@ -491,7 +491,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->ts_fade_out_begin);
   out << bits(my.t->ts_fade_in_begin);
 
-  out << bits(my.t->gas_poison);
+  out << bits(my.t->gas_poison_cloud);
 
   out << bits(my.t->_is_gas_blocker);
   out << bits(my.t->_noise_blocker);
@@ -764,6 +764,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
   out << bits(my.t.gfx_inverted);
   out << bits(my.t.gfx_show_hidden);
   out << bits(my.t.gfx_vsync_enable);
+  out << bits(my.t.mouse_wheel_lr_negated);
+  out << bits(my.t.mouse_wheel_ud_negated);
   out << bits(my.t.key_action0);
   out << bits(my.t.key_action1);
   out << bits(my.t.key_action2);

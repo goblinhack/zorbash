@@ -25,5 +25,7 @@ extern WidPopup *wid_load;
 extern WidPopup *wid_save;
 extern WidPopup *wid_quit_window;
 extern WidPopup *wid_config_keyboard_window;
+extern WidPopup *wid_config_top_window;
+extern WidPopup *wid_main_menu_window;
 
 #endif
