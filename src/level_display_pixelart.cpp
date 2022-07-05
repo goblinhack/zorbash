@@ -368,8 +368,7 @@ void Level::display_pixelart_map_all(void)
   if (! frozen) {
     TRACE_NO_INDENT();
     //
-    // Generate the non visited map with the light inverted on it
-    // to hide visible areas
+    // Generate the non visited map with the light inverted on it to hide visible areas
     //
     blit_fbo_bind(FBO_MAP_HIDDEN);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -400,6 +399,7 @@ void Level::display_pixelart_map_all(void)
     glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
     blit_fbo_game_pix(FBO_PLAYER_VISIBLE_LIGHTING);
     // sdl_fbo_dump(FBO_PIXELART_FULLMAP_LIGHT, "FULLMAP");
+    // sdl_fbo_dump(FBO_PIXELART_FULLMAP, "FULLMAP");
   }
 
   if (! frozen) {
