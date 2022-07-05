@@ -259,11 +259,19 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
   glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);
   GL_ERROR_CHECK();
 
-  DBG2("OpenGl: - glTexParameterf");
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-  GL_ERROR_CHECK();
-  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-  GL_ERROR_CHECK();
+  //
+  // Clamping caused a horizontal streak at the left edge of the game map when used with FBO_PIXELART_FULLMAP_LIGHT
+  // and FBO_PIXELART_FULLMAP. As I'm not sure I even need clampinf for FBOs, turn it off.
+  //
+  if (0) {
+    DBG2("OpenGl: - glTexParameterf (clamping)");
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    GL_ERROR_CHECK();
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    GL_ERROR_CHECK();
+  }
+
+  DBG2("OpenGl: - glTexParameterf (GL_NEAREST)");
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   GL_ERROR_CHECK();
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
