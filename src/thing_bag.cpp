@@ -532,8 +532,9 @@ bool Thing::bag_remove(Thingp item)
   auto bw = capacity_width();
   auto bh = capacity_height();
 
-  if (0) {
-    LOG("Bag contents before remove:");
+  IF_DEBUG2
+  {
+    log("Bag contents before remove of %s:", item->to_short_string().c_str());
     for (auto y = 0; y < bh; y++) {
       std::string s;
       for (auto x = 0; x < bw; x++) {
@@ -548,7 +549,7 @@ bool Thing::bag_remove(Thingp item)
           s += "o";
         }
       }
-      LOG("bag[%s]", s.c_str());
+      log("bag[%s]", s.c_str());
     }
   }
 
@@ -571,8 +572,9 @@ bool Thing::bag_remove(Thingp item)
     }
   }
 
-  if (0) {
-    LOG("Bag contents after remove:");
+  IF_DEBUG2
+  {
+    log("Bag contents after remove of %s:", item->to_short_string().c_str());
     for (auto y = 0; y < bh; y++) {
       std::string s;
       for (auto x = 0; x < bw; x++) {
@@ -587,7 +589,7 @@ bool Thing::bag_remove(Thingp item)
           s += "o";
         }
       }
-      LOG("bag[%s]", s.c_str());
+      log("bag[%s]", s.c_str());
     }
   }
 

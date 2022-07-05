@@ -432,6 +432,9 @@ bool Thing::equip(Thingp item, int equip)
     //
     auto top_owner = item->top_owner();
     if (immediate_owner != top_owner) {
+      if (immediate_owner->is_bag_item_container()) {
+        immediate_owner->bag_remove(item);
+      }
       item->owner_set(top_owner);
     }
   }
