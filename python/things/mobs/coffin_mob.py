@@ -65,16 +65,16 @@ def tp_init(name, text_long_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="block", ascii_bg_col_name="purple", ascii_fg_col_name="",
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
             tile=name + ".100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="block", ascii_bg_col_name="purple", ascii_fg_col_name="",
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
             tile=name + ".75", is_hp_75_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="block", ascii_bg_col_name="purple", ascii_fg_col_name="",
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
             tile=name + ".50", is_hp_50_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="block", ascii_bg_col_name="purple", ascii_fg_col_name="",
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
             tile=name + ".25", is_hp_25_percent=True, delay_ms=delay)
 
     my.tp_update(self)
