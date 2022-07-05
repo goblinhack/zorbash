@@ -16,7 +16,7 @@
 
 void Level::display_pixelart_deep_water(int fbo, int16_t minx, int16_t miny, int16_t maxx, int16_t maxy)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int fbo_mask1;
   int fbo_mask2;
   int fbo_mask3;

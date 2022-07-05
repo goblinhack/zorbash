@@ -13,7 +13,7 @@
 
 void Level::display_target(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto what = game->request_to_use_item;
   if (! what) {
     return;

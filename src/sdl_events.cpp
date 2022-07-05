@@ -177,7 +177,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         //
         // Handle "natural" scrolling direction.
         //
-        if (game->config.mouse_wheel_lr_negated) {
+        if (! game->config.mouse_wheel_lr_negated) {
           sdl.wheel_x = -sdl.wheel_x;
         }
 

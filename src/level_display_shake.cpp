@@ -31,13 +31,13 @@ float Level::update_wobble(void)
 
 float Level::wobble_curr(void) const
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return (wobble);
 }
 
 void Level::wobble_set(float v)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (g_opt_ascii) {
     return;
@@ -48,7 +48,7 @@ void Level::wobble_set(float v)
 
 bool Level::screen_shake_begin(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (g_opt_ascii) {
     return false;
   }
@@ -70,7 +70,7 @@ bool Level::screen_shake_begin(void)
 
 void Level::screen_shake_end(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (g_opt_ascii) {
     return;

@@ -12,7 +12,7 @@
 
 void Level::display_tick_animation(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   static uint32_t anim_speed;
   if (! anim_speed) {
     anim_speed = time_ms_cached();

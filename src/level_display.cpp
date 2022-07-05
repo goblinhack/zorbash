@@ -24,7 +24,7 @@
 void Level::update(void)
 {
   dbg("Update");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (is_map_changed) {
     is_map_changed = false;
@@ -47,7 +47,7 @@ void Level::update(void)
 //
 void Level::display_map_set_bounds(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   int border = MAP_BORDER_ROCK + 2;
   minx       = std::max(0, (int) map_at.x - border);
