@@ -1,7 +1,9 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- lava next to chasm falls immediately                                                                                                         -->
 <!-- stone cloak makes ascii walls vanish                                                                                                         -->
+<!-- clicking the tile over a web should cause a jump?                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

@@ -176,7 +176,7 @@ void Thing::owner_set(Thingp owner)
     }
 
     if (owner) {
-      dbg("Will change owner %s->%s", old_owner->to_string().c_str(), owner->to_string().c_str());
+      dbg("Will change owner %s -> %s", old_owner->to_string().c_str(), owner->to_string().c_str());
     } else {
       dbg("Will remove owner %s", old_owner->to_string().c_str());
     }
