@@ -1,7 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- lava next to chasm falls immediately                                                                                                         -->
+<!-- odd lines drawn in pixel art mode                                                                                                            -->
 <!-- stone cloak makes ascii walls vanish                                                                                                         -->
 <!-- clicking the tile over a web should cause a jump?                                                                                            -->
 <!-- ------                                                                                                                                       -->
