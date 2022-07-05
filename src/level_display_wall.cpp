@@ -12,7 +12,7 @@
 
 void Thing::blit_wall_cladding(point tl, point br, const ThingTiles *tiles)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   float dw = game->config.one_pixel_width * 1;
   float dh = game->config.one_pixel_height * 1;
 
@@ -118,7 +118,7 @@ void Thing::blit_wall_cladding(point tl, point br, const ThingTiles *tiles)
 
 void Thing::blit_wall_shadow(point tl, point br, const ThingTiles *tiles)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   float dw = game->config.one_pixel_width * 1;
   float dh = game->config.one_pixel_height * 1;
   float tw = game->config.tile_pix_width;

@@ -50,7 +50,7 @@ void Level::display_pixelart_map_mini(void)
 
     point to(game->map_mini_over.x, game->map_mini_over.y);
     if (cursor) {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       verify(MTYPE_THING, cursor);
       cursor_at = to;
       if (cursor_at != cursor_old) {

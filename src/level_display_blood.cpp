@@ -12,7 +12,7 @@
 
 void Level::display_pixelart_blood(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! player) {
     return;
   }

@@ -16,7 +16,7 @@
 //
 void Thing::blit_floor_chasm(point tl, point br, const ThingTiles *tiles)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   float th = game->config.tile_pix_height;
 
   int x = (int) curr_at.x;
