@@ -1,0 +1,45 @@
+#!/bin/bash
+# Credit to https://janakerman.co.uk/docker-git-clone/ for the SSH idea
+cd build/docker
+DOCKER_FILE=ubuntu.dockerfile
+DOCKER_IMAGE=zorbash.ubuntu
+
+which docker &>/dev/null
+if [[ $? -ne 0 ]]; then
+    echo "Please install docker."
+    echo "On Ubuntu you could try:"
+    echo "  sudo apt install docker.io"
+    echo "  sudo groupadd docker"
+    echo "  sudo usermod -aG docker \$LOGNAME"
+    echo "  sudo setfacl --modify user:\$LOGNAME:rw /var/run/docker.sock"
+    echo "  sudo docker login"
+    exit 1
+fi
+
+echo -n "Enter your ssh password (passed into the container to clone the game):"
+read -s password
+echo
+
+
+docker build \
+    --no-cache \
+    --build-arg SSH_KEY="$(cat ~/.ssh/id_rsa)" \
+    --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" \
+    --build-arg SSH_KEY_PASSPHRASE="$password" \
+    -t $DOCKER_IMAGE \
+    --file $DOCKER_FILE .
+
+# remove intermediate images with SSH info
+if [[ $? -ne 0 ]]; then
+    docker rmi -f $(docker images -q --filter label=stage=intermediate)
+
+    # NOTE: needs docker > 19 for --gpus and doesn't seem to work (on macos)
+    docker run \
+        --rm \
+        -it \
+        --gpus all \
+        $DOCKER_IMAGE
+    if [[ $? -ne 0 ]]; then
+        docker run --rm -it $DOCKER_IMAGE
+    fi
+fi

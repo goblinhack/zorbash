@@ -1,0 +1,207 @@
+#!/bin/sh
+#
+# Copyright (C) 2014 Neil McGill
+#
+# This game is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This game is distributed in the hope that it will be fun,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this game; if not, write to the Free
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+. ./build/VERSION
+. ./build/common.sh
+
+cat <<%%
+${RED}
+      @@@@@@@@  @@@@@@  @@@@@@@  @@@@@@@    @@@@@@   @@@@@@  @@@  @@@
+      @@@@@@@@ @@@@@@@@ @@@@@@@@ @@@@@@@@  @@@@@@@@ @@@@@@@  @@@  @@@
+           @@! @@!  @@@ @@!  @@@ @@!  @@@  @@!  @@@ !@@      @@!  @@@
+          !@!  !@!  @!@ !@!  @!@ !@   @!@  !@!  @!@ !@!      !@!  @!@
+         @!!   @!@  !@! @!@!!@!  @!@!@!@   @!@!@!@! !!@@!!   @!@!@!@!
+        !!!    !&!  !!! !!&!&!   !!!&!!!!  !!!&!!!!  !!&!!!  !!!&!!!!
+       !!&     !!&  !!! !!& &!!  !!&  !!!  !!&  !!!      !&! !!&  !!!
+      &!&      &!&  !&! &!&  !&! &!&  !&!  &!&  !&!     !&!  &!&  !&!
+      &&&&&&&& &&&&&&&& &&&  &&& &&& &&&&  &&&  &&& &&&&&&&  &&&  &&&
+      &&&&&&&&  &&&&&&  &&&  &&& &&&&&&&   &&&  &&& &&&&&&   &&&  &&&
+      :    :    :    :   :   :    : : ::   ::   : : :  : :    :   : :
+      : :  : :  :    :   :   :    : : ::    :   : : :  : :    :   : :
+      . .  . :  : .  :   .   : . .: . ::   .:   : . .. : :    .   : :
+${RESET}
+%%
+
+LOG=./build.log
+MAINTAINER=goblinhack@gmail.com
+
+tech_support()
+{
+    #
+    # Record some useful to send back home on fail if we are permitted
+    #
+    (
+        date
+
+        log_info "DEBUG: System"
+        echo =====================================================
+        uname -a
+        echo
+
+        log_info "DEBUG: Environment"
+        echo =====================================================
+        env
+        echo
+
+        log_info "DEBUG: Installed packages"
+        echo =====================================================
+        (apt --installed list | grep -i SDL) 2>/dev/null
+        (apt --installed list | grep gcc) 2>/dev/null
+        (apt --installed list | grep clang) 2>/dev/null
+        pacman -Q 2>/dev/null # msys2
+        echo
+
+        log_info "DEBUG: Installed compilers"
+        echo =====================================================
+        which clang++
+        which clang
+        which g++
+        which gcc
+        clang --version  2>/dev/null
+        gcc --version  2>/dev/null
+        /mingw64/bin/gcc.exe --version 2>/dev/null # msys2
+        echo
+
+        log_info "DEBUG: Python:"
+        echo =====================================================
+        set -x
+        which python
+        python --version
+        which python3-config
+        python3-config
+        python3-config --prefix
+        python3-config --includes
+        python3-config --libs
+        python3-config --cflags
+        python3-config --ldflags
+        python3-config --ldflags --embed
+        set +x
+        echo
+
+        log_info "DEBUG: Make:"
+        echo =====================================================
+        set -x
+        which make
+        make --version
+        set +x
+        echo
+
+        log_info "DEBUG: Makefile:"
+        echo =====================================================
+        cat Makefile
+        echo
+
+        log_info "DEBUG: src/Makefile:"
+        echo =====================================================
+        cat src/Makefile
+        echo
+
+        log_info "DEBUG: Makefile output for debugging:"
+        echo =====================================================
+        set -x
+        make -e -n -d all
+        set +x
+        echo
+
+    ) >> $LOG 2>&1
+}
+
+run() {
+    ARGS=$1
+    STDOUT=$2
+
+    EXIT_CODE=.exit_code
+    ($1 2>&1; echo $? > $EXIT_CODE) | tee $STDOUT
+    MY_RET=`cat $EXIT_CODE`
+    /bin/rm $EXIT_CODE
+
+    return $MY_RET
+}
+
+help()
+{
+    cat << %%
+Build options:
+
+Usage: $0 [options]
+
+  [--dev]  Enable development warnings
+  [--dev2] Enable stack checking (SLOW)
+  [--prof] Enable gprof
+  [--gcc]  Prefer g++ over clang
+%%
+}
+
+OPT_DEV1=
+OPT_DEV2=
+OPT_PROF=
+OPT_GCC=
+
+read_opts()
+{
+    while [ "$#" -ne 0 ];
+    do
+        local option=$1
+
+        case $option in
+            -*dev2)
+                OPT_DEV2="yes"
+                export OPT_DEV2
+                OPT_DEV1="yes"
+                export OPT_DEV1
+                shift
+                ;;
+            -*dev)
+                OPT_DEV1="yes"
+                export OPT_DEV1
+                shift
+                ;;
+            -*prof)
+                OPT_PROF="yes"
+                export OPT_PROF
+                shift
+                ;;
+            -*gcc)
+                OPT_GCC="yes"
+                export OPT_GCC
+                shift
+                ;;
+            *)
+                help
+                exit 1
+                ;;
+        esac
+    done
+}
+
+read_opts $*
+
+run build/build.sh $LOG
+
+if [ $? -ne 0 ]; then
+    log_info "Gathering tech support info to $LOG"
+    tech_support >> $LOG
+    log_err "Build failed."
+    log_err "Could you send $LOG to $MAINTAINER?"
+    log_err "Or file an issue at https://github.com/goblinhack/zorbash"
+    exit 1
+else
+    log "Built successfully"
+    rm $LOG
+fi

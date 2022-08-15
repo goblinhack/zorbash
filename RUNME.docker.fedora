@@ -1,0 +1,48 @@
+#!/bin/bash
+# Credit to https://janakerman.co.uk/docker-git-clone/ for the SSH idea
+cd build/docker
+DOCKER_FILE=fedora.dockerfile
+DOCKER_IMAGE=zorbash.fedora
+
+which docker &>/dev/null
+if [[ $? -ne 0 ]]; then
+    echo "Please install docker."
+    echo "On Fedora you could try (untested):"
+    echo "  sudo dnf -y install dnf-plugins-core"
+    echo "  sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo"
+    echo "  sudo dnf remove podman buildah"
+    echo "  sudo dnf install docker-ce docker-ce-cli containerd.io"
+    echo "  sudo systemctl start docker.service"
+    echo "  sudo systemctl start containerd.service"
+    echo "  sudo systemctl enable docker.service"
+    echo "  sudo systemctl enable containerd.service"
+    echo "  sudo docker login"
+    exit 1
+fi
+
+echo -n "Enter your ssh password (passed into the container to clone the game):"
+read -s password
+echo
+
+docker build \
+    --no-cache \
+    --build-arg SSH_KEY="$(cat ~/.ssh/id_rsa)" \
+    --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" \
+    --build-arg SSH_KEY_PASSPHRASE="$password" \
+    -t $DOCKER_IMAGE \
+    --file $DOCKER_FILE .
+
+# remove intermediate images with SSH info
+if [[ $? -ne 0 ]]; then
+    docker rmi -f $(docker images -q --filter label=stage=intermediate)
+
+    # NOTE: needs docker > 19 for --gpus and doesn't seem to work (on macos)
+    docker run \
+        --rm \
+        -it \
+        --gpus all \
+        $DOCKER_IMAGE
+    if [[ $? -ne 0 ]]; then
+        docker run --rm -it $DOCKER_IMAGE
+    fi
+fi
