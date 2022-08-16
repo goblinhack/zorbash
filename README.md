@@ -1,8 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- cold explosion should cause damage                                                                                                           -->
 <!-- boiling steam over water when fireball passes                                                                                                -->
+<!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->
 <!-- wort food ?                                                                                                                                  -->
 <!-- ------                                                                                                                                       -->

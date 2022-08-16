@@ -19,7 +19,11 @@ def try_to_grow(me, x, y, dx, dy):
         return
     if my.level_is_floor_at(me, x + dx, y + dy):
         if my.pcg_randint(1, 100) < 10:
-            my.spawn_at(me, "vampire_rose_stem", x + dx, y + dy)
+            my.spawn_at(me, "vampire_rose_stem1", x + dx, y + dy)
+            return
+        if my.pcg_randint(1, 100) < 10:
+            my.spawn_at(me, "vampire_rose_stem2", x + dx, y + dy)
+            return
 
 
 def on_idle(me, x, y):
@@ -74,6 +78,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_monst(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_red_blooded(self, True)
+    my.is_corpse_on_death(self, True)
     my.is_red_blood_eater(self, True)
     my.is_soft(self, True)
     my.is_temperature_sensitive(self, True)
@@ -112,6 +117,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.tile(self,
             ascii_fg_char="V", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".4", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="v", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile=name + ".dead", is_dead=True)
 
     my.tp_update(self)
 

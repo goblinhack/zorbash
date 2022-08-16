@@ -174,12 +174,12 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("wand_ice", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("wand_fire", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -266,7 +266,18 @@ void Game::place_player(void)
       // level->thing_new("foilage", point(x, y + 5));
       // level->player->on_fire_set("");
       // level->thing_new("icecube", point(x, y + 1));
-      // level->thing_new("icecube", point(x, y + 2));
+      level->thing_new("icecube", point(x, y + 2));
+      level->thing_new("vampire_rose_stem1", point(x - 1, y + 2));
+      level->thing_new("vampire_rose_stem2", point(x + 1, y + 2));
+      level->thing_new("vampire_rose_stem1", point(x - 1, y + 1));
+      level->thing_new("vampire_rose_stem2", point(x + 1, y + 1));
+      level->thing_new("vampire_rose_stem1", point(x, y + 1));
+      level->thing_new("vampire_rose_stem2", point(x - 1, y + 3));
+      level->thing_new("vampire_rose_stem1", point(x + 1, y + 3));
+      level->thing_new("vampire_rose_stem2", point(x, y + 3));
+      level->thing_new("vampire_rose_stem1", point(x - 1, y + 4));
+      level->thing_new("vampire_rose_stem2", point(x + 1, y + 4));
+      level->thing_new("vampire_rose_stem1", point(x, y + 4));
       // level->thing_new("icecube", point(x, y + 3));
       // level->thing_new("flesh_golem", point(x, y + 3));
       // level->thing_new("lava", point(x, y + 5));

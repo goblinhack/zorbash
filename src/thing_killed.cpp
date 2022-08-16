@@ -406,6 +406,11 @@ void Thing::killed(Thingp defeater, const char *reason)
         is_dead  = true;
         is_dying = false;
         level_push();
+
+        //
+        // Update the animation for this now dead thing.
+        //
+        ts_next_frame = 0;
         return;
       }
     }

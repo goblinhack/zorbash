@@ -1182,7 +1182,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   }
 
   if (! victim->wake("attacked")) {
-    dbg("Attack failed, thing is still asleep %s", victim->to_string().c_str());
+    dbg("Failed to wake the %s", victim->to_string().c_str());
     return false;
   }
 

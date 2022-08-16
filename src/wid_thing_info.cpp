@@ -156,7 +156,9 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
   if (t->is_dead) {
-    wid_popup_window->log("It's dead, Jim");
+    if (t->is_monst()) {
+      wid_popup_window->log("It's dead, Jim");
+    }
   } else {
     wid_popup_window->log(t->text_long_description(), TEXT_FORMAT_LHS, "pink");
 

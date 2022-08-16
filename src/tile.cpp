@@ -999,13 +999,26 @@ Tilep tile_random(Tilemap *tmap)
   if (unlikely(tiles->empty())) {
     return nullptr;
   }
-  auto index = non_pcg_rand() % tiles->size();
-  auto tile  = (*tiles)[ index ];
-  if (unlikely(! tile)) {
-    ERR("no tile at index #%d, max %d", (int) index, (int) tiles->size());
-    return nullptr;
+
+  int tries = 999999;
+  while (tries--) {
+    auto index = non_pcg_rand() % tiles->size();
+    auto tile  = (*tiles)[ index ];
+
+    //
+    // Don't really want dead tiles when choosing a random start tile.
+    //
+    if (tile->is_dead) {
+      continue;
+    }
+    if (unlikely(! tile)) {
+      ERR("no tile at index #%d, max %d", (int) index, (int) tiles->size());
+      return nullptr;
+    }
+    return tile_index_to_tile(tile->global_index);
   }
-  return tile_index_to_tile(tile->global_index);
+
+  DIE("failed to choose a random tile");
 }
 
 Tilep tile_n(Tilemap *tmap, int n)

@@ -17,7 +17,11 @@ def try_to_grow(me, x, y, dx, dy):
         return
     if my.level_is_floor_at(me, x + dx, y + dy):
         if my.pcg_randint(1, 100) < 10:
-            my.spawn_at(me, "vampire_rose_stem", x + dx, y + dy)
+            my.spawn_at(me, "vampire_rose_stem1", x + dx, y + dy)
+            return
+        if my.pcg_randint(1, 100) < 10:
+            my.spawn_at(me, "vampire_rose_stem2", x + dx, y + dy)
+            return
         if my.level_is_monst_at(me, x + dx, y + dy) or \
            my.level_is_player_at(me, x + dx, y + dy):
             return
@@ -49,7 +53,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_always_hit(self, True)
     my.damage_poison_chance_d1000(self, 0, 100)
     my.damage_poison_dice(self, "1d4+1")
-    my.gfx_anim_use(self, "green_splatter")
+    my.gfx_anim_use(self, "red_splatter")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.health_initial_dice(self, "1d3")
@@ -58,6 +62,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_swamp(self, True)
+    my.is_debug_type(self, True)
+    my.gfx_pixelart_animated(self, True)
     my.is_burnable(self, True)
     my.is_combustible(self, True)
     my.is_crushable(self, True)
@@ -71,10 +77,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_soft(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
+    my.is_corpse_on_death(self, True)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
-    my.on_idle_tick_freq_dice(self, "1d20:me.on_idle()")
-    my.on_you_nat_att_do(self, "me.on_you_nat_att()")
+    my.on_idle_tick_freq_dice(self, "1d20:vampire_rose_stem.on_idle()")
+    my.on_you_nat_att_do(self, "vampire_rose_stem.on_you_nat_att()")
     my.rarity(self, my.RARITY_COMMON)
     my.stat_con(self, 20)
     my.stat_def(self, 0)
@@ -91,30 +98,52 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
+    delay = 5000
     my.tile(self,
             ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile=name + ".1")
+            tile=name + ".1", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile=name + ".2")
+            tile=name + ".2", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile=name + ".3")
+            tile=name + ".3", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile=name + ".4")
+            tile=name + ".4", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile=name + ".5")
+            tile=name + ".5", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile=name + ".6")
+            tile=name + ".6", delay_ms=delay)
+
+    name = "vampire_rose_stem"
+    my.tile(self,
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile=name + ".1.dead", is_dead=True)
+    my.tile(self,
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile=name + ".2.dead", is_dead=True, is_end_of_anim=True)
+    my.tile(self,
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile=name + ".3.dead", is_dead=True, is_end_of_anim=True)
+    my.tile(self,
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile=name + ".4.dead", is_dead=True, is_end_of_anim=True)
+    my.tile(self,
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile=name + ".5.dead", is_dead=True, is_end_of_anim=True)
+    my.tile(self,
+            ascii_fg_char="~", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile=name + ".6.dead", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="vampire_rose_stem", text_long_name="vampire rose stem", text_short_name="vamp rose stem")
+    tp_init(name="vampire_rose_stem1", text_long_name="vampire rose stem", text_short_name="vamp rose stem")
+    tp_init(name="vampire_rose_stem2", text_long_name="vampire rose stem", text_short_name="vamp rose stem")
 
 
 init()
