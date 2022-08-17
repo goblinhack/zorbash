@@ -1,6 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- falling and cannot ascend                                                                                                                    -->
+<!-- click to jump when next to a monst will attack                                                                                               -->
 <!-- icecube does not melt next to fire                                                                                                           -->
 <!-- boiling steam over water when fireball passes                                                                                                -->
 <!-- eels                                                                                                                                         -->
