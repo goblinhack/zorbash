@@ -2042,12 +2042,6 @@ int Thing::is_temperature_change_sensitive(void)
   return (tp()->is_temperature_change_sensitive());
 }
 
-int Thing::temperature(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->temperature());
-}
-
 int Thing::is_very_heavy(void)
 {
   TRACE_NO_INDENT();

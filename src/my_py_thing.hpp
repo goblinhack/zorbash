@@ -384,8 +384,6 @@ PyObject *thing_is_stone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sword(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_target_radial(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_target_select(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_temperature_change_sensitive(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_temperature_sensitive(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_throwable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tickable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tireless(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -523,7 +521,6 @@ PyObject *thing_teleport_distance_get(PyObject *obj, PyObject *args, PyObject *k
 PyObject *thing_teleport_distance(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_temperature(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_tick_prio(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_top_owner_id_get(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag10(PyObject *obj, PyObject *args, PyObject *keywds);

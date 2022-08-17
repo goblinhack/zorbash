@@ -141,7 +141,6 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->stat_str);
    in >> bits(my.t->stat_str_mod);
    in >> bits(my.t->submerged_offset);
-   in >> bits(my.t->temperature);
    in >> bits(my.t->tick_last_awoke);
    in >> bits(my.t->tick_last_did_something);
    in >> bits(my.t->tick_last_dropped);
@@ -358,6 +357,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   in >> bits(my.t->tile_curr);
   in >> bits(my.t->z_depth);
   in >> bits(my.t->laser_count);
+  in >> bits(my.t->temperature);
   in >> bits(my.t->blit_bg_color);
   in >> bits(my.t->blit_fg_color);
   uint8_t dir;
@@ -375,6 +375,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   int shift = 0;
   // CON("LOAD %016LX ",bits64);
   // clang-format off
+  my.t->corpse_cleanup                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->has_ever_moved                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->has_light                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   my.t->has_projectile                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

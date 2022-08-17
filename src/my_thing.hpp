@@ -181,6 +181,8 @@ public:
   uint8_t z_depth {};
   uint8_t laser_count {};
 
+  int16_t temperature {TEMPERATURE_ROOM}; // Celsius
+
   //
   // Used for alpha fading and giving tiles slightly sifferent colors when
   // in ascii mode; to help with visibility.
@@ -197,6 +199,7 @@ public:
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
+  uint64_t corpse_cleanup                               : 1 {};
   uint64_t has_ever_moved                               : 1 {};
   uint64_t has_light                                    : 1 {};
   uint64_t has_projectile                               : 1 {}; // current projectile being fired
@@ -510,6 +513,7 @@ public:
   bool fire_at(Thingp target);
   bool fire_choose_target(Thingp item);
   bool fire_tick(void);
+  bool has_temperature(void);
   bool health_boost_would_occur(int v);
   bool idle_check(void);
   bool if_matches_then_dead(const std::string &what, const point p);
@@ -1821,7 +1825,6 @@ public:
   int temperature_incr(int);
   int temperature_incr(void);
   int temperature_set(int);
-  int temperature(void);
   int tick_prio(void);
   int torch_count(void);
   int is_basalt(void);

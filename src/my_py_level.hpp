@@ -227,8 +227,6 @@ PyObject *level_is_steal_item_chance_d1000_at(PyObject *obj, PyObject *args, PyO
 PyObject *level_is_sticky_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_stone_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_sword_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_temperature_change_sensitive_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_temperature_sensitive_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_throwable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tickable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_tmp_thing_at(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -277,7 +275,6 @@ PyObject *level_stat_def_penalty_when_in_deep_water_at(PyObject *obj, PyObject *
 PyObject *level_stat_def_penalty_when_in_shallow_water_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_def_penalty_when_stuck_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_stat_def_penalty_when_stuck_max_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_temperature_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_no_msg_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_dagger_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_lifeless_at(PyObject *obj, PyObject *args, PyObject *keywds);

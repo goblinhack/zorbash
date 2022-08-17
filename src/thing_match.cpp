@@ -1051,19 +1051,10 @@ bool Thing::matches(const std::string &what)
   if (is_dead_on_falling() && (what == "is_dead_on_falling")) {
     return true;
   }
-  if (is_temperature_sensitive() && (what == "is_temperature_sensitive")) {
-    return true;
-  }
   if (damage_received_doubled_from_cold() && (what == "damage_received_doubled_from_cold")) {
     return true;
   }
   if (is_cold() && (what == "is_cold")) {
-    return true;
-  }
-  if (is_temperature_change_sensitive() && (what == "is_temperature_change_sensitive")) {
-    return true;
-  }
-  if (temperature() && (what == "temperature")) {
     return true;
   }
   if (is_very_heavy() && (what == "is_very_heavy")) {
@@ -2129,12 +2120,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_target_radial") {
     return &Thing::is_target_radial;
   }
-  if (what == "is_temperature_change_sensitive") {
-    return &Thing::is_temperature_change_sensitive;
-  }
-  if (what == "is_temperature_sensitive") {
-    return &Thing::is_temperature_sensitive;
-  }
   if (what == "is_throwable") {
     return &Thing::is_throwable;
   }
@@ -2275,9 +2260,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   }
   if (what == "stat_def_penalty_when_stuck") {
     return &Thing::stat_def_penalty_when_stuck;
-  }
-  if (what == "temperature") {
-    return &Thing::temperature;
   }
   if (what == "tick_prio") {
     return &Thing::tick_prio;

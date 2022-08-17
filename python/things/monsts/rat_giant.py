@@ -84,6 +84,7 @@ def tp_init(name, text_long_name):
     my.is_meat(self, True)
     my.is_monst_class_a(self, True)
     my.is_monst(self, True)
+    my.temperature(self, 20)
     my.is_moveable(self, True)
     my.is_red_blood_eater(self, True)
     my.is_red_blooded(self, True)

@@ -81,6 +81,7 @@ def tp_init(name, text_long_name):
     my.is_magical(self, True)
     my.is_monst_class_d(self, True)
     my.is_monst(self, True)
+    my.temperature(self, 20)
     my.is_moveable(self, True)
     my.is_shovable(self, True)
     my.is_stone(self, True)

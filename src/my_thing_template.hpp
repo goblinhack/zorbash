@@ -9,6 +9,7 @@
 #include "my_dice.hpp"
 #include "my_fwd.hpp"
 #include "my_size.hpp"
+#include "my_thing_defs.hpp"
 #include "my_tile.hpp"
 #include <map>
 #include <set>
@@ -197,6 +198,7 @@ private:
   int _gfx_pixelart_show_outlined {};
   int _gfx_pixelart_wobbles_when_hit {};
   int _gfx_water {};
+  int _has_temperature {};
   int _hunger_clock_tick_freq {};
   int _hunger_health_pct {};
   int _hunger_is_insatiable {};
@@ -268,6 +270,7 @@ private:
   int _is_bag_item_container {};
   int _is_bag_item_not_stackable {};
   int _is_barrel {};
+  int _is_basalt {};
   int _is_biome_dungeon {};
   int _is_biome_swamp {};
   int _is_bleeder {};
@@ -278,6 +281,7 @@ private:
   int _is_brittle {};
   int _is_buff {};
   int _is_burnable {};
+  int _is_carnivorous_plant {};
   int _is_carrier_of_treasure_class_a {};
   int _is_carrier_of_treasure_class_b {};
   int _is_carrier_of_treasure_class_c {};
@@ -436,6 +440,7 @@ private:
   int _is_shallow_water {};
   int _is_shield {};
   int _is_shovable {};
+  int _is_shovable_and_sticky {};
   int _is_skill {};
   int _is_skillstone {};
   int _is_slippery {};
@@ -489,7 +494,6 @@ private:
   int _light_dist {};
   int _melting_chance_d1000 {};
   int _minion_limit {};
-  int _thing_size {};
   int _move_speed {};
   int _move_speed_mod {};
   int _noise_additional_on_jump_end {};
@@ -545,7 +549,8 @@ private:
   int _stat_str {};
   int _stat_str_mod {};
   int _teleport_distance {};
-  int _temperature {};
+  int _temperature {TEMPERATURE_ROOM};
+  int _thing_size {};
   int _tick_prio {};
   int _unused_chance1_d1000 {};
   int _unused_chance2_d1000 {};
@@ -633,9 +638,6 @@ private:
   int _unused_flag78 {};
   int _unused_flag79 {};
   int _unused_flag8 {};
-  int _is_carnivorous_plant {};
-  int _is_basalt {};
-  int _is_shovable_and_sticky {};
   int _unused_flag87 {};
   int _unused_flag9 {};
   int _weapon_damage {};
@@ -812,6 +814,7 @@ public:
   bool ai_obstacle(Thingp it);
   bool ai_obstacle_for_me(class Level *, point);
   bool can_eat(const Thingp itp);
+  bool has_temperature(void);
 
   void dbg_(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));

@@ -1,6 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- icecube does not melt next to fire                                                                                                           -->
 <!-- boiling steam over water when fireball passes                                                                                                -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->

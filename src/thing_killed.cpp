@@ -59,7 +59,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     // Unless it is already a corpse. In such a case, if a corpse is
     // eaten we want to remove it.
     //
-    if (! is_corpse_currently) {
+    if (! is_corpse_currently || corpse_cleanup) {
       if (is_loggable()) {
         dbg("Already a corpse, can't die again");
       }

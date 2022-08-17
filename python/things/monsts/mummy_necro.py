@@ -131,6 +131,7 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.is_monst_class_c(self, True)
     my.is_monst(self, True)
+    my.temperature(self, 5)
     my.is_moveable(self, True)
     my.is_necrotic_danger_level(self, 1)  # danger level
     my.is_red_blood_eater(self, True)

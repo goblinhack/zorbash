@@ -6,6 +6,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
@@ -451,8 +452,6 @@ bool Thing::spawn_fire(const std::string &what, int radius)
   dbg("Spawn fire: %s", what.c_str());
   TRACE_AND_INDENT();
 
-  std::vector< point > possible;
-
   if (! radius) {
     radius = 1;
   }
@@ -485,48 +484,24 @@ bool Thing::spawn_fire(const std::string &what, int radius)
         continue;
       }
 
-      auto p = point(x, y);
-
-      if (! level->is_combustible(x, y) && ! level->is_burnable(x, y)) {
-        continue;
-      }
-
       if (level->is_hazard(x, y) || level->is_rock(x, y) || level->is_wall(x, y)) {
         continue;
       }
 
-      if (collision_obstacle(p)) {
+      if (level->is_fire(x, y)) {
         continue;
       }
 
-      if (ai_obstacle_for_me(p)) {
-        continue;
-      }
+      FOR_ALL_THINGS(level, it, x, y)
+      {
+        if (! it->is_combustible() && ! it->is_burnable() && ! it->is_meltable()) {
+          continue;
+        }
 
-      possible.push_back(p);
+        it->on_fire_set("spawned fire");
+      }
+      FOR_ALL_THINGS_END()
     }
-  }
-
-  auto cands = possible.size();
-  if (! cands) {
-    return false;
-  }
-
-  auto chosen = possible[ pcg_random_range(0, cands) ];
-
-  auto c = level->thing_new(what, chosen);
-  c->inherit_from(this);
-
-  if (is_spawner()) {
-    c->spawned_owner_set(this);
-  }
-
-  //
-  // Check if we are newly spawned over a chasm
-  // Or if something we spawned at needs to react to us
-  //
-  if (game->tick_requested.empty()) {
-    c->location_check_forced_all_things_at();
   }
 
   return true;

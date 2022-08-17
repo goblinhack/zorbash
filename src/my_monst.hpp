@@ -159,7 +159,6 @@ public:
   int stat_str            = {};
   int stat_str_mod        = {};
   int submerged_offset    = {}; // Pixels
-  int temperature         = {};
   int tick_resurrect_when = {};
 
   int8_t bounce_count       = {}; // Graphical bounce count
