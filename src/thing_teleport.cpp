@@ -556,7 +556,7 @@ void Thing::teleport_end(void)
   //
   // Reset after the teleporting
   //
-  temperature_set(0);
+  temperature_set(TEMPERATURE_ROOM);
 }
 
 bool Thing::teleport_attack(Thingp maybe_victim)

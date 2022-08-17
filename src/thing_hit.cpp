@@ -1441,7 +1441,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   // make you colder.
   //
   if (real_hitter != this) {
-    temperature_incr(hitter->temperature_get());
+    temperature_incr(hitter->temperature_get() / 10);
   }
 
   //

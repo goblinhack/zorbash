@@ -84,7 +84,6 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.is_monst_class_b(self, True)
     my.is_monst(self, True)
-    my.temperature(self, 5)
     my.is_moveable(self, True)
     my.is_necrotic_danger_level(self, 1)  # danger level
     my.is_red_blood_eater(self, True)
@@ -108,6 +107,7 @@ def tp_init(name, text_long_name):
     my.stat_dex(self, 10)
     my.stat_luck(self, 10)
     my.stat_str(self, 16)
+    my.temperature(self, 5)
     my.text_a_or_an(self, "a")
     my.text_hits(self, "claws")
     my.text_long_description2(self, "Death is no release for this poor creature. Watch out for its necrotic touch!")

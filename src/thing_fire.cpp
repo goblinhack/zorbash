@@ -10,6 +10,9 @@
 
 bool Thing::fire_tick(void)
 {
+  dbg("Fire tick");
+  TRACE_AND_INDENT();
+
   if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
     //
     // Keep going

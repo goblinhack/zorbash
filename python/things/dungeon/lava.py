@@ -38,6 +38,7 @@ def lava_init(name, text_long_name, tiles=[]):
     my.is_hazard(self, True)
     my.is_lava(self, True)
     my.is_loggable(self, True)
+    my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "red")
     my.light_dist(self, 2)

@@ -264,7 +264,7 @@ void Thing::update(void)
     }
   }
 
-  if (! temperature_get()) {
+  if (has_temperature()) {
     TRACE_NO_INDENT();
     auto v = tpp->temperature();
     if (unlikely(v)) {

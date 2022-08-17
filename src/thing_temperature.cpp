@@ -29,21 +29,17 @@ void Thing::temperature_tick(void)
   int  location_t     = 0;
   bool location_t_set = false;
 
-  //
-  // Items being carried in side a chest are insulated.
-  //
-  auto owner = immediate_owner();
-  if (owner && owner->is_bag_item_container()) {
-    temperature_set(0);
-  }
-
   FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
   {
+    dbg("Location cand %s", t->to_string().c_str());
+
     if (t->is_hidden) {
+      dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
       continue;
     }
 
     if (t == this) {
+      dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
       continue;
     }
 
@@ -51,16 +47,22 @@ void Thing::temperature_tick(void)
       //
       // You "carry" fire when on fire.
       //
+    } else if (t->is_fire()) {
+      //
+      // Even if the owner of the fire is dead...
+      //
     } else {
       //
       // Ignore carried things
       //
       if (t->immediate_owner() == this) {
+        dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
         continue;
       }
     }
 
     if (! t->has_temperature()) {
+      dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
       continue;
     }
 
@@ -69,14 +71,15 @@ void Thing::temperature_tick(void)
     //
     if (t->is_lava()) {
       if (is_flying()) {
+        dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
         continue;
       }
     }
 
-    dbg("location temp now %d due to %s", location_t, t->to_string().c_str());
-
     location_t += t->temperature;
     location_t_set = true;
+
+    dbg("Location temp now %d due to %s (%d)", location_t, t->to_string().c_str(), t->temperature);
   }
   FOR_ALL_THINGS_END()
 
@@ -85,6 +88,15 @@ void Thing::temperature_tick(void)
   }
 
   int t = temperature;
+
+  //
+  // Items being carried in side a chest are insulated.
+  //
+  auto owner = immediate_owner();
+  if (owner && owner->is_bag_item_container()) {
+    t = TEMPERATURE_ROOM;
+  }
+
   dbg("Temperature tick, my temp %d, location temp: %d", t, location_t);
   TRACE_AND_INDENT();
 
@@ -100,6 +112,7 @@ void Thing::temperature_tick(void)
 
     temperature_incr(delta);
 
+    t = temperature;
     dbg("Temperature tick, my temp now %d, location temp: %d", t, location_t);
     TRACE_AND_INDENT();
   }
@@ -125,6 +138,12 @@ void Thing::temperature_tick(void)
           }
           is_attacked_with_damage_cold(this, this, damage);
         }
+      } else if ((t < 0) && is_fire()) {
+        auto damage = abs(t) / 10;
+        is_attacked_with_damage_cold(this, this, damage);
+      } else if ((t > 0) && is_icecube()) {
+        auto damage = abs(t) / 10;
+        is_attacked_with_damage_fire(this, this, damage);
       } else if (t >= 100) {
         if (! is_immune_to_fire()) {
           auto damage = abs(t) / 10;
@@ -207,8 +226,8 @@ int Thing::temperature_incr(int temperature_change)
   TRACE_AND_INDENT();
 
   if (is_temperature_change_sensitive()) {
-    if (temperature_change > 25) {
-      if (temperature_curr < -25) {
+    if (temperature_change > 50) {
+      if ((temperature_curr < 0) && (temperature_curr > -25)) {
         auto damage = (temperature_change - temperature_curr) / 10;
         if (is_stone()) {
           popup("Crack!");
@@ -226,8 +245,8 @@ int Thing::temperature_incr(int temperature_change)
         }
         is_attacked_with_damage_fire(this, this, damage);
       }
-    } else if (temperature_change < -25) {
-      if (temperature_curr > 25) {
+    } else if (temperature_change < -50) {
+      if ((temperature_curr > 0) && (temperature_curr > 25)) {
         auto damage = (temperature_curr - temperature_change) / 10;
         if (is_stone()) {
           popup("Crack!");
