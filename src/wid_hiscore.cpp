@@ -81,11 +81,20 @@ void Game::wid_hiscores_show(void)
     wid_hiscore_destroy();
   }
 
-  auto  m     = TERM_WIDTH / 2;
-  auto  mh    = TERM_HEIGHT / 2;
-  point tl    = make_point(m - 49, mh - 14);
-  point br    = make_point(m + 49, mh + 14);
-  auto  width = br.x - tl.x;
+  auto  m  = TERM_WIDTH / 2;
+  auto  mh = TERM_HEIGHT / 2;
+  point tl;
+  point br;
+
+  if (g_opt_ascii) {
+    tl = make_point(m - 49, mh - 14);
+    br = make_point(m + 49, mh + 14);
+  } else {
+    tl = make_point(m - 49, mh - 25);
+    br = make_point(m + 49, mh + 25);
+  }
+
+  auto width = br.x - tl.x;
 
   wid_hiscore_window = new WidPopup("Gone, but not forgotten...", tl, br, nullptr, "", false, false);
   wid_set_on_key_up(wid_hiscore_window->wid_popup_container, wid_hiscore_key_up);
@@ -101,6 +110,11 @@ void Game::wid_hiscores_show(void)
   wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
   wid_hiscore_window->log("Gone, but not forgotten...");
   wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
+
+  if (! g_opt_ascii) {
+    wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
+    wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
+  }
 
   std::vector< HiScore >::iterator h     = game->config.hiscores.hiscores.begin();
   bool                             first = true;
