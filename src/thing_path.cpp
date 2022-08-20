@@ -327,8 +327,16 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
   if (is_player() && aip()->move_path.size()) {
     if (reason == THING_MOVE_REASON_MOUSE) {
       if (level->cursor && (level->cursor->curr_at != future_pos)) {
+        //
+        // Here we have clicked on a location to jump but there is a monster next to us
+        //
+        // xC.
+        // .m@
+        //
+        // We clicked on x. What we do not want to do is attack the monster. So, check if we can jump before
+        // trying to move to the next hop at m which will be an attack.
+        //
         auto mouse_at = level->cursor->curr_at;
-
         DBG2("Try to move, no shove, attack allowed as mouse clicked on %s", mouse_at.to_string().c_str());
         TRACE_AND_INDENT();
 
