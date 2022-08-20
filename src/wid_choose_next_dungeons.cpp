@@ -256,9 +256,6 @@ static void wid_choose_next_dungeons_tick(Widp w)
         }
 
         auto l = ctx->levels[ y ][ x ];
-        if (l->is_entered_by_falling) {
-          DIE("OOK");
-        }
         if (game->level == l) {
           color c = WHITE;
           wid_set_color(b, WID_COLOR_BG, c);

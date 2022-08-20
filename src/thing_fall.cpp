@@ -191,35 +191,32 @@ bool Thing::fall_to_next_level(void)
   TRACE_AND_INDENT();
 
   //
-  // Fall from a dungeon to the next dungeon, 2 levels down
+  // Fall to the next level that exists beneath. If nothing exists, fall into the void.
   //
-  auto fall_to = level->world_at + point3d(0, 0, 2);
+  auto fall_to = level->world_at;
   if (level->is_level_type_sewer) {
-    //
-    // If in a sewer then we drop only one level to the next dungeon.
-    //
-    fall_to = level->world_at + point3d(0, 0, 1);
+    fall_to.z--;
   }
 
-  if (fall_to.z >= LEVELS_DEEP) {
-    fall_into_the_void();
-    return false;
-  }
+  Levelp l = nullptr;
 
-  auto l = get(game->world.levels, fall_to.x, fall_to.y, fall_to.z);
-  if (! l) {
-    if (! game->init_level(fall_to, level->grid_at + point(0, 1), level->difficulty_depth + 1,
-                           level->dungeon_walk_order_level_no + 1)) {
+  for (;;) {
+    fall_to.z += 2;
+
+    if (fall_to.z >= LEVELS_DEEP) {
       fall_into_the_void();
       return false;
     }
 
     l = get(game->world.levels, fall_to.x, fall_to.y, fall_to.z);
-    if (! l) {
-      err("No level");
-      fall_into_the_void();
-      return false;
+    if (l) {
+      break;
     }
+  }
+
+  if (! l) {
+    fall_into_the_void();
+    return false;
   }
 
   if (is_player()) {
