@@ -124,7 +124,7 @@ void Game::wid_credits_select(void)
     wid_credits_destroy();
   }
 
-  point tl    = make_point(1, 0);
+  point tl    = make_point(0, 0);
   point br    = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
   auto  width = br.x - tl.x;
 
@@ -171,6 +171,8 @@ void Game::wid_credits_select(void)
   wid_credits_window->log("%%fg=white$Graphics");
   wid_credits_window->log("Oryx https://www.oryxdesignlab.com/");
   wid_credits_window->log("Henry Software https://henrysoftware.itch.io/");
+  wid_credits_window->log("C.E.McGill");
+  wid_credits_window->log("Neil McGill (goblinhack@gmail.com)");
   wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
   wid_credits_window->log("%%fg=white$Music");
   wid_credits_window->log("Markus Heichelbech");
@@ -183,8 +185,8 @@ void Game::wid_credits_select(void)
     auto p = wid_credits_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "credits");
 
-    point tl = make_point(40, 54);
-    point br = make_point(width - 41, 56);
+    point tl = make_point(40, TERM_HEIGHT - 10);
+    point br = make_point(width - 41, TERM_HEIGHT - 8);
 
     wid_set_style(w, UI_WID_STYLE_RED);
     wid_set_on_mouse_up(w, wid_credits_mouse_up);
