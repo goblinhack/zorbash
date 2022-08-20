@@ -67,8 +67,9 @@ def tp_init(name, text_long_name):
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)
     my.is_temperature_sensitive(self, True)
-    my.is_tickable(self, True)
+    my.is_tickable(self, True)  # So it can interact with fire
     my.is_very_heavy(self, True)
+    my.melting_chance_d1000(self, 100)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_fall_do(self, "me.on_fall()")

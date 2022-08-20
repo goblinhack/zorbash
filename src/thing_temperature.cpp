@@ -26,20 +26,24 @@ void Thing::temperature_tick(void)
   //
   // Add in the temperature of the location
   //
-  int  location_t     = 0;
+  int  location_t     = level->heatmap(curr_at) * 50;
   bool location_t_set = false;
+
+  if (location_t) {
+    location_t_set = true;
+  }
 
   FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    dbg("Location cand %s", t->to_string().c_str());
+    dbg("Location temperature cand %s", t->to_string().c_str());
 
     if (t->is_hidden) {
-      dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
+      dbg("Location temperature cand %s skip %d", t->to_string().c_str(), __LINE__);
       continue;
     }
 
     if (t == this) {
-      dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
+      dbg("Location temperature cand %s skip %d", t->to_string().c_str(), __LINE__);
       continue;
     }
 
@@ -56,13 +60,13 @@ void Thing::temperature_tick(void)
       // Ignore carried things
       //
       if (t->immediate_owner() == this) {
-        dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
+        dbg("Location temperature cand %s skip %d", t->to_string().c_str(), __LINE__);
         continue;
       }
     }
 
     if (! t->has_temperature()) {
-      dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
+      dbg("Location temperature cand %s skip %d", t->to_string().c_str(), __LINE__);
       continue;
     }
 
@@ -71,7 +75,7 @@ void Thing::temperature_tick(void)
     //
     if (t->is_lava()) {
       if (is_flying()) {
-        dbg("Location cand %s skip %d", t->to_string().c_str(), __LINE__);
+        dbg("Location temperature cand %s skip %d", t->to_string().c_str(), __LINE__);
         continue;
       }
     }
@@ -143,7 +147,11 @@ void Thing::temperature_tick(void)
         is_attacked_with_damage_cold(this, this, damage);
       } else if ((t > 0) && is_icecube()) {
         auto damage = abs(t) / 10;
-        is_attacked_with_damage_fire(this, this, damage);
+        if (fire_tick()) {
+          dbg("Fire attack");
+          TRACE_AND_INDENT();
+          is_attacked_with_damage_fire(this, this, damage);
+        }
       } else if (t >= 100) {
         if (! is_immune_to_fire()) {
           auto damage = abs(t) / 10;

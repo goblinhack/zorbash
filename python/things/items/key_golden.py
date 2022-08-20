@@ -28,6 +28,7 @@ def key_init(name, text_long_name):
     my.is_moveable(self, True)
     my.light_color(self, "yellow")
     my.light_dist(self, 2)
+    my.melting_chance_d1000(self, 20)
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_RARE)
     my.text_a_or_an(self, "an")

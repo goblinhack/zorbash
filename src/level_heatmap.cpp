@@ -85,7 +85,6 @@ void Level::update_heatmap(void)
 
       if (is_brazier_no_check(x, y)) {
         heatmap_no_check_incr(x, y, 5);
-        continue;
       }
 
       if (is_fire_no_check(x, y)) {

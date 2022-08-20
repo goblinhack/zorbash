@@ -95,11 +95,12 @@ bool Thing::fire_tick(void)
     //
     // Make things more likely to melt the closer to the heat?
     //
-    melt_chance += (melt_chance / 10) * level->heatmap(at.x, at.y);
+    melt_chance += 100 * level->heatmap(at.x, at.y);
 
+    dbg("Fire tick, total chance of melting: %d", melt_chance);
     hit = d1000() < melt_chance;
     if (hit) {
-      dbg("Fire tick: melting");
+      dbg("Fire tick: is melting");
     }
   } else if (level->is_fire(at.x, at.y)) {
     if (! level->is_smoke(at.x, at.y)) {
