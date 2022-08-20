@@ -562,6 +562,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_smoke);
   out << bits(my.t->_is_spiderweb);
   out << bits(my.t->_is_sticky);
+  out << bits(my.t->_is_sticky);
   out << bits(my.t->_is_treasure_type);
   out << bits(my.t->_is_wall);
   out << bits(my.t->_is_wand_or_staff);
@@ -616,6 +617,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->is_map_follow_player);
   out << bits(my.t->is_map_mini_valid);
   out << bits(my.t->is_starting);
+  out << bits(my.t->is_entered_by_falling);
 
   out << bits(my.t->cursor_at);
   out << bits(my.t->cursor_old);

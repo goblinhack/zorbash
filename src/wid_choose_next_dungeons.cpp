@@ -86,6 +86,8 @@ public:
   //
   Levelp levels[ DUNGEONS_GRID_CHUNK_HEIGHT ][ DUNGEONS_GRID_CHUNK_WIDTH ] = {};
 
+  Levelp current_level {};
+
   //
   // First level
   //
@@ -254,6 +256,9 @@ static void wid_choose_next_dungeons_tick(Widp w)
         }
 
         auto l = ctx->levels[ y ][ x ];
+        if (l->is_entered_by_falling) {
+          DIE("OOK");
+        }
         if (game->level == l) {
           color c = WHITE;
           wid_set_color(b, WID_COLOR_BG, c);
@@ -288,8 +293,13 @@ static void wid_choose_next_dungeons_tick(Widp w)
               //
               // Only allow ascension to levels we've finished.
               //
-              if (! n->is_completed) {
-                continue;
+              if (! ctx->current_level->is_entered_by_falling) {
+                //
+                // Unless we fell here, in which case we may have no exit
+                //
+                if (! n->is_completed) {
+                  continue;
+                }
               }
 
               auto n_at = n->grid_at;
@@ -653,6 +663,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
   ctx->focusy        = -1;
   ctx->is_descending = is_descending;
   ctx->is_ascending  = is_ascending;
+  ctx->current_level = current;
 
   auto window = wid_new_square_window("wid level grid");
   ctx->w      = window;

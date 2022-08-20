@@ -192,6 +192,7 @@ public:
   bool is_map_follow_player {};
   bool is_map_mini_valid {};
   bool is_starting {}; // Loading level
+  bool is_entered_by_falling {};
 
   point cursor_at;
   point cursor_old;

@@ -423,6 +423,7 @@ bool Thing::fall_to_next_level(void)
         game->tick_begin("finished fall to next level");
         level->ts_fade_in_begin = time_ms_cached();
         level->update_new_level();
+        level->is_entered_by_falling = true;
       }
 
       if (health_max()) {

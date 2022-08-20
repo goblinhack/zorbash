@@ -118,6 +118,7 @@ void Thing::level_leave(void)
   game->request_remake_rightbar = true;
 
   if (is_player()) {
-    level->is_completed = true;
+    level->is_completed    = true;
+    level->is_entered_by_falling = false;
   }
 }
