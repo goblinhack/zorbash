@@ -59,6 +59,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.health_initial_dice(self, "1d3")
     my.hunger_clock_tick_freq(self, 50)
+    my.is_plant(self, True)
     my.hunger_health_pct(self, 95)
     my.hunger_is_insatiable(self, True)
     my.is_able_to_fall(self, True)

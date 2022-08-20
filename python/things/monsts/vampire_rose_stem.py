@@ -51,6 +51,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.damage_poison_dice(self, "1d4+1")
     my.damage_received_doubled_from_fire(self, True)
     my.environ_avoids_acid(self, True)
+    my.is_plant(self, True)
     my.environ_avoids_fire(self, 100)
     my.gfx_anim_use(self, "red_splatter")
     my.gfx_ascii_fade_with_dist(self, True)

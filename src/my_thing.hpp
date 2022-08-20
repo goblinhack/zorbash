@@ -1948,9 +1948,9 @@ public:
   int unused_flag74(void);
   int unused_flag75(void);
   int unused_flag76(void);
-  int unused_flag77(void);
-  int unused_flag78(void);
-  int unused_flag79(void);
+  int is_gelatinous(void);
+  int is_plant(void);
+  int is_steam(void);
   int unused_flag7(void);
   int is_carnivorous_plant(void);
   int unused_flag87(void);

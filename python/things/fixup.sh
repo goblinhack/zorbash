@@ -527,9 +527,9 @@ do
       unused_flag74 \
       unused_flag75 \
       unused_flag76 \
-      unused_flag77 \
-      unused_flag78 \
-      unused_flag79 \
+      is_gelatinous \
+      is_plant \
+      is_steam \
       unused_flag8 \
       is_carnivorous_plant \
       is_basalt \

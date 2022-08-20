@@ -1725,22 +1725,22 @@ int Thing::unused_flag76(void)
   return (tp()->unused_flag76());
 }
 
-int Thing::unused_flag77(void)
+int Thing::is_gelatinous(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag77());
+  return (tp()->is_gelatinous());
 }
 
-int Thing::unused_flag78(void)
+int Thing::is_plant(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag78());
+  return (tp()->is_plant());
 }
 
-int Thing::unused_flag79(void)
+int Thing::is_steam(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag79());
+  return (tp()->is_steam());
 }
 
 int Thing::is_carnivorous_plant(void)

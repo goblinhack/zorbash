@@ -676,9 +676,9 @@ int  Tp::unused_flag73(void) const { return _unused_flag73; }
 int  Tp::unused_flag74(void) const { return _unused_flag74; }
 int  Tp::unused_flag75(void) const { return _unused_flag75; }
 int  Tp::unused_flag76(void) const { return _unused_flag76; }
-int  Tp::unused_flag77(void) const { return _unused_flag77; }
-int  Tp::unused_flag78(void) const { return _unused_flag78; }
-int  Tp::unused_flag79(void) const { return _unused_flag79; }
+int  Tp::is_gelatinous(void) const { return _is_gelatinous; }
+int  Tp::is_plant(void) const { return _is_plant; }
+int  Tp::is_steam(void) const { return _is_steam; }
 int  Tp::unused_flag7(void) const { return _unused_flag7; }
 int  Tp::unused_flag87(void) const { return _unused_flag87; }
 int  Tp::unused_flag8(void) const { return _unused_flag8; }
@@ -1349,9 +1349,9 @@ void Tp::unused_flag73_set(int v) { _unused_flag73 = v; }
 void Tp::unused_flag74_set(int v) { _unused_flag74 = v; }
 void Tp::unused_flag75_set(int v) { _unused_flag75 = v; }
 void Tp::unused_flag76_set(int v) { _unused_flag76 = v; }
-void Tp::unused_flag77_set(int v) { _unused_flag77 = v; }
-void Tp::unused_flag78_set(int v) { _unused_flag78 = v; }
-void Tp::unused_flag79_set(int v) { _unused_flag79 = v; }
+void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
+void Tp::is_plant_set(int v) { _is_plant = v; }
+void Tp::is_steam_set(int v) { _is_steam = v; }
 void Tp::unused_flag7_set(int v) { _unused_flag7 = v; }
 void Tp::unused_flag87_set(int v) { _unused_flag87 = v; }
 void Tp::unused_flag8_set(int v) { _unused_flag8 = v; }

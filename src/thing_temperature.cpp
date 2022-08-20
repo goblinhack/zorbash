@@ -35,15 +35,11 @@ void Thing::temperature_tick(void)
 
   FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    dbg("Location temperature cand %s", t->to_string().c_str());
-
     if (t->is_hidden) {
-      dbg("Location temperature cand %s skip %d", t->to_string().c_str(), __LINE__);
       continue;
     }
 
     if (t == this) {
-      dbg("Location temperature cand %s skip %d", t->to_string().c_str(), __LINE__);
       continue;
     }
 
@@ -151,8 +147,29 @@ void Thing::temperature_tick(void)
           dbg("Fire attack");
           TRACE_AND_INDENT();
           is_attacked_with_damage_fire(this, this, damage);
+          popup("Melting!");
         }
-      } else if (t >= 100) {
+      } else if ((t >= 20) && is_plant()) {
+        if (! is_immune_to_fire()) {
+          auto damage = abs(t) / 10;
+          if (fire_tick()) {
+            dbg("Fire attack");
+            TRACE_AND_INDENT();
+            is_attacked_with_damage_fire(this, this, damage);
+            popup("Wilts!");
+          }
+        }
+      } else if ((t >= 30) && is_gelatinous()) {
+        if (! is_immune_to_fire()) {
+          auto damage = abs(t) / 10;
+          if (fire_tick()) {
+            dbg("Fire attack");
+            TRACE_AND_INDENT();
+            is_attacked_with_damage_fire(this, this, damage);
+            popup("Melts!");
+          }
+        }
+      } else if ((t >= 50) && is_humanoid()) {
         if (! is_immune_to_fire()) {
           auto damage = abs(t) / 10;
           if (fire_tick()) {
@@ -160,20 +177,31 @@ void Thing::temperature_tick(void)
             TRACE_AND_INDENT();
             is_attacked_with_damage_fire(this, this, damage);
           } else {
-            if (is_stone()) {
-              popup("Crack!");
-              if (is_player()) {
-                msg("%%fg=orange$%s fractures from the extreme heat.%%fg=reset$", text_The().c_str());
-              } else {
-                msg("%s fractures from the extreme heat.", text_The().c_str());
-              }
-            } else {
-              if (is_player()) {
-                msg("%%fg=orange$%s suffers from the extreme heat.%%fg=reset$", text_The().c_str());
-              } else if (is_alive_monst()) {
-                msg("%s suffers from the extreme heat.", text_The().c_str());
-              }
+            if (is_player()) {
+              msg("%%fg=orange$%s suffers from the extreme heat.%%fg=reset$", text_The().c_str());
+            } else if (is_alive_monst()) {
+              msg("%s suffers from the extreme heat.", text_The().c_str());
             }
+          }
+        }
+      } else if ((t >= 100) && is_wooden()) {
+        if (! is_immune_to_fire()) {
+          auto damage = abs(t) / 10;
+          if (fire_tick()) {
+            dbg("Fire attack");
+            TRACE_AND_INDENT();
+            popup("Burn!");
+            is_attacked_with_damage_fire(this, this, damage);
+          }
+        }
+      } else if ((t >= 200) && is_stone()) {
+        if (! is_immune_to_fire()) {
+          auto damage = abs(t) / 10;
+          if (fire_tick()) {
+            dbg("Fire attack");
+            TRACE_AND_INDENT();
+            popup("Crack!");
+            is_attacked_with_damage_fire(this, this, damage);
           }
         }
       } else if (t >= 50) {

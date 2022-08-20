@@ -892,13 +892,13 @@ bool Thing::matches(const std::string &what)
   if (unused_flag76() && (what == "unused_flag76")) {
     return true;
   }
-  if (unused_flag77() && (what == "unused_flag77")) {
+  if (is_gelatinous() && (what == "is_gelatinous")) {
     return true;
   }
-  if (unused_flag78() && (what == "unused_flag78")) {
+  if (is_plant() && (what == "is_plant")) {
     return true;
   }
-  if (unused_flag79() && (what == "unused_flag79")) {
+  if (is_steam() && (what == "is_steam")) {
     return true;
   }
   if (is_carnivorous_plant() && (what == "is_carnivorous_plant")) {
@@ -2486,14 +2486,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag76") {
     return &Thing::unused_flag76;
   }
-  if (what == "unused_flag77") {
-    return &Thing::unused_flag77;
+  if (what == "is_gelatinous") {
+    return &Thing::is_gelatinous;
   }
-  if (what == "unused_flag78") {
-    return &Thing::unused_flag78;
+  if (what == "is_plant") {
+    return &Thing::is_plant;
   }
-  if (what == "unused_flag79") {
-    return &Thing::unused_flag79;
+  if (what == "is_steam") {
+    return &Thing::is_steam;
   }
   if (what == "unused_flag7") {
     return &Thing::unused_flag7;

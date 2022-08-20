@@ -280,6 +280,10 @@ void Game::place_player(void)
         level->thing_new("vampire_rose_stem2", point(x + 1, y + 4));
         level->thing_new("vampire_rose_stem1", point(x, y + 4));
       }
+      if (0) {
+        level->thing_new("steam", point(x, y + 1));
+        level->thing_new("smoke", point(x, y + 2));
+      }
       // level->thing_new("flesh_golem", point(x, y + 3));
       // level->thing_new("lava", point(x, y + 5));
       // level->thing_new("lava", point(x, y + 6));

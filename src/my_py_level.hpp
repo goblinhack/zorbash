@@ -371,9 +371,9 @@ PyObject *level_unused_flag73_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag74_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag75_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag76_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag77_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag78_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag79_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_gelatinous_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_plant_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_steam_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag7_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_carnivorous_plant_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_basalt_at(PyObject *obj, PyObject *args, PyObject *keywds);

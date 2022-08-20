@@ -63,6 +63,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_biome_swamp(self, True)
     my.is_combustible(self, True)
     my.is_crushable(self, True)
+    my.is_gelatinous(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_engulfer(self, True)
     my.is_hittable(self, True)
