@@ -38,8 +38,9 @@ void Thing::icecube_tick(void)
       // Only do crush damage if the thing moved.
       //
       if (t->last_at == t->curr_at) {
-        t->log("Being frozen by an icecube");
-        t->is_attacked_with_damage_cold(this, this, damage_cold());
+        //
+        // Cold damage is handled in temperature checks.
+        //
         continue;
       }
 

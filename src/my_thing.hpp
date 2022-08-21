@@ -214,6 +214,7 @@ public:
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
   uint64_t is_frozen                                    : 1 {}; // frozen by ice and cannot move
+  uint64_t is_defrosting                                : 1 {}; // is_frozen being removed
   uint64_t is_gfx_ascii_animated                        : 1 {};
   uint64_t is_gfx_pixelart_animated                     : 1 {};
   uint64_t is_hidden                                    : 1 {};
@@ -255,7 +256,7 @@ public:
   uint64_t i_set_is_basalt                  : 1 {};
   uint64_t i_set_is_brazier                 : 1 {};
   uint64_t i_set_is_bridge                  : 1 {};
-  uint64_t i_set_is_burnable                : 1 {}; // may produce a flame
+  uint64_t i_set_is_able_to_burn            : 1 {}; // may produce a flame
   uint64_t i_set_is_chasm                   : 1 {};
   uint64_t i_set_is_combustible             : 1 {}; // may not produce a flame
   uint64_t i_set_is_corpse                  : 1 {};
@@ -1241,7 +1242,7 @@ public:
   int is_bridge(void);
   int is_brittle(void);
   int is_buff(void);
-  int is_burnable(void);
+  int is_able_to_burn(void);
   int is_carrier_of_treasure_class_a(void);
   int is_carrier_of_treasure_class_b(void);
   int is_carrier_of_treasure_class_c(void);

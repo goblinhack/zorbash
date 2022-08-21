@@ -390,6 +390,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_fadeup                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_falling                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_frozen                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_defrosting                                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_gfx_ascii_animated                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_gfx_pixelart_animated                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hidden                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -431,7 +432,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_basalt                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_brazier                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_bridge                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_burnable                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_able_to_burn                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_chasm                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_combustible                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_corpse                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -571,7 +572,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_basalt);
   in >> bits(my.t->_is_brazier);
   in >> bits(my.t->_is_bridge);
-  in >> bits(my.t->_is_burnable);
+  in >> bits(my.t->_is_able_to_burn);
   in >> bits(my.t->_is_chasm);
   in >> bits(my.t->_is_combustible);
   in >> bits(my.t->_is_corpse);

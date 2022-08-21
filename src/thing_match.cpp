@@ -244,7 +244,7 @@ bool Thing::matches(const std::string &what)
   if (is_buff() && (what == "is_buff")) {
     return true;
   }
-  if (is_burnable() && (what == "is_burnable")) {
+  if (is_able_to_burn() && (what == "is_able_to_burn")) {
     return true;
   }
   if (is_chasm() && (what == "is_chasm")) {
@@ -1628,8 +1628,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_buff") {
     return &Thing::is_buff;
   }
-  if (what == "is_burnable") {
-    return &Thing::is_burnable;
+  if (what == "is_able_to_burn") {
+    return &Thing::is_able_to_burn;
   }
   if (what == "is_chasm") {
     return &Thing::is_chasm;

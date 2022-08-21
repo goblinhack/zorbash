@@ -323,7 +323,7 @@ int  Tp::is_brazier(void) const { return _is_brazier; }
 int  Tp::is_bridge(void) const { return _is_bridge; }
 int  Tp::is_brittle(void) const { return _is_brittle; }
 int  Tp::is_buff(void) const { return _is_buff; }
-int  Tp::is_burnable(void) const { return _is_burnable; }
+int  Tp::is_able_to_burn(void) const { return _is_able_to_burn; }
 int  Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
 int  Tp::is_carrier_of_treasure_class_a(void) const { return _is_carrier_of_treasure_class_a; }
 int  Tp::is_carrier_of_treasure_class_b(void) const { return _is_carrier_of_treasure_class_b; }
@@ -864,7 +864,7 @@ void Tp::is_brazier_set(int v) { _is_brazier = v; }
 void Tp::is_bridge_set(int v) { _is_bridge = v; }
 void Tp::is_brittle_set(int v) { _is_brittle = v; }
 void Tp::is_buff_set(int v) { _is_buff = v; }
-void Tp::is_burnable_set(int v) { _is_burnable = v; }
+void Tp::is_able_to_burn_set(int v) { _is_able_to_burn = v; }
 void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
 void Tp::is_carrier_of_treasure_class_a_set(int v) { _is_carrier_of_treasure_class_a = v; }
 void Tp::is_carrier_of_treasure_class_b_set(int v) { _is_carrier_of_treasure_class_b = v; }

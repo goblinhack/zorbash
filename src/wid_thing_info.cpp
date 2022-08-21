@@ -1759,7 +1759,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     }
   } else if (t->is_meltable()) {
     w->log("Can melt.", TEXT_FORMAT_LHS);
-  } else if (t->is_burnable()) {
+  } else if (t->is_able_to_burn()) {
     if (t->is_monst() || t->is_player()) {
       //
       // Too obvious

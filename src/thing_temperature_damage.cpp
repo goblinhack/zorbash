@@ -13,7 +13,7 @@ bool Thing::thing_check_for_heat_damage(void)
   dbg("Heat damage check");
   TRACE_AND_INDENT();
 
-  if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
+  if (is_meltable() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
     //
     // Keep going
     //
@@ -118,7 +118,7 @@ bool Thing::thing_check_for_heat_damage(void)
     //
     hit = (d100() < 20);
 
-    if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
+    if (is_meltable() || is_able_to_burn() || is_combustible() || is_very_combustible()) {
       hit = true;
     }
 
@@ -155,7 +155,10 @@ bool Thing::thing_check_for_heat_damage(void)
     }
   }
 
-  is_frozen = false;
+  //
+  // Defrosting is done in two steps to allow fire damage when frozen to to double damage.
+  //
+  is_defrosting = true;
 
   return hit;
 }
@@ -179,7 +182,7 @@ bool Thing::thing_check_for_cold_damage(void)
     return false;
   }
 
-  dbg("Fire hit");
+  dbg("Cold hit");
   TRACE_AND_INDENT();
 
   is_frozen = true;

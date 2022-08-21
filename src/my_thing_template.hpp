@@ -280,7 +280,7 @@ private:
   int _is_bridge {};
   int _is_brittle {};
   int _is_buff {};
-  int _is_burnable {};
+  int _is_able_to_burn {};
   int _is_carnivorous_plant {};
   int _is_carrier_of_treasure_class_a {};
   int _is_carrier_of_treasure_class_b {};
@@ -1290,7 +1290,7 @@ public:
   int is_bridge(void) const;
   int is_brittle(void) const;
   int is_buff(void) const;
-  int is_burnable(void) const;
+  int is_able_to_burn(void) const;
   int is_carrier_of_treasure_class_a(void) const;
   int is_carrier_of_treasure_class_b(void) const;
   int is_carrier_of_treasure_class_c(void) const;
@@ -1831,7 +1831,7 @@ public:
   void is_bridge_set(int v);
   void is_brittle_set(int v);
   void is_buff_set(int v);
-  void is_burnable_set(int v);
+  void is_able_to_burn_set(int v);
   void is_carrier_of_treasure_class_a_set(int v);
   void is_carrier_of_treasure_class_b_set(int v);
   void is_carrier_of_treasure_class_c_set(int v);

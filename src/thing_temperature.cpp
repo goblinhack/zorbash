@@ -25,6 +25,13 @@ void Thing::temperature_tick(void)
     location_temp_set = true;
   }
 
+  //
+  // Defrosting is done in two steps to allow fire damage when frozen to to double damage.
+  //
+  if (is_defrosting) {
+    is_frozen = false;
+  }
+
   FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_hidden) {
@@ -120,14 +127,17 @@ void Thing::temperature_tick(void)
     }
     return;
   }
+  dbg("%d", __LINE__);
 
   if (! is_temperature_sensitive() && ! is_able_to_freeze()) {
     return;
   }
 
+  dbg("%d", __LINE__);
   if (game->tick_current == tick_last_i_was_attacked()) {
     return;
   }
+  dbg("%d", __LINE__);
 
   if ((thing_temp <= -200) && is_stone()) {
     if (thing_check_for_heat_damage()) {
@@ -138,6 +148,7 @@ void Thing::temperature_tick(void)
     }
   }
 
+  dbg("%d", __LINE__);
   if ((thing_temp <= -100) && is_wooden()) {
     if (thing_check_for_heat_damage()) {
       auto damage = abs(thing_temp) / 10;
@@ -146,9 +157,12 @@ void Thing::temperature_tick(void)
       return;
     }
   }
+  dbg("%d", __LINE__);
 
   if ((thing_temp <= -50) && is_humanoid()) {
+    dbg("%d", __LINE__);
     if (thing_check_for_cold_damage()) {
+      dbg("%d", __LINE__);
       auto damage = abs(thing_temp) / 10;
       is_attacked_with_damage_cold(this, this, damage);
       if (is_player()) {
@@ -160,6 +174,7 @@ void Thing::temperature_tick(void)
       return;
     }
   }
+  dbg("%d", __LINE__);
 
   if ((thing_temp <= -20) && is_plant()) {
     if (thing_check_for_cold_damage()) {
@@ -169,6 +184,7 @@ void Thing::temperature_tick(void)
       return;
     }
   }
+  dbg("%d", __LINE__);
 
   if ((thing_temp <= 0) && is_gelatinous()) {
     if (thing_check_for_cold_damage()) {
@@ -178,6 +194,7 @@ void Thing::temperature_tick(void)
       return;
     }
   }
+  dbg("%d", __LINE__);
 
   if ((thing_temp < 0) && is_fire()) {
     auto damage = abs(thing_temp) / 10;
@@ -193,6 +210,7 @@ void Thing::temperature_tick(void)
       return;
     }
   }
+  dbg("%d", __LINE__);
 
   if ((thing_temp >= 20) && is_plant()) {
     if (thing_check_for_heat_damage()) {

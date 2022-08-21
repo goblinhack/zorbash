@@ -330,6 +330,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_fadeup                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_falling                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_frozen                                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_defrosting                                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_ascii_animated                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_pixelart_animated                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hidden                                    ? 1LLU : 0LLU) << shift; shift++;
@@ -375,7 +376,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_basalt                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge                        ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_burnable                      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_able_to_burn                      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_chasm                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_combustible                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_corpse                        ? 1LLU : 0LLU) << shift; shift++;
@@ -521,7 +522,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_basalt);
   out << bits(my.t->_is_brazier);
   out << bits(my.t->_is_bridge);
-  out << bits(my.t->_is_burnable);
+  out << bits(my.t->_is_able_to_burn);
   out << bits(my.t->_is_chasm);
   out << bits(my.t->_is_combustible);
   out << bits(my.t->_is_corpse);

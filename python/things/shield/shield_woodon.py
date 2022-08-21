@@ -31,7 +31,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_biome_dungeon(self, True)
     my.is_droppable(self, True)
     my.is_enchantable(self, True)
-    my.is_burnable(self, True)
+    my.is_able_to_burn(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.collision_hit_priority(self, 6)

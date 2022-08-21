@@ -62,7 +62,7 @@ void tp_fixup(void)
       tp->is_heavy_set(true);
     }
 
-    if (tp->is_burnable() || tp->is_combustible() || tp->is_very_combustible()) {
+    if (tp->is_able_to_burn() || tp->is_combustible() || tp->is_very_combustible()) {
       tp->is_temperature_sensitive_set(true);
     }
 
@@ -90,7 +90,7 @@ void tp_fixup(void)
     }
 
     if (tp->is_wooden()) {
-      if (! tp->is_burnable()) {
+      if (! tp->is_able_to_burn()) {
         DIE("Tp %s needs to be set as burnable if wooden", tp->name().c_str());
       }
     }

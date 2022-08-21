@@ -212,7 +212,6 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
       t->pct_width  = fw;
       t->pct_height = fh;
 
-#define ENABLE_DEBUG_TILE
 #ifdef ENABLE_DEBUG_TILE
       printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif

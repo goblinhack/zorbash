@@ -72,7 +72,7 @@ void Thing::on_fire_unset(void)
 bool Thing::on_fire_set(const std::string &why)
 {
   TRACE_NO_INDENT();
-  if (! is_burnable() && ! is_combustible()) {
+  if (! is_able_to_burn() && ! is_combustible()) {
     return false;
   }
 

@@ -202,7 +202,7 @@ PyObject *thing_is_boots(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_brazier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bridge(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_buff(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_burnable(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_burn(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrying_an_item(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_carrying_treasure(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_chasm(PyObject *obj, PyObject *args, PyObject *keywds);

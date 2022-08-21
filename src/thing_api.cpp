@@ -591,10 +591,10 @@ int Thing::is_bridge(void)
   return (tp()->is_bridge());
 }
 
-int Thing::is_burnable(void)
+int Thing::is_able_to_burn(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_burnable());
+  return (tp()->is_able_to_burn());
 }
 
 int Thing::is_carrier_of_treasure_class_a(void)

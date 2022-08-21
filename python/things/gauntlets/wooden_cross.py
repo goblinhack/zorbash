@@ -15,12 +15,12 @@ def tp_init(name, text_long_name, text_short_name):
     # start sort marker
     my.equip_carry_anim(self, "wooden_cross_carry")
     my.gfx_ascii_shown(self, True)
+    my.is_able_to_burn(self, True)
     my.is_able_to_fall(self, True)
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
-    my.is_burnable(self, True)
     my.is_collectable(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)

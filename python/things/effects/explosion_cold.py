@@ -14,8 +14,8 @@ def on_born(me, x, y):
         attack(me, thing)
 
 
-def tp_init(name):
-    self = tp.Tp(name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.damage_cold_chance_d1000(self, 0, 1000)
     my.damage_cold_dice(self, "1d6")  # This is the damage when the monst fires
@@ -30,6 +30,7 @@ def tp_init(name):
     my.noise_on_born(self, 70)
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, 100)
+    my.text_hits(self, "blasts")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -59,7 +60,9 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="explosion_cold")
+    tp_init(name="explosion_cold",
+            text_long_name="cold blast",
+            text_short_name="cold blast")
 
 
 init()

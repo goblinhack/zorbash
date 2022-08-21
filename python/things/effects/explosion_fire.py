@@ -6,8 +6,8 @@ def on_born(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_a")
 
 
-def tp_init(name):
-    self = tp.Tp(name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "1d6")  # This is the damage when the monst fires
@@ -22,6 +22,7 @@ def tp_init(name):
     my.noise_on_born(self, 70)
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, 100)
+    my.text_hits(self, "blasts")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -51,7 +52,9 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="explosion_fire")
+    tp_init(name="explosion_fire",
+            text_long_name="fire burst",
+            text_short_name="fire burst")
 
 
 init()

@@ -66,7 +66,7 @@ PyObject *level_is_brazier_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_air_breathher_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bridge_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_buff_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_burnable_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_able_to_burn_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_carrying_an_item_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_carrying_treasure_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_chasm_at(PyObject *obj, PyObject *args, PyObject *keywds);

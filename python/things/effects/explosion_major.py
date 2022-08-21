@@ -27,8 +27,8 @@ def on_born(me, x, y):
                 attack(me, thing)
 
 
-def tp_init(name):
-    self = tp.Tp(name, "huge explosion")
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "6d6")
@@ -109,7 +109,9 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="explosion_major")
+    tp_init(name="explosion_major",
+            text_long_name="huge explosion",
+            text_short_name="huge explosion")
 
 
 init()

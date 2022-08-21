@@ -221,7 +221,7 @@ do
       is_brazier \
       is_bridge \
       is_buff \
-      is_burnable \
+      is_able_to_burn \
       is_carrier_of_treasure_class_a \
       is_carrier_of_treasure_class_b \
       is_carrier_of_treasure_class_c \

@@ -48,7 +48,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_basalt {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_brazier {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_bridge {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_burnable {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_able_to_burn {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_chasm {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_cold {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_combustible {};
@@ -781,8 +781,8 @@ public:
   uint8_t is_combustible(const point p);
   uint8_t is_torch(const int x, const int y);
   uint8_t is_torch(const point p);
-  uint8_t is_burnable(const int x, const int y);
-  uint8_t is_burnable(const point p);
+  uint8_t is_able_to_burn(const int x, const int y);
+  uint8_t is_able_to_burn(const point p);
   uint8_t is_deep_water(const int x, const int y);
   uint8_t is_deep_water(const point p);
   uint8_t is_descend_dungeon(const int x, const int y);
@@ -1010,8 +1010,8 @@ public:
   void is_combustible_unset(const int x, const int y);
   void is_torch_set(const int x, const int y);
   void is_torch_unset(const int x, const int y);
-  void is_burnable_set(const int x, const int y);
-  void is_burnable_unset(const int x, const int y);
+  void is_able_to_burn_set(const int x, const int y);
+  void is_able_to_burn_unset(const int x, const int y);
   void is_corpse_set(const int x, const int y);
   void is_corpse_unset(const int x, const int y);
   void is_corridor_set(const int x, const int y);

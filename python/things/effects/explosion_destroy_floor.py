@@ -10,8 +10,8 @@ def on_born(me, x, y):
     my.spawn_at(me, "chasm1", x, y)
 
 
-def tp_init(name):
-    self = tp.Tp(name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -22,6 +22,7 @@ def tp_init(name):
     my.is_loggable(self, True)
     my.noise_on_born(self, 100)
     my.on_born_do(self, "me.on_born()")
+    my.text_hits(self, "blasts")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -51,7 +52,9 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="explosion_destroy_floor")
+    tp_init(name="explosion_destroy_floor",
+            text_long_name="earthquake",
+            text_short_name="earthquake")
 
 
 init()

@@ -1,8 +1,10 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- fix double damage for ice to fire                                                                                                            -->
 <!-- check freezing works                                                                                                                         -->
 <!-- ascii freezing                                                                                                                               -->
+<!-- add burnt objects                                                                                                                            -->
 <!-- boiling steam over water when fireball passes                                                                                                -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->

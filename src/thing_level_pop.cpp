@@ -157,9 +157,9 @@ void Thing::level_pop(void)
     i_set_is_torch = false;
     level->is_torch_unset(mx, my);
   }
-  if (i_set_is_burnable) {
-    i_set_is_burnable = false;
-    level->is_burnable_unset(mx, my);
+  if (i_set_is_able_to_burn) {
+    i_set_is_able_to_burn = false;
+    level->is_able_to_burn_unset(mx, my);
   }
   if (i_set_is_heavy) {
     i_set_is_heavy = false;

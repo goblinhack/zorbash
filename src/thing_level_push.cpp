@@ -165,9 +165,9 @@ void Thing::level_push(void)
     i_set_is_torch = true;
     level->is_torch_set(mx, my);
   }
-  if (is_burnable()) {
-    i_set_is_burnable = true;
-    level->is_burnable_set(mx, my);
+  if (is_able_to_burn()) {
+    i_set_is_able_to_burn = true;
+    level->is_able_to_burn_set(mx, my);
   }
   if (is_heavy()) {
     i_set_is_heavy = true;
