@@ -15,6 +15,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_use_weapons(self, True)
     my.is_able_to_use_armor(self, True)
     my.is_carrier_of_treasure_class_b(self, True)
+    my.is_able_to_freeze(self, True)
     my.is_monst_class_b(self, True)
     my.is_biome_dungeon(self, True)
     my.is_carrier_of_weapon_class_b(self, True)

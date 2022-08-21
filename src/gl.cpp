@@ -476,6 +476,10 @@ void fbo_get_size(int fbo, int &w, int &h)
       w = game->config.window_pix_width;
       h = game->config.window_pix_height;
       break;
+    case FBO_SPRITE:
+      w = game->config.game_pix_width;
+      h = game->config.game_pix_height;
+      break;
   }
 
   if ((fbo >= FBO_MAP_DEBUG) && (fbo < FBO_MAP_DEBUG_END)) {
@@ -516,8 +520,15 @@ void blit_fbo_window_pix(int fbo)
 }
 
 static int fbo_locked = -1;
-void       blit_fbo_bind(int fbo)
+static int fbo_last   = -1;
+
+void blit_fbo_push(int fbo) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[ fbo ]); }
+
+void blit_fbo_pop(void) { glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[ fbo_last ]); }
+
+void blit_fbo_bind(int fbo)
 {
+  fbo_last = fbo;
   if (fbo_locked != -1) {
     DIE("Attempt to bind to another FBO %d when locked", fbo);
   }
@@ -534,6 +545,7 @@ void blit_fbo_unbind(void)
 
 void blit_fbo_bind_locked(int fbo)
 {
+  fbo_last   = fbo;
   fbo_locked = fbo;
   glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[ fbo ]);
 }

@@ -329,6 +329,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_facing_left                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_fadeup                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_falling                                   ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_frozen                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_ascii_animated                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_pixelart_animated                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hidden                                    ? 1LLU : 0LLU) << shift; shift++;

@@ -596,7 +596,7 @@ PyObject *thing_unused_flag72(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag73(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag74(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag75(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag76(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_freeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gelatinous(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_plant(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_steam(PyObject *obj, PyObject *args, PyObject *keywds);

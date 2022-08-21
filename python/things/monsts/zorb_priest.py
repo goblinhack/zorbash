@@ -27,6 +27,7 @@ def tp_init(name, text_long_name):
     my.is_biome_dungeon(self, True)
     my.damage_nat_att_dice(self, "2d6+2")
     my.health_initial_dice(self, "2d10+4")
+    my.is_able_to_freeze(self, True)
     my.is_intelligent(self, True)
 
     delay = 300

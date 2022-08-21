@@ -213,6 +213,7 @@ public:
   uint64_t is_facing_left                               : 1 {};
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
+  uint64_t is_frozen                                    : 1 {}; // frozen by ice and cannot move
   uint64_t is_gfx_ascii_animated                        : 1 {};
   uint64_t is_gfx_pixelart_animated                     : 1 {};
   uint64_t is_hidden                                    : 1 {};
@@ -220,6 +221,7 @@ public:
   uint64_t is_in_lava                                   : 1 {};
   uint64_t is_in_water                                  : 1 {};
   uint64_t is_jumping                                   : 1 {};
+  uint64_t is_key_in_lock                               : 1 {}; // key stuck in rusty lock?
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
   uint64_t is_offscreen                                 : 1 {};
   uint64_t is_open                                      : 1 {};
@@ -235,7 +237,6 @@ public:
   uint64_t is_teleporting                               : 1 {};
   uint64_t is_the_grid                                  : 1 {}; // is the backbone of the level
   uint64_t is_the_player                                : 1 {};
-  uint64_t is_key_in_lock                               : 1 {}; // key stuck in rusty lock?
   uint64_t is_waiting                                   : 1 {}; // is waiting on this tick
   uint64_t is_waiting_to_ascend_dungeon                 : 1 {};
   uint64_t is_waiting_to_ascend_sewer                   : 1 {};
@@ -512,7 +513,6 @@ public:
   bool fire_at(Thingp item, Thingp target);
   bool fire_at(Thingp target);
   bool fire_choose_target(Thingp item);
-  bool fire_tick(void);
   bool has_temperature(void);
   bool health_boost_would_occur(int v);
   bool idle_check(void);
@@ -606,6 +606,8 @@ public:
   bool teleport_randomly_away_from_player(void);
   bool teleport_randomly_towards_player(void);
   bool teleport_randomly(void);
+  bool thing_check_for_cold_damage(void);
+  bool thing_check_for_heat_damage(void);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
   bool throw_item_choose_target(Thingp item);
@@ -1947,7 +1949,7 @@ public:
   int unused_flag73(void);
   int unused_flag74(void);
   int unused_flag75(void);
-  int unused_flag76(void);
+  int is_able_to_freeze(void);
   int is_gelatinous(void);
   int is_plant(void);
   int is_steam(void);

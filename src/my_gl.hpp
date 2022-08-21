@@ -257,7 +257,8 @@ extern PFNGLDELETEBUFFERSARBPROC        glDeleteBuffersARB_EXT;
 #define FBO_FINAL                    17
 #define FBO_SCREEN_FADE_IN_AND_OUT   18
 #define FBO_SMALL_POINT_LIGHTS       19
-#define FBO_MAP_DEBUG                20 // MUST BE LAST
+#define FBO_SPRITE                   20
+#define FBO_MAP_DEBUG                21 // MUST BE LAST, as we generate more from this point
 #define FBO_MAP_DEBUG_END            (FBO_MAP_DEBUG + (DUNGEONS_GRID_CHUNK_WIDTH * DUNGEONS_GRID_CHUNK_HEIGHT))
 #define MAX_FBO                      (FBO_MAP_DEBUG_END + 1)
 
@@ -286,6 +287,8 @@ void blit_colored(int tex, GLushort left, GLushort top, GLushort right, float bo
 void blit_colored(int tex, float texMinX, float texMinY, float texMaxX, float texMaxY, GLushort left, GLushort top,
                   GLushort right, GLushort bottom, color color_bl, color color_br, color color_tl, color color_tr);
 void blit_fbo(int fbo);
+void blit_fbo_push(int fbo);
+void blit_fbo_pop(void);
 void blit_fbo_bind(int fbo);
 void blit_fbo_bind_locked(int fbo);
 void blit_fbo_game_pix(int fbo);

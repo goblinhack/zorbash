@@ -637,6 +637,17 @@ void Thing::animate(void)
     }
   }
 
+  if (tile_curr && is_frozen) {
+    if (is_monst() || is_player()) {
+#ifdef DEBUG_ANIM
+      if (is_debug_type()) {
+        con("Animate: frozen");
+      }
+#endif
+      return;
+    }
+  }
+
   std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(! tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM

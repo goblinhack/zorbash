@@ -73,6 +73,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_enchant_items(self, True)
     my.is_able_to_fall(self, True)
     my.is_able_to_follow(self, True)
+    my.is_able_to_freeze(self, True)
     my.is_able_to_jump(self, True)
     my.is_able_to_learn_skills(self, True)
     my.is_able_to_move_diagonally(self, True)

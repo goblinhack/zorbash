@@ -13532,6 +13532,21 @@ def init_progress_bar_ascii():
     )
 
 
+@timeme
+def init_tiles_ice():
+    tiles = [
+        "ice",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/tiles_32x32_ice.tga",
+        name="tiles_32x32_ice",
+        width=256,
+        height=256,
+        arr=tiles,
+    )
+
+
 init_chasm()
 init_claws_tiles()
 init_effect_descent_tiles()
@@ -13553,6 +13568,7 @@ init_tiles_24x24()
 init_tiles_32x32()
 init_tiles_32x32_deep_water()
 init_tiles_32x32_lava()
+init_tiles_ice()
 init_tiles_32x32_basalt()
 init_tiles_32x32_sewer_water()
 init_tiles_32x32_surface_effects()

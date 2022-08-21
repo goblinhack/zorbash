@@ -526,7 +526,7 @@ do
       unused_flag73 \
       unused_flag74 \
       unused_flag75 \
-      unused_flag76 \
+      is_able_to_freeze \
       is_gelatinous \
       is_plant \
       is_steam \

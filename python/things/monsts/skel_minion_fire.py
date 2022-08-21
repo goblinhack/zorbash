@@ -60,6 +60,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "4")
     my.is_able_to_fall(self, True)
+    my.is_able_to_freeze(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_shove(self, True)
     my.is_able_to_use_weapons(self, True)

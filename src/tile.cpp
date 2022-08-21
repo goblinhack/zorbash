@@ -22,7 +22,7 @@ std::vector< class Tile * >           all_tiles_array;
 
 static uint8_t tile_init_done;
 
-#define ENABLE_TILE_BOUNDS
+#undef ENABLE_TILE_BOUNDS
 
 Tile::Tile(void) { newptr(MTYPE_TILE, this, "Tile"); }
 
@@ -73,6 +73,7 @@ Tile::Tile(const class Tile *tile)
   y1         = tile->y1;
   x2         = tile->x2;
   y2         = tile->y2;
+
 #ifdef ENABLE_TILE_BOUNDS
   ox1 = tile->ox1;
   oy1 = tile->oy1;
@@ -83,13 +84,17 @@ Tile::Tile(const class Tile *tile)
   px2 = tile->px2;
   py2 = tile->py2;
 #endif
+
   set_gl_binding(tile->gl_binding());
   set_gl_binding_black_and_white(tile->gl_binding_black_and_white());
   set_gl_binding_mask(tile->gl_binding_mask());
+
   tex                 = tile->tex;
   tex_black_and_white = tile->tex_black_and_white;
   tex_mask            = tile->tex_mask;
+
   std::copy(mbegin(tile->pix), mend(tile->pix), mbegin(pix));
+
   delay_ms                      = tile->delay_ms;
   dir                           = tile->dir;
   is_join_node                  = tile->is_join_node;
@@ -207,6 +212,7 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
       t->pct_width  = fw;
       t->pct_height = fh;
 
+#define ENABLE_DEBUG_TILE
 #ifdef ENABLE_DEBUG_TILE
       printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
@@ -488,6 +494,7 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
       t->tex                 = tex;
       t->tex_black_and_white = tex_black_and_white;
       t->tex_mask            = tex_mask;
+
       t->set_gl_binding(tex_get_gl_binding(tex));
       t->set_gl_binding_black_and_white(tex_get_gl_binding(tex_black_and_white));
       t->set_gl_binding_mask(tex_get_gl_binding(tex_mask));
@@ -1367,4 +1374,61 @@ void tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, co
 {
   tile_blit_outline_section_colored(tile_index_to_tile(index), tile_tl, tile_br, tl, br, color_bl, color_br, color_tl,
                                     color_tr, scale);
+}
+
+void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
+{
+  static Tilep tile_ice;
+  if (! tile_ice) {
+    tile_ice = tile_find_mand("ice");
+  }
+
+  auto  width  = tl.x > br.x ? (tl.x - br.y) : (br.x - tl.x);
+  auto  height = br.y - tl.y;
+  float tw     = ((float) width) / ((float) game->config.game_pix_width);
+  float th     = ((float) height) / ((float) game->config.game_pix_height);
+
+  blit_fbo_push(FBO_SPRITE);
+  {
+    glcolor(WHITE);
+    blit_init();
+    {
+      //
+      // Blit a solid ice texture
+      //
+      glBlendFunc(GL_ZERO, GL_ONE);
+      tile_blit(tile_ice, point(0, 0), point(width, height));
+
+      //
+      // Now invert the mask for the thing and merge with the ice
+      //
+      glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+      {
+        glLogicOp(GL_COPY_INVERTED);
+        glEnable(GL_COLOR_LOGIC_OP);
+        {
+          blit(tile->gl_binding_mask(), tile->x1, tile->y1, tile->x2, tile->y2, 0, 0, width, height);
+        }
+        glLogicOp(GL_COPY);
+        glDisable(GL_COLOR_LOGIC_OP);
+      }
+    }
+    blit_flush();
+  }
+  blit_fbo_pop();
+
+  //
+  // Blit the final combined texture
+  //
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  blit_init();
+  {
+    blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1.0 - th, tl.x, tl.y, br.x, br.y);
+  }
+  blit_flush();
+
+  //
+  // Restore normal blending
+  //
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }

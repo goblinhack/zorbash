@@ -8,9 +8,9 @@
 #include "my_random.hpp"
 #include "my_thing.hpp"
 
-bool Thing::fire_tick(void)
+bool Thing::thing_check_for_heat_damage(void)
 {
-  dbg("Fire tick");
+  dbg("Heat damage check");
   TRACE_AND_INDENT();
 
   if (is_meltable() || is_burnable() || is_combustible() || is_very_combustible()) {
@@ -22,11 +22,16 @@ bool Thing::fire_tick(void)
     return false;
   }
 
+  if (is_immune_to_fire()) {
+    IF_DEBUG3 { dbg("No, is not immunie to fire"); }
+    return false;
+  }
+
   bool  hit = false;
   point at  = curr_at;
 
   if (is_on_fire()) {
-    dbg("Fire tick: on fire");
+    dbg("Heat damage check: on fire");
     TRACE_AND_INDENT();
 
     //
@@ -76,7 +81,7 @@ bool Thing::fire_tick(void)
     //
     hit = true;
     if (hit) {
-      dbg("Fire tick: very is_combustible and too close to the flames");
+      dbg("Heat damage check: very is_combustible and too close to the flames");
     }
   } else if (is_combustible() && (level->heatmap(at.x, at.y) > 2)) {
     //
@@ -84,7 +89,7 @@ bool Thing::fire_tick(void)
     //
     hit = (d100() < 70);
     if (hit) {
-      dbg("Fire tick: is_combustible and too close to the flames");
+      dbg("Heat damage check: is_combustible and too close to the flames");
     }
   } else if (is_meltable() && (level->heatmap(at.x, at.y) > 0)) {
     //
@@ -97,10 +102,10 @@ bool Thing::fire_tick(void)
     //
     melt_chance += 100 * level->heatmap(at.x, at.y);
 
-    dbg("Fire tick, total chance of melting: %d", melt_chance);
+    dbg("Heat damage check, total chance of melting: %d", melt_chance);
     hit = d1000() < melt_chance;
     if (hit) {
-      dbg("Fire tick: is melting");
+      dbg("Heat damage check: is melting");
     }
   } else if (level->is_fire(at.x, at.y)) {
     if (! level->is_smoke(at.x, at.y)) {
@@ -150,5 +155,35 @@ bool Thing::fire_tick(void)
     }
   }
 
+  is_frozen = false;
+
   return hit;
+}
+
+bool Thing::thing_check_for_cold_damage(void)
+{
+  dbg("Cold damage check");
+  TRACE_AND_INDENT();
+
+  if (is_able_to_freeze()) {
+    //
+    // Keep going
+    //
+  } else if (! environ_avoids_cold()) {
+    IF_DEBUG3 { dbg("No, is not cold avoider"); }
+    return false;
+  }
+
+  if (is_immune_to_cold()) {
+    IF_DEBUG3 { dbg("No, is not immunie to cold"); }
+    return false;
+  }
+
+  dbg("Fire hit");
+  TRACE_AND_INDENT();
+
+  is_frozen = true;
+  on_fire_unset();
+
+  return true;
 }

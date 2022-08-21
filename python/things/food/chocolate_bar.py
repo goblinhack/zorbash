@@ -11,6 +11,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_able_to_fall(self, True)
+    my.is_able_to_freeze(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
     my.is_burnable(self, True)

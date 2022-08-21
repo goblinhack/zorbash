@@ -889,7 +889,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag75() && (what == "unused_flag75")) {
     return true;
   }
-  if (unused_flag76() && (what == "unused_flag76")) {
+  if (is_able_to_freeze() && (what == "is_able_to_freeze")) {
     return true;
   }
   if (is_gelatinous() && (what == "is_gelatinous")) {
@@ -2483,8 +2483,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag75") {
     return &Thing::unused_flag75;
   }
-  if (what == "unused_flag76") {
-    return &Thing::unused_flag76;
+  if (what == "is_able_to_freeze") {
+    return &Thing::is_able_to_freeze;
   }
   if (what == "is_gelatinous") {
     return &Thing::is_gelatinous;

@@ -21,6 +21,7 @@ def tp_init(name, text_long_name):
     my.is_carrier_of_treasure_class_b(self, True)
     my.stat_str(self, 8)
     my.is_monst_class_c(self, True)
+    my.is_able_to_freeze(self, True)
     my.is_biome_dungeon(self, True)
     my.distance_avoid(self, 5)
     my.health_initial_dice(self, "2d4+4")

@@ -18,6 +18,7 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 8)
     my.health_initial_dice(self, "2d5")
     my.is_able_to_use_weapons(self, True)
+    my.is_able_to_freeze(self, True)
     my.is_monst_class_b(self, True)
     my.is_biome_dungeon(self, True)
 

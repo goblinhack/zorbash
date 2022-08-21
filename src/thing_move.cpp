@@ -359,7 +359,17 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         stuck("stuck under something heavy");
         return false;
       }
-    } else if (is_stuck()) {
+    }
+
+    if (is_frozen) {
+      msg("You are frozen and cannot move!");
+      game->tick_begin("frozen");
+      popup(string_sprintf("%%fg=lightblue$!"));
+      stuck("frozen");
+      return false;
+    }
+
+    if (is_stuck()) {
       if (is_player()) {
         if (level->is_spiderweb(curr_at.x, curr_at.y)) {
           if (attack_options->attack_at_set && (attack_options->attack_at != curr_at)) {

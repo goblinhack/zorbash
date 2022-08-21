@@ -633,7 +633,7 @@ private:
   int _unused_flag73 {};
   int _unused_flag74 {};
   int _unused_flag75 {};
-  int _unused_flag76 {};
+  int _is_able_to_freeze {};
   int _is_gelatinous {};
   int _is_plant {};
   int _is_steam {};
@@ -1641,7 +1641,7 @@ public:
   int unused_flag73(void) const;
   int unused_flag74(void) const;
   int unused_flag75(void) const;
-  int unused_flag76(void) const;
+  int is_able_to_freeze(void) const;
   int is_gelatinous(void) const;
   int is_plant(void) const;
   int is_steam(void) const;
@@ -2314,7 +2314,7 @@ public:
   void unused_flag73_set(int v);
   void unused_flag74_set(int v);
   void unused_flag75_set(int v);
-  void unused_flag76_set(int v);
+  void is_able_to_freeze_set(int v);
   void is_gelatinous_set(int v);
   void is_plant_set(int v);
   void is_steam_set(int v);

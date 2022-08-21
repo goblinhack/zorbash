@@ -1719,10 +1719,10 @@ int Thing::unused_flag75(void)
   return (tp()->unused_flag75());
 }
 
-int Thing::unused_flag76(void)
+int Thing::is_able_to_freeze(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag76());
+  return (tp()->is_able_to_freeze());
 }
 
 int Thing::is_gelatinous(void)

@@ -9,6 +9,7 @@ def tp_init(name, text_long_name):
     my.is_monst_class_b(self, True)
     my.is_biome_dungeon(self, True)
     my.is_carrier_of_treasure_class_a(self, True)
+    my.is_able_to_freeze(self, True)
     my.is_carrier_of_weapon_class_a(self, True)
 
     delay = 300

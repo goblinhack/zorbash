@@ -675,7 +675,7 @@ int  Tp::unused_flag72(void) const { return _unused_flag72; }
 int  Tp::unused_flag73(void) const { return _unused_flag73; }
 int  Tp::unused_flag74(void) const { return _unused_flag74; }
 int  Tp::unused_flag75(void) const { return _unused_flag75; }
-int  Tp::unused_flag76(void) const { return _unused_flag76; }
+int  Tp::is_able_to_freeze(void) const { return _is_able_to_freeze; }
 int  Tp::is_gelatinous(void) const { return _is_gelatinous; }
 int  Tp::is_plant(void) const { return _is_plant; }
 int  Tp::is_steam(void) const { return _is_steam; }
@@ -1348,7 +1348,7 @@ void Tp::unused_flag72_set(int v) { _unused_flag72 = v; }
 void Tp::unused_flag73_set(int v) { _unused_flag73 = v; }
 void Tp::unused_flag74_set(int v) { _unused_flag74 = v; }
 void Tp::unused_flag75_set(int v) { _unused_flag75 = v; }
-void Tp::unused_flag76_set(int v) { _unused_flag76 = v; }
+void Tp::is_able_to_freeze_set(int v) { _is_able_to_freeze = v; }
 void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
 void Tp::is_plant_set(int v) { _is_plant = v; }
 void Tp::is_steam_set(int v) { _is_steam = v; }

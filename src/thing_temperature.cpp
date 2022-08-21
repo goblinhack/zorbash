@@ -24,13 +24,13 @@ void Thing::temperature_tick(void)
   TRACE_AND_INDENT();
 
   //
-  // Add in the temperature of the location
+  // Add in the temperature of the location. The heatmap has some radiosity to it so it can impact neighboring tiles.
   //
-  int  location_t     = level->heatmap(curr_at) * 50;
-  bool location_t_set = false;
+  int  location_temp     = level->heatmap(curr_at) * 50;
+  bool location_temp_set = false;
 
-  if (location_t) {
-    location_t_set = true;
+  if (location_temp) {
+    location_temp_set = true;
   }
 
   FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
@@ -76,144 +76,176 @@ void Thing::temperature_tick(void)
       }
     }
 
-    location_t += t->temperature;
-    location_t_set = true;
+    location_temp += t->temperature;
+    location_temp_set = true;
 
-    dbg("Location temp now %d due to %s (%d)", location_t, t->to_string().c_str(), t->temperature);
+    dbg("Location temp now %d due to %s (%d)", location_temp, t->to_string().c_str(), t->temperature);
   }
   FOR_ALL_THINGS_END()
 
-  if (! location_t_set) {
+  if (! location_temp_set) {
     return;
   }
 
-  int t = temperature;
+  int thing_temp = temperature;
 
   //
   // Items being carried in side a chest are insulated.
   //
   auto owner = immediate_owner();
   if (owner && owner->is_bag_item_container()) {
-    t = TEMPERATURE_ROOM;
+    thing_temp = TEMPERATURE_ROOM;
   }
 
-  dbg("Temperature tick, my temp %d, location temp: %d", t, location_t);
+  dbg("Temperature tick, my temp %d, location temp: %d", thing_temp, location_temp);
   TRACE_AND_INDENT();
 
   //
   // Over time we gradually get closer to the location temperature.
   //
-  if (t != location_t) {
-    int delta = (location_t - t) / 2;
+  if (thing_temp != location_temp) {
+    int delta = (location_temp - thing_temp) / 2;
 
     if (is_fire() || is_icecube() || is_wall() || is_door() || is_rock()) {
-      delta = (location_t - t) / 10;
+      delta = (location_temp - thing_temp) / 10;
     }
 
     temperature_incr(delta);
 
-    t = temperature;
-    dbg("Temperature tick, my temp now %d, location temp: %d", t, location_t);
+    thing_temp = temperature;
+    dbg("Temperature tick, my temp now %d, location temp: %d", thing_temp, location_temp);
     TRACE_AND_INDENT();
   }
 
-  if (is_temperature_sensitive()) {
-    if (game->tick_current != tick_last_i_was_attacked()) {
-      if (t <= -100) {
-        if (! is_immune_to_cold() || is_player()) {
-          auto damage = abs(t) / 10;
-          if (is_stone()) {
-            popup("Crack!");
-            if (is_player()) {
-              msg("%%fg=cyan$%s fractures from the extreme cold.%%fg=reset$", text_The().c_str());
-            } else {
-              msg("%s fractures from the extreme cold.", text_The().c_str());
-            }
-          } else {
-            if (is_player()) {
-              msg("%%fg=cyan$%s suffers from the extreme cold.%%fg=reset$", text_The().c_str());
-            } else if (is_alive_monst()) {
-              msg("%s suffers from the extreme cold.", text_The().c_str());
-            }
-          }
-          is_attacked_with_damage_cold(this, this, damage);
-        }
-      } else if ((t < 0) && is_fire()) {
-        auto damage = abs(t) / 10;
-        is_attacked_with_damage_cold(this, this, damage);
-      } else if ((t > 0) && is_icecube()) {
-        auto damage = abs(t) / 10;
-        if (fire_tick()) {
-          dbg("Fire attack");
-          TRACE_AND_INDENT();
-          is_attacked_with_damage_fire(this, this, damage);
-          popup("Melting!");
-        }
-      } else if ((t >= 20) && is_plant()) {
-        if (! is_immune_to_fire()) {
-          auto damage = abs(t) / 10;
-          if (fire_tick()) {
-            dbg("Fire attack");
-            TRACE_AND_INDENT();
-            is_attacked_with_damage_fire(this, this, damage);
-            popup("Wilts!");
-          }
-        }
-      } else if ((t >= 30) && is_gelatinous()) {
-        if (! is_immune_to_fire()) {
-          auto damage = abs(t) / 10;
-          if (fire_tick()) {
-            dbg("Fire attack");
-            TRACE_AND_INDENT();
-            is_attacked_with_damage_fire(this, this, damage);
-            popup("Melts!");
-          }
-        }
-      } else if ((t >= 50) && is_humanoid()) {
-        if (! is_immune_to_fire()) {
-          auto damage = abs(t) / 10;
-          if (fire_tick()) {
-            dbg("Fire attack");
-            TRACE_AND_INDENT();
-            is_attacked_with_damage_fire(this, this, damage);
-          } else {
-            if (is_player()) {
-              msg("%%fg=orange$%s suffers from the extreme heat.%%fg=reset$", text_The().c_str());
-            } else if (is_alive_monst()) {
-              msg("%s suffers from the extreme heat.", text_The().c_str());
-            }
-          }
-        }
-      } else if ((t >= 100) && is_wooden()) {
-        if (! is_immune_to_fire()) {
-          auto damage = abs(t) / 10;
-          if (fire_tick()) {
-            dbg("Fire attack");
-            TRACE_AND_INDENT();
-            popup("Burn!");
-            is_attacked_with_damage_fire(this, this, damage);
-          }
-        }
-      } else if ((t >= 200) && is_stone()) {
-        if (! is_immune_to_fire()) {
-          auto damage = abs(t) / 10;
-          if (fire_tick()) {
-            dbg("Fire attack");
-            TRACE_AND_INDENT();
-            popup("Crack!");
-            is_attacked_with_damage_fire(this, this, damage);
-          }
-        }
-      } else if (t >= 50) {
-        if (! is_immune_to_fire()) {
-          auto damage = abs(t) / 20;
-          if (torch_tick()) {
-            dbg("Torch attack");
-            TRACE_AND_INDENT();
-            is_attacked_with_damage_fire(this, this, damage);
-          }
-        }
+  if (! is_temperature_sensitive()) {
+    return;
+  }
+
+  if (game->tick_current == tick_last_i_was_attacked()) {
+    return;
+  }
+
+  if ((thing_temp <= -200) && is_stone()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      popup("Crack!");
+      is_attacked_with_damage_cold(this, this, damage);
+      return;
+    }
+  }
+
+  if ((thing_temp <= -100) && is_wooden()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      popup("Shatter!");
+      is_attacked_with_damage_cold(this, this, damage);
+      return;
+    }
+  }
+
+  if ((thing_temp <= -50) && is_humanoid()) {
+    if (thing_check_for_cold_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      is_attacked_with_damage_cold(this, this, damage);
+      if (is_player()) {
+        msg("%%fg=lightblue$%s suffers from the extreme cold.%%fg=reset$", text_The().c_str());
+      } else if (is_alive_monst()) {
+        msg("%s suffers from the extreme cold.", text_The().c_str());
       }
+      popup("Freezes!");
+      return;
+    }
+  }
+
+  if ((thing_temp <= -20) && is_plant()) {
+    if (thing_check_for_cold_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      is_attacked_with_damage_cold(this, this, damage);
+      popup("Wilts!");
+      return;
+    }
+  }
+
+  if ((thing_temp <= 0) && is_gelatinous()) {
+    if (thing_check_for_cold_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      is_attacked_with_damage_cold(this, this, damage);
+      popup("Wilts!");
+      return;
+    }
+  }
+
+  if ((thing_temp < 0) && is_fire()) {
+    auto damage = abs(thing_temp) / 10;
+    is_attacked_with_damage_cold(this, this, damage);
+    return;
+  }
+
+  if ((thing_temp > 0) && is_icecube()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      is_attacked_with_damage_fire(this, this, damage);
+      popup("Melting!");
+      return;
+    }
+  }
+
+  if ((thing_temp >= 20) && is_plant()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      is_attacked_with_damage_fire(this, this, damage);
+      popup("Wilts!");
+      return;
+    }
+  }
+
+  if ((thing_temp >= 30) && is_gelatinous()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      is_attacked_with_damage_fire(this, this, damage);
+      popup("Melts!");
+      return;
+    }
+  }
+
+  if ((thing_temp >= 50) && is_humanoid()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      is_attacked_with_damage_fire(this, this, damage);
+      if (is_player()) {
+        msg("%%fg=orange$%s suffers from the extreme heat.%%fg=reset$", text_The().c_str());
+      } else if (is_alive_monst()) {
+        msg("%s suffers from the extreme heat.", text_The().c_str());
+      }
+    } else {
+      if (is_player()) {
+        msg("%%fg=orange$%s sweats from the extreme heat.%%fg=reset$", text_The().c_str());
+      }
+    }
+  }
+
+  if ((thing_temp >= 100) && is_wooden()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      popup("Burn!");
+      is_attacked_with_damage_fire(this, this, damage);
+    }
+  }
+
+  if ((thing_temp >= 200) && is_stone()) {
+    if (thing_check_for_heat_damage()) {
+      auto damage = abs(thing_temp) / 10;
+      popup("Crack!");
+      is_attacked_with_damage_fire(this, this, damage);
+    }
+  }
+
+  if (thing_temp >= 50) {
+    auto damage = abs(thing_temp) / 20;
+    if (torch_tick()) {
+      dbg("Torch attack");
+      TRACE_AND_INDENT();
+      is_attacked_with_damage_fire(this, this, damage);
     }
   }
 }

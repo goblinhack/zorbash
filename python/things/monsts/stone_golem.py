@@ -60,6 +60,7 @@ def tp_init(name, text_long_name):
     my.hunger_is_insatiable(self, True)
     my.is_able_to_change_levels(self, True)
     my.is_able_to_fall(self, True)
+    my.is_able_to_freeze(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_shove(self, True)
     my.is_attackable_by_monst(self, True)

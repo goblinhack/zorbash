@@ -931,16 +931,19 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     if (reflection) {
       if (auto submerged = blit_begin_reflection_submerged()) {
         tile_blit(tile, blit_tl, blit_br);
+        if (is_frozen) {
+          tile_blit_frozen(tile, blit_tl, blit_br);
+        }
         blit_end_reflection_submerged(submerged);
       } else {
         if (tile && tile_get_height(tile) != TILE_HEIGHT) {
           if (tpp->gfx_oversized_and_on_floor()) {
             //
-            // Seems to be ok
+            // Seems to blit ok
             //
           } else if (immediate_owner()) {
             //
-            // Seems to be ok
+            // Seems to blit ok
             //
           } else {
             blit_br.y += TILE_HEIGHT;
@@ -948,6 +951,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           }
         }
         tile_blit(tile, blit_tl, blit_br);
+        if (is_frozen) {
+          tile_blit_frozen(tile, blit_tl, blit_br);
+        }
       }
     } else if (auto submerged = blit_begin_submerged()) {
       if (outline) {
@@ -955,12 +961,18 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       } else {
         tile_blit(tile, blit_tl, blit_br);
       }
+      if (is_frozen) {
+        tile_blit_frozen(tile, blit_tl, blit_br);
+      }
       blit_end_submerged(submerged);
     } else {
       if (outline) {
         tile_blit_outline(tile, blit_tl, blit_br, c);
       } else {
         tile_blit(tile, blit_tl, blit_br);
+      }
+      if (is_frozen) {
+        tile_blit_frozen(tile, blit_tl, blit_br);
       }
     }
   } else {
