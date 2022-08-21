@@ -52,6 +52,14 @@ void Thing::location_check_forced(void)
   }
 
   //
+  // Cool down / heat up
+  //
+  temperature_tick();
+  if (is_dead) {
+    return;
+  }
+
+  //
   // Check for calling before the dead check, so dead dogmen can fall.
   //
   chasm_tick();
@@ -118,14 +126,6 @@ void Thing::location_check_forced(void)
   }
 
   gas_poison_tick();
-  if (is_dead) {
-    return;
-  }
-
-  //
-  // Cool down / heat up
-  //
-  temperature_tick();
   if (is_dead) {
     return;
   }

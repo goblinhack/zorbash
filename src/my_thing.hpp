@@ -1821,11 +1821,7 @@ public:
   int submerged_offset_get(void);
   int teleport_distance_get(void);
   int teleport_distance(void);
-  int temperature_decr(int);
-  int temperature_decr(void);
   int temperature_get(void);
-  int temperature_incr(int);
-  int temperature_incr(void);
   int temperature_set(int);
   int tick_prio(void);
   int torch_count(void);
@@ -2396,6 +2392,10 @@ public:
   void skill_remove_all(void);
   void sleep(void);
   void solid_rock_tick(void);
+  void temperature_decr(int);
+  void temperature_decr(void);
+  void temperature_incr(int);
+  void temperature_incr(void);
   void spawned_owner_set(Thingp spawner_owner);
   void stamina_boost(int v);
   void stats_tick(void);

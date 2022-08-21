@@ -1,6 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- check freezing works                                                                                                                         -->
+<!-- ascii freezing                                                                                                                               -->
 <!-- boiling steam over water when fireball passes                                                                                                -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->

@@ -12,14 +12,6 @@ void Thing::temperature_tick(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_dead || is_dying) {
-    return;
-  }
-
-  if (! is_temperature_sensitive()) {
-    return;
-  }
-
   dbg("Temperature tick (%u)", game->tick_current);
   TRACE_AND_INDENT();
 
@@ -117,7 +109,19 @@ void Thing::temperature_tick(void)
     TRACE_AND_INDENT();
   }
 
-  if (! is_temperature_sensitive()) {
+  if (is_dead || is_dying) {
+    if (is_able_to_freeze()) {
+      if (! is_frozen) {
+        if (thing_temp < 0) {
+          dbg("Freeze the dead monst");
+          is_frozen = true;
+        }
+      }
+    }
+    return;
+  }
+
+  if (! is_temperature_sensitive() && ! is_able_to_freeze()) {
     return;
   }
 
@@ -266,27 +270,18 @@ int Thing::temperature_set(int v)
   return v;
 }
 
-int Thing::temperature_decr(int v) { return temperature_incr(-v); }
+void Thing::temperature_decr(int v) { temperature_incr(-v); }
 
-int Thing::temperature_incr(int temperature_change)
+void Thing::temperature_incr(int temperature_change)
 {
   TRACE_NO_INDENT();
 
   if (! temperature_change) {
-    return temperature_change;
+    return;
   }
 
   if (is_flying()) {
-    return temperature_change;
-  }
-  if (is_floating()) {
-    return temperature_change;
-  }
-  if (is_dead) {
-    return temperature_change;
-  }
-  if (is_undead()) {
-    return temperature_change;
+    return;
   }
 
   int temperature_curr = temperature_get();
@@ -347,12 +342,10 @@ int Thing::temperature_incr(int temperature_change)
     n           = -1000;
     temperature = temperature_change;
   }
-
-  return n;
 }
 
-int Thing::temperature_decr(void) { return temperature_incr(-1); }
+void Thing::temperature_decr(void) { temperature_incr(-1); }
 
-int Thing::temperature_incr(void) { return temperature_incr(1); }
+void Thing::temperature_incr(void) { temperature_incr(1); }
 
 bool Thing::has_temperature(void) { return tp()->has_temperature(); }
