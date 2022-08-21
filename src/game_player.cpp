@@ -291,6 +291,7 @@ void Game::place_player(void)
       // level->thing_new("lava", point(x + 1, y + 5));
       // level->thing_new("lava", point(x + 1, y + 6));
       // level->thing_new("lava", point(x + 1, y + 7));
+      // level->thing_new("lava", point(x + 1, y + 7));
 
       LOG("INF: Placed player");
 

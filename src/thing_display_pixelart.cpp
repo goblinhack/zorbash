@@ -632,9 +632,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     is_in_water = true;
   }
 
-  if (unlikely(is_in_water || is_monst() || is_item() || is_treasure_type() || is_skillstone() || is_player() ||
-               is_wet_grass() || is_foilage() || is_carnivorous_plant() || tpp->gfx_pixelart_attack_anim() ||
-               tpp->gfx_on_fire_anim() || tpp->gfx_pixelart_equip_carry_anim())) {
+  if (unlikely(is_in_water || is_icecube() || is_pillar() || is_barrel() || is_monst() || is_item() ||
+               is_treasure_type() || is_skillstone() || is_player() || is_wet_grass() || is_foilage() || is_plant() ||
+               tpp->gfx_pixelart_attack_anim() || tpp->gfx_on_fire_anim() || tpp->gfx_pixelart_equip_carry_anim())) {
 
     //
     // Render the weapon and player on the same tile rules
@@ -957,7 +957,10 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       }
     } else if (auto submerged = blit_begin_submerged()) {
       if (outline) {
-        tile_blit_outline(tile, blit_tl, blit_br, c);
+        //
+        // Compensate for the one pixel of outline
+        //
+        tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c);
       } else {
         tile_blit(tile, blit_tl, blit_br);
       }
@@ -967,7 +970,10 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       blit_end_submerged(submerged);
     } else {
       if (outline) {
-        tile_blit_outline(tile, blit_tl, blit_br, c);
+        //
+        // Compensate for the one pixel of outline
+        //
+        tile_blit_outline(tile, point(blit_tl.x, blit_tl.y - 1), point(blit_br.x, blit_br.y - 1), c);
       } else {
         tile_blit(tile, blit_tl, blit_br);
       }
