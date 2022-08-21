@@ -302,7 +302,7 @@ bool Level::create_sewer_pipes(point3d at)
       if (get(final_pipes, x, y)) {
         (void) thing_new("corridor2", p);
         if (pcg_random_range(0, 100) < 25) {
-          (void) thing_new("water1", p);
+          (void) thing_new("water", p);
         }
       }
       if (get(sewer_pipe, x, y)) {

@@ -357,7 +357,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     }
 
     dbg2("INF: Place shallow water");
-    create_dungeon_place_place_shallow_water(dungeon, "water1");
+    create_dungeon_place_place_shallow_water(dungeon, "water");
     if (g_errored) {
       return false;
     }

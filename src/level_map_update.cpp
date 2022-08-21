@@ -150,7 +150,7 @@ void Level::update_things_next_to_a_chasm(void)
               FOR_ALL_THINGS_END()
 
               if (create_dungeon_place_place_shallow_water) {
-                thing_new("water1", point(x, y));
+                thing_new("water", point(x, y));
               }
             }
           }
@@ -208,7 +208,7 @@ void Level::update_deep_water(void)
           // Replace with shallow water
           //
           if (removed_deep_water) {
-            thing_new("water1", point(x, y));
+            thing_new("water", point(x, y));
           }
 
           IF_DEBUG2

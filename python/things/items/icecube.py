@@ -8,7 +8,7 @@ def melt(me, x, y):
 
     for dx in range(-1, 2):
         for dy in range(-1, 2):
-            my.spawn_at(me, "water1", x + dx, y + dy)
+            my.spawn_at(me, "water", x + dx, y + dy)
             my.spawn_at(me, "explosion_cold", x + dx, y + dy)
 
 

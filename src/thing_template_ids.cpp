@@ -372,7 +372,7 @@ std::initializer_list< std::string > tps = {
     "wand_fire_carry",
     "wand_ice",
     "wand_ice_carry",
-    "water1",
+    "water",
     "webball",
     "wet_grass1",
     "wet_grass2",
