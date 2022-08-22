@@ -156,9 +156,14 @@ bool Thing::thing_check_for_heat_damage(void)
   }
 
   //
-  // Defrosting is done in two steps to allow fire damage when frozen to to double damage.
+  // Rapid defrosting?
   //
-  is_defrosting = true;
+  if (is_frozen) {
+    is_frozen = false;
+    if (is_player()) {
+      msg("%%fg=red$You defrost rapidly!%%fg=reset$");
+    }
+  }
 
   return hit;
 }
@@ -185,7 +190,13 @@ bool Thing::thing_check_for_cold_damage(void)
   dbg("Cold hit");
   TRACE_AND_INDENT();
 
-  is_frozen = true;
+  if (! is_frozen) {
+    is_frozen = true;
+    if (is_player()) {
+      msg("%%fg=lightblue$You freeze!%%fg=reset$");
+    }
+  }
+
   on_fire_unset();
 
   return true;

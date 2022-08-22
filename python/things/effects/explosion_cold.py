@@ -2,16 +2,8 @@ import my
 import tp
 
 
-def attack(me, thing):
-    if my.thing_possible_to_attack(me, thing):
-        if thing != me:
-            my.thing_hit(me, thing)
-
-
 def on_born(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_a")
-    for thing in my.level_get_all(me, x, y):
-        attack(me, thing)
 
 
 def tp_init(name, text_long_name, text_short_name):

@@ -22,7 +22,7 @@
 //
 void Level::update(void)
 {
-  dbg("Update");
+  dbg("Level update");
   TRACE_NO_INDENT();
 
   if (is_map_changed) {

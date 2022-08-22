@@ -261,8 +261,13 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   }
 
   std::string damage_type;
+  bool        attack_set = false;
 
+  /////////////////////////////////////////////////////////////////////////
+  // Poison damage
+  /////////////////////////////////////////////////////////////////////////
   if (attack_options->attack_poison) {
+    attack_set = true;
     if (is_immune_to_poison()) {
       if (real_hitter->is_player()) {
         if (is_alive_monst()) {
@@ -279,11 +284,23 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no poison damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "poison ";
     }
-  } else if (attack_options->attack_future1) {
+
+    IF_DEBUG2 { real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "poison ";
+
+    if (damage_received_doubled_from_poison()) {
+      damage *= 2;
+      damage_type = "double " + damage_type;
+      dbg("Double damage from poison");
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Future1 damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_future1) {
+    attack_set = true;
     if (! damage) {
       if (is_player()) {
         msg("You take no future1 damage!");
@@ -291,11 +308,16 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no future1 damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "damage_future1 ";
     }
-  } else if (attack_options->attack_future2) {
+    IF_DEBUG2 { real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "damage_future1 ";
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Future2 damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_future2) {
+    attack_set = true;
     if (! damage) {
       if (is_player()) {
         msg("You take no future2 damage!");
@@ -303,11 +325,16 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no future2 damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "damage_future2 ";
     }
-  } else if (attack_options->attack_future3) {
+    IF_DEBUG2 { real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "damage_future2 ";
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Future3 damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_future3) {
+    attack_set = true;
     if (! damage) {
       if (is_player()) {
         msg("You take no future3 damage!");
@@ -315,11 +342,16 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no future3 damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "damage_future3 ";
     }
-  } else if (attack_options->attack_cold) {
+    IF_DEBUG2 { real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "damage_future3 ";
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Cold damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_cold) {
+    attack_set = true;
     if (is_immune_to_cold()) {
       if (real_hitter->is_player()) {
         if (is_alive_monst()) {
@@ -336,11 +368,25 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no cold damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_cold damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "cold ";
     }
-  } else if (attack_options->attack_fire) {
+
+    IF_DEBUG2 { real_hitter->log("Attack damage_cold damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "cold ";
+
+    if (is_temperature_sensitive()) {
+      if ((temperature_get() > 0) || is_burnt || damage_received_doubled_from_cold()) {
+        damage_type = "double " + damage_type;
+        damage *= 2;
+        dbg("Double damage from cold");
+      }
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Fire damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_fire) {
+    attack_set = true;
     if (is_immune_to_fire()) {
       if (real_hitter->is_player()) {
         if (is_alive_monst()) {
@@ -357,11 +403,25 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no fire damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_fire damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "fire ";
     }
-  } else if (attack_options->attack_crush) {
+
+    IF_DEBUG2 { real_hitter->log("Attack damage_fire damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "fire ";
+
+    if (is_temperature_sensitive()) {
+      if ((temperature_get() < 0) || was_frozen || is_frozen || damage_received_doubled_from_fire()) {
+        damage_type = "double " + damage_type;
+        damage *= 2;
+        dbg("Double damage from fire");
+      }
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Crush damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_crush) {
+    attack_set = true;
     if (! is_crushable()) {
       IF_DEBUG2 { real_hitter->log("Cannot crush %s", to_short_string().c_str()); }
       return false;
@@ -374,11 +434,16 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no crush damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_crush damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "crush ";
     }
-  } else if (attack_options->attack_lightning) {
+    IF_DEBUG2 { real_hitter->log("Attack damage_crush damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "crush ";
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Lightning damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_lightning) {
+    attack_set = true;
     if (! damage) {
       if (is_player()) {
         msg("You take no lightning damage!");
@@ -386,11 +451,22 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no lightning damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "lightning ";
     }
-  } else if (attack_options->attack_energy) {
+    IF_DEBUG2 { real_hitter->log("Attack damage_lightning damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "lightning ";
+
+    if (was_frozen || is_frozen || damage_received_doubled_from_fire()) {
+      damage_type = "double " + damage_type;
+      damage *= 2;
+      dbg("Double damage from lightning");
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Energy damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_energy) {
+    attack_set = true;
     if (! damage) {
       if (is_player()) {
         msg("You take no energy damage!");
@@ -398,11 +474,23 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no energy damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_energy damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "energy ";
     }
-  } else if (attack_options->attack_acid) {
+
+    IF_DEBUG2 { real_hitter->log("Attack damage_energy damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "energy ";
+
+    if (was_frozen || is_frozen || damage_received_doubled_from_fire()) {
+      damage_type = "double " + damage_type;
+      damage *= 2;
+      dbg("Double damage from energy");
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Acid damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_acid) {
+    attack_set = true;
     if (is_immune_to_acid()) {
       if (real_hitter->is_player()) {
         if (is_alive_monst()) {
@@ -419,11 +507,23 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no acid damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_acid damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "acid ";
     }
-  } else if (attack_options->attack_water) {
+
+    IF_DEBUG2 { real_hitter->log("Attack damage_acid damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "acid ";
+
+    if (damage_received_doubled_from_acid()) {
+      damage *= 2;
+      damage_type = "double " + damage_type;
+      dbg("Double damage from acid");
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Water damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_water) {
+    attack_set = true;
     if (is_immune_to_water()) {
       if (real_hitter->is_player()) {
         if (is_alive_monst()) {
@@ -440,11 +540,23 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no water damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_water damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "water ";
     }
-  } else if (attack_options->attack_digest) {
+
+    IF_DEBUG2 { real_hitter->log("Attack damage_water damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "water ";
+
+    if (damage_received_doubled_from_water()) {
+      damage *= 2;
+      damage_type = "double " + damage_type;
+      dbg("Double damage from water");
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Digest damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_digest) {
+    attack_set = true;
     if (! damage) {
       if (is_player()) {
         msg("You take no digest damage!");
@@ -456,8 +568,14 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       IF_DEBUG2 { real_hitter->log("Attack damage_digest damage %d on %s", damage, to_short_string().c_str()); }
       damage_type = "digest ";
     }
-  } else if (attack_options->attack_necrosis) {
-    if (is_immune_to_cold()) {
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Necrosis damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_necrosis) {
+    attack_set = true;
+    if (is_immune_to_necrosis()) {
       if (real_hitter->is_player()) {
         if (is_alive_monst()) {
           msg("%s is immune to rotting!", text_The().c_str());
@@ -473,11 +591,23 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no necrosis damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "rotting ";
     }
-  } else if (attack_options->attack_draining) {
+
+    IF_DEBUG2 { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "rotting ";
+
+    if (damage_received_doubled_from_necrosis()) {
+      damage *= 2;
+      damage_type = "double " + damage_type;
+      dbg("Double damage from necrosis");
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Draining damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_draining) {
+    attack_set = true;
     if (is_immune_to_draining()) {
       if (real_hitter->is_player()) {
         if (is_alive_monst()) {
@@ -494,11 +624,16 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no stamina damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack stamina damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "draining ";
     }
-  } else if (attack_options->attack_natural) {
+    IF_DEBUG2 { real_hitter->log("Attack stamina damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "draining ";
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  // Natural damage
+  /////////////////////////////////////////////////////////////////////////
+  if (attack_options->attack_natural) {
+    attack_set = true;
     if (! damage) {
       damage_type = real_hitter->damage_nat_att_type();
       if (is_player()) {
@@ -507,11 +642,12 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no %s damage!", text_The().c_str(), damage_type.c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = real_hitter->damage_nat_att_type() + " ";
     }
-  } else {
+    IF_DEBUG2 { real_hitter->log("Attack natural attack damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = real_hitter->damage_nat_att_type() + " ";
+  }
+
+  if (! attack_set) {
     if (! damage) {
       if (is_player()) {
         msg("You take no attack damage!");
@@ -519,81 +655,9 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no attack damage!", text_The().c_str());
       }
       return false;
-    } else {
-      damage_type = "melee ";
-      IF_DEBUG2 { real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str()); }
     }
-  }
-
-  if (hitter->is_lava()) {
-    if (is_temperature_sensitive()) {
-      if (temperature_get() < 0) {
-        damage_type = "oct " + damage_type;
-        damage *= 8;
-      }
-    } else if (is_frozen || damage_received_doubled_from_fire()) {
-      damage *= 2;
-      damage_type = "double " + damage_type;
-      dbg("Double damage from lava");
-    }
-  }
-
-  if (hitter->is_fire()) {
-    if (is_temperature_sensitive()) {
-      if (temperature_get() < 0) {
-        damage_type = "quad " + damage_type;
-        damage *= 4;
-      }
-    } else if (is_frozen || damage_received_doubled_from_fire()) {
-      damage *= 2;
-      damage_type = "double " + damage_type;
-      dbg("Double damage from fire");
-    }
-  }
-
-  if (hitter->is_cold()) {
-    if (is_temperature_sensitive()) {
-      if (temperature_get() > 0) {
-        damage_type = "quad " + damage_type;
-        damage *= 4;
-      }
-    } else if (is_burnt && damage_received_doubled_from_cold()) {
-      damage *= 2;
-      damage_type = "double " + damage_type;
-      dbg("Double damage from cold");
-    }
-  }
-
-  if (real_hitter->is_acid()) {
-    if (damage_received_doubled_from_acid()) {
-      damage *= 2;
-      damage_type = "double " + damage_type;
-      dbg("Double damage from acid");
-    }
-  }
-
-  if (real_hitter->is_water()) {
-    if (damage_received_doubled_from_water()) {
-      damage *= 2;
-      damage_type = "double " + damage_type;
-      dbg("Double damage from water");
-    }
-  }
-
-  if (real_hitter->is_poisonous_danger_level()) {
-    if (damage_received_doubled_from_poison()) {
-      damage *= 2;
-      damage_type = "double " + damage_type;
-      dbg("Double damage from poison");
-    }
-  }
-
-  if (real_hitter->is_necrotic_danger_level()) {
-    if (damage_received_doubled_from_necrosis()) {
-      damage *= 2;
-      damage_type = "double " + damage_type;
-      dbg("Double damage from necrosis");
-    }
+    damage_type = "melee ";
+    IF_DEBUG2 { real_hitter->log("Attack melee damage %d on %s", damage, to_short_string().c_str()); }
   }
 
   //

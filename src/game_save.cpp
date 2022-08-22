@@ -326,7 +326,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_burnt                                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_changing_level                            ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_dead                                      ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_defrosting                                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_dying                                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_facing_left                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_fadeup                                    ? 1LLU : 0LLU) << shift; shift++;
@@ -361,6 +360,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_waiting_to_descend_dungeon                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting_to_descend_sewer                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting_to_leave_level_has_completed_fall ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->was_frozen                                   ? 1LLU : 0LLU) << shift; shift++;
 
   if (shift >= (int) (sizeof(bits64) * 8)) {
     ERR("Ran out of bits in serialization");

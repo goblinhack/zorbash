@@ -207,6 +207,7 @@ public:
   uint64_t is_attached                                  : 1 {}; // is attached to the level
   uint64_t is_being_destroyed                           : 1 {};
   uint64_t is_bouncing                                  : 1 {};
+  uint64_t is_burnt                                     : 1 {}; // burnt by ice and cannot move
   uint64_t is_changing_level                            : 1 {}; // is in the process of changing level
   uint64_t is_dead                                      : 1 {};
   uint64_t is_dying                                     : 1 {}; // is currently in the throes of death
@@ -214,8 +215,6 @@ public:
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
   uint64_t is_frozen                                    : 1 {}; // frozen by ice and cannot move
-  uint64_t is_burnt                                     : 1 {}; // burnt by ice and cannot move
-  uint64_t is_defrosting                                : 1 {}; // is_frozen being removed
   uint64_t is_gfx_ascii_animated                        : 1 {};
   uint64_t is_gfx_pixelart_animated                     : 1 {};
   uint64_t is_hidden                                    : 1 {};
@@ -245,6 +244,7 @@ public:
   uint64_t is_waiting_to_descend_dungeon                : 1 {};
   uint64_t is_waiting_to_descend_sewer                  : 1 {};
   uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {};
+  uint64_t was_frozen                                   : 1 {}; // was frozen at the start of the tick
 
   //
   // These are flags used to make sure we set or unset flags onto

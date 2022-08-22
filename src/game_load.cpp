@@ -386,7 +386,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_burnt                                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_changing_level                            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_dead                                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_defrosting                                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_dying                                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_facing_left                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_fadeup                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -421,6 +420,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_waiting_to_descend_dungeon                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_waiting_to_descend_sewer                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_waiting_to_leave_level_has_completed_fall = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->was_frozen                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
 
   in >> bits(bits64);
   // CON("LOAD %016LX ",bits64);
