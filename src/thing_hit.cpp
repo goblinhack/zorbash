@@ -557,7 +557,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         damage_type = "quad " + damage_type;
         damage *= 4;
       }
-    } else if (damage_received_doubled_from_cold()) {
+    } else if (is_burnt && damage_received_doubled_from_cold()) {
       damage *= 2;
       damage_type = "double " + damage_type;
       dbg("Double damage from cold");

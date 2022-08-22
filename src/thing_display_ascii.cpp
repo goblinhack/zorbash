@@ -158,6 +158,19 @@ void Thing::blit_ascii_adjust_color_hue(color &c, bool fg)
 void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
 {
   //
+  // Poor thing is frozen?
+  //
+  if (fg) {
+    if (is_frozen) {
+      if (! is_icecube()) {
+        c = LIGHTBLUE;
+      }
+    } else if (is_burnt) {
+      c = BROWN;
+    }
+  }
+
+  //
   // If shown on the left bar we want the original color
   //
   if (left_bar) {

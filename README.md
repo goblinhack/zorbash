@@ -3,6 +3,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- fix double damage for ice to fire                                                                                                            -->
 <!-- check freezing works                                                                                                                         -->
+<!-- dropping a freezing item should shatter                                                                                                      -->
 <!-- ascii freezing                                                                                                                               -->
 <!-- add burnt objects                                                                                                                            -->
 <!-- boiling steam over water when fireball passes                                                                                                -->

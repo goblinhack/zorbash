@@ -323,14 +323,15 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_attached                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_being_destroyed                           ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_bouncing                                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_burnt                                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_changing_level                            ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_dead                                      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_defrosting                                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_dying                                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_facing_left                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_fadeup                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_falling                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_frozen                                    ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_defrosting                                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_ascii_animated                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_pixelart_animated                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hidden                                    ? 1LLU : 0LLU) << shift; shift++;
@@ -338,6 +339,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_in_lava                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_in_water                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_jumping                                   ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_key_in_lock                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_moving                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_offscreen                                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_open                                      ? 1LLU : 0LLU) << shift; shift++;
@@ -353,7 +355,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_teleporting                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_the_grid                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_the_player                                ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_key_in_lock                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting_to_ascend_dungeon                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting_to_ascend_sewer                   ? 1LLU : 0LLU) << shift; shift++;
@@ -369,6 +370,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
 
   bits64 = 0;
   shift  = 0;
+  bits64 |= (my.t->i_set_is_able_to_burn                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_acid                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_dungeon                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_sewer                  ? 1LLU : 0LLU) << shift; shift++;
@@ -376,7 +378,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_basalt                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge                        ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_able_to_burn                      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_carnivorous_plant             ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_chasm                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_combustible                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_corpse                        ? 1LLU : 0LLU) << shift; shift++;
@@ -393,7 +395,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_fire                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_floor                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_foilage                       ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_carnivorous_plant                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_food                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gas_blocker                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_gold                          ? 1LLU : 0LLU) << shift; shift++;

@@ -214,6 +214,7 @@ public:
   uint64_t is_fadeup                                    : 1 {}; // for text that fades upwards
   uint64_t is_falling                                   : 1 {};
   uint64_t is_frozen                                    : 1 {}; // frozen by ice and cannot move
+  uint64_t is_burnt                                     : 1 {}; // burnt by ice and cannot move
   uint64_t is_defrosting                                : 1 {}; // is_frozen being removed
   uint64_t is_gfx_ascii_animated                        : 1 {};
   uint64_t is_gfx_pixelart_animated                     : 1 {};

@@ -138,6 +138,34 @@ static void wid_leftbar_ascii_describe(Levelp level, Thingp t, int &y_at, int wi
     wid_set_thing_id_context(w, t);
   }
 
+  if (t->is_frozen) {
+    y_at++;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_leftbar, "(Frozen)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Frozen)");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+    wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+    wid_set_thing_id_context(w, t);
+  }
+
+  if (t->is_burnt) {
+    y_at++;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_leftbar, "(Burnt)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Burnt)");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+    wid_set_on_mouse_over_begin(w, wid_leftbar_over_begin);
+    wid_set_on_mouse_over_end(w, wid_leftbar_over_end);
+    wid_set_thing_id_context(w, t);
+  }
+
   if (t->is_falling) {
     y_at++;
     TRACE_NO_INDENT();

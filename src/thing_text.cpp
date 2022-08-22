@@ -26,6 +26,8 @@ std::string Thing::text_a_or_an(void)
       out += "a dying ";
     } else if (is_frozen) {
       out += "a frozen ";
+    } else if (is_burnt) {
+      out += "a burnt ";
     }
   }
 
@@ -77,6 +79,8 @@ std::string Thing::text_the(bool include_owner)
       out += "dying ";
     } else if (is_frozen) {
       out += "frozen ";
+    } else if (is_burnt) {
+      out += "burnt ";
     }
   }
 
@@ -148,6 +152,8 @@ std::string Thing::text_short_a_or_an(void)
       out += "a dying ";
     } else if (is_frozen) {
       out += "a frozen ";
+    } else if (is_burnt) {
+      out += "a burnt ";
     }
   }
 
@@ -269,6 +275,8 @@ std::string Thing::text_short_and_state_capitalised(void)
       out += "dying ";
     } else if (is_frozen) {
       out += "frozen ";
+    } else if (is_burnt) {
+      out += "burnt ";
     }
   }
 
