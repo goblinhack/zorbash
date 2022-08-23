@@ -2,7 +2,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- add burnt objects                                                                                                                            -->
-<!-- boiling steam over water when fireball passes                                                                                                -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->
 <!-- wort food ?                                                                                                                                  -->

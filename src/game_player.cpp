@@ -284,6 +284,10 @@ void Game::place_player(void)
         level->thing_new("steam", point(x, y + 1));
         level->thing_new("smoke", point(x, y + 2));
       }
+      level->thing_new("water", point(x + 1, y));
+      level->thing_new("water", point(x + 2, y));
+      level->thing_new("water", point(x + 3, y));
+      level->thing_new("water", point(x + 4, y));
       // level->thing_new("flesh_golem", point(x, y + 3));
       // level->thing_new("lava", point(x, y + 5));
       // level->thing_new("lava", point(x, y + 6));

@@ -7,6 +7,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 /*
  * Find all things on the path.
@@ -63,7 +64,12 @@ void Level::line_set_all_on_fire(const point s, const point e, size_t max_elems,
 {
   TRACE_NO_INDENT();
 
+  CON("line_set_all_on_fire");
   for (auto t : line(s, e, max_elems)) {
+    t->con("in the way");
+    if (t->is_water()) {
+      thing_new(tp_find("steam"), t->curr_at);
+    }
     if (t->curr_at == s) {
       continue;
     }

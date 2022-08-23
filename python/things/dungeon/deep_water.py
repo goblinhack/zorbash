@@ -27,6 +27,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_deep_water(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hazard(self, True)
+    my.is_tickable(self, True)  # So it can interact with fire to make steam
     my.text_a_or_an(self, "the")
     my.text_short_description(self, "A pool of deep dank water, with things in it.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
