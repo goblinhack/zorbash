@@ -423,11 +423,36 @@ bool Thing::fall_to_next_level(void)
         level->is_entered_by_falling = true;
       }
 
+      //
+      // Death from too much fall damage
+      //
       if (health_max()) {
         auto h = health_decr(fall_damage);
         if (h <= 0) {
           h = health_set(0);
           dead("by flying without wings");
+        }
+      }
+
+      //
+      // Falling while frozen is fatal
+      //
+      if (is_frozen) {
+        if (l->is_deep_water(new_pos)) {
+          if (is_player()) {
+            msg("%%fg=lightblue$You plunge into the water and defrost!%%fg=reset$");
+          }
+          is_frozen = false;
+        } else if (l->is_lava(new_pos)) {
+          if (is_player()) {
+            msg("%%fg=red$You defrost and then vaporize!%%fg=reset$");
+          }
+          dead("by vaporizing");
+        } else {
+          if (is_player()) {
+            msg("%%fg=red$You shatter into tiny frozen pieces!%%fg=reset$");
+          }
+          dead("by shattering");
         }
       }
 

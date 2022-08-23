@@ -150,10 +150,19 @@ bool Thing::possible_to_attack(const Thingp victim)
     //
     // Meat eaters eat you when you are dead!
     //
+    if (victim->is_meat()) {
+      dbg("Allow meat eater attack on corpse of %s", victim->to_string().c_str());
+      return true;
+    }
   } else {
     if (victim->is_dead) {
-      dbg("Cannot attack %s, it's dead", victim->to_string().c_str());
-      return false;
+      if (victim->is_frozen) {
+        dbg("Allow frozen corpse attack on %s", victim->to_string().c_str());
+        return true;
+      } else {
+        dbg("Cannot attack %s, it's dead", victim->to_string().c_str());
+        return false;
+      }
     }
   }
 
@@ -445,9 +454,9 @@ bool Thing::possible_to_attack(const Thingp victim)
   }
 
   if (victim->is_alive_monst() || victim->is_combustible() || victim->is_very_combustible() ||
-      victim->is_meltable() || victim->is_able_to_burn() || victim->is_wall() || victim->is_rock() || victim->is_door() ||
-      victim->is_bridge() || victim->is_dry_grass() || victim->is_wet_grass() || victim->is_treasure_type() ||
-      victim->is_enchantstone() || victim->is_skillstone() || victim->is_foilage() ||
+      victim->is_meltable() || victim->is_able_to_burn() || victim->is_wall() || victim->is_rock() ||
+      victim->is_door() || victim->is_bridge() || victim->is_dry_grass() || victim->is_wet_grass() ||
+      victim->is_treasure_type() || victim->is_enchantstone() || victim->is_skillstone() || victim->is_foilage() ||
       victim->is_carnivorous_plant() || victim->is_spiderweb() || victim->is_icecube() || victim->is_sticky() ||
       victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() ||
       victim->is_bag_item()) {

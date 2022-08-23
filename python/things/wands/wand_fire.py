@@ -17,7 +17,7 @@ def explode(me, x, y):
     if my.thing_is_dead(me):
         return
 
-    my.thing_msg(me, "The wand of fireballs explodes, predictably in a fireball.")
+    my.thing_msg(me, "The wand of fire explodes, predictably in a fireball.")
     my.spawn_at_my_position(me, "explosion_major")
     my.spawn_fire_around_thing(me, "fire")
     my.spawn_at_my_position(me, "fire")
@@ -79,7 +79,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
     my.text_long_description(self, "Discharges a single fireball at an ungrateful recipient...")
-    my.text_short_description(self, "A wand of fireballs.")
+    my.text_short_description(self, "A wand of fire.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -108,7 +108,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="wand_fire", text_long_name="wand of fireballs", text_short_name="wand, fire")
+    tp_init(name="wand_fire", text_long_name="wand of fire", text_short_name="wand, fire")
 
 
 init()

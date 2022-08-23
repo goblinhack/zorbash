@@ -1579,8 +1579,15 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
     // Filter attacks when dead
     //
     if (is_dead || is_dying) {
-      IF_DEBUG2 { hitter->log("Already dead, no more melee hits %s", to_short_string().c_str()); }
-      return false;
+      if (is_frozen) {
+        IF_DEBUG2 { hitter->log("Already dead, allow frozen corpse hit %s", to_short_string().c_str()); }
+        corpse_cleanup = true;
+        dead("frozen corpse cleanup");
+        return false;
+      } else {
+        IF_DEBUG2 { hitter->log("Already dead, no more hits %s", to_short_string().c_str()); }
+        return false;
+      }
     }
     IF_DEBUG2 { hitter->log("Possible attack on %s", to_short_string().c_str()); }
   } else {

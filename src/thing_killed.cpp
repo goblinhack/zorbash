@@ -59,7 +59,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     // Unless it is already a corpse. In such a case, if a corpse is
     // eaten we want to remove it.
     //
-    if (! is_corpse_currently || corpse_cleanup) {
+    if (! is_corpse_currently && ! corpse_cleanup) {
       if (is_loggable()) {
         dbg("Already a corpse, can't die again");
       }
@@ -377,6 +377,11 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       dbg("Already a corpse, clean it up");
       if (! tick_resurrect_when()) {
+        if (is_frozen) {
+          (void) level->thing_new(tp_find("explosion_cold"), curr_at);
+          (void) level->thing_new(tp_find("water"), curr_at);
+        }
+
         if (is_corpse_with_bones()) {
           dbg("Can place final bones");
           auto tpp = tp_random_bones();
