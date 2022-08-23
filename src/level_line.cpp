@@ -64,15 +64,29 @@ void Level::line_set_all_on_fire(const point s, const point e, size_t max_elems,
 {
   TRACE_NO_INDENT();
 
-  CON("line_set_all_on_fire");
   for (auto t : line(s, e, max_elems)) {
-    t->con("in the way");
+    //
+    // Spawn scalding steam if the fire effect is over water.
+    //
     if (t->is_water()) {
       thing_new(tp_find("steam"), t->curr_at);
+      continue;
     }
+
+    //
+    // If over water then do not set things on fire.
+    //
+    if (is_water(t->curr_at)) {
+      continue;
+    }
+
+    //
+    // Don't set fire to the location of the firer.
+    //
     if (t->curr_at == s) {
       continue;
     }
+
     t->on_fire_set(why);
   }
 }

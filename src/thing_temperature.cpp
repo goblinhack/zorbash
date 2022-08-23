@@ -341,7 +341,7 @@ void Thing::temperature_incr(int temperature_change)
         is_attacked_with_damage_fire(this, this, damage);
       }
     } else if (temperature_change < -50) {
-      if ((temperature_curr > 0) && (temperature_curr > 25)) {
+      if ((temperature_curr > 0) && (temperature_curr < 25)) {
         auto damage = (temperature_curr - temperature_change) / 10;
         if (is_stone()) {
           popup("Crack!");
