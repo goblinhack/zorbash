@@ -356,6 +356,9 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
           //
           DBG2("Cursor is not adjacent, try to jump there");
           TRACE_AND_INDENT();
+          if (move_no_shove_attack_allowed(mouse_at)) {
+            return true;
+          }
           if (try_to_jump_carefree(mouse_at)) {
             game->tick_begin("player tried to jump");
             return true;
