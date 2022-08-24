@@ -312,16 +312,28 @@ bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *att
     if (attack_lunge()) {
       lunge(best_hit_at);
     }
-    auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
-    use_anim->owner_set(this);
-    equip_use_anim_set(use_anim, equip);
+    TRACE_NO_INDENT();
+    //
+    // A monst only wielding a wand can have no swing anim
+    //
+    if (! attack_options->used_as.empty()) {
+      auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
+      use_anim->owner_set(this);
+      equip_use_anim_set(use_anim, equip);
+    }
   } else if (use_anim && (best_hit_at != use_anim->curr_at)) {
     //
     // Or, if there is a swing animation, don't create a duplicate
     //
-    auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
-    use_anim->owner_set(this);
-    equip_use_anim_set(use_anim, equip);
+    TRACE_NO_INDENT();
+    //
+    // A monst only wielding a wand can have no swing anim
+    //
+    if (! attack_options->used_as.empty()) {
+      auto use_anim = level->thing_new(attack_options->used_as, best_hit_at);
+      use_anim->owner_set(this);
+      equip_use_anim_set(use_anim, equip);
+    }
   }
 
   return true;

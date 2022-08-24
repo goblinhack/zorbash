@@ -2,6 +2,10 @@ import my
 import zorb_all
 
 
+def on_born(me, x, y):
+    zorb_all.on_born(me, x, y)
+
+
 def on_death_of_my_leader(me, x, y):
     if not my.thing_is_dead_or_dying(me):
         my.thing_msg(me, "The zorblin soldier cries out in rage!")
@@ -14,6 +18,7 @@ def tp_init(name, text_long_name):
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.text_short_description(self, "A grizzled war-weary soldier.")
     my.is_able_to_use_armor(self, True)
+    my.on_born_do(self, "me.on_born()")
     my.is_monst_class_b(self, True)
     my.is_biome_dungeon(self, True)
     my.stat_str(self, 10)

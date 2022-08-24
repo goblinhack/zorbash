@@ -168,7 +168,7 @@ void Thing::leader_set(Thingp l)
     }
 
     if (l) {
-      dbg("Will change leader %s->%s", old_leader->to_string().c_str(), l->to_string().c_str());
+      dbg("Will change leader %s -> %s", old_leader->to_string().c_str(), l->to_string().c_str());
     } else {
       dbg("Will remove leader %s", old_leader->to_string().c_str());
     }
@@ -187,15 +187,18 @@ void Thing::leader_set(Thingp l)
       //
       // I am the leader
       //
-      dbg("I am the leader");
-      l->on_you_are_declared_leader();
+      leader_id_set(NoThingId);
+      dbg("I am the leader, follower count %d", l->follower_count());
+      if (l->follower_count()) {
+        l->on_you_are_declared_leader();
+      }
     } else {
       //
       // You are being led
       //
       leader_id_set(l->id);
       l->follower_count_incr();
-      dbg("Leader set");
+      dbg("I am a follower");
       on_you_are_declared_a_follower(l);
     }
   } else {
@@ -211,6 +214,8 @@ void Thing::leader_set(Thingp l)
   } else {
     wake("leader is awake");
   }
+
+  dbg("Leader set finished");
 }
 
 void Thing::remove_leader(void)
@@ -242,6 +247,9 @@ void Thing::release_followers(void)
   //
   // Slow, but not used too often
   //
+  dbg("Release followers");
+  TRACE_AND_INDENT();
+
   {
     for (auto p : level->all_things) {
       auto follower = p.second;

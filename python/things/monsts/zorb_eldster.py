@@ -2,6 +2,10 @@ import my
 import zorb_all
 
 
+def on_born(me, x, y):
+    zorb_all.on_born(me, x, y)
+
+
 def on_death_of_a_follower(me, leader, x, y):
     if not my.thing_is_dead_or_dying(me):
         my.thing_msg(me, "The zorblin eldster cries out in rage!")
@@ -15,6 +19,7 @@ def tp_init(name, text_long_name):
     my.text_short_description(self, "A very war-weary goblin.")
     my.is_carrier_of_treasure_class_b(self, True)
     my.is_carrier_of_weapon_class_a(self, True)
+    my.on_born_do(self, "me.on_born()")
     my.stat_str(self, 8)
     my.health_initial_dice(self, "2d5")
     my.is_able_to_use_weapons(self, True)

@@ -2,14 +2,15 @@ import my
 import zorb_all
 
 
-def on_death_of_a_follower(me, leader, x, y):
-    if not my.thing_is_dead_or_dying(leader):
-        my.thing_msg(me, "The zorblin necromancer begins muttering some unknown words!")
-
-
 def on_born(me, x, y):
     my.thing_msg(me, "Hello mortal!")
     my.thing_carry(me, "staff_energy")
+    zorb_all.on_born(me, x, y)
+
+
+def on_death_of_a_follower(me, leader, x, y):
+    if not my.thing_is_dead_or_dying(leader):
+        my.thing_msg(me, "The zorblin necromancer begins muttering some unknown words!")
 
 
 def on_tick(owner, me, x, y):

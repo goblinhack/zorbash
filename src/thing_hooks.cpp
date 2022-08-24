@@ -23,7 +23,6 @@ void Thing::hooks_remove()
   auto i = immediate_owner();
 
   release_followers();
-
   remove_leader();
 
   //

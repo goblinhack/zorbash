@@ -22,9 +22,17 @@ void Thing::destroy(void)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
 
+  /*
+   * If seeing a crash in printing the description of the thing this can be handy.
+   *
+  if (maybe_infop()) {
+    LOG("Destroy %" PRIX32 " leader %" PRIX32, id.id, infop()->leader_id.id);
+  }
+   */
+
   if (is_loggable()) {
-    auto i_o = immediate_owner();
     dbg2("Destroy");
+    auto i_o = immediate_owner();
     if (i_o) {
       auto top_o = top_owner();
       if (top_o) {

@@ -381,6 +381,19 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
 
       point spawn_at = curr_at + point(x, y);
 
+      if (spawn_at.x < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (spawn_at.x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (spawn_at.y < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (spawn_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        continue;
+      }
+
       //
       // Radius needs to be the same as the check in carried_wand_highest_value_for_target
       //

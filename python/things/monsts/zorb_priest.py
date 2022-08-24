@@ -2,13 +2,14 @@ import my
 import zorb_all
 
 
+def on_born(me, x, y):
+    my.thing_carry(me, "wand_fire")
+    zorb_all.on_born(me, x, y)
+
+
 def on_death_of_a_follower(me, leader, x, y):
     if not my.thing_is_dead_or_dying(me):
         my.thing_msg(me, "The zorblin priest prays for the departed!")
-
-
-def on_born(me, x, y):
-    my.thing_carry(me, "wand_fire")
 
 
 def tp_init(name, text_long_name):

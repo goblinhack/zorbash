@@ -174,16 +174,17 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
     }
 
     wid_set_style(wid_level_description->wid_popup_container, UI_WID_STYLE_GRAY);
-    switch (l->difficulty_depth) {
-      case -1: break;
-      case 1: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, DARKGREEN); break;
-      case 2: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, OLIVEDRAB); break;
-      case 3: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, YELLOW); break;
-      case 4: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, TAN); break;
-      case 5: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, ORANGE); break;
-      case 6: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, DARKORANGE4); break;
-      case 7: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, RED); break;
-      case 8: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY50); break;
+    if (g_opt_ascii) {
+      switch (l->difficulty_depth) {
+        case -1: break;
+        case 1: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, DARKGREEN); break;
+        case 3: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, YELLOW); break;
+        case 4: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, TAN); break;
+        case 5: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, ORANGE); break;
+        case 6: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, DARKORANGE4); break;
+        case 7: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, RED); break;
+        case 8: wid_set_color(wid_level_description->wid_popup_container, WID_COLOR_BG, GRAY50); break;
+      }
     }
   }
 
@@ -495,35 +496,51 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
       case -1: break;
       case 1:
         bg_tilename = "dungeon_icon.1";
-        wid_set_color(b, WID_COLOR_BG, DARKGREEN);
+        if (g_opt_ascii) {
+          wid_set_color(b, WID_COLOR_BG, DARKGREEN);
+        }
         break;
       case 2:
         bg_tilename = "dungeon_icon.2";
-        wid_set_color(b, WID_COLOR_BG, OLIVEDRAB);
+        if (g_opt_ascii) {
+          wid_set_color(b, WID_COLOR_BG, OLIVEDRAB);
+        }
         break;
       case 3:
         bg_tilename = "dungeon_icon.3";
-        wid_set_color(b, WID_COLOR_BG, YELLOW);
+        if (g_opt_ascii) {
+          wid_set_color(b, WID_COLOR_BG, YELLOW);
+        }
         break;
       case 4:
         bg_tilename = "dungeon_icon.4";
-        wid_set_color(b, WID_COLOR_BG, TAN);
+        if (g_opt_ascii) {
+          wid_set_color(b, WID_COLOR_BG, TAN);
+        }
         break;
       case 5:
         bg_tilename = "dungeon_icon.5";
-        wid_set_color(b, WID_COLOR_BG, ORANGE);
+        if (g_opt_ascii) {
+          wid_set_color(b, WID_COLOR_BG, ORANGE);
+        }
         break;
       case 6:
         bg_tilename = "dungeon_icon.6";
-        wid_set_color(b, WID_COLOR_BG, DARKORANGE4);
+        if (g_opt_ascii) {
+          wid_set_color(b, WID_COLOR_BG, DARKORANGE4);
+        }
         break;
       case 7:
         bg_tilename = "dungeon_icon.7";
-        wid_set_color(b, WID_COLOR_BG, RED);
+        if (g_opt_ascii) {
+          wid_set_color(b, WID_COLOR_BG, RED);
+        }
         break;
       case 8:
         bg_tilename = "dungeon_icon.8";
-        wid_set_color(b, WID_COLOR_BG, GRAY50);
+        if (g_opt_ascii) {
+          wid_set_color(b, WID_COLOR_BG, GRAY50);
+        }
         break;
     }
   }

@@ -2,6 +2,10 @@ import my
 import tp
 
 
+def on_born(me, x, y):
+    zorb_all.on_born(me, x, y)
+
+
 def on_you_are_declared_leader(me, x, y):
     r = my.non_pcg_randint(1, 100)
     if r < 60:
@@ -32,6 +36,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_follow(self, True)
     my.is_allied_with(self, "zorb_pack")
     my.is_biome_dungeon(self, True)
+    my.distance_recruitment_max(self, 7)
     my.is_monst_class_b(self, True)
     my.is_pack(self, True)
     my.on_you_are_declared_a_follower_do(self, "me.on_you_are_declared_a_follower()")

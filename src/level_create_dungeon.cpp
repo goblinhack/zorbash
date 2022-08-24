@@ -834,28 +834,42 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         tp = tp_random_secret_door();
       }
 
+      int difficulty_offset = 0;
       if (d->is_monst_class_a(x, y)) {
-        if (d1000() < d1000_chance_of_creating_monst_class_a) {
-          tp = tp_random_monst_class_a(p);
-        }
+        dbg2("INF: Need monst class a");
+        difficulty_offset = 1;
       }
       if (d->is_monst_class_b(x, y)) {
-        if (d1000() < d1000_chance_of_creating_monst_class_b) {
-          tp = tp_random_monst_class_b(p);
-        }
+        dbg2("INF: Need monst class b");
+        difficulty_offset = 50;
       }
       if (d->is_monst_class_c(x, y)) {
-        if (d1000() < d1000_chance_of_creating_monst_class_c) {
-          tp = tp_random_monst_class_c(p);
-        }
+        dbg2("INF: Need monst class c");
+        difficulty_offset = 100;
       }
       if (d->is_monst_class_d(x, y)) {
-        if (d1000() < d1000_chance_of_creating_monst_class_d) {
-          tp = tp_random_monst_class_d(p);
-        }
+        dbg2("INF: Need monst class d");
+        difficulty_offset = 200;
       }
       if (d->is_monst_class_e(x, y)) {
-        if (d1000() < d1000_chance_of_creating_monst_class_e) {
+        dbg2("INF: Need monst class e");
+        difficulty_offset = 500;
+      }
+
+      if (difficulty_offset) {
+        if (d1000() < d1000_chance_of_creating_monst_class_a + difficulty_offset) {
+          tp = tp_random_monst_class_a(p);
+        }
+        if (! tp && (d1000() < d1000_chance_of_creating_monst_class_b + difficulty_offset)) {
+          tp = tp_random_monst_class_b(p);
+        }
+        if (! tp && (d1000() < d1000_chance_of_creating_monst_class_c + difficulty_offset)) {
+          tp = tp_random_monst_class_c(p);
+        }
+        if (! tp && (d1000() < d1000_chance_of_creating_monst_class_d + difficulty_offset)) {
+          tp = tp_random_monst_class_d(p);
+        }
+        if (! tp && (d1000() < d1000_chance_of_creating_monst_class_e + difficulty_offset)) {
           tp = tp_random_monst_class_e(p);
         }
       }
@@ -1068,10 +1082,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         } else if (t->is_bag()) {
           dbg("INF: Placed '%s'", t->text_short_capitalised().c_str());
         } else if (t->is_monst()) {
-          //
-          // Already logged
-          //
-          // dbg("INF: Placed random monster '%s'", t->text_short_capitalised().c_str());
+          dbg("INF: Placed monster '%s'", t->text_short_capitalised().c_str());
         } else {
           //
           // Doors etc... don't log, not as interesting

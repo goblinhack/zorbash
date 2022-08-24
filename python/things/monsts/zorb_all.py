@@ -2,6 +2,18 @@ import my
 import tp
 
 
+def on_born(me, x, y):
+    my.thing_friend(me, "zorb_wizard")
+    my.thing_friend(me, "zorb_captain")
+    my.thing_friend(me, "zorb_eldster")
+    my.thing_friend(me, "zorb_necro")
+    my.thing_friend(me, "zorb_pirate")
+    my.thing_friend(me, "zorb_priest")
+    my.thing_friend(me, "zorb_single")
+    my.thing_friend(me, "zorb_soldier")
+    my.thing_friend(me, "zorb_wizard")
+
+
 def on_you_nat_att(me, x, y):
     sound = f"hiss{my.non_pcg_randint(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
@@ -45,7 +57,6 @@ def tp_init(name, text_long_name):
     my.damage_nat_att_type(self, "gore")
     my.distance_avoid(self, 5)
     my.distance_leader_max(self, 5)
-    my.distance_recruitment_max(self, 7)
     my.distance_vision(self, 7)
     my.environ_avoids_acid(self, 100)
     my.environ_avoids_fire(self, 10)
@@ -118,6 +129,7 @@ def tp_init(name, text_long_name):
     my.noise_decibels_hearing(self, 10)
     my.noise_on_moving(self, 5)
     my.normal_placement_rules(self, True)
+    my.on_born_do(self, "me.on_born()")
     my.on_death_do(self, "zorb_all.on_death()")
     my.on_death_drop_all_items(self, True)
     my.on_you_are_hit_but_dodge_it_do(self, "zorb_all.on_you_are_hit_but_dodge_it_do()")

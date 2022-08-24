@@ -42,15 +42,23 @@ void Level::assign_leaders_and_followers(void)
   log("Choose followers");
   for (auto t : cands) {
     Thingp group_cand = nullptr;
-    dbg("Group cand %s", t->to_short_string().c_str());
     for (const auto &g : groups) {
       for (const auto &m : g.second) {
         //
         // Filter to allies only
         //
-        if (t->tp()->allies.find(m->tp()) == t->tp()->allies.end()) {
+        if (t->tp()->allies.find(m->tp()) != t->tp()->allies.end()) {
+          //
+          // ok
+          //
+        } else if (t->is_friend(m)) {
+          //
+          // ok
+          //
+        } else {
           continue;
         }
+
         //
         // That are close enough
         //
@@ -69,12 +77,10 @@ void Level::assign_leaders_and_followers(void)
   //
   // Ok now we have everyone in their groups
   //
-  if (0) {
-    for (const auto &g : groups) {
-      dbg("Group %p", g.first);
-      for (const auto &m : g.second) {
-        dbg("- Member %s", m->to_short_string().c_str());
-      }
+  for (const auto &g : groups) {
+    dbg("Group %p", g.first);
+    for (const auto &m : g.second) {
+      dbg("- Member %s", m->to_short_string().c_str());
     }
   }
 

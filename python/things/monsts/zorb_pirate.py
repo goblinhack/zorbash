@@ -2,15 +2,16 @@ import my
 import zorb_all
 
 
-def on_death_of_a_follower(me, leader, x, y):
-    if not my.thing_is_dead_or_dying(me):
-        my.thing_msg(me, "The zorblin pirate cries out: Aaar!")
-
-
 def on_born(me, x, y):
     my.thing_carry(me, "map_treasure")
     my.thing_carry(me, "gold6")
     my.thing_carry(me, "cutlass")
+    zorb_all.on_born(me, x, y)
+
+
+def on_death_of_a_follower(me, leader, x, y):
+    if not my.thing_is_dead_or_dying(me):
+        my.thing_msg(me, "The zorblin pirate cries out: Aaar!")
 
 
 def tp_init(name, text_long_name):
