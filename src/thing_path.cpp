@@ -352,13 +352,20 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
           }
         } else {
           //
-          // If more than one hop away, we must jump.
+          // If more than one hop away, we must jump if we cannot move to the next hop without hitting something.
+          //
+          DBG2("Cursor is not adjacent, try to move to the next hop first");
+          TRACE_AND_INDENT();
+
+          if (move_no_shove_no_attack(future_pos)) {
+            return true;
+          }
+
+          //
+          // Ok something is in the way, try to jump.
           //
           DBG2("Cursor is not adjacent, try to jump there");
           TRACE_AND_INDENT();
-          if (move_no_shove_attack_allowed(mouse_at)) {
-            return true;
-          }
           if (try_to_jump_carefree(mouse_at)) {
             game->tick_begin("player tried to jump");
             return true;
