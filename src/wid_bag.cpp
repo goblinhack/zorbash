@@ -50,14 +50,14 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     auto tl = t->itemsp()->bag_position + point(1, 1);
 
     if (t->itemsp()->bag_position == point(-1, -1)) {
-      bag->log("+ item %s at %d,%d (not carried in bag)", t->to_string().c_str(), t->itemsp()->bag_position.x,
+      bag->log("+ item %s at %d,%d (not carried in bag)", t->to_short_string().c_str(), t->itemsp()->bag_position.x,
                t->itemsp()->bag_position.y);
       continue;
     }
 
     auto br = tl + point(t->item_width() - 1, t->item_height() - 1);
 
-    auto w = wid_new_square_button(wid_bag_container, "wid_bag item" + t->to_string());
+    auto w = wid_new_square_button(wid_bag_container, "wid_bag item" + t->to_short_string());
     wid_set_pos(w, tl, br);
     wid_set_style(w, UI_WID_STYLE_DARK);
 
@@ -65,7 +65,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
       wid_set_style(w, UI_WID_STYLE_RED);
     }
 
-    bag->log("+ item %s at %d,%d", t->to_string().c_str(), t->itemsp()->bag_position.x, t->itemsp()->bag_position.y);
+    bag->log("+ item %s at %d,%d", t->to_short_string().c_str(), t->itemsp()->bag_position.x, t->itemsp()->bag_position.y);
 
     wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
     wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
@@ -85,7 +85,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
 
     auto tile = tile_first(tiles);
     if (! tile) {
-      bag->err("+ no tile item %s at %d,%d", t->to_string().c_str(), t->itemsp()->bag_position.x,
+      bag->err("+ no tile item %s at %d,%d", t->to_short_string().c_str(), t->itemsp()->bag_position.x,
                t->itemsp()->bag_position.y);
     }
 
@@ -106,7 +106,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     //
     auto slot = game->level->inventory_slot(t);
     if (slot != -1) {
-      auto w = wid_new_square_button(wid_bag_container, "wid_bag button" + t->to_string());
+      auto w = wid_new_square_button(wid_bag_container, "wid_bag button" + t->to_short_string());
       wid_set_pos(w, tl, tl);
       if (g_opt_ascii) {
         wid_set_text(w, std::to_string(slot + 1));
@@ -439,7 +439,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   // Try to place the item at the chosen location, or the last place thie
   // iteam was at, or last resort, anywhere.
   // /
-  bag->log("Try to place %s at %d,%d", t->to_string().c_str(), at.x, at.y);
+  bag->log("Try to place %s at %d,%d", t->to_short_string().c_str(), at.x, at.y);
   if (bag->bag_can_place_at(t, at)) {
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, at);
   } else if (t->maybe_itemsp() && bag->bag_can_place_at(t, t->itemsp()->last_bag_position)) {
@@ -584,7 +584,7 @@ bool Game::wid_bag_move_item(Thingp t)
     for (auto w : wid_find_all_containing(b->wid_bag_container, "wid_bag item")) {
       player->log("+ current item %s", wid_get_name(w).c_str());
       if (wid_get_thing_id_context(w).id == t->id.id) {
-        player->log("Moving bag thing %s", t->to_string().c_str());
+        player->log("Moving bag thing %s", t->to_short_string().c_str());
         wid_bag_container = wid_get_parent(w);
         bag_id            = wid_get_thing_id_context(wid_bag_container);
         bag               = game->thing_find(bag_id);

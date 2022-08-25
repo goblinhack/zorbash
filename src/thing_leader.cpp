@@ -189,9 +189,7 @@ void Thing::leader_set(Thingp l)
       //
       leader_id_set(NoThingId);
       dbg("I am the leader, follower count %d", l->follower_count());
-      if (l->follower_count()) {
-        l->on_you_are_declared_leader();
-      }
+      l->on_you_are_declared_leader();
     } else {
       //
       // You are being led

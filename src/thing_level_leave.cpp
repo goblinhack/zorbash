@@ -9,8 +9,13 @@ void Thing::level_leave(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_loggable()) {
-    dbg("Leave %s", level->to_string().c_str());
+  //
+  // Too noisy at level destroy time.
+  //
+  if (! level->is_being_destroyed) {
+    if (is_loggable()) {
+      dbg("Leave %s", level->to_string().c_str());
+    }
   }
   TRACE_AND_INDENT();
 
@@ -118,7 +123,7 @@ void Thing::level_leave(void)
   game->request_remake_rightbar = true;
 
   if (is_player()) {
-    level->is_completed    = true;
+    level->is_completed          = true;
     level->is_entered_by_falling = false;
   }
 }

@@ -160,7 +160,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
         }
 
         dbg("Firing named laser (at collatoral damage) with: %s at %s dist %f", laser->to_string().c_str(),
-            target->to_string().c_str(), distance(curr_at, target->curr_at));
+            target->to_short_string().c_str(), distance(curr_at, target->curr_at));
         TRACE_AND_INDENT();
 
         LaserInfo info {};
@@ -202,7 +202,7 @@ bool Thing::laser_fire_at(Thingp item, const std::string &target_name_laser, Thi
         return false;
       }
 
-      dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(), target->to_string().c_str(),
+      dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(), target->to_short_string().c_str(),
           distance(curr_at, target->curr_at));
       TRACE_AND_INDENT();
 

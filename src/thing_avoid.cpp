@@ -128,7 +128,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->is_player()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid dangerous as I am weak: %s", it->to_string().c_str());
+            dbg("Avoid dangerous as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -139,7 +139,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->is_meat_eater() || it->attack_meat()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid meat eater as I am weak: %s", it->to_string().c_str());
+            dbg("Avoid meat eater as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -150,7 +150,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->attack_humanoid()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid humanoid eater as I am weak: %s", it->to_string().c_str());
+            dbg("Avoid humanoid eater as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -161,7 +161,7 @@ bool Thing::will_avoid_monst(const point p)
       if (it->attack_living()) {
         if (is_dangerous(it)) {
           if (health() < health_max() / 4) {
-            dbg("Avoid living eater as I am weak: %s", it->to_string().c_str());
+            dbg("Avoid living eater as I am weak: %s", it->to_short_string().c_str());
             return true;
           }
         }
@@ -173,14 +173,14 @@ bool Thing::will_avoid_monst(const point p)
       // But allow baby slimes to attack each other!
       //
       if (it->is_jelly_parent()) {
-        dbg("Avoid jelly eater: %s", it->to_string().c_str());
+        dbg("Avoid jelly eater: %s", it->to_short_string().c_str());
         return true;
       }
     }
 
     if (is_dangerous(it)) {
       if (health() < health_max() / 4) {
-        dbg("Avoid dangerous: %s", it->to_string().c_str());
+        dbg("Avoid dangerous: %s", it->to_short_string().c_str());
         return true;
       }
     }

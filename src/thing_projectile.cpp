@@ -124,7 +124,7 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
     return nullptr;
   }
 
-  dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(), target->to_string().c_str());
+  dbg("Firing named projectile with: %s at %s", projectile->to_string().c_str(), target->to_short_string().c_str());
 
   if (! projectile->is_projectile()) {
     if (is_player()) {

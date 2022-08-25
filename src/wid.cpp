@@ -6747,13 +6747,18 @@ void wid_mouse_move(Widp w)
 //
 // Display all widgets
 //
-void wid_display_all(void)
+void wid_display_all(bool ok_to_handle_requests)
 {
   TRACE_NO_INDENT();
   ascii_clear_display();
 
-  TRACE_NO_INDENT();
-  wid_handle_requests();
+  //
+  // A bit faster to avoid this when flushing the display
+  //
+  if (ok_to_handle_requests) {
+    TRACE_NO_INDENT();
+    wid_handle_requests();
+  }
 
   TRACE_NO_INDENT();
   gl_leave_2d_mode();

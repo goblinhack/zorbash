@@ -43,7 +43,7 @@ bool Thing::on_firing_at_something(Thingp target)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), target->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), target->to_short_string().c_str());
 
     return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) curr_at.x,
                            (unsigned int) curr_at.y);

@@ -111,7 +111,7 @@ bool Thing::possible_to_attack(const Thingp victim)
         // If stuck in an engulfer, we can only attack locally
         //
         if (victim->curr_at != curr_at) {
-          dbg("Cannot attack %s, stuck in an engulfer (%s)", victim->to_string().c_str(), t->to_string().c_str());
+          dbg("Cannot attack %s, stuck in an engulfer (%s)", victim->to_string().c_str(), t->to_short_string().c_str());
           return false;
         }
       }

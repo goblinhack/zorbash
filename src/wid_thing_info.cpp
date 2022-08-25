@@ -394,7 +394,7 @@ void Game::wid_thing_info_clear_popup(void)
 bool Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
 {
   TRACE_AND_INDENT();
-  DBG3("Create wid thing info for %s", t->to_string().c_str());
+  DBG3("Create wid thing info for %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (game->request_remake_rightbar) {

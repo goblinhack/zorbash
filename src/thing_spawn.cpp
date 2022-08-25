@@ -208,7 +208,7 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
     radius_max = item->tp()->blast_max_radius();
   }
 
-  dbg("Spawn %s in radius range %u to %u at %s", what.c_str(), radius_min, radius_max, target->to_string().c_str());
+  dbg("Spawn %s in radius range %u to %u at %s", what.c_str(), radius_min, radius_max, target->to_short_string().c_str());
 
   //
   // Don't spawn too many monsts

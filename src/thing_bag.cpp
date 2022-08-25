@@ -531,24 +531,26 @@ bool Thing::bag_remove(Thingp item)
   auto bw = capacity_width();
   auto bh = capacity_height();
 
-  IF_DEBUG2
-  {
-    log("Bag contents before remove of %s:", item->to_short_string().c_str());
-    for (auto y = 0; y < bh; y++) {
-      std::string s;
-      for (auto x = 0; x < bw; x++) {
-        auto id = get(bag, x, y);
-        if (id == NoThingId) {
-          s += ".";
-          continue;
+  if (! is_monst()) {
+    IF_DEBUG2
+    {
+      log("Bag contents before remove of %s:", item->to_short_string().c_str());
+      for (auto y = 0; y < bh; y++) {
+        std::string s;
+        for (auto x = 0; x < bw; x++) {
+          auto id = get(bag, x, y);
+          if (id == NoThingId) {
+            s += ".";
+            continue;
+          }
+          if (id == item->id) {
+            s += "i";
+          } else {
+            s += "o";
+          }
         }
-        if (id == item->id) {
-          s += "i";
-        } else {
-          s += "o";
-        }
+        log("bag[%s]", s.c_str());
       }
-      log("bag[%s]", s.c_str());
     }
   }
 
@@ -571,24 +573,26 @@ bool Thing::bag_remove(Thingp item)
     }
   }
 
-  IF_DEBUG2
-  {
-    log("Bag contents after remove of %s:", item->to_short_string().c_str());
-    for (auto y = 0; y < bh; y++) {
-      std::string s;
-      for (auto x = 0; x < bw; x++) {
-        auto id = get(bag, x, y);
-        if (id == NoThingId) {
-          s += ".";
-          continue;
+  if (! is_monst()) {
+    IF_DEBUG2
+    {
+      log("Bag contents after remove of %s:", item->to_short_string().c_str());
+      for (auto y = 0; y < bh; y++) {
+        std::string s;
+        for (auto x = 0; x < bw; x++) {
+          auto id = get(bag, x, y);
+          if (id == NoThingId) {
+            s += ".";
+            continue;
+          }
+          if (id == item->id) {
+            s += "i";
+          } else {
+            s += "o";
+          }
         }
-        if (id == item->id) {
-          s += "i";
-        } else {
-          s += "o";
-        }
+        log("bag[%s]", s.c_str());
       }
-      log("bag[%s]", s.c_str());
     }
   }
 

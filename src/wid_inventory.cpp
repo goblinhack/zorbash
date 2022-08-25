@@ -841,7 +841,7 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
     //
     auto slot = game->level->inventory_slot(t);
     if (slot != -1) {
-      auto w = wid_new_square_button(parent, "wid_bag button" + t->to_string());
+      auto w = wid_new_square_button(parent, "wid_bag button" + t->to_short_string());
       wid_set_pos(w, tl, tl);
       if (g_opt_ascii) {
         wid_set_text(w, std::to_string(slot + 1));

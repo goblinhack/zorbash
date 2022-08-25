@@ -516,7 +516,7 @@ void Thing::dump_equip(void)
   {
     auto t = equip_get(e);
     if (t) {
-      dbg("Equipped: %s", t->to_string().c_str());
+      dbg("Equipped: %s", t->to_short_string().c_str());
     }
   }
 }

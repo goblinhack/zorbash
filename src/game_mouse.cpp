@@ -136,7 +136,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
             continue;
           }
 
-          IF_DEBUG2 { player->log("Yes; close enough to attack %s?", t->to_string().c_str()); }
+          IF_DEBUG2 { player->log("Yes; close enough to attack %s?", t->to_short_string().c_str()); }
           TRACE_AND_INDENT();
 
           if (! t->is_dead) {
@@ -199,7 +199,7 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           }
 
           if (t->is_shovable()) {
-            IF_DEBUG2 { player->log("Yes; close enough to shove %s?", t->to_string().c_str()); }
+            IF_DEBUG2 { player->log("Yes; close enough to shove %s?", t->to_short_string().c_str()); }
             TRACE_AND_INDENT();
             player->try_to_shove(level->cursor->curr_at);
             return true;

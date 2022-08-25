@@ -100,7 +100,7 @@ static void wid_collect_slot(int slot)
 
   for (auto t : collect_items) {
     if (t) {
-      player->log("Old collect items: %s", t->to_string().c_str());
+      player->log("Old collect items: %s", t->to_short_string().c_str());
     } else {
       player->log("Old collect items: <empty slot>");
     }
@@ -314,14 +314,14 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
         continue;
       }
 
-      player->log("Collect item cand: %s", t->to_string().c_str());
+      player->log("Collect item cand: %s", t->to_short_string().c_str());
       if (found.find(t) != found.end()) {
-        player->log("- exists: %s", t->to_string().c_str());
+        player->log("- exists: %s", t->to_short_string().c_str());
         continue;
       }
 
       if (! t->is_collectable()) {
-        player->log("- not collectable: %s", t->to_string().c_str());
+        player->log("- not collectable: %s", t->to_short_string().c_str());
         continue;
       }
 
@@ -359,13 +359,13 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
 
       if (t->maybe_itemsp()) {
         for (const auto t : t->item_vector()) {
-          player->log("Collect sub-item cand: %s", t->to_string().c_str());
+          player->log("Collect sub-item cand: %s", t->to_short_string().c_str());
           if (found.find(t) != found.end()) {
-            player->log("- exists: %s", t->to_string().c_str());
+            player->log("- exists: %s", t->to_short_string().c_str());
             continue;
           }
           if (! t->is_collectable()) {
-            player->log("- not collectable: %s", t->to_string().c_str());
+            player->log("- not collectable: %s", t->to_short_string().c_str());
             continue;
           }
           found[ t ] = true;
@@ -376,7 +376,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
 
     for (auto t : collect_items) {
       if (t) {
-        player->log("Final collect items: %s", t->to_string().c_str());
+        player->log("Final collect items: %s", t->to_short_string().c_str());
       } else {
         player->log("Final collect items: <empty slot>");
       }

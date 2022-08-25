@@ -798,7 +798,7 @@ void sdl_flush_display(bool force)
 
   glEnable(GL_TEXTURE_2D);
   gl_enter_2d_mode();
-  wid_display_all();
+  wid_display_all(false);
   gl_leave_2d_mode();
   gl_enter_2d_mode(game->config.window_pix_width, game->config.window_pix_height);
 

@@ -67,21 +67,21 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
       continue;
     }
 
-    dbg("Collision-candidate: %s", t->to_string().c_str());
+    dbg("Collision-candidate: %s", t->to_short_string().c_str());
 
     //
     // Skip things that aren't really hitable.
     //
     if (t->tp()->gfx_pixelart_equip_carry_anim()) {
       if (is_loggable()) {
-        dbg("Collision-candidate: Ignore %s skip, not hittable", t->to_string().c_str());
+        dbg("Collision-candidate: Ignore %s skip, not hittable", t->to_short_string().c_str());
       }
       continue;
     }
 
     if (! cand.priority) {
       if (is_loggable()) {
-        dbg("Collision-candidate: Ignore %s no priority", t->to_string().c_str());
+        dbg("Collision-candidate: Ignore %s no priority", t->to_short_string().c_str());
       }
       continue;
     }
@@ -108,7 +108,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
       // If this target is higher prio, prefer it.
       //
       best = &cand;
-      dbg("Collision-candidate: Add %s", t->to_string().c_str());
+      dbg("Collision-candidate: Add %s", t->to_short_string().c_str());
     } else if (cand.priority == best->priority) {
       //
       // If this target is closer, prefer it.
@@ -121,11 +121,11 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
 
       if (dist_cand < dist_best) {
         best = &cand;
-        dbg("Collision-candidate: Add %s", t->to_string().c_str());
+        dbg("Collision-candidate: Add %s", t->to_short_string().c_str());
       }
     } else {
       if (is_loggable()) {
-        dbg("Collision-candidate: Ignore %s", t->to_string().c_str());
+        dbg("Collision-candidate: Ignore %s", t->to_short_string().c_str());
       }
     }
   }

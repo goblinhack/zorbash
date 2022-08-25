@@ -76,7 +76,7 @@ void Thing::throw_at(Thingp what, Thingp target)
     throw_at = curr_at + point(dx, dy);
 
     float dist = distance(curr_at, throw_at);
-    dbg("Throw %s at new point %s, dist %f, max %f", what->to_string().c_str(), throw_at.to_string().c_str(), dist,
+    dbg("Throw %s at new point %s, dist %f, max %f", what->to_short_string().c_str(), throw_at.to_string().c_str(), dist,
         max_dist);
 
     FOR_ALL_GRID_THINGS(level, t, throw_at.x, throw_at.y)

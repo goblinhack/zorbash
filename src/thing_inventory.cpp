@@ -132,7 +132,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
   TRACE_NO_INDENT();
 
   dbg("Create inventory particle %s with target %s", item->to_short_string().c_str(),
-      particle_target->to_string().c_str());
+      particle_target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if (game->in_transit_item) {
@@ -392,7 +392,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
 {
   TRACE_NO_INDENT();
 
-  dbg("Inventory remove %s with target %s", item->to_short_string().c_str(), particle_target->to_string().c_str());
+  dbg("Inventory remove %s with target %s", item->to_short_string().c_str(), particle_target->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   auto player = level->player;

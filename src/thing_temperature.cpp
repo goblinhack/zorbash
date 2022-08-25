@@ -68,7 +68,7 @@ void Thing::temperature_tick(void)
     location_temp += t->temperature;
     location_temp_set = true;
 
-    dbg("Location temp now %d due to %s (%d)", location_temp, t->to_string().c_str(), t->temperature);
+    dbg("Location temp now %d due to %s (%d)", location_temp, t->to_short_string().c_str(), t->temperature);
   }
   FOR_ALL_THINGS_END()
 

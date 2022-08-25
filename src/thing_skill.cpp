@@ -192,7 +192,7 @@ int Thing::skillstone_count(void)
     if (! t->is_skillstone()) {
       continue;
     }
-    dbg("Found a skillstone: %s", t->to_string().c_str());
+    dbg("Found a skillstone: %s", t->to_short_string().c_str());
     v++;
   }
   return v;

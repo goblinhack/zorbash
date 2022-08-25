@@ -21,13 +21,13 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
 
   if (stolen) {
     if (target) {
-      dbg("Drop (being stolen) %s at %s", what->to_short_string().c_str(), target->to_string().c_str());
+      dbg("Drop (being stolen) %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
     } else {
       dbg("Drop (being stolen) %s", what->to_short_string().c_str());
     }
   } else {
     if (target) {
-      dbg("Drop %s at %s", what->to_short_string().c_str(), target->to_string().c_str());
+      dbg("Drop %s at %s", what->to_short_string().c_str(), target->to_short_string().c_str());
     } else {
       dbg("Drop %s", what->to_short_string().c_str());
     }

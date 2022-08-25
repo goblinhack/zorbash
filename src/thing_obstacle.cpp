@@ -255,7 +255,7 @@ bool Thing::ai_obstacle(Thingp it)
   // Lava, acid etc...
   //
   if (is_disliked_by_me(it->curr_at)) {
-    // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+    // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
     return true;
   }
 
@@ -264,7 +264,7 @@ bool Thing::ai_obstacle(Thingp it)
   //
   if (it->is_floating() || it->is_flying()) {
     if (is_floating() || is_flying()) {
-      // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
       return true;
     }
   }
@@ -274,7 +274,7 @@ bool Thing::ai_obstacle(Thingp it)
   //
   if (it->is_ethereal()) {
     if (is_ethereal()) {
-      // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
       return true;
     }
   }
@@ -284,7 +284,7 @@ bool Thing::ai_obstacle(Thingp it)
   //
   if (it->is_able_to_walk_through_walls()) {
     if (is_able_to_walk_through_walls()) {
-      // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
       return true;
     }
   }
@@ -321,7 +321,7 @@ bool Thing::ai_obstacle(Thingp it)
           return false;
         }
       }
-      // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
       return true;
     }
   }
@@ -329,7 +329,7 @@ bool Thing::ai_obstacle(Thingp it)
   if (it->is_secret_door()) {
     auto dist = distance(it->curr_at, curr_at);
     if (dist > THING_AI_CAN_SEE_SECRET_DOOR_DIST) {
-      // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
       return true;
     }
     return false;
@@ -342,7 +342,7 @@ bool Thing::ai_obstacle(Thingp it)
     if (is_minion()) {
       if (it->is_mob()) {
         if (it == top_mob()) {
-          // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+          // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
           return true;
         }
       }
@@ -350,14 +350,14 @@ bool Thing::ai_obstacle(Thingp it)
   }
 
   if (same_leader(it)) {
-    // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+    // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
     return true;
   }
 
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
       if (! is_floating() && ! is_flying()) {
-        // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+        // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
         return true;
       }
     }
@@ -383,7 +383,7 @@ bool Thing::ai_obstacle(Thingp it)
       //
       // Ignore is_ethereal to make it easier to attack ghosts
       //
-      // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+      // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
       return true;
     }
   }
@@ -394,7 +394,7 @@ bool Thing::ai_obstacle(Thingp it)
       // Allow passing over corpses
       //
       if (it->is_obstacle_when_dead()) {
-        // log("%s is an AI obstacle line %d", it->to_string().c_str(), __LINE__);
+        // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
         return true;
       }
     }

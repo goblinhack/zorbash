@@ -78,5 +78,6 @@ void wid_progress_bar(const std::string &title, float pct)
   }
 
   wid_update(wid_progress_bar_window->wid_text_area->wid_text_area);
+
   sdl_flush_display(true /* force */);
 }

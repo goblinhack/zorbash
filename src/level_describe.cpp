@@ -410,19 +410,19 @@ void Level::describe(Thingp t)
     return;
   }
 
-  dbg2("Describe %s", t->to_string().c_str());
+  dbg2("Describe %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   if ((game->state == Game::STATE_INVENTORY) || (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) ||
       (game->state == Game::STATE_COLLECTING_ITEMS) || (game->state == Game::STATE_SAVE_MENU) ||
       (game->state == Game::STATE_LOAD_MENU) || (game->state == Game::STATE_QUIT_MENU) ||
       (game->state == Game::STATE_KEYBOARD_MENU) || (game->state == Game::STATE_ENCHANTING_ITEMS)) {
-    dbg2("Describe %s; no wrong state", t->to_string().c_str());
+    dbg2("Describe %s; no wrong state", t->to_short_string().c_str());
     return;
   }
 
   if (! t->is_described_when_hovering_over()) {
-    dbg2("Describe %s; no not described", t->to_string().c_str());
+    dbg2("Describe %s; no not described", t->to_short_string().c_str());
     return;
   }
 
@@ -466,9 +466,9 @@ void Level::describe(Thingp t)
 
   wid_thing_info_fini("describe2");
 
-  dbg2("Describe %s?", t->to_string().c_str());
+  dbg2("Describe %s?", t->to_short_string().c_str());
   if (! t->text_short_description().empty() || ! t->text_long_description().empty()) {
-    dbg2("Describe %s; has no text", t->to_string().c_str());
+    dbg2("Describe %s; has no text", t->to_short_string().c_str());
     t->show_botcon_description();
     return;
   }

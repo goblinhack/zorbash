@@ -831,13 +831,13 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
     Py_RETURN_NONE;
   }
 
-  IF_DEBUG { hitter->log("Check if possible to attack target %s", target->to_string().c_str()); }
+  IF_DEBUG { hitter->log("Check if possible to attack target %s", target->to_short_string().c_str()); }
 
   if (hitter->possible_to_attack(target)) {
-    IF_DEBUG { hitter->log("Check if possible to target %s; yes", target->to_string().c_str()); }
+    IF_DEBUG { hitter->log("Check if possible to target %s; yes", target->to_short_string().c_str()); }
     Py_RETURN_TRUE;
   } else {
-    IF_DEBUG { hitter->log("Check if possible to attack %s; no", target->to_string().c_str()); }
+    IF_DEBUG { hitter->log("Check if possible to attack %s; no", target->to_short_string().c_str()); }
     Py_RETURN_FALSE;
   }
 }
@@ -882,7 +882,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  IF_DEBUG { owner->log("Fire %s at %s", item, target->to_string().c_str()); }
+  IF_DEBUG { owner->log("Fire %s at %s", item, target->to_short_string().c_str()); }
 
   auto what  = std::string(item);
   auto itemp = tp_find(what);
@@ -910,7 +910,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
       Py_RETURN_FALSE;
     }
   } else {
-    owner->err("Cannot fire %s at %s", item, target->to_string().c_str());
+    owner->err("Cannot fire %s at %s", item, target->to_short_string().c_str());
     Py_RETURN_FALSE;
   }
 }

@@ -126,7 +126,7 @@ Thingp Thing::most_dangerous_visible_thing(void)
 
         score += t->health_max();
         possible.push_back(std::make_pair(t, score));
-        dbg("Potential danger: %s", t->to_string().c_str());
+        dbg("Potential danger: %s", t->to_short_string().c_str());
       }
       FOR_ALL_THINGS_END()
     }
@@ -288,7 +288,7 @@ Thingp Thing::best_visible_target_get(void)
 
         score += t->health_max();
         possible.push_back(std::make_pair(t, score));
-        dbg("Potential target: %s", t->to_string().c_str());
+        dbg("Potential target: %s", t->to_short_string().c_str());
       }
       FOR_ALL_THINGS_END()
     }

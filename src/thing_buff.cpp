@@ -141,7 +141,7 @@ bool Thing::buff_add(Tpp what)
     return false;
   }
 
-  dbg("Add buff: %s", t->to_string().c_str());
+  dbg("Add buff: %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   buff_add(t);
@@ -183,7 +183,7 @@ void Thing::buff_tick(void)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      dbg("Buff (%s)", t->to_string().c_str());
+      dbg("Buff (%s)", t->to_short_string().c_str());
       if (! t->on_tick()) {
         return;
       }

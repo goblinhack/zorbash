@@ -327,7 +327,7 @@ bool Thing::carry(Thingp item, bool can_equip)
     for (const auto t : item->item_vector()) {
       if (! t->is_bag_item()) {
         if (! carry(t)) {
-          err("Could not auto carry %s's non item: %s", item->to_short_string().c_str(), t->to_string().c_str());
+          err("Could not auto carry %s's non item: %s", item->to_short_string().c_str(), t->to_short_string().c_str());
         }
       }
     }
@@ -383,12 +383,12 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
     }
 
     if (t->is_dead) {
-      dbg("Potential item to carry, no, is dead: %s", t->to_string().c_str());
+      dbg("Potential item to carry, no, is dead: %s", t->to_short_string().c_str());
       continue;
     }
 
     if (t->immediate_owner()) {
-      dbg("Potential item to carry, no, has owner: %s", t->to_string().c_str());
+      dbg("Potential item to carry, no, has owner: %s", t->to_short_string().c_str());
       continue;
     }
 
@@ -408,11 +408,11 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
     }
 
     if (worth_collecting(t) < 0) {
-      dbg("Potential item to carry, no, not worth it: %s", t->to_string().c_str());
+      dbg("Potential item to carry, no, not worth it: %s", t->to_short_string().c_str());
       continue;
     }
 
-    dbg("Potential item to carry: %s", t->to_string().c_str());
+    dbg("Potential item to carry: %s", t->to_short_string().c_str());
     items.push_back(std::make_pair(t, value(t)));
   }
   FOR_ALL_THINGS_END()

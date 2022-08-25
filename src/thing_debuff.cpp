@@ -120,7 +120,7 @@ bool Thing::debuff_add(Tpp what)
     return false;
   }
 
-  dbg("Add debuff: %s", t->to_string().c_str());
+  dbg("Add debuff: %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   debuff_add(t);
@@ -152,7 +152,7 @@ bool Thing::debuff_add_if_not_found(Tpp what)
     return false;
   }
 
-  dbg("Add debuff: %s", t->to_string().c_str());
+  dbg("Add debuff: %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
 
   debuff_add(t);
@@ -192,7 +192,7 @@ void Thing::debuff_tick(void)
   {
     auto t = level->thing_find(item.id);
     if (t) {
-      dbg("Debuff (%s)", t->to_string().c_str());
+      dbg("Debuff (%s)", t->to_short_string().c_str());
       if (! t->on_tick()) {
         return;
       }

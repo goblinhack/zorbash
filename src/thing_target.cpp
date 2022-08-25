@@ -346,7 +346,7 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   attack_options->victim_overlaps = false;
 
   if (best) {
-    dbg2("Target-attack-best: Best target to hit is %s at %s", best->to_string().c_str(),
+    dbg2("Target-attack-best: Best target to hit is %s at %s", best->to_short_string().c_str(),
          best_hit_at.to_string().c_str());
   } else {
     dbg2("Target-attack-best: Best target to hit is at %s", best_hit_at.to_string().c_str());
