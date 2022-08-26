@@ -69,6 +69,12 @@ void Thing::temperature_tick(void)
     location_temp_set = true;
 
     dbg("Location temp now %d due to %s (%d)", location_temp, t->to_short_string().c_str(), t->temperature);
+
+    if (location_temp > TEMPERATURE_MAX) {
+      location_temp = TEMPERATURE_MAX;
+    } else if (location_temp < TEMPERATURE_MIN) {
+      location_temp = TEMPERATURE_MIN;
+    }
   }
   FOR_ALL_THINGS_END()
 
@@ -366,13 +372,12 @@ void Thing::temperature_incr(int temperature_change)
     game->request_remake_rightbar = true;
   }
 
-  auto n = (temperature += temperature_change);
-  if (n > 1000) {
-    n           = 1000;
-    temperature = temperature_change;
-  } else if (n < -1000) {
-    n           = -1000;
-    temperature = temperature_change;
+  temperature += temperature_change;
+
+  if (temperature > TEMPERATURE_MAX) {
+    temperature = TEMPERATURE_MAX;
+  } else if (temperature < TEMPERATURE_MIN) {
+    temperature = TEMPERATURE_MIN;
   }
 }
 

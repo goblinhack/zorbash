@@ -242,7 +242,6 @@ void Game::place_player(void)
         // level->thing_new("teleport", point(x + 2, y + 2));
         // level->thing_new("teletoad", point(x + 2, y + 2));
         // level->thing_new("flesh_golem", point(x, y + 1));
-        // level->thing_new("stone_golem", point(x + 1, y + 1));
         level->assign_leaders_and_followers();
       }
       if (0) {
@@ -267,6 +266,7 @@ void Game::place_player(void)
       // level->player->on_fire_set("");
       // level->thing_new("icecube", point(x, y + 1));
       // level->thing_new("icecube", point(x, y + 2));
+      // level->thing_new("stone_golem", point(x + 1, y + 1));
       if (0) {
         level->thing_new("vampire_rose_stem1", point(x - 1, y + 2));
         level->thing_new("vampire_rose_stem2", point(x + 1, y + 2));
