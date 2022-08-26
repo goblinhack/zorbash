@@ -621,7 +621,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
     //
     if (maybe_victim->health() < maybe_victim->health_max() / 10) {
       {
-        dbg("Try to teleport onto weakly %s", maybe_victim->to_string().c_str());
+        dbg("Try to teleport onto weakly %s", maybe_victim->to_short_string().c_str());
         TRACE_AND_INDENT();
 
         if (teleport_carefree(maybe_victim->curr_at)) {

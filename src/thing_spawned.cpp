@@ -53,14 +53,14 @@ void Thing::spawned_owner_set(Thingp spawner_owner)
     }
 
     if (spawner_owner) {
-      dbg("Will change spawner owner %s->%s", old_spawner_owner->to_string().c_str(),
-          spawner_owner->to_string().c_str());
+      dbg("Will change spawner owner %s->%s", old_spawner_owner->to_short_string().c_str(),
+          spawner_owner->to_short_string().c_str());
     } else {
-      dbg("Will remove spawner owner %s", old_spawner_owner->to_string().c_str());
+      dbg("Will remove spawner owner %s", old_spawner_owner->to_short_string().c_str());
     }
   } else {
     if (spawner_owner) {
-      dbg("Will set spawner owner to %s", spawner_owner->to_string().c_str());
+      dbg("Will set spawner owner to %s", spawner_owner->to_short_string().c_str());
     }
   }
 
@@ -84,7 +84,7 @@ void Thing::remove_spawner_owner(void)
     return;
   }
 
-  dbg("Remove spawner owner %s", old_spawner_owner->to_string().c_str());
+  dbg("Remove spawner owner %s", old_spawner_owner->to_short_string().c_str());
 
   spawned_owner_id_set(NoThingId);
   old_spawner_owner->spawned_count_decr();

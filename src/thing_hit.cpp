@@ -178,16 +178,6 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     return false;
   }
 
-  //
-  // We can hit this for barrels. Not sure why we need the check.
-  //
-  if (! real_hitter->maybe_infop()) {
-    if (0) {
-      real_hitter->err("Hitter (orig %s) has no infop", hitter->to_short_string().c_str());
-      return false;
-    }
-  }
-
   auto victim = this;
   if (attack_options->attack_poison) {
     damage = real_hitter->total_damage_for_on_attacking_dmg_poison(victim, damage);

@@ -30,7 +30,7 @@ bool Thing::carry(Thingp item, bool can_equip)
 
   auto top_owner = item->top_owner();
   if (top_owner) {
-    dbg("Item %s has owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
+    dbg("Item %s has owner: %s", item->to_short_string().c_str(), top_owner->to_short_string().c_str());
   }
 
   //
@@ -571,7 +571,7 @@ bool Thing::try_to_carry_if_worthwhile_dropping_items_if_needed(Thingp item)
 
   if (is_player() && game->robot_mode) {
     BOTCON("Robot failed to collect %s", item->text_the().c_str());
-    game->tick_begin("Robot failed to collect " + item->to_string());
+    game->tick_begin("Robot failed to collect " + item->to_short_string());
   }
   return true;
 }
@@ -605,10 +605,10 @@ void Thing::check_all_carried_items_are_owned(void)
       auto immediate_owner = what->immediate_owner();
       if ((top_owner != this) && (immediate_owner != this)) {
         if (immediate_owner) {
-          dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_string().c_str());
+          dbg("Immediate owner of %s is %s", what->to_short_string().c_str(), top_owner->to_short_string().c_str());
           dbg("Top owner of %s is %s", what->to_short_string().c_str(), what->top_owner()->to_string().c_str());
           err("Item check failed for %s which is not carried and owned by %s", what->to_short_string().c_str(),
-              immediate_owner->to_string().c_str());
+              immediate_owner->to_short_string().c_str());
         } else {
           err("Item check failed for %s which is not carried and not owned", what->to_short_string().c_str());
         }
@@ -616,7 +616,7 @@ void Thing::check_all_carried_items_are_owned(void)
       }
 
       if (top_owner != immediate_owner) {
-        dbg("Carried %s, owner %s", what->to_short_string().c_str(), immediate_owner->to_string().c_str());
+        dbg("Carried %s, owner %s", what->to_short_string().c_str(), immediate_owner->to_short_string().c_str());
       } else {
         dbg("Carried %s", what->to_short_string().c_str());
       }

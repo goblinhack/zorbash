@@ -304,28 +304,6 @@ static uint8_t game_mouse_motion_(int x, int y, int relx, int rely, int wheelx, 
 
   level->cursor_path_create(player);
 
-#if 0
-{
-  g_debug_thing = nullptr;
-
-  point p(level->cursor->curr_at.x, level->cursor->curr_at.y);
-  TOPCON("monst %d corpse %d", level->is_monst(p), level->is_corpse(p));
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, level->cursor->curr_at.x, level->cursor->curr_at.y) {
-    if (level->cursor->curr_at != t->curr_at) {
-      continue;
-    }
-    if (t->is_dead) {
-      continue;
-    }
-    if (t->is_monst()) {
-      t->topcon("debug");
-      g_debug_thing = t;
-    }
-  }
-  FOR_ALL_THINGS_END()
-}
-#endif
-
   return true;
 }
 

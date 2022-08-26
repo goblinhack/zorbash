@@ -3,6 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
+//#include "my_backtrace.hpp"
 #include "my_dmap.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
@@ -394,6 +395,7 @@ void Level::cursor_path_create(Thingp it, const std::vector< point > &move_path)
 //
 void Level::cursor_path_clear(void)
 {
+  dbg("Clear cursor path");
   TRACE_AND_INDENT();
   // backtrace_dump();
 

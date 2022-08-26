@@ -135,7 +135,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
 
     auto victim = best->target;
 
-    dbg("Best candidate %s", victim->to_string().c_str());
+    dbg("Best candidate %s", victim->to_short_string().c_str());
     TRACE_AND_INDENT();
 
     //
@@ -177,26 +177,26 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
           // This is an odd one.
           //
           if (! is_able_to_attack_owner()) {
-            err("Trying to attack self: %s", victim->to_string().c_str());
+            err("Trying to attack self: %s", victim->to_short_string().c_str());
           }
         } else if (owner->can_eat(victim)) {
           //
           // Eat corpse?
           //
-          IF_DEBUG2 { owner->log("Can eat %s", victim->to_string().c_str()); }
+          IF_DEBUG2 { owner->log("Can eat %s", victim->to_short_string().c_str()); }
 
           if (victim->is_dead) {
             if (owner->eat(victim)) {
               //
               // Can't defeat victim twice, so hide victim
               //
-              IF_DEBUG1 { owner->log("Eat corpse %s", victim->to_string().c_str()); }
+              IF_DEBUG1 { owner->log("Eat corpse %s", victim->to_short_string().c_str()); }
               victim->hide();
               attack_options->victim_attacked = true;
               ret                             = true;
             }
           } else if (owner->is_player()) {
-            owner->log("Carry %s", victim->to_string().c_str());
+            owner->log("Carry %s", victim->to_short_string().c_str());
             if (owner->try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
               attack_options->victim_attacked = true;
               ret                             = true;
@@ -208,7 +208,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
         // As above, but not for owner.
         //
         if (can_eat(victim)) {
-          dbg("Try to eat instead of attacking %s", victim->to_string().c_str());
+          dbg("Try to eat instead of attacking %s", victim->to_short_string().c_str());
           TRACE_AND_INDENT();
 
           //
@@ -220,7 +220,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
                (is_item_magical_eater() && victim->is_item_magical()) ||
                (is_potion_eater() && victim->is_potion())) &&
               try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
-            dbg("Don't eat, try to carry %s", victim->to_string().c_str());
+            dbg("Don't eat, try to carry %s", victim->to_short_string().c_str());
             attack_options->victim_attacked = true;
             ret                             = true;
           }
@@ -230,7 +230,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
             // Can only eat once alive things when dead... But the player is gone once dead.
             // Can't defeat victim twice, so hide victim
             //
-            dbg("Eat corpse %s", victim->to_string().c_str());
+            dbg("Eat corpse %s", victim->to_short_string().c_str());
             victim->hide();
             victim->gc();
             attack_options->victim_attacked = true;
@@ -247,7 +247,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
           }
 
           if (is_player()) {
-            dbg("Don't attack, try to carry %s", victim->to_string().c_str());
+            dbg("Don't attack, try to carry %s", victim->to_short_string().c_str());
             if (try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
               attack_options->victim_attacked = true;
               ret                             = true;
@@ -263,15 +263,15 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
     //
     if (attack_options->nat_att || is_wand_or_staff() || is_laser() || is_weapon() || is_monst() ||
         (is_player() && game->robot_mode)) {
-      dbg("Collision: weapon check for %s", victim->to_string().c_str());
+      dbg("Collision: weapon check for %s", victim->to_short_string().c_str());
       if (! attack_options->victim_attacked) {
-        dbg("Collision: weapon try to attack for %s", victim->to_string().c_str());
+        dbg("Collision: weapon try to attack for %s", victim->to_short_string().c_str());
         if (attack(victim, attack_options)) {
           attack_options->victim_attacked = true;
           ret                             = true;
         } else {
           if (is_loggable()) {
-            dbg("Collision: Cannot hit %s", victim->to_string().c_str());
+            dbg("Collision: Cannot hit %s", victim->to_short_string().c_str());
           }
         }
       }

@@ -86,7 +86,7 @@ Thingp Thing::item_targetted_use_at(Thingp item, Thingp target)
     game->change_state(Game::STATE_NORMAL, "player used an item");
   }
 
-  dbg("Using named item with: %s at %s", item->to_string().c_str(), target->to_short_string().c_str());
+  dbg("Using named item with: %s at %s", item->to_short_string().c_str(), target->to_short_string().c_str());
 
   if (! item->is_item_targetted()) {
     if (is_player()) {
@@ -109,7 +109,7 @@ Thingp Thing::item_targetted_use_at(Thingp item, point at)
   Thingp best = nullptr;
   point  best_hit_at;
 
-  dbg("Use %s at %s", item->to_string().c_str(), at.to_string().c_str());
+  dbg("Use %s at %s", item->to_short_string().c_str(), at.to_string().c_str());
   TRACE_AND_INDENT();
 
   AttackOptions attack_options       = {};

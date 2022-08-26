@@ -36,6 +36,7 @@ void Level::cursor_warp_check(void)
 //
 void Level::cursor_move(void)
 {
+  dbg("Move cursor");
   TRACE_AND_INDENT();
 
   if (is_mouse_over_any_bag()) {
@@ -157,10 +158,12 @@ void Level::cursor_recreate(void)
   // Player might be on another level
   //
   if (! player) {
+    dbg("Recreate cursor; no player");
     return;
   }
 
   if (player->is_dead) {
+    dbg("Recreate cursor; player dead");
     return;
   }
 
@@ -205,5 +208,6 @@ void Level::cursor_recreate(void)
   // Why hide it? When scrolling to a new position it's nice to see the cursor pop up,
   //
   // cursor->hide();
+
   cursor_path_create(player);
 }

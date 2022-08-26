@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_backtrace.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"

@@ -35,7 +35,7 @@ void Thing::on_owner_add(Thingp owner)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -83,7 +83,7 @@ void Thing::on_owner_remove(Thingp owner)
       mod = name();
     }
 
-    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_string().c_str());
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
 
     py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
@@ -175,13 +175,13 @@ void Thing::owner_set(Thingp owner)
     }
 
     if (owner) {
-      dbg("Will change owner %s -> %s", old_owner->to_string().c_str(), owner->to_string().c_str());
+      dbg("Will change owner %s -> %s", old_owner->to_short_string().c_str(), owner->to_short_string().c_str());
     } else {
-      dbg("Will remove owner %s", old_owner->to_string().c_str());
+      dbg("Will remove owner %s", old_owner->to_short_string().c_str());
     }
   } else {
     if (owner) {
-      dbg("Will set owner to %s", owner->to_string().c_str());
+      dbg("Will set owner to %s", owner->to_short_string().c_str());
     }
   }
 
@@ -208,7 +208,7 @@ void Thing::remove_owner(void)
     return;
   }
 
-  dbg("Remove owner %s", old_owner->to_string().c_str());
+  dbg("Remove owner %s", old_owner->to_short_string().c_str());
   on_owner_remove(old_owner);
 
   owner_id_set(NoThingId);
@@ -240,7 +240,7 @@ bool Thing::change_owner(Thingp new_owner)
     return true;
   }
 
-  dbg("Change owner from %s to %s", old_owner->to_string().c_str(), new_owner->to_string().c_str());
+  dbg("Change owner from %s to %s", old_owner->to_short_string().c_str(), new_owner->to_short_string().c_str());
 
   if (old_owner->is_player()) {
     if (! old_owner->inventory_shortcuts_remove(this)) {
@@ -269,7 +269,7 @@ bool Thing::change_owner(Thingp new_owner)
     return false;
   }
   if (changed_owner != new_owner) {
-    err("Owner change failed, owner is still %s", changed_owner->to_string().c_str());
+    err("Owner change failed, owner is still %s", changed_owner->to_short_string().c_str());
     return false;
   }
 

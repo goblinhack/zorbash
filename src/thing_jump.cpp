@@ -861,7 +861,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
     //
     if (maybe_victim->health() < maybe_victim->health_max() / 10) {
       {
-        dbg("Try to jump onto weakly %s", maybe_victim->to_string().c_str());
+        dbg("Try to jump onto weakly %s", maybe_victim->to_short_string().c_str());
         TRACE_AND_INDENT();
 
         if (try_to_jump_carefree(maybe_victim->curr_at)) {
@@ -870,7 +870,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
       }
 
       if (d1000() < tp()->is_able_to_jump_onto_chance_d1000()) {
-        dbg("Try to jump onto %s", maybe_victim->to_string().c_str());
+        dbg("Try to jump onto %s", maybe_victim->to_short_string().c_str());
         TRACE_AND_INDENT();
 
         if (try_to_jump_carefree(maybe_victim->curr_at)) {

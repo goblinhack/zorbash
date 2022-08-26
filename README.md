@@ -1,6 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- stone golems are gentle                                                                                                                      -->
 <!-- add burnt objects                                                                                                                            -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->

@@ -344,7 +344,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
 
   auto top_owner = item->top_owner();
   if (top_owner) {
-    dbg("Has unequipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
+    dbg("Has unequipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_short_string().c_str());
   } else {
     dbg("Has unequipped %s, no owner now", item->to_short_string().c_str());
   }
@@ -468,7 +468,7 @@ bool Thing::equip(Thingp item, int equip)
   auto top_owner = item->top_owner();
   if (top_owner) {
     if (top_owner != this) {
-      dbg("Has equipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_string().c_str());
+      dbg("Has equipped %s, owner: %s", item->to_short_string().c_str(), top_owner->to_short_string().c_str());
     } else {
       dbg("Has equipped %s", item->to_short_string().c_str());
     }

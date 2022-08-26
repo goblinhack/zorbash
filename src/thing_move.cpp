@@ -999,6 +999,9 @@ bool Thing::move_to_or_escape_check_only(const point nh)
 
 void Thing::clear_move_path(const std::string &why)
 {
+  dbg("Clear move path: %s", why.c_str());
+  TRACE_AND_INDENT();
+
   if (! maybe_aip()) {
     //
     // Fire can hit this path

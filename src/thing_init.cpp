@@ -154,7 +154,7 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
 
   if (tpp->is_loggable()) {
     if (owner) {
-      dbg("Creating with owner %s", owner->to_string().c_str());
+      dbg("Creating with owner %s", owner->to_short_string().c_str());
     } else {
       dbg("Creating");
     }
