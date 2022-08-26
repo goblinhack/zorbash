@@ -2,6 +2,13 @@ import my
 import tp
 
 
+def on_thrown(me, x, y):
+    for thing in my.level_get_all(me, x, y):
+        if my.thing_is_combustible(thing):
+            my.spawn_at_my_position(me, "fire")
+            return
+
+
 def on_lifespan_tick(owner, me, x, y):
     if my.thing_is_player(owner):
         my.thing_msg(me, "One of your torches fizzles out.")
@@ -46,6 +53,7 @@ def tp_init(name, text_long_name, text_short_name, tiles=[]):
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.on_lifespan_tick_do(self, "me.on_lifespan_tick()")
+    my.on_thrown_do(self, "me.on_thrown()")
     my.temperature(self, 50)
     my.text_a_or_an(self, "a")
     my.text_long_description(self, "A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")

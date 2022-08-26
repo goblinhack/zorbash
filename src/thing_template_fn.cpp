@@ -116,6 +116,7 @@ const std::string &Tp::on_resting_do(void) const { return _on_resting_do; }
 const std::string &Tp::on_stuck_do(void) const { return _on_stuck_do; }
 const std::string &Tp::on_swing_do(void) const { return _on_swing_do; }
 const std::string &Tp::on_teleport_do(void) const { return _on_teleport_do; }
+const std::string &Tp::on_thrown_do(void) const { return _on_thrown_do; }
 const std::string &Tp::on_tick_do(void) const { return _on_tick_do; }
 const std::string &Tp::on_unequip_do(void) const { return _on_unequip_do; }
 const std::string &Tp::on_use_do(void) const { return _on_use_do; }
@@ -253,12 +254,14 @@ int  Tp::is_able_to_attack_owner(void) const { return _is_able_to_attack_owner; 
 int  Tp::is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
 int  Tp::is_able_to_break_out_of_ice(void) const { return _is_able_to_break_out_of_ice; }
 int  Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
+int  Tp::is_able_to_burn(void) const { return _is_able_to_burn; }
 int  Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int  Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
 int  Tp::is_able_to_enchant_items(void) const { return _is_able_to_enchant_items; }
 int  Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int  Tp::is_able_to_fire_at(void) const { return _is_able_to_fire_at; }
 int  Tp::is_able_to_follow(void) const { return _is_able_to_follow; }
+int  Tp::is_able_to_freeze(void) const { return _is_able_to_freeze; }
 int  Tp::is_able_to_jump_attack_chance_d1000(void) const { return _is_able_to_jump_attack_chance_d1000; }
 int  Tp::is_able_to_jump_attack(void) const { return _is_able_to_jump_attack; }
 int  Tp::is_able_to_jump_escape(void) const { return _is_able_to_jump_escape; }
@@ -323,7 +326,6 @@ int  Tp::is_brazier(void) const { return _is_brazier; }
 int  Tp::is_bridge(void) const { return _is_bridge; }
 int  Tp::is_brittle(void) const { return _is_brittle; }
 int  Tp::is_buff(void) const { return _is_buff; }
-int  Tp::is_able_to_burn(void) const { return _is_able_to_burn; }
 int  Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
 int  Tp::is_carrier_of_treasure_class_a(void) const { return _is_carrier_of_treasure_class_a; }
 int  Tp::is_carrier_of_treasure_class_b(void) const { return _is_carrier_of_treasure_class_b; }
@@ -387,6 +389,7 @@ int  Tp::is_food_eater(void) const { return _is_food_eater; }
 int  Tp::is_food(void) const { return _is_food; }
 int  Tp::is_gas_blocker(void) const { return _is_gas_blocker; }
 int  Tp::is_gauntlet(void) const { return _is_gauntlet; }
+int  Tp::is_gelatinous(void) const { return _is_gelatinous; }
 int  Tp::is_glass(void) const { return _is_glass; }
 int  Tp::is_gold(void) const { return _is_gold; }
 int  Tp::is_green_blood_eater(void) const { return _is_green_blood_eater; }
@@ -462,6 +465,7 @@ int  Tp::is_openable(void) const { return _is_openable; }
 int  Tp::is_organic(void) const { return _is_organic; }
 int  Tp::is_pack(void) const { return _is_pack; }
 int  Tp::is_pillar(void) const { return _is_pillar; }
+int  Tp::is_plant(void) const { return _is_plant; }
 int  Tp::is_player(void) const { return _is_player; }
 int  Tp::is_poisonous_danger_level(void) const { return _is_poisonous_danger_level; }
 int  Tp::is_potion_eater(void) const { return _is_potion_eater; }
@@ -494,6 +498,7 @@ int  Tp::is_spider(void) const { return _is_spider; }
 int  Tp::is_spiderweb(void) const { return _is_spiderweb; }
 int  Tp::is_staff(void) const { return _is_staff; }
 int  Tp::is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1000; }
+int  Tp::is_steam(void) const { return _is_steam; }
 int  Tp::is_sticky(void) const { return _is_sticky; }
 int  Tp::is_stone(void) const { return _is_stone; }
 int  Tp::is_sword(void) const { return _is_sword; }
@@ -675,10 +680,6 @@ int  Tp::unused_flag72(void) const { return _unused_flag72; }
 int  Tp::unused_flag73(void) const { return _unused_flag73; }
 int  Tp::unused_flag74(void) const { return _unused_flag74; }
 int  Tp::unused_flag75(void) const { return _unused_flag75; }
-int  Tp::is_able_to_freeze(void) const { return _is_able_to_freeze; }
-int  Tp::is_gelatinous(void) const { return _is_gelatinous; }
-int  Tp::is_plant(void) const { return _is_plant; }
-int  Tp::is_steam(void) const { return _is_steam; }
 int  Tp::unused_flag7(void) const { return _unused_flag7; }
 int  Tp::unused_flag87(void) const { return _unused_flag87; }
 int  Tp::unused_flag8(void) const { return _unused_flag8; }
@@ -793,12 +794,14 @@ void Tp::is_able_to_attack_owner_set(int v) { _is_able_to_attack_owner = v; }
 void Tp::is_able_to_break_down_doors_set(int v) { _is_able_to_break_down_doors = v; }
 void Tp::is_able_to_break_out_of_ice_set(int v) { _is_able_to_break_out_of_ice = v; }
 void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs = v; }
+void Tp::is_able_to_burn_set(int v) { _is_able_to_burn = v; }
 void Tp::is_able_to_change_levels_set(int v) { _is_able_to_change_levels = v; }
 void Tp::is_able_to_collect_keys_set(int v) { _is_able_to_collect_keys = v; }
 void Tp::is_able_to_enchant_items_set(int v) { _is_able_to_enchant_items = v; }
 void Tp::is_able_to_fall_set(int v) { _is_able_to_fall = v; }
 void Tp::is_able_to_fire_at_set(int v) { _is_able_to_fire_at = v; }
 void Tp::is_able_to_follow_set(int v) { _is_able_to_follow = v; }
+void Tp::is_able_to_freeze_set(int v) { _is_able_to_freeze = v; }
 void Tp::is_able_to_jump_attack_chance_d1000_set(int v) { _is_able_to_jump_attack_chance_d1000 = v; }
 void Tp::is_able_to_jump_attack_set(int v) { _is_able_to_jump_attack = v; }
 void Tp::is_able_to_jump_escape_set(int v) { _is_able_to_jump_escape = v; }
@@ -864,7 +867,6 @@ void Tp::is_brazier_set(int v) { _is_brazier = v; }
 void Tp::is_bridge_set(int v) { _is_bridge = v; }
 void Tp::is_brittle_set(int v) { _is_brittle = v; }
 void Tp::is_buff_set(int v) { _is_buff = v; }
-void Tp::is_able_to_burn_set(int v) { _is_able_to_burn = v; }
 void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
 void Tp::is_carrier_of_treasure_class_a_set(int v) { _is_carrier_of_treasure_class_a = v; }
 void Tp::is_carrier_of_treasure_class_b_set(int v) { _is_carrier_of_treasure_class_b = v; }
@@ -928,6 +930,7 @@ void Tp::is_food_eater_set(int v) { _is_food_eater = v; }
 void Tp::is_food_set(int v) { _is_food = v; }
 void Tp::is_gas_blocker_set(int v) { _is_gas_blocker = v; }
 void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
+void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
 void Tp::is_glass_set(int v) { _is_glass = v; }
 void Tp::is_gold_set(int v) { _is_gold = v; }
 void Tp::is_green_blood_eater_set(int v) { _is_green_blood_eater = v; }
@@ -1003,6 +1006,7 @@ void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
 void Tp::is_pack_set(int v) { _is_pack = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
+void Tp::is_plant_set(int v) { _is_plant = v; }
 void Tp::is_player_set(int v) { _is_player = v; }
 void Tp::is_poisonous_danger_level_set(int v) { _is_poisonous_danger_level = v; }
 void Tp::is_potion_eater_set(int v) { _is_potion_eater = v; }
@@ -1035,6 +1039,7 @@ void Tp::is_spider_set(int v) { _is_spider = v; }
 void Tp::is_spiderweb_set(int v) { _is_spiderweb = v; }
 void Tp::is_staff_set(int v) { _is_staff = v; }
 void Tp::is_steal_item_chance_d1000_set(int v) { _is_steal_item_chance_d1000 = v; }
+void Tp::is_steam_set(int v) { _is_steam = v; }
 void Tp::is_sticky_set(int v) { _is_sticky = v; }
 void Tp::is_stone_set(int v) { _is_stone = v; }
 void Tp::is_sword_set(int v) { _is_sword = v; }
@@ -1192,6 +1197,7 @@ void Tp::on_resting_do_set(const std::string &v) { _on_resting_do = v; }
 void Tp::on_stuck_do_set(const std::string &v) { _on_stuck_do = v; }
 void Tp::on_swing_do_set(const std::string &v) { _on_swing_do = v; }
 void Tp::on_teleport_do_set(const std::string &v) { _on_teleport_do = v; }
+void Tp::on_thrown_do_set(const std::string &v) { _on_thrown_do = v; }
 void Tp::on_tick_do_set(const std::string &v) { _on_tick_do = v; }
 void Tp::on_unequip_do_set(const std::string &v) { _on_unequip_do = v; }
 void Tp::on_use_do_set(const std::string &v) { _on_use_do = v; }
@@ -1348,10 +1354,6 @@ void Tp::unused_flag72_set(int v) { _unused_flag72 = v; }
 void Tp::unused_flag73_set(int v) { _unused_flag73 = v; }
 void Tp::unused_flag74_set(int v) { _unused_flag74 = v; }
 void Tp::unused_flag75_set(int v) { _unused_flag75 = v; }
-void Tp::is_able_to_freeze_set(int v) { _is_able_to_freeze = v; }
-void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
-void Tp::is_plant_set(int v) { _is_plant = v; }
-void Tp::is_steam_set(int v) { _is_steam = v; }
 void Tp::unused_flag7_set(int v) { _unused_flag7 = v; }
 void Tp::unused_flag87_set(int v) { _unused_flag87 = v; }
 void Tp::unused_flag8_set(int v) { _unused_flag8 = v; }

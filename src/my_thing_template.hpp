@@ -58,22 +58,22 @@ public:
   Tilemap tr2_tiles;
 
 private:
-  Dice _damage_water_dice {};
   Dice _damage_acid_dice {};
-  Dice _damage_nat_att_dice {};
+  Dice _damage_cold_dice {};
   Dice _damage_crush_dice {};
   Dice _damage_digest_dice {};
+  Dice _damage_draining_dice {};
   Dice _damage_energy_dice {};
   Dice _damage_fire_dice {};
   Dice _damage_future1_dice {};
   Dice _damage_future2_dice {};
   Dice _damage_future3_dice {};
-  Dice _damage_cold_dice {};
   Dice _damage_lightning_dice {};
   Dice _damage_melee_dice {};
+  Dice _damage_nat_att_dice {};
   Dice _damage_necrosis_dice {};
-  Dice _damage_draining_dice {};
   Dice _damage_poison_dice {};
+  Dice _damage_water_dice {};
   Dice _gold_value_dice {};
   Dice _health_initial_dice {};
   Dice _lifespan_dice {};
@@ -210,12 +210,14 @@ private:
   int _is_able_to_break_down_doors {};
   int _is_able_to_break_out_of_ice {};
   int _is_able_to_break_out_of_webs {};
+  int _is_able_to_burn {};
   int _is_able_to_change_levels {};
   int _is_able_to_collect_keys {};
   int _is_able_to_enchant_items {};
   int _is_able_to_fall {};
   int _is_able_to_fire_at {};
   int _is_able_to_follow {};
+  int _is_able_to_freeze {};
   int _is_able_to_jump {};
   int _is_able_to_jump_attack {};
   int _is_able_to_jump_attack_chance_d1000 {};
@@ -280,7 +282,6 @@ private:
   int _is_bridge {};
   int _is_brittle {};
   int _is_buff {};
-  int _is_able_to_burn {};
   int _is_carnivorous_plant {};
   int _is_carrier_of_treasure_class_a {};
   int _is_carrier_of_treasure_class_b {};
@@ -344,6 +345,7 @@ private:
   int _is_food_eater {};
   int _is_gas_blocker {};
   int _is_gauntlet {};
+  int _is_gelatinous {};
   int _is_glass {};
   int _is_gold {};
   int _is_green_blood {};
@@ -420,6 +422,7 @@ private:
   int _is_organic {};
   int _is_pack {};
   int _is_pillar {};
+  int _is_plant {};
   int _is_player {};
   int _is_poisonous_danger_level {};
   int _is_potion {};
@@ -452,6 +455,7 @@ private:
   int _is_spiderweb {};
   int _is_staff {};
   int _is_steal_item_chance_d1000 {};
+  int _is_steam {};
   int _is_sticky {};
   int _is_stone {};
   int _is_sword {};
@@ -633,10 +637,6 @@ private:
   int _unused_flag73 {};
   int _unused_flag74 {};
   int _unused_flag75 {};
-  int _is_able_to_freeze {};
-  int _is_gelatinous {};
-  int _is_plant {};
-  int _is_steam {};
   int _unused_flag8 {};
   int _unused_flag87 {};
   int _unused_flag9 {};
@@ -644,7 +644,6 @@ private:
   int _weapon_use_distance {};
 
   std::string _damage_acid_dice_str;
-  std::string _damage_water_dice_str;
   std::string _damage_cold_dice_str;
   std::string _damage_crush_dice_str;
   std::string _damage_digest_dice_str;
@@ -656,10 +655,11 @@ private:
   std::string _damage_future3_dice_str;
   std::string _damage_lightning_dice_str;
   std::string _damage_melee_dice_str;
-  std::string _damage_nat_att_type;
   std::string _damage_nat_att_dice_str;
+  std::string _damage_nat_att_type;
   std::string _damage_necrosis_dice_str;
   std::string _damage_poison_dice_str;
+  std::string _damage_water_dice_str;
   std::string _equip_carry_anim;
   std::string _gfx_anim_use;
   std::string _gold_value_dice_str;
@@ -667,13 +667,9 @@ private:
   std::string _is_allied_with;
   std::string _lifespan_dice_str;
   std::string _light_color;
-  std::string _text_long_description;
-  std::string _text_long_description2;
-  std::string _text_long_description3;
   std::string _name;
   std::string _nutrition_dice_str;
   std::string _on_attacking_dmg_acid_do;
-  std::string _on_attacking_dmg_water_do;
   std::string _on_attacking_dmg_cold_do;
   std::string _on_attacking_dmg_crush_do;
   std::string _on_attacking_dmg_digest_do;
@@ -691,6 +687,7 @@ private:
   std::string _on_attacking_dmg_stat_att_do;
   std::string _on_attacking_dmg_stat_con_do;
   std::string _on_attacking_dmg_stat_str_do;
+  std::string _on_attacking_dmg_water_do;
   std::string _on_awake_do;
   std::string _on_born_do;
   std::string _on_death_do;
@@ -701,6 +698,7 @@ private:
   std::string _on_fall_do;
   std::string _on_final_use_do;
   std::string _on_firing_at_something_do;
+  std::string _on_get_text_long_description_do;
   std::string _on_idle_tick_freq_dice_str;
   std::string _on_jump_do;
   std::string _on_lifespan_tick_do;
@@ -708,7 +706,6 @@ private:
   std::string _on_open_do;
   std::string _on_owner_add_do;
   std::string _on_owner_attack_dmg_acid_do;
-  std::string _on_owner_attack_dmg_water_do;
   std::string _on_owner_attack_dmg_cold_do;
   std::string _on_owner_attack_dmg_crush_do;
   std::string _on_owner_attack_dmg_digest_do;
@@ -726,8 +723,8 @@ private:
   std::string _on_owner_attack_dmg_stat_att_do;
   std::string _on_owner_attack_dmg_stat_con_do;
   std::string _on_owner_attack_dmg_stat_str_do;
+  std::string _on_owner_attack_dmg_water_do;
   std::string _on_owner_receive_dmg_acid_do;
-  std::string _on_owner_receive_dmg_water_do;
   std::string _on_owner_receive_dmg_cold_do;
   std::string _on_owner_receive_dmg_crush_do;
   std::string _on_owner_receive_dmg_digest_do;
@@ -745,10 +742,10 @@ private:
   std::string _on_owner_receive_dmg_stat_att_do;
   std::string _on_owner_receive_dmg_stat_con_do;
   std::string _on_owner_receive_dmg_stat_str_do;
+  std::string _on_owner_receive_dmg_water_do;
   std::string _on_owner_remove_do;
   std::string _on_polymorphed_do;
   std::string _on_receiving_dmg_acid_do;
-  std::string _on_receiving_dmg_water_do;
   std::string _on_receiving_dmg_cold_do;
   std::string _on_receiving_dmg_crush_do;
   std::string _on_receiving_dmg_digest_do;
@@ -766,12 +763,13 @@ private:
   std::string _on_receiving_dmg_stat_att_do;
   std::string _on_receiving_dmg_stat_con_do;
   std::string _on_receiving_dmg_stat_str_do;
+  std::string _on_receiving_dmg_water_do;
   std::string _on_resting_do;
   std::string _on_stuck_do;
   std::string _on_swing_do;
   std::string _on_teleport_do;
+  std::string _on_thrown_do;
   std::string _on_tick_do;
-  std::string _on_get_text_long_description_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
   std::string _on_waiting_do;
@@ -783,7 +781,6 @@ private:
   std::string _on_you_are_on_fire_do;
   std::string _on_you_nat_att_do;
   std::string _resurrect_dice_str;
-  std::string _text_short_name;
   std::string _spawn_group_size_dice_str;
   std::string _spawn_on_shoved;
   std::string _str1;
@@ -794,10 +791,14 @@ private:
   std::string _target_name_radial;
   std::string _text_a_or_an;
   std::string _text_debuff;
-  std::string _text_short_description;
   std::string _text_enchant;
   std::string _text_hits;
+  std::string _text_long_description;
+  std::string _text_long_description2;
+  std::string _text_long_description3;
   std::string _text_long_name;
+  std::string _text_short_description;
+  std::string _text_short_name;
   std::string _text_skill;
   std::string _text_title;
   std::string _text_unused;
@@ -989,6 +990,7 @@ public:
   const std::string &on_death_of_a_follower_do(void) const;
   const std::string &on_death_of_my_leader_do(void) const;
   const std::string &on_enchant_do(void) const;
+  const std::string &on_thrown_do(void) const;
   const std::string &on_equip_do(void) const;
   const std::string &on_fall_do(void) const;
   const std::string &on_final_use_do(void) const;
@@ -1220,12 +1222,14 @@ public:
   int is_able_to_break_down_doors(void) const;
   int is_able_to_break_out_of_ice(void) const;
   int is_able_to_break_out_of_webs(void) const;
+  int is_able_to_burn(void) const;
   int is_able_to_change_levels(void) const;
   int is_able_to_collect_keys(void) const;
   int is_able_to_enchant_items(void) const;
   int is_able_to_fall(void) const;
   int is_able_to_fire_at(void) const;
   int is_able_to_follow(void) const;
+  int is_able_to_freeze(void) const;
   int is_able_to_jump_attack_chance_d1000(void) const;
   int is_able_to_jump_attack(void) const;
   int is_able_to_jump_escape(void) const;
@@ -1290,7 +1294,7 @@ public:
   int is_bridge(void) const;
   int is_brittle(void) const;
   int is_buff(void) const;
-  int is_able_to_burn(void) const;
+  int is_carnivorous_plant(void) const;
   int is_carrier_of_treasure_class_a(void) const;
   int is_carrier_of_treasure_class_b(void) const;
   int is_carrier_of_treasure_class_c(void) const;
@@ -1353,6 +1357,7 @@ public:
   int is_food(void) const;
   int is_gas_blocker(void) const;
   int is_gauntlet(void) const;
+  int is_gelatinous(void) const;
   int is_glass(void) const;
   int is_gold(void) const;
   int is_green_blood_eater(void) const;
@@ -1428,6 +1433,7 @@ public:
   int is_organic(void) const;
   int is_pack(void) const;
   int is_pillar(void) const;
+  int is_plant(void) const;
   int is_player(void) const;
   int is_poisonous_danger_level(void) const;
   int is_potion_eater(void) const;
@@ -1460,6 +1466,7 @@ public:
   int is_spiderweb(void) const;
   int is_staff(void) const;
   int is_steal_item_chance_d1000(void) const;
+  int is_steam(void) const;
   int is_sticky(void) const;
   int is_stone(void) const;
   int is_sword(void) const;
@@ -1641,12 +1648,7 @@ public:
   int unused_flag73(void) const;
   int unused_flag74(void) const;
   int unused_flag75(void) const;
-  int is_able_to_freeze(void) const;
-  int is_gelatinous(void) const;
-  int is_plant(void) const;
-  int is_steam(void) const;
   int unused_flag7(void) const;
-  int is_carnivorous_plant(void) const;
   int unused_flag87(void) const;
   int unused_flag8(void) const;
   int unused_flag9(void) const;
@@ -1761,12 +1763,14 @@ public:
   void is_able_to_break_down_doors_set(int v);
   void is_able_to_break_out_of_ice_set(int v);
   void is_able_to_break_out_of_webs_set(int v);
+  void is_able_to_burn_set(int v);
   void is_able_to_change_levels_set(int v);
   void is_able_to_collect_keys_set(int v);
   void is_able_to_enchant_items_set(int v);
   void is_able_to_fall_set(int v);
   void is_able_to_fire_at_set(int v);
   void is_able_to_follow_set(int v);
+  void is_able_to_freeze_set(int v);
   void is_able_to_jump_attack_chance_d1000_set(int v);
   void is_able_to_jump_attack_set(int v);
   void is_able_to_jump_escape_set(int v);
@@ -1822,6 +1826,7 @@ public:
   void is_bag_item_set(int v);
   void is_bag_set(int v);
   void is_barrel_set(int v);
+  void is_basalt_set(int v);
   void is_biome_dungeon_set(int v);
   void is_biome_swamp_set(int v);
   void is_bleeder_set(int v);
@@ -1831,7 +1836,7 @@ public:
   void is_bridge_set(int v);
   void is_brittle_set(int v);
   void is_buff_set(int v);
-  void is_able_to_burn_set(int v);
+  void is_carnivorous_plant_set(int v);
   void is_carrier_of_treasure_class_a_set(int v);
   void is_carrier_of_treasure_class_b_set(int v);
   void is_carrier_of_treasure_class_c_set(int v);
@@ -1894,6 +1899,7 @@ public:
   void is_food_set(int v);
   void is_gas_blocker_set(int v);
   void is_gauntlet_set(int v);
+  void is_gelatinous_set(int v);
   void is_glass_set(int v);
   void is_gold_set(int v);
   void is_green_blood_eater_set(int v);
@@ -1969,6 +1975,7 @@ public:
   void is_organic_set(int v);
   void is_pack_set(int v);
   void is_pillar_set(int v);
+  void is_plant_set(int v);
   void is_player_set(int v);
   void is_poisonous_danger_level_set(int v);
   void is_potion_eater_set(int v);
@@ -1988,6 +1995,7 @@ public:
   void is_sewer_wall_set(int v);
   void is_shallow_water_set(int v);
   void is_shield_set(int v);
+  void is_shovable_and_sticky_set(int v);
   void is_shovable_set(int v);
   void is_skill_set(int v);
   void is_skillstone_set(int v);
@@ -2000,6 +2008,7 @@ public:
   void is_spiderweb_set(int v);
   void is_staff_set(int v);
   void is_steal_item_chance_d1000_set(int v);
+  void is_steam_set(int v);
   void is_sticky_set(int v);
   void is_stone_set(int v);
   void is_sword_set(int v);
@@ -2043,7 +2052,6 @@ public:
   void light_dist_set(int v);
   void melting_chance_d1000_set(int v);
   void minion_limit_set(int v);
-  void thing_size_set(int v);
   void move_speed_mod_set(int v);
   void move_speed_set(int v);
   void name_set(const std::string &v);
@@ -2059,7 +2067,6 @@ public:
   void noise_on_you_are_hit_but_still_alive_set(int v);
   void normal_placement_rules_set(int v);
   void on_attacking_dmg_acid_do_set(const std::string &v);
-  void on_attacking_dmg_water_do_set(const std::string &v);
   void on_attacking_dmg_cold_do_set(const std::string &v);
   void on_attacking_dmg_crush_do_set(const std::string &v);
   void on_attacking_dmg_digest_do_set(const std::string &v);
@@ -2077,6 +2084,7 @@ public:
   void on_attacking_dmg_stat_att_do_set(const std::string &v);
   void on_attacking_dmg_stat_con_do_set(const std::string &v);
   void on_attacking_dmg_stat_str_do_set(const std::string &v);
+  void on_attacking_dmg_water_do_set(const std::string &v);
   void on_awake_do_set(const std::string &v);
   void on_born_do_set(const std::string &v);
   void on_death_do_set(const std::string &v);
@@ -2096,7 +2104,6 @@ public:
   void on_open_do_set(const std::string &v);
   void on_owner_add_do_set(const std::string &v);
   void on_owner_attack_dmg_acid_do_set(const std::string &v);
-  void on_owner_attack_dmg_water_do_set(const std::string &v);
   void on_owner_attack_dmg_cold_do_set(const std::string &v);
   void on_owner_attack_dmg_crush_do_set(const std::string &v);
   void on_owner_attack_dmg_digest_do_set(const std::string &v);
@@ -2114,8 +2121,8 @@ public:
   void on_owner_attack_dmg_stat_att_do_set(const std::string &v);
   void on_owner_attack_dmg_stat_con_do_set(const std::string &v);
   void on_owner_attack_dmg_stat_str_do_set(const std::string &v);
+  void on_owner_attack_dmg_water_do_set(const std::string &v);
   void on_owner_receive_dmg_acid_do_set(const std::string &v);
-  void on_owner_receive_dmg_water_do_set(const std::string &v);
   void on_owner_receive_dmg_cold_do_set(const std::string &v);
   void on_owner_receive_dmg_crush_do_set(const std::string &v);
   void on_owner_receive_dmg_digest_do_set(const std::string &v);
@@ -2133,10 +2140,10 @@ public:
   void on_owner_receive_dmg_stat_att_do_set(const std::string &v);
   void on_owner_receive_dmg_stat_con_do_set(const std::string &v);
   void on_owner_receive_dmg_stat_str_do_set(const std::string &v);
+  void on_owner_receive_dmg_water_do_set(const std::string &v);
   void on_owner_remove_do_set(const std::string &v);
   void on_polymorphed_do_set(const std::string &v);
   void on_receiving_dmg_acid_do_set(const std::string &v);
-  void on_receiving_dmg_water_do_set(const std::string &v);
   void on_receiving_dmg_cold_do_set(const std::string &v);
   void on_receiving_dmg_crush_do_set(const std::string &v);
   void on_receiving_dmg_digest_do_set(const std::string &v);
@@ -2154,10 +2161,12 @@ public:
   void on_receiving_dmg_stat_att_do_set(const std::string &v);
   void on_receiving_dmg_stat_con_do_set(const std::string &v);
   void on_receiving_dmg_stat_str_do_set(const std::string &v);
+  void on_receiving_dmg_water_do_set(const std::string &v);
   void on_resting_do_set(const std::string &v);
   void on_stuck_do_set(const std::string &v);
   void on_swing_do_set(const std::string &v);
   void on_teleport_do_set(const std::string &v);
+  void on_thrown_do_set(const std::string &v);
   void on_tick_do_set(const std::string &v);
   void on_unequip_do_set(const std::string &v);
   void on_use_do_set(const std::string &v);
@@ -2233,6 +2242,7 @@ public:
   void text_unused2_set(const std::string &v);
   void text_unused3_set(const std::string &v);
   void text_unused_set(const std::string &v);
+  void thing_size_set(int v);
   void tick_prio_set(int v);
   void unused_chance1_d1000_set(int v);
   void unused_chance2_d1000_set(int v);
@@ -2314,14 +2324,7 @@ public:
   void unused_flag73_set(int v);
   void unused_flag74_set(int v);
   void unused_flag75_set(int v);
-  void is_able_to_freeze_set(int v);
-  void is_gelatinous_set(int v);
-  void is_plant_set(int v);
-  void is_steam_set(int v);
   void unused_flag7_set(int v);
-  void is_carnivorous_plant_set(int v);
-  void is_basalt_set(int v);
-  void is_shovable_and_sticky_set(int v);
   void unused_flag87_set(int v);
   void unused_flag8_set(int v);
   void unused_flag9_set(int v);

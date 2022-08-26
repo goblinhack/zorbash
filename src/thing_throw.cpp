@@ -6,7 +6,39 @@
 
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_python.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
+
+void Thing::on_thrown(void)
+{
+  TRACE_NO_INDENT();
+
+  auto on_thrown = tp()->on_thrown_do();
+  if (std::empty(on_thrown)) {
+    return;
+  }
+
+  auto t = split_tokens(on_thrown, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_thrown call [%s] expected mod:function, got %d elems", on_thrown.c_str(), (int) on_thrown.size());
+  }
+}
 
 bool Thing::throw_item_choose_target(Thingp what)
 {
@@ -76,8 +108,8 @@ void Thing::throw_at(Thingp what, Thingp target)
     throw_at = curr_at + point(dx, dy);
 
     float dist = distance(curr_at, throw_at);
-    dbg("Throw %s at new point %s, dist %f, max %f", what->to_short_string().c_str(), throw_at.to_string().c_str(), dist,
-        max_dist);
+    dbg("Throw %s at new point %s, dist %f, max %f", what->to_short_string().c_str(), throw_at.to_string().c_str(),
+        dist, max_dist);
 
     FOR_ALL_GRID_THINGS(level, t, throw_at.x, throw_at.y)
     {
@@ -106,6 +138,7 @@ void Thing::throw_at(Thingp what, Thingp target)
     drop(what, target);
   }
 
+  what->on_thrown();
   what->hide();
 
   {

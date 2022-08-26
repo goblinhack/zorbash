@@ -744,7 +744,6 @@ public:
   const std::string &msg_get(void);
   const std::string &name(void);
   const std::string &nutrition_dice_str(void);
-  const std::string &on_attacking_dmg_water_do(void);
   const std::string &on_attacking_dmg_acid_do(void);
   const std::string &on_attacking_dmg_cold_do(void);
   const std::string &on_attacking_dmg_crush_do(void);
@@ -763,6 +762,7 @@ public:
   const std::string &on_attacking_dmg_stat_att_do(void);
   const std::string &on_attacking_dmg_stat_con_do(void);
   const std::string &on_attacking_dmg_stat_str_do(void);
+  const std::string &on_attacking_dmg_water_do(void);
   const std::string &on_awake_do(void);
   const std::string &on_born_do(void);
   const std::string &on_death_do(void);
@@ -781,7 +781,6 @@ public:
   const std::string &on_open_do(void);
   const std::string &on_owner_add_do(void);
   const std::string &on_owner_attack_dmg_acid_do(void);
-  const std::string &on_owner_attack_dmg_water_do(void);
   const std::string &on_owner_attack_dmg_cold_do(void);
   const std::string &on_owner_attack_dmg_crush_do(void);
   const std::string &on_owner_attack_dmg_digest_do(void);
@@ -799,8 +798,8 @@ public:
   const std::string &on_owner_attack_dmg_stat_att_do(void);
   const std::string &on_owner_attack_dmg_stat_con_do(void);
   const std::string &on_owner_attack_dmg_stat_str_do(void);
+  const std::string &on_owner_attack_dmg_water_do(void);
   const std::string &on_owner_receive_dmg_acid_do(void);
-  const std::string &on_owner_receive_dmg_water_do(void);
   const std::string &on_owner_receive_dmg_cold_do(void);
   const std::string &on_owner_receive_dmg_crush_do(void);
   const std::string &on_owner_receive_dmg_digest_do(void);
@@ -818,10 +817,10 @@ public:
   const std::string &on_owner_receive_dmg_stat_att_do(void);
   const std::string &on_owner_receive_dmg_stat_con_do(void);
   const std::string &on_owner_receive_dmg_stat_str_do(void);
+  const std::string &on_owner_receive_dmg_water_do(void);
   const std::string &on_owner_remove_do(void);
   const std::string &on_polymorphed_do(void);
   const std::string &on_receiving_dmg_acid_do(void);
-  const std::string &on_receiving_dmg_water_do(void);
   const std::string &on_receiving_dmg_cold_do(void);
   const std::string &on_receiving_dmg_crush_do(void);
   const std::string &on_receiving_dmg_digest_do(void);
@@ -839,10 +838,12 @@ public:
   const std::string &on_receiving_dmg_stat_att_do(void);
   const std::string &on_receiving_dmg_stat_con_do(void);
   const std::string &on_receiving_dmg_stat_str_do(void);
+  const std::string &on_receiving_dmg_water_do(void);
   const std::string &on_resting_do(void);
   const std::string &on_stuck_do(void);
   const std::string &on_swing_do(void);
   const std::string &on_teleport_do(void);
+  const std::string &on_thrown_do(void);
   const std::string &on_tick_do(void);
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
@@ -988,8 +989,6 @@ public:
   int crit_chance_d10000(void);
   int damage_acid_chance_d1000(int);
   int damage_acid(void);
-  int damage_water_chance_d1000(int);
-  int damage_water(void);
   int damage_cold_chance_d1000(int);
   int damage_cold(void);
   int damage_crush_chance_d1000(int);
@@ -1039,6 +1038,8 @@ public:
   int damage_received_doubled_from_necrosis(void);
   int damage_received_doubled_from_poison(void);
   int damage_received_doubled_from_water(void);
+  int damage_water_chance_d1000(int);
+  int damage_water(void);
   int danger_current_level(Thingp);
   int danger_current_level(void);
   int danger_initial_level(Thingp);
@@ -1157,12 +1158,14 @@ public:
   int is_able_to_break_down_doors(void);
   int is_able_to_break_out_of_ice(void);
   int is_able_to_break_out_of_webs(void);
+  int is_able_to_burn(void);
   int is_able_to_change_levels(void);
   int is_able_to_collect_keys(void);
   int is_able_to_enchant_items(void);
   int is_able_to_fall(void);
   int is_able_to_fire_at(void);
   int is_able_to_follow(void);
+  int is_able_to_freeze(void);
   int is_able_to_jump_attack_chance_d1000(void);
   int is_able_to_jump_attack(void);
   int is_able_to_jump_escape(void);
@@ -1210,7 +1213,6 @@ public:
   int is_attackable_by_monst(void);
   int is_attackable_by_player(void);
   int is_attacked_with_damage_acid(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_water(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_cold(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_crush(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_digest(Thingp hitter, Thingp real_hitter, int damage);
@@ -1225,6 +1227,7 @@ public:
   int is_attacked_with_damage_nat_att(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_necrosis(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_poison(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_damage_water(Thingp hitter, Thingp real_hitter, int damage);
   int is_auto_collect_item(void);
   int is_auto_equipped(void);
   int is_auto_throw(void);
@@ -1234,6 +1237,7 @@ public:
   int is_bag_item(void);
   int is_bag(void);
   int is_barrel(void);
+  int is_basalt(void);
   int is_biome_dungeon(void);
   int is_biome_swamp(void);
   int is_bleeder(void);
@@ -1243,7 +1247,7 @@ public:
   int is_bridge(void);
   int is_brittle(void);
   int is_buff(void);
-  int is_able_to_burn(void);
+  int is_carnivorous_plant(void);
   int is_carrier_of_treasure_class_a(void);
   int is_carrier_of_treasure_class_b(void);
   int is_carrier_of_treasure_class_c(void);
@@ -1310,6 +1314,7 @@ public:
   int is_food(void);
   int is_gas_blocker(void);
   int is_gauntlet(void);
+  int is_gelatinous(void);
   int is_glass(void);
   int is_gold(void);
   int is_green_blood_eater(void);
@@ -1386,6 +1391,7 @@ public:
   int is_organic(void);
   int is_pack(void);
   int is_pillar(void);
+  int is_plant(void);
   int is_player(void);
   int is_poisonous_danger_level(void);
   int is_potion_eater(void);
@@ -1406,6 +1412,7 @@ public:
   int is_sewer_wall(void);
   int is_shallow_water(void);
   int is_shield(void);
+  int is_shovable_and_sticky(void);
   int is_shovable(void);
   int is_skillstone(void);
   int is_skill(void);
@@ -1418,6 +1425,7 @@ public:
   int is_spiderweb(void);
   int is_staff(void);
   int is_steal_item_chance_d1000(void);
+  int is_steam(void);
   int is_sticky(void);
   int is_stone(void);
   int is_sword(void);
@@ -1503,7 +1511,6 @@ public:
   int minion_count_set(int);
   int minion_count(void);
   int minion_limit(void);
-  int thing_size(void);
   int move_speed_curr(void);
   int move_speed_mod_decr(int);
   int move_speed_mod_decr(void);
@@ -1825,10 +1832,9 @@ public:
   int teleport_distance(void);
   int temperature_get(void);
   int temperature_set(int);
+  int thing_size(void);
   int tick_prio(void);
   int torch_count(void);
-  int is_basalt(void);
-  int is_shovable_and_sticky(void);
   int total_damage_for_on_attacking_dmg_acid(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_cold(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_crush(Thingp victim, int damage);
@@ -1947,12 +1953,7 @@ public:
   int unused_flag73(void);
   int unused_flag74(void);
   int unused_flag75(void);
-  int is_able_to_freeze(void);
-  int is_gelatinous(void);
-  int is_plant(void);
-  int is_steam(void);
   int unused_flag7(void);
-  int is_carnivorous_plant(void);
   int unused_flag87(void);
   int unused_flag8(void);
   int unused_flag9(void);
@@ -2351,6 +2352,7 @@ public:
   void on_stuck(void);
   void on_swing(Thingp what);
   void on_teleport(void);
+  void on_thrown(void);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
@@ -2394,16 +2396,16 @@ public:
   void skill_remove_all(void);
   void sleep(void);
   void solid_rock_tick(void);
-  void temperature_decr(int);
-  void temperature_decr(void);
-  void temperature_incr(int);
-  void temperature_incr(void);
   void spawned_owner_set(Thingp spawner_owner);
   void stamina_boost(int v);
   void stats_tick(void);
   void stuck(const std::string &why);
   void submerged_offset_set(int);
   void teleport_end(void);
+  void temperature_decr(int);
+  void temperature_decr(void);
+  void temperature_incr(int);
+  void temperature_incr(void);
   void temperature_tick(void);
   void throw_at(Thingp w, Thingp target);
   void tick(void);
