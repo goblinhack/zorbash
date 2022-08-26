@@ -12,7 +12,7 @@ void Thing::temperature_tick(void)
 {
   TRACE_NO_INDENT();
 
-  dbg("Temperature tick (%u)", game->tick_current);
+  dbg("Temperature tick");
   TRACE_AND_INDENT();
 
   //
@@ -280,7 +280,7 @@ void Thing::temperature_tick(void)
     }
   }
 
-  if (thing_temp >= 50) {
+  if (thing_temp >= 100) {
     auto damage = abs(thing_temp) / 20;
     if (torch_tick()) {
       dbg("Torch attack");
