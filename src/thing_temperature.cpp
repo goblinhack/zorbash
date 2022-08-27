@@ -303,6 +303,7 @@ int Thing::temperature_set(int v)
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
   }
   temperature = v;
   return v;
@@ -370,6 +371,7 @@ void Thing::temperature_incr(int temperature_change)
 
   if (is_player()) {
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
   }
 
   temperature += temperature_change;

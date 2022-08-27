@@ -65,7 +65,8 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
       wid_set_style(w, UI_WID_STYLE_RED);
     }
 
-    bag->log("+ item %s at %d,%d", t->to_short_string().c_str(), t->itemsp()->bag_position.x, t->itemsp()->bag_position.y);
+    bag->log("+ item %s at %d,%d", t->to_short_string().c_str(), t->itemsp()->bag_position.x,
+             t->itemsp()->bag_position.y);
 
     wid_set_on_mouse_over_begin(w, wid_bag_item_mouse_over_begin);
     wid_set_on_mouse_over_end(w, wid_bag_item_mouse_over_end);
@@ -139,6 +140,7 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
   while (bag->bag_compress()) {
   }
   game->request_remake_rightbar = true;
+  LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
 
   t->log("In transit item place completed");
   wid_bag_add_items(wid_bag_container, bag);
@@ -186,6 +188,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       t->log("Placed item: Request to remake inventory");
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
     }
     return true;
   }
@@ -201,6 +204,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       game->level->inventory_assign(slot, t);
       wid_bag_container             = wid_inventory_bag->wid_bag_container;
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       wid_inventory_select_requested(t);
       break;
     }
@@ -222,6 +226,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
 
@@ -242,6 +247,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
 
@@ -262,6 +268,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
 
@@ -282,6 +289,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
 
@@ -302,6 +310,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
 
@@ -322,6 +331,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
 
@@ -342,6 +352,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
 
@@ -362,6 +373,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
 
@@ -385,6 +397,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
 
@@ -408,6 +421,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return true;
     }
   }
@@ -463,6 +477,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   DBG3("Pressed in transit item; change state");
   wid_inventory_init();
   game->request_remake_rightbar = true;
+  LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
 
   //
   // Moving things around your bag has a cost...
@@ -498,6 +513,7 @@ uint8_t wid_in_transit_item_drop(void)
   DBG3("Pressed in transit item; change state");
   wid_inventory_init();
   game->request_remake_rightbar = true;
+  LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
 
   //
   // Moving things around your bag has a cost...
@@ -654,6 +670,7 @@ bool Game::wid_bag_move_item(Thingp t)
   DBG3("Remake the bag without the transit item");
   wid_inventory_init();
   game->request_remake_rightbar = true;
+  LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
 
   return true;
 }
@@ -754,6 +771,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     }
 
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
     game->wid_thing_info_create(game->level->player, false);
     return true;
   }
@@ -766,12 +784,14 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
         game->level->inventory_assign(9, what);
         wid_inventory_select(what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         CON("INF: Reassigned item to key.");
         return true;
       }
       if (sdlk_eq(*key, game->config.key_action1)) {
         game->level->inventory_assign(0, what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         wid_inventory_select(what);
         CON("INF: Reassigned item to key.");
         return true;
@@ -779,6 +799,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       if (sdlk_eq(*key, game->config.key_action2)) {
         game->level->inventory_assign(1, what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         wid_inventory_select(what);
         CON("INF: Reassigned item to key.");
         return true;
@@ -786,6 +807,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       if (sdlk_eq(*key, game->config.key_action3)) {
         game->level->inventory_assign(2, what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         wid_inventory_select(what);
         CON("INF: Reassigned item to key.");
         return true;
@@ -793,6 +815,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       if (sdlk_eq(*key, game->config.key_action4)) {
         game->level->inventory_assign(3, what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         wid_inventory_select(what);
         CON("INF: Reassigned item to key.");
         return true;
@@ -800,6 +823,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       if (sdlk_eq(*key, game->config.key_action5)) {
         game->level->inventory_assign(4, what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         wid_inventory_select(what);
         CON("INF: Reassigned item to key.");
         return true;
@@ -807,6 +831,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       if (sdlk_eq(*key, game->config.key_action6)) {
         game->level->inventory_assign(5, what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         wid_inventory_select(what);
         CON("INF: Reassigned item to key.");
         return true;
@@ -814,6 +839,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       if (sdlk_eq(*key, game->config.key_action7)) {
         game->level->inventory_assign(6, what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         wid_inventory_select(what);
         CON("INF: Reassigned item to key.");
         return true;
@@ -821,6 +847,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       if (sdlk_eq(*key, game->config.key_action8)) {
         game->level->inventory_assign(7, what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         wid_inventory_select(what);
         CON("INF: Reassigned item to key.");
         return true;
@@ -828,6 +855,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       if (sdlk_eq(*key, game->config.key_action9)) {
         game->level->inventory_assign(8, what);
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         wid_inventory_select(what);
         CON("INF: Reassigned item to key.");
         return true;
@@ -842,6 +870,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
       game->tick_begin("drop");
     }
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
     game->wid_thing_info_create(game->level->player, false);
     return true;
   }
@@ -853,6 +882,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     if (game->state == Game::STATE_INVENTORY) {
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
     }
     return true;
   }
@@ -863,6 +893,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
     if (game->state == Game::STATE_INVENTORY) {
       wid_inventory_init();
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
     }
     return true;
   }

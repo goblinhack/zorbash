@@ -519,11 +519,5 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   wid_update(wid_inventory_window);
   game->change_state(Game::STATE_INVENTORY, "open inventory");
 
-  CON("Created inventory");
-  CON(" ");
-  CON(" ");
-  CON(" ");
-  CON(" ");
-  CON(" ");
   return true;
 }

@@ -256,6 +256,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     if (what->charge_count()) {
       dbg("Used %s (has %d charges left)", what->to_short_string().c_str(), what->charge_count());
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       return;
     }
   }

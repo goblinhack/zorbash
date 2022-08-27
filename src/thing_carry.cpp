@@ -327,7 +327,8 @@ bool Thing::carry(Thingp item, bool can_equip)
     for (const auto t : item->item_vector()) {
       if (! t->is_bag_item()) {
         if (! carry(t)) {
-          err("Could not auto carry %s's non item: %s", item->to_short_string().c_str(), t->to_short_string().c_str());
+          err("Could not auto carry %s's non item: %s", item->to_short_string().c_str(),
+              t->to_short_string().c_str());
         }
       }
     }

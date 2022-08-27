@@ -60,6 +60,7 @@ int Thing::gold_set(int v)
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
   }
   new_infop();
   auto n = (infop()->gold = v);
@@ -71,6 +72,7 @@ int Thing::gold_decr(int v)
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
   }
   new_infop();
   auto n = (infop()->gold -= v);
@@ -85,6 +87,7 @@ int Thing::gold_incr(int v)
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
   }
   new_infop();
   auto n = (infop()->gold += v);
@@ -96,6 +99,7 @@ int Thing::gold_decr(void)
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
   }
   new_infop();
   auto n = (infop()->gold--);
@@ -110,6 +114,7 @@ int Thing::gold_incr(void)
   TRACE_NO_INDENT();
   if (is_player()) {
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
   }
   new_infop();
   auto n = (infop()->gold++);

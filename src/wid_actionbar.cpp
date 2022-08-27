@@ -4,6 +4,7 @@
 
 #include <SDL_mixer.h>
 
+#include "my_backtrace.hpp"
 #include "my_game.hpp"
 #include "my_main.hpp"
 #include "my_monst.hpp"
@@ -1096,6 +1097,7 @@ void wid_actionbar_pixelart_init(void)
   }
 
   CON("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
+  backtrace_dump();
   TRACE_AND_INDENT();
 
   bool ui_icon_collect = false;

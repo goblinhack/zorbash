@@ -133,7 +133,6 @@ void Game::change_state(int new_state, const std::string &why)
       request_remake_skillbox  = false;
       request_remake_debuffbox = false;
       request_remake_buffbox   = false;
-      request_remake_rightbar  = false;
       break;
     case STATE_LOAD_MENU:
     case STATE_KEYBOARD_MENU:

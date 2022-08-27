@@ -250,6 +250,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         TOPCON("Nothing to drop.");
         wid_inventory_init();
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
         return true;
       }
     }
@@ -293,6 +294,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         TOPCON("Nothing to eat.");
         wid_inventory_init();
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       }
     }
     wid_rightbar_init();
@@ -355,6 +357,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         TOPCON("Nothing to use.");
         wid_inventory_init();
         game->request_remake_rightbar = true;
+        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
       }
       return true;
     }

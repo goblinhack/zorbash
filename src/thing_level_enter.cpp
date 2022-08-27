@@ -140,9 +140,10 @@ void Thing::level_enter(bool rejoin)
   is_waiting_to_ascend_sewer                   = false;
   is_waiting_to_leave_level_has_completed_fall = false;
 
-  game->request_remake_rightbar = true;
-
   if (is_player()) {
+    game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+
     dbg("Level entered");
 
     level->player = this;

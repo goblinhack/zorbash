@@ -54,6 +54,7 @@ void wid_inventory_fini(void)
   if (wid_inventory_window) {
     wid_destroy(&wid_inventory_window);
     game->request_remake_rightbar = true;
+    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
     game->change_state(Game::STATE_NORMAL, "inventory close");
   }
 }

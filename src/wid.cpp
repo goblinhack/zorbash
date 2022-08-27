@@ -6608,7 +6608,7 @@ static void wid_handle_requests(void)
       // If we need to remake the rightbar, do so
       //
       if (game->request_remake_rightbar || game->request_remake_skillbox) {
-        DBG2("Handle request to remake inventory");
+        CON("Handle request to remake inventory");
         wid_leftbar_init();
         if (wid_rightbar_init()) {
           game->request_remake_rightbar = false;
@@ -6622,7 +6622,7 @@ static void wid_handle_requests(void)
       // Update the actionbar
       //
       if (game->request_remake_actionbar) {
-        DBG2("Handle request to remake actionhar");
+        CON("Handle request to remake actionhar");
         wid_actionbar_init();
         game->request_remake_actionbar = false;
       }

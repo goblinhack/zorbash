@@ -360,6 +360,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
 
     if (item->tp() == t->tp()) {
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
 
       inventory_particle(item, i, this);
 
@@ -428,6 +429,7 @@ bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
 
     if (item->tp() == t->tp()) {
       game->request_remake_rightbar = true;
+      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
 
       if (particle_target) {
         inventory_particle(item, i, particle_target);
@@ -627,6 +629,7 @@ bool Level::inventory_chosen(const uint32_t slot)
 
   DBG("Inventory: Request to remake inventory");
   game->request_remake_rightbar = true;
+  LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
 
   auto oid = get(itemsp->inventory_shortcuts, slot);
   if (! oid) {
@@ -688,6 +691,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
 
   DBG("Inventory: Request to remake inventory");
   game->request_remake_rightbar = true;
+  LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
 
   auto inventory_items = itemsp->inventory_shortcuts.size();
   for (auto i = 0U; i < inventory_items; i++) {
@@ -711,6 +715,7 @@ bool Level::inventory_assign(const uint32_t slot, Thingp item)
 
   set(itemsp->inventory_shortcuts, slot, item->id);
   game->request_remake_rightbar = true;
+  LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
   inventory_dump();
 
   return true;
