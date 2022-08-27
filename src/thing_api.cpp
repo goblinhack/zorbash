@@ -1713,10 +1713,10 @@ int Thing::unused_flag74(void)
   return (tp()->unused_flag74());
 }
 
-int Thing::unused_flag75(void)
+int Thing::is_throw_blocker(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag75());
+  return (tp()->is_throw_blocker());
 }
 
 int Thing::is_able_to_freeze(void)

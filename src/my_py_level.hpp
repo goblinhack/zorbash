@@ -369,7 +369,7 @@ PyObject *level_unused_flag71_at(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *level_unused_flag72_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag73_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_unused_flag74_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_unused_flag75_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_throw_blocker_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_freeze_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_gelatinous_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_plant_at(PyObject *obj, PyObject *args, PyObject *keywds);

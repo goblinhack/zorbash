@@ -95,14 +95,35 @@ void Thing::throw_at(Thingp what, Thingp target)
   }
 
   //
+  // We don't always get to throw as far as we want.
+  //
+  bool need_to_choose_a_new_target = false;
+
+  //
+  // Check for obstacles in the way of the throwing.
+  //
+  auto throw_at             = target->curr_at;
+  auto throw_was_stopped_at = in_the_way_for_throwing(curr_at, throw_at);
+  if (throw_at != throw_was_stopped_at) {
+    if (is_player()) {
+      msg("You fail to throw %s that far, something was in the way.", what->text_the().c_str());
+    }
+    throw_at = throw_was_stopped_at;
+
+    dbg("Throw %s at new point %s", what->to_short_string().c_str(), throw_at.to_string().c_str());
+    need_to_choose_a_new_target = true;
+  }
+
+  //
   // If you can't throw that far, throw as far as you can.
   //
-  auto  throw_at = target->curr_at;
   float dist     = DISTANCE(curr_at.x, curr_at.y, throw_at.x, throw_at.y);
   float max_dist = distance_throw_get();
   if (dist > max_dist) {
-    if (is_player()) {
-      msg("You fail to throw %s that far.", what->text_the().c_str());
+    if (! need_to_choose_a_new_target) {
+      if (is_player()) {
+        msg("You fail to throw %s that far.", what->text_the().c_str());
+      }
     }
 
     float dx = (float) throw_at.x - (float) curr_at.x;
@@ -116,7 +137,10 @@ void Thing::throw_at(Thingp what, Thingp target)
     float dist = distance(curr_at, throw_at);
     dbg("Throw %s at new point %s, dist %f, max %f", what->to_short_string().c_str(), throw_at.to_string().c_str(),
         dist, max_dist);
+    need_to_choose_a_new_target = true;
+  }
 
+  if (need_to_choose_a_new_target) {
     FOR_ALL_GRID_THINGS(level, t, throw_at.x, throw_at.y)
     {
       if (t->is_the_grid) {
@@ -169,6 +193,7 @@ void Thing::throw_at(Thingp what, Thingp target)
   } else {
     drop(what, target);
   }
+  what->hide();
 
   if (is_player()) {
     game->tick_begin("player threw an item");

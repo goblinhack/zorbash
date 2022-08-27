@@ -2,6 +2,12 @@ import my
 import tp
 
 
+def on_thrown(me, x, y):
+    for dx in range(-1, 2):
+        for dy in range(-1, 2):
+            my.spawn_at(me, "icecube", x + dx, y + dy)
+
+
 def on_idle(me, x, y):
     #
     # Random recharge
@@ -58,6 +64,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_target_select(self, True)
+    my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with cold
     my.is_treasure_class_b(self, True)
     my.is_treasure(self, True)
@@ -71,6 +78,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
+    my.on_thrown_do(self, "me.on_thrown()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)
     my.target_name_projectile(self, "projectile_cold")

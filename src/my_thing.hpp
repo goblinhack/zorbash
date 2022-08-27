@@ -388,6 +388,7 @@ public:
   Thingp immediate_spawned_owner(void);
   Thingp in_the_way_for_firing(const point s, const point e, int x, int y);
   Thingp in_the_way_for_jumping(const point s, const point e, int x, int y);
+  Thingp in_the_way_for_throwing(const point s, const point e, int x, int y);
   Thingp item_targetted_use_at(Thingp wand, point at);
   Thingp item_targetted_use_at(Thingp wand, Thingp target);
   Thingp leader(void);
@@ -1952,7 +1953,7 @@ public:
   int unused_flag72(void);
   int unused_flag73(void);
   int unused_flag74(void);
-  int unused_flag75(void);
+  int is_throw_blocker(void);
   int unused_flag7(void);
   int unused_flag87(void);
   int unused_flag8(void);
@@ -1966,11 +1967,12 @@ public:
 
   point3d born_get(void);
 
-  point vision_source_get(void);
-  point dir_to_direction(void);
   point dest_random_get(int dist = 0);
-  point where_i_dropped_an_item_last_get(void);
+  point dir_to_direction(void);
+  point in_the_way_for_throwing(const point s, const point e);
   point lunge_to_get(void);
+  point vision_source_get(void);
+  point where_i_dropped_an_item_last_get(void);
 
   point where_i_failed_to_collect_last_get(void);
   point where_i_dropped_an_item_last_set(point);

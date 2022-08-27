@@ -47,6 +47,7 @@ def tp_init(
     my.is_obs_wall_or_door(self, True)
     my.is_rock(self, True)
     my.is_stone(self, True)
+    my.is_throw_blocker(self, True)
     my.is_very_hard(self, True)
     my.is_wall(self, True)
     my.noise_blocker(self, True)
