@@ -16,7 +16,7 @@
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
 
-static std::string state_to_string(int state)
+std::string gama_state_to_string(int state)
 {
   switch (state) {
     case Game::STATE_NORMAL: return "NORMAL";
@@ -73,14 +73,14 @@ void Game::change_state(int new_state, const std::string &why)
   //
   IF_DEBUG3
   {
-    CON("Game state change: %s -> %s, reason %s", state_to_string(old_state).c_str(),
-        state_to_string(new_state).c_str(), why.c_str());
+    CON("Game state change: %s -> %s, reason %s", gama_state_to_string(old_state).c_str(),
+        gama_state_to_string(new_state).c_str(), why.c_str());
     backtrace_dump();
   }
   else
   {
-    LOG("Game state change: %s -> %s, reason %s", state_to_string(old_state).c_str(),
-        state_to_string(new_state).c_str(), why.c_str());
+    LOG("Game state change: %s -> %s, reason %s", gama_state_to_string(old_state).c_str(),
+        gama_state_to_string(new_state).c_str(), why.c_str());
   }
   TRACE_AND_INDENT();
 

@@ -462,13 +462,14 @@ public:
   void                 set_meta_data(Levelp);
 };
 
-extern uint8_t  game_mouse_down(int x, int y, uint32_t button);
-extern uint8_t  game_mouse_up(int x, int y, uint32_t button);
-extern uint8_t  game_mouse_motion(int x, int y, int relx, int rely, int wheelx, int wheely);
-extern void     wid_main_menu_hide(void);
-extern void     wid_main_menu_destroy(void);
-extern void     game_display_flames(void);
-extern uint32_t csum(char *mem, uint32_t len);
+extern uint8_t     game_mouse_down(int x, int y, uint32_t button);
+extern uint8_t     game_mouse_up(int x, int y, uint32_t button);
+extern uint8_t     game_mouse_motion(int x, int y, int relx, int rely, int wheelx, int wheely);
+extern void        wid_main_menu_hide(void);
+extern void        wid_main_menu_destroy(void);
+extern void        game_display_flames(void);
+extern uint32_t    csum(char *mem, uint32_t len);
+extern std::string gama_state_to_string(int state);
 
 extern class Game *game;
 

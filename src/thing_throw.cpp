@@ -193,7 +193,13 @@ void Thing::throw_at(Thingp what, Thingp target)
   } else {
     drop(what, target);
   }
-  what->hide();
+
+  //
+  // As there is no animation, no need to hide.
+  //
+  if (! g_opt_ascii) {
+    what->hide();
+  }
 
   if (is_player()) {
     game->tick_begin("player threw an item");

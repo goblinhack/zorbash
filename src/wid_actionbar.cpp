@@ -1095,13 +1095,14 @@ void wid_actionbar_pixelart_init(void)
     wid_actionbar_fini();
   }
 
-  DBG("Actionbar init create");
+  CON("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
   TRACE_AND_INDENT();
 
   bool ui_icon_collect = false;
   if (player->check_anything_to_carry(false)) {
     ui_icon_collect = true;
   }
+
   //
   // I don't like this - it is missing a key and makes things more complex?
   //
@@ -1113,7 +1114,12 @@ void wid_actionbar_pixelart_init(void)
     ui_icon_close = true;
   }
 
-  int options = 9;
+  int options = 7;
+
+  if (game->state == Game::STATE_NORMAL) {
+    options++;
+    options++;
+  }
 
   if (ui_icon_collect) {
     options++;
@@ -1365,7 +1371,7 @@ void wid_actionbar_ascii_init(void)
     wid_actionbar_fini();
   }
 
-  DBG("Actionbar init create");
+  CON("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
   TRACE_AND_INDENT();
 
   bool ui_icon_collect = false;

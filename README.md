@@ -1,6 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- ascii inventory borked when selecting items                                                                                                  -->
 <!-- if grass and blood on same tile, describe both                                                                                               -->
 <!-- add burnt objects                                                                                                                            -->
 <!-- eels                                                                                                                                         -->

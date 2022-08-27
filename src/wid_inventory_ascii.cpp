@@ -19,7 +19,7 @@
 
 bool wid_inventory_create_ascii(Thingp selected, Thingp over)
 {
-  DBG2("Create inventory");
+  CON("Create inventory");
   TRACE_AND_INDENT();
 
   auto level = game->get_current_level();
@@ -248,8 +248,14 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   // Highlight the thing we're over, or the selected thing with preference.
   //
   Thingp item_option = wid_inventory_thing_over;
+  if (item_option) {
+    item_option->con("ITEM");
+  }
   if (wid_inventory_thing_selected) {
     item_option = wid_inventory_thing_selected;
+    if (item_option) {
+      item_option->con("SELECTED");
+    }
   }
 
   if (item_option) {
@@ -513,5 +519,11 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   wid_update(wid_inventory_window);
   game->change_state(Game::STATE_INVENTORY, "open inventory");
 
+  CON("Created inventory");
+  CON(" ");
+  CON(" ");
+  CON(" ");
+  CON(" ");
+  CON(" ");
   return true;
 }
