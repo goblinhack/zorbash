@@ -76,7 +76,7 @@ void Level::new_projectile(ThingId id, ThingId victim_id, ProjectileInfo info, u
         return;
       }
       t->has_projectile = true;
-      t->log("New internal projectile");
+      t->log("New projectile");
     }
   }
 
@@ -138,5 +138,6 @@ void Thing::delete_projectile(void)
   });
 
   level->all_projectiles.erase(e, level->all_projectiles.end());
+
   has_projectile = false;
 }

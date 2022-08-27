@@ -2353,6 +2353,8 @@ public:
   void on_swing(Thingp what);
   void on_teleport(void);
   void on_thrown(void);
+  void noop(void);
+  void on_thrown_callback(void);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);

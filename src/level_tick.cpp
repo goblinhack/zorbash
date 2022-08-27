@@ -17,6 +17,9 @@
 
 void Level::handle_all_pending_things(void)
 {
+  handle_internal_particles();
+  handle_external_particles();
+
   for (auto &i : animated_things_pending_remove) {
     // i.second->con("pending remove");
     animated_things.erase(i.first);

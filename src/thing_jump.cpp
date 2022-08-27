@@ -358,8 +358,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       //
       // So the player is visible above light
       //
-      level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false,
-                                   true /* make_visible_at_end */);
+      auto callback = std::bind(&Thing::visible, this);
+      level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false, callback);
     } else {
       //
       // If offscreen, then jump quicker, so the we do not have to wait so long.
@@ -369,8 +369,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         duration = 0;
       }
 
-      level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false,
-                                   true /* make_visible_at_end */);
+      auto callback = std::bind(&Thing::visible, this);
+      level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false, callback);
     }
 
     is_jumping = true;
@@ -394,14 +394,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
           //
           w->is_jumping = true;
 
+          auto callback = std::bind(&Thing::visible, this);
           if (is_player()) {
             level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                         true /* make_visible_at_end */);
+                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
           } else {
             level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                         true /* make_visible_at_end */);
+                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
           }
         }
       }
@@ -421,14 +420,13 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
           //
           // No, the weapon is shown as carry anim
           //
+          auto callback = std::bind(&Thing::visible, this);
           if (is_player()) {
             level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                         true /* make_visible_at_end */);
+                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
           } else {
             level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                         true /* make_visible_at_end */);
+                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
           }
         }
       }
@@ -458,12 +456,10 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       }
       if (is_player()) {
         level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                     false /* make_visible_at_end */);
+                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
       } else {
         level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()),
-                                     false /* make_visible_at_end */);
+                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
       }
     }
   }

@@ -69,6 +69,12 @@ bool Thing::throw_item_choose_target(Thingp what)
   return is_target_select(what);
 }
 
+void Thing::on_thrown_callback(void)
+{
+  on_thrown();
+  visible();
+}
+
 void Thing::throw_at(Thingp what, Thingp target)
 {
   TRACE_NO_INDENT();
@@ -129,19 +135,12 @@ void Thing::throw_at(Thingp what, Thingp target)
   what->move_to_immediately(throw_at);
 
   //
-  // Potions for example are used when thrown. Chocolate frogs, no.
+  // Important to call this prior to drop, as drop() will spawn a particle. We want to spawn our own particle here,
+  // which reacts when it hits the destination.
   //
-  what->location_check_forced();
-  if (what->is_used_when_thrown()) {
-    used(what, target, true /* remove_after_use */);
-  } else {
-    drop(what, target);
-  }
-
-  what->on_thrown();
-  what->hide();
-
   {
+    auto callback = std::bind(&Thing::on_thrown_callback, what);
+
     auto src   = (last_blit_tl + last_blit_br) / 2;
     auto dst   = (target->last_blit_tl + target->last_blit_br) / 2;
     auto sz    = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
@@ -152,11 +151,23 @@ void Thing::throw_at(Thingp what, Thingp target)
       // So the player is visible above light
       //
       level->new_external_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
-                                   true /* make_visible_at_end */);
+                                   callback);
     } else {
       level->new_internal_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
-                                   true /* make_visible_at_end */);
+                                   callback);
     }
+  }
+
+  //
+  // Potions for example are used when thrown. Chocolate frogs, no.
+  //
+  // Must come after the particel code above.
+  //
+  what->location_check_forced();
+  if (what->is_used_when_thrown()) {
+    used(what, target, true /* remove_after_use */);
+  } else {
+    drop(what, target);
   }
 
   if (is_player()) {

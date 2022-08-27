@@ -1,7 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- stone golems are gentle                                                                                                                      -->
+<!-- if grass and blood on same tile, describe both                                                                                               -->
+<!-- should not throw torch onto wall                                                                                                             -->
 <!-- add burnt objects                                                                                                                            -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->
