@@ -81,7 +81,7 @@ bool Thing::skill_remove(Thingp what)
 
   what->remove_owner();
   itemsp()->skills.remove(what->id);
-  game->request_remake_skillbox = true;
+  game->set_request_to_remake_skillbox();
 
   dbg("Removed %s", what->to_short_string().c_str());
   return true;
@@ -115,15 +115,15 @@ bool Thing::skill_use(Thingp what)
 void Thing::skill_deactivate(Thingp what)
 {
   TRACE_NO_INDENT();
-  what->is_activated            = false;
-  game->request_remake_skillbox = true;
+  what->is_activated = false;
+  game->set_request_to_remake_skillbox();
 }
 
 void Thing::skill_activate(Thingp what)
 {
   TRACE_NO_INDENT();
-  what->is_activated            = true;
-  game->request_remake_skillbox = true;
+  what->is_activated = true;
+  game->set_request_to_remake_skillbox();
 }
 
 int Thing::skill_enchant_count(const uint32_t slot)

@@ -53,8 +53,7 @@ void wid_inventory_fini(void)
 
   if (wid_inventory_window) {
     wid_destroy(&wid_inventory_window);
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
     game->change_state(Game::STATE_NORMAL, "inventory close");
   }
 }
@@ -641,8 +640,8 @@ void wid_inventory_over_requested(Thingp over)
   if (over) {
     over->log("Inventory over this thing");
   }
-  game->request_inventory_thing_over    = over;
-  game->request_inventory_thing_over_do = true;
+  game->request_inventory_thing_over = over;
+  game->set_request_to_update_inventory_with_thing_over();
 }
 
 void wid_inventory_select_requested(Thingp selected)
@@ -654,8 +653,8 @@ void wid_inventory_select_requested(Thingp selected)
   if (selected) {
     selected->log("Inventory over this thing");
   }
-  game->request_inventory_thing_selected    = selected;
-  game->request_inventory_thing_selected_do = true;
+  game->request_inventory_thing_selected = selected;
+  game->set_request_to_update_inventory_with_thing_selected();
 }
 
 bool wid_inventory_over(Thingp over)

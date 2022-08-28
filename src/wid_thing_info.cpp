@@ -397,7 +397,7 @@ bool Game::wid_thing_info_create(Thingp t, bool when_hovering_over)
   DBG3("Create wid thing info for %s", t->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (game->request_remake_rightbar) {
+  if (game->request_to_remake_rightbar) {
     //
     // Continue
     //
@@ -468,7 +468,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
 {
   TRACE_AND_INDENT();
 
-  if (game->request_remake_rightbar) {
+  if (game->request_to_remake_rightbar) {
     //
     // Continue
     //

@@ -131,8 +131,7 @@ int Thing::stat_dex_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stat_dex = v);
@@ -143,8 +142,7 @@ int Thing::stat_dex_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stat_dex -= v);
@@ -155,8 +153,7 @@ int Thing::stat_dex_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stat_dex += v);
@@ -167,8 +164,7 @@ int Thing::stat_dex_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stat_dex--);
@@ -179,8 +175,7 @@ int Thing::stat_dex_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stat_dex++);

@@ -98,17 +98,17 @@ void Level::handle_input_events(void)
 
     bool jump            = false;
     bool attack          = false;
-    bool up              = game->request_player_up;
-    bool down            = game->request_player_down;
-    bool right           = game->request_player_right;
-    bool left            = game->request_player_left;
-    bool wait_or_collect = game->request_player_wait_or_collect;
+    bool up              = game->request_player_move_up;
+    bool down            = game->request_player_move_down;
+    bool right           = game->request_player_move_right;
+    bool left            = game->request_player_move_left;
+    bool wait_or_collect = game->request_player_to_wait_or_collect;
 
-    game->request_player_up              = false;
-    game->request_player_down            = false;
-    game->request_player_right           = false;
-    game->request_player_left            = false;
-    game->request_player_wait_or_collect = false;
+    game->request_player_move_up            = false;
+    game->request_player_move_down          = false;
+    game->request_player_move_right         = false;
+    game->request_player_move_left          = false;
+    game->request_player_to_wait_or_collect = false;
 
     if (up || down || left || right || wait_or_collect) {
       if (player_tick(left, right, up, down, attack, wait_or_collect, jump)) {

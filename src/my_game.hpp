@@ -376,25 +376,25 @@ public:
   //
   Widp request_to_choose_level {};
 
-  bool request_reset_state {};
-  bool request_remake_rightbar {};
-  bool request_remake_inventory {};
-  bool request_remake_actionbar {};
-  bool request_remake_skillbox {};
-  bool request_remake_debuffbox {};
-  bool request_remake_buffbox {};
-  bool request_update_same_level {};
-  bool request_snapshot {}; // Something has requested a game snapshot
-  bool saving_snapshot {};
-  bool request_inventory_thing_over_do {};
-  bool request_inventory_thing_selected_do {};
-  bool request_player_up {};
-  bool request_player_down {};
-  bool request_player_left {};
-  bool request_player_right {};
-  bool request_player_wait_or_collect {};
-  bool request_ascend {};
-  bool request_descend {};
+  bool currently_saving_snapshot {};
+  bool request_player_move_down {};
+  bool request_player_move_left {};
+  bool request_player_move_right {};
+  bool request_player_move_up {};
+  bool request_player_to_ascend_level {};
+  bool request_player_to_descend_level {};
+  bool request_player_to_wait_or_collect {};
+  bool request_reset_state_change {};
+  bool request_to_remake_actionbar {};
+  bool request_to_remake_buffbox {};
+  bool request_to_remake_debuffbox {};
+  bool request_to_remake_inventory {};
+  bool request_to_remake_rightbar {};
+  bool request_to_remake_skillbox {};
+  bool request_to_save_snapshot {}; // Something has requested a game snapshot
+  bool request_to_update_inventory_with_thing_over {};
+  bool request_to_update_inventory_with_thing_selected {};
+  bool request_to_update_same_level {};
 
   uint32_t request_destroy_thing_info {}; // Timestamp
   uint32_t request_player_move {};        // Player pressed some keys
@@ -455,20 +455,51 @@ public:
 
   friend std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my);
   friend std::istream &operator>>(std::istream &in, Bits< class Game & > my);
-  void                 dump(std::string prefix, std::ostream &out);
-  void                 dump(std::string prefix);
-  void                 change_state(int state, const std::string &);
-  int                  get_move_speed(void);
-  void                 set_meta_data(Levelp);
+
+  int get_move_speed(void);
+
+  void change_state(int state, const std::string &);
+  void set_meta_data(Levelp);
+  void dump(std::string prefix, std::ostream &out);
+  void dump(std::string prefix);
+
+  void set_request_reset_state_change(void);
+  void set_request_to_remake_rightbar(void);
+  void set_request_to_remake_inventory(void);
+  void set_request_to_remake_actionbar(void);
+  void set_request_to_remake_skillbox(void);
+  void set_request_to_remake_debuffbox(void);
+  void set_request_to_remake_buffbox(void);
+  void set_request_to_update_same_level(void);
+  void set_request_to_save_snapshot(void);
+  void set_currently_saving_snapshot(void);
+  void set_request_to_update_inventory_with_thing_over(void);
+  void set_request_to_update_inventory_with_thing_selected(void);
+
+  void unset_request_reset_state_change(void);
+  void unset_request_to_remake_rightbar(void);
+  void unset_request_to_remake_inventory(void);
+  void unset_request_to_remake_actionbar(void);
+  void unset_request_to_remake_skillbox(void);
+  void unset_request_to_remake_debuffbox(void);
+  void unset_request_to_remake_buffbox(void);
+  void unset_request_to_update_same_level(void);
+  void unset_request_to_save_snapshot(void);
+  void unset_currently_saving_snapshot(void);
+  void unset_request_to_update_inventory_with_thing_over(void);
+  void unset_request_to_update_inventory_with_thing_selected(void);
 };
 
-extern uint8_t     game_mouse_down(int x, int y, uint32_t button);
-extern uint8_t     game_mouse_up(int x, int y, uint32_t button);
-extern uint8_t     game_mouse_motion(int x, int y, int relx, int rely, int wheelx, int wheely);
-extern void        wid_main_menu_hide(void);
-extern void        wid_main_menu_destroy(void);
-extern void        game_display_flames(void);
-extern uint32_t    csum(char *mem, uint32_t len);
+extern uint8_t game_mouse_down(int x, int y, uint32_t button);
+extern uint8_t game_mouse_up(int x, int y, uint32_t button);
+extern uint8_t game_mouse_motion(int x, int y, int relx, int rely, int wheelx, int wheely);
+
+extern void wid_main_menu_hide(void);
+extern void wid_main_menu_destroy(void);
+extern void game_display_flames(void);
+
+extern uint32_t csum(char *mem, uint32_t len);
+
 extern std::string gama_state_to_string(int state);
 
 extern class Game *game;

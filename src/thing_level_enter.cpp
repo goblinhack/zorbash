@@ -141,8 +141,7 @@ void Thing::level_enter(bool rejoin)
   is_waiting_to_leave_level_has_completed_fall = false;
 
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
 
     dbg("Level entered");
 

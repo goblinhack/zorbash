@@ -16,7 +16,7 @@ bool Thing::ascend_dungeon_tick(void)
   dbg("Ascend dungeon tick");
   TRACE_AND_INDENT();
 
-  if (game->request_ascend) {
+  if (game->request_player_to_ascend_level) {
     //
     // User has pressed a button, forcing the change
     //

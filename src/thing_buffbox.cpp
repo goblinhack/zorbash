@@ -109,7 +109,7 @@ bool Thing::buffbox_id_remove(Thingp what)
     }
 
     if (what == t) {
-      game->request_remake_buffbox = true;
+      game->set_request_to_remake_buffbox();
 
       dbg("Remove slot");
       itemsp()->buffbox_id[ i ] = NoThingId;

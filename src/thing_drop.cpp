@@ -190,8 +190,7 @@ bool Thing::drop_into_ether(Thingp what)
   if (immediate_owner) {
     immediate_owner->itemsp()->carrying.remove(what->id);
   }
-  game->request_remake_rightbar = true;
-  LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+  game->set_request_to_remake_rightbar();
 
   dbg("Dropped %s into the ether", what->to_short_string().c_str());
   check_all_carried_items_are_owned();

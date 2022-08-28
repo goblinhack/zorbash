@@ -74,7 +74,7 @@ bool Thing::debuff_remove(Thingp what)
 
   what->remove_owner();
   itemsp()->debuffs.remove(what->id);
-  game->request_remake_debuffbox = true;
+  game->set_request_to_remake_debuffbox();
 
   dbg("Removed %s", what->to_short_string().c_str());
   return true;

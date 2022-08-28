@@ -121,9 +121,8 @@ void Thing::level_leave(void)
   }
 
   if (is_player()) {
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
-    game->request_remake_rightbar = true;
-    level->is_completed           = true;
-    level->is_entered_by_falling  = false;
+    game->set_request_to_remake_rightbar();
+    level->is_completed          = true;
+    level->is_entered_by_falling = false;
   }
 }

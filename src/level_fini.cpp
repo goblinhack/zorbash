@@ -111,10 +111,10 @@ void Level::fini(void)
     log("-");
   }
 
-  if (game->request_reset_state) {
+  if (game->request_reset_state_change) {
     CON("Handle deferred state to STATE_NORMAL");
     game->change_state(Game::STATE_NORMAL, "level fini, handle deferred state");
-    game->request_reset_state = false;
+    game->unset_request_reset_state_change();
   }
 
   pcg_random_allowed--;

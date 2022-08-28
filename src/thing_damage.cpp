@@ -40,8 +40,7 @@ int Thing::damage_current_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->damage_current = v);
@@ -52,8 +51,7 @@ int Thing::damage_current_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->damage_current -= v);
@@ -64,8 +62,7 @@ int Thing::damage_current_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->damage_current += v);
@@ -76,8 +73,7 @@ int Thing::damage_current_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->damage_current--);
@@ -88,8 +84,7 @@ int Thing::damage_current_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->damage_current++);

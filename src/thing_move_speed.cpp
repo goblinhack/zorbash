@@ -130,8 +130,7 @@ int Thing::move_speed_mod_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->move_speed_mod = v);
@@ -142,8 +141,7 @@ int Thing::move_speed_mod_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->move_speed_mod -= v);
@@ -154,8 +152,7 @@ int Thing::move_speed_mod_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->move_speed_mod += v);
@@ -166,8 +163,7 @@ int Thing::move_speed_mod_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->move_speed_mod--);
@@ -178,8 +174,7 @@ int Thing::move_speed_mod_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->move_speed_mod++);

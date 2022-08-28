@@ -271,9 +271,9 @@ bool Thing::bag_compress(void)
 
   if (! level->is_starting) {
     if (! level->is_being_destroyed) {
-      if (! game->request_remake_rightbar) {
-        game->request_remake_rightbar |= did_something;
-        if (game->request_remake_rightbar) {
+      if (! game->request_to_remake_rightbar) {
+        game->request_to_remake_rightbar |= did_something;
+        if (game->request_to_remake_rightbar) {
           dbg3("Bag: Request to remake inventory");
         }
       }

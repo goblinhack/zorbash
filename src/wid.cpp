@@ -6594,11 +6594,11 @@ static void wid_handle_requests(void)
   //
   // Update the inventory if needed. This is valid in both normal and inventory states.
   //
-  if (game->request_inventory_thing_selected_do) {
+  if (game->request_to_update_inventory_with_thing_selected) {
     DBG("Inventory: handle over selected thing");
     wid_inventory_select(game->request_inventory_thing_selected);
-    game->request_inventory_thing_selected    = nullptr;
-    game->request_inventory_thing_selected_do = false;
+    game->request_inventory_thing_selected = nullptr;
+    game->unset_request_to_update_inventory_with_thing_selected();
   }
 
   switch (game->state) {
@@ -6606,24 +6606,24 @@ static void wid_handle_requests(void)
       //
       // If we need to remake the rightbar, do so
       //
-      if (game->request_remake_rightbar || game->request_remake_skillbox) {
+      if (game->request_to_remake_rightbar || game->request_to_remake_skillbox) {
         DBG("Handle request to remake rightbar");
         wid_leftbar_init();
         if (wid_rightbar_init()) {
-          game->request_remake_rightbar = false;
-          game->request_remake_skillbox = false;
+          game->unset_request_to_remake_rightbar();
+          game->unset_request_to_remake_skillbox();
         }
         wid_actionbar_init();
-        game->request_remake_actionbar = false;
+        game->unset_request_to_remake_actionbar();
       }
 
       //
       // Update the actionbar
       //
-      if (game->request_remake_actionbar) {
+      if (game->request_to_remake_actionbar) {
         DBG("Handle request to remake actionhar");
         wid_actionbar_init();
-        game->request_remake_actionbar = false;
+        game->unset_request_to_remake_actionbar();
       }
 
       //
@@ -6643,17 +6643,17 @@ static void wid_handle_requests(void)
       //
       // Update the inventory if needed
       //
-      if (game->request_inventory_thing_over_do) {
+      if (game->request_to_update_inventory_with_thing_over) {
         DBG2("Inventory: handle over thing");
         wid_inventory_over(game->request_inventory_thing_over);
-        game->request_inventory_thing_over    = nullptr;
-        game->request_inventory_thing_over_do = false;
+        game->request_inventory_thing_over = nullptr;
+        game->unset_request_to_update_inventory_with_thing_over();
       }
 
-      if (game->request_remake_inventory) {
+      if (game->request_to_remake_inventory) {
         DBG2("Handle request to remake inventory");
         wid_inventory_init();
-        game->request_remake_inventory = false;
+        game->unset_request_to_remake_inventory();
       }
       break;
     case Game::STATE_OPTIONS_FOR_ITEM_MENU:

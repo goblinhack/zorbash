@@ -120,7 +120,7 @@ bool Thing::debuffbox_id_remove(Thingp what)
     }
 
     if (what == t) {
-      game->request_remake_debuffbox = true;
+      game->set_request_to_remake_debuffbox();
 
       dbg("Remove slot");
       itemsp()->debuffbox_id[ i ] = NoThingId;

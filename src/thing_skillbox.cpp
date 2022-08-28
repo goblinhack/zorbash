@@ -113,7 +113,7 @@ bool Thing::skillbox_id_remove(Thingp what)
     }
 
     if (what == t) {
-      game->request_remake_skillbox = true;
+      game->set_request_to_remake_skillbox();
 
       dbg("Remove slot");
       itemsp()->skillbox_id[ i ] = NoThingId;
@@ -224,7 +224,7 @@ bool Level::skillbox_over(const uint32_t slot)
 
   if (slot != game->skillbox_highlight_slot) {
     DBG2("Skillbox: Request to remake skillbox due to highlight");
-    game->request_remake_skillbox = true;
+    game->set_request_to_remake_skillbox();
     game->skillbox_highlight_slot = slot;
     what                          = skillbox_describe(slot);
   } else {
@@ -263,7 +263,7 @@ bool Level::skillbox_chosen(const uint32_t slot)
   }
 
   DBG2("Skillbox: Request to remake skillbox");
-  game->request_remake_skillbox = true;
+  game->set_request_to_remake_skillbox();
 
   auto oid = get(itemsp->skillbox_id, slot);
   if (! oid) {

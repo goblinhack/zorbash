@@ -476,7 +476,7 @@ static uint8_t wid_actionbar_ascend(Widp w, int x, int y, uint32_t button)
   }
 
   wid_actionbar_close_all_popups();
-  game->request_ascend = true;
+  game->request_player_to_ascend_level = true;
   game->tick_begin("ascend");
   wid_actionbar_init();
   delete wid_over_ascend;
@@ -551,7 +551,7 @@ static uint8_t wid_actionbar_descend(Widp w, int x, int y, uint32_t button)
   }
 
   wid_actionbar_close_all_popups();
-  game->request_descend = true;
+  game->request_player_to_descend_level = true;
   game->tick_begin("descend");
   wid_actionbar_init();
   delete wid_over_descend;
@@ -1097,7 +1097,7 @@ void wid_actionbar_pixelart_init(void)
   }
 
   DBG("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
-  backtrace_dump();
+  // backtrace_dump();
   TRACE_AND_INDENT();
 
   bool ui_icon_collect = false;
@@ -1219,7 +1219,7 @@ void wid_actionbar_pixelart_init(void)
     x_at += option_width;
   }
 
-  if (! game->request_ascend && add_ascend) {
+  if (! game->request_player_to_ascend_level && add_ascend) {
     auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar ascend");
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
@@ -1231,7 +1231,7 @@ void wid_actionbar_pixelart_init(void)
     x_at += option_width;
   }
 
-  if (! game->request_descend && add_descend) {
+  if (! game->request_player_to_descend_level && add_descend) {
     auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar descend");
     point tl = make_point(x_at, 0);
     point br = make_point(x_at + option_width - 1, option_width - 1);
@@ -1374,7 +1374,7 @@ void wid_actionbar_ascii_init(void)
   }
 
   DBG("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
-  backtrace_dump();
+  // backtrace_dump();
   TRACE_AND_INDENT();
 
   bool ui_icon_collect = false;
@@ -1483,7 +1483,7 @@ void wid_actionbar_ascii_init(void)
   }
 
   if (! game->robot_mode) {
-    if (! game->request_ascend && add_ascend) {
+    if (! game->request_player_to_ascend_level && add_ascend) {
       auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar ascend");
       point tl = make_point(x_at, 0);
       point br = make_point(x_at + option_width - 1, option_height - 1);
@@ -1499,7 +1499,7 @@ void wid_actionbar_ascii_init(void)
       x_at += option_width + 1;
     }
 
-    if (! game->request_descend && add_descend) {
+    if (! game->request_player_to_descend_level && add_descend) {
       auto  w  = wid_new_square_button(wid_actionbar, "wid actionbar descend");
       point tl = make_point(x_at, 0);
       point br = make_point(x_at + option_width - 1, option_height - 1);

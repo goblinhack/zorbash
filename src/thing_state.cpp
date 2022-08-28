@@ -102,8 +102,7 @@ void Thing::change_state(int new_state, const std::string &why)
     case MONST_STATE_OPEN_INVENTORY:
       if (is_player()) {
         wid_inventory_init();
-        game->request_remake_rightbar = true;
-        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+        game->set_request_to_remake_rightbar();
       }
       break;
     case MONST_STATE_USING_ENCHANTSTONE:

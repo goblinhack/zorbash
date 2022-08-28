@@ -91,12 +91,12 @@ void sdl_display_reset(void)
 
   config_game_gfx_update();
 
-  game->request_remake_rightbar  = true;
-  game->request_remake_inventory = true;
-  game->request_remake_actionbar = true;
-  game->request_remake_skillbox  = true;
-  game->request_remake_debuffbox = true;
-  game->request_remake_buffbox   = true;
+  game->set_request_to_remake_rightbar();
+  game->set_request_to_remake_inventory();
+  game->set_request_to_remake_actionbar();
+  game->set_request_to_remake_skillbox();
+  game->set_request_to_remake_debuffbox();
+  game->set_request_to_remake_buffbox();
 
   if (game->level) {
     game->level->scroll_map_to_player_immediately();

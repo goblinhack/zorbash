@@ -30,13 +30,13 @@ void Level::update(void)
     update_map();
   }
 
-  if (game->request_reset_state) {
+  if (game->request_reset_state_change) {
     game->change_state(Game::STATE_NORMAL, "level update");
-    game->request_reset_state = false;
+    game->unset_request_reset_state_change();
   }
 
-  if (game->request_update_same_level) {
-    game->request_update_same_level = false;
+  if (game->request_to_update_same_level) {
+    game->unset_request_to_update_same_level();
     update_same_level();
   }
 }

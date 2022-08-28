@@ -74,7 +74,7 @@ bool Thing::buff_remove(Thingp what)
 
   what->remove_owner();
   itemsp()->buffs.remove(what->id);
-  game->request_remake_buffbox = true;
+  game->set_request_to_remake_buffbox();
 
   dbg("Removed %s", what->to_short_string().c_str());
   return true;

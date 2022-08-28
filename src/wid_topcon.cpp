@@ -100,7 +100,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
-    game->request_ascend = true;
+    game->request_player_to_ascend_level = true;
     game->tick_begin("ascend");
     return false; // To avoid click noise
   }
@@ -109,7 +109,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     //
     // Handle in the next event, to give time to have two keys pressed to allow diagonal moves.
     //
-    game->request_descend = true;
+    game->request_player_to_descend_level = true;
     game->tick_begin("descend");
     return false; // To avoid click noise
   }
@@ -249,8 +249,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       } else {
         TOPCON("Nothing to drop.");
         wid_inventory_init();
-        game->request_remake_rightbar = true;
-        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+        game->set_request_to_remake_rightbar();
         return true;
       }
     }
@@ -293,8 +292,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       } else {
         TOPCON("Nothing to eat.");
         wid_inventory_init();
-        game->request_remake_rightbar = true;
-        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+        game->set_request_to_remake_rightbar();
       }
     }
     wid_rightbar_init();
@@ -356,8 +354,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       } else {
         TOPCON("Nothing to use.");
         wid_inventory_init();
-        game->request_remake_rightbar = true;
-        LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+        game->set_request_to_remake_rightbar();
       }
       return true;
     }

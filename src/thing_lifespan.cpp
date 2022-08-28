@@ -81,8 +81,7 @@ void Thing::lifespan_tick(void)
     charge_count_decr();
     if (charge_count()) {
       dbg("Lifespan expired (but has %d charges left)", charge_count());
-      game->request_remake_rightbar = true;
-      LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+      game->set_request_to_remake_rightbar();
       lifespan_set(tp()->lifespan());
       return;
     }

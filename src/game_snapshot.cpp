@@ -29,12 +29,12 @@ void Game::save_snapshot_check(void)
   //
   // Periodic snapshot saves
   //
-  if (game->request_snapshot || (move_count++ > game->config.snapshot_freq)) {
-    move_count             = 0;
-    game->request_snapshot = false;
-    game->saving_snapshot  = true;
+  if (game->request_to_save_snapshot || (move_count++ > game->config.snapshot_freq)) {
+    move_count = 0;
+    game->unset_request_to_save_snapshot();
+    game->set_currently_saving_snapshot();
     game->save_snapshot();
-    game->saving_snapshot = false;
-    g_saved_snapshot      = true;
+    game->unset_currently_saving_snapshot();
+    g_saved_snapshot = true;
   }
 }

@@ -16,7 +16,7 @@ bool Thing::descend_sewer_tick(void)
   dbg("Descend sewer tick");
   TRACE_AND_INDENT();
 
-  if (game->request_descend) {
+  if (game->request_player_to_descend_level) {
     //
     // User has pressed a button, forcing the change
     //

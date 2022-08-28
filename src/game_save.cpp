@@ -468,7 +468,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   TRACE_AND_INDENT();
   IF_DEBUG3 { my.t->log("Save"); }
 
-  if (game->saving_snapshot) {
+  if (game->currently_saving_snapshot) {
     //
     // Faster
     //

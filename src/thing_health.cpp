@@ -87,8 +87,7 @@ int Thing::health_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health = v);
@@ -99,8 +98,7 @@ int Thing::health_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health -= v);
@@ -111,8 +109,7 @@ int Thing::health_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health += v);
@@ -127,8 +124,7 @@ int Thing::health_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health--);
@@ -139,8 +135,7 @@ int Thing::health_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health++);
@@ -168,8 +163,7 @@ int Thing::health_max_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health_max = v);
@@ -180,8 +174,7 @@ int Thing::health_max_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health_max -= v);
@@ -192,8 +185,7 @@ int Thing::health_max_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health_max += v);
@@ -204,8 +196,7 @@ int Thing::health_max_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health_max--);
@@ -216,8 +207,7 @@ int Thing::health_max_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->health_max++);

@@ -61,8 +61,7 @@ int Thing::stamina_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stamina = v);
@@ -91,8 +90,7 @@ int Thing::stamina_decr(int v)
     infop()->stamina = 0;
   }
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   return n;
 }
@@ -101,8 +99,7 @@ int Thing::stamina_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stamina += v);
@@ -117,8 +114,7 @@ int Thing::stamina_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stamina--);
@@ -132,8 +128,7 @@ int Thing::stamina_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stamina++);
@@ -161,8 +156,7 @@ int Thing::stamina_max_set(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stamina_max = v);
@@ -173,8 +167,7 @@ int Thing::stamina_max_decr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stamina_max -= v);
@@ -185,8 +178,7 @@ int Thing::stamina_max_incr(int v)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stamina_max += v);
@@ -197,8 +189,7 @@ int Thing::stamina_max_decr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stamina_max--);
@@ -209,8 +200,7 @@ int Thing::stamina_max_incr(void)
 {
   TRACE_NO_INDENT();
   if (is_player()) {
-    game->request_remake_rightbar = true;
-    LOG("Request to remake rightbar at %s %d", __FUNCTION__, __LINE__);
+    game->set_request_to_remake_rightbar();
   }
   new_infop();
   auto n = (infop()->stamina_max++);

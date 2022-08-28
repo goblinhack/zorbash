@@ -49,7 +49,7 @@ void Game::change_state(int new_state, const std::string &why)
   if (new_state == STATE_NORMAL) {
     if (! pcg_random_allowed) {
       CON("Defer changing state to STATE_NORMAL");
-      game->request_reset_state = true;
+      game->set_request_reset_state_change();
       return;
     }
   }
@@ -129,12 +129,12 @@ void Game::change_state(int new_state, const std::string &why)
       wid_leftbar_fini();
       wid_actionbar_fini();
       wid_thing_info_fini("change state");
-      request_remake_rightbar  = false;
-      request_remake_inventory = false;
-      request_remake_actionbar = false;
-      request_remake_skillbox  = false;
-      request_remake_debuffbox = false;
-      request_remake_buffbox   = false;
+      request_to_remake_rightbar  = false;
+      request_to_remake_inventory = false;
+      request_to_remake_actionbar = false;
+      request_to_remake_skillbox  = false;
+      request_to_remake_debuffbox = false;
+      request_to_remake_buffbox   = false;
       break;
     case STATE_LOAD_MENU:
     case STATE_KEYBOARD_MENU:

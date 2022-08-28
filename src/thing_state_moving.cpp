@@ -22,7 +22,7 @@ bool Thing::state_moving(void)
     }
     change_state(MONST_STATE_IDLE, "move finished");
     if (is_player()) {
-      game->request_remake_actionbar = true;
+      game->set_request_to_remake_actionbar();
     }
     return true;
   }

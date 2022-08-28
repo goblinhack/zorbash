@@ -121,7 +121,7 @@ void Thing::light_dist_update_including_torch_effect(uint8_t &out_light_dist)
       // This causes a flicker and I slightly like that without
       // this you see a bit more of the level before it goes dark.
       //
-      game->request_update_same_level = true;
+      game->set_request_to_update_same_level();
     }
   }
 

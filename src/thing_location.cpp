@@ -150,7 +150,7 @@ void Thing::location_check_forced(void)
           dbg("Location check, set ascend check (1)");
           ascend_check = true;
         }
-      } else if (game->request_ascend || (curr_at == game->cursor_move_end)) {
+      } else if (game->request_player_to_ascend_level || (curr_at == game->cursor_move_end)) {
         dbg("Location check, over ascend sewer or dungeon (move end @%d,%d)", game->cursor_move_end.x,
             game->cursor_move_end.y);
         dbg("Location check, set ascend check (2)");
@@ -171,7 +171,7 @@ void Thing::location_check_forced(void)
           dbg("Location check, set descend check (1)");
           descend_check = true;
         }
-      } else if (game->request_descend || (curr_at == game->cursor_move_end)) {
+      } else if (game->request_player_to_descend_level || (curr_at == game->cursor_move_end)) {
         dbg("Location check, over descend sewer or dungeon (cursor move end @%d,%d)", game->cursor_move_end.x,
             game->cursor_move_end.y);
         dbg("Location check, set descend check (2)");
@@ -202,8 +202,8 @@ void Thing::location_check_forced(void)
   }
 
   if (is_player()) {
-    game->request_ascend  = false;
-    game->request_descend = false;
+    game->request_player_to_ascend_level  = false;
+    game->request_player_to_descend_level = false;
   }
 }
 
