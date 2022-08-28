@@ -429,6 +429,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   if (! wid_bag_container) {
     t->log("Is not over any bag");
     wid_in_transit_item_drop();
+    DBG("Request to remake inventory as dropped item");
     game->request_remake_inventory = true;
     return false;
   }
@@ -437,6 +438,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   auto bag    = game->thing_find(bag_id);
   if (! bag) {
     wid_in_transit_item_drop();
+    DBG("Request to remake inventory as no bag item");
     game->request_remake_inventory = true;
     return false;
   }
@@ -933,10 +935,9 @@ WidBag::~WidBag()
 WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, const std::string &title)
     : tl(tl), br(br)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   bag = bag_;
   bag->log("Create bag");
-  TRACE_AND_INDENT();
 
   {
     if (parent) {
@@ -963,8 +964,6 @@ WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, con
   wid_update(wid_bag_container);
 
   game->bags.push_back(this);
-
-  wid_actionbar_init();
 }
 
 Widp is_mouse_over_any_bag(void)

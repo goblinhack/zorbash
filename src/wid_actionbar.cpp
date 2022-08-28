@@ -1096,7 +1096,7 @@ void wid_actionbar_pixelart_init(void)
     wid_actionbar_fini();
   }
 
-  CON("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
+  DBG("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
   backtrace_dump();
   TRACE_AND_INDENT();
 
@@ -1373,7 +1373,8 @@ void wid_actionbar_ascii_init(void)
     wid_actionbar_fini();
   }
 
-  CON("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
+  DBG("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
+  backtrace_dump();
   TRACE_AND_INDENT();
 
   bool ui_icon_collect = false;

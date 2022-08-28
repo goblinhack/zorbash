@@ -459,7 +459,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action0)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 0"); // To remove bag or other info
     level->inventory_chosen(9);
     wid_rightbar_init();
@@ -472,7 +471,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action1)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 1"); // To remove bag or other info
     level->inventory_chosen(0);
     wid_rightbar_init();
@@ -485,7 +483,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action2)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 2"); // To remove bag or other info
     level->inventory_chosen(1);
     wid_rightbar_init();
@@ -498,7 +495,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action3)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 3"); // To remove bag or other info
     level->inventory_chosen(2);
     wid_rightbar_init();
@@ -511,7 +507,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action4)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 4"); // To remove bag or other info
     level->inventory_chosen(3);
     wid_rightbar_init();
@@ -524,7 +519,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action5)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 5"); // To remove bag or other info
     level->inventory_chosen(4);
     wid_rightbar_init();
@@ -537,7 +531,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action6)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 6"); // To remove bag or other info
     level->inventory_chosen(5);
     wid_rightbar_init();
@@ -550,7 +543,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action7)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 7"); // To remove bag or other info
     level->inventory_chosen(6);
     wid_rightbar_init();
@@ -563,7 +555,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action8)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 8"); // To remove bag or other info
     level->inventory_chosen(7);
     wid_rightbar_init();
@@ -576,7 +567,6 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_action9)) {
     CON("INF: Pressed action key");
     TRACE_AND_INDENT();
-    game->change_state(Game::STATE_NORMAL, "pressed action key");
     wid_thing_info_fini("key 9"); // To remove bag or other info
     level->inventory_chosen(8);
     wid_rightbar_init();

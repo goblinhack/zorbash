@@ -37,6 +37,8 @@ std::string gama_state_to_string(int state)
 
 void Game::change_state(int new_state, const std::string &why)
 {
+  TRACE_NO_INDENT();
+
   if (game->state == new_state) {
     return;
   }

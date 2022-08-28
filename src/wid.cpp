@@ -805,7 +805,7 @@ static void wid_mouse_over_end(void)
   if (wid_over) {
     if (! wid_ignore_events(wid_over)) {
       wid_last_over_event = time_ms_cached();
-      // CON("mouse over end %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+      // DBG("mouse over end %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
     }
   }
   wid_over = nullptr;
@@ -880,7 +880,7 @@ static uint8_t wid_mouse_over_begin(Widp w, uint32_t x, uint32_t y, int relx, in
   wid_over = w;
   if (! wid_ignore_events(wid_over)) {
     wid_last_over_event = time_ms_cached();
-    // CON("mouse over %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
+    // DBG("mouse over %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
   }
 
   wid_set_mode(w, WID_MODE_OVER);
@@ -2409,7 +2409,6 @@ static void wid_destroy_immediate(Widp w)
     wid_over = nullptr;
     if (! wid_ignore_events(w)) {
       wid_last_over_event = time_ms_cached();
-      CON("mouse destroy %s mouse %d,%d.", wid_over->name.c_str(), ascii_mouse_x, ascii_mouse_y);
     }
   }
 
@@ -6586,7 +6585,7 @@ static void wid_handle_requests(void)
   //
   if (game->request_destroy_thing_info) {
     if (time_have_x_tenths_passed_since(1, game->request_destroy_thing_info)) {
-      DBG2("Handle request to destroy thing info");
+      DBG("Handle request to destroy thing info");
       game->request_destroy_thing_info = false;
       wid_thing_info_fini("wid request destroy info");
     }
@@ -6596,7 +6595,7 @@ static void wid_handle_requests(void)
   // Update the inventory if needed. This is valid in both normal and inventory states.
   //
   if (game->request_inventory_thing_selected_do) {
-    DBG2("Inventory: handle over selected thing");
+    DBG("Inventory: handle over selected thing");
     wid_inventory_select(game->request_inventory_thing_selected);
     game->request_inventory_thing_selected    = nullptr;
     game->request_inventory_thing_selected_do = false;
@@ -6608,7 +6607,7 @@ static void wid_handle_requests(void)
       // If we need to remake the rightbar, do so
       //
       if (game->request_remake_rightbar || game->request_remake_skillbox) {
-        CON("Handle request to remake inventory");
+        DBG("Handle request to remake rightbar");
         wid_leftbar_init();
         if (wid_rightbar_init()) {
           game->request_remake_rightbar = false;
@@ -6622,7 +6621,7 @@ static void wid_handle_requests(void)
       // Update the actionbar
       //
       if (game->request_remake_actionbar) {
-        CON("Handle request to remake actionhar");
+        DBG("Handle request to remake actionhar");
         wid_actionbar_init();
         game->request_remake_actionbar = false;
       }

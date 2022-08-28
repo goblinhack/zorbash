@@ -388,16 +388,16 @@ public:
   bool saving_snapshot {};
   bool request_inventory_thing_over_do {};
   bool request_inventory_thing_selected_do {};
+  bool request_player_up {};
+  bool request_player_down {};
+  bool request_player_left {};
+  bool request_player_right {};
+  bool request_player_wait_or_collect {};
+  bool request_ascend {};
+  bool request_descend {};
 
   uint32_t request_destroy_thing_info {}; // Timestamp
   uint32_t request_player_move {};        // Player pressed some keys
-  bool     request_player_up {};
-  bool     request_player_down {};
-  bool     request_player_left {};
-  bool     request_player_right {};
-  bool     request_player_wait_or_collect {};
-  bool     request_ascend {};
-  bool     request_descend {};
 
   Thingp request_inventory_thing_over {};
   Thingp request_inventory_thing_selected {};
