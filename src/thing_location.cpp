@@ -55,9 +55,10 @@ void Thing::location_check_forced(void)
   // Cool down / heat up
   //
   temperature_tick();
-  if (is_dead) {
-    return;
-  }
+
+  //
+  // Allow fall through to fall check, so burnt things can fall.
+  //
 
   //
   // Check for calling before the dead check, so dead dogmen can fall.

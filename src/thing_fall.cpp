@@ -223,6 +223,9 @@ bool Thing::fall_to_next_level(void)
     game->current_level = fall_to;
   }
 
+  dbg("Try to fall where to fall in the next level at depth %d", fall_to.z);
+  TRACE_AND_INDENT();
+
   auto tries = 0;
   for (;;) {
     int x;

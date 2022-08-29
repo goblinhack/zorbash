@@ -6,10 +6,6 @@
 
 void Thing::fall_into_the_void(void)
 {
-  if (is_dead) {
-    return;
-  }
-
   level_pop();
   is_falling        = false;
   is_changing_level = false;

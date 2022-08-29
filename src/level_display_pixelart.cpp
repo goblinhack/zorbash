@@ -240,7 +240,7 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
             //
             IF_DEBUG2
             {
-              if (! t->is_moving && ! t->is_jumping && ! t->is_falling) {
+              if (! t->is_moving && ! t->is_jumping && ! t->is_falling && ! t->is_tmp_thing()) {
                 if (t->curr_at != make_point(t->interpolated_at_get())) {
                   t->die("Thing is not where its interpolated to be; is at %f,%f", t->interpolated_at_get().x,
                          t->interpolated_at_get().y);
