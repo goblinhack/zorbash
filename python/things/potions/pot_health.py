@@ -1,7 +1,15 @@
 import my
 import tp
 
-self = None
+
+def on_get_text_long_description(owner, me, x, y):
+    enchant = my.thing_enchant_get(me)
+    if enchant == 0:
+        return ["Restores you to 80 percent health"]
+    elif enchant == 1:
+        return ["Restores you to 90 percent health"]
+    else:
+        return ["Restores you to full health"]
 
 
 def on_thrown(me, x, y):
@@ -71,18 +79,9 @@ def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
         my.thing_msg(me, "The potion bubbles.")
-    enchant = my.thing_enchant_get(me)
-    global self
-    if enchant == 0:
-        my.text_long_description(self, "Restores you to 80 percent health")
-    elif enchant == 0:
-        my.text_long_description(self, "Restores you to 90 percent health")
-    else:
-        my.text_long_description(self, "Restores you to full health")
 
 
 def tp_init(name, text_long_name, text_short_name):
-    global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
     my.collision_hit_priority(self, 5)
@@ -102,6 +101,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
+    my.on_get_text_long_description_do(self, "me.on_get_text_long_description()")
     my.is_enchantable(self, True)
     my.is_glass(self, True)
     my.is_health_booster(self, True)

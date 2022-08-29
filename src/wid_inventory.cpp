@@ -32,21 +32,25 @@ void wid_inventory_fini(void)
   TRACE_AND_INDENT();
 
   if (wid_inventory_thing_info) {
+    DBG2("Close inventory; delete inventory thing info");
     delete wid_inventory_thing_info;
     wid_inventory_thing_info = nullptr;
   }
 
   if (wid_inventory_bag) {
+    DBG2("Close inventory; delete inventory thing bag");
     delete wid_inventory_bag;
     wid_inventory_bag = nullptr;
   }
 
   if (wid_inventory_thing_selected) {
+    DBG2("Close inventory; delete inventory thing selected");
     wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected cleared");
   }
   wid_inventory_thing_selected = nullptr;
 
   if (wid_inventory_thing_over) {
+    DBG2("Close inventory; delete inventory thing over");
     wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected cleared");
   }
   wid_inventory_thing_over = nullptr;

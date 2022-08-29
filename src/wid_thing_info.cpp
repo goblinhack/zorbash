@@ -1758,7 +1758,10 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
       hates += "fire";
     }
   } else if (t->is_meltable()) {
-    w->log("Can melt.", TEXT_FORMAT_LHS);
+    //
+    // Is this too much helpful info?
+    //
+    // w->log("Can melt.", TEXT_FORMAT_LHS);
   } else if (t->is_able_to_burn()) {
     if (t->is_monst() || t->is_player()) {
       //
@@ -1766,12 +1769,21 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
       // w->log("Can catch fire.", TEXT_FORMAT_LHS);
       //
     } else {
-      w->log("Item can burn.", TEXT_FORMAT_LHS);
+      //
+      // Is this too much helpful info?
+      //
+      // w->log("Item can burn.", TEXT_FORMAT_LHS);
     }
   } else if (t->is_combustible()) {
-    w->log("Is combustible.", TEXT_FORMAT_LHS);
+    //
+    // Is this too much helpful info?
+    //
+    // w->log("Is combustible.", TEXT_FORMAT_LHS);
   } else if (t->is_very_combustible()) {
-    w->log("Can explode!", TEXT_FORMAT_LHS);
+    //
+    // Is this too much helpful info?
+    //
+    // w->log("Can explode!", TEXT_FORMAT_LHS);
   }
 
   if (t->is_item()) {

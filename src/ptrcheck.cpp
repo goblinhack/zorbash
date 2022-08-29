@@ -316,6 +316,7 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
   if (elem) {
     auto pc = elem->pc;
 
+    fprintf(stderr, "PTRCHECK: found");
     auto a = pc->allocated_by;
     if (a) {
       fprintf(stderr, "PTRCHECK: Currently allocated at %p \"%s\" (%u bytes) at %s:%s line %u at %s\n", pc->ptr,
@@ -343,6 +344,8 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
       }
     }
 #endif
+  } else {
+    fprintf(stderr, "PTRCHECK: %p not found", ptr);
   }
 
   //
@@ -433,7 +436,7 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
   }
 
   CON("^^^^^ End of pointer history for %p ^^^^^", ptr);
-  exit(1);
+  return nullptr;
 }
 
 //
@@ -482,6 +485,11 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
       l->bt->init();
       timestamp(l->ts, sizeof(l->ts));
 
+#ifdef ENABLE_DEBUG_PTRCHECK
+      std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr,
+                                  pc->what, pc->size, file, func, line, l->ts);
+#endif
+
       pc->last_seen_at++;
       pc->last_seen_size++;
 
@@ -494,10 +502,6 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
       }
     }
 #endif
-#ifdef ENABLE_DEBUG_PTRCHECK
-    std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr, pc->what,
-                                pc->size, file, func, line, l->ts);
-#endif
     return (pc);
   } else if (! ptr) {
     ERR("%s%p NULL pointer %s:%s line %u", null_pointer_warning, ptr, file, func, line);
@@ -507,10 +511,9 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
   //
   // We may be about to crash. Complain!
   //
-  ERR("%s%p %s:%s line %u", unknown_ptr_warning, ptr, file, func, line);
-
+  CON("%s%p %s:%s line %u", unknown_ptr_warning, ptr, file, func, line);
   ptrcheck_describe_pointer(mtype, ptr);
-  exit(1);
+  DIE("%s%p %s:%s line %u", unknown_ptr_warning, ptr, file, func, line);
 }
 
 //
@@ -522,7 +525,8 @@ void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, con
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
-  auto ts = timestamp();
+  char tmp[ TS_SIZE ];
+  auto ts = timestamp(tmp, sizeof(tmp));
   fprintf(stderr, "%s: PTRCHECK: Alloc %p \"%s\" (%u bytes) at %s:%s line %u\n", ts, ptr, what, size, file, func,
           line);
 #endif
@@ -600,9 +604,10 @@ int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int 
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
-  auto ts = timestamp();
+  char tmp[ TS_SIZE ];
+  auto ts = timestamp(tmp, sizeof(tmp));
   fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u ringbuf_current_size %u\n", ts, ptr, file, func, line,
-          ringbuf_current_size);
+          ringbuf_current_size[ mtype ]);
 #endif
 
   if (! ptr) {
