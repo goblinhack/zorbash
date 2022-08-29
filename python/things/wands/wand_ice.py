@@ -3,6 +3,10 @@ import tp
 
 
 def on_thrown(me, x, y):
+    if my.level_is_chasm_at(me, x, y):
+        return
+    if my.level_is_water_at(me, x, y):
+        return
     for dx in range(-1, 2):
         for dy in range(-1, 2):
             my.spawn_at(me, "icecube", x + dx, y + dy)
