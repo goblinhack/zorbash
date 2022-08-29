@@ -962,7 +962,14 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
       victim->wake("attacked, but no damage");
 
       if (is_player() || (owner && owner->is_player())) {
-        msg("You inflict no damage on %s.", victim->text_the().c_str());
+        //
+        // If hitting a rock with a damaged weapon, give more feedback as to why there is no damage.
+        //
+        if (is_weapon() && (weapon_damaged_pct() < 100)) {
+          msg("Your damaged weapon inflicts no damage on %s.", victim->text_the().c_str());
+        } else {
+          msg("You inflict no damage on %s.", victim->text_the().c_str());
+        }
 
         if (game->robot_mode) {
           BOTCON("Robot fails to damage %s.", victim->text_the().c_str());
