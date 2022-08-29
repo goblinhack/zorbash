@@ -39,8 +39,14 @@ void Thing::killed(Thingp defeater, const char *reason)
       dbg("Killed");
     }
   }
-  TRACE_AND_INDENT();
-  auto player = level->player;
+
+  TRACE_NO_INDENT();
+  Thingp player = nullptr;
+  if (level) {
+    player = level->player;
+  } else {
+    err("Thing has no level");
+  }
 
   ///////////////////////////////////////////////////////////////
   // WARNING: defeater can be nullptr
@@ -51,6 +57,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   // If already dead, do nothing
   //
   if (is_dead) {
+    TRACE_NO_INDENT();
     if (is_loggable()) {
       dbg("Already dead");
     }
@@ -78,6 +85,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   // Unequip weapons. Keep player items around for post mortem analysis.
   //
+  TRACE_NO_INDENT();
   if (! is_player()) {
     FOR_ALL_EQUIP(e) { unequip("owner is dead", e, false); }
   }
@@ -85,6 +93,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   // If in a bag, get out of there!
   //
+  TRACE_NO_INDENT();
   auto i_o = immediate_owner();
   if (i_o) {
     i_o->bag_remove(this);
@@ -94,10 +103,12 @@ void Thing::killed(Thingp defeater, const char *reason)
   // If a minion mob dies, kill all minions
   //
   if (defeater && is_mob()) {
+    TRACE_NO_INDENT();
     destroy_minions(defeater);
   }
 
   if (defeater && is_spawner()) {
+    TRACE_NO_INDENT();
     destroy_spawned(defeater);
   }
 
@@ -107,6 +118,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   // Resurrect unless say this was a minion and its mob died
   //
   if (! is_resurrection_blocked) {
+    TRACE_NO_INDENT();
     if (is_resurrectable()) {
       tick_resurrect_when_set(game->tick_current + resurrect_when());
     }
@@ -115,9 +127,11 @@ void Thing::killed(Thingp defeater, const char *reason)
   //
   // So that slimes don't keep moving when dead
   //
+  TRACE_NO_INDENT();
   move_finish();
 
   if (maybe_itemsp()) {
+    TRACE_NO_INDENT();
     //
     // Drop everything!
     //
@@ -137,6 +151,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   }
 
   if (! is_corpse_currently) {
+    TRACE_NO_INDENT();
     if (on_death_is_open()) {
       dbg("Defeated, now open");
       level_pop();
@@ -146,6 +161,7 @@ void Thing::killed(Thingp defeater, const char *reason)
         int distance = distance_to_player();
         if (is_door()) {
           if (defeater && defeater->is_fire()) {
+            TRACE_NO_INDENT();
             if (distance < 5) {
               msg("The door burns through.");
             } else if (distance < DMAP_IS_PASSABLE) {
@@ -154,8 +170,10 @@ void Thing::killed(Thingp defeater, const char *reason)
               msg("You smell smoke in the air.");
             }
           } else if (defeater && defeater->is_player()) {
+            TRACE_NO_INDENT();
             msg("The door crashes open.");
           } else {
+            TRACE_NO_INDENT();
             if (distance <= 1) {
               msg("You see the door crash open.");
             } else if (distance < DMAP_IS_PASSABLE) {
@@ -170,14 +188,17 @@ void Thing::killed(Thingp defeater, const char *reason)
           // e.g. treasure chest
           //
           if (defeater && defeater->is_fire()) {
+            TRACE_NO_INDENT();
             if (distance < 5) {
               msg("%s burns.", text_The().c_str());
             } else {
               msg("You smell smoke in the air.");
             }
           } else if (defeater && defeater->is_player()) {
+            TRACE_NO_INDENT();
             msg("%s breaks open.", text_The().c_str());
           } else {
+            TRACE_NO_INDENT();
             if (distance <= 1) {
               msg("You see %s crash open.", text_the().c_str());
             } else if (distance < DMAP_IS_PASSABLE) {
@@ -192,16 +213,19 @@ void Thing::killed(Thingp defeater, const char *reason)
   }
 
   if (! level->is_being_destroyed) {
+    TRACE_NO_INDENT();
     place_blood(true);
 
     //
     // Add to the hiscore table?
     //
     if (is_player()) {
+      TRACE_NO_INDENT();
       //
       // Poor player
       //
       if (game->robot_mode) {
+        TRACE_NO_INDENT();
         if (defeater && defeater->is_acid()) {
           msg("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
@@ -218,6 +242,7 @@ void Thing::killed(Thingp defeater, const char *reason)
           msg("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
         }
       } else {
+        TRACE_NO_INDENT();
         if (defeater && defeater->is_acid()) {
           msg("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
@@ -237,6 +262,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     }
 
     {
+      TRACE_NO_INDENT();
       auto on_death = on_death_do();
       if (! std::empty(on_death)) {
         auto t = split_tokens(on_death, '.');
@@ -264,6 +290,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     //
     // If this is the leader, the followers may react
     //
+    TRACE_NO_INDENT();
     notify_followers_of_death_of_my_leader();
 
     //
@@ -278,6 +305,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     // Add to the hiscore table?
     //
     if (is_player()) {
+      TRACE_NO_INDENT();
       //
       // Poor player
       //
@@ -297,9 +325,12 @@ void Thing::killed(Thingp defeater, const char *reason)
       level->is_map_follow_player = false;
       game->wid_dead_select(reason);
     } else if (is_loggable()) {
+      TRACE_NO_INDENT();
       dbg("%s is killed, %s", The_no_dying.c_str(), reason);
       if (defeater && (defeater != this)) {
+        TRACE_NO_INDENT();
         if (defeater->is_player()) {
+          TRACE_NO_INDENT();
           //
           // Killed by the player
           //
@@ -323,7 +354,8 @@ void Thing::killed(Thingp defeater, const char *reason)
 
           defeater->score_add(this);
         } else if (defeater->is_monst() && player->level &&
-                   get(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+                   get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+          TRACE_NO_INDENT();
           //
           // Killed by a monster
           //
@@ -343,6 +375,7 @@ void Thing::killed(Thingp defeater, const char *reason)
             msg("%s is destroyed %s.", The_no_dying.c_str(), reason);
           }
         } else if (is_monst() && (distance_to_player() >= DMAP_IS_PASSABLE)) {
+          TRACE_NO_INDENT();
           if (is_undead()) {
             msg("You hear the distant cry of the undead...");
           } else if (is_jelly()) {
@@ -354,7 +387,8 @@ void Thing::killed(Thingp defeater, const char *reason)
           } else {
             msg("You hear a distant shriek...");
           }
-        } else if (player->level && get(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+        } else if (player->level && get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+          TRACE_NO_INDENT();
           //
           // Killed by something else, like an icecube.
           //
@@ -372,17 +406,20 @@ void Thing::killed(Thingp defeater, const char *reason)
     }
 
     if (is_corpse_currently) {
+      TRACE_NO_INDENT();
       //
       // Already a corpse
       //
       dbg("Already a corpse, clean it up");
       if (! tick_resurrect_when()) {
+        TRACE_NO_INDENT();
         if (is_frozen) {
           (void) level->thing_new(tp_find("explosion_cold"), curr_at);
           (void) level->thing_new(tp_find("water"), curr_at);
         }
 
         if (is_corpse_with_bones()) {
+          TRACE_NO_INDENT();
           dbg("Can place final bones");
           auto tpp = tp_random_bones();
           if (tpp) {
@@ -391,10 +428,12 @@ void Thing::killed(Thingp defeater, const char *reason)
         }
       }
     } else if (is_corpse_on_death()) {
+      TRACE_NO_INDENT();
       //
       // Leaves a corpse
       //
       if (! level->is_being_destroyed) {
+        TRACE_NO_INDENT();
         dbg("Defeated, leaves corpse");
         level->is_corpse_set(curr_at.x, curr_at.y);
 
@@ -424,6 +463,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     // If this was blocking the way to the player, update that now
     //
     if (is_obs_wall_or_door()) {
+      TRACE_NO_INDENT();
       level->request_dmap_to_player_update = true;
     }
   }
@@ -435,6 +475,7 @@ void Thing::killed(Thingp defeater, const char *reason)
   is_dead  = true;
   is_dying = false;
 
+  TRACE_NO_INDENT();
   level_pop();
 
   if (is_loggable()) {
