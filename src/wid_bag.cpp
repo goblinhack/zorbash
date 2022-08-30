@@ -28,13 +28,15 @@ static void wid_bag_tick(Widp w);
 
 static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   bag->log("Empty bag");
   for (auto item : wid_find_all_containing(wid_bag_container, "wid_bag item")) {
     bag->log("+ destroy item %s", wid_get_name(item).c_str());
     wid_destroy_nodelay(&item);
   }
 
+  TRACE_NO_INDENT();
   bag->log("Populate the bag");
 
   //
@@ -42,6 +44,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
   //
   FOR_ALL_CARRIED_BY(bag, item)
   {
+    TRACE_NO_INDENT();
     auto t = game->thing_find(item.id);
     if (unlikely(! t)) {
       continue;
@@ -119,11 +122,14 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     }
   }
 
+  TRACE_NO_INDENT();
   wid_update(wid_bag_container);
 }
 
 static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag, Thingp t, point at)
 {
+  TRACE_NO_INDENT();
+
   t->log("Can place at %d,%d", at.x, at.y);
 
   wid_destroy(&game->in_transit_item);
@@ -149,7 +155,8 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
 
 uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   DBG3("Place in transit item");
   TRACE_AND_INDENT();
   auto level = game->get_current_level();
@@ -181,6 +188,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   // Pver the rightbar?
   //
   if (is_mouse_over_rightbar()) {
+    TRACE_NO_INDENT();
     t->log("Is over inventory");
     if (game->level->player->carry(t)) {
       t->log("Placed in inventory");
@@ -197,6 +205,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   auto wid_bag_container = is_mouse_over_any_bag();
 
   for (auto over : wid_find_all_at(point(x, y))) {
+    TRACE_NO_INDENT();
     if (over->name == "item slot") {
       auto slot = wid_get_int_context(over);
       game->level->inventory_assign(slot, t);
@@ -227,6 +236,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
 
     if (over->name == "equip_armor") {
+      TRACE_NO_INDENT();
       auto what = t;
       if (! what->is_armor()) {
         TOPCON("Cannot equip %s as armor.", what->text_the().c_str());
@@ -247,6 +257,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
 
     if (over->name == "equip_cloak") {
+      TRACE_NO_INDENT();
       auto what = t;
       if (! what->is_cloak()) {
         TOPCON("Cannot equip %s as cloak.", what->text_the().c_str());
@@ -267,6 +278,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
 
     if (over->name == "equip_amulet") {
+      TRACE_NO_INDENT();
       auto what = t;
       if (! what->is_amulet()) {
         TOPCON("Cannot equip %s as amulet.", what->text_the().c_str());
@@ -287,6 +299,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
 
     if (over->name == "equip_boots") {
+      TRACE_NO_INDENT();
       auto what = t;
       if (! what->is_boots()) {
         TOPCON("Cannot equip %s as boots.", what->text_the().c_str());
@@ -307,6 +320,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
 
     if (over->name == "equip_helmet") {
+      TRACE_NO_INDENT();
       auto what = t;
       if (! what->is_helmet()) {
         TOPCON("Cannot equip %s as helmet.", what->text_the().c_str());
@@ -327,6 +341,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
 
     if (over->name == "equip_gauntlet") {
+      TRACE_NO_INDENT();
       auto what = t;
       if (! what->is_gauntlet()) {
         TOPCON("Cannot equip %s as gauntlet.", what->text_the().c_str());
@@ -347,6 +362,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
 
     if (over->name == "equip_shield") {
+      TRACE_NO_INDENT();
       auto what = t;
       if (! what->is_shield()) {
         TOPCON("Cannot equip %s as shield.", what->text_the().c_str());
@@ -367,6 +383,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
 
     if (over->name == "equip_ring1") {
+      TRACE_NO_INDENT();
       auto what = t;
       if (! what->is_ring()) {
         TOPCON("Cannot wear %s as a ring.", what->text_the().c_str());
@@ -390,6 +407,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
 
     if (over->name == "equip_ring2") {
+      TRACE_NO_INDENT();
       auto what = t;
       if (! what->is_ring()) {
         TOPCON("Cannot wear %s as a ring.", what->text_the().c_str());
@@ -414,6 +432,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   }
 
   if (! wid_bag_container) {
+    TRACE_NO_INDENT();
     t->log("Is not over any bag");
     wid_in_transit_item_drop();
     DBG("Request to remake inventory as dropped item");
@@ -424,12 +443,14 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   auto bag_id = wid_get_thing_id_context(wid_bag_container);
   auto bag    = game->thing_find(bag_id);
   if (! bag) {
+    TRACE_NO_INDENT();
     wid_in_transit_item_drop();
     DBG("Request to remake inventory as no bag item");
     game->set_request_to_remake_inventory();
     return false;
   }
 
+  TRACE_NO_INDENT();
   auto       at = point(ascii_mouse_x, ascii_mouse_y);
   static int tlx, tly, brx, bry;
   wid_get_tl_x_tl_y_br_x_br_y(wid_bag_container, &tlx, &tly, &brx, &bry);
@@ -444,13 +465,16 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   // /
   bag->log("Try to place %s at %d,%d", t->to_short_string().c_str(), at.x, at.y);
   if (bag->bag_can_place_at(t, at)) {
+    TRACE_NO_INDENT();
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, at);
   } else if (t->maybe_itemsp() && bag->bag_can_place_at(t, t->itemsp()->last_bag_position)) {
+    TRACE_NO_INDENT();
     //
     // Place back where it was picked up
     //
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, t->itemsp()->last_bag_position);
   } else {
+    TRACE_NO_INDENT();
     //
     // Place anywhere
     //
@@ -463,6 +487,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     }
   }
 
+  TRACE_NO_INDENT();
   DBG3("Pressed in transit item; change state");
   wid_inventory_init();
   game->set_request_to_remake_rightbar();
@@ -479,9 +504,11 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
 
 uint8_t wid_in_transit_item_drop(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   DBG3("Drop in transit item");
   TRACE_AND_INDENT();
+
   if (! game->in_transit_item) {
     DBG3("No in transit item");
     return false;
@@ -512,7 +539,8 @@ uint8_t wid_in_transit_item_drop(void)
 
 uint8_t wid_bag_item_mouse_up(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   DBG3("Mouse down, item select");
   TRACE_AND_INDENT();
   if (game->in_transit_item) {
@@ -535,7 +563,8 @@ uint8_t wid_bag_item_mouse_up(Widp w, int x, int y, uint32_t button)
 
 uint8_t wid_bag_item_mouse_held(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   DBG3("Mouse held down, item select");
   TRACE_AND_INDENT();
   if (game->in_transit_item) {
@@ -555,7 +584,8 @@ uint8_t wid_bag_item_mouse_held(Widp w, int x, int y, uint32_t button)
 
 bool Game::wid_bag_move_item(Thingp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   DBG3("Chosen to move item");
   TRACE_AND_INDENT();
 
@@ -702,7 +732,8 @@ void wid_bag_item_mouse_over_end(Widp w)
 
 uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   DBG3("Bag item key down");
   TRACE_AND_INDENT();
 
@@ -885,6 +916,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 
 static void wid_bag_tick(Widp w)
 {
+  TRACE_NO_INDENT();
   if (game->in_transit_item) {
     wid_move_to_abs(game->in_transit_item, ascii_mouse_x, ascii_mouse_y);
   }
@@ -892,8 +924,14 @@ static void wid_bag_tick(Widp w)
 
 WidBag::~WidBag()
 {
-  bag->log("Destroy bag");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
+  //
+  // Thing may have been destroyed already.
+  //
+  if (bag) {
+    bag->log("Destroy bag");
+  }
   wid_destroy(&wid_bag_container);
 
   auto b = std::find(game->bags.begin(), game->bags.end(), this);
@@ -906,6 +944,7 @@ WidBag::WidBag(Widp parent, Thingp bag_, bool highlight, point tl, point br, con
     : tl(tl), br(br)
 {
   TRACE_NO_INDENT();
+
   bag = bag_;
   bag->log("Create bag");
 

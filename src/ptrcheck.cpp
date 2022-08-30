@@ -316,7 +316,6 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
   if (elem) {
     auto pc = elem->pc;
 
-    fprintf(stderr, "PTRCHECK: found");
     auto a = pc->allocated_by;
     if (a) {
       fprintf(stderr, "PTRCHECK: Currently allocated at %p \"%s\" (%u bytes) at %s:%s line %u at %s\n", pc->ptr,
@@ -344,8 +343,6 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
       }
     }
 #endif
-  } else {
-    fprintf(stderr, "PTRCHECK: %p not found", ptr);
   }
 
   //
@@ -370,8 +367,6 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
     // Found a match?
     //
     if (pc->ptr == ptr) {
-      CON("----- Pointer is known");
-
       auto a = pc->allocated_by;
       if (a) {
         std::cerr << string_sprintf("PTRCHECK: %p allocated at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr,
@@ -511,9 +506,9 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
   //
   // We may be about to crash. Complain!
   //
-  CON("%s%p %s:%s line %u", unknown_ptr_warning, ptr, file, func, line);
+  CON("%s%p %s:%s line %u, see below logs", unknown_ptr_warning, ptr, file, func, line);
   ptrcheck_describe_pointer(mtype, ptr);
-  DIE("%s%p %s:%s line %u", unknown_ptr_warning, ptr, file, func, line);
+  DIE("%s%p %s:%s line %u, see above logs", unknown_ptr_warning, ptr, file, func, line);
 }
 
 //

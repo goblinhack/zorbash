@@ -17,8 +17,8 @@
 #define TERM_GFX_WIDTH_DEF  120
 #define TERM_GFX_HEIGHT_DEF 80
 
-#define TERM_WIDTH_MAX  (std::max(TERM_GFX_WIDTH_DEF, TERM_ASCII_WIDTH_DEF))
-#define TERM_HEIGHT_MAX (std::max(TERM_GFX_HEIGHT_DEF, TERM_ASCII_HEIGHT_DEF))
+#define TERM_WIDTH_MAX  (std::max(TERM_GFX_WIDTH_DEF + 10, TERM_ASCII_WIDTH_DEF))
+#define TERM_HEIGHT_MAX (std::max(TERM_GFX_HEIGHT_DEF + 10, TERM_ASCII_HEIGHT_DEF))
 
 typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_Keysym *key);
 typedef int (*ascii_mouse_down_callback)(int x, int y, int button);

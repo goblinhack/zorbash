@@ -112,7 +112,7 @@ void Level::fini(void)
   }
 
   if (game->request_reset_state_change) {
-    CON("Handle deferred state to STATE_NORMAL");
+    LOG("Handle deferred state to STATE_NORMAL");
     game->change_state(Game::STATE_NORMAL, "level fini, handle deferred state");
     game->unset_request_reset_state_change();
   }

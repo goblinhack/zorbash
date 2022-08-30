@@ -754,7 +754,7 @@ int main(int argc, char *argv[])
   signal(SIGPIPE, ctrlc_handler);
 #endif
 
-  CON("INI: Create color names map");
+  LOG("INI: Create color names map");
   color_init();
 
 #if 0
@@ -776,7 +776,7 @@ int main(int argc, char *argv[])
   }
 #endif
 
-  CON("INI: Create UI fonts");
+  CON("INI: Load UI fonts");
   if (! font_init()) {
     ERR("Font init");
   }
@@ -800,7 +800,7 @@ int main(int argc, char *argv[])
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  CON("INI: Load UI and gfx tiles");
+  CON("INI: Load other tiles");
   if (! tile_init()) {
     ERR("Tile init");
   }
@@ -810,20 +810,21 @@ int main(int argc, char *argv[])
   if (! tex_init()) {
     ERR("Tex init");
   }
+  LOG("INI: Inited textures");
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Init audio");
   if (! audio_init()) {
     ERR("Audio init");
   }
-  CON("INI: Inited audio");
+  LOG("INI: Inited audio");
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Load music");
   if (! music_init()) {
     ERR("Music init");
   }
-  CON("INI: Loaded music");
+  LOG("INI: Loaded music");
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   CON("INI: Load sound");
@@ -832,24 +833,23 @@ int main(int argc, char *argv[])
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
-  CON("INI: Load UI topcon");
+  LOG("INI: Init UI topcon");
   if (! wid_topcon_init()) {
     ERR("Wid_topcon init");
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
-  CON("INI: Load UI actionar");
+  LOG("INI: Init UI actionar");
   wid_actionbar_init();
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  CON("INI: Load UI botcon");
+  LOG("INI: Init UI botcon");
   if (! wid_botcon_init()) {
     ERR("Wid_botcon init");
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  CON("INI: Find resource locations for gfx and music");
+  LOG("INI: Find resource locations for gfx and music");
   find_file_locations();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -870,10 +870,10 @@ int main(int argc, char *argv[])
   }
 
   py_call_void("init2");
-  CON("INI: Python inited");
+  LOG("INI: Python inited");
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  CON("INI: Load dungeon thing templates");
+  CON("INI: Load monster templates");
   pcg_random_allowed++;
   tp_init();
   if (g_errored) {
@@ -884,7 +884,7 @@ int main(int argc, char *argv[])
   //
   // Create a fresh game if none was loaded
   //
-  CON("INI: Load dungeon rooms");
+  CON("INI: Load rooms");
   room_init();
   if (g_errored) {
     goto loop;

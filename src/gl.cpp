@@ -31,14 +31,14 @@ void gl_init_2d_mode(void)
   //
   // Enable Texture Worldping
   //
-  CON("GFX: OpenGL enable textures");
+  LOG("GFX: OpenGL enable textures");
   glEnable(GL_TEXTURE_2D);
   GL_ERROR_CHECK();
 
   //
   // Enable alpha blending for sprites
   //
-  CON("GFX: OpenGL enable blending");
+  LOG("GFX: OpenGL enable blending");
   glEnable(GL_BLEND);
   GL_ERROR_CHECK();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -47,7 +47,7 @@ void gl_init_2d_mode(void)
   //
   // Setup our viewport
   //
-  CON("GFX: OpenGL enable viewport");
+  LOG("GFX: OpenGL enable viewport");
   glViewport(0, 0, game->config.window_pix_width, game->config.window_pix_height);
   GL_ERROR_CHECK();
 
@@ -64,7 +64,7 @@ void gl_init_2d_mode(void)
   glEnable(GL_LINE_SMOOTH);
   GL_ERROR_CHECK();
 
-  CON("GFX: OpenGL initialized");
+  LOG("GFX: OpenGL initialized");
 }
 
 void gl_enter_2d_mode(void)
@@ -397,7 +397,7 @@ void gl_init_fbo(void)
 {
   int i;
 
-  CON("GFX: OpenGL creat FBOs");
+  LOG("GFX: OpenGL creat FBOs");
   GL_ERROR_CHECK();
 
   for (i = 0; i < MAX_FBO; i++) {
@@ -425,7 +425,7 @@ void gl_init_fbo(void)
     blit_fbo_unbind();
   }
 
-  CON("GFX: OpenGL created FBOs");
+  LOG("GFX: OpenGL created FBOs");
   GL_ERROR_CHECK();
 }
 
@@ -854,242 +854,242 @@ static void gl_ext_load(void)
   TRACE_AND_INDENT();
   glCreateProgram_EXT = (__typeof__(glCreateProgram_EXT)) wglGetProcAddress("glCreateProgram");
   if (! glCreateProgram_EXT) {
-    CON("OpenGl: - glCreateProgram_EXT - NOT present");
+    LOG("OpenGl: - glCreateProgram_EXT - NOT present");
   } else {
-    CON("OpenGl: - glCreateProgram_EXT - present");
+    LOG("OpenGl: - glCreateProgram_EXT - present");
   }
 
   glDeleteProgram_EXT = (__typeof__(glDeleteProgram_EXT)) wglGetProcAddress("glDeleteProgram");
   if (! glDeleteProgram_EXT) {
-    CON("OpenGl: - glDeleteProgram_EXT - NOT present");
+    LOG("OpenGl: - glDeleteProgram_EXT - NOT present");
   } else {
-    CON("OpenGl: - glDeleteProgram_EXT - present");
+    LOG("OpenGl: - glDeleteProgram_EXT - present");
   }
 
   glIsProgram_EXT = (__typeof__(glIsProgram_EXT)) wglGetProcAddress("glIsProgram");
   if (! glIsProgram_EXT) {
-    CON("OpenGl: - glIsProgram_EXT - NOT present");
+    LOG("OpenGl: - glIsProgram_EXT - NOT present");
   } else {
-    CON("OpenGl: - glIsProgram_EXT - present");
+    LOG("OpenGl: - glIsProgram_EXT - present");
   }
 
   glCreateShader_EXT = (__typeof__(glCreateShader_EXT)) wglGetProcAddress("glCreateShader");
   if (! glCreateShader_EXT) {
-    CON("OpenGl: - glCreateShader_EXT - NOT present");
+    LOG("OpenGl: - glCreateShader_EXT - NOT present");
   } else {
-    CON("OpenGl: - glCreateShader_EXT - present");
+    LOG("OpenGl: - glCreateShader_EXT - present");
   }
 
   glDeleteShader_EXT = (__typeof__(glDeleteShader_EXT)) wglGetProcAddress("glDeleteShader");
   if (! glDeleteShader_EXT) {
-    CON("OpenGl: - glDeleteShader_EXT - NOT present");
+    LOG("OpenGl: - glDeleteShader_EXT - NOT present");
   } else {
-    CON("OpenGl: - glDeleteShader_EXT - present");
+    LOG("OpenGl: - glDeleteShader_EXT - present");
   }
 
   glShaderSource_EXT = (__typeof__(glShaderSource_EXT)) wglGetProcAddress("glShaderSource");
   if (! glShaderSource_EXT) {
-    CON("OpenGl: - glShaderSource_EXT - NOT present");
+    LOG("OpenGl: - glShaderSource_EXT - NOT present");
   } else {
-    CON("OpenGl: - glShaderSource_EXT - present");
+    LOG("OpenGl: - glShaderSource_EXT - present");
   }
 
   glCompileShader_EXT = (__typeof__(glCompileShader_EXT)) wglGetProcAddress("glCompileShader");
   if (! glCompileShader_EXT) {
-    CON("OpenGl: - glCompileShader_EXT - NOT present");
+    LOG("OpenGl: - glCompileShader_EXT - NOT present");
   } else {
-    CON("OpenGl: - glCompileShader_EXT - present");
+    LOG("OpenGl: - glCompileShader_EXT - present");
   }
 
   glAttachShader_EXT = (__typeof__(glAttachShader_EXT)) wglGetProcAddress("glAttachShader");
   if (! glAttachShader_EXT) {
-    CON("OpenGl: - glAttachShader_EXT - NOT present");
+    LOG("OpenGl: - glAttachShader_EXT - NOT present");
   } else {
-    CON("OpenGl: - glAttachShader_EXT - present");
+    LOG("OpenGl: - glAttachShader_EXT - present");
   }
 
   glDetachShader_EXT = (__typeof__(glDetachShader_EXT)) wglGetProcAddress("glDetachShader");
   if (! glDetachShader_EXT) {
-    CON("OpenGl: - glDetachShader_EXT - NOT present");
+    LOG("OpenGl: - glDetachShader_EXT - NOT present");
   } else {
-    CON("OpenGl: - glDetachShader_EXT - present");
+    LOG("OpenGl: - glDetachShader_EXT - present");
   }
 
   glGetAttachedShaders_EXT = (__typeof__(glGetAttachedShaders_EXT)) wglGetProcAddress("glGetAttachedShaders");
   if (! glGetAttachedShaders_EXT) {
-    CON("OpenGl: - glGetAttachedShaders_EXT - NOT present");
+    LOG("OpenGl: - glGetAttachedShaders_EXT - NOT present");
   } else {
-    CON("OpenGl: - glGetAttachedShaders_EXT - present");
+    LOG("OpenGl: - glGetAttachedShaders_EXT - present");
   }
 
   glLinkProgram_EXT = (__typeof__(glLinkProgram_EXT)) wglGetProcAddress("glLinkProgram");
   if (! glLinkProgram_EXT) {
-    CON("OpenGl: - glLinkProgram_EXT - NOT present");
+    LOG("OpenGl: - glLinkProgram_EXT - NOT present");
   } else {
-    CON("OpenGl: - glLinkProgram_EXT - present");
+    LOG("OpenGl: - glLinkProgram_EXT - present");
   }
 
   glUseProgram_EXT = (__typeof__(glUseProgram_EXT)) wglGetProcAddress("glUseProgram");
   if (! glUseProgram_EXT) {
-    CON("OpenGl: - glUseProgram_EXT - NOT present");
+    LOG("OpenGl: - glUseProgram_EXT - NOT present");
   } else {
-    CON("OpenGl: - glUseProgram_EXT - present");
+    LOG("OpenGl: - glUseProgram_EXT - present");
   }
 
   glGetShaderInfoLog_EXT = (__typeof__(glGetShaderInfoLog_EXT)) wglGetProcAddress("glGetShaderInfoLog");
   if (! glGetShaderInfoLog_EXT) {
-    CON("OpenGl: - glGetShaderInfoLog_EXT - NOT present");
+    LOG("OpenGl: - glGetShaderInfoLog_EXT - NOT present");
   } else {
-    CON("OpenGl: - glGetShaderInfoLog_EXT - present");
+    LOG("OpenGl: - glGetShaderInfoLog_EXT - present");
   }
 
   glGetProgramInfoLog_EXT = (__typeof__(glGetProgramInfoLog_EXT)) wglGetProcAddress("glGetProgramInfoLog");
   if (! glGetProgramInfoLog_EXT) {
-    CON("OpenGl: - glGetProgramInfoLog_EXT - NOT present");
+    LOG("OpenGl: - glGetProgramInfoLog_EXT - NOT present");
   } else {
-    CON("OpenGl: - glGetProgramInfoLog_EXT - present");
+    LOG("OpenGl: - glGetProgramInfoLog_EXT - present");
   }
 
   glGetUniformLocation_EXT = (__typeof__(glGetUniformLocation_EXT)) wglGetProcAddress("glGetUniformLocation");
   if (! glGetUniformLocation_EXT) {
-    CON("OpenGl: - glGetUniformLocation_EXT - NOT present");
+    LOG("OpenGl: - glGetUniformLocation_EXT - NOT present");
   } else {
-    CON("OpenGl: - glGetUniformLocation_EXT - present");
+    LOG("OpenGl: - glGetUniformLocation_EXT - present");
   }
 
   glUniform1f_EXT = (__typeof__(glUniform1f_EXT)) wglGetProcAddress("glUniform1f");
   if (! glUniform1f_EXT) {
-    CON("OpenGl: - glUniform1f_EXT - NOT present");
+    LOG("OpenGl: - glUniform1f_EXT - NOT present");
   } else {
-    CON("OpenGl: - glUniform1f_EXT - present");
+    LOG("OpenGl: - glUniform1f_EXT - present");
   }
 
   glUniform1i_EXT = (__typeof__(glUniform1i_EXT)) wglGetProcAddress("glUniform1i");
   if (! glUniform1i_EXT) {
-    CON("OpenGl: - glUniform1i_EXT - NOT present");
+    LOG("OpenGl: - glUniform1i_EXT - NOT present");
   } else {
-    CON("OpenGl: - glUniform1i_EXT - present");
+    LOG("OpenGl: - glUniform1i_EXT - present");
   }
 
   glUniform2fv_EXT = (__typeof__(glUniform2fv_EXT)) wglGetProcAddress("glUniform2fv");
   if (! glUniform2fv_EXT) {
-    CON("OpenGl: - glUniform2fv_EXT - NOT present");
+    LOG("OpenGl: - glUniform2fv_EXT - NOT present");
   } else {
-    CON("OpenGl: - glUniform2fv_EXT - present");
+    LOG("OpenGl: - glUniform2fv_EXT - present");
   }
 
   glUniform3fv_EXT = (__typeof__(glUniform3fv_EXT)) wglGetProcAddress("glUniform3fv");
   if (! glUniform3fv_EXT) {
-    CON("OpenGl: - glUniform3fv_EXT - NOT present");
+    LOG("OpenGl: - glUniform3fv_EXT - NOT present");
   } else {
-    CON("OpenGl: - glUniform3fv_EXT - present");
+    LOG("OpenGl: - glUniform3fv_EXT - present");
   }
 
   glGenerateMipmap_EXT = (__typeof__(glGenerateMipmap_EXT)) wglGetProcAddress("glGenerateMipmap");
   if (! glGenerateMipmap_EXT) {
-    CON("OpenGl: - glGenerateMipmap_EXT - NOT present");
+    LOG("OpenGl: - glGenerateMipmap_EXT - NOT present");
   } else {
-    CON("OpenGl: - glGenerateMipmap_EXT - present");
+    LOG("OpenGl: - glGenerateMipmap_EXT - present");
   }
 
   glGenFramebuffers_EXT = (__typeof__(glGenFramebuffers_EXT)) wglGetProcAddress("glGenFramebuffers");
   if (! glGenFramebuffers_EXT) {
-    CON("OpenGl: - glGenFramebuffers_EXT - NOT present");
+    LOG("OpenGl: - glGenFramebuffers_EXT - NOT present");
   } else {
-    CON("OpenGl: - glGenFramebuffers_EXT - present");
+    LOG("OpenGl: - glGenFramebuffers_EXT - present");
   }
 
   glDeleteFramebuffers_EXT = (__typeof__(glDeleteFramebuffers_EXT)) wglGetProcAddress("glDeleteFramebuffers");
   if (! glDeleteFramebuffers_EXT) {
-    CON("OpenGl: - glDeleteFramebuffers_EXT - NOT present");
+    LOG("OpenGl: - glDeleteFramebuffers_EXT - NOT present");
   } else {
-    CON("OpenGl: - glDeleteFramebuffers_EXT - present");
+    LOG("OpenGl: - glDeleteFramebuffers_EXT - present");
   }
 
   glBindFramebuffer_EXT = (__typeof__(glBindFramebuffer_EXT)) wglGetProcAddress("glBindFramebuffer");
   if (! glBindFramebuffer_EXT) {
-    CON("OpenGl: - glBindFramebuffer_EXT - NOT present");
+    LOG("OpenGl: - glBindFramebuffer_EXT - NOT present");
   } else {
-    CON("OpenGl: - glBindFramebuffer_EXT - present");
+    LOG("OpenGl: - glBindFramebuffer_EXT - present");
   }
 
   glGenRenderbuffers_EXT = (__typeof__(glGenRenderbuffers_EXT)) wglGetProcAddress("glGenRenderbuffers");
   if (! glGenRenderbuffers_EXT) {
-    CON("OpenGl: - glGenRenderbuffers_EXT - NOT present");
+    LOG("OpenGl: - glGenRenderbuffers_EXT - NOT present");
   } else {
-    CON("OpenGl: - glGenRenderbuffers_EXT - present");
+    LOG("OpenGl: - glGenRenderbuffers_EXT - present");
   }
 
   glDeleteRenderbuffers_EXT = (__typeof__(glDeleteRenderbuffers_EXT)) wglGetProcAddress("glDeleteRenderbuffers");
   if (! glDeleteRenderbuffers_EXT) {
-    CON("OpenGl: - glDeleteRenderbuffers_EXT - NOT present");
+    LOG("OpenGl: - glDeleteRenderbuffers_EXT - NOT present");
   } else {
-    CON("OpenGl: - glDeleteRenderbuffers_EXT - present");
+    LOG("OpenGl: - glDeleteRenderbuffers_EXT - present");
   }
 
   glBindRenderbuffer_EXT = (__typeof__(glBindRenderbuffer_EXT)) wglGetProcAddress("glBindRenderbuffer");
   if (! glBindRenderbuffer_EXT) {
-    CON("OpenGl: - glBindRenderbuffer_EXT - NOT present");
+    LOG("OpenGl: - glBindRenderbuffer_EXT - NOT present");
   } else {
-    CON("OpenGl: - glBindRenderbuffer_EXT - present");
+    LOG("OpenGl: - glBindRenderbuffer_EXT - present");
   }
 
   glRenderbufferStorage_EXT = (__typeof__(glRenderbufferStorage_EXT)) wglGetProcAddress("glRenderbufferStorage");
   if (! glRenderbufferStorage_EXT) {
-    CON("OpenGl: - glRenderbufferStorage_EXT - NOT present");
+    LOG("OpenGl: - glRenderbufferStorage_EXT - NOT present");
   } else {
-    CON("OpenGl: - glRenderbufferStorage_EXT - present");
+    LOG("OpenGl: - glRenderbufferStorage_EXT - present");
   }
 
   glFramebufferRenderbuffer_EXT =
       (__typeof__(glFramebufferRenderbuffer_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
   if (! glFramebufferRenderbuffer_EXT) {
-    CON("OpenGl: - glFramebufferRenderbuffer_EXT - NOT present");
+    LOG("OpenGl: - glFramebufferRenderbuffer_EXT - NOT present");
   } else {
-    CON("OpenGl: - glFramebufferRenderbuffer_EXT - present");
+    LOG("OpenGl: - glFramebufferRenderbuffer_EXT - present");
   }
 
   glCheckFramebufferStatus_EXT =
       (__typeof__(glCheckFramebufferStatus_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
   if (! glCheckFramebufferStatus_EXT) {
-    CON("OpenGl: - glCheckFramebufferStatus_EXT - NOT present");
+    LOG("OpenGl: - glCheckFramebufferStatus_EXT - NOT present");
   } else {
-    CON("OpenGl: - glCheckFramebufferStatus_EXT - present");
+    LOG("OpenGl: - glCheckFramebufferStatus_EXT - present");
   }
 
   glFramebufferTexture2D_EXT = (__typeof__(glFramebufferTexture2D_EXT)) wglGetProcAddress("glFramebufferTexture2D");
   if (! glFramebufferTexture2D_EXT) {
-    CON("OpenGl: - glFramebufferTexture2D_EXT - NOT present");
+    LOG("OpenGl: - glFramebufferTexture2D_EXT - NOT present");
   } else {
-    CON("OpenGl: - glFramebufferTexture2D_EXT - present");
+    LOG("OpenGl: - glFramebufferTexture2D_EXT - present");
   }
 
   glGenBuffersARB_EXT = (__typeof__(glGenBuffersARB_EXT)) wglGetProcAddress("glGenBuffersARB");
   if (! glGenBuffersARB_EXT) {
-    CON("OpenGl: - glGenBuffersARB_EXT - NOT present");
+    LOG("OpenGl: - glGenBuffersARB_EXT - NOT present");
   } else {
-    CON("OpenGl: - glGenBuffersARB_EXT - present");
+    LOG("OpenGl: - glGenBuffersARB_EXT - present");
   }
 
   glBindBufferARB_EXT = (__typeof__(glBindBufferARB_EXT)) wglGetProcAddress("glBindBufferARB");
   if (! glBindBufferARB_EXT) {
-    CON("OpenGl: - glBindBufferARB_EXT - NOT present");
+    LOG("OpenGl: - glBindBufferARB_EXT - NOT present");
   } else {
-    CON("OpenGl: - glBindBufferARB_EXT - present");
+    LOG("OpenGl: - glBindBufferARB_EXT - present");
   }
 
   glDeleteBuffersARB_EXT = (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
   if (! glDeleteBuffersARB_EXT) {
-    CON("OpenGl: - glDeleteBuffersARB_EXT - NOT present");
+    LOG("OpenGl: - glDeleteBuffersARB_EXT - NOT present");
   } else {
-    CON("OpenGl: - glDeleteBuffersARB_EXT - present");
+    LOG("OpenGl: - glDeleteBuffersARB_EXT - present");
   }
 
   glDeleteBuffersARB_EXT = (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
   if (! glDeleteBuffersARB_EXT) {
-    CON("OpenGl: - glDeleteBuffersARB_EXT - NOT present");
+    LOG("OpenGl: - glDeleteBuffersARB_EXT - NOT present");
   } else {
-    CON("OpenGl: - glDeleteBuffersARB_EXT - present");
+    LOG("OpenGl: - glDeleteBuffersARB_EXT - present");
   }
 }
 
@@ -1194,9 +1194,9 @@ void gl_ext_init(void)
   WNDCLASSEX wc;
   HWND       hwnd;
 
-  CON("GFX: extensions");
+  LOG("GFX: extensions");
 
-  CON("OpenGl: - GetModuleHandle");
+  LOG("OpenGl: - GetModuleHandle");
   HINSTANCE hInstance = GetModuleHandle(0);
 
   wc.cbSize        = sizeof(WNDCLASSEX);
@@ -1212,13 +1212,13 @@ void gl_ext_init(void)
   wc.lpszClassName = g_szClassName;
   wc.hIconSm       = LoadIcon(nullptr, IDI_APPLICATION);
 
-  CON("OpenGl: - RegisterClassEx");
+  LOG("OpenGl: - RegisterClassEx");
   if (! RegisterClassEx(&wc)) {
     MessageBox(nullptr, "Window Registration Failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
     return;
   }
 
-  CON("OpenGl: - CreateWindowEx");
+  LOG("OpenGl: - CreateWindowEx");
   hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, g_szClassName, "zorbash startup", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
                         CW_USEDEFAULT, 240, 120, nullptr, nullptr, hInstance, nullptr);
 

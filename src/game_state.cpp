@@ -48,7 +48,7 @@ void Game::change_state(int new_state, const std::string &why)
   //
   if (new_state == STATE_NORMAL) {
     if (! pcg_random_allowed) {
-      CON("Defer changing state to STATE_NORMAL");
+      LOG("Defer changing state to STATE_NORMAL");
       game->set_request_reset_state_change();
       return;
     }

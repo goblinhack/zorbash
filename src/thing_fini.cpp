@@ -7,6 +7,7 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
+#include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
 
@@ -100,6 +101,12 @@ void Thing::destroy(void)
 
   if (level->player == this) {
     level->player = nullptr;
+  }
+
+  for (auto b : game->bags) {
+    if (b->bag == this) {
+      b->bag = nullptr;
+    }
   }
 
   {
