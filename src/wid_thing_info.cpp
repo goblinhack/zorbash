@@ -515,20 +515,41 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
   }
 
   if (! found_one_with_long_text) {
-    Thingp best = nullptr;
-    for (auto t : ts) {
-      if (! best) {
-        best = t;
-      } else if (t->z_depth > best->z_depth) {
-        best = t;
-      } else if ((t->z_depth == best->z_depth) && (t->z_prio() > best->z_prio())) {
-        best = t;
+    std::string description;
+    if (ts.size() > 1) {
+      //
+      // If multiple things are shown at this location, try and show them all.
+      //
+      for (auto t : ts) {
+        if (t->is_floor()) {
+          continue;
+        }
+        description += t->text_short_and_state_capitalised();
+        description += ".`"; // Why does space not work ?
       }
-    }
-    if (best) {
-      wid_thing_info_fini("No long text");
-      best->show_botcon_description();
-      return false;
+
+      BOTCON("%s", description.c_str());
+    } else {
+      //
+      // Else show the most "interesting" thing.
+      //
+      Thingp best = nullptr;
+
+      for (auto t : ts) {
+        if (! best) {
+          best = t;
+        } else if (t->z_depth > best->z_depth) {
+          best = t;
+        } else if ((t->z_depth == best->z_depth) && (t->z_prio() > best->z_prio())) {
+          best = t;
+        }
+      }
+
+      if (best) {
+        wid_thing_info_fini("No long text");
+        best->show_botcon_description();
+        return false;
+      }
     }
   }
   TRACE_AND_INDENT();

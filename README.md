@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- if grass and blood on same tile, describe both                                                                                               -->
 <!-- add burnt objects                                                                                                                            -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->

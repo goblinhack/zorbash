@@ -338,7 +338,7 @@ void Level::describe(point p)
   }
 
   if (hover_over_things.size() > 1) {
-    dbg2("Describe @%d,%d; found %d things", p.x, p.y, (int) hover_over_things.size());
+    dbg("Describe @%d,%d; found %d things", p.x, p.y, (int) hover_over_things.size());
     if (game->wid_thing_info_create_list(hover_over_things)) {
       if (hover_over_things.size() > 1) {
         auto        k = ::to_string(game->config.key_wait_or_collect);
@@ -357,7 +357,7 @@ void Level::describe(point p)
       }
     }
   } else if (hover_over_things.size()) {
-    dbg2("Describe @%d,%d; found %d thing", p.x, p.y, (int) hover_over_things.size());
+    dbg("Describe @%d,%d; found thing", p.x, p.y);
     if (game->wid_thing_info_create_list(hover_over_things)) {
       if (hover_over_things.size() > 1) {
         auto        k = ::to_string(game->config.key_wait_or_collect);
