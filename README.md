@@ -1,7 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- add burnt objects                                                                                                                            -->
+<!-- filter messages after death of player - esp falling                                                                                          -->
+<!-- thunderstone blew up on player deaty                                                                                                         -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->
 <!-- wort food ?                                                                                                                                  -->
