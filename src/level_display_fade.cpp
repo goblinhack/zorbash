@@ -22,7 +22,7 @@ void Level::display_pixelart_fade_out(void)
 
   point at(game->config.game_pix_width / 2, game->config.game_pix_height / 2);
   if (player) {
-    at = ((player->last_blit_tl + player->last_blit_br) / 2);
+    at = ((player->last_blit_tl + player->last_blit_br) / (short) 2);
   }
 
   blit_fbo_bind(FBO_SCREEN_FADE_IN_AND_OUT);
@@ -70,7 +70,7 @@ void Level::display_pixelart_fade_in(void)
 
   point at(game->config.game_pix_width / 2, game->config.game_pix_height / 2);
   if (player) {
-    at = ((player->last_blit_tl + player->last_blit_br) / 2);
+    at = ((player->last_blit_tl + player->last_blit_br) / (short) 2);
   }
 
   blit_fbo_bind(FBO_SCREEN_FADE_IN_AND_OUT);

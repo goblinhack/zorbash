@@ -497,6 +497,6 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
   last_ascii_at = point(x, y);
   last_blit_tl  = point(curr_at.x * TILE_WIDTH, curr_at.y * TILE_HEIGHT);
   last_blit_br  = point((curr_at.x + 1) * TILE_WIDTH, (curr_at.y + 1) * TILE_HEIGHT);
-  last_blit_at  = (last_blit_tl + last_blit_br) / 2;
+  last_blit_at  = (last_blit_tl + last_blit_br) / (short) 2;
   is_blitted    = true;
 }

@@ -16,46 +16,16 @@ public:
   unsigned char b {};
   unsigned char a {};
 
-  color(void) : r(0), g(0), b(0), a(0) {}
-
-  color(unsigned char r, unsigned char g, unsigned char b) : r(r), g(g), b(b), a(255) {}
+  color(void) {}
 
   color(unsigned char r, unsigned char g, unsigned char b, unsigned char a) : r(r), g(g), b(b), a(a) {}
 
   color(const color &c) : r(c.r), g(c.g), b(c.b), a(c.a) {}
 
-  friend color operator+(color c, color b) { return (color(c.r + b.r, c.g + b.g, c.b + b.b, c.a + b.a)); }
-
-  friend color operator-(color c, color b) { return (color(c.r - b.r, c.g - b.g, c.b - b.b, c.a - b.a)); }
-
-  friend color operator/(color c, color b) { return (color(c.r / b.r, c.g / b.g, c.b / b.b, c.a / b.a)); }
-
-  friend color operator*(color c, color b) { return (color(c.r * b.r, c.g * b.g, c.b * b.b, c.a * b.a)); }
-
-  friend color operator/(color c, unsigned char b) { return (color(c.r / b, c.g / b, c.b / b, c.a / b)); }
-
-  void operator*=(unsigned char c)
-  {
-    r *= c;
-    g *= c;
-    b *= c;
-    a *= c;
-  }
-
-  void operator/=(unsigned char c)
-  {
-    r /= c;
-    g /= c;
-    b /= c;
-    a /= c;
-  }
-
   friend bool operator==(const color &c, const color &b)
   {
     return (c.r == b.r) && (c.g == b.g) && (c.b == b.b) && (c.a == b.a);
   }
-
-  friend bool operator!=(const color &c, const color &b) { return (! (c == b)); }
 };
 
 extern color gl_last_color;

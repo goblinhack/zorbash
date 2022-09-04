@@ -328,7 +328,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
-  auto  src = (last_blit_tl + last_blit_br) / 2;
+  auto  src = (last_blit_tl + last_blit_br) / (short) 2;
   auto  dx  = x - curr_at.x;
   auto  dy  = y - curr_at.y;
   auto  tw  = TILE_WIDTH;
@@ -820,7 +820,7 @@ bool Thing::jump_attack(Thingp maybe_victim)
 
       auto delta = maybe_victim->curr_at - maybe_victim->last_at;
       if (delta != point(0, 0)) {
-        auto dest = maybe_victim->curr_at + (delta * 2);
+        auto dest = maybe_victim->curr_at + (delta * (short) 2);
         if (! try_to_jump_carefully(dest)) {
           auto dest = maybe_victim->curr_at + delta;
           return try_to_jump_carefully(dest);

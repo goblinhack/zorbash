@@ -579,7 +579,7 @@ bool Thing::teleport_attack(Thingp maybe_victim)
 
       auto delta = maybe_victim->curr_at - maybe_victim->last_at;
       if (delta != point(0, 0)) {
-        auto dest = maybe_victim->curr_at + (delta * 2);
+        auto dest = maybe_victim->curr_at + (delta * (short) 2);
         if (! teleport_carefully(dest)) {
           auto dest = maybe_victim->curr_at + delta;
           return teleport_carefully(dest);

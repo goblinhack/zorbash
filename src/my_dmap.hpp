@@ -14,23 +14,6 @@ typedef struct Dmap_ {
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > val {};
 } Dmap;
 
-#include <type_traits>
-
-template < typename T > size_t len(const T &a)
-{
-  return sizeof(T) / sizeof(typename std::remove_all_extents< T >::type);
-}
-
-// https://stackoverflow.com/questions/26948099/stdcopy-for-multidimensional-arrays
-template < typename T > typename std::remove_all_extents< T >::type *mbegin(T &arr)
-{
-  return reinterpret_cast< typename std::remove_all_extents< T >::type * >(&arr);
-}
-template < typename T > typename std::remove_all_extents< T >::type *mend(T &arr)
-{
-  return reinterpret_cast< typename std::remove_all_extents< T >::type * >(&arr) + len(arr);
-}
-
 extern void                 dmap_process(Dmap *D, point tl, point br);
 extern void                 dmap_process(Dmap *D);
 extern void                 dmap_print(const Dmap *d, point at, point start, point end);

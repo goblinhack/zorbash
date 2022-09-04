@@ -9,7 +9,6 @@
 #include <SDL.h>
 #include <array>
 
-#include "c_plus_plus_serializer.hpp"
 #include "my_command.hpp"
 #include "my_main.hpp"
 #include "my_time.hpp"
@@ -100,9 +99,6 @@ int sdl_get_mouse(void);
 
 SDL_Keysym   sdlk_normalize(SDL_Keysym k);
 SDL_Scancode sdlk_to_scancode(const SDL_Keysym &k);
-
-std::istream &operator>>(std::istream &in, Bits< SDL_Keysym & > my);
-std::ostream &operator<<(std::ostream &out, Bits< const SDL_Keysym & > const my);
 
 std::string to_string(const SDL_Keysym &k);
 std::string to_string_ignoring_mods(const SDL_Keysym &k);

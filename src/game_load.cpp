@@ -10,6 +10,7 @@
 #include "my_globals_extra.hpp"
 #include "my_monst.hpp"
 #include "my_sdl.hpp"
+#include "my_serialize.hpp"
 #include "my_sprintf.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
@@ -1229,7 +1230,6 @@ void Game::load_config(void)
   std::ifstream in(filename);
   if (in.is_open()) {
     in >> bits(*(&game->config));
-    game->config.dump("READ:");
   }
 }
 

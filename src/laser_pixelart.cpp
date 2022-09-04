@@ -68,7 +68,7 @@ void Level::display_pixelart_lasers(point tl, point br)
     auto stop  = l.info.pixel_stop - l.info.pixel_map_at;
 
     auto   dist  = distance(start, stop);
-    auto   steps = (int) ceil(dist) / TILE_WIDTH;
+    float  steps = (int) ceil(dist) / TILE_WIDTH;
     fpoint diff(stop.x - start.x, stop.y - start.y);
     fpoint step       = diff / steps;
     float  ninety_deg = RAD_360 / 4;
@@ -116,7 +116,7 @@ void Level::display_pixelart_lasers(point tl, point br)
       }
 
       if (unlikely(! tile)) {
-        t->err("No tile for laser, animstep %d, frame %d, steps %d", animstep, frame, steps);
+        t->err("No tile for laser, animstep %d, frame %d, steps %d", animstep, frame, (int) steps);
         break;
       }
 

@@ -6,7 +6,6 @@
 #ifndef _MY_HISCORE_HPP_
 #define _MY_HISCORE_HPP_
 
-#include "c_plus_plus_serializer.hpp"
 #include <string>
 
 class HiScore
@@ -39,8 +38,6 @@ public:
   static const int max           = 20;
   static const int max_displayed = 20;
 };
-std::ostream &operator<<(std::ostream &out, Bits< const HiScore & > const my); // save
-std::istream &operator>>(std::istream &in, Bits< HiScore & > my);              // load
 
 class HiScores
 {
@@ -58,7 +55,5 @@ public:
   bool        is_new_highest_hiscore(class Thing_ *player);
   const char *place_str(class Thing_ *player);
 };
-std::ostream &operator<<(std::ostream &out, Bits< const HiScores & > const my); // save
-std::istream &operator>>(std::istream &in, Bits< HiScores & > my);              // load
 
 #endif // _MY_THING_HPP_

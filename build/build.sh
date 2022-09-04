@@ -596,10 +596,9 @@ log_info "VERSION (game)             : $MYVER"
 cd src
 
 # Example timings at -j12
-#     61 secs
-# -O0 61 secs
-# -O1 74 secs
-# -O3 77 secs
+# -O1 112
+# -O2 110 
+# -O3 114
 
 if [[ $OPT_PROF != "" ]]; then
     C_FLAGS+=" -pg"
@@ -609,7 +608,7 @@ fi
 if [[ $OPT_DEV1 != "" ]]; then
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g # AUTOGEN" > .Makefile
 else
-    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O3 # AUTOGEN" > .Makefile
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O2 # AUTOGEN" > .Makefile
 fi
 
 if [[ $OPT_DEV2 != "" ]]; then

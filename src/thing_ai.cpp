@@ -18,6 +18,29 @@
 #define GOAL_PRIO_LOW       3
 #define GOAL_PRIO_VERY_LOW  4
 
+bool operator<(const class Goal &lhs, const class Goal &rhs)
+{
+  // Lower priorities at the head
+  if (lhs.prio < rhs.prio) {
+    return true;
+  }
+  return lhs.score > rhs.score; // Higher scores at the head
+}
+
+bool operator<(const class Next_hop &lhs, const class Next_hop &rhs)
+{
+  return lhs.cost < rhs.cost; // Lower costs at the head
+}
+
+bool operator<(const class Path &lhs, const class Path &rhs)
+{
+  if (lhs.cost == rhs.cost) {
+    return lhs.path.size() < rhs.path.size();
+  } else {
+    return lhs.cost < rhs.cost; // Lower costs at the head
+  }
+}
+
 #define GOAL_ADD(prio, score, msg, it)                                                                               \
   IF_DEBUG                                                                                                           \
   {                                                                                                                  \

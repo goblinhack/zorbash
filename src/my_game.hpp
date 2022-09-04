@@ -133,11 +133,7 @@ public:
 
   void fini(void);
   void reset(void);
-  void dump(std::string prefix, std::ostream &out);
-  void dump(std::string prefix);
 } Config;
-std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my);
-std::istream &operator>>(std::istream &in, Bits< Config & > my);
 
 class Game
 {
@@ -447,9 +443,6 @@ public:
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   /////////////////////////////////////////////////////////////////////////
-
-  friend std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my);
-  friend std::istream &operator>>(std::istream &in, Bits< class Game & > my);
 
   int get_move_speed(void);
 

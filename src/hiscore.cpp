@@ -7,6 +7,7 @@
 #include "my_main.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_serialize.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
 #include "my_time.hpp"

@@ -441,7 +441,8 @@ bool wid_leftbar_ascii_create(void)
     }
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-    sort(m.begin(), m.end(), [](Thingp a, Thingp b) -> bool { return a->curr_at > b->curr_at; });
+    sort(m.begin(), m.end(),
+         [](Thingp a, Thingp b) -> bool { return (a->curr_at.x > b->curr_at.x) && (a->curr_at.y > b->curr_at.y); });
 
     for (auto n : m) {
       wid_leftbar_ascii_describe(level, n, y_at, width, false /* allow carried */);
@@ -476,7 +477,8 @@ bool wid_leftbar_ascii_create(void)
     }
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-    sort(m.begin(), m.end(), [](Thingp a, Thingp b) -> bool { return a->curr_at > b->curr_at; });
+    sort(m.begin(), m.end(),
+         [](Thingp a, Thingp b) -> bool { return (a->curr_at.x > b->curr_at.x) && (a->curr_at.y > b->curr_at.y); });
 
     for (auto n : m) {
       wid_leftbar_ascii_describe(level, n, y_at, width, false /* allow carried */);
@@ -511,7 +513,8 @@ bool wid_leftbar_ascii_create(void)
     }
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-    sort(m.begin(), m.end(), [](Thingp a, Thingp b) -> bool { return a->curr_at > b->curr_at; });
+    sort(m.begin(), m.end(),
+         [](Thingp a, Thingp b) -> bool { return (a->curr_at.x > b->curr_at.x) && (a->curr_at.y > b->curr_at.y); });
 
     bool first = true;
     for (auto n : m) {
@@ -550,7 +553,8 @@ bool wid_leftbar_ascii_create(void)
     }
     FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(game->level)
 
-    sort(m.begin(), m.end(), [](Thingp a, Thingp b) -> bool { return a->curr_at > b->curr_at; });
+    sort(m.begin(), m.end(),
+         [](Thingp a, Thingp b) -> bool { return (a->curr_at.x > b->curr_at.x) && (a->curr_at.y > b->curr_at.y); });
 
     bool first = true;
     for (auto n : m) {

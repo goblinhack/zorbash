@@ -40,15 +40,6 @@ public:
       : prio(prio), score(score), at(at), msg(msg), what(what), avoid(avoid)
   {
   }
-
-  friend bool operator<(const class Goal &lhs, const class Goal &rhs)
-  {
-    // Lower priorities at the head
-    if (lhs.prio < rhs.prio) {
-      return true;
-    }
-    return lhs.score > rhs.score; // Higher scores at the head
-  }
 };
 
 //
@@ -63,11 +54,6 @@ public:
 
   Next_hop() {}
   Next_hop(float cost, point goal, fpoint next_hop) : cost(cost), goal(goal), next_hop(next_hop) {}
-
-  friend bool operator<(const class Next_hop &lhs, const class Next_hop &rhs)
-  {
-    return lhs.cost < rhs.cost; // Lower costs at the head
-  }
 };
 
 class Path
@@ -79,15 +65,6 @@ public:
   std::vector< point > path;
   int                  cost {};
   Goal                 goal;
-
-  friend bool operator<(const class Path &lhs, const class Path &rhs)
-  {
-    if (lhs.cost == rhs.cost) {
-      return lhs.path.size() < rhs.path.size();
-    } else {
-      return lhs.cost < rhs.cost; // Lower costs at the head
-    }
-  }
 };
 
 extern void astar_dump(const Dmap *dmap, const point at, const point start, const point end);
@@ -102,8 +79,6 @@ public:
 typedef struct AgeMap_ {
   std::array< std::array< uint32_t, MAP_HEIGHT >, MAP_WIDTH > val {};
 } AgeMap;
-std::ostream &operator<<(std::ostream &out, Bits< const AgeMap & > const my);
-std::istream &operator>>(std::istream &in, Bits< AgeMap & > my);
 
 extern std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug;
 

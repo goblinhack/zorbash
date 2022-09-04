@@ -10,6 +10,7 @@
 #include "my_globals_extra.hpp"
 #include "my_monst.hpp"
 #include "my_sdl.hpp"
+#include "my_serialize.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
@@ -1092,7 +1093,6 @@ void Game::save_config(void)
   std::ofstream out(filename, std::ios::binary);
   const Config &c = game->config;
   out << bits(c);
-  game->config.dump("WROTE:");
 }
 
 void wid_save_destroy(void)

@@ -78,4 +78,21 @@ std::multimap< B, A > flip_map(const M< A, B, Args... > &src)
   return dst;
 }
 
+#include <type_traits>
+
+template < typename T > size_t len(const T &a)
+{
+  return sizeof(T) / sizeof(typename std::remove_all_extents< T >::type);
+}
+
+// https://stackoverflow.com/questions/26948099/stdcopy-for-multidimensional-arrays
+template < typename T > typename std::remove_all_extents< T >::type *mbegin(T &arr)
+{
+  return reinterpret_cast< typename std::remove_all_extents< T >::type * >(&arr);
+}
+template < typename T > typename std::remove_all_extents< T >::type *mend(T &arr)
+{
+  return reinterpret_cast< typename std::remove_all_extents< T >::type * >(&arr) + len(arr);
+}
+
 #endif

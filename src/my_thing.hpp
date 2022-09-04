@@ -7,7 +7,7 @@
 #define _MY_THING_HPP_
 
 #include <array>
-#include <functional>
+#include <functional> // for std::function
 #include <list>
 
 #include "my_color.hpp"
@@ -2470,9 +2470,6 @@ public:
 
   int gfx_pixelart_attack_anim(void);
 } Thing;
-
-std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my);
-std::istream &operator>>(std::istream &in, Bits< Thingp & > my);
 
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);

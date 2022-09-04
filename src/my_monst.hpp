@@ -232,8 +232,6 @@ public:
   //
   int damage_current {}; // Current damage; so it can be modified by python
 } ThingInfo;
-std::ostream &operator<<(std::ostream &out, Bits< const ThingInfop & > const my);
-std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my);
 
 //
 // All carried items and buffs etc.. Typically only needed for an intelligent
@@ -287,8 +285,6 @@ public:
   //
   Widp wid {};
 } ThingItem;
-std::ostream &operator<<(std::ostream &out, Bits< const ThingItemsp & > const my);
-std::istream &operator>>(std::istream &in, Bits< ThingItemsp & > my);
 
 typedef struct ThingAi_ {
 public:
@@ -326,7 +322,5 @@ public:
   //
   std::map< ThingId, int > recently_hit_by {};
 } ThingAi;
-std::ostream &operator<<(std::ostream &out, Bits< const ThingAip & > const my);
-std::istream &operator>>(std::istream &in, Bits< ThingAip & > my);
 
 #endif // _MY_THING_HPP_

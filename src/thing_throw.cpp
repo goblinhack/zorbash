@@ -165,8 +165,8 @@ void Thing::throw_at(Thingp what, Thingp target)
   {
     auto callback = std::bind(&Thing::on_thrown_callback, what);
 
-    auto src   = (last_blit_tl + last_blit_br) / 2;
-    auto dst   = (target->last_blit_tl + target->last_blit_br) / 2;
+    auto src   = (last_blit_tl + last_blit_br) / (short) 2;
+    auto dst   = (target->last_blit_tl + target->last_blit_br) / (short) 2;
     auto sz    = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
     auto delay = PARTICLE_SPEED_MS;
 

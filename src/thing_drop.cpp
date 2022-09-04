@@ -236,7 +236,7 @@ bool Thing::drop_from_ether(Thingp what)
   wid_inventory_fini();
   wid_thing_info_fini("drop from ether");
 
-  point e = (player->last_blit_tl + player->last_blit_br) / 2;
+  point e = (player->last_blit_tl + player->last_blit_br) / (short) 2;
 
   auto w = game->in_transit_item;
   if (unlikely(! w)) {
@@ -244,7 +244,7 @@ bool Thing::drop_from_ether(Thingp what)
     return false;
   }
 
-  auto s = (w->abs_tl + w->abs_br) / 2;
+  auto s = (w->abs_tl + w->abs_br) / (short) 2;
   s.x    = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) s.x));
   s.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) s.y));
 

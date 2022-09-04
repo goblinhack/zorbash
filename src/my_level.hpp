@@ -722,9 +722,6 @@ public:
   float wobble_curr(void) const;
   float update_wobble(void);
 
-  friend std::istream &operator>>(std::istream &in, Bits< Levelp & > my);
-  friend std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my);
-
   int inventory_slot(Thingp item);
 
   std::string to_string(void);
@@ -967,8 +964,6 @@ public:
   void display_target(void);
   void display_tick_animation(void);
   void dmap_to_player_update(void);
-  void dump(std::string prefix);
-  void dump(std::string prefix, std::ostream &out);
   void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void err_(const char *fmt, va_list args); // compile error without
   void fade_in_incr(const int x, const int y);

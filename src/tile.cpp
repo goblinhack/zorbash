@@ -14,6 +14,7 @@
 #include "my_size.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
+#include "my_template.hpp"
 #include "my_tex.hpp"
 #include "my_thing_template.hpp"
 #include "my_tile.hpp"

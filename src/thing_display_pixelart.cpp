@@ -532,7 +532,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     blit_br.x += 2;
   }
 
-  last_blit_at = ((blit_tl + blit_br) / 2);
+  last_blit_at = ((blit_tl + blit_br) / (short) 2);
 
   //
   // Boing.
@@ -918,7 +918,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 
   auto wobble = update_wobble();
   if (wobble != 0.0) {
-    auto mid = (blit_tl + blit_br) / 2;
+    auto mid = (blit_tl + blit_br) / (short) 2;
     blit_flush();
     blit_init();
     glPushMatrix();

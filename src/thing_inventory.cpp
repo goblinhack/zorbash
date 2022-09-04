@@ -35,7 +35,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
       return;
     }
 
-    auto p = (w->abs_tl + w->abs_br) / 2;
+    auto p = (w->abs_tl + w->abs_br) / (short) 2;
     p.x    = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) p.x));
     p.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) p.y));
 
@@ -69,7 +69,7 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 
     dbg("Yes; create inventory particles");
     for (int c = 0; c < particle_count; c++) {
-      point s = (last_blit_tl + last_blit_br) / 2;
+      point s = (last_blit_tl + last_blit_br) / (short) 2;
       point j(pcg_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2, pcg_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
       std::string name = "gold1." + std::to_string(pcg_random_range(1, 8));
       level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2),
@@ -90,11 +90,11 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 
     msg("You collect the key.");
 
-    auto p = (w->abs_tl + w->abs_br) / 2;
+    auto p = (w->abs_tl + w->abs_br) / (short) 2;
     p.x    = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) p.x));
     p.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) p.y));
 
-    point s = (last_blit_tl + last_blit_br) / 2;
+    point s = (last_blit_tl + last_blit_br) / (short) 2;
     point j(pcg_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2, pcg_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
 
     dbg("Yes; create inventory particle");
@@ -112,14 +112,14 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
       return;
     }
 
-    auto p = (w->abs_tl + w->abs_br) / 2;
+    auto p = (w->abs_tl + w->abs_br) / (short) 2;
     p.x    = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) p.x));
     p.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) p.y));
 
     dbg("Yes; create inventory particle");
-    level->new_external_particle(item->id, (last_blit_tl + last_blit_br) / 2, p, isize(TILE_WIDTH, TILE_HEIGHT),
-                                 PARTICLE_SPEED_MS, tile_index_to_tile(item->tile_curr),
-                                 (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()));
+    level->new_external_particle(
+        item->id, (last_blit_tl + last_blit_br) / (short) 2, p, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
+        tile_index_to_tile(item->tile_curr), (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()));
   }
 }
 
@@ -176,14 +176,14 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
       return;
     }
 
-    where_from   = (w->abs_tl + w->abs_br) / 2;
+    where_from   = (w->abs_tl + w->abs_br) / (short) 2;
     where_from.x = (int) ((((float) game->config.game_pix_width) / ((float) TERM_WIDTH)) * ((float) where_from.x));
     where_from.y = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) where_from.y));
   } else {
-    where_from = (last_blit_tl + last_blit_br) / 2;
+    where_from = (last_blit_tl + last_blit_br) / (short) 2;
   }
 
-  point where_to = (particle_target->last_blit_tl + particle_target->last_blit_br) / 2;
+  point where_to = (particle_target->last_blit_tl + particle_target->last_blit_br) / (short) 2;
 
   auto callback = std::bind(&Thing::visible, item);
   level->new_external_particle(item->id, where_from, where_to, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,

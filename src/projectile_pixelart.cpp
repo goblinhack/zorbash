@@ -64,7 +64,7 @@ void Level::display_pixelart_projectiles(point tl, point br)
     auto stop  = p.info.pixel_stop - p.info.pixel_map_at;
 
     auto   dist  = distance(start, stop);
-    auto   steps = (int) ceil(dist) / TILE_WIDTH;
+    float  steps = (int) ceil(dist) / TILE_WIDTH;
     fpoint diff(stop.x - start.x, stop.y - start.y);
     fpoint step       = diff / steps;
     float  ninety_deg = RAD_360 / 4;
@@ -80,10 +80,11 @@ void Level::display_pixelart_projectiles(point tl, point br)
 
     fpoint mid(start.x + (diff.x * dt), start.y + (diff.y * dt));
 
-    point tl = make_point(mid - perp - step / 2);
-    point tr = make_point(mid - perp + step / 2);
-    point bl = make_point(mid + perp - step / 2);
-    point br = make_point(mid + perp + step / 2);
+    step /= 2;
+    point tl = make_point(mid - perp - step);
+    point tr = make_point(mid - perp + step);
+    point bl = make_point(mid + perp - step);
+    point br = make_point(mid + perp + step);
 
     tile_blit(get(p.tiles, frame), tl, tr, bl, br);
 
