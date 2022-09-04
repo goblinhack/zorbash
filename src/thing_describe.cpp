@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_game.hpp"
+#include "my_level.hpp"
 #include "my_thing.hpp"
 
 bool Thing::describe_when_hovered_over_in_rightbar(void)

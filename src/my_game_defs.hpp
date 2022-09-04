@@ -39,6 +39,12 @@
 #define MAP_HEIGHT ((DUNGEON_GRID_CHUNK_HEIGHT * MAP_ROOM_HEIGHT) + (MAP_BORDER_ROOM * 2))
 #define MAP_WIDTH  ((DUNGEON_GRID_CHUNK_WIDTH * MAP_ROOM_WIDTH) + (MAP_BORDER_ROOM * 2))
 
+#define GAME_MONST_HEALTH_BAR_STEPS 16
+#define GAME_MOST_ZOOMED_IN         5
+#define GAME_MOST_ZOOMED_OUT        1
+#define GAME_DEFAULT_UI_ZOOM        1
+#define GAME_DEFAULT_PIX_ZOOM       4
+
 //
 // So the mini map looks square even though the map is not
 //

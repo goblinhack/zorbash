@@ -12,7 +12,9 @@
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sys.hpp"
+
 #include <SDL_mixer.h>
+#include <map>
 #include <string>
 
 class sound;

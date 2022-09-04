@@ -34,7 +34,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 
-    delay = 2500
+    delay = 150
     for t in tiles:
         my.tile(self,
                 ascii_fg_char=">", ascii_bg_col_name="", ascii_fg_col_name="green",
@@ -49,34 +49,14 @@ def init():
         tiles=[
             "descend_sewer1.1",
             "descend_sewer1.2",
-        ],
-    )
-    tp_init(
-        name="descend_sewer2",
-        tiles=[
-            "descend_sewer2.1",
-            "descend_sewer2.2",
-        ],
-    )
-    tp_init(
-        name="descend_sewer3",
-        tiles=[
-            "descend_sewer3.1",
-            "descend_sewer3.2",
-        ],
-    )
-    tp_init(
-        name="descend_sewer4",
-        tiles=[
-            "descend_sewer4.1",
-            "descend_sewer4.2",
-        ],
-    )
-    tp_init(
-        name="descend_sewer5",
-        tiles=[
-            "descend_sewer5.1",
-            "descend_sewer5.2",
+            "descend_sewer1.3",
+            "descend_sewer1.4",
+            "descend_sewer1.5",
+            "descend_sewer1.6",
+            "descend_sewer1.7",
+            "descend_sewer1.8",
+            "descend_sewer1.9",
+            "descend_sewer1.10",
         ],
     )
 

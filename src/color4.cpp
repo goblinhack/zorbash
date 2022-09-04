@@ -2,11 +2,12 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_color_defs.hpp"
 #include "my_gl.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"
+
 #include <string.h>  // do not remove
-#include <strings.h> // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
 color INK;

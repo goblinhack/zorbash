@@ -3,6 +3,7 @@
 //
 
 #include "my_ascii.hpp"
+#include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_random.hpp"

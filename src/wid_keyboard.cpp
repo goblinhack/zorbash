@@ -5,6 +5,7 @@
 #include <SDL.h>
 
 #include "my_color.hpp"
+#include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_main.hpp"

@@ -18,7 +18,6 @@
 #include "my_thing_ai.hpp"
 #include "my_thing_defs.hpp"
 #include "my_thing_id.hpp"
-#include "my_tile.hpp"
 #include "my_time.hpp"
 
 typedef enum {

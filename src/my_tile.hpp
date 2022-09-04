@@ -12,8 +12,6 @@
 #include "my_point.hpp"
 #include <array>
 
-using Tilemap = std::vector< class Tile * >;
-
 #define TILE_HEIGHT       game->config.tile_height
 #define TILE_HEIGHT_LORES 16
 #define TILE_HEIGHT_MAX   64

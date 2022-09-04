@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_ascii.hpp"
+#include "my_color_defs.hpp"
 #include "my_main.hpp"
 #include "my_string.hpp"
 #include "my_sys.hpp"

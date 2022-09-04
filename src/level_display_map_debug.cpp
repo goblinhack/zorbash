@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_ptrcheck.hpp"

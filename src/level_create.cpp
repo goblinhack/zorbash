@@ -73,7 +73,9 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   }
 
   if (! monst_count) {
-    err("No monsters placed on level");
+    if (! is_level_type_sewer) {
+      err("No monsters placed on level");
+    }
   }
 
   game->level_being_created = nullptr;

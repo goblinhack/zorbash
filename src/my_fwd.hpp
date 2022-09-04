@@ -6,6 +6,8 @@
 #ifndef _MY_FWD_HPP_
 #define _MY_FWD_HPP_
 
+#include <vector>
+
 class Charmap;
 class Font;
 class Level;
@@ -49,5 +51,6 @@ using Tilep        = class Tile *;
 using Tpp          = class Tp *;
 using Widp         = class Wid *;
 using Worldp       = class World *;
+using Tilemap      = std::vector< class Tile      *>;
 
 #endif
