@@ -6,8 +6,9 @@
 #ifndef _MY_LIGHT_H
 #define _MY_LIGHT_H
 
+#include "my_fwd.hpp"
+#include "my_point.hpp"
 #include "my_thing_defs.hpp"
-#include "my_thing_template.hpp"
 
 typedef struct {
   int16_t depth_furthest;

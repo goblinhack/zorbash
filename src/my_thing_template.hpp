@@ -18,7 +18,6 @@
 using Tpidmap   = std::vector< class Tp   *>;
 using Tpnamemap = std::map< std::string, class Tp * >;
 using Allies    = std::set< class Tp    *>;
-using TpId      = uint16_t;
 
 enum {
   THING_RARITY_COMMON,

@@ -8,6 +8,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 void Thing::on_equip(Thingp what)
 {

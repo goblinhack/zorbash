@@ -52,5 +52,6 @@ using Tpp          = class Tp *;
 using Widp         = class Wid *;
 using Worldp       = class World *;
 using Tilemap      = std::vector< class Tile      *>;
+using TpId         = unsigned short;
 
 #endif

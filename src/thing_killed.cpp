@@ -7,6 +7,7 @@
 #include "my_monst.hpp"
 #include "my_python.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 void Thing::killed(Thingp defeater, const std::string &reason)
 {

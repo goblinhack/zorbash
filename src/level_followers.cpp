@@ -10,6 +10,7 @@
 #include "my_random.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 void Level::assign_leaders_and_followers(void)
 {

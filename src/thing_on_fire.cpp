@@ -8,6 +8,7 @@
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 #include "my_vector_bounds_check.hpp"
 
 //

@@ -10,6 +10,7 @@
 #include "my_sound.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_actionbar.hpp"

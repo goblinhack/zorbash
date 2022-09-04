@@ -6,14 +6,17 @@
 #ifndef _MY_MONST_HPP_
 #define _MY_MONST_HPP_
 
+#include <array>
+#include <list>
+#include <map>
+
+#include "my_color.hpp"
 #include "my_level_fov.hpp"
 #include "my_light.hpp"
 #include "my_point3d.hpp"
 #include "my_thing_ai.hpp"
 #include "my_thing_id.hpp"
 #include "my_time.hpp"
-#include <array>
-#include <list>
 
 constexpr uint32_t THING_MAGIC_BEGIN = 11221122;
 constexpr uint32_t THING_MAGIC_END   = 22112211;

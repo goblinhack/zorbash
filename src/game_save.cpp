@@ -14,6 +14,7 @@
 #include "my_string.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_console.hpp"

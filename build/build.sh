@@ -608,7 +608,7 @@ fi
 if [[ $OPT_DEV1 != "" ]]; then
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g # AUTOGEN" > .Makefile
 else
-    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O2 # AUTOGEN" > .Makefile
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O3 # AUTOGEN" > .Makefile
 fi
 
 if [[ $OPT_DEV2 != "" ]]; then

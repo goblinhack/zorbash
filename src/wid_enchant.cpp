@@ -8,6 +8,7 @@
 #include "my_sdl.hpp"
 #include "my_sys.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 #include "my_tile.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"
