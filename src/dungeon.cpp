@@ -166,19 +166,13 @@ void Dungeon::make_dungeon(void)
     debug("choose room doors");
 
     //
-    // It's just too slow.
+    // Drag rooms closer together
     //
-    if (0) {
-      //
-      // Drag rooms closer together
-      //
-      DBG2("INF: Move rooms closer");
+    DBG2("INF: Move rooms closer");
 
-      if (rooms_move_closer_together()) {
-        break;
-      }
+    if (rooms_move_closer_together()) {
+      break;
     }
-    break;
 
     DBG2("INF: Failed, retry");
     debug("failed to place dungeon");
@@ -2900,7 +2894,7 @@ bool Dungeon::rooms_move_closer_together(void)
   // This is slow and causes jitter in the game when a monst falls
   // into a chasm.
   //
-  int attempts_to_move_rooms_closer = pcg_random_range(0, 30);
+  int attempts_to_move_rooms_closer = 1; /* pcg_random_range(0, 30); */
 
   choose_room_doors();
 
