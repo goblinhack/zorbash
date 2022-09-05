@@ -183,7 +183,7 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
   set(dmap.val, end.x, end.y, DMAP_IS_GOAL);
   set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-  dmap_process(&dmap, dmap_start, dmap_end);
+  dmap_process(&dmap, dmap_start, dmap_end, true);
 #if 0
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif

@@ -2,6 +2,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- filter messages after death of player - esp falling                                                                                          -->
+<!-- you are by a baby jelly jumper                                                                                                               -->
+<!-- stood on lizardkin corpse and caught fire                                                                                                    -->
 <!-- thunderstone blew up on player deaty                                                                                                         -->
 <!-- falling to a level and trying to return failed                                                                                               -->
 <!-- eels                                                                                                                                         -->

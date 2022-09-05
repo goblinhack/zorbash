@@ -138,7 +138,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
 
-  dmap_process(&dmap, dmap_start, dmap_end);
+  dmap_process(&dmap, dmap_start, dmap_end, true);
 
 #if 0
   log("after:");

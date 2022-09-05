@@ -1758,7 +1758,7 @@ bool Nodes::create_path_to_exit(int pass)
 
   point dmap_start(minx, miny);
   point dmap_end(maxx, maxy);
-  dmap_process(&d, dmap_start, dmap_end);
+  dmap_process(&d, dmap_start, dmap_end, false);
   // dmap_print_walls(&d);
 
   //
@@ -1902,7 +1902,7 @@ void Nodes::create_path_lock_to_key(int depth)
 
   point dmap_start(minx, miny);
   point dmap_end(maxx, maxy);
-  dmap_process(&d, dmap_start, dmap_end);
+  dmap_process(&d, dmap_start, dmap_end, false);
   // dmap_print_walls(&d);
 
   for (auto y = 0; y < grid_height; y++) {
@@ -2024,7 +2024,7 @@ void Nodes::make_paths_off_critical_path_reachable(void)
   set(d.val, end.x, end.y, DMAP_IS_GOAL);
   set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-  dmap_process(&d, dmap_start, dmap_end);
+  dmap_process(&d, dmap_start, dmap_end, false);
   // dmap_print_walls(&d);
 
   std::array< std::array< bool, MAX_GRID_CHUNK_HEIGHT >, MAX_GRID_CHUNK_WIDTH > on_critical_path = {};

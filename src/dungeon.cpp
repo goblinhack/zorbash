@@ -134,7 +134,8 @@
 
 void Dungeon::make_dungeon(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   //
   // Create the high level blueprint of the level layout
   //
@@ -154,7 +155,7 @@ void Dungeon::make_dungeon(void)
     //
     DBG2("INF: Create cyclic rooms");
     create_cyclic_rooms(&grid);
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     debug("create cyclic rooms");
 
     //
@@ -162,7 +163,7 @@ void Dungeon::make_dungeon(void)
     //
     DBG2("INF: Choose room doors");
     choose_room_doors();
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     debug("choose room doors");
 
     //
@@ -185,7 +186,7 @@ void Dungeon::make_dungeon(void)
   //
   DBG2("INF: Assign rooms to tiles");
   assign_rooms_to_tiles();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   debug("assigned rooms to tiles");
 
   //
@@ -193,7 +194,7 @@ void Dungeon::make_dungeon(void)
   //
   DBG2("INF: Block secret doors");
   block_secret_doors();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   debug("blocked secret doors");
 
   //
@@ -202,7 +203,7 @@ void Dungeon::make_dungeon(void)
   //
   DBG2("INF: Remove all rooms");
   remove_all_doors();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   debug("remove all doors");
 
   //
@@ -211,7 +212,7 @@ void Dungeon::make_dungeon(void)
   //
   DBG2("INF: Place rooms with doors");
   room_print_only_doors(&grid);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   debug("only doors");
 
   //
@@ -219,7 +220,7 @@ void Dungeon::make_dungeon(void)
   //
   DBG2("INF: Place doors between room depth changes");
   place_doors_between_depth_changes();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   debug("add doors between depth changes");
 
   //
@@ -227,12 +228,12 @@ void Dungeon::make_dungeon(void)
   //
   DBG2("INF: Add corridor walls");
   add_corridor_walls();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   debug("add corridor walls");
 
   DBG2("INF: Add room walls");
   add_room_walls();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   debug("add room walls");
 
   IF_DEBUG2
@@ -321,7 +322,6 @@ bool Dungeon::is_oob(const int x, const int y)
 
 void Dungeon::debug(const std::string s)
 {
-  TRACE_AND_INDENT();
   IF_DEBUG2
   {
     LOG("DUNGEON (%u) %s", seed, s.c_str());
@@ -336,7 +336,7 @@ void Dungeon::debug(const std::string s)
 Dungeon::Dungeon(int map_width, int map_height, int grid_width, int grid_height, uint32_t seed)
     : map_width(map_width), map_height(map_height), grid_width(grid_width), grid_height(grid_height), seed(seed)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   make_dungeon();
 }
 
@@ -347,7 +347,7 @@ Dungeon::~Dungeon() { delete nodes; }
 //
 Dungeon::Dungeon(int level)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (level >= (int) LevelStatic::all_static_levels.size()) {
     ERR("Out of range level %d", level);
     return;
@@ -1505,7 +1505,7 @@ void Dungeon::create_node_map(void)
 
 void Dungeon::dump(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   IF_DEBUG2
   {
     LOG("INF: Seed %u (with room depth)", seed);
@@ -1632,7 +1632,7 @@ void Dungeon::reset_possible_rooms(void)
 
 void Dungeon::room_print_at(Roomp r, int x, int y)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   r->at.x = x;
   r->at.y = y;
   for (auto z = 0; z < MAP_DEPTH; z++) {
@@ -1649,7 +1649,7 @@ void Dungeon::room_print_at(Roomp r, int x, int y)
 
 void Dungeon::room_print_only_doors_at(Roomp r, int x, int y)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   for (auto z = 0; z < MAP_DEPTH; z++) {
     for (auto dy = 0; dy < r->height; dy++) {
       for (auto dx = 0; dx < r->width; dx++) {
@@ -1664,7 +1664,7 @@ void Dungeon::room_print_only_doors_at(Roomp r, int x, int y)
 
 void Dungeon::room_print_only_doors(Grid *g)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   for (auto x = 0; x < grid_width; x++) {
     for (auto y = 0; y < grid_height; y++) {
       auto n = nodes->getn(x, y);
@@ -1682,7 +1682,7 @@ void Dungeon::room_print_only_doors(Grid *g)
 
 void Dungeon::rooms_print_all(Grid *g)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   std::fill(cells.begin(), cells.end(), Charmap::SPACE);
 
   for (auto x = 0; x < grid_width; x++) {
@@ -2065,19 +2065,19 @@ void Dungeon::choose_room_doors(void)
       if (n->has_door_down) {
         auto o = get(grid.node_rooms, x, y + 1);
         if (! o) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Had exit down at %d,%d, but no node exists", x, y);
         }
         auto rdoori = pcg_random_range(0, r->doors_down.size());
         auto odoori = pcg_random_range(0, o->doors_up.size());
         if (rdoori >= r->doors_down.size()) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Bug");
         }
         if (odoori >= o->doors_up.size()) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Bug");
         }
@@ -2092,19 +2092,19 @@ void Dungeon::choose_room_doors(void)
       if (n->has_door_right) {
         auto o = get(grid.node_rooms, x + 1, y);
         if (! o) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Had exit right at %d,%d, but no node exists", x, y);
         }
         auto rdoori = pcg_random_range(0, r->doors_right.size());
         auto odoori = pcg_random_range(0, o->doors_left.size());
         if (rdoori >= r->doors_right.size()) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Bug");
         }
         if (odoori >= o->doors_left.size()) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Bug");
         }
@@ -2119,19 +2119,19 @@ void Dungeon::choose_room_doors(void)
       if (n->has_secret_exit_down) {
         auto o = get(grid.node_rooms, x, y + 1);
         if (! o) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Had secret exit down at %d,%d, but no node exists", x, y);
         }
         auto rdoori = pcg_random_range(0, r->doors_down.size());
         auto odoori = pcg_random_range(0, o->doors_up.size());
         if (rdoori >= r->doors_down.size()) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Bug, room %d, down door index %d size %d", r->roomno, (int) rdoori, (int) r->doors_down.size());
         }
         if (odoori >= o->doors_up.size()) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Bug, room %d, up door index %d size %d", r->roomno, (int) odoori, (int) r->doors_up.size());
         }
@@ -2146,19 +2146,19 @@ void Dungeon::choose_room_doors(void)
       if (n->has_secret_exit_right) {
         auto o = get(grid.node_rooms, x + 1, y);
         if (! o) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Had secret exit right at %d,%d, but no node exists", x, y);
         }
         auto rdoori = pcg_random_range(0, r->doors_right.size());
         auto odoori = pcg_random_range(0, o->doors_left.size());
         if (rdoori >= r->doors_right.size()) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Bug, room %d, right door index %d size %d", r->roomno, (int) rdoori, (int) r->doors_right.size());
         }
         if (odoori >= o->doors_left.size()) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("bug");
           ERR("Bug, room %d, left door index %d size %d", r->roomno, (int) odoori, (int) r->doors_left.size());
         }
@@ -2175,7 +2175,7 @@ void Dungeon::choose_room_doors(void)
 
 void Dungeon::save_level(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   std::copy(mbegin(cells), mend(cells), mbegin(cells_saved));
 
   for (unsigned int rs = 0; rs < (unsigned int) all_placed_rooms.size(); rs++) {
@@ -2188,7 +2188,7 @@ void Dungeon::save_level(void)
 
 void Dungeon::restore_level(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   std::copy(mbegin(cells_saved), mend(cells_saved), mbegin(cells));
 
   for (unsigned int rs = 0; rs < (unsigned int) all_placed_rooms.size(); rs++) {
@@ -2201,7 +2201,7 @@ void Dungeon::restore_level(void)
 
 int Dungeon::draw_corridor(point start, point end, char w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Dmap d {};
 
   //
@@ -2448,8 +2448,10 @@ int Dungeon::draw_corridor(point start, point end, char w)
   set(d.val, end.x, end.y, DMAP_IS_GOAL);
   set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-  dmap_process(&d, dmap_start, dmap_end);
-  // dmap_print(&d, (dmap_start + dmap_end) / 2, dmap_start, dmap_end);
+  dmap_process(&d, dmap_start, dmap_end, false);
+  auto dmap_mid = dmap_start + dmap_end;
+  dmap_mid /= 2;
+  dmap_print(&d, dmap_mid, dmap_start, dmap_end);
 
   auto p = dmap_solve(&d, start);
 
@@ -2483,8 +2485,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
     putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DEBUG);
 
 #if 0
-    DBG("INF: cannot create corridor, end not found between %d,%d and %d,%d",
-      start.x, start.y, end.x, end.y);
+    DNG("INF: cannot create corridor, end not found between %d,%d and %d,%d", start.x, start.y, end.x, end.y);
     dump();
 #endif
     return 0;
@@ -2498,7 +2499,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   putc(end.x, end.y, MAP_DEPTH_OBJ, Charmap::DOOR);
 
 #if 0
-  DBG("INF: placed corridor len %d", (int)p.size());
+  DBG("INF: placed corridor len %d", (int) p.size());
   dump();
 #endif
 
@@ -2510,7 +2511,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
 //
 int Dungeon::draw_corridors(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 #if 0
   LOG("Draw corridors");
   dump();
@@ -2878,23 +2879,27 @@ bool Dungeon::rooms_move_closer_together(void)
   auto corridor_count = draw_corridors();
 
   if (! corridor_count) {
-    TRACE_AND_INDENT();
-    debug("level before adding corridors is NOT solvable");
+    TRACE_NO_INDENT();
+#if 0
+    DBG("level before adding corridors is NOT solvable:");
+    dump();
+#endif
     return false;
   }
 
-  TRACE_AND_INDENT();
-  debug("level before adding shorter corridors is solvable");
+  TRACE_NO_INDENT();
+#if 0
+  DBG("level before adding shorter corridors is solvable");
+#endif
   restore_level();
 
   auto failed_to_place_all_corridors    = 0;
   auto failed_to_make_shorter_corridors = 0;
 
   //
-  // This is slow and causes jitter in the game when a monst falls
-  // into a chasm.
+  // This is slow and causes jitter in the game when a monst falls into a chasm.
   //
-  int attempts_to_move_rooms_closer = 1; /* pcg_random_range(0, 30); */
+  int attempts_to_move_rooms_closer = 0; /* pcg_random_range(0, 30); */
 
   choose_room_doors();
 
@@ -3105,7 +3110,7 @@ bool Dungeon::rooms_move_closer_together(void)
         }
 
         if (failed_to_make_shorter_corridors++ > 1000) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("cannot place shorter corridor layout");
           return true;
         }
@@ -3118,7 +3123,7 @@ bool Dungeon::rooms_move_closer_together(void)
         }
 
         if (failed_to_place_all_corridors++ > 1000) {
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           debug("cannot place shorter corridor layout");
           return true;
         }
@@ -3136,7 +3141,7 @@ bool Dungeon::rooms_move_closer_together(void)
   }
 
   auto ret = draw_corridors();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   debug("success, placed shorter corridor layout");
   return ret;
 }

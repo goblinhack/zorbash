@@ -148,7 +148,7 @@ void dmap_print(const Dmap *D)
   }
 }
 
-void dmap_process(Dmap *D, point tl, point br)
+void dmap_process(Dmap *D, point tl, point br, bool place_border)
 {
   auto                                                              before = SDL_GetTicks();
   uint8_t                                                           x;
@@ -189,10 +189,12 @@ void dmap_process(Dmap *D, point tl, point br)
   // So grow the search space slightly so that creatures that can only see one tile, do not lose out and have nothing
   // to look at.
   //
-  minx--;
-  miny--;
-  maxx++;
-  maxy++;
+  if (place_border) {
+    minx--;
+    miny--;
+    maxx++;
+    maxy++;
+  }
 
   if (minx < 0) {
     minx = 0;
@@ -395,7 +397,7 @@ void dmap_process(Dmap *D, point tl, point br)
   }
 }
 
-void dmap_process(Dmap *D) { dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT)); }
+void dmap_process(Dmap *D) { dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT), true); }
 
 static bool is_obs_wall_or_door_at(const Dmap *D, int x, int y)
 {

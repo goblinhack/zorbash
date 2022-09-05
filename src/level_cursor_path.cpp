@@ -181,7 +181,7 @@ void Level::cursor_path_draw_line(Thingp it, point start, point end)
   dbg("Make cursor path %d,%d to %d,%d", start.x, start.y, end.x, end.y);
 
   // dmap_print(&d, start, dmap_start, dmap_end);
-  dmap_process(&d, dmap_start, dmap_end);
+  dmap_process(&d, dmap_start, dmap_end, true);
   // dmap_print(&d, start, dmap_start, dmap_end);
 
   //

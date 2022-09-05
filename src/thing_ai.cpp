@@ -913,7 +913,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     }
   }
 
-  dmap_process(dmap_can_see, point(minx, miny), point(maxx, maxy));
+  dmap_process(dmap_can_see, point(minx, miny), point(maxx, maxy), true);
 
   IF_DEBUG2
   {
