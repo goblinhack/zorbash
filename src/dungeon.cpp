@@ -166,12 +166,19 @@ void Dungeon::make_dungeon(void)
     debug("choose room doors");
 
     //
-    // Drag rooms closer together
+    // It's just too slow.
     //
-    DBG2("INF: Move rooms closer");
-    if (rooms_move_closer_together()) {
-      break;
+    if (0) {
+      //
+      // Drag rooms closer together
+      //
+      DBG2("INF: Move rooms closer");
+
+      if (rooms_move_closer_together()) {
+        break;
+      }
     }
+    break;
 
     DBG2("INF: Failed, retry");
     debug("failed to place dungeon");
@@ -1808,7 +1815,7 @@ bool Dungeon::room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r
   if (n->is_secret) {
     return (n->is_secret == r->is_secret);
   }
-  if (n->depth >= r->depth) {
+  if (n->depth > r->depth) {
     return false;
   }
   return true;

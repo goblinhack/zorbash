@@ -73,7 +73,9 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   curr_at     = born;
   last_at     = born;
 
-  ts_next_frame = 0;
+  //
+  // Try to find the thing by name
+  //
   if (name == "") {
     DIE("Thing template cannot be created: No name given");
   }
@@ -84,8 +86,21 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     return;
   }
 
+  //
+  // Templates are shared for all things
+  //
   tp_id = tpp->id;
   tp_or_update();
+
+  //
+  // The grid is the perma background matrix like substrate that is the ether of this universe!
+  //
+  is_the_grid = tp()->is_the_grid();
+  if (is_the_grid) {
+    return;
+  }
+
+  ts_next_frame = 0;
 
   //
   // Cached as used often
@@ -256,11 +271,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   if (is_monst()) {
     level->monst_count++;
   }
-
-  //
-  // The grid is the perma background matrix like substrate that is the ether of this universe!
-  //
-  is_the_grid = tp()->is_the_grid();
 
   //
   // Do on born actions.

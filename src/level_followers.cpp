@@ -14,7 +14,7 @@
 
 void Level::assign_leaders_and_followers(void)
 {
-  log("Assign leaders and followers");
+  dbg("Assign leaders and followers");
   TRACE_AND_INDENT();
 
   std::list< Thingp > cands;
@@ -31,7 +31,7 @@ void Level::assign_leaders_and_followers(void)
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 
   if (! cands.size()) {
-    log("Assign leaders and followers: none found");
+    dbg("Assign leaders and followers: none found");
     return;
   }
 
@@ -40,7 +40,7 @@ void Level::assign_leaders_and_followers(void)
   //
   // Assign members to groups
   //
-  log("Choose followers");
+  dbg("Choose followers");
   for (auto t : cands) {
     Thingp group_cand = nullptr;
     for (const auto &g : groups) {
@@ -88,7 +88,7 @@ void Level::assign_leaders_and_followers(void)
   //
   // Now choose the leader
   //
-  log("Choose the leaders");
+  dbg("Choose the leaders");
   for (const auto &g : groups) {
     dbg("Final group %p", g.first);
 

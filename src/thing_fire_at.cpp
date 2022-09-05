@@ -125,7 +125,7 @@ bool Thing::fire_at_target(void)
     return false;
   }
 
-  log("Look for something to fire at");
+  dbg("Look for something to fire at");
   TRACE_AND_INDENT();
 
   int   dx, dy;
@@ -167,7 +167,7 @@ bool Thing::fire_at_target(void)
           continue;
         }
 
-        log("Look for something to fire at; %s", it->to_short_string().c_str());
+        dbg("Look for something to fire at; %s", it->to_short_string().c_str());
         TRACE_AND_INDENT();
 
         //

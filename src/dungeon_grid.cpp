@@ -126,9 +126,13 @@ redo:
   // Place the depth and join up the nodes. Add occasional
   // secret jumps between nodes in the depth
   //
-  auto pass  = 1;
-  auto depth = 1;
-  while (depth < 10) {
+  auto pass        = 1;
+  auto depth       = 1;
+  auto depth_limit = DUNGEON_MAX_DEPTH;
+  if (! is_dungeon) {
+    depth_limit = DUNGEONS_MAX_DEPTH;
+  }
+  while (depth <= depth_limit) {
     set_max_depth();
 
     int placed;
@@ -767,7 +771,7 @@ void Nodes::init_nodes(void)
 
   while (obstacles--) {
     auto x = pcg_random_range(0, grid_width);
-    auto y = pcg_random_range(1, grid_height);
+    auto y = pcg_random_range(0, grid_height);
 
     auto o   = getn(x, y);
     o->depth = depth_obstacle;

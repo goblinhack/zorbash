@@ -44,16 +44,6 @@ void Level::scroll_map_set_bounds(void)
   if (map_wanted_at.y < 0) {
     map_wanted_at.y = 0;
   }
-
-  //
-  // Allow vertical scrolling in ascii mode if necessary, but ideally I want the whole map to be onscreen.
-  //
-  if (g_opt_ascii) {
-    map_at.x        = 0;
-    map_at.y        = 0;
-    map_wanted_at.x = 0;
-    map_wanted_at.y = 0;
-  }
 }
 
 void Level::scroll_map_do(bool fast)
@@ -308,7 +298,8 @@ void Level::scroll_map_set_target(void)
       //
       // Unless we are really at the edges.
       //
-      int scroll_border = MAP_BORDER_ROCK;
+      int scroll_border = MAP_BORDER_ROCK * 4;
+
       if (player->curr_at.x > MAP_WIDTH - scroll_border) {
         auto_scroll = true;
       }

@@ -25,6 +25,9 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
 
   uint32_t start = time_ms();
 
+  uint32_t    slowest_so_far = 0;
+  std::string slowest_so_far_which;
+
   while (true) {
     uint32_t start   = time_ms();
     auto     dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
@@ -54,14 +57,26 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     }
   have_dungeon_start:
 
+    slowest_so_far = 0;
+
     //
     // The grid is the basis of all reality.
     //
-    dbg2("INF: Place the grid");
-    place_the_grid();
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place the grid");
+      place_the_grid();
+      if (g_errored) {
+        return false;
+      }
+
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing the grid";
+      }
     }
+
 #if 0
     //
     // Static level
@@ -77,62 +92,72 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
       return false;
     }
 
-    dbg2("INF: Place random walls");
-    create_dungeon_place_walls(dungeon, wall_type, 1, 6, 6, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 2, 6, 6, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 1, 6, 3, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 1, 3, 6, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 1, 3, 3, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 2, 3, 3, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 1, 2, 2, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 2, 2, 2, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 3, 2, 2, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 1, 2, 1, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 2, 2, 1, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 1, 1, 2, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_walls(dungeon, wall_type, 2, 1, 2, tries);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place random walls");
+      create_dungeon_place_walls(dungeon, wall_type, 1, 6, 6, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 2, 6, 6, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 1, 6, 3, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 1, 3, 6, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 1, 3, 3, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 2, 3, 3, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 1, 2, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 2, 2, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 3, 2, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 1, 2, 1, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 2, 2, 1, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 1, 1, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_walls(dungeon, wall_type, 2, 1, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing the walls";
+      }
     }
 
-    dbg2("INF: Place random floors");
     {
+      uint32_t start = time_ms();
+      dbg2("INF: Place random floors");
       auto floor_type = pcg_random_range_inclusive(1, 11);
 
       int  nloops = 100;
@@ -262,68 +287,100 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
       if (g_errored) {
         return false;
       }
+
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing the floor";
+      }
     }
 
-    dbg2("INF: Place corridors");
-    create_dungeon_place_corridor(dungeon, "corridor1", 0);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place corridors");
+      create_dungeon_place_corridor(dungeon, "corridor1", 0);
+      if (g_errored) {
+        return false;
+      }
+
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing the corridors";
+      }
     }
 
-    dbg2("INF: Place bridges");
-    create_dungeon_place_bridge(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place bridges");
+      create_dungeon_place_bridge(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing bridges";
+      }
     }
 
-    dbg2("INF: Place rocks");
-    create_dungeon_place_rocks(dungeon, 1, 6, 6, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 1, 6, 3, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 1, 3, 6, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 1, 3, 3, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 2, 3, 3, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 1, 2, 2, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 2, 2, 2, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 3, 2, 2, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 1, 2, 1, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 2, 2, 1, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 1, 1, 2, tries);
-    if (g_errored) {
-      return false;
-    }
-    create_dungeon_place_rocks(dungeon, 2, 1, 2, tries);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place rocks");
+      create_dungeon_place_rocks(dungeon, 1, 6, 6, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 1, 6, 3, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 1, 3, 6, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 1, 3, 3, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 2, 3, 3, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 1, 2, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 2, 2, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 3, 2, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 1, 2, 1, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 2, 2, 1, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 1, 1, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+      create_dungeon_place_rocks(dungeon, 2, 1, 2, tries);
+      if (g_errored) {
+        return false;
+      }
+
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing rocks";
+      }
     }
 
     dbg2("INF: Place remaining rocks");
@@ -332,132 +389,268 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
       return false;
     }
 
-    dbg2("INF: Place remaining walls");
-    create_dungeon_place_remaining_walls(dungeon, wall_type->name());
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place remaining walls");
+      create_dungeon_place_remaining_walls(dungeon, wall_type->name());
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing remaining walls";
+      }
     }
 
-    dbg2("INF: Place dirt");
-    place_dirt(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place dirt");
+      place_dirt(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing dirt";
+      }
     }
 
-    dbg2("INF: Place chasms");
-    create_dungeon_place_chasm(dungeon, "chasm1");
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place chasms");
+      create_dungeon_place_chasm(dungeon, "chasm1");
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing chasms";
+      }
     }
 
-    dbg2("INF: Place deep water");
-    create_dungeon_place_deep_water(dungeon, "deep_water1");
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place deep water");
+      create_dungeon_place_deep_water(dungeon, "deep_water1");
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing deep water";
+      }
     }
 
-    dbg2("INF: Place shallow water");
-    create_dungeon_place_place_shallow_water(dungeon, "water");
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place shallow water");
+      create_dungeon_place_place_shallow_water(dungeon, "water");
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing shallow water";
+      }
     }
 
-    dbg2("INF: Place lava");
-    create_dungeon_place_lava(dungeon, "lava");
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place lava");
+      create_dungeon_place_lava(dungeon, "lava");
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing lava";
+      }
     }
 
     //
     // Place braziers first and then update the heatmap
     //
-    dbg2("INF: Place braziers");
-    create_dungeon_place_braziers(dungeon, "brazier");
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place braziers");
+      create_dungeon_place_braziers(dungeon, "brazier");
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing braziers";
+      }
     }
 
     //
     // Update the heatmap to avoid placing monsts next to lava
     //
-    dbg2("INF: Update heatmap");
-    update_heatmap();
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Update heatmap");
+      update_heatmap();
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "heatmap calc";
+      }
+    }
 
     //
     // Items that have no special placement rules
     //
-    dbg2("INF: Place items");
-    create_dungeon_place_objects_with_normal_placement_rules(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place items");
+      create_dungeon_place_objects_with_normal_placement_rules(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing items";
+      }
     }
 
     //
     // Scary non essential stuff
     //
-    dbg2("INF: Place blood");
-    create_dungeon_place_random_red_blood(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place blood");
+      create_dungeon_place_random_red_blood(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing blood";
+      }
     }
 
     //
     // Less important stuff
     //
-    dbg2("INF: Place smoke");
-    create_dungeon_place_lava_smoke(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place smoke");
+      create_dungeon_place_lava_smoke(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing smoke";
+      }
     }
 
-    dbg2("INF: Place floor deco");
-    place_floor_deco(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place floor deco");
+      place_floor_deco(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing floor deco";
+      }
     }
 
     //
     // Place some pools of blood
     //
-    dbg2("INF: Place random floor deco");
-    create_dungeon_place_random_floor_deco(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place random floor deco");
+      create_dungeon_place_random_floor_deco(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing random floor deco";
+      }
     }
 
     //
     // Place some horrible sewers
     //
-    dbg2("INF: Place sewer pipes");
-    create_dungeon_place_sewer_pipes(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place sewer pipes");
+      create_dungeon_place_sewer_pipes(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing sewer pipes";
+      }
     }
 
     //
     // Be evil
     //
-    dbg2("INF: Place spiderweb");
-    place_spiderweb(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place spiderweb");
+      place_spiderweb(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing spiderwebs";
+      }
     }
 
     //
     // Be nice
     //
-    dbg2("INF: Place random treasure");
-    place_random_treasure(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place random treasure");
+      place_random_treasure(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing treasure";
+      }
     }
 
     //
     // Take pity on the player getting close to the dark
     //
-    place_random_torches(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      place_random_torches(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing torches";
+      }
     }
 
     //
@@ -468,37 +661,70 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     //
     // Make sure and place dry grass after this
     //
-    update_heatmap();
+    {
+      uint32_t start = time_ms();
+      update_heatmap();
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "updating the heatmap again";
+      }
+    }
 
     //
     // Place some greenery
     //
-    dbg2("INF: Place dry grass");
-    place_dry_grass(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place dry grass");
+      place_dry_grass(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing dry grass";
+      }
     }
 
-    dbg2("INF: Place wet grass");
-    place_wet_grass(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place wet grass");
+      place_wet_grass(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing wet grass";
+      }
     }
 
     //
     // Place some brownery
     //
-    dbg2("INF: Place foilage");
-    place_foilage(dungeon);
-    if (g_errored) {
-      return false;
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place foilage");
+      place_foilage(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing foilage";
+      }
     }
 
     delete dungeon;
     break;
   }
 
-  log("INF: Populated dungeon at (%d,%d,%d) took %u ms", at.x, at.y, at.z, time_ms() - start);
+  log("INF: Populated dungeon at (%d,%d,%d) took %u ms, slowest element took %u ms (%s)", at.x, at.y, at.z,
+      time_ms() - start, slowest_so_far, slowest_so_far_which.c_str());
   return true;
 }
 
