@@ -92,14 +92,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   tp_id = tpp->id;
   tp_or_update();
 
-  //
-  // The grid is the perma background matrix like substrate that is the ether of this universe!
-  //
-  is_the_grid = tp()->is_the_grid();
-  if (is_the_grid) {
-    return;
-  }
-
   ts_next_frame = 0;
 
   //
@@ -138,31 +130,12 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   z_depth = tp()->z_depth;
 
-  //
-  // Change state prior to choosing the first tile so we get the
-  // sleep anim immediately.
-  //
-  if (is_asleep_initially()) {
-    change_state(MONST_STATE_SLEEPING, "asleep initially");
-  }
-
-  //
-  // Start off up to data with the player
-  //
-  if (is_tickable()) {
-    //
-    // Newly spawned things, don't make them do something immediately
-    // This can lead to recursion
-    //
-    tick_last_location_check_set(game->tick_current);
-    tick_last_did_something_set(game->tick_current);
-  }
-
   if (is_tmp_thing()) {
     game->world.alloc_tmp_thing_id(this);
   } else {
     game->world.alloc_thing_id(this);
   }
+
   if (curr_at != point(-1, -1)) {
     level_enter();
     level_push();
@@ -184,29 +157,9 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   }
 
   //
-  // Add AI ability
-  //
-  if (tpp->is_monst() || tpp->is_player()) {
-    clear_age_map();
-    clear_seen_map();
-    clear_interrupt_map();
-    clear_dmap_can_see();
-    clear_can_see_currently();
-    clear_can_see_ever();
-  }
-
-  //
-  // Create the large player dmap
-  //
-  if (tpp->is_player()) {
-    level->player = this;
-    level->dmap_to_player_update();
-  }
-
-  //
   // Some things are symetrical and can flip.
   //
-  if (tpp->gfx_pixelart_animated_can_hflip()) {
+  if (gfx_pixelart_animated_can_hflip()) {
     dir            = THING_DIR_LEFT;
     is_facing_left = true;
   } else {
@@ -227,17 +180,10 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   // Some things start life open
   //
-  if (unlikely(tpp->is_ascend_dungeon())) {
+  if (unlikely(is_ascend_dungeon())) {
     if (level->dungeon_walk_order_level_no > 1) {
       is_open = true;
     }
-  }
-
-  //
-  // e.g. wand charges
-  //
-  if (unlikely(tpp->charge_count())) {
-    charge_count_set(tpp->charge_count());
   }
 
   //
@@ -246,6 +192,54 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   if (curr_at != point(-1, -1)) {
     interpolated_at_set(make_fpoint(curr_at));
     update_interpolated_position();
+  }
+
+  //
+  // The grid is the perma background matrix like substrate that is the ether of this universe!
+  //
+  is_the_grid = tp()->is_the_grid();
+  if (is_the_grid) {
+    return;
+  }
+
+  //
+  // Create the large player dmap
+  //
+  if (is_player()) {
+    level->player = this;
+    level->dmap_to_player_update();
+  }
+
+  //
+  // Add AI ability
+  //
+  if (is_monst() || is_player()) {
+    clear_age_map();
+    clear_seen_map();
+    clear_interrupt_map();
+    clear_dmap_can_see();
+    clear_can_see_currently();
+    clear_can_see_ever();
+  }
+
+  //
+  // Change state prior to choosing the first tile so we get the
+  // sleep anim immediately.
+  //
+  if (is_asleep_initially()) {
+    change_state(MONST_STATE_SLEEPING, "asleep initially");
+  }
+
+  //
+  // Start off up to data with the player
+  //
+  if (is_tickable()) {
+    //
+    // Newly spawned things, don't make them do something immediately
+    // This can lead to recursion
+    //
+    tick_last_location_check_set(game->tick_current);
+    tick_last_did_something_set(game->tick_current);
   }
 
   //
@@ -273,6 +267,13 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   }
 
   //
+  // e.g. wand charges
+  //
+  if (unlikely(tpp->charge_count())) {
+    charge_count_set(tpp->charge_count());
+  }
+
+  //
   // Do on born actions.
   //
   on_born();
@@ -280,7 +281,9 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   // In case we carry something here, check for equipping
   //
-  update();
+  if (is_player() || is_monst()) {
+    update();
+  }
 
   //
   // Mainly for explosions
