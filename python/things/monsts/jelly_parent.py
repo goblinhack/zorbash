@@ -13,10 +13,10 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
 
 def on_death(me, x, y):
     splits = False
-    if my.pcg_randint(1, 100) < 40:
+    if my.pcg_randint(1, 100) < 80:
         my.spawn_next_to(me, "jelly_baby")
         splits = True
-    if my.pcg_randint(1, 100) < 40:
+    if my.pcg_randint(1, 100) < 80:
         my.spawn_next_to(me, "jelly_baby")
         splits = True
     if my.pcg_randint(1, 100) < 40:

@@ -67,6 +67,7 @@ def tp_init(name, text_long_name):
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_fearless(self, 500)
+    my.is_acid(self, True)
     my.is_green_blood_eater(self, True)
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)

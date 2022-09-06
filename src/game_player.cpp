@@ -304,6 +304,8 @@ void Game::place_player(void)
 
       LOG("INF: Placed player");
 
+      // level->thing_new("jelly_parent", point(x, y + 4));
+      // level->thing_new("jelly_baby", point(x, y + 2));
       //
       // Zoom the map to the player
       //
@@ -318,10 +320,13 @@ void Game::place_player(void)
   auto player = level->player;
   if (player) {
     player->light_dist_update();
-    IF_DEBUG2
-    {
-      player->health_max_incr(200);
-      player->health_incr(200);
+
+    if (1) {
+      IF_DEBUG2
+      {
+        player->health_max_incr(200);
+        player->health_decr(90);
+      }
     }
   }
 }

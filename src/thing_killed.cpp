@@ -254,8 +254,10 @@ void Thing::killed(Thingp defeater, const char *reason)
           msg("%%fg=red$RIP: You are rotted to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_engulfer()) {
           msg("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
+        } else if (defeater && defeater->is_humanoid()) {
+          msg("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          msg("%%fg=red$RIP: You are %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: You are beaten %s.%%fg=reset$", reason);
         } else {
           msg("%%fg=red$RIP: You are killed %s.%%fg=reset$", reason);
         }
