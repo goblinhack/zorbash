@@ -53,7 +53,7 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_plutonium", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("pot_health", point(x - 1, y + 1));
         t->carry(w);
         t->enchant_without_stone(w);

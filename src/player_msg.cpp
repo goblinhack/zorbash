@@ -20,7 +20,15 @@ bool Thing::player_is_ready_for_messages(void)
     return false;
   }
 
-  if (! level->player) {
+  auto player = level->player;
+  if (! player) {
+    return false;
+  }
+
+  //
+  // Cut down on post death messages.
+  //
+  if (player->is_dead) {
     return false;
   }
 
@@ -35,6 +43,7 @@ bool Thing::player_is_ready_for_messages(void)
   if (level->is_starting || level->is_being_destroyed) {
     return false;
   }
+
   return true;
 }
 

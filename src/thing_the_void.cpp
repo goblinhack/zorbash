@@ -13,6 +13,10 @@ void Thing::fall_into_the_void(void)
   update_interpolated_position();
   level_push();
 
+  if (is_dead) {
+    return;
+  }
+
   if (is_player()) {
     msg("You fall into nothingness!");
   }
