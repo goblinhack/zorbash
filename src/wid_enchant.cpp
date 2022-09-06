@@ -77,7 +77,7 @@ static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
       }
     }
     CON("INF: Enchant cancelled");
-    game->change_state(Game::STATE_NORMAL, "enchante cancel");
+    game->change_state(Game::STATE_NORMAL, "enchant cancel");
     wid_enchant_destroy();
     return true;
   }

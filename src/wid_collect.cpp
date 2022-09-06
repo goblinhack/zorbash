@@ -305,8 +305,6 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     return;
   }
 
-  change_state(Game::STATE_COLLECTING_ITEMS, "collect items");
-
   if (items.size()) {
     collect_items.clear();
     std::map< Thingp, bool > found;
@@ -388,6 +386,9 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
     TOPCON("Nothing to carry here.");
     return;
   }
+
+  change_state(Game::STATE_COLLECTING_ITEMS, "collect items");
+
   BOTCON("You lucky thing. Choose an item to collect.");
 
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
