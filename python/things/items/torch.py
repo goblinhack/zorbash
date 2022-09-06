@@ -21,6 +21,7 @@ def on_lifespan_tick(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name, tiles=[]):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
+    my.appearing_chance_d1000(self, 100)
     my.charge_count(self, 10)
     my.collision_hit_priority(self, 1)
     my.collision_hit_priority(self, 6)

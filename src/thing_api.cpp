@@ -1708,10 +1708,10 @@ int Thing::unused_flag73(void)
   return (tp()->unused_flag73());
 }
 
-int Thing::unused_flag74(void)
+int Thing::appearing_chance_d1000(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag74());
+  return (tp()->appearing_chance_d1000());
 }
 
 int Thing::is_throw_blocker(void)

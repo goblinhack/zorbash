@@ -9,6 +9,7 @@ def key_init(name, text_long_name):
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.appearing_chance_d1000(self, 2)
     my.gfx_pixelart_bounce_always(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "100")

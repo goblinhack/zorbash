@@ -11,6 +11,7 @@ def key_init(name, text_long_name):
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_always(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.appearing_chance_d1000(self, 5)
     my.gold_value_dice(self, "100")
     my.is_able_to_fall(self, True)
     my.is_auto_collect_item(self, True)

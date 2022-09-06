@@ -5,6 +5,7 @@ import tp
 def tp_init(name):
     self = tp.Tp(name, "bones and skin and stuff")
     # start sort marker
+    my.appearing_chance_d1000(self, 100)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)

@@ -5,6 +5,7 @@ import tp
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
+    my.appearing_chance_d1000(self, 10)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.is_able_to_fall(self, True)

@@ -678,7 +678,7 @@ int  Tp::unused_flag70(void) const { return _unused_flag70; }
 int  Tp::unused_flag71(void) const { return _unused_flag71; }
 int  Tp::unused_flag72(void) const { return _unused_flag72; }
 int  Tp::unused_flag73(void) const { return _unused_flag73; }
-int  Tp::unused_flag74(void) const { return _unused_flag74; }
+int  Tp::appearing_chance_d1000(void) const { return _appearing_chance_d1000; }
 int  Tp::is_throw_blocker(void) const { return _is_throw_blocker; }
 int  Tp::unused_flag7(void) const { return _unused_flag7; }
 int  Tp::unused_flag87(void) const { return _unused_flag87; }
@@ -1352,7 +1352,7 @@ void Tp::unused_flag70_set(int v) { _unused_flag70 = v; }
 void Tp::unused_flag71_set(int v) { _unused_flag71 = v; }
 void Tp::unused_flag72_set(int v) { _unused_flag72 = v; }
 void Tp::unused_flag73_set(int v) { _unused_flag73 = v; }
-void Tp::unused_flag74_set(int v) { _unused_flag74 = v; }
+void Tp::appearing_chance_d1000_set(int v) { _appearing_chance_d1000 = v; }
 void Tp::is_throw_blocker_set(int v) { _is_throw_blocker = v; }
 void Tp::unused_flag7_set(int v) { _unused_flag7 = v; }
 void Tp::unused_flag87_set(int v) { _unused_flag87 = v; }

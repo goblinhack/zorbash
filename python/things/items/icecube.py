@@ -28,6 +28,7 @@ def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_obstacle(self, True)
+    my.appearing_chance_d1000(self, 10)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
     my.damage_cold_chance_d1000(self, 0, 1000)

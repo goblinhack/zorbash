@@ -594,7 +594,7 @@ PyObject *thing_unused_flag70(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag71(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag72(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag73(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag74(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_appearing_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_throw_blocker(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_freeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gelatinous(PyObject *obj, PyObject *args, PyObject *keywds);

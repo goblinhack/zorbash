@@ -19,6 +19,7 @@ def key_init(name, text_long_name):
     my.is_collectable(self, True)
     my.is_collected_as_keys(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.appearing_chance_d1000(self, 1000)
     my.is_immune_to_cold(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)

@@ -634,7 +634,7 @@ private:
   int _unused_flag71 {};
   int _unused_flag72 {};
   int _unused_flag73 {};
-  int _unused_flag74 {};
+  int _appearing_chance_d1000 {};
   int _is_throw_blocker {};
   int _unused_flag8 {};
   int _unused_flag87 {};
@@ -1645,7 +1645,7 @@ public:
   int unused_flag71(void) const;
   int unused_flag72(void) const;
   int unused_flag73(void) const;
-  int unused_flag74(void) const;
+  int appearing_chance_d1000(void) const;
   int is_throw_blocker(void) const;
   int unused_flag7(void) const;
   int unused_flag87(void) const;
@@ -2321,7 +2321,7 @@ public:
   void unused_flag71_set(int v);
   void unused_flag72_set(int v);
   void unused_flag73_set(int v);
-  void unused_flag74_set(int v);
+  void appearing_chance_d1000_set(int v);
   void is_throw_blocker_set(int v);
   void unused_flag7_set(int v);
   void unused_flag87_set(int v);

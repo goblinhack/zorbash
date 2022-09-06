@@ -359,6 +359,32 @@ static Tpp tp_get_with_rarity_filter(Tpidmap &m)
 static Tpp tp_get_with_no_rarity_filter(Tpidmap &m)
 {
   TRACE_NO_INDENT();
+
+  int tries = 1000;
+  while (tries-- > 0) {
+    auto index = pcg_rand() % m.size();
+    auto tp    = get(m, index);
+    if (! tp) {
+      break;
+    }
+
+    //
+    // If this thing has a limited chance of appearing, roll the dice.
+    //
+    auto chance = tp->appearing_chance_d1000();
+    if (chance) {
+      auto roll = d1000();
+      if (roll < chance) {
+        return tp;
+      }
+    } else {
+      return tp;
+    }
+  }
+
+  //
+  // Give in and return the first we find.
+  //
   auto index = pcg_rand() % m.size();
   auto tp    = get(m, index);
   return tp;

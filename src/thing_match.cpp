@@ -883,7 +883,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag73() && (what == "unused_flag73")) {
     return true;
   }
-  if (unused_flag74() && (what == "unused_flag74")) {
+  if (appearing_chance_d1000() && (what == "appearing_chance_d1000")) {
     return true;
   }
   if (is_throw_blocker() && (what == "is_throw_blocker")) {
@@ -2477,8 +2477,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag73") {
     return &Thing::unused_flag73;
   }
-  if (what == "unused_flag74") {
-    return &Thing::unused_flag74;
+  if (what == "appearing_chance_d1000") {
+    return &Thing::appearing_chance_d1000;
   }
   if (what == "is_throw_blocker") {
     return &Thing::is_throw_blocker;

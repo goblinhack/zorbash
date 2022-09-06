@@ -1951,7 +1951,7 @@ public:
   int unused_flag71(void);
   int unused_flag72(void);
   int unused_flag73(void);
-  int unused_flag74(void);
+  int appearing_chance_d1000(void);
   int is_throw_blocker(void);
   int unused_flag7(void);
   int unused_flag87(void);

@@ -6,6 +6,7 @@ def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # start sort marker
     my.ai_obstacle(self, True)
+    my.appearing_chance_d1000(self, 100)
     my.collision_hit_priority(self, 2)
     my.damage_crush_chance_d1000(self, 0, 1000)
     my.damage_crush_dice(self, "1d6")

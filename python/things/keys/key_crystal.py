@@ -17,6 +17,7 @@ def key_init(name, text_long_name):
     my.is_biome_dungeon(self, True)
     my.is_collectable(self, True)
     my.is_collected_as_keys(self, True)
+    my.appearing_chance_d1000(self, 10)
     my.is_crystal(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_immune_to_cold(self, True)
@@ -31,8 +32,8 @@ def key_init(name, text_long_name):
     my.melting_chance_d1000(self, 1)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
-    my.text_long_description(self, "An crystal key. What can it open?")
-    my.text_short_description(self, "A cryatal key.")
+    my.text_long_description(self, "An shiny transparent crystal key.")
+    my.text_short_description(self, "A crystal key.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker

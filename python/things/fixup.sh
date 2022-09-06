@@ -524,7 +524,7 @@ do
       unused_flag71 \
       unused_flag72 \
       unused_flag73 \
-      unused_flag74 \
+      appearing_chance_d1000 \
       is_throw_blocker \
       is_able_to_freeze \
       is_gelatinous \
