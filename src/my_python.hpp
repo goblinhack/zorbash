@@ -6,10 +6,10 @@
 #ifndef _MY_PYTHON_HPP_
 #define _MY_PYTHON_HPP_
 
-#include "my_point.hpp"
 #include <Python.h>
 #include <list>
 #include <string>
+#include <vector>
 
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *die_(PyObject *obj, PyObject *args, PyObject *keywds);

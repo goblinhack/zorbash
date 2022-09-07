@@ -4,7 +4,6 @@
 
 #include "my_dice.hpp"
 #include "my_game.hpp"
-#include "my_monst.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"

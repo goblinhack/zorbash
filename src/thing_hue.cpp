@@ -3,10 +3,7 @@
 //
 
 #include "my_backtrace.hpp"
-#include "my_game.hpp"
-#include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_python.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
 

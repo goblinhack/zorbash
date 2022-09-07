@@ -3,7 +3,6 @@
 //
 
 #include "my_level.hpp"
-#include "my_random.hpp"
 #include "my_thing.hpp"
 
 void Thing::solid_rock_tick(void)
