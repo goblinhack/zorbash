@@ -6,9 +6,11 @@
 #ifndef _MY_TEMPLATE_HPP_
 #define _MY_TEMPLATE_HPP_
 
+#include "my_random.hpp"
+
+#include <algorithm>
 #include <map>
 
-#include "my_random.hpp"
 
 template < class T, template < typename ELEM, typename ALLOC = std::allocator< ELEM > > class C >
 
