@@ -139,49 +139,54 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
           IF_DEBUG2 { player->log("Yes; close enough to attack %s?", t->to_short_string().c_str()); }
           TRACE_AND_INDENT();
 
-          if (! t->is_dead) {
-            //
-            // If the door is not broken, we can close it
-            //
-            if (t->is_door() && t->is_open) {
-              IF_DEBUG2 { player->log("Close door"); }
-              TRACE_AND_INDENT();
-              game->tick_begin("close door");
-              if (! player->close_door(t)) {
-                IF_DEBUG2 { player->log("Failed to close door"); }
-              }
+          //
+          // Not sure if we want to be able to attack corpses via the mouse.
+          //
+          if (t->is_dead && t->is_monst()) {
+            continue;
+          }
 
-              //
-              // Not sure why closing a door would fail, but I don't think we should fall through to attack.
-              //
+          //
+          // If the door is not broken, we can close it
+          //
+          if (t->is_door() && t->is_open) {
+            IF_DEBUG2 { player->log("Close door"); }
+            TRACE_AND_INDENT();
+            game->tick_begin("close door");
+            if (! player->close_door(t)) {
+              IF_DEBUG2 { player->log("Failed to close door"); }
+            }
+
+            //
+            // Not sure why closing a door would fail, but I don't think we should fall through to attack.
+            //
+            return true;
+          }
+
+          //
+          // Try to open the door with a key.
+          //
+          if (t->is_door() && ! t->is_open) {
+            IF_DEBUG2 { player->log("Open door"); }
+            TRACE_AND_INDENT();
+            game->tick_begin("open door");
+            if (player->open_door(t)) {
+              IF_DEBUG2 { player->log("Failed to open door"); }
               return true;
             }
 
             //
-            // Try to open the door with a key.
+            // Fall through to attack the door (if opening failed or we had no key).
             //
-            if (t->is_door() && ! t->is_open) {
-              IF_DEBUG2 { player->log("Open door"); }
-              TRACE_AND_INDENT();
-              game->tick_begin("open door");
-              if (player->open_door(t)) {
-                IF_DEBUG2 { player->log("Failed to open door"); }
-                return true;
-              }
+          }
 
-              //
-              // Fall through to attack the door (if opening failed or we had no key).
-              //
-            }
-
-            //
-            // Attack
-            //
-            if (t->is_attackable_by_player()) {
-              IF_DEBUG2 { player->log("Close enough to attack"); }
-              player->attack(level->cursor->curr_at);
-              return true;
-            }
+          //
+          // Attack
+          //
+          if (t->is_attackable_by_player()) {
+            IF_DEBUG2 { player->log("Close enough to attack"); }
+            player->attack(level->cursor->curr_at);
+            return true;
           }
         }
         FOR_ALL_THINGS_END()
@@ -195,6 +200,13 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
         FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
         {
           if (t == level->player) {
+            continue;
+          }
+
+          //
+          // Not sure if we want to be able to shove corpses via the mouse.
+          //
+          if (t->is_dead && t->is_monst()) {
             continue;
           }
 
