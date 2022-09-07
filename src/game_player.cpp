@@ -161,6 +161,10 @@ void Game::place_player(void)
         auto b = level->thing_new("skillstone", point(x, y));
         t->carry(b);
       }
+      if (1) {
+        auto b = level->thing_new("thunderstone", point(x, y));
+        t->carry(b);
+      }
       if (0) {
         auto b = level->thing_new("chest1", point(x, y));
         auto w = level->thing_new("wooden_cross", point(x, y));

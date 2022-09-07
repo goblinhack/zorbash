@@ -278,7 +278,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       wid_set_style(w, UI_WID_STYLE_NORMAL);
       wid_set_on_mouse_up(w, wid_inventory_item_option_eat);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "%%fg=white$E%%fg=reset$at");
+      wid_set_text(w, "Eat");
       y_at += 3;
     } else if (! item_option->target_name_laser().empty()) {
       TRACE_AND_INDENT();
@@ -290,7 +290,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       wid_set_style(w, UI_WID_STYLE_NORMAL);
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "%%fg=white$U%%fg=reset$se (choose target)");
+      wid_set_text(w, "Use (choose target)");
       y_at += 3;
     } else if (item_option->is_usable() && ! player->is_equipped(item_option)) {
       TRACE_AND_INDENT();
@@ -303,15 +303,15 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
       if (item_option->is_weapon()) {
-        wid_set_text(w, "%%fg=white$U%%fg=reset$se (equip)");
+        wid_set_text(w, "Use (equip)");
       } else if (item_option->is_potion()) {
-        wid_set_text(w, "%%fg=white$U%%fg=reset$se (drink)");
+        wid_set_text(w, "Use (drink)");
       } else if (item_option->is_wand_or_staff()) {
-        wid_set_text(w, "%%fg=white$U%%fg=reset$se (fire it)");
+        wid_set_text(w, "Use (fire it)");
       } else if (item_option->is_ring()) {
-        wid_set_text(w, "%%fg=white$U%%fg=reset$se (wear it)");
+        wid_set_text(w, "Use (wear it)");
       } else {
-        wid_set_text(w, "%%fg=white$U%%fg=reset$se");
+        wid_set_text(w, "Use");
       }
       y_at += 3;
     } else if (item_option->is_usable() && player->is_equipped(item_option)) {
@@ -327,7 +327,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       wid_set_style(w, UI_WID_STYLE_NORMAL);
       wid_set_on_mouse_up(w, wid_inventory_item_option_use);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "%%fg=white$U%%fg=reset$se");
+      wid_set_text(w, "Use");
       y_at += 3;
     }
 
@@ -358,7 +358,8 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       wid_set_style(w, UI_WID_STYLE_NORMAL);
       wid_set_on_mouse_up(w, wid_inventory_item_option_throw);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "%%fg=white$T%%fg=reset$hrow");
+
+      wid_set_text(w, "Throw");
       y_at += 3;
     }
 
@@ -372,7 +373,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       wid_set_style(w, UI_WID_STYLE_NORMAL);
       wid_set_on_mouse_up(w, wid_inventory_item_option_drop);
       wid_set_pos(w, tl, br);
-      wid_set_text(w, "%%fg=white$D%%fg=reset$rop");
+      wid_set_text(w, "Drop");
     }
   }
 
