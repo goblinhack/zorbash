@@ -768,6 +768,7 @@ private:
   std::string _on_swing_do;
   std::string _on_teleport_do;
   std::string _on_thrown_do;
+  std::string _on_dropped_do;
   std::string _on_tick_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
@@ -990,6 +991,7 @@ public:
   const std::string &on_death_of_my_leader_do(void) const;
   const std::string &on_enchant_do(void) const;
   const std::string &on_thrown_do(void) const;
+  const std::string &on_dropped_do(void) const;
   const std::string &on_equip_do(void) const;
   const std::string &on_fall_do(void) const;
   const std::string &on_final_use_do(void) const;
@@ -2166,6 +2168,7 @@ public:
   void on_swing_do_set(const std::string &v);
   void on_teleport_do_set(const std::string &v);
   void on_thrown_do_set(const std::string &v);
+  void on_dropped_do_set(const std::string &v);
   void on_tick_do_set(const std::string &v);
   void on_unequip_do_set(const std::string &v);
   void on_use_do_set(const std::string &v);

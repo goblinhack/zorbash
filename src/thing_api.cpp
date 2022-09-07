@@ -5805,6 +5805,12 @@ const std::string &Thing::on_thrown_do(void)
   return (tp()->on_thrown_do());
 }
 
+const std::string &Thing::on_dropped_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_dropped_do());
+}
+
 const std::string &Thing::on_fall_do(void)
 {
   TRACE_NO_INDENT();

@@ -844,6 +844,7 @@ public:
   const std::string &on_swing_do(void);
   const std::string &on_teleport_do(void);
   const std::string &on_thrown_do(void);
+  const std::string &on_dropped_do(void);
   const std::string &on_tick_do(void);
   const std::string &on_unequip_do(void);
   const std::string &on_use_do(void);
@@ -2354,6 +2355,7 @@ public:
   void on_swing(Thingp what);
   void on_teleport(void);
   void on_thrown(void);
+  void on_dropped(void);
   void noop(void);
   void on_thrown_callback(void);
   void on_unequip(Thingp what);

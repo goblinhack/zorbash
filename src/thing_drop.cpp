@@ -4,10 +4,42 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_python.hpp"
 #include "my_sound.hpp"
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
+
+void Thing::on_dropped(void)
+{
+  TRACE_NO_INDENT();
+
+  auto on_dropped = tp()->on_dropped_do();
+  if (std::empty(on_dropped)) {
+    return;
+  }
+
+  auto t = split_tokens(on_dropped, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
+    dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_dropped call [%s] expected mod:function, got %d elems", on_dropped.c_str(), (int) on_dropped.size());
+  }
+}
 
 bool Thing::drop(Thingp what, Thingp target, bool stolen)
 {
@@ -118,16 +150,29 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
 
   if (stolen) {
     dbg("Dropped (being stolen) %s", what->to_short_string().c_str());
+    if (is_player()) {
+      if (! is_dead_or_dying()) {
+        msg("You feel lighter.");
+      }
+    }
   } else {
     dbg("Dropped %s", what->to_short_string().c_str());
 
     if (is_player()) {
-      sound_play("drop");
-      level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+      if (! is_dead_or_dying()) {
+        msg("You drop %s.", what->text_the().c_str());
+        sound_play("drop");
+        level->noisemap_in_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
+      }
     }
   }
   what->is_being_dropped = false;
   what->tick_last_dropped_set(game->tick_current);
+  if (! is_dead_or_dying()) {
+    if (! stolen) {
+      what->on_dropped();
+    }
+  }
   check_all_carried_items_are_owned();
   check_all_carried_maps();
 

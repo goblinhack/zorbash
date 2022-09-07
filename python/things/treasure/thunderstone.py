@@ -34,6 +34,11 @@ def on_use(owner, me, target, x, y):
     my.spawn_using_items_radius_range(owner, me, target, "explosion_destroy_floor")
 
 
+def on_dropped(me, x, y):
+    my.spawn_owned_thing_at_my_position(me, "explosion_major")
+    my.spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
@@ -54,6 +59,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_droppable(self, True)
     my.is_immune_to_cold(self, True)
     my.is_interesting(self, True)
+    my.on_dropped_do(self, "me.on_dropped()")
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
