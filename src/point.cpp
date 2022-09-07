@@ -2,7 +2,9 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_math.hpp"
 #include "my_point.hpp"
+#include <math.h>
 
 template < typename T > my_apoint< T > operator+(my_apoint< T > const &a, my_apoint< T > const &b)
 {

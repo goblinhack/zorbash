@@ -5,6 +5,7 @@
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
+#include "my_math.hpp"
 #include "my_sys.hpp"
 #include "my_tex.hpp"
 #include "my_thing.hpp"

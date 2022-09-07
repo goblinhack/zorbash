@@ -9,6 +9,7 @@
 #include "my_globals.hpp"
 #include "my_laser.hpp"
 #include "my_light.hpp"
+#include "my_math.hpp"
 #include "my_projectile.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"

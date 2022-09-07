@@ -85,9 +85,9 @@ void Thing::level_pop(void)
     i_set_is_spiderweb = false;
     level->is_spiderweb_unset(mx, my);
   }
-  if (i_set_is_icecube) {
-    i_set_is_icecube = false;
-    level->is_icecube_unset(mx, my);
+  if (i_set_is_block_of_ice) {
+    i_set_is_block_of_ice = false;
+    level->is_block_of_ice_unset(mx, my);
   }
   if (i_set_is_sticky) {
     i_set_is_sticky = false;

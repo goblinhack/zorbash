@@ -3,9 +3,7 @@
 //
 
 #include "my_game.hpp"
-#include "my_globals_extra.hpp"
 #include "my_monst.hpp"
-#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 

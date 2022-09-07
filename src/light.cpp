@@ -8,6 +8,7 @@
 #include "my_game.hpp"
 #include "my_gl.hpp"
 #include "my_light.hpp"
+#include "my_math.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_sys.hpp"

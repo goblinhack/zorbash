@@ -86,7 +86,7 @@ void Thing::location_check_forced(void)
     return;
   }
 
-  icecube_tick();
+  block_of_ice_tick();
   if (is_dead) {
     return;
   }

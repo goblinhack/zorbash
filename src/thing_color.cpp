@@ -2,8 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_globals_extra.hpp"
-#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 

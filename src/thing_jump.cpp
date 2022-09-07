@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_math.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
@@ -11,6 +12,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 #include "my_vector_bounds_check.hpp"
+
 #include <math.h>
 
 //
@@ -160,7 +162,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // If stuck in ice, cannot jump
   //
-  if (level->is_icecube(curr_at)) {
+  if (level->is_block_of_ice(curr_at)) {
     dbg("Cannot jump, stuck in ice");
     return false;
   }
@@ -302,7 +304,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // No sneaky jumping onto doors to get passed them
   //
-  if (level->is_icecube(x, y) || level->is_obs_wall_or_door(x, y) || level->is_obs_destructable(x, y)) {
+  if (level->is_block_of_ice(x, y) || level->is_obs_wall_or_door(x, y) || level->is_obs_destructable(x, y)) {
     TRACE_AND_INDENT();
     dbg("No, jump failed, into obstacle");
     if (is_player()) {

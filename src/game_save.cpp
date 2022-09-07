@@ -378,6 +378,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_ascend_sewer                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_barrel                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_basalt                        ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_block_of_ice                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_carnivorous_plant             ? 1LLU : 0LLU) << shift; shift++;
@@ -403,7 +404,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_green_blood                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_hazard                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_heavy                         ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_icecube                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_key                           ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_lava                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_light_blocker                 ? 1LLU : 0LLU) << shift; shift++;
@@ -550,7 +550,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_green_blood);
   out << bits(my.t->_is_hazard);
   out << bits(my.t->_is_heavy);
-  out << bits(my.t->_is_icecube);
+  out << bits(my.t->_is_block_of_ice);
   out << bits(my.t->_is_key);
   out << bits(my.t->_is_lava);
   out << bits(my.t->_is_mob);

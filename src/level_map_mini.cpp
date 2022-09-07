@@ -141,7 +141,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = DARKGREEN;
         } else if (is_carnivorous_plant(x, y)) {
           c = GREEN;
-        } else if (is_icecube(x, y)) {
+        } else if (is_block_of_ice(x, y)) {
           c = CYAN;
         } else if (is_spiderweb(x, y)) {
           c = GRAY50;
@@ -218,7 +218,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_descend_dungeon(x, y)) {
           c   = PURPLE;
           c.a = 255;
-        } else if (is_monst(x, y) || is_spiderweb(x, y) || is_icecube(x, y) || is_mob(x, y)) {
+        } else if (is_monst(x, y) || is_spiderweb(x, y) || is_block_of_ice(x, y) || is_mob(x, y)) {
           //
           // Have both? Overlay the monsters
           //
@@ -352,7 +352,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = GREEN;
         } else if (is_spiderweb(x, y)) {
           c = GRAY50;
-        } else if (is_icecube(x, y)) {
+        } else if (is_block_of_ice(x, y)) {
           c = CYAN;
         } else {
           c = BLACK;

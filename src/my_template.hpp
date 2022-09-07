@@ -11,7 +11,6 @@
 #include <algorithm>
 #include <map>
 
-
 template < class T, template < typename ELEM, typename ALLOC = std::allocator< ELEM > > class C >
 
 bool contains(C< T > *c, T t)

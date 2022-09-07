@@ -3,10 +3,8 @@
 //
 
 #include "my_game.hpp"
-#include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_buffbox.hpp"

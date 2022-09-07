@@ -75,7 +75,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_green_blood {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_hazard {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_heavy {};
-  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_icecube {};
+  std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_block_of_ice {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_key {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_lava {};
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _is_mob {};
@@ -748,8 +748,8 @@ public:
   uint8_t noisemap_in_no_check(const point p);
   uint8_t is_able_to_stand_on(const int x, const int y);
   uint8_t is_able_to_stand_on(const point p);
-  uint8_t is_icecube(const int x, const int y);
-  uint8_t is_icecube(const point p);
+  uint8_t is_block_of_ice(const int x, const int y);
+  uint8_t is_block_of_ice(const point p);
   uint8_t is_acid(const int x, const int y);
   uint8_t is_acid(const point p);
   uint8_t is_cold(const int x, const int y);
@@ -984,8 +984,8 @@ public:
   void inventory_dump(void);
   void is_able_to_stand_on_set(const int x, const int y);
   void is_able_to_stand_on_unset(const int x, const int y);
-  void is_icecube_set(const int x, const int y);
-  void is_icecube_unset(const int x, const int y);
+  void is_block_of_ice_set(const int x, const int y);
+  void is_block_of_ice_unset(const int x, const int y);
   void is_acid_set(const int x, const int y);
   void is_acid_unset(const int x, const int y);
   void is_ascend_dungeon_set(const int x, const int y);

@@ -2,8 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_backtrace.hpp"
-#include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
 

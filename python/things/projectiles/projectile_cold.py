@@ -8,7 +8,7 @@ def on_born(me, x, y):
         if my.thing_possible_to_attack(me, thing):
             my.thing_hit(me, thing)
     my.spawn_owned_thing_at_my_position(me, "explosion_cold")
-    my.spawn_owned_thing_at_my_position(me, "icecube")
+    my.spawn_owned_thing_at_my_position(me, "block_of_ice")
 
 
 #

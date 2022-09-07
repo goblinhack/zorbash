@@ -3,12 +3,9 @@
 //
 
 #include "my_game.hpp"
-#include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include "my_ui.hpp"
 #include "my_wid_debuffbox.hpp"
-#include "my_wid_thing_info.hpp"
 
 bool Thing::debuff_add(Thingp what)
 {

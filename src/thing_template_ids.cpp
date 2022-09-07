@@ -243,7 +243,7 @@ std::initializer_list< std::string > tps = {
     "gold6",
     "green_splatter",
     "horseshoe",
-    "icecube",
+    "block_of_ice",
     "jelly_baby",
     "jelly_parent",
     "key",

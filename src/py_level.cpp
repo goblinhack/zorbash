@@ -73,7 +73,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
           floor_string += Charmap::SPACE;
         }
 
-        if (m.is_foilage || m.is_spiderweb || m.is_icecube || m.is_dry_grass || m.is_wet_grass) {
+        if (m.is_foilage || m.is_spiderweb || m.is_block_of_ice || m.is_dry_grass || m.is_wet_grass) {
           floor2_string += c;
         } else {
           floor2_string += Charmap::SPACE;
@@ -513,7 +513,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_heavy_at, is_heavy)
 LEVEL_BODY_GET_BOOL_AT(level_is_helmet_at, is_helmet)
 LEVEL_BODY_GET_BOOL_AT(level_is_hittable_at, is_hittable)
 LEVEL_BODY_GET_BOOL_AT(level_is_humanoid_at, is_humanoid)
-LEVEL_BODY_GET_BOOL_AT(level_is_icecube_at, is_icecube)
+LEVEL_BODY_GET_BOOL_AT(level_is_block_of_ice_at, is_block_of_ice)
 LEVEL_BODY_GET_BOOL_AT(level_is_immune_to_acid_at, is_immune_to_acid)
 LEVEL_BODY_GET_BOOL_AT(level_is_immune_to_cold_at, is_immune_to_cold)
 LEVEL_BODY_GET_BOOL_AT(level_is_immune_to_draining_at, is_immune_to_draining)

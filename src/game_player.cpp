@@ -269,8 +269,8 @@ void Game::place_player(void)
       // level->thing_new("foilage", point(x - 4, y + 5));
       // level->thing_new("foilage", point(x, y + 5));
       // level->player->on_fire_set("");
-      // level->thing_new("icecube", point(x, y + 1));
-      // level->thing_new("icecube", point(x, y + 2));
+      // level->thing_new("block_of_ice", point(x, y + 1));
+      // level->thing_new("block_of_ice", point(x, y + 2));
       // level->thing_new("stone_golem", point(x + 1, y + 1));
       if (0) {
         level->thing_new("vampire_rose_stem1", point(x - 1, y + 2));

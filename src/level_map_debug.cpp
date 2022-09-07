@@ -57,7 +57,7 @@ void Level::update_map_debug(int x, int y)
         c = PURPLE;
       } else if (is_monst(x, y) || is_mob(x, y)) {
         c = RED;
-      } else if (is_icecube(x, y)) {
+      } else if (is_block_of_ice(x, y)) {
         c = CYAN;
       } else if (is_spiderweb(x, y)) {
         c = WHITE;

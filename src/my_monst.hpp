@@ -193,35 +193,37 @@ public:
   //
   // Used for calling on_idle()
   //
-  uint32_t tick_last_did_something {std::numeric_limits< uint32_t >::max()};
+  // Avoiding numeric_limits to reduce the number of headers to pull in.
+  //
+  uint32_t tick_last_did_something {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //
   // When this thing was dropped
   //
-  uint32_t tick_last_dropped {std::numeric_limits< uint32_t >::max()};
+  uint32_t tick_last_dropped {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //
   // If things have stopped moving, perform location checks on where theuy
   // are now. This handles things like shoving a monst into a chasm. We do
   // location checks on the ends of moves, but this is a backup and will
   // also handle things that do not move, like a wand that is now on fire.
   //
-  uint32_t tick_last_location_check {std::numeric_limits< uint32_t >::max()};
+  uint32_t tick_last_location_check {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //
   // Don't try and escape too often else the player can never kill the monst!
   //
-  uint32_t tick_last_escape {std::numeric_limits< uint32_t >::max()};
-  uint32_t tick_last_level_change {std::numeric_limits< uint32_t >::max()};
+  uint32_t tick_last_escape {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
+  uint32_t tick_last_level_change {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //
   // When we were last attacked
   //
-  uint32_t tick_last_i_was_attacked {std::numeric_limits< uint32_t >::max()};
+  uint32_t tick_last_i_was_attacked {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //
   // When we last attacked
   //
-  uint32_t tick_last_i_attacked {std::numeric_limits< uint32_t >::max()};
+  uint32_t tick_last_i_attacked {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   //
   // This is to ensure things do not wake and immediately attack
   //
-  uint32_t tick_last_awoke {std::numeric_limits< uint32_t >::max()};
+  uint32_t tick_last_awoke {(uint32_t) -1 /* std::numeric_limits< uint32_t >::max() */};
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

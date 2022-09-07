@@ -6,12 +6,8 @@
 #include "my_ascii.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_level.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
-#include "my_tile.hpp"
-#include "my_ui.hpp"
 #include "my_unicode.hpp"
 
 //
@@ -164,7 +160,7 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
   //
   if (fg) {
     if (is_frozen) {
-      if (! is_icecube()) {
+      if (! is_block_of_ice()) {
         c = LIGHTBLUE;
       }
     } else if (is_burnt) {

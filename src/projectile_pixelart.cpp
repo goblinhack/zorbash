@@ -9,6 +9,7 @@
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
+#include "my_math.hpp"
 #include "my_point.hpp"
 #include "my_projectile.hpp"
 #include "my_random.hpp"

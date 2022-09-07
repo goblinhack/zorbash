@@ -6,8 +6,6 @@
 #include "my_color_defs.hpp"
 #include "my_font.hpp"
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
@@ -635,7 +633,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     is_in_water = true;
   }
 
-  if (unlikely(is_in_water || is_icecube() || is_pillar() || is_barrel() || is_monst() || is_item() ||
+  if (unlikely(is_in_water || is_block_of_ice() || is_pillar() || is_barrel() || is_monst() || is_item() ||
                is_treasure_type() || is_skillstone() || is_player() || is_wet_grass() || is_foilage() || is_plant() ||
                tpp->gfx_pixelart_attack_anim() || tpp->gfx_on_fire_anim() || tpp->gfx_pixelart_equip_carry_anim())) {
 
@@ -859,8 +857,8 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   //
   // Try to look like we are trapped in ice
   //
-  if (! is_icecube()) {
-    if (level->is_icecube(curr_at)) {
+  if (! is_block_of_ice()) {
+    if (level->is_block_of_ice(curr_at)) {
       c = CYAN;
     }
   }

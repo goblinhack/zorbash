@@ -28,7 +28,7 @@ class Ptrcheck_history
 public:
   const char *file {};
   const char *func {};
-  char        ts[ TS_SIZE ];
+  char        ts[ MY_TIMESTAMP_SIZE ];
   int         line {};
   Backtrace  *bt {};
 
@@ -520,7 +520,7 @@ void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, con
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
-  char tmp[ TS_SIZE ];
+  char tmp[ MY_TIMESTAMP_SIZE ];
   auto ts = timestamp(tmp, sizeof(tmp));
   fprintf(stderr, "%s: PTRCHECK: Alloc %p \"%s\" (%u bytes) at %s:%s line %u\n", ts, ptr, what, size, file, func,
           line);
@@ -599,7 +599,7 @@ int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int 
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
-  char tmp[ TS_SIZE ];
+  char tmp[ MY_TIMESTAMP_SIZE ];
   auto ts = timestamp(tmp, sizeof(tmp));
   fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u ringbuf_current_size %u\n", ts, ptr, file, func, line,
           ringbuf_current_size[ mtype ]);

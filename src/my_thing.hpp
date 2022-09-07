@@ -249,14 +249,16 @@ public:
   // These are flags used to make sure we set or unset flags onto
   // the level only once.
   //
+  uint64_t i_set_is_able_to_burn            : 1 {}; // may produce a flame
   uint64_t i_set_is_acid                    : 1 {};
   uint64_t i_set_is_ascend_dungeon          : 1 {};
   uint64_t i_set_is_ascend_sewer            : 1 {};
   uint64_t i_set_is_barrel                  : 1 {};
   uint64_t i_set_is_basalt                  : 1 {};
+  uint64_t i_set_is_block_of_ice            : 1 {};
   uint64_t i_set_is_brazier                 : 1 {};
   uint64_t i_set_is_bridge                  : 1 {};
-  uint64_t i_set_is_able_to_burn            : 1 {}; // may produce a flame
+  uint64_t i_set_is_carnivorous_plant       : 1 {};
   uint64_t i_set_is_chasm                   : 1 {};
   uint64_t i_set_is_combustible             : 1 {}; // may not produce a flame
   uint64_t i_set_is_corpse                  : 1 {};
@@ -273,14 +275,12 @@ public:
   uint64_t i_set_is_fire                    : 1 {};
   uint64_t i_set_is_floor                   : 1 {};
   uint64_t i_set_is_foilage                 : 1 {};
-  uint64_t i_set_is_carnivorous_plant       : 1 {};
   uint64_t i_set_is_food                    : 1 {};
   uint64_t i_set_is_gas_blocker             : 1 {};
   uint64_t i_set_is_gold                    : 1 {};
   uint64_t i_set_is_green_blood             : 1 {};
   uint64_t i_set_is_hazard                  : 1 {};
   uint64_t i_set_is_heavy                   : 1 {};
-  uint64_t i_set_is_icecube                 : 1 {};
   uint64_t i_set_is_key                     : 1 {};
   uint64_t i_set_is_lava                    : 1 {};
   uint64_t i_set_is_light_blocker           : 1 {};
@@ -1329,7 +1329,7 @@ public:
   int is_hittable(void);
   int is_hit(Thingp hitter, AttackOptions *, int damage);
   int is_humanoid(void);
-  int is_icecube(void);
+  int is_block_of_ice(void);
   int is_immune_to_acid(void);
   int is_immune_to_cold(void);
   int is_immune_to_draining(void);
@@ -2277,7 +2277,7 @@ public:
   void hooks_remove(void);
   void hunger_clock_tick(void);
   void hunger_update(void);
-  void icecube_tick(void);
+  void block_of_ice_tick(void);
   void inherit_from(Thingp it);
   void init_hue(void);
   void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);

@@ -7,6 +7,8 @@
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
+#include <limits>
+
 bool Thing::ai_blocked(void)
 {
   TRACE_NO_INDENT();

@@ -9,7 +9,7 @@
 #undef ONESEC
 #define ONESEC 1000
 
-#define TS_SIZE 20
+#define MY_TIMESTAMP_SIZE 20
 
 typedef int ts_t;
 

@@ -2,9 +2,10 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <math.h>
-
+#include "my_math.hpp"
 #include "my_thing.hpp"
+
+#include <math.h>
 
 void Thing::fadeup(float fadeup_height, float fadeup_fade, ts_t ms)
 {

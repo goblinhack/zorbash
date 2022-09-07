@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-#include "my_gl.hpp"
 #include "my_thing.hpp"
 
 void Thing::level_rejoin(void) { level_enter(true); }

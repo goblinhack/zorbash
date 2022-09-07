@@ -101,7 +101,7 @@ void Thing::temperature_tick(void)
   if (thing_temp != location_temp) {
     int delta = (location_temp - thing_temp) / 2;
 
-    if (is_fire() || is_icecube() || is_wall() || is_door() || is_rock()) {
+    if (is_fire() || is_block_of_ice() || is_wall() || is_door() || is_rock()) {
       delta = (location_temp - thing_temp) / 10;
     }
 
@@ -209,7 +209,7 @@ void Thing::temperature_tick(void)
     return;
   }
 
-  if ((thing_temp > 0) && is_icecube()) {
+  if ((thing_temp > 0) && is_block_of_ice()) {
     if (thing_check_for_heat_damage()) {
       auto damage = abs(thing_temp) / 10;
       dbg("Apply fire damage");

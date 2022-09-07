@@ -10,7 +10,6 @@
 #include "my_random.hpp"
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
 
 ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
 {
@@ -99,10 +98,10 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
 
   if (force) {
     //
-    // For example, shoving an icecube with something it it, we need to bypass most checks.
+    // For example, shoving an block_of_ice with something it it, we need to bypass most checks.
     //
   } else {
-    if (it->is_icecube()) {
+    if (it->is_block_of_ice()) {
       //
       // Allow to shove regardless of size
       //
@@ -120,7 +119,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
       }
     }
 
-    if (! it->is_brazier() && ! it->is_barrel() && ! it->is_icecube()) {
+    if (! it->is_brazier() && ! it->is_barrel() && ! it->is_block_of_ice()) {
       if (it->collision_check_only(shove_pos)) {
         if (is_player()) {
           msg("%s cannot be shoved!", it->text_The().c_str());
@@ -200,9 +199,9 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
       if (is_player()) {
         msg("The barrel will not budge!");
       }
-    } else if (it->is_icecube()) {
+    } else if (it->is_block_of_ice()) {
       if (is_player()) {
-        msg("The icecube will not budge!");
+        msg("The block of ice will not budge!");
       }
     } else {
       if (is_player()) {

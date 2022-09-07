@@ -534,7 +534,7 @@ do
       is_carnivorous_plant \
       is_basalt \
       is_shovable_and_sticky \
-      is_icecube \
+      is_block_of_ice \
       is_able_to_break_out_of_ice \
       is_brittle \
       is_ice \

@@ -622,7 +622,7 @@ void Thing::animate(void)
   //
   // No animation when in ice. But should we allow the death animation ? I think not.
   //
-  if (tile_curr && /* ! (is_dead || is_dying) && */ level->is_icecube(curr_at)) {
+  if (tile_curr && /* ! (is_dead || is_dying) && */ level->is_block_of_ice(curr_at)) {
     //
     // In ice, we must allow swing animations to continue; as we wait on those. And how else will you break out of
     // the ice?

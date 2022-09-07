@@ -329,8 +329,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           if (level->is_barrel(curr_at.x, curr_at.y)) {
             msg("You are trapped under a barrel!");
             game->tick_begin("trapped in a barrel");
-          } else if (level->is_icecube(curr_at.x, curr_at.y)) {
-            msg("You are trapped in an icecube!");
+          } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
+            msg("You are trapped in a block of ice!");
             game->tick_begin("trapped in ice");
           } else {
             msg("You cannot move!");
@@ -348,7 +348,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           if (t->is_barrel()) {
             t->wobble(10);
           }
-          if (t->is_icecube()) {
+          if (t->is_block_of_ice()) {
             t->wobble(10);
           }
           if (t->is_player() || t->is_monst()) {
@@ -379,7 +379,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
             msg("You try to move but are trapped in a web!");
           }
           game->tick_begin("trapped in a web");
-        } else if (level->is_icecube(curr_at.x, curr_at.y)) {
+        } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
           if (attack_options->attack_at_set && (attack_options->attack_at != curr_at)) {
             msg("You try to attack but are frozen!");
           } else {
@@ -402,7 +402,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         if (t->is_spiderweb()) {
           t->wobble(10);
         }
-        if (t->is_icecube()) {
+        if (t->is_block_of_ice()) {
           t->wobble(10);
         }
         if (t->is_player() || t->is_monst()) {

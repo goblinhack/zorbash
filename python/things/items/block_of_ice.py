@@ -56,7 +56,7 @@ def tp_init(name, text_long_name):
     my.is_cursor_path_blocker(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hittable(self, True)
-    my.is_icecube(self, True)
+    my.is_block_of_ice(self, True)
     my.is_immune_to_cold(self, True)
     my.is_immune_to_draining(self, True)
     my.is_immune_to_necrosis(self, True)
@@ -90,7 +90,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="icecube", text_long_name="block of ice")
+    tp_init(name="block_of_ice", text_long_name="block of ice")
 
 
 init()

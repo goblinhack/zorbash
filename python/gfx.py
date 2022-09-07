@@ -10923,7 +10923,7 @@ def init_tiles_32x32():
         "cleaner.2",
         "cleaner.3",
         "cleaner.4",
-        "icecube",
+        "block_of_ice",
         "blob.1",
         "blob.2",
         "blob.3",

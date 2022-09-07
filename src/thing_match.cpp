@@ -910,7 +910,7 @@ bool Thing::matches(const std::string &what)
   if (is_shovable_and_sticky() && (what == "is_shovable_and_sticky")) {
     return true;
   }
-  if (is_icecube() && (what == "is_icecube")) {
+  if (is_block_of_ice() && (what == "is_block_of_ice")) {
     return true;
   }
   if (is_able_to_break_out_of_ice() && (what == "is_able_to_break_out_of_ice")) {
@@ -919,7 +919,7 @@ bool Thing::matches(const std::string &what)
   if (is_brittle() && (what == "is_brittle")) {
     return true;
   }
-  if (is_icecube() && (what == "is_icecube")) {
+  if (is_block_of_ice() && (what == "is_block_of_ice")) {
     return true;
   }
   if (unused_flag87() && (what == "unused_flag87")) {
@@ -1832,8 +1832,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_humanoid") {
     return &Thing::is_humanoid;
   }
-  if (what == "is_icecube") {
-    return &Thing::is_icecube;
+  if (what == "is_block_of_ice") {
+    return &Thing::is_block_of_ice;
   }
   if (what == "is_immune_to_acid") {
     return &Thing::is_immune_to_acid;

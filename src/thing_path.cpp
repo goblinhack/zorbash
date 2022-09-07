@@ -7,7 +7,6 @@
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
-#include "my_sprintf.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
@@ -84,7 +83,7 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
     DBG2("Can try to jump");
     TRACE_AND_INDENT();
 
-    if (is_disliked_by_me(future_pos) || level->is_icecube(future_pos) || level->is_barrel(future_pos) ||
+    if (is_disliked_by_me(future_pos) || level->is_block_of_ice(future_pos) || level->is_barrel(future_pos) ||
         level->is_brazier(future_pos)) {
       DBG2("Next position %s is a hazard (move path size %d)", future_pos.to_string().c_str(),
            (int) ai->move_path.size());

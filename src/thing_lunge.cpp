@@ -35,7 +35,7 @@ void Thing::lunge(point to)
     if (t == this) {
       continue;
     }
-    if (t->is_icecube()) {
+    if (t->is_block_of_ice()) {
       dbg("No lunging when stuck in ice");
       return;
     }

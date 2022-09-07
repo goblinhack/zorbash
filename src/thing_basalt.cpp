@@ -3,10 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_depth.hpp"
 #include "my_level.hpp"
-#include "my_ptrcheck.hpp"
-#include "my_thing.hpp"
 
 uint8_t Level::is_basalt(const point p)
 {

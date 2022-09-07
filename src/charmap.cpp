@@ -84,10 +84,10 @@ void Charmap::init_charmaps(void)
   c->c            = char_index;
   c->is_spiderweb = true;
 
-  char_index    = Charmap::ICE;
-  c             = &all_charmaps[ char_index ];
-  c->c          = char_index;
-  c->is_icecube = true;
+  char_index         = Charmap::ICE;
+  c                  = &all_charmaps[ char_index ];
+  c->c               = char_index;
+  c->is_block_of_ice = true;
 
   char_index = Charmap::DOOR;
   c          = &all_charmaps[ char_index ];

@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_math.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
@@ -446,7 +447,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   }
 
   if (it->is_player() || it->is_monst()) {
-    if (is_barrel() || is_icecube()) {
+    if (is_barrel() || is_block_of_ice()) {
       if (things_overlap(me, future_pos, it)) {
         if (it->is_soft()) {
           dbg("Overlaps; barrel can splat soft monst");
@@ -505,20 +506,20 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     }
   }
 
-  if (it->is_icecube() && ! is_ethereal() && ! is_flying()) {
+  if (it->is_block_of_ice() && ! is_ethereal() && ! is_flying()) {
     if (it->curr_at == curr_at) {
       //
-      // Do not allow movement away. This happens if you are placed inside an icecube.
+      // Do not allow movement away. This happens if you are placed inside an block_of_ice.
       //
-      dbg("Yes; inside icecube");
+      dbg("Yes; inside block of ice");
       return true;
     }
 
     //
-    // As we want to be able to shove the icecube, we need to check for collision.
+    // As we want to be able to shove the block_of_ice, we need to check for collision.
     //
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; overlaps icecube");
+      dbg("Yes; overlaps block of ice");
       return true;
     }
   }

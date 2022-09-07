@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_globals_extra.hpp"
 #include "my_monst.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"

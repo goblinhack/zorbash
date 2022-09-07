@@ -8,7 +8,9 @@
 
 #include "my_game_defs.hpp"
 #include "my_point.hpp"
+
 #include <array>
+#include <vector>
 
 typedef struct Dmap_ {
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > val {};

@@ -6,8 +6,6 @@
 #ifndef _MY_POINT_HPP_
 #define _MY_POINT_HPP_
 
-#include "my_math.hpp"
-#include <math.h>
 #include <string>
 #include <vector>
 

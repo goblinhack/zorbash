@@ -9,7 +9,7 @@ def on_thrown(me, x, y):
         return
     for dx in range(-1, 2):
         for dy in range(-1, 2):
-            my.spawn_at(me, "icecube", x + dx, y + dy)
+            my.spawn_at(me, "block_of_ice", x + dx, y + dy)
 
 
 def on_idle(me, x, y):

@@ -81,7 +81,7 @@ public:
   bool is_skillstone {false};
   bool is_foilage {false};
   bool is_spiderweb {false};
-  bool is_icecube {false};
+  bool is_block_of_ice {false};
   bool is_door {false};
   bool is_ascend_dungeon {false};
   bool is_descend_dungeon {false};

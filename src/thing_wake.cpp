@@ -23,7 +23,7 @@ bool Thing::wake(const std::string &reason)
   //
   // I think if trapped in ice and asleep, you stay asleep. Forever...
   //
-  if (level->is_icecube(curr_at)) {
+  if (level->is_block_of_ice(curr_at)) {
     dbg("Wake %s; no, stay asleep in the ice", reason.c_str());
     return false;
   }

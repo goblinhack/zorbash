@@ -93,9 +93,9 @@ void Thing::level_push(void)
     i_set_is_spiderweb = true;
     level->is_spiderweb_set(mx, my);
   }
-  if (is_icecube()) {
-    i_set_is_icecube = true;
-    level->is_icecube_set(mx, my);
+  if (is_block_of_ice()) {
+    i_set_is_block_of_ice = true;
+    level->is_block_of_ice_set(mx, my);
   }
   if (is_sticky()) {
     i_set_is_sticky = true;

@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_backtrace.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
@@ -11,7 +10,6 @@
 #include "my_ui.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_inventory.hpp"
-#include "my_wid_leftbar.hpp"
 #include "my_wid_popup.hpp"
 
 std::list< WidPopup * > wid_thing_info_window;

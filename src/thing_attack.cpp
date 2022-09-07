@@ -4,7 +4,6 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_random.hpp"
@@ -76,7 +75,7 @@ bool Thing::possible_to_attack(const Thingp victim)
     //
     // If stuck in ice, we can only attack locally
     //
-    if (level->is_icecube(curr_at)) {
+    if (level->is_block_of_ice(curr_at)) {
       if (victim->curr_at != curr_at) {
         dbg("Cannot attack %s, stuck in ice", victim->to_short_string().c_str());
         return false;
@@ -440,7 +439,7 @@ bool Thing::possible_to_attack(const Thingp victim)
       }
     }
 
-    if (victim->is_icecube()) {
+    if (victim->is_block_of_ice()) {
       if (is_able_to_break_out_of_ice()) {
         dbg("Can attack and break out of ice %s", victim->to_short_string().c_str());
         return true;
@@ -460,7 +459,7 @@ bool Thing::possible_to_attack(const Thingp victim)
       victim->is_meltable() || victim->is_able_to_burn() || victim->is_wall() || victim->is_rock() ||
       victim->is_door() || victim->is_bridge() || victim->is_dry_grass() || victim->is_wet_grass() ||
       victim->is_treasure_type() || victim->is_enchantstone() || victim->is_skillstone() || victim->is_foilage() ||
-      victim->is_carnivorous_plant() || victim->is_spiderweb() || victim->is_icecube() || victim->is_sticky() ||
+      victim->is_carnivorous_plant() || victim->is_spiderweb() || victim->is_block_of_ice() || victim->is_sticky() ||
       victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() ||
       victim->is_bag_item()) {
     if (is_laser()) {

@@ -1762,10 +1762,10 @@ int Thing::is_shovable_and_sticky(void)
   return (tp()->is_shovable_and_sticky());
 }
 
-int Thing::is_icecube(void)
+int Thing::is_block_of_ice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_icecube());
+  return (tp()->is_block_of_ice());
 }
 
 int Thing::is_able_to_break_out_of_ice(void)

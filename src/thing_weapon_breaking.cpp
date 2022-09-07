@@ -5,6 +5,8 @@
 #include "my_random.hpp"
 #include "my_thing.hpp"
 
+#include <math.h>
+
 //
 // See if the weapon crumbles
 //

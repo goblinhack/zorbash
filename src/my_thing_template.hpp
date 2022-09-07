@@ -358,7 +358,7 @@ private:
   int _is_helmet {};
   int _is_hittable {};
   int _is_humanoid {};
-  int _is_icecube {};
+  int _is_block_of_ice {};
   int _is_immune_to_acid {};
   int _is_immune_to_cold {};
   int _is_immune_to_draining {};
@@ -1370,7 +1370,7 @@ public:
   int is_helmet(void) const;
   int is_hittable(void) const;
   int is_humanoid(void) const;
-  int is_icecube(void) const;
+  int is_block_of_ice(void) const;
   int is_immune_to_acid(void) const;
   int is_immune_to_cold(void) const;
   int is_immune_to_draining(void) const;
@@ -1912,7 +1912,7 @@ public:
   void is_helmet_set(int v);
   void is_hittable_set(int v);
   void is_humanoid_set(int v);
-  void is_icecube_set(int v);
+  void is_block_of_ice_set(int v);
   void is_immune_to_acid_set(int v);
   void is_immune_to_cold_set(int v);
   void is_immune_to_draining_set(int v);

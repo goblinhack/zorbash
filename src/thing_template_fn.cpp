@@ -403,7 +403,7 @@ int  Tp::is_heavy(void) const { return _is_heavy; }
 int  Tp::is_helmet(void) const { return _is_helmet; }
 int  Tp::is_hittable(void) const { return _is_hittable; }
 int  Tp::is_humanoid(void) const { return _is_humanoid; }
-int  Tp::is_icecube(void) const { return _is_icecube; }
+int  Tp::is_block_of_ice(void) const { return _is_block_of_ice; }
 int  Tp::is_immune_to_acid(void) const { return _is_immune_to_acid; }
 int  Tp::is_immune_to_cold(void) const { return _is_immune_to_cold; }
 int  Tp::is_immune_to_draining(void) const { return _is_immune_to_draining; }
@@ -944,7 +944,7 @@ void Tp::is_heavy_set(int v) { _is_heavy = v; }
 void Tp::is_helmet_set(int v) { _is_helmet = v; }
 void Tp::is_hittable_set(int v) { _is_hittable = v; }
 void Tp::is_humanoid_set(int v) { _is_humanoid = v; }
-void Tp::is_icecube_set(int v) { _is_icecube = v; }
+void Tp::is_block_of_ice_set(int v) { _is_block_of_ice = v; }
 void Tp::is_immune_to_acid_set(int v) { _is_immune_to_acid = v; }
 void Tp::is_immune_to_cold_set(int v) { _is_immune_to_cold = v; }
 void Tp::is_immune_to_draining_set(int v) { _is_immune_to_draining = v; }

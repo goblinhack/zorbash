@@ -4,8 +4,6 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_gl.hpp"
-#include "my_level.hpp"
 #include "my_thing.hpp"
 
 bool Thing::descend_dungeon_tick(void)

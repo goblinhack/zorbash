@@ -532,7 +532,7 @@ bool wid_leftbar_ascii_create(void)
     {
       if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon() &&
           ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel() &&
-          ! t->is_icecube()) {
+          ! t->is_block_of_ice()) {
         continue;
       }
 

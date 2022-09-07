@@ -393,7 +393,7 @@ void Thing::killed(Thingp defeater, const char *reason)
         } else if (player->level && get(player->level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
           TRACE_NO_INDENT();
           //
-          // Killed by something else, like an icecube.
+          // Killed by something else, like an block_of_ice.
           //
           if (is_monst()) {
             if (is_undead()) {

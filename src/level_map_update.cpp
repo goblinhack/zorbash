@@ -67,7 +67,7 @@ void Level::update_water_next_to_lava(void)
       if (is_shallow_water(x, y) || is_deep_water(x, y)) {
         for (auto dx = -2; dx <= 2; dx++) {
           for (auto dy = -2; dy <= 2; dy++) {
-            if (is_deep_water(x + dx, y + dy) || is_icecube(x + dx, y + dy)) {
+            if (is_deep_water(x + dx, y + dy) || is_block_of_ice(x + dx, y + dy)) {
               FOR_ALL_THINGS(this, t, x, y)
               {
                 if (t->is_lava()) {
