@@ -15,57 +15,55 @@
 
 void Level::things_gc(bool force)
 {
-  if (all_things_to_be_destroyed.empty()) {
-    return;
-  }
+  if (! all_things_to_be_destroyed.empty()) {
+    for (auto it = all_things_to_be_destroyed.cbegin(), next_it = it; it != all_things_to_be_destroyed.cend();
+         it = next_it) {
+      ++next_it;
 
-  for (auto it = all_things_to_be_destroyed.cbegin(), next_it = it; it != all_things_to_be_destroyed.cend();
-       it = next_it) {
-    ++next_it;
+      auto id = it->first;
+      DBG3("Thing %" PRIX32 " garbage collect", id.id);
 
-    auto id = it->first;
-    DBG3("Thing %" PRIX32 " garbage collect", id.id);
+      auto t = thing_find(id);
+      if (unlikely(! t)) {
+        ERR("Thing %" PRIX32 " not found to garbage collect", id.id);
+        continue;
+      }
 
-    auto t = thing_find(id);
-    if (unlikely(! t)) {
-      ERR("Thing %" PRIX32 " not found to garbage collect", id.id);
-      continue;
+      if (! force) {
+        //
+        // Allow the particles to finish
+        //
+        if (t->has_internal_particle) {
+          IF_DEBUG2 { t->log("Thing garbage collect delayed due to internal particle"); }
+          continue;
+        }
+
+        if (t->has_external_particle) {
+          IF_DEBUG2 { t->log("Thing garbage collect delayed due to external particle"); }
+          continue;
+        }
+
+        if (t->laser_count) {
+          IF_DEBUG2 { t->log("Thing garbage collect delayed due to laser"); }
+          continue;
+        }
+
+        if (t->has_projectile) {
+          IF_DEBUG2 { t->log("Thing garbage collect delayed due to projectile"); }
+          continue;
+        }
+      }
+
+      all_things_to_be_destroyed.erase(it);
+
+      if (t->is_monst()) {
+        monst_count--;
+      }
+
+      IF_DEBUG3 { t->log("Thing garbage collect"); }
+
+      delete t;
     }
-
-    if (! force) {
-      //
-      // Allow the particles to finish
-      //
-      if (t->has_internal_particle) {
-        IF_DEBUG2 { t->log("Thing garbage collect delayed due to internal particle"); }
-        continue;
-      }
-
-      if (t->has_external_particle) {
-        IF_DEBUG2 { t->log("Thing garbage collect delayed due to external particle"); }
-        continue;
-      }
-
-      if (t->laser_count) {
-        IF_DEBUG2 { t->log("Thing garbage collect delayed due to laser"); }
-        continue;
-      }
-
-      if (t->has_projectile) {
-        IF_DEBUG2 { t->log("Thing garbage collect delayed due to projectile"); }
-        continue;
-      }
-    }
-
-    all_things_to_be_destroyed.erase(it);
-
-    if (t->is_monst()) {
-      monst_count--;
-    }
-
-    IF_DEBUG3 { t->log("Thing garbage collect"); }
-
-    delete t;
   }
 
   for (auto &i : interesting_things_pending_remove) {

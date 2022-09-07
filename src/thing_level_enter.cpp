@@ -33,6 +33,9 @@ void Thing::level_enter(bool rejoin)
     } else {
       auto result = level->interesting_things.insert(std::pair(id, this));
       if (result.second == false) {
+        //
+        // If polymorphing then we are already on the level.
+        //
         if (! rejoin) {
           err("Failed to insert into active thing map");
         }
@@ -52,6 +55,9 @@ void Thing::level_enter(bool rejoin)
     } else {
       auto result = level->tickable_things.insert(std::pair(id, this));
       if (result.second == false) {
+        //
+        // If polymorphing then we are already on the level.
+        //
         if (! rejoin) {
           err("Failed to insert into active thing map");
         }

@@ -51,6 +51,10 @@ void Thing::level_change(Levelp l)
   }
 
   if (is_player()) {
+    //
+    // I think we need to clean up the interesting_things_pending_remove list before leaving this level.
+    //
+    old_level->things_gc_if_possible();
     old_level->player = nullptr;
     level->player     = this;
   }
