@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- thunderstone blew up on player deaty                                                                                                         -->
 <!-- falling to a level and trying to return failed                                                                                               -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->

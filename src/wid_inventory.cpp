@@ -394,6 +394,12 @@ uint8_t wid_inventory_item_option_drop(Widp w, int x, int y, uint32_t button)
       wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
       wid_inventory_init();
     }
+
+    //
+    // I think it's best to close the inventory as dropping items can have an impact.
+    // Sometimes literally, like a thunderstone.
+    //
+    wid_inventory_fini();
   }
 
   if (wid_inventory_thing_selected) {
