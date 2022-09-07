@@ -161,7 +161,7 @@ void Game::place_player(void)
         auto b = level->thing_new("skillstone", point(x, y));
         t->carry(b);
       }
-      if (1) {
+      if (0) {
         auto b = level->thing_new("thunderstone", point(x, y));
         t->carry(b);
       }
