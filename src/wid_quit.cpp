@@ -199,7 +199,8 @@ void Game::quit_select(void)
   }
 
   wid_update(wid_quit_window->wid_text_area->wid_text_area);
-  wid_actionbar_init();
 
   game->change_state(Game::STATE_QUIT_MENU, "quit select");
+
+  wid_actionbar_init();
 }

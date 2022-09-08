@@ -3010,9 +3010,9 @@ void Game::wid_config_keyboard_select(void)
   }
 
   if (game->level) {
-    wid_actionbar_init();
-
     game->change_state(Game::STATE_KEYBOARD_MENU, "configure keys");
+
+    wid_actionbar_init();
   }
 
   //
