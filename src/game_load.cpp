@@ -1494,7 +1494,7 @@ void Game::wid_load_select(void)
         } else {
           s += "<empty>";
         }
-        wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+        wid_set_style(w, UI_WID_STYLE_HORIZ_SCROLL_DARK);
       }
       set(slot_valid, slot, false);
     } else {

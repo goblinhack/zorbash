@@ -731,6 +731,9 @@ void gfx_init(void)
   gfx_init10();
   gfx_init11();
   gfx_init12();
+  gfx_init13();
+  gfx_init14();
+  gfx_init15();
 }
 
 void gfx_fini(void) {}

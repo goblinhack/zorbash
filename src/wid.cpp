@@ -2822,7 +2822,7 @@ Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner
   Widp trough = wid_new_scroll_trough(parent);
   wid_set_pos(trough, tl, br);
   wid_set_shape_square(trough);
-  wid_set_style(trough, UI_WID_STYLE_VERT_DARK);
+  wid_set_style(trough, UI_WID_STYLE_VERT_SCROLL_DARK);
 
   {
     fpoint tl(0, 0);
@@ -2833,7 +2833,7 @@ Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner
     wid_update_internal(scrollbar);
     wid_visible(wid_get_parent(scrollbar));
     wid_visible(scrollbar);
-    wid_set_style(scrollbar, UI_WID_STYLE_VERT_LIGHT);
+    wid_set_style(scrollbar, UI_WID_STYLE_VERT_SCROLL_LIGHT);
 
     trough->is_scrollbar_vert_trough = true;
     scrollbar->is_scrollbar_vert     = true;
@@ -2876,7 +2876,7 @@ Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owne
   Widp trough = wid_new_scroll_trough(parent);
   wid_set_pos(trough, tl, br);
   wid_set_shape_square(trough);
-  wid_set_style(trough, UI_WID_STYLE_HORIZ_DARK);
+  wid_set_style(trough, UI_WID_STYLE_HORIZ_SCROLL_DARK);
 
   {
     fpoint tl(0, 0);
@@ -2887,7 +2887,7 @@ Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owne
     wid_update_internal(scrollbar);
     wid_visible(wid_get_parent(scrollbar));
     wid_visible(scrollbar);
-    wid_set_style(scrollbar, UI_WID_STYLE_HORIZ_LIGHT);
+    wid_set_style(scrollbar, UI_WID_STYLE_HORIZ_SCROLL_LIGHT);
 
     trough->is_scrollbar_horiz_trough = true;
     scrollbar->is_scrollbar_horiz     = true;

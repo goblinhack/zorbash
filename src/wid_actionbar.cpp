@@ -1347,8 +1347,8 @@ void wid_actionbar_ascii_init(void)
   DBG("Actionbar init");
   TRACE_AND_INDENT();
 
-  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
-  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
+  auto box_style           = UI_WID_STYLE_HORIZ_SCROLL_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_SCROLL_LIGHT;
 
   if (! game->level) {
     return;

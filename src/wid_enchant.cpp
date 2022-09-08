@@ -293,8 +293,8 @@ void Game::wid_enchant_an_item(void)
     }
   }
 
-  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
-  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
+  auto box_style           = UI_WID_STYLE_HORIZ_SCROLL_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_SCROLL_LIGHT;
 
   auto       m          = TERM_WIDTH / 2;
   static int wid_width  = 70;

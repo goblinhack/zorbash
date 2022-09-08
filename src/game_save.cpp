@@ -1250,14 +1250,14 @@ void Game::wid_save_select(void)
       } else {
         s += "<empty>";
       }
-      wid_set_style(w, UI_WID_STYLE_HORIZ_DARK);
+      wid_set_style(w, UI_WID_STYLE_HORIZ_SCROLL_DARK);
     } else {
       if (slot == UI_WID_SAVE_SLOTS - 1) {
         s += "snapshot: " + tmp.save_meta;
       } else {
         s += tmp.save_meta;
       }
-      wid_set_style(w, UI_WID_STYLE_HORIZ_LIGHT);
+      wid_set_style(w, UI_WID_STYLE_HORIZ_SCROLL_LIGHT);
     }
 
     if (slot == UI_WID_SAVE_SLOTS - 1) {

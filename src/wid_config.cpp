@@ -239,8 +239,8 @@ void Game::wid_config_top_menu(void)
 
   auto box_height          = g_opt_ascii ? 0 : 2;
   auto box_step            = g_opt_ascii ? 2 : 3;
-  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
-  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
+  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_SCROLL_DARK : UI_WID_STYLE_NORMAL;
+  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_SCROLL_LIGHT : UI_WID_STYLE_NORMAL;
 
   point tl = make_point(TERM_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2, TERM_HEIGHT / 2 - 4);
   point br = make_point(TERM_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1, TERM_HEIGHT / 2 + 15);
