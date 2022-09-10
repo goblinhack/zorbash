@@ -1004,8 +1004,8 @@ void Game::wid_choose_initial_dungeons(void)
 {
   TRACE_AND_INDENT();
 
-  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_SCROLL_DARK : UI_WID_STYLE_NORMAL;
-  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_SCROLL_LIGHT : UI_WID_STYLE_NORMAL;
+  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
+  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
 
   py_call_void_fn("events", "on_initial_dungeon_menu_select", 0);
 

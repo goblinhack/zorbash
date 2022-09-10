@@ -157,8 +157,8 @@ void Game::wid_config_sound_select(void)
     wid_config_sound_destroy();
   }
 
-  auto box_style           = UI_WID_STYLE_HORIZ_SCROLL_DARK;
-  auto box_highlight_style = UI_WID_STYLE_HORIZ_SCROLL_LIGHT;
+  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
   auto m                   = TERM_WIDTH / 2;
 
   point tl = make_point(m - 16, TERM_HEIGHT / 2 - 5);

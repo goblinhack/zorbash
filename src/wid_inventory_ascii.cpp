@@ -50,8 +50,8 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected set");
   }
 
-  auto box_style           = UI_WID_STYLE_HORIZ_SCROLL_DARK;
-  auto box_highlight_style = UI_WID_STYLE_HORIZ_SCROLL_LIGHT;
+  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
 
   static int inventory_width  = 112;
   static int inventory_height = 34;

@@ -2833,7 +2833,10 @@ Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner
     wid_update_internal(scrollbar);
     wid_visible(wid_get_parent(scrollbar));
     wid_visible(scrollbar);
-    wid_set_style(scrollbar, UI_WID_STYLE_VERT_SCROLL_LIGHT);
+    wid_set_mode(scrollbar, WID_MODE_ACTIVE);
+    wid_set_style(scrollbar, UI_WID_STYLE_VERT_LIGHT);
+    wid_set_mode(scrollbar, WID_MODE_NORMAL);
+    wid_set_style(scrollbar, UI_WID_STYLE_VERT_DARK);
 
     trough->is_scrollbar_vert_trough = true;
     scrollbar->is_scrollbar_vert     = true;

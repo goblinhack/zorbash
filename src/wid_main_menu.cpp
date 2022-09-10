@@ -391,8 +391,8 @@ void Game::wid_main_menu_select(void)
 
   auto box_height          = g_opt_ascii ? 1 : 3;
   auto box_step            = g_opt_ascii ? 2 : 3;
-  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_SCROLL_DARK : UI_WID_STYLE_NORMAL;
-  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_SCROLL_LIGHT : UI_WID_STYLE_NORMAL;
+  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
+  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
 
   int menu_height;
   if (g_opt_ascii) {

@@ -153,8 +153,8 @@ void Game::wid_config_other_select(void)
     wid_config_other_destroy();
   }
 
-  auto box_style           = UI_WID_STYLE_HORIZ_SCROLL_DARK;
-  auto box_highlight_style = UI_WID_STYLE_HORIZ_SCROLL_LIGHT;
+  auto box_style           = UI_WID_STYLE_HORIZ_DARK;
+  auto box_highlight_style = UI_WID_STYLE_HORIZ_LIGHT;
   auto m                   = TERM_WIDTH / 2;
   auto h                   = TERM_HEIGHT / 2;
 
