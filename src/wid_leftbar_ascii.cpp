@@ -52,9 +52,12 @@ static void wid_leftbar_over_begin(Widp w, int relx, int rely, int wheelx, int w
 {
   TRACE_NO_INDENT();
 
-  auto id = wid_get_thing_id_context(w);
+  if (game->state != Game::STATE_NORMAL) {
+    return;
+  }
 
-  auto t = game->level->thing_find_optional(id);
+  auto id = wid_get_thing_id_context(w);
+  auto t  = game->level->thing_find_optional(id);
   if (unlikely(! t)) {
     return;
   }

@@ -17,13 +17,6 @@ void callstack_dump(void)
 {
   TRACE_AND_INDENT();
 
-  static int done;
-  if (done) {
-    return;
-  }
-
-  done = true;
-
   fprintf(MY_STDERR, "code trace\n");
   fprintf(MY_STDERR, "==========\n");
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
@@ -37,7 +30,6 @@ void callstack_dump(void)
     auto iter = &callframes[ depth ];
     CON("(stack) %d %s, line %u", depth, iter->func, iter->line);
   }
-  done = false;
 }
 
 #ifdef ENABLE_CRASH_HANDLER

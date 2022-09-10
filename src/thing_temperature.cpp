@@ -12,9 +12,6 @@ void Thing::temperature_tick(void)
 {
   TRACE_NO_INDENT();
 
-  dbg("Temperature tick");
-  TRACE_AND_INDENT();
-
   //
   // Add in the temperature of the location. The heatmap has some radiosity to it so it can impact neighboring tiles.
   //
@@ -81,6 +78,9 @@ void Thing::temperature_tick(void)
   if (! location_temp_set) {
     return;
   }
+
+  dbg("Temperature tick");
+  TRACE_AND_INDENT();
 
   int thing_temp = temperature;
 

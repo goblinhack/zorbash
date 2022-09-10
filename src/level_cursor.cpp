@@ -37,8 +37,7 @@ void Level::cursor_warp_check(void)
 //
 void Level::cursor_move(void)
 {
-  dbg("Move cursor");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (is_mouse_over_any_bag()) {
     return;

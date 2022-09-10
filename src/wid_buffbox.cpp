@@ -26,7 +26,7 @@ uint8_t wid_buffbox_init(void)
 
 void wid_buffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("buffbox: Begin over buffbox");
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||

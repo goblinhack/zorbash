@@ -65,8 +65,6 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     return false;
   }
 
-  DBG("Unhandled input");
-  TRACE_AND_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return false;
