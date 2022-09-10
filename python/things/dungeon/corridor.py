@@ -3,7 +3,7 @@ import tp
 
 
 def tp_init(name, tiles=[], bot3_tiles=[]):
-    self = tp.Tp(name)
+    self = tp.Tp(name, "a corridor", "a corridor")
     # start sort marker
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)

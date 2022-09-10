@@ -7,7 +7,7 @@ import tp
 # will check for the presence of a chasm beneath it and blit the chasm
 #
 def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
-    self = tp.Tp(name)
+    self = tp.Tp(name, "some dirt", "some dirt")
     # start sort marker
     my.gfx_ascii_fg_color_spread_blue(self, 20)
     my.gfx_ascii_fg_color_spread_green(self, 20)

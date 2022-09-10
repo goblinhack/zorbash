@@ -23,7 +23,7 @@ def tp_init(
     br2_tiles=[],
 ):
 
-    self = tp.Tp(name)
+    self = tp.Tp(name, "filthy wall", "filthy wall")
     # start sort marker
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 2)
