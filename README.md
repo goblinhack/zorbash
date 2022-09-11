@@ -2,7 +2,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- do buffs and skills change level                                                                                                             -->
-<!-- fix scroll bars                                                                                                                              -->
+<!-- bat could not fly over monst stuck in web - bug ?                                                                                            -->
+<!-- inventory is transparent                                                                                                                     -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->
 <!-- wort food ?                                                                                                                                  -->
@@ -180,7 +181,6 @@
 <!-- - ogres and ogre totem                                                                                                                       -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - acid jellies should damage weapons                                                                                                         -->
-<!-- - spider that throws web?                                                                                                                    -->
 <!-- - grass death wakes monsters                                                                                                                 -->
 <!-- - mold growth / floor puddings                                                                                                               -->
 <!-- - bloodgrass, grows near corpses                                                                                                             -->
