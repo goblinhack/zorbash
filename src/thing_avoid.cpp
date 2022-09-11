@@ -28,6 +28,21 @@ bool Thing::will_avoid_monst(const Thingp it)
     return false;
   }
 
+  //
+  // Avoid flaming things; even friends.
+  //
+  if (environ_avoids_fire() > 10) {
+    if (it->is_fire()) {
+      dbg("Avoid fire: %s", it->to_short_string().c_str());
+      return true;
+    }
+
+    if (it->is_on_fire()) {
+      dbg("Avoid on fire: %s", it->to_short_string().c_str());
+      return true;
+    }
+  }
+
   if (same_leader(it)) {
     return false;
   }

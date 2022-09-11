@@ -102,6 +102,7 @@ bool Thing::collision_obstacle(Thingp it)
   //
   if (it->is_floating() || it->is_flying()) {
     if (is_floating() || is_flying()) {
+      IF_DEBUG2 { dbg("Collision obstacle (flying): %s", it->to_short_string().c_str()); }
       return true;
     }
   }
@@ -111,6 +112,7 @@ bool Thing::collision_obstacle(Thingp it)
   //
   if (it->is_ethereal()) {
     if (is_ethereal()) {
+      IF_DEBUG2 { dbg("Collision obstacle (ethereal): %s", it->to_short_string().c_str()); }
       return true;
     }
   }
@@ -124,12 +126,14 @@ bool Thing::collision_obstacle(Thingp it)
     }
 
     if (! it->is_open) {
+      IF_DEBUG2 { dbg("Collision obstacle (not open): %s", it->to_short_string().c_str()); }
       return true;
     }
   }
 
   if (it->is_obs_destructable()) {
     if (! it->is_open) {
+      IF_DEBUG2 { dbg("Collision obstacle (not open and destructable): %s", it->to_short_string().c_str()); }
       return true;
     }
   }
@@ -139,6 +143,7 @@ bool Thing::collision_obstacle(Thingp it)
       //
       // Ignore is_ethereal to make it easier to attack ghosts
       //
+      IF_DEBUG2 { dbg("Collision obstacle (monst): %s", it->to_short_string().c_str()); }
       return true;
     }
   } else if (is_monst()) {
@@ -158,6 +163,7 @@ bool Thing::collision_obstacle(Thingp it)
         //
         // Too many monsts (including one corpse)
         //
+        IF_DEBUG2 { dbg("Collision obstacle (too many monst + corpse): %s", it->to_short_string().c_str()); }
         return true;
       }
       if (monst_count == 2) {
@@ -165,6 +171,10 @@ bool Thing::collision_obstacle(Thingp it)
           //
           // Cannot pass through
           //
+          IF_DEBUG2
+          {
+            dbg("Collision obstacle (too many non ethereal monst + corpse): %s", it->to_short_string().c_str());
+          }
           return true;
         }
       }
@@ -173,6 +183,7 @@ bool Thing::collision_obstacle(Thingp it)
         //
         // Too many monsts (including one corpse)
         //
+        IF_DEBUG2 { dbg("Collision obstacle (too many monst): %s", it->to_short_string().c_str()); }
         return true;
       }
       if (monst_count == 1) {
@@ -180,6 +191,7 @@ bool Thing::collision_obstacle(Thingp it)
           //
           // Cannot pass through
           //
+          IF_DEBUG2 { dbg("Collision obstacle (corpse): %s", it->to_short_string().c_str()); }
           return true;
         }
       }
@@ -187,6 +199,7 @@ bool Thing::collision_obstacle(Thingp it)
 
     if (it->is_chasm()) {
       if (! is_floating() && ! is_flying()) {
+        IF_DEBUG2 { dbg("Collision obstacle (floating): %s", it->to_short_string().c_str()); }
         return true;
       }
     }
@@ -195,6 +208,7 @@ bool Thing::collision_obstacle(Thingp it)
     // So we wont walk into fire for example
     //
     if (is_disliked_by_me(it)) {
+      IF_DEBUG2 { dbg("Collision obstacle (disliked): %s", it->to_short_string().c_str()); }
       return true;
     }
 
@@ -206,6 +220,7 @@ bool Thing::collision_obstacle(Thingp it)
         return false;
       }
 
+      IF_DEBUG2 { dbg("Collision obstacle (monst or player): %s", it->to_short_string().c_str()); }
       return true;
     }
   }
@@ -216,6 +231,7 @@ bool Thing::collision_obstacle(Thingp it)
       // Allow passing over corpses
       //
       if (it->is_obstacle_when_dead()) {
+        IF_DEBUG2 { dbg("Collision obstacle (as dead): %s", it->to_short_string().c_str()); }
         return true;
       }
     }
@@ -252,11 +268,11 @@ bool Thing::ai_obstacle(Thingp it)
   }
 
   //
-  // Lava, acid etc...
+  // Lava, acid etc... No allow this, else we cannot see fire next to us to avoid it.
   //
   if (is_disliked_by_me(it->curr_at)) {
     // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
-    return true;
+    // return true;
   }
 
   //

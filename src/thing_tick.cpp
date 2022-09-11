@@ -209,11 +209,6 @@ void Thing::achieve_goals_in_life(void)
   // If this thing has AI, it can try and reach goals
   //
   if (is_monst()) {
-    if ((game->tick_current - infop()->tick_last_awoke < 2)) {
-      dbg("Just woke up, cannot attack yet");
-      return;
-    }
-
     // dbg("Tick %d get next hop", game->tick_current);
     ai_get_next_hop();
     if (is_moving) {

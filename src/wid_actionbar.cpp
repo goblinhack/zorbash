@@ -519,7 +519,8 @@ static void wid_actionbar_ascend_over_begin(Widp w, int relx, int rely, int whee
   wid_over_ascend->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Ascend");
   wid_over_ascend->log(UI_LOGGING_EMPTY_LINE);
   wid_over_ascend->log(
-      "Select this to ascend is_cowardly to the previous level. I mean you might have a good reason, but let's both of "
+      "Select this to ascend is_cowardly to the previous level. I mean you might have a good reason, but let's both "
+      "of "
       "us face it; probably not...");
   wid_over_ascend->compress();
 }

@@ -60,7 +60,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_fall(self, True)
     my.is_able_to_freeze(self, True)
     my.is_able_to_see_in_the_dark(self, True)
-    my.is_able_to_sleep(self, True)
+    my.is_always_hit(self, True)
     my.is_able_to_tire(self, True)
     my.is_air_breathher(self, True)
     my.is_asleep_initially(self, True)

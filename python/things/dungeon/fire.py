@@ -23,6 +23,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_outlined(self, True)
     my.health_initial_dice(self, "10")
     my.is_able_to_fall(self, True)
+    my.is_interesting(self, True)
     my.is_always_hit(self, True)
     my.is_dead_on_falling(self, True)
     my.is_fire(self, True)

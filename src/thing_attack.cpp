@@ -577,6 +577,14 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   }
 
   //
+  // Too groggy to attack
+  //
+  if ((game->tick_current - infop()->tick_last_awoke < 2)) {
+    dbg("Just woke up, cannot attack yet");
+    return false;
+  }
+
+  //
   // Allow multiple attacks
   //
   bool tried_to_attack = false;

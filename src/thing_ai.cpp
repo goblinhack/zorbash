@@ -2077,6 +2077,15 @@ bool Thing::ai_tick(bool recursing)
   }
 
   //
+  // Wake up if the flames are nearby
+  //
+  if (environ_avoids_fire() && level->heatmap(curr_at)) {
+    if (! wake("senses heat")) {
+      return false;
+    }
+  }
+
+  //
   // If we have a treasure map then we know this level
   //
   if (map_treasure_available()) {
