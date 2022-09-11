@@ -436,17 +436,6 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     }
   }
 
-  //
-  // Move carried items too as when we attack, we will use say the
-  // carried sword and so it had better be in the same location.
-  //
-  for (const auto w : item_vector()) {
-    w->move_to_immediately(curr_at);
-    if (! g_opt_ascii) {
-      w->is_jumping = true;
-    }
-  }
-
   auto on_fire_id = on_fire_anim_id();
   if (on_fire_id.ok()) {
     TRACE_NO_INDENT();
@@ -732,13 +721,25 @@ void Thing::jump_end(void)
 
   is_jumping = false;
   move_finish();
+
   update_interpolated_position();
+
+  //
+  // Move carried items too as when we attack, we will use say the
+  // carried sword and so it had better be in the same location.
+  //
+  move_carried_items();
 
   //
   // Weapons follow also.
   //
   FOR_ALL_EQUIP(e)
   {
+    auto w = equip_get(e);
+    if (w) {
+      w->is_jumping = false;
+    }
+
     if (equip_id_carry_anim(e).ok()) {
       auto w = level->thing_find(equip_id_carry_anim(e));
       if (w) {
@@ -758,7 +759,7 @@ void Thing::jump_end(void)
   // Move carried items too as when we attack, we will use say the
   // carried sword and so it had better be in the same location.
   //
-  for (const auto o : item_vector()) {
+  for (const auto o : carried_item_only_vector()) {
     o->is_jumping = false;
   }
 

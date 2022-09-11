@@ -13,7 +13,7 @@ bool Thing::is_carrying_treasure(void)
     return false;
   }
 
-  if (! item_vector().empty()) {
+  if (! carried_and_equipped_item_vector().empty()) {
     return true;
   }
 

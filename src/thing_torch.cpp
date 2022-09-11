@@ -49,7 +49,7 @@ int Thing::torch_count(void)
   TRACE_NO_INDENT();
   int torch_count = 0;
 
-  for (const auto o : item_vector()) {
+  for (const auto o : carried_item_only_vector()) {
     if (! o->is_torch()) {
       continue;
     }

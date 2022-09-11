@@ -171,7 +171,7 @@ bool Thing::skill_add(Tpp what)
   // Drop a skillstone
   //
   auto found = false;
-  for (const auto t : item_vector()) {
+  for (const auto t : carried_item_only_vector()) {
     if (t->is_skillstone()) {
       t->dead("used");
       found = true;
@@ -189,7 +189,7 @@ int Thing::skillstone_count(void)
 {
   TRACE_NO_INDENT();
   int v = 0;
-  for (const auto t : item_vector()) {
+  for (const auto t : carried_item_only_vector()) {
     if (! t->is_skillstone()) {
       continue;
     }

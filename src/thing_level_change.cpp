@@ -94,9 +94,45 @@ void Thing::level_change(Levelp l)
     }
   }
 
+  FOR_ALL_EQUIP(e)
+  {
+    auto iter = equip_get(e);
+    if (iter) {
+      iter->level_change(l);
+    }
+  }
+
   if (maybe_itemsp()) {
-    for (const auto it : item_vector()) {
-      it->level_change(l);
+    FOR_ALL_CARRYING(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        iter->level_change(l);
+      }
+    }
+
+    FOR_ALL_BUFFS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        iter->level_change(l);
+      }
+    }
+
+    FOR_ALL_DEBUFFS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        iter->level_change(l);
+      }
+    }
+
+    FOR_ALL_SKILLS(id)
+    {
+      auto iter = level->thing_find(id);
+      if (iter) {
+        iter->level_change(l);
+      }
     }
   }
 

@@ -60,7 +60,7 @@ static void wid_collect_slot(int slot)
     // from the choice.
     //
     if (t->is_bag_item_container()) {
-      auto bag_items = t->item_vector();
+      auto bag_items = t->carried_item_only_vector();
 
       if (! player->try_to_carry(t)) {
         DBG2("Failed to collect slot %d", slot);
@@ -331,7 +331,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
       //
       if (t->is_bag()) {
         bool already_carrying_a_bag = false;
-        for (const auto m : player->item_vector()) {
+        for (const auto m : player->carried_item_only_vector()) {
           if (m->is_bag_item_container()) {
             already_carrying_a_bag = true;
             break;
@@ -357,7 +357,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
       }
 
       if (t->maybe_itemsp()) {
-        for (const auto t : t->item_vector()) {
+        for (const auto t : t->carried_item_only_vector()) {
           player->log("Collect sub-item cand: %s", t->to_short_string().c_str());
           if (found.find(t) != found.end()) {
             player->log("- exists: %s", t->to_short_string().c_str());

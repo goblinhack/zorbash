@@ -282,7 +282,7 @@ bool Thing::eat_something(void)
   //
   // Try for food first, ignoring potions
   //
-  for (const auto t : item_vector()) {
+  for (const auto t : carried_item_only_vector()) {
     if (! can_eat(t)) {
       continue;
     }
@@ -328,7 +328,7 @@ bool Thing::can_eat_something(void)
   //
   // Try for food first, ignoring potions
   //
-  for (const auto t : item_vector()) {
+  for (const auto t : carried_item_only_vector()) {
     if (! can_eat(t)) {
       continue;
     }
@@ -341,7 +341,7 @@ bool Thing::can_eat_something(void)
   //
   // Try again but include potions
   //
-  for (const auto t : item_vector()) {
+  for (const auto t : carried_item_only_vector()) {
     if (t->is_health_booster()) {
       return true;
     }

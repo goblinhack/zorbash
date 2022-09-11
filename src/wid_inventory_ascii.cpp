@@ -104,7 +104,7 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   //
   Thingp bag = nullptr;
   {
-    for (const auto t : player->item_vector()) {
+    for (const auto t : player->carried_item_only_vector()) {
       if (t->is_bag()) {
         bag = t;
         break;

@@ -341,7 +341,8 @@ public:
   std::list< Thingp > food_list(void);
   std::list< Thingp > gauntlet_list(void);
   std::list< Thingp > helmet_list(void);
-  std::list< Thingp > item_list(void);
+  std::list< Thingp > carried_item_only_list(void);
+  std::list< Thingp > carried_and_equipped_item_list(void);
   std::list< Thingp > ring_list(void);
   std::list< Thingp > shield_list(void);
   std::list< Thingp > treasure_list(void);
@@ -355,7 +356,8 @@ public:
   std::vector< Thingp > food_vector(void);
   std::vector< Thingp > gauntlet_vector(void);
   std::vector< Thingp > helmet_vector(void);
-  std::vector< Thingp > item_vector(void);
+  std::vector< Thingp > carried_item_only_vector(void);
+  std::vector< Thingp > carried_and_equipped_item_vector(void);
   std::vector< Thingp > ring_vector(void);
   std::vector< Thingp > shield_vector(void);
   std::vector< Thingp > treasure_vector(void);

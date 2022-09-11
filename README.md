@@ -1,6 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- do buffs and skills change level                                                                                                             -->
 <!-- fix scroll bars                                                                                                                              -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->

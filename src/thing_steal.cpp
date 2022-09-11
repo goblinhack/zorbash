@@ -53,7 +53,7 @@ bool Thing::steal_item_from(Thingp it)
   }
   TRACE_NO_INDENT();
   dbg("Yes, steal out of this list:");
-  auto cands = it->item_vector();
+  auto cands = it->carried_item_only_vector();
   if (! cands.size()) {
     dbg("No, nothing to steal");
     return false;

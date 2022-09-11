@@ -12,7 +12,7 @@ int Thing::item_count_including_charges(Tpp tp)
 {
   TRACE_NO_INDENT();
   auto count = 0;
-  for (const auto o : item_vector()) {
+  for (const auto o : carried_and_equipped_item_vector()) {
     if (o->tp() == tp) {
       if (o->is_bag_item_not_stackable()) {
         count = 1;
@@ -33,7 +33,7 @@ int Thing::item_count_excluding_charges(Tpp tp)
 {
   TRACE_NO_INDENT();
   auto count = 0;
-  for (const auto o : item_vector()) {
+  for (const auto o : carried_and_equipped_item_vector()) {
     if (o->tp() == tp) {
       if (o->is_bag_item_not_stackable()) {
         count = 1;
@@ -60,6 +60,12 @@ void Thing::move_carried_items(void)
   //
   FOR_ALL_EQUIP(e)
   {
+    auto w = equip_get(e);
+    if (w) {
+      w->move_to_immediately(curr_at);
+      w->dir = dir;
+    }
+
     if (equip_id_carry_anim(e).ok()) {
       auto w = level->thing_find(equip_id_carry_anim(e));
       if (w) {
@@ -89,7 +95,7 @@ void Thing::move_carried_items(void)
   // carried sword and so it had better be in the same location.
   //
   if (maybe_itemsp()) {
-    for (const auto o : item_vector()) {
+    for (const auto o : carried_item_only_vector()) {
       o->move_to(curr_at);
       o->dir = dir;
     }
@@ -143,6 +149,12 @@ void Thing::move_carried_items_immediately(void)
   //
   FOR_ALL_EQUIP(e)
   {
+    auto w = equip_get(e);
+    if (w) {
+      w->move_to_immediately(curr_at);
+      w->dir = dir;
+    }
+
     if (equip_id_carry_anim(e).ok()) {
       auto w = level->thing_find(equip_id_carry_anim(e));
       if (w) {
@@ -165,7 +177,7 @@ void Thing::move_carried_items_immediately(void)
   // carried sword and so it had better be in the same location.
   //
   if (maybe_itemsp()) {
-    for (const auto o : item_vector()) {
+    for (const auto o : carried_item_only_vector()) {
       o->move_to_immediately(curr_at);
       o->dir = dir;
     }
