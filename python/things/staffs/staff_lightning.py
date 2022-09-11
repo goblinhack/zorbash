@@ -17,7 +17,15 @@ def explode(me, x, y):
     if my.thing_is_dead(me):
         return
 
-    my.thing_msg(me, "The staff of lightning explodes in a flash.")
+    owner = my.thing_top_owner_id_get(me)
+    if owner:
+        if my.thing_is_player(owner):
+            my.thing_msg(me, "Your wand of staff of lightning explodes.")
+        else:
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s wand of staff of lightning explodes.")
+    else:
+        my.thing_msg(me, "The wand of staff of lightning explodes.")
+
     my.spawn_at_my_position(me, "explosion_major")
     my.spawn_fire_around_thing(me, "fire")
     my.spawn_fire_around_thing(me, "fire")

@@ -65,6 +65,8 @@ def tp_init(name, text_long_name):
     my.stat_dex(self, 6)
     my.stat_luck(self, 6)
     my.distance_avoid(self, 5)
+    my.environ_avoids_fire(self, 100)
+    my.environ_avoids_water(self, 100)
     my.is_able_to_freeze(self, True)
     my.health_initial_dice(self, "2d3+4")
     my.is_able_to_use_wands_or_staffs(self, True)

@@ -15,7 +15,7 @@ void Thing::temperature_tick(void)
   //
   // Add in the temperature of the location. The heatmap has some radiosity to it so it can impact neighboring tiles.
   //
-  int  location_temp     = level->heatmap(curr_at) * 50;
+  int  location_temp     = level->heatmap(curr_at) * 10;
   bool location_temp_set = false;
 
   if (location_temp) {

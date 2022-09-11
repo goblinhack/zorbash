@@ -33,7 +33,15 @@ def explode(me, x, y):
     if my.thing_is_dead(me):
         return
 
-    my.thing_msg(me, "The staff of energy explodes in a blaze of power.")
+    owner = my.thing_top_owner_id_get(me)
+    if owner:
+        if my.thing_is_player(owner):
+            my.thing_msg(me, "Your staff of energy explodes in a blaze of power.")
+        else:
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of energy explodes in a blaze of power.")
+    else:
+        my.thing_msg(me, "The staff of energy explodes in a blaze of power.")
+
     my.spawn_at_my_position(me, "explosion_fire")
     my.spawn_fire_around_thing(me, "fire")
     my.thing_dead(me, "exploded")
@@ -70,6 +78,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "200")
     my.health_initial_dice(self, "20+1d10")
+    my.on_you_are_on_fire_do(self, "me.explode()")
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)

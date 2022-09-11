@@ -17,7 +17,16 @@ def explode(me, x, y):
     if my.thing_is_dead(me):
         return
 
-    my.thing_msg(me, "The staff of descent explodes. The earth shakes.")
+    owner = my.thing_top_owner_id_get(me)
+    if owner:
+        if my.thing_is_player(owner):
+            my.thing_msg(me, "Your wand of staff of descent explodes.")
+        else:
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s wand of staff of descent explodes.")
+    else:
+        my.thing_msg(me, "The wand of staff of descent explodes.")
+
+    my.thing_msg(me, "The earth shakes.")
     my.spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
     my.thing_dead(me, "exploded")
 

@@ -79,8 +79,13 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
+      if (1) {
+        auto w = level->thing_new("buff_undead_resist", point(x, y));
+        t->buff_add(w);
+        level->thing_new("zorb_necro", point(x + 2, y));
+      }
       if (0) {
-        auto w = level->thing_new("skill_devoted_thrust", point(x, y - 2));
+        auto w = level->thing_new("skill_devoted_thrust", point(x, y));
         t->skill_add(w);
       }
       if (0) {
@@ -213,7 +218,6 @@ void Game::place_player(void)
         // level->thing_new("rat_giant", point(x - 1, y));
         // level->thing_new("rat_giant", point(x + 1, y));
         // level->thing_new("rat_giant", point(x, y - 1));
-        // level->thing_new("zorb_necro", point(x + 2, y));
         // level->thing_new("door_metal", point(x + 2, y));
         // level->thing_new("rock1", point(x + 1, y));
         // level->thing_new("rock1", point(x + 3, y));
@@ -329,7 +333,7 @@ void Game::place_player(void)
       IF_DEBUG2
       {
         player->health_max_incr(200);
-        player->health_decr(90);
+        // player->health_decr(90);
       }
     }
   }

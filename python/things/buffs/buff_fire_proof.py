@@ -21,7 +21,8 @@ def on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage):
     # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
     # my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
     if my.thing_is_fire(hitter):
-        my.thing_msg(me, "You take no damage fire.")
+        if my.thing_is_player(owner):
+            my.thing_msg(me, "You take no damage fire.")
         return 0
     return damage
 
