@@ -1702,10 +1702,10 @@ int Thing::unused_flag72(void)
   return (tp()->unused_flag72());
 }
 
-int Thing::unused_flag73(void)
+int Thing::is_cowardly(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag73());
+  return (tp()->is_cowardly());
 }
 
 int Thing::appearing_chance_d1000(void)

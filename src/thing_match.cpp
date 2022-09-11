@@ -880,7 +880,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag72() && (what == "unused_flag72")) {
     return true;
   }
-  if (unused_flag73() && (what == "unused_flag73")) {
+  if (is_cowardly() && (what == "is_cowardly")) {
     return true;
   }
   if (appearing_chance_d1000() && (what == "appearing_chance_d1000")) {
@@ -2474,8 +2474,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag72") {
     return &Thing::unused_flag72;
   }
-  if (what == "unused_flag73") {
-    return &Thing::unused_flag73;
+  if (what == "is_cowardly") {
+    return &Thing::is_cowardly;
   }
   if (what == "appearing_chance_d1000") {
     return &Thing::appearing_chance_d1000;

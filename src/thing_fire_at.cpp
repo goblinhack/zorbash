@@ -257,11 +257,12 @@ bool Thing::fire_at(Thingp target)
     }
   }
 
-  if (d100() > aggression_pct()) {
+  if (! possible_to_attack(target)) {
     return false;
   }
 
-  if (! possible_to_attack(target)) {
+  if (d100() > aggression_pct()) {
+    dbg("Aggression check fail, do not fire at");
     return false;
   }
 

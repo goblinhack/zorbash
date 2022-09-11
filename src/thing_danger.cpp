@@ -325,6 +325,10 @@ int Thing::is_dangerous(Thingp it)
     b += 2;
   }
 
+  if (is_cowardly()) {
+    b *= 10;
+  }
+
   // dbg("My danger level %d, its %d, %s", a, b, it->to_short_string().c_str());
 
   //

@@ -68,6 +68,7 @@ def tp_init(name, text_long_name):
     my.environ_avoids_fire(self, 100)
     my.environ_avoids_water(self, 100)
     my.is_able_to_freeze(self, True)
+    my.is_cowardly(self, True)
     my.health_initial_dice(self, "2d3+4")
     my.is_able_to_use_wands_or_staffs(self, True)
     my.on_tick_do(self, "me.on_tick()")

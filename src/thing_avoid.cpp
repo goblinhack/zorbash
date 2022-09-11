@@ -12,6 +12,8 @@ bool Thing::will_avoid_monst(const Thingp it)
   TRACE_NO_INDENT();
   auto me = tp();
 
+  dbg("Avoid check for: %s", it->to_short_string().c_str());
+
   //
   // Not moving?
   //
@@ -35,12 +37,14 @@ bool Thing::will_avoid_monst(const Thingp it)
   }
 
   if (is_dangerous(it)) {
+    dbg("Avoid dangerous: %s", it->to_short_string().c_str());
     return true;
   }
 
   if (me->is_meat()) {
     if (it->is_meat_eater() || it->attack_meat()) {
       if (is_dangerous(it)) {
+        dbg("Avoid dangerous meat eater: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -49,6 +53,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (me->is_red_blood()) {
     if (it->is_red_blood_eater()) {
       if (is_dangerous(it)) {
+        dbg("Avoid dangerous blood eater: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -57,6 +62,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (me->is_green_blood()) {
     if (it->is_green_blood_eater()) {
       if (is_dangerous(it)) {
+        dbg("Avoid dangerous blood eater: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -65,6 +71,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (me->is_humanoid()) {
     if (it->attack_humanoid()) {
       if (is_dangerous(it)) {
+        dbg("Avoid dangerous humanoid: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -73,6 +80,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   if (me->is_living()) {
     if (it->attack_living()) {
       if (is_dangerous(it)) {
+        dbg("Avoid dangerous monst: %s", it->to_short_string().c_str());
         return true;
       }
     }
@@ -83,6 +91,7 @@ bool Thing::will_avoid_monst(const Thingp it)
     // But allow baby slimes to attack each other!
     //
     if (it->is_jelly_parent()) {
+      dbg("Avoid dangerous jelly: %s", it->to_short_string().c_str());
       return true;
     }
   }

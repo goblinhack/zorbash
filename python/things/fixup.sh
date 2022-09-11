@@ -523,7 +523,7 @@ do
       unused_flag70 \
       unused_flag71 \
       unused_flag72 \
-      unused_flag73 \
+      is_cowardly \
       appearing_chance_d1000 \
       is_throw_blocker \
       is_able_to_freeze \
