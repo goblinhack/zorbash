@@ -47,7 +47,7 @@
 #define UI_THING_INFO_WIDTH          (g_opt_ascii ? 40 : 30)
 #define UI_TILE_PIXELART_HEIGHT      8
 #define UI_TILE_PIXELART_WIDTH       8
-#define UI_TOPCON_HEIGHT             3 // Scrollbar limit
+#define UI_TOPCON_HEIGHT             4 // Scrollbar limit
 #define UI_TOPCON_TEXT_COLOR         UI_TEXT_COLOR
 #define UI_TOPCON_VIS_HEIGHT         UI_TOPCON_HEIGHT
 #define UI_TOPCON_VIS_WIDTH          UI_TOPCON_WIDTH
