@@ -1484,7 +1484,7 @@ void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
     if (t->is_item()) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise when worn         %5d", n);
       w->log(tmp);
-    } else {
+    } else if (t->is_player()) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level base        %5d", t->noise());
       w->log(tmp);
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level with items  %5d", n);
@@ -1493,7 +1493,7 @@ void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
   }
 
   if (t->is_alive_monst()) {
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level hearing     %5d", t->noise_decibels_hearing());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Hearing                 %5d", t->noise_decibels_hearing());
     w->log(tmp);
   }
 }

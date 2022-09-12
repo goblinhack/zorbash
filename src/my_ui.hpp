@@ -61,25 +61,27 @@
 #define UI_WID_POPUP_WIDTH_NORMAL    24
 #define UI_WID_POPUP_WIDTH_WIDE      38
 #define UI_WID_SAVE_SLOTS            10 // How many save game slots
-#define UI_WID_STYLE_BAG             12
 
-#define UI_WID_STYLE_SPARSE_NONE        -1 // Used for widgets with their own backgrounds
-#define UI_WID_STYLE_SOLID_NONE         0
-#define UI_WID_STYLE_GREEN              1
-#define UI_WID_STYLE_RED                2
-#define UI_WID_STYLE_NORMAL             3
-#define UI_WID_STYLE_DARK               4
-#define UI_WID_STYLE_SOLID_DEFAULT      5
-#define UI_WID_STYLE_GRAY               6
-#define UI_WID_STYLE_OUTLINE            7
-#define UI_WID_STYLE_VERT_DARK          8
-#define UI_WID_STYLE_VERT_LIGHT         9
-#define UI_WID_STYLE_HORIZ_DARK         10
-#define UI_WID_STYLE_HORIZ_LIGHT        11
-#define UI_WID_STYLE_VERT_SCROLL_DARK   12
-#define UI_WID_STYLE_VERT_SCROLL_LIGHT  13
-#define UI_WID_STYLE_HORIZ_SCROLL_DARK  14
-#define UI_WID_STYLE_HORIZ_SCROLL_LIGHT 15
-#define UI_WID_STYLE_MAX                16
+enum {
+  UI_WID_STYLE_SPARSE_NONE = -1, // Used for widgets with their own backgrounds
+  UI_WID_STYLE_SOLID_NONE,
+  UI_WID_STYLE_GREEN,
+  UI_WID_STYLE_RED,
+  UI_WID_STYLE_NORMAL,
+  UI_WID_STYLE_DARK,
+  UI_WID_STYLE_SOLID_DEFAULT,
+  UI_WID_STYLE_GRAY,
+  UI_WID_STYLE_OUTLINE,
+  UI_WID_STYLE_VERT_DARK,
+  UI_WID_STYLE_VERT_LIGHT,
+  UI_WID_STYLE_HORIZ_DARK,
+  UI_WID_STYLE_HORIZ_LIGHT,
+  UI_WID_STYLE_VERT_SCROLL_DARK,
+  UI_WID_STYLE_VERT_SCROLL_LIGHT,
+  UI_WID_STYLE_HORIZ_SCROLL_DARK,
+  UI_WID_STYLE_HORIZ_SCROLL_LIGHT,
+  UI_WID_STYLE_BAG,
+  UI_WID_STYLE_MAX,
+};
 
 #endif

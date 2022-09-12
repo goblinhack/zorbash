@@ -4,6 +4,7 @@
 
 #include <SDL.h>
 
+#include "my_backtrace.hpp"
 #include "my_color.hpp"
 #include "my_color_defs.hpp"
 #include "my_sdl.hpp"
@@ -147,7 +148,9 @@ void WidTextBox::log_(std::wstring str, wid_text_format format, std::string colo
       line_count++;
       wid_update(wid_text_box_container);
     } else {
-      ERR("Text box overflow on [%s] height %d line_count %d", wstring_to_string(str).c_str(), height, line_count);
+      CON("Text box overflow on [%s] height %d line_count %d", wstring_to_string(str).c_str(), height, line_count);
+      backtrace_dump();
+      return;
     }
   } else {
     if (line_count < scroll_height) {
