@@ -6,6 +6,7 @@
 #include "my_ascii.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
+#include "my_random.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 #include "my_unicode.hpp"
@@ -166,6 +167,18 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
     } else if (is_burnt) {
       c = BROWN;
     }
+  }
+
+  if (is_on_fire()) {
+    auto r = non_pcg_random_range(0, 100);
+    if (r < 20) {
+      c = RED;
+    } else if (r < 50) {
+      c = YELLOW;
+    } else {
+      c = ORANGE;
+    }
+    return;
   }
 
   //

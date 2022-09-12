@@ -1720,28 +1720,38 @@ void Game::wid_thing_info_add_carry_info(WidPopup *w, Thingp t)
 
 void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
 {
+  bool printed_something = false;
+
   TRACE_AND_INDENT();
 
   auto tp = t->tp();
   if (t->is_monst()) {
     if (tp->rarity() == THING_RARITY_UNCOMMON) {
       w->log("Monster is uncommon", TEXT_FORMAT_LHS);
+      printed_something = true;
     } else if (tp->rarity() == THING_RARITY_RARE) {
       w->log("Monster is rare.", TEXT_FORMAT_LHS);
+      printed_something = true;
     } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
       w->log("Monster is very rare.", TEXT_FORMAT_LHS);
+      printed_something = true;
     } else if (tp->rarity() == THING_RARITY_UNIQUE) {
       w->log("Monster is unique!", TEXT_FORMAT_LHS);
+      printed_something = true;
     }
   } else if (t->is_collectable()) {
     if (tp->rarity() == THING_RARITY_UNCOMMON) {
       w->log("Item is uncommon", TEXT_FORMAT_LHS);
+      printed_something = true;
     } else if (tp->rarity() == THING_RARITY_RARE) {
       w->log("Item is rare.", TEXT_FORMAT_LHS);
+      printed_something = true;
     } else if (tp->rarity() == THING_RARITY_VERY_RARE) {
       w->log("Item is very rare.", TEXT_FORMAT_LHS);
+      printed_something = true;
     } else if (tp->rarity() == THING_RARITY_UNIQUE) {
       w->log("Item is unique!", TEXT_FORMAT_LHS);
+      printed_something = true;
     }
   }
 
@@ -1813,40 +1823,49 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
   if (t->is_item()) {
     if (t->temperature < 0) {
       w->log("Is cold to the touch.", TEXT_FORMAT_LHS);
+      printed_something = true;
     } else if (t->temperature > TEMPERATURE_ROOM) {
       w->log("Is warm to the touch.", TEXT_FORMAT_LHS);
+      printed_something = true;
     }
   }
 
   if (t->is_staff()) {
     w->log("Item hits all in path.", TEXT_FORMAT_LHS);
+    printed_something = true;
   }
 
   if (t->is_wand()) {
     w->log("Item hits first in path.", TEXT_FORMAT_LHS);
+    printed_something = true;
   }
 
   if (t->collision_hit_360()) {
     w->log("Item hits surrounding tiles.", TEXT_FORMAT_LHS);
+    printed_something = true;
   }
 
   if (t->collision_hit_180()) {
     w->log("Item hits front and behind.", TEXT_FORMAT_LHS);
+    printed_something = true;
   }
 
   if (t->collision_hit_two_tiles_ahead()) {
     w->log("Item hits the two tiles ahead.", TEXT_FORMAT_LHS);
+    printed_something = true;
   }
 
   if (t->collision_hit_adj()) {
     w->log("Item hits adjacent tiles.", TEXT_FORMAT_LHS);
+    printed_something = true;
   }
 
   if (t->attacks_per_round() > 1) {
     w->log("Monster has multiple attacks.", TEXT_FORMAT_LHS, "red");
+    printed_something = true;
   }
 
-  if (t->is_monst() || t->is_player()) {
+  if (t->is_monst() || t->is_player() || printed_something) {
     w->log(UI_LOGGING_EMPTY_LINE);
   }
 }
