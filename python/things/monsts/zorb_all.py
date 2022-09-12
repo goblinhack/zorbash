@@ -158,7 +158,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
     my.text_hits(self, "claws")
-    my.text_long_description(self, "A very lesser minion of Zorbash, Zorblins are small, green skinned beings that lair in caves, abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders like you. However, they usually carry some meagre amounts of gold, dug out from the depths with their bare, shaking hands. Best to find out...")
+    my.text_long_description(self, "Zorblins are small, green skinned beings that lair in abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders, like you. They often carry some meagre amounts of gold, dug from the depths with bare, shaking hands.")
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

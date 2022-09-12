@@ -44,7 +44,7 @@
 #define UI_TEXT_COLOR                GRAY // Default text color
 #define UI_TEXT_COLOR_STR            "gray"
 #define UI_TEXT_HIGHLIGHT_COLOR_STR  "white"
-#define UI_THING_INFO_WIDTH          30
+#define UI_THING_INFO_WIDTH          (g_opt_ascii ? 40 : 30)
 #define UI_TILE_PIXELART_HEIGHT      8
 #define UI_TILE_PIXELART_WIDTH       8
 #define UI_TOPCON_HEIGHT             3 // Scrollbar limit

@@ -227,24 +227,36 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       if (game->robot_mode) {
         TRACE_NO_INDENT();
-        if (defeater && defeater->is_acid()) {
+        if (defeater && (defeater == this)) {
+          if (is_on_fire()) {
+            msg("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
+          } else {
+            msg("%%fg=red$RIP: Robot is defeated %s.%%fg=reset$", reason);
+          }
+        } else if (defeater && defeater->is_acid()) {
           msg("%%fg=red$RIP: Robot is dissolved to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
           msg("%%fg=red$RIP: Robot is burnt to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_water()) {
-          msg("%%fg=red$RIP: Robot is drowned %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is shorted out %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_necrotic_danger_level()) {
-          msg("%%fg=red$RIP: Robot is torn apart %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robot is disassembled %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_engulfer()) {
           msg("%%fg=red$RIP: Robot is consumed %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_monst()) {
-          msg("%%fg=red$RIP: Robot is disassembled %s.%%fg=reset$", reason);
-        } else {
           msg("%%fg=red$RIP: Robot is deactivated %s.%%fg=reset$", reason);
+        } else {
+          msg("%%fg=red$RIP: Robot is broken %s.%%fg=reset$", reason);
         }
       } else {
         TRACE_NO_INDENT();
-        if (defeater && defeater->is_acid()) {
+        if (defeater && (defeater == this)) {
+          if (is_on_fire()) {
+            msg("%%fg=red$RIP: You are consumed %s.%%fg=reset$", reason);
+          } else {
+            msg("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
+          }
+        } else if (defeater && defeater->is_acid()) {
           msg("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
           msg("%%fg=red$RIP: You are burnt to death %s.%%fg=reset$", reason);

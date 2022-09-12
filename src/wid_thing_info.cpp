@@ -42,14 +42,14 @@ static void wid_thing_info_placement(point &tl, point &br, int height)
   tl = make_point(0, TERM_HEIGHT - 2 - height);
   br = make_point(UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
 
-  int offset = 4;
+  int offset = 8;
 
   if (ascii_mouse_x <= TERM_WIDTH / 2) {
     tl = make_point(TERM_WIDTH / 2 + offset, TERM_HEIGHT - 2 - height);
     br = make_point(TERM_WIDTH / 2 + offset + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
   } else {
-    tl = make_point(UI_LEFTBAR_WIDTH + offset, TERM_HEIGHT - 2 - height);
-    br = make_point(UI_LEFTBAR_WIDTH + offset + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
+    tl = make_point(UI_LEFTBAR_WIDTH, TERM_HEIGHT - 2 - height);
+    br = make_point(UI_LEFTBAR_WIDTH + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
   }
 }
 
@@ -1841,10 +1841,6 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
 
   if (t->attacks_per_round() > 1) {
     w->log("Monster has multiple attacks.", TEXT_FORMAT_LHS, "red");
-  }
-
-  if (hates.size()) {
-    w->log("Hates " + hates, TEXT_FORMAT_LHS, "red");
   }
 
   if (t->is_monst() || t->is_player()) {

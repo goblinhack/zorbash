@@ -16,7 +16,7 @@ def on_death_of_a_follower(me, leader, x, y):
 
 def tp_init(name, text_long_name):
     self = zorb_all.tp_init(name, text_long_name)
-    my.text_long_description2(self, "This particular zorblin was once a ruthless adventurer who plundered the seas in their mighty pirate ship, but due to a series of unfortunate and inexplicable events has now found themselves wandering the halls of this dungeon looking for the odd piece of eight.")
+    my.text_long_description2(self, "This particular zorblin was once a ruthless adventurer who plundered the seas in their mighty pirate ship, but due to a series of unfortunate events finds themselves wandering this dungeon looking for the odd piece of eight.")
     my.on_death_of_a_follower_do(self, "me.on_death_of_a_follower()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.on_born_do(self, "me.on_born()")

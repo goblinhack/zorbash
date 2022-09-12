@@ -1,10 +1,10 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- wid popup overflow                                                                                                                           -->
+<!-- on fire as a debuff in ascii mode                                                                                                            -->
+<!-- cannot see @ when on fire                                                                                                                    -->
 <!-- do buffs and skills change level                                                                                                             -->
 <!-- bat could not fly over monst stuck in web - bug ?                                                                                            -->
-<!-- inventory is transparent                                                                                                                     -->
 <!-- eels                                                                                                                                         -->
 <!-- dimension portal                                                                                                                             -->
 <!-- wort food ?                                                                                                                                  -->

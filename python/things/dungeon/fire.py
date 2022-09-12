@@ -33,7 +33,7 @@ def tp_init(name, text_long_name):
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.lifespan_dice(self, "1d20+20")
-    my.light_color(self, "white")
+    my.light_color(self, "orange")
     my.light_dist(self, 4)
     my.on_idle_tick_freq_dice(self, "1d1+1:me.spawn()")
     my.temperature(self, 100)
@@ -47,53 +47,54 @@ def tp_init(name, text_long_name):
 
     delay = 75
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="red",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="orange",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="orange",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="yellow",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="darkred",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="red",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="yellow",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="darkred",
             tile=name + ".5", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="red",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="orange",
             tile=name + ".6", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="orange",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".7", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="yellow",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="darkred",
             tile=name + ".8", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="orange",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="orange",
             tile=name + ".9", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="red",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="darkred",
             tile=name + ".10", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="yellow",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="darkred",
             tile=name + ".11", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="red",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".12", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="orange",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="darkred",
             tile=name + ".13", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="orange",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".14", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="red",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="orange",
             tile=name + ".15", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="inverted_v", ascii_fg_col_name="", ascii_bg_col_name="yellow",
+            ascii_fg_char="inverted_v", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".16", delay_ms=delay)
+    my.tp_update(self)
     my.tp_update(self)
 
 
