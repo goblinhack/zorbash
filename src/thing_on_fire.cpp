@@ -57,8 +57,8 @@ bool Thing::is_on_fire(void)
 void Thing::on_fire_unset(void)
 {
   TRACE_NO_INDENT();
-  auto id = on_fire_anim_id();
-  if (! id) {
+
+  if (! is_on_fire()) {
     return;
   }
 
@@ -73,8 +73,13 @@ void Thing::on_fire_unset(void)
 bool Thing::on_fire_set(const std::string &why)
 {
   TRACE_NO_INDENT();
+
   if (! is_able_to_burn() && ! is_combustible()) {
     return false;
+  }
+
+  if (is_on_fire()) {
+    return true;
   }
 
   if (is_dead) {
@@ -102,6 +107,17 @@ bool Thing::on_fire_set(const std::string &why)
     move_carried_items();
 
     on_fire();
+
+    if (is_player()) {
+      msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");
+    } else if (is_monst()) {
+      msg("%s is on fire!", text_The().c_str());
+    }
+
+    //
+    // I mean, it's likely this will cause you to wake.
+    //
+    wake("on fire");
   }
 
   //

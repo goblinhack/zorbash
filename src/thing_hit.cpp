@@ -1277,16 +1277,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   //
   if (attack_options->attack_fire || hitter->is_fire() || hitter->is_lava() || real_hitter->is_fire() ||
       real_hitter->is_lava()) {
-    if (on_fire_set("hit by fire")) {
-      if (is_player()) {
-        msg("%%fg=red$You are literally ON FIRE!%%fg=reset$");
-      } else if (is_monst()) {
-        msg("%s is on fire!", text_The().c_str());
-      }
-      if (is_monst() || (is_player() && game->robot_mode)) {
-        change_state(MONST_STATE_IDLE, "was set on fire");
-      }
-    }
+    on_fire_set("hit by fire");
   } else if (is_on_fire()) {
     if (is_player()) {
       if (real_hitter->is_monst()) {

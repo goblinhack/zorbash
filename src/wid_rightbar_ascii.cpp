@@ -816,7 +816,7 @@ bool wid_rightbar_ascii_create(void)
       got_one = true;
       unused  = id;
     }
-    if (got_one) {
+    if (got_one || player->is_on_fire()) {
       {
         TRACE_AND_INDENT();
         y_at++;
@@ -850,6 +850,21 @@ bool wid_rightbar_ascii_create(void)
             wid_update(w);
           }
         }
+      }
+      if (player->is_on_fire()) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "debuffs");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "On fire!");
+        wid_update(w);
       }
     }
   }

@@ -116,7 +116,7 @@ bool Thing::close_door(Thingp door)
   if (is_on_fire()) {
     if (! door->is_on_fire()) {
       if (is_player()) {
-        msg("The door is ablaze!");
+        msg("The closed door is ablaze!");
       }
       door->on_fire_set("closed flaming door");
     }

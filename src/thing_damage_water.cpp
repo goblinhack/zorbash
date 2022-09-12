@@ -131,15 +131,6 @@ int Thing::total_damage_for_on_receiving_dmg_water(Thingp hitter, Thingp real_hi
     return damage;
   }
 
-  //
-  // Allow the hitter to increase the damage.
-  // And then allow the receive to dampen the damage.
-  //
-#if 0
-  auto victim = this;
-  damage      = on_total_damage_water(hitter, real_hitter, victim, damage);
-#endif
-
   FOR_ALL_BUFFS(item)
   {
     auto iter = level->thing_find(item.id);
