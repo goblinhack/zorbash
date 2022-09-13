@@ -46,6 +46,7 @@ void Thing::on_fire(void)
 bool Thing::is_on_fire(void)
 {
   TRACE_NO_INDENT();
+
   auto id = on_fire_anim_id();
   if (! id) {
     return false;
@@ -59,6 +60,11 @@ void Thing::on_fire_unset(void)
   TRACE_NO_INDENT();
 
   if (! is_on_fire()) {
+    return;
+  }
+
+  auto id = on_fire_anim_id();
+  if (! id) {
     return;
   }
 

@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- killed by removing fire ???                                                                                                                  -->
 <!-- sweats after death                                                                                                                           -->
 <!-- do buffs and skills change level                                                                                                             -->
 <!-- bat could not fly over monst stuck in web - bug ?                                                                                            -->
