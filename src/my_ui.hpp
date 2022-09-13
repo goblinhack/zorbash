@@ -55,9 +55,9 @@
 #define UI_TYPE_ASCII                1
 #define UI_TYPE_PIXELART             0
 #define UI_TYPES_MAX                 2
-#define UI_UPDATE_FAST_MS            10
-#define UI_UPDATE_SLOW_MS            20 // FPS and game status
-#define UI_UPDATE_VERY_SLOW_MS       40 // Level tick in ascii mode
+#define UI_UPDATE_FAST_MS            (g_opt_ascii ? 10 : 5)
+#define UI_UPDATE_SLOW_MS            (g_opt_ascii ? 20 : 10) // FPS and game status
+#define UI_UPDATE_VERY_SLOW_MS       (g_opt_ascii ? 40 : 20) // Level tick in ascii mode
 #define UI_WID_POPUP_WIDTH_NORMAL    24
 #define UI_WID_POPUP_WIDTH_WIDE      38
 #define UI_WID_SAVE_SLOTS            10 // How many save game slots

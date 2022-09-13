@@ -130,16 +130,13 @@ void sdl_loop(void)
     bool update_fast      = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
 
     //
-    // In ascii mode update the screen more slowly to save CPU
+    // This tick is for either
+    // a) ascii mode
+    // b) when in pixel art mode and between levels and waiting for level fade in
     //
     if (unlikely(update_very_slow)) {
       ui_ts_very_slow_last = ts_now;
 
-      //
-      // This tick is for either
-      // a) ascii mode
-      // b) when in pixeal art mode and between levels and waiting for level fade in
-      //
       if (likely(! g_errored)) {
         if (likely(game->level != nullptr)) {
           game->level->tick();
