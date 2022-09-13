@@ -1797,9 +1797,13 @@ void Level::place_random_treasure(Dungeonp d)
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
 
+    if (d->is_rock(x, y) || d->is_wall(x, y)) {
+      continue;
+    }
+
     if (d->is_dirt(x, y) || d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_weapon_class_c(x, y) ||
-        d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
-        d->is_deep_water(x, y) || d->is_spiderweb(x, y) || d->is_foilage(x, y)) {
+        d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y)) {
+
       auto tp = tp_random_treasure();
       if (unlikely(! tp)) {
         return;
@@ -1819,16 +1823,25 @@ void Level::place_random_treasure(Dungeonp d)
         t->enchant_randomly();
       }
 
-      //
-      // Double enchant swords in lakes :)
-      //
       if (t->is_sword()) {
+        //
+        // Double enchant swords in lakes :)
+        //
         if (d->is_shallow_water(x, y)) {
           t->enchant_randomly();
         }
 
         if (d->is_deep_water(x, y)) {
           t->enchant_randomly();
+        }
+      } else {
+        //
+        // Frther enchant deep water items?
+        //
+        if (pcg_random_range(0, 100) < 20) {
+          if (d->is_deep_water(x, y)) {
+            t->enchant_randomly();
+          }
         }
       }
 
@@ -1851,13 +1864,17 @@ void Level::place_random_torches(Dungeonp d)
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
 
-    if (d->is_dirt(x, y) || d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_weapon_class_c(x, y) ||
-        d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
-        d->is_deep_water(x, y) || d->is_spiderweb(x, y) || d->is_foilage(x, y)) {
+    if (d->is_rock(x, y) || d->is_wall(x, y)) {
+      continue;
+    }
 
-      if (d->is_deep_water(x, y) || d->is_foilage(x, y)) {
-        continue;
-      }
+    if (d->is_shallow_water(x, y) || is_deep_water(x, y) || d->is_foilage(x, y)) {
+      continue;
+    }
+
+    if (d->is_weapon_class_a(x, y) || d->is_weapon_class_b(x, y) || d->is_weapon_class_c(x, y) ||
+        d->is_treasure_class_a(x, y) || d->is_treasure_class_b(x, y) || d->is_treasure_class_c(x, y) ||
+        d->is_spiderweb(x, y)) {
 
       //
       // Be nice and enchant this lost treasure.
