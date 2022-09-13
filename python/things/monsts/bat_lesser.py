@@ -20,8 +20,9 @@ def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
 
 
 def on_death(me, x, y):
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monst_death1"):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
+    sound = "squeaky_toy"
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
 def tp_init(name, text_long_name):

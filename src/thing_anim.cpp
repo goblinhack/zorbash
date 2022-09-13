@@ -100,6 +100,13 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
     }
 
     //
+    // If stuck in a web then don't flap wings.
+    //
+    if (is_stuck_currently()) {
+      return;
+    }
+
+    //
     // Stop the animation here?
     //
     is_end_of_anim = tile_is_end_of_anim(tile);

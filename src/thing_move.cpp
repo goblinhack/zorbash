@@ -274,7 +274,6 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
             msg("You are so tired but dig deep into your reserves to move!");
           } else {
             msg("You cannot move, you are so tired!");
-            stuck("too tired to move");
             game->tick_begin("too tired to move");
             return false;
           }
@@ -282,95 +281,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       }
     }
 
-    //
-    // Blocked from moving by something stronger?
-    //
-    FOR_ALL_THINGS(level, it, curr_at.x, curr_at.y)
-    {
-      if (it == this) {
-        continue;
-      }
-
-      if (! it->is_alive_monst()) {
-        continue;
-      }
-
-      if (same_mob(it) || same_leader(it)) {
-        dbg("Friends are piling up, but allow movement");
-        wobble(25);
-        continue;
-      }
-
-      if (is_engulfer() || is_heavy()) {
-        if (! d20roll(stat_str(), it->stat_str_total())) {
-          if (is_player()) {
-            msg("You are held in place and cannot move!");
-          }
-          dbg("You are held in place");
-          stuck("stuck in place");
-          wobble(25);
-          return false;
-        }
-      }
-    }
-    FOR_ALL_THINGS_END()
-
-    if (is_immune_to_spiderwebs() && level->is_spiderweb(curr_at.x, curr_at.y)) {
-      //
-      // No getting stuck in webs
-      // Also no cleaners stuck in their own gel
-      //
-    } else if (is_soft() && ! is_heavy() && level->is_heavy(curr_at.x, curr_at.y)) {
-      //
-      // Makes sure ghosts (or the cursor!) do not get stuck under barrels
-      //
-      if (! is_flying() && ! is_ethereal() && ! is_cursor() && ! is_cursor_path()) {
-        if (is_player()) {
-          if (level->is_barrel(curr_at.x, curr_at.y)) {
-            msg("You are trapped under a barrel!");
-            game->tick_begin("trapped in a barrel");
-          } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
-            msg("You are trapped in a block of ice!");
-            game->tick_begin("trapped in ice");
-          } else {
-            msg("You cannot move!");
-            game->tick_begin("trapped in a barrel");
-          }
-          popup(string_sprintf("%%fg=red$!"));
-        }
-        lunge(future_pos);
-
-        //
-        // Shake the web
-        //
-        FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
-        {
-          if (t->is_barrel()) {
-            t->wobble(10);
-          }
-          if (t->is_block_of_ice()) {
-            t->wobble(10);
-          }
-          if (t->is_player() || t->is_monst()) {
-            t->wobble(20);
-          }
-        }
-        FOR_ALL_THINGS_END()
-
-        stuck("stuck under something heavy");
-        return false;
-      }
-    }
-
-    if (is_frozen) {
-      msg("You are frozen and cannot move!");
-      game->tick_begin("frozen");
-      popup(string_sprintf("%%fg=lightblue$!"));
-      stuck("frozen");
-      return false;
-    }
-
-    if (is_stuck()) {
+    if (is_stuck_currently()) {
       if (is_player()) {
         if (level->is_spiderweb(curr_at.x, curr_at.y)) {
           if (attack_options->attack_at_set && (attack_options->attack_at != curr_at)) {
@@ -388,35 +299,13 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
           game->tick_begin("trapped in ice");
         } else {
           msg("You cannot move!");
-          game->tick_begin("trapped in something sticky");
+          game->tick_begin("cannot move");
         }
-        popup(string_sprintf("%%fg=red$!"));
       }
       lunge(future_pos);
-
-      //
-      // Shake the web
-      //
-      FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
-      {
-        if (t->is_spiderweb()) {
-          t->wobble(10);
-        }
-        if (t->is_block_of_ice()) {
-          t->wobble(10);
-        }
-        if (t->is_player() || t->is_monst()) {
-          t->wobble(20);
-        }
-      }
-      FOR_ALL_THINGS_END()
-
-      stuck("still stuck");
       return false;
     }
   }
-
-  stuck_count_set(0);
 
   //
   // No rest for the undead.

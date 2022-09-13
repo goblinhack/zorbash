@@ -1023,7 +1023,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     }
 
     if (! attack_options->crit) {
-      if (victim->is_stuck()) {
+      if (victim->is_stuck_currently()) {
         if (d10000() < crit_chance_d10000()) {
           attack_options->crit = true;
         }

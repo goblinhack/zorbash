@@ -147,7 +147,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // Ensure cleaners do not get stuck in themselves!
   //
-  if (is_stuck()) {
+  if (is_stuck_currently()) {
     //
     // Ok to move
     //

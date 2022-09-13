@@ -537,7 +537,8 @@ public:
   bool is_hated_by_me(const Thingp it);
   bool is_on_fire(void);
   bool is_state_sleeping(void);
-  bool is_stuck(void);
+  bool is_stuck_currently(void);
+  bool is_stuck_check(void);
   bool is_target_select(Thingp item);
   bool is_to_be_avoided(Thingp attacker);
   bool item_choose_target(Thingp item, Thingp victim = nullptr);
@@ -2159,6 +2160,8 @@ public:
   uint8_t is_visible(void);
   uint8_t z_prio(void);
 
+  void is_stuck_update(void);
+  void unstuck(void);
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);

@@ -305,30 +305,30 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
         //
         // Abort the walk
         //
-        dbg("No; dont set fire to yourself by carrying a torch");
+        dbg("No collision; dont set fire to yourself by carrying a torch");
         return false;
       }
 
       //
       // Continue the walk
       //
-      dbg("Yes; allow fire to burn owner");
+      dbg("Collision; allow fire to burn owner");
       return true;
     }
   }
 
   if (is_player() && it->is_collectable()) {
-    dbg("No; allow items to be collected manually");
+    dbg("No collision; allow items to be collected manually");
   } else if (! it->is_dead && possible_to_attack(it)) {
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; candidate to attack");
+      dbg("Collision; candidate to attack");
       thing_add_ai_possible_hit(it, "battle");
     } else {
-      dbg("No; cannot attack %s, no overlap", it->to_short_string().c_str());
+      dbg("No collision; cannot attack %s, no overlap", it->to_short_string().c_str());
     }
   } else if (can_eat(it)) {
     if (game->tick_current < it->tick_last_dropped() + 1) {
-      dbg("No; can eat but was seen previously");
+      dbg("No collision; can eat but was seen previously");
       //
       // Continue the walk
       //
@@ -336,40 +336,40 @@ bool Thing::collision_add_candidates(Thingp it, point future_pos, int x, int y, 
     }
 
     if (things_overlap(me, me->curr_at, it)) {
-      dbg("Yes; overlaps and can eat");
+      dbg("Collision; overlaps and can eat");
       thing_add_ai_possible_hit(it, "eat");
     }
   } else if (it->is_dead) {
     //
     // Continue walking by falling through to return true
     //
-    dbg("No; ignore corpse");
+    dbg("No collision; ignore corpse");
   } else if (is_fire() &&
              (it->is_meltable() || it->is_able_to_burn() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; allow fire to burn %s", it->to_short_string().c_str());
+      dbg("Collision; allow fire to burn %s", it->to_short_string().c_str());
       thing_add_ai_possible_hit(it, "burn");
     } else {
-      dbg("No; cannot burn %s, no overlap", it->to_short_string().c_str());
+      dbg("No collision; cannot burn %s, no overlap", it->to_short_string().c_str());
     }
   } else if (is_lava() && (it->is_able_to_burn() || it->is_very_combustible() || it->is_combustible())) {
     //
     // Fire attack?
     //
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; allow fire to burn %s", it->to_short_string().c_str());
+      dbg("Collision; allow fire to burn %s", it->to_short_string().c_str());
       thing_add_ai_possible_hit(it, "burn");
     } else {
-      dbg("No; cannot burn %s, no overlap", it->to_short_string().c_str());
+      dbg("No collision; cannot burn %s, no overlap", it->to_short_string().c_str());
     }
   } else {
     //
     // Continue walking by falling through to return true
     //
-    dbg("No; ignore");
+    dbg("No collision; ignore");
   }
 
   return true;
@@ -426,8 +426,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   auto me_tp = me->tp();
 
   //
-  // Do not include hidden as we use the sword being carried here
-  // and when swinging, it is hidden
+  // Do not include hidden as we use the sword being carried here and when swinging, it is hidden
   //
   if (is_falling || is_jumping || is_changing_level) {
     return false;
@@ -441,12 +440,15 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   //
   if (is_engulfer() && can_eat(it) && (it->curr_at == future_pos)) {
     if (d1000() < me_tp->attack_engulf_chance_d1000()) {
-      dbg("No; can engulf");
+      dbg("No collision; can engulf");
       return false;
     }
   }
 
   if (it->is_player() || it->is_monst()) {
+    //
+    // Allow barrels and blocks of ice to be pushed onto things.
+    //
     if (is_barrel() || is_block_of_ice()) {
       if (things_overlap(me, future_pos, it)) {
         if (it->is_soft()) {
@@ -457,6 +459,9 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
           return false;
         } else if (it->is_ethereal()) {
           dbg("Overlaps; barrel can splat ethereal monst");
+          return false;
+        } else if (it->is_crushable()) {
+          dbg("Overlaps; barrel can crush monst");
           return false;
         } else {
           dbg("Overlaps; barrel cannot splat");
@@ -469,18 +474,18 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       //
     } else {
       //
-      // Allow walking over the dead
+      // Allow walking over the dead but not corpses we can eat.
       //
       if (can_eat(it)) {
         if (things_overlap(me, me->curr_at, it)) {
-          dbg("Yes; overlaps and can eat");
+          dbg("Collision; overlaps and can eat");
           return true;
         }
       }
 
       if (it->is_dead) {
         if (! it->is_obstacle_when_dead()) {
-          dbg("No; ignore corpse");
+          dbg("No collision; ignore corpse");
           return false;
         }
       }
@@ -496,12 +501,12 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       //
       // Allow movement away. This happens if you jump onto a barrel.
       //
-      dbg("No; allow movement away from barrel");
+      dbg("No collision; allow movement away from barrel");
       return false;
     }
 
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; overlaps barrel");
+      dbg("Collision; overlaps barrel");
       return true;
     }
   }
@@ -511,7 +516,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       //
       // Do not allow movement away. This happens if you are placed inside an block_of_ice.
       //
-      dbg("Yes; inside block of ice");
+      dbg("Collision; inside block of ice");
       return true;
     }
 
@@ -519,7 +524,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     // As we want to be able to shove the block_of_ice, we need to check for collision.
     //
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; overlaps block of ice");
+      dbg("Collision; overlaps block of ice");
       return true;
     }
   }
@@ -533,12 +538,12 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       //
       // Allow movement away. This happens if you jump onto a brazier.
       //
-      dbg("No; allow movement away from brazier");
+      dbg("No collision; allow movement away from brazier");
       return false;
     }
 
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; overlaps brazier");
+      dbg("Collision; overlaps brazier");
       return true;
     }
   }
@@ -550,7 +555,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   // Need this or shields attack the player.
   //
   if ((owner_it == me) || (owner_me == it)) {
-    dbg("No; collision with myself");
+    dbg("No collision; collision with myself");
     return false;
   }
 
@@ -560,7 +565,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       // Weapon hits monster or mob.
       //
       if (things_overlap(me, future_pos, it)) {
-        dbg("Yes; overlaps and can attack");
+        dbg("Collision; overlaps and can attack");
         return true;
       }
     }
@@ -569,11 +574,11 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   if (it->is_door() && ! it->is_open) {
     if (! it->is_dead) {
       if (things_overlap(me, future_pos, it)) {
-        dbg("Yes; overlaps and can open");
+        dbg("Collision; overlaps and can open");
         if (open_door(it)) {
           return false;
         } else if (things_overlap(me, future_pos, it)) {
-          dbg("Yes; overlaps and can attack");
+          dbg("Collision; overlaps and can attack");
           return true;
         }
       }
@@ -588,20 +593,19 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       // Stop ghosts massing together
       //
       if (is_ethereal()) {
-        dbg("Yes; Stop ethereal things from piling up");
+        dbg("Collision; Stop ethereal things from piling up");
         return true;
       }
 
       //
-      // This also allows the player to attack a ghost over lava without falling
-      // into the lava
+      // This also allows the player to attack a ghost over lava without falling into the lava
       //
       if (is_monst() || is_player()) {
-        dbg("Yes; Stop monst moving on ethereal things");
+        dbg("Collision; Stop monst moving on ethereal things");
         return true;
       }
 
-      dbg("No; can pass through ethereal thing");
+      dbg("No collision; can pass through ethereal thing");
       return false;
     }
   }
@@ -610,13 +614,13 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     if (is_able_to_walk_through_walls()) {
       if ((future_pos.x < MAP_BORDER_ROCK) || (future_pos.y < MAP_BORDER_ROCK) ||
           (future_pos.x >= MAP_WIDTH - MAP_BORDER_ROCK) || (future_pos.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
-        dbg("No; can pass through walls but too close to the edge");
+        dbg("No collision; can pass through walls but too close to the edge");
         if (is_player()) {
           msg("The wall is too thick here to move");
         }
         return true;
       }
-      dbg("No; can pass through walls");
+      dbg("No collision; can pass through walls");
       return false;
     }
   }
@@ -627,7 +631,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       // Stop ghosts massing together
       //
       if (is_flying()) {
-        dbg("Yes; Stop flying things from piling up");
+        dbg("Collision; Stop flying things from piling up");
         return true;
       }
 
@@ -636,38 +640,38 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
       // into the lava
       //
       if (is_monst() || is_player()) {
-        dbg("Yes; Stop monst moving on flying things");
+        dbg("Collision; Stop monst moving on flying things");
         return true;
       }
 
-      dbg("No; can pass through flying thing");
+      dbg("No collision; can pass through flying thing");
       return false;
     }
   }
 
   if (it->is_descend_dungeon()) {
     if (things_overlap(me, future_pos, it)) {
-      dbg("No; overlaps but can exit");
+      dbg("No collision; overlaps but can exit");
       return false;
     }
   }
 
   if (it->is_ascend_sewer()) {
     if (things_overlap(me, future_pos, it)) {
-      dbg("No; overlaps but can exit via sewer entrance");
+      dbg("No collision; overlaps but can exit via sewer entrance");
       return false;
     }
   }
 
   if (it->is_descend_sewer()) {
     if (things_overlap(me, future_pos, it)) {
-      dbg("No; overlaps but can exit via sewer exit");
+      dbg("No collision; overlaps but can exit via sewer exit");
       return false;
     }
   }
 
   if (is_player() && it->is_collectable()) {
-    dbg("No; allow manual collect instead");
+    dbg("No collision; allow manual collect instead");
     return false;
   }
 
@@ -676,38 +680,38 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   //
   if (it->is_spiderweb() && ! is_ethereal() && ! is_immune_to_spiderwebs()) {
     if (things_overlap(me, future_pos, it)) {
-      dbg("No; overlaps and is web; allow movement into");
+      dbg("No collision; overlaps and is web; allow movement into");
       return false;
     }
   }
 
   if (possible_to_attack(it)) {
     if (things_overlap(me, future_pos, it)) {
-      dbg("Yes; overlaps and can attack");
+      dbg("Collision; overlaps and can attack");
       return true;
     } else {
-      dbg("No; can attack but no overlap");
+      dbg("No collision; can attack but no overlap");
       return false;
     }
   }
 
   if (can_eat(it)) {
     if (where_i_failed_to_collect_last_get() == it->curr_at) {
-      dbg("No; tried to collect previously");
+      dbg("No collision; tried to collect previously");
       where_i_failed_to_collect_last_set(point(-1, -1));
       return false;
     }
 
     if (game->tick_current < it->tick_last_dropped() + 1) {
-      dbg("No; can eat but was seen previously");
+      dbg("No collision; can eat but was seen previously");
       return false;
     }
 
     if (things_overlap(me, me->curr_at, it)) {
-      dbg("Yes; can eat and overlaps");
+      dbg("Collision; can eat and overlaps");
       return true;
     } else {
-      dbg("Yes; can eat but no overlap");
+      dbg("Collision; can eat but no overlap");
       return false;
     }
   }
@@ -718,7 +722,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   if (is_minion()) {
     if (same_mob(it)) {
       if (things_overlap(me, future_pos, it)) {
-        dbg("Yes; cannot pass through my mob friend");
+        dbg("Collision; cannot pass through my mob friend");
         return true;
       }
     }
@@ -726,7 +730,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     if (it->is_mob()) {
       if (it == top_mob()) {
         if (things_overlap(me, future_pos, it)) {
-          dbg("Yes; cannot pass through my mob spawner");
+          dbg("Collision; cannot pass through my mob spawner");
           return true;
         }
       }
@@ -737,7 +741,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   // Check for this post minion checks so ethereal ghosts cannot pass through their mob spawner.
   //
   if (is_ethereal()) {
-    dbg("No; I am ethereal");
+    dbg("No collision; I am ethereal");
     return false;
   }
 
@@ -746,7 +750,7 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     // "true" on collision
     //
     if (collision_obstacle(it)) {
-      dbg("Yes; overlaps and is an obstacle");
+      dbg("Collision; overlaps and is an obstacle");
       return true;
     }
   }

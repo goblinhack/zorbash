@@ -229,17 +229,15 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
   }
 
   //
-  // Ensure cleaners do not get stuck in themselves!
+  // Cannot teleport?
   //
-  if (is_stuck()) {
-    //
-    // Ok ot move
-    //
+  if (is_stuck_currently()) {
+    dbg("You try to teleport but are stuck fast.");
     if (is_player()) {
       msg("You try to teleport but are stuck fast.");
+      game->tick_begin("teleport failed");
     }
     wobble(25);
-    dbg("You try to teleport but are stuck fast.");
     return false;
   }
 

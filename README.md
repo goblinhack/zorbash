@@ -1,10 +1,15 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- stuck debuff                                                                                                                                 -->
+<!-- stamina alert                                                                                                                                -->
 <!-- bat could not fly over monst stuck in web - bug ?                                                                                            -->
-<!-- eels                                                                                                                                         -->
-<!-- dimension portal                                                                                                                             -->
-<!-- wort food ?                                                                                                                                  -->
+<!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
+<!-- the X is wounded?                                                                                                                            -->
+<!-- a Z comes into view, it is wielding a Y                                                                                                      -->
+<!-- bleeding wound from claw attacks?                                                                                                            -->
+<!-- sweep in and out attack for bat ?                                                                                                            -->
+<!-- turn count                                                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -15,6 +20,9 @@
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
+<!-- - eels                                                                                                                                       -->
+<!-- - dimension portal                                                                                                                           -->
+<!-- - wort food ? fungas foods and some poisonous?                                                                                               -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
 <!-- - negation                                                                                                                                   -->

@@ -237,7 +237,6 @@ void Game::place_player(void)
         // level->thing_new("four_leaf_clover", point(x, y));
         // level->thing_new("medal_of_valor", point(x, y));
         // level->thing_new("wooden_cross", point(x, y));
-        // level->thing_new("spiderweb", point(x, y));
         // level->thing_new("armor_lather", point(x, y));
         // level->thing_new("boots_fluffy", point(x, y - 2));
         // level->thing_new("boots_silence", point(x, y - 2));
@@ -308,6 +307,13 @@ void Game::place_player(void)
         level->thing_new("water", point(x + 3, y));
         level->thing_new("water", point(x + 4, y));
       }
+      level->thing_new("barrel", point(x + 1, y));
+      level->thing_new("zoblin", point(x + 2, y));
+      level->thing_new("spiderweb", point(x + 2, y + 1));
+      level->thing_new("bat_lesser", point(x + 2, y + 1));
+      level->thing_new("spiderweb", point(x + 2, y + 2));
+      level->thing_new("bat_lesser", point(x + 2, y + 2));
+      level->thing_new("bat_lesser", point(x + 4, y));
       // level->thing_new("flesh_golem", point(x, y + 3));
       // level->thing_new("lava", point(x, y + 5));
       // level->thing_new("lava", point(x, y + 6));

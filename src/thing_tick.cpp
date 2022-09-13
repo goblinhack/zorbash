@@ -67,6 +67,11 @@ void Thing::achieve_goals_in_life(void)
   light_dist_update();
 
   //
+  // Check if stuck in a web
+  //
+  is_stuck_update();
+
+  //
   // Lifespan tick for carried torches must be before is_hidden check
   //
   lifespan_tick();
