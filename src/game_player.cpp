@@ -82,6 +82,8 @@ void Game::place_player(void)
       if (1) {
         auto w = level->thing_new("buff_undead_resist", point(x, y));
         t->buff_add(w);
+      }
+      if (0) {
         level->thing_new("zorb_necro", point(x + 2, y));
         level->thing_new("zorb_pirate", point(x + 2, y + 1));
         level->thing_new("fire", point(x + 1, y));
