@@ -122,16 +122,16 @@ void sdl_loop(void)
     }
 
     //
-    // Less frequent updates
+    // Various event frequencies
     //
     int  ts_now           = time_ms();
-    bool update_very_slow = (ts_now - ui_ts_very_slow_last >= UI_UPDATE_VERY_SLOW_MS);
-    bool update_slow      = (ts_now - ui_ts_slow_last >= UI_UPDATE_SLOW_MS);
-    bool update_fast      = (ts_now - ui_ts_fast_last >= UI_UPDATE_FAST_MS);
+    bool update_very_slow = (ts_now - ui_ts_very_slow_last >= UI_EVENT_LOOP_FREQ_VERY_SLOW_MS);
+    bool update_slow      = (ts_now - ui_ts_slow_last >= UI_EVENT_LOOP_FREQ_SLOW_MS);
+    bool update_fast      = (ts_now - ui_ts_fast_last >= UI_EVENT_LOOP_FREQ_FAST_MS);
 
     //
-    // This tick is for either
-    // a) ascii mode
+    // This is for either
+    // a) widget display when in ascii mode, which needs to be faster
     // b) when in pixel art mode and between levels and waiting for level fade in
     //
     if (unlikely(update_very_slow)) {
@@ -147,7 +147,7 @@ void sdl_loop(void)
     }
 
     //
-    // Less frequent updates
+    // Less frequent updates like updating the FPS
     //
     if (unlikely(update_slow)) {
       ui_ts_slow_last = ts_now;
@@ -168,13 +168,12 @@ void sdl_loop(void)
       //
       // Update FPS counter. Used for damping AI even if not shown.
       //
-      game->fps_value = (1000 / UI_UPDATE_SLOW_MS) * frames;
+      game->fps_value = (1000 / UI_EVENT_LOOP_FREQ_SLOW_MS) * frames;
       frames          = 0;
     }
 
     //
-    // Do processing of some things, like reading the keyboard or doing
-    // stuff with widgets only occasionally if we do not need to.
+    // Do faster processing of events, like reading the keyboard and updating widgets.
     //
     if (unlikely(update_fast)) {
       ui_ts_fast_last = ts_now;

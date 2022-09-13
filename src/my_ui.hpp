@@ -55,12 +55,26 @@
 #define UI_TYPE_ASCII                1
 #define UI_TYPE_PIXELART             0
 #define UI_TYPES_MAX                 2
-#define UI_UPDATE_FAST_MS            (g_opt_ascii ? 10 : 5)
-#define UI_UPDATE_SLOW_MS            (g_opt_ascii ? 20 : 10) // FPS and game status
-#define UI_UPDATE_VERY_SLOW_MS       (g_opt_ascii ? 40 : 20) // Level tick in ascii mode
 #define UI_WID_POPUP_WIDTH_NORMAL    24
 #define UI_WID_POPUP_WIDTH_WIDE      38
 #define UI_WID_SAVE_SLOTS            10 // How many save game slots
+
+//
+// Do faster processing of events, like reading the keyboard and updating widgets.
+//
+#define UI_EVENT_LOOP_FREQ_FAST_MS (g_opt_ascii ? 10 : 5)
+
+//
+// Less frequent updates like updating the FPS.
+//
+#define UI_EVENT_LOOP_FREQ_SLOW_MS (g_opt_ascii ? 20 : 10)
+
+//
+// This is for either
+// a) level tick when in ascii mode.
+// b) waiting for level fade in when in pixel art mode.
+//
+#define UI_EVENT_LOOP_FREQ_VERY_SLOW_MS (g_opt_ascii ? 40 : 20)
 
 enum {
   UI_WID_STYLE_SPARSE_NONE = -1, // Used for widgets with their own backgrounds
