@@ -44,16 +44,13 @@ static void wid_thing_info_placement(point &tl, point &br, int height)
 
   int offset = 8;
 
-  if (ascii_mouse_x <= UI_LEFTBAR_WIDTH + UI_THING_INFO_WIDTH) {
-    tl = make_point(UI_LEFTBAR_WIDTH + offset, TERM_HEIGHT - 2 - height);
-    br = make_point(UI_LEFTBAR_WIDTH + offset + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
-  } else if (ascii_mouse_x <= TERM_WIDTH / 2) {
-    tl = make_point(TERM_WIDTH / 2 + offset, TERM_HEIGHT - 2 - height);
-    br = make_point(TERM_WIDTH / 2 + offset + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
-  } else {
-    tl = make_point(UI_LEFTBAR_WIDTH, TERM_HEIGHT - 2 - height);
-    br = make_point(UI_LEFTBAR_WIDTH + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
+  int x = ascii_mouse_x - UI_THING_INFO_WIDTH - offset;
+  if (x < 0) {
+    x = ascii_mouse_x + offset;
   }
+
+  tl = make_point(x, TERM_HEIGHT - 2 - height);
+  br = make_point(tl.x + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
 }
 
 void Game::wid_thing_info_destroy_immediate(void)
