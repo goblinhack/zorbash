@@ -307,13 +307,15 @@ void Game::place_player(void)
         level->thing_new("water", point(x + 3, y));
         level->thing_new("water", point(x + 4, y));
       }
-      level->thing_new("barrel", point(x + 1, y));
-      level->thing_new("zoblin", point(x + 2, y));
-      level->thing_new("spiderweb", point(x + 2, y + 1));
-      level->thing_new("bat_lesser", point(x + 2, y + 1));
-      level->thing_new("spiderweb", point(x + 2, y + 2));
-      level->thing_new("bat_lesser", point(x + 2, y + 2));
-      level->thing_new("bat_lesser", point(x + 4, y));
+      if (0) {
+        level->thing_new("barrel", point(x + 1, y));
+        level->thing_new("zoblin", point(x + 2, y));
+        level->thing_new("spiderweb", point(x + 2, y + 1));
+        level->thing_new("bat_lesser", point(x + 2, y + 1));
+        level->thing_new("spiderweb", point(x + 2, y + 2));
+        level->thing_new("bat_lesser", point(x + 2, y + 2));
+        level->thing_new("bat_lesser", point(x + 4, y));
+      }
       // level->thing_new("flesh_golem", point(x, y + 3));
       // level->thing_new("lava", point(x, y + 5));
       // level->thing_new("lava", point(x, y + 6));
