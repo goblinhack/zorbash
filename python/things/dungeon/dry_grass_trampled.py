@@ -44,7 +44,7 @@ def tp_init(name, tiles=[]):
 
 def init():
     tp_init(
-        name="is_dry_grass_trampled",
+        name="dry_grass_trampled",
         tiles=[
             "is_dry_grass_trampled.1",
             "is_dry_grass_trampled.2",
