@@ -103,7 +103,12 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
     // If stuck in a web then don't flap wings.
     //
     if (is_stuck_currently()) {
-      return;
+      //
+      // But need to have the final dead anim even if stuck
+      //
+      if (! is_dead_or_dying()) {
+        return;
+      }
     }
 
     //

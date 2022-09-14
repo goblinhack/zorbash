@@ -560,17 +560,48 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   }
 
   //
+  // Critical attach optins
+  //
+  if (d10000() < crit_chance_d10000()) {
+    attack_options->crit = true;
+  }
+
+  if (! attack_options->crit) {
+    if (victim->is_stuck_currently()) {
+      if (d10000() < crit_chance_d10000()) {
+        attack_options->crit = true;
+      }
+    }
+  }
+
+  if (victim->is_sleeping) {
+    attack_options->crit = true;
+  }
+
+  int i_rolled = d20();
+
+  if (i_rolled == 20) {
+    attack_options->crit = true;
+  }
+
+  //
   // Too tired to attack
   //
   if (is_able_to_tire()) {
     if (stamina() < 5) {
-      if (is_player()) {
-        if (d20roll_under(stat_con_total())) {
-          msg("You are so tired but dig deep and attack!");
-        } else {
-          msg("You are too tired to attack.");
-          game->tick_begin("too tired to attack");
-          return false;
+      if (attack_options->crit) {
+        if (is_player()) {
+          msg("You are so tired but have a surge of energy!");
+        }
+      } else {
+        if (is_player()) {
+          if (d20roll_under(stat_con_total())) {
+            msg("You are so tired but dig deep and attack!");
+          } else {
+            msg("You are too tired to attack.");
+            game->tick_begin("too tired to attack");
+            return false;
+          }
         }
       }
     }
@@ -580,8 +611,10 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   // Too groggy to attack
   //
   if ((game->tick_current - infop()->tick_last_awoke < 2)) {
-    dbg("Just woke up, cannot attack yet");
-    return false;
+    if (! attack_options->crit) {
+      dbg("Just woke up, cannot attack yet");
+      return false;
+    }
   }
 
   //
@@ -633,6 +666,16 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     auto attack_bonus = stat_att_total() - stat_att_penalties_total();
     if (owner) {
       attack_bonus = owner->stat_att_total() - owner->stat_att_penalties_total();
+    }
+
+    //
+    // If a critical hit then ignore any negative attack bonus. This gives a 1 in 20 chance even
+    // in bad siturations of achieving some damage.
+    //
+    if (attack_options->crit) {
+      if (attack_bonus < 0) {
+        attack_bonus = 1;
+      }
     }
 
     auto stat_def = victim->stat_def_total() - victim->stat_def_penalties_total();
@@ -956,6 +999,15 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     }
 
     //
+    // Ensure some damage if a critical hit.
+    //
+    if (attack_options->crit) {
+      if (attack_options->damage < 1) {
+        attack_options->damage = 10;
+      }
+    }
+
+    //
     // An attack counts as making noise.
     //
     if (owner) {
@@ -974,7 +1026,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         //
         // If hitting a rock with a damaged weapon, give more feedback as to why there is no damage.
         //
-        if (is_weapon() && (weapon_damaged_pct() < 100)) {
+        if (is_weapon() && (weapon_damaged_pct() > 0)) {
           msg("Your damaged weapon inflicts no damage on %s.", victim->text_the().c_str());
         } else {
           msg("You inflict no damage on %s.", victim->text_the().c_str());
@@ -1018,22 +1070,6 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
 
     bool missed = false;
 
-    if (d10000() < crit_chance_d10000()) {
-      attack_options->crit = true;
-    }
-
-    if (! attack_options->crit) {
-      if (victim->is_stuck_currently()) {
-        if (d10000() < crit_chance_d10000()) {
-          attack_options->crit = true;
-        }
-      }
-    }
-
-    if (victim->is_sleeping) {
-      attack_options->crit = true;
-    }
-
     //
     // See if we can bypass its defences
     //
@@ -1051,9 +1087,8 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         // Attack  is 1d20 + stat_att_total - penalties
         // Defence is        stat_def_total - penalties
         //
-        bool hit      = false;
-        int  to_hit   = stat_def;
-        int  i_rolled = d20();
+        bool hit    = false;
+        int  to_hit = stat_def;
 
         if (i_rolled == 20) {
           attack_options->crit = true;
