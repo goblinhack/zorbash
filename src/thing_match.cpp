@@ -334,7 +334,7 @@ bool Thing::matches(const std::string &what)
   if (is_droppable() && (what == "is_droppable")) {
     return true;
   }
-  if (is_dry_grass() && (what == "is_dry_grass")) {
+  if (is_dry_grass() && (what == "dry_grass")) {
     return true;
   }
   if (is_wet_grass() && (what == "is_wet_grass")) {
@@ -877,7 +877,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag71() && (what == "unused_flag71")) {
     return true;
   }
-  if (is_dry_grass_trampled() && (what == "is_dry_grass_trampled")) {
+  if (is_dry_grass_trampled() && (what == "dry_grass_trampled")) {
     return true;
   }
   if (is_cowardly() && (what == "is_cowardly")) {
@@ -1730,7 +1730,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_droppable") {
     return &Thing::is_droppable;
   }
-  if (what == "is_dry_grass") {
+  if (what == "dry_grass") {
     return &Thing::is_dry_grass;
   }
   if (what == "is_enchantable") {
@@ -2471,7 +2471,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag71") {
     return &Thing::unused_flag71;
   }
-  if (what == "is_dry_grass_trampled") {
+  if (what == "dry_grass_trampled") {
     return &Thing::is_dry_grass_trampled;
   }
   if (what == "is_cowardly") {
