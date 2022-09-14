@@ -1,6 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- Your damaged weapon inflicts no damage on the spiderweb.                                                                                     -->
 <!-- stuck debuff                                                                                                                                 -->
 <!-- stamina alert                                                                                                                                -->
 <!-- bat could not fly over monst stuck in web - bug ?                                                                                            -->

@@ -307,6 +307,7 @@ void Game::place_player(void)
         level->thing_new("water", point(x + 3, y));
         level->thing_new("water", point(x + 4, y));
       }
+      level->thing_new("spiderweb", point(x, y));
       if (0) {
         level->thing_new("barrel", point(x + 1, y));
         level->thing_new("zoblin", point(x + 2, y));

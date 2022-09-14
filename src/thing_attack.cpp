@@ -1027,7 +1027,13 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         // If hitting a rock with a damaged weapon, give more feedback as to why there is no damage.
         //
         if (is_weapon() && (weapon_damaged_pct() > 0)) {
-          msg("Your damaged weapon inflicts no damage on %s.", victim->text_the().c_str());
+          if (is_weapon() && (weapon_damaged_pct() > 50)) {
+            msg("Your heavily damaged weapon inflicts no damage on %s.", victim->text_the().c_str());
+          } else {
+            msg("Your damaged weapon inflicts no damage on %s.", victim->text_the().c_str());
+          }
+        } else if (stuck_count()) {
+          msg("You find it hard to move and inflict no damage on %s.", victim->text_the().c_str());
         } else {
           msg("You inflict no damage on %s.", victim->text_the().c_str());
         }
