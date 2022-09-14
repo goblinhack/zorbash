@@ -2,10 +2,10 @@ import my
 import tp
 
 
-def attack(me, thing):
-    if my.thing_possible_to_attack(me, thing):
-        if thing != me:
-            my.thing_hit(me, thing)
+def attack(me, it):
+    if my.thing_possible_to_attack(me, it):
+        if it != me:
+            my.thing_hit(me, it)
 
 
 def on_born(me, x, y):
@@ -23,8 +23,8 @@ def on_born(me, x, y):
                 my.spawn_at(me, "small_fire", x + dx, y + dy)
             if my.pcg_randint(1, 100) < 10:
                 my.spawn_at(me, "fire", x + dx, y + dy)
-            for thing in my.level_get_all(me, selection_x + dx, selection_y + dy):
-                attack(me, thing)
+            for it in my.level_get_all(me, selection_x + dx, selection_y + dy):
+                attack(me, it)
 
 
 def tp_init(name, text_long_name, text_short_name):

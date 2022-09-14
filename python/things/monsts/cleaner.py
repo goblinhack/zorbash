@@ -11,6 +11,15 @@ def on_idle(me, x, y):
         my.spawn_at_my_position(me, "acid1")
 
 
+def on_move(me, x, y):
+    for it in my.level_get_all(me, x, y):
+        if my.thing_possible_to_attack(me, it):
+            if my.thing_is_player(it):
+                my.thing_msg(me, "The dungeon cleaner engulfs you!")
+            else:
+                my.thing_msg(me, f"The dungeon cleaner engulfs the {my.thing_name_get(it)}.")
+
+
 def on_death(me, x, y):
     my.spawn_at_my_position(me, "green_splatter")
 
@@ -108,6 +117,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_death_do(self, "me.on_death()")
     my.on_death_drop_all_items(self, True)
     my.on_idle_tick_freq_dice(self, "1d5:me.on_idle()")
+    my.on_move_do(self, "me.on_move()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.on_you_nat_att_do(self, "me.on_you_nat_att()")
     my.rarity(self, my.RARITY_COMMON)

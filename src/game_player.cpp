@@ -79,7 +79,7 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("buff_undead_resist", point(x, y));
         t->buff_add(w);
       }
@@ -241,7 +241,6 @@ void Game::place_player(void)
         // level->thing_new("boots_fluffy", point(x, y - 2));
         // level->thing_new("boots_silence", point(x, y - 2));
         // level->thing_new("boots_teleport", point(x, y - 2));
-        // level->thing_new("cleaner", point(x, y + 1));
         // level->thing_new("mummy_necro", point(x + 5, y + 1));
         // level->thing_new("shield_woodon", point(x, y - 2));
         // level->thing_new("fire", point(x, y - 2));
@@ -307,7 +306,8 @@ void Game::place_player(void)
         level->thing_new("water", point(x + 3, y));
         level->thing_new("water", point(x + 4, y));
       }
-      level->thing_new("spiderweb", point(x, y));
+      level->thing_new("cleaner", point(x, y + 1));
+      // level->thing_new("spiderweb", point(x, y));
       if (0) {
         level->thing_new("barrel", point(x + 1, y));
         level->thing_new("zoblin", point(x + 2, y));

@@ -281,26 +281,20 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       }
     }
 
+    //
+    // Monsters update this when they run AI. The player however we need to do it prior to
+    // moving to avoid being able to escape pouncing monsters.
+    //
+    if (is_player()) {
+      is_stuck_update();
+    }
+
+    //
+    // Able to move?
+    //
     if (is_stuck_currently()) {
       if (is_player()) {
-        if (level->is_spiderweb(curr_at.x, curr_at.y)) {
-          if (attack_options->attack_at_set && (attack_options->attack_at != curr_at)) {
-            msg("You try to attack but the web sticks tightly to you!");
-          } else {
-            msg("You try to move but are trapped in a web!");
-          }
-          game->tick_begin("trapped in a web");
-        } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
-          if (attack_options->attack_at_set && (attack_options->attack_at != curr_at)) {
-            msg("You try to attack but are frozen!");
-          } else {
-            msg("You try to move but are frozen!");
-          }
-          game->tick_begin("trapped in ice");
-        } else {
-          msg("You cannot move!");
-          game->tick_begin("cannot move");
-        }
+        game->tick_begin("could not move");
       }
       lunge(future_pos);
       return false;

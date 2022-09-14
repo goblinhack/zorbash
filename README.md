@@ -1,9 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- stuck debuff                                                                                                                                 -->
-<!-- stamina alert                                                                                                                                -->
-<!-- bat could not fly over monst stuck in web - bug ?                                                                                            -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
 <!-- the X is wounded?                                                                                                                            -->
 <!-- a Z comes into view, it is wielding a Y                                                                                                      -->
