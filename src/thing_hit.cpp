@@ -1509,7 +1509,13 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   // make you colder.
   //
   if (real_hitter != this) {
-    temperature_incr(hitter->temperature_get() / 10);
+    //
+    // Only if the temperature is extreme enough.
+    //
+    auto hitter_temp = hitter->temperature_get();
+    if (abs(hitter_temp) >= TEMPERATURE_THRESHOLD) {
+      temperature_incr(hitter_temp / 10);
+    }
   }
 
   //

@@ -30,6 +30,7 @@
 #define THING_TICK_DURATION_TOO_LONG      10   // How many ms per thing tick we expect not to exceed
 #define THING_TICK_WAIT_TOO_LONG          100  // How many ticks we wait for things to stop moving
 #define TEMPERATURE_ROOM                  20   // Celcius
+#define TEMPERATURE_THRESHOLD             50   // Consider things being cold or hot when outside this range (-X..X)
 #define TEMPERATURE_MIN                   -273 // Celcius
 #define TEMPERATURE_MAX                   1000 // Celcius
 

@@ -47,6 +47,13 @@ void Thing::temperature_tick(void)
       if (t->immediate_owner() == this) {
         continue;
       }
+
+      //
+      // If a bag, ignore the temperature of the carrier.
+      //
+      if (immediate_owner() == t) {
+        continue;
+      }
     }
 
     if (! t->has_temperature()) {
@@ -54,7 +61,7 @@ void Thing::temperature_tick(void)
     }
 
     //
-    // So bats can flyu over lava
+    // So bats can fly over lava
     //
     if (t->is_lava()) {
       if (is_flying()) {
@@ -62,15 +69,24 @@ void Thing::temperature_tick(void)
       }
     }
 
-    location_temp += t->temperature;
-    location_temp_set = true;
+    //
+    // If we have 4 socks at 20 degrees and 1 torch at 100 degrees, what is the temperature of the tile ?
+    // It's not 180 degrees :) and it's not the average.
+    //
+    // To try and quantize this instead I ignore things that are within normal ranges and so we would only
+    // consider the torch.
+    //
+    if (abs(t->temperature) >= TEMPERATURE_THRESHOLD) {
+      location_temp += t->temperature;
+      location_temp_set = true;
 
-    dbg("Location temp now %d due to %s (%d)", location_temp, t->to_short_string().c_str(), t->temperature);
+      dbg("Location temp now %d due to %s (%d)", location_temp, t->to_short_string().c_str(), t->temperature);
 
-    if (location_temp > TEMPERATURE_MAX) {
-      location_temp = TEMPERATURE_MAX;
-    } else if (location_temp < TEMPERATURE_MIN) {
-      location_temp = TEMPERATURE_MIN;
+      if (location_temp > TEMPERATURE_MAX) {
+        location_temp = TEMPERATURE_MAX;
+      } else if (location_temp < TEMPERATURE_MIN) {
+        location_temp = TEMPERATURE_MIN;
+      }
     }
   }
   FOR_ALL_THINGS_END()
