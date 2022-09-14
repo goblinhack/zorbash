@@ -19,11 +19,11 @@ def tp_init(name, tiles=[]):
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
     my.is_combustible(self, True)
+    my.is_crushable(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hazard(self, True)
     my.is_hittable(self, True)
-    my.is_crushable(self, True)
     my.is_immune_to_cold(self, True)
     my.is_interesting(self, True)  # So robot can see and break out
     my.is_loggable(self, True)

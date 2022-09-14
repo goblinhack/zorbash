@@ -816,7 +816,7 @@ bool wid_rightbar_ascii_create(void)
       got_one = true;
       unused  = id;
     }
-    if (got_one || player->is_on_fire()) {
+    if (got_one) {
       {
         TRACE_AND_INDENT();
         y_at++;
@@ -851,10 +851,26 @@ bool wid_rightbar_ascii_create(void)
           }
         }
       }
+    }
+
+    if (player->is_on_fire() || player->stuck_count() || player->is_hungry || player->is_starving ||
+        player->is_sleeping || player->is_frozen || (player->stamina() < player->stamina_max() / 2) ||
+        (player->health() < player->health_max() / 2)) {
+      {
+        TRACE_AND_INDENT();
+        y_at++;
+        auto w = wid_new_square_button(wid_rightbar, "Status");
+        wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "Status");
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
+      }
       if (player->is_on_fire()) {
         y_at++;
         TRACE_AND_INDENT();
-        auto  w  = wid_new_square_button(wid_rightbar, "debuffs");
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
         wid_set_pos(w, tl, br);
@@ -863,7 +879,139 @@ bool wid_rightbar_ascii_create(void)
         wid_set_mode(w, WID_MODE_NORMAL);
         wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "On fire!");
+        wid_set_text(w, "Burning!");
+        wid_update(w);
+      }
+      if (player->is_frozen) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, LIGHTBLUE);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, LIGHTBLUE);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Frozen!");
+        wid_update(w);
+      }
+      if (player->is_sleeping) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Sleeping");
+        wid_update(w);
+      }
+      if (player->stuck_count()) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Stuck!");
+        wid_update(w);
+      }
+      if (player->is_starving) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Starving");
+        wid_update(w);
+      } else if (player->is_hungry) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Hungry");
+        wid_update(w);
+      }
+      if (player->stamina() < player->stamina_max() / 4) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Exhausted");
+        wid_update(w);
+      } else if (player->stamina() < player->stamina_max() / 2) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Tired");
+        wid_update(w);
+      }
+      if (player->health() < player->health_max() / 4) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Critical");
+        wid_update(w);
+      } else if (player->health() < player->health_max() / 2) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Injured");
         wid_update(w);
       }
     }

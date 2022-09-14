@@ -35,7 +35,7 @@ void Thing::grass_tick(void)
     }
 
     t->dead("trampled");
-    level->thing_new("dry_grass_trampled", t->curr_at);
+    level->thing_new("is_dry_grass_trampled", t->curr_at);
   }
   FOR_ALL_THINGS_END()
 }

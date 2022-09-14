@@ -1696,10 +1696,10 @@ int Thing::unused_flag71(void)
   return (tp()->unused_flag71());
 }
 
-int Thing::unused_flag72(void)
+int Thing::is_dry_grass_trampled(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag72());
+  return (tp()->is_dry_grass_trampled());
 }
 
 int Thing::is_cowardly(void)

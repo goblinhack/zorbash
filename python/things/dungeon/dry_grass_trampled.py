@@ -22,7 +22,7 @@ def tp_init(name, tiles=[]):
     my.is_combustible(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_when_hovering_over(self, True)
-    my.is_dry_grass(self, True)
+    my.is_dry_grass_trampled(self, True)
     my.is_interesting(self, True)
     my.is_temperature_change_sensitive(self, True)
     my.is_temperature_sensitive(self, True)
@@ -36,7 +36,7 @@ def tp_init(name, tiles=[]):
 
     for t in tiles:
         my.tile(self,
-                ascii_fg_char="-", ascii_bg_col_name="", ascii_fg_col_name="darkgreen",
+                ascii_fg_char="_", ascii_bg_col_name="", ascii_fg_col_name="darkgreen",
                 tile=t)
 
     my.tp_update(self)
@@ -44,26 +44,26 @@ def tp_init(name, tiles=[]):
 
 def init():
     tp_init(
-        name="dry_grass_trampled",
+        name="is_dry_grass_trampled",
         tiles=[
-            "dry_grass_trampled.1",
-            "dry_grass_trampled.2",
-            "dry_grass_trampled.3",
-            "dry_grass_trampled.4",
-            "dry_grass_trampled.5",
-            "dry_grass_trampled.6",
-            "dry_grass_trampled.7",
-            "dry_grass_trampled.8",
-            "dry_grass_trampled.9",
-            "dry_grass_trampled.10",
-            "dry_grass_trampled.11",
-            "dry_grass_trampled.12",
-            "dry_grass_trampled.13",
-            "dry_grass_trampled.14",
-            "dry_grass_trampled.15",
-            "dry_grass_trampled.16",
-            "dry_grass_trampled.17",
-            "dry_grass_trampled.18",
+            "is_dry_grass_trampled.1",
+            "is_dry_grass_trampled.2",
+            "is_dry_grass_trampled.3",
+            "is_dry_grass_trampled.4",
+            "is_dry_grass_trampled.5",
+            "is_dry_grass_trampled.6",
+            "is_dry_grass_trampled.7",
+            "is_dry_grass_trampled.8",
+            "is_dry_grass_trampled.9",
+            "is_dry_grass_trampled.10",
+            "is_dry_grass_trampled.11",
+            "is_dry_grass_trampled.12",
+            "is_dry_grass_trampled.13",
+            "is_dry_grass_trampled.14",
+            "is_dry_grass_trampled.15",
+            "is_dry_grass_trampled.16",
+            "is_dry_grass_trampled.17",
+            "is_dry_grass_trampled.18",
         ],
     )
 

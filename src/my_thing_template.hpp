@@ -632,7 +632,7 @@ private:
   int _unused_flag7 {};
   int _unused_flag70 {};
   int _unused_flag71 {};
-  int _unused_flag72 {};
+  int _is_dry_grass_trampled {};
   int _is_cowardly {};
   int _appearing_chance_d1000 {};
   int _is_throw_blocker {};
@@ -1645,7 +1645,7 @@ public:
   int unused_flag6(void) const;
   int unused_flag70(void) const;
   int unused_flag71(void) const;
-  int unused_flag72(void) const;
+  int is_dry_grass_trampled(void) const;
   int is_cowardly(void) const;
   int appearing_chance_d1000(void) const;
   int is_throw_blocker(void) const;
@@ -2322,7 +2322,7 @@ public:
   void unused_flag6_set(int v);
   void unused_flag70_set(int v);
   void unused_flag71_set(int v);
-  void unused_flag72_set(int v);
+  void is_dry_grass_trampled_set(int v);
   void is_cowardly_set(int v);
   void appearing_chance_d1000_set(int v);
   void is_throw_blocker_set(int v);

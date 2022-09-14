@@ -592,7 +592,7 @@ PyObject *thing_unused_flag69(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag70(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag71(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag72(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_dry_grass_trampled(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_cowardly(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_appearing_chance_d1000(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_throw_blocker(PyObject *obj, PyObject *args, PyObject *keywds);

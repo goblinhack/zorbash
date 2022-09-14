@@ -122,7 +122,7 @@ std::initializer_list< std::string > tps = {
     "double_shovel_swing",
     "dry_grass",
     "dry_grass_dead",
-    "dry_grass_trampled",
+    "is_dry_grass_trampled",
     "effect_descent_radial",
     "enchantstone",
     "exit1",

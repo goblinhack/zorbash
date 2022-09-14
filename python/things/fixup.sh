@@ -522,7 +522,7 @@ do
       unused_flag7 \
       unused_flag70 \
       unused_flag71 \
-      unused_flag72 \
+      is_dry_grass_trampled \
       is_cowardly \
       appearing_chance_d1000 \
       is_throw_blocker \

@@ -677,7 +677,7 @@ int  Tp::unused_flag69(void) const { return _unused_flag69; }
 int  Tp::unused_flag6(void) const { return _unused_flag6; }
 int  Tp::unused_flag70(void) const { return _unused_flag70; }
 int  Tp::unused_flag71(void) const { return _unused_flag71; }
-int  Tp::unused_flag72(void) const { return _unused_flag72; }
+int  Tp::is_dry_grass_trampled(void) const { return _is_dry_grass_trampled; }
 int  Tp::is_cowardly(void) const { return _is_cowardly; }
 int  Tp::appearing_chance_d1000(void) const { return _appearing_chance_d1000; }
 int  Tp::is_throw_blocker(void) const { return _is_throw_blocker; }
@@ -1352,7 +1352,7 @@ void Tp::unused_flag69_set(int v) { _unused_flag69 = v; }
 void Tp::unused_flag6_set(int v) { _unused_flag6 = v; }
 void Tp::unused_flag70_set(int v) { _unused_flag70 = v; }
 void Tp::unused_flag71_set(int v) { _unused_flag71 = v; }
-void Tp::unused_flag72_set(int v) { _unused_flag72 = v; }
+void Tp::is_dry_grass_trampled_set(int v) { _is_dry_grass_trampled = v; }
 void Tp::is_cowardly_set(int v) { _is_cowardly = v; }
 void Tp::appearing_chance_d1000_set(int v) { _appearing_chance_d1000 = v; }
 void Tp::is_throw_blocker_set(int v) { _is_throw_blocker = v; }
