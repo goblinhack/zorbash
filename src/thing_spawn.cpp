@@ -94,7 +94,7 @@ bool Thing::spawn_next_to(const std::string &what)
   // If a tick is pending there should be no need, as we will do a location check.
   //
   if (game->tick_requested.empty()) {
-    c->location_check_forced_all_things_at();
+    c->location_check_all_things_at();
   }
 
   return true;
@@ -172,7 +172,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   // Or if something we spawned at needs to react to us
   //
   if (game->tick_requested.empty()) {
-    c->location_check_forced_all_things_at();
+    c->location_check_all_things_at();
   }
 
   return true;
@@ -263,13 +263,13 @@ bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &wh
       // Or if something we spawned at needs to react to us
       //
       if (game->tick_requested.empty()) {
-        c->location_check_forced_all_things_at();
+        c->location_check_all_things_at();
       }
     }
   }
 
   if (game->tick_requested.empty()) {
-    location_check_forced_all_things_at();
+    location_check_all_things_at();
   }
   return true;
 }
@@ -326,18 +326,19 @@ bool Thing::spawn_radius_range(const std::string &what, int radius_min, int radi
         c->spawned_owner_set(this);
       }
 
+      c->con("HELLO");
       //
       // Check if we are newly spawned over a chasm
       // Or if something we spawned at needs to react to us
       //
       if (game->tick_requested.empty()) {
-        c->location_check_forced_all_things_at();
+        c->location_check_all_things_at();
       }
     }
   }
 
   if (game->tick_requested.empty()) {
-    location_check_forced_all_things_at();
+    location_check_all_things_at();
   }
   return true;
 }
@@ -447,7 +448,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
       // Or if something we spawned at needs to react to us
       //
       if (game->tick_requested.empty()) {
-        c->location_check_forced_all_things_at();
+        c->location_check_all_things_at();
       }
       spawned++;
       break;
@@ -455,7 +456,7 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
   }
 
   if (game->tick_requested.empty()) {
-    location_check_forced_all_things_at();
+    location_check_all_things_at();
   }
   return spawned;
 }
@@ -628,7 +629,7 @@ Thingp Thing::spawn_at_if_possible(const std::string &what)
   // Or if something we spawned at needs to react to us
   //
   if (game->tick_requested.empty()) {
-    c->location_check_forced_all_things_at();
+    c->location_check_all_things_at();
   }
 
   return c;
@@ -657,7 +658,7 @@ Thingp Thing::spawn_at(const std::string &what, point p)
   // Or if something we spawned at needs to react to us
   //
   if (game->tick_requested.empty()) {
-    it->location_check_forced_all_things_at();
+    it->location_check_all_things_at();
   }
 
   return it;
@@ -676,7 +677,7 @@ Thingp Thing::spawn_owned_thing_at_my_position(const std::string &what)
   // Or if something we spawned at needs to react to us
   //
   if (game->tick_requested.empty()) {
-    it->location_check_forced_all_things_at();
+    it->location_check_all_things_at();
   }
 
   return it;

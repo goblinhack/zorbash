@@ -927,7 +927,35 @@ bool wid_rightbar_ascii_create(void)
         wid_set_text(w, "Stuck!");
         wid_update(w);
       }
-      if (player->is_starving) {
+      if (player->is_gorged) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Gorged");
+        wid_update(w);
+      } else if (player->is_satiated) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Satiated");
+        wid_update(w);
+      } else if (player->is_starving) {
         y_at++;
         TRACE_AND_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");

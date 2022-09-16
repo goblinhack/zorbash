@@ -216,6 +216,7 @@ public:
   uint64_t is_frozen                                    : 1 {}; // frozen by ice and cannot move
   uint64_t is_gfx_ascii_animated                        : 1 {};
   uint64_t is_gfx_pixelart_animated                     : 1 {};
+  uint64_t is_gorged                                    : 1 {};
   uint64_t is_hidden                                    : 1 {};
   uint64_t is_hungry                                    : 1 {};
   uint64_t is_in_lava                                   : 1 {};
@@ -229,6 +230,7 @@ public:
   uint64_t is_resurrecting                              : 1 {}; // is currently resurrecing
   uint64_t is_resurrection_blocked                      : 1 {}; // blocked from resurrection
   uint64_t is_ring2                                     : 1 {}; // for 2nd rings
+  uint64_t is_satiated                                  : 1 {};
   uint64_t is_scheduled_for_death                       : 1 {}; // will die in next game loop
   uint64_t is_scheduled_for_gc                          : 1 {};
   uint64_t is_scheduled_for_jump_end                    : 1 {};
@@ -537,8 +539,8 @@ public:
   bool is_hated_by_me(const Thingp it);
   bool is_on_fire(void);
   bool is_state_sleeping(void);
-  bool is_stuck_currently(void);
   bool is_stuck_check(void);
+  bool is_stuck_currently(void);
   bool is_target_select(Thingp item);
   bool is_to_be_avoided(Thingp attacker);
   bool item_choose_target(Thingp item, Thingp victim = nullptr);
@@ -921,6 +923,7 @@ public:
   int ai_resent_count(void);
   int ai_shove_chance_d1000(void);
   int ai_wanderer(void);
+  int appearing_chance_d1000(void);
   int attack_eater(void);
   int attack_engulf_chance_d1000(void);
   int attack_humanoid(void);
@@ -1146,9 +1149,16 @@ public:
   int health_set(int);
   int health(void);
   int hunger_clock_tick_freq(void);
-  int hunger_health_pct(void);
+  int hunger_decr(int);
+  int hunger_decr(void);
+  int hunger_hunger_pct(void);
+  int hunger_incr(int);
+  int hunger_incr(void);
+  int hunger_is_hungry_at_pct(void);
   int hunger_is_insatiable(void);
-  int hunger_starving_pct(void);
+  int hunger_is_starving_at_pct(void);
+  int hunger_set(int);
+  int hunger(void);
   int idle_count_decr(int);
   int idle_count_decr(void);
   int idle_count_incr(int);
@@ -1245,6 +1255,7 @@ public:
   int is_biome_dungeon(void);
   int is_biome_swamp(void);
   int is_bleeder(void);
+  int is_block_of_ice(void);
   int is_bones(void);
   int is_boots(void);
   int is_brazier(void);
@@ -1269,6 +1280,7 @@ public:
   int is_corpse(void);
   int is_corpse_with_bones(void);
   int is_corridor(void);
+  int is_cowardly(void);
   int is_critical_to_level(void);
   int is_crushable(void);
   int is_crystal(void);
@@ -1297,6 +1309,7 @@ public:
   int is_dirt(void);
   int is_door(void);
   int is_droppable(void);
+  int is_dry_grass_trampled(void);
   int is_dry_grass(void);
   int is_enchantable(void);
   int is_enchantstone(void);
@@ -1333,7 +1346,6 @@ public:
   int is_hittable(void);
   int is_hit(Thingp hitter, AttackOptions *, int damage);
   int is_humanoid(void);
-  int is_block_of_ice(void);
   int is_immune_to_acid(void);
   int is_immune_to_cold(void);
   int is_immune_to_draining(void);
@@ -1438,6 +1450,7 @@ public:
   int is_temperature_change_sensitive(void);
   int is_temperature_sensitive(void);
   int is_throwable(void);
+  int is_throw_blocker(void);
   int is_tickable(void);
   int is_tireless(void);
   int is_tmp_thing(void);
@@ -1953,10 +1966,6 @@ public:
   int unused_flag6(void);
   int unused_flag70(void);
   int unused_flag71(void);
-  int is_dry_grass_trampled(void);
-  int is_cowardly(void);
-  int appearing_chance_d1000(void);
-  int is_throw_blocker(void);
   int unused_flag7(void);
   int unused_flag87(void);
   int unused_flag8(void);
@@ -2160,8 +2169,6 @@ public:
   uint8_t is_visible(void);
   uint8_t z_prio(void);
 
-  void is_stuck_update(void);
-  void unstuck(void);
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
@@ -2197,6 +2204,7 @@ public:
   void blit_upside_down(int fbo);
   void blit_wall_cladding(point tl, point br, const ThingTiles *tiles);
   void blit_wall_shadow(point tl, point br, const ThingTiles *tiles);
+  void block_of_ice_tick(void);
   void born_set(point3d);
   void botcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void botcon_(const char *fmt, va_list args); // compile error without
@@ -2283,7 +2291,6 @@ public:
   void hooks_remove(void);
   void hunger_clock_tick(void);
   void hunger_update(void);
-  void block_of_ice_tick(void);
   void inherit_from(Thingp it);
   void init_hue(void);
   void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);
@@ -2291,6 +2298,7 @@ public:
   void interpolated_at_set(fpoint v);
   void inventory_particle(Thingp what, uint32_t slot);
   void inventory_particle(Thingp what, uint32_t slot, Thingp particle_target);
+  void is_stuck_update(void);
   void jump_end(void);
   void killed(Thingp defeater, const char *reason);
   void killed(Thingp defeater, const std::string &reason);
@@ -2306,8 +2314,6 @@ public:
   void light_dist_including_torch_effect_get(uint8_t &light_dist);
   void light_dist_update_including_torch_effect(uint8_t &light_dist);
   void location_check_all_things_at(void);
-  void location_check_forced_all_things_at(void);
-  void location_check_forced(void);
   void location_check(void);
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void log_(const char *fmt, va_list args); // compile error without
@@ -2336,11 +2342,13 @@ public:
   void new_itemsp(void);
   void new_light(point offset, int light_dist);
   void new_light(point offset, int light_dist, color col, int fbo);
+  void noop(void);
   void notify_followers_of_death_of_my_leader(void);
   void notify_of_death_of_my_leader(void);
   void on_born(void);
   void on_death_of_a_follower(Thingp leader);
   void on_death_of_my_leader(void);
+  void on_dropped(void);
   void on_enchant(void);
   void on_equip(Thingp what);
   void on_fall(void);
@@ -2359,10 +2367,8 @@ public:
   void on_stuck(void);
   void on_swing(Thingp what);
   void on_teleport(void);
-  void on_thrown(void);
-  void on_dropped(void);
-  void noop(void);
   void on_thrown_callback(void);
+  void on_thrown(void);
   void on_unequip(Thingp what);
   void on_use(Thingp what);
   void on_use(Thingp what, Thingp target);
@@ -2425,6 +2431,7 @@ public:
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);
   void unleash_spawners_things(void);
+  void unstuck(void);
   void update_all(void);
   void update_interpolated_position(void);
   void update_light(void);

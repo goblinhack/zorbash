@@ -493,8 +493,7 @@ void Level::tick_(void)
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     //
-    // Need to do this even for dead things, so corpses don't hover over
-    // chasms.
+    // Need to do this even for dead things, so corpses don't hover over chasms.
     //
     t->location_check();
   }

@@ -158,6 +158,25 @@ int Thing::stat_def_penalties_total(void)
   }
 
   //
+  // Hunger penalties
+  //
+  if (is_starving) {
+    int p = THING_PENALTY_STARVING;
+    penalty += p;
+    if (penalty != prev) {
+      prev = penalty;
+      dbg2("AC penalty: starving %d", p);
+    }
+  } else if (is_hungry) {
+    int p = THING_PENALTY_HUNGER;
+    penalty += p;
+    if (penalty != prev) {
+      prev = penalty;
+      dbg2("AC penalty: hunger %d", p);
+    }
+  }
+
+  //
   // Terrain penalties
   //
   if (! is_aquatic() && ! buff_find_is_aquatic()) {

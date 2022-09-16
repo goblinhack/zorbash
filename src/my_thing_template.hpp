@@ -106,6 +106,7 @@ private:
   int _ai_resent_count {};
   int _ai_shove_chance_d1000 {};
   int _ai_wanderer {};
+  int _appearing_chance_d1000 {};
   int _attack_eater {};
   int _attack_engulf_chance_d1000 {};
   int _attack_humanoid {};
@@ -199,9 +200,9 @@ private:
   int _gfx_water {};
   int _has_temperature {};
   int _hunger_clock_tick_freq {};
-  int _hunger_health_pct {};
+  int _hunger_is_hungry_at_pct {};
   int _hunger_is_insatiable {};
-  int _hunger_starving_pct {};
+  int _hunger_is_starving_at_pct {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
   int _is_able_to_attack_mobs {};
@@ -275,6 +276,7 @@ private:
   int _is_biome_dungeon {};
   int _is_biome_swamp {};
   int _is_bleeder {};
+  int _is_block_of_ice {};
   int _is_bones {};
   int _is_boots {};
   int _is_brazier {};
@@ -298,6 +300,7 @@ private:
   int _is_corpse_on_death {};
   int _is_corpse_with_bones {};
   int _is_corridor {};
+  int _is_cowardly {};
   int _is_critical_to_level {};
   int _is_crushable {};
   int _is_crystal {};
@@ -324,6 +327,7 @@ private:
   int _is_door {};
   int _is_droppable {};
   int _is_dry_grass {};
+  int _is_dry_grass_trampled {};
   int _is_enchantable {};
   int _is_enchantstone {};
   int _is_engulfer {};
@@ -358,7 +362,6 @@ private:
   int _is_helmet {};
   int _is_hittable {};
   int _is_humanoid {};
-  int _is_block_of_ice {};
   int _is_immune_to_acid {};
   int _is_immune_to_cold {};
   int _is_immune_to_draining {};
@@ -464,6 +467,7 @@ private:
   int _is_temperature_sensitive {};
   int _is_the_grid {};
   int _is_throwable {};
+  int _is_throw_blocker {};
   int _is_tickable {}; // e.g. a monst or player or something moveable
   int _is_tireless {};
   int _is_tmp_thing {};
@@ -632,10 +636,6 @@ private:
   int _unused_flag7 {};
   int _unused_flag70 {};
   int _unused_flag71 {};
-  int _is_dry_grass_trampled {};
-  int _is_cowardly {};
-  int _appearing_chance_d1000 {};
-  int _is_throw_blocker {};
   int _unused_flag8 {};
   int _unused_flag87 {};
   int _unused_flag9 {};
@@ -692,6 +692,7 @@ private:
   std::string _on_death_do;
   std::string _on_death_of_a_follower_do;
   std::string _on_death_of_my_leader_do;
+  std::string _on_dropped_do;
   std::string _on_enchant_do;
   std::string _on_equip_do;
   std::string _on_fall_do;
@@ -768,7 +769,6 @@ private:
   std::string _on_swing_do;
   std::string _on_teleport_do;
   std::string _on_thrown_do;
-  std::string _on_dropped_do;
   std::string _on_tick_do;
   std::string _on_unequip_do;
   std::string _on_use_do;
@@ -1108,6 +1108,7 @@ public:
   int ai_resent_count(void) const;
   int ai_shove_chance_d1000(void) const;
   int ai_wanderer(void) const;
+  int appearing_chance_d1000(void) const;
   int attack_eater(void) const;
   int attack_engulf_chance_d1000(void) const;
   int attack_humanoid(void) const;
@@ -1213,9 +1214,9 @@ public:
   int gfx_pixelart_wobbles_when_hit(void) const;
   int gfx_water(void) const;
   int hunger_clock_tick_freq(void) const;
-  int hunger_health_pct(void) const;
+  int hunger_is_hungry_at_pct(void) const;
   int hunger_is_insatiable(void) const;
-  int hunger_starving_pct(void) const;
+  int hunger_is_starving_at_pct(void) const;
   int internal_has_dir_anim(void) const;
   int internal_has_hp_anim(void) const;
   int is_able_to_attack_mobs(void) const;
@@ -1289,6 +1290,7 @@ public:
   int is_biome_dungeon(void) const;
   int is_biome_swamp(void) const;
   int is_bleeder(void) const;
+  int is_block_of_ice(void) const;
   int is_bones(void) const;
   int is_boots(void) const;
   int is_brazier(void) const;
@@ -1312,6 +1314,7 @@ public:
   int is_corpse_on_death(void) const;
   int is_corpse_with_bones(void) const;
   int is_corridor(void) const;
+  int is_cowardly(void) const;
   int is_critical_to_level(void) const;
   int is_crushable(void) const;
   int is_crystal(void) const;
@@ -1337,6 +1340,7 @@ public:
   int is_dirt(void) const;
   int is_door(void) const;
   int is_droppable(void) const;
+  int is_dry_grass_trampled(void) const;
   int is_dry_grass(void) const;
   int is_enchantable(void) const;
   int is_enchantstone(void) const;
@@ -1372,7 +1376,6 @@ public:
   int is_helmet(void) const;
   int is_hittable(void) const;
   int is_humanoid(void) const;
-  int is_block_of_ice(void) const;
   int is_immune_to_acid(void) const;
   int is_immune_to_cold(void) const;
   int is_immune_to_draining(void) const;
@@ -1477,6 +1480,7 @@ public:
   int is_temperature_sensitive(void) const;
   int is_the_grid(void) const;
   int is_throwable(void) const;
+  int is_throw_blocker(void) const;
   int is_tickable(void) const;
   int is_tireless(void) const;
   int is_tmp_thing(void) const;
@@ -1645,10 +1649,6 @@ public:
   int unused_flag6(void) const;
   int unused_flag70(void) const;
   int unused_flag71(void) const;
-  int is_dry_grass_trampled(void) const;
-  int is_cowardly(void) const;
-  int appearing_chance_d1000(void) const;
-  int is_throw_blocker(void) const;
   int unused_flag7(void) const;
   int unused_flag87(void) const;
   int unused_flag8(void) const;
@@ -1661,6 +1661,7 @@ public:
   void ai_resent_count_set(int v);
   void ai_shove_chance_d1000_set(int v);
   void ai_wanderer_set(int v);
+  void appearing_chance_d1000_set(int v);
   void attack_eater_set(int v);
   void attack_engulf_chance_d1000_set(int v);
   void attack_humanoid_set(int v);
@@ -1754,9 +1755,9 @@ public:
   void gfx_pixelart_wobbles_when_hit_set(int v);
   void gfx_water_set(int v);
   void hunger_clock_tick_freq_set(int v);
-  void hunger_health_pct_set(int v);
+  void hunger_is_hungry_at_pct_set(int v);
   void hunger_is_insatiable_set(int v);
-  void hunger_starving_pct_set(int v);
+  void hunger_is_starving_at_pct_set(int v);
   void internal_has_dir_anim_set(int v);
   void internal_has_hp_anim_set(int v);
   void is_able_to_attack_mobs_set(int v);
@@ -1831,6 +1832,7 @@ public:
   void is_biome_dungeon_set(int v);
   void is_biome_swamp_set(int v);
   void is_bleeder_set(int v);
+  void is_block_of_ice_set(int v);
   void is_bones_set(int v);
   void is_boots_set(int v);
   void is_brazier_set(int v);
@@ -1854,6 +1856,7 @@ public:
   void is_corpse_on_death_set(int v);
   void is_corpse_with_bones_set(int v);
   void is_corridor_set(int v);
+  void is_cowardly_set(int v);
   void is_critical_to_level_set(int v);
   void is_crushable_set(int v);
   void is_crystal_set(int v);
@@ -1880,6 +1883,7 @@ public:
   void is_door_set(int v);
   void is_droppable_set(int v);
   void is_dry_grass_set(int v);
+  void is_dry_grass_trampled_set(int v);
   void is_enchantable_set(int v);
   void is_enchantstone_set(int v);
   void is_engulfer_set(int v);
@@ -1914,7 +1918,6 @@ public:
   void is_helmet_set(int v);
   void is_hittable_set(int v);
   void is_humanoid_set(int v);
-  void is_block_of_ice_set(int v);
   void is_immune_to_acid_set(int v);
   void is_immune_to_cold_set(int v);
   void is_immune_to_draining_set(int v);
@@ -2019,6 +2022,7 @@ public:
   void is_temperature_sensitive_set(int v);
   void is_the_grid_set(int v);
   void is_throwable_set(int v);
+  void is_throw_blocker_set(int v);
   void is_tickable_set(int v);
   void is_tireless_set(int v);
   void is_tmp_thing_set(int v);
@@ -2093,6 +2097,7 @@ public:
   void on_death_is_open_set(int v);
   void on_death_of_a_follower_do_set(const std::string &v);
   void on_death_of_my_leader_do_set(const std::string &v);
+  void on_dropped_do_set(const std::string &v);
   void on_enchant_do_set(const std::string &v);
   void on_equip_do_set(const std::string &v);
   void on_fall_do_set(const std::string &v);
@@ -2168,7 +2173,6 @@ public:
   void on_swing_do_set(const std::string &v);
   void on_teleport_do_set(const std::string &v);
   void on_thrown_do_set(const std::string &v);
-  void on_dropped_do_set(const std::string &v);
   void on_tick_do_set(const std::string &v);
   void on_unequip_do_set(const std::string &v);
   void on_use_do_set(const std::string &v);
@@ -2322,10 +2326,6 @@ public:
   void unused_flag6_set(int v);
   void unused_flag70_set(int v);
   void unused_flag71_set(int v);
-  void is_dry_grass_trampled_set(int v);
-  void is_cowardly_set(int v);
-  void appearing_chance_d1000_set(int v);
-  void is_throw_blocker_set(int v);
   void unused_flag7_set(int v);
   void unused_flag87_set(int v);
   void unused_flag8_set(int v);

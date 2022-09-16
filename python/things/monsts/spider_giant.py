@@ -71,7 +71,6 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_outlined(self, True)
     my.health_initial_dice(self, "4d15+4")
     my.hunger_clock_tick_freq(self, 50)
-    my.hunger_health_pct(self, 95)
     my.hunger_is_insatiable(self, True)
     my.is_able_to_fall(self, True)
     my.is_able_to_fire_at(self, True)

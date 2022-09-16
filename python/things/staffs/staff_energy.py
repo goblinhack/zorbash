@@ -55,6 +55,10 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 
+def on_fire(me, x, y):
+    explode(me, x, y)
+
+
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if my.thing_is_player(owner):
@@ -78,7 +82,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "200")
     my.health_initial_dice(self, "20+1d10")
-    my.on_you_are_on_fire_do(self, "me.explode()")
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)
     my.is_biome_dungeon(self, True)
@@ -91,6 +94,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_item_magical(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
+    my.is_combustible(self, True)
     my.is_spawner(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_treasure_class_b(self, True)
@@ -109,6 +113,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_fall_do(self, "me.on_fall()")
+    my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.on_final_use_do(self, "me.on_final_use()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
     my.on_use_do(self, "me.on_use()")

@@ -299,6 +299,10 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
     if (it->is_dead_on_shove()) {
       dbg("Shove and defeat");
       it->dead("by being shoved");
+
+      //
+      // e.g. shoving a brazier creates a dead one
+      //
       auto spawn_what = it->spawn_on_shoved();
       if (spawn_what != "") {
         auto spawn_at = it->curr_at;
@@ -307,14 +311,18 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
         } else {
           it->dir_set_right();
         }
+
+        //
+        // Must check at the new location
+        //
         auto n = level->thing_new(spawn_what, spawn_at);
-        n->location_check_forced();
+        n->location_check();
       }
     }
   }
 
   dbg("Handle location for shoved thing: %s", it->to_short_string().c_str());
-  it->location_check_forced();
+  it->location_check();
 
   //
   // If shoving something on fire! set yourself on fire!

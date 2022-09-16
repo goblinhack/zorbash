@@ -161,6 +161,11 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
+  // Cool down / heat up
+  //
+  temperature_tick();
+
+  //
   // This is to handle things that do not move, like a weapon that is on fire
   //
   location_check();

@@ -74,7 +74,6 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "2d6")
     my.hunger_clock_tick_freq(self, 50)
-    my.hunger_health_pct(self, 95)
     my.is_able_to_attack_mobs(self, True)
     my.is_able_to_break_down_doors(self, True)
     my.is_able_to_break_out_of_ice(self, True)

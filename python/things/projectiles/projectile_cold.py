@@ -55,7 +55,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="projectile_cold", text_long_name="snowball", text_short_name="snowball")
+    tp_init(name="projectile_cold", text_long_name="ball of ice", text_short_name="ball of ice")
 
 
 init()

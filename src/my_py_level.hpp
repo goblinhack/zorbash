@@ -123,7 +123,6 @@ PyObject *level_is_green_blood_eater_at(PyObject *obj, PyObject *args, PyObject 
 PyObject *level_is_green_blooded_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_green_splatter_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_hazard_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_health_booster_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_heavy_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_helmet_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_hittable_at(PyObject *obj, PyObject *args, PyObject *keywds);

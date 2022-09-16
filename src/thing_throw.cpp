@@ -186,9 +186,9 @@ void Thing::throw_at(Thingp what, Thingp target)
   //
   // Potions for example are used when thrown. Chocolate frogs, no.
   //
-  // Must come after the particel code above.
+  // Must come after the particle code above.
   //
-  what->location_check_forced();
+  what->location_check();
   if (what->is_used_when_thrown()) {
     used(what, target, true /* remove_after_use */);
   } else {

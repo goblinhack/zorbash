@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
@@ -31,9 +32,10 @@ void Thing::hunger_clock_tick(void)
   dbg("Hunger tick");
   TRACE_AND_INDENT();
 
-  if (health() > 1) {
-    health_decr();
-    if (health() == 1) {
+  auto my_hunger_level = hunger();
+  if (my_hunger_level > 1) {
+    hunger_decr();
+    if (my_hunger_level == 1) {
       if (is_player()) {
         msg("You are starving!");
       }
@@ -63,29 +65,35 @@ void Thing::hunger_update(void)
   dbg("Hunger update");
   TRACE_AND_INDENT();
 
-  auto tpp = tp();
+  auto tpp             = tp();
+  auto my_hunger_level = hunger();
 
-  int hungry_at = (int) ((double) health_max() * ((double) tpp->hunger_health_pct() / 100.0));
+  int hungry_at = (int) ((double) 100 * ((double) tpp->hunger_is_hungry_at_pct() / 100.0));
 
   auto old_is_hungry = is_hungry;
-  is_hungry          = health() <= hungry_at;
+  is_hungry          = my_hunger_level <= hungry_at;
 
-  int starving_at = (int) ((double) health_max() * ((double) tpp->hunger_starving_pct() / 100.0));
+  int starving_at = (int) ((double) 100 * ((double) tpp->hunger_is_starving_at_pct() / 100.0));
 
   auto old_is_starving = is_starving;
-  is_starving          = health() <= starving_at;
+  is_starving          = my_hunger_level <= starving_at;
 
-  if (old_is_starving != is_starving) {
-    if (is_starving) {
-      dbg("Is starving");
-    } else {
-      dbg("Is no longer starving");
-    }
-  } else if (old_is_hungry != is_hungry) {
-    if (is_hungry) {
-      dbg("Is hungry");
-    } else {
-      dbg("Is no longer hungry");
+  is_satiated = my_hunger_level > 80;
+  is_gorged   = my_hunger_level > 110;
+
+  if (is_player()) {
+    if (old_is_starving != is_starving) {
+      if (is_starving) {
+        msg("I am starving.");
+      } else {
+        msg("I am no longer starving.");
+      }
+    } else if (old_is_hungry != is_hungry) {
+      if (is_hungry) {
+        msg("I am hungry.");
+      } else {
+        msg("I am no longer hungry.");
+      }
     }
   }
 }
@@ -102,14 +110,89 @@ int Thing::hunger_clock_tick_freq(void)
   return (tp()->hunger_clock_tick_freq());
 }
 
-int Thing::hunger_health_pct(void)
+int Thing::hunger_is_hungry_at_pct(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->hunger_health_pct());
+  return (tp()->hunger_is_hungry_at_pct());
 }
 
-int Thing::hunger_starving_pct(void)
+int Thing::hunger_is_starving_at_pct(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->hunger_starving_pct());
+  return (tp()->hunger_is_starving_at_pct());
+}
+
+////////////////////////////////////////////////////////////////////////////
+// hunger
+////////////////////////////////////////////////////////////////////////////
+int Thing::hunger(void)
+{
+  TRACE_NO_INDENT();
+  int v = 0;
+  if (maybe_infop()) {
+    v = infop()->hunger;
+  }
+  /*
+   * Why do we do this? It makes looking at weapon hunger hard
+  auto owner = immediate_owner();
+  if (owner && (owner != this)) {
+    v += owner->hunger();
+  }
+   */
+  return v;
+}
+
+int Thing::hunger_set(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->hunger = v);
+  return n;
+}
+
+int Thing::hunger_decr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->hunger -= v);
+  return n;
+}
+
+int Thing::hunger_incr(int v)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->hunger += v);
+  return n;
+}
+
+int Thing::hunger_decr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->hunger--);
+  return n;
+}
+
+int Thing::hunger_incr(void)
+{
+  TRACE_NO_INDENT();
+  if (is_player()) {
+    game->set_request_to_remake_rightbar();
+  }
+  new_infop();
+  auto n = (infop()->hunger++);
+  return n;
 }

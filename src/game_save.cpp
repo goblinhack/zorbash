@@ -72,6 +72,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->gold);
   out << bits(my.t->health);
   out << bits(my.t->health_max);
+  out << bits(my.t->hunger);
   out << bits(my.t->jump_distance_mod);
   out << bits(my.t->keys);
   out << bits(my.t->leader_id);
@@ -335,6 +336,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_frozen                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_ascii_animated                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_pixelart_animated                     ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_gorged                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hidden                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hungry                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_in_lava                                   ? 1LLU : 0LLU) << shift; shift++;
@@ -348,6 +350,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_resurrecting                              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrection_blocked                      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_ring2                                     ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_satiated                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_death                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_gc                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_jump_end                    ? 1LLU : 0LLU) << shift; shift++;

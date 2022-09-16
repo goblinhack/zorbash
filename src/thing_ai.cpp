@@ -1003,6 +1003,13 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
+        if (environ_avoids_fire()) {
+          if (level->heatmap(curr_at)) {
+            AI_LOG("Avoid heat at location", it);
+            continue;
+          }
+        }
+
         //
         // Don't attack your leader
         //

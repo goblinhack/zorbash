@@ -41,6 +41,10 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 
+def on_fire(me, x, y):
+    explode(me, x, y)
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
@@ -67,6 +71,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_item_magical(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
+    my.is_combustible(self, True)
     my.is_spawner(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_treasure_class_c(self, True)
@@ -84,6 +89,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.noise_on_dropping(self, 5)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
+    my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")
     my.range_max(self, 7)

@@ -44,6 +44,10 @@ def on_fall(me, x, y):
     explode(me, x, y)
 
 
+def on_fire(me, x, y):
+    explode(me, x, y)
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # start sort marker
@@ -88,6 +92,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.noise_on_dropping(self, 5)
     my.normal_placement_rules(self, True)
     my.on_fall_do(self, "me.on_fall()")
+    my.on_you_are_on_fire_do(self, "me.on_fire()")
+    my.is_combustible(self, True)
     my.on_final_use_do(self, "me.on_final_use()")
     my.on_idle_tick_freq_dice(self, "1d1000+200:me.on_idle()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")

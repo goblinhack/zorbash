@@ -15,20 +15,6 @@ bool Thing::will_avoid_monst(const Thingp it)
   dbg("Avoid check for: %s", it->to_short_string().c_str());
 
   //
-  // Not moving?
-  //
-  if (it->idle_count() > 5) {
-    return false;
-  }
-
-  //
-  // It's stuck?
-  //
-  if (it->stuck_count() > 5) {
-    return false;
-  }
-
-  //
   // Avoid flaming things; even friends.
   //
   if (environ_avoids_fire() > 10) {
@@ -41,6 +27,20 @@ bool Thing::will_avoid_monst(const Thingp it)
       dbg("Avoid on fire: %s", it->to_short_string().c_str());
       return true;
     }
+  }
+
+  //
+  // Not moving?
+  //
+  if (it->idle_count() > 5) {
+    return false;
+  }
+
+  //
+  // It's stuck?
+  //
+  if (it->stuck_count() > 5) {
+    return false;
   }
 
   if (same_leader(it)) {

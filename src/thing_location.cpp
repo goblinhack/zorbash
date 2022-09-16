@@ -16,7 +16,7 @@
 // to handle things that do not move but something has happened to
 // like they caught on fire
 //
-void Thing::location_check_forced(void)
+void Thing::location_check(void)
 {
   TRACE_NO_INDENT();
 
@@ -50,11 +50,6 @@ void Thing::location_check_forced(void)
     dbg("Location check, skip");
     return;
   }
-
-  //
-  // Cool down / heat up
-  //
-  temperature_tick();
 
   //
   // Allow fall through to fall check, so burnt things can fall.
@@ -206,26 +201,15 @@ void Thing::location_check_forced(void)
     game->request_player_to_ascend_level  = false;
     game->request_player_to_descend_level = false;
   }
-}
 
-void Thing::location_check(void)
-{
-  TRACE_NO_INDENT();
-
-  if (maybe_infop()) {
-    if (tick_last_location_check() == game->tick_current) {
-      return;
-    }
-
-    dbg("Do location check. Last %d, game tick %d", tick_last_location_check(), game->tick_current);
-    tick_last_location_check_set(game->tick_current);
-  }
-
-  location_check_forced();
+  //
+  // Not used anymore, remove?
+  //
+  tick_last_location_check_set(game->tick_current);
 }
 
 //
-// Check all things at this location. In this case we check it
+// Check all things at this location. In this case we check if
 // already performed, so we don't for example do a lava check
 // again initiated by being set on fire by lava.
 //
@@ -246,30 +230,6 @@ void Thing::location_check_all_things_at(void)
     IF_DEBUG2 { t->log("Do location check"); }
     TRACE_AND_INDENT();
     t->location_check();
-  }
-  FOR_ALL_THINGS_END()
-}
-
-//
-// Check all things at this location
-//
-void Thing::location_check_forced_all_things_at(void)
-{
-  dbg("Do location checks");
-  TRACE_AND_INDENT();
-
-  //
-  // Needs to be for all things to stuff that does nothing like bones can fall
-  // into a chasm
-  //
-  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
-  {
-    if (t->is_hidden) {
-      continue;
-    }
-    IF_DEBUG2 { t->log("Do location check"); }
-    TRACE_AND_INDENT();
-    t->location_check_forced();
   }
   FOR_ALL_THINGS_END()
 }
