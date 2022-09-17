@@ -122,12 +122,7 @@ bool Thing::if_matches_then_dead(const std::string &what, const point p)
 
     if (t->matches(what)) {
       t->dead(this, "defeated ");
-
-      //
-      // Check if we are newly spawned over a chasm
-      // Or if something we spawned at needs to react to us
-      //
-      location_check_all_things_at();
+      t->location_check_me();
     }
   }
   FOR_ALL_THINGS_END()

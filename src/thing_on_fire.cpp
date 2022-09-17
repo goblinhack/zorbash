@@ -130,7 +130,7 @@ bool Thing::on_fire_set(const std::string &why)
   // In case the fire is over a chasm. Don't call forced as we could
   // have already stepped on lava that triggered this.
   //
-  location_check_all_things_at();
+  location_check_me();
 
   return true;
 }

@@ -148,7 +148,7 @@ bool Thing::descend_dungeon(bool force, point3d next_level)
         update_interpolated_position();
 
         dbg("Level change location check");
-        location_check();
+        location_check_me();
         update_light();
 
         if (is_player() && level->cursor) {

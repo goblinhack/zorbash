@@ -1,11 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- location check filter                                                                                                                        -->
+<!-- health clock and move clock check                                                                                                            -->
 <!-- pixel art indications of hunger                                                                                                              -->
-<!-- engorged                                                                                                                                     -->
-<!-- split hunger from health                                                                                                                     -->
-<!-- bat killed in explosion did no fall                                                                                                          -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
 <!-- the X is wounded?                                                                                                                            -->
 <!-- a Z comes into view, it is wielding a Y                                                                                                      -->

@@ -42,7 +42,7 @@ def explode(me, x, y):
     else:
         my.thing_msg(me, "The staff of energy explodes in a blaze of power.")
 
-    my.spawn_at_my_position(me, "explosion_fire")
+    my.spawn_at_my_position(me, "explosion_major")
     my.spawn_fire_around_thing(me, "fire")
     my.thing_dead(me, "exploded")
 

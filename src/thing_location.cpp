@@ -16,7 +16,7 @@
 // to handle things that do not move but something has happened to
 // like they caught on fire
 //
-void Thing::location_check(void)
+void Thing::location_check(Thingp filter_to)
 {
   TRACE_NO_INDENT();
 
@@ -58,73 +58,94 @@ void Thing::location_check(void)
   //
   // Check for calling before the dead check, so dead dogmen can fall.
   //
-  chasm_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_chasm()) {
+    chasm_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
   //
   // Embedded in solid rock?
   //
-  solid_rock_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || (filter_to->is_wall() || filter_to->is_rock())) {
+    solid_rock_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  corrode_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_acid()) {
+    corrode_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  barrel_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_barrel()) {
+    barrel_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  block_of_ice_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_block_of_ice()) {
+    block_of_ice_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  secret_door_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_secret_door()) {
+    secret_door_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  brazier_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_brazier()) {
+    brazier_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  water_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_water()) {
+    water_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  lava_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_lava()) {
+    lava_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  acid_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_acid()) {
+    acid_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  plant_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_plant()) {
+    plant_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
-  grass_tick();
-  if (is_dead) {
-    return;
+  if (! filter_to || filter_to->is_dry_grass()) {
+    grass_tick();
+    if (is_dead) {
+      return;
+    }
   }
 
   gas_poison_tick();
-  if (is_dead) {
-    return;
-  }
 
   if (! is_able_to_change_levels()) {
     return;
@@ -209,14 +230,23 @@ void Thing::location_check(void)
 }
 
 //
-// Check all things at this location. In this case we check if
-// already performed, so we don't for example do a lava check
-// again initiated by being set on fire by lava.
+// If a new thing is spawned, like fire, then check against this location.
 //
-void Thing::location_check_all_things_at(void)
+// In addition, walk all other things and location check for them, but filtered to this new thing, fire.
+//
+void Thing::location_check_me(void)
 {
   dbg("Do location checks");
   TRACE_AND_INDENT();
+
+  //
+  // If we're about to check as part of a tick, do it then.
+  //
+  if (! game->tick_requested.empty()) {
+    return;
+  }
+
+  location_check();
 
   //
   // Needs to be for all things to stuff that does nothing like bones can fall
@@ -224,12 +254,21 @@ void Thing::location_check_all_things_at(void)
   //
   FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
   {
+    if (t == this) {
+      continue;
+    }
+
     if (t->is_hidden) {
       continue;
     }
+
     IF_DEBUG2 { t->log("Do location check"); }
     TRACE_AND_INDENT();
-    t->location_check();
+
+    //
+    // Check but filter only to this thing
+    //
+    t->location_check(this);
   }
   FOR_ALL_THINGS_END()
 }

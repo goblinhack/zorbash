@@ -218,7 +218,7 @@ void Thing::remove_owner(void)
   // If this was fire and it had an owner (the thing it set on fire)
   // and that owner is now dead, the fire is free to fall into a chasm
   //
-  location_check();
+  location_check_me();
 
   old_owner->check_all_carried_maps();
 }

@@ -188,7 +188,7 @@ void Thing::throw_at(Thingp what, Thingp target)
   //
   // Must come after the particle code above.
   //
-  what->location_check();
+  what->location_check_me();
   if (what->is_used_when_thrown()) {
     used(what, target, true /* remove_after_use */);
   } else {

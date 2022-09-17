@@ -444,6 +444,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       }
     } else if (is_corpse_on_death()) {
       TRACE_NO_INDENT();
+
       //
       // Leaves a corpse
       //
@@ -470,6 +471,11 @@ void Thing::killed(Thingp defeater, const char *reason)
         // Update the animation for this now dead thing.
         //
         ts_next_frame = 0;
+
+        //
+        // If we are a bat corpse, for example, we now need to fall.
+        //
+        location_check_me();
         return;
       }
     }

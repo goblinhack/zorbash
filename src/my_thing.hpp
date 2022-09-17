@@ -2313,8 +2313,8 @@ public:
   void lifespan_tick(void);
   void light_dist_including_torch_effect_get(uint8_t &light_dist);
   void light_dist_update_including_torch_effect(uint8_t &light_dist);
-  void location_check_all_things_at(void);
-  void location_check(void);
+  void location_check_me(void);
+  void location_check(Thingp filter_to = nullptr);
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
   void log_(const char *fmt, va_list args); // compile error without
   void lunge(point tt);

@@ -146,7 +146,7 @@ bool Thing::descend_sewer(void)
   move_finish();
   interpolated_at_set(make_fpoint(curr_at));
   update_interpolated_position();
-  location_check();
+  location_check_me();
   update_light();
 
   if (is_player() && level->cursor) {

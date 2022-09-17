@@ -780,7 +780,7 @@ void Thing::move_to_immediately(point to)
     // things
     //
   } else {
-    location_check();
+    location_check_me();
   }
 
   if (is_player()) {

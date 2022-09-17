@@ -26,6 +26,7 @@ def explode(me, x, y):
     else:
         my.thing_msg(me, "The wand of staff of descent explodes.")
 
+    my.spawn_at_my_position(me, "explosion_major")
     my.thing_msg(me, "The earth shakes.")
     my.spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
     my.thing_dead(me, "exploded")

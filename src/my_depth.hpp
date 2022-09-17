@@ -32,9 +32,9 @@ enum {
   MAP_Z_PRIO_ITEM,          // Normal items for carrying, like food, weapons
   MAP_Z_PRIO_CURSOR,        // Selected path
   MAP_Z_PRIO_WEB,           // Should be behind spiders
-  MAP_Z_PRIO_MONST,         // Spiders and more!
-  MAP_Z_PRIO_FOILAGE,       // In front of monsters so they hide
   MAP_Z_PRIO_FIRE,          // Flames!
+  MAP_Z_PRIO_MONST,         // Spiders and more! Want monsters in front of fire, so you can see bats for e.g.
+  MAP_Z_PRIO_FOILAGE,       // In front of monsters so they hide
   MAP_Z_PRIO_PLAYER,        // In front of foilage else we get lost!
   MAP_Z_PRIO_CARRY,         // e.g. armor, swords
   MAP_Z_PRIO_CLOAK,         // Clock should be over armor?
