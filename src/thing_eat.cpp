@@ -8,6 +8,88 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
+bool Thing::is_edible(Thingp itp)
+{
+  if (is_eater_of_amulets() && itp->is_amulet())
+    return true;
+  if (is_eater_of_armor() && itp->is_armor())
+    return true;
+  if (is_eater_of_boots() && itp->is_boots())
+    return true;
+  if (is_eater_of_cloaks() && itp->is_cloak())
+    return true;
+  if (is_eater_of_food() && itp->is_food())
+    return true;
+  if (is_eater_of_gauntlets() && itp->is_gauntlet())
+    return true;
+  if (is_eater_of_green_blood() && itp->is_green_blood())
+    return true;
+  if (is_eater_of_helmets() && itp->is_helmet())
+    return true;
+  if (is_eater_of_jelly() && itp->is_jelly())
+    return true;
+  if (is_eater_of_magical_items() && itp->is_magical())
+    return true;
+  if (is_eater_of_meat() && itp->is_meat())
+    return true;
+  if (is_eater_of_potions() && itp->is_potion())
+    return true;
+  if (is_eater_of_red_blood() && itp->is_red_blood())
+    return true;
+  if (is_eater_of_rings() && itp->is_ring())
+    return true;
+  if (is_eater_of_staffs() && itp->is_staff())
+    return true;
+  if (is_eater_of_treasure() && itp->is_treasure_type())
+    return true;
+  if (is_eater_of_wands() && itp->is_wand())
+    return true;
+  if (is_eater_of_weapons() && itp->is_weapon())
+    return true;
+  return false;
+}
+
+bool Tp::is_edible(Thingp itp)
+{
+  if (is_eater_of_amulets() && itp->is_amulet())
+    return true;
+  if (is_eater_of_armor() && itp->is_armor())
+    return true;
+  if (is_eater_of_boots() && itp->is_boots())
+    return true;
+  if (is_eater_of_cloaks() && itp->is_cloak())
+    return true;
+  if (is_eater_of_food() && itp->is_food())
+    return true;
+  if (is_eater_of_gauntlets() && itp->is_gauntlet())
+    return true;
+  if (is_eater_of_green_blood() && itp->is_green_blood())
+    return true;
+  if (is_eater_of_helmets() && itp->is_helmet())
+    return true;
+  if (is_eater_of_jelly() && itp->is_jelly())
+    return true;
+  if (is_eater_of_magical_items() && itp->is_magical())
+    return true;
+  if (is_eater_of_meat() && itp->is_meat())
+    return true;
+  if (is_eater_of_potions() && itp->is_potion())
+    return true;
+  if (is_eater_of_red_blood() && itp->is_red_blood())
+    return true;
+  if (is_eater_of_rings() && itp->is_ring())
+    return true;
+  if (is_eater_of_staffs() && itp->is_staff())
+    return true;
+  if (is_eater_of_treasure() && itp->is_treasure_type())
+    return true;
+  if (is_eater_of_wands() && itp->is_wand())
+    return true;
+  if (is_eater_of_weapons() && itp->is_weapon())
+    return true;
+  return false;
+}
+
 bool Thing::worth_eating(Thingp victim)
 {
   TRACE_NO_INDENT();
@@ -27,65 +109,14 @@ bool Thing::worth_eating(Thingp victim)
 
 bool Thing::can_eat(const Thingp itp)
 {
-  auto me = tp();
-
   dbg("Can eat? %s", itp->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (me->is_meat_eater()) {
-    if (itp->is_meat()) {
-      dbg("Can eat meat: %s", itp->to_short_string().c_str());
-      return true;
-    }
+  if (is_edible(itp)) {
+    dbg("Can eat jelly: %s", itp->to_short_string().c_str());
+    return true;
   }
-  if (me->is_red_blood_eater()) {
-    if (itp->is_red_blood()) {
-      dbg("Can eat red blood: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (me->is_green_blood_eater()) {
-    if (itp->is_green_blood()) {
-      dbg("Can eat green blood: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (me->is_food_eater()) {
-    if (itp->is_food()) {
-      dbg("Can eat food: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (me->is_treasure_eater()) {
-    if (itp->is_treasure_type()) {
-      dbg("Can eat treasure: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (me->is_potion_eater()) {
-    if (itp->is_potion()) {
-      dbg("Can eat potion: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (me->is_item_magical_eater()) {
-    if (itp->is_item_magical()) {
-      dbg("Can eat magical: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (me->is_jelly_baby_eater()) {
-    if (itp->is_jelly_baby()) {
-      dbg("Can eat jelly: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (is_player()) {
-    if (itp->is_food()) {
-      dbg("Can eat food: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
+
   return false;
 }
 
@@ -94,60 +125,11 @@ bool Tp::can_eat(const Thingp itp)
   dbg("Can eat? %s", itp->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (is_meat_eater()) {
-    if (itp->is_meat()) {
-      dbg("Can eat meat: %s", itp->to_short_string().c_str());
-      return true;
-    }
+  if (is_edible(itp)) {
+    dbg("Can eat jelly: %s", itp->to_short_string().c_str());
+    return true;
   }
-  if (is_red_blood_eater()) {
-    if (itp->is_red_blood()) {
-      dbg("Can eat blood: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (is_green_blood_eater()) {
-    if (itp->is_green_blood()) {
-      dbg("Can eat blood: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (is_food_eater()) {
-    if (itp->is_food()) {
-      dbg("Can eat food: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (is_treasure_eater()) {
-    if (itp->is_treasure_type()) {
-      dbg("Can eat treasure: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (is_potion_eater()) {
-    if (itp->is_potion()) {
-      dbg("Can eat potion: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (is_item_magical_eater()) {
-    if (itp->is_item_magical()) {
-      dbg("Can eat magical: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (is_jelly_baby_eater()) {
-    if (itp->is_jelly_baby()) {
-      dbg("Can eat jelly: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
-  if (is_player()) {
-    if (itp->is_food()) {
-      dbg("Can eat food: %s", itp->to_short_string().c_str());
-      return true;
-    }
-  }
+
   return false;
 }
 
@@ -177,11 +159,7 @@ bool Thing::eat(Thingp victim)
   }
 
   if (attack_eater()) {
-    if ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
-        (is_red_blood_eater() && victim->is_red_blood()) || (is_green_blood_eater() && victim->is_green_blood()) ||
-        (is_food_eater() && victim->is_food()) || (is_treasure_eater() && victim->is_treasure_type()) ||
-        (is_item_magical_eater() && victim->is_item_magical()) || (is_potion_eater() && victim->is_potion())) {
-
+    if (is_edible(victim)) {
       //
       // Worth eating?
       //
@@ -229,11 +207,7 @@ bool Thing::consume(Thingp victim)
   }
 
   if (attack_eater()) {
-    if ((is_jelly_eater() && victim->is_jelly()) || (is_meat_eater() && victim->is_meat()) ||
-        (is_red_blood_eater() && victim->is_red_blood()) || (is_green_blood_eater() && victim->is_green_blood()) ||
-        (is_food_eater() && victim->is_food()) || (is_treasure_eater() && victim->is_treasure_type()) ||
-        (is_item_magical_eater() && victim->is_item_magical()) || (is_potion_eater() && victim->is_potion())) {
-
+    if (is_edible(victim)) {
       dbg("Consumes %s", victim->text_the().c_str());
 
       if (! is_player()) {

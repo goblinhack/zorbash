@@ -281,14 +281,14 @@ do
       is_flying \
       is_foilage \
       is_food \
-      is_food_eater \
+      is_eater_of_food \
       is_gas_blocker \
       is_gauntlet \
       is_gfx_anim_synced_with_owner \
       is_glass \
       is_gold \
       is_green_blood \
-      is_green_blood_eater \
+      is_eater_of_green_blood \
       is_green_blooded \
       is_green_splatter \
       is_hard \
@@ -311,16 +311,13 @@ do
       is_item \
       is_item_carrier \
       is_item_collector \
-      is_item_eater \
-      is_item_magical \
-      is_item_magical_eater \
+      is_thief \
+      is_magical \
+      is_eater_of_magical_items \
       is_item_organic \
       is_item_targetted \
       is_jelly \
-      is_jelly_baby \
-      is_jelly_baby_eater \
-      is_jelly_eater \
-      is_jelly_parent \
+      is_eater_of_jelly \
       is_jump_blocker \
       is_key \
       is_key_special \
@@ -335,7 +332,7 @@ do
       is_map_beast \
       is_map_treasure \
       is_meat \
-      is_meat_eater \
+      is_eater_of_meat \
       is_meltable \
       is_metal \
       is_minion \
@@ -363,10 +360,10 @@ do
       is_player \
       is_poisonous_danger_level \
       is_potion \
-      is_potion_eater \
+      is_eater_of_potions \
       is_projectile \
       is_red_blood \
-      is_red_blood_eater \
+      is_eater_of_red_blood \
       is_red_blooded \
       is_red_splatter \
       is_removeable_if_out_of_slots \
@@ -408,7 +405,7 @@ do
       is_treasure_class_a \
       is_treasure_class_b \
       is_treasure_class_c \
-      is_treasure_eater \
+      is_eater_of_treasure \
       is_treasure_type \
       is_undead \
       is_usable \
@@ -510,18 +507,18 @@ do
       unused_flag59 \
       unused_flag6 \
       unused_flag60 \
-      unused_flag61 \
-      unused_flag62 \
-      unused_flag63 \
-      unused_flag64 \
-      unused_flag65 \
-      unused_flag66 \
-      unused_flag67 \
-      unused_flag68 \
-      unused_flag69 \
+      is_eater_of_helmets \
+      is_eater_of_amulets \
+      is_eater_of_weapons \
+      is_eater_of_boots \
+      is_eater_of_gauntlets \
+      is_eater_of_cloaks \
+      is_eater_of_shields \
+      is_eater_of_rings \
+      is_eater_of_staffs \
       unused_flag7 \
-      unused_flag70 \
-      unused_flag71 \
+      is_eater_of_armor \
+      is_eater_of_wands \
       is_dry_grass_trampled \
       is_cowardly \
       appearing_chance_d1000 \

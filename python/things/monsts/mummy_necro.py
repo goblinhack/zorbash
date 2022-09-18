@@ -121,6 +121,7 @@ def tp_init(name, text_long_name):
     my.is_corpse_on_death(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_eater_of_red_blood(self, True)
     my.is_fearless(self, True)
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
@@ -134,7 +135,6 @@ def tp_init(name, text_long_name):
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_necrotic_danger_level(self, 1)  # danger level
-    my.is_red_blood_eater(self, True)
     my.is_resurrectable(self, True)
     my.is_shovable(self, True)
     my.is_tickable(self, True)

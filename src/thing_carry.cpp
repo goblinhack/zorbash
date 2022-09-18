@@ -312,7 +312,7 @@ bool Thing::carry(Thingp item, bool can_equip)
             msg("You hear the noise of a weapons being drawn.");
           } else if (item->is_food()) {
             msg("You hear a strange slurping sound.");
-          } else if (item->is_item_magical()) {
+          } else if (item->is_magical()) {
             msg("You hear a greedy cackle.");
           }
         }

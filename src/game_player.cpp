@@ -306,9 +306,9 @@ void Game::place_player(void)
         level->thing_new("water", point(x + 3, y));
         level->thing_new("water", point(x + 4, y));
       }
-      {
-        auto b = level->thing_new("bat_lesser", point(x + 3, y));
-        b->dead("ook");
+      if (1) {
+        level->thing_new("jelly_parent", point(x + 4, y + 4));
+        level->thing_new("cloak_stone", point(x + 3, y + 4));
       }
 
       // level->thing_new("staff_descent", point(x + 5, y + 2));

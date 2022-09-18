@@ -213,12 +213,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
           //
           // Eat corpse?
           //
-          if (is_item_carrier() &&
-              ((is_jelly_eater() && victim->is_jelly()) || (is_food_eater() && victim->is_food()) ||
-               (is_treasure_eater() && victim->is_treasure_type()) ||
-               (is_item_magical_eater() && victim->is_item_magical()) ||
-               (is_potion_eater() && victim->is_potion())) &&
-              try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
+          if (is_item_carrier() && is_edible(victim) && try_to_carry_if_worthwhile_dropping_items_if_needed(victim)) {
             dbg("Don't eat, try to carry %s", victim->to_short_string().c_str());
             attack_options->victim_attacked = true;
             ret                             = true;
@@ -236,11 +231,7 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
             ret                             = true;
           }
 
-          if (is_monst() &&
-              ((is_food_eater() && victim->is_food()) || (is_jelly_eater() && victim->is_jelly()) ||
-               (is_meat_eater() && victim->is_meat()) || (is_red_blood_eater() && victim->is_red_blood()) ||
-               (is_green_blood_eater() && victim->is_green_blood()) || (is_food_eater() && victim->is_food())) &&
-              eat(victim)) {
+          if (is_monst() && is_edible(victim) && eat(victim)) {
             attack_options->victim_attacked = true;
             ret                             = true;
           }

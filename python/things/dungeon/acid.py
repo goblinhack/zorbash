@@ -13,9 +13,9 @@ def acid_init(name, text_long_name, text_short_name, tiles=[], left_tiles=[]):
     my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)
     my.is_acid(self, True)
+    my.is_eater_of_meat(self, True)
     my.is_hazard(self, True)
     my.is_loggable(self, True)
-    my.is_meat_eater(self, True)
     my.is_removeable_if_out_of_slots(self, True)
     my.is_tickable(self, True)  # for lifespan
     my.lifespan_dice(self, "1d20+20")

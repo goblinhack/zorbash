@@ -750,7 +750,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   //
   // Try to steal instead of attacking?
   //
-  if (real_hitter->is_item_eater()) {
+  if (real_hitter->is_thief()) {
     if (is_carrying_an_item()) {
       if (real_hitter->steal_item_from(this)) {
         return true;
@@ -953,7 +953,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       } else if (hitter->is_laser()) {
         real_hitter->msg("%%fg=orange$You zap yourself for %d %sdamage with %s!%%fg=reset$", damage,
                          damage_type.c_str(), hitter->text_the().c_str());
-      } else if (hitter->is_item_magical()) {
+      } else if (hitter->is_magical()) {
         real_hitter->msg("%%fg=orange$You blast yourself for %d %sdamage with %s!%%fg=reset$", damage,
                          damage_type.c_str(), hitter->text_the().c_str());
       } else if (attack_options->attack_fire) {
@@ -985,7 +985,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         } else if (hitter->is_laser()) {
           msg("%%fg=red$%s zaps you apart with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               hitter->text_the().c_str());
-        } else if (hitter->is_item_magical()) {
+        } else if (hitter->is_magical()) {
           msg("%%fg=red$%s blasts you into pieces with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               hitter->text_the().c_str());
         } else if (hitter->is_projectile() || hitter->is_laser()) {
@@ -1041,7 +1041,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         } else if (hitter->is_laser()) {
           msg("%%fg=orange$%s zaps you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str(), hitter->text_the().c_str());
-        } else if (hitter->is_item_magical()) {
+        } else if (hitter->is_magical()) {
           msg("%%fg=orange$%s blasts you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               damage, damage_type.c_str(), hitter->text_the().c_str());
         } else if (hitter->is_projectile() || hitter->is_laser()) {
@@ -1165,7 +1165,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
             } else if (hitter->is_laser()) {
               real_hitter->msg("You zap %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
                                hitter->text_the().c_str());
-            } else if (hitter->is_item_magical()) {
+            } else if (hitter->is_magical()) {
               real_hitter->msg("You blast %s for %d %sdamage with %s.", text_the().c_str(), damage,
                                damage_type.c_str(), hitter->text_the().c_str());
             } else {
@@ -1187,7 +1187,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
               real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else if (hitter->is_laser()) {
               real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-            } else if (hitter->is_item_magical()) {
+            } else if (hitter->is_magical()) {
               real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
             } else {
               real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
@@ -1206,7 +1206,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           real_hitter->msg("You hit %s.", text_the().c_str());
         } else if (hitter->is_laser()) {
           real_hitter->msg("You zap %s.", text_the().c_str());
-        } else if (hitter->is_item_magical()) {
+        } else if (hitter->is_magical()) {
           real_hitter->msg("You blast %s.", text_the().c_str());
         } else {
           real_hitter->msg("You hit %s.", text_the().c_str());
@@ -1233,7 +1233,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           }
         } else if (hitter->is_laser()) {
           real_hitter->msg("You zap %s.", text_the().c_str());
-        } else if (hitter->is_item_magical()) {
+        } else if (hitter->is_magical()) {
           real_hitter->msg("You blast %s.", text_the().c_str());
         } else {
           hitter->msg("You hit %s.", text_the().c_str());
@@ -1250,7 +1250,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
         } else if (hitter->is_laser()) {
           real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-        } else if (hitter->is_item_magical()) {
+        } else if (hitter->is_magical()) {
           real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
         } else {
           real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
@@ -1737,7 +1737,7 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
         hitter->msg("You smash your fists against the door!");
         training = true;
       } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser() &&
-                 ! hitter->is_weapon() && ! hitter->is_item_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
+                 ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
                  ! hitter->gfx_pixelart_attack_anim()) {
         //
         // Not something that typically damages walls.
@@ -1758,7 +1758,7 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
         hitter->msg("You smash your fists against the rock!");
         training = true;
       } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser() &&
-                 ! hitter->is_weapon() && ! hitter->is_item_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
+                 ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava() &&
                  ! hitter->gfx_pixelart_attack_anim()) {
         //
         // Not something that typically damages walls.

@@ -56,31 +56,9 @@ bool Thing::will_avoid_monst(const Thingp it)
     return true;
   }
 
-  if (me->is_meat()) {
-    if (it->is_meat_eater() || it->attack_meat()) {
-      if (is_dangerous(it)) {
-        dbg("Avoid dangerous meat eater: %s", it->to_short_string().c_str());
-        return true;
-      }
-    }
-  }
-
-  if (me->is_red_blood()) {
-    if (it->is_red_blood_eater()) {
-      if (is_dangerous(it)) {
-        dbg("Avoid dangerous blood eater: %s", it->to_short_string().c_str());
-        return true;
-      }
-    }
-  }
-
-  if (me->is_green_blood()) {
-    if (it->is_green_blood_eater()) {
-      if (is_dangerous(it)) {
-        dbg("Avoid dangerous blood eater: %s", it->to_short_string().c_str());
-        return true;
-      }
-    }
+  if (it->is_edible(this) && is_dangerous(it)) {
+    dbg("Avoid dangerous eater: %s", it->to_short_string().c_str());
+    return true;
   }
 
   if (me->is_humanoid()) {
@@ -98,16 +76,6 @@ bool Thing::will_avoid_monst(const Thingp it)
         dbg("Avoid dangerous monst: %s", it->to_short_string().c_str());
         return true;
       }
-    }
-  }
-
-  if (me->is_jelly_baby()) {
-    //
-    // But allow baby slimes to attack each other!
-    //
-    if (it->is_jelly_parent()) {
-      dbg("Avoid dangerous jelly: %s", it->to_short_string().c_str());
-      return true;
     }
   }
 
@@ -158,14 +126,10 @@ bool Thing::will_avoid_monst(const point p)
       }
     }
 
-    if (me->is_meat()) {
-      if (it->is_meat_eater() || it->attack_meat()) {
-        if (is_dangerous(it)) {
-          if (health() < health_max() / 4) {
-            dbg("Avoid meat eater as I am weak: %s", it->to_short_string().c_str());
-            return true;
-          }
-        }
+    if (it->is_edible(this) && is_dangerous(it)) {
+      if (health() < health_max() / 4) {
+        dbg("Avoid meat eater as I am weak: %s", it->to_short_string().c_str());
+        return true;
       }
     }
 
@@ -188,16 +152,6 @@ bool Thing::will_avoid_monst(const point p)
             return true;
           }
         }
-      }
-    }
-
-    if (me->is_jelly_baby()) {
-      //
-      // But allow baby slimes to attack each other!
-      //
-      if (it->is_jelly_parent()) {
-        dbg("Avoid jelly eater: %s", it->to_short_string().c_str());
-        return true;
       }
     }
 

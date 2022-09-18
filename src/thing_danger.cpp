@@ -57,7 +57,7 @@ int Tp::get_danger_level(void)
   if (is_able_to_jump()) {
     danger_level += 5;
   }
-  if (is_item_eater()) {
+  if (is_thief()) {
     danger_level += 20;
   }
   if (is_able_to_fire_at()) {
@@ -145,7 +145,7 @@ int Thing::danger_initial_level(void)
   if (is_able_to_jump()) {
     danger_level += 5;
   }
-  if (is_item_eater()) {
+  if (is_thief()) {
     danger_level += 20;
   }
   if (is_able_to_fire_at()) {
@@ -240,7 +240,7 @@ int Thing::danger_current_level(void)
   if (is_able_to_jump()) {
     danger_level += 5;
   }
-  if (is_item_eater()) {
+  if (is_thief()) {
     danger_level += 20;
   }
   if (is_able_to_fire_at()) {

@@ -774,7 +774,7 @@ void Game::wid_thing_info_add_damage_melee(WidPopup *w, Thingp t, int index)
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     Thingp curr_weapon = t->equip_get(MONST_EQUIP_WEAPON);
 
     int min_value;
@@ -827,7 +827,7 @@ void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_poison_dice = t->damage_poison_dice();
     auto min_value          = damage_poison_dice.min_roll();
     auto max_value          = damage_poison_dice.max_roll();
@@ -860,7 +860,7 @@ void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_future1_dice = t->damage_future1_dice();
     auto min_value           = damage_future1_dice.min_roll();
     auto max_value           = damage_future1_dice.max_roll();
@@ -893,7 +893,7 @@ void Game::wid_thing_info_add_damage_future2(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_future2_dice = t->damage_future2_dice();
     auto min_value           = damage_future2_dice.min_roll();
     auto max_value           = damage_future2_dice.max_roll();
@@ -926,7 +926,7 @@ void Game::wid_thing_info_add_damage_future3(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_future3_dice = t->damage_future3_dice();
     auto min_value           = damage_future3_dice.min_roll();
     auto max_value           = damage_future3_dice.max_roll();
@@ -959,7 +959,7 @@ void Game::wid_thing_info_add_damage_cold(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_cold_dice = t->damage_cold_dice();
     auto min_value        = damage_cold_dice.min_roll();
     auto max_value        = damage_cold_dice.max_roll();
@@ -992,7 +992,7 @@ void Game::wid_thing_info_add_damage_fire(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_fire_dice = t->damage_fire_dice();
     auto min_value        = damage_fire_dice.min_roll();
     auto max_value        = damage_fire_dice.max_roll();
@@ -1025,7 +1025,7 @@ void Game::wid_thing_info_add_damage_crush(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_crush_dice = t->damage_crush_dice();
     auto min_value         = damage_crush_dice.min_roll();
     auto max_value         = damage_crush_dice.max_roll();
@@ -1058,7 +1058,7 @@ void Game::wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_lightning_dice = t->damage_lightning_dice();
     auto min_value             = damage_lightning_dice.min_roll();
     auto max_value             = damage_lightning_dice.max_roll();
@@ -1091,7 +1091,7 @@ void Game::wid_thing_info_add_damage_energy(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_energy_dice = t->damage_energy_dice();
     auto min_value          = damage_energy_dice.min_roll();
     auto max_value          = damage_energy_dice.max_roll();
@@ -1124,7 +1124,7 @@ void Game::wid_thing_info_add_damage_acid(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_acid_dice = t->damage_acid_dice();
     auto min_value        = damage_acid_dice.min_roll();
     auto max_value        = damage_acid_dice.max_roll();
@@ -1157,7 +1157,7 @@ void Game::wid_thing_info_add_damage_nat_att(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto damage_nat_att_dice = t->damage_nat_att_dice();
     auto min_value           = damage_nat_att_dice.min_roll();
     auto max_value           = damage_nat_att_dice.max_roll();
@@ -1205,7 +1205,7 @@ void Game::wid_thing_info_add_damage_digest(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto attack_swallow_dice = t->damage_digest_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
@@ -1238,7 +1238,7 @@ void Game::wid_thing_info_add_damage_necrosis(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto attack_swallow_dice = t->damage_necrosis_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
@@ -1271,7 +1271,7 @@ void Game::wid_thing_info_add_damage_draining(WidPopup *w, Thingp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto attack_swallow_dice = t->damage_draining_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
@@ -1302,7 +1302,7 @@ void Game::wid_thing_info_add_attack(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto stat_att       = 10 + t->stat_att();
     auto stat_att_total = 10 + t->stat_att_total();
     if (stat_att_total != stat_att) {
@@ -1382,7 +1382,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
-  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_item_magical()) {
+  if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto ac       = t->stat_def();
     auto ac_total = t->stat_def_total();
     if (ac_total != ac) {

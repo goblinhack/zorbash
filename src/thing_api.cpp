@@ -880,10 +880,10 @@ int Thing::is_foilage(void)
   return (tp()->is_foilage());
 }
 
-int Thing::is_food_eater(void)
+int Thing::is_eater_of_food(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_food_eater());
+  return (tp()->is_eater_of_food());
 }
 
 int Thing::is_food(void)
@@ -934,10 +934,10 @@ int Thing::is_item_carrier(void)
   return (tp()->is_item_carrier());
 }
 
-int Thing::is_item_eater(void)
+int Thing::is_thief(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_item_eater());
+  return (tp()->is_thief());
 }
 
 int Thing::is_item(void)
@@ -946,28 +946,10 @@ int Thing::is_item(void)
   return (tp()->is_item());
 }
 
-int Thing::is_jelly_baby_eater(void)
+int Thing::is_eater_of_jelly(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_jelly_baby_eater());
-}
-
-int Thing::is_jelly_baby(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_jelly_baby());
-}
-
-int Thing::is_jelly_eater(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_jelly_eater());
-}
-
-int Thing::is_jelly_parent(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_jelly_parent());
+  return (tp()->is_eater_of_jelly());
 }
 
 int Thing::is_jelly(void)
@@ -1078,10 +1060,10 @@ int Thing::is_loggable(void)
   return (tp()->is_loggable());
 }
 
-int Thing::is_meat_eater(void)
+int Thing::is_eater_of_meat(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_meat_eater());
+  return (tp()->is_eater_of_meat());
 }
 
 int Thing::is_meat(void)
@@ -1162,10 +1144,10 @@ int Thing::is_necrotic_danger_level(void)
   return (tp()->is_necrotic_danger_level());
 }
 
-int Thing::is_potion_eater(void)
+int Thing::is_eater_of_potions(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_potion_eater());
+  return (tp()->is_eater_of_potions());
 }
 
 int Thing::is_potion(void)
@@ -1630,70 +1612,70 @@ int Thing::unused_flag60(void)
   return (tp()->unused_flag60());
 }
 
-int Thing::unused_flag61(void)
+int Thing::is_eater_of_helmets(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag61());
+  return (tp()->is_eater_of_helmets());
 }
 
-int Thing::unused_flag62(void)
+int Thing::is_eater_of_amulets(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag62());
+  return (tp()->is_eater_of_amulets());
 }
 
-int Thing::unused_flag63(void)
+int Thing::is_eater_of_weapons(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag63());
+  return (tp()->is_eater_of_weapons());
 }
 
-int Thing::unused_flag64(void)
+int Thing::is_eater_of_boots(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag64());
+  return (tp()->is_eater_of_boots());
 }
 
-int Thing::unused_flag65(void)
+int Thing::is_eater_of_gauntlets(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag65());
+  return (tp()->is_eater_of_gauntlets());
 }
 
-int Thing::unused_flag66(void)
+int Thing::is_eater_of_cloaks(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag66());
+  return (tp()->is_eater_of_cloaks());
 }
 
-int Thing::unused_flag67(void)
+int Thing::is_eater_of_shields(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag67());
+  return (tp()->is_eater_of_shields());
 }
 
-int Thing::unused_flag68(void)
+int Thing::is_eater_of_rings(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag68());
+  return (tp()->is_eater_of_rings());
 }
 
-int Thing::unused_flag69(void)
+int Thing::is_eater_of_staffs(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag69());
+  return (tp()->is_eater_of_staffs());
 }
 
-int Thing::unused_flag70(void)
+int Thing::is_eater_of_armor(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag70());
+  return (tp()->is_eater_of_armor());
 }
 
-int Thing::unused_flag71(void)
+int Thing::is_eater_of_wands(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag71());
+  return (tp()->is_eater_of_wands());
 }
 
 int Thing::is_dry_grass_trampled(void)
@@ -1844,12 +1826,6 @@ int Thing::is_lifeless(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_lifeless());
-}
-
-int Thing::is_magical(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_magical());
 }
 
 int Thing::is_immune_to_draining(void)
@@ -2151,10 +2127,10 @@ int Thing::is_monst_class_e(void)
   return (tp()->is_monst_class_e());
 }
 
-int Thing::is_green_blood_eater(void)
+int Thing::is_eater_of_green_blood(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_green_blood_eater());
+  return (tp()->is_eater_of_green_blood());
 }
 
 int Thing::is_mob_challenge_class_b(void)
@@ -2390,10 +2366,10 @@ int Thing::gfx_pixelart_anim_synced_with_owner(void)
   return (tp()->gfx_pixelart_anim_synced_with_owner());
 }
 
-int Thing::is_item_magical(void)
+int Thing::is_magical(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_item_magical());
+  return (tp()->is_magical());
 }
 
 int Thing::is_able_to_use_armor(void)
@@ -2432,10 +2408,10 @@ int Thing::attack_undead(void)
   return (tp()->attack_undead());
 }
 
-int Thing::is_red_blood_eater(void)
+int Thing::is_eater_of_red_blood(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_red_blood_eater());
+  return (tp()->is_eater_of_red_blood());
 }
 
 int Thing::is_slippery(void)
@@ -2768,10 +2744,10 @@ int Thing::is_item_collector(void)
   return (tp()->is_item_collector());
 }
 
-int Thing::is_treasure_eater(void)
+int Thing::is_eater_of_treasure(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_treasure_eater());
+  return (tp()->is_eater_of_treasure());
 }
 
 int Thing::is_treasure_type(void)
@@ -2822,10 +2798,10 @@ int Thing::is_wall(void)
   return (tp()->is_wall());
 }
 
-int Thing::is_item_magical_eater(void)
+int Thing::is_eater_of_magical_items(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_item_magical_eater());
+  return (tp()->is_eater_of_magical_items());
 }
 
 int Thing::is_wand(void)

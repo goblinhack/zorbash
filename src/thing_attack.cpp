@@ -148,7 +148,7 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
-  if (is_meat_eater() || attack_meat()) {
+  if (attack_meat()) {
     //
     // Meat eaters eat you when you are dead!
     //
@@ -199,133 +199,18 @@ bool Thing::possible_to_attack(const Thingp victim)
   // Or carnivorous plants.
   //
   if ((! is_dead && is_carnivorous_plant()) || is_alive_monst() || is_resurrected) {
-    if (me->is_jelly_baby_eater()) {
-      if (victim->is_jelly_baby()) {
-        dbg("Can attack %s", victim->to_short_string().c_str());
-        return true;
-      }
-    }
-
-    if (me->is_treasure_eater()) {
-      if (victim->is_treasure_type()) {
-        dbg("Can attack %s", victim->to_short_string().c_str());
-        return true;
-      }
-      if (victim->is_carrying_treasure()) {
-        dbg("Can steal from %s", victim->to_short_string().c_str());
-        return true;
-      }
-    }
-
-    if (me->is_potion_eater()) {
-      if (victim->is_potion()) {
-        dbg("Can attack %s", victim->to_short_string().c_str());
-        return true;
-      }
-    }
-
-    if (me->is_item_magical_eater()) {
-      if (victim->is_item_magical()) {
-        dbg("Can attack %s", victim->to_short_string().c_str());
-        return true;
-      }
-    }
-
-    //
-    // Cleaners can attack cleaners?
-    //
-    if (me->is_item_magical_eater()) {
-      if (victim->is_item_magical_eater()) {
-        dbg("Can attack %s", victim->to_short_string().c_str());
-        return true;
-      }
-    }
 
     //
     // Can we eats it?
     //
-    if (me->is_meat_eater()) {
-      if (! victim->is_attackable_by_monst()) {
-        dbg("No, cannot attack %s, not is_attackable by meat eating monst", victim->to_short_string().c_str());
-        return false;
-      }
-
-      if (victim->is_meat()) {
-        //
-        // Doesn't matter if dead, if it can eat you...
-        //
-        if (victim->is_dead) {
-          dbg("Can eat dead meat: %s", victim->to_short_string().c_str());
-          return true;
-        }
-
-        dbg("Can attack meat or blood: %s", victim->to_short_string().c_str());
-        return true;
-      }
+    if (me->is_edible(victim)) {
+      dbg("Can attack %s", victim->to_short_string().c_str());
+      return true;
     }
 
-    //
-    // Can we attack the meat? Only if it is alive.
-    //
-    if (me->attack_meat()) {
-      if (! victim->is_attackable_by_monst()) {
-        dbg("no, cannot attack %s, not is_attackable by meat eating monst", victim->to_short_string().c_str());
-        return false;
-      }
-
-      if (victim->is_meat()) {
-        if (victim->is_dead) {
-          dbg("Can not attack dead meat: %s", victim->to_short_string().c_str());
-          return false;
-        }
-        if (victim->is_dead) {
-          dbg("Can not attack dead meat: %s", victim->to_short_string().c_str());
-          return false;
-        }
-
-        dbg("Can attack living meat: %s", victim->to_short_string().c_str());
-        return true;
-      }
-    }
-
-    if (me->is_red_blood_eater()) {
-      if (! victim->is_attackable_by_monst()) {
-        dbg("No, cannot attack %s, not is_attackable by blood eating monst", victim->to_short_string().c_str());
-        return false;
-      }
-
-      if (victim->is_red_blood()) {
-        //
-        // Doesn't matter if dead, if it can eat you...
-        //
-        if (victim->is_dead) {
-          dbg("Can eat dead blood: %s", victim->to_short_string().c_str());
-          return true;
-        }
-
-        dbg("Can attack blood or blood: %s", victim->to_short_string().c_str());
-        return true;
-      }
-    }
-
-    if (me->is_green_blood_eater()) {
-      if (! victim->is_attackable_by_monst()) {
-        dbg("No, cannot attack %s, not is_attackable by blood eating monst", victim->to_short_string().c_str());
-        return false;
-      }
-
-      if (victim->is_green_blood()) {
-        //
-        // Doesn't matter if dead, if it can eat you...
-        //
-        if (victim->is_dead) {
-          dbg("Can eat dead blood: %s", victim->to_short_string().c_str());
-          return true;
-        }
-
-        dbg("Can attack blood or blood: %s", victim->to_short_string().c_str());
-        return true;
-      }
+    if (! victim->is_attackable_by_monst()) {
+      dbg("No, cannot attack %s, not is_attackable by meat eating monst", victim->to_short_string().c_str());
+      return false;
     }
 
     if (me->attack_humanoid()) {
@@ -352,17 +237,6 @@ bool Thing::possible_to_attack(const Thingp victim)
           dbg("Can attack undead: %s", victim->to_short_string().c_str());
           return true;
         }
-      }
-    }
-
-    if (me->is_food_eater()) {
-      if (! victim->is_attackable_by_monst()) {
-        dbg("No, cannot attack %s, not is_attackable by food eating monst", victim->to_short_string().c_str());
-        return false;
-      }
-      if (victim->is_food()) {
-        dbg("Can attack food: %s", victim->to_short_string().c_str());
-        return true;
       }
     }
   }

@@ -162,31 +162,9 @@ bool Thing::is_disliked_by_me(const Thingp itp)
     }
   }
 
-  if (me->is_meat()) {
-    if (it->is_meat_eater() || it->attack_meat()) {
-      if (is_dangerous(itp)) {
-        // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-        return true;
-      }
-    }
-  }
-
-  if (me->is_red_blood()) {
-    if (it->is_red_blood_eater()) {
-      if (is_dangerous(itp)) {
-        // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-        return true;
-      }
-    }
-  }
-
-  if (me->is_green_blood()) {
-    if (it->is_green_blood_eater()) {
-      if (is_dangerous(itp)) {
-        // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-        return true;
-      }
-    }
+  if (it->is_edible(this) && is_dangerous(itp)) {
+    // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
+    return true;
   }
 
   if (me->is_humanoid()) {
@@ -204,44 +182,6 @@ bool Thing::is_disliked_by_me(const Thingp itp)
         // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
         return true;
       }
-    }
-  }
-
-  if (me->is_food()) {
-    if (it->is_food_eater()) {
-      // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-      return true;
-    }
-  }
-
-  if (me->is_treasure_type()) {
-    if (it->is_treasure_eater()) {
-      // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-      return true;
-    }
-  }
-
-  if (me->is_potion()) {
-    if (it->is_potion_eater()) {
-      // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-      return true;
-    }
-  }
-
-  if (me->is_item_magical()) {
-    if (it->is_item_magical_eater()) {
-      // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-      return true;
-    }
-  }
-
-  if (me->is_jelly_baby()) {
-    //
-    // But allow baby slimes to attack each other!
-    //
-    if (it->is_jelly_parent()) {
-      // log("%s is disliked line %d", it->to_short_string().c_str(), __LINE__);
-      return true;
     }
   }
 
