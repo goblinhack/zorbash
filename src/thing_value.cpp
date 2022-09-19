@@ -45,6 +45,7 @@ int Thing::value(Thingp it)
   //
   value += it->nutrition_get();
   value += health_boost_would_occur(it->nutrition_get());
+  value += hunger_boost_would_occur(it->nutrition_get());
   value += it->damage_max();
   value += it->gold_value();
   //

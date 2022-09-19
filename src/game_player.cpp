@@ -45,6 +45,10 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_wood", point(x, y));
         t->carry(w);
       }
+      if (1) {
+        auto w = level->thing_new("food_pottedmeat", point(x, y));
+        t->carry(w);
+      }
       if (0) {
         auto w = level->thing_new("armor_lather", point(x, y));
         t->carry(w);

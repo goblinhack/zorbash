@@ -28,6 +28,7 @@ void wid_buffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wh
 {
   TRACE_NO_INDENT();
   DBG3("buffbox: Begin over buffbox");
+
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY) ||
@@ -51,10 +52,10 @@ void wid_buffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wh
 
   auto slot = wid_get_int_context(w);
 
-  DBG3("buffbox: Begin over buffbox slot %d", slot);
+  TOPCON("buffbox: Begin over buffbox slot %d", slot);
   TRACE_AND_INDENT();
   if (! level->buffbox_over(slot)) {
-    DBG3("buffbox: Not over anything");
+    TOPCON("buffbox: Not over anything");
     return;
   }
 
@@ -70,6 +71,7 @@ void wid_buffbox_mouse_over_end(Widp w)
 {
   TRACE_AND_INDENT();
   DBG3("buffbox: End over buffbox");
+
   TRACE_AND_INDENT();
   if ((game->state == Game::STATE_CHOOSING_LEVEL) || (game->state == Game::STATE_CHOOSING_TARGET) ||
       (game->state == Game::STATE_OPTIONS_FOR_ITEM_MENU) || (game->state == Game::STATE_INVENTORY) ||

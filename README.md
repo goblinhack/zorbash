@@ -1,8 +1,8 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- health clock and move clock check                                                                                                            -->
-<!-- pixel art indications of hunger                                                                                                              -->
+<!-- player info obscuring stats info                                                                                                             -->
+<!-- move clock                                                                                                                                   -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
 <!-- the X is wounded?                                                                                                                            -->
 <!-- a Z comes into view, it is wielding a Y                                                                                                      -->

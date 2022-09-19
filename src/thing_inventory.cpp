@@ -721,7 +721,7 @@ void Level::inventory_dump(void)
     return;
   }
 
-  con("Inventory: slots:");
+  dbg("Inventory: slots:");
   TRACE_AND_INDENT();
 
   auto itemsp = player->maybe_itemsp();
@@ -740,7 +740,7 @@ void Level::inventory_dump(void)
       continue;
     }
 
-    con("Inventory: slot: %d -> %s", i + 1, t->text_short_name().c_str());
+    dbg("Inventory: slot: %d -> %s", i + 1, t->text_short_name().c_str());
   }
 }
 

@@ -780,6 +780,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_style(w, UI_WID_STYLE_NORMAL);
       }
       {
+        int idx = 0;
         FOR_ALL_BUFFS_FOR(player, id)
         {
           auto iter = level->thing_find(id);
@@ -798,6 +799,7 @@ bool wid_rightbar_ascii_create(void)
             wid_set_text(w, iter->text_short_and_state_capitalised());
             wid_set_on_mouse_over_begin(w, wid_buffbox_mouse_over_begin);
             wid_set_on_mouse_over_end(w, wid_buffbox_mouse_over_end);
+            wid_set_int_context(w, idx++);
             wid_update(w);
           }
         }
@@ -829,6 +831,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_style(w, UI_WID_STYLE_NORMAL);
       }
       {
+        int idx = 0;
         FOR_ALL_DEBUFFS_FOR(player, id)
         {
           auto iter = level->thing_find(id);
@@ -847,15 +850,15 @@ bool wid_rightbar_ascii_create(void)
             wid_set_text(w, iter->text_short_and_state_capitalised());
             wid_set_on_mouse_over_begin(w, wid_debuffbox_mouse_over_begin);
             wid_set_on_mouse_over_end(w, wid_debuffbox_mouse_over_end);
+            wid_set_int_context(w, idx++);
             wid_update(w);
           }
         }
       }
     }
 
-    if (player->is_on_fire() || player->stuck_count() || player->is_hungry || player->is_starving ||
-        player->is_sleeping || player->is_frozen || (player->stamina() < player->stamina_max() / 2) ||
-        (player->health() < player->health_max() / 2)) {
+    if (player->is_on_fire() || player->stuck_count() || player->is_sleeping || player->is_frozen ||
+        (player->stamina() < player->stamina_max() / 2) || (player->health() < player->health_max() / 2)) {
       {
         TRACE_AND_INDENT();
         y_at++;
@@ -925,63 +928,6 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Stuck!");
-        wid_update(w);
-      }
-      if (player->is_gorged) {
-        y_at++;
-        TRACE_AND_INDENT();
-        auto  w  = wid_new_square_button(wid_rightbar, "state");
-        point tl = make_point(0, y_at);
-        point br = make_point(width - 1, y_at);
-        wid_set_pos(w, tl, br);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
-        wid_set_mode(w, WID_MODE_NORMAL);
-        wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Gorged");
-        wid_update(w);
-      } else if (player->is_satiated) {
-        y_at++;
-        TRACE_AND_INDENT();
-        auto  w  = wid_new_square_button(wid_rightbar, "state");
-        point tl = make_point(0, y_at);
-        point br = make_point(width - 1, y_at);
-        wid_set_pos(w, tl, br);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
-        wid_set_mode(w, WID_MODE_NORMAL);
-        wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Satiated");
-        wid_update(w);
-      } else if (player->is_starving) {
-        y_at++;
-        TRACE_AND_INDENT();
-        auto  w  = wid_new_square_button(wid_rightbar, "state");
-        point tl = make_point(0, y_at);
-        point br = make_point(width - 1, y_at);
-        wid_set_pos(w, tl, br);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
-        wid_set_mode(w, WID_MODE_NORMAL);
-        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Starving");
-        wid_update(w);
-      } else if (player->is_hungry) {
-        y_at++;
-        TRACE_AND_INDENT();
-        auto  w  = wid_new_square_button(wid_rightbar, "state");
-        point tl = make_point(0, y_at);
-        point br = make_point(width - 1, y_at);
-        wid_set_pos(w, tl, br);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-        wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Hungry");
         wid_update(w);
       }
       if (player->stamina() < player->stamina_max() / 4) {

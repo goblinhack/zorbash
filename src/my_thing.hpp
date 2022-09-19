@@ -406,6 +406,8 @@ public:
   Thingp top_mob(void);
   Thingp top_owner(void);
   Thingp top_spawned_owner(void);
+  Thingp debuff_find(const std::string &);
+  Thingp buff_find(const std::string &);
 
   std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_firing(const point s, const point e, size_t max_elems = 0);
@@ -446,11 +448,11 @@ public:
   bool bag_remove_at(Thingp item, point pos);
   bool bag_remove(Thingp);
   bool bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_count);
+  bool buff_add_if_not_found(Tpp what);
   bool buff_add(Thingp it);
   bool buff_add(Tpp what);
   bool buffbox_id_insert(Thingp what);
   bool buffbox_id_remove(Thingp what);
-  bool buff_find(const std::string &);
   bool buff_find_is_aquatic(void);
   bool buff_find_is_fire_proof(void);
   bool buff_find_is_slippery(void);
@@ -458,7 +460,6 @@ public:
   bool buff_remove(Tpp what);
   bool buff_use(Thingp it);
   bool can_eat(const Thingp it);
-  bool is_edible(const Thingp it);
   bool can_eat_something(void);
   bool can_enchant_something(void);
   bool can_learn_something(void);
@@ -522,6 +523,7 @@ public:
   bool fire_choose_target(Thingp item);
   bool has_temperature(void);
   bool health_boost_would_occur(int v);
+  bool hunger_boost_would_occur(int v);
   bool idle_check(void);
   bool if_matches_then_dead(const std::string &what, const point p);
   bool inventory_shortcuts_insert(Thingp what);
@@ -533,6 +535,7 @@ public:
   bool is_carrying_treasure(void);
   bool is_disliked_by_me(const point p);
   bool is_disliked_by_me(const Thingp it);
+  bool is_edible(const Thingp it);
   bool is_enemy(Thingp it);
   bool is_equipped(Thingp item);
   bool is_friend(Thingp it);
@@ -997,6 +1000,10 @@ public:
   int crit_chance_d10000(void);
   int damage_acid_chance_d1000(int);
   int damage_acid(void);
+  int damage_bite_chance_d1000(int);
+  int damage_bite(void);
+  int damage_claw_chance_d1000(int);
+  int damage_claw(void);
   int damage_cold_chance_d1000(int);
   int damage_cold(void);
   int damage_crush_chance_d1000(int);
@@ -1024,10 +1031,6 @@ public:
   int damage_fire(void);
   int damage_future1_chance_d1000(int);
   int damage_future1(void);
-  int damage_bite_chance_d1000(int);
-  int damage_bite(void);
-  int damage_claw_chance_d1000(int);
-  int damage_claw(void);
   int damage_lightning_chance_d1000(int);
   int damage_lightning(void);
   int damage_max(void);
@@ -1063,17 +1066,6 @@ public:
   int distance_throw_set(int);
   int distance_to_player_on_different_level(void);
   int distance_to_player(void);
-  int is_eater_of_amulets(void);
-  int is_eater_of_armor(void);
-  int is_eater_of_boots(void);
-  int is_eater_of_cloaks(void);
-  int is_eater_of_gauntlets(void);
-  int is_eater_of_helmets(void);
-  int is_eater_of_rings(void);
-  int is_eater_of_shields(void);
-  int is_eater_of_staffs(void);
-  int is_eater_of_wands(void);
-  int is_eater_of_weapons(void);
   int enchant_decr(int);
   int enchant_decr(void);
   int enchant_get(void);
@@ -1160,6 +1152,7 @@ public:
   int health_max(void);
   int health_set(int);
   int health(void);
+  int hunger_boost(int v);
   int hunger_clock_tick_freq(void);
   int hunger_decr(int);
   int hunger_decr(void);
@@ -1239,6 +1232,8 @@ public:
   int is_attackable_by_monst(void);
   int is_attackable_by_player(void);
   int is_attacked_with_damage_acid(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_damage_bite(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_damage_claw(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_cold(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_crush(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_digest(Thingp hitter, Thingp real_hitter, int damage);
@@ -1246,8 +1241,6 @@ public:
   int is_attacked_with_damage_energy(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_fire(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_future1(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_bite(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_claw(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_melee(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_nat_att(Thingp hitter, Thingp real_hitter, int damage);
@@ -1323,14 +1316,25 @@ public:
   int is_droppable(void);
   int is_dry_grass_trampled(void);
   int is_dry_grass(void);
+  int is_eater_of_amulets(void);
+  int is_eater_of_armor(void);
+  int is_eater_of_boots(void);
+  int is_eater_of_cloaks(void);
   int is_eater_of_food(void);
+  int is_eater_of_gauntlets(void);
   int is_eater_of_green_blood(void);
+  int is_eater_of_helmets(void);
   int is_eater_of_jelly(void);
   int is_eater_of_magical_items(void);
   int is_eater_of_meat(void);
   int is_eater_of_potions(void);
   int is_eater_of_red_blood(void);
+  int is_eater_of_rings(void);
+  int is_eater_of_shields(void);
+  int is_eater_of_staffs(void);
   int is_eater_of_treasure(void);
+  int is_eater_of_wands(void);
+  int is_eater_of_weapons(void);
   int is_enchantable(void);
   int is_enchantstone(void);
   int is_engulfer(void);
@@ -1374,6 +1378,7 @@ public:
   int is_immune_to_water(void);
   int is_intelligent(void);
   int is_interesting(void);
+  int is_internal(void);
   int is_item_carrier(void);
   int is_item_collector(void);
   int is_item_organic(void);
@@ -1573,6 +1578,8 @@ public:
   int normal_placement_rules(void);
   int nutrition_get(void);
   int on_attacking_dmg_acid(Thingp victim, int damage);
+  int on_attacking_dmg_bite(Thingp victim, int damage);
+  int on_attacking_dmg_claw(Thingp victim, int damage);
   int on_attacking_dmg_cold(Thingp victim, int damage);
   int on_attacking_dmg_crush(Thingp victim, int damage);
   int on_attacking_dmg_digest(Thingp victim, int damage);
@@ -1580,8 +1587,6 @@ public:
   int on_attacking_dmg_energy(Thingp victim, int damage);
   int on_attacking_dmg_fire(Thingp victim, int damage);
   int on_attacking_dmg_future1(Thingp victim, int damage);
-  int on_attacking_dmg_bite(Thingp victim, int damage);
-  int on_attacking_dmg_claw(Thingp victim, int damage);
   int on_attacking_dmg_lightning(Thingp victim, int damage);
   int on_attacking_dmg_melee(Thingp victim, int damage);
   int on_attacking_dmg_nat_att(Thingp victim, int damage);
@@ -1595,6 +1600,8 @@ public:
   int on_death_is_open(void);
   int on_idle_tick_freq(void);
   int on_owner_attack_dmg_acid(Thingp owner, Thingp victim, int damage);
+  int on_owner_attack_dmg_bite(Thingp owner, Thingp victim, int damage);
+  int on_owner_attack_dmg_claw(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_cold(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_crush(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_digest(Thingp owner, Thingp victim, int damage);
@@ -1602,8 +1609,6 @@ public:
   int on_owner_attack_dmg_energy(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_fire(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_future1(Thingp owner, Thingp victim, int damage);
-  int on_owner_attack_dmg_bite(Thingp owner, Thingp victim, int damage);
-  int on_owner_attack_dmg_claw(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_lightning(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_melee(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_nat_att(Thingp owner, Thingp victim, int damage);
@@ -1614,6 +1619,8 @@ public:
   int on_owner_attack_dmg_stat_str(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_water(Thingp owner, Thingp victim, int damage);
   int on_owner_receive_dmg_acid(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_owner_receive_dmg_bite(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_owner_receive_dmg_claw(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_cold(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_crush(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_digest(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
@@ -1621,8 +1628,6 @@ public:
   int on_owner_receive_dmg_energy(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_fire(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_future1(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
-  int on_owner_receive_dmg_bite(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
-  int on_owner_receive_dmg_claw(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_lightning(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_melee(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_nat_att(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
@@ -1633,6 +1638,8 @@ public:
   int on_owner_receive_dmg_stat_str(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_water(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_acid(Thingp hitter, Thingp real_hitter, int damage);
+  int on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter, int damage);
+  int on_receiving_dmg_claw(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_cold(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_crush(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_digest(Thingp hitter, Thingp real_hitter, int damage);
@@ -1640,8 +1647,6 @@ public:
   int on_receiving_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_future1(Thingp hitter, Thingp real_hitter, int damage);
-  int on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter, int damage);
-  int on_receiving_dmg_claw(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);
@@ -1861,6 +1866,8 @@ public:
   int tick_prio(void);
   int torch_count(void);
   int total_damage_for_on_attacking_dmg_acid(Thingp victim, int damage);
+  int total_damage_for_on_attacking_dmg_bite(Thingp victim, int damage);
+  int total_damage_for_on_attacking_dmg_claw(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_cold(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_crush(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_digest(Thingp victim, int damage);
@@ -1868,8 +1875,6 @@ public:
   int total_damage_for_on_attacking_dmg_energy(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_fire(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_future1(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_bite(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_claw(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_lightning(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_melee(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_nat_att(Thingp victim, int damage);
@@ -1880,6 +1885,8 @@ public:
   int total_damage_for_on_attacking_dmg_stat_str(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_water(Thingp victim, int damage);
   int total_damage_for_on_receiving_dmg_acid(Thingp hitter, Thingp real_hitter, int damage);
+  int total_damage_for_on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter, int damage);
+  int total_damage_for_on_receiving_dmg_claw(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_cold(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_crush(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_digest(Thingp hitter, Thingp real_hitter, int damage);
@@ -1887,8 +1894,6 @@ public:
   int total_damage_for_on_receiving_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_future1(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_bite(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_claw(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);
@@ -1961,7 +1966,6 @@ public:
   int unused_flag58(void);
   int unused_flag59(void);
   int unused_flag5(void);
-  int is_internal(void);
   int unused_flag6(void);
   int unused_flag7(void);
   int unused_flag87(void);
