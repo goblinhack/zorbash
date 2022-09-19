@@ -286,6 +286,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     // moving to avoid being able to escape pouncing monsters.
     //
     if (is_player()) {
+      move_count_incr();
+
       is_stuck_update();
     }
 
@@ -350,9 +352,11 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       }
       msg("You wait...");
       waiting();
+      move_count_incr();
     } else {
       msg("You rest...");
       resting();
+      move_count_incr();
     }
     return false;
   }

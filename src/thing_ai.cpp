@@ -1072,7 +1072,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               GOAL_ADD(GOAL_PRIO_MED, it_health - goal_penalty, "eat-it-insatiable", it);
             }
           }
-        } else if (is_starving) {
+        } else if (is_hunger_level_starving) {
           if (worth_eating(it)) {
             //
             // If starving, prefer the thing with most health
@@ -1083,7 +1083,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               GOAL_ADD(GOAL_PRIO_MED, it_health - goal_penalty, "eat-it", it);
             }
           }
-        } else if (is_hungry) {
+        } else if (is_hunger_level_hungry) {
           if (worth_eating(it) && ! is_dangerous(it)) {
             //
             // Prefer easy food over attacking the player and prefer

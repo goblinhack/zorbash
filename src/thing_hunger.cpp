@@ -66,7 +66,7 @@ void Thing::hunger_update(void)
   }
 
   if (hunger_is_insatiable()) {
-    is_starving = true;
+    is_hunger_level_starving = true;
     return;
   }
 
@@ -76,25 +76,25 @@ void Thing::hunger_update(void)
   auto tpp             = tp();
   auto my_hunger_level = hunger();
 
-  int hungry_at = (int) ((double) 100 * ((double) tpp->hunger_is_hungry_at_pct() / 100.0));
-  is_hungry     = my_hunger_level <= hungry_at;
+  int hungry_at          = (int) ((double) 100 * ((double) tpp->hunger_is_hunger_level_hungry_at_pct() / 100.0));
+  is_hunger_level_hungry = my_hunger_level <= hungry_at;
 
-  int starving_at = (int) ((double) 100 * ((double) tpp->hunger_is_starving_at_pct() / 100.0));
-  is_starving     = my_hunger_level <= starving_at;
+  int starving_at          = (int) ((double) 100 * ((double) tpp->hunger_is_hunger_level_starving_at_pct() / 100.0));
+  is_hunger_level_starving = my_hunger_level <= starving_at;
 
-  is_satiated = my_hunger_level > 80;
-  is_gorged   = my_hunger_level > 110;
+  is_hunger_level_satiated = my_hunger_level > 80;
+  is_hunger_level_gorged   = my_hunger_level > 110;
 
   if (is_player()) {
-    if (is_gorged || is_satiated) {
+    if (is_hunger_level_gorged || is_hunger_level_satiated) {
       buff_add_if_not_found(tp_find("buff_full"));
       debuff_remove(tp_find("debuff_hungry"));
       debuff_remove(tp_find("debuff_starving"));
-    } else if (is_starving) {
+    } else if (is_hunger_level_starving) {
       buff_remove(tp_find("buff_full"));
       debuff_remove(tp_find("debuff_hungry"));
       debuff_add_if_not_found(tp_find("debuff_starving"));
-    } else if (is_hungry) {
+    } else if (is_hunger_level_hungry) {
       buff_remove(tp_find("buff_full"));
       debuff_remove(tp_find("debuff_starving"));
       debuff_add_if_not_found(tp_find("debuff_hungry"));
@@ -114,16 +114,16 @@ int Thing::hunger_clock_tick_freq(void)
   return (tp()->hunger_clock_tick_freq());
 }
 
-int Thing::hunger_is_hungry_at_pct(void)
+int Thing::hunger_is_hunger_level_hungry_at_pct(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->hunger_is_hungry_at_pct());
+  return (tp()->hunger_is_hunger_level_hungry_at_pct());
 }
 
-int Thing::hunger_is_starving_at_pct(void)
+int Thing::hunger_is_hunger_level_starving_at_pct(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->hunger_is_starving_at_pct());
+  return (tp()->hunger_is_hunger_level_starving_at_pct());
 }
 
 int Thing::hunger_boost(int v)

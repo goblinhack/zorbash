@@ -123,9 +123,27 @@ bool wid_rightbar_pixelart_create(void)
     point br = make_point(width - 1, y_at - 2);
 
     wid_set_pos(w, tl, br);
-    auto g = dynprintf(
-        "%%fg=gray$%06d %%fg=white$%%tile=dollar_icon$%%fg=gray$%03d %%fg=yellow$%%tile=key_icon$%%fg=gray$%d",
-        player->score(), player->gold(), player->keys());
+    auto g = dynprintf("  %06d   %-6d", player->gold(), player->keys());
+    wid_set_text(w, g);
+    wid_set_text_lhs(w, true);
+    wid_set_shape_none(w);
+    myfree(g);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
+  }
+
+  y_at++;
+
+  {
+    DBG2("Remake rightbar gold and keys");
+    TRACE_NO_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "score and move count");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(1, y_at - 2);
+    point br = make_point(width - 1, y_at - 2);
+
+    wid_set_pos(w, tl, br);
+    auto g = dynprintf("  %06d   %-6d", player->score(), player->move_count());
     wid_set_text(w, g);
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);

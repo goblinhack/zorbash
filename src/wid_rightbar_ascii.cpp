@@ -104,7 +104,7 @@ bool wid_rightbar_ascii_create(void)
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "Score Zorks Keys");
+    wid_set_text(w, "Gold      Keys  ");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
   }
 
@@ -117,8 +117,36 @@ bool wid_rightbar_ascii_create(void)
     point br = make_point(width - 1, y_at);
 
     wid_set_pos(w, tl, br);
-    auto g = dynprintf(" %%fg=gray$%06d %%fg=white$%%fg=green$$%%fg=gray$%03d  %%fg=yellow$k%%fg=gray$%d",
-                       player->score(), player->gold(), player->keys());
+    auto g = dynprintf(" %%fg=gray$%06d    %-6d%%fg=white$", player->gold(), player->keys());
+    wid_set_text(w, g);
+    wid_set_text_lhs(w, true);
+    wid_set_shape_none(w);
+    myfree(g);
+    wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
+    wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
+  }
+
+  {
+    y_at++;
+    TRACE_AND_INDENT();
+    auto  w  = wid_new_square_button(wid_rightbar, "Stats");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "Score     Move# ");
+    wid_set_style(w, UI_WID_STYLE_NORMAL);
+  }
+
+  {
+    y_at++;
+    TRACE_AND_INDENT();
+    auto w = wid_new_plain(wid_rightbar, "score and move");
+    wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
+    point tl = make_point(0, y_at - 1);
+    point br = make_point(width - 1, y_at);
+
+    wid_set_pos(w, tl, br);
+    auto g = dynprintf(" %%fg=gray$%06d    %-6d%%fg=white$", player->score(), player->move_count());
     wid_set_text(w, g);
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);

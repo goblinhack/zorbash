@@ -242,7 +242,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
         "is_fadeup %d "
         "is_falling %d "
         "is_hidden %d "
-        "is_hungry %d "
+        "is_hunger_level_hungry %d "
         "is_in_lava %d "
         "is_in_water %d "
         "is_jumping %d "
@@ -251,10 +251,10 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
         "is_resurrected %d "
         "is_resurrecting %d "
         "is_sleeping %d "
-        "is_starving %d ",
+        "is_hunger_level_starving %d ",
         health(), is_attached, is_being_destroyed, is_blitted, is_bouncing, is_dead, is_facing_left, is_fadeup,
-        is_falling, is_hidden, is_hungry, is_in_lava, is_in_water, is_jumping, is_moving, is_open, is_resurrected,
-        is_resurrecting, is_sleeping, is_starving);
+        is_falling, is_hidden, is_hunger_level_hungry, is_in_lava, is_in_water, is_jumping, is_moving, is_open,
+        is_resurrected, is_resurrecting, is_sleeping, is_hunger_level_starving);
   }
 #endif
   if (! chose_tile) {
@@ -506,7 +506,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
           "is_fadeup %d "
           "is_falling %d "
           "is_hidden %d "
-          "is_hungry %d "
+          "is_hunger_level_hungry %d "
           "is_in_lava %d "
           "is_in_water %d "
           "is_jumping %d "
@@ -515,12 +515,12 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
           "is_resurrected %d "
           "is_resurrecting %d "
           "is_sleeping %d "
-          "is_starving %d ",
+          "is_hunger_level_starving %d ",
           tries, size, tile_name(tile).c_str(), health(), (bool) is_attached, (bool) is_being_destroyed,
           (bool) is_blitted, (bool) is_bouncing, (bool) is_dead, (bool) is_facing_left, (bool) is_fadeup,
-          (bool) is_falling, (bool) is_hidden, (bool) is_hungry, (bool) is_in_lava, (bool) is_in_water,
+          (bool) is_falling, (bool) is_hidden, (bool) is_hunger_level_hungry, (bool) is_in_lava, (bool) is_in_water,
           (bool) is_jumping, (bool) is_moving, (bool) is_open, (bool) is_resurrected, (bool) is_resurrecting,
-          (bool) is_sleeping, (bool) is_starving);
+          (bool) is_sleeping, (bool) is_hunger_level_starving);
     }
   }
 

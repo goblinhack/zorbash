@@ -160,14 +160,14 @@ int Thing::stat_att_penalties_total(void)
   //
   // Hunger penalties
   //
-  if (is_starving) {
+  if (is_hunger_level_starving) {
     int p = HUNGER_PENALTY_WHEN_STARVING;
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
       dbg2("Att penalty: starving %d", p);
     }
-  } else if (is_hungry) {
+  } else if (is_hunger_level_hungry) {
     int p = THING_HUNGER_PENALTY_WHEN_HUNGRY;
     penalty += p;
     if (penalty != prev) {

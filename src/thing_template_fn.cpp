@@ -258,9 +258,9 @@ int  Tp::gfx_pixelart_show_outlined(void) const { return _gfx_pixelart_show_outl
 int  Tp::gfx_pixelart_wobbles_when_hit(void) const { return _gfx_pixelart_wobbles_when_hit; }
 int  Tp::gfx_water(void) const { return _gfx_water; }
 int  Tp::hunger_clock_tick_freq(void) const { return _hunger_clock_tick_freq; }
-int  Tp::hunger_is_hungry_at_pct(void) const { return _hunger_is_hungry_at_pct; }
+int  Tp::hunger_is_hunger_level_hungry_at_pct(void) const { return _hunger_is_hunger_level_hungry_at_pct; }
 int  Tp::hunger_is_insatiable(void) const { return _hunger_is_insatiable; }
-int  Tp::hunger_is_starving_at_pct(void) const { return _hunger_is_starving_at_pct; }
+int  Tp::hunger_is_hunger_level_starving_at_pct(void) const { return _hunger_is_hunger_level_starving_at_pct; }
 int  Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
 int  Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
 int  Tp::is_able_to_attack_mobs(void) const { return _is_able_to_attack_mobs; }
@@ -794,9 +794,9 @@ void Tp::gfx_pixelart_show_outlined_set(int v) { _gfx_pixelart_show_outlined = v
 void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_hit = v; }
 void Tp::gfx_water_set(int v) { _gfx_water = v; }
 void Tp::hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
-void Tp::hunger_is_hungry_at_pct_set(int v) { _hunger_is_hungry_at_pct = v; }
+void Tp::hunger_is_hunger_level_hungry_at_pct_set(int v) { _hunger_is_hunger_level_hungry_at_pct = v; }
 void Tp::hunger_is_insatiable_set(int v) { _hunger_is_insatiable = v; }
-void Tp::hunger_is_starving_at_pct_set(int v) { _hunger_is_starving_at_pct = v; }
+void Tp::hunger_is_hunger_level_starving_at_pct_set(int v) { _hunger_is_hunger_level_starving_at_pct = v; }
 void Tp::internal_has_dir_anim_set(int v) { _internal_has_dir_anim = v; }
 void Tp::internal_has_hp_anim_set(int v) { _internal_has_hp_anim = v; }
 void Tp::is_able_to_attack_mobs_set(int v) { _is_able_to_attack_mobs = v; }

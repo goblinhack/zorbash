@@ -216,9 +216,11 @@ public:
   uint64_t is_frozen                                    : 1 {}; // frozen by ice and cannot move
   uint64_t is_gfx_ascii_animated                        : 1 {};
   uint64_t is_gfx_pixelart_animated                     : 1 {};
-  uint64_t is_gorged                                    : 1 {};
   uint64_t is_hidden                                    : 1 {};
-  uint64_t is_hungry                                    : 1 {};
+  uint64_t is_hunger_level_gorged                       : 1 {};
+  uint64_t is_hunger_level_hungry                       : 1 {};
+  uint64_t is_hunger_level_satiated                     : 1 {};
+  uint64_t is_hunger_level_starving                     : 1 {};
   uint64_t is_in_lava                                   : 1 {};
   uint64_t is_in_water                                  : 1 {};
   uint64_t is_jumping                                   : 1 {};
@@ -230,12 +232,10 @@ public:
   uint64_t is_resurrecting                              : 1 {}; // is currently resurrecing
   uint64_t is_resurrection_blocked                      : 1 {}; // blocked from resurrection
   uint64_t is_ring2                                     : 1 {}; // for 2nd rings
-  uint64_t is_satiated                                  : 1 {};
   uint64_t is_scheduled_for_death                       : 1 {}; // will die in next game loop
   uint64_t is_scheduled_for_gc                          : 1 {};
   uint64_t is_scheduled_for_jump_end                    : 1 {};
   uint64_t is_sleeping                                  : 1 {};
-  uint64_t is_starving                                  : 1 {};
   uint64_t is_teleporting                               : 1 {};
   uint64_t is_the_grid                                  : 1 {}; // is the backbone of the level
   uint64_t is_the_player                                : 1 {};
@@ -1138,6 +1138,12 @@ public:
   int gold_set(int);
   int gold_value(void);
   int gold(void);
+  int move_count_decr(int);
+  int move_count_decr(void);
+  int move_count_incr(int);
+  int move_count_incr(void);
+  int move_count_set(int);
+  int move_count(void);
   int health_boost(int v);
   int health_decr(int);
   int health_decr(void);
@@ -1159,9 +1165,9 @@ public:
   int hunger_hunger_pct(void);
   int hunger_incr(int);
   int hunger_incr(void);
-  int hunger_is_hungry_at_pct(void);
+  int hunger_is_hunger_level_hungry_at_pct(void);
   int hunger_is_insatiable(void);
-  int hunger_is_starving_at_pct(void);
+  int hunger_is_hunger_level_starving_at_pct(void);
   int hunger_set(int);
   int hunger(void);
   int idle_count_decr(int);

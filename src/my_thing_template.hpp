@@ -211,9 +211,9 @@ private:
   int _gfx_water {};
   int _has_temperature {};
   int _hunger_clock_tick_freq {};
-  int _hunger_is_hungry_at_pct {};
+  int _hunger_is_hunger_level_hungry_at_pct {};
   int _hunger_is_insatiable {};
-  int _hunger_is_starving_at_pct {};
+  int _hunger_is_hunger_level_starving_at_pct {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
   int _is_able_to_attack_mobs {};
@@ -1222,9 +1222,9 @@ public:
   int gfx_pixelart_wobbles_when_hit(void) const;
   int gfx_water(void) const;
   int hunger_clock_tick_freq(void) const;
-  int hunger_is_hungry_at_pct(void) const;
+  int hunger_is_hunger_level_hungry_at_pct(void) const;
   int hunger_is_insatiable(void) const;
-  int hunger_is_starving_at_pct(void) const;
+  int hunger_is_hunger_level_starving_at_pct(void) const;
   int internal_has_dir_anim(void) const;
   int internal_has_hp_anim(void) const;
   int is_able_to_attack_mobs(void) const;
@@ -1759,9 +1759,9 @@ public:
   void gfx_pixelart_wobbles_when_hit_set(int v);
   void gfx_water_set(int v);
   void hunger_clock_tick_freq_set(int v);
-  void hunger_is_hungry_at_pct_set(int v);
+  void hunger_is_hunger_level_hungry_at_pct_set(int v);
   void hunger_is_insatiable_set(int v);
-  void hunger_is_starving_at_pct_set(int v);
+  void hunger_is_hunger_level_starving_at_pct_set(int v);
   void internal_has_dir_anim_set(int v);
   void internal_has_hp_anim_set(int v);
   void is_able_to_attack_mobs_set(int v);

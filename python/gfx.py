@@ -154,7 +154,7 @@ def init_ui_rightbar():
         file="data/gfx/ui/pixelart/ui_rightbar.tga",
         name="ui_rightbar",
         width=144,
-        height=424,
+        height=432,
         arr=tiles,
     )
 

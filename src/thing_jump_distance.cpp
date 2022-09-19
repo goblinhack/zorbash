@@ -24,9 +24,9 @@ float Thing::jump_distance_current(void)
     d *= 0.5;
   }
 
-  if (is_starving) {
+  if (is_hunger_level_starving) {
     d *= 0.5;
-  } else if (is_hungry) {
+  } else if (is_hunger_level_hungry) {
     d *= 0.8;
   }
 

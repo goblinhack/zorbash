@@ -122,6 +122,7 @@ public:
   int enchant             = {};
   int enchant_max         = {};
   int gold                = {-1};
+  int move_count          = {0};
   int nutrition           = {-1};
   int health              = {};
   int health_max          = {};

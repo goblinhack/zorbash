@@ -510,6 +510,8 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   dbg("Jump success to %d,%d.", curr_at.x, curr_at.y);
 
   if (is_player()) {
+    move_count_incr();
+
     if (curr_at == original_start) {
       msg("You jump on the spot.");
     } else if (curr_at == original_destination) {

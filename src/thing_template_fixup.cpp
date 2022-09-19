@@ -118,8 +118,8 @@ void tp_fixup(void)
         DIE("Tp %s is a monst that cannot be hit?", tp->name().c_str());
       }
 
-      tp->hunger_is_hungry_at_pct_set(50);
-      tp->hunger_is_starving_at_pct_set(10);
+      tp->hunger_is_hunger_level_hungry_at_pct_set(50);
+      tp->hunger_is_hunger_level_starving_at_pct_set(10);
     }
 
     if (tp->is_monst() || tp->is_player()) {

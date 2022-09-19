@@ -70,6 +70,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->fadeup_height);
   out << bits(my.t->fall_height);
   out << bits(my.t->gold);
+  out << bits(my.t->move_count);
   out << bits(my.t->health);
   out << bits(my.t->health_max);
   out << bits(my.t->hunger);
@@ -336,9 +337,11 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_frozen                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_ascii_animated                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_gfx_pixelart_animated                     ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_gorged                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_hidden                                    ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_hungry                                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_hunger_level_gorged                       ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_hunger_level_hungry                       ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_hunger_level_satiated                     ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_hunger_level_starving                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_in_lava                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_in_water                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_jumping                                   ? 1LLU : 0LLU) << shift; shift++;
@@ -350,12 +353,10 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_resurrecting                              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrection_blocked                      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_ring2                                     ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_satiated                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_death                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_gc                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_jump_end                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_sleeping                                  ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_starving                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_teleporting                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_the_grid                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_the_player                                ? 1LLU : 0LLU) << shift; shift++;
@@ -890,7 +891,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
   out << bits(my.t.seed_name);
   out << bits(my.t.tick_requested);
   out << bits(my.t.current_level);
-  out << bits(my.t.move_count);
   out << bits(my.t.frame_count);
   out << bits(my.t.fps_value);
   out << bits(my.t.tick_completed);
