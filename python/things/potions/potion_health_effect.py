@@ -43,7 +43,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="pot_health_effect")
+    tp_init(name="potion_health_effect")
 
 
 init()

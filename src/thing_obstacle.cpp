@@ -22,13 +22,11 @@ bool Thing::ai_obstacle_for_me(point p)
         continue;
       }
 
-      if (t->is_the_grid) {
+      if (t->is_hidden || t->is_internal()) {
         continue;
       }
+
       if (t->is_floor()) {
-        continue;
-      }
-      if (t->is_hidden) {
         continue;
       }
 
@@ -57,13 +55,11 @@ bool Tp::ai_obstacle_for_me(Levelp level, point p)
         continue;
       }
 
-      if (t->is_the_grid) {
+      if (t->is_hidden || t->is_internal()) {
         continue;
       }
+
       if (t->is_floor()) {
-        continue;
-      }
-      if (t->is_hidden) {
         continue;
       }
 
@@ -93,7 +89,7 @@ bool Thing::collision_obstacle(Thingp it)
   //
   // Skip things we cannot collide with
   //
-  if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
+  if (it->is_internal() || it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
     return false;
   }
 
@@ -252,11 +248,11 @@ bool Thing::ai_obstacle(Thingp it)
   //
   // Skip things we cannot collide with
   //
-  if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
+  if (it->is_internal() || it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
     return false;
   }
 
-  if (is_hidden || is_falling || is_jumping || is_changing_level) {
+  if (is_internal() || is_hidden || is_falling || is_jumping || is_changing_level) {
     return false;
   }
 
@@ -265,14 +261,6 @@ bool Thing::ai_obstacle(Thingp it)
   //
   if (is_engulfer() && can_eat(it)) {
     return false;
-  }
-
-  //
-  // Lava, acid etc... No allow this, else we cannot see fire next to us to avoid it.
-  //
-  if (is_disliked_by_me(it->curr_at)) {
-    // log("%s is an AI obstacle line %d", it->to_short_string().c_str(), __LINE__);
-    // return true;
   }
 
   //
@@ -427,7 +415,7 @@ bool Tp::ai_obstacle(Thingp it)
   //
   // Skip things we cannot collide with
   //
-  if (it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
+  if (it->is_internal() || it->is_hidden || it->is_falling || it->is_jumping || it->is_changing_level) {
     return false;
   }
 

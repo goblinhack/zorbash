@@ -32,6 +32,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_able_to_fall(self, True)
     my.is_cloak(self, True)
     my.is_tickable(self, True)
+    my.is_interesting(self, True)
     my.on_tick_do(self, "me.on_tick()")
     my.is_auto_equipped(self, True)
     my.is_bag_item(self, True)

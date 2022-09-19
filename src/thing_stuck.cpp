@@ -167,7 +167,7 @@ bool Thing::is_stuck_check(void)
   //
   // Blocked from moving by something stronger?
   //
-  FOR_ALL_THINGS(level, it, curr_at.x, curr_at.y)
+  FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
   {
     if (it == this) {
       continue;
@@ -243,7 +243,7 @@ void Thing::is_stuck_update(void)
   //
   // Shake the web or block of ice or barrel...
   //
-  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
+  FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_player() || t->is_monst()) {
       t->wobble(pcg_random_range(5, 20));

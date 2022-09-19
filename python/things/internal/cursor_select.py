@@ -11,6 +11,7 @@ def tp_init(name):
     my.gfx_pixelart_show_outlined(self, True)
     my.is_cursor(self, True)
     my.is_floating(self, True)
+    my.is_internal(self, True)
     my.is_moveable(self, True)
     my.is_tmp_thing(self, True)
     my.text_a_or_an(self, "the")

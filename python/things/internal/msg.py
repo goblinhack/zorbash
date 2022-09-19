@@ -6,6 +6,7 @@ def tp_init(name):
     self = tp.Tp(name)
     # start sort marker
     my.gfx_ascii_shown(self, True)
+    my.is_internal(self, True)
     my.is_loggable(self, False)
     my.is_moveable(self, True)
     my.is_msg(self, True)

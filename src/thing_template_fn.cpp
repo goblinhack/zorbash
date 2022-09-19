@@ -26,8 +26,8 @@ const std::string &Tp::on_attacking_dmg_draining_do(void) const { return _on_att
 const std::string &Tp::on_attacking_dmg_energy_do(void) const { return _on_attacking_dmg_energy_do; }
 const std::string &Tp::on_attacking_dmg_fire_do(void) const { return _on_attacking_dmg_fire_do; }
 const std::string &Tp::on_attacking_dmg_future1_do(void) const { return _on_attacking_dmg_future1_do; }
-const std::string &Tp::on_attacking_dmg_future2_do(void) const { return _on_attacking_dmg_future2_do; }
-const std::string &Tp::on_attacking_dmg_future3_do(void) const { return _on_attacking_dmg_future3_do; }
+const std::string &Tp::on_attacking_dmg_bite_do(void) const { return _on_attacking_dmg_bite_do; }
+const std::string &Tp::on_attacking_dmg_claw_do(void) const { return _on_attacking_dmg_claw_do; }
 const std::string &Tp::on_attacking_dmg_lightning_do(void) const { return _on_attacking_dmg_lightning_do; }
 const std::string &Tp::on_attacking_dmg_melee_do(void) const { return _on_attacking_dmg_melee_do; }
 const std::string &Tp::on_attacking_dmg_nat_att_do(void) const { return _on_attacking_dmg_nat_att_do; }
@@ -62,8 +62,8 @@ const std::string &Tp::on_owner_attack_dmg_draining_do(void) const { return _on_
 const std::string &Tp::on_owner_attack_dmg_energy_do(void) const { return _on_owner_attack_dmg_energy_do; }
 const std::string &Tp::on_owner_attack_dmg_fire_do(void) const { return _on_owner_attack_dmg_fire_do; }
 const std::string &Tp::on_owner_attack_dmg_future1_do(void) const { return _on_owner_attack_dmg_future1_do; }
-const std::string &Tp::on_owner_attack_dmg_future2_do(void) const { return _on_owner_attack_dmg_future2_do; }
-const std::string &Tp::on_owner_attack_dmg_future3_do(void) const { return _on_owner_attack_dmg_future3_do; }
+const std::string &Tp::on_owner_attack_dmg_bite_do(void) const { return _on_owner_attack_dmg_bite_do; }
+const std::string &Tp::on_owner_attack_dmg_claw_do(void) const { return _on_owner_attack_dmg_claw_do; }
 const std::string &Tp::on_owner_attack_dmg_lightning_do(void) const { return _on_owner_attack_dmg_lightning_do; }
 const std::string &Tp::on_owner_attack_dmg_melee_do(void) const { return _on_owner_attack_dmg_melee_do; }
 const std::string &Tp::on_owner_attack_dmg_nat_att_do(void) const { return _on_owner_attack_dmg_nat_att_do; }
@@ -81,8 +81,8 @@ const std::string &Tp::on_owner_receive_dmg_draining_do(void) const { return _on
 const std::string &Tp::on_owner_receive_dmg_energy_do(void) const { return _on_owner_receive_dmg_energy_do; }
 const std::string &Tp::on_owner_receive_dmg_fire_do(void) const { return _on_owner_receive_dmg_fire_do; }
 const std::string &Tp::on_owner_receive_dmg_future1_do(void) const { return _on_owner_receive_dmg_future1_do; }
-const std::string &Tp::on_owner_receive_dmg_future2_do(void) const { return _on_owner_receive_dmg_future2_do; }
-const std::string &Tp::on_owner_receive_dmg_future3_do(void) const { return _on_owner_receive_dmg_future3_do; }
+const std::string &Tp::on_owner_receive_dmg_bite_do(void) const { return _on_owner_receive_dmg_bite_do; }
+const std::string &Tp::on_owner_receive_dmg_claw_do(void) const { return _on_owner_receive_dmg_claw_do; }
 const std::string &Tp::on_owner_receive_dmg_lightning_do(void) const { return _on_owner_receive_dmg_lightning_do; }
 const std::string &Tp::on_owner_receive_dmg_melee_do(void) const { return _on_owner_receive_dmg_melee_do; }
 const std::string &Tp::on_owner_receive_dmg_nat_att_do(void) const { return _on_owner_receive_dmg_nat_att_do; }
@@ -102,8 +102,8 @@ const std::string &Tp::on_receiving_dmg_draining_do(void) const { return _on_rec
 const std::string &Tp::on_receiving_dmg_energy_do(void) const { return _on_receiving_dmg_energy_do; }
 const std::string &Tp::on_receiving_dmg_fire_do(void) const { return _on_receiving_dmg_fire_do; }
 const std::string &Tp::on_receiving_dmg_future1_do(void) const { return _on_receiving_dmg_future1_do; }
-const std::string &Tp::on_receiving_dmg_future2_do(void) const { return _on_receiving_dmg_future2_do; }
-const std::string &Tp::on_receiving_dmg_future3_do(void) const { return _on_receiving_dmg_future3_do; }
+const std::string &Tp::on_receiving_dmg_bite_do(void) const { return _on_receiving_dmg_bite_do; }
+const std::string &Tp::on_receiving_dmg_claw_do(void) const { return _on_receiving_dmg_claw_do; }
 const std::string &Tp::on_receiving_dmg_lightning_do(void) const { return _on_receiving_dmg_lightning_do; }
 const std::string &Tp::on_receiving_dmg_melee_do(void) const { return _on_receiving_dmg_melee_do; }
 const std::string &Tp::on_receiving_dmg_nat_att_do(void) const { return _on_receiving_dmg_nat_att_do; }
@@ -676,7 +676,7 @@ int  Tp::unused_flag57(void) const { return _unused_flag57; }
 int  Tp::unused_flag58(void) const { return _unused_flag58; }
 int  Tp::unused_flag59(void) const { return _unused_flag59; }
 int  Tp::unused_flag5(void) const { return _unused_flag5; }
-int  Tp::unused_flag60(void) const { return _unused_flag60; }
+int  Tp::is_internal(void) const { return _is_internal; }
 int  Tp::unused_flag6(void) const { return _unused_flag6; }
 int  Tp::unused_flag7(void) const { return _unused_flag7; }
 int  Tp::unused_flag87(void) const { return _unused_flag87; }
@@ -1114,8 +1114,8 @@ void Tp::on_attacking_dmg_draining_do_set(const std::string &v) { _on_attacking_
 void Tp::on_attacking_dmg_energy_do_set(const std::string &v) { _on_attacking_dmg_energy_do = v; }
 void Tp::on_attacking_dmg_fire_do_set(const std::string &v) { _on_attacking_dmg_fire_do = v; }
 void Tp::on_attacking_dmg_future1_do_set(const std::string &v) { _on_attacking_dmg_future1_do = v; }
-void Tp::on_attacking_dmg_future2_do_set(const std::string &v) { _on_attacking_dmg_future2_do = v; }
-void Tp::on_attacking_dmg_future3_do_set(const std::string &v) { _on_attacking_dmg_future3_do = v; }
+void Tp::on_attacking_dmg_bite_do_set(const std::string &v) { _on_attacking_dmg_bite_do = v; }
+void Tp::on_attacking_dmg_claw_do_set(const std::string &v) { _on_attacking_dmg_claw_do = v; }
 void Tp::on_attacking_dmg_lightning_do_set(const std::string &v) { _on_attacking_dmg_lightning_do = v; }
 void Tp::on_attacking_dmg_melee_do_set(const std::string &v) { _on_attacking_dmg_melee_do = v; }
 void Tp::on_attacking_dmg_nat_att_do_set(const std::string &v) { _on_attacking_dmg_nat_att_do = v; }
@@ -1152,8 +1152,8 @@ void Tp::on_owner_attack_dmg_draining_do_set(const std::string &v) { _on_owner_a
 void Tp::on_owner_attack_dmg_energy_do_set(const std::string &v) { _on_owner_attack_dmg_energy_do = v; }
 void Tp::on_owner_attack_dmg_fire_do_set(const std::string &v) { _on_owner_attack_dmg_fire_do = v; }
 void Tp::on_owner_attack_dmg_future1_do_set(const std::string &v) { _on_owner_attack_dmg_future1_do = v; }
-void Tp::on_owner_attack_dmg_future2_do_set(const std::string &v) { _on_owner_attack_dmg_future2_do = v; }
-void Tp::on_owner_attack_dmg_future3_do_set(const std::string &v) { _on_owner_attack_dmg_future3_do = v; }
+void Tp::on_owner_attack_dmg_bite_do_set(const std::string &v) { _on_owner_attack_dmg_bite_do = v; }
+void Tp::on_owner_attack_dmg_claw_do_set(const std::string &v) { _on_owner_attack_dmg_claw_do = v; }
 void Tp::on_owner_attack_dmg_lightning_do_set(const std::string &v) { _on_owner_attack_dmg_lightning_do = v; }
 void Tp::on_owner_attack_dmg_melee_do_set(const std::string &v) { _on_owner_attack_dmg_melee_do = v; }
 void Tp::on_owner_attack_dmg_nat_att_do_set(const std::string &v) { _on_owner_attack_dmg_nat_att_do = v; }
@@ -1171,8 +1171,8 @@ void Tp::on_owner_receive_dmg_draining_do_set(const std::string &v) { _on_owner_
 void Tp::on_owner_receive_dmg_energy_do_set(const std::string &v) { _on_owner_receive_dmg_energy_do = v; }
 void Tp::on_owner_receive_dmg_fire_do_set(const std::string &v) { _on_owner_receive_dmg_fire_do = v; }
 void Tp::on_owner_receive_dmg_future1_do_set(const std::string &v) { _on_owner_receive_dmg_future1_do = v; }
-void Tp::on_owner_receive_dmg_future2_do_set(const std::string &v) { _on_owner_receive_dmg_future2_do = v; }
-void Tp::on_owner_receive_dmg_future3_do_set(const std::string &v) { _on_owner_receive_dmg_future3_do = v; }
+void Tp::on_owner_receive_dmg_bite_do_set(const std::string &v) { _on_owner_receive_dmg_bite_do = v; }
+void Tp::on_owner_receive_dmg_claw_do_set(const std::string &v) { _on_owner_receive_dmg_claw_do = v; }
 void Tp::on_owner_receive_dmg_lightning_do_set(const std::string &v) { _on_owner_receive_dmg_lightning_do = v; }
 void Tp::on_owner_receive_dmg_melee_do_set(const std::string &v) { _on_owner_receive_dmg_melee_do = v; }
 void Tp::on_owner_receive_dmg_nat_att_do_set(const std::string &v) { _on_owner_receive_dmg_nat_att_do = v; }
@@ -1192,8 +1192,8 @@ void Tp::on_receiving_dmg_draining_do_set(const std::string &v) { _on_receiving_
 void Tp::on_receiving_dmg_energy_do_set(const std::string &v) { _on_receiving_dmg_energy_do = v; }
 void Tp::on_receiving_dmg_fire_do_set(const std::string &v) { _on_receiving_dmg_fire_do = v; }
 void Tp::on_receiving_dmg_future1_do_set(const std::string &v) { _on_receiving_dmg_future1_do = v; }
-void Tp::on_receiving_dmg_future2_do_set(const std::string &v) { _on_receiving_dmg_future2_do = v; }
-void Tp::on_receiving_dmg_future3_do_set(const std::string &v) { _on_receiving_dmg_future3_do = v; }
+void Tp::on_receiving_dmg_bite_do_set(const std::string &v) { _on_receiving_dmg_bite_do = v; }
+void Tp::on_receiving_dmg_claw_do_set(const std::string &v) { _on_receiving_dmg_claw_do = v; }
 void Tp::on_receiving_dmg_lightning_do_set(const std::string &v) { _on_receiving_dmg_lightning_do = v; }
 void Tp::on_receiving_dmg_melee_do_set(const std::string &v) { _on_receiving_dmg_melee_do = v; }
 void Tp::on_receiving_dmg_nat_att_do_set(const std::string &v) { _on_receiving_dmg_nat_att_do = v; }
@@ -1347,7 +1347,7 @@ void Tp::unused_flag57_set(int v) { _unused_flag57 = v; }
 void Tp::unused_flag58_set(int v) { _unused_flag58 = v; }
 void Tp::unused_flag59_set(int v) { _unused_flag59 = v; }
 void Tp::unused_flag5_set(int v) { _unused_flag5 = v; }
-void Tp::unused_flag60_set(int v) { _unused_flag60 = v; }
+void Tp::is_internal_set(int v) { _is_internal = v; }
 void Tp::unused_flag6_set(int v) { _unused_flag6 = v; }
 void Tp::unused_flag7_set(int v) { _unused_flag7 = v; }
 void Tp::unused_flag87_set(int v) { _unused_flag87 = v; }

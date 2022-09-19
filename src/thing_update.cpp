@@ -10,6 +10,7 @@
 void Thing::update_light(void)
 {
   TRACE_NO_INDENT();
+
   if (! is_player()) {
     return;
   }

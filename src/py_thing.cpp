@@ -547,7 +547,7 @@ PyObject *thing_hit_damage_future1(PyObject *obj, PyObject *args, PyObject *keyw
   }
 }
 
-PyObject *thing_hit_damage_future2(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -583,11 +583,11 @@ PyObject *thing_hit_damage_future2(PyObject *obj, PyObject *args, PyObject *keyw
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set     = true;
-  attack_options.damage         = damage;
-  attack_options.attack_future2 = true;
+  attack_options.damage_set  = true;
+  attack_options.damage      = damage;
+  attack_options.attack_bite = true;
 
-  hitter->log("Attack with future2 damage, %d", damage);
+  hitter->log("Attack with bite damage, %d", damage);
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {
@@ -597,7 +597,7 @@ PyObject *thing_hit_damage_future2(PyObject *obj, PyObject *args, PyObject *keyw
   }
 }
 
-PyObject *thing_hit_damage_future3(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_damage_claw(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -633,11 +633,11 @@ PyObject *thing_hit_damage_future3(PyObject *obj, PyObject *args, PyObject *keyw
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set     = true;
-  attack_options.damage         = damage;
-  attack_options.attack_future3 = true;
+  attack_options.damage_set  = true;
+  attack_options.damage      = damage;
+  attack_options.attack_claw = true;
 
-  hitter->log("Attack with future3 damage, %d", damage);
+  hitter->log("Attack with claw damage, %d", damage);
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {

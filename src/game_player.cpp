@@ -54,7 +54,7 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
-        auto w = level->thing_new("pot_health", point(x - 1, y + 1));
+        auto w = level->thing_new("potion_health", point(x - 1, y + 1));
         t->carry(w);
         t->enchant_without_stone(w);
       }
@@ -307,8 +307,8 @@ void Game::place_player(void)
         level->thing_new("water", point(x + 4, y));
       }
       if (1) {
-        level->thing_new("jelly_parent", point(x + 4, y + 4));
-        level->thing_new("cloak_stone", point(x + 3, y + 4));
+        level->thing_new("bat_greater", point(x + 4, y + 4));
+        // level->thing_new("potion_health", point(x + 3, y + 4));
       }
 
       // level->thing_new("staff_descent", point(x + 5, y + 2));

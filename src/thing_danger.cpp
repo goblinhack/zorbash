@@ -69,8 +69,8 @@ int Tp::get_danger_level(void)
   danger_level += damage_melee_dice().max_roll();
   danger_level += damage_poison_dice().max_roll();
   danger_level += damage_future1_dice().max_roll();
-  danger_level += damage_future2_dice().max_roll();
-  danger_level += damage_future3_dice().max_roll();
+  danger_level += damage_bite_dice().max_roll();
+  danger_level += damage_claw_dice().max_roll();
   danger_level += damage_cold_dice().max_roll();
   danger_level += damage_fire_dice().max_roll();
   danger_level += damage_crush_dice().max_roll();

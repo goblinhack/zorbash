@@ -64,7 +64,7 @@ void Thing::goal_penalty_tick(void)
     }
 
     if (--p.second > 0) {
-      dbg("goal penalty: %s (%d timeout)", attacker->to_string().c_str(), p.second);
+      dbg("Goal penalty: %s (%d timeout)", attacker->to_string().c_str(), p.second);
       continue;
     }
 

@@ -15,13 +15,13 @@ int Thing::on_owner_receive_dmg_stat_str(Thingp owner, Thingp hitter, Thingp rea
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_stat_str null thing");
+    err("Cannot call owner_damage_stat_str null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_stat_str null thing");
+    err("Cannot call owner_damage_stat_str null thing");
     return damage;
   }
 
@@ -62,7 +62,7 @@ int Thing::on_receiving_dmg_stat_str(Thingp hitter, Thingp real_hitter, int dama
   verify(MTYPE_THING, hitter);
 
   if (! hitter) {
-    err("Cannot damage_stat_str null thing");
+    err("Cannot call damage_stat_str null thing");
     return damage;
   }
 
@@ -138,7 +138,7 @@ int Thing::on_attacking_dmg_stat_str(Thingp victim, int damage)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot damage_stat_str null thing");
+    err("Cannot call damage_stat_str null thing");
     return damage;
   }
 
@@ -178,13 +178,13 @@ int Thing::on_owner_attack_dmg_stat_str(Thingp owner, Thingp victim, int damage)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_stat_str null thing");
+    err("Cannot call owner_damage_stat_str null thing");
     return damage;
   }
 
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot owner_damage_stat_str null thing");
+    err("Cannot call owner_damage_stat_str null thing");
     return damage;
   }
 

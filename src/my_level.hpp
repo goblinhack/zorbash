@@ -512,6 +512,12 @@ public:
   level->animated_things_walk_in_progress = false;                                                                   \
   }
 
+#define FOR_ALL_NON_INTERNAL_THINGS(level, t, x, y)                                                                  \
+  FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
+  if (t->is_internal()) {                                                                                            \
+    continue;                                                                                                        \
+  }
+
 #define FOR_ALL_GRID_THINGS(level, t, x, y)                                                                          \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
   if (! t->is_the_grid) {                                                                                            \
@@ -550,7 +556,7 @@ public:
 //
 #define FOR_ALL_THINGS_THAT_DO_STUFF(level, t, x, y)                                                                 \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (t->is_the_grid) {                                                                                              \
+  if (t->is_internal()) {                                                                                            \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_floor()) {                                                                                               \
@@ -569,7 +575,7 @@ public:
 //
 #define FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)                                                                 \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (t->is_the_grid) {                                                                                              \
+  if (t->is_internal()) {                                                                                            \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_floor()) {                                                                                               \
@@ -584,7 +590,7 @@ public:
 
 #define FOR_ALL_THINGS_THAT_INTERACT_UNSAFE(level, t, x, y)                                                          \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (t->is_the_grid) {                                                                                              \
+  if (t->is_internal()) {                                                                                            \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_floor()) {                                                                                               \
@@ -602,7 +608,7 @@ public:
 //
 #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                                                                     \
   FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
-  if (t->is_the_grid) {                                                                                              \
+  if (t->is_internal()) {                                                                                            \
     continue;                                                                                                        \
   }                                                                                                                  \
   if (t->is_floor()) {                                                                                               \

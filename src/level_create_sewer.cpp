@@ -139,7 +139,7 @@ bool Level::create_sewer_pipes(point3d at)
   TRACE_NO_INDENT();
   for (auto y = 0; y < MAP_HEIGHT; y++) {
     for (auto x = 0; x < MAP_WIDTH; x++) {
-      FOR_ALL_THINGS(prev, t, x, y)
+      FOR_ALL_NON_INTERNAL_THINGS(prev, t, x, y)
       {
         if (t->is_descend_sewer()) {
           point p(x, y);

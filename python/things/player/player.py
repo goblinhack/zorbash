@@ -192,11 +192,11 @@ def on_receiving_dmg_future1(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_dmg_future2(me, hitter, x, y, damage):
+def on_receiving_dmg_bite(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_dmg_future3(me, hitter, x, y, damage):
+def on_receiving_dmg_claw(me, hitter, x, y, damage):
     return damage
 
 
@@ -260,11 +260,11 @@ def on_attacking_dmg_future1(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_dmg_future2(me, victim, x, y, damage):
+def on_attacking_dmg_bite(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_dmg_future3(me, victim, x, y, damage):
+def on_attacking_dmg_claw(me, victim, x, y, damage):
     return damage
 
 
@@ -388,6 +388,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_explorer(self, True)
     my.is_humanoid(self, True)
     my.is_intelligent(self, True)
+    my.is_interesting(self, True)
     my.is_item_collector(self, True)
     my.is_living(self, True)
     my.is_loggable(self, True)
@@ -406,6 +407,8 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.noise_decibels_hearing(self, 30)
     my.noise_on_moving(self, 50)
     my.on_attacking_dmg_acid_do(self, "player.on_attacking_dmg_acid()")
+    my.on_attacking_dmg_bite_do(self, "player.on_attacking_dmg_bite()")
+    my.on_attacking_dmg_claw_do(self, "player.on_attacking_dmg_claw()")
     my.on_attacking_dmg_cold_do(self, "player.on_attacking_dmg_cold()")
     my.on_attacking_dmg_crush_do(self, "player.on_attacking_dmg_crush()")
     my.on_attacking_dmg_digest_do(self, "player.on_attacking_dmg_digest()")
@@ -413,8 +416,6 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_attacking_dmg_energy_do(self, "player.on_attacking_dmg_energy()")
     my.on_attacking_dmg_fire_do(self, "player.on_attacking_dmg_fire()")
     my.on_attacking_dmg_future1_do(self, "player.on_attacking_dmg_future1()")
-    my.on_attacking_dmg_future2_do(self, "player.on_attacking_dmg_future2()")
-    my.on_attacking_dmg_future3_do(self, "player.on_attacking_dmg_future3()")
     my.on_attacking_dmg_lightning_do(self, "player.on_attacking_dmg_lightning()")
     my.on_attacking_dmg_melee_do(self, "player.on_attacking_dmg_melee()")
     my.on_attacking_dmg_nat_att_do(self, "player.on_attacking_dmg_nat_att()")
@@ -427,6 +428,8 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_death_drop_all_items(self, True)
     my.on_move_do(self, "player.on_move()")
     my.on_receiving_dmg_acid_do(self, "player.on_receiving_dmg_acid()")
+    my.on_receiving_dmg_bite_do(self, "player.on_receiving_dmg_bite()")
+    my.on_receiving_dmg_claw_do(self, "player.on_receiving_dmg_claw()")
     my.on_receiving_dmg_cold_do(self, "player.on_receiving_dmg_cold()")
     my.on_receiving_dmg_crush_do(self, "player.on_receiving_dmg_crush()")
     my.on_receiving_dmg_digest_do(self, "player.on_receiving_dmg_digest()")
@@ -434,8 +437,6 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_receiving_dmg_energy_do(self, "player.on_receiving_dmg_energy()")
     my.on_receiving_dmg_fire_do(self, "player.on_receiving_dmg_fire()")
     my.on_receiving_dmg_future1_do(self, "player.on_receiving_dmg_future1()")
-    my.on_receiving_dmg_future2_do(self, "player.on_receiving_dmg_future2()")
-    my.on_receiving_dmg_future3_do(self, "player.on_receiving_dmg_future3()")
     my.on_receiving_dmg_lightning_do(self, "player.on_receiving_dmg_lightning()")
     my.on_receiving_dmg_melee_do(self, "player.on_receiving_dmg_melee()")
     my.on_receiving_dmg_nat_att_do(self, "player.on_receiving_dmg_nat_att()")

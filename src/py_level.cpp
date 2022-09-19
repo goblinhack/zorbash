@@ -232,7 +232,8 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   auto items = 0;
-  FOR_ALL_THINGS(t->level, t, x, y)
+
+  FOR_ALL_NON_INTERNAL_THINGS(t->level, t, x, y)
   {
     //
     // Don't include carried things else lasers will destroy all items carried!
@@ -246,7 +247,8 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
 
   PyObject *lst  = PyList_New(items);
   auto      item = 0;
-  FOR_ALL_THINGS(t->level, t, x, y)
+
+  FOR_ALL_NON_INTERNAL_THINGS(t->level, t, x, y)
   {
     //
     // Don't include carried things else lasers will destroy all items carried!
@@ -377,7 +379,7 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
-    FOR_ALL_THINGS(t->level, t, x, y)                                                                                \
+    FOR_ALL_NON_INTERNAL_THINGS(t->level, t, x, y)                                                                   \
     {                                                                                                                \
       if (t->__api__()) {                                                                                            \
         Py_RETURN_TRUE;                                                                                              \

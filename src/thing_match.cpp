@@ -832,7 +832,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag59() && (what == "unused_flag59")) {
     return true;
   }
-  if (unused_flag60() && (what == "unused_flag60")) {
+  if (is_internal() && (what == "is_internal")) {
     return true;
   }
   if (is_eater_of_helmets() && (what == "is_eater_of_helmets")) {
@@ -2414,8 +2414,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag5") {
     return &Thing::unused_flag5;
   }
-  if (what == "unused_flag60") {
-    return &Thing::unused_flag60;
+  if (what == "internal") {
+    return &Thing::is_internal;
   }
   if (what == "is_eater_of_helmets") {
     return &Thing::is_eater_of_helmets;

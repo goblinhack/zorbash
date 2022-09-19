@@ -355,17 +355,20 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
     // No shove recursion
     //
     if (it->is_shovable_and_sticky()) {
-      FOR_ALL_THINGS(level, t, old_at.x, old_at.y)
+      FOR_ALL_NON_INTERNAL_THINGS(level, t, old_at.x, old_at.y)
       {
         if (t == this) {
           continue;
         }
+
         if (t == it) {
           continue;
         }
+
         if (! t->is_shovable()) {
           continue;
         }
+
         if (t->curr_at == it->curr_at) {
           continue;
         }

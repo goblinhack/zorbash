@@ -1606,10 +1606,10 @@ int Thing::unused_flag59(void)
   return (tp()->unused_flag59());
 }
 
-int Thing::unused_flag60(void)
+int Thing::is_internal(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag60());
+  return (tp()->is_internal());
 }
 
 int Thing::is_eater_of_helmets(void)
@@ -2922,7 +2922,11 @@ void Thing::new_infop(void)
       //
       // Walls and rock can be destroyed, hence no checks
       //
-      if (is_dirt() || is_the_grid || is_floor()) {
+      if (is_msg() || is_cursor()) {
+        //
+        // Cursor needs to move
+        //
+      } else if (is_dirt() || is_internal() || is_floor()) {
         die("Unexpectedly needs info monst struct");
       }
     }
@@ -2942,7 +2946,7 @@ void Thing::new_itemsp(void)
       //
       // Walls and rock can be destroyed, hence no checks
       //
-      if (is_wall() || is_dirt() || is_the_grid || is_floor()) {
+      if (is_wall() || is_dirt() || is_internal() || is_floor()) {
         die("Unexpectedly needs item monst struct");
       }
     }
@@ -3390,6 +3394,9 @@ const std::string &Thing::dead_reason_get(void)
 void Thing::dead_reason_set(const std::string &v)
 {
   TRACE_NO_INDENT();
+  if (! maybe_infop()) {
+    return;
+  }
   new_infop();
   infop()->dead_reason = v;
 }

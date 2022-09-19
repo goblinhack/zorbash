@@ -357,7 +357,7 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
   //
   // Can't pick things up whilst being swallowed!
   //
-  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y) // curr_at is correct
+  FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y) // curr_at is correct
   {
     if (t->is_dead) {
       continue;
@@ -373,12 +373,8 @@ std::list< Thingp > Thing::anything_to_carry_at(point at)
   }
   FOR_ALL_THINGS_END()
 
-  FOR_ALL_THINGS(level, t, at.x, at.y)
+  FOR_ALL_NON_INTERNAL_THINGS(level, t, at.x, at.y)
   {
-    if (t->is_hidden) {
-      continue;
-    }
-
     if (! t->is_collectable()) {
       continue;
     }
@@ -438,12 +434,8 @@ bool Thing::check_anything_to_carry(bool auto_collect_allowed)
   //
   // Can't pick things up whilst being swallowed!
   //
-  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
+  FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_hidden) {
-      continue;
-    }
-
     if (t->is_dead) {
       continue;
     }
@@ -458,12 +450,8 @@ bool Thing::check_anything_to_carry(bool auto_collect_allowed)
   }
   FOR_ALL_THINGS_END()
 
-  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
+  FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_hidden) {
-      continue;
-    }
-
     if (t->is_dead) {
       continue;
     }

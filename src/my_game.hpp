@@ -216,8 +216,8 @@ public:
   void wid_thing_info_add_damage_energy(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_fire(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_future1(WidPopup *w, Thingp t, int index);
-  void wid_thing_info_add_damage_future2(WidPopup *w, Thingp t, int index);
-  void wid_thing_info_add_damage_future3(WidPopup *w, Thingp t, int index);
+  void wid_thing_info_add_damage_bite(WidPopup *w, Thingp t, int index);
+  void wid_thing_info_add_damage_claw(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_melee(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_nat_att(WidPopup *w, Thingp t, int index);

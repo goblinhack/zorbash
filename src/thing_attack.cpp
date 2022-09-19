@@ -153,7 +153,7 @@ bool Thing::possible_to_attack(const Thingp victim)
     // Meat eaters eat you when you are dead!
     //
     if (victim->is_meat()) {
-      dbg("Allow meat eater attack on corpse of %s", victim->to_short_string().c_str());
+      dbg("Allow meat eater attack on %s", victim->to_short_string().c_str());
       return true;
     }
   } else {
@@ -509,10 +509,10 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
       dbg("Attack type already set: attack_poison");
     } else if (attack_options->attack_future1) {
       dbg("Attack type already set: attack_future1");
-    } else if (attack_options->attack_future2) {
-      dbg("Attack type already set: attack_future2");
-    } else if (attack_options->attack_future3) {
-      dbg("Attack type already set: attack_future3");
+    } else if (attack_options->attack_bite) {
+      dbg("Attack type already set: attack_bite");
+    } else if (attack_options->attack_claw) {
+      dbg("Attack type already set: attack_claw");
     } else if (attack_options->attack_cold) {
       dbg("Attack type already set: attack_cold");
     } else if (attack_options->attack_fire) {
@@ -592,33 +592,33 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     }
 
     //
-    // Chance of attack_future2 damage?
+    // Chance of attack_bite damage?
     //
-    if (! attack_options->attack_future2) {
+    if (! attack_options->attack_bite) {
       if (! attack_options->damage_set) {
-        if (d1000() < damage_future2_chance_d1000(attack_options->attack_num)) {
-          int damage_future2_val = damage_future2();
-          if (damage_future2_val > 0) {
-            attack_options->damage         = damage_future2_val;
-            attack_options->damage_set     = true;
-            attack_options->attack_future2 = true;
-            dbg("Set future2 damage %d", attack_options->damage);
+        if (d1000() < damage_bite_chance_d1000(attack_options->attack_num)) {
+          int damage_bite_val = damage_bite();
+          if (damage_bite_val > 0) {
+            attack_options->damage      = damage_bite_val;
+            attack_options->damage_set  = true;
+            attack_options->attack_bite = true;
+            dbg("Set bite damage %d", attack_options->damage);
           }
         }
       }
     }
 
     //
-    // Chance of attack_future3 damage?
+    // Chance of attack_claw damage?
     //
     if (! attack_options->damage_set) {
-      if (d1000() < damage_future3_chance_d1000(attack_options->attack_num)) {
-        int damage_future3_val = damage_future3();
-        if (damage_future3_val > 0) {
-          attack_options->damage         = damage_future3_val;
-          attack_options->damage_set     = true;
-          attack_options->attack_future3 = true;
-          dbg("Set future3 damage %d", attack_options->damage);
+      if (d1000() < damage_claw_chance_d1000(attack_options->attack_num)) {
+        int damage_claw_val = damage_claw();
+        if (damage_claw_val > 0) {
+          attack_options->damage      = damage_claw_val;
+          attack_options->damage_set  = true;
+          attack_options->attack_claw = true;
+          dbg("Set claw damage %d", attack_options->damage);
         }
       }
     }
@@ -848,8 +848,8 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         attack_options->damage           = damage_digest();
         attack_options->attack_poison    = false;
         attack_options->attack_future1   = false;
-        attack_options->attack_future2   = false;
-        attack_options->attack_future3   = false;
+        attack_options->attack_bite      = false;
+        attack_options->attack_claw      = false;
         attack_options->attack_cold      = false;
         attack_options->attack_fire      = false;
         attack_options->attack_crush     = false;
@@ -1107,8 +1107,8 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     //
     attack_options->attack_poison    = false;
     attack_options->attack_future1   = false;
-    attack_options->attack_future2   = false;
-    attack_options->attack_future3   = false;
+    attack_options->attack_bite      = false;
+    attack_options->attack_claw      = false;
     attack_options->attack_cold      = false;
     attack_options->attack_fire      = false;
     attack_options->attack_crush     = false;
@@ -1213,21 +1213,21 @@ int Thing::is_attacked_with_damage_future1(Thingp hitter, Thingp real_hitter, in
   return is_hit(hitter, &attack_options, damage);
 }
 
-int Thing::is_attacked_with_damage_future2(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::is_attacked_with_damage_bite(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   AttackOptions attack_options {};
-  attack_options.attack_future2 = true;
-  attack_options.real_hitter    = real_hitter;
+  attack_options.attack_bite = true;
+  attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
 
-int Thing::is_attacked_with_damage_future3(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::is_attacked_with_damage_claw(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   AttackOptions attack_options {};
-  attack_options.attack_future3 = true;
-  attack_options.real_hitter    = real_hitter;
+  attack_options.attack_claw = true;
+  attack_options.real_hitter = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
 

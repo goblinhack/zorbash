@@ -199,11 +199,12 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // See if we are prevented from jumping. i.e. from a spider sitting on us.
   //
-  FOR_ALL_THINGS(level, it, curr_at.x, curr_at.y)
+  FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
   {
     if (it == this) {
       continue;
     }
+
     if (! it->is_alive_monst()) {
       continue;
     }

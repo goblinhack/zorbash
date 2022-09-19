@@ -144,10 +144,8 @@ void Thing::throw_at(Thingp what, Thingp target)
   if (need_to_choose_a_new_target) {
     FOR_ALL_GRID_THINGS(level, t, throw_at.x, throw_at.y)
     {
-      if (t->is_the_grid) {
-        target = t;
-        break;
-      }
+      target = t;
+      break;
     }
     FOR_ALL_THINGS_END()
   } else {

@@ -112,6 +112,7 @@ def tp_init(name, text_long_name):
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
     my.is_humanoid(self, True)
+    my.is_interesting(self, True)
     my.is_item_carrier(self, True)
     my.is_item_collector(self, True)
     my.is_living(self, True)

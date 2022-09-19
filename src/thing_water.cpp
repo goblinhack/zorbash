@@ -16,9 +16,6 @@ void Thing::water_tick(void)
     return;
   }
 
-  dbg("Water tick");
-  TRACE_AND_INDENT();
-
   if (is_on_fire()) {
     on_fire_unset();
 

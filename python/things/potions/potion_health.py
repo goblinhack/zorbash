@@ -45,7 +45,7 @@ def on_use(owner, item, target, x, y):
         my.thing_poisoned_amount_set(owner, 0)
 
     if did_something:
-        my.spawn_using_items_radius_range(owner, item, target, "pot_health_effect")
+        my.spawn_using_items_radius_range(owner, item, target, "potion_health_effect")
         if my.thing_is_player(owner):
             my.thing_msg(owner, "%%fg=pink$You glow with renewed health.%%fg=reset$")
     else:
@@ -113,6 +113,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_glass(self, True)
     my.is_health_booster(self, True)
     my.is_hittable(self, True)
+    my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
@@ -126,6 +127,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.item_width(self, 4)
     my.noise_on_dropping(self, 10)
     my.normal_placement_rules(self, True)
+    my.nutrition_dice(self, "1d20")
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_fall_do(self, "me.on_fall()")
     my.on_get_text_long_description_do(self, "me.on_get_text_long_description()")
@@ -165,7 +167,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="pot_health", text_long_name="potion of health awesomeness", text_short_name="pot. health")
+    tp_init(name="potion_health", text_long_name="potion of health awesomeness", text_short_name="pot. health")
 
 
 init()

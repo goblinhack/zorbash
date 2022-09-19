@@ -97,6 +97,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_combustible(self, True)
     my.is_spawner(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
+    my.is_interesting(self, True)
     my.is_treasure_class_b(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
@@ -115,6 +116,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.on_final_use_do(self, "me.on_final_use()")
+    my.is_interesting(self, True)
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_hit_and_now_dead_do(self, "me.on_you_are_hit_and_now_dead()")

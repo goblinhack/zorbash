@@ -506,7 +506,7 @@ do
       unused_flag58 \
       unused_flag59 \
       unused_flag6 \
-      unused_flag60 \
+      internal \
       is_eater_of_helmets \
       is_eater_of_amulets \
       is_eater_of_weapons \

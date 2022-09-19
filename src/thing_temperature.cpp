@@ -22,9 +22,9 @@ void Thing::temperature_tick(void)
     location_temp_set = true;
   }
 
-  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
+  FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_hidden) {
+    if (t->is_floor()) {
       continue;
     }
 

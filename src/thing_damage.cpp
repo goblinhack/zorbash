@@ -95,8 +95,8 @@ int Thing::damage_max(void)
   max_damage      = std::max(max_damage, damage_melee_dice().max_roll());
   max_damage      = std::max(max_damage, damage_poison_dice().max_roll());
   max_damage      = std::max(max_damage, damage_future1_dice().max_roll());
-  max_damage      = std::max(max_damage, damage_future2_dice().max_roll());
-  max_damage      = std::max(max_damage, damage_future3_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_bite_dice().max_roll());
+  max_damage      = std::max(max_damage, damage_claw_dice().max_roll());
   max_damage      = std::max(max_damage, damage_cold_dice().max_roll());
   max_damage      = std::max(max_damage, damage_fire_dice().max_roll());
   max_damage      = std::max(max_damage, damage_crush_dice().max_roll());
@@ -129,8 +129,8 @@ int Thing::damage_min(void)
   min_damage      = std::min(min_damage, damage_melee_dice().min_roll());
   min_damage      = std::min(min_damage, damage_poison_dice().min_roll());
   min_damage      = std::min(min_damage, damage_future1_dice().min_roll());
-  min_damage      = std::min(min_damage, damage_future2_dice().min_roll());
-  min_damage      = std::min(min_damage, damage_future3_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_bite_dice().min_roll());
+  min_damage      = std::min(min_damage, damage_claw_dice().min_roll());
   min_damage      = std::min(min_damage, damage_cold_dice().min_roll());
   min_damage      = std::min(min_damage, damage_fire_dice().min_roll());
   min_damage      = std::min(min_damage, damage_crush_dice().min_roll());

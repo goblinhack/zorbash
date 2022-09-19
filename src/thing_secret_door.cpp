@@ -20,12 +20,8 @@ void Thing::secret_door_tick(void)
 
   dbg("Opened a secret door");
 
-  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
+  FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_hidden) {
-      continue;
-    }
-
     if (! t->is_secret_door()) {
       continue;
     }

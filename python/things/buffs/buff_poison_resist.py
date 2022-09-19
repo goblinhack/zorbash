@@ -29,11 +29,11 @@ def on_owner_receive_dmg_future1(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receive_dmg_future2(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receive_dmg_bite(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receive_dmg_future3(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receive_dmg_claw(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
@@ -106,10 +106,13 @@ def tp_init(name, text_long_name):
 
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
+    my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_receive_dmg_acid_do(self, "me.on_owner_receive_dmg_acid()")
+    my.on_owner_receive_dmg_bite_do(self, "me.on_owner_receive_dmg_bite()")
+    my.on_owner_receive_dmg_claw_do(self, "me.on_owner_receive_dmg_claw()")
     my.on_owner_receive_dmg_cold_do(self, "me.on_owner_receive_dmg_cold()")
     my.on_owner_receive_dmg_crush_do(self, "me.on_owner_receive_dmg_crush()")
     my.on_owner_receive_dmg_digest_do(self, "me.on_owner_receive_dmg_digest()")
@@ -117,8 +120,6 @@ def tp_init(name, text_long_name):
     my.on_owner_receive_dmg_energy_do(self, "me.on_owner_receive_dmg_energy()")
     my.on_owner_receive_dmg_fire_do(self, "me.on_owner_receive_dmg_fire()")
     my.on_owner_receive_dmg_future1_do(self, "me.on_owner_receive_dmg_future1()")
-    my.on_owner_receive_dmg_future2_do(self, "me.on_owner_receive_dmg_future2()")
-    my.on_owner_receive_dmg_future3_do(self, "me.on_owner_receive_dmg_future3()")
     my.on_owner_receive_dmg_lightning_do(self, "me.on_owner_receive_dmg_lightning()")
     my.on_owner_receive_dmg_melee_do(self, "me.on_owner_receive_dmg_melee()")
     my.on_owner_receive_dmg_nat_att_do(self, "me.on_owner_receive_dmg_nat_att()")

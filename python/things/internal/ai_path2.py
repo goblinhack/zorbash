@@ -8,6 +8,7 @@ def tp_init(name):
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.is_debug_path(self, True)
+    my.is_internal(self, True)
     my.is_moveable(self, True)
     my.is_removeable_if_out_of_slots(self, True)
     my.is_tmp_thing(self, True)

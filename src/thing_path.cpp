@@ -212,15 +212,13 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
       //
       DBG2("Something is in our way that can be shoved");
       auto delta = future_pos - curr_at;
-      FOR_ALL_THINGS(level, t, future_pos.x, future_pos.y)
-      {
-        if (t->is_hidden) {
-          continue;
-        }
 
+      FOR_ALL_NON_INTERNAL_THINGS(level, t, future_pos.x, future_pos.y)
+      {
         if (! t->is_shovable()) {
           continue;
         }
+
         switch (try_to_shove_into_hazard(t, delta)) {
           case THING_SHOVE_TRIED_AND_FAILED:
             {

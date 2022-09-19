@@ -21,6 +21,7 @@ def tp_init(name, text_long_name):
 
     my.gfx_ascii_shown(self, True)
     my.is_debuff(self, True)
+    my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.on_tick_do(self, "me.on_tick()")

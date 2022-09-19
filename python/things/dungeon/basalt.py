@@ -17,6 +17,7 @@ def basalt_init(name, text_long_name, tiles=[]):
     my.is_basalt(self, True)
     my.is_biome_dungeon(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.text_a_or_an(self, "")

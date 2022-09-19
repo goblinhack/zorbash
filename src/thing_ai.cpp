@@ -466,15 +466,18 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       point p(x, y);
 
       if (! get(ai->can_see_ever.can_see, x, y)) {
+        // dbg("can see walk %d,%d line %d", x, y, __LINE__);
         continue;
       }
 
       if (too_far_from_mob(p)) {
+        // dbg("can see walk %d,%d line %d", x, y, __LINE__);
         continue;
       }
 
       if (too_far_from_leader(p)) {
         if (distance_from_leader() < too_far_from_leader(p)) {
+          // dbg("can see walk %d,%d line %d", x, y, __LINE__);
           continue;
         }
       }
@@ -522,6 +525,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       // So if we get here this thing is an AI obstacle. Can we jump over it?
       //
       if (! jump_allowed) {
+        // dbg("can see walk %d,%d line %d", x, y, __LINE__);
         continue;
       }
 
@@ -907,7 +911,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   IF_DEBUG2
   {
     if (is_debug_type()) {
-      dbg("Dmap can see before processing:");
+      dbg("DMAP can see before processing:");
       dmap_print(dmap_can_see, curr_at, point(minx, miny), point(maxx, maxy));
     }
   }
@@ -917,7 +921,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
   IF_DEBUG2
   {
     if (is_debug_type()) {
-      dbg("Dmap can see:");
+      dbg("DMAP can see:");
       dmap_print(dmap_can_see, curr_at, point(minx, miny), point(maxx, maxy));
     }
   }
@@ -948,26 +952,29 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
     }
   }
 
+  dbg("Choose can see goals between %d,%d and %d,%d", minx, miny, maxx, maxy);
+  TRACE_AND_INDENT();
+
   for (int y = miny; y <= maxy; y++) {
     for (int x = minx; x <= maxx; x++) {
       point p(x, y);
 
       if (! get(ai->can_see_currently.can_see, p.x, p.y)) {
-        //        if (is_debug_type()) {
-        //          log("%d %d can not see currently", p.x, p.y);
-        //        }
+        // if (is_debug_type()) {
+        //   log("%d %d can not see currently", p.x, p.y);
+        // }
         continue;
       }
 
       if (get(dmap_can_see->val, x, y) == DMAP_IS_WALL) {
-        //        if (is_debug_type()) {
-        //          log("%d %d can not see due to dmap", p.x, p.y);
-        //        }
+        // if (is_debug_type()) {
+        //   log("%d %d can not see due to dmap", p.x, p.y);
+        // }
         continue;
       }
 
       if (is_debug_type()) {
-        log("%d %d walk", p.x, p.y);
+        log("Walk %d,%d", p.x, p.y);
       }
 
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
@@ -1043,9 +1050,10 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         // Worse terrain, less preferred. Higher score, morepreferred.
         //
-        auto my_health   = health();
-        auto it_health   = it->health();
-        auto health_diff = my_health - it_health;
+        auto my_health    = health() + aggression_pct() / 10;
+        auto it_health    = it->health();
+        auto it_nutrition = it->nutrition_get();
+        auto health_diff  = my_health - it_health;
 
         //
         // Don't allow of attacking monsts from memory if the player or
@@ -1058,14 +1066,22 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             //
             // If instatiable, eat, eat, eat...
             //
-            GOAL_ADD(GOAL_PRIO_LOW, it_health - goal_penalty, "eat-it", it);
+            if (! it->is_monst()) {
+              GOAL_ADD(GOAL_PRIO_MED, 20 + it_nutrition - goal_penalty, "eat-it-insatiable", it);
+            } else {
+              GOAL_ADD(GOAL_PRIO_MED, it_health - goal_penalty, "eat-it-insatiable", it);
+            }
           }
         } else if (is_starving) {
           if (worth_eating(it)) {
             //
             // If starving, prefer the thing with most health
             //
-            GOAL_ADD(GOAL_PRIO_LOW, it_health - goal_penalty, "eat-it", it);
+            if (! it->is_monst()) {
+              GOAL_ADD(GOAL_PRIO_MED, 10 + it_nutrition + it_health - goal_penalty, "eat-it", it);
+            } else {
+              GOAL_ADD(GOAL_PRIO_MED, it_health - goal_penalty, "eat-it", it);
+            }
           }
         } else if (is_hungry) {
           if (worth_eating(it) && ! is_dangerous(it)) {
@@ -1076,6 +1092,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
             //
             if (it->is_player()) {
               GOAL_ADD(GOAL_PRIO_LOW, it_health / 2 - goal_penalty, "eat-player", it);
+            } else if (! it->is_monst()) {
+              GOAL_ADD(GOAL_PRIO_LOW, it_nutrition - goal_penalty, "eat-it", it);
             } else if (it->is_alive_monst()) {
               GOAL_ADD(GOAL_PRIO_LOW, it_health / 2 - goal_penalty, "eat-monst", it);
             } else {
@@ -1121,7 +1139,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           // knowledge.
           //
           if (lit_recently) {
-            dbg("AI: Consider (my health %d, its health %d) ? %s%s%s%s", my_health, it_health,
+            dbg("AI: Consider (my agg+health %d, its health %d) ? %s%s%s%s", my_health, it_health,
                 it->to_short_string().c_str(), is_enemy(it) ? ", is enemy" : "",
                 is_dangerous(it) ? ", is dangerous" : "", is_to_be_avoided(it) ? ", is to be avoided" : "");
 
@@ -1142,8 +1160,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 // The closer an enemy is (something that attacked us), the higher the score
                 //
-                GOAL_ADD(GOAL_PRIO_VERY_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-enemy",
-                         it);
+                GOAL_ADD(GOAL_PRIO_VERY_HIGH, aggression_pct() + (int) (max_dist - dist) * health_diff - goal_penalty,
+                         "attack-enemy", it);
               }
             } else if (! is_fearless() && (dist < distance_avoid_get()) && will_avoid_monst(it)) {
               //
@@ -1163,7 +1181,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
               //
               // Very close, very high priority attack as they can spawn much danger!
               //
-              GOAL_ADD(GOAL_PRIO_VERY_HIGH, 200 + (int) (max_dist - dist) * health_diff - goal_penalty,
+              GOAL_ADD(GOAL_PRIO_VERY_HIGH,
+                       200 + aggression_pct() + (int) (max_dist - dist) * health_diff - goal_penalty,
                        "attack-nearby-mob", it);
             } else if ((it->is_alive_monst() || it->is_player()) && possible_to_attack(it)) {
               //
@@ -1175,8 +1194,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 // Very close, high priority attack
                 //
-                GOAL_ADD(GOAL_PRIO_HIGH, (int) (max_dist - dist) * health_diff - goal_penalty, "attack-nearby-monst",
-                         it);
+                GOAL_ADD(GOAL_PRIO_HIGH, aggression_pct() + (int) (max_dist - dist) * health_diff - goal_penalty,
+                         "attack-nearby-monst", it);
               } else if (dist <= max_dist) {
                 //
                 // No hunting monsters we cannot see just because we have visited that area before.
@@ -1184,7 +1203,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 if (d100() < aggression_pct()) {
                   if (possible_to_attack(it)) {
-                    GOAL_ADD(GOAL_PRIO_MED, -health_diff - goal_penalty, "can-attack-monst-unprovoked", it);
+                    GOAL_ADD(GOAL_PRIO_MED, aggression_pct() + -health_diff - goal_penalty,
+                             "can-attack-monst-unprovoked", it);
                     //
                     // Add it as an enemy so we will keep going for it and not cool off due to random aggression
                     //
@@ -1291,7 +1311,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     // Don't try and walk through other minions
     //
     if (is_minion()) {
-      FOR_ALL_THINGS(level, it, p.x, p.y)
+      FOR_ALL_NON_INTERNAL_THINGS(level, it, p.x, p.y)
       {
         if (it == this) {
           continue;
@@ -1310,7 +1330,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     // Don't try and walk through other followers
     //
     if (is_able_to_follow()) {
-      FOR_ALL_THINGS(level, it, p.x, p.y)
+      FOR_ALL_NON_INTERNAL_THINGS(level, it, p.x, p.y)
       {
         if (it == this) {
           continue;
@@ -1720,12 +1740,8 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
         continue;
       }
 
-      FOR_ALL_THINGS(level, it, at.x, at.y)
+      FOR_ALL_NON_INTERNAL_THINGS(level, it, at.x, at.y)
       {
-        if (it->is_hidden) {
-          continue;
-        }
-
         if (it->is_door() && ! it->is_open) {
           if (is_able_to_open_doors()) {
             if (keys()) {

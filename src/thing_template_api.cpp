@@ -71,22 +71,22 @@ void               Tp::damage_future1_dice_set(const std::string &v)
   _damage_future1_dice_str = v;
 }
 
-const Dice        &Tp::damage_future2_dice(void) const { return _damage_future2_dice; }
-const int          Tp::damage_future2(void) const { return _damage_future2_dice.roll(); }
-const std::string &Tp::damage_future2_dice_str(void) const { return _damage_future2_dice_str; }
-void               Tp::damage_future2_dice_set(const std::string &v)
+const Dice        &Tp::damage_bite_dice(void) const { return _damage_bite_dice; }
+const int          Tp::damage_bite(void) const { return _damage_bite_dice.roll(); }
+const std::string &Tp::damage_bite_dice_str(void) const { return _damage_bite_dice_str; }
+void               Tp::damage_bite_dice_set(const std::string &v)
 {
-  _damage_future2_dice     = v;
-  _damage_future2_dice_str = v;
+  _damage_bite_dice     = v;
+  _damage_bite_dice_str = v;
 }
 
-const Dice        &Tp::damage_future3_dice(void) const { return _damage_future3_dice; }
-const int          Tp::damage_future3(void) const { return _damage_future3_dice.roll(); }
-const std::string &Tp::damage_future3_dice_str(void) const { return _damage_future3_dice_str; }
-void               Tp::damage_future3_dice_set(const std::string &v)
+const Dice        &Tp::damage_claw_dice(void) const { return _damage_claw_dice; }
+const int          Tp::damage_claw(void) const { return _damage_claw_dice.roll(); }
+const std::string &Tp::damage_claw_dice_str(void) const { return _damage_claw_dice_str; }
+void               Tp::damage_claw_dice_set(const std::string &v)
 {
-  _damage_future3_dice     = v;
-  _damage_future3_dice_str = v;
+  _damage_claw_dice     = v;
+  _damage_claw_dice_str = v;
 }
 
 const Dice        &Tp::damage_cold_dice(void) const { return _damage_cold_dice; }

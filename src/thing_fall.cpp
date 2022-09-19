@@ -282,12 +282,6 @@ bool Thing::fall_to_next_level(void)
     if (l->is_floor(x, y) || l->is_corridor(x, y) || l->is_bridge(x, y) || l->is_water(x, y) || l->is_fire(x, y) ||
         l->is_lava(x, y)) {
 
-      IF_DEBUG1
-      {
-        FOR_ALL_THINGS(l, t, x, y) { t->log("Landed on this thing on new level"); }
-        FOR_ALL_THINGS_END()
-      }
-
       if (is_player()) {
         game->level = l;
         msg("%%fg=red$You tumble into the void!%%fg=reset$");

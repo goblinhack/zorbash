@@ -9,6 +9,7 @@
 void Thing::visible(void)
 {
   TRACE_NO_INDENT();
+
   if (! is_hidden) {
     return;
   }

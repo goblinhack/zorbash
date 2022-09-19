@@ -488,7 +488,7 @@ bool Thing::spawn_fire(const std::string &what, int radius)
         continue;
       }
 
-      FOR_ALL_THINGS(level, it, x, y)
+      FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
       {
         if (! it->is_combustible() && ! it->is_able_to_burn() && ! it->is_meltable()) {
           continue;

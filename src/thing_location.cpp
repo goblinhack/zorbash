@@ -252,13 +252,9 @@ void Thing::location_check_me(void)
   // Needs to be for all things to stuff that does nothing like bones can fall
   // into a chasm
   //
-  FOR_ALL_THINGS(level, t, curr_at.x, curr_at.y)
+  FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t == this) {
-      continue;
-    }
-
-    if (t->is_hidden) {
       continue;
     }
 

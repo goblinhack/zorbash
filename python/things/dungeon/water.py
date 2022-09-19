@@ -25,6 +25,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_biome_dungeon(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_hazard(self, True)
+    my.is_interesting(self, True)
     my.is_shallow_water(self, True)
     my.is_tickable(self, True)  # So it can interact with fire to make steam
     my.text_a_or_an(self, "the")

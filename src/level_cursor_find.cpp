@@ -61,8 +61,7 @@ void Level::cursor_find_on_visible_things(const int16_t minx, const int16_t miny
     auto to = game->map_mini_over;
     if (! wid_mouse_two_clicks) {
       if (cursor) {
-        TRACE_AND_INDENT();
-        FOR_ALL_THINGS(this, t, to.x, to.y)
+        FOR_ALL_NON_INTERNAL_THINGS(this, t, to.x, to.y)
         {
           if (t->is_cursor_can_hover_over_x2_click()) {
             goto done;

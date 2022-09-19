@@ -42,13 +42,13 @@ int Thing::on_owner_receive_dmg_future1(Thingp owner, Thingp hitter, Thingp real
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_future1 null thing");
+    err("Cannot call owner_damage_future1 null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_future1 null thing");
+    err("Cannot call owner_damage_future1 null thing");
     return damage;
   }
 
@@ -88,7 +88,7 @@ int Thing::on_receiving_dmg_future1(Thingp hitter, Thingp real_hitter, int damag
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot damage_future1 null thing");
+    err("Cannot call damage_future1 null thing");
     return damage;
   }
 
@@ -164,7 +164,7 @@ int Thing::on_attacking_dmg_future1(Thingp victim, int damage)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot damage_future1 null thing");
+    err("Cannot call damage_future1 null thing");
     return damage;
   }
 
@@ -204,13 +204,13 @@ int Thing::on_owner_attack_dmg_future1(Thingp owner, Thingp victim, int damage)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_future1 null thing");
+    err("Cannot call owner_damage_future1 null thing");
     return damage;
   }
 
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot owner_damage_future1 null thing");
+    err("Cannot call owner_damage_future1 null thing");
     return damage;
   }
 

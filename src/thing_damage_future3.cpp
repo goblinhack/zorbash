@@ -10,54 +10,54 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-const Dice &Thing::damage_future3_dice(void)
+const Dice &Thing::damage_claw_dice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_future3_dice());
+  return (tp()->damage_claw_dice());
 }
 
-const std::string Thing::damage_future3_dice_str(void)
+const std::string Thing::damage_claw_dice_str(void)
 {
   TRACE_NO_INDENT();
 
   if (enchant_get()) {
-    return tp()->damage_future3_dice_str() + modifier_to_string(enchant_get());
+    return tp()->damage_claw_dice_str() + modifier_to_string(enchant_get());
   }
 
-  return (tp()->damage_future3_dice_str());
+  return (tp()->damage_claw_dice_str());
 }
 
-int Thing::damage_future3(void)
+int Thing::damage_claw(void)
 {
   TRACE_NO_INDENT();
-  auto roll    = tp()->damage_future3_dice().roll();
+  auto roll    = tp()->damage_claw_dice().roll();
   roll         = weapon_damage_modify(roll);
   auto enchant = enchant_get();
-  dbg("Damage future3 roll %d + enchant %d", roll, enchant);
+  dbg("Damage claw roll %d + enchant %d", roll, enchant);
   return roll + enchant;
 }
 
-int Thing::on_owner_receive_dmg_future3(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_receive_dmg_claw(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_future3 null thing");
+    err("Cannot call owner_damage_claw null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_future3 null thing");
+    err("Cannot call owner_damage_claw null thing");
     return damage;
   }
 
-  auto on_owner_receive_dmg_future3 = on_owner_receive_dmg_future3_do();
-  if (std::empty(on_owner_receive_dmg_future3)) {
+  auto on_owner_receive_dmg_claw = on_owner_receive_dmg_claw_do();
+  if (std::empty(on_owner_receive_dmg_claw)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_receive_dmg_future3, '.');
+  auto t = split_tokens(on_owner_receive_dmg_claw, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -77,27 +77,27 @@ int Thing::on_owner_receive_dmg_future3(Thingp owner, Thingp hitter, Thingp real
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_receive_dmg_future3 call [%s] expected mod:function, got %d elems",
-      on_owner_receive_dmg_future3.c_str(), (int) on_owner_receive_dmg_future3.size());
+  ERR("Bad on_owner_receive_dmg_claw call [%s] expected mod:function, got %d elems",
+      on_owner_receive_dmg_claw.c_str(), (int) on_owner_receive_dmg_claw.size());
 
   return damage;
 }
 
-int Thing::on_receiving_dmg_future3(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_receiving_dmg_claw(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot damage_future3 null thing");
+    err("Cannot call damage_claw null thing");
     return damage;
   }
 
-  auto on_receiving_dmg_future3 = on_receiving_dmg_future3_do();
-  if (std::empty(on_receiving_dmg_future3)) {
+  auto on_receiving_dmg_claw = on_receiving_dmg_claw_do();
+  if (std::empty(on_receiving_dmg_claw)) {
     return damage;
   }
 
-  auto t = split_tokens(on_receiving_dmg_future3, '.');
+  auto t = split_tokens(on_receiving_dmg_claw, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -117,13 +117,13 @@ int Thing::on_receiving_dmg_future3(Thingp hitter, Thingp real_hitter, int damag
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_receiving_dmg_future3 call [%s] expected mod:function, got %d elems", on_receiving_dmg_future3.c_str(),
-      (int) on_receiving_dmg_future3.size());
+  ERR("Bad on_receiving_dmg_claw call [%s] expected mod:function, got %d elems", on_receiving_dmg_claw.c_str(),
+      (int) on_receiving_dmg_claw.size());
 
   return damage;
 }
 
-int Thing::total_damage_for_on_receiving_dmg_future3(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::total_damage_for_on_receiving_dmg_claw(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -134,7 +134,7 @@ int Thing::total_damage_for_on_receiving_dmg_future3(Thingp hitter, Thingp real_
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receive_dmg_future3(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_claw(this, hitter, real_hitter, damage);
     }
   }
 
@@ -142,7 +142,7 @@ int Thing::total_damage_for_on_receiving_dmg_future3(Thingp hitter, Thingp real_
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receive_dmg_future3(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_claw(this, hitter, real_hitter, damage);
     }
   }
 
@@ -150,30 +150,30 @@ int Thing::total_damage_for_on_receiving_dmg_future3(Thingp hitter, Thingp real_
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_receive_dmg_future3(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_claw(this, hitter, real_hitter, damage);
     }
   }
 
-  damage = on_receiving_dmg_future3(hitter, real_hitter, damage);
+  damage = on_receiving_dmg_claw(hitter, real_hitter, damage);
 
   return damage;
 }
 
-int Thing::on_attacking_dmg_future3(Thingp victim, int damage)
+int Thing::on_attacking_dmg_claw(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot damage_future3 null thing");
+    err("Cannot call damage_claw null thing");
     return damage;
   }
 
-  auto on_attacking_dmg_future3 = on_attacking_dmg_future3_do();
-  if (std::empty(on_attacking_dmg_future3)) {
+  auto on_attacking_dmg_claw = on_attacking_dmg_claw_do();
+  if (std::empty(on_attacking_dmg_claw)) {
     return damage;
   }
 
-  auto t = split_tokens(on_attacking_dmg_future3, '.');
+  auto t = split_tokens(on_attacking_dmg_claw, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -193,33 +193,33 @@ int Thing::on_attacking_dmg_future3(Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_attacking_dmg_future3 call [%s] expected mod:function, got %d elems", on_attacking_dmg_future3.c_str(),
-      (int) on_attacking_dmg_future3.size());
+  ERR("Bad on_attacking_dmg_claw call [%s] expected mod:function, got %d elems", on_attacking_dmg_claw.c_str(),
+      (int) on_attacking_dmg_claw.size());
 
   return damage;
 }
 
-int Thing::on_owner_attack_dmg_future3(Thingp owner, Thingp victim, int damage)
+int Thing::on_owner_attack_dmg_claw(Thingp owner, Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_future3 null thing");
+    err("Cannot call owner_damage_claw null thing");
     return damage;
   }
 
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot owner_damage_future3 null thing");
+    err("Cannot call owner_damage_claw null thing");
     return damage;
   }
 
-  auto on_owner_attack_dmg_future3 = on_owner_attack_dmg_future3_do();
-  if (std::empty(on_owner_attack_dmg_future3)) {
+  auto on_owner_attack_dmg_claw = on_owner_attack_dmg_claw_do();
+  if (std::empty(on_owner_attack_dmg_claw)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_attack_dmg_future3, '.');
+  auto t = split_tokens(on_owner_attack_dmg_claw, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -239,13 +239,13 @@ int Thing::on_owner_attack_dmg_future3(Thingp owner, Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attack_dmg_future3 call [%s] expected mod:function, got %d elems",
-      on_owner_attack_dmg_future3.c_str(), (int) on_owner_attack_dmg_future3.size());
+  ERR("Bad on_owner_attack_dmg_claw call [%s] expected mod:function, got %d elems", on_owner_attack_dmg_claw.c_str(),
+      (int) on_owner_attack_dmg_claw.size());
 
   return damage;
 }
 
-int Thing::total_damage_for_on_attacking_dmg_future3(Thingp victim, int damage)
+int Thing::total_damage_for_on_attacking_dmg_claw(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -256,7 +256,7 @@ int Thing::total_damage_for_on_attacking_dmg_future3(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attack_dmg_future3(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_claw(this, victim, damage);
     }
   }
 
@@ -264,7 +264,7 @@ int Thing::total_damage_for_on_attacking_dmg_future3(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attack_dmg_future3(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_claw(this, victim, damage);
     }
   }
 
@@ -272,55 +272,55 @@ int Thing::total_damage_for_on_attacking_dmg_future3(Thingp victim, int damage)
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_attack_dmg_future3(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_claw(this, victim, damage);
     }
   }
 
-  damage = on_attacking_dmg_future3(victim, damage);
+  damage = on_attacking_dmg_claw(victim, damage);
 
   return damage;
 }
 
-int Thing::damage_future3_chance_d1000(int index)
+int Thing::damage_claw_chance_d1000(int index)
 {
   TRACE_NO_INDENT();
-  return (tp()->damage_future3_chance_d1000(index));
+  return (tp()->damage_claw_chance_d1000(index));
 }
 
-const std::string &Thing::on_receiving_dmg_future3_do(void)
+const std::string &Thing::on_receiving_dmg_claw_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_receiving_dmg_future3_do());
+  return (tp()->on_receiving_dmg_claw_do());
 }
 
-const std::string &Thing::on_attacking_dmg_future3_do(void)
+const std::string &Thing::on_attacking_dmg_claw_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_attacking_dmg_future3_do());
+  return (tp()->on_attacking_dmg_claw_do());
 }
 
-const std::string &Thing::on_owner_attack_dmg_future3_do(void)
+const std::string &Thing::on_owner_attack_dmg_claw_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attack_dmg_future3_do());
+  return (tp()->on_owner_attack_dmg_claw_do());
 }
 
-const std::string &Thing::on_owner_receive_dmg_future3_do(void)
+const std::string &Thing::on_owner_receive_dmg_claw_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receive_dmg_future3_do());
+  return (tp()->on_owner_receive_dmg_claw_do());
 }
 
-int Tp::damage_future3_chance_d1000(int index) const
+int Tp::damage_claw_chance_d1000(int index) const
 {
-  if (index >= (int) _damage_future3_chance_d1000.size()) {
+  if (index >= (int) _damage_claw_chance_d1000.size()) {
     return 0;
   }
-  return _damage_future3_chance_d1000[ index ];
+  return _damage_claw_chance_d1000[ index ];
 }
 
-void Tp::damage_future3_chance_d1000_set(int index, int v)
+void Tp::damage_claw_chance_d1000_set(int index, int v)
 {
-  _damage_future3_chance_d1000.resize(index + 1);
-  _damage_future3_chance_d1000[ index ] = v;
+  _damage_claw_chance_d1000.resize(index + 1);
+  _damage_claw_chance_d1000[ index ] = v;
 }

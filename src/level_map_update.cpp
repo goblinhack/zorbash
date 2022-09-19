@@ -68,7 +68,7 @@ void Level::update_water_next_to_lava(void)
         for (auto dx = -2; dx <= 2; dx++) {
           for (auto dy = -2; dy <= 2; dy++) {
             if (is_deep_water(x + dx, y + dy) || is_block_of_ice(x + dx, y + dy)) {
-              FOR_ALL_THINGS(this, t, x, y)
+              FOR_ALL_NON_INTERNAL_THINGS(this, t, x, y)
               {
                 if (t->is_lava()) {
                   t->dead("by being too close to deep water");
@@ -94,7 +94,7 @@ void Level::update_water_next_to_lava(void)
         for (auto dx = -2; dx <= 2; dx++) {
           for (auto dy = -2; dy <= 2; dy++) {
             if (is_lava(x + dx, y + dy)) {
-              FOR_ALL_THINGS(this, t, x, y)
+              FOR_ALL_NON_INTERNAL_THINGS(this, t, x, y)
               {
                 if (t->is_shallow_water()) {
                   t->dead("by being too close to lava");
@@ -128,7 +128,7 @@ void Level::update_things_next_to_a_chasm(void)
             if (is_chasm(x + dx, y + dy)) {
               bool create_dungeon_place_place_shallow_water = false;
 
-              FOR_ALL_THINGS(this, t, x, y)
+              FOR_ALL_NON_INTERNAL_THINGS(this, t, x, y)
               {
                 if (t->is_falling) {
                   continue;
@@ -169,7 +169,7 @@ void Level::update_deep_water(void)
       //
       if (is_deep_water(x, y)) {
         if (is_shallow_water(x, y)) {
-          FOR_ALL_THINGS(this, t, x, y)
+          FOR_ALL_NON_INTERNAL_THINGS(this, t, x, y)
           {
             if (t->is_shallow_water()) {
               t->dead("by being shallow");
@@ -195,7 +195,7 @@ void Level::update_deep_water(void)
 
         if (nebs < 9) {
           bool removed_deep_water = false;
-          FOR_ALL_THINGS(this, t, x, y)
+          FOR_ALL_NON_INTERNAL_THINGS(this, t, x, y)
           {
             if (t->is_deep_water()) {
               t->dead("by being too shallow");
@@ -214,7 +214,7 @@ void Level::update_deep_water(void)
           IF_DEBUG2
           {
             if (is_deep_water(x, y)) {
-              FOR_ALL_THINGS(this, t, x, y)
+              FOR_ALL_NON_INTERNAL_THINGS(this, t, x, y)
               {
                 if (t->is_deep_water()) {
                   t->log("Still present; should be removed");

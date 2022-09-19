@@ -186,12 +186,12 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   } else if (attack_options->attack_future1) {
     real_hitter->total_damage_for_on_attacking_dmg_future1(victim, damage);
     damage = victim->total_damage_for_on_receiving_dmg_future1(hitter, real_hitter, damage);
-  } else if (attack_options->attack_future2) {
-    real_hitter->total_damage_for_on_attacking_dmg_future2(victim, damage);
-    damage = victim->total_damage_for_on_receiving_dmg_future2(hitter, real_hitter, damage);
-  } else if (attack_options->attack_future3) {
-    real_hitter->total_damage_for_on_attacking_dmg_future3(victim, damage);
-    damage = victim->total_damage_for_on_receiving_dmg_future3(hitter, real_hitter, damage);
+  } else if (attack_options->attack_bite) {
+    real_hitter->total_damage_for_on_attacking_dmg_bite(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_bite(hitter, real_hitter, damage);
+  } else if (attack_options->attack_claw) {
+    real_hitter->total_damage_for_on_attacking_dmg_claw(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_claw(hitter, real_hitter, damage);
   } else if (attack_options->attack_fire) {
     real_hitter->total_damage_for_on_attacking_dmg_fire(victim, damage);
     damage = victim->total_damage_for_on_receiving_dmg_fire(hitter, real_hitter, damage);
@@ -305,37 +305,37 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   }
 
   /////////////////////////////////////////////////////////////////////////
-  // Future2 damage
+  // Bite damage
   /////////////////////////////////////////////////////////////////////////
-  if (attack_options->attack_future2) {
+  if (attack_options->attack_bite) {
     attack_set = true;
     if (! damage) {
       if (is_player()) {
-        msg("You take no future2 damage!");
+        msg("You take no bite damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no future2 damage!", text_The().c_str());
+        msg("%s takes no bite damage!", text_The().c_str());
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack damage_future2 damage %d on %s", damage, to_short_string().c_str()); }
-    damage_type = "damage_future2 ";
+    IF_DEBUG2 { real_hitter->log("Attack damage_bite damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "bite ";
   }
 
   /////////////////////////////////////////////////////////////////////////
-  // Future3 damage
+  // Claw damage
   /////////////////////////////////////////////////////////////////////////
-  if (attack_options->attack_future3) {
+  if (attack_options->attack_claw) {
     attack_set = true;
     if (! damage) {
       if (is_player()) {
-        msg("You take no future3 damage!");
+        msg("You take no claw damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no future3 damage!", text_The().c_str());
+        msg("%s takes no claw damage!", text_The().c_str());
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack damage_future3 damage %d on %s", damage, to_short_string().c_str()); }
-    damage_type = "damage_future3 ";
+    IF_DEBUG2 { real_hitter->log("Attack damage_claw damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "claw ";
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -1116,10 +1116,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           msg("Your %s is being poisoned.", text_short_name().c_str());
         } else if (attack_options->attack_future1) {
           msg("Your %s is being future1.", text_short_name().c_str());
-        } else if (attack_options->attack_future2) {
-          msg("Your %s is being future2.", text_short_name().c_str());
-        } else if (attack_options->attack_future3) {
-          msg("Your %s is being future3.", text_short_name().c_str());
+        } else if (attack_options->attack_bite) {
+          msg("Your %s is being bitten.", text_short_name().c_str());
+        } else if (attack_options->attack_claw) {
+          msg("Your %s is being clawed.", text_short_name().c_str());
         } else if (attack_options->attack_cold) {
           msg("Your %s is freezing.", text_short_name().c_str());
         } else if (attack_options->attack_fire) {
@@ -1440,10 +1440,10 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         }
       } else if (attack_options->attack_future1) {
         reason = "by future1";
-      } else if (attack_options->attack_future2) {
-        reason = "by future2";
-      } else if (attack_options->attack_future3) {
-        reason = "by future3";
+      } else if (attack_options->attack_bite) {
+        reason = "by biting";
+      } else if (attack_options->attack_claw) {
+        reason = "by clawing";
       } else if (attack_options->attack_cold) {
         reason = "by cold";
       } else if (attack_options->attack_fire) {

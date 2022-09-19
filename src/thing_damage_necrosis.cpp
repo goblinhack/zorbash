@@ -42,13 +42,13 @@ int Thing::on_owner_receive_dmg_necrosis(Thingp owner, Thingp hitter, Thingp rea
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_necrosis null thing");
+    err("Cannot call owner_damage_necrosis null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_necrosis null thing");
+    err("Cannot call owner_damage_necrosis null thing");
     return damage;
   }
 
@@ -88,7 +88,7 @@ int Thing::on_receiving_dmg_necrosis(Thingp hitter, Thingp real_hitter, int dama
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot damage_necrosis null thing");
+    err("Cannot call damage_necrosis null thing");
     return damage;
   }
 
@@ -164,7 +164,7 @@ int Thing::on_attacking_dmg_necrosis(Thingp victim, int damage)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot damage_necrosis null thing");
+    err("Cannot call damage_necrosis null thing");
     return damage;
   }
 
@@ -204,13 +204,13 @@ int Thing::on_owner_attack_dmg_necrosis(Thingp owner, Thingp victim, int damage)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_necrosis null thing");
+    err("Cannot call owner_damage_necrosis null thing");
     return damage;
   }
 
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot owner_damage_necrosis null thing");
+    err("Cannot call owner_damage_necrosis null thing");
     return damage;
   }
 

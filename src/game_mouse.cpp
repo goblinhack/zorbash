@@ -226,11 +226,8 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
     //
     if (! wid_mouse_two_clicks) {
       auto to = level->cursor->curr_at;
-      FOR_ALL_THINGS(level, t, to.x, to.y)
+      FOR_ALL_NON_INTERNAL_THINGS(level, t, to.x, to.y)
       {
-        if (t->is_hidden) {
-          continue;
-        }
         if (t->is_cursor_can_hover_over_x2_click()) {
           IF_DEBUG2 { player->log("Needs double click"); }
           if (level->is_chasm(to)) {

@@ -20,6 +20,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.is_biome_dungeon(self, True)
     my.is_biome_swamp(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "lime")

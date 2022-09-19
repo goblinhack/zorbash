@@ -13,6 +13,7 @@ def tp_init(name):
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_removeable_if_out_of_slots(self, True)
     my.is_smoke(self, True)

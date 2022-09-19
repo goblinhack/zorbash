@@ -66,6 +66,8 @@ void Thing::on_born(void)
 
 void Thing::init(Levelp level, const std::string &name, const point born, Thingp owner)
 {
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, this);
 
   this->level = level;
@@ -107,7 +109,8 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   // Make sure we have the ability to carry items.
   //
-  if (is_player() || is_monst() || is_item() || is_cursor()) {
+  TRACE_NO_INDENT();
+  if (is_msg() || is_player() || is_monst() || is_item() || is_cursor()) {
     new_infop();
 
     //
@@ -116,10 +119,12 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
     born_set(point3d(born.x, born.y, level->world_at.z));
   }
 
+  TRACE_NO_INDENT();
   if (is_player() || is_monst() || is_item()) {
     new_itemsp();
   }
 
+  TRACE_NO_INDENT();
   if (is_player() || is_monst() || is_cursor()) {
     new_aip();
   }

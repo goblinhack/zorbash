@@ -42,13 +42,13 @@ int Thing::on_owner_receive_dmg_water(Thingp owner, Thingp hitter, Thingp real_h
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_water null thing");
+    err("Cannot call owner_damage_water null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot owner_damage_water null thing");
+    err("Cannot call owner_damage_water null thing");
     return damage;
   }
 
@@ -89,7 +89,7 @@ int Thing::on_receiving_dmg_water(Thingp hitter, Thingp real_hitter, int damage)
   verify(MTYPE_THING, hitter);
 
   if (! hitter) {
-    err("Cannot damage_water null thing");
+    err("Cannot call damage_water null thing");
     return damage;
   }
 
@@ -165,7 +165,7 @@ int Thing::on_attacking_dmg_water(Thingp victim, int damage)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot damage_water null thing");
+    err("Cannot call damage_water null thing");
     return damage;
   }
 
@@ -205,13 +205,13 @@ int Thing::on_owner_attack_dmg_water(Thingp owner, Thingp victim, int damage)
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot owner_damage_water null thing");
+    err("Cannot call owner_damage_water null thing");
     return damage;
   }
 
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot owner_damage_water null thing");
+    err("Cannot call owner_damage_water null thing");
     return damage;
   }
 

@@ -97,7 +97,7 @@ std::deque< point > Level::flood_fill_points(point p, std::function< int(Thingp)
     }
 
     bool got_one = false;
-    FOR_ALL_THINGS(this, t, p.x, p.y)
+    FOR_ALL_NON_INTERNAL_THINGS(this, t, p.x, p.y)
     {
       if (filter(t)) {
         got_one = true;
@@ -168,7 +168,7 @@ std::deque< Thingp > Level::flood_fill_things(point p, std::function< int(Thingp
     }
 
     bool got_one = false;
-    FOR_ALL_THINGS(this, t, p.x, p.y)
+    FOR_ALL_NON_INTERNAL_THINGS(this, t, p.x, p.y)
     {
       if (filter(t)) {
         out.push_back(t);

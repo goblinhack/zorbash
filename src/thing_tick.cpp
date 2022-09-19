@@ -289,8 +289,8 @@ bool Thing::collision_check_do(void)
 
 void Thing::tick(void)
 {
-  dbg("Tick %d", game->tick_current);
-  TRACE_AND_INDENT();
+  // dbg("Tick %d", game->tick_current);
+  TRACE_NO_INDENT();
 
   //
   // Save fields that may change during the tick

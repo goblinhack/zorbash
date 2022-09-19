@@ -102,11 +102,6 @@ void Level::describe(point p)
       }
     }
 
-    if (t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
-      IF_DEBUG2 { t->log("Ignore for describe, boring"); }
-      continue;
-    }
-
     if (t->immediate_owner()) {
       IF_DEBUG2 { t->log("Ignore for describe, has owner"); }
       continue;
@@ -174,11 +169,6 @@ void Level::describe(point p)
       }
     }
 
-    if (t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
-      IF_DEBUG2 { t->log("Ignore for describe, boring"); }
-      continue;
-    }
-
     //
     // Dead monst clog up the screen
     //
@@ -210,7 +200,7 @@ void Level::describe(point p)
   }
   FOR_ALL_THINGS_END()
 
-  FOR_ALL_THINGS(this, t, p.x, p.y)
+  FOR_ALL_NON_INTERNAL_THINGS(this, t, p.x, p.y)
   {
     int x = p.x;
     int y = p.y;
@@ -254,7 +244,7 @@ void Level::describe(point p)
       }
     }
 
-    if (t->immediate_owner() || t->is_cursor() || t->is_cursor_path() || t->is_the_grid) {
+    if (t->immediate_owner()) {
       IF_DEBUG2 { t->log("Ignore for describe, boring"); }
       continue;
     }
