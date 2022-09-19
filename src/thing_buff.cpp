@@ -17,15 +17,6 @@ bool Thing::buff_add(Thingp what)
     return false;
   }
 
-  auto existing_owner = what->immediate_owner();
-  if (existing_owner) {
-    if (existing_owner == this) {
-      dbg("No; same owner");
-      return true;
-    }
-    existing_owner->drop(what);
-  }
-
   FOR_ALL_BUFFS(item)
   {
     if (item == what->id) {
@@ -56,6 +47,10 @@ bool Thing::buff_add(Thingp what)
 
 bool Thing::buff_remove(Thingp what)
 {
+  if (! what) {
+    return false;
+  }
+
   dbg("Removing buff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -80,12 +75,12 @@ bool Thing::buff_remove(Thingp what)
   return true;
 }
 
-bool Thing::buff_find(const std::string &what)
+Thingp Thing::buff_find(const std::string &what)
 {
   TRACE_AND_INDENT();
 
   if (! maybe_itemsp()) {
-    return false;
+    return nullptr;
   }
 
   FOR_ALL_BUFFS(id)
@@ -93,11 +88,11 @@ bool Thing::buff_find(const std::string &what)
     auto t = level->thing_find(id);
     if (t) {
       if (t->name() == what) {
-        return true;
+        return t;
       }
     }
   }
-  return false;
+  return nullptr;
 }
 
 void Thing::buff_remove_all(void)
@@ -131,6 +126,38 @@ bool Thing::buff_add(Tpp what)
 {
   if (! maybe_itemsp()) {
     return false;
+  }
+
+  //
+  // Need to allow for duplicates, so cannot check if the tp exists
+  //
+  auto t = level->thing_new(what, curr_at);
+  if (unlikely(! t)) {
+    return false;
+  }
+
+  dbg("Add buff: %s", t->to_short_string().c_str());
+  TRACE_AND_INDENT();
+
+  buff_add(t);
+
+  return true;
+}
+
+bool Thing::buff_add_if_not_found(Tpp what)
+{
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  while (! itemsp()->buffs.empty()) {
+    auto id = *itemsp()->buffs.begin();
+    auto t  = level->thing_find(id);
+    if (t) {
+      if (t->tp() == what) {
+        return true;
+      }
+    }
   }
 
   //

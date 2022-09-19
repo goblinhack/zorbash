@@ -1819,11 +1819,17 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
 
   if (t->is_item()) {
     if (t->temperature < 0) {
-      w->log("Is cold to the touch.", TEXT_FORMAT_LHS);
+      w->log("Is cold.", TEXT_FORMAT_LHS);
       printed_something = true;
-    } else if (t->temperature > TEMPERATURE_ROOM) {
-      w->log("Is warm to the touch.", TEXT_FORMAT_LHS);
-      printed_something = true;
+    } else if (t->temperature > TEMPERATURE_THRESHOLD) {
+      if (t->is_torch()) {
+        //
+        // Obviously hot...
+        //
+      } else {
+        w->log("Is hot.", TEXT_FORMAT_LHS);
+        printed_something = true;
+      }
     }
   }
 

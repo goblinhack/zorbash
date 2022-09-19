@@ -104,7 +104,7 @@ bool Thing::worth_eating(Thingp victim)
     return false;
   }
 
-  return health_boost_would_occur(victim->nutrition_get());
+  return health_boost_would_occur(victim->nutrition_get()) || hunger_boost_would_occur(victim->nutrition_get());
 }
 
 bool Thing::can_eat(const Thingp itp)
@@ -153,28 +153,34 @@ bool Thing::eat(Thingp victim)
   // Does the attacker feast on success?
   //
   if (is_player()) {
-    auto boost = health_boost(victim->nutrition_get());
-    msg("You munch %s for %d health.", victim->text_the().c_str(), boost);
+    int got_health_boost = health_boost(victim->nutrition_get());
+    int got_hunger_boost = hunger_boost(victim->nutrition_get());
+
+    if (got_health_boost) {
+      if (got_health_boost < 10) {
+        msg("You munch %s for a measly %d additional health.", victim->text_the().c_str(), got_health_boost);
+      } else {
+        msg("You munch %s for %d additional health.", victim->text_the().c_str(), got_health_boost);
+      }
+    } else if (got_hunger_boost) {
+      if (got_hunger_boost < 10) {
+        msg("You eat %s and feel a tiny bit less hungry.", victim->text_the().c_str());
+      } else {
+        msg("You eat %s and feel less hungry.", victim->text_the().c_str());
+      }
+    } else {
+      msg("You eat %s.", victim->text_the().c_str());
+    }
+
     return true;
   }
 
   if (attack_eater()) {
     if (is_edible(victim)) {
       //
-      // Worth eating?
+      // If still alive, need to kill it first.
       //
-      if (hunger_is_insatiable()) {
-        //
-        // Munch munch. Always try to eat.
-        //
-      } else if (! health_boost(victim->nutrition_get())) {
-        dbg("No health boost from eating %s", victim->text_the().c_str());
-        return false;
-      }
-
-      dbg("Eating %s", victim->text_the().c_str());
-
-      if (victim->is_monst() || victim->is_player()) {
+      if (victim->is_alive_monst() || victim->is_player()) {
         return nat_att(victim);
       } else {
         return consume(victim);
@@ -201,8 +207,17 @@ bool Thing::consume(Thingp victim)
   // Does the attacker feast on success?
   //
   if (is_player()) {
-    auto boost = health_boost(victim->nutrition_get());
-    msg("You munch %s for %d health.", victim->text_the().c_str(), boost);
+    int got_health_boost = health_boost(victim->nutrition_get());
+    int got_hunger_boost = hunger_boost(victim->nutrition_get());
+
+    if (got_health_boost) {
+      msg("You munch %s for %d additional health.", victim->text_the().c_str(), got_health_boost);
+    } else if (got_hunger_boost) {
+      msg("You eat %s and feel less hungry.", victim->text_the().c_str());
+    } else {
+      msg("You eat %s.", victim->text_the().c_str());
+    }
+
     return true;
   }
 

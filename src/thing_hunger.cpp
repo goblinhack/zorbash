@@ -11,6 +11,10 @@ void Thing::hunger_clock_tick(void)
 {
   TRACE_NO_INDENT();
 
+  if (is_lifeless() || is_undead() || is_ethereal()) {
+    return;
+  }
+
   if (is_dead || ! hunger_clock_tick_freq()) {
     return;
   }
@@ -34,7 +38,7 @@ void Thing::hunger_clock_tick(void)
 
   auto my_hunger_level = hunger();
   if (my_hunger_level > 1) {
-    hunger_decr();
+    hunger_decr(1);
     if (my_hunger_level == 1) {
       if (is_player()) {
         msg("You are starving!");
@@ -53,6 +57,10 @@ void Thing::hunger_update(void)
 {
   TRACE_NO_INDENT();
 
+  if (is_lifeless() || is_undead() || is_ethereal()) {
+    return;
+  }
+
   if (is_dead || ! hunger_clock_tick_freq()) {
     return;
   }
@@ -69,31 +77,27 @@ void Thing::hunger_update(void)
   auto my_hunger_level = hunger();
 
   int hungry_at = (int) ((double) 100 * ((double) tpp->hunger_is_hungry_at_pct() / 100.0));
-
-  auto old_is_hungry = is_hungry;
-  is_hungry          = my_hunger_level <= hungry_at;
+  is_hungry     = my_hunger_level <= hungry_at;
 
   int starving_at = (int) ((double) 100 * ((double) tpp->hunger_is_starving_at_pct() / 100.0));
-
-  auto old_is_starving = is_starving;
-  is_starving          = my_hunger_level <= starving_at;
+  is_starving     = my_hunger_level <= starving_at;
 
   is_satiated = my_hunger_level > 80;
   is_gorged   = my_hunger_level > 110;
 
   if (is_player()) {
-    if (old_is_starving != is_starving) {
-      if (is_starving) {
-        msg("I am starving.");
-      } else {
-        msg("I am no longer starving.");
-      }
-    } else if (old_is_hungry != is_hungry) {
-      if (is_hungry) {
-        msg("I am hungry.");
-      } else {
-        msg("I am no longer hungry.");
-      }
+    if (is_gorged || is_satiated) {
+      buff_add_if_not_found(tp_find("buff_full"));
+      debuff_remove(tp_find("debuff_hungry"));
+      debuff_remove(tp_find("debuff_starving"));
+    } else if (is_starving) {
+      buff_remove(tp_find("buff_full"));
+      debuff_remove(tp_find("debuff_hungry"));
+      debuff_add_if_not_found(tp_find("debuff_starving"));
+    } else if (is_hungry) {
+      buff_remove(tp_find("buff_full"));
+      debuff_remove(tp_find("debuff_starving"));
+      debuff_add_if_not_found(tp_find("debuff_hungry"));
     }
   }
 }
@@ -122,6 +126,50 @@ int Thing::hunger_is_starving_at_pct(void)
   return (tp()->hunger_is_starving_at_pct());
 }
 
+int Thing::hunger_boost(int v)
+{
+  TRACE_NO_INDENT();
+  if (! v) {
+    return false;
+  }
+
+  auto old_hunger = hunger();
+  auto new_hunger = old_hunger + v;
+  auto max_hunger = THING_HUNGER_MAX;
+
+  if (old_hunger >= max_hunger) {
+    dbg("Hunger boost not possible, maxxed out already");
+    return false;
+  }
+
+  new_hunger = std::min(new_hunger, max_hunger);
+  hunger_set(new_hunger);
+
+  if (new_hunger >= max_hunger) {
+    dbg("Hunger boost not possible, maxxed at %d", new_hunger);
+  } else {
+    dbg("Hunger boost by %d from %d to %d", v, old_hunger, new_hunger);
+  }
+  return new_hunger - old_hunger;
+}
+
+bool Thing::hunger_boost_would_occur(int v)
+{
+  TRACE_NO_INDENT();
+  if (! v) {
+    return false;
+  }
+
+  auto old_hunger = hunger();
+  auto max_hunger = THING_HUNGER_MAX;
+
+  if (old_hunger >= max_hunger) {
+    return false;
+  }
+
+  return true;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // hunger
 ////////////////////////////////////////////////////////////////////////////
@@ -132,13 +180,6 @@ int Thing::hunger(void)
   if (maybe_infop()) {
     v = infop()->hunger;
   }
-  /*
-   * Why do we do this? It makes looking at weapon hunger hard
-  auto owner = immediate_owner();
-  if (owner && (owner != this)) {
-    v += owner->hunger();
-  }
-   */
   return v;
 }
 

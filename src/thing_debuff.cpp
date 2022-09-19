@@ -17,15 +17,6 @@ bool Thing::debuff_add(Thingp what)
     return false;
   }
 
-  auto existing_owner = what->immediate_owner();
-  if (existing_owner) {
-    if (existing_owner == this) {
-      dbg("No; same owner");
-      return false;
-    }
-    existing_owner->drop(what);
-  }
-
   FOR_ALL_DEBUFFS(item)
   {
     if (item == what->id) {
@@ -56,6 +47,10 @@ bool Thing::debuff_add(Thingp what)
 
 bool Thing::debuff_remove(Thingp what)
 {
+  if (! what) {
+    return false;
+  }
+
   dbg("Removing debuff %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -80,9 +75,30 @@ bool Thing::debuff_remove(Thingp what)
   return true;
 }
 
+Thingp Thing::debuff_find(const std::string &what)
+{
+  TRACE_AND_INDENT();
+
+  if (! maybe_itemsp()) {
+    return nullptr;
+  }
+
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->name() == what) {
+        return t;
+      }
+    }
+  }
+  return nullptr;
+}
+
 void Thing::debuff_remove_all(void)
 {
   TRACE_NO_INDENT();
+
   if (! maybe_itemsp()) {
     return;
   }
