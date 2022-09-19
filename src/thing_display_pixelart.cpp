@@ -813,7 +813,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
       int h_step = (1.0 - (((float) h) / ((float) m))) * GAME_MONST_HEALTH_BAR_STEPS;
       h_step     = std::min(h_step, GAME_MONST_HEALTH_BAR_STEPS);
       h_step     = std::max(h_step, 1);
-      int y      = blit_br.y - ((1.0 - tile->py1 /* pct */) * tile->pix_height);
+      int y      = blit_br.y - ((1.0 - tile->py1 /* pct */) * tile->pix_height) - 4;
       int x      = (blit_tl.x + blit_br.x) / 2;
 
       //

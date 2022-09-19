@@ -28,7 +28,7 @@ def on_death(me, x, y):
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # start sort marker
-    my.aggression_pct(self, 10)
+    my.aggression_pct(self, -50)
     my.ai_resent_count(self, 100)
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
@@ -38,9 +38,10 @@ def tp_init(name, text_long_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.damage_bite_chance_d1000(self, 0, 500)
-    my.damage_bite_dice(self, "1d6")
+    my.damage_bite_dice(self, "1d4")
     my.damage_claw_chance_d1000(self, 0, 500)
-    my.damage_claw_dice(self, "1d4")
+    my.damage_claw_dice(self, "1d3")
+    my.damage_nat_att_chance_d1000(self, 0, 900)
     my.damage_nat_att_dice(self, "1d3+1")
     my.damage_nat_att_type(self, "nibble")
     my.distance_avoid(self, 3)

@@ -24,7 +24,7 @@ std::vector< class Tile * >           all_tiles_array;
 
 static uint8_t tile_init_done;
 
-#undef ENABLE_TILE_BOUNDS
+#define ENABLE_TILE_BOUNDS
 
 Tile::Tile(void) { newptr(MTYPE_TILE, this, "Tile"); }
 
