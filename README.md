@@ -1,7 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- move clock                                                                                                                                   -->
+<!-- no killed message                                                                                                                            -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
 <!-- the X is wounded?                                                                                                                            -->
 <!-- a Z comes into view, it is wielding a Y                                                                                                      -->
