@@ -49,6 +49,10 @@ static void wid_thing_info_placement(point &tl, point &br, int height)
     x = ascii_mouse_x + offset;
   }
 
+  if (ascii_mouse_x > TERM_WIDTH - UI_RIGHTBAR_WIDTH) {
+    x = UI_LEFTBAR_WIDTH;
+  }
+
   tl = make_point(x, TERM_HEIGHT - 2 - height);
   br = make_point(tl.x + UI_THING_INFO_WIDTH, TERM_HEIGHT - 2);
 }

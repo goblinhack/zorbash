@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- player info obscuring stats info                                                                                                             -->
 <!-- move clock                                                                                                                                   -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
 <!-- the X is wounded?                                                                                                                            -->
