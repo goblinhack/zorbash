@@ -82,31 +82,36 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     }
 
     //
-    // No resting when in danger unless in dire straits
+    // If alive and not lifeless, can we heal or rest?
     //
-    // If we're absolutely exhausted, we must rest, threat or no threat
-    //
-    if (is_able_to_tire() && (stamina() < stamina_max() / 10)) {
-      AI_LOG("Very low on stamina, forced to rest");
-      if (is_player()) {
-        game->tick_begin("Robot is forced to rest, very low on stamina");
-      }
-      change_state(MONST_STATE_RESTING, "need to rest, very low on stamina");
-      return true;
-    }
-
-    //
-    // If really low on health and we have something we can eat, try
-    // that.
-    //
-    if (health() < health_max() / 10) {
-      if (can_eat_something()) {
-        AI_LOG("Very low on health, forced to rest");
+    if (! is_lifeless() && ! is_undead() && ! is_ethereal()) {
+      //
+      // No resting when in danger unless in dire straits
+      //
+      // If we're absolutely exhausted, we must rest, threat or no threat
+      //
+      if (is_able_to_tire() && (stamina() < stamina_max() / 10)) {
+        AI_LOG("Very low on stamina, forced to rest");
         if (is_player()) {
-          game->tick_begin("Robot needs to rest, very low on health");
+          game->tick_begin("Robot is forced to rest, very low on stamina");
         }
-        change_state(MONST_STATE_RESTING, "need to rest, very low on health");
+        change_state(MONST_STATE_RESTING, "need to rest, very low on stamina");
         return true;
+      }
+
+      //
+      // If really low on health and we have something we can eat, try
+      // that.
+      //
+      if (health() < health_max() / 10) {
+        if (can_eat_something()) {
+          AI_LOG("Very low on health, forced to rest");
+          if (is_player()) {
+            game->tick_begin("Robot needs to rest, very low on health");
+          }
+          change_state(MONST_STATE_RESTING, "need to rest, very low on health");
+          return true;
+        }
       }
     }
   } else {
@@ -116,31 +121,36 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     AI_LOG("Idle, look for something to do");
 
     //
-    // If we're absolutely exhausted, we must rest, threat or no threat
+    // If alive and not lifeless, can we heal or rest?
     //
-    AI_LOG("Idle, rest check");
-    if (is_able_to_tire() && (stamina() < stamina_max() / 3)) {
-      AI_LOG("Low on stamina, rest");
-      if (is_player()) {
-        game->tick_begin("Robot is low on stamina");
-      }
-      change_state(MONST_STATE_RESTING, "need to rest, low on stamina");
-      return true;
-    }
-
-    //
-    // If really low on health and we have something we can eat, try that.
-    //
-    AI_LOG("Idle, health check");
-    if (health() < health_max() / 3) {
-      AI_LOG("Idle, eat check as a bit hungry");
-      if (can_eat_something()) {
-        AI_LOG("Low on health, rest");
+    if (! is_lifeless() && ! is_undead() && ! is_ethereal()) {
+      //
+      // If we're absolutely exhausted, we must rest, threat or no threat
+      //
+      AI_LOG("Idle, rest check");
+      if (is_able_to_tire() && (stamina() < stamina_max() / 3)) {
+        AI_LOG("Low on stamina, rest");
         if (is_player()) {
-          game->tick_begin("Robot is low on health");
+          game->tick_begin("Robot is low on stamina");
         }
-        change_state(MONST_STATE_RESTING, "need to rest, low on health");
+        change_state(MONST_STATE_RESTING, "need to rest, low on stamina");
         return true;
+      }
+
+      //
+      // If really low on health and we have something we can eat, try that.
+      //
+      AI_LOG("Idle, health check");
+      if (health() < health_max() / 3) {
+        AI_LOG("Idle, eat check as a bit hungry");
+        if (can_eat_something()) {
+          AI_LOG("Low on health, rest");
+          if (is_player()) {
+            game->tick_begin("Robot is low on health");
+          }
+          change_state(MONST_STATE_RESTING, "need to rest, low on health");
+          return true;
+        }
       }
     }
 
@@ -247,13 +257,19 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   // If nothing to do, might as well rest. If there is a point.
   //
   auto rest = true;
-  if ((health() >= (health_max() / 4) * 3)) {
-    if (is_able_to_tire()) {
-      if (stamina() >= (stamina_max() / 4) * 3) {
+
+  //
+  // If alive and not lifeless, can we heal or rest?
+  //
+  if (! is_lifeless() && ! is_undead() && ! is_ethereal()) {
+    if ((health() >= (health_max() / 4) * 3)) {
+      if (is_able_to_tire()) {
+        if (stamina() >= (stamina_max() / 4) * 3) {
+          rest = false;
+        }
+      } else {
         rest = false;
       }
-    } else {
-      rest = false;
     }
   }
 
