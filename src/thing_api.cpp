@@ -5099,8 +5099,12 @@ point Thing::where_i_dropped_an_item_last_get(void)
 point Thing::where_i_dropped_an_item_last_set(point v)
 {
   TRACE_NO_INDENT();
-  new_itemsp();
-  return (itemsp()->where_i_dropped_an_item_last = v);
+  if (maybe_itemsp()) {
+    new_itemsp();
+    return (itemsp()->where_i_dropped_an_item_last = v);
+  } else {
+    return (point(-1, -1));
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5119,8 +5123,12 @@ point Thing::where_i_failed_to_collect_last_get(void)
 point Thing::where_i_failed_to_collect_last_set(point v)
 {
   TRACE_NO_INDENT();
-  new_itemsp();
-  return (itemsp()->where_i_failed_to_collect_last = v);
+  if (maybe_itemsp()) {
+    new_itemsp();
+    return (itemsp()->where_i_failed_to_collect_last = v);
+  } else {
+    return (point(-1, -1));
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////
