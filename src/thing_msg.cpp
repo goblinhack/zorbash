@@ -28,7 +28,7 @@ bool Thing::player_is_ready_for_messages(void)
   //
   // Cut down on post death messages.
   //
-  if (player->is_dead || player->is_dying) {
+  if (player->is_dead) {
     return false;
   }
 
@@ -65,7 +65,7 @@ bool Thing::player_is_ready_for_messages(std::string &why)
   //
   // Cut down on post death messages.
   //
-  if (player->is_dead || player->is_dying) {
+  if (player->is_dead) {
     return false;
   }
 
