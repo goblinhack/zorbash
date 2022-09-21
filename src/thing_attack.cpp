@@ -881,6 +881,10 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
       level->noisemap_in_incr(curr_at.x, curr_at.y, noise_total());
     }
 
+    //
+    // This can happen if a weapon is damaged, if the thing is starving, or if trying to attack
+    // when in deep water with penalties.
+    //
     if (attack_options->damage <= 0) {
       //
       // Wake on attack
@@ -906,9 +910,26 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         if (game->robot_mode) {
           BOTCON("Robot fails to damage %s.", victim->text_the().c_str());
         }
+      } else if (victim->is_player()) {
+        if (owner) {
+          msg("%s fails to hit you with %s.", owner->text_The().c_str(), text_the().c_str());
+        } else {
+          msg("%s fails to hit you.", text_The().c_str());
+        }
+        popup("Miss!");
+
+        if (game->robot_mode) {
+          BOTCON("%s misses the robot.", text_The().c_str());
+        }
       }
-      dbg("Attack failed, no damage");
-      return false;
+
+      dbg("The attack failed, no damage (att modifier %d, AC %d) on %s", attack_bonus, stat_def,
+          victim->to_short_string().c_str());
+
+      //
+      // Do we let it try to miss again? Why not.
+      //
+      continue;
     }
 
     if (is_player()) {
@@ -999,14 +1020,14 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
             }
           } else if (victim->is_player()) {
             if (owner) {
-              msg("%s misses you with %s.", owner->text_the().c_str(), text_the().c_str());
+              msg("%s misses you with %s.", owner->text_The().c_str(), text_the().c_str());
             } else {
               msg("%s misses you.", text_The().c_str());
             }
             popup("It misses you!");
 
             if (game->robot_mode) {
-              BOTCON("%s misses the robot.", text_the().c_str());
+              BOTCON("%s misses the robot.", text_The().c_str());
             }
           } else {
             dbg("The attack missed (att modifier %d, AC %d) on %s", attack_bonus, stat_def,

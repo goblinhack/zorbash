@@ -65,11 +65,6 @@ void Thing::hunger_update(void)
     return;
   }
 
-  if (hunger_is_insatiable()) {
-    is_hunger_level_starving = true;
-    return;
-  }
-
   dbg("Hunger update");
   TRACE_AND_INDENT();
 
@@ -82,8 +77,8 @@ void Thing::hunger_update(void)
   int starving_at          = (int) ((double) 100 * ((double) tpp->hunger_is_hunger_level_starving_at_pct() / 100.0));
   is_hunger_level_starving = my_hunger_level <= starving_at;
 
-  is_hunger_level_satiated = my_hunger_level > 80;
-  is_hunger_level_gorged   = my_hunger_level > 110;
+  is_hunger_level_satiated = my_hunger_level > THING_HUNGER_SATIATED;
+  is_hunger_level_gorged   = my_hunger_level > THING_HUNGER_FULL;
 
   if (is_player()) {
     if (is_hunger_level_gorged || is_hunger_level_satiated) {

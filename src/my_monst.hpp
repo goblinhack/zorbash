@@ -126,7 +126,7 @@ public:
   int nutrition           = {-1};
   int health              = {};
   int health_max          = {};
-  int hunger              = {100};
+  int hunger              = {THING_HUNGER_FULL};
   int jump_distance_mod   = {};
   int keys                = {};
   int lifespan            = {}; // How many things this thing owns.

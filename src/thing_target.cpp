@@ -309,10 +309,13 @@ bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *att
     //
     // If no swing animation, then swing.
     //
+    dbg2("Target-attack-best: No equipment use animation, so lunge");
+    TRACE_AND_INDENT();
+
     if (attack_lunge()) {
       lunge(best_hit_at);
     }
-    TRACE_NO_INDENT();
+
     //
     // A monst only wielding a wand can have no swing anim
     //
@@ -325,7 +328,9 @@ bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *att
     //
     // Or, if there is a swing animation, don't create a duplicate
     //
-    TRACE_NO_INDENT();
+    dbg2("Target-attack-best: Have equipment use animation");
+    TRACE_AND_INDENT();
+
     //
     // A monst only wielding a wand can have no swing anim
     //
@@ -356,6 +361,8 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   //
   // Swing the weapon
   //
+  dbg2("Target-attack-best: Swing weapon");
+  TRACE_AND_INDENT();
   victim_attack_swing(equip, best_hit_at, attack_options);
 
   //
@@ -369,6 +376,9 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   // Try to attack
   //
   if (item) {
+    dbg2("Target-attack-best: Try to attack with item");
+    TRACE_AND_INDENT();
+
     if (best) {
       on_use(item, best);
     } else {
@@ -379,6 +389,9 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
       lunge(best_hit_at);
     }
   } else {
+    dbg2("Target-attack-best: Try to attack with no item");
+    TRACE_AND_INDENT();
+
     if (collision_check_and_handle_at(best_hit_at, attack_options)) {
       lunge(best_hit_at);
     }

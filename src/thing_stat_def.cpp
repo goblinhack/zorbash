@@ -161,7 +161,7 @@ int Thing::stat_def_penalties_total(void)
   // Hunger penalties
   //
   if (is_hunger_level_starving) {
-    int p = HUNGER_PENALTY_WHEN_STARVING;
+    int p = THING_HUNGER_PENALTY_WHEN_STARVING;
     penalty += p;
     if (penalty != prev) {
       prev = penalty;
