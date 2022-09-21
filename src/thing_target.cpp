@@ -359,6 +359,13 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   victim_attack_swing(equip, best_hit_at, attack_options);
 
   //
+  // If carrying a weapon, but attacking food, then do not use the weapon.
+  //
+  if (attack_options->prefer_nat_att) {
+    item = nullptr;
+  }
+
+  //
   // Try to attack
   //
   if (item) {

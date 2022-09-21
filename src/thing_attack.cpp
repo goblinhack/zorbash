@@ -148,24 +148,9 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
   }
 
-  if (attack_meat()) {
-    //
-    // Meat eaters eat you when you are dead!
-    //
-    if (victim->is_meat()) {
-      dbg("Allow meat eater attack on %s", victim->to_short_string().c_str());
-      return true;
-    }
-  } else {
-    if (victim->is_dead) {
-      if (victim->is_frozen) {
-        dbg("Allow frozen corpse attack on %s", victim->to_short_string().c_str());
-        return true;
-      } else {
-        dbg("Cannot attack %s, it's dead", victim->to_short_string().c_str());
-        return false;
-      }
-    }
+  if (can_eat(victim)) {
+    dbg("Allow eater attack on %s", victim->to_short_string().c_str());
+    return true;
   }
 
   //
@@ -199,7 +184,6 @@ bool Thing::possible_to_attack(const Thingp victim)
   // Or carnivorous plants.
   //
   if ((! is_dead && is_carnivorous_plant()) || is_alive_monst() || is_resurrected) {
-
     //
     // Can we eats it?
     //
@@ -539,7 +523,14 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     //
     auto attack_bonus = stat_att_total() - stat_att_penalties_total();
     if (owner) {
-      attack_bonus = owner->stat_att_total() - owner->stat_att_penalties_total();
+      //
+      // Only apply penalties if attacking a monster; not food.
+      //
+      if (victim->is_alive_monst() || victim->is_player()) {
+        attack_bonus = owner->stat_att_total() - owner->stat_att_penalties_total();
+      } else {
+        attack_bonus = owner->stat_att_total();
+      }
     }
 
     //
@@ -1123,10 +1114,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     attack_options->damage           = 0;
   }
 
-  if (! victim->wake("attacked")) {
-    dbg("Failed to wake the %s", victim->to_short_string().c_str());
-    return false;
-  }
+  victim->wake("attacked");
 
   if (attack_count) {
     return true;

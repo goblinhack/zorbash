@@ -652,11 +652,11 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   }
 
   //
-  // Cruel to let things keep on hitting you when you're dead
+  // If the thing is dead, then allow an additional eat attacj.
   //
   if (is_dead || is_dying) {
     if (real_hitter->can_eat(this)) {
-      IF_DEBUG2 { hitter->log("Hit bypass, eat it"); }
+      IF_DEBUG2 { hitter->log("Thing is dead, allow it to be eaten"); }
     } else {
       IF_DEBUG2 { hitter->log("Hit fails, it's dead"); }
       return false;
