@@ -206,6 +206,14 @@ std::string Thing::text_short_The(void)
   return (out);
 }
 
+std::string Thing::text_A_or_An(void)
+{
+  TRACE_NO_INDENT();
+  auto out = text_short_a_or_an();
+  out[ 0 ] = toupper(out[ 0 ]);
+  return (out);
+}
+
 //
 // foo bar -> Foo Bar
 //

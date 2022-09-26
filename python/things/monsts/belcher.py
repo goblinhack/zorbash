@@ -67,6 +67,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_loggable(self, True)
     my.is_monst_class_b(self, True)
     my.is_monst(self, True)
+    my.msg_is_wounded(self, True)
+    my.msg_is_seen(self, True)
     my.is_obstacle_when_dead(self, True)
     my.is_plant(self, True)
     my.is_shovable(self, True)

@@ -1594,16 +1594,16 @@ int Thing::unused_flag57(void)
   return (tp()->unused_flag57());
 }
 
-int Thing::unused_flag58(void)
+int Thing::msg_is_wounded(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag58());
+  return (tp()->msg_is_wounded());
 }
 
-int Thing::unused_flag59(void)
+int Thing::msg_is_seen(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag59());
+  return (tp()->msg_is_seen());
 }
 
 int Thing::is_internal(void)

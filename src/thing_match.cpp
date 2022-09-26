@@ -826,10 +826,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag57() && (what == "unused_flag57")) {
     return true;
   }
-  if (unused_flag58() && (what == "unused_flag58")) {
+  if (msg_is_wounded() && (what == "msg_is_wounded")) {
     return true;
   }
-  if (unused_flag59() && (what == "unused_flag59")) {
+  if (msg_is_seen() && (what == "msg_is_seen")) {
     return true;
   }
   if (is_internal() && (what == "is_internal")) {
@@ -2405,11 +2405,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag57") {
     return &Thing::unused_flag57;
   }
-  if (what == "unused_flag58") {
-    return &Thing::unused_flag58;
+  if (what == "msg_is_wounded") {
+    return &Thing::msg_is_wounded;
   }
-  if (what == "unused_flag59") {
-    return &Thing::unused_flag59;
+  if (what == "msg_is_seen") {
+    return &Thing::msg_is_seen;
   }
   if (what == "unused_flag5") {
     return &Thing::unused_flag5;

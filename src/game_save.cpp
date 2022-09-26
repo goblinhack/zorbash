@@ -356,6 +356,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_scheduled_for_death                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_gc                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_scheduled_for_jump_end                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_seen_msg                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_sleeping                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_teleporting                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_the_grid                                  ? 1LLU : 0LLU) << shift; shift++;
@@ -366,6 +367,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_waiting_to_descend_dungeon                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting_to_descend_sewer                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting_to_leave_level_has_completed_fall ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_wounded_msg                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->was_frozen                                   ? 1LLU : 0LLU) << shift; shift++;
 
   if (shift >= (int) (sizeof(bits64) * 8)) {

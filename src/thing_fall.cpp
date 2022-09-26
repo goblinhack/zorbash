@@ -134,6 +134,8 @@ bool Thing::fall(void)
 
 float Thing::fall_curr(void)
 {
+  TRACE_NO_INDENT();
+
   if (! is_falling) {
     return 0;
   }

@@ -111,9 +111,13 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
     }
 
     if (angle * angle + distance * distance <= radius_squared && (light_walls || ! light_blocker)) {
-      set(fov_curr->can_see, map_x, map_y, true);
+      set_no_check(fov_curr->can_see, map_x, map_y, true);
+
       if (fov_ever) {
-        set(fov_ever->can_see, map_x, map_y, true);
+        if (! get_no_check(fov_ever->can_see, map_x, map_y)) {
+          me->can_see(point(map_x, map_y));
+          set_no_check(fov_ever->can_see, map_x, map_y, true);
+        }
       }
     }
 
@@ -158,8 +162,12 @@ bool Level::fov_calculate(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov
     scan(me, fov_curr, fov_ever, pov_x, pov_y, 1, 1.0, 0.0, max_radius, octant, light_walls);
   }
 
-  set(fov_curr->can_see, pov_x, pov_y, true);
-  set(fov_ever->can_see, pov_x, pov_y, true);
+  set_no_check(fov_curr->can_see, pov_x, pov_y, true);
+
+  if (! get_no_check(fov_ever->can_see, pov_x, pov_y)) {
+    me->can_see(point(pov_x, pov_y));
+    set_no_check(fov_ever->can_see, pov_x, pov_y, true);
+  }
 
   return true;
 }

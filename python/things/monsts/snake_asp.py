@@ -82,6 +82,8 @@ def tp_init(name, text_long_name):
     my.is_meat(self, True)
     my.is_monst_class_a(self, True)
     my.is_monst(self, True)
+    my.msg_is_wounded(self, True)
+    my.msg_is_seen(self, True)
     my.is_moveable(self, True)
     my.is_poisonous_danger_level(self, 1)
     my.is_red_blooded(self, True)

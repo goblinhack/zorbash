@@ -235,6 +235,7 @@ public:
   uint64_t is_scheduled_for_death                       : 1 {}; // will die in next game loop
   uint64_t is_scheduled_for_gc                          : 1 {};
   uint64_t is_scheduled_for_jump_end                    : 1 {};
+  uint64_t is_seen_msg                                  : 1 {};
   uint64_t is_sleeping                                  : 1 {};
   uint64_t is_teleporting                               : 1 {};
   uint64_t is_the_grid                                  : 1 {}; // is the backbone of the level
@@ -245,6 +246,7 @@ public:
   uint64_t is_waiting_to_descend_dungeon                : 1 {};
   uint64_t is_waiting_to_descend_sewer                  : 1 {};
   uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {};
+  uint64_t is_wounded_msg                               : 1 {};
   uint64_t was_frozen                                   : 1 {}; // was frozen at the start of the tick
 
   //
@@ -1138,12 +1140,6 @@ public:
   int gold_set(int);
   int gold_value(void);
   int gold(void);
-  int move_count_decr(int);
-  int move_count_decr(void);
-  int move_count_incr(int);
-  int move_count_incr(void);
-  int move_count_set(int);
-  int move_count(void);
   int health_boost(int v);
   int health_decr(int);
   int health_decr(void);
@@ -1166,8 +1162,8 @@ public:
   int hunger_incr(int);
   int hunger_incr(void);
   int hunger_is_hunger_level_hungry_at_pct(void);
-  int hunger_is_insatiable(void);
   int hunger_is_hunger_level_starving_at_pct(void);
+  int hunger_is_insatiable(void);
   int hunger_set(int);
   int hunger(void);
   int idle_count_decr(int);
@@ -1547,6 +1543,12 @@ public:
   int minion_count_set(int);
   int minion_count(void);
   int minion_limit(void);
+  int move_count_decr(int);
+  int move_count_decr(void);
+  int move_count_incr(int);
+  int move_count_incr(void);
+  int move_count_set(int);
+  int move_count(void);
   int move_speed_curr(void);
   int move_speed_mod_decr(int);
   int move_speed_mod_decr(void);
@@ -1556,6 +1558,8 @@ public:
   int move_speed_mod(void);
   int move_speed_total(void);
   int move_speed(void);
+  int msg_is_seen(void);
+  int msg_is_wounded(void);
   int necrotized_amount_decr(int);
   int necrotized_amount_decr(void);
   int necrotized_amount_incr(int);
@@ -1969,8 +1973,6 @@ public:
   int unused_flag55(void);
   int unused_flag56(void);
   int unused_flag57(void);
-  int unused_flag58(void);
-  int unused_flag59(void);
   int unused_flag5(void);
   int unused_flag6(void);
   int unused_flag7(void);
@@ -2010,6 +2012,7 @@ public:
   std::string text_short_the(void);
   std::string text_short_The(void);
   std::string text_a_or_an(void);
+  std::string text_A_or_An(void);
   std::string text_the(bool include_owner = false);
   std::string text_the_no_dying(bool include_owner = false);
   std::string text_The_no_dying(void);
@@ -2223,6 +2226,7 @@ public:
   void buff_deactivate(Thingp what);
   void buff_remove_all(void);
   void buff_tick(void);
+  void can_see(point);
   void change_state(int new_state, const std::string &why);
   void chasm_tick(void);
   void check_all_carried_items_are_owned(void);

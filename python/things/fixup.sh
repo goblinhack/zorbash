@@ -503,8 +503,8 @@ do
       unused_flag55 \
       unused_flag56 \
       unused_flag57 \
-      unused_flag58 \
-      unused_flag59 \
+      msg_is_wounded \
+      msg_is_seen \
       unused_flag6 \
       internal \
       is_eater_of_helmets \
