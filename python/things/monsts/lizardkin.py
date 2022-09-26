@@ -98,7 +98,7 @@ def tp_init(name, text_long_name):
     my.is_living(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
-    my.is_monst_class_a(self, True)
+    my.is_monst_class_b(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_red_blooded(self, True)
