@@ -58,7 +58,7 @@ static const int matrix_table[ 8 ][ 4 ] = {
 
 // Cast visiblity using shadowcasting.
 void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int pov_y,
-                 int   distance, // Polar distance from POV.
+                 int   distance_from_origin, // Polar distance_from_origin from POV.
                  float view_slope_high, float view_slope_low, int max_radius, int octant, bool light_walls)
 {
   const int xx             = matrix_table[ octant ][ 0 ];
@@ -71,20 +71,20 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
     return; // View is invalid.
   }
 
-  if (distance > max_radius) {
+  if (distance_from_origin > max_radius) {
     return; // Distance is out-of-range.
   }
 
-  if (is_oob(pov_x + distance * xy, pov_y + distance * yy)) {
+  if (is_oob(pov_x + distance_from_origin * xy, pov_y + distance_from_origin * yy)) {
     return; // Distance is out-of-bounds.
   }
 
   bool prev_tile_blocked = false;
 
-  for (int angle = distance; angle >= 0; --angle) { // Polar angle coordinates from high to low.
-    const float tile_slope_high     = (angle + 0.5f) / (distance - 0.5f);
-    const float tile_slope_low      = (angle - 0.5f) / (distance + 0.5f);
-    const float prev_tile_slope_low = (angle + 0.5f) / (distance + 0.5f);
+  for (int angle = distance_from_origin; angle >= 0; --angle) { // Polar angle coordinates from high to low.
+    const float tile_slope_high     = (angle + 0.5f) / (distance_from_origin - 0.5f);
+    const float tile_slope_low      = (angle - 0.5f) / (distance_from_origin + 0.5f);
+    const float prev_tile_slope_low = (angle + 0.5f) / (distance_from_origin + 0.5f);
 
     if (tile_slope_low > view_slope_high) {
       continue; // Tile is not in the view yet.
@@ -93,8 +93,8 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
     }
 
     // Current tile is in view.
-    const int map_x = pov_x + angle * xx + distance * xy;
-    const int map_y = pov_y + angle * yx + distance * yy;
+    const int map_x = pov_x + angle * xx + distance_from_origin * xy;
+    const int map_y = pov_y + angle * yx + distance_from_origin * yy;
 
     if (is_oob(map_x, map_y)) {
       continue; // Angle is out-of-bounds.
@@ -110,7 +110,8 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
       }
     }
 
-    if (angle * angle + distance * distance <= radius_squared && (light_walls || ! light_blocker)) {
+    if (angle * angle + distance_from_origin * distance_from_origin <= radius_squared &&
+        (light_walls || ! light_blocker)) {
       set_no_check(fov_curr->can_see, map_x, map_y, true);
 
       if (fov_ever) {
@@ -127,8 +128,8 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
 
     if (! prev_tile_blocked && light_blocker) { // Floor -> wall.
       // Get the last sequence of floors as a view and recurse into them.
-      scan(me, fov_curr, fov_ever, pov_x, pov_y, distance + 1, view_slope_high, tile_slope_high, max_radius, octant,
-           light_walls);
+      scan(me, fov_curr, fov_ever, pov_x, pov_y, distance_from_origin + 1, view_slope_high, tile_slope_high,
+           max_radius, octant, light_walls);
     }
 
     prev_tile_blocked = light_blocker;
@@ -136,8 +137,8 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
 
   if (! prev_tile_blocked) {
     // Tail-recurse into the current view.
-    scan(me, fov_curr, fov_ever, pov_x, pov_y, distance + 1, view_slope_high, view_slope_low, max_radius, octant,
-         light_walls);
+    scan(me, fov_curr, fov_ever, pov_x, pov_y, distance_from_origin + 1, view_slope_high, view_slope_low, max_radius,
+         octant, light_walls);
   }
 }
 

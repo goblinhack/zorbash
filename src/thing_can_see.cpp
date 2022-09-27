@@ -14,7 +14,7 @@ void Thing::can_see(point p)
     return;
   }
 
-  FOR_ALL_THINGS_THAT_INTERACT(level, t, p.x, p.x)
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, p.x, p.y)
   {
     //
     // Display a message when a monster comes into view
@@ -26,11 +26,11 @@ void Thing::can_see(point p)
           if (! t->is_seen_msg) {
             t->is_seen_msg = true;
             if (t->msg_is_seen()) {
-              msg("%s wounded comes into view.", t->text_A_or_An().c_str());
+              msg("%s (wounded) comes into view.", t->text_A_or_An().c_str());
             }
           } else {
             if (t->msg_is_wounded()) {
-              msg("%s is wounded.", t->text_A_or_An().c_str());
+              msg("%s is wounded.", t->text_The().c_str());
             }
           }
         }
