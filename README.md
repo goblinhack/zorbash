@@ -2,11 +2,9 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
-<!-- the X is wounded?                                                                                                                            -->
 <!-- a Z comes into view, it is wielding a Y                                                                                                      -->
 <!-- bleeding wound from claw attacks?                                                                                                            -->
 <!-- sweep in and out attack for bat ?                                                                                                            -->
-<!-- turn count                                                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

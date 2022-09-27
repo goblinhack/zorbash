@@ -34,7 +34,7 @@ bool Thing::player_is_ready_for_messages(void)
 
   if (game->tick_current <= 1) {
     if (game->tick_requested.empty()) {
-      if ((time_ms() - game->tick_begin_ms) < 50) {
+      if (! game->tick_begin_ms || (time_ms() - game->tick_begin_ms) < 50) {
         return false;
       }
     }
@@ -71,7 +71,7 @@ bool Thing::player_is_ready_for_messages(std::string &why)
 
   if (game->tick_current <= 1) {
     if (game->tick_requested.empty()) {
-      if ((time_ms() - game->tick_begin_ms) < 50) {
+      if (! game->tick_begin_ms || (time_ms() - game->tick_begin_ms) < 50) {
         why = "first tick";
         return false;
       }
