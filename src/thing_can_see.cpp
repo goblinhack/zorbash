@@ -39,22 +39,22 @@ void Thing::can_see(point p)
               continue;
             }
             if (item->is_ring() || item->is_helmet() || item->is_amulet()) {
-              msg("%s is wearing a %s.", t->text_The().c_str(), item->text_long_name().c_str());
+              msg("%s is wearing %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
             }
             if (item->is_cloak()) {
-              msg("%s is styled in a %s.", t->text_The().c_str(), item->text_long_name().c_str());
+              msg("%s is styled in %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
             }
             if (item->is_gauntlet() || item->is_armor()) {
-              msg("%s is wearing %s.", t->text_The().c_str(), item->text_long_name().c_str());
+              msg("%s is wearing %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
             }
             if (item->is_boots()) {
-              msg("%s is sporting %s.", t->text_The().c_str(), item->text_long_name().c_str());
+              msg("%s is sporting %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
             }
             if (item->is_shield()) {
-              msg("%s is carrying a %s.", t->text_The().c_str(), item->text_long_name().c_str());
+              msg("%s is carrying %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
             }
             if (item->is_weapon()) {
-              msg("%s is wielding %s.", t->text_The().c_str(), item->text_long_name().c_str());
+              msg("%s is wielding %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
             }
           }
         }
