@@ -2,7 +2,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
-<!-- a Z comes into view, it is wielding a Y                                                                                                      -->
 <!-- bleeding wound from claw attacks?                                                                                                            -->
 <!-- sweep in and out attack for bat ?                                                                                                            -->
 <!-- ------                                                                                                                                       -->

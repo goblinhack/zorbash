@@ -802,7 +802,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
       t->con("LOAD %d,%d id %X", t->curr_at.x, t->curr_at.y, t->id.id);
 #endif
       t->init_lights();
-      t->light_dist_update();
+      t->light_distance_update();
     }
   }
 

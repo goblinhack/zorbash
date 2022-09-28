@@ -612,8 +612,8 @@ else
 fi
 
 if [[ $OPT_DEV2 != "" ]]; then
-    GCC_STACK_CHECK="-fstack-check -fstack-protector-all -D_FORTIFY_SOURCE=2"
-    GCC_STACK_CHECK="-fstack-check -fstack-protector-all"
+    GCC_STACK_CHECK="-fstack-protector-all -D_FORTIFY_SOURCE=2"
+    GCC_STACK_CHECK="-fstack-protector-all"
 else
     GCC_STACK_CHECK=
 fi

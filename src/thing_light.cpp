@@ -111,7 +111,7 @@ void Thing::init_lights(void)
   }
 }
 
-int Thing::light_dist_update(void)
+int Thing::light_distance_update(void)
 {
   TRACE_NO_INDENT();
 
@@ -126,10 +126,11 @@ int Thing::light_dist_update(void)
   }
 
   if (is_player()) {
-    light_dist = 0;
+    light_dist                         = 0;
+    level->request_player_light_update = false;
   }
 
-  light_dist_update_including_torch_effect(light_dist);
+  light_distance_upd_with_torch_effect(light_dist);
   infop()->light_dist = light_dist;
 
   float light_dist_new = light_dist_get();

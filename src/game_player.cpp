@@ -279,8 +279,8 @@ void Game::place_player(void)
       // level->thing_new("blob", point(x - 2, y + 1));
       // level->thing_new("belcher", point(x - 3, y + 1));
       // level->thing_new("cleaner", point(x - 3, y + 2));
-      if (0) {
-        auto d = level->thing_new("dogman", point(x + 2, y + 1));
+      if (1) {
+        auto d = level->thing_new("dogman", point(x + 20, y + 1));
         d->wake("");
         level->thing_new("food_salami", point(x + 1, y + 1));
       }
@@ -356,7 +356,7 @@ void Game::place_player(void)
 
   auto player = level->player;
   if (player) {
-    player->light_dist_update();
+    level->request_player_light_update = true;
 
     if (1) {
       IF_DEBUG2

@@ -65,7 +65,7 @@ void Thing::achieve_goals_in_life(void)
   //
   // Check torch counts
   //
-  light_dist_update();
+  light_distance_update();
 
   //
   // Check if stuck in a web

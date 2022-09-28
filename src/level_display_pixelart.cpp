@@ -334,7 +334,7 @@ void Level::display_pixelart_map_all(void)
       ts_fade_in_begin  = 0;
       if (player) {
         player->log("Fade in of level finished");
-        player->light_dist_update();
+        request_player_light_update = true;
       }
     }
   }

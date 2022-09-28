@@ -163,7 +163,7 @@ void Thing::level_enter(bool rejoin)
       // Except when loading; as this involves counting torches which may not yet be loaded.
       //
       if (! g_loading) {
-        light_dist_update();
+        light_distance_update();
       }
     }
   }

@@ -633,6 +633,6 @@ void Thing::update(void)
 
   if (is_player()) {
     TRACE_NO_INDENT();
-    light_dist_update();
+    level->request_player_light_update = true;
   }
 }

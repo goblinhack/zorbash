@@ -99,7 +99,7 @@ void Thing::light_dist_including_torch_effect_get(uint8_t &out_light_dist)
   out_light_dist = light_dist;
 }
 
-void Thing::light_dist_update_including_torch_effect(uint8_t &out_light_dist)
+void Thing::light_distance_upd_with_torch_effect(uint8_t &out_light_dist)
 {
   TRACE_NO_INDENT();
   uint8_t light_dist;

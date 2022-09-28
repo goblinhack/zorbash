@@ -897,14 +897,16 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         //
         if (is_weapon() && (weapon_damaged_pct() > 0)) {
           if (is_weapon() && (weapon_damaged_pct() > 50)) {
-            msg("Your heavily damaged weapon inflicts no damage on %s.", victim->text_the().c_str());
+            msg("%%fg=red$Your heavily damaged weapon inflicts no damage on %s.%%fg=reset$",
+                victim->text_the().c_str());
           } else {
-            msg("Your damaged weapon inflicts no damage on %s.", victim->text_the().c_str());
+            msg("%%fg=red$Your damaged weapon inflicts no damage on %s.%%fg=reset$", victim->text_the().c_str());
           }
         } else if (stuck_count()) {
-          msg("You find it hard to move and inflict no damage on %s.", victim->text_the().c_str());
+          msg("%%fg=orange$You find it hard to move and inflict no damage on %s.%%fg=reset$",
+              victim->text_the().c_str());
         } else {
-          msg("You inflict no damage on %s.", victim->text_the().c_str());
+          msg("%%fg=orange$You inflict no damage on %s.%%fg=reset$", victim->text_the().c_str());
         }
 
         if (game->robot_mode) {
@@ -912,9 +914,9 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         }
       } else if (victim->is_player()) {
         if (owner) {
-          msg("%s fails to hit you with %s.", owner->text_The().c_str(), text_the().c_str());
+          msg("%%fg=orange$%s fails to hit you with %s.%%fg=reset$", owner->text_The().c_str(), text_the().c_str());
         } else {
-          msg("%s fails to hit you.", text_The().c_str());
+          msg("%%fg=orange$%s fails to hit you.%%fg=reset$", text_The().c_str());
         }
         popup("Miss!");
 
@@ -1009,10 +1011,10 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
         if (! hit) {
           if (is_player() || (owner && owner->is_player())) {
             if (fumble) {
-              msg("You fubmle and miss %s.", victim->text_the().c_str());
+              msg("%%fg=orange$You fumble and miss %s.%%fg=reset$", victim->text_the().c_str());
               popup("You fumble!");
             } else {
-              msg("You miss %s.", victim->text_the().c_str());
+              msg("%%fg=orange$You miss %s.%%fg=reset$", victim->text_the().c_str());
               popup("You miss!");
             }
             if (game->robot_mode) {
@@ -1020,9 +1022,9 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
             }
           } else if (victim->is_player()) {
             if (owner) {
-              msg("%s misses you with %s.", owner->text_The().c_str(), text_the().c_str());
+              msg("%%fg=orange$%s misses you with %s.%%fg=reset$", owner->text_The().c_str(), text_the().c_str());
             } else {
-              msg("%s misses you.", text_The().c_str());
+              msg("%%fg=orange$%s misses you.%%fg=reset$", text_The().c_str());
             }
             popup("It misses you!");
 

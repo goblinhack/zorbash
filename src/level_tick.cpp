@@ -152,9 +152,24 @@ void Level::tick_(void)
     }
   }
 
-  if (! cursor) {
-    if (player) {
+  if (player) {
+    //
+    // Create the cursor if not yet.
+    //
+    if (! cursor) {
       cursor = thing_new("cursor", player->curr_at);
+    }
+
+    //
+    // Recalculate the player FOV if needed. This also triggers events like, if we see a monster.
+    //
+    if (request_player_light_update) {
+      //
+      // But only do this is no tick is pending, as the achieve goals function should do this.
+      //
+      if (game->tick_requested.empty()) {
+        player->light_distance_update();
+      }
     }
   }
 
@@ -162,7 +177,6 @@ void Level::tick_(void)
   // Even if a tick is not running, we need to animate all things
   //
   {
-    ;
     FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
     {
       t->animate();

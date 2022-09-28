@@ -1529,7 +1529,7 @@ public:
   int light_dist_incr(void);
   int light_dist_initial(void);
   int light_dist_set(int);
-  int light_dist_update(void);
+  int light_distance_update(void);
   int light_dist(void);
   int map_beast_carried_count(void);
   int map_beast_count(void);
@@ -2323,7 +2323,7 @@ public:
   void level_rejoin(void);
   void lifespan_tick(void);
   void light_dist_including_torch_effect_get(uint8_t &light_dist);
-  void light_dist_update_including_torch_effect(uint8_t &light_dist);
+  void light_distance_upd_with_torch_effect(uint8_t &light_dist);
   void location_check_me(void);
   void location_check(Thingp filter_to = nullptr);
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
