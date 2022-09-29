@@ -1433,3 +1433,60 @@ void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
   //
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
+
+void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
+{
+  static Tilep tile_burnt;
+  if (! tile_burnt) {
+    tile_burnt = tile_find_mand("burnt");
+  }
+
+  auto  width  = tl.x > br.x ? (tl.x - br.y) : (br.x - tl.x);
+  auto  height = br.y - tl.y;
+  float tw     = ((float) width) / ((float) game->config.game_pix_width);
+  float th     = ((float) height) / ((float) game->config.game_pix_height);
+
+  blit_fbo_push(FBO_SPRITE);
+  {
+    glcolor(WHITE);
+    blit_init();
+    {
+      //
+      // Blit a solid burnt texture
+      //
+      glBlendFunc(GL_ZERO, GL_ONE);
+      tile_blit(tile_burnt, point(0, 0), point(width, height));
+
+      //
+      // Now invert the mask for the thing and merge with the burnt
+      //
+      glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+      {
+        glLogicOp(GL_COPY_INVERTED);
+        glEnable(GL_COLOR_LOGIC_OP);
+        {
+          blit(tile->gl_binding_mask(), tile->x1, tile->y1, tile->x2, tile->y2, 0, 0, width, height);
+        }
+        glLogicOp(GL_COPY);
+        glDisable(GL_COLOR_LOGIC_OP);
+      }
+    }
+    blit_flush();
+  }
+  blit_fbo_pop();
+
+  //
+  // Blit the final combined texture
+  //
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  blit_init();
+  {
+    blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1.0 - th, tl.x, tl.y, br.x, br.y);
+  }
+  blit_flush();
+
+  //
+  // Restore normal blending
+  //
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}

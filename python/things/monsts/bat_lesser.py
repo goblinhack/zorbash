@@ -39,6 +39,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.damage_bite_chance_d1000(self, 0, 500)
     my.damage_bite_dice(self, "1d4")
+    my.gfx_oversized_and_on_floor(self, True)
     my.damage_claw_chance_d1000(self, 0, 500)
     my.damage_claw_dice(self, "1d3")
     my.damage_nat_att_chance_d1000(self, 0, 900)

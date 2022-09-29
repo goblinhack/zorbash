@@ -37,6 +37,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.damage_nat_att_dice(self, "1d4")
     my.damage_nat_att_type(self, "bite")
+    my.gfx_oversized_and_on_floor(self, True)
     my.distance_avoid(self, 3)
     my.distance_minion_vision_shared(self, True)
     my.distance_mob_max(self, 12)

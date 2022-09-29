@@ -13547,6 +13547,21 @@ def init_tiles_ice():
     )
 
 
+@timeme
+def init_tiles_burnt():
+    tiles = [
+        "burnt",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/tiles_32x32_burnt.tga",
+        name="tiles_32x32_burnt",
+        width=256,
+        height=256,
+        arr=tiles,
+    )
+
+
 init_chasm()
 init_claws_tiles()
 init_effect_descent_tiles()
@@ -13557,22 +13572,23 @@ init_laser_lightning_fork_tiles()
 init_laser_lightning_tiles()
 init_light()
 init_map_treasure()
-init_progress_bar_pixelart()
 init_progress_bar_ascii()
+init_progress_bar_pixelart()
 init_projectiles_tiles()
 init_solid()
-init_teleport_out_tiles()
 init_teleport_in_tiles()
+init_teleport_out_tiles()
 init_tiles_16x16()
 init_tiles_24x24()
 init_tiles_32x32()
+init_tiles_32x32_basalt()
 init_tiles_32x32_deep_water()
 init_tiles_32x32_lava()
-init_tiles_ice()
-init_tiles_32x32_basalt()
 init_tiles_32x32_sewer_water()
 init_tiles_32x32_surface_effects()
 init_tiles_32x32_water()
+init_tiles_burnt()
+init_tiles_ice()
 init_title_bg()
 init_title_fg1()
 init_title_fg2()
@@ -13586,8 +13602,8 @@ init_ui_dead()
 init_ui_health_bar_ascii()
 init_ui_health_bar_pixelart()
 init_ui_inventory()
-init_ui_rightbar()
 init_ui_minimap()
+init_ui_rightbar()
 init_ui_tabs()
 init_ui_tile_bg()
 init_weapons_tiles()

@@ -280,9 +280,10 @@ void Game::place_player(void)
       // level->thing_new("belcher", point(x - 3, y + 1));
       // level->thing_new("cleaner", point(x - 3, y + 2));
       if (1) {
-        auto d = level->thing_new("dogman", point(x + 2, y + 2));
+        auto d = level->thing_new("bat_lesser", point(x + 2, y + 2));
         d->wake("");
-        level->thing_new("food_salami", point(x + 1, y + 1));
+        d->is_burnt = true;
+        d->dead("x");
       }
       // level->thing_new("vampire_rose_stem", point(x, y + 1));
       // level->thing_new("fire", point(x - 4, y + 5));
