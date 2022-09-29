@@ -470,15 +470,23 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
         continue;
       }
 
-      if (too_far_from_mob(p)) {
-        // dbg("can see walk %d,%d line %d", x, y, __LINE__);
-        continue;
-      }
-
-      if (too_far_from_leader(p)) {
-        if (distance_from_leader() < too_far_from_leader(p)) {
+      //
+      // In both cases here, it is actually better if the monster can see
+      // further than it can walk. So it can *try* to get to a player that
+      // is out of range. Else it will not even see them and will ignore
+      // the player if you stand slightly out of range which is not ideal.
+      //
+      if (0) {
+        if (too_far_from_mob(p)) {
           // dbg("can see walk %d,%d line %d", x, y, __LINE__);
           continue;
+        }
+
+        if (too_far_from_leader(p)) {
+          if (distance_from_leader() < too_far_from_leader(p)) {
+            // dbg("can see walk %d,%d line %d", x, y, __LINE__);
+            continue;
+          }
         }
       }
 
@@ -2069,13 +2077,6 @@ bool Thing::ai_tick(bool recursing)
   const float dx = distance_vision_get();
   const float dy = dx;
 
-  auto vision_source = vision_source_get();
-
-  int minx = std::max(0, (int) (vision_source.x - dx));
-  int maxx = std::min(MAP_WIDTH - 1, (int) (vision_source.x + dx));
-  int miny = std::max(0, (int) (vision_source.y - dy));
-  int maxy = std::min(MAP_HEIGHT - 1, (int) (vision_source.y + dy));
-
   bool   left         = false;
   bool   right        = false;
   bool   up           = false;
@@ -2108,6 +2109,45 @@ bool Thing::ai_tick(bool recursing)
   }
 
   //
+  // Update what we can see - which if a minion is from the perspective of the mob.
+  // We need to grow the light a bit for level explorers and things that can see diagonally.
+  //
+  auto vision_source = vision_source_get();
+
+  int minx = std::max(0, (int) (vision_source.x - dx));
+  int maxx = std::min(MAP_WIDTH - 1, (int) (vision_source.x + dx));
+  int miny = std::max(0, (int) (vision_source.y - dy));
+  int maxy = std::min(MAP_HEIGHT - 1, (int) (vision_source.y + dy));
+
+  level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, vision_source.x, vision_source.y,
+                       distance_vision_get() + 1);
+
+  //
+  // Minions see a combination of the mob owner and their own vision.
+  //
+  if (is_minion()) {
+    auto additional_vision_source = curr_at;
+    int  additional_minx          = std::max(0, (int) (additional_vision_source.x - dx));
+    int  additional_maxx          = std::min(MAP_WIDTH - 1, (int) (additional_vision_source.x + dx));
+    int  additional_miny          = std::max(0, (int) (additional_vision_source.y - dy));
+    int  additional_maxy          = std::min(MAP_HEIGHT - 1, (int) (additional_vision_source.y + dy));
+    level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, additional_vision_source.x,
+                         additional_vision_source.y, distance_vision_get() + 1);
+    if (additional_minx < minx) {
+      minx = additional_minx;
+    }
+    if (additional_miny < miny) {
+      miny = additional_miny;
+    }
+    if (additional_maxx > maxx) {
+      maxx = additional_maxx;
+    }
+    if (additional_maxy > maxy) {
+      maxy = additional_maxy;
+    }
+  }
+
+  //
   // If we have a treasure map then we know this level
   //
   if (map_treasure_available()) {
@@ -2117,13 +2157,6 @@ bool Thing::ai_tick(bool recursing)
       }
     }
   }
-
-  //
-  // Update what we can see - which if a minion is from the perspective of the mob.
-  // We need to grow the light a bit for level explorers and things that can see diagonally.
-  //
-  level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, vision_source.x, vision_source.y,
-                       distance_vision_get() + 2);
 
   //
   // check for anything dangerous we need to consider and maybe stop what we're doing.
