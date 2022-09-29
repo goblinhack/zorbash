@@ -1972,7 +1972,7 @@ public:
   int unused_flag54(void);
   int unused_flag55(void);
   int unused_flag56(void);
-  int unused_flag57(void);
+  int is_able_to_rest(void);
   int unused_flag5(void);
   int unused_flag6(void);
   int unused_flag7(void);

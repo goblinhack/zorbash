@@ -823,7 +823,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag56() && (what == "unused_flag56")) {
     return true;
   }
-  if (unused_flag57() && (what == "unused_flag57")) {
+  if (is_able_to_rest() && (what == "is_able_to_rest")) {
     return true;
   }
   if (msg_is_wounded() && (what == "msg_is_wounded")) {
@@ -2402,8 +2402,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag56") {
     return &Thing::unused_flag56;
   }
-  if (what == "unused_flag57") {
-    return &Thing::unused_flag57;
+  if (what == "is_able_to_rest") {
+    return &Thing::is_able_to_rest;
   }
   if (what == "msg_is_wounded") {
     return &Thing::msg_is_wounded;

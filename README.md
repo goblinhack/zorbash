@@ -1,6 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- skel minions at the tether will not lunge attack or change dir                                                                               -->
 <!-- if burnt or frozen and dead, need message                                                                                                    -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
 <!-- bleeding wound from claw attacks?                                                                                                            -->

@@ -61,6 +61,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_jump_escape(self, True)
     my.is_able_to_jump_randomly_chance_d1000(self, 20)
     my.is_able_to_jump(self, True)
+    my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_sleep(self, True)
     my.is_able_to_swim(self, True)

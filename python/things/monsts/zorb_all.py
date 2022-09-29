@@ -89,6 +89,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_learn_skills(self, True)
     my.is_able_to_move_diagonally(self, True)
     my.is_able_to_open_doors(self, True)
+    my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_shove(self, True)
     my.is_able_to_sleep(self, True)

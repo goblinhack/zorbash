@@ -2123,7 +2123,7 @@ bool Thing::ai_tick(bool recursing)
   // We need to grow the light a bit for level explorers and things that can see diagonally.
   //
   level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, vision_source.x, vision_source.y,
-                       distance_vision_get() + 1);
+                       distance_vision_get() + 2);
 
   //
   // check for anything dangerous we need to consider and maybe stop what we're doing.

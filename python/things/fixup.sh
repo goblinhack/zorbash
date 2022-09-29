@@ -502,7 +502,7 @@ do
       unused_flag54 \
       unused_flag55 \
       unused_flag56 \
-      unused_flag57 \
+      is_able_to_rest \
       msg_is_wounded \
       msg_is_seen \
       unused_flag6 \

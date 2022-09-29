@@ -598,7 +598,7 @@ PyObject *thing_unused_flag53(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag54(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag55(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag56(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag57(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_rest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);

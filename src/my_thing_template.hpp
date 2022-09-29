@@ -626,7 +626,7 @@ private:
   int _unused_flag54 {};
   int _unused_flag55 {};
   int _unused_flag56 {};
-  int _unused_flag57 {};
+  int _is_able_to_rest {};
   int _msg_is_wounded {};
   int _msg_is_seen {};
   int _unused_flag6 {};
@@ -1639,7 +1639,7 @@ public:
   int unused_flag54(void) const;
   int unused_flag55(void) const;
   int unused_flag56(void) const;
-  int unused_flag57(void) const;
+  int is_able_to_rest(void) const;
   int unused_flag5(void) const;
   int unused_flag6(void) const;
   int unused_flag7(void) const;
@@ -2312,7 +2312,7 @@ public:
   void unused_flag54_set(int v);
   void unused_flag55_set(int v);
   void unused_flag56_set(int v);
-  void unused_flag57_set(int v);
+  void is_able_to_rest_set(int v);
   void unused_flag5_set(int v);
   void unused_flag6_set(int v);
   void unused_flag7_set(int v);

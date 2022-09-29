@@ -675,7 +675,7 @@ int Tp::unused_flag53(void) const { return _unused_flag53; }
 int Tp::unused_flag54(void) const { return _unused_flag54; }
 int Tp::unused_flag55(void) const { return _unused_flag55; }
 int Tp::unused_flag56(void) const { return _unused_flag56; }
-int Tp::unused_flag57(void) const { return _unused_flag57; }
+int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
 int Tp::unused_flag5(void) const { return _unused_flag5; }
 int Tp::unused_flag6(void) const { return _unused_flag6; }
 int Tp::unused_flag7(void) const { return _unused_flag7; }
@@ -1347,7 +1347,7 @@ void Tp::unused_flag53_set(int v) { _unused_flag53 = v; }
 void Tp::unused_flag54_set(int v) { _unused_flag54 = v; }
 void Tp::unused_flag55_set(int v) { _unused_flag55 = v; }
 void Tp::unused_flag56_set(int v) { _unused_flag56 = v; }
-void Tp::unused_flag57_set(int v) { _unused_flag57 = v; }
+void Tp::is_able_to_rest_set(int v) { _is_able_to_rest = v; }
 void Tp::unused_flag5_set(int v) { _unused_flag5 = v; }
 void Tp::unused_flag6_set(int v) { _unused_flag6 = v; }
 void Tp::unused_flag7_set(int v) { _unused_flag7 = v; }

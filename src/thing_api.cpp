@@ -1588,10 +1588,10 @@ int Thing::unused_flag56(void)
   return (tp()->unused_flag56());
 }
 
-int Thing::unused_flag57(void)
+int Thing::is_able_to_rest(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag57());
+  return (tp()->is_able_to_rest());
 }
 
 int Thing::msg_is_wounded(void)

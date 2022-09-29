@@ -256,21 +256,26 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   // If nothing to do, might as well rest. If there is a point.
   //
-  auto rest = true;
+  auto rest = false;
 
   //
-  // If alive and not lifeless, can we heal or rest?
+  // Do we need to rest?
   //
-  if (! is_lifeless() && ! is_undead() && ! is_ethereal()) {
-    if ((health() >= (health_max() / 4) * 3)) {
-      if (is_able_to_tire()) {
-        if (stamina() >= (stamina_max() / 4) * 3) {
-          rest = false;
-        }
-      } else {
-        rest = false;
+  if ((health() <= (health_max() / 4) * 3)) {
+    if (is_able_to_tire()) {
+      if (stamina() <= (stamina_max() / 4) * 3) {
+        rest = true;
       }
+    } else {
+      rest = true;
     }
+  }
+
+  //
+  // Are we able to rest?
+  //
+  if (! is_able_to_rest()) {
+    rest = false;
   }
 
   if (rest) {
