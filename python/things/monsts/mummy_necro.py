@@ -134,8 +134,6 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.is_monst_class_c(self, True)
     my.is_monst(self, True)
-    my.msg_is_wounded(self, True)
-    my.msg_is_seen(self, True)
     my.is_moveable(self, True)
     my.is_necrotic_danger_level(self, 1)  # danger level
     my.is_resurrectable(self, True)
@@ -143,6 +141,8 @@ def tp_init(name, text_long_name):
     my.is_tickable(self, True)
     my.is_undead(self, True)
     my.move_speed(self, 100)
+    my.msg_is_seen(self, True)
+    my.msg_is_wounded(self, True)
     my.noise_decibels_hearing(self, 50)
     my.noise_on_moving(self, 5)
     my.normal_placement_rules(self, True)
