@@ -2451,7 +2451,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
   dmap_process(&d, dmap_start, dmap_end, false);
   auto dmap_mid = dmap_start + dmap_end;
   dmap_mid /= 2;
-  dmap_print(&d, dmap_mid, dmap_start, dmap_end);
+  IF_DEBUG2 { dmap_print(&d, dmap_mid, dmap_start, dmap_end); }
 
   auto p = dmap_solve(&d, start);
 
