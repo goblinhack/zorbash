@@ -83,7 +83,7 @@ Thingp Thing::debuff_find(const std::string &what)
     return nullptr;
   }
 
-  FOR_ALL_BUFFS(id)
+  FOR_ALL_DEBUFFS(id)
   {
     auto t = level->thing_find(id);
     if (t) {
@@ -150,13 +150,11 @@ bool Thing::debuff_add_if_not_found(Tpp what)
     return false;
   }
 
-  while (! itemsp()->debuffs.empty()) {
-    auto id = *itemsp()->debuffs.begin();
-    auto t  = level->thing_find(id);
-    if (t) {
-      if (t->tp() == what) {
-        return true;
-      }
+  FOR_ALL_DEBUFFS(item)
+  {
+    auto t = level->thing_find(item.id);
+    if (t && (t->tp() == what)) {
+      return true;
     }
   }
 
@@ -181,6 +179,7 @@ bool Thing::debuff_remove(Tpp what)
   if (! maybe_itemsp()) {
     return false;
   }
+
   FOR_ALL_DEBUFFS(item)
   {
     auto t = level->thing_find(item.id);

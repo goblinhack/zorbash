@@ -161,6 +161,11 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
 
   if (t->is_dead) {
     if (t->is_monst()) {
+      if (t->is_frozen) {
+        wid_popup_window->log("Frozen to death.");
+      } else if (t->is_burnt) {
+        wid_popup_window->log("Burnt to a crisp.");
+      }
       wid_popup_window->log("It's dead, Jim");
     }
   } else {

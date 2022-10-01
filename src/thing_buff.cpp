@@ -150,13 +150,11 @@ bool Thing::buff_add_if_not_found(Tpp what)
     return false;
   }
 
-  while (! itemsp()->buffs.empty()) {
-    auto id = *itemsp()->buffs.begin();
-    auto t  = level->thing_find(id);
-    if (t) {
-      if (t->tp() == what) {
-        return true;
-      }
+  FOR_ALL_BUFFS(item)
+  {
+    auto t = level->thing_find(item.id);
+    if (t && (t->tp() == what)) {
+      return true;
     }
   }
 
