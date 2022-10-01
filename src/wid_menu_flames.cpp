@@ -437,5 +437,7 @@ void game_display_flames(void)
   }
 
   game_display_flames_tiles(w, h);
-  game_display_flames_change(w, h);
+  if (non_pcg_random_range(0, 100) < 50) {
+    game_display_flames_change(w, h);
+  }
 }
