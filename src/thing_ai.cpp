@@ -1053,7 +1053,14 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
         // AI_LOG("Can see", it);
 
-        auto goal_penalty = goal_penalty_get(it);
+        float dist         = distance(curr_at, it->curr_at);
+        float max_dist     = distance_vision_get();
+        auto  goal_penalty = goal_penalty_get(it);
+
+        //
+        // Make the monster prefer closer targers.
+        //
+        goal_penalty += (int) dist * dist * 10;
 
         //
         // Worse terrain, less preferred. Higher score, morepreferred.
@@ -1064,8 +1071,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         auto health_diff  = my_health - it_health;
 
         //
-        // Don't allow of attacking monsts from memory if the player or
-        // robot
+        // Don't allow of attacking monsts from memory if the player or robot
         //
         auto lit_recently = get(ai->can_see_currently.can_see, it->curr_at.x, it->curr_at.y);
 
@@ -1139,9 +1145,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         if (! it->is_dead) {
-          float dist     = distance(curr_at, it->curr_at);
-          float max_dist = distance_vision_get();
-
           //
           // If we can see an enemy, get them! If the monster is not lit then it's not really fair to use that
           // knowledge.
@@ -1211,7 +1214,13 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                 //
                 if (d100() < aggression_pct()) {
                   if (possible_to_attack(it)) {
-                    GOAL_ADD(GOAL_PRIO_MED, aggression_pct() + -health_diff - goal_penalty,
+                    int desirable_target = 0;
+                    if (it->is_sleeping) {
+                      desirable_target += 20;
+                    } else if (it->stuck_count()) {
+                      desirable_target += 20;
+                    }
+                    GOAL_ADD(GOAL_PRIO_MED, desirable_target + aggression_pct() + -health_diff - goal_penalty,
                              "can-attack-monst-unprovoked", it);
                     //
                     // Add it as an enemy so we will keep going for it and not cool off due to random aggression
