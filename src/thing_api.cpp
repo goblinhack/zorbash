@@ -574,6 +574,8 @@ int Thing::is_red_blood(void)
   return (tp()->is_red_blood());
 }
 
+int Thing::is_blood(void) { return is_red_blood() || is_green_blood(); }
+
 int Thing::is_bones(void)
 {
   TRACE_NO_INDENT();

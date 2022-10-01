@@ -1431,6 +1431,7 @@ public:
   int is_projectile(void);
   int is_red_blooded(void);
   int is_red_blood(void);
+  int is_blood(void);
   int is_red_splatter(void);
   int is_removeable_if_out_of_slots(void);
   int is_resurrectable(void);

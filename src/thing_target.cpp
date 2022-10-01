@@ -289,12 +289,10 @@ bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, Attac
       //
       // Eat attack; but only if it is dead if it is a monster.
       //
-      if (is_monst()) {
-        if (is_dead) {
-          dbg2("Target-attack-best: Dead monster");
-          attack_options->used_as        = gfx_anim_use();
-          attack_options->prefer_nat_att = true;
-        }
+      if (is_dead) {
+        dbg2("Target-attack-best: Dead monster");
+        attack_options->used_as        = gfx_anim_use();
+        attack_options->prefer_nat_att = true;
       } else {
         dbg2("Target-attack-best: Something I can eat");
         attack_options->used_as        = gfx_anim_use();
@@ -376,7 +374,7 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   //
   // Swing the weapon
   //
-  dbg2("Target-attack-best: Swing weapon");
+  dbg2("Target-attack-best: Swing weapon?");
   TRACE_AND_INDENT();
   victim_attack_swing(equip, best, best_hit_at, attack_options);
 

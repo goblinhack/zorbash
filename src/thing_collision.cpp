@@ -253,9 +253,9 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
     //
     if (attack_options->nat_att || is_wand_or_staff() || is_laser() || is_weapon() || is_monst() ||
         (is_player() && game->robot_mode)) {
-      dbg("Collision: weapon check for %s", victim->to_short_string().c_str());
+      dbg("Collision: weapon check against %s", victim->to_short_string().c_str());
       if (! attack_options->victim_attacked) {
-        dbg("Collision: weapon try to attack for %s", victim->to_short_string().c_str());
+        dbg("Collision: weapon try to attack %s", victim->to_short_string().c_str());
         if (attack(victim, attack_options)) {
           attack_options->victim_attacked = true;
           ret                             = true;

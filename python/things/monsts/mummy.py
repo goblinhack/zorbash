@@ -61,6 +61,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_health_bar_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
+    my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "2d20")
     my.hunger_is_insatiable(self, True)
     my.is_able_to_burn(self, True)
@@ -87,7 +88,6 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.is_monst_class_b(self, True)
     my.is_monst(self, True)
-    my.gfx_pixelart_wobbles_when_hit(self, True)
     my.is_moveable(self, True)
     my.is_necrotic_danger_level(self, 1)  # danger level
     my.is_resurrectable(self, True)

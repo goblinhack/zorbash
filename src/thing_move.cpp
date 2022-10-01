@@ -349,11 +349,11 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         game->wid_collect_create(items);
 #endif
       }
-      msg("You wait...");
+      msg("You wait.");
       waiting();
       move_count_incr();
     } else {
-      msg("You rest...");
+      msg("You rest.");
       resting();
       move_count_incr();
     }

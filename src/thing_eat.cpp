@@ -238,16 +238,30 @@ bool Thing::consume(Thingp victim)
           if (! victim->is_offscreen) {
             if (victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
-                msg("%%fg=red$%s feasts on your corpse!%%fg=reset$", text_The().c_str());
+                if (victim->is_burnt) {
+                  msg("%%fg=red$%s feasts on your toasted corpse!%%fg=reset$", text_The().c_str());
+                } else if (victim->is_frozen) {
+                  msg("%%fg=red$%s feasts on your frozen corpse!%%fg=reset$", text_The().c_str());
+                } else {
+                  msg("%%fg=red$%s feasts on your corpse!%%fg=reset$", text_The().c_str());
+                }
               } else {
                 msg("%%fg=orange$%s is eating you!%%fg=reset$", text_The().c_str());
               }
             } else if (victim->is_monst() || victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
-                msg("%s feasts on the corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                if (victim->is_burnt) {
+                  msg("%s feasts on the toasted corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                } else if (victim->is_frozen) {
+                  msg("%s feasts on the frozen corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                } else {
+                  msg("%s feasts on the corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                }
               } else {
                 msg("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
               }
+            } else if (victim->is_blood()) {
+              msg("%s laps up the %s.", text_The().c_str(), victim->text_the().c_str());
             } else {
               msg("%s consumes %s.", text_The().c_str(), victim->text_the().c_str());
             }
