@@ -1,8 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- dogman eats food with a knife                                                                                                                -->
-<!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
+<!-- rightbar not updated when collecting a shield                                                                                                -->
 <!-- bleeding wound from claw attacks?                                                                                                            -->
 <!-- sweep in and out attack for bat ?                                                                                                            -->
 <!-- ------                                                                                                                                       -->
