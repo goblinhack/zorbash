@@ -224,14 +224,13 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
             // Can only eat once alive things when dead... But the player is gone once dead.
             // Can't defeat victim twice, so hide victim
             //
-            dbg("Eat corpse %s", victim->to_short_string().c_str());
+            dbg("Ate corpse %s", victim->to_short_string().c_str());
             victim->hide();
             victim->gc();
             attack_options->victim_attacked = true;
             ret                             = true;
-          }
-
-          if (is_monst() && is_edible(victim) && eat(victim)) {
+          } else if (is_monst() && is_edible(victim) && eat(victim)) {
+            dbg("Ate %s", victim->to_short_string().c_str());
             attack_options->victim_attacked = true;
             ret                             = true;
           }
