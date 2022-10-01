@@ -20,6 +20,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
+    my.is_meat(self, True)
     my.is_organic(self, True)
     my.is_throwable(self, True)
     my.is_usable(self, True)
