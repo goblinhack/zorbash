@@ -19,11 +19,20 @@
 //
 void Level::scroll_map_set_bounds(void)
 {
-  if (map_at.x > MAP_WIDTH - 1) {
-    map_at.x = MAP_WIDTH - 1;
-  }
-  if (map_at.y > MAP_HEIGHT - 1) {
-    map_at.y = MAP_HEIGHT - 1;
+  if (g_opt_ascii) {
+    if (map_at.x > MAP_WIDTH - TILES_VISIBLE_ACROSS) {
+      map_at.x = MAP_WIDTH - TILES_VISIBLE_ACROSS;
+    }
+    if (map_at.y > MAP_HEIGHT - TILES_VISIBLE_DOWN) {
+      map_at.y = MAP_HEIGHT - TILES_VISIBLE_DOWN;
+    }
+  } else {
+    if (map_at.x > MAP_WIDTH - 1) {
+      map_at.x = MAP_WIDTH - 1;
+    }
+    if (map_at.y > MAP_HEIGHT - 1) {
+      map_at.y = MAP_HEIGHT - 1;
+    }
   }
   if (map_at.x < 0) {
     map_at.x = 0;
@@ -84,13 +93,9 @@ void Level::scroll_map_do(bool fast)
   }
 
 #if 0
-if (player) {
-  player->topcon("map_at %f %f map_wanted_at %f %f",
-          map_at.x,
-          map_at.y,
-          map_wanted_at.x,
-          map_wanted_at.y);
-}
+  if (player) {
+    player->topcon("map_at %f %f map_wanted_at %f %f", map_at.x, map_at.y, map_wanted_at.x, map_wanted_at.y);
+  }
 #endif
 
   //

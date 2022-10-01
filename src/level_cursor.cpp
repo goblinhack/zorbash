@@ -86,18 +86,6 @@ void Level::cursor_move(void)
 
     if (g_opt_ascii) {
       map_at += fpoint(dx, dy);
-      if (map_at.x < 0) {
-        map_at.x = 0;
-      }
-      if (map_at.y < 0) {
-        map_at.y = 0;
-      }
-      if (map_at.x > MAP_WIDTH - TILES_VISIBLE_ACROSS) {
-        map_at.x = MAP_WIDTH - TILES_VISIBLE_ACROSS;
-      }
-      if (map_at.y > MAP_HEIGHT - TILES_VISIBLE_DOWN) {
-        map_at.y = MAP_HEIGHT - TILES_VISIBLE_DOWN;
-      }
       map_wanted_at = map_at;
       display_map_set_bounds();
     } else {

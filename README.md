@@ -1,6 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- dogman eats food with a knife                                                                                                                -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
 <!-- bleeding wound from claw attacks?                                                                                                            -->
 <!-- sweep in and out attack for bat ?                                                                                                            -->

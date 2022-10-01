@@ -50,7 +50,7 @@ static void wid_thing_info_placement(point &tl, point &br, int height)
   }
 
   if (ascii_mouse_x > TERM_WIDTH - UI_RIGHTBAR_WIDTH) {
-    x = UI_LEFTBAR_WIDTH;
+    x = UI_LEFTBAR_WIDTH + 1;
   }
 
   tl = make_point(x, TERM_HEIGHT - 2 - height);
