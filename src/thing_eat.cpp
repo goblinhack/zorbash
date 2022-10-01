@@ -222,6 +222,9 @@ bool Thing::consume(Thingp victim)
   }
 
   if (attack_eater()) {
+    health_boost(victim->nutrition_get());
+    hunger_boost(victim->nutrition_get());
+
     if (is_edible(victim)) {
       dbg("Consumes %s", victim->text_the().c_str());
 
