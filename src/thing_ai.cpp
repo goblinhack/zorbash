@@ -1052,7 +1052,6 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         }
 
         // AI_LOG("Can see", it);
-
         float dist         = distance(curr_at, it->curr_at);
         float max_dist     = distance_vision_get();
         auto  goal_penalty = goal_penalty_get(it);
