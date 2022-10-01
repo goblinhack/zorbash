@@ -1347,7 +1347,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
 
   if (real_hitter != this) {
     if (gfx_pixelart_wobbles_when_hit()) {
-      wobble(90);
+      wobble(20);
       bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
     }
   }

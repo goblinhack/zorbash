@@ -563,13 +563,11 @@ void Thing::equip_remove_anim(int equip)
 
 bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
 {
-  if (is_player()) {
-    if (attack_options->attack_at_set) {
-      log("Try to use equipped %s item at %s", equip_name(equip).c_str(),
-          attack_options->attack_at.to_string().c_str());
-    } else {
-      log("Try to use equipped item");
-    }
+  if (attack_options->attack_at_set) {
+    log("Try to use equipped %s item at %s", equip_name(equip).c_str(),
+        attack_options->attack_at.to_string().c_str());
+  } else {
+    log("Try to use equipped item");
   }
   TRACE_AND_INDENT();
 

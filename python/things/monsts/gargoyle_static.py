@@ -93,6 +93,7 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.is_monst_class_c(self, True)
     my.is_monst(self, True)
+    my.gfx_pixelart_wobbles_when_hit(self, True)
     my.is_shovable(self, True)
     my.is_stone(self, True)
     my.is_temperature_change_sensitive(self, True)

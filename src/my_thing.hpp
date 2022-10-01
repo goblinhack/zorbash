@@ -660,7 +660,7 @@ public:
   bool victim_attack_best_at(int equip, AttackOptions *);
   bool victim_attack_best(int equip, AttackOptions *);
   bool victim_attack_best_(int equip, AttackOptions *);
-  bool victim_attack_swing(int equip, point best_hit_at, AttackOptions *attack_options);
+  bool victim_attack_swing(int equip, Thingp best, point best_hit_at, AttackOptions *attack_options);
   bool wake(const std::string &reason);
   bool will_avoid_monst(const point p);
   bool will_avoid_monst(const Thingp it);

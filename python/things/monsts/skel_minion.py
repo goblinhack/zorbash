@@ -85,6 +85,7 @@ def tp_init(name, text_long_name):
     my.is_minion(self, True)
     my.is_monst_class_a(self, True)
     my.is_monst(self, True)
+    my.gfx_pixelart_wobbles_when_hit(self, True)
     my.is_moveable(self, True)
     my.is_resurrectable(self, True)
     my.is_shovable(self, True)

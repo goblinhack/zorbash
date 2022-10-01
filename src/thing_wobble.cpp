@@ -6,7 +6,14 @@
 
 #include "my_thing.hpp"
 
-void Thing::wobble(float wobble) { wobble_set(wobble); }
+void Thing::wobble(float wobble)
+{
+  if (non_pcg_random_range(0, 100) < 50) {
+    wobble_set(wobble);
+  } else {
+    wobble_set(-wobble);
+  }
+}
 
 float Thing::update_wobble(void)
 {

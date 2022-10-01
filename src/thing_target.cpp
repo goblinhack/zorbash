@@ -276,7 +276,7 @@ bool Thing::victim_attack_best_attempt_3(Thingp item, point at, Thingp *best, po
   return found_best;
 }
 
-bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *attack_options)
+bool Thing::victim_attack_swing(int equip, Thingp best, point best_hit_at, AttackOptions *attack_options)
 {
   dbg2("Target-attack-best: Best target to swing at %s", best_hit_at.to_string().c_str());
   TRACE_AND_INDENT();
@@ -285,8 +285,23 @@ bool Thing::victim_attack_swing(int equip, point best_hit_at, AttackOptions *att
   // If attacking something like blood, then do a natural attack instead.
   //
   if (is_monst()) {
-    if (! level->is_monst(best_hit_at) && ! level->is_wall(best_hit_at) && ! level->is_door(best_hit_at) &&
-        ! level->is_mob(best_hit_at)) {
+    if (best && can_eat(best)) {
+      //
+      // Eat attack; but only if it is dead if it is a monster.
+      //
+      if (is_monst()) {
+        if (is_dead) {
+          dbg2("Target-attack-best: Dead monster");
+          attack_options->used_as        = gfx_anim_use();
+          attack_options->prefer_nat_att = true;
+        }
+      } else {
+        dbg2("Target-attack-best: Something I can eat");
+        attack_options->used_as        = gfx_anim_use();
+        attack_options->prefer_nat_att = true;
+      }
+    } else if (! level->is_monst(best_hit_at) && ! level->is_wall(best_hit_at) && ! level->is_door(best_hit_at) &&
+               ! level->is_mob(best_hit_at)) {
       //
       // Prefer claws
       //
@@ -363,7 +378,7 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   //
   dbg2("Target-attack-best: Swing weapon");
   TRACE_AND_INDENT();
-  victim_attack_swing(equip, best_hit_at, attack_options);
+  victim_attack_swing(equip, best, best_hit_at, attack_options);
 
   //
   // If carrying a weapon, but attacking food, then do not use the weapon.
