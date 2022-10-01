@@ -21,11 +21,21 @@ const std::string &Thing::nutrition_dice_str(void)
 int Thing::nutrition_get(void)
 {
   TRACE_NO_INDENT();
+
   if (unlikely(! _infop)) {
     new_infop();
   }
+
   if (infop()->nutrition == -1) {
     infop()->nutrition = tp()->nutrition_dice().roll();
   }
+
+  //
+  // Burnt things are more tasty.
+  //
+  if (is_burnt) {
+    return infop()->nutrition * 2;
+  }
+
   return infop()->nutrition;
 }

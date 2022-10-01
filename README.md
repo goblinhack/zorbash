@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- if burnt or frozen and dead, need message                                                                                                    -->
 <!-- eating corpses / and burnt ones are tastier ?                                                                                                -->
 <!-- bleeding wound from claw attacks?                                                                                                            -->
 <!-- sweep in and out attack for bat ?                                                                                                            -->

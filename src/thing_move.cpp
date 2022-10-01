@@ -337,8 +337,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       auto items = anything_to_carry();
       if (! items.empty()) {
         //
-        // In mouse mode, it really is better to open a window to allow
-        // choosing
+        // In mouse mode, it really is better to open a window to allow choosing
         //
 #if 0
         if (items.size() > 1) {
@@ -454,7 +453,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 
         //
         // If the cursor is where we are trying to attack, then set the
-        // attack position; this allows us to hit walls interntionally.
+        // attack position; this allows us to hit walls intentionally.
         //
         if (level->cursor) {
           if (level->cursor->curr_at == future_pos) {

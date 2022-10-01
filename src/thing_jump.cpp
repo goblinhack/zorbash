@@ -380,6 +380,28 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     is_jumping = true;
   }
 
+  //
+  // In ascii mode jumps look like immediate moves, so give more feedback but only for monsters.
+  //
+  if (! is_player() && level->player) {
+    if (! get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+      auto old_distance = DISTANCE(curr_at.x, curr_at.y, level->player->curr_at.x, level->player->curr_at.y);
+      auto new_distance = DISTANCE(to.x, to.y, level->player->curr_at.x, level->player->curr_at.y);
+      if (old_distance > new_distance) {
+        msg("%s jumps closer!", text_The().c_str());
+      } else if (old_distance < new_distance) {
+        msg("%s jumps away!", text_The().c_str());
+      } else {
+        msg("%s jumps!", text_The().c_str());
+      }
+    } else if (! get(level->player->aip()->can_see_currently.can_see, to.x, to.y)) {
+      msg("%s lands!", text_The().c_str());
+    }
+  }
+
+  //
+  // Make sure the jump messages come before this.
+  //
   move_to_immediately(point(x, y));
 
   //
@@ -489,23 +511,6 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   on_jump();
 
   level->noisemap_in_incr(to.x, to.y, noise_on_jumping());
-
-  //
-  // In ascii mode jumps look like immediate moves, so give more feedback but only
-  // for monsters.
-  //
-  if (! is_player() && level->player) {
-    if (! get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-      if (DISTANCE(curr_at.x, curr_at.y, level->player->curr_at.x, level->player->curr_at.y) >
-          DISTANCE(to.x, to.y, level->player->curr_at.x, level->player->curr_at.y)) {
-        msg("%s jumps closer!", text_The().c_str());
-      } else {
-        msg("%s jumps away!", text_The().c_str());
-      }
-    } else if (! get(level->player->aip()->can_see_currently.can_see, to.x, to.y)) {
-      msg("%s lands!", text_The().c_str());
-    }
-  }
 
   dbg("Jump success to %d,%d.", curr_at.x, curr_at.y);
 

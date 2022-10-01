@@ -932,8 +932,7 @@ bool Thing::collision_check_only(point future_pos)
 bool Thing::collision_check_only(void) { return (collision_check_only(curr_at)); }
 
 //
-// Have we hit anything? True on having done something at this (future?)
-// position.
+// Have we hit anything? True on having done something at this (future?) position.
 //
 bool Thing::collision_check_and_handle_nearby(point future_pos, AttackOptions *attack_options)
 {

@@ -83,7 +83,7 @@ void Game::place_player(void)
         t->carry(w);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("buff_undead_resist", point(x, y));
         t->buff_add(w);
       }
@@ -314,8 +314,9 @@ void Game::place_player(void)
         level->thing_new("water", point(x + 3, y));
         level->thing_new("water", point(x + 4, y));
       }
-      if (0) {
-        level->thing_new("jelly_parent", point(x + 4, y + 4));
+      if (1) {
+        level->thing_new("jelly_parent", point(x + 1, y + 4));
+        level->thing_new("food_pottedmeat", point(x + 2, y + 4));
         // level->thing_new("potion_health", point(x + 3, y + 4));
       }
 
