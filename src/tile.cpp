@@ -1389,6 +1389,8 @@ void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
   float tw     = ((float) width) / ((float) game->config.game_pix_width);
   float th     = ((float) height) / ((float) game->config.game_pix_height);
 
+  blit_flush();
+
   blit_fbo_push(FBO_SPRITE);
   {
     glcolor(WHITE);
@@ -1427,11 +1429,6 @@ void tile_blit_frozen(const Tilep &tile, const point tl, const point br)
     blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1.0 - th, tl.x, tl.y, br.x, br.y);
   }
   blit_flush();
-
-  //
-  // Restore normal blending
-  //
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
@@ -1445,6 +1442,8 @@ void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
   auto  height = br.y - tl.y;
   float tw     = ((float) width) / ((float) game->config.game_pix_width);
   float th     = ((float) height) / ((float) game->config.game_pix_height);
+
+  blit_flush();
 
   blit_fbo_push(FBO_SPRITE);
   {
@@ -1484,9 +1483,4 @@ void tile_blit_burnt(const Tilep &tile, const point tl, const point br)
     blit(fbo_tex_id[ FBO_SPRITE ], 0, 1, tw, 1.0 - th, tl.x, tl.y, br.x, br.y);
   }
   blit_flush();
-
-  //
-  // Restore normal blending
-  //
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
