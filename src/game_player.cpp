@@ -124,7 +124,7 @@ void Game::place_player(void)
         auto w = level->thing_new("shovel", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         level->thing_new("ring_shield", point(x + 2, y));
         level->thing_new("ring_poison_resist", point(x + 2, y - 1));
       }

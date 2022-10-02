@@ -115,7 +115,7 @@ def tp_init(name, text_long_name):
     my.thing_size(self, my.THING_SIZE_SMALL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
+    my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
     delay = 100
