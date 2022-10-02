@@ -345,6 +345,13 @@ bool Thing::carry(Thingp item, bool can_equip)
     bag_compress();
   }
 
+  //
+  // For items that modifys stats, like rings, need to update the display.
+  //
+  if (is_player()) {
+    game->request_to_remake_rightbar = true;
+  }
+
   return true;
 }
 

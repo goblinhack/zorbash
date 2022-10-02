@@ -125,8 +125,8 @@ void Game::place_player(void)
         t->carry(w);
       }
       if (0) {
-        auto w = level->thing_new("ring_shield", point(x, y));
-        t->carry(w);
+        level->thing_new("ring_shield", point(x + 2, y));
+        level->thing_new("ring_poison_resist", point(x + 2, y - 1));
       }
       if (0) {
         auto w = level->thing_new("very_broadsword", point(x, y));
@@ -279,7 +279,7 @@ void Game::place_player(void)
       // level->thing_new("blob", point(x - 2, y + 1));
       // level->thing_new("belcher", point(x - 3, y + 1));
       // level->thing_new("cleaner", point(x - 3, y + 2));
-      if (1) {
+      if (0) {
         auto d = level->thing_new("bat_lesser", point(x + 2, y + 2));
         d->wake("");
         d->is_burnt = true;
@@ -317,7 +317,7 @@ void Game::place_player(void)
       if (0) {
         level->thing_new("jelly_parent", point(x, y + 4));
       }
-      if (1) {
+      if (0) {
         auto d = level->thing_new("dogman", point(x + 1, y + 2));
         d->wake("x");
         // level->thing_new("potion_health", point(x + 3, y + 4));
