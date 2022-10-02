@@ -53,10 +53,13 @@ void Thing::on_move(void)
 void Thing::move_finish(void)
 {
   TRACE_NO_INDENT();
-  if (! is_moving) {
-    return;
+
+  if (! g_opt_ascii) {
+    if (! is_moving) {
+      return;
+    }
+    is_moving = false;
   }
-  is_moving = false;
 
   //
   // Set this so that we can pick up items again at the last location.
@@ -170,7 +173,6 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
 bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t must_attack,
                  uint8_t wait_or_collect, AttackOptions *attack_options)
 {
-  dbg("Move");
   TRACE_AND_INDENT();
 
   if (! is_moveable()) {
@@ -716,6 +718,10 @@ void Thing::update_pos(point to, bool immediately)
   }
 
   move_carried_items();
+
+  if (immediately) {
+    move_finish();
+  }
 }
 
 void Thing::move_to(point to)

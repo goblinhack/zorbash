@@ -389,6 +389,7 @@ void Game::wid_collect_create(const std::list< Thingp > items /* intentional cop
 
   change_state(Game::STATE_COLLECTING_ITEMS, "collect items");
 
+  TOPCON("You find some items.");
   BOTCON("You lucky thing. Choose an item to collect.");
 
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
