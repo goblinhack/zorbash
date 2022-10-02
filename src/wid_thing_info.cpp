@@ -1877,7 +1877,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
     printed_something = true;
   }
 
-  if (t->is_monst() || t->is_player() || printed_something) {
+  if (t->is_item() || t->is_monst() || t->is_player() || printed_something) {
     w->log(UI_LOGGING_EMPTY_LINE);
   }
 }
