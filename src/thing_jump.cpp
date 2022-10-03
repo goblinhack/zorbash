@@ -69,7 +69,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   if (to == curr_at) {
     if (is_player()) {
-      die("You fail to jump on the spot.");
+      msg("You fail to jump on the spot.");
     }
     return false;
   }

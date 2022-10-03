@@ -2410,7 +2410,6 @@ bool Thing::ai_tick(bool recursing)
 
   if (do_something) {
     if (is_player()) {
-      topcon("wait %d", wait);
       player_tick(left, right, up, down, attack, wait, jump);
     } else if (is_moveable()) {
       AttackOptions attack_options {};
