@@ -500,7 +500,7 @@ do
       unused_flag52 \
       unused_flag53 \
       unused_flag54 \
-      unused_flag55 \
+      bite_amount \
       unused_flag56 \
       is_able_to_rest \
       msg_is_wounded \

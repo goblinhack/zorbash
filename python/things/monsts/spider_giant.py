@@ -45,6 +45,7 @@ def tp_init(name, text_long_name):
     my.ai_resent_count(self, 10)
     my.attack_eater(self, True)
     my.attack_lunge(self, True)
+    my.bite_amount(self, 30)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.damage_nat_att_chance_d1000(self, 0, 900)

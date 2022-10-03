@@ -29,10 +29,13 @@ void Thing::place_blood(bool force)
     }
   }
 
+  auto placed_blood = false;
+
   if (is_red_blooded()) {
     if (! level->is_red_blood(curr_at.x, curr_at.y)) {
       auto tp = tp_random_red_blood();
       (void) level->thing_new(tp->name(), curr_at);
+      placed_blood = true;
     }
   }
 
@@ -40,6 +43,15 @@ void Thing::place_blood(bool force)
     if (! level->is_green_blood(curr_at.x, curr_at.y)) {
       auto tp = tp_random_green_blood();
       (void) level->thing_new(tp->name(), curr_at);
+      placed_blood = true;
+    }
+  }
+
+  if (placed_blood) {
+    auto h = health_decr();
+    if (h <= 0) {
+      h = health_set(0);
+      dead("by bleeding out");
     }
   }
 }

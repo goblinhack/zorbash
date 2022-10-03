@@ -1578,10 +1578,10 @@ int Thing::unused_flag54(void)
   return (tp()->unused_flag54());
 }
 
-int Thing::unused_flag55(void)
+int Thing::bite_amount(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag55());
+  return (tp()->bite_amount());
 }
 
 int Thing::unused_flag56(void)

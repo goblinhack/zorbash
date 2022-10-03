@@ -47,6 +47,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.attack_eater(self, True)
     my.attack_engulf_chance_d1000(self, 1000)
     my.attack_lunge(self, True)
+    my.bite_amount(self, 50)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.damage_digest_chance_d1000(self, 0, 1000)

@@ -221,12 +221,28 @@ bool Thing::consume(Thingp victim)
     return true;
   }
 
-  if (attack_eater()) {
-    health_boost(victim->nutrition_get());
-    hunger_boost(victim->nutrition_get());
+  if (attack_eater() && is_edible(victim)) {
+    //
+    // Allow monsters to eat things in bite sized chunks so the food does not vanish too fast.
+    //
+    auto bite = bite_amount();
+    auto nutr = victim->nutrition_get();
 
-    if (is_edible(victim)) {
-      dbg("Consumes %s", victim->text_the().c_str());
+    if (bite < nutr) {
+      //
+      // Here the monster cannot finish eating its meal in one go.
+      //
+
+      //
+      // Undead do not get sustenance from eating.
+      //
+      if (! is_undead() && ! is_ethereal()) {
+        health_boost(bite);
+        hunger_boost(bite);
+      }
+      victim->nutrition_decr(bite);
+
+      dbg("Is eating %s", victim->text_the().c_str());
 
       if (! is_player()) {
         if (distance_to_player() < DMAP_IS_PASSABLE) {
@@ -242,11 +258,11 @@ bool Thing::consume(Thingp victim)
             if (victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
                 if (victim->is_burnt) {
-                  msg("%%fg=red$%s feasts on your toasted corpse!%%fg=reset$", text_The().c_str());
+                  msg("%%fg=red$%s tears a chunk from your toasted corpse!%%fg=reset$", text_The().c_str());
                 } else if (victim->is_frozen) {
-                  msg("%%fg=red$%s feasts on your frozen corpse!%%fg=reset$", text_The().c_str());
+                  msg("%%fg=red$%s tears a chunk from your frozen corpse!%%fg=reset$", text_The().c_str());
                 } else {
-                  msg("%%fg=red$%s feasts on your corpse!%%fg=reset$", text_The().c_str());
+                  msg("%%fg=red$%s tears a chunk from from your corpse!%%fg=reset$", text_The().c_str());
                 }
               } else {
                 msg("%%fg=orange$%s is eating you!%%fg=reset$", text_The().c_str());
@@ -266,15 +282,78 @@ bool Thing::consume(Thingp victim)
             } else if (victim->is_blood()) {
               msg("%s laps up the %s.", text_The().c_str(), victim->text_the().c_str());
             } else {
+              if (bite <= 3) {
+                msg("%s nibbles on %s.", text_The().c_str(), victim->text_the().c_str());
+              } else if (bite <= 10) {
+                msg("%s munches on %s.", text_The().c_str(), victim->text_the().c_str());
+              } else {
+                msg("%s chomps on %s.", text_The().c_str(), victim->text_the().c_str());
+              }
+            }
+          }
+        }
+      }
+    } else {
+      //
+      // Here the monster cannot finish eating its meal in one go.
+      //
+
+      //
+      // Undead do not get sustenance from eating.
+      //
+      if (! is_undead() && ! is_ethereal()) {
+        health_boost(nutr);
+        hunger_boost(nutr);
+      }
+
+      dbg("Consumes %s", victim->text_the().c_str());
+
+      if (! is_player()) {
+        if (distance_to_player() < DMAP_IS_PASSABLE) {
+          if (victim->is_meat()) {
+            level->thing_new(tp_random_red_splatter()->name(), curr_at);
+          } else if (victim->is_red_blooded()) {
+            level->thing_new(tp_random_green_splatter()->name(), curr_at);
+          } else if (victim->is_green_blooded()) {
+            level->thing_new(tp_random_green_splatter()->name(), curr_at);
+          }
+
+          if (! victim->is_offscreen) {
+            if (victim->is_player()) {
+              if (victim->is_dead || victim->is_dying) {
+                if (victim->is_burnt) {
+                  msg("%%fg=red$%s consumes your toasted corpse!%%fg=reset$", text_The().c_str());
+                } else if (victim->is_frozen) {
+                  msg("%%fg=red$%s consumes your frozen corpse!%%fg=reset$", text_The().c_str());
+                } else {
+                  msg("%%fg=red$%s consumes your corpse!%%fg=reset$", text_The().c_str());
+                }
+              } else {
+                msg("%%fg=orange$%s consumes you!%%fg=reset$", text_The().c_str());
+              }
+            } else if (victim->is_monst() || victim->is_player()) {
+              if (victim->is_dead || victim->is_dying) {
+                if (victim->is_burnt) {
+                  msg("%s consumed the toasted corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                } else if (victim->is_frozen) {
+                  msg("%s consumed the frozen corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                } else {
+                  msg("%s consumes the corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                }
+              } else {
+                msg("%s consumes %s!", text_The().c_str(), victim->text_the().c_str());
+              }
+            } else if (victim->is_blood()) {
+              msg("%s laps up all %s.", text_The().c_str(), victim->text_the().c_str());
+            } else {
               msg("%s consumes %s.", text_The().c_str(), victim->text_the().c_str());
             }
           }
         }
       }
-
       victim->dead("by being eaten");
-      return true;
     }
+    return true;
   }
   return false;
 }

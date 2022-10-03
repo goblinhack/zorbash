@@ -48,6 +48,7 @@ def tp_init(name, text_long_name):
     my.attack_lunge(self, True)
     my.attack_meat(self, True)
     my.attack_undead(self, True)
+    my.bite_amount(self, 10)
     my.capacity_height(self, 10)
     my.capacity_width(self, 10)
     my.collateral_damage_pct(self, 50)

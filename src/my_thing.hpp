@@ -1588,6 +1588,8 @@ public:
   int noise(void);
   int normal_placement_rules(void);
   int nutrition_get(void);
+  int nutrition_init(void);
+  int nutrition_decr(int v);
   int on_attacking_dmg_acid(Thingp victim, int damage);
   int on_attacking_dmg_bite(Thingp victim, int damage);
   int on_attacking_dmg_claw(Thingp victim, int damage);
@@ -1971,7 +1973,7 @@ public:
   int unused_flag52(void);
   int unused_flag53(void);
   int unused_flag54(void);
-  int unused_flag55(void);
+  int bite_amount(void);
   int unused_flag56(void);
   int is_able_to_rest(void);
   int unused_flag5(void);
@@ -2181,6 +2183,8 @@ public:
   uint8_t z_prio(void);
 
   void achieve_goals_in_death(void);
+  void burnt_set(void);
+  void frozen_set(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
   void add_avoid(Thingp attacker);

@@ -18,24 +18,45 @@ const std::string &Thing::nutrition_dice_str(void)
   return (tp()->nutrition_dice_str());
 }
 
+int Thing::nutrition_init(void)
+{
+  TRACE_NO_INDENT();
+
+  if (tp()->nutrition_dice_str().empty()) {
+    return 0;
+  }
+
+  new_infop();
+
+  auto n = infop()->nutrition = tp()->nutrition_dice().roll();
+  return n;
+}
+
 int Thing::nutrition_get(void)
 {
   TRACE_NO_INDENT();
 
-  if (unlikely(! _infop)) {
-    new_infop();
+  auto infop = maybe_infop();
+  if (! infop) {
+    return 0;
   }
 
-  if (infop()->nutrition == -1) {
-    infop()->nutrition = tp()->nutrition_dice().roll();
+  return infop->nutrition;
+}
+
+int Thing::nutrition_decr(int v)
+{
+  TRACE_NO_INDENT();
+
+  auto infop = maybe_infop();
+  if (! infop) {
+    return 0;
   }
 
-  //
-  // Burnt things are more tasty.
-  //
-  if (is_burnt) {
-    return infop()->nutrition * 2;
+  infop->nutrition -= v;
+  if (infop->nutrition < 0) {
+    infop->nutrition = 0;
   }
 
-  return infop()->nutrition;
+  return infop->nutrition;
 }

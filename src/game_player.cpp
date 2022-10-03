@@ -124,7 +124,7 @@ void Game::place_player(void)
         auto w = level->thing_new("shovel", point(x, y));
         t->carry(w);
       }
-      if (1) {
+      if (0) {
         level->thing_new("ring_shield", point(x + 2, y));
         level->thing_new("ring_poison_resist", point(x + 2, y - 1));
       }
@@ -326,14 +326,8 @@ void Game::place_player(void)
       // level->thing_new("staff_descent", point(x + 5, y + 2));
       // level->thing_new("fire", point(x + 5, y + 2));
       //  level->thing_new("spiderweb", point(x, y));
-      if (0) {
-        level->thing_new("barrel", point(x + 1, y));
-        level->thing_new("zoblin", point(x + 2, y));
-        level->thing_new("spiderweb", point(x + 2, y + 1));
+      if (1) {
         level->thing_new("bat_lesser", point(x + 2, y + 1));
-        level->thing_new("spiderweb", point(x + 2, y + 2));
-        level->thing_new("bat_lesser", point(x + 2, y + 2));
-        level->thing_new("bat_lesser", point(x + 4, y));
       }
       // level->thing_new("flesh_golem", point(x, y + 3));
       // level->thing_new("lava", point(x, y + 5));

@@ -182,6 +182,11 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   update();
 
   //
+  // Set the initial nutrition.
+  //
+  nutrition_init();
+
+  //
   // Some things start life open
   //
   if (unlikely(is_ascend_dungeon())) {
