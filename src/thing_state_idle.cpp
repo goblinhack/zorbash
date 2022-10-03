@@ -118,7 +118,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     //
     // Not under threat, so we can think about doing some other house cleaning tasks.
     //
-    AI_LOG("Idle, look for something to do");
+    AI_LOG("Not under threat, look for something to do");
 
     //
     // If alive and not lifeless, can we heal or rest?

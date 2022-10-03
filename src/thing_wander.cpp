@@ -62,7 +62,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
     return false;
   }
 
-  dbg("AI create path from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
+  dbg("AI: create path from %d,%d to %d,%d", start.x, start.y, end.x, end.y);
   TRACE_AND_INDENT();
 
   Dmap  dmap {};
@@ -171,7 +171,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   for (auto i : result.path) {
     goal_path_str += " " + i.to_string();
   }
-  dbg("AI created path %s", goal_path_str.c_str());
+  dbg("AI: created path %s", goal_path_str.c_str());
   TRACE_AND_INDENT();
 
   auto hops     = result.path;
@@ -210,7 +210,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
 
 bool Thing::ai_choose_wander(point &nh)
 {
-  dbg("AI choose wander dest");
+  dbg("AI: choose wander dest");
   TRACE_AND_INDENT();
 
   if (! maybe_aip()) {
@@ -238,7 +238,7 @@ bool Thing::ai_choose_wander(point &nh)
   //
   aip()->wander_dest = point(0, 0);
 
-  dbg("AI get random destination");
+  dbg("AI: get random destination");
   TRACE_AND_INDENT();
 
   dest = dest_random_get();
@@ -281,7 +281,7 @@ bool Thing::ai_choose_wander(point &nh)
 
 bool Thing::ai_wander(void)
 {
-  dbg("AI wander");
+  dbg("AI: wander");
   TRACE_AND_INDENT();
 
   if (! is_moveable()) {
@@ -292,7 +292,7 @@ bool Thing::ai_wander(void)
   //
   // Need to clear any existing path, so we don't come back to that later and jump around the screen
   //
-  clear_move_path("AI wander");
+  clear_move_path("AI: wander");
 
   if (ai_blocked_completely()) {
     dbg("Blocked on all sides, try escape");
@@ -315,7 +315,7 @@ bool Thing::ai_wander(void)
         }
       }
     }
-    dbg("AI wander blocked");
+    dbg("AI: wander blocked");
     return false;
   }
 
@@ -336,11 +336,11 @@ bool Thing::ai_wander(void)
       }
     }
 
-    dbg("AI wander blocked");
+    dbg("AI: wander blocked");
     return false;
   }
 
-  dbg("AI wander");
+  dbg("AI: wander");
   auto tries = THING_AI_WANDER_TRIES;
   while (tries-- > 0) {
     point nh;

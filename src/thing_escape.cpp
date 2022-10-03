@@ -38,7 +38,7 @@ bool Thing::try_to_escape(void)
 
 bool Thing::ai_escape(void)
 {
-  dbg("AI escape");
+  dbg("AI: escape");
   TRACE_AND_INDENT();
 
   if (! is_moveable()) {
@@ -49,18 +49,18 @@ bool Thing::ai_escape(void)
   //
   // Need to clear any existing path, so we don't come back to that later and jump around the screen
   //
-  clear_move_path("AI escape");
+  clear_move_path("AI: escape");
 
   if (is_able_to_teleport_escape()) {
     if (teleport_randomly()) {
-      dbg("AI escape teleport");
+      dbg("AI: escape teleport");
       return false;
     }
   }
 
   if (is_able_to_jump_escape()) {
     if (try_to_jump()) {
-      dbg("AI escape jump");
+      dbg("AI: escape jump");
       return false;
     }
   }
@@ -68,10 +68,10 @@ bool Thing::ai_escape(void)
   if (ai_blocked_completely()) {
     if (is_able_to_jump()) {
       if (try_to_jump()) {
-        dbg("AI escape last resort");
+        dbg("AI: escape last resort");
         return false;
       }
-      dbg("AI escape blocked");
+      dbg("AI: escape blocked");
       return false;
     }
   }

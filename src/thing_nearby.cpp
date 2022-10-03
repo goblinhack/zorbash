@@ -31,13 +31,13 @@ Thingp Thing::most_dangerous_adjacent_thing(void)
       continue;
     }
 
-    FOR_ALL_THINGS_THAT_INTERACT(level, it, x, y)
+    FOR_ALL_THINGS_THAT_INTERACT(level, t, x, y)
     {
-      if (it == this) {
+      if (t == this) {
         continue;
       }
 
-      if (it->is_dead) {
+      if (t->is_dead) {
         continue;
       }
 
@@ -45,25 +45,25 @@ Thingp Thing::most_dangerous_adjacent_thing(void)
       // Treat as a threat so they attack
       //
       if (! is_immune_to_spiderwebs()) {
-        if (it->is_spiderweb()) {
-          if (it->curr_at == curr_at) {
-            possible.push_back(std::make_pair(it, 666));
+        if (t->is_spiderweb()) {
+          if (t->curr_at == curr_at) {
+            possible.push_back(std::make_pair(t, 666));
             continue;
           }
         }
       }
 
-      if (! it->is_mob() && ! it->is_monst() && ! it->is_player()) {
+      if (! t->is_mob() && ! t->is_monst() && ! t->is_player()) {
         continue;
       }
 
-      auto score = it->health();
-      if (! will_avoid_monst(point(x, y))) {
+      auto score = t->health();
+      if (! will_avoid_monst(t)) {
         continue;
       }
 
-      score += it->health_max();
-      possible.push_back(std::make_pair(it, score));
+      score += t->health_max();
+      possible.push_back(std::make_pair(t, score));
     }
     FOR_ALL_THINGS_END()
   }
@@ -120,7 +120,7 @@ Thingp Thing::most_dangerous_visible_thing(void)
           score += 100;
         }
 
-        if (! will_avoid_monst(o)) {
+        if (! will_avoid_monst(t)) {
           continue;
         }
 
@@ -282,7 +282,7 @@ Thingp Thing::best_visible_target_get(void)
           score += 100;
         }
 
-        if (will_avoid_monst(o)) {
+        if (will_avoid_monst(t)) {
           score += 100;
         }
 

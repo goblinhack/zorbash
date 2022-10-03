@@ -1870,7 +1870,7 @@ bool Thing::ai_choose_immediately_adjacent_goal(void)
 
 void Thing::ai_get_next_hop(void)
 {
-  dbg2("AI get nexthop");
+  dbg2("AI: get nexthop");
   TRACE_AND_INDENT();
 
   //
@@ -2050,7 +2050,7 @@ bool Thing::ai_choose_avoid_goals(std::multiset< Goal > &goals, const Goal &goal
 //
 bool Thing::ai_tick(bool recursing)
 {
-  dbg("AI tick");
+  dbg("AI: tick");
   TRACE_AND_INDENT();
 
   auto ai = aip();
@@ -2167,7 +2167,35 @@ bool Thing::ai_tick(bool recursing)
   }
 
   //
-  // check for anything dangerous we need to consider and maybe stop what we're doing.
+  // See if anything dangerous is close
+  //
+  dbg("AI: look for dangerous things");
+  TRACE_AND_INDENT();
+  threat = most_dangerous_visible_thing();
+  if (threat) {
+    ai_log("threat", threat);
+  }
+
+  //
+  // A threat can be a few tiles away; but if one is standing literally next to us! then it takes priority.
+  //
+  dbg("AI: look for adjacent dangerous things");
+  TRACE_AND_INDENT();
+  auto adjacent_threat = most_dangerous_adjacent_thing();
+  if (adjacent_threat) {
+    AI_LOG("Adjacent threat", adjacent_threat);
+    TRACE_AND_INDENT();
+
+    if (is_dangerous(adjacent_threat)) {
+      threat = adjacent_threat;
+    } else {
+      AI_LOG("Adjacent threat (not dangerous)", adjacent_threat);
+      threat = nullptr;
+    }
+  }
+
+  //
+  // Check for anything dangerous we need to consider and maybe stop what we're doing.
   //
   switch (infop()->monst_state) {
     case MONST_STATE_IDLE:
@@ -2181,30 +2209,6 @@ bool Thing::ai_tick(bool recursing)
     case MONST_STATE_RESTING:
     case MONST_STATE_SLEEPING:
       {
-        //
-        // see if anything dangerous is close
-        //
-        threat = most_dangerous_visible_thing();
-        if (threat) {
-          ai_log("threat", threat);
-        }
-
-        //
-        // A threat can be a few tiles away; but if one is standing literally next to us! then it takes priority.
-        //
-        auto adjacent_threat = most_dangerous_adjacent_thing();
-        if (adjacent_threat) {
-          AI_LOG("Adjacent threat", adjacent_threat);
-          TRACE_AND_INDENT();
-
-          if (is_dangerous(adjacent_threat)) {
-            threat = adjacent_threat;
-          } else {
-            AI_LOG("Adjacent threat (not dangerous)", adjacent_threat);
-            threat = nullptr;
-          }
-        }
-
         //
         // Prevent loops; should never hit this
         //
@@ -2326,55 +2330,87 @@ bool Thing::ai_tick(bool recursing)
     }
   }
 
+  dbg("AI: state handling");
+  TRACE_AND_INDENT();
+
   switch (infop()->monst_state) {
     case MONST_STATE_IDLE:
-      if (state_idle(threat, minx, miny, maxx, maxy)) {
-        return true;
+      {
+        dbg("AI: state idle");
+        TRACE_AND_INDENT();
+        if (state_idle(threat, minx, miny, maxx, maxy)) {
+          return true;
+        }
+        break;
       }
-      break;
     case MONST_STATE_MOVING:
-      if (state_moving()) {
-        return true;
+      {
+        dbg("AI: state moving");
+        TRACE_AND_INDENT();
+        if (state_moving()) {
+          return true;
+        }
+        break;
       }
-      break;
     case MONST_STATE_SLEEPING:
-      if (state_sleeping(do_something, wait)) {
-        return true;
+      {
+        dbg("AI: state sleeping");
+        TRACE_AND_INDENT();
+        if (state_sleeping(do_something, wait)) {
+          return true;
+        }
+        break;
       }
-      break;
     case MONST_STATE_RESTING:
-      if (state_resting(do_something, wait)) {
-        return true;
+      {
+        dbg("AI: state resting");
+        TRACE_AND_INDENT();
+        if (state_resting(do_something, wait)) {
+          return true;
+        }
+        break;
       }
-      break;
-
     case MONST_STATE_OPEN_INVENTORY:
-      if (state_open_inventory()) {
-        return true;
+      {
+        dbg("AI: state open inventory");
+        TRACE_AND_INDENT();
+        if (state_open_inventory()) {
+          return true;
+        }
+        break;
       }
-      break;
-
     case MONST_STATE_USING_ENCHANTSTONE:
-      if (state_using_enchantstone()) {
-        return true;
+      {
+        dbg("AI: state use enchantstone");
+        TRACE_AND_INDENT();
+        if (state_using_enchantstone()) {
+          return true;
+        }
+        break;
       }
-      break;
-
     case MONST_STATE_USING_SKILLSTONE:
-      if (state_using_skillstone()) {
-        return true;
+      {
+        dbg("AI: state use skillstone");
+        TRACE_AND_INDENT();
+        if (state_using_skillstone()) {
+          return true;
+        }
+        break;
       }
-      break;
-
     case MONST_STATE_REPACK_INVENTORY:
-      if (state_repack_inventory()) {
-        return true;
+      {
+        dbg("AI: state repack inventory");
+        TRACE_AND_INDENT();
+        if (state_repack_inventory()) {
+          return true;
+        }
+        break;
       }
-      break;
   }
 
   if (do_something) {
     if (is_player()) {
+      topcon("wait %d", wait);
       player_tick(left, right, up, down, attack, wait, jump);
     } else if (is_moveable()) {
       AttackOptions attack_options {};

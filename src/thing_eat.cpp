@@ -280,7 +280,7 @@ bool Thing::consume(Thingp victim)
                 msg("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
               }
             } else if (victim->is_blood()) {
-              msg("%s laps up the %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
             } else {
               if (bite <= 3) {
                 msg("%s nibbles on %s.", text_The().c_str(), victim->text_the().c_str());

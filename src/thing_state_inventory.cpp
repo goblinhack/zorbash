@@ -16,7 +16,7 @@ bool Thing::state_open_inventory(void)
   // Wait for the inventory to be remade
   //
   if (is_player()) {
-    if (wid_inventory_window) {
+    if (! wid_inventory_window) {
       AI_LOG("Wait on inventory.");
       return true;
     }
