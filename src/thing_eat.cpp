@@ -344,7 +344,7 @@ bool Thing::consume(Thingp victim)
                 msg("%s consumes %s!", text_The().c_str(), victim->text_the().c_str());
               }
             } else if (victim->is_blood()) {
-              msg("%s laps up all %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
             } else {
               msg("%s consumes %s.", text_The().c_str(), victim->text_the().c_str());
             }

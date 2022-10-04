@@ -61,10 +61,13 @@ void Thing::ai_log(const std::string &msg, Thingp it)
 {
   TRACE_NO_INDENT();
 
-  if (it) {
-    log("AI: %s, %s", msg.c_str(), it->to_short_string().c_str());
-  } else {
-    log("AI: %s", msg.c_str());
+  IF_DEBUG
+  {
+    if (it) {
+      dbg("AI: %s, %s", msg.c_str(), it->to_short_string().c_str());
+    } else {
+      dbg("AI: %s", msg.c_str());
+    }
   }
 }
 
@@ -2173,7 +2176,7 @@ bool Thing::ai_tick(bool recursing)
   TRACE_AND_INDENT();
   threat = most_dangerous_visible_thing();
   if (threat) {
-    ai_log("threat", threat);
+    IF_DEBUG { ai_log("threat", threat); }
   }
 
   //

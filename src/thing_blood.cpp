@@ -51,6 +51,7 @@ void Thing::place_blood(bool force)
     auto h = health_decr();
     if (h <= 0) {
       h = health_set(0);
+      msg("%s bleeds out!", text_The().c_str());
       dead("by bleeding out");
     }
   }

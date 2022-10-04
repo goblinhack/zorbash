@@ -426,6 +426,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     // Trail of blood?
     //
     place_blood();
+    if (is_dead) {
+      return false;
+    }
 
     if (up) {
       dbg("Try to move up; collision check");
