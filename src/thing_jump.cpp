@@ -69,9 +69,15 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   if (to == curr_at) {
     if (is_player()) {
-      msg("You fail to jump on the spot.");
+      //
+      // This happens if the player clicks on the character.
+      //
+    } else {
+      //
+      // Not sure why a monster would do this.
+      //
+      return false;
     }
-    return false;
   }
 
   if (be_careful) {
