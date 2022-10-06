@@ -21,7 +21,6 @@ void Thing::resurrect(void)
     tile_curr       = 0;
     animate();
 
-    dbg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
     health_set(v);
     health_max_set(v);
 
@@ -37,6 +36,11 @@ void Thing::resurrect(void)
       i_set_is_monst = true;
       level->is_monst_set(curr_at.x, curr_at.y);
     }
+
+    //
+    // Must do this after turning off the dead flag, or the monster can appear as "extra dead".
+    //
+    msg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
   } else {
     dbg("Too weak to rise from the grave");
   }
@@ -91,8 +95,13 @@ void Thing::resurrect_tick(void)
       continue;
     }
 
-    if (t->is_monst()) {
-      dbg("Cannot rise, someone stands on my grace");
+    if (t->is_player()) {
+      msg("The ground trembles beneath you...");
+      return;
+    }
+
+    if (t->is_heavy() || t->is_monst()) {
+      msg("The ground trembles beneath %s...", t->text_The().c_str());
       return;
     }
   }

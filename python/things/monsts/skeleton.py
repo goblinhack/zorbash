@@ -42,7 +42,7 @@ def tp_init(name, text_long_name):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.damage_nat_att_dice(self, "1d3")
-    my.damage_nat_att_type(self, "bite")
+    my.damage_nat_att_type(self, "gnashing")
     my.damage_received_doubled_from_water(self, True)
     my.distance_vision(self, 5)
     my.environ_avoids_water(self, 100)
