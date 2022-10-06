@@ -2099,23 +2099,28 @@ bool Thing::ai_tick(bool recursing)
   Thingp threat       = nullptr;
 
   //
-  // Wake on noise?
+  // Asleep?
   //
   is_sleeping = infop()->monst_state == MONST_STATE_SLEEPING;
   if (is_sleeping) {
+    //
+    // Wake on noise? Like a player hitting a wall.
+    //
     if (LEVEL_LOUDEST_SOUND - level->noisemap(curr_at) > noise_decibels_hearing()) {
+      msg("%s hears something!", text_The().c_str());
       if (! wake("heard something")) {
         return false;
       }
     }
-  }
 
-  //
-  // Wake up if the flames are nearby
-  //
-  if (environ_avoids_fire() && level->heatmap(curr_at)) {
-    if (! wake("senses heat")) {
-      return false;
+    //
+    // Wake up if the flames are nearby
+    //
+    if (environ_avoids_fire() && level->heatmap(curr_at)) {
+      msg("%s senses danger!", text_The().c_str());
+      if (! wake("senses heat")) {
+        return false;
+      }
     }
   }
 
@@ -2130,31 +2135,36 @@ bool Thing::ai_tick(bool recursing)
   int miny = std::max(0, (int) (vision_source.y - dy));
   int maxy = std::min(MAP_HEIGHT - 1, (int) (vision_source.y + dy));
 
-  level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, vision_source.x, vision_source.y,
-                       distance_vision_get() + 1);
+  //
+  // If not asleep, update the vision.
+  //
+  if (! is_sleeping) {
+    level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, vision_source.x, vision_source.y,
+                         distance_vision_get() + 1, is_player() /* light walls */);
 
-  //
-  // Minions see a combination of the mob owner and their own vision.
-  //
-  if (is_minion()) {
-    auto additional_vision_source = curr_at;
-    int  additional_minx          = std::max(0, (int) (additional_vision_source.x - dx));
-    int  additional_maxx          = std::min(MAP_WIDTH - 1, (int) (additional_vision_source.x + dx));
-    int  additional_miny          = std::max(0, (int) (additional_vision_source.y - dy));
-    int  additional_maxy          = std::min(MAP_HEIGHT - 1, (int) (additional_vision_source.y + dy));
-    level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, additional_vision_source.x,
-                         additional_vision_source.y, distance_vision_get() + 1);
-    if (additional_minx < minx) {
-      minx = additional_minx;
-    }
-    if (additional_miny < miny) {
-      miny = additional_miny;
-    }
-    if (additional_maxx > maxx) {
-      maxx = additional_maxx;
-    }
-    if (additional_maxy > maxy) {
-      maxy = additional_maxy;
+    //
+    // Minions see a combination of the mob owner and their own vision.
+    //
+    if (is_minion()) {
+      auto additional_vision_source = curr_at;
+      int  additional_minx          = std::max(0, (int) (additional_vision_source.x - dx));
+      int  additional_maxx          = std::min(MAP_WIDTH - 1, (int) (additional_vision_source.x + dx));
+      int  additional_miny          = std::max(0, (int) (additional_vision_source.y - dy));
+      int  additional_maxy          = std::min(MAP_HEIGHT - 1, (int) (additional_vision_source.y + dy));
+      level->fov_calculate(this, &ai->can_see_currently, &ai->can_see_ever, additional_vision_source.x,
+                           additional_vision_source.y, distance_vision_get() + 1, is_player() /* light walls */);
+      if (additional_minx < minx) {
+        minx = additional_minx;
+      }
+      if (additional_miny < miny) {
+        miny = additional_miny;
+      }
+      if (additional_maxx > maxx) {
+        maxx = additional_maxx;
+      }
+      if (additional_maxy > maxy) {
+        maxy = additional_maxy;
+      }
     }
   }
 

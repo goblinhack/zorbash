@@ -323,6 +323,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->has_ever_moved                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_light                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_projectile                               ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->has_seen_player_mgr                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_activated                                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_attached                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_being_destroyed                           ? 1LLU : 0LLU) << shift; shift++;

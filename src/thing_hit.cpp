@@ -365,7 +365,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     damage_type = "cold ";
 
     if (is_temperature_sensitive()) {
-      if ((temperature_get() > 0) || is_burnt || damage_received_doubled_from_cold()) {
+      if ((temperature_get() > TEMPERATURE_THRESHOLD) || is_burnt || damage_received_doubled_from_cold()) {
         damage_type = "double " + damage_type;
         damage *= 2;
         dbg("Double damage from cold");
@@ -400,7 +400,8 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     damage_type = "fire ";
 
     if (is_temperature_sensitive()) {
-      if ((temperature_get() < 0) || was_frozen || is_frozen || damage_received_doubled_from_fire()) {
+      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen ||
+          damage_received_doubled_from_fire()) {
         damage_type = "double " + damage_type;
         damage *= 2;
         dbg("Double damage from fire");

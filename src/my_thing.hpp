@@ -202,6 +202,7 @@ public:
   uint64_t has_ever_moved                               : 1 {};
   uint64_t has_light                                    : 1 {};
   uint64_t has_projectile                               : 1 {}; // current projectile being fired
+  uint64_t has_seen_player_mgr                          : 1 {};
   uint64_t is_activated                                 : 1 {}; // this skill is activated
   uint64_t is_attached                                  : 1 {}; // is attached to the level
   uint64_t is_being_destroyed                           : 1 {};
