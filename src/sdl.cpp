@@ -36,16 +36,16 @@ void sdl_fini(void)
     SDL_VideoQuit();
   }
 
-  CON("SDL: Delete GL context");
+  LOG("SDL: Delete GL context");
   SDL_GL_DeleteContext(sdl.context);
 
-  CON("SDL: Destroy window");
+  LOG("SDL: Destroy window");
   SDL_DestroyWindow(sdl.window);
 
   CON("SDL: Quit");
   SDL_Quit();
 
-  CON("SDL: Quit done");
+  LOG("SDL: Quit done");
 }
 
 static inline void sdl_list_video_size(void)

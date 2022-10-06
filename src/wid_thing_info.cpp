@@ -711,8 +711,14 @@ void Game::wid_thing_info_add_health(WidPopup *w, Thingp t)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
-    int pct = (((((float) t->health())) / t->health_max()) * 100.0);
-    snprintf(tmp2, sizeof(tmp2) - 1, "(%d/%d)%d%%", t->health(), t->health_max(), pct);
+    int pct = (((((float) t->health()) / (float) t->health_max())) * 100.0);
+
+    if (t->health() == t->health_max()) {
+      snprintf(tmp2, sizeof(tmp2) - 1, "%d/%d%%", t->health(), pct);
+    } else {
+      snprintf(tmp2, sizeof(tmp2) - 1, "(%d/%d)%d%%", t->health(), t->health_max(), pct);
+    }
+
     if (pct < 25) {
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=red$Health        %15s", tmp2);
     } else if (pct < 50) {
@@ -1473,8 +1479,9 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_str_total();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %2d%4s", stat,
-             stat_to_bonus_slash_str(stat).c_str());
+    char tmp2[ MAXSHORTSTR ];
+    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_str_mod()) {
     auto stat = t->stat_str_total();
@@ -1494,10 +1501,15 @@ void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
       snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise when worn         %5d", n);
       w->log(tmp);
     } else if (t->is_player()) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level base        %5d", t->noise());
-      w->log(tmp);
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level with items  %5d", n);
-      w->log(tmp);
+      if (t->noise() != n) {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level base        %5d", t->noise());
+        w->log(tmp);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level with items  %5d", n);
+        w->log(tmp);
+      } else {
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level             %5d", n);
+        w->log(tmp);
+      }
     }
   }
 
@@ -1514,8 +1526,9 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_dex_total();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity              %2d%4s", stat,
-             stat_to_bonus_slash_str(stat).c_str());
+    char tmp2[ MAXSHORTSTR ];
+    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity              %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_dex_mod()) {
     auto stat = t->stat_dex_total();
@@ -1531,8 +1544,9 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_luck_total();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck                   %2d%4s", stat,
-             stat_to_bonus_slash_str(stat).c_str());
+    char tmp2[ MAXSHORTSTR ];
+    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck                   %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_luck_mod()) {
     auto stat = t->stat_luck_total();
@@ -1600,8 +1614,9 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_con_total();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %2d%4s", stat,
-             stat_to_bonus_slash_str(stat).c_str());
+    char tmp2[ MAXSHORTSTR ];
+    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_con_mod()) {
     auto stat = t->stat_con_total();

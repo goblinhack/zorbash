@@ -936,7 +936,7 @@ loop:
   sdl_loop();
   LOG("FIN: SDL loop finished");
 
-  CON("FIN: Leave 2D mode");
+  LOG("FIN: Leave 2D mode");
   gl_leave_2d_mode();
 
   CON("FIN: Quit");
@@ -948,6 +948,6 @@ loop:
     execv(argv[ 0 ], argv);
   }
 
-  CON("FIN: Goodbye and take care until next time!");
+  CON("FIN: Goodbye my friend and take care until next time!");
   return 0;
 }

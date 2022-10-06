@@ -107,7 +107,7 @@ def tp_init(name, text_long_name):
     my.move_speed(self, 100)
     my.msg_is_seen(self, True)
     my.msg_is_wounded(self, True)
-    my.noise_decibels_hearing(self, 1)
+    my.noise_decibels_hearing(self, 10)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d4")
     my.on_born_do(self, "me.on_born()")
