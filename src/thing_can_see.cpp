@@ -20,6 +20,19 @@ void Thing::can_see(point p)
       if (t->is_monst()) {
         if (t->is_dead) {
           if (! t->is_seen_msg) {
+            if (t->is_bloodied()) {
+              if (! t->is_wounded_msg) {
+                t->is_wounded_msg = true;
+                if (t->msg_is_wounded()) {
+                  if (t->is_red_blooded()) {
+                    msg("%s corpse is covered in blood.", t->text_The().c_str());
+                  } else if (t->is_green_blooded()) {
+                    msg("%s corpse is covered in goo.", t->text_The().c_str());
+                  }
+                }
+              }
+            }
+
             t->is_seen_msg = true;
             if (t->msg_is_seen()) {
               msg("%s comes into view.", t->text_A_or_An().c_str());
@@ -47,19 +60,6 @@ void Thing::can_see(point p)
                 }
                 if (item->is_weapon()) {
                   msg("%s was wielding %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
-                }
-              }
-            }
-          }
-
-          if (t->is_bloodied()) {
-            if (! t->is_wounded_msg) {
-              t->is_wounded_msg = true;
-              if (t->msg_is_wounded()) {
-                if (t->is_red_blooded()) {
-                  msg("%s is covered in blood.", t->text_The().c_str());
-                } else if (t->is_green_blooded()) {
-                  msg("%s is covered in goo.", t->text_The().c_str());
                 }
               }
             }
