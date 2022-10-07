@@ -242,7 +242,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->change_state(Game::STATE_NORMAL, "key press");
       auto what = level->inventory_get();
       if (what) {
-        if (player->drop(what)) {
+        if (player && player->drop(what)) {
           game->tick_begin("drop");
         }
       } else {
@@ -286,7 +286,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     auto what = level->inventory_get();
     if (what) {
-      if (player->can_eat(what)) {
+      if (player && player->can_eat(what)) {
         player->use(what);
       } else {
         TOPCON("Nothing to eat.");
@@ -348,7 +348,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return false;
       }
       auto what = level->inventory_get();
-      if (what) {
+      if (what && player) {
         player->use(what);
       } else {
         TOPCON("Nothing to use.");
@@ -364,7 +364,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return false;
       }
       auto what = level->inventory_get();
-      if (what) {
+      if (what && player) {
         player->throw_item_choose_target(what);
       }
       return true;

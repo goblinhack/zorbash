@@ -11,6 +11,9 @@ all: pre
 format:
 	build/format.sh
 
+tidy:
+	build/tidy.sh
+
 clean:
 	(cd src; $(MAKE) $@)
 	/bin/rm -rf data/sounds
@@ -19,6 +22,6 @@ clean:
 clobber: clean
 	(cd src; $(MAKE) $@)
 
-.PHONY: all clean clobber format pre
+.PHONY: all clean clobber format tidy pre
 
 .DEFAULT_GOAL := all
