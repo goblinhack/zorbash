@@ -623,7 +623,7 @@ private:
   int _unused_flag51 {};
   int _unused_flag52 {};
   int _unused_flag53 {};
-  int _unused_flag54 {};
+  int _is_swimmer {};
   int _bite_amount {};
   int _unused_flag56 {};
   int _is_able_to_rest {};
@@ -1636,7 +1636,7 @@ public:
   int unused_flag51(void) const;
   int unused_flag52(void) const;
   int unused_flag53(void) const;
-  int unused_flag54(void) const;
+  int is_swimmer(void) const;
   int bite_amount(void) const;
   int unused_flag56(void) const;
   int is_able_to_rest(void) const;
@@ -2309,7 +2309,7 @@ public:
   void unused_flag51_set(int v);
   void unused_flag52_set(int v);
   void unused_flag53_set(int v);
-  void unused_flag54_set(int v);
+  void is_swimmer_set(int v);
   void bite_amount_set(int v);
   void unused_flag56_set(int v);
   void is_able_to_rest_set(int v);

@@ -1572,10 +1572,10 @@ int Thing::unused_flag53(void)
   return (tp()->unused_flag53());
 }
 
-int Thing::unused_flag54(void)
+int Thing::is_swimmer(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag54());
+  return (tp()->is_swimmer());
 }
 
 int Thing::bite_amount(void)

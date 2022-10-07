@@ -1973,7 +1973,7 @@ public:
   int unused_flag51(void);
   int unused_flag52(void);
   int unused_flag53(void);
-  int unused_flag54(void);
+  int is_swimmer(void);
   int bite_amount(void);
   int unused_flag56(void);
   int is_able_to_rest(void);

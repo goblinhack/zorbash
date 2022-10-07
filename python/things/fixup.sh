@@ -499,7 +499,7 @@ do
       unused_flag51 \
       unused_flag52 \
       unused_flag53 \
-      unused_flag54 \
+      is_swimmer \
       bite_amount \
       unused_flag56 \
       is_able_to_rest \

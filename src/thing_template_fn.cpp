@@ -672,7 +672,7 @@ int Tp::unused_flag50(void) const { return _unused_flag50; }
 int Tp::unused_flag51(void) const { return _unused_flag51; }
 int Tp::unused_flag52(void) const { return _unused_flag52; }
 int Tp::unused_flag53(void) const { return _unused_flag53; }
-int Tp::unused_flag54(void) const { return _unused_flag54; }
+int Tp::is_swimmer(void) const { return _is_swimmer; }
 int Tp::bite_amount(void) const { return _bite_amount; }
 int Tp::unused_flag56(void) const { return _unused_flag56; }
 int Tp::is_able_to_rest(void) const { return _is_able_to_rest; }
@@ -1344,7 +1344,7 @@ void Tp::unused_flag50_set(int v) { _unused_flag50 = v; }
 void Tp::unused_flag51_set(int v) { _unused_flag51 = v; }
 void Tp::unused_flag52_set(int v) { _unused_flag52 = v; }
 void Tp::unused_flag53_set(int v) { _unused_flag53 = v; }
-void Tp::unused_flag54_set(int v) { _unused_flag54 = v; }
+void Tp::is_swimmer_set(int v) { _is_swimmer = v; }
 void Tp::bite_amount_set(int v) { _bite_amount = v; }
 void Tp::unused_flag56_set(int v) { _unused_flag56 = v; }
 void Tp::is_able_to_rest_set(int v) { _is_able_to_rest = v; }

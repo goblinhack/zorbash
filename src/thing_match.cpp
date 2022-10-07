@@ -814,7 +814,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag53() && (what == "unused_flag53")) {
     return true;
   }
-  if (unused_flag54() && (what == "unused_flag54")) {
+  if (is_swimmer() && (what == "is_swimmer")) {
     return true;
   }
   if (bite_amount() && (what == "bite_amount")) {
@@ -2393,8 +2393,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag53") {
     return &Thing::unused_flag53;
   }
-  if (what == "unused_flag54") {
-    return &Thing::unused_flag54;
+  if (what == "is_swimmer") {
+    return &Thing::is_swimmer;
   }
   if (what == "bite_amount") {
     return &Thing::bite_amount;
