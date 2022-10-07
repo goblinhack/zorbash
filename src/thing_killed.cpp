@@ -459,8 +459,8 @@ void Thing::killed(Thingp defeater, const char *reason)
         }
 
         //
-        // This pop/push is necessary to update the map so that things
-        // like braziers, now dead, are not a heat source.
+        // This pop/push is necessary to update the map so that things like braziers, now dead, are
+        // not a heat source. Also so dead monsters do not appear on the minimap.
         //
         level_pop();
         is_dead  = true;

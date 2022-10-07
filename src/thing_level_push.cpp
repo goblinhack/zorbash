@@ -125,10 +125,6 @@ void Thing::level_push(void)
     i_set_is_descend_sewer = true;
     level->is_descend_sewer_set(mx, my);
   }
-  if (is_fire() && ! is_dead) {
-    i_set_is_fire = true;
-    level->is_fire_set(mx, my);
-  }
   if (is_floor()) {
     i_set_is_floor = true;
     level->is_floor_set(mx, my);
@@ -185,34 +181,6 @@ void Thing::level_push(void)
     i_set_is_basalt = true;
     level->is_basalt_set(mx, my);
   }
-  if (is_light_blocker() && ! is_open && ! is_dead) {
-    i_set_is_light_blocker = true;
-    level->is_light_blocker_set(mx, my);
-  }
-  if (is_light_blocker_for_monst() && ! is_open && ! is_dead) {
-    i_set_is_light_blocker_for_monst = true;
-    level->is_light_blocker_for_monst_set(mx, my);
-  }
-  if (is_gas_blocker() && ! is_open && ! is_dead) {
-    i_set_is_gas_blocker = true;
-    level->is_gas_blocker_set(mx, my);
-  }
-  if (noise_blocker() && ! is_open && ! is_dead) {
-    i_set_noise_blocker = true;
-    level->noise_blocker_set(mx, my);
-  }
-  if (is_monst()) {
-    i_set_is_monst = true;
-    level->is_monst_set(mx, my);
-  }
-  if (is_obs_wall_or_door() && ! is_open && ! is_dead) {
-    i_set_is_obs_wall_or_door = true;
-    level->is_obs_wall_or_door_set(mx, my);
-  }
-  if (is_obs_destructable() && ! is_open && ! is_dead) {
-    i_set_is_obs_destructable = true;
-    level->is_obs_destructable_set(mx, my);
-  }
   if (is_potion()) {
     i_set_is_potion = true;
     level->is_potion_set(mx, my);
@@ -245,19 +213,6 @@ void Thing::level_push(void)
     i_set_is_smoke = true;
     level->is_smoke_set(mx, my);
   }
-  if (is_brazier()) {
-    //
-    // Dead/extinguished braziers are not an obstacel
-    //
-    if (! is_dead) {
-      i_set_is_brazier = true;
-      level->is_brazier_set(mx, my);
-    }
-  }
-  if (is_barrel()) {
-    i_set_is_barrel = true;
-    level->is_barrel_set(mx, my);
-  }
   if (is_treasure_type()) {
     i_set_is_treasure_type = true;
     level->is_treasure_type_set(mx, my);
@@ -270,18 +225,62 @@ void Thing::level_push(void)
     i_set_water = true;
     level->gfx_water_set(mx, my);
   }
-
   if (is_shallow_water()) {
     if (! is_falling) {
       i_set_is_shallow_water = true;
       level->is_shallow_water_set(mx, my);
     }
   }
-
   if (is_deep_water()) {
     if (! is_falling) {
       i_set_is_deep_water = true;
       level->is_deep_water_set(mx, my);
+    }
+  }
+
+  if (! is_dead) {
+    if (is_fire()) {
+      i_set_is_fire = true;
+      level->is_fire_set(mx, my);
+    }
+    if (is_light_blocker() && ! is_open) {
+      i_set_is_light_blocker = true;
+      level->is_light_blocker_set(mx, my);
+    }
+    if (is_light_blocker_for_monst() && ! is_open) {
+      i_set_is_light_blocker_for_monst = true;
+      level->is_light_blocker_for_monst_set(mx, my);
+    }
+    if (is_gas_blocker() && ! is_open) {
+      i_set_is_gas_blocker = true;
+      level->is_gas_blocker_set(mx, my);
+    }
+    if (noise_blocker() && ! is_open) {
+      i_set_noise_blocker = true;
+      level->noise_blocker_set(mx, my);
+    }
+    if (is_obs_wall_or_door() && ! is_open) {
+      i_set_is_obs_wall_or_door = true;
+      level->is_obs_wall_or_door_set(mx, my);
+    }
+    if (is_obs_destructable() && ! is_open) {
+      i_set_is_obs_destructable = true;
+      level->is_obs_destructable_set(mx, my);
+    }
+    if (is_monst()) {
+      i_set_is_monst = true;
+      level->is_monst_set(mx, my);
+    }
+    if (is_brazier()) {
+      //
+      // Dead/extinguished braziers are not an obstacle
+      //
+      i_set_is_brazier = true;
+      level->is_brazier_set(mx, my);
+    }
+    if (is_barrel()) {
+      i_set_is_barrel = true;
+      level->is_barrel_set(mx, my);
     }
   }
 
