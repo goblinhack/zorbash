@@ -12,24 +12,24 @@ POST=$(mktemp) || exit 1
 OUT=$(mktemp) || exit 1
 
 for i in \
-    armor \
     amulets \
-    buffs \
+    armor \
     boots \
-    gauntlets \
+    buffs \
     debuffs \
     doors \
     dungeon \
     effects \
-    lasers \
-    projectiles \
     food \
+    gauntlets \
     internal \
     items \
+    lasers \
     mobs \
     monsts \
     player \
     potions \
+    projectiles \
     rings \
     skills \
     treasure \
@@ -41,31 +41,31 @@ do
 done
 
 for IN in \
-    armor/*py \
     amulets/*py \
-    buffs/*py \
+    armor/*py \
     boots/*py \
-    gauntlets/*py \
+    buffs/*py \
     debuffs/*py \
     doors/*py \
     dungeon/*py \
     effects/*py \
-    lasers/*py \
-    projectiles/*py \
     food/*py \
+    gauntlets/*py \
     internal/*py \
     items/*py \
+    lasers/*py \
     mobs/*py \
     monsts/*py \
     player/*py \
     potions/*py \
+    projectiles/*py \
     rings/*py \
     skills/*py \
     treasure/*py \
     wands/*py \
     weapons/*py
 do
-    echo $IN
+    echo Tidying $IN...
 
     grep -q is_pack $IN
     if [ $? -eq 0 ]; then
@@ -82,6 +82,7 @@ do
       ai_obstacle \
       ai_resent_count \
       ai_wanderer \
+      appearing_chance_d1000 \
       attack_eater \
       attack_humanoid \
       attack_living \
@@ -90,6 +91,7 @@ do
       attack_no_msg \
       attacks_per_round \
       attack_undead \
+      bite_amount \
       collateral_damage_pct \
       collision_check \
       collision_hit_180 \
@@ -114,11 +116,11 @@ do
       environ_avoids_water \
       gfx_an_animation_only \
       gfx_ascii_animated \
-      gfx_ascii_color_is_animated \
       gfx_ascii_bg_color_spread_blue \
       gfx_ascii_bg_color_spread_green \
       gfx_ascii_bg_color_spread_hue \
       gfx_ascii_bg_color_spread_red \
+      gfx_ascii_color_is_animated \
       gfx_ascii_fade_with_dist \
       gfx_ascii_fg_color_is_animated \
       gfx_ascii_fg_color_spread_blue \
@@ -153,16 +155,20 @@ do
       gfx_wobbles_when_hit \
       hunger_clock_tick_freq \
       hunger_is_insatiable \
+      internal \
       is_able_to_attack_mobs \
       is_able_to_attack_owner \
       is_able_to_break_down_doors \
+      is_able_to_break_out_of_ice \
       is_able_to_break_out_of_webs \
+      is_able_to_burn \
       is_able_to_change_levels \
       is_able_to_collect_keys \
       is_able_to_enchant_items \
       is_able_to_fall \
       is_able_to_fire_at \
       is_able_to_follow \
+      is_able_to_freeze \
       is_able_to_jump \
       is_able_to_jump_attack \
       is_able_to_jump_attack_chance_d1000 \
@@ -172,6 +178,7 @@ do
       is_able_to_learn_skills \
       is_able_to_move_diagonally \
       is_able_to_open_doors \
+      is_able_to_rest \
       is_able_to_see_in_the_dark \
       is_able_to_see_through_doors \
       is_able_to_shove \
@@ -213,15 +220,20 @@ do
       is_bag_item_container \
       is_bag_item_not_stackable \
       is_barrel \
+      is_basalt \
       is_biome_dungeon \
+      is_biome_sewer \
       is_biome_swamp \
+      is_biome_water \
       is_bleeder \
+      is_block_of_ice \
       is_bones \
       is_boots \
       is_brazier \
       is_bridge \
+      is_brittle \
       is_buff \
-      is_able_to_burn \
+      is_carnivorous_plant \
       is_carrier_of_treasure_class_a \
       is_carrier_of_treasure_class_b \
       is_carrier_of_treasure_class_c \
@@ -238,6 +250,7 @@ do
       is_corpse_on_death \
       is_corpse_with_bones \
       is_corridor \
+      is_cowardly \
       is_critical_to_level \
       is_crushable \
       is_crystal \
@@ -264,6 +277,26 @@ do
       is_door \
       is_droppable \
       is_dry_grass \
+      is_dry_grass_trampled \
+      is_eater_of_amulets \
+      is_eater_of_armor \
+      is_eater_of_boots \
+      is_eater_of_cloaks \
+      is_eater_of_food \
+      is_eater_of_gauntlets \
+      is_eater_of_green_blood \
+      is_eater_of_helmets \
+      is_eater_of_jelly \
+      is_eater_of_magical_items \
+      is_eater_of_meat \
+      is_eater_of_potions \
+      is_eater_of_red_blood \
+      is_eater_of_rings \
+      is_eater_of_shields \
+      is_eater_of_staffs \
+      is_eater_of_treasure \
+      is_eater_of_wands \
+      is_eater_of_weapons \
       is_enchantable \
       is_enchantstone \
       is_engulfer \
@@ -281,14 +314,13 @@ do
       is_flying \
       is_foilage \
       is_food \
-      is_eater_of_food \
       is_gas_blocker \
       is_gauntlet \
+      is_gelatinous \
       is_gfx_anim_synced_with_owner \
       is_glass \
       is_gold \
       is_green_blood \
-      is_eater_of_green_blood \
       is_green_blooded \
       is_green_splatter \
       is_hard \
@@ -298,6 +330,7 @@ do
       is_helmet \
       is_hittable \
       is_humanoid \
+      is_ice \
       is_immune_to_acid \
       is_immune_to_cold \
       is_immune_to_draining \
@@ -311,13 +344,9 @@ do
       is_item \
       is_item_carrier \
       is_item_collector \
-      is_thief \
-      is_magical \
-      is_eater_of_magical_items \
       is_item_organic \
       is_item_targetted \
       is_jelly \
-      is_eater_of_jelly \
       is_jump_blocker \
       is_key \
       is_key_special \
@@ -332,7 +361,6 @@ do
       is_map_beast \
       is_map_treasure \
       is_meat \
-      is_eater_of_meat \
       is_meltable \
       is_metal \
       is_minion \
@@ -357,13 +385,12 @@ do
       is_pack \
       is_pillar \
       is_pink_splatter \
+      is_plant \
       is_player \
       is_poisonous_danger_level \
       is_potion \
-      is_eater_of_potions \
       is_projectile \
       is_red_blood \
-      is_eater_of_red_blood \
       is_red_blooded \
       is_red_splatter \
       is_removeable_if_out_of_slots \
@@ -377,6 +404,7 @@ do
       is_shallow_water \
       is_shield \
       is_shovable \
+      is_shovable_and_sticky \
       is_skill \
       is_skillstone \
       is_slippery \
@@ -387,15 +415,19 @@ do
       is_spider \
       is_spiderweb \
       is_staff \
+      is_steam \
       is_sticky \
       is_stone \
+      is_swimmer \
       is_sword \
       is_target_radial \
       is_target_select \
       is_temperature_change_sensitive \
       is_temperature_sensitive \
       is_the_grid \
+      is_thief \
       is_throwable \
+      is_throw_blocker \
       is_tickable \
       is_tireless \
       is_tmp_thing \
@@ -405,7 +437,6 @@ do
       is_treasure_class_a \
       is_treasure_class_b \
       is_treasure_class_c \
-      is_eater_of_treasure \
       is_treasure_type \
       is_undead \
       is_usable \
@@ -419,6 +450,8 @@ do
       is_weapon \
       is_wooden \
       move_speed \
+      msg_is_seen \
+      msg_is_wounded \
       noise_additional_on_jump_end \
       noise_additional_on_teleporting \
       noise_blocker \
@@ -497,44 +530,10 @@ do
       unused_flag5 \
       unused_flag50 \
       unused_flag51 \
-      is_biome_water \
-      is_biome_sewer \
-      is_swimmer \
-      bite_amount \
       unused_flag56 \
-      is_able_to_rest \
-      msg_is_wounded \
-      msg_is_seen \
       unused_flag6 \
-      internal \
-      is_eater_of_helmets \
-      is_eater_of_amulets \
-      is_eater_of_weapons \
-      is_eater_of_boots \
-      is_eater_of_gauntlets \
-      is_eater_of_cloaks \
-      is_eater_of_shields \
-      is_eater_of_rings \
-      is_eater_of_staffs \
       unused_flag7 \
-      is_eater_of_armor \
-      is_eater_of_wands \
-      is_dry_grass_trampled \
-      is_cowardly \
-      appearing_chance_d1000 \
-      is_throw_blocker \
-      is_able_to_freeze \
-      is_gelatinous \
-      is_plant \
-      is_steam \
       unused_flag8 \
-      is_carnivorous_plant \
-      is_basalt \
-      is_shovable_and_sticky \
-      is_block_of_ice \
-      is_able_to_break_out_of_ice \
-      is_brittle \
-      is_ice \
       unused_flag87 \
       unused_flag9 \
       on_death_is_open

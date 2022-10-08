@@ -9,6 +9,8 @@ all: pre
 	(cd src; $(MAKE) $@)
 
 format:
+	(cd python/things ; sh ../../build/tidy_python.sh)
+	(cd src ; sh ../build/tidy_source.sh)
 	build/format.sh
 
 tidy:
