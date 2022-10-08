@@ -2344,15 +2344,12 @@ public:
   inline int gfx_pixelart_animated(void) const { return _gfx_pixelart_animated; }
 };
 
-Tilep tp_first_tile(class Tp *);
-
 class Tp *string2tp(const char **s);
 class Tp *string2tp(const std::string &s, int *len);
 class Tp *string2tp(const std::wstring &s, int *len);
 class Tp *tp_find(const std::string &name);
 class Tp *tp_find(uint32_t id);
-class Tp *tp_load(int id, const std::string &file, const std::string &text_long_name,
-                  const std::string &text_short_name);
+class Tp *tp_load(int id, const std::string &file, const std::string &long_name, const std::string &sh_name);
 class Tp *tp_random_ascend_dungeon(void);
 class Tp *tp_random_ascend_sewer(void);
 class Tp *tp_random_barrel(void);
@@ -2382,12 +2379,6 @@ class Tp *tp_random_key(void);
 class Tp *tp_random_mob_challenge_class_a(void);
 class Tp *tp_random_mob_challenge_class_b(void);
 class Tp *tp_random_mob(void);
-class Tp *tp_random_biome_dungeon_monst_class_a(void);
-class Tp *tp_random_biome_dungeon_monst_class_b(void);
-class Tp *tp_random_biome_dungeon_monst_class_c(void);
-class Tp *tp_random_biome_dungeon_monst_class_d(void);
-class Tp *tp_random_biome_dungeon_monst_class_e(void);
-class Tp *tp_random_biome_dungeon_monst(void);
 class Tp *tp_random_potion(void);
 class Tp *tp_random_red_blood(void);
 class Tp *tp_random_red_splatter(void);
@@ -2418,13 +2409,18 @@ class Tp *tp_random_wet_grass(void);
 
 const Tpidmap &tp_get_skills(void);
 
+Tilep tp_first_tile(class Tp *);
+
+Tpp tp_get_with_rarity_filter(Tpidmap &m);
+
 uint8_t tp_init(void);
 
-void tp_fini(void);
-void tp_random_init(void);
-void tp_fixup(void);
 void tp_assign_allies(void);
+void tp_biome_dungeon_monst_class_add(Tpp tp);
+void tp_fini(void);
+void tp_fixup(void);
 void tp_get_id(const std::string &tp_name, int *id);
+void tp_random_init(void);
 
 enum {
   THING_DIR_NONE,
@@ -2440,13 +2436,5 @@ enum {
 
 extern Tpidmap   tp_id_map;
 extern Tpnamemap tp_name_map;
-
-extern Tpidmap tp_biome_dungeon_monst;
-extern Tpidmap tp_biome_dungeon_monst_class_a;
-extern Tpidmap tp_biome_dungeon_monst_class_b;
-extern Tpidmap tp_biome_dungeon_monst_class_c;
-extern Tpidmap tp_biome_dungeon_monst_class_d;
-extern Tpidmap tp_biome_dungeon_monst_class_e;
-extern Tpp     tp_get_with_rarity_filter(Tpidmap &m);
 
 #endif // THING_TEMPLATE_H

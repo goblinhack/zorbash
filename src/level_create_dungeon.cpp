@@ -1060,7 +1060,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         tp = tp_random_secret_door();
       }
 
-      auto tp_monst = level_biome_dungeon_random_monst(d, p);
+      auto tp_monst = get_biome_dungeon_random_monst(d, p);
       if (tp_monst) {
         tp = tp_monst;
       }

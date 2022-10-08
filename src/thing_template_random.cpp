@@ -63,13 +63,6 @@ static Tpidmap tp_treasure_class_a;
 static Tpidmap tp_treasure_class_b;
 static Tpidmap tp_treasure_class_c;
 
-Tpidmap tp_biome_dungeon_monst;
-Tpidmap tp_biome_dungeon_monst_class_a;
-Tpidmap tp_biome_dungeon_monst_class_b;
-Tpidmap tp_biome_dungeon_monst_class_c;
-Tpidmap tp_biome_dungeon_monst_class_d;
-Tpidmap tp_biome_dungeon_monst_class_e;
-
 void tp_random_init(void)
 {
   TRACE_NO_INDENT();
@@ -296,24 +289,9 @@ void tp_random_init(void)
     }
 
     if (! tp->is_minion()) {
-      if (tp->is_biome_swamp()) {
+      if (tp->is_biome_dungeon()) {
         if (tp->is_monst()) {
-          tp_biome_dungeon_monst.push_back(tp);
-        }
-        if (tp->is_monst_class_a()) {
-          tp_biome_dungeon_monst_class_a.push_back(tp);
-        }
-        if (tp->is_monst_class_b()) {
-          tp_biome_dungeon_monst_class_b.push_back(tp);
-        }
-        if (tp->is_monst_class_c()) {
-          tp_biome_dungeon_monst_class_c.push_back(tp);
-        }
-        if (tp->is_monst_class_d()) {
-          tp_biome_dungeon_monst_class_d.push_back(tp);
-        }
-        if (tp->is_monst_class_e()) {
-          tp_biome_dungeon_monst_class_e.push_back(tp);
+          tp_biome_dungeon_monst_class_add(tp);
         }
       }
     }

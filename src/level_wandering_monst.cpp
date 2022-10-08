@@ -52,27 +52,7 @@ bool Level::create_wandering_monster(void)
     }
 
     point p(x, y);
-    tp = nullptr;
-    if (d1000() < d1000_chance_of_creating_monst_class_a) {
-      tp = tp_random_biome_dungeon_monst_class_a(p);
-      //
-      // Too common and noisy
-      //
-      // TOPCON("You hear a distant squeak.");
-    } else if (d1000() < d1000_chance_of_creating_monst_class_b) {
-      tp = tp_random_biome_dungeon_monst_class_b(p);
-      TOPCON("You hear a new distant groan.");
-    } else if (d1000() < d1000_chance_of_creating_monst_class_c) {
-      tp = tp_random_biome_dungeon_monst_class_c(p);
-      TOPCON("You hear a new distant growl.");
-    } else if (d1000() < d1000_chance_of_creating_monst_class_d) {
-      tp = tp_random_biome_dungeon_monst_class_d(p);
-      TOPCON("You hear a new distant roar.");
-    } else if (d1000() < d1000_chance_of_creating_monst_class_e) {
-      tp = tp_random_biome_dungeon_monst_class_e(p);
-      TOPCON("You hear a new distant bellow.");
-    }
-
+    tp = get_biome_dungeon_random_monst(p);
     if (tp) {
       dbg("INF: Creating %s", tp->name().c_str());
       thing_new(tp->name(), point(x, y));

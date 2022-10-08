@@ -663,12 +663,6 @@ public:
   Tpp tp_random_mob(const point p);
   Tpp tp_random_mob_challenge_class_a(const point p);
   Tpp tp_random_mob_challenge_class_b(const point p);
-  Tpp tp_random_biome_dungeon_monst(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_a(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_c(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_b(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_d(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_e(const point p);
   Tpp tp_random_treasure_class_a(const point p);
   Tpp tp_random_treasure_class_c(const point p);
   Tpp tp_random_treasure_class_b(const point p);
@@ -676,7 +670,14 @@ public:
   Tpp tp_random_weapon_class_c(const point p);
   Tpp tp_random_weapon_class_b(const point p);
 
-  Tpp level_biome_dungeon_random_monst(Dungeonp d, point p);
+  Tpp tp_random_biome_dungeon_monst_class_any(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_a(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_c(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_b(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_d(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_e(const point p);
+  Tpp get_biome_dungeon_random_monst(Dungeonp d, point p);
+  Tpp get_biome_dungeon_random_monst(point p);
 
   bool buffbox_over(const uint32_t slot);
   bool can_see_obstacle(int x, int y);
