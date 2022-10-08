@@ -37,12 +37,6 @@ static Tpidmap tp_item_not_a_container_class_a;
 static Tpidmap tp_item_not_a_container_class_b;
 static Tpidmap tp_item_not_a_container_class_c;
 static Tpidmap tp_key;
-static Tpidmap tp_monst;
-static Tpidmap tp_monst_class_a;
-static Tpidmap tp_monst_class_b;
-static Tpidmap tp_monst_class_c;
-static Tpidmap tp_monst_class_d;
-static Tpidmap tp_monst_class_e;
 static Tpidmap tp_potion;
 static Tpidmap tp_ring;
 static Tpidmap tp_ring_class_a;
@@ -68,6 +62,13 @@ static Tpidmap tp_weapon_class_c;
 static Tpidmap tp_treasure_class_a;
 static Tpidmap tp_treasure_class_b;
 static Tpidmap tp_treasure_class_c;
+
+Tpidmap tp_biome_dungeon_monst;
+Tpidmap tp_biome_dungeon_monst_class_a;
+Tpidmap tp_biome_dungeon_monst_class_b;
+Tpidmap tp_biome_dungeon_monst_class_c;
+Tpidmap tp_biome_dungeon_monst_class_d;
+Tpidmap tp_biome_dungeon_monst_class_e;
 
 void tp_random_init(void)
 {
@@ -295,29 +296,31 @@ void tp_random_init(void)
     }
 
     if (! tp->is_minion()) {
-      if (tp->is_monst()) {
-        tp_monst.push_back(tp);
-      }
-      if (tp->is_monst_class_a()) {
-        tp_monst_class_a.push_back(tp);
-      }
-      if (tp->is_monst_class_b()) {
-        tp_monst_class_b.push_back(tp);
-      }
-      if (tp->is_monst_class_c()) {
-        tp_monst_class_c.push_back(tp);
-      }
-      if (tp->is_monst_class_d()) {
-        tp_monst_class_d.push_back(tp);
-      }
-      if (tp->is_monst_class_e()) {
-        tp_monst_class_e.push_back(tp);
+      if (tp->is_biome_swamp()) {
+        if (tp->is_monst()) {
+          tp_biome_dungeon_monst.push_back(tp);
+        }
+        if (tp->is_monst_class_a()) {
+          tp_biome_dungeon_monst_class_a.push_back(tp);
+        }
+        if (tp->is_monst_class_b()) {
+          tp_biome_dungeon_monst_class_b.push_back(tp);
+        }
+        if (tp->is_monst_class_c()) {
+          tp_biome_dungeon_monst_class_c.push_back(tp);
+        }
+        if (tp->is_monst_class_d()) {
+          tp_biome_dungeon_monst_class_d.push_back(tp);
+        }
+        if (tp->is_monst_class_e()) {
+          tp_biome_dungeon_monst_class_e.push_back(tp);
+        }
       }
     }
   }
 }
 
-static Tpp tp_get_with_rarity_filter(Tpidmap &m)
+Tpp tp_get_with_rarity_filter(Tpidmap &m)
 {
   TRACE_NO_INDENT();
   int tries = 10000;
@@ -388,64 +391,6 @@ static Tpp tp_get_with_no_rarity_filter(Tpidmap &m)
   auto index = pcg_rand() % m.size();
   auto tp    = get(m, index);
   return tp;
-}
-
-Tpp tp_random_monst(void)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(! tp_monst.size())) {
-    ERR("No monsts found");
-    return nullptr;
-  }
-  return tp_get_with_rarity_filter(tp_monst);
-}
-
-Tpp tp_random_monst_class_a(void)
-{
-#if 0
-  return tp_find("teletoad");
-#endif
-  TRACE_NO_INDENT();
-  if (unlikely(! tp_monst_class_a.size())) {
-    return tp_random_monst();
-  }
-  return tp_get_with_rarity_filter(tp_monst_class_a);
-}
-
-Tpp tp_random_monst_class_b(void)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(! tp_monst_class_b.size())) {
-    return tp_random_monst_class_a();
-  }
-  return tp_get_with_rarity_filter(tp_monst_class_b);
-}
-
-Tpp tp_random_monst_class_c(void)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(! tp_monst_class_c.size())) {
-    return tp_random_monst_class_b();
-  }
-  return tp_get_with_rarity_filter(tp_monst_class_c);
-}
-
-Tpp tp_random_monst_class_d(void)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(! tp_monst_class_d.size())) {
-    return tp_random_monst_class_c();
-  }
-  return tp_get_with_rarity_filter(tp_monst_class_d);
-}
-
-Tpp tp_random_monst_class_e(void)
-{
-  TRACE_NO_INDENT();
-  if (unlikely(! tp_monst_class_e.size())) {
-    return tp_random_monst_class_d();
-  }
-  return tp_get_with_rarity_filter(tp_monst_class_e);
 }
 
 Tpp tp_random_food(void)

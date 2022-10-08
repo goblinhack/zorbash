@@ -663,18 +663,20 @@ public:
   Tpp tp_random_mob(const point p);
   Tpp tp_random_mob_challenge_class_a(const point p);
   Tpp tp_random_mob_challenge_class_b(const point p);
-  Tpp tp_random_monst(const point p);
-  Tpp tp_random_monst_class_a(const point p);
-  Tpp tp_random_monst_class_c(const point p);
-  Tpp tp_random_monst_class_b(const point p);
-  Tpp tp_random_monst_class_d(const point p);
-  Tpp tp_random_monst_class_e(const point p);
+  Tpp tp_random_biome_dungeon_monst(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_a(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_c(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_b(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_d(const point p);
+  Tpp tp_random_biome_dungeon_monst_class_e(const point p);
   Tpp tp_random_treasure_class_a(const point p);
   Tpp tp_random_treasure_class_c(const point p);
   Tpp tp_random_treasure_class_b(const point p);
   Tpp tp_random_weapon_class_a(const point p);
   Tpp tp_random_weapon_class_c(const point p);
   Tpp tp_random_weapon_class_b(const point p);
+
+  Tpp level_biome_dungeon_random_monst(Dungeonp d, point p);
 
   bool buffbox_over(const uint32_t slot);
   bool can_see_obstacle(int x, int y);
@@ -897,6 +899,7 @@ public:
   void create_dungeon_place_chasm(Dungeonp d, const std::string &what);
   void create_dungeon_place_corridor(Dungeonp d, const std::string what, int depth);
   void create_dungeon_place_deep_water(Dungeonp d, const std::string &what);
+  void place_random_water_monsts(void);
   void create_dungeon_place_floors(Dungeonp d, const std::string what, int depth, int var, int w, int h, int tries);
   void create_dungeon_place_lava(Dungeonp d, const std::string &what);
   void create_dungeon_place_lava_smoke(Dungeonp d);

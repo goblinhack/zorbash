@@ -2382,12 +2382,12 @@ class Tp *tp_random_key(void);
 class Tp *tp_random_mob_challenge_class_a(void);
 class Tp *tp_random_mob_challenge_class_b(void);
 class Tp *tp_random_mob(void);
-class Tp *tp_random_monst_class_a(void);
-class Tp *tp_random_monst_class_b(void);
-class Tp *tp_random_monst_class_c(void);
-class Tp *tp_random_monst_class_d(void);
-class Tp *tp_random_monst_class_e(void);
-class Tp *tp_random_monst(void);
+class Tp *tp_random_biome_dungeon_monst_class_a(void);
+class Tp *tp_random_biome_dungeon_monst_class_b(void);
+class Tp *tp_random_biome_dungeon_monst_class_c(void);
+class Tp *tp_random_biome_dungeon_monst_class_d(void);
+class Tp *tp_random_biome_dungeon_monst_class_e(void);
+class Tp *tp_random_biome_dungeon_monst(void);
 class Tp *tp_random_potion(void);
 class Tp *tp_random_red_blood(void);
 class Tp *tp_random_red_splatter(void);
@@ -2440,5 +2440,13 @@ enum {
 
 extern Tpidmap   tp_id_map;
 extern Tpnamemap tp_name_map;
+
+extern Tpidmap tp_biome_dungeon_monst;
+extern Tpidmap tp_biome_dungeon_monst_class_a;
+extern Tpidmap tp_biome_dungeon_monst_class_b;
+extern Tpidmap tp_biome_dungeon_monst_class_c;
+extern Tpidmap tp_biome_dungeon_monst_class_d;
+extern Tpidmap tp_biome_dungeon_monst_class_e;
+extern Tpp     tp_get_with_rarity_filter(Tpidmap &m);
 
 #endif // THING_TEMPLATE_H
