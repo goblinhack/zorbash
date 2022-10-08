@@ -49,7 +49,7 @@ Tpp Level::get_random_monst(Dungeonp d, point p, biome_t biome)
   }
 
   if (tp) {
-    con("INF: Got level monster '%s' class %d", tp->text_short_capitalised().c_str(), monst_class);
+    con("INF: Got level monster '%s' biome %d class %d", tp->text_short_capitalised().c_str(), biome, monst_class);
   }
 
   return tp;
@@ -141,27 +141,6 @@ void tp_monst_add(Tpp tp)
     }
     if (tp->is_monst_class_e()) {
       tp_monst[ BIOME_SEWER ][ MONST_CLASS_E ].push_back(tp);
-    }
-  }
-
-  if (tp->is_biome_water()) {
-    if (tp->is_monst()) {
-      tp_monst[ BIOME_WATER ][ MONST_CLASS_ANY ].push_back(tp);
-    }
-    if (tp->is_monst_class_a()) {
-      tp_monst[ BIOME_WATER ][ MONST_CLASS_A ].push_back(tp);
-    }
-    if (tp->is_monst_class_b()) {
-      tp_monst[ BIOME_WATER ][ MONST_CLASS_B ].push_back(tp);
-    }
-    if (tp->is_monst_class_c()) {
-      tp_monst[ BIOME_WATER ][ MONST_CLASS_C ].push_back(tp);
-    }
-    if (tp->is_monst_class_d()) {
-      tp_monst[ BIOME_WATER ][ MONST_CLASS_D ].push_back(tp);
-    }
-    if (tp->is_monst_class_e()) {
-      tp_monst[ BIOME_WATER ][ MONST_CLASS_E ].push_back(tp);
     }
   }
 }

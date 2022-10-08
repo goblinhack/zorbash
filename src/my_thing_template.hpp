@@ -279,7 +279,7 @@ private:
   int _is_biome_dungeon {};
   int _is_biome_sewer {};
   int _is_biome_swamp {};
-  int _is_biome_water {};
+  int _is_biome_unused {};
   int _is_bleeder {};
   int _is_block_of_ice {};
   int _is_bones {};
@@ -1296,7 +1296,7 @@ public:
   int is_biome_dungeon(void) const;
   int is_biome_sewer(void) const;
   int is_biome_swamp(void) const;
-  int is_biome_water(void) const;
+  int is_biome_unused(void) const;
   int is_bleeder(void) const;
   int is_block_of_ice(void) const;
   int is_bones(void) const;
@@ -1836,7 +1836,7 @@ public:
   void is_biome_dungeon_set(int v);
   void is_biome_sewer_set(int v);
   void is_biome_swamp_set(int v);
-  void is_biome_water_set(int v);
+  void is_biome_unused_set(int v);
   void is_bleeder_set(int v);
   void is_block_of_ice_set(int v);
   void is_bones_set(int v);
@@ -2448,7 +2448,6 @@ typedef enum {
   BIOME_DUNGEON,
   BIOME_SWAMP,
   BIOME_SEWER,
-  BIOME_WATER,
   BIOME_MAX,
 } biome_t;
 

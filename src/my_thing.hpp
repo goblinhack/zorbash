@@ -1272,7 +1272,7 @@ public:
   int is_biome_dungeon(void);
   int is_biome_sewer(void);
   int is_biome_swamp(void);
-  int is_biome_water(void);
+  int is_biome_unused(void);
   int is_bleeder(void);
   int is_block_of_ice(void);
   int is_blood(void);

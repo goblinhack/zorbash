@@ -1560,10 +1560,10 @@ int Thing::unused_flag51(void)
   return (tp()->unused_flag51());
 }
 
-int Thing::is_biome_water(void)
+int Thing::is_biome_unused(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_biome_water());
+  return (tp()->is_biome_unused());
 }
 
 int Thing::is_biome_sewer(void)

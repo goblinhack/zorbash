@@ -24,8 +24,6 @@ std::string Level::to_string(void)
     return ("sewer L" + level_no_str);
   } else if (biome == BIOME_SWAMP) {
     return ("swamp L" + level_no_str);
-  } else if (biome == BIOME_WATER) {
-    return ("water L" + level_no_str);
   } else {
     return ("dungeon L" + level_no_str);
   }

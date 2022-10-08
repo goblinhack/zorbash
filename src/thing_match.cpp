@@ -808,7 +808,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag51() && (what == "unused_flag51")) {
     return true;
   }
-  if (is_biome_water() && (what == "is_biome_water")) {
+  if (is_biome_unused() && (what == "is_biome_unused")) {
     return true;
   }
   if (is_biome_sewer() && (what == "is_biome_sewer")) {
@@ -2387,8 +2387,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag51") {
     return &Thing::unused_flag51;
   }
-  if (what == "is_biome_water") {
-    return &Thing::is_biome_water;
+  if (what == "is_biome_unused") {
+    return &Thing::is_biome_unused;
   }
   if (what == "is_biome_sewer") {
     return &Thing::is_biome_sewer;

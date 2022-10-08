@@ -224,7 +224,7 @@ do
       is_biome_dungeon \
       is_biome_sewer \
       is_biome_swamp \
-      is_biome_water \
+      is_biome_unused \
       is_bleeder \
       is_block_of_ice \
       is_bones \

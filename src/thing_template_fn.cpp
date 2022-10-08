@@ -328,7 +328,7 @@ int Tp::is_basalt(void) const { return _is_basalt; }
 int Tp::is_biome_dungeon(void) const { return _is_biome_dungeon; }
 int Tp::is_biome_sewer(void) const { return _is_biome_sewer; }
 int Tp::is_biome_swamp(void) const { return _is_biome_swamp; }
-int Tp::is_biome_water(void) const { return _is_biome_water; }
+int Tp::is_biome_unused(void) const { return _is_biome_unused; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_block_of_ice(void) const { return _is_block_of_ice; }
 int Tp::is_bones(void) const { return _is_bones; }
@@ -868,7 +868,7 @@ void Tp::is_basalt_set(int v) { _is_basalt = v; }
 void Tp::is_biome_dungeon_set(int v) { _is_biome_dungeon = v; }
 void Tp::is_biome_sewer_set(int v) { _is_biome_sewer = v; }
 void Tp::is_biome_swamp_set(int v) { _is_biome_swamp = v; }
-void Tp::is_biome_water_set(int v) { _is_biome_water = v; }
+void Tp::is_biome_unused_set(int v) { _is_biome_unused = v; }
 void Tp::is_bleeder_set(int v) { _is_bleeder = v; }
 void Tp::is_block_of_ice_set(int v) { _is_block_of_ice = v; }
 void Tp::is_bones_set(int v) { _is_bones = v; }

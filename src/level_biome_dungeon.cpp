@@ -728,7 +728,8 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
   return true;
 }
 
-void Level::create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries)
+void Level::create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height,
+                                             int tries)
 {
   TRACE_AND_INDENT();
   auto what = tp->name();
@@ -891,8 +892,8 @@ void Level::create_biome_dungeon_place_rocks(Dungeonp d, int variant, int block_
   }
 }
 
-void Level::create_biome_dungeon_place_floors(Dungeonp d, std::string what, int floor_type, int variant, int block_width,
-                                        int block_height, int tries)
+void Level::create_biome_dungeon_place_floors(Dungeonp d, std::string what, int floor_type, int variant,
+                                              int block_width, int block_height, int tries)
 {
   TRACE_AND_INDENT();
   while (tries--) {
@@ -1060,7 +1061,7 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
         tp = tp_random_secret_door();
       }
 
-      auto tp_monst = get_random_monst(d, p, BIOME_DUNGEON);
+      auto tp_monst = get_random_monst(d, p, biome);
       if (tp_monst) {
         tp = tp_monst;
       }

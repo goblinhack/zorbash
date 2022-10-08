@@ -203,7 +203,7 @@ PyObject *thing_is_basalt(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_sewer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_swamp(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_biome_water(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_biome_unused(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bleeder(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_block_of_ice(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bloodied(PyObject *obj, PyObject *args, PyObject *keywds);
