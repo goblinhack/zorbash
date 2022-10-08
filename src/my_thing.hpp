@@ -941,6 +941,7 @@ public:
   int attacks_per_round(void);
   int attack_undead(void);
   int attack(void);
+  int bite_amount(void);
   int blast_max_radius(void);
   int blast_min_radius(void);
   int bounce_count(void);
@@ -1200,6 +1201,7 @@ public:
   int is_able_to_learn_skills(void);
   int is_able_to_move_diagonally(void);
   int is_able_to_open_doors(void);
+  int is_able_to_rest(void);
   int is_able_to_see_in_the_dark(void);
   int is_able_to_see_through_doors(void);
   int is_able_to_shove(void);
@@ -1261,9 +1263,12 @@ public:
   int is_barrel(void);
   int is_basalt(void);
   int is_biome_dungeon(void);
+  int is_biome_sewer(void);
   int is_biome_swamp(void);
+  int is_biome_water(void);
   int is_bleeder(void);
   int is_block_of_ice(void);
+  int is_blood(void);
   int is_bones(void);
   int is_boots(void);
   int is_brazier(void);
@@ -1432,7 +1437,6 @@ public:
   int is_projectile(void);
   int is_red_blooded(void);
   int is_red_blood(void);
-  int is_blood(void);
   int is_red_splatter(void);
   int is_removeable_if_out_of_slots(void);
   int is_resurrectable(void);
@@ -1461,6 +1465,7 @@ public:
   int is_steam(void);
   int is_sticky(void);
   int is_stone(void);
+  int is_swimmer(void);
   int is_sword(void);
   int is_target_radial(void);
   int is_target_select(void);
@@ -1524,6 +1529,7 @@ public:
   int lifespan_incr(void);
   int lifespan_initial(void);
   int lifespan_set(int);
+  int light_distance_update(void);
   int light_dist_decr(int);
   int light_dist_decr(void);
   int light_dist_get(void);
@@ -1531,7 +1537,6 @@ public:
   int light_dist_incr(void);
   int light_dist_initial(void);
   int light_dist_set(int);
-  int light_distance_update(void);
   int light_dist(void);
   int map_beast_carried_count(void);
   int map_beast_count(void);
@@ -1588,9 +1593,9 @@ public:
   int noise_total(void);
   int noise(void);
   int normal_placement_rules(void);
+  int nutrition_decr(int v);
   int nutrition_get(void);
   int nutrition_init(void);
-  int nutrition_decr(int v);
   int on_attacking_dmg_acid(Thingp victim, int damage);
   int on_attacking_dmg_bite(Thingp victim, int damage);
   int on_attacking_dmg_claw(Thingp victim, int damage);
@@ -1971,12 +1976,7 @@ public:
   int unused_flag4(void);
   int unused_flag50(void);
   int unused_flag51(void);
-  int unused_flag52(void);
-  int unused_flag53(void);
-  int is_swimmer(void);
-  int bite_amount(void);
   int unused_flag56(void);
-  int is_able_to_rest(void);
   int unused_flag5(void);
   int unused_flag6(void);
   int unused_flag7(void);

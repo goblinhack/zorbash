@@ -38,9 +38,6 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   is_starting = true;
   clear();
 
-  is_level_type_dungeon = false;
-  is_level_type_sewer   = false;
-
   this->seed                        = seedval;
   this->difficulty_depth            = difficulty_depth;
   this->dungeon_walk_order_level_no = dungeon_walk_order_level_no;
@@ -73,7 +70,7 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
   }
 
   if (! monst_count) {
-    if (! is_level_type_sewer) {
+    if (biome != BIOME_SEWER) {
       err("No monsters placed on level");
     }
   }

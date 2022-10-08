@@ -38,9 +38,9 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
 
   static std::array< std::array< Tilep, WATER_DOWN >, WATER_ACROSS > water[ 2 ];
 
-  int level_type = 0;
-  if (is_level_type_sewer) {
-    level_type = 1;
+  int water_type = 0;
+  if (biome == BIOME_SEWER) {
+    water_type = 1;
   }
 
   if (! water[ 0 ][ 0 ][ 0 ]) {
@@ -232,7 +232,7 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
         bry -= pixel_map_at.y;
       }
 
-      auto tile = get_no_check(water[ level_type ], (x & ~1) % WATER_ACROSS, (y & ~1) % WATER_DOWN);
+      auto tile = get_no_check(water[ water_type ], (x & ~1) % WATER_ACROSS, (y & ~1) % WATER_DOWN);
       auto x1   = tile->x1;
       auto x2   = tile->x2;
       auto y1   = tile->y1;
@@ -284,7 +284,7 @@ void Level::display_pixelart_water(int fbo, int16_t minx, int16_t miny, int16_t 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   color c = WHITE;
   c.a     = 100;
-  if (is_level_type_sewer) {
+  if (biome == BIOME_SEWER) {
     c = DARKGREEN;
   }
   glcolor(c);

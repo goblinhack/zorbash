@@ -17,7 +17,7 @@ bool Level::create_sewer(point3d at, uint32_t seed)
   TRACE_AND_INDENT();
   log("Create sewer at (%d,%d,%d)", at.x, at.y, at.z);
 
-  is_level_type_sewer = true;
+  biome = BIOME_SEWER;
 
   place_the_grid();
   if (g_errored) {

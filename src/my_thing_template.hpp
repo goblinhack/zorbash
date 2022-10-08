@@ -621,8 +621,8 @@ private:
   int _unused_flag5 {};
   int _unused_flag50 {};
   int _unused_flag51 {};
-  int _unused_flag52 {};
-  int _unused_flag53 {};
+  int _is_biome_water {};
+  int _is_biome_sewer {};
   int _is_swimmer {};
   int _bite_amount {};
   int _unused_flag56 {};
@@ -1115,6 +1115,7 @@ public:
   int attack_no_msg(void) const;
   int attacks_per_round(void) const;
   int attack_undead(void) const;
+  int bite_amount(void) const;
   int blast_max_radius(void) const;
   int blast_min_radius(void) const;
   int blit_bot_off(void) const;
@@ -1241,6 +1242,7 @@ public:
   int is_able_to_learn_skills(void) const;
   int is_able_to_move_diagonally(void) const;
   int is_able_to_open_doors(void) const;
+  int is_able_to_rest(void) const;
   int is_able_to_see_in_the_dark(void) const;
   int is_able_to_see_through_doors(void) const;
   int is_able_to_shove(void) const;
@@ -1285,7 +1287,9 @@ public:
   int is_barrel(void) const;
   int is_basalt(void) const;
   int is_biome_dungeon(void) const;
+  int is_biome_sewer(void) const;
   int is_biome_swamp(void) const;
+  int is_biome_water(void) const;
   int is_bleeder(void) const;
   int is_block_of_ice(void) const;
   int is_bones(void) const;
@@ -1478,6 +1482,7 @@ public:
   int is_steam(void) const;
   int is_sticky(void) const;
   int is_stone(void) const;
+  int is_swimmer(void) const;
   int is_sword(void) const;
   int is_target_radial(void) const;
   int is_target_select(void) const;
@@ -1634,12 +1639,7 @@ public:
   int unused_flag4(void) const;
   int unused_flag50(void) const;
   int unused_flag51(void) const;
-  int unused_flag52(void) const;
-  int unused_flag53(void) const;
-  int is_swimmer(void) const;
-  int bite_amount(void) const;
   int unused_flag56(void) const;
-  int is_able_to_rest(void) const;
   int unused_flag5(void) const;
   int unused_flag6(void) const;
   int unused_flag7(void) const;
@@ -1664,6 +1664,7 @@ public:
   void attack_no_msg_set(int v);
   void attacks_per_round_set(int v);
   void attack_undead_set(int v);
+  void bite_amount_set(int v);
   void blast_max_radius_set(int v);
   void blast_min_radius_set(int v);
   void blit_bot_off_set(int v);
@@ -1778,6 +1779,7 @@ public:
   void is_able_to_learn_skills_set(int v);
   void is_able_to_move_diagonally_set(int v);
   void is_able_to_open_doors_set(int v);
+  void is_able_to_rest_set(int v);
   void is_able_to_see_in_the_dark_set(int v);
   void is_able_to_see_through_doors_set(int v);
   void is_able_to_shove_set(int v);
@@ -1823,7 +1825,9 @@ public:
   void is_barrel_set(int v);
   void is_basalt_set(int v);
   void is_biome_dungeon_set(int v);
+  void is_biome_sewer_set(int v);
   void is_biome_swamp_set(int v);
+  void is_biome_water_set(int v);
   void is_bleeder_set(int v);
   void is_block_of_ice_set(int v);
   void is_bones_set(int v);
@@ -2016,6 +2020,7 @@ public:
   void is_steam_set(int v);
   void is_sticky_set(int v);
   void is_stone_set(int v);
+  void is_swimmer_set(int v);
   void is_sword_set(int v);
   void is_target_radial_set(int v);
   void is_target_select_set(int v);
@@ -2307,12 +2312,7 @@ public:
   void unused_flag4_set(int v);
   void unused_flag50_set(int v);
   void unused_flag51_set(int v);
-  void unused_flag52_set(int v);
-  void unused_flag53_set(int v);
-  void is_swimmer_set(int v);
-  void bite_amount_set(int v);
   void unused_flag56_set(int v);
-  void is_able_to_rest_set(int v);
   void unused_flag5_set(int v);
   void unused_flag6_set(int v);
   void unused_flag7_set(int v);
@@ -2416,7 +2416,7 @@ Tpp tp_get_with_rarity_filter(Tpidmap &m);
 uint8_t tp_init(void);
 
 void tp_assign_allies(void);
-void tp_biome_dungeon_monst_class_add(Tpp tp);
+void tp_monst_add(Tpp tp);
 void tp_fini(void);
 void tp_fixup(void);
 void tp_get_id(const std::string &tp_name, int *id);
@@ -2433,6 +2433,24 @@ enum {
   THING_DIR_TR,
   THING_DIR_BR,
 };
+
+typedef enum {
+  BIOME_DUNGEON,
+  BIOME_SWAMP,
+  BIOME_SEWER,
+  BIOME_WATER,
+  BIOME_MAX,
+} biome_t;
+
+typedef enum {
+  MONST_CLASS_ANY,
+  MONST_CLASS_A,
+  MONST_CLASS_B,
+  MONST_CLASS_C,
+  MONST_CLASS_D,
+  MONST_CLASS_E,
+  MONST_CLASS_MAX,
+} monst_class_t;
 
 extern Tpidmap   tp_id_map;
 extern Tpnamemap tp_name_map;

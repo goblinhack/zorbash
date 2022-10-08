@@ -196,7 +196,7 @@ bool Thing::fall_to_next_level(void)
   // Fall to the next level that exists beneath. If nothing exists, fall into the void.
   //
   auto fall_to = level->world_at;
-  if (level->is_level_type_sewer) {
+  if (level->biome == BIOME_SEWER) {
     fall_to.z--;
   }
 

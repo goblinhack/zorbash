@@ -289,10 +289,8 @@ void tp_random_init(void)
     }
 
     if (! tp->is_minion()) {
-      if (tp->is_biome_dungeon()) {
-        if (tp->is_monst()) {
-          tp_biome_dungeon_monst_class_add(tp);
-        }
+      if (tp->is_monst()) {
+        tp_monst_add(tp);
       }
     }
   }
@@ -301,37 +299,40 @@ void tp_random_init(void)
 Tpp tp_get_with_rarity_filter(Tpidmap &m)
 {
   TRACE_NO_INDENT();
-  int tries = 10000;
+  int tries = 100;
   while (tries--) {
-    auto tp = get(m, pcg_rand() % m.size());
-    auto r  = pcg_random_range(0, 1000);
-    if (r < 800) {
-      if (tp->rarity() != THING_RARITY_COMMON) {
-        continue;
+    auto r      = pcg_random_range(0, 1000);
+    int  tries2 = 100;
+    while (tries2--) {
+      auto tp = get(m, pcg_rand() % m.size());
+      if (r < 500) {
+        if (tp->rarity() != THING_RARITY_COMMON) {
+          continue;
+        }
+        // CON("chose THING_RARITY_COMMON -- %s", tp->name().c_str());
+      } else if (r < 800) {
+        if (tp->rarity() != THING_RARITY_UNCOMMON) {
+          continue;
+        }
+        // CON("chose THING_RARITY_UNCOMMON -- %s", tp->name().c_str());
+      } else if (r < 950) {
+        if (tp->rarity() != THING_RARITY_RARE) {
+          continue;
+        }
+        // CON("chose THING_RARITY_RARE -- %s", tp->name().c_str());
+      } else if (r < 990) {
+        if (tp->rarity() != THING_RARITY_VERY_RARE) {
+          continue;
+        }
+        // CON("chose THING_RARITY_VERY_RARE -- %s", tp->name().c_str());
+      } else if (r == 999) {
+        if (tp->rarity() != THING_RARITY_UNIQUE) {
+          continue;
+        }
+        // CON("chose THING_RARITY_UNIQUE -- %s", tp->name().c_str());
       }
-      // CON("chose THING_RARITY_COMMON -- %s", tp->name().c_str());
-    } else if (r < 900) {
-      if (tp->rarity() != THING_RARITY_UNCOMMON) {
-        continue;
-      }
-      // CON("chose THING_RARITY_UNCOMMON -- %s", tp->name().c_str());
-    } else if (r < 950) {
-      if (tp->rarity() != THING_RARITY_RARE) {
-        continue;
-      }
-      // CON("chose THING_RARITY_RARE -- %s", tp->name().c_str());
-    } else if (r < 990) {
-      if (tp->rarity() != THING_RARITY_VERY_RARE) {
-        continue;
-      }
-      // CON("chose THING_RARITY_VERY_RARE -- %s", tp->name().c_str());
-    } else if (r == 999) {
-      if (tp->rarity() != THING_RARITY_UNIQUE) {
-        continue;
-      }
-      // CON("chose THING_RARITY_UNIQUE -- %s", tp->name().c_str());
+      return tp;
     }
-    return tp;
   }
   ERR("Could not find a thing according to rarity");
   return get(m, pcg_rand() % m.size());

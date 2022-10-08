@@ -20,8 +20,12 @@ std::string Level::to_string(void)
     level_no_str = world_at.to_string();
   }
 
-  if (is_level_type_sewer) {
+  if (biome == BIOME_SEWER) {
     return ("sewer L" + level_no_str);
+  } else if (biome == BIOME_SWAMP) {
+    return ("swamp L" + level_no_str);
+  } else if (biome == BIOME_WATER) {
+    return ("water L" + level_no_str);
   } else {
     return ("dungeon L" + level_no_str);
   }

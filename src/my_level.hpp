@@ -20,6 +20,7 @@
 #include "my_particle.hpp"
 #include "my_point3d.hpp"
 #include "my_projectile.hpp"
+#include "my_thing_template.hpp"
 #include "my_time.hpp"
 
 class Level
@@ -147,6 +148,11 @@ public:
   point grid_at;
 
   //
+  // What type of level
+  //
+  biome_t biome;
+
+  //
   // Levels are grouped into difficulty levels
   //
   int difficulty_depth {};
@@ -160,11 +166,8 @@ public:
   //
   // Chances for various things to appear
   //
-  int d1000_chance_of_creating_monst_class_a {};
-  int d1000_chance_of_creating_monst_class_b {};
-  int d1000_chance_of_creating_monst_class_c {};
-  int d1000_chance_of_creating_monst_class_d {};
-  int d1000_chance_of_creating_monst_class_e {};
+  std::array< int, MONST_CLASS_MAX > d1000_chance_of_creating_monst {};
+
   int d1000_chance_of_creating_mob_challenge_class_a {};
   int d1000_chance_of_creating_mob_challenge_class_b {};
   int d1000_chance_of_creating_treasure_class_a {};
@@ -187,8 +190,6 @@ public:
   bool is_first_level {};
   bool is_completed {}; // Player exited this level
   bool is_heatmap_valid {};
-  bool is_level_type_dungeon {};
-  bool is_level_type_sewer {};
   bool is_map_changed {}; // Something moved on the map
   bool is_map_follow_player {};
   bool is_map_mini_valid {};
@@ -670,14 +671,8 @@ public:
   Tpp tp_random_weapon_class_c(const point p);
   Tpp tp_random_weapon_class_b(const point p);
 
-  Tpp tp_random_biome_dungeon_monst_class_any(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_a(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_c(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_b(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_d(const point p);
-  Tpp tp_random_biome_dungeon_monst_class_e(const point p);
-  Tpp get_biome_dungeon_random_monst(Dungeonp d, point p);
-  Tpp get_biome_dungeon_random_monst(point p);
+  Tpp get_random_monst(Dungeonp d, point p, biome_t);
+  Tpp get_random_monst(point p, biome_t biome, monst_class_t monst_class);
 
   bool buffbox_over(const uint32_t slot);
   bool can_see_obstacle(int x, int y);

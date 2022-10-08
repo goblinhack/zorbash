@@ -590,6 +590,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   out << bits(my.t->world_at);
   out << bits(my.t->grid_at);
+  out << bits(my.t->biome);
 
   out << bits(my.t->difficulty_depth);
   out << bits(my.t->dungeon_walk_order_level_no);
@@ -601,11 +602,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   out << bits(my.t->d1000_chance_of_creating_mob_challenge_class_a);
   out << bits(my.t->d1000_chance_of_creating_mob_challenge_class_b);
-  out << bits(my.t->d1000_chance_of_creating_monst_class_a);
-  out << bits(my.t->d1000_chance_of_creating_monst_class_b);
-  out << bits(my.t->d1000_chance_of_creating_monst_class_c);
-  out << bits(my.t->d1000_chance_of_creating_monst_class_d);
-  out << bits(my.t->d1000_chance_of_creating_monst_class_e);
+  out << bits(my.t->d1000_chance_of_creating_monst);
   out << bits(my.t->d1000_chance_of_creating_treasure_class_a);
   out << bits(my.t->d1000_chance_of_creating_treasure_class_b);
   out << bits(my.t->d1000_chance_of_creating_treasure_class_c);
@@ -623,8 +620,6 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->is_first_level);
   out << bits(my.t->is_completed);
   out << bits(my.t->is_heatmap_valid);
-  out << bits(my.t->is_level_type_dungeon);
-  out << bits(my.t->is_level_type_sewer);
   out << bits(my.t->is_map_changed);
   out << bits(my.t->is_map_follow_player);
   out << bits(my.t->is_map_mini_valid);

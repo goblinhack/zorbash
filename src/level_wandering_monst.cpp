@@ -52,7 +52,23 @@ bool Level::create_wandering_monster(void)
     }
 
     point p(x, y);
-    tp = get_biome_dungeon_random_monst(p);
+
+    //
+    // Choose the monster class and have tougher classes less often.
+    //
+    auto roll = d1000() + difficulty_depth * 10;
+    if (roll < 950) {
+      tp = get_random_monst(p, biome, MONST_CLASS_A);
+    } else if (roll < 980) {
+      tp = get_random_monst(p, biome, MONST_CLASS_B);
+    } else if (roll < 990) {
+      tp = get_random_monst(p, biome, MONST_CLASS_C);
+    } else if (roll < 995) {
+      tp = get_random_monst(p, biome, MONST_CLASS_D);
+    } else {
+      tp = get_random_monst(p, biome, MONST_CLASS_E);
+    }
+
     if (tp) {
       dbg("INF: Creating %s", tp->name().c_str());
       thing_new(tp->name(), point(x, y));

@@ -497,8 +497,8 @@ do
       unused_flag5 \
       unused_flag50 \
       unused_flag51 \
-      unused_flag52 \
-      unused_flag53 \
+      is_biome_water \
+      is_biome_sewer \
       is_swimmer \
       bite_amount \
       unused_flag56 \

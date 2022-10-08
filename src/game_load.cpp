@@ -640,6 +640,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   in >> bits(l->world_at);
   in >> bits(l->grid_at);
+  in >> bits(l->biome);
 
   in >> bits(l->difficulty_depth);
   in >> bits(l->dungeon_walk_order_level_no);
@@ -651,11 +652,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
 
   in >> bits(l->d1000_chance_of_creating_mob_challenge_class_a);
   in >> bits(l->d1000_chance_of_creating_mob_challenge_class_b);
-  in >> bits(l->d1000_chance_of_creating_monst_class_a);
-  in >> bits(l->d1000_chance_of_creating_monst_class_b);
-  in >> bits(l->d1000_chance_of_creating_monst_class_c);
-  in >> bits(l->d1000_chance_of_creating_monst_class_d);
-  in >> bits(l->d1000_chance_of_creating_monst_class_e);
+  in >> bits(l->d1000_chance_of_creating_monst);
   in >> bits(l->d1000_chance_of_creating_treasure_class_a);
   in >> bits(l->d1000_chance_of_creating_treasure_class_b);
   in >> bits(l->d1000_chance_of_creating_treasure_class_c);
@@ -673,8 +670,6 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->is_first_level);
   in >> bits(l->is_completed);
   in >> bits(l->is_heatmap_valid);
-  in >> bits(l->is_level_type_dungeon);
-  in >> bits(l->is_level_type_sewer);
   in >> bits(l->is_map_changed);
   in >> bits(l->is_map_follow_player);
   in >> bits(l->is_map_mini_valid);

@@ -21,7 +21,7 @@ bool Level::create_dungeon(point3d at, uint32_t seed)
     TOPCON("A new dungeon level is coming into being...");
   }
 
-  is_level_type_dungeon = true;
+  biome = BIOME_SEWER;
 
   uint32_t start = time_ms();
 
@@ -1060,7 +1060,7 @@ void Level::create_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
         tp = tp_random_secret_door();
       }
 
-      auto tp_monst = get_biome_dungeon_random_monst(d, p);
+      auto tp_monst = get_random_monst(d, p, BIOME_DUNGEON);
       if (tp_monst) {
         tp = tp_monst;
       }
