@@ -84,8 +84,8 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     auto dungeon = new Dungeon(0);
     if (g_errored) { return false; }
 #endif
-    auto tries = 500;
 
+    int  tries     = 500;
     auto wall_type = tp_random_wall_dungeon();
     if (! wall_type) {
       ERR("No dungeon walls found");
@@ -719,6 +719,23 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
       }
     }
 
+    //
+    // Place some eels etc...
+    //
+    {
+      uint32_t start = time_ms();
+      dbg2("INF: Place swimming monsters");
+      place_swimming_monsts(dungeon);
+      if (g_errored) {
+        return false;
+      }
+      uint32_t took = time_ms() - start;
+      if (took > slowest_so_far) {
+        slowest_so_far       = took;
+        slowest_so_far_which = "placing dry grass";
+      }
+    }
+
     delete dungeon;
     break;
   }
@@ -734,7 +751,7 @@ void Level::create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, in
   TRACE_AND_INDENT();
   auto what = tp->name();
 
-  while (tries--) {
+  while (tries-- > 0) {
     auto x = pcg_random_range(0, MAP_WIDTH - block_width + 1);
     auto y = pcg_random_range(0, MAP_HEIGHT - block_height + 1);
 
@@ -818,7 +835,7 @@ void Level::create_biome_dungeon_place_rocks(Dungeonp d, int variant, int block_
   }
   auto what = tp->name();
 
-  while (tries--) {
+  while (tries-- > 0) {
     auto x = pcg_random_range(0, MAP_WIDTH - block_width + 1);
     auto y = pcg_random_range(0, MAP_HEIGHT - block_height + 1);
 
@@ -896,7 +913,7 @@ void Level::create_biome_dungeon_place_floors(Dungeonp d, std::string what, int 
                                               int block_width, int block_height, int tries)
 {
   TRACE_AND_INDENT();
-  while (tries--) {
+  while (tries-- > 0) {
     auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK - block_width + 1);
     auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK - block_height + 1);
 
@@ -1061,7 +1078,7 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
         tp = tp_random_secret_door();
       }
 
-      auto tp_monst = get_random_monst(d, p, biome);
+      auto tp_monst = get_dungeon_biome_random_monst(d, p, biome, MONST_TYPE_NORMAL);
       if (tp_monst) {
         tp = tp_monst;
       }
@@ -1234,7 +1251,7 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
       }
 
       if (tp->is_swimmer()) {
-        if (! is_deep_water(x, y)) {
+        if (! is_water(x, y)) {
           log("INF: Dropping %s for deep water", tp->name().c_str());
           continue;
         }
@@ -1565,6 +1582,7 @@ void Level::create_biome_dungeon_place_random_floor_deco(Dungeonp d)
 void Level::create_biome_dungeon_place_sewer_pipes(Dungeonp d)
 {
   TRACE_AND_INDENT();
+
   //
   // Sometimes we have sewer pipes
   //
@@ -1766,9 +1784,9 @@ void Level::place_random_treasure(Dungeonp d)
   int tries        = 1000;
   int treasure_max = pcg_random_range(1, 10);
 
-  while (tries--) {
-    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
-    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
+  while (tries-- > 0) {
+    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
+    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
 
     if (d->is_rock(x, y) || d->is_wall(x, y)) {
       continue;
@@ -1833,9 +1851,9 @@ void Level::place_random_torches(Dungeonp d)
   int tries     = 1000;
   int torch_max = pcg_random_range(1, 10);
 
-  while (tries--) {
-    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK);
-    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK);
+  while (tries-- > 0) {
+    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
+    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
 
     if (d->is_rock(x, y) || d->is_wall(x, y)) {
       continue;
@@ -1879,6 +1897,33 @@ void Level::place_dry_grass(Dungeonp d)
 
         (void) thing_new(tp->name(), point(x, y));
       }
+    }
+  }
+}
+
+void Level::place_swimming_monsts(Dungeonp d)
+{
+  TRACE_AND_INDENT();
+
+  int tries  = 500;
+  int placed = 0;
+
+  while (tries-- > 0) {
+    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
+    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
+
+    if (! d->is_deep_water(x, y)) {
+      continue;
+    }
+
+    auto tp = get_dungeon_biome_random_monst(d, point(x, y), biome, MONST_TYPE_SWIMMER);
+    if (unlikely(! tp)) {
+      continue;
+    }
+
+    (void) thing_new(tp->name(), point(x, y));
+    if (placed++ > 10) {
+      break;
     }
   }
 }

@@ -9,6 +9,13 @@
 bool Thing::is_disliked_by_me(const point p)
 {
   TRACE_NO_INDENT();
+
+  if (is_swimmer()) {
+    if (! level->is_water(p)) {
+      return true;
+    }
+  }
+
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (environ_avoids_water()) {
       // log("%s is disliked line %d", p.to_string().c_str(), __LINE__);
@@ -46,6 +53,14 @@ bool Thing::is_disliked_by_me(const point p)
     // .111.
     // .....
     //
+    //
+    // Lava fire looks like:
+    // ..... .....
+    // .AAA. .LLL.
+    // .A8A. .L.L.
+    // .AAA. .LLL.
+    // ..... .....
+    //
     int  heat        = level->heatmap(p);
     auto avoid_level = environ_avoids_fire();
     if (damage_received_doubled_from_fire()) {
@@ -70,6 +85,13 @@ bool Thing::is_disliked_by_me(const point p)
 bool Tp::is_disliked_by_me(Levelp level, point p) const
 {
   TRACE_NO_INDENT();
+
+  if (is_swimmer()) {
+    if (! level->is_water(p)) {
+      return true;
+    }
+  }
+
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (environ_avoids_water()) {
       return true;

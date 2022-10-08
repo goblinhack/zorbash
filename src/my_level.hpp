@@ -166,7 +166,7 @@ public:
   //
   // Chances for various things to appear
   //
-  std::array< int, MONST_CLASS_MAX > d1000_chance_of_creating_monst {};
+  std::array< std::array< int, MONST_CLASS_MAX >, MONST_TYPE_MAX > d1000_chance_of_creating_monst {};
 
   int d1000_chance_of_creating_mob_challenge_class_a {};
   int d1000_chance_of_creating_mob_challenge_class_b {};
@@ -671,8 +671,8 @@ public:
   Tpp tp_random_weapon_class_c(const point p);
   Tpp tp_random_weapon_class_b(const point p);
 
-  Tpp get_random_monst(Dungeonp d, point p, biome_t);
-  Tpp get_random_monst(point p, biome_t biome, monst_class_t monst_class);
+  Tpp get_dungeon_biome_random_monst(Dungeonp d, point p, biome_t, monst_type_t);
+  Tpp get_random_monst(point p, biome_t, monst_type_t, monst_class_t);
 
   bool buffbox_over(const uint32_t slot);
   bool can_see_obstacle(int x, int y);
@@ -734,6 +734,7 @@ public:
 
   uint32_t num(void);
 
+  // start sort marker1
   uint8_t fade_in_map(const int x, const int y);
   uint8_t fade_in_map(const point p);
   uint8_t fade_in_map_no_check(const int x, const int y);
@@ -884,7 +885,9 @@ public:
   uint8_t noisemap_in_no_check(const point p);
   uint8_t noisemap_no_check(const int x, const int y);
   uint8_t noisemap_no_check(const point p);
+  // end sort marker1
 
+  // start sort marker2
   void assign_leaders_and_followers(void);
   void chances_of_creating_set(void);
   void clear(void);
@@ -895,8 +898,7 @@ public:
   void create_biome_dungeon_place_chasm(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_corridor(Dungeonp d, const std::string what, int depth);
   void create_biome_dungeon_place_deep_water(Dungeonp d, const std::string &what);
-  void place_random_water_monsts(void);
-  void create_biome_dungeon_place_floors(Dungeonp d, const std::string what, int depth, int var, int w, int h, int tries);
+  void create_biome_dungeon_place_floors(Dungeonp d, const std::string, int depth, int var, int w, int h, int tries);
   void create_biome_dungeon_place_lava(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_lava_smoke(Dungeonp d);
   void create_biome_dungeon_place_objects_with_normal_placement_rules(Dungeonp d);
@@ -908,11 +910,11 @@ public:
   void create_biome_dungeon_place_remaining_walls(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
   void create_biome_dungeon_place_sewer_pipes(Dungeonp d);
-  void create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int variant, int block_width, int block_height, int tries);
-  void created(void);
-  void create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth, int dungeon_walk_order_level_no);
+  void create_biome_dungeon_place_walls(Dungeonp d, Tpp tp, int, int block_width, int block_height, int tries);
   void create_biome_sewer_place_remaining_walls(const std::string &what);
   void create_biome_sewer_place_walls(int variant, int block_width, int block_height, int tries);
+  void created(void);
+  void create(point3d world_at, point grid_at, uint32_t seed, int difficulty_depth, int dungeon_walk_order_level_no);
   void cursor_describe(void);
   void cursor_find_on_visible_things(const int16_t minx, const int16_t miny, const int16_t maxx, const int16_t maxy);
   void cursor_move(void);
@@ -1165,7 +1167,9 @@ public:
   void place_foilage(Dungeonp d);
   void place_random_torches(Dungeonp d);
   void place_random_treasure(Dungeonp d);
+  void place_random_water_monsts(void);
   void place_spiderweb(Dungeonp d);
+  void place_swimming_monsts(Dungeonp d);
   void place_the_grid(void);
   void place_wet_grass(Dungeonp d);
   void poison_gas_explosion(point at);
@@ -1202,6 +1206,7 @@ public:
   void update(void);
   void update_water_next_to_lava(void);
   void wobble_set(float);
+  // end sort marker2
 
   uint8_t is_lava(const int x, const int y);
   uint8_t is_lava(const point p);

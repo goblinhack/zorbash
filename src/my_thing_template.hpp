@@ -2461,6 +2461,12 @@ typedef enum {
   MONST_CLASS_MAX,
 } monst_class_t;
 
+typedef enum {
+  MONST_TYPE_NORMAL,
+  MONST_TYPE_SWIMMER,
+  MONST_TYPE_MAX,
+} monst_type_t;
+
 extern Tpidmap   tp_id_map;
 extern Tpnamemap tp_name_map;
 
