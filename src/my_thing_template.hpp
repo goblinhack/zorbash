@@ -100,6 +100,7 @@ private:
   std::vector< int > _damage_draining_chance_d1000 {};
   std::vector< int > _damage_poison_chance_d1000 {};
 
+  // start sort marker1
   int _aggression_pct {};
   int _ai_detect_secret_doors {};
   int _ai_obstacle {};
@@ -116,6 +117,7 @@ private:
   int _attack_no_msg {};
   int _attacks_per_round {};
   int _attack_undead {};
+  int _bite_amount {};
   int _blast_max_radius {};
   int _blast_min_radius {};
   int _blit_bot_off {};
@@ -149,17 +151,6 @@ private:
   int _distance_recruitment_max {};
   int _distance_throw {};
   int _distance_vision {};
-  int _is_eater_of_amulets {};
-  int _is_eater_of_armor {};
-  int _is_eater_of_boots {};
-  int _is_eater_of_cloaks {};
-  int _is_eater_of_gauntlets {};
-  int _is_eater_of_helmets {};
-  int _is_eater_of_rings {};
-  int _is_eater_of_shields {};
-  int _is_eater_of_staffs {};
-  int _is_eater_of_wands {};
-  int _is_eater_of_weapons {};
   int _enchant_level {};
   int _enchant_max {};
   int _environ_avoids_acid {};
@@ -212,8 +203,8 @@ private:
   int _has_temperature {};
   int _hunger_clock_tick_freq {};
   int _hunger_is_hunger_level_hungry_at_pct {};
-  int _hunger_is_insatiable {};
   int _hunger_is_hunger_level_starving_at_pct {};
+  int _hunger_is_insatiable {};
   int _internal_has_dir_anim {};
   int _internal_has_hp_anim {};
   int _is_able_to_attack_mobs {};
@@ -241,6 +232,7 @@ private:
   int _is_able_to_learn_skills {};
   int _is_able_to_move_diagonally {};
   int _is_able_to_open_doors {};
+  int _is_able_to_rest {};
   int _is_able_to_see_in_the_dark {};
   int _is_able_to_see_through_doors {};
   int _is_able_to_shove {};
@@ -285,7 +277,9 @@ private:
   int _is_barrel {};
   int _is_basalt {};
   int _is_biome_dungeon {};
+  int _is_biome_sewer {};
   int _is_biome_swamp {};
+  int _is_biome_water {};
   int _is_bleeder {};
   int _is_block_of_ice {};
   int _is_bones {};
@@ -339,14 +333,25 @@ private:
   int _is_droppable {};
   int _is_dry_grass {};
   int _is_dry_grass_trampled {};
+  int _is_eater_of_amulets {};
+  int _is_eater_of_armor {};
+  int _is_eater_of_boots {};
+  int _is_eater_of_cloaks {};
   int _is_eater_of_food {};
+  int _is_eater_of_gauntlets {};
   int _is_eater_of_green_blood {};
+  int _is_eater_of_helmets {};
   int _is_eater_of_jelly {};
   int _is_eater_of_magical_items {};
   int _is_eater_of_meat {};
   int _is_eater_of_potions {};
   int _is_eater_of_red_blood {};
+  int _is_eater_of_rings {};
+  int _is_eater_of_shields {};
+  int _is_eater_of_staffs {};
   int _is_eater_of_treasure {};
+  int _is_eater_of_wands {};
+  int _is_eater_of_weapons {};
   int _is_enchantable {};
   int _is_enchantstone {};
   int _is_engulfer {};
@@ -389,6 +394,7 @@ private:
   int _is_immune_to_water {};
   int _is_intelligent {};
   int _is_interesting {}; // e.g. something edible or a monst or lava
+  int _is_internal {};
   int _is_item {};
   int _is_item_carrier {};
   int _is_item_carrier0 {};
@@ -467,6 +473,7 @@ private:
   int _is_steam {};
   int _is_sticky {};
   int _is_stone {};
+  int _is_swimmer {};
   int _is_sword {};
   int _is_target_radial {};
   int _is_target_select {};
@@ -510,6 +517,8 @@ private:
   int _minion_limit {};
   int _move_speed {};
   int _move_speed_mod {};
+  int _msg_is_seen {};
+  int _msg_is_wounded {};
   int _noise_additional_on_jump_end {};
   int _noise_additional_on_teleporting {};
   int _noise_blocker {};
@@ -621,24 +630,20 @@ private:
   int _unused_flag5 {};
   int _unused_flag50 {};
   int _unused_flag51 {};
-  int _is_biome_water {};
-  int _is_biome_sewer {};
-  int _is_swimmer {};
-  int _bite_amount {};
   int _unused_flag56 {};
-  int _is_able_to_rest {};
-  int _msg_is_wounded {};
-  int _msg_is_seen {};
   int _unused_flag6 {};
-  int _is_internal {};
   int _unused_flag7 {};
   int _unused_flag8 {};
   int _unused_flag87 {};
   int _unused_flag9 {};
   int _weapon_damage {};
   int _weapon_use_distance {};
+  // end sort marker1
 
+  // start sort marker2
   std::string _damage_acid_dice_str;
+  std::string _damage_bite_dice_str;
+  std::string _damage_claw_dice_str;
   std::string _damage_cold_dice_str;
   std::string _damage_crush_dice_str;
   std::string _damage_digest_dice_str;
@@ -646,8 +651,6 @@ private:
   std::string _damage_energy_dice_str;
   std::string _damage_fire_dice_str;
   std::string _damage_future1_dice_str;
-  std::string _damage_bite_dice_str;
-  std::string _damage_claw_dice_str;
   std::string _damage_lightning_dice_str;
   std::string _damage_melee_dice_str;
   std::string _damage_nat_att_dice_str;
@@ -665,6 +668,8 @@ private:
   std::string _name;
   std::string _nutrition_dice_str;
   std::string _on_attacking_dmg_acid_do;
+  std::string _on_attacking_dmg_bite_do;
+  std::string _on_attacking_dmg_claw_do;
   std::string _on_attacking_dmg_cold_do;
   std::string _on_attacking_dmg_crush_do;
   std::string _on_attacking_dmg_digest_do;
@@ -672,8 +677,6 @@ private:
   std::string _on_attacking_dmg_energy_do;
   std::string _on_attacking_dmg_fire_do;
   std::string _on_attacking_dmg_future1_do;
-  std::string _on_attacking_dmg_bite_do;
-  std::string _on_attacking_dmg_claw_do;
   std::string _on_attacking_dmg_lightning_do;
   std::string _on_attacking_dmg_melee_do;
   std::string _on_attacking_dmg_nat_att_do;
@@ -702,6 +705,8 @@ private:
   std::string _on_open_do;
   std::string _on_owner_add_do;
   std::string _on_owner_attack_dmg_acid_do;
+  std::string _on_owner_attack_dmg_bite_do;
+  std::string _on_owner_attack_dmg_claw_do;
   std::string _on_owner_attack_dmg_cold_do;
   std::string _on_owner_attack_dmg_crush_do;
   std::string _on_owner_attack_dmg_digest_do;
@@ -709,8 +714,6 @@ private:
   std::string _on_owner_attack_dmg_energy_do;
   std::string _on_owner_attack_dmg_fire_do;
   std::string _on_owner_attack_dmg_future1_do;
-  std::string _on_owner_attack_dmg_bite_do;
-  std::string _on_owner_attack_dmg_claw_do;
   std::string _on_owner_attack_dmg_lightning_do;
   std::string _on_owner_attack_dmg_melee_do;
   std::string _on_owner_attack_dmg_nat_att_do;
@@ -721,6 +724,8 @@ private:
   std::string _on_owner_attack_dmg_stat_str_do;
   std::string _on_owner_attack_dmg_water_do;
   std::string _on_owner_receive_dmg_acid_do;
+  std::string _on_owner_receive_dmg_bite_do;
+  std::string _on_owner_receive_dmg_claw_do;
   std::string _on_owner_receive_dmg_cold_do;
   std::string _on_owner_receive_dmg_crush_do;
   std::string _on_owner_receive_dmg_digest_do;
@@ -728,8 +733,6 @@ private:
   std::string _on_owner_receive_dmg_energy_do;
   std::string _on_owner_receive_dmg_fire_do;
   std::string _on_owner_receive_dmg_future1_do;
-  std::string _on_owner_receive_dmg_bite_do;
-  std::string _on_owner_receive_dmg_claw_do;
   std::string _on_owner_receive_dmg_lightning_do;
   std::string _on_owner_receive_dmg_melee_do;
   std::string _on_owner_receive_dmg_nat_att_do;
@@ -742,6 +745,8 @@ private:
   std::string _on_owner_remove_do;
   std::string _on_polymorphed_do;
   std::string _on_receiving_dmg_acid_do;
+  std::string _on_receiving_dmg_bite_do;
+  std::string _on_receiving_dmg_claw_do;
   std::string _on_receiving_dmg_cold_do;
   std::string _on_receiving_dmg_crush_do;
   std::string _on_receiving_dmg_digest_do;
@@ -749,8 +754,6 @@ private:
   std::string _on_receiving_dmg_energy_do;
   std::string _on_receiving_dmg_fire_do;
   std::string _on_receiving_dmg_future1_do;
-  std::string _on_receiving_dmg_bite_do;
-  std::string _on_receiving_dmg_claw_do;
   std::string _on_receiving_dmg_lightning_do;
   std::string _on_receiving_dmg_melee_do;
   std::string _on_receiving_dmg_nat_att_do;
@@ -801,6 +804,7 @@ private:
   std::string _text_unused1;
   std::string _text_unused2;
   std::string _text_unused3;
+  // end sort marker2
 
 public:
   Tp(void);
@@ -936,8 +940,10 @@ public:
   std::string to_string(void);
   std::string to_short_string(void);
 
+  // start sort marker3
   const std::string &damage_acid_dice_str(void) const;
-  const std::string &damage_water_dice_str(void) const;
+  const std::string &damage_bite_dice_str(void) const;
+  const std::string &damage_claw_dice_str(void) const;
   const std::string &damage_cold_dice_str(void) const;
   const std::string &damage_crush_dice_str(void) const;
   const std::string &damage_digest_dice_str(void) const;
@@ -945,14 +951,13 @@ public:
   const std::string &damage_energy_dice_str(void) const;
   const std::string &damage_fire_dice_str(void) const;
   const std::string &damage_future1_dice_str(void) const;
-  const std::string &damage_bite_dice_str(void) const;
-  const std::string &damage_claw_dice_str(void) const;
   const std::string &damage_lightning_dice_str(void) const;
   const std::string &damage_melee_dice_str(void) const;
-  const std::string &damage_nat_att_type(void) const;
   const std::string &damage_nat_att_dice_str(void) const;
+  const std::string &damage_nat_att_type(void) const;
   const std::string &damage_necrosis_dice_str(void) const;
   const std::string &damage_poison_dice_str(void) const;
+  const std::string &damage_water_dice_str(void) const;
   const std::string &equip_carry_anim(void) const;
   const std::string &gfx_anim_use(void) const;
   const std::string &gold_value_dice_str(void) const;
@@ -963,7 +968,8 @@ public:
   const std::string &name(void) const;
   const std::string &nutrition_dice_str(void) const;
   const std::string &on_attacking_dmg_acid_do(void) const;
-  const std::string &on_attacking_dmg_water_do(void) const;
+  const std::string &on_attacking_dmg_bite_do(void) const;
+  const std::string &on_attacking_dmg_claw_do(void) const;
   const std::string &on_attacking_dmg_cold_do(void) const;
   const std::string &on_attacking_dmg_crush_do(void) const;
   const std::string &on_attacking_dmg_digest_do(void) const;
@@ -971,8 +977,6 @@ public:
   const std::string &on_attacking_dmg_energy_do(void) const;
   const std::string &on_attacking_dmg_fire_do(void) const;
   const std::string &on_attacking_dmg_future1_do(void) const;
-  const std::string &on_attacking_dmg_bite_do(void) const;
-  const std::string &on_attacking_dmg_claw_do(void) const;
   const std::string &on_attacking_dmg_lightning_do(void) const;
   const std::string &on_attacking_dmg_melee_do(void) const;
   const std::string &on_attacking_dmg_nat_att_do(void) const;
@@ -981,14 +985,14 @@ public:
   const std::string &on_attacking_dmg_stat_att_do(void) const;
   const std::string &on_attacking_dmg_stat_con_do(void) const;
   const std::string &on_attacking_dmg_stat_str_do(void) const;
+  const std::string &on_attacking_dmg_water_do(void) const;
   const std::string &on_awake_do(void) const;
   const std::string &on_born_do(void) const;
   const std::string &on_death_do(void) const;
   const std::string &on_death_of_a_follower_do(void) const;
   const std::string &on_death_of_my_leader_do(void) const;
-  const std::string &on_enchant_do(void) const;
-  const std::string &on_thrown_do(void) const;
   const std::string &on_dropped_do(void) const;
+  const std::string &on_enchant_do(void) const;
   const std::string &on_equip_do(void) const;
   const std::string &on_fall_do(void) const;
   const std::string &on_final_use_do(void) const;
@@ -1001,7 +1005,8 @@ public:
   const std::string &on_open_do(void) const;
   const std::string &on_owner_add_do(void) const;
   const std::string &on_owner_attack_dmg_acid_do(void) const;
-  const std::string &on_owner_attack_dmg_water_do(void) const;
+  const std::string &on_owner_attack_dmg_bite_do(void) const;
+  const std::string &on_owner_attack_dmg_claw_do(void) const;
   const std::string &on_owner_attack_dmg_cold_do(void) const;
   const std::string &on_owner_attack_dmg_crush_do(void) const;
   const std::string &on_owner_attack_dmg_digest_do(void) const;
@@ -1009,8 +1014,6 @@ public:
   const std::string &on_owner_attack_dmg_energy_do(void) const;
   const std::string &on_owner_attack_dmg_fire_do(void) const;
   const std::string &on_owner_attack_dmg_future1_do(void) const;
-  const std::string &on_owner_attack_dmg_bite_do(void) const;
-  const std::string &on_owner_attack_dmg_claw_do(void) const;
   const std::string &on_owner_attack_dmg_lightning_do(void) const;
   const std::string &on_owner_attack_dmg_melee_do(void) const;
   const std::string &on_owner_attack_dmg_nat_att_do(void) const;
@@ -1019,8 +1022,10 @@ public:
   const std::string &on_owner_attack_dmg_stat_att_do(void) const;
   const std::string &on_owner_attack_dmg_stat_con_do(void) const;
   const std::string &on_owner_attack_dmg_stat_str_do(void) const;
+  const std::string &on_owner_attack_dmg_water_do(void) const;
   const std::string &on_owner_receive_dmg_acid_do(void) const;
-  const std::string &on_owner_receive_dmg_water_do(void) const;
+  const std::string &on_owner_receive_dmg_bite_do(void) const;
+  const std::string &on_owner_receive_dmg_claw_do(void) const;
   const std::string &on_owner_receive_dmg_cold_do(void) const;
   const std::string &on_owner_receive_dmg_crush_do(void) const;
   const std::string &on_owner_receive_dmg_digest_do(void) const;
@@ -1028,8 +1033,6 @@ public:
   const std::string &on_owner_receive_dmg_energy_do(void) const;
   const std::string &on_owner_receive_dmg_fire_do(void) const;
   const std::string &on_owner_receive_dmg_future1_do(void) const;
-  const std::string &on_owner_receive_dmg_bite_do(void) const;
-  const std::string &on_owner_receive_dmg_claw_do(void) const;
   const std::string &on_owner_receive_dmg_lightning_do(void) const;
   const std::string &on_owner_receive_dmg_melee_do(void) const;
   const std::string &on_owner_receive_dmg_nat_att_do(void) const;
@@ -1038,10 +1041,12 @@ public:
   const std::string &on_owner_receive_dmg_stat_att_do(void) const;
   const std::string &on_owner_receive_dmg_stat_con_do(void) const;
   const std::string &on_owner_receive_dmg_stat_str_do(void) const;
+  const std::string &on_owner_receive_dmg_water_do(void) const;
   const std::string &on_owner_remove_do(void) const;
   const std::string &on_polymorphed_do(void) const;
   const std::string &on_receiving_dmg_acid_do(void) const;
-  const std::string &on_receiving_dmg_water_do(void) const;
+  const std::string &on_receiving_dmg_bite_do(void) const;
+  const std::string &on_receiving_dmg_claw_do(void) const;
   const std::string &on_receiving_dmg_cold_do(void) const;
   const std::string &on_receiving_dmg_crush_do(void) const;
   const std::string &on_receiving_dmg_digest_do(void) const;
@@ -1049,8 +1054,6 @@ public:
   const std::string &on_receiving_dmg_energy_do(void) const;
   const std::string &on_receiving_dmg_fire_do(void) const;
   const std::string &on_receiving_dmg_future1_do(void) const;
-  const std::string &on_receiving_dmg_bite_do(void) const;
-  const std::string &on_receiving_dmg_claw_do(void) const;
   const std::string &on_receiving_dmg_lightning_do(void) const;
   const std::string &on_receiving_dmg_melee_do(void) const;
   const std::string &on_receiving_dmg_nat_att_do(void) const;
@@ -1059,10 +1062,12 @@ public:
   const std::string &on_receiving_dmg_stat_att_do(void) const;
   const std::string &on_receiving_dmg_stat_con_do(void) const;
   const std::string &on_receiving_dmg_stat_str_do(void) const;
+  const std::string &on_receiving_dmg_water_do(void) const;
   const std::string &on_resting_do(void) const;
   const std::string &on_stuck_do(void) const;
   const std::string &on_swing_do(void) const;
   const std::string &on_teleport_do(void) const;
+  const std::string &on_thrown_do(void) const;
   const std::string &on_tick_do(void) const;
   const std::string &on_unequip_do(void) const;
   const std::string &on_use_do(void) const;
@@ -1098,7 +1103,9 @@ public:
   const std::string &text_unused2(void) const;
   const std::string &text_unused3(void) const;
   const std::string &text_unused(void) const;
+  // end sort marker3
 
+  // start sort marker4
   int aggression_pct(void) const;
   int ai_detect_secret_doors(void) const;
   int ai_obstacle(void) const;
@@ -1647,7 +1654,9 @@ public:
   int unused_flag8(void) const;
   int unused_flag9(void) const;
   int weapon_damage(void) const;
+  // end sort marker4
 
+  // start sort marker5
   void aggression_pct_set(int v);
   void ai_detect_secret_doors_set(int v);
   void ai_obstacle_set(int v);
@@ -2323,6 +2332,7 @@ public:
   void weapon_use_distance_set(int v);
   void z_depth_set(int v);
   void z_prio_set(int v);
+  // end sort marker5
 
   void damage_water_chance_d1000_set(int index, int v);
   void damage_acid_chance_d1000_set(int index, int v);

@@ -22,6 +22,7 @@
 #include "my_thing_template.hpp"
 
 static PyMethodDef python_c_METHODS[] = {
+    // start sort marker1
     MY_ADD_PYTHON_FUNCTION(level_ai_detect_secret_doors_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_resent_count_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_wanderer_at),
@@ -1610,6 +1611,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_WRAPPED_PYTHON_FUNCTION(tp_load),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(tp_update),
     PYFUNC_REF(SDLGetKeyState),
+    // end sort marker1
 
     {0, 0, 0, 0} /* sentinel */
 };

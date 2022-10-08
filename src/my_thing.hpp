@@ -415,6 +415,7 @@ public:
   std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_firing(const point s, const point e, size_t max_elems = 0);
 
+  // start sort marker1
   bool ai_blocked_completely(void);
   bool ai_blocked(void);
   bool ai_choose_avoid_goals(std::multiset< Goal > &avoid_goals, const Goal &goal);
@@ -667,6 +668,7 @@ public:
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
+  // end sort marker1
 
   std::vector< std::string > on_get_text_long_description(void);
 
@@ -922,6 +924,7 @@ public:
   float teleport_distance_with_modifiers_get(void);
   float update_wobble(void);
 
+  // start sort marker2
   int aggression_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
@@ -1989,6 +1992,7 @@ public:
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
+  // end sort marker2
 
   point3d born_get(void);
 
@@ -2037,6 +2041,7 @@ public:
   struct FovMap_ *can_see_currently(void);
   struct FovMap_ *can_see_ever(void);
 
+  // start sort marker2
   ts_t ts_anim_delay_end_decr(ts_t);
   ts_t ts_anim_delay_end_decr(void);
   ts_t ts_bounce_begin_decr(ts_t);
@@ -2097,6 +2102,7 @@ public:
   ts_t ts_flip_start_set(ts_t);
   ts_t ts_lunge_begin_set(ts_t);
   ts_t ts_lunge_end_set(ts_t);
+  // end sort marker3
 
   uint32_t tick_last_location_check_decr(uint32_t);
   uint32_t tick_last_location_check_decr(void);
@@ -2183,6 +2189,7 @@ public:
   uint8_t is_visible(void);
   uint8_t z_prio(void);
 
+  // start sort marker4
   void achieve_goals_in_death(void);
   void burnt_set(void);
   void frozen_set(void);
@@ -2463,6 +2470,7 @@ public:
   void weapon_sheath(void);
   void wobble(float wobble);
   void wobble_set(float);
+  // end sort marker4
 
   const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *stat_const_bag(void);
 

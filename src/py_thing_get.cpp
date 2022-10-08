@@ -107,6 +107,7 @@
     }                                                                                                                \
   }
 
+// start sort marker1
 THING_BODY_GET_BOOL(level_is_attackable_by_monst, is_attackable_by_monst)
 THING_BODY_GET_BOOL(level_is_attackable_by_player, is_attackable_by_player)
 THING_BODY_GET_BOOL(thing_aggression_pct, aggression_pct)
@@ -578,3 +579,4 @@ THING_BODY_GET_THING(thing_immediate_owner_id_get, immediate_owner_id)
 THING_BODY_GET_THING(thing_immediate_spawned_owner_id_get, immediate_spawned_owner_id)
 THING_BODY_GET_THING(thing_leader_id_get, leader_id)
 THING_BODY_GET_THING(thing_top_owner_id_get, top_owner_id)
+// end sort marker1

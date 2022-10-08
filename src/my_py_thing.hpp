@@ -7,6 +7,7 @@
 #define _MY_PY_THING_HPP_
 #include <Python.h>
 
+// start sort marker1
 PyObject *thing_aggression_pct(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_detect_secret_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_resent_count(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -16,6 +17,7 @@ PyObject *thing_attack_engulf_chance_d1000(PyObject *obj, PyObject *args, PyObje
 PyObject *thing_attack_no_msg(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attacks_per_round(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_attack_undead(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_bite_amount(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -156,6 +158,7 @@ PyObject *thing_is_able_to_jump_without_tiring(PyObject *obj, PyObject *args, Py
 PyObject *thing_is_able_to_learn_skills(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_move_diagonally(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_open_doors(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_rest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_in_the_dark(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_see_through_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_sleep(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -198,7 +201,9 @@ PyObject *thing_is_bag(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_barrel(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_basalt(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_dungeon(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_biome_sewer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_biome_swamp(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_biome_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bleeder(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_block_of_ice(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bloodied(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -400,6 +405,7 @@ PyObject *thing_is_steal_item_chance_d1000(PyObject *obj, PyObject *args, PyObje
 PyObject *thing_is_steam(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_stone(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_swimmer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sword(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_target_radial(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_target_select(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -593,17 +599,13 @@ PyObject *thing_unused_flag49(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag50(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag51(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_biome_water(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_biome_sewer(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_swimmer(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_bite_amount(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag56(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_able_to_rest(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag87(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
+// end sort marker1
 
 #endif
