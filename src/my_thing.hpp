@@ -198,6 +198,7 @@ public:
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
+  // start sort marker5
   uint64_t corpse_cleanup                               : 1 {};
   uint64_t has_ever_moved                               : 1 {};
   uint64_t has_light                                    : 1 {};
@@ -248,12 +249,14 @@ public:
   uint64_t is_waiting_to_descend_sewer                  : 1 {};
   uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {};
   uint64_t is_wounded_msg                               : 1 {};
-  uint64_t was_frozen                                   : 1 {}; // was frozen at the start of the tick
+  uint64_t was_frozen                                   : 1 {}; /* was frozen at the start of the tick */
+  // end sort marker5
 
   //
-  // These are flags used to make sure we set or unset flags onto
-  // the level only once.
+  // These are flags used to make sure we set or unset flags onto the level only once.
   //
+
+  // start sort marker6
   uint64_t i_set_is_able_to_burn            : 1 {}; // may produce a flame
   uint64_t i_set_is_acid                    : 1 {};
   uint64_t i_set_is_ascend_dungeon          : 1 {};
@@ -316,6 +319,7 @@ public:
   uint64_t i_set_is_wet_grass               : 1 {};
   uint64_t i_set_noise_blocker              : 1 {};
   uint64_t i_set_water                      : 1 {};
+  // end sort marker6
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -2041,67 +2045,67 @@ public:
   struct FovMap_ *can_see_currently(void);
   struct FovMap_ *can_see_ever(void);
 
-  // start sort marker2
+  // start sort marker3
   ts_t ts_anim_delay_end_decr(ts_t);
   ts_t ts_anim_delay_end_decr(void);
-  ts_t ts_bounce_begin_decr(ts_t);
-  ts_t ts_bounce_begin_decr(void);
-  ts_t ts_bounce_end_decr(ts_t);
-  ts_t ts_bounce_end_decr(void);
-  ts_t ts_fadeup_begin_decr(ts_t);
-  ts_t ts_fadeup_begin_decr(void);
-  ts_t ts_fadeup_end_decr(ts_t);
-  ts_t ts_fadeup_end_decr(void);
-  ts_t ts_fall_begin_decr(ts_t);
-  ts_t ts_fall_begin_decr(void);
-  ts_t ts_fall_end_decr(ts_t);
-  ts_t ts_fall_end_decr(void);
-  ts_t ts_flip_start_decr(ts_t);
-  ts_t ts_flip_start_decr(void);
-  ts_t ts_lunge_begin_decr(ts_t);
-  ts_t ts_lunge_begin_decr(void);
-  ts_t ts_lunge_end_decr(ts_t);
-  ts_t ts_lunge_end_decr(void);
-  ts_t ts_anim_delay_end(void);
-  ts_t ts_bounce_begin(void);
-  ts_t ts_bounce_end(void);
-  ts_t ts_fadeup_begin(void);
-  ts_t ts_fadeup_end(void);
-  ts_t ts_fall_begin(void);
-  ts_t ts_fall_end(void);
-  ts_t ts_flip_start_get(void);
-  ts_t ts_lunge_begin(void);
-  ts_t ts_lunge_end(void);
   ts_t ts_anim_delay_end_incr(ts_t);
   ts_t ts_anim_delay_end_incr(void);
+  ts_t ts_anim_delay_end_set(ts_t);
+  ts_t ts_anim_delay_end(void);
+  ts_t ts_bounce_begin_decr(ts_t);
+  ts_t ts_bounce_begin_decr(void);
   ts_t ts_bounce_begin_incr(ts_t);
   ts_t ts_bounce_begin_incr(void);
+  ts_t ts_bounce_begin_set(ts_t);
+  ts_t ts_bounce_begin(void);
+  ts_t ts_bounce_end_decr(ts_t);
+  ts_t ts_bounce_end_decr(void);
   ts_t ts_bounce_end_incr(ts_t);
   ts_t ts_bounce_end_incr(void);
+  ts_t ts_bounce_end_set(ts_t);
+  ts_t ts_bounce_end(void);
+  ts_t ts_fadeup_begin_decr(ts_t);
+  ts_t ts_fadeup_begin_decr(void);
   ts_t ts_fadeup_begin_incr(ts_t);
   ts_t ts_fadeup_begin_incr(void);
+  ts_t ts_fadeup_begin_set(ts_t);
+  ts_t ts_fadeup_begin(void);
+  ts_t ts_fadeup_end_decr(ts_t);
+  ts_t ts_fadeup_end_decr(void);
   ts_t ts_fadeup_end_incr(ts_t);
   ts_t ts_fadeup_end_incr(void);
+  ts_t ts_fadeup_end_set(ts_t);
+  ts_t ts_fadeup_end(void);
+  ts_t ts_fall_begin_decr(ts_t);
+  ts_t ts_fall_begin_decr(void);
   ts_t ts_fall_begin_incr(ts_t);
   ts_t ts_fall_begin_incr(void);
+  ts_t ts_fall_begin_set(ts_t);
+  ts_t ts_fall_begin(void);
+  ts_t ts_fall_end_decr(ts_t);
+  ts_t ts_fall_end_decr(void);
   ts_t ts_fall_end_incr(ts_t);
   ts_t ts_fall_end_incr(void);
+  ts_t ts_fall_end_set(ts_t);
+  ts_t ts_fall_end(void);
+  ts_t ts_flip_start_decr(ts_t);
+  ts_t ts_flip_start_decr(void);
+  ts_t ts_flip_start_get(void);
   ts_t ts_flip_start_incr(ts_t);
   ts_t ts_flip_start_incr(void);
+  ts_t ts_flip_start_set(ts_t);
+  ts_t ts_lunge_begin_decr(ts_t);
+  ts_t ts_lunge_begin_decr(void);
   ts_t ts_lunge_begin_incr(ts_t);
   ts_t ts_lunge_begin_incr(void);
+  ts_t ts_lunge_begin_set(ts_t);
+  ts_t ts_lunge_begin(void);
+  ts_t ts_lunge_end_decr(ts_t);
+  ts_t ts_lunge_end_decr(void);
   ts_t ts_lunge_end_incr(ts_t);
   ts_t ts_lunge_end_incr(void);
-  ts_t ts_anim_delay_end_set(ts_t);
-  ts_t ts_bounce_begin_set(ts_t);
-  ts_t ts_bounce_end_set(ts_t);
-  ts_t ts_fadeup_begin_set(ts_t);
-  ts_t ts_fadeup_end_set(ts_t);
-  ts_t ts_fall_begin_set(ts_t);
-  ts_t ts_fall_end_set(ts_t);
-  ts_t ts_flip_start_set(ts_t);
-  ts_t ts_lunge_begin_set(ts_t);
   ts_t ts_lunge_end_set(ts_t);
+  ts_t ts_lunge_end(void);
   // end sort marker3
 
   uint32_t tick_last_location_check_decr(uint32_t);
@@ -2191,8 +2195,6 @@ public:
 
   // start sort marker4
   void achieve_goals_in_death(void);
-  void burnt_set(void);
-  void frozen_set(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
   void add_avoid(Thingp attacker);
@@ -2239,6 +2241,7 @@ public:
   void buff_deactivate(Thingp what);
   void buff_remove_all(void);
   void buff_tick(void);
+  void burnt_set(void);
   void can_see(point);
   void change_state(int new_state, const std::string &why);
   void chasm_tick(void);
@@ -2307,6 +2310,7 @@ public:
   void fadeup_height_set(float);
   void fall_height_set(float);
   void fall_into_the_void(void);
+  void frozen_set(void);
   void gas_poison_tick(void);
   void gc(void);
   void goal_penalty_tick(void);
@@ -2335,8 +2339,8 @@ public:
   void level_push(void);
   void level_rejoin(void);
   void lifespan_tick(void);
-  void light_dist_including_torch_effect_get(uint8_t &light_dist);
   void light_distance_upd_with_torch_effect(uint8_t &light_dist);
+  void light_dist_including_torch_effect_get(uint8_t &light_dist);
   void location_check_me(void);
   void location_check(Thingp filter_to = nullptr);
   void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
