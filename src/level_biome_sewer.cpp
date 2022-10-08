@@ -12,7 +12,7 @@
 #include "my_thing_ai.hpp"
 #include "my_thing_template.hpp"
 
-bool Level::create_sewer(point3d at, uint32_t seed)
+bool Level::create_biome_sewer(point3d at, uint32_t seed)
 {
   TRACE_AND_INDENT();
   log("Create sewer at (%d,%d,%d)", at.x, at.y, at.z);
@@ -29,7 +29,7 @@ bool Level::create_sewer(point3d at, uint32_t seed)
     return false;
   }
 
-  if (! create_sewer_pipes(at)) {
+  if (! create_biome_sewer_pipes(at)) {
     return false;
   }
   if (g_errored) {
@@ -37,56 +37,56 @@ bool Level::create_sewer(point3d at, uint32_t seed)
   }
 
   auto tries = 10000;
-  create_sewer_place_walls(1, 6, 6, tries);
+  create_biome_sewer_place_walls(1, 6, 6, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(1, 6, 3, tries);
+  create_biome_sewer_place_walls(1, 6, 3, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(1, 3, 6, tries);
+  create_biome_sewer_place_walls(1, 3, 6, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(1, 3, 3, tries);
+  create_biome_sewer_place_walls(1, 3, 3, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(2, 3, 3, tries);
+  create_biome_sewer_place_walls(2, 3, 3, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(1, 2, 2, tries);
+  create_biome_sewer_place_walls(1, 2, 2, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(2, 2, 2, tries);
+  create_biome_sewer_place_walls(2, 2, 2, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(3, 2, 2, tries);
+  create_biome_sewer_place_walls(3, 2, 2, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(1, 2, 1, tries);
+  create_biome_sewer_place_walls(1, 2, 1, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(2, 2, 1, tries);
+  create_biome_sewer_place_walls(2, 2, 1, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(1, 1, 2, tries);
+  create_biome_sewer_place_walls(1, 1, 2, tries);
   if (g_errored) {
     return false;
   }
-  create_sewer_place_walls(2, 1, 2, tries);
+  create_biome_sewer_place_walls(2, 1, 2, tries);
   if (g_errored) {
     return false;
   }
 
-  create_sewer_place_remaining_walls("sewer_wall");
+  create_biome_sewer_place_remaining_walls("sewer_wall");
   if (g_errored) {
     return false;
   }
@@ -94,7 +94,7 @@ bool Level::create_sewer(point3d at, uint32_t seed)
   return true;
 }
 
-bool Level::create_sewer_pipes(point3d at)
+bool Level::create_biome_sewer_pipes(point3d at)
 {
   TRACE_NO_INDENT();
 
@@ -333,7 +333,7 @@ bool Level::create_sewer_pipes(point3d at)
   return true;
 }
 
-void Level::create_sewer_place_walls(int variant, int block_width, int block_height, int tries)
+void Level::create_biome_sewer_place_walls(int variant, int block_width, int block_height, int tries)
 {
   TRACE_AND_INDENT();
   auto tp = tp_random_sewer_wall();
@@ -414,7 +414,7 @@ void Level::create_sewer_place_walls(int variant, int block_width, int block_hei
   }
 }
 
-void Level::create_sewer_place_remaining_walls(const std::string &what)
+void Level::create_biome_sewer_place_remaining_walls(const std::string &what)
 {
   TRACE_AND_INDENT();
   for (auto x = 0; x < MAP_WIDTH; x++) {

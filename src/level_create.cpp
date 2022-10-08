@@ -64,9 +64,9 @@ void Level::create(point3d world_at, point grid_at, uint32_t seed, int difficult
 
   bool ret;
   if (world_at.z & 1) {
-    ret = create_dungeon(world_at, seed);
+    ret = create_biome_dungeon(world_at, seed);
   } else {
-    ret = create_sewer(world_at, seed);
+    ret = create_biome_sewer(world_at, seed);
   }
 
   if (! monst_count) {
