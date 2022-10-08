@@ -70,6 +70,10 @@ Tpp Level::get_random_monst(point p, biome_t biome, monst_class_t monst_class)
     }
 
     auto tp = tp_get_with_rarity_filter(tp_monst[ biome ][ monst_class ]);
+    if (! tp) {
+      continue;
+    }
+
     if (tp->is_disliked_by_me(this, p)) {
       continue;
     }

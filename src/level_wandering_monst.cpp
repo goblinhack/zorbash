@@ -18,8 +18,23 @@
 
 bool Level::create_wandering_monster(void)
 {
-  if (game->tick_current % 100) {
-    return false;
+  switch (biome) {
+    case BIOME_DUNGEON:
+      if (game->tick_current % 100) {
+        return false;
+      }
+      break;
+    case BIOME_SWAMP:
+      if (game->tick_current % 100) {
+        return false;
+      }
+      break;
+    case BIOME_SEWER:
+      if (game->tick_current % 50) {
+        return false;
+      }
+      break;
+    default: return false;
   }
 
   if (monst_count >= LEVEL_MONST_COUNT_MAX) {
@@ -27,7 +42,7 @@ bool Level::create_wandering_monster(void)
   }
 
   TRACE_AND_INDENT();
-  log("Place wandering monster");
+  dbg("Place wandering monster");
   TRACE_AND_INDENT();
 
   Tpp tp    = nullptr;
@@ -47,8 +62,10 @@ bool Level::create_wandering_monster(void)
       continue;
     }
 
-    if (is_floor(x, y) || is_corridor(x, y) || is_bridge(x, y) || is_water(x, y)) {
-      continue;
+    if (biome == BIOME_DUNGEON) {
+      if (is_floor(x, y) || is_corridor(x, y) || is_bridge(x, y) || is_water(x, y)) {
+        continue;
+      }
     }
 
     point p(x, y);
@@ -70,8 +87,9 @@ bool Level::create_wandering_monster(void)
     }
 
     if (tp) {
-      dbg("INF: Creating %s", tp->name().c_str());
+      con("Place wandering monst %s", tp->name().c_str());
       thing_new(tp->name(), point(x, y));
+      return true;
     }
   }
   return false;

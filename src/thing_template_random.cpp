@@ -299,6 +299,11 @@ void tp_random_init(void)
 Tpp tp_get_with_rarity_filter(Tpidmap &m)
 {
   TRACE_NO_INDENT();
+
+  if (m.empty()) {
+    return nullptr;
+  }
+
   int tries = 100;
   while (tries--) {
     auto r      = pcg_random_range(0, 1000);
