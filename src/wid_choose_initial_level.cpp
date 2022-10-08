@@ -23,7 +23,7 @@
 #include "my_time.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
-#include "my_wid_choose_dungeon.hpp"
+#include "my_wid_choose_level.hpp"
 #include "my_wid_console.hpp"
 #include "my_wid_popup.hpp"
 
@@ -262,7 +262,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     }
   }
 
-  auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_level_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (l) {
     if (! g_opt_ascii) {
@@ -353,7 +353,7 @@ static void wid_choose_initial_dungeons_mouse_over(Widp w, int relx, int rely, i
 
   wid_choose_initial_dungeons_set_focus(ctx, x, y);
 
-  auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_level_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
 
   IF_DEBUG
@@ -397,7 +397,7 @@ static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dunge
   TRACE_NO_INDENT();
 
   auto node     = ctx->nodes->getn(x, y);
-  auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_level_grid_to_level_coord(x, y);
 
   //
   // Create a level of the given difficulty at a fixed location
@@ -446,7 +446,7 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
         continue;
       }
 
-      auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
+      auto level_at = wid_choose_level_grid_to_level_coord(x, y);
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
       if (! l) {
         continue;
@@ -519,7 +519,7 @@ static void wid_choose_initial_dungeons_tick(Widp w)
   wid_choose_initial_dungeons_ctx *ctx = (wid_choose_initial_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
-  wid_choose_dungeons_bg();
+  wid_choose_levels_bg();
   wid_set_style(ctx->wid_enter, UI_WID_STYLE_GRAY);
 
   static int val;
@@ -664,13 +664,13 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
         continue;
       }
 
-      auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
+      auto level_at = wid_choose_level_grid_to_level_coord(x, y);
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
       if (! l) {
         continue;
       }
 
-      wid_choose_dungeon_border(b, l);
+      wid_choose_level_border(b, l);
     }
   }
 
@@ -683,7 +683,7 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
           continue;
         }
 
-        auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
+        auto level_at = wid_choose_level_grid_to_level_coord(x, y);
         auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
         if (! l) {
           continue;
@@ -700,7 +700,7 @@ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
     IF_DEBUG
     {
       if ((ctx->focusx != -1) && (ctx->focusx != -1)) {
-        auto level_at = wid_choose_dungeon_grid_to_level_coord(ctx->focusx, ctx->focusy);
+        auto level_at = wid_choose_level_grid_to_level_coord(ctx->focusx, ctx->focusy);
         auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
 
         if (l) {
@@ -806,7 +806,7 @@ static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int x, int y, 
   int lx    = (focus & 0xff);
   int ly    = (focus & 0xff00) >> 8;
 
-  auto level_at    = wid_choose_dungeon_grid_to_level_coord(lx, ly);
+  auto level_at    = wid_choose_level_grid_to_level_coord(lx, ly);
   auto start_level = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (! start_level) {
     return true;

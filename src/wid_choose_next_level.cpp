@@ -25,7 +25,7 @@
 #include "my_wid.hpp"
 #include "my_wid_actionbar.hpp"
 #include "my_wid_botcon.hpp"
-#include "my_wid_choose_dungeon.hpp"
+#include "my_wid_choose_level.hpp"
 #include "my_wid_popup.hpp"
 #include "my_wid_rightbar.hpp"
 #include "my_wid_topcon.hpp"
@@ -131,7 +131,7 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
 
   wid_choose_next_dungeons_set_focus(ctx, x, y);
 
-  auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
+  auto level_at = wid_choose_level_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
   if (l) {
     delete wid_level_description;
@@ -231,7 +231,7 @@ static void wid_choose_next_dungeons_tick(Widp w)
   wid_choose_next_dungeons_ctx *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
-  wid_choose_dungeons_bg();
+  wid_choose_levels_bg();
 
   static int val;
   static int delta = 1;
@@ -334,13 +334,13 @@ static void wid_choose_next_dungeons_post_display_tick(Widp w)
         continue;
       }
 
-      auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
+      auto level_at = wid_choose_level_grid_to_level_coord(x, y);
       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
       if (! l) {
         continue;
       }
 
-      wid_choose_dungeon_border(b, l);
+      wid_choose_level_border(b, l);
     }
   }
 
@@ -353,7 +353,7 @@ static void wid_choose_next_dungeons_post_display_tick(Widp w)
           continue;
         }
 
-        auto level_at = wid_choose_dungeon_grid_to_level_coord(x, y);
+        auto level_at = wid_choose_level_grid_to_level_coord(x, y);
         auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
         if (! l) {
           continue;
@@ -370,7 +370,7 @@ static void wid_choose_next_dungeons_post_display_tick(Widp w)
     IF_DEBUG
     {
       if ((ctx->focusx != -1) && (ctx->focusx != -1)) {
-        auto level_at = wid_choose_dungeon_grid_to_level_coord(ctx->focusx, ctx->focusy);
+        auto level_at = wid_choose_level_grid_to_level_coord(ctx->focusx, ctx->focusy);
         auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
 
         if (l) {

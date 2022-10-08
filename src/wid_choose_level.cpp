@@ -19,7 +19,7 @@
 #include "my_time.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
-#include "my_wid_choose_dungeon.hpp"
+#include "my_wid_choose_level.hpp"
 #include "my_wid_popup.hpp"
 
 WidPopup *wid_level_contents;
@@ -78,7 +78,7 @@ void wid_show_dungeon_contents(Levelp l)
   wid_set_do_not_raise(wid_level_contents->wid_popup_container, true);
 }
 
-point3d wid_choose_dungeon_grid_to_level_coord(int x, int y)
+point3d wid_choose_level_grid_to_level_coord(int x, int y)
 {
   point3d level_at;
 
@@ -88,7 +88,7 @@ point3d wid_choose_dungeon_grid_to_level_coord(int x, int y)
   return level_at;
 }
 
-void wid_choose_dungeons_bg(void)
+void wid_choose_levels_bg(void)
 {
   TRACE_NO_INDENT();
   if (g_opt_ascii) {
@@ -104,7 +104,7 @@ void wid_choose_dungeons_bg(void)
   blit_flush();
 }
 
-void wid_choose_dungeon_border(Widp b, Levelp l)
+void wid_choose_level_border(Widp b, Levelp l)
 {
   if (g_opt_ascii) {
     return;
