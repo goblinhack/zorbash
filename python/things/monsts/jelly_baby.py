@@ -90,7 +90,7 @@ def tp_init(name, text_long_name):
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
-    my.move_speed(self, 150)
+    my.move_speed(self, 50)
     my.msg_is_seen(self, True)
     my.msg_is_wounded(self, True)
     my.noise_decibels_hearing(self, 50)
