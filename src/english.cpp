@@ -48,7 +48,7 @@ std::string pluralise(const std::string &name)
     if (ends_with(name, "lotus") || ends_with(name, "status"))
       return name + "es";
     return name.substr(0, name.length() - 2) + "i";
-  } else if (ends_with(name, "larva") || ends_with(name, "antenna") || ends_with(name, "hypha") ||
+  } if (ends_with(name, "larva") || ends_with(name, "antenna") || ends_with(name, "hypha") ||
              ends_with(name, "noma")) {
     return name + "e";
   } else if (ends_with(name, "ex")) {

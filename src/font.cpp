@@ -30,14 +30,14 @@ static Fontp font_load(std::string name)
 
   if (name == "") {
     ERR("No name for font %s", __FUNCTION__);
-    return 0;
+    return nullptr;
   }
 
   f = new Font();
 
   auto result = fonts.insert(std::make_pair(name, f));
 
-  if (result.second == false) {
+  if (!result.second) {
     ERR("Font insert name [%s] failed", name.c_str());
     return f;
   }
@@ -63,12 +63,12 @@ Fontp font_find(std::string file)
   TRACE_AND_INDENT();
   if (file == "") {
     ERR("No filename given for font find %s", __FUNCTION__);
-    return 0;
+    return nullptr;
   }
 
   auto result = fonts.find(file);
   if (result == fonts.end()) {
-    return 0;
+    return nullptr;
   }
 
   return (result->second);
@@ -118,10 +118,9 @@ Tilep Font::unicode_to_tile(int u)
     if (u == L'?') {
       ERR("unicode char 0x%X/%d -> not found as tile %s", u, u, tile_name);
       return (unicode_to_tile(L'?'));
-    } else {
-      ERR("unicode char 0x%X/%d -> not found as tile %s", u, u, tile_name);
+    }       ERR("unicode char 0x%X/%d -> not found as tile %s", u, u, tile_name);
       return (unicode_to_tile(L'?'));
-    }
+   
   }
 
   set(this->cache, index, tile);

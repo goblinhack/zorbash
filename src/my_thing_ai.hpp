@@ -26,7 +26,7 @@ public:
   Thingp      what {};
   bool        avoid {};
 
-  Goal() {}
+  Goal() = default;
   Goal(int prio, int score, point at, const std::string &msg) : prio(prio), score(score), at(at), msg(msg) {}
   Goal(int prio, int score, point at, const std::string &msg, bool avoid)
       : prio(prio), score(score), at(at), msg(msg), avoid(avoid)
@@ -52,14 +52,14 @@ public:
   point  goal;
   fpoint next_hop;
 
-  Next_hop() {}
+  Next_hop() = default;
   Next_hop(float cost, point goal, fpoint next_hop) : cost(cost), goal(goal), next_hop(next_hop) {}
 };
 
 class Path
 {
 public:
-  Path() {}
+  Path() = default;
   Path(std::vector< point > &p, int c, const Goal &g) : path(p), cost(c), goal(g) {}
 
   std::vector< point > path;

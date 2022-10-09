@@ -271,7 +271,7 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
   GL_ERROR_CHECK();
 
   DBG2("OpenGl: - glTexImage2D");
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, tex_width, tex_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, tex_width, tex_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
   glBindTexture(GL_TEXTURE_2D, 0);
   GL_ERROR_CHECK();
 
@@ -619,7 +619,7 @@ void blit_fini(void)
   TRACE_AND_INDENT();
   if (gl_array_buf) {
     myfree(gl_array_buf);
-    gl_array_buf = 0;
+    gl_array_buf = nullptr;
   }
 }
 

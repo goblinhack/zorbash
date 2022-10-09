@@ -32,7 +32,7 @@ HiScores::~HiScores(void) { TRACE_AND_INDENT(); }
 void HiScores::add_new_hiscore(Thingp player, const std::string &name, const std::string &defeated_by)
 {
   TRACE_AND_INDENT();
-  std::vector< HiScore >::iterator h = hiscores.begin();
+  auto h = hiscores.begin();
   std::string                      hiscore_name;
 
   if (game->robot_mode) {
@@ -59,7 +59,7 @@ void HiScores::add_new_hiscore(Thingp player, const std::string &name, const std
 bool HiScores::is_new_hiscore(Thingp player)
 {
   TRACE_AND_INDENT();
-  std::vector< HiScore >::iterator h = hiscores.begin();
+  auto h = hiscores.begin();
 
   if (! player->score()) {
     //
@@ -80,7 +80,7 @@ bool HiScores::is_new_hiscore(Thingp player)
 
 bool HiScores::is_new_highest_hiscore(Thingp player)
 {
-  std::vector< HiScore >::iterator h = hiscores.begin();
+  auto h = hiscores.begin();
 
   if (! player->score()) {
     //
@@ -90,10 +90,7 @@ bool HiScores::is_new_highest_hiscore(Thingp player)
   }
 
   while (h != hiscores.end()) {
-    if (player->score() > h->score) {
-      return true;
-    }
-    return false;
+    return player->score() > h->score;
   }
   return false;
 }
@@ -112,7 +109,7 @@ const char *HiScores::place_str(Thingp player)
     return ("");
   }
 
-  std::vector< HiScore >::iterator h = hiscores.begin();
+  auto h = hiscores.begin();
 
   while (h != hiscores.end()) {
     if (player->score() > h->score) {

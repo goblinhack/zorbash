@@ -14,9 +14,9 @@ typedef std::shared_ptr< class WidTiles > wid_tilesp;
 class WidTiles
 {
 public:
-  WidTiles(void) {}
+  WidTiles(void) = default;
 
-  ~WidTiles(void) {}
+  ~WidTiles(void) = default;
 
   int                                       across = {};
   int                                       down   = {};
