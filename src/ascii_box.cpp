@@ -108,7 +108,7 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
       ascii_set_bg(x2, y, tiles[ ui_type ][ style ][ MAX_UI_SIZE - 1 ][ 0 ]);
     }
     return;
-  } else if (unlikely(x1 == x2)) {
+  } if (unlikely(x1 == x2)) {
     //
     // Vertical
     //
@@ -196,7 +196,7 @@ static void ascii_put_box_(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_ti
 
   if (! *fmt) {
     ascii_put_box__(style, bg_tile, fg_tile, fg2_tile, fg3_tile, x, y, x + width - 1, y + height - 1, col_bg,
-                    col_text, 0 /* context */);
+                    col_text, nullptr /* context */);
   } else {
     wchar_t buf[ MAXLONGSTR ];
     auto    wrote = vswprintf(buf, MAXLONGSTR, fmt, args);
@@ -212,7 +212,7 @@ static void ascii_put_box_(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_ti
     int  len = ascii_strlen(b);
 
     ascii_put_box__(style, bg_tile, fg_tile, fg2_tile, fg3_tile, x, y, x + width - 1, y + height - 1, col_bg,
-                    col_text, 0 /* context */);
+                    col_text, nullptr /* context */);
 
     ascii_putf__(x + ((width - len) / 2), y + 1, col_text, COLOR_NONE, b);
   }

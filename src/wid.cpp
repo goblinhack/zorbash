@@ -2730,10 +2730,6 @@ static Widp wid_new_scroll_bar(Widp parent, std::string name, Widp scrollbar_own
     ERR("No parent");
   }
 
-  color c;
-  color tl;
-  color br;
-
   Widp w = wid_new(parent);
 
   if (vertical) {

@@ -12,7 +12,7 @@
 #include "my_size.hpp"
 #include "my_thing_id.hpp"
 
-typedef class Particle_
+using Particle = class Particle_
 {
 public:
   Particle_(ThingId thing_id, point start, point stop, point pixel_map_at, isize sz, uint32_t ts_start,
@@ -34,6 +34,6 @@ public:
   bool        removed {};
   int         height {};
   MyCallback  callback;
-} Particle;
+};
 
 #endif // _MY_PARTICLE_HPP_

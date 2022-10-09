@@ -79,7 +79,7 @@ bool d20roll_under(int stat)
   return roll_a <= stat + stat_to_bonus(stat);
 }
 
-Dice::Dice(void) {}
+Dice::Dice(void) = default;
 
 std::string Dice::to_string(void) const { return (hd); }
 

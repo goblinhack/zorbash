@@ -148,7 +148,7 @@ public:
   void set_gl_binding_mask(int v);
 };
 
-typedef class Tile *Tilep;
+using Tilep = class Tile *;
 
 class Tex *tile_get_tex(Tilep);
 

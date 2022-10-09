@@ -23,7 +23,7 @@ public:
   std::array< std::array< Roomp, DUNGEON_GRID_CHUNK_HEIGHT >, DUNGEON_GRID_CHUNK_WIDTH > node_rooms {};
 };
 
-typedef class Dungeon *Dungeonp;
+using Dungeonp = class Dungeon *;
 
 class Dungeon
 {

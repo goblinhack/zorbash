@@ -10,16 +10,16 @@
 #include <memory>
 #include <string>
 
-typedef std::shared_ptr< class file_node >                          file_nodep;
-typedef std::map< std::string, std::shared_ptr< class file_node > > file_nodes;
+using file_nodep = class file_node;
+using file_nodes = std::map<std::string, std::shared_ptr<class file_node>>;
 
 class file_node
 {
 private:
 public:
-  file_node(void) {}
+  file_node(void) = default;
 
-  ~file_node(void) {}
+  ~file_node(void) = default;
 
   std::string name; // key
 

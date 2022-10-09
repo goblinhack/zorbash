@@ -12,9 +12,9 @@
 #include <array>
 #include <vector>
 
-typedef struct Dmap_ {
+using Dmap = struct Dmap_ {
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > val {};
-} Dmap;
+};
 
 extern void                 dmap_process(Dmap *D, point tl, point br, bool place_border);
 extern void                 dmap_process(Dmap *D);

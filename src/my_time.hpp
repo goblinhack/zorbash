@@ -11,7 +11,7 @@
 
 #define MY_TIMESTAMP_SIZE 20
 
-typedef int ts_t;
+using ts_t = int;
 
 #include <string>
 

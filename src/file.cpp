@@ -25,7 +25,7 @@ unsigned char *file_load(const char *filename, int *outlen)
   unsigned char *out;
   char          *alt_filename;
 
-  alt_filename = 0;
+  alt_filename = nullptr;
 
   /*
    * If the file is on disk and is newer than the program, use that in
@@ -74,7 +74,7 @@ unsigned char *file_load(const char *filename, int *outlen)
         if (out) {
           FILE_LOG("Read file %s", filename);
           myfree(alt_filename);
-          alt_filename = 0;
+          alt_filename = nullptr;
 
           return (out);
         }
@@ -85,7 +85,7 @@ unsigned char *file_load(const char *filename, int *outlen)
         if (out) {
           FILE_LOG("Read file %s", filename);
           myfree(alt_filename);
-          alt_filename = 0;
+          alt_filename = nullptr;
 
           return (out);
         }
@@ -96,7 +96,7 @@ unsigned char *file_load(const char *filename, int *outlen)
         if (out) {
           FILE_LOG("Read file %s", filename);
           myfree(alt_filename);
-          alt_filename = 0;
+          alt_filename = nullptr;
 
           return (out);
         }
@@ -110,7 +110,7 @@ unsigned char *file_load(const char *filename, int *outlen)
 
     if (alt_filename) {
       myfree(alt_filename);
-      alt_filename = 0;
+      alt_filename = nullptr;
     }
 
     return r;
@@ -125,7 +125,7 @@ unsigned char *file_load(const char *filename, int *outlen)
 
     if (alt_filename) {
       myfree(alt_filename);
-      alt_filename = 0;
+      alt_filename = nullptr;
     }
 
     return (out);
@@ -137,7 +137,7 @@ unsigned char *file_load(const char *filename, int *outlen)
 
     if (alt_filename) {
       myfree(alt_filename);
-      alt_filename = 0;
+      alt_filename = nullptr;
     }
 
     return (out);
@@ -145,7 +145,7 @@ unsigned char *file_load(const char *filename, int *outlen)
 
   if (alt_filename) {
     myfree(alt_filename);
-    alt_filename = 0;
+    alt_filename = nullptr;
   }
 
   {
@@ -172,10 +172,10 @@ unsigned char *file_load(const char *filename, int *outlen)
 
   if (alt_filename) {
     myfree(alt_filename);
-    alt_filename = 0;
+    alt_filename = nullptr;
   }
 
-  return 0;
+  return nullptr;
 }
 
 unsigned char *file_io_read(const char *filename, int *out_len)
@@ -188,7 +188,7 @@ unsigned char *file_io_read(const char *filename, int *out_len)
   file = fopen(filename, "rb");
   if (! file) {
     fprintf(MY_STDERR, "Failed to open file \"%s\" for reading: %s\n", filename, strerror(errno));
-    return 0;
+    return nullptr;
   }
 
   /*
@@ -197,33 +197,33 @@ unsigned char *file_io_read(const char *filename, int *out_len)
   if (fseek(file, 0, SEEK_END)) {
     fprintf(MY_STDERR, "Failed to seek end of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return 0;
+    return nullptr;
   }
 
   len = (uint) ftell(file);
   if (len == -1) {
     fprintf(MY_STDERR, "Failed to get size of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return 0;
+    return nullptr;
   }
 
   if (fseek(file, 0, SEEK_SET)) {
     fprintf(MY_STDERR, "Failed to seek begin of file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return 0;
+    return nullptr;
   }
 
   buffer = (unsigned char *) mymalloc(len + sizeof((char) '\0'), "file read");
   if (! buffer) {
     fprintf(MY_STDERR, "Failed to alloc mem for file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return 0;
+    return nullptr;
   }
 
   if (! fread(buffer, len, 1, file)) {
     fprintf(MY_STDERR, "Failed to read file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
-    return 0;
+    return nullptr;
   }
 
   if (out_len) {
@@ -324,7 +324,7 @@ unsigned char *file_io_read_if_exists(const char *filename, int *out_len)
     return (file_io_read(filename, out_len));
   }
 
-  return 0;
+  return nullptr;
 }
 
 /*
@@ -386,7 +386,7 @@ double file_age(const char *filename)
     return (-1);
   }
 
-  time_t now = time(0);
+  time_t now = time(nullptr);
 
   return (difftime(now, buf.st_mtime));
 }

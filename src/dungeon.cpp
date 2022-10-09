@@ -492,10 +492,7 @@ bool Dungeon::is_anything_at(const int x, const int y, const int z)
   }
 
   auto c = getc(x, y, z);
-  if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
-    return true;
-  }
-  return false;
+  return (c != Charmap::NONE) && (c != Charmap::SPACE);
 }
 
 int Dungeon::get_grid_depth_at(const int x, const int y)
@@ -1428,10 +1425,7 @@ bool Dungeon::is_anything_at_no_check(const int x, const int y)
 bool Dungeon::is_anything_at_no_check(const int x, const int y, const int z)
 {
   auto c = getc_no_check(x, y, z);
-  if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
-    return true;
-  }
-  return false;
+  return (c != Charmap::NONE) && (c != Charmap::SPACE);
 }
 
 bool Dungeon::is_floor_no_check(const int x, const int y)

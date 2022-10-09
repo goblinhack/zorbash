@@ -39,7 +39,7 @@ public:
   bool follow_moving_target {};
 };
 
-typedef class Projectile_
+using Projectile = class Projectile_
 {
 public:
   Projectile_(Levelp level, ThingId thing_id, ThingId victim_id, ProjectileInfo info);
@@ -54,6 +54,6 @@ public:
   //
   std::vector< Tilep > tiles;
   static const auto    max_frames = 16;
-} Projectile;
+};
 
 #endif // _MY_LASER_HPP_

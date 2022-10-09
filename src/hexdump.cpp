@@ -27,7 +27,7 @@ void hexdump(const unsigned char *addr, size_t len)
   int            skipping_blanks         = false;
   unsigned char  empty[ HEX_DUMP_WIDTH ] = {0};
   unsigned char  buf[ HEX_DUMP_WIDTH + 1 ];
-  unsigned char *pc = (__typeof__(pc)) addr;
+  unsigned char *pc = (unsigned char *) addr;
   size_t         i;
   unsigned int   x;
 

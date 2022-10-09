@@ -18,7 +18,7 @@
 #include "my_wid_rightbar.hpp"
 #include "stb_image_write.hpp"
 
-sdl_t sdl;
+SDL sdl;
 
 void sdl_fini(void)
 {

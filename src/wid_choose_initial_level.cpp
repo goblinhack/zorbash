@@ -125,7 +125,6 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   point tl;
   point br;
-  color c;
 
   tl.x = x * (width + 1);
   tl.y = y * (height + 1);

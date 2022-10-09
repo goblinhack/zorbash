@@ -34,7 +34,7 @@
 
 #include <inttypes.h>
 
-typedef struct pcg_state_setseq_64 pcg32_random_t;
+using pcg32_random_t = struct pcg_state_setseq_64;
 
 extern int pcg_random_allowed;
 

@@ -69,8 +69,8 @@ public:
   friend bool operator>(my_asize a, my_asize b) { return (a.w * a.h) > (b.w * b.h); }
 };
 
-typedef my_asize< int16_t > isize;
-typedef my_asize< float >   fsize;
+using isize = my_asize<int16_t>;
+using fsize = my_asize<float>;
 
 template < class T > class my_asize3d
 {
@@ -126,8 +126,7 @@ public:
   {
     if ((a.d == 0) && (b.d == 0))
       return (a.w * a.h) > (b.w * b.h);
-    else
-      return (a.w * a.h * a.d) > (b.w * b.h * b.d);
+          return (a.w * a.h * a.d) > (b.w * b.h * b.d);
   }
 
   //
@@ -139,12 +138,11 @@ public:
   {
     if ((a.d == 0) && (b.d == 0))
       return (a.w * a.h) < (b.w * b.h);
-    else
-      return (a.w * a.h * a.d) < (b.w * b.h * b.d);
+          return (a.w * a.h * a.d) < (b.w * b.h * b.d);
   }
 };
 
-typedef my_asize3d< int16_t > size3d;
-typedef my_asize3d< float >   fsize3d;
+using size3d = my_asize3d<int16_t>;
+using fsize3d = my_asize3d<float>;
 
 #endif // _MY_SIZE_HPP_

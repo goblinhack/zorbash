@@ -47,8 +47,7 @@ std::string pluralise(const std::string &name)
   if (ends_with(name, "us")) {
     if (ends_with(name, "lotus") || ends_with(name, "status"))
       return name + "es";
-    else
-      // Fungus, ufetubus, for instance.
+          // Fungus, ufetubus, for instance.
       return name.substr(0, name.length() - 2) + "i";
   } else if (ends_with(name, "larva") || ends_with(name, "antenna") || ends_with(name, "hypha") ||
              ends_with(name, "noma")) {
@@ -68,7 +67,7 @@ std::string pluralise(const std::string &name)
     if (name == "y")
       return "ys";
     // day -> days, boy -> boys, etc
-    else if (is_vowel(name[ name.length() - 2 ]))
+    if (is_vowel(name[ name.length() - 2 ]))
       return name + "s";
     // jelly -> jellies
     else

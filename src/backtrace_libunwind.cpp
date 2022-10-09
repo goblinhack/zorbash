@@ -33,7 +33,7 @@ void backtrace_unwind(void **buffer, int size)
 
     if (! unw_get_proc_name(&cursor, symbol, sizeof(symbol), &off)) {
       int status;
-      if ((name = abi::__cxa_demangle(symbol, nullptr, nullptr, &status)) == 0)
+      if ((name = abi::__cxa_demangle(symbol, nullptr, nullptr, &status)) == nullptr)
         name = symbol;
     }
 

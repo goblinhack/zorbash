@@ -7,10 +7,10 @@
 #include <map>
 #include <string>
 
-typedef struct ramdisk_t_ {
+using ramdisk_t = struct ramdisk_t_ {
   const unsigned char *data;
   int                  len;
-} ramdisk_t;
+};
 
 extern std::map< std::string, ramdisk_t_ > ramdisk_data;
 

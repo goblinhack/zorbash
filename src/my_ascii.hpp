@@ -20,9 +20,9 @@
 #define TERM_WIDTH_MAX  (std::max(TERM_GFX_WIDTH_DEF + 10, TERM_ASCII_WIDTH_DEF))
 #define TERM_HEIGHT_MAX (std::max(TERM_GFX_HEIGHT_DEF + 10, TERM_ASCII_HEIGHT_DEF))
 
-typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_Keysym *key);
-typedef int (*ascii_mouse_down_callback)(int x, int y, int button);
-typedef int (*ascii_mouse_over_callback)(int x, int y);
+using ascii_key_down_callback   = int (*)(int, int, const struct SDL_Keysym *);
+using ascii_mouse_down_callback = int (*)(int, int, int);
+using ascii_mouse_over_callback = int (*)(int, int);
 
 struct ascii_ {
   //
@@ -47,7 +47,7 @@ struct ascii_ {
 extern int16_t TERM_WIDTH;
 extern int16_t TERM_HEIGHT;
 
-typedef struct {
+using button_args = struct {
   int x;
   int y;
   int width;
@@ -64,9 +64,9 @@ typedef struct {
   ascii_mouse_over_callback mouse_over;
 
   void *context;
-} button_args;
+};
 
-typedef struct {
+using box_args = struct {
   int x;
   int y;
   int width;
@@ -85,7 +85,7 @@ typedef struct {
   ascii_mouse_over_callback mouse_over;
 
   void *context;
-} box_args;
+};
 
 bool ascii_is_empty(int x, int y);
 

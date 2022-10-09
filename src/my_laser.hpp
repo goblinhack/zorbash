@@ -39,7 +39,7 @@ public:
   bool follow_moving_target {};
 };
 
-typedef class Laser_
+using Laser = class Laser_
 {
 public:
   Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info);
@@ -54,6 +54,6 @@ public:
   //
   std::vector< std::vector< Tilep > > tiles;
   static const auto                   max_frames = 16;
-} Laser;
+};
 
 #endif // _MY_LASER_HPP_

@@ -16,7 +16,7 @@ class Backtrace
   int                                 size {};
 
 public:
-  Backtrace(void) {}
+  Backtrace(void) = default;
   void        init(void);
   std::string to_string(void);
   void        log(void);

@@ -78,7 +78,7 @@ static auto cppDemangle(const char *abiName)
   // This function allocates and returns storage in ret
   //
   int   status;
-  char *ret = abi::__cxa_demangle(abiName, 0 /* output buffer */, 0 /* length */, &status);
+  char *ret = abi::__cxa_demangle(abiName, nullptr /* output buffer */, nullptr /* length */, &status);
 
   auto deallocator = ([](char *mem) {
     if (mem)

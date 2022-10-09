@@ -16,11 +16,11 @@ public:
   unsigned char b {};
   unsigned char a {};
 
-  color(void) {}
+  color(void) = default;
 
   color(unsigned char r, unsigned char g, unsigned char b, unsigned char a) : r(r), g(g), b(b), a(a) {}
 
-  color(const color &c) : r(c.r), g(c.g), b(c.b), a(c.a) {}
+  color(const color &c)  = default;
 
   friend bool operator==(const color &c, const color &b)
   {

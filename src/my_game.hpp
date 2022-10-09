@@ -19,7 +19,7 @@
 class WidBag;
 class WidPopup;
 
-typedef class Config_
+using Config = class Config_
 {
 public:
   uint32_t serialized_size = {};
@@ -135,13 +135,13 @@ public:
 
   void fini(void);
   void reset(void);
-} Config;
+};
 
 class Game
 {
 public:
   Game(std::string appdata);
-  Game(void) {}
+  Game(void) = default;
 
   Levelp get_current_level(void);
 

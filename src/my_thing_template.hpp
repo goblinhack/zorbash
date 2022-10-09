@@ -2445,14 +2445,14 @@ enum {
   THING_DIR_BR,
 };
 
-typedef enum {
+using biome_t = enum {
   BIOME_DUNGEON,
   BIOME_SWAMP,
   BIOME_SEWER,
   BIOME_MAX,
-} biome_t;
+};
 
-typedef enum {
+using monst_class_t = enum {
   MONST_CLASS_ANY,
   MONST_CLASS_A,
   MONST_CLASS_B,
@@ -2460,13 +2460,13 @@ typedef enum {
   MONST_CLASS_D,
   MONST_CLASS_E,
   MONST_CLASS_MAX,
-} monst_class_t;
+};
 
-typedef enum {
+using monst_type_t = enum {
   MONST_TYPE_NORMAL,
   MONST_TYPE_SWIMMER,
   MONST_TYPE_MAX,
-} monst_type_t;
+};
 
 extern Tpidmap   tp_id_map;
 extern Tpnamemap tp_name_map;

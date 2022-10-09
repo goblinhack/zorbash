@@ -6,7 +6,7 @@
 #ifndef _MY_TERM_HPP_
 #define _MY_TERM_HPP_
 
-typedef enum {
+using term_color = enum {
   TERM_COLOR_BLACK,
   TERM_COLOR_RED,
   TERM_COLOR_GREEN,
@@ -17,7 +17,7 @@ typedef enum {
   TERM_COLOR_WHITE,
   TERM_COLOR_RESET,
   TERM_COLOR_MAX,
-} term_color;
+};
 
 extern void term_log(const wchar_t *buf);
 extern void term_log(const char *buf);

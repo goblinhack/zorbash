@@ -467,7 +467,6 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
 
   point tl;
   point br;
-  color c;
 
   tl.x = x * (width + 1);
   tl.y = y * (height + 1);

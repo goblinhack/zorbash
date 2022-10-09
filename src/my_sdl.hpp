@@ -37,7 +37,9 @@ enum {
 #define SDL_MAX_BUTTONS 32
 };
 
-typedef struct sdl_t_ {
+class SDL
+{
+public:
   int exiting {};
   int event_count {};
   int held_mouse_x {};
@@ -66,31 +68,49 @@ typedef struct sdl_t_ {
   int wheel_x {};
   int wheel_y {};
 
-  uint32_t mouse_down;
-  uint32_t mouse_down_when;
+  //
+  // Mouse support
+  //
+  uint32_t mouse_down {};
+  uint32_t mouse_down_when {};
   uint32_t last_mouse_held_down_when {};
   uint32_t mouse_down_ts {};
 
-  SDL_Haptic   *haptic {};
-  SDL_Joystick *joy {};
-
+  //
+  // Joystick support
+  //
+  SDL_Haptic                            *haptic {};
+  SDL_Joystick                          *joy {};
   int                                   *joy_axes {};
   std::array< uint8_t, SDL_MAX_BUTTONS > joy_buttons {};
 
-  typedef void (*on_sdl_key_grab_t)(SDL_Keysym);
+  //
+  // Key grabbing for customization of keys
+  //
+  using on_sdl_key_grab_t = void (*)(SDL_Keysym);
   on_sdl_key_grab_t on_sdl_key_grab {};
   SDL_Keysym        grabbed_key {};
 
+  //
+  // Which key is auto repeating.
+  //
   ts_t key_repeat_this_key {};
 
-  SDL_GLContext context {}; // Our opengl context handle
-  SDL_Window   *window {};  // Our window handle
-} sdl_t;
+  //
+  // Our opengl context handle
+  //
+  SDL_GLContext context {};
+
+  //
+  // Our window handle
+  //
+  SDL_Window *window {};
+};
 
 #define SDL_KEY_REPEAT_HUNDREDTHS_FIRST 20
 #define SDL_KEY_REPEAT_HUNDREDTHS_NEXT  10
 
-extern sdl_t sdl;
+extern SDL sdl;
 
 bool sdlk_eq(const SDL_Keysym &a, const SDL_Keysym &b);
 

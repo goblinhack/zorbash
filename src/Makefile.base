@@ -3,6 +3,7 @@ NAME=zorbash-game
 BUILD_DIR=.build
 
 TARGET_GAME=$(NAME)$(EXE)
+SRC_DIR=.
 
 #
 # To force clean and avoid "up to date" warning.
@@ -11,15 +12,15 @@ TARGET_GAME=$(NAME)$(EXE)
 
 all: $(TARGET_GAME)
 
-GAME_SOURCE := $(wildcard *.cpp) $(wildcard *.S)
-GAME_OBJECTS :=\
-	$(addprefix $(BUILD_DIR)/,$(addsuffix .o,$(basename $(GAME_SOURCE))))
+SOURCES := $(wildcard *.cpp) $(wildcard *.S)
+OBJECTS :=\
+	$(addprefix $(BUILD_DIR)/,$(addsuffix .o,$(basename $(SOURCES))))
 
-DEP_FILES := $(GAME_OBJECTS:.o=.d)
+DEP_FILES := $(OBJECTS:.o=.d)
 DEP_FLAGS = -MMD -MP
 
 $(BUILD_DIR): ; mkdir -p $(BUILD_DIR)
-$(GAME_OBJECTS): | $(BUILD_DIR)
+$(OBJECTS): | $(BUILD_DIR)
 
 $(BUILD_DIR)/%.o: %.cpp
 	$(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
@@ -27,9 +28,25 @@ $(BUILD_DIR)/%.o: %.cpp
 $(BUILD_DIR)/%.o: %.S
 	$(CC) $(DEP_FLAGS) -c -o $@ $<
 
-$(TARGET_GAME): $(GAME_OBJECTS)
-	cd $(BUILD_DIR); $(CC) $(LDFLAGS) $(notdir $(GAME_OBJECTS)) $(LDLIBS) -o ../$(TARGET_GAME)
+$(TARGET_GAME): $(OBJECTS)
+	cd $(BUILD_DIR); $(CC) $(LDFLAGS) $(notdir $(OBJECTS)) $(LDLIBS) -o ../$(TARGET_GAME)
 	cp -f $(TARGET_GAME) ..
+
+tidy:
+	@for src in $(SOURCES) ; do \
+		echo "Running tidy on $$src..." ; \
+		clang-tidy -fix -checks="-*,modernize-use-auto,modernize-use-nullptr,\
+			readability-else-after-return,readability-simplify-boolean-expr,\
+			readability-redundant-member-init,modernize-use-default-member-init,\
+			modernize-use-equals-default,modernize-use-equals-delete,\
+			modernize-use-using,modernize-loop-convert,\
+			cppcoreguidelines-no-malloc,misc-redundant-expression" \
+			-header-filter=".*" \
+			"$(SRC_DIR)/$$src" -- $(CFLAGS); \
+	done
+	@echo "Done"
+
+.PHONY: style check-style tidy
 
 clean:
 	rm -f ../$(TARGET_GAME) ../stdout.txt ../stderr.txt

@@ -11,7 +11,7 @@
 class HiScore
 {
 public:
-  HiScore(void) {}
+  HiScore(void) = default;
   HiScore(std::string name, std::string when, int score, int level_reached, std::string defeated_by)
   {
     this->name          = name;
@@ -21,7 +21,7 @@ public:
     this->defeated_by   = defeated_by;
   }
 
-  ~HiScore(void) {}
+  ~HiScore(void) = default;
 
   //
   // Who made the score?

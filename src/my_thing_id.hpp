@@ -20,7 +20,7 @@ public:
   uint32_t id {};
   ThingId_(int16_t id) : id(id) { DIE("error, ThingID must be uint32"); }
   ThingId_(uint32_t id) : id(id) {}
-  constexpr ThingId_() {}
+  constexpr ThingId_() = default;
 
   bool operator<(const ThingId_ &rhs) const { return (id < rhs.id); }
   bool operator!() const { return id == 0; }
