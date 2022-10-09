@@ -115,7 +115,11 @@ void Thing::move_carried_items(void)
           //
         } else {
           if (pcg_random_range(0, 1000) > 500) {
-            level->thing_new(tp_random_ripple()->name(), at);
+            if (thing_size() < (int) THING_SIZE_NORMAL) {
+              level->thing_new(tp_random_small_ripple()->name(), at);
+            } else {
+              level->thing_new(tp_random_large_ripple()->name(), at);
+            }
           }
         }
       }

@@ -329,11 +329,30 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
   //
   if (is_monst() || is_player()) {
     if (! is_floating() && ! is_flying()) {
-      if (level->is_shallow_water((int) curr_at.x, (int) curr_at.y)) {
+
+      //
+      // Ripples at the source
+      //
+      if (level->is_water((int) curr_at.x, (int) curr_at.y)) {
         dbg("Causes ripples");
         TRACE_AND_INDENT();
-        if (pcg_random_range(0, 1000) > 500) {
-          level->thing_new(tp_random_ripple()->name(), curr_at);
+        if (thing_size() < (int) THING_SIZE_NORMAL) {
+          level->thing_new(tp_random_small_ripple()->name(), curr_at);
+        } else {
+          level->thing_new(tp_random_large_ripple()->name(), curr_at);
+        }
+      }
+
+      //
+      // And destination
+      //
+      if (level->is_water((int) dest.x, (int) dest.y)) {
+        dbg("Causes ripples");
+        TRACE_AND_INDENT();
+        if (thing_size() < (int) THING_SIZE_NORMAL) {
+          level->thing_new(tp_random_small_ripple()->name(), dest);
+        } else {
+          level->thing_new(tp_random_large_ripple()->name(), dest);
         }
       }
     }

@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_monst.hpp"
 #include "my_random.hpp"
 #include "my_thing_template.hpp"
 #include "my_vector_bounds_check.hpp"
@@ -42,7 +43,8 @@ static Tpidmap tp_ring;
 static Tpidmap tp_ring_class_a;
 static Tpidmap tp_ring_class_b;
 static Tpidmap tp_ring_class_c;
-static Tpidmap tp_ripples;
+static Tpidmap tp_small_ripples;
+static Tpidmap tp_large_ripples;
 static Tpidmap tp_rock;
 static Tpidmap tp_secret_door;
 static Tpidmap tp_sewer_wall;
@@ -149,7 +151,11 @@ void tp_random_init(void)
       tp_potion.push_back(tp);
     }
     if (tp->is_ripple()) {
-      tp_ripples.push_back(tp);
+      if (tp->thing_size() < THING_SIZE_NORMAL) {
+        tp_small_ripples.push_back(tp);
+      } else {
+        tp_large_ripples.push_back(tp);
+      }
     }
     if (tp->is_rock()) {
       tp_rock.push_back(tp);
@@ -641,14 +647,24 @@ Tpp tp_random_spiderweb(void)
   return tp_get_with_no_rarity_filter(tp_spiderweb);
 }
 
-Tpp tp_random_ripple(void)
+Tpp tp_random_small_ripple(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_ripples.size())) {
-    ERR("No ripples found");
+  if (unlikely(! tp_small_ripples.size())) {
+    ERR("No small_ripples found");
     return nullptr;
   }
-  return tp_get_with_no_rarity_filter(tp_ripples);
+  return tp_get_with_no_rarity_filter(tp_small_ripples);
+}
+
+Tpp tp_random_large_ripple(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_large_ripples.size())) {
+    ERR("No large_ripples found");
+    return nullptr;
+  }
+  return tp_get_with_no_rarity_filter(tp_large_ripples);
 }
 
 Tpp tp_random_red_splatter(void)

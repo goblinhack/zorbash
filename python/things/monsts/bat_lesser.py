@@ -106,7 +106,7 @@ def tp_init(name, text_long_name):
     my.text_hits(self, "claws")
     my.text_long_description(self, "A snarling mass of flying cuteness. They don't see so well, so best to keep far away.")
     my.text_short_description(self, "A little bat.")
-    my.thing_size(self, my.THING_SIZE_NORMAL)
+    my.thing_size(self, my.THING_SIZE_SMALL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)

@@ -495,7 +495,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         dbg("Causes ripples");
         TRACE_AND_INDENT();
         if (pcg_random_range(0, 1000) > 500) {
-          level->thing_new(tp_random_ripple()->name(), at);
+          if (thing_size() < (int) THING_SIZE_NORMAL) {
+            level->thing_new(tp_random_small_ripple()->name(), at);
+          } else {
+            level->thing_new(tp_random_large_ripple()->name(), at);
+          }
         }
       }
     }
