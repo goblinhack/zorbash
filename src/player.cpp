@@ -2,8 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include <ranges>
-
 #include "my_game.hpp"
 #include "my_player.hpp"
 #include "my_ptrcheck.hpp"
