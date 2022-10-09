@@ -1,7 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!--  Waiting on moving thing longer than expected on ascii mode change                                                                           -->
+<!-- eels on minimap                                                                                                                              -->
 <!-- sewer eels ?                                                                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
