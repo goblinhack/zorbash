@@ -276,32 +276,6 @@ void Thing::killed(Thingp defeater, const char *reason)
       }
     }
 
-    {
-      TRACE_NO_INDENT();
-      auto on_death = on_death_do();
-      if (! std::empty(on_death)) {
-        auto t = split_tokens(on_death, '.');
-        if (t.size() == 2) {
-          auto        mod   = t[ 0 ];
-          auto        fn    = t[ 1 ];
-          std::size_t found = fn.find("()");
-          if (found != std::string::npos) {
-            fn = fn.replace(found, 2, "");
-          }
-
-          if (mod == "me") {
-            mod = name();
-          }
-
-          dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
-
-          py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
-        } else {
-          ERR("Bad on_death call [%s] expected mod:function, got %d elems", on_death.c_str(), (int) on_death.size());
-        }
-      }
-    }
-
     //
     // If this is the leader, the followers may react
     //
@@ -486,6 +460,35 @@ void Thing::killed(Thingp defeater, const char *reason)
     if (is_obs_wall_or_door()) {
       TRACE_NO_INDENT();
       level->request_dmap_to_player_update = true;
+    }
+  }
+
+  //
+  // Call this after all other death messages.
+  //
+  {
+    TRACE_NO_INDENT();
+    auto on_death = on_death_do();
+    if (! std::empty(on_death)) {
+      auto t = split_tokens(on_death, '.');
+      if (t.size() == 2) {
+        auto        mod   = t[ 0 ];
+        auto        fn    = t[ 1 ];
+        std::size_t found = fn.find("()");
+        if (found != std::string::npos) {
+          fn = fn.replace(found, 2, "");
+        }
+
+        if (mod == "me") {
+          mod = name();
+        }
+
+        dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+
+        py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+      } else {
+        ERR("Bad on_death call [%s] expected mod:function, got %d elems", on_death.c_str(), (int) on_death.size());
+      }
     }
   }
 
