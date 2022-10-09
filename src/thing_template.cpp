@@ -23,7 +23,7 @@ Tpp tp_find(const std::string &name)
   auto result = tp_name_map.find(name);
 
   if (unlikely(result == tp_name_map.end())) {
-    return 0;
+    return nullptr;
   }
 
   return (result->second);
@@ -76,7 +76,7 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_long_name, 
   tp->text_short_name_set(text_short_name);
 
   auto result = tp_name_map.insert(std::make_pair(name, tp));
-  if (result.second == false) {
+  if (! result.second) {
     ERR("Thing insert name [%s] failed", name.c_str());
   }
 

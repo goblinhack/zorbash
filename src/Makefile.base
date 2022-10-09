@@ -33,14 +33,21 @@ $(TARGET_GAME): $(OBJECTS)
 	cp -f $(TARGET_GAME) ..
 
 tidy:
+	# clang-tidy --list-checks -checks='*' | grep "modernize"
 	@for src in $(SOURCES) ; do \
 		echo "Running tidy on $$src..." ; \
-		clang-tidy -fix -checks="-*,modernize-use-auto,modernize-use-nullptr,\
-			readability-else-after-return,readability-simplify-boolean-expr,\
-			readability-redundant-member-init,modernize-use-default-member-init,\
-			modernize-use-equals-default,modernize-use-equals-delete,\
+		clang-tidy -fix -checks="-*,\
+ang-tidy --list-checks -checks='*' | grep "modernize"  	modernize-use-auto,\
+  		modernize-use-nullptr,\
+			readability-else-after-return,\
+			readability-simplify-boolean-expr,\
+			readability-redundant-member-init,\
+			modernize-use-default-member-init,\
+			modernize-use-equals-default,\
+			modernize-use-equals-delete,\
 			modernize-loop-convert,\
-			cppcoreguidelines-no-malloc,misc-redundant-expression" \
+			cppcoreguidelines-no-malloc,\
+			misc-redundant-expression" \
 			-header-filter=".*" \
 			"$(SRC_DIR)/$$src" -- $(CFLAGS); \
 	done

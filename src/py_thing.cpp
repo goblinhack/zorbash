@@ -92,8 +92,8 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_draining(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -141,8 +141,8 @@ PyObject *thing_hit_damage_draining(PyObject *obj, PyObject *args, PyObject *key
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -190,8 +190,8 @@ PyObject *thing_hit_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_water(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -239,8 +239,8 @@ PyObject *thing_hit_damage_water(PyObject *obj, PyObject *args, PyObject *keywds
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -288,8 +288,8 @@ PyObject *thing_hit_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -337,8 +337,8 @@ PyObject *thing_hit_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_digest(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -386,8 +386,8 @@ PyObject *thing_hit_damage_digest(PyObject *obj, PyObject *args, PyObject *keywd
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -435,8 +435,8 @@ PyObject *thing_hit_damage_energy(PyObject *obj, PyObject *args, PyObject *keywd
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -484,8 +484,8 @@ PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_future1(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -533,8 +533,8 @@ PyObject *thing_hit_damage_future1(PyObject *obj, PyObject *args, PyObject *keyw
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -582,8 +582,8 @@ PyObject *thing_hit_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_claw(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -631,8 +631,8 @@ PyObject *thing_hit_damage_claw(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_lightning(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -680,8 +680,8 @@ PyObject *thing_hit_damage_lightning(PyObject *obj, PyObject *args, PyObject *ke
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_necrosis(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -729,8 +729,8 @@ PyObject *thing_hit_damage_necrosis(PyObject *obj, PyObject *args, PyObject *key
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit_damage_poison(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -778,8 +778,8 @@ PyObject *thing_hit_damage_poison(PyObject *obj, PyObject *args, PyObject *keywd
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  }     Py_RETURN_FALSE;
- 
+  }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -821,9 +821,9 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
   if (hitter->possible_to_attack(target)) {
     IF_DEBUG { hitter->log("Check if possible to target %s; yes", target->to_short_string().c_str()); }
     Py_RETURN_TRUE;
-  }     IF_DEBUG { hitter->log("Check if possible to attack %s; no", target->to_short_string().c_str()); }
-    Py_RETURN_FALSE;
- 
+  }
+  IF_DEBUG { hitter->log("Check if possible to attack %s; no", target->to_short_string().c_str()); }
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -878,22 +878,23 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
   if (itemp->is_projectile()) {
     if (owner->projectile_fire_at(nullptr /* wand */, std::string(item), target)) {
       Py_RETURN_TRUE;
-    }       Py_RETURN_FALSE;
-   
-  } else if (itemp->is_laser()) {
-    if (owner->laser_fire_at(nullptr /* staff */, std::string(item), target)) {
-      Py_RETURN_TRUE;
-    }       Py_RETURN_FALSE;
-   
-  } else if (itemp->is_usable()) {
-    if (owner->item_targetted_use_at(nullptr /* wand */, target)) {
-      Py_RETURN_TRUE;
-    }       Py_RETURN_FALSE;
-   
-  } else {
-    owner->err("Cannot fire %s at %s", item, target->to_short_string().c_str());
+    }
     Py_RETURN_FALSE;
   }
+  if (itemp->is_laser()) {
+    if (owner->laser_fire_at(nullptr /* staff */, std::string(item), target)) {
+      Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
+  }
+  if (itemp->is_usable()) {
+    if (owner->item_targetted_use_at(nullptr /* wand */, target)) {
+      Py_RETURN_TRUE;
+    }
+    Py_RETURN_FALSE;
+  }
+  owner->err("Cannot fire %s at %s", item, target->to_short_string().c_str());
+  Py_RETURN_FALSE;
 }
 
 PyObject *thing_death_by(PyObject *obj, PyObject *args, PyObject *keywds)

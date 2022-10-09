@@ -122,9 +122,8 @@ int Thing::shove_strength_mod(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->shove_strength_mod);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::shove_strength_mod_set(int v)

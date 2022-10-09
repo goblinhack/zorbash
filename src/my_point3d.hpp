@@ -36,7 +36,7 @@ template < typename T > my_apoint3d< T > operator-(my_apoint3d< T > const &, my_
 template < typename T > my_apoint3d< T > operator*(my_apoint3d< T > const &, T);
 template < typename T > my_apoint3d< T > operator/(my_apoint3d< T > const &, T);
 
-using point3d = my_apoint3d<int16_t>;
+using point3d = my_apoint3d< int16_t >;
 
 extern point make_point(const point3d &f);
 

@@ -122,9 +122,8 @@ int Thing::stat_luck(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_luck);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_luck_set(int v)
@@ -190,9 +189,8 @@ int Thing::stat_luck_mod(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_luck_mod);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_luck_mod_set(int v)

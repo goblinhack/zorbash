@@ -28,7 +28,7 @@ Fontp   font_find(std::string);
 class Font
 {
 public:
-  Font(void) = default;
+  Font(void)  = default;
   ~Font(void) = default;
   std::array< int, FONT_MAX_CHAR + 1 >   u_to_c {};
   std::array< Tilep, FONT_MAX_CHAR + 1 > cache {};

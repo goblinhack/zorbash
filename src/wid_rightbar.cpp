@@ -616,9 +616,8 @@ bool wid_rightbar_create(void)
 
   if (g_opt_ascii) {
     return wid_rightbar_ascii_create();
-  } else {
-    return wid_rightbar_pixelart_create();
   }
+  return wid_rightbar_pixelart_create();
 }
 
 bool is_mouse_over_rightbar(void)

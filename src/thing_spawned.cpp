@@ -19,9 +19,8 @@ Thingp Thing::top_spawned_owner(void)
       return i->immediate_spawned_owner();
     }
     return i;
-  } else {
-    return nullptr;
   }
+  return nullptr;
 }
 
 Thingp Thing::immediate_spawned_owner(void)
@@ -34,9 +33,8 @@ Thingp Thing::immediate_spawned_owner(void)
       return nullptr;
     }
     return i;
-  } else {
-    return nullptr;
   }
+  return nullptr;
 }
 
 void Thing::spawned_owner_set(Thingp spawner_owner)

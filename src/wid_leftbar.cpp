@@ -85,7 +85,6 @@ bool wid_leftbar_create(void)
 
   if (g_opt_ascii) {
     return wid_leftbar_ascii_create();
-  } else {
-    return wid_leftbar_pixelart_create();
   }
+  return wid_leftbar_pixelart_create();
 }

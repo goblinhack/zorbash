@@ -666,7 +666,7 @@ static void wid_topcon_log_(std::wstring s)
   if (! wid_topcon_input_line) {
     auto result = wid_topcon_lines.insert(std::make_pair(log_wid_topcon_buffered_lines++, s));
 
-    if (result.second == false) {
+    if (! result.second) {
       DIE("Wid topcon lines insert name [%s] failed", wstring_to_string(s).c_str());
     }
 

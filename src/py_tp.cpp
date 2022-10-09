@@ -13,9 +13,9 @@
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  PyObject *py_class = 0;
+  PyObject *py_class = nullptr;
 
-  static char *kwlist[] = {(char *) "tp", 0};
+  static char *kwlist[] = {(char *) "tp", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "O", kwlist, &py_class)) {
     ERR("tp_load: Bad args");
@@ -347,12 +347,12 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  PyObject *py_class = 0;
-  char     *tp_name  = 0;
+  PyObject *py_class = nullptr;
+  char     *tp_name  = nullptr;
   int       value    = 0;
   Tpp       tp;
 
-  static char *kwlist[] = {(char *) "class", (char *) "value", 0};
+  static char *kwlist[] = {(char *) "class", (char *) "value", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class, &value)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -392,7 +392,7 @@ PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
   char    *what = nullptr;
   uint32_t id   = 0;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -434,7 +434,7 @@ PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *ke
   char    *what = nullptr;
   uint32_t id   = 0;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -480,8 +480,9 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
   uint32_t radius_min = 0;
   uint32_t radius_max = 0;
 
-  static char *kwlist[] = {
-      (char *) "id", (char *) "parent_id", (char *) "victim_id", (char *) "what", (char *) "min", (char *) "max", 0};
+  static char *kwlist[] = {(char *) "id",   (char *) "parent_id", (char *) "victim_id",
+                           (char *) "what", (char *) "min",       (char *) "max",
+                           nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, &parent_id, &victim_id, &what, &radius_min,
                                     &radius_max)) {
@@ -558,7 +559,7 @@ PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t radius_min = 0;
   uint32_t radius_max = 0;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "min", (char *) "max", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "min", (char *) "max", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is|ii", kwlist, &id, &what, &radius_min, &radius_max)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -603,7 +604,7 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
   int      x    = -1;
   int      y    = -1;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -655,7 +656,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
   char    *what = nullptr;
   uint32_t id   = 0;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -699,7 +700,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
   int      x    = -1;
   int      y    = -1;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
     ERR("%s: Bad args", __FUNCTION__);

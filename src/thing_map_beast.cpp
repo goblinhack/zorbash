@@ -11,9 +11,8 @@ int Thing::map_beast_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->map_beast_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::map_beast_count_set(int v)

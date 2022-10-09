@@ -16,7 +16,7 @@ std::array< std::array< char, MAP_HEIGHT >, MAP_WIDTH > astar_debug {};
 class Nodecost
 {
 public:
-  Nodecost(void) {}
+  Nodecost(void) = default;
   Nodecost(int c) : cost(c)
   {
     static int tiebreak_;
@@ -27,11 +27,11 @@ public:
   {
     if (cost < rhs.cost) {
       return true;
-    } else if (cost > rhs.cost) {
-      return false;
-    } else {
-      return (tiebreak < rhs.tiebreak);
     }
+    if (cost > rhs.cost) {
+      return false;
+    }
+    return (tiebreak < rhs.tiebreak);
   }
 
   int cost {};
@@ -41,7 +41,7 @@ public:
 class Node
 {
 public:
-  Node(void) {}
+  Node(void) = default;
   Node(Thingp me, point p, Nodecost c) : cost(c), at(p) { is_disliked = me->is_disliked_by_me(p); }
 
   class Node *came_from {};
@@ -77,7 +77,7 @@ public:
     }
     *o          = n;
     auto result = open_nodes.insert(std::make_pair(n->cost, n));
-    if (result.second == false) {
+    if (! result.second) {
       ERR("Open insert fail");
       return;
     }
@@ -93,7 +93,7 @@ public:
     }
     *o          = n;
     auto result = closed_nodes.insert(std::make_pair(n->cost, n));
-    if (result.second == false) {
+    if (! result.second) {
       ERR("Closed insert fail");
       return;
     }

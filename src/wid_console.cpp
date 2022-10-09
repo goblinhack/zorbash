@@ -105,7 +105,7 @@ static void wid_console_log_(std::wstring s)
   if (! wid_console_input_line) {
     auto result = wid_console_lines.insert(std::make_pair(log_wid_console_buffered_lines++, s));
 
-    if (result.second == false) {
+    if (! result.second) {
       DIE("Wid console lines insert name [%s] failed", wstring_to_string(s).c_str());
     }
 

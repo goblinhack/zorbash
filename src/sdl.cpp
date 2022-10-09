@@ -123,10 +123,9 @@ static void sdl_init_joystick(void)
       if (controller) {
         LOG("- Found gamecontroller");
         break;
-      } else {
-        WARN("Could not open gamecontroller %i: %s", sdl.joy_index, SDL_GetError());
-        SDL_ClearError();
       }
+      WARN("Could not open gamecontroller %i: %s", sdl.joy_index, SDL_GetError());
+      SDL_ClearError();
     }
   }
 
@@ -170,7 +169,7 @@ uint8_t sdl_init(void)
   }
 
   CON("SDL: Init video");
-  if (SDL_VideoInit(0) != 0) {
+  if (SDL_VideoInit(nullptr) != 0) {
     SDL_MSG_BOX("SDL_VideoInit failed %s", SDL_GetError());
     DIE("SDL_VideoInit failed %s", SDL_GetError());
     return false;
@@ -249,7 +248,7 @@ uint8_t sdl_init(void)
     //
     CON("SDL: Calling SDL_GetDisplayDPI");
     float dpi;
-    if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
+    if (SDL_GetDisplayDPI(0, nullptr, &dpi, nullptr) == 0) {
       video_unused_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
       CON("SDL: Set SDL_WINDOW_ALLOW_HIGHDPI");
     } else {
@@ -570,7 +569,7 @@ uint8_t config_fps_counter_set(class Tokens *tokens, void *context)
     game->config.fps_counter = true;
     TOPCON("FPS counter enabled (default)");
   } else {
-    game->config.fps_counter = strtol(s, 0, 10) ? 1 : 0;
+    game->config.fps_counter = strtol(s, nullptr, 10) ? 1 : 0;
     if (game->config.fps_counter) {
       TOPCON("FPS counter enabled");
     } else {
@@ -598,7 +597,7 @@ uint8_t config_debug_set(class Tokens *tokens, void *context)
     g_opt_debug1 = false;
     g_opt_debug2 = false;
     g_opt_debug3 = false;
-    switch (strtol(s, 0, 10) ? 1 : 0) {
+    switch (strtol(s, nullptr, 10) ? 1 : 0) {
       case 0: break;
       default: g_opt_debug1 = true; break;
     }
@@ -642,7 +641,7 @@ uint8_t config_gfx_inverted_set(class Tokens *tokens, void *context)
     game->config.gfx_inverted = true;
     TOPCON("GFX inverted enabled (default)");
   } else {
-    int val                   = strtol(s, 0, 10) ? 1 : 0;
+    int val                   = strtol(s, nullptr, 10) ? 1 : 0;
     game->config.gfx_inverted = val;
     if (game->config.gfx_inverted) {
       TOPCON("GFX inverted enabled");
@@ -692,7 +691,7 @@ uint8_t config_game_pix_zoom_set(class Tokens *tokens, void *context)
     game->config.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
     TOPCON("GFX: gfx zoom enabled (default)");
   } else {
-    int val                    = strtol(s, 0, 10);
+    int val                    = strtol(s, nullptr, 10);
     game->config.game_pix_zoom = val;
     if (game->config.game_pix_zoom < GAME_MOST_ZOOMED_OUT) {
       game->config.game_pix_zoom = GAME_MOST_ZOOMED_OUT;
@@ -719,7 +718,7 @@ uint8_t config_gfx_vsync_enable(class Tokens *tokens, void *context)
   if (! s || (*s == '\0')) {
     game->config.gfx_vsync_enable = true;
   } else {
-    game->config.gfx_vsync_enable = strtol(s, 0, 10) ? 1 : 0;
+    game->config.gfx_vsync_enable = strtol(s, nullptr, 10) ? 1 : 0;
   }
 
   if (game->config.gfx_vsync_enable) {

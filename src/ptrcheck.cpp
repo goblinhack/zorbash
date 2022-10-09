@@ -498,7 +498,8 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
     }
 #endif
     return (pc);
-  } if (! ptr) {
+  }
+  if (! ptr) {
     ERR("%s%p NULL pointer %s:%s line %u", null_pointer_warning, ptr, file, func, line);
     return nullptr;
   }

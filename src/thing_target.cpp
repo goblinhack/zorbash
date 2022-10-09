@@ -788,11 +788,7 @@ bool Thing::victim_attack_best_(int equip, AttackOptions *attack_options)
     return ret;
   }
 
-  if (victim_attack_best_at(equip, attack_options)) {
-    return true;
-  }
-
-  return false;
+  return victim_attack_best_at(equip, attack_options);
 }
 
 bool Thing::victim_attack_best(int equip, AttackOptions *attack_options)

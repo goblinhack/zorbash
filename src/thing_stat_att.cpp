@@ -225,9 +225,8 @@ int Thing::stat_att(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_att);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_att_set(int v)

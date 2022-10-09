@@ -228,9 +228,8 @@ int Thing::enchant_max_current_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->enchant_max);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::enchant_max_current_set(int v)

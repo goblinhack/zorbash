@@ -256,14 +256,13 @@ bool Thing::possible_to_attack(const Thingp victim)
         }
         dbg("Can attack %s", victim->to_short_string().c_str());
         return true;
-      } else {
-        if (! victim->is_attackable_by_player()) {
-          dbg("Cannot weapon attack %s, not is_attackable by player", victim->to_short_string().c_str());
-          return false;
-        }
-        dbg("Can attack %s", victim->to_short_string().c_str());
-        return true;
       }
+      if (! victim->is_attackable_by_player()) {
+        dbg("Cannot weapon attack %s, not is_attackable by player", victim->to_short_string().c_str());
+        return false;
+      }
+      dbg("Can attack %s", victim->to_short_string().c_str());
+      return true;
     }
   }
 
@@ -291,20 +290,18 @@ bool Thing::possible_to_attack(const Thingp victim)
       if (is_able_to_break_out_of_webs()) {
         dbg("Can attack and break out of web %s", victim->to_short_string().c_str());
         return true;
-      } else {
-        dbg("Can not break out of web %s", victim->to_short_string().c_str());
-        return false;
       }
+      dbg("Can not break out of web %s", victim->to_short_string().c_str());
+      return false;
     }
 
     if (victim->is_block_of_ice()) {
       if (is_able_to_break_out_of_ice()) {
         dbg("Can attack and break out of ice %s", victim->to_short_string().c_str());
         return true;
-      } else {
-        dbg("Can not break out of web %s", victim->to_short_string().c_str());
-        return false;
       }
+      dbg("Can not break out of web %s", victim->to_short_string().c_str());
+      return false;
     }
 
     if (victim->is_foilage() || victim->is_carnivorous_plant()) {

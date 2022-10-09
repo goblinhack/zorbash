@@ -122,9 +122,8 @@ int Thing::stat_str(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_str);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_str_set(int v)

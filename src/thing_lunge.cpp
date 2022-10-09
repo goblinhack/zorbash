@@ -71,7 +71,6 @@ float Thing::lunge_curr(void)
 
   if (time_step > 0.5) {
     return (1.0 - time_step);
-  } else {
-    return time_step;
   }
+  return time_step;
 }

@@ -157,10 +157,9 @@ const std::string &Thing::poison_reason_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->poison_reason);
-  } else {
-    static std::string empty;
-    return (empty);
   }
+  static std::string empty;
+  return (empty);
 }
 
 void Thing::poison_reason_set(const std::string &v)

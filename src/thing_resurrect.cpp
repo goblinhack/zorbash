@@ -118,9 +118,8 @@ uint32_t Thing::tick_resurrect_when(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->tick_resurrect_when);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 uint32_t Thing::tick_resurrect_when_set(int v)

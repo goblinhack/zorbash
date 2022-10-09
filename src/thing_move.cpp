@@ -843,26 +843,24 @@ bool Thing::move_to_try(const point nh, const bool escaping, bool check_only)
     if (attack_options.victim_attacked) {
       dbg("Cannot move to %d,%d, must attack", nh.x, nh.y);
       return true;
-    } else {
-      dbg("Cannot move to %d,%d, obstacle", nh.x, nh.y);
+    }
+    dbg("Cannot move to %d,%d, obstacle", nh.x, nh.y);
+    return false;
+  }
+  dbg("Move to %d,%d is ok", nh.x, nh.y);
+
+  if (! escaping) {
+    if (terrain_cost_get(nh) >= DMAP_LESS_PREFERRED_TERRAIN) {
+      TRACE_NO_INDENT();
+      dbg("But %d,%d is less preferred terrain, avoid", nh.x, nh.y);
       return false;
     }
-  } else {
-    dbg("Move to %d,%d is ok", nh.x, nh.y);
-
-    if (! escaping) {
-      if (terrain_cost_get(nh) >= DMAP_LESS_PREFERRED_TERRAIN) {
-        TRACE_NO_INDENT();
-        dbg("But %d,%d is less preferred terrain, avoid", nh.x, nh.y);
-        return false;
-      }
-    }
-
-    if (! check_only) {
-      move(nh);
-    }
-    return true;
   }
+
+  if (! check_only) {
+    move(nh);
+  }
+  return true;
 }
 
 bool Thing::move_to_or_attack(const point nh)

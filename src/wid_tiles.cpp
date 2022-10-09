@@ -50,14 +50,14 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
 
   if (name == "") {
     DIE("No name for wid_tiles");
-    return 0;
+    return nullptr;
   }
 
   t = std::make_shared< class WidTiles >();
 
   auto result = wid_tiles_all.insert(std::make_pair(name, t));
 
-  if (result.second == false) {
+  if (! result.second) {
     DIE("Wid_tiles insert name [%s] failed", name.c_str());
   }
 

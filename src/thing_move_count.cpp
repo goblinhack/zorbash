@@ -12,9 +12,8 @@ int Thing::move_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->move_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::move_count_set(int v)

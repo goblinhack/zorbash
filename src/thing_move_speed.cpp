@@ -122,9 +122,8 @@ int Thing::move_speed_mod(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->move_speed_mod);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::move_speed_mod_set(int v)

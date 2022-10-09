@@ -1613,10 +1613,11 @@ static PyMethodDef python_c_METHODS[] = {
     PYFUNC_REF(SDLGetKeyState),
     // end sort marker1
 
-    {0, 0, 0, 0} /* sentinel */
+    {nullptr, nullptr, 0, nullptr} /* sentinel */
 };
 
-static struct PyModuleDef python_c_MODULE = {PyModuleDef_HEAD_INIT, "my", 0, -1, python_c_METHODS, 0, 0, 0, 0};
+static struct PyModuleDef python_c_MODULE = {
+    PyModuleDef_HEAD_INIT, "my", nullptr, -1, python_c_METHODS, nullptr, nullptr, nullptr, nullptr};
 
 PyMODINIT_FUNC py_my_module_create(void)
 {
@@ -1625,7 +1626,7 @@ PyMODINIT_FUNC py_my_module_create(void)
   if (! m) {
     PyErr_Print();
     DIE("Python init");
-    return 0;
+    return nullptr;
   }
 
   return m;

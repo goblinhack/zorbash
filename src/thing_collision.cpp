@@ -15,7 +15,7 @@
 class ThingColl
 {
 public:
-  ThingColl(void) {}
+  ThingColl(void) = default;
   ThingColl(Thingp target, std::string reason, uint16_t priority) : target(target), reason(reason), priority(priority)
   {
   }
@@ -447,19 +447,21 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
         if (it->is_soft()) {
           dbg("Overlaps; barrel can splat soft monst");
           return false;
-        } else if (it->is_flying()) {
+        }
+        if (it->is_flying()) {
           dbg("Overlaps; barrel can splat flying monst");
           return false;
-        } else if (it->is_ethereal()) {
+        }
+        if (it->is_ethereal()) {
           dbg("Overlaps; barrel can splat ethereal monst");
           return false;
-        } else if (it->is_crushable()) {
+        }
+        if (it->is_crushable()) {
           dbg("Overlaps; barrel can crush monst");
           return false;
-        } else {
-          dbg("Overlaps; barrel cannot splat");
-          return true;
         }
+        dbg("Overlaps; barrel cannot splat");
+        return true;
       }
     } else if (is_brazier()) {
       //
@@ -570,7 +572,8 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
         dbg("Collision; overlaps and can open");
         if (open_door(it)) {
           return false;
-        } else if (things_overlap(me, future_pos, it)) {
+        }
+        if (things_overlap(me, future_pos, it)) {
           dbg("Collision; overlaps and can attack");
           return true;
         }
@@ -682,10 +685,9 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     if (things_overlap(me, future_pos, it)) {
       dbg("Collision; overlaps and can attack");
       return true;
-    } else {
-      dbg("No collision; can attack but no overlap");
-      return false;
     }
+    dbg("No collision; can attack but no overlap");
+    return false;
   }
 
   if (can_eat(it)) {
@@ -703,10 +705,9 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
     if (things_overlap(me, me->curr_at, it)) {
       dbg("Collision; can eat and overlaps");
       return true;
-    } else {
-      dbg("Collision; can eat but no overlap");
-      return false;
     }
+    dbg("Collision; can eat but no overlap");
+    return false;
   }
 
   //

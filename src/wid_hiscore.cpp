@@ -116,9 +116,9 @@ void Game::wid_hiscores_show(void)
     wid_hiscore_window->log(UI_LOGGING_EMPTY_LINE);
   }
 
-  std::vector< HiScore >::iterator h     = game->config.hiscores.hiscores.begin();
-  bool                             first = true;
-  auto                             index = 0;
+  auto h     = game->config.hiscores.hiscores.begin();
+  bool first = true;
+  auto index = 0;
 
   const char *colors[ HiScore::max_displayed ] = {
       "green", "yellow", "yellow", "yellow", "gold", "gold", "gold", "white", "white", "white",

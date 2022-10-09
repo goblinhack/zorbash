@@ -34,9 +34,8 @@ bool Thing::descend_dungeon_tick(void)
     }
     is_waiting_to_descend_dungeon = true;
     return true;
-  } else {
-    return descend_dungeon();
   }
+  return descend_dungeon();
 }
 
 bool Thing::descend_dungeon(bool force, point3d next_level)

@@ -11,9 +11,8 @@ int Thing::map_treasure_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->map_treasure_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::map_treasure_count_set(int v)

@@ -128,7 +128,7 @@ void command_add(command_fn_t callback, std::string input, std::string readable)
 
   auto result = commands_map.insert(std::make_pair(input, command));
 
-  if (!result.second) {
+  if (! result.second) {
     ERR("Command insert name [%s] failed", input.c_str());
     return;
   }

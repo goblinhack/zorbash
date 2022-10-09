@@ -103,7 +103,7 @@ static void wid_botcon_log_(std::wstring s)
   if (! wid_botcon_input_line) {
     auto result = wid_botcon_lines.insert(std::make_pair(log_wid_botcon_buffered_lines++, s));
 
-    if (result.second == false) {
+    if (! result.second) {
       DIE("Wid botcon lines insert name [%s] failed", wstring_to_string(s).c_str());
     }
 

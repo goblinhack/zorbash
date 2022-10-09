@@ -32,8 +32,8 @@ HiScores::~HiScores(void) { TRACE_AND_INDENT(); }
 void HiScores::add_new_hiscore(Thingp player, const std::string &name, const std::string &defeated_by)
 {
   TRACE_AND_INDENT();
-  auto h = hiscores.begin();
-  std::string                      hiscore_name;
+  auto        h = hiscores.begin();
+  std::string hiscore_name;
 
   if (game->robot_mode) {
     hiscore_name = std::string("Robot ") + name;

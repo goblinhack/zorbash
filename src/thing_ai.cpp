@@ -36,9 +36,8 @@ bool operator<(const class Path &lhs, const class Path &rhs)
 {
   if (lhs.cost == rhs.cost) {
     return lhs.path.size() < rhs.path.size();
-  } else {
-    return lhs.cost < rhs.cost; // Lower costs at the head
   }
+  return lhs.cost < rhs.cost; // Lower costs at the head
 }
 
 #define GOAL_ADD(prio, score, msg, it)                                                                               \
@@ -1622,9 +1621,7 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
   //
   // Choose goals (higher scores, lower costs are preferred)
   //
-  for (auto i = 0; i < (int) can_reach_cands.size(); i++) {
-    auto p = can_reach_cands[ i ];
-
+  for (auto p : can_reach_cands) {
     //
     // Avoid sewer descend/ascend loop
     //

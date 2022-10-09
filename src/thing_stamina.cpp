@@ -147,9 +147,8 @@ int Thing::stamina_max(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stamina_max);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stamina_max_set(int v)

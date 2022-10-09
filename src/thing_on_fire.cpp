@@ -233,13 +233,13 @@ bool Thing::ai_create_on_fire_path(point &nh, const point start, const point end
       nh = hop0;
     }
     return true;
-  } else if (hops_len >= 1) {
+  }
+  if (hops_len >= 1) {
     auto hop0 = get(hops, hops_len - 1);
     nh        = hop0;
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 bool Thing::ai_on_fire_choose_target(point &nh)

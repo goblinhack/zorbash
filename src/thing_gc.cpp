@@ -15,7 +15,7 @@ void Thing::gc(void)
   TRACE_NO_INDENT();
 
   auto result = level->all_things_to_be_destroyed.insert(std::pair(id, this));
-  if (result.second == false) {
+  if (! result.second) {
     //
     // Is this a problem?
     //

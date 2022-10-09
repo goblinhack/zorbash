@@ -170,9 +170,8 @@ int Thing::prev_light_dist_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->prev_light_dist);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::prev_light_dist_set(int v)

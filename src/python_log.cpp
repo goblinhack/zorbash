@@ -24,7 +24,7 @@
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  wchar_t *a = 0;
+  wchar_t *a = nullptr;
 
   if (! PyArg_ParseTuple(args, "u", &a)) {
     ERR("con: Bad args");
@@ -41,7 +41,7 @@ PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *topcon_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  wchar_t *a = 0;
+  wchar_t *a = nullptr;
 
   if (! PyArg_ParseTuple(args, "u", &a)) {
     ERR("topcon: Bad args");
@@ -58,7 +58,7 @@ PyObject *topcon_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *puts_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *a = 0;
+  char *a = nullptr;
 
   if (! PyArg_ParseTuple(args, "s", &a)) {
     ERR("puts: Bad args");
@@ -75,7 +75,7 @@ PyObject *puts_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *log_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *a = 0;
+  char *a = nullptr;
 
   if (! PyArg_ParseTuple(args, "s", &a)) {
     ERR("log: Bad args");
@@ -92,7 +92,7 @@ PyObject *log_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *err_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *a = 0;
+  char *a = nullptr;
 
   if (! PyArg_ParseTuple(args, "s", &a)) {
     ERR("err: Bad args");
@@ -109,7 +109,7 @@ PyObject *err_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *die_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *a = 0;
+  char *a = nullptr;
 
   if (! PyArg_ParseTuple(args, "s", &a)) {
     ERR("die: Bad args");

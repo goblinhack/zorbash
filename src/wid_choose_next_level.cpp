@@ -118,7 +118,7 @@ static void wid_choose_next_dungeons_set_focus(wid_choose_next_dungeons_ctx *ctx
 static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
-  wid_choose_next_dungeons_ctx *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
+  auto *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
   if (! relx && ! rely && ! wheelx && ! wheely) {
@@ -209,7 +209,7 @@ static void wid_choose_next_dungeons_destroy(Widp w)
   } else {
     ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
     verify(MTYPE_WID, ctx);
-    wid_set_void_context(w, 0);
+    wid_set_void_context(w, nullptr);
   }
 
   /*
@@ -228,7 +228,7 @@ static void wid_choose_next_dungeons_destroy(Widp w)
 static void wid_choose_next_dungeons_tick(Widp w)
 {
   TRACE_NO_INDENT();
-  wid_choose_next_dungeons_ctx *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
+  auto *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
   wid_choose_levels_bg();
@@ -324,7 +324,7 @@ static void wid_choose_next_dungeons_tick(Widp w)
 static void wid_choose_next_dungeons_post_display_tick(Widp w)
 {
   TRACE_NO_INDENT();
-  wid_choose_next_dungeons_ctx *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
+  auto *ctx = (wid_choose_next_dungeons_ctx *) wid_get_void_context(w);
   verify(MTYPE_WID, ctx);
 
   for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
@@ -612,7 +612,7 @@ static void wid_choose_next_dungeons_update_buttons(Widp w)
 
   int x, y;
 
-  ctx->b = 0;
+  ctx->b = nullptr;
 
   for (x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
     for (y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
@@ -657,7 +657,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
   //
   // Create a context to hold button info so we can update it when the focus changes
   //
-  wid_choose_next_dungeons_ctx *ctx = new wid_choose_next_dungeons_ctx();
+  auto *ctx = new wid_choose_next_dungeons_ctx();
   newptr(MTYPE_WID, ctx, "wid level grid ctx");
   g_ctx = ctx;
 

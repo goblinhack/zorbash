@@ -16,7 +16,7 @@
 #include "my_main.hpp"
 #include "my_point.hpp"
 
-using Rooms = std::vector<Roomp>;
+using Rooms = std::vector< Roomp >;
 
 class Room
 {

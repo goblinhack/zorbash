@@ -420,7 +420,7 @@ static void sdl_key_repeat_events_(void)
     return;
   }
 
-  const uint8_t *state = SDL_GetKeyboardState(0);
+  const uint8_t *state = SDL_GetKeyboardState(nullptr);
 
   bool        up    = state[ sdlk_to_scancode(game->config.key_move_up) ];
   bool        down  = state[ sdlk_to_scancode(game->config.key_move_down) ];

@@ -6,14 +6,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-bool Level::can_see_obstacle(int x, int y)
-{
-  if (is_obs_wall_or_door(x, y)) {
-    return true;
-  }
-
-  return false;
-}
+bool Level::can_see_obstacle(int x, int y) { return is_obs_wall_or_door(x, y); }
 
 bool Level::can_see_unimpeded(int x0, int y0, int x1, int y1)
 {

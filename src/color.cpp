@@ -12,7 +12,7 @@
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
-using colors = std::map<std::string, color>;
+using colors = std::map< std::string, color >;
 
 colors      color_map;
 static bool color_init_done;
@@ -26,7 +26,7 @@ void color_set(std::string name, color *c, uint8_t r, uint8_t g, uint8_t b, uint
   c->a = a;
 
   auto result = color_map.insert(std::make_pair(name, *c));
-  if (!result.second) {
+  if (! result.second) {
     ERR("Color insert name [%s] failed", name.c_str());
   }
 }

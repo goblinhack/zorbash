@@ -19,15 +19,15 @@ std::string py_obj_to_std_string(const PyObject *py_str)
   std::string outstr;
   char       *str;
 
-  py_encstr = 0;
-  str       = 0;
+  py_encstr = nullptr;
+  str       = nullptr;
 
   if (! PyUnicode_Check((PyObject *) py_str)) {
     ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_str)->tp_name);
     goto err_out;
   }
 
-  py_encstr = PyUnicode_AsEncodedString((PyObject *) py_str, "utf-8", 0);
+  py_encstr = PyUnicode_AsEncodedString((PyObject *) py_str, "utf-8", nullptr);
   if (! py_encstr) {
     goto err_out;
   }

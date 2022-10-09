@@ -37,7 +37,7 @@ static Fontp font_load(std::string name)
 
   auto result = fonts.insert(std::make_pair(name, f));
 
-  if (!result.second) {
+  if (! result.second) {
     ERR("Font insert name [%s] failed", name.c_str());
     return f;
   }
@@ -118,9 +118,9 @@ Tilep Font::unicode_to_tile(int u)
     if (u == L'?') {
       ERR("unicode char 0x%X/%d -> not found as tile %s", u, u, tile_name);
       return (unicode_to_tile(L'?'));
-    }       ERR("unicode char 0x%X/%d -> not found as tile %s", u, u, tile_name);
-      return (unicode_to_tile(L'?'));
-   
+    }
+    ERR("unicode char 0x%X/%d -> not found as tile %s", u, u, tile_name);
+    return (unicode_to_tile(L'?'));
   }
 
   set(this->cache, index, tile);

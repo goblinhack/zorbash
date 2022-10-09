@@ -182,9 +182,8 @@ bool Thing::eat(Thingp victim)
       //
       if (victim->is_alive_monst() || victim->is_player()) {
         return nat_att(victim);
-      } else {
-        return consume(victim);
       }
+      return consume(victim);
     }
   }
   return false;

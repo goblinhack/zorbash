@@ -44,9 +44,8 @@ int Thing::idle_count(void)
 
   if (maybe_aip()) {
     return (aip()->idle_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::idle_count_set(int v)

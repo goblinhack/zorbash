@@ -122,9 +122,8 @@ int Thing::stat_dex(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_dex);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_dex_set(int v)

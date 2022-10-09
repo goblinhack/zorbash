@@ -24,11 +24,7 @@ void Thing::plant_tick(void)
   //
   // Give the player a chance
   //
-  if (d20() < stat_dex()) {
-    hit = false;
-  } else {
-    hit = true;
-  }
+  hit = d20() >= stat_dex();
 
   if (hit) {
     dbg("Plant hit");

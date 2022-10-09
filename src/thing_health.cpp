@@ -44,11 +44,7 @@ bool Thing::health_boost_would_occur(int v)
   auto old_health = health();
   auto max_health = health_max();
 
-  if (old_health >= max_health) {
-    return false;
-  }
-
-  return true;
+  return old_health < max_health;
 }
 
 bool Thing::is_bloodied(void)
@@ -155,9 +151,8 @@ int Thing::health_max(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->health_max);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::health_max_set(int v)

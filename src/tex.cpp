@@ -18,7 +18,7 @@ class Tex
 public:
   Tex(std::string name) : name(name)
   {
-    surface            = 0;
+    surface            = nullptr;
     gl_surface_binding = 0;
     newptr(MTYPE_TEX, this, "Tex");
   }
@@ -31,7 +31,7 @@ public:
       verify(MTYPE_SDL, surface);
       SDL_FreeSurface(surface);
       oldptr(MTYPE_SDL, surface);
-      surface = 0;
+      surface = nullptr;
     }
 
     if (gl_surface_binding) {
@@ -86,7 +86,7 @@ static unsigned char *load_raw_image(std::string filename, int *x, int *y, int *
 {
   TRACE_AND_INDENT();
   unsigned char *file_data;
-  unsigned char *image_data = 0;
+  unsigned char *image_data = nullptr;
   int            len;
 
   file_data = file_load(filename.c_str(), &len);
@@ -149,7 +149,7 @@ static SDL_Surface *load_image(std::string filename)
   } else {
     ERR("Could not handle image with %d components", comp);
     free_raw_image(image_data);
-    return 0;
+    return nullptr;
   }
 
   memcpy(surf->pixels, image_data, comp * x * y);
@@ -174,8 +174,8 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
   TRACE_AND_INDENT();
   uint32_t       rmask, gmask, bmask, amask;
   unsigned char *image_data;
-  SDL_Surface   *surf1 = 0;
-  SDL_Surface   *surf2 = 0;
+  SDL_Surface   *surf1 = nullptr;
+  SDL_Surface   *surf2 = nullptr;
   int            x, y, comp;
 
   image_data = load_raw_image(filename, &x, &y, &comp);
@@ -266,14 +266,13 @@ Texp tex_load(std::string file, std::string name, int mode)
   if (file == "") {
     if (name == "") {
       ERR("No file for tex");
-      return 0;
-    } else {
-      ERR("No file for tex loading '%s'", name.c_str());
-      return 0;
+      return nullptr;
     }
+    ERR("No file for tex loading '%s'", name.c_str());
+    return nullptr;
   }
 
-  SDL_Surface *surface = 0;
+  SDL_Surface *surface = nullptr;
   surface              = load_image(file);
 
   if (! surface) {
@@ -397,8 +396,8 @@ void tex_load(Texp *tex, Texp *tex_black_and_white, Texp *tex_mask, std::string 
   }
 
   DBG2("- create textures '%s', '%s'", file.c_str(), name.c_str());
-  SDL_Surface *surface                 = 0;
-  SDL_Surface *surface_black_and_white = 0;
+  SDL_Surface *surface                 = nullptr;
+  SDL_Surface *surface_black_and_white = nullptr;
 
   load_images(&surface, &surface_black_and_white, file);
 
@@ -430,7 +429,7 @@ Texp tex_find(std::string file)
 
   auto result = textures.find(file);
   if (result == textures.end()) {
-    return 0;
+    return nullptr;
   }
 
   return (result->second);
@@ -518,7 +517,7 @@ Texp tex_from_surface(SDL_Surface *surface, std::string file, std::string name, 
   Texp t      = new Tex(name);
   auto result = textures.insert(std::make_pair(name, t));
 
-  if (result.second == false) {
+  if (! result.second) {
     ERR("Tex insert name '%s' failed", name.c_str());
   }
 
@@ -579,7 +578,7 @@ Texp string2tex(const char **s)
   }
 
   if (c == eo_tmp) {
-    return 0;
+    return nullptr;
   }
 
   *t++ = '\0';

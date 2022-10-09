@@ -277,7 +277,8 @@ static int blit_msg_strlen(std::string const &text)
         (void) string2color(tmp, &len);
         text_iter += len + 1;
         continue;
-      } else if (std::string(text_iter, text_iter + 3) == "bg=") {
+      }
+      if (std::string(text_iter, text_iter + 3) == "bg=") {
         text_iter += 3;
         auto tmp = std::string(text_iter, text.end());
 
@@ -286,7 +287,8 @@ static int blit_msg_strlen(std::string const &text)
         text_iter += len + 1;
 
         continue;
-      } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+      }
+      if (std::string(text_iter, text_iter + 3) == "tp=") {
         text_iter += 3;
         auto tmp = std::string(text_iter, text.end());
 
@@ -295,10 +297,12 @@ static int blit_msg_strlen(std::string const &text)
         text_iter += len + 1;
 
         continue;
-      } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+      }
+      if (std::string(text_iter, text_iter + 4) == "tex=") {
         text_iter += 4;
         continue;
-      } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+      }
+      if (std::string(text_iter, text_iter + 5) == "tile=") {
         text_iter += 5;
         auto tmp = std::string(text_iter, text.end());
 
@@ -347,7 +351,8 @@ void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point o
         fg.a     = blit_fg_color.a;
         text_iter += len + 1;
         continue;
-      } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+      }
+      if (std::string(text_iter, text_iter + 3) == "tp=") {
         text_iter += 3;
         auto tmp = std::string(text_iter, text.end());
 
@@ -357,10 +362,12 @@ void Thing::blit_text(std::string const &text, color fg, point oblit_tl, point o
 
         tile = tp_first_tile(tp);
         continue;
-      } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+      }
+      if (std::string(text_iter, text_iter + 4) == "tex=") {
         text_iter += 4;
         continue;
-      } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+      }
+      if (std::string(text_iter, text_iter + 5) == "tile=") {
         text_iter += 5;
         auto tmp = std::string(text_iter, text.end());
         int  len = 0;

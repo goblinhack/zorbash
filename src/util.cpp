@@ -64,7 +64,7 @@ char *dupstr_(const char *in, const char *what, const char *file, const char *fu
   TRACE_AND_INDENT();
   if (! in) {
     ERR("No string to duplicate");
-    return 0;
+    return nullptr;
   }
 
   char *ptr = strdup(in);

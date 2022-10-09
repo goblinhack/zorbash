@@ -9,7 +9,7 @@
 #include <memory> // do not remove
 #include <vector> // do not remove
 
-using LevelsStatic = std::vector<LevelStaticp>;
+using LevelsStatic = std::vector< LevelStaticp >;
 
 class LevelStatic
 {

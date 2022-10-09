@@ -1091,9 +1091,9 @@ std::vector< char > read_file(const std::string filename)
     std::vector< char > bytes(sz);
     ifs.read(bytes.data(), sz);
     return bytes;
-  }     std::vector< char > bytes;
-    return bytes;
- 
+  }
+  std::vector< char > bytes;
+  return bytes;
 }
 
 static std::vector< char > read_lzo_file(const std::string filename, lzo_uint *uncompressed_sz, uint32_t *cs)
@@ -1117,9 +1117,9 @@ static std::vector< char > read_lzo_file(const std::string filename, lzo_uint *u
     std::vector< char > bytes(sz);
     ifs.read(bytes.data(), sz);
     return (bytes);
-  }     std::vector< char > bytes;
-    return (bytes);
- 
+  }
+  std::vector< char > bytes;
+  return (bytes);
 }
 
 uint32_t csum(char *mem, uint32_t len)

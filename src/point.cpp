@@ -114,11 +114,10 @@ float angle_radians(const fpoint &p)
   if (p.x > 0) {
     if (p.y > 0) {
       return (theta);
-    }       return (RAD_360 + theta);
-   
-  } else {
-    return (RAD_180 - theta);
+    }
+    return (RAD_360 + theta);
   }
+  return (RAD_180 - theta);
 }
 
 fpoint rotate_radians(float angle, const fpoint &p, const fpoint &O)

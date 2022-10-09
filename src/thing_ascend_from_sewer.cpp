@@ -34,9 +34,8 @@ bool Thing::ascend_sewer_tick(void)
     }
     is_waiting_to_ascend_sewer = true;
     return true;
-  } else {
-    return ascend_sewer();
   }
+  return ascend_sewer();
 
   return false;
 }

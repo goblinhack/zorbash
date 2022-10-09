@@ -114,7 +114,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
   int         len;
 
   if (! in || ! look_for || ! replace_with) {
-    return 0;
+    return nullptr;
   }
 
   // printf("in %s\n", in);
@@ -132,7 +132,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
   len = (uint32_t) strlen(in) - oldlen + newlen;
   buf = (__typeof__(buf)) myzalloc_(len + sizeof((char) '\0'), what, file, func, line);
   if (! buf) {
-    return 0;
+    return nullptr;
   }
 
   *buf = '\0';
@@ -162,14 +162,14 @@ char *strappend(const char *in, const char *append)
   int   len;
 
   if (! in || ! append) {
-    return 0;
+    return nullptr;
   }
 
   newlen = (uint32_t) strlen(append);
   len    = (uint32_t) strlen(in) + newlen;
   buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strappend");
   if (! buf) {
-    return 0;
+    return nullptr;
   }
 
   strcpy(buf, in);
@@ -191,14 +191,14 @@ char *strprepend(const char *in, const char *prepend)
   int   len;
 
   if (! in || ! prepend) {
-    return 0;
+    return nullptr;
   }
 
   newlen = (uint32_t) strlen(prepend);
   len    = (uint32_t) strlen(in) + newlen;
   buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strprepend");
   if (! buf) {
-    return 0;
+    return nullptr;
   }
 
   strcpy(buf, prepend);
@@ -486,7 +486,7 @@ shared_vector_string split(const char *text, int max_line_len)
   const char *const text_start = text;
 
   if (! text) {
-    return 0;
+    return nullptr;
   }
 
   auto result = std::make_shared< std::vector< std::string > >();
@@ -532,25 +532,29 @@ shared_vector_string split(const char *text, int max_line_len)
           (void) string2color(&text);
           found_format_string = false;
           continue;
-        } else if (! strncmp(text, "tp=", 3)) {
+        }
+        if (! strncmp(text, "tp=", 3)) {
           text += 3;
           line_len -= 2; /* for the %% */
           (void) string2tp(&text);
           found_format_string = false;
           continue;
-        } else if (! strncmp(text, "tex=", 4)) {
+        }
+        if (! strncmp(text, "tex=", 4)) {
           text += 4;
           line_len -= 2; /* for the %% */
           (void) string2tex(&text);
           found_format_string = false;
           continue;
-        } else if (! strncmp(text, "tile=", 5)) {
+        }
+        if (! strncmp(text, "tile=", 5)) {
           text += 5;
           line_len -= 2; /* for the %% */
           (void) string2tile(&text);
           found_format_string = false;
           continue;
-        } else if (c == '%') {
+        }
+        if (c == '%') {
           line_len -= 1;
         } else {
           found_format_string = false;
@@ -637,7 +641,7 @@ shared_vector_string split(const std::string &text, int max_line_len)
   }
 
   if (! text.length()) {
-    return 0;
+    return nullptr;
   }
 
   // printf("SPLIT1 [%s] max_line_len %d\n", text.c_str(), max_line_len);
@@ -690,7 +694,8 @@ shared_vector_string split(const std::string &text, int max_line_len)
 
           found_format_string = false;
           continue;
-        } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+        }
+        if (std::string(text_iter, text_iter + 3) == "tp=") {
           text_iter += 3;
           line_len -= 2; /* for the %% */
 
@@ -702,7 +707,8 @@ shared_vector_string split(const std::string &text, int max_line_len)
 
           found_format_string = false;
           continue;
-        } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+        }
+        if (std::string(text_iter, text_iter + 4) == "tex=") {
           text_iter += 4;
           line_len -= 2; /* for the %% */
           auto tmp = std::string(text_iter, text.end());
@@ -713,7 +719,8 @@ shared_vector_string split(const std::string &text, int max_line_len)
 
           found_format_string = false;
           continue;
-        } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+        }
+        if (std::string(text_iter, text_iter + 5) == "tile=") {
           text_iter += 5;
           line_len -= 2; /* for the %% */
           auto tmp = std::string(text_iter, text.end());
@@ -724,7 +731,8 @@ shared_vector_string split(const std::string &text, int max_line_len)
 
           found_format_string = false;
           continue;
-        } else if (c == '%') {
+        }
+        if (c == '%') {
           line_len -= 1;
         } else {
           found_format_string = false;
@@ -809,7 +817,7 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
   auto    line_end   = text_start;
 
   if (! text.length()) {
-    return 0;
+    return nullptr;
   }
   // printf("SPLIT2 [%s] max_line_len %d\n", wstring_to_string(text).c_str(),
   // max_line_len);
@@ -862,7 +870,8 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
 
           found_format_string = false;
           continue;
-        } else if (std::wstring(text_iter, text_iter + 3) == L"tp=") {
+        }
+        if (std::wstring(text_iter, text_iter + 3) == L"tp=") {
           text_iter += 3;
           line_len -= 2; /* for the %% */
           auto tmp = std::wstring(text_iter, text.end());
@@ -873,7 +882,8 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
 
           found_format_string = false;
           continue;
-        } else if (std::wstring(text_iter, text_iter + 4) == L"tex=") {
+        }
+        if (std::wstring(text_iter, text_iter + 4) == L"tex=") {
           text_iter += 4;
           line_len -= 2; /* for the %% */
           auto tmp = std::wstring(text_iter, text.end());
@@ -884,7 +894,8 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
 
           found_format_string = false;
           continue;
-        } else if (std::wstring(text_iter, text_iter + 5) == L"tile=") {
+        }
+        if (std::wstring(text_iter, text_iter + 5) == L"tile=") {
           text_iter += 5;
           line_len -= 2; /* for the %% */
           auto tmp = std::wstring(text_iter, text.end());
@@ -895,7 +906,8 @@ shared_vector_wstring split(const std::wstring &text, int max_line_len)
 
           found_format_string = false;
           continue;
-        } else if (c == '%') {
+        }
+        if (c == '%') {
           line_len -= 1;
         } else {
           found_format_string = false;
@@ -1001,7 +1013,8 @@ int length_without_format(const std::string &text)
 
         found_format_string = false;
         continue;
-      } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+      }
+      if (std::string(text_iter, text_iter + 3) == "tp=") {
         text_iter += 3;
         line_len -= 2; /* for the %% */
 
@@ -1013,7 +1026,8 @@ int length_without_format(const std::string &text)
 
         found_format_string = false;
         continue;
-      } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+      }
+      if (std::string(text_iter, text_iter + 4) == "tex=") {
         text_iter += 4;
         line_len -= 2; /* for the %% */
         auto tmp = std::string(text_iter, text.end());
@@ -1024,7 +1038,8 @@ int length_without_format(const std::string &text)
 
         found_format_string = false;
         continue;
-      } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+      }
+      if (std::string(text_iter, text_iter + 5) == "tile=") {
         text_iter += 5;
         line_len -= 2; /* for the %% */
         auto tmp = std::string(text_iter, text.end());
@@ -1035,7 +1050,8 @@ int length_without_format(const std::string &text)
 
         found_format_string = false;
         continue;
-      } else if (c == '%') {
+      }
+      if (c == '%') {
         line_len -= 1;
       } else {
         found_format_string = false;
@@ -1085,7 +1101,8 @@ int length_without_format(const std::wstring &text)
 
         found_format_string = false;
         continue;
-      } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+      }
+      if (std::string(text_iter, text_iter + 3) == "tp=") {
         text_iter += 3;
         line_len -= 2; /* for the %% */
 
@@ -1097,7 +1114,8 @@ int length_without_format(const std::wstring &text)
 
         found_format_string = false;
         continue;
-      } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+      }
+      if (std::string(text_iter, text_iter + 4) == "tex=") {
         text_iter += 4;
         line_len -= 2; /* for the %% */
         auto tmp = std::string(text_iter, text.end());
@@ -1108,7 +1126,8 @@ int length_without_format(const std::wstring &text)
 
         found_format_string = false;
         continue;
-      } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+      }
+      if (std::string(text_iter, text_iter + 5) == "tile=") {
         text_iter += 5;
         line_len -= 2; /* for the %% */
         auto tmp = std::string(text_iter, text.end());
@@ -1119,7 +1138,8 @@ int length_without_format(const std::wstring &text)
 
         found_format_string = false;
         continue;
-      } else if (c == '%') {
+      }
+      if (c == '%') {
         line_len -= 1;
       } else {
         found_format_string = false;
@@ -1153,7 +1173,7 @@ Tpp string2tp(const char **s)
 
   if (c == eo_tmp) {
     ERR("Tp name %s is too long", tmp);
-    return 0;
+    return nullptr;
   }
 
   *t++ = '\0';
@@ -1190,7 +1210,7 @@ Tpp string2tp(const std::string &s, int *len)
 
   if (iter == s.end()) {
     ERR("Tp name %s is too long", out.c_str());
-    return 0;
+    return nullptr;
   }
 
   Tpp tp = tp_find(out);
@@ -1285,7 +1305,7 @@ int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
     tmp = (char *) myrealloc(*str, *size, "sprintf realloc");
     if (! tmp) {
       free(*str);
-      *str  = 0;
+      *str  = nullptr;
       *size = 0;
       return (-1);
     }

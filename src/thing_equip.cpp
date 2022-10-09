@@ -280,7 +280,7 @@ void Thing::equip_use_offset_get(int *dx, int *dy, int equip)
 Thingp Thing::equip_carry_anim(int equip)
 {
   TRACE_NO_INDENT();
-  Thingp anim = 0;
+  Thingp anim = nullptr;
 
   auto id = equip_id_carry_anim(equip);
   if (id.ok()) {
@@ -298,7 +298,7 @@ Thingp Thing::equip_use_anim(int equip)
   // If this gfx_anim_use has its own thing id for animations then
   // destroy that.
   //
-  Thingp gfx_anim_use = 0;
+  Thingp gfx_anim_use = nullptr;
 
   auto id = equip_id_use_anim(equip);
   if (id.ok()) {

@@ -40,7 +40,7 @@ void sdl_loop(void)
   int       frames = 0;
 
   sdl_mouse_center();
-  SDL_SetEventFilter(sdl_filter_events, 0);
+  SDL_SetEventFilter(sdl_filter_events, nullptr);
 
   glEnable(GL_TEXTURE_2D);
 

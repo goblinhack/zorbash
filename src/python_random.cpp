@@ -21,10 +21,10 @@ PyObject *pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds)
   int x = 0;
   int y = 0;
 
-  static char *kwlist[] = {(char *) "x", (char *) "y", 0};
+  static char *kwlist[] = {(char *) "x", (char *) "y", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
-    return 0;
+    return nullptr;
   }
 
   //
@@ -40,10 +40,10 @@ PyObject *non_pcg_randint(PyObject *obj, PyObject *args, PyObject *keywds)
   int x = 0;
   int y = 0;
 
-  static char *kwlist[] = {(char *) "x", (char *) "y", 0};
+  static char *kwlist[] = {(char *) "x", (char *) "y", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ii", kwlist, &x, &y)) {
-    return 0;
+    return nullptr;
   }
 
   //

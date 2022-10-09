@@ -313,19 +313,22 @@ struct tree_wid_key_cmp {
   {
     if (lhs.priority < rhs.priority) {
       return true;
-    } if (lhs.priority > rhs.priority) {
+    }
+    if (lhs.priority > rhs.priority) {
       return false;
     }
 
     if (lhs.br.y < rhs.br.y) {
       return true;
-    } if (lhs.br.y > rhs.br.y) {
+    }
+    if (lhs.br.y > rhs.br.y) {
       return false;
     }
 
     if (lhs.key < rhs.key) {
       return true;
-    } if (lhs.key > rhs.key) {
+    }
+    if (lhs.key > rhs.key) {
       return false;
     }
 

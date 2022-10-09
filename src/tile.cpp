@@ -34,9 +34,8 @@ Tilep tile_index_to_tile(uint16_t i)
 {
   if (unlikely(! i)) {
     return nullptr;
-  } else {
-    return all_tiles_array[ i - 1 ];
   }
+  return all_tiles_array[ i - 1 ];
 }
 
 uint8_t tile_init(void);
@@ -148,7 +147,7 @@ Tile::Tile(const class Tile *tile)
   name         = tile->name + " " + std::to_string(global_index);
 
   auto result = all_tiles.insert(std::make_pair(name, this));
-  if (result.second == false) {
+  if (! result.second) {
     ERR("Tile copy insert name [%s] failed", name.c_str());
   }
   all_tiles_array.push_back(this);
@@ -182,7 +181,7 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 
       auto t      = new Tile(); // std::make_shared< class Tile >();
       auto result = all_tiles.insert(std::make_pair(name, t));
-      if (result.second == false) {
+      if (! result.second) {
         ERR("Tile insert name [%s] failed", name.c_str());
       }
 
@@ -327,7 +326,7 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 
       auto t      = new Tile(); // std::make_shared< class Tile >();
       auto result = all_tiles.insert(std::make_pair(name, t));
-      if (result.second == false) {
+      if (! result.second) {
         ERR("Tile insert name [%s] failed", name.c_str());
       }
 
@@ -478,7 +477,7 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 
       auto t      = new Tile(); // std::make_shared< class Tile >();
       auto result = all_tiles.insert(std::make_pair(name, t));
-      if (result.second == false) {
+      if (! result.second) {
         ERR("Tile insert name [%s] failed", name.c_str());
       }
 
@@ -630,7 +629,7 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 
       auto t      = new Tile(); // std::make_shared< class Tile >();
       auto result = all_tiles.insert(std::make_pair(name, t));
-      if (result.second == false) {
+      if (! result.second) {
         ERR("Tile insert name [%s] failed", name.c_str());
       }
 
@@ -757,12 +756,12 @@ Tilep tile_find(std::string name)
 {
   TRACE_AND_INDENT();
   if (name == "") {
-    return 0;
+    return nullptr;
   }
 
   auto result = all_tiles.find(name);
   if (result == all_tiles.end()) {
-    return 0;
+    return nullptr;
   }
 
   return (result->second);
@@ -773,13 +772,13 @@ Tilep tile_find_mand(std::string name)
   TRACE_AND_INDENT();
   if (name == "") {
     ERR("No tile name give");
-    return 0;
+    return nullptr;
   }
 
   auto result = all_tiles.find(name);
   if (result == all_tiles.end()) {
     ERR("Tile name %s not found", name.c_str());
-    return 0;
+    return nullptr;
   }
 
   return (result->second);
@@ -820,7 +819,7 @@ Tilep string2tile(const char **s)
   }
 
   if (c == eo_name) {
-    return 0;
+    return nullptr;
   }
 
   *t++ = '\0';
@@ -829,7 +828,7 @@ Tilep string2tile(const char **s)
   auto result = all_tiles.find(name);
   if (result == all_tiles.end()) {
     ERR("Unknown tile [%s]", name);
-    return 0;
+    return nullptr;
   }
 
   return (result->second);
@@ -894,11 +893,11 @@ void tile_blit_colored_fat(Tpp tp, Tilep tile, point tl, point br, color color_t
   float y1 = tile->y1;
   float y2 = tile->y2;
 
-  if (unlikely(tp != 0)) {
-    float left_off  = (float) tp->blit_left_off();
-    float right_off = (float) tp->blit_right_off();
-    float top_off   = (float) tp->blit_top_off();
-    float bot_off   = (float) tp->blit_bot_off();
+  if (unlikely(tp != nullptr)) {
+    auto left_off  = (float) tp->blit_left_off();
+    auto right_off = (float) tp->blit_right_off();
+    auto top_off   = (float) tp->blit_top_off();
+    auto bot_off   = (float) tp->blit_bot_off();
 
     float pct_w = tile->pct_width;
     float pct_h = tile->pct_height;
@@ -1075,11 +1074,11 @@ Tilep tile_get_frame(Tilemap *tmap, uint32_t frame)
 Tilep tile_next(Tilemap *tmap, Tilep in)
 {
   if (unlikely(! tmap)) {
-    return 0;
+    return nullptr;
   }
   std::vector< Tilep > *tiles = &((*tmap));
   if (unlikely(tiles->empty())) {
-    return 0;
+    return nullptr;
   }
   auto cursor = in->index;
   cursor++;
@@ -1098,9 +1097,8 @@ int Tile::gl_binding(void) const
       return (_gl_binding);
     }
     return (_gl_binding_black_and_white);
-  } else {
-    return (_gl_binding);
   }
+  return (_gl_binding);
 }
 
 void Tile::set_gl_binding(int v) { _gl_binding = v; }

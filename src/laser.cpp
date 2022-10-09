@@ -140,8 +140,8 @@ void Thing::delete_laser(void)
     if (p.id == id) {
       log("Remove laser");
       return true;
-    }       return false;
-   
+    }
+    return false;
   });
 
   level->all_lasers.erase(e, level->all_lasers.end());

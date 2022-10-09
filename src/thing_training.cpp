@@ -47,9 +47,8 @@ int Thing::physical_training(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->physical_training);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::physical_training_set(int v)

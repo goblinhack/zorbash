@@ -12,7 +12,7 @@ bool Thing::matches(const std::string &what)
     struct slre slre;
     if (slre_compile(&slre, what.c_str())) {
       auto name = text_short_name();
-      if (slre_match(&slre, name.c_str(), name.size(), 0 /* captures */)) {
+      if (slre_match(&slre, name.c_str(), name.size(), nullptr /* captures */)) {
         return true;
       }
     }

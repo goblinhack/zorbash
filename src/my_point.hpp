@@ -28,8 +28,8 @@ public:
   void        unit(void);
 };
 
-using point = my_apoint<int16_t>;
-using fpoint = my_apoint<float>;
+using point  = my_apoint< int16_t >;
+using fpoint = my_apoint< float >;
 
 template < typename T > std::ostream &operator<<(std::ostream &out, const my_apoint< T > &my);
 

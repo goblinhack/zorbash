@@ -68,9 +68,9 @@ static void wid_collect_slot(int slot)
       }
 
       for (const auto o : bag_items) {
-        for (auto slot = 0; slot < (int) collect_items.size(); slot++) {
-          if (collect_items[ slot ] == o) {
-            collect_items[ slot ] = nullptr;
+        for (auto &collect_item : collect_items) {
+          if (collect_item == o) {
+            collect_item = nullptr;
           }
         }
       }

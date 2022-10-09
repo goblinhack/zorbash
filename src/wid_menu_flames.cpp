@@ -134,7 +134,8 @@ static void game_display_flames_tiles(int w, int h)
           cn.g /= 5;
           cn.b /= 5;
           continue;
-        } else if (r < 10) {
+        }
+        if (r < 10) {
           cn = DARKRED;
           cn.r /= 6;
           cn.g /= 6;

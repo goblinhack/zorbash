@@ -25,13 +25,13 @@ public:
   //
   int count {};
 
-  fcolor(void)  = default;
+  fcolor(void) = default;
 
   fcolor(float r, float g, float b) : r(r), g(g), b(b), a(255) {}
 
   fcolor(float r, float g, float b, float a) : r(r), g(g), b(b), a(a) {}
 
-  fcolor(const fcolor &c)  = default;
+  fcolor(const fcolor &c) = default;
 
   friend fcolor operator+(fcolor c, fcolor b) { return (fcolor(c.r + b.r, c.g + b.g, c.b + b.b, c.a + b.a)); }
 

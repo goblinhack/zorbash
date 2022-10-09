@@ -48,9 +48,8 @@ int Thing::gold(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->gold);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::gold_set(int v)

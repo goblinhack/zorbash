@@ -13,8 +13,8 @@
 #include <vector>
 #include <wchar.h>
 
-using shared_vector_string = std::shared_ptr<std::vector<std::string>>;
-using shared_vector_wstring = std::shared_ptr<std::vector<std::wstring>>;
+using shared_vector_string  = std::shared_ptr< std::vector< std::string > >;
+using shared_vector_wstring = std::shared_ptr< std::vector< std::wstring > >;
 
 extern size_t strlcpy_(char *dst, const char *src, size_t size);
 

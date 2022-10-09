@@ -20,7 +20,7 @@ public:
 
   color(unsigned char r, unsigned char g, unsigned char b, unsigned char a) : r(r), g(g), b(b), a(a) {}
 
-  color(const color &c)  = default;
+  color(const color &c) = default;
 
   friend bool operator==(const color &c, const color &b)
   {

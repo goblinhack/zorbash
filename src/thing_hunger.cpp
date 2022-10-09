@@ -158,11 +158,7 @@ bool Thing::hunger_boost_would_occur(int v)
   auto old_hunger = hunger();
   auto max_hunger = THING_HUNGER_MAX;
 
-  if (old_hunger >= max_hunger) {
-    return false;
-  }
-
-  return true;
+  return old_hunger < max_hunger;
 }
 
 ////////////////////////////////////////////////////////////////////////////

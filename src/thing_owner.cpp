@@ -117,9 +117,8 @@ Thingp Thing::top_owner(void)
       return i->top_owner();
     }
     return i;
-  } else {
-    return nullptr;
   }
+  return nullptr;
 }
 
 Thingp Thing::immediate_owner(void)
@@ -148,9 +147,8 @@ Thingp Thing::immediate_owner(void)
       return nullptr;
     }
     return i;
-  } else {
-    return nullptr;
   }
+  return nullptr;
 }
 
 void Thing::owner_set(Thingp owner)

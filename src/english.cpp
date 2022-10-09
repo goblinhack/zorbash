@@ -48,19 +48,21 @@ std::string pluralise(const std::string &name)
     if (ends_with(name, "lotus") || ends_with(name, "status"))
       return name + "es";
     return name.substr(0, name.length() - 2) + "i";
-  } if (ends_with(name, "larva") || ends_with(name, "antenna") || ends_with(name, "hypha") ||
-             ends_with(name, "noma")) {
+  }
+  if (ends_with(name, "larva") || ends_with(name, "antenna") || ends_with(name, "hypha") || ends_with(name, "noma")) {
     return name + "e";
-  } if (ends_with(name, "ex")) {
+  }
+  if (ends_with(name, "ex")) {
     // Vortex; vortexes is legal, but the classic plural is cooler.
     return name.substr(0, name.length() - 2) + "ices";
-  } else if (ends_with(name, "mosquito") || ends_with(name, "ss"))
+  }
+  if (ends_with(name, "mosquito") || ends_with(name, "ss"))
     return name + "es";
-  else if (ends_with(name, "cyclops"))
+  if (ends_with(name, "cyclops"))
     return name.substr(0, name.length() - 1) + "es";
-  else if (ends_with(name, "s"))
+  if (ends_with(name, "s"))
     return name;
-  else if (ends_with(name, "y")) {
+  if (ends_with(name, "y")) {
     if (name == "y")
       return "ys";
     // day -> days, boy -> boys, etc

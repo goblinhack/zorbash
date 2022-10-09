@@ -16,18 +16,18 @@ char *py_obj_to_string(const PyObject *py_str)
 {
   TRACE_AND_INDENT();
   PyObject *py_encstr;
-  char     *outstr = 0;
+  char     *outstr = nullptr;
   char     *str;
 
-  py_encstr = 0;
-  str       = 0;
+  py_encstr = nullptr;
+  str       = nullptr;
 
   if (! PyUnicode_Check((PyObject *) py_str)) {
     ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_str)->tp_name);
     goto err_out;
   }
 
-  py_encstr = PyUnicode_AsEncodedString((PyObject *) py_str, "utf-8", 0);
+  py_encstr = PyUnicode_AsEncodedString((PyObject *) py_str, "utf-8", nullptr);
   if (! py_encstr) {
     goto err_out;
   }
@@ -89,7 +89,7 @@ err_out:
     ERR("Int(bool) conversion failed");
   }
 
-  return (val == 0 ? false : true);
+  return (val != 0);
 }
 
 uint64_t py_obj_to_uint64(PyObject *py_obj)
@@ -146,7 +146,7 @@ int py_obj_attr_int(const PyObject *py_obj, const char *attr)
   PyObject *py_encstr;
   int       i = 0;
 
-  py_encstr = 0;
+  py_encstr = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
     ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
@@ -178,7 +178,7 @@ uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr)
   PyObject *py_encstr;
   uint64_t  i = 0;
 
-  py_encstr = 0;
+  py_encstr = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
     ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
@@ -210,7 +210,7 @@ double py_obj_attr_double(const PyObject *py_obj, const char *attr)
   PyObject *py_encstr;
   double    i = 0;
 
-  py_encstr = 0;
+  py_encstr = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
     ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
@@ -240,11 +240,11 @@ char *py_obj_attr_str(const PyObject *py_obj, const char *attr)
 {
   TRACE_AND_INDENT();
   PyObject *py_encstr;
-  char     *outstr = 0;
+  char     *outstr = nullptr;
   char     *str;
 
-  py_encstr = 0;
-  str       = 0;
+  py_encstr = nullptr;
+  str       = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
     ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
@@ -277,7 +277,7 @@ PyObject *py_obj_attr(const PyObject *py_obj, const char *attr)
   TRACE_AND_INDENT();
   PyObject *py_encstr;
 
-  py_encstr = 0;
+  py_encstr = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
     ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);

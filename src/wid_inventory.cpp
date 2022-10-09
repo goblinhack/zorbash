@@ -900,7 +900,6 @@ bool wid_inventory_create(Thingp selected, Thingp over)
 {
   if (g_opt_ascii) {
     return wid_inventory_create_ascii(selected, over);
-  } else {
-    return wid_inventory_create_pixelart(selected, over);
   }
+  return wid_inventory_create_pixelart(selected, over);
 }

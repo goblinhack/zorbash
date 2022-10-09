@@ -95,9 +95,8 @@ int Thing::lifespan_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->lifespan);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::lifespan_set(int v)

@@ -15,13 +15,14 @@
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char     *file   = 0;
-  char     *name   = 0;
+  char     *file   = nullptr;
+  char     *name   = nullptr;
   int       width  = 0;
   int       height = 0;
-  PyObject *e      = 0;
+  PyObject *e      = nullptr;
 
-  static char *kwlist[] = {(char *) "file", (char *) "name", (char *) "width", (char *) "height", (char *) "arr", 0};
+  static char *kwlist[] = {(char *) "file",   (char *) "name", (char *) "width",
+                           (char *) "height", (char *) "arr",  nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
     ERR("tile_load_arr: Bad args");
@@ -87,13 +88,14 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char     *file   = 0;
-  char     *name   = 0;
+  char     *file   = nullptr;
+  char     *name   = nullptr;
   int       width  = 0;
   int       height = 0;
-  PyObject *e      = 0;
+  PyObject *e      = nullptr;
 
-  static char *kwlist[] = {(char *) "file", (char *) "name", (char *) "width", (char *) "height", (char *) "arr", 0};
+  static char *kwlist[] = {(char *) "file",   (char *) "name", (char *) "width",
+                           (char *) "height", (char *) "arr",  nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
     ERR("tile_load_arr: Bad args");
@@ -159,8 +161,8 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
 
 static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int dir, int level)
 {
-  PyObject *py_class = 0;
-  char     *tp_name  = 0;
+  PyObject *py_class = nullptr;
+  char     *tp_name  = nullptr;
 
   int delay_ms                      = 0;
   int ascii_fg_alpha                = 255;
@@ -243,7 +245,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
                            (char *) "is_alive_on_end_of_anim",
                            (char *) "is_alive_on_end_of_ascii_anim",
                            (char *) "is_resurrecting",
-                           0};
+                           nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(
           args, keywds, "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", kwlist, &py_class, &tile_name,

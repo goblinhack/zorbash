@@ -105,10 +105,7 @@ bool Thing::too_far_from_leader(void)
     return false;
   }
 
-  if (distance(curr_at, l->curr_at) > distance_leader_max_float()) {
-    return true;
-  }
-  return false;
+  return distance(curr_at, l->curr_at) > distance_leader_max_float();
 }
 
 bool Thing::too_far_from_leader(point p)
@@ -118,10 +115,7 @@ bool Thing::too_far_from_leader(point p)
     return false;
   }
 
-  if (distance(p, l->curr_at) > distance_leader_max_float()) {
-    return true;
-  }
-  return false;
+  return distance(p, l->curr_at) > distance_leader_max_float();
 }
 
 bool Thing::too_far_from_leader(point p, float delta)
@@ -131,10 +125,7 @@ bool Thing::too_far_from_leader(point p, float delta)
     return false;
   }
 
-  if (distance(p, l->curr_at) > distance_leader_max_float() + delta) {
-    return true;
-  }
-  return false;
+  return distance(p, l->curr_at) > distance_leader_max_float() + delta;
 }
 
 Thingp Thing::leader(void)
@@ -147,9 +138,8 @@ Thingp Thing::leader(void)
       return nullptr;
     }
     return i;
-  } else {
-    return nullptr;
   }
+  return nullptr;
 }
 
 void Thing::leader_set(Thingp l)

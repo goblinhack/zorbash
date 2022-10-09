@@ -63,7 +63,7 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
     }
   }
 
-  class sound *s = new sound(alias);
+  auto *s = new sound(alias);
 
   s->volume = volume;
   s->data   = file_load(file.c_str(), &s->len);
@@ -92,7 +92,7 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
   }
 
   auto result = all_sound.insert(std::make_pair(alias, s));
-  if (result.second == false) {
+  if (! result.second) {
     ERR("Cannot insert sound name [%s] failed", alias.c_str());
     delete s;
     return false;

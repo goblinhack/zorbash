@@ -172,10 +172,7 @@ bool Thing::is_to_be_avoided(Thingp attacker)
     return false;
   }
 
-  if (aip()->avoid.find(attacker->id) != aip()->avoid.end()) {
-    return true;
-  }
-  return false;
+  return aip()->avoid.find(attacker->id) != aip()->avoid.end();
 }
 
 bool Thing::cannot_avoid(Thingp attacker)
@@ -193,11 +190,7 @@ bool Thing::cannot_avoid(Thingp attacker)
   //
   // If we hit this limit, then we're really failing to avoid
   //
-  if (f->second >= THING_AI_MAX_AVOID_COUNT) {
-    return true;
-  }
-
-  return false;
+  return f->second >= THING_AI_MAX_AVOID_COUNT;
 }
 
 //

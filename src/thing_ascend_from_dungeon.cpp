@@ -49,13 +49,11 @@ bool Thing::ascend_dungeon_tick(void)
         dbg("Location check, is now waiting to ascend");
       }
       return true;
-    } else {
-      return ascend_dungeon();
     }
-  } else {
-    if (is_player()) {
-      msg("The exit is blocked. You are stuck here!");
-    }
+    return ascend_dungeon();
+  }
+  if (is_player()) {
+    msg("The exit is blocked. You are stuck here!");
   }
 
   return false;

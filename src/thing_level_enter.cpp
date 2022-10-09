@@ -16,7 +16,7 @@ void Thing::level_enter(bool rejoin)
   }
 
   auto result = level->all_things.insert(std::pair(id, this));
-  if (result.second == false) {
+  if (! result.second) {
     if (! rejoin) {
       err("Failed to insert into thing map");
     }
@@ -32,7 +32,7 @@ void Thing::level_enter(bool rejoin)
       dbg3("Pending remove and then add to interesting things");
     } else {
       auto result = level->interesting_things.insert(std::pair(id, this));
-      if (result.second == false) {
+      if (! result.second) {
         //
         // If polymorphing then we are already on the level.
         //
@@ -54,7 +54,7 @@ void Thing::level_enter(bool rejoin)
       dbg3("Pending remove and then add to tickable things");
     } else {
       auto result = level->tickable_things.insert(std::pair(id, this));
-      if (result.second == false) {
+      if (! result.second) {
         //
         // If polymorphing then we are already on the level.
         //
@@ -76,7 +76,7 @@ void Thing::level_enter(bool rejoin)
       dbg3("Pending remove and then add to describable things");
     } else {
       auto result = level->describable_things.insert(std::pair(id, this));
-      if (result.second == false) {
+      if (! result.second) {
         if (! rejoin) {
           err("Failed to insert into active thing map");
         }
@@ -95,7 +95,7 @@ void Thing::level_enter(bool rejoin)
       dbg3("Pending remove and then add to animated things");
     } else {
       auto result = level->animated_things.insert(std::pair(id, this));
-      if (result.second == false) {
+      if (! result.second) {
         if (! rejoin) {
           err("Failed to insert into animated thing map");
         }

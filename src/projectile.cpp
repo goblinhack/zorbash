@@ -132,8 +132,8 @@ void Thing::delete_projectile(void)
     if (p.id == id) {
       log("Remove projectile");
       return true;
-    }       return false;
-   
+    }
+    return false;
   });
 
   level->all_projectiles.erase(e, level->all_projectiles.end());

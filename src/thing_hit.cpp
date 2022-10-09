@@ -556,10 +556,9 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("%s takes no digest damage!", text_The().c_str());
       }
       return false;
-    } else {
-      IF_DEBUG2 { real_hitter->log("Attack damage_digest damage %d on %s", damage, to_short_string().c_str()); }
-      damage_type = "digest ";
     }
+    IF_DEBUG2 { real_hitter->log("Attack damage_digest damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "digest ";
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -1595,10 +1594,9 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
         corpse_cleanup = true;
         dead("frozen corpse cleanup");
         return false;
-      } else {
-        IF_DEBUG2 { hitter->log("Already dead, no more hits %s", to_short_string().c_str()); }
-        return false;
       }
+      IF_DEBUG2 { hitter->log("Already dead, no more hits %s", to_short_string().c_str()); }
+      return false;
     }
     IF_DEBUG2 { hitter->log("Possible attack on %s", to_short_string().c_str()); }
   } else {

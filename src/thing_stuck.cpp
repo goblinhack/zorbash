@@ -273,9 +273,8 @@ int Thing::stuck_count(void)
 
   if (maybe_aip()) {
     return (aip()->stuck_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stuck_count_set(int v)

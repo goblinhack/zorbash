@@ -3185,9 +3185,8 @@ point Thing::lunge_to_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->lunge_to);
-  } else {
-    return (point(0, 0));
   }
+  return (point(0, 0));
 }
 
 void Thing::lunge_to_set(point v)
@@ -3205,9 +3204,8 @@ float Thing::bounce_height_curr(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->bounce_height);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::bounce_height_set(float v)
@@ -3225,9 +3223,8 @@ float Thing::fall_height_curr(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->fall_height);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::fall_height_set(float v)
@@ -3245,9 +3242,8 @@ float Thing::bounce_fade_curr(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->bounce_fade);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::bounce_fade_set(float v)
@@ -3265,10 +3261,9 @@ point3d Thing::born_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->born);
-  } else {
-    die("No born location");
-    return (point3d(-1, -1, -1));
   }
+  die("No born location");
+  return (point3d(-1, -1, -1));
 }
 
 void Thing::born_set(point3d v)
@@ -3286,9 +3281,8 @@ int Thing::bounce_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->bounce_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::bounce_count_set(int v)
@@ -3306,9 +3300,8 @@ float Thing::fadeup_height_curr(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->fadeup_height);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::fadeup_height_set(float v)
@@ -3326,9 +3319,8 @@ float Thing::fadeup_fade_curr(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->fadeup_fade);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::fadeup_fade_set(float v)
@@ -3346,9 +3338,8 @@ float Thing::wobble_curr(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->wobble);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::wobble_set(float v)
@@ -3366,10 +3357,9 @@ const std::string &Thing::msg_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->msg);
-  } else {
-    static std::string empty;
-    return (empty);
   }
+  static std::string empty;
+  return (empty);
 }
 
 void Thing::msg_set(const std::string &v)
@@ -3387,10 +3377,9 @@ const std::string &Thing::dead_reason_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->dead_reason);
-  } else {
-    static std::string empty;
-    return (empty);
   }
+  static std::string empty;
+  return (empty);
 }
 
 void Thing::dead_reason_set(const std::string &v)
@@ -3418,9 +3407,8 @@ int Thing::submerged_offset_get(void)
     }
 
     return (infop()->submerged_offset);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::submerged_offset_set(int v)
@@ -3438,9 +3426,8 @@ int Thing::score(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->score);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 void Thing::score_set(int v)
@@ -3471,9 +3458,8 @@ int Thing::keys(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->keys);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::keys_set(int v)
@@ -3545,9 +3531,8 @@ int Thing::movement_remaining(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->movement_remaining);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::movement_remaining_set(int v)
@@ -3598,9 +3583,8 @@ int Thing::stats02(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stats02);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stats02_set(int v)
@@ -3666,9 +3650,8 @@ int Thing::stats03(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stats03);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stats03_set(int v)
@@ -3734,9 +3717,8 @@ int Thing::stats04(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stats04);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stats04_set(int v)
@@ -3802,9 +3784,8 @@ int Thing::stats05(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stats05);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stats05_set(int v)
@@ -3870,9 +3851,8 @@ int Thing::stats06(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stats06);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stats06_set(int v)
@@ -3938,9 +3918,8 @@ int Thing::stats07(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stats07);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stats07_set(int v)
@@ -4006,9 +3985,8 @@ int Thing::stats09(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stats09);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stats09_set(int v)
@@ -4074,9 +4052,8 @@ int Thing::stat_def_mod(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_def_mod);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_def_mod_set(int v)
@@ -4142,9 +4119,8 @@ int Thing::stat_con_mod(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_con_mod);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_con_mod_set(int v)
@@ -4210,9 +4186,8 @@ int Thing::stat_dex_mod(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_dex_mod);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_dex_mod_set(int v)
@@ -4278,9 +4253,8 @@ int Thing::stat_att_mod(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_att_mod);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_att_mod_set(int v)
@@ -4346,9 +4320,8 @@ int Thing::stat_str_mod(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->stat_str_mod);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::stat_str_mod_set(int v)
@@ -4414,9 +4387,8 @@ float Thing::distance_throw_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->distance_throw);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::distance_throw_set(int v)
@@ -4467,9 +4439,8 @@ int Thing::owned_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->owned_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::owned_count_set(int v)
@@ -4515,9 +4486,8 @@ int Thing::minion_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->minion_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::minion_count_set(int v)
@@ -4563,9 +4533,8 @@ int Thing::follower_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->follower_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::follower_count_set(int v)
@@ -4611,9 +4580,8 @@ int Thing::spawned_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->spawned_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::spawned_count_set(int v)
@@ -4659,9 +4627,8 @@ int Thing::charge_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->charge_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::charge_count_set(int v)
@@ -4707,9 +4674,8 @@ int Thing::damaged_count(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->damaged_count);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 int Thing::damaged_count_set(int v)
@@ -4756,9 +4722,8 @@ uint32_t Thing::tick_last_did_something(void)
 
   if (maybe_infop()) {
     return (infop()->tick_last_did_something);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 uint32_t Thing::tick_last_did_something_set(uint32_t v)
@@ -4805,9 +4770,8 @@ uint32_t Thing::tick_last_dropped(void)
 
   if (maybe_infop()) {
     return (infop()->tick_last_dropped);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 uint32_t Thing::tick_last_dropped_set(uint32_t v)
@@ -4853,9 +4817,8 @@ uint32_t Thing::tick_last_location_check(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->tick_last_location_check);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 uint32_t Thing::tick_last_location_check_set(uint32_t v)
@@ -4901,9 +4864,8 @@ uint32_t Thing::tick_last_escape(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->tick_last_escape);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 uint32_t Thing::tick_last_escape_set(uint32_t v)
@@ -4949,9 +4911,8 @@ uint32_t Thing::tick_last_level_change(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->tick_last_level_change);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 uint32_t Thing::tick_last_level_change_set(uint32_t v)
@@ -4997,9 +4958,8 @@ uint32_t Thing::tick_last_i_was_attacked(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->tick_last_i_was_attacked);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 uint32_t Thing::tick_last_i_was_attacked_set(uint32_t v)
@@ -5045,9 +5005,8 @@ uint32_t Thing::tick_last_i_attacked(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->tick_last_i_attacked);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 uint32_t Thing::tick_last_i_attacked_set(uint32_t v)
@@ -5093,9 +5052,8 @@ point Thing::where_i_dropped_an_item_last_get(void)
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
     return (itemsp()->where_i_dropped_an_item_last);
-  } else {
-    return (point(-1, -1));
   }
+  return (point(-1, -1));
 }
 
 point Thing::where_i_dropped_an_item_last_set(point v)
@@ -5104,9 +5062,8 @@ point Thing::where_i_dropped_an_item_last_set(point v)
   if (maybe_itemsp()) {
     new_itemsp();
     return (itemsp()->where_i_dropped_an_item_last = v);
-  } else {
-    return (point(-1, -1));
   }
+  return (point(-1, -1));
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5117,9 +5074,8 @@ point Thing::where_i_failed_to_collect_last_get(void)
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
     return (itemsp()->where_i_failed_to_collect_last);
-  } else {
-    return (point(-1, -1));
   }
+  return (point(-1, -1));
 }
 
 point Thing::where_i_failed_to_collect_last_set(point v)
@@ -5128,9 +5084,8 @@ point Thing::where_i_failed_to_collect_last_set(point v)
   if (maybe_itemsp()) {
     new_itemsp();
     return (itemsp()->where_i_failed_to_collect_last = v);
-  } else {
-    return (point(-1, -1));
   }
+  return (point(-1, -1));
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -5141,9 +5096,8 @@ ts_t Thing::ts_lunge_begin(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_lunge_begin);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_lunge_begin_set(ts_t v)
@@ -5189,9 +5143,8 @@ ts_t Thing::ts_lunge_end(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_lunge_end);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_lunge_end_set(ts_t v)
@@ -5237,9 +5190,8 @@ ts_t Thing::ts_bounce_begin(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_bounce_begin);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_bounce_begin_set(ts_t v)
@@ -5285,9 +5237,8 @@ ts_t Thing::ts_bounce_end(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_bounce_end);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_bounce_end_set(ts_t v)
@@ -5333,9 +5284,8 @@ ts_t Thing::ts_fadeup_begin(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_fadeup_begin);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_fadeup_begin_set(ts_t v)
@@ -5381,9 +5331,8 @@ ts_t Thing::ts_fadeup_end(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_fadeup_end);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_fadeup_end_set(ts_t v)
@@ -5429,9 +5378,8 @@ ts_t Thing::ts_flip_start_get(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_flip_start);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_flip_start_set(ts_t v)
@@ -5477,9 +5425,8 @@ ts_t Thing::ts_anim_delay_end(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_anim_delay_end);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_anim_delay_end_set(ts_t v)
@@ -5525,9 +5472,8 @@ ts_t Thing::ts_fall_begin(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_fall_begin);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_fall_begin_set(ts_t v)
@@ -5573,9 +5519,8 @@ ts_t Thing::ts_fall_end(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->ts_fall_end);
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 ts_t Thing::ts_fall_end_set(ts_t v)
@@ -5668,10 +5613,8 @@ ThingId Thing::equip_id(int equip)
   if (maybe_itemsp()) {
     // con("get weapon %" PRIX32 "",  itemsp()->equip_id);
     return (itemsp()->equip_id[ equip ]);
-  } else {
-    // con("get equip id => none");
-    return NoThingId;
-  }
+  } // con("get equip id => none");
+  return NoThingId;
 }
 
 ThingId Thing::equip_id_set(ThingId v, int equip)
@@ -5690,9 +5633,8 @@ ThingId Thing::on_fire_anim_id(void)
   TRACE_NO_INDENT();
   if (maybe_infop()) {
     return (infop()->on_fire_id_anim);
-  } else {
-    return NoThingId;
   }
+  return NoThingId;
 }
 
 ThingId Thing::on_fire_anim_id_set(ThingId v)
@@ -6043,13 +5985,11 @@ std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing::bag_g
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
     return (&itemsp()->bag);
-  } else {
-    //
-    // Watch out here as lasers can have owners and do not live in bags.
-    //
-    dbg("No bag");
-    return nullptr;
-  }
+  } //
+  // Watch out here as lasers can have owners and do not live in bags.
+  //
+  dbg("No bag");
+  return nullptr;
 }
 
 const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing::stat_const_bag(void)
@@ -6057,20 +5997,17 @@ const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *Thing:
   TRACE_NO_INDENT();
   if (maybe_itemsp()) {
     return (&itemsp()->bag);
-  } else {
-    //
-    // Watch out here as lasers can have owners and do not live in bags.
-    //
-    dbg("No bag");
-    return nullptr;
-  }
+  } //
+  // Watch out here as lasers can have owners and do not live in bags.
+  //
+  dbg("No bag");
+  return nullptr;
 }
 
 const std::string &Thing::title(void)
 {
   if (g_opt_player_name.empty()) {
     return text_title();
-  } else {
-    return g_opt_player_name;
   }
+  return g_opt_player_name;
 }
