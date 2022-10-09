@@ -124,8 +124,7 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
       ascii_set_bg(x, y2, tiles[ ui_type ][ style ][ 0 ][ MAX_UI_SIZE - 1 ]);
     }
     return;
-  } else {
-    for (y = y1; y <= y2; y++) {
+  }     for (y = y1; y <= y2; y++) {
       for (x = x1; x <= x2; x++) {
         if (style >= 0) {
           ascii_set_bg(x, y, tiles[ ui_type ][ style ][ (x % MAX_UI_BG_SIZE) + 1 ][ (y % MAX_UI_BG_SIZE) + 1 ]);
@@ -155,7 +154,7 @@ static void ascii_put_box__(int style, Tilep bg_tile, Tilep fg_tile, Tilep fg2_t
         ascii_set_bg(x, y, col_bg);
       }
     }
-  }
+ 
 
   for (x = x1; x <= x2; x++) {
     for (y = y1; y <= y2; y++) {

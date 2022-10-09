@@ -39,7 +39,7 @@ tidy:
 			readability-else-after-return,readability-simplify-boolean-expr,\
 			readability-redundant-member-init,modernize-use-default-member-init,\
 			modernize-use-equals-default,modernize-use-equals-delete,\
-			modernize-use-using,modernize-loop-convert,\
+			modernize-loop-convert,\
 			cppcoreguidelines-no-malloc,misc-redundant-expression" \
 			-header-filter=".*" \
 			"$(SRC_DIR)/$$src" -- $(CFLAGS); \

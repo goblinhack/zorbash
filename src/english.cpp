@@ -47,8 +47,7 @@ std::string pluralise(const std::string &name)
   if (ends_with(name, "us")) {
     if (ends_with(name, "lotus") || ends_with(name, "status"))
       return name + "es";
-          // Fungus, ufetubus, for instance.
-      return name.substr(0, name.length() - 2) + "i";
+    return name.substr(0, name.length() - 2) + "i";
   } else if (ends_with(name, "larva") || ends_with(name, "antenna") || ends_with(name, "hypha") ||
              ends_with(name, "noma")) {
     return name + "e";
@@ -59,8 +58,6 @@ std::string pluralise(const std::string &name)
     return name + "es";
   else if (ends_with(name, "cyclops"))
     return name.substr(0, name.length() - 1) + "es";
-  else if (name == "catoblepas")
-    return "catoblepae";
   else if (ends_with(name, "s"))
     return name;
   else if (ends_with(name, "y")) {
@@ -85,10 +82,7 @@ std::string pluralise(const std::string &name)
   } else if (ends_with(name, "mage")) {
     // mage -> magi
     return name.substr(0, name.length() - 1) + "i";
-  } else if (name == "gold" || ends_with(name, "fish") || ends_with(name, "folk") || ends_with(name, "spawn") ||
-             ends_with(name, "tengu") || ends_with(name, "sheep") || ends_with(name, "swine") ||
-             ends_with(name, "efreet") || ends_with(name, "jiangshi") || ends_with(name, "raiju") ||
-             ends_with(name, "meliai")) {
+  } else if (name == "gold" || ends_with(name, "fish") || ends_with(name, "folk")) {
     return name;
   } else if (ends_with(name, "ch") || ends_with(name, "sh") || ends_with(name, "x")) {
     // To handle cockroaches, sphinxes, and bushes.
@@ -100,23 +94,8 @@ std::string pluralise(const std::string &name)
   } else if (ends_with(name, "djinni")) {
     // djinni -> djinn.
     return name.substr(0, name.length() - 1);
-  } else if (name == "foot")
+  } else if (name == "foot") {
     return "feet";
-  else if (name == "ophan" || name == "cherub" || name == "seraph") {
-    // Unlike "angel" which is fully assimilated, and "cherub" and "seraph"
-    // which may be pluralised both ways, "ophan" always uses Hebrew
-    // pluralisation.
-    return name + "im";
-  } else if (ends_with(name, "arachi")) {
-    // Barachi -> Barachim. Kind of Hebrew? Kind of goofy.
-    // (not sure if this is ever used...)
-    return name + "m";
-  } else if (name == "ushabti") {
-    // ushabti -> ushabtiu (correct ancient Egyptian pluralisation)
-    return name + "u";
-  } else if (name == "Tzitzimitl") {
-    // Tzitzimitl -> Tzitzimimeh (correct Nahuatl pluralisation)
-    return name.substr(0, name.length() - 2) + "meh";
   }
 
   return name + "s";

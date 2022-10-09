@@ -93,7 +93,7 @@ public:
   //
   void *context {};
 
-  AsciiCell(void) {}
+  AsciiCell(void) = default;
 };
 
 static std::array< std::array< AsciiCell, TERM_HEIGHT_MAX >, TERM_WIDTH_MAX > cells;
@@ -339,7 +339,7 @@ void ascii_set_context(int x, int y, void *context)
 void *ascii_get_stat_context(int x, int y)
 {
   if (! ascii_ok(x, y)) {
-    return 0;
+    return nullptr;
   }
 
   AsciiCell *cell = &getref_no_check(cells, x, y);
@@ -608,7 +608,8 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
             text_iter += len + 1;
             got_pct = false;
             continue;
-          } else if ((len > 3) && (std::string(text_iter, text_iter + 3) == "bg=")) {
+          }
+          if ((len > 3) && (std::string(text_iter, text_iter + 3) == "bg=")) {
             text_iter += 3;
             auto tmp = std::string(text_iter, text.end());
             int  len = 0;
@@ -618,7 +619,8 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
             bg_set  = true;
             got_pct = false;
             continue;
-          } else if ((len > 3) && (std::string(text_iter, text_iter + 3) == "tp=")) {
+          }
+          if ((len > 3) && (std::string(text_iter, text_iter + 3) == "tp=")) {
             text_iter += 3;
             auto tmp = std::string(text_iter, text.end());
 
@@ -629,11 +631,13 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
             tile    = tp_first_tile(tp);
             got_pct = false;
             continue;
-          } else if ((len > 4) && (std::string(text_iter, text_iter + 4) == "tex=")) {
+          }
+          if ((len > 4) && (std::string(text_iter, text_iter + 4) == "tex=")) {
             text_iter += 4;
             got_pct = false;
             continue;
-          } else if ((len > 5) && (std::string(text_iter, text_iter + 5) == "tile=")) {
+          }
+          if ((len > 5) && (std::string(text_iter, text_iter + 5) == "tile=")) {
             text_iter += 5;
             auto tmp = std::string(text_iter, text.end());
             int  len = 0;
@@ -716,7 +720,7 @@ void ascii_putf__(int x, int y, color fg, color bg, const std::wstring text)
         //
         // Else clear the background
         //
-        cell->bg_tile = 0;
+        cell->bg_tile = nullptr;
       }
 
       cell->bg_color_tl = bg;
@@ -776,7 +780,8 @@ int ascii_strlen(std::wstring const &text)
                 text_iter += len + 1;
               }
               continue;
-            } else if ((len > 3) && (std::string(text_iter, text_iter + 3) == "bg=")) {
+            }
+            if ((len > 3) && (std::string(text_iter, text_iter + 3) == "bg=")) {
               text_iter += 3;
               auto tmp = std::string(text_iter, text.end());
 
@@ -785,7 +790,8 @@ int ascii_strlen(std::wstring const &text)
               text_iter += len + 1;
 
               continue;
-            } else if ((len > 3) && (std::string(text_iter, text_iter + 3) == "tp=")) {
+            }
+            if ((len > 3) && (std::string(text_iter, text_iter + 3) == "tp=")) {
               text_iter += 3;
               auto tmp = std::string(text_iter, text.end());
 
@@ -794,10 +800,12 @@ int ascii_strlen(std::wstring const &text)
               text_iter += len + 1;
 
               continue;
-            } else if ((len > 4) && (std::string(text_iter, text_iter + 4) == "tex=")) {
+            }
+            if ((len > 4) && (std::string(text_iter, text_iter + 4) == "tex=")) {
               text_iter += 4;
               continue;
-            } else if ((len > 5) && (std::string(text_iter, text_iter + 5) == "tile=")) {
+            }
+            if ((len > 5) && (std::string(text_iter, text_iter + 5) == "tile=")) {
               text_iter += 5;
               auto tmp = std::string(text_iter, text.end());
               int  len = 0;
@@ -847,7 +855,8 @@ int ascii_strlen(std::wstring const &text, std::wstring *col)
         (void) string2color(tmp, &len);
         text_iter += len + 1;
         continue;
-      } else if (std::string(text_iter, text_iter + 3) == "bg=") {
+      }
+      if (std::string(text_iter, text_iter + 3) == "bg=") {
         text_iter += 3;
         auto tmp = std::string(text_iter, text.end());
 
@@ -856,7 +865,8 @@ int ascii_strlen(std::wstring const &text, std::wstring *col)
         text_iter += len + 1;
 
         continue;
-      } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+      }
+      if (std::string(text_iter, text_iter + 3) == "tp=") {
         text_iter += 3;
         auto tmp = std::string(text_iter, text.end());
 
@@ -865,10 +875,12 @@ int ascii_strlen(std::wstring const &text, std::wstring *col)
         text_iter += len + 1;
 
         continue;
-      } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+      }
+      if (std::string(text_iter, text_iter + 4) == "tex=") {
         text_iter += 4;
         continue;
-      } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+      }
+      if (std::string(text_iter, text_iter + 5) == "tile=") {
         text_iter += 5;
         auto tmp = std::string(text_iter, text.end());
         int  len = 0;
@@ -913,24 +925,28 @@ std::string ascii_strip(std::string const &text)
         (void) string2color(tmp, &len);
         text_iter += len + 1;
         continue;
-      } else if (std::string(text_iter, text_iter + 3) == "bg=") {
+      }
+      if (std::string(text_iter, text_iter + 3) == "bg=") {
         text_iter += 3;
         auto tmp = std::string(text_iter, text.end());
         int  len = 0;
         (void) string2color(tmp, &len);
         text_iter += len + 1;
         continue;
-      } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+      }
+      if (std::string(text_iter, text_iter + 3) == "tp=") {
         text_iter += 3;
         auto tmp = std::string(text_iter, text.end());
         int  len = 0;
         (void) string2tp(tmp, &len);
         text_iter += len;
         continue;
-      } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+      }
+      if (std::string(text_iter, text_iter + 4) == "tex=") {
         text_iter += 4;
         continue;
-      } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+      }
+      if (std::string(text_iter, text_iter + 5) == "tile=") {
         text_iter += 5;
         auto tmp = std::string(text_iter, text.end());
         int  len = 0;
@@ -1250,7 +1266,8 @@ static void ascii_blit(void)
         color bg_color_bl = cell->bg_color_bl;
         color bg_color_br = cell->bg_color_br;
 
-        tile_blit_colored_fat(0, cell->bg_tile, tile_tl, tile_br, bg_color_tl, bg_color_tr, bg_color_bl, bg_color_br);
+        tile_blit_colored_fat(nullptr, cell->bg_tile, tile_tl, tile_br, bg_color_tl, bg_color_tr, bg_color_bl,
+                              bg_color_br);
       }
 
       tile_x += dw;
@@ -1355,7 +1372,7 @@ static void ascii_blit(void)
           color fg_color_bl = cell->fg_color_bl;
           color fg_color_br = cell->fg_color_br;
 
-          tile_blit_colored_fat(0, tile, tile_tl, tile_br, fg_color_tl, fg_color_tr, fg_color_bl, fg_color_br);
+          tile_blit_colored_fat(nullptr, tile, tile_tl, tile_br, fg_color_tl, fg_color_tr, fg_color_bl, fg_color_br);
         }
       }
 

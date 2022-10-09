@@ -88,10 +88,10 @@ public:
     memset(&this->tokens, 0, sizeof(this->tokens));
     memset(&this->readable_tokens, 0, sizeof(this->readable_tokens));
     memset(&this->input_tokens, 0, sizeof(this->input_tokens));
-    this->callback = 0;
+    this->callback = nullptr;
   }
 
-  ~command_t(void) {}
+  ~command_t(void) = default;
 
   class Tokens tokens;
   class Tokens readable_tokens;
@@ -128,7 +128,7 @@ void command_add(command_fn_t callback, std::string input, std::string readable)
 
   auto result = commands_map.insert(std::make_pair(input, command));
 
-  if (result.second == false) {
+  if (!result.second) {
     ERR("Command insert name [%s] failed", input.c_str());
     return;
   }
@@ -180,7 +180,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
       cnt = strncmp(command->tokens.args[ t ], input_tokens.args[ t ], strlen(input_tokens.args[ t ]));
 
       if (slre_match(&command->tokens.regexp[ t ], input_tokens.args[ t ], (int) strlen(input_tokens.args[ t ]),
-                     0 /* captures */)) {
+                     nullptr /* captures */)) {
         /*
          * Success
          */
@@ -212,7 +212,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
       cnt = strncmp(command->tokens.args[ t ], input_tokens.args[ t ], strlen(input_tokens.args[ t ]));
 
       if (slre_match(&command->tokens.regexp[ t ], input_tokens.args[ t ], (int) strlen(input_tokens.args[ t ]),
-                     0 /* captures */)) {
+                     nullptr /* captures */)) {
         /*
          * Success
          */
@@ -271,7 +271,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
           cnt = strncmp(command->tokens.args[ t ], input_tokens.args[ t ], strlen(input_tokens.args[ t ]));
 
           if (slre_match(&command->tokens.regexp[ t ], input_tokens.args[ t ], (int) strlen(input_tokens.args[ t ]),
-                         0 /* captures */)) {
+                         nullptr /* captures */)) {
             /*
              * Success
              */
