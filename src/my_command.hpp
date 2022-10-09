@@ -8,10 +8,7 @@
 
 #include <stdint.h>
 
-typedef struct tokens_t_ *tokenp;
-typedef struct tokens_t_ *tokensp;
-
-typedef uint8_t (*command_fn_t)(tokenp, void *context);
+typedef uint8_t (*command_fn_t)(class Tokens *, void *context);
 
 #include "my_token.hpp"
 

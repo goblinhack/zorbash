@@ -125,17 +125,17 @@ std::string to_string_ignoring_mods(const SDL_Keysym &k);
 
 std::vector< uint8_t > sdl_fbo_save(int fbo);
 
-uint8_t config_errored(tokensp, void *context);
-uint8_t config_fps_counter_set(tokensp, void *context);
-uint8_t config_debug_set(tokensp, void *context);
-uint8_t config_game_pix_zoom_set(tokensp, void *context);
-uint8_t config_gfx_inverted_set(tokensp, void *context);
-uint8_t config_gfx_lights_set(tokensp, void *context);
-uint8_t config_gfx_vsync_enable(tokensp, void *context);
+uint8_t config_errored(class Tokens *, void *context);
+uint8_t config_fps_counter_set(class Tokens *, void *context);
+uint8_t config_debug_set(class Tokens *, void *context);
+uint8_t config_game_pix_zoom_set(class Tokens *, void *context);
+uint8_t config_gfx_inverted_set(class Tokens *, void *context);
+uint8_t config_gfx_lights_set(class Tokens *, void *context);
+uint8_t config_gfx_vsync_enable(class Tokens *, void *context);
 uint8_t sdl_init(void);
 
-struct tokens_t_;
-uint8_t sdl_user_exit(struct tokens_t_ *tokens, void *context);
+class Tokens;
+uint8_t sdl_user_exit(class Tokens *tokens, void *context);
 
 void config_game_pix_zoom_in(void);
 void config_game_pix_zoom_out(void);

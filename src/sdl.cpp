@@ -560,7 +560,7 @@ void sdl_exit(void)
 //
 // User has entered a command, run it
 //
-uint8_t config_fps_counter_set(tokens_t *tokens, void *context)
+uint8_t config_fps_counter_set(class Tokens *tokens, void *context)
 {
   TRACE_NO_INDENT();
 
@@ -584,7 +584,7 @@ uint8_t config_fps_counter_set(tokens_t *tokens, void *context)
 //
 // User wants to change the debug level
 //
-uint8_t config_debug_set(tokens_t *tokens, void *context)
+uint8_t config_debug_set(class Tokens *tokens, void *context)
 {
   TRACE_NO_INDENT();
 
@@ -632,7 +632,7 @@ void config_gfx_inverted_toggle(void)
 //
 // User has entered a command, run it
 //
-uint8_t config_gfx_inverted_set(tokens_t *tokens, void *context)
+uint8_t config_gfx_inverted_set(class Tokens *tokens, void *context)
 {
   TRACE_NO_INDENT();
 
@@ -682,7 +682,7 @@ void config_game_pix_zoom_out(void)
 //
 // User has entered a command, run it
 //
-uint8_t config_game_pix_zoom_set(tokens_t *tokens, void *context)
+uint8_t config_game_pix_zoom_set(class Tokens *tokens, void *context)
 {
   TRACE_NO_INDENT();
 
@@ -707,7 +707,7 @@ uint8_t config_game_pix_zoom_set(tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-uint8_t config_gfx_vsync_enable(tokens_t *tokens, void *context)
+uint8_t config_gfx_vsync_enable(class Tokens *tokens, void *context)
 {
   TRACE_NO_INDENT();
   if (game->config.gfx_vsync_locked) {
@@ -752,7 +752,7 @@ void config_gfx_vsync_update(void)
 //
 // User has entered a command, run it
 //
-uint8_t config_errored(tokens_t *tokens, void *context)
+uint8_t config_errored(class Tokens *tokens, void *context)
 {
   TRACE_NO_INDENT();
   g_errored = false;
@@ -778,7 +778,7 @@ void sdl_config_update_all(void)
 //
 // User has entered a command, run it
 //
-uint8_t sdl_user_exit(tokens_t *tokens, void *context)
+uint8_t sdl_user_exit(class Tokens *tokens, void *context)
 {
   TRACE_NO_INDENT();
   sdl_exit();

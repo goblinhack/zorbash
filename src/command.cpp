@@ -93,9 +93,9 @@ public:
 
   ~command_t(void) {}
 
-  tokens_t     tokens;
-  tokens_t     readable_tokens;
-  tokens_t     input_tokens;
+  class Tokens tokens;
+  class Tokens readable_tokens;
+  class Tokens input_tokens;
   command_fn_t callback;
 };
 
@@ -107,7 +107,7 @@ static uint8_t command_inited;
 
 void command_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (command_inited) {
     command_inited = false;
   }
@@ -115,7 +115,7 @@ void command_fini(void)
 
 uint8_t command_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   command_inited = true;
 
   return true;
@@ -123,7 +123,7 @@ uint8_t command_init(void)
 
 void command_add(command_fn_t callback, std::string input, std::string readable)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto command = std::make_shared< class command_t >();
 
   auto result = commands_map.insert(std::make_pair(input, command));
@@ -146,19 +146,20 @@ void command_add(command_fn_t callback, std::string input, std::string readable)
 static int command_matches(const char *input, char *output, uint8_t show_ambiguous, uint8_t show_complete,
                            uint8_t execute_command, void *context)
 {
-  TRACE_AND_INDENT();
-  char     cand_expand_to[ MAXSTR ];
-  commandp matched_command = nullptr;
-  char     completes_to[ MAXSTR ];
-  char     expands_to[ MAXSTR ];
-  tokens_t input_tokens;
-  char     match[ MAXSTR ];
-  char     match2[ MAXSTR ];
-  int      longest_match;
-  int      common_len;
-  int      matches;
-  int      cnt;
-  int      t;
+  TRACE_NO_INDENT();
+
+  char         cand_expand_to[ MAXSTR ];
+  commandp     matched_command = nullptr;
+  char         completes_to[ MAXSTR ];
+  char         expands_to[ MAXSTR ];
+  class Tokens input_tokens;
+  char         match[ MAXSTR ];
+  char         match2[ MAXSTR ];
+  int          longest_match;
+  int          common_len;
+  int          matches;
+  int          cnt;
+  int          t;
 
   longest_match = -1;
   matches       = 0;
@@ -325,7 +326,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
 uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambiguous, uint8_t show_complete,
                        uint8_t execute_command, void *context)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int matches;
 
   if (expandedtext) {

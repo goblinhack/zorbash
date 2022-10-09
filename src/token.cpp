@@ -9,9 +9,10 @@
 #include "my_token.hpp"
 #include "slre.hpp"
 
-static tokens_t *tokens_parse(const char *input, tokens_t *tokens)
+static class Tokens *tokens_parse(const char *input, class Tokens *tokens)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   const char *in;
   char       *out;
   char        i;
@@ -128,9 +129,9 @@ static tokens_t *tokens_parse(const char *input, tokens_t *tokens)
   }
 }
 
-static void tokens_compile(tokens_t *tokens)
+static void tokens_compile(class Tokens *tokens)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t cnt;
 
   cnt = 0;
@@ -144,9 +145,9 @@ static void tokens_compile(tokens_t *tokens)
   }
 }
 
-void tokens_print(tokens_t *tokens)
+void tokens_print(class Tokens *tokens)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t cnt;
 
   printf("tokens %u: ", tokens->cnt);
@@ -160,9 +161,9 @@ void tokens_print(tokens_t *tokens)
   printf("\n");
 }
 
-void tokens_print_to(tokens_t *tokens, char *output, int output_size)
+void tokens_print_to(class Tokens *tokens, char *output, int output_size)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   uint32_t cnt;
 
   cnt     = 0;
@@ -180,19 +181,19 @@ void tokens_print_to(tokens_t *tokens, char *output, int output_size)
 
 void tokens_test(void)
 {
-  TRACE_AND_INDENT();
-  tokens_t tmp;
+  TRACE_NO_INDENT();
+  class Tokens tmp;
 
   tokens_print(tokens_tostring("s  ", &tmp));
   tokens_print(tokens_tostring("set god mode on", &tmp));
   tokens_print(tokens_tostring("set god \"mode on\"", &tmp));
 }
 
-tokens_t *tokens_tostring(const char *input, tokens_t *tokens)
+class Tokens *tokens_tostring(const char *input, class Tokens *tokens)
 {
-  TRACE_AND_INDENT();
-  tokens_t *t;
+  TRACE_NO_INDENT();
 
+  class Tokens *t;
   t = tokens_parse(input, tokens);
   tokens_compile(tokens);
 
