@@ -17,10 +17,10 @@
 PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char     *level_name    = 0;
-  PyObject *py_level_data = 0;
+  char     *level_name    = nullptr;
+  PyObject *py_level_data = nullptr;
 
-  static char *kwlist[] = {(char *) "level_data", (char *) "level_name", 0};
+  static char *kwlist[] = {(char *) "level_data", (char *) "level_name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Os", kwlist, &py_level_data, &level_name)) {
     ERR("map_load: Bad args");
@@ -208,7 +208,7 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t     id       = 0;
   int          x        = -1;
   int          y        = -1;
-  static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -270,7 +270,7 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
   uint32_t     id       = 0;
   int          x        = -1;
   int          y        = -1;
-  static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", (char *) "filter", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", (char *) "filter", nullptr};
   char        *filter   = nullptr;
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iiis", kwlist, &id, &x, &y, &filter)) {
@@ -315,7 +315,7 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
 {
   TRACE_AND_INDENT();
   uint32_t     id       = 0;
-  static char *kwlist[] = {(char *) "id", 0};
+  static char *kwlist[] = {(char *) "id", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);

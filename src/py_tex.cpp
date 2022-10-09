@@ -13,10 +13,10 @@
 PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *file = 0;
-  char *name = 0;
+  char *file = nullptr;
+  char *name = nullptr;
 
-  static char *kwlist[] = {(char *) "file", (char *) "name", 0};
+  static char *kwlist[] = {(char *) "file", (char *) "name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ss", kwlist, &file, &name)) {
     ERR("tex_load: Bad arguments");

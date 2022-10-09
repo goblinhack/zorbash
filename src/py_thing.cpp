@@ -11,7 +11,7 @@ PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
-  static char *kwlist[] = {(char *) "id", 0};
+  static char *kwlist[] = {(char *) "id", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -56,7 +56,7 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &victim_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -92,9 +92,8 @@ PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_draining(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -103,7 +102,7 @@ PyObject *thing_hit_damage_draining(PyObject *obj, PyObject *args, PyObject *key
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -142,9 +141,8 @@ PyObject *thing_hit_damage_draining(PyObject *obj, PyObject *args, PyObject *key
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -153,7 +151,7 @@ PyObject *thing_hit_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -192,9 +190,8 @@ PyObject *thing_hit_damage_acid(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_water(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -203,7 +200,7 @@ PyObject *thing_hit_damage_water(PyObject *obj, PyObject *args, PyObject *keywds
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -242,9 +239,8 @@ PyObject *thing_hit_damage_water(PyObject *obj, PyObject *args, PyObject *keywds
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -253,7 +249,7 @@ PyObject *thing_hit_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -292,9 +288,8 @@ PyObject *thing_hit_damage_cold(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -303,7 +298,7 @@ PyObject *thing_hit_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -342,9 +337,8 @@ PyObject *thing_hit_damage_crush(PyObject *obj, PyObject *args, PyObject *keywds
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_digest(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -353,7 +347,7 @@ PyObject *thing_hit_damage_digest(PyObject *obj, PyObject *args, PyObject *keywd
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -392,9 +386,8 @@ PyObject *thing_hit_damage_digest(PyObject *obj, PyObject *args, PyObject *keywd
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_energy(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -403,7 +396,7 @@ PyObject *thing_hit_damage_energy(PyObject *obj, PyObject *args, PyObject *keywd
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -442,9 +435,8 @@ PyObject *thing_hit_damage_energy(PyObject *obj, PyObject *args, PyObject *keywd
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -453,7 +445,7 @@ PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -492,9 +484,8 @@ PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_future1(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -503,7 +494,7 @@ PyObject *thing_hit_damage_future1(PyObject *obj, PyObject *args, PyObject *keyw
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -542,9 +533,8 @@ PyObject *thing_hit_damage_future1(PyObject *obj, PyObject *args, PyObject *keyw
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -553,7 +543,7 @@ PyObject *thing_hit_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -592,9 +582,8 @@ PyObject *thing_hit_damage_bite(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_claw(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -603,7 +592,7 @@ PyObject *thing_hit_damage_claw(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -642,9 +631,8 @@ PyObject *thing_hit_damage_claw(PyObject *obj, PyObject *args, PyObject *keywds)
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_lightning(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -653,7 +641,7 @@ PyObject *thing_hit_damage_lightning(PyObject *obj, PyObject *args, PyObject *ke
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -692,9 +680,8 @@ PyObject *thing_hit_damage_lightning(PyObject *obj, PyObject *args, PyObject *ke
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_necrosis(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -703,7 +690,7 @@ PyObject *thing_hit_damage_necrosis(PyObject *obj, PyObject *args, PyObject *key
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -742,9 +729,8 @@ PyObject *thing_hit_damage_necrosis(PyObject *obj, PyObject *args, PyObject *key
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_hit_damage_poison(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -753,7 +739,7 @@ PyObject *thing_hit_damage_poison(PyObject *obj, PyObject *args, PyObject *keywd
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
   int          damage    = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", (char *) "damage", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIi", kwlist, &hitter_id, &victim_id, &damage)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -792,9 +778,8 @@ PyObject *thing_hit_damage_poison(PyObject *obj, PyObject *args, PyObject *keywd
 
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
-  } else {
-    Py_RETURN_FALSE;
-  }
+  }     Py_RETURN_FALSE;
+ 
 }
 
 PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -802,7 +787,7 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
   uint32_t     victim_id = 0;
-  static char *kwlist[]  = {(char *) "hitter", (char *) "target", 0};
+  static char *kwlist[]  = {(char *) "hitter", (char *) "target", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &victim_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -836,10 +821,9 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
   if (hitter->possible_to_attack(target)) {
     IF_DEBUG { hitter->log("Check if possible to target %s; yes", target->to_short_string().c_str()); }
     Py_RETURN_TRUE;
-  } else {
-    IF_DEBUG { hitter->log("Check if possible to attack %s; no", target->to_short_string().c_str()); }
+  }     IF_DEBUG { hitter->log("Check if possible to attack %s; no", target->to_short_string().c_str()); }
     Py_RETURN_FALSE;
-  }
+ 
 }
 
 PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
@@ -848,7 +832,7 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t     owner_id  = 0;
   char        *item      = nullptr;
   uint32_t     victim_id = 0;
-  static char *kwlist[]  = {(char *) "owner", (char *) "item", (char *) "target", 0};
+  static char *kwlist[]  = {(char *) "owner", (char *) "item", (char *) "target", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &victim_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -894,21 +878,18 @@ PyObject *thing_fire_at(PyObject *obj, PyObject *args, PyObject *keywds)
   if (itemp->is_projectile()) {
     if (owner->projectile_fire_at(nullptr /* wand */, std::string(item), target)) {
       Py_RETURN_TRUE;
-    } else {
-      Py_RETURN_FALSE;
-    }
+    }       Py_RETURN_FALSE;
+   
   } else if (itemp->is_laser()) {
     if (owner->laser_fire_at(nullptr /* staff */, std::string(item), target)) {
       Py_RETURN_TRUE;
-    } else {
-      Py_RETURN_FALSE;
-    }
+    }       Py_RETURN_FALSE;
+   
   } else if (itemp->is_usable()) {
     if (owner->item_targetted_use_at(nullptr /* wand */, target)) {
       Py_RETURN_TRUE;
-    } else {
-      Py_RETURN_FALSE;
-    }
+    }       Py_RETURN_FALSE;
+   
   } else {
     owner->err("Cannot fire %s at %s", item, target->to_short_string().c_str());
     Py_RETURN_FALSE;
@@ -921,7 +902,7 @@ PyObject *thing_death_by(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t     id        = 0;
   char        *reason    = nullptr;
   uint32_t     killer_id = 0;
-  static char *kwlist[]  = {(char *) "t", (char *) "reason", (char *) "defeater", 0};
+  static char *kwlist[]  = {(char *) "t", (char *) "reason", (char *) "defeater", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &id, &reason, &killer_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -966,7 +947,7 @@ PyObject *thing_dead(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *reason   = nullptr;
-  static char *kwlist[] = {(char *) "t", (char *) "reason", 0};
+  static char *kwlist[] = {(char *) "t", (char *) "reason", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1000,7 +981,7 @@ PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *reason   = nullptr;
-  static char *kwlist[] = {(char *) "t", (char *) "reason", 0};
+  static char *kwlist[] = {(char *) "t", (char *) "reason", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1033,7 +1014,7 @@ PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *reason   = nullptr;
-  static char *kwlist[] = {(char *) "t", (char *) "reason", 0};
+  static char *kwlist[] = {(char *) "t", (char *) "reason", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1066,7 +1047,7 @@ PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *what     = nullptr;
-  static char *kwlist[] = {(char *) "t", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "t", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1114,7 +1095,7 @@ PyObject *thing_enemy(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *what     = nullptr;
-  static char *kwlist[] = {(char *) "t", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "t", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1153,7 +1134,7 @@ PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *what     = nullptr;
-  static char *kwlist[] = {(char *) "t", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "t", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1192,7 +1173,7 @@ PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   char        *into     = nullptr;
-  static char *kwlist[] = {(char *) "t", (char *) "into", 0};
+  static char *kwlist[] = {(char *) "t", (char *) "into", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &into)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1224,7 +1205,7 @@ PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywd
 {
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
-  static char *kwlist[] = {(char *) "t", 0};
+  static char *kwlist[] = {(char *) "t", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1252,7 +1233,7 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds)
   uint32_t     id       = 0;
   int          x        = -1;
   int          y        = -1;
-  static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1285,7 +1266,7 @@ PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   uint32_t     owner_id = 0;
-  static char *kwlist[] = {(char *) "t", (char *) "owner", 0};
+  static char *kwlist[] = {(char *) "t", (char *) "owner", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &owner_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1323,7 +1304,7 @@ PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     id       = 0;
   uint32_t     owner_id = 0;
-  static char *kwlist[] = {(char *) "t", (char *) "owner", 0};
+  static char *kwlist[] = {(char *) "t", (char *) "owner", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &owner_id)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1361,7 +1342,7 @@ PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *what     = nullptr;
-  static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "owner", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1399,7 +1380,7 @@ PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *what     = nullptr;
-  static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "owner", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1437,7 +1418,7 @@ PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *what     = nullptr;
-  static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "owner", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1475,7 +1456,7 @@ PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *what     = nullptr;
-  static char *kwlist[] = {(char *) "owner", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "owner", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1513,7 +1494,7 @@ PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *msg      = nullptr;
-  static char *kwlist[] = {(char *) "owner", (char *) "msg", 0};
+  static char *kwlist[] = {(char *) "owner", (char *) "msg", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1550,7 +1531,7 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *msg      = nullptr;
-  static char *kwlist[] = {(char *) "owner", (char *) "msg", 0};
+  static char *kwlist[] = {(char *) "owner", (char *) "msg", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1583,7 +1564,7 @@ PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
   TRACE_NO_INDENT();
   uint32_t     owner_id = 0;
   char        *msg      = nullptr;
-  static char *kwlist[] = {(char *) "owner", (char *) "msg", 0};
+  static char *kwlist[] = {(char *) "owner", (char *) "msg", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
     ERR("%s: Failed parsing keywords", __FUNCTION__);
@@ -1619,10 +1600,10 @@ PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
-  char    *name     = 0;
+  char    *name     = nullptr;
   uint32_t owner_id = 0;
 
-  static char *kwlist[] = {(char *) "owner", (char *) "name", 0};
+  static char *kwlist[] = {(char *) "owner", (char *) "name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &name)) {
     ERR("thing_sound_play: Bad arguments");
@@ -1659,10 +1640,10 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
 {
   TRACE_NO_INDENT();
   uint32_t owner_id = 0;
-  char    *name     = 0;
+  char    *name     = nullptr;
   int      channel  = 0;
 
-  static char *kwlist[] = {(char *) "owner", (char *) "channel", (char *) "name", 0};
+  static char *kwlist[] = {(char *) "owner", (char *) "channel", (char *) "name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iis", kwlist, &owner_id, &channel, &name)) {
     ERR("thing_sound_play_channel: Bad arguments");
@@ -1700,7 +1681,7 @@ PyObject *spawn_fire_around_thing(PyObject *obj, PyObject *args, PyObject *keywd
   char    *what = nullptr;
   uint32_t id   = 0;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -1742,7 +1723,7 @@ PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject 
   uint32_t id     = 0;
   uint32_t radius = 0;
 
-  static char *kwlist[] = {(char *) "id", (char *) "radius", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "radius", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &radius)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -1779,7 +1760,7 @@ PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds)
   char    *what = nullptr;
   uint32_t id   = 0;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -1822,7 +1803,7 @@ PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObje
   char    *what = nullptr;
   uint32_t id   = 0;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);
@@ -1865,7 +1846,7 @@ PyObject *spawn_at_if_possible(PyObject *obj, PyObject *args, PyObject *keywds)
   char    *what = nullptr;
   uint32_t id   = 0;
 
-  static char *kwlist[] = {(char *) "id", (char *) "what", 0};
+  static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     ERR("%s: Bad args", __FUNCTION__);

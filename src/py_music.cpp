@@ -13,11 +13,11 @@
 PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char    *file = 0;
-  char    *name = 0;
+  char    *file = nullptr;
+  char    *name = nullptr;
   uint32_t rate = 44100;
 
-  static char *kwlist[] = {(char *) "rate", (char *) "file", (char *) "name", 0};
+  static char *kwlist[] = {(char *) "rate", (char *) "file", (char *) "name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iss", kwlist, &rate, &file, &name)) {
     ERR("music_load: Bad arguments");
@@ -46,9 +46,9 @@ PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *name = 0;
+  char *name = nullptr;
 
-  static char *kwlist[] = {(char *) "name", 0};
+  static char *kwlist[] = {(char *) "name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "s", kwlist, &name)) {
     ERR("music_play: Bad arguments");

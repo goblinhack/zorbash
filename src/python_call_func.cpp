@@ -22,7 +22,7 @@ void py_call_void(const char *name)
 
   PyObject *pFunc = PyObject_GetAttrString(my_mod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pValue = PyObject_CallObject(pFunc, 0);
+    PyObject *pValue = PyObject_CallObject(pFunc, nullptr);
     if (pValue) {
       Py_DECREF(pValue);
     }
@@ -492,7 +492,7 @@ bool py_call_bool(const char *name)
 
   PyObject *pFunc = PyObject_GetAttrString(my_mod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pValue = PyObject_CallObject(pFunc, 0);
+    PyObject *pValue = PyObject_CallObject(pFunc, nullptr);
     bool      out    = false;
     if (pValue) {
       out = py_obj_to_bool(pValue);
@@ -973,7 +973,7 @@ int py_call_int(const char *name)
 
   PyObject *pFunc = PyObject_GetAttrString(my_mod, name);
   if (PyCallable_Check(pFunc)) {
-    PyObject *pValue = PyObject_CallObject(pFunc, 0);
+    PyObject *pValue = PyObject_CallObject(pFunc, nullptr);
     int       out    = false;
     if (pValue) {
       out = py_obj_to_int(pValue);

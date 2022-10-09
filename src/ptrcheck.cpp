@@ -51,7 +51,7 @@ public:
 class Ptrcheck
 {
 public:
-  Ptrcheck(void) {}
+  Ptrcheck(void) = default;
 
   //
   // For sanity, the pointer itself.
@@ -232,7 +232,7 @@ static void hash_add(hash_t *hash_table, Ptrcheck *pc)
     elem = elem->next;
   }
 
-  if (elem != 0) {
+  if (elem != nullptr) {
     delete pc;
     return;
   }
@@ -252,7 +252,7 @@ static hash_elem_t *hash_find(hash_t *hash_table, void *ptr)
   hash_elem_t  *elem;
 
   if (! hash_table) {
-    return 0;
+    return nullptr;
   }
 
   slot = ptr2hash(hash_table, ptr);
@@ -283,7 +283,7 @@ static void hash_free(hash_t *hash_table, void *ptr)
 
   slot = ptr2hash(hash_table, ptr);
   elem = *slot;
-  prev = 0;
+  prev = nullptr;
 
   while (elem && (elem->pc->ptr != ptr)) {
     prev = elem;
@@ -498,7 +498,7 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
     }
 #endif
     return (pc);
-  } else if (! ptr) {
+  } if (! ptr) {
     ERR("%s%p NULL pointer %s:%s line %u", null_pointer_warning, ptr, file, func, line);
     return nullptr;
   }
@@ -661,7 +661,7 @@ int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int 
 //
 int ptrcheck_verify(int mtype, const void *ptr, const char *func, const char *file, int line)
 {
-  return (ptrcheck_verify_pointer(mtype, ptr, file, func, line, false /* don't store */) != 0);
+  return (ptrcheck_verify_pointer(mtype, ptr, file, func, line, false /* don't store */) != nullptr);
 }
 
 //

@@ -14,11 +14,11 @@
 PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *file   = 0;
-  char *name   = 0;
+  char *file   = nullptr;
+  char *name   = nullptr;
   float volume = 0;
 
-  static char *kwlist[] = {(char *) "volume", (char *) "file", (char *) "name", 0};
+  static char *kwlist[] = {(char *) "volume", (char *) "file", (char *) "name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "fss", kwlist, &volume, &file, &name)) {
     ERR("sound_load: Bad arguments");
@@ -47,9 +47,9 @@ PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *name = 0;
+  char *name = nullptr;
 
-  static char *kwlist[] = {(char *) "name", 0};
+  static char *kwlist[] = {(char *) "name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "s", kwlist, &name)) {
     ERR("sound_play: Bad arguments");
@@ -74,10 +74,10 @@ PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  char *name    = 0;
+  char *name    = nullptr;
   int   channel = 0;
 
-  static char *kwlist[] = {(char *) "channel", (char *) "name", 0};
+  static char *kwlist[] = {(char *) "channel", (char *) "name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "is", kwlist, &channel, &name)) {
     ERR("sound_play_channel: Bad arguments");
