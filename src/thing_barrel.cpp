@@ -31,12 +31,14 @@ void Thing::barrel_tick(void)
     FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
     {
       if (! t->is_barrel()) {
-        t->log("Crushed by a barrel");
-        t->is_attacked_with_damage_crush(this, this, damage_crush());
+        if (t->is_crushable()) {
+          t->log("Crushed by a barrel");
+          t->is_attacked_with_damage_crush(this, this, damage_crush());
+        }
       }
     }
     FOR_ALL_THINGS_END()
-  } else {
+  } else if (is_crushable()) {
     //
     // See if we are under a barrel
     //
