@@ -734,7 +734,7 @@ public:
 
   uint32_t num(void);
 
-  // start sort marker1
+  // begin sort marker1
   uint8_t fade_in_map(const int x, const int y);
   uint8_t fade_in_map(const point p);
   uint8_t fade_in_map_no_check(const int x, const int y);
@@ -887,7 +887,7 @@ public:
   uint8_t noisemap_no_check(const point p);
   // end sort marker1
 
-  // start sort marker2
+  // begin sort marker2
   void assign_leaders_and_followers(void);
   void chances_of_creating_set(void);
   void clear(void);

@@ -21,7 +21,7 @@ def on_use(owner, item, target, x, y):
 def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
-    # start sort marker
+    # begin sort marker
     my.equip_carry_anim(self, "boots_teleport_emer_carry")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_shadow_short(self, True)

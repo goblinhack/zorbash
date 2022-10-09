@@ -32,7 +32,7 @@ def on_tick(owner, me, x, y):
 
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
-    # start sort marker
+    # begin sort marker
     my.attack_no_msg(self, True)
     my.attacks_per_round(self, 1)
     my.damaged_chance_d10000(self, 1)

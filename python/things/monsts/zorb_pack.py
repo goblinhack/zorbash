@@ -30,7 +30,7 @@ def on_you_are_declared_a_follower(me, leader, x, y):
 
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
-    # start sort marker
+    # begin sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.gfx_ascii_shown(self, True)
     my.is_able_to_follow(self, True)

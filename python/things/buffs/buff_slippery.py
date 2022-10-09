@@ -18,7 +18,7 @@ def on_owner_remove(me, owner, x, y):
 def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
-    # start sort marker
+    # begin sort marker
 
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)

@@ -30,7 +30,7 @@ def on_receiving_dmg_lightning(me, hitter, x, y, damage):
 
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
-    # start sort marker
+    # begin sort marker
     my.aggression_pct(self, 100)
     my.ai_resent_count(self, 100)
     my.ai_shove_chance_d1000(self, 200)

@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
-    # start sort marker
+    # begin sort marker
     my.ai_obstacle(self, True)
     my.appearing_chance_d1000(self, 100)
     my.collision_hit_priority(self, 2)

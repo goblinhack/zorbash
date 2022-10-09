@@ -38,7 +38,7 @@ def on_idle(me, x, y):
 
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
-    # start sort marker
+    # begin sort marker
     my.aggression_pct(self, 100)
     my.attack_humanoid(self, True)
     my.attack_meat(self, True)

@@ -15,7 +15,7 @@ def on_born(me, x, y):
 #
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
-    # start sort marker
+    # begin sort marker
     my.collision_check(self, True)
     my.damage_energy_chance_d1000(self, 0, 1000)
     my.damage_energy_dice(self, "1d6")  # This is the damage when the monst fires

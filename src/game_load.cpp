@@ -379,7 +379,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   int shift = 0;
   // CON("LOAD %016LX ",bits64);
   // clang-format off
-  // start sort marker1
+  // begin sort marker1
              my.t->corpse_cleanup                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_ever_moved                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_light                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -437,7 +437,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // CON("LOAD %016LX ",bits64);
   shift = 0;
 
-  // start sort marker2
+  // begin sort marker2
              my.t->i_set_is_able_to_burn                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_acid                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_ascend_dungeon                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

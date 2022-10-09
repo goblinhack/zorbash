@@ -745,7 +745,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-// start sort marker1
+// begin sort marker1
 TP_BODY_SET_INT(aggression_pct)
 TP_BODY_SET_INT(ai_detect_secret_doors)
 TP_BODY_SET_INT(ai_obstacle)

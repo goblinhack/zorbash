@@ -12,7 +12,7 @@ void Tp::temperature_set(int v)
   _has_temperature = true;
 }
 
-// start sort marker1
+// begin sort marker1
 const std::string &Tp::damage_nat_att_type(void) const { return _damage_nat_att_type; }
 const std::string &Tp::equip_carry_anim(void) const { return _equip_carry_anim; }
 const std::string &Tp::gfx_anim_use(void) const { return _gfx_anim_use; }
@@ -154,7 +154,7 @@ const std::string &Tp::text_unused3(void) const { return _text_unused3; }
 const std::string &Tp::text_unused(void) const { return _text_unused; }
 // end sort marker1
 
-// start sort marker2
+// begin sort marker2
 int Tp::aggression_pct(void) const { return _aggression_pct; }
 int Tp::ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
@@ -688,7 +688,7 @@ int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
 // end sort marker2
 
-// start sort marker3
+// begin sort marker3
 void Tp::aggression_pct_set(int v) { _aggression_pct = v; }
 void Tp::ai_detect_secret_doors_set(int v) { _ai_detect_secret_doors = v; }
 void Tp::ai_obstacle_set(int v) { _ai_obstacle = v; }

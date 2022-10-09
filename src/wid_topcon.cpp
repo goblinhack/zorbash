@@ -114,16 +114,10 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   }
 
   //
-  // Toggle gfx mode
+  // Toggle gfx mode. Do this outside the level tick loop to avoid issues with moving things.
   //
   if (sdlk_eq(*key, game->config.key_gfx_toggle)) {
-    g_opt_ascii = ! g_opt_ascii;
-    sdl_display_reset();
-    if (g_opt_ascii) {
-      BOTCON("ASCII mode");
-    } else {
-      BOTCON("Pixel art mode");
-    }
+    game->request_to_toggle_gfx = true;
     return false; // To avoid click noise
   }
 

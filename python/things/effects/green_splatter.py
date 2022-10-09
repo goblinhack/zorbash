@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
-    # start sort marker
+    # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated_can_vflip(self, True)

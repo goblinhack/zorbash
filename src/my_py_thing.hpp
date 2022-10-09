@@ -7,7 +7,7 @@
 #define _MY_PY_THING_HPP_
 #include <Python.h>
 
-// start sort marker1
+// begin sort marker1
 PyObject *thing_aggression_pct(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_detect_secret_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_resent_count(PyObject *obj, PyObject *args, PyObject *keywds);

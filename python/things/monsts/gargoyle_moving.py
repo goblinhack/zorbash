@@ -27,7 +27,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
-    # start sort marker
+    # begin sort marker
     my.aggression_pct(self, 100)
     my.ai_resent_count(self, 100)
     my.attack_humanoid(self, True)

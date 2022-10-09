@@ -10,7 +10,7 @@ def on_enchant(me, x, y):
 
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
-    # start sort marker
+    # begin sort marker
     my.collision_hit_priority(self, 0)
     my.collision_hit_priority(self, 6)
     my.enchant_max(self, 1)

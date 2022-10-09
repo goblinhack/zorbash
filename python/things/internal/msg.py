@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name)
-    # start sort marker
+    # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.is_internal(self, True)
     my.is_loggable(self, False)

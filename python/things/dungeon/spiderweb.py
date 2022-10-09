@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "spiderweb")
-    # start sort marker
+    # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)

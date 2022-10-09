@@ -107,7 +107,7 @@
     }                                                                                                                \
   }
 
-// start sort marker1
+// begin sort marker1
 THING_BODY_GET_BOOL(level_is_attackable_by_monst, is_attackable_by_monst)
 THING_BODY_GET_BOOL(level_is_attackable_by_player, is_attackable_by_player)
 THING_BODY_GET_BOOL(thing_aggression_pct, aggression_pct)

@@ -5,7 +5,7 @@ import tp
 def tp_init(name):
     text_long_name = "cursor path"
     self = tp.Tp(name, text_long_name)
-    # start sort marker
+    # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.is_cursor_path(self, True)

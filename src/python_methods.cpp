@@ -22,7 +22,7 @@
 #include "my_thing_template.hpp"
 
 static PyMethodDef python_c_METHODS[] = {
-    // start sort marker1
+    // begin sort marker1
     MY_ADD_PYTHON_FUNCTION(level_ai_detect_secret_doors_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_resent_count_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_wanderer_at),

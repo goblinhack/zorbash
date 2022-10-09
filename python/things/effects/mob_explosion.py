@@ -8,7 +8,7 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name)
-    # start sort marker
+    # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_shadow_short(self, True)

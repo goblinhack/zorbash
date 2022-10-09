@@ -24,7 +24,7 @@ def tp_init(
 ):
 
     self = tp.Tp(name, "filthy wall", "filthy wall")
-    # start sort marker
+    # begin sort marker
     my.ai_obstacle(self, True)
     my.collision_hit_priority(self, 2)
     my.gfx_ascii_shown_in_bg(self, True)

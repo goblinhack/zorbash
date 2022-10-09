@@ -8,7 +8,7 @@ import tp
 #
 def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name, "dirty floor", "dirty floor")
-    # start sort marker
+    # begin sort marker
     my.gfx_ascii_fg_color_spread_blue(self, 20)
     my.gfx_ascii_fg_color_spread_green(self, 20)
     my.gfx_ascii_fg_color_spread_red(self, 20)

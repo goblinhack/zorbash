@@ -15,7 +15,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
-    # start sort marker
+    # begin sort marker
     my.ai_shove_chance_d1000(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 10)

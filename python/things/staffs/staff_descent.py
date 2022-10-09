@@ -51,7 +51,7 @@ def on_fire(me, x, y):
 
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
-    # start sort marker
+    # begin sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.gfx_ascii_shown(self, True)
     my.blast_max_radius(self, 2)

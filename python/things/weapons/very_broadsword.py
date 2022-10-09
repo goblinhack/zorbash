@@ -22,7 +22,7 @@ def on_enchant(me, x, y):
 
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
-    # start sort marker
+    # begin sort marker
     my.collision_hit_adj(self, True)
     my.crit_chance_d10000(self, 500)
     my.damaged_chance_d10000(self, 1)

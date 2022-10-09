@@ -319,7 +319,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   uint64_t bits64 = 0;
   int      shift  = 0;
   // clang-format off
-  // start sort marker1
+  // begin sort marker1
   bits64 |= (my.t->corpse_cleanup                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_ever_moved                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_light                                    ? 1LLU : 0LLU) << shift; shift++;
@@ -381,7 +381,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
 
   bits64 = 0;
   shift  = 0;
-  // start sort marker2
+  // begin sort marker2
   bits64 |= (my.t->i_set_is_able_to_burn                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_acid                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_ascend_dungeon                ? 1LLU : 0LLU) << shift; shift++;

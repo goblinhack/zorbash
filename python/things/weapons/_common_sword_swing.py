@@ -2,7 +2,7 @@ import my
 
 
 def init(self, name):
-    # start sort marker
+    # begin sort marker
     my.is_loggable(self, True)
     my.is_moveable(self, True)
     my.is_removeable_if_out_of_slots(self, True)

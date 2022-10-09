@@ -100,7 +100,7 @@ private:
   std::vector< int > _damage_draining_chance_d1000 {};
   std::vector< int > _damage_poison_chance_d1000 {};
 
-  // start sort marker1
+  // begin sort marker1
   int _aggression_pct {};
   int _ai_detect_secret_doors {};
   int _ai_obstacle {};
@@ -640,7 +640,7 @@ private:
   int _weapon_use_distance {};
   // end sort marker1
 
-  // start sort marker2
+  // begin sort marker2
   std::string _damage_acid_dice_str;
   std::string _damage_bite_dice_str;
   std::string _damage_claw_dice_str;
@@ -940,7 +940,7 @@ public:
   std::string to_string(void);
   std::string to_short_string(void);
 
-  // start sort marker3
+  // begin sort marker3
   const std::string &damage_acid_dice_str(void) const;
   const std::string &damage_bite_dice_str(void) const;
   const std::string &damage_claw_dice_str(void) const;
@@ -1105,7 +1105,7 @@ public:
   const std::string &text_unused(void) const;
   // end sort marker3
 
-  // start sort marker4
+  // begin sort marker4
   int aggression_pct(void) const;
   int ai_detect_secret_doors(void) const;
   int ai_obstacle(void) const;
@@ -1656,7 +1656,7 @@ public:
   int weapon_damage(void) const;
   // end sort marker4
 
-  // start sort marker5
+  // begin sort marker5
   void aggression_pct_set(int v);
   void ai_detect_secret_doors_set(int v);
   void ai_obstacle_set(int v);

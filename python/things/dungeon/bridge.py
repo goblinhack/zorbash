@@ -14,7 +14,7 @@ def on_death(me, x, y):
 
 def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name, "bridge")
-    # start sort marker
+    # begin sort marker
     my.gfx_ascii_bg_color_spread_hue(self, 30)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)

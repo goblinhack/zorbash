@@ -8,7 +8,7 @@ def on_born(me, x, y):
 
 def tp_init(name):
     self = tp.Tp(name, "teleport_out")
-    # start sort marker
+    # begin sort marker
     my.damage_cold_chance_d1000(self, 0, 1000)
     my.damage_cold_dice(self, "2d6")
     my.damage_nat_att_type(self, "telefreeze")

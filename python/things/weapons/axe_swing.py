@@ -5,7 +5,7 @@ import _common_sword_swing
 
 def init_swing(name):
     self = tp.Tp(name)
-    # start sort marker
+    # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated_can_vflip(self, True)

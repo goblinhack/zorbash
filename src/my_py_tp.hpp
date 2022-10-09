@@ -43,7 +43,7 @@ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 #__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__                                    \
   }
 
-// start sort marker1
+// begin sort marker1
 TP_SET_PROTO(aggression_pct)
 TP_SET_PROTO(ai_detect_secret_doors)
 TP_SET_PROTO(ai_obstacle)

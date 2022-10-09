@@ -198,7 +198,7 @@ public:
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
-  // start sort marker5
+  // begin sort marker5
   uint64_t corpse_cleanup                               : 1 {};
   uint64_t has_ever_moved                               : 1 {};
   uint64_t has_light                                    : 1 {};
@@ -256,7 +256,7 @@ public:
   // These are flags used to make sure we set or unset flags onto the level only once.
   //
 
-  // start sort marker6
+  // begin sort marker6
   uint64_t i_set_is_able_to_burn            : 1 {}; // may produce a flame
   uint64_t i_set_is_acid                    : 1 {};
   uint64_t i_set_is_ascend_dungeon          : 1 {};
@@ -419,7 +419,7 @@ public:
   std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_firing(const point s, const point e, size_t max_elems = 0);
 
-  // start sort marker1
+  // begin sort marker1
   bool ai_blocked_completely(void);
   bool ai_blocked(void);
   bool ai_choose_avoid_goals(std::multiset< Goal > &avoid_goals, const Goal &goal);
@@ -928,7 +928,7 @@ public:
   float teleport_distance_with_modifiers_get(void);
   float update_wobble(void);
 
-  // start sort marker2
+  // begin sort marker2
   int aggression_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
@@ -2045,7 +2045,7 @@ public:
   struct FovMap_ *can_see_currently(void);
   struct FovMap_ *can_see_ever(void);
 
-  // start sort marker3
+  // begin sort marker3
   ts_t ts_anim_delay_end_decr(ts_t);
   ts_t ts_anim_delay_end_decr(void);
   ts_t ts_anim_delay_end_incr(ts_t);
@@ -2193,7 +2193,7 @@ public:
   uint8_t is_visible(void);
   uint8_t z_prio(void);
 
-  // start sort marker4
+  // begin sort marker4
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);

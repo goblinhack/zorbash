@@ -26,7 +26,7 @@ def on_death(me, x, y):
 
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
-    # start sort marker
+    # begin sort marker
     my.ai_obstacle(self, True)
     my.appearing_chance_d1000(self, 10)
     my.collision_check(self, True)

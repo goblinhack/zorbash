@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name):
     self = tp.Tp(name)
-    # start sort marker
+    # begin sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)

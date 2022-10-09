@@ -16,7 +16,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
 
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
-    # start sort marker
+    # begin sort marker
     my.crit_chance_d10000(self, 200)
     my.damaged_chance_d10000(self, 50)
     my.damage_melee_chance_d1000(self, 0, 1000)

@@ -6585,6 +6585,14 @@ static void wid_handle_requests(void)
   }
 
   //
+  // Wait until everything stops moving, or we can get into tricky situations like when changing
+  // graphics modes with things that had not finished moving to their tile.
+  //
+  if (game->things_are_moving) {
+    return;
+  }
+
+  //
   // If we need to destroy the thing info, do so
   //
   if (game->request_destroy_thing_info) {
@@ -6628,6 +6636,20 @@ static void wid_handle_requests(void)
         DBG("Handle request to remake actionhar");
         wid_actionbar_init();
         game->unset_request_to_remake_actionbar();
+      }
+
+      //
+      // Switch between graphics modes.
+      //
+      if (game->request_to_toggle_gfx) {
+        game->request_to_toggle_gfx = false;
+        g_opt_ascii                 = ! g_opt_ascii;
+        sdl_display_reset();
+        if (g_opt_ascii) {
+          BOTCON("ASCII mode");
+        } else {
+          BOTCON("Pixel art mode");
+        }
       }
 
       //
