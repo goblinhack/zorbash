@@ -78,7 +78,7 @@ bool music_load(uint32_t rate, const std::string &file, const std::string &name_
     }
   }
 
-  class music *m = new music(name_alias);
+  auto *m = new music(name_alias);
 
   m->rate = rate;
   m->data = file_load(file.c_str(), &m->len);
@@ -104,7 +104,7 @@ bool music_load(uint32_t rate, const std::string &file, const std::string &name_
   }
 
   auto result = all_music.insert(std::make_pair(name_alias, m));
-  if (result.second == false) {
+  if (!result.second) {
     ERR("Cannot insert music name [%s] failed", name_alias.c_str());
     return false;
   }

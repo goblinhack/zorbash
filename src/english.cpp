@@ -51,7 +51,7 @@ std::string pluralise(const std::string &name)
   } if (ends_with(name, "larva") || ends_with(name, "antenna") || ends_with(name, "hypha") ||
              ends_with(name, "noma")) {
     return name + "e";
-  } else if (ends_with(name, "ex")) {
+  } if (ends_with(name, "ex")) {
     // Vortex; vortexes is legal, but the classic plural is cooler.
     return name.substr(0, name.length() - 2) + "ices";
   } else if (ends_with(name, "mosquito") || ends_with(name, "ss"))

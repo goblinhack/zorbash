@@ -48,7 +48,7 @@ void Level::handle_input_events(void)
   // Trying to scroll the map?
   //
   const float    map_move_scroll_delta = 0.2;
-  const uint8_t *state                 = SDL_GetKeyboardState(0);
+  const uint8_t *state                 = SDL_GetKeyboardState(nullptr);
 
   if (state[ sdlk_to_scancode(game->config.key_map_left) ]) {
     map_wanted_at.x -= map_move_scroll_delta;
@@ -353,11 +353,7 @@ void Level::tick_(void)
     //
     // Wait for animation end. Only if the thing is onscreen
     //
-    if (t->frame_count != game->frame_count) {
-      t->is_offscreen = true;
-    } else {
-      t->is_offscreen = false;
-    }
+    t->is_offscreen = t->frame_count != game->frame_count;
 
     t->update_interpolated_position();
     t->fall_curr();

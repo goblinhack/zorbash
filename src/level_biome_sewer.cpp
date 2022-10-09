@@ -87,11 +87,7 @@ bool Level::create_biome_sewer(point3d at, uint32_t seed)
   }
 
   create_biome_sewer_place_remaining_walls("sewer_wall");
-  if (g_errored) {
-    return false;
-  }
-
-  return true;
+  return !g_errored;
 }
 
 bool Level::create_biome_sewer_pipes(point3d at)
@@ -162,8 +158,7 @@ bool Level::create_biome_sewer_pipes(point3d at)
   // Draw a line from the sewer to a nearby pipe
   //
   TRACE_NO_INDENT();
-  for (auto n = 0U; n < sewers.size(); n++) {
-    auto p  = sewers[ n ];
+  for (auto p : sewers) {
     int  dx = 0, dy = 0;
     switch (pcg_random_range_inclusive(0, 3)) {
       case 0:

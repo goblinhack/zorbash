@@ -556,7 +556,7 @@ static void sdl_msgerr_(const char *fmt, va_list args)
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
 
 #if SDL_MAJOR_VERSION >= 2
-  SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "zorbash", buf + ts_len, 0);
+  SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "zorbash", buf + ts_len, nullptr);
 #endif
 
   putf(MY_STDERR, buf);

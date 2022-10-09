@@ -55,10 +55,10 @@ void quit(void)
   g_quitting = true;
 
 #ifdef ENABLE_CRASH_HANDLER
-  signal(SIGSEGV, 0); // uninstall our handler
-  signal(SIGABRT, 0); // uninstall our handler
-  signal(SIGINT, 0);  // uninstall our handler
-  signal(SIGPIPE, 0); // uninstall our handler
+  signal(SIGSEGV, nullptr); // uninstall our handler
+  signal(SIGABRT, nullptr); // uninstall our handler
+  signal(SIGINT, nullptr);  // uninstall our handler
+  signal(SIGPIPE, nullptr); // uninstall our handler
 #endif
 
   if (game) {
@@ -124,37 +124,37 @@ void quit(void)
 
   if (EXEC_FULL_PATH_AND_NAME) {
     myfree(EXEC_FULL_PATH_AND_NAME);
-    EXEC_FULL_PATH_AND_NAME = 0;
+    EXEC_FULL_PATH_AND_NAME = nullptr;
   }
 
   if (DATA_PATH) {
     myfree(DATA_PATH);
-    DATA_PATH = 0;
+    DATA_PATH = nullptr;
   }
 
   if (EXEC_PYTHONPATH) {
     myfree(EXEC_PYTHONPATH);
-    EXEC_PYTHONPATH = 0;
+    EXEC_PYTHONPATH = nullptr;
   }
 
   if (WORLD_PATH) {
     myfree(WORLD_PATH);
-    WORLD_PATH = 0;
+    WORLD_PATH = nullptr;
   }
 
   if (TTF_PATH) {
     myfree(TTF_PATH);
-    TTF_PATH = 0;
+    TTF_PATH = nullptr;
   }
 
   if (GFX_PATH) {
     myfree(GFX_PATH);
-    GFX_PATH = 0;
+    GFX_PATH = nullptr;
   }
 
   if (EXEC_DIR) {
     myfree(EXEC_DIR);
-    EXEC_DIR = 0;
+    EXEC_DIR = nullptr;
   }
 
 #ifdef ENABLE_DEBUG_MEM_LEAKS
@@ -175,14 +175,14 @@ void quit(void)
 void restart(void)
 {
   TRACE_AND_INDENT();
-  char *args[]     = {0, 0};
+  char *args[]     = {nullptr, nullptr};
   char *executable = ARGV[ 0 ];
 
   LOG("Run %s", executable);
 
   args[ 0 ] = executable;
 
-  execve(executable, (char *const *) args, 0);
+  execve(executable, (char *const *) args, nullptr);
 }
 
 void die(void)
@@ -202,11 +202,11 @@ void die(void)
 static void find_executable(void)
 {
   TRACE_AND_INDENT();
-  char       *parent_dir         = 0;
-  char       *curr_dir           = 0;
+  char       *parent_dir         = nullptr;
+  char       *curr_dir           = nullptr;
   std::string exec_name          = "";
-  char       *exec_expanded_name = 0;
-  char       *path               = 0;
+  char       *exec_expanded_name = nullptr;
+  char       *path               = nullptr;
   char       *tmp;
 
   exec_name = mybasename(ARGV[ 0 ], __FUNCTION__);
@@ -281,11 +281,11 @@ static void find_executable(void)
   //
   path = getenv("PATH");
   if (path) {
-    char *dir = 0;
+    char *dir = nullptr;
 
     path = dupstr(path, "path");
 
-    for (dir = strtok(path, PATHSEP); dir; dir = strtok(0, PATHSEP)) {
+    for (dir = strtok(path, PATHSEP); dir; dir = strtok(nullptr, PATHSEP)) {
       EXEC_FULL_PATH_AND_NAME = dynprintf("%s" DIR_SEP "%s", dir, exec_name.c_str());
       if (file_exists(EXEC_FULL_PATH_AND_NAME)) {
         EXEC_DIR = dynprintf("%s" DIR_SEP, dir);
@@ -296,7 +296,7 @@ static void find_executable(void)
     }
 
     myfree(path);
-    path = 0;
+    path = nullptr;
   }
 
   EXEC_FULL_PATH_AND_NAME = dupstr(exec_expanded_name, "full path");

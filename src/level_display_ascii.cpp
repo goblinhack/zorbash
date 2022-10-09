@@ -64,7 +64,7 @@ void Level::update_light_ascii_map(void)
               float d = DISTANCE(0, 0, dx, dy);
               d *= d;
 
-              fcolor c = fcolor(l->col);
+              auto c = fcolor(l->col);
 
               if (d > 0) {
                 c.r /= d;

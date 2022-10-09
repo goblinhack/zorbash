@@ -22,7 +22,7 @@ std::string Level::to_string(void)
 
   if (biome == BIOME_SEWER) {
     return ("sewer L" + level_no_str);
-  } else if (biome == BIOME_SWAMP) {
+  } if (biome == BIOME_SWAMP) {
     return ("swamp L" + level_no_str);
   } else {
     return ("dungeon L" + level_no_str);

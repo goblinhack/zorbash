@@ -2,6 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include <ranges>
+
 #include "my_game.hpp"
 #include "my_player.hpp"
 #include "my_ptrcheck.hpp"
@@ -109,8 +111,7 @@ static bool player_tick_(bool left, bool right, bool up, bool down, bool attack,
       //
       // A path to the target exists.
       //
-      for (auto i = game->cursor_move_path.rbegin(); i != game->cursor_move_path.rend(); i++) {
-        auto p = *i;
+      for (auto p : std::ranges::reverse_view(game->cursor_move_path)) {
         if (player->try_to_jump_carefree(make_point(p.x, p.y))) {
           player->clear_move_path("Tried to jump");
           break;

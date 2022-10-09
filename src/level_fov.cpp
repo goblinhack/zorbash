@@ -88,7 +88,7 @@ void Level::scan(Thingp me, FovMap *fov_curr, FovMap *fov_ever, int pov_x, int p
 
     if (tile_slope_low > view_slope_high) {
       continue; // Tile is not in the view yet.
-    } else if (tile_slope_high < view_slope_low) {
+    } if (tile_slope_high < view_slope_low) {
       break; // Tiles will no longer be in view.
     }
 

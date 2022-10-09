@@ -30,8 +30,8 @@ template < class T, template < typename ELEM, typename ALLOC = std::allocator< E
 
 void push_back_if_unique(C< T > &c, T d)
 {
-  typename C< T >::iterator so = c.begin();
-  typename C< T >::iterator eo = c.end();
+  auto so = c.begin();
+  auto eo = c.end();
 
   while (so != eo) {
     T t = *so;
