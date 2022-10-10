@@ -1,7 +1,7 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- eels on minimap                                                                                                                              -->
+<!-- starving too soon                                                                                                                            -->
 <!-- sewer eels ?                                                                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
