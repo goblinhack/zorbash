@@ -99,8 +99,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
     my.text_hits(self, "claws")
-    my.text_long_description(self, "A friendly possessed blood sucking bat.")
-    my.text_short_description(self, "A little possessed bat.")
+    my.text_long_description(self, "A friendly blood sucking bat.")
+    my.text_short_description(self, "A little bat.")
     my.thing_size(self, my.THING_SIZE_SMALL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -141,7 +141,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="bat_minion", text_long_name="little fluffy and possessed bat")
+    tp_init(name="bat_minion", text_long_name="little fluffy bat")
 
 
 init()
