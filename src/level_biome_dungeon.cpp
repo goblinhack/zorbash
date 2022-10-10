@@ -725,7 +725,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place swimming monsters");
-      place_swimming_monsts(dungeon);
+      place_swimming_monsts();
       if (g_errored) {
         return false;
       }
@@ -1023,6 +1023,7 @@ void Level::create_biome_dungeon_place_floors(Dungeonp d, std::string what, int 
 void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dungeonp d)
 {
   TRACE_AND_INDENT();
+
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
       Tpp tp {};
@@ -1897,33 +1898,6 @@ void Level::place_dry_grass(Dungeonp d)
 
         (void) thing_new(tp->name(), point(x, y));
       }
-    }
-  }
-}
-
-void Level::place_swimming_monsts(Dungeonp d)
-{
-  TRACE_AND_INDENT();
-
-  int tries  = 500;
-  int placed = 0;
-
-  while (tries-- > 0) {
-    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
-    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
-
-    if (! d->is_deep_water(x, y)) {
-      continue;
-    }
-
-    auto tp = get_dungeon_biome_random_monst(d, point(x, y), biome, MONST_TYPE_SWIMMER);
-    if (unlikely(! tp)) {
-      continue;
-    }
-
-    (void) thing_new(tp->name(), point(x, y));
-    if (placed++ > 10) {
-      break;
     }
   }
 }

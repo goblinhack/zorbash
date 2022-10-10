@@ -107,7 +107,7 @@
     }                                                                                                                \
   }
 
-// begin sort marker1
+// begin sort marker1 {
 THING_BODY_GET_BOOL(level_is_attackable_by_monst, is_attackable_by_monst)
 THING_BODY_GET_BOOL(level_is_attackable_by_player, is_attackable_by_player)
 THING_BODY_GET_BOOL(thing_aggression_pct, aggression_pct)
@@ -530,8 +530,8 @@ THING_BODY_GET_BOOL(thing_unused_flag47, unused_flag47)
 THING_BODY_GET_BOOL(thing_unused_flag48, unused_flag48)
 THING_BODY_GET_BOOL(thing_unused_flag49, unused_flag49)
 THING_BODY_GET_BOOL(thing_unused_flag4, unused_flag4)
-THING_BODY_GET_BOOL(thing_unused_flag50, unused_flag50)
-THING_BODY_GET_BOOL(thing_unused_flag51, unused_flag51)
+THING_BODY_GET_BOOL(thing_is_deep_water_swimmer, is_deep_water_swimmer)
+THING_BODY_GET_BOOL(thing_is_shallow_water_swimmer, is_shallow_water_swimmer)
 THING_BODY_GET_BOOL(thing_unused_flag56, unused_flag56)
 THING_BODY_GET_BOOL(thing_unused_flag5, unused_flag5)
 THING_BODY_GET_BOOL(thing_unused_flag6, unused_flag6)
@@ -579,4 +579,4 @@ THING_BODY_GET_THING(thing_immediate_owner_id_get, immediate_owner_id)
 THING_BODY_GET_THING(thing_immediate_spawned_owner_id_get, immediate_spawned_owner_id)
 THING_BODY_GET_THING(thing_leader_id_get, leader_id)
 THING_BODY_GET_THING(thing_top_owner_id_get, top_owner_id)
-// end sort marker1
+// end sort marker1 {

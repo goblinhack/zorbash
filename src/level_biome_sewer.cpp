@@ -87,7 +87,47 @@ bool Level::create_biome_sewer(point3d at, uint32_t seed)
   }
 
   create_biome_sewer_place_remaining_walls("sewer_wall");
+
+  place_swimming_monsts();
+
   return ! g_errored;
+}
+
+void Level::place_swimming_monsts(void)
+{
+  TRACE_AND_INDENT();
+
+  int tries  = 500;
+  int placed = 0;
+
+  while (tries-- > 0) {
+    auto x = pcg_random_range(MAP_BORDER_ROCK, MAP_WIDTH - MAP_BORDER_ROCK + 1);
+    auto y = pcg_random_range(MAP_BORDER_ROCK, MAP_HEIGHT - MAP_BORDER_ROCK + 1);
+
+    if (is_shallow_water(x, y)) {
+      auto tp = get_sewer_biome_random_monst(point(x, y), biome, MONST_TYPE_SHALLOW_WATER);
+      if (unlikely(! tp)) {
+        continue;
+      }
+
+      (void) thing_new(tp->name(), point(x, y));
+      if (placed++ > 10) {
+        break;
+      }
+    }
+
+    if (is_deep_water(x, y)) {
+      auto tp = get_sewer_biome_random_monst(point(x, y), biome, MONST_TYPE_DEEP_WATER);
+      if (unlikely(! tp)) {
+        continue;
+      }
+
+      (void) thing_new(tp->name(), point(x, y));
+      if (placed++ > 10) {
+        break;
+      }
+    }
+  }
 }
 
 bool Level::create_biome_sewer_pipes(point3d at)

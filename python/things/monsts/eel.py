@@ -66,7 +66,7 @@ def tp_init(name, text_long_name):
     my.is_biome_swamp(self, True)
     my.is_bleeder(self, True)
     my.is_corpse_on_death(self, True)
-    my.is_swimmer(self, True)
+    my.is_shallow_water_swimmer(self, True)
     my.is_corpse_with_bones(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)

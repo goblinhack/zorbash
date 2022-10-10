@@ -43,7 +43,7 @@ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 #__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__                                    \
   }
 
-// begin sort marker1
+// begin sort marker1 {
 TP_SET_PROTO(aggression_pct)
 TP_SET_PROTO(ai_detect_secret_doors)
 TP_SET_PROTO(ai_obstacle)
@@ -766,8 +766,8 @@ TP_SET_PROTO(unused_flag47)
 TP_SET_PROTO(unused_flag48)
 TP_SET_PROTO(unused_flag49)
 TP_SET_PROTO(unused_flag5)
-TP_SET_PROTO(unused_flag50)
-TP_SET_PROTO(unused_flag51)
+TP_SET_PROTO(is_deep_water_swimmer)
+TP_SET_PROTO(is_shallow_water_swimmer)
 TP_SET_PROTO(unused_flag56)
 TP_SET_PROTO(unused_flag6)
 TP_SET_PROTO(unused_flag7)
@@ -777,6 +777,6 @@ TP_SET_PROTO(unused_flag9)
 TP_SET_PROTO(weapon_damage)
 TP_SET_PROTO(z_depth)
 TP_SET_PROTO(z_prio)
-// end sort marker1
+// end sort marker1 {
 
 #endif

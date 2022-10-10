@@ -25,6 +25,14 @@ void tp_fixup(void)
       }
     }
 
+    if (tp->is_shallow_water_swimmer()) {
+      tp->is_swimmer_set(true);
+    }
+
+    if (tp->is_deep_water_swimmer()) {
+      tp->is_swimmer_set(true);
+    }
+
     if (tp->is_tickable()) {
       tp->is_interesting_set(true);
     }

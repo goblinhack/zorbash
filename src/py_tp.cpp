@@ -746,7 +746,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-// begin sort marker1
+// begin sort marker1 {
 TP_BODY_SET_INT(aggression_pct)
 TP_BODY_SET_INT(ai_detect_secret_doors)
 TP_BODY_SET_INT(ai_obstacle)
@@ -1283,8 +1283,8 @@ TP_BODY_SET_INT(unused_flag47)
 TP_BODY_SET_INT(unused_flag48)
 TP_BODY_SET_INT(unused_flag49)
 TP_BODY_SET_INT(unused_flag5)
-TP_BODY_SET_INT(unused_flag50)
-TP_BODY_SET_INT(unused_flag51)
+TP_BODY_SET_INT(is_deep_water_swimmer)
+TP_BODY_SET_INT(is_shallow_water_swimmer)
 TP_BODY_SET_INT(unused_flag56)
 TP_BODY_SET_INT(unused_flag6)
 TP_BODY_SET_INT(unused_flag7)
@@ -1456,4 +1456,4 @@ TP_BODY_SET_STRING(text_unused)
 TP_BODY_SET_STRING(text_unused1)
 TP_BODY_SET_STRING(text_unused2)
 TP_BODY_SET_STRING(text_unused3)
-// end sort marker1
+// end sort marker1 {

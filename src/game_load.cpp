@@ -379,12 +379,12 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   int shift = 0;
   // CON("LOAD %016LX ",bits64);
   // clang-format off
-  // begin sort marker1
+  // begin sort marker1 {
              my.t->corpse_cleanup                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_ever_moved                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_light                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_projectile                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->has_seen_player_mgr                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->has_seen_player_msg_shown                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_activated                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_attached                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_being_destroyed                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -418,7 +418,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_scheduled_for_death                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_scheduled_for_gc                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_scheduled_for_jump_end                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_seen_msg                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_seen_by_player_msg_shown                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_sleeping                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_teleporting                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_the_grid                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -431,13 +431,13 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_waiting_to_leave_level_has_completed_fall = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_wounded_msg                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->was_frozen                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  // end sort marker1
+  // end sort marker1 {
 
   in >> bits(bits64);
   // CON("LOAD %016LX ",bits64);
   shift = 0;
 
-  // begin sort marker2
+  // begin sort marker2 {
              my.t->i_set_is_able_to_burn                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_acid                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_ascend_dungeon                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -500,7 +500,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_wet_grass                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_noise_blocker                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_water                            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-  // end sort marker2
+  // end sort marker2 {
   // clang-format on
 
   /////////////////////////////////////////////////////////////////////////

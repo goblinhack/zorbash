@@ -198,12 +198,12 @@ public:
   // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
-  // begin sort marker5
+  // begin sort marker5 {
   uint64_t corpse_cleanup                               : 1 {};
   uint64_t has_ever_moved                               : 1 {};
   uint64_t has_light                                    : 1 {};
   uint64_t has_projectile                               : 1 {}; // current projectile being fired
-  uint64_t has_seen_player_mgr                          : 1 {};
+  uint64_t has_seen_player_msg_shown                    : 1 {};
   uint64_t is_activated                                 : 1 {}; // this skill is activated
   uint64_t is_attached                                  : 1 {}; // is attached to the level
   uint64_t is_being_destroyed                           : 1 {};
@@ -237,7 +237,7 @@ public:
   uint64_t is_scheduled_for_death                       : 1 {}; // will die in next game loop
   uint64_t is_scheduled_for_gc                          : 1 {};
   uint64_t is_scheduled_for_jump_end                    : 1 {};
-  uint64_t is_seen_msg                                  : 1 {};
+  uint64_t is_seen_by_player_msg_shown                  : 1 {};
   uint64_t is_sleeping                                  : 1 {};
   uint64_t is_teleporting                               : 1 {};
   uint64_t is_the_grid                                  : 1 {}; // is the backbone of the level
@@ -250,13 +250,13 @@ public:
   uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {};
   uint64_t is_wounded_msg                               : 1 {};
   uint64_t was_frozen                                   : 1 {}; /* was frozen at the start of the tick */
-  // end sort marker5
+  // end sort marker5 {
 
   //
   // These are flags used to make sure we set or unset flags onto the level only once.
   //
 
-  // begin sort marker6
+  // begin sort marker6 {
   uint64_t i_set_is_able_to_burn            : 1 {}; // may produce a flame
   uint64_t i_set_is_acid                    : 1 {};
   uint64_t i_set_is_ascend_dungeon          : 1 {};
@@ -319,7 +319,7 @@ public:
   uint64_t i_set_is_wet_grass               : 1 {};
   uint64_t i_set_noise_blocker              : 1 {};
   uint64_t i_set_water                      : 1 {};
-  // end sort marker6
+  // end sort marker6 {
 
   /////////////////////////////////////////////////////////////////////////
   // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -419,7 +419,7 @@ public:
   std::vector< Thingp > in_the_way_for_jumping(const point s, const point e, size_t max_elems = 0);
   std::vector< Thingp > in_the_way_for_firing(const point s, const point e, size_t max_elems = 0);
 
-  // begin sort marker1
+  // begin sort marker1 {
   bool ai_blocked_completely(void);
   bool ai_blocked(void);
   bool ai_choose_avoid_goals(std::multiset< Goal > &avoid_goals, const Goal &goal);
@@ -672,7 +672,7 @@ public:
   bool will_avoid_monst(const Thingp it);
   bool will_prefer_terrain(const Thingp it);
   bool worth_eating(const Thingp it);
-  // end sort marker1
+  // end sort marker1 {
 
   std::vector< std::string > on_get_text_long_description(void);
 
@@ -928,7 +928,7 @@ public:
   float teleport_distance_with_modifiers_get(void);
   float update_wobble(void);
 
-  // begin sort marker2
+  // begin sort marker2 {
   int aggression_pct(void);
   int ai_detect_secret_doors(void);
   int ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int type, bool check);
@@ -1981,8 +1981,8 @@ public:
   int unused_flag48(void);
   int unused_flag49(void);
   int unused_flag4(void);
-  int unused_flag50(void);
-  int unused_flag51(void);
+  int is_deep_water_swimmer(void);
+  int is_shallow_water_swimmer(void);
   int unused_flag56(void);
   int unused_flag5(void);
   int unused_flag6(void);
@@ -1996,7 +1996,7 @@ public:
   int weapon_damage(void);
   int worth_collecting(const Thingp it);
   int worth_collecting(const Thingp it, Thingp *would_need_to_drop);
-  // end sort marker2
+  // end sort marker2 {
 
   point3d born_get(void);
 
@@ -2045,7 +2045,7 @@ public:
   struct FovMap_ *can_see_currently(void);
   struct FovMap_ *can_see_ever(void);
 
-  // begin sort marker3
+  // begin sort marker3 {
   ts_t ts_anim_delay_end_decr(ts_t);
   ts_t ts_anim_delay_end_decr(void);
   ts_t ts_anim_delay_end_incr(ts_t);
@@ -2106,7 +2106,7 @@ public:
   ts_t ts_lunge_end_incr(void);
   ts_t ts_lunge_end_set(ts_t);
   ts_t ts_lunge_end(void);
-  // end sort marker3
+  // end sort marker3 {
 
   uint32_t tick_last_location_check_decr(uint32_t);
   uint32_t tick_last_location_check_decr(void);
@@ -2193,7 +2193,7 @@ public:
   uint8_t is_visible(void);
   uint8_t z_prio(void);
 
-  // begin sort marker4
+  // begin sort marker4 {
   void achieve_goals_in_death(void);
   void achieve_goals_in_life(void);
   void acid_tick(void);
@@ -2474,7 +2474,7 @@ public:
   void weapon_sheath(void);
   void wobble(float wobble);
   void wobble_set(float);
-  // end sort marker4
+  // end sort marker4 {
 
   const std::array< std::array< ThingId, MAX_BAG_HEIGHT >, MAX_BAG_WIDTH > *stat_const_bag(void);
 

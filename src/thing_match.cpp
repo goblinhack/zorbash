@@ -802,10 +802,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag49() && (what == "unused_flag49")) {
     return true;
   }
-  if (unused_flag50() && (what == "unused_flag50")) {
+  if (is_deep_water_swimmer() && (what == "is_deep_water_swimmer")) {
     return true;
   }
-  if (unused_flag51() && (what == "unused_flag51")) {
+  if (is_shallow_water_swimmer() && (what == "is_shallow_water_swimmer")) {
     return true;
   }
   if (is_biome_unused() && (what == "is_biome_unused")) {
@@ -2381,11 +2381,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag4") {
     return &Thing::unused_flag4;
   }
-  if (what == "unused_flag50") {
-    return &Thing::unused_flag50;
+  if (what == "is_deep_water_swimmer") {
+    return &Thing::is_deep_water_swimmer;
   }
-  if (what == "unused_flag51") {
-    return &Thing::unused_flag51;
+  if (what == "is_shallow_water_swimmer") {
+    return &Thing::is_shallow_water_swimmer;
   }
   if (what == "is_biome_unused") {
     return &Thing::is_biome_unused;

@@ -548,22 +548,22 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     //
     if (is_monst()) {
       if (victim->is_player()) {
-        if (! has_seen_player_mgr) {
+        if (! has_seen_player_msg_shown) {
           //
           // Bonus as the monster is surprised.
           //
-          has_seen_player_mgr = true;
+          has_seen_player_msg_shown = true;
           msg("%s is surprised to see you!", text_The().c_str());
           def_bonus += 2;
         }
       }
     } else if (is_player()) {
       if (victim->is_monst()) {
-        if (! victim->has_seen_player_mgr) {
+        if (! victim->has_seen_player_msg_shown) {
           //
           // Bonus as the monster is surprised.
           //
-          victim->has_seen_player_mgr = true;
+          victim->has_seen_player_msg_shown = true;
           msg("You surprise %s!", text_the().c_str());
           att_bonus += 2;
         }

@@ -168,6 +168,9 @@ public:
   //
   std::array< std::array< int, MONST_CLASS_MAX >, MONST_TYPE_MAX > d1000_chance_of_creating_monst {};
 
+  //
+  // Set to -1 to mean no chance
+  //
   int d1000_chance_of_creating_mob_challenge_class_a {};
   int d1000_chance_of_creating_mob_challenge_class_b {};
   int d1000_chance_of_creating_treasure_class_a {};
@@ -672,8 +675,10 @@ public:
   Tpp tp_random_weapon_class_b(const point p);
 
   Tpp get_dungeon_biome_random_monst(Dungeonp d, point p, biome_t, monst_type_t);
-  Tpp get_random_monst(point p, biome_t, monst_type_t, monst_class_t);
+  Tpp get_sewer_biome_random_monst(point p, biome_t, monst_type_t);
+  Tpp get_random_monst(point p, biome_t, monst_type_t, monst_class_t, int difficulty_offset = 0);
 
+  // begin sort marker1 {
   bool buffbox_over(const uint32_t slot);
   bool can_see_obstacle(int x, int y);
   bool can_see_unimpeded(const point &start, const point &end);
@@ -697,6 +702,7 @@ public:
   bool is_light_blocker_for_monst(const point p) const;
   bool is_light_blocker_for_monst_no_check(const int x, const int y) const;
   bool is_light_blocker_for_monst_no_check(const point p) const;
+  bool update_map_mini_should_show_monst(int x, int y);
   bool is_light_blocker_no_check(const int x, const int y) const;
   bool is_light_blocker_no_check(const point p) const;
   bool is_obs_destructable(const int x, const int y) const;
@@ -719,6 +725,7 @@ public:
   bool should_display_map(void);
   bool skillbox_chosen(const uint32_t slot);
   bool skillbox_over(const uint32_t slot);
+  // end sort marker1 {
 
   int total_monst_hp_level(void);
   int total_monst_damage_level(void);
@@ -734,7 +741,7 @@ public:
 
   uint32_t num(void);
 
-  // begin sort marker1
+  // begin sort marker2 {
   uint8_t fade_in_map(const int x, const int y);
   uint8_t fade_in_map(const point p);
   uint8_t fade_in_map_no_check(const int x, const int y);
@@ -885,10 +892,11 @@ public:
   uint8_t noisemap_in_no_check(const point p);
   uint8_t noisemap_no_check(const int x, const int y);
   uint8_t noisemap_no_check(const point p);
-  // end sort marker1
+  // end sort marker2 {
 
-  // begin sort marker2
+  // begin sort marker3 {
   void assign_leaders_and_followers(void);
+  void place_swimming_monsts(void);
   void chances_of_creating_set(void);
   void clear(void);
   void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
@@ -1169,7 +1177,6 @@ public:
   void place_random_treasure(Dungeonp d);
   void place_random_water_monsts(void);
   void place_spiderweb(Dungeonp d);
-  void place_swimming_monsts(Dungeonp d);
   void place_the_grid(void);
   void place_wet_grass(Dungeonp d);
   void poison_gas_explosion(point at);
@@ -1206,7 +1213,7 @@ public:
   void update(void);
   void update_water_next_to_lava(void);
   void wobble_set(float);
-  // end sort marker2
+  // end sort marker3 {
 
   uint8_t is_lava(const int x, const int y);
   uint8_t is_lava(const point p);

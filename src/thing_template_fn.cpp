@@ -12,7 +12,7 @@ void Tp::temperature_set(int v)
   _has_temperature = true;
 }
 
-// begin sort marker1
+// begin sort marker1 {
 const std::string &Tp::damage_nat_att_type(void) const { return _damage_nat_att_type; }
 const std::string &Tp::equip_carry_anim(void) const { return _equip_carry_anim; }
 const std::string &Tp::gfx_anim_use(void) const { return _gfx_anim_use; }
@@ -152,9 +152,9 @@ const std::string &Tp::text_unused1(void) const { return _text_unused1; }
 const std::string &Tp::text_unused2(void) const { return _text_unused2; }
 const std::string &Tp::text_unused3(void) const { return _text_unused3; }
 const std::string &Tp::text_unused(void) const { return _text_unused; }
-// end sort marker1
+// end sort marker1 {
 
-// begin sort marker2
+// begin sort marker2 {
 int Tp::aggression_pct(void) const { return _aggression_pct; }
 int Tp::ai_detect_secret_doors(void) const { return _ai_detect_secret_doors; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
@@ -676,8 +676,8 @@ int Tp::unused_flag47(void) const { return _unused_flag47; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
 int Tp::unused_flag49(void) const { return _unused_flag49; }
 int Tp::unused_flag4(void) const { return _unused_flag4; }
-int Tp::unused_flag50(void) const { return _unused_flag50; }
-int Tp::unused_flag51(void) const { return _unused_flag51; }
+int Tp::is_deep_water_swimmer(void) const { return _is_deep_water_swimmer; }
+int Tp::is_shallow_water_swimmer(void) const { return _is_shallow_water_swimmer; }
 int Tp::unused_flag56(void) const { return _unused_flag56; }
 int Tp::unused_flag5(void) const { return _unused_flag5; }
 int Tp::unused_flag6(void) const { return _unused_flag6; }
@@ -686,9 +686,9 @@ int Tp::unused_flag87(void) const { return _unused_flag87; }
 int Tp::unused_flag8(void) const { return _unused_flag8; }
 int Tp::unused_flag9(void) const { return _unused_flag9; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
-// end sort marker2
+// end sort marker2 {
 
-// begin sort marker3
+// begin sort marker3 {
 void Tp::aggression_pct_set(int v) { _aggression_pct = v; }
 void Tp::ai_detect_secret_doors_set(int v) { _ai_detect_secret_doors = v; }
 void Tp::ai_obstacle_set(int v) { _ai_obstacle = v; }
@@ -1350,8 +1350,8 @@ void Tp::unused_flag47_set(int v) { _unused_flag47 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }
 void Tp::unused_flag49_set(int v) { _unused_flag49 = v; }
 void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
-void Tp::unused_flag50_set(int v) { _unused_flag50 = v; }
-void Tp::unused_flag51_set(int v) { _unused_flag51 = v; }
+void Tp::is_deep_water_swimmer_set(int v) { _is_deep_water_swimmer = v; }
+void Tp::is_shallow_water_swimmer_set(int v) { _is_shallow_water_swimmer = v; }
 void Tp::unused_flag56_set(int v) { _unused_flag56 = v; }
 void Tp::unused_flag5_set(int v) { _unused_flag5 = v; }
 void Tp::unused_flag6_set(int v) { _unused_flag6 = v; }
@@ -1363,4 +1363,4 @@ void Tp::weapon_damage_set(int v) { _weapon_damage = v; }
 void Tp::weapon_use_distance_set(int v) { _weapon_use_distance = v; }
 void Tp::z_depth_set(int v) { z_depth = v; }
 void Tp::z_prio_set(int v) { z_prio = v; }
-// end sort marker3
+// end sort marker3 {

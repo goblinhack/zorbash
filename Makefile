@@ -14,7 +14,7 @@ format:
 	build/format.sh
 
 tidy:
-	build/tidy.sh
+	build/tidy_source.sh
 
 clean:
 	(cd src; $(MAKE) $@)

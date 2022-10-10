@@ -7,7 +7,7 @@
 #define _MY_PY_THING_HPP_
 #include <Python.h>
 
-// begin sort marker1
+// begin sort marker1 {
 PyObject *thing_aggression_pct(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_detect_secret_doors(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_ai_resent_count(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -597,8 +597,8 @@ PyObject *thing_unused_flag47(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag48(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag49(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag50(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag51(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_deep_water_swimmer(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_shallow_water_swimmer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag56(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -606,6 +606,6 @@ PyObject *thing_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag87(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
-// end sort marker1
+// end sort marker1 {
 
 #endif

@@ -100,7 +100,7 @@ private:
   std::vector< int > _damage_draining_chance_d1000 {};
   std::vector< int > _damage_poison_chance_d1000 {};
 
-  // begin sort marker1
+  // begin sort marker1 {
   int _aggression_pct {};
   int _ai_detect_secret_doors {};
   int _ai_obstacle {};
@@ -628,8 +628,8 @@ private:
   int _unused_flag48 {};
   int _unused_flag49 {};
   int _unused_flag5 {};
-  int _unused_flag50 {};
-  int _unused_flag51 {};
+  int _is_deep_water_swimmer {};
+  int _is_shallow_water_swimmer {};
   int _unused_flag56 {};
   int _unused_flag6 {};
   int _unused_flag7 {};
@@ -638,9 +638,9 @@ private:
   int _unused_flag9 {};
   int _weapon_damage {};
   int _weapon_use_distance {};
-  // end sort marker1
+  // end sort marker1 {
 
-  // begin sort marker2
+  // begin sort marker2 {
   std::string _damage_acid_dice_str;
   std::string _damage_bite_dice_str;
   std::string _damage_claw_dice_str;
@@ -804,7 +804,7 @@ private:
   std::string _text_unused1;
   std::string _text_unused2;
   std::string _text_unused3;
-  // end sort marker2
+  // end sort marker2 {
 
 public:
   Tp(void);
@@ -940,7 +940,7 @@ public:
   std::string to_string(void);
   std::string to_short_string(void);
 
-  // begin sort marker3
+  // begin sort marker3 {
   const std::string &damage_acid_dice_str(void) const;
   const std::string &damage_bite_dice_str(void) const;
   const std::string &damage_claw_dice_str(void) const;
@@ -1103,9 +1103,9 @@ public:
   const std::string &text_unused2(void) const;
   const std::string &text_unused3(void) const;
   const std::string &text_unused(void) const;
-  // end sort marker3
+  // end sort marker3 {
 
-  // begin sort marker4
+  // begin sort marker4 {
   int aggression_pct(void) const;
   int ai_detect_secret_doors(void) const;
   int ai_obstacle(void) const;
@@ -1644,8 +1644,8 @@ public:
   int unused_flag48(void) const;
   int unused_flag49(void) const;
   int unused_flag4(void) const;
-  int unused_flag50(void) const;
-  int unused_flag51(void) const;
+  int is_deep_water_swimmer(void) const;
+  int is_shallow_water_swimmer(void) const;
   int unused_flag56(void) const;
   int unused_flag5(void) const;
   int unused_flag6(void) const;
@@ -1654,9 +1654,9 @@ public:
   int unused_flag8(void) const;
   int unused_flag9(void) const;
   int weapon_damage(void) const;
-  // end sort marker4
+  // end sort marker4 {
 
-  // begin sort marker5
+  // begin sort marker5 {
   void aggression_pct_set(int v);
   void ai_detect_secret_doors_set(int v);
   void ai_obstacle_set(int v);
@@ -2319,8 +2319,8 @@ public:
   void unused_flag48_set(int v);
   void unused_flag49_set(int v);
   void unused_flag4_set(int v);
-  void unused_flag50_set(int v);
-  void unused_flag51_set(int v);
+  void is_deep_water_swimmer_set(int v);
+  void is_shallow_water_swimmer_set(int v);
   void unused_flag56_set(int v);
   void unused_flag5_set(int v);
   void unused_flag6_set(int v);
@@ -2332,7 +2332,7 @@ public:
   void weapon_use_distance_set(int v);
   void z_depth_set(int v);
   void z_prio_set(int v);
-  // end sort marker5
+  // end sort marker5 {
 
   void damage_water_chance_d1000_set(int index, int v);
   void damage_acid_chance_d1000_set(int index, int v);
@@ -2464,7 +2464,8 @@ using monst_class_t = enum {
 
 using monst_type_t = enum {
   MONST_TYPE_NORMAL,
-  MONST_TYPE_SWIMMER,
+  MONST_TYPE_SHALLOW_WATER,
+  MONST_TYPE_DEEP_WATER,
   MONST_TYPE_MAX,
 };
 

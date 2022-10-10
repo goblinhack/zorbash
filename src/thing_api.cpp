@@ -1548,16 +1548,16 @@ int Thing::unused_flag49(void)
   return (tp()->unused_flag49());
 }
 
-int Thing::unused_flag50(void)
+int Thing::is_deep_water_swimmer(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag50());
+  return (tp()->is_deep_water_swimmer());
 }
 
-int Thing::unused_flag51(void)
+int Thing::is_shallow_water_swimmer(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag51());
+  return (tp()->is_shallow_water_swimmer());
 }
 
 int Thing::is_biome_unused(void)

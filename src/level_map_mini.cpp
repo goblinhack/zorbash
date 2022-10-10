@@ -6,14 +6,45 @@
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_gl.hpp"
+#include "my_level.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_sys.hpp"
 #include "my_tex.hpp"
 #include "my_thing.hpp"
 #include "my_tile.hpp"
 
+//
+// Should the minimap show this monster?
+//
+bool Level::update_map_mini_should_show_monst(int x, int y)
+{
+  if (! is_monst(x, y)) {
+    return false;
+  }
+
+  if (player && (player->map_beast_count() > 0)) {
+    return true;
+  }
+
+  FOR_ALL_THINGS_THAT_INTERACT(this, t, x, y)
+  {
+    if (t->is_monst()) {
+      if (t->is_seen_by_player_msg_shown) {
+        if (! t->is_swimmer()) {
+          return true;
+        }
+      }
+    }
+  }
+  FOR_ALL_THINGS_END()
+
+  return false;
+}
+
 void Level::update_map_mini(bool showing_two_levels, bool show_faded)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   static int last_rendered;
   if (showing_two_levels) {
     if (show_faded) {
@@ -60,11 +91,6 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
     has_map_treasure = player->map_treasure_available();
   }
 
-  bool has_map_beast = false;
-  if (player && (player->map_beast_count() > 0)) {
-    has_map_beast = true;
-  }
-
   static Texp map_treasure;
   static int  map_treasure_id;
   if (! map_treasure) {
@@ -93,7 +119,12 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c;
 
-        if (is_lit_recently(x, y) && is_monst(x, y)) {
+        //
+        // Should the minimap show this monster?
+        //
+        bool show_monst = update_map_mini_should_show_monst(x, y);
+
+        if (is_lit_recently(x, y) && show_monst) {
           c = RED;
         } else if (is_mob(x, y)) {
           c = PINK;
@@ -212,21 +243,19 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = BLACK;
 
+        //
+        // Should the minimap show this monster?
+        //
+        bool show_monst = update_map_mini_should_show_monst(x, y);
+
         if (is_ascend_dungeon(x, y)) {
           c   = GREEN;
           c.a = 255;
         } else if (is_descend_dungeon(x, y)) {
           c   = PURPLE;
           c.a = 255;
-        } else if (is_monst(x, y) || is_spiderweb(x, y) || is_block_of_ice(x, y) || is_mob(x, y)) {
-          //
-          // Have both? Overlay the monsters
-          //
-          if (has_map_beast) {
-            c = RED;
-          } else {
-            continue;
-          }
+        } else if (show_monst || is_spiderweb(x, y) || is_block_of_ice(x, y) || is_mob(x, y)) {
+          c = RED;
         } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) ||
                    is_enchantstone(x, y)) {
           c   = GOLD2;
@@ -284,8 +313,13 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
       for (auto x = 0; x < MAP_WIDTH; x++) {
         color c = WHITE;
 
+        //
+        // Should the minimap show this monster?
+        //
+        bool show_monst = update_map_mini_should_show_monst(x, y);
+
         bool no_fade = false;
-        if (is_monst(x, y) && has_map_beast) {
+        if (show_monst) {
           c       = RED;
           no_fade = true;
         } else if (! get(can_see_ever.can_see, x, y)) {
@@ -297,7 +331,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_descend_dungeon(x, y)) {
           c   = PURPLE;
           c.a = 255;
-        } else if (is_monst(x, y)) {
+        } else if (show_monst) {
           c       = RED;
           no_fade = true;
         } else if (is_mob(x, y)) {

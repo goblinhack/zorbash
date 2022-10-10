@@ -22,7 +22,7 @@
 #include "my_thing_template.hpp"
 
 static PyMethodDef python_c_METHODS[] = {
-    // begin sort marker1
+    // begin sort marker1 {
     MY_ADD_PYTHON_FUNCTION(level_ai_detect_secret_doors_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_resent_count_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_wanderer_at),
@@ -847,8 +847,8 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag48),
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag49),
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag5),
-    MY_ADD_PYTHON_FUNCTION(thing_unused_flag50),
-    MY_ADD_PYTHON_FUNCTION(thing_unused_flag51),
+    MY_ADD_PYTHON_FUNCTION(thing_is_deep_water_swimmer),
+    MY_ADD_PYTHON_FUNCTION(thing_is_shallow_water_swimmer),
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag56),
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag6),
     MY_ADD_PYTHON_FUNCTION(thing_unused_flag7),
@@ -1571,8 +1571,8 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(unused_flag48),
     MY_ADD_PYTHON_TP_FUNCTION(unused_flag49),
     MY_ADD_PYTHON_TP_FUNCTION(unused_flag5),
-    MY_ADD_PYTHON_TP_FUNCTION(unused_flag50),
-    MY_ADD_PYTHON_TP_FUNCTION(unused_flag51),
+    MY_ADD_PYTHON_TP_FUNCTION(is_deep_water_swimmer),
+    MY_ADD_PYTHON_TP_FUNCTION(is_shallow_water_swimmer),
     MY_ADD_PYTHON_TP_FUNCTION(unused_flag56),
     MY_ADD_PYTHON_TP_FUNCTION(unused_flag6),
     MY_ADD_PYTHON_TP_FUNCTION(unused_flag7),
@@ -1611,7 +1611,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_WRAPPED_PYTHON_FUNCTION(tp_load),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(tp_update),
     PYFUNC_REF(SDLGetKeyState),
-    // end sort marker1
+    // end sort marker1 {
 
     {nullptr, nullptr, 0, nullptr} /* sentinel */
 };

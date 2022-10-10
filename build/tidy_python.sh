@@ -528,8 +528,8 @@ do
       unused_flag48 \
       unused_flag49 \
       unused_flag5 \
-      unused_flag50 \
-      unused_flag51 \
+      is_deep_water_swimmer \
+      is_shallow_water_swimmer \
       unused_flag56 \
       unused_flag6 \
       unused_flag7 \

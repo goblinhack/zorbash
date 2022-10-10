@@ -19,7 +19,7 @@ void Thing::can_see(point p)
     if (is_player()) {
       if (t->is_monst()) {
         if (t->is_dead) {
-          if (! t->is_seen_msg) {
+          if (! t->is_seen_by_player_msg_shown) {
             if (t->is_bloodied()) {
               if (! t->is_wounded_msg) {
                 t->is_wounded_msg = true;
@@ -33,7 +33,7 @@ void Thing::can_see(point p)
               }
             }
 
-            t->is_seen_msg = true;
+            t->is_seen_by_player_msg_shown = true;
             if (t->msg_is_seen()) {
               msg("%s comes into view.", t->text_A_or_An().c_str());
 
@@ -65,8 +65,8 @@ void Thing::can_see(point p)
             }
           }
         } else {
-          if (! t->is_seen_msg) {
-            t->is_seen_msg = true;
+          if (! t->is_seen_by_player_msg_shown) {
+            t->is_seen_by_player_msg_shown = true;
             if (t->msg_is_seen()) {
               if (t->is_sleeping) {
                 msg("A snoozing %s comes into view.", t->text_long_name().c_str());
@@ -116,8 +116,8 @@ void Thing::can_see(point p)
       }
     } else if (is_monst()) {
       if (t->is_player()) {
-        if (! t->has_seen_player_mgr) {
-          t->has_seen_player_mgr = true;
+        if (! t->has_seen_player_msg_shown) {
+          t->has_seen_player_msg_shown = true;
           msg("%s can see you!", text_The().c_str());
         }
       }
