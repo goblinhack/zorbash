@@ -430,6 +430,7 @@ public:
   bool ai_create_path(point &nh, const point start, const point end);
   bool ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type = 0);
   bool ai_create_path_to_single_goal(int, int, int, int, const Goal &goal, const struct Dmap_ *saved_dmap);
+  bool shove_ok(point future_pos);
   bool ai_escape(void);
   bool ai_obstacle_for_me(point);
   bool ai_obstacle(fpoint);

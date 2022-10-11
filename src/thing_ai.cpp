@@ -989,7 +989,12 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
 
       FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
       {
-        AI_LOG("Can see cand", it);
+        //
+        // Not sure why we would need to look at water when choosing goals.
+        //
+        if (it->is_water()) {
+          continue;
+        }
 
         if (it->is_changing_level || it->is_hidden || it->is_falling || it->is_jumping) {
           continue;
@@ -998,6 +1003,8 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         if (it == this) {
           continue;
         }
+
+        AI_LOG("Can see cand", it);
 
         if (it->immediate_owner_id().ok()) {
           AI_LOG("Has an ownwer; ignore", it);

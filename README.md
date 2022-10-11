@@ -1,8 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- starving too soon                                                                                                                            -->
-<!-- cannot shove skelton into water                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

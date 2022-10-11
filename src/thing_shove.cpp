@@ -120,7 +120,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
     }
 
     if (! it->is_brazier() && ! it->is_barrel() && ! it->is_block_of_ice()) {
-      if (it->collision_check_only(shove_pos)) {
+      if (! it->shove_ok(shove_pos)) {
         if (is_player()) {
           msg("%s cannot be shoved! Something is in the way.", it->text_The().c_str());
         } else if (it->is_player()) {
@@ -184,7 +184,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
   // The force check here is to allow something that is in a block of ice to be shoved to the new location where the
   // ice is.
   //
-  if (! force && it->collision_check_only(shove_pos)) {
+  if (! force && ! it->shove_ok(shove_pos)) {
     //
     // This is a failure to shove
     //
@@ -380,6 +380,35 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
   }
 
   return (THING_SHOVE_TRIED_AND_PASSED);
+}
+
+//
+// Can we shove to this location?
+//
+bool Thing::shove_ok(point future_pos)
+{
+  TRACE_AND_INDENT();
+
+  FOR_ALL_COLLISION_THINGS(level, it, future_pos.x, future_pos.y)
+  {
+    if (this == it) {
+      continue;
+    }
+
+    //
+    // Skip things we cannot collide with
+    //
+    if (it->is_falling || it->is_jumping || it->is_changing_level) {
+      continue;
+    }
+
+    if (it->is_obs_for_shoving()) {
+      return false;
+    }
+  }
+  FOR_ALL_THINGS_END()
+
+  return true;
 }
 
 ThingShoved Thing::try_to_shove(point future_pos)
