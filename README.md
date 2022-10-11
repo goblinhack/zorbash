@@ -1,6 +1,9 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- Multiple lava attacks                                                                                                                        -->
+<!-- - water, kraken; kraken will move out of shallows                                                                                      -->
+<!-- - make ripples, summon monsters                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -164,12 +167,6 @@
 <!-- - warhammer should kill parent jelly in one go                                                                                               -->
 <!-- - warhammer smash skeletton                                                                                                                  -->
 <!-- - (blunt/warhamma?) slime specific weapon does not cause slimes to split                                                                     -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Water                                                                                                                                        -->
-<!-- ------                                                                                                                                       -->
-<!-- - water, kraken, eels; kraken will move out of shallows                                                                                      -->
-<!-- - make ripples, summon monsters                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Monsts                                                                                                                                       -->
