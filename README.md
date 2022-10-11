@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- bleeds out only if not insta kill                                                                                                            -->
 <!-- starving too soon                                                                                                                            -->
 <!-- cannot shove skelton into water                                                                                                              -->
 <!-- ------                                                                                                                                       -->

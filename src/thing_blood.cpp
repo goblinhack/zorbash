@@ -47,12 +47,23 @@ void Thing::place_blood(bool force)
     }
   }
 
+  //
+  // If the monster was alredy wounded and dies, add some gory text
+  //
   if (placed_blood) {
-    auto h = health_decr();
-    if (h <= 0) {
-      h = health_set(0);
-      msg("%s bleeds out!", text_The().c_str());
-      dead("by bleeding out");
+    auto h = health();
+    if ((h > 0) && (h < health_max() / 2)) {
+      h = health_decr();
+      if (h <= 0) {
+        h = health_set(0);
+        msg("%s bleeds out!", text_The().c_str());
+        dead("by bleeding out");
+      }
+    } else {
+      h = health_decr();
+      if (h <= 0) {
+        health_set(0);
+      }
     }
   }
 }
