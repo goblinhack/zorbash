@@ -118,7 +118,9 @@ void Thing::can_see(point p)
       if (t->is_player()) {
         if (! t->has_seen_player_msg_shown) {
           t->has_seen_player_msg_shown = true;
-          msg("%s can see you!", text_The().c_str());
+          if (t->msg_is_seen()) {
+            msg("%s can see you!", text_The().c_str());
+          }
         }
       }
     }

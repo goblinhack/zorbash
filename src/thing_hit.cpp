@@ -923,6 +923,12 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     } else {
       clear_move_path("player was hit");
     }
+
+    //
+    // Some things like eels are only seen when they hit the player.
+    //
+    real_hitter->has_attacked_player = true;
+    hitter->has_attacked_player      = true;
   }
 
   real_hitter->reset_goal_penalty(this);

@@ -1530,10 +1530,10 @@ int Thing::unused_flag46(void)
   return (tp()->unused_flag46());
 }
 
-int Thing::unused_flag47(void)
+int Thing::is_obs_for_shoving(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag47());
+  return (tp()->is_obs_for_shoving());
 }
 
 int Thing::unused_flag48(void)
@@ -1542,10 +1542,10 @@ int Thing::unused_flag48(void)
   return (tp()->unused_flag48());
 }
 
-int Thing::unused_flag49(void)
+int Thing::is_submerged(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag49());
+  return (tp()->is_submerged());
 }
 
 int Thing::is_deep_water_swimmer(void)

@@ -204,6 +204,7 @@ public:
   uint64_t has_light                                    : 1 {};
   uint64_t has_projectile                               : 1 {}; // current projectile being fired
   uint64_t has_seen_player_msg_shown                    : 1 {};
+  uint64_t has_attacked_player                          : 1 {};
   uint64_t is_activated                                 : 1 {}; // this skill is activated
   uint64_t is_attached                                  : 1 {}; // is attached to the level
   uint64_t is_being_destroyed                           : 1 {};
@@ -1977,9 +1978,9 @@ public:
   int unused_flag44(void);
   int unused_flag45(void);
   int unused_flag46(void);
-  int unused_flag47(void);
+  int is_obs_for_shoving(void);
   int unused_flag48(void);
-  int unused_flag49(void);
+  int is_submerged(void);
   int unused_flag4(void);
   int is_deep_water_swimmer(void);
   int is_shallow_water_swimmer(void);

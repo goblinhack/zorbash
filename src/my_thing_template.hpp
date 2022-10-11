@@ -624,9 +624,9 @@ private:
   int _unused_flag44 {};
   int _unused_flag45 {};
   int _unused_flag46 {};
-  int _unused_flag47 {};
+  int _is_obs_for_shoving {};
   int _unused_flag48 {};
-  int _unused_flag49 {};
+  int _is_submerged {};
   int _unused_flag5 {};
   int _is_deep_water_swimmer {};
   int _is_shallow_water_swimmer {};
@@ -1640,9 +1640,9 @@ public:
   int unused_flag44(void) const;
   int unused_flag45(void) const;
   int unused_flag46(void) const;
-  int unused_flag47(void) const;
+  int is_obs_for_shoving(void) const;
   int unused_flag48(void) const;
-  int unused_flag49(void) const;
+  int is_submerged(void) const;
   int unused_flag4(void) const;
   int is_deep_water_swimmer(void) const;
   int is_shallow_water_swimmer(void) const;
@@ -2315,9 +2315,9 @@ public:
   void unused_flag44_set(int v);
   void unused_flag45_set(int v);
   void unused_flag46_set(int v);
-  void unused_flag47_set(int v);
+  void is_obs_for_shoving_set(int v);
   void unused_flag48_set(int v);
-  void unused_flag49_set(int v);
+  void is_submerged_set(int v);
   void unused_flag4_set(int v);
   void is_deep_water_swimmer_set(int v);
   void is_shallow_water_swimmer_set(int v);

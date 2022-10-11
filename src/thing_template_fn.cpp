@@ -672,9 +672,9 @@ int Tp::unused_flag43(void) const { return _unused_flag43; }
 int Tp::unused_flag44(void) const { return _unused_flag44; }
 int Tp::unused_flag45(void) const { return _unused_flag45; }
 int Tp::unused_flag46(void) const { return _unused_flag46; }
-int Tp::unused_flag47(void) const { return _unused_flag47; }
+int Tp::is_obs_for_shoving(void) const { return _is_obs_for_shoving; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
-int Tp::unused_flag49(void) const { return _unused_flag49; }
+int Tp::is_submerged(void) const { return _is_submerged; }
 int Tp::unused_flag4(void) const { return _unused_flag4; }
 int Tp::is_deep_water_swimmer(void) const { return _is_deep_water_swimmer; }
 int Tp::is_shallow_water_swimmer(void) const { return _is_shallow_water_swimmer; }
@@ -1346,9 +1346,9 @@ void Tp::unused_flag43_set(int v) { _unused_flag43 = v; }
 void Tp::unused_flag44_set(int v) { _unused_flag44 = v; }
 void Tp::unused_flag45_set(int v) { _unused_flag45 = v; }
 void Tp::unused_flag46_set(int v) { _unused_flag46 = v; }
-void Tp::unused_flag47_set(int v) { _unused_flag47 = v; }
+void Tp::is_obs_for_shoving_set(int v) { _is_obs_for_shoving = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }
-void Tp::unused_flag49_set(int v) { _unused_flag49 = v; }
+void Tp::is_submerged_set(int v) { _is_submerged = v; }
 void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
 void Tp::is_deep_water_swimmer_set(int v) { _is_deep_water_swimmer = v; }
 void Tp::is_shallow_water_swimmer_set(int v) { _is_shallow_water_swimmer = v; }

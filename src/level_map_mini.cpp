@@ -29,8 +29,15 @@ bool Level::update_map_mini_should_show_monst(int x, int y)
   FOR_ALL_THINGS_THAT_INTERACT(this, t, x, y)
   {
     if (t->is_monst()) {
-      if (t->is_seen_by_player_msg_shown) {
-        if (! t->is_swimmer()) {
+      //
+      // Only show on the map once it has been seen.
+      //
+      if (t->is_submerged()) {
+        if (t->has_attacked_player) {
+          return true;
+        }
+      } else {
+        if (t->is_seen_by_player_msg_shown) {
           return true;
         }
       }

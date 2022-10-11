@@ -350,7 +350,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "100")
-    my.hunger_clock_tick_freq(self, 1)
+    my.hunger_clock_tick_freq(self, 10)
     my.hunger_is_hunger_level_hungry_at_pct(self, 50)
     my.hunger_is_hunger_level_starving_at_pct(self, 10)
     my.is_able_to_attack_mobs(self, True)

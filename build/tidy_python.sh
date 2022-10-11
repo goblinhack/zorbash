@@ -524,9 +524,9 @@ do
       unused_flag44 \
       unused_flag45 \
       unused_flag46 \
-      unused_flag47 \
+      is_obs_for_shoving \
       unused_flag48 \
-      unused_flag49 \
+      is_submerged \
       unused_flag5 \
       is_deep_water_swimmer \
       is_shallow_water_swimmer \

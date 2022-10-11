@@ -122,7 +122,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
     if (! it->is_brazier() && ! it->is_barrel() && ! it->is_block_of_ice()) {
       if (it->collision_check_only(shove_pos)) {
         if (is_player()) {
-          msg("%s cannot be shoved!", it->text_The().c_str());
+          msg("%s cannot be shoved! Something is in the way.", it->text_The().c_str());
         } else if (it->is_player()) {
           msg("%s fails to shove you!", text_The().c_str());
         }

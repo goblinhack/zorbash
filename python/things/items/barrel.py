@@ -67,6 +67,7 @@ def tp_init(name, text_long_name):
     my.is_very_combustible(self, True)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
+    my.is_obs_for_shoving(self, True)
     my.on_fall_do(self, "me.on_fall()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")

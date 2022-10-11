@@ -43,6 +43,7 @@ def tp_init(name):
     my.is_jump_blocker(self, True)
     my.is_light_blocker(self, True)
     my.is_obs_wall_or_door(self, True)
+    my.is_obs_for_shoving(self, True)
     my.noise_blocker(self, True)
     my.noise_on_open(self, 60)
     my.noise_on_you_are_hit_and_now_dead(self, 100)

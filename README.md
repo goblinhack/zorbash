@@ -1,8 +1,9 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- bleeds out only if not insta kill                                                                                                            -->
 <!-- starving too soon                                                                                                                            -->
-<!-- sewer eels ?                                                                                                                                 -->
+<!-- cannot shove skelton into water                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

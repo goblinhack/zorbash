@@ -63,6 +63,9 @@ int Tp::get_danger_level(void)
   if (is_able_to_fire_at()) {
     danger_level += 20;
   }
+  if (is_submerged()) {
+    danger_level *= 2;
+  }
 
   danger_level += aggression_pct() / 10;
 
@@ -156,6 +159,12 @@ int Thing::danger_initial_level(void)
   }
   if (stuck_count() > 5) {
     danger_level /= 2;
+  }
+  if (is_submerged()) {
+    danger_level *= 2;
+  }
+  if (is_submerged()) {
+    danger_level *= 2;
   }
 
   danger_level += damage_max();
@@ -251,6 +260,9 @@ int Thing::danger_current_level(void)
   }
   if (stuck_count() > 5) {
     danger_level /= 2;
+  }
+  if (is_submerged()) {
+    danger_level *= 2;
   }
 
   danger_level += damage_max();

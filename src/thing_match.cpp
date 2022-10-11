@@ -793,13 +793,13 @@ bool Thing::matches(const std::string &what)
   if (unused_flag46() && (what == "unused_flag46")) {
     return true;
   }
-  if (unused_flag47() && (what == "unused_flag47")) {
+  if (is_obs_for_shoving() && (what == "is_obs_for_shoving")) {
     return true;
   }
   if (unused_flag48() && (what == "unused_flag48")) {
     return true;
   }
-  if (unused_flag49() && (what == "unused_flag49")) {
+  if (is_submerged() && (what == "is_submerged")) {
     return true;
   }
   if (is_deep_water_swimmer() && (what == "is_deep_water_swimmer")) {
@@ -2369,14 +2369,14 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag46") {
     return &Thing::unused_flag46;
   }
-  if (what == "unused_flag47") {
-    return &Thing::unused_flag47;
+  if (what == "is_obs_for_shoving") {
+    return &Thing::is_obs_for_shoving;
   }
   if (what == "unused_flag48") {
     return &Thing::unused_flag48;
   }
-  if (what == "unused_flag49") {
-    return &Thing::unused_flag49;
+  if (what == "is_submerged") {
+    return &Thing::is_submerged;
   }
   if (what == "unused_flag4") {
     return &Thing::unused_flag4;
