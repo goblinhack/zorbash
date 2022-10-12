@@ -706,8 +706,9 @@ void Level::tick_begin_now(void)
     //
     // Allow the same thing to hit us again
     //
-    if (t->maybe_aip()) {
-      t->aip()->recently_hit_by.clear();
+    auto aip = t->maybe_aip();
+    if (aip) {
+      aip->recently_hit_by.clear();
     }
   }
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)

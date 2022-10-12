@@ -169,6 +169,7 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
                          AttackOptions *attack_options, int damage)
 {
   TRACE_NO_INDENT();
+
   if (! hitter) {
     err("No hitter");
     return false;
@@ -1560,22 +1561,6 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     }
   }
 
-  //
-  // Keep track of who hit me to avoid multiple hits per tick
-  //
-  if (maybe_aip()) {
-    if (is_dead) {
-      //
-      // If dead, allow things to chomp on your bones
-      //
-    } else {
-      //
-      // If alive, one hit per tick
-      //
-      aip()->recently_hit_by[ real_hitter->id ]++;
-    }
-  }
-
   return true;
 }
 
@@ -1648,7 +1633,8 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
   //
   if (maybe_aip()) {
     //
-    // But allows special weapons to attack more than one time.
+    // Keep track of who hit me to avoid multiple hits per tick
+    // But allow special weapons to attack more than one time.
     //
     if (attack_options->attack_num == 0) {
       if (aip()->recently_hit_by.find(real_hitter->id) != aip()->recently_hit_by.end()) {
@@ -1672,6 +1658,19 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
           IF_DEBUG2 { hitter->log("No, I've already hit %s", to_short_string().c_str()); }
           return false;
         }
+      }
+    }
+
+    if (maybe_aip()) {
+      if (is_dead) {
+        //
+        // If dead, allow things to chomp on your bones
+        //
+      } else {
+        //
+        // If alive, one hit per tick
+        //
+        aip()->recently_hit_by[ real_hitter->id ]++;
       }
     }
   }

@@ -1,7 +1,6 @@
 
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- Multiple lava attacks                                                                                                                        -->
 <!-- - water, kraken; kraken will move out of shallows                                                                                      -->
 <!-- - make ripples, summon monsters                                                                                                              -->
 <!-- ------                                                                                                                                       -->
