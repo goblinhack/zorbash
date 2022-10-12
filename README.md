@@ -2,6 +2,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - water, kraken; kraken will move out of shallows                                                                                      -->
+<!-- - jelly jumpers cannot be surprised                                                                                                   -->
 <!-- - make ripples, summon monsters                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
