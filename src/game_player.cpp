@@ -285,7 +285,7 @@ void Game::place_player(void)
         d->is_burnt = true;
         d->dead("x");
       }
-      if (1) {
+      if (0) {
         // level->thing_new("skeleton", point(x + 1, y));
         level->thing_new("lava", point(x - 2, y));
         level->thing_new("lava", point(x - 3, y));
