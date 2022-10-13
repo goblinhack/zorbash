@@ -381,11 +381,11 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // clang-format off
   // begin sort marker1 {
              my.t->corpse_cleanup                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->has_attacked_player                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_ever_moved                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_light                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_projectile                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_seen_player_msg_shown                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->has_attacked_player                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_activated                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_attached                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_being_destroyed                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

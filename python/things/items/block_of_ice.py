@@ -44,7 +44,6 @@ def tp_init(name, text_long_name):
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
-    my.is_obs_for_shoving(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1d20")
     my.is_able_to_fall(self, True)
@@ -67,6 +66,7 @@ def tp_init(name, text_long_name):
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
     my.is_meltable(self, True)
+    my.is_obs_for_shoving(self, True)
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)
     my.is_temperature_sensitive(self, True)

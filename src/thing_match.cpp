@@ -787,10 +787,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag44() && (what == "unused_flag44")) {
     return true;
   }
-  if (unused_flag45() && (what == "unused_flag45")) {
+  if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) {
     return true;
   }
-  if (unused_flag46() && (what == "unused_flag46")) {
+  if (is_msg_allowed_is_surprised() && (what == "is_msg_allowed_is_surprised")) {
     return true;
   }
   if (is_obs_for_shoving() && (what == "is_obs_for_shoving")) {
@@ -826,10 +826,10 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_rest() && (what == "is_able_to_rest")) {
     return true;
   }
-  if (msg_is_wounded() && (what == "msg_is_wounded")) {
+  if (is_msg_allowed_is_wounded() && (what == "is_msg_allowed_is_wounded")) {
     return true;
   }
-  if (msg_is_seen() && (what == "msg_is_seen")) {
+  if (is_msg_allowed_is_seen() && (what == "is_msg_allowed_is_seen")) {
     return true;
   }
   if (is_internal() && (what == "is_internal")) {
@@ -2363,11 +2363,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag44") {
     return &Thing::unused_flag44;
   }
-  if (what == "unused_flag45") {
-    return &Thing::unused_flag45;
+  if (what == "is_able_to_be_surprised") {
+    return &Thing::is_able_to_be_surprised;
   }
-  if (what == "unused_flag46") {
-    return &Thing::unused_flag46;
+  if (what == "is_msg_allowed_is_surprised") {
+    return &Thing::is_msg_allowed_is_surprised;
   }
   if (what == "is_obs_for_shoving") {
     return &Thing::is_obs_for_shoving;
@@ -2405,11 +2405,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_rest") {
     return &Thing::is_able_to_rest;
   }
-  if (what == "msg_is_wounded") {
-    return &Thing::msg_is_wounded;
+  if (what == "is_msg_allowed_is_wounded") {
+    return &Thing::is_msg_allowed_is_wounded;
   }
-  if (what == "msg_is_seen") {
-    return &Thing::msg_is_seen;
+  if (what == "is_msg_allowed_is_seen") {
+    return &Thing::is_msg_allowed_is_seen;
   }
   if (what == "unused_flag5") {
     return &Thing::unused_flag5;

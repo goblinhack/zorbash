@@ -158,6 +158,7 @@ do
       internal \
       is_able_to_attack_mobs \
       is_able_to_attack_owner \
+      is_able_to_be_surprised \
       is_able_to_break_down_doors \
       is_able_to_break_out_of_ice \
       is_able_to_break_out_of_webs \
@@ -268,6 +269,7 @@ do
       is_debug_path \
       is_debug_type \
       is_deep_water \
+      is_deep_water_swimmer \
       is_descend_dungeon \
       is_descend_sewer \
       is_described_when_hovering_over \
@@ -378,6 +380,7 @@ do
       is_necrotic_danger_level \
       is_no_tile \
       is_obs_destructable \
+      is_obs_for_shoving \
       is_obstacle_when_dead \
       is_obs_wall_or_door \
       is_openable \
@@ -402,6 +405,7 @@ do
       is_secret_door \
       is_sewer_wall \
       is_shallow_water \
+      is_shallow_water_swimmer \
       is_shield \
       is_shovable \
       is_shovable_and_sticky \
@@ -418,6 +422,7 @@ do
       is_steam \
       is_sticky \
       is_stone \
+      is_submerged \
       is_swimmer \
       is_sword \
       is_target_radial \
@@ -450,8 +455,9 @@ do
       is_weapon \
       is_wooden \
       move_speed \
-      msg_is_seen \
-      msg_is_wounded \
+      is_msg_allowed_is_seen \
+      is_msg_allowed_is_surprised \
+      is_msg_allowed_is_wounded \
       noise_additional_on_jump_end \
       noise_additional_on_teleporting \
       noise_blocker \
@@ -522,14 +528,8 @@ do
       unused_flag42 \
       unused_flag43 \
       unused_flag44 \
-      unused_flag45 \
-      unused_flag46 \
-      is_obs_for_shoving \
       unused_flag48 \
-      is_submerged \
       unused_flag5 \
-      is_deep_water_swimmer \
-      is_shallow_water_swimmer \
       unused_flag56 \
       unused_flag6 \
       unused_flag7 \

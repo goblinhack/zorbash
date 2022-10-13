@@ -258,6 +258,7 @@ int Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
 int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
 int Tp::is_able_to_attack_mobs(void) const { return _is_able_to_attack_mobs; }
 int Tp::is_able_to_attack_owner(void) const { return _is_able_to_attack_owner; }
+int Tp::is_able_to_be_surprised(void) const { return _is_able_to_be_surprised; }
 int Tp::is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
 int Tp::is_able_to_break_out_of_ice(void) const { return _is_able_to_break_out_of_ice; }
 int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
@@ -371,6 +372,7 @@ int Tp::is_dead_on_shove(void) const { return _is_dead_on_shove; }
 int Tp::is_debuff(void) const { return _is_debuff; }
 int Tp::is_debug_path(void) const { return _is_debug_path; }
 int Tp::is_debug_type(void) const { return _is_debug_type; }
+int Tp::is_deep_water_swimmer(void) const { return _is_deep_water_swimmer; }
 int Tp::is_deep_water(void) const { return _is_deep_water; }
 int Tp::is_descend_dungeon(void) const { return _is_descend_dungeon; }
 int Tp::is_descend_sewer(void) const { return _is_descend_sewer; }
@@ -477,10 +479,14 @@ int Tp::is_monst_class_d(void) const { return _is_monst_class_d; }
 int Tp::is_monst_class_e(void) const { return _is_monst_class_e; }
 int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_moveable(void) const { return _is_moveable; }
+int Tp::is_msg_allowed_is_seen(void) const { return _is_msg_allowed_is_seen; }
+int Tp::is_msg_allowed_is_surprised(void) const { return _is_msg_allowed_is_surprised; }
+int Tp::is_msg_allowed_is_wounded(void) const { return _is_msg_allowed_is_wounded; }
 int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_necrotic_danger_level(void) const { return _is_necrotic_danger_level; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
 int Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
+int Tp::is_obs_for_shoving(void) const { return _is_obs_for_shoving; }
 int Tp::is_obstacle_when_dead(void) const { return _is_obstacle_when_dead; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_openable(void) const { return _is_openable; }
@@ -503,6 +509,7 @@ int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rusty(void) const { return _is_rusty; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_sewer_wall(void) const { return _is_sewer_wall; }
+int Tp::is_shallow_water_swimmer(void) const { return _is_shallow_water_swimmer; }
 int Tp::is_shallow_water(void) const { return _is_shallow_water; }
 int Tp::is_shield(void) const { return _is_shield; }
 int Tp::is_shovable_and_sticky(void) const { return _is_shovable_and_sticky; }
@@ -521,6 +528,7 @@ int Tp::is_steal_item_chance_d1000(void) const { return _is_steal_item_chance_d1
 int Tp::is_steam(void) const { return _is_steam; }
 int Tp::is_sticky(void) const { return _is_sticky; }
 int Tp::is_stone(void) const { return _is_stone; }
+int Tp::is_submerged(void) const { return _is_submerged; }
 int Tp::is_swimmer(void) const { return _is_swimmer; }
 int Tp::is_sword(void) const { return _is_sword; }
 int Tp::is_target_radial(void) const { return _is_target_radial; }
@@ -566,8 +574,6 @@ int Tp::melting_chance_d1000(void) const { return _melting_chance_d1000; }
 int Tp::minion_limit(void) const { return _minion_limit; }
 int Tp::move_speed_mod(void) const { return _move_speed_mod; }
 int Tp::move_speed(void) const { return _move_speed; }
-int Tp::msg_is_seen(void) const { return _msg_is_seen; }
-int Tp::msg_is_wounded(void) const { return _msg_is_wounded; }
 int Tp::noise_additional_on_jump_end(void) const { return _noise_additional_on_jump_end; }
 int Tp::noise_additional_on_teleporting(void) const { return _noise_additional_on_teleporting; }
 int Tp::noise_blocker(void) const { return _noise_blocker; }
@@ -670,14 +676,8 @@ int Tp::unused_flag41(void) const { return _unused_flag41; }
 int Tp::unused_flag42(void) const { return _unused_flag42; }
 int Tp::unused_flag43(void) const { return _unused_flag43; }
 int Tp::unused_flag44(void) const { return _unused_flag44; }
-int Tp::unused_flag45(void) const { return _unused_flag45; }
-int Tp::unused_flag46(void) const { return _unused_flag46; }
-int Tp::is_obs_for_shoving(void) const { return _is_obs_for_shoving; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
-int Tp::is_submerged(void) const { return _is_submerged; }
 int Tp::unused_flag4(void) const { return _unused_flag4; }
-int Tp::is_deep_water_swimmer(void) const { return _is_deep_water_swimmer; }
-int Tp::is_shallow_water_swimmer(void) const { return _is_shallow_water_swimmer; }
 int Tp::unused_flag56(void) const { return _unused_flag56; }
 int Tp::unused_flag5(void) const { return _unused_flag5; }
 int Tp::unused_flag6(void) const { return _unused_flag6; }
@@ -797,6 +797,7 @@ void Tp::internal_has_dir_anim_set(int v) { _internal_has_dir_anim = v; }
 void Tp::internal_has_hp_anim_set(int v) { _internal_has_hp_anim = v; }
 void Tp::is_able_to_attack_mobs_set(int v) { _is_able_to_attack_mobs = v; }
 void Tp::is_able_to_attack_owner_set(int v) { _is_able_to_attack_owner = v; }
+void Tp::is_able_to_be_surprised_set(int v) { _is_able_to_be_surprised = v; }
 void Tp::is_able_to_break_down_doors_set(int v) { _is_able_to_break_down_doors = v; }
 void Tp::is_able_to_break_out_of_ice_set(int v) { _is_able_to_break_out_of_ice = v; }
 void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs = v; }
@@ -912,6 +913,7 @@ void Tp::is_debuff_set(int v) { _is_debuff = v; }
 void Tp::is_debug_path_set(int v) { _is_debug_path = v; }
 void Tp::is_debug_type_set(int v) { _is_debug_type = v; }
 void Tp::is_deep_water_set(int v) { _is_deep_water = v; }
+void Tp::is_deep_water_swimmer_set(int v) { _is_deep_water_swimmer = v; }
 void Tp::is_descend_dungeon_set(int v) { _is_descend_dungeon = v; }
 void Tp::is_descend_sewer_set(int v) { _is_descend_sewer = v; }
 void Tp::is_described_when_hovering_over_set(int v) { _is_described_when_hovering_over = v; }
@@ -1017,10 +1019,14 @@ void Tp::is_monst_class_d_set(int v) { _is_monst_class_d = v; }
 void Tp::is_monst_class_e_set(int v) { _is_monst_class_e = v; }
 void Tp::is_monst_set(int v) { _is_monst = v; }
 void Tp::is_moveable_set(int v) { _is_moveable = v; }
+void Tp::is_msg_allowed_is_seen_set(int v) { _is_msg_allowed_is_seen = v; }
+void Tp::is_msg_allowed_is_surprised_set(int v) { _is_msg_allowed_is_surprised = v; }
+void Tp::is_msg_allowed_is_wounded_set(int v) { _is_msg_allowed_is_wounded = v; }
 void Tp::is_msg_set(int v) { _is_msg = v; }
 void Tp::is_necrotic_danger_level_set(int v) { _is_necrotic_danger_level = v; }
 void Tp::is_no_tile_set(int v) { _is_no_tile = v; }
 void Tp::is_obs_destructable_set(int v) { _is_obs_destructable = v; }
+void Tp::is_obs_for_shoving_set(int v) { _is_obs_for_shoving = v; }
 void Tp::is_obstacle_when_dead_set(int v) { _is_obstacle_when_dead = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
@@ -1044,6 +1050,7 @@ void Tp::is_rusty_set(int v) { _is_rusty = v; }
 void Tp::is_secret_door_set(int v) { _is_secret_door = v; }
 void Tp::is_sewer_wall_set(int v) { _is_sewer_wall = v; }
 void Tp::is_shallow_water_set(int v) { _is_shallow_water = v; }
+void Tp::is_shallow_water_swimmer_set(int v) { _is_shallow_water_swimmer = v; }
 void Tp::is_shield_set(int v) { _is_shield = v; }
 void Tp::is_shovable_and_sticky_set(int v) { _is_shovable_and_sticky = v; }
 void Tp::is_shovable_set(int v) { _is_shovable = v; }
@@ -1061,6 +1068,7 @@ void Tp::is_steal_item_chance_d1000_set(int v) { _is_steal_item_chance_d1000 = v
 void Tp::is_steam_set(int v) { _is_steam = v; }
 void Tp::is_sticky_set(int v) { _is_sticky = v; }
 void Tp::is_stone_set(int v) { _is_stone = v; }
+void Tp::is_submerged_set(int v) { _is_submerged = v; }
 void Tp::is_swimmer_set(int v) { _is_swimmer = v; }
 void Tp::is_sword_set(int v) { _is_sword = v; }
 void Tp::is_target_radial_set(int v) { _is_target_radial = v; }
@@ -1106,8 +1114,6 @@ void Tp::melting_chance_d1000_set(int v) { _melting_chance_d1000 = v; }
 void Tp::minion_limit_set(int v) { _minion_limit = v; }
 void Tp::move_speed_mod_set(int v) { _move_speed_mod = v; }
 void Tp::move_speed_set(int v) { _move_speed = v; }
-void Tp::msg_is_seen_set(int v) { _msg_is_seen = v; }
-void Tp::msg_is_wounded_set(int v) { _msg_is_wounded = v; }
 void Tp::name_set(const std::string &v) { _name = v; }
 void Tp::noise_additional_on_jump_end_set(int v) { _noise_additional_on_jump_end = v; }
 void Tp::noise_additional_on_teleporting_set(int v) { _noise_additional_on_teleporting = v; }
@@ -1344,14 +1350,8 @@ void Tp::unused_flag41_set(int v) { _unused_flag41 = v; }
 void Tp::unused_flag42_set(int v) { _unused_flag42 = v; }
 void Tp::unused_flag43_set(int v) { _unused_flag43 = v; }
 void Tp::unused_flag44_set(int v) { _unused_flag44 = v; }
-void Tp::unused_flag45_set(int v) { _unused_flag45 = v; }
-void Tp::unused_flag46_set(int v) { _unused_flag46 = v; }
-void Tp::is_obs_for_shoving_set(int v) { _is_obs_for_shoving = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }
-void Tp::is_submerged_set(int v) { _is_submerged = v; }
 void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
-void Tp::is_deep_water_swimmer_set(int v) { _is_deep_water_swimmer = v; }
-void Tp::is_shallow_water_swimmer_set(int v) { _is_shallow_water_swimmer = v; }
 void Tp::unused_flag56_set(int v) { _unused_flag56 = v; }
 void Tp::unused_flag5_set(int v) { _unused_flag5 = v; }
 void Tp::unused_flag6_set(int v) { _unused_flag6 = v; }

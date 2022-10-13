@@ -108,6 +108,8 @@ def tp_init(name, text_long_name):
     my.is_monst_class_b(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
+    my.is_msg_allowed_is_seen(self, True)
+    my.is_msg_allowed_is_wounded(self, True)
     my.is_poisonous_danger_level(self, 1)
     my.is_poisonous_danger_level(self, 2)  # danger level
     my.is_shovable(self, True)
@@ -116,8 +118,6 @@ def tp_init(name, text_long_name):
     my.is_tickable(self, True)
     my.jump_distance(self, 2)
     my.move_speed(self, 200)
-    my.msg_is_seen(self, True)
-    my.msg_is_wounded(self, True)
     my.noise_decibels_hearing(self, 0)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d6")

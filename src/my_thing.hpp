@@ -200,11 +200,11 @@ public:
   /////////////////////////////////////////////////////////////////////////
   // begin sort marker5 {
   uint64_t corpse_cleanup                               : 1 {};
+  uint64_t has_attacked_player                          : 1 {};
   uint64_t has_ever_moved                               : 1 {};
   uint64_t has_light                                    : 1 {};
   uint64_t has_projectile                               : 1 {}; // current projectile being fired
   uint64_t has_seen_player_msg_shown                    : 1 {};
-  uint64_t has_attacked_player                          : 1 {};
   uint64_t is_activated                                 : 1 {}; // this skill is activated
   uint64_t is_attached                                  : 1 {}; // is attached to the level
   uint64_t is_being_destroyed                           : 1 {};
@@ -430,7 +430,6 @@ public:
   bool ai_create_path(point &nh, const point start, const point end);
   bool ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int search_type = 0);
   bool ai_create_path_to_single_goal(int, int, int, int, const Goal &goal, const struct Dmap_ *saved_dmap);
-  bool shove_ok(point future_pos);
   bool ai_escape(void);
   bool ai_obstacle_for_me(point);
   bool ai_obstacle(fpoint);
@@ -596,6 +595,7 @@ public:
   bool projectile_choose_target(Thingp item, Thingp victim = nullptr);
   bool same_leader(Thingp it);
   bool same_mob(Thingp it);
+  bool shove_ok(point future_pos);
   bool skill_add(Thingp it);
   bool skill_add(Tpp what);
   bool skillbox_id_insert(Thingp what);
@@ -1187,6 +1187,7 @@ public:
   int initial_light_dist_get(void);
   int is_able_to_attack_mobs(void);
   int is_able_to_attack_owner(void);
+  int is_able_to_be_surprised(void);
   int is_able_to_break_down_doors(void);
   int is_able_to_break_out_of_ice(void);
   int is_able_to_break_out_of_webs(void);
@@ -1322,6 +1323,7 @@ public:
   int is_debuff(void);
   int is_debug_path(void);
   int is_debug_type(void);
+  int is_deep_water_swimmer(void);
   int is_deep_water(void);
   int is_descend_dungeon(void);
   int is_descend_sewer(void);
@@ -1429,10 +1431,14 @@ public:
   int is_monst_class_e(void);
   int is_monst(void);
   int is_moveable(void);
+  int is_msg_allowed_is_seen(void);
+  int is_msg_allowed_is_surprised(void);
+  int is_msg_allowed_is_wounded(void);
   int is_msg(void);
   int is_necrotic_danger_level(void);
   int is_no_tile(void);
   int is_obs_destructable(void);
+  int is_obs_for_shoving(void);
   int is_obstacle_when_dead(void);
   int is_obs_wall_or_door(void);
   int is_openable(void);
@@ -1456,6 +1462,7 @@ public:
   int is_rusty(void);
   int is_secret_door(void);
   int is_sewer_wall(void);
+  int is_shallow_water_swimmer(void);
   int is_shallow_water(void);
   int is_shield(void);
   int is_shovable_and_sticky(void);
@@ -1474,6 +1481,7 @@ public:
   int is_steam(void);
   int is_sticky(void);
   int is_stone(void);
+  int is_submerged(void);
   int is_swimmer(void);
   int is_sword(void);
   int is_target_radial(void);
@@ -1574,8 +1582,6 @@ public:
   int move_speed_mod(void);
   int move_speed_total(void);
   int move_speed(void);
-  int msg_is_seen(void);
-  int msg_is_wounded(void);
   int necrotized_amount_decr(int);
   int necrotized_amount_decr(void);
   int necrotized_amount_incr(int);
@@ -1977,14 +1983,8 @@ public:
   int unused_flag42(void);
   int unused_flag43(void);
   int unused_flag44(void);
-  int unused_flag45(void);
-  int unused_flag46(void);
-  int is_obs_for_shoving(void);
   int unused_flag48(void);
-  int is_submerged(void);
   int unused_flag4(void);
-  int is_deep_water_swimmer(void);
-  int is_shallow_water_swimmer(void);
   int unused_flag56(void);
   int unused_flag5(void);
   int unused_flag6(void);

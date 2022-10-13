@@ -702,7 +702,6 @@ public:
   bool is_light_blocker_for_monst(const point p) const;
   bool is_light_blocker_for_monst_no_check(const int x, const int y) const;
   bool is_light_blocker_for_monst_no_check(const point p) const;
-  bool update_map_mini_should_show_monst(int x, int y);
   bool is_light_blocker_no_check(const int x, const int y) const;
   bool is_light_blocker_no_check(const point p) const;
   bool is_obs_destructable(const int x, const int y) const;
@@ -725,6 +724,7 @@ public:
   bool should_display_map(void);
   bool skillbox_chosen(const uint32_t slot);
   bool skillbox_over(const uint32_t slot);
+  bool update_map_mini_should_show_monst(int x, int y);
   // end sort marker1 {
 
   int total_monst_hp_level(void);
@@ -896,7 +896,6 @@ public:
 
   // begin sort marker3 {
   void assign_leaders_and_followers(void);
-  void place_swimming_monsts(void);
   void chances_of_creating_set(void);
   void clear(void);
   void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
@@ -1177,6 +1176,7 @@ public:
   void place_random_treasure(Dungeonp d);
   void place_random_water_monsts(void);
   void place_spiderweb(Dungeonp d);
+  void place_swimming_monsts(void);
   void place_the_grid(void);
   void place_wet_grass(Dungeonp d);
   void poison_gas_explosion(point at);

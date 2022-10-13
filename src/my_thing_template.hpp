@@ -209,6 +209,7 @@ private:
   int _internal_has_hp_anim {};
   int _is_able_to_attack_mobs {};
   int _is_able_to_attack_owner {};
+  int _is_able_to_be_surprised {};
   int _is_able_to_break_down_doors {};
   int _is_able_to_break_out_of_ice {};
   int _is_able_to_break_out_of_webs {};
@@ -323,6 +324,7 @@ private:
   int _is_debug_path {};
   int _is_debug_type {};
   int _is_deep_water {};
+  int _is_deep_water_swimmer {};
   int _is_descend_dungeon {};
   int _is_descend_sewer {};
   int _is_described_when_hovering_over {};
@@ -430,9 +432,13 @@ private:
   int _is_monst_class_e {};
   int _is_moveable {};
   int _is_msg {};
+  int _is_msg_allowed_is_seen {};
+  int _is_msg_allowed_is_surprised {};
+  int _is_msg_allowed_is_wounded {};
   int _is_necrotic_danger_level {};
   int _is_no_tile {};
   int _is_obs_destructable {};
+  int _is_obs_for_shoving {};
   int _is_obstacle_when_dead {};
   int _is_obs_wall_or_door {};
   int _is_openable {};
@@ -456,6 +462,7 @@ private:
   int _is_secret_door {};
   int _is_sewer_wall {};
   int _is_shallow_water {};
+  int _is_shallow_water_swimmer {};
   int _is_shield {};
   int _is_shovable {};
   int _is_shovable_and_sticky {};
@@ -473,6 +480,7 @@ private:
   int _is_steam {};
   int _is_sticky {};
   int _is_stone {};
+  int _is_submerged {};
   int _is_swimmer {};
   int _is_sword {};
   int _is_target_radial {};
@@ -517,8 +525,6 @@ private:
   int _minion_limit {};
   int _move_speed {};
   int _move_speed_mod {};
-  int _msg_is_seen {};
-  int _msg_is_wounded {};
   int _noise_additional_on_jump_end {};
   int _noise_additional_on_teleporting {};
   int _noise_blocker {};
@@ -622,14 +628,8 @@ private:
   int _unused_flag42 {};
   int _unused_flag43 {};
   int _unused_flag44 {};
-  int _unused_flag45 {};
-  int _unused_flag46 {};
-  int _is_obs_for_shoving {};
   int _unused_flag48 {};
-  int _is_submerged {};
   int _unused_flag5 {};
-  int _is_deep_water_swimmer {};
-  int _is_shallow_water_swimmer {};
   int _unused_flag56 {};
   int _unused_flag6 {};
   int _unused_flag7 {};
@@ -1226,6 +1226,7 @@ public:
   int internal_has_hp_anim(void) const;
   int is_able_to_attack_mobs(void) const;
   int is_able_to_attack_owner(void) const;
+  int is_able_to_be_surprised(void) const;
   int is_able_to_break_down_doors(void) const;
   int is_able_to_break_out_of_ice(void) const;
   int is_able_to_break_out_of_webs(void) const;
@@ -1339,6 +1340,7 @@ public:
   int is_debuff(void) const;
   int is_debug_path(void) const;
   int is_debug_type(void) const;
+  int is_deep_water_swimmer(void) const;
   int is_deep_water(void) const;
   int is_descend_dungeon(void) const;
   int is_descend_sewer(void) const;
@@ -1445,10 +1447,14 @@ public:
   int is_monst_class_e(void) const;
   int is_monst(void) const;
   int is_moveable(void) const;
+  int is_msg_allowed_is_seen(void) const;
+  int is_msg_allowed_is_surprised(void) const;
+  int is_msg_allowed_is_wounded(void) const;
   int is_msg(void) const;
   int is_necrotic_danger_level(void) const;
   int is_no_tile(void) const;
   int is_obs_destructable(void) const;
+  int is_obs_for_shoving(void) const;
   int is_obstacle_when_dead(void) const;
   int is_obs_wall_or_door(void) const;
   int is_openable(void) const;
@@ -1471,6 +1477,7 @@ public:
   int is_rusty(void) const;
   int is_secret_door(void) const;
   int is_sewer_wall(void) const;
+  int is_shallow_water_swimmer(void) const;
   int is_shallow_water(void) const;
   int is_shield(void) const;
   int is_shovable_and_sticky(void) const;
@@ -1489,6 +1496,7 @@ public:
   int is_steam(void) const;
   int is_sticky(void) const;
   int is_stone(void) const;
+  int is_submerged(void) const;
   int is_swimmer(void) const;
   int is_sword(void) const;
   int is_target_radial(void) const;
@@ -1534,8 +1542,6 @@ public:
   int minion_limit(void) const;
   int move_speed_mod(void) const;
   int move_speed(void) const;
-  int msg_is_seen(void) const;
-  int msg_is_wounded(void) const;
   int noise_additional_on_jump_end(void) const;
   int noise_additional_on_teleporting(void) const;
   int noise_blocker(void) const;
@@ -1638,14 +1644,8 @@ public:
   int unused_flag42(void) const;
   int unused_flag43(void) const;
   int unused_flag44(void) const;
-  int unused_flag45(void) const;
-  int unused_flag46(void) const;
-  int is_obs_for_shoving(void) const;
   int unused_flag48(void) const;
-  int is_submerged(void) const;
   int unused_flag4(void) const;
-  int is_deep_water_swimmer(void) const;
-  int is_shallow_water_swimmer(void) const;
   int unused_flag56(void) const;
   int unused_flag5(void) const;
   int unused_flag6(void) const;
@@ -1765,6 +1765,7 @@ public:
   void internal_has_hp_anim_set(int v);
   void is_able_to_attack_mobs_set(int v);
   void is_able_to_attack_owner_set(int v);
+  void is_able_to_be_surprised_set(int v);
   void is_able_to_break_down_doors_set(int v);
   void is_able_to_break_out_of_ice_set(int v);
   void is_able_to_break_out_of_webs_set(int v);
@@ -1880,6 +1881,7 @@ public:
   void is_debug_path_set(int v);
   void is_debug_type_set(int v);
   void is_deep_water_set(int v);
+  void is_deep_water_swimmer_set(int v);
   void is_descend_dungeon_set(int v);
   void is_descend_sewer_set(int v);
   void is_described_when_hovering_over_set(int v);
@@ -1985,10 +1987,14 @@ public:
   void is_monst_class_e_set(int v);
   void is_monst_set(int v);
   void is_moveable_set(int v);
+  void is_msg_allowed_is_seen_set(int v);
+  void is_msg_allowed_is_surprised_set(int v);
+  void is_msg_allowed_is_wounded_set(int v);
   void is_msg_set(int v);
   void is_necrotic_danger_level_set(int v);
   void is_no_tile_set(int v);
   void is_obs_destructable_set(int v);
+  void is_obs_for_shoving_set(int v);
   void is_obstacle_when_dead_set(int v);
   void is_obs_wall_or_door_set(int v);
   void is_openable_set(int v);
@@ -2012,6 +2018,7 @@ public:
   void is_secret_door_set(int v);
   void is_sewer_wall_set(int v);
   void is_shallow_water_set(int v);
+  void is_shallow_water_swimmer_set(int v);
   void is_shield_set(int v);
   void is_shovable_and_sticky_set(int v);
   void is_shovable_set(int v);
@@ -2029,6 +2036,7 @@ public:
   void is_steam_set(int v);
   void is_sticky_set(int v);
   void is_stone_set(int v);
+  void is_submerged_set(int v);
   void is_swimmer_set(int v);
   void is_sword_set(int v);
   void is_target_radial_set(int v);
@@ -2074,8 +2082,6 @@ public:
   void minion_limit_set(int v);
   void move_speed_mod_set(int v);
   void move_speed_set(int v);
-  void msg_is_seen_set(int v);
-  void msg_is_wounded_set(int v);
   void name_set(const std::string &v);
   void noise_additional_on_jump_end_set(int v);
   void noise_additional_on_teleporting_set(int v);
@@ -2313,14 +2319,8 @@ public:
   void unused_flag42_set(int v);
   void unused_flag43_set(int v);
   void unused_flag44_set(int v);
-  void unused_flag45_set(int v);
-  void unused_flag46_set(int v);
-  void is_obs_for_shoving_set(int v);
   void unused_flag48_set(int v);
-  void is_submerged_set(int v);
   void unused_flag4_set(int v);
-  void is_deep_water_swimmer_set(int v);
-  void is_shallow_water_swimmer_set(int v);
   void unused_flag56_set(int v);
   void unused_flag5_set(int v);
   void unused_flag6_set(int v);

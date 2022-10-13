@@ -1518,16 +1518,16 @@ int Thing::unused_flag44(void)
   return (tp()->unused_flag44());
 }
 
-int Thing::unused_flag45(void)
+int Thing::is_able_to_be_surprised(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag45());
+  return (tp()->is_able_to_be_surprised());
 }
 
-int Thing::unused_flag46(void)
+int Thing::is_msg_allowed_is_surprised(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag46());
+  return (tp()->is_msg_allowed_is_surprised());
 }
 
 int Thing::is_obs_for_shoving(void)
@@ -1596,16 +1596,16 @@ int Thing::is_able_to_rest(void)
   return (tp()->is_able_to_rest());
 }
 
-int Thing::msg_is_wounded(void)
+int Thing::is_msg_allowed_is_wounded(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->msg_is_wounded());
+  return (tp()->is_msg_allowed_is_wounded());
 }
 
-int Thing::msg_is_seen(void)
+int Thing::is_msg_allowed_is_seen(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->msg_is_seen());
+  return (tp()->is_msg_allowed_is_seen());
 }
 
 int Thing::is_internal(void)

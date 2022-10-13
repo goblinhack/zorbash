@@ -13,8 +13,8 @@ def tp_init(name):
     my.noise_on_born(self, 10)
     my.text_a_or_an(self, "a")
     my.text_short_description(self, "A small ripple.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.thing_size(self, my.THING_SIZE_SMALL)
+    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

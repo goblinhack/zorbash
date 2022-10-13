@@ -23,7 +23,7 @@ void Thing::can_see(point p)
             if (t->is_bloodied()) {
               if (! t->is_wounded_msg) {
                 t->is_wounded_msg = true;
-                if (t->msg_is_wounded()) {
+                if (t->is_msg_allowed_is_wounded()) {
                   if (t->is_red_blooded()) {
                     msg("%s corpse is covered in blood.", t->text_The().c_str());
                   } else if (t->is_green_blooded()) {
@@ -34,7 +34,7 @@ void Thing::can_see(point p)
             }
 
             t->is_seen_by_player_msg_shown = true;
-            if (t->msg_is_seen()) {
+            if (t->is_msg_allowed_is_seen()) {
               msg("%s comes into view.", t->text_A_or_An().c_str());
 
               FOR_ALL_EQUIP(e)
@@ -67,7 +67,7 @@ void Thing::can_see(point p)
         } else {
           if (! t->is_seen_by_player_msg_shown) {
             t->is_seen_by_player_msg_shown = true;
-            if (t->msg_is_seen()) {
+            if (t->is_msg_allowed_is_seen()) {
               if (t->is_sleeping) {
                 msg("A snoozing %s comes into view.", t->text_long_name().c_str());
               } else if (t->is_stuck_currently()) {
@@ -107,7 +107,7 @@ void Thing::can_see(point p)
           if (t->is_bloodied()) {
             if (! t->is_wounded_msg) {
               t->is_wounded_msg = true;
-              if (t->msg_is_wounded()) {
+              if (t->is_msg_allowed_is_wounded()) {
                 msg("%s is wounded.", t->text_The().c_str());
               }
             }
@@ -118,7 +118,7 @@ void Thing::can_see(point p)
       if (t->is_player()) {
         if (! t->has_seen_player_msg_shown) {
           t->has_seen_player_msg_shown = true;
-          if (t->msg_is_seen()) {
+          if (t->is_msg_allowed_is_seen()) {
             msg("%s can see you!", text_The().c_str());
           }
         }
