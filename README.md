@@ -3,6 +3,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- - water, kraken; kraken will move out of shallows                                                                                      -->
 <!-- - jelly jumpers cannot be surprised                                                                                                   -->
+<!-- - skeleton surprised when should not be and improve anim                                                                              -->
 <!-- - make ripples, summon monsters                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
