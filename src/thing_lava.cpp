@@ -61,6 +61,20 @@ void Thing::lava_tick(void)
     }
     FOR_ALL_THINGS_END()
   } else {
+    //
+    // Even if we do not hit, we need to increase the recently_hit_by so that if a subsequent
+    // location check happens, they do not get attacked.
+    //
+    if (maybe_aip()) {
+      FOR_ALL_THINGS_AT_DEPTH(level, t, at.x, at.y, MAP_DEPTH_LIQUID)
+      {
+        if (t->is_lava()) {
+          aip()->recently_hit_by[ t->id ]++;
+        }
+      }
+      FOR_ALL_THINGS_END()
+    }
+
     if (is_player()) {
       if (is_immune_to_fire()) {
         popup("Lovely lava!");

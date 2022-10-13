@@ -2,7 +2,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - water, kraken; kraken will move out of shallows                                                                                      -->
-<!-- - torch is destroyed in lava?                                                                                                          -->
 <!-- - jelly jumpers cannot be surprised                                                                                                   -->
 <!-- - make ripples, summon monsters                                                                                                              -->
 <!-- ------                                                                                                                                       -->

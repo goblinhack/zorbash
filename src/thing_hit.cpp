@@ -934,6 +934,22 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
 
   real_hitter->reset_goal_penalty(this);
 
+  //
+  // If possessions are destroyed, let the player know.
+  //
+  if (is_dead || is_dying) {
+    auto owner = top_owner();
+    if (owner && owner->is_player()) {
+      if (! owner->is_dying && ! owner->is_dying) {
+        msg("Your %s is destroyed!", text_short_name().c_str());
+      }
+    } else if (owner && owner->is_monst()) {
+      if (! owner->is_dying && ! owner->is_dying) {
+        msg("The %s %s is destroyed!", owner->text_The().c_str(), pluralise(text_short_name()).c_str());
+      }
+    }
+  }
+
   if (is_player()) {
     //
     // Player being hit
@@ -1105,173 +1121,171 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
     if (is_bloodied() || (damage > THING_DAMAGE_SHAKE_ABOVE)) {
       level->wobble_set(damage / THING_DAMAGE_SHAKE_SCALE);
     }
-  } else {
-    if (real_hitter->is_player()) {
+  } else if (real_hitter->is_player()) {
+    //
+    // Player hitting something else
+    //
+    if (top_owner() == real_hitter) {
       //
-      // Player hitting something else
+      // This can be the player is on fire and that causes carried items to burn
       //
-      if (top_owner() == real_hitter) {
-        //
-        // This can be the player is on fire and that causes carried items to burn
-        //
-        if (d20roll_under(real_hitter->stat_luck_total())) {
-          dbg("Avoids damage by luck");
-          return false;
-        }
+      if (d20roll_under(real_hitter->stat_luck_total())) {
+        dbg("Avoids damage by luck");
+        return false;
+      }
 
-        if (attack_options->attack_poison) {
-          msg("Your %s is being poisoned.", text_short_name().c_str());
-        } else if (attack_options->attack_future1) {
-          msg("Your %s is being future1.", text_short_name().c_str());
-        } else if (attack_options->attack_bite) {
-          msg("Your %s is being bitten.", text_short_name().c_str());
-        } else if (attack_options->attack_claw) {
-          msg("Your %s is being clawed.", text_short_name().c_str());
-        } else if (attack_options->attack_cold) {
-          msg("Your %s is freezing.", text_short_name().c_str());
-        } else if (attack_options->attack_fire) {
-          msg("Your %s is burning.", text_short_name().c_str());
-        } else if (attack_options->attack_crush) {
-          msg("Your %s is being crushed.", text_short_name().c_str());
-        } else if (attack_options->attack_lightning) {
-          msg("Your %s is being zapped.", text_short_name().c_str());
-        } else if (attack_options->attack_energy) {
-          msg("Your %s is being blasted.", text_short_name().c_str());
-        } else if (attack_options->attack_acid) {
-          msg("Your %s is disintegrating.", text_short_name().c_str());
-        } else if (attack_options->attack_digest) {
-          msg("Your %s is dissolving.", text_short_name().c_str());
-        } else if (attack_options->attack_necrosis) {
-          msg("Your %s is rotting.", text_short_name().c_str());
-        } else if (attack_options->attack_draining) {
-          msg("Your %s is drained.", text_short_name().c_str());
-        } else {
-          msg("Your %s is being damaged.", text_short_name().c_str());
-        }
-      } else if (is_alive_monst() || is_mob()) {
-        //
-        // Provide some more interesting messages for when the player hits monsters...
-        //
-        if (attack_options->crit) {
-          real_hitter->msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
-                           damage_type.c_str());
-        } else {
-          if (hitter && (hitter != real_hitter)) {
-            if (attack_options->attack_poison) {
-              real_hitter->msg("You poison %s for %d %sdamage with %s.", text_the().c_str(), damage,
-                               damage_type.c_str(), hitter->text_the().c_str());
-            } else if (attack_options->attack_necrosis) {
-              real_hitter->msg("You rot %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                               hitter->text_the().c_str());
-            } else if (attack_options->attack_draining) {
-              real_hitter->msg("You tire %s for %d %sdamage with %s.", text_the().c_str(), damage,
-                               damage_type.c_str(), hitter->text_the().c_str());
-            } else if (hitter->is_weapon()) {
-              real_hitter->msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                               hitter->text_the().c_str());
-            } else if (hitter->is_laser()) {
-              real_hitter->msg("You zap %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                               hitter->text_the().c_str());
-            } else if (hitter->is_magical()) {
-              real_hitter->msg("You blast %s for %d %sdamage with %s.", text_the().c_str(), damage,
-                               damage_type.c_str(), hitter->text_the().c_str());
-            } else {
-              real_hitter->msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
-                               hitter->text_the().c_str());
-            }
-
-            if (game->robot_mode) {
-              BOTCON("Robot attacks %s.", text_the().c_str());
-            }
-          } else {
-            if (attack_options->attack_poison) {
-              real_hitter->msg("You poison %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-            } else if (attack_options->attack_necrosis) {
-              real_hitter->msg("You rot %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-            } else if (attack_options->attack_draining) {
-              real_hitter->msg("You tire %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-            } else if (hitter->is_weapon()) {
-              real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-            } else if (hitter->is_laser()) {
-              real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-            } else if (hitter->is_magical()) {
-              real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-            } else {
-              real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-            }
-
-            if (game->robot_mode) {
-              BOTCON("Robot attacks %s.", text_the().c_str());
-            }
-          }
-        }
-      } else if (is_item()) {
-        //
-        // Player hitting items.
-        //
-        if (hitter->is_weapon()) {
-          real_hitter->msg("You hit %s.", text_the().c_str());
-        } else if (hitter->is_laser()) {
-          real_hitter->msg("You zap %s.", text_the().c_str());
-        } else if (hitter->is_magical()) {
-          real_hitter->msg("You blast %s.", text_the().c_str());
-        } else {
-          real_hitter->msg("You hit %s.", text_the().c_str());
-        }
-
-        if (game->robot_mode) {
-          BOTCON("Robot attacks %s.", text_the().c_str());
-        }
-      } else if (is_rock() || is_wall_dungeon()) {
-        //
-        // Provide some more interesting messages for when hitting rocks...
-        //
-        if (hitter->is_weapon()) {
-          if (hitter->is_weapon() && (hitter->weapon_damaged_pct() < 100)) {
-            hitter->msg("You hit %s with your damaged weapon.", text_the().c_str());
-          } else if (hitter->is_weapon() && (hitter->weapon_damaged_pct() < 50)) {
-            hitter->msg("You pointlessly hit %s with your damaged weapon.", text_the().c_str());
-          } else {
-            if (pcg_random_range(1, 100) < 10) {
-              hitter->msg("You hit %s, why though?", text_the().c_str());
-            } else {
-              hitter->msg("You hit %s.", text_the().c_str());
-            }
-          }
-        } else if (hitter->is_laser()) {
-          real_hitter->msg("You zap %s.", text_the().c_str());
-        } else if (hitter->is_magical()) {
-          real_hitter->msg("You blast %s.", text_the().c_str());
-        } else {
-          hitter->msg("You hit %s.", text_the().c_str());
-        }
-
-        if (game->robot_mode) {
-          BOTCON("Robot attacks %s.", text_the().c_str());
-        }
+      if (attack_options->attack_poison) {
+        msg("Your %s is being poisoned.", text_short_name().c_str());
+      } else if (attack_options->attack_future1) {
+        msg("Your %s is being future1.", text_short_name().c_str());
+      } else if (attack_options->attack_bite) {
+        msg("Your %s is being bitten.", text_short_name().c_str());
+      } else if (attack_options->attack_claw) {
+        msg("Your %s is being clawed.", text_short_name().c_str());
+      } else if (attack_options->attack_cold) {
+        msg("Your %s is freezing.", text_short_name().c_str());
+      } else if (attack_options->attack_fire) {
+        msg("Your %s is burning.", text_short_name().c_str());
+      } else if (attack_options->attack_crush) {
+        msg("Your %s is being crushed.", text_short_name().c_str());
+      } else if (attack_options->attack_lightning) {
+        msg("Your %s is being zapped.", text_short_name().c_str());
+      } else if (attack_options->attack_energy) {
+        msg("Your %s is being blasted.", text_short_name().c_str());
+      } else if (attack_options->attack_acid) {
+        msg("Your %s is disintegrating.", text_short_name().c_str());
+      } else if (attack_options->attack_digest) {
+        msg("Your %s is dissolving.", text_short_name().c_str());
+      } else if (attack_options->attack_necrosis) {
+        msg("Your %s is rotting.", text_short_name().c_str());
+      } else if (attack_options->attack_draining) {
+        msg("Your %s is drained.", text_short_name().c_str());
       } else {
-        //
-        // Player hitting something.
-        //
-        if (hitter->is_weapon()) {
-          real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-        } else if (hitter->is_laser()) {
-          real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-        } else if (hitter->is_magical()) {
-          real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-        } else {
-          real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
-        }
+        msg("Your %s is being damaged.", text_short_name().c_str());
+      }
+    } else if (is_alive_monst() || is_mob()) {
+      //
+      // Provide some more interesting messages for when the player hits monsters...
+      //
+      if (attack_options->crit) {
+        real_hitter->msg("%%fg=red$You CRIT hit %s for %d %sdamage!%%fg=reset$", text_the().c_str(), damage,
+                         damage_type.c_str());
+      } else {
+        if (hitter && (hitter != real_hitter)) {
+          if (attack_options->attack_poison) {
+            real_hitter->msg("You poison %s for %d %sdamage with %s.", text_the().c_str(), damage,
+                             damage_type.c_str(), hitter->text_the().c_str());
+          } else if (attack_options->attack_necrosis) {
+            real_hitter->msg("You rot %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                             hitter->text_the().c_str());
+          } else if (attack_options->attack_draining) {
+            real_hitter->msg("You tire %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                             hitter->text_the().c_str());
+          } else if (hitter->is_weapon()) {
+            real_hitter->msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                             hitter->text_the().c_str());
+          } else if (hitter->is_laser()) {
+            real_hitter->msg("You zap %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                             hitter->text_the().c_str());
+          } else if (hitter->is_magical()) {
+            real_hitter->msg("You blast %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                             hitter->text_the().c_str());
+          } else {
+            real_hitter->msg("You hit %s for %d %sdamage with %s.", text_the().c_str(), damage, damage_type.c_str(),
+                             hitter->text_the().c_str());
+          }
 
-        if (game->robot_mode) {
-          BOTCON("Robot attacks %s.", text_the().c_str());
+          if (game->robot_mode) {
+            BOTCON("Robot attacks %s.", text_the().c_str());
+          }
+        } else {
+          if (attack_options->attack_poison) {
+            real_hitter->msg("You poison %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_necrosis) {
+            real_hitter->msg("You rot %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_draining) {
+            real_hitter->msg("You tire %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (hitter->is_weapon()) {
+            real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (hitter->is_laser()) {
+            real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (hitter->is_magical()) {
+            real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else {
+            real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          }
+
+          if (game->robot_mode) {
+            BOTCON("Robot attacks %s.", text_the().c_str());
+          }
         }
+      }
+    } else if (is_item()) {
+      //
+      // Player hitting items.
+      //
+      if (hitter->is_weapon()) {
+        real_hitter->msg("You hit %s.", text_the().c_str());
+      } else if (hitter->is_laser()) {
+        real_hitter->msg("You zap %s.", text_the().c_str());
+      } else if (hitter->is_magical()) {
+        real_hitter->msg("You blast %s.", text_the().c_str());
+      } else {
+        real_hitter->msg("You hit %s.", text_the().c_str());
+      }
+
+      if (game->robot_mode) {
+        BOTCON("Robot attacks %s.", text_the().c_str());
+      }
+    } else if (is_rock() || is_wall_dungeon()) {
+      //
+      // Provide some more interesting messages for when hitting rocks...
+      //
+      if (hitter->is_weapon()) {
+        if (hitter->is_weapon() && (hitter->weapon_damaged_pct() < 100)) {
+          hitter->msg("You hit %s with your damaged weapon.", text_the().c_str());
+        } else if (hitter->is_weapon() && (hitter->weapon_damaged_pct() < 50)) {
+          hitter->msg("You pointlessly hit %s with your damaged weapon.", text_the().c_str());
+        } else {
+          if (pcg_random_range(1, 100) < 10) {
+            hitter->msg("You hit %s, why though?", text_the().c_str());
+          } else {
+            hitter->msg("You hit %s.", text_the().c_str());
+          }
+        }
+      } else if (hitter->is_laser()) {
+        real_hitter->msg("You zap %s.", text_the().c_str());
+      } else if (hitter->is_magical()) {
+        real_hitter->msg("You blast %s.", text_the().c_str());
+      } else {
+        hitter->msg("You hit %s.", text_the().c_str());
+      }
+
+      if (game->robot_mode) {
+        BOTCON("Robot attacks %s.", text_the().c_str());
       }
     } else {
       //
-      // Something else hitting something else
+      // Player hitting something.
       //
+      if (hitter->is_weapon()) {
+        real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+      } else if (hitter->is_laser()) {
+        real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+      } else if (hitter->is_magical()) {
+        real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+      } else {
+        real_hitter->msg("You hit %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+      }
+
+      if (game->robot_mode) {
+        BOTCON("Robot attacks %s.", text_the().c_str());
+      }
     }
+  } else {
+    //
+    // Something else hitting something else
+    //
   }
 
   //
@@ -1669,6 +1683,8 @@ int Thing::is_hit(Thingp hitter, AttackOptions *attack_options, int damage)
       } else {
         //
         // If alive, one hit per tick
+        //
+        // NOTE: this needs to be before on_fire_set() as that leads to multiple hits by lava
         //
         aip()->recently_hit_by[ real_hitter->id ]++;
       }

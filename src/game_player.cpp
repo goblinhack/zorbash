@@ -287,7 +287,8 @@ void Game::place_player(void)
       }
       if (1) {
         // level->thing_new("skeleton", point(x + 1, y));
-        level->thing_new("lava", point(x + 2, y));
+        level->thing_new("lava", point(x - 2, y));
+        level->thing_new("lava", point(x - 3, y));
       }
       // level->thing_new("vampire_rose_stem", point(x, y + 1));
       // level->thing_new("fire", point(x - 4, y + 5));

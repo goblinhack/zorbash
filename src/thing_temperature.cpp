@@ -264,14 +264,37 @@ void Thing::temperature_tick(void)
       dbg("Apply fire damage");
       TRACE_AND_INDENT();
       is_attacked_with_damage_fire(this, this, damage);
-      if (is_player()) {
-        msg("%%fg=orange$%s suffers from the extreme heat.%%fg=reset$", text_The().c_str());
-      } else if (is_alive_monst()) {
-        msg("%s suffers from the extreme heat.", text_The().c_str());
+      if (is_on_fire()) {
+        //
+        // It's pretty obvious you are suffering if on fire!
+        //
+      } else {
+        if (is_player()) {
+          if (level->is_lava(curr_at)) {
+            msg("%%fg=orange$%sYou swim in lava!%%fg=reset$");
+          } else {
+            msg("%%fg=orange$You suffer from the extreme heat.%%fg=reset$");
+          }
+        } else if (is_alive_monst()) {
+          if (level->is_lava(curr_at)) {
+            msg("%%fg=orange$%s swims in lava!%%fg=reset$", text_The().c_str());
+          } else {
+            msg("%%fg=orange$%s suffers from the extreme heat.%%fg=reset$", text_The().c_str());
+          }
+        }
       }
     } else {
+      //
+      // No heat damage
+      //
       if (is_player()) {
-        msg("%%fg=orange$%s sweats from the extreme heat.%%fg=reset$", text_The().c_str());
+        if (level->is_lava(curr_at)) {
+          //
+          // Should be obvious you are too hot.
+          //
+        } else {
+          msg("You sweat from the extreme heat.");
+        }
       }
     }
   }

@@ -120,6 +120,15 @@ bool Thing::on_fire_set(const std::string &why)
       msg("%s is on fire!", text_The().c_str());
     }
 
+    auto owner = top_owner();
+    if (owner && owner->is_player()) {
+      if (is_torch()) {
+        msg("Your %s is now a bonfire!", text_short_name().c_str());
+      } else {
+        msg("Your %s is on fire!", text_short_name().c_str());
+      }
+    }
+
     //
     // I mean, it's likely this will cause you to wake.
     //

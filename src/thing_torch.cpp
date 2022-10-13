@@ -64,6 +64,9 @@ int Thing::torch_count(void)
   return torch_count;
 }
 
+//
+// Get the light strength, taking into account the torch count
+//
 void Thing::light_dist_including_torch_effect_get(uint8_t &out_light_dist)
 {
   TRACE_NO_INDENT();
@@ -99,6 +102,9 @@ void Thing::light_dist_including_torch_effect_get(uint8_t &out_light_dist)
   out_light_dist = light_dist;
 }
 
+//
+// Check for changes in our torch count
+//
 void Thing::light_distance_upd_with_torch_effect(uint8_t &out_light_dist)
 {
   TRACE_NO_INDENT();
@@ -110,9 +116,9 @@ void Thing::light_distance_upd_with_torch_effect(uint8_t &out_light_dist)
   if (prev) {
     if (light_dist != prev) {
       if (light_dist <= 1) {
-        msg("You are plunged into darkness.");
+        msg("Your last torch goes out. You are plunged into darkness!");
       } else if (light_dist < prev) {
-        msg("It gets darker...");
+        msg("One of your torches fizzles out. It gets darker...");
       }
 
       //
