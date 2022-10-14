@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - water, kraken; kraken will move out of shallows                                                                                      -->
+<!-- - skeleton surprised when should not be and improve anim                                                                                     -->
+<!-- - water, kraken; kraken will move out of shallows                                                                                            -->
 <!-- - make ripples, summon monsters                                                                                                              -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
