@@ -47,7 +47,7 @@ def tp_init(name, text_long_name, tiles=[]):
 
 def init():
     tp_init(
-        name="deep_water1",
+        name="deep_water",
         text_long_name="deep water",
         tiles=[
             "deep_water1.1",

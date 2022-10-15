@@ -440,8 +440,8 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Some things (like messages) have no tiles and so use the default.
   //
-  float tile_pix_width  = TILE_WIDTH;
-  float tile_pix_height = TILE_HEIGHT;
+  uint16_t tile_pix_width  = TILE_WIDTH;
+  uint16_t tile_pix_height = TILE_HEIGHT;
   if (! is_no_tile()) {
     tile = tile_index_to_tile(tile_curr);
     if (unlikely(! tile)) {
@@ -473,8 +473,10 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   if (unlikely(tpp->gfx_oversized_and_on_floor())) {
     float y_offset = (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
+    y_offset       = 32;
     blit_tl.y -= y_offset;
     blit_br.y -= y_offset;
+    // con("%dx%d %dx%d offset %d", tile_pix_width, tile_pix_height, tile->pix_width, tile->pix_height, y_offset);
   }
 
   //

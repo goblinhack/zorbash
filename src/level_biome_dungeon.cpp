@@ -434,7 +434,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     {
       uint32_t start = time_ms();
       dbg2("INF: Place deep water");
-      create_biome_dungeon_place_deep_water(dungeon, "deep_water1");
+      create_biome_dungeon_place_deep_water(dungeon, "deep_water");
       if (g_errored) {
         return false;
       }

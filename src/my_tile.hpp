@@ -17,7 +17,7 @@
 #define TILE_HEIGHT_MAX   64
 #define TILE_WIDTH        game->config.tile_width
 #define TILE_WIDTH_LORES  16 // Tile size of the player
-#define TILE_WIDTH_MAX    32 // Largest tile for collisions
+#define TILE_WIDTH_MAX    64 // Largest tile for collisions
 
 class Tile
 {

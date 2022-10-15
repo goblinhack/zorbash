@@ -11095,6 +11095,17 @@ def init_tiles_32x32():
 
 
 @timeme
+def init_tiles_64x64():
+    tiles = [
+        "kraken.1",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/tiles_64x64.tga", name="tiles_64x64", width=64, height=64, arr=tiles
+    )
+
+
+@timeme
 def init_tiles_32x32_surface_effects():
     tiles = [
         "water.1",
@@ -13603,6 +13614,7 @@ init_tiles_32x32_lava()
 init_tiles_32x32_sewer_water()
 init_tiles_32x32_surface_effects()
 init_tiles_32x32_water()
+init_tiles_64x64()
 init_tiles_burnt()
 init_tiles_ice()
 init_title_bg()
