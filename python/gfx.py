@@ -11099,6 +11099,12 @@ def init_tiles_64x64():
     tiles = [
         "kraken.1",
         "kraken.2",
+        "kraken.3",
+        "kraken.4",
+        "kraken.5",
+        "kraken.6",
+        "kraken.7",
+        "kraken.8",
     ]
 
     my.tile_load_arr_sprites(
