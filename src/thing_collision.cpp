@@ -433,8 +433,10 @@ bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
   //
   if (is_engulfer() && can_eat(it) && (it->curr_at == future_pos)) {
     if (d1000() < me_tp->attack_engulf_chance_d1000()) {
-      dbg("No collision; can engulf");
-      return false;
+      if (it->thing_size() < thing_size()) {
+        dbg("No collision; can engulf");
+        return false;
+      }
     }
   }
 

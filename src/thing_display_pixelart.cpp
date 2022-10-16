@@ -472,11 +472,9 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   // Put larger tiles on the same y base as small ones.
   //
   if (unlikely(tpp->gfx_oversized_and_on_floor())) {
-    float y_offset = (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
-    y_offset       = 32;
+    int y_offset = (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
     blit_tl.y -= y_offset;
     blit_br.y -= y_offset;
-    // con("%dx%d %dx%d offset %d", tile_pix_width, tile_pix_height, tile->pix_width, tile->pix_height, y_offset);
   }
 
   //
@@ -656,7 +654,11 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
 
     submerged_offset_set(0);
 
-    if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
+    if (is_submerged()) {
+      //
+      // Krakens are pre submerged.
+      //
+    } else if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
       is_in_water = true;
       submerged_offset_set(8);
     } else if (level->is_lava((int) map_loc.x, (int) map_loc.y)) {
@@ -858,7 +860,18 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
           set(game->tile_cache_health, index, h_step, tile);
         }
 
-        tile_blit(tile, point(x - TILE_WIDTH / 2, y - TILE_HEIGHT), point(x + TILE_WIDTH / 2, y));
+        auto health_bar_width = TILE_WIDTH;
+
+        switch (thing_size()) {
+          case THING_SIZE_GARGANTUAN: health_bar_width = TILE_WIDTH * 2; break;
+          case THING_SIZE_GIANT: health_bar_width = TILE_WIDTH * 1.5; break;
+          case THING_SIZE_LARGE: health_bar_width = TILE_WIDTH; break;
+          case THING_SIZE_NORMAL: health_bar_width = TILE_WIDTH; break;
+          case THING_SIZE_SMALL: health_bar_width = TILE_WIDTH; break;
+          case THING_SIZE_TINY: health_bar_width = TILE_WIDTH / 2; break;
+        }
+
+        tile_blit(tile, point(x - health_bar_width / 2, y - TILE_HEIGHT), point(x + health_bar_width / 2, y));
       }
     }
   }
