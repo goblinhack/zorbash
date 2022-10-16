@@ -311,7 +311,7 @@ void Game::place_player(void)
         level->thing_new("vampire_rose_stem2", point(x + 1, y + 4));
         level->thing_new("vampire_rose_stem1", point(x, y + 4));
       }
-      if (1) {
+      if (0) {
         level->thing_new("water", point(x + 1, y));
         level->thing_new("deep_water", point(x + 2, y));
         level->thing_new("deep_water", point(x + 3, y));
@@ -331,6 +331,16 @@ void Game::place_player(void)
         level->thing_new("deep_water", point(x + 2, y + 3));
         level->thing_new("deep_water", point(x + 3, y + 3));
         level->thing_new("water", point(x + 4, y + 3));
+
+        level->thing_new("water", point(x + 1, y + 4));
+        level->thing_new("deep_water", point(x + 2, y + 4));
+        level->thing_new("deep_water", point(x + 3, y + 4));
+        level->thing_new("water", point(x + 4, y + 4));
+
+        level->thing_new("water", point(x + 1, y + 5));
+        level->thing_new("deep_water", point(x + 2, y + 5));
+        level->thing_new("deep_water", point(x + 3, y + 5));
+        level->thing_new("water", point(x + 4, y + 5));
 
         level->thing_new("kraken", point(x + 2, y + 2));
         // level->thing_new("cleaner", point(x + 2, y - 2));

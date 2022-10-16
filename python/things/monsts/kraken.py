@@ -83,6 +83,8 @@ def tp_init(name, text_long_name):
     my.move_speed(self, 50)
     my.noise_decibels_hearing(self, 100)
     my.normal_placement_rules(self, True)
+    my.light_color(self, "green")
+    my.light_dist(self, 4)
     my.on_death_do(self, "me.on_death()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
@@ -105,10 +107,13 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 70
+    delay = 500
     my.tile(self,
             ascii_fg_char="K", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".1", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="K", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile=name + ".2", delay_ms=delay)
 
     my.tp_update(self)
 
