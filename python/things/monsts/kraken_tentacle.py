@@ -35,6 +35,7 @@ def tp_init(name, text_long_name):
     my.attack_humanoid(self, True)
     my.attack_lunge(self, True)
     my.attack_meat(self, True)
+    my.is_minion(self, True)
     my.bite_amount(self, 1)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
@@ -54,18 +55,10 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "1d10")
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_freeze(self, True)
-    my.is_able_to_rest(self, True)
-    my.is_able_to_see_in_the_dark(self, True)
-    my.is_able_to_tire(self, True)
     my.is_air_breathher(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
-    my.is_biome_dungeon(self, True)
-    my.is_biome_sewer(self, True)
-    my.is_biome_swamp(self, True)
     my.is_bleeder(self, True)
-    my.is_corpse_on_death(self, True)
-    my.is_corpse_with_bones(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_meat(self, True)
@@ -77,15 +70,13 @@ def tp_init(name, text_long_name):
     my.is_monst_class_a(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
-    my.is_red_blooded(self, True)
+    my.is_green_blooded(self, True)
     my.is_shallow_water_swimmer(self, True)
+    my.is_deep_water_swimmer(self, True)
     my.is_soft(self, True)
-    my.is_submerged(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.move_speed(self, 50)
-    my.noise_decibels_hearing(self, 0)
-    my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
@@ -100,49 +91,38 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
     my.text_hits(self, "bites")
-    my.text_long_description(self, "A delightfully friendly eel that just wants to hug..")
-    my.text_short_description(self, "An eel.")
-    my.thing_size(self, my.THING_SIZE_TINY)
+    my.text_short_description(self, "A slimy tentacle.")
+    my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_depth(self, my.MAP_DEPTH_FLOOR)
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 70
+    delay = 800
     my.tile(self,
-            ascii_fg_char="e", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="e", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="e", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="e", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="e", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".5", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="e", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".6", delay_ms=delay)
-    my.tile(self,
-            ascii_fg_char="e", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile=name + ".7", delay_ms=delay)
-    my.tile(self,
-            ascii_fg_char="e", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile=name + ".8", delay_ms=delay)
-
-    my.tile(self,
-            ascii_fg_char="e", ascii_bg_col_name="", ascii_fg_col_name="gray50",
-            tile=name + ".3", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="eel", text_long_name="cuddly eel")
+    tp_init(name="kraken_tentacle", text_long_name="kraken tentacle")
 
 
 init()

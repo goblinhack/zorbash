@@ -256,6 +256,7 @@ std::initializer_list< std::string > tps = {
     "key_pair",
     "key_penta",
     "kraken",
+    "kraken_tentacle",
     "laser_descent",
     "laser_energy",
     "laser_lightning",
