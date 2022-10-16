@@ -20,6 +20,12 @@ bool Thing::is_hated_by_me(const point p)
     }
   }
 
+  if (is_deep_water_swimmer()) {
+    if (! level->is_deep_water(p)) {
+      return true;
+    }
+  }
+
   if (level->is_shallow_water(p) || level->is_deep_water(p)) {
     if (environ_avoids_water()) {
       return true;
@@ -61,6 +67,12 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
 
   if (is_swimmer()) {
     if (! level->is_water(p)) {
+      return true;
+    }
+  }
+
+  if (is_deep_water_swimmer()) {
+    if (! level->is_deep_water(p)) {
       return true;
     }
   }

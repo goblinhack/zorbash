@@ -1258,6 +1258,13 @@ void Level::create_biome_dungeon_place_objects_with_normal_placement_rules(Dunge
         }
       }
 
+      if (tp->is_deep_water_swimmer()) {
+        if (! is_deep_water(x, y)) {
+          log("INF: Dropping %s for deep water", tp->name().c_str());
+          continue;
+        }
+      }
+
       if (! tp->is_biome_dungeon()) {
         // fix when swamp added
         log("INF: Dropping %s for dungeon biome", tp->name().c_str());

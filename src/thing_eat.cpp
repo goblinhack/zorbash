@@ -370,6 +370,7 @@ bool Thing::eat_something(void)
     if (! can_eat(t)) {
       continue;
     }
+
     if (! worth_eating(t)) {
       continue;
     }

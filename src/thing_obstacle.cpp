@@ -94,6 +94,30 @@ bool Thing::collision_obstacle(Thingp it)
   }
 
   //
+  // Limit eels and krakens to water. Eels can swim anywhere, but krakens are limited to the deep...
+  //
+  if (is_swimmer()) {
+    if (! level->is_water(it->curr_at)) {
+      return true;
+    }
+  }
+
+  if (is_deep_water_swimmer()) {
+    if (! level->is_deep_water(it->curr_at)) {
+      return true;
+    }
+  }
+
+  //
+  // Allow cleaners to engulf/swallow attack
+  //
+  if (is_engulfer() && can_eat(it)) {
+    if (it->thing_size() > thing_size()) {
+      return false;
+    }
+  }
+
+  //
   // Stop tentacleyes piling on top of each other
   //
   if (it->is_floating() || it->is_flying()) {
@@ -257,10 +281,22 @@ bool Thing::ai_obstacle(Thingp it)
   }
 
   //
+  // Limit eels and krakens to water. Eels can swim anywhere, but krakens are limited to the deep...
+  // However allow krakens to see into the shallow water.
+  //
+  if (is_swimmer()) {
+    if (! level->is_water(it->curr_at)) {
+      return true;
+    }
+  }
+
+  //
   // Allow cleaners to engulf/swallow attack
   //
   if (is_engulfer() && can_eat(it)) {
-    return false;
+    if (it->thing_size() > thing_size()) {
+      return true;
+    }
   }
 
   //
@@ -423,7 +459,9 @@ bool Tp::ai_obstacle(Thingp it)
   // Allow cleaners to engulf/swallow attack
   //
   if (is_engulfer() && can_eat(it)) {
-    return false;
+    if (it->thing_size() > thing_size()) {
+      return true;
+    }
   }
 
   //
