@@ -46,6 +46,11 @@ my.sound_load(
     file="data/sounds/creatures/23733__tim-kahn__squeakyrat.wav",
     name="squeaky_toy",
 )
+my.sound_load(
+    volume=1.00,
+    file="data/sounds/creatures/249686__cylon8472__cthulhu-growl.wav",
+    name="cthulu",
+)
 my.sound_load(volume=0.25, file="data/sounds/creatures/growl1.wav", name="growl1")
 my.sound_load(volume=0.25, file="data/sounds/creatures/growl2.wav", name="growl2")
 my.sound_load(volume=0.25, file="data/sounds/creatures/growl3.wav", name="growl3")

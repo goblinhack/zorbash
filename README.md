@@ -3,7 +3,7 @@
 <!-- - level num wrong in hiscores                                                                                                                -->
 <!-- - skeleton surprised when should not be and improve anim                                                                                     -->
 <!-- - water, kraken; kraken will move out of shallows                                                                                            -->
-<!-- - make ripples, summon monsters                                                                                                              -->
+<!-- - make ripples, wake kraken                                                                                                                  -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
@@ -444,6 +444,7 @@ Music
 
 Sound effects
 -------------
+- Kraken sound [found here](https://freesound.org/people/cylon8472/)
 - 8 bit sounds by Oryx, [found here](https://www.oryxdesignlab.com/)
 - Door sounds by TiesWijnen, [found here](https://freesound.org/people/TiesWijnen/)
 - Door sounds by danielvj, [found here](https://freesound.org/people/danielvj/)

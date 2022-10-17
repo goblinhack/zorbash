@@ -25,6 +25,13 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
+def on_awake(me, x, y):
+    sound = "cthulu"
+    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_popup(me, "Deafening roar!")
+
+
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
@@ -46,16 +53,18 @@ def tp_init(name, text_long_name):
     my.gfx_anim_use(self, "attack_claws")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_health_bar_shown(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "27d10")
-    my.gfx_pixelart_health_bar_shown(self, True)
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_freeze(self, True)
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_tire(self, True)
     my.is_air_breathher(self, True)
+    my.is_asleep_initially(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
@@ -66,6 +75,7 @@ def tp_init(name, text_long_name):
     my.is_deep_water_swimmer(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_meat(self, True)
+    my.is_green_blooded(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_water(self, True)
     my.is_interesting(self, True)
@@ -74,17 +84,16 @@ def tp_init(name, text_long_name):
     my.is_monst_class_c(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
-    my.is_green_blooded(self, True)
     my.is_soft(self, True)
     my.is_submerged(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
-    my.gfx_pixelart_animated_can_hflip(self, True)
-    my.move_speed(self, 50)
-    my.noise_decibels_hearing(self, 100)
-    my.normal_placement_rules(self, True)
     my.light_color(self, "green")
     my.light_dist(self, 4)
+    my.move_speed(self, 50)
+    my.noise_decibels_hearing(self, 40)
+    my.normal_placement_rules(self, True)
+    my.on_awake_do(self, "me.on_awake()")
     my.on_death_do(self, "me.on_death()")
     my.on_you_are_hit_but_dodge_it_do(self, "me.on_you_are_hit_but_dodge_it_do()")
     my.on_you_are_hit_but_still_alive_do(self, "me.on_you_are_hit_but_still_alive()")
@@ -132,6 +141,14 @@ def tp_init(name, text_long_name):
     my.tile(self,
             ascii_fg_char="K", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".8", delay_ms=delay)
+
+    delay = 5000
+    my.tile(self,
+            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="kraken.sleeping.1", is_sleeping=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="", ascii_bg_col_name="", ascii_fg_col_name="green",
+            tile="kraken.sleeping.2", is_sleeping=True, delay_ms=delay)
 
     my.tp_update(self)
 

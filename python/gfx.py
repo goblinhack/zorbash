@@ -11105,6 +11105,8 @@ def init_tiles_64x64():
         "kraken.6",
         "kraken.7",
         "kraken.8",
+        "kraken.sleeping.1",
+        "kraken.sleeping.2",
     ]
 
     my.tile_load_arr_sprites(

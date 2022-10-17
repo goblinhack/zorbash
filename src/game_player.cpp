@@ -343,14 +343,6 @@ void Game::place_player(void)
         level->thing_new("water", point(x + 4, y + 5));
 
         level->thing_new("kraken", point(x + 2, y + 2));
-        level->thing_new("kraken_tentacle", point(x + 3, y + 2));
-        level->thing_new("kraken_tentacle", point(x + 1, y + 2));
-        level->thing_new("kraken_tentacle", point(x + 3, y + 3));
-        level->thing_new("kraken_tentacle", point(x + 1, y + 3));
-        level->thing_new("kraken_tentacle", point(x + 2, y + 3));
-        level->thing_new("kraken_tentacle", point(x + 3, y + 1));
-        level->thing_new("kraken_tentacle", point(x + 1, y + 1));
-        level->thing_new("kraken_tentacle", point(x + 2, y + 1));
 
         // level->thing_new("cleaner", point(x + 2, y - 2));
       }
