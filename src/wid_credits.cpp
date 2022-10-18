@@ -179,7 +179,7 @@ void Game::wid_credits_select(void)
   wid_credits_window->log("Markus Heichelbech");
   wid_credits_window->log(UI_LOGGING_EMPTY_LINE);
   wid_credits_window->log("%%fg=white$Sounds");
-  wid_credits_window->log("See README.md");
+  wid_credits_window->log("See README.md, too many to show here");
 
   {
     TRACE_AND_INDENT();

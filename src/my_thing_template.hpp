@@ -256,7 +256,7 @@ private:
   int _is_able_to_use_weapons {};
   int _is_able_to_walk_through_walls {};
   int _is_acid {};
-  int _is_air_breathher {};
+  int _is_air_breather {};
   int _is_alive_on_end_of_anim {};
   int _is_always_hit {};
   int _is_amulet {};
@@ -1273,7 +1273,7 @@ public:
   int is_able_to_use_weapons(void) const;
   int is_able_to_walk_through_walls(void) const;
   int is_acid(void) const;
-  int is_air_breathher(void) const;
+  int is_air_breather(void) const;
   int is_alive_on_end_of_anim(void) const;
   int is_always_hit(void) const;
   int is_amulet(void) const;
@@ -1812,7 +1812,7 @@ public:
   void is_able_to_use_weapons_set(int v);
   void is_able_to_walk_through_walls_set(int v);
   void is_acid_set(int v);
-  void is_air_breathher_set(int v);
+  void is_air_breather_set(int v);
   void is_alive_on_end_of_anim_set(int v);
   void is_allied_with_set(const std::string &v);
   void is_always_hit_set(int v);

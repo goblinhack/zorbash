@@ -18,7 +18,7 @@ void Thing::gas_poison_tick(void)
     return;
   }
 
-  if (! is_air_breathher()) {
+  if (! is_air_breather()) {
     return;
   }
 

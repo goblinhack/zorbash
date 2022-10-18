@@ -68,7 +68,7 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
   s->volume = volume;
   s->data   = file_load(file.c_str(), &s->len);
   if (! s->data) {
-    ERR("Cannot load sound %s", file.c_str());
+    ERR("Cannot load sound [%s]", file.c_str());
     delete s;
     return false;
   }
@@ -77,7 +77,7 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
 
   rw = SDL_RWFromMem(s->data, s->len);
   if (! rw) {
-    ERR("SDL_RWFromMem fail %s: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
+    ERR("SDL_RWFromMem fail [%s]: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
     SDL_ClearError();
     delete s;
     return false;
@@ -85,7 +85,7 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
 
   s->chunk = Mix_LoadWAV_RW(rw, false /* A non-zero value mean is will automatically close/free the src for you. */);
   if (! s->chunk) {
-    ERR("Mix_LoadWAV_RW fail %s: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
+    ERR("Mix_LoadWAV_RW fail [%s]: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
     SDL_ClearError();
     delete s;
     return false;

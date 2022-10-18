@@ -102,7 +102,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_use_gauntlet(self, True)
     my.is_able_to_use_rings(self, True)
     my.is_able_to_use_wands_or_staffs(self, True)
-    my.is_air_breathher(self, True)
+    my.is_air_breather(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)

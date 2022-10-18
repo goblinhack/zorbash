@@ -201,7 +201,7 @@ do
       is_able_to_use_weapons \
       is_able_to_walk_through_walls \
       is_acid \
-      is_air_breathher \
+      is_air_breather \
       is_alive_on_end_of_anim \
       is_always_hit \
       is_amulet \

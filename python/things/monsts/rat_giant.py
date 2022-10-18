@@ -69,7 +69,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_sleep(self, True)
     my.is_able_to_swim(self, True)
     my.is_able_to_tire(self, True)
-    my.is_air_breathher(self, True)
+    my.is_air_breather(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)

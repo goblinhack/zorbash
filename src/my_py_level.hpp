@@ -47,7 +47,7 @@ PyObject *level_is_bones_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_corpse_with_bones_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_boots_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_brazier_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_air_breathher_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_air_breather_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bridge_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_buff_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_able_to_burn_at(PyObject *obj, PyObject *args, PyObject *keywds);

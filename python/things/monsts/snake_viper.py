@@ -63,7 +63,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_sleep(self, True)
     my.is_able_to_tire(self, True)
-    my.is_air_breathher(self, True)
+    my.is_air_breather(self, True)
     my.is_asleep_initially(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)

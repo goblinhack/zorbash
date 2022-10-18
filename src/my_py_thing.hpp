@@ -181,7 +181,7 @@ PyObject *thing_is_able_to_use_wands_or_staffs(PyObject *obj, PyObject *args, Py
 PyObject *thing_is_able_to_use_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_walk_through_walls(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_acid(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_air_breathher(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_air_breather(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_monst(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_alive_on_end_of_anim(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_always_hit(PyObject *obj, PyObject *args, PyObject *keywds);

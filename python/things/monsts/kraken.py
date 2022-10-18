@@ -3,32 +3,23 @@ import tp
 
 
 def on_you_nat_att(me, x, y):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
 
 def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
 
 def on_death(me, x, y):
-    sound = "squeaky_toy"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death_epic")
 
 
 def on_awake(me, x, y):
-    sound = "cthulu"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar_epic")
     my.thing_popup(me, "Deafening roar!")
 
 
@@ -42,16 +33,14 @@ def tp_init(name, text_long_name):
     my.attack_humanoid(self, True)
     my.attack_lunge(self, True)
     my.attack_meat(self, True)
-    my.bite_amount(self, 1)
+    my.bite_amount(self, 100)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
     my.damage_bite_chance_d1000(self, 0, 1000)
     my.damage_bite_dice(self, "3d8+10")
     my.distance_avoid(self, 3)
     my.distance_vision(self, 10)
-    my.environ_avoids_poison(self, 100)
     my.gfx_anim_use(self, "attack_claws")
-    my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -63,12 +52,10 @@ def tp_init(name, text_long_name):
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_tire(self, True)
-    my.is_air_breathher(self, True)
     my.is_asleep_initially(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
-    my.is_biome_sewer(self, True)
     my.is_biome_swamp(self, True)
     my.is_bleeder(self, True)
     my.is_corpse_on_death(self, True)
@@ -108,7 +95,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
     my.text_hits(self, "bites")
-    my.text_long_description(self, "A mighty baby kraken. Beware the grasp of its tentacles and fishy breath.")
+    my.text_long_description(self, "A mighty baby kraken. Beware the grasp of its tentacles and intoxicating fishy breath.")
     my.text_short_description(self, "A baby kraken.")
     my.thing_size(self, my.THING_SIZE_GARGANTUAN)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

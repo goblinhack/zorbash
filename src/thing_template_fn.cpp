@@ -305,7 +305,7 @@ int Tp::is_able_to_use_wands_or_staffs(void) const { return _is_able_to_use_wand
 int Tp::is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
 int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
 int Tp::is_acid(void) const { return _is_acid; }
-int Tp::is_air_breathher(void) const { return _is_air_breathher; }
+int Tp::is_air_breather(void) const { return _is_air_breather; }
 int Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
 int Tp::is_always_hit(void) const { return _is_always_hit; }
 int Tp::is_amulet(void) const { return _is_amulet; }
@@ -844,7 +844,7 @@ void Tp::is_able_to_use_wands_or_staffs_set(int v) { _is_able_to_use_wands_or_st
 void Tp::is_able_to_use_weapons_set(int v) { _is_able_to_use_weapons = v; }
 void Tp::is_able_to_walk_through_walls_set(int v) { _is_able_to_walk_through_walls = v; }
 void Tp::is_acid_set(int v) { _is_acid = v; }
-void Tp::is_air_breathher_set(int v) { _is_air_breathher = v; }
+void Tp::is_air_breather_set(int v) { _is_air_breather = v; }
 void Tp::is_alive_on_end_of_anim_set(int v) { _is_alive_on_end_of_anim = v; }
 void Tp::is_allied_with_set(const std::string &v) { _is_allied_with = v; }
 void Tp::is_always_hit_set(int v) { _is_always_hit = v; }

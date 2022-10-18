@@ -201,7 +201,7 @@ THING_BODY_GET_BOOL(thing_is_able_to_use_wands_or_staffs, is_able_to_use_wands_o
 THING_BODY_GET_BOOL(thing_is_able_to_use_weapons, is_able_to_use_weapons)
 THING_BODY_GET_BOOL(thing_is_able_to_walk_through_walls, is_able_to_walk_through_walls)
 THING_BODY_GET_BOOL(thing_is_acid, is_acid)
-THING_BODY_GET_BOOL(thing_is_air_breathher, is_air_breathher)
+THING_BODY_GET_BOOL(thing_is_air_breather, is_air_breather)
 THING_BODY_GET_BOOL(thing_is_alive_monst, is_alive_monst)
 THING_BODY_GET_BOOL(thing_is_alive_on_end_of_anim, is_alive_on_end_of_anim)
 THING_BODY_GET_BOOL(thing_is_always_hit, is_always_hit)

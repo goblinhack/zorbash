@@ -2081,10 +2081,10 @@ int Thing::is_immune_to_cold(void)
   return (tp()->is_immune_to_cold());
 }
 
-int Thing::is_air_breathher(void)
+int Thing::is_air_breather(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_air_breathher());
+  return (tp()->is_air_breather());
 }
 
 int Thing::noise_on_dropping(void)

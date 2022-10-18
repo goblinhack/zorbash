@@ -3,14 +3,11 @@ import tp
 
 
 def on_you_nat_att(me, x, y):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
-    my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
 
 def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
     health = my.thing_health(me)
     low_health = int((my.thing_health_max(me) / 100.0) * 90)
@@ -22,29 +19,23 @@ def on_you_are_hit_but_still_alive(me, hitter, real_hitter, x, y, crit, damage):
 
 
 def on_you_are_hit_but_dodge_it_do(me, hitter, x, y):
-    sound = f"hiss{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
 
 
 def on_death(me, x, y):
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monst_death1"):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monst_death1")
 
 
 def on_awake(me, x, y):
-    sound = f"growl{my.non_pcg_randint(1, 10)}"
-    if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-        my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+    my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "monster_roar")
+    my.thing_popup(me, "Deafening roar!")
     my.thing_speaks(me, "Roar! Who dares wake me?")
     my.thing_popup(me, "Roar!")
 
 
 def on_firing_at_something(me, target, x, y):  # Return True on doing an action
     if my.pcg_randint(1, 10) < 8:
-        sound = f"growl{my.non_pcg_randint(1, 10)}"
-        if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
-            my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
+        my.thing_sound_play_channel(me, my.CHANNEL_MONST, "monster_roar")
         my.thing_fire_at(me, "projectile_fire", target)
         return True
     return False

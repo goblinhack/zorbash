@@ -20,6 +20,10 @@ def on_born(me, x, y):
     pass
 
 
+def on_fall(me, x, y):
+    my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "fall")
+
+
 def on_death(me, x, y):
     messages = [
         "A grave is a place where the dead are laid to await the coming of the medical student - Ambrose Bierce.",
@@ -381,7 +385,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_able_to_use_shield(self, True)
     my.is_able_to_use_wands_or_staffs(self, True)
     my.is_able_to_use_weapons(self, True)
-    my.is_air_breathher(self, True)
+    my.is_air_breather(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_biome_dungeon(self, True)
     my.is_bleeder(self, True)
@@ -432,6 +436,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_born_do(self, "player.on_born()")
     my.on_death_do(self, "player.on_death()")
     my.on_death_drop_all_items(self, True)
+    my.on_fall_do(self, "player.on_fall()")
     my.on_move_do(self, "player.on_move()")
     my.on_receiving_dmg_acid_do(self, "player.on_receiving_dmg_acid()")
     my.on_receiving_dmg_bite_do(self, "player.on_receiving_dmg_bite()")

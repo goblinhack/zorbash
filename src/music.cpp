@@ -83,7 +83,7 @@ bool music_load(uint32_t rate, const std::string &file, const std::string &name_
   m->rate = rate;
   m->data = file_load(file.c_str(), &m->len);
   if (! m->data) {
-    DIE("Cannot load music %s", file.c_str());
+    DIE("Cannot load music [%s]", file.c_str());
     return false;
   }
 
@@ -91,14 +91,14 @@ bool music_load(uint32_t rate, const std::string &file, const std::string &name_
 
   rw = SDL_RWFromMem(m->data, m->len);
   if (! rw) {
-    ERR("SDL_RWFromMem fail %s: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
+    ERR("SDL_RWFromMem fail [%s]: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
     SDL_ClearError();
     return false;
   }
 
   m->m = Mix_LoadMUS_RW(rw, false);
   if (! m->m) {
-    ERR("Mix_LoadMUS_RW fail %s: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
+    ERR("Mix_LoadMUS_RW fail [%s]: %s %s", file.c_str(), Mix_GetError(), SDL_GetError());
     SDL_ClearError();
     return false;
   }

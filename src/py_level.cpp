@@ -404,7 +404,7 @@ LEVEL_BODY_GET_BOOL_AT(level_is_able_to_break_out_of_ice_at, is_able_to_break_ou
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_burn_at, is_able_to_burn)
 LEVEL_BODY_GET_BOOL_AT(level_is_able_to_freeze_at, is_able_to_freeze)
 LEVEL_BODY_GET_BOOL_AT(level_is_acid_at, is_acid)
-LEVEL_BODY_GET_BOOL_AT(level_is_air_breathher_at, is_air_breathher)
+LEVEL_BODY_GET_BOOL_AT(level_is_air_breather_at, is_air_breather)
 LEVEL_BODY_GET_BOOL_AT(level_is_alive_monst_at, is_alive_monst)
 LEVEL_BODY_GET_BOOL_AT(level_is_alive_on_end_of_anim_at, is_alive_on_end_of_anim)
 LEVEL_BODY_GET_BOOL_AT(level_is_always_hit_at, is_always_hit)

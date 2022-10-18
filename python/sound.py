@@ -25,6 +25,11 @@ my.sound_load(
     name="door_open",
 )
 my.sound_load(
+    volume=0.55,
+    file="data/sounds/impacts/578808__nomiqbomi__fall-3.wav",
+    name="fall",
+)
+my.sound_load(
     volume=0.15,
     file="data/sounds/impacts/59992__qubodup__swosh-sword-swing.wav",
     name="sword_swing1",
@@ -49,7 +54,17 @@ my.sound_load(
 my.sound_load(
     volume=1.00,
     file="data/sounds/creatures/249686__cylon8472__cthulhu-growl.wav",
-    name="cthulu",
+    name="monster_roar_epic",
+)
+my.sound_load(
+    volume=1.0,
+    file="data/sounds/creatures/56304__syna-max__monster-death-scream.wav",
+    name="monst_death_epic",
+)
+my.sound_load(
+    volume=1.00,
+    file="data/sounds/creatures/487513__nicknamelarry__monster-roar.wav",
+    name="monster_roar",
 )
 my.sound_load(volume=0.25, file="data/sounds/creatures/growl1.wav", name="growl1")
 my.sound_load(volume=0.25, file="data/sounds/creatures/growl2.wav", name="growl2")

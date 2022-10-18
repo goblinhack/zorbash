@@ -54,7 +54,7 @@ def tp_init(name, text_long_name):
     my.health_initial_dice(self, "1d10")
     my.hunger_clock_tick_freq(self, 50)
     my.is_able_to_freeze(self, True)
-    my.is_air_breathher(self, True)
+    my.is_air_breather(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_bleeder(self, True)

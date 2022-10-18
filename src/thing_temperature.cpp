@@ -271,7 +271,7 @@ void Thing::temperature_tick(void)
       } else {
         if (is_player()) {
           if (level->is_lava(curr_at)) {
-            msg("%%fg=orange$%sYou swim in lava!%%fg=reset$");
+            msg("%%fg=orange$You swim in lava!%%fg=reset$");
           } else {
             msg("%%fg=orange$You suffer from the extreme heat.%%fg=reset$");
           }

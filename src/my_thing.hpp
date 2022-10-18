@@ -1234,7 +1234,7 @@ public:
   int is_able_to_use_weapons(void);
   int is_able_to_walk_through_walls(void);
   int is_acid(void);
-  int is_air_breathher(void);
+  int is_air_breather(void);
   int is_alive_monst(void);
   int is_alive_on_end_of_anim(void);
   int is_always_hit(void);
