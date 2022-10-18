@@ -1009,7 +1009,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag123() && (what == "unused_flag123")) {
     return true;
   }
-  if (is_pack() && (what == "is_pack")) {
+  if (is_monst_pack() && (what == "is_monst_pack")) {
     return true;
   }
   if (is_pillar() && (what == "is_pillar")) {
@@ -1991,8 +1991,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_organic") {
     return &Thing::is_organic;
   }
-  if (what == "is_pack") {
-    return &Thing::is_pack;
+  if (what == "is_monst_pack") {
+    return &Thing::is_monst_pack;
   }
   if (what == "is_pillar") {
     return &Thing::is_pillar;

@@ -724,7 +724,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     //
     {
       uint32_t start = time_ms();
-      dbg2("INF: Place swimming monsters");
+      con("INF: Place swimming monsters");
       place_swimming_monsts();
       if (g_errored) {
         return false;
@@ -740,7 +740,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     break;
   }
 
-  log("INF: Populated dungeon at (%d,%d,%d) took %u ms, slowest element took %u ms (%s)", at.x, at.y, at.z,
+  con("INF: Populated dungeon at (%d,%d,%d) took %u ms, slowest element took %u ms (%s)", at.x, at.y, at.z,
       time_ms() - start, slowest_so_far, slowest_so_far_which.c_str());
   return true;
 }

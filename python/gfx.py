@@ -10932,9 +10932,9 @@ def init_tiles_32x32():
         "blob.6",
         "blob.7",
         "blob.8",
-        "",
-        "",
-        "",
+        "pirhana.1",
+        "pirhana.2",
+        "pirhana.dead",
         #######################################################################
         "tentacleye.1.100",
         "tentacleye.2.100",

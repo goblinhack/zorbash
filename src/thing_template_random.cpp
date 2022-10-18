@@ -295,7 +295,7 @@ void tp_random_init(void)
     }
 
     if (! tp->is_minion()) {
-      if (tp->is_monst()) {
+      if (tp->is_monst() || tp->is_monst_pack()) {
         tp_monst_add(tp);
       }
     }

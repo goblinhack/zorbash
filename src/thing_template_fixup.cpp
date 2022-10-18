@@ -13,7 +13,7 @@ void tp_fixup(void)
       tp->is_able_to_tire_set(true);
     }
 
-    if (tp->is_monst() || tp->is_pack()) {
+    if (tp->is_monst() || tp->is_monst_pack()) {
       tp->is_tickable_set(true);
     }
 

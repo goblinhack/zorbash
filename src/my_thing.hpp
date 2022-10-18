@@ -1429,6 +1429,7 @@ public:
   int is_monst_class_c(void);
   int is_monst_class_d(void);
   int is_monst_class_e(void);
+  int is_monst_pack(void);
   int is_monst(void);
   int is_moveable(void);
   int is_msg_allowed_is_seen(void);
@@ -1443,7 +1444,6 @@ public:
   int is_obs_wall_or_door(void);
   int is_openable(void);
   int is_organic(void);
-  int is_pack(void);
   int is_pillar(void);
   int is_plant(void);
   int is_player(void);

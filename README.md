@@ -1,6 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - skeleton surprised when should not be and improve anim                                                                                     -->
+<!-- - polymorph is losing animated                                                                                                               -->
 <!-- - level num wrong in hiscores                                                                                                                -->
 <!-- - jump noise                                                                                                                                 -->
 <!-- ------                                                                                                                                       -->

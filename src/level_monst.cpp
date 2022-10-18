@@ -66,10 +66,11 @@ Tpp Level::get_random_monst(point p, biome_t biome, monst_type_t monst_type, mon
       // Filter locations that are not appropriate
       //
       if (tp->is_disliked_by_me(this, p)) {
+        // con("INF: skip '%s' at %s", tp->text_short_capitalised().c_str(), p.to_string().c_str());
         continue;
       }
 
-      con("INF: Got random monster '%s' at %s", tp->text_short_capitalised().c_str(), p.to_string().c_str());
+      con("INF: Monster '%s' at %s", tp->text_short_capitalised().c_str(), p.to_string().c_str());
       return tp;
     }
   }
@@ -116,6 +117,8 @@ Tpp Level::get_sewer_biome_random_monst(point p, biome_t biome, monst_type_t mon
 
 void tp_monst_add(Tpp tp)
 {
+  // CON("INF: Add monster '%s'", tp->text_short_capitalised().c_str());
+
   std::vector< int > biomes;
   std::vector< int > monst_types;
 

@@ -443,7 +443,7 @@ private:
   int _is_obs_wall_or_door {};
   int _is_openable {};
   int _is_organic {};
-  int _is_pack {};
+  int _is_monst_pack {};
   int _is_pillar {};
   int _is_plant {};
   int _is_player {};
@@ -1445,6 +1445,7 @@ public:
   int is_monst_class_c(void) const;
   int is_monst_class_d(void) const;
   int is_monst_class_e(void) const;
+  int is_monst_pack(void) const;
   int is_monst(void) const;
   int is_moveable(void) const;
   int is_msg_allowed_is_seen(void) const;
@@ -1459,7 +1460,6 @@ public:
   int is_obs_wall_or_door(void) const;
   int is_openable(void) const;
   int is_organic(void) const;
-  int is_pack(void) const;
   int is_pillar(void) const;
   int is_plant(void) const;
   int is_player(void) const;
@@ -1999,7 +1999,7 @@ public:
   void is_obs_wall_or_door_set(int v);
   void is_openable_set(int v);
   void is_organic_set(int v);
-  void is_pack_set(int v);
+  void is_monst_pack_set(int v);
   void is_pillar_set(int v);
   void is_plant_set(int v);
   void is_player_set(int v);

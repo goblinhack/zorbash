@@ -1931,10 +1931,10 @@ int Thing::unused_flag123(void)
   return (tp()->unused_flag123());
 }
 
-int Thing::is_pack(void)
+int Thing::is_monst_pack(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_pack());
+  return (tp()->is_monst_pack());
 }
 
 int Thing::is_pillar(void)

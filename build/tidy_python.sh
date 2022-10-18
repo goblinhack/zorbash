@@ -67,7 +67,7 @@ for IN in \
 do
     echo Tidying $IN...
 
-    grep -q is_pack $IN
+    grep -q is_monst_pack $IN
     if [ $? -eq 0 ]; then
         continue
     fi
@@ -385,7 +385,7 @@ do
       is_obs_wall_or_door \
       is_openable \
       is_organic \
-      is_pack \
+      is_monst_pack \
       is_pillar \
       is_pink_splatter \
       is_plant \

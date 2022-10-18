@@ -477,6 +477,7 @@ int Tp::is_monst_class_b(void) const { return _is_monst_class_b; }
 int Tp::is_monst_class_c(void) const { return _is_monst_class_c; }
 int Tp::is_monst_class_d(void) const { return _is_monst_class_d; }
 int Tp::is_monst_class_e(void) const { return _is_monst_class_e; }
+int Tp::is_monst_pack(void) const { return _is_monst_pack; }
 int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_moveable(void) const { return _is_moveable; }
 int Tp::is_msg_allowed_is_seen(void) const { return _is_msg_allowed_is_seen; }
@@ -491,7 +492,6 @@ int Tp::is_obstacle_when_dead(void) const { return _is_obstacle_when_dead; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_organic(void) const { return _is_organic; }
-int Tp::is_pack(void) const { return _is_pack; }
 int Tp::is_pillar(void) const { return _is_pillar; }
 int Tp::is_plant(void) const { return _is_plant; }
 int Tp::is_player(void) const { return _is_player; }
@@ -1031,7 +1031,7 @@ void Tp::is_obstacle_when_dead_set(int v) { _is_obstacle_when_dead = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
-void Tp::is_pack_set(int v) { _is_pack = v; }
+void Tp::is_monst_pack_set(int v) { _is_monst_pack = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
 void Tp::is_plant_set(int v) { _is_plant = v; }
 void Tp::is_player_set(int v) { _is_player = v; }
