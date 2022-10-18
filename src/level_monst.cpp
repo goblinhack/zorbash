@@ -47,7 +47,7 @@ Tpp Level::get_random_monst(point p, biome_t biome, monst_type_t monst_type, mon
         //
         // If we've tried too many times, try the next lower class
         //
-        if ((int) biome == 0) {
+        if (monst_class == MONST_CLASS_A) {
           return nullptr;
         }
 
