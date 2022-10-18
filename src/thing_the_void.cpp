@@ -17,6 +17,7 @@ void Thing::fall_into_the_void(void)
     return;
   }
 
+  on_fall();
   if (is_player()) {
     msg("You fall into nothingness!");
   }

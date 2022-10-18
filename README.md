@@ -1,9 +1,8 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - level num wrong in hiscores                                                                                                                -->
 <!-- - skeleton surprised when should not be and improve anim                                                                                     -->
-<!-- - water, kraken; kraken will move out of shallows                                                                                            -->
-<!-- - make ripples, wake kraken                                                                                                                  -->
+<!-- - level num wrong in hiscores                                                                                                                -->
+<!-- - jump noise                                                                                                                                 -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

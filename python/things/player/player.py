@@ -21,6 +21,7 @@ def on_born(me, x, y):
 
 
 def on_fall(me, x, y):
+    my.thing_msg(me, "Aaargh!")
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "fall")
 
 

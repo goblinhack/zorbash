@@ -440,8 +440,10 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Some things (like messages) have no tiles and so use the default.
   //
-  uint16_t tile_pix_width  = TILE_WIDTH;
-  uint16_t tile_pix_height = TILE_HEIGHT;
+  // float is needed here for 24x24 tiles
+  //
+  float tile_pix_width  = TILE_WIDTH;
+  float tile_pix_height = TILE_HEIGHT;
   if (! is_no_tile()) {
     tile = tile_index_to_tile(tile_curr);
     if (unlikely(! tile)) {
@@ -472,7 +474,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   // Put larger tiles on the same y base as small ones.
   //
   if (unlikely(tpp->gfx_oversized_and_on_floor())) {
-    int y_offset = (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
+    float y_offset = (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
     blit_tl.y -= y_offset;
     blit_br.y -= y_offset;
   }

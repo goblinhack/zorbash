@@ -246,6 +246,7 @@ std::initializer_list< std::string > tps = {
     "gold4",
     "gold5",
     "gold6",
+    "goldfish",
     "green_splatter",
     "horseshoe",
     "jelly_baby",
