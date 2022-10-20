@@ -60,15 +60,19 @@ bool Thing::possible_to_attack(const Thingp victim)
     return false;
   }
 
-  dbg("Is it possible to attack %s?", victim->to_short_string().c_str());
-  TRACE_AND_INDENT();
+  if (is_debug_type()) {
+    dbg("Is it possible to attack %s?", victim->to_short_string().c_str());
+    TRACE_AND_INDENT();
+  }
 
   //
   // Weapons can't attack all by themselves. That would be nuts.
   //
   if (is_weapon() || is_wand_or_staff() || is_ring()) {
     if (! my_owner) {
-      dbg("Cannot attack %s, I have no owner", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Cannot attack %s, I have no owner", victim->to_short_string().c_str());
+      }
       return false;
     }
   } else {
@@ -77,7 +81,9 @@ bool Thing::possible_to_attack(const Thingp victim)
     //
     if (level->is_block_of_ice(curr_at)) {
       if (victim->curr_at != curr_at) {
-        dbg("Cannot attack %s, stuck in ice", victim->to_short_string().c_str());
+        if (is_debug_type()) {
+          dbg("Cannot attack %s, stuck in ice", victim->to_short_string().c_str());
+        }
         return false;
       }
     }
@@ -88,7 +94,9 @@ bool Thing::possible_to_attack(const Thingp victim)
     if (! is_immune_to_spiderwebs()) {
       if (level->is_spiderweb(curr_at)) {
         if (victim->curr_at != curr_at) {
-          dbg("Cannot attack %s, stuck in a web", victim->to_short_string().c_str());
+          if (is_debug_type()) {
+            dbg("Cannot attack %s, stuck in a web", victim->to_short_string().c_str());
+          }
           return false;
         }
       }
@@ -112,8 +120,10 @@ bool Thing::possible_to_attack(const Thingp victim)
         // If stuck in an engulfer, we can only attack locally
         //
         if (victim->curr_at != curr_at) {
-          dbg("Cannot attack %s, stuck in an engulfer (%s)", victim->to_short_string().c_str(),
-              t->to_short_string().c_str());
+          if (is_debug_type()) {
+            dbg("Cannot attack %s, stuck in an engulfer (%s)", victim->to_short_string().c_str(),
+                t->to_short_string().c_str());
+          }
           return false;
         }
       }
@@ -126,14 +136,18 @@ bool Thing::possible_to_attack(const Thingp victim)
   //
   if (victim->is_on_fire()) {
     if (environ_avoids_fire()) {
-      dbg("Cannot attack %s, it is on fire", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Cannot attack %s, it is on fire", victim->to_short_string().c_str());
+      }
       return false;
     }
   }
 
   if (victim->is_cold()) {
     if (environ_avoids_cold()) {
-      dbg("Cannot attack %s, it is cold", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Cannot attack %s, it is cold", victim->to_short_string().c_str());
+      }
       return false;
     }
   }
@@ -143,13 +157,17 @@ bool Thing::possible_to_attack(const Thingp victim)
   //
   if (is_fire()) {
     if (! is_monst() && ! is_laser() && ! is_projectile() && ! is_weapon() && ! is_explosion()) {
-      dbg("Cannot attack %s, I am fire", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Cannot attack %s, I am fire", victim->to_short_string().c_str());
+      }
       return false;
     }
   }
 
   if (can_eat(victim)) {
-    dbg("Allow eater attack on %s", victim->to_short_string().c_str());
+    if (is_debug_type()) {
+      dbg("Allow eater attack on %s", victim->to_short_string().c_str());
+    }
     return true;
   }
 
@@ -157,7 +175,9 @@ bool Thing::possible_to_attack(const Thingp victim)
   // No attacking of open doors!
   //
   if (victim->is_open) {
-    dbg("Cannot attack %s, it's open", victim->to_short_string().c_str());
+    if (is_debug_type()) {
+      dbg("Cannot attack %s, it's open", victim->to_short_string().c_str());
+    }
     return false;
   }
 
@@ -166,7 +186,9 @@ bool Thing::possible_to_attack(const Thingp victim)
   //
   if (victim->is_door()) {
     if (me->is_able_to_break_down_doors()) {
-      dbg("Can break down door %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can break down door %s", victim->to_short_string().c_str());
+      }
       return true;
     }
   }
@@ -188,19 +210,25 @@ bool Thing::possible_to_attack(const Thingp victim)
     // Can we eats it?
     //
     if (me->is_edible(victim)) {
-      dbg("Can attack %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can attack %s", victim->to_short_string().c_str());
+      }
       return true;
     }
 
     if (! victim->is_attackable_by_monst()) {
-      dbg("No, cannot attack %s, not is_attackable by meat eating monst", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("No, cannot attack %s, not is_attackable by meat eating monst", victim->to_short_string().c_str());
+      }
       return false;
     }
 
     if (me->attack_humanoid()) {
       if (victim->is_humanoid()) {
         if (! victim->is_dead) {
-          dbg("Can attack humanoid: %s", victim->to_short_string().c_str());
+          if (is_debug_type()) {
+            dbg("Can attack humanoid: %s", victim->to_short_string().c_str());
+          }
           return true;
         }
       }
@@ -209,7 +237,9 @@ bool Thing::possible_to_attack(const Thingp victim)
     if (me->attack_living()) {
       if (victim->is_living()) {
         if (! victim->is_dead) {
-          dbg("Can attack living: %s", victim->to_short_string().c_str());
+          if (is_debug_type()) {
+            dbg("Can attack living: %s", victim->to_short_string().c_str());
+          }
           return true;
         }
       }
@@ -218,7 +248,9 @@ bool Thing::possible_to_attack(const Thingp victim)
     if (me->attack_undead()) {
       if (victim->is_undead()) {
         if (! victim->is_dead) {
-          dbg("Can attack undead: %s", victim->to_short_string().c_str());
+          if (is_debug_type()) {
+            dbg("Can attack undead: %s", victim->to_short_string().c_str());
+          }
           return true;
         }
       }
@@ -229,18 +261,26 @@ bool Thing::possible_to_attack(const Thingp victim)
     if (victim->is_attackable_by_player()) {
       if (game->robot_mode) {
         if (victim->is_barrel()) {
-          dbg("No, do not attack %s, is explosive barrel", victim->to_short_string().c_str());
+          if (is_debug_type()) {
+            dbg("No, do not attack %s, is explosive barrel", victim->to_short_string().c_str());
+          }
           return false;
         }
       }
       if (victim->is_foilage() || victim->is_carnivorous_plant()) {
-        dbg("No, do not attack %s", victim->to_short_string().c_str());
+        if (is_debug_type()) {
+          dbg("No, do not attack %s", victim->to_short_string().c_str());
+        }
         return false;
       }
-      dbg("Can attack %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can attack %s", victim->to_short_string().c_str());
+      }
       return true;
     }
-    dbg("No, cannot attack %s, not is_attackable", victim->to_short_string().c_str());
+    if (is_debug_type()) {
+      dbg("No, cannot attack %s, not is_attackable", victim->to_short_string().c_str());
+    }
     return false;
   }
 
@@ -254,14 +294,20 @@ bool Thing::possible_to_attack(const Thingp victim)
           //     victim->to_short_string().c_str());
           return false;
         }
-        dbg("Can attack %s", victim->to_short_string().c_str());
+        if (is_debug_type()) {
+          dbg("Can attack %s", victim->to_short_string().c_str());
+        }
         return true;
       }
       if (! victim->is_attackable_by_player()) {
-        dbg("Cannot weapon attack %s, not is_attackable by player", victim->to_short_string().c_str());
+        if (is_debug_type()) {
+          dbg("Cannot weapon attack %s, not is_attackable by player", victim->to_short_string().c_str());
+        }
         return false;
       }
-      dbg("Can attack %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can attack %s", victim->to_short_string().c_str());
+      }
       return true;
     }
   }
@@ -274,38 +320,52 @@ bool Thing::possible_to_attack(const Thingp victim)
     } else if (victim->is_meltable() || victim->is_able_to_burn() || victim->is_very_combustible() ||
                victim->is_combustible()) {
       if (! victim->is_fire() && ! victim->is_lava()) {
-        dbg("Can attack as I am firey %s", victim->to_short_string().c_str());
+        if (is_debug_type()) {
+          dbg("Can attack as I am firey %s", victim->to_short_string().c_str());
+        }
         return true;
       }
     }
   }
 
   if (is_enemy(victim)) {
-    dbg("Can attack enemy %s", victim->to_short_string().c_str());
+    if (is_debug_type()) {
+      dbg("Can attack enemy %s", victim->to_short_string().c_str());
+    }
     return true;
   }
 
   if (is_weapon()) {
     if (victim->is_sticky() || victim->is_spiderweb()) {
       if (is_able_to_break_out_of_webs()) {
-        dbg("Can attack and break out of web %s", victim->to_short_string().c_str());
+        if (is_debug_type()) {
+          dbg("Can attack and break out of web %s", victim->to_short_string().c_str());
+        }
         return true;
       }
-      dbg("Can not break out of web %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can not break out of web %s", victim->to_short_string().c_str());
+      }
       return false;
     }
 
     if (victim->is_block_of_ice()) {
       if (is_able_to_break_out_of_ice()) {
-        dbg("Can attack and break out of ice %s", victim->to_short_string().c_str());
+        if (is_debug_type()) {
+          dbg("Can attack and break out of ice %s", victim->to_short_string().c_str());
+        }
         return true;
       }
-      dbg("Can not break out of web %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can not break out of web %s", victim->to_short_string().c_str());
+      }
       return false;
     }
 
     if (victim->is_foilage() || victim->is_carnivorous_plant()) {
-      dbg("Can attack scenery %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can attack scenery %s", victim->to_short_string().c_str());
+      }
       return true;
     }
   }
@@ -318,40 +378,51 @@ bool Thing::possible_to_attack(const Thingp victim)
       victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() ||
       victim->is_bag_item()) {
     if (is_laser()) {
-      dbg("Can attack as laser %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can attack as laser %s", victim->to_short_string().c_str());
+      }
       return true;
     }
 
     if (is_projectile()) {
-      dbg("Can attack as projectile %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can attack as projectile %s", victim->to_short_string().c_str());
+      }
       return true;
     }
 
     if (is_wand_or_staff()) {
-      dbg("Can attack as wand %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can attack as wand %s", victim->to_short_string().c_str());
+      }
       return true;
     }
 
     if (is_ring()) {
-      dbg("Can attack as ring %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can attack as ring %s", victim->to_short_string().c_str());
+      }
       return true;
     }
 
     if (is_explosion()) {
-      dbg("Can attack as explosion %s", victim->to_short_string().c_str());
+      if (is_debug_type()) {
+        dbg("Can attack as explosion %s", victim->to_short_string().c_str());
+      }
       return true;
     }
   }
 
-  dbg("Cannot attack %s, ignore", victim->to_short_string().c_str());
+  if (is_debug_type()) {
+    dbg("Cannot attack %s, ignore", victim->to_short_string().c_str());
+  }
 
   return false;
 }
 
 bool Thing::possible_to_attack_at(point at)
 {
-  dbg("Possible to attack? at %s", at.to_string().c_str());
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   bool ret = false;
 
@@ -360,14 +431,9 @@ bool Thing::possible_to_attack_at(point at)
     if (! possible_to_attack(victim)) {
       continue;
     }
-    dbg("Yes; %s", victim->to_short_string().c_str());
     ret = true;
   }
   FOR_ALL_THINGS_END()
-
-  if (! ret) {
-    dbg("No");
-  }
 
   return ret;
 }
@@ -405,12 +471,16 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
   auto owner = top_owner();
 
   if (! possible_to_attack(victim)) {
-    dbg("Attack failed, not possible to attack %s", victim->to_short_string().c_str());
+    if (is_debug_type()) {
+      dbg("Attack failed, not possible to attack %s", victim->to_short_string().c_str());
+    }
     return false;
   }
 
   if (victim->is_falling) {
-    dbg("Attack failed, victim is falling %s", victim->to_short_string().c_str());
+    if (is_debug_type()) {
+      dbg("Attack failed, victim is falling %s", victim->to_short_string().c_str());
+    }
     return false;
   }
 

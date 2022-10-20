@@ -182,7 +182,12 @@ bool Thing::collision_find_best_target(AttackOptions *attack_options)
           //
           // Eat corpse?
           //
-          IF_DEBUG2 { owner->log("Can eat %s", victim->to_short_string().c_str()); }
+          IF_DEBUG2
+          {
+            if (is_debug_type()) {
+              owner->log("Can eat %s", victim->to_short_string().c_str());
+            }
+          }
 
           if (victim->is_dead) {
             if (owner->eat(victim)) {

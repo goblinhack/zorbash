@@ -109,11 +109,7 @@ bool Thing::worth_eating(Thingp victim)
 
 bool Thing::can_eat(const Thingp itp)
 {
-  dbg("Can eat? %s", itp->to_short_string().c_str());
-
   if (is_edible(itp)) {
-    TRACE_AND_INDENT();
-    dbg("Yes, can eat: %s", itp->to_short_string().c_str());
     return true;
   }
 
@@ -122,11 +118,7 @@ bool Thing::can_eat(const Thingp itp)
 
 bool Tp::can_eat(const Thingp itp)
 {
-  dbg("Can eat? %s", itp->to_short_string().c_str());
-  TRACE_AND_INDENT();
-
   if (is_edible(itp)) {
-    dbg("Can eat jelly: %s", itp->to_short_string().c_str());
     return true;
   }
 

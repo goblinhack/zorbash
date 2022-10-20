@@ -15,6 +15,8 @@
 //
 bool Thing::path_pop_next_move(ThingMoveReason reason)
 {
+  TRACE_NO_INDENT();
+
   bool too_far = false;
 
   auto ai = maybe_aip();
@@ -26,7 +28,6 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
     return false;
   }
 
-  TRACE_NO_INDENT();
   std::string s = "";
   IF_DEBUG3
   {
@@ -38,20 +39,21 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
   auto to         = ai->move_path[ 0 ];
   auto future_pos = point(to.x, to.y);
 
-  IF_DEBUG
+  IF_DEBUG2
   {
-    std::string s = "";
-    for (auto p : ai->move_path) {
-      s += " " + p.to_string();
-    }
+    if (is_debug_type()) {
+      std::string s = "";
+      for (auto p : ai->move_path) {
+        s += " " + p.to_string();
+      }
 
-    if (s.empty()) {
-      DBG2("Path pop next move %s, path empty", future_pos.to_string().c_str());
-    } else {
-      DBG2("Path pop next move %s, path:%s", future_pos.to_string().c_str(), s.c_str());
+      if (s.empty()) {
+        dbg("Path pop next move %s, path empty", future_pos.to_string().c_str());
+      } else {
+        dbg("Path pop next move %s, path:%s", future_pos.to_string().c_str(), s.c_str());
+      }
     }
   }
-  TRACE_AND_INDENT();
 
   //
   // Clean up the old cursor path

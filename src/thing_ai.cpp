@@ -1011,7 +1011,9 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
           continue;
         }
 
-        AI_LOG("Can see cand", it);
+        if (is_debug_type()) {
+          AI_LOG("Can see cand", it);
+        }
 
         if (it->immediate_owner_id().ok()) {
           AI_LOG("Has an ownwer; ignore", it);

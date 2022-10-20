@@ -14,7 +14,7 @@
 
 static uint8_t game_mouse_down_(int x, int y, uint32_t button)
 {
-  DBG2("Game mouse down");
+  CON("Game mouse down");
   TRACE_AND_INDENT();
 
   if (! game || ! game->started) {

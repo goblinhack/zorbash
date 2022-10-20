@@ -175,8 +175,9 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
     goal_path_str += " " + i.to_string();
   }
 
-  dbg("AI: created path %s", goal_path_str.c_str());
-  TRACE_AND_INDENT();
+  if (is_debug_type()) {
+    dbg("AI: created path %s", goal_path_str.c_str());
+  }
 
   auto hops     = result.path;
   auto hops_len = hops.size();
