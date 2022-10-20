@@ -15,7 +15,6 @@ def tp_init(name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
-    my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_removeable_if_out_of_slots(self, True)
     my.is_smoke(self, True)

@@ -185,8 +185,10 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
 
     IF_DEBUG2
     {
-      AI_LOG("Modified dmap for terrain");
-      dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+      if (is_debug_type()) {
+        AI_LOG("Modified dmap for terrain");
+        dmap_print(g.dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+      }
     }
 
     const Dmap saved_dmap = *g.dmap;
@@ -284,7 +286,12 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
     set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
   }
 
-  IF_DEBUG2 { dmap_print(&dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy)); }
+  IF_DEBUG2
+  {
+    if (is_debug_type()) {
+      dmap_print(&dmap, point(start.x, start.y), point(minx, miny), point(maxx, maxy));
+    }
+  }
 
   //
   // Record we've been here.

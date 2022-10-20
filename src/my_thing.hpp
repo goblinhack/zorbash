@@ -488,7 +488,7 @@ public:
   bool collision_check_do(void);
   bool collision_check_only(point future_pos);
   bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
-  bool collision_check_only(Thingp it, point future_pos, int x, int y);
+  bool collision_check_only(Thingp it, point future_pos);
   bool collision_check_only(void);
   bool collision_find_best_target(AttackOptions *attack_options);
   bool collision_obstacle(point);

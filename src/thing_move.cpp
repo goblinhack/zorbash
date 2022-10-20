@@ -91,16 +91,18 @@ void Thing::move_finish(void)
   on_move();
 
   if (maybe_aip()) {
-    IF_DEBUG1
+    IF_DEBUG2
     {
-      std::string s = "";
-      for (auto p1 : aip()->move_path) {
-        s += " " + p1.to_string();
-      }
-      if (s.empty()) {
-        dbg("End of move");
-      } else {
-        dbg("End of move, moves left:%s", s.c_str());
+      if (is_debug_type()) {
+        std::string s = "";
+        for (auto p1 : aip()->move_path) {
+          s += " " + p1.to_string();
+        }
+        if (s.empty()) {
+          dbg("End of move");
+        } else {
+          dbg("End of move, moves left:%s", s.c_str());
+        }
       }
     }
 

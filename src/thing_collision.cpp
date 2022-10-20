@@ -412,7 +412,7 @@ bool Thing::ai_obstacle(fpoint p)
 //
 // "true" on collision
 //
-bool Thing::collision_check_only(Thingp it, point future_pos, int x, int y)
+bool Thing::collision_check_only(Thingp it, point future_pos)
 {
   auto me    = this;
   auto it_tp = it->tp();
@@ -901,30 +901,27 @@ bool Thing::collision_check_only(point future_pos)
     }
   }
 
-  for (int16_t x = minx; x <= maxx; x++) {
-    for (int16_t y = miny; y <= maxy; y++) {
-      FOR_ALL_COLLISION_THINGS(level, it, x, y)
-      {
-        if (this == it) {
-          continue;
-        }
+  FOR_ALL_COLLISION_THINGS(level, it, future_pos.x, future_pos.y)
+  {
+    if (this == it) {
+      continue;
+    }
 
-        //
-        // Skip things we cannot collide with
-        //
-        if (it->is_falling || it->is_jumping || it->is_changing_level) {
-          dbg("Ignore falling %s", it->to_short_string().c_str());
-          continue;
-        }
+    //
+    // Skip things we cannot collide with
+    //
+    if (it->is_falling || it->is_jumping || it->is_changing_level) {
+      dbg("Ignore falling %s", it->to_short_string().c_str());
+      continue;
+    }
 
-        if (collision_check_only(it, future_pos, x, y)) {
-          dbg("Cannot move; collision");
-          return true;
-        }
-      }
-      FOR_ALL_THINGS_END()
+    if (collision_check_only(it, future_pos)) {
+      dbg("Cannot move; collision");
+      return true;
     }
   }
+  FOR_ALL_THINGS_END()
+
   return false;
 }
 

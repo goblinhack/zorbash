@@ -40,7 +40,6 @@ bool wid_rightbar_pixelart_create(void)
   int y_at  = 6;
 
   {
-    DBG2("Remake rightbar container");
     TRACE_NO_INDENT();
     point tl = make_point(TERM_WIDTH - width, 0);
     point br = make_point(TERM_WIDTH - 1, UI_RIGHTBAR_PIXELART_HEIGHT);
@@ -58,7 +57,6 @@ bool wid_rightbar_pixelart_create(void)
   }
 
   {
-    DBG2("Remake rightbar level");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "level no");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -80,7 +78,6 @@ bool wid_rightbar_pixelart_create(void)
 
   y_at++;
   {
-    DBG2("Remake rightbar seed");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Seed");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -98,7 +95,6 @@ bool wid_rightbar_pixelart_create(void)
 
   y_at += 2;
   {
-    DBG2("Remake rightbar title");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "title name");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -116,7 +112,6 @@ bool wid_rightbar_pixelart_create(void)
   y_at += 3;
 
   {
-    DBG2("Remake rightbar gold and keys");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -136,7 +131,6 @@ bool wid_rightbar_pixelart_create(void)
   y_at++;
 
   {
-    DBG2("Remake rightbar gold and keys");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "score and move count");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -157,7 +151,6 @@ bool wid_rightbar_pixelart_create(void)
   // Health
   ///////////////////////////////////////////////////////////////////////////
   {
-    DBG2("Remake rightbar health-bar");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -174,7 +167,6 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
   }
   {
-    DBG2("Remake rightbar health-value");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "health-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -195,7 +187,6 @@ bool wid_rightbar_pixelart_create(void)
   // stamina
   ///////////////////////////////////////////////////////////////////////////
   {
-    DBG2("Remake rightbar stamina-bar");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stamina-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -212,7 +203,6 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_fg_tilename(w, icon);
   }
   {
-    DBG2("Remake rightbar stamina-value");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stamina-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -233,7 +223,6 @@ bool wid_rightbar_pixelart_create(void)
   // DEF
   ///////////////////////////////////////////////////////////////////////////
   {
-    DBG2("Remake rightbar stats");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -253,7 +242,6 @@ bool wid_rightbar_pixelart_create(void)
   // ATT
   ///////////////////////////////////////////////////////////////////////////
   {
-    DBG2("Remake rightbar stats");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -273,7 +261,6 @@ bool wid_rightbar_pixelart_create(void)
   // STR
   ///////////////////////////////////////////////////////////////////////////
   {
-    DBG2("Remake rightbar stats");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -295,7 +282,6 @@ bool wid_rightbar_pixelart_create(void)
   // CON
   ///////////////////////////////////////////////////////////////////////////
   {
-    DBG2("Remake rightbar stats");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -315,7 +301,6 @@ bool wid_rightbar_pixelart_create(void)
   // DEX
   ///////////////////////////////////////////////////////////////////////////
   {
-    DBG2("Remake rightbar stats");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -335,7 +320,6 @@ bool wid_rightbar_pixelart_create(void)
   // LUCK
   ///////////////////////////////////////////////////////////////////////////
   {
-    DBG2("Remake rightbar stats");
     TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -363,8 +347,6 @@ bool wid_rightbar_pixelart_create(void)
   //
   // Inventory items
   //
-  DBG2("Remake rightbar inventory items");
-  TRACE_AND_INDENT();
   {
     std::vector< Widp > wid_inventory_items;
 
@@ -496,8 +478,6 @@ bool wid_rightbar_pixelart_create(void)
   //
   // Skills
   //
-  DBG2("Remake rightbar skills");
-  TRACE_AND_INDENT();
   y_at += 8;
   {
     std::vector< Widp > wid_skillbox_items;
@@ -590,8 +570,6 @@ bool wid_rightbar_pixelart_create(void)
   //
   // Buffs
   //
-  DBG2("Remake rightbar buffs");
-  TRACE_AND_INDENT();
   y_at += 8;
   {
     std::vector< Widp > wid_buffbox_items;
@@ -667,8 +645,6 @@ bool wid_rightbar_pixelart_create(void)
   //
   // Debuffs
   //
-  DBG2("Remake rightbar debuffs");
-  TRACE_AND_INDENT();
   y_at += 8;
   {
     std::vector< Widp > wid_debuffbox_items;
@@ -746,8 +722,6 @@ bool wid_rightbar_pixelart_create(void)
   //
   // Map
   //
-  DBG2("Remake rightbar map");
-  TRACE_AND_INDENT();
   {
     auto w       = wid_new_square_window("map_mini wid");
     wid_map_mini = w;
