@@ -12,23 +12,12 @@ void Thing::temperature_tick(void)
 {
   TRACE_NO_INDENT();
 
-  //
-  // Add in the temperature of the location. The heatmap has some radiosity to it so it can impact neighboring tiles.
-  //
-  int  location_temp     = level->heatmap(curr_at) * 10;
+  int  location_temp     = 0;
   bool location_temp_set = false;
-
-  if (location_temp) {
-    location_temp_set = true;
-  }
 
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_floor()) {
-      continue;
-    }
-
-    if (t == this) {
       continue;
     }
 
@@ -80,7 +69,10 @@ void Thing::temperature_tick(void)
       location_temp += t->temperature;
       location_temp_set = true;
 
-      dbg("Location temp now %d due to %s (%d)", location_temp, t->to_short_string().c_str(), t->temperature);
+      IF_DEBUG3
+      {
+        dbg3("Location temp now %d due to %s (%d)", location_temp, t->to_short_string().c_str(), t->temperature);
+      }
 
       if (location_temp > TEMPERATURE_MAX) {
         location_temp = TEMPERATURE_MAX;
@@ -95,9 +87,6 @@ void Thing::temperature_tick(void)
     return;
   }
 
-  dbg("Temperature tick");
-  TRACE_AND_INDENT();
-
   int thing_temp = temperature;
 
   //
@@ -108,13 +97,13 @@ void Thing::temperature_tick(void)
     thing_temp = TEMPERATURE_ROOM;
   }
 
-  dbg("Temperature tick, my temp %d, location temp: %d", thing_temp, location_temp);
-  TRACE_AND_INDENT();
-
   //
   // Over time we gradually get closer to the location temperature.
   //
   if (thing_temp != location_temp) {
+    dbg("Temperature tick, my temp %d, location temp: %d", thing_temp, location_temp);
+    TRACE_AND_INDENT();
+
     int delta = (location_temp - thing_temp) / 2;
 
     if (is_fire() || is_block_of_ice() || is_wall() || is_door() || is_rock()) {

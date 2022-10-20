@@ -12,6 +12,8 @@ def basalt_init(name, text_long_name, tiles=[]):
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.is_able_to_fall(self, True)
     my.is_basalt(self, True)

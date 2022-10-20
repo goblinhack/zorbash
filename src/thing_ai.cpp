@@ -1316,6 +1316,9 @@ void Thing::ai_choose_search_goals(std::multiset< Goal > &goals, int search_type
     if (level->is_obs_wall_or_door(p.x, p.y)) {
       continue;
     }
+    if (get(dmap_can_see->val, p.x, p.y) == DMAP_IS_WALL) {
+      continue;
+    }
 
     //
     // Don't look too far beyond where we can go
@@ -2061,6 +2064,11 @@ bool Thing::ai_tick(bool recursing)
   TRACE_AND_INDENT();
 
   auto ai = aip();
+
+  //
+  // Wandering is expensive, so ensure we do it only once per AI tick.
+  //
+  ai_tried_to_wander = false;
 
   if (is_player()) {
     if (game->things_are_moving) {

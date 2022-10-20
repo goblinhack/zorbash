@@ -19,6 +19,8 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_burn(self, True)

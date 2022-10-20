@@ -105,7 +105,12 @@ bool Thing::too_far_from_leader(void)
     return false;
   }
 
-  return distance(curr_at, l->curr_at) > distance_leader_max_float();
+  auto m = distance_leader_max_float();
+  if (! m) {
+    err("distance_leader_max() is not set for thing");
+  }
+
+  return distance(curr_at, l->curr_at) > m;
 }
 
 bool Thing::too_far_from_leader(point p)
@@ -115,7 +120,12 @@ bool Thing::too_far_from_leader(point p)
     return false;
   }
 
-  return distance(p, l->curr_at) > distance_leader_max_float();
+  auto m = distance_leader_max_float();
+  if (! m) {
+    err("distance_leader_max() is not set for thing");
+  }
+
+  return distance(p, l->curr_at) > m;
 }
 
 bool Thing::too_far_from_leader(point p, float delta)
@@ -125,7 +135,12 @@ bool Thing::too_far_from_leader(point p, float delta)
     return false;
   }
 
-  return distance(p, l->curr_at) > distance_leader_max_float() + delta;
+  auto m = distance_leader_max_float();
+  if (! m) {
+    err("distance_leader_max() is not set for thing");
+  }
+
+  return distance(p, l->curr_at) > m + delta;
 }
 
 Thingp Thing::leader(void)
@@ -376,10 +391,10 @@ bool Thing::same_leader(Thingp it)
   Thingp its_leader = it->leader();
 
   if (my_leader) {
-    dbg("my leader: %s", my_leader->to_short_string().c_str());
+    dbg3("my leader: %s", my_leader->to_short_string().c_str());
   }
   if (its_leader) {
-    dbg("its leader: %s", its_leader->to_short_string().c_str());
+    dbg3("its leader: %s", its_leader->to_short_string().c_str());
   }
 
   if (my_leader && (my_leader == it)) {

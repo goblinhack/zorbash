@@ -26,7 +26,7 @@
 #define LEVEL_LOUDEST_SOUND   100 // Decibels
 #define LEVEL_FADE_IN_MS      500 // Level start fade animation time
 #define LEVEL_FADE_OUT_MS     500 // Level end fade animation time
-#define LEVEL_MONST_COUNT_MAX 100 // Monsters max per level. Want more? You're mad...
+#define LEVEL_MONST_COUNT_MAX 25  // Monsters max per level. Want more? You're mad...
 
 #define MAP_BORDER_ROCK 1  // Map rock border. If changed from 1 you need to fix collision_check_only
 #define MAP_BORDER_ROOM 1  // Room border padding

@@ -15,7 +15,7 @@
 #define THING_AI_MAX_AVOID_COUNT           10   // Count to keep track of avoid attempts
 #define THING_AI_MAX_GOAL_PENALTY          100  // Helps to avoid goal oscillation
 #define THING_AI_MAX_RESENT_COUNT          100  // Count to keep track of resentfulness
-#define THING_AI_WANDER_TRIES              2    // Quite CPU heavy
+#define THING_AI_WANDER_TRIES              1    // Quite CPU heavy
 #define THING_DAMAGE_SHAKE_ABOVE           10   // Damage above this causes shakes
 #define THING_DAMAGE_SHAKE_SCALE           40.0 // Smaller means more shaking
 #define THING_HEALTH_BLOODIED_PCT1         35   // Some blood on the screen

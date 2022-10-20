@@ -2,11 +2,8 @@ import my
 import tp
 
 
-def on_tick(owner, me, x, y):
-    if my.pcg_randint(1, 100) > 98:
-        my.spawn_at_my_position(me, "smoke")
-        return True
-    return False
+def on_idle(me, x, y):
+    my.spawn_at_my_position(me, "smoke")
 
 
 def on_death(me, x, y):
@@ -17,7 +14,6 @@ def lava_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
     my.ai_obstacle(self, True)
-    my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
     my.damage_fire_chance_d1000(self, 0, 1000)
     my.damage_fire_dice(self, "1d12+6")
@@ -29,6 +25,8 @@ def lava_init(name, text_long_name, tiles=[]):
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_glows(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.is_able_to_fall(self, True)
     my.is_biome_dungeon(self, True)
@@ -38,13 +36,12 @@ def lava_init(name, text_long_name, tiles=[]):
     my.is_hazard(self, True)
     my.is_interesting(self, True)
     my.is_lava(self, True)
-    my.is_loggable(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "red")
     my.light_dist(self, 2)
     my.on_death_do(self, "me.on_death()")
-    my.on_tick_do(self, "me.on_tick()")
+    my.on_idle_tick_freq_dice(self, "1d100:me.on_idle()")
     my.temperature(self, 800)
     my.text_a_or_an(self, "")
     my.text_hits(self, "tickles")

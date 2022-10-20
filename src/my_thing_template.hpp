@@ -191,6 +191,8 @@ private:
   int _gfx_pixelart_health_bar_autohide {};
   int _gfx_pixelart_health_bar_only_when_awake {};
   int _gfx_pixelart_health_bar_shown {};
+  int _gfx_pixelart_reflection {};
+  int _gfx_pixelart_shadow {};
   int _gfx_pixelart_shadow_long {};
   int _gfx_pixelart_shadow_short {};
   int _gfx_pixelart_shadow_solid {};
@@ -430,6 +432,7 @@ private:
   int _is_monst_class_c {};
   int _is_monst_class_d {};
   int _is_monst_class_e {};
+  int _is_monst_pack {};
   int _is_moveable {};
   int _is_msg {};
   int _is_msg_allowed_is_seen {};
@@ -443,7 +446,6 @@ private:
   int _is_obs_wall_or_door {};
   int _is_openable {};
   int _is_organic {};
-  int _is_monst_pack {};
   int _is_pillar {};
   int _is_plant {};
   int _is_player {};
@@ -626,8 +628,6 @@ private:
   int _unused_flag40 {};
   int _unused_flag41 {};
   int _unused_flag42 {};
-  int _unused_flag43 {};
-  int _unused_flag44 {};
   int _unused_flag48 {};
   int _unused_flag5 {};
   int _unused_flag56 {};
@@ -1209,10 +1209,12 @@ public:
   int gfx_pixelart_health_bar_autohide(void) const;
   int gfx_pixelart_health_bar_only_when_awake(void) const;
   int gfx_pixelart_health_bar_shown(void) const;
+  int gfx_pixelart_reflection(void) const;
   int gfx_pixelart_shadow_long(void) const;
   int gfx_pixelart_shadow_short(void) const;
   int gfx_pixelart_shadow_solid(void) const;
   int gfx_pixelart_shadow_very_short(void) const;
+  int gfx_pixelart_shadow(void) const;
   int gfx_pixelart_show_asleep_anim(void) const;
   int gfx_pixelart_shown_in_bg(void) const;
   int gfx_pixelart_show_outlined(void) const;
@@ -1642,8 +1644,6 @@ public:
   int unused_flag40(void) const;
   int unused_flag41(void) const;
   int unused_flag42(void) const;
-  int unused_flag43(void) const;
-  int unused_flag44(void) const;
   int unused_flag48(void) const;
   int unused_flag4(void) const;
   int unused_flag56(void) const;
@@ -1748,7 +1748,9 @@ public:
   void gfx_pixelart_health_bar_autohide_set(int v);
   void gfx_pixelart_health_bar_only_when_awake_set(int v);
   void gfx_pixelart_health_bar_shown_set(int v);
+  void gfx_pixelart_reflection_set(int v);
   void gfx_pixelart_shadow_long_set(int v);
+  void gfx_pixelart_shadow_set(int v);
   void gfx_pixelart_shadow_short_set(int v);
   void gfx_pixelart_shadow_solid_set(int v);
   void gfx_pixelart_shadow_very_short_set(int v);
@@ -1985,6 +1987,7 @@ public:
   void is_monst_class_c_set(int v);
   void is_monst_class_d_set(int v);
   void is_monst_class_e_set(int v);
+  void is_monst_pack_set(int v);
   void is_monst_set(int v);
   void is_moveable_set(int v);
   void is_msg_allowed_is_seen_set(int v);
@@ -1999,7 +2002,6 @@ public:
   void is_obs_wall_or_door_set(int v);
   void is_openable_set(int v);
   void is_organic_set(int v);
-  void is_monst_pack_set(int v);
   void is_pillar_set(int v);
   void is_plant_set(int v);
   void is_player_set(int v);
@@ -2317,8 +2319,6 @@ public:
   void unused_flag40_set(int v);
   void unused_flag41_set(int v);
   void unused_flag42_set(int v);
-  void unused_flag43_set(int v);
-  void unused_flag44_set(int v);
   void unused_flag48_set(int v);
   void unused_flag4_set(int v);
   void unused_flag56_set(int v);

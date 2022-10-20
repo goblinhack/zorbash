@@ -25,6 +25,8 @@ def tp_init(name):
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_health_bar_autohide(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "5d20")

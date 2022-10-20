@@ -29,6 +29,8 @@ def tp_init(
     my.collision_hit_priority(self, 2)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "20d10")

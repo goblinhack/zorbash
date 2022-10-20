@@ -42,6 +42,8 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)

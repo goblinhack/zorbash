@@ -236,8 +236,9 @@ void Thing::location_check(Thingp filter_to)
 //
 void Thing::location_check_me(void)
 {
-  dbg("Do location checks");
-  TRACE_AND_INDENT();
+  if (is_loggable()) {
+    dbg("Do location checks");
+  }
 
   //
   // If we're about to check as part of a tick, do it then.

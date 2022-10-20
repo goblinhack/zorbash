@@ -6,6 +6,7 @@
 #include "my_level.hpp"
 #include "my_random.hpp"
 #include "my_thing.hpp"
+#include <math.h>
 
 point Thing::dest_random_get(int d)
 {
@@ -30,17 +31,19 @@ point Thing::dest_random_get(int d)
   // Minions cannot wander too far
   //
   auto mob = top_mob();
-  if (mob) {
-    d             = (int) distance_mob_max_float();
+  if (mob && (mob != this)) {
+    d             = (int) ceil(distance_mob_max_float());
     wander_source = mob->curr_at;
-    dbg2("Use mob %s as wander source: %s", mob->to_short_string().c_str(), wander_source.to_string().c_str());
+    dbg2("Use mob %s as wander source: %s distance %d", mob->to_short_string().c_str(),
+         wander_source.to_string().c_str(), d);
   }
 
   auto l = leader();
-  if (l) {
-    d             = (int) distance_leader_max_float();
+  if (l && (l != this)) {
+    d             = (int) ceil(distance_leader_max_float());
     wander_source = l->curr_at;
-    dbg2("Use leader %s as wander source: %s", l->to_short_string().c_str(), wander_source.to_string().c_str());
+    dbg2("Use leader %s as wander source: %s distance %d", l->to_short_string().c_str(),
+         wander_source.to_string().c_str(), d);
   }
 
   while (tries--) {
@@ -79,6 +82,7 @@ point Thing::dest_random_get(int d)
       dbg2("Try: %d,%d; less preferred terrain", start.x + dx, start.y + dy);
       continue;
     }
+
     if (is_player()) {
       if (! get(level->can_see_currently.can_see, x, y)) {
         continue;

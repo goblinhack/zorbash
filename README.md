@@ -1,9 +1,11 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - pirhanas getting stick                                                                                                                     -->
 <!-- - skeleton surprised when should not be and improve anim                                                                                     -->
-<!-- - polymorph is losing animated                                                                                                               -->
+<!-- - check water interacting with fire/lava makes steam or basalt                                                                               -->
 <!-- - level num wrong in hiscores                                                                                                                -->
-<!-- - jump noise                                                                                                                                 -->
+<!-- - jump noise is delayed - check with non quickstart                                                                                          -->
+<!-- - kraken tentacles                                                                                                                           -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->

@@ -45,6 +45,8 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "27d10")
     my.hunger_clock_tick_freq(self, 50)

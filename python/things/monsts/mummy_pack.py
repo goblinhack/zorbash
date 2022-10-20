@@ -19,7 +19,6 @@ def tp_init(name, text_long_name):
     # begin sort marker
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.gfx_ascii_shown(self, True)
-    my.distance_leader_max(self, 5)
     my.distance_recruitment_max(self, 7)
     my.is_able_to_follow(self, True)
     my.is_allied_with(self, "mummy_pack")

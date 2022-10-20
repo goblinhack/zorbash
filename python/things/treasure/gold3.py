@@ -7,6 +7,8 @@ def gold_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shadow_very_short(self, True)
     my.gold_value_dice(self, "12+1d12")

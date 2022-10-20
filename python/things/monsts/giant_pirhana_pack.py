@@ -7,7 +7,7 @@ def on_you_are_declared_leader(me, x, y):
 
 
 def on_you_are_declared_a_follower(me, leader, x, y):
-    my.thing_polymorph(me, "pirhana")
+    my.thing_polymorph(me, "giant_pirhana")
 
 
 def tp_init(name, text_long_name):
@@ -17,12 +17,13 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown(self, True)
     my.distance_recruitment_max(self, 7)
     my.is_able_to_follow(self, True)
-    my.is_allied_with(self, "pirhana_pack")
+    my.is_allied_with(self, "giant_pirhana_pack")
     my.is_biome_dungeon(self, True)
-    my.is_monst_class_a(self, True)
+    my.is_monst_class_c(self, True)
     my.rarity(self, my.RARITY_COMMON)
     my.on_you_are_declared_a_follower_do(self, "me.on_you_are_declared_a_follower()")
     my.is_deep_water_swimmer(self, True)
+    my.is_shallow_water_swimmer(self, True)
     my.on_you_are_declared_leader_do(self, "me.on_you_are_declared_leader()")
     my.is_swimmer(self, True)
     my.is_monst_pack(self, True)
@@ -32,7 +33,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="pirhana_pack", text_long_name="pirhana pack")
+    tp_init(name="giant_pirhana_pack", text_long_name="giant_pirhana pack")
 
 
 init()

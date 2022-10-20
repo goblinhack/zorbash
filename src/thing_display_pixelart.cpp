@@ -239,6 +239,10 @@ void Thing::blit_shadow(const Tpp &tpp, const Tilep &tile, const point blit_tl, 
     return;
   }
 
+  if (! gfx_pixelart_shadow()) {
+    return;
+  }
+
   if (! level->player) {
     blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);
     return;
@@ -748,6 +752,10 @@ uint8_t Thing::blit_begin_reflection_submerged(void)
 {
   TRACE_NO_INDENT();
 
+  if (! gfx_pixelart_reflection()) {
+    return false;
+  }
+
   auto submerged = submerged_offset_get();
   if (submerged) {
     blit_flush();
@@ -770,6 +778,10 @@ uint8_t Thing::blit_begin_reflection_submerged(void)
 void Thing::blit_end_reflection_submerged(uint8_t submerged)
 {
   TRACE_NO_INDENT();
+
+  if (! gfx_pixelart_reflection()) {
+    return;
+  }
 
   blit_flush();
   glTranslatef(0, submerged, 0);
@@ -1079,6 +1091,10 @@ void Thing::blit_pixelart(int fbo)
 void Thing::blit_upside_down(int fbo)
 {
   TRACE_NO_INDENT();
+
+  if (! gfx_pixelart_reflection()) {
+    return;
+  }
 
   point blit_tl, blit_br;
   Tilep tile = {};

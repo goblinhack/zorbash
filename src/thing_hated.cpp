@@ -14,15 +14,26 @@ bool Thing::is_hated_by_me(const point p)
 {
   TRACE_NO_INDENT();
 
+  //
+  // Limit krakens to the depths, but allow eels and giant_pirhanas free roam.
+  //
   if (is_swimmer()) {
-    if (! level->is_water(p)) {
-      return true;
-    }
-  }
-
-  if (is_deep_water_swimmer()) {
-    if (! level->is_deep_water(p)) {
-      return true;
+    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+      if (! level->is_water(p)) {
+        return true;
+      }
+    } else if (is_deep_water_swimmer()) {
+      if (! level->is_deep_water(p)) {
+        return true;
+      }
+    } else if (is_shallow_water_swimmer()) {
+      if (! level->is_shallow_water(p)) {
+        return true;
+      }
+    } else {
+      if (! level->is_water(p)) {
+        return true;
+      }
     }
   }
 
@@ -65,15 +76,26 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
 {
   TRACE_NO_INDENT();
 
+  //
+  // Limit krakens to the depths, but allow eels and giant_pirhanas free roam.
+  //
   if (is_swimmer()) {
-    if (! level->is_water(p)) {
-      return true;
-    }
-  }
-
-  if (is_deep_water_swimmer()) {
-    if (! level->is_deep_water(p)) {
-      return true;
+    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+      if (! level->is_water(p)) {
+        return true;
+      }
+    } else if (is_deep_water_swimmer()) {
+      if (! level->is_deep_water(p)) {
+        return true;
+      }
+    } else if (is_shallow_water_swimmer()) {
+      if (! level->is_shallow_water(p)) {
+        return true;
+      }
+    } else {
+      if (! level->is_water(p)) {
+        return true;
+      }
     }
   }
 

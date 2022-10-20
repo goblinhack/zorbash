@@ -7,6 +7,8 @@ def tp_init(name):
     # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.is_removeable_if_out_of_slots(self, True)
     my.is_ripple(self, True)
     my.is_tmp_thing(self, True)

@@ -740,8 +740,8 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     break;
   }
 
-  con("INF: Populated dungeon at (%d,%d,%d) took %u ms, slowest element took %u ms (%s)", at.x, at.y, at.z,
-      time_ms() - start, slowest_so_far, slowest_so_far_which.c_str());
+  con("INF: Populated dungeon with %u monsters at world map (%d,%d,%d) took %u ms, slowest element took %u ms (%s)",
+      monst_count, at.x, at.y, at.z, time_ms() - start, slowest_so_far, slowest_so_far_which.c_str());
   return true;
 }
 

@@ -14,6 +14,8 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.is_ascend_sewer(self, True)

@@ -13,6 +13,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.damage_cold_dice(self, "1d6")  # This is the damage when the monst fires
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.is_cold(self, True)

@@ -20,6 +20,8 @@ def tp_init(name, text_long_name, tiles=[]):
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_water(self, True)
     my.is_able_to_fall(self, True)
@@ -28,10 +30,8 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_hazard(self, True)
     my.is_interesting(self, True)
-    my.is_tickable(self, True)  # So it can interact with fire to make steam
     my.text_a_or_an(self, "the")
     my.text_short_description(self, "A pool of deep dank water, with things in it.")
-    my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

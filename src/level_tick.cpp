@@ -322,9 +322,14 @@ void Level::tick_(void)
       uint32_t tick_begin_ms = time_ms();
       t->tick();
       {
-        if ((time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
-          t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", time_ms() - tick_begin_ms,
-                 THING_TICK_DURATION_TOO_LONG);
+        auto tick_duration = time_ms() - tick_begin_ms;
+        if (tick_duration > 1) {
+          t->log("PERF: Thing took tick duration %u ms", tick_duration);
+
+          if ((time_ms() - tick_begin_ms) > THING_TICK_DURATION_TOO_LONG) {
+            t->con("PERF: Thing took too long, tick duration %u ms, max %u ms", tick_duration,
+                   THING_TICK_DURATION_TOO_LONG);
+          }
         }
       }
     }

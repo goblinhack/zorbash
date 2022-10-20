@@ -31,6 +31,8 @@ std::initializer_list< std::string > tps = {
     "armor_lime_scale",
     "armor_lime_scale_carry",
     "ascend_dungeon",
+    "giant_pirhana",
+    "giant_pirhana_pack",
     "pirhana",
     "pirhana_pack",
     "ascend_sewer1",

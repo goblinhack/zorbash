@@ -95,7 +95,9 @@ PyObject *thing_gfx_ascii_shown_in_bg(PyObject *obj, PyObject *args, PyObject *k
 PyObject *thing_gfx_pixelart_anim_synced_with_owner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_flickers(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_health_bar_only_when_awake(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_pixelart_reflection(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_shadow_long(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_pixelart_shadow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_shadow_solid(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_shadow_very_short(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_show_asleep_anim(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -595,8 +597,6 @@ PyObject *thing_unused_flag3(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag40(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag41(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag42(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag43(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_unused_flag44(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag48(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_unused_flag56(PyObject *obj, PyObject *args, PyObject *keywds);

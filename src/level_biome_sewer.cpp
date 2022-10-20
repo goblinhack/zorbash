@@ -114,6 +114,14 @@ void Level::place_swimming_monsts(void)
       if (placed++ > 10) {
         break;
       }
+
+      //
+      // This is for packs so that the monster count increases
+      //
+      assign_leaders_and_followers();
+      if (monst_count >= LEVEL_MONST_COUNT_MAX) {
+        return;
+      }
     }
 
     if (is_deep_water(x, y)) {
@@ -125,6 +133,14 @@ void Level::place_swimming_monsts(void)
       (void) thing_new(tp->name(), point(x, y));
       if (placed++ > 10) {
         break;
+      }
+
+      //
+      // This is for packs so that the monster count increases
+      //
+      assign_leaders_and_followers();
+      if (monst_count >= LEVEL_MONST_COUNT_MAX) {
+        return;
       }
     }
   }

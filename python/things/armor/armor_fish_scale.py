@@ -28,6 +28,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.enchant_max(self, 10)
     my.equip_carry_anim(self, "armor_fish_scale_carry")
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "50")
     my.is_able_to_fall(self, True)

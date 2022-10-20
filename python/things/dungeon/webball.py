@@ -8,6 +8,8 @@ def tp_init(name, tiles=[]):
     my.collision_check(self, True)
     my.collision_hit_priority(self, 3)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.health_initial_dice(self, "1d40")
     my.is_able_to_burn(self, True)

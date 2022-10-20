@@ -351,6 +351,8 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
     my.gfx_pixelart_flickers(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)

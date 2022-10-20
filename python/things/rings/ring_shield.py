@@ -19,6 +19,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.equip_carry_anim(self, "ring_shield_carry")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gold_value_dice(self, "750")
     my.health_initial_dice(self, "1d20")

@@ -241,10 +241,12 @@ int Tp::gfx_pixelart_flickers(void) const { return _gfx_pixelart_flickers; }
 int Tp::gfx_pixelart_health_bar_autohide(void) const { return _gfx_pixelart_health_bar_autohide; }
 int Tp::gfx_pixelart_health_bar_only_when_awake(void) const { return _gfx_pixelart_health_bar_only_when_awake; }
 int Tp::gfx_pixelart_health_bar_shown(void) const { return _gfx_pixelart_health_bar_shown; }
+int Tp::gfx_pixelart_reflection(void) const { return _gfx_pixelart_reflection; }
 int Tp::gfx_pixelart_shadow_long(void) const { return _gfx_pixelart_shadow_long; }
 int Tp::gfx_pixelart_shadow_short(void) const { return _gfx_pixelart_shadow_short; }
 int Tp::gfx_pixelart_shadow_solid(void) const { return _gfx_pixelart_shadow_solid; }
 int Tp::gfx_pixelart_shadow_very_short(void) const { return _gfx_pixelart_shadow_very_short; }
+int Tp::gfx_pixelart_shadow(void) const { return _gfx_pixelart_shadow; }
 int Tp::gfx_pixelart_show_asleep_anim(void) const { return _gfx_pixelart_show_asleep_anim; }
 int Tp::gfx_pixelart_shown_in_bg(void) const { return _gfx_pixelart_shown_in_bg; }
 int Tp::gfx_pixelart_show_outlined(void) const { return _gfx_pixelart_show_outlined; }
@@ -674,8 +676,6 @@ int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
 int Tp::unused_flag41(void) const { return _unused_flag41; }
 int Tp::unused_flag42(void) const { return _unused_flag42; }
-int Tp::unused_flag43(void) const { return _unused_flag43; }
-int Tp::unused_flag44(void) const { return _unused_flag44; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
 int Tp::unused_flag4(void) const { return _unused_flag4; }
 int Tp::unused_flag56(void) const { return _unused_flag56; }
@@ -780,7 +780,9 @@ void Tp::gfx_pixelart_flickers_set(int v) { _gfx_pixelart_flickers = v; }
 void Tp::gfx_pixelart_health_bar_autohide_set(int v) { _gfx_pixelart_health_bar_autohide = v; }
 void Tp::gfx_pixelart_health_bar_only_when_awake_set(int v) { _gfx_pixelart_health_bar_only_when_awake = v; }
 void Tp::gfx_pixelart_health_bar_shown_set(int v) { _gfx_pixelart_health_bar_shown = v; }
+void Tp::gfx_pixelart_reflection_set(int v) { _gfx_pixelart_reflection = v; }
 void Tp::gfx_pixelart_shadow_long_set(int v) { _gfx_pixelart_shadow_long = v; }
+void Tp::gfx_pixelart_shadow_set(int v) { _gfx_pixelart_shadow = v; }
 void Tp::gfx_pixelart_shadow_short_set(int v) { _gfx_pixelart_shadow_short = v; }
 void Tp::gfx_pixelart_shadow_solid_set(int v) { _gfx_pixelart_shadow_solid = v; }
 void Tp::gfx_pixelart_shadow_very_short_set(int v) { _gfx_pixelart_shadow_very_short = v; }
@@ -1017,6 +1019,7 @@ void Tp::is_monst_class_b_set(int v) { _is_monst_class_b = v; }
 void Tp::is_monst_class_c_set(int v) { _is_monst_class_c = v; }
 void Tp::is_monst_class_d_set(int v) { _is_monst_class_d = v; }
 void Tp::is_monst_class_e_set(int v) { _is_monst_class_e = v; }
+void Tp::is_monst_pack_set(int v) { _is_monst_pack = v; }
 void Tp::is_monst_set(int v) { _is_monst = v; }
 void Tp::is_moveable_set(int v) { _is_moveable = v; }
 void Tp::is_msg_allowed_is_seen_set(int v) { _is_msg_allowed_is_seen = v; }
@@ -1031,7 +1034,6 @@ void Tp::is_obstacle_when_dead_set(int v) { _is_obstacle_when_dead = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
-void Tp::is_monst_pack_set(int v) { _is_monst_pack = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
 void Tp::is_plant_set(int v) { _is_plant = v; }
 void Tp::is_player_set(int v) { _is_player = v; }
@@ -1348,8 +1350,6 @@ void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
 void Tp::unused_flag41_set(int v) { _unused_flag41 = v; }
 void Tp::unused_flag42_set(int v) { _unused_flag42 = v; }
-void Tp::unused_flag43_set(int v) { _unused_flag43 = v; }
-void Tp::unused_flag44_set(int v) { _unused_flag44 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }
 void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
 void Tp::unused_flag56_set(int v) { _unused_flag56 = v; }

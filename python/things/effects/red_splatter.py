@@ -8,6 +8,8 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.is_able_to_fall(self, True)
     my.is_loggable(self, True)

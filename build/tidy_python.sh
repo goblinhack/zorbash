@@ -526,8 +526,8 @@ do
       unused_flag40 \
       unused_flag41 \
       unused_flag42 \
-      unused_flag43 \
-      unused_flag44 \
+      gfx_pixelart_reflection \
+      gfx_pixelart_shadow \
       unused_flag48 \
       unused_flag5 \
       unused_flag56 \

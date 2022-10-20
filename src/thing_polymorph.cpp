@@ -44,6 +44,10 @@ void Thing::polymorph(Tpp into)
   verify(MTYPE_THING, this);
   dbg("Polymorgh into: %s", into->name().c_str());
 
+  if (is_monst()) {
+    level->monst_count--;
+  }
+
   tp_id = into->id;
   mytp  = nullptr;
   tp_or_update();
@@ -72,15 +76,22 @@ void Thing::polymorph(Tpp into)
   level_push();
 
   //
+  // Update must occur before level_rejoin as it sets flags like animation.
+  //
+  update();
+
+  //
   // Need to re-enter the level to enable animation.
   //
   level_rejoin();
-
-  update();
 
   on_polymorphed();
   dbg("Polymorphed into: %s", into->name().c_str());
 
   on_born();
   check_all_carried_items_are_owned();
+
+  if (is_monst()) {
+    level->monst_count++;
+  }
 }

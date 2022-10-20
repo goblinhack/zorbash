@@ -781,10 +781,10 @@ bool Thing::matches(const std::string &what)
   if (unused_flag42() && (what == "unused_flag42")) {
     return true;
   }
-  if (unused_flag43() && (what == "unused_flag43")) {
+  if (gfx_pixelart_reflection() && (what == "gfx_pixelart_reflection")) {
     return true;
   }
-  if (unused_flag44() && (what == "unused_flag44")) {
+  if (gfx_pixelart_shadow() && (what == "gfx_pixelart_shadow")) {
     return true;
   }
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) {
@@ -2357,11 +2357,11 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag42") {
     return &Thing::unused_flag42;
   }
-  if (what == "unused_flag43") {
-    return &Thing::unused_flag43;
+  if (what == "gfx_pixelart_reflection") {
+    return &Thing::gfx_pixelart_reflection;
   }
-  if (what == "unused_flag44") {
-    return &Thing::unused_flag44;
+  if (what == "gfx_pixelart_shadow") {
+    return &Thing::gfx_pixelart_shadow;
   }
   if (what == "is_able_to_be_surprised") {
     return &Thing::is_able_to_be_surprised;

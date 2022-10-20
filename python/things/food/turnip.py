@@ -8,6 +8,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.collision_hit_priority(self, 6)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.is_able_to_fall(self, True)
     my.is_able_to_freeze(self, True)

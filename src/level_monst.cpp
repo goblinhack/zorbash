@@ -131,11 +131,23 @@ void tp_monst_add(Tpp tp)
   if (tp->is_biome_swamp()) {
     biomes.push_back(BIOME_SWAMP);
   }
+
+  if (tp->is_swimmer()) {
+    if (! tp->is_shallow_water_swimmer() && ! tp->is_deep_water_swimmer()) {
+      CON("INF: Swimming monster '%s' needs to set shallow and or deep water preferences",
+          tp->text_short_capitalised().c_str());
+    }
+  }
+
   if (tp->is_shallow_water_swimmer()) {
     monst_types.push_back(MONST_TYPE_SHALLOW_WATER);
-  } else if (tp->is_deep_water_swimmer()) {
+  }
+
+  if (tp->is_deep_water_swimmer()) {
     monst_types.push_back(MONST_TYPE_DEEP_WATER);
-  } else {
+  }
+
+  if (! tp->is_shallow_water_swimmer() && ! tp->is_deep_water_swimmer()) {
     monst_types.push_back(MONST_TYPE_NORMAL);
   }
 

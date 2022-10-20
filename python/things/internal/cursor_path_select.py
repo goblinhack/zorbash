@@ -8,6 +8,8 @@ def tp_init(name):
     # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_reflection(self, True)
+    my.gfx_pixelart_shadow(self, True)
     my.is_cursor_path(self, True)
     my.is_floating(self, True)
     my.is_internal(self, True)

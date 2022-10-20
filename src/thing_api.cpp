@@ -1506,16 +1506,16 @@ int Thing::unused_flag42(void)
   return (tp()->unused_flag42());
 }
 
-int Thing::unused_flag43(void)
+int Thing::gfx_pixelart_reflection(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag43());
+  return (tp()->gfx_pixelart_reflection());
 }
 
-int Thing::unused_flag44(void)
+int Thing::gfx_pixelart_shadow(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag44());
+  return (tp()->gfx_pixelart_shadow());
 }
 
 int Thing::is_able_to_be_surprised(void)

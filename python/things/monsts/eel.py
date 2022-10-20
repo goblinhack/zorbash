@@ -67,6 +67,7 @@ def tp_init(name, text_long_name):
     my.is_corpse_on_death(self, True)
     my.is_corpse_with_bones(self, True)
     my.is_crushable(self, True)
+    my.is_deep_water_swimmer(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_eater_of_meat(self, True)
     my.is_hittable(self, True)
@@ -81,6 +82,7 @@ def tp_init(name, text_long_name):
     my.is_shallow_water_swimmer(self, True)
     my.is_soft(self, True)
     my.is_submerged(self, True)
+    my.is_swimmer(self, True)
     my.is_temperature_sensitive(self, True)
     my.is_tickable(self, True)
     my.move_speed(self, 50)
@@ -104,7 +106,7 @@ def tp_init(name, text_long_name):
     my.text_short_description(self, "An eel.")
     my.thing_size(self, my.THING_SIZE_TINY)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_depth(self, my.MAP_DEPTH_FLOOR)
+    my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 

@@ -85,6 +85,9 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
     maxy = dmap_start.y;
   }
 
+  //
+  // The border is to allow for planning around obstacles at the edge of our vision.
+  //
   auto border = 4;
   minx -= border;
   miny -= border;
@@ -171,6 +174,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   for (auto i : result.path) {
     goal_path_str += " " + i.to_string();
   }
+
   dbg("AI: created path %s", goal_path_str.c_str());
   TRACE_AND_INDENT();
 
@@ -210,7 +214,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
 
 bool Thing::ai_choose_wander(point &nh)
 {
-  dbg("AI: choose wander dest");
+  dbg("AI: choose wander dest (curr at %d,%d)", curr_at.x, curr_at.y);
   TRACE_AND_INDENT();
 
   if (! maybe_aip()) {
@@ -285,8 +289,16 @@ bool Thing::ai_wander(void)
   TRACE_AND_INDENT();
 
   if (! is_moveable()) {
-    dbg("No cannot move");
+    dbg("AI: wander, no cannot move");
     return false;
+  }
+
+  if (is_monst()) {
+    if (ai_tried_to_wander) {
+      dbg("AI: wander, no already tried to wander");
+      return false;
+    }
+    ai_tried_to_wander = true;
   }
 
   //
@@ -295,13 +307,13 @@ bool Thing::ai_wander(void)
   clear_move_path("AI: wander");
 
   if (ai_blocked_completely()) {
-    dbg("Blocked on all sides, try escape");
+    dbg("AI: wander, blocked on all sides, try escape");
     if (ai_escape()) {
       return true;
     }
 
     if (is_able_to_jump()) {
-      dbg("Blocked on all sides, try jumping");
+      dbg("AI: wander, blocked on all sides, try jumping");
       if (health() < health_max() / 5) {
         //
         // May jump into something bad out of desperation
@@ -320,7 +332,7 @@ bool Thing::ai_wander(void)
   }
 
   if (ai_blocked()) {
-    dbg("Blocked on all sides except current pos, try jumping");
+    dbg("AI: wander, blocked on all sides except current pos, try jumping");
     if (is_able_to_jump()) {
       //
       // May jump into something bad out of desperation
@@ -340,7 +352,9 @@ bool Thing::ai_wander(void)
     return false;
   }
 
-  dbg("AI: wander");
+  dbg("AI: wander tries");
+  TRACE_AND_INDENT();
+
   auto tries = THING_AI_WANDER_TRIES;
   while (tries-- > 0) {
     point nh;

@@ -33,7 +33,12 @@ bool Thing::too_far_from_mob(void)
     return false;
   }
 
-  return distance(curr_at, mob->curr_at) > distance_mob_max_float();
+  auto m = distance_mob_max_float();
+  if (! m) {
+    err("distance_mob_max() is not set for thing");
+  }
+
+  return distance(curr_at, mob->curr_at) > m;
 }
 
 bool Thing::too_far_from_mob(point p)
@@ -43,7 +48,12 @@ bool Thing::too_far_from_mob(point p)
     return false;
   }
 
-  return distance(p, mob->curr_at) > distance_mob_max_float();
+  auto m = distance_mob_max_float();
+  if (! m) {
+    err("distance_mob_max() is not set for thing");
+  }
+
+  return distance(p, mob->curr_at) > m;
 }
 
 bool Thing::too_far_from_mob(point p, float delta)
@@ -53,7 +63,12 @@ bool Thing::too_far_from_mob(point p, float delta)
     return false;
   }
 
-  return distance(p, mob->curr_at) > distance_mob_max_float() + delta;
+  auto m = distance_mob_max_float();
+  if (! m) {
+    err("distance_mob_max() is not set for thing");
+  }
+
+  return distance(p, mob->curr_at) > m + delta;
 }
 
 Thingp Thing::top_mob(void)

@@ -336,6 +336,7 @@ public:
   uint64_t inited_tiles          : 1 {};
   uint64_t has_external_particle : 1 {}; // current in motion particle
   uint64_t has_internal_particle : 1 {}; // current in motion particle
+  uint64_t ai_tried_to_wander    : 1 {}; // tried to wander
 #ifdef ENABLE_DEBUG_THING_SER
   std::string debug_str;
 #endif
@@ -1134,10 +1135,12 @@ public:
   int gfx_pixelart_health_bar_autohide(void);
   int gfx_pixelart_health_bar_only_when_awake(void);
   int gfx_pixelart_health_bar_shown(void);
+  int gfx_pixelart_reflection(void);
   int gfx_pixelart_shadow_long(void);
   int gfx_pixelart_shadow_short(void);
   int gfx_pixelart_shadow_solid(void);
   int gfx_pixelart_shadow_very_short(void);
+  int gfx_pixelart_shadow(void);
   int gfx_pixelart_show_asleep_anim(void);
   int gfx_pixelart_shown_in_bg(void);
   int gfx_pixelart_show_outlined(void);
@@ -1981,8 +1984,6 @@ public:
   int unused_flag40(void);
   int unused_flag41(void);
   int unused_flag42(void);
-  int unused_flag43(void);
-  int unused_flag44(void);
   int unused_flag48(void);
   int unused_flag4(void);
   int unused_flag56(void);

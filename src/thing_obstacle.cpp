@@ -94,17 +94,25 @@ bool Thing::collision_obstacle(Thingp it)
   }
 
   //
-  // Limit eels and krakens to water. Eels can swim anywhere, but krakens are limited to the deep...
+  // Limit krakens to the depths, but allow eels and giant_pirhanas free roam.
   //
   if (is_swimmer()) {
-    if (! level->is_water(it->curr_at)) {
-      return true;
-    }
-  }
-
-  if (is_deep_water_swimmer()) {
-    if (! level->is_deep_water(it->curr_at)) {
-      return true;
+    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+      if (! level->is_water(it->curr_at)) {
+        return true;
+      }
+    } else if (is_deep_water_swimmer()) {
+      if (! level->is_deep_water(it->curr_at)) {
+        return true;
+      }
+    } else if (is_shallow_water_swimmer()) {
+      if (! level->is_shallow_water(it->curr_at)) {
+        return true;
+      }
+    } else {
+      if (! level->is_water(it->curr_at)) {
+        return true;
+      }
     }
   }
 
@@ -281,12 +289,25 @@ bool Thing::ai_obstacle(Thingp it)
   }
 
   //
-  // Limit eels and krakens to water. Eels can swim anywhere, but krakens are limited to the deep...
-  // However allow krakens to see into the shallow water.
+  // Limit krakens to the depths, but allow eels and giant_pirhanas free roam.
   //
   if (is_swimmer()) {
-    if (! level->is_water(it->curr_at)) {
-      return true;
+    if (is_deep_water_swimmer() && is_shallow_water_swimmer()) {
+      if (! level->is_water(it->curr_at)) {
+        return true;
+      }
+    } else if (is_deep_water_swimmer()) {
+      if (! level->is_deep_water(it->curr_at)) {
+        return true;
+      }
+    } else if (is_shallow_water_swimmer()) {
+      if (! level->is_shallow_water(it->curr_at)) {
+        return true;
+      }
+    } else {
+      if (! level->is_water(it->curr_at)) {
+        return true;
+      }
     }
   }
 
