@@ -29,11 +29,12 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
     }
   }
 
+  auto owner = top_owner();
+
   //
   // If this thing has an owner, sync the anim tiles so the weapon moves as the player does.
   //
   if (gfx_pixelart_anim_synced_with_owner()) {
-    auto owner = top_owner();
     if (owner) {
       if (owner->is_sleeping) {
 #ifdef DEBUG_ANIM
@@ -533,12 +534,6 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
     return;
   }
 
-#ifdef DEBUG_ANIM
-  if (is_debug_type()) {
-    con("Set %s", tile_name(tile).c_str());
-  }
-#endif
-
   tile_curr = tile->global_index;
 
   //
@@ -553,12 +548,17 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
   //
   // Quicker anims if offscreen
   //
-  if (is_offscreen) {
+  if (is_offscreen || (owner && owner->is_offscreen)) {
     delay = 0;
   }
 
   if (! ts_next_frame) {
     ts_t delay = tile_delay_ms(tile);
+
+    if (is_offscreen || (owner && owner->is_offscreen)) {
+      delay = 0;
+    }
+
     if (delay) {
       ts_next_frame = time_game_ms_cached() + (non_pcg_rand() % delay) / 2;
     } else {
@@ -568,15 +568,12 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
     ts_next_frame = time_game_ms_cached() + delay;
   }
 
-  //
-  // For water we don't care if the frames change really fast. We just want to avoid pauses where all the water stops
-  // animating.
-  //
-  if (g_opt_ascii) {
-    if (is_water()) {
-      ts_next_frame = time_game_ms_cached() + (non_pcg_rand() % delay);
-    }
+#ifdef DEBUG_ANIM
+  if (is_debug_type()) {
+    con("Set %s now %d ts_next_frame %d delay %d", tile_name(tile).c_str(), time_game_ms_cached(), ts_next_frame,
+        delay);
   }
+#endif
 
   if (is_end_of_anim) {
     if (is_dead_on_end_of_anim) {

@@ -151,9 +151,6 @@ bool Game::tick_end(void)
   }
 
   CON("-");
-  if (level->player) {
-    level->player->con("at");
-  }
 
   if (level) {
     level->update();

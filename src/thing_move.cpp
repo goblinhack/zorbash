@@ -54,12 +54,10 @@ void Thing::move_finish(void)
 {
   TRACE_NO_INDENT();
 
-  if (! g_opt_ascii) {
-    if (! is_moving) {
-      return;
-    }
-    is_moving = false;
+  if (! is_moving) {
+    return;
   }
+  is_moving = false;
 
   //
   // Set this so that we can pick up items again at the last location.
@@ -596,6 +594,8 @@ void Thing::update_interpolated_position(void)
     step = 1;
   }
 
+  IF_DEBUG2 { step = 1; }
+
   auto p = top_owner();
   if ((p && p->is_falling) || is_falling) {
     if (z_depth == MAP_DEPTH_LIQUID) {
@@ -737,6 +737,15 @@ void Thing::move_to(point to)
   move_set_dir_from_dest_or_delta(delta);
 
   //
+  // If in debug mode, speed everything up
+  //
+  IF_DEBUG2
+  {
+    update_pos(to, true);
+    return;
+  }
+
+  //
   // As we have no smooth movement in ascii mode, just move immediately
   //
   if (g_opt_ascii) {
@@ -758,6 +767,15 @@ void Thing::move_delta(point delta)
   //
   if (is_changing_level || is_hidden || is_falling || is_waiting_to_ascend_dungeon || is_waiting_to_descend_sewer ||
       is_waiting_to_descend_dungeon || is_waiting_to_ascend_sewer || is_jumping) {
+    return;
+  }
+
+  //
+  // If in debug mode, speed everything up
+  //
+  IF_DEBUG2
+  {
+    update_pos(curr_at + delta, true);
     return;
   }
 
