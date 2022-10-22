@@ -159,6 +159,11 @@ bool Thing::drop(Thingp what, Thingp target, bool stolen)
     dbg("Dropped %s", what->to_short_string().c_str());
 
     if (is_player()) {
+      //
+      // We need to tick here, to ensure that log messages do not get filtered.
+      //
+      game->tick_begin("drop item");
+
       if (! is_dead_or_dying()) {
         msg("You drop %s.", what->text_the().c_str());
         sound_play("drop");
