@@ -236,13 +236,13 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       game->change_state(Game::STATE_NORMAL, "key press");
       auto what = level->inventory_get();
       if (what) {
-        if (player && player->drop(what)) {
-          game->tick_begin("drop");
-        }
+        player->drop(what);
       } else {
-        TOPCON("Nothing to drop.");
-        wid_inventory_init();
-        game->set_request_to_remake_rightbar();
+        if (player->carrying_anything()) {
+          TOPCON("Select an item to drop.");
+        } else {
+          TOPCON("Nothing to drop.");
+        }
         return true;
       }
     }
