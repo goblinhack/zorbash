@@ -14,6 +14,30 @@ def init(self, name):
     delay = 20
     my.tile(self,
             ascii_fg_char="/", ascii_fg_col_name="cyan",
+            tile=name + "_left.1", delay_ms=delay, is_dir_none=True)
+    my.tile(self,
+            ascii_fg_char="|", ascii_fg_col_name="cyan",
+            tile=name + "_left.2", delay_ms=delay, is_dir_none=True)
+    my.tile(self,
+            ascii_fg_char="\\", ascii_fg_col_name="cyan",
+            tile=name + "_left.3", delay_ms=delay, is_dir_none=True)
+    my.tile(self,
+            ascii_fg_char="-", ascii_fg_col_name="cyan",
+            tile=name + "_left.4", delay_ms=delay, is_dir_none=True)
+    my.tile(self,
+            ascii_fg_char="/", ascii_fg_col_name="cyan",
+            tile=name + "_left.5", delay_ms=delay, is_dir_none=True)
+    my.tile(self,
+            ascii_fg_char="|", ascii_fg_col_name="cyan",
+            tile=name + "_left.6",
+            delay_ms=delay,
+            is_dir_none=True,
+            is_end_of_anim=True,
+            is_dead_on_end_of_anim=True)
+
+    delay = 20
+    my.tile(self,
+            ascii_fg_char="/", ascii_fg_col_name="cyan",
             tile=name + "_left.1", delay_ms=delay, is_dir_left=True)
     my.tile(self,
             ascii_fg_char="|", ascii_fg_col_name="cyan",
