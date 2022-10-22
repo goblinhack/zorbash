@@ -555,6 +555,11 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   }
 
   //
+  // Speed up offscreen animation?
+  //
+  bool speedup = false;
+
+  //
   // Quicker anims if offscreen if the game tick is currently running.
   //
   if (game->things_are_moving) {
@@ -563,7 +568,22 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     // need to wait for these things.
     //
     if (! is_visible_to_player || (owner && ! owner->is_visible_to_player)) {
-      delay = 1;
+      //
+      // This will speedup the animation such that the level tick will end sooner for
+      // things that it is waiting on. i.e. moving or falling or dying or resurrecting
+      // or attack animations.
+      //
+      // For other things like grass, they have slow animations anyway and will not
+      // be lagging behind.
+      //
+      speedup = true;
+
+      //
+      // If we are waiting on this thing specifically, speed up the anim.
+      //
+      if (is_waiting) {
+        delay = 1;
+      }
     }
   }
 
@@ -582,7 +602,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     // If we are lagging behind and the next frame should also have finished, then
     // jump past this frame.
     //
-    if ((delay > 1) && (ts_next_frame + delay < time_game_ms_cached())) {
+    if ((speedup || (delay > 0)) && (ts_next_frame + delay < time_game_ms_cached())) {
       ts_next_frame += delay;
       *next_frame_please = true;
 #ifdef DEBUG_ANIM
