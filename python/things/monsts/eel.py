@@ -106,7 +106,7 @@ def tp_init(name, text_long_name):
     my.text_short_description(self, "An eel.")
     my.thing_size(self, my.THING_SIZE_TINY)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_depth(self, my.MAP_DEPTH_FLOOR2)
+    my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
