@@ -575,6 +575,11 @@ bool wid_rightbar_ascii_create(void)
         point br = make_point(width - 1, y_at);
         wid_set_pos(w, tl, br);
         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
+
+        if (slot == game->inventory_highlight_slot) {
+          wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
+        }
+
         wid_set_int_context(w, slot);
         wid_set_text_lhs(w, true);
 
