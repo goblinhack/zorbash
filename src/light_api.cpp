@@ -30,7 +30,7 @@ uint8_t Level::is_currently_pixelart_raycast_lit_no_check(const point p)
 //
 // Note light fades
 //
-uint8_t Level::is_lit_recently(const int x, const int y)
+uint8_t Level::is_lit_recently_pixelart_raycast(const int x, const int y)
 {
   if (unlikely(is_oob(x, y))) {
     return false;

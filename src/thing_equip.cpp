@@ -488,7 +488,7 @@ bool Thing::equip(Thingp item, int equip)
     } else {
       msg("You put on %s.", item->text_the().c_str());
     }
-  } else if (is_monst() && ! is_offscreen) {
+  } else if (is_monst() && is_visible_to_player) {
     if (level->player && (level->tick_created < game->tick_current)) {
       if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
         msg("%s wields %s.", text_The().c_str(), item->text_the().c_str());

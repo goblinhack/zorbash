@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
@@ -316,6 +317,20 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   if (is_player() || is_monst()) {
     gold_value();
+  }
+
+  //
+  // Initially visible?
+  //
+  if (get_no_check(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+    is_visible_to_player = true;
+  }
+
+  //
+  // Copy the owner offscreen status.
+  //
+  if (owner) {
+    is_visible_to_player = owner->is_visible_to_player;
   }
 
   //

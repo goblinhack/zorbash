@@ -830,11 +830,7 @@ public:
   uint8_t is_heavy(const point p);
   uint8_t is_key(const int x, const int y);
   uint8_t is_key(const point p);
-  uint8_t is_lit_ever(const int x, const int y);
-  uint8_t is_lit_ever(const point p);
-  uint8_t is_lit_ever_no_check(const int x, const int y);
-  uint8_t is_lit_ever_no_check(const point p);
-  uint8_t is_lit_recently(const int x, const int y);
+  uint8_t is_lit_recently_pixelart_raycast(const int x, const int y);
   uint8_t is_mob(const int x, const int y);
   uint8_t is_mob(const point p);
   uint8_t is_monst(const int x, const int y);

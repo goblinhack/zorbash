@@ -350,7 +350,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_jumping                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_key_in_lock                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_moving                                    ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_offscreen                                 ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_visible_to_player                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_open                                      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrected                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrecting                              ? 1LLU : 0LLU) << shift; shift++;

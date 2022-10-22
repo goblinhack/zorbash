@@ -1066,8 +1066,13 @@ void Thing::blit_pixelart(int fbo)
   point blit_tl, blit_br;
   Tilep tile = {};
 
-  is_offscreen = false;
-  frame_count  = game->frame_count;
+  //
+  // If currently being displayed and is visible, update the frame count so we can tell
+  // what is currently visible and on screen.
+  //
+  if (get_no_check(level->can_see_currently.can_see, curr_at.x, curr_at.y)) {
+    frame_count = game->frame_count;
+  }
 
   //
   // If blitting to the background, ignore scroll

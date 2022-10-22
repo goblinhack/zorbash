@@ -347,16 +347,12 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   point dest(src.x + dx * tw, src.y + dy * th);
   auto  duration = THING_JUMP_SPEED_MS;
 
-  //
-  // Ascii mode, jump is immediate
-  //
-  if (g_opt_ascii) {
+  if (g_opt_ascii || ! is_visible_to_player) {
+    //
+    // Ascii mode, jump is immediate
+    //
     duration = 0;
   } else {
-    if (is_offscreen) {
-      duration = 0;
-    }
-
     //
     // Check the number of things jumping is not slowing the game too much
     //
@@ -420,10 +416,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto w  = level->thing_find(id);
       if (w) {
         w->move_to_immediately(curr_at);
-        if (! g_opt_ascii) {
+        if (g_opt_ascii || ! is_visible_to_player) {
           //
-          // Ascii mode, jump is imdediate
+          // Ascii mode, jump is immediate
           //
+        } else {
           w->is_jumping = true;
 
           auto callback = std::bind(&Thing::visible, this);
@@ -443,10 +440,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto w  = level->thing_find(equip_id_use_anim(e));
       if (w) {
         w->move_to_immediately(curr_at);
-        if (! g_opt_ascii) {
+        if (g_opt_ascii || ! is_visible_to_player) {
           //
-          // Ascii mode, jump is imdediate
+          // Ascii mode, jump is immediate
           //
+        } else {
           w->is_jumping = true;
 
           //
@@ -472,7 +470,11 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     auto w  = level->thing_find(id);
     if (w) {
       w->move_to_immediately(curr_at);
-      if (! g_opt_ascii) {
+      if (g_opt_ascii || ! is_visible_to_player) {
+        //
+        // Ascii mode, jump is immediate
+        //
+      } else {
         w->is_jumping = true;
       }
       if (is_player()) {

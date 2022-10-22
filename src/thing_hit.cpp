@@ -1353,16 +1353,21 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   // Splat graphics
   //
   if (is_monst() || is_player()) {
-    if (is_green_blooded()) {
-      level->thing_new(tp_random_green_splatter()->name(), curr_at);
-    } else if (is_red_blooded()) {
-      level->thing_new(tp_random_red_splatter()->name(), curr_at);
-    } else if (is_undead()) {
-      level->thing_new(tp_random_green_splatter()->name(), curr_at);
-    } else {
-      //
-      // Nothing for gargoyles being attacked.
-      //
+    //
+    // If offscreen, avoid as we never see it.
+    //
+    if (is_visible_to_player) {
+      if (is_green_blooded()) {
+        level->thing_new(tp_random_green_splatter()->name(), curr_at);
+      } else if (is_red_blooded()) {
+        level->thing_new(tp_random_red_splatter()->name(), curr_at);
+      } else if (is_undead()) {
+        level->thing_new(tp_random_green_splatter()->name(), curr_at);
+      } else {
+        //
+        // Nothing for gargoyles being attacked.
+        //
+      }
     }
   }
 
@@ -1391,11 +1396,13 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
       //
       // Monster natural attack
       //
-      auto claws = real_hitter->tp()->gfx_anim_use();
-      if (claws != "") {
-        auto nat_att_effect = level->thing_new(claws, curr_at);
-        if (nat_att_effect->bounce(0.1, 0.1, 100, 3)) {
-          nat_att_effect->move_set_dir_from_delta(delta);
+      if (real_hitter->is_visible_to_player) {
+        auto claws = real_hitter->tp()->gfx_anim_use();
+        if (claws != "") {
+          auto nat_att_effect = level->thing_new(claws, curr_at, real_hitter);
+          if (nat_att_effect->bounce(0.1, 0.1, 100, 3)) {
+            nat_att_effect->move_set_dir_from_delta(delta);
+          }
         }
       }
 

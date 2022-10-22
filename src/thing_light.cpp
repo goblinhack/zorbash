@@ -2,8 +2,10 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
+#include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
@@ -157,6 +159,55 @@ int Thing::light_distance_update(void)
 
   if (is_player()) {
     level->fov_calculate(this, &level->can_see_currently, &level->can_see_ever, curr_at.x, curr_at.y, light_dist);
+
+    if (is_debug_type()) {
+      con("This is what the player can see:");
+      con("  @  - you/it");
+      con("  L  - walked and can see currently");
+      con("  O  - walked and have seen ever");
+      con("  l  - can see currently");
+      con("  o  - have seen ever");
+
+      for (int y = 0; y < MAP_HEIGHT; y++) {
+        std::string s;
+        for (int x = 0; x < MAP_WIDTH; x++) {
+          if ((x == (int) curr_at.x) && (y == (int) curr_at.y)) {
+            s += "@";
+            s += " ";
+            continue;
+          }
+
+          if (level->is_obs_wall_or_door(x, y)) {
+            if (get(level->can_see_currently.can_see, x, y)) {
+              s += "x";
+            } else if (get(level->can_see_ever.can_see, x, y)) {
+              s += "x";
+            } else {
+              s += "x";
+            }
+          } else if (level->is_floor(x, y)) {
+            if (get(level->can_see_currently.can_see, x, y)) {
+              s += "l";
+            } else if (get(level->can_see_ever.can_see, x, y)) {
+              s += "o";
+            } else {
+              s += ".";
+            }
+          } else {
+            s += " ";
+          }
+        }
+        con("%s", s.c_str());
+      }
+    }
+
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t)
+    {
+      if (get_no_check(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
+        t->is_visible_to_player = true;
+      }
+    }
+    FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
   }
 
   return light_dist;

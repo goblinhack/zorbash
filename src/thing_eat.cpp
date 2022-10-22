@@ -245,7 +245,7 @@ bool Thing::consume(Thingp victim)
             level->thing_new(tp_random_green_splatter()->name(), curr_at);
           }
 
-          if (! victim->is_offscreen) {
+          if (victim->is_visible_to_player) {
             if (victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
                 if (victim->is_burnt) {
@@ -309,7 +309,7 @@ bool Thing::consume(Thingp victim)
             level->thing_new(tp_random_green_splatter()->name(), curr_at);
           }
 
-          if (! victim->is_offscreen) {
+          if (victim->is_visible_to_player) {
             if (victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
                 if (victim->is_burnt) {

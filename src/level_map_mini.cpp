@@ -131,7 +131,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         //
         bool show_monst = update_map_mini_should_show_monst(x, y);
 
-        if (is_lit_recently(x, y) && show_monst) {
+        if (is_lit_recently_pixelart_raycast(x, y) && show_monst) {
           c = RED;
         } else if (is_mob(x, y)) {
           c = PINK;
@@ -187,7 +187,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = BLACK;
         }
 
-        if (! is_lit_recently(x, y)) {
+        if (! is_lit_recently_pixelart_raycast(x, y)) {
           c.r /= 2;
           c.g /= 2;
           c.b /= 2;
@@ -400,7 +400,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         }
 
         if (! no_fade) {
-          if (! is_lit_recently(x, y)) {
+          if (! is_lit_recently_pixelart_raycast(x, y)) {
             c.r /= 2;
             c.g /= 2;
             c.b /= 2;

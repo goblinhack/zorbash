@@ -196,6 +196,11 @@ void Thing::owner_set(Thingp owner)
   on_owner_add(owner);
 
   owner->check_all_carried_maps();
+
+  //
+  // Inherit visibility.
+  //
+  is_visible_to_player = owner->is_visible_to_player;
 }
 
 void Thing::remove_owner(void)

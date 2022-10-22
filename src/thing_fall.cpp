@@ -74,16 +74,12 @@ bool Thing::fall(void)
   const float fall_height = 1;
   auto        duration    = THING_FALL_SPEED_MS;
 
-  //
-  // Ascii mode, fall is immediate
-  //
-  if (g_opt_ascii) {
+  if (g_opt_ascii || ! is_visible_to_player) {
+    //
+    // Ascii mode, fall is immediate
+    //
     duration = 0;
   } else {
-    if (is_offscreen) {
-      duration = 0;
-    }
-
     //
     // Check the number of things jumping is not slowing the game too much
     //

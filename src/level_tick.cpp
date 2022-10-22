@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_array_bounds_check.hpp"
 #include "my_depth.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
@@ -356,10 +357,8 @@ void Level::tick_(void)
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     //
-    // Wait for animation end. Only if the thing is onscreen
+    // Wait for animation end. Only if the thing is onscreen and visible.
     //
-    t->is_offscreen = t->frame_count != game->frame_count;
-
     t->update_interpolated_position();
     t->fall_curr();
 
@@ -399,7 +398,7 @@ void Level::tick_(void)
     //
     // Wait on dying thing?
     //
-    if (t->is_dead_on_end_of_anim() && ! (t->is_dead || t->is_scheduled_for_death || t->is_offscreen)) {
+    if (t->is_dead_on_end_of_anim() && ! (t->is_dead || t->is_scheduled_for_death || ! t->is_visible_to_player)) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
         t->con("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
       }
@@ -428,7 +427,7 @@ void Level::tick_(void)
       auto equip_id = t->equip_id_use_anim(e);
       if (equip_id.ok()) {
         auto w = thing_find(equip_id);
-        if (w && ! (w->is_dead || w->is_scheduled_for_death || w->is_offscreen)) {
+        if (w && ! (w->is_dead || w->is_scheduled_for_death || ! w->is_visible_to_player)) {
           if ((wait_count > wait_count_max) && ! game->things_are_moving) {
             w->con("Waiting on this");
             t->con("This is the owner");

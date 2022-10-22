@@ -229,7 +229,7 @@ public:
   uint64_t is_jumping                                   : 1 {};
   uint64_t is_key_in_lock                               : 1 {}; // key stuck in rusty lock?
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
-  uint64_t is_offscreen                                 : 1 {};
+  uint64_t is_visible_to_player                         : 1 {};
   uint64_t is_open                                      : 1 {};
   uint64_t is_resurrected                               : 1 {}; // has finished resurrecting
   uint64_t is_resurrecting                              : 1 {}; // is currently resurrecing
@@ -2211,7 +2211,7 @@ public:
   void ai_get_next_hop(void);
   void ai_log(const std::string &msg);
   void ai_log(const std::string &msg, Thingp it);
-  void animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles);
+  void animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool *next_frame_please);
   void animate(void);
   void avoid_tick(void);
   void awake(void);

@@ -10,7 +10,7 @@
 
 #undef DEBUG_ANIM
 
-void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
+void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool *next_frame_please)
 {
   TRACE_NO_INDENT();
 
@@ -542,30 +542,56 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles)
   ts_t delay = tile_delay_ms(tile);
 
   if (delay) {
+    //
+    // The delay until the next anim frame; with some jitter.
+    //
     delay += (non_pcg_rand() % delay) / 2;
-  }
-
-  //
-  // Quicker anims if offscreen
-  //
-  if (is_offscreen || (owner && owner->is_offscreen)) {
-    delay = 0;
-  }
-
-  if (! ts_next_frame) {
-    ts_t delay = tile_delay_ms(tile);
-
-    if (is_offscreen || (owner && owner->is_offscreen)) {
-      delay = 0;
-    }
-
-    if (delay) {
-      ts_next_frame = time_game_ms_cached() + (non_pcg_rand() % delay) / 2;
-    } else {
-      ts_next_frame = time_game_ms_cached();
-    }
   } else {
+    //
+    // This is for things like doors that do not need to look for their next frame
+    // in a spin loop.
+    //
+    delay = 1000;
+  }
+
+  //
+  // Quicker anims if offscreen if the game tick is currently running.
+  //
+  if (game->things_are_moving) {
+    //
+    // But only for things we cannot see. This speeds up the game tick as we do not
+    // need to wait for these things.
+    //
+    if (! is_visible_to_player || (owner && ! owner->is_visible_to_player)) {
+      delay = 1;
+    }
+  }
+
+  //
+  // First frame?
+  //
+  if (! ts_next_frame) {
+    //
+    // This is the first frame
+    //
     ts_next_frame = time_game_ms_cached() + delay;
+  } else {
+    //
+    // This is to get the next frame.
+    //
+    // If we are lagging behind and the next frame should also have finished, then
+    // jump past this frame.
+    //
+    if ((delay > 1) && (ts_next_frame + delay < time_game_ms_cached())) {
+      ts_next_frame += delay;
+      *next_frame_please = true;
+#ifdef DEBUG_ANIM
+      con("Too slow %s now %d next %d delay %d", tile_name(tile).c_str(), time_game_ms_cached(), ts_next_frame,
+          delay);
+#endif
+    } else {
+      ts_next_frame = time_game_ms_cached() + delay;
+    }
   }
 
 #ifdef DEBUG_ANIM
@@ -670,7 +696,11 @@ void Thing::animate(void)
   //
   // Choose a new tile
   //
-  animate_choose_tile(tmap, tiles);
+  bool next_frame_please = true;
+  while (next_frame_please) {
+    next_frame_please = false;
+    animate_choose_tile(tmap, tiles, &next_frame_please);
+  }
 
   if (tile_curr) {
     return;
