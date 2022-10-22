@@ -14,9 +14,9 @@ void Thing::level_pop(void)
   }
   is_attached = false;
 
-#if 1
+#if 0
   if (is_torch()) {
-    con("push at %d,%d", last_attached.x, last_attached.y);
+    con("pop at %d,%d", last_attached.x, last_attached.y);
   }
 #endif
 

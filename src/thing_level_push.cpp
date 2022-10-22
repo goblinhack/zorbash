@@ -19,7 +19,7 @@ void Thing::level_push(void)
   is_attached   = true;
   last_attached = point(mx, my);
 
-#if 1
+#if 0
   if (is_torch()) {
     con("push at %d,%d", last_attached.x, last_attached.y);
   }
