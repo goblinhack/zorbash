@@ -1,6 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - skeleton surprised when should not be and improve anim                                                                                     -->
+<!-- - should not be able to jump onto a barrel                                                                                                   -->
 <!-- - check water interacting with fire/lava makes steam or basalt                                                                               -->
 <!-- - level num wrong in hiscores                                                                                                                -->
 <!-- - jump noise is delayed - check with non quickstart                                                                                          -->
