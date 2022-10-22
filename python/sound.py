@@ -10,7 +10,7 @@ my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_a.wav", name="li
 my.sound_load(volume=1.0, file="data/sounds/abilities/lightning_b.wav", name="lightning_b")
 my.sound_load(volume=1.0, file="data/sounds/abilities/teleport.wav", name="teleport")
 my.sound_load(
-    volume=0.25,
+    volume=0.50,
     file="data/sounds/impacts/437653__dersuperanton__moan-male-beat-punch.wav",
     name="player_punch",
 )
@@ -25,22 +25,22 @@ my.sound_load(
     name="door_open",
 )
 my.sound_load(
-    volume=0.55,
+    volume=0.15,
     file="data/sounds/impacts/578808__nomiqbomi__fall-3.wav",
     name="fall",
 )
 my.sound_load(
-    volume=0.15,
+    volume=0.60,
     file="data/sounds/impacts/59992__qubodup__swosh-sword-swing.wav",
     name="sword_swing1",
 )
 my.sound_load(
-    volume=0.05,
+    volume=0.80,
     file="data/sounds/impacts/268227__xxchr0nosxx__swing.wav",
     name="sword_swing2",
 )
 my.sound_load(
-    volume=0.05,
+    volume=1.00,
     file="data/sounds/impacts/507466__danjocross__clean-fast-swoosh.wav",
     name="sword_swing3",
 )
