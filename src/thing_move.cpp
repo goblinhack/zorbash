@@ -587,15 +587,6 @@ void Thing::update_interpolated_position(void)
     }
   }
 
-  //
-  // As we have no smooth movement in ascii mode, just move immediately
-  //
-  if (g_opt_ascii) {
-    step = 1;
-  }
-
-  IF_DEBUG2 { step = 1; }
-
   auto p = top_owner();
   if ((p && p->is_falling) || is_falling) {
     if (z_depth == MAP_DEPTH_LIQUID) {
@@ -745,14 +736,7 @@ void Thing::move_to(point to)
     return;
   }
 
-  //
-  // As we have no smooth movement in ascii mode, just move immediately
-  //
-  if (g_opt_ascii) {
-    update_pos(to, true);
-  } else {
-    update_pos(to, false);
-  }
+  update_pos(to, false);
 }
 
 void Thing::move_delta(point delta)
@@ -770,23 +754,7 @@ void Thing::move_delta(point delta)
     return;
   }
 
-  //
-  // If in debug mode, speed everything up
-  //
-  IF_DEBUG2
-  {
-    update_pos(curr_at + delta, true);
-    return;
-  }
-
-  //
-  // As we have no smooth movement in ascii mode, just move immediately
-  //
-  if (g_opt_ascii) {
-    update_pos(curr_at + delta, true);
-  } else {
-    update_pos(curr_at + delta, false);
-  }
+  update_pos(curr_at + delta, false);
 }
 
 void Thing::move_to_immediately(point to)

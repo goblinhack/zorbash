@@ -154,6 +154,13 @@ bool Game::tick_end(void)
 
   if (level) {
     level->update();
+
+    //
+    // This is to update things that are now onscreen at the end of the tick.
+    //
+    if (level->player) {
+      level->player->light_distance_update();
+    }
 #if 0
     //
     // For debugging consistent randomness
