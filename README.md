@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - fix animation delays                                                                                                                       -->
-<!-- - pirhanas getting stick                                                                                                                     -->
 <!-- - skeleton surprised when should not be and improve anim                                                                                     -->
 <!-- - check water interacting with fire/lava makes steam or basalt                                                                               -->
 <!-- - level num wrong in hiscores                                                                                                                -->
