@@ -92,7 +92,7 @@ void Level::handle_input_events(void)
         display_pixelart_external_particles();
         tick();
       } while (game->things_are_moving);
-      dbg("Fast forward end ");
+      dbg("Fast forward end");
     }
 
     game->request_player_move = 0;

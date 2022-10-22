@@ -6,6 +6,7 @@ def melt(me, x, y):
     if my.thing_is_dead(me):
         return
 
+    my.thing_msg(me, "The ice melts.")
     for dx in range(-1, 2):
         for dy in range(-1, 2):
             my.spawn_at(me, "water", x + dx, y + dy)

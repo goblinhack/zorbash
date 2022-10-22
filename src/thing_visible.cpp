@@ -30,7 +30,9 @@ void Thing::visible(void)
     }
   }
 
+  level_pop();
   is_hidden = false;
+  level_push();
 
   //
   // Reveal the weapon again too.

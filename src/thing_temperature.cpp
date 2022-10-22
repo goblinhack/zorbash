@@ -21,6 +21,13 @@ void Thing::temperature_tick(void)
       continue;
     }
 
+    //
+    // Without this check a player will heat themselves up ridiculously
+    //
+    if (t == this) {
+      continue;
+    }
+
     if (on_fire_anim_id() == t->id) {
       //
       // You "carry" fire when on fire.
@@ -33,14 +40,14 @@ void Thing::temperature_tick(void)
       //
       // Ignore carried things
       //
-      if (t->immediate_owner() == this) {
+      if (t->top_owner() == this) {
         continue;
       }
 
       //
       // If a bag, ignore the temperature of the carrier.
       //
-      if (immediate_owner() == t) {
+      if (top_owner() == t) {
         continue;
       }
     }
@@ -69,9 +76,9 @@ void Thing::temperature_tick(void)
       location_temp += t->temperature;
       location_temp_set = true;
 
-      IF_DEBUG3
+      IF_DEBUG2
       {
-        dbg3("Location temp now %d due to %s (%d)", location_temp, t->to_short_string().c_str(), t->temperature);
+        dbg("Location temp now %d due to %s (%d)", location_temp, t->to_short_string().c_str(), t->temperature);
       }
 
       if (location_temp > TEMPERATURE_MAX) {
@@ -106,7 +113,7 @@ void Thing::temperature_tick(void)
 
     int delta = (location_temp - thing_temp) / 2;
 
-    if (is_fire() || is_block_of_ice() || is_wall() || is_door() || is_rock()) {
+    if (is_lava() || is_fire() || is_block_of_ice() || is_wall() || is_door() || is_rock()) {
       delta = (location_temp - thing_temp) / 10;
     }
 

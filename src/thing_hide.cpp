@@ -13,7 +13,9 @@ void Thing::hide(void)
     return;
   }
 
+  level_pop();
   is_hidden = true;
+  level_push();
 
   //
   // Hide the weapon too or it just floats in the air.

@@ -14,6 +14,12 @@ void Thing::level_pop(void)
   }
   is_attached = false;
 
+#if 1
+  if (is_torch()) {
+    con("push at %d,%d", last_attached.x, last_attached.y);
+  }
+#endif
+
   auto mx = (int16_t) (int) last_attached.x;
   auto my = (int16_t) (int) last_attached.y;
 

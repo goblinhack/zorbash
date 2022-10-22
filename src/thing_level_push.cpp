@@ -19,17 +19,25 @@ void Thing::level_push(void)
   is_attached   = true;
   last_attached = point(mx, my);
 
-#if 0
+#if 1
   if (is_torch()) {
     con("push at %d,%d", last_attached.x, last_attached.y);
   }
 #endif
+
   //
   // Don't have things like lasers or projectiles briefly setting fire on a tile
   // as that will cause interactions. And they really are brief, not long lived
   // like actual fire.
   //
   if (is_tmp_thing()) {
+    return;
+  }
+
+  //
+  // We don't want torches for example to act as if they are on the level/
+  //
+  if (is_hidden) {
     return;
   }
 
@@ -284,14 +292,12 @@ void Thing::level_push(void)
     }
   }
 
-  if (is_lava() || is_fire()) {
-    level->is_heatmap_valid = false;
+  if (gfx_pixelart_shown_in_bg()) {
+    level->ts_redraw_bg = time_ms_cached() + 1000;
   }
 
-  if (! is_hidden) {
-    if (gfx_pixelart_shown_in_bg()) {
-      level->ts_redraw_bg = time_ms_cached() + 1000;
-    }
+  if (is_lava() || is_fire()) {
+    level->is_heatmap_valid = false;
   }
 
   if (gfx_pixelart_shown_in_bg()) {

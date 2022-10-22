@@ -199,7 +199,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("wand_ice", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);
@@ -287,8 +287,8 @@ void Game::place_player(void)
       }
       if (0) {
         // level->thing_new("skeleton", point(x + 1, y));
-        level->thing_new("lava", point(x - 2, y));
-        level->thing_new("lava", point(x - 3, y));
+        level->thing_new("lava", point(x + 2, y + 1));
+        level->thing_new("block_of_ice", point(x + 2, y + 1));
       }
       // level->thing_new("vampire_rose_stem", point(x, y + 1));
       // level->thing_new("fire", point(x - 4, y + 5));
