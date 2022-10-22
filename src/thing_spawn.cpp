@@ -411,6 +411,29 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
       }
 
       //
+      // Monster packs are not declared monsters until they polymorph. Until that
+      // point make sure the members do not overlap.
+      //
+      bool skip = false;
+      if (tpp->is_monst_pack()) {
+        FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
+        {
+          if (it->is_monst()) {
+            skip = true;
+            break;
+          }
+          if (! it->is_monst_pack()) {
+            skip = true;
+            break;
+          }
+        }
+        FOR_ALL_THINGS_END()
+      }
+      if (skip) {
+        continue;
+      }
+
+      //
       // For pack spawning make sure all followers can see each other
       //
       if (is_able_to_follow()) {
