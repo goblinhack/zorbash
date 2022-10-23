@@ -41,7 +41,7 @@ def lava_init(name, text_long_name, tiles=[]):
     my.light_color(self, "red")
     my.light_dist(self, 2)
     my.on_death_do(self, "me.on_death()")
-    my.on_idle_tick_freq_dice(self, "1d100:me.on_idle()")
+    my.on_idle_tick_freq_dice(self, "1d200+50:me.on_idle()")
     my.temperature(self, 800)
     my.text_a_or_an(self, "")
     my.text_hits(self, "tickles")
