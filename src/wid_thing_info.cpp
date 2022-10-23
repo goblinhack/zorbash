@@ -196,7 +196,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
   wid_thing_info_add_damage_nat_att(wid_popup_window, t, attack_index);
   wid_thing_info_add_damage_melee(wid_popup_window, t, attack_index);
   wid_thing_info_add_damage_poison(wid_popup_window, t, attack_index);
-  wid_thing_info_add_damage_future1(wid_popup_window, t, attack_index);
+  wid_thing_info_add_damage_drown(wid_popup_window, t, attack_index);
   wid_thing_info_add_damage_bite(wid_popup_window, t, attack_index);
   wid_thing_info_add_damage_claw(wid_popup_window, t, attack_index);
   wid_thing_info_add_damage_cold(wid_popup_window, t, attack_index);
@@ -293,7 +293,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     wid_thing_info_add_damage_nat_att(wid_popup_window, t, attack_index);
     wid_thing_info_add_damage_melee(wid_popup_window, t, attack_index);
     wid_thing_info_add_damage_poison(wid_popup_window, t, attack_index);
-    wid_thing_info_add_damage_future1(wid_popup_window, t, attack_index);
+    wid_thing_info_add_damage_drown(wid_popup_window, t, attack_index);
     wid_thing_info_add_damage_bite(wid_popup_window, t, attack_index);
     wid_thing_info_add_damage_claw(wid_popup_window, t, attack_index);
     wid_thing_info_add_damage_cold(wid_popup_window, t, attack_index);
@@ -871,7 +871,7 @@ void Game::wid_thing_info_add_damage_poison(WidPopup *w, Thingp t, int index)
   }
 }
 
-void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t, int index)
+void Game::wid_thing_info_add_damage_drown(WidPopup *w, Thingp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
@@ -879,22 +879,22 @@ void Game::wid_thing_info_add_damage_future1(WidPopup *w, Thingp t, int index)
 
   auto tp = t->tp();
   if (t->is_alive_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
-    auto damage_future1_dice = t->damage_future1_dice();
-    auto min_value           = damage_future1_dice.min_roll();
-    auto max_value           = damage_future1_dice.max_roll();
+    auto damage_drown_dice = t->damage_drown_dice();
+    auto min_value         = damage_drown_dice.min_roll();
+    auto max_value         = damage_drown_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_future1_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future1   %22s", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->damage_drown_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown          %22s", tmp2);
       } else {
         min_value += t->enchant_get();
         max_value += t->enchant_get();
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_future1_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$damage_future1   %22s", tmp2);
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->damage_drown_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown          %22s", tmp2);
       }
       w->log(tmp);
 
-      int chance = (int) (((((float) tp->damage_future1_chance_d1000(index))) / 1000.0) * 100.0);
+      int chance = (int) (((((float) tp->damage_drown_chance_d1000(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);

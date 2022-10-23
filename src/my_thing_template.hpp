@@ -64,7 +64,7 @@ private:
   Dice _damage_draining_dice {};
   Dice _damage_energy_dice {};
   Dice _damage_fire_dice {};
-  Dice _damage_future1_dice {};
+  Dice _damage_drown_dice {};
   Dice _damage_bite_dice {};
   Dice _damage_claw_dice {};
   Dice _damage_lightning_dice {};
@@ -90,7 +90,7 @@ private:
   std::vector< int > _damage_digest_chance_d1000 {};
   std::vector< int > _damage_energy_chance_d1000 {};
   std::vector< int > _damage_fire_chance_d1000 {};
-  std::vector< int > _damage_future1_chance_d1000 {};
+  std::vector< int > _damage_drown_chance_d1000 {};
   std::vector< int > _damage_bite_chance_d1000 {};
   std::vector< int > _damage_claw_chance_d1000 {};
   std::vector< int > _damage_lightning_chance_d1000 {};
@@ -648,9 +648,9 @@ private:
   std::string _damage_crush_dice_str;
   std::string _damage_digest_dice_str;
   std::string _damage_draining_dice_str;
+  std::string _damage_drown_dice_str;
   std::string _damage_energy_dice_str;
   std::string _damage_fire_dice_str;
-  std::string _damage_future1_dice_str;
   std::string _damage_lightning_dice_str;
   std::string _damage_melee_dice_str;
   std::string _damage_nat_att_dice_str;
@@ -674,9 +674,9 @@ private:
   std::string _on_attacking_dmg_crush_do;
   std::string _on_attacking_dmg_digest_do;
   std::string _on_attacking_dmg_draining_do;
+  std::string _on_attacking_dmg_drown_do;
   std::string _on_attacking_dmg_energy_do;
   std::string _on_attacking_dmg_fire_do;
-  std::string _on_attacking_dmg_future1_do;
   std::string _on_attacking_dmg_lightning_do;
   std::string _on_attacking_dmg_melee_do;
   std::string _on_attacking_dmg_nat_att_do;
@@ -711,9 +711,9 @@ private:
   std::string _on_owner_attack_dmg_crush_do;
   std::string _on_owner_attack_dmg_digest_do;
   std::string _on_owner_attack_dmg_draining_do;
+  std::string _on_owner_attack_dmg_drown_do;
   std::string _on_owner_attack_dmg_energy_do;
   std::string _on_owner_attack_dmg_fire_do;
-  std::string _on_owner_attack_dmg_future1_do;
   std::string _on_owner_attack_dmg_lightning_do;
   std::string _on_owner_attack_dmg_melee_do;
   std::string _on_owner_attack_dmg_nat_att_do;
@@ -730,9 +730,9 @@ private:
   std::string _on_owner_receive_dmg_crush_do;
   std::string _on_owner_receive_dmg_digest_do;
   std::string _on_owner_receive_dmg_draining_do;
+  std::string _on_owner_receive_dmg_drown_do;
   std::string _on_owner_receive_dmg_energy_do;
   std::string _on_owner_receive_dmg_fire_do;
-  std::string _on_owner_receive_dmg_future1_do;
   std::string _on_owner_receive_dmg_lightning_do;
   std::string _on_owner_receive_dmg_melee_do;
   std::string _on_owner_receive_dmg_nat_att_do;
@@ -751,9 +751,9 @@ private:
   std::string _on_receiving_dmg_crush_do;
   std::string _on_receiving_dmg_digest_do;
   std::string _on_receiving_dmg_draining_do;
+  std::string _on_receiving_dmg_drown_do;
   std::string _on_receiving_dmg_energy_do;
   std::string _on_receiving_dmg_fire_do;
-  std::string _on_receiving_dmg_future1_do;
   std::string _on_receiving_dmg_lightning_do;
   std::string _on_receiving_dmg_melee_do;
   std::string _on_receiving_dmg_nat_att_do;
@@ -837,7 +837,7 @@ public:
   const Dice &damage_digest_dice(void) const;
   const Dice &damage_energy_dice(void) const;
   const Dice &damage_fire_dice(void) const;
-  const Dice &damage_future1_dice(void) const;
+  const Dice &damage_drown_dice(void) const;
   const Dice &damage_bite_dice(void) const;
   const Dice &damage_claw_dice(void) const;
   const Dice &damage_cold_dice(void) const;
@@ -862,7 +862,7 @@ public:
   const int damage_digest(void) const;
   const int damage_energy(void) const;
   const int damage_fire(void) const;
-  const int damage_future1(void) const;
+  const int damage_drown(void) const;
   const int damage_bite(void) const;
   const int damage_claw(void) const;
   const int damage_cold(void) const;
@@ -918,7 +918,7 @@ public:
   void damage_draining_dice_set(const std::string &);
   void damage_energy_dice_set(const std::string &);
   void damage_fire_dice_set(const std::string &);
-  void damage_future1_dice_set(const std::string &);
+  void damage_drown_dice_set(const std::string &);
   void damage_bite_dice_set(const std::string &);
   void damage_claw_dice_set(const std::string &);
   void damage_lightning_dice_set(const std::string &);
@@ -948,9 +948,9 @@ public:
   const std::string &damage_crush_dice_str(void) const;
   const std::string &damage_digest_dice_str(void) const;
   const std::string &damage_draining_dice_str(void) const;
+  const std::string &damage_drown_dice_str(void) const;
   const std::string &damage_energy_dice_str(void) const;
   const std::string &damage_fire_dice_str(void) const;
-  const std::string &damage_future1_dice_str(void) const;
   const std::string &damage_lightning_dice_str(void) const;
   const std::string &damage_melee_dice_str(void) const;
   const std::string &damage_nat_att_dice_str(void) const;
@@ -974,9 +974,9 @@ public:
   const std::string &on_attacking_dmg_crush_do(void) const;
   const std::string &on_attacking_dmg_digest_do(void) const;
   const std::string &on_attacking_dmg_draining_do(void) const;
+  const std::string &on_attacking_dmg_drown_do(void) const;
   const std::string &on_attacking_dmg_energy_do(void) const;
   const std::string &on_attacking_dmg_fire_do(void) const;
-  const std::string &on_attacking_dmg_future1_do(void) const;
   const std::string &on_attacking_dmg_lightning_do(void) const;
   const std::string &on_attacking_dmg_melee_do(void) const;
   const std::string &on_attacking_dmg_nat_att_do(void) const;
@@ -1011,9 +1011,9 @@ public:
   const std::string &on_owner_attack_dmg_crush_do(void) const;
   const std::string &on_owner_attack_dmg_digest_do(void) const;
   const std::string &on_owner_attack_dmg_draining_do(void) const;
+  const std::string &on_owner_attack_dmg_drown_do(void) const;
   const std::string &on_owner_attack_dmg_energy_do(void) const;
   const std::string &on_owner_attack_dmg_fire_do(void) const;
-  const std::string &on_owner_attack_dmg_future1_do(void) const;
   const std::string &on_owner_attack_dmg_lightning_do(void) const;
   const std::string &on_owner_attack_dmg_melee_do(void) const;
   const std::string &on_owner_attack_dmg_nat_att_do(void) const;
@@ -1030,9 +1030,9 @@ public:
   const std::string &on_owner_receive_dmg_crush_do(void) const;
   const std::string &on_owner_receive_dmg_digest_do(void) const;
   const std::string &on_owner_receive_dmg_draining_do(void) const;
+  const std::string &on_owner_receive_dmg_drown_do(void) const;
   const std::string &on_owner_receive_dmg_energy_do(void) const;
   const std::string &on_owner_receive_dmg_fire_do(void) const;
-  const std::string &on_owner_receive_dmg_future1_do(void) const;
   const std::string &on_owner_receive_dmg_lightning_do(void) const;
   const std::string &on_owner_receive_dmg_melee_do(void) const;
   const std::string &on_owner_receive_dmg_nat_att_do(void) const;
@@ -1051,9 +1051,9 @@ public:
   const std::string &on_receiving_dmg_crush_do(void) const;
   const std::string &on_receiving_dmg_digest_do(void) const;
   const std::string &on_receiving_dmg_draining_do(void) const;
+  const std::string &on_receiving_dmg_drown_do(void) const;
   const std::string &on_receiving_dmg_energy_do(void) const;
   const std::string &on_receiving_dmg_fire_do(void) const;
-  const std::string &on_receiving_dmg_future1_do(void) const;
   const std::string &on_receiving_dmg_lightning_do(void) const;
   const std::string &on_receiving_dmg_melee_do(void) const;
   const std::string &on_receiving_dmg_nat_att_do(void) const;
@@ -1148,9 +1148,9 @@ public:
   int damaged_chance_d10000(void) const;
   int damage_digest_chance_d1000(int index) const;
   int damage_draining_chance_d1000(int index) const;
+  int damage_drown_chance_d1000(int index) const;
   int damage_energy_chance_d1000(int index) const;
   int damage_fire_chance_d1000(int index) const;
-  int damage_future1_chance_d1000(int index) const;
   int damage_lightning_chance_d1000(int index) const;
   int damage_melee_chance_d1000(int index) const;
   int damage_nat_att_chance_d1000(int index) const;
@@ -2104,9 +2104,9 @@ public:
   void on_attacking_dmg_crush_do_set(const std::string &v);
   void on_attacking_dmg_digest_do_set(const std::string &v);
   void on_attacking_dmg_draining_do_set(const std::string &v);
+  void on_attacking_dmg_drown_do_set(const std::string &v);
   void on_attacking_dmg_energy_do_set(const std::string &v);
   void on_attacking_dmg_fire_do_set(const std::string &v);
-  void on_attacking_dmg_future1_do_set(const std::string &v);
   void on_attacking_dmg_lightning_do_set(const std::string &v);
   void on_attacking_dmg_melee_do_set(const std::string &v);
   void on_attacking_dmg_nat_att_do_set(const std::string &v);
@@ -2142,9 +2142,9 @@ public:
   void on_owner_attack_dmg_crush_do_set(const std::string &v);
   void on_owner_attack_dmg_digest_do_set(const std::string &v);
   void on_owner_attack_dmg_draining_do_set(const std::string &v);
+  void on_owner_attack_dmg_drown_do_set(const std::string &v);
   void on_owner_attack_dmg_energy_do_set(const std::string &v);
   void on_owner_attack_dmg_fire_do_set(const std::string &v);
-  void on_owner_attack_dmg_future1_do_set(const std::string &v);
   void on_owner_attack_dmg_lightning_do_set(const std::string &v);
   void on_owner_attack_dmg_melee_do_set(const std::string &v);
   void on_owner_attack_dmg_nat_att_do_set(const std::string &v);
@@ -2161,9 +2161,9 @@ public:
   void on_owner_receive_dmg_crush_do_set(const std::string &v);
   void on_owner_receive_dmg_digest_do_set(const std::string &v);
   void on_owner_receive_dmg_draining_do_set(const std::string &v);
+  void on_owner_receive_dmg_drown_do_set(const std::string &v);
   void on_owner_receive_dmg_energy_do_set(const std::string &v);
   void on_owner_receive_dmg_fire_do_set(const std::string &v);
-  void on_owner_receive_dmg_future1_do_set(const std::string &v);
   void on_owner_receive_dmg_lightning_do_set(const std::string &v);
   void on_owner_receive_dmg_melee_do_set(const std::string &v);
   void on_owner_receive_dmg_nat_att_do_set(const std::string &v);
@@ -2182,9 +2182,9 @@ public:
   void on_receiving_dmg_crush_do_set(const std::string &v);
   void on_receiving_dmg_digest_do_set(const std::string &v);
   void on_receiving_dmg_draining_do_set(const std::string &v);
+  void on_receiving_dmg_drown_do_set(const std::string &v);
   void on_receiving_dmg_energy_do_set(const std::string &v);
   void on_receiving_dmg_fire_do_set(const std::string &v);
-  void on_receiving_dmg_future1_do_set(const std::string &v);
   void on_receiving_dmg_lightning_do_set(const std::string &v);
   void on_receiving_dmg_melee_do_set(const std::string &v);
   void on_receiving_dmg_nat_att_do_set(const std::string &v);
@@ -2341,7 +2341,7 @@ public:
   void damage_digest_chance_d1000_set(int index, int v);
   void damage_energy_chance_d1000_set(int index, int v);
   void damage_fire_chance_d1000_set(int index, int v);
-  void damage_future1_chance_d1000_set(int index, int v);
+  void damage_drown_chance_d1000_set(int index, int v);
   void damage_bite_chance_d1000_set(int index, int v);
   void damage_claw_chance_d1000_set(int index, int v);
   void damage_lightning_chance_d1000_set(int index, int v);

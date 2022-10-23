@@ -35,7 +35,7 @@ def on_owner_receive_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
     return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def on_owner_receive_dmg_future1(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_receive_dmg_drown(me, owner, hitter, real_hitter, x, y, damage):
     return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
@@ -106,9 +106,9 @@ def tp_init(name, text_long_name):
     my.on_owner_receive_dmg_cold_do(self, "me.on_owner_receive_dmg_cold()")
     my.on_owner_receive_dmg_crush_do(self, "me.on_owner_receive_dmg_crush()")
     my.on_owner_receive_dmg_digest_do(self, "me.on_owner_receive_dmg_digest()")
+    my.on_owner_receive_dmg_drown_do(self, "me.on_owner_receive_dmg_drown()")
     my.on_owner_receive_dmg_energy_do(self, "me.on_owner_receive_dmg_energy()")
     my.on_owner_receive_dmg_fire_do(self, "me.on_owner_receive_dmg_fire()")
-    my.on_owner_receive_dmg_future1_do(self, "me.on_owner_receive_dmg_future1()")
     my.on_owner_receive_dmg_lightning_do(self, "me.on_owner_receive_dmg_lightning()")
     my.on_owner_receive_dmg_melee_do(self, "me.on_owner_receive_dmg_melee()")
     my.on_owner_receive_dmg_nat_att_do(self, "me.on_owner_receive_dmg_nat_att()")

@@ -184,9 +184,9 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   if (attack_options->attack_poison) {
     damage = real_hitter->total_damage_for_on_attacking_dmg_poison(victim, damage);
     damage = victim->total_damage_for_on_receiving_dmg_poison(hitter, real_hitter, damage);
-  } else if (attack_options->attack_future1) {
-    real_hitter->total_damage_for_on_attacking_dmg_future1(victim, damage);
-    damage = victim->total_damage_for_on_receiving_dmg_future1(hitter, real_hitter, damage);
+  } else if (attack_options->attack_drown) {
+    real_hitter->total_damage_for_on_attacking_dmg_drown(victim, damage);
+    damage = victim->total_damage_for_on_receiving_dmg_drown(hitter, real_hitter, damage);
   } else if (attack_options->attack_bite) {
     real_hitter->total_damage_for_on_attacking_dmg_bite(victim, damage);
     damage = victim->total_damage_for_on_receiving_dmg_bite(hitter, real_hitter, damage);
@@ -289,20 +289,24 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
   }
 
   /////////////////////////////////////////////////////////////////////////
-  // Future1 damage
+  // Drown damage
   /////////////////////////////////////////////////////////////////////////
-  if (attack_options->attack_future1) {
+  if (! is_air_breather()) {
+    attack_options->attack_drown = false;
+  }
+
+  if (attack_options->attack_drown) {
     attack_set = true;
     if (! damage) {
       if (is_player()) {
-        msg("You take no future1 damage!");
+        msg("You take no drowning damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no future1 damage!", text_The().c_str());
+        msg("%s takes no drowning damage!", text_The().c_str());
       }
       return false;
     }
-    IF_DEBUG2 { real_hitter->log("Attack damage_future1 damage %d on %s", damage, to_short_string().c_str()); }
-    damage_type = "damage_future1 ";
+    IF_DEBUG2 { real_hitter->log("Attack drown damage %d on %s", damage, to_short_string().c_str()); }
+    damage_type = "drown ";
   }
 
   /////////////////////////////////////////////////////////////////////////
@@ -1002,6 +1006,16 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           msg("%%fg=red$%s's withering touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
         } else if (attack_options->attack_draining) {
           msg("%%fg=red$%s's draining touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+        } else if (hitter->is_barrel()) {
+          if (is_air_breather()) {
+            msg("%%fg=red$You are drowned in a barrel!%%fg=reset$");
+            popup("%%fg=red$Drowned!");
+          } else if (is_crushable()) {
+            msg("%%fg=red$You are crushed in a barrel!%%fg=reset$");
+            popup("%%fg=red$Drowned!");
+          } else {
+            msg("%%fg=red$You are killed by a barrel!%%fg=reset$");
+          }
         } else if (hitter->is_weapon()) {
           msg("%%fg=red$%s cuts you down with %s!%%fg=reset$", real_hitter->text_The().c_str(),
               hitter->text_the(false).c_str());
@@ -1034,8 +1048,11 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           msg("%%fg=red$You are burnt to a crisp by %s!%%fg=reset$", real_hitter->text_the().c_str());
           popup("%%fg=red$Sizzle!");
         } else if (attack_options->attack_digest) {
-          msg("%%fg=red$You are being eaten by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=red$You are eaten by %s!%%fg=reset$", real_hitter->text_the().c_str());
           popup("%%fg=red$Slurp!");
+        } else if (attack_options->attack_drown) {
+          msg("%%fg=red$You are drowned by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          popup("%%fg=red$Drown!");
         } else {
           msg("%%fg=red$%s %s you fatally!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str());
@@ -1058,6 +1075,12 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         } else if (attack_options->attack_draining) {
           msg("%%fg=limegreen$%s's draining touch weakens you!%%fg=reset$", real_hitter->text_The().c_str());
           popup("%%fg=orange$Drain!");
+        } else if (hitter->is_barrel()) {
+          if (is_air_breather()) {
+            msg("%%fg=orange$You are drowning in a barrel!%%fg=reset$");
+          } else if (is_crushable()) {
+            msg("%%fg=orange$You are being crushed by a barrel!%%fg=reset$");
+          }
         } else if (hitter->is_weapon()) {
           msg("%%fg=orange$%s hits you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(), damage,
               damage_type.c_str(), hitter->text_the(false).c_str());
@@ -1108,6 +1131,8 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           msg("%%fg=red$You are being consumed by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
               damage);
           popup("%%fg=red$Gulp!");
+        } else if (attack_options->attack_drown) {
+          msg("%%fg=red$You are drowning!%%fg=reset$");
         } else {
           msg("%%fg=orange$%s %s you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
               real_hitter->text_hits().c_str(), damage, damage_type.c_str());
@@ -1136,8 +1161,8 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
 
       if (attack_options->attack_poison) {
         msg("Your %s is being poisoned.", text_short_name().c_str());
-      } else if (attack_options->attack_future1) {
-        msg("Your %s is being future1.", text_short_name().c_str());
+      } else if (attack_options->attack_drown) {
+        msg("Your %s is being drowned.", text_short_name().c_str());
       } else if (attack_options->attack_bite) {
         msg("Your %s is being bitten.", text_short_name().c_str());
       } else if (attack_options->attack_claw) {
@@ -1160,6 +1185,8 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         msg("Your %s is rotting.", text_short_name().c_str());
       } else if (attack_options->attack_draining) {
         msg("Your %s is drained.", text_short_name().c_str());
+      } else if (attack_options->attack_drown) {
+        msg("Your %s is drowned.", text_short_name().c_str());
       } else {
         msg("Your %s is being damaged.", text_short_name().c_str());
       }
@@ -1200,7 +1227,26 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
           }
         } else {
           if (attack_options->attack_poison) {
-            real_hitter->msg("You poison %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_drown) {
+            real_hitter->msg("You drown %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_bite) {
+            real_hitter->msg("You bite %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_claw) {
+            real_hitter->msg("You claw %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_cold) {
+            real_hitter->msg("You freeze %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_fire) {
+            real_hitter->msg("You burn %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_crush) {
+            real_hitter->msg("You crush %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_lightning) {
+            real_hitter->msg("You zap %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_energy) {
+            real_hitter->msg("You blast %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_acid) {
+            real_hitter->msg("You dissolve %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
+          } else if (attack_options->attack_digest) {
+            real_hitter->msg("You digest %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
           } else if (attack_options->attack_necrosis) {
             real_hitter->msg("You rot %s for %d %sdamage.", text_the().c_str(), damage, damage_type.c_str());
           } else if (attack_options->attack_draining) {
@@ -1466,8 +1512,8 @@ int Thing::ai_hit_actual(Thingp         hitter,      // an arrow / monst /...
         } else {
           reason = "by poisoning by " + poison_reason_get();
         }
-      } else if (attack_options->attack_future1) {
-        reason = "by future1";
+      } else if (attack_options->attack_drown) {
+        reason = "by drowning";
       } else if (attack_options->attack_bite) {
         reason = "by biting";
       } else if (attack_options->attack_claw) {

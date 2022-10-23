@@ -193,7 +193,7 @@ def on_receiving_dmg_poison(me, hitter, x, y, damage):
     return damage
 
 
-def on_receiving_dmg_future1(me, hitter, x, y, damage):
+def on_receiving_dmg_drown(me, hitter, x, y, damage):
     return damage
 
 
@@ -261,7 +261,7 @@ def on_attacking_dmg_poison(me, victim, x, y, damage):
     return damage
 
 
-def on_attacking_dmg_future1(me, victim, x, y, damage):
+def on_attacking_dmg_drown(me, victim, x, y, damage):
     return damage
 
 
@@ -426,9 +426,9 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_attacking_dmg_crush_do(self, "player.on_attacking_dmg_crush()")
     my.on_attacking_dmg_digest_do(self, "player.on_attacking_dmg_digest()")
     my.on_attacking_dmg_draining_do(self, "player.on_attacking_dmg_draining()")
+    my.on_attacking_dmg_drown_do(self, "player.on_attacking_dmg_drown()")
     my.on_attacking_dmg_energy_do(self, "player.on_attacking_dmg_energy()")
     my.on_attacking_dmg_fire_do(self, "player.on_attacking_dmg_fire()")
-    my.on_attacking_dmg_future1_do(self, "player.on_attacking_dmg_future1()")
     my.on_attacking_dmg_lightning_do(self, "player.on_attacking_dmg_lightning()")
     my.on_attacking_dmg_melee_do(self, "player.on_attacking_dmg_melee()")
     my.on_attacking_dmg_nat_att_do(self, "player.on_attacking_dmg_nat_att()")
@@ -448,9 +448,9 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_receiving_dmg_crush_do(self, "player.on_receiving_dmg_crush()")
     my.on_receiving_dmg_digest_do(self, "player.on_receiving_dmg_digest()")
     my.on_receiving_dmg_draining_do(self, "player.on_receiving_dmg_draining()")
+    my.on_receiving_dmg_drown_do(self, "player.on_receiving_dmg_drown()")
     my.on_receiving_dmg_energy_do(self, "player.on_receiving_dmg_energy()")
     my.on_receiving_dmg_fire_do(self, "player.on_receiving_dmg_fire()")
-    my.on_receiving_dmg_future1_do(self, "player.on_receiving_dmg_future1()")
     my.on_receiving_dmg_lightning_do(self, "player.on_receiving_dmg_lightning()")
     my.on_receiving_dmg_melee_do(self, "player.on_receiving_dmg_melee()")
     my.on_receiving_dmg_nat_att_do(self, "player.on_receiving_dmg_nat_att()")

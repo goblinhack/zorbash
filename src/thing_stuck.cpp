@@ -227,7 +227,7 @@ void Thing::is_stuck_update(void)
       } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
         msg("You are trapped in ice!");
       } else if (level->is_barrel(curr_at.x, curr_at.y)) {
-        msg("You are trapped under a barrel!");
+        msg("You are trapped inside a barrel!");
       } else {
         msg("You are stuck!");
       }

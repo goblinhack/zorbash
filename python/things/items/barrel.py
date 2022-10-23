@@ -34,6 +34,8 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 1)
     my.damage_crush_chance_d1000(self, 0, 1000)
     my.damage_crush_dice(self, "2d6")
+    my.damage_drown_chance_d1000(self, 0, 1000)
+    my.damage_drown_dice(self, "2d6")
     my.damage_received_doubled_from_fire(self, True)
     my.environ_avoids_fire(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
@@ -65,7 +67,6 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)  # so it can be shoved
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
-    my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_shovable(self, True)
     my.is_very_combustible(self, True)

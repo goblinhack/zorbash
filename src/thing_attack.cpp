@@ -558,8 +558,8 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
 
     if (attack_options->attack_poison) {
       dbg("Attack type already set: attack_poison");
-    } else if (attack_options->attack_future1) {
-      dbg("Attack type already set: attack_future1");
+    } else if (attack_options->attack_drown) {
+      dbg("Attack type already set: attack_drown");
     } else if (attack_options->attack_bite) {
       dbg("Attack type already set: attack_bite");
     } else if (attack_options->attack_claw) {
@@ -671,17 +671,17 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     }
 
     //
-    // Chance of attack_future1 damage?
+    // Chance of attack_drown damage?
     //
-    if (! attack_options->attack_future1) {
+    if (! attack_options->attack_drown) {
       if (! attack_options->damage_set) {
-        if (d1000() < damage_future1_chance_d1000(attack_options->attack_num)) {
-          int damage_future1_val = damage_future1();
-          if (damage_future1_val > 0) {
-            attack_options->damage         = damage_future1_val;
-            attack_options->damage_set     = true;
-            attack_options->attack_future1 = true;
-            dbg("Set future1 damage %d", attack_options->damage);
+        if (d1000() < damage_drown_chance_d1000(attack_options->attack_num)) {
+          int damage_drown_val = damage_drown();
+          if (damage_drown_val > 0) {
+            attack_options->damage       = damage_drown_val;
+            attack_options->damage_set   = true;
+            attack_options->attack_drown = true;
+            dbg("Set drown damage %d", attack_options->damage);
           }
         }
       }
@@ -943,7 +943,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
       if (victim->curr_at == curr_at) {
         attack_options->damage           = damage_digest();
         attack_options->attack_poison    = false;
-        attack_options->attack_future1   = false;
+        attack_options->attack_drown     = false;
         attack_options->attack_bite      = false;
         attack_options->attack_claw      = false;
         attack_options->attack_cold      = false;
@@ -1238,7 +1238,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     // Reset to allow multiple attacks of the same type.
     //
     attack_options->attack_poison    = false;
-    attack_options->attack_future1   = false;
+    attack_options->attack_drown     = false;
     attack_options->attack_bite      = false;
     attack_options->attack_claw      = false;
     attack_options->attack_cold      = false;
@@ -1333,12 +1333,12 @@ int Thing::is_attacked_with_damage_draining(Thingp hitter, Thingp real_hitter, i
   return is_hit(hitter, &attack_options, damage);
 }
 
-int Thing::is_attacked_with_damage_future1(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::is_attacked_with_damage_drown(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   AttackOptions attack_options {};
-  attack_options.attack_future1 = true;
-  attack_options.real_hitter    = real_hitter;
+  attack_options.attack_drown = true;
+  attack_options.real_hitter  = real_hitter;
   return is_hit(hitter, &attack_options, damage);
 }
 

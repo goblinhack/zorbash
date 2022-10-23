@@ -76,7 +76,8 @@ void Game::place_player(void)
         level->thing_new("descend_sewer1", point(x + 4, y + 4));
       }
       if (0) {
-        level->thing_new("boots_jumping", point(x, y - 2));
+        level->thing_new("boots_jumping", point(x + 1, y - 2));
+        level->thing_new("boots_teleport", point(x + 1, y - 1));
       }
       if (0) {
         auto w = level->thing_new("gauntlets_lion", point(x, y - 2));

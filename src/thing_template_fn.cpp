@@ -26,9 +26,9 @@ const std::string &Tp::on_attacking_dmg_cold_do(void) const { return _on_attacki
 const std::string &Tp::on_attacking_dmg_crush_do(void) const { return _on_attacking_dmg_crush_do; }
 const std::string &Tp::on_attacking_dmg_digest_do(void) const { return _on_attacking_dmg_digest_do; }
 const std::string &Tp::on_attacking_dmg_draining_do(void) const { return _on_attacking_dmg_draining_do; }
+const std::string &Tp::on_attacking_dmg_drown_do(void) const { return _on_attacking_dmg_drown_do; }
 const std::string &Tp::on_attacking_dmg_energy_do(void) const { return _on_attacking_dmg_energy_do; }
 const std::string &Tp::on_attacking_dmg_fire_do(void) const { return _on_attacking_dmg_fire_do; }
-const std::string &Tp::on_attacking_dmg_future1_do(void) const { return _on_attacking_dmg_future1_do; }
 const std::string &Tp::on_attacking_dmg_lightning_do(void) const { return _on_attacking_dmg_lightning_do; }
 const std::string &Tp::on_attacking_dmg_melee_do(void) const { return _on_attacking_dmg_melee_do; }
 const std::string &Tp::on_attacking_dmg_nat_att_do(void) const { return _on_attacking_dmg_nat_att_do; }
@@ -62,9 +62,9 @@ const std::string &Tp::on_owner_attack_dmg_cold_do(void) const { return _on_owne
 const std::string &Tp::on_owner_attack_dmg_crush_do(void) const { return _on_owner_attack_dmg_crush_do; }
 const std::string &Tp::on_owner_attack_dmg_digest_do(void) const { return _on_owner_attack_dmg_digest_do; }
 const std::string &Tp::on_owner_attack_dmg_draining_do(void) const { return _on_owner_attack_dmg_draining_do; }
+const std::string &Tp::on_owner_attack_dmg_drown_do(void) const { return _on_owner_attack_dmg_drown_do; }
 const std::string &Tp::on_owner_attack_dmg_energy_do(void) const { return _on_owner_attack_dmg_energy_do; }
 const std::string &Tp::on_owner_attack_dmg_fire_do(void) const { return _on_owner_attack_dmg_fire_do; }
-const std::string &Tp::on_owner_attack_dmg_future1_do(void) const { return _on_owner_attack_dmg_future1_do; }
 const std::string &Tp::on_owner_attack_dmg_lightning_do(void) const { return _on_owner_attack_dmg_lightning_do; }
 const std::string &Tp::on_owner_attack_dmg_melee_do(void) const { return _on_owner_attack_dmg_melee_do; }
 const std::string &Tp::on_owner_attack_dmg_nat_att_do(void) const { return _on_owner_attack_dmg_nat_att_do; }
@@ -81,9 +81,9 @@ const std::string &Tp::on_owner_receive_dmg_cold_do(void) const { return _on_own
 const std::string &Tp::on_owner_receive_dmg_crush_do(void) const { return _on_owner_receive_dmg_crush_do; }
 const std::string &Tp::on_owner_receive_dmg_digest_do(void) const { return _on_owner_receive_dmg_digest_do; }
 const std::string &Tp::on_owner_receive_dmg_draining_do(void) const { return _on_owner_receive_dmg_draining_do; }
+const std::string &Tp::on_owner_receive_dmg_drown_do(void) const { return _on_owner_receive_dmg_drown_do; }
 const std::string &Tp::on_owner_receive_dmg_energy_do(void) const { return _on_owner_receive_dmg_energy_do; }
 const std::string &Tp::on_owner_receive_dmg_fire_do(void) const { return _on_owner_receive_dmg_fire_do; }
-const std::string &Tp::on_owner_receive_dmg_future1_do(void) const { return _on_owner_receive_dmg_future1_do; }
 const std::string &Tp::on_owner_receive_dmg_lightning_do(void) const { return _on_owner_receive_dmg_lightning_do; }
 const std::string &Tp::on_owner_receive_dmg_melee_do(void) const { return _on_owner_receive_dmg_melee_do; }
 const std::string &Tp::on_owner_receive_dmg_nat_att_do(void) const { return _on_owner_receive_dmg_nat_att_do; }
@@ -102,9 +102,9 @@ const std::string &Tp::on_receiving_dmg_cold_do(void) const { return _on_receivi
 const std::string &Tp::on_receiving_dmg_crush_do(void) const { return _on_receiving_dmg_crush_do; }
 const std::string &Tp::on_receiving_dmg_digest_do(void) const { return _on_receiving_dmg_digest_do; }
 const std::string &Tp::on_receiving_dmg_draining_do(void) const { return _on_receiving_dmg_draining_do; }
+const std::string &Tp::on_receiving_dmg_drown_do(void) const { return _on_receiving_dmg_drown_do; }
 const std::string &Tp::on_receiving_dmg_energy_do(void) const { return _on_receiving_dmg_energy_do; }
 const std::string &Tp::on_receiving_dmg_fire_do(void) const { return _on_receiving_dmg_fire_do; }
-const std::string &Tp::on_receiving_dmg_future1_do(void) const { return _on_receiving_dmg_future1_do; }
 const std::string &Tp::on_receiving_dmg_lightning_do(void) const { return _on_receiving_dmg_lightning_do; }
 const std::string &Tp::on_receiving_dmg_melee_do(void) const { return _on_receiving_dmg_melee_do; }
 const std::string &Tp::on_receiving_dmg_nat_att_do(void) const { return _on_receiving_dmg_nat_att_do; }
@@ -1136,9 +1136,9 @@ void Tp::on_attacking_dmg_cold_do_set(const std::string &v) { _on_attacking_dmg_
 void Tp::on_attacking_dmg_crush_do_set(const std::string &v) { _on_attacking_dmg_crush_do = v; }
 void Tp::on_attacking_dmg_digest_do_set(const std::string &v) { _on_attacking_dmg_digest_do = v; }
 void Tp::on_attacking_dmg_draining_do_set(const std::string &v) { _on_attacking_dmg_draining_do = v; }
+void Tp::on_attacking_dmg_drown_do_set(const std::string &v) { _on_attacking_dmg_drown_do = v; }
 void Tp::on_attacking_dmg_energy_do_set(const std::string &v) { _on_attacking_dmg_energy_do = v; }
 void Tp::on_attacking_dmg_fire_do_set(const std::string &v) { _on_attacking_dmg_fire_do = v; }
-void Tp::on_attacking_dmg_future1_do_set(const std::string &v) { _on_attacking_dmg_future1_do = v; }
 void Tp::on_attacking_dmg_lightning_do_set(const std::string &v) { _on_attacking_dmg_lightning_do = v; }
 void Tp::on_attacking_dmg_melee_do_set(const std::string &v) { _on_attacking_dmg_melee_do = v; }
 void Tp::on_attacking_dmg_nat_att_do_set(const std::string &v) { _on_attacking_dmg_nat_att_do = v; }
@@ -1174,9 +1174,9 @@ void Tp::on_owner_attack_dmg_cold_do_set(const std::string &v) { _on_owner_attac
 void Tp::on_owner_attack_dmg_crush_do_set(const std::string &v) { _on_owner_attack_dmg_crush_do = v; }
 void Tp::on_owner_attack_dmg_digest_do_set(const std::string &v) { _on_owner_attack_dmg_digest_do = v; }
 void Tp::on_owner_attack_dmg_draining_do_set(const std::string &v) { _on_owner_attack_dmg_draining_do = v; }
+void Tp::on_owner_attack_dmg_drown_do_set(const std::string &v) { _on_owner_attack_dmg_drown_do = v; }
 void Tp::on_owner_attack_dmg_energy_do_set(const std::string &v) { _on_owner_attack_dmg_energy_do = v; }
 void Tp::on_owner_attack_dmg_fire_do_set(const std::string &v) { _on_owner_attack_dmg_fire_do = v; }
-void Tp::on_owner_attack_dmg_future1_do_set(const std::string &v) { _on_owner_attack_dmg_future1_do = v; }
 void Tp::on_owner_attack_dmg_lightning_do_set(const std::string &v) { _on_owner_attack_dmg_lightning_do = v; }
 void Tp::on_owner_attack_dmg_melee_do_set(const std::string &v) { _on_owner_attack_dmg_melee_do = v; }
 void Tp::on_owner_attack_dmg_nat_att_do_set(const std::string &v) { _on_owner_attack_dmg_nat_att_do = v; }
@@ -1193,9 +1193,9 @@ void Tp::on_owner_receive_dmg_cold_do_set(const std::string &v) { _on_owner_rece
 void Tp::on_owner_receive_dmg_crush_do_set(const std::string &v) { _on_owner_receive_dmg_crush_do = v; }
 void Tp::on_owner_receive_dmg_digest_do_set(const std::string &v) { _on_owner_receive_dmg_digest_do = v; }
 void Tp::on_owner_receive_dmg_draining_do_set(const std::string &v) { _on_owner_receive_dmg_draining_do = v; }
+void Tp::on_owner_receive_dmg_drown_do_set(const std::string &v) { _on_owner_receive_dmg_drown_do = v; }
 void Tp::on_owner_receive_dmg_energy_do_set(const std::string &v) { _on_owner_receive_dmg_energy_do = v; }
 void Tp::on_owner_receive_dmg_fire_do_set(const std::string &v) { _on_owner_receive_dmg_fire_do = v; }
-void Tp::on_owner_receive_dmg_future1_do_set(const std::string &v) { _on_owner_receive_dmg_future1_do = v; }
 void Tp::on_owner_receive_dmg_lightning_do_set(const std::string &v) { _on_owner_receive_dmg_lightning_do = v; }
 void Tp::on_owner_receive_dmg_melee_do_set(const std::string &v) { _on_owner_receive_dmg_melee_do = v; }
 void Tp::on_owner_receive_dmg_nat_att_do_set(const std::string &v) { _on_owner_receive_dmg_nat_att_do = v; }
@@ -1214,9 +1214,9 @@ void Tp::on_receiving_dmg_cold_do_set(const std::string &v) { _on_receiving_dmg_
 void Tp::on_receiving_dmg_crush_do_set(const std::string &v) { _on_receiving_dmg_crush_do = v; }
 void Tp::on_receiving_dmg_digest_do_set(const std::string &v) { _on_receiving_dmg_digest_do = v; }
 void Tp::on_receiving_dmg_draining_do_set(const std::string &v) { _on_receiving_dmg_draining_do = v; }
+void Tp::on_receiving_dmg_drown_do_set(const std::string &v) { _on_receiving_dmg_drown_do = v; }
 void Tp::on_receiving_dmg_energy_do_set(const std::string &v) { _on_receiving_dmg_energy_do = v; }
 void Tp::on_receiving_dmg_fire_do_set(const std::string &v) { _on_receiving_dmg_fire_do = v; }
-void Tp::on_receiving_dmg_future1_do_set(const std::string &v) { _on_receiving_dmg_future1_do = v; }
 void Tp::on_receiving_dmg_lightning_do_set(const std::string &v) { _on_receiving_dmg_lightning_do = v; }
 void Tp::on_receiving_dmg_melee_do_set(const std::string &v) { _on_receiving_dmg_melee_do = v; }
 void Tp::on_receiving_dmg_nat_att_do_set(const std::string &v) { _on_receiving_dmg_nat_att_do = v; }

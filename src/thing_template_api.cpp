@@ -62,13 +62,13 @@ void               Tp::damage_poison_dice_set(const std::string &v)
   _damage_poison_dice_str = v;
 }
 
-const Dice        &Tp::damage_future1_dice(void) const { return _damage_future1_dice; }
-const int          Tp::damage_future1(void) const { return _damage_future1_dice.roll(); }
-const std::string &Tp::damage_future1_dice_str(void) const { return _damage_future1_dice_str; }
-void               Tp::damage_future1_dice_set(const std::string &v)
+const Dice        &Tp::damage_drown_dice(void) const { return _damage_drown_dice; }
+const int          Tp::damage_drown(void) const { return _damage_drown_dice.roll(); }
+const std::string &Tp::damage_drown_dice_str(void) const { return _damage_drown_dice_str; }
+void               Tp::damage_drown_dice_set(const std::string &v)
 {
-  _damage_future1_dice     = v;
-  _damage_future1_dice_str = v;
+  _damage_drown_dice     = v;
+  _damage_drown_dice_str = v;
 }
 
 const Dice        &Tp::damage_bite_dice(void) const { return _damage_bite_dice; }

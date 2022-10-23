@@ -24,33 +24,28 @@ void Thing::barrel_tick(void)
   dbg("Barrel tick");
   TRACE_AND_INDENT();
 
-  if (is_barrel()) {
-    //
-    // Find all non barrels and crush them
-    //
-    FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
-    {
-      if (! t->is_barrel()) {
-        if (t->is_crushable()) {
-          t->log("Crushed by a barrel");
-          t->is_attacked_with_damage_crush(this, this, damage_crush());
-        }
-      }
+  //
+  // Find all non barrels and crush them
+  //
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
+  {
+    if (t->is_barrel()) {
+      continue;
     }
-    FOR_ALL_THINGS_END()
-  } else if (is_crushable()) {
-    //
-    // See if we are under a barrel
-    //
-    FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
-    {
-      if (t->is_barrel()) {
-        dbg("Crushed by a barrel");
-        is_attacked_with_damage_crush(t, t, t->damage_crush());
-      }
+
+    if (t->is_air_breather()) {
+      t->log("Drowned by a barrel");
+      t->is_attacked_with_damage_drown(this, this, damage_crush());
+      continue;
     }
-    FOR_ALL_THINGS_END()
+
+    if (t->is_crushable()) {
+      t->log("Crushed by a barrel");
+      t->is_attacked_with_damage_crush(this, this, damage_crush());
+      continue;
+    }
   }
+  FOR_ALL_THINGS_END()
 }
 
 uint8_t Level::is_barrel(const point p)

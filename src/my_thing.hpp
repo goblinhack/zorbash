@@ -109,7 +109,7 @@ typedef struct {
   bool attack_draining;
   bool attack_energy;
   bool attack_fire;
-  bool attack_future1;
+  bool attack_drown;
   bool attack_bite;
   bool attack_claw;
   bool attack_lightning;
@@ -298,8 +298,8 @@ public:
   uint64_t i_set_is_monst                   : 1 {};
   uint64_t i_set_is_necrotic_danger_level   : 1 {};
   uint64_t i_set_is_obs_destructable        : 1 {};
-  uint64_t i_set_is_obs_wall_or_door        : 1 {};
   uint64_t i_set_is_obs_for_jump_landing    : 1 {};
+  uint64_t i_set_is_obs_wall_or_door        : 1 {};
   uint64_t i_set_is_poisonous_danger_level  : 1 {};
   uint64_t i_set_is_potion                  : 1 {};
   uint64_t i_set_is_red_blood               : 1 {};
@@ -688,7 +688,7 @@ public:
   const Dice &damage_draining_dice(void);
   const Dice &damage_energy_dice(void);
   const Dice &damage_fire_dice(void);
-  const Dice &damage_future1_dice(void);
+  const Dice &damage_drown_dice(void);
   const Dice &damage_bite_dice(void);
   const Dice &damage_claw_dice(void);
   const Dice &damage_lightning_dice(void);
@@ -741,7 +741,7 @@ public:
   const std::string damage_draining_dice_str(void);
   const std::string damage_energy_dice_str(void);
   const std::string damage_fire_dice_str(void);
-  const std::string damage_future1_dice_str(void);
+  const std::string damage_drown_dice_str(void);
   const std::string damage_bite_dice_str(void);
   const std::string damage_claw_dice_str(void);
   const std::string damage_lightning_dice_str(void);
@@ -773,7 +773,7 @@ public:
   const std::string &on_attacking_dmg_draining_do(void);
   const std::string &on_attacking_dmg_energy_do(void);
   const std::string &on_attacking_dmg_fire_do(void);
-  const std::string &on_attacking_dmg_future1_do(void);
+  const std::string &on_attacking_dmg_drown_do(void);
   const std::string &on_attacking_dmg_bite_do(void);
   const std::string &on_attacking_dmg_claw_do(void);
   const std::string &on_attacking_dmg_lightning_do(void);
@@ -809,7 +809,7 @@ public:
   const std::string &on_owner_attack_dmg_draining_do(void);
   const std::string &on_owner_attack_dmg_energy_do(void);
   const std::string &on_owner_attack_dmg_fire_do(void);
-  const std::string &on_owner_attack_dmg_future1_do(void);
+  const std::string &on_owner_attack_dmg_drown_do(void);
   const std::string &on_owner_attack_dmg_bite_do(void);
   const std::string &on_owner_attack_dmg_claw_do(void);
   const std::string &on_owner_attack_dmg_lightning_do(void);
@@ -828,7 +828,7 @@ public:
   const std::string &on_owner_receive_dmg_draining_do(void);
   const std::string &on_owner_receive_dmg_energy_do(void);
   const std::string &on_owner_receive_dmg_fire_do(void);
-  const std::string &on_owner_receive_dmg_future1_do(void);
+  const std::string &on_owner_receive_dmg_drown_do(void);
   const std::string &on_owner_receive_dmg_bite_do(void);
   const std::string &on_owner_receive_dmg_claw_do(void);
   const std::string &on_owner_receive_dmg_lightning_do(void);
@@ -849,7 +849,7 @@ public:
   const std::string &on_receiving_dmg_draining_do(void);
   const std::string &on_receiving_dmg_energy_do(void);
   const std::string &on_receiving_dmg_fire_do(void);
-  const std::string &on_receiving_dmg_future1_do(void);
+  const std::string &on_receiving_dmg_drown_do(void);
   const std::string &on_receiving_dmg_bite_do(void);
   const std::string &on_receiving_dmg_claw_do(void);
   const std::string &on_receiving_dmg_lightning_do(void);
@@ -1040,12 +1040,12 @@ public:
   int damage_digest(void);
   int damage_draining_chance_d1000(int);
   int damage_draining(void);
+  int damage_drown_chance_d1000(int);
+  int damage_drown(void);
   int damage_energy_chance_d1000(int);
   int damage_energy(void);
   int damage_fire_chance_d1000(int);
   int damage_fire(void);
-  int damage_future1_chance_d1000(int);
-  int damage_future1(void);
   int damage_lightning_chance_d1000(int);
   int damage_lightning(void);
   int damage_max(void);
@@ -1257,9 +1257,9 @@ public:
   int is_attacked_with_damage_crush(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_digest(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_draining(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_damage_drown(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_energy(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_fire(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_damage_future1(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_melee(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_damage_nat_att(Thingp hitter, Thingp real_hitter, int damage);
@@ -1623,9 +1623,9 @@ public:
   int on_attacking_dmg_crush(Thingp victim, int damage);
   int on_attacking_dmg_digest(Thingp victim, int damage);
   int on_attacking_dmg_draining(Thingp victim, int damage);
+  int on_attacking_dmg_drown(Thingp victim, int damage);
   int on_attacking_dmg_energy(Thingp victim, int damage);
   int on_attacking_dmg_fire(Thingp victim, int damage);
-  int on_attacking_dmg_future1(Thingp victim, int damage);
   int on_attacking_dmg_lightning(Thingp victim, int damage);
   int on_attacking_dmg_melee(Thingp victim, int damage);
   int on_attacking_dmg_nat_att(Thingp victim, int damage);
@@ -1645,9 +1645,9 @@ public:
   int on_owner_attack_dmg_crush(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_digest(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_draining(Thingp owner, Thingp victim, int damage);
+  int on_owner_attack_dmg_drown(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_energy(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_fire(Thingp owner, Thingp victim, int damage);
-  int on_owner_attack_dmg_future1(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_lightning(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_melee(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_nat_att(Thingp owner, Thingp victim, int damage);
@@ -1664,9 +1664,9 @@ public:
   int on_owner_receive_dmg_crush(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_digest(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_draining(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_owner_receive_dmg_drown(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_energy(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_fire(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
-  int on_owner_receive_dmg_future1(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_lightning(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_melee(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_nat_att(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
@@ -1683,9 +1683,9 @@ public:
   int on_receiving_dmg_crush(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_digest(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_draining(Thingp hitter, Thingp real_hitter, int damage);
+  int on_receiving_dmg_drown(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
-  int on_receiving_dmg_future1(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);
@@ -1911,9 +1911,9 @@ public:
   int total_damage_for_on_attacking_dmg_crush(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_digest(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_draining(Thingp victim, int damage);
+  int total_damage_for_on_attacking_dmg_drown(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_energy(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_fire(Thingp victim, int damage);
-  int total_damage_for_on_attacking_dmg_future1(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_lightning(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_melee(Thingp victim, int damage);
   int total_damage_for_on_attacking_dmg_nat_att(Thingp victim, int damage);
@@ -1930,9 +1930,9 @@ public:
   int total_damage_for_on_receiving_dmg_crush(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_digest(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_draining(Thingp hitter, Thingp real_hitter, int damage);
+  int total_damage_for_on_receiving_dmg_drown(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
-  int total_damage_for_on_receiving_dmg_future1(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
   int total_damage_for_on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);

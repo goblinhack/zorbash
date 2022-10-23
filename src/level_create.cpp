@@ -155,7 +155,7 @@ int Level::total_monst_damage_level(void)
     if (t->is_mob() || t->is_monst()) {
       damage += t->damage_melee_dice().max_roll();
       damage += t->damage_poison_dice().max_roll();
-      damage += t->damage_future1_dice().max_roll();
+      damage += t->damage_drown_dice().max_roll();
       damage += t->damage_bite_dice().max_roll();
       damage += t->damage_claw_dice().max_roll();
       damage += t->damage_cold_dice().max_roll();

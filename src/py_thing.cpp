@@ -488,7 +488,7 @@ PyObject *thing_hit_damage_fire(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_FALSE;
 }
 
-PyObject *thing_hit_damage_future1(PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *thing_hit_damage_drown(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   uint32_t     hitter_id = 0;
@@ -524,11 +524,11 @@ PyObject *thing_hit_damage_future1(PyObject *obj, PyObject *args, PyObject *keyw
   }
 
   AttackOptions attack_options {};
-  attack_options.damage_set     = true;
-  attack_options.damage         = damage;
-  attack_options.attack_future1 = true;
+  attack_options.damage_set   = true;
+  attack_options.damage       = damage;
+  attack_options.attack_drown = true;
 
-  hitter->log("Attack with future1 damage, %d", damage);
+  hitter->log("Attack with drown damage, %d", damage);
   TRACE_AND_INDENT();
 
   if (hitter->attack(target, &attack_options)) {

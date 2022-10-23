@@ -218,9 +218,9 @@ public:
   void wid_thing_info_add_damaged_chance(WidPopup *w, Thingp t);
   void wid_thing_info_add_damage_digest(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_draining(WidPopup *w, Thingp t, int index);
+  void wid_thing_info_add_damage_drown(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_energy(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_fire(WidPopup *w, Thingp t, int index);
-  void wid_thing_info_add_damage_future1(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_lightning(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_melee(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_damage_nat_att(WidPopup *w, Thingp t, int index);

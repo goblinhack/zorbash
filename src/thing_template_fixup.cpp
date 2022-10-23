@@ -156,7 +156,7 @@ void tp_fixup(void)
     num_attack_types += tp->damage_melee() ? 1 : 0;
     num_attack_types += tp->damage_nat_att() ? 1 : 0;
     num_attack_types += tp->damage_poison() ? 1 : 0;
-    num_attack_types += tp->damage_future1() ? 1 : 0;
+    num_attack_types += tp->damage_drown() ? 1 : 0;
     num_attack_types += tp->damage_bite() ? 1 : 0;
     num_attack_types += tp->damage_claw() ? 1 : 0;
     num_attack_types += tp->damage_cold() ? 1 : 0;
@@ -198,8 +198,8 @@ void tp_fixup(void)
         if (tp->damage_fire() > 0) {
           tp->damage_fire_chance_d1000_set(attack_index, 1000);
         }
-        if (tp->damage_future1() > 0) {
-          tp->damage_future1_chance_d1000_set(attack_index, 1000);
+        if (tp->damage_drown() > 0) {
+          tp->damage_drown_chance_d1000_set(attack_index, 1000);
         }
         if (tp->damage_bite() > 0) {
           tp->damage_bite_chance_d1000_set(attack_index, 1000);

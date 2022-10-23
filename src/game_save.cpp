@@ -423,8 +423,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_monst                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_necrotic_danger_level         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_destructable              ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_obs_wall_or_door              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_for_jump_landing          ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_obs_wall_or_door              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_poisonous_danger_level        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_potion                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_red_blood                     ? 1LLU : 0LLU) << shift; shift++;

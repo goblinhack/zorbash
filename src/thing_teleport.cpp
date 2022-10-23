@@ -229,16 +229,15 @@ bool Thing::teleport(point to, bool be_careful, bool *too_far)
   }
 
   //
-  // Cannot teleport?
+  // Need to allow teleporting when stuck so there is a way out of barrels!
   //
   if (is_stuck_currently()) {
-    dbg("You try to teleport but are stuck fast.");
+    dbg("You teleport out of trouble.");
     if (is_player()) {
-      msg("You try to teleport but are stuck fast.");
-      game->tick_begin("teleport failed");
+      msg("You teleport out of your sticky situation!");
+      game->tick_begin("teleport");
     }
     wobble(25);
-    return false;
   }
 
   //
