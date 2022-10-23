@@ -59,15 +59,6 @@ void Level::scroll_map_do(bool fast)
 {
   TRACE_NO_INDENT();
 
-  if (! fast) {
-    //
-    // Not sure why I have this :)
-    //
-    if (wid_find_under_mouse_when_scrolling()) {
-      return;
-    }
-  }
-
   if (game->is_being_destroyed || is_being_destroyed) {
     return;
   }
@@ -209,10 +200,6 @@ void Level::scroll_map(void)
 {
   TRACE_NO_INDENT();
 
-  if (wid_find_under_mouse_when_scrolling()) {
-    return;
-  }
-
   scroll_map_do(false);
 }
 
@@ -280,9 +267,12 @@ void Level::scroll_map_set_target(void)
 
   fpoint follow;
 
-  if (wid_find_under_mouse_when_scrolling()) {
-    return;
-  }
+  //
+  // Do not have this. This prevents us scrolling when over the minimap.
+  //
+  // if (wid_find_under_mouse_when_scrolling()) {
+  //   return;
+  // }
 
   if (player && is_map_follow_player) {
     follow = make_fpoint(player->curr_at);

@@ -52,10 +52,11 @@ void wid_buffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wh
 
   auto slot = wid_get_int_context(w);
 
-  TOPCON("buffbox: Begin over buffbox slot %d", slot);
+  DBG3("buffbox: Begin over buffbox slot %d", slot);
   TRACE_AND_INDENT();
+
   if (! level->buffbox_over(slot)) {
-    TOPCON("buffbox: Not over anything");
+    DBG3("buffbox: Not over anything");
     return;
   }
 
