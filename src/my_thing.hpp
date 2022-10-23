@@ -229,7 +229,6 @@ public:
   uint64_t is_jumping                                   : 1 {};
   uint64_t is_key_in_lock                               : 1 {}; // key stuck in rusty lock?
   uint64_t is_moving                                    : 1 {}; // is currently moving tiles
-  uint64_t is_visible_to_player                         : 1 {};
   uint64_t is_open                                      : 1 {};
   uint64_t is_resurrected                               : 1 {}; // has finished resurrecting
   uint64_t is_resurrecting                              : 1 {}; // is currently resurrecing
@@ -243,6 +242,7 @@ public:
   uint64_t is_teleporting                               : 1 {};
   uint64_t is_the_grid                                  : 1 {}; // is the backbone of the level
   uint64_t is_the_player                                : 1 {};
+  uint64_t is_visible_to_player                         : 1 {};
   uint64_t is_waiting                                   : 1 {}; // is waiting on this tick
   uint64_t is_waiting_to_ascend_dungeon                 : 1 {};
   uint64_t is_waiting_to_ascend_sewer                   : 1 {};
@@ -299,6 +299,7 @@ public:
   uint64_t i_set_is_necrotic_danger_level   : 1 {};
   uint64_t i_set_is_obs_destructable        : 1 {};
   uint64_t i_set_is_obs_wall_or_door        : 1 {};
+  uint64_t i_set_is_obs_for_jump_landing    : 1 {};
   uint64_t i_set_is_poisonous_danger_level  : 1 {};
   uint64_t i_set_is_potion                  : 1 {};
   uint64_t i_set_is_red_blood               : 1 {};
@@ -1442,6 +1443,7 @@ public:
   int is_necrotic_danger_level(void);
   int is_no_tile(void);
   int is_obs_destructable(void);
+  int is_obs_for_jump_landing(void);
   int is_obs_for_shoving(void);
   int is_obstacle_when_dead(void);
   int is_obs_wall_or_door(void);
@@ -1983,7 +1985,6 @@ public:
   int unused_flag3(void);
   int unused_flag40(void);
   int unused_flag41(void);
-  int unused_flag42(void);
   int unused_flag48(void);
   int unused_flag4(void);
   int unused_flag56(void);

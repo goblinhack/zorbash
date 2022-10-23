@@ -525,7 +525,7 @@ do
       unused_flag4 \
       unused_flag40 \
       unused_flag41 \
-      unused_flag42 \
+      is_obs_for_jump_landing \
       gfx_pixelart_reflection \
       gfx_pixelart_shadow \
       unused_flag48 \

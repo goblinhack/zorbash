@@ -489,6 +489,7 @@ int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_necrotic_danger_level(void) const { return _is_necrotic_danger_level; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
 int Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
+int Tp::is_obs_for_jump_landing(void) const { return _is_obs_for_jump_landing; }
 int Tp::is_obs_for_shoving(void) const { return _is_obs_for_shoving; }
 int Tp::is_obstacle_when_dead(void) const { return _is_obstacle_when_dead; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
@@ -675,7 +676,6 @@ int Tp::unused_flag39(void) const { return _unused_flag39; }
 int Tp::unused_flag3(void) const { return _unused_flag3; }
 int Tp::unused_flag40(void) const { return _unused_flag40; }
 int Tp::unused_flag41(void) const { return _unused_flag41; }
-int Tp::unused_flag42(void) const { return _unused_flag42; }
 int Tp::unused_flag48(void) const { return _unused_flag48; }
 int Tp::unused_flag4(void) const { return _unused_flag4; }
 int Tp::unused_flag56(void) const { return _unused_flag56; }
@@ -1029,6 +1029,7 @@ void Tp::is_msg_set(int v) { _is_msg = v; }
 void Tp::is_necrotic_danger_level_set(int v) { _is_necrotic_danger_level = v; }
 void Tp::is_no_tile_set(int v) { _is_no_tile = v; }
 void Tp::is_obs_destructable_set(int v) { _is_obs_destructable = v; }
+void Tp::is_obs_for_jump_landing_set(int v) { _is_obs_for_jump_landing = v; }
 void Tp::is_obs_for_shoving_set(int v) { _is_obs_for_shoving = v; }
 void Tp::is_obstacle_when_dead_set(int v) { _is_obstacle_when_dead = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
@@ -1349,7 +1350,6 @@ void Tp::unused_flag39_set(int v) { _unused_flag39 = v; }
 void Tp::unused_flag3_set(int v) { _unused_flag3 = v; }
 void Tp::unused_flag40_set(int v) { _unused_flag40 = v; }
 void Tp::unused_flag41_set(int v) { _unused_flag41 = v; }
-void Tp::unused_flag42_set(int v) { _unused_flag42 = v; }
 void Tp::unused_flag48_set(int v) { _unused_flag48 = v; }
 void Tp::unused_flag4_set(int v) { _unused_flag4 = v; }
 void Tp::unused_flag56_set(int v) { _unused_flag56 = v; }

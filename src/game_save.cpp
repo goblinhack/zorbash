@@ -350,7 +350,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_jumping                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_key_in_lock                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_moving                                    ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_visible_to_player                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_open                                      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrected                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_resurrecting                              ? 1LLU : 0LLU) << shift; shift++;
@@ -364,6 +363,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_teleporting                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_the_grid                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_the_player                                ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_visible_to_player                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting_to_ascend_dungeon                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting_to_ascend_sewer                   ? 1LLU : 0LLU) << shift; shift++;
@@ -424,6 +424,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_necrotic_danger_level         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_destructable              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_wall_or_door              ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_obs_for_jump_landing          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_poisonous_danger_level        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_potion                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_red_blood                     ? 1LLU : 0LLU) << shift; shift++;
@@ -525,6 +526,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_light_blocker_for_monst);
   out << bits(my.t->_is_obs_destructable);
   out << bits(my.t->_is_obs_wall_or_door);
+  out << bits(my.t->_is_obs_for_jump_landing);
 
   out << bits(my.t->_fade_in_map);
   out << bits(my.t->_gfx_water);

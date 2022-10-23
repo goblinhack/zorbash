@@ -410,7 +410,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_jumping                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_key_in_lock                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_moving                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_visible_to_player                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_open                                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_resurrected                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_resurrecting                              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -424,6 +423,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_teleporting                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_the_grid                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_the_player                                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_visible_to_player                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_waiting                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_waiting_to_ascend_dungeon                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_waiting_to_ascend_sewer                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -480,6 +480,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_necrotic_danger_level         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_destructable              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_obs_wall_or_door              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_obs_for_jump_landing          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_poisonous_danger_level        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_potion                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_red_blood                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -575,6 +576,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_light_blocker_for_monst);
   in >> bits(my.t->_is_obs_destructable);
   in >> bits(my.t->_is_obs_wall_or_door);
+  in >> bits(my.t->_is_obs_for_jump_landing);
 
   in >> bits(my.t->_fade_in_map);
   in >> bits(my.t->_gfx_water);

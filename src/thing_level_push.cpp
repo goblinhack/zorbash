@@ -271,6 +271,10 @@ void Thing::level_push(void)
       i_set_is_obs_wall_or_door = true;
       level->is_obs_wall_or_door_set(mx, my);
     }
+    if (is_obs_for_jump_landing() && ! is_open) {
+      i_set_is_obs_for_jump_landing = true;
+      level->is_obs_for_jump_landing_set(mx, my);
+    }
     if (is_obs_destructable() && ! is_open) {
       i_set_is_obs_destructable = true;
       level->is_obs_destructable_set(mx, my);

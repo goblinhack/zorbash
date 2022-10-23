@@ -2022,9 +2022,6 @@ void Level::is_gas_poison_no_check_unset(const int x, const int y)
   set_no_check(_is_gas_poison, x, y, (uint8_t) 0);
 }
 
-//
-// Used in lighting, so inlined
-//
 bool Level::is_obs_wall_or_door(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {
@@ -2077,9 +2074,58 @@ void Level::is_obs_wall_or_door_no_check_unset(const int x, const int y)
   set_no_check(_is_obs_wall_or_door, x, y, false);
 }
 
-//
-// Used in lighting, so inlined
-//
+bool Level::is_obs_for_jump_landing(const point p) const
+{
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_is_obs_for_jump_landing, p.x, p.y));
+}
+
+bool Level::is_obs_for_jump_landing_no_check(const point p) const
+{
+  return (get_no_check(_is_obs_for_jump_landing, p.x, p.y));
+}
+
+bool Level::is_obs_for_jump_landing(const int x, const int y) const
+{
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_is_obs_for_jump_landing, x, y));
+}
+
+bool Level::is_obs_for_jump_landing_no_check(const int x, const int y) const
+{
+  return (get_no_check(_is_obs_for_jump_landing, x, y));
+}
+
+void Level::is_obs_for_jump_landing_set(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_obs_for_jump_landing, x, y, true);
+}
+
+void Level::is_obs_for_jump_landing_no_check_set(const int x, const int y)
+{
+  set_no_check(_is_obs_for_jump_landing, x, y, true);
+}
+
+void Level::is_obs_for_jump_landing_unset(const int x, const int y)
+{
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  set(_is_obs_for_jump_landing, x, y, false);
+}
+
+void Level::is_obs_for_jump_landing_no_check_unset(const int x, const int y)
+{
+  set_no_check(_is_obs_for_jump_landing, x, y, false);
+}
+
 bool Level::is_obs_destructable(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {

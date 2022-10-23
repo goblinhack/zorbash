@@ -311,7 +311,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // No sneaky jumping onto doors to get passed them
   //
-  if (level->is_block_of_ice(x, y) || level->is_obs_wall_or_door(x, y) || level->is_obs_destructable(x, y)) {
+  if (level->is_obs_for_jump_landing(x, y) || level->is_obs_wall_or_door(x, y) || level->is_obs_destructable(x, y)) {
     TRACE_AND_INDENT();
     dbg("No, jump failed, into obstacle");
     if (is_player()) {

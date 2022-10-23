@@ -37,6 +37,7 @@ public:
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_light_blocker_for_monst {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_destructable {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_wall_or_door {};
+  std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _is_obs_for_jump_landing {};
   std::array< std::array< bool, MAP_HEIGHT >, MAP_WIDTH > _noise_blocker {};
 
   std::array< std::array< uint8_t, MAP_HEIGHT >, MAP_WIDTH > _fade_in_map {};
@@ -708,6 +709,10 @@ public:
   bool is_obs_destructable(const point p) const;
   bool is_obs_destructable_no_check(const int x, const int y) const;
   bool is_obs_destructable_no_check(const point p) const;
+  bool is_obs_for_jump_landing(const int x, const int y) const;
+  bool is_obs_for_jump_landing(const point p) const;
+  bool is_obs_for_jump_landing_no_check(const int x, const int y) const;
+  bool is_obs_for_jump_landing_no_check(const point p) const;
   bool is_obs_wall_or_door(const int x, const int y) const;
   bool is_obs_wall_or_door(const point p) const;
   bool is_obs_wall_or_door_no_check(const int x, const int y) const;
@@ -1094,6 +1099,10 @@ public:
   void is_obs_destructable_no_check_unset(const int x, const int y);
   void is_obs_destructable_set(const int x, const int y);
   void is_obs_destructable_unset(const int x, const int y);
+  void is_obs_for_jump_landing_no_check_set(const int x, const int y);
+  void is_obs_for_jump_landing_no_check_unset(const int x, const int y);
+  void is_obs_for_jump_landing_set(const int x, const int y);
+  void is_obs_for_jump_landing_unset(const int x, const int y);
   void is_obs_wall_or_door_no_check_set(const int x, const int y);
   void is_obs_wall_or_door_no_check_unset(const int x, const int y);
   void is_obs_wall_or_door_set(const int x, const int y);

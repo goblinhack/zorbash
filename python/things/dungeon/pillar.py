@@ -21,6 +21,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_floor_deco(self, True)
     my.is_interesting(self, True)
     my.is_jump_blocker(self, True)
+    my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_obs_wall_or_door(self, True)
     my.is_pillar(self, True)

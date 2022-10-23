@@ -1500,10 +1500,10 @@ int Thing::unused_flag41(void)
   return (tp()->unused_flag41());
 }
 
-int Thing::unused_flag42(void)
+int Thing::is_obs_for_jump_landing(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->unused_flag42());
+  return (tp()->is_obs_for_jump_landing());
 }
 
 int Thing::gfx_pixelart_reflection(void)

@@ -65,6 +65,7 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)  # so it can be shoved
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
+    my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_shovable(self, True)
     my.is_very_combustible(self, True)

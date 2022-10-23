@@ -441,6 +441,7 @@ private:
   int _is_necrotic_danger_level {};
   int _is_no_tile {};
   int _is_obs_destructable {};
+  int _is_obs_for_jump_landing {};
   int _is_obs_for_shoving {};
   int _is_obstacle_when_dead {};
   int _is_obs_wall_or_door {};
@@ -627,7 +628,6 @@ private:
   int _unused_flag4 {};
   int _unused_flag40 {};
   int _unused_flag41 {};
-  int _unused_flag42 {};
   int _unused_flag48 {};
   int _unused_flag5 {};
   int _unused_flag56 {};
@@ -1457,6 +1457,7 @@ public:
   int is_necrotic_danger_level(void) const;
   int is_no_tile(void) const;
   int is_obs_destructable(void) const;
+  int is_obs_for_jump_landing(void) const;
   int is_obs_for_shoving(void) const;
   int is_obstacle_when_dead(void) const;
   int is_obs_wall_or_door(void) const;
@@ -1643,7 +1644,6 @@ public:
   int unused_flag3(void) const;
   int unused_flag40(void) const;
   int unused_flag41(void) const;
-  int unused_flag42(void) const;
   int unused_flag48(void) const;
   int unused_flag4(void) const;
   int unused_flag56(void) const;
@@ -1997,6 +1997,7 @@ public:
   void is_necrotic_danger_level_set(int v);
   void is_no_tile_set(int v);
   void is_obs_destructable_set(int v);
+  void is_obs_for_jump_landing_set(int v);
   void is_obs_for_shoving_set(int v);
   void is_obstacle_when_dead_set(int v);
   void is_obs_wall_or_door_set(int v);
@@ -2318,7 +2319,6 @@ public:
   void unused_flag3_set(int v);
   void unused_flag40_set(int v);
   void unused_flag41_set(int v);
-  void unused_flag42_set(int v);
   void unused_flag48_set(int v);
   void unused_flag4_set(int v);
   void unused_flag56_set(int v);

@@ -69,6 +69,7 @@ def tp_init(name, text_long_name):
     my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
     my.is_meltable(self, True)
+    my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)

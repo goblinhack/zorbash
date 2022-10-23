@@ -57,6 +57,7 @@ void Level::clear(void)
   _is_currently_pixelart_raycast_lit = {};
   _is_monst                          = {};
   _is_obs_wall_or_door               = {};
+  _is_obs_for_jump_landing           = {};
   _is_obs_destructable               = {};
   _is_rock                           = {};
   _is_shallow_water                  = {};

@@ -207,6 +207,10 @@ void Thing::level_pop(void)
     i_set_is_obs_wall_or_door = false;
     level->is_obs_wall_or_door_unset(mx, my);
   }
+  if (i_set_is_obs_for_jump_landing) {
+    i_set_is_obs_for_jump_landing = false;
+    level->is_obs_for_jump_landing_unset(mx, my);
+  }
   if (i_set_is_obs_destructable) {
     i_set_is_obs_destructable = false;
     level->is_obs_destructable_unset(mx, my);

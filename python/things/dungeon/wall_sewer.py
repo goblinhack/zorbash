@@ -45,6 +45,7 @@ def tp_init(
     my.is_hittable(self, True)
     my.is_jump_blocker(self, True)
     my.is_light_blocker(self, True)
+    my.is_obs_for_jump_landing(self, True)
     my.is_obs_for_shoving(self, True)
     my.is_obs_wall_or_door(self, True)
     my.is_sewer_wall(self, True)

@@ -778,7 +778,7 @@ bool Thing::matches(const std::string &what)
   if (unused_flag41() && (what == "unused_flag41")) {
     return true;
   }
-  if (unused_flag42() && (what == "unused_flag42")) {
+  if (is_obs_for_jump_landing() && (what == "is_obs_for_jump_landing")) {
     return true;
   }
   if (gfx_pixelart_reflection() && (what == "gfx_pixelart_reflection")) {
@@ -2354,8 +2354,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "unused_flag41") {
     return &Thing::unused_flag41;
   }
-  if (what == "unused_flag42") {
-    return &Thing::unused_flag42;
+  if (what == "is_obs_for_jump_landing") {
+    return &Thing::is_obs_for_jump_landing;
   }
   if (what == "gfx_pixelart_reflection") {
     return &Thing::gfx_pixelart_reflection;
