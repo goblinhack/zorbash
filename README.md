@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- - check water interacting with fire/lava makes steam or basalt                                                                               -->
-<!-- - level num wrong in hiscores                                                                                                                -->
 <!-- - jump noise is delayed - check with non quickstart                                                                                          -->
 <!-- - kraken tentacles                                                                                                                           -->
 <!-- ------                                                                                                                                       -->
