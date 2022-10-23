@@ -4,6 +4,7 @@
 
 #include "my_level.hpp"
 #include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
@@ -43,7 +44,11 @@ const Tpp Thing::tp_slow(void)
   return nullptr;
 }
 
-uint8_t Thing::z_prio(void) { return (tp()->z_prio); }
+uint8_t Thing::z_prio(void)
+{
+  verify(MTYPE_THING, this);
+  return (tp()->z_prio);
+}
 
 std::size_t Thing::light_count(void)
 {

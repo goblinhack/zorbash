@@ -299,9 +299,12 @@ bool Thing::drop_from_ether(Thingp what)
   s.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) s.y));
 
   auto callback = std::bind(&Thing::visible, what);
-  game->level->new_external_particle(id, s, e, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
-                                     tile_index_to_tile(what->tile_curr),
-                                     (is_dir_br() || is_dir_right() || is_dir_tr()), callback);
+
+  if (! is_being_destroyed) {
+    game->level->new_external_particle(id, s, e, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
+                                       tile_index_to_tile(what->tile_curr),
+                                       (is_dir_br() || is_dir_right() || is_dir_tr()), callback);
+  }
 
   dbg("Dropped from ether %s", what->to_short_string().c_str());
 

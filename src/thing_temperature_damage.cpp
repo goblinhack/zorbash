@@ -16,12 +16,10 @@ bool Thing::thing_check_for_heat_damage(void)
     // Keep going
     //
   } else if (! environ_avoids_fire()) {
-    IF_DEBUG3 { dbg("No, is not fire avoider"); }
     return false;
   }
 
   if (is_immune_to_fire()) {
-    IF_DEBUG3 { dbg("No, is not immunie to fire"); }
     return false;
   }
 
@@ -69,6 +67,7 @@ bool Thing::thing_check_for_heat_damage(void)
 
         dbg("Remove the flames");
         TRACE_AND_INDENT();
+
         on_fire_unset();
         hit = false;
       }
@@ -176,12 +175,10 @@ bool Thing::thing_check_for_cold_damage(void)
     // Keep going
     //
   } else if (! environ_avoids_cold()) {
-    IF_DEBUG3 { dbg("No, is not cold avoider"); }
     return false;
   }
 
   if (is_immune_to_cold()) {
-    IF_DEBUG3 { dbg("No, is not immunie to cold"); }
     return false;
   }
 

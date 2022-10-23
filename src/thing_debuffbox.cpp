@@ -12,9 +12,6 @@
 
 bool Thing::debuffbox_id_insert(Thingp what)
 {
-  dbg("debuffbox insert %s", what->to_short_string().c_str());
-  TRACE_AND_INDENT();
-
   auto player = level->player;
   if (! player) {
     return false;
@@ -27,6 +24,9 @@ bool Thing::debuffbox_id_insert(Thingp what)
   if (! maybe_itemsp()) {
     return false;
   }
+
+  dbg("debuffbox insert %s", what->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   int  free_slot       = -1;
   auto debuffbox_items = player->itemsp()->debuffbox_id.size();
@@ -87,9 +87,6 @@ bool Thing::debuffbox_id_insert(Thingp what)
 
 bool Thing::debuffbox_id_remove(Thingp what)
 {
-  dbg("debuffbox remove %s", what->to_short_string().c_str());
-  TRACE_AND_INDENT();
-
   auto player = level->player;
   if (! player) {
     return false;
@@ -102,6 +99,9 @@ bool Thing::debuffbox_id_remove(Thingp what)
   if (! maybe_itemsp()) {
     return false;
   }
+
+  dbg("debuffbox remove %s", what->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   auto immediate_owner = what->immediate_owner();
   if (immediate_owner) {

@@ -12,9 +12,6 @@
 
 bool Thing::buffbox_id_insert(Thingp what)
 {
-  dbg("buffbox insert %s", what->to_short_string().c_str());
-  TRACE_AND_INDENT();
-
   auto player = level->player;
   if (! player) {
     return false;
@@ -27,6 +24,9 @@ bool Thing::buffbox_id_insert(Thingp what)
   if (! maybe_itemsp()) {
     return false;
   }
+
+  dbg("buffbox insert %s", what->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   int  free_slot     = -1;
   auto buffbox_items = player->itemsp()->buffbox_id.size();
@@ -76,9 +76,6 @@ bool Thing::buffbox_id_insert(Thingp what)
 
 bool Thing::buffbox_id_remove(Thingp what)
 {
-  dbg("buffbox remove %s", what->to_short_string().c_str());
-  TRACE_AND_INDENT();
-
   auto player = level->player;
   if (! player) {
     return false;
@@ -91,6 +88,9 @@ bool Thing::buffbox_id_remove(Thingp what)
   if (! maybe_itemsp()) {
     return false;
   }
+
+  dbg("buffbox remove %s", what->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   auto immediate_owner = what->immediate_owner();
   if (immediate_owner) {
@@ -127,13 +127,13 @@ bool Thing::buffbox_id_remove(Thingp what)
 
 Thingp Level::buffbox_get(const uint32_t slot)
 {
-  dbg("buffbox get slot %d", slot);
-  TRACE_AND_INDENT();
-
   if (! player) {
     ERR("No player");
     return nullptr;
   }
+
+  dbg("buffbox get slot %d", slot);
+  TRACE_AND_INDENT();
 
   auto itemsp = player->maybe_itemsp();
   if (! itemsp) {

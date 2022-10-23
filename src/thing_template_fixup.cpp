@@ -7,7 +7,8 @@
 
 void tp_fixup(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   for (auto &tp : tp_id_map) {
     if (tp->stamina()) {
       tp->is_able_to_tire_set(true);
@@ -245,7 +246,8 @@ void tp_fixup(void)
 
 void tp_assign_allies(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   for (auto &tp : tp_id_map) {
     auto allies = tp->is_allied_with();
     for (auto ally : split_tokens(allies, ',')) {

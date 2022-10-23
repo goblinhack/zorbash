@@ -143,9 +143,11 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
   {
     AI_LOG("All goals:");
     TRACE_AND_INDENT();
+
     for (auto &g : goalmaps) {
       AI_LOG("Goalmap:");
       TRACE_AND_INDENT();
+
       for (const auto &goal : g.goals) {
         auto s = string_sprintf("Goal, prio %d score %d @(%d,%d) %s", (int) goal.prio, (int) goal.score,
                                 (int) goal.at.x, (int) goal.at.y, goal.msg.c_str());
@@ -196,6 +198,7 @@ bool Thing::ai_create_path_to_goal(int minx, int miny, int maxx, int maxy, int s
       if (goal.avoid) {
         AI_LOG("Processing avoid goal");
         TRACE_AND_INDENT();
+
         std::multiset< Goal > avoid;
         if (ai_choose_avoid_goals(avoid, goal)) {
           for (const auto &inner_goal : avoid) {
@@ -253,7 +256,6 @@ bool Thing::ai_create_path_to_single_goal(int minx, int miny, int maxx, int maxy
                             goal.msg.c_str());
     AI_LOG(s);
   }
-  TRACE_AND_INDENT();
 
   auto ai = aip();
 
@@ -2205,6 +2207,7 @@ bool Thing::ai_tick(bool recursing)
   //
   dbg("AI: look for dangerous things");
   TRACE_AND_INDENT();
+
   threat = most_dangerous_visible_thing();
   if (threat) {
     IF_DEBUG { ai_log("threat", threat); }
@@ -2215,6 +2218,7 @@ bool Thing::ai_tick(bool recursing)
   //
   dbg("AI: look for adjacent dangerous things");
   TRACE_AND_INDENT();
+
   auto adjacent_threat = most_dangerous_adjacent_thing();
   if (adjacent_threat) {
     AI_LOG("Adjacent threat", adjacent_threat);
@@ -2372,6 +2376,7 @@ bool Thing::ai_tick(bool recursing)
       {
         dbg("AI: state idle");
         TRACE_AND_INDENT();
+
         if (state_idle(threat, minx, miny, maxx, maxy)) {
           return true;
         }
@@ -2381,6 +2386,7 @@ bool Thing::ai_tick(bool recursing)
       {
         dbg("AI: state moving");
         TRACE_AND_INDENT();
+
         if (state_moving()) {
           return true;
         }
@@ -2390,6 +2396,7 @@ bool Thing::ai_tick(bool recursing)
       {
         dbg("AI: state sleeping");
         TRACE_AND_INDENT();
+
         if (state_sleeping(do_something, wait)) {
           return true;
         }
@@ -2399,6 +2406,7 @@ bool Thing::ai_tick(bool recursing)
       {
         dbg("AI: state resting");
         TRACE_AND_INDENT();
+
         if (state_resting(do_something, wait)) {
           return true;
         }
@@ -2408,6 +2416,7 @@ bool Thing::ai_tick(bool recursing)
       {
         dbg("AI: state open inventory");
         TRACE_AND_INDENT();
+
         if (state_open_inventory()) {
           return true;
         }
@@ -2417,6 +2426,7 @@ bool Thing::ai_tick(bool recursing)
       {
         dbg("AI: state use enchantstone");
         TRACE_AND_INDENT();
+
         if (state_using_enchantstone()) {
           return true;
         }
@@ -2426,6 +2436,7 @@ bool Thing::ai_tick(bool recursing)
       {
         dbg("AI: state use skillstone");
         TRACE_AND_INDENT();
+
         if (state_using_skillstone()) {
           return true;
         }
@@ -2435,6 +2446,7 @@ bool Thing::ai_tick(bool recursing)
       {
         dbg("AI: state repack inventory");
         TRACE_AND_INDENT();
+
         if (state_repack_inventory()) {
           return true;
         }

@@ -105,6 +105,7 @@ void Thing::msg(const char *fmt, ...)
   if (! player) {
     dbg("No player for msg: %s", why.c_str());
     TRACE_AND_INDENT();
+
     va_start(args, fmt);
     log_(fmt, args);
     va_end(args);
@@ -114,6 +115,7 @@ void Thing::msg(const char *fmt, ...)
   if (! player_is_ready_for_messages(why)) {
     dbg("Player not ready for msg: %s", why.c_str());
     TRACE_AND_INDENT();
+
     va_start(args, fmt);
     log_(fmt, args);
     va_end(args);
@@ -132,6 +134,7 @@ void Thing::msg(const char *fmt, ...)
       if (distance >= DMAP_IS_PASSABLE) {
         dbg("Too far to see (dist %d) msg: %s", distance, why.c_str());
         TRACE_AND_INDENT();
+
         va_start(args, fmt);
         log_(fmt, args);
         va_end(args);
@@ -142,6 +145,7 @@ void Thing::msg(const char *fmt, ...)
     if (! level->can_see_unimpeded(player->curr_at, curr_at)) {
       dbg("Cannot directly see for msg: %s", why.c_str());
       TRACE_AND_INDENT();
+
       va_start(args, fmt);
       log_(fmt, args);
       va_end(args);

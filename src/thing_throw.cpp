@@ -169,15 +169,17 @@ void Thing::throw_at(Thingp what, Thingp target)
     auto sz    = isize(last_blit_br.x - last_blit_tl.x, last_blit_br.y - last_blit_tl.y);
     auto delay = PARTICLE_SPEED_MS;
 
-    if (is_player()) {
-      //
-      // So the player is visible above light
-      //
-      level->new_external_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
-                                   callback);
-    } else {
-      level->new_internal_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
-                                   callback);
+    if (! is_being_destroyed) {
+      if (is_player()) {
+        //
+        // So the player is visible above light
+        //
+        level->new_external_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
+                                     callback);
+      } else {
+        level->new_internal_particle(what->id, src, dst, sz, delay, tile_index_to_tile(what->tile_curr), false,
+                                     callback);
+      }
     }
   }
 

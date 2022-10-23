@@ -387,7 +387,7 @@ ThingShoved Thing::try_to_shove(Thingp it, point delta, bool force)
 //
 bool Thing::shove_ok(point future_pos)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   FOR_ALL_COLLISION_THINGS(level, it, future_pos.x, future_pos.y)
   {

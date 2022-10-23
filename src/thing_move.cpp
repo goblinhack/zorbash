@@ -173,7 +173,7 @@ bool Thing::move_no_shove_attack_allowed(point future_pos)
 bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t must_attack,
                  uint8_t wait_or_collect, AttackOptions *attack_options)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! is_moveable()) {
     if (attack_lunge()) {
@@ -661,10 +661,7 @@ void Thing::update_interpolated_position(void)
 
 void Thing::update_pos(point to, bool immediately)
 {
-  if (! is_hidden) {
-    dbg3("Update pos to %d,%d", to.x, to.y);
-  }
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   point new_at((int) to.x, (int) to.y);
   if (level->is_oob(new_at)) {

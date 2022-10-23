@@ -7,8 +7,8 @@
 
 bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null */)
 {
-  TRACE_AND_INDENT();
   dbg("Trying to target a projectile with: %s", item->to_short_string().c_str());
+  TRACE_AND_INDENT();
 
   if (is_monst() || (game->robot_mode && is_player())) {
     if (! victim) {
@@ -54,7 +54,6 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
   // intrinsic ability. Or it might be non null if say a wand.
   //
 
-  TRACE_AND_INDENT();
   if (target_name_projectile == "") {
     die("No projectile name");
   }
@@ -62,6 +61,7 @@ Thingp Thing::projectile_fire_at(Thingp item, const std::string &target_name_pro
   if (is_player()) {
     msg("You fire %s at %s.", item->text_the().c_str(), target->text_the().c_str());
   }
+  TRACE_AND_INDENT();
 
   //
   // Projectiles hit the first thing in the way. But ignore if it hits

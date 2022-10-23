@@ -401,7 +401,8 @@ bool Thing::eat_something(void)
 
 bool Thing::can_eat_something(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   //
   // Try for food first, ignoring potions
   //

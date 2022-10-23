@@ -7,7 +7,8 @@
 
 void Thing::tiles_get()
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   auto n   = (uint32_t) id.id;
   auto tpp = tp();
   auto out = &tiles;

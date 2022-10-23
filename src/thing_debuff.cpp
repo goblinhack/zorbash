@@ -77,7 +77,7 @@ bool Thing::debuff_remove(Thingp what)
 
 Thingp Thing::debuff_find(const std::string &what)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! maybe_itemsp()) {
     return nullptr;

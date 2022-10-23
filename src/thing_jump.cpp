@@ -365,7 +365,9 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       // So the player is visible above light
       //
       auto callback = std::bind(&Thing::visible, this);
-      level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false, callback);
+      if (! is_being_destroyed) {
+        level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(tile_curr), false, callback);
+      }
     } else {
       //
       // If offscreen, then jump quicker, so the we do not have to wait so long.
@@ -424,12 +426,14 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
           w->is_jumping = true;
 
           auto callback = std::bind(&Thing::visible, this);
-          if (is_player()) {
-            level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
-          } else {
-            level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+          if (! is_being_destroyed) {
+            if (is_player()) {
+              level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                           (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+            } else {
+              level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                           (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+            }
           }
         }
       }
@@ -451,12 +455,14 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
           // No, the weapon is shown as carry anim
           //
           auto callback = std::bind(&Thing::visible, this);
-          if (is_player()) {
-            level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
-          } else {
-            level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                         (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+          if (! is_being_destroyed) {
+            if (is_player()) {
+              level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                           (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+            } else {
+              level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                           (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()), callback);
+            }
           }
         }
       }
@@ -477,12 +483,14 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       } else {
         w->is_jumping = true;
       }
-      if (is_player()) {
-        level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
-      } else {
-        level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
-                                     (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+      if (! is_being_destroyed) {
+        if (is_player()) {
+          level->new_external_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+        } else {
+          level->new_internal_particle(id, src, dest, sz, duration, tile_index_to_tile(w->tile_curr),
+                                       (w->is_dir_br() || w->is_dir_right() || w->is_dir_tr()));
+        }
       }
     }
   }
@@ -496,6 +504,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
         point at(curr_at.x, curr_at.y);
         dbg("Causes ripples");
         TRACE_AND_INDENT();
+
         if (pcg_random_range(0, 1000) > 500) {
           if (thing_size() < (int) THING_SIZE_NORMAL) {
             level->thing_new(tp_random_small_ripple()->name(), at);

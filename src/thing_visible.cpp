@@ -4,11 +4,14 @@
 
 #include "my_level.hpp"
 #include "my_monst.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 void Thing::visible(void)
 {
   TRACE_NO_INDENT();
+
+  verify(MTYPE_THING, this);
 
   if (! is_hidden) {
     return;

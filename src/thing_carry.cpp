@@ -198,6 +198,7 @@ bool Thing::carry(Thingp item, bool can_equip)
   if (existing_owner) {
     dbg("Drop from existing owner");
     TRACE_AND_INDENT();
+
     if (existing_owner == this) {
       //
       // We hit this case when unequipping items
@@ -596,6 +597,7 @@ void Thing::check_all_carried_items_are_owned(void)
   if (carrying_anything()) {
     dbg("Carried items:");
     TRACE_AND_INDENT();
+
     for (const auto &what : carried_item_only_list()) {
       auto top_owner       = what->top_owner();
       auto immediate_owner = what->immediate_owner();
@@ -622,6 +624,7 @@ void Thing::check_all_carried_items_are_owned(void)
   if (equipped_anything()) {
     dbg("Equipped items:");
     TRACE_AND_INDENT();
+
     FOR_ALL_EQUIP(e)
     {
       auto what = equip_get(e);

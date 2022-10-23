@@ -23,6 +23,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   if (is_on_fire() && environ_avoids_fire()) {
     AI_LOG("I am on fire!");
     TRACE_AND_INDENT();
+
     if (is_intelligent()) {
       if (ai_on_fire()) {
         return true;
@@ -36,6 +37,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   if (terrain_cost_get(curr_at) >= DMAP_LESS_PREFERRED_TERRAIN) {
     AI_LOG("I am on bad terrain, escape");
     TRACE_AND_INDENT();
+
     if (ai_escape()) {
       return true;
     }
@@ -43,6 +45,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
     ai->wander_dest = point(0, 0);
     AI_LOG("I am on bad terrain, and cannot escape. Try to wander.");
     TRACE_AND_INDENT();
+
     if (ai_wander()) {
       return true;
     }

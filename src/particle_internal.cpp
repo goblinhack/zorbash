@@ -23,13 +23,6 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
 {
   TRACE_NO_INDENT();
 
-  if (g_opt_ascii) {
-    callback();
-    return;
-  }
-
-  DBG3("Create new internal particle");
-
   if (unlikely(! tile)) {
     err("No internal particle tile");
     return;
@@ -42,14 +35,22 @@ void Level::new_internal_particle(ThingId id, point start, point stop, isize sz,
         return;
       }
 
+      if (g_opt_ascii) {
+        callback();
+        return;
+      }
+
       if (t->has_internal_particle) {
         return;
       }
 
-      IF_DEBUG3
-      t->log("New internal particle");
       t->has_internal_particle = true;
     }
+  }
+
+  if (g_opt_ascii) {
+    callback();
+    return;
   }
 
   uint32_t now = time_game_ms();

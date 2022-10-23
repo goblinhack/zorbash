@@ -660,7 +660,6 @@ void Thing::animate(void)
   if (is_debug_type()) {
     con("Animate");
   }
-  TRACE_AND_INDENT();
 #endif
 
   auto tpp  = tp();

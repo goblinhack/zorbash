@@ -376,6 +376,7 @@ bool Thing::victim_attack_found_best(int equip, Thingp item, Thingp best, point 
   //
   dbg2("Target-attack-best: Swing weapon?");
   TRACE_AND_INDENT();
+
   victim_attack_swing(equip, best, best_hit_at, attack_options);
 
   //
@@ -771,6 +772,7 @@ bool Thing::victim_attack_best_(int equip, AttackOptions *attack_options)
         point at = curr_at + d;
         dbg("Target-attack-best: Try to attack 180 adj with equipped item at %s", at.to_string().c_str());
         TRACE_AND_INDENT();
+
         attack_options->attempt       = attempt;
         attack_options->attack_at_set = true;
         attack_options->attack_at     = at;

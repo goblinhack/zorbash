@@ -12,6 +12,7 @@
 std::string Thing::to_string(void)
 {
   TRACE_NO_INDENT();
+
   auto tpp = tp();
   verify(MTYPE_THING, this);
 
@@ -85,6 +86,7 @@ std::string Thing::to_string(void)
 std::string Thing::to_short_string(void)
 {
   TRACE_NO_INDENT();
+
   auto tpp = tp();
   verify(MTYPE_THING, this);
 
@@ -122,6 +124,7 @@ std::string Thing::to_short_string(void)
 std::string Thing::to_dbg_string(void)
 {
   TRACE_NO_INDENT();
+
   verify(MTYPE_THING, this);
 
   return (string_sprintf(
@@ -185,6 +188,7 @@ std::string Thing::to_dbg_string(void)
 std::string Thing::to_dbg_saved_string(void)
 {
   TRACE_NO_INDENT();
+
   verify(MTYPE_THING, this);
 
   return (string_sprintf(

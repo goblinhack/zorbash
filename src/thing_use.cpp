@@ -315,7 +315,6 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     preferred_equip = use_options->preferred_equip;
   }
 
-  TRACE_NO_INDENT();
   dbg("Trying to use: %s", what->to_short_string().c_str());
   TRACE_AND_INDENT();
 

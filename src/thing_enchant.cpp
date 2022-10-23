@@ -44,9 +44,9 @@ void Thing::on_enchant(void)
 
 bool Thing::enchant_with_stone(Thingp what)
 {
-  msg("You enchant %s.", what->text_the().c_str());
-
-  dbg("enchant %s", what->text_the().c_str());
+  if (is_player()) {
+    msg("You enchant %s.", what->text_the().c_str());
+  }
   TRACE_AND_INDENT();
 
   what->on_enchant();
@@ -76,9 +76,9 @@ bool Thing::enchant_with_stone(Thingp what)
 
 bool Thing::enchant_without_stone(Thingp what)
 {
-  msg("You enchant %s.", what->text_the().c_str());
-
-  dbg("Enchant %s", what->text_the().c_str());
+  if (is_player()) {
+    msg("You enchant %s.", what->text_the().c_str());
+  }
   TRACE_AND_INDENT();
 
   what->on_enchant();

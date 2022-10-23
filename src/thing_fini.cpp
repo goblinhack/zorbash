@@ -12,7 +12,8 @@
 
 Thing::~Thing_(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
+
   verify(MTYPE_THING, this);
   destroy();
   oldptr(MTYPE_THING, this);
@@ -21,11 +22,11 @@ Thing::~Thing_(void)
 void Thing::destroy(void)
 {
   TRACE_NO_INDENT();
+
   verify(MTYPE_THING, this);
 
   /*
    * If seeing a crash in printing the description of the thing this can be handy.
-   *
   if (maybe_infop()) {
     LOG("Destroy %" PRIX32 " leader %" PRIX32, id.id, infop()->leader_id.id);
   }

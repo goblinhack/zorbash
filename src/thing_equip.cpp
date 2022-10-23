@@ -670,6 +670,7 @@ bool Thing::equip_use(bool forced, int equip, AttackOptions *attack_options)
 
   dbg("Find best attack target");
   TRACE_AND_INDENT();
+
   bool attacked = victim_attack_best(equip, attack_options);
   if (! attacked) {
     if (is_player() && forced) {
@@ -710,6 +711,7 @@ bool Thing::equip_use_may_attack(int equip)
 {
   dbg("Equip use and may attack");
   TRACE_AND_INDENT();
+
   AttackOptions attack_options {};
   return equip_use(false, equip, &attack_options);
 }
@@ -718,6 +720,7 @@ bool Thing::equip_use_must_attack(int equip)
 {
   dbg("Equip use and must attack");
   TRACE_AND_INDENT();
+
   AttackOptions attack_options {};
   return equip_use(true, equip, &attack_options);
 }

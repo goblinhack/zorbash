@@ -13,7 +13,6 @@
 
 void Thing::inventory_particle(Thingp item, uint32_t slot)
 {
-  TRACE_NO_INDENT();
   dbg("Create inventory particle? %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -72,8 +71,10 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
       point s = (last_blit_tl + last_blit_br) / (short) 2;
       point j(pcg_random_range(0, TILE_WIDTH) - TILE_WIDTH / 2, pcg_random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
       std::string name = "gold1." + std::to_string(pcg_random_range(1, 8));
-      level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2),
-                                   2 * PARTICLE_SPEED_MS + c, tile_find_mand(name), false);
+      if (! is_being_destroyed) {
+        level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2),
+                                     2 * PARTICLE_SPEED_MS + c, tile_find_mand(name), false);
+      }
     }
     return;
   }
@@ -99,8 +100,10 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 
     dbg("Yes; create inventory particle");
     std::string tile_name = "key.1";
-    level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), PARTICLE_SPEED_MS,
-                                 tile_find_mand(tile_name), false);
+    if (! is_being_destroyed) {
+      level->new_external_particle(NoThingId, s + j, p, isize(TILE_WIDTH / 2, TILE_HEIGHT / 2), PARTICLE_SPEED_MS,
+                                   tile_find_mand(tile_name), false);
+    }
     return;
   }
 
@@ -117,9 +120,11 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
     p.y    = (int) ((((float) game->config.game_pix_height) / ((float) TERM_HEIGHT)) * ((float) p.y));
 
     dbg("Yes; create inventory particle");
-    level->new_external_particle(
-        item->id, (last_blit_tl + last_blit_br) / (short) 2, p, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
-        tile_index_to_tile(item->tile_curr), (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()));
+    if (! is_being_destroyed) {
+      level->new_external_particle(
+          item->id, (last_blit_tl + last_blit_br) / (short) 2, p, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
+          tile_index_to_tile(item->tile_curr), (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()));
+    }
   }
 }
 
@@ -129,6 +134,8 @@ void Thing::inventory_particle(Thingp item, uint32_t slot)
 void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_target)
 {
   TRACE_NO_INDENT();
+
+  verify(MTYPE_THING, item);
 
   dbg("Create inventory particle %s with target %s", item->to_short_string().c_str(),
       particle_target->to_short_string().c_str());
@@ -186,9 +193,11 @@ void Thing::inventory_particle(Thingp item, uint32_t slot, Thingp particle_targe
   point where_to = (particle_target->last_blit_tl + particle_target->last_blit_br) / (short) 2;
 
   auto callback = std::bind(&Thing::visible, item);
-  level->new_external_particle(item->id, where_from, where_to, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
-                               tile_index_to_tile(item->tile_curr),
-                               (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()), callback);
+  if (! is_being_destroyed) {
+    level->new_external_particle(item->id, where_from, where_to, isize(TILE_WIDTH, TILE_HEIGHT), PARTICLE_SPEED_MS,
+                                 tile_index_to_tile(item->tile_curr),
+                                 (item->is_dir_br() || item->is_dir_right() || item->is_dir_tr()), callback);
+  }
 }
 
 bool Thing::inventory_shortcuts_insert(Thingp item)
@@ -390,7 +399,6 @@ bool Thing::inventory_shortcuts_remove(Thingp item)
 bool Thing::inventory_shortcuts_remove(Thingp item, Thingp particle_target)
 {
   TRACE_NO_INDENT();
-
   dbg("Inventory remove %s with target %s", item->to_short_string().c_str(),
       particle_target->to_short_string().c_str());
   TRACE_AND_INDENT();

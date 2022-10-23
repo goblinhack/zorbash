@@ -7,7 +7,7 @@
 
 bool Thing::place(const std::string &what, const point p)
 {
-  dbg("place");
+  dbg("Place");
   TRACE_AND_INDENT();
 
   level->thing_new(what, p);

@@ -8,7 +8,7 @@
 
 bool Thing::buff_find_is_slippery(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! maybe_itemsp()) {
     return false;
@@ -28,7 +28,7 @@ bool Thing::buff_find_is_slippery(void)
 
 bool Thing::buff_find_is_aquatic(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! maybe_itemsp()) {
     return false;
@@ -48,7 +48,7 @@ bool Thing::buff_find_is_aquatic(void)
 
 bool Thing::buff_find_is_fire_proof(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! maybe_itemsp()) {
     return false;

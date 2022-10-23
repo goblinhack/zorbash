@@ -20,11 +20,6 @@
 void Level::new_external_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
                                   bool hflip, MyCallback callback)
 {
-  if (g_opt_ascii) {
-    callback();
-    return;
-  }
-
   TRACE_NO_INDENT();
 
   if (unlikely(! tile)) {
@@ -42,14 +37,22 @@ void Level::new_external_particle(ThingId id, point start, point stop, isize sz,
         return;
       }
 
+      if (g_opt_ascii) {
+        callback();
+        return;
+      }
+
       if (t->has_external_particle) {
         return;
       }
 
-      IF_DEBUG3
-      t->log("New external particle");
       t->has_external_particle = true;
     }
+  }
+
+  if (g_opt_ascii) {
+    callback();
+    return;
   }
 
   uint32_t now = time_game_ms();
@@ -81,7 +84,6 @@ void Level::handle_external_particles(void)
           p.callback();
           IF_DEBUG3
           t->log("Particle end");
-          // t->con("end jump");
           t->is_scheduled_for_jump_end = true;
           t->has_external_particle     = false;
         }

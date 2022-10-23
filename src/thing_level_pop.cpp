@@ -3,11 +3,14 @@
 //
 
 #include "my_game.hpp"
+#include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 void Thing::level_pop(void)
 {
   TRACE_NO_INDENT();
+
+  verify(MTYPE_THING, this);
 
   if (! is_attached) {
     return;
@@ -267,6 +270,7 @@ void Thing::level_pop(void)
     i_set_water = false;
     level->gfx_water_unset(mx, my);
   }
+
   level->remove_thing(last_attached.x, last_attached.y, id);
 
   if (is_lava() || is_fire()) {

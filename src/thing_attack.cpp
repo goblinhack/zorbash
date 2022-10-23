@@ -62,7 +62,6 @@ bool Thing::possible_to_attack(const Thingp victim)
 
   if (is_debug_type()) {
     dbg("Is it possible to attack %s?", victim->to_short_string().c_str());
-    TRACE_AND_INDENT();
   }
 
   //
@@ -1196,6 +1195,7 @@ bool Thing::attack(Thingp victim, AttackOptions *attack_options)
     if (! missed) {
       dbg("Do the hit");
       TRACE_AND_INDENT();
+
       if (victim->is_hit(this, attack_options, attack_options->damage)) {
         dbg("The attack succeeded");
 

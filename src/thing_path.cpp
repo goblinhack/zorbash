@@ -107,7 +107,8 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
         //
         // If the thing we are going to land on is also a hazard, can we jump further?
         //
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
+
         if (is_disliked_by_me(jump_pos) && ai->move_path.size()) {
           DBG2("Next-next position %s is also a hazard", jump_pos.to_string().c_str());
 
@@ -347,6 +348,7 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
           //
           DBG2("Cursor is adjacent, try to move there");
           TRACE_AND_INDENT();
+
           if (move_no_shove_attack_allowed(mouse_at)) {
             return true;
           }
@@ -366,6 +368,7 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
           //
           DBG2("Cursor is not adjacent, try to jump there");
           TRACE_AND_INDENT();
+
           if (try_to_jump_carefree(mouse_at)) {
             game->tick_begin("player tried to jump");
             return true;
@@ -375,12 +378,14 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
 
       DBG2("Try to move, no shove, attack allowed on next hop %s", future_pos.to_string().c_str());
       TRACE_AND_INDENT();
+
       if (move_no_shove_attack_allowed(future_pos)) {
         return true;
       }
     } else {
       DBG2("Try to move, no shove, no attack as have move path");
       TRACE_AND_INDENT();
+
       if (move_no_shove_no_attack(future_pos)) {
         return true;
       }
@@ -389,12 +394,14 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
     if (possible_to_attack_at(future_pos)) {
       DBG2("Try to move and attack");
       TRACE_AND_INDENT();
+
       if (move_no_shove_attack_allowed(future_pos)) {
         return true;
       }
     } else {
       DBG2("Try to move, no shove, no attack");
       TRACE_AND_INDENT();
+
       if (move_no_shove_no_attack(future_pos)) {
         return true;
       }
@@ -402,6 +409,7 @@ bool Thing::path_pop_next_move(ThingMoveReason reason)
       if (possible_to_attack_at(future_pos)) {
         DBG2("Try to move, no shove, attack allowed");
         TRACE_AND_INDENT();
+
         if (move_no_shove_attack_allowed(future_pos)) {
           return true;
         }
