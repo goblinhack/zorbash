@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- - dead dogman, where is the dagger                                                                                                           -->
 <!-- - doors not shown in ascii mode when offscreen                                                                                               -->
 <!-- - ascii not auto scrolling if too low on the screen                                                                                          -->
 <!-- - if monst standing in open door, cannot hit                                                                                                 -->
