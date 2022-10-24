@@ -410,7 +410,7 @@ public:
       for (size_t idx = 0; idx < things_to_walk_size; idx++) {                                                       \
         Thingp t;                                                                                                    \
         t = things_to_walk[ idx ];                                                                                   \
-        verify(MTYPE_THING, t);
+  /* verify(MTYPE_THING, t); */
 
 #define FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                 \
   if (! (level)->is_oob(x, y)) {                                                                                     \
@@ -443,7 +443,7 @@ public:
         continue;                                                                                                    \
       }                                                                                                              \
                                                                                                                      \
-      verify(MTYPE_THING, t);
+    /* verify(MTYPE_THING, t); */
 
 #define FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)                                                               \
   if (i == level->interesting_things.end()) {                                                                        \
@@ -466,7 +466,7 @@ public:
       auto t = i->second;                                                                                            \
       /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
       i++;                                                                                                           \
-      verify(MTYPE_THING, t);
+    /* verify(MTYPE_THING, t); */
 
 #define FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(level)                                                                  \
   if (i == level->tickable_things.end()) {                                                                           \
@@ -489,7 +489,7 @@ public:
       auto t = i->second;                                                                                            \
       /* LOG("ID %08x -> %p", i->first.id, t); */                                                                    \
       i++;                                                                                                           \
-      verify(MTYPE_THING, t);
+    /* verify(MTYPE_THING, t); */
 
 #define FOR_ALL_DESCRIBABLE_THINGS_ON_LEVEL_END(level)                                                               \
   if (i == level->describable_things.end()) {                                                                        \
@@ -508,7 +508,7 @@ public:
     while (i != level->animated_things.end()) {                                                                      \
       auto t = i->second;                                                                                            \
       i++;                                                                                                           \
-      verify(MTYPE_THING, t);
+    /* verify(MTYPE_THING, t); */
 
 #define FOR_ALL_ANIMATED_THINGS_LEVEL_END(level)                                                                     \
   if (i == level->animated_things.end()) {                                                                           \

@@ -24,10 +24,10 @@ void Game::tick_begin(const std::string &why)
     auto player = level->player;
 
     if (player) {
-      LOG("Seed (%s) tick %d asked (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+      DBG("Seed (%s) tick %d asked (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
           player->to_string().c_str());
     } else {
-      LOG("Seed (%s) tick %d asked (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+      DBG("Seed (%s) tick %d asked (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
           level->to_string().c_str());
     }
   }
@@ -61,14 +61,14 @@ void Game::tick_begin_now(void)
   if (level) {
     auto player = level->player;
     if (player) {
-      LOG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+      DBG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
           player->to_string().c_str());
     } else {
-      LOG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
+      DBG("Seed (%s) tick %d begin (%s): %s", game->seed_name.c_str(), game->tick_current, why.c_str(),
           level->to_string().c_str());
     }
   } else {
-    LOG("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
+    DBG("Seed (%s) tick %d begin (%s)", game->seed_name.c_str(), game->tick_current, why.c_str());
   }
 
   TRACE_AND_INDENT();
@@ -139,18 +139,18 @@ bool Game::tick_end(void)
   if (level) {
     auto player = level->player;
     if (player) {
-      LOG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+      DBG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
           time_ms() - game->tick_begin_ms, player->to_string().c_str());
     } else {
-      LOG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
+      DBG("Seed (%s) tick %d end, duration %d ms: %s", game->seed_name.c_str(), game->tick_current,
           time_ms() - game->tick_begin_ms, level->to_string().c_str());
     }
   } else {
-    LOG("Seed (%s) tick %d end, duration %d ms", game->seed_name.c_str(), game->tick_current,
+    DBG("Seed (%s) tick %d end, duration %d ms", game->seed_name.c_str(), game->tick_current,
         time_ms() - game->tick_begin_ms);
   }
 
-  LOG("-");
+  DBG("-");
 
   if (level) {
     level->update();
@@ -171,7 +171,7 @@ bool Game::tick_end(void)
       h += (int)t->curr_at.y;
       t->con("THING AT");
     } FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
-    LOG("TICK %d hash %u rand %d", tick_current, h, pcg_random_range(1, 10000));
+    DBG("TICK %d hash %u rand %d", tick_current, h, pcg_random_range(1, 10000));
 #endif
   }
 

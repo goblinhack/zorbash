@@ -106,9 +106,12 @@ void Thing::msg(const char *fmt, ...)
     dbg("No player for msg: %s", why.c_str());
     TRACE_AND_INDENT();
 
-    va_start(args, fmt);
-    log_(fmt, args);
-    va_end(args);
+    IF_DEBUG
+    {
+      va_start(args, fmt);
+      dbg_(fmt, args);
+      va_end(args);
+    }
     return;
   }
 
@@ -116,9 +119,12 @@ void Thing::msg(const char *fmt, ...)
     dbg("Player not ready for msg: %s", why.c_str());
     TRACE_AND_INDENT();
 
-    va_start(args, fmt);
-    log_(fmt, args);
-    va_end(args);
+    IF_DEBUG
+    {
+      va_start(args, fmt);
+      dbg_(fmt, args);
+      va_end(args);
+    }
     return;
   }
 
@@ -135,9 +141,12 @@ void Thing::msg(const char *fmt, ...)
         dbg("Too far to see (dist %d) msg: %s", distance, why.c_str());
         TRACE_AND_INDENT();
 
-        va_start(args, fmt);
-        log_(fmt, args);
-        va_end(args);
+        IF_DEBUG
+        {
+          va_start(args, fmt);
+          dbg_(fmt, args);
+          va_end(args);
+        }
         return;
       }
     }
@@ -146,16 +155,22 @@ void Thing::msg(const char *fmt, ...)
       dbg("Cannot directly see for msg: %s", why.c_str());
       TRACE_AND_INDENT();
 
-      va_start(args, fmt);
-      log_(fmt, args);
-      va_end(args);
+      IF_DEBUG
+      {
+        va_start(args, fmt);
+        dbg_(fmt, args);
+        va_end(args);
+      }
       return;
     }
   }
 
-  va_start(args, fmt);
-  log_(fmt, args);
-  va_end(args);
+  IF_DEBUG
+  {
+    va_start(args, fmt);
+    dbg_(fmt, args);
+    va_end(args);
+  }
 
   va_start(args, fmt);
   ::topcon_(fmt, args);
