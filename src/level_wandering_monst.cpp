@@ -37,7 +37,7 @@ bool Level::create_wandering_monster(void)
     default: return false;
   }
 
-  if (monst_count >= LEVEL_MONST_COUNT_MAX) {
+  if (monst_count >= LEVEL_MONST_COUNT_ABS_MAX) {
     return false;
   }
 

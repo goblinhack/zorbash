@@ -218,6 +218,9 @@ void Game::place_player(void)
 
       IF_DEBUG2
       {
+        if (1) {
+          level->thing_new("ghost_mob", point(x + 2, y + 1));
+        }
         if (0) {
           level->thing_new("barrel", point(x + 2, y + 1));
           level->thing_new("rat_giant", point(x + 3, y + 1));

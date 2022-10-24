@@ -119,7 +119,7 @@ void Level::place_swimming_monsts(void)
       // This is for packs so that the monster count increases
       //
       assign_leaders_and_followers();
-      if (monst_count >= LEVEL_MONST_COUNT_MAX) {
+      if (monst_count >= LEVEL_MONST_COUNT_INIT_MAX) {
         return;
       }
     }
@@ -139,7 +139,7 @@ void Level::place_swimming_monsts(void)
       // This is for packs so that the monster count increases
       //
       assign_leaders_and_followers();
-      if (monst_count >= LEVEL_MONST_COUNT_MAX) {
+      if (monst_count >= LEVEL_MONST_COUNT_INIT_MAX) {
         return;
       }
     }

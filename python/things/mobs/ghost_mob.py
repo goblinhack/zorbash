@@ -57,7 +57,7 @@ def tp_init(name, text_long_name):
     my.minion_limit(self, 3)
     my.normal_placement_rules(self, True)
     my.on_death_do(self, "me.on_death()")
-    my.on_idle_tick_freq_dice(self, "1d20+20:me.on_idle_tick_freq_dice()")
+    my.on_idle_tick_freq_dice(self, "1d5+5:me.on_idle_tick_freq_dice()")
     my.text_a_or_an(self, "a")
     my.text_long_description(self, "A bone portal which spews the angry spirits of those long passed.")
     my.text_short_description(self, "A cursed pile of bones, spawning spirits.")

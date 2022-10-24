@@ -270,13 +270,6 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   init_hue();
 
   //
-  // Keep track of the monsts per level so we don't get too many
-  //
-  if (is_monst()) {
-    level->monst_count++;
-  }
-
-  //
   // e.g. wand charges
   //
   if (unlikely(tpp->charge_count())) {

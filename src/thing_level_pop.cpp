@@ -10,8 +10,6 @@ void Thing::level_pop(void)
 {
   TRACE_NO_INDENT();
 
-  verify(MTYPE_THING, this);
-
   if (! is_attached) {
     return;
   }
@@ -204,6 +202,7 @@ void Thing::level_pop(void)
   }
   if (i_set_is_monst) {
     i_set_is_monst = false;
+    level->monst_count--;
     level->is_monst_unset(mx, my);
   }
   if (i_set_is_obs_wall_or_door) {

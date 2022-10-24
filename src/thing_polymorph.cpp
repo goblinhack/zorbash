@@ -44,10 +44,6 @@ void Thing::polymorph(Tpp into)
   verify(MTYPE_THING, this);
   dbg("Polymorgh into: %s", into->name().c_str());
 
-  if (is_monst()) {
-    level->monst_count--;
-  }
-
   tp_id = into->id;
   mytp  = nullptr;
   tp_or_update();
@@ -90,8 +86,4 @@ void Thing::polymorph(Tpp into)
 
   on_born();
   check_all_carried_items_are_owned();
-
-  if (is_monst()) {
-    level->monst_count++;
-  }
 }

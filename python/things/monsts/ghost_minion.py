@@ -21,7 +21,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.damage_cold_dice(self, "1")
     my.distance_minion_vision_shared(self, True)
-    my.distance_mob_max(self, 6)
+    my.distance_mob_max(self, 4)
     my.distance_vision(self, 7)
     my.gfx_anim_use(self, "attack_claws")
     my.gfx_ascii_fade_with_dist(self, True)

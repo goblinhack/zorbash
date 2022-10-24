@@ -242,11 +242,10 @@ void Thing::achieve_goals_in_life(void)
         change_state(MONST_STATE_IDLE, "move path is empty");
       }
     }
-  } else {
+  } else if (is_monst()) {
     //
     // Pop the next monst move.
     //
-    dbg("Tick %d pop next move", game->tick_current);
     if (path_pop_next_move(THING_MOVE_REASON_AI)) {
       dbg("Popped next move");
       return;

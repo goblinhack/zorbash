@@ -56,10 +56,6 @@ void Level::things_gc(bool force)
 
       all_things_to_be_destroyed.erase(it);
 
-      if (t->is_monst()) {
-        monst_count--;
-      }
-
       IF_DEBUG3 { t->log("Thing garbage collect"); }
 
       delete t;

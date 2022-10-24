@@ -281,6 +281,7 @@ void Thing::level_push(void)
     }
     if (is_monst()) {
       i_set_is_monst = true;
+      level->monst_count++;
       level->is_monst_set(mx, my);
     }
     if (is_brazier()) {
