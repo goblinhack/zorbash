@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - did player get stuck on top of 2 monst corpses                                                                                             -->
 <!-- - dead dogman, where is the dagger                                                                                                           -->
 <!-- - doors not shown in ascii mode when offscreen                                                                                               -->
 <!-- - ascii not auto scrolling if too low on the screen                                                                                          -->
