@@ -322,6 +322,10 @@ void Thing::init(Levelp level, const std::string &name, const point born, Thingp
   //
   // Copy the owner offscreen status.
   //
+  if (is_player()) {
+    is_visible_to_player = true;
+  }
+
   if (owner) {
     is_visible_to_player = owner->is_visible_to_player;
   }

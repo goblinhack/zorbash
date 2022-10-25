@@ -3,7 +3,6 @@
 <!-- - dead dogman, where is the dagger                                                                                                           -->
 <!-- - ascii not auto scrolling if too low on the screen                                                                                          -->
 <!-- - if monst standing in open door, cannot hit                                                                                                 -->
-<!-- - generators are not generating                                                                                                              -->
 <!-- - check water interacting with fire/lava makes steam or basalt                                                                               -->
 <!-- - jump noise is delayed - check with non quickstart                                                                                          -->
 <!-- - kraken tentacles                                                                                                                           -->

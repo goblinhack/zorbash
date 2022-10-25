@@ -201,6 +201,8 @@ void Thing::owner_set(Thingp owner)
   // Inherit visibility.
   //
   is_visible_to_player = owner->is_visible_to_player;
+
+  dbg("Set owner to %s", owner->to_short_string().c_str());
 }
 
 void Thing::remove_owner(void)

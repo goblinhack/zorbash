@@ -724,15 +724,6 @@ void Thing::move_to(point to)
   auto delta = to - curr_at;
   move_set_dir_from_dest_or_delta(delta);
 
-  //
-  // If in debug mode, speed everything up
-  //
-  IF_DEBUG2
-  {
-    update_pos(to, true);
-    return;
-  }
-
   update_pos(to, false);
 }
 

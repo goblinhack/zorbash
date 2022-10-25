@@ -205,6 +205,14 @@ int Thing::light_distance_update(void)
     {
       if (get_no_check(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
         t->is_visible_to_player = true;
+
+        FOR_ALL_EQUIP(e)
+        {
+          auto anim = t->equip_carry_anim(e);
+          if (anim) {
+            anim->is_visible_to_player = true;
+          }
+        }
       }
     }
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
