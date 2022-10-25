@@ -77,7 +77,7 @@ def tp_init(name, text_long_name):
     my.stat_con(self, 10)
     my.stat_def(self, 11)
     my.stat_dex(self, 13)
-    my.stat_luck(self, 10)
+    my.stat_luck(self, 8)
     my.stat_str(self, 7)
     my.temperature(self, 0)
     my.text_a_or_an(self, "a")

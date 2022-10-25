@@ -30,6 +30,14 @@ def on_death(me, x, y):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones2")
 
 
+def on_firing_at_something(me, target, x, y):  # Return True on doing an action
+    if my.pcg_randint(1, 100) < 10:
+        my.thing_fire_at(me, "projectile_fire", target)
+        my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
+        return True
+    return False
+
+
 def tp_init(name, text_long_name):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
@@ -74,6 +82,7 @@ def tp_init(name, text_long_name):
     my.is_biome_swamp(self, True)
     my.is_carrier_of_treasure_class_a(self, True)
     my.is_corpse_on_death(self, True)
+    my.on_firing_at_something_do(self, "me.on_firing_at_something()")
     my.is_corpse_with_bones(self, True)
     my.is_crushable(self, True)
     my.is_described_when_hovering_over(self, True)
@@ -282,7 +291,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="skel_minion_fire", text_long_name="firey skeleton")
+    tp_init(name="skel_minion_fire", text_long_name="flaming skeleton")
 
 
 init()
