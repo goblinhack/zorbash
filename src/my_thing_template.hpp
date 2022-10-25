@@ -2445,14 +2445,14 @@ enum {
   THING_DIR_BR,
 };
 
-using biome_t = enum {
+using biome_t = enum biome_type {
   BIOME_DUNGEON,
   BIOME_SWAMP,
   BIOME_SEWER,
   BIOME_MAX,
 };
 
-using monst_class_t = enum {
+using monst_class_t = enum monst_class {
   MONST_CLASS_ANY,
   MONST_CLASS_A,
   MONST_CLASS_B,
@@ -2462,7 +2462,7 @@ using monst_class_t = enum {
   MONST_CLASS_MAX,
 };
 
-using monst_type_t = enum {
+using monst_type_t = enum monst_type {
   MONST_TYPE_NORMAL,
   MONST_TYPE_SHALLOW_WATER,
   MONST_TYPE_DEEP_WATER,

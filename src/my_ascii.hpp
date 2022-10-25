@@ -66,7 +66,7 @@ using button_args = struct {
   void *context;
 };
 
-using box_args = struct {
+using box_args = struct box_args_ {
   int x;
   int y;
   int width;

@@ -33,7 +33,7 @@ void Game::place_player(void)
     return;
   }
 
-  LOG("INF: Place player");
+  DBG("INF: Place player");
 
   for (auto x = MAP_BORDER_ROCK; x < MAP_WIDTH - MAP_BORDER_ROCK; x++) {
     for (auto y = MAP_BORDER_ROCK; y < MAP_HEIGHT - MAP_BORDER_ROCK; y++) {
@@ -374,15 +374,14 @@ void Game::place_player(void)
       // level->thing_new("lava", point(x + 1, y + 7));
       // level->thing_new("lava", point(x + 1, y + 7));
 
-      LOG("INF: Placed player");
-
       // level->thing_new("jelly_parent", point(x, y + 4));
       // level->thing_new("jelly_baby", point(x, y + 2));
       //
       // Zoom the map to the player
       //
-      LOG("INF: Scroll to player");
       level->scroll_map_to_player();
+
+      DBG("INF: Placed player");
     }
   }
 

@@ -323,7 +323,7 @@ void Level::display_pixelart_map_all(void)
       ts_fade_out_begin = 0;
       fade_out_finished = true;
       if (player) {
-        player->log("Fade out of level finished");
+        DBG("Fade out of level finished");
       }
     }
   }
@@ -333,7 +333,7 @@ void Level::display_pixelart_map_all(void)
       is_map_mini_valid = false;
       ts_fade_in_begin  = 0;
       if (player) {
-        player->log("Fade in of level finished");
+        DBG("Fade in of level finished");
         request_player_light_update = true;
       }
     }
