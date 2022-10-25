@@ -21,6 +21,7 @@ def tp_init(name):
     my.collision_hit_priority(self, 9)
     my.damage_crush_chance_d1000(self, 0, 1000)
     my.damage_crush_dice(self, "2d6")
+    my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_oversized_and_on_floor(self, True)
     my.gfx_pixelart_animated(self, True)
