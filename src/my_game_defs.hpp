@@ -34,6 +34,8 @@
 #define MAP_ROOM_HEIGHT 13 // Max room dimensions
 #define MAP_ROOM_WIDTH  13 // Max room dimensions
 
+#define MAP_BORDER_ASCII_AUTO_SCROLL 8 // Max room dimensions
+
 #define LEVELS_ACROSS MAP_WIDTH // World size; no world yet...
 #define LEVELS_DOWN   MAP_HEIGHT
 #define LEVELS_DEEP   (DUNGEONS_GRID_CHUNK_HEIGHT * 2)

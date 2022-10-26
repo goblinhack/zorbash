@@ -240,6 +240,7 @@ void Level::scroll_map_to_player_immediately(void)
   while (tries++ < 10000) {
     auto dx = map_at.x - map_wanted_at.x;
     auto dy = map_at.y - map_wanted_at.y;
+
     if ((dx == 0) && (dy == 0)) {
       return;
     }
@@ -293,18 +294,46 @@ void Level::scroll_map_set_target(void)
       //
       // Unless we are really at the edges.
       //
-      int scroll_border = MAP_BORDER_ROCK * 4;
+      int scroll_border = MAP_BORDER_ASCII_AUTO_SCROLL;
 
-      if (player->curr_at.x > MAP_WIDTH - scroll_border) {
-        auto_scroll = true;
+      //
+      // The ascii map should fit the screen; so not sure if we need this.
+      //
+      bool left_right_scroll = false;
+
+      //
+      // Scroll if at the edges of the map
+      //
+      if (left_right_scroll) {
+        if (player->curr_at.x > MAP_WIDTH - scroll_border) {
+          auto_scroll = true;
+        }
+        if (player->curr_at.x < scroll_border) {
+          auto_scroll = true;
+        }
       }
       if (player->curr_at.y > MAP_HEIGHT - scroll_border) {
         auto_scroll = true;
       }
-      if (player->curr_at.x < scroll_border) {
+      if (player->curr_at.y < scroll_border) {
         auto_scroll = true;
       }
-      if (player->curr_at.y < scroll_border) {
+
+      //
+      // Scroll if at the edges of the screen
+      //
+      if (left_right_scroll) {
+        if (player->last_ascii_at.x > TERM_WIDTH - scroll_border) {
+          auto_scroll = true;
+        }
+        if (player->last_ascii_at.x < scroll_border) {
+          auto_scroll = true;
+        }
+      }
+      if (player->last_ascii_at.y > TERM_HEIGHT - scroll_border) {
+        auto_scroll = true;
+      }
+      if (player->last_ascii_at.y < scroll_border) {
         auto_scroll = true;
       }
     }
