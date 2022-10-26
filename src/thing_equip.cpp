@@ -341,6 +341,8 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
         drop(item);
       }
     }
+  } else if (! is_being_destroyed && ! item->is_being_destroyed && is_dead_or_dying()) {
+    drop(item);
   }
 
   auto top_owner = item->top_owner();
