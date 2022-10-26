@@ -31,6 +31,13 @@ void Level::update_light_ascii_map(void)
     for (auto x = minx; x < maxx; x++) {
       FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
+        //
+        // So knocked over braziers do not light
+        //
+        if (t->is_dead || t->is_corpse()) {
+          continue;
+        }
+
         for (auto &l : t->light_get()) {
           //
           // In pixel art mode we have more lights. Ignore those.

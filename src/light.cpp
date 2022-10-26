@@ -800,6 +800,13 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
     for (auto x = minx; x < maxx; x++) {
       FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
+        //
+        // So knocked over braziers do not light
+        //
+        if (t->is_dead || t->is_corpse()) {
+          continue;
+        }
+
         for (auto &l : t->light_get()) {
 
           if (player && (l->owner == player)) {
@@ -880,6 +887,13 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
     for (auto x = minx; x < maxx; x++) {
       FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
+        //
+        // So knocked over braziers do not light
+        //
+        if (t->is_dead || t->is_corpse()) {
+          continue;
+        }
+
         for (auto &l : t->light_get()) {
 
           if (player && (l->owner == player)) {
@@ -983,6 +997,13 @@ void Level::lights_update_new_level(void)
       FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
         //
+        // So knocked over braziers do not light
+        //
+        if (t->is_dead || t->is_corpse()) {
+          continue;
+        }
+
+        //
         // Need to do this as light position depends on blitting
         //
         t->is_blitted = false;
@@ -1007,6 +1028,13 @@ void Level::lights_update_same_level(void)
     for (auto x = 0; x < MAP_WIDTH; x++) {
       FOR_ALL_LIGHTS_AT(this, t, x, y)
       {
+        //
+        // So knocked over braziers do not light
+        //
+        if (t->is_dead || t->is_corpse()) {
+          continue;
+        }
+
         for (auto &l : t->light_get()) {
           l->update();
           l->reset();

@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - dead brazier casting light     r                                                                                                           -->
 <!-- - dead dogman, where is the dagger                                                                                                           -->
 <!-- - ascii not auto scrolling if too low on the screen                                                                                          -->
 <!-- - if monst standing in open door, cannot hit                                                                                                 -->
