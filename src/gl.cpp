@@ -246,7 +246,7 @@ static void gl_init_fbo_(int fbo, GLuint *render_buf_id, GLuint *fbo_id, GLuint 
 
   if (*fbo_id) {
     DBG2("OpenGl: - glDeleteRenderbuffers");
-    glDeleteRenderbuffers(1, fbo_id);
+    glDeleteRenderbuffers_EXT(1, fbo_id);
     GL_ERROR_CHECK();
     *fbo_id = 0;
   }
