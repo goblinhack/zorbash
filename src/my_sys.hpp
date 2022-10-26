@@ -6,6 +6,8 @@
 #ifndef _MY_SYS_HPP_
 #define _MY_SYS_HPP_
 
+#include "my_format_str_attribute.hpp"
+
 #include <stdint.h>
 
 #if __GNUC__ >= 8
@@ -151,9 +153,9 @@ typedef unsigned long int uint64_t;
 //
 #include "my_callstack.hpp"
 
-void DYING(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
-void CROAK(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
-void CROAK_CLEAN(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+void DYING(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+void CROAK(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+void CROAK_CLEAN(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 
 #define DIE(args...)                                                                                                 \
   DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);                                                     \

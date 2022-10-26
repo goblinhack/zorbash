@@ -6,6 +6,7 @@
 #ifndef _MY_LIGHT_H
 #define _MY_LIGHT_H
 
+#include "my_format_str_attribute.hpp"
 #include "my_fwd.hpp"
 #include "my_point.hpp"
 #include "my_thing_defs.hpp"
@@ -53,22 +54,22 @@ public:
   std::array< std::vector< RayPoint >, LIGHT_MAX_RAYS > points;
 
   bool calculate(void);
-  void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void con(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void con_(const char *fmt, va_list args); // compile error without
   void destroy();
   void destroyed(void);
-  void die(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void die(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void die_(const char *fmt, va_list args); // compile error without
   void draw_line(const int16_t index, const point p0, const point p1);
   void draw_pixel(const int16_t index, const point p0, const point p1);
-  void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void err(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void err_(const char *fmt, va_list args); // compile error without
-  void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void log(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void log_(const char *fmt, va_list args); // compile error without
   void render(int ray_cast_only);
   void render_triangle_fans(void);
   void reset(void);
-  void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void topcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void topcon_(const char *fmt, va_list args); // compile error without
   void update(void);
 };

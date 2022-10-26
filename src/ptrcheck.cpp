@@ -124,7 +124,7 @@ static void error_(const char *fmt, va_list args)
   std::cerr << err << std::endl;
 }
 
-void ERROR(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+void ERROR(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void ERROR(const char *fmt, ...)
 {
   va_list args;
