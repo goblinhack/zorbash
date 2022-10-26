@@ -8,6 +8,8 @@
 
 #include <stdint.h>
 
+#include "my_format_str_attribute.hpp"
+
 int            file_write(const char *filename, unsigned char *buffer, int len);
 uint8_t        file_exists(const char *filename);
 int            file_size(const char *filename);
@@ -25,7 +27,7 @@ unsigned char *file_load(const char *filename, int *outlen);
 #define SET_BINARY_MODE(file)
 #endif
 
-void FILE_LOG(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
-void FILE_DBG(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+void FILE_LOG(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+void FILE_DBG(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 
 #endif

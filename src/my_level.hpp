@@ -13,6 +13,7 @@
 
 #include "my_dmap.hpp"
 #include "my_fcolor.hpp"
+#include "my_format_str_attribute.hpp"
 #include "my_fwd.hpp"
 #include "my_game_defs.hpp"
 #include "my_laser.hpp"
@@ -899,7 +900,7 @@ public:
   void assign_leaders_and_followers(void);
   void chances_of_creating_set(void);
   void clear(void);
-  void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void con(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void con_(const char *fmt, va_list args); // compile error without
   void create_biome_dungeon_place_braziers(Dungeonp d, const std::string &what);
   void create_biome_dungeon_place_bridge(Dungeonp d);
@@ -978,7 +979,7 @@ public:
   void display_target(void);
   void display_tick_animation(void);
   void dmap_to_player_update(void);
-  void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void err(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void err_(const char *fmt, va_list args); // compile error without
   void fade_in_incr(const int x, const int y);
   void fade_in_no_check_incr(const int x, const int y);
@@ -1146,7 +1147,7 @@ public:
   void lights_render_small_lights(int minx, int miny, int maxx, int maxy, int fbo, bool include_player_lights);
   void lights_update_new_level(void);
   void lights_update_same_level(void);
-  void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void log(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void log_(const char *fmt, va_list args); // compile error without
   void l_shaped_path_to_diag(std::vector< point > &path);
   void new_external_particle(ThingId, point, point, isize, uint32_t dur, Tilep, bool, MyCallback = NoCallback);

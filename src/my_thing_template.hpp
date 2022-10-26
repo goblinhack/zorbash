@@ -7,6 +7,7 @@
 #define _MY_THING_TEMPLATE_H
 
 #include "my_dice.hpp"
+#include "my_format_str_attribute.hpp"
 #include "my_fwd.hpp"
 #include "my_size.hpp"
 #include "my_thing_defs.hpp"
@@ -818,16 +819,16 @@ public:
   bool is_edible(const Thingp it);
   bool has_temperature(void);
 
-  void dbg_(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-  void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void dbg_(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
+  void err(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void err_(const char *fmt, va_list args); // compile error without
-  void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void log(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void log_(const char *fmt, va_list args); // compile error without
-  void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void topcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void topcon_(const char *fmt, va_list args); // compile error without
-  void die(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void die(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void die_(const char *fmt, va_list args); // compile error without
-  void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void con(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void con_(const char *fmt, va_list args); // compile error without
 
   const Dice &damage_acid_dice(void) const;

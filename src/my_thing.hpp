@@ -12,6 +12,7 @@
 
 #include "my_color.hpp"
 #include "my_dice.hpp"
+#include "my_format_str_attribute.hpp"
 #include "my_fwd.hpp"
 #include "my_point.hpp"
 #include "my_point3d.hpp"
@@ -2235,7 +2236,7 @@ public:
   void blit_wall_shadow(point tl, point br, const ThingTiles *tiles);
   void block_of_ice_tick(void);
   void born_set(point3d);
-  void botcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void botcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void botcon_(const char *fmt, va_list args); // compile error without
   void bounce_count_set(int);
   void bounce_fade_set(float);
@@ -2258,18 +2259,18 @@ public:
   void clear_interrupt_map(void);
   void clear_move_path(const std::string &why);
   void clear_seen_map(void);
-  void con(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void con(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void con_(const char *fmt, va_list args); // compile error without
   void corrode_tick(void);
   void cursor_hover_over_check(void);
-  void dbg_(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-  void dead(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void dbg_(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
+  void dead(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void dead_(const char *fmt, va_list args); // compile error without
   void dead(const std::string &);
   void dead_reason_set(const std::string &);
-  void dead_scheduled(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void dead_scheduled(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void dead_scheduled(const std::string &);
-  void dead(Thingp defeater, const char *fmt, ...) __attribute__((format(printf, 3, 4)));
+  void dead(Thingp defeater, const char *fmt, ...) CHECK_FORMAT_STR(printf, 3, 4);
   void dead_(Thingp defeater, const char *fmt, va_list args);
   void dead(Thingp defeater, std::string &);
   void debuff_activate(Thingp what);
@@ -2284,7 +2285,7 @@ public:
   void destroy_minions(Thingp defeater);
   void destroy_spawned(Thingp defeater);
   void destroy(void);
-  void die(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void die(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void die_(const char *fmt, va_list args); // compile error without
   void dir_set_bl(void);
   void dir_set_br(void);
@@ -2307,7 +2308,7 @@ public:
   void equip_use_anim_id_set(ThingId gfx_anim_use_id, int equip);
   void equip_use_anim_set(Thingp gfx_anim_use, int equip);
   void equip_use_offset_get(int *dx, int *dy, int equip);
-  void err(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void err(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void err_(const char *fmt, va_list args); // compile error without
   void fadeup_fade_set(float);
   void fadeup(float fadeup_height, float fadeup_fade, ts_t ms);
@@ -2347,7 +2348,7 @@ public:
   void light_dist_including_torch_effect_get(uint8_t &light_dist);
   void location_check_me(void);
   void location_check(Thingp filter_to = nullptr);
-  void log(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void log(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void log_(const char *fmt, va_list args); // compile error without
   void lunge(point tt);
   void lunge_to_set(point);
@@ -2366,7 +2367,7 @@ public:
   void move_speed_curr_set(int);
   void move_to_immediately(point to);
   void move_to(point to);
-  void msg(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void msg(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void msg_set(const std::string &);
   void necrosis_tick(void);
   void new_aip(void);
@@ -2458,7 +2459,7 @@ public:
   void throw_at(Thingp w, Thingp target);
   void tick(void);
   void tiles_get(void);
-  void topcon(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+  void topcon(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void topcon_(const char *fmt, va_list args); // compile error without
   void try_to_carry(const std::list< Thingp > &items);
   void unleash_minions(void);

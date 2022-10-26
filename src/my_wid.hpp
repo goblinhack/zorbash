@@ -16,8 +16,8 @@
 #include "my_time.hpp"
 #include "my_wid_tiles.hpp"
 
-void WID_LOG(Widp, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-void WID_DBG(Widp, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+void WID_LOG(Widp, const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
+void WID_DBG(Widp, const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
 
 typedef enum {
   WID_COLOR_BG,

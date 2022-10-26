@@ -11,6 +11,8 @@
 #include <string>
 #include <vector>
 
+#include "my_format_str_attribute.hpp"
+
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *die_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *err_(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -272,8 +274,8 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
 #name, pysdl_##name, METH_VARARGS, name##_doc                                                                    \
   }
 
-void PY_LOG(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
-void PY_DBG(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
+void PY_LOG(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+void PY_DBG(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 
 extern PyObject *my_mod;
 #endif
