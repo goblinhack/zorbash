@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - cannot select right most ascii tile on map                                                                                                 -->
 <!-- - if monst standing in open door, cannot hit                                                                                                 -->
 <!-- - check water interacting with fire/lava makes steam or basalt                                                                               -->
 <!-- - jump noise is delayed - check with non quickstart                                                                                          -->
