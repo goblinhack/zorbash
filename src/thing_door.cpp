@@ -155,11 +155,16 @@ bool Thing::close_door(Thingp door)
       continue;
     }
 
-    t->log("Is in the way of a door being closed");
-    TRACE_AND_INDENT();
+    if (t->thing_size() > thing_size()) {
+      msg("%s blocks the door from closing.", t->text_The().c_str());
+    }
 
     if (is_player()) {
-      msg("You slam the door on %s.", t->text_the().c_str());
+      if (t->is_ethereal()) {
+        msg("The closing door passes through %s.", t->text_the().c_str());
+      } else {
+        msg("You slam the door on %s.", t->text_the().c_str());
+      }
     }
 
     t->is_attacked_with_damage_crush(door, this, door->damage_crush());

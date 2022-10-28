@@ -551,7 +551,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     // This is for things like doors that do not need to look for their next frame
     // in a spin loop.
     //
-    delay = 1000;
+    delay = 200;
   }
 
   //

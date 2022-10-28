@@ -153,14 +153,17 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
             IF_DEBUG2 { player->log("Close door"); }
             TRACE_AND_INDENT();
             game->tick_begin("close door");
-            if (! player->close_door(t)) {
-              IF_DEBUG2 { player->log("Failed to close door"); }
+
+            if (player->close_door(t)) {
+              IF_DEBUG2 { player->log("Closed a door"); }
+              return true;
             }
 
             //
-            // Not sure why closing a door would fail, but I don't think we should fall through to attack.
+            // If we fail to close the door; there could be a larger thing standing there,
+            // then fall through to attack.
             //
-            return true;
+            IF_DEBUG2 { player->log("Failed to close door"); }
           }
 
           //
@@ -170,13 +173,15 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
             IF_DEBUG2 { player->log("Open door"); }
             TRACE_AND_INDENT();
             game->tick_begin("open door");
+
             if (player->open_door(t)) {
-              IF_DEBUG2 { player->log("Failed to open door"); }
+              IF_DEBUG2 { player->log("Opened a door"); }
               return true;
             }
 
             //
-            // Fall through to attack the door (if opening failed or we had no key).
+            // Fall through to attack if we fail to open the door. Maybe there is a monst
+            // in the way
             //
           }
 

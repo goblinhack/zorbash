@@ -41,9 +41,13 @@ void Game::place_player(void)
         continue;
       }
       auto t = level->thing_new("player2", point(x, y));
-      if (1) {
-        auto w = level->thing_new("sword_wood", point(x, y));
-        t->carry(w);
+      if (0) {
+        auto k = level->thing_new("key", point(x, y));
+        t->carry(k);
+      }
+      if (0) {
+        auto d = level->thing_new("door_wood", point(x + 3, y - 2));
+        d->open();
       }
       if (1) {
         auto w = level->thing_new("food_pottedmeat", point(x, y));
