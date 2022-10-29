@@ -7,6 +7,7 @@
 #define _MY_SYS_HPP_
 
 #include "my_format_str_attribute.hpp"
+#include "my_source_loc.hpp"
 
 #include <stdint.h>
 
@@ -157,14 +158,14 @@ void DYING(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void CROAK(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void CROAK_CLEAN(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 
-#define DIE(args...)                                                                                                 \
-  DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);                                                     \
-  CROAK(args);                                                                                                       \
+#define DIE(...)                                                                                                 \
+  DYING("Died at %s:%s():%u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                                       \
+  CROAK(__VA_ARGS__);                                                                                            \
   exit(1);
 
-#define DIE_CLEAN(args...)                                                                                           \
-  DYING("Exiting at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);                                                  \
-  CROAK_CLEAN(args);                                                                                                 \
+#define DIE_CLEAN(...)                                                                                           \
+  DYING("Exiting at %s:%s():%u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                                    \
+  CROAK_CLEAN(__VA_ARGS__);                                                                                      \
   exit(1);
 
 #ifdef DEBUG
@@ -193,15 +194,14 @@ void CROAK_CLEAN(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 // Based on
 // https://stackoverflow.com/questions/2193544/how-to-print-additional-information-when-assert-fails
 #ifdef ENABLE_ASSERT
-#define ASSERT_EX(left, operator, right)                                                                                               \
-  if (! ((left) operator(right))) {                                                                                                    \
-    TRACE_AND_INDENT();                                                                                                                \
-    std::cerr << "ASSERT FAILED: " << #left << " "                                                                                     \
-              << #                                                                                                                     \
-        operator<< " " << #right << " @ " << __FILE__ << ":" << __PRETTY_FUNCTION__ << " line " << __LINE__ << " " << #left << "=" <<( \
-            left)                                                                                                                      \
-              << "; " << #right << "=" << (right) << std::endl;                                                                        \
-    ASSERT(left operator right);                                                                                                       \
+#define ASSERT_EX(left, operator, right)                                                                             \
+  if (! ((left) operator (right))) {                                                                                 \
+    TRACE_AND_INDENT();                                                                                              \
+    std::cerr << "ASSERT FAILED: " << #left << " " << #operator << " " << #right                                     \
+              << " @ " << SRC_FILE_NAME << ":" << SRC_FUNC_NAME << " line " << SRC_LINE_NUM                          \
+              << " " << #left << "=" << (left)                                                                       \
+              << "; " << #right << "=" << (right) << std::endl;                                                      \
+    ASSERT(left operator right);                                                                                     \
   }
 #else
 #define ASSERT_EX(left, operator, right)

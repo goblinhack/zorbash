@@ -3,11 +3,13 @@
 #ifndef _MY__PTRCHECK_HPP__
 #define _MY__PTRCHECK_HPP__
 
+#include "my_source_loc.hpp"
+
 //
 // __FUNCTION__ is not a preprocessor directive so we can't convert it into a
 // string
 //
-#define PTRCHECK_AT __FILE__, __PRETTY_FUNCTION__, __LINE__
+#define PTRCHECK_AT SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM
 
 void *myzalloc_(int size, const char *what, const char *func, const char *file, int line);
 void *mymalloc_(int size, const char *what, const char *func, const char *file, int line);
@@ -56,7 +58,7 @@ void  ptrcheck_leak_print(void);
   {                                                                                                                  \
     if (DEBUG2) {                                                                                                    \
       TRACE_AND_INDENT();                                                                                            \
-      ptrcheck_verify(__mtype__, __ptr__, __FILE__, __PRETTY_FUNCTION__, __LINE__);                                  \
+      ptrcheck_verify(__mtype__, __ptr__, SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                               \
     }                                                                                                                \
   }
 

@@ -134,11 +134,11 @@ void ERROR(const char *fmt, ...)
 }
 
 #define DIE(args...)                                                                                                 \
-  std::cerr << string_sprintf("Died at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);                     \
+  std::cerr << string_sprintf("Died at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                  \
   CROAK(args);
 
 #define ERR(args...)                                                                                                 \
-  std::cerr << string_sprintf("Error at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);                    \
+  std::cerr << string_sprintf("Error at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                 \
   ERROR(args);
 
 #endif
