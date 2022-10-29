@@ -2,19 +2,8 @@
 #ifndef _MY_SOURCE_LOC_HPP_
 #define _MY_SOURCE_LOC_HPP_
 
-#define HAVE_WORKING_SOURCE_LOCATION_HEADER
-
-#ifdef __clang__
-// Seems to be missing for clang. Including <experimental/source_location> did not help
-#undef HAVE_WORKING_SOURCE_LOCATION_HEADER
-#endif
-
-#ifdef __APPLE__
-// Missing with macports
-#undef HAVE_WORKING_SOURCE_LOCATION_HEADER
-#endif
-
-#ifdef HAVE_WORKING_SOURCE_LOCATION_HEADER
+#if defined(__cpp_lib_source_location) && (__cpp_lib_source_location >= 201907L)
+// Feature test macros https://en.cppreference.com/w/cpp/feature_test
 #include <source_location>
 #define SRC_FILE_NAME (std::source_location::current().file_name())
 #define SRC_FUNC_NAME (std::source_location::current().function_name())
