@@ -20,7 +20,7 @@ def on_born(me, x, y):
     pass
 
 
-def on_fall(me, x, y):
+def on_fall_begin(me, x, y):
     my.thing_msg(me, "Aaargh!")
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "fall")
 
@@ -441,7 +441,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_born_do(self, "player.on_born()")
     my.on_death_do(self, "player.on_death()")
     my.on_death_drop_all_items(self, True)
-    my.on_fall_do(self, "player.on_fall()")
+    my.on_fall_begin_do(self, "player.on_fall_begin()")
     my.on_move_do(self, "player.on_move()")
     my.on_receiving_dmg_acid_do(self, "player.on_receiving_dmg_acid()")
     my.on_receiving_dmg_bite_do(self, "player.on_receiving_dmg_bite()")

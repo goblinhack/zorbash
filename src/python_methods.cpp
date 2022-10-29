@@ -1351,6 +1351,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_dropped_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_enchant_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_equip_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_fall_begin_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_fall_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_final_use_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_firing_at_something_do),

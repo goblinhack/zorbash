@@ -695,6 +695,7 @@ private:
   std::string _on_dropped_do;
   std::string _on_enchant_do;
   std::string _on_equip_do;
+  std::string _on_fall_begin_do;
   std::string _on_fall_do;
   std::string _on_final_use_do;
   std::string _on_firing_at_something_do;
@@ -995,6 +996,7 @@ public:
   const std::string &on_dropped_do(void) const;
   const std::string &on_enchant_do(void) const;
   const std::string &on_equip_do(void) const;
+  const std::string &on_fall_begin_do(void) const;
   const std::string &on_fall_do(void) const;
   const std::string &on_final_use_do(void) const;
   const std::string &on_firing_at_something_do(void) const;
@@ -2128,6 +2130,7 @@ public:
   void on_dropped_do_set(const std::string &v);
   void on_enchant_do_set(const std::string &v);
   void on_equip_do_set(const std::string &v);
+  void on_fall_begin_do_set(const std::string &v);
   void on_fall_do_set(const std::string &v);
   void on_final_use_do_set(const std::string &v);
   void on_firing_at_something_do_set(const std::string &v);

@@ -795,6 +795,7 @@ public:
   const std::string &on_enchant_do(void);
   const std::string &on_equip_do(void);
   const std::string &on_fall_do(void);
+  const std::string &on_fall_begin_do(void);
   const std::string &on_final_use_do(void);
   const std::string &on_firing_at_something_do(void);
   const std::string &on_get_text_long_description_do(void);
@@ -2384,6 +2385,7 @@ public:
   void on_dropped(void);
   void on_enchant(void);
   void on_equip(Thingp what);
+  void on_fall_begin(void);
   void on_fall(void);
   void on_final_use(Thingp what);
   void on_final_use(Thingp what, Thingp target);

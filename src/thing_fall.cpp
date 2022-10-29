@@ -42,6 +42,36 @@ void Thing::on_fall(void)
   }
 }
 
+void Thing::on_fall_begin(void)
+{
+  TRACE_NO_INDENT();
+  auto on_fall_begin = tp()->on_fall_begin_do();
+  if (std::empty(on_fall_begin)) {
+    return;
+  }
+
+  auto t = split_tokens(on_fall_begin, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = name();
+    }
+
+    dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_fall_begin call [%s] expected mod:function, got %d elems", on_fall_begin.c_str(),
+        (int) on_fall_begin.size());
+  }
+}
+
 bool Thing::fall(void)
 {
   TRACE_NO_INDENT();
@@ -95,6 +125,12 @@ bool Thing::fall(void)
 
   dbg("Begin falling");
   TRACE_AND_INDENT();
+
+  //
+  // Gives a chance to play a sound effect before falling begins which can have a delay
+  // while the level is setup.
+  //
+  on_fall_begin();
 
   //
   // Push pop here is needed to remove items as they are now in freefall
@@ -454,7 +490,6 @@ bool Thing::fall_to_next_level(void)
       if (! is_dead) {
         wake("fell");
         movement_remaining_set(0);
-        on_fall();
       }
 
       return true;

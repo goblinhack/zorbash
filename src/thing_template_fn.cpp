@@ -46,6 +46,7 @@ const std::string &Tp::on_death_of_my_leader_do(void) const { return _on_death_o
 const std::string &Tp::on_dropped_do(void) const { return _on_dropped_do; }
 const std::string &Tp::on_enchant_do(void) const { return _on_enchant_do; }
 const std::string &Tp::on_equip_do(void) const { return _on_equip_do; }
+const std::string &Tp::on_fall_begin_do(void) const { return _on_fall_begin_do; }
 const std::string &Tp::on_fall_do(void) const { return _on_fall_do; }
 const std::string &Tp::on_final_use_do(void) const { return _on_final_use_do; }
 const std::string &Tp::on_firing_at_something_do(void) const { return _on_firing_at_something_do; }
@@ -1159,6 +1160,7 @@ void Tp::on_death_of_my_leader_do_set(const std::string &v) { _on_death_of_my_le
 void Tp::on_dropped_do_set(const std::string &v) { _on_dropped_do = v; }
 void Tp::on_enchant_do_set(const std::string &v) { _on_enchant_do = v; }
 void Tp::on_equip_do_set(const std::string &v) { _on_equip_do = v; }
+void Tp::on_fall_begin_do_set(const std::string &v) { _on_fall_begin_do = v; }
 void Tp::on_fall_do_set(const std::string &v) { _on_fall_do = v; }
 void Tp::on_final_use_do_set(const std::string &v) { _on_final_use_do = v; }
 void Tp::on_firing_at_something_do_set(const std::string &v) { _on_firing_at_something_do = v; }

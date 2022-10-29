@@ -5752,6 +5752,12 @@ const std::string &Thing::on_fall_do(void)
   return (tp()->on_fall_do());
 }
 
+const std::string &Thing::on_fall_begin_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_fall_begin_do());
+}
+
 const std::string &Thing::on_jump_do(void)
 {
   TRACE_NO_INDENT();

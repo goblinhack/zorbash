@@ -25,7 +25,7 @@ my.sound_load(
     name="door_open",
 )
 my.sound_load(
-    volume=0.15,
+    volume=0.50,
     file="data/sounds/impacts/578808__nomiqbomi__fall-3.wav",
     name="fall",
 )
