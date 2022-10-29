@@ -204,7 +204,7 @@ void Game::place_player(void)
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("wand_ice", point(x, y));
         t->carry(w);
         t->enchant_without_stone(w);

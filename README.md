@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- - pushing a block of ice; can fall into it                                                                                                   -->
-<!-- - check water interacting with fire/lava makes steam or basalt                                                                               -->
 <!-- - jump noise is delayed - check with non quickstart                                                                                          -->
 <!-- - kraken tentacles                                                                                                                           -->
 <!-- ------                                                                                                                                       -->
