@@ -8,7 +8,7 @@
 #define GL_GLEXT_PROTOTYPES
 
 #include "my_game_defs.hpp"
-
+#include "my_source_loc.hpp"
 #include <array>
 
 /* Defined before OpenGL and GLUT includes to avoid deprecation messages */
@@ -333,9 +333,9 @@ void glcolorfast(color s);
   {                                                                                                                  \
     auto errCode = glGetError();                                                                                     \
     if (likely(errCode == GL_NO_ERROR)) {                                                                            \
-      /* CON("GFX: ok at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__); */                                \
+      /* CON("GFX: ok at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM); */                             \
     } else {                                                                                                         \
-      ERR("GFX: error at %s:%s line %u", __FILE__, __PRETTY_FUNCTION__, __LINE__);                                   \
+      ERR("GFX: error at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                                \
       gl_error(errCode);                                                                                             \
     }                                                                                                                \
   }
