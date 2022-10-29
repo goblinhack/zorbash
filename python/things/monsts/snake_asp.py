@@ -40,6 +40,7 @@ def tp_init(name, text_long_name):
     my.damage_poison_dice(self, "1d3+1")
     my.damage_received_doubled_from_fire(self, True)
     my.distance_avoid(self, 2)
+    my.distance_leader_max(self, 5)
     my.distance_vision(self, 7)
     my.environ_avoids_acid(self, 100)
     my.environ_avoids_cold(self, 100)

@@ -94,6 +94,7 @@ def tp_init(name, text_long_name):
     my.damage_necrosis_dice(self, "1")
     my.damage_received_doubled_from_fire(self, True)
     my.damage_received_doubled_from_water(self, True)
+    my.distance_leader_max(self, 5)
     my.distance_vision(self, 5)
     my.environ_avoids_fire(self, 100)
     my.environ_avoids_water(self, 100)
